@@ -123,6 +123,10 @@
 
 #include <trace/events/sock.h>
 
+#ifdef CONFIG_ANDROID_PARANOID_NETWORK
+#include <linux/android_aid.h>
+#endif
+
 /* The inetsw table contains everything that inet_create needs to
  * build a new socket.
  */
@@ -257,6 +261,11 @@ static int inet_create(struct net *net, struct socket *sock, int protocol,
 
 	if (protocol < 0 || protocol >= IPPROTO_MAX)
 		return -EINVAL;
+
+#ifdef CONFIG_ANDROID_PARANOID_NETWORK
+	if (!in_egroup_p(AID_INET) && !ns_capable(net->user_ns, CAP_NET_RAW))
+		return -EACCES;
+#endif
 
 	sock->state = SS_UNCONNECTED;
 
