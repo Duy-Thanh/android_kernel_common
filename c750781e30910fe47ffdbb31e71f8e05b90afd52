@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQ3///9s\u003d",
+        "filename": "drivers/misc/qemutrace/qemu_trace.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2009-05-05T21:22:15Z",
+      "side": 1,
+      "message": "The state of this driver should probably be wrapped into a struct, but it\u0027s best to be left for a separate change. Could you at least make this variable static?",
+      "revId": "c750781e30910fe47ffdbb31e71f8e05b90afd52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
