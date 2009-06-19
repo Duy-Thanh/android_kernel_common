@@ -16,6 +16,23 @@
       "revId": "155b63712a87bfed4536c3342c5cf3dceac7759e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAZX////4\u003d",
+        "filename": "net/ipv4/af_inet.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1001923
+      },
+      "writtenOn": "2009-06-19T03:54:09Z",
+      "side": 1,
+      "message": "Yes, they are the same.",
+      "revId": "155b63712a87bfed4536c3342c5cf3dceac7759e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
