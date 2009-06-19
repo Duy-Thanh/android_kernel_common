@@ -33,6 +33,23 @@
       "revId": "155b63712a87bfed4536c3342c5cf3dceac7759e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAZX////0\u003d",
+        "filename": "net/ipv4/af_inet.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1001923
+      },
+      "writtenOn": "2009-06-19T04:00:07Z",
+      "side": 1,
+      "message": "Hmm, I take it back.\nin_egroup_p(AID_NET_RAW) only checks the groups,\nbut capable(CAP_NET_RAW) also checks the real capability.",
+      "revId": "155b63712a87bfed4536c3342c5cf3dceac7759e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
