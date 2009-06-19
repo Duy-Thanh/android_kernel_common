@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAZH///44\u003d",
+        "filename": "net/ipv4/af_inet.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2009-06-19T01:18:35Z",
+      "side": 1,
+      "message": "The previous code was cleaner here.",
+      "revId": "91757d0e292a10097fd818f1c08a177c226151ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
