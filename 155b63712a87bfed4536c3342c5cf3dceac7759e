@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAZX////8\u003d",
+        "filename": "net/ipv4/af_inet.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2009-06-19T03:16:18Z",
+      "side": 1,
+      "message": "Is in_egroup_p(AID_NET_RAW) the same as capable(CAP_NET_RAW) from your last version?",
+      "revId": "155b63712a87bfed4536c3342c5cf3dceac7759e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
