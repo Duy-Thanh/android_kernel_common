@@ -16,6 +16,23 @@
       "revId": "a3a75570d226a386b4fd823336a256ed71cc8305",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAZn///68\u003d",
+        "filename": "mm/ashmem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2009-06-23T17:52:59Z",
+      "side": 1,
+      "message": "OK, I can change that. I used PAGE_CACHE_ALIGN because that is what mm/shmem.c uses.",
+      "revId": "a3a75570d226a386b4fd823336a256ed71cc8305",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
