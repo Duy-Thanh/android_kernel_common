@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAm3///Qk\u003d",
+        "filename": "arch/arm/mach-goldfish/include/mach/debug-macro.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001286
+      },
+      "writtenOn": "2009-09-22T22:38:46Z",
+      "side": 1,
+      "message": "I think you could drop the teq and make the store unconditional, since rx is always going to be one of the above defines and never zero...",
+      "revId": "7c465a3e14d6ec18c6c8c38c471d0631abeae41a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
