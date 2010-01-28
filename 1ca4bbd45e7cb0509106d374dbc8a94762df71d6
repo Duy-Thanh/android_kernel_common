@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAr3///Ds\u003d",
+        "filename": "arch/arm/mach-goldfish/include/mach/memory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2010-01-28T22:23:47Z",
+      "side": 1,
+      "message": "8MB? Do you get more than 4MB?",
+      "revId": "1ca4bbd45e7cb0509106d374dbc8a94762df71d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
