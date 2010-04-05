@@ -16,6 +16,24 @@
       "revId": "f824a6018ffd8c44bcea57778c100d126ed61147",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAwX///sY\u003d",
+        "filename": "init/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1001534
+      },
+      "writtenOn": "2010-04-05T21:30:08Z",
+      "side": 1,
+      "message": "If the # of frequencies the cpu has available is greater than 32, then the table needs to be larger or else we cannot track those cpu frequency speeds. Making this a config option so you don\u0027t have to edit kernel/sched.c",
+      "parentUuid": "AAAAwX///sg\u003d",
+      "revId": "f824a6018ffd8c44bcea57778c100d126ed61147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
