@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAwX///sg\u003d",
+        "filename": "init/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000866
+      },
+      "writtenOn": "2010-04-05T20:15:22Z",
+      "side": 1,
+      "message": "You should point out that this is in u64, not in bytes.  Why are you even making this a CONFIG option?",
+      "revId": "f824a6018ffd8c44bcea57778c100d126ed61147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
