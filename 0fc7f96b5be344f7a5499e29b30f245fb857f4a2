@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAwn///0U\u003d",
+        "filename": "drivers/usb/gadget/f_mass_storage.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2317,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-04-16T18:27:56Z",
+      "side": 1,
+      "message": "does this cancel the current transfer or all transfers?",
+      "revId": "0fc7f96b5be344f7a5499e29b30f245fb857f4a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
