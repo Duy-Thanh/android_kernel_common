@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAx3///Jo\u003d",
+        "filename": "drivers/staging/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3042,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2010-05-05T00:37:32Z",
+      "side": 1,
+      "message": "This should also unmap the pages so moving this call up before the loop should also fix the problem.",
+      "revId": "fea9e1d42e77b527a8cda1e658eb1703710c55f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
