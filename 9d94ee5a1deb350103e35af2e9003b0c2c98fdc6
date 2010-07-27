@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA3X///5Y\u003d",
+        "filename": "drivers/block/ublock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-07-27T17:38:38Z",
+      "side": 1,
+      "message": "static",
+      "revId": "9d94ee5a1deb350103e35af2e9003b0c2c98fdc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///4Y\u003d",
+        "filename": "drivers/block/ublock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-07-27T17:38:38Z",
+      "side": 1,
+      "message": "you probably want kzalloc here. Unless you always assign all the fields, and never rely on some fields for 0 to mean uninitialized.\nAlso, does this actually get called in softirq context?",
+      "revId": "9d94ee5a1deb350103e35af2e9003b0c2c98fdc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///5Q\u003d",
+        "filename": "drivers/block/ublock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-07-27T17:38:38Z",
+      "side": 1,
+      "message": "pr_warning",
+      "revId": "9d94ee5a1deb350103e35af2e9003b0c2c98fdc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///5M\u003d",
+        "filename": "drivers/block/ublock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-07-27T17:38:38Z",
+      "side": 1,
+      "message": "pr_warning",
+      "revId": "9d94ee5a1deb350103e35af2e9003b0c2c98fdc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///5I\u003d",
+        "filename": "drivers/block/ublock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-07-27T17:38:38Z",
+      "side": 1,
+      "message": "pr_warning",
+      "revId": "9d94ee5a1deb350103e35af2e9003b0c2c98fdc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///z4\u003d",
+        "filename": "drivers/block/ublock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-07-27T17:38:38Z",
+      "side": 1,
+      "message": "is it safe to call this without any locks held?",
+      "revId": "9d94ee5a1deb350103e35af2e9003b0c2c98fdc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///5E\u003d",
+        "filename": "drivers/block/ublock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 950,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-07-27T17:38:38Z",
+      "side": 1,
+      "message": "pr_warning",
+      "revId": "9d94ee5a1deb350103e35af2e9003b0c2c98fdc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///5A\u003d",
+        "filename": "drivers/block/ublock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-07-27T17:38:38Z",
+      "side": 1,
+      "message": "pr_err",
+      "revId": "9d94ee5a1deb350103e35af2e9003b0c2c98fdc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///48\u003d",
+        "filename": "drivers/block/ublock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1024,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-07-27T17:38:38Z",
+      "side": 1,
+      "message": "pr_err",
+      "revId": "9d94ee5a1deb350103e35af2e9003b0c2c98fdc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///5U\u003d",
+        "filename": "drivers/block/ublock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1046,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-07-27T17:38:38Z",
+      "side": 1,
+      "message": "pr_err",
+      "revId": "9d94ee5a1deb350103e35af2e9003b0c2c98fdc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///44\u003d",
+        "filename": "drivers/block/ublock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1058,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-07-27T17:38:38Z",
+      "side": 1,
+      "message": "pr_info",
+      "revId": "9d94ee5a1deb350103e35af2e9003b0c2c98fdc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///z0\u003d",
+        "filename": "include/linux/ublock.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-07-27T17:38:38Z",
+      "side": 1,
+      "message": "why is this in include/linux? You are not exporting anything to the kernel or to userspace. This is a private header for your ublock.c driver, and thus should just sit next to your driver (i.e. drivers/block/ublock.h)",
+      "revId": "9d94ee5a1deb350103e35af2e9003b0c2c98fdc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
