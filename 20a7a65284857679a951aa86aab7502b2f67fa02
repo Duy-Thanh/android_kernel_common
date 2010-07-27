@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA3X///zI\u003d",
+        "filename": "drivers/block/ublock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-07-27T18:05:18Z",
+      "side": 1,
+      "message": "you should only insert it into your devices list once you\u0027ve actually initialized the structure fully.",
+      "revId": "20a7a65284857679a951aa86aab7502b2f67fa02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
