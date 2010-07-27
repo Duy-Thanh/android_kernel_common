@@ -203,6 +203,40 @@
       "revId": "9d94ee5a1deb350103e35af2e9003b0c2c98fdc6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///zo\u003d",
+        "filename": "include/linux/ublock.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-07-27T17:41:36Z",
+      "side": 1,
+      "message": "please add the values of each member of the enum explicitly.",
+      "revId": "9d94ee5a1deb350103e35af2e9003b0c2c98fdc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA3X///zk\u003d",
+        "filename": "include/linux/ublock.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-07-27T17:41:36Z",
+      "side": 1,
+      "message": "add comma at the end",
+      "revId": "9d94ee5a1deb350103e35af2e9003b0c2c98fdc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
