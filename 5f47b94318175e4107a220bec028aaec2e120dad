@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA7n//+/4\u003d",
+        "filename": "arch/arm/common/fiq_debugger.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2010-09-27T23:40:35Z",
+      "side": 1,
+      "message": "is there a lock protecting this?",
+      "revId": "5f47b94318175e4107a220bec028aaec2e120dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA7n//+/0\u003d",
+        "filename": "arch/arm/common/fiq_debugger.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2010-09-27T23:40:35Z",
+      "side": 1,
+      "message": "why 1024?",
+      "revId": "5f47b94318175e4107a220bec028aaec2e120dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA7n//+/w\u003d",
+        "filename": "arch/arm/common/fiq_debugger.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2010-09-27T23:40:35Z",
+      "side": 1,
+      "message": "0 is a valid interrupt number",
+      "revId": "5f47b94318175e4107a220bec028aaec2e120dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA7n//+/s\u003d",
+        "filename": "arch/arm/common/fiq_debugger_ringbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2010-09-27T23:40:35Z",
+      "side": 1,
+      "message": "this not needed, you called kzalloc",
+      "revId": "5f47b94318175e4107a220bec028aaec2e120dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA7n//+/o\u003d",
+        "filename": "arch/arm/common/fiq_debugger_ringbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2010-09-27T23:40:35Z",
+      "side": 1,
+      "message": "is this needed? How do you notify the other cpu that the buffer is available?",
+      "revId": "5f47b94318175e4107a220bec028aaec2e120dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA7n//+/k\u003d",
+        "filename": "arch/arm/common/fiq_debugger_ringbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2010-09-27T23:40:35Z",
+      "side": 1,
+      "message": "+\u003d",
+      "revId": "5f47b94318175e4107a220bec028aaec2e120dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
