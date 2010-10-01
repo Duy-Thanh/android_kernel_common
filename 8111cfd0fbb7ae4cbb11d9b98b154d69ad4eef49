@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA73///+Q\u003d",
+        "filename": "arch/arm/common/fiq_debugger.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-10-01T23:17:48Z",
+      "side": 1,
+      "message": "remove the irq disable stuffs",
+      "revId": "8111cfd0fbb7ae4cbb11d9b98b154d69ad4eef49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA73///+c\u003d",
+        "filename": "arch/arm/common/fiq_debugger.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-10-01T23:17:48Z",
+      "side": 1,
+      "message": "inconsistent whitespace in struct definition before the \u003d",
+      "revId": "8111cfd0fbb7ae4cbb11d9b98b154d69ad4eef49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA73///+M\u003d",
+        "filename": "arch/arm/common/fiq_debugger.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2010-10-01T23:17:48Z",
+      "side": 1,
+      "message": "I\u0027m not sure it is correct to always leave the clock on. Perhaps add a bool to pdata?",
+      "revId": "8111cfd0fbb7ae4cbb11d9b98b154d69ad4eef49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
