@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAA73///9o\u003d",
+        "filename": "arch/arm/common/fiq_debugger.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2010-10-02T06:46:10Z",
+      "side": 1,
+      "message": "debug_printf(state, \"console mode\\n\");",
+      "revId": "8111cfd0fbb7ae4cbb11d9b98b154d69ad4eef49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA73///9k\u003d",
+        "filename": "arch/arm/common/fiq_debugger.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2010-10-02T06:46:10Z",
+      "side": 1,
+      "message": "if (!state-\u003econsole_enable)",
+      "revId": "8111cfd0fbb7ae4cbb11d9b98b154d69ad4eef49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAA73///+Q\u003d",
         "filename": "arch/arm/common/fiq_debugger.c",
         "patchSetId": 7
