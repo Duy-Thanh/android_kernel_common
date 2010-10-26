@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA8H//+i8\u003d",
+        "filename": "arch/arm/common/fiq_debugger.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2010-10-26T00:25:57Z",
+      "side": 1,
+      "message": "for (cpu \u003d 0; cpu \u003c NR_CPUS; cpu++)",
+      "revId": "fcec6c42409220c69f6ccf817f027424aadffc2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA8H//+i4\u003d",
+        "filename": "arch/arm/common/fiq_debugger.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2010-10-26T00:25:57Z",
+      "side": 1,
+      "message": "__IRQ_STAT(cpu, local_timer_irqs)",
+      "revId": "fcec6c42409220c69f6ccf817f027424aadffc2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
