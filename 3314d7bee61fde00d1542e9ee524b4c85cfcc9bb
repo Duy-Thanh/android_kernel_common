@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA+3///RE\u003d",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2010-12-24T09:50:02Z",
+      "side": 1,
+      "message": "I think you need a smp_wmb here to make sure governor_enabled\u003d0 is visible to the timer function",
+      "revId": "3314d7bee61fde00d1542e9ee524b4c85cfcc9bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
