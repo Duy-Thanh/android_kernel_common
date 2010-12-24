@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAA+3///Qw\u003d",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2010-12-24T23:47:30Z",
+      "side": 1,
+      "message": "There is still a race here.  If governor_enabled is set to 0 betwen here and the mod_timer call below, the timer will still be enabled.",
+      "revId": "3314d7bee61fde00d1542e9ee524b4c85cfcc9bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAA+3///RE\u003d",
         "filename": "drivers/cpufreq/cpufreq_interactive.c",
         "patchSetId": 2
