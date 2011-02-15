@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA+3//4wE\u003d",
+        "filename": "include/linux/wlan_plat.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2011-02-15T01:18:38Z",
+      "side": 1,
+      "message": "what does it return in the void *?",
+      "revId": "69fa8ccfb7878a9e4b016201c4ccf58a68261cd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
