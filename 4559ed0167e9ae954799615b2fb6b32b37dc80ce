@@ -33,6 +33,24 @@
       "revId": "4559ed0167e9ae954799615b2fb6b32b37dc80ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA+3//4uQ\u003d",
+        "filename": "arch/arm/kernel/etm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2011-02-15T02:28:41Z",
+      "side": 1,
+      "message": "I agree that it should hold the mutex, but that is unrelated to this change.",
+      "parentUuid": "AAAA+3//4uk\u003d",
+      "revId": "4559ed0167e9ae954799615b2fb6b32b37dc80ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
