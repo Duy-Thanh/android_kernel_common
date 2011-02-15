@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA+3//4uo\u003d",
+        "filename": "arch/arm/kernel/etm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2011-02-15T02:13:01Z",
+      "side": 1,
+      "message": "This doesn\u0027t hold tracer.mutex, etm_regs could get iounmapped.",
+      "revId": "4559ed0167e9ae954799615b2fb6b32b37dc80ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA+3//4uk\u003d",
+        "filename": "arch/arm/kernel/etm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2011-02-15T02:13:01Z",
+      "side": 1,
+      "message": "This doesn\u0027t hold tracer.mutex, etm_regs could get iounmapped",
+      "revId": "4559ed0167e9ae954799615b2fb6b32b37dc80ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
