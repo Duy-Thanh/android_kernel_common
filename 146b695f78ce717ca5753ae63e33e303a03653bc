@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAA/H///TY\u003d",
+        "filename": "drivers/mmc/host/goldfish.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1005562
+      },
+      "writtenOn": "2011-03-05T07:01:41Z",
+      "side": 1,
+      "message": "We wanted to clarify the first argument of dma_map_sg() is ignored for X86_32, but I agree that it would be correct if we put \"dev\" as the argument.",
+      "parentUuid": "AAAA+3//32Q\u003d",
+      "revId": "146b695f78ce717ca5753ae63e33e303a03653bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAA+3//32M\u003d",
         "filename": "drivers/mmc/host/goldfish.c",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2011-02-22T23:59:48Z",
       "side": 1,
       "message": "...",
+      "revId": "146b695f78ce717ca5753ae63e33e303a03653bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA/H///TM\u003d",
+        "filename": "drivers/mmc/host/goldfish.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1005562
+      },
+      "writtenOn": "2011-03-05T07:01:41Z",
+      "side": 1,
+      "message": "Same reason as the above. The first argument of dma_alloc_coherent() is ignored for X86_32. We used dma_alloc_coherent() because dma_alloc_writecombine() is ARM-specific. I agree that it would be correct if we put \"dev\" as the argument. Same for the rest.",
+      "parentUuid": "AAAA+3//32M\u003d",
       "revId": "146b695f78ce717ca5753ae63e33e303a03653bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
