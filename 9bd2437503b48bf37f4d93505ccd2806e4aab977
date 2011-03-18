@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA/X///YE\u003d",
+        "filename": "drivers/input/misc/gpio_matrix.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2011-03-18T21:52:44Z",
+      "side": 1,
+      "message": "get rid of {} for single line statements.\n\nAlso, this is not quite right. Not every device would have generated an event, so you can\u0027t just blindly generate sync events. You\u0027d need to track which device generated events and only sync those.",
+      "revId": "9bd2437503b48bf37f4d93505ccd2806e4aab977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
