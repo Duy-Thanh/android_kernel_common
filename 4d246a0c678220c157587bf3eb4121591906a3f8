@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAA/X///UE\u003d",
+        "filename": "drivers/input/misc/gpio_input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1003957
+      },
+      "writtenOn": "2011-03-19T01:44:19Z",
+      "side": 1,
+      "message": "Ah, I didn\u0027t think that was the case in the kernel.\n\nI use bool everywhere in the framework of course.  :)",
+      "parentUuid": "AAAA/X///UU\u003d",
+      "revId": "4d246a0c678220c157587bf3eb4121591906a3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAA/X///UQ\u003d",
         "filename": "drivers/input/misc/gpio_input.c",
         "patchSetId": 1
