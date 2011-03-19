@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA/X///UU\u003d",
+        "filename": "drivers/input/misc/gpio_input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2011-03-19T00:57:22Z",
+      "side": 1,
+      "message": "bool is preferred these days.",
+      "revId": "4d246a0c678220c157587bf3eb4121591906a3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA/X///UQ\u003d",
+        "filename": "drivers/input/misc/gpio_input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2011-03-19T00:57:22Z",
+      "side": 1,
+      "message": "use true",
+      "revId": "4d246a0c678220c157587bf3eb4121591906a3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
