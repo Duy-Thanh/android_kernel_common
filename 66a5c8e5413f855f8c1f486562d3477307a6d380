@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABCX///sI\u003d",
+        "filename": "net/netfilter/Kconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2011-06-16T00:20:45Z",
+      "side": 1,
+      "message": "typo, onwer -\u003e owner",
+      "revId": "66a5c8e5413f855f8c1f486562d3477307a6d380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABCX///sA\u003d",
+        "filename": "net/netfilter/Kconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2011-06-16T00:20:45Z",
+      "side": 1,
+      "message": "is the reason why we are replacing \"owner\" because userspace tools assume \"owner\" exists? I\u0027m not sure I understand why we are doing that?",
+      "revId": "66a5c8e5413f855f8c1f486562d3477307a6d380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
