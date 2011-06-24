@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABDX//+aY\u003d",
+        "filename": "arch/arm/kernel/process.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2011-06-24T22:14:31Z",
+      "side": 1,
+      "message": "use idle_notifier_call_chain",
+      "revId": "2c33879b16298abf53aa447fb07a7779c36213cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
