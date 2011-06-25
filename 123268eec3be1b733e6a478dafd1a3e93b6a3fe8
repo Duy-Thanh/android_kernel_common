@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEH///+4\u003d",
+        "filename": "arch/x86/kernel/process_64.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2011-06-25T02:22:01Z",
+      "side": 1,
+      "message": "put the NULL inside idle_notifier_call_chain",
+      "revId": "123268eec3be1b733e6a478dafd1a3e93b6a3fe8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
