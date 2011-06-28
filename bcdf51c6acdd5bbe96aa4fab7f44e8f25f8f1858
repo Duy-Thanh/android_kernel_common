@@ -16,6 +16,24 @@
       "revId": "bcdf51c6acdd5bbe96aa4fab7f44e8f25f8f1858",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX///3Y\u003d",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 953,
+      "author": {
+        "id": 1005480
+      },
+      "writtenOn": "2011-06-28T06:43:40Z",
+      "side": 1,
+      "message": "char **p and not char *p.\nSo it should be incrementing the pointer to the char.",
+      "parentUuid": "AAABEX///3g\u003d",
+      "revId": "bcdf51c6acdd5bbe96aa4fab7f44e8f25f8f1858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
