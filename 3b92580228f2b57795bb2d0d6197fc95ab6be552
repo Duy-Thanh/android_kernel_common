@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEX///4k\u003d",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2011-06-28T05:07:19Z",
+      "side": 1,
+      "message": "newline between variable declarations and code.",
+      "revId": "3b92580228f2b57795bb2d0d6197fc95ab6be552",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX///4g\u003d",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2011-06-28T05:07:19Z",
+      "side": 1,
+      "message": "how do you know that this is aligned correctly?",
+      "revId": "3b92580228f2b57795bb2d0d6197fc95ab6be552",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
