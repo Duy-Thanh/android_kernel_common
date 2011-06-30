@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "AAABEX///Qk\u003d",
+        "filename": "drivers/gpu/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1001118
+      },
+      "writtenOn": "2011-06-30T17:57:35Z",
+      "side": 1,
+      "message": "it\u0027s a bad name -- i\u0027m going to change it to id.  type is insufficient as a platform might have multiple heaps of the same type (ie multiple carveout heaps)",
+      "parentUuid": "AAABEX///Us\u003d",
+      "revId": "c80005ae9ef788dce825629ea07e658714a2adad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABEX///UM\u003d",
         "filename": "drivers/gpu/ion/ion.c",
         "patchSetId": 1
@@ -132,6 +150,24 @@
       "writtenOn": "2011-06-30T08:47:45Z",
       "side": 1,
       "message": "should this be a put? Are you guaranteed that noone else has a ref on the handle? I guess if they did then they\u0027d have a ref on the client too? Maybe put a BUG_ON here, or in destroy if -\u003eref-\u003ecnt is !\u003d 0?",
+      "revId": "c80005ae9ef788dce825629ea07e658714a2adad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX///Qc\u003d",
+        "filename": "drivers/gpu/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1001118
+      },
+      "writtenOn": "2011-06-30T17:57:35Z",
+      "side": 1,
+      "message": "handles are client local -- the client is getting destroyed, the handles should too. the underlying buffers will be refcounted correctly (theoretically you could call handle_put n times where n is the number of times your referenced it but that seems silly.",
+      "parentUuid": "AAABEX///Tg\u003d",
       "revId": "c80005ae9ef788dce825629ea07e658714a2adad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
