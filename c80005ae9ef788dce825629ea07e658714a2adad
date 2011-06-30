@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAABEX///Tw\u003d",
+        "filename": "drivers/gpu/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2011-06-30T08:47:45Z",
+      "side": 1,
+      "message": "s/an/a/",
+      "revId": "c80005ae9ef788dce825629ea07e658714a2adad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX///Ts\u003d",
+        "filename": "drivers/gpu/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2011-06-30T08:47:45Z",
+      "side": 1,
+      "message": "update comment for current struct fields",
+      "revId": "c80005ae9ef788dce825629ea07e658714a2adad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX///To\u003d",
+        "filename": "drivers/gpu/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2011-06-30T08:47:45Z",
+      "side": 1,
+      "message": "I\u0027d bug here since we\u0027d want to find out if it ever happens, right?",
+      "revId": "c80005ae9ef788dce825629ea07e658714a2adad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABEX///Us\u003d",
         "filename": "drivers/gpu/ion/ion.c",
         "patchSetId": 1
@@ -30,6 +81,125 @@
       "writtenOn": "2011-06-30T07:40:32Z",
       "side": 1,
       "message": "mutex still held (6 places next 3 fns)",
+      "revId": "c80005ae9ef788dce825629ea07e658714a2adad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX///Tk\u003d",
+        "filename": "drivers/gpu/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2011-06-30T08:47:45Z",
+      "side": 1,
+      "message": "maybe add a helper function to insert a client given a client tree?",
+      "revId": "c80005ae9ef788dce825629ea07e658714a2adad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX///Tg\u003d",
+        "filename": "drivers/gpu/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2011-06-30T08:47:45Z",
+      "side": 1,
+      "message": "should this be a put? Are you guaranteed that noone else has a ref on the handle? I guess if they did then they\u0027d have a ref on the client too? Maybe put a BUG_ON here, or in destroy if -\u003eref-\u003ecnt is !\u003d 0?",
+      "revId": "c80005ae9ef788dce825629ea07e658714a2adad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX///Tc\u003d",
+        "filename": "drivers/gpu/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2011-06-30T08:47:45Z",
+      "side": 1,
+      "message": "need to drop the mutex, will need a new err label probably",
+      "revId": "c80005ae9ef788dce825629ea07e658714a2adad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX///TY\u003d",
+        "filename": "drivers/gpu/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 942,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2011-06-30T08:47:45Z",
+      "side": 1,
+      "message": "drop client-\u003elock",
+      "revId": "c80005ae9ef788dce825629ea07e658714a2adad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX///TQ\u003d",
+        "filename": "drivers/gpu/ion/ion_carveout_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2011-06-30T08:47:45Z",
+      "side": 1,
+      "message": "should be a nop if addr \u003d\u003d ION_CARVEOUT_ALLOCATE_FAIL, or a WARN",
+      "revId": "c80005ae9ef788dce825629ea07e658714a2adad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX///TM\u003d",
+        "filename": "drivers/gpu/ion/ion_carveout_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2011-06-30T08:47:45Z",
+      "side": 1,
+      "message": "newline after var declarations",
+      "revId": "c80005ae9ef788dce825629ea07e658714a2adad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX///TI\u003d",
+        "filename": "include/linux/ion.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2011-06-30T08:47:45Z",
+      "side": 1,
+      "message": "why not just defined it in the enum as ION_NUM_HEAPS \u003d ION_HEAP_END ?",
       "revId": "c80005ae9ef788dce825629ea07e658714a2adad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
