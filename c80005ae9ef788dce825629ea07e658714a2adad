@@ -53,6 +53,23 @@
     },
     {
       "key": {
+        "uuid": "AAABEX///T4\u003d",
+        "filename": "drivers/gpu/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2011-06-30T16:28:24Z",
+      "side": 1,
+      "message": "kfree(buffer)",
+      "revId": "c80005ae9ef788dce825629ea07e658714a2adad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABEX///Us\u003d",
         "filename": "drivers/gpu/ion/ion.c",
         "patchSetId": 1
@@ -138,6 +155,23 @@
     },
     {
       "key": {
+        "uuid": "AAABEX///UA\u003d",
+        "filename": "drivers/gpu/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2011-06-30T16:28:24Z",
+      "side": 1,
+      "message": "mutex_unlock(\u0026client-\u003elock)",
+      "revId": "c80005ae9ef788dce825629ea07e658714a2adad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABEX///TY\u003d",
         "filename": "drivers/gpu/ion/ion.c",
         "patchSetId": 1
@@ -183,6 +217,23 @@
       "writtenOn": "2011-06-30T08:47:45Z",
       "side": 1,
       "message": "newline after var declarations",
+      "revId": "c80005ae9ef788dce825629ea07e658714a2adad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEX///T0\u003d",
+        "filename": "drivers/gpu/ion/tegra/tegra_ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2011-06-30T16:28:24Z",
+      "side": 1,
+      "message": "kfree(heaps)",
       "revId": "c80005ae9ef788dce825629ea07e658714a2adad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
