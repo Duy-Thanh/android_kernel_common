@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAD03////4\u003d",
+        "filename": "drivers/base/sw_sync.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1001902
+      },
+      "writtenOn": "2012-03-13T00:10:24Z",
+      "side": 1,
+      "message": "^sync^sw_sync",
+      "revId": "1dcabfb70b34b5ef00ee6be20be40ba09d0091f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADxn///5s\u003d",
         "filename": "include/linux/sync.h",
         "patchSetId": 2
