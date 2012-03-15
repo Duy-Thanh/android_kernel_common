@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAD8X///9c\u003d",
+        "filename": "drivers/base/Kconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1003793
+      },
+      "writtenOn": "2012-03-15T01:57:52Z",
+      "side": 1,
+      "message": "s/and/an/",
+      "revId": "cc6ec84568ab9bd0aae45489e274ea18353b4492",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAD8X///9Y\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1003793
+      },
+      "writtenOn": "2012-03-15T01:57:52Z",
+      "side": 1,
+      "message": "Can this take a timeout argument?  (or perhaps make an ioctl-specific one that has a timeout)",
+      "revId": "cc6ec84568ab9bd0aae45489e274ea18353b4492",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
