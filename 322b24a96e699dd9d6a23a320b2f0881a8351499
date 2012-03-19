@@ -909,6 +909,24 @@
       "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAEC3///9o\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T20:15:37Z",
+      "side": 1,
+      "message": "if you add a poll interface, you don\u0027t need this ioctl.",
+      "parentUuid": "AAAEC3///94\u003d",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
