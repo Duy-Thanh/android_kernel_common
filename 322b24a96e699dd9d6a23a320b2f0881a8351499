@@ -282,6 +282,24 @@
     },
     {
       "key": {
+        "uuid": "AAAEC3///9g\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T20:19:56Z",
+      "side": 1,
+      "message": "but someone else could be calling sync_obj_remove_pt (like sync_pt_free or a put on sync_fence)",
+      "parentUuid": "AAAEC3///+8\u003d",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAECn///+w\u003d",
         "filename": "drivers/base/sync.c",
         "patchSetId": 5
