@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAEC3////U\u003d",
+        "filename": "drivers/base/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAECn////k\u003d",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAECn///+A\u003d",
         "filename": "drivers/base/sw_sync.c",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2012-03-19T06:48:34Z",
       "side": 1,
       "message": "separate into just the var declaration and then the creation. Will be much clearer",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAEC3////Q\u003d",
+        "filename": "drivers/base/sw_sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAECn///+A\u003d",
       "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAAEC3////M\u003d",
+        "filename": "drivers/base/sw_sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAECn///98\u003d",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAECn///94\u003d",
         "filename": "drivers/base/sw_sync.c",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2012-03-19T06:48:34Z",
       "side": 1,
       "message": "cant remember now, but will this also delete the sync_pt?",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAEC3////I\u003d",
+        "filename": "drivers/base/sw_sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "yes",
+      "parentUuid": "AAAECn///94\u003d",
       "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "AAAEC3////E\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "in 3.0 it depends on one of the above headers.  in 3.3 it does not.  I\u0027ll move it to the top of the list above when up-porting to 3.3",
+      "parentUuid": "AAAECn///+8\u003d",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAECn///+4\u003d",
         "filename": "drivers/base/sync.c",
         "patchSetId": 5
@@ -98,6 +188,24 @@
       "writtenOn": "2012-03-19T06:48:34Z",
       "side": 1,
       "message": "why not just reorder the functions and then not need the forward declarations?",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAEC3////A\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "because I want to keep all the obj, pt, and fence functions together.",
+      "parentUuid": "AAAECn///+4\u003d",
       "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "AAAEC3///9w\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "might make an ERR_PTR pass in the future",
+      "parentUuid": "AAAECn///+0\u003d",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAECn///+s\u003d",
         "filename": "drivers/base/sync.c",
         "patchSetId": 5
@@ -132,6 +258,24 @@
       "writtenOn": "2012-03-19T06:48:34Z",
       "side": 1,
       "message": "you can double free the object I think. If you set destroyed, then  the list_empty will be true both here and in sync_obj_remove_pt. You are not holding any locks in either place at the time of comparison.",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAEC3///+8\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "only the caller of sync_obj_create should call sync_obj_destroy so it won\u0027t race by design.  Will add that to the function document docs.",
+      "parentUuid": "AAAECn///+s\u003d",
       "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "AAAEC3///+4\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAECn///+w\u003d",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAECn///+o\u003d",
         "filename": "drivers/base/sync.c",
         "patchSetId": 5
@@ -166,6 +328,24 @@
       "writtenOn": "2012-03-19T06:48:34Z",
       "side": 1,
       "message": "need to also make sure parent is not destroyed?",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAEC3///+0\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "Will document that once a object is destroyed it should not be available to create sync pts against.  If it\u0027s necessary for the underlying implementation to keep refcounts it can.",
+      "parentUuid": "AAAECn///+o\u003d",
       "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "AAAEC3///+w\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAECn///+g\u003d",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAECn///+c\u003d",
         "filename": "drivers/base/sync.c",
         "patchSetId": 5
@@ -200,6 +398,24 @@
       "writtenOn": "2012-03-19T06:48:34Z",
       "side": 1,
       "message": "what happens when this functions is called on a sync_pt that already has a fence?",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAEC3///+s\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "Adding a check for that.",
+      "parentUuid": "AAAECn///+c\u003d",
       "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "AAAEC3///+o\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "good point",
+      "parentUuid": "AAAECn///+Y\u003d",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAECn///+U\u003d",
         "filename": "drivers/base/sync.c",
         "patchSetId": 5
@@ -234,6 +468,24 @@
       "writtenOn": "2012-03-19T06:48:34Z",
       "side": 1,
       "message": "use proper coding style for comments",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAEC3///+k\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAECn///+U\u003d",
       "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "AAAEC3///+g\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAECn///+Q\u003d",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAECn///+M\u003d",
         "filename": "drivers/base/sync.c",
         "patchSetId": 5
@@ -268,6 +538,24 @@
       "writtenOn": "2012-03-19T06:48:34Z",
       "side": 1,
       "message": "verify that f_op \u003d\u003d your_ops just in case?",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAEC3///+c\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "this function will never be called if f_op !\u003d my_ops",
+      "parentUuid": "AAAECn///+M\u003d",
       "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -291,6 +579,24 @@
     },
     {
       "key": {
+        "uuid": "AAAEC3///+Y\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAECn////c\u003d",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAECn////U\u003d",
         "filename": "include/linux/sync.h",
         "patchSetId": 5
@@ -302,6 +608,24 @@
       "writtenOn": "2012-03-19T06:48:34Z",
       "side": 1,
       "message": "suggest has_signalled or is_signalled, test is too broad.",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAEC3///+I\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAECn////U\u003d",
       "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -325,6 +649,24 @@
     },
     {
       "key": {
+        "uuid": "AAAEC3///+U\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAECn////Y\u003d",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAECn///+I\u003d",
         "filename": "include/linux/sync.h",
         "patchSetId": 5
@@ -336,6 +678,24 @@
       "writtenOn": "2012-03-19T06:48:34Z",
       "side": 1,
       "message": "ditto",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAEC3///+Q\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAECn///+I\u003d",
       "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -359,6 +719,24 @@
     },
     {
       "key": {
+        "uuid": "AAAEC3///+M\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAECn///+E\u003d",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAECn////M\u003d",
         "filename": "include/linux/sync.h",
         "patchSetId": 5
@@ -370,6 +748,24 @@
       "writtenOn": "2012-03-19T06:48:34Z",
       "side": 1,
       "message": "signaled? do you mean status?",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAEC3///+E\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAECn////M\u003d",
       "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -393,6 +789,24 @@
     },
     {
       "key": {
+        "uuid": "AAAEC3///+A\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAECn////I\u003d",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAECn////E\u003d",
         "filename": "include/linux/sync.h",
         "patchSetId": 5
@@ -404,6 +818,24 @@
       "writtenOn": "2012-03-19T06:48:34Z",
       "side": 1,
       "message": "you plan to add docs for these?",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAEC3///98\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "yes... in coming patch",
+      "parentUuid": "AAAECn////E\u003d",
       "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -427,6 +859,24 @@
     },
     {
       "key": {
+        "uuid": "AAAEC3///90\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "changed to \u0027\u003e\u0027",
+      "parentUuid": "AAAECn////g\u003d",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAECn////A\u003d",
         "filename": "include/linux/sync.h",
         "patchSetId": 5
@@ -438,6 +888,24 @@
       "writtenOn": "2012-03-19T06:48:34Z",
       "side": 1,
       "message": "are you going to support poll for async wait from userspace? I guess I\u0027ll find out when I make it further in the review..",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAEC3///94\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1001891
+      },
+      "writtenOn": "2012-03-19T20:12:22Z",
+      "side": 1,
+      "message": "No plans but if it could be added if needed.",
+      "parentUuid": "AAAECn////A\u003d",
       "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
