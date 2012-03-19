@@ -1,0 +1,446 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAECn////k\u003d",
+        "filename": "drivers/base/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "s/creates and/provides a/",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn///+A\u003d",
+        "filename": "drivers/base/sw_sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "separate into just the var declaration and then the creation. Will be much clearer",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn///98\u003d",
+        "filename": "drivers/base/sw_sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "create a temp variable, will be easier to read.",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn///94\u003d",
+        "filename": "drivers/base/sw_sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "cant remember now, but will this also delete the sync_pt?",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn///+8\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "why is this not with the others?",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn///+4\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "why not just reorder the functions and then not need the forward declarations?",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn///+0\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "maybe return ERR_PTR() instead so you can return different error codes between EINVAL here and ENOMEM @ line 39?",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn///+s\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "you can double free the object I think. If you set destroyed, then  the list_empty will be true both here and in sync_obj_remove_pt. You are not holding any locks in either place at the time of comparison.",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn///+w\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "remove newline",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn///+o\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "need to also make sure parent is not destroyed?",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn///+g\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "missing whitespace",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn///+c\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "what happens when this functions is called on a sync_pt that already has a fence?",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn///+Y\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "can\u0027t you just break here since there\u0027s no point continuing through the loop?",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn///+U\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "use proper coding style for comments",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn///+Q\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "new interfaces are suggested to be in msecs, not jiffies",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn///+M\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "verify that f_op \u003d\u003d your_ops just in case?",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn////c\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "inconsistent white space in the struct. should probably just remove this tab.",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn////U\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "suggest has_signalled or is_signalled, test is too broad.",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn////Y\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "no space between * and compare",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn///+I\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn///+E\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn////M\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "signaled? do you mean status?",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn////I\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "why is one argument named and other is not?",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn////E\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "you plan to add docs for these?",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn////g\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "this collides with the ALSA sequencer. Considering that it is not uncommon to have alsa compiled in the kernel, you may want to think of a different range. \u0027s\u0027 seems to have been used by some obscure multi-port serial device driver. May be less chance of it actually being ever used.",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAECn////A\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-19T06:48:34Z",
+      "side": 1,
+      "message": "are you going to support poll for async wait from userspace? I guess I\u0027ll find out when I make it further in the review..",
+      "revId": "322b24a96e699dd9d6a23a320b2f0881a8351499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
