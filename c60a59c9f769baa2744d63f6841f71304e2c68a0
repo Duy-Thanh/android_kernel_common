@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAEK3////M\u003d",
+        "filename": "drivers/base/sync.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-22T07:36:54Z",
+      "side": 1,
+      "message": "is 4k due to PAGE_SIZE? if so, use PAGE_SIZE. Otherwise, use SZ_4K. Also, use size \u003d min(size, \u003cblah\u003e)",
+      "revId": "c60a59c9f769baa2744d63f6841f71304e2c68a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
