@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAEK3////4\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-22T07:23:13Z",
+      "side": 1,
+      "message": "i think the preferred method is to put the comment on the line above.",
+      "revId": "49f9dbc2836288009f612fb49c322b949848b850",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAEK3////0\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-22T07:23:13Z",
+      "side": 1,
+      "message": "s/stuct/struct/",
+      "revId": "49f9dbc2836288009f612fb49c322b949848b850",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAEK3////w\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-22T07:23:13Z",
+      "side": 1,
+      "message": "s/independant/independent/",
+      "revId": "49f9dbc2836288009f612fb49c322b949848b850",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAEK3////s\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-22T07:23:13Z",
+      "side": 1,
+      "message": "s/indefintly/indefinitely",
+      "revId": "49f9dbc2836288009f612fb49c322b949848b850",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAEK3////o\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-03-22T07:23:13Z",
+      "side": 1,
+      "message": "s/miliseconds/milliseconds",
+      "revId": "49f9dbc2836288009f612fb49c322b949848b850",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
