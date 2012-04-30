@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAFLX////8\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1011408
+      },
+      "writtenOn": "2012-04-30T23:04:31Z",
+      "side": 1,
+      "message": "s/@destoryed/@destroyed",
+      "revId": "d8daae70151243b35d5b8727f2b3fe6e46bb4e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAFLX////0\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1011408
+      },
+      "writtenOn": "2012-04-30T23:04:31Z",
+      "side": 1,
+      "message": "This conflicts with the comment on sync_pt.status below that indicates active_list_lock is the protecting lock.",
+      "revId": "d8daae70151243b35d5b8727f2b3fe6e46bb4e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAFLX////4\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1011408
+      },
+      "writtenOn": "2012-04-30T23:04:31Z",
+      "side": 1,
+      "message": "Need a description of @active_list_lock here.",
+      "revId": "d8daae70151243b35d5b8727f2b3fe6e46bb4e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAFLX////w\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1011408
+      },
+      "writtenOn": "2012-04-30T23:04:31Z",
+      "side": 1,
+      "message": "Seems to conflict with sync_timeline comments about the protection of this member.",
+      "revId": "d8daae70151243b35d5b8727f2b3fe6e46bb4e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAFLX////I\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1011408
+      },
+      "writtenOn": "2012-04-30T23:04:31Z",
+      "side": 1,
+      "message": "Might be good to indicate here that @size must be \u003e\u003d sizeof(struct sync_timeline), or make size simply represent the extra bytes.",
+      "revId": "d8daae70151243b35d5b8727f2b3fe6e46bb4e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAFLX////s\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1011408
+      },
+      "writtenOn": "2012-04-30T23:04:31Z",
+      "side": 1,
+      "message": "s/sync_timeline_destory/sync_timeline_destroy\ns/destory/destroy",
+      "revId": "d8daae70151243b35d5b8727f2b3fe6e46bb4e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAFLX////o\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1011408
+      },
+      "writtenOn": "2012-04-30T23:04:31Z",
+      "side": 1,
+      "message": "s/childern/children",
+      "revId": "d8daae70151243b35d5b8727f2b3fe6e46bb4e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAFLX////k\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1011408
+      },
+      "writtenOn": "2012-04-30T23:04:31Z",
+      "side": 1,
+      "message": "s/it\u0027s/its",
+      "revId": "d8daae70151243b35d5b8727f2b3fe6e46bb4e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAFLX////g\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1011408
+      },
+      "writtenOn": "2012-04-30T23:04:31Z",
+      "side": 1,
+      "message": "s/chiled/child\n\nSimilar to sync_timeline_create(), it might be good to indicate here that @size must be \u003e\u003d sizeof(struct sync_pt), or make size simply represent the extra bytes",
+      "revId": "d8daae70151243b35d5b8727f2b3fe6e46bb4e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAFLX////c\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1011408
+      },
+      "writtenOn": "2012-04-30T23:04:31Z",
+      "side": 1,
+      "message": "s/refernnce of /reference on",
+      "revId": "d8daae70151243b35d5b8727f2b3fe6e46bb4e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAFLX////Y\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1011408
+      },
+      "writtenOn": "2012-04-30T23:04:31Z",
+      "side": 1,
+      "message": "s/it\u0027s/its",
+      "revId": "d8daae70151243b35d5b8727f2b3fe6e46bb4e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAFLX////U\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1011408
+      },
+      "writtenOn": "2012-04-30T23:04:31Z",
+      "side": 1,
+      "message": "s/instal/install",
+      "revId": "d8daae70151243b35d5b8727f2b3fe6e46bb4e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAFLX////M\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1011408
+      },
+      "writtenOn": "2012-04-30T23:04:31Z",
+      "side": 1,
+      "message": "s/and/an",
+      "revId": "d8daae70151243b35d5b8727f2b3fe6e46bb4e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAFLX////Q\u003d",
+        "filename": "include/linux/sync.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1011408
+      },
+      "writtenOn": "2012-04-30T23:04:31Z",
+      "side": 1,
+      "message": "Would be good to see explicit \u0027success\u0027 return value even if it is generally assumed to be \u00270\u0027.",
+      "revId": "d8daae70151243b35d5b8727f2b3fe6e46bb4e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
