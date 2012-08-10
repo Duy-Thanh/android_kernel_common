@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAIM3///7k\u003d",
+        "filename": "drivers/bthid/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1012391
+      },
+      "writtenOn": "2012-08-10T01:16:00Z",
+      "side": 1,
+      "message": "This looks like a broadcom driver.  Is there any reason to call it \"android\" instead of broadcom?",
+      "revId": "435770f6749d346c2073c2c96422809d4b544991",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAIM3///7g\u003d",
+        "filename": "drivers/bthid/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1012391
+      },
+      "writtenOn": "2012-08-10T01:16:00Z",
+      "side": 1,
+      "message": "please clean up no carriage return.",
+      "revId": "435770f6749d346c2073c2c96422809d4b544991",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
