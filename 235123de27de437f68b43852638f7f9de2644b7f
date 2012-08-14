@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAIW3///ss\u003d",
+        "filename": "drivers/devfreq/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-08-14T18:11:58Z",
+      "side": 1,
+      "message": "missing tab before +\u003d",
+      "revId": "235123de27de437f68b43852638f7f9de2644b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAIaX///3s\u003d",
+        "filename": "drivers/devfreq/governor_pm_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-08-14T18:11:58Z",
+      "side": 1,
+      "message": "unsigned maybe? I guess we\u0027ll have other problems when requesting \u003e 2TB of bandwidth :)",
+      "revId": "235123de27de437f68b43852638f7f9de2644b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAIXH///s0\u003d",
+        "filename": "drivers/devfreq/governor_pm_qos.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2012-08-14T18:11:58Z",
+      "side": 1,
+      "message": "also, validate bytes_per_sec_per_hz to be non-zero to avoid divide by 0 on line 40",
+      "revId": "235123de27de437f68b43852638f7f9de2644b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
