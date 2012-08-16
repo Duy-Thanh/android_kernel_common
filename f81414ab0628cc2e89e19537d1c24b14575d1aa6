@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAIgH///yM\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2012-08-16T18:09:06Z",
+      "side": 1,
+      "message": "typo: disabled",
+      "revId": "f81414ab0628cc2e89e19537d1c24b14575d1aa6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAIgH///0M\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2012-08-16T18:09:06Z",
+      "side": 1,
+      "message": "add Change-ID (for android)",
+      "revId": "f81414ab0628cc2e89e19537d1c24b14575d1aa6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
