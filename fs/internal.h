@@ -15,6 +15,7 @@ struct mount;
 struct shrink_control;
 struct fs_context;
 struct user_namespace;
+struct xarray;
 
 /*
  * block_dev.c
@@ -53,6 +54,10 @@ static inline void bd_forget(struct inode *inode)
  */
 extern int __block_write_begin_int(struct page *page, loff_t pos, unsigned len,
 		get_block_t *get_block, struct iomap *iomap);
+struct busy_bhs_container {
+	struct xarray xarray;
+	int size;
+};
 
 /*
  * char_dev.c
