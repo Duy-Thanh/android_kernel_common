@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAJ/3///Do\u003d",
+        "filename": "drivers/gpu/ion/ion_page_pool.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2012-10-10T21:58:51Z",
+      "side": 1,
+      "message": "if you use:\n  static struct plist_head pools \u003d PLIST_HEAD_INIT(pools);\nyou won\u0027t need the pure initcall.",
+      "revId": "46603c78eb04cf6bde19c1ce1382be73808b2878",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAJ/3///EI\u003d",
+        "filename": "drivers/gpu/ion/ion_page_pool.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2012-10-10T21:58:51Z",
+      "side": 1,
+      "message": "this might be simpler if you take the lock before the for loop, compute the number to scan in this pool with min(nr_to_scan, high_count + low_count), and iterate to that number.",
+      "revId": "46603c78eb04cf6bde19c1ce1382be73808b2878",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAJ/3///Dw\u003d",
+        "filename": "drivers/gpu/ion/ion_page_pool.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2012-10-10T21:58:51Z",
+      "side": 1,
+      "message": "why 16?  seems like the cost of replacing one of these objects is pretty small compared to reading a page off disk",
+      "revId": "46603c78eb04cf6bde19c1ce1382be73808b2878",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAJ/3///Dg\u003d",
+        "filename": "drivers/gpu/ion/ion_priv.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2012-10-10T21:58:51Z",
+      "side": 1,
+      "message": "list instead of plist, and its a list node not a list head",
+      "revId": "46603c78eb04cf6bde19c1ce1382be73808b2878",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
