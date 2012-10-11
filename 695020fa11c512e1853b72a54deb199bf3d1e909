@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAKGH///3A\u003d",
+        "filename": "drivers/staging/android/lowmemorykiller.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2012-10-11T23:56:30Z",
+      "side": 1,
+      "message": "Would subtracting the tasksize and picking a second process to kill here make sense if we are still below the threshold?",
+      "revId": "695020fa11c512e1853b72a54deb199bf3d1e909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
