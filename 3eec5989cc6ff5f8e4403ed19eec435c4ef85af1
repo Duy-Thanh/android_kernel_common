@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAALPH//+58\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2012-11-01T22:00:02Z",
+      "side": 1,
+      "message": "In hopes of avoiding idle wakeups that do nothing other than run the governor worker to find out the system is very idle -- stretch the next governor timer wakeup to the next timer run.  The ondemand governor does this as well.  It tends to save power in certain use cases, although performance impacts are still being evaluated.\n\nDo you want this in the commit message?",
+      "parentUuid": "AAALP3///u0\u003d",
+      "revId": "3eec5989cc6ff5f8e4403ed19eec435c4ef85af1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAALMn///5w\u003d",
         "filename": "drivers/cpufreq/cpufreq_interactive.c",
         "patchSetId": 1
