@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAALMn///5w\u003d",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1004359
+      },
+      "writtenOn": "2012-11-01T14:20:09Z",
+      "side": 1,
+      "message": "What\u0027s the advantage of deferrable work vs init_timer_deferrable()?",
+      "revId": "3eec5989cc6ff5f8e4403ed19eec435c4ef85af1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
