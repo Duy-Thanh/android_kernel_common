@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "AAALP3///pk\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2012-11-02T00:13:02Z",
+      "side": 1,
+      "message": "Yes, but I don\u0027t think this justifies moving from a timer to a work queue. There are three independent changes here. Running the timer on the same cpu, using a deferred timer, and running the timer in thread context. The first seems reasonable on any system (however, it my not make any practical difference if the timer ends up running on the same cpu anyway). The second should only happen on systems where the frequency does not affect idle power consumption. The last change does not seem to have any benefit.",
+      "parentUuid": "AAALPH//+58\u003d",
+      "revId": "3eec5989cc6ff5f8e4403ed19eec435c4ef85af1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAALMn///5w\u003d",
         "filename": "drivers/cpufreq/cpufreq_interactive.c",
         "patchSetId": 1
