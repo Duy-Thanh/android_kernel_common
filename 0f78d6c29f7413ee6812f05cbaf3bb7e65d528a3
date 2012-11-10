@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAALWn///aY\u003d",
+        "filename": "arch/arm/kernel/stacktrace.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2012-11-10T05:12:37Z",
+      "side": 1,
+      "message": "Why not add \"offset \u003d sp \u0026 (THREAD_SIZE - 1)\" and use that below.",
+      "revId": "0f78d6c29f7413ee6812f05cbaf3bb7e65d528a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALWn///aQ\u003d",
+        "filename": "arch/arm/kernel/stacktrace.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2012-11-10T05:12:37Z",
+      "side": 1,
+      "message": "why not pass in the size of sp as well.",
+      "revId": "0f78d6c29f7413ee6812f05cbaf3bb7e65d528a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
