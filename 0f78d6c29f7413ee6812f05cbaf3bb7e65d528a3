@@ -33,6 +33,24 @@
       "revId": "0f78d6c29f7413ee6812f05cbaf3bb7e65d528a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALc3///80\u003d",
+        "filename": "arch/arm/kernel/stacktrace.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2012-11-10T22:17:38Z",
+      "side": 1,
+      "message": "what do you mean by \"size of sp\"?  do you just want to avoid the round_down(...) + THREAD_SIZE_SP calculation every time?",
+      "parentUuid": "AAALWn///aQ\u003d",
+      "revId": "0f78d6c29f7413ee6812f05cbaf3bb7e65d528a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
