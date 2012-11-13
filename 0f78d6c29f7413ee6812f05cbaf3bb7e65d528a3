@@ -51,6 +51,41 @@
       "revId": "0f78d6c29f7413ee6812f05cbaf3bb7e65d528a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALc3///KY\u003d",
+        "filename": "arch/arm/kernel/stacktrace.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2012-11-13T00:55:38Z",
+      "side": 1,
+      "message": "You use this to check if data can be read from the stack, but you hardcode the size to 4 bytes. You use it below to check if 16 bytes pointed to by fp-12 is valid.",
+      "parentUuid": "AAALc3///80\u003d",
+      "revId": "0f78d6c29f7413ee6812f05cbaf3bb7e65d528a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAALc3///Kk\u003d",
+        "filename": "arch/arm/kernel/stacktrace.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2012-11-13T00:55:38Z",
+      "side": 1,
+      "message": "\"fp - 4\"? You never read the pc storred at fp, and it is not clear if it is required to be there.",
+      "revId": "0f78d6c29f7413ee6812f05cbaf3bb7e65d528a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
