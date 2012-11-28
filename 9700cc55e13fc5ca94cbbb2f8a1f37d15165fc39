@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAL/X//+yU\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2012-11-28T23:06:06Z",
+      "side": 1,
+      "message": "I don\u0027t think that is a good idea. A background task will make the device less responsive if it uses enough cpu to raise the frequency below the minimum.",
+      "revId": "9700cc55e13fc5ca94cbbb2f8a1f37d15165fc39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
