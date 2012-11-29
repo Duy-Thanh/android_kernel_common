@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "MOsg0j94",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2012-11-29T21:23:41Z",
+      "side": 1,
+      "message": "This text was written before we decided a go_hispeed_load of 99-100% is probably wanted to match the new code.  I\u0027ll remove this since it\u0027s not likely to be useful.",
+      "parentUuid": "MICJFLhQ",
+      "revId": "b489ada88583663e99caf6a984e23aab6fcce53c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "MIAJMqjw",
         "filename": "drivers/cpufreq/cpufreq_interactive.c",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2012-11-29T04:57:11Z",
       "side": 1,
       "message": "Would it make more sense to move the code out of this if statement instead and restrict this to only handle the special jump to hispeed_freq case?",
+      "revId": "b489ada88583663e99caf6a984e23aab6fcce53c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MPWWyZgU",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2012-11-29T21:23:41Z",
+      "side": 1,
+      "message": "I\u0027ll try rearranging and see if it looks better that way, but there\u0027s some overlap between the various cases.",
+      "parentUuid": "MIAJMqjw",
       "revId": "b489ada88583663e99caf6a984e23aab6fcce53c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
