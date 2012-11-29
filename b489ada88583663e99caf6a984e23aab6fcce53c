@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "MICJFLhQ",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2012-11-29T04:57:11Z",
+      "side": 1,
+      "message": "If the load is above 99% why are you ramping down?",
+      "revId": "b489ada88583663e99caf6a984e23aab6fcce53c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "MIAJMqjw",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2012-11-29T04:57:11Z",
+      "side": 1,
+      "message": "Would it make more sense to move the code out of this if statement instead and restrict this to only handle the special jump to hispeed_freq case?",
+      "revId": "b489ada88583663e99caf6a984e23aab6fcce53c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
