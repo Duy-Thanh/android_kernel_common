@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "M738D7U0",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2012-12-15T09:55:47Z",
+      "side": 1,
+      "message": "you could just return it.",
+      "revId": "f5fe1bd21c7dde11d2d86962d843aeb3d938cc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "M71.NUeE",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2012-12-15T09:55:47Z",
+      "side": 1,
+      "message": "with three output arguments is it worth it to have this as a helper function?",
+      "revId": "f5fe1bd21c7dde11d2d86962d843aeb3d938cc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
