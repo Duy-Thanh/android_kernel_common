@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "M1Pmh5Jg",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2012-12-15T00:07:35Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "M1PmMRI4",
+      "revId": "2c037809ade26aeb556a110ac17ab1b0558a7bc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "M1FlhGJo",
         "filename": "drivers/cpufreq/cpufreq_interactive.c",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "M1LmXXEM",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2012-12-15T00:07:35Z",
+      "side": 1,
+      "message": "right, originally i had 2 callers interested in this, but now there\u0027s only 1, will move it there.",
+      "parentUuid": "M1FlhGJo",
+      "revId": "2c037809ade26aeb556a110ac17ab1b0558a7bc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "M1Dnf7Do",
         "filename": "drivers/cpufreq/cpufreq_interactive.c",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2012-12-14T23:08:40Z",
       "side": 1,
       "message": "why are you converting this to a load at the current frequency?",
+      "revId": "2c037809ade26aeb556a110ac17ab1b0558a7bc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "M1FlVmBs",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2012-12-15T00:07:35Z",
+      "side": 1,
+      "message": "As discussed in person, will use a percentage relative to current target for logging purposes (and go_hispeed_load), and remove the divide/multiply for new frequency selection",
+      "parentUuid": "M1Dnf7Do",
       "revId": "2c037809ade26aeb556a110ac17ab1b0558a7bc7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
