@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "M1AZPEmU",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2012-12-18T03:37:17Z",
+      "side": 1,
+      "message": "Ah, yeah, now that the previous function return is gone, duh.",
+      "parentUuid": "M738D7U0",
+      "revId": "f5fe1bd21c7dde11d2d86962d843aeb3d938cc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "M71.NUeE",
         "filename": "drivers/cpufreq/cpufreq_interactive.c",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2012-12-15T09:55:47Z",
       "side": 1,
       "message": "with three output arguments is it worth it to have this as a helper function?",
+      "revId": "f5fe1bd21c7dde11d2d86962d843aeb3d938cc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "M1GY21uU",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2012-12-18T03:37:17Z",
+      "side": 1,
+      "message": "Good point.  Will just move it inline.",
+      "parentUuid": "M71.NUeE",
       "revId": "f5fe1bd21c7dde11d2d86962d843aeb3d938cc2e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
