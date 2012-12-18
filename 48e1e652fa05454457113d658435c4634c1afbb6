@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "M1KZG-rk",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2012-12-18T05:16:57Z",
+      "side": 1,
+      "message": "Why is it called near_...? Is it not the same time period delta_idle refers to?",
+      "revId": "48e1e652fa05454457113d658435c4634c1afbb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "M1OYnZiA",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2012-12-18T05:16:57Z",
+      "side": 1,
+      "message": "Don\u0027t use a space after a cast (unless you are casting to void). Also, if you add a helper variable for this (e.g. active_time) you can avoid both the cast and line split.",
+      "revId": "48e1e652fa05454457113d658435c4634c1afbb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "M1CYyDmM",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2012-12-18T05:16:57Z",
+      "side": 1,
+      "message": "Don\u0027t use a space after a cast",
+      "revId": "48e1e652fa05454457113d658435c4634c1afbb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "M1AY1Ukg",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2012-12-18T05:16:57Z",
+      "side": 1,
+      "message": "...",
+      "revId": "48e1e652fa05454457113d658435c4634c1afbb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
