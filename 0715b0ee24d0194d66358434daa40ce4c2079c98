@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "PkFXtPuU",
+        "filename": "android/configs/android-base.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-02-07T00:07:17Z",
+      "side": 1,
+      "message": "this should probably be optional",
+      "revId": "0715b0ee24d0194d66358434daa40ce4c2079c98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PkDX6up0",
+        "filename": "android/configs/android-base.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-02-07T00:07:17Z",
+      "side": 1,
+      "message": "this is optional",
+      "revId": "0715b0ee24d0194d66358434daa40ce4c2079c98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PkLUTShk",
+        "filename": "android/configs/android-recommended.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-02-07T00:07:17Z",
+      "side": 1,
+      "message": "I think this should be off for new kernels, bluedroid doesn\u0027t use it.",
+      "revId": "0715b0ee24d0194d66358434daa40ce4c2079c98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PkPUy8qo",
+        "filename": "android/configs/android-recommended.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-02-07T00:07:17Z",
+      "side": 1,
+      "message": "I think this and DM_CRYPT are required for encrypted containers",
+      "revId": "0715b0ee24d0194d66358434daa40ce4c2079c98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PkLVaKus",
+        "filename": "android/configs/android-recommended.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-02-07T00:07:17Z",
+      "side": 1,
+      "message": "Erik, should this be in the required config?",
+      "revId": "0715b0ee24d0194d66358434daa40ce4c2079c98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PkBVsVo8",
+        "filename": "android/configs/android-recommended.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-02-07T00:07:17Z",
+      "side": 1,
+      "message": "Not sure about this one, wouldn\u0027t it be off on any nVidia chip?",
+      "revId": "0715b0ee24d0194d66358434daa40ce4c2079c98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
