@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "Pkv-Rq-s",
+        "filename": "android/configs/android-base.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1018087
+      },
+      "writtenOn": "2013-02-07T16:35:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "PkFXtPuU",
+      "revId": "0715b0ee24d0194d66358434daa40ce4c2079c98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "PkDX6up0",
         "filename": "android/configs/android-base.cfg",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2013-02-07T00:07:17Z",
       "side": 1,
       "message": "this is optional",
+      "revId": "0715b0ee24d0194d66358434daa40ce4c2079c98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Pkt-W5-E",
+        "filename": "android/configs/android-base.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1018087
+      },
+      "writtenOn": "2013-02-07T16:35:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "PkDX6up0",
       "revId": "0715b0ee24d0194d66358434daa40ce4c2079c98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "Pkr-bIxg",
+        "filename": "android/configs/android-recommended.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1018087
+      },
+      "writtenOn": "2013-02-07T16:35:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "PkLUTShk",
+      "revId": "0715b0ee24d0194d66358434daa40ce4c2079c98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "PkPUy8qo",
         "filename": "android/configs/android-recommended.cfg",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2013-02-07T00:07:17Z",
       "side": 1,
       "message": "I think this and DM_CRYPT are required for encrypted containers",
+      "revId": "0715b0ee24d0194d66358434daa40ce4c2079c98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Pkp-gX8M",
+        "filename": "android/configs/android-recommended.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1018087
+      },
+      "writtenOn": "2013-02-07T16:35:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "PkPUy8qo",
       "revId": "0715b0ee24d0194d66358434daa40ce4c2079c98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "Pkh-Nj1g",
+        "filename": "android/configs/android-recommended.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1018087
+      },
+      "writtenOn": "2013-02-07T16:35:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "PkLVaKus",
+      "revId": "0715b0ee24d0194d66358434daa40ce4c2079c98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "PkBVsVo8",
         "filename": "android/configs/android-recommended.cfg",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2013-02-07T00:07:17Z",
       "side": 1,
       "message": "Not sure about this one, wouldn\u0027t it be off on any nVidia chip?",
+      "revId": "0715b0ee24d0194d66358434daa40ce4c2079c98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Pkv-6y2k",
+        "filename": "android/configs/android-recommended.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1018087
+      },
+      "writtenOn": "2013-02-07T16:35:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "PkBVsVo8",
       "revId": "0715b0ee24d0194d66358434daa40ce4c2079c98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
