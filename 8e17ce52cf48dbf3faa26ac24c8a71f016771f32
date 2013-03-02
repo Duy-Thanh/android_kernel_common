@@ -16,6 +16,24 @@
       "revId": "8e17ce52cf48dbf3faa26ac24c8a71f016771f32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Qo3.W79w",
+        "filename": "drivers/tty/serial/samsung.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1005480
+      },
+      "writtenOn": "2013-03-02T02:29:48Z",
+      "side": 1,
+      "message": "clarified in comment",
+      "parentUuid": "QoSFZLrM",
+      "revId": "8e17ce52cf48dbf3faa26ac24c8a71f016771f32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
