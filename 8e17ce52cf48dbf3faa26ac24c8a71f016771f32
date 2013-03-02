@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "QoSFZLrM",
+        "filename": "drivers/tty/serial/samsung.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-03-02T02:17:50Z",
+      "side": 1,
+      "message": "it won\u0027t be freed if !ourport-\u003etx_claimed, can that ever happen?",
+      "revId": "8e17ce52cf48dbf3faa26ac24c8a71f016771f32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
