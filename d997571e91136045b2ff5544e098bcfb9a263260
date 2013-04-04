@@ -16,6 +16,24 @@
       "revId": "d997571e91136045b2ff5544e098bcfb9a263260",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "S8jmCk4g",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1010468
+      },
+      "writtenOn": "2013-04-04T00:27:07Z",
+      "side": 1,
+      "message": "The commit text doesn\u0027t completely explain. Please see 4b6e1e37026ec7dae9b23d78ffcebdd5ddb1bfa1 . The problem is trying to use this from a fault handler. WIthout this flag, we BUG_ON when trying to fault in pages from the handelr because the mmap_sem is already locked",
+      "parentUuid": "S8jkNM4A",
+      "revId": "d997571e91136045b2ff5544e098bcfb9a263260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
