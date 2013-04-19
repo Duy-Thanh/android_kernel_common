@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ToAJ1Ct0",
+        "filename": "drivers/usb/gadget/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1477,
+      "author": {
+        "id": 1000413
+      },
+      "writtenOn": "2013-04-19T03:29:26Z",
+      "side": 1,
+      "message": "Is grabbing func-\u003eeps and func-\u003effs-\u003eeps_count valid outside of the func-\u003effs-\u003eeps_lock?",
+      "revId": "c8a011880c7e7a1756918743de4a998bdd7718ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
