@@ -16,6 +16,24 @@
       "revId": "c8a011880c7e7a1756918743de4a998bdd7718ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "TvSUgbqk",
+        "filename": "drivers/usb/gadget/f_fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1477,
+      "author": {
+        "id": 1003977
+      },
+      "writtenOn": "2013-04-19T21:35:15Z",
+      "side": 1,
+      "message": "eps and eps_count don\u0027t change while the function is running. They are just set once when userspace writes the descriptors. The lock just protects the usb ep state.",
+      "parentUuid": "ToAJ1Ct0",
+      "revId": "c8a011880c7e7a1756918743de4a998bdd7718ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
