@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "UuDnN.1c",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2013-05-17T22:10:52Z",
+      "side": 1,
+      "message": "Suggest remove this check, and remove the down_read_trylock and governor_enabled check for pcpu above, and just always grab the lock here.",
+      "revId": "7aa507fb9de3fbe9db0bd83a0120a922a2a41361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
