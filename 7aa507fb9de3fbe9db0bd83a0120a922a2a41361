@@ -16,6 +16,24 @@
       "revId": "7aa507fb9de3fbe9db0bd83a0120a922a2a41361",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "U3oRDRsk",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1017041
+      },
+      "writtenOn": "2013-05-20T07:27:21Z",
+      "side": 1,
+      "message": "We can not remove the down_read_trylock and governor_enabled check for pcpu above because the policy element in for_each_cpu should be protected too. I do meet a kernel panic after remove the above pcpu lock/checking.\n\nI don\u0027t have a better solution yet.",
+      "parentUuid": "UuDnN.1c",
+      "revId": "7aa507fb9de3fbe9db0bd83a0120a922a2a41361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
