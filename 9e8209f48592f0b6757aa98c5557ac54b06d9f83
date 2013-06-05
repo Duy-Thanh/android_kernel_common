@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d879d2a_f207b927",
+        "filename": "mm/ashmem.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2013-06-05T19:56:28Z",
+      "side": 1,
+      "message": "Using the struct you just unlocked is not the best option here. It may be safe, but you have to read the entire source file to make sure no-one changes the file pointer.",
+      "revId": "9e8209f48592f0b6757aa98c5557ac54b06d9f83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d879d2a_32ea312b",
+        "filename": "mm/ashmem.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2013-06-05T19:56:28Z",
+      "side": 1,
+      "message": "Does user-space always provide a full buffer here, or just a null terminated string. strncpy_from_user is safer if a full buffer is not always provided.",
+      "revId": "9e8209f48592f0b6757aa98c5557ac54b06d9f83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
