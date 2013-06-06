@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d879d2a_81e62534",
+        "filename": "mm/ashmem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2013-06-06T23:03:29Z",
+      "side": 1,
+      "message": "Why does this position need to be updated? There does no seem to be any lock protecting this update, so they could get out of sync.",
+      "revId": "4dc97bc9bd8b2e1ae5a468bbe91efacf81b3dcad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
