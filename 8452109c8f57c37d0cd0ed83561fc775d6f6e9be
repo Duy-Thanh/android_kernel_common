@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0aae7193_4ccfff08",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1019659
+      },
+      "writtenOn": "2013-06-20T23:49:57Z",
+      "side": 1,
+      "message": "I agree with get/put_online_cpus() here. At least for 3.4.",
+      "parentUuid": "0ad591ff_4f261991",
+      "revId": "8452109c8f57c37d0cd0ed83561fc775d6f6e9be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ad591ff_6f2bdd57",
         "filename": "drivers/cpufreq/cpufreq_interactive.c",
         "patchSetId": 3
