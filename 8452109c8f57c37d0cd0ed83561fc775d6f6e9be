@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ad591ff_4f261991",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2013-06-20T02:06:47Z",
+      "side": 1,
+      "message": "May still race with a cpu offlining in parallel?  Need get_online_cpus()?",
+      "revId": "8452109c8f57c37d0cd0ed83561fc775d6f6e9be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ad591ff_6f2bdd57",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2013-06-20T02:06:47Z",
+      "side": 1,
+      "message": "Believe this isn\u0027t necessary, at least in 3.10, where cpufreq ensures all policy cpus are online prior to governor callbacks.  May be needed in 3.4, will check.",
+      "revId": "8452109c8f57c37d0cd0ed83561fc775d6f6e9be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
