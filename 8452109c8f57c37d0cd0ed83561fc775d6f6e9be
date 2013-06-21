@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ca753907_69fa016a",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1017041
+      },
+      "writtenOn": "2013-06-21T03:59:53Z",
+      "side": 1,
+      "message": "It is not good to call get/put_onine_cpus()  here because they hold mutex.\n\nIt shell not race with cpu down because this is a timer callback and preempt disabled.\n\nIt shell not race with cpu up because the timer shall be only re-armed after it is setting online.\n\nI\u0027d like to double check the online status here because the del_timer is called instead of del_timer_sync in idle callback.",
+      "parentUuid": "0aae7193_4ccfff08",
+      "revId": "8452109c8f57c37d0cd0ed83561fc775d6f6e9be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ad591ff_6f2bdd57",
         "filename": "drivers/cpufreq/cpufreq_interactive.c",
         "patchSetId": 3
@@ -48,6 +66,24 @@
       "writtenOn": "2013-06-20T02:06:47Z",
       "side": 1,
       "message": "Believe this isn\u0027t necessary, at least in 3.10, where cpufreq ensures all policy cpus are online prior to governor callbacks.  May be needed in 3.4, will check.",
+      "revId": "8452109c8f57c37d0cd0ed83561fc775d6f6e9be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca753907_49f54577",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1017041
+      },
+      "writtenOn": "2013-06-21T03:59:53Z",
+      "side": 1,
+      "message": "I believe we need check the online status on 3.4 kernel. \n\nTake a 4 Cores for example. The 4 Cores will shall the same voltage/freq and so they are managed with the same policy. So the result is policy-\u003ecpu \u003d 0 and policy_cpus\u003d0/1/2/3\n\nWhen cpu0 is up, the cpufreq device driver will set all the cpus masks to the policy-\u003ecpus. The cpufreq governor driver will check this mask and start timer on all affected cpus. But actually the affected cpu maybe offline. It is offline because 1) maxcpus is set in command line or 2) run-time hotplug. It is not good to start the timer on the offline cpus, and it may cause kernel panic when start timer on a cpu that is never online yet because that cpu\u0027s idle is not initialized.\n\nWhen cpu1/2/3 is up/down, there is no governor start/stop is called because the policy is already set for them. So we have to stop/start the timer in idle callback.",
+      "parentUuid": "0ad591ff_6f2bdd57",
       "revId": "8452109c8f57c37d0cd0ed83561fc775d6f6e9be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
