@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2771b0c7_ff85974c",
+        "filename": "mm/madvise.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-07-03T03:07:17Z",
+      "side": 1,
+      "message": "will fix",
+      "parentUuid": "2771b0c7_7f918798",
+      "revId": "99a419bb50b4d45e18fcbc8290f78cf21edebdf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2771b0c7_1f964b92",
         "filename": "mm/vma_name.c",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2013-07-03T02:39:55Z",
       "side": 1,
       "message": "You don\u0027t need a list here, just compare the string if the hash matches when searching the rbtree.",
+      "revId": "99a419bb50b4d45e18fcbc8290f78cf21edebdf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2771b0c7_df88d365",
+        "filename": "mm/vma_name.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-07-03T03:07:17Z",
+      "side": 1,
+      "message": "you\u0027re right, and that makes this code so much simpler",
+      "parentUuid": "2771b0c7_1f964b92",
       "revId": "99a419bb50b4d45e18fcbc8290f78cf21edebdf9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
