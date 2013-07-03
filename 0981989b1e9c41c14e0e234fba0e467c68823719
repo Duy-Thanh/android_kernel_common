@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2771b0c7_8520c575",
+        "filename": "mm/madvise.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2013-07-03T22:52:39Z",
+      "side": 1,
+      "message": "This does not match the code.",
+      "revId": "0981989b1e9c41c14e0e234fba0e467c68823719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2771b0c7_0534b5b1",
+        "filename": "mm/madvise.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2013-07-03T22:52:39Z",
+      "side": 1,
+      "message": "Would this produce a readable diff if you put it below the old madvise call?",
+      "revId": "0981989b1e9c41c14e0e234fba0e467c68823719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
