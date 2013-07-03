@@ -104,6 +104,24 @@
       "revId": "957808d8b3254c826e053ac17cabb73ed830c903",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2771b0c7_ee87239c",
+        "filename": "mm/vma_name.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2013-07-03T21:19:11Z",
+      "side": 1,
+      "message": "Why do you memset it to 0 first then?",
+      "parentUuid": "2771b0c7_0e54d704",
+      "revId": "957808d8b3254c826e053ac17cabb73ed830c903",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
