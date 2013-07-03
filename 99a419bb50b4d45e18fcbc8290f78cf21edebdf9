@@ -69,6 +69,24 @@
       "revId": "99a419bb50b4d45e18fcbc8290f78cf21edebdf9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2771b0c7_bfb15f19",
+        "filename": "mm/vma_name.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-07-03T04:34:46Z",
+      "side": 1,
+      "message": "one problem, i use the fact that the list can store two identical elements to handle the case where object with refcount 0 is still in the list.  I think I can rearrange it so the write lock is held whenever the refcount is decremented to 0.",
+      "parentUuid": "2771b0c7_df88d365",
+      "revId": "99a419bb50b4d45e18fcbc8290f78cf21edebdf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
