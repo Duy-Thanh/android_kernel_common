@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2771b0c7_aea92bcb",
+        "filename": "mm/vma_name.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-07-03T20:32:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2771b0c7_5324bc1d",
+      "revId": "957808d8b3254c826e053ac17cabb73ed830c903",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2771b0c7_9379f4d6",
         "filename": "mm/vma_name.c",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2771b0c7_4e62cfeb",
+        "filename": "mm/vma_name.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-07-03T20:32:21Z",
+      "side": 1,
+      "message": "I need to compare the length of the strings because name-\u003ename may not be null terminated, and it may be a prefix of vma_name-\u003ename.  it was easier to add it as a key to make sure they are equal by the time I call strncmp.",
+      "parentUuid": "2771b0c7_9379f4d6",
+      "revId": "957808d8b3254c826e053ac17cabb73ed830c903",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2771b0c7_93fed424",
         "filename": "mm/vma_name.c",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2013-07-03T20:16:46Z",
       "side": 1,
       "message": "kzalloc already does this. You don\u0027t need both.",
+      "revId": "957808d8b3254c826e053ac17cabb73ed830c903",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2771b0c7_0e54d704",
+        "filename": "mm/vma_name.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-07-03T20:32:21Z",
+      "side": 1,
+      "message": "I like to make it explicit that it is null terminated here.",
+      "parentUuid": "2771b0c7_93fed424",
       "revId": "957808d8b3254c826e053ac17cabb73ed830c903",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
