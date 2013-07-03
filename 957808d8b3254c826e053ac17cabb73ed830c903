@@ -122,6 +122,24 @@
       "revId": "957808d8b3254c826e053ac17cabb73ed830c903",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2771b0c7_a2c93f7c",
+        "filename": "mm/vma_name.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-07-03T21:52:02Z",
+      "side": 1,
+      "message": "switched to kmalloc.",
+      "parentUuid": "2771b0c7_ee87239c",
+      "revId": "957808d8b3254c826e053ac17cabb73ed830c903",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
