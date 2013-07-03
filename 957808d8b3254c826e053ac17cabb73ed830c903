@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2771b0c7_5324bc1d",
+        "filename": "mm/vma_name.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2013-07-03T20:16:46Z",
+      "side": 1,
+      "message": "why not use atomic_dec here and avoid the retry?",
+      "revId": "957808d8b3254c826e053ac17cabb73ed830c903",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2771b0c7_9379f4d6",
+        "filename": "mm/vma_name.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2013-07-03T20:16:46Z",
+      "side": 1,
+      "message": "are two hashes useful?",
+      "revId": "957808d8b3254c826e053ac17cabb73ed830c903",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2771b0c7_93fed424",
+        "filename": "mm/vma_name.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2013-07-03T20:16:46Z",
+      "side": 1,
+      "message": "kzalloc already does this. You don\u0027t need both.",
+      "revId": "957808d8b3254c826e053ac17cabb73ed830c903",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
