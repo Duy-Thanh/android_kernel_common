@@ -87,6 +87,24 @@
       "revId": "8452109c8f57c37d0cd0ed83561fc775d6f6e9be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a716808d_65968693",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1017041
+      },
+      "writtenOn": "2013-07-09T07:30:59Z",
+      "side": 1,
+      "message": "A upstream patch from kernel.org can make sure only online cpus will be managed by the policy. We can remove this check after that upstream patch merged.\n\ncommit 643ae6e81dd65b333a13259852405fc9f764ac76\nAuthor: Viresh Kumar \u003cviresh.kumar@linaro.org\u003e\nDate:   Sat Jan 12 05:14:38 2013 +0000\n\n    cpufreq: Manage only online cpus\n    \n    cpufreq core doesn\u0027t manage offline cpus and if driver-\u003einit() has returned\n    mask including offline cpus, it may result in unwanted behavior by cpufreq core\n    or governors.\n    \n    We need to get only online cpus in this mask. There are two places to fix this\n    mask, cpufreq core and cpufreq driver. It makes sense to do this at common place\n    and hence is done in core.\n    \n    Signed-off-by: Viresh Kumar \u003cviresh.kumar@linaro.org\u003e\n    Signed-off-by: Rafael J. Wysocki \u003crafael.j.wysocki@intel.com\u003e",
+      "parentUuid": "ca753907_49f54577",
+      "revId": "8452109c8f57c37d0cd0ed83561fc775d6f6e9be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
