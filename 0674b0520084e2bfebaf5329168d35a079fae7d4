@@ -16,6 +16,24 @@
       "revId": "0674b0520084e2bfebaf5329168d35a079fae7d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32581541_5ce15d8a",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-08-28T22:44:58Z",
+      "side": 1,
+      "message": "But then you\u0027d have to poll asma-\u003efile waiting for it to become valid",
+      "parentUuid": "32581541_5c703d0d",
+      "revId": "0674b0520084e2bfebaf5329168d35a079fae7d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
