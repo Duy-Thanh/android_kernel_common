@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32581541_5c703d0d",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2013-08-28T22:43:17Z",
+      "side": 1,
+      "message": "You could prevent that by checking your new flag instead of file before entering this block above.",
+      "revId": "0674b0520084e2bfebaf5329168d35a079fae7d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
