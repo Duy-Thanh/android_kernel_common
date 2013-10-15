@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e6cb8f0_9a0eed85",
+        "filename": "mm/mempolicy.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 1022098
+      },
+      "writtenOn": "2013-10-15T03:10:38Z",
+      "side": 1,
+      "message": "undeclared variable \"name\"",
+      "revId": "6ebfe5864ae65ad31e1e5526f0f45a5f735c9a5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
