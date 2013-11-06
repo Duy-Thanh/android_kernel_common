@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fec1ed19_7c0be53e",
+        "filename": "drivers/gpu/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1039,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-11-06T19:17:58Z",
+      "side": 1,
+      "message": "I think this locking was already broken before I broke everything with idr.  There was nothing preventing a free ioctl from destroying the handle, and maybe destroying the buffer, between   the mutex unlock and dereferencing the handle pointer or calling ion_buffer_get.\n\nI think just moving the unlock of client-\u003elock, which prevents the handle from getting deleted, to after the ion_buffer_get should be sufficient.",
+      "parentUuid": "fec1ed19_c12792c6",
+      "revId": "ad22ba0b5b07a9646fda483288b6cf5c46ce8429",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fec1ed19_13e97428",
         "filename": "drivers/gpu/ion/ion.c",
         "patchSetId": 1
