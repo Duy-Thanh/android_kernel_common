@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fec1ed19_13e97428",
+        "filename": "drivers/gpu/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-11-06T01:37:09Z",
+      "side": 1,
+      "message": "ion_handle_put can\u0027t be called without the lock held, I\u0027ll have another version to fix that.",
+      "revId": "ad22ba0b5b07a9646fda483288b6cf5c46ce8429",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
