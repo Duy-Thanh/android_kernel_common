@@ -16,6 +16,24 @@
       "revId": "11c12bd9339a8201264eda6ee4a27cbeb35626e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dee8a9cd_ff523bc4",
+        "filename": "include/uapi/video/adf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1018087
+      },
+      "writtenOn": "2013-11-13T04:30:11Z",
+      "side": 1,
+      "message": "Is PAGE_SIZE defined for user-space? I thought that was kernel-space only...",
+      "parentUuid": "7e5dfd5e_41a87470",
+      "revId": "11c12bd9339a8201264eda6ee4a27cbeb35626e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
