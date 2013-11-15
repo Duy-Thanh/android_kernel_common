@@ -34,6 +34,24 @@
       "revId": "eec88854d8ecdab5e5d16ee50d95fb9c478114a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fed56d33_d60a5a3a",
+        "filename": "drivers/staging/android/ion/compat_ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2013-11-15T04:38:12Z",
+      "side": 1,
+      "message": "Right. Technically the ION_IOC_FREE case doesn\u0027t need a compat IOCTL, but since there\u0027s special case handling still needed, I figured it would be cleaner to be consistent and add a COMPAT_ION_IOC_FREE macro.",
+      "parentUuid": "dee2691a_120fccb5",
+      "revId": "eec88854d8ecdab5e5d16ee50d95fb9c478114a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
