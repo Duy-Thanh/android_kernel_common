@@ -16,6 +16,24 @@
       "revId": "eec88854d8ecdab5e5d16ee50d95fb9c478114a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dee2691a_120fccb5",
+        "filename": "drivers/staging/android/ion/compat_ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-11-15T04:32:28Z",
+      "side": 1,
+      "message": "since the sizes of the parameters for these don\u0027t change size the ioctl number will be the same on 32 and 64 bit, so they don\u0027t need a compat number.",
+      "parentUuid": "fed56d33_36fd1ee3",
+      "revId": "eec88854d8ecdab5e5d16ee50d95fb9c478114a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
