@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "deaa69eb_5e1e3375",
+        "filename": "drivers/staging/android/ion/ion_dummy_driver.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-11-23T05:16:19Z",
+      "side": 1,
+      "message": "would CMA work here to avoid the 4MB limit?",
+      "revId": "b92454a97c88cd488f4fc9c64851c71e1ed470d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
