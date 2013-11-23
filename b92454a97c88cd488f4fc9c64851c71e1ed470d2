@@ -16,6 +16,24 @@
       "revId": "b92454a97c88cd488f4fc9c64851c71e1ed470d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bea77522_23851540",
+        "filename": "drivers/staging/android/ion/ion_dummy_driver.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2013-11-23T05:22:37Z",
+      "side": 1,
+      "message": "Quite possibly, though I\u0027m not sure if CMA is supported on all architectures. I initially figured I\u0027d keep this simple so any interested parties could play around with it on any architecture without adding any platform specific hooks.\n\nI\u0027ll look into adding CMA support if it is generic enough (maybe with a kzalloc, or likely more correctly page_alloc, fallback)",
+      "parentUuid": "deaa69eb_5e1e3375",
+      "revId": "b92454a97c88cd488f4fc9c64851c71e1ed470d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
