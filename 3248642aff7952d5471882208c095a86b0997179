@@ -25,6 +25,70 @@
     },
     {
       "key": {
+        "uuid": "883a77c3_91245cde",
+        "filename": "drivers/staging/android/ion/ion_carveout_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-12-11T22:17:48Z",
+      "side": 1,
+      "message": "it zeroes with a writecombined mapping, not a cached mapping, so it needs to cache flush first.",
+      "parentUuid": "883a77c3_11c06c37",
+      "range": {
+        "startLine": 88,
+        "startChar": 1,
+        "endLine": 88,
+        "endChar": 20
+      },
+      "revId": "3248642aff7952d5471882208c095a86b0997179",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4844ff56_cf8b5dc3",
+        "filename": "drivers/staging/android/ion/ion_carveout_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-12-11T22:17:48Z",
+      "side": 1,
+      "message": "cache flush needs to be before the zeroing",
+      "range": {
+        "startLine": 145,
+        "startChar": 1,
+        "endLine": 145,
+        "endChar": 26
+      },
+      "revId": "3248642aff7952d5471882208c095a86b0997179",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "683f03b6_53e27648",
+        "filename": "drivers/staging/android/ion/ion_chunk_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-12-11T22:17:48Z",
+      "side": 1,
+      "message": "cache flush needs to be before zeroing",
+      "revId": "3248642aff7952d5471882208c095a86b0997179",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4844ff56_afe499fe",
         "filename": "drivers/staging/android/ion/ion_heap.c",
         "patchSetId": 1
