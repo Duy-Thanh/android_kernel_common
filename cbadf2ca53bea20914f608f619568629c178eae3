@@ -22,6 +22,30 @@
       "revId": "cbadf2ca53bea20914f608f619568629c178eae3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88d6f7d9_3124b098",
+        "filename": "drivers/staging/android/ion/ion_page_pool.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-12-12T02:20:25Z",
+      "side": 1,
+      "message": "I remember why its necessary.  gfp_t is marked __bitwise__, so building without !! and with C\u003d2 gives:\ndrivers/staging/android/ion/ion_page_pool.c:137:14: warning: incorrect type in assignment (different base types)\ndrivers/staging/android/ion/ion_page_pool.c:137:14:    expected bool [unsigned] [usertype] high\ndrivers/staging/android/ion/ion_page_pool.c:137:14:    got restricted gfp_t",
+      "parentUuid": "883a77c3_710e9803",
+      "range": {
+        "startLine": 137,
+        "startChar": 21,
+        "endLine": 137,
+        "endChar": 22
+      },
+      "revId": "cbadf2ca53bea20914f608f619568629c178eae3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
