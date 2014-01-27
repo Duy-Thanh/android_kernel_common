@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "f213e69e_073fd89d",
+        "filename": "net/ipv4/sysctl_net_ipv4.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-01-27T22:06:13Z",
+      "side": 1,
+      "message": "Since everything is now called ..._rwnd, care to rename this function as well?",
+      "range": {
+        "startLine": 127,
+        "startChar": 11,
+        "endLine": 127,
+        "endChar": 39
+      },
+      "revId": "cd90638f3130d17fe3c99d348164dfe84e277182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5244b256_3504786f",
         "filename": "net/ipv4/tcp_input.c",
         "patchSetId": 4
@@ -37,6 +60,30 @@
       "side": 1,
       "message": "I specifically switched from init_rcvwnd to match net-next\u0027s init_rwnd.",
       "parentUuid": "5244b256_3504786f",
+      "range": {
+        "startLine": 105,
+        "startChar": 4,
+        "endLine": 105,
+        "endChar": 32
+      },
+      "revId": "cd90638f3130d17fe3c99d348164dfe84e277182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "321adeb4_89c75d51",
+        "filename": "net/ipv4/tcp_input.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-01-27T22:06:13Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "3229fe85_42ed0270",
       "range": {
         "startLine": 105,
         "startChar": 4,
