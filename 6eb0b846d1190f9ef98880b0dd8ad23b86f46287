@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f193130_3ee7edc8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T02:31:15Z",
+      "side": 1,
+      "message": "This needs to be a single-line quick description.\n\nI should also say upstream will want this single-line description to be followed by a blank line and then a short sentence or paragraph describing the patch in more detail.\n\nI\u0027d suggest something like:\n\npower: add an API to log wakeup reasons\n\nAdd API log_wakeup_reason() and expose it to userspace via sysfs path xxx.",
+      "range": {
+        "startLine": 7,
+        "startChar": 45,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "6eb0b846d1190f9ef98880b0dd8ad23b86f46287",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f1c351e_bf501b2a",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T02:31:15Z",
+      "side": 1,
+      "message": "These lines are duplicated, keep only one set?",
+      "range": {
+        "startLine": 4,
+        "startChar": 1,
+        "endLine": 7,
+        "endChar": 25
+      },
+      "revId": "6eb0b846d1190f9ef98880b0dd8ad23b86f46287",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
