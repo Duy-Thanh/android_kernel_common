@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f1c351e_dc5c05bb",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:46:09Z",
+      "side": 1,
+      "message": "duplicated lines",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 25
+      },
+      "revId": "1cf6cb8c063069f32b7507068857731bb95a68b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f193130_de019921",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:46:09Z",
+      "side": 1,
+      "message": "use tabs, not spaces, for all identation.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 4
+      },
+      "revId": "1cf6cb8c063069f32b7507068857731bb95a68b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f193130_be02dd25",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:46:09Z",
+      "side": 1,
+      "message": "sorry, didn\u0027t catch kernel coding style issue previously: add space after \"for\", prior to \"(...)\".",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 9
+      },
+      "revId": "1cf6cb8c063069f32b7507068857731bb95a68b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f193130_fee3b543",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:46:09Z",
+      "side": 1,
+      "message": "trailing whitespace",
+      "range": {
+        "startLine": 65,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 3
+      },
+      "revId": "1cf6cb8c063069f32b7507068857731bb95a68b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_9aae0d64",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:46:09Z",
+      "side": 1,
+      "message": "add space after \"switch\"",
+      "range": {
+        "startLine": 86,
+        "startChar": 4,
+        "endLine": 86,
+        "endChar": 11
+      },
+      "revId": "1cf6cb8c063069f32b7507068857731bb95a68b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_7a5b31e7",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:46:09Z",
+      "side": 1,
+      "message": "add space between \"if\" and \"(condition)\"",
+      "range": {
+        "startLine": 110,
+        "startChar": 4,
+        "endLine": 110,
+        "endChar": 7
+      },
+      "revId": "1cf6cb8c063069f32b7507068857731bb95a68b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f193130_7ef845ee",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:46:09Z",
+      "side": 1,
+      "message": "add space after \"if\".",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 114,
+        "endChar": 8
+      },
+      "revId": "1cf6cb8c063069f32b7507068857731bb95a68b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f193130_1eeb111b",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:46:09Z",
+      "side": 1,
+      "message": "also suggest removing braces around single statement here, upstream folks may care",
+      "range": {
+        "startLine": 114,
+        "startChar": 23,
+        "endLine": 114,
+        "endChar": 24
+      },
+      "revId": "1cf6cb8c063069f32b7507068857731bb95a68b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f193130_5ef589f4",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:46:09Z",
+      "side": 1,
+      "message": "space after \"if\"",
+      "range": {
+        "startLine": 119,
+        "startChar": 4,
+        "endLine": 119,
+        "endChar": 7
+      },
+      "revId": "1cf6cb8c063069f32b7507068857731bb95a68b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
