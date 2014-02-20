@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f193130_fb574795",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:16:08Z",
+      "side": 1,
+      "message": "Suggest: \"power: add API to log wakeup reasons and expose to userspace via sysfs\"\n\nadding the \"power:\" prefix and avoiding the past tense.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 74
+      },
+      "revId": "cfbcded8729c0a31560b5c94e3ac64c337844178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f193130_bb830ff3",
+        "filename": "include/linux/wakeup_reason.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:16:08Z",
+      "side": 1,
+      "message": "Could add copyright and GPL license, not required.",
+      "range": {
+        "startLine": 5,
+        "startChar": 3,
+        "endLine": 5,
+        "endChar": 7
+      },
+      "revId": "cfbcded8729c0a31560b5c94e3ac64c337844178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f193130_1bd16320",
+        "filename": "include/linux/wakeup_reason.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:16:08Z",
+      "side": 1,
+      "message": "These includes can move to the file for the log_wakeup_reason code, other callers including this header don\u0027t necessarily need these includes to call log_wakeup_reason()",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 26
+      },
+      "revId": "cfbcded8729c0a31560b5c94e3ac64c337844178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_17cad6e1",
+        "filename": "include/linux/wakeup_reason.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:16:08Z",
+      "side": 1,
+      "message": "update comment to match the CPP defines above",
+      "range": {
+        "startLine": 25,
+        "startChar": 10,
+        "endLine": 25,
+        "endChar": 25
+      },
+      "revId": "cfbcded8729c0a31560b5c94e3ac64c337844178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_f78f5aa2",
+        "filename": "kernel/power/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:16:08Z",
+      "side": 1,
+      "message": "Let\u0027s use obj-$(CONFIG_SUSPEND) to only include if the kernel has SUSPEND support.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 5
+      },
+      "revId": "cfbcded8729c0a31560b5c94e3ac64c337844178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f193130_5baabb64",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:16:08Z",
+      "side": 1,
+      "message": "Add copyright and GPL license.",
+      "range": {
+        "startLine": 6,
+        "startChar": 1,
+        "endLine": 6,
+        "endChar": 2
+      },
+      "revId": "cfbcded8729c0a31560b5c94e3ac64c337844178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_f768fa09",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:16:08Z",
+      "side": 1,
+      "message": "This symbol may be too generic and could collide with other defines, suggest MAX_WAKEUP_REASON_IRQS or similar.",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 15
+      },
+      "revId": "cfbcded8729c0a31560b5c94e3ac64c337844178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_9741c67c",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:16:08Z",
+      "side": 1,
+      "message": "File has (mostly) spaces instead of tabs, use tab indentation.\n\nWe\u0027ll set you up to run checkpatch from your git checkout to help look for style problems.",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 7
+      },
+      "revId": "cfbcded8729c0a31560b5c94e3ac64c337844178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f1c351e_3c4ff953",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:16:08Z",
+      "side": 1,
+      "message": "/*\n * logs all...\n\nstyle of comments are generally preferred (opening \"/*\").",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 3
+      },
+      "revId": "cfbcded8729c0a31560b5c94e3ac64c337844178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f193130_bbd2efef",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:16:08Z",
+      "side": 1,
+      "message": "Could move the spin_lock to just around the irq_list[] array store, don\u0027t need to hold across printk etc.",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 35
+      },
+      "revId": "cfbcded8729c0a31560b5c94e3ac64c337844178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef15bdf4_fa310108",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:16:08Z",
+      "side": 1,
+      "message": "Suggest removing the function name here, it\u0027s not needed to identify the source of the message, which will appear at every resume.",
+      "range": {
+        "startLine": 54,
+        "startChar": 59,
+        "endLine": 54,
+        "endChar": 67
+      },
+      "revId": "cfbcded8729c0a31560b5c94e3ac64c337844178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f1c351e_7cde912f",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-02-20T01:16:08Z",
+      "side": 1,
+      "message": "Kernel style generally discourages use of curly braces around single-statement blocks if both the \"then\" and \"else\" (if present) clauses are single statements.",
+      "range": {
+        "startLine": 87,
+        "startChar": 15,
+        "endLine": 87,
+        "endChar": 16
+      },
+      "revId": "cfbcded8729c0a31560b5c94e3ac64c337844178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
