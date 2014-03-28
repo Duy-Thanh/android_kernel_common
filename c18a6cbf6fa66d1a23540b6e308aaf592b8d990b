@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39fba735_cd537554",
+        "filename": "net/ipv4/tcp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3319,
+      "author": {
+        "id": 1005480
+      },
+      "writtenOn": "2014-03-28T23:30:17Z",
+      "side": 1,
+      "message": "Does this test still apply as sk-\u003esk_v6_rvc_saddr is used directly?",
+      "range": {
+        "startLine": 3319,
+        "startChar": 4,
+        "endLine": 3319,
+        "endChar": 22
+      },
+      "revId": "c18a6cbf6fa66d1a23540b6e308aaf592b8d990b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99157331_d30e6c4e",
+        "filename": "net/netfilter/xt_quota2.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1005480
+      },
+      "writtenOn": "2014-03-28T23:30:17Z",
+      "side": 1,
+      "message": "This dissociates the quota_list_uid/quota_list_gid from the parameters, which means that proc_set_user() calls will not work after the module parameters are changed.\nThese should be runtime and not limited to module load-time.\nOr like\nhttps://lists.openwrt.org/pipermail/openwrt-devel/2013-January/018351.html \njust disable the parameters.",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 71
+      },
+      "revId": "c18a6cbf6fa66d1a23540b6e308aaf592b8d990b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
