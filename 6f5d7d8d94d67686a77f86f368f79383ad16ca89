@@ -33,6 +33,24 @@
       "revId": "6f5d7d8d94d67686a77f86f368f79383ad16ca89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19c5035d_be135de5",
+        "filename": "net/netfilter/xt_quota2.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1005480
+      },
+      "writtenOn": "2014-04-04T03:36:21Z",
+      "side": 1,
+      "message": "This looks closer to what might get upstreamed https://lists.openwrt.org/pipermail/openwrt-devel/2013-January/018351.html",
+      "parentUuid": "59b3fbf9_c0b834a7",
+      "revId": "6f5d7d8d94d67686a77f86f368f79383ad16ca89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }

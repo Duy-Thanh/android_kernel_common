@@ -16,6 +16,24 @@
       "revId": "da5bab969dc076b2d9eaeba43231a94338c72624",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19c5035d_dec5792c",
+        "filename": "net/netfilter/xt_quota2.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1005480
+      },
+      "writtenOn": "2014-04-04T03:36:21Z",
+      "side": 0,
+      "message": "We don\u0027t use them, so I suggested something like this https://lists.openwrt.org/pipermail/openwrt-devel/2013-January/018351.html only because http://sourceforge.net/p/xtables-addons/xtables-addons/ci/master/tree/extensions/xt_quota2.c has not fix for that yet.\n\nBut I\u0027m fine if it is all clobbered out.",
+      "parentUuid": "59b3fbf9_40ffc449",
+      "revId": "da5bab969dc076b2d9eaeba43231a94338c72624",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
