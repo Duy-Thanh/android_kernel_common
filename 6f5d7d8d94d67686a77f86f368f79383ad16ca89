@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59b3fbf9_e09b7812",
+        "filename": "net/ipv4/tcp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3320,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-04-04T02:54:57Z",
+      "side": 1,
+      "message": "This looks fine. More in detail:\n\nThe IPv6 receive address moved from  ipv6_pinfo to struct sock in October 2013 - https://kernel.googlesource.com/pub/scm/linux/kernel/git/davem/net-next/+/efe4208f47f907b86f528788da711e8ab9dea44d .\n\nThe check for inet-\u003epinet6 was mostly intended to (racily) protect against the possibility of a null pointer reference, not as a semantic check - we\u0027ve already checked the socket family, so we know it\u0027s an IPv6 socket.\n\nWe only kill the socket if a) the passed-in IPv6 address matches the socket address, or b) if the passed-in IPv6 address is empty and the socket address is not configured on the system any more. So even if sk-\u003esk_v6_rcv_saddr is uninitialized or garbage (which I think would indicated a bug elsewhere), the code will still work.\n\ntcp_is_local6 will return false for an empty address. If the system has a non-loopback route to the address, rt6_lookup will return that, and if it does not, it will return NULL. Even if userspace points a non-local route at a loopback interface, it will be promoted to a reject route at creation time, so rt6_lookup will also return NULL in that case.",
+      "revId": "6f5d7d8d94d67686a77f86f368f79383ad16ca89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59b3fbf9_c0b834a7",
+        "filename": "net/netfilter/xt_quota2.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-04-04T02:54:57Z",
+      "side": 1,
+      "message": "You could also set these to GLOBAL_ROOT_UID and GLOBAL_ROOT_GID, if that\u0027s what\u0027s intended here.",
+      "revId": "6f5d7d8d94d67686a77f86f368f79383ad16ca89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

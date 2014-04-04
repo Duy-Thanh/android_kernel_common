@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59b3fbf9_40ffc449",
+        "filename": "net/netfilter/xt_quota2.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-04-04T02:54:57Z",
+      "side": 0,
+      "message": "JP, do we not need these parameters any more? If we still need them, then a better fix would be to store UIDs and GIDs as unsigned int (or uid_t) and convert to kuid_t only when using them.",
+      "revId": "da5bab969dc076b2d9eaeba43231a94338c72624",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
