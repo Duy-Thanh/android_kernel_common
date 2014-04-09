@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b96a3764_eadc678a",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2014-04-09T23:39:07Z",
+      "side": 1,
+      "message": "this needs to be tunables-\u003eboostpulse_endtime on 3.10",
+      "revId": "49cc72365fb7ee87762a7ccc6a32ef68627216c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
