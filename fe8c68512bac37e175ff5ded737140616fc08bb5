@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19ffc3b9_2be01de6",
+        "filename": "drivers/net/wireless/bcmdhd/include/wlioctl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1038,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2014-04-09T01:15:43Z",
+      "side": 1,
+      "message": "Can you please remove it to make it similar to wl_ioctl?",
+      "range": {
+        "startLine": 1038,
+        "startChar": 12,
+        "endLine": 1038,
+        "endChar": 23
+      },
+      "revId": "fe8c68512bac37e175ff5ded737140616fc08bb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39d4872d_c06def89",
+        "filename": "drivers/net/wireless/bcmdhd/wl_android.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1303,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2014-04-09T01:15:43Z",
+      "side": 1,
+      "message": "If you are fixing near this line, please fix grammer",
+      "range": {
+        "startLine": 1303,
+        "startChar": 27,
+        "endLine": 1303,
+        "endChar": 34
+      },
+      "revId": "fe8c68512bac37e175ff5ded737140616fc08bb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9fbcfcb_641d2ac1",
+        "filename": "drivers/net/wireless/bcmdhd/wl_android.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1314,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2014-04-09T01:15:43Z",
+      "side": 1,
+      "message": "priv_cmd.buf doesn\u0027t exist",
+      "range": {
+        "startLine": 1314,
+        "startChar": 29,
+        "endLine": 1314,
+        "endChar": 37
+      },
+      "revId": "fe8c68512bac37e175ff5ded737140616fc08bb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
