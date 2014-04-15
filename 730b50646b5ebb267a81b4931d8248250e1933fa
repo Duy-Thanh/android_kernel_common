@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "198c23b9_3163789f",
+        "filename": "drivers/staging/android/fiq_debugger/fiq_debugger.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2014-04-15T02:34:11Z",
+      "side": 1,
+      "message": "This is not related to the name change, and wold be better moved to another change.",
+      "range": {
+        "startLine": 679,
+        "startChar": 20,
+        "endLine": 679,
+        "endChar": 34
+      },
+      "revId": "730b50646b5ebb267a81b4931d8248250e1933fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "198c23b9_51600490",
+        "filename": "drivers/staging/android/fiq_debugger/fiq_debugger.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2014-04-15T02:34:11Z",
+      "side": 1,
+      "message": "...",
+      "range": {
+        "startLine": 930,
+        "startChar": 64,
+        "endLine": 930,
+        "endChar": 71
+      },
+      "revId": "730b50646b5ebb267a81b4931d8248250e1933fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
