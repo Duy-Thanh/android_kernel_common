@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d91c4b54_ec383fe9",
+        "filename": "drivers/staging/android/fiq_debugger/fiq_debugger.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2014-04-16T18:56:28Z",
+      "side": 1,
+      "message": "Did you remove the static on purpose?",
+      "revId": "45468d7e888dd8826710d1676eb6f95e4735d4ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d91c4b54_8c526b2e",
+        "filename": "drivers/staging/android/fiq_debugger/fiq_debugger.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2014-04-16T18:56:28Z",
+      "side": 1,
+      "message": "Is the cast not needed?",
+      "revId": "45468d7e888dd8826710d1676eb6f95e4735d4ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
