@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aadf3855_6b0981f9",
+        "filename": "net/ipv6/route.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1975,
+      "author": {
+        "id": 1005480
+      },
+      "writtenOn": "2014-05-10T01:09:15Z",
+      "side": 1,
+      "message": "The original code looks more like it was doing a fib6_clean_tree() than a clean_all().\nIs this intended?",
+      "range": {
+        "startLine": 1975,
+        "startChar": 1,
+        "endLine": 1975,
+        "endChar": 15
+      },
+      "revId": "5fe5c512af518d0abbbc0d2fafa8e355f518c2a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
