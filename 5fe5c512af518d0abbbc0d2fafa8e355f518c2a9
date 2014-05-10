@@ -22,6 +22,24 @@
       "revId": "5fe5c512af518d0abbbc0d2fafa8e355f518c2a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aadf3855_8bca6dde",
+        "filename": "net/ipv6/route.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1975,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-05-10T02:03:59Z",
+      "side": 1,
+      "message": "Yes, that\u0027s the intent.\n\nPreviously, the code was only adding autoconf routes to RT6_TABLE_DFLT, and so the cleaning code only needed to clean RT6_TABLE_DFLT.\n\nNow that autoconf routes can be added to all tables, the code needs to clean all autoconf routes in all tables. So now the code calls fib6_clean_all, which loops over all routing tables and calls fib6_clean_tree on each of them.",
+      "parentUuid": "aadf3855_6b0981f9",
+      "revId": "5fe5c512af518d0abbbc0d2fafa8e355f518c2a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
