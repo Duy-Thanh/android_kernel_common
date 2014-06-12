@@ -16,6 +16,24 @@
       "revId": "83ebaa690e97ccae932ce8c4f1c7b2065804763a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f6328c5_4c521b97",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2014-06-12T15:50:45Z",
+      "side": 1,
+      "message": "So, this reduces to (action \u003d\u003d 0), or should there be a pair of manifests used like SAR_LIMITATION_ACTIVATED and SAR_LIMITATION_DEACTIVATED to make this abundantly clear?",
+      "parentUuid": "1f8a489d_becbd030",
+      "revId": "83ebaa690e97ccae932ce8c4f1c7b2065804763a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
