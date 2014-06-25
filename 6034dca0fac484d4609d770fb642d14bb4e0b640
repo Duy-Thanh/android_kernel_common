@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44ba35ef_bb9b531c",
+        "filename": "net/ipv4/route.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3116,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2014-06-25T16:33:42Z",
+      "side": 1,
+      "message": "uid is not used below if iif is defined. Would we not have the same result without this ? : decision?",
+      "range": {
+        "startLine": 3116,
+        "startChar": 9,
+        "endLine": 3116,
+        "endChar": 25
+      },
+      "revId": "6034dca0fac484d4609d770fb642d14bb4e0b640",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44ba35ef_db2de71f",
+        "filename": "net/ipv4/route.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3116,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2014-06-25T16:33:42Z",
+      "side": 1,
+      "message": "I half expected a define to cover this",
+      "range": {
+        "startLine": 3116,
+        "startChar": 15,
+        "endLine": 3116,
+        "endChar": 25
+      },
+      "revId": "6034dca0fac484d4609d770fb642d14bb4e0b640",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64c57978_4267a8f3",
+        "filename": "net/ipv6/route.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2591,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2014-06-25T16:33:42Z",
+      "side": 1,
+      "message": "half expected a manifest used here for invalid UID.",
+      "range": {
+        "startLine": 2591,
+        "startChar": 26,
+        "endLine": 2591,
+        "endChar": 36
+      },
+      "revId": "6034dca0fac484d4609d770fb642d14bb4e0b640",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
