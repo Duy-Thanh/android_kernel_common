@@ -48,6 +48,29 @@
     },
     {
       "key": {
+        "uuid": "e4fec9bb_ba48d572",
+        "filename": "net/ipv4/route.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3116,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2014-06-27T15:02:37Z",
+      "side": 1,
+      "message": "This whole fragment, plus the uid_t uid definition, can move into the \u0027} else {\u0027 block below (optimization).",
+      "range": {
+        "startLine": 3113,
+        "startChar": 1,
+        "endLine": 3116,
+        "endChar": 43
+      },
+      "revId": "6034dca0fac484d4609d770fb642d14bb4e0b640",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64c57978_4267a8f3",
         "filename": "net/ipv6/route.c",
         "patchSetId": 2
