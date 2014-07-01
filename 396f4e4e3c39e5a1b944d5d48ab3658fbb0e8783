@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4efa930_a6c2ccca",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_pno.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1420,
+      "author": {
+        "id": 1049528
+      },
+      "writtenOn": "2014-07-01T20:07:05Z",
+      "side": 1,
+      "message": "Modified the code, mutex lock will be done by caller",
+      "revId": "396f4e4e3c39e5a1b944d5d48ab3658fbb0e8783",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
