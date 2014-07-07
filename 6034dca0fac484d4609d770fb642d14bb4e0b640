@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "84326dd1_caf7e3ab",
+        "filename": "net/ipv4/route.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3116,
+      "author": {
+        "id": 1031429
+      },
+      "writtenOn": "2014-07-07T18:43:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4fec9bb_ba48d572",
+      "range": {
+        "startLine": 3113,
+        "startChar": 1,
+        "endLine": 3116,
+        "endChar": 43
+      },
+      "revId": "6034dca0fac484d4609d770fb642d14bb4e0b640",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64c57978_4267a8f3",
         "filename": "net/ipv6/route.c",
         "patchSetId": 2
@@ -82,6 +106,30 @@
       "writtenOn": "2014-06-25T16:33:42Z",
       "side": 1,
       "message": "half expected a manifest used here for invalid UID.",
+      "range": {
+        "startLine": 2591,
+        "startChar": 26,
+        "endLine": 2591,
+        "endChar": 36
+      },
+      "revId": "6034dca0fac484d4609d770fb642d14bb4e0b640",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4462542_55bc7e53",
+        "filename": "net/ipv6/route.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2591,
+      "author": {
+        "id": 1031429
+      },
+      "writtenOn": "2014-07-07T18:43:01Z",
+      "side": 1,
+      "message": "Not sure what \"manifest\" means (a \"#define\"?). I\u0027ll let Lorenzo deal with this when he gets back from vacation.",
+      "parentUuid": "64c57978_4267a8f3",
       "range": {
         "startLine": 2591,
         "startChar": 26,
