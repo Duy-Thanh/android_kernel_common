@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4c385c9_cb58a634",
+        "filename": "include/net/route.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1031429
+      },
+      "writtenOn": "2014-07-08T16:48:36Z",
+      "side": 1,
+      "message": "The other fields handle \u0027sk\u0027 being NULL. Since we don\u0027t do that for sock_i_uid(), could that be the cause of the NULL pointer exception?",
+      "revId": "0b428749ce5969bc06c73855e360141b4e7126e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
