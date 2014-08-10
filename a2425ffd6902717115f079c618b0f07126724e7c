@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9699c785_d85025ed",
+        "filename": "drivers/cpufreq/cpufreq_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1037069
+      },
+      "writtenOn": "2014-08-10T18:57:52Z",
+      "side": 1,
+      "message": "ERROR: \"total_cpus\" [drivers/cpufreq/cpufreq_stats.ko] undefined!",
+      "range": {
+        "startLine": 285,
+        "startChar": 34,
+        "endLine": 285,
+        "endChar": 35
+      },
+      "revId": "a2425ffd6902717115f079c618b0f07126724e7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
