@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "303103d2_7636def9",
+        "filename": "drivers/net/wireless/bcmdhd/wl_cfg80211.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4145,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2014-09-29T18:11:10Z",
+      "side": 1,
+      "message": "Can be combined with code above",
+      "range": {
+        "startLine": 4145,
+        "startChar": 1,
+        "endLine": 4145,
+        "endChar": 2
+      },
+      "revId": "d0ed3980c6ef32d77fed28a3fb309ae9ff48f91e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "303103d2_d67dca88",
+        "filename": "drivers/net/wireless/bcmdhd/wl_cfg80211.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4149,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2014-09-29T18:11:10Z",
+      "side": 1,
+      "message": "Why we need to do assignment twice?",
+      "range": {
+        "startLine": 4149,
+        "startChar": 2,
+        "endLine": 4149,
+        "endChar": 8
+      },
+      "revId": "d0ed3980c6ef32d77fed28a3fb309ae9ff48f91e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
