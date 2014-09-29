@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90f63048_0594964a",
+        "filename": "drivers/net/wireless/bcmdhd/wl_cfg80211.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4130,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2014-09-29T21:00:15Z",
+      "side": 1,
+      "message": "@Ecco, do you think we need this of we can cancel scan regardless \u0027act\u0027 value?",
+      "range": {
+        "startLine": 4130,
+        "startChar": 6,
+        "endLine": 4130,
+        "endChar": 9
+      },
+      "revId": "b92faa42a1d1095272b6fe32d267964f23774551",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
