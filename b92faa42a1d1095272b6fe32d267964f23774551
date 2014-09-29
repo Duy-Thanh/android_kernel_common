@@ -22,6 +22,24 @@
       "revId": "b92faa42a1d1095272b6fe32d267964f23774551",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50f83838_e362c6f8",
+        "filename": "drivers/net/wireless/bcmdhd/wl_cfg80211.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4130,
+      "author": {
+        "id": 1021673
+      },
+      "writtenOn": "2014-09-29T21:41:15Z",
+      "side": 1,
+      "message": "Let\u0027s keep the original code.",
+      "parentUuid": "90f63048_0594964a",
+      "revId": "b92faa42a1d1095272b6fe32d267964f23774551",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
