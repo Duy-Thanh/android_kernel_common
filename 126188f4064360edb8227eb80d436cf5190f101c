@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "903e30e9_d7dc579e",
+        "filename": "include/linux/ipv6.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-10-08T06:53:38Z",
+      "side": 1,
+      "message": "I would call this something like optimistic_preferred or prefer_optimistic.",
+      "revId": "126188f4064360edb8227eb80d436cf5190f101c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0342809_db412b33",
+        "filename": "net/ipv6/addrconf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1266,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-10-08T06:53:38Z",
+      "side": 1,
+      "message": "I would rename this to simply \"u8 avoid\". Also, I think it would be more readable if the test were not inverted:\n\n                u8 avoid \u003d IFA_F_DEPRECATED;\n#ifdef CONFIG_IPV6_OPTIMISTIC_DAD\n                if (!score-\u003eifa-\u003eidev-\u003ecnf.prefer_optimistic) {\n                        avoid |\u003d IFA_OPTIMISTIC;\n                }\n#endif",
+      "revId": "126188f4064360edb8227eb80d436cf5190f101c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0342809_7b2d7f83",
+        "filename": "net/ipv6/addrconf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1271,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-10-08T06:53:38Z",
+      "side": 1,
+      "message": "Trailing whitespace. Remember to run scripts/checkpatch.pl before sending upstream.",
+      "revId": "126188f4064360edb8227eb80d436cf5190f101c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
