@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30c2e457_77c80a80",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-10-08T13:46:00Z",
+      "side": 1,
+      "message": "Add \"net: ipv6: \" to the beginning of the commit summary, and also try to convery the fact that this is optional.\n\nExample:\n\nnet: ipv6: Add a sysctl to treat optimistic addresses as preferred",
+      "revId": "650be90e5aca283882e01f323d3a78f19b55b8c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30c2e457_b7a9c29f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-10-08T13:46:00Z",
+      "side": 1,
+      "message": "\"Add a sysctl that causes...\"\n\"and\" -\u003e \"an\"",
+      "revId": "650be90e5aca283882e01f323d3a78f19b55b8c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "903e30e9_ed10ac71",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-10-08T13:46:00Z",
+      "side": 1,
+      "message": "Also mention that they are not treated as well as preferred addresses?",
+      "revId": "650be90e5aca283882e01f323d3a78f19b55b8c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "903e30e9_cd0de857",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-10-08T13:46:00Z",
+      "side": 1,
+      "message": "The reference to BCP38 may not be immediately understood by everyone upstream. Instead, perhaps say that it\u0027s useful where different interfaces are connected to different networks from different ISPs (e.g., a cell network and a home wifi network)?",
+      "revId": "650be90e5aca283882e01f323d3a78f19b55b8c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30c2e457_17a0b6ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-10-08T13:46:00Z",
+      "side": 1,
+      "message": "I would perhaps note that the current behaviour complies with RFC 3484/6724, and its behaviour makes sense if the host has only one interface, or has multiple interfaces on the same network, but not in the multiple distinct network case.",
+      "revId": "650be90e5aca283882e01f323d3a78f19b55b8c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
