@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30e3c420_0c2fb7a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-10-10T09:40:36Z",
+      "side": 1,
+      "message": "\"can\" -\u003e \"will\"",
+      "revId": "6ac6df86a3cdb483708bf60aa8a633ed982913d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50d67840_2db70dfc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-10-10T09:40:36Z",
+      "side": 1,
+      "message": "For example, if a mobile device has an IPv6 address on an LTE network and then connects to wifi, while the wifi IPv6 address is undergoing DAD, IPv6 connections will use the wifi default route and he LTE IPv6 address, and will get stuck until they time out.",
+      "revId": "6ac6df86a3cdb483708bf60aa8a633ed982913d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30e3c420_4c35bff9",
+        "filename": "Documentation/networking/ip-sysctl.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 1338,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-10-10T09:40:36Z",
+      "side": 1,
+      "message": "Lose this blank line? Looks like the other entries don\u0027t have it.",
+      "revId": "6ac6df86a3cdb483708bf60aa8a633ed982913d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30e3c420_2c327313",
+        "filename": "Documentation/networking/ip-sysctl.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 1343,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-10-10T09:40:36Z",
+      "side": 1,
+      "message": "Not sure \"valid\" is the right word here. Optimistic addresses are already valid, they\u0027re just treated the same as deprecated. Perhaps you can invert the matching and say that if this is set to 1 then optimistic addresses are not treated the same as deprecated?",
+      "revId": "6ac6df86a3cdb483708bf60aa8a633ed982913d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50d67840_edb8e5f2",
+        "filename": "Documentation/networking/ip-sysctl.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 1344,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2014-10-10T09:40:36Z",
+      "side": 1,
+      "message": "\"can still be chosen\" -\u003e \"will still be chosen\"",
+      "revId": "6ac6df86a3cdb483708bf60aa8a633ed982913d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
