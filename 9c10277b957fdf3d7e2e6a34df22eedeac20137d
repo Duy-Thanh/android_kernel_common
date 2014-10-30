@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f5267ef7_5efcf580",
+        "filename": "drivers/net/wireless/bcmdhd/dhd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1045688
+      },
+      "writtenOn": "2014-10-30T18:32:04Z",
+      "side": 1,
+      "message": "multiplier for DHD_PACKET_TIMEOUT_MS (?) :)",
+      "range": {
+        "startLine": 909,
+        "startChar": 39,
+        "endLine": 909,
+        "endChar": 48
+      },
+      "revId": "9c10277b957fdf3d7e2e6a34df22eedeac20137d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
