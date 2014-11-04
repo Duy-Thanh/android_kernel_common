@@ -22,6 +22,30 @@
       "revId": "44bb9b152b68c86cd534b4301ca5068324ddd73a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55d10a3e_c1e295e4",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-11-04T02:05:45Z",
+      "side": 1,
+      "message": "OK, I guess not needed.",
+      "parentUuid": "15b23212_2e6a4adf",
+      "range": {
+        "startLine": 104,
+        "startChar": 1,
+        "endLine": 104,
+        "endChar": 4
+      },
+      "revId": "44bb9b152b68c86cd534b4301ca5068324ddd73a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
