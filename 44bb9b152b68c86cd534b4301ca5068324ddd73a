@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15b23212_2e6a4adf",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2014-11-04T01:49:56Z",
+      "side": 1,
+      "message": "prior to line 104: if (suspend_abort) then drop wakelock and return false.  (current suspend sequence was aborted)",
+      "range": {
+        "startLine": 104,
+        "startChar": 1,
+        "endLine": 104,
+        "endChar": 4
+      },
+      "revId": "44bb9b152b68c86cd534b4301ca5068324ddd73a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
