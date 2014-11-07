@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b52c067c_28516b5c",
+        "filename": "include/linux/cgroup.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2014-11-07T21:30:44Z",
+      "side": 1,
+      "message": ", either because CAP_SYS_NICE is set or because [short explanation of what the loop is looking for]",
+      "revId": "25811db8f2c3d8d86b7aa37456326eaf3ae4acb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1544f239_ff7e2750",
+        "filename": "include/linux/cgroup.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2014-11-07T21:30:44Z",
+      "side": 1,
+      "message": "0 if this is allowed, or -EACCES otherwise.",
+      "range": {
+        "startLine": 837,
+        "startChar": 11,
+        "endLine": 837,
+        "endChar": 68
+      },
+      "revId": "25811db8f2c3d8d86b7aa37456326eaf3ae4acb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
