@@ -22,6 +22,30 @@
       "revId": "538d9e48b8681795fa15045e3294fd28c56cfba2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba5eb3fb_ec0e9326",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1260,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2014-11-20T04:30:22Z",
+      "side": 1,
+      "message": "Changed!!",
+      "parentUuid": "ba0233b9_1e05cd36",
+      "range": {
+        "startLine": 1260,
+        "startChar": 1,
+        "endLine": 1260,
+        "endChar": 3
+      },
+      "revId": "538d9e48b8681795fa15045e3294fd28c56cfba2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
