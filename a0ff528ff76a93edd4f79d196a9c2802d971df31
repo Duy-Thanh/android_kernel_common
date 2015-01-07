@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e630529_0d19a59c",
+        "filename": "fs/pstore/inode.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1003966
+      },
+      "writtenOn": "2015-01-07T22:56:55Z",
+      "side": 1,
+      "message": "On line 215, you return dentry-\u003ed_inode-\u003ei_private-\u003exattrs, but here you just return i_private. At first glance, that feels wrong... Is this intentional?",
+      "revId": "a0ff528ff76a93edd4f79d196a9c2802d971df31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
