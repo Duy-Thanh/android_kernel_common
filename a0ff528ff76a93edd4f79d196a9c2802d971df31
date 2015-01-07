@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0e630529_6def7913",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-01-07T23:01:49Z",
+      "side": 1,
+      "message": "Missing Signed-off-by:",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 1
+      },
+      "revId": "a0ff528ff76a93edd4f79d196a9c2802d971df31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e630529_0d19a59c",
         "filename": "fs/pstore/inode.c",
         "patchSetId": 1
@@ -13,6 +36,24 @@
       "writtenOn": "2015-01-07T22:56:55Z",
       "side": 1,
       "message": "On line 215, you return dentry-\u003ed_inode-\u003ei_private-\u003exattrs, but here you just return i_private. At first glance, that feels wrong... Is this intentional?",
+      "revId": "a0ff528ff76a93edd4f79d196a9c2802d971df31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e1ac1b5_269656db",
+        "filename": "fs/pstore/inode.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-01-07T23:01:49Z",
+      "side": 1,
+      "message": "Yes. If the dentry references a directory, we stuff an allocation of \u0027struct simple_xattrs\u0027 into i_private. If the dentry references a file, we stuff an allocation of \u0027struct pstore_private\u0027 into i_private.\n\nI should add documentation to this effect, however something similar (but better with abstraction IMHO) was done in kernel/cgroup.c. I will think about this, maybe incorporate similar abstraction as kernel/cgroup ...",
+      "parentUuid": "0e630529_0d19a59c",
       "revId": "a0ff528ff76a93edd4f79d196a9c2802d971df31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
