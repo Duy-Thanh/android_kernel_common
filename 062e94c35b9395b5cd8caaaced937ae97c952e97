@@ -45,6 +45,30 @@
       "revId": "062e94c35b9395b5cd8caaaced937ae97c952e97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ed17d3e_5502cc7c",
+        "filename": "security/selinux/hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1010099
+      },
+      "writtenOn": "2015-01-09T13:29:47Z",
+      "side": 1,
+      "message": "Yes, this looks like it was a mistake in the sysfs check and then repeated in the rootfs one.  strcmp should be fine.",
+      "parentUuid": "ce9c8d86_3533c8e1",
+      "range": {
+        "startLine": 422,
+        "startChar": 5,
+        "endLine": 425,
+        "endChar": 60
+      },
+      "revId": "062e94c35b9395b5cd8caaaced937ae97c952e97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
