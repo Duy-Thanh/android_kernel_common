@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cee48d53_21398ec2",
+        "filename": "security/selinux/hooks.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1010099
+      },
+      "writtenOn": "2015-01-10T17:04:43Z",
+      "side": 1,
+      "message": "See Documentation/CodingStyle, SubmittingPatches, and run it through scripts/checkpatch.pl before submitting.  SELinux patches go to selinux@tycho.nsa.gov, subscribe via selinux-join@tycho.nsa.gov.",
+      "revId": "821d813f030a0f62dd4fbd9bc3caee63a9664d7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
