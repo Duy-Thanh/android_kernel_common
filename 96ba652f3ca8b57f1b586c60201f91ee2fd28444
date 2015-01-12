@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2eab69f1_e6de82e7",
+        "filename": "drivers/usb/gadget/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-01-12T23:42:39Z",
+      "side": 1,
+      "message": "Please add empty line above",
+      "range": {
+        "startLine": 557,
+        "startChar": 0,
+        "endLine": 557,
+        "endChar": 6
+      },
+      "revId": "96ba652f3ca8b57f1b586c60201f91ee2fd28444",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ef09d0f_2c3fbbf7",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-01-12T23:42:39Z",
+      "side": 1,
+      "message": "Maybe makes sense to move it above static _mtp_dev declaration",
+      "range": {
+        "startLine": 291,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 6
+      },
+      "revId": "96ba652f3ca8b57f1b586c60201f91ee2fd28444",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efa25f3_e4ae8b28",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-01-12T23:42:39Z",
+      "side": 1,
+      "message": "Please remove empty line above",
+      "range": {
+        "startLine": 761,
+        "startChar": 0,
+        "endLine": 761,
+        "endChar": 1
+      },
+      "revId": "96ba652f3ca8b57f1b586c60201f91ee2fd28444",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ef09d0f_57dd7471",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1260,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-01-12T23:42:39Z",
+      "side": 1,
+      "message": "If you afraid (at least in code below) that fi_mtp can be NULL you need to check it here as well or to move lines below before the if.",
+      "range": {
+        "startLine": 1260,
+        "startChar": 2,
+        "endLine": 1260,
+        "endChar": 8
+      },
+      "revId": "96ba652f3ca8b57f1b586c60201f91ee2fd28444",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efa25f3_e417abb4",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1324,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-01-12T23:42:39Z",
+      "side": 1,
+      "message": "Please add empty line above. Also you probably don\u0027t need this function at all.",
+      "range": {
+        "startLine": 1324,
+        "startChar": 0,
+        "endLine": 1324,
+        "endChar": 6
+      },
+      "revId": "96ba652f3ca8b57f1b586c60201f91ee2fd28444",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
