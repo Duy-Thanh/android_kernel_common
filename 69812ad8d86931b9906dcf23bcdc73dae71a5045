@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed5357b_c7a41ebf",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1257,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-01-13T00:22:45Z",
+      "side": 1,
+      "message": "In this case static int mtp_setup(void) doesn\u0027t make any sense.",
+      "range": {
+        "startLine": 1257,
+        "startChar": 5,
+        "endLine": 1257,
+        "endChar": 11
+      },
+      "revId": "69812ad8d86931b9906dcf23bcdc73dae71a5045",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ef09d0f_3702687c",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1334,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-01-13T00:22:45Z",
+      "side": 1,
+      "message": "This is simple function and is used only once. Why not to just use container_of() here?",
+      "range": {
+        "startLine": 1334,
+        "startChar": 31,
+        "endLine": 1334,
+        "endChar": 46
+      },
+      "revId": "69812ad8d86931b9906dcf23bcdc73dae71a5045",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
