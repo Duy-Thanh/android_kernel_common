@@ -22,6 +22,30 @@
       "revId": "b5e9a0b183c7121fb1e29d1fb959fbb737b8215f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e99a9f9_9c2705a4",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1375,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2015-01-13T01:06:04Z",
+      "side": 1,
+      "message": "I dont think that can happen. func_inst is not a pointer, its a part of mtp_instance structure. Also the pointer to this function itself resides inside fi variable. Is that convincing enough ??",
+      "parentUuid": "2e99a9f9_3c335113",
+      "range": {
+        "startLine": 1375,
+        "startChar": 7,
+        "endLine": 1375,
+        "endChar": 13
+      },
+      "revId": "b5e9a0b183c7121fb1e29d1fb959fbb737b8215f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
