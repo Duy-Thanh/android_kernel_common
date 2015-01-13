@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4ef09d0f_f2292eaf",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1257,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2015-01-13T00:41:47Z",
+      "side": 1,
+      "message": "My bad.. just lost the idea of what I was intending. Probably still jet lagged :)",
+      "parentUuid": "8ed5357b_c7a41ebf",
+      "range": {
+        "startLine": 1257,
+        "startChar": 5,
+        "endLine": 1257,
+        "endChar": 11
+      },
+      "revId": "69812ad8d86931b9906dcf23bcdc73dae71a5045",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ef09d0f_3702687c",
         "filename": "drivers/usb/gadget/f_mtp.c",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2015-01-13T00:22:45Z",
       "side": 1,
       "message": "This is simple function and is used only once. Why not to just use container_of() here?",
+      "range": {
+        "startLine": 1334,
+        "startChar": 31,
+        "endLine": 1334,
+        "endChar": 46
+      },
+      "revId": "69812ad8d86931b9906dcf23bcdc73dae71a5045",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0efa25f3_c76b910f",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1334,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2015-01-13T00:41:47Z",
+      "side": 1,
+      "message": "Thought might prevent code replication in future. Also, seems more readable to me.. Shall remove it, if you think it is redundant.",
+      "parentUuid": "4ef09d0f_3702687c",
       "range": {
         "startLine": 1334,
         "startChar": 31,
