@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e99a9f9_3c335113",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1375,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-01-13T00:54:12Z",
+      "side": 1,
+      "message": "Can fi_mtp be NULL?",
+      "range": {
+        "startLine": 1375,
+        "startChar": 7,
+        "endLine": 1375,
+        "endChar": 13
+      },
+      "revId": "b5e9a0b183c7121fb1e29d1fb959fbb737b8215f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
