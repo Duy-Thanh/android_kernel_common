@@ -2,6 +2,144 @@
   "comments": [
     {
       "key": {
+        "uuid": "ebe78392_4b4f4d87",
+        "filename": "drivers/usb/gadget/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-01-14T21:53:17Z",
+      "side": 1,
+      "message": "alphabetically sorted with other objects is the desire (this Makefile is not sorted, so a weak request).",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 39
+      },
+      "revId": "b5e9a0b183c7121fb1e29d1fb959fbb737b8215f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ebe78392_c8792331",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-01-14T21:53:17Z",
+      "side": 1,
+      "message": "Weak argument for a third one.\n\neg:\n\n#define DRIVER_NAME \"mtp\"\nstatic const char mpt_shortname[] \u003d DRIVER_NAME \"_usb\"",
+      "range": {
+        "startLine": 75,
+        "startChar": 37,
+        "endLine": 75,
+        "endChar": 40
+      },
+      "revId": "b5e9a0b183c7121fb1e29d1fb959fbb737b8215f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ebe78392_684a17f9",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-01-14T21:53:17Z",
+      "side": 1,
+      "message": "pr_err",
+      "range": {
+        "startLine": 470,
+        "startChar": 1,
+        "endLine": 470,
+        "endChar": 17
+      },
+      "revId": "b5e9a0b183c7121fb1e29d1fb959fbb737b8215f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e20c981_4d6231f8",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1235,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-01-14T21:53:17Z",
+      "side": 1,
+      "message": "Two entities in here have \"mtp\".\n\ndefine this (MODULE_NAME, DRIVER_NAME, MTP_NAME, not tied)",
+      "range": {
+        "startLine": 1235,
+        "startChar": 22,
+        "endLine": 1235,
+        "endChar": 27
+      },
+      "revId": "b5e9a0b183c7121fb1e29d1fb959fbb737b8215f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e20c981_ed7bddaa",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-01-14T21:53:17Z",
+      "side": 1,
+      "message": "indent? Has this been run through ./scripts/checkpatch.pl?",
+      "range": {
+        "startLine": 1301,
+        "startChar": 1,
+        "endLine": 1301,
+        "endChar": 2
+      },
+      "revId": "b5e9a0b183c7121fb1e29d1fb959fbb737b8215f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e20c981_0d811928",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1306,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-01-14T21:53:17Z",
+      "side": 1,
+      "message": "indent?",
+      "range": {
+        "startLine": 1306,
+        "startChar": 1,
+        "endLine": 1306,
+        "endChar": 2
+      },
+      "revId": "b5e9a0b183c7121fb1e29d1fb959fbb737b8215f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e99a9f9_3c335113",
         "filename": "drivers/usb/gadget/f_mtp.c",
         "patchSetId": 5
@@ -49,6 +187,75 @@
     },
     {
       "key": {
+        "uuid": "2e20c981_4d1f9151",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1393,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-01-14T21:53:17Z",
+      "side": 1,
+      "message": "leak of fi_mtp?",
+      "range": {
+        "startLine": 1393,
+        "startChar": 11,
+        "endLine": 1393,
+        "endChar": 12
+      },
+      "revId": "b5e9a0b183c7121fb1e29d1fb959fbb737b8215f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1dc54d_09682dd8",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1420,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-01-14T21:53:17Z",
+      "side": 1,
+      "message": "indent",
+      "range": {
+        "startLine": 1420,
+        "startChar": 0,
+        "endLine": 1420,
+        "endChar": 1
+      },
+      "revId": "b5e9a0b183c7121fb1e29d1fb959fbb737b8215f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1dc54d_4994e54b",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1429,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-01-14T21:53:17Z",
+      "side": 1,
+      "message": "The \u0027other\u0027 one",
+      "range": {
+        "startLine": 1429,
+        "startChar": 22,
+        "endLine": 1429,
+        "endChar": 27
+      },
+      "revId": "b5e9a0b183c7121fb1e29d1fb959fbb737b8215f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e1dc54d_233fcaf7",
         "filename": "drivers/usb/gadget/f_ptp.c",
         "patchSetId": 5
@@ -60,6 +267,24 @@
       "writtenOn": "2015-01-14T19:55:07Z",
       "side": 1,
       "message": "This would be pretty confusing for someone looking at this file on its own. Could we have a comment that these are in f_mtp.c, and maybe rename these functions to include \"mtp\" somewhere in the name so it is more clear what is happening here?",
+      "revId": "b5e9a0b183c7121fb1e29d1fb959fbb737b8215f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1dc54d_498b0548",
+        "filename": "drivers/usb/gadget/f_ptp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-01-14T21:53:17Z",
+      "side": 1,
+      "message": "Add the prototype to a f_mtp.h and include it to ensure that the interface remains consistent.",
+      "parentUuid": "0e1dc54d_233fcaf7",
       "revId": "b5e9a0b183c7121fb1e29d1fb959fbb737b8215f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
