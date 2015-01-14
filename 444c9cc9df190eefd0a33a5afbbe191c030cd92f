@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce372dc2_cfd29164",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-01-14T01:11:06Z",
+      "side": 1,
+      "message": "You have same lines above",
+      "range": {
+        "startLine": 593,
+        "startChar": 1,
+        "endLine": 593,
+        "endChar": 3
+      },
+      "revId": "444c9cc9df190eefd0a33a5afbbe191c030cd92f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e3a5daa_07a48a13",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-01-14T01:11:06Z",
+      "side": 1,
+      "message": "Do you still want to call composite_setup() nobody in line 973 return positive value and CONFIG_USB_CONFIGFS_F_ACC is defined?",
+      "range": {
+        "startLine": 984,
+        "startChar": 1,
+        "endLine": 984,
+        "endChar": 3
+      },
+      "revId": "444c9cc9df190eefd0a33a5afbbe191c030cd92f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e3a5daa_a77bb6e6",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-01-14T01:11:06Z",
+      "side": 1,
+      "message": "Do you want to check if gi-\u003econnected !\u003d 1 ?",
+      "range": {
+        "startLine": 990,
+        "startChar": 2,
+        "endLine": 990,
+        "endChar": 15
+      },
+      "revId": "444c9cc9df190eefd0a33a5afbbe191c030cd92f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e47e93f_800ce6ae",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-01-14T01:11:06Z",
+      "side": 1,
+      "message": "Do you need to call\nconfigfs_unregister_subsystem(\u0026gadget_subsys); ?",
+      "range": {
+        "startLine": 1132,
+        "startChar": 2,
+        "endLine": 1132,
+        "endChar": 8
+      },
+      "revId": "444c9cc9df190eefd0a33a5afbbe191c030cd92f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
