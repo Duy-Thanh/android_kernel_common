@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ce372dc2_8f4339e4",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2015-01-14T04:11:58Z",
+      "side": 1,
+      "message": "Seems to be there in 3.14 by default. Will remove them",
+      "parentUuid": "ce372dc2_cfd29164",
+      "range": {
+        "startLine": 593,
+        "startChar": 1,
+        "endLine": 593,
+        "endChar": 3
+      },
+      "revId": "444c9cc9df190eefd0a33a5afbbe191c030cd92f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e3a5daa_07a48a13",
         "filename": "drivers/usb/gadget/configfs.c",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2015-01-14T01:11:06Z",
       "side": 1,
       "message": "Do you still want to call composite_setup() nobody in line 973 return positive value and CONFIG_USB_CONFIGFS_F_ACC is defined?",
+      "range": {
+        "startLine": 984,
+        "startChar": 1,
+        "endLine": 984,
+        "endChar": 3
+      },
+      "revId": "444c9cc9df190eefd0a33a5afbbe191c030cd92f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e47e93f_1b5867ca",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2015-01-14T04:11:58Z",
+      "side": 1,
+      "message": "Yes... composite_setup would be the final fallback function to service generic setup requests.",
+      "parentUuid": "4e3a5daa_07a48a13",
       "range": {
         "startLine": 984,
         "startChar": 1,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ce372dc2_52fe4ac2",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2015-01-14T04:11:58Z",
+      "side": 1,
+      "message": "I have restructured the android_work a bit to make sure that both CONNECTED and CONFIGURED uevents are sent.\n\n1. When USB is disconnected, USB_STATE\u003dDISCONNECTED uevent is sent.\n\n2. USB_STATE\u003dCONNECTED and USB_STATE\u003dCONFIGURED gets sent when USB is eventually configured.",
+      "parentUuid": "4e3a5daa_a77bb6e6",
+      "range": {
+        "startLine": 990,
+        "startChar": 2,
+        "endLine": 990,
+        "endChar": 15
+      },
+      "revId": "444c9cc9df190eefd0a33a5afbbe191c030cd92f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e47e93f_800ce6ae",
         "filename": "drivers/usb/gadget/configfs.c",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2015-01-14T01:11:06Z",
       "side": 1,
       "message": "Do you need to call\nconfigfs_unregister_subsystem(\u0026gadget_subsys); ?",
+      "range": {
+        "startLine": 1132,
+        "startChar": 2,
+        "endLine": 1132,
+        "endChar": 8
+      },
+      "revId": "444c9cc9df190eefd0a33a5afbbe191c030cd92f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e47e93f_410cc05f",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2015-01-14T04:11:58Z",
+      "side": 1,
+      "message": "This is only to create an sysfs class to send uevents to userspace... Userspace listens to these uevents and displays USB notifications accordingly. Not sure whether it would be an overkill if we unregister the configfs subsystem which might result in USB device mode failing altogether.",
+      "parentUuid": "2e47e93f_800ce6ae",
       "range": {
         "startLine": 1132,
         "startChar": 2,
