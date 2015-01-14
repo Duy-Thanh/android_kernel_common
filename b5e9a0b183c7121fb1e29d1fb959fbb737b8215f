@@ -46,6 +46,23 @@
       "revId": "b5e9a0b183c7121fb1e29d1fb959fbb737b8215f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e1dc54d_233fcaf7",
+        "filename": "drivers/usb/gadget/f_ptp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1004957
+      },
+      "writtenOn": "2015-01-14T19:55:07Z",
+      "side": 1,
+      "message": "This would be pretty confusing for someone looking at this file on its own. Could we have a comment that these are in f_mtp.c, and maybe rename these functions to include \"mtp\" somewhere in the name so it is more clear what is happening here?",
+      "revId": "b5e9a0b183c7121fb1e29d1fb959fbb737b8215f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
