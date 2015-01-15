@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "6b2473a4_99e25f2d",
+        "filename": "include/linux/lsm_audit.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1010111
+      },
+      "writtenOn": "2015-01-15T15:16:12Z",
+      "side": 1,
+      "message": "Could make this a struct containing both the struct path (or dentry or whatever) and the unsigned int ioctlcmd and then display them both together on denials.  Also, this file diff belongs with the other change.",
+      "revId": "0be80d8e4268cdceaa1d7ea9caa13bee2112c1d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb106340_dd6c3f75",
+        "filename": "security/selinux/hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1010111
+      },
+      "writtenOn": "2015-01-15T15:16:12Z",
+      "side": 1,
+      "message": "I\u0027d put this file diff with the change that creates this header file. More generally, you only need at most two changes - one for the general LSM infrastructure and one for SELinux.",
+      "revId": "0be80d8e4268cdceaa1d7ea9caa13bee2112c1d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b2473a4_39eb4b08",
+        "filename": "security/selinux/hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3137,
+      "author": {
+        "id": 1010111
+      },
+      "writtenOn": "2015-01-15T15:16:12Z",
+      "side": 1,
+      "message": "Use cred_sid() helper.",
+      "revId": "0be80d8e4268cdceaa1d7ea9caa13bee2112c1d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb106340_9d76c73f",
+        "filename": "security/selinux/hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3142,
+      "author": {
+        "id": 1010111
+      },
+      "writtenOn": "2015-01-15T15:16:12Z",
+      "side": 1,
+      "message": "Use a struct so you can pass both the path and the cmd for inclusion in the audit message.",
+      "revId": "0be80d8e4268cdceaa1d7ea9caa13bee2112c1d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb106340_faa0297a",
         "filename": "security/selinux/hooks.c",
         "patchSetId": 1
@@ -43,6 +111,23 @@
         "endLine": 3143,
         "endChar": 48
       },
+      "revId": "0be80d8e4268cdceaa1d7ea9caa13bee2112c1d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b2473a4_19f08fee",
+        "filename": "security/selinux/hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3144,
+      "author": {
+        "id": 1010111
+      },
+      "writtenOn": "2015-01-15T15:16:12Z",
+      "side": 1,
+      "message": "This is problematic; you are reusing an existing class/permission combination for a completely different purpose and different target context.  You really need a new permission for this check.  And it has to be added to COMMON_FILE_SOCK_PERMS in security/selinux/include/classmap.h so that it is defined for all file and socket classes.",
       "revId": "0be80d8e4268cdceaa1d7ea9caa13bee2112c1d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
