@@ -149,6 +149,24 @@
       "revId": "0be80d8e4268cdceaa1d7ea9caa13bee2112c1d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ba19b5e_1ce5f562",
+        "filename": "security/selinux/hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3144,
+      "author": {
+        "id": 1010099
+      },
+      "writtenOn": "2015-01-15T23:25:03Z",
+      "side": 1,
+      "message": "Actually, I think this check still won\u0027t be right even with its own permission.  IIUC, you want to be able to express in policy goals like \"untrusted apps can only invoke ioctls A, B-D, and Q on the gpu device\".  Which requires that your check take into account the task/cred SID, the device node SID (i.e. the inode SID), and the ioctl command.  Normally we would think of the ioctl command as corresponding to a permission, but of course we can\u0027t support such a mapping due to the limited permission space and vast ioctl space.  By trying to map the ioctl command to a target SID, you are losing the device node SID from the equation.  Two independent checks, one on the device node SID and one on the ioctl command SID, doesn\u0027t seem sufficient, e.g. if you want to allow ioctl command N on device node D1 and ioctl command M on device node D2, you\u0027ll have to allow ioctl to D1 and D2 and ioctl (or new permission) to SID(N) and SID(M).  Which will also allow ioctl M on D1 and N on D2.  All that to say that I would not try to model this as a regular permission check.  Instead, just introduce a new structure within the policydb and a new function exported by the security server that allows checking based on source SID (the task/cred SID), target SID (the inode SID for the device file), maybe the target class (if we think we\u0027ll use the same target SID on both block and character devices and need to distinguish?), and the ioctl command.  Internally we\u0027d have something like the avtab to look up by source type, target type, and target class, and then check against your whitelist of ioctl commands.  More work, and more of a change to libsepol/checkpolicy, but seems more suited.",
+      "parentUuid": "6b2473a4_19f08fee",
+      "revId": "0be80d8e4268cdceaa1d7ea9caa13bee2112c1d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
