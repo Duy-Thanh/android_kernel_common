@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "0b49377c_8323fe11",
+        "filename": "security/selinux/hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2015-01-15T21:44:59Z",
+      "side": 1,
+      "message": "Rgr. So two patches, a small (~20 lines) lsm_audit patch, and a much larger (~350 lines) selinux patch.",
+      "parentUuid": "eb106340_dd6c3f75",
+      "revId": "0be80d8e4268cdceaa1d7ea9caa13bee2112c1d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6b2473a4_39eb4b08",
         "filename": "security/selinux/hooks.c",
         "patchSetId": 1
