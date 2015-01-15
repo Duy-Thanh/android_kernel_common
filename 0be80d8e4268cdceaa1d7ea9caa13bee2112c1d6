@@ -22,6 +22,30 @@
       "revId": "0be80d8e4268cdceaa1d7ea9caa13bee2112c1d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b051bfe_65f0fc21",
+        "filename": "security/selinux/hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3143,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2015-01-15T03:10:52Z",
+      "side": 1,
+      "message": "Good catch! I believe that could be accessed by:\n\nstruct inode_security_struct *isec;\nstruct inode *inode \u003d file_inode(file);\nisec \u003d inode-\u003ei_security;\nisec-\u003esclass\n\nI will update tomorrow",
+      "parentUuid": "eb106340_faa0297a",
+      "range": {
+        "startLine": 3143,
+        "startChar": 35,
+        "endLine": 3143,
+        "endChar": 48
+      },
+      "revId": "0be80d8e4268cdceaa1d7ea9caa13bee2112c1d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
