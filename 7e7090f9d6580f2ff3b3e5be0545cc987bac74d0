@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb8303c3_825afa43",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-01-15T16:51:00Z",
+      "side": 1,
+      "message": "C11 (I know, not compiling with that standard ... yet) requires a space between the two strings.",
+      "range": {
+        "startLine": 76,
+        "startChar": 36,
+        "endLine": 76,
+        "endChar": 48
+      },
+      "revId": "7e7090f9d6580f2ff3b3e5be0545cc987bac74d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b4c3b8a_4464eeb7",
+        "filename": "drivers/usb/gadget/f_mtp.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1236,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-01-15T16:51:00Z",
+      "side": 1,
+      "message": "Functions may be mutually exclusive, but can the inherit from the DRIVER_NAME macro?",
+      "range": {
+        "startLine": 1236,
+        "startChar": 22,
+        "endLine": 1236,
+        "endChar": 27
+      },
+      "revId": "7e7090f9d6580f2ff3b3e5be0545cc987bac74d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
