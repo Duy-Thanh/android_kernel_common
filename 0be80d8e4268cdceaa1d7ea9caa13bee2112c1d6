@@ -203,6 +203,24 @@
       "revId": "0be80d8e4268cdceaa1d7ea9caa13bee2112c1d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6bc55323_f4f13072",
+        "filename": "security/selinux/hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3144,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2015-01-16T01:29:18Z",
+      "side": 1,
+      "message": "I\u0027m glad you brought this up.\n\nIt\u0027s important to note that this is the same issue with netport and netnode. They deal with socket TSID and port/addr TSID separately.\n\nI need to think about this more, but I will be considering two options:\n\n1) how to implement your example statement using the current two-check code and have the policy compiler solve the command space problem.\n\n2) how to use a single check. Adding a new statement to the policydb seems trivial, it\u0027s the avc lookup that is the difficulty. Currently it only uses the SSID, TSID and class for lookups. How would we expand this?",
+      "parentUuid": "6b971303_418cf418",
+      "revId": "0be80d8e4268cdceaa1d7ea9caa13bee2112c1d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
