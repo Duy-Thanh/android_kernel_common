@@ -167,6 +167,24 @@
       "revId": "0be80d8e4268cdceaa1d7ea9caa13bee2112c1d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2bcfdb48_cca10f36",
+        "filename": "security/selinux/hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3144,
+      "author": {
+        "id": 1003966
+      },
+      "writtenOn": "2015-01-16T00:20:20Z",
+      "side": 1,
+      "message": "\u003e IUC, you want to be able to express in policy goals like \"untrusted apps can only invoke ioctls A, B-D, and Q on the gpu device\".\n\nThat\u0027s the ideal state, but I\u0027d also be OK with being able to express a policy like:\n\n  untrusted_apps can only invoke ioctls A, B-D, and Q on a character device\n\nwhich isn\u0027t as good as what you proposed above...\n\nIf we\u0027re trying to express the ideal state, what would that look like from a policy perspective? More concretely, I\u0027m having a tough time envisioning what an \"allow\" rule would look like under such a scenario.\n\nLike this?\n\n  allow untrusted_app gpu_device:chr_file ioctlA;\n  allow untrusted_app gpu_device:chr_file ioctlBD;",
+      "parentUuid": "2ba19b5e_1ce5f562",
+      "revId": "0be80d8e4268cdceaa1d7ea9caa13bee2112c1d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
