@@ -239,6 +239,24 @@
       "revId": "0be80d8e4268cdceaa1d7ea9caa13bee2112c1d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ba5b782_2696b8d9",
+        "filename": "security/selinux/hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3144,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2015-01-16T22:10:56Z",
+      "side": 1,
+      "message": "\"the struct av_decision returned by the security server could be extended to support returning an array of ioctl commands/operations and the AVC could simply check for a match.\"\n\nThat seems reasonable.\n\nI don\u0027t think we can assume that drivers conform to the ioctl-decoding document, I\u0027m not sure it\u0027s even possible with only 256 values that are \"supposedly unique to each driver\". But despite that I would expect the array (assuming it represents ranges) would be quite short for each SSID/TSID/class set and therefore reasonable to search through.  \n\nOr, alternatively consider:\n\nUse the 2-check system show here and the existing AVC structure. Use policy compiler to resolve ioctl range overlap. \n\nFor example\nallow app1 gpu_device:chr_file ioctl { 12 }; \nallow app2 gpu_device:chr_file ioctl { 10-15 };\nallow app2 gpu_device:chr_file ioctl { 5-25 };\nThe compiler would expand to\nallow {app1 app2 app3 } gpu_device:chr_file ioctl { 12 } \n\nallow { app2 app3 } gpu_device:chr_file ioctl { 10-11 };\nallow { app2 app3 } gpu_device:chr_file ioctl { 13-15 };\n\nallow app3 gpu_device:chr_file ioctl { 5-9 };\nallow app3 gpu_device:chr_file ioctl { 16-25 };\n\nBenefits:\nUses existing AVC as-is\nWe can load the command -\u003e tsid policy mapping presorted which would allow a faster binary search on the initial lookup and the command cache for faster subsequent lookups.\nIn general, there shouldn’t be a lot of overlapping command ranges. Drivers tend to have sequential ranges, and we only need to account for the occasional non-conforming driver.",
+      "parentUuid": "6b971303_e458aecb",
+      "revId": "0be80d8e4268cdceaa1d7ea9caa13bee2112c1d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
