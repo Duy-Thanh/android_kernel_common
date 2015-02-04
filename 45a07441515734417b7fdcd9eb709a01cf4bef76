@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c521c24_265b36f0",
+        "filename": "drivers/usb/gadget/f_midi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2015-02-04T01:30:19Z",
+      "side": 1,
+      "message": "Trying to understand when would this happen... Can you be more elaborate ?? Any chance of pushing this patch to upstream, if possible.",
+      "range": {
+        "startLine": 412,
+        "startChar": 2,
+        "endLine": 412,
+        "endChar": 27
+      },
+      "revId": "45a07441515734417b7fdcd9eb709a01cf4bef76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
