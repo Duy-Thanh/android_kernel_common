@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63a3ca80_98cd81e2",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1658,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-03-27T22:08:40Z",
+      "side": 1,
+      "message": "Android device can be only one?",
+      "range": {
+        "startLine": 1658,
+        "startChar": 1,
+        "endLine": 1658,
+        "endChar": 15
+      },
+      "revId": "0b289c7c47afa362a4351606f38caee92dcb32d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
