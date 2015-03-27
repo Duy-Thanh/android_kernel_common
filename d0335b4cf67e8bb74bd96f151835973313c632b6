@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63a3ca80_98e6e158",
+        "filename": "drivers/usb/gadget/f_audio_source.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-03-27T22:12:25Z",
+      "side": 1,
+      "message": "Removing lines from original source is not good",
+      "range": {
+        "startLine": 643,
+        "startChar": 1,
+        "endLine": 643,
+        "endChar": 7
+      },
+      "revId": "d0335b4cf67e8bb74bd96f151835973313c632b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63758ab8_ebf067e0",
+        "filename": "drivers/usb/gadget/f_audio_source.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-03-27T22:12:25Z",
+      "side": 1,
+      "message": "Same here",
+      "range": {
+        "startLine": 651,
+        "startChar": 0,
+        "endLine": 651,
+        "endChar": 1
+      },
+      "revId": "d0335b4cf67e8bb74bd96f151835973313c632b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63758ab8_2b25ffd6",
+        "filename": "drivers/usb/gadget/f_audio_source.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-03-27T22:12:25Z",
+      "side": 1,
+      "message": "No need to remove one tab",
+      "range": {
+        "startLine": 898,
+        "startChar": 3,
+        "endLine": 898,
+        "endChar": 7
+      },
+      "revId": "d0335b4cf67e8bb74bd96f151835973313c632b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63758ab8_eb1e278e",
+        "filename": "drivers/usb/gadget/f_audio_source.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-03-27T22:12:25Z",
+      "side": 1,
+      "message": "No need to add empty line above",
+      "range": {
+        "startLine": 913,
+        "startChar": 1,
+        "endLine": 913,
+        "endChar": 7
+      },
+      "revId": "d0335b4cf67e8bb74bd96f151835973313c632b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
