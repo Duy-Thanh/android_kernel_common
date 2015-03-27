@@ -22,6 +22,30 @@
       "revId": "0b289c7c47afa362a4351606f38caee92dcb32d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63758ab8_8e2a21f6",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1658,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2015-03-27T23:12:10Z",
+      "side": 1,
+      "message": "Yes... In fact, we would just have one configuration and we keep changing the usb_functions that are present in the configuration depending on the settings.",
+      "parentUuid": "63a3ca80_98cd81e2",
+      "range": {
+        "startLine": 1658,
+        "startChar": 1,
+        "endLine": 1658,
+        "endChar": 15
+      },
+      "revId": "0b289c7c47afa362a4351606f38caee92dcb32d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
