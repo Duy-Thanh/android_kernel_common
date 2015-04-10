@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2368f29d_882c1f40",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1070083
+      },
+      "writtenOn": "2015-04-10T18:20:16Z",
+      "side": 1,
+      "message": "Are all these changes same except commit text?\nhttps://android-review.googlesource.com/#/c/146291/\nhttps://android-review.googlesource.com/#/c/146292/\nhttps://android-review.googlesource.com/#/c/146310/",
+      "revId": "89db6b68e9f82aa52077f6bf7d819dab74265790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4365e6c2_5d164f00",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1070083
+      },
+      "writtenOn": "2015-04-10T18:20:16Z",
+      "side": 1,
+      "message": "I think this has to be target_freq or we could keep CPU at high freq indefinitely.\n\nImagining two CPUs managed by one policy. CPU A is fully busy and its target_freq is policy-\u003emax, and thus keeping cluster frequency at policy-\u003emax. CPU B is idling at non-min freq with both timer scheduled. (They could be scheduled before CPU A ramped up to policy-\u003emax.)\n\nCPU B wakes up at beginning of the window where slack_timer would fire. Its regulaor timer drops its target_freq to policy-\u003emin because load is 0. With this change, it won\u0027t schedule regular timer, but slack timer is left unchanged.  CPU B does quite a lot of work before going to sleep again in same window. CPU B\u0027s slack time fires at end of this window, sees the busy time CPU B consumed in that window, and ramps up its target_freq to some middle frequency. CPU B\u0027s timers are again not scheduled because CPU A is keeping policy-\u003ecur at policy-\u003emax. If CPU B goes to long idle afterwards, its target_freq will keep policy frequency high forever even if CPU A ramps down to policy-\u003emin later.",
+      "range": {
+        "startLine": 499,
+        "startChar": 5,
+        "endLine": 499,
+        "endChar": 9
+      },
+      "revId": "89db6b68e9f82aa52077f6bf7d819dab74265790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
