@@ -16,6 +16,24 @@
       "revId": "f8ad216f37e6a7b07d5f6982a25c426c72f661f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0299e86_15b3b37b",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2015-04-13T21:04:44Z",
+      "side": 1,
+      "message": "No, cpufreq_{put,get}_global_kobject keep their own refcount on the kobject, which is incremented unconditionally whether cpufreq_get_global_refcount() succeeds or not.  So you need to unconditionally call cpufreq_put_global_refcount() to balance the refcount.",
+      "parentUuid": "9033a6f4_86541eab",
+      "revId": "f8ad216f37e6a7b07d5f6982a25c426c72f661f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
