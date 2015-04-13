@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9033a6f4_86541eab",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2015-04-13T20:15:35Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this code be something like:\n\n  int got_global_kobject \u003d 0;\n  ...\n  get_kobject_failed \u003d cpufreq_get_global_kobject();\n  WARN_ON(get_kobject_failed);\n\nThen below at line 1168 where we are handling a  sysfs_create_group() failure we would back out the reference with:\n\n  if (!have_governor_per_policy()) {\n    common_tunables \u003d NULL;\n    if (!get_kobject_failed)\n      cpufreq_put_global_kobject();\n  }",
+      "revId": "f8ad216f37e6a7b07d5f6982a25c426c72f661f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
