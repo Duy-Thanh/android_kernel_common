@@ -19,6 +19,57 @@
     },
     {
       "key": {
+        "uuid": "907ac6a8_6c155173",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2015-04-16T15:36:58Z",
+      "side": 1,
+      "message": "I think the changes above here look fine -- they mean we are calculating the new_freq based on the current frequency instead of our un-attained target that might no longer be appropriate.\n\nThe changes below here don\u0027t seem right though since they are deciding whether we need to set target_freq to the new_freq and whether or not to rearm the timer.",
+      "revId": "89db6b68e9f82aa52077f6bf7d819dab74265790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30d59acf_3a0b20ad",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2015-04-16T15:36:58Z",
+      "side": 1,
+      "message": "if new_freq \u003e cur but new_freq \u003c target, we leave target alone on this pass even though it is now stale. We don\u0027t want to skip to \"rearm\" since that skips setting the new target at line 487.",
+      "revId": "89db6b68e9f82aa52077f6bf7d819dab74265790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30d59acf_5a4144f7",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2015-04-16T15:36:58Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem right either. This conditional is deciding whether our target_freq is staying the same and if so skips setting target_freq to the new value at line 487. If we\u0027ve calculated a new frequency, we want to set target_freq.",
+      "revId": "89db6b68e9f82aa52077f6bf7d819dab74265790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4365e6c2_5d164f00",
         "filename": "drivers/cpufreq/cpufreq_interactive.c",
         "patchSetId": 1
@@ -30,6 +81,30 @@
       "writtenOn": "2015-04-10T18:20:16Z",
       "side": 1,
       "message": "I think this has to be target_freq or we could keep CPU at high freq indefinitely.\n\nImagining two CPUs managed by one policy. CPU A is fully busy and its target_freq is policy-\u003emax, and thus keeping cluster frequency at policy-\u003emax. CPU B is idling at non-min freq with both timer scheduled. (They could be scheduled before CPU A ramped up to policy-\u003emax.)\n\nCPU B wakes up at beginning of the window where slack_timer would fire. Its regulaor timer drops its target_freq to policy-\u003emin because load is 0. With this change, it won\u0027t schedule regular timer, but slack timer is left unchanged.  CPU B does quite a lot of work before going to sleep again in same window. CPU B\u0027s slack time fires at end of this window, sees the busy time CPU B consumed in that window, and ramps up its target_freq to some middle frequency. CPU B\u0027s timers are again not scheduled because CPU A is keeping policy-\u003ecur at policy-\u003emax. If CPU B goes to long idle afterwards, its target_freq will keep policy frequency high forever even if CPU A ramps down to policy-\u003emin later.",
+      "range": {
+        "startLine": 499,
+        "startChar": 5,
+        "endLine": 499,
+        "endChar": 9
+      },
+      "revId": "89db6b68e9f82aa52077f6bf7d819dab74265790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "907ac6a8_6c679123",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2015-04-16T15:36:58Z",
+      "side": 1,
+      "message": "I agree with Junjie that line 499 should use target_freq -- remember, this is the newly calculated target_freq (line 487), and our check for rearm should be based on the expectations of where we think we are going to be during the interval",
+      "parentUuid": "4365e6c2_5d164f00",
       "range": {
         "startLine": 499,
         "startChar": 5,
