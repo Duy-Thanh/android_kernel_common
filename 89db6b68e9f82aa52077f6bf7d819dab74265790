@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "10597645_43260ee6",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1070083
+      },
+      "writtenOn": "2015-04-16T17:41:08Z",
+      "side": 1,
+      "message": "\"new_freq \u003e cur but new_freq \u003c target\" means target \u003e cur, which shouldn\u0027t really happen as long as we are always waking up speedchange task correctly and setting frequency properly, right?\n\nEven if it happens, I could argue that policy-\u003ecur should have been target_freq and not letting target_freq to drop is the right thing. The CPU never gets a chance to run at target_freq and apparently current frequency is still not enough.\n\nMore importantly though we probably want to wake up speedchange_task if target \u003e cur. On the other hand new_freq could be same as target_freq at any time. So if we really want to handle the error case where speedchange task could fail to change frequency, 55c5ba1 alone is not enough. We need to diligently check before every return whether we want to wake it up or not. Worse yet, if we cancel timer at fmax, we might never have such a chance to remedy the situation in timer function, and speedchange_task needs to check return value of __cpufreq_driver_target() and somehow recover. I think that\u0027s a separate (and not trivial) issue though.",
+      "parentUuid": "30d59acf_3a0b20ad",
+      "revId": "89db6b68e9f82aa52077f6bf7d819dab74265790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30d59acf_5a4144f7",
         "filename": "drivers/cpufreq/cpufreq_interactive.c",
         "patchSetId": 1
@@ -64,6 +82,24 @@
       "writtenOn": "2015-04-16T15:36:58Z",
       "side": 1,
       "message": "This doesn\u0027t seem right either. This conditional is deciding whether our target_freq is staying the same and if so skips setting target_freq to the new value at line 487. If we\u0027ve calculated a new frequency, we want to set target_freq.",
+      "revId": "89db6b68e9f82aa52077f6bf7d819dab74265790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10597645_23231ad5",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1070083
+      },
+      "writtenOn": "2015-04-16T17:41:08Z",
+      "side": 1,
+      "message": "Agree. Missed this one. It needs to be target_freq.",
+      "parentUuid": "30d59acf_5a4144f7",
       "revId": "89db6b68e9f82aa52077f6bf7d819dab74265790",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
