@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f03ce2f3_1f626313",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1070083
+      },
+      "writtenOn": "2015-04-17T22:29:21Z",
+      "side": 1,
+      "message": "I feel this target_freq should be policy-\u003ecur as in first patch. If policy-\u003ecur is already \u003e\u003d hispeed_freq, and we know the exact cpu_load of this sampling window, I don\u0027t see why we want to cap it at hispeed_freq. It could be same thread that just migrated to this CPU at beginning of the window.",
+      "range": {
+        "startLine": 410,
+        "startChar": 12,
+        "endLine": 410,
+        "endChar": 23
+      },
+      "revId": "6902d1f6c261ed7fe256f75611bc7125a160b621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b03eeaea_1de55323",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1070083
+      },
+      "writtenOn": "2015-04-17T22:29:21Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 421,
+        "startChar": 10,
+        "endLine": 421,
+        "endChar": 21
+      },
+      "revId": "6902d1f6c261ed7fe256f75611bc7125a160b621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
