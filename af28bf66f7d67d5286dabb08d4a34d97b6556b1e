@@ -46,6 +46,30 @@
       "revId": "af28bf66f7d67d5286dabb08d4a34d97b6556b1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5083ee1c_53124e55",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2015-04-23T22:22:52Z",
+      "side": 1,
+      "message": "Here\u0027s the change I was referring to:\nhttps://android-review.googlesource.com/#/c/147908/1",
+      "parentUuid": "10a416b9_16d8aa17",
+      "range": {
+        "startLine": 425,
+        "startChar": 1,
+        "endLine": 428,
+        "endChar": 64
+      },
+      "revId": "af28bf66f7d67d5286dabb08d4a34d97b6556b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
