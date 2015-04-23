@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d076fe11_fa6151b9",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2015-04-23T01:37:50Z",
+      "side": 1,
+      "message": "Can we please hold off on this change? I think to fix this correctly, this needs a whole bunch of other changes that need to go with it. For example, we\u0027ll have to change how we enforce above hispeed delay, etc.\n\nJunjie and I were just about to upload a bunch of changes we made on our internal tree. We\u0027ll upload it tomorrow or day after. So, if we can pick those up instead, I think it would work out better for all of us.",
+      "range": {
+        "startLine": 425,
+        "startChar": 1,
+        "endLine": 428,
+        "endChar": 64
+      },
+      "revId": "af28bf66f7d67d5286dabb08d4a34d97b6556b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
