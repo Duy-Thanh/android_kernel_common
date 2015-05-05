@@ -22,6 +22,30 @@
       "revId": "ac609f256d7416f165965766f998910c12df4767",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "504a0e43_9c39aaa2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1070083
+      },
+      "writtenOn": "2015-05-05T17:44:44Z",
+      "side": 1,
+      "message": "Yeah. Meant to say policy-\u003emax.",
+      "parentUuid": "d026fe9b_89dfbd56",
+      "range": {
+        "startLine": 10,
+        "startChar": 9,
+        "endLine": 10,
+        "endChar": 20
+      },
+      "revId": "ac609f256d7416f165965766f998910c12df4767",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
