@@ -46,6 +46,30 @@
       "revId": "aa89df3e974c05bfb7b3974ae389e16a67634d2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d8435cc_9b896ea6",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2015-05-07T17:59:17Z",
+      "side": 1,
+      "message": "It looks this will lower the chance kernel enter suspend since otherwise kernel will just try again. suspend_ops are very low level suspend code and retry has high chance to succeed. Theoretically, the wakeup signal here is not aborting suspend since kernel will try again, so it\u0027s not exactly same as normal suspend abort. I think we shouldn\u0027t make the no-abort wakeup a valid suspend abort wakeup by changing its behavior to really abort suspend. Just a thought, maybe we can make wakeup reason here a separate category from normal suspend reason.",
+      "parentUuid": "cd24a5a6_2d889321",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 3
+      },
+      "revId": "aa89df3e974c05bfb7b3974ae389e16a67634d2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
