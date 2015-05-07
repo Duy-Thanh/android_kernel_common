@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d8435cc_72cf2fd6",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-07T20:51:00Z",
+      "side": 1,
+      "message": "It will be better to do:\nif (*wakeup)\n  error \u003d -EBUSY;",
+      "range": {
+        "startLine": 239,
+        "startChar": 3,
+        "endLine": 239,
+        "endChar": 8
+      },
+      "revId": "3bb69add3d724df78707bc8fb780b8f1d9e9bd0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
