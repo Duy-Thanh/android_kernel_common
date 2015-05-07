@@ -22,6 +22,30 @@
       "revId": "aa89df3e974c05bfb7b3974ae389e16a67634d2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd24a5a6_2d889321",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1041663
+      },
+      "writtenOn": "2015-05-07T17:42:31Z",
+      "side": 1,
+      "message": "The accounting in the kernal as well as the framework will consider this as a valid suspend and wakeup, but the device never suspended. Additionally this is no different than the case where the wakeup source was pending in the earlier stages of the suspend.",
+      "parentUuid": "cd24a5a6_6d444b7a",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 3
+      },
+      "revId": "aa89df3e974c05bfb7b3974ae389e16a67634d2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
