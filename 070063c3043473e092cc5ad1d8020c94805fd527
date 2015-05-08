@@ -1,0 +1,326 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d6d15ec_443f0fd9",
+        "filename": "drivers/net/wireless/bcmdhd/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-08T23:37:19Z",
+      "side": 1,
+      "message": "Please comment it",
+      "range": {
+        "startLine": 182,
+        "startChar": 2,
+        "endLine": 182,
+        "endChar": 11
+      },
+      "revId": "070063c3043473e092cc5ad1d8020c94805fd527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d679d0f_cc334f6f",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3004,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-08T23:37:19Z",
+      "side": 1,
+      "message": "How this is related to STATIC_IOCTLBUF?",
+      "range": {
+        "startLine": 3004,
+        "startChar": 3,
+        "endLine": 3004,
+        "endChar": 17
+      },
+      "revId": "070063c3043473e092cc5ad1d8020c94805fd527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d679d0f_6cd24389",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux_platdev.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-08T23:37:19Z",
+      "side": 1,
+      "message": "Remove blank",
+      "range": {
+        "startLine": 154,
+        "startChar": 37,
+        "endLine": 154,
+        "endChar": 38
+      },
+      "revId": "070063c3043473e092cc5ad1d8020c94805fd527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d70e1c2_339ee839",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux_platdev.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-08T23:37:19Z",
+      "side": 1,
+      "message": "Remove blank",
+      "range": {
+        "startLine": 155,
+        "startChar": 39,
+        "endLine": 155,
+        "endChar": 40
+      },
+      "revId": "070063c3043473e092cc5ad1d8020c94805fd527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d6d15ec_c4847f11",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux_platdev.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-08T23:37:19Z",
+      "side": 1,
+      "message": "Should be under at least PCIE ifdef",
+      "range": {
+        "startLine": 227,
+        "startChar": 2,
+        "endLine": 227,
+        "endChar": 20
+      },
+      "revId": "070063c3043473e092cc5ad1d8020c94805fd527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d679d0f_4ce17f4c",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux_platdev.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-08T23:37:19Z",
+      "side": 1,
+      "message": "Should be under PCIE ifdef",
+      "range": {
+        "startLine": 230,
+        "startChar": 1,
+        "endLine": 230,
+        "endChar": 7
+      },
+      "revId": "070063c3043473e092cc5ad1d8020c94805fd527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d6d15ec_04b6f7cb",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_msgbuf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-08T23:37:19Z",
+      "side": 1,
+      "message": "Remove blank",
+      "range": {
+        "startLine": 69,
+        "startChar": 6,
+        "endLine": 69,
+        "endChar": 7
+      },
+      "revId": "070063c3043473e092cc5ad1d8020c94805fd527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d679d0f_cc97cf8f",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_pcie.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-08T23:37:19Z",
+      "side": 1,
+      "message": "Let\u0027s remove this to use either \n#include \u003cmach/msm_pcie.h\u003e\nor \n#include \u003clinux/msm_pcie.h\u003e\nand change kernel accordingly",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 26
+      },
+      "revId": "070063c3043473e092cc5ad1d8020c94805fd527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d70e1c2_d3fbec3d",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_pcie.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-08T23:37:19Z",
+      "side": 1,
+      "message": "I don\u0027t want ARCH ifdefs in the driver. How can we fix it?",
+      "range": {
+        "startLine": 140,
+        "startChar": 7,
+        "endLine": 140,
+        "endChar": 26
+      },
+      "revId": "070063c3043473e092cc5ad1d8020c94805fd527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d679d0f_4c85ff54",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_pcie_linux.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-08T23:37:19Z",
+      "side": 1,
+      "message": "Same here...",
+      "range": {
+        "startLine": 55,
+        "startChar": 13,
+        "endLine": 55,
+        "endChar": 32
+      },
+      "revId": "070063c3043473e092cc5ad1d8020c94805fd527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d679d0f_0c506760",
+        "filename": "drivers/net/wireless/bcmdhd/linux_osl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-08T23:37:19Z",
+      "side": 1,
+      "message": "Please remove",
+      "range": {
+        "startLine": 34,
+        "startChar": 12,
+        "endLine": 34,
+        "endChar": 23
+      },
+      "revId": "070063c3043473e092cc5ad1d8020c94805fd527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d679d0f_ac4cdbce",
+        "filename": "drivers/net/wireless/bcmdhd/linux_osl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-08T23:37:19Z",
+      "side": 1,
+      "message": "Same here",
+      "range": {
+        "startLine": 70,
+        "startChar": 7,
+        "endLine": 70,
+        "endChar": 22
+      },
+      "revId": "070063c3043473e092cc5ad1d8020c94805fd527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d70e1c2_333d8870",
+        "filename": "drivers/net/wireless/bcmdhd/wl_cfg80211.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7720,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-08T23:37:19Z",
+      "side": 1,
+      "message": "remove blank",
+      "range": {
+        "startLine": 7720,
+        "startChar": 8,
+        "endLine": 7720,
+        "endChar": 9
+      },
+      "revId": "070063c3043473e092cc5ad1d8020c94805fd527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d679d0f_cc702f06",
+        "filename": "drivers/net/wireless/bcmdhd/wl_cfg80211.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7745,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-08T23:37:19Z",
+      "side": 1,
+      "message": "remove blank",
+      "range": {
+        "startLine": 7745,
+        "startChar": 7,
+        "endLine": 7745,
+        "endChar": 8
+      },
+      "revId": "070063c3043473e092cc5ad1d8020c94805fd527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
