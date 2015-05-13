@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd1ae5b3_37e67731",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-13T23:16:51Z",
+      "side": 1,
+      "message": "Please use common conversion:\nnet: wireless: bcmdhd: Add bcm4358 support",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "e573966392804060c8dba72ad41ce396be70203a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_56d7b476",
+        "filename": "drivers/net/wireless/bcmdhd/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-13T23:16:51Z",
+      "side": 1,
+      "message": "Should be:\n  DHDCFLAGS +\u003d -DLINKSTAT_SUPPORT\nsorry",
+      "range": {
+        "startLine": 59,
+        "startChar": 1,
+        "endLine": 59,
+        "endChar": 10
+      },
+      "revId": "e573966392804060c8dba72ad41ce396be70203a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_5600546f",
+        "filename": "drivers/net/wireless/bcmdhd/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-13T23:16:51Z",
+      "side": 1,
+      "message": "Please add this as CONFIG_DHD_DTS option that can be set from Kconfig - we want to use it for other project.",
+      "range": {
+        "startLine": 117,
+        "startChar": 16,
+        "endLine": 117,
+        "endChar": 27
+      },
+      "revId": "e573966392804060c8dba72ad41ce396be70203a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_56a974dd",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux_platdev.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-13T23:16:51Z",
+      "side": 1,
+      "message": "Please allow no regulator case",
+      "range": {
+        "startLine": 328,
+        "startChar": 1,
+        "endLine": 328,
+        "endChar": 15
+      },
+      "revId": "e573966392804060c8dba72ad41ce396be70203a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd1ae5b3_b7fa67b3",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux_platdev.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-13T23:16:51Z",
+      "side": 1,
+      "message": "Why this is different from non-DTS case?",
+      "range": {
+        "startLine": 637,
+        "startChar": 7,
+        "endLine": 637,
+        "endChar": 36
+      },
+      "revId": "e573966392804060c8dba72ad41ce396be70203a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
