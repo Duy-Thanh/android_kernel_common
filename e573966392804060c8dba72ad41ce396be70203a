@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6dbd79c9_13944c1a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-05-14T18:39:12Z",
+      "side": 1,
+      "message": "Ok. will raise new CLs with fixed one.",
+      "parentUuid": "cd1ae5b3_37e67731",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "e573966392804060c8dba72ad41ce396be70203a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad15b184_56d7b476",
         "filename": "drivers/net/wireless/bcmdhd/Makefile",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2015-05-13T23:16:51Z",
       "side": 1,
       "message": "Should be:\n  DHDCFLAGS +\u003d -DLINKSTAT_SUPPORT\nsorry",
+      "range": {
+        "startLine": 59,
+        "startChar": 1,
+        "endLine": 59,
+        "endChar": 10
+      },
+      "revId": "e573966392804060c8dba72ad41ce396be70203a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d9a7579_3200706f",
+        "filename": "drivers/net/wireless/bcmdhd/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-05-14T18:39:12Z",
+      "side": 1,
+      "message": "Ok. will enable again. also will raise new cl.",
+      "parentUuid": "ad15b184_56d7b476",
       "range": {
         "startLine": 59,
         "startChar": 1,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "6dbd79c9_33994851",
+        "filename": "drivers/net/wireless/bcmdhd/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-05-14T18:39:12Z",
+      "side": 1,
+      "message": "Ok. will raise new Cl.",
+      "parentUuid": "ad15b184_5600546f",
+      "range": {
+        "startLine": 117,
+        "startChar": 16,
+        "endLine": 117,
+        "endChar": 27
+      },
+      "revId": "e573966392804060c8dba72ad41ce396be70203a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad15b184_56a974dd",
         "filename": "drivers/net/wireless/bcmdhd/dhd_linux_platdev.c",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2015-05-13T23:16:51Z",
       "side": 1,
       "message": "Please allow no regulator case",
+      "range": {
+        "startLine": 328,
+        "startChar": 1,
+        "endLine": 328,
+        "endChar": 15
+      },
+      "revId": "e573966392804060c8dba72ad41ce396be70203a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8dc2ad55_34cdb037",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux_platdev.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-05-14T18:39:12Z",
+      "side": 1,
+      "message": "It is under CONFIG_DTS define, so regulator_get should be used to get correct information. \nIf my understanding is not correct, please advise for this.",
+      "parentUuid": "ad15b184_56a974dd",
       "range": {
         "startLine": 328,
         "startChar": 1,
