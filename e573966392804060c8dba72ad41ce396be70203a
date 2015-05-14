@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "cd8d8546_5871925c",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux_platdev.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-14T19:21:04Z",
+      "side": 1,
+      "message": "As I see in case of other platform, regulators may be not accessible by drivers even in case of DTS, so we will fail here without any alternative.",
+      "parentUuid": "8dc2ad55_34cdb037",
+      "range": {
+        "startLine": 328,
+        "startChar": 1,
+        "endLine": 328,
+        "endChar": 15
+      },
+      "revId": "e573966392804060c8dba72ad41ce396be70203a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd1ae5b3_b7fa67b3",
         "filename": "drivers/net/wireless/bcmdhd/dhd_linux_platdev.c",
         "patchSetId": 2
