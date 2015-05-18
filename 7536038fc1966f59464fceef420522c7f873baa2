@@ -22,6 +22,76 @@
       "revId": "7536038fc1966f59464fceef420522c7f873baa2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0da23dbf_f4bc40fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-18T17:59:55Z",
+      "side": 1,
+      "message": "And this one",
+      "parentUuid": "4d9a7579_9c292a3f",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "7536038fc1966f59464fceef420522c7f873baa2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0da23dbf_e9634d3f",
+        "filename": "drivers/net/wireless/bcmdhd/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-18T17:59:55Z",
+      "side": 1,
+      "message": "Please enable",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 1
+      },
+      "revId": "7536038fc1966f59464fceef420522c7f873baa2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eda409cd_ee1d8f65",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux_platdev.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-18T17:59:55Z",
+      "side": 1,
+      "message": "Why this is different from non-DTS case?",
+      "range": {
+        "startLine": 637,
+        "startChar": 2,
+        "endLine": 637,
+        "endChar": 4
+      },
+      "revId": "7536038fc1966f59464fceef420522c7f873baa2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
