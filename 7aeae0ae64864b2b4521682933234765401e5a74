@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d54fde2_0ce1fa18",
+        "filename": "drivers/net/wireless/bcmdhd/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-29T19:30:16Z",
+      "side": 1,
+      "message": "This is not good - please do it Kconfig option",
+      "range": {
+        "startLine": 186,
+        "startChar": 16,
+        "endLine": 186,
+        "endChar": 31
+      },
+      "revId": "7aeae0ae64864b2b4521682933234765401e5a74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b91fb853_5e314929",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-29T19:30:16Z",
+      "side": 1,
+      "message": "I suspect CONFIG_64BIT defines path - should be separate.",
+      "range": {
+        "startLine": 39,
+        "startChar": 32,
+        "endLine": 39,
+        "endChar": 39
+      },
+      "revId": "7aeae0ae64864b2b4521682933234765401e5a74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed56c9ec_e5fbdeb7",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-29T19:30:16Z",
+      "side": 1,
+      "message": "Why do you need so long line? ;)",
+      "range": {
+        "startLine": 248,
+        "startChar": 1,
+        "endLine": 248,
+        "endChar": 8
+      },
+      "revId": "7aeae0ae64864b2b4521682933234765401e5a74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b91fb853_1e62b10b",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-29T19:30:16Z",
+      "side": 1,
+      "message": "We can get it from DTS",
+      "range": {
+        "startLine": 348,
+        "startChar": 0,
+        "endLine": 348,
+        "endChar": 6
+      },
+      "revId": "7aeae0ae64864b2b4521682933234765401e5a74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed56c9ec_e56d9eff",
+        "filename": "drivers/net/wireless/bcmdhd/include/bcmdevs.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-29T19:30:16Z",
+      "side": 1,
+      "message": "Should be separate change",
+      "range": {
+        "startLine": 367,
+        "startChar": 8,
+        "endLine": 367,
+        "endChar": 24
+      },
+      "revId": "7aeae0ae64864b2b4521682933234765401e5a74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b91fb853_fe4db58f",
+        "filename": "drivers/net/wireless/bcmdhd/siutils.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-29T19:30:16Z",
+      "side": 1,
+      "message": "Same here",
+      "range": {
+        "startLine": 417,
+        "startChar": 2,
+        "endLine": 417,
+        "endChar": 6
+      },
+      "revId": "7aeae0ae64864b2b4521682933234765401e5a74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d54fde2_6c19a6ae",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_msgbuf.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1886,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-05-29T19:30:16Z",
+      "side": 0,
+      "message": "This was removed already",
+      "range": {
+        "startLine": 1886,
+        "startChar": 0,
+        "endLine": 1886,
+        "endChar": 1
+      },
+      "revId": "c348dbdcbe5dc4d404e9a947847c7918275a7cfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
