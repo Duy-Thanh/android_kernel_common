@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "190b6419_2c88ab6e",
+        "filename": "drivers/net/wireless/bcmdhd/Makefile",
+        "patchSetId": 7
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-06-01T23:40:37Z",
+      "side": 1,
+      "message": "OK. Nvidia N9 use their own platform, So only QCOM part needed this.\nI will couple CONFIG_DHD_OF_SUPPORT together.",
+      "parentUuid": "0d54fde2_d2506064",
+      "range": {
+        "startLine": 296,
+        "startChar": 9,
+        "endLine": 296,
+        "endChar": 24
+      },
+      "revId": "9471857e604f32cc64fe6d3401fd9b3c618e2273",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed56c9ec_269962f5",
         "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
         "patchSetId": 7
