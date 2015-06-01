@@ -94,6 +94,30 @@
       "revId": "1adf5445f25ee3c64e5431ad31be3dcca0f11731",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59d23ce8_d5942e4e",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-06-01T23:41:56Z",
+      "side": 1,
+      "message": "Try to CONFIG_MODULES",
+      "parentUuid": "d980ecc6_96700cd3",
+      "range": {
+        "startLine": 511,
+        "startChar": 0,
+        "endLine": 511,
+        "endChar": 13
+      },
+      "revId": "1adf5445f25ee3c64e5431ad31be3dcca0f11731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
