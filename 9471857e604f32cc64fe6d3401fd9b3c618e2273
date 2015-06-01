@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3914a832_42bba863",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-06-01T18:10:50Z",
+      "side": 1,
+      "message": "Hi, Dmitry. \nCan we seperate this task to another one?\nI will make new CL for this. \nWe should work from organizing DTS format and do some testing.",
+      "parentUuid": "ed56c9ec_269962f5",
+      "range": {
+        "startLine": 287,
+        "startChar": 34,
+        "endLine": 287,
+        "endChar": 35
+      },
+      "revId": "9471857e604f32cc64fe6d3401fd9b3c618e2273",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d54fde2_af80d995",
         "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
         "patchSetId": 7
@@ -36,6 +60,30 @@
       "writtenOn": "2015-06-01T17:02:39Z",
       "side": 1,
       "message": "Add this check to \"while\"",
+      "range": {
+        "startLine": 442,
+        "startChar": 2,
+        "endLine": 442,
+        "endChar": 4
+      },
+      "revId": "9471857e604f32cc64fe6d3401fd9b3c618e2273",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59115c41_efee21fe",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-06-01T18:10:50Z",
+      "side": 1,
+      "message": "OK. Good.\nI will fix it.",
+      "parentUuid": "0d54fde2_af80d995",
       "range": {
         "startLine": 442,
         "startChar": 2,
