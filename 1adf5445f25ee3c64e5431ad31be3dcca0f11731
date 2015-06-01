@@ -22,6 +22,30 @@
       "revId": "1adf5445f25ee3c64e5431ad31be3dcca0f11731",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99a11461_1c2655f1",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1070608
+      },
+      "writtenOn": "2015-06-01T23:16:37Z",
+      "side": 1,
+      "message": "dhd_wlan_init() should be called earlier than dhd_module_init(). It prepares kernel platform data/driver and preallocated memory. \n\nWe tested with below call sequence and there\u0027s no problem found.\ndhd_wlan_init()-\u003e device_initcall\ndhd_module_init() -\u003e late_initcall_sync. \n\nIn N6, we also have similar implementation.\nLet me know any concern you have.",
+      "parentUuid": "b97b38ac_75d208fd",
+      "range": {
+        "startLine": 511,
+        "startChar": 0,
+        "endLine": 511,
+        "endChar": 13
+      },
+      "revId": "1adf5445f25ee3c64e5431ad31be3dcca0f11731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
