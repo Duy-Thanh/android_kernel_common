@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b97b38ac_75d208fd",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-06-01T23:08:30Z",
+      "side": 1,
+      "message": "It makes sense to call it in dhd_module_init() to avoid possible call ordering issue.",
+      "range": {
+        "startLine": 511,
+        "startChar": 0,
+        "endLine": 511,
+        "endChar": 13
+      },
+      "revId": "1adf5445f25ee3c64e5431ad31be3dcca0f11731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
