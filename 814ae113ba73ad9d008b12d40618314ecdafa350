@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d54fde2_404f3a48",
+        "filename": "drivers/net/wireless/bcmdhd/Makefile",
+        "patchSetId": 8
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-06-01T19:45:33Z",
+      "side": 1,
+      "message": "Please remove this, why custom_platdev is only for MSM?",
+      "range": {
+        "startLine": 296,
+        "startChar": 9,
+        "endLine": 296,
+        "endChar": 24
+      },
+      "revId": "814ae113ba73ad9d008b12d40618314ecdafa350",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
