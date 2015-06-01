@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0d54fde2_b52746e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-06-01T18:16:45Z",
+      "side": 1,
+      "message": "Please use more meaningful message",
+      "range": {
+        "startLine": 7,
+        "startChar": 23,
+        "endLine": 7,
+        "endChar": 29
+      },
+      "revId": "9471857e604f32cc64fe6d3401fd9b3c618e2273",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d54fde2_d2506064",
         "filename": "drivers/net/wireless/bcmdhd/Makefile",
         "patchSetId": 7
