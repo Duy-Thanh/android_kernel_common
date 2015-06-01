@@ -46,6 +46,30 @@
       "revId": "1adf5445f25ee3c64e5431ad31be3dcca0f11731",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59d23ce8_928f9cfd",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-06-01T23:18:59Z",
+      "side": 1,
+      "message": "You are 100% right - dhd_wlan_init() should be called BEFORE (on inside) dhd_module_init(). But device_initcall \u003d\u003d late_initcall when MODULES are defined, so you can not ensure order unless you call the first one from second one.",
+      "parentUuid": "99a11461_1c2655f1",
+      "range": {
+        "startLine": 511,
+        "startChar": 0,
+        "endLine": 511,
+        "endChar": 13
+      },
+      "revId": "1adf5445f25ee3c64e5431ad31be3dcca0f11731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
