@@ -70,6 +70,30 @@
       "revId": "1adf5445f25ee3c64e5431ad31be3dcca0f11731",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d980ecc6_96700cd3",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-06-01T23:40:37Z",
+      "side": 1,
+      "message": "Usually measured 3~6sec gap between two function.\n\u003c6\u003e[    3.365933] dhd_wlan_init: START.\n\u003c4\u003e[    6.458836] dhd_module_init in\n\nAnyway I will review it more.",
+      "parentUuid": "59d23ce8_928f9cfd",
+      "range": {
+        "startLine": 511,
+        "startChar": 0,
+        "endLine": 511,
+        "endChar": 13
+      },
+      "revId": "1adf5445f25ee3c64e5431ad31be3dcca0f11731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
