@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3914a832_82366073",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1070608
+      },
+      "writtenOn": "2015-06-01T19:48:42Z",
+      "side": 1,
+      "message": "changed to unified driver support for 4358/4356",
+      "parentUuid": "0d54fde2_b52746e0",
+      "range": {
+        "startLine": 7,
+        "startChar": 23,
+        "endLine": 7,
+        "endChar": 29
+      },
+      "revId": "9471857e604f32cc64fe6d3401fd9b3c618e2273",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d54fde2_d2506064",
         "filename": "drivers/net/wireless/bcmdhd/Makefile",
         "patchSetId": 7
@@ -36,6 +60,30 @@
       "writtenOn": "2015-06-01T18:14:04Z",
       "side": 1,
       "message": "ifneq CONFIG_DHD_OF_SUPPORT ?",
+      "range": {
+        "startLine": 296,
+        "startChar": 9,
+        "endLine": 296,
+        "endChar": 24
+      },
+      "revId": "9471857e604f32cc64fe6d3401fd9b3c618e2273",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3914a832_623b4c5d",
+        "filename": "drivers/net/wireless/bcmdhd/Makefile",
+        "patchSetId": 7
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1070608
+      },
+      "writtenOn": "2015-06-01T19:48:42Z",
+      "side": 1,
+      "message": "Changed",
+      "parentUuid": "0d54fde2_d2506064",
       "range": {
         "startLine": 296,
         "startChar": 9,
