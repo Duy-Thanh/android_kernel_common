@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39d588cf_692560b2",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-06-02T19:54:33Z",
+      "side": 1,
+      "message": "__init",
+      "range": {
+        "startLine": 603,
+        "startChar": 4,
+        "endLine": 603,
+        "endChar": 17
+      },
+      "revId": "cb3b02075fa7fc5e98d69d3156683a5247598f73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59d23ce8_9268f16e",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 6916,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-06-02T19:54:33Z",
+      "side": 1,
+      "message": "You need also dhd_wlan_exit() call to clean memory allocations",
+      "range": {
+        "startLine": 6916,
+        "startChar": 0,
+        "endLine": 6916,
+        "endChar": 1
+      },
+      "revId": "cb3b02075fa7fc5e98d69d3156683a5247598f73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59d23ce8_b2809594",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 6925,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-06-02T19:54:33Z",
+      "side": 1,
+      "message": "You removed it, right?",
+      "range": {
+        "startLine": 6925,
+        "startChar": 13,
+        "endLine": 6925,
+        "endChar": 23
+      },
+      "revId": "cb3b02075fa7fc5e98d69d3156683a5247598f73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
