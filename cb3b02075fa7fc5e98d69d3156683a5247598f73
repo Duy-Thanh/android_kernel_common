@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "b967b830_b5f8c0bd",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 6916,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-06-03T18:04:22Z",
+      "side": 1,
+      "message": "Indeed, but for generic solution you need to handle module removal.",
+      "parentUuid": "d9ae2c65_8d68e26e",
+      "range": {
+        "startLine": 6916,
+        "startChar": 0,
+        "endLine": 6916,
+        "endChar": 1
+      },
+      "revId": "cb3b02075fa7fc5e98d69d3156683a5247598f73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "59d23ce8_b2809594",
         "filename": "drivers/net/wireless/bcmdhd/dhd_linux.c",
         "patchSetId": 10
