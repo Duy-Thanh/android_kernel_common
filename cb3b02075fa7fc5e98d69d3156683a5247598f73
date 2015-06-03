@@ -214,6 +214,30 @@
     },
     {
       "key": {
+        "uuid": "99a8345d_2420e7a2",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 6916,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-06-03T18:13:33Z",
+      "side": 1,
+      "message": "Yes, I agree..\nI will discuss it internally. \nCan we keep it note and change later?",
+      "parentUuid": "b967b830_b5f8c0bd",
+      "range": {
+        "startLine": 6916,
+        "startChar": 0,
+        "endLine": 6916,
+        "endChar": 1
+      },
+      "revId": "cb3b02075fa7fc5e98d69d3156683a5247598f73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "59d23ce8_b2809594",
         "filename": "drivers/net/wireless/bcmdhd/dhd_linux.c",
         "patchSetId": 10
