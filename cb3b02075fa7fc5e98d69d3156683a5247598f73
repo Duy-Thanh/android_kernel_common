@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b9a97860_8468bb6e",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-06-03T18:00:04Z",
+      "side": 1,
+      "message": "Ok. I will test it",
+      "parentUuid": "f955b039_d79bbc78",
+      "range": {
+        "startLine": 2,
+        "startChar": 30,
+        "endLine": 2,
+        "endChar": 31
+      },
+      "revId": "cb3b02075fa7fc5e98d69d3156683a5247598f73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9a97860_593ab3fa",
         "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
         "patchSetId": 10
@@ -36,6 +60,30 @@
       "writtenOn": "2015-06-02T20:17:10Z",
       "side": 1,
       "message": "No default return",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 199,
+        "endChar": 1
+      },
+      "revId": "cb3b02075fa7fc5e98d69d3156683a5247598f73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99a8345d_0464cb13",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-06-03T18:00:04Z",
+      "side": 1,
+      "message": "Ok. I will add",
+      "parentUuid": "b9a97860_593ab3fa",
       "range": {
         "startLine": 199,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "d9ae2c65_4d72ea5e",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-06-03T18:00:04Z",
+      "side": 1,
+      "message": "Ok. I will test it and fix",
+      "parentUuid": "39d588cf_692560b2",
+      "range": {
+        "startLine": 603,
+        "startChar": 4,
+        "endLine": 603,
+        "endChar": 17
+      },
+      "revId": "cb3b02075fa7fc5e98d69d3156683a5247598f73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "59d23ce8_9268f16e",
         "filename": "drivers/net/wireless/bcmdhd/dhd_linux.c",
         "patchSetId": 10
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "d9ae2c65_8d68e26e",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 6916,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-06-03T18:00:04Z",
+      "side": 1,
+      "message": "Usually we initiated prealloc memory one time when boot, and keep it until power off. \nAny concern for this?",
+      "parentUuid": "59d23ce8_9268f16e",
+      "range": {
+        "startLine": 6916,
+        "startChar": 0,
+        "endLine": 6916,
+        "endChar": 1
+      },
+      "revId": "cb3b02075fa7fc5e98d69d3156683a5247598f73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "59d23ce8_b2809594",
         "filename": "drivers/net/wireless/bcmdhd/dhd_linux.c",
         "patchSetId": 10
@@ -105,6 +201,30 @@
       "writtenOn": "2015-06-02T19:54:33Z",
       "side": 1,
       "message": "You removed it, right?",
+      "range": {
+        "startLine": 6925,
+        "startChar": 13,
+        "endLine": 6925,
+        "endChar": 23
+      },
+      "revId": "cb3b02075fa7fc5e98d69d3156683a5247598f73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9a97860_e4764f50",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 6925,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-06-03T18:00:04Z",
+      "side": 1,
+      "message": "Ok. I will remove it.",
+      "parentUuid": "59d23ce8_b2809594",
       "range": {
         "startLine": 6925,
         "startChar": 13,
