@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9ab8c9c_3845f962",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-06-08T15:57:32Z",
+      "side": 1,
+      "message": "space in email address\n\nSigned-off-by: Ruchi Kandoi \u003ckandoiruchi@google.com\u003e\nBug: ????\nChange-Id: I938f45e92ff6d5371c32c4d0e37274e6de66769c",
+      "range": {
+        "startLine": 14,
+        "startChar": 15,
+        "endLine": 14,
+        "endChar": 51
+      },
+      "revId": "21c955299b6c8bcae437bd2b45d408e6adbc4eb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "399bc88e_b071265b",
+        "filename": "drivers/cpufreq/cpufreq_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-06-08T15:57:32Z",
+      "side": 1,
+      "message": "Not a strict rule, but it does aid readability if the automatics that are not being initialized are placed first eg:\n    int i, cpu_num, count \u003d 0, ret \u003d -ENODEV;",
+      "range": {
+        "startLine": 675,
+        "startChar": 32,
+        "endLine": 675,
+        "endChar": 41
+      },
+      "revId": "21c955299b6c8bcae437bd2b45d408e6adbc4eb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9ab8c9c_78f6e1d0",
+        "filename": "drivers/cpufreq/cpufreq_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-06-08T15:57:32Z",
+      "side": 1,
+      "message": "And _only_ because I am here, for efficiency, count is used below at the for loop, initialize it there instead?",
+      "range": {
+        "startLine": 675,
+        "startChar": 23,
+        "endLine": 675,
+        "endChar": 32
+      },
+      "revId": "21c955299b6c8bcae437bd2b45d408e6adbc4eb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9ab8c9c_d85cd550",
+        "filename": "drivers/cpufreq/cpufreq_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-06-08T15:57:32Z",
+      "side": 1,
+      "message": "optimization, drop continue? (optional):\n\n    if (freq !\u003d CPUFREQ_ENTRY_INVALID)\n        count++;",
+      "range": {
+        "startLine": 688,
+        "startChar": 0,
+        "endLine": 690,
+        "endChar": 10
+      },
+      "revId": "21c955299b6c8bcae437bd2b45d408e6adbc4eb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9ab8c9c_389cd970",
+        "filename": "drivers/cpufreq/cpufreq_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-06-08T15:57:32Z",
+      "side": 1,
+      "message": "linux coding standard: braces {} are not necessary for single statement blocks",
+      "range": {
+        "startLine": 697,
+        "startChar": 2,
+        "endLine": 699,
+        "endChar": 3
+      },
+      "revId": "21c955299b6c8bcae437bd2b45d408e6adbc4eb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
