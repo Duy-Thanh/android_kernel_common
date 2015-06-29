@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "138ee5ef_6f90fda1",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-06-29T16:53:30Z",
+      "side": 1,
+      "message": "What is the point of this change?",
+      "range": {
+        "startLine": 836,
+        "startChar": 31,
+        "endLine": 836,
+        "endChar": 33
+      },
+      "revId": "e0b5f0b63ec6064a2fd31dbee2b28462c849ecd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5384ddcb_d1c3ee97",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_linux.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-06-29T16:53:30Z",
+      "side": 1,
+      "message": "You are loosing update flag in case it is normal.",
+      "range": {
+        "startLine": 839,
+        "startChar": 3,
+        "endLine": 839,
+        "endChar": 10
+      },
+      "revId": "e0b5f0b63ec6064a2fd31dbee2b28462c849ecd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
