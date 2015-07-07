@@ -45,6 +45,30 @@
       "revId": "f756cd388fde1d47849074eb4f62dd09298a0f5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f80dae2c_9d436362",
+        "filename": "init/load_initramfs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1018087
+      },
+      "writtenOn": "2015-07-07T18:00:58Z",
+      "side": 1,
+      "message": "See retain_initrd_param in initramfs.c",
+      "parentUuid": "f80dae2c_9a85a990",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 11
+      },
+      "revId": "f756cd388fde1d47849074eb4f62dd09298a0f5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
