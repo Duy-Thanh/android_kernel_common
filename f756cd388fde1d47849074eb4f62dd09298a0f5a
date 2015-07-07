@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f80dae2c_fa6dc52c",
+        "filename": "init/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2015-07-07T17:38:03Z",
+      "side": 1,
+      "message": "How is \nobj-$(CONFIG_BLK_DEV_INITRD)  +\u003d initramfs.o load_initramfs.o\ndifferent from above ??\n\nCan we make the initramfs.o take the kernel command line paramater defined in load_initramfs.o ?? Then we can merge load_initramfs.o and initramfs.o together. Will it break something ??",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 45
+      },
+      "revId": "f756cd388fde1d47849074eb4f62dd09298a0f5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f80dae2c_9a85a990",
+        "filename": "init/load_initramfs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2015-07-07T17:38:03Z",
+      "side": 1,
+      "message": "Saw the following code stub in kernel used for no_console_suspend\n\nstatic int __init console_suspend_disable(char *str)\n{\n        console_suspend_enabled \u003d 0;\n        return 1;\n}\n__setup(\"no_console_suspend\", console_suspend_disable);\n\nDo we have to check the string that gets passed, if we don\u0027t care about it anyways ??",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 11
+      },
+      "revId": "f756cd388fde1d47849074eb4f62dd09298a0f5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
