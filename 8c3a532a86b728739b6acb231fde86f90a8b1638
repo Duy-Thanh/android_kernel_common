@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d61d221_76d3ce02",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1037988
+      },
+      "writtenOn": "2015-07-23T06:28:04Z",
+      "side": 1,
+      "message": "please preserve the alphabetical order of these entries.",
+      "revId": "8c3a532a86b728739b6acb231fde86f90a8b1638",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
