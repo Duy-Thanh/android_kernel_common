@@ -16,6 +16,24 @@
       "revId": "8c3a532a86b728739b6acb231fde86f90a8b1638",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad7a16a8_5bd8541d",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_custom_platdev.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1076109
+      },
+      "writtenOn": "2015-07-23T06:57:04Z",
+      "side": 1,
+      "message": "It was done",
+      "parentUuid": "8d61d221_76d3ce02",
+      "revId": "8c3a532a86b728739b6acb231fde86f90a8b1638",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
