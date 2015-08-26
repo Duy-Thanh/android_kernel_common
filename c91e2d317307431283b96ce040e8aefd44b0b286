@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "048f817d_b04ec48d",
+        "filename": "include/trace/events/filemap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-08-26T20:23:01Z",
+      "side": 1,
+      "message": "This one is a loff_t which will have its own set of problems. 64bit kernels, no issue.",
+      "range": {
+        "startLine": 87,
+        "startChar": 13,
+        "endLine": 87,
+        "endChar": 16
+      },
+      "revId": "c91e2d317307431283b96ce040e8aefd44b0b286",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
