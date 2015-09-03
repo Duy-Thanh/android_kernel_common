@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "e486eed4_f9313285",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_pno.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1742,
+      "author": {
+        "id": 1076109
+      },
+      "writtenOn": "2015-09-03T00:53:24Z",
+      "side": 1,
+      "message": "Yes, the string should be start with \u0027,\u0027 and end with \u0027,\u0027",
+      "parentUuid": "e486eed4_39423a2e",
+      "range": {
+        "startLine": 1742,
+        "startChar": 19,
+        "endLine": 1742,
+        "endChar": 45
+      },
+      "revId": "9eb994a59bd0582bee3e2f3371b3acda27471277",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e486eed4_993826ba",
         "filename": "drivers/net/wireless/bcmdhd/dhd_pno.c",
         "patchSetId": 3
