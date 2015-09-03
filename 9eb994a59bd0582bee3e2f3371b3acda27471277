@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0484e2ca_6e7f94a7",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_pno.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1739,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-09-03T00:49:59Z",
+      "side": 1,
+      "message": "OK. using define.",
+      "parentUuid": "44141a88_44c42e2b",
+      "range": {
+        "startLine": 1739,
+        "startChar": 10,
+        "endLine": 1739,
+        "endChar": 11
+      },
+      "revId": "9eb994a59bd0582bee3e2f3371b3acda27471277",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44141a88_84a58683",
         "filename": "drivers/net/wireless/bcmdhd/dhd_pno.c",
         "patchSetId": 3
@@ -71,6 +95,54 @@
     },
     {
       "key": {
+        "uuid": "8497f201_0a76f860",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_pno.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1741,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-09-03T00:49:59Z",
+      "side": 1,
+      "message": "Yes, using define",
+      "parentUuid": "644d9e85_d17e57ef",
+      "range": {
+        "startLine": 1741,
+        "startChar": 15,
+        "endLine": 1741,
+        "endChar": 16
+      },
+      "revId": "9eb994a59bd0582bee3e2f3371b3acda27471277",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04cce27b_c2168213",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_pno.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1741,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-09-03T00:49:59Z",
+      "side": 1,
+      "message": "Yes, change made.",
+      "parentUuid": "44141a88_84a58683",
+      "range": {
+        "startLine": 1741,
+        "startChar": 20,
+        "endLine": 1741,
+        "endChar": 21
+      },
+      "revId": "9eb994a59bd0582bee3e2f3371b3acda27471277",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e486eed4_39423a2e",
         "filename": "drivers/net/wireless/bcmdhd/dhd_pno.c",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2015-09-03T00:20:27Z",
       "side": 1,
       "message": "What about first or last frequency? It will be still ,N, ?",
+      "range": {
+        "startLine": 1742,
+        "startChar": 19,
+        "endLine": 1742,
+        "endChar": 45
+      },
+      "revId": "9eb994a59bd0582bee3e2f3371b3acda27471277",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "644d9e85_0474abc6",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_pno.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1742,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-09-03T00:49:59Z",
+      "side": 1,
+      "message": "@Xinrui.\nCan you check this thing?",
+      "parentUuid": "e486eed4_39423a2e",
       "range": {
         "startLine": 1742,
         "startChar": 19,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "e486eed4_993ee654",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_pno.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1743,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-09-03T00:49:59Z",
+      "side": 1,
+      "message": "Ok. fixed.",
+      "parentUuid": "e486eed4_993826ba",
+      "range": {
+        "startLine": 1743,
+        "startChar": 1,
+        "endLine": 1743,
+        "endChar": 2
+      },
+      "revId": "9eb994a59bd0582bee3e2f3371b3acda27471277",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "644d9e85_5162674d",
         "filename": "drivers/net/wireless/bcmdhd/dhd_pno.c",
         "patchSetId": 3
@@ -128,6 +248,30 @@
       "writtenOn": "2015-09-03T00:20:27Z",
       "side": 1,
       "message": "No need",
+      "range": {
+        "startLine": 1746,
+        "startChar": 1,
+        "endLine": 1746,
+        "endChar": 5
+      },
+      "revId": "9eb994a59bd0582bee3e2f3371b3acda27471277",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "644d9e85_c46d73fa",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_pno.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1746,
+      "author": {
+        "id": 1072843
+      },
+      "writtenOn": "2015-09-03T00:49:59Z",
+      "side": 1,
+      "message": "Ok fixed.",
+      "parentUuid": "644d9e85_5162674d",
       "range": {
         "startLine": 1746,
         "startChar": 1,
