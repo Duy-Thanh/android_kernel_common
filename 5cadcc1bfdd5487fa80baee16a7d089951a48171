@@ -22,6 +22,30 @@
       "revId": "5cadcc1bfdd5487fa80baee16a7d089951a48171",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04c1426c_00388ab7",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_pno.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2718,
+      "author": {
+        "id": 1049528
+      },
+      "writtenOn": "2015-09-09T00:07:32Z",
+      "side": 1,
+      "message": "i need to do this as soon as we get the result from FW, so as to reduce as much o the time between the FW put the relative time and us getting the host ts",
+      "parentUuid": "24c9e69c_59f8c383",
+      "range": {
+        "startLine": 2718,
+        "startChar": 2,
+        "endLine": 2718,
+        "endChar": 24
+      },
+      "revId": "5cadcc1bfdd5487fa80baee16a7d089951a48171",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
