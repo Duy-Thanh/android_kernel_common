@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24c9e69c_59f8c383",
+        "filename": "drivers/net/wireless/bcmdhd/dhd_pno.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2718,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2015-09-09T00:01:20Z",
+      "side": 1,
+      "message": "Don\u0027t you need to do this before entering the loop?",
+      "range": {
+        "startLine": 2718,
+        "startChar": 2,
+        "endLine": 2718,
+        "endChar": 24
+      },
+      "revId": "5cadcc1bfdd5487fa80baee16a7d089951a48171",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
