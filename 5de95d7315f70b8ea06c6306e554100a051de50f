@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a9bdafe7_77c27071",
+        "filename": "fs/open.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1010099
+      },
+      "writtenOn": "2015-09-17T23:54:06Z",
+      "side": 1,
+      "message": "vfs maintainers will hate having two security hooks right next to each other like this.  If you really want this, then we would either need to enable CONFIG_SECURITY_PATH for SELinux and implement the security_path_truncate() hook, with an additional flag, or re-think open permission.  Eric at one time suggested that open permission should be repurposed or replaced by a new permission that gets checked at the tail of pathname lookup (I think he called it name_resolve or something, but I would just call it lookup), so that one can prevent all pathname-based calls on a file by not allowing lookup permission to it.  But such a permission is only useful/necessary if you have to allow search to the parent directory type; otherwise, search permission suffices to prevent any pathname-based system calls on files within that directory.",
+      "revId": "5de95d7315f70b8ea06c6306e554100a051de50f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
