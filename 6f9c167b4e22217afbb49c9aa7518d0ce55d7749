@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6971f71a_65b0665e",
+        "filename": "security/selinux/hooks.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2826,
+      "author": {
+        "id": 1010111
+      },
+      "writtenOn": "2015-09-18T16:00:22Z",
+      "side": 1,
+      "message": "Just add this as an additional condition for the previous if statement.",
+      "revId": "6f9c167b4e22217afbb49c9aa7518d0ce55d7749",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
