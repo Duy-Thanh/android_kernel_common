@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89d46b2f_1640dcfa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1010111
+      },
+      "writtenOn": "2015-09-18T17:08:07Z",
+      "side": 1,
+      "message": "extraneous comma (my fault, I think)",
+      "range": {
+        "startLine": 11,
+        "startChar": 65,
+        "endLine": 11,
+        "endChar": 67
+      },
+      "revId": "5200d9b90a342c6d82e8eebd17b52feac47ffdc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a9bdafe7_d7e25c96",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1010111
+      },
+      "writtenOn": "2015-09-18T17:08:07Z",
+      "side": 1,
+      "message": "double word",
+      "range": {
+        "startLine": 16,
+        "startChar": 61,
+        "endLine": 17,
+        "endChar": 5
+      },
+      "revId": "5200d9b90a342c6d82e8eebd17b52feac47ffdc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
