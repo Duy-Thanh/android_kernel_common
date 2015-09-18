@@ -16,6 +16,24 @@
       "revId": "5de95d7315f70b8ea06c6306e554100a051de50f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69dad736_4387dada",
+        "filename": "fs/open.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2015-09-18T00:14:30Z",
+      "side": 1,
+      "message": "What do you suggest? Your CONFIG_SECURITY_PATH idea seems straight forward.",
+      "parentUuid": "a9bdafe7_77c27071",
+      "revId": "5de95d7315f70b8ea06c6306e554100a051de50f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
