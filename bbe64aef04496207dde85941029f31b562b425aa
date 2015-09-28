@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee616dea_9730c71e",
+        "filename": "drivers/md/dm-verity.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2015-09-28T17:55:55Z",
+      "side": 1,
+      "message": "nit, whitespace-only change",
+      "revId": "bbe64aef04496207dde85941029f31b562b425aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee86cdd4_c0cb1332",
+        "filename": "drivers/md/dm-verity.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2015-09-28T17:55:55Z",
+      "side": 1,
+      "message": "should go on previous line",
+      "range": {
+        "startLine": 790,
+        "startChar": 0,
+        "endLine": 790,
+        "endChar": 15
+      },
+      "revId": "bbe64aef04496207dde85941029f31b562b425aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
