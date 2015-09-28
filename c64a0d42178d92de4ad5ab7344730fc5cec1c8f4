@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae5bf53d_2217967f",
+        "filename": "drivers/md/dm-verity.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2015-09-28T20:53:58Z",
+      "side": 1,
+      "message": "always zero?",
+      "range": {
+        "startLine": 978,
+        "startChar": 3,
+        "endLine": 978,
+        "endChar": 19
+      },
+      "revId": "c64a0d42178d92de4ad5ab7344730fc5cec1c8f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
