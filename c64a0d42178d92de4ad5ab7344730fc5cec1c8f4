@@ -22,6 +22,30 @@
       "revId": "c64a0d42178d92de4ad5ab7344730fc5cec1c8f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec3bd5a_58e7c1a6",
+        "filename": "drivers/md/dm-verity.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-29T10:04:53Z",
+      "side": 1,
+      "message": "Correct, in this version r is always zero. Should I move this line to the next CL instead?",
+      "parentUuid": "ae5bf53d_2217967f",
+      "range": {
+        "startLine": 978,
+        "startChar": 3,
+        "endLine": 978,
+        "endChar": 19
+      },
+      "revId": "c64a0d42178d92de4ad5ab7344730fc5cec1c8f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
