@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99c5aa26_ce3fc3ee",
+        "filename": "kernel/mutex.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1018087
+      },
+      "writtenOn": "2015-10-15T15:40:09Z",
+      "side": 1,
+      "message": "Add an ifdef ARM or ARM64 around this",
+      "revId": "a8a659772cbea3e55dbd06c90e7a39e46f09fde2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
