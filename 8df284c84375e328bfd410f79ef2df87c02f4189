@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76c565cc_3488beb3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-10-29T14:41:12Z",
+      "side": 1,
+      "message": "Add:\n\n(cherry pick from commit 83d4a806ae46397f606de7376b831524bd3a21e5)",
+      "range": {
+        "startLine": 7,
+        "startChar": 47,
+        "endLine": 7,
+        "endChar": 48
+      },
+      "revId": "8df284c84375e328bfd410f79ef2df87c02f4189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56ab01f0_0068d6a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-10-29T14:41:12Z",
+      "side": 1,
+      "message": "nit: Move to bottom of footer so as not to insert in the middle",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 52
+      },
+      "revId": "8df284c84375e328bfd410f79ef2df87c02f4189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "769c85d8_7cb3453a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-10-29T14:41:12Z",
+      "side": 1,
+      "message": "Eeek, why was subject line changed? Why is this non-compliant footer here, this should be as part of the \u0027notes\u0027 section right after the subject line?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 26
+      },
+      "revId": "8df284c84375e328bfd410f79ef2df87c02f4189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
