@@ -68,6 +68,30 @@
       "revId": "8df284c84375e328bfd410f79ef2df87c02f4189",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7621e584_f92b9fb3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2015-10-29T17:06:12Z",
+      "side": 1,
+      "message": "This was added by the kernel maintainer before submission to upstream (4.3). He changed the subject line from \"avc: remove...\" to \"selinux: remove\" I can delete it but it\u0027s in the upstream commit.",
+      "parentUuid": "769c85d8_7cb3453a",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 26
+      },
+      "revId": "8df284c84375e328bfd410f79ef2df87c02f4189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
