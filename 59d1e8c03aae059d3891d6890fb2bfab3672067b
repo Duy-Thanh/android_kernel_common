@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76c565cc_343f1e80",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-10-29T14:30:41Z",
+      "side": 1,
+      "message": "Since this is a cherry pick, please add:\n\n(cherry picked from commit fa1aa143ac4a682c7f5fd52a3cf05f5a6fe44a0a)",
+      "range": {
+        "startLine": 7,
+        "startChar": 39,
+        "endLine": 7,
+        "endChar": 40
+      },
+      "revId": "59d1e8c03aae059d3891d6890fb2bfab3672067b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96cad9dc_35071a9f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-10-29T14:30:41Z",
+      "side": 1,
+      "message": "nit: These two fields are non-compliant for upstream, and are in \u0027insert\u0027 here and should be placed at the bottom of the footers.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 52
+      },
+      "revId": "59d1e8c03aae059d3891d6890fb2bfab3672067b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
