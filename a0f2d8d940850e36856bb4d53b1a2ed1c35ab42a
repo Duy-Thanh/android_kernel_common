@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "562a227b_83ef6c6f",
+        "filename": "drivers/net/wireless/bcmdhd/wl_cfg80211.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10141,
+      "author": {
+        "id": 1067059
+      },
+      "writtenOn": "2015-11-02T21:08:54Z",
+      "side": 1,
+      "message": "nit: missing space before :\n\n\"count\" can be declared inside the \"then\" clause instead of at the top of the function",
+      "revId": "a0f2d8d940850e36856bb4d53b1a2ed1c35ab42a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "760e462a_3115a019",
+        "filename": "drivers/net/wireless/bcmdhd/wl_cfg80211.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10144,
+      "author": {
+        "id": 1067059
+      },
+      "writtenOn": "2015-11-02T21:08:54Z",
+      "side": 1,
+      "message": "This adds a \"naked\" printk",
+      "revId": "a0f2d8d940850e36856bb4d53b1a2ed1c35ab42a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
