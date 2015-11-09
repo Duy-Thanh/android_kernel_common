@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36712e54_73339838",
+        "filename": "net/ipv4/tcp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3555,
+      "author": {
+        "id": 1076784
+      },
+      "writtenOn": "2015-11-09T17:17:08Z",
+      "side": 1,
+      "message": "1. Do we have to use \"goto\" here?\n2. Maybe it would be better to check the flag after disabling bottom halves?\n3. Can we please not use C++ comments in the kernel?",
+      "range": {
+        "startLine": 3553,
+        "startChar": 0,
+        "endLine": 3555,
+        "endChar": 17
+      },
+      "revId": "633ae503890a4fb4ee58e206ef70e57b6177fcd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
