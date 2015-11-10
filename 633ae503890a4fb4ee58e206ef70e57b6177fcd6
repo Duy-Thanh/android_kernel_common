@@ -46,6 +46,30 @@
       "revId": "633ae503890a4fb4ee58e206ef70e57b6177fcd6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6851e5b_b1b340c1",
+        "filename": "net/ipv4/tcp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3555,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-11-10T02:17:34Z",
+      "side": 1,
+      "message": "Removed the goto and moved the check after local_bh_disable.\n\nI deleted the C++ style comment by addressing the TODO, but I will note that you had the opportunity of pushing back on them when you reviewed the change that introduced them :-)",
+      "parentUuid": "36712e54_73339838",
+      "range": {
+        "startLine": 3553,
+        "startChar": 0,
+        "endLine": 3555,
+        "endChar": 17
+      },
+      "revId": "633ae503890a4fb4ee58e206ef70e57b6177fcd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
