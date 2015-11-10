@@ -22,6 +22,30 @@
       "revId": "633ae503890a4fb4ee58e206ef70e57b6177fcd6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6829250_b581eab4",
+        "filename": "net/ipv4/tcp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3555,
+      "author": {
+        "id": 1000451
+      },
+      "writtenOn": "2015-11-10T02:01:48Z",
+      "side": 1,
+      "message": "I think this is just deleting one existing comment line.",
+      "parentUuid": "36712e54_73339838",
+      "range": {
+        "startLine": 3553,
+        "startChar": 0,
+        "endLine": 3555,
+        "endChar": 17
+      },
+      "revId": "633ae503890a4fb4ee58e206ef70e57b6177fcd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
