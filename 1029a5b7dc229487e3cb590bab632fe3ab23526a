@@ -22,6 +22,30 @@
       "revId": "1029a5b7dc229487e3cb590bab632fe3ab23526a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16218a86_84a4067b",
+        "filename": "net/ipv4/tcp.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3559,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-11-11T03:26:19Z",
+      "side": 1,
+      "message": "That doesn\u0027t make sense. Here sock_owned_by_user(sk) is guaranteed to be true, because we have called lock_sock.\n\nlock_sock basically does the following:\n  - Wait until sock_owned_by_user(sk) is false\n  - Lock the socket\n  - Set sock_owned_by_user to 1\n  - Unlock the socket\n\nI don\u0027t think the race you describe can happen. tcp_close calls inet_put port via tcp_set_state, which is only called with the userspace socket lock held. So there are two cases:\n\nCase #1: tcp_nuke_addr calls lock_sock first. In this case tcp_done() will do \"tcp_set_state(sk, TCP_CLOSE)\". Then when tcp_nuke_addr calls release_sock, tcp_close will run. But now sk-\u003esk_state \u003d\u003d TCP_CLOSE, so tcp_close will do \"goto adjudge_to_death\" and not call inet_put_port.\n\nCase #2: tcp_close calls lock_sock first. In this case tcp_close will call sock_orphan, which sets SOCK_DEAD. Then it calls sock_release. Now tcp_nuke_addr can run. But because SOCK_DEAD is true, tcp_nuke addr will just skip the socket without doing anything.",
+      "parentUuid": "5bfc0b2b_1e22ade4",
+      "range": {
+        "startLine": 3559,
+        "startChar": 4,
+        "endLine": 3559,
+        "endChar": 12
+      },
+      "revId": "1029a5b7dc229487e3cb590bab632fe3ab23526a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
