@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "1b06130b_9c3a45c0",
+        "filename": "net/ipv4/tcp.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3553,
+      "author": {
+        "id": 1086323
+      },
+      "writtenOn": "2015-11-11T05:56:08Z",
+      "side": 1,
+      "message": "Yes, you\u0027re right. I did not see the lock_sock in line 3551. \nThere\u0027s no race condition now.\n\nBut I think some boring warn message will be printed out\nfrom time to time by WARN_ON(sock_owned_by_user(sk))：\n\nCPU0                         CPU1\ntcp_nuke_addr()              tcp_close()\n--                           lock_sock\nlock_sock(wait)              release_sock\nlock_sock(ok)                --\nbh_lock_sock(ok)             bh_lock_sock(wait)\nbh_unlock_sock               bh_lock_sock(ok)\n--                           WARN_ON(sock_owned_by_user(sk))\nrelease_sock(wait)           bh_unlock_sock\nrelease_sock(ok)             --",
+      "parentUuid": "1b06130b_bc3d01bc",
+      "range": {
+        "startLine": 3553,
+        "startChar": 3,
+        "endLine": 3553,
+        "endChar": 15
+      },
+      "revId": "1029a5b7dc229487e3cb590bab632fe3ab23526a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5bfc0b2b_1e22ade4",
         "filename": "net/ipv4/tcp.c",
         "patchSetId": 4
