@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5bfc0b2b_1e22ade4",
+        "filename": "net/ipv4/tcp.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3559,
+      "author": {
+        "id": 1086323
+      },
+      "writtenOn": "2015-11-11T03:04:02Z",
+      "side": 1,
+      "message": "I think here miss a judgement of sock_owned_by_user, or it will\nstill race with inet_put_port() in tcp_close(). So code should be\nlike this:\nif (!sock_owned_by_user(sk))\n    tcp_done(sk);",
+      "range": {
+        "startLine": 3559,
+        "startChar": 4,
+        "endLine": 3559,
+        "endChar": 12
+      },
+      "revId": "1029a5b7dc229487e3cb590bab632fe3ab23526a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
