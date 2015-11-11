@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "3bf75749_bd5e1f51",
+        "filename": "net/ipv4/tcp.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3553,
+      "author": {
+        "id": 1086323
+      },
+      "writtenOn": "2015-11-11T04:02:35Z",
+      "side": 1,
+      "message": "Here you change the lock_sock() to bh_lock_sock() in \ntcp_nuke_addr, so check sock_owned_by_user(sk) is needed.",
+      "range": {
+        "startLine": 3553,
+        "startChar": 3,
+        "endLine": 3553,
+        "endChar": 15
+      },
+      "revId": "1029a5b7dc229487e3cb590bab632fe3ab23526a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5bfc0b2b_1e22ade4",
         "filename": "net/ipv4/tcp.c",
         "patchSetId": 4
