@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5bfc0b2b_be5e1951",
+        "filename": "net/ipv4/tcp.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3553,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-11-11T04:51:44Z",
+      "side": 1,
+      "message": "No, sock_owned_by_user guaranteed to be true until we call release_sock. bh_lock_sock does not affect the result of sock_owned_by_user(); all it does is:\n\n    #define bh_lock_sock(__sk)      spin_lock(\u0026((__sk)-\u003esk_lock.slock))\n\nYou can confirm this by adding:\n\n    BUG_ON(!sock_owned_by_user(sk));\n\nafter bh_lock_sock().",
+      "parentUuid": "3bf75749_bd5e1f51",
+      "range": {
+        "startLine": 3553,
+        "startChar": 3,
+        "endLine": 3553,
+        "endChar": 15
+      },
+      "revId": "1029a5b7dc229487e3cb590bab632fe3ab23526a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5bfc0b2b_1e22ade4",
         "filename": "net/ipv4/tcp.c",
         "patchSetId": 4
