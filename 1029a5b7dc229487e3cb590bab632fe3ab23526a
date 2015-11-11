@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "5bfc0b2b_3ee0c9bb",
+        "filename": "net/ipv4/tcp.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3553,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-11-11T05:30:49Z",
+      "side": 1,
+      "message": "No, that can\u0027t happen. The reason is the lock_sock statement in line 3551.\n\nIf tcp_close executes lock_sock first, then tcp_nuke_addr will block on the lock_sock in line 3551 until tcp_close calls release_sock. Once tcp_close calls release_sock, the SOCK_DEAD flag will be set, and tcp_nuke_addr will not call tcp_done.\n\nIf tcp_nuke_addr executes lock_sock first, then tcp_close will block on lock_sock until tcp_nuke_addr calls release_sock. By that time, sk-\u003esk_state is set to TCP_CLOSE, and lock_sock will not call tcp_set_state.",
+      "parentUuid": "f61b1659_06dadc41",
+      "range": {
+        "startLine": 3553,
+        "startChar": 3,
+        "endLine": 3553,
+        "endChar": 15
+      },
+      "revId": "1029a5b7dc229487e3cb590bab632fe3ab23526a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5bfc0b2b_1e22ade4",
         "filename": "net/ipv4/tcp.c",
         "patchSetId": 4
