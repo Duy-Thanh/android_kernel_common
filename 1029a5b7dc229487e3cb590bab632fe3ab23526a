@@ -145,6 +145,30 @@
     },
     {
       "key": {
+        "uuid": "f61b1659_86d6cce6",
+        "filename": "net/ipv4/tcp.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3553,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-11-11T06:35:58Z",
+      "side": 1,
+      "message": "Yes, we might occasionally hit that WARN_ON in tcp_close (and another one in inet_csk_listen_stop). But those messages are harmless, and should be very rare in actual use.",
+      "parentUuid": "1b06130b_9c3a45c0",
+      "range": {
+        "startLine": 3553,
+        "startChar": 3,
+        "endLine": 3553,
+        "endChar": 15
+      },
+      "revId": "1029a5b7dc229487e3cb590bab632fe3ab23526a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5bfc0b2b_1e22ade4",
         "filename": "net/ipv4/tcp.c",
         "patchSetId": 4
