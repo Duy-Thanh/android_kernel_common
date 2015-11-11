@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "f61b1659_06dadc41",
+        "filename": "net/ipv4/tcp.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3553,
+      "author": {
+        "id": 1086323
+      },
+      "writtenOn": "2015-11-11T05:14:27Z",
+      "side": 1,
+      "message": "Hello Lorenzo,\nIf we lack a judgement of sock_owned_by_user here, race condition\nwill still exist like this:\nCPU0                            CPU1\n   tcp_nuke_addr {                tcp_close {\n     --                             lock_sock\n     bh_lock_sock                   --\n     tcp_set_state {                tcp_set_state {\n       inet_put_port                    inet_put_port\n       --                               icsk_bind_hash-\u003enum_owners--\n       --                               icsk_bind_hash \u003d NULL\n       // access NULL pointer here  }\n       icsk_bind_hash-\u003enum_owners--",
+      "parentUuid": "5bfc0b2b_be5e1951",
+      "range": {
+        "startLine": 3553,
+        "startChar": 3,
+        "endLine": 3553,
+        "endChar": 15
+      },
+      "revId": "1029a5b7dc229487e3cb590bab632fe3ab23526a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5bfc0b2b_1e22ade4",
         "filename": "net/ipv4/tcp.c",
         "patchSetId": 4
