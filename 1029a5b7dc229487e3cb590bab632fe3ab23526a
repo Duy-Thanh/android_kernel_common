@@ -193,6 +193,29 @@
     },
     {
       "key": {
+        "uuid": "9bf20354_60b0f21f",
+        "filename": "net/ipv4/tcp.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3557,
+      "author": {
+        "id": 1086323
+      },
+      "writtenOn": "2015-11-12T02:07:35Z",
+      "side": 1,
+      "message": "Hello Lorenzo,\nRefer to tcp_reset, I think smp_wmb() should be put after set sk-\u003esk_err, like this:\nsk-\u003esk_err \u003d ETIMEDOUT;\nsmp_wmb();\nsk-\u003esk_error_report(sk);",
+      "range": {
+        "startLine": 3556,
+        "startChar": 4,
+        "endLine": 3557,
+        "endChar": 27
+      },
+      "revId": "1029a5b7dc229487e3cb590bab632fe3ab23526a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5bfc0b2b_1e22ade4",
         "filename": "net/ipv4/tcp.c",
         "patchSetId": 4
