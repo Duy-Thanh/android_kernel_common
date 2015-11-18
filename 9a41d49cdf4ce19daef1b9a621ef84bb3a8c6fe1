@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "db847bce_9070f6e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-11-18T20:36:16Z",
+      "side": 1,
+      "message": "If we are changing the commit message to include Bug: then maybe we should make this ANDROID: to match the standards?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "9a41d49cdf4ce19daef1b9a621ef84bb3a8c6fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3b2597a9_7011d82d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
