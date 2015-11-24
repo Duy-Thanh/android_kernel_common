@@ -22,6 +22,30 @@
       "revId": "ee92adaec60cef9c768cfd29a45f8f2d4a7ef177",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9b7da3ef_cba76928",
+        "filename": "drivers/md/dm-verity.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-11-24T19:08:31Z",
+      "side": 1,
+      "message": "I don\u0027t remember why this was changed in the upstream patch, but most likely it was because the function already stops logging corruption errors after DM_VERITY_MAX_CORRUPTED_ERRS.",
+      "parentUuid": "1b153384_39cdd33a",
+      "range": {
+        "startLine": 233,
+        "startChar": 1,
+        "endLine": 233,
+        "endChar": 6
+      },
+      "revId": "ee92adaec60cef9c768cfd29a45f8f2d4a7ef177",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
