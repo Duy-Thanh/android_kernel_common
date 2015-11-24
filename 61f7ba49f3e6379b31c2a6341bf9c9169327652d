@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3bed97ca_02e05817",
+        "filename": "drivers/md/dm-verity.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-11-24T18:37:01Z",
+      "side": 0,
+      "message": "Checked:\n\ncommit fc0a446152877d3a4e40166ddb19b6e0cb5f6567\nAuthor: viresh kumar \u003cviresh.kumar@linaro.org\u003e\nDate:   Mon Aug 10 11:42:26 2015 +0530\n\n    dm: remove unlikely() before IS_ERR()\n    \n    IS_ERR() already contains an \u0027unlikely\u0027 compiler flag so there is no\n    need to do that again from IS_ERR() callers.\n    \n    Signed-off-by: Viresh Kumar \u003cviresh.kumar@linaro.org\u003e\n    Signed-off-by: Mike Snitzer \u003csnitzer@redhat.com\u003e\n\nConfirmed that this is correct in the case of 3.10:\n\ninclude/linux/err.h (common-3.10):\n\n#define IS_ERR_VALUE(x) unlikely((x) \u003e\u003d (unsigned long)-MAX_ERRNO)",
+      "range": {
+        "startLine": 273,
+        "startChar": 5,
+        "endLine": 273,
+        "endChar": 14
+      },
+      "revId": "61f7ba49f3e6379b31c2a6341bf9c9169327652d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b153384_39cdd33a",
+        "filename": "drivers/md/dm-verity.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-11-24T18:37:01Z",
+      "side": 1,
+      "message": "This appears to be a regression, logspam about corruption? I missed the discussion about why this was changed (between 062a6b5efee1a4e97fae2569517d35af9ed99148 as committed to 3.10 and the version upstreamed in 65ff5b7ddf0541f2b6e5cc59c47bfbf6cbcd91b8)?",
+      "range": {
+        "startLine": 233,
+        "startChar": 1,
+        "endLine": 233,
+        "endChar": 6
+      },
+      "revId": "ee92adaec60cef9c768cfd29a45f8f2d4a7ef177",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
