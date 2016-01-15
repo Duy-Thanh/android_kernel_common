@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07495aa4_ede267bd",
+        "filename": "arch/arm/mm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2016-01-15T17:15:45Z",
+      "side": 1,
+      "message": "This was the conflict",
+      "range": {
+        "startLine": 1163,
+        "startChar": 1,
+        "endLine": 1163,
+        "endChar": 29
+      },
+      "revId": "d607a7dbfb7a6fd26fd015f0772fb247f8cf0ebd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
