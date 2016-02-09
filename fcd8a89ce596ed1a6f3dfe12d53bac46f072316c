@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7dbb8cf2_f869d18b",
+        "filename": "init/do_mounts_dm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1022354
+      },
+      "writtenOn": "2016-02-09T19:05:20Z",
+      "side": 1,
+      "message": "this should be one line up under add_target_fail.  dm_table_create_fail can occur before the lock is grabbed.",
+      "range": {
+        "startLine": 409,
+        "startChar": 1,
+        "endLine": 409,
+        "endChar": 18
+      },
+      "revId": "fcd8a89ce596ed1a6f3dfe12d53bac46f072316c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
