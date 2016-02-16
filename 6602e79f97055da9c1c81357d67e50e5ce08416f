@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd2a1c13_5d8d2f5d",
+        "filename": "init/do_mounts_dm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-02-16T23:55:21Z",
+      "side": 1,
+      "message": "Please do not insert obsolete empty lines",
+      "range": {
+        "startLine": 333,
+        "startChar": 1,
+        "endLine": 333,
+        "endChar": 3
+      },
+      "revId": "6602e79f97055da9c1c81357d67e50e5ce08416f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
