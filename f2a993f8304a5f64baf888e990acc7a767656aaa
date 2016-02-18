@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ddbf1831_c30a5670",
+        "filename": "arch/arm64/kernel/hw_breakpoint.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 830,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-02-18T10:47:38Z",
+      "side": 1,
+      "message": "Trivial merge conflict due to reset_ctrl_regs rename in 60fc6942.",
+      "range": {
+        "startLine": 830,
+        "startChar": 32,
+        "endLine": 830,
+        "endChar": 47
+      },
+      "revId": "f2a993f8304a5f64baf888e990acc7a767656aaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
