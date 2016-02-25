@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a29b218c_c36cc644",
+        "filename": "android/configs/android-recommended.cfg",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2016-02-25T18:49:04Z",
+      "side": 1,
+      "message": "not in alphabetic position, move up one line.",
+      "range": {
+        "startLine": 17,
+        "startChar": 1,
+        "endLine": 17,
+        "endChar": 26
+      },
+      "revId": "7a7e9b3ab8b571cd2b672f9c527839967ee053fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
