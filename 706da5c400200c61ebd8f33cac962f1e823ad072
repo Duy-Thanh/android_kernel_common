@@ -22,6 +22,30 @@
       "revId": "706da5c400200c61ebd8f33cac962f1e823ad072",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d79459c3_01be2e90",
+        "filename": "fs/pstore/ram.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1098683
+      },
+      "writtenOn": "2016-03-15T15:44:52Z",
+      "side": 1,
+      "message": "correct, thanks for catching the typo! should be dev-\u003eof_node",
+      "parentUuid": "573069cd_e86e5d03",
+      "range": {
+        "startLine": 550,
+        "startChar": 7,
+        "endLine": 550,
+        "endChar": 14
+      },
+      "revId": "706da5c400200c61ebd8f33cac962f1e823ad072",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
