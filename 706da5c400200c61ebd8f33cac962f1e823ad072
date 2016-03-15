@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "573069cd_e86e5d03",
+        "filename": "fs/pstore/ram.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2016-03-15T15:38:07Z",
+      "side": 1,
+      "message": "dev-\u003eof_node\n\nAs written this compiles but checks whether the function of_node() is at a non-NULL address.",
+      "range": {
+        "startLine": 550,
+        "startChar": 7,
+        "endLine": 550,
+        "endChar": 14
+      },
+      "revId": "706da5c400200c61ebd8f33cac962f1e823ad072",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
