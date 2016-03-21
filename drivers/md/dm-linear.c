@@ -156,6 +156,7 @@ static int linear_iterate_devices(struct dm_target *ti,
 	return fn(ti, lc->dev, lc->start, ti->len, data);
 }
 
+<<<<<<< HEAD   (02b5df UPSTREAM: binder: Gracefully handle BINDER_TYPE_FDA objects )
 #if IS_ENABLED(CONFIG_DAX_DRIVER)
 static long linear_dax_direct_access(struct dm_target *ti, pgoff_t pgoff,
 		long nr_pages, void **kaddr, pfn_t *pfn)
@@ -225,6 +226,9 @@ static int linear_dax_zero_page_range(struct dm_target *ti, pgoff_t pgoff,
 #endif
 
 static struct target_type linear_target = {
+=======
+struct target_type linear_target = {
+>>>>>>> CHANGE (dd5d43 ANDROID: dm: Mounting root as linear device when verity disa)
 	.name   = "linear",
 	.version = {1, 4, 0},
 #ifdef CONFIG_BLK_DEV_ZONED
