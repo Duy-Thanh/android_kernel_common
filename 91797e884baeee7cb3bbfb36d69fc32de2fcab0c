@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "31aa2554_680d5b8d",
+        "filename": "drivers/md/dm-android-verity.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-03-25T20:43:33Z",
+      "side": 1,
+      "message": "why not \"0\";",
+      "range": {
+        "startLine": 580,
+        "startChar": 24,
+        "endLine": 580,
+        "endChar": 30
+      },
+      "revId": "91797e884baeee7cb3bbfb36d69fc32de2fcab0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "31aa2554_e8f86b91",
+        "filename": "drivers/md/dm-android-verity.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-03-25T20:43:33Z",
+      "side": 1,
+      "message": "You are using global variable without any memory barriers. Just notice.",
+      "range": {
+        "startLine": 594,
+        "startChar": 2,
+        "endLine": 594,
+        "endChar": 14
+      },
+      "revId": "91797e884baeee7cb3bbfb36d69fc32de2fcab0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "31aa2554_a8511356",
+        "filename": "drivers/md/dm-android-verity.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-03-25T20:43:33Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 742,
+        "startChar": 6,
+        "endLine": 742,
+        "endChar": 20
+      },
+      "revId": "91797e884baeee7cb3bbfb36d69fc32de2fcab0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
