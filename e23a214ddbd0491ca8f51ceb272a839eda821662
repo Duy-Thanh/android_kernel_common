@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71249df3_01a5fe23",
+        "filename": "fs/pipe.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2016-03-28T17:45:37Z",
+      "side": 1,
+      "message": "This may create a merge conflict, internal fix had \u0027int error, atomic, offset\u0027",
+      "range": {
+        "startLine": 392,
+        "startChar": 3,
+        "endLine": 393,
+        "endChar": 14
+      },
+      "revId": "e23a214ddbd0491ca8f51ceb272a839eda821662",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
