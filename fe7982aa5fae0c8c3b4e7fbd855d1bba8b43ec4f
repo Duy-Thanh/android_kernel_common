@@ -16,6 +16,24 @@
       "revId": "fe7982aa5fae0c8c3b4e7fbd855d1bba8b43ec4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0bac0e06_165499ce",
+        "filename": "fs/sdcardfs/inode.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-04-14T00:24:08Z",
+      "side": 1,
+      "message": "I take that back - current is the current thread, not the current process, so nothing else should modify your temporary fs.\n\nIt seems strange that this only happens on f2fs and not on ext4.  Can you tell where the umask is getting applied somewhere inside vfs_create?",
+      "parentUuid": "0bac0e06_16fad959",
+      "revId": "fe7982aa5fae0c8c3b4e7fbd855d1bba8b43ec4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
