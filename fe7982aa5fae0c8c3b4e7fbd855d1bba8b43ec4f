@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0bac0e06_16fad959",
+        "filename": "fs/sdcardfs/inode.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-04-14T00:13:53Z",
+      "side": 1,
+      "message": "This will cause problems if another thread modifies current-\u003efs - the changes will be lost when you put the saved_fs back.",
+      "revId": "fe7982aa5fae0c8c3b4e7fbd855d1bba8b43ec4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
