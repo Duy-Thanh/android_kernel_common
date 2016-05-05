@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d3e834b_3a54f1b9",
+        "filename": "drivers/staging/android/fiq_debugger/fiq_debugger.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1214,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-05-05T23:05:37Z",
+      "side": 1,
+      "message": "why return early on errors instead",
+      "revId": "711a76d52ecbcc1ecc4cf12fa0ad9eb4f00e7868",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
