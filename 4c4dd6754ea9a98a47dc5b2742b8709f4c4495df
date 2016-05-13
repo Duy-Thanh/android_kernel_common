@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2725490_a3c56f50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2016-05-13T19:44:10Z",
+      "side": 1,
+      "message": "@rgreenwalt: Do you someone who is aware of the frameworks requirement ? The kernel change proposed seem to be valid if the framework code requirement is true.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 58
+      },
+      "revId": "4c4dd6754ea9a98a47dc5b2742b8709f4c4495df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2725490_c3c26b46",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2016-05-13T19:44:10Z",
+      "side": 1,
+      "message": "nit: unregistered",
+      "range": {
+        "startLine": 13,
+        "startChar": 58,
+        "endLine": 13,
+        "endChar": 68
+      },
+      "revId": "4c4dd6754ea9a98a47dc5b2742b8709f4c4495df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
