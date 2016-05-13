@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2725490_00b9bcd9",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1082545
+      },
+      "writtenOn": "2016-05-13T05:55:35Z",
+      "side": 1,
+      "message": "not sure if this will cause 4 interrupt lost (retry\u003d5) because of this patch which has interrupt disabled when calling trusty_std_call_inner().\n\nHow about not retrying in this function? I saw you have \"trusty_std_call_helper()\" to retry it, but need to change sleep/wait algorithm if no above 5 times of retries.",
+      "revId": "9ab50bdb5dc7744b496f68d3ecdb2bdb25e56b47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
