@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2725490_5570d461",
+        "filename": "include/linux/trusty/smcall.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1082545
+      },
+      "writtenOn": "2016-05-13T05:30:54Z",
+      "side": 1,
+      "message": "typo - if",
+      "range": {
+        "startLine": 66,
+        "startChar": 75,
+        "endLine": 66,
+        "endChar": 78
+      },
+      "revId": "83a4405e403b5926c483de893cbe66cc44cf4763",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
