@@ -70,6 +70,24 @@
       "revId": "9ab50bdb5dc7744b496f68d3ecdb2bdb25e56b47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2725490_f5bf0bb6",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-05-16T22:08:32Z",
+      "side": 1,
+      "message": "Are having a problem, or are you just speculating? No interrupt controller state should have been touched when SM_ERR_BUSY is returned.",
+      "parentUuid": "f2725490_a1472068",
+      "revId": "9ab50bdb5dc7744b496f68d3ecdb2bdb25e56b47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
