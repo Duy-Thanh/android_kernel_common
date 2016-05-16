@@ -34,6 +34,24 @@
       "revId": "9ab50bdb5dc7744b496f68d3ecdb2bdb25e56b47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2725490_a1472068",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1082545
+      },
+      "writtenOn": "2016-05-16T02:15:39Z",
+      "side": 1,
+      "message": "Sorry, I\u0027m not quite understanding the behaviors of ARM GIC. \n\nFor x86, in a VMM/Hypervisor-based TEE implementation, due to this patch, the interrupt will be disabled (aka, interrupt window is closed for a short time) in android before calling SMC/VMCALL to VMM, hence if the Trusty returns because of an android-owned interrupt occurrence, then VMM will inject this interrupt (with its vector) back to Android, but the interrupt window is closed, so android has no chance to handle its irq.  then this trusty_std_call_inner() code does retry again for the second time. \n\nand now assuming the case above happens again with another interrupt (with different vector), but the interrupt window is still closing on Android side.  then repeating this for another 3 times.  so only the last interrupt can be injected successfully because after 5-time retry, the interrupt window is opened again.  \n\nVitalization Technology itself doesn\u0027t provide a way to save/store the history interrupt information and doesn\u0027t deliver them one by one later. \n\nHowever, this may not be an issue now, after our discussion, we think we can solve it in VMM, we can log those history/pending interrupt vector info, and inject them back one by one based on their interrupt priorities (or in the order of occurrence) as long as the interrupt window is opened after 5 retries. \n\nSo if i\u0027m correct as above, this might not be a problem. and if this could make ARM/TrustZone happy, i\u0027m Ok to this.",
+      "parentUuid": "f2725490_bcb74c47",
+      "revId": "9ab50bdb5dc7744b496f68d3ecdb2bdb25e56b47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
