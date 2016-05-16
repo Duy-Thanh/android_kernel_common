@@ -52,6 +52,24 @@
       "revId": "9ab50bdb5dc7744b496f68d3ecdb2bdb25e56b47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2725490_0157f414",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1082545
+      },
+      "writtenOn": "2016-05-16T02:18:37Z",
+      "side": 1,
+      "message": "\u003e The change description on the previous patch (which added this\n \u003e code) explains why we need to retry. Why do you think this retry\n \u003e would affect interrupts?\n\nand yes, I read it again, and I\u0027m understanding the reason of retrying in your previous patch.",
+      "parentUuid": "f2725490_bcb74c47",
+      "revId": "9ab50bdb5dc7744b496f68d3ecdb2bdb25e56b47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
