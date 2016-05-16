@@ -46,6 +46,30 @@
       "revId": "83a4405e403b5926c483de893cbe66cc44cf4763",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2725490_61c34800",
+        "filename": "include/linux/trusty/smcall.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1082545
+      },
+      "writtenOn": "2016-05-16T01:10:36Z",
+      "side": 1,
+      "message": "Just Google it.. iff \u003d if and only if \ngood to know this. thank you :-)",
+      "parentUuid": "f2725490_3c07bc0b",
+      "range": {
+        "startLine": 66,
+        "startChar": 75,
+        "endLine": 66,
+        "endChar": 78
+      },
+      "revId": "83a4405e403b5926c483de893cbe66cc44cf4763",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
