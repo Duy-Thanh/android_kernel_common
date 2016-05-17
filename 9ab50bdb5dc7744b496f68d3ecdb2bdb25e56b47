@@ -88,6 +88,24 @@
       "revId": "9ab50bdb5dc7744b496f68d3ecdb2bdb25e56b47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2725490_ae970455",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1082545
+      },
+      "writtenOn": "2016-05-17T01:42:44Z",
+      "side": 1,
+      "message": "so far so good, but we didn\u0027t have  massive testing. I\u0027m just speculating this, however, we should have solution to solve it in VMM and is pretty easy to get it resolved...",
+      "parentUuid": "f2725490_f5bf0bb6",
+      "revId": "9ab50bdb5dc7744b496f68d3ecdb2bdb25e56b47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
