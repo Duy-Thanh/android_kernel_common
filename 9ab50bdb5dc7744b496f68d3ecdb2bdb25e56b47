@@ -106,6 +106,24 @@
       "revId": "9ab50bdb5dc7744b496f68d3ecdb2bdb25e56b47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2725490_a95c5e3b",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-05-17T02:20:56Z",
+      "side": 1,
+      "message": "I\u0027m still not sure what you are trying to solve. If SM_ERR_BUSY is returned, no interrupt state should have been touched.",
+      "parentUuid": "f2725490_ae970455",
+      "revId": "9ab50bdb5dc7744b496f68d3ecdb2bdb25e56b47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
