@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9c276ff4_91165b49",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002609
+      },
+      "writtenOn": "2016-05-24T23:46:08Z",
+      "side": 1,
+      "message": "I don\u0027t know the details.  I believe when we disable usb tethering settings we change the UsbManager.setCurrentFunction between USB_FUNCTION_RNDIS and null.  I suspect the network interface for usb RNDIS is expected to appear and disappear.",
+      "parentUuid": "f2725490_a3c56f50",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 58
+      },
+      "revId": "4c4dd6754ea9a98a47dc5b2742b8709f4c4495df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2725490_c3c26b46",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
