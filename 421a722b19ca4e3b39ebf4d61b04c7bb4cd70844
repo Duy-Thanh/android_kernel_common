@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09034492_46deb2e3",
+        "filename": "android/configs/android-base.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2016-06-20T15:16:35Z",
+      "side": 1,
+      "message": "CONFIG_CC_STACKPROTECTOR_STRONG\u003dy is all that is needed, it turns off _NONE _REGULAR and automatically enabled CONFIG_CC_STACKPROTECTOR.",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 33
+      },
+      "revId": "421a722b19ca4e3b39ebf4d61b04c7bb4cd70844",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
