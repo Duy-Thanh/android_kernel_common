@@ -116,6 +116,24 @@
       "revId": "e39767c9d2e0053849916ea9a0921e4ed9337b77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ec6ea30_83b2ecfc",
+        "filename": "drivers/base/power/main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1579,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2016-06-22T18:30:11Z",
+      "side": 1,
+      "message": "Hmm. Looking closer, all of this is just to skip these conditionals below. In the empty case, we will just fall out the bottom of the if/else with callback\u003d\u003dNULL and end up and the unlock label.\n\nSo just avoiding the memory latency for these conditionals is what fixes the issue?",
+      "parentUuid": "6ed5a6ce_4bc09959",
+      "revId": "e39767c9d2e0053849916ea9a0921e4ed9337b77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
