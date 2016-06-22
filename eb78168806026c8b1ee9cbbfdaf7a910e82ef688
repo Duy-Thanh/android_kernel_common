@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae9cfe2a_b87e4050",
+        "filename": "drivers/base/power/main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1579,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2016-06-22T18:12:44Z",
+      "side": 1,
+      "message": "Is this the only place no_pm_callbacks is consumed? Is there a reason why",
+      "revId": "eb78168806026c8b1ee9cbbfdaf7a910e82ef688",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
