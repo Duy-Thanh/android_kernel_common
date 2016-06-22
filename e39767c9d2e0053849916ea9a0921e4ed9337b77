@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "4e67020f_f8d4c61c",
+        "filename": "drivers/base/power/common.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-06-22T18:18:25Z",
+      "side": 1,
+      "message": "Same thing from Todd - is it needed?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 1
+      },
+      "revId": "e39767c9d2e0053849916ea9a0921e4ed9337b77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ed5a6ce_6baa3da2",
         "filename": "drivers/base/power/domain.c",
         "patchSetId": 4
