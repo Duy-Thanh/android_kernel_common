@@ -152,6 +152,24 @@
       "revId": "e39767c9d2e0053849916ea9a0921e4ed9337b77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e09fadf_9a3e0dd0",
+        "filename": "drivers/base/power/main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1579,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2016-06-22T21:19:51Z",
+      "side": 1,
+      "message": "Ok.. So the subtle detail here is that ret \u003d 1, which sets direct_complete which wasn\u0027t done previously. This allows the problematic i2c driver to properly suspend w/o causing clk disable/enable mismatches.",
+      "parentUuid": "0ec6ea30_83b2ecfc",
+      "revId": "e39767c9d2e0053849916ea9a0921e4ed9337b77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
