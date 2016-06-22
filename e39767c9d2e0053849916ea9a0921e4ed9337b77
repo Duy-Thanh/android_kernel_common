@@ -170,6 +170,24 @@
       "revId": "e39767c9d2e0053849916ea9a0921e4ed9337b77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2eed6e38_42c1343c",
+        "filename": "drivers/base/power/main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1579,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2016-06-22T21:45:43Z",
+      "side": 1,
+      "message": "Ok, then it still seems like we don\u0027t need dev-\u003epower.no_pm_callbacks or any of the calls to device_pm_check_callbacks except one right here. The code would then be:\n\n  if (!device_pm_check_callbacks()) {\n    ret \u003d 1;\n    goto unlock;\n  }\n\nand none of the changes in the other files are needed.\n\nHaving to sprinkle device_pm_check_callbacks() invocations throughout the code to get this set up correctly seems error prone, and if its side effects are only used here, then why not only call it here?",
+      "parentUuid": "8e09fadf_9a3e0dd0",
+      "revId": "e39767c9d2e0053849916ea9a0921e4ed9337b77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
