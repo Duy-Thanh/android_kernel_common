@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ed5a6ce_6baa3da2",
+        "filename": "drivers/base/power/domain.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2016-06-22T18:12:44Z",
+      "side": 1,
+      "message": "is this needed?",
+      "revId": "e39767c9d2e0053849916ea9a0921e4ed9337b77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ed5a6ce_4bc09959",
+        "filename": "drivers/base/power/main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1579,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2016-06-22T18:12:44Z",
+      "side": 1,
+      "message": "Is this the only place where no_pm_callbacks is consumed? Any reason why the checks in device_pm_check_callbacks() can\u0027t be done here and eliminate this bitfield?",
+      "revId": "e39767c9d2e0053849916ea9a0921e4ed9337b77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
