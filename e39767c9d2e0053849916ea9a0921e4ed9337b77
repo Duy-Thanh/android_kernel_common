@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2e564e46_66acc0a1",
+        "filename": "drivers/base/power/common.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2016-06-22T18:26:12Z",
+      "side": 1,
+      "message": "It was needed in the upstream commit which added a device_pm_check_callbacks call to dev_pm_domain_set which doesn\u0027t exist here.\n\nI can remove it to simplify.",
+      "parentUuid": "4e67020f_f8d4c61c",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 1
+      },
+      "revId": "e39767c9d2e0053849916ea9a0921e4ed9337b77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ed5a6ce_6baa3da2",
         "filename": "drivers/base/power/domain.c",
         "patchSetId": 4
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "8ed2dae5_f92a8823",
+        "filename": "drivers/base/power/domain.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2016-06-22T18:26:12Z",
+      "side": 1,
+      "message": "Seems like we could go without it, but its part of the upstream commit. I can drop it if preferred.",
+      "parentUuid": "6ed5a6ce_6baa3da2",
+      "revId": "e39767c9d2e0053849916ea9a0921e4ed9337b77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ed5a6ce_4bc09959",
         "filename": "drivers/base/power/main.c",
         "patchSetId": 4
@@ -53,6 +95,24 @@
       "writtenOn": "2016-06-22T18:12:44Z",
       "side": 1,
       "message": "Is this the only place where no_pm_callbacks is consumed? Any reason why the checks in device_pm_check_callbacks() can\u0027t be done here and eliminate this bitfield?",
+      "revId": "e39767c9d2e0053849916ea9a0921e4ed9337b77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e564e46_0b5a2ddc",
+        "filename": "drivers/base/power/main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1579,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2016-06-22T18:26:12Z",
+      "side": 1,
+      "message": "So this sounds reasonable, but as this is a backport of an upstream commit, I\u0027d prefer to keep it close to upstream.\n\n+Ulf: Do you have any thoughts on this?",
+      "parentUuid": "6ed5a6ce_4bc09959",
       "revId": "e39767c9d2e0053849916ea9a0921e4ed9337b77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
