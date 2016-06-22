@@ -134,6 +134,24 @@
       "revId": "e39767c9d2e0053849916ea9a0921e4ed9337b77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e680e70_c7fe3e72",
+        "filename": "drivers/base/power/main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1579,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2016-06-22T20:48:01Z",
+      "side": 1,
+      "message": "Sorry (I submitted a new version before noticing this comment). This is a bit confusing. Let me follow up with Ulf to make sure I better understand the core reason this fixes the problem and I\u0027ll resubmit.",
+      "parentUuid": "0ec6ea30_83b2ecfc",
+      "revId": "e39767c9d2e0053849916ea9a0921e4ed9337b77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
