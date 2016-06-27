@@ -188,6 +188,24 @@
       "revId": "e39767c9d2e0053849916ea9a0921e4ed9337b77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a047af66_831bfe14",
+        "filename": "drivers/base/power/main.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1579,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2016-06-27T23:22:27Z",
+      "side": 1,
+      "message": "Again, I don\u0027t disagree with you, and I can implement such a change, but I\u0027m hesitant since this is a backport, and switching to your method may cause future collisions with other backported changes.",
+      "parentUuid": "2eed6e38_42c1343c",
+      "revId": "e39767c9d2e0053849916ea9a0921e4ed9337b77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
