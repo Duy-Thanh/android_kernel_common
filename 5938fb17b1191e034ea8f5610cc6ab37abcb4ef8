@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a2130e3_1d60b5e4",
+        "filename": "arch/arm/kernel/setup.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-07-12T21:08:14Z",
+      "side": 1,
+      "message": "shouldn\u0027t there be \"vfpd32\" and \"lpae\" in between?",
+      "revId": "5938fb17b1191e034ea8f5610cc6ab37abcb4ef8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
