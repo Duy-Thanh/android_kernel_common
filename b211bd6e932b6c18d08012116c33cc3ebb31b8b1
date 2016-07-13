@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a1264d9_ef7fb5f0",
+        "filename": "lib/asn1_decoder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2016-07-13T00:24:57Z",
+      "side": 1,
+      "message": "odd adjustment ... but hey, its upstream ...",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 21
+      },
+      "revId": "b211bd6e932b6c18d08012116c33cc3ebb31b8b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
