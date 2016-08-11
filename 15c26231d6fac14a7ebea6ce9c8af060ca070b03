@@ -46,6 +46,30 @@
       "revId": "15c26231d6fac14a7ebea6ce9c8af060ca070b03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5950b7ef_e6c2245b",
+        "filename": "include/uapi/linux/rtnetlink.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2016-08-11T16:26:27Z",
+      "side": 1,
+      "message": "Huh. Good catch. I didn\u0027t realize the iproute2 code had been modified as well. Though this will likely cause more trouble for trying to run mainline kernels w/ Android since the rest of the enum values will be offset from what the modified iproute2 code uses...",
+      "parentUuid": "5eeedd73_e1c3e603",
+      "range": {
+        "startLine": 310,
+        "startChar": 1,
+        "endLine": 310,
+        "endChar": 9
+      },
+      "revId": "15c26231d6fac14a7ebea6ce9c8af060ca070b03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
