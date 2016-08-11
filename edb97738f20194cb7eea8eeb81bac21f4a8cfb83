@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5950b7ef_e62b0499",
+        "filename": "include/net/fib_rules.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2016-08-11T15:25:10Z",
+      "side": 0,
+      "message": "I might suggest you add this in a second patch, with a reference to which patch added the duplication so its easier to fold this change down when we move to the next kernel.",
+      "range": {
+        "startLine": 92,
+        "startChar": 1,
+        "endLine": 92,
+        "endChar": 36
+      },
+      "revId": "edb97738f20194cb7eea8eeb81bac21f4a8cfb83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
