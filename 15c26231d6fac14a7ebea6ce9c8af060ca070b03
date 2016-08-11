@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5950b7ef_e6322415",
+        "filename": "include/uapi/linux/rtnetlink.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2016-08-11T15:22:47Z",
+      "side": 1,
+      "message": "So RTA_UID and RA_VIA collide here, but just inserting UID back in its place bumps VIA up one along with all the other following RTA_ enums.\n\nIt might be better to just comment RTA_VIA out (or add it to the end) and add a comment making it clear that its been re-numbered and userspace using RTA_VIA won\u0027t work.",
+      "range": {
+        "startLine": 310,
+        "startChar": 1,
+        "endLine": 310,
+        "endChar": 9
+      },
+      "revId": "15c26231d6fac14a7ebea6ce9c8af060ca070b03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
