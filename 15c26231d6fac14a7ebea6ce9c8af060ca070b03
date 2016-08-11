@@ -22,6 +22,30 @@
       "revId": "15c26231d6fac14a7ebea6ce9c8af060ca070b03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5eeedd73_e1c3e603",
+        "filename": "include/uapi/linux/rtnetlink.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2016-08-11T16:16:07Z",
+      "side": 1,
+      "message": "I did think of commenting out RTA_VIA but then I decided to stay in sync with external/iproute2 project https://android.googlesource.com/platform/external/iproute2/+/android-n-preview-5/include/linux/rtnetlink.h#287.",
+      "parentUuid": "5950b7ef_e6322415",
+      "range": {
+        "startLine": 310,
+        "startChar": 1,
+        "endLine": 310,
+        "endChar": 9
+      },
+      "revId": "15c26231d6fac14a7ebea6ce9c8af060ca070b03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
