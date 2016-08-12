@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de180dbf_195c5b5b",
+        "filename": "fs/ecryptfs/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2016-08-12T15:15:03Z",
+      "side": 0,
+      "message": "In android-3.10, commit 2de5f059c4422e357b7df021b487a37b1d61356b appears to be applied borken and lower_file-\u003ef_pos remained as file-\u003ef_pos in the rval, and the lval on line 124. It may behove us to correct this in the BACKPORT for android-3.10?",
+      "range": {
+        "startLine": 122,
+        "startChar": 1,
+        "endLine": 122,
+        "endChar": 30
+      },
+      "revId": "c355622ecb2b204890dad2cb24a1015a16b8876a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
