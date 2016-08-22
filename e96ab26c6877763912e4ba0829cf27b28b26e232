@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e818b7be_599373a7",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1513,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-08-22T23:23:28Z",
+      "side": 1,
+      "message": "This can fail if the target process just died and finished unmapping the binder driver but has not finished the close call (as it need the same lock that this code is holding). Perhaps fixing that case to return BR_DEAD_REPLY would be more useful than adding all these error codes.",
+      "revId": "e96ab26c6877763912e4ba0829cf27b28b26e232",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e818b7be_1409c28b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1708,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-08-22T23:23:28Z",
+      "side": 1,
+      "message": "-ESRCH here probably also mean the target process is dying. -EMFILE usually means the target process hit its fd limit. I don\u0027t know if this can also happen if a process is exiting.",
+      "revId": "e96ab26c6877763912e4ba0829cf27b28b26e232",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
