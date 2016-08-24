@@ -70,6 +70,29 @@
       "revId": "d3b18da23e9c3f3fd2c20377dca3da17c030fc70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e85c37da_0baea17b",
+        "filename": "kernel/sched/walt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2016-08-24T18:01:07Z",
+      "side": 1,
+      "message": "Can you split this change into a separate patch? It really doesn\u0027t seem to have much to do with the do_div change.",
+      "range": {
+        "startLine": 25,
+        "startChar": 9,
+        "endLine": 25,
+        "endChar": 39
+      },
+      "revId": "d3b18da23e9c3f3fd2c20377dca3da17c030fc70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
