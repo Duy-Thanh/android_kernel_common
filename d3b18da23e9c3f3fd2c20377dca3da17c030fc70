@@ -46,6 +46,30 @@
       "revId": "d3b18da23e9c3f3fd2c20377dca3da17c030fc70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e8c6f768_35d13029",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1523,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2016-08-24T15:42:37Z",
+      "side": 1,
+      "message": "walt_ravg_window\u003d\u003d20000000 but because of early_param(), it can be override from kernel commandline.\n\nIn early_param func, walt_disabled\u003d\u003d1 for out of range values of walt_ravg_window. \n\nSo in this particular case !walt_disabled will take care of that.\n\nI did not check other division instances. Though I do see a couple more division by walt_ravg_window without explicitly checking for walt_disabled but there might be other relevant divide-by-zero checks which I might have easily overlooked.",
+      "parentUuid": "881e5bf2_d4c5945d",
+      "range": {
+        "startLine": 1523,
+        "startChar": 15,
+        "endLine": 1523,
+        "endChar": 31
+      },
+      "revId": "d3b18da23e9c3f3fd2c20377dca3da17c030fc70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
