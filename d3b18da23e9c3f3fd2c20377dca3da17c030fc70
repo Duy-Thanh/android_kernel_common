@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "881e5bf2_d4c5945d",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1523,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2016-08-24T15:10:18Z",
+      "side": 1,
+      "message": "Q: what makes sure walt_ravg_window is not zero?",
+      "range": {
+        "startLine": 1523,
+        "startChar": 15,
+        "endLine": 1523,
+        "endChar": 31
+      },
+      "revId": "d3b18da23e9c3f3fd2c20377dca3da17c030fc70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
