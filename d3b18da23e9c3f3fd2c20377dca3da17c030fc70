@@ -22,6 +22,30 @@
       "revId": "d3b18da23e9c3f3fd2c20377dca3da17c030fc70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "881e5bf2_4fdd6d06",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1523,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2016-08-24T15:41:12Z",
+      "side": 1,
+      "message": "It is hardcoded to 20000000 and can only be changed via the kernel command line. If someone did set it to 0 (or anything less than MIN_SCHED_RAVG_WINDOWS), then walt_disabled gets set to true and we wouldn\u0027t come here.",
+      "parentUuid": "881e5bf2_d4c5945d",
+      "range": {
+        "startLine": 1523,
+        "startChar": 15,
+        "endLine": 1523,
+        "endChar": 31
+      },
+      "revId": "d3b18da23e9c3f3fd2c20377dca3da17c030fc70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
