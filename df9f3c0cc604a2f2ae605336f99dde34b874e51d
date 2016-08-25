@@ -22,6 +22,30 @@
       "revId": "df9f3c0cc604a2f2ae605336f99dde34b874e51d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "884bbb45_41d75c49",
+        "filename": "include/trace/events/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1061,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2016-08-25T14:43:42Z",
+      "side": 1,
+      "message": "Good catch, thanks! This should have resulted in a syntax error (!), because \u0027#define TP_fast_assign(args...) args\u0027 would have stripped off the , and left white space between these two assignments after CPP phase.",
+      "parentUuid": "458b6ee0_807d1613",
+      "range": {
+        "startLine": 1061,
+        "startChar": 44,
+        "endLine": 1061,
+        "endChar": 46
+      },
+      "revId": "df9f3c0cc604a2f2ae605336f99dde34b874e51d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
