@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25a4baca_1926bbd1",
+        "filename": "android/configs/android-recommended.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018087
+      },
+      "writtenOn": "2016-08-26T22:55:36Z",
+      "side": 1,
+      "message": "You only need to set them in the base config. Recommended is added to base.",
+      "revId": "a150bbb73adc710b9ce575301a7f24a17f5b4a01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25a4baca_7917075b",
+        "filename": "arch/arm64/configs/defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018087
+      },
+      "writtenOn": "2016-08-26T22:55:36Z",
+      "side": 1,
+      "message": "This file is the base ARM64 config, we shouldn\u0027t touch this",
+      "revId": "a150bbb73adc710b9ce575301a7f24a17f5b4a01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
