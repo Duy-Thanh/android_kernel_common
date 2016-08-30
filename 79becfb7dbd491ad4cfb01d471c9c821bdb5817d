@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c5c11ec4_01261d1f",
+        "filename": "kernel/kcov.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2016-08-30T14:20:25Z",
+      "side": 1,
+      "message": "Adding to the end is so de-passe ;-} One can alphabetically sort the headers to statistically reduce the chances of merge conflicts.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 24
+      },
+      "revId": "79becfb7dbd491ad4cfb01d471c9c821bdb5817d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
