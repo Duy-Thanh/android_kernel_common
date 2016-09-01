@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f19fc9ca_308a8650",
+        "filename": "drivers/media/tuners/tuner-xc2028.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1407,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2016-09-01T21:58:14Z",
+      "side": 1,
+      "message": "fails to unlock priv-\u003elock",
+      "range": {
+        "startLine": 1407,
+        "startChar": 3,
+        "endLine": 1407,
+        "endChar": 18
+      },
+      "revId": "c3af24192c51e5e6abec8dbe489416cf620d6a3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
