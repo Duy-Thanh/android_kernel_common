@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cbe692fe_f118a080",
+        "filename": "arch/arm/include/asm/pgtable-2level-hwdef.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2016-09-12T15:23:20Z",
+      "side": 1,
+      "message": "Upstream this is tabs. Why were they converted to spaces? This may make future merges more difficult.\n\nI see this behavior in several places, please resubmit with the appropriate indentation characters.",
+      "range": {
+        "startLine": 23,
+        "startChar": 20,
+        "endLine": 23,
+        "endChar": 31
+      },
+      "revId": "4480a88702d7217887cb59a53e55fe58116d0f0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
