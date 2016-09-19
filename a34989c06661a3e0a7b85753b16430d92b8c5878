@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "70d83709_f1b628d6",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5504,
+      "author": {
+        "id": 1097408
+      },
+      "writtenOn": "2016-09-19T22:18:57Z",
+      "side": 1,
+      "message": "Sorry the other way.\n\nBoosted tasks must prefer higher utilization CPUs and the non-boosted ones will prefer lower-utilization CPUs.\n\nIf the above makes sense, we can keep the existing logic",
+      "parentUuid": "eb3b56ab_933a5b82",
+      "revId": "a34989c06661a3e0a7b85753b16430d92b8c5878",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb3b56ab_330a872d",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 2
