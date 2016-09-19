@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "eb3b56ab_933a5b82",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5504,
+      "author": {
+        "id": 1097408
+      },
+      "writtenOn": "2016-09-19T22:07:43Z",
+      "side": 1,
+      "message": "Actually I\u0027m wondering if it has to be\nif (!boosted) {\n}",
+      "parentUuid": "eb3b56ab_f3ef1f78",
+      "revId": "a34989c06661a3e0a7b85753b16430d92b8c5878",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb3b56ab_330a872d",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 2
