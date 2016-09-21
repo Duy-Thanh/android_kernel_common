@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f074270d_59f35389",
+        "filename": "drivers/video/adf/adf_fops.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2016-09-21T20:27:34Z",
+      "side": 1,
+      "message": "This makes a bunch of the get_user() calls below (e.g. get_user(n_intfs, \u0026arg-\u003en_interfaces)) redundant, since they same information has already been copied into data.",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 230,
+        "endChar": 17
+      },
+      "revId": "212d3715d691ad9da9c11710f67ec147009ebd83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
