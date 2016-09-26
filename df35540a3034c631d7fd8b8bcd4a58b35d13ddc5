@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2554bf0d_a63726e6",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-26T14:48:11Z",
+      "side": 1,
+      "message": "I don\u0027t think so. I can make it generic a generic \u0027extra allocations buffer\u0027 - but that probably means just renaming this to something like \u0027extra_buffers_size\u0027. Is that what you had in mind?",
+      "parentUuid": "f08d07b7_3746f578",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_77407d5a",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "2554bf0d_06771a93",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-26T14:48:11Z",
+      "side": 1,
+      "message": "I need to think about this.",
+      "parentUuid": "f08d07b7_d74f9184",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_d7015114",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -64,6 +100,24 @@
       "writtenOn": "2016-09-24T03:01:10Z",
       "side": 1,
       "message": "You are duplicating a lot of code here. You can look at Change-Id: I40a8753520bad5e92dfe273cdf6e8feb5b074b76 to see if any of those pending changes are helpful, but if not adding some helper functions to handle common code would be better.",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2554bf0d_86342ae2",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1954,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-26T14:48:11Z",
+      "side": 1,
+      "message": "I\u0027ll take a look.",
+      "parentUuid": "f08d07b7_d7015114",
       "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -93,6 +147,30 @@
     },
     {
       "key": {
+        "uuid": "2554bf0d_265b362d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1977,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-26T14:48:11Z",
+      "side": 1,
+      "message": "I was worried about a malicious actor causing overflow in line 1978 below, erroneously passing the check.",
+      "parentUuid": "f08d07b7_37099537",
+      "range": {
+        "startLine": 1977,
+        "startChar": 8,
+        "endLine": 1977,
+        "endChar": 44
+      },
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_9741893f",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -104,6 +182,24 @@
       "writtenOn": "2016-09-24T03:01:10Z",
       "side": 1,
       "message": "You may want to look at https://android-review.googlesource.com/260878 to see which error codes would make most sense for all the error cases you add.",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2554bf0d_66512e0b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1981,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-26T14:48:11Z",
+      "side": 1,
+      "message": "ok.",
+      "parentUuid": "f08d07b7_9741893f",
       "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -127,6 +223,24 @@
     },
     {
       "key": {
+        "uuid": "2554bf0d_46563205",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1987,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-26T14:48:11Z",
+      "side": 1,
+      "message": "ack, will fix.",
+      "parentUuid": "f08d07b7_77131d65",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_d72231b3",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -138,6 +252,24 @@
       "writtenOn": "2016-09-24T03:01:10Z",
       "side": 1,
       "message": "this could use two helper function, one shared function to transfer a file, and one to transfer an array with would allow simpler cleanup.",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2554bf0d_06603acd",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2022,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-26T14:48:11Z",
+      "side": 1,
+      "message": "ok.",
+      "parentUuid": "f08d07b7_d72231b3",
       "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -161,6 +293,24 @@
     },
     {
       "key": {
+        "uuid": "2554bf0d_a64e0664",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2045,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-26T14:48:11Z",
+      "side": 1,
+      "message": "Ok. BTW do you know if we\u0027re going to try to upstream the preempt disable patch?",
+      "parentUuid": "f08d07b7_f751ed00",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_b7f68554",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 3
@@ -172,6 +322,24 @@
       "writtenOn": "2016-09-24T03:01:10Z",
       "side": 1,
       "message": "consider using kerneldoc comments instead",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2554bf0d_864b0a54",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-26T14:48:11Z",
+      "side": 1,
+      "message": "ok.",
+      "parentUuid": "f08d07b7_b7f68554",
       "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -195,6 +363,24 @@
     },
     {
       "key": {
+        "uuid": "2554bf0d_267216a3",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-26T14:48:11Z",
+      "side": 1,
+      "message": "They are different things - a binder_buffer_object is a buffer to copy with optionally a parent pointer to fix up. A binder_fd_array_object describes a list of file descriptors to fix up in a parent buffer.\n\nThere could be multiple FD arrays present in a single binder_buffer_object.",
+      "parentUuid": "f08d07b7_97ab4928",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_f7a2cd49",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 3
@@ -212,6 +398,24 @@
     },
     {
       "key": {
+        "uuid": "2554bf0d_66780e85",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-26T14:48:11Z",
+      "side": 1,
+      "message": "will fix.",
+      "parentUuid": "f08d07b7_f7a2cd49",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_77679d1e",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 3
@@ -223,6 +427,24 @@
       "writtenOn": "2016-09-24T03:01:10Z",
       "side": 1,
       "message": "update comment to match your version",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2554bf0d_467d1273",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-26T14:48:11Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "f08d07b7_77679d1e",
       "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
