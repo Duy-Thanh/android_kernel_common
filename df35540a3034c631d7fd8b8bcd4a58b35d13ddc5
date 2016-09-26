@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "452373ec_8aad8ba0",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-26T21:53:04Z",
+      "side": 1,
+      "message": "Something like that yes. I think we need to also allocate space for the security context string here, but I don\u0027t know if we need both at the same time.",
+      "parentUuid": "2554bf0d_a63726e6",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_77407d5a",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -171,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "452373ec_6dcb114a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1977,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-26T21:53:04Z",
+      "side": 1,
+      "message": "I think it is better to check for overflow than add an arbitrary limit.",
+      "parentUuid": "2554bf0d_265b362d",
+      "range": {
+        "startLine": 1977,
+        "startChar": 8,
+        "endLine": 1977,
+        "endChar": 44
+      },
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_9741893f",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -235,6 +277,23 @@
       "side": 1,
       "message": "ack, will fix.",
       "parentUuid": "f08d07b7_77131d65",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "452373ec_ed86e1c3",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1992,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-26T21:53:04Z",
+      "side": 1,
+      "message": "don\u0027t use int to access data shared with user-space. User-space int could be a different size.",
       "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -311,6 +370,24 @@
     },
     {
       "key": {
+        "uuid": "452373ec_edd541db",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2045,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-26T21:53:04Z",
+      "side": 1,
+      "message": "It has already been rejected.",
+      "parentUuid": "2554bf0d_a64e0664",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_b7f68554",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 3
@@ -346,6 +423,46 @@
     },
     {
       "key": {
+        "uuid": "452373ec_4d128d66",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-26T21:53:04Z",
+      "side": 1,
+      "message": "Is this useful? Is it easier validate this parent index than finding the parent without it?",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "452373ec_ed538134",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-26T21:53:04Z",
+      "side": 1,
+      "message": "what does pointer refer to? It seems to be the offset where the actual array starts. Are you validating that this offset has not already been fixed up?",
+      "range": {
+        "startLine": 125,
+        "startChar": 44,
+        "endLine": 125,
+        "endChar": 51
+      },
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_97ab4928",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 3
@@ -375,6 +492,24 @@
       "side": 1,
       "message": "They are different things - a binder_buffer_object is a buffer to copy with optionally a parent pointer to fix up. A binder_fd_array_object describes a list of file descriptors to fix up in a parent buffer.\n\nThere could be multiple FD arrays present in a single binder_buffer_object.",
       "parentUuid": "f08d07b7_97ab4928",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "452373ec_6d4671aa",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-26T21:53:04Z",
+      "side": 1,
+      "message": "Can you update the comment to clarify this. How often do you pass arrays of fds versus a single fd?",
+      "parentUuid": "2554bf0d_267216a3",
       "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
