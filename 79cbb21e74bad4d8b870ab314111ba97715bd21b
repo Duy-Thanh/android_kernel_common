@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2554bf0d_262456b3",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1355,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-26T14:30:34Z",
+      "side": 1,
+      "message": "checkpatch doesn\u0027t complain and I can\u0027t find anything about it in the kernel coding style doc. But I\u0027ll make it consistent with the rest of the driver.",
+      "parentUuid": "f08d07b7_0c71ff07",
+      "revId": "79cbb21e74bad4d8b870ab314111ba97715bd21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_26d09cbe",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2554bf0d_662a4e85",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-26T14:30:34Z",
+      "side": 1,
+      "message": "ok.",
+      "parentUuid": "f08d07b7_26d09cbe",
+      "revId": "79cbb21e74bad4d8b870ab314111ba97715bd21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_4c9a27bf",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 2
@@ -47,6 +83,30 @@
       "writtenOn": "2016-09-22T23:00:30Z",
       "side": 1,
       "message": "compatible?",
+      "range": {
+        "startLine": 79,
+        "startChar": 39,
+        "endLine": 79,
+        "endChar": 50
+      },
+      "revId": "79cbb21e74bad4d8b870ab314111ba97715bd21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2554bf0d_861d4a74",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-26T14:30:34Z",
+      "side": 1,
+      "message": "will fix.",
+      "parentUuid": "f08d07b7_4c9a27bf",
       "range": {
         "startLine": 79,
         "startChar": 39,
