@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "e513870f_9402646c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1355,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-27T23:02:25Z",
+      "side": 1,
+      "message": "actually checkpatch did complain (with a CHECK). Fixed it.",
+      "parentUuid": "2554bf0d_262456b3",
+      "revId": "79cbb21e74bad4d8b870ab314111ba97715bd21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_26d09cbe",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 2
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "ok.",
       "parentUuid": "f08d07b7_26d09cbe",
+      "revId": "79cbb21e74bad4d8b870ab314111ba97715bd21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e513870f_d4e05c89",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-27T23:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2554bf0d_662a4e85",
       "revId": "79cbb21e74bad4d8b870ab314111ba97715bd21b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -125,6 +161,30 @@
       "side": 1,
       "message": "will fix.",
       "parentUuid": "f08d07b7_4c9a27bf",
+      "range": {
+        "startLine": 79,
+        "startChar": 39,
+        "endLine": 79,
+        "endChar": 50
+      },
+      "revId": "79cbb21e74bad4d8b870ab314111ba97715bd21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e513870f_34f6f054",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-27T23:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2554bf0d_861d4a74",
       "range": {
         "startLine": 79,
         "startChar": 39,
