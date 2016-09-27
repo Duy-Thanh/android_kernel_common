@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "e5b2a710_83d93d1a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1355,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2016-09-27T16:47:29Z",
+      "side": 1,
+      "message": "I agree with Arve regarding consistency. Make sure you are using ToT kernel.org (4.8.0-rc8 at this instant of time) checkpatch.pl and not this much older kernel\u0027s version. ToT reports 15 code style warnings.",
+      "parentUuid": "2554bf0d_262456b3",
+      "revId": "79cbb21e74bad4d8b870ab314111ba97715bd21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_26d09cbe",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 2
