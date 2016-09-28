@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "452ff370_47912e4d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1391,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-28T07:22:46Z",
+      "side": 1,
+      "message": "mm I didn\u0027t think of that - is container_of used in that way in more places? Changed it to that for now.",
+      "parentUuid": "45ba9338_04d0e41c",
+      "revId": "b35af81cf3430c327a19ae3feed2439feeef2418",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "45ba9338_049e246b",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -30,6 +48,30 @@
       "writtenOn": "2016-09-28T02:38:53Z",
       "side": 1,
       "message": "this is not accurate",
+      "range": {
+        "startLine": 1657,
+        "startChar": 7,
+        "endLine": 1657,
+        "endChar": 19
+      },
+      "revId": "b35af81cf3430c327a19ae3feed2439feeef2418",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "452ff370_678e322e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1657,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-28T07:22:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45ba9338_049e246b",
       "range": {
         "startLine": 1657,
         "startChar": 7,
