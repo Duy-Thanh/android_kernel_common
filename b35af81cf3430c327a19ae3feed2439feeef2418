@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45ba9338_04d0e41c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1391,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-28T02:38:53Z",
+      "side": 1,
+      "message": "would it make sense to use containerof here? We don\u0027t need any translation, but it would ensure the types are compatible.",
+      "revId": "b35af81cf3430c327a19ae3feed2439feeef2418",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45ba9338_049e246b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1657,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-28T02:38:53Z",
+      "side": 1,
+      "message": "this is not accurate",
+      "range": {
+        "startLine": 1657,
+        "startChar": 7,
+        "endLine": 1657,
+        "endChar": 19
+      },
+      "revId": "b35af81cf3430c327a19ae3feed2439feeef2418",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
