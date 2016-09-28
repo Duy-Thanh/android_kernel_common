@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "45ba9338_5500caa8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-28T23:08:59Z",
+      "side": 1,
+      "message": "This is not really needed. A process that opens /dev/binder can only access the service manager. You\u0027ll get the same separation if you only allow a process access to one service manager.",
+      "revId": "e32c63561e5cf932c8b33c7b55a344e195513311",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "45ba9338_2e57c224",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
