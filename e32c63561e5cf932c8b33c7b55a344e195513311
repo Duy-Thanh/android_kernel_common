@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45ba9338_2e57c224",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1018087
+      },
+      "writtenOn": "2016-09-28T15:22:07Z",
+      "side": 1,
+      "message": "new hotness is to use #if IS_ENABLED()\n\nalso works outside macros: if (IS_ENABLED(...)) {\n...\n}",
+      "revId": "e32c63561e5cf932c8b33c7b55a344e195513311",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
