@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "45ba9338_bd500260",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-28T21:21:36Z",
+      "side": 1,
+      "message": "There is a (broken) change here:\nhttps://android-review.googlesource.com/183566\n\nAdding a transaction return type with a pointer to the string seems like a reasonable way to fix it.",
+      "parentUuid": "452ff370_072bb6ec",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_77407d5a",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -291,6 +309,30 @@
     },
     {
       "key": {
+        "uuid": "45ba9338_bd7c8278",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1977,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-28T21:21:36Z",
+      "side": 1,
+      "message": "Dividing by a constant power of two should optimize to a shift, but you could also do a divide at compile time as suggested by sbauer.",
+      "parentUuid": "452ff370_87e16690",
+      "range": {
+        "startLine": 1977,
+        "startChar": 8,
+        "endLine": 1977,
+        "endChar": 44
+      },
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_9741893f",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -426,6 +468,24 @@
       "side": 1,
       "message": "err, yeah I guess that could happen (though there\u0027s no arch linux supports today where this is true, right?). I changed it to u32; that would mean the userspace buffer would also need to explicitly use 32-bit fields. It looks like the current Parcel code doesn\u0027t validate this (even for the existing file descriptor code).",
       "parentUuid": "452373ec_ed86e1c3",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45ba9338_1d0dce44",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1992,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-28T21:21:36Z",
+      "side": 1,
+      "message": "No, I\u0027m not aware of any existing supported arch where int is not the same size, but it is better to use a types with explicit sizes in user-space interfaces, as some types are different.",
+      "parentUuid": "452ff370_a702ea6b",
       "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -644,6 +704,24 @@
     },
     {
       "key": {
+        "uuid": "45ba9338_e41dd628",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-28T21:21:36Z",
+      "side": 1,
+      "message": "No I mean only allow the parent to be the last PTR object seen.",
+      "parentUuid": "452ff370_67d392f6",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "452373ec_ed538134",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 3
@@ -679,6 +757,30 @@
       "side": 1,
       "message": "Yes, it is the offset in the buffer where the array starts.\n\nDo you mean whether the file descriptors have already been fixed up? It shouldn\u0027t happen, unless userspace messes up. Do you see issues with this?\n\nWe know the buffer itself has already been fixed up, since its offset must be lower than the offset of this object, and we\u0027re walking the offset array in order.",
       "parentUuid": "452373ec_ed538134",
+      "range": {
+        "startLine": 125,
+        "startChar": 44,
+        "endLine": 125,
+        "endChar": 51
+      },
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45ba9338_64e726fe",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-28T21:21:36Z",
+      "side": 1,
+      "message": "You can\u0027t trust user-space with data that affects the kernel and other user-space processes. Allowing multiple fixups on the same address can create security holes.",
+      "parentUuid": "452ff370_a71bcae3",
       "range": {
         "startLine": 125,
         "startChar": 44,
@@ -756,6 +858,24 @@
       "side": 1,
       "message": "Will update it. The main usecase for this is a struct containing a native_handle_t (used by forex gralloc):\n\nstruct some_struct {\n    native_handle_t* handle;\n    ...\n}\n\na native_handle contains a list of file descriptors. We copy the struct and the native_handle_t as regular binder_buffer_objects. But the file descriptors in the native_handle_t need to be fixed up; since the target buffer is in read-only memory, we can\u0027t change some_struct.handle or the file descriptors it contains in userspace in the receiving process - the kernel needs to do it. This is what binder_fd_array allows you to do.\n\nDoes that make sense?",
       "parentUuid": "452373ec_6d4671aa",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45ba9338_c791b44f",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-28T21:21:36Z",
+      "side": 1,
+      "message": "What is unclear is why you need multiple fd arrays per ptr-object. A single array of all the fds in the ptr-object or a fd-object per fd seems simpler.",
+      "parentUuid": "452ff370_47d68ee7",
       "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
