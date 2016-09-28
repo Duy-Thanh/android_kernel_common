@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45ba9338_ee701a6b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1524,
+      "author": {
+        "id": 1079129
+      },
+      "writtenOn": "2016-09-28T15:58:49Z",
+      "side": 1,
+      "message": "If you want to avoid doing a division every time you should be able to do the following:\n\nif (fda-\u003enum_fds \u003e\u003d (SIZE_T_MAX / sizeof(u32)))\n  /* error on overflow */\n\nthe division above will get constant folded by the compiler and you wont have to take the division hit during runtime.",
+      "revId": "51e5b1d01649db82f1bbc695e17a0f8c2a7d3cc1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
