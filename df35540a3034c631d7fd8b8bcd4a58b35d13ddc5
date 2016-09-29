@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "c22d9995_ce3da318",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-29T20:12:26Z",
+      "side": 1,
+      "message": "I think the allocator change should go into a separate patch from the new commands. If the security context needs to be used at the same time as your new objects (ask dcashman or nnk), there may be additional changes needed.",
+      "parentUuid": "452ff370_c75a7e27",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_77407d5a",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -782,6 +800,24 @@
     },
     {
       "key": {
+        "uuid": "c22d9995_2efe67c7",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-29T20:12:26Z",
+      "side": 1,
+      "message": "It seems you have to apply fixups out of order in that case, which is hard to validate. You may have to change this to fix up all the offsets in one object before moving on to the next one.",
+      "parentUuid": "452ff370_474f6e61",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "452373ec_ed538134",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 3
@@ -865,6 +901,30 @@
       "side": 1,
       "message": "Agree; but the receiving side will anyway have to validate all meta-data objects are the way it expects them to be in userspace; eg check that the kernel has in fact fixed up a pointer/fd at a certain offset before using it. Likewise, verify that the # of meta-data objects match. So it would detect areas being fixed up twice, or not fixed up at all.\n\nAs for the kernel itself, if a malicious process points at some random memory or tries to fix up a file descriptor region twice, fget() would presumably fail or get a random file descriptor if the memory happened to be pointing at a valid one; but it doesn\u0027t seem like that would be bad for the receiving process.",
       "parentUuid": "45ba9338_64e726fe",
+      "range": {
+        "startLine": 125,
+        "startChar": 44,
+        "endLine": 125,
+        "endChar": 51
+      },
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c22d9995_0edccb67",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-29T20:12:26Z",
+      "side": 1,
+      "message": "I don\u0027t think you can get away with not validating this in the kernel. It is very similar to the existing fixup that the driver does for flat binder objects where it validates that they don\u0027t overlap. User-space cannot easily validate this without re-scanning the entire offset array and replicating the validation that the kernel should have performed.",
+      "parentUuid": "452ff370_674c726c",
       "range": {
         "startLine": 125,
         "startChar": 44,
@@ -978,6 +1038,24 @@
       "side": 1,
       "message": "mmm, I think in our current design we don\u0027t strictly have a need for multiple, since we only use this for native_handle_t; in that case the native_handle_t struct itself is the PTR object, and it would only have one fd array embedded.\n\nSo I guess you\u0027re saying, if this is true, then I could add something like\n\nbinder_size_t  fd_array_offset;\n\nto binder_buffer_object, and have a flag indicating it has an FD array to fix up?\n\nThe only downside I can see is that it increases the meta-data object size with 8 bytes for all buffers, whether they contain FD arrays or not. But perhaps that\u0027s not such a big deal.",
       "parentUuid": "45ba9338_c791b44f",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c22d9995_cefec393",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-29T20:12:26Z",
+      "side": 1,
+      "message": "If your normal case is that your objects contain a single array of file descriptors, and most object don\u0027t contain any file descriptors then this design seems optimal. I though passing single file descriptors was more common though. I think your comment should explain why you expect arrays of file descriptors.",
+      "parentUuid": "452ff370_a77caa78",
       "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
