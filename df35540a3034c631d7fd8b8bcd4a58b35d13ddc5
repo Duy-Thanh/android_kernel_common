@@ -145,6 +145,24 @@
     },
     {
       "key": {
+        "uuid": "c22d9995_9f26a3cf",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-29T22:29:54Z",
+      "side": 1,
+      "message": "As an individual patch, yes, but as part of a patchset this is normal.",
+      "parentUuid": "452ff370_873fa674",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_77407d5a",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -1003,6 +1021,30 @@
     },
     {
       "key": {
+        "uuid": "c22d9995_3ffe8fc7",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-29T22:29:54Z",
+      "side": 1,
+      "message": "Yes, they are not truly random if overwritten by other files. As you already mention overwriting with a different type of data will give you bad fds. Different alignment can also produce other fd numbers (unless you check for this), and closing the same fd twice does not fail if someone else open a file and got the same fd number between your two close calls.\n\nThe current verification is based on all fixups created by the parcel code in order. This way you only need one variable to check against. If you can perform all your in-object fixups in order, you can validate them the same way.",
+      "parentUuid": "452ff370_a744aa01",
+      "range": {
+        "startLine": 125,
+        "startChar": 44,
+        "endLine": 125,
+        "endChar": 51
+      },
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_97ab4928",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 3
@@ -1140,6 +1182,24 @@
       "side": 1,
       "message": "\u0027then this design seems optimal\u0027 -\u003e did you mean the design in this CL, or describing an optional fd array as part of the binder_buffer_object as I described in the previous comment? I like the latter better since it will make the code simpler. I think it also gets rid of your earlier concern on line 124, though I think I\u0027ll still need to check for overlap.",
       "parentUuid": "c22d9995_cefec393",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c22d9995_bf671fb5",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-29T22:29:54Z",
+      "side": 1,
+      "message": "You current design is optimal in the situation I described. A single file fixup object is better if you don\u0027t pass large fd arrays though.",
+      "parentUuid": "a2126545_9a648db1",
       "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
