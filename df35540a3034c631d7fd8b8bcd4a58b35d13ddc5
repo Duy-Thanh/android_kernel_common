@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "452ff370_c75a7e27",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-29T12:26:41Z",
+      "side": 1,
+      "message": "Ok. That anyway needs to be a separate change, I think. Anything else we should do on this one to accomodate that?",
+      "parentUuid": "45ba9338_bd500260",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_77407d5a",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -321,6 +339,30 @@
       "side": 1,
       "message": "Dividing by a constant power of two should optimize to a shift, but you could also do a divide at compile time as suggested by sbauer.",
       "parentUuid": "452ff370_87e16690",
+      "range": {
+        "startLine": 1977,
+        "startChar": 8,
+        "endLine": 1977,
+        "endChar": 44
+      },
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "452ff370_07457641",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1977,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-29T12:26:41Z",
+      "side": 1,
+      "message": "Yeah I\u0027ll follow Scotts\u0027 suggestion; I thought SIZE_T_MAX is C99 (and we can\u0027t use it), but looks like linux/kernel.h does have SIZE_MAX.",
+      "parentUuid": "45ba9338_bd7c8278",
       "range": {
         "startLine": 1977,
         "startChar": 8,
@@ -722,6 +764,24 @@
     },
     {
       "key": {
+        "uuid": "452ff370_474f6e61",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-29T12:26:41Z",
+      "side": 1,
+      "message": "I\u0027m not sure that\u0027s always true, we don\u0027t support this today , but in the future maybe we could have:\n\nstruct some_struct {\n   struct other_struct *other;\n   int                 num_fds;\n   int                 fds[0];\n};\n\nand we basically do a DFS when writing this into a Parcel; the first PTR object represents \u0027some_struct\u0027, the second PTR object represents \u0027some_struct-\u003eother\u0027, but the FD array needs to have the first PTR object as a parent.",
+      "parentUuid": "45ba9338_e41dd628",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "452373ec_ed538134",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 3
@@ -781,6 +841,30 @@
       "side": 1,
       "message": "You can\u0027t trust user-space with data that affects the kernel and other user-space processes. Allowing multiple fixups on the same address can create security holes.",
       "parentUuid": "452ff370_a71bcae3",
+      "range": {
+        "startLine": 125,
+        "startChar": 44,
+        "endLine": 125,
+        "endChar": 51
+      },
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "452ff370_674c726c",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-29T12:26:41Z",
+      "side": 1,
+      "message": "Agree; but the receiving side will anyway have to validate all meta-data objects are the way it expects them to be in userspace; eg check that the kernel has in fact fixed up a pointer/fd at a certain offset before using it. Likewise, verify that the # of meta-data objects match. So it would detect areas being fixed up twice, or not fixed up at all.\n\nAs for the kernel itself, if a malicious process points at some random memory or tries to fix up a file descriptor region twice, fget() would presumably fail or get a random file descriptor if the memory happened to be pointing at a valid one; but it doesn\u0027t seem like that would be bad for the receiving process.",
+      "parentUuid": "45ba9338_64e726fe",
       "range": {
         "startLine": 125,
         "startChar": 44,
@@ -876,6 +960,24 @@
       "side": 1,
       "message": "What is unclear is why you need multiple fd arrays per ptr-object. A single array of all the fds in the ptr-object or a fd-object per fd seems simpler.",
       "parentUuid": "452ff370_47d68ee7",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "452ff370_a77caa78",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-29T12:26:41Z",
+      "side": 1,
+      "message": "mmm, I think in our current design we don\u0027t strictly have a need for multiple, since we only use this for native_handle_t; in that case the native_handle_t struct itself is the PTR object, and it would only have one fd array embedded.\n\nSo I guess you\u0027re saying, if this is true, then I could add something like\n\nbinder_size_t  fd_array_offset;\n\nto binder_buffer_object, and have a flag indicating it has an FD array to fix up?\n\nThe only downside I can see is that it increases the meta-data object size with 8 bytes for all buffers, whether they contain FD arrays or not. But perhaps that\u0027s not such a big deal.",
+      "parentUuid": "45ba9338_c791b44f",
       "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
