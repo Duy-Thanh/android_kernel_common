@@ -937,6 +937,30 @@
     },
     {
       "key": {
+        "uuid": "c22d9995_74ff9e4d",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-29T21:16:43Z",
+      "side": 1,
+      "message": "Also no check in user-space can prevent binder_transaction_buffer_release from closing random file descriptors in the target process if the file descriptor array is corrupted by second fixup.",
+      "parentUuid": "c22d9995_0edccb67",
+      "range": {
+        "startLine": 125,
+        "startChar": 44,
+        "endLine": 125,
+        "endChar": 51
+      },
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_97ab4928",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 3
