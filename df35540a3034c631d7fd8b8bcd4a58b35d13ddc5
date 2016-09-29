@@ -127,6 +127,24 @@
     },
     {
       "key": {
+        "uuid": "452ff370_873fa674",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-29T21:52:36Z",
+      "side": 1,
+      "message": "I can do that, but without new commands, it would always get a size of 0. Wouldn\u0027t it be weird to add functionality in a patch without using it?",
+      "parentUuid": "c22d9995_ce3da318",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_77407d5a",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -961,6 +979,30 @@
     },
     {
       "key": {
+        "uuid": "452ff370_a744aa01",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-29T21:52:36Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand, they are not random; let\u0027s say you have fds [4, 9, 12] and after first fixup those are translated to [11, 12, 13]. Now you do a second fixup; if all those fds happen to exist in the source process, they\u0027d simply get translated to [14,15,16]; If one of them doesn\u0027t exist, we will bail out. Closing those in release is not a problem I think. But, we do leak the file descriptors allocated in the first pass, that is definitely a problem.\n\nAlso, I guess you could overwrite part of the fd array when fixing up a pointer to a PTR object, so I do agree now this validation is necessary.\n\nBut verification here in the kernel is not easy; for each buffer, I\u0027d need to keep track of the address ranges that were fixed up earlier, right?\n\nUserspace will need to revalidate the entire offset array regardless, since a process can tell the kernel to fix up anything anywhere.",
+      "parentUuid": "c22d9995_74ff9e4d",
+      "range": {
+        "startLine": 125,
+        "startChar": 44,
+        "endLine": 125,
+        "endChar": 51
+      },
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_97ab4928",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 3
@@ -1080,6 +1122,24 @@
       "side": 1,
       "message": "If your normal case is that your objects contain a single array of file descriptors, and most object don\u0027t contain any file descriptors then this design seems optimal. I though passing single file descriptors was more common though. I think your comment should explain why you expect arrays of file descriptors.",
       "parentUuid": "452ff370_a77caa78",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a2126545_9a648db1",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-29T21:52:36Z",
+      "side": 1,
+      "message": "\u0027then this design seems optimal\u0027 -\u003e did you mean the design in this CL, or describing an optional fd array as part of the binder_buffer_object as I described in the previous comment? I like the latter better since it will make the code simpler. I think it also gets rid of your earlier concern on line 124, though I think I\u0027ll still need to check for overlap.",
+      "parentUuid": "c22d9995_cefec393",
       "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
