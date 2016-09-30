@@ -163,6 +163,24 @@
     },
     {
       "key": {
+        "uuid": "a2318518_e2ba86b4",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-30T12:34:43Z",
+      "side": 1,
+      "message": "Done, see parent 8b73c5334e905147462440821520d791274a5a4f",
+      "parentUuid": "c22d9995_9f26a3cf",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_77407d5a",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -280,6 +298,24 @@
       "side": 1,
       "message": "will address in next PS (trying to pull in change from Riley as a parent). I will also make sure checkpatch passes then - right now I didn\u0027t bother because the cleanup will remove a lot of violations anyway.",
       "parentUuid": "2554bf0d_86342ae2",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a2318518_42e9b2a4",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1954,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-30T12:34:43Z",
+      "side": 1,
+      "message": "Done, see parent 0ac22b19845b85f3796c9e090f2a094ddfe0f8a4",
+      "parentUuid": "452ff370_4763ee38",
       "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -641,6 +677,24 @@
     },
     {
       "key": {
+        "uuid": "a2318518_22ee2eae",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2022,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-30T12:34:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "452ff370_e74a22ac",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_f751ed00",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -854,6 +908,24 @@
     },
     {
       "key": {
+        "uuid": "a2318518_62e8369f",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-30T12:34:43Z",
+      "side": 1,
+      "message": "Doing a BFS may be a lot harder with our code generator...I have to think about this for a bit.",
+      "parentUuid": "c22d9995_2efe67c7",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "452373ec_ed538134",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 3
@@ -1045,6 +1117,30 @@
     },
     {
       "key": {
+        "uuid": "a2318518_c2dca20a",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-30T12:34:43Z",
+      "side": 1,
+      "message": "As mentioned above, would require doing a BFS. If that\u0027s not feasible, I\u0027d have to keep a minimum offset per PTR object. Not very nice but I think it would be enough. Do you agree?",
+      "parentUuid": "c22d9995_3ffe8fc7",
+      "range": {
+        "startLine": 125,
+        "startChar": 44,
+        "endLine": 125,
+        "endChar": 51
+      },
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_97ab4928",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 3
@@ -1200,6 +1296,24 @@
       "side": 1,
       "message": "You current design is optimal in the situation I described. A single file fixup object is better if you don\u0027t pass large fd arrays though.",
       "parentUuid": "a2126545_9a648db1",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a2318518_82e3bac4",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-30T12:34:43Z",
+      "side": 1,
+      "message": "Apparently some HALs (like hwcomposer) use native_handle_t, and so arrays have to be supported for those cases. I clarified this in the comment, though I\u0027m not sure it\u0027s ok to refer to Android userspace types here.",
+      "parentUuid": "c22d9995_bf671fb5",
       "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
