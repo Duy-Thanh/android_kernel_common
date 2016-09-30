@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "a2318518_c212e2bc",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-30T15:31:26Z",
+      "side": 1,
+      "message": "Ah didn\u0027t know that, will change it!",
+      "parentUuid": "45ba9338_2e57c224",
+      "revId": "e32c63561e5cf932c8b33c7b55a344e195513311",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "45ba9338_f0162cbb",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2016-09-29T20:23:28Z",
       "side": 1,
       "message": "Why do you need a loop here?",
+      "revId": "e32c63561e5cf932c8b33c7b55a344e195513311",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a2318518_82f9fa67",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3150,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-09-30T15:31:26Z",
+      "side": 1,
+      "message": "I tried to keep it generic - someone could add a binder_context in the binder_contexts array without having to modify this code.",
+      "parentUuid": "45ba9338_f0162cbb",
       "revId": "e32c63561e5cf932c8b33c7b55a344e195513311",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
