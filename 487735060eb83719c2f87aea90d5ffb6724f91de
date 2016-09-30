@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c22d9995_8877862c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1539,
+      "author": {
+        "id": 1079129
+      },
+      "writtenOn": "2016-09-30T15:47:49Z",
+      "side": 1,
+      "message": "Nit: You use two different overflow checks (Here and line 1755), the SIZE_MAX /etc and this one. Probably want to keep them consistent.",
+      "revId": "487735060eb83719c2f87aea90d5ffb6724f91de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
