@@ -1141,6 +1141,30 @@
     },
     {
       "key": {
+        "uuid": "c22d9995_864772a5",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-30T22:19:03Z",
+      "side": 1,
+      "message": "Yes a minimum offset per object would work, but where do you store it?",
+      "parentUuid": "a2318518_c2dca20a",
+      "range": {
+        "startLine": 125,
+        "startChar": 44,
+        "endLine": 125,
+        "endChar": 51
+      },
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_97ab4928",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 3
@@ -1314,6 +1338,24 @@
       "side": 1,
       "message": "Apparently some HALs (like hwcomposer) use native_handle_t, and so arrays have to be supported for those cases. I clarified this in the comment, though I\u0027m not sure it\u0027s ok to refer to Android userspace types here.",
       "parentUuid": "c22d9995_bf671fb5",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c22d9995_a68dcee6",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-30T22:19:03Z",
+      "side": 1,
+      "message": "Having a fixup object per fd works with both arrays of fds and scattered fds. The only reason to have array fixup objects it to save space when passing many fds. If native_handle_t is used with one or two fds, then you don\u0027t gain much by supporting multiple fds in a single fixup object.",
+      "parentUuid": "a2318518_82e3bac4",
       "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
