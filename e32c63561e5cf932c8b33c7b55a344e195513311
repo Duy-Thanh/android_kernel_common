@@ -86,6 +86,24 @@
       "revId": "e32c63561e5cf932c8b33c7b55a344e195513311",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c22d9995_430cdcf5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3150,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-09-30T21:58:48Z",
+      "side": 1,
+      "message": "That is not what I mean. You should be able to pass the information you need in without having to scan for a matching entry.",
+      "parentUuid": "a2318518_82f9fa67",
+      "revId": "e32c63561e5cf932c8b33c7b55a344e195513311",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
