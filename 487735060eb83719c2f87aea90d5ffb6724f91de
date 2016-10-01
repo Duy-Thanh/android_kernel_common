@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "c22d9995_ecc3b59b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-01T00:08:40Z",
+      "side": 1,
+      "message": "Remove out of date description",
+      "revId": "487735060eb83719c2f87aea90d5ffb6724f91de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c22d9995_0c416135",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1421,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-01T00:08:40Z",
+      "side": 1,
+      "message": "Adding a blank line after the return seems clearer",
+      "revId": "487735060eb83719c2f87aea90d5ffb6724f91de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c22d9995_8c94319d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1452,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-01T00:08:40Z",
+      "side": 1,
+      "message": "don\u0027t change unrelated code",
+      "revId": "487735060eb83719c2f87aea90d5ffb6724f91de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c22d9995_2ca3fdfc",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1504,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-01T00:08:40Z",
+      "side": 1,
+      "message": "why did this change?",
+      "revId": "487735060eb83719c2f87aea90d5ffb6724f91de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c22d9995_8877862c",
         "filename": "drivers/android/binder.c",
         "patchSetId": 7
@@ -13,6 +81,57 @@
       "writtenOn": "2016-09-30T15:47:49Z",
       "side": 1,
       "message": "Nit: You use two different overflow checks (Here and line 1755), the SIZE_MAX /etc and this one. Probably want to keep them consistent.",
+      "revId": "487735060eb83719c2f87aea90d5ffb6724f91de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c22d9995_b7e976a7",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1541,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-01T00:08:40Z",
+      "side": 1,
+      "message": "This is not a user error. If user-space passed bad data, it should be caught when creating the transaction. An error here is either an internal driver error or kernel memory corruption.",
+      "revId": "487735060eb83719c2f87aea90d5ffb6724f91de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c22d9995_3758e68a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1663,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-01T00:08:40Z",
+      "side": 1,
+      "message": "See refactor patch. Also, I think this check is cheap enough to be repeated for each fd in your array. That way your transfer fd array function can call the existing fd transfer function.",
+      "revId": "487735060eb83719c2f87aea90d5ffb6724f91de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c22d9995_f73a5e1d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1753,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-01T00:08:40Z",
+      "side": 1,
+      "message": "Move this comment next to the code it refers to.",
       "revId": "487735060eb83719c2f87aea90d5ffb6724f91de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
