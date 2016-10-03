@@ -104,6 +104,24 @@
       "revId": "e32c63561e5cf932c8b33c7b55a344e195513311",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a2b6e5e4_5a95f535",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3150,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-03T08:06:13Z",
+      "side": 1,
+      "message": "Oh I see - I thought this was in binder_init(). Will fix in other patchset.",
+      "parentUuid": "c22d9995_430cdcf5",
+      "revId": "e32c63561e5cf932c8b33c7b55a344e195513311",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
