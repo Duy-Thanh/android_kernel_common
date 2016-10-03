@@ -1165,6 +1165,30 @@
     },
     {
       "key": {
+        "uuid": "a2b6e5e4_fad329f4",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-03T19:39:27Z",
+      "side": 1,
+      "message": "I don\u0027t know. It\u0027s not very nice to do extra allocations. I\u0027d  also need to know the # of PTR objects before doing the allocation (though the size of the offsets array is a safe upper bound). I could add a field to binder_buffer_object, but it wouldn\u0027t mean anything to userspace so it\u0027s kind of weird.\n\nDo you have any ideas? We might be able to move our code-gen to BFS, but if so it will take a while, and I\u0027d like to unblock others in the mean time.",
+      "parentUuid": "c22d9995_864772a5",
+      "range": {
+        "startLine": 125,
+        "startChar": 44,
+        "endLine": 125,
+        "endChar": 51
+      },
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_97ab4928",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 3
@@ -1356,6 +1380,24 @@
       "side": 1,
       "message": "Having a fixup object per fd works with both arrays of fds and scattered fds. The only reason to have array fixup objects it to save space when passing many fds. If native_handle_t is used with one or two fds, then you don\u0027t gain much by supporting multiple fds in a single fixup object.",
       "parentUuid": "a2318518_82e3bac4",
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a2b6e5e4_dad665e7",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-03T19:39:27Z",
+      "side": 1,
+      "message": "I will ask around what the typical usage is for some of our HALs, but IIRC more than one is definitely the common case.",
+      "parentUuid": "c22d9995_a68dcee6",
       "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
