@@ -1189,6 +1189,30 @@
     },
     {
       "key": {
+        "uuid": "0275f106_855ac24a",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-04T00:21:05Z",
+      "side": 1,
+      "message": "You may be able to walk back up the parent chain if you DFS in order and only have tree structures (no loops or multiple pointers to the same entry). If you store the last object you processed you only allow fixups within that object, or after its fixup in its parent (or after parent\u0027s fixup in its parent etc.).",
+      "parentUuid": "a2b6e5e4_fad329f4",
+      "range": {
+        "startLine": 125,
+        "startChar": 44,
+        "endLine": 125,
+        "endChar": 51
+      },
+      "revId": "df35540a3034c631d7fd8b8bcd4a58b35d13ddc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f08d07b7_97ab4928",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 3
