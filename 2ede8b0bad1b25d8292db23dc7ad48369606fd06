@@ -1,0 +1,504 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42ec493c_73a6c8a9",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1390,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "this looks like a pointer to the offset, not the offset itself",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_b3c4d03a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1391,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_53ce2427",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "your code uses this as the first invalid offset pointer, not the last valid offset pointer",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_6ec89f9f",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1395,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "%NULL",
+      "range": {
+        "startLine": 1395,
+        "startChar": 40,
+        "endLine": 1395,
+        "endChar": 44
+      },
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_d9bff3aa",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1398,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "the way this is used, it may be better to pass the parent value here, and not the fixed up offset pointer",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_93beeca8",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1406,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "You validate the offset itself. If off_max limits this to only already validated objects, then this is OK, but the way this function is documented this limitation is not clear.",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_99860bc4",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1422,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "I don\u0027t think you need this. Should always be set by your loop unless this is the first fixup in buffer. --- Edit. I see you add the size of the fixup for fd-arrays in the caller. In that case you do need this argument. If you move that fixup to this function you can eliminate that code however (you would need a type check here though so you want to try both and see which way is simpler overall).",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_6eefff0b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "%true if ... (assuming that is the polarity of your check)",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_ae1c672b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1449,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "C is not even a known object at this point. You may want to use an example that would be valid without the offset ordering requirement. e.g.\nA\n  B (parent \u003d A)\n  C (parent \u003d A)\n   D (parent \u003d B)",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_ce40cbf1",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1460,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "/*\n * ... (is the standard multi-line kernel comment style)",
+      "range": {
+        "startLine": 1460,
+        "startChar": 2,
+        "endLine": 1460,
+        "endChar": 4
+      },
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_5913e3c1",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1465,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "you need to add the size of that fixup here",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_0ef8f3a8",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "You could store the number of parents to pop instead of the parent offset",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_2eadf79c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1469,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "return last_obj \u0026\u0026 (fixup_offset \u003e\u003d last_min_offset);",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_545baa50",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1470,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "You always call binder_validate_ptr before binder_validate_fixup. I would try to share some of that code.",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_59dda302",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1709,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "?",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_99344b4c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1791,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "check alignment",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_b9be6f7d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1796,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "use goto",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_39cb7f17",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "return the error code you got in target_fd",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_d4fe9a4f",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2028,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "you could use off_end here",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_79d4e7dd",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2070,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "don\u0027t change unrelated code",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_d91533b2",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2081,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "move to correct patch",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_f4e11e8d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2148,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "this code is not unique to this case. If you add a helper function to fixup the parent you can call that first and have a single exit path.",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_346f06ef",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2459,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "?",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_d4469a7a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 3981,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "add ,",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_140f6245",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "Is this not an index in the offset array?",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_5420cab6",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "index?",
+      "range": {
+        "startLine": 114,
+        "startChar": 52,
+        "endLine": 114,
+        "endChar": 58
+      },
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_74522e34",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "offset",
+      "range": {
+        "startLine": 115,
+        "startChar": 10,
+        "endLine": 115,
+        "endChar": 15
+      },
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_74006e10",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-05T02:21:44Z",
+      "side": 1,
+      "message": "Do you plan to support multiple pointers into the same object (e.g. circular lists, graphs, shared strings). If so, I think you need another fixup object that instead of listing a buffer and an length, has a link to an existing buffer object (in addition to parent).",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
