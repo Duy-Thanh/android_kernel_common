@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df3014eb_efe73dff",
+        "filename": "fs/sdcardfs/inode.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2016-10-05T22:05:51Z",
+      "side": 1,
+      "message": "missing release",
+      "range": {
+        "startLine": 594,
+        "startChar": 2,
+        "endLine": 595,
+        "endChar": 16
+      },
+      "revId": "ec07c347c0dff0a8e30970d92fe11440c60615b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
