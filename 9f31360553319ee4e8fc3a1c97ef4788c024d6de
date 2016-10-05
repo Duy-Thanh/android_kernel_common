@@ -22,6 +22,30 @@
       "revId": "9f31360553319ee4e8fc3a1c97ef4788c024d6de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_19e31bc7",
+        "filename": "arch/arm64/kernel/vmlinux.lds.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2016-10-05T00:41:41Z",
+      "side": 1,
+      "message": "hmm....this still exists in upstream (looking at linux-next...)",
+      "parentUuid": "42ec493c_ce8e0b8a",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 51
+      },
+      "revId": "9f31360553319ee4e8fc3a1c97ef4788c024d6de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
