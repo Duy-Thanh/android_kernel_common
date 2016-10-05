@@ -46,6 +46,30 @@
       "revId": "9f31360553319ee4e8fc3a1c97ef4788c024d6de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42ec493c_2b5a0427",
+        "filename": "arch/arm64/kernel/vmlinux.lds.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1082649
+      },
+      "writtenOn": "2016-10-05T15:04:40Z",
+      "side": 1,
+      "message": "This is just a mistaken backport. Upstream 9fdc14c55cd6579d619ccd9d40982e0805e62b6d moved the _etext. This backport should just not change the existing _etext position.",
+      "parentUuid": "42ec493c_19e31bc7",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 51
+      },
+      "revId": "9f31360553319ee4e8fc3a1c97ef4788c024d6de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
