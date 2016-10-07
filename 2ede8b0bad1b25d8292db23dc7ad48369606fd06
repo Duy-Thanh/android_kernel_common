@@ -206,6 +206,24 @@
     },
     {
       "key": {
+        "uuid": "5f06e49f_cec7573e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1406,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-07T20:42:25Z",
+      "side": 1,
+      "message": "I mean that you don\u0027t validate the offset itself, only the index into the offset array. The documentation is still  unclear about this.",
+      "parentUuid": "7f2d68d5_a9d17d4f",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42ec493c_99860bc4",
         "filename": "drivers/android/binder.c",
         "patchSetId": 10
@@ -358,6 +376,30 @@
     },
     {
       "key": {
+        "uuid": "5f06e49f_2ec15326",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1460,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-07T20:42:25Z",
+      "side": 1,
+      "message": "This is line 1460, which other lines are you referring to?",
+      "parentUuid": "7f2d68d5_c9c831a4",
+      "range": {
+        "startLine": 1460,
+        "startChar": 2,
+        "endLine": 1460,
+        "endChar": 4
+      },
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42ec493c_5913e3c1",
         "filename": "drivers/android/binder.c",
         "patchSetId": 10
@@ -428,6 +470,24 @@
     },
     {
       "key": {
+        "uuid": "5f06e49f_ce007769",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-07T20:42:25Z",
+      "side": 1,
+      "message": "I mean the parent offset index you store, not the offset within the parent object (which you do need either way).",
+      "parentUuid": "7f2d68d5_e966d5b9",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42ec493c_2eadf79c",
         "filename": "drivers/android/binder.c",
         "patchSetId": 10
@@ -492,6 +552,24 @@
       "side": 1,
       "message": "There is one case where we don\u0027t. (binder_transaction_buffer_release() below). And, they do different things, so not really sharing much code?",
       "parentUuid": "42ec493c_545baa50",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f06e49f_2eeef37b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1470,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-07T20:42:25Z",
+      "side": 1,
+      "message": "I don\u0027t see you call binder_validate_fixup at all there. Where do you call binder_validate_fixup without fist calling binder_validate_ptr?",
+      "parentUuid": "7f2d68d5_2970ed68",
       "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
