@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f06e49f_cb74e95e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1407,
+      "author": {
+        "id": 1079129
+      },
+      "writtenOn": "2016-10-07T20:17:12Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure this check invokes undefined behavior. Have you verified that this check still works? GCC has been known to remove these checks: \nhttps://lwn.net/Articles/278137/\n\nI also don\u0027t see -frwapv in the upstream make files so I would verify that the check is still there after compilation, via reading assembly or specifically making a test case to test this.",
+      "revId": "0839c3434c67f3e647d6fec0d86779db396917be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
