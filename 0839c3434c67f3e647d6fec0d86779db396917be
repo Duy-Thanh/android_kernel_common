@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dffad4f1_3c85310c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1407,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-08T21:36:58Z",
+      "side": 1,
+      "message": "Thanks for pointing this out, I thought this would be treated as unsigned interger overflow. I will add some tests for this in userspace. Should be fixed in new PS.",
+      "parentUuid": "5f06e49f_cb74e95e",
+      "revId": "0839c3434c67f3e647d6fec0d86779db396917be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f06e49f_2e65d33d",
         "filename": "drivers/android/binder.c",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2016-10-07T20:42:25Z",
       "side": 1,
       "message": "do you not need to check last_obj?",
+      "revId": "0839c3434c67f3e647d6fec0d86779db396917be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dffad4f1_9c9c4563",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1473,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-08T21:36:58Z",
+      "side": 1,
+      "message": "not in the way it\u0027s currently written - last_obj !\u003d NULL when this function is called, and it can\u0027t get assigned NULL later in this function. Added an additional check to make it safer though.",
+      "parentUuid": "5f06e49f_2e65d33d",
       "revId": "0839c3434c67f3e647d6fec0d86779db396917be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "dffad4f1_1c82f503",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-08T21:36:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f06e49f_eeb1fb96",
+      "revId": "0839c3434c67f3e647d6fec0d86779db396917be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f06e49f_ae66631c",
         "filename": "drivers/android/binder.c",
         "patchSetId": 11
@@ -64,6 +118,24 @@
       "writtenOn": "2016-10-07T20:42:25Z",
       "side": 1,
       "message": "err_translate_fd_failed",
+      "revId": "0839c3434c67f3e647d6fec0d86779db396917be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dffad4f1_7c8fb92b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1808,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-08T21:36:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f06e49f_ae66631c",
       "revId": "0839c3434c67f3e647d6fec0d86779db396917be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
