@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9f7dbc55_ce79c088",
+        "filename": "drivers/staging/goldfish/goldfish_audio.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2016-10-11T23:18:28Z",
+      "side": 1,
+      "message": "emulator virtual device still use generic,goldfish-audio. We either need them to change qemu to match kernel string here (sent an email to ask for it) or we have to modify upstream patch as backport. Hopefully, they can change qemu so we keep upstream patch as is.",
+      "range": {
+        "startLine": 348,
+        "startChar": 18,
+        "endLine": 348,
+        "endChar": 39
+      },
+      "revId": "524c4bc40ea3d19c40e1bea34460383d7dcf7114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
