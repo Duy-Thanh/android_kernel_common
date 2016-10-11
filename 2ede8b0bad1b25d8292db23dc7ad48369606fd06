@@ -584,6 +584,24 @@
     },
     {
       "key": {
+        "uuid": "dffad4f1_1c3955da",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1468,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-11T09:23:38Z",
+      "side": 1,
+      "message": "Ok, I will keep this in mind.",
+      "parentUuid": "ffc878e8_f4d906ea",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42ec493c_2eadf79c",
         "filename": "drivers/android/binder.c",
         "patchSetId": 10
@@ -790,6 +808,24 @@
       "side": 1,
       "message": "If user-space is 32 bit and the kernel is 64 bit sizeof(void *) will not match.",
       "parentUuid": "dffad4f1_dc96cd3e",
+      "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dffad4f1_7c3699e9",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1791,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-11T09:23:38Z",
+      "side": 1,
+      "message": "Right - I aligned to u64 for now, since (hw)binder currently doesn\u0027t support any primitive data types that exceed 8 bytes (eg long double on x86). Do you know of a better way to future proof this?",
+      "parentUuid": "9f7dbc55_28b78fcf",
       "revId": "2ede8b0bad1b25d8292db23dc7ad48369606fd06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
