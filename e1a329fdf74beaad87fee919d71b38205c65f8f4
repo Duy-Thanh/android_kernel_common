@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9f7dbc55_427f47af",
+        "filename": "fs/tracefs/inode.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2016-10-11T20:19:17Z",
+      "side": 1,
+      "message": "list_for_each_entry(dentry, \u0026parent-\u003ed_subdirs, d_u.d_child) {",
+      "range": {
+        "startLine": 462,
+        "startChar": 1,
+        "endLine": 462,
+        "endChar": 58
+      },
+      "revId": "e1a329fdf74beaad87fee919d71b38205c65f8f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
