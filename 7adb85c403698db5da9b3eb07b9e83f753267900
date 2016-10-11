@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9f7dbc55_48821305",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1874,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-11T00:27:12Z",
+      "side": 1,
+      "message": "binder_uintptr_t?\n\nThis will not work in general if the source process is 32 bit and the destination process is 64 bit as the structures you are copying may not use 64 bit pointer types. Are we requiring that all processes using hwbinder are 64bit or use 64 bit structures on a 64 bit system?",
+      "range": {
+        "startLine": 1874,
+        "startChar": 3,
+        "endLine": 1874,
+        "endChar": 12
+      },
+      "revId": "7adb85c403698db5da9b3eb07b9e83f753267900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f7dbc55_c5f1acc6",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2206,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-11T00:27:12Z",
+      "side": 1,
+      "message": "need alignment",
+      "revId": "7adb85c403698db5da9b3eb07b9e83f753267900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f7dbc55_42a9127b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2208,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-11T00:27:12Z",
+      "side": 1,
+      "message": "This may be easier to read if you move this check into binder_fixup_parent",
+      "revId": "7adb85c403698db5da9b3eb07b9e83f753267900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
