@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dffad4f1_3c47f14d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1874,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-11T09:23:38Z",
+      "side": 1,
+      "message": "Yes, on a 64-bit system all structures would be padded to 64-bit if necessary, and hence the pointers should fit. This is also why I used uintptr_t. Though last I heard we may not even support 32-\u003e64.",
+      "parentUuid": "9f7dbc55_48821305",
+      "range": {
+        "startLine": 1874,
+        "startChar": 3,
+        "endLine": 1874,
+        "endChar": 12
+      },
+      "revId": "7adb85c403698db5da9b3eb07b9e83f753267900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f7dbc55_c5f1acc6",
         "filename": "drivers/android/binder.c",
         "patchSetId": 12
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "dffad4f1_dc61add6",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2206,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-11T09:23:38Z",
+      "side": 1,
+      "message": "Done (see other comment for rationale on using u64)",
+      "parentUuid": "9f7dbc55_c5f1acc6",
+      "revId": "7adb85c403698db5da9b3eb07b9e83f753267900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f7dbc55_42a9127b",
         "filename": "drivers/android/binder.c",
         "patchSetId": 12
@@ -53,6 +95,24 @@
       "writtenOn": "2016-10-11T00:27:12Z",
       "side": 1,
       "message": "This may be easier to read if you move this check into binder_fixup_parent",
+      "revId": "7adb85c403698db5da9b3eb07b9e83f753267900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dffad4f1_fc5c6922",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2208,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-11T09:23:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f7dbc55_42a9127b",
       "revId": "7adb85c403698db5da9b3eb07b9e83f753267900",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
