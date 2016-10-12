@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "5ca192a9_b60d309d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1874,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-12T23:49:19Z",
+      "side": 1,
+      "message": "binder_uintptr_t would be more correct in that case. uintptr_t is 32 bit on a 32 bit kernel, but you can still configure binder_uintptr_t to be 64 bits. If you don\u0027t, you can\u0027t run the same 32 bit user-space binary on both a 64 bit and a 32 bit system.",
+      "parentUuid": "dffad4f1_3c47f14d",
+      "range": {
+        "startLine": 1874,
+        "startChar": 3,
+        "endLine": 1874,
+        "endChar": 12
+      },
+      "revId": "7adb85c403698db5da9b3eb07b9e83f753267900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f7dbc55_c5f1acc6",
         "filename": "drivers/android/binder.c",
         "patchSetId": 12
