@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ca192a9_b61e107c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2203,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-12T23:49:19Z",
+      "side": 1,
+      "message": "this alignment check would be redundant if you check that tr.buffers_size/extra_buffers_size is aligned to start with.",
+      "range": {
+        "startLine": 2203,
+        "startChar": 7,
+        "endLine": 2203,
+        "endChar": 12
+      },
+      "revId": "f5dfab7f3ca800f8859fc960443891a75154c93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
