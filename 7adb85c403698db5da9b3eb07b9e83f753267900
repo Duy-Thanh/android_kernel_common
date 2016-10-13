@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "5cb272c6_88045728",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1874,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-13T10:22:05Z",
+      "side": 1,
+      "message": "Good point, changed to binder_uintptr_t",
+      "parentUuid": "5ca192a9_b60d309d",
+      "range": {
+        "startLine": 1874,
+        "startChar": 3,
+        "endLine": 1874,
+        "endChar": 12
+      },
+      "revId": "7adb85c403698db5da9b3eb07b9e83f753267900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f7dbc55_c5f1acc6",
         "filename": "drivers/android/binder.c",
         "patchSetId": 12
