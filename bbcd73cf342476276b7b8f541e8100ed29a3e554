@@ -22,6 +22,30 @@
       "revId": "bbcd73cf342476276b7b8f541e8100ed29a3e554",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bca52e1d_abb729a2",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7084,
+      "author": {
+        "id": 1124443
+      },
+      "writtenOn": "2016-10-14T16:12:43Z",
+      "side": 1,
+      "message": "We could add a new flag `energy_aware_enabled` and check it in `energy_aware()` in fair.c? i.e. `sched_feat(ENERGY_AWARE) \u0026\u0026 energy_aware_enabled`?\n\nWe can also clear the sched_feat but that will have to be in an #ifdef CONFIG_SCHED_DEBUG.",
+      "parentUuid": "3cd3fe97_a7e00a8e",
+      "range": {
+        "startLine": 7084,
+        "startChar": 1,
+        "endLine": 7084,
+        "endChar": 5
+      },
+      "revId": "bbcd73cf342476276b7b8f541e8100ed29a3e554",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
