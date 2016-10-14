@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "9c7dca55_425912fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1124443
+      },
+      "writtenOn": "2016-10-14T16:13:43Z",
+      "side": 1,
+      "message": "Argh just noticed s/present/not present/, will update this with the next version (same for the 4.4 patch).",
+      "revId": "bbcd73cf342476276b7b8f541e8100ed29a3e554",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3cd3fe97_a7e00a8e",
         "filename": "kernel/sched/core.c",
         "patchSetId": 2
