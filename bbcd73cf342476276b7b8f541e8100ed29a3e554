@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3cd3fe97_a7e00a8e",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7084,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2016-10-14T15:59:26Z",
+      "side": 1,
+      "message": "We should probably find a way to force-disable ENERGY_AWARE in these cases, otherwise we do not solve the real issue: we still try using EAS in the wakeup path.",
+      "range": {
+        "startLine": 7084,
+        "startChar": 1,
+        "endLine": 7084,
+        "endChar": 5
+      },
+      "revId": "bbcd73cf342476276b7b8f541e8100ed29a3e554",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
