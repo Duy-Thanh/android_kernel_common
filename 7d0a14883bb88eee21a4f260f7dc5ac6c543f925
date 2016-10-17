@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c6b9b00_55e32cbf",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 1915,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-17T20:16:20Z",
+      "side": 1,
+      "message": "why do you need this? Is it different from (offp-off_start)?",
+      "revId": "7d0a14883bb88eee21a4f260f7dc5ac6c543f925",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
