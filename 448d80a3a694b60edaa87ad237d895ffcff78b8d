@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c6b9b00_de3639a5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 2220,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-17T23:25:14Z",
+      "side": 1,
+      "message": "We need a separate patch to convert this to use the copy_from_user_preempt_disabled hack",
+      "revId": "448d80a3a694b60edaa87ad237d895ffcff78b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
