@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bcc28f6f_9a940d1e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1333,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2016-10-18T08:10:12Z",
+      "side": 1,
+      "message": "coding style (run the patches through checkpatch.pl please.)",
+      "range": {
+        "startLine": 1333,
+        "startChar": 39,
+        "endLine": 1333,
+        "endChar": 40
+      },
+      "revId": "8aff9211e26f684035d4293006271e9107c4a6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcc28f6f_7aaa595d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2016-10-18T08:10:12Z",
+      "side": 1,
+      "message": "can userspace trigger this?  if so, make it pr_dbg() to keep the kernel log quiet, otherwise it\u0027s a simple DoS.",
+      "range": {
+        "startLine": 1349,
+        "startChar": 2,
+        "endLine": 1349,
+        "endChar": 8
+      },
+      "revId": "8aff9211e26f684035d4293006271e9107c4a6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcc28f6f_5aa79591",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1386,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2016-10-18T08:10:12Z",
+      "side": 1,
+      "message": "potential 2 errors printed for a bad buffer?  Don\u0027t have binder_validate_object() print anything, or have it be the only thing that prints an error, don\u0027t mix and match please.",
+      "range": {
+        "startLine": 1386,
+        "startChar": 3,
+        "endLine": 1386,
+        "endChar": 9
+      },
+      "revId": "8aff9211e26f684035d4293006271e9107c4a6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcc28f6f_3aa4e18a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1390,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2016-10-18T08:10:12Z",
+      "side": 1,
+      "message": "This is what binder_validate_object() did, why not have that function return a pointer, or NULL, to keep us from having to do the math over and over?",
+      "range": {
+        "startLine": 1390,
+        "startChar": 2,
+        "endLine": 1390,
+        "endChar": 62
+      },
+      "revId": "8aff9211e26f684035d4293006271e9107c4a6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcc28f6f_1aa11d7b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1415,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2016-10-18T08:10:12Z",
+      "side": 1,
+      "message": "suggestion, make macros for the container_of() calls, to make it more obvious what is happening.  Common convention is to_flat_binder_object() for something like this.",
+      "range": {
+        "startLine": 1415,
+        "startChar": 8,
+        "endLine": 1415,
+        "endChar": 20
+      },
+      "revId": "8aff9211e26f684035d4293006271e9107c4a6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcc28f6f_9acbed3c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1660,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2016-10-18T08:10:12Z",
+      "side": 1,
+      "message": "can this ever be true now?",
+      "range": {
+        "startLine": 1660,
+        "startChar": 26,
+        "endLine": 1660,
+        "endChar": 41
+      },
+      "revId": "8aff9211e26f684035d4293006271e9107c4a6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
