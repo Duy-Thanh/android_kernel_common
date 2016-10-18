@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bcc28f6f_1ad91dda",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-18T14:49:56Z",
+      "side": 1,
+      "message": "Ok, split that one out.",
+      "parentUuid": "bcc28f6f_3a2981fd",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 25
+      },
+      "revId": "448d80a3a694b60edaa87ad237d895ffcff78b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c6b9b00_092999fc",
         "filename": "drivers/android/binder.c",
         "patchSetId": 21
@@ -36,6 +60,30 @@
       "writtenOn": "2016-10-18T00:02:20Z",
       "side": 1,
       "message": "u8 or change type of parent_buffer to uintptr_t and avoid cast",
+      "range": {
+        "startLine": 1602,
+        "startChar": 20,
+        "endLine": 1602,
+        "endChar": 27
+      },
+      "revId": "448d80a3a694b60edaa87ad237d895ffcff78b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcc28f6f_fabc29a6",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 1602,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-18T14:49:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c6b9b00_092999fc",
       "range": {
         "startLine": 1602,
         "startChar": 20,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "bcc28f6f_dac1651e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 1821,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-18T14:49:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c6b9b00_c91e81d5",
+      "range": {
+        "startLine": 1821,
+        "startChar": 18,
+        "endLine": 1821,
+        "endChar": 25
+      },
+      "revId": "448d80a3a694b60edaa87ad237d895ffcff78b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c6b9b00_c9eb2136",
         "filename": "drivers/android/binder.c",
         "patchSetId": 21
@@ -82,6 +154,24 @@
       "writtenOn": "2016-10-18T00:02:20Z",
       "side": 1,
       "message": "what if parent-\u003elength is less than sizeof(binder_uintptr_t)",
+      "revId": "448d80a3a694b60edaa87ad237d895ffcff78b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcc28f6f_fa7429f5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 1882,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-18T14:49:56Z",
+      "side": 1,
+      "message": "Bad things happen. Fixed.",
+      "parentUuid": "1c6b9b00_c9eb2136",
       "revId": "448d80a3a694b60edaa87ad237d895ffcff78b8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "bcc28f6f_bac6b132",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 1888,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-18T14:49:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c6b9b00_a9dea5c2",
+      "range": {
+        "startLine": 1888,
+        "startChar": 18,
+        "endLine": 1888,
+        "endChar": 25
+      },
+      "revId": "448d80a3a694b60edaa87ad237d895ffcff78b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c6b9b00_de3639a5",
         "filename": "drivers/android/binder.c",
         "patchSetId": 21
@@ -122,6 +236,24 @@
       "writtenOn": "2016-10-17T23:25:14Z",
       "side": 1,
       "message": "We need a separate patch to convert this to use the copy_from_user_preempt_disabled hack",
+      "revId": "448d80a3a694b60edaa87ad237d895ffcff78b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcc28f6f_9a83ed9b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 2220,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-18T14:49:56Z",
+      "side": 1,
+      "message": "Yes, I will follow up on this.",
+      "parentUuid": "1c6b9b00_de3639a5",
       "revId": "448d80a3a694b60edaa87ad237d895ffcff78b8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
