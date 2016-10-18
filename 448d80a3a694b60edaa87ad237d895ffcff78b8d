@@ -2,6 +2,92 @@
   "comments": [
     {
       "key": {
+        "uuid": "1c6b9b00_092999fc",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 1602,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-18T00:02:20Z",
+      "side": 1,
+      "message": "u8 or change type of parent_buffer to uintptr_t and avoid cast",
+      "range": {
+        "startLine": 1602,
+        "startChar": 20,
+        "endLine": 1602,
+        "endChar": 27
+      },
+      "revId": "448d80a3a694b60edaa87ad237d895ffcff78b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c6b9b00_c91e81d5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 1821,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-18T00:02:20Z",
+      "side": 1,
+      "message": "...",
+      "range": {
+        "startLine": 1821,
+        "startChar": 18,
+        "endLine": 1821,
+        "endChar": 25
+      },
+      "revId": "448d80a3a694b60edaa87ad237d895ffcff78b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c6b9b00_c9eb2136",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 1882,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-18T00:02:20Z",
+      "side": 1,
+      "message": "what if parent-\u003elength is less than sizeof(binder_uintptr_t)",
+      "revId": "448d80a3a694b60edaa87ad237d895ffcff78b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c6b9b00_a9dea5c2",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 1888,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-18T00:02:20Z",
+      "side": 1,
+      "message": "u8 or change type of parent_buffer to uintptr_t and avoid this cast",
+      "range": {
+        "startLine": 1888,
+        "startChar": 18,
+        "endLine": 1888,
+        "endChar": 25
+      },
+      "revId": "448d80a3a694b60edaa87ad237d895ffcff78b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c6b9b00_de3639a5",
         "filename": "drivers/android/binder.c",
         "patchSetId": 21
