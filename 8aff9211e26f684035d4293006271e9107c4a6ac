@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bcc28f6f_fae309c1",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1333,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-18T14:38:42Z",
+      "side": 1,
+      "message": "I did run checkpatch (with --strict), interestingly it didn\u0027t catch this one. Fixed.",
+      "parentUuid": "bcc28f6f_9a940d1e",
+      "range": {
+        "startLine": 1333,
+        "startChar": 39,
+        "endLine": 1333,
+        "endChar": 40
+      },
+      "revId": "8aff9211e26f684035d4293006271e9107c4a6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bcc28f6f_7aaa595d",
         "filename": "drivers/android/binder.c",
         "patchSetId": 12
@@ -36,6 +60,30 @@
       "writtenOn": "2016-10-18T08:10:12Z",
       "side": 1,
       "message": "can userspace trigger this?  if so, make it pr_dbg() to keep the kernel log quiet, otherwise it\u0027s a simple DoS.",
+      "range": {
+        "startLine": 1349,
+        "startChar": 2,
+        "endLine": 1349,
+        "endChar": 8
+      },
+      "revId": "8aff9211e26f684035d4293006271e9107c4a6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcc28f6f_dae845a0",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-18T14:38:42Z",
+      "side": 1,
+      "message": "good catch; I removed this one, since we already had error printing at the caller.",
+      "parentUuid": "bcc28f6f_7aaa595d",
       "range": {
         "startLine": 1349,
         "startChar": 2,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "bcc28f6f_badd91fc",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1386,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-18T14:38:42Z",
+      "side": 1,
+      "message": "Removed the pr_err in binder_validate_object",
+      "parentUuid": "bcc28f6f_5aa79591",
+      "range": {
+        "startLine": 1386,
+        "startChar": 3,
+        "endLine": 1386,
+        "endChar": 9
+      },
+      "revId": "8aff9211e26f684035d4293006271e9107c4a6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bcc28f6f_3aa4e18a",
         "filename": "drivers/android/binder.c",
         "patchSetId": 12
@@ -82,6 +154,30 @@
       "writtenOn": "2016-10-18T08:10:12Z",
       "side": 1,
       "message": "This is what binder_validate_object() did, why not have that function return a pointer, or NULL, to keep us from having to do the math over and over?",
+      "range": {
+        "startLine": 1390,
+        "startChar": 2,
+        "endLine": 1390,
+        "endChar": 62
+      },
+      "revId": "8aff9211e26f684035d4293006271e9107c4a6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcc28f6f_3ad2a1e7",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1390,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-18T14:38:42Z",
+      "side": 1,
+      "message": "binder_validate_object() returns the size of the object - that is not used here in release(), but it is used in the binder_transaction() code below. I could introduce a separate function to get the size of an object - but then we are again doing some double work.",
+      "parentUuid": "bcc28f6f_3aa4e18a",
       "range": {
         "startLine": 1390,
         "startChar": 2,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "bcc28f6f_7a1ff9d1",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1415,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-18T14:38:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcc28f6f_1aa11d7b",
+      "range": {
+        "startLine": 1415,
+        "startChar": 8,
+        "endLine": 1415,
+        "endChar": 20
+      },
+      "revId": "8aff9211e26f684035d4293006271e9107c4a6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bcc28f6f_9acbed3c",
         "filename": "drivers/android/binder.c",
         "patchSetId": 12
@@ -128,6 +248,30 @@
       "writtenOn": "2016-10-18T08:10:12Z",
       "side": 1,
       "message": "can this ever be true now?",
+      "range": {
+        "startLine": 1660,
+        "startChar": 26,
+        "endLine": 1660,
+        "endChar": 41
+      },
+      "revId": "8aff9211e26f684035d4293006271e9107c4a6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcc28f6f_5a1c35db",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1660,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-18T14:38:42Z",
+      "side": 1,
+      "message": "yes - the offset array is controlled by userspace, they could craft an offset array like this: [0, 128, 40]. This check prevents us from fixing up an object that we had fixed up earlier already.",
+      "parentUuid": "bcc28f6f_9acbed3c",
       "range": {
         "startLine": 1660,
         "startChar": 26,
