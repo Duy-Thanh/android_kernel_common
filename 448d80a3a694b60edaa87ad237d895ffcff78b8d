@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "bcc28f6f_3a2981fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2016-10-18T08:46:51Z",
+      "side": 1,
+      "message": "Whenever you have to list a number of different things you are doing in a single patch, that\u0027s a huge flag that it might be better to split this up.\n\nFor this patch, please split out this new array object and handle that first, before doing the major work that this patch does.  That will make it easier to review and verify that all is working properly, right now you are adding two different types to the system at the same time.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 25
+      },
+      "revId": "448d80a3a694b60edaa87ad237d895ffcff78b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c6b9b00_092999fc",
         "filename": "drivers/android/binder.c",
         "patchSetId": 21
