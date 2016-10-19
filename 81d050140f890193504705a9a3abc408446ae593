@@ -34,6 +34,24 @@
       "revId": "81d050140f890193504705a9a3abc408446ae593",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c6b9b00_7ba1dc2f",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 1993,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2016-10-19T21:37:25Z",
+      "side": 1,
+      "message": "OK, I would keep the exiting code then and remove the change to use off_start below so you don\u0027t create merge conflict when applying these changes to a branch that don\u0027t use copy_from_user_preempt_disabled",
+      "parentUuid": "9c15cbc1_09a1e97a",
+      "revId": "81d050140f890193504705a9a3abc408446ae593",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
