@@ -16,6 +16,24 @@
       "revId": "81d050140f890193504705a9a3abc408446ae593",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c15cbc1_09a1e97a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 1993,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-19T08:13:27Z",
+      "side": 1,
+      "message": "The problem is the err_bad_offset / err_copy_data_failed labels right below; they will potentially use offp uninitialized. It could make them separate labels, but this seemed cleaner.",
+      "parentUuid": "1c6b9b00_6df81011",
+      "revId": "81d050140f890193504705a9a3abc408446ae593",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
