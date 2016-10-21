@@ -45,6 +45,30 @@
       "revId": "c7eca77ca20d95840657da1c5b847b3754eb19f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cce57f1_51546668",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1082545
+      },
+      "writtenOn": "2016-10-21T01:19:17Z",
+      "side": 1,
+      "message": "so you also saw the BUG_ON for preemption enabling issue? \n\nafter tried your patch tomorrow, we also saw a BUG_ON for smp_processor_id() due to preemption is NOT disabled. we thought it was our issue, and plan to work today to investigate it.",
+      "parentUuid": "7cce57f1_518aa6fd",
+      "range": {
+        "startLine": 404,
+        "startChar": 0,
+        "endLine": 404,
+        "endChar": 53
+      },
+      "revId": "c7eca77ca20d95840657da1c5b847b3754eb19f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
