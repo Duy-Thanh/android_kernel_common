@@ -69,6 +69,30 @@
       "revId": "c7eca77ca20d95840657da1c5b847b3754eb19f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cce57f1_718a4aa7",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1045553
+      },
+      "writtenOn": "2016-10-21T01:28:57Z",
+      "side": 1,
+      "message": "yes, I have a fix, but I cannot upload it how, for some reason. I will try again later. Also, see another comment, that function need to be fixed too. Ax, OK, upload just went through.",
+      "parentUuid": "7cce57f1_51546668",
+      "range": {
+        "startLine": 404,
+        "startChar": 0,
+        "endLine": 404,
+        "endChar": 53
+      },
+      "revId": "c7eca77ca20d95840657da1c5b847b3754eb19f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
