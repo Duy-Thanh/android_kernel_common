@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7cce57f1_3183b2ec",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1045553
+      },
+      "writtenOn": "2016-10-21T01:10:23Z",
+      "side": 1,
+      "message": "This is wrong as it breaks if there is not next item.",
+      "range": {
+        "startLine": 390,
+        "startChar": 0,
+        "endLine": 391,
+        "endChar": 12
+      },
+      "revId": "c7eca77ca20d95840657da1c5b847b3754eb19f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cce57f1_518aa6fd",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1045553
+      },
+      "writtenOn": "2016-10-21T01:10:23Z",
+      "side": 1,
+      "message": "Triggers BUG_ON as preemption is not disabled.",
+      "range": {
+        "startLine": 404,
+        "startChar": 0,
+        "endLine": 404,
+        "endChar": 53
+      },
+      "revId": "c7eca77ca20d95840657da1c5b847b3754eb19f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
