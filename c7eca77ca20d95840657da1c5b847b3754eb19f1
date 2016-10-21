@@ -93,6 +93,30 @@
       "revId": "c7eca77ca20d95840657da1c5b847b3754eb19f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cce57f1_1ca7a592",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1082545
+      },
+      "writtenOn": "2016-10-21T02:06:32Z",
+      "side": 1,
+      "message": "perfect, then we\u0027re going to use your new patch instead to verify it.",
+      "parentUuid": "7cce57f1_718a4aa7",
+      "range": {
+        "startLine": 404,
+        "startChar": 0,
+        "endLine": 404,
+        "endChar": 53
+      },
+      "revId": "c7eca77ca20d95840657da1c5b847b3754eb19f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
