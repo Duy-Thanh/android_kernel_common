@@ -1133,7 +1133,11 @@ static ssize_t governor_store(struct device *dev, struct device_attribute *attr,
 	struct devfreq *df = to_devfreq(dev);
 	int ret;
 	char str_governor[DEVFREQ_NAME_LEN + 1];
+<<<<<<< HEAD   (c22962 Revert "[WIP -- DO NOT SUBMIT] ANDROID: add support for vend)
 	const struct devfreq_governor *governor, *prev_governor;
+=======
+	const struct devfreq_governor *governor, *prev_gov;
+>>>>>>> CHANGE (a2038b FROMLIST: PM / devfreq: Restart previous governor if new gov)
 
 	ret = sscanf(buf, "%" __stringify(DEVFREQ_NAME_LEN) "s", str_governor);
 	if (ret != 1)
@@ -1162,13 +1166,18 @@ static ssize_t governor_store(struct device *dev, struct device_attribute *attr,
 			goto out;
 		}
 	}
+<<<<<<< HEAD   (c22962 Revert "[WIP -- DO NOT SUBMIT] ANDROID: add support for vend)
 	prev_governor = df->governor;
+=======
+	prev_gov = df->governor;
+>>>>>>> CHANGE (a2038b FROMLIST: PM / devfreq: Restart previous governor if new gov)
 	df->governor = governor;
 	strncpy(df->governor_name, governor->name, DEVFREQ_NAME_LEN);
 	ret = df->governor->event_handler(df, DEVFREQ_GOV_START, NULL);
 	if (ret) {
 		dev_warn(dev, "%s: Governor %s not started(%d)\n",
 			 __func__, df->governor->name, ret);
+<<<<<<< HEAD   (c22962 Revert "[WIP -- DO NOT SUBMIT] ANDROID: add support for vend)
 		df->governor = prev_governor;
 		strncpy(df->governor_name, prev_governor->name,
 			DEVFREQ_NAME_LEN);
@@ -1180,6 +1189,19 @@ static ssize_t governor_store(struct device *dev, struct device_attribute *attr,
 			df->governor = NULL;
 		}
 	}
+=======
+		if (prev_gov) {
+			df->governor = prev_gov;
+			strlcpy(df->governor_name, prev_gov->name,
+				DEVFREQ_NAME_LEN);
+			df->governor->event_handler(df, DEVFREQ_GOV_START,
+						    NULL);
+		}
+	}
+
+gov_stop_out:
+	mutex_unlock(&df->event_lock);
+>>>>>>> CHANGE (a2038b FROMLIST: PM / devfreq: Restart previous governor if new gov)
 out:
 	mutex_unlock(&devfreq_list_lock);
 
