@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "011ed449_67fe2c47",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1993,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-28T22:15:09Z",
+      "side": 1,
+      "message": "I think the only place is line 2022, right?; I like using off_start better there because it is more indicative of what it is, and I didn\u0027t think we\u0027d be having merge conflicts around that line. I don\u0027t mind that much, if you prefer offp there I\u0027ll change it.",
+      "parentUuid": "663c06f3_a8033f2a",
+      "revId": "c521bce3d73392e0bc948c8ac053aacaa45f887d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "663c06f3_687e5792",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 23
@@ -30,6 +48,24 @@
       "writtenOn": "2016-10-28T22:07:33Z",
       "side": 1,
       "message": "You should probably add a blank line here to make ot more clear that the comment below BC_TRANSACTION_SG and BC_REPLY_SG applies to them, and not the comment above them.",
+      "revId": "c521bce3d73392e0bc948c8ac053aacaa45f887d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "011ed449_a75ca497",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2016-10-28T22:15:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "663c06f3_687e5792",
       "revId": "c521bce3d73392e0bc948c8ac053aacaa45f887d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
