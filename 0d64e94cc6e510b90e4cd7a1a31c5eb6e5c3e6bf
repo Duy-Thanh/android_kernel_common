@@ -16,6 +16,24 @@
       "revId": "0d64e94cc6e510b90e4cd7a1a31c5eb6e5c3e6bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab888773_5a69c4d3",
+        "filename": "fs/sdcardfs/lookup.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2016-11-10T02:59:59Z",
+      "side": 1,
+      "message": "The lock was originally there to ensure that the permissions stored in the lower inode were consistent with the inode information, although we now directly use the inode information in the permission call. The other use of that lock was around where it would copy and then modify the inode permissions, but that one was removed when it was changed to modify and copy at the same time. In the current version, there is fixup_tmp_permissions instead, which fills in values to ensure no one stops us before the sdcardfs_permission call. I don\u0027t believe there is any remaining reason to have the lock here. I\u0027ll think it over. If there is, it would need to be a spinlock to protect accesses to the inode info.",
+      "parentUuid": "0bb35316_c21186c6",
+      "revId": "0d64e94cc6e510b90e4cd7a1a31c5eb6e5c3e6bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
