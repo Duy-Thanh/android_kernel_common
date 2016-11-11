@@ -34,6 +34,24 @@
       "revId": "0d64e94cc6e510b90e4cd7a1a31c5eb6e5c3e6bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b97d3c5_cbff01f4",
+        "filename": "fs/sdcardfs/lookup.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2016-11-11T02:48:17Z",
+      "side": 1,
+      "message": "Thanks for explanations. looks there\u0027s a lock in vfs above that ensures single entry in lookup function so that we won\u0027t have multiple threads modifying inode info at the same time.",
+      "parentUuid": "ab888773_5a69c4d3",
+      "revId": "0d64e94cc6e510b90e4cd7a1a31c5eb6e5c3e6bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
