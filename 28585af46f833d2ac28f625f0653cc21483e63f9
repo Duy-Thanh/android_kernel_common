@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10ad446a_dd4c468e",
+        "filename": "fs/sdcardfs/super.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1037321
+      },
+      "writtenOn": "2016-11-15T18:44:16Z",
+      "side": 1,
+      "message": "add other options as well",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 33
+      },
+      "revId": "28585af46f833d2ac28f625f0653cc21483e63f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
