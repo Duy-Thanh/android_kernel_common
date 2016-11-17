@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50b17cf0_1d71b3ff",
+        "filename": "drivers/power/goldfish_battery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-11-17T19:15:29Z",
+      "side": 1,
+      "message": "Or here \"goldfish_battery\"",
+      "range": {
+        "startLine": 240,
+        "startChar": 19,
+        "endLine": 240,
+        "endChar": 20
+      },
+      "revId": "ac4d96f09a06c127d9d7509efbe6403a6b19d208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
