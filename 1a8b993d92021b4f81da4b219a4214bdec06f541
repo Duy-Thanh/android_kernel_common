@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50b17cf0_5d67ab60",
+        "filename": "drivers/staging/goldfish/goldfish_audio.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-11-17T19:12:06Z",
+      "side": 1,
+      "message": "Should be \"goldfish-audio\", if we want to keep same style as battery.",
+      "range": {
+        "startLine": 357,
+        "startChar": 11,
+        "endLine": 357,
+        "endChar": 25
+      },
+      "revId": "1a8b993d92021b4f81da4b219a4214bdec06f541",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
