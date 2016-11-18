@@ -22,6 +22,30 @@
       "revId": "a3f2fa7817b0b85efb3105622c3e43481d5184c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50b17cf0_e052932a",
+        "filename": "build.config.goldfish.arm64",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2016-11-18T01:00:28Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s from arm. I think we can rename it to ranchu64_defconfig.",
+      "parentUuid": "50b17cf0_40ca5f08",
+      "range": {
+        "startLine": 4,
+        "startChar": 10,
+        "endLine": 4,
+        "endChar": 26
+      },
+      "revId": "a3f2fa7817b0b85efb3105622c3e43481d5184c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
