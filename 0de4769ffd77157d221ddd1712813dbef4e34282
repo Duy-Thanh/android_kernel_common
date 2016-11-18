@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50b17cf0_e0a9b35a",
+        "filename": "build.config.goldfish.arm",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-11-18T00:24:22Z",
+      "side": 1,
+      "message": "It doesn\u0027t exist anymore on master AOSP",
+      "range": {
+        "startLine": 7,
+        "startChar": 66,
+        "endLine": 7,
+        "endChar": 69
+      },
+      "revId": "0de4769ffd77157d221ddd1712813dbef4e34282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
