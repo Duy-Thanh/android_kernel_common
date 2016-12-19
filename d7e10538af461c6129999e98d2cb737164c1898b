@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57909609_5f684b63",
+        "filename": "net/ipv4/syncookies.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2016-12-19T16:08:27Z",
+      "side": 1,
+      "message": "As per comment on 3.18 version, removing the null check is correct.",
+      "range": {
+        "startLine": 377,
+        "startChar": 6,
+        "endLine": 377,
+        "endChar": 27
+      },
+      "revId": "d7e10538af461c6129999e98d2cb737164c1898b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
