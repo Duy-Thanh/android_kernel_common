@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a772381_372b62b0",
+        "filename": "include/uapi/linux/rtnetlink.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1121773
+      },
+      "writtenOn": "2016-12-19T16:58:29Z",
+      "side": 0,
+      "message": "Do you need to take special care removing this? Upstream does indeed have RTA_VIA following RTA_MFC_STATS.\n\nUserspace applications using RTA_VIA+ built before this change may fail in subtle ways. If userspace and kernel are always built together using the most current UAPI headers then we should not see any problems.",
+      "range": {
+        "startLine": 309,
+        "startChar": 8,
+        "endLine": 309,
+        "endChar": 9
+      },
+      "revId": "61f26de8c058833bb29aa4641717fc5b873724b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
