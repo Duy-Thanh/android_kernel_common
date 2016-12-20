@@ -22,6 +22,30 @@
       "revId": "61f26de8c058833bb29aa4641717fc5b873724b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "57909609_1f2723e5",
+        "filename": "include/uapi/linux/rtnetlink.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2016-12-20T03:03:27Z",
+      "side": 0,
+      "message": "I think the unfortunate state of affairs is that this is currently broken because our userspace headers (bionic/libc/kernel/uapi/linux/rtnetlink.h) also have RTA_VIA immediately following RTA_MFC_STATS. So this change is making things more correct.\n\nFortunately breakage should be minimal because very few devices use 4.4 at this point, so it\u0027s unlikely that application developers would be using these enum values (assuming apps can open rtnetlink sockets, which I\u0027m not sure they can due to selinux policies).",
+      "parentUuid": "1a772381_372b62b0",
+      "range": {
+        "startLine": 309,
+        "startChar": 8,
+        "endLine": 309,
+        "endChar": 9
+      },
+      "revId": "61f26de8c058833bb29aa4641717fc5b873724b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
