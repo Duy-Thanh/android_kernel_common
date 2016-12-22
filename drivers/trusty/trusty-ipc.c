@@ -29,6 +29,7 @@
 #include <linux/virtio_ids.h>
 #include <linux/virtio_config.h>
 
+#include <linux/trusty/trusty.h>
 #include <linux/trusty/trusty_ipc.h>
 
 #define MAX_DEVICES			4
@@ -48,12 +49,37 @@
 #define TIPC_MIN_LOCAL_ADDR		1024
 #define TIPC_MAX_LOCAL_ADDR		0x7FFFFFFF
 
+#define MAX_MEMREF_NUM			8
+#define MEMREF_ALIGN			8
+#define TIPC_MIN_MEMREF_ID		2048
+#define TIPC_MAX_MEMREF_ID		10000
 
 #define TIPC_IOC_MAGIC			'r'
 #define TIPC_IOC_CONNECT		_IOW(TIPC_IOC_MAGIC, 0x80, char *)
+
+#define TIPC_MEMREF_PERM_RO		(0x0U << 0)
+#define TIPC_MEMREF_PERM_RW		(0x1U << 0)
+
+struct tipc_shmem {
+	__u32 flags;
+	__u32 size[3];
+	__u64 base[3];
+};
+
+struct tipc_send_msg_req {
+	__u64 msgiov;
+	__u64 shmemv;
+	__u32 msgiov_cnt;
+	__u32 shmemv_cnt;
+};
+
+#define TIPC_IOC_SEND_MSG		_IOW(TIPC_IOC_MAGIC, 0x81, \
+					     struct tipc_send_msg_req)
+
 #if defined(CONFIG_COMPAT)
 #define TIPC_IOC_CONNECT_COMPAT		_IOW(TIPC_IOC_MAGIC, 0x80, \
 					     compat_uptr_t)
+
 #endif
 
 struct tipc_virtio_dev;
@@ -73,12 +99,21 @@ struct tipc_msg_hdr {
 	u8 data[0];
 } __packed;
 
+struct tipc_msg_mref_hdr {
+	u32 id;
+	u32 flags;
+	u32 size;
+	u32 pg_inf_cnt;
+	struct ns_mem_page_info pg_inf[];
+} __packed;
+
 enum tipc_ctrl_msg_types {
 	TIPC_CTRL_MSGTYPE_GO_ONLINE = 1,
 	TIPC_CTRL_MSGTYPE_GO_OFFLINE,
 	TIPC_CTRL_MSGTYPE_CONN_REQ,
 	TIPC_CTRL_MSGTYPE_CONN_RSP,
 	TIPC_CTRL_MSGTYPE_DISC_REQ,
+	TIPC_CTRL_MSGTYPE_MREF_RELEASE_REQ,
 };
 
 struct tipc_ctrl_msg {
@@ -101,6 +136,10 @@ struct tipc_conn_rsp_body {
 
 struct tipc_disc_req_body {
 	u32 target;
+} __packed;
+
+struct tipc_mref_release_req_body {
+	u32 id;
 } __packed;
 
 struct tipc_cdev_node {
@@ -129,6 +168,8 @@ struct tipc_virtio_dev {
 	struct list_head stashed_buf_list;
 	wait_queue_head_t sendq;
 	struct idr addr_idr;
+	struct idr mref_idr;
+	struct mutex mref_lock; /* protects access to mref_idr */
 	enum tipc_device_state state;
 	struct tipc_cdev_node cdev_node;
 	char   cdev_name[MAX_DEV_NAME_LEN];
@@ -148,11 +189,21 @@ struct tipc_chan {
 	struct tipc_virtio_dev *vds;
 	const struct tipc_chan_ops *ops;
 	void *ops_arg;
+	struct list_head mref_list;
+	wait_queue_head_t mrefq;
 	u32 remote;
 	u32 local;
 	u32 max_msg_size;
 	u32 max_msg_cnt;
 	char srv_name[MAX_SRV_NAME_LEN];
+};
+
+struct tipc_memref {
+	struct tipc_chan *chan;
+	struct list_head node;
+	unsigned int pg_num;
+	unsigned int pg_pinned;
+	struct page *pages[];
 };
 
 static struct class *tipc_class;
@@ -162,6 +213,10 @@ struct virtio_device *default_vdev;
 
 static DEFINE_IDR(tipc_devices);
 static DEFINE_MUTEX(tipc_devices_lock);
+
+static int  _tipc_send_msg(struct tipc_chan *chan, struct iov_iter *msg_iter,
+			   struct tipc_shmem *shmv, uint shmv_cnt, bool user,
+			   long timeout, bool intr);
 
 static int _match_any(int id, void *p, void *data)
 {
@@ -228,6 +283,23 @@ static inline void mb_reset(struct tipc_msg_buf *mb)
 {
 	mb->wpos = 0;
 	mb->rpos = 0;
+}
+
+static inline void mb_reset_read(struct tipc_msg_buf *mb)
+{
+	mb->rpos = 0;
+}
+
+static inline void mb_align_read(struct tipc_msg_buf *mb, uint align)
+{
+	(void)mb_get_data(mb, ALIGN(mb->rpos, align) - mb->rpos);
+}
+
+static inline void mb_align_write(struct tipc_msg_buf *mb, uint align)
+{
+	size_t cb  = ALIGN(mb->wpos, align) - mb->wpos;
+
+	memset(mb_put_data(mb, cb), 0, cb);
 }
 
 static void _free_vds(struct kref *kref)
@@ -506,6 +578,8 @@ static struct tipc_chan *vds_create_channel(struct tipc_virtio_dev *vds,
 	mutex_init(&chan->lock);
 	kref_init(&chan->refcount);
 	chan->state = TIPC_DISCONNECTED;
+	INIT_LIST_HEAD(&chan->mref_list);
+	init_waitqueue_head(&chan->mrefq);
 
 	ret = vds_add_channel(vds, chan);
 	if (ret) {
@@ -527,6 +601,317 @@ static void fill_msg_hdr(struct tipc_msg_buf *mb, u32 src, u32 dst)
 	hdr->flags = 0;
 	hdr->reserved = 0;
 }
+
+/*****************************************************************************/
+
+#if defined(CONFIG_TRUSTY_MEMREFS)
+
+static int memref_preflight_check(struct tipc_shmem *shm)
+{
+	unsigned int i;
+
+	if (!shm)
+		return -EINVAL;
+
+	for (i = 0; i < 3; i++) {
+		/* size has to be page aligned */
+		if (shm->size[i] & (PAGE_SIZE - 1))
+			return -EINVAL;
+
+		/* base address also has not be page aligned */
+		if ((uintptr_t)shm->base[i] & (PAGE_SIZE - 1))
+			return -EINVAL;
+	}
+	return 0;
+}
+
+static unsigned int memref_count_pages(struct tipc_shmem *shm)
+{
+	unsigned int i;
+	unsigned int pg_cnt = 0;
+
+	for (i = 0; i < 3; i++)
+		pg_cnt += shm->size[i] / PAGE_SIZE;
+	return pg_cnt;
+}
+
+static int memrefv_preflight_check(struct tipc_shmem *shmv, uint shmv_cnt)
+{
+	int ret;
+	unsigned int i;
+
+	if (shmv_cnt > MAX_MEMREF_NUM)
+		return -EINVAL;
+
+	for (i = 0; i < shmv_cnt; i++) {
+		ret = memref_preflight_check(&shmv[i]);
+		if (ret < 0)
+			return ret;
+	}
+	return 0;
+}
+
+static size_t memrefv_aux_data_len(struct tipc_shmem *shmv, uint shmv_cnt)
+{
+	uint i;
+	size_t len;
+	unsigned int pg_num;
+
+	len = shmv_cnt * sizeof(struct tipc_msg_mref_hdr);
+	for (i = 0; i < shmv_cnt; i++) {
+		pg_num = memref_count_pages(&shmv[i]);
+		len += pg_num * sizeof(struct ns_mem_page_info);
+	}
+	return len;
+}
+
+static void memref_release_pages(struct tipc_memref *mref, bool dirty)
+{
+	unsigned int i;
+
+	/* if pages are pinned, unpin them */
+	for (i = 0; i < mref->pg_pinned; i++) {
+		if (dirty)
+			set_page_dirty(mref->pages[i]);
+		put_page(mref->pages[i]);
+	}
+	mref->pg_pinned = 0;
+}
+
+static void vds_memref_release_locked(struct tipc_virtio_dev *vds, u32 id)
+{
+	struct tipc_memref *mref = idr_find(&vds->mref_idr, id);
+
+	if (WARN_ON(!mref)) {
+		pr_err("%s: memref (id=%u) is not found\n", __func__, id);
+		return;
+	}
+
+	pr_debug("%s: id=%u %u\n", __func__, id, mref->pg_pinned);
+
+	/* remove id */
+	idr_remove(&mref->chan->vds->mref_idr, id);
+
+	/* dec refs */
+	list_del(&mref->node);
+	if (list_empty(&mref->chan->mref_list))
+		wake_up_all(&mref->chan->mrefq);
+
+	kref_put(&mref->chan->refcount, _free_chan);
+	mref->chan = NULL;
+
+	memref_release_pages(mref, true);
+	kfree(mref);
+}
+
+static void vds_memref_release(struct tipc_virtio_dev *vds,
+			       const u32 *ids, uint ids_num)
+{
+	uint i;
+
+	mutex_lock(&vds->mref_lock);
+	for (i = 0; i < ids_num; i++)
+		vds_memref_release_locked(vds, ids[i]);
+	mutex_unlock(&vds->mref_lock);
+}
+
+static int build_user_page_info(struct ns_mem_page_info *ns,
+				struct vm_area_struct *vmas[],
+				struct page *pages[], unsigned long pg_num)
+{
+	int ret;
+	unsigned long i;
+
+	for (i = 0; i < pg_num; i++, ns++) {
+		struct vm_area_struct *vma = vmas[i];
+
+		ret = trusty_encode_page_info(ns, pages[i], vma->vm_page_prot,
+					      !!(vma->vm_flags & VM_WRITE));
+		if (ret < 0)
+			return ret;
+	}
+	return 0;
+}
+
+static int append_kernel_memref(struct tipc_msg_mref_hdr *hdr,
+				struct tipc_memref *mref,
+				struct tipc_shmem *shm)
+{
+	/* Implement me */
+	return -EINVAL;
+}
+
+static int append_user_memref(struct tipc_msg_mref_hdr *hdr,
+			      struct tipc_memref *mref,
+			      struct tipc_shmem *shm)
+{
+	long ret;
+	unsigned int gup_flags;
+	unsigned int i;
+	unsigned int pg_num;
+	unsigned long pg_start;
+	struct vm_area_struct **vmas;
+
+	vmas = kcalloc(mref->pg_num, sizeof(*vmas), GFP_KERNEL);
+	if (!vmas)
+		return -ENOMEM;
+
+	gup_flags = (shm->flags & TIPC_MEMREF_PERM_RW) ? FOLL_WRITE : 0;
+
+	down_read(&current->mm->mmap_sem);
+
+	/* for all 3 regions */
+	for (i = 0; i < 3; i++) {
+		pg_num = shm->size[i] / PAGE_SIZE;
+		pg_start = (unsigned long)shm->base[i];
+
+		if (!pg_start || !pg_num)
+			continue;
+
+		ret = get_user_pages(pg_start, pg_num, gup_flags,
+				     mref->pages + mref->pg_pinned,
+				     vmas + mref->pg_pinned);
+		if (ret < 0)
+			goto err_pinned;
+
+		mref->pg_pinned += (unsigned int)ret;
+
+		if ((unsigned int)ret != pg_num) {
+			/* partially succeeded */
+			ret = -EINVAL;
+			goto err_bad_cnt;
+		}
+	}
+
+	hdr->id = 0; /* will be filled later */
+	hdr->flags = shm->flags & TIPC_MEMREF_PERM_RW;
+	hdr->size = mref->pg_pinned * PAGE_SIZE;
+	hdr->pg_inf_cnt = mref->pg_pinned;
+	ret = build_user_page_info(hdr->pg_inf, vmas,
+				   mref->pages, mref->pg_pinned);
+
+err_bad_cnt:
+err_pinned:
+	if (ret < 0)
+		memref_release_pages(mref, false);
+	up_read(&current->mm->mmap_sem);
+	kfree(vmas);
+	return ret;
+}
+
+static int append_memrefs(struct tipc_chan *chan, struct tipc_msg_buf *mb,
+			  u32 *mr_ids, struct tipc_shmem *shmv, uint shmv_cnt,
+			  bool user)
+{
+	uint i;
+	int ret;
+	size_t sz;
+	unsigned int pg_num;
+	struct tipc_memref *mref;
+	struct tipc_msg_mref_hdr *hdr;
+	struct tipc_virtio_dev *vds = chan->vds;
+
+	/* align output buffer */
+	mb_align_write(mb, MEMREF_ALIGN);
+
+	/* for each memrefs */
+	mutex_lock(&chan->vds->mref_lock);
+	for (i = 0; i < shmv_cnt; i++) {
+		/* create memref tracking obj */
+		pg_num = memref_count_pages(&shmv[i]);
+		if (!pg_num) {
+			ret  = -EINVAL;
+			goto err_create;
+		}
+
+		mref = kzalloc(sizeof(*mref) + pg_num * sizeof(struct page *),
+			       GFP_KERNEL);
+		if (!mref) {
+			ret = -ENOMEM;
+			goto err_create;
+		}
+		mref->pg_num = pg_num;
+
+		/* reserve space for memref object */
+		sz = sizeof(struct tipc_msg_mref_hdr) +
+		     sizeof(struct ns_mem_page_info) * pg_num;
+		hdr = mb_put_data(mb, sz);
+
+		if (user)
+			ret = append_user_memref(hdr, mref, &shmv[i]);
+		else
+			ret = append_kernel_memref(hdr, mref, &shmv[i]);
+		if (ret)
+			goto err_append;
+
+		/* create memref id */
+		ret = idr_alloc(&vds->mref_idr, mref,
+				TIPC_MIN_MEMREF_ID, TIPC_MAX_MEMREF_ID,
+				GFP_KERNEL);
+
+		if (ret < 0)
+			goto err_idr_alloc;
+
+		hdr->id = ret;
+		mr_ids[i] = ret;
+
+		/* attach memref to chan object */
+		kref_get(&chan->refcount);
+		mref->chan = chan;
+		list_add_tail(&mref->node, &chan->mref_list);
+	}
+	mutex_unlock(&chan->vds->mref_lock);
+
+	return 0;
+
+err_idr_alloc:
+err_append:
+	memref_release_pages(mref, false);
+	kfree(mref);
+err_create:
+	while (i--)
+		vds_memref_release_locked(vds, mr_ids[i]);
+	mutex_unlock(&chan->vds->mref_lock);
+	return ret;
+}
+
+static void wait_for_memrefs(struct tipc_chan *chan)
+{
+	DEFINE_WAIT_FUNC(wait, woken_wake_function);
+
+	if (list_empty(&chan->mref_list))
+		return;
+
+	add_wait_queue(&chan->mrefq, &wait);
+	do {
+		wait_woken(&wait, TASK_UNINTERRUPTIBLE, MAX_SCHEDULE_TIMEOUT);
+	} while (!list_empty(&chan->mref_list));
+	remove_wait_queue(&chan->mrefq, &wait);
+}
+
+#else /* CONFIG_TRUSTY_MEMREFS */
+
+static int append_memrefs(struct tipc_chan *chan, struct tipc_msg_buf *mb,
+			  u32 *mr_ids, struct tipc_shmem *shmv, uint shmv_cnt,
+			  bool user)
+{
+	return -EINVAL;
+}
+
+static void vds_memref_release(struct tipc_virtio_dev *vds,
+			       const u32 *ids, uint ids_num)
+{
+	/* we should not have any */
+	WARN_ON(ids_num);
+}
+
+static void wait_for_memrefs(struct tipc_chan *chan)
+{
+	/* we should not have any */
+	WARN_ON(!list_empty(&chan->mref_list));
+}
+
+#endif  /* CONFIG_TRUSTY_MEMREFS */
 
 /*****************************************************************************/
 
@@ -585,19 +970,37 @@ void tipc_chan_put_txbuf(struct tipc_chan *chan, struct tipc_msg_buf *mb)
 }
 EXPORT_SYMBOL(tipc_chan_put_txbuf);
 
-int tipc_chan_queue_msg(struct tipc_chan *chan, struct tipc_msg_buf *mb)
+static int _tipc_chan_queue_msg(struct tipc_chan *chan,
+				struct tipc_msg_buf *mb,
+				struct tipc_shmem *shmv, uint shmv_cnt,
+				bool user)
 {
 	int err;
+	u32 mr_ids[MAX_MEMREF_NUM];
 
 	mutex_lock(&chan->lock);
 	switch (chan->state) {
 	case TIPC_CONNECTED:
 		fill_msg_hdr(mb, chan->local, chan->remote);
+
+		/* append memrefs if any */
+		if (shmv_cnt) {
+			err = append_memrefs(chan, mb, mr_ids,
+					     shmv, shmv_cnt, user);
+			if (err < 0) {
+				pr_err("%s: failed to append memrefs (%d)\n",
+				       __func__, err);
+				break;
+			}
+		}
+
+		/* queue message */
 		err = vds_queue_txbuf(chan->vds, mb);
 		if (err) {
 			/* this should never happen */
 			pr_err("%s: failed to queue tx buffer (%d)\n",
 			       __func__, err);
+			vds_memref_release(chan->vds, mr_ids, shmv_cnt);
 		}
 		break;
 	case TIPC_DISCONNECTED:
@@ -614,6 +1017,11 @@ int tipc_chan_queue_msg(struct tipc_chan *chan, struct tipc_msg_buf *mb)
 	}
 	mutex_unlock(&chan->lock);
 	return err;
+}
+
+int tipc_chan_queue_msg(struct tipc_chan *chan, struct tipc_msg_buf *mb)
+{
+	return _tipc_chan_queue_msg(chan, mb, NULL, 0, false);
 }
 EXPORT_SYMBOL(tipc_chan_queue_msg);
 
@@ -722,6 +1130,9 @@ int tipc_chan_shutdown(struct tipc_chan *chan)
 	}
 	chan->state = TIPC_STALE;
 	mutex_unlock(&chan->lock);
+
+	/* wait for all outstanding memref to be released by remote side */
+	wait_for_memrefs(chan);
 
 	if (err) {
 		/* release buffer */
@@ -969,9 +1380,73 @@ static int dn_connect_ioctl(struct tipc_dn_chan *dn, char __user *usr_name)
 	return dn_wait_for_reply(dn, REPLY_TIMEOUT);
 }
 
+#if !defined(CONFIG_COMPAT)
+static int compat_import_iovec(int type,
+			       const struct compat_iovec __user *uvector,
+			       unsigned int nr_segs, unsigned int fast_segs,
+			       struct iovec **iov, struct iov_iter *i)
+{
+	return -EINVAL;
+}
+#endif
+
+static long tipc_send_msg_ioctl(struct file *filp, unsigned long arg,
+				bool compat)
+{
+	ssize_t ret;
+	struct iov_iter msg_iter;
+	struct iovec iovstack[12];
+	struct tipc_send_msg_req req;
+	struct tipc_shmem shmems[MAX_MEMREF_NUM];
+	struct tipc_dn_chan *dn = filp->private_data;
+	struct iovec *iov = iovstack;
+	long timeout = (filp->f_flags & O_NONBLOCK) ? 0 : TXBUF_TIMEOUT;
+
+	/* copy in request */
+	if (copy_from_user(&req, (const void __user *)arg, sizeof(req)))
+		return -EFAULT;
+
+	if (req.shmemv_cnt > MAX_MEMREF_NUM) {
+		pr_err("%s: too many memrefs %u\n", __func__, req.shmemv_cnt);
+		return -EINVAL;
+	}
+
+	/* import message iovecs */
+	if (compat)
+		ret = compat_import_iovec(READ,
+					  (void *)(uintptr_t)req.msgiov,
+					  req.msgiov_cnt,
+					  ARRAY_SIZE(iovstack), &iov,
+					  &msg_iter);
+	else
+		ret = import_iovec(READ,
+				   (void *)(uintptr_t)req.msgiov,
+				   req.msgiov_cnt,
+				   ARRAY_SIZE(iovstack), &iov,
+				   &msg_iter);
+	if (ret < 0)
+		return ret;
+
+	if (req.shmemv_cnt) {
+		/* import memref descriptors */
+		if (copy_from_user(shmems, (const void __user *)req.shmemv,
+				   req.shmemv_cnt * sizeof(shmems[0]))) {
+			ret = -EFAULT;
+			goto err_bad_descrs;
+		}
+	}
+
+	ret = _tipc_send_msg(dn->chan, &msg_iter, shmems, req.shmemv_cnt, true,
+			     timeout, true);
+
+err_bad_descrs:
+	kfree(iov);
+	return ret;
+}
+
 static long tipc_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
-	int ret;
+	long ret;
 	struct tipc_dn_chan *dn = filp->private_data;
 
 	if (_IOC_TYPE(cmd) != TIPC_IOC_MAGIC)
@@ -980,6 +1455,9 @@ static long tipc_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	switch (cmd) {
 	case TIPC_IOC_CONNECT:
 		ret = dn_connect_ioctl(dn, (char __user *)arg);
+		break;
+	case TIPC_IOC_SEND_MSG:
+		ret = tipc_send_msg_ioctl(filp, arg, false);
 		break;
 	default:
 		pr_warn("%s: Unhandled ioctl cmd: 0x%x\n",
@@ -990,6 +1468,7 @@ static long tipc_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 }
 
 #if defined(CONFIG_COMPAT)
+
 static long tipc_compat_ioctl(struct file *filp,
 			      unsigned int cmd, unsigned long arg)
 {
@@ -1003,6 +1482,9 @@ static long tipc_compat_ioctl(struct file *filp,
 	switch (cmd) {
 	case TIPC_IOC_CONNECT_COMPAT:
 		ret = dn_connect_ioctl(dn, user_req);
+		break;
+	case TIPC_IOC_SEND_MSG:
+		ret = tipc_send_msg_ioctl(filp, arg, true);
 		break;
 	default:
 		pr_warn("%s: Unhandled ioctl cmd: 0x%x\n",
@@ -1080,47 +1562,67 @@ out:
 	return ret;
 }
 
-static ssize_t tipc_write_iter(struct kiocb *iocb, struct iov_iter *iter)
+static int _tipc_send_msg(struct tipc_chan *chan, struct iov_iter *msg_iter,
+			  struct tipc_shmem *shmv, uint shmv_cnt, bool user,
+			  long timeout, bool intr)
 {
-	ssize_t ret;
+	int ret;
 	size_t len;
-	long timeout = TXBUF_TIMEOUT;
-	struct tipc_msg_buf *txbuf = NULL;
-	struct file *filp = iocb->ki_filp;
-	struct tipc_dn_chan *dn = filp->private_data;
+	struct tipc_msg_buf *txbuf;
+	size_t aux_len = 0;
 
-	if (filp->f_flags & O_NONBLOCK)
-		timeout = 0;
+	/* pre flight check message length */
+	len = iov_iter_count(msg_iter);
+	if (len > (chan->vds->msg_buf_sz - sizeof(struct tipc_msg_hdr)))
+		return -EMSGSIZE;
 
-	txbuf = tipc_chan_get_txbuf_timeout(dn->chan, timeout);
+	if (shmv_cnt) {
+#if defined(CONFIG_TRUSTY_MEMREFS)
+		/* do memref parameters check */
+		ret = memrefv_preflight_check(shmv, shmv_cnt);
+		if (ret < 0)
+			return ret;
+
+		/* calculate aux data size and add alignment */
+		aux_len = memrefv_aux_data_len(shmv, shmv_cnt) +
+			  ALIGN(len, MEMREF_ALIGN);
+#else
+		return -EINVAL;
+#endif
+	}
+
+	/* get or allocate tx buffer */
+	txbuf = vds_get_txbuf(chan->vds,
+			      sizeof(struct tipc_msg_hdr) + len + aux_len,
+			      timeout, intr);
 	if (IS_ERR(txbuf))
 		return PTR_ERR(txbuf);
 
-	/* message length */
-	len = iov_iter_count(iter);
-
-	/* check available space */
-	if (len > mb_avail_space(txbuf)) {
-		ret = -EMSGSIZE;
-		goto err_out;
-	}
-
 	/* copy in message data */
-	if (copy_from_iter(mb_put_data(txbuf, len), len, iter) != len) {
+	if (copy_from_iter(mb_put_data(txbuf, len), len, msg_iter) != len) {
 		ret = -EFAULT;
 		goto err_out;
 	}
 
 	/* queue message */
-	ret = tipc_chan_queue_msg(dn->chan, txbuf);
+	ret = _tipc_chan_queue_msg(chan, txbuf, shmv, shmv_cnt, user);
 	if (ret)
 		goto err_out;
 
 	return len;
 
 err_out:
-	tipc_chan_put_txbuf(dn->chan, txbuf);
+	tipc_chan_put_txbuf(chan, txbuf);
 	return ret;
+}
+
+static ssize_t tipc_write_iter(struct kiocb *iocb, struct iov_iter *iter)
+{
+	struct file *filp = iocb->ki_filp;
+	struct tipc_dn_chan *dn = filp->private_data;
+	long timeout = (filp->f_flags & O_NONBLOCK) ? 0 : TXBUF_TIMEOUT;
+
+	return _tipc_send_msg(dn->chan, iter, NULL, 0, true, timeout, true);
 }
 
 static unsigned int tipc_poll(struct file *filp, poll_table *wait)
@@ -1405,6 +1907,21 @@ static void _handle_disc_req(struct tipc_virtio_dev *vds,
 	}
 }
 
+static void _handle_mref_release_req(struct tipc_virtio_dev *vds,
+				     struct tipc_mref_release_req_body *req,
+				     size_t len)
+{
+	while (len >= sizeof(*req)) {
+		if (req->id) {
+			/* release memref with specified id */
+			vds_memref_release(vds, &req->id, 1);
+		}
+		req++;
+		len -= sizeof(*req);
+	}
+	WARN_ON(len);
+}
+
 static void _handle_ctrl_msg(struct tipc_virtio_dev *vds,
 			     void *data, int len, u32 src)
 {
@@ -1439,6 +1956,12 @@ static void _handle_ctrl_msg(struct tipc_virtio_dev *vds,
 		_handle_disc_req(vds, (struct tipc_disc_req_body *)msg->body,
 				 msg->body_len);
 	break;
+
+	case TIPC_CTRL_MSGTYPE_MREF_RELEASE_REQ: {
+		struct tipc_mref_release_req_body *req =
+			      (struct tipc_mref_release_req_body *)msg->body;
+		_handle_mref_release_req(vds, req, msg->body_len);
+	} break;
 
 	default:
 		dev_warn(&vds->vdev->dev,
@@ -1526,6 +2049,42 @@ static void _rxvq_cb(struct virtqueue *rxvq)
 		virtqueue_kick(rxvq);
 }
 
+static void _discard_ctrl_msg(struct tipc_virtio_dev *vds,
+			      struct tipc_msg_buf *mb)
+{
+	/* nothing to do for control messages */
+}
+
+static void _discard_chan_msg(struct tipc_virtio_dev *vds,
+			      struct tipc_msg_hdr *msg,
+			      struct tipc_msg_buf *mb)
+{
+	struct tipc_msg_mref_hdr *mhdr;
+
+	/* skip message data */
+	(void)mb_get_data(mb, msg->len);
+
+	/* check if we have memrefs attached */
+	if (!mb_avail_data(mb))
+		return; /* no more data */
+
+	/* align for proper boundary */
+	mb_align_read(mb, MEMREF_ALIGN);
+
+	/* discard all memrefs */
+	while (mb_avail_data(mb)) {
+		/* get memref */
+		mhdr = mb_get_data(mb, sizeof(*mhdr));
+
+		/* release mref_by id */
+		vds_memref_release(vds, &mhdr->id, 1);
+
+		/* skip to next memref hdr */
+		(void)mb_get_data(mb,
+				  mhdr->pg_inf_cnt * sizeof(mhdr->pg_inf[0]));
+	}
+}
+
 static void _txvq_cb(struct virtqueue *txvq)
 {
 	unsigned int len;
@@ -1537,8 +2096,19 @@ static void _txvq_cb(struct virtqueue *txvq)
 
 	/* detach all buffers */
 	mutex_lock(&vds->lock);
-	while ((mb = virtqueue_get_buf(txvq, &len)) != NULL)
+	while ((mb = virtqueue_get_buf(txvq, &len)) != NULL) {
+		if ((int)len < 0) {
+			struct tipc_msg_hdr *msg;
+
+			mb_reset_read(mb);
+			msg = mb_get_data(mb, sizeof(*msg));
+			if (msg->dst == TIPC_CTRL_ADDR)
+				_discard_ctrl_msg(vds, mb);
+			else
+				_discard_chan_msg(vds, msg, mb);
+		}
 		need_wakeup |= _put_txbuf_locked(vds, mb);
+	}
 	mutex_unlock(&vds->lock);
 
 	if (need_wakeup) {
@@ -1570,6 +2140,8 @@ static int tipc_virtio_probe(struct virtio_device *vdev)
 	INIT_LIST_HEAD(&vds->free_buf_list);
 	INIT_LIST_HEAD(&vds->stashed_buf_list);
 	idr_init(&vds->addr_idr);
+	idr_init(&vds->mref_idr);
+	mutex_init(&vds->mref_lock);
 
 	/* set default max message size and alignment */
 	memset(&config, 0, sizeof(config));
@@ -1638,6 +2210,7 @@ static void tipc_virtio_remove(struct virtio_device *vdev)
 
 	vdev->config->reset(vdev);
 
+	idr_destroy(&vds->mref_idr);
 	idr_destroy(&vds->addr_idr);
 
 	_cleanup_vq(vds->rxvq);
