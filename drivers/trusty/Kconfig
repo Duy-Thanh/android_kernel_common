@@ -49,4 +49,11 @@ config TRUSTY_VIRTIO_IPC
 	  If you choose to build a module, it'll be called trusty-ipc.
 	  Say N if unsure.
 
+config TRUSTY_MEMREFS
+	bool "Trusty Memrefs support"
+	depends on TRUSTY_VIRTIO_IPC
+	default y
+	help
+	  This setting enables support for sharing memory with Trusty Services
+
 endmenu
