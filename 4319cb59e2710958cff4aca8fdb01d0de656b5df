@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97c76e81_d138edfc",
+        "filename": "kernel/sched/rt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-01-10T21:45:49Z",
+      "side": 1,
+      "message": "Makes sense.\nWe should probably use barriers here (smp_wmb, smb_rmb) because its possible from what I can see cfs_throttle_flags is modified on one CPU (during setscheduler and then is read here by another CPU). Although a rare case, better to be safe.\nAnd also add barriers to the code setting the flags.",
+      "revId": "4319cb59e2710958cff4aca8fdb01d0de656b5df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
