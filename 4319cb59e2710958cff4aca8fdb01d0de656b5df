@@ -16,6 +16,24 @@
       "revId": "4319cb59e2710958cff4aca8fdb01d0de656b5df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a364350b_42886308",
+        "filename": "kernel/sched/rt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1118133
+      },
+      "writtenOn": "2017-01-11T19:30:56Z",
+      "side": 1,
+      "message": "will do, I would prefer to serialize the demotion differently but for now without much change this seems to do the trick",
+      "parentUuid": "97c76e81_d138edfc",
+      "revId": "4319cb59e2710958cff4aca8fdb01d0de656b5df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
