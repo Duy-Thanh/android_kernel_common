@@ -1627,7 +1627,7 @@ static inline unsigned long cpu_util_freq(int cpu)
 
 #ifdef CONFIG_CPU_FREQ_GOV_SCHED
 #define capacity_max SCHED_CAPACITY_SCALE
-extern unsigned int capacity_margin;
+extern unsigned int capacity_margin_freq;
 extern struct static_key __sched_freq;
 
 static inline bool sched_freq(void)
