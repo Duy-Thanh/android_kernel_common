@@ -131,8 +131,10 @@ unsigned int sysctl_sched_cfs_bandwidth_slice = 5000UL;
  * The margin used when comparing utilization with CPU capacity:
  * util * margin < capacity * 1024
  */
-#define SCHED_CAPACITY_MARGIN 1280
-unsigned int capacity_margin = SCHED_CAPACITY_MARGIN; /* ~20% */
+#define SCHED_CAPACITY_MARGIN 1078
+#define SCHED_CAPACITY_MARGIN_DOWN 1205
+static unsigned int capacity_margin = SCHED_CAPACITY_MARGIN; /* ~5% */
+static unsigned int capacity_margin_down = SCHED_CAPACITY_MARGIN_DOWN; /* ~15% */
 
 static inline void update_load_add(struct load_weight *lw, unsigned long inc)
 {
@@ -5849,11 +5851,16 @@ static inline unsigned long boosted_task_util(struct task_struct *task);
 
 static inline bool __task_fits(struct task_struct *p, int cpu, int util)
 {
-	unsigned long capacity = capacity_of(cpu);
+	unsigned int margin;
 
 	util += boosted_task_util(p);
 
-	return (capacity * 1024) > (util * capacity_margin);
+	if (capacity_orig_of(task_cpu(p)) > capacity_orig_of(cpu))
+		margin = capacity_margin_down;
+	else
+		margin = capacity_margin;
+
+	return (capacity_of(cpu) * 1024) > (util * margin);
 }
 
 static inline bool task_fits_max(struct task_struct *p, int cpu)
