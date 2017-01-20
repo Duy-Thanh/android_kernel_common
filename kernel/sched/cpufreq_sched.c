@@ -258,7 +258,7 @@ void update_cpu_capacity_request(int cpu, bool request)
 	scr = &per_cpu(cpu_sched_capacity_reqs, cpu);
 
 	new_capacity = requested_capacity(scr);
-	new_capacity = new_capacity * capacity_margin
+	new_capacity = new_capacity * capacity_margin_freq
 		/ SCHED_CAPACITY_SCALE;
 	new_capacity += scr->dl;
 
