@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49f6f9c8_e4317c79",
+        "filename": "fs/9p/acl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2017-01-25T23:28:27Z",
+      "side": 1,
+      "message": "Comparing with https://android-review.googlesource.com/#/c/327266/ that releases old_acl right after posix_acl_update_mode regardless of retval, if it intentional to not right release it right after 326?",
+      "revId": "ce2cf61bcd8068159cce7d0356fbefe311d6fcd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
