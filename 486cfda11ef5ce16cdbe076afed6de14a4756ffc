@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cda0bbfc_090b728b",
+        "filename": "fs/sdcardfs/packagelist.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2017-01-31T22:03:38Z",
+      "side": 1,
+      "message": "static",
+      "revId": "486cfda11ef5ce16cdbe076afed6de14a4756ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e39deb5e_d04a1b8e",
+        "filename": "fs/sdcardfs/packagelist.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2017-01-31T22:03:38Z",
+      "side": 1,
+      "message": "static inline bool qstr_eq(const struct qstr *q1, const struct qstr *q2)\n{\n    return q1-\u003elen \u003d\u003d q2-\u003elen \u0026\u0026 !strcasecmp(q1-\u003ename, q2-\u003ename);\n}\n\nThis consolidates all the case-insensitive behavior in one place (in case you ever need to change it for some reason), and short-circuits the expensive string comparison if the lengths are different.",
+      "range": {
+        "startLine": 68,
+        "startChar": 6,
+        "endLine": 68,
+        "endChar": 48
+      },
+      "revId": "486cfda11ef5ce16cdbe076afed6de14a4756ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76ea90fb_63643457",
+        "filename": "fs/sdcardfs/packagelist.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2017-01-31T22:03:38Z",
+      "side": 1,
+      "message": "static",
+      "revId": "486cfda11ef5ce16cdbe076afed6de14a4756ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
