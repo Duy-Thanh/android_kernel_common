@@ -5548,8 +5548,13 @@ static int sched_group_energy(struct energy_env *eenv)
 				group_util = group_norm_util(eenv, sg);
 
 				sg_busy_energy = (group_util * sg->sge->cap_states[cap_idx].power);
-				sg_idle_energy = ((SCHED_LOAD_SCALE-group_util)
-								* sg->sge->idle_states[idle_idx].power);
+
+				if (idle_idx == 0)
+					sg_idle_energy = ((SCHED_LOAD_SCALE-group_util) *
+							  sg->sge->cap_states[cap_idx].power);
+				else
+					sg_idle_energy = ((SCHED_LOAD_SCALE-group_util) *
+							  sg->sge->idle_states[idle_idx].power);
 
 				total_energy += sg_busy_energy + sg_idle_energy;
 
