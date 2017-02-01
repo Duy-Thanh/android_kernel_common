@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b21ee9ca_a5021f6a",
+        "filename": "fs/sdcardfs/sdcardfs.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-02-01T22:22:07Z",
+      "side": 1,
+      "message": "maybe preserve \"case\" in the name to make this clearer to callers?",
+      "range": {
+        "startLine": 609,
+        "startChar": 19,
+        "endLine": 609,
+        "endChar": 25
+      },
+      "revId": "0a32652733af088796ced2bd8d5ab395d869847e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70d84ba9_15fef0b3",
+        "filename": "fs/sdcardfs/sdcardfs.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-02-01T22:22:07Z",
+      "side": 1,
+      "message": "could use strncasecmp (or a new wrapper) if it helps",
+      "range": {
+        "startLine": 616,
+        "startChar": 30,
+        "endLine": 616,
+        "endChar": 36
+      },
+      "revId": "0a32652733af088796ced2bd8d5ab395d869847e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
