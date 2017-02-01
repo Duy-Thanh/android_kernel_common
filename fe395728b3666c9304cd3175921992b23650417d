@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e6097ac_b2860ef6",
+        "filename": "fs/sdcardfs/derived_perm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-02-01T21:26:30Z",
+      "side": 1,
+      "message": "Kernel strrchr never returns ptr to trailing NUL byte?",
+      "range": {
+        "startLine": 139,
+        "startChar": 9,
+        "endLine": 139,
+        "endChar": 18
+      },
+      "revId": "fe395728b3666c9304cd3175921992b23650417d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04022e0d_f8a452e9",
+        "filename": "fs/sdcardfs/multiuser.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-02-01T21:26:30Z",
+      "side": 1,
+      "message": "gid_t is unsigned?",
+      "range": {
+        "startLine": 39,
+        "startChar": 15,
+        "endLine": 39,
+        "endChar": 17
+      },
+      "revId": "fe395728b3666c9304cd3175921992b23650417d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0c7b90f9_da0693c4",
+        "filename": "fs/sdcardfs/packagelist.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-02-01T21:26:30Z",
+      "side": 1,
+      "message": "nit: inconsistent use of \"type* name\"",
+      "range": {
+        "startLine": 570,
+        "startChar": 7,
+        "endLine": 570,
+        "endChar": 12
+      },
+      "revId": "fe395728b3666c9304cd3175921992b23650417d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1483b9fc_4ecf88e0",
+        "filename": "fs/sdcardfs/packagelist.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-02-01T21:26:30Z",
+      "side": 1,
+      "message": "pr_info preferred",
+      "range": {
+        "startLine": 588,
+        "startChar": 2,
+        "endLine": 588,
+        "endChar": 17
+      },
+      "revId": "fe395728b3666c9304cd3175921992b23650417d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
