@@ -22,6 +22,29 @@
       "revId": "72bc2b2ad8ae230c3bc2ce151057d206657d2002",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a06545d4_3f105ffd",
+        "filename": "drivers/staging/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2043,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2017-02-02T18:15:10Z",
+      "side": 1,
+      "message": "%u make sense but all the instances of binder_size_t in the driver are typecasted to u64 and used with %lld format specifier. So I just followed the convention.",
+      "range": {
+        "startLine": 2043,
+        "startChar": 75,
+        "endLine": 2043,
+        "endChar": 76
+      },
+      "revId": "72bc2b2ad8ae230c3bc2ce151057d206657d2002",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
