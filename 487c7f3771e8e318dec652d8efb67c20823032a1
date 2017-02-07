@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d080fb3e_8c204965",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1105434
+      },
+      "writtenOn": "2017-02-07T21:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c571ef6c_fde2d1e9",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 9
+      },
+      "revId": "487c7f3771e8e318dec652d8efb67c20823032a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e2ead7ab_5123988b",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2017-02-07T17:06:24Z",
       "side": 1,
       "message": "Is there an associated Bug: ?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 3
+      },
+      "revId": "487c7f3771e8e318dec652d8efb67c20823032a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f70539d0_d330697f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1105434
+      },
+      "writtenOn": "2017-02-07T21:15:57Z",
+      "side": 1,
+      "message": "There isn\u0027t a bug. This was reported by qualcomm (by personal email to me). Should I file a bug for the purposes of the commit ?",
+      "parentUuid": "e2ead7ab_5123988b",
       "range": {
         "startLine": 15,
         "startChar": 0,
@@ -318,6 +366,30 @@
       "side": 1,
       "message": "True. I added the IS_ERR(path) check here. I will test with a artificially short path buffer to trigger ENAMETOOLONG and exercise the errored path case. However, I don\u0027t understand your comment as to why I need to  \u0027\\0\u0027 terminate the buffer before I call dentry_path_raw(). I only call it once, and __dentry_path() prepends a \u0027\\0\u0027 to the buffer before it does the walk back to root (each time, checking to buffer length).",
       "parentUuid": "65d1de96_08f849b4",
+      "range": {
+        "startLine": 57,
+        "startChar": 2,
+        "endLine": 57,
+        "endChar": 41
+      },
+      "revId": "487c7f3771e8e318dec652d8efb67c20823032a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f609aee_a82716ee",
+        "filename": "include/trace/events/android_fs.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1105434
+      },
+      "writtenOn": "2017-02-07T21:15:57Z",
+      "side": 1,
+      "message": "Tested by shrinking the size of the path buffer to 5, which causes dentry_path_raw to return a ERR_PTR(ENAMETOOLONG). And we catch that and store ERROR in the buffer and reset pointer to start of the buffer.",
+      "parentUuid": "d7e7ed9a_5d49b0e5",
       "range": {
         "startLine": 57,
         "startChar": 2,
