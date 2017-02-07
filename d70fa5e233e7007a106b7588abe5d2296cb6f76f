@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b1dabf5_1ba78b07",
+        "filename": "drivers/usb/gadget/function/f_mtp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 1030767
+      },
+      "writtenOn": "2017-02-07T19:54:18Z",
+      "side": 1,
+      "message": "this change might be overkill...\n\n- instead of a introducing boolean member is_ptp, just check dev-\u003efunction.fs_descriptors \u003d\u003d fs_ptp_descs\n- the only difference between mtp_ext_config_desc and ptp_ext_config_desc is a single character (compatibleID[0]). Why not just update that directly after the memcpy.",
+      "revId": "d70fa5e233e7007a106b7588abe5d2296cb6f76f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
