@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c571ef6c_fde2d1e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-02-07T17:06:24Z",
+      "side": 1,
+      "message": "remove stutter",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 9
+      },
+      "revId": "487c7f3771e8e318dec652d8efb67c20823032a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2ead7ab_5123988b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-02-07T17:06:24Z",
+      "side": 1,
+      "message": "Is there an associated Bug: ?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 3
+      },
+      "revId": "487c7f3771e8e318dec652d8efb67c20823032a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcda7fd7_31e94a63",
+        "filename": "fs/ext4/inline.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-02-07T17:06:24Z",
+      "side": 1,
+      "message": "This does not get optimized out by the trace magic I _believe_ so all calls will take time to check this flag rather than the trace activation rewriting this fragment away or rewriting the code in place. I would check the compiled output to confirm (?) that the trace magic is working or not.\n\nunlikely() is an option, but not a good one.\n\nAny chance you can merge all these operations _into_ trace_android_fs_dataread_start?\n\nIf I am correct, It may require you to have pathbuf[MAX_TRACE_PATHBUF_LEN] at the top rather than inside a block so that you pass pathbuf and sizeof(pathbuf) to trace_android_fs_dataread_start and let it call android_fstrace_get_pathname directly.",
+      "range": {
+        "startLine": 504,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 49
+      },
+      "revId": "487c7f3771e8e318dec652d8efb67c20823032a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85a345e8_d639f4e8",
+        "filename": "fs/ext4/inline.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-02-07T17:06:24Z",
+      "side": 1,
+      "message": "What does trace_android_fs_dataread_start do with a IS_ERR(path)? You need to make sure path is not IS_ERR in android_fstrace_get_pathname.",
+      "range": {
+        "startLine": 512,
+        "startChar": 6,
+        "endLine": 512,
+        "endChar": 10
+      },
+      "revId": "487c7f3771e8e318dec652d8efb67c20823032a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e43ff1c_4aad489f",
+        "filename": "include/trace/events/android_fs.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-02-07T17:06:24Z",
+      "side": 1,
+      "message": "We should comment here to indicate that this specifies an on-stack buffer. The comment will cause developers to think before they adjust this by any amount.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 33
+      },
+      "revId": "487c7f3771e8e318dec652d8efb67c20823032a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2814ed6_1bf4ba1a",
+        "filename": "include/trace/events/android_fs.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-02-07T17:06:24Z",
+      "side": 1,
+      "message": "Maybe you need path \u003d buf so that return is appropriate?",
+      "range": {
+        "startLine": 41,
+        "startChar": 11,
+        "endLine": 41,
+        "endChar": 12
+      },
+      "revId": "487c7f3771e8e318dec652d8efb67c20823032a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "236f4077_c42ef21d",
+        "filename": "include/trace/events/android_fs.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-02-07T17:06:24Z",
+      "side": 1,
+      "message": "kind of verbose for a kernel commit (an opinion, no law against it, the comment does tell us why you are doing this explicitly!).\n\nMost if not all of the comment can be solved by adding a latent KISS comment:\n\n    d \u003d d_obtain_alias(inode); /* calls iput(inode) */",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 4
+      },
+      "revId": "487c7f3771e8e318dec652d8efb67c20823032a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d1de96_08f849b4",
+        "filename": "include/trace/events/android_fs.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-02-07T17:06:24Z",
+      "side": 1,
+      "message": "path can return IS_ERR here, and leave buffer in an unknown state. Suggest also landing \"ERROR\" in the buffer in this case.\n\nThe assumption is that whatever is at buf[buflen - 1] is to be preserved and represents the termination or continuation (you must ensure that the character is nul in your case; in the general case it may also be \"/\u003cfilename\u003e\u003cnul\u003e so that a directory can be pasted in front of a filename).\n\nIs this trace code hot? Here is my suggestion (untested):\n\n{\n  char *path \u003d ERR_PTR(-ENOENT);\n  struct dentry *d;\n\n  ihold(inode);\n  d \u003d d_obtain_alias(inode); /* calls iput */\n  if (likely(!IS_ERR(d))) {\n    buf[buflen - 1] \u003d \u0027\\0\u0027;\n    path \u003d dentry_path_raw(d, buf, buflen);\n    dput(d);\n  }\n  if (unlikely(IS_ERR(path))\n    path \u003d strcpy(buf, \"ERROR\");\n  return path;\n}",
+      "range": {
+        "startLine": 57,
+        "startChar": 2,
+        "endLine": 57,
+        "endChar": 41
+      },
+      "revId": "487c7f3771e8e318dec652d8efb67c20823032a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea48252e_05e6bb24",
+        "filename": "include/trace/events/android_fs.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-02-07T17:06:24Z",
+      "side": 1,
+      "message": "Error reports a _random_ on-stack value for path if this is taken.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 23
+      },
+      "revId": "487c7f3771e8e318dec652d8efb67c20823032a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
