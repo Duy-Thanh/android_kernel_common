@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "b0f55eca_27833837",
+        "filename": "fs/ext4/inline.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-02-08T19:44:32Z",
+      "side": 1,
+      "message": "Have you looked at the assembler (gdb live?)? If the assembler clips at line 504 when disabled, and does not leave a branch, then you are OK. If not, then you will need to make the call to android_fstrace_get_pathname _in_ the tracepoint code.\n\nYou can keep the buffer on the stack, trace in or out, and the tracepoint code can call out to android_fstrace_get_pathname to fill in pathbuf[sizeof(pathbuf)] from the inode information passing path directly into the trace buffer. The tracepoint code should be able to make the call there I would expect.\n\nIf this later case, you would find minimal changes here, replacing the path reference with \u0027pathbuf, sizeof(pathbuf),\u0027",
+      "parentUuid": "e7039590_832f9498",
+      "range": {
+        "startLine": 504,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 49
+      },
+      "revId": "487c7f3771e8e318dec652d8efb67c20823032a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85a345e8_d639f4e8",
         "filename": "fs/ext4/inline.c",
         "patchSetId": 3
