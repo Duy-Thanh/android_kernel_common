@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c20dd87_5f02b836",
+        "filename": "include/trace/events/android_fs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-02-08T19:44:32Z",
+      "side": 1,
+      "message": "this dput should be moved up to just below dentry_path_raw call, because at that point it is no longer needed and can go through garbage collection sooner.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 10
+      },
+      "revId": "e8471166f436bf55a47ee9a92c3c81fb6bf7fac6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
