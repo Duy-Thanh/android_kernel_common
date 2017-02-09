@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da3bd839_f0066a21",
+        "filename": "include/trace/events/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1036,
+      "author": {
+        "id": 1097718
+      },
+      "writtenOn": "2017-02-09T16:52:00Z",
+      "side": 1,
+      "message": "As per the other comment, the statement now has no effect. Is that really what you want ?",
+      "revId": "7ad9332621c3c2c06c7596a8586b0c3f72f85e22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66c51158_ebe99b04",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 1097718
+      },
+      "writtenOn": "2017-02-09T16:52:00Z",
+      "side": 1,
+      "message": "div64_u64 returns the result, and does not modify the divisor. do_div stores the result in the divisor. I don\u0027t think this change is doing what you want (the statement has no effect after the change).",
+      "revId": "7ad9332621c3c2c06c7596a8586b0c3f72f85e22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
