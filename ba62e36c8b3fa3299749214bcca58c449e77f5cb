@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9fe0381e_c0cf6fc4",
+        "filename": "include/trace/events/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1036,
+      "author": {
+        "id": 1097718
+      },
+      "writtenOn": "2017-02-09T18:04:51Z",
+      "side": 1,
+      "message": "Nitpicking, but why not use div_u64 ?",
+      "revId": "ba62e36c8b3fa3299749214bcca58c449e77f5cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f787862_58ed398d",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 1097718
+      },
+      "writtenOn": "2017-02-09T18:04:51Z",
+      "side": 1,
+      "message": "Is this really needed ? util is unsigned long, walt_ravg_window is unsigned int. A normal divide operation should do here.\n[sorry, I didn\u0027t have a closer look earlier]",
+      "revId": "ba62e36c8b3fa3299749214bcca58c449e77f5cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
