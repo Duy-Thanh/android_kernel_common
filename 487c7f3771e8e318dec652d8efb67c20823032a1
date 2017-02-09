@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "95fdc1ff_cff131a7",
+        "filename": "fs/ext4/inline.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2017-02-09T00:06:11Z",
+      "side": 1,
+      "message": "Both trace_\u003ctracepoint\u003e() and trace_\u003ctracepoint\u003e_enabled() use jump labels on supported kernels.",
+      "parentUuid": "b0f55eca_27833837",
+      "range": {
+        "startLine": 504,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 49
+      },
+      "revId": "487c7f3771e8e318dec652d8efb67c20823032a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85a345e8_d639f4e8",
         "filename": "fs/ext4/inline.c",
         "patchSetId": 3
