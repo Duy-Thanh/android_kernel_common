@@ -22,6 +22,30 @@
       "revId": "e8471166f436bf55a47ee9a92c3c81fb6bf7fac6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ec7191b4_3821a07a",
+        "filename": "include/trace/events/android_fs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1105434
+      },
+      "writtenOn": "2017-02-09T07:26:43Z",
+      "side": 1,
+      "message": "In every path where this is called, the file is open (we have the inode passed in here). This dput() call will not drop the dentry refcount to 0. It can\u0027t go through garbage collection until after the file is closed.",
+      "parentUuid": "8c20dd87_5f02b836",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 10
+      },
+      "revId": "e8471166f436bf55a47ee9a92c3c81fb6bf7fac6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
