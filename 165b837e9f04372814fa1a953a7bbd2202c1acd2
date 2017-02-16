@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a31a42ea_5f137224",
+        "filename": "drivers/trusty/trusty-irq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-02-16T01:06:36Z",
+      "side": 1,
+      "message": "add blank line",
+      "revId": "165b837e9f04372814fa1a953a7bbd2202c1acd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68f9e0cf_f8f47750",
+        "filename": "drivers/trusty/trusty-irq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-02-16T01:06:36Z",
+      "side": 1,
+      "message": "add blank line",
+      "revId": "165b837e9f04372814fa1a953a7bbd2202c1acd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d1feff51_1d03353f",
+        "filename": "drivers/trusty/trusty-irq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-02-16T01:06:36Z",
+      "side": 1,
+      "message": "does this call trusty_irq_cpu_up on every online cpu?",
+      "revId": "165b837e9f04372814fa1a953a7bbd2202c1acd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5b3eda4_183e3ffc",
+        "filename": "drivers/trusty/trusty-irq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-02-16T01:06:36Z",
+      "side": 1,
+      "message": "what does a failure here mean? If it did not remove the notifier it is not safe to free is.",
+      "revId": "165b837e9f04372814fa1a953a7bbd2202c1acd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3597f9c5_dba09350",
+        "filename": "drivers/trusty/trusty-irq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-02-16T01:06:36Z",
+      "side": 1,
+      "message": "goto err...",
+      "revId": "165b837e9f04372814fa1a953a7bbd2202c1acd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
