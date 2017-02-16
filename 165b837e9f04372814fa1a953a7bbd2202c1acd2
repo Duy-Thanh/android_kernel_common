@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2b924656_77129249",
+        "filename": "drivers/trusty/trusty-irq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1045553
+      },
+      "writtenOn": "2017-02-16T19:31:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a31a42ea_5f137224",
+      "revId": "165b837e9f04372814fa1a953a7bbd2202c1acd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "68f9e0cf_f8f47750",
         "filename": "drivers/trusty/trusty-irq.c",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2017-02-16T01:06:36Z",
       "side": 1,
       "message": "add blank line",
+      "revId": "165b837e9f04372814fa1a953a7bbd2202c1acd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "555ec278_f389f3ee",
+        "filename": "drivers/trusty/trusty-irq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1045553
+      },
+      "writtenOn": "2017-02-16T19:31:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68f9e0cf_f8f47750",
       "revId": "165b837e9f04372814fa1a953a7bbd2202c1acd2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "9616244e_a3a5d01b",
+        "filename": "drivers/trusty/trusty-irq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1045553
+      },
+      "writtenOn": "2017-02-16T19:31:57Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "d1feff51_1d03353f",
+      "revId": "165b837e9f04372814fa1a953a7bbd2202c1acd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d5b3eda4_183e3ffc",
         "filename": "drivers/trusty/trusty-irq.c",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "d5282c32_7eb89c98",
+        "filename": "drivers/trusty/trusty-irq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1045553
+      },
+      "writtenOn": "2017-02-16T19:31:57Z",
+      "side": 1,
+      "message": "I can see only one code path when it possible: trusty_irq_cpuhp_slot does not point to multi-instanced slot, so I guess I have to abort remove as it is unsafe to continue.",
+      "parentUuid": "d5b3eda4_183e3ffc",
+      "revId": "165b837e9f04372814fa1a953a7bbd2202c1acd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3597f9c5_dba09350",
         "filename": "drivers/trusty/trusty-irq.c",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2017-02-16T01:06:36Z",
       "side": 1,
       "message": "goto err...",
+      "revId": "165b837e9f04372814fa1a953a7bbd2202c1acd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "97691ffa_191412dc",
+        "filename": "drivers/trusty/trusty-irq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1045553
+      },
+      "writtenOn": "2017-02-16T19:31:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3597f9c5_dba09350",
       "revId": "165b837e9f04372814fa1a953a7bbd2202c1acd2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
