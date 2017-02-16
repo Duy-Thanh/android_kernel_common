@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42c54448_9c68c216",
+        "filename": "drivers/trusty/trusty-irq.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-02-16T20:30:00Z",
+      "side": 1,
+      "message": "0?",
+      "range": {
+        "startLine": 536,
+        "startChar": 8,
+        "endLine": 536,
+        "endChar": 11
+      },
+      "revId": "d2c7d5bac933f62b4cd485aac222625eb797ab5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
