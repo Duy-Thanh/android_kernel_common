@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3692d600_724ed5f3",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-02-22T13:31:32Z",
+      "side": 1,
+      "message": "Should you pad out struct binder_object_header instead?  That would ensure that nothing bad happens in the future and you would have to change things in multiple places.\n\nbike-shedding, sorry, I know :)",
+      "range": {
+        "startLine": 155,
+        "startChar": 33,
+        "endLine": 155,
+        "endChar": 37
+      },
+      "revId": "f5526991a45777e33b376273a17c896e4fde1ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
