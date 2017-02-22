@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ffa0d98_32d9e4ad",
+        "filename": "fs/sdcardfs/packagelist.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-02-22T23:02:03Z",
+      "side": 0,
+      "message": "Brain scared that anyone that left things on the dlist results in a leak. But usage appears to move items from dlist to freelist, then freeing. As such dlist is like a temporary.\n\nhlist not freed, looks temporary too.\n\nghackmann@ discussed usage to me.",
+      "range": {
+        "startLine": 329,
+        "startChar": 0,
+        "endLine": 329,
+        "endChar": 29
+      },
+      "revId": "fcf4aa5e5ff857261b1519e2b4f9e7cdca30a1c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
