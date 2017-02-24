@@ -170,8 +170,11 @@ max_comp_streams  RW    the number of possible concurrent compress operations
 comp_algorithm    RW    show and change the compression algorithm
 notify_free       RO    the number of notifications to free pages (either
                         slot free notifications or REQ_DISCARD requests)
-zero_pages        RO    the number of zero filled pages written to this disk
+same_pages        RO    the number of same element filled pages written
+                        to this disk
 orig_data_size    RO    uncompressed size of data stored in this disk
+                        excluding same-element-filled pages (same_pages) since
+                        no memory is allocated for them
 compr_data_size   RO    compressed size of data stored in this disk
 mem_used_total    RO    the amount of memory allocated for this disk
 mem_used_max      RW    the maximum amount of memory zram have consumed to
@@ -225,7 +228,7 @@ line of text and contains the following stats separated by whitespace:
 	mem_used_total
 	mem_limit
 	mem_used_max
-	zero_pages
+	same_pages
 	num_migrated
 
 9) Deactivate:
