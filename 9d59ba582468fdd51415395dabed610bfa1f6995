@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60fb13ef_ef51a90f",
+        "filename": "fs/sdcardfs/multiuser.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2017-03-13T23:22:59Z",
+      "side": 0,
+      "message": "Do we assume user_id is always 0 and uid is always within valid range?",
+      "range": {
+        "startLine": 35,
+        "startChar": 53,
+        "endLine": 35,
+        "endChar": 60
+      },
+      "revId": "9d59ba582468fdd51415395dabed610bfa1f6995",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
