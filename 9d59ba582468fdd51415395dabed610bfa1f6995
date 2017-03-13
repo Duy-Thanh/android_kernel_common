@@ -22,6 +22,30 @@
       "revId": "9d59ba582468fdd51415395dabed610bfa1f6995",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc987497_9aa377bf",
+        "filename": "fs/sdcardfs/multiuser.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-03-13T23:42:47Z",
+      "side": 0,
+      "message": "user_id can be 0 or above in some range. Likely 0, 10, 11, 12, etc. The value I was passing into this function was computed using multiuser_get_uid, so the user_id is already accounted for. This does assume that uid is in a valid range, but causes no ill effect if it is not.",
+      "parentUuid": "60fb13ef_ef51a90f",
+      "range": {
+        "startLine": 35,
+        "startChar": 53,
+        "endLine": 35,
+        "endChar": 60
+      },
+      "revId": "9d59ba582468fdd51415395dabed610bfa1f6995",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
