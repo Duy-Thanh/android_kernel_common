@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "527e699a_dd6fad2a",
+        "filename": "drivers/misc/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2017-03-14T19:36:30Z",
+      "side": 1,
+      "message": "What about uid_procstat?",
+      "range": {
+        "startLine": 533,
+        "startChar": 3,
+        "endLine": 533,
+        "endChar": 6
+      },
+      "revId": "3183c9351ca8002221e12c06e473fab354bad4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
