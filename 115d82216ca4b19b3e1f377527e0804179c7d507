@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18b2f3d3_eecc8b77",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2017-03-14T23:47:25Z",
+      "side": 1,
+      "message": "Previous includes has alphabet order, please obey it.",
+      "range": {
+        "startLine": 28,
+        "startChar": 1,
+        "endLine": 28,
+        "endChar": 8
+      },
+      "revId": "115d82216ca4b19b3e1f377527e0804179c7d507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
