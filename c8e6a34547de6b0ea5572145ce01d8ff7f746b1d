@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "268a56d6_22f4c1c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-03-16T22:29:09Z",
+      "side": 1,
+      "message": "checkpatch.pl requires Change-Id: to be _last_ footer.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 45
+      },
+      "revId": "c8e6a34547de6b0ea5572145ce01d8ff7f746b1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
