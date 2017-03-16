@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b4f51713_830450d4",
+        "filename": "kernel/events/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-03-16T21:25:27Z",
+      "side": 1,
+      "message": "NB: In upstream (should this be forward ported to newer kernels) READ_ONCE is preferred now. For 3.10 this is all we have for an API.",
+      "range": {
+        "startLine": 762,
+        "startChar": 7,
+        "endLine": 762,
+        "endChar": 18
+      },
+      "revId": "37b302281ad57e192c5003fddea2885b5277622a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f0555df_eb74a9f6",
+        "filename": "kernel/events/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3165,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-03-16T21:25:27Z",
+      "side": 1,
+      "message": "\u003e 80 characters",
+      "range": {
+        "startLine": 3165,
+        "startChar": 0,
+        "endLine": 3165,
+        "endChar": 68
+      },
+      "revId": "37b302281ad57e192c5003fddea2885b5277622a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe82e0b7_161e71ed",
+        "filename": "kernel/events/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3442,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-03-16T21:25:27Z",
+      "side": 1,
+      "message": "\u003e 80 characters",
+      "range": {
+        "startLine": 3442,
+        "startChar": 0,
+        "endLine": 3442,
+        "endChar": 86
+      },
+      "revId": "37b302281ad57e192c5003fddea2885b5277622a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
