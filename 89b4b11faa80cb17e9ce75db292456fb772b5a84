@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42391bce_99384ffc",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-03-17T22:40:29Z",
+      "side": 1,
+      "message": "Renaming this to binder_buffer_lookup_locked and adding a binder_buffer_lookup wrapper that takes the lock might be simpler. I don\u0027t think \"else {\" is valid kernel code style.",
+      "revId": "89b4b11faa80cb17e9ce75db292456fb772b5a84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca76c9aa_dfa7dda6",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2051,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-03-17T22:40:29Z",
+      "side": 1,
+      "message": "Are you sure it is safe to release the lock here?",
+      "revId": "89b4b11faa80cb17e9ce75db292456fb772b5a84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
