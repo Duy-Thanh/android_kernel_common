@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "573a0f9f_372dbe1e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-03-18T00:13:50Z",
+      "side": 1,
+      "message": "There are many cases of \"else {\" in the kernel (mm/mmap.c, mm/slab.c, lib/crs32.c, kernel/sched/fair.c, ...). checkpatch.pl didn\u0027t complain about it.",
+      "parentUuid": "42391bce_99384ffc",
+      "revId": "89b4b11faa80cb17e9ce75db292456fb772b5a84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca76c9aa_dfa7dda6",
         "filename": "drivers/android/binder.c",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2017-03-17T22:40:29Z",
       "side": 1,
       "message": "Are you sure it is safe to release the lock here?",
+      "revId": "89b4b11faa80cb17e9ce75db292456fb772b5a84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25ee8180_163137f7",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2051,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-03-18T00:13:50Z",
+      "side": 1,
+      "message": "I did a lot of testing of it at the time to convince myself... but the lock is removed completely later in the series",
+      "parentUuid": "ca76c9aa_dfa7dda6",
       "revId": "89b4b11faa80cb17e9ce75db292456fb772b5a84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
