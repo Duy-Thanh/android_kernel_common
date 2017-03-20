@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "7a01a4ee_5da72c16",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-03-20T21:27:49Z",
+      "side": 1,
+      "message": "I was referring to this statement in the coding-style document:\nThis does not apply if only one branch of a conditional statement is a single\nstatement; in the latter case use braces in both branches:",
+      "parentUuid": "7e5ea042_52a30bc6",
+      "revId": "89b4b11faa80cb17e9ce75db292456fb772b5a84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca76c9aa_dfa7dda6",
         "filename": "drivers/android/binder.c",
         "patchSetId": 1
