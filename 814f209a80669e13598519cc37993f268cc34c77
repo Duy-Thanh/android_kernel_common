@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae5ea53c_e59c7a8f",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2201,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-03-20T15:36:46Z",
+      "side": 1,
+      "message": "Ugh, spell it out with a real if() statement, as it is, I have no idea what this means at first glance, which isn\u0027t good.  In the end, the compiler should make the same output.",
+      "range": {
+        "startLine": 2201,
+        "startChar": 10,
+        "endLine": 2201,
+        "endChar": 36
+      },
+      "revId": "814f209a80669e13598519cc37993f268cc34c77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e43b4bea_7e78168f",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2244,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-03-20T15:36:46Z",
+      "side": 1,
+      "message": "And here you negate it again?  Why not just do it better when you look at the flag and call it \"sync\" or something :)",
+      "range": {
+        "startLine": 2244,
+        "startChar": 16,
+        "endLine": 2244,
+        "endChar": 22
+      },
+      "revId": "814f209a80669e13598519cc37993f268cc34c77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
