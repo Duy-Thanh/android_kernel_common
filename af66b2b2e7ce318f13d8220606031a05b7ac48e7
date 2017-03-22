@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e7170e3_1fd847d3",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-03-22T03:38:59Z",
+      "side": 1,
+      "message": "the binder_debug_no_lock option to dump the binder state if the driver has locked up is not specific to the global lock.",
+      "revId": "af66b2b2e7ce318f13d8220606031a05b7ac48e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
