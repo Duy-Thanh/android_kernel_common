@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27502e91_7ee65229",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1381,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-03-22T03:33:07Z",
+      "side": 1,
+      "message": "source?",
+      "range": {
+        "startLine": 1381,
+        "startChar": 53,
+        "endLine": 1381,
+        "endChar": 59
+      },
+      "revId": "68d9b63af9722c4380d69e87eabf447d562ce86e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8d0cb211_9c602739",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1401,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-03-22T03:33:07Z",
+      "side": 1,
+      "message": "source?",
+      "range": {
+        "startLine": 1401,
+        "startChar": 50,
+        "endLine": 1401,
+        "endChar": 56
+      },
+      "revId": "68d9b63af9722c4380d69e87eabf447d562ce86e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39cc9662_e38a009e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1953,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-03-22T03:33:07Z",
+      "side": 1,
+      "message": "this should be based on the binder state, not on the process state. The process could theoretically close down the binder connection before exiting.",
+      "range": {
+        "startLine": 1953,
+        "startChar": 19,
+        "endLine": 1953,
+        "endChar": 55
+      },
+      "revId": "68d9b63af9722c4380d69e87eabf447d562ce86e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
