@@ -237,11 +237,9 @@ char *pp_sock_tag(struct sock_tag *st)
 	tag_str = pp_tag_t(&st->tag);
 	res = kasprintf(GFP_ATOMIC, "sock_tag@%p{"
 			"sock_node=rb_node{...}, "
-			"sk=%p socket=%p (f_count=%lu), list=list_head{...}, "
+			"cookie=%llu, net=%p, list=list_head{...}, "
 			"pid=%u, tag=%s}",
-			st, st->sk, st->socket, atomic_long_read(
-				&st->socket->file->f_count),
-			st->pid, tag_str);
+			st, st->cookie, st->net, st->pid, tag_str);
 	_bug_on_err_or_null(res);
 	kfree(tag_str);
 	return res;
@@ -294,7 +292,6 @@ void prdebug_sock_tag_tree(int indent_level,
 	struct rb_node *node;
 	struct sock_tag *sock_tag_entry;
 	char *str;
-
 	if (!unlikely(qtaguid_debug_mask & DDEBUG_MASK))
 		return;
 

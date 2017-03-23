@@ -23,6 +23,7 @@
 #include <linux/ratelimit.h>
 #include <linux/seq_file.h>
 #include <linux/skbuff.h>
+#include <linux/sock_diag.h>
 #include <linux/workqueue.h>
 #include <net/addrconf.h>
 #include <net/sock.h>
@@ -267,19 +268,24 @@ static struct tag_ref *tag_ref_tree_search(struct rb_root *root, tag_t tag)
 }
 
 static struct sock_tag *sock_tag_tree_search(struct rb_root *root,
-					     const struct sock *sk)
+					     u64 cookie, struct net *net)
 {
 	struct rb_node *node = root->rb_node;
 
 	while (node) {
 		struct sock_tag *data = rb_entry(node, struct sock_tag,
 						 sock_node);
-		if (sk < data->sk)
+		if (net < data->net) {
 			node = node->rb_left;
-		else if (sk > data->sk)
+		} else if (net > data->net) {
 			node = node->rb_right;
-		else
+		} else if (cookie < data->cookie) {
+			node = node->rb_left;
+                } else if (cookie > data->cookie) {
+			node = node->rb_right;
+		} else {
 			return data;
+		}
 	}
 	return NULL;
 }
@@ -293,12 +299,17 @@ static void sock_tag_tree_insert(struct sock_tag *data, struct rb_root *root)
 		struct sock_tag *this = rb_entry(*new, struct sock_tag,
 						 sock_node);
 		parent = *new;
-		if (data->sk < this->sk)
+		if (data->net < this->net) {
 			new = &((*new)->rb_left);
-		else if (data->sk > this->sk)
+		} else if (data->net > this->net) {
 			new = &((*new)->rb_right);
-		else
+		} else if (data->cookie < this->cookie) {
+			new = &((*new)->rb_left);
+                } else if (data->cookie > this->cookie) {
+			new = &((*new)->rb_right);
+                } else {
 			BUG();
+		}
 	}
 
 	/* Add new node and rebalance tree. */
@@ -315,13 +326,13 @@ static void sock_tag_tree_erase(struct rb_root *st_to_free_tree)
 	while (node) {
 		st_entry = rb_entry(node, struct sock_tag, sock_node);
 		node = rb_next(node);
-		CT_DEBUG("qtaguid: %s(): "
-			 "erase st: sk=%p tag=0x%llx (uid=%u)\n", __func__,
-			 st_entry->sk,
+		CT_DEBUG("qtaguid: %s(): erase st: cookie=%llu net=%p tag=0x%llx (uid=%u)\n",
+			 __func__,
+			 st_entry->cookie,
+			 st_entry->net,
 			 st_entry->tag,
 			 get_uid_from_tag(st_entry->tag));
 		rb_erase(&st_entry->sock_node, st_to_free_tree);
-		sockfd_put(st_entry->socket);
 		kfree(st_entry);
 	}
 }
@@ -1063,20 +1074,22 @@ done_put:
 	in_dev_put(in_dev);
 }
 
-static struct sock_tag *get_sock_stat_nl(const struct sock *sk)
+static struct sock_tag *get_sock_stat_nl(const u64 cookie, struct net *net)
 {
-	MT_DEBUG("qtaguid: get_sock_stat_nl(sk=%p)\n", sk);
-	return sock_tag_tree_search(&sock_tag_tree, sk);
+	MT_DEBUG("qtaguid: get_sock_stat_nl(cookie=%llu, net=%p)\n",
+		 cookie, net);
+	return sock_tag_tree_search(&sock_tag_tree, cookie, net);
 }
 
-static struct sock_tag *get_sock_stat(const struct sock *sk)
+static struct sock_tag *get_sock_stat(const u64 cookie, struct net *net)
 {
 	struct sock_tag *sock_tag_entry;
-	MT_DEBUG("qtaguid: get_sock_stat(sk=%p)\n", sk);
-	if (!sk)
+	if (!cookie && !net)
 		return NULL;
+	MT_DEBUG("qtaguid: get_sock_stat(cookie=%llu, net=%p)\n",
+		 cookie, net);
 	spin_lock_bh(&sock_tag_list_lock);
-	sock_tag_entry = get_sock_stat_nl(sk);
+	sock_tag_entry = get_sock_stat_nl(cookie, net);
 	spin_unlock_bh(&sock_tag_list_lock);
 	return sock_tag_entry;
 }
@@ -1280,6 +1293,7 @@ static void if_tag_stat_update(const char *ifname, uid_t uid,
 			       const struct sock *sk, enum ifs_tx_rx direction,
 			       int proto, int bytes)
 {
+	u64 cookie = 0;
 	struct tag_stat *tag_stat_entry;
 	tag_t tag, acct_tag;
 	tag_t uid_tag;
@@ -1287,10 +1301,14 @@ static void if_tag_stat_update(const char *ifname, uid_t uid,
 	struct sock_tag *sock_tag_entry;
 	struct iface_stat *iface_entry;
 	struct tag_stat *new_tag_stat = NULL;
+	struct net *net = NULL;
 	MT_DEBUG("qtaguid: if_tag_stat_update(ifname=%s "
 		"uid=%u sk=%p dir=%d proto=%d bytes=%d)\n",
 		 ifname, uid, sk, direction, proto, bytes);
-
+	if (sk) {
+		cookie = atomic64_read(&sk->sk_cookie);
+		net = sock_net(sk);
+	}
 	spin_lock_bh(&iface_stat_list_lock);
 	iface_entry = get_iface_entry(ifname);
 	if (!iface_entry) {
@@ -1308,7 +1326,7 @@ static void if_tag_stat_update(const char *ifname, uid_t uid,
 	 * Look for a tagged sock.
 	 * It will have an acct_uid.
 	 */
-	sock_tag_entry = get_sock_stat(sk);
+	sock_tag_entry = get_sock_stat(cookie, net);
 	if (sock_tag_entry) {
 		tag = sock_tag_entry->tag;
 		acct_tag = get_atag_from_tag(tag);
@@ -1655,7 +1673,6 @@ static void account_for_uid(const struct sk_buff *skb,
 static bool qtaguid_mt(const struct sk_buff *skb, struct xt_action_param *par)
 {
 	const struct xt_qtaguid_match_info *info = par->matchinfo;
-	const struct file *filp;
 	bool got_sock = false;
 	struct sock *sk;
 	kuid_t sock_uid;
@@ -1717,18 +1734,8 @@ static bool qtaguid_mt(const struct sk_buff *skb, struct xt_action_param *par)
 	}
 	MT_DEBUG("qtaguid[%d]: sk=%p got_sock=%d fam=%d proto=%d\n",
 		 par->hooknum, sk, got_sock, par->family, ipx_proto(skb, par));
-	if (sk != NULL) {
-		set_sk_callback_lock = true;
-		read_lock_bh(&sk->sk_callback_lock);
-		MT_DEBUG("qtaguid[%d]: sk=%p->sk_socket=%p->file=%p\n",
-			par->hooknum, sk, sk->sk_socket,
-			sk->sk_socket ? sk->sk_socket->file : (void *)-1LL);
-		filp = sk->sk_socket ? sk->sk_socket->file : NULL;
-		MT_DEBUG("qtaguid[%d]: filp...uid=%u\n",
-			par->hooknum, filp ? from_kuid(&init_user_ns, filp->f_cred->fsuid) : -1);
-	}
 
-	if (sk == NULL || sk->sk_socket == NULL) {
+	if (sk == NULL) {
 		/*
 		 * Here, the qtaguid_find_sk() using connection tracking
 		 * couldn't find the owner, so for now we just count them
@@ -1751,16 +1758,7 @@ static bool qtaguid_mt(const struct sk_buff *skb, struct xt_action_param *par)
 		res = false;
 		goto put_sock_ret_res;
 	}
-	filp = sk->sk_socket->file;
-	if (filp == NULL) {
-		MT_DEBUG("qtaguid[%d]: leaving filp=NULL\n", par->hooknum);
-		account_for_uid(skb, sk, 0, par);
-		res = ((info->match ^ info->invert) &
-			(XT_QTAGUID_UID | XT_QTAGUID_GID)) == 0;
-		atomic64_inc(&qtu_events.match_no_sk_file);
-		goto put_sock_ret_res;
-	}
-	sock_uid = filp->f_cred->fsuid;
+	sock_uid = sk->sk_uid;
 	/*
 	 * TODO: unhack how to force just accounting.
 	 * For now we only do iface stats when the uid-owner is not requested
@@ -1778,24 +1776,11 @@ static bool qtaguid_mt(const struct sk_buff *skb, struct xt_action_param *par)
 		kuid_t uid_min = make_kuid(&init_user_ns, info->uid_min);
 		kuid_t uid_max = make_kuid(&init_user_ns, info->uid_max);
 
-		if ((uid_gte(filp->f_cred->fsuid, uid_min) &&
-		     uid_lte(filp->f_cred->fsuid, uid_max)) ^
+		if ((uid_gte(sk->sk_uid, uid_min) &&
+		     uid_lte(sk->sk_uid, uid_max)) ^
 		    !(info->invert & XT_QTAGUID_UID)) {
 			MT_DEBUG("qtaguid[%d]: leaving uid not matching\n",
 				 par->hooknum);
-			res = false;
-			goto put_sock_ret_res;
-		}
-	}
-	if (info->match & XT_QTAGUID_GID) {
-		kgid_t gid_min = make_kgid(&init_user_ns, info->gid_min);
-		kgid_t gid_max = make_kgid(&init_user_ns, info->gid_max);
-
-		if ((gid_gte(filp->f_cred->fsgid, gid_min) &&
-				gid_lte(filp->f_cred->fsgid, gid_max)) ^
-			!(info->invert & XT_QTAGUID_GID)) {
-			MT_DEBUG("qtaguid[%d]: leaving gid not matching\n",
-				par->hooknum);
 			res = false;
 			goto put_sock_ret_res;
 		}
@@ -1857,7 +1842,8 @@ static void prdebug_full_state_locked(int indent_level, const char *fmt, ...) {}
 #endif
 
 struct proc_ctrl_print_info {
-	struct sock *sk; /* socket found by reading to sk_pos */
+	u64 cookie; /* socket found by reading to sk_pos */
+	struct net *net;
 	loff_t sk_pos;
 };
 
@@ -1874,11 +1860,13 @@ static void *qtaguid_ctrl_proc_next(struct seq_file *m, void *v, loff_t *pos)
 
 	node = rb_next(&sock_tag_entry->sock_node);
 	if (!node) {
-		pcpi->sk = NULL;
+		pcpi->cookie = 0;
+		pcpi->net = NULL;
 		sock_tag_entry = SEQ_START_TOKEN;
 	} else {
 		sock_tag_entry = rb_entry(node, struct sock_tag, sock_node);
-		pcpi->sk = sock_tag_entry->sk;
+		pcpi->cookie = sock_tag_entry->cookie;
+		pcpi->net = sock_tag_entry->net;
 	}
 	pcpi->sk_pos = *pos;
 	return sock_tag_entry;
@@ -1890,23 +1878,27 @@ static void *qtaguid_ctrl_proc_start(struct seq_file *m, loff_t *pos)
 	struct sock_tag *sock_tag_entry;
 	struct rb_node *node;
 
+	CT_DEBUG("qtaguid: proc ctrl start!: pcpi->%p, pos: %llu\n",
+		 pcpi, *pos);
 	spin_lock_bh(&sock_tag_list_lock);
 
 	if (unlikely(module_passive))
 		return NULL;
-
 	if (*pos == 0) {
 		pcpi->sk_pos = 0;
 		node = rb_first(&sock_tag_tree);
 		if (!node) {
-			pcpi->sk = NULL;
+			pcpi->cookie = 0;
+			pcpi->net = NULL;
 			return SEQ_START_TOKEN;
 		}
 		sock_tag_entry = rb_entry(node, struct sock_tag, sock_node);
-		pcpi->sk = sock_tag_entry->sk;
+		pcpi->cookie = sock_tag_entry->cookie;
+		pcpi->net = sock_tag_entry->net;
 	} else {
-		sock_tag_entry = (pcpi->sk ? get_sock_stat_nl(pcpi->sk) :
-						NULL) ?: SEQ_START_TOKEN;
+		sock_tag_entry = (pcpi->cookie ?
+				  get_sock_stat_nl(pcpi->cookie, pcpi->net) :
+				  NULL) ?: SEQ_START_TOKEN;
 		if (*pos != pcpi->sk_pos) {
 			/* seq_read skipped a next call */
 			*pos = pcpi->sk_pos;
@@ -1929,27 +1921,25 @@ static int qtaguid_ctrl_proc_show(struct seq_file *m, void *v)
 {
 	struct sock_tag *sock_tag_entry = v;
 	uid_t uid;
-	long f_count;
 
 	CT_DEBUG("qtaguid: proc ctrl pid=%u tgid=%u uid=%u\n",
 		 current->pid, current->tgid, from_kuid(&init_user_ns, current_fsuid()));
 
 	if (sock_tag_entry != SEQ_START_TOKEN) {
 		uid = get_uid_from_tag(sock_tag_entry->tag);
-		CT_DEBUG("qtaguid: proc_read(): sk=%p tag=0x%llx (uid=%u) "
-			 "pid=%u\n",
-			 sock_tag_entry->sk,
+		CT_DEBUG("qtaguid: proc_read(): cookie=%llu net=%p "
+			 "tag=0x%llx (uid=%u) pid=%u\n",
+			 sock_tag_entry->cookie,
+			 sock_tag_entry->net,
 			 sock_tag_entry->tag,
 			 uid,
 			 sock_tag_entry->pid
 			);
-		f_count = atomic_long_read(
-			&sock_tag_entry->socket->file->f_count);
-		seq_printf(m, "sock=%pK tag=0x%llx (uid=%u) pid=%u "
-			   "f_count=%lu\n",
-			   sock_tag_entry->sk,
+		seq_printf(m, "sock=%llu tag=0x%llx (uid=%u) pid=%u "
+                           "f_count=0\n",
+			   sock_tag_entry->cookie,
 			   sock_tag_entry->tag, uid,
-			   sock_tag_entry->pid, f_count);
+			   sock_tag_entry->pid);
 	} else {
 		seq_printf(m, "events: sockets_tagged=%llu "
 			   "sockets_untagged=%llu "
@@ -2222,6 +2212,8 @@ static int ctrl_cmd_tag(const char *input)
 	tag_t full_tag;
 	struct socket *el_socket;
 	int res, argc;
+	u64 cookie;
+	struct net *net;
 	struct sock_tag *sock_tag_entry;
 	struct tag_ref *tag_ref_entry;
 	struct uid_tag_data *uid_tag_data_entry;
@@ -2276,9 +2268,10 @@ static int ctrl_cmd_tag(const char *input)
 		goto err_put;
 	}
 	full_tag = combine_atag_with_uid(acct_tag, uid_int);
-
+	cookie = sock_gen_cookie(el_socket->sk);
+	net = sock_net(el_socket->sk);
 	spin_lock_bh(&sock_tag_list_lock);
-	sock_tag_entry = get_sock_stat_nl(el_socket->sk);
+	sock_tag_entry = get_sock_stat_nl(cookie, net);
 	tag_ref_entry = get_tag_ref(full_tag, &uid_tag_data_entry);
 	if (IS_ERR(tag_ref_entry)) {
 		res = PTR_ERR(tag_ref_entry);
@@ -2289,17 +2282,10 @@ static int ctrl_cmd_tag(const char *input)
 	if (sock_tag_entry) {
 		struct tag_ref *prev_tag_ref_entry;
 
-		CT_DEBUG("qtaguid: ctrl_tag(%s): retag for sk=%p "
-			 "st@%p ...->f_count=%ld\n",
-			 input, el_socket->sk, sock_tag_entry,
+		CT_DEBUG("qtaguid: ctrl_tag(%s): retag for cookie=%llu "
+			 "net=%p st@%p ...->f_count=%ld\n",
+			 input, cookie, net, sock_tag_entry,
 			 atomic_long_read(&el_socket->file->f_count));
-		/*
-		 * This is a re-tagging, so release the sock_fd that was
-		 * locked at the time of the 1st tagging.
-		 * There is still the ref from this call's sockfd_lookup() so
-		 * it can be done within the spinlock.
-		 */
-		sockfd_put(sock_tag_entry->socket);
 		prev_tag_ref_entry = lookup_tag_ref(sock_tag_entry->tag,
 						    &uid_tag_data_entry);
 		BUG_ON(IS_ERR_OR_NULL(prev_tag_ref_entry));
@@ -2319,8 +2305,8 @@ static int ctrl_cmd_tag(const char *input)
 			res = -ENOMEM;
 			goto err_tag_unref_put;
 		}
-		sock_tag_entry->sk = el_socket->sk;
-		sock_tag_entry->socket = el_socket;
+		sock_tag_entry->cookie = cookie;
+		sock_tag_entry->net = net;
 		sock_tag_entry->pid = current->tgid;
 		sock_tag_entry->tag = combine_atag_with_uid(acct_tag, uid_int);
 		spin_lock_bh(&uid_tag_data_tree_lock);
@@ -2351,6 +2337,7 @@ static int ctrl_cmd_tag(const char *input)
 	CT_DEBUG("qtaguid: ctrl_tag(%s): done st@%p ...->f_count=%ld\n",
 		 input, sock_tag_entry,
 		 atomic_long_read(&el_socket->file->f_count));
+	sockfd_put(el_socket);
 	return 0;
 
 err_tag_unref_put:
@@ -2375,6 +2362,8 @@ static int ctrl_cmd_untag(const char *input)
 	int sock_fd = 0;
 	struct socket *el_socket;
 	int res, argc;
+	u64 cookie;
+	struct net *net;
 	struct sock_tag *sock_tag_entry;
 	struct tag_ref *tag_ref_entry;
 	struct uid_tag_data *utd_entry;
@@ -2395,11 +2384,13 @@ static int ctrl_cmd_untag(const char *input)
 			from_kuid(&init_user_ns, current_fsuid()));
 		goto err;
 	}
-	CT_DEBUG("qtaguid: ctrl_untag(%s): socket->...->f_count=%ld ->sk=%p\n",
-		 input, atomic_long_read(&el_socket->file->f_count),
-		 el_socket->sk);
+	cookie = atomic64_read(&el_socket->sk->sk_cookie);
+	net = sock_net(el_socket->sk);
+	CT_DEBUG("qtaguid: ctrl_untag(%s): socket->...->cookie=%llu net=%p\n",
+		 input, cookie, net);
+
 	spin_lock_bh(&sock_tag_list_lock);
-	sock_tag_entry = get_sock_stat_nl(el_socket->sk);
+	sock_tag_entry = get_sock_stat_nl(cookie, net);
 	if (!sock_tag_entry) {
 		spin_unlock_bh(&sock_tag_list_lock);
 		res = -EINVAL;
@@ -2440,7 +2431,6 @@ static int ctrl_cmd_untag(const char *input)
 	 * Release the sock_fd that was grabbed at tag time,
 	 * and once more for the sockfd_lookup() here.
 	 */
-	sockfd_put(sock_tag_entry->socket);
 	CT_DEBUG("qtaguid: ctrl_untag(%s): done. st@%p ...->f_count=%ld\n",
 		 input, sock_tag_entry,
 		 atomic_long_read(&el_socket->file->f_count) - 1);
@@ -2842,11 +2832,10 @@ static int qtudev_release(struct inode *inode, struct file *file)
 
 	list_for_each_safe(entry, next, &pqd_entry->sock_tag_list) {
 		st_entry = list_entry(entry, struct sock_tag, list);
-		DR_DEBUG("qtaguid: %s(): "
-			 "erase sock_tag=%p->sk=%p pid=%u tgid=%u uid=%u\n",
-			 __func__,
-			 st_entry, st_entry->sk,
-			 current->pid, current->tgid,
+		DR_DEBUG("qtaguid: %s(): erase sock_tag=%p->cookie=%llu "
+			 "net=%p, pid=%u tgid=%u uid=%u\n",
+			 __func__, st_entry, st_entry->cookie,
+			 st_entry->net, current->pid, current->tgid,
 			 pqd_entry->parent_tag_data->uid);
 
 		utd_entry = uid_tag_data_tree_search(
