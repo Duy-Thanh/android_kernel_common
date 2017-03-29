@@ -164,6 +164,12 @@ ENTRY(cpu_resume)
 	ldp	w5, w6, [x8, #(MPIDR_HASH_SHIFTS + 8)]
 	compute_mpidr_hash x7, x3, x4, x5, x6, x1, x2
         /* x7 contains hash index, let's use it to grab context pointer */
+<<<<<<< HEAD   (fdd544 Merge 3.18.2 into android-3.18)
+=======
+#else
+	mov	x7, xzr
+#endif
+>>>>>>> BRANCH (219b18 Linux 3.18.3)
 	adrp	x0, sleep_save_sp
 	add	x0, x0, #:lo12:sleep_save_sp
 	ldr	x0, [x0, #SLEEP_SAVE_SP_PHYS]

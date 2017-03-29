@@ -7605,12 +7605,16 @@ SYSCALL_DEFINE5(perf_event_open,
 		 * the old lists, before installing it on new lists.
 		 */
 		synchronize_rcu();
+<<<<<<< HEAD   (fdd544 Merge 3.18.2 into android-3.18)
 
 		perf_install_in_context(ctx, group_leader, event->cpu);
+=======
+		perf_install_in_context(ctx, group_leader, group_leader->cpu);
+>>>>>>> BRANCH (219b18 Linux 3.18.3)
 		get_ctx(ctx);
 		list_for_each_entry(sibling, &group_leader->sibling_list,
 				    group_entry) {
-			perf_install_in_context(ctx, sibling, event->cpu);
+			perf_install_in_context(ctx, sibling, sibling->cpu);
 			get_ctx(ctx);
 		}
 	}

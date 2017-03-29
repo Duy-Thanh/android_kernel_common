@@ -277,6 +277,10 @@ void __init setup_arch(char **cmdline_p)
 	paging_init();
 	request_standard_resources();
 
+<<<<<<< HEAD   (fdd544 Merge 3.18.2 into android-3.18)
+=======
+	efi_idmap_init();
+>>>>>>> BRANCH (219b18 Linux 3.18.3)
 	early_ioremap_reset();
 
 	unflatten_device_tree();

@@ -232,7 +232,14 @@ static bool __init efi_virtmap_init(void)
 {
 	efi_memory_desc_t *md;
 
+<<<<<<< HEAD   (fdd544 Merge 3.18.2 into android-3.18)
 	init_new_context(NULL, &efi_mm);
+=======
+	/* boot time idmap_pg_dir is incomplete, so fill in missing parts */
+	efi_setup_idmap();
+	early_memunmap(memmap.map, memmap.map_end - memmap.map);
+}
+>>>>>>> BRANCH (219b18 Linux 3.18.3)
 
 	for_each_efi_memory_desc(&memmap, md) {
 		u64 paddr, npages, size;
@@ -282,6 +289,11 @@ static int __init arm64_enable_runtime_services(void)
 		pr_info("EFI services will not be available.\n");
 		return -1;
 	}
+<<<<<<< HEAD   (fdd544 Merge 3.18.2 into android-3.18)
+=======
+
+	mapsize = memmap.map_end - memmap.map;
+>>>>>>> BRANCH (219b18 Linux 3.18.3)
 
 	if (efi_runtime_disabled()) {
 		pr_info("EFI runtime services will be disabled.\n");

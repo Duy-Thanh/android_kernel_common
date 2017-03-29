@@ -111,7 +111,11 @@ int __cpu_suspend(unsigned long arg, int (*fn)(unsigned long))
 		else
 			cpu_switch_mm(mm->pgd, mm);
 
+<<<<<<< HEAD   (fdd544 Merge 3.18.2 into android-3.18)
 		local_flush_tlb_all();
+=======
+		flush_tlb_all();
+>>>>>>> BRANCH (219b18 Linux 3.18.3)
 
 		/*
 		 * Restore per-cpu offset before any kernel
