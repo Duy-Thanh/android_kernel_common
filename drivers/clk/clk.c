@@ -374,6 +374,7 @@ static const struct file_operations clk_dump_fops = {
 	.release	= single_release,
 };
 
+<<<<<<< HEAD   (1aced1 Merge 3.18.3 into android-3.18)
 #ifdef CONFIG_COMMON_CLK_FREQ_STATS_ACCOUNTING
 static int freq_stats_get(void *unused, u64 *val)
 {
@@ -447,6 +448,8 @@ DEFINE_SIMPLE_ATTRIBUTE(freq_stats_fops, freq_stats_get,
 #endif /*CONFIG_COMMON_CLK_FREQ_STATS_ACCOUNTING*/
 
 /* caller must hold prepare_lock */
+=======
+>>>>>>> BRANCH (71745c Linux 3.18.4)
 static int clk_debug_create_one(struct clk *clk, struct dentry *pdentry)
 {
 	struct dentry *d;
@@ -2212,7 +2215,6 @@ int __clk_init(struct device *dev, struct clk *clk)
 	else
 		clk->rate = 0;
 
-	clk_debug_register(clk);
 	/*
 	 * walk the list of orphan clocks and reparent any that are children of
 	 * this clock
@@ -2246,6 +2248,9 @@ int __clk_init(struct device *dev, struct clk *clk)
 	kref_init(&clk->ref);
 out:
 	clk_prepare_unlock();
+
+	if (!ret)
+		clk_debug_register(clk);
 
 	return ret;
 }
@@ -2546,14 +2551,17 @@ int __clk_get(struct clk *clk)
 
 void __clk_put(struct clk *clk)
 {
+	struct module *owner;
+
 	if (!clk || WARN_ON_ONCE(IS_ERR(clk)))
 		return;
 
 	clk_prepare_lock();
+	owner = clk->owner;
 	kref_put(&clk->ref, __clk_release);
 	clk_prepare_unlock();
 
-	module_put(clk->owner);
+	module_put(owner);
 }
 
 /***        clk rate change notifiers        ***/
