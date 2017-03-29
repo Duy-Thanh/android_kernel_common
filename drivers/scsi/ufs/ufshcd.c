@@ -2689,6 +2689,34 @@ static int ufshcd_verify_dev_init(struct ufs_hba *hba)
 	return err;
 }
 
+static int
+ufshcd_get_erase_block_size(struct ufs_hba *hba)
+{
+	int ret = 0;
+	u32 blk_size;
+
+	ret = ufshcd_read_unit_desc_param(hba,
+			  0,
+			  UNIT_DESC_PARAM_ERASE_BLK_SIZE,
+			  (u8 *)&blk_size,
+			  sizeof(blk_size));
+	return ((ret < 0) ? ret : blk_size);
+}
+
+static int
+ufshcd_get_logical_block_size(struct ufs_hba *hba)
+{
+	int ret = 0;
+	u8 blk_size;
+
+	ret = ufshcd_read_unit_desc_param(hba,
+			  0,
+			  UNIT_DESC_PARAM_LOGICAL_BLK_SIZE,
+			  &blk_size,
+			  sizeof(blk_size));
+	return ((ret < 0) ? ret : blk_size);
+}
+
 /**
  * ufshcd_set_queue_depth - set lun queue depth
  * @sdev: pointer to SCSI device
@@ -5321,7 +5349,69 @@ ufshcd_init_latency_hist(struct ufs_hba *hba)
 static void
 ufshcd_exit_latency_hist(struct ufs_hba *hba)
 {
-	device_create_file(hba->dev, &dev_attr_latency_hist);
+	device_remove_file(hba->dev, &dev_attr_latency_hist);
+}
+
+ssize_t
+erase_blksize_show(struct device *dev, struct device_attribute *attr,
+		   char *buf)
+{
+	struct ufs_hba *hba = dev_get_drvdata(dev);
+	int erase_blksize;
+
+	erase_blksize = ufshcd_get_erase_block_size(hba);
+	if (erase_blksize > 0)
+		return scnprintf(buf, PAGE_SIZE, "%d\n", erase_blksize);
+	else
+		return scnprintf(buf, PAGE_SIZE, "ERROR %d\n",
+				 erase_blksize);
+}
+
+static DEVICE_ATTR(erase_blksize, S_IRUGO, erase_blksize_show, NULL);
+
+static void
+ufshcd_init_erase_blksize(struct ufs_hba *hba)
+{
+	if (device_create_file(hba->dev, &dev_attr_erase_blksize))
+		dev_err(hba->dev,
+			"Failed to create erase_blksize sysfs entry\n");
+}
+
+static void
+ufshcd_exit_erase_blksize(struct ufs_hba *hba)
+{
+	device_remove_file(hba->dev, &dev_attr_erase_blksize);
+}
+
+ssize_t
+logical_blksize_show(struct device *dev, struct device_attribute *attr,
+		   char *buf)
+{
+	struct ufs_hba *hba = dev_get_drvdata(dev);
+	int logical_blksize;
+
+	logical_blksize = ufshcd_get_logical_block_size(hba);
+	if (logical_blksize > 0)
+		return scnprintf(buf, PAGE_SIZE, "%d\n", logical_blksize);
+	else
+		return scnprintf(buf, PAGE_SIZE, "ERROR %d\n",
+				 logical_blksize);
+}
+
+static DEVICE_ATTR(logical_blksize, S_IRUGO, logical_blksize_show, NULL);
+
+static void
+ufshcd_init_logical_blksize(struct ufs_hba *hba)
+{
+	if (device_create_file(hba->dev, &dev_attr_logical_blksize))
+		dev_err(hba->dev,
+			"Failed to create logical_blksize sysfs entry\n");
+}
+
+static void
+ufshcd_exit_logical_blksize(struct ufs_hba *hba)
+{
+	device_remove_file(hba->dev, &dev_attr_logical_blksize);
 }
 
 /**
@@ -5340,6 +5430,8 @@ void ufshcd_remove(struct ufs_hba *hba)
 
 	ufshcd_exit_clk_gating(hba);
 	ufshcd_exit_latency_hist(hba);
+	ufshcd_exit_logical_blksize(hba);
+	ufshcd_exit_erase_blksize(hba);
 	if (ufshcd_is_clkscaling_enabled(hba))
 		devfreq_remove_device(hba->devfreq);
 	ufshcd_hba_exit(hba);
@@ -5630,6 +5722,8 @@ int ufshcd_init(struct ufs_hba *hba, void __iomem *mmio_base, unsigned int irq)
 	pm_runtime_get_sync(dev);
 
 	ufshcd_init_latency_hist(hba);
+	ufshcd_init_logical_blksize(hba);
+	ufshcd_init_erase_blksize(hba);
 
 	/*
 	 * The device-initialize-sequence hasn't been invoked yet.
@@ -5646,6 +5740,9 @@ out_remove_scsi_host:
 exit_gating:
 	ufshcd_exit_clk_gating(hba);
 	ufshcd_exit_latency_hist(hba);
+	ufshcd_exit_logical_blksize(hba);
+	ufshcd_exit_erase_blksize(hba);
+
 out_disable:
 	hba->is_irq_enabled = false;
 	scsi_host_put(host);
