@@ -1,0 +1,16 @@
+What:		/sys/devices/soc/XXX.ufshc/erase_blksize
+Date:		March 2017
+Contact:	Mohan S. <srmohan@google.com>
+Description:
+		Query Unit 0 and report the erase block size of the
+		underlying device. If the device does not support this
+		query, or if the query times out, an error code is returned.
+
+What:		/sys/devices/soc/XXX.ufshc/logical_blksize
+Date:		March 2017
+Contact:	Mohan S. <srmohan@google.com>
+Description:
+		Query Unit 0 and report the logical block size of the
+		underlying device. Reported value is log(logical blksz bytes).
+		If the device does not support this query, or if the query
+		times out, an error code is returned.
