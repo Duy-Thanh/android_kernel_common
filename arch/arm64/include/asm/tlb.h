@@ -37,6 +37,7 @@ static inline void __tlb_remove_table(void *_table)
 
 static inline void tlb_flush(struct mmu_gather *tlb)
 {
+<<<<<<< HEAD   (9a4e31 Merge 3.18.10 into android-3.18)
 	struct vm_area_struct vma = { .vm_mm = tlb->mm, };
 
 	/*
@@ -52,6 +53,14 @@ static inline void tlb_flush(struct mmu_gather *tlb)
 	 * TLBI is sufficient here.
 	 */
 	__flush_tlb_range(&vma, tlb->start, tlb->end, true);
+=======
+	if (tlb->fullmm) {
+		flush_tlb_mm(tlb->mm);
+	} else {
+		struct vm_area_struct vma = { .vm_mm = tlb->mm, };
+		flush_tlb_range(&vma, tlb->start, tlb->end);
+	}
+>>>>>>> BRANCH (f154a1 Linux 3.18.11)
 }
 
 static inline void __pte_free_tlb(struct mmu_gather *tlb, pgtable_t pte,

@@ -147,6 +147,9 @@ static int lz4_uncompress(const char *source, char *dest, int osize)
 					(op + COPYLENGTH) > oend)
 #endif
 				goto _output_error;
+			if ((ref + COPYLENGTH) > oend ||
+					(op + COPYLENGTH) > oend)
+				goto _output_error;
 			LZ4_SECURECOPY(ref, op, (oend - COPYLENGTH));
 			while (op < cpy)
 				*op++ = *ref++;

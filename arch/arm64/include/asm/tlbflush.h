@@ -166,6 +166,37 @@ static inline void __flush_tlb_pgtable(struct mm_struct *mm,
 	asm("tlbi	vae1is, %0" : : "r" (addr));
 	dsb(ish);
 }
+<<<<<<< HEAD   (9a4e31 Merge 3.18.10 into android-3.18)
+=======
+
+/*
+ * Used to invalidate the TLB (walk caches) corresponding to intermediate page
+ * table levels (pgd/pud/pmd).
+ */
+static inline void __flush_tlb_pgtable(struct mm_struct *mm,
+				       unsigned long uaddr)
+{
+	unsigned long addr = uaddr >> 12 | ((unsigned long)ASID(mm) << 48);
+
+	dsb(ishst);
+	asm("tlbi	vae1is, %0" : : "r" (addr));
+	dsb(ish);
+}
+/*
+ * On AArch64, the cache coherency is handled via the set_pte_at() function.
+ */
+static inline void update_mmu_cache(struct vm_area_struct *vma,
+				    unsigned long addr, pte_t *ptep)
+{
+	/*
+	 * set_pte() does not have a DSB for user mappings, so make sure that
+	 * the page table write is visible.
+	 */
+	dsb(ishst);
+}
+
+#define update_mmu_cache_pmd(vma, address, pmd) do { } while (0)
+>>>>>>> BRANCH (f154a1 Linux 3.18.11)
 
 #endif
 
