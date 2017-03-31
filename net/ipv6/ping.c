@@ -106,6 +106,13 @@ int ping_v6_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 			return -EINVAL;
 		if (u->sin6_family != AF_INET6) {
 			return -EAFNOSUPPORT;
+<<<<<<< HEAD   (185c54 Merge 3.18.9 into android-3.18)
+=======
+		}
+		if (sk->sk_bound_dev_if &&
+		    sk->sk_bound_dev_if != u->sin6_scope_id) {
+			return -EINVAL;
+>>>>>>> BRANCH (96e199 Linux 3.18.10)
 		}
 		daddr = &(u->sin6_addr);
 		if (__ipv6_addr_needs_scope_id(ipv6_addr_type(daddr)))

@@ -1089,8 +1089,13 @@ static void change_pageblock_range(struct page *pageblock_page,
  * is worse than movable allocations stealing from unmovable and reclaimable
  * pageblocks.
  *
+<<<<<<< HEAD   (185c54 Merge 3.18.9 into android-3.18)
  * If we claim more than half of the pageblock, change pageblock's migratetype
  * as well.
+=======
+ * Returns the allocation migratetype if free pages were stolen, or the
+ * fallback migratetype if it was decided not to steal.
+>>>>>>> BRANCH (96e199 Linux 3.18.10)
  */
 static void try_to_steal_freepages(struct zone *zone, struct page *page,
 				  int start_type, int fallback_type)
@@ -1115,6 +1120,11 @@ static void try_to_steal_freepages(struct zone *zone, struct page *page,
 		if (pages >= (1 << (pageblock_order-1)) ||
 				page_group_by_mobility_disabled)
 			set_pageblock_migratetype(page, start_type);
+<<<<<<< HEAD   (185c54 Merge 3.18.9 into android-3.18)
+=======
+
+		return start_type;
+>>>>>>> BRANCH (96e199 Linux 3.18.10)
 	}
 }
 
