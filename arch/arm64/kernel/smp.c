@@ -312,8 +312,12 @@ void cpu_die(void)
 void __init smp_cpus_done(unsigned int max_cpus)
 {
 	pr_info("SMP: Total of %d processors activated.\n", num_online_cpus());
+<<<<<<< HEAD   (0df4fe Merge 3.18.12 into android-3.18)
 	setup_cpu_features();
 	apply_alternatives_all();
+=======
+	apply_alternatives();
+>>>>>>> BRANCH (72d391 Linux 3.18.13)
 }
 
 void __init smp_prepare_boot_cpu(void)

@@ -24,6 +24,7 @@
 #include <asm/cacheflush.h>
 #include <asm/alternative.h>
 #include <asm/cpufeature.h>
+<<<<<<< HEAD   (0df4fe Merge 3.18.12 into android-3.18)
 #include <asm/insn.h>
 #include <linux/stop_machine.h>
 
@@ -156,6 +157,39 @@ void apply_alternatives(void *start, size_t length)
 	};
 
 	__apply_alternatives(&region);
+=======
+#include <linux/stop_machine.h>
+
+extern struct alt_instr __alt_instructions[], __alt_instructions_end[];
+
+static int __apply_alternatives(void *dummy)
+{
+	struct alt_instr *alt;
+	u8 *origptr, *replptr;
+
+	for (alt = __alt_instructions; alt < __alt_instructions_end; alt++) {
+		if (!cpus_have_cap(alt->cpufeature))
+			continue;
+
+		BUG_ON(alt->alt_len > alt->orig_len);
+
+		pr_info_once("patching kernel code\n");
+
+		origptr = (u8 *)&alt->orig_offset + alt->orig_offset;
+		replptr = (u8 *)&alt->alt_offset + alt->alt_offset;
+		memcpy(origptr, replptr, alt->alt_len);
+		flush_icache_range((uintptr_t)origptr,
+				   (uintptr_t)(origptr + alt->alt_len));
+	}
+
+	return 0;
+}
+
+void apply_alternatives(void)
+{
+	/* better not try code patching on a live SMP system */
+	stop_machine(__apply_alternatives, NULL, NULL);
+>>>>>>> BRANCH (72d391 Linux 3.18.13)
 }
 
 void free_alternatives_memory(void)

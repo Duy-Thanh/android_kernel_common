@@ -25,6 +25,7 @@
 #define ARM64_WORKAROUND_CLEAN_CACHE		0
 #define ARM64_WORKAROUND_DEVICE_LOAD_ACQUIRE	1
 #define ARM64_WORKAROUND_845719			2
+<<<<<<< HEAD   (0df4fe Merge 3.18.12 into android-3.18)
 #define ARM64_HAS_SYSREG_GIC_CPUIF		3
 #define ARM64_HAS_PAN				4
 #define ARM64_HAS_UAO				5
@@ -93,6 +94,14 @@ struct arm64_cpu_capabilities {
 };
 
 extern DECLARE_BITMAP(cpu_hwcaps, ARM64_NCAPS);
+=======
+
+#define NCAPS					3
+
+#ifndef __ASSEMBLY__
+
+extern DECLARE_BITMAP(cpu_hwcaps, NCAPS);
+>>>>>>> BRANCH (72d391 Linux 3.18.13)
 
 static inline bool cpu_have_feature(unsigned int num)
 {
@@ -101,6 +110,7 @@ static inline bool cpu_have_feature(unsigned int num)
 
 static inline bool cpus_have_cap(unsigned int num)
 {
+<<<<<<< HEAD   (0df4fe Merge 3.18.12 into android-3.18)
 	if (num >= ARM64_NCAPS)
 		return false;
 	return test_bit(num, cpu_hwcaps);
@@ -188,6 +198,23 @@ static inline bool system_uses_ttbr0_pan(void)
 	return IS_ENABLED(CONFIG_ARM64_SW_TTBR0_PAN) &&
 		!cpus_have_cap(ARM64_HAS_PAN);
 }
+=======
+	if (num >= NCAPS)
+		return false;
+	return test_bit(num, cpu_hwcaps);
+}
+
+static inline void cpus_set_cap(unsigned int num)
+{
+	if (num >= NCAPS)
+		pr_warn("Attempt to set an illegal CPU capability (%d >= %d)\n",
+			num, NCAPS);
+	else
+		__set_bit(num, cpu_hwcaps);
+}
+
+void check_local_cpu_errata(void);
+>>>>>>> BRANCH (72d391 Linux 3.18.13)
 
 #endif /* __ASSEMBLY__ */
 

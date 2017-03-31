@@ -21,7 +21,11 @@
 #include <linux/init.h>
 #include <linux/linkage.h>
 
+<<<<<<< HEAD   (0df4fe Merge 3.18.12 into android-3.18)
 #include <asm/alternative.h>
+=======
+#include <asm/alternative-asm.h>
+>>>>>>> BRANCH (72d391 Linux 3.18.13)
 #include <asm/assembler.h>
 #include <asm/asm-offsets.h>
 #include <asm/cpufeature.h>
@@ -197,6 +201,7 @@ alternative_else_nop_endif
 
 	.if	\el == 0
 	ldr	x23, [sp, #S_SP]		// load return stack pointer
+<<<<<<< HEAD   (0df4fe Merge 3.18.12 into android-3.18)
 	msr	sp_el0, x23
 #ifdef CONFIG_ARM64_ERRATUM_845719
 alternative_if_not ARM64_WORKAROUND_845719
@@ -215,6 +220,25 @@ alternative_else
 #endif
 1:
 alternative_endif
+=======
+
+#ifdef CONFIG_ARM64_ERRATUM_845719
+	alternative_insn						\
+	"nop",								\
+	"tbz x22, #4, 1f",						\
+	ARM64_WORKAROUND_845719
+#ifdef CONFIG_PID_IN_CONTEXTIDR
+	alternative_insn						\
+	"nop; nop",							\
+	"mrs x29, contextidr_el1; msr contextidr_el1, x29; 1:",		\
+	ARM64_WORKAROUND_845719
+#else
+	alternative_insn						\
+	"nop",								\
+	"msr contextidr_el1, xzr; 1:",					\
+	ARM64_WORKAROUND_845719
+#endif
+>>>>>>> BRANCH (72d391 Linux 3.18.13)
 #endif
 	.endif
 
