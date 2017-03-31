@@ -683,7 +683,10 @@ static void tcp_v4_send_reset(struct sock *sk, struct sk_buff *skb)
 		arg.bound_dev_if = sk->sk_bound_dev_if;
 
 	arg.tos = ip_hdr(skb)->tos;
+<<<<<<< HEAD   (471422 Merge 3.18.7 into android-3.18)
 	arg.uid = sock_net_uid(net, sk && sk_fullsock(sk) ? sk : NULL);
+=======
+>>>>>>> BRANCH (e5c9f0 Linux 3.18.8)
 	ip_send_unicast_reply(*this_cpu_ptr(net->ipv4.tcp_sk),
 			      skb, &TCP_SKB_CB(skb)->header.h4.opt,
 			      ip_hdr(skb)->saddr, ip_hdr(skb)->daddr,
@@ -770,7 +773,10 @@ static void tcp_v4_send_ack(const struct sock *sk, struct sk_buff *skb,
 	if (oif)
 		arg.bound_dev_if = oif;
 	arg.tos = tos;
+<<<<<<< HEAD   (471422 Merge 3.18.7 into android-3.18)
 	arg.uid = sock_net_uid(net, sk_fullsock(sk) ? sk : NULL);
+=======
+>>>>>>> BRANCH (e5c9f0 Linux 3.18.8)
 	ip_send_unicast_reply(*this_cpu_ptr(net->ipv4.tcp_sk),
 			      skb, &TCP_SKB_CB(skb)->header.h4.opt,
 			      ip_hdr(skb)->saddr, ip_hdr(skb)->daddr,
