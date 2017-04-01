@@ -1739,6 +1739,7 @@ void nf_conntrack_init_end(void)
 
 int nf_conntrack_init_net(struct net *net)
 {
+	static atomic64_t unique_id;
 	int ret = -ENOMEM;
 	int cpu;
 
@@ -1762,7 +1763,12 @@ int nf_conntrack_init_net(struct net *net)
 	if (!net->ct.stat)
 		goto err_pcpu_lists;
 
+<<<<<<< HEAD   (99fc2b Merge 3.18.33 into android-3.18)
 	net->ct.slabname = kasprintf(GFP_KERNEL, "nf_conntrack_%pK", net);
+=======
+	net->ct.slabname = kasprintf(GFP_KERNEL, "nf_conntrack_%llu",
+				(u64)atomic64_inc_return(&unique_id));
+>>>>>>> BRANCH (3b6aa0 Linux 3.18.34)
 	if (!net->ct.slabname)
 		goto err_slabname;
 
