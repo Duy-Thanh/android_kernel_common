@@ -51,6 +51,7 @@ static unsigned long mmap_rnd(void)
 {
 	unsigned long rnd = 0;
 
+<<<<<<< HEAD   (6e0c50 Merge 3.18.20 into android-3.18)
 	if (current->flags & PF_RANDOMIZE) {
 #ifdef CONFIG_COMPAT
 		if (test_thread_flag(TIF_32BIT))
@@ -59,6 +60,11 @@ static unsigned long mmap_rnd(void)
 #endif
 			rnd = get_random_long() & ((1UL << mmap_rnd_bits) - 1);
 	}
+=======
+	if (current->flags & PF_RANDOMIZE)
+		rnd = (long)get_random_int() & STACK_RND_MASK;
+
+>>>>>>> BRANCH (fcd9bf Linux 3.18.21)
 	return rnd << PAGE_SHIFT;
 }
 
