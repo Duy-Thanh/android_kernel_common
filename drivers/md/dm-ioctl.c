@@ -1751,6 +1751,7 @@ static int ctl_ioctl(uint command, struct dm_ioctl __user *user)
 		return -ENOTTY;
 	}
 
+	memset(&param_kernel, 0, sizeof(param_kernel));
 	/*
 	 * Copy the parameters into kernel space.
 	 */
