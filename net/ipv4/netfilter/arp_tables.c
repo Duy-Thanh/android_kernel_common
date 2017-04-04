@@ -478,6 +478,7 @@ static int mark_source_chains(const struct xt_table_info *newinfo,
 		duprintf("Finished chain %u\n", hook);
 	}
 	return 1;
+<<<<<<< HEAD   (7b09c5 ANDROID: binder: add hwbinder,vndbinder to BINDER_DEVICES.)
 }
 
 static inline int check_entry(const struct arpt_entry *e)
@@ -495,6 +496,8 @@ static inline int check_entry(const struct arpt_entry *e)
 		return -EINVAL;
 
 	return 0;
+=======
+>>>>>>> BRANCH (e9e1b4 Linux 3.18.41)
 }
 
 static inline int check_target(struct arpt_entry *e, const char *name)
@@ -586,7 +589,15 @@ static inline int check_entry_size_and_hooks(struct arpt_entry *e,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD   (7b09c5 ANDROID: binder: add hwbinder,vndbinder to BINDER_DEVICES.)
 	err = check_entry(e);
+=======
+	if (!arp_checkentry(&e->arp))
+		return -EINVAL;
+
+	err = xt_check_entry_offsets(e, e->elems, e->target_offset,
+				     e->next_offset);
+>>>>>>> BRANCH (e9e1b4 Linux 3.18.41)
 	if (err)
 		return err;
 
@@ -1228,8 +1239,16 @@ check_compat_entry_size_and_hooks(struct compat_arpt_entry *e,
 		return -EINVAL;
 	}
 
+<<<<<<< HEAD   (7b09c5 ANDROID: binder: add hwbinder,vndbinder to BINDER_DEVICES.)
 	/* For purposes of check_entry casting the compat entry is fine */
 	ret = check_entry((struct arpt_entry *)e);
+=======
+	if (!arp_checkentry(&e->arp))
+		return -EINVAL;
+
+	ret = xt_compat_check_entry_offsets(e, e->elems, e->target_offset,
+					    e->next_offset);
+>>>>>>> BRANCH (e9e1b4 Linux 3.18.41)
 	if (ret)
 		return ret;
 

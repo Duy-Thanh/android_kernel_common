@@ -316,7 +316,11 @@ static int xenbus_write_transaction(unsigned msg_type,
 			rc = -ENOMEM;
 			goto out;
 		}
+<<<<<<< HEAD   (7b09c5 ANDROID: binder: add hwbinder,vndbinder to BINDER_DEVICES.)
 	} else {
+=======
+	} else if (msg_type == XS_TRANSACTION_END) {
+>>>>>>> BRANCH (e9e1b4 Linux 3.18.41)
 		list_for_each_entry(trans, &u->transactions, list)
 			if (trans->handle.id == u->u.msg.tx_id)
 				break;

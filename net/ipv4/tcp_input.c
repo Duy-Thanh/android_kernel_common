@@ -3325,8 +3325,12 @@ static void tcp_send_challenge_ack(struct sock *sk)
 	/* unprotected vars, we dont care of overwrites */
 	static u32 challenge_timestamp;
 	static unsigned int challenge_count;
+<<<<<<< HEAD   (7b09c5 ANDROID: binder: add hwbinder,vndbinder to BINDER_DEVICES.)
 	u32 now = jiffies / HZ;
 	u32 count;
+=======
+	u32 count, now = jiffies / HZ;
+>>>>>>> BRANCH (e9e1b4 Linux 3.18.41)
 
 	if (now != challenge_timestamp) {
 		u32 half = (sysctl_tcp_challenge_ack_limit + 1) >> 1;

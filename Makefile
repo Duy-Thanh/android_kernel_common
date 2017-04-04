@@ -1,6 +1,10 @@
 VERSION = 3
 PATCHLEVEL = 18
+<<<<<<< HEAD   (7b09c5 ANDROID: binder: add hwbinder,vndbinder to BINDER_DEVICES.)
 SUBLEVEL = 40
+=======
+SUBLEVEL = 41
+>>>>>>> BRANCH (e9e1b4 Linux 3.18.41)
 EXTRAVERSION =
 NAME = Shuffling Zombie Juror
 
