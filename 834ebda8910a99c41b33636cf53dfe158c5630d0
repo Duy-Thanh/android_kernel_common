@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58adac66_4271c3c3",
+        "filename": "net/ipv6/addrconf.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4243,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2017-04-06T22:43:53Z",
+      "side": 1,
+      "message": "error: \u0027DEVCONF_RTR_SOLICIT_MAX_INTERVAL\u0027 undeclared\n (first use in this function)",
+      "range": {
+        "startLine": 4243,
+        "startChar": 7,
+        "endLine": 4243,
+        "endChar": 39
+      },
+      "revId": "834ebda8910a99c41b33636cf53dfe158c5630d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
