@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23b732bd_15e01267",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1443,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2017-04-07T18:09:21Z",
+      "side": 0,
+      "message": "This change isn\u0027t part of the original patch.",
+      "range": {
+        "startLine": 1441,
+        "startChar": 1,
+        "endLine": 1443,
+        "endChar": 11
+      },
+      "revId": "43c6570e5683b9b0a5100dc733ab322fecb89703",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
