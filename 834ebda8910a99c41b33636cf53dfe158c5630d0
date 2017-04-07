@@ -22,6 +22,30 @@
       "revId": "834ebda8910a99c41b33636cf53dfe158c5630d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c35a798a_ec4b0f8d",
+        "filename": "net/ipv6/addrconf.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4243,
+      "author": {
+        "id": 1121773
+      },
+      "writtenOn": "2017-04-07T00:19:26Z",
+      "side": 1,
+      "message": "this error is surprising. DEVCONF_RTR_SOLICIT_MAX_INTERVAL is defined in include/uapi/linux/ipv6.h and I\u0027m able to build after rebasing and patching a clean android/android-3.10 kernel.\n\ncould something have been temporarily lost from ipv6.h while merging?",
+      "parentUuid": "58adac66_4271c3c3",
+      "range": {
+        "startLine": 4243,
+        "startChar": 7,
+        "endLine": 4243,
+        "endChar": 39
+      },
+      "revId": "834ebda8910a99c41b33636cf53dfe158c5630d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
