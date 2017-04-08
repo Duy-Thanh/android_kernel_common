@@ -1,6 +1,10 @@
 VERSION = 4
 PATCHLEVEL = 4
+<<<<<<< HEAD   (24c96f ANDROID: sdcardfs: update module info)
 SUBLEVEL = 59
+=======
+SUBLEVEL = 60
+>>>>>>> BRANCH (8f8ee9 Linux 4.4.60)
 EXTRAVERSION =
 NAME = Blurry Fish Butt
 
