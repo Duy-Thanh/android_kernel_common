@@ -29,7 +29,8 @@
  * because different namespaces have very different rules.
  */
 static int
-xattr_permission(struct inode *inode, const char *name, int mask)
+xattr_permission(struct vfsmount *mnt, struct inode *inode,
+		const char *name, int mask)
 {
 	/*
 	 * We can never set or remove an extended attribute on a read-only
@@ -70,7 +71,7 @@ xattr_permission(struct inode *inode, const char *name, int mask)
 			return -EPERM;
 	}
 
-	return inode_permission(inode, mask);
+	return inode_permission2(mnt, inode, mask);
 }
 
 /**
@@ -117,15 +118,14 @@ int __vfs_setxattr_noperm(struct dentry *dentry, const char *name,
 	return error;
 }
 
-
 int
-vfs_setxattr(struct dentry *dentry, const char *name, const void *value,
-		size_t size, int flags)
+vfs_setxattr2(struct vfsmount *mnt, struct dentry *dentry, const char *name,
+		const void *value, size_t size, int flags)
 {
 	struct inode *inode = dentry->d_inode;
 	int error;
 
-	error = xattr_permission(inode, name, MAY_WRITE);
+	error = xattr_permission(mnt, inode, name, MAY_WRITE);
 	if (error)
 		return error;
 
@@ -139,6 +139,14 @@ vfs_setxattr(struct dentry *dentry, const char *name, const void *value,
 out:
 	mutex_unlock(&inode->i_mutex);
 	return error;
+}
+EXPORT_SYMBOL_GPL(vfs_setxattr2);
+
+int
+vfs_setxattr(struct dentry *dentry, const char *name, const void *value,
+		size_t size, int flags)
+{
+	return vfs_setxattr2(NULL, dentry, name, value, size, flags);
 }
 EXPORT_SYMBOL_GPL(vfs_setxattr);
 
@@ -178,14 +186,15 @@ EXPORT_SYMBOL_GPL(xattr_getsecurity);
  * Returns the result of alloc, if failed, or the getxattr operation.
  */
 ssize_t
-vfs_getxattr_alloc(struct dentry *dentry, const char *name, char **xattr_value,
-		   size_t xattr_size, gfp_t flags)
+vfs_getxattr_alloc2(struct vfsmount *mnt, struct dentry *dentry,
+		   const char *name, char **xattr_value, size_t xattr_size,
+		   gfp_t flags)
 {
 	struct inode *inode = dentry->d_inode;
 	char *value = *xattr_value;
 	int error;
 
-	error = xattr_permission(inode, name, MAY_READ);
+	error = xattr_permission(mnt, inode, name, MAY_READ);
 	if (error)
 		return error;
 
@@ -208,14 +217,23 @@ vfs_getxattr_alloc(struct dentry *dentry, const char *name, char **xattr_value,
 	return error;
 }
 
+ssize_t
+vfs_getxattr_alloc(struct dentry *dentry, const char *name, char **xattr_value,
+		   size_t xattr_size, gfp_t flags)
+{
+	return vfs_getxattr_alloc2(NULL, dentry, name, xattr_value,
+			xattr_size, flags);
+}
+
 /* Compare an extended attribute value with the given value */
-int vfs_xattr_cmp(struct dentry *dentry, const char *xattr_name,
-		  const char *value, size_t size, gfp_t flags)
+int vfs_xattr_cmp2(struct vfsmount *mnt, struct dentry *dentry,
+		  const char *xattr_name,  const char *value, size_t size,
+		  gfp_t flags)
 {
 	char *xattr_value = NULL;
 	int rc;
 
-	rc = vfs_getxattr_alloc(dentry, xattr_name, &xattr_value, 0, flags);
+	rc = vfs_getxattr_alloc2(mnt, dentry, xattr_name, &xattr_value, 0, flags);
 	if (rc < 0)
 		return rc;
 
@@ -227,13 +245,20 @@ int vfs_xattr_cmp(struct dentry *dentry, const char *xattr_name,
 	return rc;
 }
 
+int vfs_xattr_cmp(struct dentry *dentry, const char *xattr_name,
+		  const char *value, size_t size, gfp_t flags)
+{
+	return vfs_xattr_cmp2(NULL, dentry, xattr_name, value, size, flags);
+}
+
 ssize_t
-vfs_getxattr(struct dentry *dentry, const char *name, void *value, size_t size)
+vfs_getxattr2(struct vfsmount *mnt, struct dentry *dentry,
+		const char *name, void *value, size_t size)
 {
 	struct inode *inode = dentry->d_inode;
 	int error;
 
-	error = xattr_permission(inode, name, MAY_READ);
+	error = xattr_permission(mnt, inode, name, MAY_READ);
 	if (error)
 		return error;
 
@@ -261,6 +286,15 @@ nolsm:
 
 	return error;
 }
+EXPORT_SYMBOL_GPL(vfs_getxattr2);
+
+ssize_t
+vfs_getxattr(struct dentry *dentry, const char *name, void *value, size_t size)
+{
+
+
+	return vfs_getxattr2(NULL, dentry, name, value, size);
+}
 EXPORT_SYMBOL_GPL(vfs_getxattr);
 
 ssize_t
@@ -284,7 +318,7 @@ vfs_listxattr(struct dentry *d, char *list, size_t size)
 EXPORT_SYMBOL_GPL(vfs_listxattr);
 
 int
-vfs_removexattr(struct dentry *dentry, const char *name)
+vfs_removexattr2(struct vfsmount *mnt, struct dentry *dentry, const char *name)
 {
 	struct inode *inode = dentry->d_inode;
 	int error;
@@ -292,7 +326,7 @@ vfs_removexattr(struct dentry *dentry, const char *name)
 	if (!inode->i_op->removexattr)
 		return -EOPNOTSUPP;
 
-	error = xattr_permission(inode, name, MAY_WRITE);
+	error = xattr_permission(mnt, inode, name, MAY_WRITE);
 	if (error)
 		return error;
 
@@ -312,6 +346,13 @@ vfs_removexattr(struct dentry *dentry, const char *name)
 	}
 	return error;
 }
+EXPORT_SYMBOL_GPL(vfs_removexattr2);
+
+int
+vfs_removexattr(struct dentry *dentry, const char *name)
+{
+	return vfs_removexattr2(NULL, dentry, name);
+}
 EXPORT_SYMBOL_GPL(vfs_removexattr);
 
 
@@ -319,8 +360,8 @@ EXPORT_SYMBOL_GPL(vfs_removexattr);
  * Extended attribute SET operations
  */
 static long
-setxattr(struct dentry *d, const char __user *name, const void __user *value,
-	 size_t size, int flags)
+setxattr(struct vfsmount *mnt, struct dentry *d, const char __user *name,
+	 const void __user *value, size_t size, int flags)
 {
 	int error;
 	void *kvalue = NULL;
@@ -355,7 +396,7 @@ setxattr(struct dentry *d, const char __user *name, const void __user *value,
 			posix_acl_fix_xattr_from_user(kvalue, size);
 	}
 
-	error = vfs_setxattr(d, kname, kvalue, size, flags);
+	error = vfs_setxattr2(mnt, d, kname, kvalue, size, flags);
 out:
 	if (vvalue)
 		vfree(vvalue);
@@ -376,7 +417,7 @@ retry:
 		return error;
 	error = mnt_want_write(path.mnt);
 	if (!error) {
-		error = setxattr(path.dentry, name, value, size, flags);
+		error = setxattr(path.mnt, path.dentry, name, value, size, flags);
 		mnt_drop_write(path.mnt);
 	}
 	path_put(&path);
@@ -405,16 +446,18 @@ SYSCALL_DEFINE5(fsetxattr, int, fd, const char __user *, name,
 		const void __user *,value, size_t, size, int, flags)
 {
 	struct fd f = fdget(fd);
+	struct vfsmount *mnt;
 	struct dentry *dentry;
 	int error = -EBADF;
 
 	if (!f.file)
 		return error;
 	dentry = f.file->f_path.dentry;
+	mnt = f.file->f_path.mnt;
 	audit_inode(NULL, dentry, 0);
 	error = mnt_want_write_file(f.file);
 	if (!error) {
-		error = setxattr(dentry, name, value, size, flags);
+		error = setxattr(mnt, dentry, name, value, size, flags);
 		mnt_drop_write_file(f.file);
 	}
 	fdput(f);
@@ -425,8 +468,8 @@ SYSCALL_DEFINE5(fsetxattr, int, fd, const char __user *, name,
  * Extended attribute GET operations
  */
 static ssize_t
-getxattr(struct dentry *d, const char __user *name, void __user *value,
-	 size_t size)
+getxattr(struct vfsmount *mnt, struct dentry *d, const char __user *name,
+	 void __user *value, size_t size)
 {
 	ssize_t error;
 	void *kvalue = NULL;
@@ -451,7 +494,7 @@ getxattr(struct dentry *d, const char __user *name, void __user *value,
 		}
 	}
 
-	error = vfs_getxattr(d, kname, kvalue, size);
+	error = vfs_getxattr2(mnt, d, kname, kvalue, size);
 	if (error > 0) {
 		if ((strcmp(kname, XATTR_NAME_POSIX_ACL_ACCESS) == 0) ||
 		    (strcmp(kname, XATTR_NAME_POSIX_ACL_DEFAULT) == 0))
@@ -480,7 +523,7 @@ retry:
 	error = user_path_at(AT_FDCWD, pathname, lookup_flags, &path);
 	if (error)
 		return error;
-	error = getxattr(path.dentry, name, value, size);
+	error = getxattr(path.mnt, path.dentry, name, value, size);
 	path_put(&path);
 	if (retry_estale(error, lookup_flags)) {
 		lookup_flags |= LOOKUP_REVAL;
@@ -510,7 +553,8 @@ SYSCALL_DEFINE4(fgetxattr, int, fd, const char __user *, name,
 	if (!f.file)
 		return error;
 	audit_inode(NULL, f.file->f_path.dentry, 0);
-	error = getxattr(f.file->f_path.dentry, name, value, size);
+	error = getxattr(f.file->f_path.mnt, f.file->f_path.dentry,
+			name, value, size);
 	fdput(f);
 	return error;
 }
@@ -600,7 +644,7 @@ SYSCALL_DEFINE3(flistxattr, int, fd, char __user *, list, size_t, size)
  * Extended attribute REMOVE operations
  */
 static long
-removexattr(struct dentry *d, const char __user *name)
+removexattr(struct vfsmount *mnt, struct dentry *d, const char __user *name)
 {
 	int error;
 	char kname[XATTR_NAME_MAX + 1];
@@ -611,7 +655,7 @@ removexattr(struct dentry *d, const char __user *name)
 	if (error < 0)
 		return error;
 
-	return vfs_removexattr(d, kname);
+	return vfs_removexattr2(mnt, d, kname);
 }
 
 static int path_removexattr(const char __user *pathname,
@@ -625,7 +669,7 @@ retry:
 		return error;
 	error = mnt_want_write(path.mnt);
 	if (!error) {
-		error = removexattr(path.dentry, name);
+		error = removexattr(path.mnt, path.dentry, name);
 		mnt_drop_write(path.mnt);
 	}
 	path_put(&path);
@@ -651,16 +695,18 @@ SYSCALL_DEFINE2(lremovexattr, const char __user *, pathname,
 SYSCALL_DEFINE2(fremovexattr, int, fd, const char __user *, name)
 {
 	struct fd f = fdget(fd);
+	struct vfsmount *mnt;
 	struct dentry *dentry;
 	int error = -EBADF;
 
 	if (!f.file)
 		return error;
+	mnt = f.file->f_path.mnt;
 	dentry = f.file->f_path.dentry;
 	audit_inode(NULL, dentry, 0);
 	error = mnt_want_write_file(f.file);
 	if (!error) {
-		error = removexattr(dentry, name);
+		error = removexattr(mnt, dentry, name);
 		mnt_drop_write_file(f.file);
 	}
 	fdput(f);
