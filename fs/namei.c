@@ -795,7 +795,7 @@ static inline int may_follow_link(struct path *link, struct nameidata *nd)
  *
  * Otherwise returns true.
  */
-static bool safe_hardlink_source(struct inode *inode)
+static bool safe_hardlink_source(struct vfsmount *mnt, struct inode *inode)
 {
 	umode_t mode = inode->i_mode;
 
@@ -812,7 +812,7 @@ static bool safe_hardlink_source(struct inode *inode)
 		return false;
 
 	/* Hardlinking to unreadable or unwritable sources is dangerous. */
-	if (inode_permission(inode, MAY_READ | MAY_WRITE))
+	if (inode_permission2(mnt, inode, MAY_READ | MAY_WRITE))
 		return false;
 
 	return true;
@@ -833,19 +833,21 @@ static bool safe_hardlink_source(struct inode *inode)
 static int may_linkat(struct path *link)
 {
 	const struct cred *cred;
+	struct vfsmount *mnt;
 	struct inode *inode;
 
 	if (!sysctl_protected_hardlinks)
 		return 0;
 
 	cred = current_cred();
+	mnt = link->mnt;
 	inode = link->dentry->d_inode;
 
 	/* Source inode owner (or CAP_FOWNER) can hardlink all they like,
 	 * otherwise, it must be a safe source.
 	 */
-	if (uid_eq(cred->fsuid, inode->i_uid) || safe_hardlink_source(inode) ||
-	    capable(CAP_FOWNER))
+	if (uid_eq(cred->fsuid, inode->i_uid) ||
+	    safe_hardlink_source(mnt, inode) || capable(CAP_FOWNER))
 		return 0;
 
 	audit_log_link_denied("linkat", link);
