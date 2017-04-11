@@ -1,6 +1,10 @@
 VERSION = 4
 PATCHLEVEL = 4
+<<<<<<< HEAD   (84b600 Revert "Revert "Revert "CHROMIUM: android: binder: Fix poten)
 SUBLEVEL = 59
+=======
+SUBLEVEL = 60
+>>>>>>> BRANCH (8f8ee9 Linux 4.4.60)
 EXTRAVERSION =
 NAME = Blurry Fish Butt
 
