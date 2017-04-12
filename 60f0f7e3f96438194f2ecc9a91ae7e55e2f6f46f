@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f1bb35e_b511ddcc",
+        "filename": "include/linux/xattr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-04-12T10:17:44Z",
+      "side": 1,
+      "message": "huh?  Where are these changes coming from?  Why pass a mount to these functions?  And the whole \"2\" numbering scheme is unmaintainable, look at the qualcomm kernels for proof of that :)",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 21
+      },
+      "revId": "60f0f7e3f96438194f2ecc9a91ae7e55e2f6f46f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
