@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "d8459a93_eb3fbe15",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-04-12T20:31:13Z",
+      "side": 1,
+      "message": "Greg- should the coding-style doc be changed then? Is \"else {\" actually preferred, or would it be better to conform to the doc?",
+      "parentUuid": "7a01a4ee_5da72c16",
+      "revId": "89b4b11faa80cb17e9ce75db292456fb772b5a84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca76c9aa_dfa7dda6",
         "filename": "drivers/android/binder.c",
         "patchSetId": 1
