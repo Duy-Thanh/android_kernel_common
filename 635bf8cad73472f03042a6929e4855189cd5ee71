@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "399e4cd1_3a4d7a7c",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1121773
+      },
+      "writtenOn": "2017-04-12T04:50:18Z",
+      "side": 1,
+      "message": "commented on this in 4.9, but this is definitely wrong. same in other backports.",
+      "revId": "635bf8cad73472f03042a6929e4855189cd5ee71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
