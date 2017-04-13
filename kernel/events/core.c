@@ -3466,14 +3466,15 @@ struct perf_read_data {
 	int ret;
 };
 
-static int find_cpu_to_read(struct perf_event *event, int local_cpu)
+static int __perf_event_read_cpu(struct perf_event *event, int event_cpu)
 {
-	int event_cpu = event->oncpu;
 	u16 local_pkg, event_pkg;
 
 	if (event->group_caps & PERF_EV_CAP_READ_ACTIVE_PKG) {
-		event_pkg =  topology_physical_package_id(event_cpu);
-		local_pkg =  topology_physical_package_id(local_cpu);
+		int local_cpu = smp_processor_id();
+
+		event_pkg = topology_physical_package_id(event_cpu);
+		local_pkg = topology_physical_package_id(local_cpu);
 
 		if (event_pkg == local_pkg)
 			return local_cpu;
@@ -3603,7 +3604,7 @@ u64 perf_event_read_local(struct perf_event *event)
 
 static int perf_event_read(struct perf_event *event, bool group)
 {
-	int ret = 0, cpu_to_read, local_cpu;
+	int event_cpu, ret = 0;
 
 	/*
 	 * If event is enabled and currently active on a CPU, update the
@@ -3616,21 +3617,25 @@ static int perf_event_read(struct perf_event *event, bool group)
 			.ret = 0,
 		};
 
-		local_cpu = get_cpu();
-		cpu_to_read = find_cpu_to_read(event, local_cpu);
-		put_cpu();
+		event_cpu = READ_ONCE(event->oncpu);
+		if ((unsigned)event_cpu >= nr_cpu_ids)
+			return 0;
+
+		preempt_disable();
+		event_cpu = __perf_event_read_cpu(event, event_cpu);
 
 		/*
 		 * Purposely ignore the smp_call_function_single() return
 		 * value.
 		 *
-		 * If event->oncpu isn't a valid CPU it means the event got
+		 * If event_cpu isn't a valid CPU it means the event got
 		 * scheduled out and that will have updated the event count.
 		 *
 		 * Therefore, either way, we'll have an up-to-date event count
 		 * after this.
 		 */
-		(void)smp_call_function_single(cpu_to_read, __perf_event_read, &data, 1);
+		(void)smp_call_function_single(event_cpu, __perf_event_read, &data, 1);
+		preempt_enable();
 		ret = data.ret;
 	} else if (event->state == PERF_EVENT_STATE_INACTIVE) {
 		struct perf_event_context *ctx = event->ctx;
@@ -10336,6 +10341,17 @@ void perf_event_free_task(struct task_struct *task)
 			continue;
 
 		mutex_lock(&ctx->mutex);
+		raw_spin_lock_irq(&ctx->lock);
+		/*
+		 * Destroy the task <-> ctx relation and mark the context dead.
+		 *
+		 * This is important because even though the task hasn't been
+		 * exposed yet the context has been (through child_list).
+		 */
+		RCU_INIT_POINTER(task->perf_event_ctxp[ctxn], NULL);
+		WRITE_ONCE(ctx->task, TASK_TOMBSTONE);
+		put_task_struct(task); /* cannot be last */
+		raw_spin_unlock_irq(&ctx->lock);
 again:
 		list_for_each_entry_safe(event, tmp, &ctx->pinned_groups,
 				group_entry)
@@ -10589,7 +10605,7 @@ static int perf_event_init_context(struct task_struct *child, int ctxn)
 		ret = inherit_task_group(event, parent, parent_ctx,
 					 child, ctxn, &inherited_all);
 		if (ret)
-			break;
+			goto out_unlock;
 	}
 
 	/*
@@ -10605,7 +10621,7 @@ static int perf_event_init_context(struct task_struct *child, int ctxn)
 		ret = inherit_task_group(event, parent, parent_ctx,
 					 child, ctxn, &inherited_all);
 		if (ret)
-			break;
+			goto out_unlock;
 	}
 
 	raw_spin_lock_irqsave(&parent_ctx->lock, flags);
@@ -10633,6 +10649,7 @@ static int perf_event_init_context(struct task_struct *child, int ctxn)
 	}
 
 	raw_spin_unlock_irqrestore(&parent_ctx->lock, flags);
+out_unlock:
 	mutex_unlock(&parent_ctx->mutex);
 
 	perf_unpin_context(parent_ctx);
