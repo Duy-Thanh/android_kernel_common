@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "be66f2e5_023625a5",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2017-04-19T21:08:53Z",
+      "side": 1,
+      "message": "This is to protect task list (replacing tasklist_lock). uid_lock protects uid data when the loop below walking through task list and aggregating io usages of uids, i.e. we don\u0027t get a partial result when uid io usages are being updated.\n\nThis loop can take some time and using read_lock disables preemption which caused delay on bluetooth events.",
+      "parentUuid": "78398ebe_13a31dda",
+      "range": {
+        "startLine": 267,
+        "startChar": 1,
+        "endLine": 267,
+        "endChar": 14
+      },
+      "revId": "67bce12e6fae8932fd443c3a4d55fb61a72c137b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70face39_80e995a8",
         "filename": "drivers/misc/uid_sys_stats.c",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-04-19T08:35:57Z",
       "side": 1,
       "message": "I know it is done elsewhere, but you NEVER want to crash the whole system just because you have a foolish driver bug somewhere.  That\u0027s a bit rude.  If this is impossible to hit, great, then remove it and all is good.",
+      "range": {
+        "startLine": 305,
+        "startChar": 1,
+        "endLine": 305,
+        "endChar": 40
+      },
+      "revId": "67bce12e6fae8932fd443c3a4d55fb61a72c137b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81c2e89a_97e6c175",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2017-04-19T21:08:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70face39_80e995a8",
       "range": {
         "startLine": 305,
         "startChar": 1,
