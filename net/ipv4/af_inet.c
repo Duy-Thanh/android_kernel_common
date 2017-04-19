@@ -89,6 +89,7 @@
 #include <linux/netfilter_ipv4.h>
 #include <linux/random.h>
 #include <linux/slab.h>
+#include <linux/netfilter/xt_qtaguid.h>
 
 #include <asm/uaccess.h>
 
@@ -411,15 +412,15 @@ out_rcu_unlock:
 int inet_release(struct socket *sock)
 {
 	struct sock *sk = sock->sk;
-
 	if (sk) {
 		long timeout;
+		int res;
+		res = qtaguid_untag(sock);
 
 		sock_rps_reset_flow(sk);
 
 		/* Applications forget to leave groups before exiting */
 		ip_mc_drop_socket(sk);
-
 		/* If linger is set, we don't return until the close
 		 * is complete.  Otherwise we return immediately. The
 		 * actually closing is done the same either way.
