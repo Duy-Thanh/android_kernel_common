@@ -89,6 +89,7 @@
 #include <linux/netfilter_ipv4.h>
 #include <linux/random.h>
 #include <linux/slab.h>
+#include <linux/netfilter/xt_qtaguid.h>
 
 #include <asm/uaccess.h>
 
@@ -411,9 +412,10 @@ out_rcu_unlock:
 int inet_release(struct socket *sock)
 {
 	struct sock *sk = sock->sk;
-
 	if (sk) {
 		long timeout;
+
+		qtaguid_untag(sock);
 
 		sock_rps_reset_flow(sk);
 
