@@ -46,6 +46,8 @@
 #include <linux/list.h>
 #include "multiuser.h"
 
+static int debug = 0;
+
 /* the file system name */
 #define SDCARDFS_NAME "sdcardfs"
 
