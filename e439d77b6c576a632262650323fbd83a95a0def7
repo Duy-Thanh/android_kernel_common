@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b7d207f_b100998f",
+        "filename": "include/linux/netfilter/xt_qtaguid.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2017-04-20T02:50:20Z",
+      "side": 1,
+      "message": "Convention is that variables and function arguments of type \"struct socket\" are called \"sock\".",
+      "range": {
+        "startLine": 13,
+        "startChar": 33,
+        "endLine": 13,
+        "endChar": 42
+      },
+      "revId": "e439d77b6c576a632262650323fbd83a95a0def7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea4d3345_6717062f",
+        "filename": "net/ipv4/af_inet.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2017-04-20T02:50:20Z",
+      "side": 1,
+      "message": "I\u0027m wondering if it\u0027s worth having this optimization. I\u0027m worried that:\n\n1. If there is a bug in qtaguid_untag() that causes a crash or deadlock, it\n   might be very hard to spot this bug.\n2. If there is a bug in our refcount handling, we might never untag the socket.\n\nIt looks like this code is called by a deferred handler anyway, so we\u0027re not blocking anything important, and the tree probably won\u0027t be very large. Even if an app wants to mount an attack on this code, it still can only open about 1000 fds, and traversing a 1000-node tree is not going to be slow.",
+      "range": {
+        "startLine": 448,
+        "startChar": 2,
+        "endLine": 448,
+        "endChar": 40
+      },
+      "revId": "e439d77b6c576a632262650323fbd83a95a0def7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9c2d512_c902043e",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1941,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2017-04-20T02:50:20Z",
+      "side": 1,
+      "message": "%u?",
+      "range": {
+        "startLine": 1941,
+        "startChar": 16,
+        "endLine": 1941,
+        "endChar": 17
+      },
+      "revId": "e439d77b6c576a632262650323fbd83a95a0def7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
