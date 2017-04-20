@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "56973b45_4f204c96",
+        "filename": "include/linux/netfilter/xt_qtaguid.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1121354
+      },
+      "writtenOn": "2017-04-20T16:28:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b7d207f_b100998f",
+      "range": {
+        "startLine": 13,
+        "startChar": 33,
+        "endLine": 13,
+        "endChar": 42
+      },
+      "revId": "e439d77b6c576a632262650323fbd83a95a0def7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea4d3345_6717062f",
         "filename": "net/ipv4/af_inet.c",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "c3df9c82_16ba4f2e",
+        "filename": "net/ipv4/af_inet.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1121354
+      },
+      "writtenOn": "2017-04-20T16:28:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea4d3345_6717062f",
+      "range": {
+        "startLine": 448,
+        "startChar": 2,
+        "endLine": 448,
+        "endChar": 40
+      },
+      "revId": "e439d77b6c576a632262650323fbd83a95a0def7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e9c2d512_c902043e",
         "filename": "net/netfilter/xt_qtaguid.c",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2017-04-20T02:50:20Z",
       "side": 1,
       "message": "%u?",
+      "range": {
+        "startLine": 1941,
+        "startChar": 16,
+        "endLine": 1941,
+        "endChar": 17
+      },
+      "revId": "e439d77b6c576a632262650323fbd83a95a0def7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4c935ff5_7732e3de",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1941,
+      "author": {
+        "id": 1121354
+      },
+      "writtenOn": "2017-04-20T16:28:28Z",
+      "side": 1,
+      "message": "Is atomic_read return a int value? Since atomic_t have a int inside the struct.",
+      "parentUuid": "e9c2d512_c902043e",
       "range": {
         "startLine": 1941,
         "startChar": 16,
