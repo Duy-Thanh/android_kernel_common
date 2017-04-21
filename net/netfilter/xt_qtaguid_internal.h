@@ -292,7 +292,7 @@ struct qtaguid_event_counts {
 	 * The file ptr in the sk_socket wasn't there.
 	 * This might happen for traffic while the socket is being closed.
 	 */
-	atomic64_t match_no_sk_file;
+	atomic64_t match_no_sk_gid;
 };
 
 /* Track the set active_set for the given tag. */
