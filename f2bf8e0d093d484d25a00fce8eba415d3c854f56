@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "348029a9_0edbcb4a",
+        "filename": "net/ipv4/af_inet.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2017-04-21T07:46:12Z",
+      "side": 0,
+      "message": "Can you revert this whitespace change? They might seem harmless but they can easily cause merge conflicts.",
+      "revId": "f2bf8e0d093d484d25a00fce8eba415d3c854f56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5fade020_dea23903",
+        "filename": "net/ipv4/af_inet.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2017-04-21T07:46:12Z",
+      "side": 0,
+      "message": "Put this blank line back.",
+      "revId": "f2bf8e0d093d484d25a00fce8eba415d3c854f56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
