@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d904194_69b1fe3f",
+        "filename": "net/ipv4/af_inet.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1121773
+      },
+      "writtenOn": "2017-04-21T01:52:14Z",
+      "side": 1,
+      "message": "res is unused?",
+      "revId": "2f982f624aa41c1a1600d78e8a8c08d2e7e8039d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ccbc21b_1e93b0f6",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1931,
+      "author": {
+        "id": 1121773
+      },
+      "writtenOn": "2017-04-21T01:52:14Z",
+      "side": 1,
+      "message": "you can reduce the scope of f_count by moving it to the beginning of the block. This will help future readers identify where f_count is used.\n\nif (sock_tag_entry !\u003d SEQ_START_TOKEN) {\n    int f_count;\n    ...\n\nalso consider renaming f_count now that it is derived from sk_refcnt",
+      "range": {
+        "startLine": 1931,
+        "startChar": 5,
+        "endLine": 1931,
+        "endChar": 12
+      },
+      "revId": "2f982f624aa41c1a1600d78e8a8c08d2e7e8039d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
