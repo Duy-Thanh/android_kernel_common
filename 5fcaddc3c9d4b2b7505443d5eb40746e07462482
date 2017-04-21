@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "113c13f3_df35d2a3",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-04-21T23:27:09Z",
+      "side": 1,
+      "message": "this seems to be in the wrong patch",
+      "revId": "5fcaddc3c9d4b2b7505443d5eb40746e07462482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b22bfdd_6568cc8e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-04-21T23:27:09Z",
+      "side": 1,
+      "message": "Renaming this to binder_buffer_lookup_locked and adding a binder_buffer_lookup wrapper that takes the lock might be simpler",
+      "revId": "5fcaddc3c9d4b2b7505443d5eb40746e07462482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dba1ab52_86209387",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-04-21T23:27:09Z",
+      "side": 1,
+      "message": "Renaming this to binder_alloc_buf_locked and adding a binder_alloc_buf wrapper that takes the lock might be simpler",
+      "revId": "5fcaddc3c9d4b2b7505443d5eb40746e07462482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
