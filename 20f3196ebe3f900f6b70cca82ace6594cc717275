@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0fe46829_1153bd65",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1121354
+      },
+      "writtenOn": "2017-04-21T15:53:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9e007d5_5c47395b",
+      "range": {
+        "startLine": 13,
+        "startChar": 13,
+        "endLine": 14,
+        "endChar": 27
+      },
+      "revId": "20f3196ebe3f900f6b70cca82ace6594cc717275",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a2da897b_33acc9f7",
         "filename": "net/ipv4/af_inet.c",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2017-04-21T07:46:12Z",
       "side": 1,
       "message": "It occurs to me that the if we untag the socket here, then traffic that happens between when we call close() and when traffic actually stops flowing will not be tagged. Not ideal, but we can probably live with it.\n\nI was thinking that if you made qtaguid_untag take a struct sock instead of a struct socket, perhaps you could call qtaguid_untag after sk-\u003esk_prot-\u003eclose() completes. But by that time the socket might have been freed already, or there might be other incorrect behaviour. It seems safer to do the untag where you have it now.",
+      "range": {
+        "startLine": 417,
+        "startChar": 2,
+        "endLine": 417,
+        "endChar": 22
+      },
+      "revId": "20f3196ebe3f900f6b70cca82ace6594cc717275",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3089f509_abf7a280",
+        "filename": "net/ipv4/af_inet.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1121354
+      },
+      "writtenOn": "2017-04-21T15:53:22Z",
+      "side": 1,
+      "message": "Okay, I will leave it as is then",
+      "parentUuid": "a2da897b_33acc9f7",
       "range": {
         "startLine": 417,
         "startChar": 2,
@@ -82,6 +130,30 @@
       "writtenOn": "2017-04-21T07:46:12Z",
       "side": 1,
       "message": "Remove (file) - it\u0027s not true any more.",
+      "range": {
+        "startLine": 2346,
+        "startChar": 34,
+        "endLine": 2346,
+        "endChar": 40
+      },
+      "revId": "20f3196ebe3f900f6b70cca82ace6594cc717275",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "18f998f2_cac28623",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2346,
+      "author": {
+        "id": 1121354
+      },
+      "writtenOn": "2017-04-21T15:53:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b8531b8_91392ca2",
       "range": {
         "startLine": 2346,
         "startChar": 34,
