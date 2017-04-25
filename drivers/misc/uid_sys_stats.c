@@ -111,11 +111,11 @@ static int uid_cputime_show(struct seq_file *m, void *v)
 		uid_entry = find_or_register_uid(from_kuid_munged(
 			current_user_ns(), task_uid(task)));
 		if (!uid_entry) {
-			read_unlock(&tasklist_lock);
-			rt_mutex_unlock(&uid_lock);
 			pr_err("%s: failed to find the uid_entry for uid %d\n",
 				__func__, from_kuid_munged(current_user_ns(),
 				task_uid(task)));
+			read_unlock(&tasklist_lock);
+			rt_mutex_unlock(&uid_lock);
 			return -ENOMEM;
 		}
 		task_cputime_adjusted(task, &utime, &stime);
