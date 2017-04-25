@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c6cdce4_bca650c0",
+        "filename": "fs/sdcardfs/file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2017-04-25T22:40:46Z",
+      "side": 1,
+      "message": "Is this meant to be part of this patch?",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 29
+      },
+      "revId": "1430945c04fc253884e3843694a2cd2c4f4f6fa4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
