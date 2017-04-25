@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a33707b5_5d861940",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1156728
+      },
+      "writtenOn": "2017-04-25T19:24:45Z",
+      "side": 1,
+      "message": "a snapshot of code (from one branch to another branch) can be useful, but it\u0027s more useful if it has a short log of \"new-to-us\" commits alongside, in case moving to a new upstream branch causes conflicts (etc.) and the integration needs to get redone.",
+      "revId": "6a6a7657c231e947233c43ae0522bbd4edf0139e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
