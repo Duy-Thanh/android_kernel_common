@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5281f5f_4c4f9880",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2017-04-26T20:57:04Z",
+      "side": 1,
+      "message": "how about save uid to temp variable above line 111 and print it here? Then we can release lock early.",
+      "range": {
+        "startLine": 118,
+        "startChar": 28,
+        "endLine": 118,
+        "endChar": 30
+      },
+      "revId": "7d3a264f5a3cfd5070d3297868e4078b5ec558f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
