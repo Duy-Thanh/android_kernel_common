@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "310c9d95_65986cc0",
+        "filename": "fs/sdcardfs/file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1105434
+      },
+      "writtenOn": "2017-04-26T00:17:40Z",
+      "side": 1,
+      "message": "I have the same question that Greg asked - post write do we expect anything but times/sizes to change ?",
+      "range": {
+        "startLine": 74,
+        "startChar": 1,
+        "endLine": 74,
+        "endChar": 65
+      },
+      "revId": "1430945c04fc253884e3843694a2cd2c4f4f6fa4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c6cdce4_bca650c0",
         "filename": "fs/sdcardfs/file.c",
         "patchSetId": 4
