@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd5ecffa_e3fcbea2",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2017-04-26T19:25:35Z",
+      "side": 1,
+      "message": "(1 \u003c\u003c 6) is 64",
+      "range": {
+        "startLine": 30,
+        "startChar": 22,
+        "endLine": 30,
+        "endChar": 23
+      },
+      "revId": "b3999a6f099341c9949a121d6e6e3f5323d8786f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
