@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0ab73a1_4d4a3dbe",
+        "filename": "arch/mips/configs/ranchu32r6_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-04-27T07:23:22Z",
+      "side": 1,
+      "message": "why are you touching default config files?  That shouldn\u0027t matter for the goldfish emulator, right??",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 20
+      },
+      "revId": "8fa5a6c5cd9e9e1baec531c4517455fb5d9ca866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
