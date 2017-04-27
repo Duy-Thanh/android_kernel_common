@@ -22,6 +22,30 @@
       "revId": "8fa5a6c5cd9e9e1baec531c4517455fb5d9ca866",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "82a0e67d_5213c27d",
+        "filename": "arch/mips/configs/ranchu32r6_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1082465
+      },
+      "writtenOn": "2017-04-27T14:54:16Z",
+      "side": 1,
+      "message": "These ranchu config files are used for the emulator\u0027s 32-bit MIPS kernel. Generally, \"ranchu\" and \"goldfish\" are both referring to \"goldfish emulator\", while \"ranchu\" is more about running on QEMU 2.x specifically.",
+      "parentUuid": "b0ab73a1_4d4a3dbe",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 20
+      },
+      "revId": "8fa5a6c5cd9e9e1baec531c4517455fb5d9ca866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
