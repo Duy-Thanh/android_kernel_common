@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b17e03e_403d63f5",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2400,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2017-04-28T00:54:04Z",
+      "side": 1,
+      "message": "Per in-person discussion, we should probably not call this force. Maybe \"kernel\"?",
+      "range": {
+        "startLine": 2400,
+        "startChar": 49,
+        "endLine": 2400,
+        "endChar": 54
+      },
+      "revId": "d287778083245a1b5e713206d06ea40091819268",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db9da144_c4c5314b",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2442,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2017-04-28T00:54:04Z",
+      "side": 1,
+      "message": "This is hard to read. Suggest:\n\n    pid_t pid;\n    if (kernel)\n        pid \u003d sock_tag_entry-\u003epid;\n    else\n        pid \u003d current_fsuid();\n\n    pqd_entry \u003d ...;\n    if (!IS_ERR_OR_NULL(pqd_entry)\n         list_del(\u0026sock_tag_entry-\u003elist);\n    else\n        pr_warn_once(...);",
+      "range": {
+        "startLine": 2432,
+        "startChar": 0,
+        "endLine": 2442,
+        "endChar": 31
+      },
+      "revId": "d287778083245a1b5e713206d06ea40091819268",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
