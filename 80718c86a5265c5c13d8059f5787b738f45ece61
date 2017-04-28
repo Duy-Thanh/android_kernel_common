@@ -16,6 +16,24 @@
       "revId": "80718c86a5265c5c13d8059f5787b738f45ece61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0607c443_5c1ae1f8",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2396,
+      "author": {
+        "id": 1121354
+      },
+      "writtenOn": "2017-04-28T16:31:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90050719_8adc098f",
+      "revId": "80718c86a5265c5c13d8059f5787b738f45ece61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
