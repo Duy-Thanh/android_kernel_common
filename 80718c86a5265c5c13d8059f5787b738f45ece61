@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90050719_8adc098f",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2396,
+      "author": {
+        "id": 1121773
+      },
+      "writtenOn": "2017-04-28T06:04:59Z",
+      "side": 1,
+      "message": "you don\u0027t do any cleanup in err:\n\nconsider changing gotos above to return directly.",
+      "revId": "80718c86a5265c5c13d8059f5787b738f45ece61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
