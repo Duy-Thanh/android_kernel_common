@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c075ad9_508ca30b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3725,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-04-28T23:19:25Z",
+      "side": 1,
+      "message": "what prevents this from getting freed before you use it below?",
+      "revId": "00626bae415b24890bca281a1bbbaf452e9da2ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
