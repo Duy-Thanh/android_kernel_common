@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b65aba2c_fb8b5340",
+        "filename": "include/linux/netfilter/xt_qtaguid.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1121354
+      },
+      "writtenOn": "2017-05-01T17:45:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4a45056_ff243711",
+      "range": {
+        "startLine": 13,
+        "startChar": 44,
+        "endLine": 13,
+        "endChar": 49
+      },
+      "revId": "af615a7df0e058f1ad66a3a76762eeed9fbae921",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a5e5d14_d015e171",
         "filename": "net/netfilter/xt_qtaguid.c",
         "patchSetId": 8
@@ -59,6 +83,30 @@
       "writtenOn": "2017-05-01T16:31:40Z",
       "side": 1,
       "message": "Why do we need this extra if clause?",
+      "range": {
+        "startLine": 2438,
+        "startChar": 8,
+        "endLine": 2438,
+        "endChar": 38
+      },
+      "revId": "af615a7df0e058f1ad66a3a76762eeed9fbae921",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d32a8b40_f65e4321",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 2438,
+      "author": {
+        "id": 1121354
+      },
+      "writtenOn": "2017-05-01T17:45:17Z",
+      "side": 1,
+      "message": "This is the place where the crash happens if we tag the socket, open the dev and then untag the socket. It crashes because this list is not added to any linked list when tagging the socket so the next and prev pointer point to nothing. So I added this check here to prevent that crash by checking the next pointer.",
+      "parentUuid": "c1796e96_4a34e93e",
       "range": {
         "startLine": 2438,
         "startChar": 8,
