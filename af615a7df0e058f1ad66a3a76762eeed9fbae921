@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b4a45056_ff243711",
+        "filename": "include/linux/netfilter/xt_qtaguid.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2017-05-01T16:31:40Z",
+      "side": 1,
+      "message": "kernel",
+      "range": {
+        "startLine": 13,
+        "startChar": 44,
+        "endLine": 13,
+        "endChar": 49
+      },
+      "revId": "af615a7df0e058f1ad66a3a76762eeed9fbae921",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a5e5d14_d015e171",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 2425,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2017-05-01T16:31:40Z",
+      "side": 1,
+      "message": "Add a space before this (",
+      "range": {
+        "startLine": 2425,
+        "startChar": 3,
+        "endLine": 2425,
+        "endChar": 4
+      },
+      "revId": "af615a7df0e058f1ad66a3a76762eeed9fbae921",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1796e96_4a34e93e",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 2438,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2017-05-01T16:31:40Z",
+      "side": 1,
+      "message": "Why do we need this extra if clause?",
+      "range": {
+        "startLine": 2438,
+        "startChar": 8,
+        "endLine": 2438,
+        "endChar": 38
+      },
+      "revId": "af615a7df0e058f1ad66a3a76762eeed9fbae921",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

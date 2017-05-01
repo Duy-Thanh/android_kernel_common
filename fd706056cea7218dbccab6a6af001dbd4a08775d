@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a79c47d_a9bedcc9",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 2423,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2017-05-01T16:31:40Z",
+      "side": 0,
+      "message": "Any reason to remove this TODO comment? Is it out of date?",
+      "range": {
+        "startLine": 2419,
+        "startChar": 0,
+        "endLine": 2423,
+        "endChar": 4
+      },
+      "revId": "fd706056cea7218dbccab6a6af001dbd4a08775d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
