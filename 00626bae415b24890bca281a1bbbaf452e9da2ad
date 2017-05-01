@@ -16,6 +16,24 @@
       "revId": "00626bae415b24890bca281a1bbbaf452e9da2ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c033175f_16a0c74e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3725,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-01T17:18:06Z",
+      "side": 1,
+      "message": "At this point in the patch series, its the global lock that protects against that. Later in the series it will be the zombie list (or equiv mechanism to protect against unsafe ref, node, thread, proc pointers)",
+      "parentUuid": "5c075ad9_508ca30b",
+      "revId": "00626bae415b24890bca281a1bbbaf452e9da2ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
