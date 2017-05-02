@@ -975,18 +975,12 @@ static struct binder_ref *binder_get_ref_for_node(struct binder_proc *proc,
 	 */
 	if (node_proc)
 		binder_proc_lock(node_proc);
-	if (node) {
-		hlist_add_head(&new_ref->node_entry, &node->refs);
+	hlist_add_head(&new_ref->node_entry, &node->refs);
 
-		binder_debug(BINDER_DEBUG_INTERNAL_REFS,
-			     "%d new ref %d desc %d for node %d\n",
-			      proc->pid, new_ref->debug_id, new_ref->desc,
-			      node->debug_id);
-	} else {
-		binder_debug(BINDER_DEBUG_INTERNAL_REFS,
-			     "%d new ref %d desc %d for dead node\n",
-			      proc->pid, new_ref->debug_id, new_ref->desc);
-	}
+	binder_debug(BINDER_DEBUG_INTERNAL_REFS,
+		     "%d new ref %d desc %d for node %d\n",
+		      proc->pid, new_ref->debug_id, new_ref->desc,
+		      node->debug_id);
 	if (node_proc)
 		binder_proc_unlock(node_proc);
 	return new_ref;
