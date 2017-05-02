@@ -1407,10 +1407,15 @@ static int xc2028_set_config(struct dvb_frontend *fe, void *priv_cfg)
 	memcpy(&priv->ctrl, p, sizeof(priv->ctrl));
 	if (p->fname) {
 		priv->ctrl.fname = kstrdup(p->fname, GFP_KERNEL);
+<<<<<<< HEAD   (1342bd ANDROID: Add untag hacks to inet_release function)
 		if (priv->ctrl.fname == NULL) {
 			rc = -ENOMEM;
 			goto unlock;
 		}
+=======
+		if (priv->ctrl.fname == NULL)
+			return -ENOMEM;
+>>>>>>> BRANCH (ce88f0 Linux 3.18.51)
 	}
 
 	/*

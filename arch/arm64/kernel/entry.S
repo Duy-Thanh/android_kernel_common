@@ -626,7 +626,11 @@ el0_inv:
 	mov	x0, sp
 	mov	x1, #BAD_SYNC
 	mrs	x2, esr_el1
+<<<<<<< HEAD   (1342bd ANDROID: Add untag hacks to inet_release function)
 	bl	bad_mode
+=======
+	bl	bad_el0_sync
+>>>>>>> BRANCH (ce88f0 Linux 3.18.51)
 	b	ret_to_user
 ENDPROC(el0_sync)
 

@@ -1293,9 +1293,13 @@ void set_task_cpu(struct task_struct *p, unsigned int new_cpu)
 		if (p->sched_class->migrate_task_rq)
 			p->sched_class->migrate_task_rq(p, new_cpu);
 		p->se.nr_migrations++;
+<<<<<<< HEAD   (1342bd ANDROID: Add untag hacks to inet_release function)
 		perf_sw_event(PERF_COUNT_SW_CPU_MIGRATIONS, 1, NULL, 0);
 
 		walt_fixup_busy_time(p, new_cpu);
+=======
+		perf_sw_event_sched(PERF_COUNT_SW_CPU_MIGRATIONS, 1, 0);
+>>>>>>> BRANCH (ce88f0 Linux 3.18.51)
 	}
 
 	__set_task_cpu(p, new_cpu);
