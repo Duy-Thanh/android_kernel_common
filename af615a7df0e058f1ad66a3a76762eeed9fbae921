@@ -116,6 +116,30 @@
       "revId": "af615a7df0e058f1ad66a3a76762eeed9fbae921",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fbb99b95_6bb4c89e",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 2438,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2017-05-02T01:51:24Z",
+      "side": 1,
+      "message": "In normal operation with a well-behaved app, this should never be null, right? If so, instead of just silently continuing when sock_tag_entry-\u003elist.next is null, can you warn? Either put it in the previous pr_warn_once or add it to its own pr_warn_once.",
+      "parentUuid": "d32a8b40_f65e4321",
+      "range": {
+        "startLine": 2438,
+        "startChar": 8,
+        "endLine": 2438,
+        "endChar": 38
+      },
+      "revId": "af615a7df0e058f1ad66a3a76762eeed9fbae921",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
