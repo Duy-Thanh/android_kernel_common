@@ -444,7 +444,10 @@ enum bpf_func_id {
 	 * @skb: pointer to skb
 	 */
 	BPF_FUNC_set_hash_invalid,
-
+	BPF_FUNC_get_numa_node_id,
+	BPF_FUNC_skb_change_head,
+	BPF_FUNC_xdp_adjust_head,
+	BPF_FUNC_probe_read_str,
 	/**
 	 * u64 bpf_bpf_get_socket_cookie(skb)
 	 *     Get the cookie for the socket stored inside sk_buff.
