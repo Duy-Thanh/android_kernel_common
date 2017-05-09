@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "202b6db3_97b2487f",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-09T23:39:22Z",
+      "side": 1,
+      "message": "Well, it will cause the thread to briefly wake and find no work to do...but it shouldn\u0027t. Fixed.",
+      "parentUuid": "4e0e9429_e99bf0bb",
+      "revId": "ffaed0c8a5b94b9c513951c3fb74bfd3229de533",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "971c523a_c07a37e9",
         "filename": "drivers/android/binder.c",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2017-05-09T22:11:19Z",
       "side": 1,
       "message": "remove traling whitespace",
+      "range": {
+        "startLine": 2028,
+        "startChar": 35,
+        "endLine": 2028,
+        "endChar": 36
+      },
+      "revId": "ffaed0c8a5b94b9c513951c3fb74bfd3229de533",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cc7b46bb_951e97da",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2028,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-09T23:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "971c523a_c07a37e9",
       "range": {
         "startLine": 2028,
         "startChar": 35,
