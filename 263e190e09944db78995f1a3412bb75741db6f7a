@@ -1,0 +1,180 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f2a25de_b0bc3a06",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-10T03:26:01Z",
+      "side": 1,
+      "message": "add binder_free_ref",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f4201916_4850e5b3",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1095,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-10T03:26:01Z",
+      "side": 1,
+      "message": "was this not needed before?",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dae52681_dff99025",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-10T03:26:01Z",
+      "side": 1,
+      "message": "why do you return -EINVAL, true and false from one function.",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e991b6a2_6e243dde",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1162,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-10T03:26:01Z",
+      "side": 1,
+      "message": "what protect node after this?",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f905fea_aeea64f1",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1717,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-10T03:26:01Z",
+      "side": 1,
+      "message": "what prevents the node from getting freed after it is returned here?",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e2f6652_4f9ba3dd",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2479,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-10T03:26:01Z",
+      "side": 1,
+      "message": "\u003d cmd \u003d\u003d BC_ACQUIRE || cmd \u003d\u003d BC_RELEASE\nbool acquire \u003d cmd \u003d\u003d BC_INCREFS || cmd \u003d\u003d BC_ACQUIRE",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "414f2a4a_a3b00853",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2489,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-10T03:26:01Z",
+      "side": 1,
+      "message": "false?",
+      "range": {
+        "startLine": 2489,
+        "startChar": 13,
+        "endLine": 2489,
+        "endChar": 14
+      },
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ede7b006_555faf6b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2525,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-10T03:26:01Z",
+      "side": 1,
+      "message": "passing inc/dec as an argument to binder_get_ref might be simpler",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f66d6aa5_bca28e52",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2543,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-10T03:26:01Z",
+      "side": 1,
+      "message": "what do you use these for?",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ee458eb_ba912432",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2808,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-10T03:26:01Z",
+      "side": 1,
+      "message": "Why is this different from the \"if (ref \u003d\u003d NULL) {\" above.",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
