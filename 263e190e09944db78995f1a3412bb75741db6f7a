@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "ad680552_07f78ed3",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-10T23:46:20Z",
+      "side": 1,
+      "message": "I mean add a binder_free_ref function containing the code you deleted as it is now duplicated in the callers.",
+      "parentUuid": "95cbd1d0_f54c85dc",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f4201916_4850e5b3",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -334,6 +352,24 @@
       "side": 1,
       "message": "Are you asking why \"(ref \u003d\u003d NULL)\" above and \"(!ref)\" here? I figured \"(!ref)\" is preferred and the \"ref \u003d\u003d NULL\" is an unchanged line. Would you prefer \"ref \u003d\u003d NULL\" here for consistency?\n\n...or are you asking why do we need to check again here when we checked above? That\u0027s because we had to unlock at line 2788 and perhaps the ref went away when we didn\u0027t have the lock.",
       "parentUuid": "4ee458eb_ba912432",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aee4fae2_631abec4",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2808,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-10T23:46:20Z",
+      "side": 1,
+      "message": "No, I\u0027m asking why it is handled differently when detected here versus when it is detected early.",
+      "parentUuid": "3e3f0452_3c78c90d",
       "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
