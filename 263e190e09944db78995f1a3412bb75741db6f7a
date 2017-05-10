@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "95cbd1d0_f54c85dc",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-10T17:39:58Z",
+      "side": 1,
+      "message": "Actually, since we hold a lock here, we can\u0027t actually do the free... so \"delete\" is probably not the right name. The caller does the actual kfree. I\u0027ll change the name of this to binder_cleanup_ref_locked()",
+      "parentUuid": "1f2a25de_b0bc3a06",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f4201916_4850e5b3",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2017-05-10T03:26:01Z",
       "side": 1,
       "message": "was this not needed before?",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a41f2f24_4fb91f1d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1095,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-10T17:39:58Z",
+      "side": 1,
+      "message": "Hmm. I thought it was, but clearly it is not. I\u0027ll remove this.",
+      "parentUuid": "f4201916_4850e5b3",
       "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "b8bb2001_f884438b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-10T17:39:58Z",
+      "side": 1,
+      "message": "Didn\u0027t fix the error cases when I changed the return. Good catch.",
+      "parentUuid": "dae52681_dff99025",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e991b6a2_6e243dde",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2017-05-10T03:26:01Z",
       "side": 1,
       "message": "what protect node after this?",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23ef5921_1e6e6976",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1162,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-10T17:39:58Z",
+      "side": 1,
+      "message": "node persistence is coming in the next patch.",
+      "parentUuid": "e991b6a2_6e243dde",
       "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "d6ee71ac_62850509",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1717,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-10T17:39:58Z",
+      "side": 1,
+      "message": "coming in the next patch. basically, binder_get_node* will do an implicit ref and the callee will need to do a binder_put_node() to indicate it is done with the node.",
+      "parentUuid": "0f905fea_aeea64f1",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3e2f6652_4f9ba3dd",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2017-05-10T03:26:01Z",
       "side": 1,
       "message": "\u003d cmd \u003d\u003d BC_ACQUIRE || cmd \u003d\u003d BC_RELEASE\nbool acquire \u003d cmd \u003d\u003d BC_INCREFS || cmd \u003d\u003d BC_ACQUIRE",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "62efa435_2e1c07ea",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2479,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-10T17:39:58Z",
+      "side": 1,
+      "message": "Ok.",
+      "parentUuid": "3e2f6652_4f9ba3dd",
       "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -144,6 +252,24 @@
     },
     {
       "key": {
+        "uuid": "027ec8bf_ec12fefd",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2525,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-10T17:39:58Z",
+      "side": 1,
+      "message": "Indeed. Simplified.",
+      "parentUuid": "ede7b006_555faf6b",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f66d6aa5_bca28e52",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -161,6 +287,24 @@
     },
     {
       "key": {
+        "uuid": "5058278a_7f40e344",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2543,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-10T17:39:58Z",
+      "side": 1,
+      "message": "Oops... debug code removed.",
+      "parentUuid": "f66d6aa5_bca28e52",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ee458eb_ba912432",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -172,6 +316,24 @@
       "writtenOn": "2017-05-10T03:26:01Z",
       "side": 1,
       "message": "Why is this different from the \"if (ref \u003d\u003d NULL) {\" above.",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e3f0452_3c78c90d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2808,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-10T17:39:58Z",
+      "side": 1,
+      "message": "Are you asking why \"(ref \u003d\u003d NULL)\" above and \"(!ref)\" here? I figured \"(!ref)\" is preferred and the \"ref \u003d\u003d NULL\" is an unchanged line. Would you prefer \"ref \u003d\u003d NULL\" here for consistency?\n\n...or are you asking why do we need to check again here when we checked above? That\u0027s because we had to unlock at line 2788 and perhaps the ref went away when we didn\u0027t have the lock.",
+      "parentUuid": "4ee458eb_ba912432",
       "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
