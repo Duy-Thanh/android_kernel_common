@@ -205,6 +205,24 @@
       "revId": "85fb77c9733a89594be6e87b7448649da01c6d28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "712f18a3_0b9c5bab",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1954,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-10T15:22:44Z",
+      "side": 1,
+      "message": "Sigh. Yes, I think that\u0027s an artifact of when I moved this patch before the proc lock patch. Fixed",
+      "parentUuid": "3845c375_2b130fd8",
+      "revId": "85fb77c9733a89594be6e87b7448649da01c6d28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
