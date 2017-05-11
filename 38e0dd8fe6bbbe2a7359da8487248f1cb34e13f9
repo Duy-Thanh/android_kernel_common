@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc16471f_63b93ef3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-11T01:58:04Z",
+      "side": 1,
+      "message": "You also changed binder_send_failed_reply to pop the transaction even if when it failed to send an error code.",
+      "revId": "38e0dd8fe6bbbe2a7359da8487248f1cb34e13f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
