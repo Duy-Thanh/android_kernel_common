@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "4fae237c_54bbd7de",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-11T16:14:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad680552_07f78ed3",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f4201916_4850e5b3",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -370,6 +388,24 @@
       "side": 1,
       "message": "No, I\u0027m asking why it is handled differently when detected here versus when it is detected early.",
       "parentUuid": "3e3f0452_3c78c90d",
+      "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9966e30_6db0eeea",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2808,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-11T16:14:24Z",
+      "side": 1,
+      "message": "Changed to match above handling.",
+      "parentUuid": "aee4fae2_631abec4",
       "revId": "263e190e09944db78995f1a3412bb75741db6f7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
