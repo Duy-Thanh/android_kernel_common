@@ -34,6 +34,24 @@
       "revId": "38e0dd8fe6bbbe2a7359da8487248f1cb34e13f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b73d8050_9c6a517b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-05-12T22:09:58Z",
+      "side": 1,
+      "message": "Did you mean to change the commit message to indicate this?",
+      "parentUuid": "4adbb180_ea52c460",
+      "revId": "38e0dd8fe6bbbe2a7359da8487248f1cb34e13f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
