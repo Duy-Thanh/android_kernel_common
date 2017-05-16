@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb5b76b1_c00df33a",
+        "filename": "fs/sdcardfs/dentry.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2017-05-16T22:40:59Z",
+      "side": 1,
+      "message": "This exits the function still holding the spinlocks acquired above.",
+      "range": {
+        "startLine": 99,
+        "startChar": 2,
+        "endLine": 99,
+        "endChar": 11
+      },
+      "revId": "cf6b4dbcc8b564e66f680dfa121b47aa53108ba0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ba06a42_4e5535e5",
+        "filename": "fs/sdcardfs/sdcardfs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2017-05-16T22:40:59Z",
+      "side": 1,
+      "message": "Bikeshedding time:\n\nKernel convention is to use foo_get() to take a reference, foo_put() to drop a reference, and foo_release() for the cleanup callback passed to kref_put().\n\nThe naming\u0027s a little more important than usual here, because it provides a clue to the reader that there\u0027s refcounting going on.",
+      "range": {
+        "startLine": 369,
+        "startChar": 42,
+        "endLine": 369,
+        "endChar": 51
+      },
+      "revId": "cf6b4dbcc8b564e66f680dfa121b47aa53108ba0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
