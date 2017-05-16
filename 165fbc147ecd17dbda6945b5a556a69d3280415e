@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ff2f318_8c01bb62",
+        "filename": "fs/sdcardfs/super.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2017-05-16T23:47:42Z",
+      "side": 1,
+      "message": "If you allocate with __GFP_ZERO then the kernel will do this for you",
+      "range": {
+        "startLine": 215,
+        "startChar": 1,
+        "endLine": 216,
+        "endChar": 50
+      },
+      "revId": "165fbc147ecd17dbda6945b5a556a69d3280415e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
