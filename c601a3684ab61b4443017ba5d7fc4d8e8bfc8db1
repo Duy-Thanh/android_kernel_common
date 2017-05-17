@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "364e97dd_27521b48",
+        "filename": "fs/sdcardfs/derived_perm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2017-05-17T00:26:24Z",
+      "side": 1,
+      "message": "info_d",
+      "range": {
+        "startLine": 182,
+        "startChar": 5,
+        "endLine": 182,
+        "endChar": 15
+      },
+      "revId": "c601a3684ab61b4443017ba5d7fc4d8e8bfc8db1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "274d7e08_7521ea21",
+        "filename": "fs/sdcardfs/sdcardfs.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2017-05-17T00:26:24Z",
+      "side": 1,
+      "message": "info-\u003edata could be released and abandoned is no longer valid. Is it possible for use-after-free to happen?",
+      "revId": "c601a3684ab61b4443017ba5d7fc4d8e8bfc8db1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
