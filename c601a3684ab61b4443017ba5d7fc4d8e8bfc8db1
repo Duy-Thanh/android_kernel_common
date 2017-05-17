@@ -39,6 +39,24 @@
       "revId": "c601a3684ab61b4443017ba5d7fc4d8e8bfc8db1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcb6fa71_8242d0cb",
+        "filename": "fs/sdcardfs/sdcardfs.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-05-17T00:36:46Z",
+      "side": 1,
+      "message": "The inode maintains a reference to its own data for its lifespan. This is called exactly one time to release that reference. I can add a BUG on if abandoned is already true.",
+      "parentUuid": "274d7e08_7521ea21",
+      "revId": "c601a3684ab61b4443017ba5d7fc4d8e8bfc8db1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
