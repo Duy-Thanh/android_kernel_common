@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "499da7e9_702dcd9b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1955,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-17T03:03:44Z",
+      "side": 1,
+      "message": "why did you put this here and not after the }",
+      "revId": "38179e11ad2a26b470b9bbfa8c034c90fbe2eb58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef84ed85_b9bfac7e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3319,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-17T03:03:44Z",
+      "side": 1,
+      "message": "why do you need two ways to keep the process around? How does the process get freed if the last reference to go away is in proc-\u003etxn_in_progress?",
+      "revId": "38179e11ad2a26b470b9bbfa8c034c90fbe2eb58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b61cb4c9_694d304e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3814,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-17T03:03:44Z",
+      "side": 1,
+      "message": "where was this locked?",
+      "revId": "38179e11ad2a26b470b9bbfa8c034c90fbe2eb58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
