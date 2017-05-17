@@ -1,0 +1,233 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fdc7555e_fd04bfbe",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-17T02:34:49Z",
+      "side": 1,
+      "message": "rb_node_desc",
+      "range": {
+        "startLine": 340,
+        "startChar": 4,
+        "endLine": 340,
+        "endChar": 13
+      },
+      "revId": "1b52a762f1d5e03a8be31f88f92aec7e98c5dacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04e5bcd8_6d86f8f6",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-17T02:34:49Z",
+      "side": 1,
+      "message": "\"lookup by @node\" might be clearer (and similar above)",
+      "range": {
+        "startLine": 341,
+        "startChar": 26,
+        "endLine": 341,
+        "endChar": 44
+      },
+      "revId": "1b52a762f1d5e03a8be31f88f92aec7e98c5dacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02005d73_4f8bb281",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-17T02:34:49Z",
+      "side": 1,
+      "message": "rb_node_node",
+      "range": {
+        "startLine": 341,
+        "startChar": 4,
+        "endLine": 341,
+        "endChar": 13
+      },
+      "revId": "1b52a762f1d5e03a8be31f88f92aec7e98c5dacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "424f1c7f_b1eb9eee",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-17T02:34:49Z",
+      "side": 1,
+      "message": "I don\u0027t think node_entry can be protected by @proc-\u003elock as each entry in the list has a unique @proc.",
+      "revId": "1b52a762f1d5e03a8be31f88f92aec7e98c5dacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f52cf86b_169745a6",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-17T02:34:49Z",
+      "side": 1,
+      "message": "where is this checked?",
+      "revId": "1b52a762f1d5e03a8be31f88f92aec7e98c5dacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "851cb5cc_279a1fe2",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-17T02:34:49Z",
+      "side": 1,
+      "message": "why did this move?",
+      "revId": "1b52a762f1d5e03a8be31f88f92aec7e98c5dacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c2e96f6_3de5f901",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-17T02:34:49Z",
+      "side": 1,
+      "message": "is there a use case where rdata is NULL? Without the rdata you would not know which descriptor you got a reference to.",
+      "range": {
+        "startLine": 1166,
+        "startChar": 5,
+        "endLine": 1166,
+        "endChar": 10
+      },
+      "revId": "1b52a762f1d5e03a8be31f88f92aec7e98c5dacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "58845bbc_19172785",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1585,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-17T02:34:49Z",
+      "side": 1,
+      "message": "srdata or src_rdata?",
+      "range": {
+        "startLine": 1585,
+        "startChar": 24,
+        "endLine": 1585,
+        "endChar": 29
+      },
+      "revId": "1b52a762f1d5e03a8be31f88f92aec7e98c5dacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2682383b_2b023671",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1614,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-17T02:34:49Z",
+      "side": 1,
+      "message": "dest_rdata, new_rdata?",
+      "range": {
+        "startLine": 1614,
+        "startChar": 25,
+        "endLine": 1614,
+        "endChar": 31
+      },
+      "revId": "1b52a762f1d5e03a8be31f88f92aec7e98c5dacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32e70edd_b8efb02a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2347,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-17T02:34:49Z",
+      "side": 1,
+      "message": "%d/target?",
+      "range": {
+        "startLine": 2347,
+        "startChar": 64,
+        "endLine": 2347,
+        "endChar": 65
+      },
+      "revId": "1b52a762f1d5e03a8be31f88f92aec7e98c5dacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f62a2ea3_33f05654",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2610,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-17T02:34:49Z",
+      "side": 1,
+      "message": "why are you calling get_ref twice?",
+      "revId": "1b52a762f1d5e03a8be31f88f92aec7e98c5dacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
