@@ -16,6 +16,24 @@
       "revId": "af66b2b2e7ce318f13d8220606031a05b7ac48e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f8b481b0_960af032",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-18T01:24:40Z",
+      "side": 1,
+      "message": "So I should change the print routines to skip locking if this is set? Ok, I\u0027ll add a patch for that next week.",
+      "parentUuid": "4e7170e3_1fd847d3",
+      "revId": "af66b2b2e7ce318f13d8220606031a05b7ac48e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
