@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "013e67c6_4b6546d5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1955,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-18T01:09:04Z",
+      "side": 1,
+      "message": "target_node-\u003eproc is only valid while holding the node lock (later in series)... we have to let go of the node lock before the }",
+      "parentUuid": "499da7e9_702dcd9b",
+      "revId": "38179e11ad2a26b470b9bbfa8c034c90fbe2eb58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef84ed85_b9bfac7e",
         "filename": "drivers/android/binder.c",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "4d7af329_88ee856a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3319,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-18T01:09:04Z",
+      "side": 1,
+      "message": "We need the txn_in_progress for cases where we start a transaction to a proc w/o a target_thread. The proc needs to stay alive.\n\nYou are right though... I\u0027m leaking the proc in binder_free_transaction() if there are no remaining threads.\n\nFixed.",
+      "parentUuid": "ef84ed85_b9bfac7e",
+      "revId": "38179e11ad2a26b470b9bbfa8c034c90fbe2eb58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b61cb4c9_694d304e",
         "filename": "drivers/android/binder.c",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2017-05-17T03:03:44Z",
       "side": 1,
       "message": "where was this locked?",
+      "revId": "38179e11ad2a26b470b9bbfa8c034c90fbe2eb58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "82bf9de4_f9875cad",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3814,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-18T01:09:04Z",
+      "side": 1,
+      "message": "Oops... looks like it ended up in the wrong patch after rebaseing this one before the lock patches. Fixed.",
+      "parentUuid": "b61cb4c9_694d304e",
       "revId": "38179e11ad2a26b470b9bbfa8c034c90fbe2eb58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
