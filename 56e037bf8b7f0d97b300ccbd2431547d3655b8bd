@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3136e00_15f76443",
+        "filename": "include/drm/drm_crtc.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-05-19T03:33:08Z",
+      "side": 1,
+      "message": "Do we have to worry about compatibility with existing userspace code written for 4.9 that provides 64-bit types?",
+      "range": {
+        "startLine": 1198,
+        "startChar": 32,
+        "endLine": 1199,
+        "endChar": 21
+      },
+      "revId": "56e037bf8b7f0d97b300ccbd2431547d3655b8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
