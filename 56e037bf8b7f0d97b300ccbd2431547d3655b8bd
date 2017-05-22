@@ -22,6 +22,30 @@
       "revId": "56e037bf8b7f0d97b300ccbd2431547d3655b8bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76207642_c90e67a4",
+        "filename": "include/drm/drm_crtc.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1073546
+      },
+      "writtenOn": "2017-05-22T17:12:36Z",
+      "side": 1,
+      "message": "The prop_out_fence_ptr was added earlier in this patch stack. The only way I can think of it breaking userspace code is if someone backported \"BACKPORT: drm/fence: add out-fences support\" independently, wrote userspace code that depended on it and then replaced their backport with this one. Is that a case we need to consider?",
+      "parentUuid": "f3136e00_15f76443",
+      "range": {
+        "startLine": 1198,
+        "startChar": 32,
+        "endLine": 1199,
+        "endChar": 21
+      },
+      "revId": "56e037bf8b7f0d97b300ccbd2431547d3655b8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
