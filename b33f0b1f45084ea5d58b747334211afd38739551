@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "795119d4_34425585",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-05-24T16:51:02Z",
+      "side": 1,
+      "message": "if it\u0027s a \"userspace\" value, it needs to be __u32.  But I don\u0027t think that\u0027s really the case here, right?  I know you are just moving the variable type around, this isn\u0027t the main change here.\n\nAnyway, the _t types always look wrong to me in kernel code, but not a big deal.",
+      "range": {
+        "startLine": 333,
+        "startChar": 1,
+        "endLine": 333,
+        "endChar": 9
+      },
+      "revId": "b33f0b1f45084ea5d58b747334211afd38739551",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ada9baed_bff0e53a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1100,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-05-24T16:51:02Z",
+      "side": 1,
+      "message": "no need to check for NULL before calling kfree.  checkpatch.pl should have complained about this.  Just call kfree directly here and below.",
+      "range": {
+        "startLine": 1100,
+        "startChar": 2,
+        "endLine": 1100,
+        "endChar": 7
+      },
+      "revId": "b33f0b1f45084ea5d58b747334211afd38739551",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "20fc957c_6df2553d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1179,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-05-24T16:51:02Z",
+      "side": 1,
+      "message": "call this earlier when you get into this function?\n\nAnd as this is impossible (you only call this function 3 times), do you really need to check this?",
+      "range": {
+        "startLine": 1179,
+        "startChar": 0,
+        "endLine": 1179,
+        "endChar": 16
+      },
+      "revId": "b33f0b1f45084ea5d58b747334211afd38739551",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
