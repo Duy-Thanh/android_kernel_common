@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "80a2ab41_6d738676",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-25T03:34:04Z",
+      "side": 1,
+      "message": "@data.desc?",
+      "range": {
+        "startLine": 337,
+        "startChar": 37,
+        "endLine": 337,
+        "endChar": 41
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "229c949b_40e843cc",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-25T03:34:04Z",
+      "side": 1,
+      "message": "describe special meaning after cleanup?",
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33956205_38294455",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-25T03:34:04Z",
+      "side": 1,
+      "message": "This code is identical to binder_get_ref_for_node. You could pass new_ref to that function instead and return at this point if new_ref is NULL.",
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b54611cf_484cd3ae",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1131,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-25T03:34:04Z",
+      "side": 1,
+      "message": "perhaps this should also be a spinlock so you don\u0027t have to separate the cleanup code for live and dead nodes like this.",
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24c29957_1ed08fe7",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2671,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-25T03:34:04Z",
+      "side": 1,
+      "message": "you don\u0027t need to look it up \"again\". You can allocate the memory first, then look it up once.",
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1a11b255_ce0656d2",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-25T03:34:04Z",
+      "side": 1,
+      "message": "The value is shared with userspace, but the struct is not.",
+      "parentUuid": "795119d4_34425585",
+      "range": {
+        "startLine": 333,
+        "startChar": 1,
+        "endLine": 333,
+        "endChar": 9
+      },
+      "revId": "b33f0b1f45084ea5d58b747334211afd38739551",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ada9baed_bff0e53a",
         "filename": "drivers/android/binder.c",
         "patchSetId": 8
