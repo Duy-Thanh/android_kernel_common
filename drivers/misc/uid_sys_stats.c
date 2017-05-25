@@ -1,4 +1,4 @@
-/* drivers/misc/uid_cputime.c
+/* drivers/misc/uid_sys_stats.c
  *
  * Copyright (C) 2014 - 2015 Google, Inc.
  *
@@ -282,23 +282,18 @@ static void update_io_stats_all_locked(void)
 	}
 }
 
-static void update_io_stats_uid_locked(uid_t target_uid)
+static void update_io_stats_uid_locked(struct uid_entry *uid_entry)
 {
-	struct uid_entry *uid_entry;
 	struct task_struct *task, *temp;
 	struct io_stats *io_bucket, *io_curr, *io_last;
 	struct user_namespace *user_ns = current_user_ns();
-
-	uid_entry = find_or_register_uid(target_uid);
-	if (!uid_entry)
-		return;
 
 	memset(&uid_entry->io[UID_STATE_TOTAL_CURR], 0,
 		sizeof(struct io_stats));
 
 	rcu_read_lock();
 	do_each_thread(temp, task) {
-		if (from_kuid_munged(user_ns, task_uid(task)) != target_uid)
+		if (from_kuid_munged(user_ns, task_uid(task)) != uid_entry->uid)
 			continue;
 		add_uid_io_curr_stats(uid_entry, task);
 	} while_each_thread(temp, task);
@@ -405,7 +400,7 @@ static ssize_t uid_procstat_write(struct file *file,
 		return count;
 	}
 
-	update_io_stats_uid_locked(uid);
+	update_io_stats_uid_locked(uid_entry);
 
 	uid_entry->state = state;
 
@@ -443,7 +438,7 @@ static int process_notifier(struct notifier_block *self,
 	uid_entry->utime += utime;
 	uid_entry->stime += stime;
 
-	update_io_stats_uid_locked(uid);
+	update_io_stats_uid_locked(uid_entry);
 	clean_uid_io_last_stats(uid_entry, task);
 
 exit:
