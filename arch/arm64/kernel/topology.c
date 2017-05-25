@@ -43,6 +43,35 @@ static void set_capacity_scale(unsigned int cpu, unsigned long capacity)
 	per_cpu(cpu_scale, cpu) = capacity;
 }
 
+struct cpu_efficiency {
+	const char *compatible;
+	unsigned long efficiency;
+};
+
+static unsigned long middle_capacity = 1;
+
+/*
+ * Table of relative efficiency of each processors
+ * The efficiency value must fit in 20bit and the final
+ * cpu_scale value must be in the range
+ *   0 < cpu_scale < 3*SCHED_CAPACITY_SCALE/2
+ * in order to return at most 1 when DIV_ROUND_CLOSEST
+ * is used to compute the capacity of a CPU.
+ * Processors that are not defined in the table,
+ * use the default SCHED_CAPACITY_SCALE value for cpu_scale.
+ */
+static const struct cpu_efficiency table_efficiency[] = {
+	{ NULL, },
+};
+
+static unsigned long *__cpu_capacity;
+#define cpu_capacity(cpu)	__cpu_capacity[cpu]
+
+static void set_power_scale(unsigned int cpu, unsigned long power)
+{
+	per_cpu(cpu_scale, cpu) = power;
+}
+
 static int __init get_cpu_for_node(struct device_node *node)
 {
 	struct device_node *cpu_node;
@@ -374,6 +403,99 @@ static void __init reset_cpu_topology(void)
 	}
 }
 
+static void __init parse_dt_cpu_power(void)
+{
+	const struct cpu_efficiency *cpu_eff;
+	struct device_node *cn;
+	unsigned long min_capacity = ULONG_MAX;
+	unsigned long max_capacity = 0;
+	unsigned long capacity = 0;
+	int cpu;
+
+	__cpu_capacity = kcalloc(nr_cpu_ids, sizeof(*__cpu_capacity),
+				 GFP_NOWAIT);
+
+	for_each_possible_cpu(cpu) {
+		const u32 *rate;
+		int len;
+		u32 efficiency;
+
+		/* Too early to use cpu->of_node */
+		cn = of_get_cpu_node(cpu, NULL);
+		if (!cn) {
+			pr_err("Missing device node for CPU %d\n", cpu);
+			continue;
+		}
+
+		/*
+		 * The CPU efficiency value passed from the device tree
+		 * overrides the value defined in the table_efficiency[]
+		 */
+		if (of_property_read_u32(cn, "efficiency", &efficiency) < 0) {
+
+			for (cpu_eff = table_efficiency;
+					cpu_eff->compatible; cpu_eff++)
+
+				if (of_device_is_compatible(cn,
+						cpu_eff->compatible))
+					break;
+
+			if (cpu_eff->compatible == NULL) {
+				pr_warn("%s: Unknown CPU type\n",
+						cn->full_name);
+				continue;
+			}
+
+			efficiency = cpu_eff->efficiency;
+		}
+
+		per_cpu(cpu_efficiency, cpu) = efficiency;
+
+		rate = of_get_property(cn, "clock-frequency", &len);
+		if (!rate || len != 4) {
+			pr_err("%s: Missing clock-frequency property\n",
+				cn->full_name);
+			continue;
+		}
+
+		capacity = ((be32_to_cpup(rate)) >> 20) * efficiency;
+
+		/* Save min capacity of the system */
+		if (capacity < min_capacity)
+			min_capacity = capacity;
+
+		/* Save max capacity of the system */
+		if (capacity > max_capacity)
+			max_capacity = capacity;
+
+		cpu_capacity(cpu) = capacity;
+	}
+
+	/* If min and max capacities are equal we bypass the update of the
+	 * cpu_scale because all CPUs have the same capacity. Otherwise, we
+	 * compute a middle_capacity factor that will ensure that the capacity
+	 * of an 'average' CPU of the system will be as close as possible to
+	 * SCHED_CAPACITY_SCALE, which is the default value, but with the
+	 * constraint explained near table_efficiency[].
+	 */
+	if (min_capacity == max_capacity)
+		return;
+	else if (4 * max_capacity < (3 * (max_capacity + min_capacity)))
+		middle_capacity = (min_capacity + max_capacity)
+				>> (SCHED_CAPACITY_SHIFT+1);
+	else
+		middle_capacity = ((max_capacity / 3)
+				>> (SCHED_CAPACITY_SHIFT-1)) + 1;
+}
+
+static void __init reset_cpu_power(void)
+{
+	unsigned int cpu;
+
+	for_each_possible_cpu(cpu)
+		set_power_scale(cpu, SCHED_CAPACITY_SCALE);
+}
+
 void __init init_cpu_topology(void)
 {
 	reset_cpu_topology();
@@ -387,5 +509,7 @@ void __init init_cpu_topology(void)
 	else
 		set_sched_topology(arm64_topology);
 
+	reset_cpu_power();
+	parse_dt_cpu_power();
 	init_sched_energy_costs();
 }
