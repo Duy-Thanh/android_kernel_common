@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9a0ea04f_72625dff",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-25T18:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80a2ab41_6d738676",
+      "range": {
+        "startLine": 337,
+        "startChar": 37,
+        "endLine": 337,
+        "endChar": 41
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "229c949b_40e843cc",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
@@ -36,6 +60,24 @@
       "writtenOn": "2017-05-25T03:34:04Z",
       "side": 1,
       "message": "describe special meaning after cleanup?",
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f440de7f_9d56e44c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-25T18:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "229c949b_40e843cc",
       "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "637083ea_8870cff7",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-25T18:27:01Z",
+      "side": 1,
+      "message": "except that what we really need here is \"parent\" and \"p\" so to do that I\u0027d need to have binder_get_ref_for_node pass those back. That seems clumsier than just repeating this loop.",
+      "parentUuid": "33956205_38294455",
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b54611cf_484cd3ae",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "b19379ea_8230a556",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1131,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-25T18:27:01Z",
+      "side": 1,
+      "message": "We could make it a spinlock, but how does it simplify anything? What is the separation you are talking about?\n\nI just noticed that the \"if (ref-\u003enode)\" case should just call binder_free_node() instead of repeating that code here.",
+      "parentUuid": "b54611cf_484cd3ae",
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24c29957_1ed08fe7",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
@@ -87,6 +165,24 @@
       "writtenOn": "2017-05-25T03:34:04Z",
       "side": 1,
       "message": "you don\u0027t need to look it up \"again\". You can allocate the memory first, then look it up once.",
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "151d5810_a7b03882",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2671,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-25T18:27:01Z",
+      "side": 1,
+      "message": "so allocate up at line 2623 if cmd\u003d\u003dBC_REQUEST_DEATH_NOTIFICATION? I could do that.",
+      "parentUuid": "24c29957_1ed08fe7",
       "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
