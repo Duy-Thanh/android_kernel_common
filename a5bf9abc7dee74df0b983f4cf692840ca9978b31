@@ -119,6 +119,24 @@
     },
     {
       "key": {
+        "uuid": "c08fb4f2_4db3396d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-25T22:56:39Z",
+      "side": 1,
+      "message": "That is not what I\u0027m suggesting. This function is now the same as the old function, except the new ref has to be passed in. If you make new_ref optional, you only need one function.",
+      "parentUuid": "637083ea_8870cff7",
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b54611cf_484cd3ae",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
@@ -154,6 +172,24 @@
     },
     {
       "key": {
+        "uuid": "808860f4_20f7cb68",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1131,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-25T22:56:39Z",
+      "side": 1,
+      "message": "You delay the cleanup in one case an not the other. Delaying only the free operation would make the code easier to follow.",
+      "parentUuid": "b19379ea_8230a556",
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24c29957_1ed08fe7",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
@@ -183,6 +219,24 @@
       "side": 1,
       "message": "so allocate up at line 2623 if cmd\u003d\u003dBC_REQUEST_DEATH_NOTIFICATION? I could do that.",
       "parentUuid": "24c29957_1ed08fe7",
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df0eb96b_d0c9f8a8",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2671,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-25T22:56:39Z",
+      "side": 1,
+      "message": "yes, or move the if statement up and get the ref separately for each command.",
+      "parentUuid": "151d5810_a7b03882",
       "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
