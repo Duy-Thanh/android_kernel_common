@@ -16,6 +16,24 @@
       "revId": "680e8ac249309c8be9c13f625d9315a733a3effb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "62886d08_bd759780",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-25T18:26:45Z",
+      "side": 1,
+      "message": "good point (though it can\u0027t really cause damage to miss it). I\u0027ll change to an atomic.",
+      "parentUuid": "7d0f05e8_0cb719ef",
+      "revId": "680e8ac249309c8be9c13f625d9315a733a3effb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
