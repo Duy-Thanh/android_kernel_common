@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21f1e6a4_cac01ed2",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2017-05-25T17:39:14Z",
+      "side": 1,
+      "message": "uid_entry \u003d NULL or we could have random value for first iteration in the loop below.",
+      "range": {
+        "startLine": 100,
+        "startChar": 19,
+        "endLine": 100,
+        "endChar": 28
+      },
+      "revId": "0528501b6a2a9a7f6387961454133a6708b4604f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1287e2cb_cb756bbb",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2017-05-25T17:39:14Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 258,
+        "startChar": 19,
+        "endLine": 258,
+        "endChar": 28
+      },
+      "revId": "0528501b6a2a9a7f6387961454133a6708b4604f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
