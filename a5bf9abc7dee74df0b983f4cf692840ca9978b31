@@ -137,6 +137,52 @@
     },
     {
       "key": {
+        "uuid": "10b625e6_a5b62cba",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-05-26T00:19:52Z",
+      "side": 1,
+      "message": "binder_dec_node_locked",
+      "range": {
+        "startLine": 1007,
+        "startChar": 2,
+        "endLine": 1007,
+        "endChar": 17
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb1e532d_9f776bd5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-05-26T00:19:52Z",
+      "side": 1,
+      "message": "kerneldoc would help understand what this means.",
+      "range": {
+        "startLine": 1084,
+        "startChar": 1,
+        "endLine": 1084,
+        "endChar": 14
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b54611cf_484cd3ae",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
@@ -184,6 +230,144 @@
       "side": 1,
       "message": "You delay the cleanup in one case an not the other. Delaying only the free operation would make the code easier to follow.",
       "parentUuid": "b19379ea_8230a556",
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56f393ae_3f487615",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-05-26T00:19:52Z",
+      "side": 1,
+      "message": "having binder_dec_ref_for_handle and binder_inc_ref_for_handle calling into this makes the code easier to read.",
+      "range": {
+        "startLine": 1156,
+        "startChar": 11,
+        "endLine": 1156,
+        "endChar": 39
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b5f15416_3aa5f0ae",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1212,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-05-26T00:19:52Z",
+      "side": 1,
+      "message": "-ENOMEM",
+      "range": {
+        "startLine": 1212,
+        "startChar": 11,
+        "endLine": 1212,
+        "endChar": 17
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068762c2_470c5ab6",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2376,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-05-26T00:19:52Z",
+      "side": 1,
+      "message": "nit: can you rename this to \u0027increment\u0027 or \u0027inc\u0027? When reading the code below I kept associating this with BC_ACQUIRE",
+      "range": {
+        "startLine": 2376,
+        "startChar": 8,
+        "endLine": 2376,
+        "endChar": 15
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0093f9f_cc511be0",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2397,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-05-26T00:19:52Z",
+      "side": 1,
+      "message": "can you make this an else{} branch instead? It would make the code easier to read.",
+      "range": {
+        "startLine": 2394,
+        "startChar": 3,
+        "endLine": 2397,
+        "endChar": 14
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa73958d_f1e45474",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2399,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-05-26T00:19:52Z",
+      "side": 1,
+      "message": "I\u0027m curious how this can happen. The old code only printed this for the context mgr node, but even in that case I\u0027m not sure how this can happen.",
+      "range": {
+        "startLine": 2398,
+        "startChar": 3,
+        "endLine": 2399,
+        "endChar": 86
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41d40619_793b5ea0",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2418,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-05-26T00:19:52Z",
+      "side": 1,
+      "message": "nit: this could now also print in case of allocation failures.",
+      "range": {
+        "startLine": 2418,
+        "startChar": 3,
+        "endLine": 2418,
+        "endChar": 13
+      },
       "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
