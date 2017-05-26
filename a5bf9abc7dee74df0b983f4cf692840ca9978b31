@@ -508,6 +508,30 @@
     },
     {
       "key": {
+        "uuid": "619bcbab_2e4e1e95",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2397,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-05-26T23:45:35Z",
+      "side": 1,
+      "message": "if ret is set inside the if, it means you couldn\u0027t find or create the ref for the context mgr node. It seems unlikely that subsequently trying to find and inc the ref by handle here would then work. The old code had it also though. What am I missing?",
+      "parentUuid": "bb1e9820_0020f403",
+      "range": {
+        "startLine": 2394,
+        "startChar": 3,
+        "endLine": 2397,
+        "endChar": 14
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa73958d_f1e45474",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
@@ -555,6 +579,30 @@
     },
     {
       "key": {
+        "uuid": "9e5a0638_6bc27181",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2399,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-05-26T23:45:35Z",
+      "side": 1,
+      "message": "aha! ok.",
+      "parentUuid": "e0858dd4_6ace1dfe",
+      "range": {
+        "startLine": 2398,
+        "startChar": 3,
+        "endLine": 2399,
+        "endChar": 86
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41d40619_793b5ea0",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
@@ -590,6 +638,30 @@
       "side": 1,
       "message": "Well, even if it was an alloc fail, we end up with an invalid ref... but it would be useful to include the ret in the message",
       "parentUuid": "41d40619_793b5ea0",
+      "range": {
+        "startLine": 2418,
+        "startChar": 3,
+        "endLine": 2418,
+        "endChar": 13
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2bd123a5_64fe4bfe",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2418,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-05-26T23:45:35Z",
+      "side": 1,
+      "message": "mm yeah, I always read \u0027invalid ref\u0027 as \u0027userspace passed in an invalid handle\u0027. binder_user_error is merely used for errors caused by userspace AFAICT.",
+      "parentUuid": "ab78dc36_e0a2b05c",
       "range": {
         "startLine": 2418,
         "startChar": 3,
