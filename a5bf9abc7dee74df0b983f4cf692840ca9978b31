@@ -137,6 +137,24 @@
     },
     {
       "key": {
+        "uuid": "66b5e0f3_690439ff",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-26T17:17:18Z",
+      "side": 1,
+      "message": "Got it. Done.",
+      "parentUuid": "c08fb4f2_4db3396d",
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10b625e6_a5b62cba",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
@@ -160,6 +178,30 @@
     },
     {
       "key": {
+        "uuid": "000bb730_dd8cbb41",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-26T17:17:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10b625e6_a5b62cba",
+      "range": {
+        "startLine": 1007,
+        "startChar": 2,
+        "endLine": 1007,
+        "endChar": 17
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb1e532d_9f776bd5",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
@@ -171,6 +213,30 @@
       "writtenOn": "2017-05-26T00:19:52Z",
       "side": 1,
       "message": "kerneldoc would help understand what this means.",
+      "range": {
+        "startLine": 1084,
+        "startChar": 1,
+        "endLine": 1084,
+        "endChar": 14
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0fa772d_fc2ade81",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-26T17:17:18Z",
+      "side": 1,
+      "message": "Added",
+      "parentUuid": "eb1e532d_9f776bd5",
       "range": {
         "startLine": 1084,
         "startChar": 1,
@@ -236,6 +302,24 @@
     },
     {
       "key": {
+        "uuid": "300803a1_0f9cb1e5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1131,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-26T17:17:18Z",
+      "side": 1,
+      "message": "I think it is simplified more by using the new binder_free_node() for all node free cases. See if you still think a spinlock simplifies when you see the next version.",
+      "parentUuid": "808860f4_20f7cb68",
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56f393ae_3f487615",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
@@ -247,6 +331,30 @@
       "writtenOn": "2017-05-26T00:19:52Z",
       "side": 1,
       "message": "having binder_dec_ref_for_handle and binder_inc_ref_for_handle calling into this makes the code easier to read.",
+      "range": {
+        "startLine": 1156,
+        "startChar": 11,
+        "endLine": 1156,
+        "endChar": 39
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6266dd86_8534d988",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-26T17:17:18Z",
+      "side": 1,
+      "message": "Added a dec_ref_for_handle. There are no cases for inc_ref_for_handle since the inc case is using a computed \"increment\" boolean (don\u0027t want to split to separate inc/dec cases).",
+      "parentUuid": "56f393ae_3f487615",
       "range": {
         "startLine": 1156,
         "startChar": 11,
@@ -282,6 +390,30 @@
     },
     {
       "key": {
+        "uuid": "5af15d6b_32e86176",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1212,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-26T17:17:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5f15416_3aa5f0ae",
+      "range": {
+        "startLine": 1212,
+        "startChar": 11,
+        "endLine": 1212,
+        "endChar": 17
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "068762c2_470c5ab6",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
@@ -305,6 +437,30 @@
     },
     {
       "key": {
+        "uuid": "843a8c05_73fb496a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2376,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-26T17:17:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "068762c2_470c5ab6",
+      "range": {
+        "startLine": 2376,
+        "startChar": 8,
+        "endLine": 2376,
+        "endChar": 15
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0093f9f_cc511be0",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
@@ -316,6 +472,30 @@
       "writtenOn": "2017-05-26T00:19:52Z",
       "side": 1,
       "message": "can you make this an else{} branch instead? It would make the code easier to read.",
+      "range": {
+        "startLine": 2394,
+        "startChar": 3,
+        "endLine": 2397,
+        "endChar": 14
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb1e9820_0020f403",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2397,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-26T17:17:18Z",
+      "side": 1,
+      "message": "ret can be set inside the \"if\", so this can\u0027t be in the \"else\"... or do you think we should repeat this call to binder_update_ref_for_handle in both the if and the else?",
+      "parentUuid": "a0093f9f_cc511be0",
       "range": {
         "startLine": 2394,
         "startChar": 3,
@@ -398,6 +578,30 @@
     },
     {
       "key": {
+        "uuid": "ab78dc36_e0a2b05c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2418,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-26T17:17:18Z",
+      "side": 1,
+      "message": "Well, even if it was an alloc fail, we end up with an invalid ref... but it would be useful to include the ret in the message",
+      "parentUuid": "41d40619_793b5ea0",
+      "range": {
+        "startLine": 2418,
+        "startChar": 3,
+        "endLine": 2418,
+        "endChar": 13
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24c29957_1ed08fe7",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
@@ -445,6 +649,24 @@
       "side": 1,
       "message": "yes, or move the if statement up and get the ref separately for each command.",
       "parentUuid": "151d5810_a7b03882",
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13c8405d_5d58f476",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2671,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-26T17:17:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df0eb96b_d0c9f8a8",
       "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
