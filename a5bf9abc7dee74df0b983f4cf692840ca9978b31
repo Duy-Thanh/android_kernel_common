@@ -351,6 +351,30 @@
     },
     {
       "key": {
+        "uuid": "e0858dd4_6ace1dfe",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2399,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-26T00:38:25Z",
+      "side": 1,
+      "message": "If you get this for anything other than ref 0, it is a driver bug. With the context manager, user-space could pass a node to another process, then set that same node as the context manager effectively requesting two handles to a single node.",
+      "parentUuid": "aa73958d_f1e45474",
+      "range": {
+        "startLine": 2398,
+        "startChar": 3,
+        "endLine": 2399,
+        "endChar": 86
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41d40619_793b5ea0",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
