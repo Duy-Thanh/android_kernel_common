@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5ac4291_12a7df47",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-27T00:54:49Z",
+      "side": 1,
+      "message": "proc outer lock?",
+      "range": {
+        "startLine": 348,
+        "startChar": 53,
+        "endLine": 348,
+        "endChar": 62
+      },
+      "revId": "631d29dd321e3435d47d95cb1eef9f4a46e58ab8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b189421_3bd0bb96",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2691,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-27T00:54:49Z",
+      "side": 1,
+      "message": "why did this move in this patch?",
+      "revId": "631d29dd321e3435d47d95cb1eef9f4a46e58ab8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

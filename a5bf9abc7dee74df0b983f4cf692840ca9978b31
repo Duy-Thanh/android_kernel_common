@@ -320,6 +320,24 @@
     },
     {
       "key": {
+        "uuid": "6b225ae5_25f7ed91",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1131,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-27T00:54:49Z",
+      "side": 1,
+      "message": "That version still splits the cleanup for live and dead nodes.",
+      "parentUuid": "300803a1_0f9cb1e5",
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56f393ae_3f487615",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
