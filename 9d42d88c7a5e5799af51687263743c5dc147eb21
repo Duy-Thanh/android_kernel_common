@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "391c49c5_55d99fc3",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3454,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-27T02:19:28Z",
+      "side": 1,
+      "message": "Why did you add this? If another process in the transaction stack has died, we still need to unlink this thread.",
+      "range": {
+        "startLine": 3454,
+        "startChar": 13,
+        "endLine": 3454,
+        "endChar": 54
+      },
+      "revId": "9d42d88c7a5e5799af51687263743c5dc147eb21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

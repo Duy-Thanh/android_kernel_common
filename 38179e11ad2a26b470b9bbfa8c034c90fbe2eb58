@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "eefe8942_8ea96eb2",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1955,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-27T02:19:28Z",
+      "side": 1,
+      "message": "I don\u0027t see how this helps with that. You added a unlock call in the else, in that case, and a separate unlock after the }.",
+      "parentUuid": "013e67c6_4b6546d5",
+      "revId": "38179e11ad2a26b470b9bbfa8c034c90fbe2eb58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef84ed85_b9bfac7e",
         "filename": "drivers/android/binder.c",
         "patchSetId": 2
