@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ade351f6_63479be7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-27T02:52:40Z",
+      "side": 1,
+      "message": "You are locking the proc spinlock in a later patch for most of these anyway.",
+      "revId": "e46d7708bd7e2227cc77fab538d62607a883f40c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce0f984d_e6accf18",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3449,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-27T02:52:40Z",
+      "side": 1,
+      "message": "I don\u0027t think this is correct. If 10 out of 10 ready threads wake up at the same time, we should request one new thread, not 10 new threads. The proc spinlock you add later avoids this by protecting requested_threads, but if you lock that anyway it is not clear what you gain by making ready_threads atomic (other than avoiding moving the inc/dec location)",
+      "range": {
+        "startLine": 3449,
+        "startChar": 3,
+        "endLine": 3449,
+        "endChar": 14
+      },
+      "revId": "e46d7708bd7e2227cc77fab538d62607a883f40c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
