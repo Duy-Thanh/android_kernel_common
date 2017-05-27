@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56bf4955_ff49c292",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1961,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-27T01:03:02Z",
+      "side": 1,
+      "message": "why did you switch back to get_ref here? The previous patch just changed away from get_ref.",
+      "range": {
+        "startLine": 1961,
+        "startChar": 9,
+        "endLine": 1961,
+        "endChar": 23
+      },
+      "revId": "1657c3d5534d29640697e589cd3f7d6890ce648c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
