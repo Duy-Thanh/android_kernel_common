@@ -550,6 +550,30 @@
     },
     {
       "key": {
+        "uuid": "8575c1fc_472b9810",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2397,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-30T17:52:51Z",
+      "side": 1,
+      "message": "I suppose there is a small chance of a new context mgr node by the time we retry (agreed that this is unlikely)",
+      "parentUuid": "619bcbab_2e4e1e95",
+      "range": {
+        "startLine": 2394,
+        "startChar": 3,
+        "endLine": 2397,
+        "endChar": 14
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa73958d_f1e45474",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
