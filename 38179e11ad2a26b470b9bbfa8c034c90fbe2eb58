@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "2915d1ec_1b82ef79",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1955,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-30T23:39:42Z",
+      "side": 1,
+      "message": "You\u0027re right. I misunderstood which \u0027}\u0027 you were suggesting.",
+      "parentUuid": "eefe8942_8ea96eb2",
+      "revId": "38179e11ad2a26b470b9bbfa8c034c90fbe2eb58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef84ed85_b9bfac7e",
         "filename": "drivers/android/binder.c",
         "patchSetId": 2
