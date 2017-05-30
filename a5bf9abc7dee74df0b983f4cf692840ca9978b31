@@ -338,6 +338,24 @@
     },
     {
       "key": {
+        "uuid": "6989bdf3_d4472e54",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1131,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-30T22:36:40Z",
+      "side": 1,
+      "message": "To merge the cleanup paths, it would need to be acquired with the inner lock held... but if we do that, it becomes hard traverse/print the list of dead_nodes. How strongly do you feel about this? Would you prefer a per-proc dead_nodes list protected by inner_lock?",
+      "parentUuid": "6b225ae5_25f7ed91",
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56f393ae_3f487615",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
@@ -704,6 +722,30 @@
       "side": 1,
       "message": "mm yeah, I always read \u0027invalid ref\u0027 as \u0027userspace passed in an invalid handle\u0027. binder_user_error is merely used for errors caused by userspace AFAICT.",
       "parentUuid": "ab78dc36_e0a2b05c",
+      "range": {
+        "startLine": 2418,
+        "startChar": 3,
+        "endLine": 2418,
+        "endChar": 13
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1dd1e2e7_d50eb2a2",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2418,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-05-30T22:36:40Z",
+      "side": 1,
+      "message": "Do you think this distinction is worth creating a bool above to suppress this message if it is an alloc fail? IMHO, better to just print it with the ret code.",
+      "parentUuid": "2bd123a5_64fe4bfe",
       "range": {
         "startLine": 2418,
         "startChar": 3,
