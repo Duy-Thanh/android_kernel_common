@@ -758,6 +758,30 @@
     },
     {
       "key": {
+        "uuid": "d6fa2a82_4aa928ff",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2418,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-30T23:34:09Z",
+      "side": 1,
+      "message": "you could do if (ret \u0026\u0026 ret !\u003d -ENOMEM)",
+      "parentUuid": "1dd1e2e7_d50eb2a2",
+      "range": {
+        "startLine": 2418,
+        "startChar": 3,
+        "endLine": 2418,
+        "endChar": 13
+      },
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24c29957_1ed08fe7",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
