@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1259123_deec450f",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-31T23:54:55Z",
+      "side": 1,
+      "message": "binder_get_ref already checks this",
+      "range": {
+        "startLine": 1471,
+        "startChar": 14,
+        "endLine": 1471,
+        "endChar": 25
+      },
+      "revId": "d4ab55159493852cab6e2bc3fa0b8bd2b3f89585",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a16af5c_74f541b5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1483,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-05-31T23:54:55Z",
+      "side": 1,
+      "message": "why are you setting this twice?",
+      "revId": "d4ab55159493852cab6e2bc3fa0b8bd2b3f89585",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
