@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a413be23_adce5771",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-01T16:01:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b47f2b1_e81f8b7f",
+      "revId": "bb4a8779f8e2fa3c4811b01acef470adf681816d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "616eca12_68b43562",
         "filename": "drivers/android/binder.c",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "f7a59fbd_5e0ab5f3",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-01T16:01:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "616eca12_68b43562",
+      "revId": "bb4a8779f8e2fa3c4811b01acef470adf681816d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30eb61ef_3782088c",
         "filename": "drivers/android/binder.c",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2017-05-31T23:12:27Z",
       "side": 1,
       "message": "... and under node lock",
+      "revId": "bb4a8779f8e2fa3c4811b01acef470adf681816d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2383d7a_b6d951b4",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-01T16:01:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30eb61ef_3782088c",
       "revId": "bb4a8779f8e2fa3c4811b01acef470adf681816d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
