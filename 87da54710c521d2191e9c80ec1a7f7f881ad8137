@@ -16,6 +16,24 @@
       "revId": "87da54710c521d2191e9c80ec1a7f7f881ad8137",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37c44b32_3e223ec2",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-01T15:53:50Z",
+      "side": 1,
+      "message": "Yes, called by binder_free_ref() which is called by binder_update_ref_for_handle(). In upcoming patches it is called from more places.",
+      "parentUuid": "e2e3197a_c9cd7f90",
+      "revId": "87da54710c521d2191e9c80ec1a7f7f881ad8137",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
