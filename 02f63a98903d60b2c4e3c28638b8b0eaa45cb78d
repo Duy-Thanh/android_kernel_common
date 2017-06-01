@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ac526d9_7533001b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2869,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-01T00:22:47Z",
+      "side": 1,
+      "message": "this function does not look correct if there is no global lock. binder_send_failed_reply needs to be called when a thread is at the top of the transaction stack, but now it looks at thread-\u003eis_dead. Also, how do you avoid triggering the BUG() above when called twice?",
+      "revId": "02f63a98903d60b2c4e3c28638b8b0eaa45cb78d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
