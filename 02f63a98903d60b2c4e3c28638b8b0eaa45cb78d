@@ -16,6 +16,24 @@
       "revId": "02f63a98903d60b2c4e3c28638b8b0eaa45cb78d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0679d79b_5716ee66",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2869,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-01T15:46:31Z",
+      "side": 1,
+      "message": "I uploaded a fix for the BUG() issue already (changed to \"break\" since we can get there if the other fields are \"invalid\")\n\nFixed the is_dead issue by changing it to:\n\n  if (t \u0026\u0026 t-\u003eto_thread \u003d\u003d thread \u0026\u0026 !t-\u003eto_thread_invalid)\n\n(we don\u0027t want to send the failed reply more than once)",
+      "parentUuid": "7ac526d9_7533001b",
+      "revId": "02f63a98903d60b2c4e3c28638b8b0eaa45cb78d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
