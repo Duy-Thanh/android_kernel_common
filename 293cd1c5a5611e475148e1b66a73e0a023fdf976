@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8bdbb0c9_8b35d31b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 788,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-01T19:19:49Z",
+      "side": 1,
+      "message": "this can be written by another thread than the one calling this function, right? If you read the old value, is there any guarantee this will be called again at some point in the future so you will clean up the thread?",
+      "range": {
+        "startLine": 788,
+        "startChar": 13,
+        "endLine": 788,
+        "endChar": 20
+      },
+      "revId": "293cd1c5a5611e475148e1b66a73e0a023fdf976",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf0d7b90_b03b3585",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2829,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-01T19:19:49Z",
+      "side": 1,
+      "message": "Can binder_free_thread() be called by different threads at the same time while !thread-\u003eis_dead? It seems one way is if binder_deferred_release() runs concurrently with a BINDER_THREAD_EXIT ioctl, but I don\u0027t think that can happen.",
+      "range": {
+        "startLine": 2829,
+        "startChar": 1,
+        "endLine": 2829,
+        "endChar": 53
+      },
+      "revId": "293cd1c5a5611e475148e1b66a73e0a023fdf976",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cba7979e_098c9275",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3379,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-01T19:19:49Z",
+      "side": 1,
+      "message": "this can never be true, since you inc\u0027d it above.",
+      "range": {
+        "startLine": 3379,
+        "startChar": 3,
+        "endLine": 3379,
+        "endChar": 39
+      },
+      "revId": "293cd1c5a5611e475148e1b66a73e0a023fdf976",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
