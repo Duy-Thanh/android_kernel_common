@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "3e39b7b6_8687c615",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 788,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-01T21:38:24Z",
+      "side": 1,
+      "message": "Ok. I guess what confuses me in this case is that we do protect txn_in_progress with an atomic - so is that modified in any place without holding the global lock? Or will it be modified in the future in places without the outer lock?",
+      "parentUuid": "93430b18_80c1b9dc",
+      "range": {
+        "startLine": 788,
+        "startChar": 13,
+        "endLine": 788,
+        "endChar": 20
+      },
+      "revId": "293cd1c5a5611e475148e1b66a73e0a023fdf976",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf0d7b90_b03b3585",
         "filename": "drivers/android/binder.c",
         "patchSetId": 7
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "e4fb21d5_f06219f8",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2829,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-01T21:38:24Z",
+      "side": 1,
+      "message": "wasn\u0027t the same true when using thread-\u003eis_dead? The first caller to get here will send a failed reply, the next ones won\u0027t (assuming the global lock is held while calling this).\n\nI don\u0027t see how using t-\u003eto_thread_invalid instead changes the behavior.",
+      "parentUuid": "ec6c6d6b_35001907",
+      "range": {
+        "startLine": 2829,
+        "startChar": 1,
+        "endLine": 2829,
+        "endChar": 53
+      },
+      "revId": "293cd1c5a5611e475148e1b66a73e0a023fdf976",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cba7979e_098c9275",
         "filename": "drivers/android/binder.c",
         "patchSetId": 7
@@ -131,6 +179,30 @@
       "side": 1,
       "message": "This is removed in the most recent upload.",
       "parentUuid": "cba7979e_098c9275",
+      "range": {
+        "startLine": 3379,
+        "startChar": 3,
+        "endLine": 3379,
+        "endChar": 39
+      },
+      "revId": "293cd1c5a5611e475148e1b66a73e0a023fdf976",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8036b39e_eb7cbe30",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3379,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-01T21:38:24Z",
+      "side": 1,
+      "message": "ack.",
+      "parentUuid": "2c0f7583_686cf486",
       "range": {
         "startLine": 3379,
         "startChar": 3,
