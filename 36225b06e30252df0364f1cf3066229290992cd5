@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc30f987_3669f415",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 954,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-02T19:25:01Z",
+      "side": 1,
+      "message": "I think the implementation is correct, with the exception of this call below.",
+      "range": {
+        "startLine": 954,
+        "startChar": 0,
+        "endLine": 954,
+        "endChar": 49
+      },
+      "revId": "36225b06e30252df0364f1cf3066229290992cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
