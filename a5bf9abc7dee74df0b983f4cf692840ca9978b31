@@ -356,6 +356,24 @@
     },
     {
       "key": {
+        "uuid": "4ec38bcf_6380f573",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1131,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-02T01:03:14Z",
+      "side": 1,
+      "message": "Ok, tomorrow I\u0027ll change this to use an inner spinlock for dead_nodes so the cleanup doesn\u0027t need to be separated.",
+      "parentUuid": "6989bdf3_d4472e54",
+      "revId": "a5bf9abc7dee74df0b983f4cf692840ca9978b31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56f393ae_3f487615",
         "filename": "drivers/android/binder.c",
         "patchSetId": 9
