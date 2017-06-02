@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "890f8a5f_df81a160",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-02T02:10:11Z",
+      "side": 1,
+      "message": "this does not appear to match the code. Once node-\u003eproc is gone, this gets modified with only the node-lock held.",
+      "revId": "31ddca90d8e37ab2f3b4fc709c70507c2d7ada50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
