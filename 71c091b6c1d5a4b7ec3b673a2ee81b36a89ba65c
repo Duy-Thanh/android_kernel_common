@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a711ef51_52596c3a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2849,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-02T23:31:34Z",
+      "side": 1,
+      "message": "I think this breaks cleanup of processes that die while in the middle of a transaction stack. Before this change, when you try to reply to a dead process, it would walk the transaction stack until it finds a live process to reply to. Now it seems to queue a reply to a dead process and stop.",
+      "revId": "71c091b6c1d5a4b7ec3b673a2ee81b36a89ba65c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
