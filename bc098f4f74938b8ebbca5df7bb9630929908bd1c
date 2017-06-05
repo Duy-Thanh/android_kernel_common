@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ec381da3_d89ff830",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-05T16:34:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0cf8b47_34ad2ff4",
+      "revId": "bc098f4f74938b8ebbca5df7bb9630929908bd1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52285c26_f71e09ec",
         "filename": "drivers/android/binder.c",
         "patchSetId": 14
@@ -30,6 +48,24 @@
       "writtenOn": "2017-06-03T00:10:27Z",
       "side": 1,
       "message": "I don\u0027t think you need the if",
+      "revId": "bc098f4f74938b8ebbca5df7bb9630929908bd1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "94409562_60fe2a2a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-05T16:34:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52285c26_f71e09ec",
       "revId": "bc098f4f74938b8ebbca5df7bb9630929908bd1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
