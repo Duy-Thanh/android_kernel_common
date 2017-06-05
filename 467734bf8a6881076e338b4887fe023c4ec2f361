@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1bdbf189_c47adfec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-06-05T23:23:28Z",
+      "side": 1,
+      "message": "checkpatch.pl will complain about this footer order. Signed-off-by: should be first with the author, and Change-Id: needs to be the _last_ footer.\n\nSigned-off-by: Roberto Pereira \u003crpere@google.com\u003e\nBug:37753761\nChange-Id: Ie98651c777b3729400ff8876d56f4008703cc785",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 49
+      },
+      "revId": "467734bf8a6881076e338b4887fe023c4ec2f361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
