@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a374083_0df5b786",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-05T20:36:01Z",
+      "side": 1,
+      "message": "you can leave this out (or change the if statement instead)",
+      "range": {
+        "startLine": 832,
+        "startChar": 18,
+        "endLine": 832,
+        "endChar": 29
+      },
+      "revId": "3dadaef2e34edd23f2402f3d2a9e31667be64519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3eb7cfa_14a8d907",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1480,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-05T20:36:01Z",
+      "side": 1,
+      "message": "assuming in_reply_to-\u003efrom ca never be NULL, changing the if statement below to check from_invalid would be clearer.",
+      "revId": "3dadaef2e34edd23f2402f3d2a9e31667be64519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ebc9f7fb_f639eeec",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1572,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-05T20:36:01Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "3dadaef2e34edd23f2402f3d2a9e31667be64519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
