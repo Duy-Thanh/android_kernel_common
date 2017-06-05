@@ -42,6 +42,46 @@
     },
     {
       "key": {
+        "uuid": "c2b2de27_56eabbca",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1485,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-05T22:39:11Z",
+      "side": 1,
+      "message": "If the target process dies after you read from_invalid, then this check will not catch it. If your tests fail when you remove this block, then you probably have a race.",
+      "range": {
+        "startLine": 1481,
+        "startChar": 0,
+        "endLine": 1485,
+        "endChar": 3
+      },
+      "revId": "3dadaef2e34edd23f2402f3d2a9e31667be64519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3056dee8_75e6dfc9",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1486,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-05T22:39:11Z",
+      "side": 1,
+      "message": "If you keep this reference until the transaction is freed, how to you trigger the work cleanup for the work you just queued if the target process is dead before you queue it?",
+      "revId": "3dadaef2e34edd23f2402f3d2a9e31667be64519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ebc9f7fb_f639eeec",
         "filename": "drivers/android/binder.c",
         "patchSetId": 10
