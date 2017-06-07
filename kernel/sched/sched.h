@@ -422,7 +422,7 @@ struct cfs_rq {
 
 	u64 throttled_clock, throttled_clock_task;
 	u64 throttled_clock_task_time;
-	int throttled, throttle_count;
+	int throttled, throttle_count, throttle_uptodate;
 	struct list_head throttled_list;
 #endif /* CONFIG_CFS_BANDWIDTH */
 #endif /* CONFIG_FAIR_GROUP_SCHED */
@@ -734,8 +734,14 @@ struct rq {
 	/* try_to_wake_up() stats */
 	unsigned int ttwu_count;
 	unsigned int ttwu_local;
+<<<<<<< HEAD   (4fb0f2 Revert EXPERIMENTAL patches in preparation for merging andro)
 
 	struct eas_stats eas_stats;
+=======
+#ifdef CONFIG_SMP
+	struct eas_stats eas_stats;
+#endif
+>>>>>>> BRANCH (6fc057 Merge 4.4.71 into android-4.4)
 #endif
 
 #ifdef CONFIG_SMP
