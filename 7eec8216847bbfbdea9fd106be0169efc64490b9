@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05a782f3_8bc80d16",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-08T02:26:33Z",
+      "side": 1,
+      "message": "\"3U \u003c\u003c FLAT_BINDER_FLAG_SCHED_POLICY_SHIFT\"?",
+      "range": {
+        "startLine": 70,
+        "startChar": 38,
+        "endLine": 70,
+        "endChar": 43
+      },
+      "revId": "7eec8216847bbfbdea9fd106be0169efc64490b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
