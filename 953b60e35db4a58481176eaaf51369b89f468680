@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "548662d6_565ed9ce",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2445,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-08T02:21:53Z",
+      "side": 1,
+      "message": "what happens it proc is dead at this point?",
+      "revId": "953b60e35db4a58481176eaaf51369b89f468680",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
