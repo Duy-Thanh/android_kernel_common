@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3add29c_b3d4b5f3",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1918,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-08T23:15:01Z",
+      "side": 1,
+      "message": "what are you popping here? You just pushed the transaction on this thread, not on the target.",
+      "revId": "845d4a698e3fed24000522db743be503220ea703",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4e9f533_2192d656",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2747,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-08T23:15:01Z",
+      "side": 1,
+      "message": "you have some return paths here where you leak this reference.",
+      "revId": "845d4a698e3fed24000522db743be503220ea703",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
