@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "837b344e_e6eae72e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1918,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-09T00:13:05Z",
+      "side": 1,
+      "message": "Ack. I fixed this in the wrong patch. Fixed correctly now.",
+      "parentUuid": "f3add29c_b3d4b5f3",
+      "revId": "845d4a698e3fed24000522db743be503220ea703",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c4e9f533_2192d656",
         "filename": "drivers/android/binder.c",
         "patchSetId": 12
@@ -30,6 +48,24 @@
       "writtenOn": "2017-06-08T23:15:01Z",
       "side": 1,
       "message": "you have some return paths here where you leak this reference.",
+      "revId": "845d4a698e3fed24000522db743be503220ea703",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55545cf7_3c416de9",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 2747,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-09T00:13:05Z",
+      "side": 1,
+      "message": "Indeed. Fix coming.",
+      "parentUuid": "c4e9f533_2192d656",
       "revId": "845d4a698e3fed24000522db743be503220ea703",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false

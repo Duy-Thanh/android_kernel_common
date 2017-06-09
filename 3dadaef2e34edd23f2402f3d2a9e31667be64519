@@ -83,6 +83,30 @@
     },
     {
       "key": {
+        "uuid": "9e7b2626_6ecd8033",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1485,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-09T00:13:05Z",
+      "side": 1,
+      "message": "refactored to get rid of \"from_invalid\". Added code to prevent queuing after thread/proc dies",
+      "parentUuid": "c2b2de27_56eabbca",
+      "range": {
+        "startLine": 1481,
+        "startChar": 0,
+        "endLine": 1485,
+        "endChar": 3
+      },
+      "revId": "3dadaef2e34edd23f2402f3d2a9e31667be64519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3056dee8_75e6dfc9",
         "filename": "drivers/android/binder.c",
         "patchSetId": 10
@@ -94,6 +118,24 @@
       "writtenOn": "2017-06-05T22:39:11Z",
       "side": 1,
       "message": "If you keep this reference until the transaction is freed, how to you trigger the work cleanup for the work you just queued if the target process is dead before you queue it?",
+      "revId": "3dadaef2e34edd23f2402f3d2a9e31667be64519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "981bda48_d0e4d05a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1486,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-09T00:13:05Z",
+      "side": 1,
+      "message": "fixed in refactored code by avoiding queuing to dead thread/node",
+      "parentUuid": "3056dee8_75e6dfc9",
       "revId": "3dadaef2e34edd23f2402f3d2a9e31667be64519",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
