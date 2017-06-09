@@ -541,6 +541,30 @@
       "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8075b2c9_dd697ec1",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3925,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-09T23:31:17Z",
+      "side": 1,
+      "message": "Oh, \"e-\u003e\". Okay, it\u0027s time for weekend :-)",
+      "parentUuid": "a047434a_27d7ecce",
+      "range": {
+        "startLine": 3925,
+        "startChar": 24,
+        "endLine": 3925,
+        "endChar": 31
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
