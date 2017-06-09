@@ -425,6 +425,30 @@
     },
     {
       "key": {
+        "uuid": "dbf0aeba_5b6e07af",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3602,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-09T23:24:32Z",
+      "side": 1,
+      "message": "ah, right",
+      "parentUuid": "b33a4d26_c19b3b53",
+      "range": {
+        "startLine": 3602,
+        "startChar": 2,
+        "endLine": 3602,
+        "endChar": 12
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce5ab83c_ad60792b",
         "filename": "drivers/android/binder.c",
         "patchSetId": 13
@@ -460,6 +484,30 @@
       "side": 1,
       "message": "no, e-\u003eto_proc is a pid",
       "parentUuid": "ce5ab83c_ad60792b",
+      "range": {
+        "startLine": 3925,
+        "startChar": 24,
+        "endLine": 3925,
+        "endChar": 31
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c9c724c_2c33c688",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3925,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-09T23:24:32Z",
+      "side": 1,
+      "message": "sorry, I meant to_thread",
+      "parentUuid": "0fb2b691_e436d8ac",
       "range": {
         "startLine": 3925,
         "startChar": 24,
