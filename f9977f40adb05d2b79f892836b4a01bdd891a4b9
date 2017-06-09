@@ -16,6 +16,24 @@
       "revId": "f9977f40adb05d2b79f892836b4a01bdd891a4b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "965e53a0_d0e58324",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-09T21:49:46Z",
+      "side": 1,
+      "message": "not really - but the place where ready_threads is read we doesn\u0027t hold the inner lock (which protects the waiting_threads list). I guess we could take the lock there, though I guess it also doesn\u0027t really matter if we read an older value.",
+      "parentUuid": "51ae2e9f_2b94f742",
+      "revId": "f9977f40adb05d2b79f892836b4a01bdd891a4b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
