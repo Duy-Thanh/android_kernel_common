@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b59e20fe_756bc299",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-09T20:31:02Z",
+      "side": 1,
+      "message": "when is ts_from NULL? With the global lock binder_pop_transaction is not used in that case as target_thread is unknown then.",
+      "range": {
+        "startLine": 783,
+        "startChar": 8,
+        "endLine": 783,
+        "endChar": 15
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
