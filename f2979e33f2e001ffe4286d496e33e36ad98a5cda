@@ -22,6 +22,30 @@
       "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c224d5d_9e1a1e10",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-09T21:43:52Z",
+      "side": 1,
+      "message": "It can\u0027t be NULL. I can remove the \"ts_from \u0026\u0026\" from the expression.",
+      "parentUuid": "b59e20fe_756bc299",
+      "range": {
+        "startLine": 783,
+        "startChar": 8,
+        "endLine": 783,
+        "endChar": 15
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
