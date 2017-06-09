@@ -46,6 +46,237 @@
       "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5826f1dd_204c11d3",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-09T22:25:44Z",
+      "side": 1,
+      "message": "in that case might as well remove the ts_from variable",
+      "parentUuid": "7c224d5d_9e1a1e10",
+      "range": {
+        "startLine": 783,
+        "startChar": 8,
+        "endLine": 783,
+        "endChar": 15
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e871f69e_3684aa8d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1508,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-09T22:25:44Z",
+      "side": 1,
+      "message": "do you need the lock here - the commit message just mentions it protects t-\u003efrom",
+      "range": {
+        "startLine": 1508,
+        "startChar": 3,
+        "endLine": 1508,
+        "endChar": 33
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "57045123_aeccbc9a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1600,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-09T22:25:44Z",
+      "side": 1,
+      "message": "same here.",
+      "range": {
+        "startLine": 1600,
+        "startChar": 4,
+        "endLine": 1600,
+        "endChar": 13
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f4122cbb_cd2a280b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1920,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-09T22:25:44Z",
+      "side": 1,
+      "message": "I guess this will start to make sense when the locking is added later :)",
+      "range": {
+        "startLine": 1920,
+        "startChar": 3,
+        "endLine": 1920,
+        "endChar": 25
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b6a4dfc_f87400e7",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2806,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-09T22:25:44Z",
+      "side": 1,
+      "message": "wrong patch?",
+      "range": {
+        "startLine": 2806,
+        "startChar": 4,
+        "endLine": 2806,
+        "endChar": 27
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d36a24b7_2561e55f",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2911,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-09T22:25:44Z",
+      "side": 1,
+      "message": "where is the corresponding dec?",
+      "range": {
+        "startLine": 2911,
+        "startChar": 1,
+        "endLine": 2911,
+        "endChar": 36
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ee72a19_5dd45f3a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2921,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-09T22:25:44Z",
+      "side": 1,
+      "message": "taking the lock here suggests to_thread is somehow protected by the spinlock too. I guess it\u0027s used to make sure we only send the dead reply once?",
+      "range": {
+        "startLine": 2921,
+        "startChar": 9,
+        "endLine": 2921,
+        "endChar": 18
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2cdd11c_66c5c312",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3525,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-09T22:25:44Z",
+      "side": 1,
+      "message": "needs spinlock now",
+      "range": {
+        "startLine": 3525,
+        "startChar": 5,
+        "endLine": 3525,
+        "endChar": 33
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fece4adb_6b69c586",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3602,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-09T22:25:44Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 3602,
+        "startChar": 2,
+        "endLine": 3602,
+        "endChar": 12
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce5ab83c_ad60792b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3925,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-09T22:25:44Z",
+      "side": 1,
+      "message": "and here, probably",
+      "range": {
+        "startLine": 3925,
+        "startChar": 24,
+        "endLine": 3925,
+        "endChar": 31
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
