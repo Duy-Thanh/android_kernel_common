@@ -34,6 +34,24 @@
       "revId": "f9977f40adb05d2b79f892836b4a01bdd891a4b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50d41a31_c6aadfbe",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-09T22:17:38Z",
+      "side": 1,
+      "message": "requested_threads (which is read at the same time) is currently protected by the outer lock, but I think it could use the inner lock instead.",
+      "parentUuid": "965e53a0_d0e58324",
+      "revId": "f9977f40adb05d2b79f892836b4a01bdd891a4b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
