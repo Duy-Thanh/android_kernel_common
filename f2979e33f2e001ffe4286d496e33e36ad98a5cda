@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "b5f6cd88_7db74b55",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-09T23:31:40Z",
+      "side": 1,
+      "message": "you may want to document the locks as you add them instead of in a later patch.",
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b59e20fe_756bc299",
         "filename": "drivers/android/binder.c",
         "patchSetId": 13
@@ -97,6 +114,57 @@
     },
     {
       "key": {
+        "uuid": "7eb7f793_f0c957ab",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-09T23:31:40Z",
+      "side": 1,
+      "message": "You should explain that the atomic is only used to protect the counter value while it cannot reach zero or thread-\u003eis_dead is false.",
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9cde432_e6724490",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-09T23:31:40Z",
+      "side": 1,
+      "message": "explain atomic, or switch to a normal variable and make sure it is only modified while holding a specific lock.",
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee43dfb7_b61ade0a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-09T23:31:40Z",
+      "side": 1,
+      "message": "is this needed, or could you always use target_proc instead?",
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e871f69e_3684aa8d",
         "filename": "drivers/android/binder.c",
         "patchSetId": 13
@@ -131,6 +199,30 @@
       "writtenOn": "2017-06-09T23:10:53Z",
       "side": 1,
       "message": "It\u0027s protecting to_proc and to_thread for these print cases too. I\u0027ll change the commit msg.",
+      "parentUuid": "e871f69e_3684aa8d",
+      "range": {
+        "startLine": 1508,
+        "startChar": 3,
+        "endLine": 1508,
+        "endChar": 33
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "162190fb_59830e15",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1508,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-09T23:31:40Z",
+      "side": 1,
+      "message": "A lock is needed to protect to_proc and to_thread. The proc inner lock also protects this in a later patch, but in this case I would not expect the inner lock to be held for the correct process.",
       "parentUuid": "e871f69e_3684aa8d",
       "range": {
         "startLine": 1508,
@@ -184,6 +276,23 @@
         "endLine": 1920,
         "endChar": 25
       },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a2d3d64c_83b15b28",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1944,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-09T23:31:40Z",
+      "side": 1,
+      "message": "target_proc has already been unconditionally dereferenced before this.",
       "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -319,6 +428,30 @@
       "side": 1,
       "message": "It is used to protect to_thread, but I guess it doesn\u0027t matter much whether it transitions to NULL while we are looking at it since either way the expression with be false... but there is no harm in grabbing it here and we need it below as we potentially change t-\u003efrom and t-\u003eto_*.",
       "parentUuid": "8ee72a19_5dd45f3a",
+      "range": {
+        "startLine": 2921,
+        "startChar": 9,
+        "endLine": 2921,
+        "endChar": 18
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41e260fd_a8c78791",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2921,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-09T23:31:40Z",
+      "side": 1,
+      "message": "The lock is not needed on the system we use, but if setting to_thread to NULL is not atomic, you could get a false match without a lock.",
+      "parentUuid": "d02e1c2c_86a8306f",
       "range": {
         "startLine": 2921,
         "startChar": 9,
@@ -556,6 +689,30 @@
       "side": 1,
       "message": "Oh, \"e-\u003e\". Okay, it\u0027s time for weekend :-)",
       "parentUuid": "a047434a_27d7ecce",
+      "range": {
+        "startLine": 3925,
+        "startChar": 24,
+        "endLine": 3925,
+        "endChar": 31
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "209128b3_a2818aaf",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3925,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-09T23:31:40Z",
+      "side": 1,
+      "message": "also a pid. This the event struct, not the transaction struct.",
+      "parentUuid": "6c9c724c_2c33c688",
       "range": {
         "startLine": 3925,
         "startChar": 24,
