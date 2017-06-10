@@ -22,6 +22,30 @@
       "revId": "7eec8216847bbfbdea9fd106be0169efc64490b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d750bddd_4af054ec",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-10T00:56:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05a782f3_8bc80d16",
+      "range": {
+        "startLine": 70,
+        "startChar": 38,
+        "endLine": 70,
+        "endChar": 43
+      },
+      "revId": "7eec8216847bbfbdea9fd106be0169efc64490b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
