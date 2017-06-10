@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "db6e89f5_109511ac",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-10T02:40:18Z",
+      "side": 1,
+      "message": "the count of use t-\u003efrom can never be more than one, so a bool could also be used for that.",
+      "parentUuid": "74fbe6bd_78be7054",
+      "range": {
+        "startLine": 359,
+        "startChar": 10,
+        "endLine": 359,
+        "endChar": 25
+      },
+      "revId": "f2979e33f2e001ffe4286d496e33e36ad98a5cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5f6cd88_7db74b55",
         "filename": "drivers/android/binder.c",
         "patchSetId": 13
