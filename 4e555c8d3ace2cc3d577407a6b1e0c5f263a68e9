@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "68d55926_c712c934",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-12T18:04:52Z",
+      "side": 1,
+      "message": "Fixed. It had other uses until maco@\u0027s changes, not it is just refs. Changed these comments.",
+      "parentUuid": "e247b34c_4b1769fa",
+      "range": {
+        "startLine": 24,
+        "startChar": 34,
+        "endLine": 24,
+        "endChar": 38
+      },
+      "revId": "4e555c8d3ace2cc3d577407a6b1e0c5f263a68e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "370b44b5_0f84201b",
         "filename": "drivers/android/binder.c",
         "patchSetId": 8
