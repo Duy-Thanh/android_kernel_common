@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4d8465c7_ff614b8e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3732,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-12T23:35:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6cb20bc_7451e97d",
+      "revId": "518d9e114a5e300a8630ddf3db5cfb1591fdcc71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f4a5e9e6_0d827518",
         "filename": "drivers/android/binder.c",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2017-06-12T22:06:16Z",
       "side": 1,
       "message": "log entry at index can get overwritten while it is printed. Re-reading the counter and printing a warning when this happens would be useful.",
+      "revId": "518d9e114a5e300a8630ddf3db5cfb1591fdcc71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e53bded9_56398b68",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3738,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-12T23:35:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4a5e9e6_0d827518",
       "revId": "518d9e114a5e300a8630ddf3db5cfb1591fdcc71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
