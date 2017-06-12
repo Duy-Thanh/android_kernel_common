@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6cb20bc_7451e97d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3732,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-12T22:06:16Z",
+      "side": 1,
+      "message": "count seems to assume the starting value of log-\u003ecur is 0 while cur assumes it is the oldest entry. Neither appears to match what binder_init and binder_transaction_log_add does.",
+      "revId": "518d9e114a5e300a8630ddf3db5cfb1591fdcc71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f4a5e9e6_0d827518",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3738,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-12T22:06:16Z",
+      "side": 1,
+      "message": "log entry at index can get overwritten while it is printed. Re-reading the counter and printing a warning when this happens would be useful.",
+      "revId": "518d9e114a5e300a8630ddf3db5cfb1591fdcc71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
