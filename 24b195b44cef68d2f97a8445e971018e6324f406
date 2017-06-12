@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be06ba7b_0d514123",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-12T22:59:31Z",
+      "side": 1,
+      "message": "containing",
+      "revId": "24b195b44cef68d2f97a8445e971018e6324f406",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af5f880a_8edc4ff6",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-12T22:59:31Z",
+      "side": 1,
+      "message": "or %NULL",
+      "revId": "24b195b44cef68d2f97a8445e971018e6324f406",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50769a3f_997198ea",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-12T22:59:31Z",
+      "side": 1,
+      "message": "I don\u0027t think this is needed",
+      "range": {
+        "startLine": 992,
+        "startChar": 1,
+        "endLine": 992,
+        "endChar": 16
+      },
+      "revId": "24b195b44cef68d2f97a8445e971018e6324f406",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
