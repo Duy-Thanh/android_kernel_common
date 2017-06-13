@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06e0124d_7222870d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-13T22:05:33Z",
+      "side": 1,
+      "message": "What do you mean?",
+      "range": {
+        "startLine": 18,
+        "startChar": 30,
+        "endLine": 19,
+        "endChar": 42
+      },
+      "revId": "cb3f929a4252ba5d50ca366c04da2caace6c189c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a70a0656_7cd31d4f",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-13T22:05:33Z",
+      "side": 1,
+      "message": "You could use in-line kernel doc comments for this:\n https://www.kernel.org/doc/html/latest/doc-guide/kernel-doc.html#in-line-member-documentation-comments",
+      "revId": "cb3f929a4252ba5d50ca366c04da2caace6c189c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f84a9f55_71759bd2",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2917,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-13T22:05:33Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 2917,
+        "startChar": 16,
+        "endLine": 2917,
+        "endChar": 37
+      },
+      "revId": "cb3f929a4252ba5d50ca366c04da2caace6c189c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79ef5691_9b09274c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 3603,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-13T22:05:33Z",
+      "side": 1,
+      "message": "can this happen? The thread is removed from the tree before is_dead is set.",
+      "range": {
+        "startLine": 3603,
+        "startChar": 3,
+        "endLine": 3603,
+        "endChar": 18
+      },
+      "revId": "cb3f929a4252ba5d50ca366c04da2caace6c189c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "144de4f9_0b60da1a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 3668,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-13T22:05:33Z",
+      "side": 1,
+      "message": "can this happen?",
+      "range": {
+        "startLine": 3668,
+        "startChar": 3,
+        "endLine": 3668,
+        "endChar": 16
+      },
+      "revId": "cb3f929a4252ba5d50ca366c04da2caace6c189c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
