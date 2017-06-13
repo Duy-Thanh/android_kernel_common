@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6bd89ff_4987c520",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 4679,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-13T01:15:55Z",
+      "side": 1,
+      "message": "it may be better to read this with the lock held. If the write that clears to_proc is not atomic, it could create an alias.",
+      "range": {
+        "startLine": 4679,
+        "startChar": 13,
+        "endLine": 4679,
+        "endChar": 23
+      },
+      "revId": "382ea58768f81e4f39de1a9552a2c60c33ca6f58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
