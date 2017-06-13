@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a439c35_f3041743",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-13T20:00:38Z",
+      "side": 1,
+      "message": "drop or fix obsolete lock descriptions",
+      "revId": "45d9b0fb6f839cc0455d50c88d007b80d0853974",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
