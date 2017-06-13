@@ -16,6 +16,24 @@
       "revId": "d15f0d6e090fb1c72236bbc58cc51a2a8a6f2604",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d062831c_b94fd97d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 3146,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-13T00:21:31Z",
+      "side": 1,
+      "message": "Fixed possible queue-after-dead by checking target_thread-\u003eis_dead if available (if not available then wouldn\u0027t have queued for the exiting thread).\n\nNot fixing issues with exiting looper thread for now since that issue existed before.",
+      "parentUuid": "daba11b5_fec6b569",
+      "revId": "d15f0d6e090fb1c72236bbc58cc51a2a8a6f2604",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
