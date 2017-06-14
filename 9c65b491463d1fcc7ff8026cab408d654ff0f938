@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d4de2a9e_b60996f9",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3731,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-14T04:57:51Z",
+      "side": 1,
+      "message": "I started log-\u003ecur at ~0 so the first entry is added at 0 (the first atomic_inc_return returns 0).",
+      "parentUuid": "c71585f6_c7d23ed2",
+      "revId": "9c65b491463d1fcc7ff8026cab408d654ff0f938",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b590f9cc_f246fffa",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2017-06-13T21:19:05Z",
       "side": 1,
       "message": "this is not correct if count is low because the counter has wrapped.",
+      "revId": "9c65b491463d1fcc7ff8026cab408d654ff0f938",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "681ff50f_ac7ec63b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3733,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-14T04:57:51Z",
+      "side": 1,
+      "message": "Indeed. Fixed.",
+      "parentUuid": "b590f9cc_f246fffa",
       "revId": "9c65b491463d1fcc7ff8026cab408d654ff0f938",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "5dfb15d8_e6a1c335",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3737,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-14T04:57:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a576f4aa_0953768c",
+      "range": {
+        "startLine": 3737,
+        "startChar": 10,
+        "endLine": 3737,
+        "endChar": 60
+      },
+      "revId": "9c65b491463d1fcc7ff8026cab408d654ff0f938",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1dab4988_26798abc",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -70,6 +130,24 @@
       "writtenOn": "2017-06-13T21:19:05Z",
       "side": 1,
       "message": "How often do you see this? If it is common, you could check the counter inside the loop and print again if the counter crossed the printed entry.",
+      "revId": "9c65b491463d1fcc7ff8026cab408d654ff0f938",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c91cb7a_8a35ef40",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3742,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-14T04:57:51Z",
+      "side": 1,
+      "message": "With a relatively heavy binder load, I see it about 8% of the time. Never under \"normal\" loads.",
+      "parentUuid": "1dab4988_26798abc",
       "revId": "9c65b491463d1fcc7ff8026cab408d654ff0f938",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
