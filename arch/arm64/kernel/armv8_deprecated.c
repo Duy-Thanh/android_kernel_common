@@ -299,10 +299,16 @@ do {								\
 	_ASM_EXTABLE(0b, 4b)					\
 	_ASM_EXTABLE(1b, 4b)					\
 	: "=&r" (res), "+r" (data), "=&r" (temp)		\
+<<<<<<< HEAD   (23874b ANDROID: uid_sys_stats: check previous uid_entry before call)
 	: "r" (addr), "i" (-EAGAIN), "i" (-EFAULT)		\
 	: "memory");						\
 	uaccess_disable();					\
 } while (0)
+=======
+	: "r" ((unsigned long)addr), "i" (-EAGAIN),		\
+	  "i" (-EFAULT)						\
+	: "memory")
+>>>>>>> BRANCH (30c918 Linux 4.4.72)
 
 #define __user_swp_asm(data, addr, res, temp) \
 	__user_swpX_asm(data, addr, res, temp, "")
