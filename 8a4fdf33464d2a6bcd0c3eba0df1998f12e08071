@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9dba975_1ce7d737",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3739,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-15T23:00:13Z",
+      "side": 1,
+      "message": "count \u003d log_cur + 1; (or log-\u003enext which seems simpler to me)\nif (count \u003e ARRAY_SIZE(log-\u003eentry) || log-\u003efull)\n\tcount \u003d ARRAY_SIZE(log-\u003eentry)\n\nor:\nnext \u003d log_cur + 1\ncount \u003d next \u003e ARRAY_SIZE(log-\u003eentry) || log-\u003efull ? ARRAY_SIZE(log-\u003eentry) : next\n\nlog_cur + 1 can be larger than ARRAY_SIZE(log-\u003eentry) before log-\u003efull is set.",
+      "revId": "8a4fdf33464d2a6bcd0c3eba0df1998f12e08071",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
