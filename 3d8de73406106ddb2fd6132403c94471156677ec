@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1bf3676_b9485f42",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-06-15T06:13:46Z",
+      "side": 1,
+      "message": "BIT(X) usages here maybe?  Minor nit, sorry, couldn\u0027t help myself...",
+      "range": {
+        "startLine": 547,
+        "startChar": 35,
+        "endLine": 547,
+        "endChar": 39
+      },
+      "revId": "3d8de73406106ddb2fd6132403c94471156677ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
