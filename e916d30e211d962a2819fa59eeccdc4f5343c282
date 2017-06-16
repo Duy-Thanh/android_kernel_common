@@ -16,6 +16,24 @@
       "revId": "e916d30e211d962a2819fa59eeccdc4f5343c282",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1bc3eaad_ea9ae714",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-16T00:06:31Z",
+      "side": 1,
+      "message": "target_thread dying and clearing t-\u003efrom (though later in the series this will be protected by the inner lock -- which is probably your point). You think I should remove the t-\u003elock here since we\u0027ll have the inner lock later?",
+      "parentUuid": "1c920b0c_c0a91c94",
+      "revId": "e916d30e211d962a2819fa59eeccdc4f5343c282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
