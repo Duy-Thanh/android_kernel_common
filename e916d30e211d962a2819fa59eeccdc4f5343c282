@@ -34,6 +34,24 @@
       "revId": "e916d30e211d962a2819fa59eeccdc4f5343c282",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "745e261d_3485ed9f",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-16T00:40:39Z",
+      "side": 1,
+      "message": "If t-\u003efrom can get cleared by another thread while this function runs, this lock will not prevent triggering the BUG_ON below (as there is no conditional code below). If it protects against some other race, a comment would be useful as it does not match the purpose of the lock as described in the struct.\n\nIf it does not protect anything, remove it.",
+      "parentUuid": "1bc3eaad_ea9ae714",
+      "revId": "e916d30e211d962a2819fa59eeccdc4f5343c282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
