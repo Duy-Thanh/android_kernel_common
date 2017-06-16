@@ -16,6 +16,23 @@
       "revId": "8a4fdf33464d2a6bcd0c3eba0df1998f12e08071",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a86dbfcf_ba62fa8a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3744,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-16T20:24:08Z",
+      "side": 1,
+      "message": "you may want to add the log index or something else to the log entry to indicate when it has been fully written, so that this code can detect an incomplete entry.",
+      "revId": "8a4fdf33464d2a6bcd0c3eba0df1998f12e08071",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
