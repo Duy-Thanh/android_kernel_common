@@ -52,6 +52,24 @@
       "revId": "e916d30e211d962a2819fa59eeccdc4f5343c282",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "47aa519f_467ba003",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-19T15:56:42Z",
+      "side": 1,
+      "message": "Removed the lock here since this case is protected by the inner lock in a later patch",
+      "parentUuid": "745e261d_3485ed9f",
+      "revId": "e916d30e211d962a2819fa59eeccdc4f5343c282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
