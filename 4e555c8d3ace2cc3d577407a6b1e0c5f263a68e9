@@ -63,6 +63,24 @@
       "revId": "4e555c8d3ace2cc3d577407a6b1e0c5f263a68e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79b78a7b_35cb52e6",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-20T17:36:04Z",
+      "side": 1,
+      "message": "I kept the struct description, but removed all the \"protected by\" statements which are now added in the patch where the corresponding protection is added.",
+      "parentUuid": "370b44b5_0f84201b",
+      "revId": "4e555c8d3ace2cc3d577407a6b1e0c5f263a68e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
