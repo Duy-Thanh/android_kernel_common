@@ -145,9 +145,9 @@ static struct qtaguid_event_counts qtu_events;
 static bool can_manipulate_uids(void)
 {
 	/* root pwnd */
-	return in_egroup_p(xt_qtaguid_ctrl_file->gid)
+	return xt_qtaguid_ctrl_file ? (in_egroup_p(xt_qtaguid_ctrl_file->gid)
 		|| unlikely(!from_kuid(&init_user_ns, current_fsuid())) || unlikely(!proc_ctrl_write_limited)
-		|| unlikely(uid_eq(current_fsuid(), xt_qtaguid_ctrl_file->uid));
+		|| unlikely(uid_eq(current_fsuid(), xt_qtaguid_ctrl_file->uid))) : false;
 }
 
 static bool can_impersonate_uid(kuid_t uid)
@@ -158,10 +158,12 @@ static bool can_impersonate_uid(kuid_t uid)
 static bool can_read_other_uid_stats(kuid_t uid)
 {
 	/* root pwnd */
-	return in_egroup_p(xt_qtaguid_stats_file->gid)
-		|| unlikely(!from_kuid(&init_user_ns, current_fsuid())) || uid_eq(uid, current_fsuid())
-		|| unlikely(!proc_stats_readall_limited)
-		|| unlikely(uid_eq(current_fsuid(), xt_qtaguid_ctrl_file->uid));
+	if (xt_qtaguid_stats_file && xt_qtaguid_ctrl_file)
+		return in_egroup_p(xt_qtaguid_stats_file->gid)
+			|| unlikely(!from_kuid(&init_user_ns, current_fsuid())) || uid_eq(uid, current_fsuid())
+			|| unlikely(!proc_stats_readall_limited)
+			|| unlikely(uid_eq(current_fsuid(), xt_qtaguid_ctrl_file->uid));
+	return false;
 }
 
 static inline void dc_add_byte_packets(struct data_counters *counters, int set,
