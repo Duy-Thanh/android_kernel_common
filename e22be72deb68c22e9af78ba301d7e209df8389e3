@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f5c0007c_e8972563",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-20T23:10:49Z",
+      "side": 1,
+      "message": "why did these move? If you want tmp_ref before them, at it there when you introduce it.",
+      "revId": "e22be72deb68c22e9af78ba301d7e209df8389e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
