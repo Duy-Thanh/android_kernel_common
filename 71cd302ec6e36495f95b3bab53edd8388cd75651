@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f3e2a75f_c419b333",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-21T00:53:02Z",
+      "side": 1,
+      "message": "I\u0027d prefer to have the debug_id in the log output even if the entry is incomplete.",
+      "parentUuid": "b63aa026_44b0a80e",
+      "revId": "71cd302ec6e36495f95b3bab53edd8388cd75651",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f31a5a12_34bbec9b",
         "filename": "drivers/android/binder.c",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2017-06-20T19:44:34Z",
       "side": 1,
       "message": "smp_wmb",
+      "revId": "71cd302ec6e36495f95b3bab53edd8388cd75651",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c55890b5_4a66bc4f",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1831,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-21T00:53:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f31a5a12_34bbec9b",
       "revId": "71cd302ec6e36495f95b3bab53edd8388cd75651",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5c7d8b1e_86b54893",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1832,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-21T00:53:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a222d07c_eb7ea002",
+      "revId": "71cd302ec6e36495f95b3bab53edd8388cd75651",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a781af9_bcd75f53",
         "filename": "drivers/android/binder.c",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2017-06-20T19:44:34Z",
       "side": 1,
       "message": "you need to read e-\u003edebug_id before everything else for this to work:\ndebug_id \u003d e-\u003edebug_id (READ_ONCE?)\nrmb()\n..print...\nrmb()\n...debug_id \u0026\u0026 debug_id \u003d\u003d e-\u003edebug_id_done...",
+      "revId": "71cd302ec6e36495f95b3bab53edd8388cd75651",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a2feeec_3c401748",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3744,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-21T00:53:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a781af9_bcd75f53",
       "revId": "71cd302ec6e36495f95b3bab53edd8388cd75651",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
