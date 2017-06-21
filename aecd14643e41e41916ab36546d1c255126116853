@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0b4b896_a84f6aea",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3774,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-21T19:55:34Z",
+      "side": 1,
+      "message": ".. \u0026\u0026 !log-\u003efull",
+      "range": {
+        "startLine": 3774,
+        "startChar": 7,
+        "endLine": 3774,
+        "endChar": 37
+      },
+      "revId": "aecd14643e41e41916ab36546d1c255126116853",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
