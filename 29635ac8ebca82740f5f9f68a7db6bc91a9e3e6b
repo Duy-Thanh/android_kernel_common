@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8f9d14e_7d2fa237",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-06-21T21:14:52Z",
+      "side": 1,
+      "message": "Maybe describe why Android needs an updated defconfig here.\n\nAlso mention something about the Kconfig changes in the expanded commit message.",
+      "revId": "29635ac8ebca82740f5f9f68a7db6bc91a9e3e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "131e6d93_dd89e29b",
+        "filename": "arch/um/Kconfig.um",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-06-21T21:14:52Z",
+      "side": 1,
+      "message": "It seems like this is a fix upstream may be interested in?  Are you sending it to the um folks?",
+      "revId": "29635ac8ebca82740f5f9f68a7db6bc91a9e3e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ad1a022_e9f0ddfa",
+        "filename": "arch/um/Kconfig.um",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-06-21T21:14:52Z",
+      "side": 1,
+      "message": "Suggest add more comments here about why this was appended.",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 16
+      },
+      "revId": "29635ac8ebca82740f5f9f68a7db6bc91a9e3e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
