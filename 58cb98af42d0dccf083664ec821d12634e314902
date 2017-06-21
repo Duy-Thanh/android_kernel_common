@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8f10dc29_c4bd9fc2",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-21T02:24:35Z",
+      "side": 1,
+      "message": "@inner_lock",
+      "range": {
+        "startLine": 491,
+        "startChar": 0,
+        "endLine": 497,
+        "endChar": 51
+      },
+      "revId": "58cb98af42d0dccf083664ec821d12634e314902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "899a7d6b_06177c83",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 3845,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-21T02:24:35Z",
+      "side": 1,
+      "message": "why did the spacing change here?",
+      "range": {
+        "startLine": 3840,
+        "startChar": 0,
+        "endLine": 3845,
+        "endChar": 51
+      },
+      "revId": "58cb98af42d0dccf083664ec821d12634e314902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3ac231a_6693b687",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 4972,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-21T02:24:35Z",
+      "side": 1,
+      "message": "why did this move here?",
+      "revId": "58cb98af42d0dccf083664ec821d12634e314902",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
