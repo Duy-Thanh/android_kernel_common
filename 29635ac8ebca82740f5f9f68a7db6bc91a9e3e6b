@@ -56,6 +56,52 @@
       "revId": "29635ac8ebca82740f5f9f68a7db6bc91a9e3e6b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c0f66663_a1207ecd",
+        "filename": "arch/um/Kconfig.um",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2017-06-21T21:15:02Z",
+      "side": 1,
+      "message": "it exists in arch/Kconfig",
+      "range": {
+        "startLine": 148,
+        "startChar": 7,
+        "endLine": 148,
+        "endChar": 25
+      },
+      "revId": "29635ac8ebca82740f5f9f68a7db6bc91a9e3e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "80179d97_85ea8154",
+        "filename": "arch/um/configs/android_x86_64_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2017-06-21T21:15:02Z",
+      "side": 1,
+      "message": "Did you make it through savedefconfig ?",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 18
+      },
+      "revId": "29635ac8ebca82740f5f9f68a7db6bc91a9e3e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
