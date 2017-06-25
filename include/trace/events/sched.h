@@ -1156,6 +1156,51 @@ TRACE_EVENT(walt_migration_update_sum,
 );
 #endif /* CONFIG_SCHED_WALT */
 
+/*
+ * Tracepoint for schedule group energy
+ */
+TRACE_EVENT(sched_group_energy,
+
+	TP_PROTO(const struct cpumask *mask,
+		 int util_delta, int cap_idx, int idle_idx,
+		 unsigned long group_util,
+		 int sg_busy_energy, int sg_idle_energy,
+		 int total_energy),
+
+	TP_ARGS(mask, util_delta, cap_idx, idle_idx, group_util,
+		sg_busy_energy, sg_idle_energy, total_energy),
+
+	TP_STRUCT__entry(
+		__bitmask(cpumask,      num_possible_cpus()     )
+		__field( int,		util_delta		)
+		__field( int,		cap_idx			)
+		__field( int,		idle_idx		)
+		__field( unsigned long,	group_util		)
+		__field( int,		sg_busy_energy		)
+		__field( int,		sg_idle_energy		)
+		__field( int,		total_energy		)
+	),
+
+	TP_fast_assign(
+		__assign_bitmask(cpumask, cpumask_bits(mask),
+				 num_possible_cpus());
+		__entry->util_delta	= util_delta;
+		__entry->cap_idx	= cap_idx;
+		__entry->idle_idx	= idle_idx;
+		__entry->group_util	= group_util;
+		__entry->sg_busy_energy	= sg_busy_energy;
+		__entry->sg_idle_energy	= sg_idle_energy;
+		__entry->total_energy	= total_energy;
+	),
+
+	TP_printk("cpus=%s util_delta=%d cap_idx=%d idle_idx=%d "
+		  "group_util=%lu sg_busy_energy=%d sg_idle_energy=%d total_energy=%d",
+		  __get_bitmask(cpumask), __entry->util_delta,
+		  __entry->cap_idx, __entry->idle_idx,
+		  __entry->group_util, __entry->sg_busy_energy,
+		  __entry->sg_idle_energy, __entry->total_energy)
+);
+
 #endif /* CONFIG_SMP */
 
 #endif /* _TRACE_SCHED_H */

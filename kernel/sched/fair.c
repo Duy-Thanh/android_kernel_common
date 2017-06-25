@@ -5694,6 +5694,11 @@ static int sched_group_energy(struct energy_env *eenv)
 
 				total_energy += sg_busy_energy + sg_idle_energy;
 
+				trace_sched_group_energy(sched_group_cpus(sg),
+					eenv->util_delta, cap_idx, idle_idx,
+					group_util, sg_busy_energy,
+					sg_idle_energy, total_energy);
+
 				if (!sd->child)
 					cpumask_xor(&visit_cpus, &visit_cpus, sched_group_cpus(sg));
 
