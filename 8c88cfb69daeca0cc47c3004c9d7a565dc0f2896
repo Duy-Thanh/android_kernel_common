@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b314fdcd_a3d3200e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-27T18:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "982f7f07_9f71819f",
+      "range": {
+        "startLine": 811,
+        "startChar": 0,
+        "endLine": 817,
+        "endChar": 5
+      },
+      "revId": "8c88cfb69daeca0cc47c3004c9d7a565dc0f2896",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "164328f0_fe5c885f",
         "filename": "drivers/android/binder.c",
         "patchSetId": 23
@@ -36,6 +60,24 @@
       "writtenOn": "2017-06-27T03:41:47Z",
       "side": 1,
       "message": "you could move\n\nif (last_t)\n\tspin_lock(\u0026t-\u003elock);\n\nhere as:\n\nif (t)\n\tspin_lock(\u0026t-\u003elock);\n\nto make it a little clearer.",
+      "revId": "8c88cfb69daeca0cc47c3004c9d7a565dc0f2896",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d84aec66_31254beb",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 2979,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-06-27T18:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "164328f0_fe5c885f",
       "revId": "8c88cfb69daeca0cc47c3004c9d7a565dc0f2896",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
