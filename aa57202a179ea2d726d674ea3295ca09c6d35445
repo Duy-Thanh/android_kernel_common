@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "20790208_338bdf4c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-27T23:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24899e74_f09bcdef",
+      "range": {
+        "startLine": 531,
+        "startChar": 35,
+        "endLine": 531,
+        "endChar": 64
+      },
+      "revId": "aa57202a179ea2d726d674ea3295ca09c6d35445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da4c6c42_2f05d881",
         "filename": "drivers/android/binder.c",
         "patchSetId": 19
@@ -36,6 +60,30 @@
       "writtenOn": "2017-06-27T22:36:17Z",
       "side": 1,
       "message": "...",
+      "range": {
+        "startLine": 544,
+        "startChar": 0,
+        "endLine": 545,
+        "endChar": 61
+      },
+      "revId": "aa57202a179ea2d726d674ea3295ca09c6d35445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af140665_9c6df2d2",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-27T23:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da4c6c42_2f05d881",
       "range": {
         "startLine": 544,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "e7da8181_a2f10a71",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-27T23:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8e7636e_d4b73776",
+      "range": {
+        "startLine": 571,
+        "startChar": 40,
+        "endLine": 571,
+        "endChar": 55
+      },
+      "revId": "aa57202a179ea2d726d674ea3295ca09c6d35445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b0bf2c4_62aeda54",
         "filename": "drivers/android/binder.c",
         "patchSetId": 19
@@ -82,6 +154,30 @@
       "writtenOn": "2017-06-27T22:36:17Z",
       "side": 1,
       "message": "align with (",
+      "range": {
+        "startLine": 930,
+        "startChar": 4,
+        "endLine": 930,
+        "endChar": 8
+      },
+      "revId": "aa57202a179ea2d726d674ea3295ca09c6d35445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b83d27e_fe1bfec4",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-27T23:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b0bf2c4_62aeda54",
       "range": {
         "startLine": 930,
         "startChar": 4,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "da35e0fc_fd7acbe5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 2666,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-27T23:43:02Z",
+      "side": 1,
+      "message": "You\u0027re right, removed.",
+      "parentUuid": "e4f7e584_51ec7b43",
+      "range": {
+        "startLine": 2666,
+        "startChar": 2,
+        "endLine": 2666,
+        "endChar": 13
+      },
+      "revId": "aa57202a179ea2d726d674ea3295ca09c6d35445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe4df03a_3df1da6f",
         "filename": "drivers/android/binder.c",
         "patchSetId": 19
@@ -128,6 +248,30 @@
       "writtenOn": "2017-06-27T22:36:17Z",
       "side": 1,
       "message": "WARN_ON(target_wait)",
+      "range": {
+        "startLine": 2974,
+        "startChar": 3,
+        "endLine": 2974,
+        "endChar": 21
+      },
+      "revId": "aa57202a179ea2d726d674ea3295ca09c6d35445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b8a1edb4_85dd3609",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 2974,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-27T23:43:02Z",
+      "side": 1,
+      "message": "didn\u0027t add since I removed target_wait altogether.",
+      "parentUuid": "fe4df03a_3df1da6f",
       "range": {
         "startLine": 2974,
         "startChar": 3,
