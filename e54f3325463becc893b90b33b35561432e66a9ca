@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "af0d9eb2_06041024",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1275,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-27T23:44:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef9341a_1528f9c1",
+      "range": {
+        "startLine": 1275,
+        "startChar": 3,
+        "endLine": 1275,
+        "endChar": 29
+      },
+      "revId": "e54f3325463becc893b90b33b35561432e66a9ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d67376f_ab9c6820",
         "filename": "drivers/android/binder.c",
         "patchSetId": 17
@@ -36,6 +60,30 @@
       "writtenOn": "2017-06-27T22:48:19Z",
       "side": 1,
       "message": "!node",
+      "range": {
+        "startLine": 2548,
+        "startChar": 8,
+        "endLine": 2548,
+        "endChar": 20
+      },
+      "revId": "e54f3325463becc893b90b33b35561432e66a9ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28e5372a_e5f10d6e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 2548,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-27T23:44:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d67376f_ab9c6820",
       "range": {
         "startLine": 2548,
         "startChar": 8,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "fde134c4_820858a8",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 2551,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-27T23:44:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ccc6f7d_d888bd5b",
+      "range": {
+        "startLine": 2551,
+        "startChar": 9,
+        "endLine": 2551,
+        "endChar": 23
+      },
+      "revId": "e54f3325463becc893b90b33b35561432e66a9ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca1cbcfb_5334ce36",
         "filename": "drivers/android/binder.c",
         "patchSetId": 17
@@ -82,6 +154,30 @@
       "writtenOn": "2017-06-27T22:48:19Z",
       "side": 1,
       "message": "where is this used?",
+      "range": {
+        "startLine": 2573,
+        "startChar": 2,
+        "endLine": 2573,
+        "endChar": 13
+      },
+      "revId": "e54f3325463becc893b90b33b35561432e66a9ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d4bc96b4_7460bbb8",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 2573,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-27T23:44:37Z",
+      "side": 1,
+      "message": "mmm nowhere, used in old PS, wakeup_thread_ilocked() takes care of this now. Removed.",
+      "parentUuid": "ca1cbcfb_5334ce36",
       "range": {
         "startLine": 2573,
         "startChar": 2,
