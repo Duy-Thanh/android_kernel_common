@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cdc9f71e_8f8b1b2d",
+        "filename": "fs/squashfs/block.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1097718
+      },
+      "writtenOn": "2017-06-27T01:52:05Z",
+      "side": 1,
+      "message": "Nitpick: The space after (unsigned char) results in a checkpatch CHECK message.",
+      "revId": "1f0af96b6ba32a163bbaada43ab1d9db9c0b6198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
