@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ef9341a_1528f9c1",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 1275,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-27T22:48:19Z",
+      "side": 1,
+      "message": "it might be better to use this name in the previous patch.",
+      "range": {
+        "startLine": 1275,
+        "startChar": 3,
+        "endLine": 1275,
+        "endChar": 29
+      },
+      "revId": "e54f3325463becc893b90b33b35561432e66a9ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d67376f_ab9c6820",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 2548,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-27T22:48:19Z",
+      "side": 1,
+      "message": "!node",
+      "range": {
+        "startLine": 2548,
+        "startChar": 8,
+        "endLine": 2548,
+        "endChar": 20
+      },
+      "revId": "e54f3325463becc893b90b33b35561432e66a9ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ccc6f7d_d888bd5b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 2551,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-27T22:48:19Z",
+      "side": 1,
+      "message": "thread",
+      "range": {
+        "startLine": 2551,
+        "startChar": 9,
+        "endLine": 2551,
+        "endChar": 23
+      },
+      "revId": "e54f3325463becc893b90b33b35561432e66a9ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca1cbcfb_5334ce36",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 2573,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-06-27T22:48:19Z",
+      "side": 1,
+      "message": "where is this used?",
+      "range": {
+        "startLine": 2573,
+        "startChar": 2,
+        "endLine": 2573,
+        "endChar": 13
+      },
+      "revId": "e54f3325463becc893b90b33b35561432e66a9ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
