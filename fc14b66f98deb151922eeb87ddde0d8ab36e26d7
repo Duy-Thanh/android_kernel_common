@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d96925c9_eead08d8",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5687,
+      "author": {
+        "id": 1173283
+      },
+      "writtenOn": "2017-06-30T15:49:08Z",
+      "side": 1,
+      "message": "How about not using a variable for the margin ? It\u0027s the only place it is used, and that could let us drop the brackets.",
+      "revId": "fc14b66f98deb151922eeb87ddde0d8ab36e26d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
