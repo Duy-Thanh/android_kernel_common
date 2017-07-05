@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a6202db_8ea0e359",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5419,
+      "author": {
+        "id": 1173283
+      },
+      "writtenOn": "2017-07-05T16:27:18Z",
+      "side": 1,
+      "message": "The first set of conditions tries to bypass groups with both dst and src cpus (same cluster migration, and current sched group is that cluster), so how about laying it out like this:\n\nif (cpumask_test_cpu(eenv-\u003esrc_cpu, sched_group_cpus(sg)) \u0026\u0026\n    cpumask_test_cpu(eenv-\u003edst_cpu, sched_group_cpus(sg)))) {\n        /* both cpus under consideration\n         * are in the same group, migration\n         * will not change group idle state\n         */\n        goto end;\n}\n\nif (cpumask_test_cpu(eenv-\u003esrc_cpu, sched_group_cpus(sg))) {\n        grp_util -\u003d eenv-\u003eutil_delta;\n} else if (cpumask_test_cpu(eenv-\u003edst_cpu, sched_group_cpus(sg))) {\n        grp_util +\u003d eenv-\u003eutil_delta;\n} else {\n        goto end;\n}\n\nWith appropriate comments where needed. I think this makes the code easier to read.",
+      "revId": "c8782e2f639fba07e2b8b96c526337246716673c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1e9d10e_ecf22924",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5452,
+      "author": {
+        "id": 1173283
+      },
+      "writtenOn": "2017-07-05T16:27:18Z",
+      "side": 1,
+      "message": "If I recall correctly, the -2 is here to avoid selecting the deepest idle state (cluster sleep) if grp_util is greater than zero.\n\nThe group will only be able to \"drive\" the idle state to its deepest value if it\u0027s a cluster group, so we\u0027d have to check if the group weight is \u003e 1, but that makes the code grow more and more. Could we just go with always mapping the group utilization with the idle state estimation ?",
+      "revId": "c8782e2f639fba07e2b8b96c526337246716673c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
