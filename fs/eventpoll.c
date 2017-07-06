@@ -159,8 +159,18 @@ struct epitem {
 	/* The file descriptor information this item refers to */
 	struct epoll_filefd ffd;
 
-	/* Number of active wait queue attached to poll operations */
-	int nwait;
+	union {
+		/*
+		 * Number of active wait queue attached to poll operations
+		 * Only valid at the start of ep_insert.
+		 */
+		int nwait;
+		/*
+		 * Mask of events that haven't yet been sent to the user.
+		 * Only valid after the start of ep_insert.
+		 */
+		__u32 unsent_events;
+	};
 
 	/* List containing poll wait queues */
 	struct list_head pwqlist;
@@ -243,6 +253,14 @@ struct eppoll_entry {
 
 	/* The wait queue head that linked the "wait" wait queue item */
 	wait_queue_head_t *whead;
+
+	/*
+	 * Backup for epitem->unsent_events while the ovflist is active.
+	 * Accumulated across all epoll_entrys once ovflist is deactivated.
+	 * Added per epoll_entry rather than per epitem to prevent epitem from
+	 * using an additional cache line.
+	 */
+	__u32 ovf_unsent_events;
 };
 
 /* Wrapper struct used by poll queueing */
@@ -582,6 +600,42 @@ static inline void ep_pm_stay_awake_rcu(struct epitem *epi)
 	rcu_read_unlock();
 }
 
+void enter_callback_redirect_locked(struct eventpoll *ep) {
+	ep->ovflist = NULL;
+}
+
+/* Returns true if epi_match was found in the ep->ovflist. */
+bool exit_callback_redirect_locked(struct eventpoll *ep, struct epitem *epi_match) {
+	struct epitem *epi, *nepi;
+	struct eppoll_entry *pwq;
+	bool match_found = false;
+
+	for (nepi = ep->ovflist; (epi = nepi) != NULL;
+		 nepi = epi->next, epi->next = EP_UNACTIVE_PTR) {
+
+		if (epi_match == epi)
+			match_found = true;
+
+		list_for_each_entry(pwq, &epi->pwqlist, llink) {
+			epi->unsent_events |= pwq->ovf_unsent_events;
+			pwq->ovf_unsent_events = 0;
+		}
+
+		if (!ep_is_linked(&epi->rdllink)) {
+			list_add_tail(&epi->rdllink, &ep->rdllist);
+			ep_pm_stay_awake(epi);
+		}
+	}
+	/*
+	 * We need to set back ep->ovflist to EP_UNACTIVE_PTR, so that after
+	 * releasing the lock, events will be queued in the normal way inside
+	 * ep->rdllist.
+	 */
+	ep->ovflist = EP_UNACTIVE_PTR;
+
+	return match_found;
+}
+
 /**
  * ep_scan_ready_list - Scans the ready list in a way that makes possible for
  *                      the scan code, to call f_op->poll(). Also allows for
@@ -602,7 +656,6 @@ static int ep_scan_ready_list(struct eventpoll *ep,
 {
 	int error, pwake = 0;
 	unsigned long flags;
-	struct epitem *epi, *nepi;
 	LIST_HEAD(txlist);
 
 	/*
@@ -623,7 +676,7 @@ static int ep_scan_ready_list(struct eventpoll *ep,
 	 */
 	spin_lock_irqsave(&ep->lock, flags);
 	list_splice_init(&ep->rdllist, &txlist);
-	ep->ovflist = NULL;
+	enter_callback_redirect_locked(ep);
 	spin_unlock_irqrestore(&ep->lock, flags);
 
 	/*
@@ -632,30 +685,13 @@ static int ep_scan_ready_list(struct eventpoll *ep,
 	error = (*sproc)(ep, &txlist, priv);
 
 	spin_lock_irqsave(&ep->lock, flags);
+
 	/*
 	 * During the time we spent inside the "sproc" callback, some
 	 * other events might have been queued by the poll callback.
 	 * We re-insert them inside the main ready-list here.
 	 */
-	for (nepi = ep->ovflist; (epi = nepi) != NULL;
-	     nepi = epi->next, epi->next = EP_UNACTIVE_PTR) {
-		/*
-		 * We need to check if the item is already in the list.
-		 * During the "sproc" callback execution time, items are
-		 * queued into ->ovflist but the "txlist" might already
-		 * contain them, and the list_splice() below takes care of them.
-		 */
-		if (!ep_is_linked(&epi->rdllink)) {
-			list_add_tail(&epi->rdllink, &ep->rdllist);
-			ep_pm_stay_awake(epi);
-		}
-	}
-	/*
-	 * We need to set back ep->ovflist to EP_UNACTIVE_PTR, so that after
-	 * releasing the lock, events will be queued in the normal way inside
-	 * ep->rdllist.
-	 */
-	ep->ovflist = EP_UNACTIVE_PTR;
+	exit_callback_redirect_locked(ep, NULL);
 
 	/*
 	 * Quickly re-inject items left on "txlist".
@@ -1009,6 +1045,7 @@ static int ep_poll_callback(wait_queue_t *wait, unsigned mode, int sync, void *k
 	struct epitem *epi = ep_item_from_wait(wait);
 	struct eventpoll *ep = epi->ep;
 	int ewake = 0;
+	__u32 events;
 
 	if ((unsigned long)key & POLLFREE) {
 		ep_pwq_from_wait(wait)->whead = NULL;
@@ -1038,7 +1075,8 @@ static int ep_poll_callback(wait_queue_t *wait, unsigned mode, int sync, void *k
 	 * callback. We need to be able to handle both cases here, hence the
 	 * test for "key" != NULL before the event match test.
 	 */
-	if (key && !((unsigned long) key & epi->event.events))
+	events = ((unsigned long long)key) & epi->event.events;
+	if (key && !events)
 		goto out_unlock;
 
 	/*
@@ -1060,8 +1098,19 @@ static int ep_poll_callback(wait_queue_t *wait, unsigned mode, int sync, void *k
 			}
 
 		}
+		/* If key is 0, ovf_unsent_events and events will always be 0 here. */
+		ep_pwq_from_wait(wait)->ovf_unsent_events |= events;
 		goto out_unlock;
 	}
+
+	/*
+	 * If key is 0, make sure to poll before sending events to the user.
+	 * unsent_events may not be zero here when key is 0 becaues of ep_insert.
+	 */
+	if (key)
+		epi->unsent_events |= events;
+	else
+		epi->unsent_events = 0;
 
 	/* If this file is already in the ready list we exit soon */
 	if (!ep_is_linked(&epi->rdllink)) {
@@ -1126,6 +1175,7 @@ static void ep_ptable_queue_proc(struct file *file, wait_queue_head_t *whead,
 			add_wait_queue_exclusive(whead, &pwq->wait);
 		else
 			add_wait_queue(whead, &pwq->wait);
+		pwq->ovf_unsent_events = 0;
 		list_add_tail(&pwq->llink, &epi->pwqlist);
 		epi->nwait++;
 	} else {
@@ -1292,13 +1342,14 @@ static noinline void ep_destroy_wakeup_source(struct epitem *epi)
  * Must be called with "mtx" held.
  */
 static int ep_insert(struct eventpoll *ep, struct epoll_event *event,
-		     struct file *tfile, int fd, int full_check)
+             struct file *tfile, int fd, int full_check)
 {
 	int error, revents, pwake = 0;
 	unsigned long flags;
 	long user_watches;
 	struct epitem *epi;
 	struct ep_pqueue epq;
+	bool racy_callback;
 
 	user_watches = atomic_long_read(&ep->user->epoll_watches);
 	if (unlikely(user_watches >= max_user_watches))
@@ -1323,9 +1374,46 @@ static int ep_insert(struct eventpoll *ep, struct epoll_event *event,
 		RCU_INIT_POINTER(epi->ws, NULL);
 	}
 
+	/*
+	 * nwait is invalid after this point.
+	 * unsent_events becomes valid, so initizlize it to zero here.
+	 * Note: unsent_events isn't accessed during callback_redirect sections.
+	 */
+	epi->unsent_events = 0;
+
+	/* Add the current item to the list of active epoll hook for this file */
+	spin_lock(&tfile->f_lock);
+	list_add_tail_rcu(&epi->fllink, &tfile->f_ep_links);
+	spin_unlock(&tfile->f_lock);
+
+	/*
+	 * Add the current item to the RB tree. All RB tree operations are
+	 * protected by "mtx", and ep_insert() is called with "mtx" held.
+	 */
+	ep_rbtree_insert(ep, epi);
+
+	/* now check if we've created too many backpaths */
+	error = -EINVAL;
+	if (full_check && reverse_path_check())
+		goto error_remove_epi;
+
 	/* Initialize the poll table using the queue callback */
 	epq.epi = epi;
 	init_poll_funcptr(&epq.pt, ep_ptable_queue_proc);
+
+	/* Redirect callbacks so we can avoid races with callbacks that
+	 * happen while ep->lock isn't locked.
+	 * We cannot hold ep->lock while calling ep_item_poll since the device
+	 * may acquire it's wait queue lock, which is the incorrect order.
+	 * If a callback with key==0 is received, we must poll for the real events.
+	 * We can't just OR it with revents below since that could cause us to
+	 * drop events that should have been sent to the user.
+	 * If all devices never set key to 0, redirecting the callbacks here
+	 * shouldn't be needed.
+	 */
+	spin_lock_irqsave(&ep->lock, flags);
+	enter_callback_redirect_locked(ep);
+	spin_unlock_irqrestore(&ep->lock, flags);
 
 	/*
 	 * Attach the item to the poll hooks and get current event bits.
@@ -1345,27 +1433,28 @@ static int ep_insert(struct eventpoll *ep, struct epoll_event *event,
 	if (epi->nwait < 0)
 		goto error_unregister;
 
-	/* Add the current item to the list of active epoll hook for this file */
-	spin_lock(&tfile->f_lock);
-	list_add_tail_rcu(&epi->fllink, &tfile->f_ep_links);
-	spin_unlock(&tfile->f_lock);
-
-	/*
-	 * Add the current item to the RB tree. All RB tree operations are
-	 * protected by "mtx", and ep_insert() is called with "mtx" held.
-	 */
-	ep_rbtree_insert(ep, epi);
-
-	/* now check if we've created too many backpaths */
-	error = -EINVAL;
-	if (full_check && reverse_path_check())
-		goto error_remove_epi;
-
-	/* We have to drop the new item inside our item list to keep track of it */
 	spin_lock_irqsave(&ep->lock, flags);
 
-	/* If the file is already "ready" we drop it inside the ready list */
-	if ((revents & event->events) && !ep_is_linked(&epi->rdllink)) {
+	/*
+	 * Collect callbacks that may have occured between ep_item_poll
+	 * and ep->lock acquisition.
+	 */
+	racy_callback = exit_callback_redirect_locked(ep, epi);
+	if (racy_callback) {
+		/*
+		 * Don't add revents if the |key| received in the ep_poll_callback was
+		 * not used. This ensures we poll for the real events before sending
+		 * them to the user.
+		 */
+		if (epi->unsent_events)
+			epi->unsent_events |= revents;
+		/*
+		 * Don't worry about waking anything since it's already been handled
+		 * by exit_callback_redirect_locked.
+		 */
+	} else if (revents) {
+		/* If the file is already "ready" we drop it inside the ready list */
+		epi->unsent_events = revents;
 		list_add_tail(&epi->rdllink, &ep->rdllist);
 		ep_pm_stay_awake(epi);
 
@@ -1386,28 +1475,20 @@ static int ep_insert(struct eventpoll *ep, struct epoll_event *event,
 
 	return 0;
 
+error_unregister:
+	ep_unregister_pollwait(ep, epi);
+	wakeup_source_unregister(ep_wakeup_source(epi));
+
+	spin_lock_irqsave(&ep->lock, flags);
+	exit_callback_redirect_locked(ep, NULL);
+	spin_unlock_irqrestore(&ep->lock, flags);
+
 error_remove_epi:
 	spin_lock(&tfile->f_lock);
 	list_del_rcu(&epi->fllink);
 	spin_unlock(&tfile->f_lock);
 
 	rb_erase(&epi->rbn, &ep->rbr);
-
-error_unregister:
-	ep_unregister_pollwait(ep, epi);
-
-	/*
-	 * We need to do this because an event could have been arrived on some
-	 * allocated wait queue. Note that we don't care about the ep->ovflist
-	 * list, since that is used/cleaned only inside a section bound by "mtx".
-	 * And ep_insert() is called with "mtx" held.
-	 */
-	spin_lock_irqsave(&ep->lock, flags);
-	if (ep_is_linked(&epi->rdllink))
-		list_del_init(&epi->rdllink);
-	spin_unlock_irqrestore(&ep->lock, flags);
-
-	wakeup_source_unregister(ep_wakeup_source(epi));
 
 error_create_wakeup_source:
 	kmem_cache_free(epi_cache, epi);
@@ -1424,6 +1505,7 @@ static int ep_modify(struct eventpoll *ep, struct epitem *epi, struct epoll_even
 	int pwake = 0;
 	unsigned int revents;
 	poll_table pt;
+	__u32 new_events = ~epi->event.events & event->events;
 
 	init_poll_funcptr(&pt, NULL);
 
@@ -1468,11 +1550,21 @@ static int ep_modify(struct eventpoll *ep, struct epitem *epi, struct epoll_even
 	revents = ep_item_poll(epi, &pt);
 
 	/*
+	 * For edge-triggered monitoring, don't notify for events that were
+	 * monitored before this call. If there was an edge, it should be already
+	 * be reflected in epi->unsent_events.
+	 */
+	if (epi->event.events & EPOLLET) {
+		revents &= new_events;
+	}
+
+	/*
 	 * If the item is "hot" and it is not registered inside the ready
 	 * list, push it inside.
 	 */
-	if (revents & event->events) {
+	if (revents) {
 		spin_lock_irq(&ep->lock);
+		epi->unsent_events |= revents;
 		if (!ep_is_linked(&epi->rdllink)) {
 			list_add_tail(&epi->rdllink, &ep->rdllist);
 			ep_pm_stay_awake(epi);
@@ -1533,7 +1625,21 @@ static int ep_send_events_proc(struct eventpoll *ep, struct list_head *head,
 
 		list_del_init(&epi->rdllink);
 
-		revents = ep_item_poll(epi, &pt);
+		/*
+		 * If level triggered: Re-poll to avoid unnecessary notifications.
+		 *
+		 * If edge triggered: Avoid re-poll if events are cached in
+		 * unsent_events. This way, all epoll files are notified regardless of
+		 * racy state changes in the poll state; for example, if thread A reads
+		 * from an fd with unsent events while thread B is between calls
+		 * to epoll wait, thread B could miss the edge.
+		 */
+		if ((epi->event.events & EPOLLET) && epi->unsent_events) {
+			revents = epi->unsent_events & epi->event.events;
+		} else {
+			revents = ep_item_poll(epi, &pt);
+		}
+		epi->unsent_events = 0;
 
 		/*
 		 * If the event mask intersect the caller-requested one,
