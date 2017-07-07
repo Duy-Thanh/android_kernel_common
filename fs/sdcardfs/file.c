@@ -110,8 +110,11 @@ static long sdcardfs_unlocked_ioctl(struct file *file, unsigned int cmd,
 	/* XXX: use vfs_ioctl if/when VFS exports it */
 	if (!lower_file || !lower_file->f_op)
 		goto out;
-	if (lower_file->f_op->unlocked_ioctl)
+	if (lower_file->f_op->unlocked_ioctl) {
+		struct cred *saved_cred = override_creds(lower_file->f_cred);
 		err = lower_file->f_op->unlocked_ioctl(lower_file, cmd, arg);
+		revert_creds(saved_cred);
+	}
 
 	/* some ioctls can change inode attributes (EXT2_IOC_SETFLAGS) */
 	if (!err)
@@ -133,8 +136,11 @@ static long sdcardfs_compat_ioctl(struct file *file, unsigned int cmd,
 	/* XXX: use vfs_ioctl if/when VFS exports it */
 	if (!lower_file || !lower_file->f_op)
 		goto out;
-	if (lower_file->f_op->compat_ioctl)
+	if (lower_file->f_op->compat_ioctl) {
+		struct cred *saved_cred = override_creds(lower_file->f_cred);
 		err = lower_file->f_op->compat_ioctl(lower_file, cmd, arg);
+		revert_creds(saved_cred);
+	}
 
 out:
 	return err;
