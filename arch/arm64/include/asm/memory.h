@@ -120,6 +120,8 @@
 
 #define IRQ_STACK_SIZE		THREAD_SIZE
 
+#define OVERFLOW_STACK_SIZE	SZ_4K
+
 /*
  * Physical vs virtual RAM address space conversion.  These are
  * private definitions which should NOT be used outside memory.h
