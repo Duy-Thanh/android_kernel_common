@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d535ead_410cdeb7",
+        "filename": "drivers/rtc/rtc-lib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-07-17T22:30:26Z",
+      "side": 1,
+      "message": "checkpatch.pl does not like this (copy and pasted from elsewhere). Style should change to:\n\ncase SYS_RESTART:\n    txt \u003d \"Restart\";\n    break;",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 10
+      },
+      "revId": "9a350badf78dbe0188e383bad692f8de655f0307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d8ef0061_8f198957",
+        "filename": "drivers/rtc/rtc-lib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-07-17T22:30:26Z",
+      "side": 1,
+      "message": "checkpatch sez to use device_initcall() instead.",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 31
+      },
+      "revId": "9a350badf78dbe0188e383bad692f8de655f0307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
