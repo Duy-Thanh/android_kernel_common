@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6d466cdb_737d7dac",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5419,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2017-07-18T08:00:02Z",
+      "side": 1,
+      "message": "Looks fine to me. I don\u0027t feel strongly about this layout so I can change it if necessary.",
+      "parentUuid": "7a6202db_8ea0e359",
+      "revId": "c8782e2f639fba07e2b8b96c526337246716673c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1e9d10e_ecf22924",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2017-07-05T16:27:18Z",
       "side": 1,
       "message": "If I recall correctly, the -2 is here to avoid selecting the deepest idle state (cluster sleep) if grp_util is greater than zero.\n\nThe group will only be able to \"drive\" the idle state to its deepest value if it\u0027s a cluster group, so we\u0027d have to check if the group weight is \u003e 1, but that makes the code grow more and more. Could we just go with always mapping the group utilization with the idle state estimation ?",
+      "revId": "c8782e2f639fba07e2b8b96c526337246716673c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3e6a54b_8a725df2",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5452,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2017-07-18T08:00:02Z",
+      "side": 1,
+      "message": "Yes, the -2 is to ensure we reserve the lowest possible idle state for cases when the group util is 0, and we then spread the remaining states across the utilization levels.",
+      "parentUuid": "c1e9d10e_ecf22924",
       "revId": "c8782e2f639fba07e2b8b96c526337246716673c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
