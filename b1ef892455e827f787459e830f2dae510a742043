@@ -16,6 +16,24 @@
       "revId": "b1ef892455e827f787459e830f2dae510a742043",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "20c69a1c_97c354df",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1591,
+      "author": {
+        "id": 1093953
+      },
+      "writtenOn": "2017-07-18T17:33:27Z",
+      "side": 1,
+      "message": "cpu_util_freq still uses prev_runnable_sum. The intent is to use cpu_util_freq directly when schedutil queries utilization. cpu_util will be used when querying util for task placement etc.",
+      "parentUuid": "eea45391_e3584b52",
+      "revId": "b1ef892455e827f787459e830f2dae510a742043",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
