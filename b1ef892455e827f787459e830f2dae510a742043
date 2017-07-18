@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eea45391_e3584b52",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1591,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2017-07-18T13:41:18Z",
+      "side": 1,
+      "message": "Looks like this is the major change here, correct? switch from prev_runnable_sum to cumulative_runnable_avg when calculating cpu util.\nIt\u0027s not clear to me how this is different from cpu_util_freq below, if this were to be used with delta\u003d0.",
+      "revId": "b1ef892455e827f787459e830f2dae510a742043",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
