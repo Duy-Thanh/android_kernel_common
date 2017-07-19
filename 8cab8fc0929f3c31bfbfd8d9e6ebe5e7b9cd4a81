@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab23d182_a8b6347f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-07-19T20:25:04Z",
+      "side": 1,
+      "message": "To be prefixed with \"ANDROID:\" if upstream continues to pass on this.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "8cab8fc0929f3c31bfbfd8d9e6ebe5e7b9cd4a81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de5c9e86_082073d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-07-19T20:25:04Z",
+      "side": 1,
+      "message": "suggest put \"Suspended for\" in quotes.",
+      "range": {
+        "startLine": 12,
+        "startChar": 7,
+        "endLine": 12,
+        "endChar": 20
+      },
+      "revId": "8cab8fc0929f3c31bfbfd8d9e6ebe5e7b9cd4a81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89c93a3c_792dacf1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-07-19T20:25:04Z",
+      "side": 1,
+      "message": "It seems like a very general activation trigger, not terribly specific as to what info is optionally enabled and when. Haven\u0027t followed what upstream has requested.",
+      "range": {
+        "startLine": 15,
+        "startChar": 1,
+        "endLine": 15,
+        "endChar": 43
+      },
+      "revId": "8cab8fc0929f3c31bfbfd8d9e6ebe5e7b9cd4a81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69e3a11e_ec08aed0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-07-19T20:25:04Z",
+      "side": 1,
+      "message": "Same Change-ID as the partner gerrit commit of original PM marker CL in 2012, was a bit confusing.",
+      "range": {
+        "startLine": 19,
+        "startChar": 11,
+        "endLine": 19,
+        "endChar": 52
+      },
+      "revId": "8cab8fc0929f3c31bfbfd8d9e6ebe5e7b9cd4a81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
