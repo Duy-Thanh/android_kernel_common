@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "487809cc_0c7de644",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3009,
+      "author": {
+        "id": 1120758
+      },
+      "writtenOn": "2017-07-19T11:32:44Z",
+      "side": 0,
+      "message": "This seems the right thing to do. However, even if wrong, it might affect performance (if tuning parameters are not changed). So, careful power/perf evaluation might be required.\nAlso, we need a corresponding change for PELT (sum_capacity_reqs() above adds the same margin).",
+      "revId": "6f5b3e9aad415cc539098af19f9df769dbc19d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
