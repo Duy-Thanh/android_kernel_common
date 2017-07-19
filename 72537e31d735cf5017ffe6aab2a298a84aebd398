@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d895dd55_46d63237",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5875,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-07-19T13:30:46Z",
+      "side": 1,
+      "message": "I think this breaks PELT since cpu_capaticy discounts RT utilization which is not accounted in cpu_capacity_orig, which instead is subject just to architectural scaling.\n\nThus, with this patch PELT is tricked in believing a task can fit into CPU which is completely busy by real-time workloads.",
+      "revId": "72537e31d735cf5017ffe6aab2a298a84aebd398",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a19d393_35e544eb",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5894,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-07-19T13:30:46Z",
+      "side": 1,
+      "message": "Same reasoning here, if there is RT pressure, from the FAIR class standpoint a CPU is more close to the overutilized then without that RT load.\n\nIOW, overutilization is a concept defined from the FAIR class stanpoint and thus it has to discount all the bandwidth reduction sources.",
+      "revId": "72537e31d735cf5017ffe6aab2a298a84aebd398",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
