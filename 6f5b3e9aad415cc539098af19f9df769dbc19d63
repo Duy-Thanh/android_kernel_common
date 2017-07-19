@@ -16,6 +16,24 @@
       "revId": "6f5b3e9aad415cc539098af19f9df769dbc19d63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0cfd793_0d8ad88d",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3009,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2017-07-19T13:04:17Z",
+      "side": 0,
+      "message": "Looking at PELT, what it does is use the margin to determine if we will need to increase frequency to maintain the margin, but it uses current util without margin in set_cfs_cpu_capacity.\n\nThis WALT version should probably look like (untested):\n\nif (add_capacity_margin(cpu_utilization) \u003c\u003d capacity_curr)\n    return;",
+      "parentUuid": "487809cc_0c7de644",
+      "revId": "6f5b3e9aad415cc539098af19f9df769dbc19d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
