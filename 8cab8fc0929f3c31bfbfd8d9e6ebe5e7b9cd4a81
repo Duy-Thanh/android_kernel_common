@@ -91,6 +91,29 @@
       "revId": "8cab8fc0929f3c31bfbfd8d9e6ebe5e7b9cd4a81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9fe2160_7bb358a5",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-07-19T23:29:32Z",
+      "side": 1,
+      "message": "https://patchwork.kernel.org/patch/9850217/ had this becoming:\n\npr_info(\"Starting resume from hibernation\\n\");\n\nConvinced author to change it to:\n\npr_info(\"PM: suspend entry\");\n\nso we might be half way there!\n\nswitch it to pr_info_show_time() and we have it!",
+      "range": {
+        "startLine": 561,
+        "startChar": 0,
+        "endLine": 561,
+        "endChar": 36
+      },
+      "revId": "8cab8fc0929f3c31bfbfd8d9e6ebe5e7b9cd4a81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
