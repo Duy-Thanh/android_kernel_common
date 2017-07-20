@@ -46,6 +46,23 @@
       "revId": "ff3d11f7af457aa54711dcec46dabfc08cd49353",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f2df7b4_e0d5b32a",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 1138783
+      },
+      "writtenOn": "2017-07-20T23:33:56Z",
+      "side": 1,
+      "message": "This was a rebase error. Deleted.",
+      "revId": "ff3d11f7af457aa54711dcec46dabfc08cd49353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
