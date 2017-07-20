@@ -22,6 +22,30 @@
       "revId": "ff3d11f7af457aa54711dcec46dabfc08cd49353",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6775f4a1_07015737",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1138783
+      },
+      "writtenOn": "2017-07-20T22:17:20Z",
+      "side": 1,
+      "message": "I am hoping to upstream it, but Rom suggested I get feedback from Android folks first.\n\nI\u0027m particularly concerned about the compatibility concerns. They really shouldn\u0027t be a problem, but you never know what crazy stuff application code might do or rely on.",
+      "parentUuid": "54d007c9_f5229804",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 5
+      },
+      "revId": "ff3d11f7af457aa54711dcec46dabfc08cd49353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
