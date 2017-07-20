@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21627a01_31b2a3ba",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 9704,
+      "author": {
+        "id": 1093953
+      },
+      "writtenOn": "2017-07-20T07:35:30Z",
+      "side": 1,
+      "message": "nitpick... \n\n    s/there have/there is a/\n\nSorry I couldn\u0027t let it go :-(",
+      "revId": "1f84132a6857f70e09a0f64bdc689b20b35e906a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
