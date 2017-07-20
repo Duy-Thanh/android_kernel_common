@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "493a70b2_6fb9f5d7",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5875,
+      "author": {
+        "id": 1093953
+      },
+      "writtenOn": "2017-07-20T06:12:21Z",
+      "side": 1,
+      "message": "Right, perhaps capacity_of should  - in its implementation - have a WALT guard to ignore RT pressure. I don\u0027t think there\u0027s any place we want to account for RT pressure when WALT is used, since RT utilization is done just as CFS is.",
+      "parentUuid": "d895dd55_46d63237",
+      "revId": "72537e31d735cf5017ffe6aab2a298a84aebd398",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a19d393_35e544eb",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 4
