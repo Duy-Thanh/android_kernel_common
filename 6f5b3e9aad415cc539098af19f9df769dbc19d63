@@ -52,6 +52,24 @@
       "revId": "6f5b3e9aad415cc539098af19f9df769dbc19d63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8af5155d_f90f2e49",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3009,
+      "author": {
+        "id": 1209348
+      },
+      "writtenOn": "2017-07-20T21:03:39Z",
+      "side": 0,
+      "message": "Juri -\nRE: power/perf evaluation - it\u0027s a good point.  I hope the current code with WALT was just killing power without no/minimum perf over boost.\nRE: sum_capacity_reqs - sum_capacity_reqs() doesn\u0027t change cpu_utilization inside sched_freq_tick_pelt() so we should be fine as it is.\n\nChris -\nAgreed.  LGTM.\nHow do you want us to update patchset?  I\u0027m checking if I\u0027m allowed to upload patches to this server.  In the meantime, I can send patches with comments addressed.\nI think Vikram asked the same question.",
+      "parentUuid": "139afeed_fc2932a4",
+      "revId": "6f5b3e9aad415cc539098af19f9df769dbc19d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
