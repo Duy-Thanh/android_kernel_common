@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "cfe6b467_685dccff",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5875,
+      "author": {
+        "id": 1209348
+      },
+      "writtenOn": "2017-07-20T23:56:39Z",
+      "side": 1,
+      "message": "Use of capacity_of() leads upmigration of small tasks.  For example, when a small task is running on a little CPU and the CPU is under the RT pressure, use of capacity_of() will set rq-\u003emisfit_task \u003d true and will make the small task to be upmigrated.  Not quite sure if that\u0027s desired.  \n\nI hoped using capacity_orig_of() will make the small task under the RT pressure to be preempted and load balanced. But looks like it\u0027s not happening since find_busitest_group() will do nop since such condition won\u0027t set rd-\u003eoverutilzed...",
+      "parentUuid": "493a70b2_6fb9f5d7",
+      "revId": "72537e31d735cf5017ffe6aab2a298a84aebd398",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a19d393_35e544eb",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 4
