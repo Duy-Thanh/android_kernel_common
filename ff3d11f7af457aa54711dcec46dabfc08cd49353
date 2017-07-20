@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "54d007c9_f5229804",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2017-07-20T22:03:13Z",
+      "side": 1,
+      "message": "If it is android-related only -please add ANDROID: prefix like: ANDROID: epoll: ...\nIf it is \"upstreamable\" patch - please submit it to upstream.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 5
+      },
+      "revId": "ff3d11f7af457aa54711dcec46dabfc08cd49353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
