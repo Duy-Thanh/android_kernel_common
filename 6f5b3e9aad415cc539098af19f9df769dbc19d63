@@ -34,6 +34,24 @@
       "revId": "6f5b3e9aad415cc539098af19f9df769dbc19d63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "139afeed_fc2932a4",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3009,
+      "author": {
+        "id": 1093953
+      },
+      "writtenOn": "2017-07-20T07:03:17Z",
+      "side": 0,
+      "message": "Right, cpu_utilization should not be modified, just the comparison alone needs to have the margin included.",
+      "parentUuid": "a0cfd793_0d8ad88d",
+      "revId": "6f5b3e9aad415cc539098af19f9df769dbc19d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
