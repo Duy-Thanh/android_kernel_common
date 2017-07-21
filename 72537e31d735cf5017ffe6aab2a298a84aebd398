@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "0913a810_d69a1e28",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5875,
+      "author": {
+        "id": 1209348
+      },
+      "writtenOn": "2017-07-21T20:53:52Z",
+      "side": 1,
+      "message": "I agree that we\u0027re in the domain of heuristics.  Let\u0027s drop this patch for now.  I will bring this up again if I find issue with real life usecase.",
+      "parentUuid": "ab97fae2_6319c99b",
+      "revId": "72537e31d735cf5017ffe6aab2a298a84aebd398",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a19d393_35e544eb",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 4
