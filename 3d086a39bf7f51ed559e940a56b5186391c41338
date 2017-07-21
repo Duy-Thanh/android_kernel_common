@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aebf2f23_d222840b",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-07-21T06:59:00Z",
+      "side": 1,
+      "message": "always run scripts/checkpatch.pl on your patches so that you don\u0027t get grumpy maintainers, or bots, telling you to run scripts/checkpatch.pl on your patch.",
+      "range": {
+        "startLine": 608,
+        "startChar": 0,
+        "endLine": 608,
+        "endChar": 84
+      },
+      "revId": "3d086a39bf7f51ed559e940a56b5186391c41338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
