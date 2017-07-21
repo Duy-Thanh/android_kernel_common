@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "ab97fae2_6319c99b",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5875,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-07-21T08:57:09Z",
+      "side": 1,
+      "message": "Moreover, certain FAIR small task can still be quite important for the user experience.\nThus, likely, we don\u0027t what to rely on the load balancer to move them on a free CPU after an \"undefined\" amount of time.\nIf all small CPUs are RT busy (quite unlikely) and such a small task is still allowed to run on a big one, than we wanna wakeup the task on that CPU.\n\nBut overall here we are in the domain of heuristics, and sometimes we can go right or wrong with both approaches.\n\nThe main point I\u0027m remarking here is that, from a FAIR class standpoint, the concept of \"does this task fits here\" should discount all the bandwidth drops due to other (i.e. non FAIR) sources.",
+      "parentUuid": "cfe6b467_685dccff",
+      "revId": "72537e31d735cf5017ffe6aab2a298a84aebd398",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a19d393_35e544eb",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 4
