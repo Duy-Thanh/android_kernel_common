@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "911a3e2c_79693e12",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-07-24T22:45:36Z",
+      "side": 1,
+      "message": "why int?",
+      "range": {
+        "startLine": 167,
+        "startChar": 2,
+        "endLine": 167,
+        "endChar": 5
+      },
+      "revId": "137a2657d101084a9ac4eebc1f24145ef7766c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a533df8_c5542173",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-07-24T22:45:36Z",
+      "side": 1,
+      "message": "same comment as below, should be u32, right?",
+      "range": {
+        "startLine": 172,
+        "startChar": 2,
+        "endLine": 172,
+        "endChar": 7
+      },
+      "revId": "137a2657d101084a9ac4eebc1f24145ef7766c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5fd131b_6b9fcb8e",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-07-24T22:45:36Z",
+      "side": 1,
+      "message": "Is this crossing the user/kernel boundry?  If not, then do not use the __ version, it should just be \"u32\".",
+      "range": {
+        "startLine": 263,
+        "startChar": 1,
+        "endLine": 263,
+        "endChar": 6
+      },
+      "revId": "137a2657d101084a9ac4eebc1f24145ef7766c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a743b114_8b2ffbfd",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-07-24T22:45:36Z",
+      "side": 1,
+      "message": "why inline?  The compiler can handle this for you if it really is only 1 line long.\n\nAnd why a whole function for one line?",
+      "range": {
+        "startLine": 603,
+        "startChar": 7,
+        "endLine": 603,
+        "endChar": 13
+      },
+      "revId": "137a2657d101084a9ac4eebc1f24145ef7766c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45ca26f6_a0fc4525",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-07-24T22:45:36Z",
+      "side": 1,
+      "message": "odd indentation :(",
+      "range": {
+        "startLine": 617,
+        "startChar": 0,
+        "endLine": 617,
+        "endChar": 51
+      },
+      "revId": "137a2657d101084a9ac4eebc1f24145ef7766c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2b9eb96_8169857a",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-07-24T22:45:36Z",
+      "side": 1,
+      "message": "u32?\n\nAnd really u32?  You are \u0026 with a unsigned long long value.  Aren\u0027t you dropping some bits here?",
+      "range": {
+        "startLine": 1051,
+        "startChar": 1,
+        "endLine": 1051,
+        "endChar": 6
+      },
+      "revId": "137a2657d101084a9ac4eebc1f24145ef7766c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0503bf9c_b77a6e98",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1104,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-07-24T22:45:36Z",
+      "side": 1,
+      "message": "coding style of comment :(",
+      "range": {
+        "startLine": 1104,
+        "startChar": 0,
+        "endLine": 1104,
+        "endChar": 51
+      },
+      "revId": "137a2657d101084a9ac4eebc1f24145ef7766c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2562f3b_520035e9",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-07-24T22:45:36Z",
+      "side": 1,
+      "message": "unneeded change.",
+      "range": {
+        "startLine": 1351,
+        "startChar": 0,
+        "endLine": 1351,
+        "endChar": 47
+      },
+      "revId": "137a2657d101084a9ac4eebc1f24145ef7766c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23dcb778_3c976293",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1520,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-07-24T22:45:36Z",
+      "side": 1,
+      "message": "u32?",
+      "range": {
+        "startLine": 1520,
+        "startChar": 1,
+        "endLine": 1520,
+        "endChar": 6
+      },
+      "revId": "137a2657d101084a9ac4eebc1f24145ef7766c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
