@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8697e481_5e067a14",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5389,
+      "author": {
+        "id": 1209348
+      },
+      "writtenOn": "2017-07-24T17:35:12Z",
+      "side": 1,
+      "message": "Isn\u0027t the chance high that we see cpu \u003d\u003d trg_cpu?",
+      "range": {
+        "startLine": 5389,
+        "startChar": 6,
+        "endLine": 5389,
+        "endChar": 14
+      },
+      "revId": "b2c7d1779a9cd9aa0d5925eee7aa9cdb810d9d01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
