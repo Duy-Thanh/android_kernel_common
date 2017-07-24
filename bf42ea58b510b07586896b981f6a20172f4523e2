@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cad1b03c_087dd495",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-07-24T22:51:37Z",
+      "side": 1,
+      "message": "Signed-off-by: missing\n\nChange-Id: Ic0573f9f8564e9026ddbc50d340a0716285ecb04\n\nalso missing.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 13
+      },
+      "revId": "bf42ea58b510b07586896b981f6a20172f4523e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
