@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f85cc02a_2a4b6de4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-07-24T23:31:15Z",
+      "side": 1,
+      "message": "BACKPORT must reference upstream commit in the body of the commit message:\n\n(cherry-picked from commit 04c03d10e507052cfce6910ddf34091196e79e1c)",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "37181667b2de44d6df3784646dcbf1c9c33a8966",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04cce22b_b1fc191b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-07-24T23:31:15Z",
+      "side": 1,
+      "message": "Bug: (and Change-Id:) should be at bottom of footer according to checkpatch.pl.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 52
+      },
+      "revId": "37181667b2de44d6df3784646dcbf1c9c33a8966",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
