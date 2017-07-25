@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "190fe375_81b691c6",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5609,
+      "author": {
+        "id": 1209348
+      },
+      "writtenOn": "2017-07-25T21:38:09Z",
+      "side": 1,
+      "message": "Dont\u0027 we need :\n.task \u003d eenv-\u003etask,\n\ncpu_util_wake() inside group_max_util() and group_norm_util() refer to -\u003etask.",
+      "range": {
+        "startLine": 5609,
+        "startChar": 20,
+        "endLine": 5609,
+        "endChar": 22
+      },
+      "revId": "04f62f0f51f75812bdcea7d66048040b999cdf1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
