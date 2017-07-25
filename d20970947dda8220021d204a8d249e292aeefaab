@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ced3a3d4_5c558110",
+        "filename": "net/core/datagram.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-07-25T20:30:08Z",
+      "side": 1,
+      "message": "One of the conflicts was this in a different refactored function upstream.",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 243,
+        "endChar": 30
+      },
+      "revId": "d20970947dda8220021d204a8d249e292aeefaab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb3fab61_e1997fb1",
+        "filename": "net/core/datagram.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-07-25T20:30:08Z",
+      "side": 1,
+      "message": "One of the conflicts was this in a different refactored function upstream.",
+      "range": {
+        "startLine": 354,
+        "startChar": 0,
+        "endLine": 354,
+        "endChar": 29
+      },
+      "revId": "d20970947dda8220021d204a8d249e292aeefaab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
