@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ad2d06a_66483de2",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1138783
+      },
+      "writtenOn": "2017-07-25T20:12:19Z",
+      "side": 1,
+      "message": "I was keeping it consistent with the code from before, but changed it to s32 so it\u0027s the same size as unsent_events.",
+      "parentUuid": "911a3e2c_79693e12",
+      "range": {
+        "startLine": 167,
+        "startChar": 2,
+        "endLine": 167,
+        "endChar": 5
+      },
+      "revId": "137a2657d101084a9ac4eebc1f24145ef7766c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4a533df8_c5542173",
         "filename": "fs/eventpoll.c",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2017-07-24T22:45:36Z",
       "side": 1,
       "message": "same comment as below, should be u32, right?",
+      "range": {
+        "startLine": 172,
+        "startChar": 2,
+        "endLine": 172,
+        "endChar": 7
+      },
+      "revId": "137a2657d101084a9ac4eebc1f24145ef7766c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd85d54e_76a7ef7c",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1138783
+      },
+      "writtenOn": "2017-07-25T20:12:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a533df8_c5542173",
       "range": {
         "startLine": 172,
         "startChar": 2,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "4f6d595e_29e2712d",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1138783
+      },
+      "writtenOn": "2017-07-25T20:12:19Z",
+      "side": 1,
+      "message": "Done. Can you tell I\u0027m a noob? \u003d)",
+      "parentUuid": "a5fd131b_6b9fcb8e",
+      "range": {
+        "startLine": 263,
+        "startChar": 1,
+        "endLine": 263,
+        "endChar": 6
+      },
+      "revId": "137a2657d101084a9ac4eebc1f24145ef7766c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a743b114_8b2ffbfd",
         "filename": "fs/eventpoll.c",
         "patchSetId": 4
@@ -82,6 +154,30 @@
       "writtenOn": "2017-07-24T22:45:36Z",
       "side": 1,
       "message": "why inline?  The compiler can handle this for you if it really is only 1 line long.\n\nAnd why a whole function for one line?",
+      "range": {
+        "startLine": 603,
+        "startChar": 7,
+        "endLine": 603,
+        "endChar": 13
+      },
+      "revId": "137a2657d101084a9ac4eebc1f24145ef7766c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb726bde_bd27a9a0",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1138783
+      },
+      "writtenOn": "2017-07-25T20:12:19Z",
+      "side": 1,
+      "message": "Was copying what other functions in this file do. Removed the inline.\n\nI made it a separate function so it\u0027s more obvious from call sites that it should be paired with the exit function below.",
+      "parentUuid": "a743b114_8b2ffbfd",
       "range": {
         "startLine": 603,
         "startChar": 7,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "a3d5b83f_d432de6f",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1138783
+      },
+      "writtenOn": "2017-07-25T20:12:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45ca26f6_a0fc4525",
+      "range": {
+        "startLine": 617,
+        "startChar": 0,
+        "endLine": 617,
+        "endChar": 51
+      },
+      "revId": "137a2657d101084a9ac4eebc1f24145ef7766c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b2b9eb96_8169857a",
         "filename": "fs/eventpoll.c",
         "patchSetId": 4
@@ -128,6 +248,30 @@
       "writtenOn": "2017-07-24T22:45:36Z",
       "side": 1,
       "message": "u32?\n\nAnd really u32?  You are \u0026 with a unsigned long long value.  Aren\u0027t you dropping some bits here?",
+      "range": {
+        "startLine": 1051,
+        "startChar": 1,
+        "endLine": 1051,
+        "endChar": 6
+      },
+      "revId": "137a2657d101084a9ac4eebc1f24145ef7766c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93018097_aee9a5ae",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1138783
+      },
+      "writtenOn": "2017-07-25T20:12:19Z",
+      "side": 1,
+      "message": "key is always \u0026\u0027d with at 32-bit mask, so u32 should be all that\u0027s needed.\n\nI also realize that I should typecast to \"unsigned long\" like the existing code does. The extra \"long\" was a mistake.",
+      "parentUuid": "b2b9eb96_8169857a",
       "range": {
         "startLine": 1051,
         "startChar": 1,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "5be3af1c_5e5346ce",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1104,
+      "author": {
+        "id": 1138783
+      },
+      "writtenOn": "2017-07-25T20:12:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0503bf9c_b77a6e98",
+      "range": {
+        "startLine": 1104,
+        "startChar": 0,
+        "endLine": 1104,
+        "endChar": 51
+      },
+      "revId": "137a2657d101084a9ac4eebc1f24145ef7766c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d2562f3b_520035e9",
         "filename": "fs/eventpoll.c",
         "patchSetId": 4
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "92d52e86_b12099d7",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1138783
+      },
+      "writtenOn": "2017-07-25T20:12:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2562f3b_520035e9",
+      "range": {
+        "startLine": 1351,
+        "startChar": 0,
+        "endLine": 1351,
+        "endChar": 47
+      },
+      "revId": "137a2657d101084a9ac4eebc1f24145ef7766c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "23dcb778_3c976293",
         "filename": "fs/eventpoll.c",
         "patchSetId": 4
@@ -197,6 +389,30 @@
       "writtenOn": "2017-07-24T22:45:36Z",
       "side": 1,
       "message": "u32?",
+      "range": {
+        "startLine": 1520,
+        "startChar": 1,
+        "endLine": 1520,
+        "endChar": 6
+      },
+      "revId": "137a2657d101084a9ac4eebc1f24145ef7766c6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "700ba82c_431a1572",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1520,
+      "author": {
+        "id": 1138783
+      },
+      "writtenOn": "2017-07-25T20:12:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23dcb778_3c976293",
       "range": {
         "startLine": 1520,
         "startChar": 1,
