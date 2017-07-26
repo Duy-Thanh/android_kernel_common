@@ -22,6 +22,30 @@
       "revId": "04f62f0f51f75812bdcea7d66048040b999cdf1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "047cb444_c959a035",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5609,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-07-26T05:47:23Z",
+      "side": 1,
+      "message": "You\u0027re absolutely right!\n\nI\u0027ve backported this patch from the top of another set of patches refactoring the energy_diff function, just to show you a preview of a \"more generic way\" to have the same functionality of your previous patch.\nWith the energy_diff refactoring, the usage of energy_env is completely different...\n\nHowever, since it\u0027s probably worth to have this patch in before the refactoring ones goes in, I\u0027ll post an update of this one.\n\nThanks for the review.",
+      "parentUuid": "190fe375_81b691c6",
+      "range": {
+        "startLine": 5609,
+        "startChar": 20,
+        "endLine": 5609,
+        "endChar": 22
+      },
+      "revId": "04f62f0f51f75812bdcea7d66048040b999cdf1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
