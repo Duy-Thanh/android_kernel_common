@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57cf1ab4_96f38087",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6846,
+      "author": {
+        "id": 1118133
+      },
+      "writtenOn": "2017-07-28T00:36:40Z",
+      "side": 1,
+      "message": "if we don\u0027t prefer idle, should we instead pick a backup as the last target_cpu before it being overwritten in 6814?",
+      "revId": "750c4773e3434bb55fe59f12e3a013c50fcd883f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
