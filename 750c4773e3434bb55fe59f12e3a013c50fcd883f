@@ -52,6 +52,24 @@
       "revId": "750c4773e3434bb55fe59f12e3a013c50fcd883f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f1c344e_1e05abf9",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6846,
+      "author": {
+        "id": 1200908
+      },
+      "writtenOn": "2017-07-29T10:07:41Z",
+      "side": 1,
+      "message": "\u003e why do you say we would only hit line 6814 only once?  for\n\nWell, it\u0027s actually what I observed looking at the traces I had but that will obviously largely depend on workloads and execution targets. The thing is, once we hit 6814 once, I guess it\u0027s not that likely (but definitely not impossible) that other CPUs will pass through both 6804 and 6808. This is especially true if we start iterating from the little CPUs. Actually it could be interesting to measure that more precisely.\n\n \u003e non-latency sensitive cases we would skip And B.  I guess 6808\n \u003e would filter only based on order but this could be change to\n \u003e remember the second best.\n\nYes we could definitely try to do that. I\u0027ll try to measure the impact of that change next week. However, since the goal of this patch is to bring 4.9 to equivalence with 4.4, what do you think if this was rather part of a future patch ?\n\n \u003e \n \u003e I see how maybe it is better to use a different strategy, I guess\n \u003e it would be good to have data on that, taking an idle cpu when we\n \u003e are trying to pack seems counter-intuitive but I understand it may\n \u003e be better/simpler.",
+      "parentUuid": "013ba2b9_9f773f5a",
+      "revId": "750c4773e3434bb55fe59f12e3a013c50fcd883f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
