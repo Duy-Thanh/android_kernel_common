@@ -34,6 +34,24 @@
       "revId": "750c4773e3434bb55fe59f12e3a013c50fcd883f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "013ba2b9_9f773f5a",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6846,
+      "author": {
+        "id": 1118133
+      },
+      "writtenOn": "2017-07-29T03:49:37Z",
+      "side": 1,
+      "message": "why do you say we would only hit line 6814 only once?  for non-latency sensitive cases we would skip And B.  I guess 6808 would filter only based on order but this could be change to remember the second best.\n\nI see how maybe it is better to use a different strategy, I guess it would be good to have data on that, taking an idle cpu when we are trying to pack seems counter-intuitive but I understand it may be better/simpler.",
+      "parentUuid": "f87c905c_450b5e37",
+      "revId": "750c4773e3434bb55fe59f12e3a013c50fcd883f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
