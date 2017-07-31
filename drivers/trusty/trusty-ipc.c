@@ -726,7 +726,7 @@ static int append_user_memref(struct tipc_msg_mref_hdr *hdr,
 			      struct tipc_shmem *shm)
 {
 	long ret;
-	bool write;
+	unsigned int gup_flags;
 	unsigned int i;
 	unsigned int pg_num;
 	unsigned long pg_start;
@@ -736,7 +736,7 @@ static int append_user_memref(struct tipc_msg_mref_hdr *hdr,
 	if (!vmas)
 		return -ENOMEM;
 
-	write = !!(shm->flags & TIPC_MEMREF_PERM_RW);
+	gup_flags = (shm->flags & TIPC_MEMREF_PERM_RW) ? FOLL_WRITE : 0;
 
 	down_read(&current->mm->mmap_sem);
 
@@ -748,8 +748,7 @@ static int append_user_memref(struct tipc_msg_mref_hdr *hdr,
 		if (!pg_start || !pg_num)
 			continue;
 
-		ret = get_user_pages(current, current->mm,
-				     pg_start, pg_num, write, 0,
+		ret = get_user_pages(pg_start, pg_num, gup_flags,
 				     mref->pages + mref->pg_pinned,
 				     vmas + mref->pg_pinned);
 		if (ret < 0)
