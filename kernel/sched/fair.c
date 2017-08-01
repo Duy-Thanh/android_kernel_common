@@ -5323,9 +5323,10 @@ struct energy_env {
  *
  *   norm_util = running_time/time ~ util/capacity
  */
-static unsigned long __cpu_norm_util(int cpu, unsigned long capacity, int delta)
+static unsigned long __cpu_norm_util(int cpu, unsigned long capacity, int delta,
+				     struct task_struct *p)
 {
-	int util = __cpu_util(cpu, delta);
+	int util = __cpu_util(cpu, delta, p, true);
 
 	if (util >= capacity)
 		return SCHED_CAPACITY_SCALE;
@@ -5350,7 +5351,8 @@ unsigned long group_max_util(struct energy_env *eenv)
 
 	for_each_cpu(i, sched_group_cpus(eenv->sg_cap)) {
 		delta = calc_util_delta(eenv, i);
-		max_util = max(max_util, __cpu_util(i, delta));
+		max_util = max(max_util, __cpu_util(i, delta, eenv->task,
+			       true));
 	}
 
 	return max_util;
@@ -5374,7 +5376,7 @@ long group_norm_util(struct energy_env *eenv, struct sched_group *sg)
 
 	for_each_cpu(i, sched_group_cpus(sg)) {
 		delta = calc_util_delta(eenv, i);
-		util_sum += __cpu_norm_util(i, capacity, delta);
+		util_sum += __cpu_norm_util(i, capacity, delta, eenv->task);
 	}
 
 	if (util_sum > SCHED_CAPACITY_SCALE)
@@ -5823,7 +5825,7 @@ static int wake_affine(struct sched_domain *sd, struct task_struct *p,
 	return 1;
 }
 
-static inline unsigned long task_util(struct task_struct *p)
+unsigned long task_util(struct task_struct *p)
 {
 #ifdef CONFIG_SCHED_WALT
 	if (!walt_disabled && sysctl_sched_use_walt_task_util) {

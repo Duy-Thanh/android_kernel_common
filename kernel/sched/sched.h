@@ -1551,7 +1551,16 @@ static inline unsigned long capacity_orig_of(int cpu)
 extern unsigned int sysctl_sched_use_walt_cpu_util;
 extern unsigned int walt_ravg_window;
 extern unsigned int walt_disabled;
+extern unsigned long task_util(struct task_struct *p);
 
+#ifdef CONFIG_SCHED_WALT
+static inline bool
+walt_task_in_cum_window_demand(struct rq *rq, struct task_struct *p)
+{
+	return cpu_of(rq) == task_cpu(p) &&
+	       (p->on_rq || p->last_sleep_ts >= rq->window_start);
+}
+#endif /* CONFIG_SCHED_WALT */
 /*
  * cpu_util returns the amount of capacity of a CPU that is used by CFS
  * tasks. The unit of the return value must be the one of capacity so we can
@@ -1577,16 +1586,31 @@ extern unsigned int walt_disabled;
  * available capacity. We allow utilization to overshoot capacity_curr (but not
  * capacity_orig) as it useful for predicting the capacity required after task
  * migrations (scheduler-driven DVFS).
+ *
+ * The 'for_ediff' parameter allows WALT to use a different statistic when
+ * a utilization value for a cpu is requested as part of energy-diff
+ * calculations - we use cumulative demand as it also contains blocked load
+ * (in a sense) in the current window, allowing for less instantaneous-data-
+ * based energy decisions. 'p' is needed by WALT to exclude p's utilization
+ * from the cumulative window demand if the task ran previously in that window.
  */
-static inline unsigned long __cpu_util(int cpu, int delta)
+static inline unsigned long __cpu_util(int cpu, int delta, struct task_struct *p, bool for_ediff)
 {
 	unsigned long util = cpu_rq(cpu)->cfs.avg.util_avg;
 	unsigned long capacity = capacity_orig_of(cpu);
 
 #ifdef CONFIG_SCHED_WALT
-	if (!walt_disabled && sysctl_sched_use_walt_cpu_util)
-		util = div64_u64(cpu_rq(cpu)->cumulative_runnable_avg,
-				 walt_ravg_window >> SCHED_LOAD_SHIFT);
+	if (!walt_disabled && sysctl_sched_use_walt_cpu_util) {
+		if (!for_ediff) {
+			util = div64_u64(cpu_rq(cpu)->cumulative_runnable_avg,
+					 walt_ravg_window >> SCHED_LOAD_SHIFT);
+		} else {
+			util = div64_u64(cpu_rq(cpu)->cum_window_demand,
+					 walt_ravg_window >> SCHED_LOAD_SHIFT);
+			if (walt_task_in_cum_window_demand(cpu_rq(cpu), p))
+				util -= task_util(p);
+		}
+	}
 #endif
 	delta += util;
 	if (delta < 0)
@@ -1597,7 +1621,7 @@ static inline unsigned long __cpu_util(int cpu, int delta)
 
 static inline unsigned long cpu_util(int cpu)
 {
-	return __cpu_util(cpu, 0);
+	return __cpu_util(cpu, 0, NULL, false);
 }
 
 static inline unsigned long cpu_util_freq(int cpu)
@@ -2088,17 +2112,6 @@ static inline void cpufreq_update_this_cpu(struct rq *rq, unsigned int flags)
 static inline void cpufreq_update_util(struct rq *rq, unsigned int flags) {}
 static inline void cpufreq_update_this_cpu(struct rq *rq, unsigned int flags) {}
 #endif /* CONFIG_CPU_FREQ */
-
-#ifdef CONFIG_SCHED_WALT
-
-static inline bool
-walt_task_in_cum_window_demand(struct rq *rq, struct task_struct *p)
-{
-	return cpu_of(rq) == task_cpu(p) &&
-	       (p->on_rq || p->last_sleep_ts >= rq->window_start);
-}
-
-#endif /* CONFIG_SCHED_WALT */
 
 #ifdef arch_scale_freq_capacity
 #ifndef arch_scale_freq_invariant
