@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "544123dc_4d873e0d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1121354
+      },
+      "writtenOn": "2017-08-03T23:34:00Z",
+      "side": 1,
+      "message": "The prefix should be \"ANDROID:\" for xt_qtaguid module",
+      "range": {
+        "startLine": 7,
+        "startChar": 1,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "452d85616357fc4d356957b3b4b1f22f6c676e17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
