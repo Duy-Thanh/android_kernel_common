@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "767efcfd_fdb72fc0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1121354
+      },
+      "writtenOn": "2017-08-04T17:45:21Z",
+      "side": 1,
+      "message": "It seems this link is not reachable from public, could you rephrase it to something other than url that you can keep track of? (eg. Tracked-On: AW-5883)",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 60
+      },
+      "revId": "4f0261795d74da17c4c13a27370eab3cd7587c96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
