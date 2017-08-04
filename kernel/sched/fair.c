@@ -6309,6 +6309,7 @@ static inline int find_best_target(struct task_struct *p, int *backup_cpu,
 	unsigned long target_max_spare_cap = 0;
 	unsigned long target_util = ULONG_MAX;
 	unsigned long best_active_util = ULONG_MAX;
+	unsigned long best_util_energy = ULONG_MAX;
 	int best_idle_cstate = INT_MAX;
 	struct sched_domain *sd;
 	struct sched_group *sg;
@@ -6471,6 +6472,7 @@ static inline int find_best_target(struct task_struct *p, int *backup_cpu,
 			 */
 			if (idle_cpu(i)) {
 				int idle_idx = idle_get_state_idx(cpu_rq(i));
+				unsigned long cpu_energy;
 
 				/* Select idle CPU with lower cap_orig */
 				if (capacity_orig > best_idle_min_cap_orig)
@@ -6481,15 +6483,27 @@ static inline int find_best_target(struct task_struct *p, int *backup_cpu,
 				 * if they are also less energy efficient.
 				 * IOW, prefer a deep IDLE LITTLE CPU vs a
 				 * shallow idle big CPU.
+				 * Between same idle state CPUs, prefer lesser
+				 * utilized CPU.
 				 */
-				if (sysctl_sched_cstate_aware &&
-				    best_idle_cstate <= idle_idx)
-					continue;
+				cpu_energy = cpu_util_energy(i);
+				if (sysctl_sched_cstate_aware) {
+					if (best_idle_cstate < idle_idx)
+						continue;
+
+					if (best_idle_cstate == idle_idx &&
+					    cpu_energy > best_util_energy)
+						continue;
+				} else {
+					if (cpu_energy > best_util_energy)
+						continue;
+				}
 
 				/* Keep track of best idle CPU */
 				best_idle_min_cap_orig = capacity_orig;
 				best_idle_cstate = idle_idx;
 				best_idle_cpu = i;
+				best_util_energy = cpu_energy;
 				continue;
 			}
 
