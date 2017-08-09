@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ae08d32_b5f50fdc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-08-09T21:41:46Z",
+      "side": 1,
+      "message": "ANDROID: keychord: Fix races in keychord_write",
+      "revId": "d3201d84d058d16aebd10cdc9218cf9a8a53ff8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01f6931f_9ca9dd2c",
+        "filename": "drivers/input/misc/keychord.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-08-09T21:41:46Z",
+      "side": 1,
+      "message": "It would be less code, but this seems easy to follow and not much more complicated, so, meh.",
+      "range": {
+        "startLine": 231,
+        "startChar": 34,
+        "endLine": 231,
+        "endChar": 66
+      },
+      "revId": "d3201d84d058d16aebd10cdc9218cf9a8a53ff8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
