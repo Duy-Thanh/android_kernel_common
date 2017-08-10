@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e3b43b4_400088ca",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1364,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-08-10T15:53:21Z",
+      "side": 1,
+      "message": "While I\u0027m Ok with this, I\u0027m curious to know one thing - at what point does adding stuff to stats actually cause performance issues due to bloating task_struct? Has that been a concern? I remember seeing folks on mailing list grumble some time back.\n\nDoes it make sense to make some of these u32 and pack the struct a bit more? 4G seems to me a good limit for things like nr_wakesups.",
+      "range": {
+        "startLine": 1361,
+        "startChar": 32,
+        "endLine": 1364,
+        "endChar": 32
+      },
+      "revId": "b509aeafc736cf9345fc5e6b5f418e04fa9e6e8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
