@@ -1091,6 +1091,7 @@ static int sanity_check_ckpt(struct f2fs_sb_info *sbi)
 	if (unlikely(fsmeta >= total))
 		return 1;
 
+<<<<<<< HEAD   (603662 ANDROID: keychord: Fix for a memory leak in keychord.)
 	main_segs = le32_to_cpu(sbi->raw_super->segment_count_main);
 	blocks_per_seg = sbi->blocks_per_seg;
 
@@ -1105,6 +1106,20 @@ static int sanity_check_ckpt(struct f2fs_sb_info *sbi)
 		    le16_to_cpu(ckpt->cur_data_blkoff[i]) >= blocks_per_seg) {
 			return 1;
 		}
+=======
+	main_segs = le32_to_cpu(raw_super->segment_count_main);
+	blocks_per_seg = sbi->blocks_per_seg;
+
+	for (i = 0; i < NR_CURSEG_NODE_TYPE; i++) {
+		if (le32_to_cpu(ckpt->cur_node_segno[i]) >= main_segs ||
+			le16_to_cpu(ckpt->cur_node_blkoff[i]) >= blocks_per_seg)
+			return 1;
+	}
+	for (i = 0; i < NR_CURSEG_DATA_TYPE; i++) {
+		if (le32_to_cpu(ckpt->cur_data_segno[i]) >= main_segs ||
+			le16_to_cpu(ckpt->cur_data_blkoff[i]) >= blocks_per_seg)
+			return 1;
+>>>>>>> BRANCH (2ab639 Linux 4.4.81)
 	}
 
 	if (unlikely(f2fs_cp_error(sbi))) {
