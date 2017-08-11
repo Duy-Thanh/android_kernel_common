@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47eff70a_bde1fea4",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6324,
+      "author": {
+        "id": 1118133
+      },
+      "writtenOn": "2017-08-11T23:40:26Z",
+      "side": 1,
+      "message": "demand is kind of WALT specific, should it be util_energy?",
+      "revId": "79b6df746d5b72acc79fb752a05a139539a13d5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
