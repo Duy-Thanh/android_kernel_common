@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cda84143_28dfad0a",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6431,
+      "author": {
+        "id": 1209348
+      },
+      "writtenOn": "2017-08-11T23:18:03Z",
+      "side": 1,
+      "message": "When cpu 0,1,2,3 are big and cpu 4,5,6,7 are little, if there was any big idle CPU, best_idle_max_spare_cap will be more than any of little idle CPU\u0027s spare cap.  \nSo we won\u0027t be able to select little idle cpu.\n\nAlso WALT\u0027s new_util equals to task_util when CPU is idle.  i.e. wake_util \u003d 0.  So this idea won\u0027t make any behaviour difference with WALT.",
+      "range": {
+        "startLine": 6431,
+        "startChar": 4,
+        "endLine": 6431,
+        "endChar": 61
+      },
+      "revId": "f891fbb94ebe01d8d8485149e44169e29bde4a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
