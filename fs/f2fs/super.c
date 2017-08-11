@@ -1437,6 +1437,7 @@ int sanity_check_ckpt(struct f2fs_sb_info *sbi)
 	if (unlikely(fsmeta >= total))
 		return 1;
 
+<<<<<<< HEAD   (4501c0 ANDROID: binder: don't queue async transactions to thread.)
 	main_segs = le32_to_cpu(sbi->raw_super->segment_count_main);
 	blocks_per_seg = sbi->blocks_per_seg;
 
@@ -1451,6 +1452,20 @@ int sanity_check_ckpt(struct f2fs_sb_info *sbi)
 		    le16_to_cpu(ckpt->cur_data_blkoff[i]) >= blocks_per_seg) {
 			return 1;
 		}
+=======
+	main_segs = le32_to_cpu(raw_super->segment_count_main);
+	blocks_per_seg = sbi->blocks_per_seg;
+
+	for (i = 0; i < NR_CURSEG_NODE_TYPE; i++) {
+		if (le32_to_cpu(ckpt->cur_node_segno[i]) >= main_segs ||
+			le16_to_cpu(ckpt->cur_node_blkoff[i]) >= blocks_per_seg)
+			return 1;
+	}
+	for (i = 0; i < NR_CURSEG_DATA_TYPE; i++) {
+		if (le32_to_cpu(ckpt->cur_data_segno[i]) >= main_segs ||
+			le16_to_cpu(ckpt->cur_data_blkoff[i]) >= blocks_per_seg)
+			return 1;
+>>>>>>> BRANCH (4c666b Linux 4.9.42)
 	}
 
 	if (unlikely(f2fs_cp_error(sbi))) {
