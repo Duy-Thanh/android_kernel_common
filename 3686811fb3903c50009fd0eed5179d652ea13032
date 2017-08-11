@@ -22,6 +22,30 @@
       "revId": "3686811fb3903c50009fd0eed5179d652ea13032",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f0b323a_cc180813",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-08-11T19:52:38Z",
+      "side": 1,
+      "message": "no, const still causes mult instructions with gcc.",
+      "parentUuid": "596a0000_0145b2e2",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 7
+      },
+      "revId": "3686811fb3903c50009fd0eed5179d652ea13032",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
