@@ -34,6 +34,24 @@
       "revId": "79b6df746d5b72acc79fb752a05a139539a13d5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "629d5e37_a0ae1dbc",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6324,
+      "author": {
+        "id": 1118133
+      },
+      "writtenOn": "2017-08-12T00:16:21Z",
+      "side": 1,
+      "message": "well best/util/energy in this context, that applies for all \"bests\" in this function.  least is good as well, but best does show quite clearly that it is the best_x we have found so far",
+      "parentUuid": "394a1d9c_3dd1fd16",
+      "revId": "79b6df746d5b72acc79fb752a05a139539a13d5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
