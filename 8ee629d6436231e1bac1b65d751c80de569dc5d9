@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "796bfd1f_55da6b79",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2017-08-12T01:11:34Z",
+      "side": 1,
+      "message": "Should macros use capital letters?",
+      "revId": "8ee629d6436231e1bac1b65d751c80de569dc5d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
