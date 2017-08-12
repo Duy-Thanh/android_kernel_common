@@ -52,6 +52,24 @@
       "revId": "79b6df746d5b72acc79fb752a05a139539a13d5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3732f25c_8966a1f6",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6324,
+      "author": {
+        "id": 1209348
+      },
+      "writtenOn": "2017-08-12T00:25:03Z",
+      "side": 1,
+      "message": "I also like best_ here.  Will change to best_util_energy.",
+      "parentUuid": "629d5e37_a0ae1dbc",
+      "revId": "79b6df746d5b72acc79fb752a05a139539a13d5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
