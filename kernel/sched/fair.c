@@ -6550,6 +6550,10 @@ static inline int find_best_target(struct task_struct *p, int *backup_cpu,
 		: best_idle_cpu;
 
 	if (target_cpu != -1 && best_idle_cpu != -1) {
+
+		if (schedtune_cpu_prefer_idle(target_cpu))
+			target_cpu = best_idle_cpu;
+
 		if (target_cap_increased > 0)
 			target_cpu = best_idle_cpu;
 	}
