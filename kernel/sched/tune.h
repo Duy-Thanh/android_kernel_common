@@ -15,6 +15,7 @@ struct target_nrg {
 #ifdef CONFIG_CGROUP_SCHEDTUNE
 
 int schedtune_cpu_boost(int cpu);
+int schedtune_cpu_prefer_idle(int cpu);
 int schedtune_task_boost(struct task_struct *tsk);
 
 int schedtune_prefer_idle(struct task_struct *tsk);

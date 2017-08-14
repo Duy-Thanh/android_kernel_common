@@ -226,9 +226,12 @@ struct boost_groups {
 	/* Maximum boost value for all RUNNABLE tasks on a CPU */
 	bool idle;
 	int boost_max;
+	int prefer_idle;
 	struct {
 		/* The boost for tasks on that boost group */
 		int boost;
+		/* The prefer_idle for tasks */
+		int prefer_idle;
 		/* Count of RUNNABLE tasks on that boost group */
 		unsigned tasks;
 	} group[BOOSTGROUPS_COUNT];
@@ -244,6 +247,7 @@ schedtune_cpu_update(int cpu)
 {
 	struct boost_groups *bg;
 	int boost_max;
+	int prefer_idle = 0;
 	int idx;
 
 	bg = &per_cpu(cpu_boost_groups, cpu);
@@ -259,12 +263,16 @@ schedtune_cpu_update(int cpu)
 			continue;
 
 		boost_max = max(boost_max, bg->group[idx].boost);
+
+		if (bg->group[idx].prefer_idle)
+			prefer_idle = bg->group[idx].prefer_idle;
 	}
 	/* Ensures boost_max is non-negative when all cgroup boost values
 	 * are neagtive. Avoids under-accounting of cpu capacity which may cause
 	 * task stacking and frequency spikes.*/
 	boost_max = max(boost_max, 0);
 	bg->boost_max = boost_max;
+	bg->prefer_idle = prefer_idle;
 }
 
 static int
@@ -305,6 +313,23 @@ schedtune_boostgroup_update(int idx, int boost)
 		}
 
 		trace_sched_tune_boostgroup_update(cpu, 0, bg->boost_max);
+	}
+
+	return 0;
+}
+
+static int schedtune_prefer_idle_update(int idx, int prefer_idle)
+{
+	struct boost_groups *bg;
+	int cpu;
+
+	/* Update per CPU boost groups */
+	for_each_possible_cpu(cpu) {
+		bg = &per_cpu(cpu_boost_groups, cpu);
+
+		/* Update the boost value of this boost group */
+		bg->group[idx].prefer_idle = prefer_idle;
+		schedtune_cpu_update(cpu);
 	}
 
 	return 0;
@@ -522,6 +547,17 @@ int schedtune_cpu_boost(int cpu)
 	return bg->boost_max;
 }
 
+int schedtune_cpu_prefer_idle(int cpu)
+{
+	struct boost_groups *bg;
+
+	if (!unlikely(schedtune_initialized))
+		return 0;
+
+	bg = &per_cpu(cpu_boost_groups, cpu);
+	return bg->prefer_idle;
+}
+
 int schedtune_task_boost(struct task_struct *p)
 {
 	struct schedtune *st;
@@ -570,6 +606,9 @@ prefer_idle_write(struct cgroup_subsys_state *css, struct cftype *cft,
 {
 	struct schedtune *st = css_st(css);
 	st->prefer_idle = prefer_idle;
+
+	/* Update CPU prefer_idle flag */
+	schedtune_prefer_idle_update(st->idx, st->prefer_idle);
 
 	return 0;
 }
@@ -700,6 +739,7 @@ schedtune_boostgroup_release(struct schedtune *st)
 {
 	/* Reset this boost group */
 	schedtune_boostgroup_update(st->idx, 0);
+	schedtune_prefer_idle_update(st->idx, 0);
 
 	/* Keep track of allocated boost groups */
 	allocated_group[st->idx] = NULL;
