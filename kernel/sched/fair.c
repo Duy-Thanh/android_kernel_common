@@ -5379,10 +5379,12 @@ unsigned long group_max_util(struct energy_env *eenv)
 {
 	int i, delta;
 	unsigned long max_util = 0;
+	unsigned long new_util;
 
 	for_each_cpu(i, sched_group_cpus(eenv->sg_cap)) {
 		delta = calc_util_delta(eenv, i);
-		max_util = max(max_util, __cpu_util(i, delta));
+		new_util = calc_total_util(i, eenv->task, cpu_util(i), delta);
+		max_util = max(max_util, new_util);
 	}
 
 	return max_util;
@@ -6333,14 +6335,13 @@ static inline int find_best_target(struct task_struct *p, int *backup_cpu,
 			 * accounting. However, the blocked utilization may be zero.
 			 */
 			wake_util = cpu_util_wake(i, p);
-			new_util = wake_util + task_util(p);
+			new_util = calc_total_util(i, p, wake_util, task_util(p));
 
 			/*
 			 * Ensure minimum capacity to grant the required boost.
 			 * The target CPU can be already at a capacity level higher
 			 * than the one required to boost the task.
 			 */
-			new_util = max(min_util, new_util);
 			if (new_util > capacity_orig)
 				continue;
 
