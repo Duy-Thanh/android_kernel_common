@@ -6289,6 +6289,7 @@ static inline int find_best_target(struct task_struct *p, int *backup_cpu,
 	int best_idle_cstate = INT_MAX;
 	struct sched_domain *sd;
 	struct sched_group *sg;
+	int target_cap_increased = 0;
 	int best_active_cpu = -1;
 	int best_idle_cpu = -1;
 	int target_cpu = -1;
@@ -6321,7 +6322,7 @@ static inline int find_best_target(struct task_struct *p, int *backup_cpu,
 		for_each_cpu_and(i, tsk_cpus_allowed(p), sched_group_cpus(sg)) {
 			unsigned long capacity_curr = capacity_curr_of(i);
 			unsigned long capacity_orig = capacity_orig_of(i);
-			unsigned long wake_util, new_util;
+			unsigned long wake_util, new_util, old_util;
 
 			if (!cpu_online(i))
 				continue;
@@ -6335,6 +6336,7 @@ static inline int find_best_target(struct task_struct *p, int *backup_cpu,
 			 * accounting. However, the blocked utilization may be zero.
 			 */
 			wake_util = cpu_util_wake(i, p);
+			old_util = calc_total_util(i, NULL, wake_util, 0);
 			new_util = calc_total_util(i, p, wake_util, task_util(p));
 
 			/*
@@ -6509,6 +6511,8 @@ static inline int find_best_target(struct task_struct *p, int *backup_cpu,
 			if ((capacity_orig - new_util) < target_max_spare_cap)
 				continue;
 
+			target_cap_increased = find_new_capacity(sg->sge, new_util) -
+					       find_new_capacity(sg->sge, old_util);
 			target_max_spare_cap = capacity_orig - new_util;
 			target_capacity = capacity_orig;
 			target_cpu = i;
@@ -6544,6 +6548,11 @@ static inline int find_best_target(struct task_struct *p, int *backup_cpu,
 		*backup_cpu = prefer_idle
 		? best_active_cpu
 		: best_idle_cpu;
+
+	if (target_cpu != -1 && best_idle_cpu != -1) {
+		if (target_cap_increased > 0)
+			target_cpu = best_idle_cpu;
+	}
 
 	trace_sched_find_best_target(p, prefer_idle, min_util, cpu,
 				     best_idle_cpu, best_active_cpu,
