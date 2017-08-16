@@ -83,6 +83,7 @@
 #include <linux/export.h>
 #include <linux/msg.h>
 #include <linux/shm.h>
+#include <linux/bpf.h>
 
 #include "avc.h"
 #include "objsec.h"
@@ -6079,6 +6080,66 @@ static int selinux_key_getsecurity(struct key *key, char **_buffer)
 
 #endif
 
+#ifdef CONFIG_BPF_SYSCALL
+static int selinux_bpf_map_create(void)
+{
+	u32 sid = current_sid();
+	return avc_has_perm(sid, sid, SECCLASS_BPF, BPF__MAP_CREATE, NULL);
+}
+
+static int selinux_bpf_map_update(struct bpf_map *map)
+{
+	struct bpf_security_struct *bpfsec = map->security;
+
+	return avc_has_perm(current_sid(), bpfsec->sid, SECCLASS_BPF,
+			    BPF__MAP_UPDATE, NULL);
+	
+}
+
+static int selinux_bpf_map_delete(struct bpf_map *map)
+{
+	struct bpf_security_struct *bpfsec = map->security;
+
+	return avc_has_perm(current_sid(), bpfsec->sid, SECCLASS_BPF,
+			    BPF__MAP_DELETE, NULL);
+}
+
+static int selinux_bpf_map_read(struct bpf_map *map)
+{
+	struct bpf_security_struct *bpfsec = map->security;
+
+	return avc_has_perm(current_sid(), bpfsec->sid, SECCLASS_BPF,
+			    BPF__MAP_READ, NULL);
+}
+
+static int selinux_bpf_prog_load(void)
+{
+	u32 sid = current_sid();
+	return avc_has_perm(sid, sid, SECCLASS_BPF, BPF__PROG_LOAD, NULL);
+}
+
+static int selinux_bpf_post_create(void **security)
+{
+	struct bpf_security_struct *bpfsec;
+
+	bpfsec = kzalloc(sizeof(*bpfsec), GFP_KERNEL);
+	if (!bpfsec)
+		return -ENOMEM;
+	bpfsec->sid = current_sid();
+
+	*security = bpfsec;
+	return 0;
+}
+
+static int selinux_bpf_prog_use(struct bpf_prog *prog)
+{
+	struct bpf_security_struct *bpfsec = prog->security;
+
+	return avc_has_perm(current_sid(), bpfsec->sid, SECCLASS_BPF,
+			    BPF__PROG_USE, NULL);
+}
+#endif
+
 static struct security_hook_list selinux_hooks[] = {
 	LSM_HOOK_INIT(binder_set_context_mgr, selinux_binder_set_context_mgr),
 	LSM_HOOK_INIT(binder_transaction, selinux_binder_transaction),
@@ -6292,6 +6353,15 @@ static struct security_hook_list selinux_hooks[] = {
 	LSM_HOOK_INIT(audit_rule_known, selinux_audit_rule_known),
 	LSM_HOOK_INIT(audit_rule_match, selinux_audit_rule_match),
 	LSM_HOOK_INIT(audit_rule_free, selinux_audit_rule_free),
+#endif
+#ifdef CONFIG_BPF_SYSCALL
+	LSM_HOOK_INIT(bpf_map_create, selinux_bpf_map_create),
+	LSM_HOOK_INIT(bpf_map_update, selinux_bpf_map_update),
+	LSM_HOOK_INIT(bpf_map_delete, selinux_bpf_map_delete),
+	LSM_HOOK_INIT(bpf_map_read, selinux_bpf_map_read),
+	LSM_HOOK_INIT(bpf_prog_load, selinux_bpf_prog_load),
+	LSM_HOOK_INIT(bpf_prog_use, selinux_bpf_prog_use),
+	LSM_HOOK_INIT(bpf_post_create, selinux_bpf_post_create),
 #endif
 };
 

@@ -30,6 +30,7 @@
 #include <linux/string.h>
 #include <linux/mm.h>
 #include <linux/fs.h>
+#include <linux/bpf.h>
 
 struct linux_binprm;
 struct cred;
@@ -1661,6 +1662,53 @@ static inline void securityfs_remove(struct dentry *dentry)
 {}
 
 #endif
+
+#ifdef CONFIG_BPF_SYSCALL
+#ifdef CONFIG_SECURITY
+extern int security_map_create(void);
+extern int security_map_update(struct bpf_map *map);
+extern int security_map_delete(struct bpf_map *map);
+extern int security_map_read(struct bpf_map *map);
+extern int security_prog_load(void);
+extern int security_prog_use(struct bpf_prog *prog);
+extern int security_post_create(void **security);
+#else
+int security_map_create(void)
+{
+	return 0;
+}
+
+int security_map_read(struct bpf_map *map)
+{
+	return 0;
+}
+
+int security_map_update(struct bpf_map *map)
+{
+	return 0;
+}
+
+int security_map_delete(struct bpf_map *map)
+{
+	return 0;
+}
+
+int security_prog_load(void)
+{
+	return 0;
+}
+
+int security_prog_use(struct bpf_prog *prog)
+{
+	return 0;
+}
+
+int security_post_create(void **security)
+{
+	return 0;
+}
+#endif /* CONFIG_SECURITY */
+#endif /* CONFIG_BPF_SYSCALL */
 
 #ifdef CONFIG_SECURITY
 
