@@ -210,6 +210,10 @@ static int map_create(union bpf_attr *attr)
 	if (err)
 		return -EINVAL;
 
+	err = security_map_create(attr);
+	if (err)
+		return -EACCES;
+
 	/* find map type and init map: hashtable vs rbtree vs bloom vs ... */
 	map = find_and_alloc_map(attr);
 	if (IS_ERR(map))
@@ -308,6 +312,10 @@ static int map_lookup_elem(union bpf_attr *attr)
 	if (CHECK_ATTR(BPF_MAP_LOOKUP_ELEM))
 		return -EINVAL;
 
+	err = security_map_lookup_elem(attr);
+	if (err)
+		return -EACCES;
+
 	f = fdget(ufd);
 	map = __bpf_map_get(f);
 	if (IS_ERR(map))
@@ -381,6 +389,10 @@ static int map_update_elem(union bpf_attr *attr)
 
 	if (CHECK_ATTR(BPF_MAP_UPDATE_ELEM))
 		return -EINVAL;
+
+	err = security_map_update_elem(attr);
+	if (err)
+		return -EACCES;
 
 	f = fdget(ufd);
 	map = __bpf_map_get(f);
@@ -458,6 +470,10 @@ static int map_delete_elem(union bpf_attr *attr)
 	if (CHECK_ATTR(BPF_MAP_DELETE_ELEM))
 		return -EINVAL;
 
+	err = security_map_delete_elem(attr);
+	if (err)
+		return -EACCES;
+
 	f = fdget(ufd);
 	map = __bpf_map_get(f);
 	if (IS_ERR(map))
@@ -502,6 +518,10 @@ static int map_get_next_key(union bpf_attr *attr)
 
 	if (CHECK_ATTR(BPF_MAP_GET_NEXT_KEY))
 		return -EINVAL;
+
+	err = security_map_get_next_key(attr);
+	if (err)
+		return -EACCES;
 
 	f = fdget(ufd);
 	map = __bpf_map_get(f);
@@ -757,6 +777,10 @@ static int bpf_prog_load(union bpf_attr *attr)
 	if (CHECK_ATTR(BPF_PROG_LOAD))
 		return -EINVAL;
 
+	err = security_prog_load(attr);
+	if (err)
+		return -EACCES;
+
 	/* copy eBPF program license from user space */
 	if (strncpy_from_user(license, u64_to_ptr(attr->license),
 			      sizeof(license) - 1) < 0)
@@ -841,6 +865,10 @@ static int bpf_obj_pin(const union bpf_attr *attr)
 	if (CHECK_ATTR(BPF_OBJ))
 		return -EINVAL;
 
+	err = security_obj_pin(attr);
+	if (err)
+		return -EACCES;
+
 	return bpf_obj_pin_user(attr->bpf_fd, u64_to_ptr(attr->pathname));
 }
 
@@ -848,6 +876,10 @@ static int bpf_obj_get(const union bpf_attr *attr)
 {
 	if (CHECK_ATTR(BPF_OBJ) || attr->bpf_fd != 0)
 		return -EINVAL;
+
+	err = security_obj_get(attr);
+	if (err)
+		return -EACCES;
 
 	return bpf_obj_get_user(u64_to_ptr(attr->pathname));
 }
@@ -870,6 +902,10 @@ static int bpf_prog_attach(const union bpf_attr *attr)
 
 	if (attr->attach_flags & ~BPF_F_ALLOW_OVERRIDE)
 		return -EINVAL;
+
+	err = security_prog_attach(attr);
+	if (err)
+		return -EACCES;
 
 	switch (attr->attach_type) {
 	case BPF_CGROUP_INET_INGRESS:
@@ -911,6 +947,10 @@ static int bpf_prog_detach(const union bpf_attr *attr)
 
 	if (CHECK_ATTR(BPF_PROG_DETACH))
 		return -EINVAL;
+
+	err = security_prog_detach(attr);
+	if (err)
+		return -EACCES;
 
 	switch (attr->attach_type) {
 	case BPF_CGROUP_INET_INGRESS:
