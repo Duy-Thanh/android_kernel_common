@@ -1663,6 +1663,71 @@ static inline void securityfs_remove(struct dentry *dentry)
 #endif
 
 #ifdef CONFIG_SECURITY
+#ifdef CONFIG_BPF_SYSCALL
+extern int security_map_create(union bpf_attr *attr);
+extern int security_map_lookup_elem(union bpf_attr *attr);
+extern int security_map_update_elem(union bpf_attr *attr);
+extern int security_map_delete_elem(union bpf_attr *attr);
+extern int security_map_get_next_key(union bpf_attr *attr);
+extern int security_prog_load(union bpf_attr *attr);
+extern int security_obj_pin(union bpf_attr *attr);
+extern int security_obj_get(union bpf_attr *attr);
+extern int security_prog_attach(union bpf_attr *attr);
+extern int security_prog_detach(union bpf_attr *attr);
+#else /* CONFIG_BPF_SYSCALL */
+int security_map_create(union bpf_attr *attr)
+{
+	return 0;
+}
+
+int security_map_lookup_elem(union bpf_attr *attr)
+{
+	return 0;
+}
+
+int security_map_update_elem(union bpf_attr *attr)
+{
+	return 0;
+}
+
+int security_map_delete_elem(union bpf_attr *attr)
+{
+	return 0;
+}
+
+int security_map_get_next_key(union bpf_attr *attr)
+{
+	return 0;
+}
+
+int security_prog_load(union bpf_attr *attr)
+{
+	return 0;
+}
+
+int security_obj_pin(union bpf_attr *attr)
+{
+	return 0;
+}
+
+int security_obj_get(union bpf_attr *attr)
+{
+	return 0;
+}
+
+int security_prog_attach(union bpf_attr *attr)
+{
+	return 0;
+}
+
+int security_prog_detach(union bpf_attr *attr)
+{
+	return 0;
+}
+#endif /* CONFIG_BPF_SYSCALL */
+#endif /* CONFIG_SECURITY */
+
+#ifdef CONFIG_SECURITY
 
 static inline char *alloc_secdata(void)
 {

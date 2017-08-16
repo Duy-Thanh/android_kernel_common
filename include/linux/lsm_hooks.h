@@ -1328,6 +1328,62 @@
  *	@inode we wish to get the security context of.
  *	@ctx is a pointer in which to place the allocated security context.
  *	@ctxlen points to the place to put the length of @ctx.
+ *
+ * Security hooks for eBPF syscalls
+ *
+ * @bpf_map_create:
+ *	Check permissions prior to creating a new bpf map.
+ *	@attr points to the bpf attr union that contains map create parameters.
+ *	Return 0 if the permission is granted.
+ *
+ * @bpf_map_lookup_elem:
+ *	Check permission prior to lookup map content.
+ *	@attr points to the bpf attr union that contains map information.
+ *	Return 0 if the permission is granted.
+ *
+ * @bpf_map_update_elem:
+ *	Check permission prior to change map content.
+ *	@attr points to the bpf attr union that contains map information.
+ *	Return 0 if the permission is granted.
+ *
+ * @bpf_map_delete_elem:
+ *	Check permission prior to delete map content.
+ *	@attr points to the bpf attr union that contains map information.
+ *	Return 0 if the permission is granted.
+ *
+ * @bpf_map_get_next_key:
+ *	Check permission prior to lookup map content.
+ *	@attr points to the bpf attr union that contains map information.
+ *	Return 0 if the permission is granted.
+ *
+ * @bpf_prog_load:
+ *	Check permission prior to load eBPF program.
+ *	@attr points to the bpf attr union that contains eBPF program
+ *	      information.
+ *	Return 0 if the permission is granted.
+ *
+ * @bpf_obj_pin:
+ *	Check permission prior to pin the object to a file path
+ *	@attr points to the bpf attr union that contains program information
+ *	      and the file path.
+ *	Return 0 if the permission is granted.
+ *
+ * @bpf_obj_get:
+ *	Check permission prior to get a eBPF object from a file path.
+ *	@attr points to the bpf attr union that contains file path.
+ *	Return 0 if the permission is granted.
+ *
+ * @bpf_prog_attach:
+ *	Check permission prior to attach program to a cgroup.
+ *	@attr points to the bpf attr union that contains program information
+ *	      and the cgroup fd.
+ *	Return 0 if the permission is granted.
+ *
+ * @bpf_prog_detach:
+ *	Check permission prior to detach a eBPF program from a cgroup.
+ *	@attr points to the bpf attr union that contains the cgroup fd.
+ *	Return 0 if the permission is granted.
+ *
  * This is the main security structure.
  */
 
@@ -1652,6 +1708,19 @@ union security_list_options {
 				struct audit_context *actx);
 	void (*audit_rule_free)(void *lsmrule);
 #endif /* CONFIG_AUDIT */
+
+#ifdef CONFIG_BPF_SYSCALL
+	int (*bpf_map_create)(union bpf_attr *attr);
+	int (*bpf_map_lookup_elem)(union bpf_attr *attr);
+	int (*bpf_map_update_elem)(union bpf_attr *attr);
+	int (*bpf_map_delete_elem)(union bpf_attr *attr);
+	int (*bpf_map_get_next_key)(union bpf_attr *attr);
+	int (*bpf_prog_load)(union bpf_attr *attr);
+	int (*bpf_obj_pin)(union bpf_attr *attr);
+	int (*bpf_obj_get)(union bpf_attr *attr);
+	int (*bpf_prog_attach)(union bpf_attr *attr);
+	int (*bpf_prog_detach)(union bpf_attr *attr);
+#endif /* CONFIG_BPF_SYSCALL */
 };
 
 struct security_hook_heads {
@@ -1866,6 +1935,18 @@ struct security_hook_heads {
 	struct list_head audit_rule_match;
 	struct list_head audit_rule_free;
 #endif /* CONFIG_AUDIT */
+#ifdef CONFIG_BPF_SYSCALL
+	struct list_head bpf_map_create;
+	struct list_head bpf_map_lookup_elem;
+	struct list_head bpf_map_update_elem;
+	struct list_head bpf_map_delete_elem;
+	struct list_head bpf_map_get_next_key;
+	struct list_head bpf_prog_load;
+	struct list_head bpf_obj_pin;
+	struct list_head bpf_obj_get;
+	struct list_head bpf_prog_attach;
+	struct list_head bpf_prog_detach;
+#endif /* CONFIG_BPF_SYSCALL */
 };
 
 /*

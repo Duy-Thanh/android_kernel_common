@@ -1590,6 +1590,58 @@ int security_audit_rule_match(u32 secid, u32 field, u32 op, void *lsmrule,
 }
 #endif /* CONFIG_AUDIT */
 
+#ifdef CONFIG_BPF_SYSCALL
+int security_map_create(union bpf_attr *attr)
+{
+	return call_int_hook(bpf_map_create, attr);
+}
+
+int security_map_lookup_elem(union bpf_attr *attr)
+{
+	return call_int_hook(bpf_map_lookup_elem, attr);
+}
+
+int security_map_update_elem(union bpf_attr *attr)
+{
+	return call_int_hook(bpf_map_update_elem, attr);
+}
+
+int security_map_delete_elem(union bpf_attr *attr)
+{
+	return call_int_hook(bpf_map_delete_elem, attr);
+}
+
+int security_map_get_next_key(union bpf_attr *attr)
+{
+	return call_int_hook(bpf_map_get_next_key, attr);
+}
+
+int security_prog_load(union bpf_attr *attr)
+{
+	return call_int_hook(bpf_prog_load, attr);
+}
+
+int security_obj_pin(union bpf_attr *attr)
+{
+	return call_int_hook(bpf_obj_pin, attr);
+}
+
+int security_obj_get(union bpf_attr *attr)
+{
+	return call_int_hook(bpf_obj_get, attr);
+}
+
+int security_prog_attach(union bpf_attr *attr)
+{
+	return call_int_hook(bpf_prog_attach, attr);
+}
+
+int security_prog_detach(union bpf_attr *attr)
+{
+	return call_int_hook(bpf_prog_detach, attr);
+}
+#endif /* CONFIG_BPF_SYSCALL */
+
 struct security_hook_heads security_hook_heads = {
 	.binder_set_context_mgr =
 		LIST_HEAD_INIT(security_hook_heads.binder_set_context_mgr),
@@ -1941,4 +1993,26 @@ struct security_hook_heads security_hook_heads = {
 	.audit_rule_free =
 		LIST_HEAD_INIT(security_hook_heads.audit_rule_free),
 #endif /* CONFIG_AUDIT */
+#ifdef CONFIG_BPF_SYSCALL
+	.bpf_map_create =
+		LIST_HEAD_INIT(security_hook_heads.bpf_map_create),
+	.bpf_map_lookup_elem =
+		LIST_HEAD_INIT(security_hook_heads.bpf_map_lookup_elem),
+	.bpf_map_update_elem =
+		LIST_HEAD_INIT(security_hook_heads.bpf_map_update_elem),
+	.bpf_map_delete_elem =
+		LIST_HEAD_INIT(security_hook_heads.bpf_map_delete_elem),
+	.bpf_map_get_next_key =
+		LIST_HEAD_INIT(security_hook_heads..bpf_map_get_next_key),
+	.bpf_prog_load =
+		LIST_HEAD_INIT(security_hook_heads.bpf_prog_load),
+	.bpf_obj_pin =
+		LIST_HEAD_INIT(security_hook_heads.bpf_obj_pin),
+	.bpf_obj_get =
+		LIST_HEAD_INIT(security_hook_heads.bpf_obj_get),
+	.bpf_prog_attach =
+		LIST_HEAD_INIT(security_hook_heads.bpf_prog_attach),
+	.bpf_prog_detach =
+		LIST_HEAD_INIT(security_hook_heads.bpf_prog_detach),
+#endif /* CONFIG_BPF_SYSCALL */
 };
