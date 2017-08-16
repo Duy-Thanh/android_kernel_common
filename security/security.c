@@ -11,6 +11,7 @@
  *	(at your option) any later version.
  */
 
+#include <linux/bpf.h>
 #include <linux/capability.h>
 #include <linux/dcache.h>
 #include <linux/module.h>
@@ -1590,6 +1591,43 @@ int security_audit_rule_match(u32 secid, u32 field, u32 op, void *lsmrule,
 }
 #endif /* CONFIG_AUDIT */
 
+#ifdef CONFIG_BPF_SYSCALL
+int security_map_create(void)
+{
+	return call_int_hook(bpf_map_create, 0);
+}
+
+int security_map_update(struct bpf_map *map)
+{
+	return call_int_hook(bpf_map_update, 0, map);
+}
+
+int security_map_delete(struct bpf_map *map)
+{
+	return call_int_hook(bpf_map_delete, 0, map);
+}
+
+int security_map_read(struct bpf_map *map)
+{
+	return call_int_hook(bpf_map_read, 0, map);
+}
+
+int security_prog_load(void)
+{
+	return call_int_hook(bpf_prog_load, 0);
+}
+
+int security_prog_use(struct bpf_prog *prog)
+{
+	return call_int_hook(bpf_prog_use, 0, prog);
+}
+
+int security_post_create(void **security)
+{
+	return call_int_hook(bpf_post_create, 0, security);
+}
+#endif /* CONFIG_BPF_SYSCALL */
+
 struct security_hook_heads security_hook_heads = {
 	.binder_set_context_mgr =
 		LIST_HEAD_INIT(security_hook_heads.binder_set_context_mgr),
@@ -1941,4 +1979,20 @@ struct security_hook_heads security_hook_heads = {
 	.audit_rule_free =
 		LIST_HEAD_INIT(security_hook_heads.audit_rule_free),
 #endif /* CONFIG_AUDIT */
+#ifdef CONFIG_BPF_SYSCALL
+	.bpf_map_create =
+		LIST_HEAD_INIT(security_hook_heads.bpf_map_create),
+	.bpf_map_read =
+		LIST_HEAD_INIT(security_hook_heads.bpf_map_read),
+	.bpf_map_update =
+		LIST_HEAD_INIT(security_hook_heads.bpf_map_update),
+	.bpf_map_delete =
+		LIST_HEAD_INIT(security_hook_heads.bpf_map_delete),
+	.bpf_prog_load =
+		LIST_HEAD_INIT(security_hook_heads.bpf_prog_load),
+	.bpf_prog_use =
+		LIST_HEAD_INIT(security_hook_heads.bpf_prog_use),
+        .bpf_post_create =
+		LIST_HEAD_INIT(security_hook_heads.bpf_post_create),
+#endif /* CONFIG_BPF_SYSCALL */
 };

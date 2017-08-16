@@ -1328,6 +1328,44 @@
  *	@inode we wish to get the security context of.
  *	@ctx is a pointer in which to place the allocated security context.
  *	@ctxlen points to the place to put the length of @ctx.
+ *
+ * Security hooks for using the eBPF maps and programs functionalities through
+ * eBPF syscalls.
+ *
+ * @bpf_map_create:
+ *	Check permissions prior to creating a new bpf map.
+ *	Return 0 if the permission is granted.
+ *
+ * @bpf_map_update_elem:
+ *	Check permission prior to change map content.
+ *	@map pointer to the struct bpf_map that contains map information.
+ *	Return 0 if the permission is granted.
+ *
+ * @bpf_map_delete_elem:
+ *	Check permission prior to delete map content.
+ *	@map pointer to the struct bpf_map that contains map information.
+ *	Return 0 if the permission is granted.
+ *
+ * @bpf_map_read:
+ *	Check permission prior to read a bpf map content.
+ *	@map pointer to the struct bpf_map that contains map information.
+ *	Return 0 if the permission is granted.
+ *
+ * @bpf_prog_load:
+ *	Check permission prior to load eBPF program.
+ *	Return 0 if the permission is granted.
+ *
+ * @bpf_prog_use:
+ *	Check permission prior to attach or detach a program to a cgroup.
+ *	@prog pointer to the struct bpf_prog that contains program information.
+ *	Return 0 if the permission is granted.
+ *
+ * @bpf_prog_use:
+ *	Store the securtiy information after create bpf object.
+ *	@security pointer to the security field inside struct bpf_map and
+ *	struct bpf_prog.
+ *	Return 0 if the permission is granted.
+ *
  * This is the main security structure.
  */
 
@@ -1652,6 +1690,16 @@ union security_list_options {
 				struct audit_context *actx);
 	void (*audit_rule_free)(void *lsmrule);
 #endif /* CONFIG_AUDIT */
+
+#ifdef CONFIG_BPF_SYSCALL
+	int (*bpf_map_create)(void);
+	int (*bpf_map_read)(struct bpf_map *map);
+	int (*bpf_map_update)(struct bpf_map *map);
+	int (*bpf_map_delete)(struct bpf_map *map);
+	int (*bpf_prog_load)(void);
+	int (*bpf_prog_use)(struct bpf_prog *prog);
+        int (*bpf_post_create)(void **security);
+#endif /* CONFIG_BPF_SYSCALL */
 };
 
 struct security_hook_heads {
@@ -1866,6 +1914,15 @@ struct security_hook_heads {
 	struct list_head audit_rule_match;
 	struct list_head audit_rule_free;
 #endif /* CONFIG_AUDIT */
+#ifdef CONFIG_BPF_SYSCALL
+	struct list_head bpf_map_create;
+	struct list_head bpf_map_read;
+	struct list_head bpf_map_update;
+	struct list_head bpf_map_delete;
+	struct list_head bpf_prog_load;
+	struct list_head bpf_prog_use;
+        struct list_head bpf_post_create;
+#endif /* CONFIG_BPF_SYSCALL */
 };
 
 /*

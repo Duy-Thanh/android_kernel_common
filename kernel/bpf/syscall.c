@@ -210,6 +210,10 @@ static int map_create(union bpf_attr *attr)
 	if (err)
 		return -EINVAL;
 
+	err = security_map_create();
+	if (err)
+		return -EACCES;
+
 	/* find map type and init map: hashtable vs rbtree vs bloom vs ... */
 	map = find_and_alloc_map(attr);
 	if (IS_ERR(map))
@@ -221,6 +225,10 @@ static int map_create(union bpf_attr *attr)
 	err = bpf_map_charge_memlock(map);
 	if (err)
 		goto free_map_nouncharge;
+
+	err = security_post_create(&map->security);
+	if(err < 0)
+		goto free_map;
 
 	err = bpf_map_new_fd(map);
 	if (err < 0)
@@ -313,6 +321,10 @@ static int map_lookup_elem(union bpf_attr *attr)
 	if (IS_ERR(map))
 		return PTR_ERR(map);
 
+	err = security_map_read(map);
+	if (err)
+		return -EACCES;
+
 	err = -ENOMEM;
 	key = kmalloc(map->key_size, GFP_USER);
 	if (!key)
@@ -386,6 +398,10 @@ static int map_update_elem(union bpf_attr *attr)
 	map = __bpf_map_get(f);
 	if (IS_ERR(map))
 		return PTR_ERR(map);
+
+	err = security_map_update(map);
+	if (err)
+		return -EACCES;
 
 	err = -ENOMEM;
 	key = kmalloc(map->key_size, GFP_USER);
@@ -463,6 +479,10 @@ static int map_delete_elem(union bpf_attr *attr)
 	if (IS_ERR(map))
 		return PTR_ERR(map);
 
+	err = security_map_delete(map);
+	if (err)
+		return -EACCES;
+
 	err = -ENOMEM;
 	key = kmalloc(map->key_size, GFP_USER);
 	if (!key)
@@ -507,6 +527,10 @@ static int map_get_next_key(union bpf_attr *attr)
 	map = __bpf_map_get(f);
 	if (IS_ERR(map))
 		return PTR_ERR(map);
+
+	err = security_map_read(map);
+	if (err)
+		return -EACCES;
 
 	err = -ENOMEM;
 	key = kmalloc(map->key_size, GFP_USER);
@@ -757,6 +781,10 @@ static int bpf_prog_load(union bpf_attr *attr)
 	if (CHECK_ATTR(BPF_PROG_LOAD))
 		return -EINVAL;
 
+	err = security_prog_load();
+	if (err)
+		return -EACCES;
+
 	/* copy eBPF program license from user space */
 	if (strncpy_from_user(license, u64_to_ptr(attr->license),
 			      sizeof(license) - 1) < 0)
@@ -816,6 +844,10 @@ static int bpf_prog_load(union bpf_attr *attr)
 	/* eBPF program is ready to be JITed */
 	prog = bpf_prog_select_runtime(prog, &err);
 	if (err < 0)
+		goto free_used_maps;
+
+	err = security_post_create(&prog->security);
+	if(err < 0)
 		goto free_used_maps;
 
 	err = bpf_prog_new_fd(prog);
@@ -878,6 +910,10 @@ static int bpf_prog_attach(const union bpf_attr *attr)
 					 BPF_PROG_TYPE_CGROUP_SKB);
 		if (IS_ERR(prog))
 			return PTR_ERR(prog);
+
+		ret = security_prog_use(prog);
+		if (ret)
+			return -EACCES;
 
 		cgrp = cgroup_get_from_fd(attr->target_fd);
 		if (IS_ERR(cgrp)) {

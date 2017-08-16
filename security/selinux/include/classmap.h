@@ -165,5 +165,8 @@ struct security_class_mapping secclass_map[] = {
 	  { COMMON_CAP_PERMS, NULL } },
 	{ "cap2_userns",
 	  { COMMON_CAP2_PERMS, NULL } },
+        { "bpf",
+          {"map_create", "map_update", "map_delete", "map_read", "prog_load",
+            "prog_use"} },
 	{ NULL }
   };
