@@ -3301,6 +3301,15 @@ void sync_entity_load_avg(struct sched_entity *se)
 
 	last_update_time = cfs_rq_last_update_time(cfs_rq);
 	__update_load_avg(last_update_time, cpu_of(rq_of(cfs_rq)), &se->avg, 0, 0, NULL);
+
+	if (entity_is_task(se)) {
+		void *ptr = NULL;
+
+#ifdef CONFIG_SCHED_WALT
+		ptr = (void *)&(task_of(se)->ravg);
+#endif
+		trace_sched_load_avg_task(task_of(se), &se->avg, ptr);
+	}
 }
 
 /*
