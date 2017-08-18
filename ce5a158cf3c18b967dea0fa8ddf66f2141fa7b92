@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d35f2cc_04dd978d",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2995,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-08-18T18:30:46Z",
+      "side": 1,
+      "message": "shouldn\u0027t this just use boosted_cpu_util like PELT does? I imagine schedfreq should to need to know about the boost as well. However since schedfreq is a dead end and schedutil is the replacement, I am ok with +2.",
+      "range": {
+        "startLine": 2995,
+        "startChar": 33,
+        "endLine": 2995,
+        "endChar": 46
+      },
+      "revId": "ce5a158cf3c18b967dea0fa8ddf66f2141fa7b92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
