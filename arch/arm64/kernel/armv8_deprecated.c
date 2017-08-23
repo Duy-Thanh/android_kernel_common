@@ -299,10 +299,16 @@ do {								\
 	_ASM_EXTABLE(0b, 4b)					\
 	_ASM_EXTABLE(1b, 4b)					\
 	: "=&r" (res), "+r" (data), "=&r" (temp)		\
+<<<<<<< HEAD   (792d8c UPSTREAM: arm64: assembler: introduce ldr_this_cpu)
 	: "r" (addr), "i" (-EAGAIN), "i" (-EFAULT)		\
 	: "memory");						\
 	uaccess_disable();					\
 } while (0)
+=======
+	: "r" ((unsigned long)addr), "i" (-EAGAIN),		\
+	  "i" (-EFAULT)						\
+	: "memory")
+>>>>>>> BRANCH (425fdd Linux 4.4.83)
 
 #define __user_swp_asm(data, addr, res, temp) \
 	__user_swpX_asm(data, addr, res, temp, "")
