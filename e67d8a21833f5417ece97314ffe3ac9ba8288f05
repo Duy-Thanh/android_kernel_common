@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a492346_b9e8ee69",
+        "filename": "kernel/sched/rt.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1500,
+      "author": {
+        "id": 1200908
+      },
+      "writtenOn": "2017-08-23T15:28:37Z",
+      "side": 1,
+      "message": "With this patch applied I have the following compilation error:\n\n Implicit reference to boosted_cpu_util()\n\nboosted_cpu_util() is correctly defined in fair.c so I suppose we just needs to add the declaration somewhere.",
+      "range": {
+        "startLine": 1500,
+        "startChar": 34,
+        "endLine": 1500,
+        "endChar": 50
+      },
+      "revId": "e67d8a21833f5417ece97314ffe3ac9ba8288f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
