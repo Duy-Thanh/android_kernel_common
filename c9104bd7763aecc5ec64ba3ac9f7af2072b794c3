@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4320bf45_e93bbb48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1209348
+      },
+      "writtenOn": "2017-08-25T19:10:29Z",
+      "side": 1,
+      "message": "Hi Leo,\n\nI just noticed you made some change to this....\n\nNext time, will you please leave comments if you think we should fix something so I can reply or update my change?\nI don\u0027t mind if you upload your own change on top of mine.\n\nMoreover, with WALT, new_util doesn\u0027t give any idea about energy/cpu frequency.  It just gives us the very instantaneous load of CPU rq at the given time.  So we should *not* use it for energy calculation.  So I don\u0027t think your change is right thing to do.\n\nSo I\u0027m recovering my version here.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 27
+      },
+      "revId": "c9104bd7763aecc5ec64ba3ac9f7af2072b794c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
