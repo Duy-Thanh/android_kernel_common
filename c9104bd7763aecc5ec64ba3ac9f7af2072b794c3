@@ -22,6 +22,30 @@
       "revId": "c9104bd7763aecc5ec64ba3ac9f7af2072b794c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dee756f9_62d6e751",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2017-08-28T14:57:55Z",
+      "side": 1,
+      "message": "Hi Joonwoo, sorry for my fault. I will rebase your patch and based on your patch I will generate other patches. Sorry my purpose is to create one topic branch, but I didn\u0027t know this will overwrite your original patch.\n\nI agree now WALT is not reliable with energy modeling; so I want to get suggestion for this from you, Let me share with you my slides for my recent optimization, the optimization can save power with PELT signal, but I cannot see equal optimization with WALT.",
+      "parentUuid": "4320bf45_e93bbb48",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 27
+      },
+      "revId": "c9104bd7763aecc5ec64ba3ac9f7af2072b794c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
