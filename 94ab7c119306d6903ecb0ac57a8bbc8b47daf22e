@@ -16,6 +16,24 @@
       "revId": "94ab7c119306d6903ecb0ac57a8bbc8b47daf22e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "14d4fa70_0bc6ea13",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1093953
+      },
+      "writtenOn": "2017-08-28T19:31:11Z",
+      "side": 1,
+      "message": "It might indeed be useful with PELT, but since we\u0027ve tested with WALT alone, I requested Stephen Boyd to add the check here. \n\nHowever this is one of those \"technically right thing to do, but does it affect (or matter to) power/perf?\" work_in_progress is a sort of natural rate-limit so we\u0027d have to run some test cases to make sure nothing breaks. Our testing so far indicates that it doesn\u0027t.",
+      "parentUuid": "5ab68264_d57721ef",
+      "revId": "94ab7c119306d6903ecb0ac57a8bbc8b47daf22e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
