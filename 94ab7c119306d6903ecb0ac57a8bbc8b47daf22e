@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ab68264_d57721ef",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1120758
+      },
+      "writtenOn": "2017-08-28T16:17:44Z",
+      "side": 1,
+      "message": "Mmm.. wondering if this is not useful when using PELT as well.\n\nAlso, it seems to go along well with Patrick\u0027s fix:\nhttps://marc.info/?l\u003dlinux-kernel\u0026m\u003d149918967527011\u0026w\u003d2",
+      "revId": "94ab7c119306d6903ecb0ac57a8bbc8b47daf22e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
