@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a85b1f2_3f524c9f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-08-29T23:27:28Z",
+      "side": 1,
+      "message": "Also move alloc-\u003ebuffers initialization as it is now used even if mmap failed or was not called.",
+      "revId": "fc53babf7a93c43c467281bcf8db25427df7aedb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
