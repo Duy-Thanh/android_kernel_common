@@ -46,6 +46,30 @@
       "revId": "c9104bd7763aecc5ec64ba3ac9f7af2072b794c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "787f11d0_f13f4021",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1209348
+      },
+      "writtenOn": "2017-08-29T17:52:23Z",
+      "side": 1,
+      "message": "No worries at all!  I also thought It must be a simple mistake.\nYeah, I got the slide.  I will take a look and get back to you.\nThanks!",
+      "parentUuid": "dee756f9_62d6e751",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 27
+      },
+      "revId": "c9104bd7763aecc5ec64ba3ac9f7af2072b794c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
