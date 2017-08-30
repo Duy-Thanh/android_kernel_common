@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6984a11_585085e0",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-08-30T00:33:06Z",
+      "side": 1,
+      "message": "use kernel-doc to describe new structs",
+      "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59701f8b_56b6e0e9",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-08-30T00:33:06Z",
+      "side": 1,
+      "message": "does this need to be separated into each namespace? If we keep it global /d/binder could list the state of all the child namespaces in addition to its own.",
+      "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ace92617_86195668",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-08-30T00:33:06Z",
+      "side": 1,
+      "message": "should this code move to a separate file and/or config option?",
+      "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e338ef7_6db31287",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5105,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-08-30T00:33:06Z",
+      "side": 1,
+      "message": "is this safe to release here, or should it be moved to binder_free_proc",
+      "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f28de80f_d24a35b1",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5739,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-08-30T00:33:06Z",
+      "side": 1,
+      "message": "don\u0027t add random blank lines",
+      "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94b08de6_c274ba09",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5808,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-08-30T00:33:06Z",
+      "side": 1,
+      "message": "this is not the right error name. Add a label for your error.",
+      "range": {
+        "startLine": 5808,
+        "startChar": 7,
+        "endLine": 5808,
+        "endChar": 36
+      },
+      "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
