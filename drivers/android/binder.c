@@ -3239,6 +3239,7 @@ static void binder_transaction(struct binder_proc *proc,
 		if (!binder_proc_transaction(t, target_proc, NULL))
 			goto err_dead_proc_or_thread;
 	}
+<<<<<<< HEAD   (2e8f15 Merge 4.4.84 into android-4.4)
 	if (target_thread)
 		binder_thread_dec_tmpref(target_thread);
 	binder_proc_dec_tmpref(target_proc);
@@ -3248,6 +3249,18 @@ static void binder_transaction(struct binder_proc *proc,
 	 */
 	smp_wmb();
 	WRITE_ONCE(e->debug_id_done, t_debug_id);
+=======
+	t->work.type = BINDER_WORK_TRANSACTION;
+	list_add_tail(&t->work.entry, target_list);
+	tcomplete->type = BINDER_WORK_TRANSACTION_COMPLETE;
+	list_add_tail(&tcomplete->entry, &thread->todo);
+	if (target_wait) {
+		if (reply || !(t->flags & TF_ONE_WAY))
+			wake_up_interruptible_sync(target_wait);
+		else
+			wake_up_interruptible(target_wait);
+	}
+>>>>>>> BRANCH (717bd2 Linux 4.4.85)
 	return;
 
 err_dead_proc_or_thread:
@@ -4755,8 +4768,11 @@ static int binder_open(struct inode *nodp, struct file *filp)
 	proc = kzalloc(sizeof(*proc), GFP_KERNEL);
 	if (proc == NULL)
 		return -ENOMEM;
+<<<<<<< HEAD   (2e8f15 Merge 4.4.84 into android-4.4)
 	spin_lock_init(&proc->inner_lock);
 	spin_lock_init(&proc->outer_lock);
+=======
+>>>>>>> BRANCH (717bd2 Linux 4.4.85)
 	get_task_struct(current->group_leader);
 	proc->tsk = current->group_leader;
 	INIT_LIST_HEAD(&proc->todo);
