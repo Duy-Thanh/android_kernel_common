@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "4b79ff87_728d05b0",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1060196
+      },
+      "writtenOn": "2017-08-30T01:29:28Z",
+      "side": 1,
+      "message": "If we make it global (like it currently ToT is), then child namespaces would also be able list the state of parent namespaces. Is that expected /desired?",
+      "parentUuid": "59701f8b_56b6e0e9",
+      "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ace92617_86195668",
         "filename": "drivers/android/binder.c",
         "patchSetId": 1
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "02e2a927_49cd13bd",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5105,
+      "author": {
+        "id": 1060196
+      },
+      "writtenOn": "2017-08-30T01:29:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e338ef7_6db31287",
+      "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f28de80f_d24a35b1",
         "filename": "drivers/android/binder.c",
         "patchSetId": 1
@@ -87,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "f3584666_0f72e839",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5739,
+      "author": {
+        "id": 1060196
+      },
+      "writtenOn": "2017-08-30T01:29:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f28de80f_d24a35b1",
+      "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "94b08de6_c274ba09",
         "filename": "drivers/android/binder.c",
         "patchSetId": 1
@@ -98,6 +152,30 @@
       "writtenOn": "2017-08-30T00:33:06Z",
       "side": 1,
       "message": "this is not the right error name. Add a label for your error.",
+      "range": {
+        "startLine": 5808,
+        "startChar": 7,
+        "endLine": 5808,
+        "endChar": 36
+      },
+      "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "277239af_daefc8b0",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5808,
+      "author": {
+        "id": 1060196
+      },
+      "writtenOn": "2017-08-30T01:29:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94b08de6_c274ba09",
       "range": {
         "startLine": 5808,
         "startChar": 7,
