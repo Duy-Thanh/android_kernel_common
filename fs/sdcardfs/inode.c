@@ -97,7 +97,7 @@ static int sdcardfs_create(struct inode *dir, struct dentry *dentry,
 	if (err)
 		goto out;
 
-	err = sdcardfs_interpose(dentry, dir->i_sb, &lower_path,
+	err = sdcardfs_interpose(&dentry, dir->i_sb, &lower_path,
 			SDCARDFS_I(dir)->data->userid);
 	if (err)
 		goto out;
@@ -338,7 +338,7 @@ static int sdcardfs_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode
 			make_nomedia_in_obb = 1;
 	}
 
-	err = sdcardfs_interpose(dentry, dir->i_sb, &lower_path, pd->userid);
+	err = sdcardfs_interpose(&dentry, dir->i_sb, &lower_path, pd->userid);
 	if (err) {
 		unlock_dir(lower_parent_dentry);
 		goto out;

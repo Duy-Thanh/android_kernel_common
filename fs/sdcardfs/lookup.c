@@ -166,7 +166,7 @@ struct inode *sdcardfs_iget(struct super_block *sb, struct inode *lower_inode, u
  * Helper interpose routine, called directly by ->lookup to handle
  * spliced dentries.
  */
-static struct dentry *__sdcardfs_interpose(struct dentry *dentry,
+static struct dentry *__sdcardfs_interpose(struct dentry **dentry,
 					 struct super_block *sb,
 					 struct path *lower_path,
 					 userid_t id)
@@ -197,10 +197,17 @@ static struct dentry *__sdcardfs_interpose(struct dentry *dentry,
 		goto out;
 	}
 
-	ret_dentry = d_splice_alias(inode, dentry);
-	dentry = ret_dentry ?: dentry;
-	if (!IS_ERR(dentry))
-		update_derived_permission_lock(dentry);
+	ret_dentry = d_materialise_unique(*dentry, inode);
+	if (IS_ERR(ret_dentry))
+		goto out;
+
+	if (ret_dentry) {
+		*dentry = ret_dentry;
+		ret_dentry = NULL;
+	}
+
+	if (!IS_ERR(*dentry))
+		update_derived_permission_lock(*dentry);
 out:
 	return ret_dentry;
 }
@@ -213,7 +220,7 @@ out:
  * @sb: sdcardfs's super_block
  * @lower_path: the lower path (caller does path_get/put)
  */
-int sdcardfs_interpose(struct dentry *dentry, struct super_block *sb,
+int sdcardfs_interpose(struct dentry **dentry, struct super_block *sb,
 		     struct path *lower_path, userid_t id)
 {
 	struct dentry *ret_dentry;
@@ -348,7 +355,7 @@ put_name:
 
 		sdcardfs_set_lower_path(dentry, &lower_path);
 		ret_dentry =
-			__sdcardfs_interpose(dentry, dentry->d_sb, &lower_path, id);
+			__sdcardfs_interpose(&dentry, dentry->d_sb, &lower_path, id);
 		if (IS_ERR(ret_dentry)) {
 			err = PTR_ERR(ret_dentry);
 			 /* path_put underlying path on error */
