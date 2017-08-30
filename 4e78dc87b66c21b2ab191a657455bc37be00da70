@@ -72,6 +72,47 @@
     },
     {
       "key": {
+        "uuid": "05050da3_e4f34c7a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-08-30T10:39:31Z",
+      "side": 1,
+      "message": "+1 for keeping this global, the printing code can use proc-\u003econtext-\u003ebinder_ns to determine if it should print the proc or not.",
+      "parentUuid": "dd91c855_4f4d6e89",
+      "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fa88fcf_9366a8ae",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-08-30T10:39:31Z",
+      "side": 1,
+      "message": "nit: don\u0027t necessarily need _safe here since binder_devices is immutable at this point.",
+      "range": {
+        "startLine": 959,
+        "startChar": 2,
+        "endLine": 959,
+        "endChar": 27
+      },
+      "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ace92617_86195668",
         "filename": "drivers/android/binder.c",
         "patchSetId": 1
@@ -86,6 +127,29 @@
       "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "697f41cf_3083120b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4886,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-08-30T10:39:31Z",
+      "side": 1,
+      "message": "can this ever return NULL?",
+      "range": {
+        "startLine": 4886,
+        "startChar": 13,
+        "endLine": 4886,
+        "endChar": 33
+      },
+      "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -203,6 +267,29 @@
       "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "848eb8d6_24ae3dcd",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5812,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-08-30T10:39:31Z",
+      "side": 1,
+      "message": "just \"return 0;\"",
+      "range": {
+        "startLine": 5810,
+        "startChar": 0,
+        "endLine": 5812,
+        "endChar": 12
+      },
+      "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
