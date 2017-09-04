@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ea4446c_8699e69a",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3174,
+      "author": {
+        "id": 1224784
+      },
+      "writtenOn": "2017-09-04T10:26:30Z",
+      "side": 1,
+      "message": "This version of the patch will not work with patch (\"sched/pelt: Fix false running accounting\")\nhttp://git.kernel.org/tip/f235a54f00449c611f85173fe8a66c4d189c5ce1, which has just been queued in mainline for v4.14.\nInstead, it should be: ret \u003d __update_load_avg(now, cpu, \u0026rt_rq-\u003eavg, running, running, NULL);\nIt\u0027s probably better to anticipate the change\nThis change of the patch has not been sent for review yet",
+      "revId": "7826a652f1963d0c0b1754c508b00c91496e8e34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
