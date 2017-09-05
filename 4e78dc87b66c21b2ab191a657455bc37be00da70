@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "66e414aa_bdfe50ab",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1060196
+      },
+      "writtenOn": "2017-09-05T23:01:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6984a11_585085e0",
+      "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "59701f8b_56b6e0e9",
         "filename": "drivers/android/binder.c",
         "patchSetId": 1
@@ -153,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "1b83ef5e_864d5448",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 1060196
+      },
+      "writtenOn": "2017-09-05T23:01:29Z",
+      "side": 1,
+      "message": "I\u0027ll leave this here until the other nits and comments are ironed out. Then I will upload a final revision to the patchset to move it to another file (binder_namespace.c ?) if the final decision is to do so.",
+      "parentUuid": "ace92617_86195668",
+      "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "697f41cf_3083120b",
         "filename": "drivers/android/binder.c",
         "patchSetId": 1
@@ -164,6 +200,30 @@
       "writtenOn": "2017-08-30T10:39:31Z",
       "side": 1,
       "message": "can this ever return NULL?",
+      "range": {
+        "startLine": 4886,
+        "startChar": 13,
+        "endLine": 4886,
+        "endChar": 33
+      },
+      "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4898b142_1877bc68",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4886,
+      "author": {
+        "id": 1060196
+      },
+      "writtenOn": "2017-09-05T23:01:29Z",
+      "side": 1,
+      "message": "I don\u0027t believe so. The ipc private data will always be set to something once the binder __init function runs), and we never unregister binder from ipc_priv_ops so every IPC should always have *some* binder namespace data.",
+      "parentUuid": "697f41cf_3083120b",
       "range": {
         "startLine": 4886,
         "startChar": 13,
@@ -304,6 +364,30 @@
       "writtenOn": "2017-08-30T10:39:31Z",
       "side": 1,
       "message": "just \"return 0;\"",
+      "range": {
+        "startLine": 5810,
+        "startChar": 0,
+        "endLine": 5812,
+        "endChar": 12
+      },
+      "revId": "4e78dc87b66c21b2ab191a657455bc37be00da70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "80ee9351_869310e9",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5812,
+      "author": {
+        "id": 1060196
+      },
+      "writtenOn": "2017-09-05T23:01:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "848eb8d6_24ae3dcd",
       "range": {
         "startLine": 5810,
         "startChar": 0,
