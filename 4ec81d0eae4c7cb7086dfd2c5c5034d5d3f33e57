@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "041c4798_efc7433a",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6454,
+      "author": {
+        "id": 1200908
+      },
+      "writtenOn": "2017-09-05T17:49:56Z",
+      "side": 1,
+      "message": "target_cpu \u003d prev_cpu\n\nOtherwise we can return whatever is on the stack when next_cpu\u003d\u003dprev_cpu in some cases",
+      "range": {
+        "startLine": 6454,
+        "startChar": 5,
+        "endLine": 6454,
+        "endChar": 15
+      },
+      "revId": "4ec81d0eae4c7cb7086dfd2c5c5034d5d3f33e57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
