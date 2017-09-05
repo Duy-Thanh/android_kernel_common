@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a19f7654_cfeb427d",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 9420,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2017-09-05T16:41:27Z",
+      "side": 1,
+      "message": "initialize it to NULL.",
+      "range": {
+        "startLine": 9420,
+        "startChar": 21,
+        "endLine": 9420,
+        "endChar": 30
+      },
+      "revId": "ce09a150297693c4cbde5c51777107b0ba63dcb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
