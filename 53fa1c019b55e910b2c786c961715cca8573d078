@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8730e701_f1dfccdc",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1755,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2017-09-07T15:51:42Z",
+      "side": 1,
+      "message": "These could be sock_uid instead of sk-\u003esk_uid.",
+      "range": {
+        "startLine": 1754,
+        "startChar": 15,
+        "endLine": 1755,
+        "endChar": 25
+      },
+      "revId": "53fa1c019b55e910b2c786c961715cca8573d078",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
