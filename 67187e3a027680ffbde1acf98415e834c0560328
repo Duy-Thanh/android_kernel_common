@@ -33,6 +33,23 @@
       "revId": "67187e3a027680ffbde1acf98415e834c0560328",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86b7df7e_e74b765f",
+        "filename": "kernel/sched/cpufreq_sched.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2017-09-07T08:20:24Z",
+      "side": 1,
+      "message": "If without WALT configuration, should we include DL utilization?\n\nnew_capacity \u003d scr-\u003ecfs + scr-\u003ert + scr-\u003edl;",
+      "revId": "67187e3a027680ffbde1acf98415e834c0560328",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
