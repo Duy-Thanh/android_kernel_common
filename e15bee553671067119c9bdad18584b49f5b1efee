@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ef9a3389_6de87442",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1200,
+      "author": {
+        "id": 1121354
+      },
+      "writtenOn": "2017-09-07T19:38:07Z",
+      "side": 1,
+      "message": "It is removed in I748ff6dd11569e5596a9d5cecdf9c334847e7307, the clang compiler reports warning for these checks when we switch the tools chain from gcc to clang. Do you think it is also needed for previous kernel version?",
+      "parentUuid": "f70207c4_9062144a",
+      "range": {
+        "startLine": 1196,
+        "startChar": 0,
+        "endLine": 1200,
+        "endChar": 2
+      },
+      "revId": "e15bee553671067119c9bdad18584b49f5b1efee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "68b4d581_924446b0",
         "filename": "net/netfilter/xt_qtaguid.c",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-09-07T15:49:17Z",
       "side": 1,
       "message": "I notice that in earlier kernels (e.g., 4.4) there is a check for TIME_WAIT sockets here. Can you take a look to see if you can find out why it\u0027s missing here in 4.9?",
+      "range": {
+        "startLine": 1613,
+        "startChar": 1,
+        "endLine": 1613,
+        "endChar": 2
+      },
+      "revId": "e15bee553671067119c9bdad18584b49f5b1efee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f9e0af5_709d67a4",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1613,
+      "author": {
+        "id": 1121354
+      },
+      "writtenOn": "2017-09-07T19:38:07Z",
+      "side": 1,
+      "message": "This is a recent change introduced by I03acb2251319fd800d0e36a6dde30fc1fbb7d1b0 maybe we should cherry-pick this back to all previous kernels as well since it now can get the full socket for TCP_NEW_SYN_RECV state socket",
+      "parentUuid": "68b4d581_924446b0",
       "range": {
         "startLine": 1613,
         "startChar": 1,
