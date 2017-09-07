@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e3bae40_57aa4b65",
+        "filename": "kernel/sched/walt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2017-09-07T06:13:07Z",
+      "side": 1,
+      "message": "The prev_runnable_sum is not flipped yet. so we send stale data to the governor. This call needs to be moved to the end of walt_update_task_ravg()",
+      "range": {
+        "startLine": 183,
+        "startChar": 1,
+        "endLine": 183,
+        "endChar": 20
+      },
+      "revId": "29ff3e3d9b802fb8d63b6ec817b61b7ce1f66257",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
