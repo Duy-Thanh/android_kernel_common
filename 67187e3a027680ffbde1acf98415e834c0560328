@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ccbb7ac_27c6b4ff",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3011,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2017-09-07T08:16:27Z",
+      "side": 1,
+      "message": "This patch is conflict with Joonwoo\u0027s patch \"sched: EAS/WALT: use cr_avg instead of prev_runnable_sum\", which has been merged into ACK 4.4.",
+      "revId": "67187e3a027680ffbde1acf98415e834c0560328",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a62b8e72_e99f455c",
+        "filename": "kernel/sched/cpufreq_sched.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2017-09-07T08:16:27Z",
+      "side": 1,
+      "message": "This change is conflict with patch \"sched: EAS: schedfreq: fix CPU util over estimation\" which has been merged into ACK 4.4.",
+      "revId": "67187e3a027680ffbde1acf98415e834c0560328",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
