@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7fb98049_f8e0c32a",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1748,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2017-09-07T15:37:03Z",
+      "side": 1,
+      "message": "This could be sock_uid.",
+      "range": {
+        "startLine": 1748,
+        "startChar": 15,
+        "endLine": 1748,
+        "endChar": 25
+      },
+      "revId": "4f275692c8415e0ef7da441047561369ffa83562",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d09fbb4_15fb536f",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1749,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2017-09-07T15:37:03Z",
+      "side": 1,
+      "message": "And so could this.",
+      "range": {
+        "startLine": 1749,
+        "startChar": 15,
+        "endLine": 1749,
+        "endChar": 25
+      },
+      "revId": "4f275692c8415e0ef7da441047561369ffa83562",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
