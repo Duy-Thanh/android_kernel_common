@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3dfa1672_933533c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1138783
+      },
+      "writtenOn": "2017-09-08T23:56:36Z",
+      "side": 1,
+      "message": "The results for this section are off. I discovered with the help of Lena Olson that I also needed to disable C states to get comparable results.\n\nThis patch on it\u0027s own only improves performance by 100ns, but the improvement goes up to 300ns with some followup patches.\n\nOn a Pixel phone, this represents about a 2% to 4% improvement in hop latency. If x86 sees the same magnitude improvement though, it could be more like a 10% improvement.",
+      "revId": "e13b2d1a4b672002a2e0c7a6d68def9f25ec40ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
