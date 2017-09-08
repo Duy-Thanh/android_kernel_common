@@ -50,6 +50,23 @@
       "revId": "67187e3a027680ffbde1acf98415e834c0560328",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c5fd3db4_e594bb55",
+        "filename": "kernel/sched/cpufreq_sched.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2017-09-08T05:29:52Z",
+      "side": 1,
+      "message": "We should remove line 267 due DL utilization has been included in upper sentence?",
+      "revId": "67187e3a027680ffbde1acf98415e834c0560328",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
