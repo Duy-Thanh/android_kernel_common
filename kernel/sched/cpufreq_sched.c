@@ -420,6 +420,8 @@ free_tunables:
 	kfree(gd->tunables);
 free_gd:
 	policy->governor_data = NULL;
+	if (!have_governor_per_policy() || global_tunables == gd->tunables)
+		global_tunables = NULL;
 	kfree(gd);
 	return -ENOMEM;
 }
