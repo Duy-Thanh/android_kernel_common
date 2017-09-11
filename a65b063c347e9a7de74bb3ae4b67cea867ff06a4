@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "a83e2723_d0e3a223",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5593,
+      "author": {
+        "id": 1060196
+      },
+      "writtenOn": "2017-09-11T18:22:29Z",
+      "side": 1,
+      "message": "Thinking about this a bit more (and discussing with team mates), I don\u0027t think debugFS in general is properly namespaced (newly spawned containers don\u0027t have their own debugFS by default), so I think it may be best (initially) to just dump all proc binder data for all namespaces. \n\nIn a follow up CL, I can modify this to organize it by namespace.",
+      "parentUuid": "fe08ebf7_3ef23dd3",
+      "revId": "a65b063c347e9a7de74bb3ae4b67cea867ff06a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "37330aa6_129dd063",
         "filename": "drivers/android/binder.c",
         "patchSetId": 2
