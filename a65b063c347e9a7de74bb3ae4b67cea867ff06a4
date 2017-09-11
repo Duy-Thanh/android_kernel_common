@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33d27035_9a76a987",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5593,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-09-11T17:49:35Z",
+      "side": 1,
+      "message": "If we want to use this for hwbinder all child name-spaces also need to be printed (with a name)",
+      "revId": "a65b063c347e9a7de74bb3ae4b67cea867ff06a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37330aa6_129dd063",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5611,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-09-11T17:49:35Z",
+      "side": 1,
+      "message": "see above",
+      "revId": "a65b063c347e9a7de74bb3ae4b67cea867ff06a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d3b2e85_921b1fae",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5626,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-09-11T17:49:35Z",
+      "side": 1,
+      "message": "...",
+      "revId": "a65b063c347e9a7de74bb3ae4b67cea867ff06a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
