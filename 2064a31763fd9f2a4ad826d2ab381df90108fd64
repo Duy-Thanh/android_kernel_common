@@ -16,6 +16,24 @@
       "revId": "2064a31763fd9f2a4ad826d2ab381df90108fd64",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "31e9b393_81e88ab4",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5429,
+      "author": {
+        "id": 1201522
+      },
+      "writtenOn": "2017-09-12T18:09:06Z",
+      "side": 1,
+      "message": "With the current implementation, cpu_capacity_orig does not contain thermal pressure which is nothing else then *\u003d arch_scale_max_freq_capacity() and \u003e\u003e\u003d SCHED_CAPACITY_SHIFT.\n\nOnce we know cpu_capacity_orig has to contain it, this two liner has to move before\n\ncpu_rq(cpu)-\u003ecpu_capacity_orig \u003d capacity;\n\nSince this is not clear, I decided to leave it like this.",
+      "parentUuid": "3b015bf8_c951d5ad",
+      "revId": "2064a31763fd9f2a4ad826d2ab381df90108fd64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
