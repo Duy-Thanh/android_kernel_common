@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b015bf8_c951d5ad",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5429,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2017-09-12T17:32:32Z",
+      "side": 1,
+      "message": "This might need an update - Ionela says this might be incorrect if we change capacity_orig to contain thermal pressure and it\u0027s not clear if we should do that. In any case, don\u0027t forget about this if we do.\nMight be able to change this to work correctly in both cases if we switch to arch_scale_cpu_capacity instead of capacity_orig.",
+      "revId": "2064a31763fd9f2a4ad826d2ab381df90108fd64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
