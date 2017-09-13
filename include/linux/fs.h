@@ -1170,6 +1170,8 @@ struct mm_struct;
 #define MNT_DETACH	0x00000002	/* Just detach from the tree */
 #define MNT_EXPIRE	0x00000004	/* Mark for expiry */
 #define UMOUNT_NOFOLLOW	0x00000008	/* Don't follow symlink on umount */
+/* FIXME: Be careful! UMOUNT_WAIT is only for ANDROID, not upstreamed */
+#define UMOUNT_WAIT	0x40000000	/* Wait to unmount completely */
 #define UMOUNT_UNUSED	0x80000000	/* Flag guaranteed to be unused */
 
 extern struct list_head super_blocks;
