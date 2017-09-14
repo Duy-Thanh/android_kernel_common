@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b622169_c2ff7717",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5415,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2017-09-14T14:00:27Z",
+      "side": 1,
+      "message": "This might work nicely, do you have any test results?",
+      "range": {
+        "startLine": 5413,
+        "startChar": 0,
+        "endLine": 5415,
+        "endChar": 1
+      },
+      "revId": "43a0374d3b3f445ea26375a1269c78daadb919f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8eb28679_1be16463",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5453,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2017-09-14T14:00:27Z",
+      "side": 1,
+      "message": "I think this is not correct but I admit it is not obvious what it happening here. What we\u0027re doing here is effectively using normalized group util but it is spread across the calculations to reduce the math we need to do.\n\nI started this code with normalized group utilization, and needed group weight included in the divide for the sum to work. However I realised while writing this code that if we don\u0027t include group weight in the divide, we don\u0027t need to normalize the group util, so here I just sum it up instead of calling group_norm_util, and then avoid including group_weight in the divide.",
+      "revId": "43a0374d3b3f445ea26375a1269c78daadb919f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
