@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8be1ff0_5e2c7bfc",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6886,
+      "author": {
+        "id": 1130863
+      },
+      "writtenOn": "2017-09-15T11:10:01Z",
+      "side": 1,
+      "message": "here, should we set new trg_cpu?\neenv.trg_cpu \u003d backup_cpu;",
+      "revId": "2b4da78967c4d8cdc7d68dd402a31b60e378f5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
