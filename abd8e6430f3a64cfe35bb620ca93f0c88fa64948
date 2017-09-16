@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb49cddf_90be89c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-09-16T04:26:27Z",
+      "side": 1,
+      "message": ", task lock and dentry lock",
+      "range": {
+        "startLine": 11,
+        "startChar": 36,
+        "endLine": 11,
+        "endChar": 52
+      },
+      "revId": "abd8e6430f3a64cfe35bb620ca93f0c88fa64948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cc61fd8_fdb6f413",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-09-16T04:26:27Z",
+      "side": 1,
+      "message": "err_mmget?",
+      "range": {
+        "startLine": 926,
+        "startChar": 8,
+        "endLine": 926,
+        "endChar": 19
+      },
+      "revId": "abd8e6430f3a64cfe35bb620ca93f0c88fa64948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
