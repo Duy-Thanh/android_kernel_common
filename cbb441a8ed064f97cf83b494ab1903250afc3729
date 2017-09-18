@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "4e2d9271_4f794bcc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2017-09-18T17:52:52Z",
+      "side": 1,
+      "message": "Please add ANDROID: prefix",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "cbb441a8ed064f97cf83b494ab1903250afc3729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04c85f53_a5cea148",
         "filename": "drivers/usb/gadget/function/f_mtp.c",
         "patchSetId": 1
