@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "668b4250_a17ccf8a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-09-19T13:23:52Z",
+      "side": 1,
+      "message": "BTW this depends on CONFIG_IPC_NS, which in turn depends on SYSV_IPC, which is not set by default in Android kernels. We either need to deal with CONFIG_IPC_NS not being set, or make it a requirement (and in that case, suggest making CONFIG_IPC_NS toggleable if just CONFIG_ANDROID_BINDER_IPC is set).",
+      "range": {
+        "startLine": 945,
+        "startChar": 8,
+        "endLine": 945,
+        "endChar": 26
+      },
+      "revId": "a65b063c347e9a7de74bb3ae4b67cea867ff06a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33d27035_9a76a987",
         "filename": "drivers/android/binder.c",
         "patchSetId": 2
