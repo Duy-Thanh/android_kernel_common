@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca0f0e8e_ea327ce6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-09-21T02:17:22Z",
+      "side": 1,
+      "message": "I was not able to test with lockdep on 3.18 as other errors disable it at boot before I can run any binder tests.",
+      "range": {
+        "startLine": 18,
+        "startChar": 12,
+        "endLine": 18,
+        "endChar": 21
+      },
+      "revId": "ab5fe05524bc53551fea977561324a2e00f4e923",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
