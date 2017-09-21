@@ -93,6 +93,30 @@
       "revId": "e15bee553671067119c9bdad18584b49f5b1efee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddcf083d_89a1d8b5",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1613,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2017-09-21T13:30:51Z",
+      "side": 1,
+      "message": "We might want to get something like that commit into 4.4 trees, yes. I don\u0027t think NEW_SYN_RECV existed before 4.4.",
+      "parentUuid": "7f9e0af5_709d67a4",
+      "range": {
+        "startLine": 1613,
+        "startChar": 1,
+        "endLine": 1613,
+        "endChar": 2
+      },
+      "revId": "e15bee553671067119c9bdad18584b49f5b1efee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
