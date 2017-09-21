@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70f5692a_24a8f074",
+        "filename": "include/linux/fs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2017-09-21T23:05:32Z",
+      "side": 1,
+      "message": "nit: typo",
+      "range": {
+        "startLine": 1173,
+        "startChar": 13,
+        "endLine": 1173,
+        "endChar": 21
+      },
+      "revId": "2bc68ffdb13bff2714629370c3662b3600ff1f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
