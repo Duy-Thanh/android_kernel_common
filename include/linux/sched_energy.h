@@ -35,6 +35,13 @@ extern struct sched_group_energy *sge_array[NR_CPUS][NR_SD_LEVELS];
 
 void init_sched_energy_costs(void);
 
+struct energy_model {
+	struct sched_group_energy *core_energy;
+	struct sched_group_energy *cluster_energy;
+};
+
+extern struct energy_model *platform_energy_data;
+
 #else
 
 #define init_sched_energy_costs() do { } while (0)

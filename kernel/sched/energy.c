@@ -28,6 +28,7 @@
 #include <linux/stddef.h>
 
 struct sched_group_energy *sge_array[NR_CPUS][NR_SD_LEVELS];
+struct energy_model *platform_energy_data;
 
 static void free_resources(void)
 {
@@ -56,67 +57,88 @@ void init_sched_energy_costs(void)
 	int sd_level, i, nstates, cpu;
 	const __be32 *val;
 
-	for_each_possible_cpu(cpu) {
-		cn = of_get_cpu_node(cpu, NULL);
-		if (!cn) {
-			pr_warn("CPU device node missing for CPU %d\n", cpu);
-			return;
-		}
-
-		if (!of_find_property(cn, "sched-energy-costs", NULL)) {
-			pr_warn("CPU device node has no sched-energy-costs\n");
-			return;
-		}
-
-		for_each_possible_sd_level(sd_level) {
-			cp = of_parse_phandle(cn, "sched-energy-costs", sd_level);
-			if (!cp)
-				break;
-
-			prop = of_find_property(cp, "busy-cost-data", NULL);
-			if (!prop || !prop->value) {
-				pr_warn("No busy-cost data, skipping sched_energy init\n");
-				goto out;
+	if (IS_ENABLED(CONFIG_OF)) {
+		for_each_possible_cpu(cpu) {
+			cn = of_get_cpu_node(cpu, NULL);
+			if (!cn) {
+				pr_warn("CPU device node missing for CPU %d\n", cpu);
+				return;
 			}
 
-			sge = kcalloc(1, sizeof(struct sched_group_energy),
-				      GFP_NOWAIT);
-
-			nstates = (prop->length / sizeof(u32)) / 2;
-			cap_states = kcalloc(nstates,
-					     sizeof(struct capacity_state),
-					     GFP_NOWAIT);
-
-			for (i = 0, val = prop->value; i < nstates; i++) {
-				cap_states[i].cap = be32_to_cpup(val++);
-				cap_states[i].power = be32_to_cpup(val++);
+			if (!of_find_property(cn, "sched-energy-costs", NULL)) {
+				pr_warn("CPU device node has no sched-energy-costs\n");
+				return;
 			}
 
-			sge->nr_cap_states = nstates;
-			sge->cap_states = cap_states;
+			for_each_possible_sd_level(sd_level) {
+				cp = of_parse_phandle(cn, "sched-energy-costs", sd_level);
+				if (!cp)
+					break;
 
-			prop = of_find_property(cp, "idle-cost-data", NULL);
-			if (!prop || !prop->value) {
-				pr_warn("No idle-cost data, skipping sched_energy init\n");
-				goto out;
-			}
+				prop = of_find_property(cp, "busy-cost-data", NULL);
+				if (!prop || !prop->value) {
+					pr_warn("No busy-cost data, skipping sched_energy init\n");
+					goto out;
+				}
 
-			nstates = (prop->length / sizeof(u32));
-			idle_states = kcalloc(nstates,
-					      sizeof(struct idle_state),
+				sge = kcalloc(1, sizeof(struct sched_group_energy),
 					      GFP_NOWAIT);
 
-			for (i = 0, val = prop->value; i < nstates; i++)
-				idle_states[i].power = be32_to_cpup(val++);
+				nstates = (prop->length / sizeof(u32)) / 2;
+				cap_states = kcalloc(nstates,
+						     sizeof(struct capacity_state),
+						     GFP_NOWAIT);
 
-			sge->nr_idle_states = nstates;
-			sge->idle_states = idle_states;
+				for (i = 0, val = prop->value; i < nstates; i++) {
+					cap_states[i].cap = be32_to_cpup(val++);
+					cap_states[i].power = be32_to_cpup(val++);
+				}
 
-			sge_array[cpu][sd_level] = sge;
+				sge->nr_cap_states = nstates;
+				sge->cap_states = cap_states;
+
+				prop = of_find_property(cp, "idle-cost-data", NULL);
+				if (!prop || !prop->value) {
+					pr_warn("No idle-cost data, skipping sched_energy init\n");
+					goto out;
+				}
+
+				nstates = (prop->length / sizeof(u32));
+				idle_states = kcalloc(nstates,
+						      sizeof(struct idle_state),
+						      GFP_NOWAIT);
+
+				for (i = 0, val = prop->value; i < nstates; i++)
+					idle_states[i].power = be32_to_cpup(val++);
+
+				sge->nr_idle_states = nstates;
+				sge->idle_states = idle_states;
+
+				sge_array[cpu][sd_level] = sge;
+			}
+		}
+		pr_info("Sched-energy-costs installed from DT\n");
+	} else {
+		if (platform_energy_data) {
+			struct energy_model *em = platform_energy_data;
+
+			/*
+			 * Here, we do not know the number of clusters and
+			 * whether they are symmetric or heterogeneous. We
+			 * are currently assigning the core/cluster energy
+			 * data assuming an SMP system with single cluster.
+			 */
+			for_each_possible_cpu(cpu) {
+				sge_array[cpu][SD_LEVEL0] = em->core_energy;
+				sge_array[cpu][SD_LEVEL1] = em->cluster_energy;
+			}
+		pr_info("Sched-energy-costs installed from static platform data\n");
+		} else {
+			pr_warn("Sched-energy-costs not available\n");
+			return;
 		}
 	}
 
-	pr_info("Sched-energy-costs installed from DT\n");
 	return;
 
 out:
