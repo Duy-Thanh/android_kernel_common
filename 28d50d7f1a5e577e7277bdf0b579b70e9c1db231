@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94a77609_84f710d1",
+        "filename": "include/linux/fs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1174,
+      "author": {
+        "id": 1038033
+      },
+      "writtenOn": "2017-09-22T20:59:53Z",
+      "side": 1,
+      "message": "Do we really need to have a new umount option if this is not for upstream use, but just a local hack?\n\nMaybe we should just do it unconditionally for the Android kernel?\n\nOtherwise we risk getting in trouble if someone else uses it.",
+      "range": {
+        "startLine": 1174,
+        "startChar": 0,
+        "endLine": 1174,
+        "endChar": 63
+      },
+      "revId": "28d50d7f1a5e577e7277bdf0b579b70e9c1db231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
