@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "941f859a_09cb390e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2850,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-09-25T20:48:49Z",
+      "side": 1,
+      "message": "what happens if the target process dies before you get this lock?",
+      "revId": "aca175ced84f0e28ae005843a7f37d80a5efb162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12fb3a07_ce0f5ca7",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3271,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-09-25T20:48:49Z",
+      "side": 1,
+      "message": "why are you releasing the node tmpref here?",
+      "revId": "aca175ced84f0e28ae005843a7f37d80a5efb162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
