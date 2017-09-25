@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "adc0eee6_5693d943",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2850,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-09-25T21:09:29Z",
+      "side": 1,
+      "message": "Good point. If we don\u0027t hold the target_procs inner lock here, we don\u0027t have protection for incrementing the tmpref",
+      "parentUuid": "941f859a_09cb390e",
+      "revId": "aca175ced84f0e28ae005843a7f37d80a5efb162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "12fb3a07_ce0f5ca7",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2017-09-25T20:48:49Z",
       "side": 1,
       "message": "why are you releasing the node tmpref here?",
+      "revId": "aca175ced84f0e28ae005843a7f37d80a5efb162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb6abc05_2e685dda",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3271,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2017-09-25T21:09:29Z",
+      "side": 1,
+      "message": "The binder_dec_node() for the local strong ref is done implicitly in binder_transaction_buffer_release() so we need to inhibit it below by setting target_node to NULL. So we dec the tmpref here too.",
+      "parentUuid": "12fb3a07_ce0f5ca7",
       "revId": "aca175ced84f0e28ae005843a7f37d80a5efb162",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
