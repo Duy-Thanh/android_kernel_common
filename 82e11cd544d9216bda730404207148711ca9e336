@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a3ecc69_19e9e46b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-09-25T23:31:52Z",
+      "side": 1,
+      "message": "check whitespace",
+      "revId": "82e11cd544d9216bda730404207148711ca9e336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d34b516_2a6ba54b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2755,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-09-25T23:31:52Z",
+      "side": 1,
+      "message": "Include more details from the commit message here?",
+      "revId": "82e11cd544d9216bda730404207148711ca9e336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d61cc429_efcb4e6e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2915,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-09-25T23:31:52Z",
+      "side": 1,
+      "message": "dead binder is the common way to get here, so you could keep that label.",
+      "revId": "82e11cd544d9216bda730404207148711ca9e336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
