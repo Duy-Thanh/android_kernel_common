@@ -2846,8 +2846,15 @@ static void binder_transaction(struct binder_proc *proc,
 			ref = binder_get_ref_olocked(proc, tr->target.handle,
 						     true);
 			if (ref) {
-				binder_inc_node(ref->node, 1, 0, NULL);
 				target_node = ref->node;
+				binder_node_inner_lock(target_node);
+				target_proc = target_node->proc;
+				if (target_proc) {
+					target_proc->tmp_ref++;
+					binder_inc_node_nilocked(target_node,
+								 1, 0, NULL);
+				}
+				binder_node_inner_unlock(target_node);
 			}
 			binder_proc_unlock(proc);
 			if (target_node == NULL) {
@@ -2867,22 +2874,22 @@ static void binder_transaction(struct binder_proc *proc,
 				return_error_line = __LINE__;
 				goto err_no_context_mgr_node;
 			}
-			binder_inc_node(target_node, 1, 0, NULL);
+			binder_node_inner_lock(target_node);
+			target_proc = target_node->proc;
+			if (target_proc) {
+				target_proc->tmp_ref++;
+				binder_inc_node_nilocked(target_node,
+							 1, 0, NULL);
+			}
+			binder_node_inner_unlock(target_node);
 			mutex_unlock(&context->context_mgr_node_lock);
 		}
-		e->to_node = target_node->debug_id;
-		binder_node_lock(target_node);
-		target_proc = target_node->proc;
 		if (target_proc == NULL) {
-			binder_node_unlock(target_node);
 			return_error = BR_DEAD_REPLY;
 			return_error_line = __LINE__;
 			goto err_dead_binder;
 		}
-		binder_inner_proc_lock(target_proc);
-		target_proc->tmp_ref++;
-		binder_inner_proc_unlock(target_proc);
-		binder_node_unlock(target_node);
+		e->to_node = target_node->debug_id;
 		if (security_binder_transaction(proc->tsk,
 						target_proc->tsk) < 0) {
 			return_error = BR_FAILED_REPLY;
@@ -3277,10 +3284,10 @@ err_invalid_target_handle:
 err_no_context_mgr_node:
 	if (target_thread)
 		binder_thread_dec_tmpref(target_thread);
-	if (target_proc)
-		binder_proc_dec_tmpref(target_proc);
 	if (target_node)
 		binder_dec_node(target_node, 1, 0);
+	if (target_proc)
+		binder_proc_dec_tmpref(target_proc);
 
 	binder_debug(BINDER_DEBUG_FAILED_TRANSACTION,
 		     "%d:%d transaction failed %d/%d, size %lld-%lld line %d\n",
