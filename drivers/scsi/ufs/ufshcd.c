@@ -2986,6 +2986,9 @@ int ufshcd_map_desc_id_to_length(struct ufs_hba *hba,
 	case QUERY_DESC_IDN_RFU_1:
 		*desc_len = 0;
 		break;
+	case QUERY_DESC_IDN_HEALTH:
+		*desc_len = hba->desc_size.health_desc;
+		break;
 	default:
 		*desc_len = 0;
 		return -EINVAL;
@@ -6294,6 +6297,11 @@ static void ufshcd_init_desc_sizes(struct ufs_hba *hba)
 		&hba->desc_size.geom_desc);
 	if (err)
 		hba->desc_size.geom_desc = QUERY_DESC_GEOMETRY_DEF_SIZE;
+
+	err = ufshcd_read_desc_length(hba, QUERY_DESC_IDN_HEALTH, 0,
+		&hba->desc_size.health_desc);
+	if (err)
+		hba->desc_size.health_desc = QUERY_DESC_HEALTH_DEF_SIZE;
 }
 
 static void ufshcd_def_desc_sizes(struct ufs_hba *hba)
@@ -6304,6 +6312,7 @@ static void ufshcd_def_desc_sizes(struct ufs_hba *hba)
 	hba->desc_size.conf_desc = QUERY_DESC_CONFIGURATION_DEF_SIZE;
 	hba->desc_size.unit_desc = QUERY_DESC_UNIT_DEF_SIZE;
 	hba->desc_size.geom_desc = QUERY_DESC_GEOMETRY_DEF_SIZE;
+	hba->desc_size.health_desc = QUERY_DESC_HEALTH_DEF_SIZE;
 }
 
 /**
@@ -7680,7 +7689,64 @@ static struct attribute *ufshcd_attrs[] = {
 	NULL
 };
 
-ATTRIBUTE_GROUPS(ufshcd);
+static const struct attribute_group ufshcd_default_group = {
+	.attrs = ufshcd_attrs,
+};
+
+static u8 ufshcd_read_desc_health(struct device *dev, int byte_offset)
+{
+	struct ufs_hba *hba = dev_get_drvdata(dev);
+	int buff_len = hba->desc_size.health_desc;
+	u8 desc_buf[hba->desc_size.health_desc];
+	int err;
+
+	if (byte_offset >= buff_len)
+		return 0;
+
+	pm_runtime_get_sync(hba->dev);
+	err = ufshcd_read_desc(hba, QUERY_DESC_IDN_HEALTH, 0,
+					desc_buf, buff_len);
+	pm_runtime_put_sync(hba->dev);
+	if (err)
+		return 0;
+
+	return desc_buf[byte_offset];
+}
+
+#define HEALTH_ATTR_RO(_name, _byte_offset)				\
+static ssize_t _name##_show(struct device *_dev,			\
+			struct device_attribute *attr, char *buf)	\
+{									\
+	u8 byte = ufshcd_read_desc_health(_dev, _byte_offset);		\
+	return scnprintf(buf, PAGE_SIZE, "0x%02x\n", byte);		\
+}									\
+static DEVICE_ATTR_RO(_name);
+
+HEALTH_ATTR_RO(length, 0);
+HEALTH_ATTR_RO(type, 1);
+HEALTH_ATTR_RO(eol, 2);
+HEALTH_ATTR_RO(lifetimeA, 3);
+HEALTH_ATTR_RO(lifetimeB, 4);
+
+static struct attribute *ufshcd_health_attrs[] = {
+	&dev_attr_length.attr,
+	&dev_attr_type.attr,
+	&dev_attr_eol.attr,
+	&dev_attr_lifetimeA.attr,
+	&dev_attr_lifetimeB.attr,
+	NULL
+};
+
+static const struct attribute_group ufshcd_health_group = {
+	.name = "health",
+	.attrs = ufshcd_health_attrs,
+};
+
+static const struct attribute_group *ufshcd_groups[] = {
+	&ufshcd_default_group,
+	&ufshcd_health_group,
+	NULL,
+};
 
 static inline void ufshcd_add_sysfs_nodes(struct ufs_hba *hba)
 {
