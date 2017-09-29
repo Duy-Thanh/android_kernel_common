@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e1a0dd1_9cf33801",
+        "filename": "kernel/configs/android-fetch-configs.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2017-09-29T22:29:30Z",
+      "side": 1,
+      "message": "curl https://android.googlesource.com/kernel/configs/+archive/master/android-4.9.tar.gz | tar xzv\n\nThis has the advantage of not needing to cleanup the intermediate tarball, and working on OS X (which ships curl but not wget)",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 21
+      },
+      "revId": "caccb014bb67eab1c41199360c86b5bc3ec6212c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
