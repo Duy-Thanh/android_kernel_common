@@ -22,6 +22,30 @@
       "revId": "caccb014bb67eab1c41199360c86b5bc3ec6212c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa89d66f_b96bfd5c",
+        "filename": "kernel/configs/android-fetch-configs.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2017-10-02T17:55:43Z",
+      "side": 1,
+      "message": "done, thx",
+      "parentUuid": "3e1a0dd1_9cf33801",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 21
+      },
+      "revId": "caccb014bb67eab1c41199360c86b5bc3ec6212c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
