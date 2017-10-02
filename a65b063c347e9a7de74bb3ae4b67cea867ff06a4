@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8e1e28ac_0981300b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2017-10-02T20:19:57Z",
+      "side": 1,
+      "message": "It\u0027s a CTS requirement that SYSV_IPC be disabled in Android kernels (i.e. CONFIG_SYSV_IPC not set).",
+      "parentUuid": "668b4250_a17ccf8a",
+      "range": {
+        "startLine": 945,
+        "startChar": 8,
+        "endLine": 945,
+        "endChar": 26
+      },
+      "revId": "a65b063c347e9a7de74bb3ae4b67cea867ff06a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33d27035_9a76a987",
         "filename": "drivers/android/binder.c",
         "patchSetId": 2
