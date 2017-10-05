@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a40b7b14_31deb14c",
+        "filename": "kernel/sched/energy.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-10-05T17:47:58Z",
+      "side": 1,
+      "message": "Can we split the non-DT portions into a separate function instead of increasing indentation on the DT portions?\n\nThat, or, Just do\n\nif (!IS_ENABLED(CONFIG_OF)) {\n   /* Do non DT stuff */\n   return;\n}\n\n/* Do DT stuff */\n\nAlso can you just use the of_ API to detect if DT is running or not and if not, fallback to platform data, and if not then give up? that\u0027s much cleaner than checking the config option.\n\nof_get_cpu_node will return NULL if DT is turned off.",
+      "revId": "3b7e7c0609175ad7ab6b23bd41f54dc6a39539a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
