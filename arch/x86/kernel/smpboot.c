@@ -53,6 +53,10 @@
 #include <linux/stackprotector.h>
 #include <linux/gfp.h>
 #include <linux/cpuidle.h>
+#if defined(CONFIG_DEFAULT_USE_ENERGY_AWARE)
+#include <linux/sched.h>
+#include <linux/sched_energy.h>
+#endif
 
 #include <asm/acpi.h>
 #include <asm/desc.h>
@@ -107,6 +111,35 @@ static unsigned int logical_packages __read_mostly;
 
 /* Maximum number of SMT threads on any online core */
 int __max_smt_threads __read_mostly;
+
+#if defined(CONFIG_DEFAULT_USE_ENERGY_AWARE)
+/* sd energy functions */
+static inline
+const struct sched_group_energy * const cpu_cluster_energy(int cpu)
+{
+	struct sched_group_energy *sge = sge_array[cpu][SD_LEVEL1];
+
+	if (!sge) {
+		pr_warn("Invalid sched_group_energy for Cluster%d\n", cpu);
+		return NULL;
+	}
+
+	return sge;
+}
+
+static inline
+const struct sched_group_energy * const cpu_core_energy(int cpu)
+{
+	struct sched_group_energy *sge = sge_array[cpu][SD_LEVEL0];
+
+	if (!sge) {
+		pr_warn("Invalid sched_group_energy for CPU%d\n", cpu);
+		return NULL;
+	}
+
+	return sge;
+}
+#endif
 
 static inline void smpboot_setup_warm_reset_vector(unsigned long start_eip)
 {
@@ -464,6 +497,18 @@ static bool match_die(struct cpuinfo_x86 *c, struct cpuinfo_x86 *o)
 	return false;
 }
 
+#if defined(CONFIG_DEFAULT_USE_ENERGY_AWARE)
+static inline int cpu_corepower_flags(void)
+{
+	return SD_SHARE_PKG_RESOURCES | SD_SHARE_CAP_STATES;
+}
+
+static inline int cpu_clusterpower_flags(void)
+{
+	return SD_SHARE_CAP_STATES;
+}
+#endif
+
 static struct sched_domain_topology_level x86_numa_in_package_topology[] = {
 #ifdef CONFIG_SCHED_SMT
 	{ cpu_smt_mask, cpu_smt_flags, SD_INIT_NAME(SMT) },
@@ -475,13 +520,21 @@ static struct sched_domain_topology_level x86_numa_in_package_topology[] = {
 };
 
 static struct sched_domain_topology_level x86_topology[] = {
-#ifdef CONFIG_SCHED_SMT
+#if defined(CONFIG_SCHED_SMT) && !defined(CONFIG_DEFAULT_USE_ENERGY_AWARE)
 	{ cpu_smt_mask, cpu_smt_flags, SD_INIT_NAME(SMT) },
 #endif
 #ifdef CONFIG_SCHED_MC
+#if defined(CONFIG_DEFAULT_USE_ENERGY_AWARE)
+	{ cpu_coregroup_mask, cpu_corepower_flags, cpu_core_energy, SD_INIT_NAME(MC) },
+#else
 	{ cpu_coregroup_mask, cpu_core_flags, SD_INIT_NAME(MC) },
 #endif
+#endif
+#if defined(CONFIG_DEFAULT_USE_ENERGY_AWARE)
+	{ cpu_cpu_mask, cpu_clusterpower_flags, cpu_cluster_energy, SD_INIT_NAME(DIE) },
+#else
 	{ cpu_cpu_mask, SD_INIT_NAME(DIE) },
+#endif
 	{ NULL, },
 };
 
