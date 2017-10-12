@@ -18,9 +18,13 @@
 #include <linux/workqueue.h>
 #include <linux/kmod.h>
 #include <trace/events/power.h>
+<<<<<<< HEAD   (35091a ANDROID: binder: init desired_prio.sched_policy before use i)
 #include <linux/wakeup_reason.h>
+=======
+#include <linux/cpuset.h>
+>>>>>>> BRANCH (69f53f Linux 4.4.92)
 
-/* 
+/*
  * Timeout for stopping processes
  */
 unsigned int __read_mostly freeze_timeout_msecs = 20 * MSEC_PER_SEC;
@@ -207,6 +211,8 @@ void thaw_processes(void)
 
 	__usermodehelper_set_disable_depth(UMH_FREEZING);
 	thaw_workqueues();
+
+	cpuset_wait_for_hotplug();
 
 	read_lock(&tasklist_lock);
 	for_each_process_thread(g, p) {
