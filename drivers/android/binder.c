@@ -5448,6 +5448,10 @@ static void print_binder_proc_stats(struct seq_file *m,
 	int count, strong, weak, ready_threads;
 	size_t free_async_space =
 		binder_alloc_get_free_async_space(&proc->alloc);
+	size_t cur_alloc =
+		binder_alloc_get_cur_alloc_space(&proc->alloc);
+	size_t max_alloc =
+		binder_alloc_get_max_alloc_space(&proc->alloc);
 
 	seq_printf(m, "proc %d\n", proc->pid);
 	seq_printf(m, "context %s\n", proc->context->name);
@@ -5463,10 +5467,15 @@ static void print_binder_proc_stats(struct seq_file *m,
 	seq_printf(m, "  threads: %d\n", count);
 	seq_printf(m, "  requested threads: %d+%d/%d\n"
 			"  ready threads %d\n"
-			"  free async space %zd\n", proc->requested_threads,
+			"  free async space %zd\n"
+			"  cur allocated %zd\n"
+			"  max allocated %zd\n",
+			proc->requested_threads,
 			proc->requested_threads_started, proc->max_threads,
 			ready_threads,
-			free_async_space);
+			free_async_space,
+			cur_alloc,
+			max_alloc);
 	count = 0;
 	for (n = rb_first(&proc->nodes); n != NULL; n = rb_next(n))
 		count++;

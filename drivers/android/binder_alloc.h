@@ -112,6 +112,8 @@ struct binder_alloc {
 	size_t buffer_size;
 	uint32_t buffer_free;
 	int pid;
+	size_t cur_allocated;
+	size_t max_allocated;
 };
 
 #ifdef CONFIG_ANDROID_BINDER_IPC_SELFTEST
@@ -161,6 +163,39 @@ binder_alloc_get_free_async_space(struct binder_alloc *alloc)
 	return free_async_space;
 }
 
+/**
+ * binder_alloc_get_cur_alloc_space() - get currently allocated space
+ * @alloc:	binder_alloc for this proc
+ *
+ * Return:	number of bytes allocated
+ */
+static inline size_t
+binder_alloc_get_cur_alloc_space(struct binder_alloc *alloc)
+{
+	size_t cur_alloc_space;
+
+	mutex_lock(&alloc->mutex);
+	cur_alloc_space = alloc->cur_allocated;
+	mutex_unlock(&alloc->mutex);
+	return cur_alloc_space;
+}
+
+/**
+ * binder_alloc_get_max_alloc_space() - get max allocated space
+ * @alloc:	binder_alloc for this proc
+ *
+ * Return:	max number of bytes allocated over life-time of this proc
+ */
+static inline size_t
+binder_alloc_get_max_alloc_space(struct binder_alloc *alloc)
+{
+	size_t max_alloc_space;
+
+	mutex_lock(&alloc->mutex);
+	max_alloc_space = alloc->max_allocated;
+	mutex_unlock(&alloc->mutex);
+	return max_alloc_space;
+}
 /**
  * binder_alloc_get_user_buffer_offset() - get offset between kernel/user addrs
  * @alloc:	binder_alloc for this proc

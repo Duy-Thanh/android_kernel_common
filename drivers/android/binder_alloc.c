@@ -474,6 +474,9 @@ struct binder_buffer *binder_alloc_new_buf_locked(struct binder_alloc *alloc,
 			     "%d: binder_alloc_buf size %zd async free %zd\n",
 			      alloc->pid, size, alloc->free_async_space);
 	}
+	alloc->cur_allocated += size;
+	if (alloc->cur_allocated > alloc->max_allocated)
+		alloc->max_allocated = alloc->cur_allocated;
 	return buffer;
 
 err_alloc_buf_struct_failed:
@@ -621,6 +624,7 @@ static void binder_free_buf_locked(struct binder_alloc *alloc,
 			buffer = prev;
 		}
 	}
+	alloc->cur_allocated -= size;
 	binder_insert_free_buffer(alloc, buffer);
 }
 
