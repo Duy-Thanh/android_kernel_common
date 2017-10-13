@@ -113,7 +113,7 @@ int dump_task_regs(struct task_struct *t, elf_gregset_t *elfregs);
 #define ELF_EXEC_PAGESIZE	4096
 
 /* This is the base location for PIE (ET_DYN with INTERP) loads. */
-#define ELF_ET_DYN_BASE		0x400000UL
+#define ELF_ET_DYN_BASE		0x60000000UL
 
 /* When the program starts, a1 contains a pointer to a function to be 
    registered with atexit, as per the SVR4 ABI.  A value of 0 means we 
