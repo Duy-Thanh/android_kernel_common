@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "001f95a0_a6330212",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1643,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-10-15T05:42:22Z",
+      "side": 1,
+      "message": "I\u0027m Ok with this change but wouldn\u0027t we lose some precision here due to the shift?",
+      "range": {
+        "startLine": 1643,
+        "startChar": 10,
+        "endLine": 1643,
+        "endChar": 26
+      },
+      "revId": "7453a4a0b4fe58188d25ea1cc3666465a42b1e89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
