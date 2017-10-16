@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60496f73_f5b667bf",
+        "filename": "arch/arm64/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-10-16T22:03:00Z",
+      "side": 1,
+      "message": "Could mark this with a comment saying it expires at v4.13, maybe the commit text is good enough.",
+      "revId": "e9186826bb135f8cef70cb21689291cd8e6961af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
