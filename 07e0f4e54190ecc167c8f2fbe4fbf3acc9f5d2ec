@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2280540d_1a2cc851",
+        "filename": "arch/arm64/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-10-16T21:56:54Z",
+      "side": 1,
+      "message": "Suggest a TODO comment with the bug number and describing the temporary workaround.",
+      "revId": "07e0f4e54190ecc167c8f2fbe4fbf3acc9f5d2ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
