@@ -16,6 +16,24 @@
       "revId": "07e0f4e54190ecc167c8f2fbe4fbf3acc9f5d2ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c654ac5_77190fc7",
+        "filename": "arch/arm64/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2017-10-16T22:02:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2280540d_1a2cc851",
+      "revId": "07e0f4e54190ecc167c8f2fbe4fbf3acc9f5d2ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
