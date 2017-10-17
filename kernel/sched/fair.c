@@ -6122,10 +6122,11 @@ boosted_task_util(struct task_struct *task)
 }
 
 static int cpu_util_wake(int cpu, struct task_struct *p);
+static int boosted_cpu_util_wake(int cpu, struct task_struct *p);
 
 static unsigned long capacity_spare_wake(int cpu, struct task_struct *p)
 {
-	return capacity_orig_of(cpu) - cpu_util_wake(cpu, p);
+	return capacity_orig_of(cpu) - boosted_cpu_util_wake(cpu, p);
 }
 
 /*
@@ -6668,6 +6669,17 @@ static int cpu_util_wake(int cpu, struct task_struct *p)
 	util = max_t(long, cpu_util(cpu) - task_util(p), 0);
 
 	return (util >= capacity) ? capacity : util;
+}
+
+static int boosted_cpu_util_wake(int cpu, struct task_struct *p)
+{
+	unsigned long util;
+	long margin;
+
+	util = cpu_util_wake(cpu, p);
+	margin = schedtune_cpu_margin(util);
+
+	return util + margin;
 }
 
 static inline int find_best_target(struct task_struct *p, int *backup_cpu)
