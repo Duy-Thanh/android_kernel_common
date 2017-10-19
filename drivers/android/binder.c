@@ -601,6 +601,8 @@ enum {
  *                        (protected by @proc->inner_lock)
  * @todo:                 list of work to do for this thread
  *                        (protected by @proc->inner_lock)
+ * @process_todo:         whether work in @todo should be processed
+ *                        (protected by @proc->inner_lock)
  * @return_error:         transaction errors reported by this thread
  *                        (only accessed by this thread)
  * @reply_error:          transaction errors reported by target thread
@@ -627,6 +629,7 @@ struct binder_thread {
 	bool looper_need_return; /* can be written by other thread */
 	struct binder_transaction *transaction_stack;
 	struct list_head todo;
+	bool process_todo;
 	struct binder_error return_error;
 	struct binder_error reply_error;
 	wait_queue_head_t wait;
@@ -954,7 +957,8 @@ static long task_close_fd(struct binder_proc *proc, unsigned int fd)
 static bool binder_has_work_ilocked(struct binder_thread *thread,
 				    bool do_proc_work)
 {
-	return !binder_worklist_empty_ilocked(&thread->todo) ||
+	return (!binder_worklist_empty_ilocked(&thread->todo) &&
+		thread->process_todo) ||
 		thread->looper_need_return ||
 		(do_proc_work &&
 		 !binder_worklist_empty_ilocked(&thread->proc->todo));
@@ -979,6 +983,10 @@ static bool binder_available_for_proc_work_ilocked(struct binder_thread *thread)
 				   BINDER_LOOPER_STATE_REGISTERED));
 }
 
+static void binder_wakeup_thread_ilocked(struct binder_proc *proc,
+					 struct binder_thread *thread,
+					 bool sync);
+
 static void binder_wakeup_poll_threads_ilocked(struct binder_proc *proc,
 					       bool sync)
 {
@@ -989,10 +997,7 @@ static void binder_wakeup_poll_threads_ilocked(struct binder_proc *proc,
 		thread = rb_entry(n, struct binder_thread, rb_node);
 		if (thread->looper & BINDER_LOOPER_STATE_POLL &&
 		    binder_available_for_proc_work_ilocked(thread)) {
-			if (sync)
-				wake_up_interruptible_sync(&thread->wait);
-			else
-				wake_up_interruptible(&thread->wait);
+			binder_wakeup_thread_ilocked(proc, thread, sync);
 		}
 	}
 }
@@ -1048,6 +1053,7 @@ static void binder_wakeup_thread_ilocked(struct binder_proc *proc,
 	assert_spin_locked(&proc->inner_lock);
 
 	if (thread) {
+		thread->process_todo = true;
 		if (sync)
 			wake_up_interruptible_sync(&thread->wait);
 		else
@@ -2074,7 +2080,9 @@ static void binder_send_failed_reply(struct binder_transaction *t,
 				binder_enqueue_work_ilocked(
 					&target_thread->reply_error.work,
 					&target_thread->todo);
-				wake_up_interruptible(&target_thread->wait);
+				binder_wakeup_thread_ilocked(
+					target_thread->proc,
+					target_thread, false);
 			} else {
 				WARN(1, "Unexpected reply error: %u\n",
 						target_thread->reply_error.cmd);
@@ -2830,6 +2838,7 @@ static void binder_transaction(struct binder_proc *proc,
 	binder_size_t last_fixup_min_off = 0;
 	struct binder_context *context = proc->context;
 	int t_debug_id = atomic_inc_return(&binder_last_id);
+	bool thread_queue_empty = binder_worklist_empty(proc, &thread->todo);
 
 	e = binder_transaction_log_add(&binder_transaction_log);
 	e->debug_id = t_debug_id;
@@ -3270,8 +3279,8 @@ static void binder_transaction(struct binder_proc *proc,
 		BUG_ON(t->buffer->async_transaction != 0);
 		binder_pop_transaction_ilocked(target_thread, in_reply_to);
 		binder_enqueue_work_ilocked(&t->work, &target_thread->todo);
+		binder_wakeup_thread_ilocked(target_proc, target_thread, true);
 		binder_inner_proc_unlock(target_proc);
-		wake_up_interruptible_sync(&target_thread->wait);
 		binder_restore_priority(current, in_reply_to->saved_priority);
 		binder_free_transaction(in_reply_to);
 	} else if (!(t->flags & TF_ONE_WAY)) {
@@ -3279,6 +3288,13 @@ static void binder_transaction(struct binder_proc *proc,
 		binder_inner_proc_lock(proc);
 		t->need_reply = 1;
 		t->from_parent = thread->transaction_stack;
+		/*
+		 * If there was no thread work at the beginning of this
+		 * function, don't return to userspace immediately, since we
+		 * anyway need to wait for the reply.
+		 */
+		if (thread_queue_empty)
+			thread->process_todo = false;
 		thread->transaction_stack = t;
 		binder_inner_proc_unlock(proc);
 		if (!binder_proc_transaction(t, target_proc, target_thread)) {
@@ -3310,6 +3326,7 @@ err_dead_proc_or_thread:
 	return_error = BR_DEAD_REPLY;
 	return_error_line = __LINE__;
 	binder_dequeue_work(proc, tcomplete);
+	thread->process_todo = true;
 err_translate_failed:
 err_bad_object_type:
 err_bad_offset:
@@ -4355,6 +4372,7 @@ static struct binder_thread *binder_get_thread_ilocked(
 	atomic_set(&thread->tmp_ref, 0);
 	init_waitqueue_head(&thread->wait);
 	INIT_LIST_HEAD(&thread->todo);
+	thread->process_todo = true;
 	rb_link_node(&thread->rb_node, parent, p);
 	rb_insert_color(&thread->rb_node, &proc->threads);
 	thread->looper_need_return = true;
@@ -4887,7 +4905,7 @@ static void binder_deferred_flush(struct binder_proc *proc)
 
 		thread->looper_need_return = true;
 		if (thread->looper & BINDER_LOOPER_STATE_WAITING) {
-			wake_up_interruptible(&thread->wait);
+			binder_wakeup_thread_ilocked(proc, thread, false);
 			wake_count++;
 		}
 	}
