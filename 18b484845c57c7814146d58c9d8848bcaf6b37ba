@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0d50af5_62b2938a",
+        "filename": "include/trace/events/sched.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-10-20T16:28:08Z",
+      "side": 1,
+      "message": "I believe, in the future its better if we also dump prev_runnable_sum for the frequency guidance signal since that\u0027s useful to check the input the schedutil.\nInfact I think this should be named into something like:\n\nutil_avg_walt_cravg\nutil_avg_walt_prevrun",
+      "range": {
+        "startLine": 727,
+        "startChar": 26,
+        "endLine": 729,
+        "endChar": 8
+      },
+      "revId": "18b484845c57c7814146d58c9d8848bcaf6b37ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
