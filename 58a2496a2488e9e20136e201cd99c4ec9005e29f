@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1761752b_d0643d7b",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 6479,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-10-23T14:07:54Z",
+      "side": 1,
+      "message": "Can this be made capacity_of(i) to match cpu_overutilized() ?",
+      "range": {
+        "startLine": 6479,
+        "startChar": 8,
+        "endLine": 6479,
+        "endChar": 21
+      },
+      "revId": "58a2496a2488e9e20136e201cd99c4ec9005e29f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
