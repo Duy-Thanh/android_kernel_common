@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff3c24d2_066fb3a9",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 9379,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-10-23T16:02:57Z",
+      "side": 1,
+      "message": "don\u0027t we need to check here that busiest_cpu falls in the allowed mask of push_task?\n\nI guess select_energy_brute_cpu would make sure it does, however I was wondering for the case there\u0027s a small race window between running the check_for_migration and running the stopper where the allowed mask can change.",
+      "revId": "f7c4244f526aec2cea4e8daccd98067cf0d572b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
