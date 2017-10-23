@@ -1603,7 +1603,8 @@ static inline unsigned long cpu_util_freq(int cpu)
 
 #ifdef CONFIG_SCHED_WALT
 	if (!walt_disabled && sysctl_sched_use_walt_cpu_util)
-		util = div64_u64(cpu_rq(cpu)->prev_runnable_sum,
+		util = div64_u64(max(cpu_rq(cpu)->prev_runnable_sum,
+						 cpu_rq(cpu)->curr_runnable_sum),
 				 walt_ravg_window >> SCHED_LOAD_SHIFT);
 #endif
 	return (util >= capacity) ? capacity : util;
