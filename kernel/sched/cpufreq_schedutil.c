@@ -217,6 +217,9 @@ static void sugov_get_util(unsigned long *util, unsigned long *max, u64 time)
 	rt = (rt * max_cap) >> SCHED_CAPACITY_SHIFT;
 
 	*util = boosted_cpu_util(cpu);
+
+	trace_sched_sugov_util(cpu, rt, *util, *util + rt);
+
 	if (likely(use_pelt()))
 		*util = min((*util + rt), max_cap);
 
