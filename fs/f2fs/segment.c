@@ -2096,11 +2096,17 @@ static int get_ssr_segment(struct f2fs_sb_info *sbi, int type)
 	int i, cnt;
 	bool reversed = false;
 
+<<<<<<< HEAD   (9eaaf1 Merge branch 'android-4.9-llvm' into android-4.9)
 	/* need_SSR() already forces to do this */
 	if (v_ops->get_victim(sbi, &segno, BG_GC, type, SSR)) {
 		curseg->next_segno = segno;
 		return 1;
 	}
+=======
+	if (IS_NODESEG(type))
+		return v_ops->get_victim(sbi,
+				&(curseg)->next_segno, BG_GC, type, SSR);
+>>>>>>> BRANCH (4d4a6a Linux 4.9.58)
 
 	/* For node segments, let's do SSR more intensively */
 	if (IS_NODESEG(type)) {
