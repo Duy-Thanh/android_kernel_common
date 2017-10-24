@@ -194,6 +194,7 @@ static int binder_update_page_range(struct binder_alloc *alloc, int allocate,
 	struct vm_area_struct *vma = NULL;
 	struct mm_struct *mm = NULL;
 	bool need_mm = false;
+	size_t num_allocated = 0;
 
 	binder_alloc_debug(BINDER_DEBUG_BUFFER_ALLOC,
 		     "%d: %s pages %pK-%pK\n", alloc->pid,
@@ -282,9 +283,14 @@ static int binder_update_page_range(struct binder_alloc *alloc, int allocate,
 			goto err_vm_insert_page_failed;
 		}
 
+		num_allocated++;
 		trace_binder_alloc_page_end(alloc, index);
 		/* vm_insert_page does not seem to increment the refcount */
 	}
+	alloc->pages_allocated += num_allocated;
+	if (alloc->pages_allocated > alloc->pages_high)
+		alloc->pages_high = alloc->pages_allocated;
+
 	if (mm) {
 		up_write(&mm->mmap_sem);
 		mmput(mm);
@@ -785,6 +791,7 @@ void binder_alloc_deferred_release(struct binder_alloc *alloc)
 				     on_lru ? "on lru" : "active");
 			unmap_kernel_range((unsigned long)page_addr, PAGE_SIZE);
 			__free_page(alloc->pages[i].page_ptr);
+			alloc->pages_allocated--;
 			page_count++;
 		}
 		kfree(alloc->pages);
@@ -854,7 +861,8 @@ void binder_alloc_print_pages(struct seq_file *m,
 			lru++;
 	}
 	mutex_unlock(&alloc->mutex);
-	seq_printf(m, "  pages: %d:%d:%d\n", active, lru, free);
+	seq_printf(m, "  pages: %d:%d:%d:%zu\n", active, lru, free,
+		   alloc->pages_high);
 }
 
 /**
@@ -953,6 +961,7 @@ enum lru_status binder_alloc_free_page(struct list_head *item,
 	unmap_kernel_range(page_addr, PAGE_SIZE);
 	__free_page(page->page_ptr);
 	page->page_ptr = NULL;
+	alloc->pages_allocated--;
 
 	trace_binder_unmap_kernel_end(alloc, index);
 

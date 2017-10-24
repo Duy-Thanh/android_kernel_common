@@ -92,6 +92,8 @@ struct binder_lru_page {
  * @pages:              array of binder_lru_page
  * @buffer_size:        size of address space specified via mmap
  * @pid:                pid for associated binder_proc (invariant after init)
+ * @pages_allocated:    number of pages currently allocated
+ * @pages_high:         high watermark of @pages_allocated
  *
  * Bookkeeping structure for per-proc address space management for binder
  * buffers. It is normally initialized during binder_init() and binder_mmap()
@@ -112,6 +114,8 @@ struct binder_alloc {
 	size_t buffer_size;
 	uint32_t buffer_free;
 	int pid;
+	size_t pages_allocated;
+	size_t pages_high;
 };
 
 #ifdef CONFIG_ANDROID_BINDER_IPC_SELFTEST
