@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f873ee9f_91fe631b",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6489,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-10-24T00:01:47Z",
+      "side": 1,
+      "message": "I am wondering, if cpu_util_energy should actually be cpu_util_wake here for the !walt case.\n\nSay if the task was previously running on the now idle CPU, then the task\u0027s blocked contribution would be part of the cpu_util for pelt. In this case, the task util IMO should be subtracted from the cpu_util before comparing with best_util_energy. Do you agree?",
+      "range": {
+        "startLine": 6489,
+        "startChar": 17,
+        "endLine": 6489,
+        "endChar": 32
+      },
+      "revId": "2cdab756d80ba251b6fc2ca4eecf3bc4c27262b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
