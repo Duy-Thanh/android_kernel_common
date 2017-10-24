@@ -22,6 +22,30 @@
       "revId": "2cdab756d80ba251b6fc2ca4eecf3bc4c27262b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dbdee167_d6fd6e87",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6489,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2017-10-24T04:52:43Z",
+      "side": 1,
+      "message": "I think so. I think for idle CPU case, we still need to use \u0027new_util\u0027 value to find the maximum spare capacity CPU.\n\nIf use \u0027new_util\u0027 value, we also can easily add RT/DL pressure on it: new_util \u003d new_util + util(rt/dl).\n\nI will send one patch set with some total CPU util statistics after taking account RT pressure, my patch heavily refers this Joonwoo\u0027s patch; after reviewing Joonwoo could decide if need to change and commit to gerrit.",
+      "parentUuid": "f873ee9f_91fe631b",
+      "range": {
+        "startLine": 6489,
+        "startChar": 17,
+        "endLine": 6489,
+        "endChar": 32
+      },
+      "revId": "2cdab756d80ba251b6fc2ca4eecf3bc4c27262b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
