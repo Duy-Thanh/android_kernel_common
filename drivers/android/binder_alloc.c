@@ -282,9 +282,13 @@ static int binder_update_page_range(struct binder_alloc *alloc, int allocate,
 			goto err_vm_insert_page_failed;
 		}
 
+		if (index > alloc->pages_high)
+			alloc->pages_high = index;
+
 		trace_binder_alloc_page_end(alloc, index);
 		/* vm_insert_page does not seem to increment the refcount */
 	}
+
 	if (mm) {
 		up_write(&mm->mmap_sem);
 		mmput(mm);
@@ -854,7 +858,8 @@ void binder_alloc_print_pages(struct seq_file *m,
 			lru++;
 	}
 	mutex_unlock(&alloc->mutex);
-	seq_printf(m, "  pages: %d:%d:%d\n", active, lru, free);
+	seq_printf(m, "  pages: %d:%d:%zu:%d\n", active, lru, alloc->pages_high,
+		   free);
 }
 
 /**
