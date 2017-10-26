@@ -31,6 +31,7 @@ enum {
 	Opt_noconfine,
 	Opt_gid_derivation,
 	Opt_default_normal,
+	Opt_ns_mapping,
 
 	/* From sdcardfs */
 	Opt_fsuid,
@@ -56,6 +57,7 @@ static match_table_t esdfs_tokens = {
 	{Opt_noconfine, "noconfine"},
 	{Opt_gid_derivation, "derive_gid"},
 	{Opt_default_normal, "default_normal"},
+	{Opt_ns_mapping, "mapping=%s"},
 	/* compatibility with sdcardfs options */
 	{Opt_fsuid, "fsuid=%u"},
 	{Opt_fsgid, "fsgid=%u"},
@@ -120,6 +122,45 @@ static int parse_perms(struct esdfs_perms *perms, char *args)
 	if (ret)
 		return ret;
 
+	return 0;
+}
+
+/*
+ * Mapping is of the form
+ * start:start_lower:count/start2:start_lower2:count2 etc
+ * with values from uid/gid mapping file
+ */
+static int parse_mapping(struct user_namespace *ns, char *args)
+{
+	char *input = args;
+	char *extent;
+	char *value;
+	int ret;
+	int i = 0;
+
+	while ((extent = strsep(&input, "/")) != NULL
+			&& i < UID_GID_MAP_MAX_EXTENTS) {
+		value = strsep(&extent, ":");
+		ret = kstrtou32(value, 0, &ns->uid_map.extent[i].first);
+		if (ret)
+			return ret;
+
+		value = strsep(&extent, ":");
+		ret = kstrtou32(value, 0, &ns->uid_map.extent[i].lower_first);
+		if (ret)
+			return ret;
+
+		value = strsep(&extent, ":");
+		ret = kstrtou32(value, 0, &ns->uid_map.extent[i].count);
+		if (ret)
+			return ret;
+		i++;
+
+	}
+	ns->uid_map.nr_extents = i;
+
+	/* uid and gid are assumed to be mapped the same */
+	memcpy(&ns->gid_map, &ns->uid_map, sizeof(struct uid_gid_map));
 	return 0;
 }
 
@@ -248,6 +289,18 @@ static int parse_options(struct super_block *sb, char *options)
 			break;
 		case Opt_default_normal:
 			set_opt(sbi, DEFAULT_NORMAL);
+		case Opt_ns_mapping:
+			if (args->from) {
+				int ret;
+				char *map = match_strdup(args);
+
+				ret = parse_mapping(&sbi->base_ns, map);
+				kfree(map);
+
+				if (ret)
+					return -EINVAL;
+			} else
+				return -EINVAL;
 			break;
 		default:
 			esdfs_msg(sb, KERN_ERR,
