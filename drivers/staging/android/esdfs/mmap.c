@@ -23,7 +23,7 @@ static int esdfs_fault(struct vm_area_struct *vma, struct vm_fault *vmf)
 
 	file = (struct file *)vma->vm_private_data;
 	sbi = ESDFS_SB(file->f_path.dentry->d_sb);
-	creds = esdfs_override_creds(sbi, NULL);
+	creds = esdfs_override_creds(sbi, ESDFS_I(file->f_inode), NULL);
 	if (!creds)
 		return -ENOMEM;
 
@@ -59,7 +59,7 @@ static int esdfs_page_mkwrite(struct vm_area_struct *vma,
 
 	file = (struct file *)vma->vm_private_data;
 	sbi = ESDFS_SB(file->f_path.dentry->d_sb);
-	creds = esdfs_override_creds(sbi, NULL);
+	creds = esdfs_override_creds(sbi, ESDFS_I(file->f_inode), NULL);
 	if (!creds)
 		return -ENOMEM;
 
