@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be3d00a7_1beed228",
+        "filename": "drivers/pkglist/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2017-10-27T23:00:52Z",
+      "side": 1,
+      "message": "add a blank line?",
+      "revId": "531ec3d88efdea1a868fe9c8da3a145d676ec60e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d935ef44_1194c998",
+        "filename": "drivers/pkglist/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2017-10-27T23:00:52Z",
+      "side": 1,
+      "message": "default on?",
+      "range": {
+        "startLine": 14,
+        "startChar": 7,
+        "endLine": 14,
+        "endChar": 27
+      },
+      "revId": "531ec3d88efdea1a868fe9c8da3a145d676ec60e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5fd48a6c_db8524e5",
+        "filename": "drivers/pkglist/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2017-10-27T23:00:52Z",
+      "side": 1,
+      "message": "use configfs for ....",
+      "range": {
+        "startLine": 15,
+        "startChar": 7,
+        "endLine": 15,
+        "endChar": 66
+      },
+      "revId": "531ec3d88efdea1a868fe9c8da3a145d676ec60e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7231ddf7_9319f299",
+        "filename": "drivers/pkglist/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2017-10-27T23:00:52Z",
+      "side": 1,
+      "message": "miss this file?",
+      "range": {
+        "startLine": 3,
+        "startChar": 35,
+        "endLine": 3,
+        "endChar": 47
+      },
+      "revId": "531ec3d88efdea1a868fe9c8da3a145d676ec60e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
