@@ -430,3 +430,13 @@ static notrace int __cvdso_clock_getres(clockid_t clock_id,
 
 	return 0;
 }
+
+static notrace time_t __cvdso_time(time_t *t)
+{
+	const struct vdso_data *vd = __arch_get_vdso_data();
+	time_t result = READ_ONCE(vd->xtime_coarse_sec);
+
+	if (t)
+		*t = result;
+	return result;
+}

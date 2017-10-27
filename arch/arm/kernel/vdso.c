@@ -173,6 +173,7 @@ static void __init patch_vdso(void *ehdr)
 	if (!cntvct_ok) {
 		vdso_nullpatch_one(&einfo, "__vdso_gettimeofday");
 		vdso_nullpatch_one(&einfo, "__vdso_clock_gettime");
+		/* do not zero out __vdso_time, no cntvct_ok dependency */
 	}
 }
 
