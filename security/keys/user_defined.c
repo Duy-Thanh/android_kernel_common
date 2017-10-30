@@ -106,8 +106,13 @@ int user_update(struct key *key, struct key_preparsed_payload *prep)
 
 	/* attach the new data, displacing the old */
 	key->expiry = prep->expiry;
+<<<<<<< HEAD   (3861f0 ANDROID: sched/walt: Fix divide by zero error in cpufreq not)
 	if (!test_bit(KEY_FLAG_NEGATIVE, &key->flags))
 		zap = dereference_key_locked(key);
+=======
+	if (key_is_positive(key))
+		zap = rcu_dereference_key(key);
+>>>>>>> BRANCH (d78506 Linux 4.9.59)
 	rcu_assign_keypointer(key, prep->payload.data[0]);
 	prep->payload.data[0] = NULL;
 
@@ -154,7 +159,7 @@ EXPORT_SYMBOL_GPL(user_destroy);
 void user_describe(const struct key *key, struct seq_file *m)
 {
 	seq_puts(m, key->description);
-	if (key_is_instantiated(key))
+	if (key_is_positive(key))
 		seq_printf(m, ": %u", key->datalen);
 }
 

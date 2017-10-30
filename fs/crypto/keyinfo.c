@@ -108,7 +108,16 @@ static int validate_user_key(struct fscrypt_info *crypt_info,
 		res = -ENOKEY;
 		goto out;
 	}
+<<<<<<< HEAD   (3861f0 ANDROID: sched/walt: Fix divide by zero error in cpufreq not)
 	ukp = user_key_payload_locked(keyring_key);
+=======
+	ukp = user_key_payload(keyring_key);
+	if (!ukp) {
+		/* key was revoked before we acquired its semaphore */
+		res = -EKEYREVOKED;
+		goto out;
+	}
+>>>>>>> BRANCH (d78506 Linux 4.9.59)
 	if (ukp->datalen != sizeof(struct fscrypt_key)) {
 		res = -EINVAL;
 		goto out;

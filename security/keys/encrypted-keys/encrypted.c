@@ -314,7 +314,18 @@ static struct key *request_user_key(const char *master_desc, const u8 **master_k
 		goto error;
 
 	down_read(&ukey->sem);
+<<<<<<< HEAD   (3861f0 ANDROID: sched/walt: Fix divide by zero error in cpufreq not)
 	upayload = user_key_payload_locked(ukey);
+=======
+	upayload = user_key_payload(ukey);
+	if (!upayload) {
+		/* key was revoked before we acquired its semaphore */
+		up_read(&ukey->sem);
+		key_put(ukey);
+		ukey = ERR_PTR(-EKEYREVOKED);
+		goto error;
+	}
+>>>>>>> BRANCH (d78506 Linux 4.9.59)
 	*master_key = upayload->data;
 	*master_keylen = upayload->datalen;
 error:
@@ -867,7 +878,7 @@ static int encrypted_update(struct key *key, struct key_preparsed_payload *prep)
 	size_t datalen = prep->datalen;
 	int ret = 0;
 
-	if (test_bit(KEY_FLAG_NEGATIVE, &key->flags))
+	if (key_is_negative(key))
 		return -ENOKEY;
 	if (datalen <= 0 || datalen > 32767 || !prep->data)
 		return -EINVAL;

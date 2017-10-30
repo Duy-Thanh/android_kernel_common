@@ -329,7 +329,18 @@ static void fscache_objlist_config(struct fscache_objlist_data *data)
 	config = 0;
 	rcu_read_lock();
 
+<<<<<<< HEAD   (3861f0 ANDROID: sched/walt: Fix divide by zero error in cpufreq not)
 	confkey = user_key_payload_rcu(key);
+=======
+	confkey = user_key_payload(key);
+	if (!confkey) {
+		/* key was revoked */
+		rcu_read_unlock();
+		key_put(key);
+		goto no_config;
+	}
+
+>>>>>>> BRANCH (d78506 Linux 4.9.59)
 	buf = confkey->data;
 
 	for (len = confkey->datalen - 1; len >= 0; len--) {
