@@ -1866,7 +1866,26 @@ static int f2fs_ioc_set_encryption_policy(struct file *filp, unsigned long arg)
 
 	f2fs_update_time(F2FS_I_SB(inode), REQ_TIME);
 
+<<<<<<< HEAD   (8f0127 BACKPORT: arm64: relocatable: suppress R_AARCH64_ABS64 reloc)
 	return fscrypt_ioctl_set_policy(filp, (const void __user *)arg);
+=======
+	err = mnt_want_write_file(filp);
+	if (err)
+		return err;
+
+	mutex_lock(&inode->i_mutex);
+
+	err = f2fs_process_policy(&policy, inode);
+
+	mutex_unlock(&inode->i_mutex);
+
+	mnt_drop_write_file(filp);
+
+	return err;
+#else
+	return -EOPNOTSUPP;
+#endif
+>>>>>>> BRANCH (9b3669 Linux 4.4.95)
 }
 
 static int f2fs_ioc_get_encryption_policy(struct file *filp, unsigned long arg)
