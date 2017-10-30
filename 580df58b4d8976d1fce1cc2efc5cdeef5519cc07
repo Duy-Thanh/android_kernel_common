@@ -71,6 +71,29 @@
     },
     {
       "key": {
+        "uuid": "0a468df8_87f058f5",
+        "filename": "drivers/pkglist/pkglist.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1197513
+      },
+      "writtenOn": "2017-10-30T09:38:16Z",
+      "side": 1,
+      "message": "I think package_details and hashtable_entry describe the same thing and could have the same lifetime.\nHow about combined package_details with hashtable_entry, use configfs hiarchary / container_of / hashtable to manage the same object.\n\nMonths ago I implemented a new sdcardfs_packagelist_entry in our sdcardfs implmentation as follows:\n\nstruct sdcardfs_packagelist_entry {\n\tunion {\n\t\tstruct config_item item;\n\t\tstruct rcu_head rcu;\n\t};\n\tstruct hlist_node hlist;\n\tchar *app_name;\n\tappid_t appid;\n};\n\nstatic ssize_t\nsdcardfs_configfs_pkgdir_appid_show(\n\tstruct config_item *item, char *page\n) {\n\tstruct sdcardfs_packagelist_entry *pkg \u003d container_of(\n\t\titem, struct sdcardfs_packagelist_entry, item);\n\n\treturn scnprintf(page, PAGE_SIZE, \"%d\\n\", (int)pkg-\u003eappid);\n}\n\nstatic ssize_t sdcardfs_configfs_pkgdir_appid_store(\n\tstruct config_item *item,\n\tconst char *page, size_t count\n) {\n\tunsigned int tmp;\n\tint ret;\n\n\tstruct sdcardfs_packagelist_entry *pkg \u003d container_of(\n\t\titem, struct sdcardfs_packagelist_entry, item);\n\n\tret \u003d kstrtouint(page, 10, \u0026tmp);\n\tif (ret)\n\t\treturn ret;\n\n\tpkg-\u003eappid \u003d tmp;\n\treturn count;\n}\n\n\n/* make items */\nstatic\nstruct config_item *\nsdcardfs_configfs_rootdir_group_make_item(\n\tstruct config_group *group,\n\tconst char *name\n) {\n\tstruct sdcardfs_packagelist_entry *pkg;\n\n\tpkg \u003d sdcardfs_packagelist_entry_alloc();\n\tif (pkg \u003d\u003d NULL)\n\t\treturn NULL;\n\tconfig_item_init_type_name(\u0026pkg-\u003eitem,\n\t\tname, \u0026sdcardfs_configfs_pkgdir_type);\n\tsdcardfs_packagelist_entry_register(pkg, name, 0);\n\treturn \u0026pkg-\u003eitem;\n}\n\n...\n\nstatic DEFINE_HASHTABLE(pkgl_hashtable, 8);\n\n/* BKDR Hash Function */\nstatic u32 str_hash(const char *str)\n{\n\tconst u32 seed \u003d 131;\t/* 31 131 1313 13131 131313 etc.. */\n\tu32 hash \u003d 0;\n\n\twhile (*str !\u003d \u0027\\0\u0027)\n\t\thash \u003d hash * seed + tolower(*str++);\n\treturn hash;\n}\n\nappid_t get_appid(const char *app_name)\n{\n#ifdef SDCARDFS_DEBUG_APPID\n\treturn SDCARDFS_DEBUG_APPID;\n#else\n\tappid_t retid \u003d 0;\n\tstruct sdcardfs_packagelist_entry *iter;\n\tu32 hashval \u003d str_hash(app_name);\n\n\trcu_read_lock();\n\thash_for_each_possible_rcu(pkgl_hashtable, iter, hlist, hashval) {\t/*lint !e666*/\n\t\tif (!strcasecmp(iter-\u003eapp_name, app_name)) {\n\t\t\tretid \u003d iter-\u003eappid;\n\t\t\tbreak;\n\t\t}\n\t}\n\trcu_read_unlock();\n\treturn retid;\n#endif\n}\n\nstruct sdcardfs_packagelist_entry *\nsdcardfs_packagelist_entry_alloc(void)\n{\n\tstruct sdcardfs_packagelist_entry *pkg;\n\n\tpkg \u003d kzalloc(\n\t\tsizeof(struct sdcardfs_packagelist_entry),\n\t\tGFP_KERNEL);\n\treturn pkg;\n}\n\nvoid sdcardfs_packagelist_entry_register(\n\tstruct sdcardfs_packagelist_entry *pkg,\n\tconst char *app_name, appid_t appid\n) {\n\tpkg-\u003eapp_name \u003d kstrdup(app_name, GFP_KERNEL);\n\tpkg-\u003eappid \u003d appid;\n\thash_add_rcu(pkgl_hashtable, \u0026pkg-\u003ehlist,\n\t\tstr_hash(app_name));\t/*lint !e666*/\n}\n\n...\n\nthat is much simple and clean.",
+      "range": {
+        "startLine": 417,
+        "startChar": 7,
+        "endLine": 417,
+        "endChar": 22
+      },
+      "revId": "580df58b4d8976d1fce1cc2efc5cdeef5519cc07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e073cb39_72960ce4",
         "filename": "drivers/pkglist/pkglist.c",
         "patchSetId": 3
