@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a994013_a036e46d",
+        "filename": "fs/hwsdcardfs/configfs.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-01T11:47:50Z",
+      "side": 1,
+      "message": "nit, kernel code is 8 tab stops wide...",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 36
+      },
+      "revId": "1014824af5e374caaf3f2e267429bab1013696d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a778d6d6_2f68ce66",
+        "filename": "fs/hwsdcardfs/configfs.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-01T11:47:50Z",
+      "side": 1,
+      "message": "checkpatch.pl should have caught stuff like this, have you run it?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 3
+      },
+      "revId": "1014824af5e374caaf3f2e267429bab1013696d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
