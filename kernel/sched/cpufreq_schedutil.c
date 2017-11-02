@@ -134,12 +134,16 @@ static bool sugov_up_down_rate_limit(struct sugov_policy *sg_policy, u64 time,
 	delta_ns = time - sg_policy->last_freq_update_time;
 
 	if (next_freq > sg_policy->next_freq &&
-	    delta_ns < sg_policy->up_rate_delay_ns)
+	    delta_ns < sg_policy->up_rate_delay_ns) {
+			trace_printk("up_freq rate limit: delta_ns=%lld delay=%lld", delta_ns, sg_policy->up_rate_delay_ns);
 			return true;
+	}
 
 	if (next_freq < sg_policy->next_freq &&
-	    delta_ns < sg_policy->down_rate_delay_ns)
+	    delta_ns < sg_policy->down_rate_delay_ns){
+			trace_printk("down_freq rate limit: delta_ns=%lld delay=%lld", delta_ns, sg_policy->down_rate_delay_ns);
 			return true;
+	}
 
 	return false;
 }
@@ -152,8 +156,10 @@ static void sugov_update_commit(struct sugov_policy *sg_policy, u64 time,
 	if (sg_policy->next_freq == next_freq)
 		return;
 
-	if (sugov_up_down_rate_limit(sg_policy, time, next_freq))
+	if (sugov_up_down_rate_limit(sg_policy, time, next_freq)) {
+		trace_cpu_frequency(0, smp_processor_id());
 		return;
+	}
 
 	sg_policy->next_freq = next_freq;
 	sg_policy->last_freq_update_time = time;
@@ -219,6 +225,8 @@ static void sugov_get_util(unsigned long *util, unsigned long *max, int cpu)
 	*util = boosted_cpu_util(cpu) + rt;
 	*util = min(*util, max_cap);
 	*max = max_cap;
+
+	trace_printk("sugov_get_util cpu=%d util=%lu max=%lu", cpu, *util, *max);
 }
 
 static void sugov_set_iowait_boost(struct sugov_cpu *sg_cpu, u64 time,
@@ -297,6 +305,13 @@ static void sugov_update_single(struct update_util_data *hook, u64 time,
 	unsigned long util, max;
 	unsigned int next_f;
 	bool busy;
+
+	{
+		char buf[256];
+		int n;
+		n = scnprintf(buf, 256, "%*pbl", cpumask_pr_args(sg_policy->policy->cpus));
+		trace_printk("sg_policy update (single) covers CPUs %s", buf);
+	}
 
 	sugov_set_iowait_boost(sg_cpu, time, flags);
 	sg_cpu->last_update = time;
@@ -734,6 +749,7 @@ static int sugov_start(struct cpufreq_policy *policy)
 		sg_cpu->sg_policy = sg_policy;
 		sg_cpu->flags = SCHED_CPUFREQ_DL;
 		sg_cpu->iowait_boost_max = policy->cpuinfo.max_freq;
+		trace_printk("set sugov policy for cpu%d : max_freq=%u", cpu, policy->cpuinfo.max_freq);
 	}
 
 	for_each_cpu(cpu, policy->cpus) {
