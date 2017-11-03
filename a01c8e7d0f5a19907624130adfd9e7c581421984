@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8972511_cc28b0f7",
+        "filename": "include/uapi/linux/time.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-11-03T21:56:22Z",
+      "side": 1,
+      "message": "NS_PER_SEC in android code tree should be replaced with this one ...",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 32
+      },
+      "revId": "a01c8e7d0f5a19907624130adfd9e7c581421984",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
