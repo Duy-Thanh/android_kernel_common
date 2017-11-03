@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5242b89d_1231872b",
+        "filename": "include/uapi/linux/jiffies.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-11-03T22:06:45Z",
+      "side": 1,
+      "message": "This is the _only_ one I needed from jiffies, as a dependency to the definition of LOW_RES_NSEC. The rest is here just to make the proposal.\n\nWhen I open coded this in vdso, got rejected upstream.\n\nCan not include linux/jiffies.h to pick it up because it goes nuts with aarch64 code.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 42
+      },
+      "revId": "82cf2b742011ad7648ce80077696f2d48d679fc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "71fa5d72_e0dea7bf",
+        "filename": "include/uapi/linux/jiffies.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-11-03T22:06:45Z",
+      "side": 1,
+      "message": "This is why I need to move the time ratios to uapi/linux/time.h (?) because we can not include linux/time64.h because it goes nuts and picks up aarch64 includes that can not compile with aarch32 compiler.",
+      "range": {
+        "startLine": 21,
+        "startChar": 20,
+        "endLine": 21,
+        "endChar": 32
+      },
+      "revId": "82cf2b742011ad7648ce80077696f2d48d679fc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
