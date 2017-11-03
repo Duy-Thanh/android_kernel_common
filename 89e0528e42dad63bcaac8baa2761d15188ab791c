@@ -2,6 +2,190 @@
   "comments": [
     {
       "key": {
+        "uuid": "c2475843_cfecd96f",
+        "filename": "drivers/staging/android/pkglist.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-03T10:22:32Z",
+      "side": 1,
+      "message": "why is this an atomic variable?",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f65c3be3_4c16f7f0",
+        "filename": "drivers/staging/android/pkglist.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-03T10:22:32Z",
+      "side": 1,
+      "message": "is this really needed?  Now I have to look up what this odd str_case_eq() function does, !strcasecmp() is obvious what is happening.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 28
+      },
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2bf793b_529f5a97",
+        "filename": "drivers/staging/android/pkglist.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-03T10:22:32Z",
+      "side": 1,
+      "message": "same here, don\u0027t add odd named inline functions for common code patterns for no good reason.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 34
+      },
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b492204a_532936b1",
+        "filename": "drivers/staging/android/pkglist.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-03T10:22:32Z",
+      "side": 1,
+      "message": "kuid_t vs uid_t?  Any specific reason?",
+      "range": {
+        "startLine": 39,
+        "startChar": 47,
+        "endLine": 39,
+        "endChar": 52
+      },
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e11c5d34_8439af2b",
+        "filename": "drivers/staging/android/pkglist.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-03T10:22:32Z",
+      "side": 1,
+      "message": "same kuid_t question here.",
+      "range": {
+        "startLine": 40,
+        "startChar": 50,
+        "endLine": 40,
+        "endChar": 55
+      },
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c28423e_a4c2b277",
+        "filename": "drivers/staging/android/pkglist/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-03T10:22:32Z",
+      "side": 1,
+      "message": "I do not understand what this means.  Can you please expand on this to explain it better?",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 37
+      },
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea5a03d6_62012912",
+        "filename": "drivers/staging/android/pkglist/pkglist.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-03T10:22:32Z",
+      "side": 1,
+      "message": "why is this needed to be stored if it is always equal to strlen(q-\u003ename)?",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 7
+      },
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abe06f0d_0b5d5549",
+        "filename": "drivers/staging/android/pkglist/pkglist.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-03T10:22:32Z",
+      "side": 1,
+      "message": "is gid_t of 0 a valid gid_t?",
+      "range": {
+        "startLine": 95,
+        "startChar": 8,
+        "endLine": 95,
+        "endChar": 9
+      },
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "23b31503_00254fdf",
         "filename": "drivers/staging/android/pkglist/pkglist.c",
         "patchSetId": 5
@@ -22,6 +206,40 @@
       "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9a02180_147aa72f",
+        "filename": "drivers/staging/android/pkglist/pkglist.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-03T10:22:32Z",
+      "side": 1,
+      "message": "no MODULE_INFO() or MODULE_LICENSE()?  Actually both could go in the \u0027pkg.c\u0027 file.",
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdd4d5cb_ff589dae",
+        "filename": "drivers/staging/android/pkglist/pkglist_none.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-03T10:22:32Z",
+      "side": 1,
+      "message": "No MODULE_INFO() or MODULE_LICENSE()?  MODULE_LICENSE is required for the build system...",
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
