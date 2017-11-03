@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23b31503_00254fdf",
+        "filename": "drivers/staging/android/pkglist/pkglist.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1133869
+      },
+      "writtenOn": "2017-11-03T03:56:06Z",
+      "side": 1,
+      "message": "I think packages.list file is not useful since\n    1) we have configfs package dir / appid / ... hierarchy and we can use opendir/readdir/closedir to traverse, instead.\n    2) configfs only has 4k space. if packages.list is larger than 4k, truncation will make userprograms confused.\n\nThanks.",
+      "range": {
+        "startLine": 730,
+        "startChar": 0,
+        "endLine": 730,
+        "endChar": 60
+      },
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
