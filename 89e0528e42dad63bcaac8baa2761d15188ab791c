@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cef51713_48910848",
+        "filename": "drivers/staging/android/pkglist.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-11-04T02:36:03Z",
+      "side": 1,
+      "message": "We\u0027re using an RCU approach to update entries, and need to update this atomically.",
+      "parentUuid": "c2475843_cfecd96f",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f65c3be3_4c16f7f0",
         "filename": "drivers/staging/android/pkglist.h",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2017-11-03T10:22:32Z",
       "side": 1,
       "message": "is this really needed?  Now I have to look up what this odd str_case_eq() function does, !strcasecmp() is obvious what is happening.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 28
+      },
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30e6310d_9915376b",
+        "filename": "drivers/staging/android/pkglist.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-11-04T02:36:03Z",
+      "side": 1,
+      "message": "I switched the case insensitive string comparisons here in case we ever switch to something more fancy for better language coverage, although that\u0027s probably unlikely for compatibility reasons.",
+      "parentUuid": "f65c3be3_4c16f7f0",
       "range": {
         "startLine": 17,
         "startChar": 0,
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "db71889f_618d67df",
+        "filename": "drivers/staging/android/pkglist.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-11-04T02:36:03Z",
+      "side": 1,
+      "message": "This is referring to the Android user. I should probably just make it an unsigned int to avoid confusion.",
+      "parentUuid": "b492204a_532936b1",
+      "range": {
+        "startLine": 39,
+        "startChar": 47,
+        "endLine": 39,
+        "endChar": 52
+      },
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e11c5d34_8439af2b",
         "filename": "drivers/staging/android/pkglist.h",
         "patchSetId": 5
@@ -140,6 +212,30 @@
     },
     {
       "key": {
+        "uuid": "8d023056_74ba4658",
+        "filename": "drivers/staging/android/pkglist/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-11-04T02:36:03Z",
+      "side": 1,
+      "message": "Yeah. I\u0027ll write up a bit more documentation here in the next revision.",
+      "parentUuid": "1c28423e_a4c2b277",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 37
+      },
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ea5a03d6_62012912",
         "filename": "drivers/staging/android/pkglist/pkglist.c",
         "patchSetId": 5
@@ -151,6 +247,30 @@
       "writtenOn": "2017-11-03T10:22:32Z",
       "side": 1,
       "message": "why is this needed to be stored if it is always equal to strlen(q-\u003ename)?",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 7
+      },
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08831b24_bc30b972",
+        "filename": "drivers/staging/android/pkglist/pkglist.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-11-04T02:36:03Z",
+      "side": 1,
+      "message": "It doesn\u0027t change, and saves recalculating the length.\nPlus knowing the length up front makes comparisons slightly faster.",
+      "parentUuid": "ea5a03d6_62012912",
       "range": {
         "startLine": 42,
         "startChar": 4,
@@ -186,6 +306,30 @@
     },
     {
       "key": {
+        "uuid": "c4e42bb0_8168821b",
+        "filename": "drivers/staging/android/pkglist/pkglist.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-11-04T02:36:03Z",
+      "side": 1,
+      "message": "I suppose in this particular case, it makes more sense to return INVALID_GID. When it\u0027s used, if the value wasn\u0027t found in the map, it uses a default value.",
+      "parentUuid": "abe06f0d_0b5d5549",
+      "range": {
+        "startLine": 95,
+        "startChar": 8,
+        "endLine": 95,
+        "endChar": 9
+      },
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "23b31503_00254fdf",
         "filename": "drivers/staging/android/pkglist/pkglist.c",
         "patchSetId": 5
@@ -209,6 +353,30 @@
     },
     {
       "key": {
+        "uuid": "620900bb_7a396223",
+        "filename": "drivers/staging/android/pkglist/pkglist.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-11-04T02:36:03Z",
+      "side": 1,
+      "message": "I\u0027ve just been using it to see a quick listing of things. It\u0027s handy at a glance while debugging. But yes, it\u0027s not terribly useful otherwise.",
+      "parentUuid": "23b31503_00254fdf",
+      "range": {
+        "startLine": 730,
+        "startChar": 0,
+        "endLine": 730,
+        "endChar": 60
+      },
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9a02180_147aa72f",
         "filename": "drivers/staging/android/pkglist/pkglist.c",
         "patchSetId": 5
@@ -220,6 +388,24 @@
       "writtenOn": "2017-11-03T10:22:32Z",
       "side": 1,
       "message": "no MODULE_INFO() or MODULE_LICENSE()?  Actually both could go in the \u0027pkg.c\u0027 file.",
+      "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bdea741_a3881bd6",
+        "filename": "drivers/staging/android/pkglist/pkglist.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-11-04T02:36:03Z",
+      "side": 1,
+      "message": "I didn\u0027t see a reasonable way to put them in both without just having a giant #ifdef between them.",
+      "parentUuid": "d9a02180_147aa72f",
       "revId": "89e0528e42dad63bcaac8baa2761d15188ab791c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
