@@ -5513,6 +5513,24 @@ static unsigned long __cpu_norm_util(unsigned long util, unsigned long capacity)
  * energy_diff - supports the computation of the estimated energy impact in
  * moving a "task"'s "util_delta" between different CPU candidates.
  */
+#define DEBUG_EENV_DECISIONS 1
+
+#ifdef DEBUG_EENV_DECISIONS
+/* max of 8 levels of sched groups traversed */
+#define EAS_EENV_DEBUG_LEVELS 8
+
+struct _eenv_debug {
+	unsigned long cap;
+	unsigned long norm_util;
+	unsigned long cap_energy;
+	unsigned long idle_energy;
+	unsigned long this_energy;
+	unsigned long this_busy_energy;
+	unsigned long this_idle_energy;
+	unsigned long cpu_util[NR_CPUS];
+	cpumask_t group_cpumask;
+};
+#endif
 struct energy_env {
 	/* Utilization to move */
 	struct task_struct	*p;
@@ -5546,7 +5564,10 @@ struct energy_env {
 
 		/* Estimated energy variation wrt EAS_CPU_PRV */
 		long nrg_delta;
-
+#ifdef DEBUG_EENV_DECISIONS
+		struct _eenv_debug debug[EAS_EENV_DEBUG_LEVELS];
+		int debug_idx;
+#endif /* DEBUG_EENV_DECISIONS */
 	} cpu[EAS_CPU_CNT];
 
 	/*
@@ -5613,10 +5634,8 @@ long group_norm_util(struct energy_env *eenv, int cpu_idx)
 		 */
 		if (unlikely(cpu == eenv->cpu[cpu_idx].cpu_id))
 			util += eenv->util_delta;
-
 		util_sum += __cpu_norm_util(util, capacity);
 	}
-
 	if (util_sum > SCHED_CAPACITY_SCALE)
 		return SCHED_CAPACITY_SCALE;
 	return util_sum;
@@ -5710,6 +5729,48 @@ end:
 	return state;
 }
 
+#ifdef DEBUG_EENV_DECISIONS
+static void store_energy_calc_debug_info(struct energy_env *eenv, int cpu_idx, int cap_idx, int idle_idx)
+{
+	int debug_idx = eenv->cpu[cpu_idx].debug_idx;
+
+	if (debug_idx < sizeof(eenv->cpu[cpu_idx].debug)) {
+		unsigned long sg_util, busy_energy, idle_energy;
+		int cpu;
+
+		sg_util = group_norm_util(eenv, cpu_idx);
+		busy_energy   = eenv->sg->sge->cap_states[cap_idx].power;
+		busy_energy  *= sg_util;
+		idle_energy   = SCHED_CAPACITY_SCALE - sg_util;
+		idle_energy  *= eenv->sg->sge->idle_states[idle_idx].power;
+
+		eenv->cpu[cpu_idx].debug[debug_idx].cap =
+				eenv->sg->sge->cap_states[cap_idx].cap;
+		eenv->cpu[cpu_idx].debug[debug_idx].norm_util =
+				sg_util;
+		eenv->cpu[cpu_idx].debug[debug_idx].cap_energy =
+				eenv->sg->sge->cap_states[cap_idx].power;
+		eenv->cpu[cpu_idx].debug[debug_idx].idle_energy =
+				eenv->sg->sge->idle_states[idle_idx].power;
+		eenv->cpu[cpu_idx].debug[debug_idx].this_energy =
+				busy_energy + idle_energy;
+		eenv->cpu[cpu_idx].debug[debug_idx].this_busy_energy =
+				busy_energy;
+		eenv->cpu[cpu_idx].debug[debug_idx].this_idle_energy =
+				idle_energy;
+		cpumask_copy(&eenv->cpu[cpu_idx].debug[debug_idx].group_cpumask,
+				sched_group_span(eenv->sg));
+
+		for_each_cpu(cpu, &eenv->cpu[cpu_idx].debug[debug_idx].group_cpumask)
+			eenv->cpu[cpu_idx].debug[debug_idx].cpu_util[cpu] = cpu_util(cpu);
+
+		eenv->cpu[cpu_idx].debug_idx = debug_idx+1;
+	}
+}
+#else
+#define store_energy_calc_debug_info(a,b,c,d) {}
+#endif /* DEBUG_EENV_DECISIONS */
+
 /*
  * calc_sg_energy: compute energy for the eenv's SG (i.e. eenv->sg).
  *
@@ -5751,6 +5812,8 @@ static void calc_sg_energy(struct energy_env *eenv)
 
 		total_energy = busy_energy + idle_energy;
 		eenv->cpu[cpu_idx].energy += total_energy;
+
+		store_energy_calc_debug_info(eenv, cpu_idx, cap_idx, idle_idx);
 	}
 }
 
@@ -5825,6 +5888,59 @@ static inline bool cpu_in_sg(struct sched_group *sg, int cpu)
 	return cpu != -1 && cpumask_test_cpu(cpu, sched_group_span(sg));
 }
 
+#ifdef DEBUG_EENV_DECISIONS
+static void dump_eenv_debug(struct energy_env *eenv)
+{
+	int cpu_idx, grp_idx;
+	char cpu_utils[(NR_CPUS*12)+10]="cpu_util: ";
+	char cpulist[64];
+
+	trace_printk("eenv scenario: task=%p %s task_util=%lu prev_cpu=%d",
+			eenv->p, eenv->p->comm, eenv->util_delta, eenv->cpu[EAS_CPU_PRV].cpu_id);
+
+	for (cpu_idx=EAS_CPU_PRV; cpu_idx < eenv->max_cpu_count; cpu_idx++) {
+		if (eenv->cpu[cpu_idx].cpu_id == -1)
+			continue;
+		trace_printk("---Scenario %d: Place task on cpu %d energy=%lu (%d debug logs)",
+				cpu_idx+1, eenv->cpu[cpu_idx].cpu_id,
+				eenv->cpu[cpu_idx].energy >> SCHED_CAPACITY_SHIFT,
+				eenv->cpu[cpu_idx].debug_idx);
+		for (grp_idx = 0; grp_idx < eenv->cpu[cpu_idx].debug_idx; grp_idx++) {
+			struct _eenv_debug *debug;
+			int cpu, written=0;
+
+			debug = &(eenv->cpu[cpu_idx].debug[grp_idx]);
+			cpu = scnprintf(cpulist, sizeof(cpulist), "%*pbl", cpumask_pr_args(&debug->group_cpumask));
+
+			cpu_utils[0] = 0;
+			/* print out the relevant cpu_util */
+			for_each_cpu(cpu, &(debug->group_cpumask)) {
+				char tmp[64];
+				if (written > sizeof(cpu_utils)-10) {
+					cpu_utils[written]=0;
+					break;
+				}
+				written += snprintf(tmp, sizeof(tmp), "cpu%d(%lu) ", cpu, debug->cpu_util[cpu]);
+				strcat(cpu_utils, tmp);
+			}
+			/* trace the data */
+			trace_printk("  | %s : cap=%lu nutil=%lu, cap_nrg=%lu, idle_nrg=%lu energy=%lu busy_energy=%lu idle_energy=%lu %s",
+					cpulist, debug->cap, debug->norm_util,
+					debug->cap_energy, debug->idle_energy,
+					debug->this_energy >> SCHED_CAPACITY_SHIFT,
+					debug->this_busy_energy >> SCHED_CAPACITY_SHIFT,
+					debug->this_idle_energy >> SCHED_CAPACITY_SHIFT,
+					cpu_utils);
+
+		}
+		trace_printk("---");
+	}
+	trace_printk("----- done");
+	return;
+}
+#else
+#define dump_eenv_debug(a) {}
+#endif /* DEBUG_EENV_DECISIONS */
 /*
  * select_energy_cpu_idx(): estimate the energy impact of changing the
  * utilization distribution.
@@ -5869,8 +5985,10 @@ static inline int select_energy_cpu_idx(struct energy_env *eenv)
 			continue;
 
 		eenv->sg_top = sg;
-		if (compute_energy(eenv) == -EINVAL)
+		if (compute_energy(eenv) == -EINVAL) {
+			trace_printk("compute_energy returned -EINVAL");
 			return EAS_CPU_PRV;
+		}
 	} while (sg = sg->next, sg != sd->groups);
 	/* remember - eenv energy values are unscaled */
 
@@ -5889,6 +6007,8 @@ static inline int select_energy_cpu_idx(struct energy_env *eenv)
 	eenv->next_idx = EAS_CPU_PRV;
 	eenv->cpu[EAS_CPU_PRV].nrg_delta = 0;
 
+	dump_eenv_debug(eenv);
+
 	/*
 	 * Compare the other CPU candidates to find a CPU which can be
 	 * more energy efficient then EAS_CPU_PRV
@@ -5905,6 +6025,7 @@ static inline int select_energy_cpu_idx(struct energy_env *eenv)
 				/* filter energy variations within the dead-zone margin */
 				if (abs(eenv->cpu[cpu_idx].nrg_delta) < margin)
 					eenv->cpu[cpu_idx].nrg_delta = 0;
+
 				/* update the schedule candidate with min(nrg_delta) */
 				if (eenv->cpu[cpu_idx].nrg_delta <
 					eenv->cpu[eenv->next_idx].nrg_delta) {
@@ -5931,6 +6052,9 @@ static inline int select_energy_cpu_idx(struct energy_env *eenv)
 				eenv->next_idx = cpu_idx;
 		}
 	}
+	trace_printk("task=%p %s task_util=%lu energy_cpu=%d",
+			eenv->p, eenv->p->comm, eenv->util_delta,
+			eenv->cpu[eenv->next_idx].cpu_id);
 
 	return eenv->next_idx;
 }
@@ -7228,23 +7352,32 @@ static inline int wake_energy(struct task_struct *p, int prev_cpu, int sd_flag, 
 	/*
 	 * Check all definite no-energy-awareness conditions
 	 */
-	if (!energy_aware())
+	if (!energy_aware()) {
+		trace_printk("no_energy_aware");
 		return false;
+	}
 
-	if (!sd)
+	if (!sd) {
+		trace_printk("no_sd");
 		return false;
+	}
 
-	if (sd_overutilized(sd))
+	if (sd_overutilized(sd)) {
+		trace_printk("sd_overutilized");
 		return false;
+	}
 
 	if(sched_feat(MAINLINE_PREFER_IDLE)){
 		/*
 		 * Force prefer-idle tasks into the slow path, this may not happen
 		 * if none of the sd flags matched.
 		 */
-		if (schedtune_prefer_idle(p) > 0 && !sync)
+		if (schedtune_prefer_idle(p) > 0 && !sync) {
+			trace_printk("prefer_idle");
 			return false;
+		}
 	}
+	trace_printk("energy_aware_wakeup for task %p %s prev_cpu=%d", p, p->comm, prev_cpu);
 	return true;
 }
 
