@@ -1845,30 +1845,33 @@ int xfrm_user_policy(struct sock *sk, int optname, u8 __user *optval, int optlen
 	struct xfrm_mgr *km;
 	struct xfrm_policy *pol = NULL;
 
-	if (optlen <= 0 || optlen > PAGE_SIZE)
+	if (optlen < 0 || optlen > PAGE_SIZE)
 		return -EMSGSIZE;
 
-	data = kmalloc(optlen, GFP_KERNEL);
-	if (!data)
-		return -ENOMEM;
+	if (optlen > 0) {
+		data = kmalloc(optlen, GFP_KERNEL);
+		if (!data)
+			return -ENOMEM;
 
-	err = -EFAULT;
-	if (copy_from_user(data, optval, optlen))
-		goto out;
+		err = -EFAULT;
+		if (copy_from_user(data, optval, optlen))
+			goto out;
 
-	err = -EINVAL;
-	rcu_read_lock();
-	list_for_each_entry_rcu(km, &xfrm_km_list, list) {
-		pol = km->compile_policy(sk, optname, data,
-					 optlen, &err);
-		if (err >= 0)
-			break;
+		err = -EINVAL;
+		rcu_read_lock();
+		list_for_each_entry_rcu(km, &xfrm_km_list, list) {
+			pol = km->compile_policy(sk, optname, data,
+						 optlen, &err);
+			if (err >= 0)
+				break;
+		}
+		rcu_read_unlock();
 	}
-	rcu_read_unlock();
 
 	if (err >= 0) {
 		xfrm_sk_policy_insert(sk, err, pol);
-		xfrm_pol_put(pol);
+		if (pol)
+			xfrm_pol_put(pol);
 		err = 0;
 	}
 
