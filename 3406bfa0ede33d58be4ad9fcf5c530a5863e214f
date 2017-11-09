@@ -22,6 +22,30 @@
       "revId": "3406bfa0ede33d58be4ad9fcf5c530a5863e214f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28f7809e_655da1ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1124443
+      },
+      "writtenOn": "2017-11-09T12:48:16Z",
+      "side": 1,
+      "message": "Yeah, my intention was that the first Signed-off-by is copied from the LKML patch, and the second one shows that it was me who cherry-picked it. I can remove the first one though, that\u0027s represented by the Author field.",
+      "parentUuid": "38c02d07_040e73ae",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 56
+      },
+      "revId": "3406bfa0ede33d58be4ad9fcf5c530a5863e214f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
