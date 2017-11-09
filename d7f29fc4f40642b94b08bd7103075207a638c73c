@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa03a37d_407829dc",
+        "filename": "net/xfrm/xfrm_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1872,
+      "author": {
+        "id": 1166304
+      },
+      "writtenOn": "2017-11-09T17:48:57Z",
+      "side": 1,
+      "message": "Will have to set err right for direction. If err is not being set, it only meant for IN direction (0).",
+      "revId": "d7f29fc4f40642b94b08bd7103075207a638c73c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
