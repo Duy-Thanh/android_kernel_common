@@ -1,5 +1,5 @@
 /*
- * Obtain energy cost data from DT and populate relevant scheduler data
+ * Obtain energy cost data and populate relevant scheduler data
  * structures.
  *
  * Copyright (C) 2015 ARM Ltd.
@@ -28,6 +28,7 @@
 #include <linux/stddef.h>
 
 struct sched_group_energy *sge_array[NR_CPUS][NR_SD_LEVELS];
+struct energy_model *platform_energy_data;
 
 static void free_resources(void)
 {
@@ -55,12 +56,26 @@ void init_sched_energy_costs(void)
 	const struct property *prop;
 	int sd_level, i, nstates, cpu;
 	const __be32 *val;
+	struct energy_model *em = platform_energy_data;
 
 	for_each_possible_cpu(cpu) {
 		cn = of_get_cpu_node(cpu, NULL);
 		if (!cn) {
-			pr_warn("CPU device node missing for CPU %d\n", cpu);
-			return;
+			if (platform_energy_data) {
+				/*
+				 * Here, we do not know the number of clusters
+				 * and if they are symmetric or heterogeneous.
+				 * We are currently assigning the core/cluster
+				 * energy data assuming an SMP system with
+				 * single cluster.
+				 */
+				sge_array[cpu][SD_LEVEL0] = em->core_energy;
+				sge_array[cpu][SD_LEVEL1] = em->cluster_energy;
+			} else {
+				pr_warn("Sched-energy-costs not available\n");
+				return;
+			}
+			continue;
 		}
 
 		if (!of_find_property(cn, "sched-energy-costs", NULL)) {
@@ -116,7 +131,7 @@ void init_sched_energy_costs(void)
 		}
 	}
 
-	pr_info("Sched-energy-costs installed from DT\n");
+	pr_info("Sched-energy-costs installed\n");
 	return;
 
 out:
