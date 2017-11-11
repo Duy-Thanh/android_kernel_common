@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d48f2a7b_be53b23d",
+        "filename": "drivers/staging/android/pkglist/Kconfig",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-11T14:15:55Z",
+      "side": 1,
+      "message": "still no updated documentation :(",
+      "range": {
+        "startLine": 5,
+        "startChar": 3,
+        "endLine": 6,
+        "endChar": 37
+      },
+      "revId": "01f4fd1ef1e2ee2a5e0b512da0f1b40dc4b21539",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e432ed76_39b4de93",
+        "filename": "drivers/staging/android/pkglist/pkglist.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-11T14:15:55Z",
+      "side": 1,
+      "message": "these files should be described in something like Documentation/ABI/ as well to be able to find them later, instead of buried in a comment in a random .c file :)",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 37
+      },
+      "revId": "01f4fd1ef1e2ee2a5e0b512da0f1b40dc4b21539",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fabe28e_1d7c64fd",
+        "filename": "drivers/staging/android/pkglist/pkglist.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-11T14:15:55Z",
+      "side": 1,
+      "message": "static?  Same for the others here, right?",
+      "range": {
+        "startLine": 574,
+        "startChar": 0,
+        "endLine": 574,
+        "endChar": 20
+      },
+      "revId": "01f4fd1ef1e2ee2a5e0b512da0f1b40dc4b21539",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20994a8a_4879030d",
+        "filename": "drivers/staging/android/pkglist/pkglist.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-11T14:15:55Z",
+      "side": 1,
+      "message": "static?",
+      "range": {
+        "startLine": 589,
+        "startChar": 0,
+        "endLine": 589,
+        "endChar": 17
+      },
+      "revId": "01f4fd1ef1e2ee2a5e0b512da0f1b40dc4b21539",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6c2e7bc_ff0e77de",
+        "filename": "drivers/staging/android/pkglist/pkglist.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-11T14:15:55Z",
+      "side": 1,
+      "message": "static?",
+      "range": {
+        "startLine": 618,
+        "startChar": 0,
+        "endLine": 618,
+        "endChar": 20
+      },
+      "revId": "01f4fd1ef1e2ee2a5e0b512da0f1b40dc4b21539",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e4ad47f_42f5a528",
+        "filename": "drivers/staging/android/pkglist/pkglist.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-11T14:15:55Z",
+      "side": 1,
+      "message": "static?  \u0027nm\u0027 is your friend to check for the symbols you are exporting that you don\u0027t realize you are exporting, use it on the .ko or .o file.  I think there are lots of \"global\" symbols in this file that should be moved to static.",
+      "range": {
+        "startLine": 663,
+        "startChar": 0,
+        "endLine": 663,
+        "endChar": 21
+      },
+      "revId": "01f4fd1ef1e2ee2a5e0b512da0f1b40dc4b21539",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06d32159_da2706f0",
+        "filename": "drivers/staging/android/pkglist/pkglist.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 976,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-11T14:15:55Z",
+      "side": 1,
+      "message": "\"GPL v2\" is the license of the module, according to what you have up above, so it should be reflected here as well.",
+      "range": {
+        "startLine": 976,
+        "startChar": 16,
+        "endLine": 976,
+        "endChar": 19
+      },
+      "revId": "01f4fd1ef1e2ee2a5e0b512da0f1b40dc4b21539",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1f8e385_9864e332",
+        "filename": "drivers/staging/android/pkglist/pkglist_none.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-11T14:15:55Z",
+      "side": 1,
+      "message": "\"GPL v2\"",
+      "range": {
+        "startLine": 57,
+        "startChar": 16,
+        "endLine": 57,
+        "endChar": 19
+      },
+      "revId": "01f4fd1ef1e2ee2a5e0b512da0f1b40dc4b21539",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
