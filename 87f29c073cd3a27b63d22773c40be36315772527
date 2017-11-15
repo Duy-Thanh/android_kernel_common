@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1126c04c_4e0582e7",
+        "filename": "drivers/staging/android/esdfs/inode.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-15T15:22:05Z",
+      "side": 1,
+      "message": "nit, when you don\u0027t touch a file, you can\u0027t change the copyright notice on it.  I\u0027m pretty sure you do touch it later in the patch series, just be careful about this type of thing.\n\nLawyers get grumpy about this, despite these notices not being worth even the electrons they represent, lawyers are worse \"cargo-cult\" followers than programmers are :)",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "87f29c073cd3a27b63d22773c40be36315772527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
