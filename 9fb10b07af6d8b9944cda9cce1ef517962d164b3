@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8f7c320a_80989dfb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-11-15T15:27:14Z",
+      "side": 1,
+      "message": "again, this is \"what\", not why.\n\nAnd there is no changelog text here, I reject such patches upstream, and other maintainers do as well...",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 53
+      },
+      "revId": "9fb10b07af6d8b9944cda9cce1ef517962d164b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
