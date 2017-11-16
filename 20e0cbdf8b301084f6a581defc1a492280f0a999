@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b62f9d4f_0398b71c",
+        "filename": "drivers/usb/class/cdc-acm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 1073546
+      },
+      "writtenOn": "2017-11-16T23:46:02Z",
+      "side": 0,
+      "message": "This original solution just assumes the byte is garbage and move us the buffer by 1 byte. The linux security patch assumes that the buffer is bad and errors. I believe the old behavior is incorrect. Linux master does not have the old behavior.",
+      "range": {
+        "startLine": 1145,
+        "startChar": 3,
+        "endLine": 1147,
+        "endChar": 18
+      },
+      "revId": "20e0cbdf8b301084f6a581defc1a492280f0a999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
