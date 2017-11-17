@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "a162799a_d6d86f09",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1201522
+      },
+      "writtenOn": "2017-11-17T12:16:07Z",
+      "side": 1,
+      "message": "You also add the two new flag functions: cpu_corepower_flags() and cpu_clusterpower_flags()",
+      "revId": "4db64f141b7c5a6560f67e368fd926094c2433ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c99463d3_4fb50a43",
         "filename": "arch/x86/kernel/smpboot.c",
         "patchSetId": 1
@@ -13,6 +30,40 @@
       "writtenOn": "2017-11-17T10:12:11Z",
       "side": 1,
       "message": "Hi, this config flag just indicates that the energy awareness sched feature is true at boot. In a CONFIG_SCHED_DEBUG configuration this can be changed at runtime, so there will be a number of configurations for which x86 would still lack energy model support.\n\nI think the #ifdefs should be removed unless you particularly intend to only support providing EM data for devices which boot with energy awareness on.",
+      "revId": "4db64f141b7c5a6560f67e368fd926094c2433ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "990e1efd_01017816",
+        "filename": "arch/x86/kernel/smpboot.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1201522
+      },
+      "writtenOn": "2017-11-17T12:16:07Z",
+      "side": 1,
+      "message": "Where does your platform share frequency domain? Per-cluster or per-system? If it\u0027s the former, set SD_SHARE_CAP_STATES here, otherwise in cpu_clusterpower_flags(). If your platform has per-cpu frequency domains, don\u0027t set it at all.",
+      "revId": "4db64f141b7c5a6560f67e368fd926094c2433ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6fcfc308_fe1b1ce1",
+        "filename": "arch/x86/kernel/smpboot.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1201522
+      },
+      "writtenOn": "2017-11-17T12:16:07Z",
+      "side": 1,
+      "message": "Just to make sure ... your platform doesn\u0027t have SMT?",
       "revId": "4db64f141b7c5a6560f67e368fd926094c2433ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
