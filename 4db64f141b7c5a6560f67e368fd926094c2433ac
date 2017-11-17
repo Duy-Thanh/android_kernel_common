@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c99463d3_4fb50a43",
+        "filename": "arch/x86/kernel/smpboot.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2017-11-17T10:12:11Z",
+      "side": 1,
+      "message": "Hi, this config flag just indicates that the energy awareness sched feature is true at boot. In a CONFIG_SCHED_DEBUG configuration this can be changed at runtime, so there will be a number of configurations for which x86 would still lack energy model support.\n\nI think the #ifdefs should be removed unless you particularly intend to only support providing EM data for devices which boot with energy awareness on.",
+      "revId": "4db64f141b7c5a6560f67e368fd926094c2433ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
