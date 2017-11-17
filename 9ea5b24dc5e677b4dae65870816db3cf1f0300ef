@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71b636a8_5f26d463",
+        "filename": "kernel/sched/energy.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2017-11-17T11:00:19Z",
+      "side": 1,
+      "message": "Is this sufficient? It covers most devices but (for example) original Hikey has a 3rd level EM to cover the shared voltage rail for the two SMP clusters.\n\nMight it be better to restructure this so that the driver/whatever responsible for filling in platform_energy_data is instead responsible for filling in sge_array?\n\nWhat do you think?",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 51
+      },
+      "revId": "9ea5b24dc5e677b4dae65870816db3cf1f0300ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
