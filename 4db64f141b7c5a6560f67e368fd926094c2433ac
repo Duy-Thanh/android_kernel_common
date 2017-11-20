@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "8680bc94_4474e2d8",
+        "filename": "arch/x86/kernel/smpboot.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1190079
+      },
+      "writtenOn": "2017-11-20T11:08:45Z",
+      "side": 1,
+      "message": "I wanted to prevent any unintended side-effects on x86 platforms where eas is not supported (non-atom, having hyper-threading). I am for now only targeting devices where the user explicity enables the energy aware config. Also, unless I re-work the x86_topology below, I would need the defines. Please let me know if the defines are a non-starter.",
+      "parentUuid": "c99463d3_4fb50a43",
+      "revId": "4db64f141b7c5a6560f67e368fd926094c2433ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "990e1efd_01017816",
         "filename": "arch/x86/kernel/smpboot.c",
         "patchSetId": 1
