@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "822ea87c_68fd38ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1190079
+      },
+      "writtenOn": "2017-11-20T11:12:27Z",
+      "side": 1,
+      "message": "I will amend the commit message to reflect this.",
+      "parentUuid": "a162799a_d6d86f09",
+      "revId": "4db64f141b7c5a6560f67e368fd926094c2433ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c99463d3_4fb50a43",
         "filename": "arch/x86/kernel/smpboot.c",
         "patchSetId": 1
@@ -71,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "fbd40be6_2d6fabeb",
+        "filename": "arch/x86/kernel/smpboot.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1190079
+      },
+      "writtenOn": "2017-11-20T11:12:27Z",
+      "side": 1,
+      "message": "My platform has per-system frequency domain and I have set the SD_SHARE_CAP_STATES in the below cpu_clusterpower_flags functions. As new supported platforms are added the core/cluster flags may be different from the current one and we can handle this using something like x86_match_cpu(xxxx).",
+      "parentUuid": "990e1efd_01017816",
+      "revId": "4db64f141b7c5a6560f67e368fd926094c2433ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6fcfc308_fe1b1ce1",
         "filename": "arch/x86/kernel/smpboot.c",
         "patchSetId": 1
@@ -82,6 +118,24 @@
       "writtenOn": "2017-11-17T12:16:07Z",
       "side": 1,
       "message": "Just to make sure ... your platform doesn\u0027t have SMT?",
+      "revId": "4db64f141b7c5a6560f67e368fd926094c2433ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66655566_7396e90e",
+        "filename": "arch/x86/kernel/smpboot.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1190079
+      },
+      "writtenOn": "2017-11-20T11:12:27Z",
+      "side": 1,
+      "message": "Yes. I am using an atom based platform without hyper-threading. Do you know if there is any on-going work to support SMT ?",
+      "parentUuid": "6fcfc308_fe1b1ce1",
       "revId": "4db64f141b7c5a6560f67e368fd926094c2433ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
