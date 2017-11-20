@@ -22,6 +22,30 @@
       "revId": "356791cb20b892420bc8106c3e0430cd09b78af0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32809199_c51a0c71",
+        "filename": "arch/arm64/kernel/suspend.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2017-11-20T21:56:40Z",
+      "side": 1,
+      "message": "nvm, this is not a symbol : )",
+      "parentUuid": "9f9782bf_4f6a58a5",
+      "range": {
+        "startLine": 166,
+        "startChar": 37,
+        "endLine": 166,
+        "endChar": 49
+      },
+      "revId": "356791cb20b892420bc8106c3e0430cd09b78af0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
