@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16511795_07218617",
+        "filename": "kernel/time/timekeeping.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1105434
+      },
+      "writtenOn": "2017-11-28T21:14:39Z",
+      "side": 1,
+      "message": "Not familiar with this code, but comparing with upstream, upstream has timespec64_add_ns().",
+      "range": {
+        "startLine": 917,
+        "startChar": 1,
+        "endLine": 917,
+        "endChar": 16
+      },
+      "revId": "2003d3efd4eb43b1443a4ed96b96f7ce1fbfae50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
