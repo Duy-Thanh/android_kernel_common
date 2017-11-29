@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b062a3d1_1cde64cd",
+        "filename": "kernel/time/timekeeping.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-11-29T20:47:14Z",
+      "side": 1,
+      "message": "So now it is jsut a pure change from tk-\u003eraw_time to tk-\u003eraw_sec.",
+      "range": {
+        "startLine": 910,
+        "startChar": 0,
+        "endLine": 920,
+        "endChar": 1
+      },
+      "revId": "9df612faa6b0c0675fe7d781cb772a73bc2af50d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
