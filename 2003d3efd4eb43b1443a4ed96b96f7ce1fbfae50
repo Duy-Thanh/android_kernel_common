@@ -22,6 +22,30 @@
       "revId": "2003d3efd4eb43b1443a4ed96b96f7ce1fbfae50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ee2ef9f_44838331",
+        "filename": "kernel/time/timekeeping.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-11-29T20:35:15Z",
+      "side": 1,
+      "message": "Yes, I had to cross the streams.\n\ngetrawmonotonic was replaced with getrawmonotonic64 in later kernels. The result is clamped to timespec.\n\nIn hind sight I am not satisfied with my decision since nsecs is an s64 (which by implication could also overload...) and will resort to keeping the ts64 to do the math on, translating afterwards.",
+      "parentUuid": "16511795_07218617",
+      "range": {
+        "startLine": 917,
+        "startChar": 1,
+        "endLine": 917,
+        "endChar": 16
+      },
+      "revId": "2003d3efd4eb43b1443a4ed96b96f7ce1fbfae50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
