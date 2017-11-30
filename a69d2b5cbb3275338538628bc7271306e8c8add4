@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd41fa22_6de17e22",
+        "filename": "project.config",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1086523
+      },
+      "writtenOn": "2017-11-30T19:19:53Z",
+      "side": 1,
+      "message": "Usually you would also grant pushMerge (unless it\u0027s not necessary and all changes are straight fast forwards).",
+      "revId": "a69d2b5cbb3275338538628bc7271306e8c8add4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3db54bc6_1156be8e",
+        "filename": "project.config",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1086523
+      },
+      "writtenOn": "2017-11-30T19:19:53Z",
+      "side": 1,
+      "message": "The ticket says * (in #9), should it be used here?",
+      "range": {
+        "startLine": 37,
+        "startChar": 31,
+        "endLine": 37,
+        "endChar": 56
+      },
+      "revId": "a69d2b5cbb3275338538628bc7271306e8c8add4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
