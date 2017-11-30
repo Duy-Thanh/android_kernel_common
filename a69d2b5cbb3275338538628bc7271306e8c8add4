@@ -81,6 +81,30 @@
       "revId": "a69d2b5cbb3275338538628bc7271306e8c8add4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98c27558_7baebf10",
+        "filename": "project.config",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1086523
+      },
+      "writtenOn": "2017-11-30T19:40:12Z",
+      "side": 1,
+      "message": "I think he meant \"*\" -- if we specify the name explicitly, it means the creator would only be able to create this one tag, and based on the context it\u0027s not really reasonable...",
+      "parentUuid": "20bac538_77d5719b",
+      "range": {
+        "startLine": 37,
+        "startChar": 31,
+        "endLine": 37,
+        "endChar": 56
+      },
+      "revId": "a69d2b5cbb3275338538628bc7271306e8c8add4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
