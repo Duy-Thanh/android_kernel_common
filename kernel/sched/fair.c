@@ -5665,107 +5665,74 @@ end:
 }
 
 /*
- * sched_group_energy(): Computes the absolute energy consumption of cpus
- * belonging to the sched_group including shared resources shared only by
- * members of the group. Iterates over all cpus in the hierarchy below the
- * sched_group starting from the bottom working it's way up before going to
- * the next cpu until all cpus are covered at all levels. The current
- * implementation is likely to gather the same util statistics multiple times.
- * This can probably be done in a faster but more complex way.
- * Note: sched_group_energy() may fail when racing with sched_domain updates.
+ * sched_group_energy(): Computes the absolute energy consumption of specific
+ * sched_group; In this function 'sched_group *sg' corresponds to one specific
+ * hardware level logic, for lowest level it presents CPU logic and calculates
+ * CPU energy, for second level it presents cluster logic and calculates cluster
+ * energy based on the energy parameters.
  */
-static int sched_group_energy(struct energy_env *eenv)
+static int sched_group_energy(struct energy_env *eenv, struct sched_group *sg)
+{
+	u64 total_energy = 0;
+	unsigned long group_util;
+	int sg_busy_energy, sg_idle_energy;
+	int cap_idx, idle_idx;
+
+	cap_idx = eenv->cap_idx;
+	idle_idx = group_idle_state(eenv, sg);
+	group_util = group_norm_util(eenv, sg);
+
+	sg_busy_energy = (group_util * sg->sge->cap_states[cap_idx].power);
+	sg_idle_energy = ((SCHED_CAPACITY_SCALE-group_util)
+					* sg->sge->idle_states[idle_idx].power);
+
+	total_energy = sg_busy_energy + sg_idle_energy;
+
+	eenv->energy += total_energy >> SCHED_CAPACITY_SHIFT;
+	return 0;
+}
+
+/*
+ * sched_group_hierarchy_energy(): Computes the absolute energy consumption
+ * based on sched_group hierarchy. We use 'eenv->sg_top' to indicate how many
+ * CPUs energy should be calculated, e.g. if the target CPU OPP is same before
+ * and after task placement, then we can merely calculate this target CPU
+ * energy and it's higher hierarchy sched_group energy (e.g. for cluster level
+ * or more higher level hardware logical energy consumption); In this case
+ * we don't need calculate other CPUs energy in the same clock domain due other
+ * CPUs energy are no matter with waken task placement.
+ *
+ * If the target CPU OPP is different between before and after task placement,
+ * then this target CPU OPP increasing also impacts other CPUs energy in the
+ * same clock domain, so we need set 'eenv->sg_top' to one higher level so this
+ * can let energy calculation includes other interaction CPUs.
+ *
+ * For this purpose, sched_group_hierarchy_energy() iterates over all
+ * sched_groups in the hierarchy and check if the sched_group has intersection
+ * with 'eenv->sg_top'; if the sched_group is intersect with 'eenv->sg_top'
+ * that means the sched_group has been impacted by task placement and we calls
+ * sched_group_energy() to calculate the energy for the specific sched_group,
+ * finally we can accumulate the energy data related with waken task.
+ */
+static int sched_group_hierarchy_energy(struct energy_env *eenv, int cpu)
 {
 	struct sched_domain *sd;
-	int cpu, total_energy = 0;
-	struct cpumask visit_cpus;
 	struct sched_group *sg;
 
-	WARN_ON(!eenv->sg_top->sge);
+	eenv->energy = 0;
+	for_each_domain(cpu, sd) {
+		sg = sd->groups;
 
-	cpumask_copy(&visit_cpus, sched_group_cpus(eenv->sg_top));
+		do {
+			if (!cpumask_intersects(sched_group_cpus(eenv->sg_top),
+						sched_group_cpus(sg)))
+				continue;
 
-	while (!cpumask_empty(&visit_cpus)) {
-		struct sched_group *sg_shared_cap = NULL;
+			sched_group_energy(eenv, sg);
 
-		cpu = cpumask_first(&visit_cpus);
-
-		/*
-		 * Is the group utilization affected by cpus outside this
-		 * sched_group?
-		 */
-		sd = rcu_dereference(per_cpu(sd_scs, cpu));
-
-		if (sd && sd->parent)
-			sg_shared_cap = sd->parent->groups;
-
-		for_each_domain(cpu, sd) {
-			sg = sd->groups;
-
-			/* Has this sched_domain already been visited? */
-			if (sd->child && group_first_cpu(sg) != cpu)
-				break;
-
-			do {
-				unsigned long group_util;
-				int sg_busy_energy, sg_idle_energy;
-				int cap_idx, idle_idx;
-
-				if (sg_shared_cap && sg_shared_cap->group_weight >= sg->group_weight)
-					eenv->sg_cap = sg_shared_cap;
-				else
-					eenv->sg_cap = sg;
-
-				cap_idx = find_new_capacity(eenv, sg->sge);
-
-				if (sg->group_weight == 1) {
-					/* Remove capacity of src CPU (before task move) */
-					if (eenv->trg_cpu == eenv->src_cpu &&
-					    cpumask_test_cpu(eenv->src_cpu, sched_group_cpus(sg))) {
-						eenv->cap.before = sg->sge->cap_states[cap_idx].cap;
-						eenv->cap.delta -= eenv->cap.before;
-					}
-					/* Add capacity of dst CPU  (after task move) */
-					if (eenv->trg_cpu == eenv->dst_cpu &&
-					    cpumask_test_cpu(eenv->dst_cpu, sched_group_cpus(sg))) {
-						eenv->cap.after = sg->sge->cap_states[cap_idx].cap;
-						eenv->cap.delta += eenv->cap.after;
-					}
-				}
-
-				idle_idx = group_idle_state(eenv, sg);
-				group_util = group_norm_util(eenv, sg);
-
-				sg_busy_energy = (group_util * sg->sge->cap_states[cap_idx].power)
-								>> SCHED_CAPACITY_SHIFT;
-				sg_idle_energy = ((SCHED_CAPACITY_SCALE-group_util)
-								* sg->sge->idle_states[idle_idx].power)
-								>> SCHED_CAPACITY_SHIFT;
-
-				total_energy += sg_busy_energy + sg_idle_energy;
-
-				if (!sd->child)
-					cpumask_xor(&visit_cpus, &visit_cpus, sched_group_cpus(sg));
-
-				if (cpumask_equal(sched_group_cpus(sg), sched_group_cpus(eenv->sg_top)))
-					goto next_cpu;
-
-			} while (sg = sg->next, sg != sd->groups);
-		}
-
-		/*
-		 * If we raced with hotplug and got an sd NULL-pointer;
-		 * returning a wrong energy estimation is better than
-		 * entering an infinite loop.
-		 */
-		if (cpumask_test_cpu(cpu, &visit_cpus))
-			return -EINVAL;
-next_cpu:
-		cpumask_clear_cpu(cpu, &visit_cpus);
-		continue;
+		} while (sg = sg->next, sg != sd->groups);
 	}
 
-	eenv->energy = total_energy;
 	return 0;
 }
 
@@ -5777,6 +5744,95 @@ static inline bool cpu_in_sg(struct sched_group *sg, int cpu)
 static inline unsigned long task_util(struct task_struct *p);
 
 /*
+ * compute_task_energy(): Computes the absolute energy consumption for
+ * waken task on specific CPU. It calculates the energy data twice,
+ * the first energy data is before task placement, the second energy data
+ * is after task placed on specific CPU; the difference value between
+ * these two energy if the energy introduced by this task.
+ *
+ * In the energy calculation, we use 'eenv' as a descriptor to track
+ * energy calculation parameters and assign output result in it. Here
+ * have two parameters are important for energy calculation:
+ *
+ * 'eenv->sg_cap' presents the relationship for the sched_group which
+ * shares the same capacity (or the CPUs in this sched_group share the
+ * same clock domain).
+ *
+ * 'eenv->sg_top' presents which CPUs involved for the task energy
+ * calculation. If 'eenv->sg_top' points the lowest level
+ * sched_group, this means the energy calculation is only related with
+ * single CPU, otherwise it calculates all CPUs energy in the same
+ * clock domain.
+ */
+static int compute_task_energy(struct energy_env *eenv, int cpu)
+{
+	struct sched_domain *sd;
+	struct sched_group *sg;
+	unsigned int prev_cap_idx, next_cap_idx;
+	unsigned long energy;
+
+	sd = rcu_dereference(per_cpu(sd_scs, cpu));
+	if (!sd)
+		return 0;
+
+	sg = sd->groups;
+
+	/*
+	 * The CPU capacity sharing attribution is decided by hardhware
+	 * design so we can decide the sg_cp value at the beginning
+	 * for specific CPU.
+	 */
+	if (sd && sd->parent)
+		eenv->sg_cap = sd->parent->groups;
+	else
+		eenv->sg_cap = sd->groups;
+
+	/* Estimate capacity index before task placement */
+	eenv->trg_cpu = -1;
+	prev_cap_idx = find_new_capacity(eenv, sg->sge);
+
+	/* Estimate capacity index after task placement */
+	eenv->trg_cpu = cpu;
+	next_cap_idx = find_new_capacity(eenv, sg->sge);
+
+	/*
+	 * Before and after task placement, if the CPU frequency has no change
+	 * then we can set sg_top to the single CPU; this means we can only
+	 * calculate the energy related with this single CPU and ignore other
+	 * CPUs in the same clock domain. If we found the OPP frequency is
+	 * changed then we need to calculate all impacted CPUs in the same
+	 * clock domain, so we need to set to shared capacity scheduling group.
+	 */
+	if (prev_cap_idx != next_cap_idx)
+		eenv->sg_top = sd->parent->groups;
+	else
+		eenv->sg_top = sd->groups;
+
+	/* Remove capacity of src CPU (before task move) */
+	if (cpu == eenv->src_cpu) {
+		eenv->cap.before = sg->sge->cap_states[next_cap_idx].cap;
+		eenv->cap.delta -= eenv->cap.before;
+	/* Add capacity of dst CPU  (after task move) */
+	} else if (cpu == eenv->dst_cpu) {
+		eenv->cap.after  = sg->sge->cap_states[next_cap_idx].cap;
+		eenv->cap.delta += eenv->cap.after;
+	}
+
+	/* Calculate the energy before task placement */
+	eenv->trg_cpu = -1;
+	eenv->cap_idx = prev_cap_idx;
+	sched_group_hierarchy_energy(eenv, cpu);
+	energy = eenv->energy;
+
+	/* Calculate the energy after task placement */
+	eenv->trg_cpu = cpu;
+	eenv->cap_idx = next_cap_idx;
+	sched_group_hierarchy_energy(eenv, cpu);
+
+	return eenv->energy - energy;
+}
+
+/*
  * energy_diff(): Estimate the energy impact of changing the utilization
  * distribution. eenv specifies the change: utilisation amount, source, and
  * destination cpu. Source or destination cpu may be -1 in which case the
@@ -5786,53 +5842,28 @@ static inline unsigned long task_util(struct task_struct *p);
 static inline int __energy_diff(struct energy_env *eenv)
 {
 	struct sched_domain *sd;
-	struct sched_group *sg;
-	int sd_cpu = -1, energy_before = 0, energy_after = 0;
+	int sd_cpu = -1;
 	int diff, margin;
-
-	struct energy_env eenv_before = {
-		.util_delta	= task_util(eenv->task),
-		.src_cpu	= eenv->src_cpu,
-		.dst_cpu	= eenv->dst_cpu,
-		.trg_cpu	= eenv->src_cpu,
-		.nrg		= { 0, 0, 0, 0},
-		.cap		= { 0, 0, 0 },
-		.task		= eenv->task,
-	};
 
 	if (eenv->src_cpu == eenv->dst_cpu)
 		return 0;
 
 	sd_cpu = (eenv->src_cpu != -1) ? eenv->src_cpu : eenv->dst_cpu;
-	sd = rcu_dereference(per_cpu(sd_ea, sd_cpu));
 
+	/*
+	 * The CPU capacity sharing attribution is fixed by hardhware
+	 * design so we can decide the sg_cp value at the beginning
+	 * for specific CPU.
+	 */
+	sd = rcu_dereference(per_cpu(sd_scs, sd_cpu));
 	if (!sd)
 		return 0; /* Error */
 
-	sg = sd->groups;
+	eenv->nrg.before = compute_task_energy(eenv, eenv->src_cpu);
+	eenv->nrg.after  = compute_task_energy(eenv, eenv->dst_cpu);
+	eenv->nrg.diff   = eenv->nrg.after - eenv->nrg.before;
+	eenv->payoff     = 0;
 
-	do {
-		if (cpu_in_sg(sg, eenv->src_cpu) || cpu_in_sg(sg, eenv->dst_cpu)) {
-			eenv_before.sg_top = eenv->sg_top = sg;
-
-			if (sched_group_energy(&eenv_before))
-				return 0; /* Invalid result abort */
-			energy_before += eenv_before.energy;
-
-			/* Keep track of SRC cpu (before) capacity */
-			eenv->cap.before = eenv_before.cap.before;
-			eenv->cap.delta = eenv_before.cap.delta;
-
-			if (sched_group_energy(eenv))
-				return 0; /* Invalid result abort */
-			energy_after += eenv->energy;
-		}
-	} while (sg = sg->next, sg != sd->groups);
-
-	eenv->nrg.before = energy_before;
-	eenv->nrg.after = energy_after;
-	eenv->nrg.diff = eenv->nrg.after - eenv->nrg.before;
-	eenv->payoff = 0;
 #ifndef CONFIG_SCHED_TUNE
 	trace_sched_energy_diff(eenv->task,
 			eenv->src_cpu, eenv->dst_cpu, eenv->util_delta,
