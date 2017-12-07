@@ -524,6 +524,8 @@ static struct tag_ref *get_tag_ref(tag_t full_tag,
 	BUG_ON(IS_ERR_OR_NULL(utd_entry));
 	if (!tr_entry)
 		tr_entry = new_tag_ref(full_tag, utd_entry);
+	if (!IS_ERR(tr_entry))
+		tr_entry->num_sock_tags++;
 
 	spin_unlock_bh(&uid_tag_data_tree_lock);
 	if (utd_res)
@@ -2260,13 +2262,15 @@ static int ctrl_cmd_tag(const char *input)
 
 	spin_lock_bh(&sock_tag_list_lock);
 	sock_tag_entry = get_sock_stat_nl(el_socket->sk);
+	/* tag_ref_entry->num_sock_tags is incremented within get_tag_ref
+	 * with uid_tag_data_tree_lock protection.
+	 */
 	tag_ref_entry = get_tag_ref(full_tag, &uid_tag_data_entry);
 	if (IS_ERR(tag_ref_entry)) {
 		res = PTR_ERR(tag_ref_entry);
 		spin_unlock_bh(&sock_tag_list_lock);
 		goto err_put;
 	}
-	tag_ref_entry->num_sock_tags++;
 	if (sock_tag_entry) {
 		struct tag_ref *prev_tag_ref_entry;
 
