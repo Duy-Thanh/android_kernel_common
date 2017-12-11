@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dac6092d_9f72be08",
+        "filename": "mm/kasan/kasan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-12-11T22:45:22Z",
+      "side": 1,
+      "message": "NB: unused, fine.",
+      "range": {
+        "startLine": 466,
+        "startChar": 0,
+        "endLine": 466,
+        "endChar": 15
+      },
+      "revId": "b8eeaa533e63836c32db5d9172ac5a72e6016cab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da8e3a84_6dfeeba8",
+        "filename": "mm/slub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1344,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-12-11T22:45:22Z",
+      "side": 1,
+      "message": "NB: this was from mm/slab.h adjustment in upstream, landed here.",
+      "range": {
+        "startLine": 1344,
+        "startChar": 0,
+        "endLine": 1344,
+        "endChar": 37
+      },
+      "revId": "b8eeaa533e63836c32db5d9172ac5a72e6016cab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
