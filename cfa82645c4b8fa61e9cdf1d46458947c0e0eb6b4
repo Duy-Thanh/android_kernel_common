@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eab21a1d_19b037f8",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5624,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T17:43:12Z",
+      "side": 1,
+      "message": "nit-pick: (just because of my OCPD) can we add this before the previous line?",
+      "range": {
+        "startLine": 5624,
+        "startChar": 1,
+        "endLine": 5624,
+        "endChar": 28
+      },
+      "revId": "cfa82645c4b8fa61e9cdf1d46458947c0e0eb6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e8fa7a1_ecd839e1",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5646,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T17:43:12Z",
+      "side": 1,
+      "message": "Why not just a return state instead of this jump and return?\nThis would remove the end label too, isn\u0027t it?",
+      "range": {
+        "startLine": 5646,
+        "startChar": 2,
+        "endLine": 5646,
+        "endChar": 11
+      },
+      "revId": "cfa82645c4b8fa61e9cdf1d46458947c0e0eb6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9f5e835_7bfeb343",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5648,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T17:43:12Z",
+      "side": 1,
+      "message": "nit-pick: here checkpatch would complain about the comment format, which should start by\n\n/*\n * Add or ....",
+      "range": {
+        "startLine": 5648,
+        "startChar": 4,
+        "endLine": 5648,
+        "endChar": 65
+      },
+      "revId": "cfa82645c4b8fa61e9cdf1d46458947c0e0eb6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04318298_181c4b9d",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5663,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T17:43:12Z",
+      "side": 1,
+      "message": "nit-pick: we should add {}",
+      "range": {
+        "startLine": 5660,
+        "startChar": 2,
+        "endLine": 5663,
+        "endChar": 6
+      },
+      "revId": "cfa82645c4b8fa61e9cdf1d46458947c0e0eb6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "585e2ec8_16540f49",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5670,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T17:43:12Z",
+      "side": 1,
+      "message": "nit-pick: what about:\n\nnew_state \u003d min_t(int, max_idle_state_idx,\n\t\t  new_state / sg-\u003esgc\u003emax_capacity);",
+      "range": {
+        "startLine": 5669,
+        "startChar": 15,
+        "endLine": 5670,
+        "endChar": 42
+      },
+      "revId": "cfa82645c4b8fa61e9cdf1d46458947c0e0eb6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f1e71a2_ae2f45ff",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5679,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T17:43:12Z",
+      "side": 1,
+      "message": "What about saving some columns above by moving this else as an early bail out case:\n\nif (grp_util \u003e ((long)sg-\u003esgc-\u003emax_capacity * (int)sg-\u003egroup_weight))\n        return 0;\n\n// Here the if branch code",
+      "range": {
+        "startLine": 5674,
+        "startChar": 3,
+        "endLine": 5679,
+        "endChar": 2
+      },
+      "revId": "cfa82645c4b8fa61e9cdf1d46458947c0e0eb6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
