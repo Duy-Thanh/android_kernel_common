@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b849fe35_a19d38e4",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6727,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T18:13:04Z",
+      "side": 1,
+      "message": "With the other proposed sched_feat semantics, this can also be updated to save some tabs:\n\n/*\n * Use find_best_target() for prefer_idle tasks if enabled\n */\nif (sched_feat(PREFER_IDLE_FBT))\n        return true;\n\n/*\n * Always use find_best_target() for non-prefer idle tasks\n */\nif (!schedtune_prefer_idle(p))\n        return true;\n\n/*\n * Force prefer-idle tasks into the slow path only\n * if the sd flags matched.\n */\nreturn (wake_flags \u0026 WF_SYNC);",
+      "range": {
+        "startLine": 6727,
+        "startChar": 1,
+        "endLine": 6727,
+        "endChar": 38
+      },
+      "revId": "1d2b29f6ab79ee230b46c801296ed864daab629c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9c398a7_281cf969",
+        "filename": "kernel/sched/features.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T18:13:04Z",
+      "side": 1,
+      "message": "Should not be logically better to name the sched_feat with respect to what is NON mainline code?\n\nThus, express we wanna use find_best_target (non mainline feature) instead of the mainline code?\nSCHED_FEAT(PREFER_IDLE_FBT, true)\n\nThat\u0027s on the same line of \"ENERGY_AWARE\" above, i.e. we use sched features for non mainline bits.",
+      "range": {
+        "startLine": 105,
+        "startChar": 11,
+        "endLine": 105,
+        "endChar": 31
+      },
+      "revId": "1d2b29f6ab79ee230b46c801296ed864daab629c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
