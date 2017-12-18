@@ -1,0 +1,303 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea009e02_77b379e5",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5550,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T20:12:05Z",
+      "side": 1,
+      "message": "Why not just eenv_cpu?... that \"_\" seems a bit unusual...",
+      "range": {
+        "startLine": 5550,
+        "startChar": 7,
+        "endLine": 5550,
+        "endChar": 16
+      },
+      "revId": "ba2982dbcffee848f013011e4ceb9c6bc4fe47b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b37f94a8_8ab6cb56",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5575,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T20:12:05Z",
+      "side": 1,
+      "message": "util_delta_boosted?",
+      "range": {
+        "startLine": 5575,
+        "startChar": 16,
+        "endLine": 5575,
+        "endChar": 34
+      },
+      "revId": "ba2982dbcffee848f013011e4ceb9c6bc4fe47b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb5401bf_80608fc4",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5582,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T20:12:05Z",
+      "side": 1,
+      "message": "eenv_cpu_count?",
+      "range": {
+        "startLine": 5582,
+        "startChar": 5,
+        "endLine": 5582,
+        "endChar": 18
+      },
+      "revId": "ba2982dbcffee848f013011e4ceb9c6bc4fe47b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25317e85_f9511bfc",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5599,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T20:12:05Z",
+      "side": 1,
+      "message": "nit-pick:\n\nstatic unsigned long group_max_util(struct energy_env *eenv,\n                                    int cpu_idx, int boosted)",
+      "range": {
+        "startLine": 5599,
+        "startChar": 0,
+        "endLine": 5599,
+        "endChar": 86
+      },
+      "revId": "ba2982dbcffee848f013011e4ceb9c6bc4fe47b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1c8eb2e_5ad48439",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5614,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T20:12:05Z",
+      "side": 1,
+      "message": "This function is currently used just one time, from find_new_capacity() and it\u0027s called with boosted\u003d1.\n\nLet\u0027s remove this parameter (which makes the call site less ambiguous by removing the hard-coded 1, and simplify this to be just\n   util +\u003d eenv-\u003eboosted_util_delta",
+      "range": {
+        "startLine": 5614,
+        "startChar": 11,
+        "endLine": 5614,
+        "endChar": 18
+      },
+      "revId": "ba2982dbcffee848f013011e4ceb9c6bc4fe47b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80092231_84fcc3c4",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5669,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T20:12:05Z",
+      "side": 1,
+      "message": "The missing {} should be squashed back to:\n   73dbfdeb2e8f1d\n   ANDROID: sched: Extend sched_group_energy to test load-balancing decisions",
+      "range": {
+        "startLine": 5666,
+        "startChar": 40,
+        "endLine": 5669,
+        "endChar": 3
+      },
+      "revId": "ba2982dbcffee848f013011e4ceb9c6bc4fe47b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f22d262_1ccf4c9f",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5763,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T20:12:05Z",
+      "side": 1,
+      "message": "Not necessary empty lines?",
+      "range": {
+        "startLine": 5762,
+        "startChar": 0,
+        "endLine": 5763,
+        "endChar": 0
+      },
+      "revId": "ba2982dbcffee848f013011e4ceb9c6bc4fe47b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c1ab855_26c3e6f9",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5772,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T20:12:05Z",
+      "side": 1,
+      "message": "This maybe can be removed... that\u0027s implied by the function we call I would say.",
+      "range": {
+        "startLine": 5769,
+        "startChar": 2,
+        "endLine": 5772,
+        "endChar": 5
+      },
+      "revId": "ba2982dbcffee848f013011e4ceb9c6bc4fe47b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ba6606a_38146b9c",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6754,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T20:12:05Z",
+      "side": 1,
+      "message": "nit-pick: we should add an empty line after this one.",
+      "range": {
+        "startLine": 6754,
+        "startChar": 2,
+        "endLine": 6754,
+        "endChar": 54
+      },
+      "revId": "ba2982dbcffee848f013011e4ceb9c6bc4fe47b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb94b6ac_e364b274",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6755,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T20:12:05Z",
+      "side": 1,
+      "message": "Maybe unlikely, but this can still fails... should we add something like:\n   if (unlikely(!eenv-\u003ecpu))\n       BUG_ON(\"The world is over!\")\n?",
+      "range": {
+        "startLine": 6755,
+        "startChar": 2,
+        "endLine": 6755,
+        "endChar": 11
+      },
+      "revId": "ba2982dbcffee848f013011e4ceb9c6bc4fe47b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7be0fcb_1104fa58",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6804,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T20:12:05Z",
+      "side": 1,
+      "message": "nit-pick: should we use:\n   for (i\u003dEAS_CPU_PRV; ...)\njust for consistency?",
+      "range": {
+        "startLine": 6804,
+        "startChar": 8,
+        "endLine": 6804,
+        "endChar": 9
+      },
+      "revId": "ba2982dbcffee848f013011e4ceb9c6bc4fe47b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ec21b30_9b4526bb",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6831,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T20:12:05Z",
+      "side": 1,
+      "message": "Can this really happen?\n... if it can, should not this be a BUG_ON?",
+      "range": {
+        "startLine": 6831,
+        "startChar": 5,
+        "endLine": 6831,
+        "endChar": 28
+      },
+      "revId": "ba2982dbcffee848f013011e4ceb9c6bc4fe47b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "543be858_6a92c1f6",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6834,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T20:12:05Z",
+      "side": 1,
+      "message": "why not just cpu?",
+      "range": {
+        "startLine": 6834,
+        "startChar": 18,
+        "endLine": 6834,
+        "endChar": 26
+      },
+      "revId": "ba2982dbcffee848f013011e4ceb9c6bc4fe47b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
