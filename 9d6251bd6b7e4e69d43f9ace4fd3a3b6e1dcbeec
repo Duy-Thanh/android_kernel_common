@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4ef2ad8_5a2ecd58",
+        "filename": "fs/hwsdcardfs/dentry.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-12-20T03:30:52Z",
+      "side": 1,
+      "message": "I\u0027m pretty uncomfortable with the casting away of const here...",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 92,
+        "endChar": 48
+      },
+      "revId": "9d6251bd6b7e4e69d43f9ace4fd3a3b6e1dcbeec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "997ab545_c8cc0ccd",
+        "filename": "fs/hwsdcardfs/dentry.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-12-20T03:30:52Z",
+      "side": 1,
+      "message": "I\u0027m pretty uncomfortable with casting away the const here.",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 92,
+        "endChar": 48
+      },
+      "revId": "9d6251bd6b7e4e69d43f9ace4fd3a3b6e1dcbeec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7328ebae_d4e7d2d2",
+        "filename": "fs/hwsdcardfs/dentry.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-12-20T03:30:52Z",
+      "side": 1,
+      "message": "Are you sure this won\u0027t upset any of the vfs locking assumptions? Normally this lock is held throughout d_delete",
+      "range": {
+        "startLine": 110,
+        "startChar": 2,
+        "endLine": 110,
+        "endChar": 29
+      },
+      "revId": "9d6251bd6b7e4e69d43f9ace4fd3a3b6e1dcbeec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ff70e64_53081088",
+        "filename": "fs/hwsdcardfs/inode.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-12-20T03:30:52Z",
+      "side": 1,
+      "message": "This highly obscures the function of the code.\nInstead of breaking the common beginning and ending of the code into separate functions, you can do something similar to what overlayfs does, and call into a common function from create and mkdir, and split back into the two function calls on S_ISREG(dentry)/S_ISDIR(dentry). That would remove the need for the functions in create.c, and the structs that they pass.",
+      "range": {
+        "startLine": 23,
+        "startChar": 1,
+        "endLine": 23,
+        "endChar": 33
+      },
+      "revId": "9d6251bd6b7e4e69d43f9ace4fd3a3b6e1dcbeec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a2bebe9_9cad5048",
+        "filename": "fs/hwsdcardfs/inode.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-12-20T03:30:52Z",
+      "side": 1,
+      "message": "Same for unlink/rmdir",
+      "range": {
+        "startLine": 140,
+        "startChar": 1,
+        "endLine": 140,
+        "endChar": 33
+      },
+      "revId": "9d6251bd6b7e4e69d43f9ace4fd3a3b6e1dcbeec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ca05223_20642842",
+        "filename": "fs/hwsdcardfs/namei.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-12-20T03:30:52Z",
+      "side": 1,
+      "message": "ERR_CAST(inode)",
+      "range": {
+        "startLine": 99,
+        "startChar": 9,
+        "endLine": 99,
+        "endChar": 31
+      },
+      "revId": "9d6251bd6b7e4e69d43f9ace4fd3a3b6e1dcbeec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a11001d9_985dce3b",
+        "filename": "fs/hwsdcardfs/sdcardfs.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-12-20T03:30:52Z",
+      "side": 1,
+      "message": "Why are we doing this? d_fsdata is only written to when we allocate it, and then when it is removed. So long as the deletion is done in a RCU friendly way, I don\u0027t why we need this here, and in SDCARDFS_DI_R/SDCARDFS_DI_W",
+      "range": {
+        "startLine": 309,
+        "startChar": 1,
+        "endLine": 314,
+        "endChar": 14
+      },
+      "revId": "9d6251bd6b7e4e69d43f9ace4fd3a3b6e1dcbeec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f2f60e8_7b7d2c25",
+        "filename": "fs/hwsdcardfs/sdcardfs.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-12-20T03:30:52Z",
+      "side": 1,
+      "message": "These functions obscure the read/write locks, making it harder to see the paired read_lock and read_unlocks. These could be collapsed into one, raking the appropriate lock outside.",
+      "range": {
+        "startLine": 325,
+        "startChar": 28,
+        "endLine": 325,
+        "endChar": 41
+      },
+      "revId": "9d6251bd6b7e4e69d43f9ace4fd3a3b6e1dcbeec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbf23b39_856cf31e",
+        "filename": "fs/hwsdcardfs/super.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-12-20T03:30:52Z",
+      "side": 1,
+      "message": "Why is this being done from an include?",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 17
+      },
+      "revId": "9d6251bd6b7e4e69d43f9ace4fd3a3b6e1dcbeec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
