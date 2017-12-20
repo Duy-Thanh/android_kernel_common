@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "911ac605_049bd4e4",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6727,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-20T10:54:49Z",
+      "side": 1,
+      "message": "Ok for the sched_feat renaming, I keep a note for possibly improving the rest of this code as described above in a patch to follow.",
+      "parentUuid": "5dbc72c2_f7d98a8e",
+      "range": {
+        "startLine": 6727,
+        "startChar": 1,
+        "endLine": 6727,
+        "endChar": 38
+      },
+      "revId": "1d2b29f6ab79ee230b46c801296ed864daab629c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9c398a7_281cf969",
         "filename": "kernel/sched/features.h",
         "patchSetId": 5
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "maybe, but since we don\u0027t have FBT at this point in the stack, we can use EAS_PREFER_IDLE or PREFER_IDLE_EAS.",
       "parentUuid": "c9c398a7_281cf969",
+      "range": {
+        "startLine": 105,
+        "startChar": 11,
+        "endLine": 105,
+        "endChar": 31
+      },
+      "revId": "1d2b29f6ab79ee230b46c801296ed864daab629c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "06333d6b_3379f32b",
+        "filename": "kernel/sched/features.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-20T10:54:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a232f6c0_58a9a7ff",
       "range": {
         "startLine": 105,
         "startChar": 11,
