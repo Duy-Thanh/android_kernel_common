@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d219305_3da80a94",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5799,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-20T10:47:12Z",
+      "side": 1,
+      "message": "This have been squashed back to wrong patch... but should not be a big issue anyway for the tree to be bisectable.",
+      "range": {
+        "startLine": 5798,
+        "startChar": 0,
+        "endLine": 5799,
+        "endChar": 22
+      },
+      "revId": "074d813f3294583c727403b6f4bb311b5c1dca88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
