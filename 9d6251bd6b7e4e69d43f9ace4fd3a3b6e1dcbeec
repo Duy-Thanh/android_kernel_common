@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "a8138f2b_b3dc41ef",
+        "filename": "fs/hwsdcardfs/dentry.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1133869
+      },
+      "writtenOn": "2017-12-20T03:59:08Z",
+      "side": 1,
+      "message": "actually we need a writable callback in the dput.\nyou can think of \"sdcardfs_d_delete\" is an another callback in the d_delete at the specific position, I mean:\n\n\tif (unlikely(dentry-\u003ed_flags \u0026 DCACHE_DISCONNECTED))\n\t\tgoto kill_it;\n\n\u003e\u003e\u003e\u003e d_lock unlock and relock safe\n\tif (unlikely(dentry-\u003ed_flags \u0026 DCACHE_OP_DELETE)) {\n\t\tif (dentry-\u003ed_op-\u003ed_delete(dentry))\n\t\t\tgoto kill_it;\n\t}\n\u003c\u003c\u003c\u003c\n\n\tdentry_lru_add(dentry);",
+      "parentUuid": "c4ef2ad8_5a2ecd58",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 92,
+        "endChar": 48
+      },
+      "revId": "9d6251bd6b7e4e69d43f9ace4fd3a3b6e1dcbeec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7328ebae_d4e7d2d2",
         "filename": "fs/hwsdcardfs/dentry.c",
         "patchSetId": 23
@@ -71,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "bc8dd8ef_0fb03faf",
+        "filename": "fs/hwsdcardfs/dentry.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1133869
+      },
+      "writtenOn": "2017-12-20T03:59:08Z",
+      "side": 1,
+      "message": "I think that is OK to spin_unlock(\u0026cast-\u003ed_lock); here.\nBecause, if you take a look at the remaining code of \"dput\" after\nd_delete(dentry), it has only\n\tif (unlikely(dentry-\u003ed_flags \u0026 DCACHE_OP_DELETE)) {\n\t\tif (dentry-\u003ed_op-\u003ed_delete(dentry))\n\t\t\tgoto kill_it;\n\t}\n\n\tdentry_lru_add(dentry);\n\n\tdentry-\u003ed_lockref.count--;    \u003c-- we have d_count \u003e 0\n\tspin_unlock(\u0026dentry-\u003ed_lock);\n\treturn;\n\nor dentry_kill\n\tstruct inode *inode \u003d dentry-\u003ed_inode;\n\tstruct dentry *parent \u003d NULL;\n\n\tif (inode \u0026\u0026 unlikely(!spin_trylock(\u0026inode-\u003ei_lock)))\n\t\tgoto failed;\n        ...\nfailed:\n\tspin_unlock(\u0026dentry-\u003ed_lock);  \u003c-- take a look here\n\treturn dentry; /* try again with same dentry */\n\nboth are spin_unlock(\u0026dentry-\u003ed_lock); safe.",
+      "parentUuid": "7328ebae_d4e7d2d2",
+      "range": {
+        "startLine": 110,
+        "startChar": 2,
+        "endLine": 110,
+        "endChar": 29
+      },
+      "revId": "9d6251bd6b7e4e69d43f9ace4fd3a3b6e1dcbeec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4ff70e64_53081088",
         "filename": "fs/hwsdcardfs/inode.c",
         "patchSetId": 23
@@ -82,6 +130,30 @@
       "writtenOn": "2017-12-20T03:30:52Z",
       "side": 1,
       "message": "This highly obscures the function of the code.\nInstead of breaking the common beginning and ending of the code into separate functions, you can do something similar to what overlayfs does, and call into a common function from create and mkdir, and split back into the two function calls on S_ISREG(dentry)/S_ISDIR(dentry). That would remove the need for the functions in create.c, and the structs that they pass.",
+      "range": {
+        "startLine": 23,
+        "startChar": 1,
+        "endLine": 23,
+        "endChar": 33
+      },
+      "revId": "9d6251bd6b7e4e69d43f9ace4fd3a3b6e1dcbeec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6d20206_c7c7a23e",
+        "filename": "fs/hwsdcardfs/inode.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1133869
+      },
+      "writtenOn": "2017-12-20T03:59:08Z",
+      "side": 1,
+      "message": "I will take a look at here to make an additional patch.",
+      "parentUuid": "4ff70e64_53081088",
       "range": {
         "startLine": 23,
         "startChar": 1,
@@ -140,6 +212,30 @@
     },
     {
       "key": {
+        "uuid": "e0a9662c_e73114d3",
+        "filename": "fs/hwsdcardfs/namei.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1133869
+      },
+      "writtenOn": "2017-12-20T03:59:08Z",
+      "side": 1,
+      "message": "will fix it.",
+      "parentUuid": "6ca05223_20642842",
+      "range": {
+        "startLine": 99,
+        "startChar": 9,
+        "endLine": 99,
+        "endChar": 31
+      },
+      "revId": "9d6251bd6b7e4e69d43f9ace4fd3a3b6e1dcbeec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a11001d9_985dce3b",
         "filename": "fs/hwsdcardfs/sdcardfs.h",
         "patchSetId": 23
@@ -151,6 +247,30 @@
       "writtenOn": "2017-12-20T03:30:52Z",
       "side": 1,
       "message": "Why are we doing this? d_fsdata is only written to when we allocate it, and then when it is removed. So long as the deletion is done in a RCU friendly way, I don\u0027t why we need this here, and in SDCARDFS_DI_R/SDCARDFS_DI_W",
+      "range": {
+        "startLine": 309,
+        "startChar": 1,
+        "endLine": 314,
+        "endChar": 14
+      },
+      "revId": "9d6251bd6b7e4e69d43f9ace4fd3a3b6e1dcbeec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "039a2339_a3a50c0d",
+        "filename": "fs/hwsdcardfs/sdcardfs.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1133869
+      },
+      "writtenOn": "2017-12-20T03:59:08Z",
+      "side": 1,
+      "message": "Because there existed a race condition.\nd_fsdata would be cleared after d_release but there could be still ongoing RCU dentry lookup still after \"get fs_data\" but before \"read_lock\", so we need the extra xchg lock.\n\nI don\u0027t know whether I describe the race condition above clearly. \n\nActually I don\u0027t like this approach too, so I have tried to use another approach \"ANDROID: sdcardfs: optimize relationship and locks (experimental)\" to take place.",
+      "parentUuid": "a11001d9_985dce3b",
       "range": {
         "startLine": 309,
         "startChar": 1,
@@ -186,6 +306,30 @@
     },
     {
       "key": {
+        "uuid": "5191bf73_0e804eb4",
+        "filename": "fs/hwsdcardfs/sdcardfs.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1133869
+      },
+      "writtenOn": "2017-12-20T03:59:08Z",
+      "side": 1,
+      "message": "yes, see \"ANDROID: sdcardfs: optimize relationship and locks (experimental)\"",
+      "parentUuid": "9f2f60e8_7b7d2c25",
+      "range": {
+        "startLine": 325,
+        "startChar": 28,
+        "endLine": 325,
+        "endChar": 41
+      },
+      "revId": "9d6251bd6b7e4e69d43f9ace4fd3a3b6e1dcbeec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dbf23b39_856cf31e",
         "filename": "fs/hwsdcardfs/super.c",
         "patchSetId": 23
@@ -197,6 +341,30 @@
       "writtenOn": "2017-12-20T03:30:52Z",
       "side": 1,
       "message": "Why is this being done from an include?",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 17
+      },
+      "revId": "9d6251bd6b7e4e69d43f9ace4fd3a3b6e1dcbeec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a899565_e5cf24aa",
+        "filename": "fs/hwsdcardfs/super.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1133869
+      },
+      "writtenOn": "2017-12-20T03:59:08Z",
+      "side": 1,
+      "message": "there existed an obsolete code to adapt bind-mount remount options for user-space sdcardd. It has been deleted.\n\nI will fix it and delete these defines.",
+      "parentUuid": "dbf23b39_856cf31e",
       "range": {
         "startLine": 153,
         "startChar": 0,
