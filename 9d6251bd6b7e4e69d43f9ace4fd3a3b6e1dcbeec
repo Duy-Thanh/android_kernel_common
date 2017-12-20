@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "98138d71_8d96c0ba",
+        "filename": "fs/hwsdcardfs/dentry.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1133869
+      },
+      "writtenOn": "2017-12-20T05:09:18Z",
+      "side": 1,
+      "message": "and before d_delete, you can see its only\nfast_dput\n    \t/*\n\t * If we have a d_op-\u003ed_delete() operation, we sould not\n\t * let the dentry count go to zero, so use \"put_or_lock\".\n\t */\n\tif (unlikely(dentry-\u003ed_flags \u0026 DCACHE_OP_DELETE))\n\t\treturn lockref_put_or_lock(\u0026dentry-\u003ed_lockref);\n        ...\n\ndput\n        fast_dput\n\n\t/* Slow case: now with the dentry lock held */\n\trcu_read_unlock();\n\n\tWARN_ON(d_in_lookup(dentry));\n\n\t/* Unreachable? Get rid of it */\n\tif (unlikely(d_unhashed(dentry)))\n\t\tgoto kill_it;\n\n\tif (unlikely(dentry-\u003ed_flags \u0026 DCACHE_DISCONNECTED))\n\t\tgoto kill_it;\n\n\tif (unlikely(dentry-\u003ed_flags \u0026 DCACHE_OP_DELETE)) {\n\t\tif (dentry-\u003ed_op-\u003ed_delete(dentry)) \u003c-- we are here\n\t\t\tgoto kill_it;\n\t}\n so you can think\n    1) d_count \u003e 0\n    2) after lockref_put_or_lock and before dentry-\u003ed_op-\u003ed_delete(dentry), only a few check, if we unlock and relock d_lock again, we redo \n            if (unlikely(d_unhashed(dentry)))\n\t\tgoto kill_it;\n       to confirm whether we should kill or into LRU.\n   that is equal to delay lock d_lock with d_count \u003e 0.\n\nthere here will be no race.",
+      "parentUuid": "7328ebae_d4e7d2d2",
+      "range": {
+        "startLine": 110,
+        "startChar": 2,
+        "endLine": 110,
+        "endChar": 29
+      },
+      "revId": "9d6251bd6b7e4e69d43f9ace4fd3a3b6e1dcbeec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4ff70e64_53081088",
         "filename": "fs/hwsdcardfs/inode.c",
         "patchSetId": 23
