@@ -15,33 +15,6 @@
 
 #include "trace-events.h"
 
-#include "create.c"
-
-static int sdcardfs_create(struct inode *dir, struct dentry *dentry,
-	umode_t mode, bool want_excl)
-{
-	_sdcardfs_do_create_struct this;
-	int err;
-
-	trace_sdcardfs_create_enter(dir, dentry, mode, want_excl);
-
-	err = __sdcardfs_do_create_begin(&this, dir, dentry);
-	if (err)
-		goto out;
-
-	/* for regular files, the last 16bit of mode is 0664 */
-	mode = (mode & S_IFMT) | 0664;
-
-	err = vfs_create(d_inode(this.real_dir_dentry),
-		this.real_dentry, mode, want_excl);
-
-	err = __sdcardfs_do_create_end(&this, __func__, dir, dentry, err);
-
-out:
-	trace_sdcardfs_create_exit(dir, dentry, mode, want_excl, err);
-	return err;
-}
-
 static struct dentry *touch_file(struct dentry *parent, char *name, int len)
 {
 	struct dentry *dentry;
@@ -65,7 +38,7 @@ static struct dentry *touch_file(struct dentry *parent, char *name, int len)
 	return dentry;
 }
 
-int touch_nomedia(struct dentry *parent)
+static int touch_nomedia(struct dentry *parent)
 {
 	struct dentry *d_nomedia =
 		touch_file(parent, ".nomedia", sizeof(".nomedia") - 1);
@@ -77,10 +50,175 @@ int touch_nomedia(struct dentry *parent)
 	return 0;
 }
 
-static int sdcardfs_mkdir(struct inode *dir,
-	struct dentry *dentry, umode_t mode)
+/* When creating /Android/data and /Android/obb, mark them as .nomedia */
+static int prepare_nomedia_dir(struct sdcardfs_sb_info *sbi,
+	struct dentry *parent,
+	struct dentry *real_dentry
+) {
+	int err = 0;
+	struct sdcardfs_tree_entry *pte = SDCARDFS_D(parent);
+	const char *name = real_dentry->d_name.name;
+
+	if (unlikely(pte->perm == PERM_ANDROID)) {
+		if (unlikely(!strcasecmp(name, "data"))) {
+touch_real:
+			err = touch_nomedia(real_dentry);
+			WARN_ON(err == -EEXIST);
+		} else if (unlikely(!strcasecmp(name, "obb"))) {
+			/* not multiuser obb */
+			if (sbi->shared_obb == NULL)
+				goto touch_real;
+
+			err = touch_nomedia(sbi->shared_obb);
+			if (err == -EEXIST)
+				err = 0;
+		}
+
+		if (unlikely(err))
+			errln("failed to touch .nomedia in %s: %d", name, err);
+	}
+	return err;
+}
+
+int sdcardfs_create_file(struct inode *dir,
+	struct dentry *dentry,
+	umode_t mode,
+	bool want_excl,
+	const char *__caller_FUNCTION__)
 {
-	_sdcardfs_do_create_struct this;
+	const char *name = dentry->d_name.name;
+	struct dentry *parent, *real_dir_dentry;
+	struct sdcardfs_sb_info *sbi;
+	const struct cred *saved_cred;
+	int err;
+	struct dentry *real_dentry;
+	struct fs_struct *saved_fs;
+
+	if (d_really_is_positive(dentry)) {
+		warnln("%s, unexpected positive dentry(%s)",
+			__caller_FUNCTION__, name);
+		return -ESTALE;
+	}
+
+	/* some forbidden filenames should be checked before creating */
+	if (permission_denied_to_create(dir, name)) {
+		errln("permission denied to create %s", name);
+		return -EACCES;
+	}
+
+	parent = dget_parent(dentry);
+	BUG_ON(d_inode(parent) != dir);
+
+	real_dir_dentry = sdcardfs_get_lower_dentry(parent);
+	BUG_ON(real_dir_dentry == NULL);
+
+	inode_lock_nested(d_inode(real_dir_dentry), I_MUTEX_PARENT);
+
+	sbi = SDCARDFS_SB(dir->i_sb);
+	/* save current_cred and override it */
+	OVERRIDE_CRED(sbi, saved_cred);
+	if (IS_ERR(saved_cred)) {
+		err = PTR_ERR(saved_cred);
+		goto unlock_err;
+	}
+
+#ifdef SDCARDFS_CASE_INSENSITIVE
+	if (sbi->ci->may_create != NULL) {
+		struct path path = {
+			.dentry = real_dir_dentry,
+			.mnt = sbi->lower_mnt
+		};
+
+		err = sbi->ci->may_create(&path, &dentry->d_name);
+		if (err)
+			goto revert_cred_err;
+	}
+#endif
+
+	real_dentry = lookup_one_len(dentry->d_name.name,
+		real_dir_dentry, dentry->d_name.len);
+
+	if (IS_ERR(real_dentry)) {
+		err = PTR_ERR(real_dentry);
+		goto revert_cred_err;
+	}
+
+	if (d_is_positive(real_dentry)) {
+		err = -ESTALE;
+		goto dput_err;
+	}
+
+	BUG_ON(sbi->override_fs == NULL);
+	saved_fs = override_current_fs(sbi->override_fs);
+
+	switch (mode & S_IFMT) {
+	case S_IFDIR:
+		/* for directories, the last 16bit of mode is 0775 */
+		mode = S_IFDIR | 0775;
+
+		err = vfs_mkdir(d_inode(real_dir_dentry),
+			real_dentry, mode);
+
+		if (!err && d_is_positive(real_dentry))
+			err = prepare_nomedia_dir(sbi, parent, real_dentry);
+		break;
+
+	case S_IFREG:
+		/* for regular files, the last 16bit of mode is 0664 */
+		mode = S_IFREG | 0664;
+
+		err = vfs_create(d_inode(real_dir_dentry),
+			real_dentry, mode, want_excl);
+		break;
+
+	default:
+		err = -EINVAL;
+		break;
+	}
+
+	fsstack_copy_inode_size(dir, d_inode(real_dir_dentry));
+	revert_current_fs(saved_fs);
+
+	if (err)
+		goto dput_err;
+
+	REVERT_CRED(saved_cred);
+
+	err = PTR_ERR(sdcardfs_interpose(parent, dentry, real_dentry));
+	if (unlikely(err))
+		errln("%s, unexpected error when interposing: %d",
+			__caller_FUNCTION__, err);
+
+	goto unlock_err;
+dput_err:
+	dput(real_dentry);
+revert_cred_err:
+	REVERT_CRED(saved_cred);
+unlock_err:
+	inode_unlock(d_inode(real_dir_dentry));
+	dput(real_dir_dentry);
+	dput(parent);
+	return err;
+}
+
+static int sdcardfs_create(struct inode *dir,
+	struct dentry *dentry,
+	umode_t __maybe_unused mode, bool want_excl)
+{
+	int err;
+
+	trace_sdcardfs_create_enter(dir, dentry, mode, want_excl);
+
+	err = sdcardfs_create_file(dir, dentry,
+		S_IFREG, want_excl, __func__);
+
+	trace_sdcardfs_create_exit(dir, dentry, mode, want_excl, err);
+	return err;
+}
+
+static int sdcardfs_mkdir(struct inode *dir,
+	struct dentry *dentry, umode_t __maybe_unused mode)
+{
 	int err;
 
 	trace_sdcardfs_mkdir_enter(dir, dentry, mode);
@@ -92,92 +230,119 @@ static int sdcardfs_mkdir(struct inode *dir,
 		goto out;
 	}
 #endif
-	err = __sdcardfs_do_create_begin(&this, dir, dentry);
-	if (err)
-		goto out;
-
-	/* for directories, the last 16bit of mode is 0775 */
-	mode = (mode & S_IFMT) | 0775;
-
-	err = vfs_mkdir(d_inode(this.real_dir_dentry),
-		this.real_dentry, mode);
-
-	/* When creating /Android/data and /Android/obb, mark them as .nomedia */
-	if (!err && d_is_positive(this.real_dentry)) {
-		struct sdcardfs_tree_entry *pte = SDCARDFS_D(this.parent);
-
-		if (unlikely(pte->perm == PERM_ANDROID)) {
-			if (unlikely(!strcasecmp(dentry->d_name.name, "data"))) {
-touch_real:
-				err = touch_nomedia(this.real_dentry);
-				WARN_ON(err == -EEXIST);
-			} else if (unlikely(!strcasecmp(dentry->d_name.name, "obb"))) {
-				/* not multiuser obb */
-				if (SDCARDFS_SB(dir->i_sb)->shared_obb == NULL)
-					goto touch_real;
-				err = touch_nomedia(SDCARDFS_SB(dir->i_sb)->shared_obb);
-				if (err == -EEXIST)
-					err = 0;
-			}
-
-			if (unlikely(err))
-				errln("%s: failed to create .nomedia in %s: %d",
-					__func__, dentry->d_name.name, err);
-		}
-	}
-
-	err = __sdcardfs_do_create_end(&this, __func__, dir, dentry, err);
+	err = sdcardfs_create_file(dir, dentry, S_IFDIR, false, __func__);
 
 out:
 	trace_sdcardfs_mkdir_exit(dir, dentry, mode, err);
 	return err;
 }
 
-#include "remove.c"
+static int sdcardfs_remove_file(struct inode *dir,
+	struct dentry *dentry)
+{
+	struct dentry *real_dentry;
+	struct dentry *real_dir_dentry;
+	struct inode *real_dir;
+	int err;
+	const struct cred *saved_cred;
+	struct inode *real_inode = NULL;
+
+	/* some forbidden filenames should be checked before removing */
+	if (permission_denied_to_remove(dir, dentry->d_name.name)) {
+		errln("permission denied to remove %s", dentry->d_name.name);
+		return -EACCES;
+	}
+
+	real_dentry = sdcardfs_get_real_dentry(dentry);
+	BUG_ON(real_dentry == NULL);
+
+retry:
+	real_dir_dentry = dget_parent(real_dentry);
+
+	/* TODO: disconnected dentry is not supported yet.*/
+	BUG_ON(real_dir_dentry == NULL);
+
+	/*
+	 * note that real_dir_dentry ?(!=) lower_dentry(dget_parent(dentry)).
+	 * it's unsafe to check by use IS_ROOT since inode_lock has not taken
+	 */
+	if (unlikely(real_dentry == real_dir_dentry)) {
+		err = -EBUSY;
+		goto dput_err;
+	}
+
+	real_dir = d_inode(real_dir_dentry);
+	inode_lock_nested(real_dir, I_MUTEX_PARENT);
+
+	if (unlikely(real_dir_dentry != real_dentry->d_parent)) {
+		inode_unlock(real_dir);
+		dput(real_dir_dentry);
+		goto retry;
+	}
+
+	/* save current_cred and override it */
+	OVERRIDE_CRED(SDCARDFS_SB(dir->i_sb), saved_cred);
+	if (IS_ERR(saved_cred)) {
+		err = PTR_ERR(saved_cred);
+		goto unlock_err;
+	}
+
+	/* real_dentry must be hashed and in the real_dir */
+	if (__read_seqcount_retry(&real_dentry->d_seq,
+		SDCARDFS_D(dentry)->real.d_seq)) {
+		err = -ESTALE;
+
+		/* since we dont support hashed but negative dentry */
+		d_invalidate(dentry);
+		goto revert_cred_err;
+	}
+
+	real_inode = d_inode(real_dentry);
+	if (S_ISDIR(real_inode->i_mode)) {
+		err = vfs_rmdir(real_dir, real_dentry);
+		real_inode = NULL;
+	} else {
+		ihold(real_inode);
+		err = vfs_unlink(real_dir, real_dentry, NULL);
+	}
+	fsstack_copy_inode_size(dir, real_dir);
+revert_cred_err:
+	REVERT_CRED(saved_cred);
+unlock_err:
+	inode_unlock(d_inode(real_dir_dentry));
+dput_err:
+	dput(real_dir_dentry);
+	dput(real_dentry);
+
+	/*
+	 * Since sdcardfs is a multiview stackable file system,
+	 * we must keep track of the underlay file system all the time.
+	 * Thus, it makes no sense that hashed but negative
+	 * dentries exist (probably could cause bad behaviors).
+	 */
+	if (!err)
+		d_drop(dentry);
+	if (real_inode != NULL)
+		iput(real_inode);
+	return err;
+}
 
 static int sdcardfs_unlink(struct inode *dir, struct dentry *dentry)
 {
-	_sdcardfs_do_remove_struct this;
 	int ret;
-	struct inode *real_inode;
 
 	trace_sdcardfs_unlink_enter(dir, dentry);
-
-	ret = __sdcardfs_do_remove_begin(&this, dir, dentry);
-	if (ret)
-		goto out;
-
-	real_inode = d_inode(this.real_dentry);
-	ihold(real_inode);
-
-	ret = S_ISDIR(real_inode->i_mode) ?
-		-EISDIR :
-		vfs_unlink(d_inode(this.real_dir_dentry),
-			this.real_dentry, NULL);
-
-	__sdcardfs_do_remove_end(&this, dir, dentry);
-	iput(real_inode);	/* truncate real_inode here */
-
-out:
+	ret = sdcardfs_remove_file(dir, dentry);
 	trace_sdcardfs_unlink_exit(dir, dentry, ret);
 	return ret;
 }
 
 static int sdcardfs_rmdir(struct inode *dir, struct dentry *dentry)
 {
-	_sdcardfs_do_remove_struct this;
 	int ret;
 
 	trace_sdcardfs_rmdir_enter(dir, dentry);
-
-	ret = __sdcardfs_do_remove_begin(&this, dir, dentry);
-	if (ret)
-		goto out;
-
-	ret = vfs_rmdir(d_inode(this.real_dir_dentry), this.real_dentry);
-	__sdcardfs_do_remove_end(&this, dir, dentry);
-
-out:
+	ret = sdcardfs_remove_file(dir, dentry);
 	trace_sdcardfs_rmdir_exit(dir, dentry, ret);
 	return ret;
 }

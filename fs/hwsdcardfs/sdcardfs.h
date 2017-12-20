@@ -158,7 +158,6 @@ extern struct dentry *sdcardfs_interpose(struct dentry *,
 
 /* inode.c */
 extern void sdcardfs_fill_inode(struct inode *inode, mode_t mode);
-extern int touch_nomedia(struct dentry *parent);
 
 #ifdef CONFIG_SDCARD_FS_XATTR
 /* xattr.c */
