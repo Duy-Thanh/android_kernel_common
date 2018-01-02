@@ -219,7 +219,11 @@ struct tcp_sock {
 	} rack;
 	u16	advmss;		/* Advertised MSS			*/
 	u8	rate_app_limited:1,  /* rate_{delivered,interval_us} limited? */
+<<<<<<< HEAD   (f3f345 Merge 4.9.73 into android-4.9)
 		fastopen_connect:1, /* FASTOPEN_CONNECT sockopt */
+=======
+		is_sack_reneg:1,    /* in recovery from loss with SACK reneg? */
+>>>>>>> BRANCH (07bcb2 Linux 4.9.74)
 		unused:6;
 	u8	nonagle     : 4,/* Disable Nagle algorithm?             */
 		thin_lto    : 1,/* Use linear timeouts for thin streams */
