@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee946bc5_2fbb4db6",
+        "filename": "scripts/mod/modpost.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-01-04T15:48:33Z",
+      "side": 1,
+      "message": "random number?  :)",
+      "range": {
+        "startLine": 176,
+        "startChar": 27,
+        "endLine": 176,
+        "endChar": 30
+      },
+      "revId": "f64014a5ece5ae34e3cfbc3c2b5312f192eb220c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0ce5719_70da3dcc",
+        "filename": "scripts/mod/modpost.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-01-04T15:48:33Z",
+      "side": 1,
+      "message": "nit, didn\u0027t need to be changed.",
+      "range": {
+        "startLine": 217,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 27
+      },
+      "revId": "f64014a5ece5ae34e3cfbc3c2b5312f192eb220c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df092be8_4165789d",
+        "filename": "scripts/mod/modpost.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2161,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-01-04T15:48:33Z",
+      "side": 1,
+      "message": "nice check!",
+      "range": {
+        "startLine": 2161,
+        "startChar": 0,
+        "endLine": 2161,
+        "endChar": 80
+      },
+      "revId": "f64014a5ece5ae34e3cfbc3c2b5312f192eb220c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
