@@ -1380,6 +1380,7 @@ out:
 	err = -EINVAL;
 	spin_lock_bh(&x1->lock);
 	if (likely(x1->km.state == XFRM_STATE_VALID)) {
+		bool bump_genids = false;
 		if (x->encap && x1->encap)
 			memcpy(x1->encap, x->encap, sizeof(*x1->encap));
 		if (x->coaddr && x1->coaddr) {
@@ -1393,6 +1394,19 @@ out:
 		tasklet_hrtimer_start(&x1->mtimer, ktime_set(1, 0), HRTIMER_MODE_REL);
 		if (x1->curlft.use_time)
 			xfrm_state_check_expire(x1);
+
+		spin_lock_bh(&net->xfrm.xfrm_state_lock);
+        if (memcmp(&x1->mark, &x->mark, sizeof(x1->mark))) {
+			memcpy(&x1->mark, &x->mark, sizeof(x1->mark));
+			bump_genids = true;
+		}
+		if (x->props.output_mark) {
+			x1->props.output_mark = x->props.output_mark;
+			bump_genids = true;
+		}
+		if (bump_genids)
+			__xfrm_state_bump_genids(x1);
+		spin_unlock_bh(&net->xfrm.xfrm_state_lock);
 
 		err = 0;
 		x->km.state = XFRM_STATE_DEAD;
