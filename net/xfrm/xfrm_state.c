@@ -1334,6 +1334,31 @@ error:
 EXPORT_SYMBOL(xfrm_state_migrate);
 #endif
 
+static inline void __xfrm_state_update_valid(struct xfrm_state *x,
+					     struct xfrm_state *x1) {
+	int use_spi = xfrm_id_proto_match(x->id.proto, IPSEC_PROTO_ANY);
+	if (x->encap && x1->encap)
+		memcpy(x1->encap, x->encap, sizeof(*x1->encap));
+	if (x->coaddr && x1->coaddr) {
+		memcpy(x1->coaddr, x->coaddr, sizeof(*x1->coaddr));
+	}
+	if (!use_spi && memcmp(&x1->sel, &x->sel, sizeof(x1->sel)))
+		memcpy(&x1->sel, &x->sel, sizeof(x1->sel));
+
+	memcpy(&x1->lft, &x->lft, sizeof(x1->lft));
+	x1->km.dying = 0;
+	tasklet_hrtimer_start(&x1->mtimer, ktime_set(1, 0), HRTIMER_MODE_REL);
+	if (x1->curlft.use_time)
+		xfrm_state_check_expire(x1);
+
+	if (memcmp(&x1->mark, &x->mark, sizeof(x1->mark)) ||
+			x1->props.output_mark != x->props.output_mark) {
+		memcpy(&x1->mark, &x->mark, sizeof(x1->mark));
+		x1->props.output_mark = x->props.output_mark;
+		__xfrm_state_bump_genids(x1);
+	}
+}
+
 int xfrm_state_update(struct xfrm_state *x)
 {
 	struct xfrm_state *x1, *to_put;
@@ -1356,11 +1381,22 @@ int xfrm_state_update(struct xfrm_state *x)
 		goto out;
 	}
 
-	if (x1->km.state == XFRM_STATE_ACQ) {
+	err = -EINVAL;
+	if (likely(x1->km.state == XFRM_STATE_ACQ)) {
 		__xfrm_state_insert(x);
 		x = NULL;
+		err = 0;
+        goto out;
 	}
-	err = 0;
+
+	spin_lock_bh(&x1->lock);
+	if (x1->km.state == XFRM_STATE_VALID) {
+		__xfrm_state_update_valid(x, x1);
+		x->km.state = XFRM_STATE_DEAD;
+		__xfrm_state_put(x);
+		err = 0;
+	}
+	spin_unlock_bh(&x1->lock);
 
 out:
 	spin_unlock_bh(&net->xfrm.xfrm_state_lock);
@@ -1373,32 +1409,8 @@ out:
 
 	if (!x) {
 		xfrm_state_delete(x1);
-		xfrm_state_put(x1);
-		return 0;
-	}
-
-	err = -EINVAL;
-	spin_lock_bh(&x1->lock);
-	if (likely(x1->km.state == XFRM_STATE_VALID)) {
-		if (x->encap && x1->encap)
-			memcpy(x1->encap, x->encap, sizeof(*x1->encap));
-		if (x->coaddr && x1->coaddr) {
-			memcpy(x1->coaddr, x->coaddr, sizeof(*x1->coaddr));
-		}
-		if (!use_spi && memcmp(&x1->sel, &x->sel, sizeof(x1->sel)))
-			memcpy(&x1->sel, &x->sel, sizeof(x1->sel));
-		memcpy(&x1->lft, &x->lft, sizeof(x1->lft));
-		x1->km.dying = 0;
-
-		tasklet_hrtimer_start(&x1->mtimer, ktime_set(1, 0), HRTIMER_MODE_REL);
-		if (x1->curlft.use_time)
-			xfrm_state_check_expire(x1);
-
 		err = 0;
-		x->km.state = XFRM_STATE_DEAD;
-		__xfrm_state_put(x);
 	}
-	spin_unlock_bh(&x1->lock);
 
 	xfrm_state_put(x1);
 
