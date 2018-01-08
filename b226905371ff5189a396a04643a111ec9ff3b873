@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d56a676e_a4a7b4f2",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1060151
+      },
+      "writtenOn": "2018-01-08T23:53:03Z",
+      "side": 1,
+      "message": "in any of these cases, is it possible for state to be null? It looks \"unlikely\", but if so... kaboom.",
+      "range": {
+        "startLine": 1089,
+        "startChar": 14,
+        "endLine": 1089,
+        "endChar": 23
+      },
+      "revId": "b226905371ff5189a396a04643a111ec9ff3b873",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "782e0e6b_18ec25ed",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1186,
+      "author": {
+        "id": 1060151
+      },
+      "writtenOn": "2018-01-08T23:53:03Z",
+      "side": 1,
+      "message": "consider holding par-\u003estate in a variable to reduce the number of double-dereferences? Ofc this is readability, not performance since the compiler will do it anyway.",
+      "range": {
+        "startLine": 1186,
+        "startChar": 5,
+        "endLine": 1186,
+        "endChar": 17
+      },
+      "revId": "b226905371ff5189a396a04643a111ec9ff3b873",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c66860f0_5acd8bfc",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2284,
+      "author": {
+        "id": 1060151
+      },
+      "writtenOn": "2018-01-08T23:53:03Z",
+      "side": 1,
+      "message": "suggest to mention this conversion in the commit message.",
+      "range": {
+        "startLine": 2284,
+        "startChar": 4,
+        "endLine": 2284,
+        "endChar": 17
+      },
+      "revId": "b226905371ff5189a396a04643a111ec9ff3b873",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
