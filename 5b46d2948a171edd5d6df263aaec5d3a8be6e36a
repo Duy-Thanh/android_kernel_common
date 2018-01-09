@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69e9485c_a5c7965b",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2242,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2018-01-09T00:46:30Z",
+      "side": 1,
+      "message": "Can you explain in the commit message why this switch is necessary? Is it just because sk-\u003esk_refcnt has changed type?h",
+      "range": {
+        "startLine": 2242,
+        "startChar": 10,
+        "endLine": 2242,
+        "endChar": 23
+      },
+      "revId": "5b46d2948a171edd5d6df263aaec5d3a8be6e36a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
