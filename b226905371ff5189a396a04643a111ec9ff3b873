@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4fff3c79_84f4b6f3",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2018-01-09T00:22:23Z",
+      "side": 1,
+      "message": "No other places checking for NULL.",
+      "parentUuid": "d56a676e_a4a7b4f2",
+      "range": {
+        "startLine": 1089,
+        "startChar": 14,
+        "endLine": 1089,
+        "endChar": 23
+      },
+      "revId": "b226905371ff5189a396a04643a111ec9ff3b873",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "782e0e6b_18ec25ed",
         "filename": "net/netfilter/xt_qtaguid.c",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "aacb59c4_c6667a77",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1186,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2018-01-09T00:22:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "782e0e6b_18ec25ed",
+      "range": {
+        "startLine": 1186,
+        "startChar": 5,
+        "endLine": 1186,
+        "endChar": 17
+      },
+      "revId": "b226905371ff5189a396a04643a111ec9ff3b873",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c66860f0_5acd8bfc",
         "filename": "net/netfilter/xt_qtaguid.c",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2018-01-08T23:53:03Z",
       "side": 1,
       "message": "suggest to mention this conversion in the commit message.",
+      "range": {
+        "startLine": 2284,
+        "startChar": 4,
+        "endLine": 2284,
+        "endChar": 17
+      },
+      "revId": "b226905371ff5189a396a04643a111ec9ff3b873",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "446ad5bb_dad06e76",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2284,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2018-01-09T00:22:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c66860f0_5acd8bfc",
       "range": {
         "startLine": 2284,
         "startChar": 4,
