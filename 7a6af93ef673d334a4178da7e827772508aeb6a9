@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97e43bd4_90e89713",
+        "filename": "kernel/sched/energy.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2018-01-10T21:19:08Z",
+      "side": 1,
+      "message": "Thinking about the usage of this a bit more, you must be populating this struct from elsewhere very early in the boot phase. Could you just instead populate sge_array directly?",
+      "revId": "7a6af93ef673d334a4178da7e827772508aeb6a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53e387b6_6b977f8f",
+        "filename": "kernel/sched/energy.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2018-01-10T21:19:08Z",
+      "side": 1,
+      "message": "If we were to write sge_array before we call init_sched_energy_costs, we could do something like:\n\nif (!cn) {\n    if (!sge_array[cpu][0]) {\n        pr_warn(\"Sched-energy-costs not available\\n\");\n        return;\n    }\n    continue;\n}\n\nThis would let non-DT platforms write whatever they want into sge_array, so long as it\u0027s done before we call here.\n\nIt will still be overridden by data from DT if supplied which is potentially problematic for debugging. Perhaps we could add a warning below for cases where you have populated sge_array *and* someone has put the sched-energy-costs node in the devicetree, it\u0027s bound to happen.",
+      "range": {
+        "startLine": 64,
+        "startChar": 3,
+        "endLine": 64,
+        "endChar": 30
+      },
+      "revId": "7a6af93ef673d334a4178da7e827772508aeb6a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f70eccc7_91a11b9e",
+        "filename": "kernel/sched/energy.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2018-01-10T21:19:08Z",
+      "side": 1,
+      "message": "if we were externally populating sge_array, this is probably the line where you\u0027d add something like:\n\n\nif (sge_array[cpu][0])\n    pr_warn(\"DT overriding existing sched-energy-costs for CPU%d\\n\", cpu);",
+      "revId": "7a6af93ef673d334a4178da7e827772508aeb6a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
