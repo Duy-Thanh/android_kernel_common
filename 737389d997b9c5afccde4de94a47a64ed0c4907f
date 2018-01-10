@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3a82f54_46b20f3c",
+        "filename": "fs/ext4/ext4.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2018-01-10T00:29:13Z",
+      "side": 1,
+      "message": "ext4 shouldn\u0027t include fscrypt.h until it\u0027s actually been converted over to use it.  For one, EXT4_ENCRYPTION doesn\u0027t select FS_ENCRYPTION in these old kernels, so after this change if you were to enable ext4 encryption without also f2fs encryption, there will be compile errors.",
+      "revId": "737389d997b9c5afccde4de94a47a64ed0c4907f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31cd6e7a_2c528ef4",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2018-01-10T00:29:13Z",
+      "side": 1,
+      "message": "In include/linux/fscrypt*.h there are some slight differences between this and the actual v4.15-rc4 versions; I\u0027m not sure why.  Though, none of the differences appear to matter.",
+      "revId": "737389d997b9c5afccde4de94a47a64ed0c4907f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
