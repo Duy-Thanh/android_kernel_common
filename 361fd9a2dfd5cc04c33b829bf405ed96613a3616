@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "360b23f5_a3172341",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5866,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2018-01-18T12:18:54Z",
+      "side": 1,
+      "message": "Is it possible to do this without calling ktime_get_ns even when we\u0027re not tracing?\n\nCould we achieve the same result by spitting out the same trace token twice (with some kind of before/after variation) and then working out the time afterwards from the trace event timestamps?\n\nOr, if that doesn\u0027t work well enough, perhaps we can put the whole thing behind a CONFIG_MEASURE_ENERGY_DIFF_TIME or something.",
+      "range": {
+        "startLine": 5859,
+        "startChar": 0,
+        "endLine": 5866,
+        "endChar": 45
+      },
+      "revId": "361fd9a2dfd5cc04c33b829bf405ed96613a3616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
