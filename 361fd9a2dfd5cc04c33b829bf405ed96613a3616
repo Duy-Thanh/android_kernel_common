@@ -22,6 +22,30 @@
       "revId": "361fd9a2dfd5cc04c33b829bf405ed96613a3616",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c364a37_5f1d19c0",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5866,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2018-01-19T06:33:12Z",
+      "side": 1,
+      "message": "Daniel Lezcano suggests to use local_clock() so can avoid overload by ktime_get_ns(), I verified this can work.\n\nAnother method is we can utilize the timestamp of T(trace_sched_energy_diff()) - T(trace_sched_waking()), or if there have two continuous energy calculation, we should use T`(trace_sched_energy_diff()) - T(trace_sched_energy_diff()) to get the duration. But this method is not very accurate. Will use python script to give a try for this.",
+      "parentUuid": "360b23f5_a3172341",
+      "range": {
+        "startLine": 5859,
+        "startChar": 0,
+        "endLine": 5866,
+        "endChar": 45
+      },
+      "revId": "361fd9a2dfd5cc04c33b829bf405ed96613a3616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
