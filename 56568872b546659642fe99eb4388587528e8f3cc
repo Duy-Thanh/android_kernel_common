@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e206126_297a8dff",
+        "filename": "fs/f2fs/data.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2018-01-22T19:10:15Z",
+      "side": 1,
+      "message": "This can be simplified slightly to:\n\nbio_set_op_attrs(bio, REQ_OP_READ, ctx ? REQ_NOENCRYPT : 0);",
+      "revId": "56568872b546659642fe99eb4388587528e8f3cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
