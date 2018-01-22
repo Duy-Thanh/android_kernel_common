@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "089846d9_a6f9062e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-01-22T14:19:45Z",
+      "side": 1,
+      "message": "You forgot to also sign-off on this :(\n\nAnd what is the upstream git commit id for this patch?  Why shouldn\u0027t it just go through the normal stable tree submission instead of being cherry-picked into android-common?",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 47
+      },
+      "revId": "8d3554b2d76d3a182de618f125588dfce13cfb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
