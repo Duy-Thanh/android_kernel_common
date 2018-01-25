@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48e82bb1_817109c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-01-25T14:31:11Z",
+      "side": 1,
+      "message": "no signed-off-by from the patch submitter?  That\u0027s not good :(",
+      "revId": "f512a4b4b1a6a265edb26142bd86d172968b4c3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a1e5c9a_356eb7dc",
+        "filename": "drivers/base/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-01-25T14:31:11Z",
+      "side": 1,
+      "message": "this is always the default, no need to set it.",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 16
+      },
+      "revId": "f512a4b4b1a6a265edb26142bd86d172968b4c3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
