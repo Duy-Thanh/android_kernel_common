@@ -1217,9 +1217,10 @@ static void binder_do_set_priority(struct task_struct *task,
 		struct sched_param params;
 
 		params.sched_priority = is_rt_policy(policy) ? priority : 0;
+		policy = is_rt_policy(policy) ? (policy | SCHED_RESET_ON_FORK) : policy;
 
 		sched_setscheduler_nocheck(task,
-					   policy | SCHED_RESET_ON_FORK,
+					   policy,
 					   &params);
 	}
 	if (is_fair_policy(policy))
