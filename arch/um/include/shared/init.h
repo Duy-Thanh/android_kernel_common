@@ -54,9 +54,7 @@ typedef void (*exitcall_t)(void);
 #endif
 
 #else
-#if __GNUC__ == 4
 # define __used			__attribute__((__used__))
-#endif
 #endif
 
 #else
