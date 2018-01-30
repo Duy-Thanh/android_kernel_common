@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b466bd1d_f6e31dc7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-01-30T22:51:59Z",
+      "side": 1,
+      "message": "meta-comment, the subjects of all of these are crazy, I don\u0027t think you want all of this in the git commit short line, do you?  :)",
+      "range": {
+        "startLine": 7,
+        "startChar": 1,
+        "endLine": 8,
+        "endChar": 0
+      },
+      "revId": "c026c6ee7ea6bf9dedf8327dd59f637f03657534",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
