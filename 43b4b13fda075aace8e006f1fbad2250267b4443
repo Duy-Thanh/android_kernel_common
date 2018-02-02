@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32d614c3_7e40cb99",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7085,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2018-02-02T17:38:52Z",
+      "side": 1,
+      "message": "Just to clarify: here is the place where eenv gets a member initialization, thus all the \"non assigned\" fields are zeroed.\nThe above line generates an out-of-bound read, but instead of fixing it we  can actually removed it thus saving also a useless memory write.",
+      "revId": "43b4b13fda075aace8e006f1fbad2250267b4443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
