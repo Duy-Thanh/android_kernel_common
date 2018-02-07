@@ -35,6 +35,7 @@
 #include <asm/uaccess.h>
 #include <asm/asm-uaccess.h>
 #include <asm/unistd.h>
+#include <asm/safestack.h>
 
 /*
  * Context tracking subsystem.  Used to instrument transitions
@@ -288,17 +289,21 @@ alternative_insn eret, nop, ARM64_UNMAP_KERNEL_AT_EL0
 	.endif
 	.endm
 
+	.macro jmp_if_not_task_stack ptr, label, tmp
+	/*
+	 * Compare sp with the current thread_info, if the top
+	 * ~(THREAD_SIZE - 1) bits match, we are on a task stack.
+	 */
+	and	\tmp, \ptr, #~(THREAD_SIZE - 1)
+	cmp	\tmp, tsk
+	b.ne	\label
+	.endm
+
 	.macro	irq_stack_entry
 	mov	x19, sp			// preserve the original sp
 
-	/*
-	 * Compare sp with the current thread_info, if the top
-	 * ~(THREAD_SIZE - 1) bits match, we are on a task stack, and
-	 * should switch to the irq stack.
-	 */
-	and	x25, x19, #~(THREAD_SIZE - 1)
-	cmp	x25, tsk
-	b.ne	9998f
+	/* if sp points to task stack, switch to the irq stack */
+	jmp_if_not_task_stack x19, 9998f, x25
 
 	adr_this_cpu x25, irq_stack, x26
 	mov	x26, #IRQ_STACK_START_SP
@@ -314,6 +319,18 @@ alternative_insn eret, nop, ARM64_UNMAP_KERNEL_AT_EL0
 	stp     x29, x19, [sp, #-16]!
 	mov	x29, sp
 
+#ifdef CONFIG_SAFESTACK
+	/* save the task unsafe stack pointer */
+	ldr	x25, [tsk, TSK_UNSAFE_STACK_PTR]
+	str	x25, [tsk, TSK_UNSAFE_SAVED_PTR]
+
+	/* switch to the irq unsafe stack */
+	adr_this_cpu x25, irq_unsafe_stack, x26
+	mov	x26, #UNSAFE_STACK_SIZE
+	add	x26, x25, x26
+	str	x26, [tsk, TSK_UNSAFE_STACK_PTR]
+#endif
+
 9998:
 	.endm
 
@@ -322,6 +339,16 @@ alternative_insn eret, nop, ARM64_UNMAP_KERNEL_AT_EL0
 	 * irq_stack_exit.
 	 */
 	.macro	irq_stack_exit
+#ifdef CONFIG_SAFESTACK
+	/*
+	 * Restore the unsafe stack pointer if we are switching back to
+	 * the task stack.
+	 */
+	jmp_if_not_task_stack x19, 9999f, x25
+	ldr	x25, [tsk, TSK_UNSAFE_SAVED_PTR]
+	str	x25, [tsk, TSK_UNSAFE_STACK_PTR]
+#endif
+9999:
 	mov	sp, x19
 	.endm
 

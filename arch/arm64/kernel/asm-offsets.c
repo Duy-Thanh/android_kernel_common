@@ -36,6 +36,10 @@
 int main(void)
 {
   DEFINE(TSK_ACTIVE_MM,		offsetof(struct task_struct, active_mm));
+#ifdef CONFIG_SAFESTACK
+  DEFINE(TSK_UNSAFE_STACK_PTR,	offsetof(struct task_struct, unsafe_stack_ptr));
+  DEFINE(TSK_UNSAFE_SAVED_PTR,	offsetof(struct task_struct, unsafe_saved_ptr));
+#endif
   BLANK();
   DEFINE(TI_FLAGS,		offsetof(struct thread_info, flags));
   DEFINE(TI_PREEMPT,		offsetof(struct thread_info, preempt_count));
