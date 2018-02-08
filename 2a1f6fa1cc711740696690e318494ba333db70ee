@@ -22,6 +22,30 @@
       "revId": "2a1f6fa1cc711740696690e318494ba333db70ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32ce3355_6d57b0ad",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-08T02:13:18Z",
+      "side": 1,
+      "message": "Invalid frequencies are now excluded when copying the frequency table, so no changes are needed here.",
+      "parentUuid": "9500532a_fcea5e83",
+      "range": {
+        "startLine": 171,
+        "startChar": 1,
+        "endLine": 171,
+        "endChar": 60
+      },
+      "revId": "2a1f6fa1cc711740696690e318494ba333db70ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
