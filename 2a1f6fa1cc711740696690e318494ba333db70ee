@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9500532a_fcea5e83",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-08T01:47:22Z",
+      "side": 1,
+      "message": "This buffer includes invalid frequencies if any exist, need to either check \u0026 exclude them here or exclude them when copying the frequency table.",
+      "range": {
+        "startLine": 171,
+        "startChar": 1,
+        "endLine": 171,
+        "endChar": 60
+      },
+      "revId": "2a1f6fa1cc711740696690e318494ba333db70ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
