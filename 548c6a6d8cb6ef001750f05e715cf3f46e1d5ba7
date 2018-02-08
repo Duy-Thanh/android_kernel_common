@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12be05ed_fde0d641",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-08T01:45:35Z",
+      "side": 1,
+      "message": "This will print invalid frequencies if there are any in the table, need to either add a check (both here and at line 153) or only copy valid frequencies into the table during initialization.",
+      "range": {
+        "startLine": 105,
+        "startChar": 2,
+        "endLine": 105,
+        "endChar": 40
+      },
+      "revId": "548c6a6d8cb6ef001750f05e715cf3f46e1d5ba7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
