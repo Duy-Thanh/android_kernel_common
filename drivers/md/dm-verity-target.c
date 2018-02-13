@@ -394,6 +394,32 @@ static int verity_bv_zero(struct dm_verity *v, struct dm_verity_io *io,
 	return 0;
 }
 
+#ifdef CONFIG_DM_VERITY_AT_LEAST_ONCE
+
+/*
+ * Moves the bio iter to the end.
+ */
+void verity_bv_move_it(struct dm_verity *v, struct dm_verity_io *io,
+			struct bvec_iter *iter)
+{
+	unsigned todo = 1 << v->data_dev_block_bits;
+	struct bio *bio = dm_bio_from_per_bio_data(io, v->ti->per_bio_data_size);
+
+	do {
+		unsigned len;
+		struct bio_vec bv = bio_iter_iovec(bio, *iter);
+		len = bv.bv_len;
+
+		if (likely(len >= todo))
+			len = todo;
+
+		bio_advance_iter(bio, iter, len);
+		todo -= len;
+	} while (todo);
+}
+
+#endif
+
 /*
  * Verify one "dm_verity_io" structure.
  */
@@ -406,9 +432,18 @@ static int verity_verify_io(struct dm_verity_io *io)
 
 	for (b = 0; b < io->n_blocks; b++) {
 		int r;
+		unsigned cur_block = io->block + b;
 		struct shash_desc *desc = verity_io_hash_desc(v, io);
 
-		r = verity_hash_for_block(v, io, io->block + b,
+#ifdef CONFIG_DM_VERITY_AT_LEAST_ONCE
+		if (v->validated_blocks &&
+		    test_bit(cur_block, v->validated_blocks)) {
+			/* don't validate anything */
+			verity_bv_move_it(v, io, &io->iter);
+			continue;
+		}
+#endif
+		r = verity_hash_for_block(v, io, cur_block,
 					  verity_io_want_digest(v, io),
 					  &is_zero);
 		if (unlikely(r < 0))
@@ -441,8 +476,13 @@ static int verity_verify_io(struct dm_verity_io *io)
 			return r;
 
 		if (likely(memcmp(verity_io_real_digest(v, io),
-				  verity_io_want_digest(v, io), v->digest_size) == 0))
+				  verity_io_want_digest(v, io), v->digest_size) == 0)) {
+#ifdef CONFIG_DM_VERITY_AT_LEAST_ONCE
+			if (v->validated_blocks)
+				set_bit(cur_block, v->validated_blocks);
+#endif
 			continue;
+		}
 		else if (verity_fec_decode(v, io, DM_VERITY_BLOCK_TYPE_DATA,
 					   io->block + b, NULL, &start) == 0)
 			continue;
@@ -730,6 +770,9 @@ void verity_dtr(struct dm_target *ti)
 	if (v->bufio)
 		dm_bufio_client_destroy(v->bufio);
 
+#ifdef CONFIG_DM_VERITY_AT_LEAST_ONCE
+	kfree(v->validated_blocks);
+#endif
 	kfree(v->salt);
 	kfree(v->root_digest);
 	kfree(v->zero_digest);
@@ -1059,6 +1102,15 @@ int verity_ctr(struct dm_target *ti, unsigned argc, char **argv)
 		goto bad;
 	}
 
+#ifdef CONFIG_DM_VERITY_AT_LEAST_ONCE
+	v->validated_blocks = kzalloc(BITS_TO_LONGS(v->data_blocks)
+				     * sizeof(unsigned long), GFP_KERNEL);
+	if (!v->validated_blocks) {
+		ti->error = "Cannot allocate bitset for validated blocks";
+		r = -ENOMEM;
+		goto bad;
+	}
+#endif
 	/* WQ_UNBOUND greatly improves performance when running on ramdisk */
 	v->verify_wq = alloc_workqueue("kverityd",
 				       WQ_HIGHPRI | WQ_MEM_RECLAIM | WQ_UNBOUND,
