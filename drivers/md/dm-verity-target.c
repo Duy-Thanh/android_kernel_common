@@ -394,6 +394,14 @@ static int verity_bv_zero(struct dm_verity *v, struct dm_verity_io *io,
 	return 0;
 }
 
+#ifdef CONFIG_DM_VERITY_AT_LEAST_ONCE
+static int verity_bv_do_nothing(struct dm_verity *v, struct dm_verity_io *io,
+			  u8 *data, size_t len)
+{
+	return 0;
+}
+#endif
+
 /*
  * Verify one "dm_verity_io" structure.
  */
@@ -406,9 +414,21 @@ static int verity_verify_io(struct dm_verity_io *io)
 
 	for (b = 0; b < io->n_blocks; b++) {
 		int r;
+		unsigned cur_block = io->block + b;
 		struct shash_desc *desc = verity_io_hash_desc(v, io);
 
-		r = verity_hash_for_block(v, io, io->block + b,
+#ifdef CONFIG_DM_VERITY_AT_LEAST_ONCE
+		if (test_bit(cur_block, v->validated_pages)) {
+			/* don't validate anything */
+			r = verity_for_bv_block(v, io, &io->iter,
+						verity_bv_do_nothing);
+			if (unlikely(r < 0))
+				return r;
+
+			continue;
+		}
+#endif
+		r = verity_hash_for_block(v, io, cur_block,
 					  verity_io_want_digest(v, io),
 					  &is_zero);
 		if (unlikely(r < 0))
@@ -441,8 +461,12 @@ static int verity_verify_io(struct dm_verity_io *io)
 			return r;
 
 		if (likely(memcmp(verity_io_real_digest(v, io),
-				  verity_io_want_digest(v, io), v->digest_size) == 0))
+				  verity_io_want_digest(v, io), v->digest_size) == 0)) {
+#ifdef CONFIG_DM_VERITY_AT_LEAST_ONCE
+			set_bit(cur_block, v->validated_pages);
+#endif
 			continue;
+		}
 		else if (verity_fec_decode(v, io, DM_VERITY_BLOCK_TYPE_DATA,
 					   io->block + b, NULL, &start) == 0)
 			continue;
@@ -730,6 +754,10 @@ void verity_dtr(struct dm_target *ti)
 	if (v->bufio)
 		dm_bufio_client_destroy(v->bufio);
 
+#ifdef CONFIG_DM_VERITY_AT_LEAST_ONCE
+	if (v->validated_pages)
+		kfree(v->validated_pages);
+#endif
 	kfree(v->salt);
 	kfree(v->root_digest);
 	kfree(v->zero_digest);
@@ -1059,6 +1087,15 @@ int verity_ctr(struct dm_target *ti, unsigned argc, char **argv)
 		goto bad;
 	}
 
+#ifdef CONFIG_DM_VERITY_AT_LEAST_ONCE
+	v->validated_pages = kzalloc(BITS_TO_LONGS(ti->len)
+				     * sizeof(unsigned long), GFP_KERNEL);
+	if (!v->validated_pages) {
+		ti->error = "Cannot allocate bitset for validated pages";
+		r = -ENOMEM;
+		goto bad;
+	}
+#endif
 	/* WQ_UNBOUND greatly improves performance when running on ramdisk */
 	v->verify_wq = alloc_workqueue("kverityd",
 				       WQ_HIGHPRI | WQ_MEM_RECLAIM | WQ_UNBOUND,
