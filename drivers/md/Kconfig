@@ -464,6 +464,20 @@ config DM_VERITY_FEC
 
 	  If unsure, say N.
 
+config DM_VERITY_AT_LEAST_ONCE
+	bool "Verity will validate pages at least once"
+	depends on DM_VERITY
+	---help---
+	  Adds the ability to validate checksums at least once, with
+	  the goal to reduce the amount of times a page is validated.
+
+	  This allows an intermediate level of security on a CPU 
+	  and/or RAM constrained platform. This will protect against
+	  offline attacks but if someone gains access to R/W of the
+	  block device this option may fail to detect any changes.
+
+	  If unsure, say N.
+
 config DM_SWITCH
 	tristate "Switch target support (EXPERIMENTAL)"
 	depends on BLK_DEV_DM
