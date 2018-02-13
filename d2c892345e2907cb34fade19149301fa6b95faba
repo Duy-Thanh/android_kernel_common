@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae5ea5d2_b0e41944",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-02-13T22:39:41Z",
+      "side": 1,
+      "message": "maybe rename as \"find_uid_entry_locked()\" to make it obvious that lock is required even at the callsites? Same comment for other functions below that need lock to be held on entry...",
+      "revId": "d2c892345e2907cb34fade19149301fa6b95faba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
