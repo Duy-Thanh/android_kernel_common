@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89606f5c_566eda18",
+        "filename": "include/trace/events/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-02-13T21:09:00Z",
+      "side": 1,
+      "message": "The multiple open braces matching a close can be annoying in some editors. Would this be better?\n\n  #ifdef CONFIG_FAIR_GROUP_SCHED\n  if (!se-\u003emy_q)\n  #endif\n  {",
+      "range": {
+        "startLine": 776,
+        "startChar": 0,
+        "endLine": 782,
+        "endChar": 0
+      },
+      "revId": "f99c692b877592f341ff25d457e37ac1cd3d72e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
