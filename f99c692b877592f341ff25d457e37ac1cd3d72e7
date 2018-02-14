@@ -22,6 +22,53 @@
       "revId": "f99c692b877592f341ff25d457e37ac1cd3d72e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eff4f585_ad138e88",
+        "filename": "include/trace/events/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2018-02-14T06:12:49Z",
+      "side": 1,
+      "message": "may be a wrapper similar to entity_is_task()\n\n#ifdef CONFIG_FAIR_GROUP_SCHED\n#define entity_is_task(se)      (!se-\u003emy_q)\n#else\n#define entity_is_task(se)      1\n#endif\n\nif (entity_is_task()) {\n /* assign walt_util */\n}",
+      "parentUuid": "89606f5c_566eda18",
+      "range": {
+        "startLine": 776,
+        "startChar": 0,
+        "endLine": 782,
+        "endChar": 0
+      },
+      "revId": "f99c692b877592f341ff25d457e37ac1cd3d72e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9aaf3496_4d9cb850",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2018-02-14T06:12:49Z",
+      "side": 1,
+      "message": "we don\u0027t need to track cumulative_runnable_avg per cfs_rq when CFS_BANDWIDTH is not enabled. The CFS_BANDWIDTH itself depends on CFS_GROUP_SCHED. Satya already submitted a fix for this at https://android-review.googlesource.com/c/kernel/common/+/534438.\n\nMay be we can get your change in for now.",
+      "range": {
+        "startLine": 470,
+        "startChar": 7,
+        "endLine": 470,
+        "endChar": 24
+      },
+      "revId": "f99c692b877592f341ff25d457e37ac1cd3d72e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
