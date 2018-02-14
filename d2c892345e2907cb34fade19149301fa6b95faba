@@ -16,6 +16,24 @@
       "revId": "d2c892345e2907cb34fade19149301fa6b95faba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e319bd97_84d81151",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-14T22:27:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae5ea5d2_b0e41944",
+      "revId": "d2c892345e2907cb34fade19149301fa6b95faba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
