@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "84beb1a8_8f3b2eca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-02-15T21:10:45Z",
+      "side": 1,
+      "message": "update to what?  What does this patch do?  Please be specific.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 29
+      },
+      "revId": "b584dcb2cfe0c374486dabec4aa5050e5309f4b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a4ffdbf2_77a9292c",
         "filename": "drivers/tty/goldfish.c",
         "patchSetId": 1
