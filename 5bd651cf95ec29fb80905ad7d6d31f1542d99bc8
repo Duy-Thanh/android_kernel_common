@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "7f3b8ce3_9e44bf76",
+        "filename": "drivers/input/keyboard/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-02-15T21:22:26Z",
+      "side": 1,
+      "message": "where is the Kconfig change to allow this driver to be built?",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 0
+      },
+      "revId": "5bd651cf95ec29fb80905ad7d6d31f1542d99bc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "432f9244_5598fee0",
         "filename": "drivers/input/keyboard/goldfish_rotary.c",
         "patchSetId": 1
