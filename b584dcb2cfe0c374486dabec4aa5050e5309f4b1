@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4ffdbf2_77a9292c",
+        "filename": "drivers/tty/goldfish.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2018-02-15T01:06:45Z",
+      "side": 1,
+      "message": "missing } ?",
+      "revId": "b584dcb2cfe0c374486dabec4aa5050e5309f4b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
