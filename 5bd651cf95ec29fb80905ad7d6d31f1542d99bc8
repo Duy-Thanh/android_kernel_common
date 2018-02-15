@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f7f16bb5_ae91f6b2",
+        "filename": "drivers/input/keyboard/goldfish_rotary.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2018-02-15T01:14:04Z",
+      "side": 1,
+      "message": "we might want change this to google and add a doc in dt binding.\n\nhttp://elixir.free-electrons.com/linux/v4.16-rc1/source/Documentation/devicetree/bindings/goldfish",
+      "range": {
+        "startLine": 175,
+        "startChar": 18,
+        "endLine": 175,
+        "endChar": 25
+      },
+      "revId": "5bd651cf95ec29fb80905ad7d6d31f1542d99bc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
