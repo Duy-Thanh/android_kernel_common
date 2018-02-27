@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a77b6183_b0ef7ff2",
+        "filename": "arch/x86/configs/x86_64_ranchu_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2018-02-27T22:27:33Z",
+      "side": 1,
+      "message": "Where do these values come from?",
+      "range": {
+        "startLine": 467,
+        "startChar": 0,
+        "endLine": 467,
+        "endChar": 16
+      },
+      "revId": "530c9b99424c7711707f1ef85b634b7012c4c7d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8245185_ef599fe3",
+        "filename": "arch/x86/configs/x86_64_ranchu_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2018-02-27T22:27:33Z",
+      "side": 1,
+      "message": "Why do we have CONFIG_IP specified several times?",
+      "range": {
+        "startLine": 499,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 11
+      },
+      "revId": "530c9b99424c7711707f1ef85b634b7012c4c7d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
