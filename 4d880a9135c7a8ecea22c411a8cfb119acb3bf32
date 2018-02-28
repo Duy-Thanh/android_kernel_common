@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2beed966_6622110c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2018-02-28T02:19:59Z",
+      "side": 1,
+      "message": "Please add prefix and original SHA if it is UPSTREAM",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 5
+      },
+      "revId": "4d880a9135c7a8ecea22c411a8cfb119acb3bf32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
