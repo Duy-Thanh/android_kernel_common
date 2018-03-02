@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2372e8c_7387cba5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2018-03-02T01:27:28Z",
+      "side": 1,
+      "message": "It causes a kernel warning; syzkaller uses a non-standard config option to panic on all warnings.",
+      "range": {
+        "startLine": 9,
+        "startChar": 22,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "07fee6fde50043d7870c0844a89a55b955828f3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7f2e14b_707562af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2018-03-02T01:27:28Z",
+      "side": 1,
+      "message": "Reported-by: syzbot@google.com",
+      "revId": "07fee6fde50043d7870c0844a89a55b955828f3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
