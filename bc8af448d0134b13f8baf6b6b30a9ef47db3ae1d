@@ -22,6 +22,30 @@
       "revId": "bc8af448d0134b13f8baf6b6b30a9ef47db3ae1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7a3e1ec_b5ce3402",
+        "filename": "fs/afs/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2018-03-02T19:50:36Z",
+      "side": 1,
+      "message": "CFI breaks if the function pointer type for an indirect call doesn\u0027t match the target function type.\n\nThe type filler_t is primarily used for calling readpage from struct address_space_operations, where the type of the first parameter is struct file*. Unfortunately, filler_t is used also for other purposes, like here, where the first parameter is used for something completely different.\n\nThis changes fixes the build (with -Werror\u003dincompatible-pointer-types), but perhaps a better solution would be to not use filler_t here in the first place. However, that would be a more complicated change.",
+      "parentUuid": "b881e6a6_4746ee21",
+      "range": {
+        "startLine": 126,
+        "startChar": 20,
+        "endLine": 126,
+        "endChar": 37
+      },
+      "revId": "bc8af448d0134b13f8baf6b6b30a9ef47db3ae1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
