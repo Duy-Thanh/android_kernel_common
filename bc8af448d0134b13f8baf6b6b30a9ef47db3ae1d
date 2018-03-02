@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b881e6a6_4746ee21",
+        "filename": "fs/afs/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-03-02T19:26:56Z",
+      "side": 1,
+      "message": "I do not have much background regarding kcfi to understand why this transition is relevant.\n\nI may need an education on how this is relevant to kcfi?\n\nand struct key was out of the question why?\n\nstruct file {\n        union {\n                struct llist_node       fu_llist;\n                struct rcu_head         fu_rcuhead;\n        } f_u;\n. . .\n\nstruct key {\n        atomic_t              usage;          /* number of references */\n. . .\n\nI\u0027d be more comfortable if there was some form of overlap between the structures as they get cast willy nilly? At least void* was clear that it was completely abstract. We all want stronger type checking though, not abstraction.\n\nkcfi is supposed to migrate to a union type to deal with input variables cast possibilities I thought?",
+      "range": {
+        "startLine": 126,
+        "startChar": 20,
+        "endLine": 126,
+        "endChar": 37
+      },
+      "revId": "bc8af448d0134b13f8baf6b6b30a9ef47db3ae1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
