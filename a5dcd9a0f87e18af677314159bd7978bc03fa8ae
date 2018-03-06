@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9c014cfe_ed5bc3e3",
+        "filename": "drivers/input/keyboard/goldfish_events.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2018-03-06T19:25:30Z",
+      "side": 1,
+      "message": "I removed these changes. Thank you.",
+      "parentUuid": "f76fddbd_497604b3",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 0
+      },
+      "revId": "a5dcd9a0f87e18af677314159bd7978bc03fa8ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3ccffeeb_23af745b",
         "filename": "drivers/input/keyboard/goldfish_rotary.c",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-03-06T03:34:45Z",
       "side": 1,
       "message": "minor nit, this should say \"GPL v2\", right?",
+      "range": {
+        "startLine": 200,
+        "startChar": 16,
+        "endLine": 200,
+        "endChar": 19
+      },
+      "revId": "a5dcd9a0f87e18af677314159bd7978bc03fa8ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "291b5fc8_0f258d5f",
+        "filename": "drivers/input/keyboard/goldfish_rotary.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2018-03-06T19:25:30Z",
+      "side": 1,
+      "message": "Thank you.",
+      "parentUuid": "3ccffeeb_23af745b",
       "range": {
         "startLine": 200,
         "startChar": 16,
