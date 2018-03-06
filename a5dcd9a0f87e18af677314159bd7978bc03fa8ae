@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "74f27868_90ea14a4",
+        "filename": "drivers/input/keyboard/goldfish_events.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2018-03-06T19:30:52Z",
+      "side": 1,
+      "message": "Resolved.",
+      "parentUuid": "9c014cfe_ed5bc3e3",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 0
+      },
+      "revId": "a5dcd9a0f87e18af677314159bd7978bc03fa8ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ccffeeb_23af745b",
         "filename": "drivers/input/keyboard/goldfish_rotary.c",
         "patchSetId": 1
@@ -93,6 +117,30 @@
       "revId": "a5dcd9a0f87e18af677314159bd7978bc03fa8ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d78662d0_4345119e",
+        "filename": "drivers/input/keyboard/goldfish_rotary.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2018-03-06T19:30:52Z",
+      "side": 1,
+      "message": "Resolved.",
+      "parentUuid": "291b5fc8_0f258d5f",
+      "range": {
+        "startLine": 200,
+        "startChar": 16,
+        "endLine": 200,
+        "endChar": 19
+      },
+      "revId": "a5dcd9a0f87e18af677314159bd7978bc03fa8ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
