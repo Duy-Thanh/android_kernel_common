@@ -25,6 +25,7 @@
 #include <linux/async.h>
 #include <linux/pm_runtime.h>
 #include <linux/pinctrl/devinfo.h>
+#include <linux/of.h>
 
 #include "base.h"
 #include "power/power.h"
@@ -236,6 +237,14 @@ static int driver_sysfs_add(struct device *dev)
 			sysfs_remove_link(&dev->driver->p->kobj,
 					kobject_name(&dev->kobj));
 	}
+
+	if (dev->of_node) {
+		ret = sysfs_create_link(&dev->of_node->kobj,
+					&dev->kobj, "of_device");
+		if (ret)
+			dev_warn(dev, "Error %d create of_device link\n", ret);
+	}
+
 	return ret;
 }
 
@@ -246,6 +255,8 @@ static void driver_sysfs_remove(struct device *dev)
 	if (drv) {
 		sysfs_remove_link(&drv->p->kobj, kobject_name(&dev->kobj));
 		sysfs_remove_link(&dev->kobj, "driver");
+		if (dev->of_node)
+			sysfs_remove_link(&dev->of_node->kobj, "of_device");
 	}
 }
 
