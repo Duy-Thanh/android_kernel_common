@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "29e84db4_71be0cb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2018-03-07T20:15:15Z",
+      "side": 1,
+      "message": "__get_task_comm() is using srtnlen() so it copies the string only. Currently BUILD_BUG_ON(sizeof(buf) !\u003d TASK_COMM_LEN); doesn\u0027t allow buffer to be bigger.",
+      "parentUuid": "12adfd2d_4183c109",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 62
+      },
+      "revId": "33ba71e4db9cf23870af4f34a0de394af8cf7b9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "17d3a6ed_d1a6b413",
         "filename": "include/linux/sched.h",
         "patchSetId": 2
@@ -93,6 +117,30 @@
       "revId": "33ba71e4db9cf23870af4f34a0de394af8cf7b9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2141f36_1ec265bc",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1563,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2018-03-07T20:15:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cfc3abf_0f02f94a",
+      "range": {
+        "startLine": 1560,
+        "startChar": 0,
+        "endLine": 1563,
+        "endChar": 2
+      },
+      "revId": "33ba71e4db9cf23870af4f34a0de394af8cf7b9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
