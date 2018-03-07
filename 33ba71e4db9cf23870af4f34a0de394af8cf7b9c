@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d57b24b_ce064c01",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-03-07T19:36:43Z",
+      "side": 1,
+      "message": "a bit confusing... how about something like:\n\n  __get_task_comm() currently copies buf_size. This used to \n  expose an issue where if sizeof(buf) \u003e TASK_COMM_LEN, the \n  copy would read beyond the end of tsk-\u003ecomm. This was fixed \n  in 3756f6401c30 (\"exec: avoid gcc-8 warning for \n  get_task_comm\") by insisting at compile-time that \n  sizeof(buf) \u003d\u003d TASK_COMM_LEN.\n\n  This is overly restrictive since it is reasonable to allow buf\n  to be smaller than TASK_COMM_LEN. This patch loosens the \n  compile-time check to fail only if sizeof(buf) \u003e TASK_COMM_LEN.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 62
+      },
+      "revId": "33ba71e4db9cf23870af4f34a0de394af8cf7b9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17d3a6ed_d1a6b413",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1563,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-03-07T19:36:43Z",
+      "side": 1,
+      "message": "How about this instead (use TASK_COMM_LEN instead of sizeof(tsk-\u003ecomm) )?\n\n  #define get_task_comm(buf, tsk) ({\t\t\t\\\n\tBUILD_BUG_ON(sizeof(buf) \u003c TASK_COMM_LEN);\t\\\n\t__get_task_comm(buf, TASK_COMM_LEN, tsk);\t\\\n  })",
+      "range": {
+        "startLine": 1560,
+        "startChar": 0,
+        "endLine": 1563,
+        "endChar": 2
+      },
+      "revId": "33ba71e4db9cf23870af4f34a0de394af8cf7b9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
