@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "12adfd2d_4183c109",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2018-03-07T19:54:58Z",
+      "side": 1,
+      "message": "\u003e   This is overly restrictive since it is reasonable to allow buf\n\u003e   to be smaller than TASK_COMM_LEN. This patch loosens the \n\u003e   compile-time check to fail only if sizeof(buf) \u003e TASK_COMM_LEN.\n\nWait, is it reasonable to copy into a buf that is smaller then TASK_COMM_LEN?\n\nI\u0027d think you\u0027d want to copy at most TASK_COMM_LEN bytes into buf, and want to insure that buf was at least TASK_COMM_LEN in length.",
+      "parentUuid": "1d57b24b_ce064c01",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 62
+      },
+      "revId": "33ba71e4db9cf23870af4f34a0de394af8cf7b9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "17d3a6ed_d1a6b413",
         "filename": "include/linux/sched.h",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2018-03-07T19:36:43Z",
       "side": 1,
       "message": "How about this instead (use TASK_COMM_LEN instead of sizeof(tsk-\u003ecomm) )?\n\n  #define get_task_comm(buf, tsk) ({\t\t\t\\\n\tBUILD_BUG_ON(sizeof(buf) \u003c TASK_COMM_LEN);\t\\\n\t__get_task_comm(buf, TASK_COMM_LEN, tsk);\t\\\n  })",
+      "range": {
+        "startLine": 1560,
+        "startChar": 0,
+        "endLine": 1563,
+        "endChar": 2
+      },
+      "revId": "33ba71e4db9cf23870af4f34a0de394af8cf7b9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cfc3abf_0f02f94a",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1563,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2018-03-07T19:54:58Z",
+      "side": 1,
+      "message": "Todd suggestion looks sane to me.",
+      "parentUuid": "17d3a6ed_d1a6b413",
       "range": {
         "startLine": 1560,
         "startChar": 0,
