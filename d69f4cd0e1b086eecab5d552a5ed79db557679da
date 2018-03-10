@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7e5b6fe_a4a5d1f0",
+        "filename": "drivers/platform/goldfish/goldfish_fwdata.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-10T00:36:34Z",
+      "side": 1,
+      "message": "why is this using \"raw\" kobjects?  It\u0027s a device, use \u0027struct device\u0027 attributes please!",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 79
+      },
+      "revId": "d69f4cd0e1b086eecab5d552a5ed79db557679da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90addcbf_3f91aabb",
+        "filename": "drivers/platform/goldfish/goldfish_fwdata.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-10T00:36:34Z",
+      "side": 1,
+      "message": "No Documentation/ABI/ entries for any of these new sysfs files?  That\u0027s not ok :(",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 34
+      },
+      "revId": "d69f4cd0e1b086eecab5d552a5ed79db557679da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3714d043_d22ec3e2",
+        "filename": "drivers/platform/goldfish/goldfish_fwdata.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-10T00:36:34Z",
+      "side": 1,
+      "message": "ATTRIBUTE_GROUPS()?",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 46
+      },
+      "revId": "d69f4cd0e1b086eecab5d552a5ed79db557679da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f1b2c1a_271f9db5",
+        "filename": "drivers/platform/goldfish/goldfish_fwdata.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-10T00:36:34Z",
+      "side": 1,
+      "message": "no, you have a device structure, use it and not \"raw\" kobjects please.  We have much simpler ways of doing all of this, don\u0027t make it more complex than it has to be.\n\nAlso, by using \"raw\" kobjects, you just hid the whole tree from userspace tools like libudev, which is not a good idea.\n\nAnd finally, you are racing with userspace, creating the files after the device is created and notified userspace it is present.  I don\u0027t know if that\u0027s an issue here, but please be aware of that.",
+      "range": {
+        "startLine": 249,
+        "startChar": 0,
+        "endLine": 249,
+        "endChar": 68
+      },
+      "revId": "d69f4cd0e1b086eecab5d552a5ed79db557679da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
