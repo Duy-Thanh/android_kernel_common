@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dbdfb3c1_d332e553",
+        "filename": "kernel/bpf/inode.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-03-14T17:56:03Z",
+      "side": 1,
+      "message": "You _invented_ this into this CL and it is not upstream. Separate it out into a separate CL.",
+      "range": {
+        "startLine": 324,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 36
+      },
+      "revId": "151619dff8d1c8e4184c7e3ec12251aa69bba248",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
