@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6944c0a2_8f02e33f",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2018-03-15T08:29:42Z",
+      "side": 1,
+      "message": "If we boot only with one cluster (there is a command line option for this in non-mainline kernels), we delay the energy-model population until then. I don\u0027t see any problem with that. It is not like we forever don\u0027t hotplug in the other cluster.\n\nThe topology_detect_flags() can return false for SMP but dual cluster systems, right? if that happens, the current scheduler domains are built without energy-model data. Right?",
+      "range": {
+        "startLine": 425,
+        "startChar": 2,
+        "endLine": 425,
+        "endChar": 25
+      },
+      "revId": "4063b5fbcb32366851acda795e3611abdd2241b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
