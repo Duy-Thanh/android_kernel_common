@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d175a4b3_8bf3361e",
+        "filename": "include/linux/arm-smccc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2018-03-20T23:38:49Z",
+      "side": 1,
+      "message": "is \"w\" not a valid register width on ARM32?",
+      "range": {
+        "startLine": 166,
+        "startChar": 25,
+        "endLine": 166,
+        "endChar": 28
+      },
+      "revId": "e707f486c525bd4cf106e408b0a6ee1b3a3e9fd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
