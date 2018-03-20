@@ -32,8 +32,8 @@
 #define XRES_MIN    32
 #define YRES_MIN    32
 
-#define XRES_DEF  1024
-#define YRES_DEF   768
+#define XRES_DEF   720
+#define YRES_DEF  1280
 
 #define XRES_MAX  8192
 #define YRES_MAX  8192
@@ -170,29 +170,14 @@ static void virtio_gpu_enc_disable(struct drm_encoder *encoder)
 
 static int virtio_gpu_conn_get_modes(struct drm_connector *connector)
 {
-	struct virtio_gpu_output *output =
-		drm_connector_to_virtio_gpu_output(connector);
-	struct drm_display_mode *mode = NULL;
-	int count, width, height;
+	struct drm_display_mode *mode;
 
-	width  = le32_to_cpu(output->info.r.width);
-	height = le32_to_cpu(output->info.r.height);
-	count = drm_add_modes_noedid(connector, XRES_MAX, YRES_MAX);
+	mode = drm_cvt_mode(connector->dev, XRES_DEF, YRES_DEF, 60,
+			    false, false, false);
+	mode->type |= DRM_MODE_TYPE_PREFERRED;
+	drm_mode_probed_add(connector, mode);
 
-	if (width == 0 || height == 0) {
-		width = XRES_DEF;
-		height = YRES_DEF;
-		drm_set_preferred_mode(connector, XRES_DEF, YRES_DEF);
-	} else {
-		DRM_DEBUG("add mode: %dx%d\n", width, height);
-		mode = drm_cvt_mode(connector->dev, width, height, 60,
-				    false, false, false);
-		mode->type |= DRM_MODE_TYPE_PREFERRED;
-		drm_mode_probed_add(connector, mode);
-		count++;
-	}
-
-	return count;
+	return 1;
 }
 
 static int virtio_gpu_conn_mode_valid(struct drm_connector *connector,
