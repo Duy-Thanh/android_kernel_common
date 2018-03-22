@@ -46,6 +46,30 @@
       "revId": "e707f486c525bd4cf106e408b0a6ee1b3a3e9fd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2eceeb3_29ff037a",
+        "filename": "include/linux/arm-smccc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2018-03-22T22:48:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7a70dbb_48a00c13",
+      "range": {
+        "startLine": 166,
+        "startChar": 25,
+        "endLine": 166,
+        "endChar": 28
+      },
+      "revId": "e707f486c525bd4cf106e408b0a6ee1b3a3e9fd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
