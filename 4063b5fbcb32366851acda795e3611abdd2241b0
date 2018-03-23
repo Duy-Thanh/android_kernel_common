@@ -46,6 +46,30 @@
       "revId": "4063b5fbcb32366851acda795e3611abdd2241b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9d84678_4501694c",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1180085
+      },
+      "writtenOn": "2018-03-23T02:51:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0abe34ec_772b766c",
+      "range": {
+        "startLine": 425,
+        "startChar": 2,
+        "endLine": 425,
+        "endChar": 25
+      },
+      "revId": "4063b5fbcb32366851acda795e3611abdd2241b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
