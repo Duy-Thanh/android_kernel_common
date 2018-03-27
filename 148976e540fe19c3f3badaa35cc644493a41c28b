@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d0f0d692_d4c86238",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-03-27T20:32:16Z",
+      "side": 1,
+      "message": "The output data on hikey was always all 0s; I missed this because that\u0027s the expected output for a lot of pids since most of their work happens before all_freqs gets initialized.\n\nNot sure why the compiler didn\u0027t flag it.",
+      "parentUuid": "3c8696b2_30338770",
+      "revId": "148976e540fe19c3f3badaa35cc644493a41c28b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ffa0f926_5d161c6d",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "148976e540fe19c3f3badaa35cc644493a41c28b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47baf46a_e4393920",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-03-27T20:32:16Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "ffa0f926_5d161c6d",
+      "revId": "148976e540fe19c3f3badaa35cc644493a41c28b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
