@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c8696b2_30338770",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-03-27T15:30:57Z",
+      "side": 1,
+      "message": "hmm. so we were using an uninitialized local pointer? Seems like the compiler would have flagged this and we\u0027d have seen some crashes. Did the output data look bogus before?",
+      "revId": "148976e540fe19c3f3badaa35cc644493a41c28b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffa0f926_5d161c6d",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-03-27T15:30:57Z",
+      "side": 1,
+      "message": "why adding whitespace?",
+      "revId": "148976e540fe19c3f3badaa35cc644493a41c28b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
