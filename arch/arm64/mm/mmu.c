@@ -828,6 +828,7 @@ void *__init __fixmap_remap_fdt(phys_addr_t dt_phys, int *size, pgprot_t prot)
 	return dt_virt;
 }
 
+<<<<<<< HEAD   (f7e185 Merge 4.4.124 into android-4.4-n)
 void *__init fixmap_remap_fdt(phys_addr_t dt_phys)
 {
 	void *dt_virt;
@@ -881,3 +882,16 @@ int pmd_clear_huge(pmd_t *pmd)
 	pmd_clear(pmd);
 	return 1;
 }
+=======
+#ifdef CONFIG_HAVE_ARCH_HUGE_VMAP
+int pud_free_pmd_page(pud_t *pud)
+{
+	return pud_none(*pud);
+}
+
+int pmd_free_pte_page(pmd_t *pmd)
+{
+	return pmd_none(*pmd);
+}
+#endif
+>>>>>>> BRANCH (aec8e7 Linux 4.4.125)
