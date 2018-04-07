@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ac2345c9_7412f37e",
+        "filename": "fs/fuse/dev.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1875,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2018-04-07T00:12:24Z",
+      "side": 1,
+      "message": "Probably better to use req-\u003eout.args[0].size here",
+      "range": {
+        "startLine": 1875,
+        "startChar": 7,
+        "endLine": 1875,
+        "endChar": 15
+      },
+      "revId": "5f022295edd4ec4a7a76e648b2ac96943d59fd3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
