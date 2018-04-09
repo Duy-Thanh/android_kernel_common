@@ -30,11 +30,15 @@
 #include <asm/irq.h>
 #include <asm/memory.h>
 #include <asm/mmu.h>
+<<<<<<< HEAD   (205b82 Merge 4.9.92 into android-4.9-o)
 #include <asm/ptrace.h>
+=======
+>>>>>>> BRANCH (d32da5 Linux 4.9.93)
 #include <asm/thread_info.h>
 #include <asm/uaccess.h>
 #include <asm/asm-uaccess.h>
 #include <asm/unistd.h>
+#include <asm/kernel-pgtable.h>
 
 /*
  * Context tracking subsystem.  Used to instrument transitions
@@ -271,6 +275,25 @@ alternative_else_nop_endif
 	ldp	x28, x29, [sp, #16 * 14]
 	ldr	lr, [sp, #S_LR]
 	add	sp, sp, #S_FRAME_SIZE		// restore sp
+<<<<<<< HEAD   (205b82 Merge 4.9.92 into android-4.9-o)
+=======
+
+	.if	\el == 0
+alternative_insn eret, nop, ARM64_UNMAP_KERNEL_AT_EL0
+#ifdef CONFIG_UNMAP_KERNEL_AT_EL0
+	bne	4f
+	msr	far_el1, x30
+	tramp_alias	x30, tramp_exit_native
+	br	x30
+4:
+	tramp_alias	x30, tramp_exit_compat
+	br	x30
+#endif
+	.else
+	eret
+	.endif
+	.endm
+>>>>>>> BRANCH (d32da5 Linux 4.9.93)
 
 	.if	\el == 0
 alternative_insn eret, nop, ARM64_UNMAP_KERNEL_AT_EL0
@@ -908,6 +931,7 @@ __ni_sys_trace:
 
 	.macro tramp_map_kernel, tmp
 	mrs	\tmp, ttbr1_el1
+<<<<<<< HEAD   (205b82 Merge 4.9.92 into android-4.9-o)
 	sub	\tmp, \tmp, #(SWAPPER_DIR_SIZE + RESERVED_TTBR0_SIZE)
 	bic	\tmp, \tmp, #USER_ASID_FLAG
 	msr	ttbr1_el1, \tmp
@@ -957,6 +981,43 @@ __ni_sys_trace:
 #ifndef CONFIG_ARCH_MSM8996
 	isb
 #endif
+=======
+	sub	\tmp, \tmp, #SWAPPER_DIR_SIZE
+	bic	\tmp, \tmp, #USER_ASID_FLAG
+	msr	ttbr1_el1, \tmp
+	.endm
+
+	.macro tramp_unmap_kernel, tmp
+	mrs	\tmp, ttbr1_el1
+	add	\tmp, \tmp, #SWAPPER_DIR_SIZE
+	orr	\tmp, \tmp, #USER_ASID_FLAG
+	msr	ttbr1_el1, \tmp
+	/*
+	 * We avoid running the post_ttbr_update_workaround here because
+	 * it's only needed by Cavium ThunderX, which requires KPTI to be
+	 * disabled.
+	 */
+	.endm
+
+	.macro tramp_ventry, regsize = 64
+	.align	7
+1:
+	.if	\regsize == 64
+	msr	tpidrro_el0, x30	// Restored in kernel_ventry
+	.endif
+	/*
+	 * Defend against branch aliasing attacks by pushing a dummy
+	 * entry onto the return stack and using a RET instruction to
+	 * enter the full-fat kernel vectors.
+	 */
+	bl	2f
+	b	.
+2:
+	tramp_map_kernel	x30
+#ifdef CONFIG_RANDOMIZE_BASE
+	adr	x30, tramp_vectors + PAGE_SIZE
+	isb
+>>>>>>> BRANCH (d32da5 Linux 4.9.93)
 	ldr	x30, [x30]
 #else
 	ldr	x30, =vectors

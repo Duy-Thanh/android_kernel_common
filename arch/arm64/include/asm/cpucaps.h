@@ -34,9 +34,14 @@
 #define ARM64_HAS_32BIT_EL0			13
 #define ARM64_HYP_OFFSET_LOW			14
 #define ARM64_MISMATCHED_CACHE_LINE_SIZE	15
+#define ARM64_UNMAP_KERNEL_AT_EL0		16
 
+<<<<<<< HEAD   (205b82 Merge 4.9.92 into android-4.9-o)
 #define ARM64_UNMAP_KERNEL_AT_EL0		23
 
 #define ARM64_NCAPS				24
+=======
+#define ARM64_NCAPS				17
+>>>>>>> BRANCH (d32da5 Linux 4.9.93)
 
 #endif /* __ASM_CPUCAPS_H */

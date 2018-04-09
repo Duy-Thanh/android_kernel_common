@@ -422,6 +422,7 @@ alternative_endif
 	movk	\reg, :abs_g0_nc:\val
 	.endm
 
+<<<<<<< HEAD   (205b82 Merge 4.9.92 into android-4.9-o)
 /*
  * Return the current thread_info.
  */
@@ -429,4 +430,9 @@ alternative_endif
 	mrs	\rd, sp_el0
 	.endm
 
+=======
+	.macro	pte_to_phys, phys, pte
+	and	\phys, \pte, #(((1 << (48 - PAGE_SHIFT)) - 1) << PAGE_SHIFT)
+	.endm
+>>>>>>> BRANCH (d32da5 Linux 4.9.93)
 #endif	/* __ASM_ASSEMBLER_H */

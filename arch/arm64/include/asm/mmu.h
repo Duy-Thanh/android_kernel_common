@@ -16,9 +16,13 @@
 #ifndef __ASM_MMU_H
 #define __ASM_MMU_H
 
+<<<<<<< HEAD   (205b82 Merge 4.9.92 into android-4.9-o)
 
 #define USER_ASID_FLAG	(UL(1) << 48)
 #define TTBR_ASID_MASK	(UL(0xffff) << 48)
+=======
+#define USER_ASID_FLAG	(UL(1) << 48)
+>>>>>>> BRANCH (d32da5 Linux 4.9.93)
 
 #ifndef __ASSEMBLY__
 
