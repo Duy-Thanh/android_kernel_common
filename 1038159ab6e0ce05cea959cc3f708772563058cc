@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55c90df0_5884b580",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2018-04-12T18:35:00Z",
+      "side": 1,
+      "message": "This was actually a clean cherry-pick, and the commit is now in Linus\u0027 tree, so the appropriate tag would be \"UPSTREAM:\".  The \"BACKPORT:\" tag is appropriate for earlier kernels where it doesn\u0027t cherry-pick cleanly.  \"FROMGIT:\" is only for cherry-picking from a maintainer\u0027s tree, not Linus\u0027 tree (though I\u0027ve been told that the Android team actually wants \"FROMLIST:\" for that case, which differs from Chrome OS convention).",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 16
+      },
+      "revId": "1038159ab6e0ce05cea959cc3f708772563058cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb002d10_0c50c148",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2018-04-12T18:35:00Z",
+      "side": 1,
+      "message": "This should go after the original Signed-off-by lines.  Also, when only the \"UPSTREAM:\" or \"BACKPORT:\" tag is used I think you don\u0027t have to write that the cherry-pick is from \"upstream\" as it is implied.  \u0027git cherry-pick -x\u0027 would generate the correct line.",
+      "revId": "1038159ab6e0ce05cea959cc3f708772563058cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
