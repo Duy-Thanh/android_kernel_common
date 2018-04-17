@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a21425a6_c403352f",
+        "filename": "fs/sdcardfs/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1121338
+      },
+      "writtenOn": "2018-04-17T21:44:30Z",
+      "side": 1,
+      "message": "this should also be added to the commit message I think.",
+      "range": {
+        "startLine": 424,
+        "startChar": 44,
+        "endLine": 424,
+        "endChar": 57
+      },
+      "revId": "54a877ed77807354d3118fde81472702fdd65809",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
