@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d1feaaf7_85999d43",
+        "filename": "net/ipv6/addrconf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2224,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-04-19T16:06:31Z",
+      "side": 1,
+      "message": "nit, checkpatch is going to complain about the lack of a blank line here. Yes, the original code didn\u0027t have it either, but someone has to fix up the code sometime and since you are touching this line... :)",
+      "range": {
+        "startLine": 2224,
+        "startChar": 0,
+        "endLine": 2224,
+        "endChar": 11
+      },
+      "revId": "d5afdcb512d317e6500f466c0a6524a8908bb9f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
