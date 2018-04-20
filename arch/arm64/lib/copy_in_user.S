@@ -64,14 +64,20 @@
 	.endm
 
 end	.req	x5
+<<<<<<< HEAD   (5c69e5 Merge 4.9.94 into android-4.9-o)
 ENTRY(__copy_in_user)
 	uaccess_enable_not_uao x3, x4, x5
+=======
+ENTRY(__arch_copy_in_user)
+ALTERNATIVE("nop", __stringify(SET_PSTATE_PAN(0)), ARM64_ALT_PAN_NOT_UAO, \
+	    CONFIG_ARM64_PAN)
+>>>>>>> BRANCH (eedaf2 Linux 4.9.95)
 	add	end, x0, x2
 #include "copy_template.S"
 	uaccess_disable_not_uao x3, x4
 	mov	x0, #0
 	ret
-ENDPROC(__copy_in_user)
+ENDPROC(__arch_copy_in_user)
 
 	.section .fixup,"ax"
 	.align	2
