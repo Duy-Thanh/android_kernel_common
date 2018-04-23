@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "174fdaf6_df1ec4a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-04-23T15:06:55Z",
+      "side": 1,
+      "message": "BACKPORT?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "02401ef8db8c5d1e470b5657622532202e5ca632",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23cf2ae8_9f09f563",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-04-23T15:06:55Z",
+      "side": 1,
+      "message": "no bug id for this?  Why is this new feature being backported?",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 52
+      },
+      "revId": "02401ef8db8c5d1e470b5657622532202e5ca632",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
