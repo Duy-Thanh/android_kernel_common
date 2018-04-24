@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7103cd19_fd58124f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2018-04-24T11:29:32Z",
+      "side": 1,
+      "message": "Hi Greg, thanks for reviewing. Yes, this patch series is backported from mainline kernel to Android common kernel 4.9.",
+      "parentUuid": "174fdaf6_df1ec4a6",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "02401ef8db8c5d1e470b5657622532202e5ca632",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "23cf2ae8_9f09f563",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2018-04-23T15:06:55Z",
       "side": 1,
       "message": "no bug id for this?  Why is this new feature being backported?",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 52
+      },
+      "revId": "02401ef8db8c5d1e470b5657622532202e5ca632",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41703913_bc5163fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2018-04-24T11:29:32Z",
+      "side": 1,
+      "message": "This patch series is an enhancement for ARM CPUIdle driver to support asymmetric CPU architecture (more specific, it\u0027s ARM big.LITTLE architecture); if without this patch series, the kernel cannot support ARMv8 big.LITTLE platform for registration idle states from DT binding. And ARMv8 big.LITTLE platform is mainstream for phone productions.\n\nTo be more clear, we have another CPUIdle driver drivers/cpuidle/cpuidle-big_little.c, but this driver has dependency with MCPM implementation and it isn\u0027t compatible with Power State Coordination Interface (PSCI).  So this driver is obsolete and only can be used for ARMv7 CPUs.",
+      "parentUuid": "23cf2ae8_9f09f563",
       "range": {
         "startLine": 33,
         "startChar": 0,
