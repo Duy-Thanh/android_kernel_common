@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "d8fcc8f7_4d95e772",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2018-04-25T09:01:57Z",
+      "side": 1,
+      "message": "Sure, will update for header.",
+      "parentUuid": "6680a1eb_6e6a8c27",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "02401ef8db8c5d1e470b5657622532202e5ca632",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "23cf2ae8_9f09f563",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "Why is hardware platform support being done in the common tree?  Shouldn\u0027t this be in an SoC specific tree instead?",
       "parentUuid": "41703913_bc5163fe",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 52
+      },
+      "revId": "02401ef8db8c5d1e470b5657622532202e5ca632",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35fe4ef4_8181f7bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2018-04-25T09:01:57Z",
+      "side": 1,
+      "message": "This driver is commonly used for ARM CPUs, as mentioned in the commit log by Daniel, this driver is used by Hikey960/Hikey620 boards, and it also is used by Qualcomm DB410c board and Mediatek 8173 board.  So the ARM CPUidle driver is a common driver for different SoCs based on ARM CPUs, as result Android common tree is a good place to land them.\n\nPlease let me know if have any other question, otherwise I will prepare new patch set according to your suggestion :)",
+      "parentUuid": "a434391d_a40ee049",
       "range": {
         "startLine": 33,
         "startChar": 0,
