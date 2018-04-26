@@ -45,6 +45,29 @@
       "revId": "0ff084595217f24a3f377930b1ebae2de75c2b7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7cbd351_c3e2750f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-04-26T09:57:28Z",
+      "side": 1,
+      "message": "what do you mean by completely - what scenarios are left to fix?",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 45,
+        "endChar": 58
+      },
+      "revId": "0ff084595217f24a3f377930b1ebae2de75c2b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
