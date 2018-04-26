@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e316882b_cbcb8260",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-04-26T09:53:02Z",
+      "side": 1,
+      "message": "which binder work is in thread-\u003etodo? And in which thread-\u003etodo? Of the client sending the transaction?",
+      "range": {
+        "startLine": 11,
+        "startChar": 27,
+        "endLine": 12,
+        "endChar": 11
+      },
+      "revId": "0ff084595217f24a3f377930b1ebae2de75c2b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d9108c2_888a8558",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-04-26T09:53:02Z",
+      "side": 1,
+      "message": "you\u0027re saying the client picks up the work in thread-\u003etodo before it sees the return error of the transaction it initiated?",
+      "range": {
+        "startLine": 20,
+        "startChar": 27,
+        "endLine": 22,
+        "endChar": 45
+      },
+      "revId": "0ff084595217f24a3f377930b1ebae2de75c2b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
