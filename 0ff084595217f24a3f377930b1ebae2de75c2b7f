@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0cef018b_3ec3f01b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1112683
+      },
+      "writtenOn": "2018-04-26T14:21:18Z",
+      "side": 1,
+      "message": "I have reproduced scene is that BINDER_WORK_DEAD_BINDER in thread-\u003etodo. linkToDeath() product the binder work when target process is dead.",
+      "parentUuid": "e316882b_cbcb8260",
+      "range": {
+        "startLine": 11,
+        "startChar": 27,
+        "endLine": 12,
+        "endChar": 11
+      },
+      "revId": "0ff084595217f24a3f377930b1ebae2de75c2b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d9108c2_888a8558",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "8dd08a07_b896fe30",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1112683
+      },
+      "writtenOn": "2018-04-26T14:21:18Z",
+      "side": 1,
+      "message": "requestDeathNotification() with flush command, so left BINDER_WORK_DEAD_BINDER in thread-\u003etodo.\nclient pick up BINDER_WORK_DEAD_BINDER, in a nested call scenario, reportOneDeath() consumed BINDER_WORK_RETURN_ERROR. So oneway binder call hang",
+      "parentUuid": "2d9108c2_888a8558",
+      "range": {
+        "startLine": 20,
+        "startChar": 27,
+        "endLine": 22,
+        "endChar": 45
+      },
+      "revId": "0ff084595217f24a3f377930b1ebae2de75c2b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7cbd351_c3e2750f",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2018-04-26T09:57:28Z",
       "side": 1,
       "message": "what do you mean by completely - what scenarios are left to fix?",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 45,
+        "endChar": 58
+      },
+      "revId": "0ff084595217f24a3f377930b1ebae2de75c2b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "814c8376_2cd06950",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1112683
+      },
+      "writtenOn": "2018-04-26T14:21:18Z",
+      "side": 1,
+      "message": "Recently I encountered some versions of mobile phones to reproduce this problem，all is hang in attachApplicationLocked()，Your solution can really solve the BINDER_WORK_DEAD_BINDER nesting  scenarios :)\n\nMaybe what I want to say is that my patch is more appropriate.\n\nDuring a transaction, the client will add BINDER_WORK_RETURN_ERROR into thread-\u003etodo list, however, it would be better to pick up BINDER_WORK_RETURN_ERROR firstly and finish the transaction immediately, jump out of the nest. \n\nThen client pick up the left binder work from thread-\u003etodo, using the same thread, do not need wake up other idle binder thread.\n\nNo other scene has been encountered yet, but other binder transaction nesting scenarios can cause similar problem. Anyway, my patch can solve transaction nesting cases.",
+      "parentUuid": "a7cbd351_c3e2750f",
       "range": {
         "startLine": 44,
         "startChar": 1,
