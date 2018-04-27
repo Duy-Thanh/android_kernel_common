@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2953d979_df9ff76d",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7007,
+      "author": {
+        "id": 1200908
+      },
+      "writtenOn": "2018-04-27T15:05:08Z",
+      "side": 1,
+      "message": "In this case, should we bail-out if the task is boosted and target_capacity\u003d\u003dSCHED_CAPACITY_SCALE ? That would mean almost no behavioural change on typical big.LITTLE platforms and still fix the issue with platforms with more than 2 capacity groups.",
+      "range": {
+        "startLine": 7007,
+        "startChar": 4,
+        "endLine": 7007,
+        "endChar": 28
+      },
+      "revId": "06edc60a941d51fb0da2cc6c29bc9b5653d6e19f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
