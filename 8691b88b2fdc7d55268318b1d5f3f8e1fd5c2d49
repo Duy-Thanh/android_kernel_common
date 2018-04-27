@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e320e791_798ffc3c",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6916,
+      "author": {
+        "id": 1200908
+      },
+      "writtenOn": "2018-04-27T14:55:04Z",
+      "side": 1,
+      "message": "You can probably get rid of that actually. Bellow we iterate between the groups of the sd_ea. By using sched_group_span() in the loop, we actually scan the cpumask of the group, which means that you are guaranteed to start from the CPU with the lowest id in each group. So, when you are scanning the big CPUs, you should always start from the reserved big CPUs, which might be enough for what you try to do here ?",
+      "range": {
+        "startLine": 6916,
+        "startChar": 1,
+        "endLine": 6916,
+        "endChar": 28
+      },
+      "revId": "8691b88b2fdc7d55268318b1d5f3f8e1fd5c2d49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
