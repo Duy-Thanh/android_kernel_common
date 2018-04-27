@@ -94,6 +94,30 @@
       "revId": "06edc60a941d51fb0da2cc6c29bc9b5653d6e19f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2928b27d_1629a7e0",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7007,
+      "author": {
+        "id": 1125654
+      },
+      "writtenOn": "2018-04-27T17:02:50Z",
+      "side": 1,
+      "message": "Yes, I will add idle state filtering as it pays to have it given that we iterate though all CPUs.",
+      "parentUuid": "4bfd63c1_61274607",
+      "range": {
+        "startLine": 7007,
+        "startChar": 4,
+        "endLine": 7007,
+        "endChar": 28
+      },
+      "revId": "06edc60a941d51fb0da2cc6c29bc9b5653d6e19f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
