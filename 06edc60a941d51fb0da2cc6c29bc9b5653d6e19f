@@ -22,6 +22,30 @@
       "revId": "06edc60a941d51fb0da2cc6c29bc9b5653d6e19f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75d33af8_53509c08",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7007,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2018-04-27T15:41:30Z",
+      "side": 1,
+      "message": "What you propose will not work if we want to plug in here a policy to select the most shallow idle state. Thus, I would keep it as it is now... and add with another patch the idle state optimization.",
+      "parentUuid": "2953d979_df9ff76d",
+      "range": {
+        "startLine": 7007,
+        "startChar": 4,
+        "endLine": 7007,
+        "endChar": 28
+      },
+      "revId": "06edc60a941d51fb0da2cc6c29bc9b5653d6e19f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
