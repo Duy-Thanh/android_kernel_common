@@ -46,6 +46,30 @@
       "revId": "06edc60a941d51fb0da2cc6c29bc9b5653d6e19f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa0212c1_ad742af9",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7007,
+      "author": {
+        "id": 1200908
+      },
+      "writtenOn": "2018-04-27T15:47:08Z",
+      "side": 1,
+      "message": "Right, but this additional idle state filtering isn\u0027t done for prefer idle tasks today. And it\u0027s not sure if it will be done eventually ...",
+      "parentUuid": "75d33af8_53509c08",
+      "range": {
+        "startLine": 7007,
+        "startChar": 4,
+        "endLine": 7007,
+        "endChar": 28
+      },
+      "revId": "06edc60a941d51fb0da2cc6c29bc9b5653d6e19f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
