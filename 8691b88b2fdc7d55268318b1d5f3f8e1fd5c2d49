@@ -46,6 +46,30 @@
       "revId": "8691b88b2fdc7d55268318b1d5f3f8e1fd5c2d49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d31db619_899e110a",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6916,
+      "author": {
+        "id": 1200908
+      },
+      "writtenOn": "2018-04-27T16:56:36Z",
+      "side": 1,
+      "message": "Yep that\u0027s right. Now, if you get sd_ea from the point of view of prev_cpu, then you should see big CPUs first if you ran on a big CPU before sleeping. That should be the case most of the time in practice I suppose.",
+      "parentUuid": "bedb782c_5f2b3f21",
+      "range": {
+        "startLine": 6916,
+        "startChar": 1,
+        "endLine": 6916,
+        "endChar": 28
+      },
+      "revId": "8691b88b2fdc7d55268318b1d5f3f8e1fd5c2d49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
