@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "477734b3_1317afff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-04-28T19:03:51Z",
+      "side": 1,
+      "message": "please explain what you are doing here, this is very vague.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "c6d63fd59a886b6c92d29e485d47c82a939834c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b65cfe4d_965f14e0",
+        "filename": "drivers/platform/goldfish/goldfish_pipe.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-04-28T19:03:51Z",
+      "side": 1,
+      "message": "how is this a \"cleanup\"?\n\nPlease be more descriptive, you seem to have mixed coding style cleanups with minor refactoring, and other small fixes.  Please break it up into \"one logical type of change per patch\".",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 0
+      },
+      "revId": "c6d63fd59a886b6c92d29e485d47c82a939834c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
