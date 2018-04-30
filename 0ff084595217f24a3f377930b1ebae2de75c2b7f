@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "2311dd53_a0a7045d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-04-30T07:26:08Z",
+      "side": 1,
+      "message": "reportOneDeath() itself doesn\u0027t do anything with the buffer buffer; are you saying that the death recipient called by reportOneDeath() issues a new binder transaction, for which we pick up the return error for the old transaction? I guess that could happen.",
+      "parentUuid": "8dd08a07_b896fe30",
+      "range": {
+        "startLine": 20,
+        "startChar": 27,
+        "endLine": 22,
+        "endChar": 45
+      },
+      "revId": "0ff084595217f24a3f377930b1ebae2de75c2b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7cbd351_c3e2750f",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -131,6 +155,30 @@
       "side": 1,
       "message": "Recently I encountered some versions of mobile phones to reproduce this problem，all is hang in attachApplicationLocked()，Your solution can really solve the BINDER_WORK_DEAD_BINDER nesting  scenarios :)\n\nMaybe what I want to say is that my patch is more appropriate.\n\nDuring a transaction, the client will add BINDER_WORK_RETURN_ERROR into thread-\u003etodo list, however, it would be better to pick up BINDER_WORK_RETURN_ERROR firstly and finish the transaction immediately, jump out of the nest. \n\nThen client pick up the left binder work from thread-\u003etodo, using the same thread, do not need wake up other idle binder thread.\n\nNo other scene has been encountered yet, but other binder transaction nesting scenarios can cause similar problem. Anyway, my patch can solve transaction nesting cases.",
       "parentUuid": "a7cbd351_c3e2750f",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 45,
+        "endChar": 58
+      },
+      "revId": "0ff084595217f24a3f377930b1ebae2de75c2b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4cfdb905_16df8d98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-04-30T07:26:08Z",
+      "side": 1,
+      "message": "Ok. I think there are no other cases left where we push to thread-\u003etodo - just for nested transactions itself (where it should be ok). Do you agree? But I will double check and also take a closer look at your patch.",
+      "parentUuid": "814c8376_2cd06950",
       "range": {
         "startLine": 44,
         "startChar": 1,
