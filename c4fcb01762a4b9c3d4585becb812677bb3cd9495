@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85b3303e_9acc55a8",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-05-01T23:43:54Z",
+      "side": 0,
+      "message": "you removed them too :)",
+      "range": {
+        "startLine": 365,
+        "startChar": 0,
+        "endLine": 365,
+        "endChar": 1
+      },
+      "revId": "c4fcb01762a4b9c3d4585becb812677bb3cd9495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
