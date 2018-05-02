@@ -22,6 +22,30 @@
       "revId": "eac4f88126c09571f7f4c2db01477bb0b20e9324",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29ec8213_7c1c5721",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2018-05-02T18:09:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29e003e0_08da2a88",
+      "range": {
+        "startLine": 804,
+        "startChar": 0,
+        "endLine": 805,
+        "endChar": 0
+      },
+      "revId": "eac4f88126c09571f7f4c2db01477bb0b20e9324",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
