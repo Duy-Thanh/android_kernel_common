@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29e003e0_08da2a88",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-05-02T03:23:00Z",
+      "side": 1,
+      "message": "doesn\u0027t checkpatch complain about this?  You need a blank line between these.\n\nIt\u0027s ackward, just have \"int err;\" on a single line, and then do the devm_request...() call on the first logical line of the function.  Burring it here where err is created is messy.",
+      "range": {
+        "startLine": 804,
+        "startChar": 0,
+        "endLine": 805,
+        "endChar": 0
+      },
+      "revId": "eac4f88126c09571f7f4c2db01477bb0b20e9324",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
