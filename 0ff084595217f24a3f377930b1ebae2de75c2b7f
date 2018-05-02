@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "0a39f277_fbbd37ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1112683
+      },
+      "writtenOn": "2018-05-02T02:17:07Z",
+      "side": 1,
+      "message": "Yes, you are right.\n\n\n1）requestDeathNotification() called by linkToDeath() left BINDER_WORK_DEAD_BINDER in thread-\u003etodo because target process has died.  using flush command， no need read from binder driver.\n2) attachApplicationLocked() left BINDER_WORK_RETURN_ERROR in thread-\u003etodo as target process has died.\n3) Client pick up BINDER_WORK_DEAD_BINDER in the head of thread-\u003etodo, then add BR_DEAD_BINDER to mIn buffer.\n4) Death recipient called by reportOneDeath() pick up BINDER_WORK_RETURN_ERROR which is producted by attachApplicationLocked()\n5) Oneway attachApplicationLocked() can be blocked forever.",
+      "parentUuid": "2311dd53_a0a7045d",
+      "range": {
+        "startLine": 20,
+        "startChar": 27,
+        "endLine": 22,
+        "endChar": 45
+      },
+      "revId": "0ff084595217f24a3f377930b1ebae2de75c2b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7cbd351_c3e2750f",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "Ok. I think there are no other cases left where we push to thread-\u003etodo - just for nested transactions itself (where it should be ok). Do you agree? But I will double check and also take a closer look at your patch.",
       "parentUuid": "814c8376_2cd06950",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 45,
+        "endChar": 58
+      },
+      "revId": "0ff084595217f24a3f377930b1ebae2de75c2b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45389df4_b6ad059c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1112683
+      },
+      "writtenOn": "2018-05-02T02:17:07Z",
+      "side": 1,
+      "message": "I agree with you. At present, no found other nesting scenarios where we push to thread-\u003etodo.\nBut there is potential risks in the future, future functional extensions need to consider nesting issues, maybe extending more methods where we push to thread-\u003etodo.\n\nSo I prefer to put the BINDER_WORK_RETURN_ERROR to the head of the queue， same as the old version of binder driver, once and for all :)",
+      "parentUuid": "4cfdb905_16df8d98",
       "range": {
         "startLine": 44,
         "startChar": 1,
