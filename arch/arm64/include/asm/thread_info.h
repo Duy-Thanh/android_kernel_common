@@ -43,6 +43,10 @@ struct thread_info {
 	u64			ttbr0;		/* saved TTBR0_EL1 */
 #endif
 	int			preempt_count;	/* 0 => preemptable, <0 => bug */
+#ifdef CONFIG_SHADOW_CALL_STACK
+	unsigned long 		shadow_call_stack;
+	unsigned long		shadow_call_stack_page;
+#endif
 };
 
 #define INIT_THREAD_INFO(tsk)						\
