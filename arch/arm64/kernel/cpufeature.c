@@ -24,6 +24,7 @@
 #include <linux/stop_machine.h>
 #include <linux/types.h>
 #include <linux/mm.h>
+#include <linux/scs.h>
 #include <asm/cpu.h>
 #include <asm/cpufeature.h>
 #include <asm/cpu_ops.h>
@@ -806,9 +807,13 @@ static int __nocfi kpti_install_ng_mappings(void *__unused)
 
 	remap_fn = (void *)__pa_symbol(idmap_kpti_install_ng_mappings);
 
+	scs_save(current);
+
 	cpu_install_idmap();
 	remap_fn(cpu, num_online_cpus(), __pa_symbol(swapper_pg_dir));
 	cpu_uninstall_idmap();
+
+	scs_load(current);
 
 	if (!cpu)
 		kpti_applied = true;
