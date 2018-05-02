@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32f56925_1e1ca77c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-05-02T18:55:08Z",
+      "side": 1,
+      "message": "Huge hint, when you say \"and\" or \"also\" in a changelog comment, you should probably split it up into multiple patches.  This should be two different patches because of this, right?",
+      "range": {
+        "startLine": 9,
+        "startChar": 39,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "1955fce49912b1e87a5f7f6eb03d64775c338790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
