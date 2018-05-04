@@ -7263,12 +7263,26 @@ static int build_sched_domains(const struct cpumask *cpu_map,
 		for (sd = *per_cpu_ptr(d.sd, i); sd; sd = sd->parent, tl++) {
 			init_sched_energy(i, sd, tl->energy);
 			claim_allocations(i, sd);
-			init_sched_groups_capacity(i, sd);
 		}
 	}
 
 	/* Attach the domains */
 	rcu_read_lock();
+	for_each_cpu(i, cpu_map) {
+		sd = *per_cpu_ptr(d.sd, i);
+
+		cpu_attach_domain(sd, d.rd, i);
+	}
+	rcu_read_unlock();
+
+	for (i = nr_cpumask_bits-1; i >= 0; i--) {
+		if (!cpumask_test_cpu(i, cpu_map))
+			continue;
+
+		for (sd = *per_cpu_ptr(d.sd, i); sd; sd = sd->parent)
+			init_sched_groups_capacity(i, sd);
+	}
+
 	for_each_cpu(i, cpu_map) {
 		int max_cpu = READ_ONCE(d.rd->max_cap_orig_cpu);
 		int min_cpu = READ_ONCE(d.rd->min_cap_orig_cpu);
@@ -7280,12 +7294,7 @@ static int build_sched_domains(const struct cpumask *cpu_map,
 		if ((min_cpu < 0) || (cpu_rq(i)->cpu_capacity_orig <
 		    cpu_rq(min_cpu)->cpu_capacity_orig))
 			WRITE_ONCE(d.rd->min_cap_orig_cpu, i);
-
-		sd = *per_cpu_ptr(d.sd, i);
-
-		cpu_attach_domain(sd, d.rd, i);
 	}
-	rcu_read_unlock();
 
 	ret = 0;
 error:
