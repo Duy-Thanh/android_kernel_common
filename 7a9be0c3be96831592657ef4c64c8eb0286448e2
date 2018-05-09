@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a3d9f18_8601d349",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2018-05-09T00:46:27Z",
+      "side": 1,
+      "message": "More to the point I\u0027d say that this is for backwards compatibility. If we made 0 a valid value, then anything that does an UPDSA on an SA that has an output mark will clobber the mark.",
+      "range": {
+        "startLine": 19,
+        "startChar": 38,
+        "endLine": 23,
+        "endChar": 29
+      },
+      "revId": "7a9be0c3be96831592657ef4c64c8eb0286448e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
