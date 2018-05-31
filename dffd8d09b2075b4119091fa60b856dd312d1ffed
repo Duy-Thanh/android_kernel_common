@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e81c08e_53a05ef1",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 7062,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2018-05-31T11:12:40Z",
+      "side": 0,
+      "message": "which then allows us to get rid of the similar and separate conditions in the idle case itself...?",
+      "range": {
+        "startLine": 7059,
+        "startChar": 40,
+        "endLine": 7062,
+        "endChar": 0
+      },
+      "revId": "dffd8d09b2075b4119091fa60b856dd312d1ffed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

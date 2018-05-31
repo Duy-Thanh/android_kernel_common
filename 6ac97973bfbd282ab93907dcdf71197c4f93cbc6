@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1069f1c_1fa48651",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 7038,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2018-05-31T11:12:40Z",
+      "side": 1,
+      "message": "To be clear, we are pulling this condition earlier in order to apply the same capacity minimisation for idle as active CPUs?",
+      "range": {
+        "startLine": 7032,
+        "startChar": 3,
+        "endLine": 7038,
+        "endChar": 5
+      },
+      "revId": "6ac97973bfbd282ab93907dcdf71197c4f93cbc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
