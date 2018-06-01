@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41ec9ac6_59190be8",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6908,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2018-06-01T09:24:35Z",
+      "side": 1,
+      "message": "Maybe it reads slightly better like this:\n\n   In most cases, target_capacity tracks capacity_orig of the most energy\n   efficient CPU candidate, thus requiring to minimise target_capacity.\n   For these cases target_capacity is already initialized to ULONG_MAX.\n\n   However, for prefer_idle and boosted tasks we look for a high\n   performance CPU, thus requiring to maximise target_capacity.\n   In this case we need instead to initialise target_capacity to 0.\n\n?",
+      "range": {
+        "startLine": 6905,
+        "startChar": 4,
+        "endLine": 6908,
+        "endChar": 33
+      },
+      "revId": "f2b43233ba0105acff0edca894648659a0817fd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

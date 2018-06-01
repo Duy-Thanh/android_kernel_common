@@ -118,6 +118,30 @@
       "revId": "06edc60a941d51fb0da2cc6c29bc9b5653d6e19f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bd65cd1_e9144112",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7007,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2018-06-01T09:24:35Z",
+      "side": 1,
+      "message": "This is now addressed by a following patch:\nhttps://android-review.googlesource.com/c/kernel/common/+/675102/4",
+      "parentUuid": "2928b27d_1629a7e0",
+      "range": {
+        "startLine": 7007,
+        "startChar": 4,
+        "endLine": 7007,
+        "endChar": 28
+      },
+      "revId": "06edc60a941d51fb0da2cc6c29bc9b5653d6e19f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
