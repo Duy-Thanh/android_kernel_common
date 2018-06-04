@@ -22,6 +22,30 @@
       "revId": "dffd8d09b2075b4119091fa60b856dd312d1ffed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a7af9a3_a6ad1a4b",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 7062,
+      "author": {
+        "id": 1125654
+      },
+      "writtenOn": "2018-06-04T10:52:02Z",
+      "side": 0,
+      "message": "I\u0027m not sure what you meant by your question. But if I get it right, yes, we have two similar and separate conditions in cases B and C an each insure a local minimum for idle CPUs (case B) and active CPUs (case C) when it comes to capacity orig.",
+      "parentUuid": "2e81c08e_53a05ef1",
+      "range": {
+        "startLine": 7059,
+        "startChar": 40,
+        "endLine": 7062,
+        "endChar": 0
+      },
+      "revId": "dffd8d09b2075b4119091fa60b856dd312d1ffed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }

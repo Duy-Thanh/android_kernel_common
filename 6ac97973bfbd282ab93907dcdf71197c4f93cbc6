@@ -22,6 +22,30 @@
       "revId": "6ac97973bfbd282ab93907dcdf71197c4f93cbc6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3cecbd9_18a59aea",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 7038,
+      "author": {
+        "id": 1125654
+      },
+      "writtenOn": "2018-06-04T10:52:02Z",
+      "side": 1,
+      "message": "Yes, this replaces the local minimums obtained previously from the idle and active CPUs, with a global minimum for the non-prefer idle case. Everything higher in either case B and C will be filtered out. This fixes the scenario in which we have all LITTLE CPUs idle and all bigs active, when we\u0027d chose a big CPU as target_cpu and a LITTLE idle CPU as backup idle CPU. \"energy_diff\" might choose the big active one as it will only compare against the previous CPUs, and not consider backup as well (depending on FBT_STRICT_ORDER).",
+      "parentUuid": "c1069f1c_1fa48651",
+      "range": {
+        "startLine": 7032,
+        "startChar": 3,
+        "endLine": 7038,
+        "endChar": 5
+      },
+      "revId": "6ac97973bfbd282ab93907dcdf71197c4f93cbc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
