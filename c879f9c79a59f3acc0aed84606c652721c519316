@@ -22,6 +22,30 @@
       "revId": "c879f9c79a59f3acc0aed84606c652721c519316",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f618ad5_22564e1c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2018-06-06T21:08:18Z",
+      "side": 1,
+      "message": "Seems this comment is still unresolved and applies to the current patch?",
+      "parentUuid": "9964c496_a6b9782d",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 26
+      },
+      "revId": "c879f9c79a59f3acc0aed84606c652721c519316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
