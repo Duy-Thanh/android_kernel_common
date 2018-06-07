@@ -46,6 +46,30 @@
       "revId": "c879f9c79a59f3acc0aed84606c652721c519316",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea6579ce_113409c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2018-06-07T13:57:37Z",
+      "side": 1,
+      "message": "Seems that this fix, which was provided by the original version of this patch, has been already merged in:\n\n   commit f6bec4e8c771 (\"Revert \"ANDROID: sched/tune: Initialize raw_spin_lock in boosted_groups\")\n\nThus, I\u0027ll update the changelog to track this \"dependency\".",
+      "parentUuid": "9f618ad5_22564e1c",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 26
+      },
+      "revId": "c879f9c79a59f3acc0aed84606c652721c519316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
