@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "538d7a42_ba8a29ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2018-06-07T15:29:43Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be schedtune_boostgroup_init()",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 24
+      },
+      "revId": "c5a6f107f1862c13292da215bf8682ffc138c1a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
