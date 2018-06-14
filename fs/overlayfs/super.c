@@ -24,7 +24,6 @@ MODULE_AUTHOR("Miklos Szeredi <miklos@szeredi.hu>");
 MODULE_DESCRIPTION("Overlay filesystem");
 MODULE_LICENSE("GPL");
 
-
 struct ovl_dir_cache;
 
 #define OVL_MAX_STACK 500
@@ -38,6 +37,11 @@ static bool ovl_index_def = IS_ENABLED(CONFIG_OVERLAY_FS_INDEX);
 module_param_named(index, ovl_index_def, bool, 0644);
 MODULE_PARM_DESC(ovl_index_def,
 		 "Default to on or off for the inodes index feature");
+
+static bool __read_mostly ovl_caller_credentials;
+module_param_named(caller_credentials, ovl_caller_credentials, bool, 0644);
+MODULE_PARM_DESC(ovl_caller_credentials,
+		 "Use caller credentials rather than creator credentials for accesses");
 
 static void ovl_dentry_release(struct dentry *dentry)
 {
@@ -307,6 +311,10 @@ static int ovl_show_options(struct seq_file *m, struct dentry *dentry)
 	if (ufs->config.index != ovl_index_def)
 		seq_printf(m, ",index=%s",
 			   ufs->config.index ? "on" : "off");
+	if (ufs->config.caller_credentials)
+		seq_puts(m, ",caller_credentials");
+	else
+		seq_puts(m, ",creator_credentials");
 	return 0;
 }
 
@@ -340,6 +348,8 @@ enum {
 	OPT_REDIRECT_DIR_OFF,
 	OPT_INDEX_ON,
 	OPT_INDEX_OFF,
+	OPT_CREATOR_CREDENTIALS,
+	OPT_CALLER_CREDENTIALS,
 	OPT_ERR,
 };
 
@@ -352,6 +362,8 @@ static const match_table_t ovl_tokens = {
 	{OPT_REDIRECT_DIR_OFF,		"redirect_dir=off"},
 	{OPT_INDEX_ON,			"index=on"},
 	{OPT_INDEX_OFF,			"index=off"},
+	{OPT_CREATOR_CREDENTIALS,	"creator_credentials"},
+	{OPT_CALLER_CREDENTIALS,	"caller_credentials"},
 	{OPT_ERR,			NULL}
 };
 
@@ -382,6 +394,7 @@ static int ovl_parse_opt(char *opt, struct ovl_config *config)
 {
 	char *p;
 
+	config->caller_credentials = ovl_caller_credentials;
 	while ((p = ovl_next_opt(&opt)) != NULL) {
 		int token;
 		substring_t args[MAX_OPT_ARGS];
@@ -430,6 +443,14 @@ static int ovl_parse_opt(char *opt, struct ovl_config *config)
 
 		case OPT_INDEX_OFF:
 			config->index = false;
+			break;
+
+		case OPT_CREATOR_CREDENTIALS:
+			config->caller_credentials = false;
+			break;
+
+		case OPT_CALLER_CREDENTIALS:
+			config->caller_credentials = true;
 			break;
 
 		default:
