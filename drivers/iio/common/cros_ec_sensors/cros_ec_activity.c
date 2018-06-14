@@ -390,12 +390,11 @@ static int cros_ec_sensors_probe(struct platform_device *pdev)
 					     cros_ec_activity_push_data);
 }
 
-static int cros_ec_sensors_remove(struct platform_device *pdev)
+static void cros_ec_sensors_remove(struct platform_device *pdev)
 {
 	struct iio_dev *indio_dev = platform_get_drvdata(pdev);
 
 	iio_device_unregister(indio_dev);
-	return 0;
 }
 
 static struct platform_driver cros_ec_sensors_platform_driver = {
