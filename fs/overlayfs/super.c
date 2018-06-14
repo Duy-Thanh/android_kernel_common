@@ -39,6 +39,12 @@ module_param_named(index, ovl_index_def, bool, 0644);
 MODULE_PARM_DESC(ovl_index_def,
 		 "Default to on or off for the inodes index feature");
 
+static bool __read_mostly ovl_default_override_creds =
+	IS_ENABLED(CONFIG_OVERLAY_FS_OVERRIDE_CREDS);
+module_param_named(override_creds, ovl_default_override_creds, bool, 0644);
+MODULE_PARM_DESC(ovl_default_override_creds,
+		 "Use mounter's credentials for accesses");
+
 static void ovl_dentry_release(struct dentry *dentry)
 {
 	struct ovl_entry *oe = dentry->d_fsdata;
@@ -228,7 +234,8 @@ static void ovl_put_super(struct super_block *sb)
 	kfree(ufs->config.lowerdir);
 	kfree(ufs->config.upperdir);
 	kfree(ufs->config.workdir);
-	put_cred(ufs->creator_cred);
+	if (ufs->creator_cred)
+		put_cred(ufs->creator_cred);
 	kfree(ufs);
 }
 
@@ -307,6 +314,8 @@ static int ovl_show_options(struct seq_file *m, struct dentry *dentry)
 	if (ufs->config.index != ovl_index_def)
 		seq_printf(m, ",index=%s",
 			   ufs->config.index ? "on" : "off");
+	seq_show_option(m, "override_creds",
+			ufs->config.override_creds ? "on" : "off");
 	return 0;
 }
 
@@ -340,6 +349,8 @@ enum {
 	OPT_REDIRECT_DIR_OFF,
 	OPT_INDEX_ON,
 	OPT_INDEX_OFF,
+	OPT_OVERRIDE_CREDS_ON,
+	OPT_OVERRIDE_CREDS_OFF,
 	OPT_ERR,
 };
 
@@ -352,6 +363,8 @@ static const match_table_t ovl_tokens = {
 	{OPT_REDIRECT_DIR_OFF,		"redirect_dir=off"},
 	{OPT_INDEX_ON,			"index=on"},
 	{OPT_INDEX_OFF,			"index=off"},
+	{OPT_OVERRIDE_CREDS_ON,		"override_creds=on"},
+	{OPT_OVERRIDE_CREDS_OFF,	"override_creds=off"},
 	{OPT_ERR,			NULL}
 };
 
@@ -382,6 +395,7 @@ static int ovl_parse_opt(char *opt, struct ovl_config *config)
 {
 	char *p;
 
+	config->override_creds = ovl_default_override_creds;
 	while ((p = ovl_next_opt(&opt)) != NULL) {
 		int token;
 		substring_t args[MAX_OPT_ARGS];
@@ -430,6 +444,14 @@ static int ovl_parse_opt(char *opt, struct ovl_config *config)
 
 		case OPT_INDEX_OFF:
 			config->index = false;
+			break;
+
+		case OPT_OVERRIDE_CREDS_ON:
+			config->override_creds = true;
+			break;
+
+		case OPT_OVERRIDE_CREDS_OFF:
+			config->override_creds = false;
 			break;
 
 		default:
@@ -841,7 +863,7 @@ static int ovl_fill_super(struct super_block *sb, void *data, int silent)
 	unsigned int stacklen = 0;
 	unsigned int i;
 	bool remote = false;
-	struct cred *cred;
+	struct cred *cred = NULL;
 	int err;
 
 	err = -ENOMEM;
@@ -1101,12 +1123,14 @@ static int ovl_fill_super(struct super_block *sb, void *data, int silent)
 		sb->s_d_op = &ovl_dentry_operations;
 
 	err = -ENOMEM;
-	ufs->creator_cred = cred = prepare_creds();
-	if (!cred)
-		goto out_put_indexdir;
+	if (ufs->config.override_creds) {
+		ufs->creator_cred = cred = prepare_creds();
+		if (!cred)
+			goto out_put_indexdir;
 
-	/* Never override disk quota limits or use reserved space */
-	cap_lower(cred->cap_effective, CAP_SYS_RESOURCE);
+		/* Never override disk quota limits or use reserved space */
+		cap_lower(cred->cap_effective, CAP_SYS_RESOURCE);
+	}
 
 	err = -ENOMEM;
 	oe = ovl_alloc_entry(numlower);
@@ -1152,7 +1176,8 @@ static int ovl_fill_super(struct super_block *sb, void *data, int silent)
 out_free_oe:
 	kfree(oe);
 out_put_cred:
-	put_cred(ufs->creator_cred);
+	if (ufs->creator_cred)
+		put_cred(ufs->creator_cred);
 out_put_indexdir:
 	dput(ufs->indexdir);
 out_put_lower_mnt:
