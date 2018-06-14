@@ -348,6 +348,9 @@ static loff_t sdcardfs_file_llseek(struct file *file, loff_t offset, int whence)
 {
 	int err;
 	struct file *lower_file;
+	struct inode *inode = file->f_mapping->host;
+
+	fsstack_copy_inode_size(inode, sdcardfs_lower_inode(inode));
 
 	err = generic_file_llseek(file, offset, whence);
 	if (err < 0)
@@ -421,7 +424,7 @@ out:
 }
 
 const struct file_operations sdcardfs_main_fops = {
-	.llseek		= generic_file_llseek,
+	.llseek		= sdcardfs_file_llseek,
 	.read		= sdcardfs_read,
 	.write		= sdcardfs_write,
 	.unlocked_ioctl	= sdcardfs_unlocked_ioctl,
