@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c4f75ee_066f7d5d",
+        "filename": "drivers/staging/gasket/LICENSE",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-06-15T19:01:42Z",
+      "side": 1,
+      "message": "Don\u0027t include yet-another-copy of the GPL in the kernel source tree.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 43
+      },
+      "revId": "3d88e49e134372004ce8ab202eb0152054ebb920",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
