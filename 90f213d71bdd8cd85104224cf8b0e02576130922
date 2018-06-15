@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4016d22c_eefb42f0",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 9852,
+      "author": {
+        "id": 1173283
+      },
+      "writtenOn": "2018-06-15T17:46:33Z",
+      "side": 1,
+      "message": "Isn\u0027t this going to hurt load balancing when we are overutilized ? I read this as \"don\u0027t do active balance unless the group is overloaded (sum_nr_running \u003e group_weight AND group_util over ~ 75%) AND one task has \u003e\u003d 80% utilization.\n\nIn a perfect world if we hit the sum_nr_running \u003e group_weight condition we should be able to balance without active balance, but when we check that condition we\u0027re already within the !ld_moved load_balance() branch, which means we failed to move load and we\u0027re desperate to move some...",
+      "revId": "90f213d71bdd8cd85104224cf8b0e02576130922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
