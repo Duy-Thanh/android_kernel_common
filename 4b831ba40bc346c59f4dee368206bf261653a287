@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c7ee518_6beb1682",
+        "filename": "fs/sdcardfs/inode.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2018-06-15T02:23:00Z",
+      "side": 1,
+      "message": "We don\u0027t really use this value, though. Instead we take the size related values from lower_stat inside of sdcardfs_fillattr. The size you get by just using sdcardfs_fillattr doesn\u0027t necessarily give what getattr needs. For instance, under ext4, i_blocks might not reflect what it passes to stat-\u003eblock.",
+      "range": {
+        "startLine": 874,
+        "startChar": 1,
+        "endLine": 875,
+        "endChar": 37
+      },
+      "revId": "4b831ba40bc346c59f4dee368206bf261653a287",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
