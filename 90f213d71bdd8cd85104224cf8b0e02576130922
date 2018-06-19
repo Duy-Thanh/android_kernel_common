@@ -16,6 +16,24 @@
       "revId": "90f213d71bdd8cd85104224cf8b0e02576130922",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97adc9ee_e5a1fa48",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 9852,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2018-06-19T13:02:20Z",
+      "side": 1,
+      "message": "In the cases where this condition is taken, what we do is allow an active balance without waiting for the failed count to increment. We\u0027re not preventing any balance opportunities, just adding another one. This can happen when we identify an imbalance but can\u0027t move the tasks (running, pinned, cache hot etc.).\n\nThat imbalance seems to be fairly common when we wake up a bunch of tasks in a short amount of time and want to push some misfits down onto smaller CPUs to increase overall throughput.",
+      "parentUuid": "4016d22c_eefb42f0",
+      "revId": "90f213d71bdd8cd85104224cf8b0e02576130922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
