@@ -712,6 +712,23 @@ DISABLE_SCS	:= -fno-sanitize=shadow-call-stack
 export DISABLE_SCS
 endif
 
+ifdef CONFIG_PGO_CLANG_INSTRUMENT
+CFLAGS_PGO_CLANG_INSTRUMENT	:= -fprofile-instr-generate
+DISABLE_PGO_CLANG_INSTRUMENT	:= -fno-profile-instr-generate
+export CFLAGS_PGO_CLANG_INSTRUMENT DISABLE_PGO_CLANG_INSTRUMENT
+endif
+
+ifdef CONFIG_PGO_CLANG
+ifndef PGO_CLANG_PROFDATA
+PGO_CLANG_PROFDATA := $(srctree)/vmlinux.profdata
+endif
+KBUILD_CFLAGS	+= -fprofile-instr-use=$(PGO_CLANG_PROFDATA) \
+			-Wno-profile-instr-unprofiled \
+			-Wno-profile-instr-out-of-date
+DISABLE_PGO	:= -fno-profile-instr-use
+export DISABLE_PGO
+endif
+
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS	+= $(call cc-option,-Oz,-Os)
 KBUILD_CFLAGS	+= $(call cc-disable-warning,maybe-uninitialized,)
