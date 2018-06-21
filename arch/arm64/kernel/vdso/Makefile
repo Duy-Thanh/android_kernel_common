@@ -19,6 +19,9 @@ ccflags-y += $(DISABLE_LTO) $(DISABLE_SCS)
 # Disable gcov profiling for VDSO code
 GCOV_PROFILE := n
 
+# Disable clang instrumentation
+PGO_CLANG_INSTRUMENT := n
+
 # Workaround for bare-metal (ELF) toolchains that neglect to pass -shared
 # down to collect2, resulting in silent corruption of the vDSO image.
 ccflags-y += -Wl,-shared
