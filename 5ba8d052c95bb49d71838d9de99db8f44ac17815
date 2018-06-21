@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad007b6e_6069c9f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-06-21T22:17:23Z",
+      "side": 1,
+      "message": "override_creds\u003doff",
+      "range": {
+        "startLine": 7,
+        "startChar": 20,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "5ba8d052c95bb49d71838d9de99db8f44ac17815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a48bc928_2dbf5453",
+        "filename": "fs/overlayfs/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-06-21T22:17:23Z",
+      "side": 1,
+      "message": "tabs",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 10
+      },
+      "revId": "5ba8d052c95bb49d71838d9de99db8f44ac17815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
