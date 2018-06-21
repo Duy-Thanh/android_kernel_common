@@ -34,6 +34,24 @@
       "revId": "90f213d71bdd8cd85104224cf8b0e02576130922",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "baa6c433_ec18d961",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 9852,
+      "author": {
+        "id": 1173283
+      },
+      "writtenOn": "2018-06-21T15:14:23Z",
+      "side": 1,
+      "message": "Right, I forgot that nr_balance_failed thing for a moment.\n\nI\u0027m trying to make sense of when exactly do we hit this condition. With an overloaded group you\u0027d expect to be able to solve the imbalance without active balancing, but you can still fail to pull tasks in detach_tasks (pinned tasks, only one active task in the rq...).\n\nThis is also gated by a rq_has_misfit() check, so it\u0027ll only happen when a big (\u003e\u003d80% util, although scaled to the CPU capacity) task suddenly becomes coscheduled with one or more other tasks, and the load balancer can\u0027t seem to fix it.\n\nIIUC the most common scenario for that to happen is a task being pinned to where a misfit task is residing (otherwise we would have placed that task elsewhere). I\u0027ve tried coming up with scenarios where we wouldn\u0027t want to do an active balance - for instance, if the other task is a periodic one without any CPU affinity - but none of them really seem to make sense.\n\nSo, if I\u0027ve got it right so far, those scenarios can only really be helped with active balance. How much faster is this compared to letting the nr_balance_failed counter increase ?",
+      "parentUuid": "97adc9ee_e5a1fa48",
+      "revId": "90f213d71bdd8cd85104224cf8b0e02576130922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
