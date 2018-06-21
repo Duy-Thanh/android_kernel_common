@@ -867,6 +867,23 @@ DISABLE_SCS	:= -fno-sanitize=shadow-call-stack
 export DISABLE_SCS
 endif
 
+ifdef CONFIG_PGO_CLANG_INSTRUMENT
+CFLAGS_PGO_CLANG_INSTRUMENT	:= -fprofile-instr-generate
+DISABLE_PGO_CLANG_INSTRUMENT	:= -fno-profile-instr-generate
+export CFLAGS_PGO_CLANG_INSTRUMENT DISABLE_PGO_CLANG_INSTRUMENT
+endif
+
+ifdef CONFIG_PGO_CLANG
+ifndef PGO_CLANG_PROFDATA
+PGO_CLANG_PROFDATA := $(srctree)/vmlinux.profdata
+endif
+KBUILD_CFLAGS	+= -fprofile-instr-use=$(PGO_CLANG_PROFDATA) \
+			-Wno-profile-instr-unprofiled \
+			-Wno-profile-instr-out-of-date
+DISABLE_PGO	:= -fno-profile-instr-use
+export DISABLE_PGO
+endif
+
 # arch Makefile may override CC so keep this after arch Makefile is included
 NOSTDINC_FLAGS += -nostdinc -isystem $(shell $(CC) -print-file-name=include)
 CHECKFLAGS     += $(NOSTDINC_FLAGS)

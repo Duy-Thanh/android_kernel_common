@@ -611,6 +611,40 @@ config LD_DEAD_CODE_DATA_ELIMINATION
 	  sections (e.g., '.text.init'). Typically '.' in section names
 	  is used to distinguish them from label names / C identifiers.
 
+choice
+	prompt "Profile Guided Optimization (PGO) (EXPERIMENTAL)"
+	default PGO_NONE
+	help
+	  This option controls Profile Guided Optimization (PGO). Note that
+	  PGO is a compiler-specific feature, which requires profile data to
+	  be generated using an instrumented kernel, for example.
+
+config PGO_NONE
+	bool "None"
+
+config PGO_CLANG_INSTRUMENT
+	bool "Enable clang's profiling with instrumentation"
+	help
+	  This option enables profiling with instrumentation for generating
+	  a profile to be used with PGO. Run a representative workload for
+	  your application on a kernel compiled with this option, and download
+	  the raw profile file from /sys/kernel/debug/pgo/profraw. This file
+	  needs to be processed with llvm-profdata, and can, for example, be
+	  merged with other collected raw profiles.
+
+	  Copy the resulting profile file into vmlinux.profdata, and enable
+	  CONFIG_PGO_CLANG to produce an optimized kernel.
+
+config PGO_CLANG
+	bool "Enable clang's Profile Guided Optimization (PGO)"
+	help
+	  This option enables clang's PGO (Profile Guided Optimization)
+	  option to better optimize the kernel. Note that you must first
+	  collect profile data from a kernel compiled with the option
+	  CONFIG_PGO_CLANG_INSTRUMENT.
+
+endchoice
+
 config LTO
 	def_bool n
 
