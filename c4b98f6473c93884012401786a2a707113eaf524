@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b00b29f_1c39043d",
+        "filename": "fs/sdcardfs/inode.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-06-25T22:36:34Z",
+      "side": 1,
+      "message": "nit: unnecessary initialization, it is not referenced without initialization.",
+      "range": {
+        "startLine": 273,
+        "startChar": 29,
+        "endLine": 273,
+        "endChar": 36
+      },
+      "revId": "c4b98f6473c93884012401786a2a707113eaf524",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4042de01_ed3368f5",
+        "filename": "fs/sdcardfs/inode.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-06-25T22:36:34Z",
+      "side": 1,
+      "message": "nit: if you added a bool free_space variable above:\n\nparent_dentry \u003d dget_parent(dentry);\nfree_space \u003d check_min_free_space(parent_dentry, 0, 1);\ndput(parent_dentry);\nif (free_space) {\n    pr_err(\"sdcardfs: No minimum free space.\\n\");\n    err \u003d -ENOSPC;\n    goto out_revert;\n}",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 294,
+        "endChar": 50
+      },
+      "revId": "c4b98f6473c93884012401786a2a707113eaf524",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
