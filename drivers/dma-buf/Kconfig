@@ -1,5 +1,9 @@
 menu "DMABUF options"
 
+config SYNC
+	bool "For OTA backward compatibility"
+	default y
+
 config SYNC_FILE
 	bool "Explicit Synchronization Framework"
 	default n
