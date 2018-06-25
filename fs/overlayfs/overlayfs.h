@@ -128,7 +128,7 @@ static inline int ovl_do_rename(struct inode *olddir, struct dentry *olddentry,
 
 static inline int ovl_do_whiteout(struct inode *dir, struct dentry *dentry)
 {
-	int err = vfs_whiteout(dir, dentry);
+	int err = capable(CAP_MKNOD) ? vfs_whiteout(dir, dentry) : -EPERM;
 	pr_debug("whiteout(%pd2) = %i\n", dentry, err);
 	return err;
 }
