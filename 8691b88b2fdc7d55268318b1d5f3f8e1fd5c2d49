@@ -94,6 +94,30 @@
       "revId": "8691b88b2fdc7d55268318b1d5f3f8e1fd5c2d49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23bda3e3_9116023e",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6916,
+      "author": {
+        "id": 1318918
+      },
+      "writtenOn": "2018-06-27T17:32:54Z",
+      "side": 1,
+      "message": "not sure I understand the underlying reason for this.\nThis would be detrimental for a small task - the ones with no boost and no prefer_idle, it would look at the big cluster first, perhaps choose a cpu there and then look at the smaller group, and end up choosing a cpu in smaller group.",
+      "parentUuid": "fcbea769_93109ea7",
+      "range": {
+        "startLine": 6916,
+        "startChar": 1,
+        "endLine": 6916,
+        "endChar": 28
+      },
+      "revId": "8691b88b2fdc7d55268318b1d5f3f8e1fd5c2d49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }

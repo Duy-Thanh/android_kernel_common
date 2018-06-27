@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4aa932e6_22df0492",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 6916,
+      "author": {
+        "id": 1318918
+      },
+      "writtenOn": "2018-06-27T17:32:54Z",
+      "side": 1,
+      "message": "can you please use this opportunity to rename the variable \"cpu\" to \"start_cpu\"?",
+      "revId": "b00dad4aa494e7338c7edfd47aa33ef2da976921",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
