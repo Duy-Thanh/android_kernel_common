@@ -118,6 +118,30 @@
       "revId": "8691b88b2fdc7d55268318b1d5f3f8e1fd5c2d49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "638be064_0dde712b",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6916,
+      "author": {
+        "id": 1125654
+      },
+      "writtenOn": "2018-06-28T11:00:12Z",
+      "side": 1,
+      "message": "Yes, you are correct. This patch is meant as a simplification. Before this patch https://android-review.googlesource.com/c/kernel/common/+/673171/8, the correct start CPU was crucial as we would bail out early for the prefer_idle case. Now we\u0027re going though all CPUs. Starting at the biggest CPU is no longer crucial but it results in less calculations for the prefer_idle and boosted case, which is the latency sensitive one. Even if we\u0027d start at lower capacity CPUs for non-prefer_idle and boosted there would be no guarantees of order of CPUs for scenarios where we have multiple groups of CPUs with different capacities. We might still end up considering big CPUs before medium CPUs, for example. Also, I don\u0027t believe the overhead is significant.",
+      "parentUuid": "23bda3e3_9116023e",
+      "range": {
+        "startLine": 6916,
+        "startChar": 1,
+        "endLine": 6916,
+        "endChar": 28
+      },
+      "revId": "8691b88b2fdc7d55268318b1d5f3f8e1fd5c2d49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
