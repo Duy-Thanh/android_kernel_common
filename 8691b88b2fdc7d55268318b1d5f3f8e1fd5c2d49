@@ -142,6 +142,30 @@
       "revId": "8691b88b2fdc7d55268318b1d5f3f8e1fd5c2d49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f3b69b2_b67bcf18",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6916,
+      "author": {
+        "id": 1318918
+      },
+      "writtenOn": "2018-07-03T00:13:55Z",
+      "side": 1,
+      "message": "Hello Ionela,\n\nThe overhead might not be significant, but the code flow will be much simpler.\n\nWe know the capacities of each cluster (all cpus in a cluster are with same capacity), \nso we can sort the groups based on their capacities.\n\nDuring task placement we start with the ones where the task fits and for boosted and prefer_idle tasks we start with mid. If we didnt find anything there we go to the next one higher in capacity. And if nothing we then find something on the smaller one.\n\nWe already are maintaining rd-\u003emin/max_cap_orig_cpu, it should be easy to extend that code to find the rf-\u003emid_cap_orig_cpu. i.e. we should be able to create a sorted array of cpus for traversal.\n\nThe other advantage is if we find a cpu on the favorable cluster, we exit and run energy eval only on the ilde and active cpu on that cluster. If you notice, \nhttps://android-review.googlesource.com/c/kernel/common/+/673169/8\ndoes that in way.",
+      "parentUuid": "638be064_0dde712b",
+      "range": {
+        "startLine": 6916,
+        "startChar": 1,
+        "endLine": 6916,
+        "endChar": 28
+      },
+      "revId": "8691b88b2fdc7d55268318b1d5f3f8e1fd5c2d49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
