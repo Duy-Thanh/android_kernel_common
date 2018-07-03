@@ -190,6 +190,30 @@
       "revId": "8691b88b2fdc7d55268318b1d5f3f8e1fd5c2d49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "605ffcbf_f532eff9",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6916,
+      "author": {
+        "id": 1125654
+      },
+      "writtenOn": "2018-07-03T14:48:52Z",
+      "side": 1,
+      "message": "Hi,\n\nIn regards to creating a list of ordered CPUs/groups and bailing out early:\nThe reason for choosing this implementation is due to having a long term plan to meld the code in find_best_target into the \"mainline\" wake-up paths which so far is proving good performance and energy results (I am evaluating this currently).\nTherefore, initially I had an attempt to obtain some sorted list of CPUs/groups based on their capacity, but that involved adding infrastructure code that would not bring any benefit outside of find_best_target. Additionally, the simpler current implementation does not cause any regressions by visiting all CPUs and it allowed us to improve the prefer_idle case by considering the idle state of the CPU as well.\n\nAlso, there are mechanisms in place to obtain similar behaviours to skip CPUs that belong to smaller/bigger capacity groups as you\u0027ve suggested to save us from doing unnecessary calculations.\nFor example:\nhttps://android-review.googlesource.com/c/kernel/common/+/673171/9/kernel/sched/fair.c#7005 - for prefer idle and boosted tasks we\u0027ll only visit the highest capacity group of CPUs as CPUs of all categories will not pass the capacity condition on that line. We\u0027re starting at highest capacity CPU to make sure we optimise this latency sensitive case.\nAlso:\nhttps://android-review.googlesource.com/c/kernel/common/+/673171/9/kernel/sched/fair.c#7016 - we will not go though the checks for active CPUs if a idle CPU was found. \n\nI understand that there is a small overhead for non-latency sensitive tasks (because we visit bigger CPUs first), but:\n- Background tasks (non-prefer idle) will probably have use only of the LITTLE CPUs\n- We\u0027re not looking for low latency wake-up for these tasks so a small overhead is acceptable.\n\nIn my opinion, if we want to optimise this last case as well, we could just drop this patch and start either from bigs or littles, as done before, but go though all CPUs. That would save us some checks for the non-prefer idle case, but it would not bring other benefits.\nAlso, adding sorted lists of CPUs/groups and bailing out early would only result in complicating this solution and creating a bigger delta to mainline for no observable benefits. The same applies to adding a mid_cap_orig_cpu, which seems more a customisation for tri-gear.\n\n\nIn regards to your comment:\n\u003e\u003e The other advantage is if we find a cpu on the favorable cluster, we exit and run energy eval \u003e\u003e only on the ilde and active cpu on that cluster. If you notice, \n\u003e\u003e https://android-review.googlesource.com/c/kernel/common/+/673169/8\n\u003e\u003e does that in way.\n\nThis already happens for non-prefer idle tasks - we have same capacity idle and active CPU as you\u0027ve pointed out in Pavan\u0027s patch, and this is a desired behaviour.\nI see now you\u0027ve identified later we don\u0027t pay attention to active CPUs if we\u0027ve found an idle one for the prefer_idle case. It\u0027s also worth mentioning that we will return that idle CPU immediately without doing an energy evaluation (https://android-review.googlesource.com/c/kernel/common/+/703086/3/kernel/sched/fair.c#7382)",
+      "parentUuid": "edefc583_2fb68e1d",
+      "range": {
+        "startLine": 6916,
+        "startChar": 1,
+        "endLine": 6916,
+        "endChar": 28
+      },
+      "revId": "8691b88b2fdc7d55268318b1d5f3f8e1fd5c2d49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
