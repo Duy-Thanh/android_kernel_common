@@ -166,6 +166,30 @@
       "revId": "8691b88b2fdc7d55268318b1d5f3f8e1fd5c2d49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edefc583_2fb68e1d",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6916,
+      "author": {
+        "id": 1318918
+      },
+      "writtenOn": "2018-07-03T00:23:27Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common/+/673171/9/kernel/sched/fair.c#7009\n\ndoes that in a way too.\n\nI am requesting we break from visiting more groups once we find something useable in the group.\n\nfor (sd \u003d group_of_favourable_cpu; more groups to visit and *target_capacity is not found* ; next higher group)\n {\n\n    handle case A (note target), handle case B (note target)\n      \n }",
+      "parentUuid": "0f3b69b2_b67bcf18",
+      "range": {
+        "startLine": 6916,
+        "startChar": 1,
+        "endLine": 6916,
+        "endChar": 28
+      },
+      "revId": "8691b88b2fdc7d55268318b1d5f3f8e1fd5c2d49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
