@@ -136,9 +136,14 @@ schedtune_cpu_update(int cpu, u64 now)
 	int boost_max;
 	int idx;
 
+	trace_printk("cpu=%d now=%llu\n", cpu, now);
+
 	/* The root boost group is always active */
 	boost_max = bg->group[0].boost;
 	for (idx = 1; idx < BOOSTGROUPS_COUNT; ++idx) {
+		trace_printk("cpu=%d idx=%d boost=%d tasks=%u ts=%llu\n",
+			cpu, idx, bg->group[idx].boost,
+			bg->group[idx].tasks, bg->group[idx].ts);
 		/*
 		 * A boost group affects a CPU only if it has
 		 * RUNNABLE tasks on that CPU or it has hold
@@ -160,6 +165,9 @@ schedtune_cpu_update(int cpu, u64 now)
 	boost_max = max(boost_max, 0);
 	bg->boost_max = boost_max;
 	bg->boost_ts = boost_ts;
+
+	trace_printk("boost_max=%d ts=%llu\n",
+			boost_max, boost_ts);
 }
 
 static int
@@ -195,8 +203,13 @@ schedtune_boostgroup_update(int idx, int boost)
 			bg->boost_max = boost;
 			bg->boost_ts = bg->group[idx].ts;
 
+			trace_printk("active_group boost=%d tasks=%d ts=%llu group_idx=%d",
+				bg->group[idx].boost, bg->group[idx].tasks, bg->group[idx].ts, idx);
 			trace_sched_tune_boostgroup_update(cpu, 1, bg->boost_max);
 			continue;
+		} else {
+			trace_printk("low_boost_group boost=%d tasks=%d ts=%llu group_idx=%d",
+				bg->group[idx].boost, bg->group[idx].tasks, bg->group[idx].ts, idx);
 		}
 
 		/* Check if this update has decreased current max */
@@ -401,9 +414,10 @@ int schedtune_cpu_boost(int cpu)
 	now = sched_clock_cpu(cpu);
 
 	/* check to see if we have a hold in effect */
-	if (schedtune_boost_timeout(now, bg->boost_ts))
+	if (schedtune_boost_timeout(now, bg->boost_ts)) {
+		trace_printk("cpu=%d now=%llu boost_ts=%llu\n", cpu, now, bg->boost_ts);
 		schedtune_cpu_update(cpu, now);
-
+	}
 	return bg->boost_max;
 }
 
