@@ -22,6 +22,30 @@
       "revId": "b1e890541e3fe449c7387d8fd319eefb642bc653",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bda36ef_6eb44a60",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2018-07-18T16:52:08Z",
+      "side": 1,
+      "message": "https://android.googlesource.com/kernel/common/+/77ed324e037215406d317fd805e7828f15e13da0",
+      "parentUuid": "d2388ee7_df63cdab",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 53
+      },
+      "revId": "b1e890541e3fe449c7387d8fd319eefb642bc653",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
