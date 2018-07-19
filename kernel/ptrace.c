@@ -895,7 +895,11 @@ int ptrace_request(struct task_struct *child, long request,
 		return generic_ptrace_peekdata(child, addr, data);
 	case PTRACE_POKETEXT:
 	case PTRACE_POKEDATA:
+#ifdef CONFIG_PTRACE_CANNOT_POKE
+		return -EIO; // disable POKE access
+#else
 		return generic_ptrace_pokedata(child, addr, data);
+#endif
 
 #ifdef PTRACE_OLDSETOPTIONS
 	case PTRACE_OLDSETOPTIONS:
@@ -1068,8 +1072,14 @@ int ptrace_request(struct task_struct *child, long request,
 		return ptrace_resume(child, request, SIGKILL);
 
 #ifdef CONFIG_HAVE_ARCH_TRACEHOOK
-	case PTRACE_GETREGSET:
-	case PTRACE_SETREGSET: {
+	case PTRACE_SETREGSET:
+#ifdef CONFIG_PTRACE_CANNOT_POKE
+	{
+		return -EFAULT;
+	}
+#endif
+	case PTRACE_GETREGSET: 
+	{
 		struct iovec kiov;
 		struct iovec __user *uiov = datavp;
 
@@ -1207,10 +1217,14 @@ int compat_ptrace_request(struct task_struct *child, compat_long_t request,
 
 	case PTRACE_POKETEXT:
 	case PTRACE_POKEDATA:
+#ifdef CONFIG_PTRACE_CANNOT_POKE
+		ret = -EIO;
+#else
 		ret = ptrace_access_vm(child, addr, &data, sizeof(data),
 				FOLL_FORCE | FOLL_WRITE);
 		ret = (ret != sizeof(data) ? -EIO : 0);
 		break;
+#endif
 
 	case PTRACE_GETEVENTMSG:
 		ret = put_user((compat_ulong_t) child->ptrace_message, datap);
@@ -1233,8 +1247,13 @@ int compat_ptrace_request(struct task_struct *child, compat_long_t request,
 			ret = ptrace_setsiginfo(child, &siginfo);
 		break;
 #ifdef CONFIG_HAVE_ARCH_TRACEHOOK
-	case PTRACE_GETREGSET:
 	case PTRACE_SETREGSET:
+#ifdef CONFIG_PTRACE_CANNOT_POKE
+	{
+		return -EFAULT;
+	}
+#endif
+	case PTRACE_GETREGSET:
 	{
 		struct iovec kiov;
 		struct compat_iovec __user *uiov =
