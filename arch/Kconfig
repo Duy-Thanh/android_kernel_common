@@ -837,4 +837,14 @@ config VMAP_STACK
 	  the stack to map directly to the KASAN shadow map using a formula
 	  that is incorrect if the stack is in vmalloc space.
 
+config PTRACE_CANNOT_POKE
+    bool "Remove POKE parameters of ptrace on the kernel used by end user"
+    help
+      Because ptrace is mainly a means of debugging and could be used
+      for malicious purposes. For example, a program could use ptrace
+      to modify the execution flow of another program, or modification
+      program, inject malicious code, and so on. Therefore, it is very
+      important to remove the POKE parameters of ptrace on the kernel
+      used by end user.
+
 source "kernel/gcov/Kconfig"
