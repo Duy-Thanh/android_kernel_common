@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc6baa46_f52ca882",
+        "filename": "drivers/staging/android/virt_wifi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-07-20T12:25:05Z",
+      "side": 1,
+      "message": "nit, this isn\u0027t needed as you already have the SPDX line up above.",
+      "range": {
+        "startLine": 12,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 47
+      },
+      "revId": "8c9b2cf4060ee9db3d23ecd83a1b37f20045968f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b622b949_f3ebf24b",
+        "filename": "drivers/staging/android/virt_wifi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-07-20T12:25:05Z",
+      "side": 1,
+      "message": "__func__ is never needed for this type of message, you already know the driver/device it came from.",
+      "range": {
+        "startLine": 369,
+        "startChar": 3,
+        "endLine": 369,
+        "endChar": 11
+      },
+      "revId": "8c9b2cf4060ee9db3d23ecd83a1b37f20045968f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3308946f_1ed45d95",
+        "filename": "drivers/staging/android/virt_wifi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-07-20T12:25:05Z",
+      "side": 1,
+      "message": "same here.",
+      "range": {
+        "startLine": 390,
+        "startChar": 3,
+        "endLine": 390,
+        "endChar": 11
+      },
+      "revId": "8c9b2cf4060ee9db3d23ecd83a1b37f20045968f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7db9321_bbafffb0",
+        "filename": "drivers/staging/android/virt_wifi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-07-20T12:25:05Z",
+      "side": 1,
+      "message": "here and elsewhere as well.",
+      "range": {
+        "startLine": 432,
+        "startChar": 3,
+        "endLine": 432,
+        "endChar": 11
+      },
+      "revId": "8c9b2cf4060ee9db3d23ecd83a1b37f20045968f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c9c108a_279d9517",
+        "filename": "drivers/staging/android/virt_wifi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-07-20T12:25:05Z",
+      "side": 1,
+      "message": "does not match the license at the top of the file :(",
+      "range": {
+        "startLine": 512,
+        "startChar": 16,
+        "endLine": 512,
+        "endChar": 19
+      },
+      "revId": "8c9b2cf4060ee9db3d23ecd83a1b37f20045968f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
