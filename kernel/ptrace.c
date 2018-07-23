@@ -1072,9 +1072,15 @@ int ptrace_request(struct task_struct *child, long request,
 		return ptrace_resume(child, request, SIGKILL);
 
 #ifdef CONFIG_HAVE_ARCH_TRACEHOOK
-	case PTRACE_GETREGSET:
-	case PTRACE_SETREGSET: {
+	case PTRACE_SETREGSET:
 #ifdef CONFIG_PTRACE_CANNOT_POKE
+	{
+		return -EFAULT;
+	}
+#else
+	case PTRACE_GETREGSET:
+#ifdef CONFIG_PTRACE_CANNOT_POKE
+	{
 		return -EFAULT;
 	}
 #else
