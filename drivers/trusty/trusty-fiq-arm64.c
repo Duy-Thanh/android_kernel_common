@@ -85,7 +85,7 @@ static int fiq_glue_set_handler(void)
 			goto err_alloc_fiq_stack;
 		}
 		per_cpu(fiq_stack, cpu) = stack;
-		stack += THREAD_START_SP;
+		stack += THREAD_SIZE;
 
 		local_irq_save(irqflags);
 		ret = trusty_fast_call64(trusty_dev, SMC_FC64_SET_FIQ_HANDLER,

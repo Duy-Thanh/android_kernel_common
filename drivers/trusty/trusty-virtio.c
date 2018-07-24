@@ -300,7 +300,8 @@ static void trusty_virtio_del_vqs(struct virtio_device *vdev)
 static struct virtqueue *_find_vq(struct virtio_device *vdev,
 				  unsigned id,
 				  void (*callback)(struct virtqueue *vq),
-				  const char *name)
+				  const char *name,
+				  bool ctx)
 {
 	struct trusty_vring *tvr;
 	struct trusty_vdev *tvdev = vdev_to_tvdev(vdev);
@@ -336,7 +337,7 @@ static struct virtqueue *_find_vq(struct virtio_device *vdev,
 		 id, tvr->vaddr, (u64)tvr->paddr, tvr->elem_num, tvr->notifyid);
 
 	tvr->vq = vring_new_virtqueue(id, tvr->elem_num, tvr->align,
-				      vdev, true, tvr->vaddr,
+				      vdev, true, ctx, tvr->vaddr,
 				      trusty_virtio_notify, callback, name);
 	if (!tvr->vq) {
 		dev_err(&vdev->dev, "vring_new_virtqueue %s failed\n",
@@ -357,13 +358,16 @@ err_new_virtqueue:
 static int trusty_virtio_find_vqs(struct virtio_device *vdev, unsigned nvqs,
 				  struct virtqueue *vqs[],
 				  vq_callback_t *callbacks[],
-				  const char * const names[])
+				  const char * const names[],
+				  const bool *ctx,
+				  struct irq_affinity *desc)
 {
 	uint i;
 	int ret;
 
 	for (i = 0; i < nvqs; i++) {
-		vqs[i] = _find_vq(vdev, i, callbacks[i], names[i]);
+		vqs[i] = _find_vq(vdev, i, callbacks[i], names[i],
+				  ctx ? ctx[i] : false);
 		if (IS_ERR(vqs[i])) {
 			ret = PTR_ERR(vqs[i]);
 			_del_vqs(vdev);
