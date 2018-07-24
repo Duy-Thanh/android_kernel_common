@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c187ca4a_addf816b",
+        "filename": "drivers/staging/android/virt_wifi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2018-07-24T21:45:17Z",
+      "side": 1,
+      "message": "Done, thanks.",
+      "parentUuid": "fc6baa46_f52ca882",
+      "range": {
+        "startLine": 12,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 47
+      },
+      "revId": "8c9b2cf4060ee9db3d23ecd83a1b37f20045968f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b622b949_f3ebf24b",
         "filename": "drivers/staging/android/virt_wifi.c",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "8c9b2cf4060ee9db3d23ecd83a1b37f20045968f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff87f07e_01bf6a14",
+        "filename": "drivers/staging/android/virt_wifi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2018-07-24T21:45:17Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "b622b949_f3ebf24b",
+      "range": {
+        "startLine": 369,
+        "startChar": 3,
+        "endLine": 369,
+        "endChar": 11
+      },
+      "revId": "8c9b2cf4060ee9db3d23ecd83a1b37f20045968f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "62133e5d_7fd05d0f",
+        "filename": "drivers/staging/android/virt_wifi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2018-07-24T21:45:17Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "3308946f_1ed45d95",
+      "range": {
+        "startLine": 390,
+        "startChar": 3,
+        "endLine": 390,
+        "endChar": 11
+      },
+      "revId": "8c9b2cf4060ee9db3d23ecd83a1b37f20045968f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7db9321_bbafffb0",
         "filename": "drivers/staging/android/virt_wifi.c",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "5a83385a_8c925ccc",
+        "filename": "drivers/staging/android/virt_wifi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2018-07-24T21:45:17Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "a7db9321_bbafffb0",
+      "range": {
+        "startLine": 432,
+        "startChar": 3,
+        "endLine": 432,
+        "endChar": 11
+      },
+      "revId": "8c9b2cf4060ee9db3d23ecd83a1b37f20045968f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0c9c108a_279d9517",
         "filename": "drivers/staging/android/virt_wifi.c",
         "patchSetId": 1
@@ -114,6 +210,30 @@
       "revId": "8c9b2cf4060ee9db3d23ecd83a1b37f20045968f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89951b0a_30ab91dc",
+        "filename": "drivers/staging/android/virt_wifi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2018-07-24T21:45:17Z",
+      "side": 1,
+      "message": "Good catch, fixed.",
+      "parentUuid": "0c9c108a_279d9517",
+      "range": {
+        "startLine": 512,
+        "startChar": 16,
+        "endLine": 512,
+        "endChar": 19
+      },
+      "revId": "8c9b2cf4060ee9db3d23ecd83a1b37f20045968f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
