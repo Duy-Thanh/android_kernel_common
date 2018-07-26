@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ea6da74_22de7cdf",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-07-26T22:14:02Z",
+      "side": 1,
+      "message": "BINDER_DEBUG_USER_ERROR should be on by default",
+      "revId": "d02e2021729217817105da60b60053977e5109c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0afdc639_d9a13d4a",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-07-26T22:14:02Z",
+      "side": 1,
+      "message": "the string can go over 80 cols, but the argument list should be wrapped. Does checkpatch not give an error here?",
+      "revId": "d02e2021729217817105da60b60053977e5109c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
