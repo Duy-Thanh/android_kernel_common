@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0725e388_deb5c96d",
+        "filename": "net/ipv4/tcp_input.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4824,
+      "author": {
+        "id": 1105204
+      },
+      "writtenOn": "2018-07-27T10:49:13Z",
+      "side": 1,
+      "message": "Here you need to add :\n\n    range_truesize \u003d skb-\u003etruesize;\n\nOr replace the whole block with an ugly goto label_at_line_4791;",
+      "range": {
+        "startLine": 4824,
+        "startChar": 3,
+        "endLine": 4824,
+        "endChar": 34
+      },
+      "revId": "cc21fc84e8dd89278acf1c1dc3a0132a5c58bf7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
