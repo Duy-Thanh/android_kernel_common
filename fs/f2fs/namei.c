@@ -294,7 +294,12 @@ static int f2fs_create(struct inode *dir, struct dentry *dentry, umode_t mode,
 
 	alloc_nid_done(sbi, ino);
 
+<<<<<<< HEAD   (9664bd ANDROID: sdcardfs: Check stacked filesystem depth)
 	d_instantiate_new(dentry, inode);
+=======
+	unlock_new_inode(inode);
+	d_instantiate(dentry, inode);
+>>>>>>> BRANCH (734502 f2fs: run fstrim asynchronously if runtime discard is on)
 
 	if (IS_DIRSYNC(dir))
 		f2fs_sync_fs(sbi->sb, 1);
@@ -593,7 +598,12 @@ static int f2fs_symlink(struct inode *dir, struct dentry *dentry,
 	err = page_symlink(inode, disk_link.name, disk_link.len);
 
 err_out:
+<<<<<<< HEAD   (9664bd ANDROID: sdcardfs: Check stacked filesystem depth)
 	d_instantiate_new(dentry, inode);
+=======
+	unlock_new_inode(inode);
+	d_instantiate(dentry, inode);
+>>>>>>> BRANCH (734502 f2fs: run fstrim asynchronously if runtime discard is on)
 
 	/*
 	 * Let's flush symlink data in order to avoid broken symlink as much as
@@ -656,7 +666,12 @@ static int f2fs_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode)
 
 	alloc_nid_done(sbi, inode->i_ino);
 
+<<<<<<< HEAD   (9664bd ANDROID: sdcardfs: Check stacked filesystem depth)
 	d_instantiate_new(dentry, inode);
+=======
+	unlock_new_inode(inode);
+	d_instantiate(dentry, inode);
+>>>>>>> BRANCH (734502 f2fs: run fstrim asynchronously if runtime discard is on)
 
 	if (IS_DIRSYNC(dir))
 		f2fs_sync_fs(sbi->sb, 1);
@@ -707,7 +722,12 @@ static int f2fs_mknod(struct inode *dir, struct dentry *dentry,
 
 	alloc_nid_done(sbi, inode->i_ino);
 
+<<<<<<< HEAD   (9664bd ANDROID: sdcardfs: Check stacked filesystem depth)
 	d_instantiate_new(dentry, inode);
+=======
+	unlock_new_inode(inode);
+	d_instantiate(dentry, inode);
+>>>>>>> BRANCH (734502 f2fs: run fstrim asynchronously if runtime discard is on)
 
 	if (IS_DIRSYNC(dir))
 		f2fs_sync_fs(sbi->sb, 1);

@@ -195,6 +195,14 @@ static inline bool wq_has_sleeper(wait_queue_head_t *wq)
 	return waitqueue_active(wq);
 }
 
+<<<<<<< HEAD   (9664bd ANDROID: sdcardfs: Check stacked filesystem depth)
+=======
+static inline void inode_nohighmem(struct inode *inode)
+{
+	mapping_set_gfp_mask(inode->i_mapping, GFP_USER);
+}
+
+>>>>>>> BRANCH (734502 f2fs: run fstrim asynchronously if runtime discard is on)
 /**
  * current_time - Return FS time
  * @inode: inode.

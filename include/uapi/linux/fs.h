@@ -193,8 +193,11 @@ struct inodes_stat_t {
 #define FS_ENCRYPTION_MODE_AES_256_CTS		4
 #define FS_ENCRYPTION_MODE_AES_128_CBC		5
 #define FS_ENCRYPTION_MODE_AES_128_CTS		6
+<<<<<<< HEAD   (9664bd ANDROID: sdcardfs: Check stacked filesystem depth)
 #define FS_ENCRYPTION_MODE_SPECK128_256_XTS	7
 #define FS_ENCRYPTION_MODE_SPECK128_256_CTS	8
+=======
+>>>>>>> BRANCH (734502 f2fs: run fstrim asynchronously if runtime discard is on)
 
 
 struct fscrypt_policy {
