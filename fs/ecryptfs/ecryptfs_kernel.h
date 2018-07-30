@@ -122,7 +122,13 @@ ecryptfs_get_key_payload_data(struct key *key)
 	const struct user_key_payload *ukp;
 
 	auth_tok = ecryptfs_get_encrypted_key_payload_data(key);
+<<<<<<< HEAD   (990559 ANDROID: sdcardfs: Check stacked filesystem depth)
 	if (auth_tok)
+=======
+	if (!auth_tok)
+		return (struct ecryptfs_auth_tok *)user_key_payload_locked(key)->data;
+	else
+>>>>>>> BRANCH (3ccf9e f2fs: run fstrim asynchronously if runtime discard is on)
 		return auth_tok;
 
 	ukp = user_key_payload_locked(key);

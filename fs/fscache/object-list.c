@@ -330,6 +330,7 @@ static void fscache_objlist_config(struct fscache_objlist_data *data)
 	rcu_read_lock();
 
 	confkey = user_key_payload_rcu(key);
+<<<<<<< HEAD   (990559 ANDROID: sdcardfs: Check stacked filesystem depth)
 	if (!confkey) {
 		/* key was revoked */
 		rcu_read_unlock();
@@ -337,6 +338,8 @@ static void fscache_objlist_config(struct fscache_objlist_data *data)
 		goto no_config;
 	}
 
+=======
+>>>>>>> BRANCH (3ccf9e f2fs: run fstrim asynchronously if runtime discard is on)
 	buf = confkey->data;
 
 	for (len = confkey->datalen - 1; len >= 0; len--) {

@@ -364,11 +364,14 @@ static inline bool key_is_positive(const struct key *key)
 	return key_read_state(key) == KEY_IS_POSITIVE;
 }
 
+<<<<<<< HEAD   (990559 ANDROID: sdcardfs: Check stacked filesystem depth)
 static inline bool key_is_negative(const struct key *key)
 {
 	return key_read_state(key) < 0;
 }
 
+=======
+>>>>>>> BRANCH (3ccf9e f2fs: run fstrim asynchronously if runtime discard is on)
 #define dereference_key_rcu(KEY)					\
 	(rcu_dereference((KEY)->payload.rcu_data0))
 

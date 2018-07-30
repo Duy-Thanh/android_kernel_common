@@ -106,7 +106,11 @@ int user_update(struct key *key, struct key_preparsed_payload *prep)
 
 	/* attach the new data, displacing the old */
 	key->expiry = prep->expiry;
+<<<<<<< HEAD   (990559 ANDROID: sdcardfs: Check stacked filesystem depth)
 	if (key_is_positive(key))
+=======
+	if (!test_bit(KEY_FLAG_NEGATIVE, &key->flags))
+>>>>>>> BRANCH (3ccf9e f2fs: run fstrim asynchronously if runtime discard is on)
 		zap = dereference_key_locked(key);
 	rcu_assign_keypointer(key, prep->payload.data[0]);
 	prep->payload.data[0] = NULL;

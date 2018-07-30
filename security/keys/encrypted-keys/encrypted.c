@@ -314,6 +314,7 @@ static struct key *request_user_key(const char *master_desc, const u8 **master_k
 
 	down_read(&ukey->sem);
 	upayload = user_key_payload_locked(ukey);
+<<<<<<< HEAD   (990559 ANDROID: sdcardfs: Check stacked filesystem depth)
 	if (!upayload) {
 		/* key was revoked before we acquired its semaphore */
 		up_read(&ukey->sem);
@@ -321,6 +322,8 @@ static struct key *request_user_key(const char *master_desc, const u8 **master_k
 		ukey = ERR_PTR(-EKEYREVOKED);
 		goto error;
 	}
+=======
+>>>>>>> BRANCH (3ccf9e f2fs: run fstrim asynchronously if runtime discard is on)
 	*master_key = upayload->data;
 	*master_keylen = upayload->datalen;
 error:
