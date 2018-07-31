@@ -254,7 +254,12 @@ lr	.req	x30		// link register
 	 */
 	.macro adr_this_cpu, dst, sym, tmp
 	adr_l	\dst, \sym
+<<<<<<< HEAD   (83d212 ANDROID: verity: really fix android-verity Kconfig)
+=======
+alternative_if_not ARM64_HAS_VIRT_HOST_EXTN
+>>>>>>> BRANCH (19e5f4 Linux 4.9.114)
 	mrs	\tmp, tpidr_el1
+<<<<<<< HEAD   (83d212 ANDROID: verity: really fix android-verity Kconfig)
 	add	\dst, \dst, \tmp
 	.endm
 
@@ -266,6 +271,26 @@ lr	.req	x30		// link register
 	.macro ldr_this_cpu dst, sym, tmp
 	adr_l	\dst, \sym
 	mrs	\tmp, tpidr_el1
+=======
+alternative_else
+	mrs	\tmp, tpidr_el2
+alternative_endif
+	add	\dst, \dst, \tmp
+	.endm
+
+	/*
+	 * @dst: Result of READ_ONCE(per_cpu(sym, smp_processor_id()))
+	 * @sym: The name of the per-cpu variable
+	 * @tmp: scratch register
+	 */
+	.macro ldr_this_cpu dst, sym, tmp
+	adr_l	\dst, \sym
+alternative_if_not ARM64_HAS_VIRT_HOST_EXTN
+	mrs	\tmp, tpidr_el1
+alternative_else
+	mrs	\tmp, tpidr_el2
+alternative_endif
+>>>>>>> BRANCH (19e5f4 Linux 4.9.114)
 	ldr	\dst, [\dst, \tmp]
 	.endm
 

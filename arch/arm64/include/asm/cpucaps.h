@@ -34,10 +34,20 @@
 #define ARM64_HAS_32BIT_EL0			13
 #define ARM64_HYP_OFFSET_LOW			14
 #define ARM64_MISMATCHED_CACHE_LINE_SIZE	15
+<<<<<<< HEAD   (83d212 ANDROID: verity: really fix android-verity Kconfig)
+=======
+#define ARM64_UNMAP_KERNEL_AT_EL0		16
+#define ARM64_HARDEN_BRANCH_PREDICTOR		17
+#define ARM64_SSBD				18
+>>>>>>> BRANCH (19e5f4 Linux 4.9.114)
 
+<<<<<<< HEAD   (83d212 ANDROID: verity: really fix android-verity Kconfig)
 #define ARM64_UNMAP_KERNEL_AT_EL0		23
 #define ARM64_HARDEN_BRANCH_PREDICTOR		24
 
 #define ARM64_NCAPS				25
+=======
+#define ARM64_NCAPS				19
+>>>>>>> BRANCH (19e5f4 Linux 4.9.114)
 
 #endif /* __ASM_CPUCAPS_H */
