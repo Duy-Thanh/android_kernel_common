@@ -101,10 +101,13 @@ static inline bool fscrypt_valid_enc_modes(u32 contents_mode,
 	    filenames_mode == FS_ENCRYPTION_MODE_AES_256_CTS)
 		return true;
 
+<<<<<<< HEAD   (9664bd ANDROID: sdcardfs: Check stacked filesystem depth)
 	if (contents_mode == FS_ENCRYPTION_MODE_SPECK128_256_XTS &&
 	    filenames_mode == FS_ENCRYPTION_MODE_SPECK128_256_CTS)
 		return true;
 
+=======
+>>>>>>> BRANCH (734502 f2fs: run fstrim asynchronously if runtime discard is on)
 	return false;
 }
 
