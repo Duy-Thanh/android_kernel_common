@@ -65,25 +65,56 @@
 #endif
 
 /*
+ * Feature detection for gnu_inline (gnu89 extern inline semantics). Either
+ * __GNUC_STDC_INLINE__ is defined (not using gnu89 extern inline semantics,
+ * and we opt in to the gnu89 semantics), or __GNUC_STDC_INLINE__ is not
+ * defined so the gnu89 semantics are the default.
+ */
+#ifdef __GNUC_STDC_INLINE__
+# define __gnu_inline	__attribute__((gnu_inline))
+#else
+# define __gnu_inline
+#endif
+
+/*
  * Force always-inline if the user requests it so via the .config,
  * or if gcc is too old.
  * GCC does not warn about unused static inline functions for
  * -Wunused-function.  This turns out to avoid the need for complex #ifdef
  * directives.  Suppress the warning in clang as well by using "unused"
  * function attribute, which is redundant but not harmful for gcc.
+<<<<<<< HEAD   (8ec9fd Merge 4.4.142 into android-4.4)
+=======
+ * Prefer gnu_inline, so that extern inline functions do not emit an
+ * externally visible function. This makes extern inline behave as per gnu89
+ * semantics rather than c99. This prevents multiple symbol definition errors
+ * of extern inline functions at link time.
+ * A lot of inline functions can cause havoc with function tracing.
+>>>>>>> BRANCH (a8ea62 Linux 4.4.143)
  */
 #if !defined(CONFIG_ARCH_SUPPORTS_OPTIMIZED_INLINING) ||		\
     !defined(CONFIG_OPTIMIZE_INLINING) || (__GNUC__ < 4)
+<<<<<<< HEAD   (8ec9fd Merge 4.4.142 into android-4.4)
 #define inline inline		__attribute__((always_inline,unused)) notrace
 #define __inline__ __inline__	__attribute__((always_inline,unused)) notrace
 #define __inline __inline	__attribute__((always_inline,unused)) notrace
+=======
+#define inline \
+	inline __attribute__((always_inline, unused)) notrace __gnu_inline
+>>>>>>> BRANCH (a8ea62 Linux 4.4.143)
 #else
+<<<<<<< HEAD   (8ec9fd Merge 4.4.142 into android-4.4)
 /* A lot of inline functions can cause havoc with function tracing */
 #define inline inline		__attribute__((unused)) notrace
 #define __inline__ __inline__	__attribute__((unused)) notrace
 #define __inline __inline	__attribute__((unused)) notrace
+=======
+#define inline inline		__attribute__((unused)) notrace __gnu_inline
+>>>>>>> BRANCH (a8ea62 Linux 4.4.143)
 #endif
 
+#define __inline__ inline
+#define __inline inline
 #define __always_inline	inline __attribute__((always_inline))
 #define  noinline	__attribute__((noinline))
 
