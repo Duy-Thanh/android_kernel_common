@@ -787,7 +787,11 @@ retry:
 
 		set_cold_data(page);
 
+<<<<<<< HEAD   (52be32 Merge 4.9.116 into android-4.9)
 		err = f2fs_do_write_data_page(&fio);
+=======
+		err = do_write_data_page(&fio);
+>>>>>>> BRANCH (ddd28f Linux 4.9.117)
 		if (err) {
 			clear_cold_data(page);
 			if (err == -ENOMEM) {
