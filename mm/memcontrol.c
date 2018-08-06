@@ -2657,11 +2657,21 @@ unsigned long mem_cgroup_soft_limit_reclaim(struct zone *zone, int order,
 		if (!mz)
 			break;
 
+		/*
+		 * skip current memcg to avoid page thrashing, for the
+		 * mem_cgroup_soft_reclaim has more directivity than
+		 * global reclaim.
+		 */
+		if (get_mem_cgroup_from_mm(current->mm) == mz->memcg) {
+			reclaimed = 0;
+			goto next;
+		}
 		nr_scanned = 0;
 		reclaimed = mem_cgroup_soft_reclaim(mz->memcg, zone,
 						    gfp_mask, &nr_scanned);
 		nr_reclaimed += reclaimed;
 		*total_scanned += nr_scanned;
+next:
 		spin_lock_irq(&mctz->lock);
 		__mem_cgroup_remove_exceeded(mz, mctz);
 
