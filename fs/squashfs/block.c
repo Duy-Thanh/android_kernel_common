@@ -456,6 +456,46 @@ static int __squashfs_read_data(struct super_block *sb, u64 index, int length,
 		return -EIO;
 	}
 
+<<<<<<< HEAD   (bb8e9d Merge 4.4.145 into android-4.4-o)
+=======
+	if (compressed) {
+		if (!msblk->stream)
+			goto read_failure;
+		length = squashfs_decompress(msblk, bh, b, offset, length,
+			output);
+		if (length < 0)
+			goto read_failure;
+	} else {
+		/*
+		 * Block is uncompressed.
+		 */
+		int in, pg_offset = 0;
+		void *data = squashfs_first_page(output);
+
+		for (bytes = length; k < b; k++) {
+			in = min(bytes, msblk->devblksize - offset);
+			bytes -= in;
+			while (in) {
+				if (pg_offset == PAGE_CACHE_SIZE) {
+					data = squashfs_next_page(output);
+					pg_offset = 0;
+				}
+				avail = min_t(int, in, PAGE_CACHE_SIZE -
+						pg_offset);
+				memcpy(data + pg_offset, bh[k]->b_data + offset,
+						avail);
+				in -= avail;
+				pg_offset += avail;
+				offset += avail;
+			}
+			offset = 0;
+			put_bh(bh[k]);
+		}
+		squashfs_finish_page(output);
+	}
+
+	kfree(bh);
+>>>>>>> BRANCH (bffa1e Linux 4.4.146)
 	return length;
 }
 
