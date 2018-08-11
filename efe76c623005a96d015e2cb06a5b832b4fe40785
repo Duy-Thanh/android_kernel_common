@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5eb92ddf_b2ba563f",
+        "filename": "Documentation/blockdev/zram.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-11T20:44:40Z",
+      "side": 1,
+      "message": "do we want this to be in recommended / required kernel configurations to be enabled\nin kernel/configs project? If so, lets add that patch as part of this topic and bug as well.",
+      "range": {
+        "startLine": 248,
+        "startChar": 5,
+        "endLine": 248,
+        "endChar": 32
+      },
+      "revId": "efe76c623005a96d015e2cb06a5b832b4fe40785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c184095a_9dd387e7",
+        "filename": "Documentation/blockdev/zram.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-11T20:44:40Z",
+      "side": 1,
+      "message": "what in Android userspace is going to use this? (assuming something will be,\ncan we also start a bug to write the VTS test for this?)",
+      "range": {
+        "startLine": 252,
+        "startChar": 0,
+        "endLine": 252,
+        "endChar": 40
+      },
+      "revId": "efe76c623005a96d015e2cb06a5b832b4fe40785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a21217b_ee07ffd0",
+        "filename": "drivers/block/zram/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-11T20:44:40Z",
+      "side": 1,
+      "message": "note that nothing in platform should depend on debugfs. In fact, we plan to remove all\nplatform dependency for debugfs for production builds - see: b/112189958. \n\nSo, same question, what is the plan for using this?",
+      "range": {
+        "startLine": 32,
+        "startChar": 20,
+        "endLine": 32,
+        "endChar": 28
+      },
+      "revId": "efe76c623005a96d015e2cb06a5b832b4fe40785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
