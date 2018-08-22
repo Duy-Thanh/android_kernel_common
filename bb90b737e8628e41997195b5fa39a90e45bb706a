@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "128c6c94_0d955a6a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-22T20:38:43Z",
+      "side": 1,
+      "message": "This needs one of the commit prefixes to figure out if its a backport  later in future.\nlike .. \"BACKPORT: xfrm:...\". See go/howdoiandroidkernel",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 5
+      },
+      "revId": "bb90b737e8628e41997195b5fa39a90e45bb706a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71b2002d_bd35c286",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-22T20:38:43Z",
+      "side": 1,
+      "message": "It is unclear from the bug why we are backporting this, some more context / details and the userspace implacations of this and other patches in this series will help.\n\nThis also lacks a \"Test:\" line? How do we test it?\nWhy only backport to 4.14? 4.9 is also valid .. no?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 14
+      },
+      "revId": "bb90b737e8628e41997195b5fa39a90e45bb706a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
