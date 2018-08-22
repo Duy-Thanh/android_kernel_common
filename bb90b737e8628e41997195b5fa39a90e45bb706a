@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "433d3111_8a25418b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1221725
+      },
+      "writtenOn": "2018-08-22T22:08:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "128c6c94_0d955a6a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 5
+      },
+      "revId": "bb90b737e8628e41997195b5fa39a90e45bb706a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "71b2002d_bd35c286",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "bb90b737e8628e41997195b5fa39a90e45bb706a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94c91410_8a20c17a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1221725
+      },
+      "writtenOn": "2018-08-22T22:08:55Z",
+      "side": 1,
+      "message": "Added more information in bug.",
+      "parentUuid": "71b2002d_bd35c286",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 14
+      },
+      "revId": "bb90b737e8628e41997195b5fa39a90e45bb706a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
