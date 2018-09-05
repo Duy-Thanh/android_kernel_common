@@ -34,6 +34,24 @@
       "revId": "d762e28031e9b01584231acc3ef1c12822ca3fb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44b5f453_d6b446e5",
+        "filename": "arch/arm64/mm/init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1118753
+      },
+      "writtenOn": "2018-09-05T15:08:42Z",
+      "side": 1,
+      "message": "Sorry if this doesn\u0027t make sense, I\u0027ll try to break it down\n\nWhen upstream commit 5ad356eabc47 (\"arm64: mm: check for upper PAGE_SHIFT bits in pfn_valid()\") was backported to 4.4.y stable, \u0027memblock_is_memory\u0027 was substituted for \u0027memblock_is_map_memory\u0027 because 4.4.y stable doesn\u0027t have upstream commit bf3d3cc580f9 (\"mm/memblock: add MEMBLOCK_NOMAP attribute to memblock memory table\"), as it first appeared in 4.5; however, it was backported to this tree in commit bb849676d5a9 (\"UPSTREAM: mm/memblock: add MEMBLOCK_NOMAP attribute to memblock memory table\") and used in commit b6535fe66603 (\"BACKPORT: arm64: only consider memblocks with NOMAP cleared for linear mapping\").\n\nUltimately, my chain went like this (since I was doing it with the linked script):\n\nRevert b6535fe66603 (\"BACKPORT: arm64: only consider memblocks with NOMAP cleared for linear mapping\")\nRevert c6a9c8e51b18 (\"arm64: check for upper PAGE_SHIFT bits in pfn_valid()\")\nApply 68709f45385a (\"arm64: only consider memblocks with NOMAP cleared for linear mapping\")\nApply 5ad356eabc47 (\"arm64: mm: check for upper PAGE_SHIFT bits in pfn_valid()\")\n\nhttps://github.com/nathanchance/stable-patches/blob/master/4.4.154/generic-commands#L21-L24\n\nWhich ends up with this diff:\n\ndiff --git a/arch/arm64/mm/init.c b/arch/arm64/mm/init.c\nindex 8c8c2b222e7c..fa9649e4b038 100644\n--- a/arch/arm64/mm/init.c\n+++ b/arch/arm64/mm/init.c\n@@ -129,11 +129,13 @@ static void __init zone_sizes_init(unsigned long min, unsigned long max)\n }\n \n #ifdef CONFIG_HAVE_ARCH_PFN_VALID\n-#define PFN_MASK ((1UL \u003c\u003c (64 - PAGE_SHIFT)) - 1)\n-\n int pfn_valid(unsigned long pfn)\n {\n-       return (pfn \u0026 PFN_MASK) \u003d\u003d pfn \u0026\u0026 memblock_is_map_memory(pfn \u003c\u003c PAGE_SHIFT);\n+       phys_addr_t addr \u003d pfn \u003c\u003c PAGE_SHIFT;\n+\n+       if ((addr \u003e\u003e PAGE_SHIFT) !\u003d pfn)\n+               return 0;\n+       return memblock_is_map_memory(addr);\n }\n EXPORT_SYMBOL(pfn_valid);\n #endif\n\nGreg can comment on if this is necessary or not though, this was my logic behind resolving that conflict.",
+      "parentUuid": "13f36f26_ada42014",
+      "revId": "d762e28031e9b01584231acc3ef1c12822ca3fb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
