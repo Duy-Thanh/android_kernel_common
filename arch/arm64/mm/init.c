@@ -131,7 +131,15 @@ static void __init zone_sizes_init(unsigned long min, unsigned long max)
 
 int pfn_valid(unsigned long pfn)
 {
+<<<<<<< HEAD   (e84f35 Merge 4.4.153 into android-4.4-o)
 	return (pfn & PFN_MASK) == pfn && memblock_is_map_memory(pfn << PAGE_SHIFT);
+=======
+	phys_addr_t addr = pfn << PAGE_SHIFT;
+
+	if ((addr >> PAGE_SHIFT) != pfn)
+		return 0;
+	return memblock_is_memory(addr);
+>>>>>>> BRANCH (4d9339 Linux 4.4.154)
 }
 EXPORT_SYMBOL(pfn_valid);
 #endif
