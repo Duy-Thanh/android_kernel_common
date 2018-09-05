@@ -71,12 +71,18 @@ extern __le64 *squashfs_read_fragment_index_table(struct super_block *,
 				u64, u64, unsigned int);
 
 /* file.c */
+void squashfs_fill_page(struct page *, struct squashfs_cache_entry *, int, int);
 void squashfs_copy_cache(struct page *, struct squashfs_cache_entry *, int,
 				int);
 
+<<<<<<< HEAD   (14e3ca Merge 4.9.124 into android-4.9-p)
 /* file_direct.c */
 extern int squashfs_readpages_block(struct page *, struct list_head *,
 	unsigned int *, struct address_space *, int, u64, int);
+=======
+/* file_xxx.c */
+extern int squashfs_readpage_block(struct page *, u64, int, int);
+>>>>>>> BRANCH (9eabac Linux 4.9.125)
 
 /* id.c */
 extern int squashfs_get_id(struct super_block *, unsigned int, unsigned int *);
