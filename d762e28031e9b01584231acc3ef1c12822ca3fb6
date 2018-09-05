@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b09ab122_f3ac9ed6",
+        "filename": "arch/arm64/mm/init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1118753
+      },
+      "writtenOn": "2018-09-05T09:43:27Z",
+      "side": 1,
+      "message": "Would it be better to make this \u0027memblock_is_map_memory\u0027 like the upstream patch (5ad356eabc47d26a92140a0c4b20eba471c10de3)? With this, it partially undoes b6535fe666034be99b777a0dfad672636e17de35 in this tree. No idea how critical that is, just comparing what I did with my trees.",
+      "revId": "d762e28031e9b01584231acc3ef1c12822ca3fb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
