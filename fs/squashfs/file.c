@@ -375,13 +375,29 @@ static int read_blocklist(struct inode *inode, int index, u64 *block)
 	return squashfs_block_size(size);
 }
 
+void squashfs_fill_page(struct page *page, struct squashfs_cache_entry *buffer, int offset, int avail)
+{
+	int copied;
+	void *pageaddr;
+
+	pageaddr = kmap_atomic(page);
+	copied = squashfs_copy_data(pageaddr, buffer, offset, avail);
+	memset(pageaddr + copied, 0, PAGE_SIZE - copied);
+	kunmap_atomic(pageaddr);
+
+	flush_dcache_page(page);
+	if (copied == avail)
+		SetPageUptodate(page);
+	else
+		SetPageError(page);
+}
+
 /* Copy data into page cache  */
 void squashfs_copy_cache(struct page *page, struct squashfs_cache_entry *buffer,
 	int bytes, int offset)
 {
 	struct inode *inode = page->mapping->host;
 	struct squashfs_sb_info *msblk = inode->i_sb->s_fs_info;
-	void *pageaddr;
 	int i, mask = (1 << (msblk->block_log - PAGE_SHIFT)) - 1;
 	int start_index = page->index & ~mask, end_index = start_index | mask;
 
@@ -407,12 +423,7 @@ void squashfs_copy_cache(struct page *page, struct squashfs_cache_entry *buffer,
 		if (PageUptodate(push_page))
 			goto skip_page;
 
-		pageaddr = kmap_atomic(push_page);
-		squashfs_copy_data(pageaddr, buffer, offset, avail);
-		memset(pageaddr + avail, 0, PAGE_SIZE - avail);
-		kunmap_atomic(pageaddr);
-		flush_dcache_page(push_page);
-		SetPageUptodate(push_page);
+		squashfs_fill_page(push_page, buffer, offset, avail);
 skip_page:
 		unlock_page(push_page);
 		if (i != page->index)
@@ -421,10 +432,9 @@ skip_page:
 }
 
 /* Read datablock stored packed inside a fragment (tail-end packed block) */
-static int squashfs_readpage_fragment(struct page *page)
+static int squashfs_readpage_fragment(struct page *page, int expected)
 {
 	struct inode *inode = page->mapping->host;
-	struct squashfs_sb_info *msblk = inode->i_sb->s_fs_info;
 	struct squashfs_cache_entry *buffer = squashfs_get_fragment(inode->i_sb,
 		squashfs_i(inode)->fragment_block,
 		squashfs_i(inode)->fragment_size);
@@ -435,14 +445,14 @@ static int squashfs_readpage_fragment(struct page *page)
 			squashfs_i(inode)->fragment_block,
 			squashfs_i(inode)->fragment_size);
 	else
-		squashfs_copy_cache(page, buffer, i_size_read(inode) &
-			(msblk->block_size - 1),
+		squashfs_copy_cache(page, buffer, expected,
 			squashfs_i(inode)->fragment_offset);
 
 	squashfs_cache_put(buffer);
 	return res;
 }
 
+<<<<<<< HEAD   (75ac55 Merge 4.14.67 into android-4.14-p)
 static int squashfs_readpages_fragment(struct page *page,
 	struct list_head *readahead_pages, struct address_space *mapping)
 {
@@ -459,14 +469,11 @@ static int squashfs_readpages_fragment(struct page *page,
 }
 
 static int squashfs_readpage_sparse(struct page *page, int index, int file_end)
+=======
+static int squashfs_readpage_sparse(struct page *page, int expected)
+>>>>>>> BRANCH (ee13f7 Linux 4.14.68)
 {
-	struct inode *inode = page->mapping->host;
-	struct squashfs_sb_info *msblk = inode->i_sb->s_fs_info;
-	int bytes = index == file_end ?
-			(i_size_read(inode) & (msblk->block_size - 1)) :
-			 msblk->block_size;
-
-	squashfs_copy_cache(page, NULL, bytes, 0);
+	squashfs_copy_cache(page, NULL, expected, 0);
 	return 0;
 }
 
@@ -493,6 +500,9 @@ static int __squashfs_readpages(struct file *file, struct page *page,
 	struct inode *inode = mapping->host;
 	struct squashfs_sb_info *msblk = inode->i_sb->s_fs_info;
 	int file_end = i_size_read(inode) >> msblk->block_log;
+	int expected = index == file_end ?
+			(i_size_read(inode) & (msblk->block_size - 1)) :
+			 msblk->block_size;
 	int res;
 
 	do {
@@ -543,17 +553,35 @@ static int squashfs_readpage(struct file *file, struct page *page)
 
 	get_page(page);
 
+<<<<<<< HEAD   (75ac55 Merge 4.14.67 into android-4.14-p)
 	ret = __squashfs_readpages(file, page, NULL, 1, page->mapping);
 	if (ret) {
 		flush_dcache_page(page);
 		if (ret < 0)
 			SetPageError(page);
+=======
+	if (index < file_end || squashfs_i(inode)->fragment_block ==
+					SQUASHFS_INVALID_BLK) {
+		u64 block = 0;
+		int bsize = read_blocklist(inode, index, &block);
+		if (bsize < 0)
+			goto error_out;
+
+		if (bsize == 0)
+			res = squashfs_readpage_sparse(page, expected);
+>>>>>>> BRANCH (ee13f7 Linux 4.14.68)
 		else
+<<<<<<< HEAD   (75ac55 Merge 4.14.67 into android-4.14-p)
 			SetPageUptodate(page);
 		zero_user_segment(page, 0, PAGE_SIZE);
 		unlock_page(page);
 		put_page(page);
 	}
+=======
+			res = squashfs_readpage_block(page, block, bsize, expected);
+	} else
+		res = squashfs_readpage_fragment(page, expected);
+>>>>>>> BRANCH (ee13f7 Linux 4.14.68)
 
 	return 0;
 }
