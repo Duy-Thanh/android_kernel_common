@@ -16,6 +16,24 @@
       "revId": "d762e28031e9b01584231acc3ef1c12822ca3fb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13f36f26_ada42014",
+        "filename": "arch/arm64/mm/init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-09-05T10:54:05Z",
+      "side": 1,
+      "message": "I took what upstream did here, as I was assuming that this was what Greg and the ARM developers came up with for the \"correct\" solution.\n\n3.18.y uses memblock_is_memory() here, not memblock_is_map_memory(), unlike newer versions of the kernel.",
+      "parentUuid": "b09ab122_f3ac9ed6",
+      "revId": "d762e28031e9b01584231acc3ef1c12822ca3fb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
