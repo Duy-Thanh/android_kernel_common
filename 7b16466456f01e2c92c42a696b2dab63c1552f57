@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4aa94a35_616cb0fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-09-06T17:52:33Z",
+      "side": 1,
+      "message": "I know I\u0027m too late to comment, but for future reference - \n\nThis needs either \"UPSTREAM\" or \"BACKPORT\" tag here. BACKPORT is used if you had to modify the patch (even a single line) to do the backport, UPSTREAM is used if it applied cleanly.\nSecondly,\n\nSince we are directly applying this to common kernel, we need a \"Bug: b/\u003cbug-number\u003e\" here, so in future we know why we applied this backport.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 53
+      },
+      "revId": "7b16466456f01e2c92c42a696b2dab63c1552f57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
