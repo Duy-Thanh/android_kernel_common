@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7656258_a5442549",
+        "filename": "arch/arm64/kernel/vdso.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-09-06T15:51:14Z",
+      "side": 1,
+      "message": "In the original patch (tk-\u003eraw_time.tv_nsec \u003c\u003c tk-\u003etkr_raw.shift) + tk-\u003etkr_raw.xtime_nsec\n\nreason for removing this part of the fix?",
+      "range": {
+        "startLine": 222,
+        "startChar": 36,
+        "endLine": 222,
+        "endChar": 59
+      },
+      "revId": "0cb3f9f0b8ee04a809279018f5408efdd13f418e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
