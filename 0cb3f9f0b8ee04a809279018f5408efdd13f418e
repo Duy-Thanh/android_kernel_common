@@ -22,6 +22,30 @@
       "revId": "0cb3f9f0b8ee04a809279018f5408efdd13f418e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80cc7672_4d330364",
+        "filename": "arch/arm64/kernel/vdso.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-09-06T15:55:43Z",
+      "side": 1,
+      "message": "b/c patch fc6eead7c1e2e5376c25d2795d4539fdacbc0648 applied",
+      "parentUuid": "c7656258_a5442549",
+      "range": {
+        "startLine": 222,
+        "startChar": 36,
+        "endLine": 222,
+        "endChar": 59
+      },
+      "revId": "0cb3f9f0b8ee04a809279018f5408efdd13f418e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
