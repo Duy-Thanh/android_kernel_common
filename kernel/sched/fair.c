@@ -6087,7 +6087,7 @@ static bool cpu_overutilized(int cpu)
 struct reciprocal_value schedtune_spc_rdiv;
 
 static long
-schedtune_margin(unsigned long signal, long boost)
+schedtune_margin(unsigned long signal, long boost, unsigned long capacity)
 {
 	long long margin = 0;
 
@@ -6100,13 +6100,17 @@ schedtune_margin(unsigned long signal, long boost)
 	 * The obtained M could be used by the caller to "boost" S.
 	 */
 	if (boost >= 0) {
-		margin  = SCHED_CAPACITY_SCALE - signal;
-		margin *= boost;
-	} else {
+		if (signal >= capacity)
+			return 0;
+		else {
+			margin = capacity - signal;
+			margin *= boost;
+		}
+	} else
 		margin = -signal * boost;
-	}
 
 	margin  = reciprocal_divide(margin, schedtune_spc_rdiv);
+
 	if (boost < 0)
 		margin *= -1;
 
@@ -6117,11 +6121,12 @@ static inline int
 schedtune_cpu_margin(unsigned long util, int cpu)
 {
 	int boost = schedtune_cpu_boost(cpu);
+	unsigned long capacity = capacity_orig_of(cpu);
 
 	if (boost == 0)
 		return 0;
 
-	return schedtune_margin(util, boost);
+	return schedtune_margin(util, boost, capacity);
 }
 
 static inline long
@@ -6135,7 +6140,7 @@ schedtune_task_margin(struct task_struct *p)
 		return 0;
 
 	util = task_util(p);
-	margin = schedtune_margin(util, boost);
+	margin = schedtune_margin(util, boost, SCHED_CAPACITY_SCALE);
 
 	return margin;
 }
