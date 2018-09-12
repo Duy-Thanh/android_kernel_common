@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55009ecb_8142cc28",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-09-12T18:59:25Z",
+      "side": 1,
+      "message": "nit, Alistair, you forgot to add your signed-off-by here :)",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 49
+      },
+      "revId": "6d64a4b997af86816988933a5897c9de0781d4c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
