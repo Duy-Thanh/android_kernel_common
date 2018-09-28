@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb11ab9a_f8421998",
+        "filename": "block/blk-core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3551,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2018-09-28T17:35:42Z",
+      "side": 1,
+      "message": "Please use one line",
+      "range": {
+        "startLine": 3551,
+        "startChar": 0,
+        "endLine": 3551,
+        "endChar": 4
+      },
+      "revId": "5510504cfe8d3ada3769a9a8165d3d3ae5d0a998",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
