@@ -45,3 +45,12 @@ config ZRAM_WB_INCOMPRESSIBLE_PAGES
 	help
 	  With incompressible page, there is no memory saving to keep it
 	  in memory. Instead, write it out to backing device.
+
+config ZRAM_WB_COLD_PAGES
+	bool "Write back cold pages to backing device"
+	depends on ZRAM
+	select ZRAM_WRITEBACK
+	default n
+	help
+	  With this feature, pages that are perceived cold can written out
+	  to a backing device freeing up space on zram.

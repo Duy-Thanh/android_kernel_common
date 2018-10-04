@@ -12,6 +12,7 @@
  *
  */
 
+#define DEBUG
 #define KMSG_COMPONENT "zram"
 #define pr_fmt(fmt) KMSG_COMPONENT ": " fmt
 
@@ -132,6 +133,36 @@ static void zram_set_obj_size(struct zram *zram,
 
 	zram->table[index].value = (flags << ZRAM_FLAG_SHIFT) | size;
 }
+
+#ifdef CONFIG_ZRAM_WB_COLD_PAGES
+
+static const unsigned long ZRAM_AGE_DEFAULT_TIMER = 120000;
+
+static void zram_ageing_free(struct zram *zram);
+
+static const unsigned long ZRAM_AGE_MASK = GENMASK(ZRAM_AGE_BIT_END,
+												   ZRAM_AGE_BIT_START);
+
+static unsigned long zram_get_max_age(void)
+{
+	return (ZRAM_AGE_MASK >> ZRAM_AGE_BIT_START);
+}
+
+static void zram_set_obj_age(struct zram *zram, u32 index, unsigned long age)
+{
+	zram->table[index].value &= ~ZRAM_AGE_MASK;
+
+	if (age > zram_get_max_age())
+		age = zram_get_max_age();
+
+	zram->table[index].value |= (age << ZRAM_AGE_BIT_START);
+}
+
+static unsigned long zram_get_obj_age(struct zram *zram, u32 index)
+{
+	return ((zram->table[index].value & ZRAM_AGE_MASK) >> ZRAM_AGE_BIT_START);
+}
+#endif
 
 #if PAGE_SIZE != 4096
 static inline bool is_partial_io(struct bio_vec *bvec)
@@ -285,6 +316,46 @@ static bool zram_wb_incompressible_page(struct zram *zram)
 #endif
 }
 
+#ifdef CONFIG_ZRAM_WB_COLD_PAGES
+static ssize_t age_timer_ms_show(struct device *dev,
+		struct device_attribute *attr, char *buf)
+{
+	struct zram *zram = dev_to_zram(dev);
+
+	return scnprintf(buf, PAGE_SIZE, "%lu\n", zram->age_timer_ms);
+}
+
+static ssize_t age_timer_ms_store(struct device *dev,
+		struct device_attribute *attr, const char *buf, size_t len)
+{
+	int err;
+	unsigned long val = 0;
+	struct zram *zram = dev_to_zram(dev);
+
+	err = kstrtoul(buf, 10, &val);
+	if (err || val == 0) {
+		return -EINVAL;
+	}
+
+	down_write(&zram->init_lock);
+	zram->age_timer_ms = val;
+	up_write(&zram->init_lock);
+
+	return len;
+
+}
+
+static ssize_t wb_cold_pages_store(struct device *dev,
+		struct device_attribute *attr, const char *buf, size_t len)
+{
+	struct zram *zram = dev_to_zram(dev);
+
+	queue_work(zram->ageing_wq, &zram->wb_cold_pages_work);
+
+	return len;
+}
+#endif
+
 #ifdef CONFIG_ZRAM_WRITEBACK
 static bool zram_wb_enabled(struct zram *zram)
 {
@@ -360,12 +431,13 @@ static ssize_t backing_dev_store(struct device *dev,
 		return -ENOMEM;
 
 	down_write(&zram->init_lock);
+#if 0
 	if (init_done(zram)) {
 		pr_info("Can't setup backing device for initialized device\n");
 		err = -EBUSY;
 		goto out;
 	}
-
+#endif
 	strlcpy(file_name, buf, PATH_MAX);
 	/* ignore trailing newline */
 	sz = strlen(file_name);
@@ -564,8 +636,8 @@ static int read_from_bdev(struct zram *zram, struct bio_vec *bvec,
 }
 
 static int write_to_bdev(struct zram *zram, struct bio_vec *bvec,
-					u32 index, struct bio *parent,
-					unsigned long *pentry)
+					u32 index, struct bio *parent, bio_end_io_t endio_cb,
+					void *endio_pvt_data, unsigned long *pentry)
 {
 	struct bio *bio;
 	unsigned long entry;
@@ -591,7 +663,9 @@ static int write_to_bdev(struct zram *zram, struct bio_vec *bvec,
 
 	if (!parent) {
 		bio->bi_opf = REQ_OP_WRITE | REQ_SYNC;
-		bio->bi_end_io = zram_page_end_io;
+		bio->bi_end_io = endio_cb;
+		bio->bi_private = endio_pvt_data;
+		((struct zram_cold_page_endio *)endio_pvt_data)->element = entry;
 	} else {
 		bio->bi_opf = parent->bi_opf;
 		bio_chain(bio, parent);
@@ -617,8 +691,8 @@ static void zram_wb_clear(struct zram *zram, u32 index)
 static bool zram_wb_enabled(struct zram *zram) { return false; }
 static inline void reset_bdev(struct zram *zram) {};
 static int write_to_bdev(struct zram *zram, struct bio_vec *bvec,
-					u32 index, struct bio *parent,
-					unsigned long *pentry)
+					u32 index, struct bio *parent, bio_end_io_t endio_cb,
+					void *endio_pvt_data, unsigned long *pentry);
 
 {
 	return -EIO;
@@ -685,12 +759,13 @@ static ssize_t read_block_state(struct file *file, char __user *buf,
 
 		ts = ktime_to_timespec64(zram->table[index].ac_time);
 		copied = snprintf(kbuf + written, count,
-			"%12zd %12lld.%06lu %c%c%c\n",
-			index, (s64)ts.tv_sec,
+			"%12zd %5zd %12lld.%06lu %c%c%c%lu\n",
+			index, zram_get_obj_size(zram, index), (s64)ts.tv_sec,
 			ts.tv_nsec / NSEC_PER_USEC,
 			zram_test_flag(zram, index, ZRAM_SAME) ? 's' : '.',
 			zram_test_flag(zram, index, ZRAM_WB) ? 'w' : '.',
-			zram_test_flag(zram, index, ZRAM_HUGE) ? 'h' : '.');
+			zram_test_flag(zram, index, ZRAM_HUGE) ? 'h' : '.',
+			zram_get_obj_age(zram, index));
 
 		if (count < copied) {
 			zram_slot_unlock(zram, index);
@@ -943,6 +1018,10 @@ static void zram_free_page(struct zram *zram, size_t index)
 		atomic64_dec(&zram->stats.huge_pages);
 	}
 
+#ifdef CONFIG_ZRAM_WB_COLD_PAGES
+	zram_set_obj_age(zram, index, 0);
+#endif
+
 	if (zram_wb_enabled(zram) && zram_test_flag(zram, index, ZRAM_WB)) {
 		zram_wb_clear(zram, index);
 		atomic64_dec(&zram->stats.pages_stored);
@@ -975,30 +1054,12 @@ static void zram_free_page(struct zram *zram, size_t index)
 	zram_set_obj_size(zram, index, 0);
 }
 
-static int __zram_bvec_read(struct zram *zram, struct page *page, u32 index,
-				struct bio *bio, bool partial_io)
+static int zram_decompress_page(struct zram *zram, u32 index, struct page *page)
 {
 	int ret;
 	unsigned long handle;
 	unsigned int size;
 	void *src, *dst;
-
-	if (zram_wb_enabled(zram)) {
-		zram_slot_lock(zram, index);
-		if (zram_test_flag(zram, index, ZRAM_WB)) {
-			struct bio_vec bvec;
-
-			zram_slot_unlock(zram, index);
-
-			bvec.bv_page = page;
-			bvec.bv_len = PAGE_SIZE;
-			bvec.bv_offset = 0;
-			return read_from_bdev(zram, &bvec,
-					zram_get_element(zram, index),
-					bio, partial_io);
-		}
-		zram_slot_unlock(zram, index);
-	}
 
 	zram_slot_lock(zram, index);
 	handle = zram_get_handle(zram, index);
@@ -1036,6 +1097,34 @@ static int __zram_bvec_read(struct zram *zram, struct page *page, u32 index,
 	/* Should NEVER happen. Return bio error if it does. */
 	if (unlikely(ret))
 		pr_err("Decompression failed! err=%d, page=%u\n", ret, index);
+
+	return ret;
+}
+
+static int __zram_bvec_read(struct zram *zram, struct page *page, u32 index,
+				struct bio *bio, bool partial_io)
+{
+	int ret;
+
+	if (zram_wb_enabled(zram)) {
+		zram_slot_lock(zram, index);
+		if (zram_test_flag(zram, index, ZRAM_WB)) {
+			struct bio_vec bvec;
+
+			zram_slot_unlock(zram, index);
+
+			bvec.bv_page = page;
+			bvec.bv_len = PAGE_SIZE;
+			bvec.bv_offset = 0;
+			atomic64_dec(&zram->stats.wb_pages);
+			return read_from_bdev(zram, &bvec,
+					zram_get_element(zram, index),
+					bio, partial_io);
+		}
+		zram_slot_unlock(zram, index);
+	}
+
+	ret = zram_decompress_page(zram, index, page);
 
 	return ret;
 }
@@ -1114,9 +1203,12 @@ compress_again:
 		if (zram_wb_enabled(zram) && zram_wb_incompressible_page(zram) &&
 									allow_wb) {
 			zcomp_stream_put(zram->comp);
-			ret = write_to_bdev(zram, bvec, index, bio, &element);
+			ret = write_to_bdev(zram, bvec, index, bio,
+								zram_page_end_io, NULL, &element);
 			if (!ret) {
 				flags = ZRAM_WB;
+				atomic64_inc(&zram->stats.wb_pages);
+				atomic64_inc(&zram->stats.wb_writes);
 				ret = 1;
 				goto out;
 			}
@@ -1161,6 +1253,7 @@ compress_again:
 	if (zram->limit_pages && alloced_pages > zram->limit_pages) {
 		zcomp_stream_put(zram->comp);
 		zs_free(zram->mem_pool, handle);
+		pr_err("Alloc failed limit pages!\n");
 		return -ENOMEM;
 	}
 
@@ -1219,11 +1312,13 @@ static int zram_bvec_write(struct zram *zram, struct bio_vec *bvec,
 		 * before to write the changes.
 		 */
 		page = alloc_page(GFP_NOIO|__GFP_HIGHMEM);
-		if (!page)
+		if (!page) {
+			pr_err("Alloc failed! alloc_page\n");
 			return -ENOMEM;
-
+		}
 		ret = __zram_bvec_read(zram, page, index, bio, true);
 		if (ret)
+			pr_err("Alloc failed!bvec_read\n");
 			goto out;
 
 		src = kmap_atomic(bvec->bv_page);
@@ -1311,6 +1406,9 @@ static int zram_bvec_rw(struct zram *zram, struct bio_vec *bvec, u32 index,
 
 	zram_slot_lock(zram, index);
 	zram_accessed(zram, index);
+#ifdef CONFIG_ZRAM_WB_COLD_PAGES
+	zram_set_obj_age(zram, index, 0);
+#endif
 	zram_slot_unlock(zram, index);
 
 	if (unlikely(ret < 0)) {
@@ -1480,8 +1578,245 @@ static void zram_reset_device(struct zram *zram)
 	zram_meta_free(zram, disksize);
 	memset(&zram->stats, 0, sizeof(zram->stats));
 	zcomp_destroy(comp);
+
+#ifdef CONFIG_ZRAM_WB_COLD_PAGES
+	zram_ageing_free(zram);
+#endif
 	reset_bdev(zram);
 }
+
+#ifdef CONFIG_ZRAM_WB_COLD_PAGES
+
+static void zram_cold_page_end_io(struct bio *bio)
+{
+	struct zram_cold_page_endio *endio = bio->bi_private;
+	struct zram *zram = endio->zram;
+	struct page *page = bio->bi_io_vec[0].bv_page;
+	unsigned long index = endio->index;
+	unsigned long handle;
+	int err = blk_status_to_errno(bio->bi_status);
+
+	if (!err) {
+		zram_slot_lock(zram, index);
+		// free obj allocation
+		handle = zram_get_handle(zram, index);
+		zram_set_handle(zram, index, 0);
+		zs_free(zram->mem_pool, handle);
+
+		zram_set_obj_size(zram, index, 0);
+		zram_set_element(zram, index, endio->element);
+		zram_set_flag(zram, index, ZRAM_WB);
+
+		zram_slot_unlock(zram, index);
+
+		atomic64_inc(&zram->stats.wb_pages);
+		atomic64_inc(&zram->stats.wb_writes);
+	} else {
+		pr_err("zram_wb: blk write failed for page (%u), err = %d\n",
+				index, err);
+	}
+
+	bio_put(bio);
+	mempool_free(page, zram->age_mempool);
+	kvfree(endio);
+}
+
+static int zram_move_page_to_disk(struct zram *zram, u32 index)
+{
+	int err = 0;
+	struct page *page;
+	struct bio_vec bv;
+	struct zram_cold_page_endio *endio;
+	unsigned long entry = 0;
+
+	// 1. Decompress page
+	// 2. write to disk
+	// 3. wait for write to finish
+	// 4. free zs_object
+	//
+	page = mempool_alloc(zram->age_mempool, 0);
+
+	if (!page)
+		return -ENOMEM;
+
+	endio = vzalloc(sizeof(*endio));
+	if (!endio) {
+		mempool_free(page, zram->age_mempool);
+		return -ENOMEM;
+	}
+
+	err = zram_decompress_page(zram, index, page);
+	if (err) {
+		pr_err("zram_wb: decompress failed\n");
+		goto out;
+	}
+
+	// Writing to backing disk
+	bv.bv_page = page;
+	bv.bv_len = PAGE_SIZE;
+	bv.bv_offset = 0;
+
+	endio->zram = zram;
+	endio->index = index;
+	err = write_to_bdev(zram, &bv, index, NULL,
+						zram_cold_page_end_io, endio,
+						&entry);
+	if (err) {
+		pr_err("zram_wb: write_cold_page failed\n");
+		goto out;
+	}
+	// TODO: is this safe?
+	//endio->element = entry;
+	return 0;
+out:
+	kvfree(endio);
+	mempool_free(page, zram->age_mempool);
+	return err;
+}
+
+static void zram_wb_cold_pages(struct work_struct *w)
+{
+	struct zram *zram = container_of(w, struct zram, wb_cold_pages_work);
+	unsigned long nr_pages = zram->disksize >> PAGE_SHIFT;
+	u32 index = 0;
+	int err;
+	bool is_same, is_wb;
+
+	if (!zram_wb_enabled(zram)){
+		pr_err("zram_wb: backing dev is not configured\n");
+		return;
+	}
+
+	pr_debug("zram_wb: starting writeback of cold pages\n");
+
+	down_read(&zram->init_lock);
+
+	for (index = 0; index < nr_pages; index++) {
+		unsigned long age;
+
+		zram_slot_lock(zram, index);
+
+		if (!zram_allocated(zram, index)) {
+			zram_slot_unlock(zram, index);
+			continue;
+		}
+
+		age = zram_get_obj_age(zram, index);
+		is_same = zram_test_flag(zram, index, ZRAM_SAME);
+		is_wb = zram_test_flag(zram, index, ZRAM_WB);
+
+		zram_slot_unlock(zram, index);
+
+		if (age >= zram->wb_age_thresh && !is_same && !is_wb) {
+
+			err = zram_move_page_to_disk(zram, index);
+			if (err == -ENOSPC) {
+				pr_debug("zram_wb: backing device is out of space\n");
+				break;
+			} else if (err) {
+				pr_err("zram: failed to move page (%d) to disk, err = %d\n",
+						index, err);
+			}
+		}
+
+	}
+
+	up_read(&zram->init_lock);
+	pr_debug("zram_wb: finished writeback of cold pages\n");
+}
+
+static void zram_mark_cold_pages(struct work_struct *w)
+{
+	struct zram *zram = container_of(w, struct zram, ageing_work);
+	unsigned long nr_pages = zram->disksize >> PAGE_SHIFT;
+	u32 index = 0;
+
+	if (!zram->table) {
+		pr_err("zram page_table is NULL\n");
+		return;
+	}
+
+	pr_debug("zram_wb: starting age update on active pages\n");
+
+	down_read(&zram->init_lock);
+
+	for (index = 0; index < nr_pages; index++) {
+		unsigned long age;
+
+		zram_slot_lock(zram, index);
+
+		if (!zram_allocated(zram, index)) {
+			zram_slot_unlock(zram, index);
+			continue;
+		}
+
+		age = zram_get_obj_age(zram, index);
+		zram_set_obj_age(zram, index, age + 1);
+
+		zram_slot_unlock(zram, index);
+
+	}
+
+	up_read(&zram->init_lock);
+
+	pr_debug("zram_wb: finished age update\n");
+
+	mod_timer(&zram->timer, jiffies + msecs_to_jiffies(zram->age_timer_ms));
+}
+
+static void zram_timer_callback(unsigned long ctx)
+{
+	struct zram *zram = (struct zram *)ctx;
+	queue_work(zram->ageing_wq, &zram->ageing_work);
+}
+
+static int zram_ageing_setup(struct zram *zram, u64 disksize)
+{
+	int ret = 0;
+	mempool_t *age_mempool = NULL;
+	struct workqueue_struct *wq = NULL;
+
+	wq = create_singlethread_workqueue("zram-age-process");
+	if (!wq) {
+		pr_err("Failed to create workqueue\n");
+		return -ENOMEM;
+	}
+
+	// TODO: replace with alloc_page()
+	age_mempool = mempool_create_page_pool(16, 0);
+	if (!age_mempool) {
+		pr_err("Failed to create mempool for ageing\n");
+		ret = -ENOMEM;
+		goto free_wq;
+	}
+
+	zram->ageing_wq = wq;
+	zram->age_mempool = age_mempool;
+	zram->age_timer_ms = ZRAM_AGE_DEFAULT_TIMER;
+	zram->wb_age_thresh = zram_get_max_age();
+	INIT_WORK(&zram->ageing_work, zram_mark_cold_pages);
+	INIT_WORK(&zram->wb_cold_pages_work, zram_wb_cold_pages);
+
+	setup_timer(&zram->timer, zram_timer_callback, (unsigned long) zram);
+	mod_timer(&zram->timer, jiffies +
+							msecs_to_jiffies(zram->age_timer_ms));
+	return 0;
+free_wq:
+	destroy_workqueue(wq);
+
+	return ret;
+}
+
+static void zram_ageing_free(struct zram *zram)
+{
+	flush_workqueue(zram->ageing_wq);
+	destroy_workqueue(zram->ageing_wq);
+	zram->ageing_wq = NULL;
+
+	mempool_destroy(zram->age_mempool);
+	zram->age_mempool = NULL;
+}
+#endif
 
 static ssize_t disksize_store(struct device *dev,
 		struct device_attribute *attr, const char *buf, size_t len)
@@ -1516,15 +1851,27 @@ static ssize_t disksize_store(struct device *dev,
 		goto out_free_meta;
 	}
 
+#ifdef CONFIG_ZRAM_WB_COLD_PAGES
+	err = zram_ageing_setup(zram, disksize);
+	if (err) {
+		pr_err("Failed to setup ageing\n");
+		goto out_free_comp;
+	}
+#endif
+
 	zram->comp = comp;
 	zram->disksize = disksize;
 	set_capacity(zram->disk, zram->disksize >> SECTOR_SHIFT);
 
 	revalidate_disk(zram->disk);
 	up_write(&zram->init_lock);
-
+	pr_info("@@@@@@ ZRAM INITED @@@@@@@@\n");
 	return len;
 
+#ifdef CONFIG_ZRAM_WB_COLD_PAGES
+out_free_comp:
+	zcomp_destroy(comp);
+#endif
 out_free_meta:
 	zram_meta_free(zram, disksize);
 out_unlock:
@@ -1610,6 +1957,10 @@ static DEVICE_ATTR_RW(comp_algorithm);
 #ifdef CONFIG_ZRAM_WRITEBACK
 static DEVICE_ATTR_RW(backing_dev);
 #endif
+#ifdef CONFIG_ZRAM_WB_COLD_PAGES
+static DEVICE_ATTR_RW(age_timer_ms);
+static DEVICE_ATTR_WO(wb_cold_pages);
+#endif
 
 static struct attribute *zram_disk_attrs[] = {
 	&dev_attr_disksize.attr,
@@ -1626,6 +1977,10 @@ static struct attribute *zram_disk_attrs[] = {
 	&dev_attr_io_stat.attr,
 	&dev_attr_mm_stat.attr,
 	&dev_attr_debug_stat.attr,
+#ifdef CONFIG_ZRAM_WB_COLD_PAGES
+	&dev_attr_age_timer_ms.attr,
+	&dev_attr_wb_cold_pages.attr,
+#endif
 	NULL,
 };
 

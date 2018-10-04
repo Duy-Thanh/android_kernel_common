@@ -49,6 +49,8 @@ enum zram_pageflags {
 	ZRAM_SAME,	/* Page consists the same element */
 	ZRAM_WB,	/* page is stored on backing_device */
 	ZRAM_HUGE,	/* Incompressible page */
+	ZRAM_AGE_BIT_START,
+	ZRAM_AGE_BIT_END,
 
 	__NR_ZRAM_PAGEFLAGS,
 };
@@ -80,7 +82,17 @@ struct zram_stats {
 	atomic64_t pages_stored;	/* no. of pages currently stored */
 	atomic_long_t max_used_pages;	/* no. of maximum pages stored */
 	atomic64_t writestall;		/* no. of write slow paths */
+	atomic64_t wb_pages;		/* no. of pages residing on backing dev */
+	atomic64_t wb_writes;		/* no. of writes to backing dev */
 };
+
+#ifdef CONFIG_ZRAM_WB_COLD_PAGES
+struct zram_cold_page_endio {
+	struct zram *zram;
+	unsigned long index;
+	unsigned long element;
+};
+#endif
 
 struct zram {
 	struct zram_table_entry *table;
@@ -115,6 +127,16 @@ struct zram {
 #endif
 #ifdef CONFIG_ZRAM_MEMORY_TRACKING
 	struct dentry *debugfs_dir;
+#endif
+#ifdef CONFIG_ZRAM_WB_COLD_PAGES
+	struct workqueue_struct *ageing_wq;
+	struct work_struct ageing_work;
+	struct work_struct wb_cold_pages_work;
+	struct timer_list timer;
+
+	unsigned long age_timer_ms;
+	mempool_t *age_mempool;
+	int wb_age_thresh;
 #endif
 };
 #endif
