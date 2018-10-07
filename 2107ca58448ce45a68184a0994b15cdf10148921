@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a381d4b_a9ee70fe",
+        "filename": "scripts/mod/modpost.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1226,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-10-07T18:40:30Z",
+      "side": 1,
+      "message": "what specific \"Current ARM tools\" are so odd here?  This file builds on all arches, why is arm somehow special?",
+      "range": {
+        "startLine": 1226,
+        "startChar": 44,
+        "endLine": 1226,
+        "endChar": 55
+      },
+      "revId": "2107ca58448ce45a68184a0994b15cdf10148921",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
