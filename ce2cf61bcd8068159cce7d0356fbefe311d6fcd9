@@ -16,6 +16,23 @@
       "revId": "ce2cf61bcd8068159cce7d0356fbefe311d6fcd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ba61133_5100b244",
+        "filename": "fs/9p/acl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-10-08T14:29:54Z",
+      "side": 1,
+      "message": "Only when !acl \u0026\u0026 !retval (intertwined, !acl _means_ we have !retval)",
+      "revId": "ce2cf61bcd8068159cce7d0356fbefe311d6fcd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
