@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57b229f7_fdc07ff6",
+        "filename": "drivers/md/dm-crypt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1869,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-10-08T14:30:54Z",
+      "side": 1,
+      "message": "resulted in a build break :-(",
+      "range": {
+        "startLine": 1869,
+        "startChar": 11,
+        "endLine": 1869,
+        "endChar": 28
+      },
+      "revId": "46050a93ff9e13fddcdcaff35e2b0b863b3af69b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
