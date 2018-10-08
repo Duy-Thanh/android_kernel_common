@@ -22,6 +22,30 @@
       "revId": "2107ca58448ce45a68184a0994b15cdf10148921",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1260553d_4714a8b5",
+        "filename": "scripts/mod/modpost.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1226,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2018-10-08T15:11:23Z",
+      "side": 1,
+      "message": "All of them, mapping symbols are part of the ARM ELF specification. Note that this is not my comment, I simply moved find_elf_symbol below these functions, so I can use is_valid_name in there as well.",
+      "parentUuid": "6a381d4b_a9ee70fe",
+      "range": {
+        "startLine": 1226,
+        "startChar": 44,
+        "endLine": 1226,
+        "endChar": 55
+      },
+      "revId": "2107ca58448ce45a68184a0994b15cdf10148921",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
