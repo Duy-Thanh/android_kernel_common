@@ -30,14 +30,23 @@
 #define ARM64_HAS_LSE_ATOMICS			5
 #define ARM64_WORKAROUND_CAVIUM_23154		6
 #define ARM64_WORKAROUND_834220			7
+<<<<<<< HEAD   (a781f6 ANDROID: sdcardfs: Change current->fs under lock)
 #define ARM64_HAS_NO_HW_PREFETCH		8
 #define ARM64_HAS_UAO				9
 #define ARM64_ALT_PAN_NOT_UAO			10
 #define ARM64_HAS_VIRT_HOST_EXTN		11
 #define ARM64_WORKAROUND_CAVIUM_27456		12
 #define ARM64_UNMAP_KERNEL_AT_EL0		23
+=======
+#define ARM64_WORKAROUND_CAVIUM_27456		8
+#define ARM64_HAS_32BIT_EL0			9
+>>>>>>> BRANCH (11abac Linux 4.4.160)
 
+<<<<<<< HEAD   (a781f6 ANDROID: sdcardfs: Change current->fs under lock)
 #define ARM64_NCAPS				24
+=======
+#define ARM64_NCAPS				10
+>>>>>>> BRANCH (11abac Linux 4.4.160)
 
 #ifndef __ASSEMBLY__
 
@@ -183,6 +192,11 @@ u64 read_system_reg(u32 id);
 static inline bool cpu_supports_mixed_endian_el0(void)
 {
 	return id_aa64mmfr0_mixed_endian_el0(read_cpuid(SYS_ID_AA64MMFR0_EL1));
+}
+
+static inline bool system_supports_32bit_el0(void)
+{
+	return cpus_have_cap(ARM64_HAS_32BIT_EL0);
 }
 
 static inline bool system_supports_mixed_endian_el0(void)
