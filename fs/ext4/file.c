@@ -338,15 +338,6 @@ static const struct vm_operations_struct ext4_file_vm_ops = {
 
 static int ext4_file_mmap(struct file *file, struct vm_area_struct *vma)
 {
-	struct inode *inode = file->f_mapping->host;
-
-	if (ext4_encrypted_inode(inode)) {
-		int err = ext4_get_encryption_info(inode);
-		if (err)
-			return 0;
-		if (ext4_encryption_info(inode) == NULL)
-			return -ENOKEY;
-	}
 	file_accessed(file);
 	if (IS_DAX(file_inode(file))) {
 		vma->vm_ops = &ext4_dax_vm_ops;
@@ -398,13 +389,10 @@ static int ext4_file_open(struct inode * inode, struct file * filp)
 			ext4_journal_stop(handle);
 		}
 	}
-	if (ext4_encrypted_inode(inode)) {
-		ret = ext4_get_encryption_info(inode);
-		if (ret)
-			return -EACCES;
-		if (ext4_encryption_info(inode) == NULL)
-			return -ENOKEY;
-	}
+
+	ret = fscrypt_file_open(inode, filp);
+	if (ret)
+		return ret;
 	/*
 	 * Set up the jbd2_inode if we are opening the inode for
 	 * writing and the journal is present
