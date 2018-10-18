@@ -101,7 +101,12 @@ int dm_linear_map(struct dm_target *ti, struct bio *bio)
 	return DM_MAPIO_REMAPPED;
 }
 
+<<<<<<< HEAD   (864aac Merge 4.14.76 into android-4.14-p)
 int dm_linear_end_io(struct dm_target *ti, struct bio *bio,
+=======
+#ifdef CONFIG_BLK_DEV_ZONED
+static int linear_end_io(struct dm_target *ti, struct bio *bio,
+>>>>>>> BRANCH (826308 Linux 4.14.77)
 			 blk_status_t *error)
 {
 	struct linear_c *lc = ti->private;
@@ -111,7 +116,11 @@ int dm_linear_end_io(struct dm_target *ti, struct bio *bio,
 
 	return DM_ENDIO_DONE;
 }
+<<<<<<< HEAD   (864aac Merge 4.14.76 into android-4.14-p)
 EXPORT_SYMBOL_GPL(dm_linear_end_io);
+=======
+#endif
+>>>>>>> BRANCH (826308 Linux 4.14.77)
 
 void dm_linear_status(struct dm_target *ti, status_type_t type,
 			  unsigned status_flags, char *result, unsigned maxlen)
@@ -190,8 +199,14 @@ EXPORT_SYMBOL_GPL(dm_linear_dax_copy_from_iter);
 static struct target_type linear_target = {
 	.name   = "linear",
 	.version = {1, 4, 0},
+#ifdef CONFIG_BLK_DEV_ZONED
+	.end_io = linear_end_io,
 	.features = DM_TARGET_PASSES_INTEGRITY | DM_TARGET_ZONED_HM,
+#else
+	.features = DM_TARGET_PASSES_INTEGRITY,
+#endif
 	.module = THIS_MODULE,
+<<<<<<< HEAD   (864aac Merge 4.14.76 into android-4.14-p)
 	.ctr    = dm_linear_ctr,
 	.dtr    = dm_linear_dtr,
 	.map    = dm_linear_map,
@@ -201,6 +216,16 @@ static struct target_type linear_target = {
 	.iterate_devices = dm_linear_iterate_devices,
 	.direct_access = dm_linear_dax_direct_access,
 	.dax_copy_from_iter = dm_linear_dax_copy_from_iter,
+=======
+	.ctr    = linear_ctr,
+	.dtr    = linear_dtr,
+	.map    = linear_map,
+	.status = linear_status,
+	.prepare_ioctl = linear_prepare_ioctl,
+	.iterate_devices = linear_iterate_devices,
+	.direct_access = linear_dax_direct_access,
+	.dax_copy_from_iter = linear_dax_copy_from_iter,
+>>>>>>> BRANCH (826308 Linux 4.14.77)
 };
 
 int __init dm_linear_init(void)
