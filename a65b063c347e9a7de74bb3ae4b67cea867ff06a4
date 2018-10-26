@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "9f0f12b2_877f063e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1067948
+      },
+      "writtenOn": "2018-10-26T22:55:07Z",
+      "side": 1,
+      "message": "We are headed to running Android in a VM instead of a container. When that happens we won\u0027t have that much need for a namespaced binder.",
+      "parentUuid": "e72623f6_1ec135c3",
+      "range": {
+        "startLine": 945,
+        "startChar": 8,
+        "endLine": 945,
+        "endChar": 26
+      },
+      "revId": "a65b063c347e9a7de74bb3ae4b67cea867ff06a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33d27035_9a76a987",
         "filename": "drivers/android/binder.c",
         "patchSetId": 2
