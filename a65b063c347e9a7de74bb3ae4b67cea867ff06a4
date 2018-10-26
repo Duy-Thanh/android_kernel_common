@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "e72623f6_1ec135c3",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1060196
+      },
+      "writtenOn": "2018-10-26T19:24:16Z",
+      "side": 1,
+      "message": "Ha ,that\u0027s the CL-upload-to-latest-comment delta I\u0027ve had on a CL :)\n\nI\u0027d be happy to resurrect this CL, though I\u0027ll need to refresh myself on some of the comments and context.\n\nMore importantly, I don\u0027t know what priority is currently attached to this effort (namespace support for binder....).\n\nI would imagine if we want to move the HALs out of the container it would be helpful. I think Dylan might be comment on our current need for this...dgreid@ wdyt?\n\nI don\u0027t have any current plans to attend LPC.",
+      "parentUuid": "96a0c366_115e33e3",
+      "range": {
+        "startLine": 945,
+        "startChar": 8,
+        "endLine": 945,
+        "endChar": 26
+      },
+      "revId": "a65b063c347e9a7de74bb3ae4b67cea867ff06a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33d27035_9a76a987",
         "filename": "drivers/android/binder.c",
         "patchSetId": 2
