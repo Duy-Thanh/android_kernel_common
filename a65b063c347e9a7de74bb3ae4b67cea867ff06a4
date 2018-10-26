@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "96a0c366_115e33e3",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-10-26T19:07:42Z",
+      "side": 1,
+      "message": "Well, actually CONFIG_IPC_NS depends on (SYSV_IPC || POSIX_MQUEUE) and we have some kernels where CONFIG_IPC_NS is enabled (along with POSIX_MQUEUE of course). If we do it, I think we\u0027d want to allow binder to be used w/o namespaces if !CONFIG_IPC_NS.\n\nThis topic has been coming up quite a bit lately and will have some discussion at LPC this month.\n\npmalani@, are you still interested in this? Are you going to LPC?",
+      "parentUuid": "8e1e28ac_0981300b",
+      "range": {
+        "startLine": 945,
+        "startChar": 8,
+        "endLine": 945,
+        "endChar": 26
+      },
+      "revId": "a65b063c347e9a7de74bb3ae4b67cea867ff06a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33d27035_9a76a987",
         "filename": "drivers/android/binder.c",
         "patchSetId": 2
