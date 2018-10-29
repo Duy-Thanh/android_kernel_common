@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "91065c50_56c42031",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2369,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-10-29T13:11:27Z",
+      "side": 1,
+      "message": "Does it make sense to have the initial users of the new API in a new patch BTW? Guess you run into unused warnings..\n\nAlso, any reason for just reading the object_offset in the \"new\" way but keeping the other parts here the \"old\" way?",
+      "range": {
+        "startLine": 2366,
+        "startChar": 2,
+        "endLine": 2369,
+        "endChar": 27
+      },
+      "revId": "af679a697a89a90677c6190717dac8c5e082a428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d112caa5_a11903f6",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2371,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-10-29T13:11:27Z",
+      "side": 1,
+      "message": "check for failure (other cases as well).",
+      "range": {
+        "startLine": 2371,
+        "startChar": 2,
+        "endLine": 2371,
+        "endChar": 31
+      },
+      "revId": "af679a697a89a90677c6190717dac8c5e082a428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ae92049_76b3e859",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2496,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-10-29T13:11:27Z",
+      "side": 1,
+      "message": "Would reading all num_fds at once make a difference here?",
+      "range": {
+        "startLine": 2496,
+        "startChar": 4,
+        "endLine": 2496,
+        "endChar": 33
+      },
+      "revId": "af679a697a89a90677c6190717dac8c5e082a428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67cf501f_202d9659",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-10-29T13:11:27Z",
+      "side": 1,
+      "message": "maybe use a boolean here since this function can only return either the full amount or 0?",
+      "range": {
+        "startLine": 1173,
+        "startChar": 2,
+        "endLine": 1173,
+        "endChar": 15
+      },
+      "revId": "af679a697a89a90677c6190717dac8c5e082a428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88966e48_f99c82e9",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1197,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-10-29T13:11:27Z",
+      "side": 1,
+      "message": "if this is important to reset, do it at the top of this function?",
+      "range": {
+        "startLine": 1197,
+        "startChar": 2,
+        "endLine": 1197,
+        "endChar": 12
+      },
+      "revId": "af679a697a89a90677c6190717dac8c5e082a428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
