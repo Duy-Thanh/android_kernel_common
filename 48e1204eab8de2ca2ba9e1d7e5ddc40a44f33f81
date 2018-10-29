@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1b2135f_10794d2f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2018-10-29T07:11:00Z",
+      "side": 1,
+      "message": "(\"ANDROID: net: ipv4: tcp: Namespace-ify sysctl_tcp_default_init_rwnd\") and (\"ANDROID: net: ipv4: sysfs_net_ipv4: Fix TCP window size controlling knobs\") are not android-common kernel commits. So their commit IDs won\u0027t lead the curious developers anywhere. So let\u0027s remove these references?\n\nIn the past I have updated the commit log with relevant upstream commit IDs or references which led me to such refactoring. e.g.\n[AmitP: Minor refactoring of original patch to align with\n        Namespace-ification of TCP sysctl knobs upstream\n        5bbcc0f595fa (\"Merge git://git.kernel.org/pub/scm/linux/kernel/git/davem/net-next\")]",
+      "revId": "48e1204eab8de2ca2ba9e1d7e5ddc40a44f33f81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
