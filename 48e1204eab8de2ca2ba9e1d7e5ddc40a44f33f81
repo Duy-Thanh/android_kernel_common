@@ -16,6 +16,24 @@
       "revId": "48e1204eab8de2ca2ba9e1d7e5ddc40a44f33f81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5a02af9_8e37b25a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2018-10-29T15:42:00Z",
+      "side": 1,
+      "message": "Maybe we could branch android-mainline-tracking now so we retain a historical record of your rebased versions and follow-up fixes?",
+      "parentUuid": "e1b2135f_10794d2f",
+      "revId": "48e1204eab8de2ca2ba9e1d7e5ddc40a44f33f81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
