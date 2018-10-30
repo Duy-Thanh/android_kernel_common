@@ -22,6 +22,30 @@
       "revId": "d5afdcb512d317e6500f466c0a6524a8908bb9f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50d95c80_ebff6f2d",
+        "filename": "net/ipv6/addrconf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2224,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2018-10-30T05:47:36Z",
+      "side": 1,
+      "message": "I\u0027m not convinced the behaviour is correct if we return default_table here...\n\nI think:\n  http://cs/kernel/net/ipv6/addrconf.c?l\u003d3360\u0026rcl\u003d037a3718f7e32fb06d04356ca120afb95ef5e58c\nis where it got nulled out, and then\n  http://cs/kernel/net/ipv6/addrconf.c?l\u003d3423\u0026rcl\u003d037a3718f7e32fb06d04356ca120afb95ef5e58c\nis where we fail...\nwhich goes in here:\n  http://cs/kernel/net/ipv6/addrconf.c?l\u003d5221\u0026rcl\u003d037a3718f7e32fb06d04356ca120afb95ef5e58c\n\nand then tries to remove route here:\n  http://cs/kernel/net/ipv6/addrconf.c?l\u003d5224\u0026rcl\u003d037a3718f7e32fb06d04356ca120afb95ef5e58c\nfrom that table, which wasn\u0027t necessarily the table they were added to?\n\nMaybe 3360 needs to be moved past 3429...\n(utterly not clear if that is at all correct from the point of view of the rest of the code though)\n\nMore annoying but more likely correct is probably to pass idev down... ie.\n  __ipv6_ifa_notify(RTM_DELADDR, ifa, idev);",
+      "parentUuid": "d1feaaf7_85999d43",
+      "range": {
+        "startLine": 2224,
+        "startChar": 0,
+        "endLine": 2224,
+        "endChar": 11
+      },
+      "revId": "d5afdcb512d317e6500f466c0a6524a8908bb9f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
