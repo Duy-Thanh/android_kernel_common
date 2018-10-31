@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "32a35832_998624b7",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2369,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-10-31T09:08:19Z",
+      "side": 1,
+      "message": "I personally kinda like introducing just the API first, but it\u0027s probably not acceptable because that commit by itself doesn\u0027t build.\n\nMaybe just update the commit message and mention you\u0027ve converted over one particular usage of the old API, and others are done in follow-up patches?",
+      "parentUuid": "b17068ed_88c969a2",
+      "range": {
+        "startLine": 2366,
+        "startChar": 2,
+        "endLine": 2369,
+        "endChar": 27
+      },
+      "revId": "af679a697a89a90677c6190717dac8c5e082a428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d112caa5_a11903f6",
         "filename": "drivers/android/binder.c",
         "patchSetId": 2
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "I\u0027ve been thinking of making it a void since the only failure case is the check that it is a valid buffer/offset which would be a kernel bug. Maybe we make that a BUG_ON() inside binder_alloc_copy* instead of polluting the code here with needless error handling. What do you think?",
       "parentUuid": "d112caa5_a11903f6",
+      "range": {
+        "startLine": 2371,
+        "startChar": 2,
+        "endLine": 2371,
+        "endChar": 31
+      },
+      "revId": "af679a697a89a90677c6190717dac8c5e082a428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d15ed2b0_710215e3",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2371,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-10-31T09:08:19Z",
+      "side": 1,
+      "message": "yeah in that case BUG_ON sounds better.",
+      "parentUuid": "bf483b76_ba4a0460",
       "range": {
         "startLine": 2371,
         "startChar": 2,
@@ -143,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "63f7f4a1_54547faf",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2496,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-10-31T09:08:19Z",
+      "side": 1,
+      "message": "I know fd_array is used extensively in the graphics HAL (the native_handle type in particular). But, the majority of the time they just carry one fd in there, so it probably doesn\u0027t matter a lot. I guess we can optimize it later if we need to.",
+      "parentUuid": "63577cc8_a455b5c2",
+      "range": {
+        "startLine": 2496,
+        "startChar": 4,
+        "endLine": 2496,
+        "endChar": 33
+      },
+      "revId": "af679a697a89a90677c6190717dac8c5e082a428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "67cf501f_202d9659",
         "filename": "drivers/android/binder_alloc.c",
         "patchSetId": 2
@@ -178,6 +250,30 @@
       "side": 1,
       "message": "... or BUG_ON() the failure case and make the function void.",
       "parentUuid": "67cf501f_202d9659",
+      "range": {
+        "startLine": 1173,
+        "startChar": 2,
+        "endLine": 1173,
+        "endChar": 15
+      },
+      "revId": "af679a697a89a90677c6190717dac8c5e082a428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "027a491c_524cff5a",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-10-31T09:08:19Z",
+      "side": 1,
+      "message": "BUG_ON sgtm too",
+      "parentUuid": "f79d2a51_50cbfcb3",
       "range": {
         "startLine": 1173,
         "startChar": 2,
@@ -234,6 +330,30 @@
       "revId": "af679a697a89a90677c6190717dac8c5e082a428",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76fa2f04_b6f8ce52",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1197,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-10-31T09:08:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8931c5b4_0de788b3",
+      "range": {
+        "startLine": 1197,
+        "startChar": 2,
+        "endLine": 1197,
+        "endChar": 12
+      },
+      "revId": "af679a697a89a90677c6190717dac8c5e082a428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
