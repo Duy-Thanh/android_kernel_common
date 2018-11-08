@@ -16,4 +16,8 @@ obj-$(CONFIG_PM_WAKELOCKS)	+= wakelock.o
 
 obj-$(CONFIG_MAGIC_SYSRQ)	+= poweroff.o
 
+<<<<<<< HEAD   (89eb8f ANDROID: cuttlefish_defconfig: Enable CONFIG_NETFILTER_XT_MA)
 obj-$(CONFIG_SUSPEND)	+= wakeup_reason.o
+=======
+obj-$(CONFIG_ENERGY_MODEL)	+= energy_model.o
+>>>>>>> BRANCH (6d6667 ANDROID: thermal: cpu_cooling: Migrate to using the EM frame)
