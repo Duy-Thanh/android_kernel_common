@@ -16,4 +16,8 @@ obj-$(CONFIG_PM_WAKELOCKS)	+= wakelock.o
 
 obj-$(CONFIG_MAGIC_SYSRQ)	+= poweroff.o
 
+<<<<<<< HEAD   (bbe8a2 ANDROID: net: Paranoid network.)
 obj-$(CONFIG_SUSPEND)	+= wakeup_reason.o
+=======
+obj-$(CONFIG_ENERGY_MODEL)	+= energy_model.o
+>>>>>>> BRANCH (6d6667 ANDROID: thermal: cpu_cooling: Migrate to using the EM frame)
