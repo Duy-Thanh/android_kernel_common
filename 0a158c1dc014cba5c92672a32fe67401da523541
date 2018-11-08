@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c51530ba_510f3711",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2018-11-08T18:24:10Z",
+      "side": 0,
+      "message": "NOTE for future patch reworking. This header was incorrectly introduced by a previous change, which makes the change before this one non-buildable. We should remove this line and the line that added it in the previous change, for better bisectability.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 17
+      },
+      "revId": "0a158c1dc014cba5c92672a32fe67401da523541",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
