@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96c18be3_072f3de4",
+        "filename": "drivers/staging/android/virt_wifi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1062926
+      },
+      "writtenOn": "2018-11-12T17:03:29Z",
+      "side": 1,
+      "message": "It would be more idiomatic to say:\n\nchannels_5ghz",
+      "range": {
+        "startLine": 226,
+        "startChar": 43,
+        "endLine": 226,
+        "endChar": 60
+      },
+      "revId": "81b1e0cccfae0dc00105788ea219f1023042a0d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
