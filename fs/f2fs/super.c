@@ -1989,6 +1989,13 @@ static int f2fs_quota_off(struct super_block *sb, int type)
 		return dquot_quota_off(sb, type);
 
 	err = f2fs_quota_sync(sb, type);
+<<<<<<< HEAD   (97c308 ANDROID: zram: set comp_len to PAGE_SIZE when page is huge)
+=======
+	if (err)
+		goto out_put;
+
+	err = dquot_quota_off(sb, type);
+>>>>>>> BRANCH (2e390c Linux 4.14.81)
 	if (err)
 		goto out_put;
 
@@ -2020,7 +2027,11 @@ void f2fs_quota_off_umount(struct super_block *sb)
 				"Fail to turn off disk quota "
 				"(type: %d, err: %d, ret:%d), Please "
 				"run fsck to fix it.", type, err, ret);
+<<<<<<< HEAD   (97c308 ANDROID: zram: set comp_len to PAGE_SIZE when page is huge)
 			set_sbi_flag(F2FS_SB(sb), SBI_QUOTA_NEED_REPAIR);
+=======
+			set_sbi_flag(F2FS_SB(sb), SBI_NEED_FSCK);
+>>>>>>> BRANCH (2e390c Linux 4.14.81)
 		}
 	}
 }

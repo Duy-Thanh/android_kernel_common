@@ -484,8 +484,13 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio)
 
 	bio_set_op_attrs(bio, fio->op, fio->op_flags);
 
+<<<<<<< HEAD   (97c308 ANDROID: zram: set comp_len to PAGE_SIZE when page is huge)
 	inc_page_count(fio->sbi, is_read_io(fio->op) ?
 			__read_io_type(page): WB_DATA_TYPE(fio->page));
+=======
+	if (!is_read_io(fio->op))
+		inc_page_count(fio->sbi, WB_DATA_TYPE(fio->page));
+>>>>>>> BRANCH (2e390c Linux 4.14.81)
 
 	__submit_bio(fio->sbi, bio, fio->type);
 	return 0;

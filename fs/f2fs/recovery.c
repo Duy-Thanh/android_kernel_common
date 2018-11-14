@@ -279,6 +279,7 @@ static int recover_inode(struct inode *inode, struct page *page)
 
 	F2FS_I(inode)->i_advise = raw->i_advise;
 	F2FS_I(inode)->i_flags = le32_to_cpu(raw->i_flags);
+<<<<<<< HEAD   (97c308 ANDROID: zram: set comp_len to PAGE_SIZE when page is huge)
 	f2fs_set_inode_flags(inode);
 	F2FS_I(inode)->i_gc_failures[GC_FAILURE_PIN] =
 				le16_to_cpu(raw->i_gc_failures);
@@ -286,6 +287,8 @@ static int recover_inode(struct inode *inode, struct page *page)
 	recover_inline_flags(inode, raw);
 
 	f2fs_mark_inode_dirty_sync(inode, true);
+=======
+>>>>>>> BRANCH (2e390c Linux 4.14.81)
 
 	if (file_enc_name(inode))
 		name = "<encrypted>";
