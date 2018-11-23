@@ -110,8 +110,11 @@ else
         KBUILD_CFLAGS += $(call cc-option,-mno-80387)
         KBUILD_CFLAGS += $(call cc-option,-mno-fp-ret-in-387)
 
+<<<<<<< HEAD   (5e1075 Merge 4.9.138 into android-4.9)
         KBUILD_CFLAGS += -fno-pic
 
+=======
+>>>>>>> BRANCH (44caf8 Linux 4.9.139)
         # By default gcc and clang use a stack alignment of 16 bytes for x86.
         # However the standard kernel entry on x86-64 leaves the stack on an
         # 8-byte boundary. If the compiler isn't informed about the actual

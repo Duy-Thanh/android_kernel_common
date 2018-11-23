@@ -7,11 +7,14 @@ obj-y	+= xenbus/
 nostackp := $(call cc-option, -fno-stack-protector)
 CFLAGS_features.o			:= $(nostackp)
 
+<<<<<<< HEAD   (5e1075 Merge 4.9.138 into android-4.9)
 ifndef CONFIG_LTO_CLANG
 CFLAGS_efi.o				+= -fshort-wchar
 LDFLAGS					+= $(call ld-option, --no-wchar-size-warning)
 endif
 
+=======
+>>>>>>> BRANCH (44caf8 Linux 4.9.139)
 dom0-$(CONFIG_ARM64) += arm-device.o
 dom0-$(CONFIG_PCI) += pci.o
 dom0-$(CONFIG_USB_SUPPORT) += dbgp.o
