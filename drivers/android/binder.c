@@ -4784,6 +4784,13 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	unsigned int size = _IOC_SIZE(cmd);
 	void __user *ubuf = (void __user *)arg;
 
+	/*
+	 * Need a reference on filp since ksys_close() could
+	 * be called on binder fd and the fdget() used in
+	 * ksys_ioctl() might have optimized out the reference.
+	 */
+	get_file(filp);
+
 	/*pr_info("binder_ioctl: %d:%d %x %lx\n",
 			proc->pid, current->pid, cmd, arg);*/
 
@@ -4895,6 +4902,7 @@ err:
 		pr_info("%d:%d ioctl %x %lx returned %d\n", proc->pid, current->pid, cmd, arg, ret);
 err_unlocked:
 	trace_binder_ioctl_done(ret);
+	fput(filp);
 	return ret;
 }
 
