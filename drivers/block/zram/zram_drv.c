@@ -1624,6 +1624,11 @@ static const struct attribute_group zram_disk_attr_group = {
 	.attrs = zram_disk_attrs,
 };
 
+static const struct attribute_group *zram_disk_attr_groups[] = {
+	&zram_disk_attr_group,
+	NULL,
+};
+
 /*
  * Allocate and initialize new zram device. the function returns
  * '>= 0' device_id upon success, and negative value otherwise.
@@ -1702,26 +1707,20 @@ static int zram_add(void)
 	if (ZRAM_LOGICAL_BLOCK_SIZE == PAGE_SIZE)
 		blk_queue_max_write_zeroes_sectors(zram->disk->queue, UINT_MAX);
 
+<<<<<<< HEAD   (ea91d1 Merge 4.14.83 into android-4.14)
 	zram->disk->queue->backing_dev_info->capabilities |=
 					BDI_CAP_STABLE_WRITES;
+=======
+	disk_to_dev(zram->disk)->groups = zram_disk_attr_groups;
+>>>>>>> BRANCH (4201a5 Linux 4.14.84)
 	add_disk(zram->disk);
 
-	ret = sysfs_create_group(&disk_to_dev(zram->disk)->kobj,
-				&zram_disk_attr_group);
-	if (ret < 0) {
-		pr_err("Error creating sysfs group for device %d\n",
-				device_id);
-		goto out_free_disk;
-	}
 	strlcpy(zram->compressor, default_compressor, sizeof(zram->compressor));
 
 	zram_debugfs_register(zram);
 	pr_info("Added device: %s\n", zram->disk->disk_name);
 	return device_id;
 
-out_free_disk:
-	del_gendisk(zram->disk);
-	put_disk(zram->disk);
 out_free_queue:
 	blk_cleanup_queue(queue);
 out_free_idr:
@@ -1749,6 +1748,7 @@ static int zram_remove(struct zram *zram)
 	zram->claim = true;
 	mutex_unlock(&bdev->bd_mutex);
 
+<<<<<<< HEAD   (ea91d1 Merge 4.14.83 into android-4.14)
 	zram_debugfs_unregister(zram);
 	/*
 	 * Remove sysfs first, so no one will perform a disksize
@@ -1760,6 +1760,8 @@ static int zram_remove(struct zram *zram)
 	sysfs_remove_group(&disk_to_dev(zram->disk)->kobj,
 			&zram_disk_attr_group);
 
+=======
+>>>>>>> BRANCH (4201a5 Linux 4.14.84)
 	/* Make sure all the pending I/O are finished */
 	fsync_bdev(bdev);
 	zram_reset_device(zram);
