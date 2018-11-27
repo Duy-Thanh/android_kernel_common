@@ -20,8 +20,11 @@
 
 #include <linux/efi.h>
 #include <asm/efi.h>
+<<<<<<< HEAD   (564ce1 Merge 4.4.164 into android-4.4)
 
 #include "efistub.h"
+=======
+>>>>>>> BRANCH (2757e1 Linux 4.4.165)
 
 efi_status_t __init handle_kernel_image(efi_system_table_t *sys_table_arg,
 					unsigned long *image_addr,
