@@ -16,6 +16,24 @@
       "revId": "cdc01637b28304ea3ea7bc0ffbf2eeb16e1a66b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f5561e8_08a5326c",
+        "filename": "arch/x86/configs/x86_64_cuttlefish_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2018-12-03T22:31:15Z",
+      "side": 1,
+      "message": "No. The x86_64 defconfig was introduced a little more haphazardly than the arm64 one and it contains some incorrect/unneeded options, such as this. It\u0027s on my list to remove it. The cuttlefish kernel is supposed to look like a \u0027product\u0027 kernel.",
+      "parentUuid": "f271c59e_0f33cd33",
+      "revId": "cdc01637b28304ea3ea7bc0ffbf2eeb16e1a66b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
