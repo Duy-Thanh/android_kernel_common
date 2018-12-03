@@ -34,6 +34,24 @@
       "revId": "cdc01637b28304ea3ea7bc0ffbf2eeb16e1a66b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "940c0a36_16cc28a3",
+        "filename": "arch/x86/configs/x86_64_cuttlefish_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2018-12-03T22:31:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2f5561e8_08a5326c",
+      "revId": "cdc01637b28304ea3ea7bc0ffbf2eeb16e1a66b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
