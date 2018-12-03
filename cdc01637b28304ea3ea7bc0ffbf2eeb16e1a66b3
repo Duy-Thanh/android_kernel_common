@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f271c59e_0f33cd33",
+        "filename": "arch/x86/configs/x86_64_cuttlefish_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2018-12-03T21:56:11Z",
+      "side": 1,
+      "message": "Is it intentional that the crypto self-tests are enabled for x86_64 but not for arm64?",
+      "revId": "cdc01637b28304ea3ea7bc0ffbf2eeb16e1a66b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
