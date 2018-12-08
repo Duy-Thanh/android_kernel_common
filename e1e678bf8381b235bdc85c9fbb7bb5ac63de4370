@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9974161a_1311c466",
+        "filename": "kernel/auditsc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-12-08T12:10:22Z",
+      "side": 1,
+      "message": "This is the line that should be removed to keep this file in sync with upstream.  Can you do that instead please?",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 26
+      },
+      "revId": "e1e678bf8381b235bdc85c9fbb7bb5ac63de4370",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
