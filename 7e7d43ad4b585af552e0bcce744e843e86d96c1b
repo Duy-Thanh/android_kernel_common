@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a59c415b_5f8e54be",
+        "filename": "arch/arm64/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2018-12-10T22:06:52Z",
+      "side": 1,
+      "message": "L61-62 are duplicated on L67-68. Maybe they should happen unconditionally, once?",
+      "revId": "7e7d43ad4b585af552e0bcce744e843e86d96c1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba0bde9a_9e2a9e8c",
+        "filename": "arch/arm64/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2018-12-10T22:06:52Z",
+      "side": 1,
+      "message": "shouldn\u0027t this check+warning happen unconditionally?",
+      "revId": "7e7d43ad4b585af552e0bcce744e843e86d96c1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
