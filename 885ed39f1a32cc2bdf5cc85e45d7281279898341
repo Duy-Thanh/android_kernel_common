@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1ec6253c_10c3acc3",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-12-12T18:48:07Z",
+      "side": 1,
+      "message": "Added. I guess I missed it since we omit this for some other cases (since the init is to set to NULL so kzalloc takes care of it). I added the init.",
+      "parentUuid": "f41e9381_e61e0ecc",
+      "range": {
+        "startLine": 624,
+        "startChar": 19,
+        "endLine": 624,
+        "endChar": 37
+      },
+      "revId": "885ed39f1a32cc2bdf5cc85e45d7281279898341",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3e86e9_080ff0b8",
         "filename": "drivers/android/binder.c",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "885ed39f1a32cc2bdf5cc85e45d7281279898341",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3a40898_680dc0d9",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2375,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-12-12T18:48:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3e86e9_080ff0b8",
+      "range": {
+        "startLine": 2375,
+        "startChar": 1,
+        "endLine": 2375,
+        "endChar": 5
+      },
+      "revId": "885ed39f1a32cc2bdf5cc85e45d7281279898341",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
