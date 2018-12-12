@@ -142,6 +142,8 @@ static bool f2fs_bio_post_read_required(struct bio *bio)
 
 static void f2fs_read_end_io(struct bio *bio)
 {
+	struct page *first_page = bio->bi_io_vec[0].bv_page;
+
 	if (time_to_inject(F2FS_P_SB(bio->bi_io_vec->bv_page), FAULT_READ_IO)) {
 		f2fs_show_injection_info(FAULT_READ_IO);
 		bio->bi_error = -EIO;
@@ -154,6 +156,11 @@ static void f2fs_read_end_io(struct bio *bio)
 		bio_post_read_processing(ctx);
 		return;
 	}
+
+	if (first_page != NULL)
+		trace_android_fs_dataread_end(first_page->mapping->host,
+					      page_offset(first_page),
+					      bio->bi_iter.bi_size);
 
 	__read_end_io(bio);
 }
@@ -1492,6 +1499,33 @@ out:
 	return ret;
 }
 
+static void
+f2fs_submit_bio_read(struct inode *inode, struct bio *bio)
+{
+	if (trace_android_fs_dataread_start_enabled()) {
+		struct page *first_page = bio->bi_io_vec[0].bv_page;
+
+		if (first_page != NULL) {
+			char *path, pathbuf[MAX_TRACE_PATHBUF_LEN];
+
+			path = android_fstrace_get_pathname(pathbuf,
+						MAX_TRACE_PATHBUF_LEN,
+						first_page->mapping->host);
+
+			trace_android_fs_dataread_start(
+				first_page->mapping->host,
+				page_offset(first_page),
+				bio->bi_iter.bi_size,
+				current->pid,
+				path,
+				current->comm);
+		}
+	}
+
+	__submit_bio(F2FS_I_SB(inode), bio, DATA);
+
+}
+
 /*
  * This function was originally taken from fs/mpage.c, and customized for f2fs.
  * Major change was from block_size == page_size in f2fs by default.
@@ -1593,7 +1627,7 @@ got_it:
 		if (bio && (last_block_in_bio != block_nr - 1 ||
 			!__same_bdev(F2FS_I_SB(inode), block_nr, bio))) {
 submit_and_realloc:
-			__submit_bio(F2FS_I_SB(inode), bio, DATA);
+			f2fs_submit_bio_read(inode, bio);
 			bio = NULL;
 		}
 		if (bio == NULL) {
@@ -1625,7 +1659,7 @@ set_error_page:
 		goto next_page;
 confused:
 		if (bio) {
-			__submit_bio(F2FS_I_SB(inode), bio, DATA);
+			f2fs_submit_bio_read(inode, bio);
 			bio = NULL;
 		}
 		unlock_page(page);
@@ -1635,7 +1669,7 @@ next_page:
 	}
 	BUG_ON(pages && !list_empty(pages));
 	if (bio)
-		__submit_bio(F2FS_I_SB(inode), bio, DATA);
+		f2fs_submit_bio_read(inode, bio);
 	return 0;
 }
 
