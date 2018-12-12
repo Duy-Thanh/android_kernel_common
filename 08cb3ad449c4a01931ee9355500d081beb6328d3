@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16dd42dc_f271a076",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-12-12T11:10:28Z",
+      "side": 1,
+      "message": "This line does not look correct :(",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 62
+      },
+      "revId": "08cb3ad449c4a01931ee9355500d081beb6328d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
