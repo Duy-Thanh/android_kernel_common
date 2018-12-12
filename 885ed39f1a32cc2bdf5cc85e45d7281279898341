@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f41e9381_e61e0ecc",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-12-12T18:07:38Z",
+      "side": 1,
+      "message": "no init for this anywhere?",
+      "range": {
+        "startLine": 624,
+        "startChar": 19,
+        "endLine": 624,
+        "endChar": 37
+      },
+      "revId": "885ed39f1a32cc2bdf5cc85e45d7281279898341",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce3e86e9_080ff0b8",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2375,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-12-12T18:07:38Z",
+      "side": 1,
+      "message": "check for allocation failure",
+      "range": {
+        "startLine": 2375,
+        "startChar": 1,
+        "endLine": 2375,
+        "endChar": 5
+      },
+      "revId": "885ed39f1a32cc2bdf5cc85e45d7281279898341",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
