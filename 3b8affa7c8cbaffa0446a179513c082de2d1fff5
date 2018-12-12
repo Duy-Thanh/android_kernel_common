@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21af7eda_67d3f574",
+        "filename": "fs/f2fs/data.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1525,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2018-12-12T20:44:09Z",
+      "side": 1,
+      "message": "It doesn\u0027t require other read paths as well in order to match f2fs_read_end_io()?",
+      "range": {
+        "startLine": 1525,
+        "startChar": 1,
+        "endLine": 1525,
+        "endChar": 13
+      },
+      "revId": "3b8affa7c8cbaffa0446a179513c082de2d1fff5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
