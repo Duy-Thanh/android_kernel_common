@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c19e6c0_c7dc785d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2371,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-12-13T21:55:02Z",
+      "side": 1,
+      "message": "warnon thread !\u003d current?",
+      "revId": "b147d30cb37eecfc40cd2ecc45dcea2e0dc751b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87377d0a_7825fd95",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4661,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-12-13T21:55:02Z",
+      "side": 1,
+      "message": "are you sure this can\u0027t trigger? binder_free_thread can be called from any thread and I don\u0027t see anything that delays it while binder_do_fd_close is running",
+      "revId": "b147d30cb37eecfc40cd2ecc45dcea2e0dc751b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
