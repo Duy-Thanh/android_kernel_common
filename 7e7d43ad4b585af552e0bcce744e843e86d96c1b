@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3a96215d_b4a5df87",
+        "filename": "arch/arm64/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-12-13T21:38:09Z",
+      "side": 1,
+      "message": "In the case where the above could be reverted to a warning, then we would need to move them back as well ... Will do non-the-less, but it will not be an obvious revert ...",
+      "parentUuid": "a59c415b_5f8e54be",
+      "revId": "7e7d43ad4b585af552e0bcce744e843e86d96c1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba0bde9a_9e2a9e8c",
         "filename": "arch/arm64/Makefile",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "7e7d43ad4b585af552e0bcce744e843e86d96c1b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24760a50_9b063d93",
+        "filename": "arch/arm64/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-12-13T21:38:09Z",
+      "side": 1,
+      "message": "No, as this is specific to gcc, removing the pedantic cc-name as this obviously confused the situation.",
+      "parentUuid": "ba0bde9a_9e2a9e8c",
+      "revId": "7e7d43ad4b585af552e0bcce744e843e86d96c1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
