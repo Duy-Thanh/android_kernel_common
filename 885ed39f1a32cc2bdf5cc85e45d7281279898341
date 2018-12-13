@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "2e5c438c_951f1d48",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-12-13T16:45:40Z",
+      "side": 1,
+      "message": "...but I do agree that it is better to be explicit so thanks for flagging it.",
+      "parentUuid": "ee6a8b61_269d196a",
+      "range": {
+        "startLine": 624,
+        "startChar": 19,
+        "endLine": 624,
+        "endChar": 37
+      },
+      "revId": "885ed39f1a32cc2bdf5cc85e45d7281279898341",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3e86e9_080ff0b8",
         "filename": "drivers/android/binder.c",
         "patchSetId": 2
