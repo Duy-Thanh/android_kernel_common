@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b85dc780_4daf6f64",
+        "filename": "arch/arm64/kernel/vdso32/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2018-12-14T18:21:50Z",
+      "side": 1,
+      "message": "hard coding gcc? tsk tsk.",
+      "revId": "118520ee3510315382fcab671b758c825cc1c1d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
