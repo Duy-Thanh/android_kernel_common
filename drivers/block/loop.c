@@ -1155,6 +1155,12 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
 
 	if (lo->lo_offset != info->lo_offset ||
 	    lo->lo_sizelimit != info->lo_sizelimit) {
+		struct block_device *bdev = lo->lo_device;
+
+		/* drop stale caches used in old offset */
+		sync_blockdev(bdev);
+		kill_bdev(bdev);
+
 		if (figure_loop_size(lo, info->lo_offset, info->lo_sizelimit)) {
 			err = -EFBIG;
 			goto exit;
@@ -1388,6 +1394,15 @@ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
 	blk_queue_physical_block_size(lo->lo_queue, arg);
 	blk_queue_io_min(lo->lo_queue, arg);
 	loop_update_dio(lo);
+
+	/* Don't change the size if it is same as current */
+	if (lo->lo_queue->limits.logical_block_size != arg) {
+		struct block_device *bdev = lo->lo_device;
+
+		/* drop stale caches likewise set_blocksize */
+		sync_blockdev(bdev);
+		kill_bdev(bdev);
+	}
 
 	blk_mq_unfreeze_queue(lo->lo_queue);
 
