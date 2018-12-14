@@ -69,6 +69,24 @@
       "revId": "b147d30cb37eecfc40cd2ecc45dcea2e0dc751b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e6fd151_aa6ac8d7",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4661,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-12-14T01:53:40Z",
+      "side": 1,
+      "message": "Ok, the version I just uploaded doesn\u0027t rely on this and doesn\u0027t touch the binder_thread at all from the task_work handler. It\u0027s also simplified a bunch. Have a look.",
+      "parentUuid": "ba8e9eb2_e17ead4e",
+      "revId": "b147d30cb37eecfc40cd2ecc45dcea2e0dc751b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
