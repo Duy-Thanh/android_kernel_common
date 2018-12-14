@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d7986afa_e4de6649",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2371,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-12-14T00:20:55Z",
+      "side": 1,
+      "message": "Added.",
+      "parentUuid": "4c19e6c0_c7dc785d",
+      "revId": "b147d30cb37eecfc40cd2ecc45dcea2e0dc751b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "87377d0a_7825fd95",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "b147d30cb37eecfc40cd2ecc45dcea2e0dc751b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba8e9eb2_e17ead4e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4661,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-12-14T00:20:55Z",
+      "side": 1,
+      "message": "Yes, you are right. New version coming that doesn\u0027t rely on this.",
+      "parentUuid": "87377d0a_7825fd95",
+      "revId": "b147d30cb37eecfc40cd2ecc45dcea2e0dc751b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
