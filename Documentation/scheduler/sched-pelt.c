@@ -25,12 +25,12 @@ void calc_runnable_avg_yN_inv(const int halflife)
 		x = ((1UL<<32)-1)*pow(y, i);
 
 		if (i % 4 == 0) printf("\n\t");
-		printf("0x%8x, ", x);
+		printf("0x%8x,", x);
 	}
 	printf("\n};\n\n");
 }
 
-int sum = 1024;
+int sum;
 
 void calc_runnable_avg_yN_sum(const int halflife)
 {
@@ -51,9 +51,8 @@ void calc_runnable_avg_yN_sum(const int halflife)
 	printf("\n};\n\n");
 }
 
-int n = -1;
-/* first period */
-long max = 1024;
+int n;
+long max;
 
 void calc_converged_max(const int halflife)
 {
@@ -107,8 +106,12 @@ void main(void)
 		halflife = hl_value[hl_idx];
 
 		y = pow(0.5, 1/(double)halflife);
+		sum = 1024;
+		/* first period */
+		max = 1024;
+		n = -1;
 
-		printf("#if CONFIG_PELT_UTIL_HALFLIFE_%d\n", halflife);
+		printf("#ifdef CONFIG_PELT_UTIL_HALFLIFE_%d\n", halflife);
 		calc_runnable_avg_yN_inv(halflife);
 		calc_runnable_avg_yN_sum(halflife);
 		calc_converged_max(halflife);
