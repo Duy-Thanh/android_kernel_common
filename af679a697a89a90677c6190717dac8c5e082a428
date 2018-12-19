@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "a69d0810_2521cd1d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2369,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-12-19T20:32:50Z",
+      "side": 1,
+      "message": "will do.",
+      "parentUuid": "32a35832_998624b7",
+      "range": {
+        "startLine": 2366,
+        "startChar": 2,
+        "endLine": 2369,
+        "endChar": 27
+      },
+      "revId": "af679a697a89a90677c6190717dac8c5e082a428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d112caa5_a11903f6",
         "filename": "drivers/android/binder.c",
         "patchSetId": 2
@@ -203,6 +227,30 @@
       "side": 1,
       "message": "I know fd_array is used extensively in the graphics HAL (the native_handle type in particular). But, the majority of the time they just carry one fd in there, so it probably doesn\u0027t matter a lot. I guess we can optimize it later if we need to.",
       "parentUuid": "63577cc8_a455b5c2",
+      "range": {
+        "startLine": 2496,
+        "startChar": 4,
+        "endLine": 2496,
+        "endChar": 33
+      },
+      "revId": "af679a697a89a90677c6190717dac8c5e082a428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e6f3214_3224588f",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2496,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-12-19T20:32:50Z",
+      "side": 1,
+      "message": "No perf issues were surfaced by QC on 32-bit devices or in my testing for arm64, so I think this is ok. We can visit it again if some perf issues come up.",
+      "parentUuid": "63f7f4a1_54547faf",
       "range": {
         "startLine": 2496,
         "startChar": 4,
