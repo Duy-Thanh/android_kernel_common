@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96f77652_f7da4f91",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-12-21T22:29:36Z",
+      "side": 1,
+      "message": "wrong description?",
+      "revId": "98e09fd747391c3dff14aa93b9c75063d5cedf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b85fe5b_df8a177f",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3178,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-12-21T22:29:36Z",
+      "side": 1,
+      "message": "secctx \u003d NULL?",
+      "revId": "98e09fd747391c3dff14aa93b9c75063d5cedf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93d86a95_69ba6336",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3449,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-12-21T22:29:36Z",
+      "side": 1,
+      "message": "if (secctx) security_release_secctx?",
+      "revId": "98e09fd747391c3dff14aa93b9c75063d5cedf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea92f0f4_f04d2964",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4125,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-12-21T22:29:36Z",
+      "side": 1,
+      "message": "I don\u0027t think this needs to be optional. If the default size of tr is the largest version it should work in both cases.",
+      "revId": "98e09fd747391c3dff14aa93b9c75063d5cedf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60e204b3_87f59947",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4342,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-12-21T22:29:36Z",
+      "side": 1,
+      "message": "I think it would be easier for user-space to deal with an extended binder_transaction_data struct than passing security context in a separate command.",
+      "revId": "98e09fd747391c3dff14aa93b9c75063d5cedf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6726c11e_2e0dea88",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4894,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-12-21T22:29:36Z",
+      "side": 1,
+      "message": "I would use a struct flat_binder_object here instead of adding a third way.",
+      "revId": "98e09fd747391c3dff14aa93b9c75063d5cedf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "360ce15e_f7f5e826",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4899,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-12-21T22:29:36Z",
+      "side": 1,
+      "message": "this should not a proc flag.",
+      "revId": "98e09fd747391c3dff14aa93b9c75063d5cedf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
