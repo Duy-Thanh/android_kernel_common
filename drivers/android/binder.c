@@ -359,6 +359,8 @@ struct binder_error {
  *                        (invariant after initialized)
  * @inherit_rt:           inherit RT scheduling policy from caller
  *                        (invariant after initialized)
+ * @txn_security_ctx:     require sender's security context
+ *                        (invariant after initialized)
  * @async_todo:           list of async work items
  *                        (protected by @proc->inner_lock)
  *
@@ -397,6 +399,7 @@ struct binder_node {
 		u8 sched_policy:2;
 		u8 inherit_rt:1;
 		u8 accept_fds:1;
+		u8 txn_security_ctx:1;
 		u8 min_priority;
 	};
 	bool has_async_transaction;
@@ -513,6 +516,8 @@ struct binder_priority {
  * @is_dead:              process is dead and awaiting free
  *                        when outstanding transactions are cleaned up
  *                        (protected by @inner_lock)
+ * @sec_ctx_size:         list of work for this process
+ *                        (invariant after initialized)
  * @todo:                 list of work for this process
  *                        (protected by @inner_lock)
  * @stats:                per-process binder statistics
@@ -555,6 +560,7 @@ struct binder_proc {
 	struct hlist_node deferred_work_node;
 	int deferred_work;
 	bool is_dead;
+	int sec_ctx_size;
 
 	struct list_head todo;
 	struct binder_stats stats;
@@ -654,6 +660,8 @@ struct binder_transaction {
 	struct binder_priority	saved_priority;
 	bool    set_priority_called;
 	kuid_t	sender_euid;
+	binder_uintptr_t security_ctx;
+	u32 security_ctx_size;
 	/**
 	 * @lock:  protects @from, @to_proc, and @to_thread
 	 *
@@ -1363,6 +1371,7 @@ static struct binder_node *binder_init_node_ilocked(
 	node->min_priority = to_kernel_prio(node->sched_policy, priority);
 	node->accept_fds = !!(flags & FLAT_BINDER_FLAG_ACCEPTS_FDS);
 	node->inherit_rt = !!(flags & FLAT_BINDER_FLAG_INHERIT_RT);
+	node->txn_security_ctx = !!(flags & FLAT_BINDER_FLAG_TXN_SECURITY_CTX);
 	spin_lock_init(&node->lock);
 	INIT_LIST_HEAD(&node->work.entry);
 	INIT_LIST_HEAD(&node->async_todo);
@@ -2900,6 +2909,8 @@ static void binder_transaction(struct binder_proc *proc,
 	binder_size_t last_fixup_min_off = 0;
 	struct binder_context *context = proc->context;
 	int t_debug_id = atomic_inc_return(&binder_last_id);
+	char *secctx = NULL;
+	u32 secctx_sz = 0;
 
 	e = binder_transaction_log_add(&binder_transaction_log);
 	e->debug_id = t_debug_id;
@@ -3123,6 +3134,20 @@ static void binder_transaction(struct binder_proc *proc,
 		t->priority = target_proc->default_priority;
 	}
 
+	if (target_node && target_node->txn_security_ctx) {
+		u32 secid;
+
+		security_task_getsecid(proc->tsk, &secid);
+		ret = security_secid_to_secctx(secid, &secctx, &secctx_sz);
+		if (ret) {
+			return_error = BR_FAILED_REPLY;
+			return_error_param = ret;
+			return_error_line = __LINE__;
+			goto err_get_secctx_failed;
+		}
+		extra_buffers_size += ALIGN(secctx_sz, sizeof(u64));
+	}
+
 	trace_binder_transaction(reply, t, target_node);
 
 	t->buffer = binder_alloc_new_buf(&target_proc->alloc, tr->data_size,
@@ -3138,6 +3163,19 @@ static void binder_transaction(struct binder_proc *proc,
 		return_error_line = __LINE__;
 		t->buffer = NULL;
 		goto err_binder_alloc_buf_failed;
+	}
+	if (secctx) {
+		size_t buf_offset = ALIGN(tr->data_size, sizeof(void *)) +
+				    ALIGN(tr->offsets_size, sizeof(void *)) +
+				    ALIGN(extra_buffers_size, sizeof(void *)) -
+				    ALIGN(secctx_sz, sizeof(uint32_t));
+		char *kptr = t->buffer->data + buf_offset;
+
+		t->security_ctx_size = secctx_sz;
+		t->security_ctx = (binder_uintptr_t)kptr +
+		    binder_alloc_get_user_buffer_offset(&target_proc->alloc);
+		memcpy(kptr, secctx, secctx_sz);
+		security_release_secctx(secctx, secctx_sz);
 	}
 	t->buffer->debug_id = t->debug_id;
 	t->buffer->transaction = t;
@@ -3409,6 +3447,7 @@ err_copy_data_failed:
 	t->buffer->transaction = NULL;
 	binder_alloc_free_buf(&target_proc->alloc, t->buffer);
 err_binder_alloc_buf_failed:
+err_get_secctx_failed:
 	kfree(tcomplete);
 	binder_stats_deleted(BINDER_STAT_TRANSACTION_COMPLETE);
 err_alloc_tcomplete_failed:
@@ -4076,7 +4115,14 @@ retry:
 			break;
 		}
 
-		if (end - ptr < sizeof(tr) + 4) {
+		/*
+		 * Make sure there is room in the read buffer for
+		 * a transaction. If this process has requested
+		 * security context for any node, then we need to
+		 * make sure there is also space for the BR_SECURITY_CTX
+		 * command.
+		 */
+		if (end - ptr < sizeof(tr) + 4 + proc->sec_ctx_size) {
 			binder_inner_proc_unlock(proc);
 			break;
 		}
@@ -4290,6 +4336,24 @@ retry:
 					ALIGN(t->buffer->data_size,
 					    sizeof(void *));
 
+		if (t->security_ctx) {
+			void __user *szptr;
+			void __user *ctxptr;
+			u32 sccmd = BR_SECURITY_CTX;
+			u32 scsz = t->security_ctx_size;
+
+			szptr = ptr + sizeof(uint32_t);
+			ctxptr = szptr + sizeof(uint32_t);
+			if (put_user(sccmd, (uint32_t __user *)ptr) ||
+			    put_user(scsz, (uint32_t __user *)szptr) ||
+			    copy_to_user((uint32_t __user *)ctxptr,
+					 &t->security_ctx,
+					 sizeof(binder_uintptr_t))) {
+				binder_cleanup_transaction(t,
+					"copy sec ctx failed", BR_FAILED_REPLY);
+				return -EFAULT;
+			}
+		}
 		if (put_user(cmd, (uint32_t __user *)ptr)) {
 			if (t_from)
 				binder_thread_dec_tmpref(t_from);
@@ -4671,7 +4735,7 @@ out:
 	return ret;
 }
 
-static int binder_ioctl_set_ctx_mgr(struct file *filp)
+static int binder_ioctl_set_ctx_mgr(struct file *filp, uint32_t node_flags)
 {
 	int ret = 0;
 	struct binder_proc *proc = filp->private_data;
@@ -4710,6 +4774,8 @@ static int binder_ioctl_set_ctx_mgr(struct file *filp)
 	new_node->local_strong_refs++;
 	new_node->has_strong_ref = 1;
 	new_node->has_weak_ref = 1;
+	new_node->txn_security_ctx =
+		!!(node_flags & FLAT_BINDER_FLAG_TXN_SECURITY_CTX);
 	context->binder_context_mgr_node = new_node;
 	binder_node_unlock(new_node);
 	binder_put_node(new_node);
@@ -4786,6 +4852,7 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	struct binder_thread *thread;
 	unsigned int size = _IOC_SIZE(cmd);
 	void __user *ubuf = (void __user *)arg;
+	u32 node_flags = 0;
 
 	/*pr_info("binder_ioctl: %d:%d %x %lx\n",
 			proc->pid, current->pid, cmd, arg);*/
@@ -4823,8 +4890,17 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		binder_inner_proc_unlock(proc);
 		break;
 	}
+	case BINDER_SET_CONTEXT_MGR_EXT:
+		if (copy_from_user(&node_flags, ubuf, sizeof(node_flags))) {
+			ret = -EINVAL;
+			goto err;
+		}
+		/* set size of BR_SECURITY_CTX command */
+		proc->sec_ctx_size =
+			2 * sizeof(uint32_t) + sizeof(binder_uintptr_t);
+		/* fall into... */
 	case BINDER_SET_CONTEXT_MGR:
-		ret = binder_ioctl_set_ctx_mgr(filp);
+		ret = binder_ioctl_set_ctx_mgr(filp, node_flags);
 		if (ret)
 			goto err;
 		break;
