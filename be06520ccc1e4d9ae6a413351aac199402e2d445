@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "004e01c4_e07b780d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4098,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-12-22T01:23:23Z",
+      "side": 1,
+      "message": "could you use an unnamed union here and get tr both trs names or an unnamed struct int he header to make the binder_transaction_data_secctx struct src compatible?",
+      "revId": "be06520ccc1e4d9ae6a413351aac199402e2d445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd453a8b_caac8c81",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4723,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-12-22T01:23:23Z",
+      "side": 1,
+      "message": "I would pass the flat_binder_object here and have binder_new_node set the flag",
+      "range": {
+        "startLine": 4723,
+        "startChar": 55,
+        "endLine": 4723,
+        "endChar": 74
+      },
+      "revId": "be06520ccc1e4d9ae6a413351aac199402e2d445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6763ee45_0818ae28",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-12-22T01:23:23Z",
+      "side": 1,
+      "message": "This needs to be a separate return code if you want the encoded size in the opcode to be correct.",
+      "revId": "be06520ccc1e4d9ae6a413351aac199402e2d445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
