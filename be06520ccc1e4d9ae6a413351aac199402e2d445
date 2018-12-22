@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c2222423_70d439a7",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3138,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-12-22T03:23:06Z",
+      "side": 1,
+      "message": "It is the size of the null-terminated string (includes the \u0027\\0\u0027)",
+      "parentUuid": "c677af65_b52f39a6",
+      "revId": "be06520ccc1e4d9ae6a413351aac199402e2d445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "004e01c4_e07b780d",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2018-12-22T01:23:23Z",
       "side": 1,
       "message": "could you use an unnamed union here and get tr both trs names or an unnamed struct int he header to make the binder_transaction_data_secctx struct src compatible?",
+      "revId": "be06520ccc1e4d9ae6a413351aac199402e2d445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd3be2f3_df54932f",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4098,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-12-22T03:23:06Z",
+      "side": 1,
+      "message": "what is the src compatibility issue? Is it just that you\u0027d prefer that everything is referred to by tr.* instead of a combination of tr.* and trd-\u003e* ?",
+      "parentUuid": "004e01c4_e07b780d",
       "revId": "be06520ccc1e4d9ae6a413351aac199402e2d445",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "ab46a7d8_772b8362",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4723,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-12-22T03:23:06Z",
+      "side": 1,
+      "message": "Ok, I\u0027ll change that.",
+      "parentUuid": "cd453a8b_caac8c81",
+      "range": {
+        "startLine": 4723,
+        "startChar": 55,
+        "endLine": 4723,
+        "endChar": 74
+      },
+      "revId": "be06520ccc1e4d9ae6a413351aac199402e2d445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6763ee45_0818ae28",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 3
@@ -70,6 +130,24 @@
       "writtenOn": "2018-12-22T01:23:23Z",
       "side": 1,
       "message": "This needs to be a separate return code if you want the encoded size in the opcode to be correct.",
+      "revId": "be06520ccc1e4d9ae6a413351aac199402e2d445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8608b93d_c0acc538",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-12-22T03:23:06Z",
+      "side": 1,
+      "message": "Ok. I\u0027ll fix that.",
+      "parentUuid": "6763ee45_0818ae28",
       "revId": "be06520ccc1e4d9ae6a413351aac199402e2d445",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
