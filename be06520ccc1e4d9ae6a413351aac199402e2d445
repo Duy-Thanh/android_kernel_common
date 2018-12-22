@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "c677af65_b52f39a6",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3138,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-12-22T01:47:51Z",
+      "side": 1,
+      "message": "Is secctx_sz the string length or the size of the null terminated string?",
+      "revId": "be06520ccc1e4d9ae6a413351aac199402e2d445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "004e01c4_e07b780d",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3
