@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "6a7d1bce_564b31a4",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4098,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-12-27T23:16:49Z",
+      "side": 1,
+      "message": "It would make the patch smaller as you would not have to modify all the references to tr below.",
+      "parentUuid": "bd3be2f3_df54932f",
+      "revId": "be06520ccc1e4d9ae6a413351aac199402e2d445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cd453a8b_caac8c81",
         "filename": "drivers/android/binder.c",
         "patchSetId": 3

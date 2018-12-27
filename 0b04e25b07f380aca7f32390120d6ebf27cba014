@@ -48,6 +48,70 @@
     },
     {
       "key": {
+        "uuid": "058f70d4_a32175b1",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3145,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-12-27T23:16:49Z",
+      "side": 1,
+      "message": "The existing code is already inconsistent. extra_buffers_size is 8 byte aligned, but the start of the extra data is only void* aligned. The code below should be fixed to match though.",
+      "parentUuid": "0fbeae85_ded7e009",
+      "range": {
+        "startLine": 3145,
+        "startChar": 48,
+        "endLine": 3145,
+        "endChar": 51
+      },
+      "revId": "0b04e25b07f380aca7f32390120d6ebf27cba014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b788c2f0_d28cf3dc",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4765,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-12-27T23:16:49Z",
+      "side": 1,
+      "message": "This should not be needed. binder_new_node should set it",
+      "revId": "0b04e25b07f380aca7f32390120d6ebf27cba014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8c3c688_2f7c1ab6",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-12-27T23:16:49Z",
+      "side": 1,
+      "message": "why do you need this is secctx always contains a 0 terminated string?",
+      "range": {
+        "startLine": 338,
+        "startChar": 15,
+        "endLine": 338,
+        "endChar": 26
+      },
+      "revId": "0b04e25b07f380aca7f32390120d6ebf27cba014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41198e09_42648522",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 4
