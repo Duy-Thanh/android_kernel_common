@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dae3722c_607939f2",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3134,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-12-27T15:34:41Z",
+      "side": 1,
+      "message": "I wonder if \u0027!reply\u0027 is more self-documenting here, but I don\u0027t feel strongly either way.",
+      "range": {
+        "startLine": 3134,
+        "startChar": 5,
+        "endLine": 3134,
+        "endChar": 16
+      },
+      "revId": "0b04e25b07f380aca7f32390120d6ebf27cba014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fbeae85_ded7e009",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3145,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-12-27T15:34:41Z",
+      "side": 1,
+      "message": "why u64 here but uint32_t in L3168?",
+      "range": {
+        "startLine": 3145,
+        "startChar": 48,
+        "endLine": 3145,
+        "endChar": 51
+      },
+      "revId": "0b04e25b07f380aca7f32390120d6ebf27cba014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41198e09_42648522",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-12-27T15:34:41Z",
+      "side": 1,
+      "message": "binder_transaction_data_secctx",
+      "range": {
+        "startLine": 457,
+        "startChar": 4,
+        "endLine": 457,
+        "endChar": 27
+      },
+      "revId": "0b04e25b07f380aca7f32390120d6ebf27cba014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
