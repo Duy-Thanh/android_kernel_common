@@ -135,6 +135,23 @@
     },
     {
       "key": {
+        "uuid": "bcaee8b3_f0475a99",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2018-12-28T18:55:40Z",
+      "side": 1,
+      "message": "You can put this next to BR_TRANSACTION and use 2 as the opcode. _IOC_NR(BR_TRANSACTION) would then be equal to _IOC_NR(BR_TRANSACTION_SEC_CTX)",
+      "revId": "0b04e25b07f380aca7f32390120d6ebf27cba014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41198e09_42648522",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 4
