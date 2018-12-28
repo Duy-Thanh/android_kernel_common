@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57907563_d086d9a0",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-12-28T13:04:55Z",
+      "side": 1,
+      "message": "just pass in page_addr here and get rid of user_page_addr?",
+      "range": {
+        "startLine": 266,
+        "startChar": 28,
+        "endLine": 266,
+        "endChar": 42
+      },
+      "revId": "c82c580eca3fd8d78769cea422afcf4185fa863f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
