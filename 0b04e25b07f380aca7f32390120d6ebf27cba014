@@ -72,6 +72,29 @@
     },
     {
       "key": {
+        "uuid": "1b223e5e_c8f9f557",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4378,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-12-28T10:37:13Z",
+      "side": 1,
+      "message": "also need to handle BR_TRANSACTION_SECCTX; also check other uses of BR_TRANSACTION",
+      "range": {
+        "startLine": 4378,
+        "startChar": 6,
+        "endLine": 4378,
+        "endChar": 27
+      },
+      "revId": "0b04e25b07f380aca7f32390120d6ebf27cba014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b788c2f0_d28cf3dc",
         "filename": "drivers/android/binder.c",
         "patchSetId": 4
