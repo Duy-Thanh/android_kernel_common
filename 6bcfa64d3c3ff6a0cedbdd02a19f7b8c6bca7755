@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19ab2798_f30e1afa",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1393,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2019-01-03T23:36:36Z",
+      "side": 1,
+      "message": "why did you move this out of binder_init_node_ilocked?",
+      "revId": "6bcfa64d3c3ff6a0cedbdd02a19f7b8c6bca7755",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6c5161c_0e1593f6",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 4378,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2019-01-03T23:36:36Z",
+      "side": 1,
+      "message": "_IOC_NR(cmd) \u003d\u003d _IOC_NR(BR_TRANSACTION) or cmd !\u003d BR_REPLY would also work",
+      "range": {
+        "startLine": 4378,
+        "startChar": 7,
+        "endLine": 4378,
+        "endChar": 61
+      },
+      "revId": "6bcfa64d3c3ff6a0cedbdd02a19f7b8c6bca7755",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
