@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b977dad1_94f07c96",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3134,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-01-03T23:48:24Z",
+      "side": 1,
+      "message": "I like target_node here since we are immediately deref\u0027ing it. if \"!reply\" then its less obvious that the deref is safe. I guess it depends on what exactly is being \"self-documented\" :).",
+      "parentUuid": "dae3722c_607939f2",
+      "range": {
+        "startLine": 3134,
+        "startChar": 5,
+        "endLine": 3134,
+        "endChar": 16
+      },
+      "revId": "0b04e25b07f380aca7f32390120d6ebf27cba014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0fbeae85_ded7e009",
         "filename": "drivers/android/binder.c",
         "patchSetId": 4
@@ -72,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "ed9c9f27_24b2d606",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3145,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-01-03T23:48:24Z",
+      "side": 1,
+      "message": "u64 here because this is allocating the space that must be u64 aligned as expected by L3210:\n\n\tif (!IS_ALIGNED(extra_buffers_size, sizeof(u64))) {\n\nchanged code below to match.",
+      "parentUuid": "058f70d4_a32175b1",
+      "range": {
+        "startLine": 3145,
+        "startChar": 48,
+        "endLine": 3145,
+        "endChar": 51
+      },
+      "revId": "0b04e25b07f380aca7f32390120d6ebf27cba014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1b223e5e_c8f9f557",
         "filename": "drivers/android/binder.c",
         "patchSetId": 4
@@ -95,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "c33cc1a6_15be3646",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4378,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-01-03T23:48:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b223e5e_c8f9f557",
+      "range": {
+        "startLine": 4378,
+        "startChar": 6,
+        "endLine": 4378,
+        "endChar": 27
+      },
+      "revId": "0b04e25b07f380aca7f32390120d6ebf27cba014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b788c2f0_d28cf3dc",
         "filename": "drivers/android/binder.c",
         "patchSetId": 4
@@ -109,6 +181,24 @@
       "revId": "0b04e25b07f380aca7f32390120d6ebf27cba014",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60b9db4d_cb7a0275",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4765,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-01-03T23:48:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b788c2f0_d28cf3dc",
+      "revId": "0b04e25b07f380aca7f32390120d6ebf27cba014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {

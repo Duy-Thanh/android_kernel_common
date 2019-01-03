@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dc0a0348_10e34390",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1393,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-01-03T23:48:24Z",
+      "side": 1,
+      "message": "you had suggested the move to binder_new_node() in previous comments, but you are right binder_init_node_ilocked() is better. I\u0027ll move it back.",
+      "parentUuid": "19ab2798_f30e1afa",
+      "revId": "6bcfa64d3c3ff6a0cedbdd02a19f7b8c6bca7755",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d6c5161c_0e1593f6",
         "filename": "drivers/android/binder.c",
         "patchSetId": 6
