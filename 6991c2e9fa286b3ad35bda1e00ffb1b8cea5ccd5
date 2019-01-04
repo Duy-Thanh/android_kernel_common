@@ -70,6 +70,24 @@
       "revId": "6991c2e9fa286b3ad35bda1e00ffb1b8cea5ccd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "698f5f3e_162d5b84",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3167,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2019-01-04T23:40:30Z",
+      "side": 1,
+      "message": "I think the existing extra_buffers_size check is odd as the start of the buffer is not 64 bit aligned. If the extra data size passed in is always a multiple of 8 (but does not need 8 byte alignment), then that check is OK, but I don\u0027t see a reason to extend that to secctx_sz.",
+      "parentUuid": "6ef00e4b_1b7db4c2",
+      "revId": "6991c2e9fa286b3ad35bda1e00ffb1b8cea5ccd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
