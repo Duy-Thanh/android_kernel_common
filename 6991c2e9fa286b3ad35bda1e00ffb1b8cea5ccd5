@@ -52,6 +52,24 @@
       "revId": "6991c2e9fa286b3ad35bda1e00ffb1b8cea5ccd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ef00e4b_1b7db4c2",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3167,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-01-04T23:29:12Z",
+      "side": 1,
+      "message": "Well, this was done based on binder_alloc_new_buf_locked() code where:\n\n  data_offsets_size \u003d ALIGN(data_size, sizeof(void *)) + ALIGN(offsets_size, sizeof(void*));\n  size \u003d data_offsets_size + ALIGN(extra_buffers_size, sizeof(void *));\n\nSo the end of the buffer is at:\n  ALIGN(data_size, sizeof(void *)) +\n  ALIGN(offsets_size, sizeof(void *)) +\n  ALIGN(extra_buffers_size, sizeof(void *));\n\nWe added ALIGN(secctx_sz, sizeof(u64)) to extra_buffers_size to make room for this string. We aligned on sizeof(u64) because we know that extra_buffers_size has to be u64 aligned. This is tested in binder_transaction():\n\n  if (!IS_ALIGNED(extra_buffers_size, sizeof(u64))) {\n\nso since we added ALIGN(secctx_sz, sizeof(u64)), that\u0027s what is subtracted to find the beginning of the secctx string area, so we get:\n\n  ALIGN(data_size, sizeof(void *)) +\n  ALIGN(offsets_size, sizeof(void*)) +\n  ALIGN(extra_buffers_size, sizeof(void *) -\n  ALIGN(secctx_sz, sizeof(u64))\n\nwhere do you think I went wrong here?",
+      "parentUuid": "494221b9_6fd6b786",
+      "revId": "6991c2e9fa286b3ad35bda1e00ffb1b8cea5ccd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
