@@ -88,6 +88,24 @@
       "revId": "6991c2e9fa286b3ad35bda1e00ffb1b8cea5ccd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06a5f9e9_233663d9",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3167,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-01-04T23:51:43Z",
+      "side": 1,
+      "message": "Ok, I don\u0027t think we should change the extra_buffers_size checks in this patch. Since there is a check, we need to align to u64 above in line 3144.\n\nSo what do you think is the right thing to do here? Drop the ALIGN() for secctx_sz in this statement?",
+      "parentUuid": "698f5f3e_162d5b84",
+      "revId": "6991c2e9fa286b3ad35bda1e00ffb1b8cea5ccd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
