@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "149d48a9_0161c459",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1393,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-01-04T22:26:19Z",
+      "side": 1,
+      "message": "Yes, I got that from your question. Anyway, I think its right now, agree?",
+      "parentUuid": "548027ab_26b346b8",
+      "revId": "6bcfa64d3c3ff6a0cedbdd02a19f7b8c6bca7755",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6c5161c_0e1593f6",
         "filename": "drivers/android/binder.c",
         "patchSetId": 6

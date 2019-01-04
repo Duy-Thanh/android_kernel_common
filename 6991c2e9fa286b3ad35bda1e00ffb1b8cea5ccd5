@@ -16,6 +16,24 @@
       "revId": "6991c2e9fa286b3ad35bda1e00ffb1b8cea5ccd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "904968ed_ab1f41c0",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3167,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-01-04T22:26:19Z",
+      "side": 1,
+      "message": "The thought here is that by using the 64-bit aligned size, the security context will immediately follow the extra_buffers stuff with the padding on the end. If I don\u0027t use the aligned size, then the alignment padding will be between the extra_buffers stuff and the security context. It doesn\u0027t really matter, but this was my preference. You think its better to pad between extra_buffers and the security context string?",
+      "parentUuid": "134d6f87_f7a27dd7",
+      "revId": "6991c2e9fa286b3ad35bda1e00ffb1b8cea5ccd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
