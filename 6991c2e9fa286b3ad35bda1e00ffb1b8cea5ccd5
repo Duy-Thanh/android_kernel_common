@@ -34,6 +34,24 @@
       "revId": "6991c2e9fa286b3ad35bda1e00ffb1b8cea5ccd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "494221b9_6fd6b786",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3167,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2019-01-04T22:46:38Z",
+      "side": 1,
+      "message": "The location of the padding is not the issue. The amount of padding does not match the allocator size alignment or the buffer start alignment.",
+      "parentUuid": "904968ed_ab1f41c0",
+      "revId": "6991c2e9fa286b3ad35bda1e00ffb1b8cea5ccd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
