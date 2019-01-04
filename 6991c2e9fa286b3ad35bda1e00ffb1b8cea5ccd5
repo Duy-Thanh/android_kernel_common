@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "134d6f87_f7a27dd7",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3167,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2019-01-04T22:07:54Z",
+      "side": 1,
+      "message": "the alignment here is still odd. If extra_buffers really need to be 64 bit aligned then there needs to be an ALIGN(..., sizeof(u64)); around the void * aligned sum of data_size and offsets_size. If it does not need to be 64 bit aligned (which the current implementation implies) then why bother aligning the string size to 64 bits.",
+      "revId": "6991c2e9fa286b3ad35bda1e00ffb1b8cea5ccd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

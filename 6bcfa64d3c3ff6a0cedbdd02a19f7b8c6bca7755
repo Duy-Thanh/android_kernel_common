@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "548027ab_26b346b8",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1393,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2019-01-04T22:07:54Z",
+      "side": 1,
+      "message": "I meant txn_security_ctx should be initialized before binder_new_node returns, not that if had to be done in the body of binder_new_node",
+      "parentUuid": "c5ffaddb_84be2248",
+      "revId": "6bcfa64d3c3ff6a0cedbdd02a19f7b8c6bca7755",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6c5161c_0e1593f6",
         "filename": "drivers/android/binder.c",
         "patchSetId": 6
