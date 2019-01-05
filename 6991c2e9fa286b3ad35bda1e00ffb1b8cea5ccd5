@@ -106,6 +106,24 @@
       "revId": "6991c2e9fa286b3ad35bda1e00ffb1b8cea5ccd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cb77cd4_87b7389a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3167,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2019-01-05T00:04:12Z",
+      "side": 1,
+      "message": "OK. I did not see that that check was after the allocation. If you don\u0027t want to fix that check first, leave it like this.",
+      "parentUuid": "06a5f9e9_233663d9",
+      "revId": "6991c2e9fa286b3ad35bda1e00ffb1b8cea5ccd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
