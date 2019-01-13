@@ -76,7 +76,12 @@ static int chacha20_simd(struct blkcipher_desc *desc, struct scatterlist *dst,
 	state = (u32 *)roundup((uintptr_t)state_buf, CHACHA20_STATE_ALIGN);
 
 	blkcipher_walk_init(&walk, dst, src, nbytes);
+<<<<<<< HEAD   (9e6c14 Merge upstream-f2fs-stable-linux-4.9.y into android-4.9)
 	err = blkcipher_walk_virt_block(desc, &walk, CHACHA_BLOCK_SIZE);
+=======
+	err = blkcipher_walk_virt_block(desc, &walk, CHACHA20_BLOCK_SIZE);
+	desc->flags &= ~CRYPTO_TFM_REQ_MAY_SLEEP;
+>>>>>>> BRANCH (df6062 Linux 4.9.150)
 
 	crypto_chacha_init(state, crypto_blkcipher_ctx(desc->tfm), walk.iv);
 
