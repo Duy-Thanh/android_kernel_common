@@ -290,8 +290,12 @@ static int recover_inode(struct inode *inode, struct page *page)
 	return 0;
 }
 
+<<<<<<< HEAD   (ea0c4f ANDROID: cuttlefish_defconfig: Enable vsock options)
 static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
 				bool check_only)
+=======
+static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head)
+>>>>>>> BRANCH (ef50e3 Linux 4.9.152)
 {
 	struct curseg_info *curseg;
 	struct page *page = NULL;
@@ -325,11 +329,16 @@ static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
 
 		entry = get_fsync_inode(head, ino_of_node(page));
 		if (!entry) {
+<<<<<<< HEAD   (ea0c4f ANDROID: cuttlefish_defconfig: Enable vsock options)
 			bool quota_inode = false;
 
 			if (!check_only &&
 					IS_INODE(page) && is_dent_dnode(page)) {
 				err = f2fs_recover_inode_page(sbi, page);
+=======
+			if (IS_INODE(page) && is_dent_dnode(page)) {
+				err = recover_inode_page(sbi, page);
+>>>>>>> BRANCH (ef50e3 Linux 4.9.152)
 				if (err)
 					break;
 				quota_inode = true;
