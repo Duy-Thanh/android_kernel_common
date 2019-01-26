@@ -13,6 +13,15 @@ config USB_DWC3
 
 if USB_DWC3
 
+config USB_DWC3_DISABLE_GADGET_SG
+	bool "Disable DWC3 scatter-gather on gadget mode"
+	help
+	  On multiple dwc3 based devices, folks have seen hangs
+	  when running adb logcat. The root cause has not been found
+	  to this issue, but it can be worked around by disabling
+	  scatter-gather support in the gadget code.
+
+
 config USB_DWC3_ULPI
 	bool "Register ULPI PHY Interface"
 	depends on USB_ULPI_BUS=y || USB_ULPI_BUS=USB_DWC3

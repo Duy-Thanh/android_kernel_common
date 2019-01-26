@@ -3350,7 +3350,11 @@ int dwc3_gadget_init(struct dwc3 *dwc)
 
 	dwc->gadget.ops			= &dwc3_gadget_ops;
 	dwc->gadget.speed		= USB_SPEED_UNKNOWN;
+#ifdef CONFIG_USB_DWC3_DISABLE_GADGET_SG
+	dwc->gadget.sg_supported        = false;
+#else
 	dwc->gadget.sg_supported	= true;
+#endif
 	dwc->gadget.name		= "dwc3-gadget";
 	dwc->gadget.lpm_capable		= true;
 
