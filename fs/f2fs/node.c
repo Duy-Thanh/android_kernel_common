@@ -825,7 +825,10 @@ static int truncate_node(struct dnode_of_data *dn)
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(dn->inode);
 	struct node_info ni;
+<<<<<<< HEAD   (fe0eb2 Merge 4.9.153 into android-4.9)
 	int err;
+=======
+>>>>>>> BRANCH (a4d0a0 Linux 4.9.154)
 	pgoff_t index;
 
 	err = f2fs_get_node_info(sbi, dn->nid, &ni);

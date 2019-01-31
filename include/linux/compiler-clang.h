@@ -24,6 +24,7 @@
 #undef __noretpoline
 #endif
 
+<<<<<<< HEAD   (fe0eb2 Merge 4.9.153 into android-4.9)
 #ifdef CONFIG_LTO_CLANG
 #ifdef CONFIG_FTRACE_MCOUNT_RECORD
 #define __norecordmcount \
@@ -39,4 +40,18 @@
 /* emulate gcc's __SANITIZE_ADDRESS__ flag */
 #if __has_feature(address_sanitizer)
 #define __SANITIZE_ADDRESS__
+=======
+/*
+ * Not all versions of clang implement the the type-generic versions
+ * of the builtin overflow checkers. Fortunately, clang implements
+ * __has_builtin allowing us to avoid awkward version
+ * checks. Unfortunately, we don't know which version of gcc clang
+ * pretends to be, so the macro may or may not be defined.
+ */
+#undef COMPILER_HAS_GENERIC_BUILTIN_OVERFLOW
+#if __has_builtin(__builtin_mul_overflow) && \
+    __has_builtin(__builtin_add_overflow) && \
+    __has_builtin(__builtin_sub_overflow)
+#define COMPILER_HAS_GENERIC_BUILTIN_OVERFLOW 1
+>>>>>>> BRANCH (a4d0a0 Linux 4.9.154)
 #endif
