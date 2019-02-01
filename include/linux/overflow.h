@@ -202,6 +202,7 @@
 
 #endif /* COMPILER_HAS_GENERIC_BUILTIN_OVERFLOW */
 
+<<<<<<< HEAD   (63d165 ANDROID: sched/rt: fix the problem that rt_rq's util is alwa)
 /**
  * array_size() - Calculate size of 2-dimensional array.
  *
@@ -275,4 +276,6 @@ static inline __must_check size_t __ab_c_size(size_t n, size_t size, size_t c)
 		    sizeof(*(p)->member) + __must_be_array((p)->member),\
 		    sizeof(*(p)))
 
+=======
+>>>>>>> BRANCH (e1e364 Linux 4.14.97)
 #endif /* __LINUX_OVERFLOW_H */

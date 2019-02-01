@@ -825,7 +825,10 @@ static int truncate_node(struct dnode_of_data *dn)
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(dn->inode);
 	struct node_info ni;
+<<<<<<< HEAD   (63d165 ANDROID: sched/rt: fix the problem that rt_rq's util is alwa)
 	int err;
+=======
+>>>>>>> BRANCH (e1e364 Linux 4.14.97)
 	pgoff_t index;
 
 	err = f2fs_get_node_info(sbi, dn->nid, &ni);
