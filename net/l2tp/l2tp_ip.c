@@ -157,7 +157,14 @@ static int l2tp_ip_recv(struct sk_buff *skb)
 		print_hex_dump_bytes("", DUMP_PREFIX_OFFSET, ptr, length);
 	}
 
+<<<<<<< HEAD   (7d0826 BACKPORT: net: dev_is_mac_header_xmit() true for ARPHRD_RAWI)
 	l2tp_recv_common(session, skb, ptr, optr, 0, skb->len);
+=======
+	if (l2tp_v3_ensure_opt_in_linear(session, skb, &ptr, &optr))
+		goto discard_sess;
+
+	l2tp_recv_common(session, skb, ptr, optr, 0, skb->len, tunnel->recv_payload_hook);
+>>>>>>> BRANCH (6ebe34 Linux 4.9.155)
 	l2tp_session_dec_refcount(session);
 
 	return 0;
