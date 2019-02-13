@@ -22,6 +22,30 @@
       "revId": "ee7ead20e30e6fba373c00d1952c17858233607a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9445f5b_24038a55",
+        "filename": "drivers/staging/android/ion/ion_dummy_driver.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-02-13T20:24:12Z",
+      "side": 1,
+      "message": "The trouble though is that the SYSTEM_CONTIG isn\u0027t clearly an invalid heap. The previous ion patch has just stopped supporting it (returning an error).\n\nIf that heap is forever gone, we can rework the other cases, but that isn\u0027t clear.\n\nThe other issue with removing the SYSTEM_CONTIG entry, is that in some cases I believe there is a few cases where we index into the heap by id. Those would need rework and it didn\u0027t seem particularly cleaner",
+      "parentUuid": "0f06fbe0_2132cad2",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 4
+      },
+      "revId": "ee7ead20e30e6fba373c00d1952c17858233607a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
