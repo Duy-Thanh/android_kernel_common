@@ -46,6 +46,30 @@
       "revId": "ee7ead20e30e6fba373c00d1952c17858233607a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b208ddff_d9452c2b",
+        "filename": "drivers/staging/android/ion/ion_dummy_driver.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-02-13T20:35:47Z",
+      "side": 1,
+      "message": "A platform with a real ion implementation/use shouldn\u0027t be hijacking the \u0027dummy_driver\u0027 backend. This code didn\u0027t even exist in older kernels. This implementation exhaustively defines all heaps - and if the system doesn\u0027t use one or more of them, it\u0027s just opening itself up to wasted memory and increased attack surface.",
+      "parentUuid": "e9445f5b_24038a55",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 4
+      },
+      "revId": "ee7ead20e30e6fba373c00d1952c17858233607a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
