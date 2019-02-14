@@ -94,6 +94,30 @@
       "revId": "ee7ead20e30e6fba373c00d1952c17858233607a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "652ee7f1_25de60ad",
+        "filename": "drivers/staging/android/ion/ion_dummy_driver.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-02-14T00:46:10Z",
+      "side": 1,
+      "message": "Ok. I\u0027ve reworked the patch set to remove this chunk.\n\nAdditionally, I\u0027ve provided an alternative patch to switch hikey off the dummy driver here:\nhttps://android-review.googlesource.com/c/kernel/hikey-linaro/+/904675",
+      "parentUuid": "c1221acd_af34c755",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 4
+      },
+      "revId": "ee7ead20e30e6fba373c00d1952c17858233607a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
