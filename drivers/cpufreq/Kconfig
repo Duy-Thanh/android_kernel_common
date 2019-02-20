@@ -234,6 +234,9 @@ config CPUFREQ_DT_PLATDEV
 
 	  If in doubt, say N.
 
+config CPUFREQ_CF
+       bool "Cuttlefish cpufreq driver"
+
 if X86
 source "drivers/cpufreq/Kconfig.x86"
 endif
