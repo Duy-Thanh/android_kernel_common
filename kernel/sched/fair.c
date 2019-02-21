@@ -6976,6 +6976,10 @@ static void select_cpu_candidates(struct sched_domain *sd, cpumask_t *cpus,
 	unsigned int min_exit_lat = UINT_MAX;
 	int cpu, max_spare_cap_cpu;
 	struct cpuidle_state *idle;
+	unsigned long min_cap;
+
+	/* Minimum capacity required by the task */
+	min_cap = uclamp_task(p);
 
 	for (; pd; pd = pd->next) {
 		max_spare_cap_cpu = -1;
@@ -6985,10 +6989,13 @@ static void select_cpu_candidates(struct sched_domain *sd, cpumask_t *cpus,
 			if (!cpumask_test_cpu(cpu, &p->cpus_allowed))
 				continue;
 
-			/* Skip CPUs that will be overutilized. */
+			/*
+			 * Skip CPUs that will be overutilized or not
+			 * providing the min capacity required by the task.
+			 */
 			util = cpu_util_next(cpu, p, cpu);
 			cpu_cap = capacity_of(cpu);
-			if (cpu_cap * 1024 < util * capacity_margin)
+			if (cpu_cap * 1024 < max(min_cap, util) * capacity_margin)
 				continue;
 
 			/*
