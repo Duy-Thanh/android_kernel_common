@@ -21,6 +21,7 @@
 #include <linux/slab.h>
 #include <linux/stat.h>
 #include <linux/string.h>
+#include <linux/trusty/shared_mem.h>
 #include <linux/trusty/smcall.h>
 #include <linux/trusty/sm_err.h>
 #include <linux/trusty/trusty.h>
@@ -48,6 +49,9 @@ struct trusty_state {
 	struct trusty_work __percpu *nop_works;
 	struct list_head nop_queue;
 	spinlock_t nop_lock; /* protects nop_queue */
+	struct trusty_shared_mem_msg *share_memory_msg;
+	u64 share_memory_msg_buf_id;
+	struct mutex share_memory_msg_lock; /* protects share_memory_msg */
 };
 
 #ifdef CONFIG_ARM64
@@ -270,19 +274,58 @@ int trusty_share_memory(struct device *dev, uint64_t *id,
 		goto err_encode_page_info;
 	}
 
-	if (nents != 1) {
-		dev_err(s->dev, "%s: not supported\n", __func__);
-		ret = -ENOTSUPP;
-		goto err_not_contiguous;
+	if (!s->share_memory_msg) {
+		if (nents != 1) {
+			dev_err(s->dev, "%s: not supported\n", __func__);
+			ret = -ENOTSUPP;
+			goto err_not_contiguous;
+		}
+
+		dev_dbg(s->dev, "%s: not supported, fall back to ns_mem_page_info 0x%llx for paddr 0x%llx\n",
+			__func__, pg_inf.attr, sg_dma_address(sg));
+
+		*id = pg_inf.attr;
+
+		return 0;
 	}
 
-	dev_dbg(s->dev, "%s: not supported, fall back to ns_mem_page_info 0x%llx for paddr 0x%llx\n",
-		__func__, pg_inf.attr, sg_dma_address(sg));
+	mutex_lock(&s->share_memory_msg_lock);
 
-	*id = pg_inf.attr;
+	s->share_memory_msg->id = 0;
+	s->share_memory_msg->attr = pg_inf.attr & ~sg_dma_address(sg);
+	s->share_memory_msg->total_page_run_count = nents;
+	s->share_memory_msg->page_run_start = 0;
 
-	return 0;
+	while (count) {
+		size_t i;
+		size_t lcount = min(count, TRUSTY_MSG_MAX_PAGE_RUN_COUNT);
 
+		s->share_memory_msg->page_run_count = lcount;
+		for (i = 0; i < lcount; i++) {
+			s->share_memory_msg->page_runs[i].phys_addr =
+				sg_dma_address(sg);
+			s->share_memory_msg->page_runs[i].size = sg_dma_len(sg);
+			sg = sg_next(sg);
+		}
+		count -= lcount;
+		ret = trusty_std_call32(dev, SMC_SC_MSG_SHARE_MEMORY, 0, 0, 0);
+		if (ret)
+			break;
+		s->share_memory_msg->page_run_start += lcount;
+	}
+
+	if (!ret)
+		*id = s->share_memory_msg->id;
+
+	mutex_unlock(&s->share_memory_msg_lock);
+
+	if (!ret) {
+		dev_dbg(s->dev, "%s: done\n", __func__);
+		return 0;
+	}
+
+	dev_err(s->dev, "%s: SMC_SC_PROCESS_MSG failed %d",
+		__func__, ret);
 err_not_contiguous:
 err_encode_page_info:
 	dma_unmap_sg(dev, sglist, nents, DMA_BIDIRECTIONAL);
@@ -294,6 +337,9 @@ int trusty_revoke_memory(struct device *dev, uint64_t id,
 			 struct scatterlist *sglist, unsigned int nents)
 {
 	struct trusty_state *s = platform_get_drvdata(to_platform_device(dev));
+	int ret;
+	size_t released;
+	struct scatterlist *sg = sglist;
 
 	dev_dbg(s->dev, "%s\n", __func__);
 
@@ -303,9 +349,94 @@ int trusty_revoke_memory(struct device *dev, uint64_t id,
 	if (WARN_ON(nents < 1))
 		return -EINVAL;
 
-	if (nents != 1) {
-		dev_err(s->dev, "%s: not supported\n", __func__);
-		return -ENOTSUPP;
+	if (!s->share_memory_msg) {
+		if (nents != 1) {
+			dev_err(s->dev, "%s: not supported\n", __func__);
+			return -ENOTSUPP;
+		}
+
+		dma_unmap_sg(dev, sglist, nents, DMA_BIDIRECTIONAL);
+
+		return 0;
+	}
+
+	mutex_lock(&s->share_memory_msg_lock);
+
+	released = 0;
+	while (released < nents) {
+		size_t i;
+		size_t lcount;
+
+		s->share_memory_msg->id = id;
+		ret = trusty_std_call32(dev, SMC_SC_MSG_REVOKE_MEMORY, 0, 0, 0);
+		if (ret) {
+			dev_err(s->dev, "%s: SMC_SC_MSG_REVOKE_MEMORY failed %d",
+				__func__, ret);
+			if (ret == SM_ERR_NOT_ALLOWED)
+				ret = -EBUSY;
+			else
+				ret = -EIO;
+			break;
+		}
+
+		if (s->share_memory_msg->id != id) {
+			dev_err(s->dev,
+				"%s: Requested release of id %lld, got %lld, ignore and retry\n",
+				__func__, id, s->share_memory_msg->id);
+			continue;
+		}
+
+		if (s->share_memory_msg->total_page_run_count != nents) {
+			dev_err(s->dev,
+				"%s: id %lld, unexpected total_page_run_count %lld != %lld\n",
+				__func__, id,
+				s->share_memory_msg->total_page_run_count,
+				nents);
+			continue;
+		}
+
+		if (s->share_memory_msg->page_run_start != released) {
+			dev_err(s->dev,
+				"%s: id %lld, unexpected start %lld != %lld\n",
+				__func__, id,
+				s->share_memory_msg->page_run_start, released);
+			continue;
+		}
+		lcount = s->share_memory_msg->page_run_count;
+		if (!lcount || lcount > TRUSTY_MSG_MAX_PAGE_RUN_COUNT) {
+			dev_err(s->dev,
+				"%s: id %lld, bad page run count, %lld\n",
+				__func__, id, lcount);
+			continue;
+		}
+
+		for (i = 0; i < lcount; i++, released++, sg = sg_next(sg)) {
+			if (s->share_memory_msg->page_runs[i].phys_addr !=
+			    sg_dma_address(sg) ||
+			    s->share_memory_msg->page_runs[i].size !=
+			    sg_dma_len(sg)) {
+				dev_err(s->dev,
+					"%s: id %lld, bad page_run/size, 0x%llx %lld != 0x%llx %lld\n",
+					__func__, id,
+				    s->share_memory_msg->page_runs[i].phys_addr,
+					sg_dma_address(sg),
+					s->share_memory_msg->page_runs[i].size,
+					sg_dma_len(sg));
+				break;
+			}
+		}
+	}
+
+	mutex_unlock(&s->share_memory_msg_lock);
+
+	if (ret != 0)
+		return ret;
+
+	if (released != nents) {
+		dev_err(s->dev,
+			"%s: id %lld, failed to release all page runs %zd != %zd\n",
+			__func__, id, released, nents);
+		return -EIO;
 	}
 
 	dma_unmap_sg(dev, sglist, nents, DMA_BIDIRECTIONAL);
@@ -355,6 +486,62 @@ const char *trusty_version_str_get(struct device *dev)
 	return s->version_str;
 }
 EXPORT_SYMBOL(trusty_version_str_get);
+
+static int trusty_init_msg_buf(struct trusty_state *s, struct device *dev)
+{
+	phys_addr_t paddr;
+	int ret;
+
+	BUILD_BUG_ON(sizeof(*s->share_memory_msg) != TRUSTY_MSG_BUF_SIZE);
+
+	s->share_memory_msg = kmalloc(sizeof(*s->share_memory_msg), GFP_KERNEL);
+	if (!s->share_memory_msg)
+		return -ENOMEM;
+
+	paddr = virt_to_phys(s->share_memory_msg);
+	if (WARN_ON(paddr & (TRUSTY_MSG_BUF_SIZE - 1)))
+		goto err_unaligned_buf;
+
+	ret = trusty_call32_mem_buf(dev, SMC_SC_REGISTER_MSG_BUF,
+				    phys_to_page(paddr), TRUSTY_MSG_BUF_SIZE,
+				    PAGE_KERNEL);
+	if (ret) {
+		if (ret == SM_ERR_UNDEFINED_SMC) {
+			ret = 0;
+			dev_notice(dev, "disable share memory api\n");
+		} else {
+			dev_err(dev,
+				"failed to register share memory msg buf, %d\n",
+				ret);
+		}
+		goto err_setup_msg_buf;
+	}
+	s->share_memory_msg_buf_id = s->share_memory_msg->id;
+	return 0;
+
+err_setup_msg_buf:
+err_unaligned_buf:
+	kfree(s->share_memory_msg);
+	s->share_memory_msg = NULL;
+	return ret;
+}
+
+static void trusty_free_msg_buf(struct trusty_state *s, struct device *dev)
+{
+	int ret;
+
+	if (!s->share_memory_msg)
+		return;
+
+	s->share_memory_msg->id = s->share_memory_msg_buf_id;
+
+	ret = trusty_std_call32(dev, SMC_SC_REMOVE_MSG_BUF, 0, 0, 0);
+	if (ret) {
+		dev_err(dev, "failed to remove share memory msg buf, %d\n",
+			ret);
+	}
+	kfree(s->share_memory_msg);
+}
 
 static void trusty_init_version(struct trusty_state *s, struct device *dev)
 {
@@ -548,6 +735,7 @@ static int trusty_probe(struct platform_device *pdev)
 	spin_lock_init(&s->nop_lock);
 	INIT_LIST_HEAD(&s->nop_queue);
 	mutex_init(&s->smc_lock);
+	mutex_init(&s->share_memory_msg_lock);
 	ATOMIC_INIT_NOTIFIER_HEAD(&s->notifier);
 	init_completion(&s->cpu_idle_completion);
 	platform_set_drvdata(pdev, s);
@@ -557,6 +745,10 @@ static int trusty_probe(struct platform_device *pdev)
 	ret = trusty_init_api_version(s, &pdev->dev);
 	if (ret < 0)
 		goto err_api_version;
+
+	ret = trusty_init_msg_buf(s, &pdev->dev);
+	if (ret < 0)
+		goto err_init_msg_buf;
 
 	s->nop_wq = alloc_workqueue("trusty-nop-wq", WQ_CPU_INTENSIVE, 0);
 	if (!s->nop_wq) {
@@ -602,12 +794,15 @@ err_add_children:
 err_alloc_works:
 	destroy_workqueue(s->nop_wq);
 err_create_nop_wq:
+	trusty_free_msg_buf(s, &pdev->dev);
+err_init_msg_buf:
 err_api_version:
 	if (s->version_str) {
 		device_remove_file(&pdev->dev, &dev_attr_trusty_version);
 		kfree(s->version_str);
 	}
 	device_for_each_child(&pdev->dev, NULL, trusty_remove_child);
+	mutex_destroy(&s->share_memory_msg_lock);
 	mutex_destroy(&s->smc_lock);
 	kfree(s);
 err_allocate_state:
@@ -629,7 +824,9 @@ static int trusty_remove(struct platform_device *pdev)
 	free_percpu(s->nop_works);
 	destroy_workqueue(s->nop_wq);
 
+	mutex_destroy(&s->share_memory_msg_lock);
 	mutex_destroy(&s->smc_lock);
+	trusty_free_msg_buf(s, &pdev->dev);
 	if (s->version_str) {
 		device_remove_file(&pdev->dev, &dev_attr_trusty_version);
 		kfree(s->version_str);
