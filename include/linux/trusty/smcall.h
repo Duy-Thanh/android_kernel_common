@@ -82,6 +82,17 @@
  */
 #define SMC_SC_NOP		SMC_STDCALL_NR  (SMC_ENTITY_SECURE_MONITOR, 3)
 
+/**
+ * SMC_SC_SETUP_MSG_BUF - Share memory with trusty
+ *
+ * @r1: Low 32 bits of paddr
+ * @r2: High 32 bit of paddr
+ * @r3: Size
+ */
+#define SMC_SC_SETUP_MSG_BUF	SMC_STDCALL_NR  (SMC_ENTITY_SECURE_MONITOR, 4)
+
+#define SMC_SC_PROCESS_MSG	SMC_STDCALL_NR  (SMC_ENTITY_SECURE_MONITOR, 5)
+
 /*
  * Return from secure os to non-secure os with return value in r1
  */

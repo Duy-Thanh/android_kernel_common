@@ -26,10 +26,28 @@
 #include <linux/trusty/trusty.h>
 
 struct trusty_state;
+static struct platform_driver trusty_driver;
 
 struct trusty_work {
 	struct trusty_state *ts;
 	struct work_struct work;
+};
+
+#define MSG_BUF_SIZE (4096UL)
+#define MAX_PAGE_COUNT (MSG_BUF_SIZE / 8 - 6)
+#define CMD_SHARE_MEM_ADD 1
+#define CMD_SHARE_MEM_REMOVE 2
+#define SHARE_MEMORY_FLAG_WRITE (1U << 1)
+struct trusty_share_memory_msg {
+	u64 cmd;
+	u64 src_id;
+	u64 dest_id;
+	u64 total_page_count;
+	u32 flags;
+	u32 page_size;
+	u32 page_count;
+	u32 page_start;
+	u64 page_addr[MAX_PAGE_COUNT];
 };
 
 struct trusty_state {
@@ -44,6 +62,8 @@ struct trusty_state {
 	struct trusty_work __percpu *nop_works;
 	struct list_head nop_queue;
 	spinlock_t nop_lock; /* protects nop_queue */
+	struct trusty_share_memory_msg *share_memory_msg;
+	struct mutex share_memory_msg_lock;
 };
 
 #ifdef CONFIG_ARM64
@@ -233,6 +253,89 @@ s32 trusty_std_call32(struct device *dev, u32 smcnr, u32 a0, u32 a1, u32 a2)
 }
 EXPORT_SYMBOL(trusty_std_call32);
 
+int trusty_share_memory(struct device *dev, uint64_t *id, phys_addr_t *paddrs,
+			size_t entry_size, size_t count,
+			uint32_t flags)
+{
+	struct trusty_state *s = platform_get_drvdata(to_platform_device(dev));
+	int ret;
+
+	dev_dbg(s->dev, "%s\n", __func__);
+
+	if (WARN_ON(dev->driver != &trusty_driver.driver)) {
+		return -EINVAL;
+	}
+
+	if (!s->share_memory_msg) {
+		struct ns_mem_page_info pg_inf;
+
+		if (count != 1) {
+			dev_err(s->dev, "%s: not supported\n", __func__);
+			return -ENOTSUPP;
+		}
+
+		dev_dbg(s->dev, "%s: not supported, fall back to paddr\n",
+			__func__);
+		ret = trusty_encode_page_info(&pg_inf, phys_to_page(paddrs[0]),
+					      PAGE_KERNEL);
+		if (ret) {
+			dev_err(s->dev, "%s: trusty_encode_page_info failed\n",
+				__func__);
+			return ret;
+		}
+
+		dev_dbg(s->dev, "%s: not supported, fall back to ns_mem_page_info 0x%llx for paddr 0x%llx\n",
+			__func__, pg_inf.attr, paddrs[0]);
+
+		*id = pg_inf.attr;
+
+		return 0;
+	}
+
+	mutex_lock(&s->share_memory_msg_lock);
+
+	s->share_memory_msg->cmd = (flags & TRUSTY_SHARE_MEMORY_REMOVE) ?
+				   CMD_SHARE_MEM_REMOVE : CMD_SHARE_MEM_ADD;
+	s->share_memory_msg->src_id = 0; /* do we need this? */
+	s->share_memory_msg->dest_id = (flags & TRUSTY_SHARE_MEMORY_REMOVE) ?
+				       *id : 0;
+	s->share_memory_msg->total_page_count = count;
+	s->share_memory_msg->flags = (flags & TRUSTY_SHARE_MEMORY_WRITE) ?
+				     SHARE_MEMORY_FLAG_WRITE : 0;
+	s->share_memory_msg->page_size = entry_size;
+	s->share_memory_msg->page_start = 0;
+
+	while (count) {
+		size_t i;
+		size_t lcount = min(count, MAX_PAGE_COUNT);
+		s->share_memory_msg->page_count = lcount;
+		for (i = 0; i < lcount; i++) {
+			s->share_memory_msg->page_addr[i] = *paddrs++;
+		}
+		count -= lcount;
+		ret = trusty_std_call32(dev, SMC_SC_PROCESS_MSG, 0, 0, 0);
+		if (ret)
+			break;
+		s->share_memory_msg->page_start += lcount;
+	}
+
+	if (!ret) {
+		*id = s->share_memory_msg->dest_id;
+	}
+
+	mutex_unlock(&s->share_memory_msg_lock);
+
+	if (ret != 0) {
+		dev_err(s->dev, "%s: SMC_SC_PROCESS_MSG failed %d",
+			__func__, ret);
+		return ret;
+	}
+
+	dev_dbg(s->dev, "%s: done\n", __func__);
+	return 0;
+}
+EXPORT_SYMBOL(trusty_share_memory);
+
 int trusty_call_notifier_register(struct device *dev, struct notifier_block *n)
 {
 	struct trusty_state *s = platform_get_drvdata(to_platform_device(dev));
@@ -273,6 +376,42 @@ const char *trusty_version_str_get(struct device *dev)
 	return s->version_str;
 }
 EXPORT_SYMBOL(trusty_version_str_get);
+
+static int trusty_init_msg_buf(struct trusty_state *s, struct device *dev)
+{
+	phys_addr_t paddr;
+	int ret;
+
+	BUILD_BUG_ON(sizeof(*s->share_memory_msg) != MSG_BUF_SIZE);
+
+	s->share_memory_msg = kmalloc(sizeof(*s->share_memory_msg), GFP_KERNEL);
+	if (!s->share_memory_msg) {
+		dev_err(dev, "failed to allocate share memory msb buf\n");
+		return -ENOMEM;
+	}
+	paddr = virt_to_phys(s->share_memory_msg);
+	BUG_ON(paddr & (MSG_BUF_SIZE - 1));
+
+	ret = trusty_std_call32(dev, SMC_SC_SETUP_MSG_BUF,
+	                        (u32)paddr, paddr >> 32, MSG_BUF_SIZE);
+	if (ret) {
+		if (ret == SM_ERR_UNDEFINED_SMC) {
+			ret = 0;
+			dev_notice(dev, "disable share memory api\n");
+		} else {
+			dev_err(dev,
+				"failed to set up share memory msg buf, %d\n",
+				ret);
+		}
+		goto err_setup_msg_buf;
+	}
+	return 0;
+
+err_setup_msg_buf:
+	kfree(s->share_memory_msg);
+	s->share_memory_msg = NULL;
+	return ret;
+}
 
 static void trusty_init_version(struct trusty_state *s, struct device *dev)
 {
@@ -466,6 +605,7 @@ static int trusty_probe(struct platform_device *pdev)
 	spin_lock_init(&s->nop_lock);
 	INIT_LIST_HEAD(&s->nop_queue);
 	mutex_init(&s->smc_lock);
+	mutex_init(&s->share_memory_msg_lock);
 	ATOMIC_INIT_NOTIFIER_HEAD(&s->notifier);
 	init_completion(&s->cpu_idle_completion);
 	platform_set_drvdata(pdev, s);
@@ -475,6 +615,10 @@ static int trusty_probe(struct platform_device *pdev)
 	ret = trusty_init_api_version(s, &pdev->dev);
 	if (ret < 0)
 		goto err_api_version;
+
+	ret = trusty_init_msg_buf(s, &pdev->dev);
+	if (ret < 0)
+		goto err_init_msg_buf;
 
 	s->nop_wq = alloc_workqueue("trusty-nop-wq", WQ_CPU_INTENSIVE, 0);
 	if (!s->nop_wq) {
@@ -520,12 +664,15 @@ err_add_children:
 err_alloc_works:
 	destroy_workqueue(s->nop_wq);
 err_create_nop_wq:
+	kfree(s->share_memory_msg);
+err_init_msg_buf:
 err_api_version:
 	if (s->version_str) {
 		device_remove_file(&pdev->dev, &dev_attr_trusty_version);
 		kfree(s->version_str);
 	}
 	device_for_each_child(&pdev->dev, NULL, trusty_remove_child);
+	mutex_destroy(&s->share_memory_msg_lock);
 	mutex_destroy(&s->smc_lock);
 	kfree(s);
 err_allocate_state:
@@ -547,7 +694,9 @@ static int trusty_remove(struct platform_device *pdev)
 	free_percpu(s->nop_works);
 	destroy_workqueue(s->nop_wq);
 
+	mutex_destroy(&s->share_memory_msg_lock);
 	mutex_destroy(&s->smc_lock);
+	kfree(s->share_memory_msg);
 	if (s->version_str) {
 		device_remove_file(&pdev->dev, &dev_attr_trusty_version);
 		kfree(s->version_str);

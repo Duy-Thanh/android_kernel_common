@@ -19,6 +19,7 @@ struct tipc_chan;
 struct tipc_msg_buf {
 	void *buf_va;
 	phys_addr_t buf_pa;
+	uint64_t buf_id;
 	size_t buf_sz;
 	size_t wpos;
 	size_t rpos;

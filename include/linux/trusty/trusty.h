@@ -16,6 +16,7 @@
 
 #include <linux/kernel.h>
 #include <linux/trusty/sm_err.h>
+#include <linux/types.h>
 #include <linux/device.h>
 #include <linux/pagemap.h>
 
@@ -68,6 +69,14 @@ int trusty_encode_page_info(struct ns_mem_page_info *inf,
 int trusty_call32_mem_buf(struct device *dev, u32 smcnr,
 			  struct page *page,  u32 size,
 			  pgprot_t pgprot);
+
+#define TRUSTY_SHARE_MEMORY_ADD (0U << 0)
+#define TRUSTY_SHARE_MEMORY_REMOVE (1U << 0)
+#define TRUSTY_SHARE_MEMORY_WRITE (1U << 1)
+typedef uint64_t trusty_shared_mem_id_t;
+int trusty_share_memory(struct device *dev, trusty_shared_mem_id_t *id,
+                        phys_addr_t *paddrs, size_t entry_size, size_t count,
+                        uint32_t flags);
 
 struct trusty_nop {
 	struct list_head node;
