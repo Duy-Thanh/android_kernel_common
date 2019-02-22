@@ -23,6 +23,7 @@
 #include <linux/string.h>
 #include <linux/trusty/smcall.h>
 #include <linux/trusty/sm_err.h>
+#include <linux/trusty/spci.h>
 #include <linux/trusty/trusty.h>
 
 #include <linux/scatterlist.h>
@@ -49,6 +50,11 @@ struct trusty_state {
 	struct list_head nop_queue;
 	spinlock_t nop_lock; /* protects nop_queue */
 	struct device_dma_parameters dma_parms;
+	void *spci_tx;
+	void *spci_rx;
+	u16 spci_local_id;
+	u16 spci_remote_id;
+	struct mutex share_memory_msg_lock; /* protects share_memory_msg */
 };
 
 #ifdef CONFIG_ARM64
@@ -56,40 +62,83 @@ struct trusty_state {
 #define SMC_ARG1		"x1"
 #define SMC_ARG2		"x2"
 #define SMC_ARG3		"x3"
+#define SMC_ARG4		"x4"
+#define SMC_ARG5		"x5"
+#define SMC_ARG6		"x6"
+#define SMC_ARG7		"x7"
 #define SMC_ARCH_EXTENSION	""
-#define SMC_REGISTERS_TRASHED	"x4","x5","x6","x7","x8","x9","x10","x11", \
+#define SMC_REGISTERS_TRASHED	"x8", "x9", "x10", "x11", \
 				"x12","x13","x14","x15","x16","x17"
 #else
 #define SMC_ARG0		"r0"
 #define SMC_ARG1		"r1"
 #define SMC_ARG2		"r2"
 #define SMC_ARG3		"r3"
+#define SMC_ARG4		"r4"
+#define SMC_ARG5		"r5"
+#define SMC_ARG6		"r6"
+#define SMC_ARG7		"r7"
 #define SMC_ARCH_EXTENSION	".arch_extension sec\n"
 #define SMC_REGISTERS_TRASHED	"ip"
 #endif
 
-static inline ulong smc(ulong r0, ulong r1, ulong r2, ulong r3)
+struct smc_ret8 {
+	ulong r0;
+	ulong r1;
+	ulong r2;
+	ulong r3;
+	ulong r4;
+	ulong r5;
+	ulong r6;
+	ulong r7;
+};
+
+static inline struct smc_ret8 smc8(ulong r0, ulong r1, ulong r2, ulong r3,
+				   ulong r4, ulong r5, ulong r6, ulong r7)
 {
 	register ulong _r0 asm(SMC_ARG0) = r0;
 	register ulong _r1 asm(SMC_ARG1) = r1;
 	register ulong _r2 asm(SMC_ARG2) = r2;
 	register ulong _r3 asm(SMC_ARG3) = r3;
+	register ulong _r4 asm(SMC_ARG4) = r4;
+	register ulong _r5 asm(SMC_ARG5) = r5;
+	register ulong _r6 asm(SMC_ARG6) = r6;
+	register ulong _r7 asm(SMC_ARG7) = r7;
 
 	asm volatile(
 		__asmeq("%0", SMC_ARG0)
 		__asmeq("%1", SMC_ARG1)
 		__asmeq("%2", SMC_ARG2)
 		__asmeq("%3", SMC_ARG3)
-		__asmeq("%4", SMC_ARG0)
-		__asmeq("%5", SMC_ARG1)
-		__asmeq("%6", SMC_ARG2)
-		__asmeq("%7", SMC_ARG3)
+		__asmeq("%4", SMC_ARG4)
+		__asmeq("%5", SMC_ARG5)
+		__asmeq("%6", SMC_ARG6)
+		__asmeq("%7", SMC_ARG7)
+		__asmeq("%8", SMC_ARG0)
+		__asmeq("%9", SMC_ARG1)
+		__asmeq("%10", SMC_ARG2)
+		__asmeq("%11", SMC_ARG3)
+		__asmeq("%12", SMC_ARG4)
+		__asmeq("%13", SMC_ARG5)
+		__asmeq("%14", SMC_ARG6)
+		__asmeq("%15", SMC_ARG7)
 		SMC_ARCH_EXTENSION
 		"smc	#0"	/* switch to secure world */
-		: "=r" (_r0), "=r" (_r1), "=r" (_r2), "=r" (_r3)
-		: "r" (_r0), "r" (_r1), "r" (_r2), "r" (_r3)
+		: "=r" (_r0), "=r" (_r1), "=r" (_r2), "=r" (_r3), "=r" (_r4),
+		  "=r" (_r5), "=r" (_r6), "=r" (_r7)
+		: "r" (_r0), "r" (_r1), "r" (_r2), "r" (_r3), "r" (_r4),
+		  "r" (_r5), "r" (_r6), "r" (_r7)
 		: SMC_REGISTERS_TRASHED);
-	return _r0;
+
+	{
+		struct smc_ret8 ret = {_r0, _r1, _r2, _r3, _r4, _r5, _r6, _r7};
+		return ret;
+	}
+}
+
+static inline ulong smc(ulong r0, ulong r1, ulong r2, ulong r3)
+{
+	return smc8(r0, r1, r2, r3, 0, 0, 0, 0).r0;
 }
 
 s32 trusty_fast_call32(struct device *dev, u32 smcnr, u32 a0, u32 a1, u32 a2)
@@ -254,6 +303,17 @@ int trusty_share_memory(struct device *dev, uint64_t *id,
 	struct ns_mem_page_info pg_inf;
 	struct scatterlist *sg;
 	size_t count;
+	unsigned int i;
+	size_t len;
+	u32 spci_handle = 0;
+	u16 spci_mem_attr;
+	size_t spci_len_arg;
+	struct spci_memory_region_descriptor *mrd = s->spci_tx;
+	size_t cmrd_offset = offsetof(struct spci_memory_region_descriptor,
+				      memory_region_attributes_descriptors[1]);
+	struct spci_constituent_memory_region_descriptor *cmrd = s->spci_tx +
+								 cmrd_offset;
+	struct smc_ret8 smc_ret;
 
 	dev_dbg(s->dev, "%s\n", __func__);
 
@@ -263,8 +323,9 @@ int trusty_share_memory(struct device *dev, uint64_t *id,
 	if (WARN_ON(nents < 1))
 		return -EINVAL;
 
-	if (nents != 1) {
-		dev_err(s->dev, "%s: not supported\n", __func__);
+	if (nents != 1 && s->api_version < TRUSTY_API_VERSION_MEM_OBJ) {
+		dev_err(s->dev, "%s: old trusty version does not support non-contiguous memory objects\n",
+			__func__);
 		return -ENOTSUPP;
 	}
 
@@ -283,12 +344,91 @@ int trusty_share_memory(struct device *dev, uint64_t *id,
 		goto err_encode_page_info;
 	}
 
-	dev_dbg(s->dev, "%s: not supported, fall back to ns_mem_page_info 0x%llx for paddr 0x%llx\n",
-		__func__, pg_inf.attr, sg_dma_address(sg));
+	if (s->api_version < TRUSTY_API_VERSION_MEM_OBJ) {
+		*id = pg_inf.attr;
+		return 0;
+	}
 
-	*id = pg_inf.attr;
+	len = 0;
+	for_each_sg(sglist, sg, nents, i)
+		len += sg_dma_len(sg);
 
-	return 0;
+	mutex_lock(&s->share_memory_msg_lock);
+
+	mrd->tag = 0;
+	mrd->flags = 0;
+	mrd->sender_id = s->spci_local_id;
+	mrd->reserved = 0;
+	mrd->total_page_count = len / PAGE_SIZE;
+	mrd->constituent_memory_region_count = nents;
+	mrd->constituent_memory_region_descriptor_offset = cmrd_offset;
+	mrd->memory_region_attributes_descriptor_count = 1;
+	mrd->memory_region_attributes_descriptors[0].receiver_id =
+		s->spci_remote_id;
+
+	/* TODO: move to helper, e.g. trusty_encode_page_info */
+	spci_mem_attr = SPCI_MEM_ATTR_NORMAL_MEMORY_CACHED_WB |
+			SPCI_MEM_ATTR_INNER_SHAREABLE;
+	if (!(pg_inf.attr & (1 << 7)))
+		spci_mem_attr |= SPCI_MEM_ATTR_RW;
+
+	mrd->memory_region_attributes_descriptors[0].memory_attributes =
+		spci_mem_attr;
+
+	spci_len_arg = cmrd_offset + nents * sizeof(*cmrd);
+	sg = sglist;
+	while (count) {
+		size_t i;
+		size_t lcount = min(count,
+				    (PAGE_SIZE - cmrd_offset) / sizeof(*cmrd));
+		size_t fragment_len = lcount * sizeof(*cmrd) + cmrd_offset;
+
+		for (i = 0; i < lcount; i++) {
+			cmrd[i].address = sg_dma_address(sg);
+			cmrd[i].page_count = sg_dma_len(sg) / PAGE_SIZE;
+			sg = sg_next(sg);
+		}
+		count -= lcount;
+		smc_ret = smc8(SMC_FC_SPCI_MEM_SHARE, 0, 0, fragment_len,
+			       spci_len_arg, 0, 0, 0);
+		if (smc_ret.r0 == SMC_FC_SPCI_SUCCESS) {
+			dev_dbg(s->dev, "%s: fragment_len %zd/%zd, got handle 0x%lx\n",
+				__func__, fragment_len, spci_len_arg,
+				smc_ret.r2);
+			if (cmrd_offset) {
+				spci_handle = smc_ret.r2;
+			} else if (smc_ret.r2 != spci_handle) {
+				dev_err(s->dev, "%s: fragment_len %zd/%zd, handle mismatch 0x%lx != 0x%x\n",
+					__func__, fragment_len, spci_len_arg,
+					smc_ret.r2, spci_handle);
+			}
+		} else {
+			dev_err(s->dev, "%s: SMC_FC_SPCI_MEM_SHARE failed 0x%x 0x%x 0x%x",
+				__func__, smc_ret.r0, smc_ret.r1, smc_ret.r2);
+			break;
+		}
+
+		cmrd = s->spci_tx;
+		cmrd_offset = 0;
+		spci_len_arg = 0;
+	}
+
+	count = nents;
+
+	ret = trusty_std_call32(dev, SMC_SC_MSG_SHARE_MEMORY, spci_handle,
+				spci_mem_attr, 0);
+	if (!ret)
+		*id = spci_handle | (u64)spci_mem_attr << 32;
+
+	mutex_unlock(&s->share_memory_msg_lock);
+
+	if (!ret) {
+		dev_dbg(s->dev, "%s: done\n", __func__);
+		return 0;
+	}
+
+	dev_err(s->dev, "%s: SMC_SC_MSG_SHARE_MEMORY failed %d",
+		__func__, ret);
 
 err_encode_page_info:
 	dma_unmap_sg(dev, sglist, nents, DMA_BIDIRECTIONAL);
@@ -322,6 +462,8 @@ int trusty_reclaim_memory(struct device *dev, uint64_t id,
 			  struct scatterlist *sglist, unsigned int nents)
 {
 	struct trusty_state *s = platform_get_drvdata(to_platform_device(dev));
+	int ret;
+	struct smc_ret8 smc_ret;
 
 	dev_dbg(s->dev, "%s\n", __func__);
 
@@ -331,10 +473,46 @@ int trusty_reclaim_memory(struct device *dev, uint64_t id,
 	if (WARN_ON(nents < 1))
 		return -EINVAL;
 
-	if (nents != 1) {
-		dev_err(s->dev, "%s: not supported\n", __func__);
-		return -ENOTSUPP;
+	if (s->api_version < TRUSTY_API_VERSION_MEM_OBJ) {
+		if (nents != 1) {
+			dev_err(s->dev, "%s: not supported\n", __func__);
+			return -ENOTSUPP;
+		}
+
+		dma_unmap_sg(dev, sglist, nents, DMA_BIDIRECTIONAL);
+
+		dev_dbg(s->dev, "%s: done\n", __func__);
+		return 0;
 	}
+
+	mutex_lock(&s->share_memory_msg_lock);
+
+	ret = trusty_std_call32(dev, SMC_SC_MSG_REVOKE_MEMORY, (u32)id,
+				id >> 32, 0);
+	if (ret) {
+		dev_err(s->dev, "%s: SMC_SC_MSG_REVOKE_MEMORY failed %d",
+			__func__, ret);
+		if (ret == SM_ERR_NOT_ALLOWED)
+			ret = -EBUSY;
+		else
+			ret = -EIO;
+	}
+
+	smc_ret = smc8(SMC_FC_SPCI_MEM_RECLAIM, id, 0, 0, 0, 0, 0, 0);
+	if (smc_ret.r0 != SMC_FC_SPCI_SUCCESS) {
+		dev_err(s->dev, "%s: SMC_FC_SPCI_MEM_RECLAIM failed 0x%x 0x%x 0x%x",
+			__func__, smc_ret.r0, smc_ret.r1, smc_ret.r2);
+		if (smc_ret.r0 == SMC_FC_SPCI_ERROR &&
+		    smc_ret.r2 == SPCI_ERROR_DENIED)
+			ret = -EBUSY;
+		else
+			ret = -EIO;
+	}
+
+	mutex_unlock(&s->share_memory_msg_lock);
+
+	if (ret != 0)
+		return ret;
 
 	dma_unmap_sg(dev, sglist, nents, DMA_BIDIRECTIONAL);
 
@@ -383,6 +561,94 @@ const char *trusty_version_str_get(struct device *dev)
 	return s->version_str;
 }
 EXPORT_SYMBOL(trusty_version_str_get);
+
+static int trusty_init_msg_buf(struct trusty_state *s, struct device *dev)
+{
+	phys_addr_t tx_paddr;
+	phys_addr_t rx_paddr;
+	int ret;
+	struct smc_ret8 smc_ret;
+
+	if (s->api_version < TRUSTY_API_VERSION_MEM_OBJ)
+		return 0;
+
+	/*
+	 * Set SPCI endpoint IDs.
+	 *
+	 * Hardcode 0x8000 for the secure os.
+	 * TODO: Use SPCI call or device tree to configure this dynamically
+	 */
+	smc_ret = smc8(SMC_FC_SPCI_ID_GET, 0, 0, 0, 0, 0, 0,
+		       0);
+	if (smc_ret.r0 != SMC_FC_SPCI_SUCCESS) {
+		dev_err(s->dev, "%s: SMC_FC_SPCI_ID_GET failed 0x%x 0x%x 0x%x",
+			__func__, smc_ret.r0, smc_ret.r1, smc_ret.r2);
+		ret = -EIO;
+		goto err_id_get;
+	}
+
+	s->spci_local_id = smc_ret.r2;
+	s->spci_remote_id = 0x8000;
+
+	s->spci_tx = kmalloc(PAGE_SIZE, GFP_KERNEL);
+	if (!s->spci_tx) {
+		ret = -ENOMEM;
+		goto err_alloc_tx;
+	}
+	tx_paddr = virt_to_phys(s->spci_tx);
+	if (WARN_ON(tx_paddr & (PAGE_SIZE - 1))) {
+		ret = -EINVAL;
+		goto err_unaligned_tx_buf;
+	}
+
+	s->spci_rx = kmalloc(PAGE_SIZE, GFP_KERNEL);
+	if (!s->spci_rx) {
+		ret = -ENOMEM;
+		goto err_alloc_rx;
+	}
+	rx_paddr = virt_to_phys(s->spci_rx);
+	if (WARN_ON(rx_paddr & (PAGE_SIZE - 1))) {
+		ret = -EINVAL;
+		goto err_unaligned_rx_buf;
+	}
+
+	smc_ret = smc8(SMC_FC64_SPCI_RXTX_MAP, tx_paddr, rx_paddr, 1, 0, 0, 0,
+		       0);
+	if (smc_ret.r0 != SMC_FC_SPCI_SUCCESS) {
+		dev_err(s->dev, "%s: SMC_FC64_SPCI_RXTX_MAP failed 0x%x 0x%x 0x%x",
+			__func__, smc_ret.r0, smc_ret.r1, smc_ret.r2);
+		ret = -EIO;
+		goto err_rxtx_map;
+	}
+
+	return 0;
+
+err_rxtx_map:
+err_unaligned_rx_buf:
+	kfree(s->spci_rx);
+	s->spci_rx = NULL;
+err_alloc_rx:
+err_unaligned_tx_buf:
+	kfree(s->spci_tx);
+	s->spci_tx = NULL;
+err_alloc_tx:
+err_id_get:
+	return ret;
+}
+
+static void trusty_free_msg_buf(struct trusty_state *s, struct device *dev)
+{
+	struct smc_ret8 smc_ret;
+
+	smc_ret = smc8(SMC_FC_SPCI_RXTX_UNMAP, 0, 0, 0, 0, 0, 0, 0);
+	if (smc_ret.r0 != SMC_FC_SPCI_SUCCESS) {
+		dev_err(s->dev, "%s: SMC_FC_SPCI_RXTX_UNMAP failed 0x%x 0x%x 0x%x",
+			__func__, smc_ret.r0, smc_ret.r1, smc_ret.r2);
+	} else {
+		kfree(s->spci_rx);
+		kfree(s->spci_tx);
+	}
+}
 
 static void trusty_init_version(struct trusty_state *s, struct device *dev)
 {
@@ -586,6 +852,7 @@ static int trusty_probe(struct platform_device *pdev)
 	spin_lock_init(&s->nop_lock);
 	INIT_LIST_HEAD(&s->nop_queue);
 	mutex_init(&s->smc_lock);
+	mutex_init(&s->share_memory_msg_lock);
 	ATOMIC_INIT_NOTIFIER_HEAD(&s->notifier);
 	init_completion(&s->cpu_idle_completion);
 
@@ -599,6 +866,10 @@ static int trusty_probe(struct platform_device *pdev)
 	ret = trusty_init_api_version(s, &pdev->dev);
 	if (ret < 0)
 		goto err_api_version;
+
+	ret = trusty_init_msg_buf(s, &pdev->dev);
+	if (ret < 0)
+		goto err_init_msg_buf;
 
 	s->nop_wq = alloc_workqueue("trusty-nop-wq", WQ_CPU_INTENSIVE, 0);
 	if (!s->nop_wq) {
@@ -644,6 +915,8 @@ err_add_children:
 err_alloc_works:
 	destroy_workqueue(s->nop_wq);
 err_create_nop_wq:
+	trusty_free_msg_buf(s, &pdev->dev);
+err_init_msg_buf:
 err_api_version:
 	s->dev->dma_parms = NULL;
 	if (s->version_str) {
@@ -651,6 +924,7 @@ err_api_version:
 		kfree(s->version_str);
 	}
 	device_for_each_child(&pdev->dev, NULL, trusty_remove_child);
+	mutex_destroy(&s->share_memory_msg_lock);
 	mutex_destroy(&s->smc_lock);
 	kfree(s);
 err_allocate_state:
@@ -672,7 +946,9 @@ static int trusty_remove(struct platform_device *pdev)
 	free_percpu(s->nop_works);
 	destroy_workqueue(s->nop_wq);
 
+	mutex_destroy(&s->share_memory_msg_lock);
 	mutex_destroy(&s->smc_lock);
+	trusty_free_msg_buf(s, &pdev->dev);
 	s->dev->dma_parms = NULL;
 	if (s->version_str) {
 		device_remove_file(&pdev->dev, &dev_attr_trusty_version);

@@ -32,10 +32,10 @@
 #define SMC_ENTITY(smc_nr)	(((smc_nr) & 0x3F000000) >> 24)
 #define SMC_FUNCTION(smc_nr)	((smc_nr) & 0x0000FFFF)
 
-#define SMC_NR(entity, fn, fastcall, smc64) ((((fastcall) & 0x1) << 31) | \
-					     (((smc64) & 0x1) << 30) | \
-					     (((entity) & 0x3F) << 24) | \
-					     ((fn) & 0xFFFF) \
+#define SMC_NR(entity, fn, fastcall, smc64) ((((fastcall) & 0x1U) << 31) | \
+					     (((smc64) & 0x1U) << 30) | \
+					     (((entity) & 0x3FU) << 24) | \
+					     ((fn) & 0xFFFFU) \
 					    )
 
 #define SMC_FASTCALL_NR(entity, fn)	SMC_NR((entity), (fn), 1, 0)
@@ -83,6 +83,29 @@
  */
 #define SMC_SC_NOP		SMC_STDCALL_NR  (SMC_ENTITY_SECURE_MONITOR, 3)
 
+/**
+ * SMC_SC_MSG_SHARE_MEMORY - Add shared memory
+ * @r1: Shared memory handle previously returned from SPCI_MEM_SHARE.
+ * @r2: Memory attributes previously passed to SPCI_MEM_SHARE.
+ *
+ * Creates a shared memory region with id (@r2 << 32 | @r1).
+ *
+ * Return: 0 on success or error code.
+ */
+#define SMC_SC_MSG_SHARE_MEMORY SMC_STDCALL_NR(SMC_ENTITY_SECURE_MONITOR, 6)
+
+/**
+ * SMC_SC_MSG_REVOKE_MEMORY - Add revoke shared memory request.
+ * @r1: Low 32 bits of shared memory object id (or SPCI memory handle).
+ * @r2: High 32 bits of shared memory object id (or SPCI Memory attributes).
+ *
+ * Remove shared memory region.
+ *
+ * Return: 0 on success or error code. SM_ERR_NOT_ALLOWED if memory object is
+ * still in use.
+ */
+#define SMC_SC_MSG_REVOKE_MEMORY SMC_STDCALL_NR(SMC_ENTITY_SECURE_MONITOR, 7)
+
 /*
  * Return from secure os to non-secure os with return value in r1
  */
@@ -128,7 +151,8 @@
 #define TRUSTY_API_VERSION_SMP		(2)
 #define TRUSTY_API_VERSION_SMP_NOP	(3)
 #define TRUSTY_API_VERSION_PHYS_MEM_OBJ	(4)
-#define TRUSTY_API_VERSION_CURRENT	(4)
+#define TRUSTY_API_VERSION_MEM_OBJ	(5)
+#define TRUSTY_API_VERSION_CURRENT	(5)
 #define SMC_FC_API_VERSION	SMC_FASTCALL_NR (SMC_ENTITY_SECURE_MONITOR, 11)
 
 #define SMC_FC_FIQ_RESUME	SMC_FASTCALL_NR (SMC_ENTITY_SECURE_MONITOR, 12)
