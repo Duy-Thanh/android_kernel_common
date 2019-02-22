@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8fded76a_2f639dc0",
+        "filename": "fs/overlayfs/super.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1252,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-02-22T20:13:43Z",
+      "side": 1,
+      "message": "wtf, move into ovl_parse_opt",
+      "range": {
+        "startLine": 1252,
+        "startChar": 0,
+        "endLine": 1252,
+        "endChar": 49
+      },
+      "revId": "743d538a99ea72a3cd65ffb32cfc5fd1bf801fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
