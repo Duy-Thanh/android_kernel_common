@@ -84,30 +84,11 @@
 #define SMC_SC_NOP		SMC_STDCALL_NR  (SMC_ENTITY_SECURE_MONITOR, 3)
 
 /**
- * SMC_SC_REGISTER_MSG_BUF - Register message buffer used by shared memory msg.
- * @r1: Low 32 bits of paddr/attr
- * @r2: High 32 bit of paddr/attr
- * @r3: Size
- *
- * Register message buffer and return id in @struct trusty_share_memory_msg.id.
- *
- * Return: 0 on success or error code.
- */
-#define SMC_SC_REGISTER_MSG_BUF SMC_STDCALL_NR(SMC_ENTITY_SECURE_MONITOR, 4)
-
-/**
- * SMC_SC_REMOVE_MSG_BUF - Remove message buffer.
- *
- * Remove message buffer. Id is passed in @struct trusty_share_memory_msg.id.
- *
- * Return: 0 on success or error code.
- */
-#define SMC_SC_REMOVE_MSG_BUF SMC_STDCALL_NR(SMC_ENTITY_SECURE_MONITOR, 5)
-
-/**
  * SMC_SC_MSG_SHARE_MEMORY - Add shared memory
+ * @r1: Shared memory handle previously returned from SPCI_MEM_SHARE.
+ * @r2: Memory attributes previously passed to SPCI_MEM_SHARE.
  *
- * Add shared memory region described in @struct trusty_share_memory_msg.
+ * Creates a shared memory region with id (@r2 << 32 | @r1).
  *
  * Return: 0 on success or error code.
  */
@@ -115,14 +96,13 @@
 
 /**
  * SMC_SC_MSG_REVOKE_MEMORY - Add revoke shared memory request.
+ * @r1: Low 32 bits of shared memory object id (or SPCI memory handle).
+ * @r2: High 32 bits of shared memory object id (or SPCI Memory attributes).
  *
- * Remove shared memory region identified by @struct trusty_share_memory_msg.id.
- * Response list all pages in region and call must be repeated until a message
- * with (@struct trusty_share_memory_msg.page_run_start +
- * @struct trusty_share_memory_msg.page_run_count ==
- * @struct trusty_share_memory_msg.total_page_run_count) is returned.
+ * Remove shared memory region.
  *
- * Return: 0 on success or error code.
+ * Return: 0 on success or error code. SM_ERR_NOT_ALLOWED if memory object is
+ * still in use.
  */
 #define SMC_SC_MSG_REVOKE_MEMORY SMC_STDCALL_NR(SMC_ENTITY_SECURE_MONITOR, 7)
 

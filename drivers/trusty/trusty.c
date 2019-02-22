@@ -21,9 +21,9 @@
 #include <linux/slab.h>
 #include <linux/stat.h>
 #include <linux/string.h>
-#include <linux/trusty/shared_mem.h>
 #include <linux/trusty/smcall.h>
 #include <linux/trusty/sm_err.h>
+#include <linux/trusty/spci.h>
 #include <linux/trusty/trusty.h>
 
 #include <linux/scatterlist.h>
@@ -50,8 +50,10 @@ struct trusty_state {
 	struct list_head nop_queue;
 	spinlock_t nop_lock; /* protects nop_queue */
 	struct device_dma_parameters dma_parms;
-	struct trusty_shared_mem_msg *share_memory_msg;
-	u64 share_memory_msg_buf_id;
+	void *spci_tx;
+	void *spci_rx;
+	u16 spci_local_id;
+	u16 spci_remote_id;
 	struct mutex share_memory_msg_lock; /* protects share_memory_msg */
 };
 
@@ -60,40 +62,83 @@ struct trusty_state {
 #define SMC_ARG1		"x1"
 #define SMC_ARG2		"x2"
 #define SMC_ARG3		"x3"
+#define SMC_ARG4		"x4"
+#define SMC_ARG5		"x5"
+#define SMC_ARG6		"x6"
+#define SMC_ARG7		"x7"
 #define SMC_ARCH_EXTENSION	""
-#define SMC_REGISTERS_TRASHED	"x4","x5","x6","x7","x8","x9","x10","x11", \
+#define SMC_REGISTERS_TRASHED	"x8", "x9", "x10", "x11", \
 				"x12","x13","x14","x15","x16","x17"
 #else
 #define SMC_ARG0		"r0"
 #define SMC_ARG1		"r1"
 #define SMC_ARG2		"r2"
 #define SMC_ARG3		"r3"
+#define SMC_ARG4		"r4"
+#define SMC_ARG5		"r5"
+#define SMC_ARG6		"r6"
+#define SMC_ARG7		"r7"
 #define SMC_ARCH_EXTENSION	".arch_extension sec\n"
 #define SMC_REGISTERS_TRASHED	"ip"
 #endif
 
-static inline ulong smc(ulong r0, ulong r1, ulong r2, ulong r3)
+struct smc_ret8 {
+	ulong r0;
+	ulong r1;
+	ulong r2;
+	ulong r3;
+	ulong r4;
+	ulong r5;
+	ulong r6;
+	ulong r7;
+};
+
+static inline struct smc_ret8 smc8(ulong r0, ulong r1, ulong r2, ulong r3,
+				   ulong r4, ulong r5, ulong r6, ulong r7)
 {
 	register ulong _r0 asm(SMC_ARG0) = r0;
 	register ulong _r1 asm(SMC_ARG1) = r1;
 	register ulong _r2 asm(SMC_ARG2) = r2;
 	register ulong _r3 asm(SMC_ARG3) = r3;
+	register ulong _r4 asm(SMC_ARG4) = r4;
+	register ulong _r5 asm(SMC_ARG5) = r5;
+	register ulong _r6 asm(SMC_ARG6) = r6;
+	register ulong _r7 asm(SMC_ARG7) = r7;
 
 	asm volatile(
 		__asmeq("%0", SMC_ARG0)
 		__asmeq("%1", SMC_ARG1)
 		__asmeq("%2", SMC_ARG2)
 		__asmeq("%3", SMC_ARG3)
-		__asmeq("%4", SMC_ARG0)
-		__asmeq("%5", SMC_ARG1)
-		__asmeq("%6", SMC_ARG2)
-		__asmeq("%7", SMC_ARG3)
+		__asmeq("%4", SMC_ARG4)
+		__asmeq("%5", SMC_ARG5)
+		__asmeq("%6", SMC_ARG6)
+		__asmeq("%7", SMC_ARG7)
+		__asmeq("%8", SMC_ARG0)
+		__asmeq("%9", SMC_ARG1)
+		__asmeq("%10", SMC_ARG2)
+		__asmeq("%11", SMC_ARG3)
+		__asmeq("%12", SMC_ARG4)
+		__asmeq("%13", SMC_ARG5)
+		__asmeq("%14", SMC_ARG6)
+		__asmeq("%15", SMC_ARG7)
 		SMC_ARCH_EXTENSION
 		"smc	#0"	/* switch to secure world */
-		: "=r" (_r0), "=r" (_r1), "=r" (_r2), "=r" (_r3)
-		: "r" (_r0), "r" (_r1), "r" (_r2), "r" (_r3)
+		: "=r" (_r0), "=r" (_r1), "=r" (_r2), "=r" (_r3), "=r" (_r4),
+		  "=r" (_r5), "=r" (_r6), "=r" (_r7)
+		: "r" (_r0), "r" (_r1), "r" (_r2), "r" (_r3), "r" (_r4),
+		  "r" (_r5), "r" (_r6), "r" (_r7)
 		: SMC_REGISTERS_TRASHED);
-	return _r0;
+
+	{
+		struct smc_ret8 ret = {_r0, _r1, _r2, _r3, _r4, _r5, _r6, _r7};
+		return ret;
+	}
+}
+
+static inline ulong smc(ulong r0, ulong r1, ulong r2, ulong r3)
+{
+	return smc8(r0, r1, r2, r3, 0, 0, 0, 0).r0;
 }
 
 s32 trusty_fast_call32(struct device *dev, u32 smcnr, u32 a0, u32 a1, u32 a2)
@@ -258,6 +303,17 @@ int trusty_share_memory(struct device *dev, uint64_t *id,
 	struct ns_mem_page_info pg_inf;
 	struct scatterlist *sg;
 	size_t count;
+	unsigned int i;
+	size_t len;
+	u32 spci_handle = 0;
+	u16 spci_mem_attr;
+	size_t spci_len_arg;
+	struct spci_memory_region_descriptor *mrd = s->spci_tx;
+	size_t cmrd_offset = offsetof(struct spci_memory_region_descriptor,
+				      memory_region_attributes_descriptors[1]);
+	struct spci_constituent_memory_region_descriptor *cmrd = s->spci_tx +
+								 cmrd_offset;
+	struct smc_ret8 smc_ret;
 
 	dev_dbg(s->dev, "%s\n", __func__);
 
@@ -268,7 +324,7 @@ int trusty_share_memory(struct device *dev, uint64_t *id,
 		return -EINVAL;
 
 	count = dma_map_sg(dev, sglist, nents, DMA_BIDIRECTIONAL);
-	if (!count) {
+	if (count != nents) {
 		dev_err(s->dev, "failed to dma map sg_table\n");
 		return -EINVAL;
 	}
@@ -282,48 +338,76 @@ int trusty_share_memory(struct device *dev, uint64_t *id,
 		goto err_encode_page_info;
 	}
 
-	if (!s->share_memory_msg) {
-		if (nents != 1) {
-			dev_err(s->dev, "%s: not supported\n", __func__);
-			ret = -ENOTSUPP;
-			goto err_not_contiguous;
-		}
-
-		dev_dbg(s->dev, "%s: not supported, fall back to ns_mem_page_info 0x%llx for paddr 0x%llx\n",
-			__func__, pg_inf.attr, sg_dma_address(sg));
-
-		*id = pg_inf.attr;
-
-		return 0;
-	}
+	len = 0;
+	for_each_sg(sglist, sg, nents, i)
+		len += sg_dma_len(sg);
 
 	mutex_lock(&s->share_memory_msg_lock);
 
-	s->share_memory_msg->id = 0;
-	s->share_memory_msg->attr = pg_inf.attr & ~sg_dma_address(sg);
-	s->share_memory_msg->total_page_run_count = nents;
-	s->share_memory_msg->page_run_start = 0;
+	mrd->tag = 0;
+	mrd->flags = 0;
+	mrd->sender_id = s->spci_local_id;
+	mrd->reserved = 0;
+	mrd->total_page_count = len / PAGE_SIZE;
+	mrd->constituent_memory_region_count = nents;
+	mrd->constituent_memory_region_descriptor_offset = cmrd_offset;
+	mrd->memory_region_attributes_descriptor_count = 1;
+	mrd->memory_region_attributes_descriptors[0].receiver_id =
+		s->spci_remote_id;
 
+	/* TODO: move to helper, e.g. trusty_encode_page_info */
+	spci_mem_attr = SPCI_MEM_ATTR_NORMAL_MEMORY_CACHED_WB |
+			SPCI_MEM_ATTR_INNER_SHAREABLE;
+	if (!(pg_inf.attr & (1 << 7)))
+		spci_mem_attr |= SPCI_MEM_ATTR_RW;
+
+	mrd->memory_region_attributes_descriptors[0].memory_attributes =
+		spci_mem_attr;
+
+	spci_len_arg = cmrd_offset + nents * sizeof(*cmrd);
+	sg = sglist;
 	while (count) {
 		size_t i;
-		size_t lcount = min(count, TRUSTY_MSG_MAX_PAGE_RUN_COUNT);
+		size_t lcount = min(count,
+				    (PAGE_SIZE - cmrd_offset) / sizeof(*cmrd));
+		size_t fragment_len = lcount * sizeof(*cmrd) + cmrd_offset;
 
-		s->share_memory_msg->page_run_count = lcount;
 		for (i = 0; i < lcount; i++) {
-			s->share_memory_msg->page_runs[i].phys_addr =
-				sg_dma_address(sg);
-			s->share_memory_msg->page_runs[i].size = sg_dma_len(sg);
+			cmrd[i].address = sg_dma_address(sg);
+			cmrd[i].page_count = sg_dma_len(sg) / PAGE_SIZE;
 			sg = sg_next(sg);
 		}
 		count -= lcount;
-		ret = trusty_std_call32(dev, SMC_SC_MSG_SHARE_MEMORY, 0, 0, 0);
-		if (ret)
+		smc_ret = smc8(SMC_FC_SPCI_MEM_SHARE, 0, 0, fragment_len,
+			       spci_len_arg, 0, 0, 0);
+		if ((int32_t)smc_ret.r0 == SMC_FC_SPCI_SUCCESS) {
+			dev_dbg(s->dev, "%s: fragment_len %zd/%zd, got handle 0x%lx\n",
+				__func__, fragment_len, spci_len_arg,
+				smc_ret.r2);
+			if (cmrd_offset) {
+				spci_handle = smc_ret.r2;
+			} else if (smc_ret.r2 != spci_handle) {
+				dev_err(s->dev, "%s: fragment_len %zd/%zd, handle mismatch 0x%lx != 0x%x\n",
+					__func__, fragment_len, spci_len_arg,
+					smc_ret.r2, spci_handle);
+			}
+		} else {
+			dev_err(s->dev, "%s: SMC_FC_SPCI_MEM_SHARE failed 0x%x 0x%x 0x%x",
+				__func__, smc_ret.r0, smc_ret.r1, smc_ret.r2);
 			break;
-		s->share_memory_msg->page_run_start += lcount;
+		}
+
+		cmrd = s->spci_tx;
+		cmrd_offset = 0;
+		spci_len_arg = 0;
 	}
 
+	count = nents;
+
+	ret = trusty_std_call32(dev, SMC_SC_MSG_SHARE_MEMORY, spci_handle,
+				spci_mem_attr, 0);
 	if (!ret)
-		*id = s->share_memory_msg->id;
+		*id = spci_handle | (u64)spci_mem_attr << 32;
 
 	mutex_unlock(&s->share_memory_msg_lock);
 
@@ -332,9 +416,9 @@ int trusty_share_memory(struct device *dev, uint64_t *id,
 		return 0;
 	}
 
-	dev_err(s->dev, "%s: SMC_SC_PROCESS_MSG failed %d",
+	dev_err(s->dev, "%s: SMC_SC_MSG_SHARE_MEMORY failed %d",
 		__func__, ret);
-err_not_contiguous:
+
 err_encode_page_info:
 	dma_unmap_sg(dev, sglist, nents, DMA_BIDIRECTIONAL);
 	return ret;
@@ -346,8 +430,7 @@ int trusty_revoke_memory(struct device *dev, uint64_t id,
 {
 	struct trusty_state *s = platform_get_drvdata(to_platform_device(dev));
 	int ret;
-	size_t released;
-	struct scatterlist *sg = sglist;
+	struct smc_ret8 smc_ret;
 
 	dev_dbg(s->dev, "%s\n", __func__);
 
@@ -357,95 +440,34 @@ int trusty_revoke_memory(struct device *dev, uint64_t id,
 	if (WARN_ON(nents < 1))
 		return -EINVAL;
 
-	if (!s->share_memory_msg) {
-		if (nents != 1) {
-			dev_err(s->dev, "%s: not supported\n", __func__);
-			return -ENOTSUPP;
-		}
-
-		dma_unmap_sg(dev, sglist, nents, DMA_BIDIRECTIONAL);
-
-		return 0;
-	}
-
 	mutex_lock(&s->share_memory_msg_lock);
 
-	released = 0;
-	while (released < nents) {
-		size_t i;
-		size_t lcount;
+	ret = trusty_std_call32(dev, SMC_SC_MSG_REVOKE_MEMORY, (u32)id,
+				id >> 32, 0);
+	if (ret) {
+		dev_err(s->dev, "%s: SMC_SC_MSG_REVOKE_MEMORY failed %d",
+			__func__, ret);
+		if (ret == SM_ERR_NOT_ALLOWED)
+			ret = -EBUSY;
+		else
+			ret = -EIO;
+	}
 
-		s->share_memory_msg->id = id;
-		ret = trusty_std_call32(dev, SMC_SC_MSG_REVOKE_MEMORY, 0, 0, 0);
-		if (ret) {
-			dev_err(s->dev, "%s: SMC_SC_MSG_REVOKE_MEMORY failed %d",
-				__func__, ret);
-			if (ret == SM_ERR_NOT_ALLOWED)
-				ret = -EBUSY;
-			else
-				ret = -EIO;
-			break;
-		}
-
-		if (s->share_memory_msg->id != id) {
-			dev_err(s->dev,
-				"%s: Requested release of id %lld, got %lld, ignore and retry\n",
-				__func__, id, s->share_memory_msg->id);
-			continue;
-		}
-
-		if (s->share_memory_msg->total_page_run_count != nents) {
-			dev_err(s->dev,
-				"%s: id %lld, unexpected total_page_run_count %lld != %lld\n",
-				__func__, id,
-				s->share_memory_msg->total_page_run_count,
-				nents);
-			continue;
-		}
-
-		if (s->share_memory_msg->page_run_start != released) {
-			dev_err(s->dev,
-				"%s: id %lld, unexpected start %lld != %lld\n",
-				__func__, id,
-				s->share_memory_msg->page_run_start, released);
-			continue;
-		}
-		lcount = s->share_memory_msg->page_run_count;
-		if (!lcount || lcount > TRUSTY_MSG_MAX_PAGE_RUN_COUNT) {
-			dev_err(s->dev,
-				"%s: id %lld, bad page run count, %lld\n",
-				__func__, id, lcount);
-			continue;
-		}
-
-		for (i = 0; i < lcount; i++, released++, sg = sg_next(sg)) {
-			if (s->share_memory_msg->page_runs[i].phys_addr !=
-			    sg_dma_address(sg) ||
-			    s->share_memory_msg->page_runs[i].size !=
-			    sg_dma_len(sg)) {
-				dev_err(s->dev,
-					"%s: id %lld, bad page_run/size, 0x%llx %lld != 0x%llx %lld\n",
-					__func__, id,
-				    s->share_memory_msg->page_runs[i].phys_addr,
-					sg_dma_address(sg),
-					s->share_memory_msg->page_runs[i].size,
-					sg_dma_len(sg));
-				break;
-			}
-		}
+	smc_ret = smc8(SMC_FC_SPCI_MEM_RECLAIM, id, 0, 0, 0, 0, 0, 0);
+	if ((int32_t)smc_ret.r0 != SMC_FC_SPCI_SUCCESS) {
+		dev_err(s->dev, "%s: SMC_FC_SPCI_MEM_RECLAIM failed 0x%x 0x%x 0x%x",
+			__func__, smc_ret.r0, smc_ret.r1, smc_ret.r2);
+		if (smc_ret.r0 == SMC_FC_SPCI_ERROR &&
+		    smc_ret.r2 == SPCI_ERROR_DENIED)
+			ret = -EBUSY;
+		else
+			ret = -EIO;
 	}
 
 	mutex_unlock(&s->share_memory_msg_lock);
 
 	if (ret != 0)
 		return ret;
-
-	if (released != nents) {
-		dev_err(s->dev,
-			"%s: id %lld, failed to release all page runs %zd != %zd\n",
-			__func__, id, released, nents);
-		return -EIO;
-	}
 
 	dma_unmap_sg(dev, sglist, nents, DMA_BIDIRECTIONAL);
 
@@ -497,58 +519,76 @@ EXPORT_SYMBOL(trusty_version_str_get);
 
 static int trusty_init_msg_buf(struct trusty_state *s, struct device *dev)
 {
-	phys_addr_t paddr;
+	phys_addr_t tx_paddr;
+	phys_addr_t rx_paddr;
 	int ret;
+	struct smc_ret8 smc_ret;
 
-	BUILD_BUG_ON(sizeof(*s->share_memory_msg) != TRUSTY_MSG_BUF_SIZE);
+	/*
+	 * Set SPCI endpoint IDs.
+	 * 1 is for primary VM.
+	 * 0x8000 is for the secure os.
+	 *
+	 * TODO: Use SPCI call or device tree to confugure this dynamically
+	 */
+	s->spci_local_id = 1;
+	s->spci_remote_id = 0x8000;
 
-	s->share_memory_msg = kmalloc(sizeof(*s->share_memory_msg), GFP_KERNEL);
-	if (!s->share_memory_msg)
-		return -ENOMEM;
-
-	paddr = virt_to_phys(s->share_memory_msg);
-	if (WARN_ON(paddr & (TRUSTY_MSG_BUF_SIZE - 1)))
-		goto err_unaligned_buf;
-
-	ret = trusty_call32_mem_buf(dev, SMC_SC_REGISTER_MSG_BUF,
-				    phys_to_page(paddr), TRUSTY_MSG_BUF_SIZE,
-				    PAGE_KERNEL);
-	if (ret) {
-		if (ret == SM_ERR_UNDEFINED_SMC) {
-			ret = 0;
-			dev_notice(dev, "disable share memory api\n");
-		} else {
-			dev_err(dev,
-				"failed to register share memory msg buf, %d\n",
-				ret);
-		}
-		goto err_setup_msg_buf;
+	s->spci_tx = kmalloc(PAGE_SIZE, GFP_KERNEL);
+	if (!s->spci_tx) {
+		ret = -ENOMEM;
+		goto err_alloc_tx;
 	}
-	s->share_memory_msg_buf_id = s->share_memory_msg->id;
+	tx_paddr = virt_to_phys(s->spci_tx);
+	if (WARN_ON(tx_paddr & (PAGE_SIZE - 1))) {
+		ret = -EINVAL;
+		goto err_unaligned_tx_buf;
+	}
+
+	s->spci_rx = kmalloc(PAGE_SIZE, GFP_KERNEL);
+	if (!s->spci_rx) {
+		ret = -ENOMEM;
+		goto err_alloc_rx;
+	}
+	rx_paddr = virt_to_phys(s->spci_rx);
+	if (WARN_ON(rx_paddr & (PAGE_SIZE - 1))) {
+		ret = -EINVAL;
+		goto err_unaligned_rx_buf;
+	}
+
+	smc_ret = smc8(SMC_FC64_SPCI_RXTX_MAP, tx_paddr, rx_paddr, 1, 0, 0, 0,
+		       0);
+	if ((int32_t)smc_ret.r0 != SMC_FC_SPCI_SUCCESS) {
+		ret = -EIO;
+		goto err_rxtx_map;
+	}
+
 	return 0;
 
-err_setup_msg_buf:
-err_unaligned_buf:
-	kfree(s->share_memory_msg);
-	s->share_memory_msg = NULL;
+err_rxtx_map:
+err_unaligned_rx_buf:
+	kfree(s->spci_rx);
+	s->spci_rx = NULL;
+err_alloc_rx:
+err_unaligned_tx_buf:
+	kfree(s->spci_tx);
+	s->spci_tx = NULL;
+err_alloc_tx:
 	return ret;
 }
 
 static void trusty_free_msg_buf(struct trusty_state *s, struct device *dev)
 {
-	int ret;
+	struct smc_ret8 smc_ret;
 
-	if (!s->share_memory_msg)
-		return;
-
-	s->share_memory_msg->id = s->share_memory_msg_buf_id;
-
-	ret = trusty_std_call32(dev, SMC_SC_REMOVE_MSG_BUF, 0, 0, 0);
-	if (ret) {
-		dev_err(dev, "failed to remove share memory msg buf, %d\n",
-			ret);
+	smc_ret = smc8(SMC_FC_SPCI_RXTX_UNMAP, 0, 0, 0, 0, 0, 0, 0);
+	if ((int32_t)smc_ret.r0 != SMC_FC_SPCI_SUCCESS) {
+		dev_err(s->dev, "%s: SMC_FC_SPCI_RXTX_UNMAP failed 0x%x 0x%x 0x%x",
+			__func__, smc_ret.r0, smc_ret.r1, smc_ret.r2);
+	} else {
+		kfree(s->spci_rx);
+		kfree(s->spci_tx);
 	}
-	kfree(s->share_memory_msg);
 }
 
 static void trusty_init_version(struct trusty_state *s, struct device *dev)
