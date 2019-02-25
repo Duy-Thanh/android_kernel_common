@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fbe2ae5c_31ad0513",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-02-25T23:37:27Z",
+      "side": 1,
+      "message": "can we drop the seq_putc() by specifying \":\" as the delimiter in line 236?",
+      "revId": "38aeba63ed0d33b9f40ae5a5b7d747785cc3138a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59616616_80dc79d7",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-02-25T23:37:27Z",
+      "side": 1,
+      "message": "checkpatch likes an empty line between the var decls and the code...do you run checkpatch?",
+      "revId": "38aeba63ed0d33b9f40ae5a5b7d747785cc3138a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
