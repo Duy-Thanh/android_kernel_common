@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "52bfbf4b_4ba50311",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-02-25T23:54:17Z",
+      "side": 1,
+      "message": "Oh, nevermind. I should have looked at the code. I thought the delim went after. This is fine.",
+      "parentUuid": "fc5a3ed4_1fa127db",
+      "revId": "38aeba63ed0d33b9f40ae5a5b7d747785cc3138a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "59616616_80dc79d7",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 2
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Which checkpatch are you seeing this with? I just ran the common 4.14 one and the mainline kernel one and all I saw from either was the Gerrit Change-Id warning.",
       "parentUuid": "59616616_80dc79d7",
+      "revId": "38aeba63ed0d33b9f40ae5a5b7d747785cc3138a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f17f5a2a_162cf66b",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-02-25T23:54:17Z",
+      "side": 1,
+      "message": "I have \"git checkpatch\" defined in my .gitconfig. It runs checkpatch against all patches that would be pushed. I\u0027ll send you my .gitconfig so you can see it. It invokes checkpatch as:\n\n  scripts/checkpatch.pl --strict --ignore\u003dGERRIT_CHANGE_ID -\u0027",
+      "parentUuid": "b5c4efef_eb4925af",
       "revId": "38aeba63ed0d33b9f40ae5a5b7d747785cc3138a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
