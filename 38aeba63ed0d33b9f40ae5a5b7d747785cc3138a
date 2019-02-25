@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fc5a3ed4_1fa127db",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2019-02-25T23:48:23Z",
+      "side": 1,
+      "message": "The delimiter gets put before the number. I guess I could change line 244 to something like\n\nseq_put_decimal_ull(m, i ? \" \" : \": \", time);\n\nbut do you think getting rid of the call to seq_putc is worth the reduced clarity?",
+      "parentUuid": "fbe2ae5c_31ad0513",
+      "revId": "38aeba63ed0d33b9f40ae5a5b7d747785cc3138a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "59616616_80dc79d7",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2019-02-25T23:37:27Z",
       "side": 1,
       "message": "checkpatch likes an empty line between the var decls and the code...do you run checkpatch?",
+      "revId": "38aeba63ed0d33b9f40ae5a5b7d747785cc3138a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5c4efef_eb4925af",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2019-02-25T23:48:23Z",
+      "side": 1,
+      "message": "Which checkpatch are you seeing this with? I just ran the common 4.14 one and the mainline kernel one and all I saw from either was the Gerrit Change-Id warning.",
+      "parentUuid": "59616616_80dc79d7",
       "revId": "38aeba63ed0d33b9f40ae5a5b7d747785cc3138a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
