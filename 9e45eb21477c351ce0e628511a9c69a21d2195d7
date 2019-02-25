@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b970210c_bafe0501",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2019-02-25T18:13:01Z",
+      "side": 1,
+      "message": "For reference:\n\nWe enter move_queued_task with only rq-\u003elock held, and we should leave with cpu_rq(new_cpu)-\u003elock held.\n\nSince we have WALT and will call walt_fixup_busy_time for a migration inside set_task_cpu, we need to ensure that we hold the rq-\u003elock for both CPUs if they are different.\n\ndouble_lock_balance will handle the case where the two locks are the same one since it eventually calls double_rq_lock which is OK with this.\n\nThe error we saw after the previous change occurs when both CPUs are the same. What happens is that we unlock new_rq in the double_unlock_balance and then unconditionally unlock rq-\u003elock which (in this case) is the same one we just unlocked.\n\nIt seems to me that using double_rq_unlock here directly accomplishes exactly what we need.",
+      "range": {
+        "startLine": 958,
+        "startChar": 1,
+        "endLine": 960,
+        "endChar": 39
+      },
+      "revId": "9e45eb21477c351ce0e628511a9c69a21d2195d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
