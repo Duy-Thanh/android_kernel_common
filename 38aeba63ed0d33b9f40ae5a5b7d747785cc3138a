@@ -105,6 +105,24 @@
       "revId": "38aeba63ed0d33b9f40ae5a5b7d747785cc3138a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2267ccef_3aefa372",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-02-26T00:07:35Z",
+      "side": 1,
+      "message": "Looks like they aren\u0027t flagging that any more on mainline, so ignore.",
+      "parentUuid": "f17f5a2a_162cf66b",
+      "revId": "38aeba63ed0d33b9f40ae5a5b7d747785cc3138a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
