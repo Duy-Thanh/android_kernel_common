@@ -498,6 +498,9 @@ static void put_crypt_info(struct fscrypt_info *ci)
 		crypto_free_skcipher(ci->ci_ctfm);
 		crypto_free_cipher(ci->ci_essiv_tfm);
 	}
+#if IS_ENABLED(CONFIG_FS_ENCRYPTION_HW_CRYPT)
+	kzfree(ci->raw_key);
+#endif
 	kmem_cache_free(fscrypt_info_cachep, ci);
 }
 
@@ -547,6 +550,7 @@ int fscrypt_get_encryption_info(struct inode *inode)
 	memcpy(crypt_info->ci_master_key_descriptor, ctx.master_key_descriptor,
 	       FS_KEY_DESCRIPTOR_SIZE);
 	memcpy(crypt_info->ci_nonce, ctx.nonce, FS_KEY_DERIVATION_NONCE_SIZE);
+	fscrypt_set_hw_crypt_info(crypt_info, NULL);
 
 	mode = select_encryption_mode(crypt_info, inode);
 	if (IS_ERR(mode)) {
@@ -569,12 +573,23 @@ int fscrypt_get_encryption_info(struct inode *inode)
 	if (res)
 		goto out;
 
-	res = setup_crypto_transform(crypt_info, mode, raw_key, inode);
-	if (res)
-		goto out;
+	if (fscrypt_is_hw_encrypted(crypt_info, inode->i_mode)) {
+		fscrypt_set_hw_crypt_info(crypt_info, raw_key);
+	} else {
+		res = setup_crypto_transform(crypt_info, mode, raw_key, inode);
+		if (res)
+			goto out;
+	}
 
-	if (cmpxchg(&inode->i_crypt_info, NULL, crypt_info) == NULL)
+	if (cmpxchg(&inode->i_crypt_info, NULL, crypt_info) == NULL) {
 		crypt_info = NULL;
+		if (fscrypt_is_hw_encrypted(inode->i_crypt_info,
+					    inode->i_mode)) {
+			raw_key = NULL;
+		}
+	} else {
+		fscrypt_set_hw_crypt_info(crypt_info, NULL);
+	}
 out:
 	if (res == -ENOKEY)
 		res = 0;
@@ -586,6 +601,7 @@ EXPORT_SYMBOL(fscrypt_get_encryption_info);
 
 void fscrypt_put_encryption_info(struct inode *inode)
 {
+	fscrypt_evict_crypt_key(inode);
 	put_crypt_info(inode->i_crypt_info);
 	inode->i_crypt_info = NULL;
 }

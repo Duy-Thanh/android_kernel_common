@@ -87,7 +87,38 @@ struct fscrypt_info {
 	u8 ci_flags;
 	u8 ci_master_key_descriptor[FS_KEY_DESCRIPTOR_SIZE];
 	u8 ci_nonce[FS_KEY_DERIVATION_NONCE_SIZE];
+#if IS_ENABLED(CONFIG_FS_ENCRYPTION_HW_CRYPT)
+	u8 *raw_key; /* TODO: should we make this and ci_master_key a union? */
+#endif /* CONFIG_FS_ENCRYPTION_HW_CRYPT */
 };
+
+#if IS_ENABLED(CONFIG_FS_ENCRYPTION_HW_CRYPT)
+static inline bool fscrypt_is_hw_encrypted(const struct fscrypt_info *ci,
+					   umode_t i_mode)
+{
+	return ci &&
+	       (ci->ci_flags & FS_POLICY_FLAGS_HW_ENCRYPTION) &&
+	       S_ISREG(i_mode);
+}
+
+static inline void fscrypt_set_hw_crypt_info(struct fscrypt_info *fi,
+					     u8 *raw_key)
+{
+	fi->raw_key = raw_key;
+}
+
+#else /* CONFIG_FS_ENCRYPTION_HW_CRYPT */
+static inline bool fscrypt_is_hw_encrypted(const struct fscrypt_info *ci,
+					   umode_t i_mode)
+{
+	return false;
+}
+
+static inline void fscrypt_set_hw_crypt_info(struct fscrypt_info *fi,
+					     u8 *raw_key) { }
+
+#endif /* CONFIG_FS_ENCRYPTION_HW_CRYPT */
+
 
 typedef enum {
 	FS_DECRYPT = 0,

@@ -14,3 +14,11 @@ config FS_ENCRYPTION
 	  feature is similar to ecryptfs, but it is more memory
 	  efficient since it avoids caching the encrypted and
 	  decrypted pages in the page cache.
+
+config FS_ENCRYPTION_HW_CRYPT
+	tristate "Enable fscrypt to use inline crypto"
+	default n
+	depends on FS_ENCRYPTION && BLK_KEYSLOT_MANAGER
+	help
+	  Enables fscrypt to use inline crypto engine if available,
+	  through the struct keyslot_manager in struct request_queue.

@@ -181,6 +181,26 @@ extern void fscrypt_enqueue_decrypt_bio(struct fscrypt_ctx *ctx,
 extern void fscrypt_pullback_bio_page(struct page **, bool);
 extern int fscrypt_zeroout_range(const struct inode *, pgoff_t, sector_t,
 				 unsigned int);
+#if IS_ENABLED(CONFIG_FS_ENCRYPTION_HW_CRYPT)
+extern int fscrypt_get_bio_crypt_ctx(const struct inode *inode,
+					struct bio *bio, u64 data_unit_num);
+extern void fscrypt_release_bio_crypt_ctx(struct bio *bio);
+extern int fscrypt_evict_crypt_key(struct inode *inode);
+#else
+
+static inline int fscrypt_get_bio_crypt_ctx(const struct inode *inode,
+					struct bio *bio, u64 data_unit_num)
+{
+	return 0;
+}
+
+static inline void fscrypt_release_bio_crypt_ctx(struct bio *bio) { }
+
+static inline int fscrypt_evict_crypt_key(struct inode *inode)
+{
+	return 0;
+}
+#endif
 
 /* hooks.c */
 extern int fscrypt_file_open(struct inode *inode, struct file *filp);
