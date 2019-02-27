@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d87ca68_6ba2bfa8",
+        "filename": "Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-02-27T18:30:06Z",
+      "side": 1,
+      "message": "not sure if you meant to remove the \u003ctab\u003e here?",
+      "range": {
+        "startLine": 510,
+        "startChar": 12,
+        "endLine": 510,
+        "endChar": 16
+      },
+      "revId": "5b3826ed15925e468dbbc1120b0a265a934418cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
