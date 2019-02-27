@@ -16,6 +16,24 @@
       "revId": "9df256d5091aed2b2d375d7d657d0abe49ef7bda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8aa90909_7d4f2a1e",
+        "filename": "Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-02-27T19:41:34Z",
+      "side": 1,
+      "message": "Thanks for the report, fixed in: https://android-review.googlesource.com/c/kernel/common/+/914135/1/Makefile",
+      "parentUuid": "d7c1df75_ce1c168a",
+      "revId": "9df256d5091aed2b2d375d7d657d0abe49ef7bda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
