@@ -109,3 +109,7 @@ config SCSI_UFS_HISI
 
 	  Select this if you have UFS controller on Hisilicon chipset.
 	  If unsure, say N.
+
+config SCSI_UFS_CRYPTO
+	bool "UFS Inline Crypto Engine Support"
+	depends on SCSI_UFSHCD && BLK_KEYSLOT_MANAGER
