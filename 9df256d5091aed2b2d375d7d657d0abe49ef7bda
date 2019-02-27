@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7c1df75_ce1c168a",
+        "filename": "Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1381763
+      },
+      "writtenOn": "2019-02-27T12:21:34Z",
+      "side": 1,
+      "message": "Nothing is defined CROSS_TRIPLE, and it should be like this\n\nCLANG_FLAGS\t:\u003d --target\u003d$(notdir $(CLANG_TRIPLE:%-\u003d%))",
+      "revId": "9df256d5091aed2b2d375d7d657d0abe49ef7bda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
