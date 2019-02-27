@@ -1152,6 +1152,16 @@ int do_journal_get_write_access(handle_t *handle,
 }
 
 #ifdef CONFIG_EXT4_FS_ENCRYPTION
+
+static void end_bio_block_write_begin(struct bio *bio)
+{
+	struct buffer_head *bh = bio->bi_private;
+
+	bh->b_end_io(bh, !bio->bi_status);
+	fscrypt_release_bio_crypt_ctx(bio);
+	bio_put(bio);
+}
+
 static int ext4_block_write_begin(struct page *page, loff_t pos, unsigned len,
 				  get_block_t *get_block)
 {
@@ -1165,6 +1175,8 @@ static int ext4_block_write_begin(struct page *page, loff_t pos, unsigned len,
 	unsigned bbits;
 	struct buffer_head *bh, *head, *wait[2], **wait_bh = wait;
 	bool decrypt = false;
+	struct bio *bio;
+	int op_flags = 0;
 
 	BUG_ON(!PageLocked(page));
 	BUG_ON(from > PAGE_SIZE);
@@ -1216,7 +1228,38 @@ static int ext4_block_write_begin(struct page *page, loff_t pos, unsigned len,
 		if (!buffer_uptodate(bh) && !buffer_delay(bh) &&
 		    !buffer_unwritten(bh) &&
 		    (block_start < from || block_end > to)) {
-			ll_rw_block(REQ_OP_READ, 0, 1, &bh);
+
+			bio = bio_alloc(GFP_NOIO, 1);
+			if (bio && trylock_buffer(bh)) {
+				bh->b_end_io = end_buffer_read_sync;
+				get_bh(bh);
+
+				bio->bi_iter.bi_sector =
+					bh->b_blocknr * (bh->b_size >> 9);
+				bio_set_dev(bio, bh->b_bdev);
+				bio_add_page(bio, bh->b_page,
+					     bh->b_size, bh_offset(bh));
+				BUG_ON(bio->bi_iter.bi_size != bh->b_size);
+
+				bio->bi_end_io = end_bio_block_write_begin;
+				bio->bi_private = bh;
+
+				if (buffer_meta(bh))
+					op_flags |= REQ_META;
+				if (buffer_prio(bh))
+					op_flags |= REQ_PRIO;
+				bio_set_op_attrs(bio, REQ_OP_READ, op_flags);
+
+				if (fscrypt_get_bio_crypt_ctx(inode,
+						bio, bh->b_blocknr) == 0) {
+					submit_bio(bio);
+				} else {
+					bio->bi_status = BLK_STS_RESOURCE;
+					bio_endio(bio);
+				}
+			} else if (bio) {
+				bio_put(bio);
+			}
 			*wait_bh++ = bh;
 			decrypt = ext4_encrypted_inode(inode) &&
 				S_ISREG(inode->i_mode);

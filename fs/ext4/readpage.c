@@ -91,6 +91,7 @@ static void mpage_end_io(struct bio *bio)
 	if (ext4_bio_encrypted(bio)) {
 		if (bio->bi_status) {
 			fscrypt_release_ctx(bio->bi_private);
+			fscrypt_release_bio_crypt_ctx(bio);
 		} else {
 			fscrypt_enqueue_decrypt_bio(bio->bi_private, bio);
 			return;
@@ -134,6 +135,25 @@ ext4_submit_bio_read(struct bio *bio)
 	}
 	submit_bio(bio);
 }
+
+static void mpage_failed_get_bio_crypt_ctx(struct bio *bio)
+{
+	fscrypt_release_ctx(bio->bi_private);
+	bio->bi_private = NULL;
+	fscrypt_release_bio_crypt_ctx(bio);
+	bio->bi_status = BLK_STS_RESOURCE;
+	mpage_end_io(bio);
+}
+
+static void mpage_submit_bio(struct inode *inode, struct bio *bio,
+							 u64 data_unit_num)
+{
+	if (fscrypt_get_bio_crypt_ctx(inode, bio, data_unit_num) == 0)
+		ext4_submit_bio_read(bio);
+	else
+		mpage_failed_get_bio_crypt_ctx(bio);
+}
+
 
 int ext4_mpage_readpages(struct address_space *mapping,
 			 struct list_head *pages, struct page *page,
@@ -275,7 +295,9 @@ int ext4_mpage_readpages(struct address_space *mapping,
 		 */
 		if (bio && (last_block_in_bio != blocks[0] - 1)) {
 		submit_and_realloc:
-			ext4_submit_bio_read(bio);
+			mpage_submit_bio(
+				inode, bio,
+				bio->bi_iter.bi_sector >> (blkbits - 9));
 			bio = NULL;
 		}
 		if (bio == NULL) {
@@ -299,7 +321,7 @@ int ext4_mpage_readpages(struct address_space *mapping,
 			bio->bi_end_io = mpage_end_io;
 			bio->bi_private = ctx;
 			bio_set_op_attrs(bio, REQ_OP_READ,
-						is_readahead ? REQ_RAHEAD : 0);
+					 is_readahead ? REQ_RAHEAD : 0);
 		}
 
 		length = first_hole << blkbits;
@@ -309,14 +331,18 @@ int ext4_mpage_readpages(struct address_space *mapping,
 		if (((map.m_flags & EXT4_MAP_BOUNDARY) &&
 		     (relative_block == map.m_len)) ||
 		    (first_hole != blocks_per_page)) {
-			ext4_submit_bio_read(bio);
+			mpage_submit_bio(
+				inode, bio,
+				bio->bi_iter.bi_sector >> (blkbits - 9));
 			bio = NULL;
 		} else
 			last_block_in_bio = blocks[blocks_per_page - 1];
 		goto next_page;
 	confused:
 		if (bio) {
-			ext4_submit_bio_read(bio);
+			mpage_submit_bio(
+				inode, bio,
+				bio->bi_iter.bi_sector >> (blkbits - 9));
 			bio = NULL;
 		}
 		if (!PageUptodate(page))
@@ -329,6 +355,9 @@ int ext4_mpage_readpages(struct address_space *mapping,
 	}
 	BUG_ON(pages && !list_empty(pages));
 	if (bio)
-		ext4_submit_bio_read(bio);
+		mpage_submit_bio(
+			inode, bio,
+			bio->bi_iter.bi_sector >> (blkbits - 9));
+
 	return 0;
 }

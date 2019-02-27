@@ -118,6 +118,8 @@ static void ext4_finish_bio(struct bio *bio)
 			end_page_writeback(page);
 		}
 	}
+
+	fscrypt_release_bio_crypt_ctx(bio);
 }
 
 static void ext4_release_io_end(ext4_io_end_t *io_end)
@@ -353,7 +355,13 @@ void ext4_io_submit(struct ext4_io_submit *io)
 				  REQ_SYNC : 0;
 		io->io_bio->bi_write_hint = io->io_end->inode->i_write_hint;
 		bio_set_op_attrs(io->io_bio, REQ_OP_WRITE, io_op_flags);
-		submit_bio(io->io_bio);
+
+		if (fscrypt_get_bio_crypt_ctx(io->io_end->inode, bio,
+					      io->encryption_data_num) == 0) {
+			submit_bio(io->io_bio);
+		} else {
+			bio_io_error(bio);
+		}
 	}
 	io->io_bio = NULL;
 }
@@ -381,6 +389,7 @@ static int io_submit_init_bio(struct ext4_io_submit *io,
 	bio->bi_private = ext4_get_io_end(io->io_end);
 	io->io_bio = bio;
 	io->io_next_block = bh->b_blocknr;
+	io->encryption_data_num = bh->b_blocknr;
 	return 0;
 }
 
@@ -520,7 +529,7 @@ int ext4_bio_write_page(struct ext4_io_submit *io,
 	/* Error stopped previous loop? Clean up buffers... */
 	if (ret) {
 	out:
-		if (data_page)
+		if (data_page && data_page != page)
 			fscrypt_restore_control_page(data_page);
 		printk_ratelimited(KERN_ERR "%s: ret = %d\n", __func__, ret);
 		redirty_page_for_writepage(wbc, page);
