@@ -173,6 +173,17 @@ static inline int fscrypt_zeroout_range(const struct inode *inode, pgoff_t lblk,
 {
 	return -EOPNOTSUPP;
 }
+static inline int fscrypt_get_bio_crypt_ctx(const struct inode *inode,
+					    struct bio *bio,
+					    u64 data_unit_num)
+{
+	return -EOPNOTSUPP;
+}
+
+static inline void fscrypt_release_bio_crypt_ctx(struct inode *inode,
+					       struct bio *bio)
+{
+}
 
 /* hooks.c */
 

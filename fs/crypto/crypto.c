@@ -245,6 +245,11 @@ struct page *fscrypt_encrypt_page(const struct inode *inode,
 
 	BUG_ON(len % FS_CRYPTO_BLOCK_SIZE != 0);
 
+	/* If HW encryption, then pretend we did in place encryption */
+	if (fscrypt_is_hw_encrypted(inode->i_crypt_info, inode->i_mode)) {
+		return ciphertext_page;
+	}
+
 	if (inode->i_sb->s_cop->flags & FS_CFLG_OWN_PAGES) {
 		/* with inplace-encryption we just encrypt the page */
 		err = fscrypt_do_page_crypto(inode, FS_ENCRYPT, lblk_num, page,
@@ -306,6 +311,10 @@ int fscrypt_decrypt_page(const struct inode *inode, struct page *page,
 {
 	if (!(inode->i_sb->s_cop->flags & FS_CFLG_OWN_PAGES))
 		BUG_ON(!PageLocked(page));
+
+	/* If we have HW encryption, then this page is already decrypted */
+	if (fscrypt_is_hw_encrypted(inode->i_crypt_info, inode->i_mode))
+		return 0;
 
 	return fscrypt_do_page_crypto(inode, FS_DECRYPT, lblk_num, page, page,
 				      len, offs, GFP_NOFS);
