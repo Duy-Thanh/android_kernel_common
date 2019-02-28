@@ -137,27 +137,29 @@ static struct uid_entry *find_or_register_uid_locked(uid_t uid)
 	return uid_entry;
 }
 
-static bool freq_index_invalid(unsigned int index)
+static struct cpu_freqs *index_to_freqs(unsigned int index)
 {
-	unsigned int cpu;
-	struct cpu_freqs *freqs;
-
-	for_each_possible_cpu(cpu) {
-		freqs = all_freqs[cpu];
-		if (!freqs || index < freqs->offset ||
-		    freqs->offset + freqs->max_state <= index)
-			continue;
-		return freqs->freq_table[index - freqs->offset] ==
-			CPUFREQ_ENTRY_INVALID;
+	int cpu;
+        for_each_possible_cpu(cpu) {
+		if (all_freqs[cpu] && all_freqs[cpu]->offset == index)
+			return all_freqs[cpu];
 	}
-	return true;
+	return NULL;
 }
+
+#define cpufreq_times_for_each_valid_frequency(freqs, max, i)		\
+	for (freqs = index_to_freqs(0); freqs && freqs->offset < max;	\
+	     freqs = index_to_freqs(freqs->offset + freqs->max_state))	\
+		for (i = freqs->offset; i < freqs->offset + freqs->max_state; \
+		     ++i)						\
+			if (freqs->freq_table[i] == CPUFREQ_ENTRY_INVALID) { \
+				continue;				\
+			} else
 
 static int single_uid_time_in_state_show(struct seq_file *m, void *ptr)
 {
 	struct uid_entry *uid_entry;
 	unsigned int i;
-	u64 time;
 	uid_t uid = from_kuid_munged(current_user_ns(), *(kuid_t *)m->private);
 
 	if (uid == overflowuid)
@@ -171,10 +173,8 @@ static int single_uid_time_in_state_show(struct seq_file *m, void *ptr)
 		return 0;
 	}
 
-	for (i = 0; i < uid_entry->max_state; ++i) {
-		if (freq_index_invalid(i))
-			continue;
-		time = nsec_to_clock_t(uid_entry->time_in_state[i]);
+	cpufreq_times_for_each_valid_frequency(freqs, uid_entry->max_state, i) {
+		u64 time = nsec_to_clock_t(uid_entry->time_in_state[i]);
 		seq_write(m, &time, sizeof(time));
 	}
 
@@ -236,11 +236,9 @@ static int uid_time_in_state_seq_show(struct seq_file *m, void *v)
 			seq_put_decimal_ull(m, "", uid_entry->uid);
 			seq_putc(m, ':');
 		}
-		for (i = 0; i < uid_entry->max_state; ++i) {
-			u64 time;
-			if (freq_index_invalid(i))
-				continue;
-			time = nsec_to_clock_t(uid_entry->time_in_state[i]);
+		cpufreq_times_for_each_valid_frequency(
+			freqs, uid_entry->max_state, i) {
+			u64 time = nsec_to_clock_t(uid_entry->time_in_state[i]);
 			seq_put_decimal_ull(m, " ", time);
 		}
 		if (uid_entry->max_state)
