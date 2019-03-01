@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eedeee7a_352f3805",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6696,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-03-01T19:24:58Z",
+      "side": 1,
+      "message": "move up to line 6689? No point in spare_cap calculations if !prefer_idle.",
+      "range": {
+        "startLine": 6695,
+        "startChar": 4,
+        "endLine": 6696,
+        "endChar": 13
+      },
+      "revId": "85079ad327c4c6895df8c6e1f8add8d970920547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
