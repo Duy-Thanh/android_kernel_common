@@ -1,0 +1,238 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "030139c5_d068ebde",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T21:44:52Z",
+      "side": 1,
+      "message": "Change to something like \"block: add inline encryption support\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 19
+      },
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d874ec12_c6f278c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T21:44:52Z",
+      "side": 1,
+      "message": "More details are needed here.  What problem does this patch solve and why, and what is the high-level outline of the solution?  Consider that the reader is likely to be familiar with Linux\u0027s block layer, but might not be familiar with inline cryptographic engines or the challenges involved in storage encryption on mobile devices.\n\nAlso consider adding a documentation file Documentation/block/inline-encryption.txt.",
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "daca3f38_a924dd2e",
+        "filename": "block/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T21:44:52Z",
+      "side": 1,
+      "message": "Selectable kernel config options should describe user-visible features, not implementations or internal APIs.  How about config BLK_INLINE_ENCRYPTION: \"Enable inline encryption support\"?  Help text would need to be updated too.",
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aad1d0c5_bd304b86",
+        "filename": "block/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T21:44:52Z",
+      "side": 1,
+      "message": "n is already the default, so no need to have this line.",
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5aa53da3_d78094bf",
+        "filename": "block/bio.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T21:44:52Z",
+      "side": 1,
+      "message": "\u0027block_size\u0027 isn\u0027t used.",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 36
+      },
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d3110b4_db6a63da",
+        "filename": "block/bio.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T21:44:52Z",
+      "side": 1,
+      "message": "Hmm, maybe my idea to use \u0027keyslot \u003c 0\u0027 to represent \"no encryption\" isn\u0027t best, because now it means the keyslot has to be explicitly initialized rather than just left 0.  That adds some  complexity and possibilities for mistakes, and it seems to break the existing conventions with struct bio.\n\nHow about instead using a request flag (not a \"bio flag\") to indicate that inline encryption is enabled?  See \u0027enum req_flag_bits\u0027 in include/linux/blk_types.h.  You could add a flag __REQ_INLINECRYPT.\n\n[As I mentioned earlier, it\u0027s also possible that people will want a pointer to a separately allocated struct instead, in which case encryption disabled would just be represented by NULL.  I\u0027m unsure whether we\u0027ll need to go there though.]",
+      "range": {
+        "startLine": 325,
+        "startChar": 1,
+        "endLine": 325,
+        "endChar": 25
+      },
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5b66df9_d17e4ac7",
+        "filename": "block/bio.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T21:44:52Z",
+      "side": 1,
+      "message": "Seems this needs to be called from bounce_clone_bio() too.",
+      "range": {
+        "startLine": 628,
+        "startChar": 1,
+        "endLine": 628,
+        "endChar": 24
+      },
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "015357a0_6fedffb7",
+        "filename": "block/blk-merge.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T21:44:52Z",
+      "side": 1,
+      "message": "Move to above the update of -\u003enr_phys_segments.",
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5eeeaf20_e2d9028a",
+        "filename": "block/blk-merge.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T21:44:52Z",
+      "side": 1,
+      "message": "Missing a { here, so it doesn\u0027t compile.  Please compile before posting :-)",
+      "range": {
+        "startLine": 866,
+        "startChar": 0,
+        "endLine": 866,
+        "endChar": 43
+      },
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0f8934f_c05faf64",
+        "filename": "block/blk-merge.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T21:44:52Z",
+      "side": 1,
+      "message": "So I\u0027m not super familiar with this code, but it looks like blk_try_merge() may be the wrong place to add the front/back mergable checks.  It looks like blk_try_merge() isn\u0027t not always called, and sometimes .elevator_merge_fn() is called instead.  Possibly these checks should go in ll_new_hw_segment() instead?  What was the thinking behind putting the checks here specifically?",
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "947c9b23_789f1419",
+        "filename": "include/linux/bio.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T21:44:52Z",
+      "side": 1,
+      "message": "If any of these inline functions end up used in only one .c file (maybe the merge helpers?), consider moving it there.  Only the functions used in multiple places need to be here.",
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1475c46_aecaa169",
+        "filename": "include/linux/blk_types.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T21:44:52Z",
+      "side": 1,
+      "message": "Add comment explaining what this is and what the fields mean.  Maybe use kerneldoc format?",
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
