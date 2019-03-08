@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de2b0573_d643be32",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1294339
+      },
+      "writtenOn": "2019-03-08T03:33:28Z",
+      "side": 1,
+      "message": "Can this case be checked by below ccap_array comparison? If so, it may be more clean to remove this special checking here.",
+      "revId": "7d9043d79b866a4714d6c91b332185ba4df64432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e979fe5e_a3fa9375",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4652,
+      "author": {
+        "id": 1294339
+      },
+      "writtenOn": "2019-03-08T03:33:28Z",
+      "side": 1,
+      "message": "Currently every scsi device will have its own keyslot instance in its request queue. I am not sure if this may waste memory because not every scsi device needs to handle inline crypto requests. Keyslot actually implies key slots in inline crypto engine in storage host, so would it better to bind keyslot instance to host instead of request queue?",
+      "revId": "7d9043d79b866a4714d6c91b332185ba4df64432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
