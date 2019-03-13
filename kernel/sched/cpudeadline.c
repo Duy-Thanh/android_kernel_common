@@ -120,14 +120,20 @@ int cpudl_find(struct cpudl *cp, struct task_struct *p,
 	const struct sched_dl_entity *dl_se = &p->dl;
 
 	if (later_mask &&
-	    cpumask_and(later_mask, cp->free_cpus, p->cpus_ptr)) {
+	    cpumask_and(later_mask, cp->free_cpus, p->cpus_ptr) &&
+	    cpumask_and(later_mask, later_mask, cpu_active_mask)) {
 		return 1;
 	} else {
 		int best_cpu = cpudl_maximum(cp);
 
 		WARN_ON(best_cpu != -1 && !cpu_present(best_cpu));
 
+<<<<<<< HEAD
 		if (cpumask_test_cpu(best_cpu, p->cpus_ptr) &&
+=======
+		if (cpumask_test_cpu(best_cpu, &p->cpus_allowed) &&
+		    cpumask_test_cpu(best_cpu, cpu_active_mask) &&
+>>>>>>> 3cb2d84... Revert "sched/deadline: Remove cpu_active_mask from cpudl_find()"
 		    dl_time_before(dl_se->deadline, cp->elements[0].dl)) {
 			if (later_mask)
 				cpumask_set_cpu(best_cpu, later_mask);
