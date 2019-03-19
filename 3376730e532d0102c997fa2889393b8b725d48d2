@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2e8f3f7_c566eae4",
+        "filename": "drivers/trusty/trusty-mem.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-03-19T12:53:56Z",
+      "side": 1,
+      "message": "dev_err()?",
+      "range": {
+        "startLine": 128,
+        "startChar": 2,
+        "endLine": 128,
+        "endChar": 8
+      },
+      "revId": "3376730e532d0102c997fa2889393b8b725d48d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6915cc9_c7d88238",
+        "filename": "drivers/trusty/trusty-virtio.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-03-19T12:53:56Z",
+      "side": 1,
+      "message": "dev_err()?",
+      "range": {
+        "startLine": 339,
+        "startChar": 2,
+        "endLine": 339,
+        "endChar": 8
+      },
+      "revId": "3376730e532d0102c997fa2889393b8b725d48d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
