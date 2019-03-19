@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16595748_b7e4b857",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-03-19T12:52:17Z",
+      "side": 1,
+      "message": "it is 2019 :)\n\nNo SPDX license line?",
+      "range": {
+        "startLine": 2,
+        "startChar": 25,
+        "endLine": 2,
+        "endChar": 26
+      },
+      "revId": "83c1fcb01d553776e838566bfba9e7e1a3e6b492",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
