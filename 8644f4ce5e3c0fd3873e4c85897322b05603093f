@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a147109_71a242a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-03-21T21:59:45Z",
+      "side": 1,
+      "message": "It\u0027s ok for this bug to be here, but please create a bug via go/ack-oot-bug (as this code is not upstream yet) and update here.\n\nPlease also add a Test: tag with a one liner roughly explaining how you tested the change. It\u0027d be great if you put a more detailed explanation in the Out of Tree bug you are about to file. Thanks!",
+      "range": {
+        "startLine": 60,
+        "startChar": 5,
+        "endLine": 60,
+        "endChar": 14
+      },
+      "revId": "8644f4ce5e3c0fd3873e4c85897322b05603093f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
