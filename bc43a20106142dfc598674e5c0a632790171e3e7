@@ -16,6 +16,24 @@
       "revId": "bc43a20106142dfc598674e5c0a632790171e3e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21018974_7da4bd8d",
+        "filename": "drivers/trusty/trusty-hafnium.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2019-03-22T23:19:33Z",
+      "side": 1,
+      "message": "It does not do much here. The normal trusty IRQ driver sits on top of the trusty driver and delivers interrupts to trusty. Here it is currently only used to get a handle to the trusty device so we can call into it when we get an unsolicited message from trusty. We could rename it here or come up with a better way to get a call in the other direction.",
+      "parentUuid": "413a71ab_508e89b7",
+      "revId": "bc43a20106142dfc598674e5c0a632790171e3e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
