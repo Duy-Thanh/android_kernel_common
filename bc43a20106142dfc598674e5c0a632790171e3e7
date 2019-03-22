@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "413a71ab_508e89b7",
+        "filename": "drivers/trusty/trusty-hafnium.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2019-03-22T18:46:20Z",
+      "side": 1,
+      "message": "I\u0027m struggling to follow this... what is the IRQ driver for exactly? It doesn\u0027t seem to actually register for an IRQ as far as I can see..",
+      "revId": "bc43a20106142dfc598674e5c0a632790171e3e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
