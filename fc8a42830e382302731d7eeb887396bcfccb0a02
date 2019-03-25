@@ -76,6 +76,24 @@
     },
     {
       "key": {
+        "uuid": "5e85bb85_5adaf368",
+        "filename": "block/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-03-25T19:20:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aad1d0c5_bd304b86",
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5aa53da3_d78094bf",
         "filename": "block/bio.c",
         "patchSetId": 3
@@ -96,6 +114,30 @@
       "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a96e7bf_cd96387e",
+        "filename": "block/bio.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-03-25T19:20:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5aa53da3_d78094bf",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 36
+      },
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +187,30 @@
     },
     {
       "key": {
+        "uuid": "de78c3ce_d2a406d4",
+        "filename": "block/bio.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-03-25T19:20:54Z",
+      "side": 1,
+      "message": "I should\u0027ve checked where bio_integrity_clone was called - it\u0027s probably the same places I\u0027d want to clone the crypt context too.\n\nDone",
+      "parentUuid": "b5b66df9_d17e4ac7",
+      "range": {
+        "startLine": 628,
+        "startChar": 1,
+        "endLine": 628,
+        "endChar": 24
+      },
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "015357a0_6fedffb7",
         "filename": "block/blk-merge.c",
         "patchSetId": 3
@@ -156,6 +222,24 @@
       "writtenOn": "2019-03-05T21:44:52Z",
       "side": 1,
       "message": "Move to above the update of -\u003enr_phys_segments.",
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c8a6a2b_5f791eb4",
+        "filename": "block/blk-merge.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-03-25T19:20:54Z",
+      "side": 1,
+      "message": "AAaaaahhhh!\n\nDone.",
+      "parentUuid": "015357a0_6fedffb7",
       "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -185,6 +269,30 @@
     },
     {
       "key": {
+        "uuid": "a8292989_ec3e3016",
+        "filename": "block/blk-merge.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-03-25T19:20:54Z",
+      "side": 1,
+      "message": "I should have tried to compile the version I was submitting for code review, but rest assured the actual code on kernel master (as well as the version I have for testing the code on my device kernel) compile (and run).",
+      "parentUuid": "5eeeaf20_e2d9028a",
+      "range": {
+        "startLine": 866,
+        "startChar": 0,
+        "endLine": 866,
+        "endChar": 43
+      },
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a0f8934f_c05faf64",
         "filename": "block/blk-merge.c",
         "patchSetId": 3
@@ -196,6 +304,24 @@
       "writtenOn": "2019-03-05T21:44:52Z",
       "side": 1,
       "message": "So I\u0027m not super familiar with this code, but it looks like blk_try_merge() may be the wrong place to add the front/back mergable checks.  It looks like blk_try_merge() isn\u0027t not always called, and sometimes .elevator_merge_fn() is called instead.  Possibly these checks should go in ll_new_hw_segment() instead?  What was the thinking behind putting the checks here specifically?",
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d54f7d1_137c86c2",
+        "filename": "block/blk-merge.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-03-25T19:20:54Z",
+      "side": 1,
+      "message": "In kernel master all the elevator merge stuff has been removed and I think everything is now \"unified\" to use the functions in this file to merge bios/requests so this function is always called in master.\n\nIt also looks like the code to check whether bios/requests can be merged is split into blk_rq_merge_ok and blk_try_merge, with rq_merge_ok checking things like flags, and try_merge checking for \"continuity\", which is why I put the DUN continuity check here. We could put it in ll_new_hw_segments instead if it makes more sense for the check to be there instead.",
+      "parentUuid": "a0f8934f_c05faf64",
       "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -216,6 +342,24 @@
       "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64ba57c3_db4c2c87",
+        "filename": "include/linux/bio.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-03-25T19:20:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "947c9b23_789f1419",
+      "revId": "fc8a42830e382302731d7eeb887396bcfccb0a02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
