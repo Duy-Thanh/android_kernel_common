@@ -34,6 +34,24 @@
       "revId": "bc43a20106142dfc598674e5c0a632790171e3e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43a5b292_5660bd78",
+        "filename": "drivers/trusty/trusty-hafnium.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2019-03-25T11:16:15Z",
+      "side": 1,
+      "message": "Ah, I see. That makes sense, but it might be worth having a comment here saying what you just said, for the next person who comes along trying to understand it.",
+      "parentUuid": "21018974_7da4bd8d",
+      "revId": "bc43a20106142dfc598674e5c0a632790171e3e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
