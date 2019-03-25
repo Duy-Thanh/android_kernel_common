@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f66e1c7a_60683862",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-03-25T19:21:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de2b0573_d643be32",
+      "revId": "7d9043d79b866a4714d6c91b332185ba4df64432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e979fe5e_a3fa9375",
         "filename": "drivers/scsi/ufs/ufshcd.c",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "7d9043d79b866a4714d6c91b332185ba4df64432",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31a0256c_168f56f9",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4652,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-03-25T19:21:52Z",
+      "side": 1,
+      "message": "Every scsi device will only have an extra pointer in its request queue. The actual instance of a keyslot manager is only set up if the host supports inline crypto requests (the function doesn\u0027t allocate memory or do anything else if the host doesn\u0027t support inline crypto). Or is your concern that the extra pointer itself is a potential waste of memory?",
+      "parentUuid": "e979fe5e_a3fa9375",
+      "revId": "7d9043d79b866a4714d6c91b332185ba4df64432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
