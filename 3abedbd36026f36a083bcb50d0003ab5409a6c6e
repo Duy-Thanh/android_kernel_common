@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a79b686d_5e4881fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-26T16:54:01Z",
+      "side": 1,
+      "message": "There are several architectural helpers that must be used instead such, as div_u64_rem, div_s64_rem, div64_u64_rem, __iter_div_u64_rem(). However, your utilization is probably better served by a shift and mask operation given power of two.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 55
+      },
+      "revId": "3abedbd36026f36a083bcb50d0003ab5409a6c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b29aec5_544bf269",
+        "filename": "drivers/md/dm-bow.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-26T16:54:01Z",
+      "side": 1,
+      "message": "since block_size is power of two and the calculation below for return makes that same assumption\n\n    WARN_ON((sector \u0026 (((sector_t)1 \u003c\u003c (bc-\u003eblock_shift - SECTOR_SHIFT)) - 1)) !\u003d 0);\n\nis preferred and is more \u0027balanced\u0027 with respect to the math (use SECTOR_SHIFT and block_shift in both places)",
+      "range": {
+        "startLine": 269,
+        "startChar": 9,
+        "endLine": 269,
+        "endChar": 53
+      },
+      "revId": "3abedbd36026f36a083bcb50d0003ab5409a6c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
