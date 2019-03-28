@@ -69,6 +69,24 @@
       "revId": "7d9043d79b866a4714d6c91b332185ba4df64432",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d54e373a_210314b0",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4652,
+      "author": {
+        "id": 1294339
+      },
+      "writtenOn": "2019-03-28T14:51:02Z",
+      "side": 1,
+      "message": "Take UFS storage device as example, every active LUN and W-LUN (Boot W-LUN, Device W-LUN...etc.) in UFS have its own scsi device and request queue. In this case, multiple ksm instances will be created on a single ufs host if the host supports inline crypto.\n1) This wastes memory because not every scsi device needs to handle inline crypto requests. In current Android, inline crypto may be enabled only in one scsi device with user data partition in it.\n2) If multiple scsi devices need to handle inline crypto requests, synchronization issue may happen when multiple key slot managers access the same crypto config array in the same UFS host.",
+      "parentUuid": "31a0256c_168f56f9",
+      "revId": "7d9043d79b866a4714d6c91b332185ba4df64432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
