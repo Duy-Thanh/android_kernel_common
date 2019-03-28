@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b44aed80_354f9020",
+        "filename": "drivers/char/random.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-03-28T09:56:38Z",
+      "side": 1,
+      "message": "In 4.16 and newer, the spin_unlock_irqrestore() is just done before this if() block, and numa_crng_init() and crng_init \u003d 2 run unprotected. This seems to still be the case in 5.0. This still seems to be the case upstream. Is there any reason we need to do this differently on 4.9? The 4.9 LTS code really looks a lot like 4.16\u0027s, just it has this locking bug.",
+      "range": {
+        "startLine": 896,
+        "startChar": 2,
+        "endLine": 896,
+        "endChar": 45
+      },
+      "revId": "a1d2cbecce56a229490828dbf30567cdbf16e5af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
