@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "529c03fd_4208e7c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-03-28T10:00:55Z",
+      "side": 1,
+      "message": "pedantic nit, add\nTest: n/a \n\n:)",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 3
+      },
+      "revId": "c529356473ab2ae5a4bef42c4d0298123b1710a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
