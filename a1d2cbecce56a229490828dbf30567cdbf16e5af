@@ -46,6 +46,30 @@
       "revId": "a1d2cbecce56a229490828dbf30567cdbf16e5af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3f88d27_01523c80",
+        "filename": "drivers/char/random.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-03-29T00:03:24Z",
+      "side": 1,
+      "message": "Yes, so I was right. See L434. All writes to crng_init are to be protected by primary_crng-\u003elock. If upstream or 4.16 is not doing this, then that seems\nlike a bug upstream instead?",
+      "parentUuid": "a40537e9_88a8586b",
+      "range": {
+        "startLine": 896,
+        "startChar": 2,
+        "endLine": 896,
+        "endChar": 45
+      },
+      "revId": "a1d2cbecce56a229490828dbf30567cdbf16e5af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
