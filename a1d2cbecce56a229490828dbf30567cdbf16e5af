@@ -70,6 +70,30 @@
       "revId": "a1d2cbecce56a229490828dbf30567cdbf16e5af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbbfdd6c_9846cd37",
+        "filename": "drivers/char/random.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-03-29T04:10:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d3f88d27_01523c80",
+      "range": {
+        "startLine": 896,
+        "startChar": 2,
+        "endLine": 896,
+        "endChar": 45
+      },
+      "revId": "a1d2cbecce56a229490828dbf30567cdbf16e5af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
