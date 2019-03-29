@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d976ccb_78cfe390",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-03-29T00:42:16Z",
+      "side": 1,
+      "message": "Thanks a lot of these Andrey, it helps a bunch.\nOne question though, what about 4.14 / 4.19? None of these are needed there?\n\nIf not, then we are going to need whichever one of these patches apply to those kernels too. (so we are at feature parity for _all_ common kernels for Q)",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 63
+      },
+      "revId": "a6251ef9e886155f114034688fadf3f5a064f755",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
