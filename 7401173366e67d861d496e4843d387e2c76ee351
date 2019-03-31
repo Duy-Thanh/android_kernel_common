@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc508762_f81e130c",
+        "filename": "drivers/net/tun.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2290,
+      "author": {
+        "id": 1121354
+      },
+      "writtenOn": "2019-03-31T00:04:43Z",
+      "side": 0,
+      "message": "I am not sure the tun interface filtering is covered by any other security checks though, I think sepolicy allow apps to call this ioctl this but only app with permission NET_ADMIN can do it because of this check here.\n+lorenzo@ do you think this is no longer needed?",
+      "range": {
+        "startLine": 2286,
+        "startChar": 0,
+        "endLine": 2290,
+        "endChar": 6
+      },
+      "revId": "7401173366e67d861d496e4843d387e2c76ee351",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
