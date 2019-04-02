@@ -22,6 +22,30 @@
       "revId": "a6251ef9e886155f114034688fadf3f5a064f755",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1be8f9b2_050a066e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1471648
+      },
+      "writtenOn": "2019-04-02T16:58:38Z",
+      "side": 1,
+      "message": "We want this on 4.14 and 4.19 as well, and some patches are indeed needed there.\n\nThe plan was to first deploy this on Pixel 3 and make sure that everything actually works. Then move on to Pixel 4 and so on. If I had a Pixel 4 device, I probably wouldn\u0027t have bothered with 4.9 in the first place.\n\nI saw the note in the common kernel guidelines about the feature parity for the userspace exposed features. Is KASAN considered one of those? If so, do you want to merge all the common kernel changes into 4.9, 4.14 and 4.19 at the same time? If not, it would be easier to first merge 4.9 (or 4.14 if I happen to get a Pixel 4) and then carry on with 4.14/4.19.",
+      "parentUuid": "8d976ccb_78cfe390",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 63
+      },
+      "revId": "a6251ef9e886155f114034688fadf3f5a064f755",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
