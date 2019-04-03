@@ -98,7 +98,10 @@ __efistub_memcpy		= KALLSYMS_HIDE(__pi_memcpy);
 __efistub_memmove		= KALLSYMS_HIDE(__pi_memmove);
 __efistub_memset		= KALLSYMS_HIDE(__pi_memset);
 __efistub_strlen		= KALLSYMS_HIDE(__pi_strlen);
+<<<<<<< HEAD   (349ac1 Merge 4.4.177 into android-4.4-p)
 __efistub_strnlen		= KALLSYMS_HIDE(__pi_strnlen);
+=======
+>>>>>>> BRANCH (12ae58 Linux 4.4.178)
 __efistub_strcmp		= KALLSYMS_HIDE(__pi_strcmp);
 __efistub_strncmp		= KALLSYMS_HIDE(__pi_strncmp);
 __efistub___flush_dcache_area	= KALLSYMS_HIDE(__pi___flush_dcache_area);
