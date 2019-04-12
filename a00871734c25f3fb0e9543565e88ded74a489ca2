@@ -1,0 +1,819 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9020ba32_5f8be242",
+        "filename": "drivers/scsi/ufs/Kconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "I still think that if possible, this should be something like BLK_INLINE_ENCRYPTION which describes the feature, as opposed to the implementation.",
+      "range": {
+        "startLine": 115,
+        "startChar": 27,
+        "endLine": 115,
+        "endChar": 46
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68030dad_93880628",
+        "filename": "drivers/scsi/ufs/Kconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "Add help text",
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d46cc253_cf350de0",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "Perhaps add a function comment that explains how \"enabled\" is different from \"supported\".",
+      "range": {
+        "startLine": 16,
+        "startChar": 5,
+        "endLine": 16,
+        "endChar": 29
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d900e496_019e6c7c",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "How about renaming this to ufshcd_keyslot_valid(), then adding a function likewise for validating the cap_idx:\n\n static bool ufshcd_cap_idx_valid(struct ufs_hba *hba, unsigned int cap_idx)\n {\n        return cap_idx \u003c hba-\u003ecrypto_capabilities.num_crypto_cap;\n }\n\nThen the callers look like:\n\n        if (!ufshcd_is_crypto_enabled(hba) ||\n            !ufshcd_cap_idx_valid(hba, cap_idx) ||\n            !ufshcd_keyslot_valid(hba, slot))\n                return -EINVAL;\n\nI think that\u0027s much easier to understand.  Also it avoids the issue of creating a function with external linkage that\u0027s not in the \"ufshcd_\" \"namespace\".",
+      "range": {
+        "startLine": 21,
+        "startChar": 5,
+        "endLine": 21,
+        "endChar": 30
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7097018b_0fab1c22",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "This can be simplified by making it return the mask or 0 directly.\n\n static u8 get_data_unit_size_mask(unsigned int data_unit_size)\n {\n        if (data_unit_size \u003c 512 || data_unit_size \u003e 65536 ||\n            !is_power_of_2(data_unit_size))\n                return 0;\n\n        return data_unit_size / 512;\n }\n\nAnd then callers don\u0027t actually have to check for 0 explicitly, since it\u0027s being used as a mask.\n\n        data_unit_mask \u003d get_data_unit_size_mask(data_unit_size);\n        if (!(data_unit_mask \u0026 hba-\u003ecrypto_cap_array[cap_idx].sdus_mask))\n                return -EINVAL;",
+      "range": {
+        "startLine": 30,
+        "startChar": 11,
+        "endLine": 30,
+        "endChar": 47
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f1223a5_72b0baa0",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "\u0027enum ufs_crypto_key_size size\u0027, since the type already conveys the meaning.",
+      "range": {
+        "startLine": 43,
+        "startChar": 57,
+        "endLine": 43,
+        "endChar": 72
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b0e0474_a7951275",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "Remove this, or remove the return 0 below.  Don\u0027t need both.",
+      "range": {
+        "startLine": 50,
+        "startChar": 1,
+        "endLine": 50,
+        "endChar": 19
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e32478a_b9c9d38d",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "Unnecessary braces.",
+      "range": {
+        "startLine": 80,
+        "startChar": 29,
+        "endLine": 80,
+        "endChar": 31
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44c3b1c7_b81c9837",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "Unnecessary braces.",
+      "range": {
+        "startLine": 92,
+        "startChar": 35,
+        "endLine": 92,
+        "endChar": 37
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6da92054_ff5a5729",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "For miscellaneous loop counters, use \u0027i\u0027 unless there is a good reason to use something else.  Try to be as boring as possible...",
+      "range": {
+        "startLine": 105,
+        "startChar": 5,
+        "endLine": 105,
+        "endChar": 6
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c3d4226_a01d1fd6",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "Define a reg_base variable with the value of this expression, so it can be reused.\n\n u32 reg_base \u003d hba-\u003ecrypto_cfg_register + slot * sizeof(*cfg);",
+      "range": {
+        "startLine": 114,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 27
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91a386de_66026a47",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "A comment explaining why the memory barriers are needed would be helpful.",
+      "range": {
+        "startLine": 116,
+        "startChar": 1,
+        "endLine": 116,
+        "endChar": 6
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4911bc5e_b6d3c58e",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "ARRAY_SIZE(cfg-\u003ereg_val)",
+      "range": {
+        "startLine": 117,
+        "startChar": 17,
+        "endLine": 117,
+        "endChar": 53
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7602af24_38483007",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "I\u0027d probably call this \u0027cfgs\u0027 and let the fact that it\u0027s an array speak for itself, but either works...",
+      "range": {
+        "startLine": 137,
+        "startChar": 29,
+        "endLine": 137,
+        "endChar": 36
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aaf0d682_1d9000eb",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "This is an error code, so call it \u0027err\u0027.",
+      "range": {
+        "startLine": 158,
+        "startChar": 1,
+        "endLine": 158,
+        "endChar": 2
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe72d59d_9216b998",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "Must zero the key before returning.\n\n memzero_explicit(\u0026cfg, sizeof(cfg));",
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b23808b2_e12affdb",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "err",
+      "range": {
+        "startLine": 195,
+        "startChar": 1,
+        "endLine": 195,
+        "endChar": 2
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a49bc00a_73e533aa",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "\u0027slot\u0027, since it\u0027s iterating through the keyslots, and \u0027slot\u0027 is used in lots of other places to mean a keyslot index.",
+      "range": {
+        "startLine": 201,
+        "startChar": 6,
+        "endLine": 201,
+        "endChar": 7
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfa164e4_be5f71c0",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "crypto_memneq()",
+      "range": {
+        "startLine": 204,
+        "startChar": 6,
+        "endLine": 204,
+        "endChar": 12
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d25f8666_8f3375c9",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "Check these before the key, since the key comparison is more expensive.",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 42
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53b51ff8_d38a38c6",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "Must zero the key before returning.\n\n memzero_explicit(\u0026cfg, sizeof(cfg));",
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05274684_12ec2372",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "u32.  This is just a number.",
+      "range": {
+        "startLine": 222,
+        "startChar": 1,
+        "endLine": 222,
+        "endChar": 7
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "705a93d8_ab6bdda9",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "This is a little confusing because the code goes through the trouble to create a pointer to the specific cfg entry, but it\u0027s actually only used for the memset().\n\nHow about:\n\n        memset(\u0026cfgs[slot], 0, sizeof(cfgs[slot]));\n\n        /* Clear the crypto cfg on the device */\n        reg_base \u003d hba-\u003ecrypto_cfg_register + slot * sizeof(cfgs[0]);\n        for (i \u003d 0; i \u003c sizeof(cfgs[0]); i +\u003d sizeof(__le32))\n                ufshcd_writel(hba, 0, reg_base + i);\n        mb();",
+      "range": {
+        "startLine": 231,
+        "startChar": 1,
+        "endLine": 231,
+        "endChar": 4
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa33e478_626f33fa",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "cap_idx",
+      "range": {
+        "startLine": 289,
+        "startChar": 6,
+        "endLine": 289,
+        "endChar": 7
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "462e8378_78939c5e",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "Unused function.",
+      "range": {
+        "startLine": 308,
+        "startChar": 4,
+        "endLine": 308,
+        "endChar": 33
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "983b3337_49dffabb",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "slot",
+      "range": {
+        "startLine": 338,
+        "startChar": 5,
+        "endLine": 338,
+        "endChar": 6
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43fa19d5_09fa021d",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "Unnecessary cast.  u8 is already promoted to \u0027int\u0027 when doing arithmetic with it.  Also \u0027uint\u0027 is non-conventional.",
+      "range": {
+        "startLine": 400,
+        "startChar": 9,
+        "endLine": 400,
+        "endChar": 13
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13731e06_2ea54748",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "cap_idx",
+      "range": {
+        "startLine": 412,
+        "startChar": 6,
+        "endLine": 412,
+        "endChar": 7
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92ece804_db56dc86",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "This is only needed in ufshcd-crypto.c.",
+      "range": {
+        "startLine": 28,
+        "startChar": 5,
+        "endLine": 28,
+        "endChar": 24
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a101bfbe_5e966a71",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "This is only needed in ufshcd-crypto.c.",
+      "range": {
+        "startLine": 37,
+        "startChar": 40,
+        "endLine": 37,
+        "endChar": 54
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9af9e18_c04a22fb",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2414,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "Move the WARN_ON() into the \u0027if\u0027 condition.",
+      "range": {
+        "startLine": 2414,
+        "startChar": 3,
+        "endLine": 2414,
+        "endChar": 14
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65239b48_8e611218",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2415,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "Seems the caller should handle the clear_bit_unlock().",
+      "range": {
+        "startLine": 2415,
+        "startChar": 3,
+        "endLine": 2415,
+        "endChar": 43
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9a33019_28d2c3c1",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2524,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "if (err) {\n         lrbp-\u003ecmd \u003d NULL;\n         clear_bit_unlock(tag, \u0026hba-\u003elrb_in_use);\n         goto out;\t\n }",
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94e51915_923f94a8",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4261,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "Unnecessary new blank line.",
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70885bf6_857fe74e",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "Need to add these fields to the comment above this struct.",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 19
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "174df530_d789d4cb",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "This struct already has a kerneldoc comment that documents all the other fields, so these new fields need to be added to it.",
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "057e0950_c0fc0fab",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T21:57:51Z",
+      "side": 1,
+      "message": "Why is this a void pointer, and not \u0027union ufs_crypto_cfg_entry *cfgs\u0027?",
+      "range": {
+        "startLine": 719,
+        "startChar": 7,
+        "endLine": 719,
+        "endChar": 18
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
