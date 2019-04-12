@@ -1,0 +1,991 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a4e6900_e4441026",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "This will eventually need to be split up into several patches.",
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fae59d36_e91b42b1",
+        "filename": "block/bio.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "This is in a .c file and not static, so drop the \u0027inline\u0027.",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 6
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73f95c10_48ac9a56",
+        "filename": "block/bio.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "This is in a .c file and not static, so drop the \u0027inline\u0027.",
+      "range": {
+        "startLine": 297,
+        "startChar": 0,
+        "endLine": 297,
+        "endChar": 6
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "916f7d39_05effa1a",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Add a file-level comment explaining briefly what blk-crypto is.",
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00c1af78_c8ddf5de",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "static const struct",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 6
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "937ccd2b_5bc3a1ed",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "crypto_alloc_skcipher() returns an ERR_PTR() on failure, not NULL.\n\nif (IS_ERR(slot_mem[slot].tfm)) {\n       err \u003d PTR_ERR(slot_mem[slot].tfm);\n       slot_mem[slot].tfm \u003d NULL;\n       return err;\n}",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 18
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2982e54_4c158731",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Aren\u0027t the swapped key words a quirk of UFS inline encryption?  I don\u0027t think we should swap words everywhere else to handle it.  Instead everywhere else should use the normal order, and the UFS driver should swap the words when programming keys.",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 53
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cb2b323_6811d705",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "return err;",
+      "range": {
+        "startLine": 83,
+        "startChar": 2,
+        "endLine": 83,
+        "endChar": 17
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "588d1a18_7a3ddd0a",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Be consistent.  There is data_unit_size_bytes, data_unit_size, and dataunit_size.  Pick one and use it everywhere.\n\nSimilarly there is alg_id, crypto_alg_id, and cap_idx.  Pick one and use it everywhere.",
+      "range": {
+        "startLine": 91,
+        "startChar": 21,
+        "endLine": 91,
+        "endChar": 34
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b405b8fe_c60b8f1b",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "This should be BLK_CRYPTO_NUM_KEYSLOTS.",
+      "range": {
+        "startLine": 109,
+        "startChar": 17,
+        "endLine": 109,
+        "endChar": 40
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f4b083e_61ae6329",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Use crypto_memneq() (constant-time comparison), to avoid leaking the contents of different keys via the time this takes to execute.",
+      "range": {
+        "startLine": 111,
+        "startChar": 6,
+        "endLine": 111,
+        "endChar": 12
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "874c1804_a61c025c",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Comment explaining why this just returns crypt_mode.",
+      "range": {
+        "startLine": 124,
+        "startChar": 1,
+        "endLine": 124,
+        "endChar": 19
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce778b85_a47f9244",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Add __init",
+      "range": {
+        "startLine": 137,
+        "startChar": 3,
+        "endLine": 137,
+        "endChar": 4
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8c808e0_5f869797",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Conventionally, boot-time initialization functions go at the bottom of the file.",
+      "range": {
+        "startLine": 137,
+        "startChar": 4,
+        "endLine": 137,
+        "endChar": 19
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "911f5ccd_0d8c68f5",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Using two underscores for static variables like this is unconventional.  How about prefixing all the variables with \u0027blk_crypto\u0027?  So blk_crypto_ksm, blk_crypto_wq, blk_crypto_slots, blk_crypto_bounce_page_pool, blk_crypto_work_mem_cache.",
+      "range": {
+        "startLine": 139,
+        "startChar": 1,
+        "endLine": 139,
+        "endChar": 6
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5df8aec_746145c2",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "pr_warn(",
+      "range": {
+        "startLine": 180,
+        "startChar": 1,
+        "endLine": 180,
+        "endChar": 20
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc246646_0c051910",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "I don\u0027t see the point of the double underscores here.  If there was a \"release_keyslot()\" that called this it could make sense, but there isn\u0027t.  Same for __program_keyslot().",
+      "range": {
+        "startLine": 184,
+        "startChar": 12,
+        "endLine": 184,
+        "endChar": 29
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbe3651c_4b9ee675",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "__le64, and add cpu_to_le64() below",
+      "range": {
+        "startLine": 292,
+        "startChar": 2,
+        "endLine": 292,
+        "endChar": 5
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b1eb94e_8708f81f",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Remove this negative sign.  -\u003ebi_status codes are not negated.",
+      "range": {
+        "startLine": 346,
+        "startChar": 19,
+        "endLine": 346,
+        "endChar": 20
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a629873a_3f61863a",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Add a comment for this function.",
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4556135_56f886ed",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Add a comment for this function.",
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d083aab_b522414a",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Conventionally, kernel code does not use an \u0027else\u0027 if the previous \u0027if\u0027 block ends in a return.",
+      "range": {
+        "startLine": 460,
+        "startChar": 3,
+        "endLine": 460,
+        "endChar": 9
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "353c3977_230291f0",
+        "filename": "block/blk-merge.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Move the WARN_ON() into the \u0027if\u0027 condition.",
+      "range": {
+        "startLine": 552,
+        "startChar": 2,
+        "endLine": 552,
+        "endChar": 13
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5281c458_6a79bcf6",
+        "filename": "block/blk-merge.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Unnecessary whitespace change.",
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84834976_a287aaa2",
+        "filename": "block/blk-merge.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Trailing whitespace.  checkpatch.pl should warn about this.",
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ca08ca9_2c967c2d",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Why is there a maximum number of slots?  It doesn\u0027t look like anything would break if you had more than this.",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 10,
+        "endChar": 21
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "218a30d4_9e20c71c",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Please add kerneldoc (function comments) for all externally visible keyslot_manager_* functions.",
+      "range": {
+        "startLine": 12,
+        "startChar": 24,
+        "endLine": 12,
+        "endChar": 46
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c6a0ba5_ac75ad17",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Check these in the same order as they\u0027re declared in the struct, so the code is easier to read.",
+      "range": {
+        "startLine": 22,
+        "startChar": 1,
+        "endLine": 26,
+        "endChar": 14
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bebfa958_d54b9485",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "struct_size(ksm, slot_refs, num_slots)",
+      "range": {
+        "startLine": 29,
+        "startChar": 15,
+        "endLine": 30,
+        "endChar": 37
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b8fe2b1_16760d37",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "If num_slots is odd, then last_used_seq_nums won\u0027t be properly aligned.\n\nHow about just using a separate kzalloc()\u0027ed buffer instead?",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 37
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c3cbe1c_e8292b94",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "min_seq_num",
+      "range": {
+        "startLine": 60,
+        "startChar": 5,
+        "endLine": 60,
+        "endChar": 12
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "256ed0a4_f190baae",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Generally, avoid random NULL checks unless there is a valid reason for the variable to be NULL.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 17
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78377c85_2fb425c7",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Unnecessary cast.",
+      "range": {
+        "startLine": 74,
+        "startChar": 9,
+        "endLine": 74,
+        "endChar": 23
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46c3ea4b_92728ee7",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Move this into the \u0027slot !\u003d -ENOKEY\u0027 block, so the weird cast to \u0027int\u0027 isn\u0027t needed?",
+      "range": {
+        "startLine": 81,
+        "startChar": 1,
+        "endLine": 81,
+        "endChar": 44
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c9dfef4_c41bc2e7",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "It would be cleaner to merge this with the previous line.\n\n  ksm-\u003elast_used_seq_nums[slot] \u003d ++ksm-\u003eseq_num;\n\nSame later in this function.",
+      "range": {
+        "startLine": 105,
+        "startChar": 34,
+        "endLine": 105,
+        "endChar": 46
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58a9c837_5536d9f5",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Add a comment describing the high-level task this code is doing, like \"Program the key into the least-recently-used slot that isn\u0027t currently in use.\"",
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ecce52e_03526e74",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "WARN_ON() already means \"This should never happen\", so this comment doesn\u0027t add anything.",
+      "range": {
+        "startLine": 137,
+        "startChar": 1,
+        "endLine": 137,
+        "endChar": 31
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96c78d3d_e795f5e2",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "This fits on the previous line without exceeding 80 characters.",
+      "range": {
+        "startLine": 167,
+        "startChar": 8,
+        "endLine": 167,
+        "endChar": 25
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5158f70f_9d77e910",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "This fits on the previous line without exceeding 80 characters.",
+      "range": {
+        "startLine": 177,
+        "startChar": 5,
+        "endLine": 177,
+        "endChar": 22
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4be97a1a_a1d463d3",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Why doesn\u0027t this return an error code (like -EBUSY) if the key couldn\u0027t be evicted because slot_refs[slot] \u003e 0?",
+      "range": {
+        "startLine": 191,
+        "startChar": 4,
+        "endLine": 191,
+        "endChar": 29
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c5685d3_27bde998",
+        "filename": "include/linux/blk-crypto.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Move to blk-crypto.c.",
+      "range": {
+        "startLine": 13,
+        "startChar": 7,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e721401a_1ec772fe",
+        "filename": "include/linux/blk_types.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Why not define these as BIT(0), BIT(1), BIT(2)?  Why are the shift amounts needed?\n\nAlso, for each flag add a brief comment describing it.",
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85b79806_2753678a",
+        "filename": "include/linux/blk_types.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "I don\u0027t think people will be happy with putting such a large struct directly in struct bio.  If I counted correctly, it increases sizeof(struct bio) by 72 bytes.\n\nCan -\u003ebi_crypt_ctx be made a pointer to a separately allocated struct instead?",
+      "range": {
+        "startLine": 223,
+        "startChar": 1,
+        "endLine": 223,
+        "endChar": 39
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88a557dd_cf7a2a50",
+        "filename": "include/linux/keyslot-manager.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "First sentence of comment should describe the high-level task the function accomplishes, not a detail such as what convention it uses to report errors.",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 43
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cc72200_e4496025",
+        "filename": "include/linux/keyslot-manager.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-12T19:12:35Z",
+      "side": 1,
+      "message": "Add a comment explaining what this is.",
+      "range": {
+        "startLine": 42,
+        "startChar": 7,
+        "endLine": 42,
+        "endChar": 22
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
