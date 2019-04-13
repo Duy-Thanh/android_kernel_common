@@ -87,6 +87,24 @@
       "revId": "7d9043d79b866a4714d6c91b332185ba4df64432",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "71f863f2_cf039018",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4652,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-13T00:49:18Z",
+      "side": 1,
+      "message": "I think Stanley is correct.  The keyslot manager needs to be a property of the UFS host controller, i.e. a field in struct ufs_hba.  Then, request_queue::ksm for each device attached to the host controller needs to point to the host controller\u0027s keyslot manager.",
+      "parentUuid": "d54e373a_210314b0",
+      "revId": "7d9043d79b866a4714d6c91b332185ba4df64432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
