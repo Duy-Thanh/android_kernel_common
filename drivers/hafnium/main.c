@@ -924,6 +924,7 @@ static struct platform_driver hf_int_driver = {
 		.name = HYPERVISOR_TIMER_NAME,
 		.owner = THIS_MODULE,
 		.of_match_table = of_match_ptr(hf_int_driver_id),
+		.probe_type = PROBE_PREFER_ASYNCHRONOUS,
 	},
 	.probe = hf_int_driver_probe,
 	.remove = hf_int_driver_remove,
@@ -933,7 +934,7 @@ static struct platform_driver hf_int_driver = {
  * Initializes the Hafnium driver by creating a thread for each vCPU of each
  * virtual machine.
  */
-static int __init hf_init(void)
+static int hf_probe(struct platform_device *pdev)
 {
 	static const struct net_proto_family proto_family = {
 		.family = PF_HF,
@@ -1132,7 +1133,7 @@ fail_with_cleanup:
  * Frees up all resources used by the Hafnium driver in preparation for
  * unloading it.
  */
-static void __exit hf_exit(void)
+static int hf_remove(struct platform_device *pdev)
 {
 	pr_info("Preparing to unload Hafnium\n");
 	sock_unregister(PF_HF);
@@ -1140,9 +1141,24 @@ static void __exit hf_exit(void)
 	hf_free_resources();
 	platform_driver_unregister(&hf_int_driver);
 	pr_info("Hafnium ready to unload\n");
+	return 0;
 }
 
-MODULE_LICENSE("GPL v2");
+static const struct of_device_id hafnium_of_match[] = {
+	{ .compatible = "android,hafnium-v1", },
+	{},
+};
 
-module_init(hf_init);
-module_exit(hf_exit);
+static struct platform_driver hf_driver = {
+	.probe = hf_probe,
+	.remove = hf_remove,
+	.driver = {
+		.name = "hafnium",
+		.owner = THIS_MODULE,
+		.of_match_table = hafnium_of_match,
+	},
+};
+
+module_platform_driver(hf_driver);
+
+MODULE_LICENSE("GPL v2");
