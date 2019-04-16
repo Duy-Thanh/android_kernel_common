@@ -273,6 +273,8 @@ static void hf_deliver_message(uint32_t vm_id)
 
 	/* None were waiting for a message so interrupt one. */
 	hf_interrupt_vm(vm->id, HF_MAILBOX_READABLE_INTID);
+	/* Always wake to avoid race */
+	hf_handle_wake_up_request(vm_id, 0);
 }
 
 /**
@@ -924,6 +926,7 @@ static struct platform_driver hf_int_driver = {
 		.name = HYPERVISOR_TIMER_NAME,
 		.owner = THIS_MODULE,
 		.of_match_table = of_match_ptr(hf_int_driver_id),
+		.probe_type = PROBE_FORCE_SYNCHRONOUS,
 	},
 	.probe = hf_int_driver_probe,
 	.remove = hf_int_driver_remove,
@@ -933,7 +936,7 @@ static struct platform_driver hf_int_driver = {
  * Initializes the Hafnium driver by creating a thread for each vCPU of each
  * virtual machine.
  */
-static int __init hf_init(void)
+static int hf_probe(struct platform_device *pdev)
 {
 	static const struct net_proto_family proto_family = {
 		.family = PF_HF,
@@ -997,7 +1000,7 @@ static int __init hf_init(void)
 	/* Only track the secondary VMs. */
 	total_vm_count = ret - 1;
 	hf_vms =
-		kmalloc_array(total_vm_count, sizeof(struct hf_vm), GFP_KERNEL);
+		kcalloc(total_vm_count, sizeof(struct hf_vm), GFP_KERNEL);
 	if (!hf_vms)
 		return -ENOMEM;
 
@@ -1040,8 +1043,8 @@ static int __init hf_init(void)
 		}
 
 		vm->vcpu_count = ret;
-		vm->vcpu = kmalloc_array(vm->vcpu_count, sizeof(struct hf_vcpu),
-					 GFP_KERNEL);
+		vm->vcpu = kcalloc(vm->vcpu_count, sizeof(struct hf_vcpu),
+				   GFP_KERNEL);
 		if (!vm->vcpu) {
 			ret = -ENOMEM;
 			goto fail_with_cleanup;
@@ -1132,7 +1135,7 @@ fail_with_cleanup:
  * Frees up all resources used by the Hafnium driver in preparation for
  * unloading it.
  */
-static void __exit hf_exit(void)
+static int hf_remove(struct platform_device *pdev)
 {
 	pr_info("Preparing to unload Hafnium\n");
 	sock_unregister(PF_HF);
@@ -1140,9 +1143,24 @@ static void __exit hf_exit(void)
 	hf_free_resources();
 	platform_driver_unregister(&hf_int_driver);
 	pr_info("Hafnium ready to unload\n");
+	return 0;
 }
 
-MODULE_LICENSE("GPL v2");
+static const struct of_device_id hafnium_of_match[] = {
+	{ .compatible = "android,hafnium-v1", },
+	{},
+};
 
-module_init(hf_init);
-module_exit(hf_exit);
+static struct platform_driver hf_driver = {
+	.probe = hf_probe,
+	.remove = hf_remove,
+	.driver = {
+		.name = "hafnium",
+		.owner = THIS_MODULE,
+		.of_match_table = hafnium_of_match,
+	},
+};
+
+module_platform_driver(hf_driver);
+
+MODULE_LICENSE("GPL v2");
