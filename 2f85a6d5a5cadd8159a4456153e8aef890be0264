@@ -105,6 +105,29 @@
     },
     {
       "key": {
+        "uuid": "b4895f35_0b5f0482",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T20:40:27Z",
+      "side": 1,
+      "message": "Call this \"struct blk_crypto_keyslot\"?",
+      "range": {
+        "startLine": 24,
+        "startChar": 7,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "937ccd2b_5bc3a1ed",
         "filename": "block/blk-crypto.c",
         "patchSetId": 4
@@ -122,6 +145,47 @@
         "endLine": 69,
         "endChar": 18
       },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfade6fc_b69b9453",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T20:40:27Z",
+      "side": 1,
+      "message": "Also, it\u0027s easier to check for error first, then store the tfm in memory afterwards.\n\n                tfm \u003d crypto_alloc_skcipher(                                     \n                        blk_crypt_modes[cap_idx].cipher_str, 0, 0);              \n                if (IS_ERR(tfm))                                                 \n                        return PTR_ERR(tfm);                                     \n                crypto_skcipher_set_flags(tfm, CRYPTO_TFM_REQ_WEAK_KEY);         \n                slotp-\u003etfm \u003d tfm;",
+      "parentUuid": "937ccd2b_5bc3a1ed",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 18
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "070236ec_8d6e7236",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T20:40:27Z",
+      "side": 1,
+      "message": "Move this to after crypto_skcipher_setkey(), so the key isn\u0027t left in memory if crypto_skcipher_setkey() fails.",
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -213,6 +277,29 @@
         "startChar": 17,
         "endLine": 109,
         "endChar": 40
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5816bba_04d9dac8",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T20:40:27Z",
+      "side": 1,
+      "message": "\u0027slot\u0027 instead of \u0027c\u0027",
+      "range": {
+        "startLine": 109,
+        "startChar": 6,
+        "endLine": 109,
+        "endChar": 7
       },
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
@@ -381,6 +468,75 @@
     },
     {
       "key": {
+        "uuid": "204b0a8e_edebb970",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T20:40:27Z",
+      "side": 1,
+      "message": "slot",
+      "range": {
+        "startLine": 195,
+        "startChar": 5,
+        "endLine": 195,
+        "endChar": 8
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27bee0e4_62296ce0",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T20:40:27Z",
+      "side": 1,
+      "message": "\u0027dun\u0027 here instead of \u0027iv\u0027.  Same in decrypt_bio().",
+      "range": {
+        "startLine": 219,
+        "startChar": 6,
+        "endLine": 219,
+        "endChar": 8
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39116e50_48632273",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T20:40:27Z",
+      "side": 1,
+      "message": "AFAICS, changing a bio\u0027s bio_vec list is not allowed, so you cannot actually do this.  Instead you\u0027ll have to create a new bio containing the bounce pages, like blk_queue_bounce() does.  Or am I missing something?",
+      "range": {
+        "startLine": 254,
+        "startChar": 2,
+        "endLine": 254,
+        "endChar": 45
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cbe3651c_4b9ee675",
         "filename": "block/blk-crypto.c",
         "patchSetId": 4
@@ -397,6 +553,76 @@
         "startChar": 2,
         "endLine": 292,
         "endChar": 5
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8cc77b2_74ae875b",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T20:40:27Z",
+      "side": 1,
+      "message": "For the increment you can use:\n\n                le64_add_cpu(\u0026iv.dun, 1);",
+      "parentUuid": "cbe3651c_4b9ee675",
+      "range": {
+        "startLine": 292,
+        "startChar": 2,
+        "endLine": 292,
+        "endChar": 5
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c86d8ce3_0f91ef08",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T20:40:27Z",
+      "side": 1,
+      "message": "This is in-place decryption, so there\u0027s no need for separate src and dst scatterlists.  Just do:\n\nsg_init_table(\u0026sg, 1);\nsg_set_page(\u0026sg, page, bv.bv_len, bv.bv_offset);\n\n...\nskcipher_request_set_crypt(ciph_req, \u0026sg, \u0026sg, bv.bv_len, iv.bytes);\n...\n\nAlso, you don\u0027t need to call sg_init_table() for every page.  Instead just call it once for the whole bio.  Similarly for encryption, except there you still need src and dst since encryption isn\u0027t in-place.",
+      "range": {
+        "startLine": 319,
+        "startChar": 0,
+        "endLine": 322,
+        "endChar": 51
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf3a77f3_3cf03182",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T20:40:27Z",
+      "side": 1,
+      "message": "queue_decrypt_bio()",
+      "range": {
+        "startLine": 340,
+        "startChar": 12,
+        "endLine": 340,
+        "endChar": 27
       },
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
@@ -438,6 +664,29 @@
       "writtenOn": "2019-04-12T19:12:35Z",
       "side": 1,
       "message": "Add a comment for this function.",
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c6ef81a_2001c5bc",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T20:40:27Z",
+      "side": 1,
+      "message": "AFAICS, this means that inline encryption will work on all block devices even if the hardware doesn\u0027t support it.  But filesystems will still be able to check whether the hardware actually supports inline encryption via the keyslot_manager, right?",
+      "range": {
+        "startLine": 406,
+        "startChar": 1,
+        "endLine": 406,
+        "endChar": 34
+      },
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -834,6 +1083,29 @@
     },
     {
       "key": {
+        "uuid": "e0727fe2_2db8fb9e",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T20:40:27Z",
+      "side": 1,
+      "message": "If no one is going to check the return value (since this only fails if the caller is broken), just make this return void.",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 3
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5158f70f_9d77e910",
         "filename": "block/keyslot-manager.c",
         "patchSetId": 4
@@ -937,6 +1209,23 @@
         "endLine": 223,
         "endChar": 39
       },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9290656d_91c1043b",
+        "filename": "include/linux/blkdev.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T20:40:27Z",
+      "side": 1,
+      "message": "Forward-declaring struct keyslot_manager would be sufficient here, rather than including keyslot-manager.h.",
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
