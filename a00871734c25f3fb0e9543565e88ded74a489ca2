@@ -272,6 +272,30 @@
     },
     {
       "key": {
+        "uuid": "5c5e5e56_cd2bf6b1",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T23:48:58Z",
+      "side": 1,
+      "message": "Also, wouldn\u0027t wmb() be sufficient, since this code is only writing to the hardware, not reading?  Why mb()?\n\nAlso take a look at Section 7.1.3 \"CRYPTOCFG Configuration Procedure\" in the UFSHCI v2.1 standard.  It makes recommendations different from what is done here.  Basically:\n\n- If CFGE is set before, clear it before writing the key\n- Write the key before setting CFGE\n- Only write up to dword 16 (the one containing CFGE), not 31\n\nIt also says the key must be written \"sequentially\", so given that and the fact that it documents the ordering w.r.t. CFGE, perhaps wmb() is even needed after every dword written?",
+      "parentUuid": "91a386de_66026a47",
+      "range": {
+        "startLine": 116,
+        "startChar": 1,
+        "endLine": 116,
+        "endChar": 6
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4911bc5e_b6d3c58e",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -513,6 +537,29 @@
     },
     {
       "key": {
+        "uuid": "63d60ff6_25968c12",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T23:48:58Z",
+      "side": 1,
+      "message": "I wonder if it\u0027s sufficient to just clear CFGE?  The standard is unclear so probably to be safe we should write zeroes to the key too, as this code does.  But if so, a comment noting that clearing CFGE isn\u0027t guaranteed to be sufficient would be helpful.",
+      "range": {
+        "startLine": 235,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 38
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "aa33e478_626f33fa",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -559,6 +606,29 @@
     },
     {
       "key": {
+        "uuid": "545644c2_f7067016",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T23:48:58Z",
+      "side": 1,
+      "message": "Fold this into ufshcd_crypto_enable()?  Or else make it static and maybe rename it to ufshcd_program_all_keys().  Otherwise it makes it sound like it\u0027s actually resetting the hardware, as opposed to responding to a reset.",
+      "range": {
+        "startLine": 335,
+        "startChar": 0,
+        "endLine": 335,
+        "endChar": 24
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "983b3337_49dffabb",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -575,6 +645,121 @@
         "startChar": 5,
         "endLine": 338,
         "endChar": 6
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7eff8a90_75a783c7",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T23:48:58Z",
+      "side": 1,
+      "message": "AFAICS, this is also called on driver initialization, in which case it clears all keys.  I assume that\u0027s intentional, in order to clear keys that may be around from someone/something using the hardware prior to the driver being loaded?  The comment should clarify.",
+      "range": {
+        "startLine": 340,
+        "startChar": 1,
+        "endLine": 340,
+        "endChar": 60
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15b00fa7_8c473a10",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T23:48:58Z",
+      "side": 1,
+      "message": "How about providing two functions: ufshcd_crypto_enable() and ufshcd_crypto_disable()?  Having to call *_enable() to disable is counterintuitive.",
+      "range": {
+        "startLine": 345,
+        "startChar": 0,
+        "endLine": 345,
+        "endChar": 58
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67f6c270_ce71b444",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T23:48:58Z",
+      "side": 1,
+      "message": "This function doesn\u0027t actually initialize the hardware, so this description is misleading.  How about:\n\n\"Read crypto capabilities and allocate keyslot memory\"",
+      "range": {
+        "startLine": 361,
+        "startChar": 28,
+        "endLine": 361,
+        "endChar": 65
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50b9983e_010d952e",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T23:48:58Z",
+      "side": 1,
+      "message": "IMO, we shouldn\u0027t bother falling back to \"no crypto support\" if memory allocation failed.  If it happens, it\u0027s a major problem.",
+      "range": {
+        "startLine": 365,
+        "startChar": 3,
+        "endLine": 366,
+        "endChar": 54
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "296ef2f0_fa7b178a",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T23:48:58Z",
+      "side": 1,
+      "message": "Specification says \"larger than 04h\", not \"greater than or equal to 04h\".",
+      "range": {
+        "startLine": 382,
+        "startChar": 4,
+        "endLine": 382,
+        "endChar": 27
       },
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
@@ -674,6 +859,29 @@
     },
     {
       "key": {
+        "uuid": "3105e62a_f56751eb",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2229,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T23:48:58Z",
+      "side": 1,
+      "message": "Move this comment up, so it\u0027s before the first line of code that changes req_desc-\u003eheader.",
+      "range": {
+        "startLine": 2229,
+        "startChar": 1,
+        "endLine": 2229,
+        "endChar": 48
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d9af9e18_c04a22fb",
         "filename": "drivers/scsi/ufs/ufshcd.c",
         "patchSetId": 4
@@ -713,6 +921,29 @@
         "startChar": 3,
         "endLine": 2415,
         "endChar": 43
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab9ff4bc_e5969ce4",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2428,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-04-16T23:48:58Z",
+      "side": 1,
+      "message": "Make this an early return?\n\nif (!bio_is_encrypted(cmd-\u003erequest-\u003ebio) ||\n    !bio_crypt_check_process_ksm(cmd-\u003erequest-\u003ebio, cmd-\u003erequest-\u003eq)) {\n        lrbp-\u003ecrypto_enable \u003d false;\n        return 0;\n}\n\nAlso, couldn\u0027t there be one function that does both these checks?  Like:\n\nif (!bio_crypt_should_process(cmd-\u003erequest-\u003ebio, cmd-\u003erequest-\u003eq)) {\n        lrbp-\u003ecrypto_enable \u003d false;\n        return 0;\n}",
+      "range": {
+        "startLine": 2428,
+        "startChar": 2,
+        "endLine": 2428,
+        "endChar": 30
       },
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
