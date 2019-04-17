@@ -1,6 +1,6 @@
 VERSION = 4
 PATCHLEVEL = 9
-SUBLEVEL = 168
+SUBLEVEL = 169
 EXTRAVERSION =
 NAME = Roaring Lionus
 
@@ -507,9 +507,14 @@ endif
 
 ifeq ($(cc-name),clang)
 ifneq ($(CROSS_COMPILE),)
+<<<<<<< HEAD   (bbb187 Merge 4.9.168 into android-4.9-p)
 CLANG_TRIPLE    ?= $(CROSS_COMPILE)
 CLANG_FLAGS	:= --target=$(notdir $(CLANG_TRIPLE:%-=%))
 GCC_TOOLCHAIN_DIR := $(dir $(shell which $(LD)))
+=======
+CLANG_FLAGS	:= --target=$(notdir $(CROSS_COMPILE:%-=%))
+GCC_TOOLCHAIN_DIR := $(dir $(shell which $(CROSS_COMPILE)elfedit))
+>>>>>>> BRANCH (df6216 Linux 4.9.169)
 CLANG_FLAGS	+= --prefix=$(GCC_TOOLCHAIN_DIR)
 GCC_TOOLCHAIN	:= $(realpath $(GCC_TOOLCHAIN_DIR)/..)
 endif
