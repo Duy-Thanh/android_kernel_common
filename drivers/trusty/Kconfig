@@ -49,4 +49,9 @@ config TRUSTY_VIRTIO_IPC
 	  If you choose to build a module, it'll be called trusty-ipc.
 	  Say N if unsure.
 
+config TRUSTY_X86_64
+	tristate "Trusty x86_64 driver"
+	select TRUSTY_CUSTOM_SMC
+	default n
+
 endmenu
