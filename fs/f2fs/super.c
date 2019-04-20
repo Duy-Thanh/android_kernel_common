@@ -1444,7 +1444,11 @@ static void default_options(struct f2fs_sb_info *sbi)
 	sbi->sb->s_flags |= SB_LAZYTIME;
 	set_opt(sbi, FLUSH_MERGE);
 	set_opt(sbi, DISCARD);
+<<<<<<< HEAD   (275442 ANDROID: cuttlefish_defconfig: Enable L2TP/PPTP)
 	if (f2fs_sb_has_blkzoned(sbi))
+=======
+	if (f2fs_sb_has_blkzoned(sbi->sb))
+>>>>>>> BRANCH (c98875 Linux 4.19.36)
 		set_opt_mode(sbi, F2FS_MOUNT_LFS);
 	else
 		set_opt_mode(sbi, F2FS_MOUNT_ADAPTIVE);
@@ -2123,6 +2127,19 @@ static int f2fs_dquot_commit_info(struct super_block *sb, int type)
 		set_sbi_flag(F2FS_SB(sb), SBI_QUOTA_NEED_REPAIR);
 	return ret;
 }
+
+static void f2fs_truncate_quota_inode_pages(struct super_block *sb)
+{
+	struct quota_info *dqopt = sb_dqopt(sb);
+	int type;
+
+	for (type = 0; type < MAXQUOTAS; type++) {
+		if (!dqopt->files[type])
+			continue;
+		f2fs_inode_synced(dqopt->files[type]);
+	}
+}
+
 
 static int f2fs_get_projid(struct inode *inode, kprojid_t *projid)
 {
@@ -3437,7 +3454,11 @@ sync_free_meta:
 free_meta:
 #ifdef CONFIG_QUOTA
 	f2fs_truncate_quota_inode_pages(sb);
+<<<<<<< HEAD   (275442 ANDROID: cuttlefish_defconfig: Enable L2TP/PPTP)
 	if (f2fs_sb_has_quota_ino(sbi) && !f2fs_readonly(sb))
+=======
+	if (f2fs_sb_has_quota_ino(sb) && !f2fs_readonly(sb))
+>>>>>>> BRANCH (c98875 Linux 4.19.36)
 		f2fs_quota_off_umount(sbi->sb);
 #endif
 	/*

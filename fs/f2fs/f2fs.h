@@ -3552,7 +3552,11 @@ static inline int get_blkz_type(struct f2fs_sb_info *sbi,
 
 static inline bool f2fs_hw_should_discard(struct f2fs_sb_info *sbi)
 {
+<<<<<<< HEAD   (275442 ANDROID: cuttlefish_defconfig: Enable L2TP/PPTP)
 	return f2fs_sb_has_blkzoned(sbi);
+=======
+	return f2fs_sb_has_blkzoned(sbi->sb);
+>>>>>>> BRANCH (c98875 Linux 4.19.36)
 }
 
 static inline bool f2fs_hw_support_discard(struct f2fs_sb_info *sbi)
