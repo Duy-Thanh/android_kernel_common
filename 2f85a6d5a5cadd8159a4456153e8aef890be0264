@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "2b0f8b41_c1152be0",
+        "filename": "block/bio.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fae59d36_e91b42b1",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 6
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "73f95c10_48ac9a56",
         "filename": "block/bio.c",
         "patchSetId": 4
@@ -65,6 +89,30 @@
     },
     {
       "key": {
+        "uuid": "a6c3f157_d8fa4a8e",
+        "filename": "block/bio.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73f95c10_48ac9a56",
+      "range": {
+        "startLine": 297,
+        "startChar": 0,
+        "endLine": 297,
+        "endChar": 6
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "916f7d39_05effa1a",
         "filename": "block/blk-crypto.c",
         "patchSetId": 4
@@ -79,6 +127,24 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6901acd8_8808830b",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "916f7d39_05effa1a",
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +171,30 @@
     },
     {
       "key": {
+        "uuid": "0ae6fbb9_a4732cde",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00c1af78_c8ddf5de",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 6
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4895f35_0b5f0482",
         "filename": "block/blk-crypto.c",
         "patchSetId": 4
@@ -125,6 +215,30 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1de67291_2026eb1f",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4895f35_0b5f0482",
+      "range": {
+        "startLine": 24,
+        "startChar": 7,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -175,6 +289,30 @@
     },
     {
       "key": {
+        "uuid": "62cbe1b3_478ddd5f",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfade6fc_b69b9453",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 18
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "070236ec_8d6e7236",
         "filename": "block/blk-crypto.c",
         "patchSetId": 4
@@ -189,6 +327,24 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8321bb1_00fa6231",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "070236ec_8d6e7236",
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -215,6 +371,30 @@
     },
     {
       "key": {
+        "uuid": "b4053800_4eae8256",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Oh, I mistakenly thought it was something we had to do to use the crypto API.",
+      "parentUuid": "b2982e54_4c158731",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 53
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7cb2b323_6811d705",
         "filename": "block/blk-crypto.c",
         "patchSetId": 4
@@ -238,6 +418,30 @@
     },
     {
       "key": {
+        "uuid": "94f28b9d_9b8b6ef0",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cb2b323_6811d705",
+      "range": {
+        "startLine": 83,
+        "startChar": 2,
+        "endLine": 83,
+        "endChar": 17
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "588d1a18_7a3ddd0a",
         "filename": "block/blk-crypto.c",
         "patchSetId": 4
@@ -258,6 +462,30 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53ea43ad_29a41a4a",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "588d1a18_7a3ddd0a",
+      "range": {
+        "startLine": 91,
+        "startChar": 21,
+        "endLine": 91,
+        "endChar": 34
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -307,6 +535,54 @@
     },
     {
       "key": {
+        "uuid": "c9489aff_ba9f1ea2",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b405b8fe_c60b8f1b",
+      "range": {
+        "startLine": 109,
+        "startChar": 17,
+        "endLine": 109,
+        "endChar": 40
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c2c11ef_f5824189",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5816bba_04d9dac8",
+      "range": {
+        "startLine": 109,
+        "startChar": 6,
+        "endLine": 109,
+        "endChar": 7
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f4b083e_61ae6329",
         "filename": "block/blk-crypto.c",
         "patchSetId": 4
@@ -330,6 +606,30 @@
     },
     {
       "key": {
+        "uuid": "9a97451c_67858344",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f4b083e_61ae6329",
+      "range": {
+        "startLine": 111,
+        "startChar": 6,
+        "endLine": 111,
+        "endChar": 12
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "874c1804_a61c025c",
         "filename": "block/blk-crypto.c",
         "patchSetId": 4
@@ -350,6 +650,30 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ce38640_865ba8f5",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "874c1804_a61c025c",
+      "range": {
+        "startLine": 124,
+        "startChar": 1,
+        "endLine": 124,
+        "endChar": 19
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -399,6 +723,54 @@
     },
     {
       "key": {
+        "uuid": "e98996fe_3c3f73d1",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce778b85_a47f9244",
+      "range": {
+        "startLine": 137,
+        "startChar": 3,
+        "endLine": 137,
+        "endChar": 4
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "363cdcc7_a907ef25",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8c808e0_5f869797",
+      "range": {
+        "startLine": 137,
+        "startChar": 4,
+        "endLine": 137,
+        "endChar": 19
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "911f5ccd_0d8c68f5",
         "filename": "block/blk-crypto.c",
         "patchSetId": 4
@@ -419,6 +791,30 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4294f58c_75bc527e",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "911f5ccd_0d8c68f5",
+      "range": {
+        "startLine": 139,
+        "startChar": 1,
+        "endLine": 139,
+        "endChar": 6
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -445,6 +841,30 @@
     },
     {
       "key": {
+        "uuid": "2b4ed4b3_a779c4c6",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5df8aec_746145c2",
+      "range": {
+        "startLine": 180,
+        "startChar": 1,
+        "endLine": 180,
+        "endChar": 20
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fc246646_0c051910",
         "filename": "block/blk-crypto.c",
         "patchSetId": 4
@@ -465,6 +885,30 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "853cb2d2_da0830f1",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc246646_0c051910",
+      "range": {
+        "startLine": 184,
+        "startChar": 12,
+        "endLine": 184,
+        "endChar": 29
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -491,6 +935,30 @@
     },
     {
       "key": {
+        "uuid": "5bbe6918_c4524320",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "204b0a8e_edebb970",
+      "range": {
+        "startLine": 195,
+        "startChar": 5,
+        "endLine": 195,
+        "endChar": 8
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27bee0e4_62296ce0",
         "filename": "block/blk-crypto.c",
         "patchSetId": 4
@@ -514,6 +982,30 @@
     },
     {
       "key": {
+        "uuid": "6a632110_f243576d",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27bee0e4_62296ce0",
+      "range": {
+        "startLine": 219,
+        "startChar": 6,
+        "endLine": 219,
+        "endChar": 8
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39116e50_48632273",
         "filename": "block/blk-crypto.c",
         "patchSetId": 4
@@ -525,6 +1017,30 @@
       "writtenOn": "2019-04-16T20:40:27Z",
       "side": 1,
       "message": "AFAICS, changing a bio\u0027s bio_vec list is not allowed, so you cannot actually do this.  Instead you\u0027ll have to create a new bio containing the bounce pages, like blk_queue_bounce() does.  Or am I missing something?",
+      "range": {
+        "startLine": 254,
+        "startChar": 2,
+        "endLine": 254,
+        "endChar": 45
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43b2575f_38e4f45e",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "39116e50_48632273",
       "range": {
         "startLine": 254,
         "startChar": 2,
@@ -584,6 +1100,30 @@
     },
     {
       "key": {
+        "uuid": "d5c3544f_bfbb648d",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8cc77b2_74ae875b",
+      "range": {
+        "startLine": 292,
+        "startChar": 2,
+        "endLine": 292,
+        "endChar": 5
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c86d8ce3_0f91ef08",
         "filename": "block/blk-crypto.c",
         "patchSetId": 4
@@ -604,6 +1144,30 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ed7f9d0_d78e7d36",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c86d8ce3_0f91ef08",
+      "range": {
+        "startLine": 319,
+        "startChar": 0,
+        "endLine": 322,
+        "endChar": 51
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -630,6 +1194,30 @@
     },
     {
       "key": {
+        "uuid": "95acc65a_faba08f1",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf3a77f3_3cf03182",
+      "range": {
+        "startLine": 340,
+        "startChar": 12,
+        "endLine": 340,
+        "endChar": 27
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1b1eb94e_8708f81f",
         "filename": "block/blk-crypto.c",
         "patchSetId": 4
@@ -653,6 +1241,30 @@
     },
     {
       "key": {
+        "uuid": "bb15daa0_adfe7164",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b1eb94e_8708f81f",
+      "range": {
+        "startLine": 346,
+        "startChar": 19,
+        "endLine": 346,
+        "endChar": 20
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a629873a_3f61863a",
         "filename": "block/blk-crypto.c",
         "patchSetId": 4
@@ -667,6 +1279,24 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd89b45d_c66bc426",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a629873a_3f61863a",
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -693,6 +1323,30 @@
     },
     {
       "key": {
+        "uuid": "a0cd1dfc_aa9c30e7",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Yes",
+      "parentUuid": "2c6ef81a_2001c5bc",
+      "range": {
+        "startLine": 406,
+        "startChar": 1,
+        "endLine": 406,
+        "endChar": 34
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4556135_56f886ed",
         "filename": "block/blk-crypto.c",
         "patchSetId": 4
@@ -707,6 +1361,24 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "650f886d_7f89a1bd",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4556135_56f886ed",
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -733,6 +1405,30 @@
     },
     {
       "key": {
+        "uuid": "6ebb65cf_35dc7ed0",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d083aab_b522414a",
+      "range": {
+        "startLine": 460,
+        "startChar": 3,
+        "endLine": 460,
+        "endChar": 9
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "353c3977_230291f0",
         "filename": "block/blk-merge.c",
         "patchSetId": 4
@@ -756,6 +1452,30 @@
     },
     {
       "key": {
+        "uuid": "cc5a4f30_78ed6259",
+        "filename": "block/blk-merge.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "353c3977_230291f0",
+      "range": {
+        "startLine": 552,
+        "startChar": 2,
+        "endLine": 552,
+        "endChar": 13
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5281c458_6a79bcf6",
         "filename": "block/blk-merge.c",
         "patchSetId": 4
@@ -773,6 +1493,24 @@
     },
     {
       "key": {
+        "uuid": "64d055ef_6823b2cf",
+        "filename": "block/blk-merge.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5281c458_6a79bcf6",
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84834976_a287aaa2",
         "filename": "block/blk-merge.c",
         "patchSetId": 4
@@ -787,6 +1525,24 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6beb6cfa_f43f4eae",
+        "filename": "block/blk-merge.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84834976_a287aaa2",
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -813,6 +1569,30 @@
     },
     {
       "key": {
+        "uuid": "89bc1edf_956d8352",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ca08ca9_2c967c2d",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 10,
+        "endChar": 21
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "218a30d4_9e20c71c",
         "filename": "block/keyslot-manager.c",
         "patchSetId": 4
@@ -833,6 +1613,30 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21513e4f_b5c45ef4",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "218a30d4_9e20c71c",
+      "range": {
+        "startLine": 12,
+        "startChar": 24,
+        "endLine": 12,
+        "endChar": 46
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -859,6 +1663,30 @@
     },
     {
       "key": {
+        "uuid": "501aeb08_f78598b0",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c6a0ba5_ac75ad17",
+      "range": {
+        "startLine": 22,
+        "startChar": 1,
+        "endLine": 26,
+        "endChar": 14
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bebfa958_d54b9485",
         "filename": "block/keyslot-manager.c",
         "patchSetId": 4
@@ -879,6 +1707,30 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b95411d6_138cb41e",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bebfa958_d54b9485",
+      "range": {
+        "startLine": 29,
+        "startChar": 15,
+        "endLine": 30,
+        "endChar": 37
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -905,6 +1757,30 @@
     },
     {
       "key": {
+        "uuid": "6f1782e5_93f3bdea",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b8fe2b1_16760d37",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 37
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c3cbe1c_e8292b94",
         "filename": "block/keyslot-manager.c",
         "patchSetId": 4
@@ -925,6 +1801,30 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d25054a_8a8d6a1a",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c3cbe1c_e8292b94",
+      "range": {
+        "startLine": 60,
+        "startChar": 5,
+        "endLine": 60,
+        "endChar": 12
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -951,6 +1851,30 @@
     },
     {
       "key": {
+        "uuid": "07842560_83e4d8f3",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "256ed0a4_f190baae",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 17
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "78377c85_2fb425c7",
         "filename": "block/keyslot-manager.c",
         "patchSetId": 4
@@ -971,6 +1895,30 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5e24929_bfd8a36f",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78377c85_2fb425c7",
+      "range": {
+        "startLine": 74,
+        "startChar": 9,
+        "endLine": 74,
+        "endChar": 23
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -1020,6 +1968,30 @@
     },
     {
       "key": {
+        "uuid": "10921b03_5597a544",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c9dfef4_c41bc2e7",
+      "range": {
+        "startLine": 105,
+        "startChar": 34,
+        "endLine": 105,
+        "endChar": 46
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "58a9c837_5536d9f5",
         "filename": "block/keyslot-manager.c",
         "patchSetId": 4
@@ -1034,6 +2006,24 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f77bfcfc_a73ceacd",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58a9c837_5536d9f5",
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -1060,6 +2050,30 @@
     },
     {
       "key": {
+        "uuid": "ec62f05a_07123caa",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ecce52e_03526e74",
+      "range": {
+        "startLine": 137,
+        "startChar": 1,
+        "endLine": 137,
+        "endChar": 31
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96c78d3d_e795f5e2",
         "filename": "block/keyslot-manager.c",
         "patchSetId": 4
@@ -1080,6 +2094,30 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79ff781a_9f85cecd",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96c78d3d_e795f5e2",
+      "range": {
+        "startLine": 167,
+        "startChar": 8,
+        "endLine": 167,
+        "endChar": 25
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -1106,6 +2144,30 @@
     },
     {
       "key": {
+        "uuid": "3a2a318b_2234b815",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0727fe2_2db8fb9e",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 3
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5158f70f_9d77e910",
         "filename": "block/keyslot-manager.c",
         "patchSetId": 4
@@ -1126,6 +2188,30 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "078d5197_73e548fa",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5158f70f_9d77e910",
+      "range": {
+        "startLine": 177,
+        "startChar": 5,
+        "endLine": 177,
+        "endChar": 22
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -1152,6 +2238,30 @@
     },
     {
       "key": {
+        "uuid": "29a9e04d_816bdc9b",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4be97a1a_a1d463d3",
+      "range": {
+        "startLine": 191,
+        "startChar": 4,
+        "endLine": 191,
+        "endChar": 29
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c5685d3_27bde998",
         "filename": "include/linux/blk-crypto.h",
         "patchSetId": 4
@@ -1175,6 +2285,30 @@
     },
     {
       "key": {
+        "uuid": "10543d91_b9ec7aa4",
+        "filename": "include/linux/blk-crypto.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c5685d3_27bde998",
+      "range": {
+        "startLine": 13,
+        "startChar": 7,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e721401a_1ec772fe",
         "filename": "include/linux/blk_types.h",
         "patchSetId": 4
@@ -1192,6 +2326,24 @@
     },
     {
       "key": {
+        "uuid": "05dfaea4_b96c4504",
+        "filename": "include/linux/blk_types.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e721401a_1ec772fe",
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85b79806_2753678a",
         "filename": "include/linux/blk_types.h",
         "patchSetId": 4
@@ -1203,6 +2355,30 @@
       "writtenOn": "2019-04-12T19:12:35Z",
       "side": 1,
       "message": "I don\u0027t think people will be happy with putting such a large struct directly in struct bio.  If I counted correctly, it increases sizeof(struct bio) by 72 bytes.\n\nCan -\u003ebi_crypt_ctx be made a pointer to a separately allocated struct instead?",
+      "range": {
+        "startLine": 223,
+        "startChar": 1,
+        "endLine": 223,
+        "endChar": 39
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "630750af_8767d3f4",
+        "filename": "include/linux/blk_types.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "85b79806_2753678a",
       "range": {
         "startLine": 223,
         "startChar": 1,
@@ -1232,6 +2408,24 @@
     },
     {
       "key": {
+        "uuid": "a54a962c_d592ec0b",
+        "filename": "include/linux/blkdev.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9290656d_91c1043b",
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "88a557dd_cf7a2a50",
         "filename": "include/linux/keyslot-manager.h",
         "patchSetId": 4
@@ -1255,6 +2449,30 @@
     },
     {
       "key": {
+        "uuid": "70543964_2be0c6fd",
+        "filename": "include/linux/keyslot-manager.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88a557dd_cf7a2a50",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 43
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7cc72200_e4496025",
         "filename": "include/linux/keyslot-manager.h",
         "patchSetId": 4
@@ -1275,6 +2493,30 @@
       "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "156fe37e_144d59d8",
+        "filename": "include/linux/keyslot-manager.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T02:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cc72200_e4496025",
+      "range": {
+        "startLine": 42,
+        "startChar": 7,
+        "endLine": 42,
+        "endChar": 22
+      },
+      "revId": "2f85a6d5a5cadd8159a4456153e8aef890be0264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
