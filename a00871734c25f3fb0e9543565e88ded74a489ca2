@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "fb5f211e_d5051eeb",
+        "filename": "drivers/scsi/ufs/Kconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68030dad_93880628",
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d46cc253_cf350de0",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -88,6 +106,30 @@
     },
     {
       "key": {
+        "uuid": "6d883331_c1aa6c7f",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d900e496_019e6c7c",
+      "range": {
+        "startLine": 21,
+        "startChar": 5,
+        "endLine": 21,
+        "endChar": 30
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7097018b_0fab1c22",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -108,6 +150,30 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93f82046_b9ca5b09",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7097018b_0fab1c22",
+      "range": {
+        "startLine": 30,
+        "startChar": 11,
+        "endLine": 30,
+        "endChar": 47
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -134,6 +200,30 @@
     },
     {
       "key": {
+        "uuid": "9b4258be_502c71e3",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f1223a5_72b0baa0",
+      "range": {
+        "startLine": 43,
+        "startChar": 57,
+        "endLine": 43,
+        "endChar": 72
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b0e0474_a7951275",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -154,6 +244,30 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7c86f3b_c5db4acd",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b0e0474_a7951275",
+      "range": {
+        "startLine": 50,
+        "startChar": 1,
+        "endLine": 50,
+        "endChar": 19
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -180,6 +294,30 @@
     },
     {
       "key": {
+        "uuid": "f8479f57_5355b841",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e32478a_b9c9d38d",
+      "range": {
+        "startLine": 80,
+        "startChar": 29,
+        "endLine": 80,
+        "endChar": 31
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44c3b1c7_b81c9837",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -200,6 +338,30 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6829e47_7ad1dc2d",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44c3b1c7_b81c9837",
+      "range": {
+        "startLine": 92,
+        "startChar": 35,
+        "endLine": 92,
+        "endChar": 37
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -226,6 +388,30 @@
     },
     {
       "key": {
+        "uuid": "a940c701_07bf7efb",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6da92054_ff5a5729",
+      "range": {
+        "startLine": 105,
+        "startChar": 5,
+        "endLine": 105,
+        "endChar": 6
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c3d4226_a01d1fd6",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -246,6 +432,30 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd830a43_e97455c4",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c3d4226_a01d1fd6",
+      "range": {
+        "startLine": 114,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 27
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -296,6 +506,30 @@
     },
     {
       "key": {
+        "uuid": "a3e31bea_1a836f9a",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c5e5e56_cd2bf6b1",
+      "range": {
+        "startLine": 116,
+        "startChar": 1,
+        "endLine": 116,
+        "endChar": 6
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4911bc5e_b6d3c58e",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -316,6 +550,30 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f67645c_0a363db5",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4911bc5e_b6d3c58e",
+      "range": {
+        "startLine": 117,
+        "startChar": 17,
+        "endLine": 117,
+        "endChar": 53
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -342,6 +600,30 @@
     },
     {
       "key": {
+        "uuid": "2bce2216_e240e494",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7602af24_38483007",
+      "range": {
+        "startLine": 137,
+        "startChar": 29,
+        "endLine": 137,
+        "endChar": 36
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aaf0d682_1d9000eb",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -365,6 +647,30 @@
     },
     {
       "key": {
+        "uuid": "fa27796d_5ddc33df",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aaf0d682_1d9000eb",
+      "range": {
+        "startLine": 158,
+        "startChar": 1,
+        "endLine": 158,
+        "endChar": 2
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe72d59d_9216b998",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -379,6 +685,24 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a914b49_22263f78",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe72d59d_9216b998",
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -405,6 +729,30 @@
     },
     {
       "key": {
+        "uuid": "74f14ba2_bb09cdd0",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b23808b2_e12affdb",
+      "range": {
+        "startLine": 195,
+        "startChar": 1,
+        "endLine": 195,
+        "endChar": 2
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a49bc00a_73e533aa",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -425,6 +773,30 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01631f0f_c0a8ab62",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a49bc00a_73e533aa",
+      "range": {
+        "startLine": 201,
+        "startChar": 6,
+        "endLine": 201,
+        "endChar": 7
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -451,6 +823,30 @@
     },
     {
       "key": {
+        "uuid": "bcf4983f_5376db68",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfa164e4_be5f71c0",
+      "range": {
+        "startLine": 204,
+        "startChar": 6,
+        "endLine": 204,
+        "endChar": 12
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d25f8666_8f3375c9",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -474,6 +870,30 @@
     },
     {
       "key": {
+        "uuid": "665b4d53_c6ffba96",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d25f8666_8f3375c9",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 42
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "53b51ff8_d38a38c6",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -488,6 +908,24 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e7a5123_cde6b716",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53b51ff8_d38a38c6",
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -514,6 +952,30 @@
     },
     {
       "key": {
+        "uuid": "471e536c_a9650255",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05274684_12ec2372",
+      "range": {
+        "startLine": 222,
+        "startChar": 1,
+        "endLine": 222,
+        "endChar": 7
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "705a93d8_ab6bdda9",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -534,6 +996,30 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc128680_989a6bda",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "705a93d8_ab6bdda9",
+      "range": {
+        "startLine": 231,
+        "startChar": 1,
+        "endLine": 231,
+        "endChar": 4
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -560,6 +1046,30 @@
     },
     {
       "key": {
+        "uuid": "8045d14e_5a3d8613",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63d60ff6_25968c12",
+      "range": {
+        "startLine": 235,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 38
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa33e478_626f33fa",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -580,6 +1090,30 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcbea52f_920db0a9",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa33e478_626f33fa",
+      "range": {
+        "startLine": 289,
+        "startChar": 6,
+        "endLine": 289,
+        "endChar": 7
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -606,6 +1140,30 @@
     },
     {
       "key": {
+        "uuid": "0386bb88_9664e2f0",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "462e8378_78939c5e",
+      "range": {
+        "startLine": 308,
+        "startChar": 4,
+        "endLine": 308,
+        "endChar": 33
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "545644c2_f7067016",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -626,6 +1184,30 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c14c0590_b720470b",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "545644c2_f7067016",
+      "range": {
+        "startLine": 335,
+        "startChar": 0,
+        "endLine": 335,
+        "endChar": 24
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -652,6 +1234,30 @@
     },
     {
       "key": {
+        "uuid": "6e6c518e_3c7269fb",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "983b3337_49dffabb",
+      "range": {
+        "startLine": 338,
+        "startChar": 5,
+        "endLine": 338,
+        "endChar": 6
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7eff8a90_75a783c7",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -672,6 +1278,30 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0249f500_8831807b",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7eff8a90_75a783c7",
+      "range": {
+        "startLine": 340,
+        "startChar": 1,
+        "endLine": 340,
+        "endChar": 60
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -698,6 +1328,30 @@
     },
     {
       "key": {
+        "uuid": "dc855fb2_88a88062",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15b00fa7_8c473a10",
+      "range": {
+        "startLine": 345,
+        "startChar": 0,
+        "endLine": 345,
+        "endChar": 58
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "67f6c270_ce71b444",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -718,6 +1372,30 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd844196_175b4915",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67f6c270_ce71b444",
+      "range": {
+        "startLine": 361,
+        "startChar": 28,
+        "endLine": 361,
+        "endChar": 65
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -744,6 +1422,30 @@
     },
     {
       "key": {
+        "uuid": "83e2955a_48295973",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50b9983e_010d952e",
+      "range": {
+        "startLine": 365,
+        "startChar": 3,
+        "endLine": 366,
+        "endChar": 54
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "296ef2f0_fa7b178a",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -764,6 +1466,30 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bfe67e3_31e97636",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "296ef2f0_fa7b178a",
+      "range": {
+        "startLine": 382,
+        "startChar": 4,
+        "endLine": 382,
+        "endChar": 27
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -790,6 +1516,30 @@
     },
     {
       "key": {
+        "uuid": "d3280f8c_99d51959",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43fa19d5_09fa021d",
+      "range": {
+        "startLine": 400,
+        "startChar": 9,
+        "endLine": 400,
+        "endChar": 13
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13731e06_2ea54748",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 4
@@ -810,6 +1560,30 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "549c56d3_aaff974e",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13731e06_2ea54748",
+      "range": {
+        "startLine": 412,
+        "startChar": 6,
+        "endLine": 412,
+        "endChar": 7
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -836,6 +1610,30 @@
     },
     {
       "key": {
+        "uuid": "37ce513b_3b5f7d0b",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92ece804_db56dc86",
+      "range": {
+        "startLine": 28,
+        "startChar": 5,
+        "endLine": 28,
+        "endChar": 24
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a101bfbe_5e966a71",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.h",
         "patchSetId": 4
@@ -856,6 +1654,30 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "015254fc_e7f85d6a",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a101bfbe_5e966a71",
+      "range": {
+        "startLine": 37,
+        "startChar": 40,
+        "endLine": 37,
+        "endChar": 54
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -882,6 +1704,30 @@
     },
     {
       "key": {
+        "uuid": "ef325fc2_175e237f",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2229,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3105e62a_f56751eb",
+      "range": {
+        "startLine": 2229,
+        "startChar": 1,
+        "endLine": 2229,
+        "endChar": 48
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9af9e18_c04a22fb",
         "filename": "drivers/scsi/ufs/ufshcd.c",
         "patchSetId": 4
@@ -902,6 +1748,30 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "faa632e2_791c5e77",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2414,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9af9e18_c04a22fb",
+      "range": {
+        "startLine": 2414,
+        "startChar": 3,
+        "endLine": 2414,
+        "endChar": 14
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -928,6 +1798,30 @@
     },
     {
       "key": {
+        "uuid": "c826e1e9_1806df6e",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2415,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65239b48_8e611218",
+      "range": {
+        "startLine": 2415,
+        "startChar": 3,
+        "endLine": 2415,
+        "endChar": 43
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab9ff4bc_e5969ce4",
         "filename": "drivers/scsi/ufs/ufshcd.c",
         "patchSetId": 4
@@ -951,6 +1845,30 @@
     },
     {
       "key": {
+        "uuid": "7c6670e4_abb99297",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2428,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab9ff4bc_e5969ce4",
+      "range": {
+        "startLine": 2428,
+        "startChar": 2,
+        "endLine": 2428,
+        "endChar": 30
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e9a33019_28d2c3c1",
         "filename": "drivers/scsi/ufs/ufshcd.c",
         "patchSetId": 4
@@ -968,6 +1886,24 @@
     },
     {
       "key": {
+        "uuid": "3a200a67_f3696f8e",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2524,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9a33019_28d2c3c1",
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "94e51915_923f94a8",
         "filename": "drivers/scsi/ufs/ufshcd.c",
         "patchSetId": 4
@@ -982,6 +1918,24 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ffb74f3_0cae598f",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4261,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94e51915_923f94a8",
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -1008,6 +1962,30 @@
     },
     {
       "key": {
+        "uuid": "b37bc96c_63bf789f",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70885bf6_857fe74e",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 19
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "174df530_d789d4cb",
         "filename": "drivers/scsi/ufs/ufshcd.h",
         "patchSetId": 4
@@ -1022,6 +2000,24 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f79d0b99_365217db",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "174df530_d789d4cb",
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -1045,6 +2041,30 @@
       "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8cd72b0_1e0bd9ab",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "057e0950_c0fc0fab",
+      "range": {
+        "startLine": 719,
+        "startChar": 7,
+        "endLine": 719,
+        "endChar": 18
+      },
+      "revId": "a00871734c25f3fb0e9543565e88ded74a489ca2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
