@@ -105,6 +105,24 @@
       "revId": "7d9043d79b866a4714d6c91b332185ba4df64432",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "389d60bd_63634507",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4652,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-05-01T22:29:20Z",
+      "side": 1,
+      "message": "Ah I see. Thanks! I\u0027ll fix that.",
+      "parentUuid": "71f863f2_cf039018",
+      "revId": "7d9043d79b866a4714d6c91b332185ba4df64432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
