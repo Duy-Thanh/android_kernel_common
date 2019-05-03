@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7f767f9_e4157d3f",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:45:14Z",
+      "side": 1,
+      "message": "How about defining a macro NUM_KEYSLOTS() so that this off-by-one quirk gets handled in one place, not 5 places?\n\n /*\n * The actual number of configurations supported is (CFGC+1), so slot numbers\n  * range from 0 to config_count inclusive.\n  */\n #define NUM_KEYSLOTS(hba)      (hba-\u003ecrypto_capabilities.config_count + 1)\n\ni.e. also use this when iterating \u0027slot \u003d 0; slot \u003c NUM_KEYSLOTS(hba); slot++\u0027, and when allocating stuff in ufshcd_hba_init_crypto().  Currently those both have to take into account the \"the hardware is off by one\" quirk, which is error-prone.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 54
+      },
+      "revId": "b1742a54728c92581868f40279419d308d5b88e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e099028_b4f5a761",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:45:14Z",
+      "side": 1,
+      "message": "Unnecessary braces.  Same with some other single-line statements in this file",
+      "range": {
+        "startLine": 40,
+        "startChar": 37,
+        "endLine": 42,
+        "endChar": 2
+      },
+      "revId": "b1742a54728c92581868f40279419d308d5b88e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90e01ff2_86d2cc9e",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:45:14Z",
+      "side": 1,
+      "message": "This could go at a label \u0027out:\u0027 so it doesn\u0027t need to repeated",
+      "range": {
+        "startLine": 210,
+        "startChar": 3,
+        "endLine": 210,
+        "endChar": 39
+      },
+      "revId": "b1742a54728c92581868f40279419d308d5b88e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adc758ca_206b38d5",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:45:14Z",
+      "side": 1,
+      "message": "One line",
+      "range": {
+        "startLine": 235,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 29
+      },
+      "revId": "b1742a54728c92581868f40279419d308d5b88e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "474789a0_7e4dee8e",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:45:14Z",
+      "side": 1,
+      "message": "The return value of this function is never checked, so either it should be checked or there should\u0027t be a return value.\n\nGiven that this only returns an error when !ufshcd_hba_is_crypto_supported(), and the caller clearly only calls this when ufshcd_hba_is_crypto_supported(), I think this just shouldn\u0027t have a return value.",
+      "range": {
+        "startLine": 302,
+        "startChar": 0,
+        "endLine": 302,
+        "endChar": 45
+      },
+      "revId": "b1742a54728c92581868f40279419d308d5b88e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de1c9953_fc24aafa",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:45:14Z",
+      "side": 1,
+      "message": "Return value of this is never checked either, but it seems this one should be",
+      "range": {
+        "startLine": 408,
+        "startChar": 0,
+        "endLine": 408,
+        "endChar": 3
+      },
+      "revId": "b1742a54728c92581868f40279419d308d5b88e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e89d2a0_5fc69a24",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:45:14Z",
+      "side": 1,
+      "message": "No need for this to have a return value.",
+      "range": {
+        "startLine": 442,
+        "startChar": 0,
+        "endLine": 442,
+        "endChar": 3
+      },
+      "revId": "b1742a54728c92581868f40279419d308d5b88e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "788b8298_f717dbad",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:45:14Z",
+      "side": 1,
+      "message": "Option is actually called CONFIG_SCSI_UFS_CRYPTO",
+      "range": {
+        "startLine": 37,
+        "startChar": 9,
+        "endLine": 37,
+        "endChar": 26
+      },
+      "revId": "b1742a54728c92581868f40279419d308d5b88e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c18f23f_8b4f1079",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:45:14Z",
+      "side": 1,
+      "message": "This function no longer exists, so this should be removed.",
+      "range": {
+        "startLine": 55,
+        "startChar": 18,
+        "endLine": 55,
+        "endChar": 47
+      },
+      "revId": "b1742a54728c92581868f40279419d308d5b88e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "741bf57f_3214e411",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:45:14Z",
+      "side": 1,
+      "message": "Needs to be return 0, otherwise this breaks the UFS driver when !CONFIG_SCSI_UFS_CRYPTO",
+      "range": {
+        "startLine": 74,
+        "startChar": 8,
+        "endLine": 74,
+        "endChar": 11
+      },
+      "revId": "b1742a54728c92581868f40279419d308d5b88e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acf6c5cc_aa427d35",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2425,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:45:14Z",
+      "side": 1,
+      "message": "One line",
+      "range": {
+        "startLine": 2424,
+        "startChar": 0,
+        "endLine": 2425,
+        "endChar": 45
+      },
+      "revId": "b1742a54728c92581868f40279419d308d5b88e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03de6879_6f3f29b0",
+        "filename": "drivers/scsi/ufs/ufshci.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:45:14Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure this is broken on big endian CPUs, because the words are being being read and written from the memory-mapped registers using readl() and writel() which convert to/from native endianness.  Thus the value stored in .reg_val will actually be u32, not __le32.\n\nSo either we need something like this:\n\n union ufs_crypto_capabilities {\n        u32 reg_val;\n        struct {\n #ifdef __LITTLE_ENDIAN\n                u8 num_crypto_cap;\n                u8 config_count;\n                u8 reserved;\n                u8 config_array_ptr;\n #else\n                u8 config_array_ptr;\n                u8 reserved;\n                u8 config_count;\n                u8 num_crypto_cap;\n #endif\n        };\n};\n\n\n... or we don\u0027t declare the byte fields and instead read them from reg_val using shifts and masking, or we actually make it always be __le32 in memory.\n\nSame for ufs_crypto_cap_entry and ufs_crypto_cfg_entry.",
+      "range": {
+        "startLine": 324,
+        "startChar": 0,
+        "endLine": 332,
+        "endChar": 2
+      },
+      "revId": "b1742a54728c92581868f40279419d308d5b88e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
