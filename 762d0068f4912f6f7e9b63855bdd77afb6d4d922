@@ -1,0 +1,1102 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e72fb8e8_50a82d0a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "This is all good information, but IMO it\u0027s getting too verbose.  Try to make it more concise, while still covering the important points.  The longer it is, the less of it people will read.",
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "942d2d3d_cd01585b",
+        "filename": "block/Kconfig",
+        "patchSetId": 6
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "These are only selected by BLK_CRYPTO, so from the user\u0027s perspective there\u0027s really only one Kconfig option.  Having the additional options in the code is unnecessarily complex, so how about just having one option:\n\nconfig BLK_INLINE_ENCRYPTION\n\n(I\u0027d be okay with BLK_CRYPTO too, but I feel that \"inline encryption\" is more descriptive, especially since Linux\u0027s block subsystem already has support for Opal self-encrypting drives which is kind of \"block crypto\" too :-) )",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 5
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b63d7dd_7e5949e4",
+        "filename": "block/bio.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "One line",
+      "range": {
+        "startLine": 301,
+        "startChar": 29,
+        "endLine": 302,
+        "endChar": 33
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3d9405f_486bb043",
+        "filename": "block/bio.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1794,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "For consistency with the existing code, use the same calling convention as bio_integrity_endio() here.\n\nfalse \u003d\u003e bio was queued again, so shouldn\u0027t continue on\ntrue \u003d\u003e should continue on",
+      "range": {
+        "startLine": 1794,
+        "startChar": 5,
+        "endLine": 1794,
+        "endChar": 21
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a224532b_a8eb1f3c",
+        "filename": "block/blk-core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2524,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "blk_crypto_submit_bio() already calls bio_endio() on error, so having it here too is wrong.",
+      "range": {
+        "startLine": 2524,
+        "startChar": 2,
+        "endLine": 2524,
+        "endChar": 17
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef302add_6a3cf90c",
+        "filename": "block/blk-core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3984,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "Currently if blk_crypto_init() fails, the kernel will continue booting.  But, the code in blk-crypto.c isn\u0027t actually written to handle the case where blk_crypto_init() has failed.  So either that needs to be fixed, or we need to panic() if blk_crypto_init() fails.",
+      "range": {
+        "startLine": 3984,
+        "startChar": 1,
+        "endLine": 3984,
+        "endChar": 16
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "548753c0_c079c11a",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "Unnecessary includes",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 23
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36c2dc80_980a62e4",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "Union is no longer needed.  Just need \u0027key\u0027.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 3
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45a5cbae_88d34e60",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "Rename this to \u0027blk_crypto_keylots\u0027 to be clearer and consistent with the other static variables in this file?",
+      "range": {
+        "startLine": 42,
+        "startChar": 3,
+        "endLine": 42,
+        "endChar": 11
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de276426_4e41e6fb",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "So that blk_crypt_modes and blk_crypto_keyslots don\u0027t have to be repeatedly indexed, how about assigning variables at the start of this function?\n\n        struct blk_crypto_keyslot *slotp \u003d \u0026blk_crypto_keyslots[slot];\n        const struct blk_crypt_mode *mode \u003d \u0026blk_crypt_modes[crypto_alg_id];\n\nThen use slotp-\u003etfm, slotp-\u003ecrypto_alg_id, mode-\u003ekeysize, mode-\u003ecipher_str, etc.\n\n(Yes, I suggested otherwise in a different place, but that was where there was only one use, not many.)",
+      "range": {
+        "startLine": 62,
+        "startChar": 31,
+        "endLine": 62,
+        "endChar": 45
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0916ce8d_d415500a",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "This is essentially blk_crypto_keyslot_evict(), so seems this should have \u0027memset(slotp-\u003ekey, 0, BLK_CRYPTO_MAX_KEY_SIZE)\u0027, so the key is consistently wiped on error.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 28
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16100094_b27a5f18",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "It would make a little more sense to move this after allocating the tfm, so it\u0027s set at the same time as slotp-\u003etfm.  They seem to go together.",
+      "range": {
+        "startLine": 69,
+        "startChar": 2,
+        "endLine": 69,
+        "endChar": 47
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbb7d22e_77cf6d40",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "This can just be \u0027tfm\u0027.",
+      "range": {
+        "startLine": 83,
+        "startChar": 23,
+        "endLine": 83,
+        "endChar": 41
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbf61b85_aa253ef3",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "Argument order is different from blk_crypto_keyslot_program(), which is confusing",
+      "range": {
+        "startLine": 93,
+        "startChar": 11,
+        "endLine": 93,
+        "endChar": 35
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87e902d6_c4feca77",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "Using the return value of crypto_memneq() as a bool is easier to read and what most other callers do: \u0027!crypto_memneq()\u0027 rather than \u0027crypto_memneq() \u003d\u003d 0\u0027",
+      "range": {
+        "startLine": 116,
+        "startChar": 43,
+        "endLine": 116,
+        "endChar": 47
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc0e39f0_aa8507d5",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "Can set \u0027keysize\u0027 before the loop to improve the readability of this \u0027if\u0027 condition.\n\n         const size_t keysize \u003d blk_crypt_modes[crypto_alg_id].keysize;\n\n         ...\n\n                if (blk_crypto_keyslots[slot].crypto_alg_id \u003d\u003d crypto_alg_id \u0026\u0026\n                    !crypto_memneq(blk_crypto_keyslots[slot].key, key, keysize))\n                        return slot;\n\n         ...",
+      "range": {
+        "startLine": 116,
+        "startChar": 3,
+        "endLine": 116,
+        "endChar": 42
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db6f59c4_f6b31375",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "blk_crypto_put_keyslot(), to match the keyslot_manager_*() functions more closely.",
+      "range": {
+        "startLine": 144,
+        "startChar": 12,
+        "endLine": 144,
+        "endChar": 38
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "414148cf_ce7501fa",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "One line",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 25
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a82740c0_1d70910a",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "blk_crypto_get_keyslot(), to match the keyslot_manager_*() functions more closely.  And this doesn\u0027t necessarily \"program\" the keyslot; it may get an existing one",
+      "range": {
+        "startLine": 153,
+        "startChar": 11,
+        "endLine": 153,
+        "endChar": 37
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f9bca4c_183e2724",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "Early returns are usually for errors, not success.  This would be a bit more readable:\n\n        if (slot \u003c 0)\n                return slot;\n \n        bio_crypt_set_keyslot(bio, slot, ksm);\n        return 0;",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 13
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4b9d3fb_3241db23",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "DECLARE_CRYPTO_WAIT(wait)\n\nSame in blk_crypto_decrypt_bio().",
+      "range": {
+        "startLine": 174,
+        "startChar": 1,
+        "endLine": 174,
+        "endChar": 25
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56ecbf48_c061844d",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "u64 dun;\n\nNow that this is separate from iv.dun and we have to do arithmetic on it, it should be kept in native endianness and then for each iteration we should set iv.dun \u003d cpu_to_le64(dun);\n\nSame in blk_crypto_decrypt_bio().",
+      "range": {
+        "startLine": 178,
+        "startChar": 1,
+        "endLine": 178,
+        "endChar": 7
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e6f82a1_5bd94f0d",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "\u0027return -ENOMEM;\u0027 would be a bit simpler",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 20
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3f2fe5c_0300fd1d",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "Don\u0027t need this if using DECLARE_CRYPTO_WAIT().  Same in blk_crypto_decrypt_bio().",
+      "range": {
+        "startLine": 225,
+        "startChar": 2,
+        "endLine": 225,
+        "endChar": 26
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf2c191a_f7b2548a",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "\u0027sg\u0027, since this is both the src and dst now",
+      "range": {
+        "startLine": 259,
+        "startChar": 20,
+        "endLine": 259,
+        "endChar": 23
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09514631_124a4861",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "skcipher_request_free() handles a NULL value, and also this always finishes the bio before returning, so IMO it would be simplest to have a single label:\n\n done:\n        skcipher_request_free(ciph_req);\n        blk_crypto_put_keyslot(bio);\n        bio_endio(bio);",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 13
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3225de0c_39f33a13",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "AFAICS, the order in which things are checked makes this logic more complicated than needed.  Don\u0027t we just need:\n\n        if (bio_crypt_has_keyslot(bio)) {\n                /* Key already programmed into device? */\n                if (bio-\u003ebi_crypt_context.processing_ksm \u003d\u003d q-\u003eksm)\n                        return 0;\n\n                /* Nope, release the existing keyslot. */\n                blk_crypto_put_keyslot(bio);\n        }\n\n        /* Get device keyslot if supported, else fall back to software. */\n        if (q-\u003eksm) {\n                err \u003d blk_crypto_get_keyslot(bio, q-\u003eksm);\n                if (err)\n                        goto out_err;\n        } else {\n                err \u003d blk_crypto_get_keyslot(bio, blk_crypto_ksm);\n                if (err)\n                        goto out_err;\n                if (bio_data_dir(bio) \u003d\u003d WRITE) {\n                        /* Encrypt the data now */\n                        err \u003d blk_crypto_encrypt_bio(bio);\n                        if (err)\n                                goto out_encrypt_err;\n                }\n        }",
+      "range": {
+        "startLine": 347,
+        "startChar": 0,
+        "endLine": 379,
+        "endChar": 2
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1f4ec9f_77537f31",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "Fix indentation here and in alloc_workqueue() below",
+      "range": {
+        "startLine": 453,
+        "startChar": 41,
+        "endLine": 455,
+        "endChar": 17
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "286b8989_4fdefaf3",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "Should be at beginning just below the SPDX-License-Identifier, not after a long comment.  maybe:\n\n // SPDX-License-Identifier: GPL-2.0\n /*\n  * keyslot-manager.c\n  *\n  * Copyright 2019 Google LLC\n  */\n \n /**\n  * DOC: The Keyslot Manager\n  ...",
+      "range": {
+        "startLine": 24,
+        "startChar": 3,
+        "endLine": 24,
+        "endChar": 28
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18cc8ac9_0bb6e71c",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "Don\u0027t need to say \"This function\" in kerneldoc for functions.  Just say \"May sleep\".",
+      "range": {
+        "startLine": 42,
+        "startChar": 12,
+        "endLine": 42,
+        "endChar": 35
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "951ccabc_9cb16f09",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "Unnecessary braces",
+      "range": {
+        "startLine": 58,
+        "startChar": 39,
+        "endLine": 60,
+        "endChar": 2
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f43ec8c2_a314199c",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "The fact that the modes are currently in an array in blk-crypto.c is an implementation detail.  This should be documented in a way that describes behavior, not implementation (though it can refer to the implementation, it shouldn\u0027t be the main point).  Maybe:\n\n * @key: Pointer to the bytes of the key to program. Must be the correct length\n *      for the chosen @crypt_mode; see blk_crypt_modes in blk-crypto.c.\n * @crypt_mode: Identifier for the encryption algorithm to use.",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 8
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5f0080f_2dfa3b44",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "Try to be more concise.  Maybe:\n\n * Get a keyslot that\u0027s been programmed with the specified key, crypt_mode, and\n * data_unit_size.  If one already exists, return it with incremented refcount.\n * Otherwise, wait for a keyslot to become idle and program it.\n\nLong comments take more time to read and make things seem more complex, so will get read less.",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 23
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "736f3973_47f8e434",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "* Return: The keyslot on success, else a -errno value\n\n(One line is nice, and this clarifies that the return value follows the errno convention and not some other convention like returning -1 on failure.)",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 26
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4464e528_aee324e3",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "This logic is also duplicated at the end of the function.  IMO, it should be consolidated at the end like this:\n\n have_slot:\n        if (WARN_ON(atomic_read(\u0026ksm-\u003eslot_refs[slot]) \u003d\u003d UINT_MAX)) {\n                err \u003d -EBUSY;\n                goto out_unlock;\n        }\n        if (atomic_fetch_inc(\u0026ksm-\u003eslot_refs[slot]) \u003d\u003d 0)\n                atomic_dec(\u0026ksm-\u003enum_idle_slots);\n        ksm-\u003elast_used_seq_nums[slot] \u003d ++ksm-\u003eseq_num;\n out_unlock:\n        mutex_unlock(\u0026ksm-\u003elock);\n        return slot;\n\nThen this part would be:\n\n        slot \u003d ksm-\u003eksm_ll_ops.keyslot_find(ksm-\u003ell_priv_data, key,\n                                            data_unit_size, crypto_alg_id);\n        if (slot !\u003d -ENOKEY) {\n                if (slot \u003c 0)\n                        goto out_unlock;\n                if (WARN_ON(slot \u003e\u003d ksm-\u003enum_slots)) {\n                        slot \u003d -EINVAL;\n                        goto out_unlock;\n                }\n                goto have_slot;\n        }",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 2
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4eb0a10e_ea55ac78",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "for (slot \u003d 0; slot \u003c ksm-\u003enum_slots; slot++) {",
+      "range": {
+        "startLine": 178,
+        "startChar": 1,
+        "endLine": 178,
+        "endChar": 39
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e42a91ed_641a078b",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "I don\u0027t see why these need to be done before .keyslot_program().  Doing them after would be easier, since then they wouldn\u0027t need to be undone on failure.",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 44
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82e16579_529a91ba",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "This return value here is unnecessary since the caller must already have a reference to the keyslot.  So it would be simpler to just return void and check for incorrect usage in here.\n\nvoid keyslot_manager_get_slot(struct keyslot_manager *ksm, unsigned int slot)\n{\n        if (WARN_ON(slot \u003e\u003d ksm-\u003enum_slots))\n                return;\n\n        WARN_ON(atomic_inc_return(\u0026ksm-\u003eslot_refs[slot]) \u003c 2); \n}\n\nSee ihold() for an example of an existing function in the kernel that works the same way.",
+      "range": {
+        "startLine": 222,
+        "startChar": 1,
+        "endLine": 236,
+        "endChar": 40
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75c92c32_9b6e978c",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "Unnecessary cast (I think I commented on this before?)",
+      "range": {
+        "startLine": 289,
+        "startChar": 9,
+        "endLine": 289,
+        "endChar": 23
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ce098bf_6fe1c2ed",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "This is a free()-like function, so it should handle NULL.\n\n       if (ksm) {\n                kzfree(ksm-\u003elast_used_seq_nums);\n                kzfree(ksm);\n       }",
+      "range": {
+        "startLine": 309,
+        "startChar": 5,
+        "endLine": 309,
+        "endChar": 28
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e7630e8_a4108108",
+        "filename": "include/linux/blk-crypto.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "Don\u0027t need these includes.  A forward declaration\n\n   struct bio;\n\nis enough.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 25
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef8fbc9c_992fbb76",
+        "filename": "include/linux/blk_types.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "I don\u0027t think these flags are actually necessary.\n\nBIO_CRYPT_ENABLED: use a flag REQ_INLINECRYPT in -\u003ebi_opf instead (similar to REQ_INTEGRITY).  One advantage of this is that bio_clone_crypt_ctx() becomes simpler -- you only need to actually copy the bio_crypt_ctx if the REQ_INLINECRYPT flag is set.\n\nBIO_CRYPT_SWHANDLED: AFAICS, this can be replaced with checking for processing_ksm \u003d\u003d blk_crypto_ksm, and this is only needed in blk-crypto.c.\n\nBIO_CRYPT_KEYSLOT: Just use -1 to mean an unset keyslot, and \u003e\u003d 0 to mean a set keyslot.  IIRC, I suggested against this earlier because at the time it was the means for determining whether encryption was enabled, and having the initial value of 0 be \"encryption disabled\" was desirable.  But now that a separate \"enabled\" flag is needed anyway, keyslot \u003d -1 works fine since it can be set at the same time the flag is set.",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 32
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d5ee4ab_e35b7d38",
+        "filename": "include/linux/blk_types.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "How about \"blk_crypt_mode\"?  I don\u0027t see the point of the \"_index\" suffix.  If it\u0027s referring to the fact that it\u0027s used as an index in the blk_crypto_modes[] array in blk-crypto.c, that\u0027s really an implementation detail that shouldn\u0027t be exposed in the naming here.",
+      "range": {
+        "startLine": 152,
+        "startChar": 5,
+        "endLine": 152,
+        "endChar": 25
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "558ffbcd_df9c79e6",
+        "filename": "include/linux/blkdev.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "BLK_KEYSLOT_MANAGER",
+      "range": {
+        "startLine": 433,
+        "startChar": 14,
+        "endLine": 433,
+        "endChar": 29
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "742ec026_df8d9837",
+        "filename": "include/linux/keyslot-manager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "\"the specified keyslot\", not \"all keyslots\"",
+      "range": {
+        "startLine": 22,
+        "startChar": 19,
+        "endLine": 22,
+        "endChar": 31
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d4e9321_87ce8f7b",
+        "filename": "include/linux/keyslot-manager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "These aren\u0027t arguments actually used in the current patchset.  Since it\u0027s not straightforward to understand why they\u0027re here (one would assume the keyslot would be enough), they probably shouldn\u0027t be added until they\u0027re actually needed.",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 25,
+        "endChar": 64
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b99bd60d_d2e1b08c",
+        "filename": "include/linux/keyslot-manager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "What is a \u0027crypto_alg_id\u0027 exactly?  According to this it represents a crypt_mode and a data_unit_size.  But actually it doesn\u0027t, because the other keyslot_mgmt_ll_ops methods still take the crypto_alg_id and data_unit_size separately.  It seems this is because you use UFS crypto capability index directly as the crypto_alg_id.  But couldn\u0027t the crypto_alg_id for UFS just encode both the data_unit_size and capability index, like (data_unit_size \u003c\u003c 16) | cap_idx?  Otherwise, I don\u0027t see much point in having crypto_alg_id at all, as opposed to using crypt_mode directly.",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 66
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7b4b588_464f009a",
+        "filename": "include/linux/keyslot-manager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T22:17:01Z",
+      "side": 1,
+      "message": "\"-errno value\"\n\nSimilarly in other places that don\u0027t clarify what type of negative error code is meant.",
+      "range": {
+        "startLine": 36,
+        "startChar": 51,
+        "endLine": 36,
+        "endChar": 70
+      },
+      "revId": "762d0068f4912f6f7e9b63855bdd77afb6d4d922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
