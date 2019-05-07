@@ -130,9 +130,12 @@ config CRYPTO_CHACHA20_NEON
 	select CRYPTO_BLKCIPHER
 	select CRYPTO_CHACHA20
 
+<<<<<<< HEAD   (4ff443 ANDROID: cuttlefish 4.19: enable CONFIG_CRYPTO_AES_NI_INTEL=)
 config CRYPTO_NHPOLY1305_NEON
 	tristate "NEON accelerated NHPoly1305 hash function (for Adiantum)"
 	depends on KERNEL_MODE_NEON
 	select CRYPTO_NHPOLY1305
 
+=======
+>>>>>>> BRANCH (ad8ceb fscrypt: remove filesystem specific build config option)
 endif
