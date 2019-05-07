@@ -1,0 +1,395 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ba39757_8194ae29",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-07T20:03:41Z",
+      "side": 0,
+      "message": "what is this doing? I\u0027m curious why we had it enabled on cuttlefish..",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 24
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a973fad_b776cc03",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-07T20:03:41Z",
+      "side": 0,
+      "message": "this should come back; we don\u0027t want to use the non-PSI method moving foward",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 12
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7c439be_c9bc9ea8",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-07T20:03:41Z",
+      "side": 0,
+      "message": "Worth looking into whether the sw workaround will be required on new chips?",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 27
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e663f306_a0320f00",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-07T20:03:41Z",
+      "side": 0,
+      "message": "seems reasonable to me but I wonder what was using it (if anything?)",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 17
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f788d9f3_674406fa",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-07T20:03:41Z",
+      "side": 0,
+      "message": "I think this was just added so removing it would be a bug.",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 22
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22083e04_cc423665",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-07T20:03:41Z",
+      "side": 0,
+      "message": "This implements rollback for ext4 userdata on Q+. We need it. Pixel doesn\u0027t need it because it uses f2fs.",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 15
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ded7cf8a_97093f38",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-07T20:03:41Z",
+      "side": 0,
+      "message": "these are probably bugs in the pixel configs as I\u0027m pretty sure the input team wants xbox controller support over otg?",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 274,
+        "endChar": 25
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54a93864_e077d290",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-07T20:03:41Z",
+      "side": 0,
+      "message": "not sure about this one",
+      "range": {
+        "startLine": 314,
+        "startChar": 0,
+        "endLine": 314,
+        "endChar": 15
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "18e57f21_3df1b288",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-07T20:03:41Z",
+      "side": 0,
+      "message": "all these removed HID devices are probably bugs in the pixel config",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 21
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41fcae49_aa87a2e4",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-07T20:03:41Z",
+      "side": 0,
+      "message": "it seems desirable to leave this one enabled?",
+      "range": {
+        "startLine": 372,
+        "startChar": 0,
+        "endLine": 372,
+        "endChar": 19
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41280f39_aabd29a3",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-07T20:03:41Z",
+      "side": 0,
+      "message": "not sure about this one",
+      "range": {
+        "startLine": 373,
+        "startChar": 0,
+        "endLine": 373,
+        "endChar": 33
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f18b27a_982b7705",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-07T20:03:41Z",
+      "side": 0,
+      "message": "ok, whoops, this one is a bug, most likely coming in from cuttlefish",
+      "range": {
+        "startLine": 374,
+        "startChar": 0,
+        "endLine": 374,
+        "endChar": 21
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ff03d6f_820c221d",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-07T20:03:41Z",
+      "side": 0,
+      "message": "bug in pixel config. this is used when free space on read-only partitions is low",
+      "range": {
+        "startLine": 417,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 19
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "039a48af_14c5c9ce",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-07T20:03:41Z",
+      "side": 0,
+      "message": "not sure about this one. why do we recommend it if we already enable the vfat driver?",
+      "range": {
+        "startLine": 418,
+        "startChar": 0,
+        "endLine": 418,
+        "endChar": 17
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41940e16_0b7da4c3",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-07T20:03:41Z",
+      "side": 0,
+      "message": "not sure about this one?",
+      "range": {
+        "startLine": 429,
+        "startChar": 0,
+        "endLine": 429,
+        "endChar": 30
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76480fdc_58b57409",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-07T20:03:41Z",
+      "side": 0,
+      "message": "this does seem like an odd thing to hard-code, but I guess panic\u003d\u003csomething\u003e continues to work",
+      "range": {
+        "startLine": 449,
+        "startChar": 0,
+        "endLine": 449,
+        "endChar": 22
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "31fc98ac_9146652b",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-07T20:03:41Z",
+      "side": 0,
+      "message": "this is most likely a bug in the pixel defconfigs, *unless* it enables other tracers that we don\u0027t recommend. this will probably be a pain point for gki.",
+      "range": {
+        "startLine": 452,
+        "startChar": 0,
+        "endLine": 452,
+        "endChar": 31
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
