@@ -9,8 +9,12 @@ obj-$(CONFIG_CRYPTO_SHA1_ARM) += sha1-arm.o
 obj-$(CONFIG_CRYPTO_SHA1_ARM_NEON) += sha1-arm-neon.o
 obj-$(CONFIG_CRYPTO_SHA256_ARM) += sha256-arm.o
 obj-$(CONFIG_CRYPTO_SHA512_ARM) += sha512-arm.o
+<<<<<<< HEAD   (82d2ef ANDROID: block/cfq-iosched: make group_idle per io cgroup tu)
 obj-$(CONFIG_CRYPTO_CHACHA20_NEON) += chacha-neon.o
 obj-$(CONFIG_CRYPTO_NHPOLY1305_NEON) += nhpoly1305-neon.o
+=======
+obj-$(CONFIG_CRYPTO_CHACHA20_NEON) += chacha20-neon.o
+>>>>>>> BRANCH (ad8ceb fscrypt: remove filesystem specific build config option)
 
 ce-obj-$(CONFIG_CRYPTO_AES_ARM_CE) += aes-arm-ce.o
 ce-obj-$(CONFIG_CRYPTO_SHA1_ARM_CE) += sha1-arm-ce.o
@@ -53,8 +57,12 @@ aes-arm-ce-y	:= aes-ce-core.o aes-ce-glue.o
 ghash-arm-ce-y	:= ghash-ce-core.o ghash-ce-glue.o
 crct10dif-arm-ce-y	:= crct10dif-ce-core.o crct10dif-ce-glue.o
 crc32-arm-ce-y:= crc32-ce-core.o crc32-ce-glue.o
+<<<<<<< HEAD   (82d2ef ANDROID: block/cfq-iosched: make group_idle per io cgroup tu)
 chacha-neon-y := chacha-neon-core.o chacha-neon-glue.o
 nhpoly1305-neon-y := nh-neon-core.o nhpoly1305-neon-glue.o
+=======
+chacha20-neon-y := chacha20-neon-core.o chacha20-neon-glue.o
+>>>>>>> BRANCH (ad8ceb fscrypt: remove filesystem specific build config option)
 
 ifdef REGENERATE_ARM_CRYPTO
 quiet_cmd_perl = PERL    $@
