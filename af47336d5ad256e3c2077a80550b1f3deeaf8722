@@ -593,6 +593,30 @@
     },
     {
       "key": {
+        "uuid": "a26bb655_d74d3393",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T20:19:51Z",
+      "side": 0,
+      "message": "Oddly, enabling these drivers make CONFIG_ARM64_SW_TTBR0_PAN, CONFIG_PM_DEBUG, CONFIG_OVERLAY_FS required to boot. Since drivers might have these weird dependencies and we don\u0027t need them yet, let\u0027s start out with a minimal kernel and add stuff as we go.",
+      "parentUuid": "259ea1a8_a93d11d3",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 21
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41fcae49_aa87a2e4",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
