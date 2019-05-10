@@ -569,6 +569,30 @@
     },
     {
       "key": {
+        "uuid": "259ea1a8_a93d11d3",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T18:21:22Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "3ba8a140_60d5d934",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 21
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41fcae49_aa87a2e4",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
