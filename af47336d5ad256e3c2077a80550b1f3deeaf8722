@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "58bdfbae_c529d936",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-10T02:23:39Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "8489ba8b_4687024e",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 24
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a973fad_b776cc03",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
@@ -237,6 +261,30 @@
     },
     {
       "key": {
+        "uuid": "a6df1b8b_777f3b31",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-10T02:23:39Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "1007b0a3_645fd7b6",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 22
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "22083e04_cc423665",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
@@ -284,6 +332,30 @@
     },
     {
       "key": {
+        "uuid": "559e3835_ad65be69",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-10T02:23:39Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "cade0878_696db300",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 15
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ded7cf8a_97093f38",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
@@ -319,6 +391,30 @@
       "side": 0,
       "message": "I think these should be modules in pixel kernel then.",
       "parentUuid": "ded7cf8a_97093f38",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 274,
+        "endChar": 25
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ec1686a_1fb0e77b",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-10T02:23:39Z",
+      "side": 0,
+      "message": "well, since we won\u0027t have modules right now, compile them in? :) how much bigger does it make the kernel?",
+      "parentUuid": "c1eab467_151cdb6a",
       "range": {
         "startLine": 266,
         "startChar": 0,
@@ -413,6 +509,30 @@
       "side": 0,
       "message": "These look like candidate for GKI modules. WDYT?",
       "parentUuid": "18e57f21_3df1b288",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 21
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ba8a140_60d5d934",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-10T02:23:39Z",
+      "side": 0,
+      "message": "well, since we won\u0027t have modules right now, compile them in? :) how much bigger does it make the kernel?",
+      "parentUuid": "595fff74_a8dcff7f",
       "range": {
         "startLine": 316,
         "startChar": 0,
@@ -610,6 +730,30 @@
       "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67484283_4fa5f65c",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-05-10T02:23:39Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "b835b0ae_bf9027eb",
+      "range": {
+        "startLine": 417,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 19
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
