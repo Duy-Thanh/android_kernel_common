@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8489ba8b_4687024e",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T00:39:53Z",
+      "side": 0,
+      "message": "It collects statistics on execution delays.\nhttps://www.kernel.org/doc/Documentation/accounting/delay-accounting.txt \nIt got into cuttlefish config from recommended config list.",
+      "parentUuid": "1ba39757_8194ae29",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 24
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6a973fad_b776cc03",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de698dd7_d17a85fc",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T00:39:53Z",
+      "side": 0,
+      "message": "I put it back in.",
+      "parentUuid": "6a973fad_b776cc03",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 12
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "169c6d04_bc118bbd",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T00:39:53Z",
+      "side": 0,
+      "message": "Security requirement is CONFIG_ARM64_SW_TTBR0_PAN or CONFIG_ARM64_PAN\nhttps://source.android.com/devices/architecture/kernel/config\nCONFIG_ARM64_PAN, enabled on \u003e8.1 chips, satisfies our security requirements even on cpus without PAN support.",
+      "parentUuid": "d7c439be_c9bc9ea8",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 27
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e663f306_a0320f00",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2019-05-07T20:03:41Z",
       "side": 0,
       "message": "seems reasonable to me but I wonder what was using it (if anything?)",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 17
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "180a21cb_3b156f41",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T00:39:53Z",
+      "side": 0,
+      "message": "It\u0027s recommended for debugging. Nothing in production should be using it. Userspace interface that this config exposes /sys/power/pm_test doesn\u0027t have selinux labeling.",
+      "parentUuid": "e663f306_a0320f00",
       "range": {
         "startLine": 55,
         "startChar": 0,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "1007b0a3_645fd7b6",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T00:39:53Z",
+      "side": 0,
+      "message": "iiuc this config is mostly for debugging aosp/906713\nWe want GKI to be a subset of a production kernel (for now).",
+      "parentUuid": "f788d9f3_674406fa",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 22
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "22083e04_cc423665",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
@@ -128,6 +248,30 @@
       "writtenOn": "2019-05-07T20:03:41Z",
       "side": 0,
       "message": "This implements rollback for ext4 userdata on Q+. We need it. Pixel doesn\u0027t need it because it uses f2fs.",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 15
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cade0878_696db300",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T00:39:53Z",
+      "side": 0,
+      "message": "good catch",
+      "parentUuid": "22083e04_cc423665",
       "range": {
         "startLine": 222,
         "startChar": 0,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "c1eab467_151cdb6a",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T00:39:53Z",
+      "side": 0,
+      "message": "I think these should be modules in pixel kernel then.",
+      "parentUuid": "ded7cf8a_97093f38",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 274,
+        "endChar": 25
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "54a93864_e077d290",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
@@ -174,6 +342,30 @@
       "writtenOn": "2019-05-07T20:03:41Z",
       "side": 0,
       "message": "not sure about this one",
+      "range": {
+        "startLine": 314,
+        "startChar": 0,
+        "endLine": 314,
+        "endChar": 15
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "abd12b7f_e506c3f5",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T00:39:53Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "54a93864_e077d290",
       "range": {
         "startLine": 314,
         "startChar": 0,
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "595fff74_a8dcff7f",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T00:39:53Z",
+      "side": 0,
+      "message": "These look like candidate for GKI modules. WDYT?",
+      "parentUuid": "18e57f21_3df1b288",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 21
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41fcae49_aa87a2e4",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
@@ -232,6 +448,30 @@
     },
     {
       "key": {
+        "uuid": "71e224ea_265ce40e",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T00:39:53Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "41fcae49_aa87a2e4",
+      "range": {
+        "startLine": 372,
+        "startChar": 0,
+        "endLine": 372,
+        "endChar": 19
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41280f39_aabd29a3",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
@@ -243,6 +483,30 @@
       "writtenOn": "2019-05-07T20:03:41Z",
       "side": 0,
       "message": "not sure about this one",
+      "range": {
+        "startLine": 373,
+        "startChar": 0,
+        "endLine": 373,
+        "endChar": 33
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0aa9f86_8d6a0a6f",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T00:39:53Z",
+      "side": 0,
+      "message": "Looks like a debugging feature\nhttps://cateee.net/lkddb/web-lkddb/USB_ANNOUNCE_NEW_DEVICES.html",
+      "parentUuid": "41280f39_aabd29a3",
       "range": {
         "startLine": 373,
         "startChar": 0,
@@ -278,6 +542,30 @@
     },
     {
       "key": {
+        "uuid": "10857d43_4e96b35a",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T00:39:53Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "8f18b27a_982b7705",
+      "range": {
+        "startLine": 374,
+        "startChar": 0,
+        "endLine": 374,
+        "endChar": 21
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ff03d6f_820c221d",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
@@ -289,6 +577,30 @@
       "writtenOn": "2019-05-07T20:03:41Z",
       "side": 0,
       "message": "bug in pixel config. this is used when free space on read-only partitions is low",
+      "range": {
+        "startLine": 417,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 19
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b835b0ae_bf9027eb",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T00:39:53Z",
+      "side": 0,
+      "message": "This for debugging right? Debug features in GKI sound like a recurring theme. Let\u0027s start with a minimal GKI with only debugging that\u0027s used in production.",
+      "parentUuid": "4ff03d6f_820c221d",
       "range": {
         "startLine": 417,
         "startChar": 0,
@@ -324,6 +636,30 @@
     },
     {
       "key": {
+        "uuid": "338e3965_d4476a89",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T00:39:53Z",
+      "side": 0,
+      "message": "Pixel mounts a vfat partition under /vendor/firmware_mnt. Not sure if any device actually uses CONFIG_MSDOS_FS, but makes sense to enable since  GKI is supposed to be generic.",
+      "parentUuid": "039a48af_14c5c9ce",
+      "range": {
+        "startLine": 418,
+        "startChar": 0,
+        "endLine": 418,
+        "endChar": 17
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41940e16_0b7da4c3",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
@@ -335,6 +671,30 @@
       "writtenOn": "2019-05-07T20:03:41Z",
       "side": 0,
       "message": "not sure about this one?",
+      "range": {
+        "startLine": 429,
+        "startChar": 0,
+        "endLine": 429,
+        "endChar": 30
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c0447828_b7fec310",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T00:39:53Z",
+      "side": 0,
+      "message": "The value is arch-dependent. Kconfig help text says, \"On arm and other archs it should not be higher than 32768.\" https://github.com/torvalds/linux/blob/master/security/Kconfig#L140\nDefault value of 32768 should be OK.",
+      "parentUuid": "41940e16_0b7da4c3",
       "range": {
         "startLine": 429,
         "startChar": 0,
@@ -370,6 +730,30 @@
     },
     {
       "key": {
+        "uuid": "efa497d9_0e92867d",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T00:39:53Z",
+      "side": 0,
+      "message": "I made a mistake. Pixel should have this too.",
+      "parentUuid": "76480fdc_58b57409",
+      "range": {
+        "startLine": 449,
+        "startChar": 0,
+        "endLine": 449,
+        "endChar": 22
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "31fc98ac_9146652b",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
@@ -390,6 +774,30 @@
       "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95e03e68_9ded8fc7",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-10T00:39:53Z",
+      "side": 0,
+      "message": "This looks like a non-production configuration. So let\u0027s leave it out for now.",
+      "parentUuid": "31fc98ac_9146652b",
+      "range": {
+        "startLine": 452,
+        "startChar": 0,
+        "endLine": 452,
+        "endChar": 31
+      },
+      "revId": "af47336d5ad256e3c2077a80550b1f3deeaf8722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
