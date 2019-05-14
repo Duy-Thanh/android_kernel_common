@@ -68,6 +68,43 @@ struct platform_device *of_find_device_by_node(struct device_node *np)
 EXPORT_SYMBOL(of_find_device_by_node);
 
 #ifdef CONFIG_OF_ADDRESS
+static int of_link_to_suppliers(struct device *dev)
+{
+	struct device_node *sup_node;
+	struct device *sup_dev;
+	unsigned int i = 0, links = 0;
+	u32 dl_flags = DL_FLAG_AUTOPROBE_CONSUMER;
+
+	if (unlikely(!dev->of_node))
+		return 0;
+
+	while ((sup_node = of_parse_phandle(dev->of_node, "depends-on", i))) {
+		sup_dev = &of_find_device_by_node(sup_node)->dev;
+		if (device_link_add(dev, sup_node->dev, dl_flags))
+			links++;
+		put_device(sup_dev);
+		i++;
+	}
+	if (links < i)
+		return -ENODEV;
+	return 0;
+}
+
+static void link_waiting_consumers_func(struct work_struct *work)
+{
+	device_link_check_waiting_consumers(of_link_to_suppliers);
+}
+static DECLARE_WORK(link_waiting_consumers_work, link_waiting_consumers_func);
+
+static bool link_waiting_consumers_enable;
+static void link_waiting_consumers_trigger(void)
+{
+	if (!link_waiting_consumers_enable)
+		return;
+
+	schedule_work(&link_waiting_consumers_work);
+}
+
 /*
  * The following routines scan a subtree and registers a device for
  * each applicable node.
@@ -199,6 +236,8 @@ static struct platform_device *of_platform_device_create_pdata(
 	dev->dev.platform_data = platform_data;
 	of_msi_configure(&dev->dev, dev->dev.of_node);
 
+	if (of_link_to_suppliers(&dev->dev))
+		device_link_wait_for_supplier(&dev->dev);
 	if (of_device_add(dev) != 0) {
 		platform_device_put(dev);
 		goto err_clear_flag;
@@ -206,6 +245,7 @@ static struct platform_device *of_platform_device_create_pdata(
 	spin_lock(&of_dev_lock);
 	np->dev = &dev->dev;
 	spin_unlock(&of_dev_lock);
+	link_waiting_consumers_trigger();
 
 	return dev;
 
@@ -553,6 +593,10 @@ static int __init of_platform_default_populate_init(void)
 
 	/* Populate everything else. */
 	of_platform_default_populate(NULL, NULL, NULL);
+
+	/* Make the device-links between producers and consumers */
+	link_waiting_consumers_enable = true;
+	device_link_check_waiting_consumers(of_link_to_suppliers);
 
 	return 0;
 }
