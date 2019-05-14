@@ -519,6 +519,22 @@ static const struct of_device_id reserved_mem_matches[] = {
 	{}
 };
 
+static int of_link_devices(struct device *dev, void *data)
+{
+	struct device_node *sup_node;
+	int index = 0;
+
+	if (!dev->of_node)
+		return 0;
+
+	while((sup_node = of_parse_phandle(dev->of_node, "depends-on", index))) {
+		device_link_add(dev, sup_node->dev, 0);
+		index++;
+	}
+
+	return 0;
+}
+
 static int __init of_platform_default_populate_init(void)
 {
 	struct device_node *node;
@@ -542,6 +558,9 @@ static int __init of_platform_default_populate_init(void)
 
 	/* Populate everything else. */
 	of_platform_default_populate(NULL, NULL, NULL);
+
+	/* Make the device-links between producers and consumers */
+	bus_for_each_dev(&platform_bus_type, NULL, NULL, of_link_devices);
 
 	return 0;
 }
