@@ -281,6 +281,12 @@ int keyslot_manager_evict_key(struct keyslot_manager *ksm,
 	int slot;
 	int err = 0;
 
+	if (ksm->num_slots == 0) {
+		return ksm->ksm_ll_ops.keyslot_evict(ksm->ll_priv_data, key,
+						     crypt_mode,
+						     data_unit_size, -1);
+	}
+
 	mutex_lock(&ksm->lock);
 	slot = ksm->ksm_ll_ops.keyslot_find(ksm->ll_priv_data, key,
 					    crypt_mode,
@@ -309,7 +315,49 @@ void keyslot_manager_destroy(struct keyslot_manager *ksm)
 {
 	if (!ksm)
 		return;
-	kzfree(ksm->last_used_seq_nums);
+
+	if (ksm->last_used_seq_nums)
+		kzfree(ksm->last_used_seq_nums);
+
 	kzfree(ksm);
 }
 EXPORT_SYMBOL(keyslot_manager_destroy);
+
+/**
+ * keyslot_manager_create_passthrough() - Create a passthrough keyslot manager
+ * @ksm_ll_ops: The struct keyslot_mgmt_ll_ops for the device that this keyslot
+ *		manager will use to perform operations like programming and
+ *		evicting keys.
+ * @ll_priv_data: Private data passed as is to the functions in ksm_ll_ops.
+ *
+ * Allocate memory for and initialize a keyslot manager. Called by for e.g.
+ * storage drivers to set up a keyslot manager in their request_queue.
+ *
+ * Context: This function may sleep
+ * Return: Pointer to constructed keyslot manager or NULL on error.
+ */
+struct keyslot_manager *keyslot_manager_create_passthrough(
+			const struct keyslot_mgmt_ll_ops *ksm_ll_ops,
+			void *ll_priv_data)
+{
+	struct keyslot_manager *ksm;
+
+	/* Check that op for evict is specified */
+	if (ksm_ll_ops->keyslot_evict == NULL) {
+		return NULL;
+	}
+
+	ksm = kzalloc(sizeof(*ksm), GFP_KERNEL);
+	if (!ksm)
+		return NULL;
+
+	ksm->num_slots = 0;
+	return ksm;
+}
+EXPORT_SYMBOL(keyslot_manager_create_passthrough);
+
+bool keyslot_manager_is_passthrough(struct keyslot_manager *ksm)
+{
+	return ksm->num_slots == 0;
+}
+EXPORT_SYMBOL(keyslot_manager_is_passthrough);

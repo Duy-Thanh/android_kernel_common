@@ -71,6 +71,12 @@ extern int keyslot_manager_evict_key(struct keyslot_manager *ksm,
 
 extern void keyslot_manager_destroy(struct keyslot_manager *ksm);
 
+extern struct keyslot_manager *keyslot_manager_create_passthrough(
+				const struct keyslot_mgmt_ll_ops *ksm_ops,
+				void *ll_priv_data);
+
+extern bool keyslot_manager_is_passthrough(struct keyslot_manager *ksm);
+
 #else /* CONFIG_BLK_INLINE_ENCRYPTION */
 struct keyslot_manager {};
 
@@ -111,6 +117,17 @@ static inline int keyslot_manager_evict_key(struct keyslot_manager *ksm,
 static inline void keyslot_manager_destroy(struct keyslot_manager *ksm)
 { }
 
+static inline struct keyslot_manager *
+keyslot_manager_create_passthrough(const struct keyslot_mgmt_ll_ops *ksm_ops,
+				   void *ll_priv_data)
+{
+	return NULL;
+}
+
+static inline bool keyslot_manager_is_passthrough(struct keyslot_manager *ksm)
+{
+	return false;
+}
 #endif /* CONFIG_BLK_INLINE_ENCRYPTION */
 
 #endif /* __LINUX_KEYSLOT_MANAGER_H */
