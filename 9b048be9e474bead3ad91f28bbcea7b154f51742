@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa12cc52_342c1962",
+        "filename": "drivers/of/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-05-15T13:55:37Z",
+      "side": 1,
+      "message": "checkpatch is your friend :)",
+      "range": {
+        "startLine": 530,
+        "startChar": 1,
+        "endLine": 530,
+        "endChar": 6
+      },
+      "revId": "9b048be9e474bead3ad91f28bbcea7b154f51742",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
