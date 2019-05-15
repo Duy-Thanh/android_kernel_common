@@ -68,6 +68,30 @@
       "revId": "9b048be9e474bead3ad91f28bbcea7b154f51742",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01d6efb7_86d15cfc",
+        "filename": "drivers/of/platform.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2019-05-15T17:23:59Z",
+      "side": 1,
+      "message": "Yeah, this wasn\u0027t a full/final patch. Just something for people to get an idea of what I\u0027m thinking. Still need to handle clean up when devices are removed and also handle children DT node dependencies.",
+      "parentUuid": "164feedc_afa43bc4",
+      "range": {
+        "startLine": 531,
+        "startChar": 0,
+        "endLine": 531,
+        "endChar": 41
+      },
+      "revId": "9b048be9e474bead3ad91f28bbcea7b154f51742",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
