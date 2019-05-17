@@ -2,6 +2,98 @@
   "comments": [
     {
       "key": {
+        "uuid": "db88f02d_6cee48e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-05-17T14:30:39Z",
+      "side": 1,
+      "message": "Love the explanation.\n\nI assume this is going to be your RFC cover letter. I don\u0027t know a lot about code, so I will let Greg comment there.\nHowever, there are some things below that could use some concrete examples.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 70
+      },
+      "revId": "8b9d9c17a6793d2bc4502662038475e10701446e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3bcc46a_770573c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-05-17T14:30:39Z",
+      "side": 1,
+      "message": "Give an example?",
+      "range": {
+        "startLine": 14,
+        "startChar": 18,
+        "endLine": 17,
+        "endChar": 39
+      },
+      "revId": "8b9d9c17a6793d2bc4502662038475e10701446e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5adcf859_020a5c26",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-05-17T14:30:39Z",
+      "side": 1,
+      "message": "Give an example of both cases?",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "8b9d9c17a6793d2bc4502662038475e10701446e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1de283af_5e7601ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-05-17T14:30:39Z",
+      "side": 1,
+      "message": "Give numbers or results for before / after where EPROBE_DEFER wasted boot time\nvs a serialized probe now doesn\u0027t.",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 0
+      },
+      "revId": "8b9d9c17a6793d2bc4502662038475e10701446e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4df46a06_c31fe0ee",
         "filename": "drivers/base/core.c",
         "patchSetId": 2
