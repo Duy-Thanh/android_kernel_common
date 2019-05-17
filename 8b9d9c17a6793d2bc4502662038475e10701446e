@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4df46a06_c31fe0ee",
+        "filename": "drivers/base/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2019-05-17T03:42:29Z",
+      "side": 1,
+      "message": "This looks like a locking issue, but I think it\u0027s fine because it is literally just a 32 bit read which is guaranteed to be atomic on all 32-bit or higher arch? Oh wait, this will be a 64-bit read though.\n\nEven in that case, I\u0027m wondering if I need to fix this. Because at worst case, the race happens as this device gets its last supplier linked to it and it\u0027s removed from the \"wait_for_suppliers\" list and it\u0027s put on the deferred probe list when it could have probed. But then it\u0027ll immediately be probed once the supplier device finishes probing.\n\nI\u0027m trying to avoid the locking here because rest of the code is in drivers/of/platform.c and we can\u0027t have drivers/base/core.c depend on it.",
+      "range": {
+        "startLine": 538,
+        "startChar": 23,
+        "endLine": 538,
+        "endChar": 28
+      },
+      "revId": "8b9d9c17a6793d2bc4502662038475e10701446e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
