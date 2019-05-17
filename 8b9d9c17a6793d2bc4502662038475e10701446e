@@ -94,6 +94,30 @@
     },
     {
       "key": {
+        "uuid": "891e189a_6caa7830",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2019-05-17T16:46:10Z",
+      "side": 1,
+      "message": "This is going to be the hard part. 4.9 on Pixel 3 doesn\u0027t have device links support. I can try to force deferred probing by hacking up hikey, but not sure how much deferred probing it\u0027ll cause vs actually crash because it doesn\u0027t handle EPROBE_DEFER correctly. It\u0027s going to be a while. I wonder if I should send out the patch before I have those numbers or not.",
+      "parentUuid": "1de283af_5e7601ef",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 0
+      },
+      "revId": "8b9d9c17a6793d2bc4502662038475e10701446e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4df46a06_c31fe0ee",
         "filename": "drivers/base/core.c",
         "patchSetId": 2
@@ -109,6 +133,29 @@
         "startLine": 538,
         "startChar": 23,
         "endLine": 538,
+        "endChar": 28
+      },
+      "revId": "8b9d9c17a6793d2bc4502662038475e10701446e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56cd7f3a_96d7df28",
+        "filename": "drivers/of/platform.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2019-05-17T16:46:10Z",
+      "side": 1,
+      "message": "I\u0027m going back and forth on whether this can cause a deadlock because I\u0027m holding the list lock while adding device links with AUTOPROBE_CONSUMER. I\u0027m wondering if I can end up in a nested of_platform_device_create_pdata(). Don\u0027t know if that\u0027s already not allowed (meaning I won\u0027t make it any worse) or if it can happen.\n\nThere are many ways to fix it. One being -- remove AUTOPROBE_CONSUMER) and fix the locking in device_links_check() when I check for !list_empty(). Another being doing the retry_link_to_suppliers() in a work queue.",
+      "range": {
+        "startLine": 255,
+        "startChar": 2,
+        "endLine": 255,
         "endChar": 28
       },
       "revId": "8b9d9c17a6793d2bc4502662038475e10701446e",
