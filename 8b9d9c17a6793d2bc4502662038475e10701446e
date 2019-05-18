@@ -118,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "d5c32520_49357e8b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-05-18T05:33:42Z",
+      "side": 1,
+      "message": "How did you test this patch then?",
+      "parentUuid": "891e189a_6caa7830",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 0
+      },
+      "revId": "8b9d9c17a6793d2bc4502662038475e10701446e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4df46a06_c31fe0ee",
         "filename": "drivers/base/core.c",
         "patchSetId": 2
