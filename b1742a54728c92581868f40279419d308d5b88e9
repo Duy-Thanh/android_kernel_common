@@ -117,6 +117,23 @@
     },
     {
       "key": {
+        "uuid": "46685ad1_da0ea154",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1294339
+      },
+      "writtenOn": "2019-05-20T03:37:52Z",
+      "side": 1,
+      "message": "hba-\u003ecaps shall be zero by default, so this may be not necessary.",
+      "revId": "b1742a54728c92581868f40279419d308d5b88e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "de1c9953_fc24aafa",
         "filename": "drivers/scsi/ufs/ufshcd-crypto.c",
         "patchSetId": 6
