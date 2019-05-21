@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eda535be_1fab9990",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-21T23:01:49Z",
+      "side": 1,
+      "message": "Add ANDROID: tag to commit messages in this topic\ngo/common-kernel-3p",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 54
+      },
+      "revId": "73e4c755725f6cd50ac85f0193de518bd3c77b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f2934ca_c8289dda",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2019-05-21T23:01:49Z",
+      "side": 1,
+      "message": "Do we need this one for CFI?",
+      "range": {
+        "startLine": 9,
+        "startChar": 20,
+        "endLine": 9,
+        "endChar": 60
+      },
+      "revId": "73e4c755725f6cd50ac85f0193de518bd3c77b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
