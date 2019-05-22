@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df236288_df71ec9a",
+        "filename": "drivers/base/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-05-22T10:31:22Z",
+      "side": 1,
+      "message": "comment the heck about what you are doing here please :)",
+      "range": {
+        "startLine": 583,
+        "startChar": 0,
+        "endLine": 583,
+        "endChar": 23
+      },
+      "revId": "593597d5b06d21ee54fbfedc73d1affbf06979ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "545bfa2b_67a7b0b7",
+        "filename": "include/linux/device.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-05-22T10:31:22Z",
+      "side": 1,
+      "message": "nit, move this up one line.",
+      "range": {
+        "startLine": 897,
+        "startChar": 0,
+        "endLine": 897,
+        "endChar": 34
+      },
+      "revId": "593597d5b06d21ee54fbfedc73d1affbf06979ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
