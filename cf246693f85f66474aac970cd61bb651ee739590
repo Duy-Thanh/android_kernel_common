@@ -22,6 +22,30 @@
       "revId": "cf246693f85f66474aac970cd61bb651ee739590",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0343985_46a41f18",
+        "filename": "drivers/of/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2019-05-22T16:04:36Z",
+      "side": 1,
+      "message": "Ack will remove",
+      "parentUuid": "7e63ee65_ef920f9d",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 29
+      },
+      "revId": "cf246693f85f66474aac970cd61bb651ee739590",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
