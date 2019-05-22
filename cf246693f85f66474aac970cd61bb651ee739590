@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e63ee65_ef920f9d",
+        "filename": "drivers/of/platform.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-05-22T10:35:07Z",
+      "side": 1,
+      "message": "if you can not benchmark that unlikely() actually matters, remove it.  Odds are the compiler/CPU knows this better than you do.",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 29
+      },
+      "revId": "cf246693f85f66474aac970cd61bb651ee739590",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
