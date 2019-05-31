@@ -64,6 +64,7 @@ ENTRY(cpu_do_suspend)
 	mrs	x2, tpidr_el0
 	mrs	x3, tpidrro_el0
 	mrs	x4, contextidr_el1
+<<<<<<< HEAD   (559894 Merge remote-tracking branch 'origin/upstream-f2fs-stable-li)
 	mrs	x5, cpacr_el1
 	mrs	x6, tcr_el1
 	mrs	x7, vbar_el1
@@ -72,12 +73,28 @@ ENTRY(cpu_do_suspend)
 	mrs	x10, sctlr_el1
 	mrs	x11, tpidr_el1
 	mrs	x12, sp_el0
+=======
+	mrs	x5, osdlr_el1
+	mrs	x6, cpacr_el1
+	mrs	x7, tcr_el1
+	mrs	x8, vbar_el1
+	mrs	x9, mdscr_el1
+	mrs	x10, oslsr_el1
+	mrs	x11, sctlr_el1
+>>>>>>> BRANCH (b16a53 Linux 4.9.180)
 	stp	x2, x3, [x0]
+<<<<<<< HEAD   (559894 Merge remote-tracking branch 'origin/upstream-f2fs-stable-li)
 	stp	x4, xzr, [x0, #16]
 	stp	x5, x6, [x0, #32]
 	stp	x7, x8, [x0, #48]
 	stp	x9, x10, [x0, #64]
 	stp	x11, x12, [x0, #80]
+=======
+	stp	x4, x5, [x0, #16]
+	stp	x6, x7, [x0, #32]
+	stp	x8, x9, [x0, #48]
+	stp	x10, x11, [x0, #64]
+>>>>>>> BRANCH (b16a53 Linux 4.9.180)
 	ret
 ENDPROC(cpu_do_suspend)
 
@@ -100,8 +117,8 @@ ENTRY(cpu_do_resume)
 	msr	cpacr_el1, x6
 
 	/* Don't change t0sz here, mask those bits when restoring */
-	mrs	x5, tcr_el1
-	bfi	x8, x5, TCR_T0SZ_OFFSET, TCR_TxSZ_WIDTH
+	mrs	x7, tcr_el1
+	bfi	x8, x7, TCR_T0SZ_OFFSET, TCR_TxSZ_WIDTH
 
 	msr	tcr_el1, x8
 	msr	vbar_el1, x9
@@ -121,6 +138,7 @@ ENTRY(cpu_do_resume)
 	/*
 	 * Restore oslsr_el1 by writing oslar_el1
 	 */
+	msr	osdlr_el1, x5
 	ubfx	x11, x11, #1, #1
 	msr	oslar_el1, x11
 	reset_pmuserenr_el0 x0			// Disable PMU access from EL0
