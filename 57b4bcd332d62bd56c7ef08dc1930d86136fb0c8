@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "808ff6c9_ebbb3aef",
+        "filename": "drivers/trusty/trusty-mem.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2019-06-03T21:54:54Z",
+      "side": 1,
+      "message": "Define output constants (e.g. TRUSTY_PTE_RDONLY) to use both archs. Set flag when writable\u003d\u003dfalse?",
+      "range": {
+        "startLine": 60,
+        "startChar": 11,
+        "endLine": 60,
+        "endChar": 17
+      },
+      "revId": "57b4bcd332d62bd56c7ef08dc1930d86136fb0c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70bcc18a_f00478b8",
+        "filename": "drivers/trusty/trusty-mem.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2019-06-03T21:54:54Z",
+      "side": 1,
+      "message": "move to a common helper",
+      "revId": "57b4bcd332d62bd56c7ef08dc1930d86136fb0c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a700b5d0_7589b726",
+        "filename": "include/linux/trusty/trusty.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2019-06-03T21:54:54Z",
+      "side": 1,
+      "message": "Add kerneldoc and explain why writable is overriding pgprot.",
+      "revId": "57b4bcd332d62bd56c7ef08dc1930d86136fb0c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
