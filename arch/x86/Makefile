@@ -308,6 +308,15 @@ PHONY += vdso_install
 vdso_install:
 	$(Q)$(MAKE) $(build)=arch/x86/entry/vdso $@
 
+<<<<<<< HEAD   (cab439 Merge 4.19.47 into android-4.19)
+=======
+archprepare: checkbin
+checkbin:
+ifndef CONFIG_CC_HAS_ASM_GOTO
+	@echo Compiler lacks asm-goto support.
+	@exit 1
+endif
+>>>>>>> BRANCH (e109a9 Linux 4.19.48)
 ifdef CONFIG_RETPOLINE
 ifeq ($(RETPOLINE_CFLAGS),)
 	@echo "You are building kernel with non-retpoline compiler." >&2
