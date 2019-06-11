@@ -471,6 +471,7 @@ int fib_nl_newrule(struct sk_buff *skb, struct nlmsghdr *nlh)
 	if (rule->l3mdev && rule->table)
 		goto errout_free;
 
+<<<<<<< HEAD   (83ae22 Revert "fib_rules: return 0 directly if an exactly same rule)
 	if (tb[FRA_UID_RANGE]) {
 		if (current_user_ns() != net->user_ns) {
 			err = -EPERM;
@@ -486,6 +487,8 @@ int fib_nl_newrule(struct sk_buff *skb, struct nlmsghdr *nlh)
 		rule->uid_range = fib_kuid_range_unset;
 	}
 
+=======
+>>>>>>> BRANCH (3ffb24 Linux 4.9.181)
 	if ((nlh->nlmsg_flags & NLM_F_EXCL) &&
 	    rule_exists(ops, frh, tb, rule)) {
 		err = -EEXIST;
