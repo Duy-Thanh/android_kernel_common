@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "acb38eca_63b43962",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1110304
+      },
+      "writtenOn": "2019-06-18T21:04:59Z",
+      "side": 1,
+      "message": "shouldn\u0027t there be a \u0027Change-Id: ...\u0027 line?\nI would expect these changes to be cherry-picks from other branch, but it doesn\u0027t show in gerrit because it lacks that line.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 0
+      },
+      "revId": "29f8900d703defb3cdc9e6569c4b62e097801464",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
