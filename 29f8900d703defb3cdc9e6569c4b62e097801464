@@ -22,6 +22,30 @@
       "revId": "29f8900d703defb3cdc9e6569c4b62e097801464",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9410e6d1_63c16622",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-06-18T22:29:23Z",
+      "side": 1,
+      "message": "Huh, guess I don\u0027t have the git presubmit hooks setup for my android-common tree checkout... Thanks Ram.",
+      "parentUuid": "acb38eca_63b43962",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 0
+      },
+      "revId": "29f8900d703defb3cdc9e6569c4b62e097801464",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
