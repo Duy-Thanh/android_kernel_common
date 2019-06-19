@@ -134,6 +134,7 @@ struct ion_heap_ops {
  * @shrinker:		a shrinker for the heap
  * @free_list:		free list head if deferred free is used
  * @free_list_size	size of the deferred free list in bytes
+ * @priv		pointer to data that is private to the heap
  * @lock:		protects the free list
  * @waitqueue:		queue to wait on from deferred free thread
  * @task:		task struct of deferred free thread
@@ -170,6 +171,9 @@ struct ion_heap {
 
 	/* protect heap statistics */
 	spinlock_t stat_lock;
+
+	/* heap's private data */
+	void *private;
 };
 
 /**
