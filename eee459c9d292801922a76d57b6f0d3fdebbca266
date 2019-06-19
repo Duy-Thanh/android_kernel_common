@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f8a141d_4dcad21f",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1141859
+      },
+      "writtenOn": "2019-06-19T02:29:53Z",
+      "side": 1,
+      "message": "This file does not exist in x86 architecture, can we use following style?\n\n#if defined(CONFIG_ARM64) || defined(CONFIG_ARM)\n#include \u003casm/compiler.h\u003e\n#endif",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 25
+      },
+      "revId": "eee459c9d292801922a76d57b6f0d3fdebbca266",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5f45fe5_00587d16",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1141859
+      },
+      "writtenOn": "2019-06-19T02:29:53Z",
+      "side": 1,
+      "message": "This function would be built by default, however, it fails to build due to unrecognized instruction for x86. Suggest to add a stub function for non-arm64 and non-arm architecture:\n\n#if defined(CONFIG_ARM64) || defined(CONFIG_ARM)\n...keep line 60 ... 83\n#else\nstatic inline ulong smc(ulong r0, ulong r1, ulong r2, ulong r3,\n                          struct trusty_custom_smc *dummy_smc)\n{\n    /* Non-ARM64 and non-ARM architecture should implement its own customized smc*/\n    BUG_ON(1);\n\n    return 0;\n}\n#endif",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 69
+      },
+      "revId": "eee459c9d292801922a76d57b6f0d3fdebbca266",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
