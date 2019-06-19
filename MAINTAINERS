@@ -3121,7 +3121,12 @@ F:	arch/arm/mach-bcm/
 
 BROADCOM BCM2835 ARM ARCHITECTURE
 M:	Eric Anholt <eric@anholt.net>
+<<<<<<< HEAD   (27e23d ARM: omap2: remove incorrect __init annotation)
 M:	Stefan Wahren <wahrenst@gmx.net>
+=======
+M:	Stefan Wahren <stefan.wahren@i2se.com>
+L:	bcm-kernel-feedback-list@broadcom.com
+>>>>>>> BRANCH (64f357 MAINTAINERS: BCM53573: Add internal Broadcom mailing list)
 L:	linux-rpi-kernel@lists.infradead.org (moderated for non-subscribers)
 L:	linux-arm-kernel@lists.infradead.org (moderated for non-subscribers)
 T:	git git://github.com/anholt/linux
@@ -3151,6 +3156,7 @@ F:	arch/arm/boot/dts/bcm953012*
 
 BROADCOM BCM53573 ARM ARCHITECTURE
 M:	Rafał Miłecki <rafal@milecki.pl>
+L:	bcm-kernel-feedback-list@broadcom.com
 L:	linux-arm-kernel@lists.infradead.org
 S:	Maintained
 F:	arch/arm/boot/dts/bcm53573*
