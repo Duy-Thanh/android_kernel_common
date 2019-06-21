@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e92f4c72_7e263df6",
+        "filename": "drivers/trusty/trusty-irq.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1085883
+      },
+      "writtenOn": "2019-06-21T07:08:45Z",
+      "side": 1,
+      "message": "use ifdef instead of ifndef",
+      "range": {
+        "startLine": 239,
+        "startChar": 1,
+        "endLine": 239,
+        "endChar": 8
+      },
+      "revId": "fd8948609a9c09fb034dd2b48cc2adfe676c50e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f0570d9_ac35daca",
+        "filename": "drivers/trusty/trusty-x86_64.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1085883
+      },
+      "writtenOn": "2019-06-21T07:08:45Z",
+      "side": 1,
+      "message": "need to consider ACRN support. it is ok to not support ACRN for now, but we must have the design ...",
+      "range": {
+        "startLine": 89,
+        "startChar": 44,
+        "endLine": 89,
+        "endChar": 58
+      },
+      "revId": "fd8948609a9c09fb034dd2b48cc2adfe676c50e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b36422a_12ff6db4",
+        "filename": "drivers/trusty/trusty-x86_64.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1085883
+      },
+      "writtenOn": "2019-06-21T07:08:45Z",
+      "side": 1,
+      "message": "why it does same thing as above?",
+      "range": {
+        "startLine": 127,
+        "startChar": 2,
+        "endLine": 127,
+        "endChar": 31
+      },
+      "revId": "fd8948609a9c09fb034dd2b48cc2adfe676c50e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f0119f3_5097eb8e",
+        "filename": "drivers/trusty/trusty-x86_64.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1085883
+      },
+      "writtenOn": "2019-06-21T07:08:45Z",
+      "side": 1,
+      "message": "function name doesn\u0027t match the action. but I don\u0027t have better idea here.",
+      "range": {
+        "startLine": 180,
+        "startChar": 1,
+        "endLine": 180,
+        "endChar": 49
+      },
+      "revId": "fd8948609a9c09fb034dd2b48cc2adfe676c50e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75b662e8_ecd099ca",
+        "filename": "drivers/trusty/trusty-x86_64.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1085883
+      },
+      "writtenOn": "2019-06-21T07:08:45Z",
+      "side": 1,
+      "message": "number, not size",
+      "range": {
+        "startLine": 204,
+        "startChar": 5,
+        "endLine": 204,
+        "endChar": 10
+      },
+      "revId": "fd8948609a9c09fb034dd2b48cc2adfe676c50e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
