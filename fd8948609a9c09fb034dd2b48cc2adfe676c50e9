@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "99707f9c_abf1fc7d",
+        "filename": "drivers/trusty/trusty-irq.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1141859
+      },
+      "writtenOn": "2019-06-24T04:12:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e92f4c72_7e263df6",
+      "range": {
+        "startLine": 239,
+        "startChar": 1,
+        "endLine": 239,
+        "endChar": 8
+      },
+      "revId": "fd8948609a9c09fb034dd2b48cc2adfe676c50e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f0570d9_ac35daca",
         "filename": "drivers/trusty/trusty-x86_64.c",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "fd8948609a9c09fb034dd2b48cc2adfe676c50e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4afeb5c1_b1c20b89",
+        "filename": "drivers/trusty/trusty-x86_64.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1141859
+      },
+      "writtenOn": "2019-06-24T04:12:10Z",
+      "side": 1,
+      "message": "Done\n\nDone in register_trusty_custom_smc",
+      "parentUuid": "4f0570d9_ac35daca",
+      "range": {
+        "startLine": 89,
+        "startChar": 44,
+        "endLine": 89,
+        "endChar": 58
+      },
+      "revId": "fd8948609a9c09fb034dd2b48cc2adfe676c50e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "7883435e_6e867d6b",
+        "filename": "drivers/trusty/trusty-x86_64.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1141859
+      },
+      "writtenOn": "2019-06-24T04:12:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b36422a_12ff6db4",
+      "range": {
+        "startLine": 127,
+        "startChar": 2,
+        "endLine": 127,
+        "endChar": 31
+      },
+      "revId": "fd8948609a9c09fb034dd2b48cc2adfe676c50e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f0119f3_5097eb8e",
         "filename": "drivers/trusty/trusty-x86_64.c",
         "patchSetId": 3
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "148e56a8_6bd2733b",
+        "filename": "drivers/trusty/trusty-x86_64.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1141859
+      },
+      "writtenOn": "2019-06-24T04:12:10Z",
+      "side": 1,
+      "message": "Done\n\nAPI renamed to trusty_x86_64_release_reserved_vector",
+      "parentUuid": "4f0119f3_5097eb8e",
+      "range": {
+        "startLine": 180,
+        "startChar": 1,
+        "endLine": 180,
+        "endChar": 49
+      },
+      "revId": "fd8948609a9c09fb034dd2b48cc2adfe676c50e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75b662e8_ecd099ca",
         "filename": "drivers/trusty/trusty-x86_64.c",
         "patchSetId": 3
@@ -114,6 +210,30 @@
       "revId": "fd8948609a9c09fb034dd2b48cc2adfe676c50e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fcb1ecf_03fc5db6",
+        "filename": "drivers/trusty/trusty-x86_64.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1141859
+      },
+      "writtenOn": "2019-06-24T04:12:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75b662e8_ecd099ca",
+      "range": {
+        "startLine": 204,
+        "startChar": 5,
+        "endLine": 204,
+        "endChar": 10
+      },
+      "revId": "fd8948609a9c09fb034dd2b48cc2adfe676c50e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
