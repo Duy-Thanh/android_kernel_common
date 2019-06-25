@@ -7278,6 +7278,12 @@ capacity_from_percent(char *buf)
 	return req;
 }
 
+static inline u64
+percent_from_capacity(u64 value) {
+	return DIV_ROUND_CLOSEST_ULL(value * UCLAMP_PERCENT_SCALE,
+				     SCHED_CAPACITY_SCALE);
+}
+
 static ssize_t cpu_uclamp_write(struct kernfs_open_file *of, char *buf,
 				size_t nbytes, loff_t off,
 				enum uclamp_id clamp_id)
@@ -7326,7 +7332,8 @@ static ssize_t cpu_uclamp_max_write(struct kernfs_open_file *of,
 }
 
 static inline void cpu_uclamp_print(struct seq_file *sf,
-				    enum uclamp_id clamp_id)
+				    enum uclamp_id clamp_id,
+				    bool effective)
 {
 	struct task_group *tg;
 	u64 util_clamp;
@@ -7335,7 +7342,9 @@ static inline void cpu_uclamp_print(struct seq_file *sf,
 
 	rcu_read_lock();
 	tg = css_tg(seq_css(sf));
-	util_clamp = tg->uclamp_req[clamp_id].value;
+	util_clamp = effective
+		? tg->uclamp[clamp_id].value
+		: tg->uclamp_req[clamp_id].value;
 	rcu_read_unlock();
 
 	if (util_clamp == SCHED_CAPACITY_SCALE) {
@@ -7343,20 +7352,34 @@ static inline void cpu_uclamp_print(struct seq_file *sf,
 		return;
 	}
 
-	percent = tg->uclamp_pct[clamp_id];
+	percent = effective
+		? percent_from_capacity(util_clamp)
+		: tg->uclamp_pct[clamp_id];
 	percent = div_u64_rem(percent, POW10(UCLAMP_PERCENT_SHIFT), &rem);
 	seq_printf(sf, "%llu.%0*u\n", percent, UCLAMP_PERCENT_SHIFT, rem);
 }
 
 static int cpu_uclamp_min_show(struct seq_file *sf, void *v)
 {
-	cpu_uclamp_print(sf, UCLAMP_MIN);
+	cpu_uclamp_print(sf, UCLAMP_MIN, false);
 	return 0;
 }
 
 static int cpu_uclamp_max_show(struct seq_file *sf, void *v)
 {
-	cpu_uclamp_print(sf, UCLAMP_MAX);
+	cpu_uclamp_print(sf, UCLAMP_MAX, false);
+	return 0;
+}
+
+static int cpu_uclamp_min_effective_show(struct seq_file *sf, void *v)
+{
+	cpu_uclamp_print(sf, UCLAMP_MIN, true);
+	return 0;
+}
+
+static int cpu_uclamp_max_effective_show(struct seq_file *sf, void *v)
+{
+	cpu_uclamp_print(sf, UCLAMP_MAX, true);
 	return 0;
 }
 #endif /* CONFIG_UCLAMP_TASK_GROUP */
@@ -7714,10 +7737,18 @@ static struct cftype cpu_legacy_files[] = {
 		.write = cpu_uclamp_min_write,
 	},
 	{
+		.name = "uclamp.min.effective",
+		.seq_show = cpu_uclamp_min_effective_show,
+	},
+	{
 		.name = "uclamp.max",
 		.flags = CFTYPE_NOT_ON_ROOT,
 		.seq_show = cpu_uclamp_max_show,
 		.write = cpu_uclamp_max_write,
+	},
+	{
+		.name = "uclamp.max.effective",
+		.seq_show = cpu_uclamp_max_effective_show,
 	},
 #endif
 	{ }	/* Terminate */
@@ -7895,10 +7926,18 @@ static struct cftype cpu_files[] = {
 		.write = cpu_uclamp_min_write,
 	},
 	{
+		.name = "uclamp.min.effective",
+		.seq_show = cpu_uclamp_min_effective_show,
+	},
+	{
 		.name = "uclamp.max",
 		.flags = CFTYPE_NOT_ON_ROOT,
 		.seq_show = cpu_uclamp_max_show,
 		.write = cpu_uclamp_max_write,
+	},
+	{
+		.name = "uclamp.max.effective",
+		.seq_show = cpu_uclamp_max_effective_show,
 	},
 #endif
 	{ }	/* terminate */
