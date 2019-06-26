@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4fb2d0b0_a9eea3cd",
+        "filename": "drivers/staging/android/lowmemorykiller.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-06-26T17:54:19Z",
+      "side": 1,
+      "message": "is \"selected\" (struct task_struct *) safe to access outside the rcu_read lock?",
+      "revId": "e0c8121bb4e97ebb3c86356b3a416d9c35d91d1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
