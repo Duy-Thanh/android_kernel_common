@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee460664_dd700187",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1294339
+      },
+      "writtenOn": "2019-06-27T14:23:41Z",
+      "side": 1,
+      "message": "Once keyslot eviction successfully done by ksm_ll_ops, how about also reset ksm-\u003elast_used_seq_nums[slot] here? This can make \"used slots\" as \"compact\" as possible according to idle slot finding logic in keyslot_manager_get_slot_for_key().\n\nBTW, I just saw Eric proposed a link-list-based LRU patch in Linux forum and ksm-\u003elast_used_seq_nums[slot] is removed in that patch.",
+      "revId": "637f77e2cedf68b0f4d4881c2fb9322f001a3d39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
