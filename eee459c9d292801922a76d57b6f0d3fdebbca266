@@ -45,6 +45,47 @@
       "revId": "eee459c9d292801922a76d57b6f0d3fdebbca266",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf501320_8bfdb0ba",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2019-06-27T21:19:35Z",
+      "side": 1,
+      "message": "This seems like it would make sense to go in whichever patch lands second.\nAdditionally, this isn\u0027t new in this patch, so this comment doesn\u0027t go on this change.",
+      "parentUuid": "f5f45fe5_00587d16",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 69
+      },
+      "revId": "eee459c9d292801922a76d57b6f0d3fdebbca266",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a185856_036c1014",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2019-06-27T21:19:35Z",
+      "side": 1,
+      "message": "Should this be dev_get_drvdata(dev)?",
+      "revId": "eee459c9d292801922a76d57b6f0d3fdebbca266",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
