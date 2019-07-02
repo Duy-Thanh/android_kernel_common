@@ -266,6 +266,8 @@ int security_inode_setxattr(struct dentry *dentry, const char *name,
 void security_inode_post_setxattr(struct dentry *dentry, const char *name,
 				  const void *value, size_t size, int flags);
 int security_inode_getxattr(struct dentry *dentry, const char *name);
+void security_inode_getxattr_copy_up(struct dentry *parent,
+				     struct dentry *child);
 int security_inode_listxattr(struct dentry *dentry);
 int security_inode_removexattr(struct dentry *dentry, const char *name);
 int security_inode_need_killpriv(struct dentry *dentry);
@@ -697,6 +699,10 @@ static inline int security_inode_getxattr(struct dentry *dentry,
 {
 	return 0;
 }
+
+static inline void security_inode_getxattr_copy_up(struct dentry *dentry,
+			struct dentry *child)
+{ }
 
 static inline int security_inode_listxattr(struct dentry *dentry)
 {

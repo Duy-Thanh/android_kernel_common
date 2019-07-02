@@ -3100,6 +3100,25 @@ static int selinux_inode_getxattr(struct dentry *dentry, const char *name)
 	return dentry_has_perm(cred, dentry, FILE__GETATTR);
 }
 
+static void selinux_inode_getxattr_copy_up(struct dentry *parent,
+					   struct dentry *child)
+{
+	struct inode *pinode, *cinode;
+	struct inode_security_struct *pisec, *cisec;
+
+	if (unlikely(!parent || !child))
+		return;
+	pinode = parent->d_inode;
+	cinode = child->d_inode;
+	if (unlikely(!pinode || !cinode))
+		return;
+	pisec = pinode->i_security;
+	cisec = cinode->i_security;
+	if (unlikely(!pisec || !cisec))
+		return;
+	pisec->sid = cisec->sid;
+}
+
 static int selinux_inode_listxattr(struct dentry *dentry)
 {
 	const struct cred *cred = current_cred();
@@ -5967,6 +5986,7 @@ static struct security_hook_list selinux_hooks[] = {
 	LSM_HOOK_INIT(inode_setxattr, selinux_inode_setxattr),
 	LSM_HOOK_INIT(inode_post_setxattr, selinux_inode_post_setxattr),
 	LSM_HOOK_INIT(inode_getxattr, selinux_inode_getxattr),
+	LSM_HOOK_INIT(inode_getxattr_copy_up, selinux_inode_getxattr_copy_up),
 	LSM_HOOK_INIT(inode_listxattr, selinux_inode_listxattr),
 	LSM_HOOK_INIT(inode_removexattr, selinux_inode_removexattr),
 	LSM_HOOK_INIT(inode_getsecurity, selinux_inode_getsecurity),

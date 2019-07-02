@@ -356,6 +356,8 @@
  *	Check permission before obtaining the extended attributes
  *	identified by @name for @dentry.
  *	Return 0 if permission is granted.
+ * @inode_getxattr_copy_up:
+ *	For union filesystems to copy child dentry security id to parent.
  * @inode_listxattr:
  *	Check permission before obtaining the list of extended attribute
  *	names for @dentry.
@@ -1409,6 +1411,8 @@ union security_list_options {
 					const void *value, size_t size,
 					int flags);
 	int (*inode_getxattr)(struct dentry *dentry, const char *name);
+	void (*inode_getxattr_copy_up)(struct dentry *parent,
+				       struct dentry *child);
 	int (*inode_listxattr)(struct dentry *dentry);
 	int (*inode_removexattr)(struct dentry *dentry, const char *name);
 	int (*inode_need_killpriv)(struct dentry *dentry);
@@ -1681,6 +1685,7 @@ struct security_hook_heads {
 	struct list_head inode_setxattr;
 	struct list_head inode_post_setxattr;
 	struct list_head inode_getxattr;
+	struct list_head inode_getxattr_copy_up;
 	struct list_head inode_listxattr;
 	struct list_head inode_removexattr;
 	struct list_head inode_need_killpriv;
