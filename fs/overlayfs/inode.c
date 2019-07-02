@@ -8,6 +8,7 @@
  */
 
 #include <linux/fs.h>
+#include <linux/selinux.h>
 #include <linux/slab.h>
 #include <linux/cred.h>
 #include <linux/xattr.h>
@@ -376,6 +377,8 @@ int ovl_xattr_get(struct dentry *dentry, struct inode *inode, const char *name,
 	old_cred = ovl_override_creds(dentry->d_sb);
 	res = vfs_getxattr(realdentry, name, value, size);
 	ovl_revert_creds(old_cred);
+	if (res == -EACCES)
+		selinux_copy_sid(dentry, realdentry);
 	return res;
 }
 
