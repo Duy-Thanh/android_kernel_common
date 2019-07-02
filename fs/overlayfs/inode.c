@@ -8,6 +8,7 @@
  */
 
 #include <linux/fs.h>
+#include <linux/selinux.h>
 #include <linux/slab.h>
 #include <linux/xattr.h>
 #include "overlayfs.h"
@@ -263,13 +264,17 @@ static bool ovl_need_xattr_filter(struct dentry *dentry,
 ssize_t ovl_getxattr(struct dentry *dentry, const char *name,
 		     void *value, size_t size)
 {
+	ssize_t res;
 	struct path realpath;
 	enum ovl_path_type type = ovl_path_real(dentry, &realpath);
 
 	if (ovl_need_xattr_filter(dentry, type) && ovl_is_private_xattr(name))
 		return -ENODATA;
 
-	return vfs_getxattr(realpath.dentry, name, value, size);
+	res = vfs_getxattr(realpath.dentry, name, value, size);
+	if (res == -EACCES)
+		selinux_copy_sid(dentry, realpath.dentry);
+	return res;
 }
 
 static bool ovl_can_list(const char *s)
