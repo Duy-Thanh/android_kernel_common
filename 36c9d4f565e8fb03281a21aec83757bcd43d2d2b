@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be6200ca_4b253516",
+        "filename": "include/linux/selinux.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-07-03T21:56:08Z",
+      "side": 1,
+      "message": "top here, parent in the discussion, match them!",
+      "range": {
+        "startLine": 29,
+        "startChar": 37,
+        "endLine": 29,
+        "endChar": 40
+      },
+      "revId": "36c9d4f565e8fb03281a21aec83757bcd43d2d2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
