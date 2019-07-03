@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c45cfc2c_bbb494c0",
+        "filename": "kernel/fork.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2034,
+      "author": {
+        "id": 1399056
+      },
+      "writtenOn": "2019-07-03T13:23:15Z",
+      "side": 1,
+      "message": "This patch introduced a bug. It\u0027s fixed in mainline. Please also backport:\n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d28dd29c06d0dede4b32b2c559cff21955a830928",
+      "revId": "6fd2fe494b17bf2dec37b610d23a43a72b16923a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
