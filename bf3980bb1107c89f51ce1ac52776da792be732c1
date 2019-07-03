@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18e71033_852a22ed",
+        "filename": "fs/overlayfs/inode.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-07-03T20:29:31Z",
+      "side": 1,
+      "message": "maybe make this an exported function from selinux so we don\u0027t need to silly include on line 14?",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 26
+      },
+      "revId": "bf3980bb1107c89f51ce1ac52776da792be732c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
