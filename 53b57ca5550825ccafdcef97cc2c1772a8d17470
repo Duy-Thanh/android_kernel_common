@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c9069a6_bda293ec",
+        "filename": "fs/overlayfs/inode.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-07-03T19:55:05Z",
+      "side": 1,
+      "message": "upstream uses res, switch to make it merge cleaner.",
+      "range": {
+        "startLine": 269,
+        "startChar": 9,
+        "endLine": 269,
+        "endChar": 15
+      },
+      "revId": "53b57ca5550825ccafdcef97cc2c1772a8d17470",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
