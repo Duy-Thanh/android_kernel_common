@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "01044601_3a14090f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-07-08T22:47:36Z",
+      "side": 1,
+      "message": "Add \"Fixes:\" tag to point to the patch that introduced the issue.",
+      "revId": "fc8f6794af10f7230bc3db285fdfa7e0adc9b5b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
