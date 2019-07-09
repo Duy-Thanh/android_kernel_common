@@ -16,6 +16,24 @@
       "revId": "fc8f6794af10f7230bc3db285fdfa7e0adc9b5b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "411a479f_8c625bfa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2019-07-09T06:47:12Z",
+      "side": 1,
+      "message": "Ack, will do in upstream submission",
+      "parentUuid": "01044601_3a14090f",
+      "revId": "fc8f6794af10f7230bc3db285fdfa7e0adc9b5b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
