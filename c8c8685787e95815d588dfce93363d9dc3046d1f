@@ -22,6 +22,30 @@
       "revId": "c8c8685787e95815d588dfce93363d9dc3046d1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62493bad_0432c913",
+        "filename": "drivers/staging/android/ion/ion.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-07-11T20:50:04Z",
+      "side": 1,
+      "message": "yeah, I think this should go with the other patch for dma buf operations addition in ion_heap. That makes more sense. I\u0027ll drop this patch.",
+      "parentUuid": "af5d0ba1_0dbb6836",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 15
+      },
+      "revId": "c8c8685787e95815d588dfce93363d9dc3046d1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
