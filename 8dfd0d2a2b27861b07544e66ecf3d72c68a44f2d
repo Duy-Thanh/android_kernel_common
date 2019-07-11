@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ac353326_b1fc7473",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-07-11T16:06:16Z",
+      "side": 1,
+      "message": "same WARN_ON() comment as before.",
+      "range": {
+        "startLine": 817,
+        "startChar": 5,
+        "endLine": 817,
+        "endChar": 12
+      },
+      "revId": "8dfd0d2a2b27861b07544e66ecf3d72c68a44f2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3be27e57_95022139",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-07-11T16:06:16Z",
+      "side": 1,
+      "message": "EXPORT_SYMBOL_GPL() please.",
+      "range": {
+        "startLine": 875,
+        "startChar": 0,
+        "endLine": 875,
+        "endChar": 13
+      },
+      "revId": "8dfd0d2a2b27861b07544e66ecf3d72c68a44f2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
