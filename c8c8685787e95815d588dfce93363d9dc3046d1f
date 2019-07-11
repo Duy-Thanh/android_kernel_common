@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af5d0ba1_0dbb6836",
+        "filename": "drivers/staging/android/ion/ion.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-07-11T16:19:39Z",
+      "side": 1,
+      "message": "do not add things that you never use...",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 15
+      },
+      "revId": "c8c8685787e95815d588dfce93363d9dc3046d1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
