@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "00253bd2_1fb49e94",
+        "filename": "fs/overlayfs/inode.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2019-07-12T20:39:57Z",
+      "side": 1,
+      "message": "IIUC, you\u0027re just adding the hook to print an avc denied on EACCES? That seems odd (and wrong). An LSM hook should actually be enforcing a security decision.",
+      "range": {
+        "startLine": 289,
+        "startChar": 0,
+        "endLine": 289,
+        "endChar": 59
+      },
+      "revId": "7ad2a0e750b2cec84af4fff361acb071c3e86a62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a680a128_b96f2389",
+        "filename": "include/linux/lsm_hooks.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2019-07-12T20:39:57Z",
+      "side": 1,
+      "message": "stray tab.",
+      "range": {
+        "startLine": 360,
+        "startChar": 2,
+        "endLine": 360,
+        "endChar": 3
+      },
+      "revId": "7ad2a0e750b2cec84af4fff361acb071c3e86a62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
