@@ -99,8 +99,14 @@ config PROC_CHILDREN
 	  Say Y if you are running any user-space software which takes benefit from
 	  this interface. For example, rkt is such a piece of software.
 
+<<<<<<< HEAD   (51f670 ABI signature update for 5.2)
 config PROC_UID
 	bool "Include /proc/uid/ files"
 	depends on PROC_FS && RT_MUTEXES
 	help
 	Provides aggregated per-uid information under /proc/uid.
+=======
+config PROC_PID_ARCH_STATUS
+	def_bool n
+	depends on PROC_FS
+>>>>>>> BRANCH (d7d170 Merge tag 'tag-chrome-platform-for-v5.3' of git://git.kernel)

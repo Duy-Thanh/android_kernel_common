@@ -15,7 +15,7 @@
  *
  * Debugfs support added by Simon Kagstrom <simon.kagstrom@netinsight.net>
  *
- * See Documentation/fault-injection/provoke-crashes.txt for instructions
+ * See Documentation/fault-injection/provoke-crashes.rst for instructions
  */
 #include "lkdtm.h"
 #include <linux/fs.h>
@@ -114,6 +114,7 @@ static const struct crashtype crashtypes[] = {
 	CRASHTYPE(CORRUPT_USER_DS),
 	CRASHTYPE(STACK_GUARD_PAGE_LEADING),
 	CRASHTYPE(STACK_GUARD_PAGE_TRAILING),
+	CRASHTYPE(UNSET_SMEP),
 	CRASHTYPE(UNALIGNED_LOAD_STORE_WRITE),
 	CRASHTYPE(OVERWRITE_ALLOCATION),
 	CRASHTYPE(WRITE_AFTER_FREE),

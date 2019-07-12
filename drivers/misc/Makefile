@@ -42,7 +42,6 @@ obj-$(CONFIG_VMWARE_BALLOON)	+= vmw_balloon.o
 obj-$(CONFIG_PCH_PHUB)		+= pch_phub.o
 obj-y				+= ti-st/
 obj-y				+= lis3lv02d/
-obj-$(CONFIG_USB_SWITCH_FSA9480) += fsa9480.o
 obj-$(CONFIG_ALTERA_STAPL)	+=altera-stapl/
 obj-$(CONFIG_INTEL_MEI)		+= mei/
 obj-$(CONFIG_VMWARE_VMCI)	+= vmw_vmci/
@@ -59,4 +58,8 @@ obj-$(CONFIG_OCXL)		+= ocxl/
 obj-y				+= cardreader/
 obj-$(CONFIG_PVPANIC)   	+= pvpanic.o
 obj-$(CONFIG_HABANA_AI)		+= habanalabs/
+<<<<<<< HEAD   (51f670 ABI signature update for 5.2)
 obj-$(CONFIG_UID_SYS_STATS)	+= uid_sys_stats.o
+=======
+obj-$(CONFIG_XILINX_SDFEC)	+= xilinx_sdfec.o
+>>>>>>> BRANCH (d7d170 Merge tag 'tag-chrome-platform-for-v5.3' of git://git.kernel)
