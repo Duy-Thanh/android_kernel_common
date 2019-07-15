@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "989d4bc4_d04d8e5a",
+        "filename": "fs/overlayfs/inode.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-07-15T17:28:15Z",
+      "side": 1,
+      "message": "Today you see this as an overlayfs-only adjustment. It is not, I am ignoring all other union and layered filesystems and their derivatives, albeit acknowledging that sdcardfs does not have this problem because it does not have per-file security contexts. Upstream may require me to patch other union or layered filesystems (which may include fuse).\n\nThe getxattr hook has no references to dentry, only realpath.deptry, so it is not accessible inside that hook. The first fix had us place the selinux fixup here without involving a hook, rejected because it required too much internal knowledge of selinux within the overlayfs driver, had a copious number of #include ../../selinux/private/include all to punch through the designed-in abstraction of the security layers. The next spin added an export function from selinux that we could call, alas upstream had removed all selinux exports and replaced with with hooks so it was not a viable alternative for upstreaming. This spin is about putting the private handling into a hook that we can hand dentry and realpath.dentry to and become the first viable patch I think upstream can discuss.\n\nI had contemplated adjusting the vfs_getxattr call to be handed the parent dentry, and pass it all the way down to the security layers to perform the fixup, but that ended up touching every filesystem on the planet ...",
+      "parentUuid": "fb243167_75aa2744",
+      "range": {
+        "startLine": 289,
+        "startChar": 0,
+        "endLine": 289,
+        "endChar": 59
+      },
+      "revId": "7ad2a0e750b2cec84af4fff361acb071c3e86a62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a680a128_b96f2389",
         "filename": "include/linux/lsm_hooks.h",
         "patchSetId": 5
