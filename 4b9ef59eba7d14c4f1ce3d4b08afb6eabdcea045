@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7ec596cf_484078f7",
+        "filename": "fs/overlayfs/inode.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1010111
+      },
+      "writtenOn": "2019-07-15T20:15:40Z",
+      "side": 1,
+      "message": "I guess the problem here is that the __vfs_getxattr() versus vfs_getxattr() distinction is not propagated down to the -\u003egetxattr inode operation.  If the caller invoked __vfs_getxattr() on the upper inode, then ovl_getxattr() should be calling __vfs_getxattr() on the lower inode, not vfs_getxattr(). Otherwise, you are triggering permission checks on the lower inode for this kernel-internal call by SELinux or others, and you are asking the security module to provide the attribute value based on its own internal state instead of fetching it from the lower inode filesystem. Maybe add an optional -\u003egetxattr_raw() inode operation, defined only by overlayfs, if defined then call -\u003egetxattr_raw() from __vfs_getxattr() instead of calling -\u003egetxattr(). Then in ovl__getxattr_raw(), you\u0027d call __vfs_getxattr() instead of vfs_getxattr() on the lower, and we\u0027d skip all that extraneous processing for the lower inode.  Meanwhile, when userspace calls getxattr(), we\u0027d still go through the vfs_getxattr() to -\u003egetxattr()  to ovl_getxattr() path, and that would still use vfs_getxattr(), thereby doing the security checking and overwrite on the lower as expected.",
+      "revId": "4b9ef59eba7d14c4f1ce3d4b08afb6eabdcea045",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "28e85d4a_56bf3b5c",
         "filename": "security/security.c",
         "patchSetId": 7
