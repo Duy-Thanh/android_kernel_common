@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "28e85d4a_56bf3b5c",
+        "filename": "security/security.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1670,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-07-15T17:07:56Z",
+      "side": 1,
+      "message": "missed this spot in back-port, totally different initialization mechanism.",
+      "range": {
+        "startLine": 1669,
+        "startChar": 0,
+        "endLine": 1670,
+        "endChar": 61
+      },
+      "revId": "4b9ef59eba7d14c4f1ce3d4b08afb6eabdcea045",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
