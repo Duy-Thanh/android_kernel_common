@@ -169,6 +169,30 @@
     },
     {
       "key": {
+        "uuid": "bb995d01_50b9c6b9",
+        "filename": "fs/overlayfs/inode.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-07-15T18:58:00Z",
+      "side": 1,
+      "message": "This is a case where one fix solves _two_ problems. Only the older kernels have both of the problems though.\n\nThis is complicated because of recursion and changing security contexts when calling vfs_getxattr. I will try to lay things out a bit more.\n\nIn 4.4 this is only partially true. The security decision is being made on both the upper and the lower node, the upper only occasionally referenced in a sloppy cache AFAIK. The failure in the lower (-EACCES) is leaving the upper sid uninitialized and thus poisoning the access decision under some sloppy circumstances that we have no intention of fixing directly. However, _this_ fix resolves that problem.\n\nFor upstream it is not. It is purely cosmetic since the decision is made here and only here with the vfs_getxattr cleanup. But the side effect is the check is done silently because of nesting and correctly always and reports back -EACCES or not from the \u0027lower\u0027 vfs_getxattr; but the avc logging uses the sid value from the upper dentry vfs_getxattr to report the failure logging. Thus the avc log is _correct_ for allowed accesses, the sid for the upper is updated and refreshed by the value returned via vfs_getxattr. But in the denied accesses, there is no such refreshing of the sid, so the tcontext may report as \u0027unlabeled\u0027. The access was properly denied, just that the log requires the sid in the upper node to report a correct context.\n\nYou see, vfs_getxattr with -EACCES does not report anything into the value[size] buffer as it should, but there is an expectation that vfs_getxattr security decision within the security layer will look at the retrieved buffer in the silent security context and translate it to a sid for logging purposes. For most filesystems without nesting this is not a problem because upstream vfs_getxattr cleanup set that as the default handler, only filesystems that override the getxattr handler will be in trouble (especially if the dentry passed down is not the same as the one passed in, ala overlayfs).",
+      "parentUuid": "eac50767_7ffc11f3",
+      "range": {
+        "startLine": 289,
+        "startChar": 0,
+        "endLine": 289,
+        "endChar": 59
+      },
+      "revId": "7ad2a0e750b2cec84af4fff361acb071c3e86a62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a680a128_b96f2389",
         "filename": "include/linux/lsm_hooks.h",
         "patchSetId": 5
