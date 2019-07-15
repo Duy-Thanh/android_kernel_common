@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "bc1d04c6_f774b32f",
+        "filename": "fs/overlayfs/inode.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2019-07-15T18:02:41Z",
+      "side": 1,
+      "message": "Do you see my concern? No security decision is being made here. No other security hook behaves this way. What you should be doing is passing the necessary information (dentry) into the existing security hook for a security decision to be made and correct audit message to be generated. This change is not doing that. It keeps the existing incorrect security check (made on the wrong SID) and then strangely delays the audit message generation to a separate hook. If this change is not overlayfs specific than that seems like a great justification for plumbing through the correct information (dentry) into the existing security hook even if it involves touching multiple filesystems.",
+      "parentUuid": "989d4bc4_d04d8e5a",
+      "range": {
+        "startLine": 289,
+        "startChar": 0,
+        "endLine": 289,
+        "endChar": 59
+      },
+      "revId": "7ad2a0e750b2cec84af4fff361acb071c3e86a62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a680a128_b96f2389",
         "filename": "include/linux/lsm_hooks.h",
         "patchSetId": 5
