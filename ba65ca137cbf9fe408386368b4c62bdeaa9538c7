@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16307189_a4463822",
+        "filename": "fs/namespace.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2019-07-22T22:56:09Z",
+      "side": 1,
+      "message": "We should check that this isn\u0027t null also",
+      "range": {
+        "startLine": 974,
+        "startChar": 24,
+        "endLine": 974,
+        "endChar": 39
+      },
+      "revId": "ba65ca137cbf9fe408386368b4c62bdeaa9538c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
