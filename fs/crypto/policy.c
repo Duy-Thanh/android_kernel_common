@@ -80,6 +80,13 @@ int fscrypt_ioctl_set_policy(struct file *filp, const void __user *arg)
 	if (ret == -ENODATA) {
 		if (!S_ISDIR(inode->i_mode))
 			ret = -ENOTDIR;
+<<<<<<< HEAD   (39eed5 Merge 4.9.185 into android-4.9-q)
+=======
+		else if (IS_DEADDIR(inode))
+			ret = -ENOENT;
+		else if (!inode->i_sb->s_cop->empty_dir)
+			ret = -EOPNOTSUPP;
+>>>>>>> BRANCH (35c308 Linux 4.9.186)
 		else if (!inode->i_sb->s_cop->empty_dir(inode))
 			ret = -ENOTEMPTY;
 		else
