@@ -80,6 +80,13 @@ int fscrypt_ioctl_set_policy(struct file *filp, const void __user *arg)
 	if (ret == -ENODATA) {
 		if (!S_ISDIR(inode->i_mode))
 			ret = -ENOTDIR;
+<<<<<<< HEAD   (5e2c34 ANDROID: f2fs: add android fsync tracepoint)
+=======
+		else if (IS_DEADDIR(inode))
+			ret = -ENOENT;
+		else if (!inode->i_sb->s_cop->empty_dir)
+			ret = -EOPNOTSUPP;
+>>>>>>> BRANCH (35c308 Linux 4.9.186)
 		else if (!inode->i_sb->s_cop->empty_dir(inode))
 			ret = -ENOTEMPTY;
 		else
