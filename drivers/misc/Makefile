@@ -42,7 +42,6 @@ obj-$(CONFIG_VMWARE_BALLOON)	+= vmw_balloon.o
 obj-$(CONFIG_PCH_PHUB)		+= pch_phub.o
 obj-y				+= ti-st/
 obj-y				+= lis3lv02d/
-obj-$(CONFIG_USB_SWITCH_FSA9480) += fsa9480.o
 obj-$(CONFIG_ALTERA_STAPL)	+=altera-stapl/
 obj-$(CONFIG_INTEL_MEI)		+= mei/
 obj-$(CONFIG_VMWARE_VMCI)	+= vmw_vmci/
@@ -59,4 +58,8 @@ obj-$(CONFIG_OCXL)		+= ocxl/
 obj-y				+= cardreader/
 obj-$(CONFIG_PVPANIC)   	+= pvpanic.o
 obj-$(CONFIG_HABANA_AI)		+= habanalabs/
+<<<<<<< HEAD   (cbfbd9 ANDROID: mnt: Fix null pointer dereference)
 obj-$(CONFIG_UID_SYS_STATS)	+= uid_sys_stats.o
+=======
+obj-$(CONFIG_XILINX_SDFEC)	+= xilinx_sdfec.o
+>>>>>>> BRANCH (5f9e83 Linus 5.3-rc1)

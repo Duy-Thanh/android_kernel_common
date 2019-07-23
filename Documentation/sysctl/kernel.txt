@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (cbfbd9 ANDROID: mnt: Fix null pointer dereference)
 Documentation for /proc/sys/kernel/*	kernel version 2.2.10
 	(c) 1998, 1999,  Rik van Riel <riel@nl.linux.org>
 	(c) 2009,        Shen Feng<shen@cn.fujitsu.com>
@@ -1145,3 +1146,5 @@ The softlockup threshold is (2 * watchdog_thresh). Setting this
 tunable to zero will disable lockup detection altogether.
 
 ==============================================================
+=======
+>>>>>>> BRANCH (5f9e83 Linus 5.3-rc1)

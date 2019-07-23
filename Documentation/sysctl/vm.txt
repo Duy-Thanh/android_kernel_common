@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (cbfbd9 ANDROID: mnt: Fix null pointer dereference)
 Documentation for /proc/sys/vm/*	kernel version 2.6.29
 	(c) 1998, 1999,  Rik van Riel <riel@nl.linux.org>
 	(c) 2008         Peter W. Morreale <pmorreale@novell.com>
@@ -960,3 +961,5 @@ node unless explicitly overridden by memory policies or cpuset
 configurations.
 
 ============ End of Document =================================
+=======
+>>>>>>> BRANCH (5f9e83 Linus 5.3-rc1)
