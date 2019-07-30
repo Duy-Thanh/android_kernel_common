@@ -22,6 +22,75 @@
       "revId": "91a35141196ff47ba382da4d1df9f5b979ff2855",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d42575c_af7a6023",
+        "filename": "drivers/base/power/suspend_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-07-30T06:17:44Z",
+      "side": 1,
+      "message": "that is not a proper error value.",
+      "range": {
+        "startLine": 64,
+        "startChar": 9,
+        "endLine": 64,
+        "endChar": 10
+      },
+      "revId": "91a35141196ff47ba382da4d1df9f5b979ff2855",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e82fcec_c58416bc",
+        "filename": "drivers/base/power/suspend_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-07-30T06:17:44Z",
+      "side": 1,
+      "message": "why do we care?  What can a user do about this?",
+      "range": {
+        "startLine": 70,
+        "startChar": 2,
+        "endLine": 70,
+        "endChar": 8
+      },
+      "revId": "91a35141196ff47ba382da4d1df9f5b979ff2855",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0db7dc47_3b2a4fdc",
+        "filename": "drivers/base/power/suspend_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-07-30T06:17:44Z",
+      "side": 1,
+      "message": "you succeed even if creating the group fails???",
+      "range": {
+        "startLine": 74,
+        "startChar": 8,
+        "endLine": 74,
+        "endChar": 9
+      },
+      "revId": "91a35141196ff47ba382da4d1df9f5b979ff2855",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
