@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6194794d_05835bc3",
+        "filename": "drivers/base/power/suspend_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2019-07-30T17:33:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7354738b_b3db1283",
+      "revId": "22ca0cd156f8e4def95575439377dad27f3ed7f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39484657_841b9287",
         "filename": "drivers/base/power/suspend_stats.c",
         "patchSetId": 1
@@ -59,6 +77,30 @@
     },
     {
       "key": {
+        "uuid": "c9dcd5f1_7ba66fca",
+        "filename": "drivers/base/power/suspend_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2019-07-30T17:33:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39484657_841b9287",
+      "range": {
+        "startLine": 14,
+        "startChar": 23,
+        "endLine": 14,
+        "endChar": 24
+      },
+      "revId": "22ca0cd156f8e4def95575439377dad27f3ed7f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab9f9479_5d003e6d",
         "filename": "drivers/base/power/suspend_stats.c",
         "patchSetId": 1
@@ -73,6 +115,24 @@
       "revId": "22ca0cd156f8e4def95575439377dad27f3ed7f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c66f27f_c283600f",
+        "filename": "drivers/base/power/suspend_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2019-07-30T17:33:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab9f9479_5d003e6d",
+      "revId": "22ca0cd156f8e4def95575439377dad27f3ed7f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +159,30 @@
     },
     {
       "key": {
+        "uuid": "79bb73a8_9372c0fc",
+        "filename": "drivers/base/power/suspend_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2019-07-30T17:33:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93997415_805005bc",
+      "range": {
+        "startLine": 54,
+        "startChar": 23,
+        "endLine": 54,
+        "endChar": 41
+      },
+      "revId": "22ca0cd156f8e4def95575439377dad27f3ed7f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f05cc447_78de5184",
         "filename": "drivers/base/power/suspend_stats.c",
         "patchSetId": 1
@@ -119,6 +203,30 @@
       "revId": "22ca0cd156f8e4def95575439377dad27f3ed7f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a0e3cd6_39fe0e82",
+        "filename": "drivers/base/power/suspend_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2019-07-30T17:33:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f05cc447_78de5184",
+      "range": {
+        "startLine": 62,
+        "startChar": 2,
+        "endLine": 62,
+        "endChar": 8
+      },
+      "revId": "22ca0cd156f8e4def95575439377dad27f3ed7f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +253,30 @@
     },
     {
       "key": {
+        "uuid": "c53924fc_3226bd40",
+        "filename": "drivers/base/power/suspend_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2019-07-30T17:33:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "863c6314_9e6b723c",
+      "range": {
+        "startLine": 64,
+        "startChar": 9,
+        "endLine": 64,
+        "endChar": 10
+      },
+      "revId": "22ca0cd156f8e4def95575439377dad27f3ed7f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae68c88c_89d79671",
         "filename": "drivers/base/power/suspend_stats.c",
         "patchSetId": 1
@@ -165,6 +297,30 @@
       "revId": "22ca0cd156f8e4def95575439377dad27f3ed7f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2e23691_06116c1e",
+        "filename": "drivers/base/power/suspend_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2019-07-30T17:33:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ae68c88c_89d79671",
+      "range": {
+        "startLine": 74,
+        "startChar": 8,
+        "endLine": 74,
+        "endChar": 9
+      },
+      "revId": "22ca0cd156f8e4def95575439377dad27f3ed7f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
