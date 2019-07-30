@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e6d2470_02b40b95",
+        "filename": "drivers/base/power/suspend_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-07-30T06:15:20Z",
+      "side": 1,
+      "message": "Why are you using a new kobject for all of this?",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 74
+      },
+      "revId": "91a35141196ff47ba382da4d1df9f5b979ff2855",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
