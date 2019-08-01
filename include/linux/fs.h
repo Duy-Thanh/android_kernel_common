@@ -2865,6 +2865,11 @@ static inline bool dir_relax(struct inode *inode)
 	return !IS_DEADDIR(inode);
 }
 
+<<<<<<< HEAD   (65d75b ANDROID: enable CONFIG_RTC_DRV_TEST on cuttlefish)
 extern void inode_nohighmem(struct inode *inode);
+=======
+int vfs_ioc_setflags_prepare(struct inode *inode, unsigned int oldflags,
+			     unsigned int flags);
+>>>>>>> BRANCH (7dcbeb f2fs: use EINVAL for superblock with invalid magic)
 
 #endif /* _LINUX_FS_H */
