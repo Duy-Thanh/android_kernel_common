@@ -166,6 +166,24 @@
     },
     {
       "key": {
+        "uuid": "f70d95ce_da0a079f",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1412036
+      },
+      "writtenOn": "2019-08-05T21:03:22Z",
+      "side": 1,
+      "message": "Also, wouldn\u0027t having provision for dma buf ops per heap be less flexible than attaching the ops per buffer - eg. latter would allow different ops for different buffer types (cached, uncached, etc) if such a need arises",
+      "parentUuid": "f8bb421a_2556d4dc",
+      "revId": "8d94fc8385460d1f1074f9e5352b154c967b371c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5546baea_c1d5dbd0",
         "filename": "drivers/staging/android/ion/ion_dma_buf.c",
         "patchSetId": 1
