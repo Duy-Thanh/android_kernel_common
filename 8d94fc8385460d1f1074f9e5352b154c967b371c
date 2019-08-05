@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "42099e20_a01f1aea",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-08-05T19:13:04Z",
+      "side": 1,
+      "message": "That is correct. Should be apparent with the heap-as-module patch I plan to include in the series.",
+      "parentUuid": "e49b432e_da41d842",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 38
+      },
+      "revId": "8d94fc8385460d1f1074f9e5352b154c967b371c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9d6817a6_57fe9866",
         "filename": "drivers/staging/android/ion/ion.c",
         "patchSetId": 1
@@ -106,6 +130,24 @@
     },
     {
       "key": {
+        "uuid": "110a9b58_95052548",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-08-05T19:13:04Z",
+      "side": 1,
+      "message": "Yes, which is what the big complain from Greg was. So, I am now splitting the whole series.\n\nTo answer your question, yeah, I think the later works better for us too. There is a new user of libion in Android system image as well :( (IIRC, you had no objections either way, correct?).",
+      "parentUuid": "06880035_f016c70a",
+      "revId": "8d94fc8385460d1f1074f9e5352b154c967b371c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5546baea_c1d5dbd0",
         "filename": "drivers/staging/android/ion/ion_dma_buf.c",
         "patchSetId": 1
@@ -140,6 +182,24 @@
       "writtenOn": "2019-08-05T18:20:54Z",
       "side": 1,
       "message": "Out of curiosity, what was the rationale for exposing the ION internals to the rest of the kernel? Do they need to know about all this stuff?",
+      "revId": "8d94fc8385460d1f1074f9e5352b154c967b371c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dce6e78b_6be8a1d9",
+        "filename": "include/linux/ion.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-08-05T19:13:04Z",
+      "side": 1,
+      "message": "So, the ion_heap is needed by the \"rest\" (heap drivers). The ion_heap_type is needed by the allocators. So, I guess we can move the ion_device and the ion_buffer back into staging and call the file ion_private.h or something.\nAs things stood, it was randomly hidden, so I just went ahead and opened up everything. We can find a good middle ground like you said.\n\n(I also don\u0027t like the fact that ion_device represents a \"subsystem\", but I guess that\u0027s getting fixed with the dmabuf based heaps anyway)",
+      "parentUuid": "ae938134_4273d753",
       "revId": "8d94fc8385460d1f1074f9e5352b154c967b371c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
