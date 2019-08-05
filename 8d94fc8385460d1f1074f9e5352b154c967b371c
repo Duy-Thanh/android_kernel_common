@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "1407bebe_bcdd2fb3",
+        "filename": "drivers/staging/android/ion/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1530208
+      },
+      "writtenOn": "2019-08-05T18:20:54Z",
+      "side": 1,
+      "message": "Doesn\u0027t this tie the heaps to use the generic ION dmabuf operations as well? So for heaps to have their own ops, they\u0027d have to have their own [$vendor]_ion_dma_buf.o and build that as a module? I guess this can be clarified with the answer to the question in ion.c?",
+      "revId": "8d94fc8385460d1f1074f9e5352b154c967b371c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7de0246b_0b3edd29",
         "filename": "drivers/staging/android/ion/ion.c",
         "patchSetId": 1
@@ -13,6 +30,30 @@
       "writtenOn": "2019-08-01T16:24:12Z",
       "side": 1,
       "message": "why export this now?",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 38
+      },
+      "revId": "8d94fc8385460d1f1074f9e5352b154c967b371c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e49b432e_da41d842",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1530208
+      },
+      "writtenOn": "2019-08-05T18:20:54Z",
+      "side": 1,
+      "message": "I think it\u0027s necessary in case the heaps implement their own dma buf ops as part of their modules, and need to call this function?",
+      "parentUuid": "7de0246b_0b3edd29",
       "range": {
         "startLine": 133,
         "startChar": 0,
@@ -48,6 +89,23 @@
     },
     {
       "key": {
+        "uuid": "06880035_f016c70a",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1530208
+      },
+      "writtenOn": "2019-08-05T18:20:54Z",
+      "side": 1,
+      "message": "Is there a follow-up patch to this? If not, then how can the heaps use their own dmabuf operations?\n\nIf there is a subsequent patch, will it be possible to forego the use of the ion_dma_buf_ops structure (i.e. the buffer provides its own dma_buf_ops pointer), or is it the approach you discussed where you will add an extra field in the heaps to provide dma buf operations, and you\u0027ll still export the buffer in ion.c with ion_dma_buf_ops, but the ion_dma_buf_ops will check first to see if the heap has implemented the op in question, and use that implementation, otherwise, use the generic one?",
+      "revId": "8d94fc8385460d1f1074f9e5352b154c967b371c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5546baea_c1d5dbd0",
         "filename": "drivers/staging/android/ion/ion_dma_buf.c",
         "patchSetId": 1
@@ -65,6 +123,23 @@
         "endLine": 5,
         "endChar": 34
       },
+      "revId": "8d94fc8385460d1f1074f9e5352b154c967b371c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae938134_4273d753",
+        "filename": "include/linux/ion.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1530208
+      },
+      "writtenOn": "2019-08-05T18:20:54Z",
+      "side": 1,
+      "message": "Out of curiosity, what was the rationale for exposing the ION internals to the rest of the kernel? Do they need to know about all this stuff?",
       "revId": "8d94fc8385460d1f1074f9e5352b154c967b371c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
