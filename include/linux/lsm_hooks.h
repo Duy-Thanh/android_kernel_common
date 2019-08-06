@@ -1777,6 +1777,10 @@ union security_list_options {
 	int (*bpf_prog_alloc_security)(struct bpf_prog_aux *aux);
 	void (*bpf_prog_free_security)(struct bpf_prog_aux *aux);
 #endif /* CONFIG_BPF_SYSCALL */
+
+#ifdef CONFIG_PERF_EVENTS
+	int (*perf_event)(struct perf_event_attr *attr, int type);
+#endif
 };
 
 struct security_hook_heads {
@@ -2011,6 +2015,9 @@ struct security_hook_heads {
 	struct hlist_head bpf_prog_alloc_security;
 	struct hlist_head bpf_prog_free_security;
 #endif /* CONFIG_BPF_SYSCALL */
+#ifdef CONFIG_PERF_EVENTS
+	struct hlist_head perf_event;
+#endif
 } __randomize_layout;
 
 /*

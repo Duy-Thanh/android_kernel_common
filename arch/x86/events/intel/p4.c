@@ -8,6 +8,7 @@
  */
 
 #include <linux/perf_event.h>
+#include <linux/security.h>
 
 #include <asm/perf_event_p4.h>
 #include <asm/hardirq.h>
@@ -778,6 +779,10 @@ static int p4_validate_raw_event(struct perf_event *event)
 	if (p4_ht_active() && p4_event_bind_map[v].shared) {
 		if (perf_paranoid_cpu() && !capable(CAP_SYS_ADMIN))
 			return -EACCES;
+
+		v = security_perf_event(&event->attr, PERF_SECURITY_CPU);
+		if (v)
+		  return v;
 	}
 
 	/* ESCR EventMask bits may be invalid */

@@ -22,6 +22,7 @@
 #include <linux/debugfs.h>
 #include <linux/device.h>
 #include <linux/coredump.h>
+#include <linux/security.h>
 
 #include <asm-generic/sizes.h>
 #include <asm/perf_event.h>
@@ -560,6 +561,10 @@ static int bts_event_init(struct perf_event *event)
 	if (event->attr.exclude_kernel && perf_paranoid_kernel() &&
 	    !capable(CAP_SYS_ADMIN))
 		return -EACCES;
+
+	ret = security_perf_event(&event->attr, PERF_SECURITY_KERNEL);
+	if (ret)
+		return ret;
 
 	if (x86_add_exclusive(x86_lbr_exclusive_bts))
 		return -EBUSY;

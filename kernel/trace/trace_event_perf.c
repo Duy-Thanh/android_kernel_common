@@ -8,6 +8,7 @@
 
 #include <linux/module.h>
 #include <linux/kprobes.h>
+#include <linux/security.h>
 #include "trace.h"
 #include "trace_probe.h"
 
@@ -26,8 +27,10 @@ static int	total_ref_count;
 static int perf_trace_event_perm(struct trace_event_call *tp_event,
 				 struct perf_event *p_event)
 {
+	int ret;
+
 	if (tp_event->perf_perm) {
-		int ret = tp_event->perf_perm(tp_event, p_event);
+		ret = tp_event->perf_perm(tp_event, p_event);
 		if (ret)
 			return ret;
 	}
@@ -48,6 +51,10 @@ static int perf_trace_event_perm(struct trace_event_call *tp_event,
 	if (ftrace_event_is_function(tp_event)) {
 		if (perf_paranoid_tracepoint_raw() && !capable(CAP_SYS_ADMIN))
 			return -EPERM;
+
+		ret = security_perf_event(&p_event->attr, PERF_SECURITY_RAW_TRACEPOINT);
+		if (ret)
+			return ret;
 
 		if (!is_sampling_event(p_event))
 			return 0;
@@ -84,6 +91,10 @@ static int perf_trace_event_perm(struct trace_event_call *tp_event,
 	 */
 	if (perf_paranoid_tracepoint_raw() && !capable(CAP_SYS_ADMIN))
 		return -EPERM;
+
+	ret = security_perf_event(&p_event->attr, PERF_SECURITY_RAW_TRACEPOINT);
+	if (ret)
+		return ret;
 
 	return 0;
 }

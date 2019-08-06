@@ -1805,3 +1805,10 @@ void security_bpf_prog_free(struct bpf_prog_aux *aux)
 	call_void_hook(bpf_prog_free_security, aux);
 }
 #endif /* CONFIG_BPF_SYSCALL */
+
+#ifdef CONFIG_PERF_EVENTS
+int security_perf_event(struct perf_event_attr *attr, int type)
+{
+	return call_int_hook(perf_event, 0, attr, type);
+}
+#endif /* CONFIG_PERF_EVENTS */

@@ -10,6 +10,7 @@
 #include <linux/stddef.h>
 #include <linux/types.h>
 #include <linux/init.h>
+#include <linux/security.h>
 #include <linux/slab.h>
 #include <linux/export.h>
 #include <linux/nmi.h>
@@ -3111,6 +3112,10 @@ static int intel_pmu_hw_config(struct perf_event *event)
 
 	if (perf_paranoid_cpu() && !capable(CAP_SYS_ADMIN))
 		return -EACCES;
+
+	ret = security_perf_event(&event->attr, PERF_SECURITY_CPU);
+	if (ret)
+		return ret;
 
 	event->hw.config |= ARCH_PERFMON_EVENTSEL_ANY;
 

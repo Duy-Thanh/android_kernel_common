@@ -1843,5 +1843,17 @@ static inline void free_secdata(void *secdata)
 { }
 #endif /* CONFIG_SECURITY */
 
-#endif /* ! __LINUX_SECURITY_H */
+#ifdef CONFIG_PERF_EVENTS
+struct perf_event_attr;
 
+#ifdef CONFIG_SECURITY
+extern int security_perf_event(struct perf_event_attr *attr, int type);
+#else
+static inline int security_perf_event(struct perf_event_attr *attr, int type)
+{
+	return 0;
+}
+#endif /* CONFIG_SECURITY */
+#endif /* CONFIG_PERF_EVENTS */
+
+#endif /* ! __LINUX_SECURITY_H */

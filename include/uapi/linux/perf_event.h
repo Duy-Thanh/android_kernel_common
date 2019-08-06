@@ -424,6 +424,21 @@ struct perf_event_attr {
 	__u16	__reserved_2;	/* align to __u64 */
 };
 
+
+/*
+ * Different types of perf security for LSM
+ *
+ * First, decide if the domains get access to perf_event_open at all:
+ */
+#define PERF_SECURITY_EVENT_ALLOW	0
+
+/*
+ * Next, more finer grained access control
+ * */
+#define PERF_SECURITY_RAW_TRACEPOINT	1
+#define PERF_SECURITY_CPU		2
+#define PERF_SECURITY_KERNEL		3
+
 /*
  * Structure used by below PERF_EVENT_IOC_QUERY_BPF command
  * to query bpf programs attached to the same perf tracepoint
