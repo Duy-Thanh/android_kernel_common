@@ -3,6 +3,7 @@ BRANCH=android-mainline
 CLANG_TRIPLE=x86_64-linux-gnu-
 CROSS_COMPILE=x86_64-linux-androidkernel-
 CC=clang
+LD=ld.lld
 DEFCONFIG=gki_defconfig
 EXTRA_CMDS=''
 KERNEL_DIR=common
