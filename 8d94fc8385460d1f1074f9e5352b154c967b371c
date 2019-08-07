@@ -207,6 +207,98 @@
     },
     {
       "key": {
+        "uuid": "c64500e3_6cd2be09",
+        "filename": "drivers/staging/android/ion/ion_dma_buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1013969
+      },
+      "writtenOn": "2019-08-07T12:45:47Z",
+      "side": 1,
+      "message": "Show heap name for better debugability.",
+      "range": {
+        "startLine": 171,
+        "startChar": 13,
+        "endLine": 171,
+        "endChar": 24
+      },
+      "revId": "8d94fc8385460d1f1074f9e5352b154c967b371c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ecf294d_597096c6",
+        "filename": "drivers/staging/android/ion/ion_dma_buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1013969
+      },
+      "writtenOn": "2019-08-07T12:45:47Z",
+      "side": 1,
+      "message": "if heap.ops.map_kernel is not implemented, return NULL for the callers to identify dma_buf_kmap() is failed.",
+      "range": {
+        "startLine": 204,
+        "startChar": 1,
+        "endLine": 204,
+        "endChar": 43
+      },
+      "revId": "8d94fc8385460d1f1074f9e5352b154c967b371c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcc3e0ad_1228291d",
+        "filename": "drivers/staging/android/ion/ion_dma_buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1013969
+      },
+      "writtenOn": "2019-08-07T12:45:47Z",
+      "side": 1,
+      "message": "This is redundant if ion_buffer is allocated without ION_FLAG_CACHED.",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 232,
+        "endChar": 2
+      },
+      "revId": "8d94fc8385460d1f1074f9e5352b154c967b371c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d334187_7ba08350",
+        "filename": "drivers/staging/android/ion/ion_dma_buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1013969
+      },
+      "writtenOn": "2019-08-07T12:45:47Z",
+      "side": 1,
+      "message": "Also redundant for uncached buffers.",
+      "range": {
+        "startLine": 253,
+        "startChar": 0,
+        "endLine": 256,
+        "endChar": 2
+      },
+      "revId": "8d94fc8385460d1f1074f9e5352b154c967b371c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ae938134_4273d753",
         "filename": "include/linux/ion.h",
         "patchSetId": 1
