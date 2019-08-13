@@ -255,6 +255,22 @@ config DRM_VKMS
 
 	  If M is selected the module will be called vkms.
 
+config DRM_DUMMY_MODULE_HELPER
+	bool "DRM Dummy Module Helper enabler"
+	depends on DRM
+	select DRM_KMS_HELPER
+	select DRM_GEM_CMA_HELPER
+	select DRM_KMS_CMA_HELPER
+	select DRM_MIPI_DSI
+	default n
+	help
+	  Dummy config option used to enable core functionality used by
+	  modules that may not be selected in this config.
+
+	  Unless you are building a kernel to be used with modules
+	  built from a different config, say N here.
+
+
 source "drivers/gpu/drm/exynos/Kconfig"
 
 source "drivers/gpu/drm/rockchip/Kconfig"
