@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22fec8bb_cfac8b6b",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-08-13T18:10:25Z",
+      "side": 1,
+      "message": "As discussed offline, I think \"CLASS_DEVICE\" type options should probably all be \u003dy in gki_defconfig, but this also appears to be broken on aarch64 so approving this change for now.",
+      "range": {
+        "startLine": 251,
+        "startChar": 2,
+        "endLine": 251,
+        "endChar": 25
+      },
+      "revId": "1c7416794ce16a4e6ae6afd2a1a21e26e043bd62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
