@@ -145,6 +145,7 @@ struct ion_heap_ops {
  *			allocating.  These are specified by platform data and
  *			MUST be unique
  * @name:		used for debugging
+ * @owner:		kernel module that implements this heap
  * @shrinker:		a shrinker for the heap
  * @free_list:		free list head if deferred free is used
  * @free_list_size	size of the deferred free list in bytes
@@ -167,6 +168,7 @@ struct ion_heap {
 	unsigned long flags;
 	unsigned int id;
 	const char *name;
+	struct module *owner;
 
 	/* deferred free support */
 	struct shrinker shrinker;
@@ -183,14 +185,26 @@ struct ion_heap {
 
 	/* protect heap statistics */
 	spinlock_t stat_lock;
+
+	/* heap's debugfs root */
+	struct dentry *debugfs_dir;
 };
 
 /**
  * ion_device_add_heap - adds a heap to the ion device
  *
  * @heap:               the heap to add
+ *
+ * Returns 0 on success, negative error otherwise.
  */
-void ion_device_add_heap(struct ion_heap *heap);
+int ion_device_add_heap(struct ion_heap *heap);
+
+/**
+ * ion_device_remove_heap - removes a heap from ion device
+ *
+ * @heap:		pointer to the heap to be removed
+ */
+void ion_device_remove_heap(struct ion_heap *heap);
 
 /**
  * ion_heap_init_shrinker
