@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce955776_f94a7022",
+        "filename": "drivers/staging/android/ion/heaps/ion_system_heap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-08-13T12:10:29Z",
+      "side": 1,
+      "message": "While this is correct, people will get it wrong...\n\nTo fix this, do what I did for PCI/USB years ago, you have your registration function itself pass in the module owner value, and have the compiler set it all up automatically.\n\nI\u0027ll comment below in the .h file for how to do this...",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 256,
+        "endChar": 23
+      },
+      "revId": "8624f1adc5dbca3566fec9403c85c5aaec0ad154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4dc5e65_38821c61",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-08-13T12:10:29Z",
+      "side": 1,
+      "message": "EXPORT_SYMBOL_GPL()?",
+      "range": {
+        "startLine": 326,
+        "startChar": 0,
+        "endLine": 326,
+        "endChar": 13
+      },
+      "revId": "8624f1adc5dbca3566fec9403c85c5aaec0ad154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65217ff7_c525c308",
+        "filename": "include/linux/ion.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-08-13T12:10:29Z",
+      "side": 1,
+      "message": "To set the module owner, do this:\n\n#define ion_device_add_heap(heap) __ion_device_add_heap(heap, THIS_MODULE);\n\nand then the function you export is:\nint __ion_device_add_heap(struct ion_heap *heap, struct module *owner);\n\nand the first thing you do in that function is:\n  heap-\u003eowner \u003d owner;\nbefore doing much of anything else with the heap pointers.\n\nThat way the compiler always sets the correct module owner, and you don\u0027t have to rely on the user trying to remember to set it in their structure.  As they _will_ forget.",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 200,
+        "endChar": 47
+      },
+      "revId": "8624f1adc5dbca3566fec9403c85c5aaec0ad154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
