@@ -319,6 +319,21 @@ static int sdcardfs_show_options(struct vfsmount *mnt, struct seq_file *m,
 	return 0;
 };
 
+int sdcardfs_on_fscrypt_key_removed(struct notifier_block *nb,
+				    unsigned long action, void *data)
+{
+	struct sdcardfs_sb_info *sbi = container_of(nb, struct sdcardfs_sb_info,
+						    fscrypt_nb);
+
+	/*
+	 * Evict any unused sdcardfs dentries (and hence any unused sdcardfs
+	 * inodes, since sdcardfs doesn't cache unpinned inodes by themselves)
+	 * so that the lower filesystem's encrypted inodes can be evicted.
+	 */
+	shrink_dcache_sb(sbi->sb);
+	return 0;
+}
+
 const struct super_operations sdcardfs_sops = {
 	.put_super	= sdcardfs_put_super,
 	.statfs		= sdcardfs_statfs,
