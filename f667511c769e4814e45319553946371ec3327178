@@ -22,6 +22,23 @@
       "revId": "f667511c769e4814e45319553946371ec3327178",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89b8e84d_396db818",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-08-15T17:02:12Z",
+      "side": 1,
+      "message": "should this be \"latency_sensitive\" instead to be consistent with the proposed implementation in uclamp?",
+      "revId": "f667511c769e4814e45319553946371ec3327178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
