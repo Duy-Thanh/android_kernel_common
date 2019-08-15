@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6eeeb960_dfadba1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1200908
+      },
+      "writtenOn": "2019-08-15T17:20:47Z",
+      "side": 1,
+      "message": "Yeah and this is supposed to mimic what Schedtune did (though it didn\u0027t support nested hierarchies, so that wasn\u0027t really a problem). But if you feel like we should do something smarter just let me know :)",
+      "parentUuid": "8174365e_25e43501",
+      "range": {
+        "startLine": 14,
+        "startChar": 24,
+        "endLine": 15,
+        "endChar": 2
+      },
+      "revId": "f667511c769e4814e45319553946371ec3327178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "89b8e84d_396db818",
         "filename": "kernel/sched/sched.h",
         "patchSetId": 1
