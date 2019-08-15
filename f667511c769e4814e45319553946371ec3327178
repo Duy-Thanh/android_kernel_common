@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8174365e_25e43501",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2019-08-15T16:56:34Z",
+      "side": 1,
+      "message": "Agree, this falls into a \"hint\" category which can be followed if possible and IMO does not fit into any cgroup resource distribution model. I\u0027m not sure always setting it to false is the right approach but it\u0027s definitely the simplest.",
+      "range": {
+        "startLine": 14,
+        "startChar": 24,
+        "endLine": 15,
+        "endChar": 2
+      },
+      "revId": "f667511c769e4814e45319553946371ec3327178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
