@@ -39,6 +39,24 @@
       "revId": "f667511c769e4814e45319553946371ec3327178",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d06e4bbb_c8ba9ebd",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1200908
+      },
+      "writtenOn": "2019-08-15T17:08:42Z",
+      "side": 1,
+      "message": "Sure, I kept the old name because people know it, so they don\u0027t get confused. But I can totally change it.",
+      "parentUuid": "89b8e84d_396db818",
+      "revId": "f667511c769e4814e45319553946371ec3327178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
