@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d10c44b7_f42734a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1291841
+      },
+      "writtenOn": "2019-08-16T16:44:37Z",
+      "side": 1,
+      "message": "My take away from OSPM is that spread-vs-pack is a too strict and committing concept to be exposed user-space.\n\nIn kernel-space what we want to achieve is exactly what you describe. But we don\u0027t want to commit any specific behavior to user-space. That\u0027s why a more generic and flexible hint is preferred.\n\nRegarding the name itself (latency_sensible) is what PaulT proposed and PeterZ seemed to be OK with. We are talking about a hint for CFS tasks, thus that definition applies within the limits of that class. IOW, I don\u0027t think it can generate confusion with RT or DEADLINE. Those classes are for tasks which are \"more than just\" latency-sensitive.",
+      "parentUuid": "86daba70_9366b27b",
+      "revId": "f667511c769e4814e45319553946371ec3327178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8174365e_25e43501",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
