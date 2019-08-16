@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "2cd1766f_82671ce1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1291841
+      },
+      "writtenOn": "2019-08-16T11:06:58Z",
+      "side": 1,
+      "message": "We should work on the latency_sensitive concept, firsts of all because it\u0027s a range value and thus better than a flag from the \"resource management\" story standpoint.\n\nMoreover, being a more abstract concept, we have more freedom in mapping it in userspace.\n\nIf a task is latency-sensitive we want to run AND complete it sooner, relatively to others. Thus, we wanna run it:\n\n  - (possibly) on an idle CPU             \u003d\u003e to start it sooner\n  - on a relatively high frequency        \u003d\u003e to complete it sooner\n  AND\n  - with reduced chances to be preempted  \u003d\u003e to complete it sooner\n\nIMO we already have all the ingredients to cook such a recipe, considering all the limitations of the FAIR class of course.\n\nIn principle we just need to consider prefer_idle a task which matches these TWO conditions:\n\n a) cpu.uclamp_min \u003e 0  (default value)\n b) cpu.shares \u003e 1024   (default value)\n\nIn this case, we actually already have all that we need in mainline and we can also distinguish between:\n\n - boosted tasks,     where only a) applies\n - prefer_idle tasks, where both a) and b) must apply\n\nIf we really need also the \"prefer_idle NON boosted\" case, then maybe we can get it by just adding in a threshold in the condition a) above.\n\nThoughts?",
+      "parentUuid": "6eeeb960_dfadba1d",
+      "range": {
+        "startLine": 14,
+        "startChar": 24,
+        "endLine": 15,
+        "endChar": 2
+      },
+      "revId": "f667511c769e4814e45319553946371ec3327178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "89b8e84d_396db818",
         "filename": "kernel/sched/sched.h",
         "patchSetId": 1
@@ -78,6 +102,24 @@
       "side": 1,
       "message": "Sure, I kept the old name because people know it, so they don\u0027t get confused. But I can totally change it.",
       "parentUuid": "89b8e84d_396db818",
+      "revId": "f667511c769e4814e45319553946371ec3327178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3087c9e7_0f968c36",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1291841
+      },
+      "writtenOn": "2019-08-16T11:06:58Z",
+      "side": 1,
+      "message": "As per my comment on the last patch of this series, I\u0027m more of the idea to use the new naming schema. At the very least is more aligned in the intent with what we aim to have for mainline.\n\nEven better if we can avoid to add this at all and go for something similar to what I described in my other comment (i.e. regarding util_min AND shares)",
+      "parentUuid": "d06e4bbb_c8ba9ebd",
       "revId": "f667511c769e4814e45319553946371ec3327178",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
