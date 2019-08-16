@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "86daba70_9366b27b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-08-16T16:36:02Z",
+      "side": 1,
+      "message": "Would we avoid upstream allergic reactions if we talk about this as a pack vs spread policy instead of latency sensitivity? We don\u0027t want to be dismissed with \"if it\u0027s latency sensitive then use RT or DL?\" argument. Spread (default non-EAS behavior) vs pack (common EAS behavior) seems like a very legitimate policy hint.",
+      "revId": "f667511c769e4814e45319553946371ec3327178",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8174365e_25e43501",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
