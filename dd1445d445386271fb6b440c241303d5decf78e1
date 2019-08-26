@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d964bd89_4dda4848",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-08-26T17:40:59Z",
+      "side": 1,
+      "message": "Ooops, needs to be removed.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 17
+      },
+      "revId": "dd1445d445386271fb6b440c241303d5decf78e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15863de4_b00b1b4e",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-08-26T17:40:59Z",
+      "side": 1,
+      "message": "Ooops, needs to be removed",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 16
+      },
+      "revId": "dd1445d445386271fb6b440c241303d5decf78e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
