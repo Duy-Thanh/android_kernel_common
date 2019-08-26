@@ -242,6 +242,36 @@ TRACE_EVENT(gpu_sched_complete,
 	)
 );
 
+/*
+ * The gpu_freq event indicates frequency changes on the GPU clock domain.
+ *
+ * This event should be traced whenever there's a frequency change on the GPU
+ * clock domain. At the start of tracing, this event should be additionally
+ * emitted to record the initial GPU clock for the tracing period. Whenever GPU
+ * goes into idle state, this event must be emitted for accurate tracing.
+ *
+ * @freq: The new GPU frequency.
+ *
+ */
+TRACE_EVENT(gpu_freq,
+	TP_PROTO(
+		uint32_t freq
+	),
+	TP_ARGS(
+		freq
+	),
+	TP_STRUCT__entry(
+		__field(uint32_t, freq)
+	),
+	TP_fast_assign(
+		__entry->freq = freq;
+	),
+	TP_printk(
+		"freq=%u",
+		__entry->freq
+	)
+);
+
 #endif /* _TRACE_GPU_H */
 
 /* This part must be outside protection */

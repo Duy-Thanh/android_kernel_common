@@ -13,3 +13,4 @@
 EXPORT_TRACEPOINT_SYMBOL(gpu_sched_enqueue);
 EXPORT_TRACEPOINT_SYMBOL(gpu_sched_submit);
 EXPORT_TRACEPOINT_SYMBOL(gpu_sched_complete);
+EXPORT_TRACEPOINT_SYMBOL(gpu_freq);
