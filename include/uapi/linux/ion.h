@@ -12,29 +12,50 @@
 #include <linux/types.h>
 
 /**
- * enum ion_heap_types - list of all possible types of heaps
- * @ION_HEAP_TYPE_SYSTEM:        memory allocated via vmalloc
- * @ION_HEAP_TYPE_SYSTEM_CONTIG: memory allocated via kmalloc
- * @ION_HEAP_TYPE_CARVEOUT:      memory allocated from a prereserved
- *                               carveout heap, allocations are physically
- *                               contiguous
- * @ION_HEAP_TYPE_DMA:           memory allocated via DMA API
+ * ion_heap_types - list of all possible types of heaps
+ *
+ * @ION_HEAP_TYPE_SYSTEM:        Reserved heap id for ion heap that allocates
+ *				 memory using alloc_page(). Also, supports
+ *				 deferred free and allocation pools.
+ *
+ * @ION_HEAP_TYPE_SYSTEM_CONTIG: Reserved heap id for ion heap that is the same
+ *				 as SYSTEM_HEAP, except doesn't support
+ *				 allocation pools.
+ * @ION_HEAP_TYPE_CARVEOUT:      Reserved heap id for ion heap that allocates
+ *				 memory from a pre-reserved memory region
+ *				 aka 'carveout'.
+ * @ION_HEAP_TYPE_DMA_START:	 Start of the reserved heap ids for ion heap
+ *				 that manages single CMA (contiguous memory
+ *				 allocator) region. Uses standard DMA APIs for
+ *				 managing memory within the CMA region.
+ * @ION_HEAP_TYPE_DMA_END:	 End of the reserved heap ids for ion heap that
+ *				 manages a single CMA (contiguous memory
+ *				 allocator) region. Uses standard DMA APIs for
+ *				 managing memory within the CMA region.
  * @ION_HEAP_TYPE_MAX:		 helper for iterating over standard
  *				 (not device specific) heaps
- * @ION_NUM_HEAPS_IDS:           helper for iterating over heaps, a bit mask
- *                               is used to identify the heaps, so only 32
- *                               total heap types are supported
+ * @ION_HEAP_TYPE_MAX:           helper for iterating over heaps, a bit mask
+ *				 is used to identify the heaps, so only 32
+ *				 total heap types are supported
  */
 enum ion_heap_type {
-	ION_HEAP_TYPE_SYSTEM = (1 << 0),
-	ION_HEAP_TYPE_SYSTEM_CONTIG = (1 << 1),
-	ION_HEAP_TYPE_CARVEOUT = (1 << 2),
-	ION_HEAP_TYPE_CHUNK = (1 << 3),
-	ION_HEAP_TYPE_DMA = (1 << 4),
-	ION_HEAP_TYPE_MAX = (1 << 15),
+	ION_HEAP_TYPE_SYSTEM = 1,
+	ION_HEAP_TYPE_SYSTEM_CONTIG = 2,
+	ION_HEAP_TYPE_CARVEOUT = 3,
+	ION_HEAP_TYPE_CHUNK = 4,
+	ION_HEAP_TYPE_DMA = 5,
+	ION_HEAP_TYPE_DMA_START = ION_HEAP_TYPE_DMA,
+	ION_HEAP_TYPE_DMA_END = 12,
+	ION_HEAP_TYPE_MAX = 32,
 };
 
-#define ION_NUM_HEAP_IDS		(sizeof(unsigned int) * 8)
+enum ion_heap_id {
+	ION_HEAP_SYSTEM = (1 << (ION_HEAP_TYPE_SYSTEM - 1)),
+	ION_HEAP_SYSTEM_CONTIG = (1 << (ION_HEAP_TYPE_SYSTEM_CONTIG - 1)),
+	ION_HEAP_CARVEOUT = (1 << (ION_HEAP_TYPE_CARVEOUT - 1)),
+	ION_HEAP_CHUNK = (1 << (ION_HEAP_TYPE_CHUNK - 1)),
+	ION_HEAP_DMA = (1 << (ION_HEAP_TYPE_DMA - 1)),
+};
 
 /**
  * allocation flags - the lower 16 bits are used by core ion, the upper 16
