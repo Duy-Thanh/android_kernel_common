@@ -7,6 +7,7 @@
  *
  */
 
+#include <linux/bitmap.h>
 #include <linux/debugfs.h>
 #include <linux/device.h>
 #include <linux/dma-buf.h>
@@ -27,7 +28,6 @@
 #include "ion_private.h"
 
 static struct ion_device *internal_dev;
-static int heap_id;
 
 /* Entry into ION allocator for rest of the kernel */
 struct dma_buf *ion_alloc(size_t len, unsigned int heap_id_mask,
@@ -222,6 +222,63 @@ static int debug_shrink_get(void *data, u64 *val)
 DEFINE_SIMPLE_ATTRIBUTE(debug_shrink_fops, debug_shrink_get,
 			debug_shrink_set, "%llu\n");
 
+static int ion_assign_heap_id(struct ion_heap *heap, struct ion_device *dev)
+{
+	int nr_bit;
+
+	if (heap->type == 0 || heap->type > ION_HEAP_TYPE_MAX)
+		return -EINVAL;
+
+	switch (heap->type) {
+	case ION_HEAP_TYPE_DMA:
+		/* For DMA heaps, we first let the heaps choose their
+		 * own IDs. This allows the old behaviour of knowing the CMA
+		 * region and heaps associated with them in advance in user
+		 * space.  If a heap with that ID already exists, it is an
+		 * error.
+		 *
+		 * If the heap hasn't picked an id by itself, then we assign it
+		 * one.
+		 */
+		if (heap->id) {
+			nr_bit = ffs(heap->id);
+			if (nr_bit < ION_HEAP_TYPE_DMA_START ||
+			    nr_bit > ION_HEAP_TYPE_DMA_END)
+				return -EINVAL;
+		} else {
+			nr_bit = find_next_zero_bit(dev->heap_ids,
+						    ION_HEAP_TYPE_MAX,
+						    ION_HEAP_TYPE_DMA_START);
+			if (nr_bit > ION_HEAP_TYPE_DMA_END)
+				return -ENOSPC;
+		}
+		break;
+	case ION_HEAP_TYPE_SYSTEM:
+	case ION_HEAP_TYPE_SYSTEM_CONTIG:
+	case ION_HEAP_TYPE_CARVEOUT:
+	case ION_HEAP_TYPE_CHUNK:
+		nr_bit = heap->type;
+		break;
+	case ION_HEAP_TYPE_CUSTOM_START ... ION_HEAP_TYPE_CUSTOM_END:
+		/* for custom heap types, reuse the heap type as id, otherwise
+		 * just use the heap id set by the heap
+		 */
+		if (heap->id)
+			nr_bit = ffs(heap->id);
+		else
+			nr_bit = heap->type;
+		break;
+	default:
+		return -EINVAL;
+	}
+
+	if (test_and_set_bit(nr_bit - 1, dev->heap_ids))
+		return -EEXIST;
+	heap->id = BIT(nr_bit - 1);
+	dev->heap_cnt++;
+	return 0;
+}
+
 int __ion_device_add_heap(struct ion_heap *heap, struct module *owner)
 {
 	struct ion_device *dev = internal_dev;
@@ -283,7 +340,14 @@ int __ion_device_add_heap(struct ion_heap *heap, struct module *owner)
 
 	heap->debugfs_dir = heap_root;
 	down_write(&dev->lock);
-	heap->id = heap_id++;
+	ret = ion_assign_heap_id(heap, dev);
+	if (ret) {
+		pr_err("%s: Failed to assign heap id for heap type %x\n",
+		       __func__, heap->type);
+		up_write(&dev->lock);
+		goto out_debugfs_cleanup;
+	}
+
 	/*
 	 * use negative heap->id to reverse the priority -- when traversing
 	 * the list later attempt higher id numbers first
@@ -291,11 +355,12 @@ int __ion_device_add_heap(struct ion_heap *heap, struct module *owner)
 	plist_node_init(&heap->node, -heap->id);
 	plist_add(&heap->node, &dev->heaps);
 
-	dev->heap_cnt++;
 	up_write(&dev->lock);
 
 	return 0;
 
+out_debugfs_cleanup:
+	debugfs_remove_recursive(heap->debugfs_dir);
 out_heap_cleanup:
 	ion_heap_cleanup(heap);
 out:
@@ -306,6 +371,7 @@ EXPORT_SYMBOL_GPL(__ion_device_add_heap);
 void ion_device_remove_heap(struct ion_heap *heap)
 {
 	struct ion_device *dev = internal_dev;
+	int nr_bit;
 
 	if (!heap) {
 		pr_err("%s: Invalid argument\n", __func__);
@@ -316,11 +382,15 @@ void ion_device_remove_heap(struct ion_heap *heap)
 	down_write(&dev->lock);
 	/* So no new allocations can happen from this heap */
 	plist_del(&heap->node, &dev->heaps);
+	dev->heap_cnt--;
+	nr_bit = ffs(heap->id);
+	clear_bit(nr_bit - 1, dev->heap_ids);
 	if (ion_heap_cleanup(heap) != 0) {
 		pr_warn("%s: failed to cleanup heap (%s)\n",
 			__func__, heap->name);
 	}
 	debugfs_remove_recursive(heap->debugfs_dir);
+	dev->heap_cnt--;
 	up_write(&dev->lock);
 }
 EXPORT_SYMBOL(ion_device_remove_heap);
