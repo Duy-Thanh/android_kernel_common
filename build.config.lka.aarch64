@@ -1,0 +1,27 @@
+#  Same as:
+#	common/build.config.gki.aarch64
+#  except that POST_DEFCONFIG_CMDS is not set, don't want use of:
+#	check_defconfig()
+#  and a different DEFCONFIG is used
+
+POST_DEFCONFIG_CMDS=
+DEFCONFIG=lka_defconfig
+
+ARCH=arm64
+BRANCH=android-mainline
+CLANG_TRIPLE=aarch64-linux-gnu-
+CROSS_COMPILE=aarch64-linux-androidkernel-
+CC=clang
+EXTRA_CMDS=''
+KERNEL_DIR=common
+CLANG_PREBUILT_BIN=prebuilts-master/clang/host/linux-x86/clang-r353983c/bin
+BUILDTOOLS_PREBUILT_BIN=build/build-tools/path/linux-x86
+LINUX_GCC_CROSS_COMPILE_PREBUILTS_BIN=prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin
+FILES="
+arch/arm64/boot/Image.gz
+vmlinux
+System.map
+"
+STOP_SHIP_TRACEPRINTK=1
+ABI_DEFINITION=abi_gki_aarch64.xml
+BUILD_INITRAMFS=1

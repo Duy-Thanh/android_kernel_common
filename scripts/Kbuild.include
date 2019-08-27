@@ -230,7 +230,7 @@ if_changed_dep = $(if $(any-prereq)$(cmd-check),$(cmd_and_fixdep),@:)
 cmd_and_fixdep =                                                             \
 	$(cmd);                                                              \
 	scripts/basic/fixdep $(depfile) $@ '$(make-cmd)' > $(dot-target).cmd;\
-	rm -f $(depfile)
+	mv -f $(depfile) $(depfile).keep
 
 # Usage: $(call if_changed_rule,foo)
 # Will check if $(cmd_foo) or any of the prerequisites changed,
