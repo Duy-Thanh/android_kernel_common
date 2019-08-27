@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "fd68bf3b_ac53582d",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1412036
+      },
+      "writtenOn": "2019-08-27T19:21:04Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be (ION_HEAP_TYPE_DMA_END + 1)?",
+      "range": {
+        "startLine": 250,
+        "startChar": 10,
+        "endLine": 250,
+        "endChar": 27
+      },
+      "revId": "b6c71b50d2ba06bdde944fdde98a75db615d0cc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "97000200_bc8cbc49",
         "filename": "drivers/staging/android/ion/ion.c",
         "patchSetId": 3
@@ -93,6 +116,29 @@
       "revId": "b6c71b50d2ba06bdde944fdde98a75db615d0cc8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "444d502c_4613a89b",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1412036
+      },
+      "writtenOn": "2019-08-27T19:21:04Z",
+      "side": 1,
+      "message": "Should this be using an id instead so that vendors can actually add their heaps without the need to modify ion_heap_type structure?",
+      "range": {
+        "startLine": 261,
+        "startChar": 17,
+        "endLine": 261,
+        "endChar": 21
+      },
+      "revId": "b6c71b50d2ba06bdde944fdde98a75db615d0cc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
