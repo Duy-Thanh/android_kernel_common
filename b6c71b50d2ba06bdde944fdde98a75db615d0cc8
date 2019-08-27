@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97000200_bc8cbc49",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1530208
+      },
+      "writtenOn": "2019-08-27T17:28:04Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we be checking here to ensure that the ID is within the CMA heaps range, instead of just the heaps range?",
+      "range": {
+        "startLine": 252,
+        "startChar": 17,
+        "endLine": 252,
+        "endChar": 34
+      },
+      "revId": "b6c71b50d2ba06bdde944fdde98a75db615d0cc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "280ac794_460f53e9",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1530208
+      },
+      "writtenOn": "2019-08-27T17:28:04Z",
+      "side": 1,
+      "message": "Similar note as the previous patch about potentially many carveout heaps.",
+      "range": {
+        "startLine": 258,
+        "startChar": 6,
+        "endLine": 258,
+        "endChar": 28
+      },
+      "revId": "b6c71b50d2ba06bdde944fdde98a75db615d0cc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
