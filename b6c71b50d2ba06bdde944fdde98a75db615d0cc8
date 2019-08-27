@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "12293d2e_540d56bf",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1530208
+      },
+      "writtenOn": "2019-08-27T20:12:25Z",
+      "side": 1,
+      "message": "So does this mean that there is one standard carveout heap then, and all vendors are expected to implement it? If not, what is the distinction between a standard carveout heap and a custom carveout heap?",
+      "parentUuid": "933126ca_d5e88fc4",
+      "range": {
+        "startLine": 258,
+        "startChar": 6,
+        "endLine": 258,
+        "endChar": 28
+      },
+      "revId": "b6c71b50d2ba06bdde944fdde98a75db615d0cc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "444d502c_4613a89b",
         "filename": "drivers/staging/android/ion/ion.c",
         "patchSetId": 3
