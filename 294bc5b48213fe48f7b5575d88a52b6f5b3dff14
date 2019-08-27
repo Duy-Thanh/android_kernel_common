@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40f5117d_106f9f1d",
+        "filename": "arch/arm64/configs/lka_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-08-27T20:16:47Z",
+      "side": 1,
+      "message": "So, instead of adding another defconfig, would it work instead to modify your build.config to set the extra options you want/don\u0027t want (like https://source.android.com/setup/build/building-kernels \u0027update_debug_config\u0027). That way, you\u0027ll stay in line with gki_defconfig, but you can still mostly control what you are running with.",
+      "revId": "294bc5b48213fe48f7b5575d88a52b6f5b3dff14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
