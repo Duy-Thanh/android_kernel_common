@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "631a0cc6_7e987143",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2110,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-08-28T23:24:53Z",
+      "side": 1,
+      "message": "Maybe we should insist on listing Bug numbers in these comments...",
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a226fa63_87fc07a3",
         "filename": "init/Kconfig",
         "patchSetId": 1
