@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a226fa63_87fc07a3",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2123,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-08-28T23:21:22Z",
+      "side": 1,
+      "message": "I guess I\u0027d differentiate between options that have to be selected for modules to work (such at the top set of hidden configs, which I am less optimistic for upstream), and the TODO work that either need to be added to gki_defconfig (like I suspect ARCH_HISI and probably PCIE_KIRIN) or fixed upstream and back-ported (like PINCTRL_SINGLE/GPIO_PL061).\n\nThough I do think having it documented here in this patch is sort of a nice TODO list. Maybe add a second GKI_HACKS_TO_FIX option for the second set?",
+      "range": {
+        "startLine": 2116,
+        "startChar": 1,
+        "endLine": 2123,
+        "endChar": 24
+      },
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
