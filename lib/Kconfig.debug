@@ -414,7 +414,8 @@ config MAGIC_SYSRQ
 config MAGIC_SYSRQ_DEFAULT_ENABLE
 	hex "Enable magic SysRq key functions by default"
 	depends on MAGIC_SYSRQ
-	default 0x1
+	default 0x0 if FIQ_DEBUGGER
+	default 0x1 if !FIQ_DEBUGGER
 	help
 	  Specifies which SysRq key functions are enabled by default.
 	  This may be set to 1 or 0 to enable or disable them all, or
