@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3cfba27b_1d851579",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1530208
+      },
+      "writtenOn": "2019-08-28T18:28:11Z",
+      "side": 1,
+      "message": "As per my comment on the previous patch, I guess you can just make this the default case?",
+      "range": {
+        "startLine": 253,
+        "startChar": 6,
+        "endLine": 253,
+        "endChar": 26
+      },
+      "revId": "6a8cdb997e0e2ed8bb55a5fe84d9a323fc4315ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1cb5d25_c5e6c0f8",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1530208
+      },
+      "writtenOn": "2019-08-28T18:28:11Z",
+      "side": 1,
+      "message": "If you start at 0, you don\u0027t have to do this.",
+      "range": {
+        "startLine": 283,
+        "startChar": 22,
+        "endLine": 283,
+        "endChar": 28
+      },
+      "revId": "6a8cdb997e0e2ed8bb55a5fe84d9a323fc4315ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a27e1a30_62a7e349",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1530208
+      },
+      "writtenOn": "2019-08-28T18:28:11Z",
+      "side": 1,
+      "message": "heap-\u003eid cannot be BIT(id_bit - 1). In ion_alloc_dmabuf(), when you search through the heap list, with the heap mask provided by the caller, you use the id in the heap structure as the amount to shift 1 by, i.e. (1 \u003c\u003c heap-\u003eid) and check against the heap id mask to see if you can draw from that heap mask. Therefore, this should be id_bit (assuming you start at 0).",
+      "range": {
+        "startLine": 285,
+        "startChar": 6,
+        "endLine": 285,
+        "endChar": 7
+      },
+      "revId": "6a8cdb997e0e2ed8bb55a5fe84d9a323fc4315ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
