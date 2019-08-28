@@ -1,0 +1,39 @@
+# Atrocities needed for
+# a) building GKI modules in separate tree, or
+# b) building drivers that are not modularizable
+#
+# All of these should be reworked into an upstream solution
+# if possible.
+#
+config GKI_HACKS_TO_FIX
+	bool "GKI hacks to fix"
+	depends on DRM
+	# Hidden configs for DRM modules
+	select DRM_KMS_HELPER
+	select DRM_GEM_CMA_HELPER
+	select DRM_KMS_CMA_HELPER
+	select DRM_MIPI_DSI
+	# Hidden configs for REGMAP modules
+	select REGMAP_IRQ
+	select MFD_CORE
+	select REGMAP_MMIO
+	# Hidden configs for SND/SND_SOC modules
+	depends on SND
+	depends on SND_SOC
+	select SND_SOC_GENERIC_DMAENGINE_PCM
+	select SND_PCM_ELD
+	select SND_PCM_IEC958
+	# Drivers that need to be modularized
+	select SERIAL_DEV_BUS
+	select PINCTRL_SINGLE
+	select GPIO_PL061
+	# Base HISI platform for Hikey960
+	select ARCH_HISI
+	select PCIE_KIRIN
+	select POWER_RESET_HISI
+	help
+	  Dummy config option used to enable core functionality used by
+	  modules that may not be selectable in this config.
+
+	  Unless you are building a GKI kernel to be used with modules
+	  built from a different config, say N here.
