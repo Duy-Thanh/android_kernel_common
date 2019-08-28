@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0999c6d6_015642c1",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-08-28T05:13:22Z",
+      "side": 1,
+      "message": "I fixed the error check below in new patch and htat should fix it.\nThe way I read _find_next_bit() code, both ION_HEAP_TYPE_MAX or ION_HEAP_TYPE_DMA_END + 1 would work. So, I guess I will make it clear by changing it to DMA_END + 1",
+      "parentUuid": "fd68bf3b_ac53582d",
+      "range": {
+        "startLine": 250,
+        "startChar": 10,
+        "endLine": 250,
+        "endChar": 27
+      },
+      "revId": "b6c71b50d2ba06bdde944fdde98a75db615d0cc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "97000200_bc8cbc49",
         "filename": "drivers/staging/android/ion/ion.c",
         "patchSetId": 3
@@ -143,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "5235d6e3_36937710",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-08-28T05:13:22Z",
+      "side": 1,
+      "message": "I\u0027m happy to add more than one here ofcourse, but as far as I know, your don\u0027t have more than 1? Also, the distiction will be those custom carveout heaps can\u0027t / shouldn\u0027t be used in the system image and that\u0027s it. I don\u0027t have a strong opinion about this, I was simply trying to make sure there is enough room for \"custom heaps\". We can also remove system_contig and free up one spot as well. For now, lets do that carveout specific change if there is a need as a later patch (unless that\u0027s needed now now)",
+      "parentUuid": "12293d2e_540d56bf",
+      "range": {
+        "startLine": 258,
+        "startChar": 6,
+        "endLine": 258,
+        "endChar": 28
+      },
+      "revId": "b6c71b50d2ba06bdde944fdde98a75db615d0cc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "444d502c_4613a89b",
         "filename": "drivers/staging/android/ion/ion.c",
         "patchSetId": 3
@@ -163,6 +211,30 @@
       "revId": "b6c71b50d2ba06bdde944fdde98a75db615d0cc8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60d00ee7_f1f43809",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-08-28T05:13:22Z",
+      "side": 1,
+      "message": "I fixed this in the new patch. The default case doesn\u0027t belong iwth others, so we use the \"id\" as-is if set otherwise derive one from the heap-\u003etype as long as the type is within ION_HEAP_TYPE_DMA_START..END.",
+      "parentUuid": "444d502c_4613a89b",
+      "range": {
+        "startLine": 261,
+        "startChar": 17,
+        "endLine": 261,
+        "endChar": 21
+      },
+      "revId": "b6c71b50d2ba06bdde944fdde98a75db615d0cc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
