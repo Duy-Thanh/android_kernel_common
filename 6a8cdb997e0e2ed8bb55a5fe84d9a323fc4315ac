@@ -68,6 +68,29 @@
       "revId": "6a8cdb997e0e2ed8bb55a5fe84d9a323fc4315ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28dd669c_154df2e3",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1412036
+      },
+      "writtenOn": "2019-08-28T18:46:06Z",
+      "side": 1,
+      "message": "heap_cnt gets decremented one more time later in this function so double decrement?",
+      "range": {
+        "startLine": 393,
+        "startChar": 6,
+        "endLine": 393,
+        "endChar": 14
+      },
+      "revId": "6a8cdb997e0e2ed8bb55a5fe84d9a323fc4315ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
