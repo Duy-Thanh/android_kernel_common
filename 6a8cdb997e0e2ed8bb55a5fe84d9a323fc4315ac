@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3a02ec7e_9ef8eda6",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-08-28T20:57:52Z",
+      "side": 1,
+      "message": "I made it ION_HEAP_TYPE_CUSTOM .. ION_HEAP_TYPE_MAX",
+      "parentUuid": "3cfba27b_1d851579",
+      "range": {
+        "startLine": 253,
+        "startChar": 6,
+        "endLine": 253,
+        "endChar": 26
+      },
+      "revId": "6a8cdb997e0e2ed8bb55a5fe84d9a323fc4315ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b1cb5d25_c5e6c0f8",
         "filename": "drivers/staging/android/ion/ion.c",
         "patchSetId": 6
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "02f38d86_4743b07b",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-08-28T20:57:52Z",
+      "side": 1,
+      "message": "no, I still need to  because ffs() is 1-indexed and not 0-indexed.",
+      "parentUuid": "b1cb5d25_c5e6c0f8",
+      "range": {
+        "startLine": 283,
+        "startChar": 22,
+        "endLine": 283,
+        "endChar": 28
+      },
+      "revId": "6a8cdb997e0e2ed8bb55a5fe84d9a323fc4315ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a27e1a30_62a7e349",
         "filename": "drivers/staging/android/ion/ion.c",
         "patchSetId": 6
@@ -59,6 +107,30 @@
       "writtenOn": "2019-08-28T18:28:11Z",
       "side": 1,
       "message": "heap-\u003eid cannot be BIT(id_bit - 1). In ion_alloc_dmabuf(), when you search through the heap list, with the heap mask provided by the caller, you use the id in the heap structure as the amount to shift 1 by, i.e. (1 \u003c\u003c heap-\u003eid) and check against the heap id mask to see if you can draw from that heap mask. Therefore, this should be id_bit (assuming you start at 0).",
+      "range": {
+        "startLine": 285,
+        "startChar": 6,
+        "endLine": 285,
+        "endChar": 7
+      },
+      "revId": "6a8cdb997e0e2ed8bb55a5fe84d9a323fc4315ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd0cb3e6_28e6433e",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-08-28T20:57:52Z",
+      "side": 1,
+      "message": "ouch, I wonder how did ion-unit-tests worked.. I\u0027m going to check that too. Thanks for spotting this",
+      "parentUuid": "a27e1a30_62a7e349",
       "range": {
         "startLine": 285,
         "startChar": 6,
@@ -91,6 +163,30 @@
       "revId": "6a8cdb997e0e2ed8bb55a5fe84d9a323fc4315ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23f23633_79e1027b",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-08-28T20:57:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28dd669c_154df2e3",
+      "range": {
+        "startLine": 393,
+        "startChar": 6,
+        "endLine": 393,
+        "endChar": 14
+      },
+      "revId": "6a8cdb997e0e2ed8bb55a5fe84d9a323fc4315ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
