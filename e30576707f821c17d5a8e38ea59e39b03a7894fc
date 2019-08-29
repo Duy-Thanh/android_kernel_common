@@ -63,6 +63,30 @@
       "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "879b328a_94b7fafc",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2123,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-08-29T02:45:42Z",
+      "side": 1,
+      "message": "\u003e but I still prefer a single TODO list. \n\nOk. I can understand that side as well.\n\n\u003e I guess we can move the !hidden ones to gki_defconfig when we concede we won\u0027t have any fix for them... but maybe the whole thing should be CONFIG_GKI_HACKS_TO_FIX instead of calling it a MODULE_HELPER.\n\nYea. HACKS_TO_FIX is more descriptive in this case :)",
+      "parentUuid": "c6de0000_edaab5a4",
+      "range": {
+        "startLine": 2116,
+        "startChar": 1,
+        "endLine": 2123,
+        "endChar": 24
+      },
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
