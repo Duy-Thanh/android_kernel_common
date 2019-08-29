@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c114c60_7ba17c8c",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1530208
+      },
+      "writtenOn": "2019-08-29T00:07:15Z",
+      "side": 1,
+      "message": "id_bit - 1? (i.e. heap-\u003eid should be the shift)\n\nIn the case of system heap, this will be 1, so if anyone tries to allocate from system heap--(1 \u003c\u003c 0)--then you\u0027ll try to test (1 \u003c\u003c 0) against (1 \u003c\u003c 1), which will not work?",
+      "revId": "cdd71a39594962a4057d8b9bdfaef5e5e68d10a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
