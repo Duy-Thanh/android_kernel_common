@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "5000bf42_19767e07",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2091,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-08-29T07:33:31Z",
+      "side": 1,
+      "message": "Why not put all of these (if this is going to be the way we do this, into a init/Kconfig.gki file, keeping it separate from the \"real\" init/Kconfig file and then just include it?\n\nThat way it is obvious what the file is for, and easier to maintain over time as it does not live upstream.",
+      "range": {
+        "startLine": 2091,
+        "startChar": 0,
+        "endLine": 2091,
+        "endChar": 23
+      },
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "631a0cc6_7e987143",
         "filename": "init/Kconfig",
         "patchSetId": 1
