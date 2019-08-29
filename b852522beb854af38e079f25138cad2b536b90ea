@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41a1a193_c005202b",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1530208
+      },
+      "writtenOn": "2019-08-29T21:48:44Z",
+      "side": 1,
+      "message": "Please see my comment on the previous patchset. I think this should be id_bit - 1, as this value is used as an offset to shift 1 by.",
+      "revId": "b852522beb854af38e079f25138cad2b536b90ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
