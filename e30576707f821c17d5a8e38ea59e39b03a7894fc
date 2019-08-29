@@ -39,6 +39,30 @@
       "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6de0000_edaab5a4",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2123,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-08-29T00:43:09Z",
+      "side": 1,
+      "message": "Hmm. I think of all this as TODO work (I guess I\u0027m hoping for something better than this for the hidden configs). It seems like there are 3 categories then:\n1) hidden configs\n2) configs we don\u0027t like but might be stuck with: ARCH_HISI, PCIE_KIRIN\n3) stuff that needs to be fixed upstream and backported\n\nbut I still prefer a single TODO list. I guess we can move the !hidden ones to gki_defconfig when we concede we won\u0027t have any fix for them... but maybe the whole thing should be CONFIG_GKI_HACKS_TO_FIX instead of calling it a MODULE_HELPER.\n\nMaybe we\u0027ll also want CONFIG_GKI_HACKS_FOR_HISILICON for ARCH_HISI and PCIE_KIRIN, and generally CONFIG_GKI_HACKS_FOR_\u003cvendor\u003e where we can call out per-vendor config requirements that we want to get rid of someday...\n\nLet\u0027s see what other folks think.",
+      "parentUuid": "a226fa63_87fc07a3",
+      "range": {
+        "startLine": 2116,
+        "startChar": 1,
+        "endLine": 2123,
+        "endChar": 24
+      },
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
