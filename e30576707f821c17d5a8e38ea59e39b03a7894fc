@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e5ec2dc9_7352ba76",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2091,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-08-29T14:54:44Z",
+      "side": 1,
+      "message": "Yes, I like that idea. Next version.",
+      "parentUuid": "5000bf42_19767e07",
+      "range": {
+        "startLine": 2091,
+        "startChar": 0,
+        "endLine": 2091,
+        "endChar": 23
+      },
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fd0c1cce_626c016f",
         "filename": "init/Kconfig",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2019-08-29T07:55:32Z",
       "side": 1,
       "message": "\"modularizable into kernel\" sounds wrong. Did you mean \"modularizable in the kernel\"?",
+      "range": {
+        "startLine": 2093,
+        "startChar": 49,
+        "endLine": 2093,
+        "endChar": 53
+      },
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7794301_ff17b916",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2093,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-08-29T14:54:44Z",
+      "side": 1,
+      "message": "Yes, actually, the \"into kernel\" shouldn\u0027t have been there at all.",
+      "parentUuid": "fd0c1cce_626c016f",
       "range": {
         "startLine": 2093,
         "startChar": 49,
@@ -76,6 +124,30 @@
       "writtenOn": "2019-08-29T07:55:32Z",
       "side": 1,
       "message": "I didn\u0027t know that depends on only applies to selects below it. Is that really true? If so, then why is PINCTRL_SINGLE depend on SND_SOC?",
+      "range": {
+        "startLine": 2112,
+        "startChar": 12,
+        "endLine": 2112,
+        "endChar": 19
+      },
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c10040a_98234a8d",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2112,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-08-29T14:54:44Z",
+      "side": 1,
+      "message": "Honestly, I\u0027m not sure, I put it there to group it with the SND_SOC_GENERIC_DMAENGING_PCM that required it.\n\nI\u0027m pretty sure PINCTRL_SINGLE doesn\u0027t need it. What do you suggest?",
+      "parentUuid": "dcf7d7f5_c68ec583",
       "range": {
         "startLine": 2112,
         "startChar": 12,
@@ -170,6 +242,30 @@
       "writtenOn": "2019-08-29T07:34:03Z",
       "side": 1,
       "message": "Always the default, never needed to be listed.",
+      "range": {
+        "startLine": 2124,
+        "startChar": 0,
+        "endLine": 2124,
+        "endChar": 10
+      },
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16710d73_e2c6171d",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2124,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-08-29T14:54:44Z",
+      "side": 1,
+      "message": "will remove.",
+      "parentUuid": "002974b2_2adda161",
       "range": {
         "startLine": 2124,
         "startChar": 0,
