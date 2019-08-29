@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "fd0c1cce_626c016f",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2093,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2019-08-29T07:55:32Z",
+      "side": 1,
+      "message": "\"modularizable into kernel\" sounds wrong. Did you mean \"modularizable in the kernel\"?",
+      "range": {
+        "startLine": 2093,
+        "startChar": 49,
+        "endLine": 2093,
+        "endChar": 53
+      },
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "631a0cc6_7e987143",
         "filename": "init/Kconfig",
         "patchSetId": 1
@@ -36,6 +59,29 @@
       "writtenOn": "2019-08-28T23:24:53Z",
       "side": 1,
       "message": "Maybe we should insist on listing Bug numbers in these comments...",
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcf7d7f5_c68ec583",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2112,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2019-08-29T07:55:32Z",
+      "side": 1,
+      "message": "I didn\u0027t know that depends on only applies to selects below it. Is that really true? If so, then why is PINCTRL_SINGLE depend on SND_SOC?",
+      "range": {
+        "startLine": 2112,
+        "startChar": 12,
+        "endLine": 2112,
+        "endChar": 19
+      },
       "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
