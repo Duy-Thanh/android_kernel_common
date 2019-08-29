@@ -110,6 +110,29 @@
       "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "002974b2_2adda161",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2124,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-08-29T07:34:03Z",
+      "side": 1,
+      "message": "Always the default, never needed to be listed.",
+      "range": {
+        "startLine": 2124,
+        "startChar": 0,
+        "endLine": 2124,
+        "endChar": 10
+      },
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
