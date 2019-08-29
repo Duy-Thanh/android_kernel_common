@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "9479bc50_4b8d75d1",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1412036
+      },
+      "writtenOn": "2019-08-29T00:57:50Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be nice to have the ION_HEAP_TYPE_DMA be used by vendor CMA heaps as well. If a vendor needs to use a stardard CMA heap as well as a vendor specific CMA heap then they will need to use ION_HEAP_TYPE_DMA for the standard one and some custom type for vendor CMA heap.\n\nDoes this ID range check really help enforce system image from using a custom type and hence custom id? Seems like the basic requirement would be for the system image to use IDs in the lower 16 bits and that seems like a separate problem that may not make sense to handle here??\n\nSimilar for carveout.",
+      "range": {
+        "startLine": 245,
+        "startChar": 6,
+        "endLine": 245,
+        "endChar": 23
+      },
+      "revId": "cdd71a39594962a4057d8b9bdfaef5e5e68d10a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7c114c60_7ba17c8c",
         "filename": "drivers/staging/android/ion/ion.c",
         "patchSetId": 7
