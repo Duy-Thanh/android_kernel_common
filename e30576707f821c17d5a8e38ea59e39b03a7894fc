@@ -275,6 +275,29 @@
       "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbe5af96_dbc396aa",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2130,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-08-30T15:37:40Z",
+      "side": 1,
+      "message": "Caveat: There should never be an ifdef/ifndef/defined\n        CONFIG_GKI_DUMMY_MODULE_HELPER in the source code.\n\nWe have had partners request a config parameter to determine if they are running in a GKI kernel or in a production kernel. We have flatly said NO to such requests because this breaks our ABI/API contract. The invention of this config could end up being abused by the partners as a result.\n\nIs there a mechanism where we suppress the config.h define that results from this config?",
+      "range": {
+        "startLine": 2130,
+        "startChar": 3,
+        "endLine": 2130,
+        "endChar": 45
+      },
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
