@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b386e813_53644c2b",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2019-08-30T18:55:32Z",
+      "side": 1,
+      "message": "I believe the way to apply these \"depends on\" per line is to do it as\n\nselect XXX if (YYY \u0026\u0026 ZZZ)\n\nOtherwise depends on applies to the whole config.",
+      "range": {
+        "startLine": 21,
+        "startChar": 11,
+        "endLine": 21,
+        "endChar": 12
+      },
+      "revId": "ba7a9ae09cb3d368c00f314446fe0ec45d01e86d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
