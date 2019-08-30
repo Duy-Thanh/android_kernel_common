@@ -436,6 +436,30 @@
       "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df50f680_f3b30e4e",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2130,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-08-30T17:17:49Z",
+      "side": 1,
+      "message": "If you can 100% guarantee that we will not be asleep at the switch and let it slip through, then we _still_ have to communicate to the partners that they should _never_ use this proactively. Adding this to the help prevents _some_ of the engineering churn and help us to scale our reviews.\n\nIf we can prevent it landing in config.h, more better(sic). It would be so cool it we could use CONFIG_GKI-HACKS-TO-FIX (notice minus signs) and it is filtered out from config.h ...",
+      "parentUuid": "17a2fdc3_fb52b0c5",
+      "range": {
+        "startLine": 2130,
+        "startChar": 3,
+        "endLine": 2130,
+        "endChar": 45
+      },
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
