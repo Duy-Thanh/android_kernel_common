@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "e97e2712_14e3c28d",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2091,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-08-30T16:14:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5ec2dc9_7352ba76",
+      "range": {
+        "startLine": 2091,
+        "startChar": 0,
+        "endLine": 2091,
+        "endChar": 23
+      },
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fd0c1cce_626c016f",
         "filename": "init/Kconfig",
         "patchSetId": 1
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "6c6818ac_7b704d45",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2093,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-08-30T16:14:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7794301_ff17b916",
+      "range": {
+        "startLine": 2093,
+        "startChar": 49,
+        "endLine": 2093,
+        "endChar": 53
+      },
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "631a0cc6_7e987143",
         "filename": "init/Kconfig",
         "patchSetId": 1
@@ -110,6 +158,24 @@
       "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34e0b919_4e727e7d",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2110,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-08-30T16:14:39Z",
+      "side": 1,
+      "message": "Nah. Bug numbers on the commit are probably enough.",
+      "parentUuid": "631a0cc6_7e987143",
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -231,6 +297,30 @@
     },
     {
       "key": {
+        "uuid": "65f891f1_131f09e6",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2123,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-08-30T16:14:39Z",
+      "side": 1,
+      "message": "renamed to GKI_HACKS_TO_FIX",
+      "parentUuid": "879b328a_94b7fafc",
+      "range": {
+        "startLine": 2116,
+        "startChar": 1,
+        "endLine": 2123,
+        "endChar": 24
+      },
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "002974b2_2adda161",
         "filename": "init/Kconfig",
         "patchSetId": 1
@@ -278,6 +368,30 @@
     },
     {
       "key": {
+        "uuid": "5e9c3619_63b41526",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2124,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-08-30T16:14:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16710d73_e2c6171d",
+      "range": {
+        "startLine": 2124,
+        "startChar": 0,
+        "endLine": 2124,
+        "endChar": 10
+      },
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fbe5af96_dbc396aa",
         "filename": "init/Kconfig",
         "patchSetId": 1
@@ -289,6 +403,30 @@
       "writtenOn": "2019-08-30T15:37:40Z",
       "side": 1,
       "message": "Caveat: There should never be an ifdef/ifndef/defined\n        CONFIG_GKI_DUMMY_MODULE_HELPER in the source code.\n\nWe have had partners request a config parameter to determine if they are running in a GKI kernel or in a production kernel. We have flatly said NO to such requests because this breaks our ABI/API contract. The invention of this config could end up being abused by the partners as a result.\n\nIs there a mechanism where we suppress the config.h define that results from this config?",
+      "range": {
+        "startLine": 2130,
+        "startChar": 3,
+        "endLine": 2130,
+        "endChar": 45
+      },
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17a2fdc3_fb52b0c5",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2130,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-08-30T16:14:39Z",
+      "side": 1,
+      "message": "Is that necessary? Isn\u0027t it sufficient to never +2 any proposed patch that uses this in code?",
+      "parentUuid": "fbe5af96_dbc396aa",
       "range": {
         "startLine": 2130,
         "startChar": 3,
