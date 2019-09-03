@@ -460,6 +460,30 @@
       "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e95c26d_1d900a9e",
+        "filename": "init/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 2130,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-09-03T16:16:10Z",
+      "side": 1,
+      "message": "I\u0027m fine with that...is there a way to do it?",
+      "parentUuid": "df50f680_f3b30e4e",
+      "range": {
+        "startLine": 2130,
+        "startChar": 3,
+        "endLine": 2130,
+        "endChar": 45
+      },
+      "revId": "e30576707f821c17d5a8e38ea59e39b03a7894fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
