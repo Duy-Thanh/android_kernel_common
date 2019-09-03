@@ -94,6 +94,30 @@
     },
     {
       "key": {
+        "uuid": "712e916e_7c289e30",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2019-09-03T19:00:39Z",
+      "side": 1,
+      "message": "For core functionality we expect most vendors to enable, and do not want to permit overriding/replacing, isn\u0027t it preferable to have it built in?",
+      "parentUuid": "c5d0b9d0_a2cbfadc",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 37
+      },
+      "revId": "ba7a9ae09cb3d368c00f314446fe0ec45d01e86d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0b95cd33_df3140b3",
         "filename": "init/Kconfig.gki",
         "patchSetId": 2
