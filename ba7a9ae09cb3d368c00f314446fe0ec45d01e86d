@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "8c600cae_bce67eea",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-09-03T17:56:58Z",
+      "side": 1,
+      "message": "Need a better description here for the \"short line\"  Summarize the longer description below, something like \"GKI Dummy config options\"",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 24
+      },
+      "revId": "ba7a9ae09cb3d368c00f314446fe0ec45d01e86d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "272c2e3f_855bc8e3",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-09-03T17:56:58Z",
+      "side": 1,
+      "message": "We should have one config option per \"major\" thing here (one for DRM, one for SND, etc.) otherwise we have no way of unwinding this mess later.\n\nSo please break this up into smaller chunks if possible.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 18
+      },
+      "revId": "ba7a9ae09cb3d368c00f314446fe0ec45d01e86d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b386e813_53644c2b",
         "filename": "init/Kconfig.gki",
         "patchSetId": 2
@@ -18,6 +64,52 @@
         "startChar": 11,
         "endLine": 21,
         "endChar": 12
+      },
+      "revId": "ba7a9ae09cb3d368c00f314446fe0ec45d01e86d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5d0b9d0_a2cbfadc",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-09-03T17:56:58Z",
+      "side": 1,
+      "message": "why not a module?  Same for most of these.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 37
+      },
+      "revId": "ba7a9ae09cb3d368c00f314446fe0ec45d01e86d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b95cd33_df3140b3",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-09-03T17:56:58Z",
+      "side": 1,
+      "message": "SERIAL_DEV_BUS can be a module, why are you building it in here?",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 22
       },
       "revId": "ba7a9ae09cb3d368c00f314446fe0ec45d01e86d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
