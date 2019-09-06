@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "507572ea_3d4b012d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-09-06T21:54:30Z",
+      "side": 1,
+      "message": "Wow, this has got to be the worst case scenario for an abi breakage?",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 27
+      },
+      "revId": "ffc72224c6f9b5436aa927ad25c099cbbef7308c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccdf165b_79f928ca",
+        "filename": "abi_gki_aarch64.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 13784,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-09-06T21:54:30Z",
+      "side": 1,
+      "message": "The milepost marker for __anonymous_struct__ moves one notch and everything that follows takes a unscalable hit when trying to compare, at least side by side in gerrit. Can something be done to make this more deterministic so that merges can be simplified and not overlap so grossly? Every update will require all simultaneous patch series to be updated to reflect a merge down. I have already found it very difficult to rebase the abi.xml file; you have to generate a brand new one from scratch instead.",
+      "range": {
+        "startLine": 13784,
+        "startChar": 18,
+        "endLine": 13784,
+        "endChar": 45
+      },
+      "revId": "ffc72224c6f9b5436aa927ad25c099cbbef7308c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a24d75b2_2a5fe528",
+        "filename": "abi_gki_aarch64.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 194186,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-09-06T21:54:30Z",
+      "side": 1,
+      "message": "This is like looking at a diff of Assembler, id\u003d\u0027type-id-14955\u0027 becomes id\u003d\u0027type-id-15000\u0027. Is there any way to add a deterministic algorithm to libabigail so that such widespread and unscalable changes can be eliminated?",
+      "range": {
+        "startLine": 194185,
+        "startChar": 1,
+        "endLine": 194186,
+        "endChar": 44
+      },
+      "revId": "ffc72224c6f9b5436aa927ad25c099cbbef7308c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
