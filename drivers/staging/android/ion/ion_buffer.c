@@ -161,7 +161,7 @@ struct ion_buffer *ion_buffer_alloc(struct ion_device *dev, size_t len,
 	down_read(&dev->lock);
 	plist_for_each_entry(heap, &dev->heaps, node) {
 		/* if the caller didn't specify this heap id */
-		if (!((1 << heap->id) & heap_id_mask))
+		if (!((1 << (heap->id - 1)) & heap_id_mask))
 			continue;
 		buffer = ion_buffer_create(heap, dev, len, flags);
 		if (!IS_ERR(buffer))
