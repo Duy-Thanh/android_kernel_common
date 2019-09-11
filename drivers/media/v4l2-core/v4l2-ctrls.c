@@ -37,8 +37,8 @@
 struct v4l2_ctrl_helper {
 	/* Pointer to the control reference of the master control */
 	struct v4l2_ctrl_ref *mref;
-	/* The control corresponding to the v4l2_ext_control ID field. */
-	struct v4l2_ctrl *ctrl;
+	/* The control ref corresponding to the v4l2_ext_control ID field. */
+	struct v4l2_ctrl_ref *ref;
 	/* v4l2_ext_control index of the next control belonging to the
 	   same cluster, or 0 if there isn't any. */
 	u32 next;
@@ -1668,6 +1668,13 @@ static int new_to_user(struct v4l2_ext_control *c,
 	return ptr_to_user(c, ctrl, ctrl->p_new);
 }
 
+/* Helper function: copy the request value back to the caller */
+static int req_to_user(struct v4l2_ext_control *c,
+		       struct v4l2_ctrl_ref *ref)
+{
+	return ptr_to_user(c, ref->ctrl, ref->p_req);
+}
+
 /* Helper function: copy the initial control value back to the caller */
 static int def_to_user(struct v4l2_ext_control *c, struct v4l2_ctrl *ctrl)
 {
@@ -1787,6 +1794,26 @@ static void cur_to_new(struct v4l2_ctrl *ctrl)
 	ptr_to_ptr(ctrl, ctrl->p_cur, ctrl->p_new);
 }
 
+/* Copy the new value to the request value */
+static void new_to_req(struct v4l2_ctrl_ref *ref)
+{
+	if (!ref)
+		return;
+	ptr_to_ptr(ref->ctrl, ref->ctrl->p_new, ref->p_req);
+	ref->req = ref;
+}
+
+/* Copy the request value to the new value */
+static void req_to_new(struct v4l2_ctrl_ref *ref)
+{
+	if (!ref)
+		return;
+	if (ref->req)
+		ptr_to_ptr(ref->ctrl, ref->req->p_req, ref->ctrl->p_new);
+	else
+		ptr_to_ptr(ref->ctrl, ref->ctrl->p_cur, ref->ctrl->p_new);
+}
+
 /* Return non-zero if one or more of the controls in the cluster has a new
    value that differs from the current value. */
 static int cluster_changed(struct v4l2_ctrl *master)
@@ -1896,11 +1923,15 @@ int v4l2_ctrl_handler_init_class(struct v4l2_ctrl_handler *hdl,
 	lockdep_set_class_and_name(hdl->lock, key, name);
 	INIT_LIST_HEAD(&hdl->ctrls);
 	INIT_LIST_HEAD(&hdl->ctrl_refs);
+	INIT_LIST_HEAD(&hdl->requests);
+	INIT_LIST_HEAD(&hdl->requests_queued);
+	hdl->request_is_queued = false;
 	hdl->nr_of_buckets = 1 + nr_of_controls_hint / 8;
 	hdl->buckets = kvmalloc_array(hdl->nr_of_buckets,
 				      sizeof(hdl->buckets[0]),
 				      GFP_KERNEL | __GFP_ZERO);
 	hdl->error = hdl->buckets ? 0 : -ENOMEM;
+	media_request_object_init(&hdl->req_obj);
 	return hdl->error;
 }
 EXPORT_SYMBOL(v4l2_ctrl_handler_init_class);
@@ -1915,6 +1946,14 @@ void v4l2_ctrl_handler_free(struct v4l2_ctrl_handler *hdl)
 	if (hdl == NULL || hdl->buckets == NULL)
 		return;
 
+	if (!hdl->req_obj.req && !list_empty(&hdl->requests)) {
+		struct v4l2_ctrl_handler *req, *next_req;
+
+		list_for_each_entry_safe(req, next_req, &hdl->requests, requests) {
+			media_request_object_unbind(&req->req_obj);
+			media_request_object_put(&req->req_obj);
+		}
+	}
 	mutex_lock(hdl->lock);
 	/* Free all nodes */
 	list_for_each_entry_safe(ref, next_ref, &hdl->ctrl_refs, node) {
@@ -2016,13 +2055,19 @@ EXPORT_SYMBOL(v4l2_ctrl_find);
 
 /* Allocate a new v4l2_ctrl_ref and hook it into the handler. */
 static int handler_new_ref(struct v4l2_ctrl_handler *hdl,
-			   struct v4l2_ctrl *ctrl)
+			   struct v4l2_ctrl *ctrl,
+			   struct v4l2_ctrl_ref **ctrl_ref,
+			   bool from_other_dev, bool allocate_req)
 {
 	struct v4l2_ctrl_ref *ref;
 	struct v4l2_ctrl_ref *new_ref;
 	u32 id = ctrl->id;
 	u32 class_ctrl = V4L2_CTRL_ID2WHICH(id) | 1;
 	int bucket = id % hdl->nr_of_buckets;	/* which bucket to use */
+	unsigned int size_extra_req = 0;
+
+	if (ctrl_ref)
+		*ctrl_ref = NULL;
 
 	/*
 	 * Automatically add the control class if it is not yet present and
@@ -2036,10 +2081,16 @@ static int handler_new_ref(struct v4l2_ctrl_handler *hdl,
 	if (hdl->error)
 		return hdl->error;
 
-	new_ref = kzalloc(sizeof(*new_ref), GFP_KERNEL);
+	if (allocate_req)
+		size_extra_req = ctrl->elems * ctrl->elem_size;
+	new_ref = kzalloc(sizeof(*new_ref) + size_extra_req, GFP_KERNEL);
 	if (!new_ref)
 		return handler_set_err(hdl, -ENOMEM);
 	new_ref->ctrl = ctrl;
+	new_ref->from_other_dev = from_other_dev;
+	if (size_extra_req)
+		new_ref->p_req.p = &new_ref[1];
+
 	if (ctrl->handler == hdl) {
 		/* By default each control starts in a cluster of its own.
 		   new_ref->ctrl is basically a cluster array with one
@@ -2079,6 +2130,8 @@ insert_in_hash:
 	/* Insert the control node in the hash */
 	new_ref->next = hdl->buckets[bucket];
 	hdl->buckets[bucket] = new_ref;
+	if (ctrl_ref)
+		*ctrl_ref = new_ref;
 
 unlock:
 	mutex_unlock(hdl->lock);
@@ -2220,7 +2273,7 @@ static struct v4l2_ctrl *v4l2_ctrl_new(struct v4l2_ctrl_handler *hdl,
 		ctrl->type_ops->init(ctrl, idx, ctrl->p_new);
 	}
 
-	if (handler_new_ref(hdl, ctrl)) {
+	if (handler_new_ref(hdl, ctrl, NULL, false, false)) {
 		kvfree(ctrl);
 		return NULL;
 	}
@@ -2388,7 +2441,8 @@ EXPORT_SYMBOL(v4l2_ctrl_new_int_menu);
 /* Add the controls from another handler to our own. */
 int v4l2_ctrl_add_handler(struct v4l2_ctrl_handler *hdl,
 			  struct v4l2_ctrl_handler *add,
-			  bool (*filter)(const struct v4l2_ctrl *ctrl))
+			  bool (*filter)(const struct v4l2_ctrl *ctrl),
+			  bool from_other_dev)
 {
 	struct v4l2_ctrl_ref *ref;
 	int ret = 0;
@@ -2411,7 +2465,7 @@ int v4l2_ctrl_add_handler(struct v4l2_ctrl_handler *hdl,
 		/* Filter any unwanted controls */
 		if (filter && !filter(ctrl))
 			continue;
-		ret = handler_new_ref(hdl, ctrl);
+		ret = handler_new_ref(hdl, ctrl, NULL, from_other_dev, false);
 		if (ret)
 			break;
 	}
@@ -2820,6 +2874,123 @@ int v4l2_querymenu(struct v4l2_ctrl_handler *hdl, struct v4l2_querymenu *qm)
 }
 EXPORT_SYMBOL(v4l2_querymenu);
 
+static int v4l2_ctrl_request_clone(struct v4l2_ctrl_handler *hdl,
+				   const struct v4l2_ctrl_handler *from)
+{
+	struct v4l2_ctrl_ref *ref;
+	int err;
+
+	if (WARN_ON(!hdl || hdl == from))
+		return -EINVAL;
+
+	if (hdl->error)
+		return hdl->error;
+
+	WARN_ON(hdl->lock != &hdl->_lock);
+
+	mutex_lock(from->lock);
+	list_for_each_entry(ref, &from->ctrl_refs, node) {
+		struct v4l2_ctrl *ctrl = ref->ctrl;
+		struct v4l2_ctrl_ref *new_ref;
+
+		/* Skip refs inherited from other devices */
+		if (ref->from_other_dev)
+			continue;
+		/* And buttons */
+		if (ctrl->type == V4L2_CTRL_TYPE_BUTTON)
+			continue;
+		err = handler_new_ref(hdl, ctrl, &new_ref, false, true);
+		if (err)
+			break;
+	}
+	mutex_unlock(from->lock);
+	return err;
+}
+
+static void v4l2_ctrl_request_queue(struct media_request_object *obj)
+{
+	struct v4l2_ctrl_handler *hdl =
+		container_of(obj, struct v4l2_ctrl_handler, req_obj);
+	struct v4l2_ctrl_handler *main_hdl = obj->priv;
+	struct v4l2_ctrl_handler *prev_hdl = NULL;
+	struct v4l2_ctrl_ref *ref_ctrl, *ref_ctrl_prev = NULL;
+
+	if (list_empty(&main_hdl->requests_queued))
+		goto queue;
+
+	prev_hdl = list_last_entry(&main_hdl->requests_queued,
+				   struct v4l2_ctrl_handler, requests_queued);
+	/*
+	 * Note: prev_hdl and hdl must contain the same list of control
+	 * references, so if any differences are detected then that is a
+	 * driver bug and the WARN_ON is triggered.
+	 */
+	mutex_lock(prev_hdl->lock);
+	ref_ctrl_prev = list_first_entry(&prev_hdl->ctrl_refs,
+					 struct v4l2_ctrl_ref, node);
+	list_for_each_entry(ref_ctrl, &hdl->ctrl_refs, node) {
+		if (ref_ctrl->req)
+			continue;
+		while (ref_ctrl_prev->ctrl->id < ref_ctrl->ctrl->id) {
+			/* Should never happen, but just in case... */
+			if (list_is_last(&ref_ctrl_prev->node,
+					 &prev_hdl->ctrl_refs))
+				break;
+			ref_ctrl_prev = list_next_entry(ref_ctrl_prev, node);
+		}
+		if (WARN_ON(ref_ctrl_prev->ctrl->id != ref_ctrl->ctrl->id))
+			break;
+		ref_ctrl->req = ref_ctrl_prev->req;
+	}
+	mutex_unlock(prev_hdl->lock);
+queue:
+	list_add_tail(&hdl->requests_queued, &main_hdl->requests_queued);
+	hdl->request_is_queued = true;
+}
+
+static void v4l2_ctrl_request_unbind(struct media_request_object *obj)
+{
+	struct v4l2_ctrl_handler *hdl =
+		container_of(obj, struct v4l2_ctrl_handler, req_obj);
+
+	list_del_init(&hdl->requests);
+	if (hdl->request_is_queued) {
+		list_del_init(&hdl->requests_queued);
+		hdl->request_is_queued = false;
+	}
+}
+
+static void v4l2_ctrl_request_release(struct media_request_object *obj)
+{
+	struct v4l2_ctrl_handler *hdl =
+		container_of(obj, struct v4l2_ctrl_handler, req_obj);
+
+	v4l2_ctrl_handler_free(hdl);
+	kfree(hdl);
+}
+
+static const struct media_request_object_ops req_ops = {
+	.queue = v4l2_ctrl_request_queue,
+	.unbind = v4l2_ctrl_request_unbind,
+	.release = v4l2_ctrl_request_release,
+};
+
+static int v4l2_ctrl_request_bind(struct media_request *req,
+			   struct v4l2_ctrl_handler *hdl,
+			   struct v4l2_ctrl_handler *from)
+{
+	int ret;
+
+	ret = v4l2_ctrl_request_clone(hdl, from);
+
+	if (!ret) {
+		ret = media_request_object_bind(req, &req_ops,
+						from, false, &hdl->req_obj);
+		if (!ret)
+			list_add_tail(&hdl->requests, &from->requests);
+	}
+	return ret;
+}
 
 /* Some general notes on the atomic requirements of VIDIOC_G/TRY/S_EXT_CTRLS:
 
@@ -2881,6 +3052,7 @@ static int prepare_ext_ctrls(struct v4l2_ctrl_handler *hdl,
 
 		if (cs->which &&
 		    cs->which != V4L2_CTRL_WHICH_DEF_VAL &&
+		    cs->which != V4L2_CTRL_WHICH_REQUEST_VAL &&
 		    V4L2_CTRL_ID2WHICH(id) != cs->which)
 			return -EINVAL;
 
@@ -2891,6 +3063,7 @@ static int prepare_ext_ctrls(struct v4l2_ctrl_handler *hdl,
 		ref = find_ref_lock(hdl, id);
 		if (ref == NULL)
 			return -EINVAL;
+		h->ref = ref;
 		ctrl = ref->ctrl;
 		if (ctrl->flags & V4L2_CTRL_FLAG_DISABLED)
 			return -EINVAL;
@@ -2913,7 +3086,6 @@ static int prepare_ext_ctrls(struct v4l2_ctrl_handler *hdl,
 		}
 		/* Store the ref to the master control of the cluster */
 		h->mref = ref;
-		h->ctrl = ctrl;
 		/* Initially set next to 0, meaning that there is no other
 		   control in this helper array belonging to the same
 		   cluster */
@@ -2960,15 +3132,15 @@ static int prepare_ext_ctrls(struct v4l2_ctrl_handler *hdl,
    whether there are any controls at all. */
 static int class_check(struct v4l2_ctrl_handler *hdl, u32 which)
 {
-	if (which == 0 || which == V4L2_CTRL_WHICH_DEF_VAL)
+	if (which == 0 || which == V4L2_CTRL_WHICH_DEF_VAL ||
+	    which == V4L2_CTRL_WHICH_REQUEST_VAL)
 		return 0;
 	return find_ref_lock(hdl, which | 1) ? 0 : -EINVAL;
 }
 
-
-
 /* Get extended controls. Allocates the helpers array if needed. */
-int v4l2_g_ext_ctrls(struct v4l2_ctrl_handler *hdl, struct v4l2_ext_controls *cs)
+static int v4l2_g_ext_ctrls_common(struct v4l2_ctrl_handler *hdl,
+				   struct v4l2_ext_controls *cs)
 {
 	struct v4l2_ctrl_helper helper[4];
 	struct v4l2_ctrl_helper *helpers = helper;
@@ -2998,7 +3170,7 @@ int v4l2_g_ext_ctrls(struct v4l2_ctrl_handler *hdl, struct v4l2_ext_controls *cs
 	cs->error_idx = cs->count;
 
 	for (i = 0; !ret && i < cs->count; i++)
-		if (helpers[i].ctrl->flags & V4L2_CTRL_FLAG_WRITE_ONLY)
+		if (helpers[i].ref->ctrl->flags & V4L2_CTRL_FLAG_WRITE_ONLY)
 			ret = -EACCES;
 
 	for (i = 0; !ret && i < cs->count; i++) {
@@ -3032,8 +3204,12 @@ int v4l2_g_ext_ctrls(struct v4l2_ctrl_handler *hdl, struct v4l2_ext_controls *cs
 			u32 idx = i;
 
 			do {
-				ret = ctrl_to_user(cs->controls + idx,
-						   helpers[idx].ctrl);
+				if (helpers[idx].ref->req)
+					ret = req_to_user(cs->controls + idx,
+						helpers[idx].ref->req);
+				else
+					ret = ctrl_to_user(cs->controls + idx,
+						helpers[idx].ref->ctrl);
 				idx = helpers[idx].next;
 			} while (!ret && idx);
 		}
@@ -3042,6 +3218,82 @@ int v4l2_g_ext_ctrls(struct v4l2_ctrl_handler *hdl, struct v4l2_ext_controls *cs
 
 	if (cs->count > ARRAY_SIZE(helper))
 		kvfree(helpers);
+	return ret;
+}
+
+static struct media_request_object *
+v4l2_ctrls_find_req_obj(struct v4l2_ctrl_handler *hdl,
+			struct media_request *req, bool set)
+{
+	struct media_request_object *obj;
+	struct v4l2_ctrl_handler *new_hdl;
+	int ret;
+
+	if (IS_ERR(req))
+		return ERR_CAST(req);
+
+	if (set && WARN_ON(req->state != MEDIA_REQUEST_STATE_UPDATING))
+		return ERR_PTR(-EBUSY);
+
+	obj = media_request_object_find(req, &req_ops, hdl);
+	if (obj)
+		return obj;
+	if (!set)
+		return ERR_PTR(-ENOENT);
+
+	new_hdl = kzalloc(sizeof(*new_hdl), GFP_KERNEL);
+	if (!new_hdl)
+		return ERR_PTR(-ENOMEM);
+
+	obj = &new_hdl->req_obj;
+	ret = v4l2_ctrl_handler_init(new_hdl, (hdl->nr_of_buckets - 1) * 8);
+	if (!ret)
+		ret = v4l2_ctrl_request_bind(req, new_hdl, hdl);
+	if (ret) {
+		kfree(new_hdl);
+
+		return ERR_PTR(ret);
+	}
+
+	media_request_object_get(obj);
+	return obj;
+}
+
+int v4l2_g_ext_ctrls(struct v4l2_ctrl_handler *hdl, struct media_device *mdev,
+		     struct v4l2_ext_controls *cs)
+{
+	struct media_request_object *obj = NULL;
+	int ret;
+
+	if (cs->which == V4L2_CTRL_WHICH_REQUEST_VAL) {
+		struct media_request *req;
+
+		if (!mdev || cs->request_fd < 0)
+			return -EINVAL;
+
+		req = media_request_get_by_fd(mdev, cs->request_fd);
+		if (IS_ERR(req))
+			return PTR_ERR(req);
+
+		if (req->state != MEDIA_REQUEST_STATE_COMPLETE) {
+			media_request_put(req);
+			return -EACCES;
+		}
+
+		obj = v4l2_ctrls_find_req_obj(hdl, req, false);
+		/* Reference to the request held through obj */
+		media_request_put(req);
+		if (IS_ERR(obj))
+			return PTR_ERR(obj);
+
+		hdl = container_of(obj, struct v4l2_ctrl_handler,
+				   req_obj);
+	}
+
+	ret = v4l2_g_ext_ctrls_common(hdl, cs);
+
+	if (obj)
+		media_request_object_put(obj);
 	return ret;
 }
 EXPORT_SYMBOL(v4l2_g_ext_ctrls);
@@ -3185,7 +3437,7 @@ static int validate_ctrls(struct v4l2_ext_controls *cs,
 
 	cs->error_idx = cs->count;
 	for (i = 0; i < cs->count; i++) {
-		struct v4l2_ctrl *ctrl = helpers[i].ctrl;
+		struct v4l2_ctrl *ctrl = helpers[i].ref->ctrl;
 		union v4l2_ctrl_ptr p_new;
 
 		cs->error_idx = i;
@@ -3232,9 +3484,9 @@ static void update_from_auto_cluster(struct v4l2_ctrl *master)
 }
 
 /* Try or try-and-set controls */
-static int try_set_ext_ctrls(struct v4l2_fh *fh, struct v4l2_ctrl_handler *hdl,
-			     struct v4l2_ext_controls *cs,
-			     bool set)
+static int try_set_ext_ctrls_common(struct v4l2_fh *fh,
+				    struct v4l2_ctrl_handler *hdl,
+				    struct v4l2_ext_controls *cs, bool set)
 {
 	struct v4l2_ctrl_helper helper[4];
 	struct v4l2_ctrl_helper *helpers = helper;
@@ -3297,7 +3549,7 @@ static int try_set_ext_ctrls(struct v4l2_fh *fh, struct v4l2_ctrl_handler *hdl,
 			do {
 				/* Check if the auto control is part of the
 				   list, and remember the new value. */
-				if (helpers[tmp_idx].ctrl == master)
+				if (helpers[tmp_idx].ref->ctrl == master)
 					new_auto_val = cs->controls[tmp_idx].value;
 				tmp_idx = helpers[tmp_idx].next;
 			} while (tmp_idx);
@@ -3310,7 +3562,7 @@ static int try_set_ext_ctrls(struct v4l2_fh *fh, struct v4l2_ctrl_handler *hdl,
 		/* Copy the new caller-supplied control values.
 		   user_to_new() sets 'is_new' to 1. */
 		do {
-			struct v4l2_ctrl *ctrl = helpers[idx].ctrl;
+			struct v4l2_ctrl *ctrl = helpers[idx].ref->ctrl;
 
 			ret = user_to_new(cs->controls + idx, ctrl);
 			if (!ret && ctrl->is_ptr)
@@ -3319,14 +3571,23 @@ static int try_set_ext_ctrls(struct v4l2_fh *fh, struct v4l2_ctrl_handler *hdl,
 		} while (!ret && idx);
 
 		if (!ret)
-			ret = try_or_set_cluster(fh, master, set, 0);
+			ret = try_or_set_cluster(fh, master,
+						 !hdl->req_obj.req && set, 0);
+		if (!ret && hdl->req_obj.req && set) {
+			for (j = 0; j < master->ncontrols; j++) {
+				struct v4l2_ctrl_ref *ref =
+					find_ref(hdl, master->cluster[j]->id);
+
+				new_to_req(ref);
+			}
+		}
 
 		/* Copy the new values back to userspace. */
 		if (!ret) {
 			idx = i;
 			do {
 				ret = new_to_user(cs->controls + idx,
-						helpers[idx].ctrl);
+						helpers[idx].ref->ctrl);
 				idx = helpers[idx].next;
 			} while (!ret && idx);
 		}
@@ -3338,16 +3599,60 @@ static int try_set_ext_ctrls(struct v4l2_fh *fh, struct v4l2_ctrl_handler *hdl,
 	return ret;
 }
 
-int v4l2_try_ext_ctrls(struct v4l2_ctrl_handler *hdl, struct v4l2_ext_controls *cs)
+static int try_set_ext_ctrls(struct v4l2_fh *fh,
+			     struct v4l2_ctrl_handler *hdl, struct media_device *mdev,
+			     struct v4l2_ext_controls *cs, bool set)
 {
-	return try_set_ext_ctrls(NULL, hdl, cs, false);
+	struct media_request_object *obj = NULL;
+	struct media_request *req = NULL;
+	int ret;
+
+	if (cs->which == V4L2_CTRL_WHICH_REQUEST_VAL) {
+		if (!mdev || cs->request_fd < 0)
+			return -EINVAL;
+
+		req = media_request_get_by_fd(mdev, cs->request_fd);
+		if (IS_ERR(req))
+			return PTR_ERR(req);
+
+		ret = media_request_lock_for_update(req);
+		if (ret) {
+			media_request_put(req);
+			return ret;
+		}
+
+		obj = v4l2_ctrls_find_req_obj(hdl, req, set);
+		/* Reference to the request held through obj */
+		media_request_put(req);
+		if (IS_ERR(obj)) {
+			media_request_unlock_for_update(req);
+			return PTR_ERR(obj);
+		}
+		hdl = container_of(obj, struct v4l2_ctrl_handler,
+				   req_obj);
+	}
+
+	ret = try_set_ext_ctrls_common(fh, hdl, cs, set);
+
+	if (obj) {
+		media_request_unlock_for_update(obj->req);
+		media_request_object_put(obj);
+	}
+
+	return ret;
+}
+
+int v4l2_try_ext_ctrls(struct v4l2_ctrl_handler *hdl, struct media_device *mdev,
+		       struct v4l2_ext_controls *cs)
+{
+	return try_set_ext_ctrls(NULL, hdl, mdev, cs, false);
 }
 EXPORT_SYMBOL(v4l2_try_ext_ctrls);
 
 int v4l2_s_ext_ctrls(struct v4l2_fh *fh, struct v4l2_ctrl_handler *hdl,
-					struct v4l2_ext_controls *cs)
+		     struct media_device *mdev, struct v4l2_ext_controls *cs)
 {
-	return try_set_ext_ctrls(fh, hdl, cs, true);
+	return try_set_ext_ctrls(fh, hdl, mdev, cs, true);
 }
 EXPORT_SYMBOL(v4l2_s_ext_ctrls);
 
@@ -3445,6 +3750,162 @@ int __v4l2_ctrl_s_ctrl_string(struct v4l2_ctrl *ctrl, const char *s)
 	return set_ctrl(NULL, ctrl, 0);
 }
 EXPORT_SYMBOL(__v4l2_ctrl_s_ctrl_string);
+
+void v4l2_ctrl_request_complete(struct media_request *req,
+				struct v4l2_ctrl_handler *main_hdl)
+{
+	struct media_request_object *obj;
+	struct v4l2_ctrl_handler *hdl;
+	struct v4l2_ctrl_ref *ref;
+
+	if (!req || !main_hdl)
+		return;
+
+	/*
+	 * Note that it is valid if nothing was found. It means
+	 * that this request doesn't have any controls and so just
+	 * wants to leave the controls unchanged.
+	 */
+	obj = media_request_object_find(req, &req_ops, main_hdl);
+	if (!obj)
+		return;
+	hdl = container_of(obj, struct v4l2_ctrl_handler, req_obj);
+
+	list_for_each_entry(ref, &hdl->ctrl_refs, node) {
+		struct v4l2_ctrl *ctrl = ref->ctrl;
+		struct v4l2_ctrl *master = ctrl->cluster[0];
+		unsigned int i;
+
+		if (ctrl->flags & V4L2_CTRL_FLAG_VOLATILE) {
+			ref->req = ref;
+
+			v4l2_ctrl_lock(master);
+			/* g_volatile_ctrl will update the current control values */
+			for (i = 0; i < master->ncontrols; i++)
+				cur_to_new(master->cluster[i]);
+			call_op(master, g_volatile_ctrl);
+			new_to_req(ref);
+			v4l2_ctrl_unlock(master);
+			continue;
+		}
+		if (ref->req == ref)
+			continue;
+
+		v4l2_ctrl_lock(ctrl);
+		if (ref->req)
+			ptr_to_ptr(ctrl, ref->req->p_req, ref->p_req);
+		else
+			ptr_to_ptr(ctrl, ctrl->p_cur, ref->p_req);
+		v4l2_ctrl_unlock(ctrl);
+	}
+
+	WARN_ON(!hdl->request_is_queued);
+	list_del_init(&hdl->requests_queued);
+	hdl->request_is_queued = false;
+	media_request_object_complete(obj);
+	media_request_object_put(obj);
+}
+EXPORT_SYMBOL(v4l2_ctrl_request_complete);
+
+void v4l2_ctrl_request_setup(struct media_request *req,
+			     struct v4l2_ctrl_handler *main_hdl)
+{
+	struct media_request_object *obj;
+	struct v4l2_ctrl_handler *hdl;
+	struct v4l2_ctrl_ref *ref;
+
+	if (!req || !main_hdl)
+		return;
+
+	if (WARN_ON(req->state != MEDIA_REQUEST_STATE_QUEUED))
+		return;
+
+	/*
+	 * Note that it is valid if nothing was found. It means
+	 * that this request doesn't have any controls and so just
+	 * wants to leave the controls unchanged.
+	 */
+	obj = media_request_object_find(req, &req_ops, main_hdl);
+	if (!obj)
+		return;
+	if (obj->completed) {
+		media_request_object_put(obj);
+		return;
+	}
+	hdl = container_of(obj, struct v4l2_ctrl_handler, req_obj);
+
+	list_for_each_entry(ref, &hdl->ctrl_refs, node)
+		ref->req_done = false;
+
+	list_for_each_entry(ref, &hdl->ctrl_refs, node) {
+		struct v4l2_ctrl *ctrl = ref->ctrl;
+		struct v4l2_ctrl *master = ctrl->cluster[0];
+		bool have_new_data = false;
+		int i;
+
+		/*
+		 * Skip if this control was already handled by a cluster.
+		 * Skip button controls and read-only controls.
+		 */
+		if (ref->req_done || ctrl->type == V4L2_CTRL_TYPE_BUTTON ||
+		    (ctrl->flags & V4L2_CTRL_FLAG_READ_ONLY))
+			continue;
+
+		v4l2_ctrl_lock(master);
+		for (i = 0; i < master->ncontrols; i++) {
+			if (master->cluster[i]) {
+				struct v4l2_ctrl_ref *r =
+					find_ref(hdl, master->cluster[i]->id);
+
+				if (r->req && r == r->req) {
+					have_new_data = true;
+					break;
+				}
+			}
+		}
+		if (!have_new_data) {
+			v4l2_ctrl_unlock(master);
+			continue;
+		}
+
+		for (i = 0; i < master->ncontrols; i++) {
+			if (master->cluster[i]) {
+				struct v4l2_ctrl_ref *r =
+					find_ref(hdl, master->cluster[i]->id);
+
+				req_to_new(r);
+				master->cluster[i]->is_new = 1;
+				r->req_done = true;
+			}
+		}
+		/*
+		 * For volatile autoclusters that are currently in auto mode
+		 * we need to discover if it will be set to manual mode.
+		 * If so, then we have to copy the current volatile values
+		 * first since those will become the new manual values (which
+		 * may be overwritten by explicit new values from this set
+		 * of controls).
+		 */
+		if (master->is_auto && master->has_volatiles &&
+		    !is_cur_manual(master)) {
+			s32 new_auto_val = *master->p_new.p_s32;
+
+			/*
+			 * If the new value == the manual value, then copy
+			 * the current volatile values.
+			 */
+			if (new_auto_val == master->manual_mode_value)
+				update_from_auto_cluster(master);
+		}
+
+		try_or_set_cluster(NULL, master, true, 0);
+
+		v4l2_ctrl_unlock(master);
+	}
+
+	media_request_object_put(obj);
+}
+EXPORT_SYMBOL(v4l2_ctrl_request_setup);
 
 void v4l2_ctrl_notify(struct v4l2_ctrl *ctrl, v4l2_ctrl_notify_fnc notify, void *priv)
 {

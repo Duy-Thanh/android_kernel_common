@@ -480,7 +480,7 @@ static int rvin_parallel_subdevice_attach(struct rvin_dev *vin,
 		return ret;
 
 	ret = v4l2_ctrl_add_handler(&vin->ctrl_handler, subdev->ctrl_handler,
-				    NULL);
+				    NULL, true);
 	if (ret < 0) {
 		v4l2_ctrl_handler_free(&vin->ctrl_handler);
 		return ret;
@@ -614,6 +614,8 @@ static int rvin_parallel_parse_v4l2(struct device *dev,
 static int rvin_parallel_init(struct rvin_dev *vin)
 {
 	int ret;
+
+	v4l2_async_notifier_init(&vin->notifier);
 
 	ret = v4l2_async_notifier_parse_fwnode_endpoints_by_port(
 		vin->dev, &vin->notifier, sizeof(struct rvin_parallel_entity),
@@ -807,6 +809,8 @@ static int rvin_mc_parse_of_graph(struct rvin_dev *vin)
 		return 0;
 	}
 
+	v4l2_async_notifier_init(&vin->group->notifier);
+
 	/*
 	 * Have all VIN's look for CSI-2 subdevices. Some subdevices will
 	 * overlap but the parser function can handle it, so each subdevice
@@ -828,7 +832,7 @@ static int rvin_mc_parse_of_graph(struct rvin_dev *vin)
 
 	mutex_unlock(&vin->group->lock);
 
-	if (!vin->group->notifier.num_subdevs)
+	if (list_empty(&vin->group->notifier.asd_list))
 		return 0;
 
 	vin->group->notifier.ops = &rvin_group_notify_ops;
