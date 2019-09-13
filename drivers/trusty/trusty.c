@@ -253,12 +253,29 @@ s32 trusty_std_call32(struct device *dev, u32 smcnr, u32 a0, u32 a1, u32 a2)
 }
 EXPORT_SYMBOL(trusty_std_call32);
 
+#define TEST_SPLIT_MESSAGE 1
+
 int trusty_share_memory(struct device *dev, uint64_t *id, phys_addr_t *paddrs,
 			size_t entry_size, size_t count,
 			uint32_t flags)
 {
 	struct trusty_state *s = platform_get_drvdata(to_platform_device(dev));
 	int ret;
+
+#if TEST_SPLIT_MESSAGE
+	phys_addr_t paddr_array[4];
+	if (count == 1 && entry_size > PAGE_SIZE && entry_size <= PAGE_SIZE * ARRAY_SIZE(paddr_array)) {
+		int i;
+		count = entry_size / PAGE_SIZE;
+		dev_info(s->dev, "convert %zd*1 0x%llx -> %zd*%zd\n", entry_size, *paddrs, PAGE_SIZE, count);
+		for (i = 0; i < count; i++) {
+			paddr_array[i] = *paddrs + i * PAGE_SIZE;
+			dev_info(s->dev, "  paddr[%d] = 0x%llx\n", i, paddr_array[i]);
+		}
+		paddrs = paddr_array;
+		entry_size = PAGE_SIZE;
+	}
+#endif
 
 	dev_dbg(s->dev, "%s\n", __func__);
 
@@ -287,6 +304,9 @@ int trusty_share_memory(struct device *dev, uint64_t *id, phys_addr_t *paddrs,
 	while (count) {
 		size_t i;
 		size_t lcount = min(count, MAX_PAGE_COUNT);
+#if TEST_SPLIT_MESSAGE
+		lcount = 1;
+#endif
 		s->share_memory_msg->page_count = lcount;
 		for (i = 0; i < lcount; i++) {
 			s->share_memory_msg->page_addr[i] = *paddrs++;
