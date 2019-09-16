@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c395301d_5dbcd5ea",
+        "filename": "drivers/staging/android/lowmemorykiller.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2019-09-16T16:25:21Z",
+      "side": 1,
+      "message": "You don\u0027t need this anymore.",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 22
+      },
+      "revId": "92046c70b6303770d858a692a4534a7b2581faa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
