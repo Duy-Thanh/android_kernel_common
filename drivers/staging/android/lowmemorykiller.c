@@ -78,10 +78,8 @@ static DECLARE_WAIT_QUEUE_HEAD(event_wait);
 static DEFINE_SPINLOCK(lmk_event_lock);
 static struct circ_buf event_buffer;
 #define MAX_BUFFERED_EVENTS 8
-#define MAX_TASKNAME 128
 
 struct lmk_event {
-	char taskname[MAX_TASKNAME];
 	pid_t pid;
 	uid_t uid;
 	pid_t group_leader_pid;
@@ -101,19 +99,6 @@ void handle_lmk_event(struct task_struct *selected, int selected_tasksize,
 	int tail;
 	struct lmk_event *events;
 	struct lmk_event *event;
-	int res;
-	char taskname[MAX_TASKNAME];
-
-	res = get_cmdline(selected, taskname, MAX_TASKNAME - 1);
-
-	/* No valid process name means this is definitely not associated with a
-	 * userspace activity.
-	 */
-
-	if (res <= 0 || res >= MAX_TASKNAME)
-		return;
-
-	taskname[res] = '\0';
 
 	spin_lock(&lmk_event_lock);
 
@@ -128,8 +113,6 @@ void handle_lmk_event(struct task_struct *selected, int selected_tasksize,
 
 	events = (struct lmk_event *) event_buffer.buf;
 	event = &events[head];
-
-	memcpy(event->taskname, taskname, res + 1);
 
 	event->pid = selected->pid;
 	event->uid = from_kuid_munged(current_user_ns(), task_uid(selected));
@@ -170,11 +153,11 @@ static int lmk_event_show(struct seq_file *s, void *unused)
 
 	event = &events[tail];
 
-	seq_printf(s, "%lu %lu %lu %lu %lu %lu %hd %hd %llu\n%s\n",
+	seq_printf(s, "%lu %lu %lu %lu %lu %lu %hd %hd %llu\n",
 		(unsigned long) event->pid, (unsigned long) event->uid,
 		(unsigned long) event->group_leader_pid, event->min_flt,
 		event->maj_flt, event->rss_in_pages, event->oom_score_adj,
-		event->min_score_adj, event->start_time, event->taskname);
+		event->min_score_adj, event->start_time);
 
 	event_buffer.tail = (tail + 1) & (MAX_BUFFERED_EVENTS - 1);
 
