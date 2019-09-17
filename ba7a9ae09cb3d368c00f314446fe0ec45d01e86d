@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "eda52089_9a09c8fe",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-09-17T23:35:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c600cae_bce67eea",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 24
+      },
+      "revId": "ba7a9ae09cb3d368c00f314446fe0ec45d01e86d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "272c2e3f_855bc8e3",
         "filename": "init/Kconfig.gki",
         "patchSetId": 2
@@ -72,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "06b1e199_650a49db",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-09-17T23:35:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b03902f1_0e20312c",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 18
+      },
+      "revId": "ba7a9ae09cb3d368c00f314446fe0ec45d01e86d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b386e813_53644c2b",
         "filename": "init/Kconfig.gki",
         "patchSetId": 2
@@ -116,6 +164,30 @@
       "revId": "ba7a9ae09cb3d368c00f314446fe0ec45d01e86d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb3c61ae_bfba21ad",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-09-17T23:35:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0baa35d9_ff7d717d",
+      "range": {
+        "startLine": 21,
+        "startChar": 11,
+        "endLine": 21,
+        "endChar": 12
+      },
+      "revId": "ba7a9ae09cb3d368c00f314446fe0ec45d01e86d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -214,6 +286,30 @@
     },
     {
       "key": {
+        "uuid": "1f480b70_b9620da0",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-09-17T23:35:53Z",
+      "side": 1,
+      "message": "SND_SOC_GENERIC_DMAENGINE_PCM is not modular so this is a good place to enable it so we can go back and modularize it later.",
+      "parentUuid": "62df065d_e6a08b42",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 37
+      },
+      "revId": "ba7a9ae09cb3d368c00f314446fe0ec45d01e86d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b95cd33_df3140b3",
         "filename": "init/Kconfig.gki",
         "patchSetId": 2
@@ -306,6 +402,30 @@
       "revId": "ba7a9ae09cb3d368c00f314446fe0ec45d01e86d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8117926a_fb8f7acd",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-09-17T23:35:53Z",
+      "side": 1,
+      "message": "Moved to gki_defconfig",
+      "parentUuid": "c3480a6f_a89313ef",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 22
+      },
+      "revId": "ba7a9ae09cb3d368c00f314446fe0ec45d01e86d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
