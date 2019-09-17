@@ -25,6 +25,14 @@ config GKI_HIDDEN_SND_SOC_CONFIGS
 	  These are normally selected implicitely when a module
 	  that relies on it is configured.
 
+config GKI_ENABLE_HISI
+	bool "configs needed to enable HiSilicon SoCs for GKI"
+	select ARCH_HISI
+	select POWER_RESET_HISI
+	select PCIE_KIRIN
+	help
+	  Dummy config option used to enable HiSilicon SoC configs.
+
 # Atrocities needed for
 # a) building GKI modules in separate tree, or
 # b) building drivers that are not modularizable
@@ -37,6 +45,7 @@ config GKI_HACKS_TO_FIX
 	select GKI_HIDDEN_DRM_CONFIGS
 	select GKI_HIDDEN_REGMAP_CONFIGS
 	select GKI_HIDDEN_SND_SOC_CONFIGS
+	select GKI_ENABLE_HISI
 	help
 	  Dummy config option used to enable core functionality used by
 	  modules that may not be selectable in this config.
