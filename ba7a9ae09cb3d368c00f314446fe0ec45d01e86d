@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "62df065d_e6a08b42",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2019-09-17T21:14:45Z",
+      "side": 1,
+      "message": "Given that we don\u0027t have a good way to prevent overriding GKI modules yet, I think we should leave as much functionality built in as possible, unless it\u0027s something that is large and not used by most platforms.",
+      "parentUuid": "43dac55e_751466b8",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 37
+      },
+      "revId": "ba7a9ae09cb3d368c00f314446fe0ec45d01e86d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0b95cd33_df3140b3",
         "filename": "init/Kconfig.gki",
         "patchSetId": 2
@@ -225,6 +249,30 @@
       "side": 1,
       "message": "It\u0027s here because it selects several hidden options. Next rev, will remove all the modules, but keep the hidden selections made by those modules.",
       "parentUuid": "0b95cd33_df3140b3",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 22
+      },
+      "revId": "ba7a9ae09cb3d368c00f314446fe0ec45d01e86d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ddded9b8_1175f5f1",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2019-09-17T21:14:45Z",
+      "side": 1,
+      "message": "SERIAL_DEV_BUS looks like something that would be used by pretty much all platforms? In that case I\u0027d think it should be left built in.",
+      "parentUuid": "6a195025_69e7be38",
       "range": {
         "startLine": 27,
         "startChar": 0,
