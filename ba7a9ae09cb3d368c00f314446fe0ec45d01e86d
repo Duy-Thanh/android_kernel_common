@@ -282,6 +282,30 @@
       "revId": "ba7a9ae09cb3d368c00f314446fe0ec45d01e86d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3480a6f_a89313ef",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-09-17T21:22:32Z",
+      "side": 1,
+      "message": "If we are including it because everyone needs it, then SERIAL_DEV_BUS should go directly into gki_defconfig instead of here.",
+      "parentUuid": "ddded9b8_1175f5f1",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 22
+      },
+      "revId": "ba7a9ae09cb3d368c00f314446fe0ec45d01e86d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
