@@ -1,4 +1,8 @@
+<<<<<<< HEAD   (8b2a1e ANDROID: gki_defconfig: CONFIG_MMC_BLOCK=m)
 CONFIG_LOCALVERSION="-mainline"
+=======
+# CONFIG_USELIB is not set
+>>>>>>> CHANGE (ba808f ANDROID: Remove CONFIG_USELIB from x86 gki config)
 CONFIG_AUDIT=y
 CONFIG_NO_HZ=y
 CONFIG_HIGH_RES_TIMERS=y
