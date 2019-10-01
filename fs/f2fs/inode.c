@@ -73,7 +73,11 @@ static int __written_first_block(struct f2fs_sb_info *sbi,
 
 	if (!__is_valid_data_blkaddr(addr))
 		return 1;
+<<<<<<< HEAD   (a0aef7 UPSTREAM: mm/kasan: fix false positive invalid-free reports )
 	if (!f2fs_is_valid_blkaddr(sbi, addr, DATA_GENERIC_ENHANCE))
+=======
+	if (!f2fs_is_valid_blkaddr(sbi, addr, DATA_GENERIC))
+>>>>>>> BRANCH (555161 Linux 4.19.76)
 		return -EFSCORRUPTED;
 	return 0;
 }

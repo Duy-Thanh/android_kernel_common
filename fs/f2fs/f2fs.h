@@ -3708,6 +3708,7 @@ static inline bool is_journalled_quota(struct f2fs_sb_info *sbi)
 		F2FS_OPTION(sbi).s_qf_names[PRJQUOTA])
 		return true;
 #endif
+<<<<<<< HEAD   (a0aef7 UPSTREAM: mm/kasan: fix false positive invalid-free reports )
 	return false;
 }
 
@@ -3715,3 +3716,9 @@ static inline bool is_journalled_quota(struct f2fs_sb_info *sbi)
 #define EFSCORRUPTED	EUCLEAN		/* Filesystem is corrupted */
 
 #endif /* _LINUX_F2FS_H */
+=======
+
+#define EFSBADCRC	EBADMSG		/* Bad CRC detected */
+#define EFSCORRUPTED	EUCLEAN		/* Filesystem is corrupted */
+
+>>>>>>> BRANCH (555161 Linux 4.19.76)

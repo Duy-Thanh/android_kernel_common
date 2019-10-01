@@ -677,7 +677,11 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
 		goto put_page;
 	}
 	if (unlikely(!f2fs_is_valid_blkaddr(sbi, dn.data_blkaddr,
+<<<<<<< HEAD   (a0aef7 UPSTREAM: mm/kasan: fix false positive invalid-free reports )
 						DATA_GENERIC_ENHANCE))) {
+=======
+						DATA_GENERIC))) {
+>>>>>>> BRANCH (555161 Linux 4.19.76)
 		err = -EFSCORRUPTED;
 		goto put_page;
 	}

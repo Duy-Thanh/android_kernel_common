@@ -346,9 +346,12 @@ static int lookup_all_xattrs(struct inode *inode, struct page *ipage,
 
 	*xe = __find_xattr(cur_addr, last_txattr_addr, index, len, name);
 	if (!*xe) {
+<<<<<<< HEAD   (a0aef7 UPSTREAM: mm/kasan: fix false positive invalid-free reports )
 		f2fs_err(F2FS_I_SB(inode), "inode (%lu) has corrupted xattr",
 								inode->i_ino);
 		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
+=======
+>>>>>>> BRANCH (555161 Linux 4.19.76)
 		err = -EFSCORRUPTED;
 		goto out;
 	}
@@ -625,9 +628,12 @@ static int __f2fs_setxattr(struct inode *inode, int index,
 	/* find entry with wanted name. */
 	here = __find_xattr(base_addr, last_base_addr, index, len, name);
 	if (!here) {
+<<<<<<< HEAD   (a0aef7 UPSTREAM: mm/kasan: fix false positive invalid-free reports )
 		f2fs_err(F2FS_I_SB(inode), "inode (%lu) has corrupted xattr",
 								inode->i_ino);
 		set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
+=======
+>>>>>>> BRANCH (555161 Linux 4.19.76)
 		error = -EFSCORRUPTED;
 		goto exit;
 	}

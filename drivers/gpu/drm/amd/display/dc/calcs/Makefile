@@ -32,10 +32,15 @@ endif
 
 calcs_ccflags := -mhard-float -msse $(cc_stack_align)
 
+<<<<<<< HEAD   (a0aef7 UPSTREAM: mm/kasan: fix false positive invalid-free reports )
 # Use -msse2 only with clang:
 #   https://bugs.freedesktop.org/show_bug.cgi?id=109487
 ifdef CONFIG_CC_IS_CLANG
 calcs_cc_flags += -msse2
+=======
+ifdef CONFIG_CC_IS_CLANG
+calcs_ccflags += -msse2
+>>>>>>> BRANCH (555161 Linux 4.19.76)
 endif
 
 CFLAGS_dcn_calcs.o := $(calcs_ccflags)

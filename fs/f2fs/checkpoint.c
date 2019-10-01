@@ -965,7 +965,11 @@ free_fail_no_cp:
 	f2fs_put_page(cp1, 1);
 	f2fs_put_page(cp2, 1);
 fail_no_cp:
+<<<<<<< HEAD   (a0aef7 UPSTREAM: mm/kasan: fix false positive invalid-free reports )
 	kvfree(sbi->ckpt);
+=======
+	kfree(sbi->ckpt);
+>>>>>>> BRANCH (555161 Linux 4.19.76)
 	return err;
 }
 
