@@ -18,14 +18,9 @@
 #include <net/rtnetlink.h>
 #include <linux/etherdevice.h>
 #include <linux/module.h>
+#include "virt_wifi.h"
 
 static struct wiphy *common_wiphy;
-
-struct virt_wifi_wiphy_priv {
-	struct delayed_work scan_result;
-	struct cfg80211_scan_request *scan_request;
-	bool being_deleted;
-};
 
 static struct ieee80211_channel channel_2ghz = {
 	.band = NL80211_BAND_2GHZ,
@@ -153,6 +148,9 @@ static int virt_wifi_scan(struct wiphy *wiphy,
 
 	priv->scan_request = request;
 	schedule_delayed_work(&priv->scan_result, HZ * 2);
+	struct virt_wifi_wiphy_priv *c_priv = wiphy_priv(common_wiphy);
+	if (c_priv->notify_scan_trigger != NULL)
+		c_priv->notify_scan_trigger();
 
 	return 0;
 }
@@ -160,6 +158,17 @@ static int virt_wifi_scan(struct wiphy *wiphy,
 /* Acquires and releases the rdev BSS lock. */
 static void virt_wifi_scan_result(struct work_struct *work)
 {
+	struct virt_wifi_wiphy_priv *priv =
+		container_of(work, struct virt_wifi_wiphy_priv,
+			     scan_result.work);
+	struct wiphy *wiphy = priv_to_wiphy(priv);
+	struct cfg80211_scan_info scan_info = { .aborted = false };
+	struct virt_wifi_wiphy_priv *c_priv = wiphy_priv(common_wiphy);
+	if(c_priv->generate_virt_scan_result != NULL) {
+		c_priv->generate_virt_scan_result(wiphy);
+		goto finish;
+	}
+
 	struct {
 		u8 tag;
 		u8 len;
@@ -168,12 +177,6 @@ static void virt_wifi_scan_result(struct work_struct *work)
 		.tag = WLAN_EID_SSID, .len = 8, .ssid = "VirtWifi",
 	};
 	struct cfg80211_bss *informed_bss;
-	struct virt_wifi_wiphy_priv *priv =
-		container_of(work, struct virt_wifi_wiphy_priv,
-			     scan_result.work);
-	struct wiphy *wiphy = priv_to_wiphy(priv);
-	struct cfg80211_scan_info scan_info = { .aborted = false };
-
 	informed_bss = cfg80211_inform_bss(wiphy, &channel_5ghz,
 					   CFG80211_BSS_FTYPE_PRESP,
 					   fake_router_bssid,
@@ -182,7 +185,7 @@ static void virt_wifi_scan_result(struct work_struct *work)
 					   (void *)&ssid, sizeof(ssid),
 					   DBM_TO_MBM(-50), GFP_KERNEL);
 	cfg80211_put_bss(wiphy, informed_bss);
-
+finish:
 	/* Schedules work which acquires and releases the rtnl lock. */
 	cfg80211_scan_done(priv->scan_request, &scan_info);
 	priv->scan_request = NULL;
@@ -370,6 +373,11 @@ static struct wiphy *virt_wifi_make_wiphy(void)
 	priv = wiphy_priv(wiphy);
 	priv->being_deleted = false;
 	priv->scan_request = NULL;
+	priv->notify_device_open = NULL;
+	priv->notify_device_stop = NULL;
+	priv->notify_scan_trigger = NULL;
+	priv->generate_virt_scan_result = NULL;
+
 	INIT_DELAYED_WORK(&priv->scan_result, virt_wifi_scan_result);
 
 	err = wiphy_register(wiphy);
@@ -385,7 +393,6 @@ static struct wiphy *virt_wifi_make_wiphy(void)
 static void virt_wifi_destroy_wiphy(struct wiphy *wiphy)
 {
 	struct virt_wifi_wiphy_priv *priv;
-
 	WARN(!wiphy, "%s called with null wiphy", __func__);
 	if (!wiphy)
 		return;
@@ -397,6 +404,9 @@ static void virt_wifi_destroy_wiphy(struct wiphy *wiphy)
 	if (wiphy->registered)
 		wiphy_unregister(wiphy);
 	wiphy_free(wiphy);
+	struct virt_wifi_wiphy_priv *c_priv = wiphy_priv(common_wiphy);
+	if (c_priv->notify_device_stop != NULL)
+		c_priv->notify_device_stop();
 }
 
 /* Enters and exits a RCU-bh critical section. */
@@ -419,8 +429,11 @@ static netdev_tx_t virt_wifi_start_xmit(struct sk_buff *skb,
 static int virt_wifi_net_device_open(struct net_device *dev)
 {
 	struct virt_wifi_netdev_priv *priv = netdev_priv(dev);
-
+	struct virt_wifi_wiphy_priv *c_priv = wiphy_priv(common_wiphy);
 	priv->is_up = true;
+	if(c_priv->notify_device_open != NULL)
+		c_priv->notify_device_open();
+
 	return 0;
 }
 
@@ -623,6 +636,19 @@ static void __exit virt_wifi_cleanup_module(void)
 	rtnl_link_unregister(&virt_wifi_link_ops);
 	virt_wifi_destroy_wiphy(common_wiphy);
 }
+
+int register_data_simulation(struct virt_wifi_wiphy_priv *data_ops)
+{
+	struct virt_wifi_wiphy_priv *priv = wiphy_priv(common_wiphy);
+
+	priv->notify_device_open = data_ops->notify_device_open;
+	priv->notify_device_stop = data_ops->notify_device_stop;
+	priv->notify_scan_trigger = data_ops->notify_scan_trigger;
+	priv->generate_virt_scan_result = data_ops->generate_virt_scan_result;
+
+	return 0;
+}
+EXPORT_SYMBOL(register_data_simulation);
 
 module_init(virt_wifi_init_module);
 module_exit(virt_wifi_cleanup_module);
