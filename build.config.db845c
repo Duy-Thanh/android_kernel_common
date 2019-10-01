@@ -1,0 +1,9 @@
+. ${ROOT_DIR}/common/build.config.common
+. ${ROOT_DIR}/common/build.config.aarch64
+
+DEFCONFIG=db845c_gki_defconfig
+
+FILES="
+arch/arm64/boot/Image.gz
+arch/arm64/boot/dts/qcom/sdm845-db845c.dtb
+"
