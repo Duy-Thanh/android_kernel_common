@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9e4729b_454132ec",
+        "filename": "include/uapi/linux/ion.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-10-03T19:18:30Z",
+      "side": 1,
+      "message": "As I mentioned in the userspace review, I don\u0027t think a variable that changes between ABI revisions should be in the uapi. The uapi is supposed to be stable, except for additions.",
+      "revId": "6b43efd8952ecb1091ace25387e5668d6785b33e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
