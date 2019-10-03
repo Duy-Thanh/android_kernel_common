@@ -1,0 +1,2 @@
+obj-m := virt_wifi_ext.o
+virt_wifi_ext-y := virt_wifi_ext.o ../../drivers/net/wireless/virt_wifi.o

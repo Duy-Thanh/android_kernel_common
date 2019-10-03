@@ -19,6 +19,8 @@
 #include <linux/etherdevice.h>
 #include <linux/module.h>
 
+void virt_wifi_extension_function(struct wiphy*);
+
 static struct wiphy *common_wiphy;
 
 struct virt_wifi_wiphy_priv {
@@ -182,6 +184,8 @@ static void virt_wifi_scan_result(struct work_struct *work)
 					   (void *)&ssid, sizeof(ssid),
 					   DBM_TO_MBM(-50), GFP_KERNEL);
 	cfg80211_put_bss(wiphy, informed_bss);
+
+  virt_wifi_extension_function(wiphy);
 
 	/* Schedules work which acquires and releases the rtnl lock. */
 	cfg80211_scan_done(priv->scan_request, &scan_info);
