@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ef16ecc4_b80d264f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-10-04T08:31:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "293e4298_eb20e78b",
+      "range": {
+        "startLine": 17,
+        "startChar": 52,
+        "endLine": 17,
+        "endChar": 58
+      },
+      "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6ade8e5_37cb6fd6",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "0ef55c8d_57e85100",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-10-04T08:31:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e6ade8e5_37cb6fd6",
+      "range": {
+        "startLine": 19,
+        "startChar": 56,
+        "endLine": 19,
+        "endChar": 58
+      },
+      "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d2aa1ae2_4b189975",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2019-10-03T23:08:52Z",
       "side": 1,
       "message": "You used uclamp.min 4 times and each time by a different name: uclamp min, uclamp_min, uclamp-min and min_clamp. Please choose one (maybe uclamp.min as in the implementation)?",
+      "range": {
+        "startLine": 37,
+        "startChar": 19,
+        "endLine": 37,
+        "endChar": 28
+      },
+      "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc3fdb7c_33aeaa24",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-10-04T08:31:45Z",
+      "side": 1,
+      "message": "Right, a little bit of consistency wouldn\u0027t hurt :)",
+      "parentUuid": "d2aa1ae2_4b189975",
       "range": {
         "startLine": 37,
         "startChar": 19,
