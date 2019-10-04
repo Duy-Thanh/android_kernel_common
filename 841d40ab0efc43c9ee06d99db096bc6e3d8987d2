@@ -214,6 +214,24 @@
       "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66e89c23_66213792",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-10-04T09:41:34Z",
+      "side": 1,
+      "message": "Yep, sounds like a good description of what this tries to achieve :)\n\nAn alternative solution would be, select an idle CPU candidate in each pd where the task fits and use the EM to decide which is best. That\u0027d be more generic that trying to find the smallest possible idle CPU, but we need profiling on real HW to make sure we could afford the overhead of the energy diff.",
+      "parentUuid": "def3c83d_c180b088",
+      "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
