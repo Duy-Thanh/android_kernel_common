@@ -96,6 +96,63 @@
     },
     {
       "key": {
+        "uuid": "d7fbc95e_83bf25ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1201522
+      },
+      "writtenOn": "2019-10-04T08:40:15Z",
+      "side": 1,
+      "message": "You could mention that boosted and non-boosted task are now following the same code path, i.e. no need for local boosted car any more.",
+      "range": {
+        "startLine": 22,
+        "startChar": 9,
+        "endLine": 22,
+        "endChar": 10
+      },
+      "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c625d05c_dc9ba72f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1201522
+      },
+      "writtenOn": "2019-10-04T08:40:15Z",
+      "side": 1,
+      "message": "I think that\u0027s a small price to pay to get bL and tri-gear aligned.\nSo task placement is controlled solely by uclamp values (besides the natural utilization of a task) and not by boosted any more.",
+      "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a2a3674_079123e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1201522
+      },
+      "writtenOn": "2019-10-04T08:40:15Z",
+      "side": 1,
+      "message": "Sounds sane to me. The system integrator has to honour little and medium orig cap on tri-gear like he has to honour little orig cap on bL. (Another source of setup input is probably the #cpus in these groups of CPUs (4l, 3m, 1b) but I assume that this is less visible and there will be less variety for now.)",
+      "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d2aa1ae2_4b189975",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -137,6 +194,23 @@
         "endLine": 37,
         "endChar": 28
       },
+      "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "def3c83d_c180b088",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1201522
+      },
+      "writtenOn": "2019-10-04T08:40:15Z",
+      "side": 1,
+      "message": "For me this is the overall policy which makes bL (dual-gear) and tri-gear specific incarnations of n-gear:\n\n(1) Use an available CPU in the requested (by util \u0026 u_clamp) \n    gear. (meet (QoS) request)\n(2) If there is no CPU in the requested gear try to go up one gear\n    step by step. (Over-provisioning (meet (QoS) request))\n(3) If there is no CPU in the upper gears, use the highest   \n    available gear. (Under-provisioning (Best Effort))\n(4) Use given fallback CPU (Emergency exit (Best Effort))",
       "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
