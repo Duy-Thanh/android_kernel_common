@@ -17,7 +17,6 @@ struct device;
  */
 struct vmem_altmap {
 	const unsigned long base_pfn;
-	const unsigned long end_pfn;
 	const unsigned long reserve;
 	unsigned long free;
 	unsigned long align;

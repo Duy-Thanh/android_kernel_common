@@ -1,11 +1,10 @@
-/* SPDX-License-Identifier: GPL-2.0 */
+// SPDX-License-Identifier: GPL-2.0
 #define _GNU_SOURCE
 #include <linux/membarrier.h>
 #include <syscall.h>
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
-#include <pthread.h>
 
 #include "../kselftest.h"
 
@@ -224,7 +223,7 @@ static int test_membarrier_global_expedited_success(void)
 	return 0;
 }
 
-static int test_membarrier_fail(void)
+static int test_membarrier(void)
 {
 	int status;
 
@@ -234,27 +233,10 @@ static int test_membarrier_fail(void)
 	status = test_membarrier_flags_fail();
 	if (status)
 		return status;
-	status = test_membarrier_private_expedited_fail();
+	status = test_membarrier_global_success();
 	if (status)
 		return status;
-	status = sys_membarrier(MEMBARRIER_CMD_QUERY, 0);
-	if (status < 0) {
-		ksft_test_result_fail("sys_membarrier() failed\n");
-		return status;
-	}
-	if (status & MEMBARRIER_CMD_PRIVATE_EXPEDITED_SYNC_CORE) {
-		status = test_membarrier_private_expedited_sync_core_fail();
-		if (status)
-			return status;
-	}
-	return 0;
-}
-
-static int test_membarrier_success(void)
-{
-	int status;
-
-	status = test_membarrier_global_success();
+	status = test_membarrier_private_expedited_fail();
 	if (status)
 		return status;
 	status = test_membarrier_register_private_expedited_success();
@@ -269,6 +251,9 @@ static int test_membarrier_success(void)
 		return status;
 	}
 	if (status & MEMBARRIER_CMD_PRIVATE_EXPEDITED_SYNC_CORE) {
+		status = test_membarrier_private_expedited_sync_core_fail();
+		if (status)
+			return status;
 		status = test_membarrier_register_private_expedited_sync_core_success();
 		if (status)
 			return status;
@@ -314,4 +299,15 @@ static int test_membarrier_query(void)
 
 	ksft_test_result_pass("sys_membarrier available\n");
 	return 0;
+}
+
+int main(int argc, char **argv)
+{
+	ksft_print_header();
+	ksft_set_plan(13);
+
+	test_membarrier_query();
+	test_membarrier();
+
+	return ksft_exit_pass();
 }

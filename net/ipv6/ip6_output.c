@@ -193,7 +193,7 @@ bool ip6_autoflowlabel(struct net *net, const struct ipv6_pinfo *np)
  * which are using proper atomic operations or spinlocks.
  */
 int ip6_xmit(const struct sock *sk, struct sk_buff *skb, struct flowi6 *fl6,
-	     __u32 mark, struct ipv6_txoptions *opt, int tclass, u32 priority)
+	     __u32 mark, struct ipv6_txoptions *opt, int tclass)
 {
 	struct net *net = sock_net(sk);
 	const struct ipv6_pinfo *np = inet6_sk(sk);
@@ -258,7 +258,7 @@ int ip6_xmit(const struct sock *sk, struct sk_buff *skb, struct flowi6 *fl6,
 	hdr->daddr = *first_hop;
 
 	skb->protocol = htons(ETH_P_IPV6);
-	skb->priority = priority;
+	skb->priority = sk->sk_priority;
 	skb->mark = mark;
 
 	mtu = dst_mtu(dst);
