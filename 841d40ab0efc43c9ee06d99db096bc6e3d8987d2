@@ -232,6 +232,24 @@
       "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "145f7f26_c48d7920",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1201522
+      },
+      "writtenOn": "2019-10-04T09:55:46Z",
+      "side": 1,
+      "message": "With PD \u003d\u003d Gear.\n\nThat would be smarter than required.\n\nA system integrator says task T has u_clamp UC_t.\n\nWhat positive outcome would you expect from this?\n\nThe EM knows that it can run T (with UC_t) more efficient on PD_x+1 (freq_x+1_y) than on PD_x (freq_x_i)?\n\nThis wouldn\u0027t work on today\u0027s tri-gear in which Big is Medium with a higher freq range but could work in general.\n\nWe should try to formalize a rule here which is broad enough for all cases but still reflects reality.\n\nIf we can achieve to map this rule into code then I would say tri-gear mission accomplished.",
+      "parentUuid": "66e89c23_66213792",
+      "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
