@@ -250,6 +250,24 @@
       "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e6434e1_f55eab8c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-10-04T10:11:37Z",
+      "side": 1,
+      "message": "\u003e With PD \u003d\u003d Gear.\n\nRight.\n\n\u003e That would be smarter than required.\n\u003e \n\u003e A system integrator says task T has u_clamp UC_t.\n\u003e \n\u003e What positive outcome would you expect from this?\n\u003e \n\u003e The EM knows that it can run T (with UC_t) more efficient on PD_x+1 (freq_x+1_y) than on PD_x (freq_x_i)?\n\nYep, for example. This can be true for a number of reasons. For instance, say you already have a bunch of tasks running on PD_x, if placing T there involves to raise the frequency of the whole PD, you might prefer to place the task on PD_x+1 if it has no tasks. Depending on the EM, of course.\n\n\u003e This wouldn\u0027t work on today\u0027s tri-gear in which Big is Medium with a higher freq range but could work in general.\n\nWhy would it not work on today\u0027s tri gear ? We know that going for the smaller CPUs isn\u0027t always the best choice energy-wise. That\u0027s actually why we have an EM to being with :)\n\nThe main issue I\u0027d see with this approach is the potential scheduling overhead, so this definitely wants more work/testing before we can seriously consider it.",
+      "parentUuid": "145f7f26_c48d7920",
+      "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
