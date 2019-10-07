@@ -268,6 +268,24 @@
       "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d42bfdd7_383e9376",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1201522
+      },
+      "writtenOn": "2019-10-07T07:51:36Z",
+      "side": 1,
+      "message": "Agreed that the fact that since we want to keep lat_sens fast, the EM could be a no-go.\n\nBut again back to the question whether the EM would make sense here. Let\u0027s take an example.\n\nA 4/3/1 CPU with CPU capacity orig 512/768/1024\n\nUse case has 4 60% (uclamp_min value) tasks.\n\nIn case the medium gear has 3 of them, it\u0027s wise to use the big CPU for the the 4th task.\n\nSince we have to respect overutilization (80% of CPU orig capacity) and that the EM spreads within a PD, I can\u0027t see what the EM can do better in this situation.\n\nMaybe in a situation in which little tasks are migrating to higher gears due to the fact that the fitting gear is already fully used?",
+      "parentUuid": "2e6434e1_f55eab8c",
+      "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
