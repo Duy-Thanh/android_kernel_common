@@ -286,6 +286,24 @@
       "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cba0211c_142d3d8f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-10-07T08:58:27Z",
+      "side": 1,
+      "message": "\u003e I can\u0027t see what the EM can do better in this situation.\n\nIt can help you break the tie between a medium and a big CPU, if both are idle. Assuming that using the medium is more energy efficient is simply not always true :)",
+      "parentUuid": "d42bfdd7_383e9376",
+      "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
