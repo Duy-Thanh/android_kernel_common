@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "829e566c_45e1a423",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-10-10T19:31:53Z",
+      "side": 1,
+      "message": "Maybe (oddly) this should be nested under the DRM options, as it seems to be used by DRM drivers for HDMI audio?",
+      "range": {
+        "startLine": 25,
+        "startChar": 1,
+        "endLine": 25,
+        "endChar": 19
+      },
+      "revId": "0805538018326ec4e2402a69396756433a3708f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "266e65c1_216797d5",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-10-10T19:31:53Z",
+      "side": 1,
+      "message": "This is used by the synopsys drm driver, and has DRM in the header comment, but it seems to be a generic helper for coax/spdif, might be ok here.",
+      "range": {
+        "startLine": 26,
+        "startChar": 8,
+        "endLine": 26,
+        "endChar": 22
+      },
+      "revId": "0805538018326ec4e2402a69396756433a3708f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
