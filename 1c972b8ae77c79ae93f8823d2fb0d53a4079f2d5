@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "486710a9_460bd8f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-10-11T12:45:09Z",
+      "side": 1,
+      "message": "s/cuttlefish-4.19/gki_defconfig ?",
+      "revId": "1c972b8ae77c79ae93f8823d2fb0d53a4079f2d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "624e909f_00a8debf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-10-11T12:45:09Z",
+      "side": 1,
+      "message": "Perhaps remove the double SoB ?",
+      "revId": "1c972b8ae77c79ae93f8823d2fb0d53a4079f2d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
