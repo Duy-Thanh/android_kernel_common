@@ -304,6 +304,24 @@
       "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd62c9a6_b31bb7f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2019-10-15T09:43:51Z",
+      "side": 1,
+      "message": "Instinctively I feel that the EM is the correct solution and otherwise we\u0027re trying to bake in some heuristic shortcuts. Seems like the only reason we wouldn\u0027t go for the EM solution here is because we\u0027re worried about the performance impact. Do we have any recent figures of how long it takes to do EM calcs on (for example) 3-PD systems with around 8 cores? Perhaps it isn\u0027t worth worrying about too much any more?\n\nOn the other hand, maybe we should be trying to avoid bigger cores as a matter of policy so that they are more likely to be available if we need them for bigger tasks - that\u0027s a completely different topic.",
+      "parentUuid": "cba0211c_142d3d8f",
+      "revId": "841d40ab0efc43c9ee06d99db096bc6e3d8987d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
