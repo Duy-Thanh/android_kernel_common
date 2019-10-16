@@ -2912,6 +2912,7 @@ int tk_ati_dq;
 int tk_ati_never;
 int tk_ati_maxq;
 int tk_ati_maxqlen;
+int tk_ati_barrier;
 
 //TJK: async_txn functions (add nlocked suffix)
 struct binder_async_txn_info *binder_get_async_txn_info(struct binder_node *node, int pid, struct binder_async_txn_info *new_info)
@@ -2982,6 +2983,7 @@ static bool binder_proc_transaction(struct binder_transaction *t,
 	struct binder_node *node = t->buffer->target_node;
 	struct binder_priority node_prio;
 	bool oneway = !!(t->flags & TF_ONE_WAY);
+	bool barrier = !oneway && !!(t->flags & TF_ASYNC_BARRIER);
 	bool pending_async = false;
 	struct binder_async_txn_info *info = NULL;
 
@@ -2990,11 +2992,11 @@ static bool binder_proc_transaction(struct binder_transaction *t,
 	node_prio.prio = node->min_priority;
 	node_prio.sched_policy = node->sched_policy;
 
-	if (oneway) {
+	if (oneway || barrier) {
 
 		BUG_ON(thread);
 		info = binder_get_async_txn_info(node, proc->pid, NULL);
-		if (!info) {
+		if (!info && !barrier) {
 			struct binder_async_txn_info *new_info;
 
 			binder_node_unlock(node);
@@ -3005,12 +3007,15 @@ static bool binder_proc_transaction(struct binder_transaction *t,
 			if (new_info != info)
 				kfree(new_info);
 		}
-		if (info->has_async_transaction) {
-			pending_async = true;
-		} else {
-			info->has_async_transaction = true;
+		if (info) {
+			if (info->has_async_transaction)
+				pending_async = true;
+			else if (!barrier)
+				info->has_async_transaction = true;
+			if (barrier)
+				t->buffer->async_transaction = true;
+			t->buffer->txn_info = info;
 		}
-		t->buffer->txn_info = info;
 	}
 
 	binder_inner_proc_lock(proc);
@@ -3035,6 +3040,8 @@ static bool binder_proc_transaction(struct binder_transaction *t,
 		tk_ati_q++;
 		info->tk_q_count++;
 		info->tk_q_depth++;
+		if (barrier)
+			tk_ati_barrier++;
 		if (info->tk_q_depth > info->tk_max_q_depth)
 			info->tk_max_q_depth = info->tk_q_depth;
 		binder_enqueue_work_ilocked(&t->work, &info->async_todo);
@@ -6336,12 +6343,13 @@ int binder_stats_show(struct seq_file *m, void *unused)
 			tk_try_again,
 			tk_signal,
 			tk_wake);
-	seq_printf(m, "TJK.ATI: count=%d alloc=%d/%d q=%d/%d never=%d maxq=%d/%d\n",
+	seq_printf(m, "TJK.ATI: count=%d alloc=%d/%d q=%d/%d never=%d maxq=%d/%d barrier=%d\n",
 			tk_ati_count,
 			tk_ati_alloc,tk_ati_free,
 			tk_ati_q, tk_ati_dq,
 			tk_ati_never,
-			tk_ati_maxq, tk_ati_maxqlen);
+			tk_ati_maxq, tk_ati_maxqlen,
+			tk_ati_barrier);
 	return 0;
 }
 
@@ -6421,7 +6429,7 @@ int binder_transaction_log_show(struct seq_file *m, void *unused)
 	}
 	tk_wait = tk_nowait = tk_try_again = tk_signal = tk_wake = 0;
 	tk_ati_count = tk_ati_alloc = tk_ati_free = tk_ati_q = tk_ati_dq =
-			tk_ati_never = tk_ati_maxq = tk_ati_maxqlen = 0;
+		tk_ati_never = tk_ati_maxq = tk_ati_maxqlen = tk_ati_barrier = 0;
 	return 0;
 }
 
