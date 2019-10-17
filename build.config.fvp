@@ -1,0 +1,26 @@
+. ${ROOT_DIR}/common/build.config.gki.aarch64
+
+POST_DEFCONFIG_CMDS="update_config"
+function update_config() {
+    ${KERNEL_DIR}/scripts/config --file ${OUT_DIR}/.config \
+         -e ARCH_VEXPRESS \
+         -m FB \
+         -m FB_ARMCLCD \
+         -e INPUT_MOUSE \
+         -m MOUSE_PS2 \
+         -m INPUT_MOUSEDEV \
+         -m SERIO_AMBAKMI \
+         -m MMC_ARMMMCI \
+         -m REGULATOR_FIXED_VOLTAGE \
+
+    (cd ${OUT_DIR} && \
+     make O=${OUT_DIR} $archsubarch CC=${CC} CROSS_COMPILE=${CROSS_COMPILE} olddefconfig)
+}
+
+shopt -s globstar
+
+FILES="
+arch/arm64/boot/Image
+arch/arm64/boot/dts/arm/fvp-base-revc.dtb
+drivers/**/*.ko
+"
