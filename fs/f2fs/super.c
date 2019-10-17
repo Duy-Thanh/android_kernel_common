@@ -2517,6 +2517,7 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
 	__u32 crc = 0;
 
 	if (le32_to_cpu(raw_super->magic) != F2FS_SUPER_MAGIC) {
+<<<<<<< HEAD   (5b2718 ANDROID: gki_defconfig: enable fs-verity)
 		f2fs_info(sbi, "Magic Mismatch, valid(0x%x) - read(0x%x)",
 			  F2FS_SUPER_MAGIC, le32_to_cpu(raw_super->magic));
 		return -EINVAL;
@@ -2536,27 +2537,51 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
 			f2fs_info(sbi, "Invalid SB checksum value: %u", crc);
 			return -EFSCORRUPTED;
 		}
+=======
+		f2fs_msg(sb, KERN_INFO,
+			"Magic Mismatch, valid(0x%x) - read(0x%x)",
+			F2FS_SUPER_MAGIC, le32_to_cpu(raw_super->magic));
+		return -EINVAL;
+>>>>>>> BRANCH (c3038e Linux 4.19.80)
 	}
 
 	/* Currently, support only 4KB page cache size */
 	if (F2FS_BLKSIZE != PAGE_SIZE) {
+<<<<<<< HEAD   (5b2718 ANDROID: gki_defconfig: enable fs-verity)
 		f2fs_info(sbi, "Invalid page_cache_size (%lu), supports only 4KB",
 			  PAGE_SIZE);
+=======
+		f2fs_msg(sb, KERN_INFO,
+			"Invalid page_cache_size (%lu), supports only 4KB\n",
+			PAGE_SIZE);
+>>>>>>> BRANCH (c3038e Linux 4.19.80)
 		return -EFSCORRUPTED;
 	}
 
 	/* Currently, support only 4KB block size */
 	blocksize = 1 << le32_to_cpu(raw_super->log_blocksize);
 	if (blocksize != F2FS_BLKSIZE) {
+<<<<<<< HEAD   (5b2718 ANDROID: gki_defconfig: enable fs-verity)
 		f2fs_info(sbi, "Invalid blocksize (%u), supports only 4KB",
 			  blocksize);
+=======
+		f2fs_msg(sb, KERN_INFO,
+			"Invalid blocksize (%u), supports only 4KB\n",
+			blocksize);
+>>>>>>> BRANCH (c3038e Linux 4.19.80)
 		return -EFSCORRUPTED;
 	}
 
 	/* check log blocks per segment */
 	if (le32_to_cpu(raw_super->log_blocks_per_seg) != 9) {
+<<<<<<< HEAD   (5b2718 ANDROID: gki_defconfig: enable fs-verity)
 		f2fs_info(sbi, "Invalid log blocks per segment (%u)",
 			  le32_to_cpu(raw_super->log_blocks_per_seg));
+=======
+		f2fs_msg(sb, KERN_INFO,
+			"Invalid log blocks per segment (%u)\n",
+			le32_to_cpu(raw_super->log_blocks_per_seg));
+>>>>>>> BRANCH (c3038e Linux 4.19.80)
 		return -EFSCORRUPTED;
 	}
 
@@ -2565,16 +2590,28 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
 				F2FS_MAX_LOG_SECTOR_SIZE ||
 		le32_to_cpu(raw_super->log_sectorsize) <
 				F2FS_MIN_LOG_SECTOR_SIZE) {
+<<<<<<< HEAD   (5b2718 ANDROID: gki_defconfig: enable fs-verity)
 		f2fs_info(sbi, "Invalid log sectorsize (%u)",
 			  le32_to_cpu(raw_super->log_sectorsize));
+=======
+		f2fs_msg(sb, KERN_INFO, "Invalid log sectorsize (%u)",
+			le32_to_cpu(raw_super->log_sectorsize));
+>>>>>>> BRANCH (c3038e Linux 4.19.80)
 		return -EFSCORRUPTED;
 	}
 	if (le32_to_cpu(raw_super->log_sectors_per_block) +
 		le32_to_cpu(raw_super->log_sectorsize) !=
 			F2FS_MAX_LOG_SECTOR_SIZE) {
+<<<<<<< HEAD   (5b2718 ANDROID: gki_defconfig: enable fs-verity)
 		f2fs_info(sbi, "Invalid log sectors per block(%u) log sectorsize(%u)",
 			  le32_to_cpu(raw_super->log_sectors_per_block),
 			  le32_to_cpu(raw_super->log_sectorsize));
+=======
+		f2fs_msg(sb, KERN_INFO,
+			"Invalid log sectors per block(%u) log sectorsize(%u)",
+			le32_to_cpu(raw_super->log_sectors_per_block),
+			le32_to_cpu(raw_super->log_sectorsize));
+>>>>>>> BRANCH (c3038e Linux 4.19.80)
 		return -EFSCORRUPTED;
 	}
 
@@ -2588,51 +2625,96 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
 
 	if (segment_count > F2FS_MAX_SEGMENT ||
 				segment_count < F2FS_MIN_SEGMENTS) {
+<<<<<<< HEAD   (5b2718 ANDROID: gki_defconfig: enable fs-verity)
 		f2fs_info(sbi, "Invalid segment count (%u)", segment_count);
+=======
+		f2fs_msg(sb, KERN_INFO,
+			"Invalid segment count (%u)",
+			segment_count);
+>>>>>>> BRANCH (c3038e Linux 4.19.80)
 		return -EFSCORRUPTED;
 	}
 
 	if (total_sections > segment_count ||
 			total_sections < F2FS_MIN_SEGMENTS ||
 			segs_per_sec > segment_count || !segs_per_sec) {
+<<<<<<< HEAD   (5b2718 ANDROID: gki_defconfig: enable fs-verity)
 		f2fs_info(sbi, "Invalid segment/section count (%u, %u x %u)",
 			  segment_count, total_sections, segs_per_sec);
+=======
+		f2fs_msg(sb, KERN_INFO,
+			"Invalid segment/section count (%u, %u x %u)",
+			segment_count, total_sections, segs_per_sec);
+>>>>>>> BRANCH (c3038e Linux 4.19.80)
 		return -EFSCORRUPTED;
 	}
 
 	if ((segment_count / segs_per_sec) < total_sections) {
+<<<<<<< HEAD   (5b2718 ANDROID: gki_defconfig: enable fs-verity)
 		f2fs_info(sbi, "Small segment_count (%u < %u * %u)",
 			  segment_count, segs_per_sec, total_sections);
+=======
+		f2fs_msg(sb, KERN_INFO,
+			"Small segment_count (%u < %u * %u)",
+			segment_count, segs_per_sec, total_sections);
+>>>>>>> BRANCH (c3038e Linux 4.19.80)
 		return -EFSCORRUPTED;
 	}
 
 	if (segment_count > (le64_to_cpu(raw_super->block_count) >> 9)) {
+<<<<<<< HEAD   (5b2718 ANDROID: gki_defconfig: enable fs-verity)
 		f2fs_info(sbi, "Wrong segment_count / block_count (%u > %llu)",
 			  segment_count, le64_to_cpu(raw_super->block_count));
+=======
+		f2fs_msg(sb, KERN_INFO,
+			"Wrong segment_count / block_count (%u > %llu)",
+			segment_count, le64_to_cpu(raw_super->block_count));
+>>>>>>> BRANCH (c3038e Linux 4.19.80)
 		return -EFSCORRUPTED;
 	}
 
 	if (secs_per_zone > total_sections || !secs_per_zone) {
+<<<<<<< HEAD   (5b2718 ANDROID: gki_defconfig: enable fs-verity)
 		f2fs_info(sbi, "Wrong secs_per_zone / total_sections (%u, %u)",
 			  secs_per_zone, total_sections);
+=======
+		f2fs_msg(sb, KERN_INFO,
+			"Wrong secs_per_zone / total_sections (%u, %u)",
+			secs_per_zone, total_sections);
+>>>>>>> BRANCH (c3038e Linux 4.19.80)
 		return -EFSCORRUPTED;
 	}
 	if (le32_to_cpu(raw_super->extension_count) > F2FS_MAX_EXTENSION ||
 			raw_super->hot_ext_count > F2FS_MAX_EXTENSION ||
 			(le32_to_cpu(raw_super->extension_count) +
 			raw_super->hot_ext_count) > F2FS_MAX_EXTENSION) {
+<<<<<<< HEAD   (5b2718 ANDROID: gki_defconfig: enable fs-verity)
 		f2fs_info(sbi, "Corrupted extension count (%u + %u > %u)",
 			  le32_to_cpu(raw_super->extension_count),
 			  raw_super->hot_ext_count,
 			  F2FS_MAX_EXTENSION);
+=======
+		f2fs_msg(sb, KERN_INFO,
+			"Corrupted extension count (%u + %u > %u)",
+			le32_to_cpu(raw_super->extension_count),
+			raw_super->hot_ext_count,
+			F2FS_MAX_EXTENSION);
+>>>>>>> BRANCH (c3038e Linux 4.19.80)
 		return -EFSCORRUPTED;
 	}
 
 	if (le32_to_cpu(raw_super->cp_payload) >
 				(blocks_per_seg - F2FS_CP_PACKS)) {
+<<<<<<< HEAD   (5b2718 ANDROID: gki_defconfig: enable fs-verity)
 		f2fs_info(sbi, "Insane cp_payload (%u > %u)",
 			  le32_to_cpu(raw_super->cp_payload),
 			  blocks_per_seg - F2FS_CP_PACKS);
+=======
+		f2fs_msg(sb, KERN_INFO,
+			"Insane cp_payload (%u > %u)",
+			le32_to_cpu(raw_super->cp_payload),
+			blocks_per_seg - F2FS_CP_PACKS);
+>>>>>>> BRANCH (c3038e Linux 4.19.80)
 		return -EFSCORRUPTED;
 	}
 
@@ -2640,10 +2722,18 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
 	if (le32_to_cpu(raw_super->node_ino) != 1 ||
 		le32_to_cpu(raw_super->meta_ino) != 2 ||
 		le32_to_cpu(raw_super->root_ino) != 3) {
+<<<<<<< HEAD   (5b2718 ANDROID: gki_defconfig: enable fs-verity)
 		f2fs_info(sbi, "Invalid Fs Meta Ino: node(%u) meta(%u) root(%u)",
 			  le32_to_cpu(raw_super->node_ino),
 			  le32_to_cpu(raw_super->meta_ino),
 			  le32_to_cpu(raw_super->root_ino));
+=======
+		f2fs_msg(sb, KERN_INFO,
+			"Invalid Fs Meta Ino: node(%u) meta(%u) root(%u)",
+			le32_to_cpu(raw_super->node_ino),
+			le32_to_cpu(raw_super->meta_ino),
+			le32_to_cpu(raw_super->root_ino));
+>>>>>>> BRANCH (c3038e Linux 4.19.80)
 		return -EFSCORRUPTED;
 	}
 
@@ -2967,9 +3057,15 @@ static int read_raw_super_block(struct f2fs_sb_info *sbi,
 		/* sanity checking of raw super */
 		err = sanity_check_raw_super(sbi, bh);
 		if (err) {
+<<<<<<< HEAD   (5b2718 ANDROID: gki_defconfig: enable fs-verity)
 			f2fs_err(sbi, "Can't find valid F2FS filesystem in %dth superblock",
 				 block + 1);
 			err = -EFSCORRUPTED;
+=======
+			f2fs_msg(sb, KERN_ERR,
+				"Can't find valid F2FS filesystem in %dth superblock",
+				block + 1);
+>>>>>>> BRANCH (c3038e Linux 4.19.80)
 			brelse(bh);
 			continue;
 		}
