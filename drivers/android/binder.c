@@ -57,6 +57,7 @@
 #include <linux/sched/signal.h>
 #include <linux/sched/mm.h>
 #include <linux/seq_file.h>
+#include <linux/string.h>
 #include <linux/uaccess.h>
 #include <linux/pid_namespace.h>
 #include <linux/security.h>
@@ -66,7 +67,11 @@
 #include <linux/task_work.h>
 
 #include <uapi/linux/android/binder.h>
+<<<<<<< HEAD   (3048eb ANDROID: gki_defconfig: enable fs-verity)
 #include <uapi/linux/sched/types.h>
+=======
+#include <uapi/linux/android/binderfs.h>
+>>>>>>> BRANCH (4f5caf Linux 5.4-rc3)
 
 #include <asm/cacheflush.h>
 
@@ -3036,7 +3041,7 @@ static void binder_transaction(struct binder_proc *proc,
 	e->target_handle = tr->target.handle;
 	e->data_size = tr->data_size;
 	e->offsets_size = tr->offsets_size;
-	e->context_name = proc->context->name;
+	strscpy(e->context_name, proc->context->name, BINDERFS_MAX_NAME);
 
 	if (reply) {
 		binder_inner_proc_lock(proc);
