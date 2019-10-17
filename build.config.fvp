@@ -1,0 +1,28 @@
+. ${ROOT_DIR}/common/build.config.gki.aarch64
+
+POST_DEFCONFIG_CMDS="update_config"
+function update_config() {
+    ${KERNEL_DIR}/scripts/config --file ${OUT_DIR}/.config \
+         -e ARCH_VEXPRESS \
+         -e FB \
+         -e FB_ARMCLCD \
+         -e INPUT_KEYBOARD \
+         -e KEYBOARD_ATKBD \
+         -e INPUT_MOUSE \
+         -e MOUSE_PS2 \
+         -e INPUT_MOUSEDEV \
+         -e SERIO_AMBAKMI \
+         -e MMC \
+         -e MMC_BLOCK \
+         -e MMC_ARMMMCI \
+         -e REGULATOR \
+         -e REGULATOR_FIXED_VOLTAGE \
+
+    (cd ${OUT_DIR} && \
+     make O=${OUT_DIR} $archsubarch CC=${CC} CROSS_COMPILE=${CROSS_COMPILE} olddefconfig)
+}
+
+FILES="
+arch/arm64/boot/Image
+arch/arm64/boot/dts/arm/fvp-base-revc.dtb
+"
