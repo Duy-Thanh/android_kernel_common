@@ -1109,6 +1109,9 @@ static void ext4_put_super(struct super_block *sb)
 #ifdef CONFIG_UNICODE
 	utf8_unload(sb->s_encoding);
 #endif
+#ifdef CONFIG_FS_ENCRYPTION
+	kfree(sbi->s_dummy_encryption_context);
+#endif
 	kfree(sbi);
 }
 
@@ -1613,6 +1616,7 @@ static const match_table_t tokens = {
 	{Opt_noinit_itable, "noinit_itable"},
 	{Opt_max_dir_size_kb, "max_dir_size_kb=%u"},
 	{Opt_test_dummy_encryption, "test_dummy_encryption"},
+	{Opt_test_dummy_encryption, "test_dummy_encryption=%s"},
 	{Opt_inlinecrypt, "inlinecrypt"},
 	{Opt_nombcache, "nombcache"},
 	{Opt_nombcache, "no_mbcache"},	/* for backward compatibility */
@@ -1824,7 +1828,7 @@ static const struct mount_opts {
 	{Opt_jqfmt_vfsv0, QFMT_VFS_V0, MOPT_QFMT},
 	{Opt_jqfmt_vfsv1, QFMT_VFS_V1, MOPT_QFMT},
 	{Opt_max_dir_size_kb, 0, MOPT_GTE0},
-	{Opt_test_dummy_encryption, 0, MOPT_GTE0},
+	{Opt_test_dummy_encryption, 0, MOPT_STRING},
 #ifdef CONFIG_FS_ENCRYPTION_INLINE_CRYPT
 	{Opt_inlinecrypt, EXT4_MOUNT_INLINECRYPT, MOPT_SET},
 #else
@@ -2061,9 +2065,27 @@ static int handle_mount_opt(struct super_block *sb, char *opt, int token,
 			IOPRIO_PRIO_VALUE(IOPRIO_CLASS_BE, arg);
 	} else if (token == Opt_test_dummy_encryption) {
 #ifdef CONFIG_FS_ENCRYPTION
-		sbi->s_mount_flags |= EXT4_MF_TEST_DUMMY_ENCRYPTION;
+		const char *policy;
+
+		if (args[0].from)
+			policy = match_strdup(&args[0]);
+		else
+			policy = kstrdup("v1", GFP_KERNEL);
+		if (!policy)
+			return -1;
+		sbi->s_dummy_encryption_context =
+			fscrypt_parse_test_dummy_context(sb, policy);
+		if (!sbi->s_dummy_encryption_context) {
+			ext4_msg(sb, KERN_ERR,
+				 "Invalid test dummy encryption policy '%s'",
+				 policy);
+			kfree(policy);
+			return -1;
+		}
 		ext4_msg(sb, KERN_WARNING,
-			 "Test dummy encryption mode enabled");
+			 "Test dummy encryption mode enabled with %s policies",
+			 policy);
+		kfree(policy);
 #else
 		ext4_msg(sb, KERN_WARNING,
 			 "Test dummy encryption mount option ignored");
@@ -2324,8 +2346,10 @@ static int _ext4_show_options(struct seq_file *seq, struct super_block *sb,
 		SEQ_OPTS_PRINT("max_dir_size_kb=%u", sbi->s_max_dir_size_kb);
 	if (test_opt(sb, DATA_ERR_ABORT))
 		SEQ_OPTS_PUTS("data_err=abort");
-	if (DUMMY_ENCRYPTION_ENABLED(sbi))
-		SEQ_OPTS_PUTS("test_dummy_encryption");
+#ifdef CONFIG_FS_ENCRYPTION
+	fscrypt_show_test_dummy_encryption(seq, sep,
+					   sbi->s_dummy_encryption_context);
+#endif
 
 	ext4_show_quota_options(seq, sb);
 	return 0;
@@ -4777,7 +4801,9 @@ failed_mount:
 #ifdef CONFIG_UNICODE
 	utf8_unload(sb->s_encoding);
 #endif
-
+#ifdef CONFIG_FS_ENCRYPTION
+	kfree(sbi->s_dummy_encryption_context);
+#endif
 #ifdef CONFIG_QUOTA
 	for (i = 0; i < EXT4_MAXQUOTAS; i++)
 		kfree(get_qf_name(sb, sbi, i));

@@ -1358,11 +1358,10 @@ struct ext4_super_block {
  */
 #define EXT4_MF_MNTDIR_SAMPLED		0x0001
 #define EXT4_MF_FS_ABORTED		0x0002	/* Fatal error detected */
-#define EXT4_MF_TEST_DUMMY_ENCRYPTION	0x0004
 
 #ifdef CONFIG_FS_ENCRYPTION
-#define DUMMY_ENCRYPTION_ENABLED(sbi) (unlikely((sbi)->s_mount_flags & \
-						EXT4_MF_TEST_DUMMY_ENCRYPTION))
+#define DUMMY_ENCRYPTION_ENABLED(sbi) \
+	(unlikely((sbi)->s_dummy_encryption_context != NULL))
 #else
 #define DUMMY_ENCRYPTION_ENABLED(sbi) (0)
 #endif
@@ -1421,6 +1420,13 @@ struct ext4_sb_info {
 	struct kobject s_kobj;
 	struct completion s_kobj_unregister;
 	struct super_block *s_sb;
+#ifdef CONFIG_UNICODE
+	struct unicode_map *s_encoding;
+	__u16 s_encoding_flags;
+#endif
+#ifdef CONFIG_FS_ENCRYPTION
+	const union fscrypt_context *s_dummy_encryption_context;
+#endif
 
 	/* Journaling */
 	struct journal_s *s_journal;
