@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6354a247_8d06aa27",
+        "filename": "build.config.fvp",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2019-10-21T20:15:01Z",
+      "side": 1,
+      "message": "POST_DEFCONFIG_CMDS hook is a feature to support local development. It feels not right to use this as a means to inherit configuration. It will also bypass any savedefconfig comparison checks.\n\nIf we absolutely need to support derived configurations (and I think we should avoid that in the first place in the spirit of GKI), we need to find a better way.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 19
+      },
+      "revId": "bd71bf4ce7e06b3db610486d84eaedf36419a35c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
