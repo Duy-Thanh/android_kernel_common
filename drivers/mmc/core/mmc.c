@@ -1983,6 +1983,16 @@ static int mmc_init_card(struct mmc_host *host, u32 ocr,
 		}
 	}
 
+	card->clk_scaling_lowest = host->f_min;
+	if ((card->mmc_avail_type & EXT_CSD_CARD_TYPE_HS400) ||
+			(card->mmc_avail_type & EXT_CSD_CARD_TYPE_HS200))
+		card->clk_scaling_highest = card->ext_csd.hs200_max_dtr;
+	else if ((card->mmc_avail_type & EXT_CSD_CARD_TYPE_HS) ||
+			(card->mmc_avail_type & EXT_CSD_CARD_TYPE_DDR_52))
+		card->clk_scaling_highest = card->ext_csd.hs_max_dtr;
+	else
+		card->clk_scaling_highest = card->csd.max_dtr;
+
 	/*
 	 * Choose the power class with selected bus interface
 	 */
@@ -2187,6 +2197,7 @@ static int mmc_poweroff_notify(struct mmc_card *card, unsigned int notify_type)
  */
 static void mmc_remove(struct mmc_host *host)
 {
+	mmc_exit_clk_scaling(host);
 	mmc_remove_card(host->card);
 	host->card = NULL;
 }
@@ -2236,6 +2247,12 @@ static int _mmc_suspend(struct mmc_host *host, bool is_suspend)
 	int err = 0;
 	unsigned int notify_type = is_suspend ? EXT_CSD_POWER_OFF_SHORT :
 					EXT_CSD_POWER_OFF_LONG;
+	err = mmc_suspend_clk_scaling(host);
+	if (err) {
+		pr_err("%s: %s: fail to suspend clock scaling (%d)\n",
+			mmc_hostname(host), __func__, err);
+		return err;
+	}
 
 	mmc_claim_host(host);
 
@@ -2261,6 +2278,9 @@ static int _mmc_suspend(struct mmc_host *host, bool is_suspend)
 	}
 out:
 	mmc_release_host(host);
+	if (err)
+		mmc_resume_clk_scaling(host);
+
 	return err;
 }
 
@@ -2290,15 +2310,21 @@ static int _mmc_resume(struct mmc_host *host)
 
 	mmc_claim_host(host);
 
-	if (!mmc_card_suspended(host->card))
+	if (!mmc_card_suspended(host->card)) {
+		mmc_release_host(host);
 		goto out;
+	}
 
 	mmc_power_up(host, host->card->ocr);
 	err = mmc_init_card(host, host->card->ocr, host->card);
 	mmc_card_clr_suspended(host->card);
 
-out:
 	mmc_release_host(host);
+	err = mmc_resume_clk_scaling(host);
+	if (err)
+		pr_err("%s: %s: fail to resume clock scaling (%d)\n",
+			mmc_hostname(host), __func__, err);
+out:
 	return err;
 }
 
@@ -2316,6 +2342,12 @@ static int mmc_shutdown(struct mmc_host *host)
 	if (mmc_can_poweroff_notify(host->card) &&
 		!(host->caps2 & MMC_CAP2_FULL_PWR_CYCLE))
 		err = _mmc_resume(host);
+	/*
+	 * Exit clock scaling so that it doesn't kick in after
+	 * power off notification is sent
+	 */
+	if (host->caps2 & MMC_CAP2_CLK_SCALE)
+		mmc_exit_clk_scaling(host);
 
 	if (!err)
 		err = _mmc_suspend(host, false);
@@ -2378,6 +2410,7 @@ static int mmc_can_reset(struct mmc_card *card)
 static int _mmc_hw_reset(struct mmc_host *host)
 {
 	struct mmc_card *card = host->card;
+	int ret;
 
 	/*
 	 * In the case of recovery, we can't expect flushing the cache to work
@@ -2397,7 +2430,15 @@ static int _mmc_hw_reset(struct mmc_host *host)
 		mmc_power_cycle(host, card->ocr);
 		mmc_pwrseq_reset(host);
 	}
-	return mmc_init_card(host, card->ocr, card);
+
+	ret = mmc_init_card(host, host->card->ocr, host->card);
+	if (ret) {
+		pr_err("%s: %s: mmc_init_card failed (%d)\n",
+			mmc_hostname(host), __func__, ret);
+		return ret;
+	}
+
+	return ret;
 }
 
 static const struct mmc_bus_ops mmc_ops = {
@@ -2411,6 +2452,7 @@ static const struct mmc_bus_ops mmc_ops = {
 	.shutdown = mmc_shutdown,
 	.hw_reset = _mmc_hw_reset,
 	.cache_enabled = _mmc_cache_enabled,
+	.change_bus_speed = mmc_change_bus_speed,
 };
 
 /*
@@ -2467,6 +2509,12 @@ int mmc_attach_mmc(struct mmc_host *host)
 		goto remove_card;
 
 	mmc_claim_host(host);
+	err = mmc_init_clk_scaling(host);
+	if (err) {
+		mmc_release_host(host);
+		goto remove_card;
+	}
+
 	return 0;
 
 remove_card:
