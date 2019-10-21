@@ -204,6 +204,7 @@ static match_table_t f2fs_tokens = {
 	{Opt_alloc, "alloc_mode=%s"},
 	{Opt_fsync, "fsync_mode=%s"},
 	{Opt_test_dummy_encryption, "test_dummy_encryption"},
+	{Opt_test_dummy_encryption, "test_dummy_encryption=%s"},
 	{Opt_inlinecrypt, "inlinecrypt"},
 	{Opt_checkpoint_disable, "checkpoint=disable"},
 	{Opt_checkpoint_disable_cap, "checkpoint=disable:%u"},
@@ -779,19 +780,6 @@ static int parse_options(struct super_block *sb, char *options)
 			}
 			kvfree(name);
 			break;
-		case Opt_test_dummy_encryption:
-#ifdef CONFIG_FS_ENCRYPTION
-			if (!f2fs_sb_has_encrypt(sbi)) {
-				f2fs_err(sbi, "Encrypt feature is off");
-				return -EINVAL;
-			}
-
-			F2FS_OPTION(sbi).test_dummy_encryption = true;
-			f2fs_info(sbi, "Test dummy encryption mode enabled");
-#else
-			f2fs_info(sbi, "Test dummy encryption mount option ignored");
-#endif
-			break;
 		case Opt_inlinecrypt:
 #ifdef CONFIG_FS_ENCRYPTION_INLINE_CRYPT
 			F2FS_OPTION(sbi).inlinecrypt = true;
@@ -799,6 +787,34 @@ static int parse_options(struct super_block *sb, char *options)
 			f2fs_info(sbi, "inline encryption not supported");
 #endif
 			break;
+		case Opt_test_dummy_encryption: {
+#ifdef CONFIG_FS_ENCRYPTION
+			const char *policy;
+
+			if (args[0].from)
+				policy = match_strdup(&args[0]);
+			else
+				policy = kstrdup("v1", GFP_KERNEL);
+			if (!policy)
+				return -ENOMEM;
+			F2FS_OPTION(sbi).dummy_encryption_context =
+				fscrypt_parse_test_dummy_context(sb, policy);
+			if (!F2FS_OPTION(sbi).dummy_encryption_context) {
+				f2fs_err(sbi,
+					 "Invalid test dummy encryption policy '%s'",
+					 policy);
+				kfree(policy);
+				return -EINVAL;
+			}
+			f2fs_info(sbi,
+				  "Test dummy encryption mode enabled with %s policies",
+				  policy);
+			kfree(policy);
+#else
+			f2fs_info(sbi, "Test dummy encryption mount option ignored");
+#endif
+			break;
+		}
 		case Opt_checkpoint_disable_cap_perc:
 			if (args->from && match_int(args, &arg))
 				return -EINVAL;
@@ -1218,6 +1234,9 @@ static void f2fs_put_super(struct super_block *sb)
 	destroy_device_list(sbi);
 	f2fs_destroy_xattr_caches(sbi);
 	mempool_destroy(sbi->write_io_dummy);
+#ifdef CONFIG_FS_ENCRYPTION
+	kfree(F2FS_OPTION(sbi).dummy_encryption_context);
+#endif
 #ifdef CONFIG_QUOTA
 	for (i = 0; i < MAXQUOTAS; i++)
 		kvfree(F2FS_OPTION(sbi).s_qf_names[i]);
@@ -1552,9 +1571,10 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
 		seq_printf(seq, ",whint_mode=%s", "user-based");
 	else if (F2FS_OPTION(sbi).whint_mode == WHINT_MODE_FS)
 		seq_printf(seq, ",whint_mode=%s", "fs-based");
+
 #ifdef CONFIG_FS_ENCRYPTION
-	if (F2FS_OPTION(sbi).test_dummy_encryption)
-		seq_puts(seq, ",test_dummy_encryption");
+	fscrypt_show_test_dummy_encryption(seq, ',',
+					   F2FS_OPTION(sbi).dummy_encryption_context);
 	if (F2FS_OPTION(sbi).inlinecrypt)
 		seq_puts(seq, ",inlinecrypt");
 #endif
@@ -1586,8 +1606,8 @@ static void default_options(struct f2fs_sb_info *sbi)
 	F2FS_OPTION(sbi).whint_mode = WHINT_MODE_OFF;
 	F2FS_OPTION(sbi).alloc_mode = ALLOC_MODE_DEFAULT;
 	F2FS_OPTION(sbi).fsync_mode = FSYNC_MODE_POSIX;
-	F2FS_OPTION(sbi).test_dummy_encryption = false;
 #ifdef CONFIG_FS_ENCRYPTION
+	F2FS_OPTION(sbi).dummy_encryption_context = NULL;
 	F2FS_OPTION(sbi).inlinecrypt = false;
 #endif
 	F2FS_OPTION(sbi).s_resuid = make_kuid(&init_user_ns, F2FS_DEF_RESUID);
@@ -3799,6 +3819,9 @@ free_bio_info:
 	utf8_unload(sb->s_encoding);
 #endif
 free_options:
+#ifdef CONFIG_FS_ENCRYPTION
+	kfree(F2FS_OPTION(sbi).dummy_encryption_context);
+#endif
 #ifdef CONFIG_QUOTA
 	for (i = 0; i < MAXQUOTAS; i++)
 		kvfree(F2FS_OPTION(sbi).s_qf_names[i]);
