@@ -454,6 +454,27 @@ static void put_crypt_info(struct fscrypt_info *ci)
 	kmem_cache_free(fscrypt_info_cachep, ci);
 }
 
+/*
+ * Fake up a context for a top-level unencrypted file or directory when the
+ * test_dummy_encryption mount option is enabled.
+ */
+static int get_dummy_context(struct inode *inode, union fscrypt_context *ctx)
+{
+	const union fscrypt_context *dummy_context;
+	int size;
+
+	if (IS_ENCRYPTED(inode))
+		return -ENODATA;
+
+	dummy_context = fscrypt_dummy_context(inode);
+	if (!dummy_context)
+		return -ENODATA;
+
+	size = fscrypt_context_size(dummy_context);
+	memcpy(ctx, dummy_context, size);
+	return size;
+}
+
 int fscrypt_get_encryption_info(struct inode *inode)
 {
 	struct fscrypt_info *crypt_info;
@@ -470,22 +491,11 @@ int fscrypt_get_encryption_info(struct inode *inode)
 		return res;
 
 	res = inode->i_sb->s_cop->get_context(inode, &ctx, sizeof(ctx));
+	if (res == -ENODATA)
+		res = get_dummy_context(inode, &ctx);
 	if (res < 0) {
-		if (!fscrypt_dummy_context_enabled(inode) ||
-		    IS_ENCRYPTED(inode)) {
-			fscrypt_warn(inode,
-				     "Error %d getting encryption context",
-				     res);
-			return res;
-		}
-		/* Fake up a context for an unencrypted directory */
-		memset(&ctx, 0, sizeof(ctx));
-		ctx.version = FSCRYPT_CONTEXT_V1;
-		ctx.v1.contents_encryption_mode = FSCRYPT_MODE_AES_256_XTS;
-		ctx.v1.filenames_encryption_mode = FSCRYPT_MODE_AES_256_CTS;
-		memset(ctx.v1.master_key_descriptor, 0x42,
-		       FSCRYPT_KEY_DESCRIPTOR_SIZE);
-		res = sizeof(ctx.v1);
+		fscrypt_warn(inode, "Error %d getting encryption context", res);
+		return res;
 	}
 
 	crypt_info = kmem_cache_zalloc(fscrypt_info_cachep, GFP_NOFS);
