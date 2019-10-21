@@ -58,7 +58,7 @@ struct fscrypt_operations {
 	const char *key_prefix;
 	int (*get_context)(struct inode *, void *, size_t);
 	int (*set_context)(struct inode *, const void *, size_t, void *);
-	bool (*dummy_context)(struct inode *);
+	const union fscrypt_context *(*dummy_context)(struct inode *);
 	bool (*empty_dir)(struct inode *);
 	unsigned int max_namelen;
 	bool (*has_stable_inodes)(struct super_block *sb);
@@ -91,10 +91,12 @@ static inline bool fscrypt_needs_contents_encryption(const struct inode *inode)
 	return IS_ENCRYPTED(inode) && S_ISREG(inode->i_mode);
 }
 
-static inline bool fscrypt_dummy_context_enabled(struct inode *inode)
+static inline const union fscrypt_context *
+fscrypt_dummy_context(struct inode *inode)
 {
-	return inode->i_sb->s_cop->dummy_context &&
-		inode->i_sb->s_cop->dummy_context(inode);
+	if (!inode->i_sb->s_cop->dummy_context)
+		return NULL;
+	return inode->i_sb->s_cop->dummy_context(inode);
 }
 
 /*
@@ -234,9 +236,10 @@ static inline bool fscrypt_needs_contents_encryption(const struct inode *inode)
 	return false;
 }
 
-static inline bool fscrypt_dummy_context_enabled(struct inode *inode)
+static inline const union fscrypt_context *
+fscrypt_dummy_context(struct inode *inode)
 {
-	return false;
+	return NULL;
 }
 
 static inline void fscrypt_handle_d_move(struct dentry *dentry)
@@ -769,7 +772,7 @@ static inline int fscrypt_prepare_symlink(struct inode *dir,
 					  unsigned int max_len,
 					  struct fscrypt_str *disk_link)
 {
-	if (IS_ENCRYPTED(dir) || fscrypt_dummy_context_enabled(dir))
+	if (IS_ENCRYPTED(dir) || fscrypt_dummy_context(dir) != NULL)
 		return __fscrypt_prepare_symlink(dir, len, max_len, disk_link);
 
 	disk_link->name = (unsigned char *)target;
