@@ -2444,9 +2444,9 @@ static int f2fs_set_context(struct inode *inode, const void *ctx, size_t len,
 				ctx, len, fs_data, XATTR_CREATE);
 }
 
-static bool f2fs_dummy_context(struct inode *inode)
+static const union fscrypt_context *f2fs_dummy_context(struct inode *inode)
 {
-	return DUMMY_ENCRYPTION_ENABLED(F2FS_I_SB(inode));
+	return F2FS_OPTION(F2FS_I_SB(inode)).dummy_encryption_context;
 }
 
 static bool f2fs_has_stable_inodes(struct super_block *sb)

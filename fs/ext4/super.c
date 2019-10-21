@@ -1392,9 +1392,9 @@ retry:
 	return res;
 }
 
-static bool ext4_dummy_context(struct inode *inode)
+static const union fscrypt_context *ext4_dummy_context(struct inode *inode)
 {
-	return DUMMY_ENCRYPTION_ENABLED(EXT4_SB(inode->i_sb));
+	return EXT4_SB(inode->i_sb)->s_dummy_encryption_context;
 }
 
 static bool ext4_has_stable_inodes(struct super_block *sb)
