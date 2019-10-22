@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f1f1d17_a5b96398",
+        "filename": "drivers/media/v4l2-core/v4l2-compat-ioctl32.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-10-22T18:39:38Z",
+      "side": 1,
+      "message": "why is the copy size different than line 538?\n\nwhat is the reserved field being used for? What if upstream uses the reserved field for something else -- this looks risky.",
+      "revId": "8f33c492a28a9028ebde7dfe9fbb34e16788cdb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
