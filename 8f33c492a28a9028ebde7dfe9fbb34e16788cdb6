@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "29b6497f_901223ba",
+        "filename": "drivers/media/v4l2-core/v4l2-compat-ioctl32.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1584147
+      },
+      "writtenOn": "2019-10-23T20:42:29Z",
+      "side": 1,
+      "message": "It seems there is no way to pass extra information to driver along with buffer (synchronously) other than using reserved fields.",
+      "parentUuid": "30632187_13c9c6e3",
+      "revId": "8f33c492a28a9028ebde7dfe9fbb34e16788cdb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cbca59e9_75671bce",
         "filename": "drivers/media/v4l2-core/v4l2-compat-ioctl32.c",
         "patchSetId": 1
@@ -69,6 +87,24 @@
       "revId": "8f33c492a28a9028ebde7dfe9fbb34e16788cdb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "831fc77d_d54ce42c",
+        "filename": "drivers/media/v4l2-core/v4l2-compat-ioctl32.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1584147
+      },
+      "writtenOn": "2019-10-23T20:42:29Z",
+      "side": 1,
+      "message": "yes Todd sizeof(p32-\u003ereserved) \u003d\u003d sizeof(p64-\u003ereserved) is same always as reserved is __u32 type.\n\nalso upstream code is using p64-\u003edata_offset instead of p32-\u003edata_offset where data_offset is __u32 type.\n\nbut anyway I think it is good to use p32-\u003ereserved here so I will modify it.",
+      "parentUuid": "cbca59e9_75671bce",
+      "revId": "8f33c492a28a9028ebde7dfe9fbb34e16788cdb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
