@@ -22,6 +22,30 @@
       "revId": "3123640eb6fda91672c612891606c82786839fbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "268ae759_68e05d4f",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6427,
+      "author": {
+        "id": 1173283
+      },
+      "writtenOn": "2019-10-23T09:18:58Z",
+      "side": 1,
+      "message": "Good point. We actually have the same problem with misfit - it uses task_fits_capacity() but it should take e.g. uclamp.min into account. I could add a new helper that would be reusable for misfit \u0026 else.",
+      "parentUuid": "be156e0e_d36f380e",
+      "range": {
+        "startLine": 6427,
+        "startChar": 7,
+        "endLine": 6427,
+        "endChar": 45
+      },
+      "revId": "3123640eb6fda91672c612891606c82786839fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
