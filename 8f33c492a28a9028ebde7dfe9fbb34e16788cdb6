@@ -34,6 +34,41 @@
       "revId": "8f33c492a28a9028ebde7dfe9fbb34e16788cdb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30632187_13c9c6e3",
+        "filename": "drivers/media/v4l2-core/v4l2-compat-ioctl32.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-10-23T20:18:41Z",
+      "side": 1,
+      "message": "Is there a reason these changes to the video driver can\u0027t be made now to avoid using the reserved field?\n\n\u003e by the time upstream uses this field...\n\nThis is the android-mainline branch which gets updates from linux mainline on every RC. So if upstream changes it in 5.4-rc4, this code will be broken in android-mainline a few days later.\n\nSince this *is* upstream, the code needs to be upstream compliant in this way.",
+      "parentUuid": "4d454b89_58d17fab",
+      "revId": "8f33c492a28a9028ebde7dfe9fbb34e16788cdb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbca59e9_75671bce",
+        "filename": "drivers/media/v4l2-core/v4l2-compat-ioctl32.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-10-23T20:18:41Z",
+      "side": 1,
+      "message": "are we sure that sizeof(p32-\u003ereserved) \u003d\u003d sizeof(p64-\u003ereserved) always? Is there a chance that this overruns p32-\u003ereserved?",
+      "revId": "8f33c492a28a9028ebde7dfe9fbb34e16788cdb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
