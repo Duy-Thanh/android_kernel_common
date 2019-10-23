@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8b14d16d_219766ab",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-10-23T00:34:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "829e566c_45e1a423",
+      "range": {
+        "startLine": 25,
+        "startChar": 1,
+        "endLine": 25,
+        "endChar": 19
+      },
+      "revId": "0805538018326ec4e2402a69396756433a3708f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "266e65c1_216797d5",
         "filename": "init/Kconfig.gki",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "0805538018326ec4e2402a69396756433a3708f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6cb1a15e_1abd321f",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-10-23T00:34:58Z",
+      "side": 1,
+      "message": "Left here, but let me know if you\u0027d like it moved.",
+      "parentUuid": "266e65c1_216797d5",
+      "range": {
+        "startLine": 26,
+        "startChar": 8,
+        "endLine": 26,
+        "endChar": 22
+      },
+      "revId": "0805538018326ec4e2402a69396756433a3708f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
