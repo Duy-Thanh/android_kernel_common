@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be156e0e_d36f380e",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6427,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-10-23T08:43:45Z",
+      "side": 1,
+      "message": "Should we check the clamped / boosted util against capacity_orig too ? I know we don\u0027t do it today in wake_cap but this is arguably borken :)",
+      "range": {
+        "startLine": 6427,
+        "startChar": 7,
+        "endLine": 6427,
+        "endChar": 45
+      },
+      "revId": "3123640eb6fda91672c612891606c82786839fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
