@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "ab544651_11be1d48",
+        "filename": "drivers/media/v4l2-core/v4l2-compat-ioctl32.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1584147
+      },
+      "writtenOn": "2019-10-23T21:15:49Z",
+      "side": 1,
+      "message": "This is bug in v4l2 framework code.\n\nFor 64 bit client (and 64 bit kernel) the reserved fields are copied from clients to driver.\nWhere as 32 bit client is not able to pass reserved fields. This is a bug in v4l2 framework which we are fixing with this change.\n\nThis bug is not related to whether client or driver is using reserved fields.\nWe are using 32 bit userspace due to Google\u0027s mediaserver restriction. \nIn fact we would like switch to 64 bit userspace if Android can move mediaserver process to 64 bit.\n\nHaving said that we will look at the feasibility of not using reserved fields in future.\nBut after quick analysis it seems not using reserved fields in non-trivial and needs much more design changes in both Qcom userspace and driver.\n\nHence overall I would request you review this change with this background details.\nLet us know if you would like to have a quick call for this change.",
+      "parentUuid": "29b6497f_901223ba",
+      "revId": "8f33c492a28a9028ebde7dfe9fbb34e16788cdb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cbca59e9_75671bce",
         "filename": "drivers/media/v4l2-core/v4l2-compat-ioctl32.c",
         "patchSetId": 1
