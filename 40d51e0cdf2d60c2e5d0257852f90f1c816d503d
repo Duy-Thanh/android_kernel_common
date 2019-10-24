@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9214ef1_0f19e6ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-10-24T08:37:19Z",
+      "side": 1,
+      "message": "If you\u0027re confident with this analysis, could you please report that on the list rather than reverting for Android ? This can be fixed upstream with a -rc patch, or reverted before release if fixing is too hard.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 56
+      },
+      "revId": "40d51e0cdf2d60c2e5d0257852f90f1c816d503d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
