@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "29c66277_a04ce122",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-10-24T17:15:57Z",
+      "side": 1,
+      "message": "Add \"ANDROID: \" tag.",
+      "revId": "8f33c492a28a9028ebde7dfe9fbb34e16788cdb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27feac6e_f45ed4dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-10-24T17:15:57Z",
+      "side": 1,
+      "message": "Please cite the bug with \"Bug: 143160749\".",
+      "revId": "8f33c492a28a9028ebde7dfe9fbb34e16788cdb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2f1f1d17_a5b96398",
         "filename": "drivers/media/v4l2-core/v4l2-compat-ioctl32.c",
         "patchSetId": 1
