@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c9a6a670_5d24c49a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1584147
+      },
+      "writtenOn": "2019-10-24T18:49:00Z",
+      "side": 1,
+      "message": "ANDROID: v4l2-compat-ioctl32.c: copy reserved fields\n\nCopy reserved fields along with other fields in v4l2_plane\nfor 32 bit clients to use reserved fields when required.\n\nBug: 143160749\nChange-Id: I0c7e7485961ab50188cda6ae81998473500bb07b\nSigned-off-by: Maheshwar Ajja \u003cmajja@codeaurora.org\u003e",
+      "parentUuid": "29c66277_a04ce122",
+      "revId": "8f33c492a28a9028ebde7dfe9fbb34e16788cdb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27feac6e_f45ed4dd",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "9831287d_b6aee1b3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1584147
+      },
+      "writtenOn": "2019-10-24T18:49:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27feac6e_f45ed4dd",
+      "revId": "8f33c492a28a9028ebde7dfe9fbb34e16788cdb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd5e5a38_565632aa",
         "filename": "drivers/media/v4l2-core/v4l2-compat-ioctl32.c",
         "patchSetId": 1
@@ -50,6 +86,24 @@
       "revId": "8f33c492a28a9028ebde7dfe9fbb34e16788cdb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9506a508_490bd47f",
+        "filename": "drivers/media/v4l2-core/v4l2-compat-ioctl32.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1584147
+      },
+      "writtenOn": "2019-10-24T18:49:00Z",
+      "side": 1,
+      "message": "ok sure",
+      "parentUuid": "cd5e5a38_565632aa",
+      "revId": "8f33c492a28a9028ebde7dfe9fbb34e16788cdb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
