@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55b20503_af0dd85c",
+        "filename": "drivers/media/v4l2-core/v4l2-compat-ioctl32.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-10-24T20:39:22Z",
+      "side": 1,
+      "message": "\"upto\" --\u003e \"up to\"",
+      "revId": "dc7862f09fac767c7d2a2c5610c23a2d5ab3a766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4631f1c_0f61b3f8",
+        "filename": "include/uapi/linux/videodev2.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-10-24T20:39:22Z",
+      "side": 1,
+      "message": "The kerneldoc addition is good, but can you actually put a comment here before the decl of reserved? The point is that if someone upstream adds a field in the reserved space, we\u0027ll get a merge conflict when merging into android-mainline.",
+      "revId": "dc7862f09fac767c7d2a2c5610c23a2d5ab3a766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
