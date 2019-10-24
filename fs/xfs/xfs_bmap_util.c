@@ -864,7 +864,6 @@ xfs_alloc_file_space(
 	xfs_filblks_t		allocatesize_fsb;
 	xfs_extlen_t		extsz, temp;
 	xfs_fileoff_t		startoffset_fsb;
-	xfs_fileoff_t		endoffset_fsb;
 	int			nimaps;
 	int			quota_flag;
 	int			rt;
@@ -892,8 +891,7 @@ xfs_alloc_file_space(
 	imapp = &imaps[0];
 	nimaps = 1;
 	startoffset_fsb	= XFS_B_TO_FSBT(mp, offset);
-	endoffset_fsb = XFS_B_TO_FSB(mp, offset + count);
-	allocatesize_fsb = endoffset_fsb - startoffset_fsb;
+	allocatesize_fsb = XFS_B_TO_FSB(mp, count);
 
 	/*
 	 * Allocate file space until done or until there is an error

@@ -194,27 +194,6 @@ static void free_capture_list(struct i915_request *request)
 	}
 }
 
-static void remove_from_engine(struct i915_request *rq)
-{
-	struct intel_engine_cs *engine, *locked;
-
-	/*
-	 * Virtual engines complicate acquiring the engine timeline lock,
-	 * as their rq->engine pointer is not stable until under that
-	 * engine lock. The simple ploy we use is to take the lock then
-	 * check that the rq still belongs to the newly locked engine.
-	 */
-	locked = READ_ONCE(rq->engine);
-	spin_lock(&locked->active.lock);
-	while (unlikely(locked != (engine = READ_ONCE(rq->engine)))) {
-		spin_unlock(&locked->active.lock);
-		spin_lock(&engine->active.lock);
-		locked = engine;
-	}
-	list_del(&rq->sched.link);
-	spin_unlock(&locked->active.lock);
-}
-
 static bool i915_request_retire(struct i915_request *rq)
 {
 	struct i915_active_request *active, *next;
@@ -280,7 +259,9 @@ static bool i915_request_retire(struct i915_request *rq)
 	 * request that we have removed from the HW and put back on a run
 	 * queue.
 	 */
-	remove_from_engine(rq);
+	spin_lock(&rq->engine->active.lock);
+	list_del(&rq->sched.link);
+	spin_unlock(&rq->engine->active.lock);
 
 	spin_lock(&rq->lock);
 	i915_request_mark_complete(rq);
@@ -377,10 +358,9 @@ __i915_request_await_execution(struct i915_request *rq,
 	return 0;
 }
 
-bool __i915_request_submit(struct i915_request *request)
+void __i915_request_submit(struct i915_request *request)
 {
 	struct intel_engine_cs *engine = request->engine;
-	bool result = false;
 
 	GEM_TRACE("%s fence %llx:%lld, current %d\n",
 		  engine->name,
@@ -389,25 +369,6 @@ bool __i915_request_submit(struct i915_request *request)
 
 	GEM_BUG_ON(!irqs_disabled());
 	lockdep_assert_held(&engine->active.lock);
-
-	/*
-	 * With the advent of preempt-to-busy, we frequently encounter
-	 * requests that we have unsubmitted from HW, but left running
-	 * until the next ack and so have completed in the meantime. On
-	 * resubmission of that completed request, we can skip
-	 * updating the payload, and execlists can even skip submitting
-	 * the request.
-	 *
-	 * We must remove the request from the caller's priority queue,
-	 * and the caller must only call us when the request is in their
-	 * priority queue, under the active.lock. This ensures that the
-	 * request has *not* yet been retired and we can safely move
-	 * the request into the engine->active.list where it will be
-	 * dropped upon retiring. (Otherwise if resubmit a *retired*
-	 * request, this would be a horrible use-after-free.)
-	 */
-	if (i915_request_completed(request))
-		goto xfer;
 
 	if (i915_gem_context_is_banned(request->gem_context))
 		i915_request_skip(request, -EIO);
@@ -432,18 +393,13 @@ bool __i915_request_submit(struct i915_request *request)
 	    i915_sw_fence_signaled(&request->semaphore))
 		engine->saturated |= request->sched.semaphores;
 
-	engine->emit_fini_breadcrumb(request,
-				     request->ring->vaddr + request->postfix);
-
-	trace_i915_request_execute(request);
-	engine->serial++;
-	result = true;
-
-xfer:	/* We may be recursing from the signal callback of another i915 fence */
+	/* We may be recursing from the signal callback of another i915 fence */
 	spin_lock_nested(&request->lock, SINGLE_DEPTH_NESTING);
 
-	if (!test_and_set_bit(I915_FENCE_FLAG_ACTIVE, &request->fence.flags))
-		list_move_tail(&request->sched.link, &engine->active.requests);
+	list_move_tail(&request->sched.link, &engine->active.requests);
+
+	GEM_BUG_ON(test_bit(I915_FENCE_FLAG_ACTIVE, &request->fence.flags));
+	set_bit(I915_FENCE_FLAG_ACTIVE, &request->fence.flags);
 
 	if (test_bit(DMA_FENCE_FLAG_ENABLE_SIGNAL_BIT, &request->fence.flags) &&
 	    !test_bit(DMA_FENCE_FLAG_SIGNALED_BIT, &request->fence.flags) &&
@@ -454,7 +410,12 @@ xfer:	/* We may be recursing from the signal callback of another i915 fence */
 
 	spin_unlock(&request->lock);
 
-	return result;
+	engine->emit_fini_breadcrumb(request,
+				     request->ring->vaddr + request->postfix);
+
+	engine->serial++;
+
+	trace_i915_request_execute(request);
 }
 
 void i915_request_submit(struct i915_request *request)

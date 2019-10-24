@@ -687,7 +687,6 @@ struct clock_source *dce112_clock_source_create(
 		return &clk_src->base;
 	}
 
-	kfree(clk_src);
 	BREAK_TO_DEBUGGER();
 	return NULL;
 }

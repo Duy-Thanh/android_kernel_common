@@ -12,7 +12,6 @@
 #define pr_fmt(fmt) fmt
 
 #include <linux/workqueue.h>
-#include <linux/security.h>
 #include <linux/spinlock.h>
 #include <linux/kthread.h>
 #include <linux/tracefs.h>
@@ -1295,8 +1294,6 @@ static int trace_format_open(struct inode *inode, struct file *file)
 	struct seq_file *m;
 	int ret;
 
-	/* Do we want to hide event format files on tracefs lockdown? */
-
 	ret = seq_open(file, &trace_format_seq_ops);
 	if (ret < 0)
 		return ret;
@@ -1443,17 +1440,28 @@ static int system_tr_open(struct inode *inode, struct file *filp)
 	struct trace_array *tr = inode->i_private;
 	int ret;
 
+	if (tracing_is_disabled())
+		return -ENODEV;
+
+	if (trace_array_get(tr) < 0)
+		return -ENODEV;
+
 	/* Make a temporary dir that has no system but points to tr */
 	dir = kzalloc(sizeof(*dir), GFP_KERNEL);
-	if (!dir)
+	if (!dir) {
+		trace_array_put(tr);
 		return -ENOMEM;
+	}
 
-	ret = tracing_open_generic_tr(inode, filp);
+	dir->tr = tr;
+
+	ret = tracing_open_generic(inode, filp);
 	if (ret < 0) {
+		trace_array_put(tr);
 		kfree(dir);
 		return ret;
 	}
-	dir->tr = tr;
+
 	filp->private_data = dir;
 
 	return 0;
@@ -1763,10 +1771,6 @@ ftrace_event_open(struct inode *inode, struct file *file,
 	struct seq_file *m;
 	int ret;
 
-	ret = security_locked_down(LOCKDOWN_TRACEFS);
-	if (ret)
-		return ret;
-
 	ret = seq_open(file, seq_ops);
 	if (ret < 0)
 		return ret;
@@ -1791,7 +1795,6 @@ ftrace_event_avail_open(struct inode *inode, struct file *file)
 {
 	const struct seq_operations *seq_ops = &show_event_seq_ops;
 
-	/* Checks for tracefs lockdown */
 	return ftrace_event_open(inode, file, seq_ops);
 }
 
@@ -1802,9 +1805,8 @@ ftrace_event_set_open(struct inode *inode, struct file *file)
 	struct trace_array *tr = inode->i_private;
 	int ret;
 
-	ret = tracing_check_open_get_tr(tr);
-	if (ret)
-		return ret;
+	if (trace_array_get(tr) < 0)
+		return -ENODEV;
 
 	if ((file->f_mode & FMODE_WRITE) &&
 	    (file->f_flags & O_TRUNC))
@@ -1823,9 +1825,8 @@ ftrace_event_set_pid_open(struct inode *inode, struct file *file)
 	struct trace_array *tr = inode->i_private;
 	int ret;
 
-	ret = tracing_check_open_get_tr(tr);
-	if (ret)
-		return ret;
+	if (trace_array_get(tr) < 0)
+		return -ENODEV;
 
 	if ((file->f_mode & FMODE_WRITE) &&
 	    (file->f_flags & O_TRUNC))

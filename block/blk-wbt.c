@@ -308,8 +308,7 @@ static void calc_wb_limits(struct rq_wb *rwb)
 
 static void scale_up(struct rq_wb *rwb)
 {
-	if (!rq_depth_scale_up(&rwb->rq_depth))
-		return;
+	rq_depth_scale_up(&rwb->rq_depth);
 	calc_wb_limits(rwb);
 	rwb->unknown_cnt = 0;
 	rwb_wake_all(rwb);
@@ -318,8 +317,7 @@ static void scale_up(struct rq_wb *rwb)
 
 static void scale_down(struct rq_wb *rwb, bool hard_throttle)
 {
-	if (!rq_depth_scale_down(&rwb->rq_depth, hard_throttle))
-		return;
+	rq_depth_scale_down(&rwb->rq_depth, hard_throttle);
 	calc_wb_limits(rwb);
 	rwb->unknown_cnt = 0;
 	rwb_trace_step(rwb, "scale down");

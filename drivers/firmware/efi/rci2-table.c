@@ -76,7 +76,7 @@ static u16 checksum(void)
 	return chksum;
 }
 
-static int __init efi_rci2_sysfs_init(void)
+int __init efi_rci2_sysfs_init(void)
 {
 	struct kobject *tables_kobj;
 	int ret = -ENOMEM;

@@ -526,7 +526,7 @@ static int ag71xx_mdio_probe(struct ag71xx *ag)
 	struct device *dev = &ag->pdev->dev;
 	struct net_device *ndev = ag->ndev;
 	static struct mii_bus *mii_bus;
-	struct device_node *np, *mnp;
+	struct device_node *np;
 	int err;
 
 	np = dev->of_node;
@@ -571,9 +571,7 @@ static int ag71xx_mdio_probe(struct ag71xx *ag)
 		msleep(200);
 	}
 
-	mnp = of_get_child_by_name(np, "mdio");
-	err = of_mdiobus_register(mii_bus, mnp);
-	of_node_put(mnp);
+	err = of_mdiobus_register(mii_bus, np);
 	if (err)
 		goto mdio_err_put_clk;
 

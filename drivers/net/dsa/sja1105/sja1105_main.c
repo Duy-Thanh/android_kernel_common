@@ -1897,9 +1897,7 @@ static int sja1105_set_ageing_time(struct dsa_switch *ds,
 	return sja1105_static_config_reload(priv);
 }
 
-/* Must be called only with priv->tagger_data.state bit
- * SJA1105_HWTS_RX_EN cleared
- */
+/* Caller must hold priv->tagger_data.meta_lock */
 static int sja1105_change_rxtstamping(struct sja1105_private *priv,
 				      bool on)
 {
@@ -1956,17 +1954,16 @@ static int sja1105_hwtstamp_set(struct dsa_switch *ds, int port,
 		break;
 	}
 
-	if (rx_on != test_bit(SJA1105_HWTS_RX_EN, &priv->tagger_data.state)) {
-		clear_bit(SJA1105_HWTS_RX_EN, &priv->tagger_data.state);
-
+	if (rx_on != priv->tagger_data.hwts_rx_en) {
+		spin_lock(&priv->tagger_data.meta_lock);
 		rc = sja1105_change_rxtstamping(priv, rx_on);
+		spin_unlock(&priv->tagger_data.meta_lock);
 		if (rc < 0) {
 			dev_err(ds->dev,
 				"Failed to change RX timestamping: %d\n", rc);
-			return rc;
+			return -EFAULT;
 		}
-		if (rx_on)
-			set_bit(SJA1105_HWTS_RX_EN, &priv->tagger_data.state);
+		priv->tagger_data.hwts_rx_en = rx_on;
 	}
 
 	if (copy_to_user(ifr->ifr_data, &config, sizeof(config)))
@@ -1985,7 +1982,7 @@ static int sja1105_hwtstamp_get(struct dsa_switch *ds, int port,
 		config.tx_type = HWTSTAMP_TX_ON;
 	else
 		config.tx_type = HWTSTAMP_TX_OFF;
-	if (test_bit(SJA1105_HWTS_RX_EN, &priv->tagger_data.state))
+	if (priv->tagger_data.hwts_rx_en)
 		config.rx_filter = HWTSTAMP_FILTER_PTP_V2_L2_EVENT;
 	else
 		config.rx_filter = HWTSTAMP_FILTER_NONE;
@@ -2008,11 +2005,11 @@ static void sja1105_rxtstamp_work(struct work_struct *work)
 
 	mutex_lock(&priv->ptp_lock);
 
+	now = priv->tstamp_cc.read(&priv->tstamp_cc);
+
 	while ((skb = skb_dequeue(&data->skb_rxtstamp_queue)) != NULL) {
 		struct skb_shared_hwtstamps *shwt = skb_hwtstamps(skb);
 		u64 ts;
-
-		now = priv->tstamp_cc.read(&priv->tstamp_cc);
 
 		*shwt = (struct skb_shared_hwtstamps) {0};
 
@@ -2034,7 +2031,7 @@ static bool sja1105_port_rxtstamp(struct dsa_switch *ds, int port,
 	struct sja1105_private *priv = ds->priv;
 	struct sja1105_tagger_data *data = &priv->tagger_data;
 
-	if (!test_bit(SJA1105_HWTS_RX_EN, &data->state))
+	if (!data->hwts_rx_en)
 		return false;
 
 	/* We need to read the full PTP clock to reconstruct the Rx
@@ -2204,7 +2201,6 @@ static int sja1105_probe(struct spi_device *spi)
 	tagger_data = &priv->tagger_data;
 	skb_queue_head_init(&tagger_data->skb_rxtstamp_queue);
 	INIT_WORK(&tagger_data->rxtstamp_work, sja1105_rxtstamp_work);
-	spin_lock_init(&tagger_data->meta_lock);
 
 	/* Connections between dsa_port and sja1105_port */
 	for (i = 0; i < SJA1105_NUM_PORTS; i++) {

@@ -39,6 +39,9 @@
  * ways. Unless there is something clearly wrong with it the code should
  * remain as-is as it provides us with a guarantee from HW that it is correct.
  */
+
+typedef unsigned int uint;
+
 typedef struct {
 	double DPPCLK;
 	double DISPCLK;
@@ -4771,7 +4774,7 @@ void dml21_ModeSupportAndSystemConfigurationFull(struct display_mode_lib *mode_l
 				mode_lib->vba.MaximumReadBandwidthWithoutPrefetch = 0.0;
 				mode_lib->vba.MaximumReadBandwidthWithPrefetch = 0.0;
 				for (k = 0; k <= mode_lib->vba.NumberOfActivePlanes - 1; k++) {
-					unsigned int m;
+					uint m;
 
 					locals->cursor_bw[k] = 0;
 					locals->cursor_bw_pre[k] = 0;
@@ -5282,7 +5285,7 @@ static void CalculateWatermarksAndDRAMSpeedChangeSupport(
 	double SecondMinActiveDRAMClockChangeMarginOneDisplayInVBLank;
 	double FullDETBufferingTimeYStutterCriticalPlane = 0;
 	double TimeToFinishSwathTransferStutterCriticalPlane = 0;
-	unsigned int k, j;
+	uint k, j;
 
 	mode_lib->vba.TotalActiveDPP = 0;
 	mode_lib->vba.TotalDCCActiveDPP = 0;
@@ -5504,7 +5507,7 @@ static void CalculateDCFCLKDeepSleep(
 		double DPPCLK[],
 		double *DCFCLKDeepSleep)
 {
-	unsigned int k;
+	uint k;
 	double DisplayPipeLineDeliveryTimeLuma;
 	double DisplayPipeLineDeliveryTimeChroma;
 	//double   DCFCLKDeepSleepPerPlane[DC__NUM_DPP__MAX];
@@ -5724,7 +5727,7 @@ static void CalculatePixelDeliveryTimes(
 		double DisplayPipeRequestDeliveryTimeChromaPrefetch[])
 {
 	double req_per_swath_ub;
-	unsigned int k;
+	uint k;
 
 	for (k = 0; k < NumberOfActivePlanes; ++k) {
 		if (VRatio[k] <= 1) {
@@ -5866,7 +5869,7 @@ static void CalculateMetaAndPTETimes(
 	unsigned int dpte_groups_per_row_chroma_ub;
 	unsigned int num_group_per_lower_vm_stage;
 	unsigned int num_req_per_lower_vm_stage;
-	unsigned int k;
+	uint k;
 
 	for (k = 0; k < NumberOfActivePlanes; ++k) {
 		if (GPUVMEnable == true) {

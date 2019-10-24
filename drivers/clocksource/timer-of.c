@@ -25,9 +25,7 @@ static __init void timer_of_irq_exit(struct of_timer_irq *of_irq)
 
 	struct clock_event_device *clkevt = &to->clkevt;
 
-	if (of_irq->percpu)
-		free_percpu_irq(of_irq->irq, clkevt);
-	else
+	of_irq->percpu ? free_percpu_irq(of_irq->irq, clkevt) :
 		free_irq(of_irq->irq, clkevt);
 }
 

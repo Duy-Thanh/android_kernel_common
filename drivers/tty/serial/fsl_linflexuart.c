@@ -3,7 +3,7 @@
  * Freescale linflexuart serial port driver
  *
  * Copyright 2012-2016 Freescale Semiconductor, Inc.
- * Copyright 2017-2019 NXP
+ * Copyright 2017-2018 NXP
  */
 
 #if defined(CONFIG_SERIAL_FSL_LINFLEXUART_CONSOLE) && \
@@ -246,14 +246,12 @@ static irqreturn_t linflex_rxint(int irq, void *dev_id)
 	struct tty_port *port = &sport->state->port;
 	unsigned long flags, status;
 	unsigned char rx;
-	bool brk;
 
 	spin_lock_irqsave(&sport->lock, flags);
 
 	status = readl(sport->membase + UARTSR);
 	while (status & LINFLEXD_UARTSR_RMB) {
 		rx = readb(sport->membase + BDRM);
-		brk = false;
 		flg = TTY_NORMAL;
 		sport->icount.rx++;
 
@@ -263,11 +261,8 @@ static irqreturn_t linflex_rxint(int irq, void *dev_id)
 				status |= LINFLEXD_UARTSR_SZF;
 			if (status & LINFLEXD_UARTSR_BOF)
 				status |= LINFLEXD_UARTSR_BOF;
-			if (status & LINFLEXD_UARTSR_FEF) {
-				if (!rx)
-					brk = true;
+			if (status & LINFLEXD_UARTSR_FEF)
 				status |= LINFLEXD_UARTSR_FEF;
-			}
 			if (status & LINFLEXD_UARTSR_PE)
 				status |=  LINFLEXD_UARTSR_PE;
 		}
@@ -276,15 +271,13 @@ static irqreturn_t linflex_rxint(int irq, void *dev_id)
 		       sport->membase + UARTSR);
 		status = readl(sport->membase + UARTSR);
 
-		if (brk) {
-			uart_handle_break(sport);
-		} else {
+		if (uart_handle_sysrq_char(sport, (unsigned char)rx))
+			continue;
+
 #ifdef SUPPORT_SYSRQ
-			if (uart_handle_sysrq_char(sport, (unsigned char)rx))
-				continue;
+			sport->sysrq = 0;
 #endif
-			tty_insert_flip_char(port, rx, flg);
-		}
+		tty_insert_flip_char(port, rx, flg);
 	}
 
 	spin_unlock_irqrestore(&sport->lock, flags);

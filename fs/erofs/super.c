@@ -105,9 +105,9 @@ static int erofs_read_superblock(struct super_block *sb)
 	int ret;
 
 	page = read_mapping_page(sb->s_bdev->bd_inode->i_mapping, 0, NULL);
-	if (IS_ERR(page)) {
+	if (!page) {
 		erofs_err(sb, "cannot read erofs superblock");
-		return PTR_ERR(page);
+		return -EIO;
 	}
 
 	sbi = EROFS_SB(sb);

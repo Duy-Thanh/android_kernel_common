@@ -164,13 +164,8 @@ static void finish_writeback_work(struct bdi_writeback *wb,
 
 	if (work->auto_free)
 		kfree(work);
-	if (done) {
-		wait_queue_head_t *waitq = done->waitq;
-
-		/* @done can't be accessed after the following dec */
-		if (atomic_dec_and_test(&done->cnt))
-			wake_up_all(waitq);
-	}
+	if (done && atomic_dec_and_test(&done->cnt))
+		wake_up_all(done->waitq);
 }
 
 static void wb_queue_work(struct bdi_writeback *wb,

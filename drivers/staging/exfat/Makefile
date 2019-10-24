@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: GPL-2.0-or-later
+# SPDX-License-Identifier: GPL-2.0
 
 obj-$(CONFIG_EXFAT_FS) += exfat.o
 

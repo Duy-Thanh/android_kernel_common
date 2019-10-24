@@ -215,7 +215,7 @@ static bool ipv6_raw_deliver(struct sk_buff *skb, int nexthdr)
 
 			/* Not releasing hash table! */
 			if (clone) {
-				nf_reset_ct(clone);
+				nf_reset(clone);
 				rawv6_rcv(sk, clone);
 			}
 		}

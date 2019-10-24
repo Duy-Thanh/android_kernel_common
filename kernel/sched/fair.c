@@ -4926,28 +4926,20 @@ static enum hrtimer_restart sched_cfs_period_timer(struct hrtimer *timer)
 		if (++count > 3) {
 			u64 new, old = ktime_to_ns(cfs_b->period);
 
-			/*
-			 * Grow period by a factor of 2 to avoid losing precision.
-			 * Precision loss in the quota/period ratio can cause __cfs_schedulable
-			 * to fail.
-			 */
-			new = old * 2;
-			if (new < max_cfs_quota_period) {
-				cfs_b->period = ns_to_ktime(new);
-				cfs_b->quota *= 2;
+			new = (old * 147) / 128; /* ~115% */
+			new = min(new, max_cfs_quota_period);
 
-				pr_warn_ratelimited(
-	"cfs_period_timer[cpu%d]: period too short, scaling up (new cfs_period_us = %lld, cfs_quota_us = %lld)\n",
-					smp_processor_id(),
-					div_u64(new, NSEC_PER_USEC),
-					div_u64(cfs_b->quota, NSEC_PER_USEC));
-			} else {
-				pr_warn_ratelimited(
-	"cfs_period_timer[cpu%d]: period too short, but cannot scale up without losing precision (cfs_period_us = %lld, cfs_quota_us = %lld)\n",
-					smp_processor_id(),
-					div_u64(old, NSEC_PER_USEC),
-					div_u64(cfs_b->quota, NSEC_PER_USEC));
-			}
+			cfs_b->period = ns_to_ktime(new);
+
+			/* since max is 1s, this is limited to 1e9^2, which fits in u64 */
+			cfs_b->quota *= new;
+			cfs_b->quota = div64_u64(cfs_b->quota, old);
+
+			pr_warn_ratelimited(
+	"cfs_period_timer[cpu%d]: period too short, scaling up (new cfs_period_us %lld, cfs_quota_us = %lld)\n",
+				smp_processor_id(),
+				div_u64(new, NSEC_PER_USEC),
+				div_u64(cfs_b->quota, NSEC_PER_USEC));
 
 			/* reset count so we don't come right back in here */
 			count = 0;
@@ -6364,8 +6356,7 @@ static int find_energy_efficient_cpu(struct task_struct *p, int prev_cpu, int sy
 		goto fail;
 
 	cpu = smp_processor_id();
-	if (sync && cpu_rq(cpu)->nr_running == 1 &&
-	    cpumask_test_cpu(cpu, p->cpus_ptr)) {
+	if (sync && cpumask_test_cpu(cpu, p->cpus_ptr)) {
 		rcu_read_unlock();
 		return cpu;
 	}

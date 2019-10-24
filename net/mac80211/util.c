@@ -247,8 +247,7 @@ static void __ieee80211_wake_txqs(struct ieee80211_sub_if_data *sdata, int ac)
 	struct sta_info *sta;
 	int i;
 
-	local_bh_disable();
-	spin_lock(&fq->lock);
+	spin_lock_bh(&fq->lock);
 
 	if (sdata->vif.type == NL80211_IFTYPE_AP)
 		ps = &sdata->bss->ps;
@@ -274,9 +273,9 @@ static void __ieee80211_wake_txqs(struct ieee80211_sub_if_data *sdata, int ac)
 						&txqi->flags))
 				continue;
 
-			spin_unlock(&fq->lock);
+			spin_unlock_bh(&fq->lock);
 			drv_wake_tx_queue(local, txqi);
-			spin_lock(&fq->lock);
+			spin_lock_bh(&fq->lock);
 		}
 	}
 
@@ -289,14 +288,12 @@ static void __ieee80211_wake_txqs(struct ieee80211_sub_if_data *sdata, int ac)
 	    (ps && atomic_read(&ps->num_sta_ps)) || ac != vif->txq->ac)
 		goto out;
 
-	spin_unlock(&fq->lock);
+	spin_unlock_bh(&fq->lock);
 
 	drv_wake_tx_queue(local, txqi);
-	local_bh_enable();
 	return;
 out:
-	spin_unlock(&fq->lock);
-	local_bh_enable();
+	spin_unlock_bh(&fq->lock);
 }
 
 static void

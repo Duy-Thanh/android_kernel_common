@@ -111,7 +111,7 @@ struct qib {
 	/* private: */
 	u8 res[88];
 	/* public: */
-	u8 parm[128];
+	u8 parm[QDIO_MAX_BUFFERS_PER_Q];
 } __attribute__ ((packed, aligned(256)));
 
 /**

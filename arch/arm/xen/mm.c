@@ -28,10 +28,7 @@ unsigned long xen_get_swiotlb_free_pages(unsigned int order)
 
 	for_each_memblock(memory, reg) {
 		if (reg->base < (phys_addr_t)0xffffffff) {
-			if (IS_ENABLED(CONFIG_ZONE_DMA32))
-				flags |= __GFP_DMA32;
-			else
-				flags |= __GFP_DMA;
+			flags |= __GFP_DMA;
 			break;
 		}
 	}

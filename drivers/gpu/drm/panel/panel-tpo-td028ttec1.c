@@ -375,7 +375,8 @@ static const struct of_device_id td028ttec1_of_match[] = {
 MODULE_DEVICE_TABLE(of, td028ttec1_of_match);
 
 static const struct spi_device_id td028ttec1_ids[] = {
-	{ "td028ttec1", 0 },
+	{ "tpo,td028ttec1", 0},
+	{ "toppoly,td028ttec1", 0 },
 	{ /* sentinel */ }
 };
 

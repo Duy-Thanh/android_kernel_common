@@ -156,11 +156,7 @@ static struct sk_buff
 	/* Step 1: A timestampable frame was received.
 	 * Buffer it until we get its meta frame.
 	 */
-	if (is_link_local) {
-		if (!test_bit(SJA1105_HWTS_RX_EN, &sp->data->state))
-			/* Do normal processing. */
-			return skb;
-
+	if (is_link_local && sp->data->hwts_rx_en) {
 		spin_lock(&sp->data->meta_lock);
 		/* Was this a link-local frame instead of the meta
 		 * that we were expecting?
@@ -190,12 +186,6 @@ static struct sk_buff
 	 */
 	} else if (is_meta) {
 		struct sk_buff *stampable_skb;
-
-		/* Drop the meta frame if we're not in the right state
-		 * to process it.
-		 */
-		if (!test_bit(SJA1105_HWTS_RX_EN, &sp->data->state))
-			return NULL;
 
 		spin_lock(&sp->data->meta_lock);
 

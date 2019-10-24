@@ -6,8 +6,6 @@
 /// add a missing namespace tag to a module source file.
 ///
 
-virtual report
-
 @has_ns_import@
 declarer name MODULE_IMPORT_NS;
 identifier virtual.ns;

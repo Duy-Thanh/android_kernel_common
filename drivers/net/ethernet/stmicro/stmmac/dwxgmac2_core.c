@@ -472,7 +472,7 @@ static void dwxgmac2_set_filter(struct mac_device_info *hw,
 	dwxgmac2_set_mchash(ioaddr, mc_filter, mcbitslog2);
 
 	/* Handle multiple unicast addresses */
-	if (netdev_uc_count(dev) > hw->unicast_filter_entries) {
+	if (netdev_uc_count(dev) > XGMAC_ADDR_MAX) {
 		value |= XGMAC_FILTER_PR;
 	} else {
 		struct netdev_hw_addr *ha;
@@ -523,8 +523,8 @@ static int dwxgmac2_rss_configure(struct mac_device_info *hw,
 				  struct stmmac_rss *cfg, u32 num_rxq)
 {
 	void __iomem *ioaddr = hw->pcsr;
-	u32 value, *key;
 	int i, ret;
+	u32 value;
 
 	value = readl(ioaddr + XGMAC_RSS_CTRL);
 	if (!cfg || !cfg->enable) {
@@ -533,9 +533,8 @@ static int dwxgmac2_rss_configure(struct mac_device_info *hw,
 		return 0;
 	}
 
-	key = (u32 *)cfg->key;
-	for (i = 0; i < (ARRAY_SIZE(cfg->key) / sizeof(u32)); i++) {
-		ret = dwxgmac2_rss_write_reg(ioaddr, true, i, key[i]);
+	for (i = 0; i < (sizeof(cfg->key) / sizeof(u32)); i++) {
+		ret = dwxgmac2_rss_write_reg(ioaddr, true, i, cfg->key[i]);
 		if (ret)
 			return ret;
 	}
