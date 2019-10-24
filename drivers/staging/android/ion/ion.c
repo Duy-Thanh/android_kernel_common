@@ -284,9 +284,9 @@ static int ion_assign_heap_id(struct ion_heap *heap, struct ion_device *dev)
 		}
 	}
 
-	if (test_and_set_bit(id_bit - 1, dev->heap_ids))
+	if (test_and_set_bit(id_bit, dev->heap_ids))
 		return -EEXIST;
-	heap->id = id_bit - 1;
+	heap->id = id_bit;
 	dev->heap_cnt++;
 
 	return 0;
