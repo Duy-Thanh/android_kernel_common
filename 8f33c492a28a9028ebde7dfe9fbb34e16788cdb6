@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "cd5e5a38_565632aa",
+        "filename": "drivers/media/v4l2-core/v4l2-compat-ioctl32.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-10-24T17:32:32Z",
+      "side": 1,
+      "message": "Please add a comment before reserved indicating how it is being used. Please do the same in include/uapi/linux/videodev2.h on the \"reserved\" field declaration for v4l2_plane. This will cause a conflict if the reserved field is used by upstream -- better to catch it at merge time than have it silently fail.",
+      "revId": "8f33c492a28a9028ebde7dfe9fbb34e16788cdb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2f1f1d17_a5b96398",
         "filename": "drivers/media/v4l2-core/v4l2-compat-ioctl32.c",
         "patchSetId": 1
