@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "8c143e58_25c723bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-10-25T18:10:47Z",
+      "side": 1,
+      "message": "\"ANDROID: \"",
+      "revId": "07a35bc4b84deadce0f799bec0ec9d77386e1ea8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f2885b9_82bb2889",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-10-25T18:10:47Z",
+      "side": 1,
+      "message": "\"Bug: \"",
+      "revId": "07a35bc4b84deadce0f799bec0ec9d77386e1ea8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "750b6a38_40d7df6e",
         "filename": "include/uapi/sound/compress_params.h",
         "patchSetId": 2
