@@ -18,6 +18,9 @@ extern struct module __this_module;
 #define THIS_MODULE ((struct module *)0)
 #endif
 
+#ifdef CONFIG_MODULES
+
+#if defined(__KERNEL__) && !defined(__GENKSYMS__)
 #ifdef CONFIG_MODVERSIONS
 /* Mark the CRC weak since genksyms apparently decides not to
  * generate a checksums for some symbols */
@@ -71,12 +74,6 @@ struct kernel_symbol {
 };
 #endif
 
-#ifdef __GENKSYMS__
-
-#define ___EXPORT_SYMBOL(sym, sec)	__GENKSYMS_EXPORT_SYMBOL(sym)
-
-#else
-
 /* For every exported symbol, place a struct in the __ksymtab section */
 #define ___EXPORT_SYMBOL(sym, sec)					\
 	extern typeof(sym) sym;						\
@@ -86,9 +83,7 @@ struct kernel_symbol {
 	= #sym;								\
 	__KSYMTAB_ENTRY(sym, sec)
 
-#endif
-
-#if !defined(CONFIG_MODULES) || defined(__DISABLE_EXPORTS)
+#if defined(__DISABLE_EXPORTS)
 
 /*
  * Allow symbol exports to be disabled completely so that C code may
@@ -122,22 +117,37 @@ struct kernel_symbol {
 #define __cond_export_sym_0(sym, sec) /* nothing */
 
 #else
+#define __EXPORT_SYMBOL ___EXPORT_SYMBOL
+#endif
 
-#define __EXPORT_SYMBOL(sym, sec)	___EXPORT_SYMBOL(sym, sec)
+#define EXPORT_SYMBOL(sym)					\
+	__EXPORT_SYMBOL(sym, "")
 
-#endif /* CONFIG_MODULES */
+#define EXPORT_SYMBOL_GPL(sym)					\
+	__EXPORT_SYMBOL(sym, "_gpl")
 
-#define EXPORT_SYMBOL(sym)		__EXPORT_SYMBOL(sym, "")
-#define EXPORT_SYMBOL_GPL(sym)		__EXPORT_SYMBOL(sym, "_gpl")
-#define EXPORT_SYMBOL_GPL_FUTURE(sym)	__EXPORT_SYMBOL(sym, "_gpl_future")
+#define EXPORT_SYMBOL_GPL_FUTURE(sym)				\
+	__EXPORT_SYMBOL(sym, "_gpl_future")
+
 #ifdef CONFIG_UNUSED_SYMBOLS
-#define EXPORT_UNUSED_SYMBOL(sym)	__EXPORT_SYMBOL(sym, "_unused")
-#define EXPORT_UNUSED_SYMBOL_GPL(sym)	__EXPORT_SYMBOL(sym, "_unused_gpl")
+#define EXPORT_UNUSED_SYMBOL(sym) __EXPORT_SYMBOL(sym, "_unused")
+#define EXPORT_UNUSED_SYMBOL_GPL(sym) __EXPORT_SYMBOL(sym, "_unused_gpl")
 #else
 #define EXPORT_UNUSED_SYMBOL(sym)
 #define EXPORT_UNUSED_SYMBOL_GPL(sym)
 #endif
 
+#endif	/* __GENKSYMS__ */
+
+#else /* !CONFIG_MODULES... */
+
+#define EXPORT_SYMBOL(sym)
+#define EXPORT_SYMBOL_GPL(sym)
+#define EXPORT_SYMBOL_GPL_FUTURE(sym)
+#define EXPORT_UNUSED_SYMBOL(sym)
+#define EXPORT_UNUSED_SYMBOL_GPL(sym)
+
+#endif /* CONFIG_MODULES */
 #endif /* !__ASSEMBLY__ */
 
 #endif /* _LINUX_EXPORT_H */

@@ -1308,22 +1308,28 @@ out:
 
 int pm8001_abort_task_set(struct domain_device *dev, u8 *lun)
 {
+	int rc = TMF_RESP_FUNC_FAILED;
 	struct pm8001_tmf_task tmf_task;
 
 	tmf_task.tmf = TMF_ABORT_TASK_SET;
-	return pm8001_issue_ssp_tmf(dev, lun, &tmf_task);
+	rc = pm8001_issue_ssp_tmf(dev, lun, &tmf_task);
+	return rc;
 }
 
 int pm8001_clear_aca(struct domain_device *dev, u8 *lun)
 {
+	int rc = TMF_RESP_FUNC_FAILED;
 	struct pm8001_tmf_task tmf_task;
 
 	tmf_task.tmf = TMF_CLEAR_ACA;
-	return pm8001_issue_ssp_tmf(dev, lun, &tmf_task);
+	rc = pm8001_issue_ssp_tmf(dev, lun, &tmf_task);
+
+	return rc;
 }
 
 int pm8001_clear_task_set(struct domain_device *dev, u8 *lun)
 {
+	int rc = TMF_RESP_FUNC_FAILED;
 	struct pm8001_tmf_task tmf_task;
 	struct pm8001_device *pm8001_dev = dev->lldd_dev;
 	struct pm8001_hba_info *pm8001_ha = pm8001_find_ha_by_dev(dev);
@@ -1332,6 +1338,7 @@ int pm8001_clear_task_set(struct domain_device *dev, u8 *lun)
 		pm8001_printk("I_T_L_Q clear task set[%x]\n",
 		pm8001_dev->device_id));
 	tmf_task.tmf = TMF_CLEAR_TASK_SET;
-	return pm8001_issue_ssp_tmf(dev, lun, &tmf_task);
+	rc = pm8001_issue_ssp_tmf(dev, lun, &tmf_task);
+	return rc;
 }
 

@@ -149,24 +149,29 @@ static inline bool irq_safe_dev_in_no_sleep_domain(struct device *dev,
 	return ret;
 }
 
-static int genpd_runtime_suspend(struct device *dev);
-
 /*
  * Get the generic PM domain for a particular struct device.
  * This validates the struct device pointer, the PM domain pointer,
  * and checks that the PM domain pointer is a real generic PM domain.
  * Any failure results in NULL being returned.
  */
-static struct generic_pm_domain *dev_to_genpd_safe(struct device *dev)
+static struct generic_pm_domain *genpd_lookup_dev(struct device *dev)
 {
+	struct generic_pm_domain *genpd = NULL, *gpd;
+
 	if (IS_ERR_OR_NULL(dev) || IS_ERR_OR_NULL(dev->pm_domain))
 		return NULL;
 
-	/* A genpd's always have its ->runtime_suspend() callback assigned. */
-	if (dev->pm_domain->ops.runtime_suspend == genpd_runtime_suspend)
-		return pd_to_genpd(dev->pm_domain);
+	mutex_lock(&gpd_list_lock);
+	list_for_each_entry(gpd, &gpd_list, gpd_list_node) {
+		if (&gpd->domain == dev->pm_domain) {
+			genpd = gpd;
+			break;
+		}
+	}
+	mutex_unlock(&gpd_list_lock);
 
-	return NULL;
+	return genpd;
 }
 
 /*
@@ -380,8 +385,8 @@ int dev_pm_genpd_set_performance_state(struct device *dev, unsigned int state)
 	unsigned int prev;
 	int ret;
 
-	genpd = dev_to_genpd_safe(dev);
-	if (!genpd)
+	genpd = dev_to_genpd(dev);
+	if (IS_ERR(genpd))
 		return -ENODEV;
 
 	if (unlikely(!genpd->set_performance_state))
@@ -1605,7 +1610,7 @@ static int genpd_remove_device(struct generic_pm_domain *genpd,
  */
 int pm_genpd_remove_device(struct device *dev)
 {
-	struct generic_pm_domain *genpd = dev_to_genpd_safe(dev);
+	struct generic_pm_domain *genpd = genpd_lookup_dev(dev);
 
 	if (!genpd)
 		return -EINVAL;

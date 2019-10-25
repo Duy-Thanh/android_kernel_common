@@ -60,6 +60,7 @@ static void construct(struct dc_context *ctx, struct dc_plane_state *plane_state
 	plane_state->lut3d_func = dc_create_3dlut_func();
 	if (plane_state->lut3d_func != NULL) {
 		plane_state->lut3d_func->ctx = ctx;
+		plane_state->lut3d_func->initialized = false;
 	}
 	plane_state->blend_tf = dc_create_transfer_func();
 	if (plane_state->blend_tf != NULL) {
@@ -278,7 +279,7 @@ struct dc_3dlut *dc_create_3dlut_func(void)
 		goto alloc_fail;
 
 	kref_init(&lut->refcount);
-	lut->state.raw = 0;
+	lut->initialized = false;
 
 	return lut;
 

@@ -18,7 +18,6 @@ Kernel Build System
     headers_install
 
     issues
-    reproducible-builds
 
 .. only::  subproject and html
 

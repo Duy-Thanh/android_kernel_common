@@ -25,12 +25,6 @@
 
 #include "amdgpu_smu.h"
 
-#define SMU11_DRIVER_IF_VERSION_INV 0xFFFFFFFF
-#define SMU11_DRIVER_IF_VERSION_VG20 0x13
-#define SMU11_DRIVER_IF_VERSION_ARCT 0x09
-#define SMU11_DRIVER_IF_VERSION_NV10 0x33
-#define SMU11_DRIVER_IF_VERSION_NV14 0x34
-
 /* MP Apertures */
 #define MP0_Public			0x03800000
 #define MP0_SRAM			0x03900000
@@ -49,30 +43,19 @@
 #define SMU11_TOOL_SIZE			0x19000
 
 #define CLK_MAP(clk, index) \
-	[SMU_##clk] = {1, (index)}
+	[SMU_##clk] = index
 
 #define FEA_MAP(fea) \
-	[SMU_FEATURE_##fea##_BIT] = {1, FEATURE_##fea##_BIT}
+	[SMU_FEATURE_##fea##_BIT] = FEATURE_##fea##_BIT
 
 #define TAB_MAP(tab) \
-	[SMU_TABLE_##tab] = {1, TABLE_##tab}
+	[SMU_TABLE_##tab] = TABLE_##tab
 
 #define PWR_MAP(tab) \
-	[SMU_POWER_SOURCE_##tab] = {1, POWER_SOURCE_##tab}
+	[SMU_POWER_SOURCE_##tab] = POWER_SOURCE_##tab
 
 #define WORKLOAD_MAP(profile, workload) \
-	[profile] = {1, (workload)}
-
-static const struct smu_temperature_range smu11_thermal_policy[] =
-{
-	{-273150,  99000, 99000, -273150, 99000, 99000, -273150, 99000, 99000},
-	{ 120000, 120000, 120000, 120000, 120000, 120000, 120000, 120000, 120000},
-};
-
-struct smu_11_0_cmn2aisc_mapping {
-	int	valid_mapping;
-	int	map_to;
-};
+	[profile] = workload
 
 struct smu_11_0_max_sustainable_clocks {
 	uint32_t display_clock;

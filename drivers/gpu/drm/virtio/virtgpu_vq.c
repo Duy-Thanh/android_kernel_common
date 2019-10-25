@@ -26,13 +26,12 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <linux/dma-mapping.h>
+#include <drm/drmP.h>
+#include "virtgpu_drv.h"
+#include "virtgpu_trace.h"
 #include <linux/virtio.h>
 #include <linux/virtio_config.h>
 #include <linux/virtio_ring.h>
-
-#include "virtgpu_drv.h"
-#include "virtgpu_trace.h"
 
 #define MAX_INLINE_CMD_SIZE   96
 #define MAX_INLINE_RESP_SIZE  24

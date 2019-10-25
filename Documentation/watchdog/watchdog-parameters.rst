@@ -301,6 +301,15 @@ ixp4xx_wdt:
 
 -------------------------------------------------
 
+ks8695_wdt:
+    wdt_time:
+	Watchdog time in seconds. (default=5)
+    nowayout:
+	Watchdog cannot be stopped once started
+	(default=kernel config parameter)
+
+-------------------------------------------------
+
 machzwd:
     nowayout:
 	Watchdog cannot be stopped once started
@@ -360,6 +369,16 @@ ni903x_wdt:
 nic7018_wdt:
     timeout:
 	Initial watchdog timeout in seconds (0<timeout<464, default=80)
+    nowayout:
+	Watchdog cannot be stopped once started
+	(default=kernel config parameter)
+
+-------------------------------------------------
+
+nuc900_wdt:
+    heartbeat:
+	Watchdog heartbeats in seconds.
+	(default = 15)
     nowayout:
 	Watchdog cannot be stopped once started
 	(default=kernel config parameter)

@@ -290,7 +290,10 @@ static int spi_gpio_request(struct device *dev, struct spi_gpio *spi_gpio)
 		return PTR_ERR(spi_gpio->miso);
 
 	spi_gpio->sck = devm_gpiod_get(dev, "sck", GPIOD_OUT_LOW);
-	return PTR_ERR_OR_ZERO(spi_gpio->sck);
+	if (IS_ERR(spi_gpio->sck))
+		return PTR_ERR(spi_gpio->sck);
+
+	return 0;
 }
 
 #ifdef CONFIG_OF

@@ -77,10 +77,7 @@ configure specific aspects of kernel behavior to your liking.
    blockdev/index
    ext4
    binderfs
-   cifs/index
    xfs
-   jfs
-   ufs
    pm/index
    thunderbolt
    LSM/index
@@ -101,7 +98,6 @@ configure specific aspects of kernel behavior to your liking.
    iostats
    kernel-per-CPU-kthreads
    laptops/index
-   auxdisplay/index
    lcd-panel-cgram
    ldm
    lockup-watchdogs
@@ -109,7 +105,6 @@ configure specific aspects of kernel behavior to your liking.
    pnp
    rtc
    svga
-   wimax/index
    video-output
 
 .. only::  subproject and html

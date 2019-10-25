@@ -213,13 +213,6 @@ static void reopen_session(struct ceph_mon_client *monc)
 	__open_session(monc);
 }
 
-void ceph_monc_reopen_session(struct ceph_mon_client *monc)
-{
-	mutex_lock(&monc->mutex);
-	reopen_session(monc);
-	mutex_unlock(&monc->mutex);
-}
-
 static void un_backoff(struct ceph_mon_client *monc)
 {
 	monc->hunt_mult /= 2; /* reduce by 50% */

@@ -301,11 +301,6 @@ static inline unsigned long regs_return_value(struct pt_regs *regs)
 	return regs->regs[0];
 }
 
-static inline void regs_set_return_value(struct pt_regs *regs, unsigned long rc)
-{
-	regs->regs[0] = rc;
-}
-
 /**
  * regs_get_kernel_argument() - get Nth function argument in kernel
  * @regs:	pt_regs of that context

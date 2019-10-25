@@ -627,17 +627,20 @@ out:
 }
 
 static bool is_tmpfs;
-static int rootfs_init_fs_context(struct fs_context *fc)
+static struct dentry *rootfs_mount(struct file_system_type *fs_type,
+	int flags, const char *dev_name, void *data)
 {
-	if (IS_ENABLED(CONFIG_TMPFS) && is_tmpfs)
-		return shmem_init_fs_context(fc);
+	void *fill = ramfs_fill_super;
 
-	return ramfs_init_fs_context(fc);
+	if (IS_ENABLED(CONFIG_TMPFS) && is_tmpfs)
+		fill = shmem_fill_super;
+
+	return mount_nodev(fs_type, flags, data, fill);
 }
 
 struct file_system_type rootfs_fs_type = {
 	.name		= "rootfs",
-	.init_fs_context = rootfs_init_fs_context,
+	.mount		= rootfs_mount,
 	.kill_sb	= kill_litter_super,
 };
 

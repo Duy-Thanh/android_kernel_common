@@ -364,7 +364,8 @@ static int mqueue_get_tree(struct fs_context *fc)
 {
 	struct mqueue_fs_context *ctx = fc->fs_private;
 
-	return get_tree_keyed(fc, mqueue_fill_super, ctx->ipc_ns);
+	fc->s_fs_info = ctx->ipc_ns;
+	return vfs_get_super(fc, vfs_get_keyed_super, mqueue_fill_super);
 }
 
 static void mqueue_fs_context_free(struct fs_context *fc)
@@ -1240,14 +1241,15 @@ static int do_mq_notify(mqd_t mqdes, const struct sigevent *notification)
 
 			/* create the notify skb */
 			nc = alloc_skb(NOTIFY_COOKIE_LEN, GFP_KERNEL);
-			if (!nc)
-				return -ENOMEM;
-
+			if (!nc) {
+				ret = -ENOMEM;
+				goto out;
+			}
 			if (copy_from_user(nc->data,
 					notification->sigev_value.sival_ptr,
 					NOTIFY_COOKIE_LEN)) {
 				ret = -EFAULT;
-				goto free_skb;
+				goto out;
 			}
 
 			/* TODO: add a header? */
@@ -1263,7 +1265,8 @@ retry:
 			fdput(f);
 			if (IS_ERR(sock)) {
 				ret = PTR_ERR(sock);
-				goto free_skb;
+				sock = NULL;
+				goto out;
 			}
 
 			timeo = MAX_SCHEDULE_TIMEOUT;
@@ -1272,8 +1275,11 @@ retry:
 				sock = NULL;
 				goto retry;
 			}
-			if (ret)
-				return ret;
+			if (ret) {
+				sock = NULL;
+				nc = NULL;
+				goto out;
+			}
 		}
 	}
 
@@ -1328,8 +1334,7 @@ out_fput:
 out:
 	if (sock)
 		netlink_detachskb(sock, nc);
-	else
-free_skb:
+	else if (nc)
 		dev_kfree_skb(nc);
 
 	return ret;

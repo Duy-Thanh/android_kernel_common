@@ -81,12 +81,6 @@
         label = "bmc";
 #include "openbmc-flash-layout.dtsi"
 	};
-
-	flash@1 {
-		status = "okay";
-		m25p,fast-read;
-		label = "alt";
-	};
 };
 
 &spi {
@@ -227,8 +221,4 @@
 
 &vuart {
 	status = "okay";
-};
-
-&wdt2 {
-	aspeed,alt-boot;
 };

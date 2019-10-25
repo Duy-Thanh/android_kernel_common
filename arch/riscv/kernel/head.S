@@ -61,12 +61,7 @@ _start_kernel:
 	 * floating point in kernel space
 	 */
 	li t0, SR_FS
-	csrc CSR_SSTATUS, t0
-
-#ifdef CONFIG_SMP
-	li t0, CONFIG_NR_CPUS
-	bgeu a0, t0, .Lsecondary_park
-#endif
+	csrc sstatus, t0
 
 	/* Pick one hart to run the main boot sequence */
 	la a3, hart_lottery
@@ -159,6 +154,9 @@ relocate:
 
 .Lsecondary_start:
 #ifdef CONFIG_SMP
+	li a1, CONFIG_NR_CPUS
+	bgeu a0, a1, .Lsecondary_park
+
 	/* Set trap vector to spin forever to help debug */
 	la a3, .Lsecondary_park
 	csrw CSR_STVEC, a3

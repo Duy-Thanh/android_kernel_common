@@ -526,7 +526,7 @@ static int ag71xx_mdio_probe(struct ag71xx *ag)
 	struct device *dev = &ag->pdev->dev;
 	struct net_device *ndev = ag->ndev;
 	static struct mii_bus *mii_bus;
-	struct device_node *np, *mnp;
+	struct device_node *np;
 	int err;
 
 	np = dev->of_node;
@@ -571,9 +571,7 @@ static int ag71xx_mdio_probe(struct ag71xx *ag)
 		msleep(200);
 	}
 
-	mnp = of_get_child_by_name(np, "mdio");
-	err = of_mdiobus_register(mii_bus, mnp);
-	of_node_put(mnp);
+	err = of_mdiobus_register(mii_bus, np);
 	if (err)
 		goto mdio_err_put_clk;
 
@@ -1150,7 +1148,7 @@ static int ag71xx_rings_init(struct ag71xx *ag)
 		return -ENOMEM;
 	}
 
-	rx->buf = &tx->buf[tx_size];
+	rx->buf = &tx->buf[BIT(tx->order)];
 	rx->descs_cpu = ((void *)tx->descs_cpu) + tx_size * AG71XX_DESC_SIZE;
 	rx->descs_dma = tx->descs_dma + tx_size * AG71XX_DESC_SIZE;
 
@@ -1688,7 +1686,7 @@ static int ag71xx_probe(struct platform_device *pdev)
 	}
 
 	ag->mac_base = devm_ioremap_nocache(&pdev->dev, res->start,
-					    resource_size(res));
+					    res->end - res->start + 1);
 	if (!ag->mac_base) {
 		err = -ENOMEM;
 		goto err_free;

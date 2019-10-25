@@ -190,7 +190,8 @@ static int __sk_msg_free(struct sock *sk, struct sk_msg *msg, u32 i,
 		sk_msg_check_to_free(msg, i, msg->sg.size);
 		sge = sk_msg_elem(msg, i);
 	}
-	consume_skb(msg->skb);
+	if (msg->skb)
+		consume_skb(msg->skb);
 	sk_msg_init(msg);
 	return freed;
 }

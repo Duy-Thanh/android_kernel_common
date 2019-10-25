@@ -5,7 +5,6 @@
  * Author: Rob Clark <robdclark@gmail.com>
  */
 
-#include <drm/drm_fourcc.h>
 #include <drm/drm_util.h>
 
 #include "mdp5_kms.h"

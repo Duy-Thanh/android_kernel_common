@@ -4,8 +4,6 @@
  * Author: Rob Clark <rob.clark@linaro.org>
  */
 
-#include <drm/drm_vblank.h>
-
 #include "omap_drv.h"
 
 struct omap_irq_wait {

@@ -89,15 +89,9 @@ static void usnic_ib_dump_vf(struct usnic_ib_vf *vf, char *buf, int buf_sz)
 
 void usnic_ib_log_vf(struct usnic_ib_vf *vf)
 {
-	char *buf = kzalloc(1000, GFP_KERNEL);
-
-	if (!buf)
-		return;
-
-	usnic_ib_dump_vf(vf, buf, 1000);
+	char buf[1000];
+	usnic_ib_dump_vf(vf, buf, sizeof(buf));
 	usnic_dbg("%s\n", buf);
-
-	kfree(buf);
 }
 
 /* Start of netdev section */

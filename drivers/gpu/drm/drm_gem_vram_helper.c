@@ -7,8 +7,6 @@
 #include <drm/drm_vram_mm_helper.h>
 #include <drm/ttm/ttm_page_alloc.h>
 
-static const struct drm_gem_object_funcs drm_gem_vram_object_funcs;
-
 /**
  * DOC: overview
  *
@@ -26,7 +24,7 @@ static void drm_gem_vram_cleanup(struct drm_gem_vram_object *gbo)
 	 * TTM buffer object in 'bo' has already been cleaned
 	 * up; only release the GEM object.
 	 */
-	drm_gem_object_release(&gbo->bo.base);
+	drm_gem_object_release(&gbo->gem);
 }
 
 static void drm_gem_vram_destroy(struct drm_gem_vram_object *gbo)
@@ -82,10 +80,7 @@ static int drm_gem_vram_init(struct drm_device *dev,
 	int ret;
 	size_t acc_size;
 
-	if (!gbo->bo.base.funcs)
-		gbo->bo.base.funcs = &drm_gem_vram_object_funcs;
-
-	ret = drm_gem_object_init(dev, &gbo->bo.base, size);
+	ret = drm_gem_object_init(dev, &gbo->gem, size);
 	if (ret)
 		return ret;
 
@@ -103,7 +98,7 @@ static int drm_gem_vram_init(struct drm_device *dev,
 	return 0;
 
 err_drm_gem_object_release:
-	drm_gem_object_release(&gbo->bo.base);
+	drm_gem_object_release(&gbo->gem);
 	return ret;
 }
 
@@ -168,7 +163,7 @@ EXPORT_SYMBOL(drm_gem_vram_put);
  */
 u64 drm_gem_vram_mmap_offset(struct drm_gem_vram_object *gbo)
 {
-	return drm_vma_node_offset_addr(&gbo->bo.base.vma_node);
+	return drm_vma_node_offset_addr(&gbo->bo.vma_node);
 }
 EXPORT_SYMBOL(drm_gem_vram_mmap_offset);
 
@@ -383,11 +378,11 @@ int drm_gem_vram_fill_create_dumb(struct drm_file *file,
 	if (IS_ERR(gbo))
 		return PTR_ERR(gbo);
 
-	ret = drm_gem_handle_create(file, &gbo->bo.base, &handle);
+	ret = drm_gem_handle_create(file, &gbo->gem, &handle);
 	if (ret)
 		goto err_drm_gem_object_put_unlocked;
 
-	drm_gem_object_put_unlocked(&gbo->bo.base);
+	drm_gem_object_put_unlocked(&gbo->gem);
 
 	args->pitch = pitch;
 	args->size = size;
@@ -396,7 +391,7 @@ int drm_gem_vram_fill_create_dumb(struct drm_file *file,
 	return 0;
 
 err_drm_gem_object_put_unlocked:
-	drm_gem_object_put_unlocked(&gbo->bo.base);
+	drm_gem_object_put_unlocked(&gbo->gem);
 	return ret;
 }
 EXPORT_SYMBOL(drm_gem_vram_fill_create_dumb);
@@ -446,7 +441,7 @@ int drm_gem_vram_bo_driver_verify_access(struct ttm_buffer_object *bo,
 {
 	struct drm_gem_vram_object *gbo = drm_gem_vram_of_bo(bo);
 
-	return drm_vma_node_verify_access(&gbo->bo.base.vma_node,
+	return drm_vma_node_verify_access(&gbo->gem.vma_node,
 					  filp->private_data);
 }
 EXPORT_SYMBOL(drm_gem_vram_bo_driver_verify_access);
@@ -465,24 +460,21 @@ const struct drm_vram_mm_funcs drm_gem_vram_mm_funcs = {
 EXPORT_SYMBOL(drm_gem_vram_mm_funcs);
 
 /*
- * Helpers for struct drm_gem_object_funcs
+ * Helpers for struct drm_driver
  */
 
 /**
- * drm_gem_vram_object_free() - \
-	Implements &struct drm_gem_object_funcs.free
- * @gem:       GEM object. Refers to &struct drm_gem_vram_object.gem
+ * drm_gem_vram_driver_gem_free_object_unlocked() - \
+	Implements &struct drm_driver.gem_free_object_unlocked
+ * @gem:	GEM object. Refers to &struct drm_gem_vram_object.gem
  */
-static void drm_gem_vram_object_free(struct drm_gem_object *gem)
+void drm_gem_vram_driver_gem_free_object_unlocked(struct drm_gem_object *gem)
 {
 	struct drm_gem_vram_object *gbo = drm_gem_vram_of_gem(gem);
 
 	drm_gem_vram_put(gbo);
 }
-
-/*
- * Helpers for dump buffers
- */
+EXPORT_SYMBOL(drm_gem_vram_driver_gem_free_object_unlocked);
 
 /**
  * drm_gem_vram_driver_create_dumb() - \
@@ -544,19 +536,19 @@ int drm_gem_vram_driver_dumb_mmap_offset(struct drm_file *file,
 EXPORT_SYMBOL(drm_gem_vram_driver_dumb_mmap_offset);
 
 /*
- * PRIME helpers
+ * PRIME helpers for struct drm_driver
  */
 
 /**
- * drm_gem_vram_object_pin() - \
-	Implements &struct drm_gem_object_funcs.pin
+ * drm_gem_vram_driver_gem_prime_pin() - \
+	Implements &struct drm_driver.gem_prime_pin
  * @gem:	The GEM object to pin
  *
  * Returns:
  * 0 on success, or
  * a negative errno code otherwise.
  */
-static int drm_gem_vram_object_pin(struct drm_gem_object *gem)
+int drm_gem_vram_driver_gem_prime_pin(struct drm_gem_object *gem)
 {
 	struct drm_gem_vram_object *gbo = drm_gem_vram_of_gem(gem);
 
@@ -570,29 +562,31 @@ static int drm_gem_vram_object_pin(struct drm_gem_object *gem)
 	 */
 	return drm_gem_vram_pin(gbo, 0);
 }
+EXPORT_SYMBOL(drm_gem_vram_driver_gem_prime_pin);
 
 /**
- * drm_gem_vram_object_unpin() - \
-	Implements &struct drm_gem_object_funcs.unpin
+ * drm_gem_vram_driver_gem_prime_unpin() - \
+	Implements &struct drm_driver.gem_prime_unpin
  * @gem:	The GEM object to unpin
  */
-static void drm_gem_vram_object_unpin(struct drm_gem_object *gem)
+void drm_gem_vram_driver_gem_prime_unpin(struct drm_gem_object *gem)
 {
 	struct drm_gem_vram_object *gbo = drm_gem_vram_of_gem(gem);
 
 	drm_gem_vram_unpin(gbo);
 }
+EXPORT_SYMBOL(drm_gem_vram_driver_gem_prime_unpin);
 
 /**
- * drm_gem_vram_object_vmap() - \
-	Implements &struct drm_gem_object_funcs.vmap
+ * drm_gem_vram_driver_gem_prime_vmap() - \
+	Implements &struct drm_driver.gem_prime_vmap
  * @gem:	The GEM object to map
  *
  * Returns:
  * The buffers virtual address on success, or
  * NULL otherwise.
  */
-static void *drm_gem_vram_object_vmap(struct drm_gem_object *gem)
+void *drm_gem_vram_driver_gem_prime_vmap(struct drm_gem_object *gem)
 {
 	struct drm_gem_vram_object *gbo = drm_gem_vram_of_gem(gem);
 	int ret;
@@ -608,30 +602,40 @@ static void *drm_gem_vram_object_vmap(struct drm_gem_object *gem)
 	}
 	return base;
 }
+EXPORT_SYMBOL(drm_gem_vram_driver_gem_prime_vmap);
 
 /**
- * drm_gem_vram_object_vunmap() - \
-	Implements &struct drm_gem_object_funcs.vunmap
+ * drm_gem_vram_driver_gem_prime_vunmap() - \
+	Implements &struct drm_driver.gem_prime_vunmap
  * @gem:	The GEM object to unmap
  * @vaddr:	The mapping's base address
  */
-static void drm_gem_vram_object_vunmap(struct drm_gem_object *gem,
-				       void *vaddr)
+void drm_gem_vram_driver_gem_prime_vunmap(struct drm_gem_object *gem,
+					  void *vaddr)
 {
 	struct drm_gem_vram_object *gbo = drm_gem_vram_of_gem(gem);
 
 	drm_gem_vram_kunmap(gbo);
 	drm_gem_vram_unpin(gbo);
 }
+EXPORT_SYMBOL(drm_gem_vram_driver_gem_prime_vunmap);
 
-/*
- * GEM object funcs
+/**
+ * drm_gem_vram_driver_gem_prime_mmap() - \
+	Implements &struct drm_driver.gem_prime_mmap
+ * @gem:	The GEM object to map
+ * @vma:	The VMA describing the mapping
+ *
+ * Returns:
+ * 0 on success, or
+ * a negative errno code otherwise.
  */
+int drm_gem_vram_driver_gem_prime_mmap(struct drm_gem_object *gem,
+				       struct vm_area_struct *vma)
+{
+	struct drm_gem_vram_object *gbo = drm_gem_vram_of_gem(gem);
 
-static const struct drm_gem_object_funcs drm_gem_vram_object_funcs = {
-	.free	= drm_gem_vram_object_free,
-	.pin	= drm_gem_vram_object_pin,
-	.unpin	= drm_gem_vram_object_unpin,
-	.vmap	= drm_gem_vram_object_vmap,
-	.vunmap	= drm_gem_vram_object_vunmap
-};
+	gbo->gem.vma_node.vm_node.start = gbo->bo.vma_node.vm_node.start;
+	return drm_gem_prime_mmap(gem, vma);
+}
+EXPORT_SYMBOL(drm_gem_vram_driver_gem_prime_mmap);

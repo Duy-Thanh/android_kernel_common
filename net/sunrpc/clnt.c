@@ -1837,7 +1837,7 @@ call_allocate(struct rpc_task *task)
 		return;
 	}
 
-	rpc_call_rpcerror(task, -ERESTARTSYS);
+	rpc_exit(task, -ERESTARTSYS);
 }
 
 static int
@@ -1862,7 +1862,6 @@ rpc_xdr_encode(struct rpc_task *task)
 		     req->rq_rbuffer,
 		     req->rq_rcvsize);
 
-	req->rq_reply_bytes_recvd = 0;
 	req->rq_snd_buf.head[0].iov_len = 0;
 	xdr_init_encode(&xdr, &req->rq_snd_buf,
 			req->rq_snd_buf.head[0].iov_base, req);
@@ -1882,8 +1881,6 @@ call_encode(struct rpc_task *task)
 	if (!rpc_task_need_encode(task))
 		goto out;
 	dprint_status(task);
-	/* Dequeue task from the receive queue while we're encoding */
-	xprt_request_dequeue_xprt(task);
 	/* Encode here so that rpcsec_gss can use correct sequence number. */
 	rpc_xdr_encode(task);
 	/* Did the encode result in an error condition? */
@@ -2482,7 +2479,6 @@ call_decode(struct rpc_task *task)
 	struct rpc_clnt	*clnt = task->tk_client;
 	struct rpc_rqst	*req = task->tk_rqstp;
 	struct xdr_stream xdr;
-	int err;
 
 	dprint_status(task);
 
@@ -2505,15 +2501,6 @@ call_decode(struct rpc_task *task)
 	 * before it changed req->rq_reply_bytes_recvd.
 	 */
 	smp_rmb();
-
-	/*
-	 * Did we ever call xprt_complete_rqst()? If not, we should assume
-	 * the message is incomplete.
-	 */
-	err = -EAGAIN;
-	if (!req->rq_reply_bytes_recvd)
-		goto out;
-
 	req->rq_rcv_buf.len = req->rq_private_buf.len;
 
 	/* Check that the softirq receive buffer is valid */
@@ -2522,9 +2509,7 @@ call_decode(struct rpc_task *task)
 
 	xdr_init_decode(&xdr, &req->rq_rcv_buf,
 			req->rq_rcv_buf.head[0].iov_base, req);
-	err = rpc_decode_header(task, &xdr);
-out:
-	switch (err) {
+	switch (rpc_decode_header(task, &xdr)) {
 	case 0:
 		task->tk_action = rpc_exit_task;
 		task->tk_status = rpcauth_unwrap_resp(task, &xdr);
@@ -2533,6 +2518,9 @@ out:
 		return;
 	case -EAGAIN:
 		task->tk_status = 0;
+		xdr_free_bvec(&req->rq_rcv_buf);
+		req->rq_reply_bytes_recvd = 0;
+		req->rq_rcv_buf.len = 0;
 		if (task->tk_client->cl_discrtry)
 			xprt_conditional_disconnect(req->rq_xprt,
 						    req->rq_connect_cookie);
@@ -2573,7 +2561,7 @@ rpc_encode_header(struct rpc_task *task, struct xdr_stream *xdr)
 	return 0;
 out_fail:
 	trace_rpc_bad_callhdr(task);
-	rpc_call_rpcerror(task, error);
+	rpc_exit(task, error);
 	return error;
 }
 
@@ -2640,7 +2628,7 @@ out_garbage:
 		return -EAGAIN;
 	}
 out_err:
-	rpc_call_rpcerror(task, error);
+	rpc_exit(task, error);
 	return error;
 
 out_unparsable:

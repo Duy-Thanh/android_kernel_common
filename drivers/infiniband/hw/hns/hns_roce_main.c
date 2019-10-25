@@ -262,8 +262,7 @@ static int hns_roce_query_port(struct ib_device *ib_dev, u8 port_num,
 	props->state = (netif_running(net_dev) && netif_carrier_ok(net_dev)) ?
 			IB_PORT_ACTIVE : IB_PORT_DOWN;
 	props->phys_state = (props->state == IB_PORT_ACTIVE) ?
-			     IB_PORT_PHYS_STATE_LINK_UP :
-			     IB_PORT_PHYS_STATE_DISABLED;
+			     HNS_ROCE_PHY_LINKUP : HNS_ROCE_PHY_DISABLED;
 
 	spin_unlock_irqrestore(&hr_dev->iboe.lock, flags);
 
@@ -902,7 +901,6 @@ int hns_roce_init(struct hns_roce_dev *hr_dev)
 		goto error_failed_cmd_init;
 	}
 
-	/* EQ depends on poll mode, event mode depends on EQ */
 	ret = hr_dev->hw->init_eq(hr_dev);
 	if (ret) {
 		dev_err(dev, "eq init failed!\n");
@@ -912,9 +910,8 @@ int hns_roce_init(struct hns_roce_dev *hr_dev)
 	if (hr_dev->cmd_mod) {
 		ret = hns_roce_cmd_use_events(hr_dev);
 		if (ret) {
-			dev_warn(dev,
-				 "Cmd event  mode failed, set back to poll!\n");
-			hns_roce_cmd_use_polling(hr_dev);
+			dev_err(dev, "Switch to event-driven cmd failed!\n");
+			goto error_failed_use_event;
 		}
 	}
 
@@ -957,6 +954,8 @@ error_failed_setup_hca:
 error_failed_init_hem:
 	if (hr_dev->cmd_mod)
 		hns_roce_cmd_use_polling(hr_dev);
+
+error_failed_use_event:
 	hr_dev->hw->cleanup_eq(hr_dev);
 
 error_failed_eq_table:

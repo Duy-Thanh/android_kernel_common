@@ -18,6 +18,7 @@
 #include <linux/slab.h>
 #include <linux/jiffies.h>
 #include <linux/delay.h>
+#include <linux/pci-aspm.h>
 #include "../pci.h"
 
 #ifdef MODULE_PARAM_PREFIX
@@ -912,10 +913,10 @@ void pcie_aspm_init_link_state(struct pci_dev *pdev)
 
 	/*
 	 * We allocate pcie_link_state for the component on the upstream
-	 * end of a Link, so there's nothing to do unless this device is
-	 * downstream port.
+	 * end of a Link, so there's nothing to do unless this device has a
+	 * Link on its secondary side.
 	 */
-	if (!pcie_downstream_port(pdev))
+	if (!pdev->has_secondary_link)
 		return;
 
 	/* VIA has a strange chipset, root port is under a bridge */
@@ -1069,7 +1070,7 @@ static int __pci_disable_link_state(struct pci_dev *pdev, int state, bool sem)
 	if (!pci_is_pcie(pdev))
 		return 0;
 
-	if (pcie_downstream_port(pdev))
+	if (pdev->has_secondary_link)
 		parent = pdev;
 	if (!parent || !parent->link_state)
 		return -EINVAL;

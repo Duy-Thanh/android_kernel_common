@@ -4,10 +4,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <linux/capability.h>
 #include <linux/kernel.h>
 #include <linux/mman.h>
-#include <linux/string.h>
 #include <linux/time64.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -17,17 +15,11 @@
 #include <inttypes.h>
 #include "annotate.h"
 #include "build-id.h"
-#include "cap.h"
-#include "dso.h"
-#include "util.h" // lsdir()
+#include "util.h"
 #include "debug.h"
-#include "event.h"
 #include "machine.h"
 #include "map.h"
 #include "symbol.h"
-#include "map_symbol.h"
-#include "mem-events.h"
-#include "symsrc.h"
 #include "strlist.h"
 #include "intlist.h"
 #include "namespaces.h"
@@ -2203,18 +2195,12 @@ static bool symbol__read_kptr_restrict(void)
 		char line[8];
 
 		if (fgets(line, sizeof(line), fp) != NULL)
-			value = perf_cap__capable(CAP_SYSLOG) ?
-					(atoi(line) >= 2) :
-					(atoi(line) != 0);
+			value = ((geteuid() != 0) || (getuid() != 0)) ?
+					(atoi(line) != 0) :
+					(atoi(line) == 2);
 
 		fclose(fp);
 	}
-
-	/* Per kernel/kallsyms.c:
-	 * we also restrict when perf_event_paranoid > 1 w/o CAP_SYSLOG
-	 */
-	if (perf_event_paranoid() > 1 && !perf_cap__capable(CAP_SYSLOG))
-		value = true;
 
 	return value;
 }

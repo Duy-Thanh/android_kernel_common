@@ -35,6 +35,7 @@ struct kvm_timer {
 	s64 advance_expire_delta;
 	atomic_t pending;			/* accumulated triggered timers */
 	bool hv_timer_in_use;
+	bool timer_advance_adjust_done;
 };
 
 struct kvm_lapic {

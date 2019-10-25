@@ -8,8 +8,8 @@
 
 #define unlikely(cond) (cond)
 #include <asm/insn.h>
-#include "../../../arch/x86/lib/inat.c"
-#include "../../../arch/x86/lib/insn.c"
+#include "lib/inat.c"
+#include "lib/insn.c"
 
 #include "../../elf.h"
 #include "../../arch.h"

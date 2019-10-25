@@ -5,8 +5,6 @@
 #ifndef __PANFROST_DEVICE_H__
 #define __PANFROST_DEVICE_H__
 
-#include <linux/atomic.h>
-#include <linux/io-pgtable.h>
 #include <linux/spinlock.h>
 #include <drm/drm_device.h>
 #include <drm/drm_mm.h>
@@ -45,7 +43,6 @@ struct panfrost_features {
 	u32 js_features[16];
 
 	u32 nr_core_groups;
-	u32 thread_tls_alloc;
 
 	unsigned long hw_features[64 / BITS_PER_LONG];
 	unsigned long hw_issues[64 / BITS_PER_LONG];
@@ -63,6 +60,11 @@ struct panfrost_device {
 	struct drm_device *ddev;
 	struct platform_device *pdev;
 
+	spinlock_t hwaccess_lock;
+
+	struct drm_mm mm;
+	spinlock_t mm_lock;
+
 	void __iomem *iomem;
 	struct clk *clock;
 	struct clk *bus_clock;
@@ -71,11 +73,7 @@ struct panfrost_device {
 
 	struct panfrost_features features;
 
-	spinlock_t as_lock;
-	unsigned long as_in_use_mask;
-	unsigned long as_alloc_mask;
-	struct list_head as_lru_list;
-
+	struct panfrost_mmu *mmu;
 	struct panfrost_job_slot *js;
 
 	struct panfrost_job *jobs[NUM_JOB_SLOTS];
@@ -86,10 +84,6 @@ struct panfrost_device {
 	struct mutex sched_lock;
 	struct mutex reset_lock;
 
-	struct mutex shrinker_lock;
-	struct list_head shrinker_list;
-	struct shrinker shrinker;
-
 	struct {
 		struct devfreq *devfreq;
 		struct thermal_cooling_device *cooling;
@@ -99,22 +93,10 @@ struct panfrost_device {
 	} devfreq;
 };
 
-struct panfrost_mmu {
-	struct io_pgtable_cfg pgtbl_cfg;
-	struct io_pgtable_ops *pgtbl_ops;
-	int as;
-	atomic_t as_count;
-	struct list_head list;
-};
-
 struct panfrost_file_priv {
 	struct panfrost_device *pfdev;
 
 	struct drm_sched_entity sched_entity[NUM_JOB_SLOTS];
-
-	struct panfrost_mmu mmu;
-	struct drm_mm mm;
-	spinlock_t mm_lock;
 };
 
 static inline struct panfrost_device *to_panfrost_device(struct drm_device *ddev)
@@ -145,7 +127,6 @@ int panfrost_unstable_ioctl_check(void);
 
 int panfrost_device_init(struct panfrost_device *pfdev);
 void panfrost_device_fini(struct panfrost_device *pfdev);
-void panfrost_device_reset(struct panfrost_device *pfdev);
 
 int panfrost_device_resume(struct device *dev);
 int panfrost_device_suspend(struct device *dev);

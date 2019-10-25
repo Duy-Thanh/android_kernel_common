@@ -13,8 +13,6 @@
  * current job can make progress.
  */
 
-#include <linux/platform_device.h>
-
 #include "v3d_drv.h"
 #include "v3d_regs.h"
 #include "v3d_trace.h"

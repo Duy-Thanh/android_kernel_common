@@ -146,6 +146,7 @@ static int clk_bcm63xx_probe(struct platform_device *pdev)
 {
 	const struct clk_bcm63xx_table_entry *entry, *table;
 	struct clk_bcm63xx_hw *hw;
+	struct resource *r;
 	u8 maxbit = 0;
 	int i, ret;
 
@@ -169,7 +170,8 @@ static int clk_bcm63xx_probe(struct platform_device *pdev)
 	for (i = 0; i < maxbit; i++)
 		hw->data.hws[i] = ERR_PTR(-ENODEV);
 
-	hw->regs = devm_platform_ioremap_resource(pdev, 0);
+	r = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	hw->regs = devm_ioremap_resource(&pdev->dev, r);
 	if (IS_ERR(hw->regs))
 		return PTR_ERR(hw->regs);
 

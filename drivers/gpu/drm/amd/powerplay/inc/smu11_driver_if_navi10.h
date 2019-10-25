@@ -26,9 +26,7 @@
 // *** IMPORTANT ***
 // SMU TEAM: Always increment the interface version if 
 // any structure is changed in this file
-// Be aware of that the version should be updated in
-// smu_v11_0.h, maybe rename is also needed.
-// #define SMU11_DRIVER_IF_VERSION 0x33
+#define SMU11_DRIVER_IF_VERSION 0x33
 
 #define PPTABLE_NV10_SMU_VERSION 8
 
@@ -506,11 +504,10 @@ typedef struct {
   uint32_t Status;
 
   uint16_t DieTemperature;
-  uint16_t CurrentMemoryTemperature;
-
   uint16_t MemoryTemperature;
-  uint8_t MemoryHotspotPosition;
-  uint8_t Reserved4;
+
+  uint16_t SelectedCardPower;
+  uint16_t Reserved4; 
 
   uint32_t BoardLevelEnergyAccumulator;  
 } OutOfBandMonitor_t;
@@ -802,12 +799,7 @@ typedef struct {
   // Mvdd Svi2 Div Ratio Setting
   uint32_t     MvddRatio; // This is used for MVDD Vid workaround. It has 16 fractional bits (Q16.16)
 
-  uint8_t      RenesesLoadLineEnabled;
-  uint8_t      GfxLoadlineResistance;
-  uint8_t      SocLoadlineResistance;
-  uint8_t      Padding8_Loadline;
-
-  uint32_t     BoardReserved[8];
+  uint32_t     BoardReserved[9];
 
   // Padding for MMHUB - do not modify this
   uint32_t     MmHubPadding[8]; // SMU internal use
@@ -911,22 +903,13 @@ typedef struct {
 } Watermarks_t;
 
 typedef struct {
-  uint16_t avgPsmCount[28];
-  uint16_t minPsmCount[28];
-  float    avgPsmVoltage[28];
-  float    minPsmVoltage[28];
-
-  uint32_t     MmHubPadding[32]; // SMU internal use
-} AvfsDebugTable_t_NV14;
-
-typedef struct {
   uint16_t avgPsmCount[36];
   uint16_t minPsmCount[36];
   float    avgPsmVoltage[36]; 
   float    minPsmVoltage[36];
 
   uint32_t     MmHubPadding[8]; // SMU internal use
-} AvfsDebugTable_t_NV10;
+} AvfsDebugTable_t;
 
 typedef struct {
   uint8_t  AvfsVersion;

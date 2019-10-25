@@ -548,9 +548,7 @@ bool dm_helpers_dp_write_dsc_enable(
 		bool enable
 )
 {
-	uint8_t enable_dsc = enable ? 1 : 0;
-
-	return dm_helpers_dp_write_dpcd(ctx, stream->sink->link, DP_DSC_ENABLE, &enable_dsc, 1);
+	return false;
 }
 #endif
 

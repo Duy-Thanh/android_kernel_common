@@ -152,7 +152,7 @@ struct dentry_operations {
 
 /*
  * Locking rules for dentry_operations callbacks are to be found in
- * Documentation/filesystems/locking.rst. Keep it updated!
+ * Documentation/filesystems/Locking. Keep it updated!
  *
  * FUrther descriptions are found in Documentation/filesystems/vfs.rst.
  * Keep it updated too!

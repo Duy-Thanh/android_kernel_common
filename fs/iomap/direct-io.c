@@ -24,7 +24,7 @@
 
 struct iomap_dio {
 	struct kiocb		*iocb;
-	const struct iomap_dio_ops *dops;
+	iomap_dio_end_io_t	*end_io;
 	loff_t			i_size;
 	loff_t			size;
 	atomic_t		ref;
@@ -72,14 +72,18 @@ static void iomap_dio_submit_bio(struct iomap_dio *dio, struct iomap *iomap,
 
 static ssize_t iomap_dio_complete(struct iomap_dio *dio)
 {
-	const struct iomap_dio_ops *dops = dio->dops;
 	struct kiocb *iocb = dio->iocb;
 	struct inode *inode = file_inode(iocb->ki_filp);
 	loff_t offset = iocb->ki_pos;
-	ssize_t ret = dio->error;
+	ssize_t ret;
 
-	if (dops && dops->end_io)
-		ret = dops->end_io(iocb, dio->size, ret, dio->flags);
+	if (dio->end_io) {
+		ret = dio->end_io(iocb,
+				dio->error ? dio->error : dio->size,
+				dio->flags);
+	} else {
+		ret = dio->error;
+	}
 
 	if (likely(!ret)) {
 		ret = dio->size;
@@ -97,9 +101,9 @@ static ssize_t iomap_dio_complete(struct iomap_dio *dio)
 	 * one is a pretty crazy thing to do, so we don't support it 100%.  If
 	 * this invalidation fails, tough, the write still worked...
 	 *
-	 * And this page cache invalidation has to be after ->end_io(), as some
-	 * filesystems convert unwritten extents to real allocations in
-	 * ->end_io() when necessary, otherwise a racing buffer read would cache
+	 * And this page cache invalidation has to be after dio->end_io(), as
+	 * some filesystems convert unwritten extents to real allocations in
+	 * end_io() when necessary, otherwise a racing buffer read would cache
 	 * zeros from unwritten extents.
 	 */
 	if (!dio->error &&
@@ -392,7 +396,7 @@ iomap_dio_actor(struct inode *inode, loff_t pos, loff_t length,
  */
 ssize_t
 iomap_dio_rw(struct kiocb *iocb, struct iov_iter *iter,
-		const struct iomap_ops *ops, const struct iomap_dio_ops *dops)
+		const struct iomap_ops *ops, iomap_dio_end_io_t end_io)
 {
 	struct address_space *mapping = iocb->ki_filp->f_mapping;
 	struct inode *inode = file_inode(iocb->ki_filp);
@@ -417,7 +421,7 @@ iomap_dio_rw(struct kiocb *iocb, struct iov_iter *iter,
 	atomic_set(&dio->ref, 1);
 	dio->size = 0;
 	dio->i_size = i_size_read(inode);
-	dio->dops = dops;
+	dio->end_io = end_io;
 	dio->error = 0;
 	dio->flags = 0;
 

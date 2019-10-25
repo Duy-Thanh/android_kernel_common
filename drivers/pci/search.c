@@ -15,6 +15,7 @@
 #include "pci.h"
 
 DECLARE_RWSEM(pci_bus_sem);
+EXPORT_SYMBOL_GPL(pci_bus_sem);
 
 /*
  * pci_for_each_dma_alias - Iterate over DMA aliases for a device
@@ -106,7 +107,6 @@ int pci_for_each_dma_alias(struct pci_dev *pdev,
 
 	return ret;
 }
-EXPORT_SYMBOL_GPL(pci_for_each_dma_alias);
 
 static struct pci_bus *pci_do_find_bus(struct pci_bus *bus, unsigned char busnr)
 {

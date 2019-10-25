@@ -34,7 +34,7 @@ struct configfs_dirent {
 	int			s_dependent_count;
 	struct list_head	s_sibling;
 	struct list_head	s_children;
-	int			s_links;
+	struct list_head	s_links;
 	void			* s_element;
 	int			s_type;
 	umode_t			s_mode;
@@ -66,7 +66,7 @@ extern struct kmem_cache *configfs_dir_cachep;
 extern int configfs_is_root(struct config_item *item);
 
 extern struct inode * configfs_new_inode(umode_t mode, struct configfs_dirent *, struct super_block *);
-extern struct inode *configfs_create(struct dentry *, umode_t mode);
+extern int configfs_create(struct dentry *, umode_t mode, void (*init)(struct inode *));
 
 extern int configfs_create_file(struct config_item *, const struct configfs_attribute *);
 extern int configfs_create_bin_file(struct config_item *,
@@ -84,6 +84,7 @@ extern int configfs_setattr(struct dentry *dentry, struct iattr *iattr);
 extern struct dentry *configfs_pin_fs(void);
 extern void configfs_release_fs(void);
 
+extern struct rw_semaphore configfs_rename_sem;
 extern const struct file_operations configfs_dir_operations;
 extern const struct file_operations configfs_file_operations;
 extern const struct file_operations configfs_bin_file_operations;
@@ -96,8 +97,14 @@ extern int configfs_symlink(struct inode *dir, struct dentry *dentry,
 			    const char *symname);
 extern int configfs_unlink(struct inode *dir, struct dentry *dentry);
 
-int configfs_create_link(struct configfs_dirent *target, struct dentry *parent,
-		struct dentry *dentry, char *body);
+struct configfs_symlink {
+	struct list_head sl_list;
+	struct config_item *sl_target;
+};
+
+extern int configfs_create_link(struct configfs_symlink *sl,
+				struct dentry *parent,
+				struct dentry *dentry);
 
 static inline struct config_item * to_item(struct dentry * dentry)
 {
@@ -125,7 +132,11 @@ static inline struct config_item *configfs_get_config_item(struct dentry *dentry
 	spin_lock(&dentry->d_lock);
 	if (!d_unhashed(dentry)) {
 		struct configfs_dirent * sd = dentry->d_fsdata;
-		item = config_item_get(sd->s_element);
+		if (sd->s_type & CONFIGFS_ITEM_LINK) {
+			struct configfs_symlink * sl = sd->s_element;
+			item = config_item_get(sl->sl_target);
+		} else
+			item = config_item_get(sd->s_element);
 	}
 	spin_unlock(&dentry->d_lock);
 

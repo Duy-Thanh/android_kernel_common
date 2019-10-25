@@ -13,6 +13,8 @@
 
 #include <asm-generic/pgalloc.h>	/* for pte_{alloc,free}_one */
 
+#define check_pgt_cache() do {} while (0)
+
 extern unsigned long long kmap_generation;
 
 /*
@@ -94,7 +96,7 @@ static inline void pmd_populate_kernel(struct mm_struct *mm, pmd_t *pmd,
 
 #define __pte_free_tlb(tlb, pte, addr)		\
 do {						\
-	pgtable_pte_page_dtor((pte));		\
+	pgtable_page_dtor((pte));		\
 	tlb_remove_page((tlb), (pte));		\
 } while (0)
 

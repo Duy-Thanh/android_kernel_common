@@ -1023,6 +1023,8 @@ int common_cpu_up(unsigned int cpu, struct task_struct *idle)
 static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle,
 		       int *cpu0_nmi_registered)
 {
+	volatile u32 *trampoline_status =
+		(volatile u32 *) __va(real_mode_header->trampoline_status);
 	/* start_ip had better be page-aligned! */
 	unsigned long start_ip = real_mode_header->trampoline_start;
 
@@ -1113,6 +1115,9 @@ static int do_boot_cpu(int apicid, int cpu, struct task_struct *idle,
 			schedule();
 		}
 	}
+
+	/* mark "stuck" area as not stuck */
+	*trampoline_status = 0;
 
 	if (x86_platform.legacy.warm_reset) {
 		/*
@@ -1591,12 +1596,7 @@ int native_cpu_disable(void)
 	if (ret)
 		return ret;
 
-	/*
-	 * Disable the local APIC. Otherwise IPI broadcasts will reach
-	 * it. It still responds normally to INIT, NMI, SMI, and SIPI
-	 * messages.
-	 */
-	apic_soft_disable();
+	clear_local_APIC();
 	cpu_disable_common();
 
 	return 0;

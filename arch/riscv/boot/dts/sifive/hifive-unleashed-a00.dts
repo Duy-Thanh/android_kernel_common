@@ -85,11 +85,3 @@
 		reg = <0>;
 	};
 };
-
-&pwm0 {
-	status = "okay";
-};
-
-&pwm1 {
-	status = "okay";
-};

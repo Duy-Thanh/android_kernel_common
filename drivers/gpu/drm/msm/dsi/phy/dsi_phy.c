@@ -396,12 +396,8 @@ static int dsi_phy_regulator_init(struct msm_dsi_phy *phy)
 
 	ret = devm_regulator_bulk_get(dev, num, s);
 	if (ret < 0) {
-		if (ret != -EPROBE_DEFER) {
-			DRM_DEV_ERROR(dev,
-				      "%s: failed to init regulator, ret=%d\n",
-				      __func__, ret);
-		}
-
+		DRM_DEV_ERROR(dev, "%s: failed to init regulator, ret=%d\n",
+						__func__, ret);
 		return ret;
 	}
 
@@ -588,8 +584,10 @@ static int dsi_phy_driver_probe(struct platform_device *pdev)
 	}
 
 	ret = dsi_phy_regulator_init(phy);
-	if (ret)
+	if (ret) {
+		DRM_DEV_ERROR(dev, "%s: failed to init regulator\n", __func__);
 		goto fail;
+	}
 
 	phy->ahb_clk = msm_clk_get(pdev, "iface");
 	if (IS_ERR(phy->ahb_clk)) {

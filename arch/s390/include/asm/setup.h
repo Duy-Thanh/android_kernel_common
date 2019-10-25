@@ -83,7 +83,6 @@ struct parmarea {
 extern int noexec_disabled;
 extern int memory_end_set;
 extern unsigned long memory_end;
-extern unsigned long vmalloc_size;
 extern unsigned long max_physmem_end;
 extern unsigned long __swsusp_reset_dma;
 

@@ -179,7 +179,7 @@ static void amdgpu_mn_invalidate_node(struct amdgpu_mn_node *node,
 		if (!amdgpu_ttm_tt_affect_userptr(bo->tbo.ttm, start, end))
 			continue;
 
-		r = dma_resv_wait_timeout_rcu(bo->tbo.base.resv,
+		r = reservation_object_wait_timeout_rcu(bo->tbo.resv,
 			true, false, MAX_SCHEDULE_TIMEOUT);
 		if (r <= 0)
 			DRM_ERROR("(%ld) failed to wait for user bo\n", r);
@@ -195,14 +195,13 @@ static void amdgpu_mn_invalidate_node(struct amdgpu_mn_node *node,
  * Block for operations on BOs to finish and mark pages as accessed and
  * potentially dirty.
  */
-static int
-amdgpu_mn_sync_pagetables_gfx(struct hmm_mirror *mirror,
-			      const struct mmu_notifier_range *update)
+static int amdgpu_mn_sync_pagetables_gfx(struct hmm_mirror *mirror,
+			const struct hmm_update *update)
 {
 	struct amdgpu_mn *amn = container_of(mirror, struct amdgpu_mn, mirror);
 	unsigned long start = update->start;
 	unsigned long end = update->end;
-	bool blockable = mmu_notifier_range_blockable(update);
+	bool blockable = update->blockable;
 	struct interval_tree_node *it;
 
 	/* notification is exclusive, but interval is inclusive */
@@ -244,14 +243,13 @@ amdgpu_mn_sync_pagetables_gfx(struct hmm_mirror *mirror,
  * necessitates evicting all user-mode queues of the process. The BOs
  * are restorted in amdgpu_mn_invalidate_range_end_hsa.
  */
-static int
-amdgpu_mn_sync_pagetables_hsa(struct hmm_mirror *mirror,
-			      const struct mmu_notifier_range *update)
+static int amdgpu_mn_sync_pagetables_hsa(struct hmm_mirror *mirror,
+			const struct hmm_update *update)
 {
 	struct amdgpu_mn *amn = container_of(mirror, struct amdgpu_mn, mirror);
 	unsigned long start = update->start;
 	unsigned long end = update->end;
-	bool blockable = mmu_notifier_range_blockable(update);
+	bool blockable = update->blockable;
 	struct interval_tree_node *it;
 
 	/* notification is exclusive, but interval is inclusive */
@@ -484,5 +482,6 @@ void amdgpu_hmm_init_range(struct hmm_range *range)
 		range->flags = hmm_range_flags;
 		range->values = hmm_range_values;
 		range->pfn_shift = PAGE_SHIFT;
+		INIT_LIST_HEAD(&range->list);
 	}
 }

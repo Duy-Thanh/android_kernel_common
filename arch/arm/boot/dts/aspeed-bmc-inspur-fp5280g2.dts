@@ -725,9 +725,9 @@
 		reg = <0x58>;
 	};
 
-	power-supply@59 {
+	power-supply@5a {
 		compatible = "pmbus";
-		reg = <0x59>;
+		reg = <0x5a>;
 	};
 };
 

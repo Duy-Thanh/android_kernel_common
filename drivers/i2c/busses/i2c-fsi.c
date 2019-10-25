@@ -707,10 +707,8 @@ static int fsi_i2c_probe(struct device *dev)
 			continue;
 
 		port = kzalloc(sizeof(*port), GFP_KERNEL);
-		if (!port) {
-			of_node_put(np);
+		if (!port)
 			break;
-		}
 
 		port->master = i2c;
 		port->port = port_no;

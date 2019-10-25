@@ -8,7 +8,6 @@
 #include <errno.h>
 #include <unistd.h>
 #include <string.h>
-#include <stdlib.h>
 #include <sys/types.h>
 #include <dirent.h>
 #include <sys/wait.h>

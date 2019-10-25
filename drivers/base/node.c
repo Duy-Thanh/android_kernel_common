@@ -427,8 +427,6 @@ static ssize_t node_read_meminfo(struct device *dev,
 		       "Node %d AnonHugePages:  %8lu kB\n"
 		       "Node %d ShmemHugePages: %8lu kB\n"
 		       "Node %d ShmemPmdMapped: %8lu kB\n"
-		       "Node %d FileHugePages: %8lu kB\n"
-		       "Node %d FilePmdMapped: %8lu kB\n"
 #endif
 			,
 		       nid, K(node_page_state(pgdat, NR_FILE_DIRTY)),
@@ -454,10 +452,6 @@ static ssize_t node_read_meminfo(struct device *dev,
 		       nid, K(node_page_state(pgdat, NR_SHMEM_THPS) *
 				       HPAGE_PMD_NR),
 		       nid, K(node_page_state(pgdat, NR_SHMEM_PMDMAPPED) *
-				       HPAGE_PMD_NR),
-		       nid, K(node_page_state(pgdat, NR_FILE_THPS) *
-				       HPAGE_PMD_NR),
-		       nid, K(node_page_state(pgdat, NR_FILE_PMDMAPPED) *
 				       HPAGE_PMD_NR)
 #endif
 		       );
@@ -762,13 +756,15 @@ static int __ref get_nid_for_pfn(unsigned long pfn)
 static int register_mem_sect_under_node(struct memory_block *mem_blk,
 					 void *arg)
 {
-	unsigned long memory_block_pfns = memory_block_size_bytes() / PAGE_SIZE;
-	unsigned long start_pfn = section_nr_to_pfn(mem_blk->start_section_nr);
-	unsigned long end_pfn = start_pfn + memory_block_pfns - 1;
 	int ret, nid = *(int *)arg;
-	unsigned long pfn;
+	unsigned long pfn, sect_start_pfn, sect_end_pfn;
 
-	for (pfn = start_pfn; pfn <= end_pfn; pfn++) {
+	mem_blk->nid = nid;
+
+	sect_start_pfn = section_nr_to_pfn(mem_blk->start_section_nr);
+	sect_end_pfn = section_nr_to_pfn(mem_blk->end_section_nr);
+	sect_end_pfn += PAGES_PER_SECTION - 1;
+	for (pfn = sect_start_pfn; pfn <= sect_end_pfn; pfn++) {
 		int page_nid;
 
 		/*
@@ -793,13 +789,6 @@ static int register_mem_sect_under_node(struct memory_block *mem_blk,
 			if (page_nid != nid)
 				continue;
 		}
-
-		/*
-		 * If this memory block spans multiple nodes, we only indicate
-		 * the last processed node.
-		 */
-		mem_blk->nid = nid;
-
 		ret = sysfs_create_link_nowarn(&node_devices[nid]->dev.kobj,
 					&mem_blk->dev.kobj,
 					kobject_name(&mem_blk->dev.kobj));
@@ -815,18 +804,32 @@ static int register_mem_sect_under_node(struct memory_block *mem_blk,
 }
 
 /*
- * Unregister a memory block device under the node it spans. Memory blocks
- * with multiple nodes cannot be offlined and therefore also never be removed.
+ * Unregister memory block device under all nodes that it spans.
+ * Has to be called with mem_sysfs_mutex held (due to unlinked_nodes).
  */
 void unregister_memory_block_under_nodes(struct memory_block *mem_blk)
 {
-	if (mem_blk->nid == NUMA_NO_NODE)
-		return;
+	unsigned long pfn, sect_start_pfn, sect_end_pfn;
+	static nodemask_t unlinked_nodes;
 
-	sysfs_remove_link(&node_devices[mem_blk->nid]->dev.kobj,
-			  kobject_name(&mem_blk->dev.kobj));
-	sysfs_remove_link(&mem_blk->dev.kobj,
-			  kobject_name(&node_devices[mem_blk->nid]->dev.kobj));
+	nodes_clear(unlinked_nodes);
+	sect_start_pfn = section_nr_to_pfn(mem_blk->start_section_nr);
+	sect_end_pfn = section_nr_to_pfn(mem_blk->end_section_nr);
+	for (pfn = sect_start_pfn; pfn <= sect_end_pfn; pfn++) {
+		int nid;
+
+		nid = get_nid_for_pfn(pfn);
+		if (nid < 0)
+			continue;
+		if (!node_online(nid))
+			continue;
+		if (node_test_and_set(nid, unlinked_nodes))
+			continue;
+		sysfs_remove_link(&node_devices[nid]->dev.kobj,
+			 kobject_name(&mem_blk->dev.kobj));
+		sysfs_remove_link(&mem_blk->dev.kobj,
+			 kobject_name(&node_devices[nid]->dev.kobj));
+	}
 }
 
 int link_mem_sections(int nid, unsigned long start_pfn, unsigned long end_pfn)

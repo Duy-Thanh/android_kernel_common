@@ -30,6 +30,7 @@
 #include <linux/of.h>
 #include <linux/delay.h>
 #include <linux/reboot.h>
+#include <mach/hardware.h>
 
 /* WatchDog Timer - Chapter 23 Page 207 */
 

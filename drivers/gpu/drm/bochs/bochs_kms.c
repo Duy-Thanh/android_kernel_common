@@ -2,14 +2,12 @@
 /*
  */
 
-#include <linux/moduleparam.h>
-
+#include "bochs.h"
 #include <drm/drm_atomic_helper.h>
+#include <drm/drm_plane_helper.h>
+#include <drm/drm_atomic_uapi.h>
 #include <drm/drm_gem_framebuffer_helper.h>
 #include <drm/drm_probe_helper.h>
-#include <drm/drm_vblank.h>
-
-#include "bochs.h"
 
 static int defx = 1024;
 static int defy = 768;

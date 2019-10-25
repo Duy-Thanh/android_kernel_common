@@ -185,7 +185,8 @@ static int stm32_dmamux_probe(struct platform_device *pdev)
 	if (!node)
 		return -ENODEV;
 
-	count = device_property_count_u32(&pdev->dev, "dma-masters");
+	count = device_property_read_u32_array(&pdev->dev, "dma-masters",
+					       NULL, 0);
 	if (count < 0) {
 		dev_err(&pdev->dev, "Can't get DMA master(s) node\n");
 		return -ENODEV;

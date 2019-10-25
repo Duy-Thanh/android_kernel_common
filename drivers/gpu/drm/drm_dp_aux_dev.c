@@ -37,7 +37,6 @@
 
 #include <drm/drm_crtc.h>
 #include <drm/drm_dp_helper.h>
-#include <drm/drm_dp_mst_helper.h>
 #include <drm/drm_print.h>
 
 #include "drm_crtc_helper_internal.h"
@@ -83,7 +82,8 @@ static struct drm_dp_aux_dev *alloc_drm_dp_aux_dev(struct drm_dp_aux *aux)
 	kref_init(&aux_dev->refcount);
 
 	mutex_lock(&aux_idr_mutex);
-	index = idr_alloc(&aux_idr, aux_dev, 0, DRM_AUX_MINORS, GFP_KERNEL);
+	index = idr_alloc_cyclic(&aux_idr, aux_dev, 0, DRM_AUX_MINORS,
+				 GFP_KERNEL);
 	mutex_unlock(&aux_idr_mutex);
 	if (index < 0) {
 		kfree(aux_dev);
@@ -163,12 +163,7 @@ static ssize_t auxdev_read_iter(struct kiocb *iocb, struct iov_iter *to)
 			break;
 		}
 
-		if (aux_dev->aux->is_remote)
-			res = drm_dp_mst_dpcd_read(aux_dev->aux, pos, buf,
-						   todo);
-		else
-			res = drm_dp_dpcd_read(aux_dev->aux, pos, buf, todo);
-
+		res = drm_dp_dpcd_read(aux_dev->aux, pos, buf, todo);
 		if (res <= 0)
 			break;
 
@@ -215,12 +210,7 @@ static ssize_t auxdev_write_iter(struct kiocb *iocb, struct iov_iter *from)
 			break;
 		}
 
-		if (aux_dev->aux->is_remote)
-			res = drm_dp_mst_dpcd_write(aux_dev->aux, pos, buf,
-						    todo);
-		else
-			res = drm_dp_dpcd_write(aux_dev->aux, pos, buf, todo);
-
+		res = drm_dp_dpcd_write(aux_dev->aux, pos, buf, todo);
 		if (res <= 0)
 			break;
 

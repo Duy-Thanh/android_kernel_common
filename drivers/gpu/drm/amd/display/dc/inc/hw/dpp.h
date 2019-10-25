@@ -42,7 +42,6 @@ struct dpp {
 
 #if defined(CONFIG_DRM_AMD_DC_DCN2_0)
 	struct pwl_params shaper_params;
-	bool cm_bypass_mode;
 #endif
 };
 
@@ -201,7 +200,7 @@ struct dpp_funcs {
 
 	void (*set_cursor_attributes)(
 			struct dpp *dpp_base,
-			struct dc_cursor_attributes *cursor_attributes);
+			enum dc_cursor_color_format color_format);
 
 	void (*set_cursor_position)(
 			struct dpp *dpp_base,

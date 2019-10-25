@@ -255,10 +255,6 @@
 	};
 };
 
-&r_ir {
-	status = "okay";
-};
-
 &r_pio {
 	vcc-pm-supply = <&reg_aldo1>;
 };

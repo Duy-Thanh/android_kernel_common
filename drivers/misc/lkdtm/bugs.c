@@ -75,12 +75,7 @@ static int warn_counter;
 
 void lkdtm_WARNING(void)
 {
-	WARN_ON(++warn_counter);
-}
-
-void lkdtm_WARNING_MESSAGE(void)
-{
-	WARN(1, "Warning message trigger count: %d\n", ++warn_counter);
+	WARN(1, "Warning message trigger count: %d\n", warn_counter++);
 }
 
 void lkdtm_EXCEPTION(void)

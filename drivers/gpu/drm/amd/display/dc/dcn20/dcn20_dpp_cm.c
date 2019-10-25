@@ -52,12 +52,7 @@ static void dpp2_enable_cm_block(
 {
 	struct dcn20_dpp *dpp = TO_DCN20_DPP(dpp_base);
 
-	unsigned int cm_bypass_mode = 0;
-	//Temp, put CM in bypass mode
-	if (dpp_base->ctx->dc->debug.cm_in_bypass)
-		cm_bypass_mode = 1;
-
-	REG_UPDATE(CM_CONTROL, CM_BYPASS, cm_bypass_mode);
+	REG_UPDATE(CM_CONTROL, CM_BYPASS, 0);
 }
 
 

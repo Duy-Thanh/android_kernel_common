@@ -1,16 +1,19 @@
-.. SPDX-License-Identifier: GPL-2.0
-
 ========================
 Null block device driver
 ========================
 
-Overview
-========
+1. Overview
+===========
 
-The null block device (``/dev/nullb*``) is used for benchmarking the various
+The null block device (/dev/nullb*) is used for benchmarking the various
 block-layer implementations. It emulates a block device of X gigabytes in size.
-It does not execute any read/write operation, just mark them as complete in
-the request queue. The following instances are possible:
+The following instances are possible:
+
+  Single-queue block-layer
+
+    - Request-based.
+    - Single submission queue per device.
+    - Implements IO scheduling algorithms (CFQ, Deadline, noop).
 
   Multi-queue block-layer
 
@@ -24,15 +27,15 @@ the request queue. The following instances are possible:
 
 All of them have a completion queue for each core in the system.
 
-Module parameters
-=================
+2. Module parameters applicable for all instances
+=================================================
 
 queue_mode=[0-2]: Default: 2-Multi-queue
   Selects which block-layer the module should instantiate with.
 
   =  ============
   0  Bio-based
-  1  Single-queue (deprecated)
+  1  Single-queue
   2  Multi-queue
   =  ============
 
@@ -64,7 +67,7 @@ irqmode=[0-2]: Default: 1-Soft-irq
 completion_nsec=[ns]: Default: 10,000ns
   Combined with irqmode=2 (timer). The time each completion event must wait.
 
-submit_queues=[1..nr_cpus]: Default: 1
+submit_queues=[1..nr_cpus]:
   The number of submission queues attached to the device driver. If unset, it
   defaults to 1. For multi-queue, it is ignored when use_per_node_hctx module
   parameter is 1.
@@ -72,11 +75,9 @@ submit_queues=[1..nr_cpus]: Default: 1
 hw_queue_depth=[0..qdepth]: Default: 64
   The hardware queue depth of the device.
 
-Multi-queue specific parameters
--------------------------------
+III: Multi-queue specific parameters
 
 use_per_node_hctx=[0/1]: Default: 0
-  Number of hardware context queues.
 
   =  =====================================================================
   0  The number of submit queues are set to the value of the submit_queues
@@ -86,7 +87,6 @@ use_per_node_hctx=[0/1]: Default: 0
   =  =====================================================================
 
 no_sched=[0/1]: Default: 0
-  Enable/disable the io scheduler.
 
   =  ======================================
   0  nullb* use default blk-mq io scheduler
@@ -94,7 +94,6 @@ no_sched=[0/1]: Default: 0
   =  ======================================
 
 blocking=[0/1]: Default: 0
-  Blocking behavior of the request queue.
 
   =  ===============================================================
   0  Register as a non-blocking blk-mq driver device.
@@ -104,7 +103,6 @@ blocking=[0/1]: Default: 0
   =  ===============================================================
 
 shared_tags=[0/1]: Default: 0
-  Sharing tags between devices.
 
   =  ================================================================
   0  Tag set is not shared.
@@ -113,7 +111,6 @@ shared_tags=[0/1]: Default: 0
   =  ================================================================
 
 zoned=[0/1]: Default: 0
-  Device is a random-access or a zoned block device.
 
   =  ======================================================================
   0  Block device is exposed as a random-access block device.

@@ -416,8 +416,11 @@ static int bd70528_probe(struct platform_device *pdev)
 	bd_rtc->dev = &pdev->dev;
 
 	irq = platform_get_irq_byname(pdev, "bd70528-rtc-alm");
-	if (irq < 0)
+
+	if (irq < 0) {
+		dev_err(&pdev->dev, "Failed to get irq\n");
 		return irq;
+	}
 
 	platform_set_drvdata(pdev, bd_rtc);
 
@@ -476,7 +479,11 @@ static int bd70528_probe(struct platform_device *pdev)
 		return ret;
 	}
 
-	return rtc_register_device(rtc);
+	ret = rtc_register_device(rtc);
+	if (ret)
+		dev_err(&pdev->dev, "Registering RTC failed\n");
+
+	return ret;
 }
 
 static struct platform_driver bd70528_rtc = {

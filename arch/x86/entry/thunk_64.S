@@ -46,7 +46,7 @@
 	THUNK lockdep_sys_exit_thunk,lockdep_sys_exit
 #endif
 
-#ifdef CONFIG_PREEMPTION
+#ifdef CONFIG_PREEMPT
 	THUNK ___preempt_schedule, preempt_schedule
 	THUNK ___preempt_schedule_notrace, preempt_schedule_notrace
 	EXPORT_SYMBOL(___preempt_schedule)
@@ -55,7 +55,7 @@
 
 #if defined(CONFIG_TRACE_IRQFLAGS) \
  || defined(CONFIG_DEBUG_LOCK_ALLOC) \
- || defined(CONFIG_PREEMPTION)
+ || defined(CONFIG_PREEMPT)
 .L_restore:
 	popq %r11
 	popq %r10

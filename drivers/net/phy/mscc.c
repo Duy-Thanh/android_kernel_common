@@ -1725,7 +1725,7 @@ static int vsc8584_config_init(struct phy_device *phydev)
 			return ret;
 	}
 
-	return 0;
+	return genphy_config_init(phydev);
 
 err:
 	mutex_unlock(&phydev->mdio.bus->mdio_lock);
@@ -1767,7 +1767,7 @@ static int vsc85xx_config_init(struct phy_device *phydev)
 			return rc;
 	}
 
-	return 0;
+	return genphy_config_init(phydev);
 }
 
 static int vsc8584_did_interrupt(struct phy_device *phydev)

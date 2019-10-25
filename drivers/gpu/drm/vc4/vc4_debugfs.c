@@ -7,6 +7,7 @@
 #include <linux/circ_buf.h>
 #include <linux/ctype.h>
 #include <linux/debugfs.h>
+#include <drm/drmP.h>
 
 #include "vc4_drv.h"
 #include "vc4_regs.h"

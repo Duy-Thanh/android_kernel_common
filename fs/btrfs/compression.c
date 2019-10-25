@@ -18,7 +18,6 @@
 #include <linux/sched/mm.h>
 #include <linux/log2.h>
 #include <crypto/hash.h>
-#include "misc.h"
 #include "ctree.h"
 #include "disk-io.h"
 #include "transaction.h"
@@ -1040,7 +1039,7 @@ int btrfs_compress_pages(unsigned int type_level, struct address_space *mapping,
 	struct list_head *workspace;
 	int ret;
 
-	level = btrfs_compress_set_level(type, level);
+	level = btrfs_compress_op[type]->set_level(level);
 	workspace = get_workspace(type, level);
 	ret = btrfs_compress_op[type]->compress_pages(workspace, mapping,
 						      start, pages,
@@ -1612,23 +1611,7 @@ unsigned int btrfs_compress_str2level(unsigned int type, const char *str)
 			level = 0;
 	}
 
-	level = btrfs_compress_set_level(type, level);
-
-	return level;
-}
-
-/*
- * Adjust @level according to the limits of the compression algorithm or
- * fallback to default
- */
-unsigned int btrfs_compress_set_level(int type, unsigned level)
-{
-	const struct btrfs_compress_op *ops = btrfs_compress_op[type];
-
-	if (level == 0)
-		level = ops->default_level;
-	else
-		level = min(level, ops->max_level);
+	level = btrfs_compress_op[type]->set_level(level);
 
 	return level;
 }

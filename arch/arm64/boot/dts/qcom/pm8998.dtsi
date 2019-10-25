@@ -78,7 +78,7 @@
 			#size-cells = <0>;
 			#io-channel-cells = <1>;
 
-			adc-chan@6 {
+			adc-chan@ADC5_DIE_TEMP {
 				reg = <ADC5_DIE_TEMP>;
 				label = "die_temp";
 			};

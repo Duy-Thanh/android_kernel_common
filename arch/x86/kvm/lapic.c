@@ -65,11 +65,8 @@
 #define APIC_BROADCAST			0xFF
 #define X2APIC_BROADCAST		0xFFFFFFFFul
 
-static bool lapic_timer_advance_dynamic __read_mostly;
-#define LAPIC_TIMER_ADVANCE_ADJUST_MIN	100	/* clock cycles */
-#define LAPIC_TIMER_ADVANCE_ADJUST_MAX	10000	/* clock cycles */
-#define LAPIC_TIMER_ADVANCE_NS_INIT	1000
-#define LAPIC_TIMER_ADVANCE_NS_MAX     5000
+#define LAPIC_TIMER_ADVANCE_ADJUST_DONE 100
+#define LAPIC_TIMER_ADVANCE_ADJUST_INIT 1000
 /* step-by-step approximation to mitigate fluctuation */
 #define LAPIC_TIMER_ADVANCE_ADJUST_STEP 8
 
@@ -1201,8 +1198,10 @@ void kvm_apic_set_eoi_accelerated(struct kvm_vcpu *vcpu, int vector)
 }
 EXPORT_SYMBOL_GPL(kvm_apic_set_eoi_accelerated);
 
-static void apic_send_ipi(struct kvm_lapic *apic, u32 icr_low, u32 icr_high)
+static void apic_send_ipi(struct kvm_lapic *apic)
 {
+	u32 icr_low = kvm_lapic_get_reg(apic, APIC_ICR);
+	u32 icr_high = kvm_lapic_get_reg(apic, APIC_ICR2);
 	struct kvm_lapic_irq irq;
 
 	irq.vector = icr_low & APIC_VECTOR_MASK;
@@ -1488,25 +1487,26 @@ static inline void adjust_lapic_timer_advance(struct kvm_vcpu *vcpu,
 	u32 timer_advance_ns = apic->lapic_timer.timer_advance_ns;
 	u64 ns;
 
-	/* Do not adjust for tiny fluctuations or large random spikes. */
-	if (abs(advance_expire_delta) > LAPIC_TIMER_ADVANCE_ADJUST_MAX ||
-	    abs(advance_expire_delta) < LAPIC_TIMER_ADVANCE_ADJUST_MIN)
-		return;
-
 	/* too early */
 	if (advance_expire_delta < 0) {
 		ns = -advance_expire_delta * 1000000ULL;
 		do_div(ns, vcpu->arch.virtual_tsc_khz);
-		timer_advance_ns -= ns/LAPIC_TIMER_ADVANCE_ADJUST_STEP;
+		timer_advance_ns -= min((u32)ns,
+			timer_advance_ns / LAPIC_TIMER_ADVANCE_ADJUST_STEP);
 	} else {
 	/* too late */
 		ns = advance_expire_delta * 1000000ULL;
 		do_div(ns, vcpu->arch.virtual_tsc_khz);
-		timer_advance_ns += ns/LAPIC_TIMER_ADVANCE_ADJUST_STEP;
+		timer_advance_ns += min((u32)ns,
+			timer_advance_ns / LAPIC_TIMER_ADVANCE_ADJUST_STEP);
 	}
 
-	if (unlikely(timer_advance_ns > LAPIC_TIMER_ADVANCE_NS_MAX))
-		timer_advance_ns = LAPIC_TIMER_ADVANCE_NS_INIT;
+	if (abs(advance_expire_delta) < LAPIC_TIMER_ADVANCE_ADJUST_DONE)
+		apic->lapic_timer.timer_advance_adjust_done = true;
+	if (unlikely(timer_advance_ns > 5000)) {
+		timer_advance_ns = LAPIC_TIMER_ADVANCE_ADJUST_INIT;
+		apic->lapic_timer.timer_advance_adjust_done = false;
+	}
 	apic->lapic_timer.timer_advance_ns = timer_advance_ns;
 }
 
@@ -1526,7 +1526,7 @@ static void __kvm_wait_lapic_expire(struct kvm_vcpu *vcpu)
 	if (guest_tsc < tsc_deadline)
 		__wait_lapic_expire(vcpu, tsc_deadline - guest_tsc);
 
-	if (lapic_timer_advance_dynamic)
+	if (unlikely(!apic->lapic_timer.timer_advance_adjust_done))
 		adjust_lapic_timer_advance(vcpu, apic->lapic_timer.advance_expire_delta);
 }
 
@@ -1598,7 +1598,7 @@ static void start_sw_tscdeadline(struct kvm_lapic *apic)
 	    likely(ns > apic->lapic_timer.timer_advance_ns)) {
 		expire = ktime_add_ns(now, ns);
 		expire = ktime_sub_ns(expire, ktimer->timer_advance_ns);
-		hrtimer_start(&ktimer->timer, expire, HRTIMER_MODE_ABS_HARD);
+		hrtimer_start(&ktimer->timer, expire, HRTIMER_MODE_ABS);
 	} else
 		apic_timer_expired(apic);
 
@@ -1914,9 +1914,8 @@ int kvm_lapic_reg_write(struct kvm_lapic *apic, u32 reg, u32 val)
 	}
 	case APIC_ICR:
 		/* No delay here, so we always clear the pending bit */
-		val &= ~(1 << 12);
-		apic_send_ipi(apic, val, kvm_lapic_get_reg(apic, APIC_ICR2));
-		kvm_lapic_set_reg(apic, APIC_ICR, val);
+		kvm_lapic_set_reg(apic, APIC_ICR, val & ~(1 << 12));
+		apic_send_ipi(apic);
 		break;
 
 	case APIC_ICR2:
@@ -2300,15 +2299,16 @@ int kvm_create_lapic(struct kvm_vcpu *vcpu, int timer_advance_ns)
 	apic->vcpu = vcpu;
 
 	hrtimer_init(&apic->lapic_timer.timer, CLOCK_MONOTONIC,
-		     HRTIMER_MODE_ABS_HARD);
+		     HRTIMER_MODE_ABS);
 	apic->lapic_timer.timer.function = apic_timer_fn;
 	if (timer_advance_ns == -1) {
-		apic->lapic_timer.timer_advance_ns = LAPIC_TIMER_ADVANCE_NS_INIT;
-		lapic_timer_advance_dynamic = true;
+		apic->lapic_timer.timer_advance_ns = LAPIC_TIMER_ADVANCE_ADJUST_INIT;
+		apic->lapic_timer.timer_advance_adjust_done = false;
 	} else {
 		apic->lapic_timer.timer_advance_ns = timer_advance_ns;
-		lapic_timer_advance_dynamic = false;
+		apic->lapic_timer.timer_advance_adjust_done = true;
 	}
+
 
 	/*
 	 * APIC is created enabled. This will prevent kvm_lapic_set_base from
@@ -2484,7 +2484,7 @@ void __kvm_migrate_apic_timer(struct kvm_vcpu *vcpu)
 
 	timer = &vcpu->arch.apic->lapic_timer.timer;
 	if (hrtimer_cancel(timer))
-		hrtimer_start_expires(timer, HRTIMER_MODE_ABS_HARD);
+		hrtimer_start_expires(timer, HRTIMER_MODE_ABS);
 }
 
 /*
@@ -2707,14 +2707,11 @@ void kvm_apic_accept_events(struct kvm_vcpu *vcpu)
 		return;
 
 	/*
-	 * INITs are latched while CPU is in specific states
-	 * (SMM, VMX non-root mode, SVM with GIF=0).
-	 * Because a CPU cannot be in these states immediately
-	 * after it has processed an INIT signal (and thus in
-	 * KVM_MP_STATE_INIT_RECEIVED state), just eat SIPIs
-	 * and leave the INIT pending.
+	 * INITs are latched while in SMM.  Because an SMM CPU cannot
+	 * be in KVM_MP_STATE_INIT_RECEIVED state, just eat SIPIs
+	 * and delay processing of INIT until the next RSM.
 	 */
-	if (is_smm(vcpu) || kvm_x86_ops->apic_init_signal_blocked(vcpu)) {
+	if (is_smm(vcpu)) {
 		WARN_ON_ONCE(vcpu->arch.mp_state == KVM_MP_STATE_INIT_RECEIVED);
 		if (test_bit(KVM_APIC_SIPI, &apic->pending_events))
 			clear_bit(KVM_APIC_SIPI, &apic->pending_events);

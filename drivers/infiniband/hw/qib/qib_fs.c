@@ -493,7 +493,7 @@ static int remove_device_files(struct super_block *sb,
 	remove_file(dir, "flash");
 	inode_unlock(d_inode(dir));
 	ret = simple_rmdir(d_inode(root), dir);
-	d_drop(dir);
+	d_delete(dir);
 	dput(dir);
 
 bail:

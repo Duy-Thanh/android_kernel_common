@@ -323,6 +323,9 @@ megasas_fusion_update_can_queue(struct megasas_instance *instance, int fw_boot_c
 {
 	u16 cur_max_fw_cmds = 0;
 	u16 ldio_threshold = 0;
+	struct megasas_register_set __iomem *reg_set;
+
+	reg_set = instance->reg_set;
 
 	/* ventura FW does not fill outbound_scratch_pad_2 with queue depth */
 	if (instance->adapter_type < VENTURA_SERIES)
@@ -3508,7 +3511,7 @@ megasas_complete_r1_command(struct megasas_instance *instance,
  * @instance:			Adapter soft state
  * Completes all commands that is in reply descriptor queue
  */
-static int
+int
 complete_cmd_fusion(struct megasas_instance *instance, u32 MSIxIndex,
 		    struct megasas_irq_context *irq_context)
 {
@@ -3699,7 +3702,7 @@ static void megasas_enable_irq_poll(struct megasas_instance *instance)
  * megasas_sync_irqs -	Synchronizes all IRQs owned by adapter
  * @instance:			Adapter soft state
  */
-static void megasas_sync_irqs(unsigned long instance_addr)
+void megasas_sync_irqs(unsigned long instance_addr)
 {
 	u32 count, i;
 	struct megasas_instance *instance =
@@ -3757,7 +3760,7 @@ int megasas_irqpoll(struct irq_poll *irqpoll, int budget)
  *
  * Tasklet to complete cmds
  */
-static void
+void
 megasas_complete_cmd_dpc_fusion(unsigned long instance_addr)
 {
 	struct megasas_instance *instance =
@@ -3777,7 +3780,7 @@ megasas_complete_cmd_dpc_fusion(unsigned long instance_addr)
 /**
  * megasas_isr_fusion - isr entry point
  */
-static irqreturn_t megasas_isr_fusion(int irq, void *devp)
+irqreturn_t megasas_isr_fusion(int irq, void *devp)
 {
 	struct megasas_irq_context *irq_context = devp;
 	struct megasas_instance *instance = irq_context->instance;
@@ -3813,7 +3816,7 @@ static irqreturn_t megasas_isr_fusion(int irq, void *devp)
  * mfi_cmd:			megasas_cmd pointer
  *
  */
-static void
+void
 build_mpt_mfi_pass_thru(struct megasas_instance *instance,
 			struct megasas_cmd *mfi_cmd)
 {
@@ -3871,7 +3874,7 @@ build_mpt_mfi_pass_thru(struct megasas_instance *instance,
  * @cmd:			mfi cmd to build
  *
  */
-static union MEGASAS_REQUEST_DESCRIPTOR_UNION *
+union MEGASAS_REQUEST_DESCRIPTOR_UNION *
 build_mpt_cmd(struct megasas_instance *instance, struct megasas_cmd *cmd)
 {
 	union MEGASAS_REQUEST_DESCRIPTOR_UNION *req_desc = NULL;
@@ -3897,7 +3900,7 @@ build_mpt_cmd(struct megasas_instance *instance, struct megasas_cmd *cmd)
  * @cmd:			mfi cmd pointer
  *
  */
-static void
+void
 megasas_issue_dcmd_fusion(struct megasas_instance *instance,
 			  struct megasas_cmd *cmd)
 {
@@ -4093,9 +4096,8 @@ static inline void megasas_trigger_snap_dump(struct megasas_instance *instance)
 }
 
 /* This function waits for outstanding commands on fusion to complete */
-static int
-megasas_wait_for_outstanding_fusion(struct megasas_instance *instance,
-				    int reason, int *convert)
+int megasas_wait_for_outstanding_fusion(struct megasas_instance *instance,
+					int reason, int *convert)
 {
 	int i, outstanding, retval = 0, hb_seconds_missed = 0;
 	u32 fw_state, abs_state;
@@ -4219,7 +4221,7 @@ void  megasas_reset_reply_desc(struct megasas_instance *instance)
  * megasas_refire_mgmt_cmd :	Re-fire management commands
  * @instance:				Controller's soft instance
 */
-static void megasas_refire_mgmt_cmd(struct megasas_instance *instance)
+void megasas_refire_mgmt_cmd(struct megasas_instance *instance)
 {
 	int j;
 	struct megasas_cmd_fusion *cmd_fusion;
@@ -4745,8 +4747,7 @@ out:
 }
 
 /*SRIOV get other instance in cluster if any*/
-static struct
-megasas_instance *megasas_get_peer_instance(struct megasas_instance *instance)
+struct megasas_instance *megasas_get_peer_instance(struct megasas_instance *instance)
 {
 	int i;
 
@@ -5052,7 +5053,7 @@ out:
 }
 
 /* Fusion Crash dump collection */
-static void  megasas_fusion_crash_dump(struct megasas_instance *instance)
+void  megasas_fusion_crash_dump(struct megasas_instance *instance)
 {
 	u32 status_reg;
 	u8 partial_copy = 0;

@@ -6181,7 +6181,8 @@ static void nv_remove(struct pci_dev *pci_dev)
 #ifdef CONFIG_PM_SLEEP
 static int nv_suspend(struct device *device)
 {
-	struct net_device *dev = dev_get_drvdata(device);
+	struct pci_dev *pdev = to_pci_dev(device);
+	struct net_device *dev = pci_get_drvdata(pdev);
 	struct fe_priv *np = netdev_priv(dev);
 	u8 __iomem *base = get_hwbase(dev);
 	int i;

@@ -16,11 +16,10 @@
 #include "strlist.h"
 #include "strfilter.h"
 #include "debug.h"
-#include "build-id.h"
-#include "dso.h"
+#include "cache.h"
 #include "color.h"
 #include "symbol.h"
-#include "strbuf.h"
+#include "thread.h"
 #include <api/fs/tracing_path.h>
 #include "probe-event.h"
 #include "probe-file.h"

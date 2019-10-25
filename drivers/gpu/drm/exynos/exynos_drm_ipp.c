@@ -16,10 +16,7 @@
  * all copies or substantial portions of the Software.
  */
 
-#include <linux/uaccess.h>
-
-#include <drm/drm_file.h>
-#include <drm/drm_fourcc.h>
+#include <drm/drmP.h>
 #include <drm/drm_mode.h>
 #include <drm/exynos_drm.h>
 

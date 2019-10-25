@@ -15,6 +15,8 @@
 #include "xdr_fs.h"
 #include "protocol_yfs.h"
 
+static const struct afs_fid afs_zero_fid;
+
 static inline void afs_use_fs_server(struct afs_call *call, struct afs_cb_interest *cbi)
 {
 	call->cbi = afs_get_cb_interest(cbi);
@@ -392,7 +394,7 @@ static int afs_deliver_fs_fetch_data(struct afs_call *call)
 			goto no_more_data;
 
 		/* Discard any excess data the server gave us */
-		afs_extract_discard(call, req->actual_len - req->len);
+		iov_iter_discard(&call->iter, READ, req->actual_len - req->len);
 		call->unmarshall = 3;
 		/* Fall through */
 
@@ -1870,7 +1872,7 @@ static int afs_deliver_fs_get_capabilities(struct afs_call *call)
 
 		call->count = count;
 		call->count2 = count;
-		afs_extract_discard(call, count * sizeof(__be32));
+		iov_iter_discard(&call->iter, READ, count * sizeof(__be32));
 		call->unmarshall++;
 		/* Fall through */
 

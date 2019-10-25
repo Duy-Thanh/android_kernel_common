@@ -76,17 +76,16 @@ int sprd_clk_probe(struct device *dev, struct clk_hw_onecell_data *clkhw)
 	struct clk_hw *hw;
 
 	for (i = 0; i < clkhw->num; i++) {
-		const char *name;
 
 		hw = clkhw->hws[i];
+
 		if (!hw)
 			continue;
 
-		name = hw->init->name;
 		ret = devm_clk_hw_register(dev, hw);
 		if (ret) {
 			dev_err(dev, "Couldn't register clock %d - %s\n",
-				i, name);
+				i, hw->init->name);
 			return ret;
 		}
 	}

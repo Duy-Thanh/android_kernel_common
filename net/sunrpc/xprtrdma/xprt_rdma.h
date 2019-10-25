@@ -47,7 +47,6 @@
 #include <linux/atomic.h>		/* atomic_t, etc */
 #include <linux/kref.h>			/* struct kref */
 #include <linux/workqueue.h>		/* struct work_struct */
-#include <linux/llist.h>
 
 #include <rdma/rdma_cm.h>		/* RDMA connection api */
 #include <rdma/ib_verbs.h>		/* RDMA verbs api */
@@ -118,6 +117,9 @@ struct rpcrdma_ep {
 #endif
 
 /* Registered buffer -- registered kmalloc'd memory for RDMA SEND/RECV
+ *
+ * The below structure appears at the front of a large region of kmalloc'd
+ * memory, which always starts on a good alignment boundary.
  */
 
 struct rpcrdma_regbuf {
@@ -156,22 +158,25 @@ static inline void *rdmab_data(const struct rpcrdma_regbuf *rb)
 
 /* To ensure a transport can always make forward progress,
  * the number of RDMA segments allowed in header chunk lists
- * is capped at 16. This prevents less-capable devices from
- * overrunning the Send buffer while building chunk lists.
+ * is capped at 8. This prevents less-capable devices and
+ * memory registrations from overrunning the Send buffer
+ * while building chunk lists.
  *
  * Elements of the Read list take up more room than the
- * Write list or Reply chunk. 16 read segments means the
- * chunk lists cannot consume more than
+ * Write list or Reply chunk. 8 read segments means the Read
+ * list (or Write list or Reply chunk) cannot consume more
+ * than
  *
- * ((16 + 2) * read segment size) + 1 XDR words,
+ * ((8 + 2) * read segment size) + 1 XDR words, or 244 bytes.
  *
- * or about 400 bytes. The fixed part of the header is
- * another 24 bytes. Thus when the inline threshold is
- * 1024 bytes, at least 600 bytes are available for RPC
- * message bodies.
+ * And the fixed part of the header is another 24 bytes.
+ *
+ * The smallest inline threshold is 1024 bytes, ensuring that
+ * at least 750 bytes are available for RPC messages.
  */
 enum {
-	RPCRDMA_MAX_HDR_SEGS = 16,
+	RPCRDMA_MAX_HDR_SEGS = 8,
+	RPCRDMA_HDRBUF_SIZE = 256,
 };
 
 /*
@@ -201,7 +206,7 @@ struct rpcrdma_rep {
 	struct rpc_rqst		*rr_rqst;
 	struct xdr_buf		rr_hdrbuf;
 	struct xdr_stream	rr_stream;
-	struct llist_node	rr_node;
+	struct list_head	rr_list;
 	struct ib_recv_wr	rr_recv_wr;
 };
 
@@ -235,20 +240,20 @@ struct rpcrdma_sendctx {
  * An external memory region is any buffer or page that is registered
  * on the fly (ie, not pre-registered).
  */
+struct rpcrdma_req;
 struct rpcrdma_frwr {
 	struct ib_mr			*fr_mr;
 	struct ib_cqe			fr_cqe;
 	struct completion		fr_linv_done;
+	struct rpcrdma_req		*fr_req;
 	union {
 		struct ib_reg_wr	fr_regwr;
 		struct ib_send_wr	fr_invwr;
 	};
 };
 
-struct rpcrdma_req;
 struct rpcrdma_mr {
 	struct list_head	mr_list;
-	struct rpcrdma_req	*mr_req;
 	struct scatterlist	*mr_sg;
 	int			mr_nents;
 	enum dma_data_direction	mr_dir;
@@ -326,8 +331,7 @@ struct rpcrdma_req {
 	struct list_head	rl_all;
 	struct kref		rl_kref;
 
-	struct list_head	rl_free_mrs;
-	struct list_head	rl_registered;
+	struct list_head	rl_registered;	/* registered segments */
 	struct rpcrdma_mr_seg	rl_segments[RPCRDMA_MAX_SEGS];
 };
 
@@ -340,7 +344,7 @@ rpcr_to_rdmar(const struct rpc_rqst *rqst)
 static inline void
 rpcrdma_mr_push(struct rpcrdma_mr *mr, struct list_head *list)
 {
-	list_add(&mr->mr_list, list);
+	list_add_tail(&mr->mr_list, list);
 }
 
 static inline struct rpcrdma_mr *
@@ -348,9 +352,8 @@ rpcrdma_mr_pop(struct list_head *list)
 {
 	struct rpcrdma_mr *mr;
 
-	mr = list_first_entry_or_null(list, struct rpcrdma_mr, mr_list);
-	if (mr)
-		list_del_init(&mr->mr_list);
+	mr = list_first_entry(list, struct rpcrdma_mr, mr_list);
+	list_del_init(&mr->mr_list);
 	return mr;
 }
 
@@ -361,19 +364,19 @@ rpcrdma_mr_pop(struct list_head *list)
  * One of these is associated with a transport instance
  */
 struct rpcrdma_buffer {
-	spinlock_t		rb_lock;
-	struct list_head	rb_send_bufs;
+	spinlock_t		rb_mrlock;	/* protect rb_mrs list */
 	struct list_head	rb_mrs;
+	struct list_head	rb_all;
 
 	unsigned long		rb_sc_head;
 	unsigned long		rb_sc_tail;
 	unsigned long		rb_sc_last;
 	struct rpcrdma_sendctx	**rb_sc_ctxs;
 
+	spinlock_t		rb_lock;	/* protect buf lists */
+	struct list_head	rb_send_bufs;
+	struct list_head	rb_recv_bufs;
 	struct list_head	rb_allreqs;
-	struct list_head	rb_all_mrs;
-
-	struct llist_head	rb_free_reps;
 
 	u32			rb_max_requests;
 	u32			rb_credits;	/* most recent credit grant */
@@ -381,7 +384,7 @@ struct rpcrdma_buffer {
 	u32			rb_bc_srv_max_requests;
 	u32			rb_bc_max_requests;
 
-	struct work_struct	rb_refresh_worker;
+	struct delayed_work	rb_refresh_worker;
 };
 
 /*
@@ -487,6 +490,7 @@ struct rpcrdma_sendctx *rpcrdma_sendctx_get_locked(struct rpcrdma_xprt *r_xprt);
 
 struct rpcrdma_mr *rpcrdma_mr_get(struct rpcrdma_xprt *r_xprt);
 void rpcrdma_mr_put(struct rpcrdma_mr *mr);
+void rpcrdma_mr_unmap_and_put(struct rpcrdma_mr *mr);
 
 static inline void
 rpcrdma_mr_recycle(struct rpcrdma_mr *mr)
@@ -542,7 +546,6 @@ rpcrdma_data_dir(bool writing)
 /* Memory registration calls xprtrdma/frwr_ops.c
  */
 bool frwr_is_supported(struct ib_device *device);
-void frwr_recycle(struct rpcrdma_req *req);
 void frwr_reset(struct rpcrdma_req *req);
 int frwr_open(struct rpcrdma_ia *ia, struct rpcrdma_ep *ep);
 int frwr_init_mr(struct rpcrdma_ia *ia, struct rpcrdma_mr *mr);
@@ -551,7 +554,7 @@ size_t frwr_maxpages(struct rpcrdma_xprt *r_xprt);
 struct rpcrdma_mr_seg *frwr_map(struct rpcrdma_xprt *r_xprt,
 				struct rpcrdma_mr_seg *seg,
 				int nsegs, bool writing, __be32 xid,
-				struct rpcrdma_mr *mr);
+				struct rpcrdma_mr **mr);
 int frwr_send(struct rpcrdma_ia *ia, struct rpcrdma_req *req);
 void frwr_reminv(struct rpcrdma_rep *rep, struct list_head *mrs);
 void frwr_unmap_sync(struct rpcrdma_xprt *r_xprt, struct rpcrdma_req *req);

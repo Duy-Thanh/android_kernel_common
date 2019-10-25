@@ -285,12 +285,12 @@ struct drm_crtc_state {
 	u32 target_vblank;
 
 	/**
-	 * @async_flip:
+	 * @pageflip_flags:
 	 *
-	 * This is set when DRM_MODE_PAGE_FLIP_ASYNC is set in the legacy
-	 * PAGE_FLIP IOCTL. It's not wired up for the atomic IOCTL itself yet.
+	 * DRM_MODE_PAGE_FLIP_* flags, as passed to the page flip ioctl.
+	 * Zero in any other case.
 	 */
-	bool async_flip;
+	u32 pageflip_flags;
 
 	/**
 	 * @vrr_enabled:
@@ -756,9 +756,6 @@ struct drm_crtc_funcs {
 	 * provided from the configured source. Drivers must accept an "auto"
 	 * source name that will select a default source for this CRTC.
 	 *
-	 * This may trigger an atomic modeset commit if necessary, to enable CRC
-	 * generation.
-	 *
 	 * Note that "auto" can depend upon the current modeset configuration,
 	 * e.g. it could pick an encoder or output specific CRC sampling point.
 	 *
@@ -770,7 +767,6 @@ struct drm_crtc_funcs {
 	 * 0 on success or a negative error code on failure.
 	 */
 	int (*set_crc_source)(struct drm_crtc *crtc, const char *source);
-
 	/**
 	 * @verify_crc_source:
 	 *
@@ -1108,7 +1104,7 @@ struct drm_crtc {
 	/**
 	 * @self_refresh_data: Holds the state for the self refresh helpers
 	 *
-	 * Initialized via drm_self_refresh_helper_init().
+	 * Initialized via drm_self_refresh_helper_register().
 	 */
 	struct drm_self_refresh_data *self_refresh_data;
 };

@@ -7,7 +7,6 @@
 #include <linux/clk/clk-conf.h>
 #include <linux/err.h>
 #include <linux/delay.h>
-#include <linux/of.h>
 
 #include <drm/drm_print.h>
 

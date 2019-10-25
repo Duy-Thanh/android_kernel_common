@@ -292,7 +292,7 @@ int vbox_gem_create(struct vbox_private *vbox,
 		return ret;
 	}
 
-	*obj = &gbo->bo.base;
+	*obj = &gbo->gem;
 
 	return 0;
 }

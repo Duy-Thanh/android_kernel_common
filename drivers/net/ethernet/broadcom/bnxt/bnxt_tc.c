@@ -319,6 +319,8 @@ static int bnxt_hwrm_cfa_flow_free(struct bnxt *bp,
 	if (rc)
 		netdev_info(bp->dev, "%s: Error rc=%d", __func__, rc);
 
+	if (rc)
+		rc = -EIO;
 	return rc;
 }
 
@@ -513,6 +515,11 @@ static int bnxt_hwrm_cfa_flow_alloc(struct bnxt *bp, struct bnxt_tc_flow *flow,
 		}
 	}
 	mutex_unlock(&bp->hwrm_cmd_lock);
+
+	if (rc == HWRM_ERR_CODE_RESOURCE_ALLOC_ERROR)
+		rc = -ENOSPC;
+	else if (rc)
+		rc = -EIO;
 	return rc;
 }
 
@@ -584,6 +591,8 @@ static int hwrm_cfa_decap_filter_alloc(struct bnxt *bp,
 	}
 	mutex_unlock(&bp->hwrm_cmd_lock);
 
+	if (rc)
+		rc = -EIO;
 	return rc;
 }
 
@@ -600,6 +609,8 @@ static int hwrm_cfa_decap_filter_free(struct bnxt *bp,
 	if (rc)
 		netdev_info(bp->dev, "%s: Error rc=%d", __func__, rc);
 
+	if (rc)
+		rc = -EIO;
 	return rc;
 }
 
@@ -649,6 +660,8 @@ static int hwrm_cfa_encap_record_alloc(struct bnxt *bp,
 	}
 	mutex_unlock(&bp->hwrm_cmd_lock);
 
+	if (rc)
+		rc = -EIO;
 	return rc;
 }
 
@@ -665,6 +678,8 @@ static int hwrm_cfa_encap_record_free(struct bnxt *bp,
 	if (rc)
 		netdev_info(bp->dev, "%s: Error rc=%d", __func__, rc);
 
+	if (rc)
+		rc = -EIO;
 	return rc;
 }
 
@@ -1442,6 +1457,8 @@ bnxt_hwrm_cfa_flow_stats_get(struct bnxt *bp, int num_flows,
 	}
 	mutex_unlock(&bp->hwrm_cmd_lock);
 
+	if (rc)
+		rc = -EIO;
 	return rc;
 }
 

@@ -116,10 +116,8 @@ restart:
 				vfsmnt = &mnt->mnt;
 				continue;
 			}
-			if (is_mounted(vfsmnt) && !is_anon_ns(mnt->mnt_ns))
-				error = 1;	// absolute root
-			else
-				error = 2;	// detached or not attached yet
+			if (!error)
+				error = is_mounted(vfsmnt) ? 1 : 2;
 			break;
 		}
 		parent = dentry->d_parent;

@@ -290,7 +290,6 @@ struct vba_vars_st {
 	double PixelClock[DC__NUM_DPP__MAX];
 	double PixelClockBackEnd[DC__NUM_DPP__MAX];
 	bool DCCEnable[DC__NUM_DPP__MAX];
-	bool FECEnable[DC__NUM_DPP__MAX];
 	unsigned int DCCMetaPitchY[DC__NUM_DPP__MAX];
 	unsigned int DCCMetaPitchC[DC__NUM_DPP__MAX];
 	enum scan_direction_class SourceScan[DC__NUM_DPP__MAX];
@@ -318,7 +317,6 @@ struct vba_vars_st {
 	double DCCRate[DC__NUM_DPP__MAX];
 	double AverageDCCCompressionRate;
 	bool ODMCombineEnabled[DC__NUM_DPP__MAX];
-	enum odm_combine_mode ODMCombineTypeEnabled[DC__NUM_DPP__MAX];
 	double OutputBpp[DC__NUM_DPP__MAX];
 	bool DSCEnabled[DC__NUM_DPP__MAX];
 	unsigned int DSCInputBitPerComponent[DC__NUM_DPP__MAX];
@@ -397,7 +395,6 @@ struct vba_vars_st {
 	double FabricClockPerState[DC__VOLTAGE_STATES + 1];
 	double SOCCLKPerState[DC__VOLTAGE_STATES + 1];
 	double PHYCLKPerState[DC__VOLTAGE_STATES + 1];
-	double DTBCLKPerState[DC__VOLTAGE_STATES + 1];
 	double MaxDppclk[DC__VOLTAGE_STATES + 1];
 	double MaxDSCCLK[DC__VOLTAGE_STATES + 1];
 	double DRAMSpeedPerState[DC__VOLTAGE_STATES + 1];
@@ -491,7 +488,6 @@ struct vba_vars_st {
 	unsigned int NoOfDPP[DC__VOLTAGE_STATES + 1][2][DC__NUM_DPP__MAX];
 	int NoOfDPPThisState[DC__NUM_DPP__MAX];
 	bool ODMCombineEnablePerState[DC__VOLTAGE_STATES + 1][DC__NUM_DPP__MAX];
-	enum odm_combine_mode ODMCombineTypeEnablePerState[DC__VOLTAGE_STATES + 1][DC__NUM_DPP__MAX];
 	unsigned int SwathWidthYThisState[DC__NUM_DPP__MAX];
 	unsigned int SwathHeightCPerState[DC__VOLTAGE_STATES + 1][2][DC__NUM_DPP__MAX];
 	unsigned int SwathHeightYThisState[DC__NUM_DPP__MAX];
@@ -517,7 +513,6 @@ struct vba_vars_st {
 	bool DIOSupport[DC__VOLTAGE_STATES + 1];
 	bool NotEnoughDSCUnits[DC__VOLTAGE_STATES + 1];
 	bool DSCCLKRequiredMoreThanSupported[DC__VOLTAGE_STATES + 1];
-	bool DTBCLKRequiredMoreThanSupported[DC__VOLTAGE_STATES + 1];
 	double UrgentRoundTripAndOutOfOrderLatencyPerState[DC__VOLTAGE_STATES + 1];
 	bool ROBSupport[DC__VOLTAGE_STATES + 1];
 	bool PTEBufferSizeNotExceeded[DC__VOLTAGE_STATES + 1][2];
@@ -610,7 +605,6 @@ struct vba_vars_st {
 	double         MaximumSwathWidthLuma[DC__NUM_DPP__MAX];
 	double         MaximumSwathWidthChroma[DC__NUM_DPP__MAX];
 	bool odm_combine_dummy[DC__NUM_DPP__MAX];
-	enum odm_combine_mode odm_combine_mode_dummy[DC__NUM_DPP__MAX];
 	double         dummy1[DC__NUM_DPP__MAX];
 	double         dummy2[DC__NUM_DPP__MAX];
 	double         dummy3[DC__NUM_DPP__MAX];
@@ -631,11 +625,6 @@ struct vba_vars_st {
 	unsigned int        dummyinteger10;
 	unsigned int        dummyinteger11;
 	unsigned int        dummyinteger12;
-	unsigned int        dummyintegerarr1[DC__NUM_DPP__MAX];
-	unsigned int        dummyintegerarr2[DC__NUM_DPP__MAX];
-	unsigned int        dummyintegerarr3[DC__NUM_DPP__MAX];
-	unsigned int        dummyintegerarr4[DC__NUM_DPP__MAX];
-	long                dummylongarr1[DC__NUM_DPP__MAX];
 	bool           dummysinglestring;
 	bool           SingleDPPViewportSizeSupportPerPlane[DC__NUM_DPP__MAX];
 	double         PlaneRequiredDISPCLKWithODMCombine2To1;
@@ -644,7 +633,6 @@ struct vba_vars_st {
 	bool           LinkDSCEnable;
 	bool           ODMCombine4To1SupportCheckOK[DC__VOLTAGE_STATES + 1];
 	bool ODMCombineEnableThisState[DC__NUM_DPP__MAX];
-	enum odm_combine_mode ODMCombineEnableTypeThisState[DC__NUM_DPP__MAX];
 	unsigned int   SwathWidthCThisState[DC__NUM_DPP__MAX];
 	bool           ViewportSizeSupportPerPlane[DC__NUM_DPP__MAX];
 	double         AlignedDCCMetaPitchY[DC__NUM_DPP__MAX];
@@ -653,7 +641,6 @@ struct vba_vars_st {
 	unsigned int NotEnoughUrgentLatencyHiding;
 	unsigned int NotEnoughUrgentLatencyHidingPre;
 	long PTEBufferSizeInRequestsForLuma;
-	long PTEBufferSizeInRequestsForChroma;
 
 	// Missing from VBA
 	long dpte_group_bytes_chroma;
@@ -800,9 +787,6 @@ struct vba_vars_st {
 	unsigned int PDEProcessingBufIn64KBReqs;
 
 	double MaxTotalVActiveRDBandwidth;
-	bool DoUrgentLatencyAdjustment;
-	double UrgentLatencyAdjustmentFabricClockComponent;
-	double UrgentLatencyAdjustmentFabricClockReference;
 	double MinUrgentLatencySupportUs;
 	double MinFullDETBufferingTime;
 	double AverageReadBandwidthGBytePerSecond;
@@ -817,8 +801,6 @@ struct vba_vars_st {
 	bool ModeIsSupported;
 	bool ODMCombine4To1Supported;
 
-	unsigned int SurfaceWidthY[DC__NUM_DPP__MAX];
-	unsigned int SurfaceWidthC[DC__NUM_DPP__MAX];
 	unsigned int SurfaceHeightY[DC__NUM_DPP__MAX];
 	unsigned int SurfaceHeightC[DC__NUM_DPP__MAX];
 	unsigned int WritebackHTaps[DC__NUM_DPP__MAX];

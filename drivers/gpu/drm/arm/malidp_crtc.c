@@ -6,17 +6,14 @@
  * ARM Mali DP500/DP550/DP650 driver (crtc operations)
  */
 
-#include <linux/clk.h>
-#include <linux/pm_runtime.h>
-
-#include <video/videomode.h>
-
+#include <drm/drmP.h>
 #include <drm/drm_atomic.h>
 #include <drm/drm_atomic_helper.h>
 #include <drm/drm_crtc.h>
-#include <drm/drm_print.h>
 #include <drm/drm_probe_helper.h>
-#include <drm/drm_vblank.h>
+#include <linux/clk.h>
+#include <linux/pm_runtime.h>
+#include <video/videomode.h>
 
 #include "malidp_drv.h"
 #include "malidp_hw.h"

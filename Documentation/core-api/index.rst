@@ -25,7 +25,6 @@ Core utilities
    librs
    genalloc
    errseq
-   packing
    printk-formats
    circular-buffers
    generic-radix-tree
@@ -38,7 +37,6 @@ Core utilities
    protection-keys
    ../RCU/index
    gcc-plugins
-   symbol-namespaces
 
 
 Interfaces for kernel debugging
@@ -50,7 +48,7 @@ Interfaces for kernel debugging
    debug-objects
    tracepoint
 
-.. only:: subproject and html
+.. only::  subproject
 
    Indices
    =======

@@ -11,13 +11,7 @@
  *	Jianhua Li <lijianhua@huawei.com>
  */
 
-#include <linux/pci.h>
-
 #include <drm/drm_atomic_helper.h>
-#include <drm/drm_gem.h>
-#include <drm/drm_gem_vram_helper.h>
-#include <drm/drm_print.h>
-#include <drm/drm_vram_mm_helper.h>
 
 #include "hibmc_drm_drv.h"
 
@@ -66,7 +60,7 @@ int hibmc_gem_create(struct drm_device *dev, u32 size, bool iskernel,
 			DRM_ERROR("failed to allocate GEM object: %d\n", ret);
 		return ret;
 	}
-	*obj = &gbo->bo.base;
+	*obj = &gbo->gem;
 	return 0;
 }
 

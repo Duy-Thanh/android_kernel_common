@@ -15,9 +15,6 @@
 #ifdef CONFIG_DEBUG_FS
 
 #include <linux/debugfs.h>
-#include <linux/uaccess.h>
-
-#include <drm/drm_file.h>
 
 #include "msm_drv.h"
 #include "msm_gpu.h"

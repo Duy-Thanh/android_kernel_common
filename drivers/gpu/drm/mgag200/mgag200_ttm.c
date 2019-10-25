@@ -25,8 +25,7 @@
 /*
  * Authors: Dave Airlie <airlied@redhat.com>
  */
-
-#include <drm/drm_pci.h>
+#include <drm/drmP.h>
 
 #include "mgag200_drv.h"
 
