@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6530b98d_8db7c64e",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1584799
+      },
+      "writtenOn": "2019-10-25T21:25:17Z",
+      "side": 1,
+      "message": "This is incorrect, as we are using ffs(), which is 1 indexed, which I believe is why the whole -1 arithmetic was done in the first place.\n\nFor example, the system heap ID is 1 \u003d\u003d\u003e ffs(SYSTEM_HEAP_ID) \u003d\u003d 1, so here we\u0027ll set dev-\u003eheap_ids[1], but never heap_ids[0], which is a bit weird. More importantly, however, if we look at the allocation path, the comparison for finding a heap based on the input heap mask is as such:\n\nif (!((1 \u003c\u003c heap-\u003eid) \u0026 heap_id_mask))\n\tcontinue;\n\nSo for users that don\u0027t use heap query, and know the actual heap IDs beforehand (i.e. the value constructed by shifting 1 over by heap_id), your system heap ID mask will be 0x1, but the heap comparison will be against 1 \u003c\u003c 1, and allocations from the system heap will fail. This example just uses the system heap, but in general, I believe this is applicable to any heap.",
+      "range": {
+        "startLine": 289,
+        "startChar": 12,
+        "endLine": 289,
+        "endChar": 18
+      },
+      "revId": "e568be779b10e12b4c96318162b7f893c30d14b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
