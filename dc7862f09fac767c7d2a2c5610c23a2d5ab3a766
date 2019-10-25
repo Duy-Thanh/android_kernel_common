@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9817f4a0_6eb8cc04",
+        "filename": "drivers/media/v4l2-core/v4l2-compat-ioctl32.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1584147
+      },
+      "writtenOn": "2019-10-25T00:10:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55b20503_af0dd85c",
+      "revId": "dc7862f09fac767c7d2a2c5610c23a2d5ab3a766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4631f1c_0f61b3f8",
         "filename": "include/uapi/linux/videodev2.h",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "dc7862f09fac767c7d2a2c5610c23a2d5ab3a766",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9ac18ef_c84c4990",
+        "filename": "include/uapi/linux/videodev2.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1584147
+      },
+      "writtenOn": "2019-10-25T00:10:00Z",
+      "side": 1,
+      "message": "Got it.",
+      "parentUuid": "b4631f1c_0f61b3f8",
+      "revId": "dc7862f09fac767c7d2a2c5610c23a2d5ab3a766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
