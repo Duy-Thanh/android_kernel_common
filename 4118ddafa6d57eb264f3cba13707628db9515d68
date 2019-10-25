@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f6f8401_2504aa50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-10-25T20:53:43Z",
+      "side": 1,
+      "message": "\"ANDROID: \"? \"FROMLIST: \"?",
+      "revId": "4118ddafa6d57eb264f3cba13707628db9515d68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "925f11fa_2a507dfe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-10-25T20:53:43Z",
+      "side": 1,
+      "message": "Please add \"Bug: \" tag indicating the Android bug",
+      "revId": "4118ddafa6d57eb264f3cba13707628db9515d68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a13fe005_91c807a4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-10-25T20:53:43Z",
+      "side": 1,
+      "message": "add your own \"Signed-off-by:\"",
+      "revId": "4118ddafa6d57eb264f3cba13707628db9515d68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
