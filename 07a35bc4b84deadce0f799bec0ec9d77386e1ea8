@@ -79,6 +79,30 @@
       "revId": "07a35bc4b84deadce0f799bec0ec9d77386e1ea8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b80746e9_2a3d7713",
+        "filename": "include/uapi/sound/compress_params.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2019-10-25T18:14:33Z",
+      "side": 1,
+      "message": "I took a closer look and I agree with what Alistair has to say. Another option is to try and upstream this as the new codecs you are adding seem fairly common/well known ones.\n\nAlso, keep in mind that if multiple vendors try to add their codecs, there\u0027s no way to decide who gets to keep their number and get the other to change theirs. So the best option seems to be to use BESPOKE where each vendor can define what those reserved bits mean inside their drivers.",
+      "parentUuid": "b9de2f67_9f15a4e2",
+      "range": {
+        "startLine": 321,
+        "startChar": 21,
+        "endLine": 321,
+        "endChar": 65
+      },
+      "revId": "07a35bc4b84deadce0f799bec0ec9d77386e1ea8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
