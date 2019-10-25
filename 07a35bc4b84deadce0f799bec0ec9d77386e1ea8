@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "750b6a38_40d7df6e",
+        "filename": "include/uapi/sound/compress_params.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-10-25T17:59:24Z",
+      "side": 1,
+      "message": "So, I don\u0027t think we can take these into GKI because upstream might use them in a future release, and then we\u0027d have an irreconcilable uapi mismatch, requiring e.g. HALs to be rebuilt to align to future GKIs.",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 65
+      },
+      "revId": "07a35bc4b84deadce0f799bec0ec9d77386e1ea8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9de2f67_9f15a4e2",
+        "filename": "include/uapi/sound/compress_params.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-10-25T17:59:24Z",
+      "side": 1,
+      "message": "I do wonder if you really need to make the below changes. Can\u0027t you just use SND_AUDIOCODEC_BESPOKE and define reserved[0] to an \"enum { WMA_PRO..DSD }\" and then alias the other 14 s32\u0027s to the fields you introduce below?\n\nIf you do it this way, you avoid updating SND_AUDIOCODEC_xxx and since BESPOKE was already defined by upstream, the HALs will continue to work even if upstream changes.",
+      "range": {
+        "startLine": 321,
+        "startChar": 21,
+        "endLine": 321,
+        "endChar": 65
+      },
+      "revId": "07a35bc4b84deadce0f799bec0ec9d77386e1ea8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
