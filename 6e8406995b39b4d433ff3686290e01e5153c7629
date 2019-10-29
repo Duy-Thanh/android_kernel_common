@@ -22,6 +22,30 @@
       "revId": "6e8406995b39b4d433ff3686290e01e5153c7629",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11c2d562_edbe3d2a",
+        "filename": "include/linux/mod_devicetable.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1581431
+      },
+      "writtenOn": "2019-10-29T19:18:14Z",
+      "side": 1,
+      "message": "Qualcomm\u0027s WCD/WSA codecs uses soundwire interface for control and data path.",
+      "parentUuid": "630f6e62_75c551e2",
+      "range": {
+        "startLine": 534,
+        "startChar": 0,
+        "endLine": 538,
+        "endChar": 0
+      },
+      "revId": "6e8406995b39b4d433ff3686290e01e5153c7629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
