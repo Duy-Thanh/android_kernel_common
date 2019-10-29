@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "630f6e62_75c551e2",
+        "filename": "include/linux/mod_devicetable.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-10-29T18:16:39Z",
+      "side": 1,
+      "message": "Are there any consumers of this struct? Can\u0027t you just carry this in your downstream kernel?",
+      "range": {
+        "startLine": 534,
+        "startChar": 0,
+        "endLine": 538,
+        "endChar": 0
+      },
+      "revId": "6e8406995b39b4d433ff3686290e01e5153c7629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
