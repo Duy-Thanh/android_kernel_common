@@ -46,6 +46,30 @@
       "revId": "6e8406995b39b4d433ff3686290e01e5153c7629",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66506238_15713931",
+        "filename": "include/linux/mod_devicetable.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-10-29T19:35:53Z",
+      "side": 1,
+      "message": "But if there are no users of \"struct swr_device_id\" upstream or in android-mainline, why does it need to be declared here? Can\u0027t it be declared in a private QCOM file?",
+      "parentUuid": "11c2d562_edbe3d2a",
+      "range": {
+        "startLine": 534,
+        "startChar": 0,
+        "endLine": 538,
+        "endChar": 0
+      },
+      "revId": "6e8406995b39b4d433ff3686290e01e5153c7629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
