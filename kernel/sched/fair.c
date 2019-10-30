@@ -6888,7 +6888,7 @@ again:
 simple:
 #endif
 	if (prev)
-		put_prev_task(rq, prev);
+		prev->sched_class->put_prev_task(rq, prev, rf);
 
 	do {
 		se = pick_next_entity(cfs_rq, NULL);
