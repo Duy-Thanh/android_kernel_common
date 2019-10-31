@@ -4207,6 +4207,8 @@ pick_next_entity(struct cfs_rq *cfs_rq, struct sched_entity *curr)
 
 	se = left; /* ideally we run the leftmost entity */
 
+	WARN(!se, "cfs_rq->nr_running=%u, cfs_rq=%p, rq->cfs=%p",
+			cfs_rq->nr_running, cfs_rq, cfs_rq->rq->cfs);
 	/*
 	 * Avoid running the skip buddy, if running something else can
 	 * be done without getting too unfair.
