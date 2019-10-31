@@ -32,15 +32,12 @@
 #include <linux/atomic.h>
 #include <linux/mutex.h>
 #include <linux/wait.h>
-#include <linux/blk-crypto.h>
 #include <linux/blkdev.h>
 
 struct keyslot {
 	atomic_t slot_refs;
 	struct list_head idle_slot_node;
-	enum blk_crypto_mode_num crypto_mode;
-	unsigned int data_unit_size;
-	u8 key[BLK_CRYPTO_MAX_KEY_SIZE];
+	struct blk_crypto_key key;
 };
 
 struct keyslot_manager {
@@ -127,31 +124,28 @@ static void remove_slot_from_lru_list(struct keyslot_manager *ksm, int slot)
 	atomic_dec(&ksm->num_idle_slots);
 }
 
-static int find_keyslot(struct keyslot_manager *ksm, const u8 *key,
-			enum blk_crypto_mode_num crypto_mode,
-			unsigned int data_unit_size)
+static int find_keyslot(struct keyslot_manager *ksm,
+			const struct blk_crypto_key *key)
 {
-	const size_t keysize = blk_crypto_keysize(crypto_mode);
 	unsigned int slot;
 
 	for (slot = 0; slot < ksm->num_slots; slot++) {
 		const struct keyslot *slotp = &ksm->slots[slot];
 
-		if (slotp->crypto_mode == crypto_mode &&
-		    slotp->data_unit_size == data_unit_size &&
-		    !crypto_memneq(slotp->key, key, keysize))
+		if (slotp->key.crypto_mode == key->crypto_mode &&
+		    slotp->key.data_unit_size == key->data_unit_size &&
+		    !crypto_memneq(slotp->key.raw, key->raw, key->size))
 			return slot;
 	}
 	return -ENOKEY;
 }
 
-static int find_and_grab_keyslot(struct keyslot_manager *ksm, const u8 *key,
-				 enum blk_crypto_mode_num crypto_mode,
-				 unsigned int data_unit_size)
+static int find_and_grab_keyslot(struct keyslot_manager *ksm,
+				 const struct blk_crypto_key *key)
 {
 	int slot;
 
-	slot = find_keyslot(ksm, key, crypto_mode, data_unit_size);
+	slot = find_keyslot(ksm, key);
 	if (slot < 0)
 		return slot;
 	if (atomic_inc_return(&ksm->slots[slot].slot_refs) == 1) {
@@ -164,37 +158,32 @@ static int find_and_grab_keyslot(struct keyslot_manager *ksm, const u8 *key,
 /**
  * keyslot_manager_get_slot_for_key() - Program a key into a keyslot.
  * @ksm: The keyslot manager to program the key into.
- * @key: Pointer to the bytes of the key to program. Must be the correct length
- *      for the chosen @crypto_mode; see blk_crypto_modes in blk-crypto.c.
- * @crypto_mode: Identifier for the encryption algorithm to use.
- * @data_unit_size: The data unit size to use for en/decryption.
+ * @key: Pointer to the key object to program, including the raw key, crypto
+ *	 mode, and data unit size.
  *
- * Get a keyslot that's been programmed with the specified key, crypto_mode, and
- * data_unit_size.  If one already exists, return it with incremented refcount.
- * Otherwise, wait for a keyslot to become idle and program it.
+ * Get a keyslot that's been programmed with the specified key.  If one already
+ * exists, return it with incremented refcount.  Otherwise, wait for a keyslot
+ * to become idle and program it.
  *
  * Context: Process context. Takes and releases ksm->lock.
  * Return: The keyslot on success, else a -errno value.
  */
 int keyslot_manager_get_slot_for_key(struct keyslot_manager *ksm,
-				     const u8 *key,
-				     enum blk_crypto_mode_num crypto_mode,
-				     unsigned int data_unit_size)
+				     const struct blk_crypto_key *key)
 {
 	int slot;
 	int err;
 	struct keyslot *idle_slot;
 
 	down_read(&ksm->lock);
-	slot = find_and_grab_keyslot(ksm, key, crypto_mode, data_unit_size);
+	slot = find_and_grab_keyslot(ksm, key);
 	up_read(&ksm->lock);
 	if (slot != -ENOKEY)
 		return slot;
 
 	for (;;) {
 		down_write(&ksm->lock);
-		slot = find_and_grab_keyslot(ksm, key, crypto_mode,
-					     data_unit_size);
+		slot = find_and_grab_keyslot(ksm, key);
 		if (slot != -ENOKEY) {
 			up_write(&ksm->lock);
 			return slot;
@@ -216,11 +205,7 @@ int keyslot_manager_get_slot_for_key(struct keyslot_manager *ksm,
 					     idle_slot_node);
 	slot = idle_slot - ksm->slots;
 
-	err = ksm->ksm_ll_ops.keyslot_program(ksm->ll_priv_data, key,
-					      crypto_mode,
-					      data_unit_size,
-					      slot);
-
+	err = ksm->ksm_ll_ops.keyslot_program(ksm->ll_priv_data, key, slot);
 	if (err) {
 		wake_up(&ksm->idle_slots_wait_queue);
 		up_write(&ksm->lock);
@@ -228,9 +213,7 @@ int keyslot_manager_get_slot_for_key(struct keyslot_manager *ksm,
 	}
 
 	atomic_set(&idle_slot->slot_refs, 1);
-	idle_slot->crypto_mode = crypto_mode;
-	idle_slot->data_unit_size = data_unit_size;
-	memcpy(idle_slot->key, key, blk_crypto_keysize(crypto_mode));
+	idle_slot->key = *key;
 
 	remove_slot_from_lru_list(ksm, slot);
 
@@ -326,27 +309,23 @@ EXPORT_SYMBOL(keyslot_manager_rq_crypto_mode_supported);
  * keyslot_manager_evict_key() - Evict a key from the lower layer device.
  * @ksm - The keyslot manager to evict from
  * @key - The key to evict
- * @crypto_mode - The crypto algorithm the key was programmed with.
- * @data_unit_size - The data_unit_size the key was programmed with.
  *
- * Finds the slot that the specified key, crypto_mode, data_unit_size combo
- * was programmed into, and evicts that slot from the lower layer device if
- * the refcount on the slot is 0. Returns -EBUSY if the refcount is not 0, and
- * -errno on error.
+ * Find the keyslot that the specified key was programmed into, and evict that
+ * slot from the lower layer device if that slot is not currently in use.
  *
  * Context: Process context. Takes and releases ksm->lock.
+ * Return: 0 on success, -EBUSY if the keyslot is still in use, or another
+ *	   -errno value on other error.
  */
 int keyslot_manager_evict_key(struct keyslot_manager *ksm,
-			      const u8 *key,
-			      enum blk_crypto_mode_num crypto_mode,
-			      unsigned int data_unit_size)
+			      const struct blk_crypto_key *key)
 {
 	int slot;
 	int err;
 	struct keyslot *slotp;
 
 	down_write(&ksm->lock);
-	slot = find_keyslot(ksm, key, crypto_mode, data_unit_size);
+	slot = find_keyslot(ksm, key);
 	if (slot < 0) {
 		err = slot;
 		goto out_unlock;
@@ -357,14 +336,12 @@ int keyslot_manager_evict_key(struct keyslot_manager *ksm,
 		err = -EBUSY;
 		goto out_unlock;
 	}
-	err = ksm->ksm_ll_ops.keyslot_evict(ksm->ll_priv_data, key, crypto_mode,
-					    data_unit_size, slot);
+	err = ksm->ksm_ll_ops.keyslot_evict(ksm->ll_priv_data, key, slot);
 	if (err)
 		goto out_unlock;
 
-	slotp->crypto_mode = BLK_ENCRYPTION_MODE_INVALID;
-	slotp->data_unit_size = 0;
-	memzero_explicit(slotp->key, sizeof(slotp->key));
+	BUILD_BUG_ON(BLK_ENCRYPTION_MODE_INVALID != 0);
+	memzero_explicit(&slotp->key, sizeof(slotp->key));
 	err = 0;
 out_unlock:
 	up_write(&ksm->lock);
@@ -390,14 +367,11 @@ void keyslot_manager_reprogram_all_keys(struct keyslot_manager *ksm)
 		const struct keyslot *slotp = &ksm->slots[slot];
 		int err;
 
-		if (slotp->crypto_mode == BLK_ENCRYPTION_MODE_INVALID)
+		if (slotp->key.crypto_mode == BLK_ENCRYPTION_MODE_INVALID)
 			continue;
 
 		err = ksm->ksm_ll_ops.keyslot_program(ksm->ll_priv_data,
-						      slotp->key,
-						      slotp->crypto_mode,
-						      slotp->data_unit_size,
-						      slot);
+						      &slotp->key, slot);
 		WARN_ON(err);
 	}
 	up_write(&ksm->lock);

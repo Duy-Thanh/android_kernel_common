@@ -168,10 +168,10 @@ struct fscrypt_info {
 
 #ifdef CONFIG_FS_ENCRYPTION_INLINE_CRYPT
 	/*
-	 * The raw key for inline encryption, if this file is using inline
-	 * encryption rather than the traditional filesystem layer encryption.
+	 * This file's blk-crypto key, if this file is using inline encryption
+	 * rather than the traditional filesystem layer encryption.
 	 */
-	const u8 *ci_inline_crypt_key;
+	struct blk_crypto_key *ci_inline_crypt_key;
 #endif
 
 	/* True if the key should be freed when this fscrypt_info is freed */
@@ -451,11 +451,8 @@ struct fscrypt_master_key {
 	struct crypto_skcipher	*mk_iv_ino_lblk_64_tfms[__FSCRYPT_MODE_MAX + 1];
 
 #ifdef CONFIG_FS_ENCRYPTION_INLINE_CRYPT
-	/* Raw keys for IV_INO_LBLK_64 policies, allocated on-demand */
-	u8			*mk_iv_ino_lblk_64_raw_keys[__FSCRYPT_MODE_MAX + 1];
-
-	/* The data unit size being used for inline encryption */
-	unsigned int		mk_data_unit_size;
+	/* Blk-crypto keys for IV_INO_LBLK_64 policies, allocated on-demand */
+	struct blk_crypto_key	*mk_iv_ino_lblk_64_blk_keys[__FSCRYPT_MODE_MAX + 1];
 
 	/* The filesystem's block device */
 	struct block_device	*mk_bdev;

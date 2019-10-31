@@ -50,10 +50,13 @@ int fscrypt_set_inline_crypt_key(struct fscrypt_info *ci, const u8 *derived_key)
 {
 	const struct fscrypt_mode *mode = ci->ci_mode;
 	const struct super_block *sb = ci->ci_inode->i_sb;
+	struct blk_crypto_key *blk_key;
 
-	ci->ci_inline_crypt_key = kmemdup(derived_key, mode->keysize, GFP_NOFS);
-	if (!ci->ci_inline_crypt_key)
-		return -ENOMEM;
+	blk_key = blk_crypto_alloc_key(derived_key, mode->blk_crypto_mode,
+				       sb->s_blocksize, GFP_NOFS);
+	if (IS_ERR(blk_key))
+		return PTR_ERR(blk_key);
+	ci->ci_inline_crypt_key = blk_key;
 	ci->ci_owns_key = true;
 
 	return blk_crypto_start_using_mode(mode->blk_crypto_mode,
@@ -65,13 +68,9 @@ int fscrypt_set_inline_crypt_key(struct fscrypt_info *ci, const u8 *derived_key)
 void fscrypt_free_inline_crypt_key(struct fscrypt_info *ci)
 {
 	if (ci->ci_inline_crypt_key != NULL) {
-		const struct fscrypt_mode *mode = ci->ci_mode;
-		const struct super_block *sb = ci->ci_inode->i_sb;
-
-		blk_crypto_evict_key(sb->s_bdev->bd_queue,
-				     ci->ci_inline_crypt_key,
-				     mode->blk_crypto_mode, sb->s_blocksize);
-		kzfree(ci->ci_inline_crypt_key);
+		blk_crypto_evict_key(ci->ci_inode->i_sb->s_bdev->bd_queue,
+				     ci->ci_inline_crypt_key);
+		blk_crypto_free_key(ci->ci_inline_crypt_key);
 	}
 }
 
@@ -89,7 +88,8 @@ int fscrypt_setup_per_mode_inline_crypt_key(struct fscrypt_info *ci,
 	struct block_device *bdev = sb->s_bdev;
 	const struct fscrypt_mode *mode = ci->ci_mode;
 	const u8 mode_num = mode - fscrypt_modes;
-	u8 *raw_key;
+	u8 raw_key[FSCRYPT_MAX_KEY_SIZE];
+	struct blk_crypto_key *blk_key;
 	u8 hkdf_info[sizeof(mode_num) + sizeof(sb->s_uuid)];
 	int err;
 
@@ -97,23 +97,17 @@ int fscrypt_setup_per_mode_inline_crypt_key(struct fscrypt_info *ci,
 		return -EINVAL;
 
 	/* pairs with smp_store_release() below */
-	raw_key = smp_load_acquire(&mk->mk_iv_ino_lblk_64_raw_keys[mode_num]);
-	if (raw_key) {
+	blk_key = smp_load_acquire(&mk->mk_iv_ino_lblk_64_blk_keys[mode_num]);
+	if (blk_key) {
 		err = 0;
 		goto out;
 	}
 
 	mutex_lock(&inline_crypt_setup_mutex);
 
-	raw_key = mk->mk_iv_ino_lblk_64_raw_keys[mode_num];
-	if (raw_key) {
+	blk_key = mk->mk_iv_ino_lblk_64_blk_keys[mode_num];
+	if (blk_key) {
 		err = 0;
-		goto out_unlock;
-	}
-
-	raw_key = kmalloc(mode->keysize, GFP_NOFS);
-	if (!raw_key) {
-		err = -ENOMEM;
 		goto out_unlock;
 	}
 
@@ -130,6 +124,15 @@ int fscrypt_setup_per_mode_inline_crypt_key(struct fscrypt_info *ci,
 	if (err)
 		goto out_unlock;
 
+	blk_key = blk_crypto_alloc_key(raw_key, mode->blk_crypto_mode,
+				       sb->s_blocksize, GFP_NOFS);
+	memzero_explicit(raw_key, mode->keysize);
+	if (IS_ERR(blk_key)) {
+		err = PTR_ERR(blk_key);
+		blk_key = NULL;
+		goto out_unlock;
+	}
+
 	err = blk_crypto_start_using_mode(mode->blk_crypto_mode,
 					  sb->s_blocksize, bdev->bd_queue);
 	if (err)
@@ -140,19 +143,17 @@ int fscrypt_setup_per_mode_inline_crypt_key(struct fscrypt_info *ci,
 	 * reference to the filesystem's block device so that the inline
 	 * encryption keys can be evicted when the master key is destroyed.
 	 */
-	if (!mk->mk_bdev) {
+	if (!mk->mk_bdev)
 		mk->mk_bdev = bdgrab(bdev);
-		mk->mk_data_unit_size = sb->s_blocksize;
-	}
 
 	/* pairs with smp_load_acquire() above */
-	smp_store_release(&mk->mk_iv_ino_lblk_64_raw_keys[mode_num], raw_key);
+	smp_store_release(&mk->mk_iv_ino_lblk_64_blk_keys[mode_num], blk_key);
 	err = 0;
 out_unlock:
 	mutex_unlock(&inline_crypt_setup_mutex);
 out:
 	if (err == 0) {
-		ci->ci_inline_crypt_key = raw_key;
+		ci->ci_inline_crypt_key = blk_key;
 		/*
 		 * Since each struct fscrypt_master_key belongs to a particular
 		 * filesystem (a struct super_block), there should be only one
@@ -161,10 +162,10 @@ out:
 		 */
 		if (WARN_ON(mk->mk_bdev != bdev))
 			err = -EINVAL;
-		if (WARN_ON(mk->mk_data_unit_size != sb->s_blocksize))
+		if (WARN_ON(blk_key->data_unit_size != sb->s_blocksize))
 			err = -EINVAL;
 	} else {
-		kzfree(raw_key);
+		blk_crypto_free_key(blk_key);
 	}
 	return err;
 }
@@ -181,14 +182,13 @@ void fscrypt_evict_inline_crypt_keys(struct fscrypt_master_key *mk)
 	if (!bdev) /* No inline encryption keys? */
 		return;
 
-	for (i = 0; i < ARRAY_SIZE(mk->mk_iv_ino_lblk_64_raw_keys); i++) {
-		u8 *raw_key = mk->mk_iv_ino_lblk_64_raw_keys[i];
+	for (i = 0; i < ARRAY_SIZE(mk->mk_iv_ino_lblk_64_blk_keys); i++) {
+		struct blk_crypto_key *blk_key =
+			mk->mk_iv_ino_lblk_64_blk_keys[i];
 
-		if (raw_key != NULL) {
-			blk_crypto_evict_key(bdev->bd_queue, raw_key,
-					     fscrypt_modes[i].blk_crypto_mode,
-					     mk->mk_data_unit_size);
-			kzfree(raw_key);
+		if (blk_key != NULL) {
+			blk_crypto_evict_key(bdev->bd_queue, blk_key);
+			blk_crypto_free_key(blk_key);
 		}
 	}
 	bdput(bdev);
@@ -267,9 +267,7 @@ int fscrypt_set_bio_crypt_ctx(struct bio *bio, const struct inode *inode,
 
 	dun = fscrypt_generate_dun(ci, first_lblk);
 
-	return bio_crypt_set_ctx(bio, ci->ci_inline_crypt_key,
-				 ci->ci_mode->blk_crypto_mode,
-				 dun, inode->i_blkbits, gfp_mask);
+	return bio_crypt_set_ctx(bio, ci->ci_inline_crypt_key, dun, gfp_mask);
 }
 EXPORT_SYMBOL_GPL(fscrypt_set_bio_crypt_ctx);
 
@@ -343,7 +341,7 @@ bool fscrypt_mergeable_bio(struct bio *bio, const struct inode *inode,
 			   u64 next_lblk)
 {
 	const struct bio_crypt_ctx *bc;
-	const u8 *next_key;
+	const struct blk_crypto_key *next_key;
 	u64 next_dun;
 
 	if (bio_has_crypt_ctx(bio) != fscrypt_inode_uses_inline_crypto(inode))
@@ -359,10 +357,10 @@ bool fscrypt_mergeable_bio(struct bio *bio, const struct inode *inode,
 	 * uses the same pointer.  I.e., there's currently no need to support
 	 * merging requests where the keys are the same but the pointers differ.
 	 */
-	return next_key == bc->raw_key &&
+	return next_key == bc->key &&
 		next_dun == bc->data_unit_num +
 			    (bio_sectors(bio) >>
-			     (bc->data_unit_size_bits - SECTOR_SHIFT));
+			     (bc->key->data_unit_size_bits - SECTOR_SHIFT));
 }
 EXPORT_SYMBOL_GPL(fscrypt_mergeable_bio);
 

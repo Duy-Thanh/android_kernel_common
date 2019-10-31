@@ -147,9 +147,8 @@ static void clear_all_keyslots(struct ufs_hba *hba)
 		program_key(hba, &cfg, slot);
 }
 
-static int ufshcd_crypto_keyslot_program(void *hba_p, const u8 *key,
-					 enum blk_crypto_mode_num crypto_mode,
-					 unsigned int data_unit_size,
+static int ufshcd_crypto_keyslot_program(void *hba_p,
+					 const struct blk_crypto_key *key,
 					 unsigned int slot)
 {
 	struct ufs_hba *hba = hba_p;
@@ -158,15 +157,15 @@ static int ufshcd_crypto_keyslot_program(void *hba_p, const u8 *key,
 	union ufs_crypto_cfg_entry cfg;
 	int cap_idx;
 
-	cap_idx = ufshcd_crypto_cap_find(hba_p, crypto_mode,
-					       data_unit_size);
+	cap_idx = ufshcd_crypto_cap_find(hba_p, key->crypto_mode,
+					 key->data_unit_size);
 
 	if (!ufshcd_is_crypto_enabled(hba) ||
 	    !ufshcd_keyslot_valid(hba, slot) ||
 	    !ufshcd_cap_idx_valid(hba, cap_idx))
 		return -EINVAL;
 
-	data_unit_mask = get_data_unit_size_mask(data_unit_size);
+	data_unit_mask = get_data_unit_size_mask(key->data_unit_size);
 
 	if (!(data_unit_mask & hba->crypto_cap_array[cap_idx].sdus_mask))
 		return -EINVAL;
@@ -176,8 +175,8 @@ static int ufshcd_crypto_keyslot_program(void *hba_p, const u8 *key,
 	cfg.crypto_cap_idx = cap_idx;
 	cfg.config_enable |= UFS_CRYPTO_CONFIGURATION_ENABLE;
 
-	err = ufshcd_crypto_cfg_entry_write_key(&cfg, key,
-				hba->crypto_cap_array[cap_idx]);
+	err = ufshcd_crypto_cfg_entry_write_key(&cfg, key->raw,
+						hba->crypto_cap_array[cap_idx]);
 	if (err)
 		return err;
 
@@ -187,9 +186,8 @@ static int ufshcd_crypto_keyslot_program(void *hba_p, const u8 *key,
 	return 0;
 }
 
-static int ufshcd_crypto_keyslot_evict(void *hba_p, const u8 *key,
-				       enum blk_crypto_mode_num crypto_mode,
-				       unsigned int data_unit_size,
+static int ufshcd_crypto_keyslot_evict(void *hba_p,
+				       const struct blk_crypto_key *key,
 				       unsigned int slot)
 {
 	struct ufs_hba *hba = hba_p;

@@ -32,12 +32,6 @@ static const struct blk_crypto_mode blk_crypto_modes[] = {
 	},
 };
 
-size_t blk_crypto_keysize(enum blk_crypto_mode_num crypto_mode)
-{
-	return blk_crypto_modes[crypto_mode].keysize;
-}
-EXPORT_SYMBOL(blk_crypto_keysize);
-
 static unsigned int num_prealloc_bounce_pg = 32;
 module_param(num_prealloc_bounce_pg, uint, 0);
 MODULE_PARM_DESC(num_prealloc_bounce_pg,
@@ -99,14 +93,12 @@ static void evict_keyslot(unsigned int slot)
 	slotp->crypto_mode = BLK_ENCRYPTION_MODE_INVALID;
 }
 
-static int blk_crypto_keyslot_program(void *priv, const u8 *key,
-				      enum blk_crypto_mode_num crypto_mode,
-				      unsigned int data_unit_size,
+static int blk_crypto_keyslot_program(void *priv,
+				      const struct blk_crypto_key *key,
 				      unsigned int slot)
 {
 	struct blk_crypto_keyslot *slotp = &blk_crypto_keyslots[slot];
-	const struct blk_crypto_mode *mode = &blk_crypto_modes[crypto_mode];
-	size_t keysize = mode->keysize;
+	const enum blk_crypto_mode_num crypto_mode = key->crypto_mode;
 	int err;
 
 	if (crypto_mode != slotp->crypto_mode &&
@@ -117,7 +109,8 @@ static int blk_crypto_keyslot_program(void *priv, const u8 *key,
 	if (!slotp->tfms[crypto_mode])
 		return -ENOMEM;
 	slotp->crypto_mode = crypto_mode;
-	err = crypto_skcipher_setkey(slotp->tfms[crypto_mode], key, keysize);
+	err = crypto_skcipher_setkey(slotp->tfms[crypto_mode], key->raw,
+				     key->size);
 	if (err) {
 		evict_keyslot(slot);
 		return err;
@@ -125,9 +118,8 @@ static int blk_crypto_keyslot_program(void *priv, const u8 *key,
 	return 0;
 }
 
-static int blk_crypto_keyslot_evict(void *priv, const u8 *key,
-				    enum blk_crypto_mode_num crypto_mode,
-				    unsigned int data_unit_size,
+static int blk_crypto_keyslot_evict(void *priv,
+				    const struct blk_crypto_key *key,
 				    unsigned int slot)
 {
 	evict_keyslot(slot);
@@ -203,7 +195,7 @@ static struct bio *blk_crypto_clone_bio(struct bio *bio_src)
 /* Check that all I/O segments are data unit aligned */
 static int bio_crypt_check_alignment(struct bio *bio)
 {
-	int data_unit_size = 1 << bio->bi_crypt_context->data_unit_size_bits;
+	const int data_unit_size = bio->bi_crypt_context->key->data_unit_size;
 	struct bvec_iter iter;
 	struct bio_vec bv;
 
@@ -296,7 +288,7 @@ static int blk_crypto_encrypt_bio(struct bio **bio_ptr)
 		return err;
 
 	src_bio = *bio_ptr;
-	data_unit_size = 1 << src_bio->bi_crypt_context->data_unit_size_bits;
+	data_unit_size = src_bio->bi_crypt_context->key->data_unit_size;
 
 	/* Allocate bounce bio for encryption */
 	enc_bio = blk_crypto_clone_bio(src_bio);
@@ -407,7 +399,7 @@ static void blk_crypto_decrypt_bio(struct work_struct *w)
 		u8 bytes[16];
 	} iv;
 	struct scatterlist sg;
-	int data_unit_size = 1 << bio->bi_crypt_context->data_unit_size_bits;
+	const int data_unit_size = bio->bi_crypt_context->key->data_unit_size;
 	int i;
 	int err;
 
@@ -544,7 +536,7 @@ int blk_crypto_submit_bio(struct bio **bio_ptr)
 	}
 
 	/* Fallback to crypto API */
-	if (!READ_ONCE(tfms_inited[bio->bi_crypt_context->crypto_mode])) {
+	if (!READ_ONCE(tfms_inited[bio->bi_crypt_context->key->crypto_mode])) {
 		err = -EIO;
 		bio->bi_status = BLK_STS_IOERR;
 		goto out;
@@ -685,13 +677,51 @@ out:
 EXPORT_SYMBOL(blk_crypto_start_using_mode);
 
 /**
+ * blk_crypto_alloc_key() - Prepare a key for use with blk-crypto
+ * @raw_key: Pointer to the raw key.  Must be the correct length for the chosen
+ *	     @crypto_mode; see blk_crypto_modes[].
+ * @crypto_mode: identifier for the encryption algorithm to use
+ * @data_unit_size: the data unit size to use for en/decryption
+ * @gfp_flags: memory allocation flags
+ *
+ * Return: The blk_crypto_key that was prepared, or an ERR_PTR() on error.  When
+ *	   done using the key, it must be freed with blk_crypto_free_key().
+ */
+struct blk_crypto_key *
+blk_crypto_alloc_key(const u8 *raw_key, enum blk_crypto_mode_num crypto_mode,
+		     unsigned int data_unit_size, gfp_t gfp_flags)
+{
+	const struct blk_crypto_mode *mode;
+	struct blk_crypto_key *key;
+
+	if (crypto_mode >= ARRAY_SIZE(blk_crypto_modes))
+		return ERR_PTR(-EINVAL);
+
+	mode = &blk_crypto_modes[crypto_mode];
+	if (mode->keysize == 0)
+		return ERR_PTR(-EINVAL);
+
+	if (!is_power_of_2(data_unit_size))
+		return ERR_PTR(-EINVAL);
+
+	key = kzalloc(sizeof(*key), gfp_flags);
+	if (!key)
+		return ERR_PTR(-ENOMEM);
+	key->crypto_mode = crypto_mode;
+	key->data_unit_size = data_unit_size;
+	key->data_unit_size_bits = ilog2(data_unit_size);
+	key->size = mode->keysize;
+	memcpy(key->raw, raw_key, mode->keysize);
+	return key;
+}
+EXPORT_SYMBOL(blk_crypto_alloc_key);
+
+/**
  * blk_crypto_evict_key() - Evict a key from any inline encryption hardware
  *			    it may have been programmed into
  * @q - The request queue who's keyslot manager this key might have been
  *	programmed into
  * @key - The key to evict
- * @mode - The blk_crypto_mode_num used with this key
- * @data_unit_size - The data unit size used with this key
  *
  * Upper layers (filesystems) should call this function to ensure that a key
  * is evicted from hardware that it might have been programmed into. This
@@ -701,20 +731,32 @@ EXPORT_SYMBOL(blk_crypto_start_using_mode);
  *
  * Return: 0 on success, -err on error.
  */
-int blk_crypto_evict_key(struct request_queue *q, const u8 *key,
-			 enum blk_crypto_mode_num mode,
-			 unsigned int data_unit_size)
+int blk_crypto_evict_key(struct request_queue *q,
+			 const struct blk_crypto_key *key)
 {
 	struct keyslot_manager *ksm = blk_crypto_ksm;
 
-	if (q && q->ksm && keyslot_manager_crypto_mode_supported(q->ksm, mode,
-							    data_unit_size)) {
+	if (q && q->ksm &&
+	    keyslot_manager_crypto_mode_supported(q->ksm, key->crypto_mode,
+						  key->data_unit_size))
 		ksm = q->ksm;
-	}
 
-	return keyslot_manager_evict_key(ksm, key, mode, data_unit_size);
+	return keyslot_manager_evict_key(ksm, key);
 }
 EXPORT_SYMBOL(blk_crypto_evict_key);
+
+/**
+ * blk_crypto_free_key() - free a blk_crypto_key
+ * @key: the key to free
+ *
+ * Free a key that was prepared with blk_crypto_alloc_key().
+ * It must be ensured that no bios using this key are in flight.
+ */
+void blk_crypto_free_key(struct blk_crypto_key *key)
+{
+	kzfree(key);
+}
+EXPORT_SYMBOL(blk_crypto_free_key);
 
 int __init blk_crypto_init(void)
 {

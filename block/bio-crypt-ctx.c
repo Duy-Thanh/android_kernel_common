@@ -113,7 +113,7 @@ bool bio_crypt_ctx_back_mergeable(struct bio *b_1,
 
 	return !bio_has_crypt_ctx(b_1) ||
 		(bc1->data_unit_num +
-		(b1_sectors >> (bc1->data_unit_size_bits - 9)) ==
+		(b1_sectors >> (bc1->key->data_unit_size_bits - 9)) ==
 		bc2->data_unit_num);
 }
 
@@ -128,15 +128,13 @@ void bio_crypt_ctx_release_keyslot(struct bio *bio)
 
 int bio_crypt_ctx_acquire_keyslot(struct bio *bio, struct keyslot_manager *ksm)
 {
+	const struct bio_crypt_ctx *bc = bio->bi_crypt_context;
 	int slot;
-	enum blk_crypto_mode_num crypto_mode = bio_crypto_mode(bio);
 
 	if (!ksm)
 		return -ENOMEM;
 
-	slot = keyslot_manager_get_slot_for_key(ksm,
-			bio_crypt_raw_key(bio), crypto_mode,
-			1 << bio->bi_crypt_context->data_unit_size_bits);
+	slot = keyslot_manager_get_slot_for_key(ksm, bc->key);
 	if (slot < 0)
 		return slot;
 
