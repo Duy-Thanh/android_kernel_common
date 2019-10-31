@@ -4240,6 +4240,8 @@ pick_next_entity(struct cfs_rq *cfs_rq, struct sched_entity *curr)
 
 	clear_buddies(cfs_rq, se);
 
+	BUG_ON(!se && cfs_rq->tg->parent);
+
 	return se;
 }
 
