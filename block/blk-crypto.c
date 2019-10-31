@@ -15,6 +15,7 @@
 #include <linux/blk-cgroup.h>
 #include <linux/crypto.h>
 #include <linux/random.h>
+#include <linux/siphash.h>
 #include <crypto/skcipher.h>
 #include <linux/module.h>
 #include <linux/sched/mm.h>
@@ -693,6 +694,7 @@ blk_crypto_alloc_key(const u8 *raw_key, enum blk_crypto_mode_num crypto_mode,
 {
 	const struct blk_crypto_mode *mode;
 	struct blk_crypto_key *key;
+	static siphash_key_t hash_key;
 
 	if (crypto_mode >= ARRAY_SIZE(blk_crypto_modes))
 		return ERR_PTR(-EINVAL);
@@ -712,6 +714,15 @@ blk_crypto_alloc_key(const u8 *raw_key, enum blk_crypto_mode_num crypto_mode,
 	key->data_unit_size_bits = ilog2(data_unit_size);
 	key->size = mode->keysize;
 	memcpy(key->raw, raw_key, mode->keysize);
+
+	/*
+	 * The keyslot manager uses the SipHash of the key to implement O(1) key
+	 * lookups while avoiding leaking information about the keys.  It's
+	 * precomputed here so that it only needs to be computed once per key.
+	 */
+	get_random_once(&hash_key, sizeof(hash_key));
+	key->hash = siphash(raw_key, mode->keysize, &hash_key);
+
 	return key;
 }
 EXPORT_SYMBOL(blk_crypto_alloc_key);

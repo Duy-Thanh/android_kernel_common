@@ -26,6 +26,7 @@ enum blk_crypto_mode_num {
  *	filesystem block size or the disk sector size.
  * @data_unit_size_bits: log2 of data_unit_size
  * @size: size of this key in bytes (determined by @crypto_mode)
+ * @hash: hash of this key, for keyslot manager use only
  * @raw: the raw bytes of this key.  Only the first @size bytes are used.
  *
  * A blk_crypto_key is immutable once created, and many bios can reference it at
@@ -36,6 +37,7 @@ struct blk_crypto_key {
 	unsigned int data_unit_size;
 	unsigned int data_unit_size_bits;
 	unsigned int size;
+	unsigned int hash;
 	u8 raw[BLK_CRYPTO_MAX_KEY_SIZE];
 };
 

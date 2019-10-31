@@ -37,6 +37,7 @@
 struct keyslot {
 	atomic_t slot_refs;
 	struct list_head idle_slot_node;
+	struct hlist_node hash_node;
 	struct blk_crypto_key key;
 };
 
@@ -53,6 +54,15 @@ struct keyslot_manager {
 	wait_queue_head_t idle_slots_wait_queue;
 	struct list_head idle_slots;
 	spinlock_t idle_slots_lock;
+
+	/*
+	 * Hash table which maps key hashes to keyslots, so that we can find a
+	 * key's keyslot in O(1) time rather than O(num_slots).  Protected by
+	 * 'lock'.  A cryptographic hash function is used so that timing attacks
+	 * can't leak information about the raw keys.
+	 */
+	struct hlist_head *slot_hashtable;
+	unsigned int slot_hashtable_size;
 
 	/* Per-keyslot data */
 	struct keyslot slots[];
@@ -77,7 +87,8 @@ struct keyslot_manager *keyslot_manager_create(unsigned int num_slots,
 				void *ll_priv_data)
 {
 	struct keyslot_manager *ksm;
-	int slot;
+	unsigned int slot;
+	unsigned int i;
 
 	if (num_slots == 0)
 		return NULL;
@@ -109,9 +120,29 @@ struct keyslot_manager *keyslot_manager_create(unsigned int num_slots,
 
 	spin_lock_init(&ksm->idle_slots_lock);
 
+	ksm->slot_hashtable_size = roundup_pow_of_two(num_slots);
+	ksm->slot_hashtable = kvmalloc_array(ksm->slot_hashtable_size,
+					     sizeof(ksm->slot_hashtable[0]),
+					     GFP_KERNEL);
+	if (!ksm->slot_hashtable)
+		goto err_free_ksm;
+	for (i = 0; i < ksm->slot_hashtable_size; i++)
+		INIT_HLIST_HEAD(&ksm->slot_hashtable[i]);
+
 	return ksm;
+
+err_free_ksm:
+	keyslot_manager_destroy(ksm);
+	return NULL;
 }
 EXPORT_SYMBOL(keyslot_manager_create);
+
+static inline struct hlist_head *
+hash_bucket_for_key(struct keyslot_manager *ksm,
+		    const struct blk_crypto_key *key)
+{
+	return &ksm->slot_hashtable[key->hash & (ksm->slot_hashtable_size - 1)];
+}
 
 static void remove_slot_from_lru_list(struct keyslot_manager *ksm, int slot)
 {
@@ -127,15 +158,15 @@ static void remove_slot_from_lru_list(struct keyslot_manager *ksm, int slot)
 static int find_keyslot(struct keyslot_manager *ksm,
 			const struct blk_crypto_key *key)
 {
-	unsigned int slot;
+	const struct hlist_head *head = hash_bucket_for_key(ksm, key);
+	const struct keyslot *slotp;
 
-	for (slot = 0; slot < ksm->num_slots; slot++) {
-		const struct keyslot *slotp = &ksm->slots[slot];
-
-		if (slotp->key.crypto_mode == key->crypto_mode &&
+	hlist_for_each_entry(slotp, head, hash_node) {
+		if (slotp->key.hash == key->hash &&
+		    slotp->key.crypto_mode == key->crypto_mode &&
 		    slotp->key.data_unit_size == key->data_unit_size &&
 		    !crypto_memneq(slotp->key.raw, key->raw, key->size))
-			return slot;
+			return slotp - ksm->slots;
 	}
 	return -ENOKEY;
 }
@@ -211,6 +242,11 @@ int keyslot_manager_get_slot_for_key(struct keyslot_manager *ksm,
 		up_write(&ksm->lock);
 		return err;
 	}
+
+	/* Move this slot to the hash list for the new key. */
+	if (idle_slot->key.crypto_mode != BLK_ENCRYPTION_MODE_INVALID)
+		hlist_del(&idle_slot->hash_node);
+	hlist_add_head(&idle_slot->hash_node, hash_bucket_for_key(ksm, key));
 
 	atomic_set(&idle_slot->slot_refs, 1);
 	idle_slot->key = *key;
@@ -340,6 +376,7 @@ int keyslot_manager_evict_key(struct keyslot_manager *ksm,
 	if (err)
 		goto out_unlock;
 
+	hlist_del(&slotp->hash_node);
 	BUILD_BUG_ON(BLK_ENCRYPTION_MODE_INVALID != 0);
 	memzero_explicit(&slotp->key, sizeof(slotp->key));
 	err = 0;
@@ -381,6 +418,7 @@ EXPORT_SYMBOL(keyslot_manager_reprogram_all_keys);
 void keyslot_manager_destroy(struct keyslot_manager *ksm)
 {
 	if (ksm) {
+		kvfree(ksm->slot_hashtable);
 		memzero_explicit(ksm, struct_size(ksm, slots, ksm->num_slots));
 		kvfree(ksm);
 	}
