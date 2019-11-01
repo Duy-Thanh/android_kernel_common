@@ -103,6 +103,30 @@
       "revId": "07a35bc4b84deadce0f799bec0ec9d77386e1ea8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35f127d0_c4c1c8e4",
+        "filename": "include/uapi/sound/compress_params.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1581431
+      },
+      "writtenOn": "2019-11-01T18:41:09Z",
+      "side": 1,
+      "message": "We are in the process of upstreaming the changes with the help of landing team, but these changes may be needed for GKI compliance for running CTS/VTS. So, posting the changes here. \n\nWould like to know whether Google plans to use only android supported software decoders, while running CTS/VTS with GKI?",
+      "parentUuid": "b80746e9_2a3d7713",
+      "range": {
+        "startLine": 321,
+        "startChar": 21,
+        "endLine": 321,
+        "endChar": 65
+      },
+      "revId": "07a35bc4b84deadce0f799bec0ec9d77386e1ea8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
