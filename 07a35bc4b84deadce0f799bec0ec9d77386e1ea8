@@ -151,6 +151,30 @@
       "revId": "07a35bc4b84deadce0f799bec0ec9d77386e1ea8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdaaaed6_b7ed511f",
+        "filename": "include/uapi/sound/compress_params.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1581431
+      },
+      "writtenOn": "2019-11-01T22:57:45Z",
+      "side": 1,
+      "message": "As per the comments from SND_AUDIOCODEC_BESPOKE (https://www.alsa-project.org/pipermail/alsa-devel/2015-December/101703.html) gerrit, it is added for esoteric internal audio formats. But,as Saravana Kannan mentioned, AAC/WMA/DSD formats are fairly common/well known formats. So, trying to push this change to upstream, but may not be available for Lahaina timeframe. If GKI does not need these formats for CTS/VTS validation, these formats can be restricted only to Qualcomm kernel.",
+      "parentUuid": "91806b7a_270952a4",
+      "range": {
+        "startLine": 321,
+        "startChar": 21,
+        "endLine": 321,
+        "endChar": 65
+      },
+      "revId": "07a35bc4b84deadce0f799bec0ec9d77386e1ea8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
