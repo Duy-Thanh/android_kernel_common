@@ -127,6 +127,30 @@
       "revId": "07a35bc4b84deadce0f799bec0ec9d77386e1ea8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91806b7a_270952a4",
+        "filename": "include/uapi/sound/compress_params.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-11-01T19:10:16Z",
+      "side": 1,
+      "message": "Assume we will not use the software decoders.\n\nThe changes could be reworked as we suggested and negate the need to upstream and solve the problem for GKI, couldn\u0027t they? I don\u0027t see that this patch must be accepted as-is?",
+      "parentUuid": "35f127d0_c4c1c8e4",
+      "range": {
+        "startLine": 321,
+        "startChar": 21,
+        "endLine": 321,
+        "endChar": 65
+      },
+      "revId": "07a35bc4b84deadce0f799bec0ec9d77386e1ea8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
