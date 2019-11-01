@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "565af946_c914cd7a",
+        "filename": "arch/arm64/configs/lka_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2019-11-01T15:16:09Z",
+      "side": 1,
+      "message": "we also need an x86 version of this",
+      "revId": "294bc5b48213fe48f7b5575d88a52b6f5b3dff14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "15b79a96_fc128198",
         "filename": "include/trace/events/android_fs.h",
         "patchSetId": 1
