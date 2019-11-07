@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0085d80_17553f3d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-11-07T19:29:12Z",
+      "side": 1,
+      "message": "Please update to conform to commit msg standards in https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "515918b2809b8d439fa22819cc1e5da88c1cfbef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
