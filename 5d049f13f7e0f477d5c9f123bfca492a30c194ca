@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f395d554_b191337d",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-11-11T12:06:26Z",
+      "side": 1,
+      "message": "I don\u0027t understand the formula you are using here.  Can you document this in a comment above the first line here saying what you are trying to calculate?\n\nCan this all just be replaced with a call to DIV_ROUND_UP() instead?",
+      "range": {
+        "startLine": 593,
+        "startChar": 1,
+        "endLine": 595,
+        "endChar": 53
+      },
+      "revId": "5d049f13f7e0f477d5c9f123bfca492a30c194ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
