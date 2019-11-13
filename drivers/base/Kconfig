@@ -92,7 +92,7 @@ source "drivers/base/firmware_loader/Kconfig"
 config FW_CACHE
 	bool "Enable firmware caching during suspend"
 	depends on PM_SLEEP
-	default y
+	default n
 	help
 	  Because firmware caching generates uevent messages that are sent
 	  over a netlink socket, it can prevent suspend on many platforms.
