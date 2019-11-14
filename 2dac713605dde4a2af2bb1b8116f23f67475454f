@@ -16,6 +16,24 @@
       "revId": "2dac713605dde4a2af2bb1b8116f23f67475454f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1238a570_74c9796b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2019-11-14T19:47:49Z",
+      "side": 1,
+      "message": "Not meant for merge. 😊",
+      "parentUuid": "e6c661aa_06ee7cf3",
+      "revId": "2dac713605dde4a2af2bb1b8116f23f67475454f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
