@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b55c1a46_8b20b293",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-11-15T12:13:09Z",
+      "side": 1,
+      "message": "As per README.md (and the upstream rules) this should usually refer to a sha1 in the format\n    Fixes: 234abcd2468 (\"foobar: add cool feature\")\n\nFWIW I have the following alias in my .gitconfig for that :) \n    one \u003d show -s --pretty\u003d\u0027format:%h (\\\"%s\\\")\u0027",
+      "revId": "f6c15a701046fb45804d42c7158db886d5dcc80f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
