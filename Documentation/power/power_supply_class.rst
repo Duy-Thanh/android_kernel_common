@@ -189,6 +189,9 @@ CAPACITY_ALERT_MAX
 CAPACITY_LEVEL
   capacity level. This corresponds to POWER_SUPPLY_CAPACITY_LEVEL_*.
 
+SOH
+  battery state of health (SoH) in percents.
+
 TEMP
   temperature of the power supply.
 TEMP_ALERT_MIN
@@ -213,6 +216,13 @@ TIME_TO_FULL
   seconds left for battery to be considered full
   (i.e. while battery is charging)
 
+BOOST_EN
+  enables boost output (e.g. OTG/Wireless Tx).
+
+MOISTURE_DETECTION_EN
+  enables moisture detection.
+MOISTURE_DETECTED
+  shows moisture detection status.
 
 Battery <-> external power supply interaction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

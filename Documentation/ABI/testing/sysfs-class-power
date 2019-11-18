@@ -84,6 +84,15 @@ Description:
 		Valid values: "Unknown", "Critical", "Low", "Normal", "High",
 			      "Full"
 
+What:		/sys/class/power_supply/<supply_name>/soh
+Date:		November 2019
+Contact:	linux-pm@vger.kernel.org
+Description:
+		Battery state of health (SoH).
+
+		Access: Read
+		Valid values: 0 - 100 (percent)
+
 What:		/sys/class/power_supply/<supply_name>/current_avg
 Date:		May 2007
 Contact:	linux-pm@vger.kernel.org
@@ -527,6 +536,33 @@ Description:
 
 		Access: Read, Write
 		Valid values: Represented in microvolts
+
+What: 		/sys/class/power_supply/<supply_name>/boost_en
+Date:		November 2019
+Contact:	linux-pm@vger.kernel.org
+Description:
+		Enables the boost output for OTG/Wireless Tx.
+
+		Access: Read, Write
+		Valid values: 0, 1
+
+What: 		/sys/class/power_supply/<supply_name>/moisture_detection_en
+Date:		November 2019
+Contact:	linux-pm@vger.kernel.org
+Description:
+		Enables the moisture detection feature.
+
+		Access: Read, Write
+		Valid values: 0, 1
+
+What: 		/sys/class/power_supply/<supply_name>/moisture_detected
+Date:		November 2019
+Contact:	linux-pm@vger.kernel.org
+Description:
+		Reports the moisture detection status.
+
+		Access: Read
+		Valid values: 0, 1
 
 ===== Device Specific Properties =====
 
