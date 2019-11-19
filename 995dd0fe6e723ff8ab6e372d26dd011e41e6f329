@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "d7b9a9c1_ae75ea4d",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2019-11-19T19:00:04Z",
+      "side": 1,
+      "message": "I was overruled, we are accepting serial drivers.",
+      "parentUuid": "34c2a602_6efef370",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 33
+      },
+      "revId": "995dd0fe6e723ff8ab6e372d26dd011e41e6f329",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4e0cdd4e_c6b94f0f",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 4
