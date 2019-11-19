@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7dc1ae69_59f81f20",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-11-19T10:39:29Z",
+      "side": 1,
+      "message": "Should be \u0027cherry picked from commit xxx\u0027 (git cherry-pick -x should do it for you)",
+      "revId": "018cf5b956c1f5d87ab92daae7ba21fd47c270b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
