@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a38cd5b6_db803feb",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-11-19T18:02:46Z",
+      "side": 1,
+      "message": "This seems OK",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 20
+      },
+      "revId": "995dd0fe6e723ff8ab6e372d26dd011e41e6f329",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b21e854a_f12b2824",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-11-19T18:02:46Z",
+      "side": 1,
+      "message": "This seems OK (PCIE needs work for modular backends)",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 18
+      },
+      "revId": "995dd0fe6e723ff8ab6e372d26dd011e41e6f329",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "34c2a602_6efef370",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-11-19T18:02:46Z",
+      "side": 1,
+      "message": "Not sure we\u0027re going to allow more serial console drivers. smuckle@ can comment.",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 33
+      },
+      "revId": "995dd0fe6e723ff8ab6e372d26dd011e41e6f329",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e0cdd4e_c6b94f0f",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-11-19T18:02:46Z",
+      "side": 1,
+      "message": "Can this be \u003dm?",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 22
+      },
+      "revId": "995dd0fe6e723ff8ab6e372d26dd011e41e6f329",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
