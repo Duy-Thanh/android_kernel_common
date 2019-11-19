@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ce8090f_158a76b0",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7059,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-11-19T11:08:39Z",
+      "side": 1,
+      "message": "ISTR we were checking the actual task util against capacity_of() and the min_clamp against capacity_orgi_of() in a different version of this patch. It made sense to me, why has this changed ?",
+      "range": {
+        "startLine": 7059,
+        "startChar": 3,
+        "endLine": 7059,
+        "endChar": 61
+      },
+      "revId": "b3fea710161e496ea983d691cb32d38acddb96aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
