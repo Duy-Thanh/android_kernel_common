@@ -95,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "4c68dbf0_a526c601",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-11-19T22:36:12Z",
+      "side": 1,
+      "message": "I\u0027m looking more at this one. The SERIAL_QCOM_GENI_CONSOLE option depends on QCOM_GENI\u003dy, which also causes CONFIG_QCOM_GENI_SE to be built in.\n\nWith the last two set as a module, the kernel boots, but I don\u0027t get any serial console (since GENI_CONSOLE\u003dn). So I\u0027m trying to see if I can get GENI_CONSOLE to work w/ QCOM_GENI\u003dm.",
+      "parentUuid": "d7b9a9c1_ae75ea4d",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 33
+      },
+      "revId": "995dd0fe6e723ff8ab6e372d26dd011e41e6f329",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4e0cdd4e_c6b94f0f",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 4
@@ -112,6 +136,47 @@
         "endLine": 293,
         "endChar": 22
       },
+      "revId": "995dd0fe6e723ff8ab6e372d26dd011e41e6f329",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12ac164d_d2a98f2f",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-11-19T22:36:12Z",
+      "side": 1,
+      "message": "Not earlier, but with the oflink stuff now in place, I\u0027ll double check.",
+      "parentUuid": "4e0cdd4e_c6b94f0f",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 22
+      },
+      "revId": "995dd0fe6e723ff8ab6e372d26dd011e41e6f329",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0835b477_356465c8",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-11-19T22:36:12Z",
+      "side": 1,
+      "message": "This one is more of a top-level config, which is needed for the SD845 interconnect driver. Doesn\u0027t seem like it would have any real effect on gki kernel.",
       "revId": "995dd0fe6e723ff8ab6e372d26dd011e41e6f329",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
