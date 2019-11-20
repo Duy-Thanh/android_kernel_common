@@ -240,6 +240,7 @@ static int recover_inode(struct inode *inode, struct page *page)
 	int err;
 
 	inode->i_mode = le16_to_cpu(raw->i_mode);
+<<<<<<< HEAD   (460dc7 ANDROID: uid_sys_stats: avoid double accounting of dying thr)
 
 	err = recover_quota_data(inode, page);
 	if (err)
@@ -265,6 +266,20 @@ static int recover_inode(struct inode *inode, struct page *page)
 					return err;
 				F2FS_I(inode)->i_projid = kprojid;
 			}
+=======
+	i_uid_write(inode, le32_to_cpu(raw->i_uid));
+	i_gid_write(inode, le32_to_cpu(raw->i_gid));
+
+	if (raw->i_inline & F2FS_EXTRA_ATTR) {
+		if (f2fs_sb_has_project_quota(F2FS_I_SB(inode)->sb) &&
+			F2FS_FITS_IN_INODE(raw, le16_to_cpu(raw->i_extra_isize),
+								i_projid)) {
+			projid_t i_projid;
+
+			i_projid = (projid_t)le32_to_cpu(raw->i_projid);
+			F2FS_I(inode)->i_projid =
+				make_kprojid(&init_user_ns, i_projid);
+>>>>>>> BRANCH (f56f3d Linux 4.14.155)
 		}
 	}
 
@@ -283,6 +298,8 @@ static int recover_inode(struct inode *inode, struct page *page)
 				le16_to_cpu(raw->i_gc_failures);
 
 	recover_inline_flags(inode, raw);
+
+	f2fs_mark_inode_dirty_sync(inode, true);
 
 	f2fs_mark_inode_dirty_sync(inode, true);
 

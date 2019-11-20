@@ -35,6 +35,23 @@
 static struct pmu etm_pmu;
 static bool etm_perf_up;
 
+<<<<<<< HEAD   (460dc7 ANDROID: uid_sys_stats: avoid double accounting of dying thr)
+=======
+/**
+ * struct etm_event_data - Coresight specifics associated to an event
+ * @work:		Handle to free allocated memory outside IRQ context.
+ * @mask:		Hold the CPU(s) this event was set for.
+ * @snk_config:		The sink configuration.
+ * @path:		An array of path, each slot for one CPU.
+ */
+struct etm_event_data {
+	struct work_struct work;
+	cpumask_t mask;
+	void *snk_config;
+	struct list_head * __percpu *path;
+};
+
+>>>>>>> BRANCH (f56f3d Linux 4.14.155)
 static DEFINE_PER_CPU(struct perf_output_handle, ctx_handle);
 static DEFINE_PER_CPU(struct coresight_device *, csdev_src);
 
@@ -64,6 +81,7 @@ static struct attribute *etm_config_sinks_attr[] = {
 	NULL,
 };
 
+<<<<<<< HEAD   (460dc7 ANDROID: uid_sys_stats: avoid double accounting of dying thr)
 static const struct attribute_group etm_pmu_sinks_group = {
 	.name   = "sinks",
 	.attrs  = etm_config_sinks_attr,
@@ -75,6 +93,8 @@ static const struct attribute_group *etm_pmu_attr_groups[] = {
 	NULL,
 };
 
+=======
+>>>>>>> BRANCH (f56f3d Linux 4.14.155)
 static inline struct list_head **
 etm_event_cpu_path_ptr(struct etm_event_data *data, int cpu)
 {
@@ -156,9 +176,22 @@ static void free_event_data(struct work_struct *work)
 
 	event_data = container_of(work, struct etm_event_data, work);
 	mask = &event_data->mask;
+<<<<<<< HEAD   (460dc7 ANDROID: uid_sys_stats: avoid double accounting of dying thr)
 
 	/* Free the sink buffers, if there are any */
 	free_sink_buffer(event_data);
+=======
+	/*
+	 * First deal with the sink configuration.  See comment in
+	 * etm_setup_aux() about why we take the first available path.
+	 */
+	if (event_data->snk_config) {
+		cpu = cpumask_first(mask);
+		sink = coresight_get_sink(etm_event_cpu_path(event_data, cpu));
+		if (sink_ops(sink)->free_buffer)
+			sink_ops(sink)->free_buffer(event_data->snk_config);
+	}
+>>>>>>> BRANCH (f56f3d Linux 4.14.155)
 
 	for_each_cpu(cpu, mask) {
 		struct list_head **ppath;
@@ -183,6 +216,11 @@ static void *alloc_event_data(int cpu)
 	if (!event_data)
 		return NULL;
 
+<<<<<<< HEAD   (460dc7 ANDROID: uid_sys_stats: avoid double accounting of dying thr)
+=======
+	/* Make sure nothing disappears under us */
+	get_online_cpus();
+>>>>>>> BRANCH (f56f3d Linux 4.14.155)
 
 	mask = &event_data->mask;
 	if (cpu != -1)
@@ -270,10 +308,15 @@ static void *etm_setup_aux(struct perf_event *event, void **pages,
 		 * referenced later when the path is actually needed.
 		 */
 		path = coresight_build_path(csdev, sink);
+<<<<<<< HEAD   (460dc7 ANDROID: uid_sys_stats: avoid double accounting of dying thr)
 		if (IS_ERR(path)) {
 			cpumask_clear_cpu(cpu, mask);
 			continue;
 		}
+=======
+		if (IS_ERR(path))
+			goto err;
+>>>>>>> BRANCH (f56f3d Linux 4.14.155)
 
 		*etm_event_cpu_path_ptr(event_data, cpu) = path;
 	}
@@ -324,11 +367,24 @@ static void etm_event_start(struct perf_event *event, int flags)
 	path = etm_event_cpu_path(event_data, cpu);
 	/* We need a sink, no need to continue without one */
 	sink = coresight_get_sink(path);
+<<<<<<< HEAD   (460dc7 ANDROID: uid_sys_stats: avoid double accounting of dying thr)
 	if (WARN_ON_ONCE(!sink))
+=======
+	if (WARN_ON_ONCE(!sink || !sink_ops(sink)->set_buffer))
+		goto fail_end_stop;
+
+	/* Configure the sink */
+	if (sink_ops(sink)->set_buffer(sink, handle,
+				       event_data->snk_config))
+>>>>>>> BRANCH (f56f3d Linux 4.14.155)
 		goto fail_end_stop;
 
 	/* Nothing will happen without a path */
+<<<<<<< HEAD   (460dc7 ANDROID: uid_sys_stats: avoid double accounting of dying thr)
 	if (coresight_enable_path(path, CS_MODE_PERF, handle))
+=======
+	if (coresight_enable_path(path, CS_MODE_PERF))
+>>>>>>> BRANCH (f56f3d Linux 4.14.155)
 		goto fail_end_stop;
 
 	/* Tell the perf core the event is alive */
