@@ -117,6 +117,30 @@
       "revId": "b118f3d56dd6fbe0c252d794664b66b23e497c7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4becc1ec_ed4fc88b",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-11-21T11:19:33Z",
+      "side": 1,
+      "message": "If dropping this patch doesn\u0027t make the verification done by Connor invalid, then I agree we better drop. But if the results were dependent on this patch then we should be careful about it. I agree going for the same solution in 5.4 is the best way forward. Ideally I\u0027d love uclamp support in 5.4 and 4.19 to be identical.",
+      "parentUuid": "7f2d8f1b_09444666",
+      "range": {
+        "startLine": 1226,
+        "startChar": 0,
+        "endLine": 1231,
+        "endChar": 2
+      },
+      "revId": "b118f3d56dd6fbe0c252d794664b66b23e497c7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
