@@ -34,6 +34,24 @@
       "revId": "5fbca20561cab693e47ca61bd543191d1685d774",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8783db81_253e7dbf",
+        "filename": "arch/arm64/configs/defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-11-21T20:23:49Z",
+      "side": 0,
+      "message": "This is the upstream defconfig. We don\u0027t use it and don\u0027t document it.",
+      "parentUuid": "3eedd8be_85b85bcb",
+      "revId": "5fbca20561cab693e47ca61bd543191d1685d774",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
