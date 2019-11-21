@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef2ac97f_c041d342",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:39:43Z",
+      "side": 1,
+      "message": "These three definitions aren\u0027t used any more",
+      "revId": "8e17a2739392f139c6f2f57ece1c08a6def01676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1bbe080_d1a5c950",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:39:43Z",
+      "side": 1,
+      "message": "Comment needs to be updated to properly document fscrypt_nokey_name.",
+      "revId": "8e17a2739392f139c6f2f57ece1c08a6def01676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ba288dd_68edb7e2",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:39:43Z",
+      "side": 1,
+      "message": "Comment needs to be updated",
+      "range": {
+        "startLine": 218,
+        "startChar": 55,
+        "endLine": 220,
+        "endChar": 42
+      },
+      "revId": "8e17a2739392f139c6f2f57ece1c08a6def01676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11bdfc59_5d14d4d2",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:39:43Z",
+      "side": 1,
+      "message": "Since this is function is being made much longer, it should be made non-inline (moved to fs/crypto/fname.c).",
+      "range": {
+        "startLine": 224,
+        "startChar": 7,
+        "endLine": 224,
+        "endChar": 13
+      },
+      "revId": "8e17a2739392f139c6f2f57ece1c08a6def01676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "960d9d5b_7b768f21",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:39:43Z",
+      "side": 1,
+      "message": "For bool variables, should use true/false instead of 1/0",
+      "range": {
+        "startLine": 231,
+        "startChar": 20,
+        "endLine": 231,
+        "endChar": 21
+      },
+      "revId": "8e17a2739392f139c6f2f57ece1c08a6def01676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
