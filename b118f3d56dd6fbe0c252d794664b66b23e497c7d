@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3c7aabae_da304a52",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1224,
+      "author": {
+        "id": 1598371
+      },
+      "writtenOn": "2019-11-21T08:46:32Z",
+      "side": 1,
+      "message": "It was added since:\n- this is a core API\n- uclamp supports RT tasks, which by default are considered latency sensitive\n- there was already discussions about possibly affect how RT tasks are placed on CPUs depending on their clamp values.\n\nThat said, you right, it\u0027s currently not used.",
+      "parentUuid": "3199d1d1_0ad2c80a",
+      "range": {
+        "startLine": 1223,
+        "startChar": 1,
+        "endLine": 1224,
+        "endChar": 14
+      },
+      "revId": "b118f3d56dd6fbe0c252d794664b66b23e497c7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a723d386_e581e4b6",
         "filename": "kernel/sched/core.c",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2019-11-19T11:03:31Z",
       "side": 1,
       "message": "I\u0027m feeling a little nervous doing this change in 4.19 (and the next one based on shares) given that it wasn\u0027t tested very thoroughly to the best of my knowledge. I\u0027d feel better with a prefer-idle extension to uclamp instead (which is what is currently queued for 5.4).",
+      "range": {
+        "startLine": 1226,
+        "startChar": 0,
+        "endLine": 1231,
+        "endChar": 2
+      },
+      "revId": "b118f3d56dd6fbe0c252d794664b66b23e497c7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "080711ec_55240fd4",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1598371
+      },
+      "writtenOn": "2019-11-21T08:46:32Z",
+      "side": 1,
+      "message": "AFAIR Connor did some tests on some 4.19 based devices and he was happy with the results.\nBut you right, that\u0027s likely not a very extensive testing.\n\nOn the 5.4 queue instead I\u0027m wondering why we still go for the prefer-idle extension instead of building on mainline code. But that\u0027s a discussion for a different thread.",
+      "parentUuid": "a723d386_e581e4b6",
       "range": {
         "startLine": 1226,
         "startChar": 0,
