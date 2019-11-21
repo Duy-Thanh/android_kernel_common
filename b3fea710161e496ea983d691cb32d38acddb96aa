@@ -94,6 +94,30 @@
       "revId": "b3fea710161e496ea983d691cb32d38acddb96aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25fcc98e_60bd409e",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7059,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-11-21T11:33:44Z",
+      "side": 1,
+      "message": "Did I understand correctly that we can replace this with what Valentin has actually pushed to mainline?\n\nhttps://lore.kernel.org/lkml/20191120175533.4672-1-valentin.schneider@arm.com/",
+      "parentUuid": "5eafa6ff_f429839d",
+      "range": {
+        "startLine": 7059,
+        "startChar": 3,
+        "endLine": 7059,
+        "endChar": 61
+      },
+      "revId": "b3fea710161e496ea983d691cb32d38acddb96aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
