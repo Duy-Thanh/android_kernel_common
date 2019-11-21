@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "38a6cdd5_fe671f6a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:17:44Z",
+      "side": 1,
+      "message": "I assume you know this already, but the commit messages will need a lot more detail, and we\u0027ll also need an update to Documentation/filesystems/fscrypt.rst.",
+      "revId": "ed2e472de430284231db8e72c6667c02fed6641d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0db9020f_c095e29a",
+        "filename": "fs/crypto/fname.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:17:44Z",
+      "side": 1,
+      "message": "This should have a kerneldoc comment.  In general, all functions in fs/crypto/ that are exported to filesystems should have kerneldoc comments.",
+      "revId": "ed2e472de430284231db8e72c6667c02fed6641d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd955a95_b84612ff",
+        "filename": "fs/crypto/fname.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:17:44Z",
+      "side": 1,
+      "message": "It would be nice to have a WARN_ON() check here which verifies that the ci_hash_key was actually initialized.  As-is, this will just use the all 0\u0027s key.",
+      "revId": "ed2e472de430284231db8e72c6667c02fed6641d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccb0d8cc_a4914768",
+        "filename": "fs/crypto/keysetup.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:17:44Z",
+      "side": 1,
+      "message": "This is overwriting the error code from above.\n\nAlso, this key may still be needed if the DIRECT_KEY or IV_INO_LBLK_64 policy flags are set.  (See the code above.)\n\nAlso, this is only needed on directories.  We can save time by not deriving this key for non-directories.",
+      "revId": "ed2e472de430284231db8e72c6667c02fed6641d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5402e35a_b5eda381",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:17:44Z",
+      "side": 1,
+      "message": "Omitting the parameter names is bad practice and checkpatch.pl will warn about it, so I\u0027ve been including them for new functions.  I suggest including them here.  Also make sure to run checkpatch.pl and address as many warnings as it makes sense to.",
+      "range": {
+        "startLine": 161,
+        "startChar": 33,
+        "endLine": 161,
+        "endChar": 74
+      },
+      "revId": "ed2e472de430284231db8e72c6667c02fed6641d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58e81f89_978c8241",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:17:44Z",
+      "side": 1,
+      "message": "Please keep functions in the same order in the CONFIG_FS_ENCRYPTION and !CONFIG_FS_ENCRYPTION cases",
+      "revId": "ed2e472de430284231db8e72c6667c02fed6641d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
