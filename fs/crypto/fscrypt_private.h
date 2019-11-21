@@ -374,8 +374,10 @@ struct fscrypt_master_key_secret {
 	/* Size of the raw key in bytes.  Set even if ->raw isn't set. */
 	u32			size;
 
-	/* For v1 policy keys: the raw key.  Wiped for v2 policy keys. */
-	u8			raw[FSCRYPT_MAX_KEY_SIZE];
+	/* For v1 policy keys: the raw key.  Wiped for v2 policy keys.
+	 * For wrapped keys using v2 policies, not wiped.
+	 */
+	u8			raw[FSCRYPT_MAX_WRAPPED_KEY_SIZE];
 
 } __randomize_layout;
 
@@ -455,6 +457,11 @@ struct fscrypt_master_key {
 	 * IV_INO_LBLK_64 policies, allocated on-demand.
 	 */
 	struct crypto_skcipher	*mk_iv_ino_lblk_64_tfms[__FSCRYPT_MODE_MAX + 1];
+
+	/*
+	 * Size of the key/blob that is present in mk_iv_ino_lblk_64_tfms.
+	 */
+	unsigned int		mk_key_size;
 
 #ifdef CONFIG_FS_ENCRYPTION_INLINE_CRYPT
 	/* Raw keys for IV_INO_LBLK_64 policies, allocated on-demand */

@@ -93,6 +93,7 @@ int fscrypt_setup_per_mode_inline_crypt_key(struct fscrypt_info *ci,
 	const struct fscrypt_mode *mode = ci->ci_mode;
 	const u8 mode_num = mode - fscrypt_modes;
 	u8 *raw_key;
+	unsigned int key_size = 0;
 	u8 hkdf_info[sizeof(mode_num) + sizeof(sb->s_uuid)];
 	int err;
 
@@ -114,24 +115,40 @@ int fscrypt_setup_per_mode_inline_crypt_key(struct fscrypt_info *ci,
 		goto out_unlock;
 	}
 
-	raw_key = kmalloc(mode->keysize, GFP_NOFS);
+	if (ci->ci_policy.v2.flags & FSCRYPT_POLICY_FLAG_WRAPPED_KEY)
+		key_size = mk->mk_secret.size;
+	else
+		key_size = mode->keysize;
+
+	if (key_size < FSCRYPT_MIN_KEY_SIZE ||
+		key_size > FSCRYPT_MAX_WRAPPED_KEY_SIZE) {
+		err = -EINVAL;
+		goto out_unlock;
+	}
+
+	raw_key = kmalloc(key_size, GFP_NOFS);
 	if (!raw_key) {
 		err = -ENOMEM;
 		goto out_unlock;
 	}
 
-	BUILD_BUG_ON(sizeof(mode_num) != 1);
-	BUILD_BUG_ON(sizeof(sb->s_uuid) != 16);
-	BUILD_BUG_ON(sizeof(hkdf_info) != 17);
-	hkdf_info[0] = mode_num;
-	memcpy(&hkdf_info[1], &sb->s_uuid, sizeof(sb->s_uuid));
+	if (ci->ci_policy.v2.flags & FSCRYPT_POLICY_FLAG_WRAPPED_KEY) {
+		memcpy(raw_key, mk->mk_secret.raw, key_size);
+		memzero_explicit(mk->mk_secret.raw, key_size);
+	} else {
+		BUILD_BUG_ON(sizeof(mode_num) != 1);
+		BUILD_BUG_ON(sizeof(sb->s_uuid) != 16);
+		BUILD_BUG_ON(sizeof(hkdf_info) != 17);
+		hkdf_info[0] = mode_num;
+		memcpy(&hkdf_info[1], &sb->s_uuid, sizeof(sb->s_uuid));
 
-	err = fscrypt_hkdf_expand(&mk->mk_secret.hkdf,
+		err = fscrypt_hkdf_expand(&mk->mk_secret.hkdf,
 				  HKDF_CONTEXT_IV_INO_LBLK_64_KEY,
 				  hkdf_info, sizeof(hkdf_info),
 				  raw_key, mode->keysize);
-	if (err)
-		goto out_unlock;
+		if (err)
+			goto out_unlock;
+	}
 
 	err = blk_crypto_start_using_mode(mode->blk_crypto_mode,
 					  sb->s_blocksize, bdev->bd_queue);
@@ -150,12 +167,13 @@ int fscrypt_setup_per_mode_inline_crypt_key(struct fscrypt_info *ci,
 
 	/* pairs with smp_load_acquire() above */
 	smp_store_release(&mk->mk_iv_ino_lblk_64_raw_keys[mode_num], raw_key);
+	mk->mk_key_size = key_size;
 	err = 0;
 out_unlock:
 	mutex_unlock(&inline_crypt_setup_mutex);
 out:
 	if (err == 0) {
-		ci->ci_inline_crypt_key_size = mode->keysize;
+		ci->ci_inline_crypt_key_size = key_size;
 		ci->ci_inline_crypt_key = raw_key;
 		/*
 		 * Since each struct fscrypt_master_key belongs to a particular
@@ -180,9 +198,15 @@ out:
 void fscrypt_evict_inline_crypt_keys(struct fscrypt_master_key *mk)
 {
 	struct block_device *bdev = mk->mk_bdev;
+	unsigned int key_size = 0;
 	size_t i;
 
 	if (!bdev) /* No inline encryption keys? */
+		return;
+
+	key_size = mk->mk_key_size;
+	if (key_size < FSCRYPT_MIN_KEY_SIZE ||
+		key_size > FSCRYPT_MAX_WRAPPED_KEY_SIZE)
 		return;
 
 	for (i = 0; i < ARRAY_SIZE(mk->mk_iv_ino_lblk_64_raw_keys); i++) {
@@ -190,7 +214,7 @@ void fscrypt_evict_inline_crypt_keys(struct fscrypt_master_key *mk)
 
 		if (raw_key != NULL) {
 			blk_crypto_evict_key(bdev->bd_queue, raw_key,
-					     fscrypt_modes[i].keysize,
+					     key_size,
 					     fscrypt_modes[i].blk_crypto_mode,
 					     mk->mk_data_unit_size);
 			kzfree(raw_key);
