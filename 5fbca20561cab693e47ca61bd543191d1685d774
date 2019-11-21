@@ -52,6 +52,24 @@
       "revId": "5fbca20561cab693e47ca61bd543191d1685d774",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c6572812_d58ba091",
+        "filename": "arch/arm64/configs/defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-11-21T20:55:38Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "8783db81_253e7dbf",
+      "revId": "5fbca20561cab693e47ca61bd543191d1685d774",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
