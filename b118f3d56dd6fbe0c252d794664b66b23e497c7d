@@ -93,6 +93,30 @@
       "revId": "b118f3d56dd6fbe0c252d794664b66b23e497c7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f2d8f1b_09444666",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-11-21T10:51:28Z",
+      "side": 1,
+      "message": "\u003e On the 5.4 queue instead I\u0027m wondering why we still go for the prefer-idle extension instead of building on mainline code. But that\u0027s a discussion for a different thread.\n\nThis interpretation of the priorities, shares, and such is not a mainline thing either. And userspace will need to be made aware of it. So if userspace needs to be made aware of some out-of-tree tricks we\u0027re doing in the kernel, I \u0027m not sure to see what\u0027s the value of this over the prefer-idle thing.\n\nI\u0027d say let\u0027s use the mainline code once it\u0027s actually mainline (the latency-nice stuff for ex.), but until then we should stick to the thing that we know works and people already use widely. Otherwise with this change we\u0027re just risking to cause pain downstream for very little benefits (IMO).",
+      "parentUuid": "080711ec_55240fd4",
+      "range": {
+        "startLine": 1226,
+        "startChar": 0,
+        "endLine": 1231,
+        "endChar": 2
+      },
+      "revId": "b118f3d56dd6fbe0c252d794664b66b23e497c7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
