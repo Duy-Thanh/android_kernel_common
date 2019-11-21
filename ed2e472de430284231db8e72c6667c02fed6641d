@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "bdb226a6_1bc56675",
+        "filename": "fs/crypto/keysetup.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:48:38Z",
+      "side": 1,
+      "message": "It would also be nice to skip deriving the key if the directory doesn\u0027t have casefolding enabled --- though, then we\u0027d also have to derive the key when enabling the casefolding flag, so that would add a little extra complexity.",
+      "parentUuid": "ccb0d8cc_a4914768",
+      "revId": "ed2e472de430284231db8e72c6667c02fed6641d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5402e35a_b5eda381",
         "filename": "include/linux/fscrypt.h",
         "patchSetId": 2
