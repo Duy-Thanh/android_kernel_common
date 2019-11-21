@@ -16,6 +16,24 @@
       "revId": "5fbca20561cab693e47ca61bd543191d1685d774",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3eedd8be_85b85bcb",
+        "filename": "arch/arm64/configs/defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-11-21T19:07:45Z",
+      "side": 0,
+      "message": "What is this configuration for, if it is even remotely related to Android, it needs to be off otherwise the platform will not suspend appropriately b/c CONFIG_FW_LOADER.",
+      "parentUuid": "2768d5e4_593b9f41",
+      "revId": "5fbca20561cab693e47ca61bd543191d1685d774",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
