@@ -1,0 +1,510 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "409ea8e9_7edae028",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "IIUC, there are really two logically separate changes here:\n\n- Always include the dirtree hash (if available) in the filenames.\n- Switch the strong hash algorithm from \"use the second-to-last ciphertext block\" to SHA-256, and optimize performance by only using it for very long filenames.\n\nCan you make the commit message reflect the reasoning behind both of these changes?",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1dc2e81_a6c61d9e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "Call this \"dirtree hash\" to avoid confusion with the SHA-256 hash?",
+      "range": {
+        "startLine": 9,
+        "startChar": 48,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51a3f8f5_6476d904",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "\"ciphertext\", not \"cyphertext\".  Likewise everywhere else.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 10
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a96c8db_c210472b",
+        "filename": "fs/crypto/fname.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "Use \u0027static int fscrypt_do_sha256(const u8 *data, unsigned int len, u8 *out)\u0027?  Fits on one line and mirrors crypto_shash_digest().  And it\u0027s only used in this file, so it can be static.\n\nAlso, it might make sense to move this function the top of the file so that it\u0027s more separated out from the rest of the filenames encryption code.",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 44
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "535dcd7c_f3f0f277",
+        "filename": "fs/crypto/fname.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "This patch makes fscrypt always use SHA-256, so it needs to make CONFIG_FS_ENCRYPTION select CONFIG_CRYPTO_SHA256 so that it\u0027s always available.\n\nThen this check for missing crypto API support should be removed.",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 4
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f850ec2_eed5467b",
+        "filename": "fs/crypto/fname.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "Comment needs to be updated.",
+      "range": {
+        "startLine": 283,
+        "startChar": 25,
+        "endLine": 284,
+        "endChar": 53
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b8ada68_26ad6e7a",
+        "filename": "fs/crypto/fname.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "It would make more sense to have this line before the SHA-256 part, to match the order of the fields in fscrypt_nokey_name.",
+      "range": {
+        "startLine": 330,
+        "startChar": 1,
+        "endLine": 330,
+        "endChar": 33
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5435a945_12fc1047",
+        "filename": "fs/crypto/fname.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "return 0;",
+      "range": {
+        "startLine": 332,
+        "startChar": 1,
+        "endLine": 332,
+        "endChar": 12
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb860ca0_bffdadc8",
+        "filename": "fs/crypto/fname.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "What is the point of FSCRYPT_FNAME_LONG_SIZE here?  Isn\u0027t this code always decoding a \u0027struct fscrypt_nokey_name\u0027?",
+      "range": {
+        "startLine": 405,
+        "startChar": 24,
+        "endLine": 405,
+        "endChar": 47
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d49c9f80_891f0601",
+        "filename": "fs/crypto/fname.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "ret \u003c (int)offsetofend(struct fscrypt_nokey_name, hash)\n\nOtherwise there can be an out of bounds array access later.",
+      "range": {
+        "startLine": 413,
+        "startChar": 1,
+        "endLine": 413,
+        "endChar": 15
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f4947fb_48b309da",
+        "filename": "fs/crypto/fname.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "Should not use \u0027else\u0027 here, since the previous block ends in a goto.",
+      "range": {
+        "startLine": 416,
+        "startChar": 1,
+        "endLine": 416,
+        "endChar": 9
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9acc315d_7d6efeb1",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "The dirtree hash already had to be included in encoded long names so that the filesystem could find the correct directory block --- see the original comment.  This new text is misleading because it implies the dirtree hash is only needed for encrypt+casefold.",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 63
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0020d359_8a328d0f",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "characters \u003d\u003e bytes",
+      "range": {
+        "startLine": 176,
+        "startChar": 25,
+        "endLine": 176,
+        "endChar": 35
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99a0beb1_3f45f6f3",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "It would be helpful to clarify that the whole \"base64 encode up to 149 bytes\" thing is a performance optimization to avoid needing to do the SHA-256 hash as frequently.  After all, the SHA-256 hash by itself would be sufficient from a correctness standpoint.",
+      "range": {
+        "startLine": 176,
+        "startChar": 55,
+        "endLine": 178,
+        "endChar": 31
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1ec7d4c_9ac865d2",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "This paragraph is kind of obvious now that it\u0027s using a real cryptographic hash, so it could be left out.  The old way needed a lot of explanation only because it wasn\u0027t using a real cryptographic hash.",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 69
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7723b97_9858934c",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "Is this BASE64_CHARS(sizeof(struct fscrypt_nokey_name))?  If so, that should be used instead of literal 252, and there should be a BUILD_BUG_ON() somewhere that verifies it\u0027s \u003c\u003d NAME_MAX.",
+      "range": {
+        "startLine": 187,
+        "startChar": 32,
+        "endLine": 187,
+        "endChar": 35
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "211f1e1b_7afd3de0",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "dirtree_hash, to avoid confusion with sha256 hash",
+      "range": {
+        "startLine": 189,
+        "startChar": 5,
+        "endLine": 189,
+        "endChar": 9
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6c6fb36_085ea3f4",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "SHA256_DIGEST_SIZE",
+      "range": {
+        "startLine": 191,
+        "startChar": 11,
+        "endLine": 191,
+        "endChar": 13
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fa9890d_76a2a295",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "What is the padding field for?",
+      "range": {
+        "startLine": 192,
+        "startChar": 1,
+        "endLine": 192,
+        "endChar": 15
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bd9724d_99ce1412",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "SHA256_DIGEST_SIZE",
+      "range": {
+        "startLine": 220,
+        "startChar": 12,
+        "endLine": 220,
+        "endChar": 14
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b347b235_3b8b39ce",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "memcmp() !\u003d 0",
+      "range": {
+        "startLine": 234,
+        "startChar": 6,
+        "endLine": 234,
+        "endChar": 38
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecfef4ee_d66f97f1",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 1,
+      "message": "memcmp() !\u003d 0",
+      "range": {
+        "startLine": 240,
+        "startChar": 7,
+        "endLine": 240,
+        "endChar": 50
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb42eb5_9fa9b881",
+        "filename": "fs/crypto/fname.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T21:45:39Z",
+      "side": 0,
+      "message": "Need to check:\n\nif (iname-\u003elen \u003e BASE64_CHARS(sizeof(struct fscrypt_nokey_name))\n        return -ENOENT;\n\nOtherwise base64_decode() may write past the end of fname-\u003ecrypto_buf.name.",
+      "range": {
+        "startLine": 368,
+        "startChar": 0,
+        "endLine": 371,
+        "endChar": 15
+      },
+      "revId": "ea2e517985e8404a35c76faa34a9836137920477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
