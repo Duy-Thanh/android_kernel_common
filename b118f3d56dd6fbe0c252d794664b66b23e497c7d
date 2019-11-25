@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "b089e3af_8e158e8a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2019-11-25T09:50:38Z",
+      "side": 1,
+      "message": "from code,\n\nuclamp_latency_sensitive(p) \u003c\u003d schedtune_prefer_idle(p) \u003e 0\n\nuntil now we treated prefer_idle as bool (though it is int). this patch checks the value to be positive for placing the task on idle CPU. Any special reason for this?",
+      "range": {
+        "startLine": 16,
+        "startChar": 35,
+        "endLine": 16,
+        "endChar": 56
+      },
+      "revId": "b118f3d56dd6fbe0c252d794664b66b23e497c7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3199d1d1_0ad2c80a",
         "filename": "kernel/sched/core.c",
         "patchSetId": 1
@@ -137,6 +160,29 @@
         "startChar": 0,
         "endLine": 1231,
         "endChar": 2
+      },
+      "revId": "b118f3d56dd6fbe0c252d794664b66b23e497c7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "deec122d_63334211",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3808,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2019-11-25T09:50:38Z",
+      "side": 1,
+      "message": "we are replacing task_util_est() with uclamp_task(). The intention of this patch is replacing boosted_task_util() with uclamp_task(). Since this modifies the functionality, better to push this change separately.",
+      "range": {
+        "startLine": 3808,
+        "startChar": 26,
+        "endLine": 3808,
+        "endChar": 37
       },
       "revId": "b118f3d56dd6fbe0c252d794664b66b23e497c7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
