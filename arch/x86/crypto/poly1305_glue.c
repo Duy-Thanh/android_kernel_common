@@ -185,12 +185,13 @@ static int __init poly1305_simd_mod_init(void)
 	if (poly1305_use_avx2)
 		alg.descsize += 10 * sizeof(u32);
 #endif
-	return crypto_register_shash(&alg);
+	return IS_REACHABLE(CONFIG_CRYPTO_HASH) ? crypto_register_shash(&alg) : 0;
 }
 
 static void __exit poly1305_simd_mod_exit(void)
 {
-	crypto_unregister_shash(&alg);
+	if (IS_REACHABLE(CONFIG_CRYPTO_HASH))
+		crypto_unregister_shash(&alg);
 }
 
 module_init(poly1305_simd_mod_init);

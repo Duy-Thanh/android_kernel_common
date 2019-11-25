@@ -177,12 +177,14 @@ static int __init chacha_simd_mod_init(void)
 	if (!cpu_have_named_feature(ASIMD))
 		return -ENODEV;
 
-	return crypto_register_skciphers(algs, ARRAY_SIZE(algs));
+	return IS_REACHABLE(CONFIG_CRYPTO_BLKCIPHER) ?
+		crypto_register_skciphers(algs, ARRAY_SIZE(algs)) : 0;
 }
 
 static void __exit chacha_simd_mod_fini(void)
 {
-	crypto_unregister_skciphers(algs, ARRAY_SIZE(algs));
+	if (IS_REACHABLE(CONFIG_CRYPTO_BLKCIPHER) && cpu_have_named_feature(ASIMD))
+		crypto_unregister_skciphers(algs, ARRAY_SIZE(algs));
 }
 
 module_init(chacha_simd_mod_init);
