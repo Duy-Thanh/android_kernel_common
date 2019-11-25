@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "e028307a_1cbe2d6d",
+        "filename": "fs/crypto/fname.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T18:54:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0db9020f_c095e29a",
+      "revId": "ed2e472de430284231db8e72c6667c02fed6641d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fd955a95_b84612ff",
         "filename": "fs/crypto/fname.c",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2019-11-21T22:17:44Z",
       "side": 1,
       "message": "It would be nice to have a WARN_ON() check here which verifies that the ci_hash_key was actually initialized.  As-is, this will just use the all 0\u0027s key.",
+      "revId": "ed2e472de430284231db8e72c6667c02fed6641d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfd9abce_576136d2",
+        "filename": "fs/crypto/fname.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T18:54:54Z",
+      "side": 1,
+      "message": "I\u0027m not sure it\u0027s a good idea to fix this by assuming that an all 0\u0027s key is uninitialized, since a 1 in 2^64 chance isn\u0027t *that* unlikely, especially when there could be millions of files.  Can you add a separate ci_hash_key_initialized flag?",
+      "parentUuid": "fd955a95_b84612ff",
       "revId": "ed2e472de430284231db8e72c6667c02fed6641d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -111,6 +147,30 @@
     },
     {
       "key": {
+        "uuid": "0275cb9d_c6b44f0f",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T18:54:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5402e35a_b5eda381",
+      "range": {
+        "startLine": 161,
+        "startChar": 33,
+        "endLine": 161,
+        "endChar": 74
+      },
+      "revId": "ed2e472de430284231db8e72c6667c02fed6641d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "58e81f89_978c8241",
         "filename": "include/linux/fscrypt.h",
         "patchSetId": 2
@@ -125,6 +185,24 @@
       "revId": "ed2e472de430284231db8e72c6667c02fed6641d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4402501_528b969f",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T18:54:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58e81f89_978c8241",
+      "revId": "ed2e472de430284231db8e72c6667c02fed6641d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
