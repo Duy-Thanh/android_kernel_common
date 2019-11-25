@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d8975d6_564f0188",
+        "filename": "sound/core/pcm_lib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2053,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-11-25T19:57:05Z",
+      "side": 1,
+      "message": "typo? Presumably, this was intended to be \"TODO: consider an -EINVAL here\". Instead of the comment, can we just go ahead and do that? What will happen if we don\u0027t error out here?",
+      "revId": "7e8eb68f349c529de6718cf26cc8ce01b7fa5b32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
