@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cf67dd06_e215a1f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-11-25T12:31:13Z",
+      "side": 1,
+      "message": "As discussed with Quentin. 5.4 has a different implementation of prefer_idle using uclamp that we\u0027ll backport to 4.19 instead of this. So I expect this to change as a consequence.",
+      "parentUuid": "b089e3af_8e158e8a",
+      "range": {
+        "startLine": 16,
+        "startChar": 35,
+        "endLine": 16,
+        "endChar": 56
+      },
+      "revId": "b118f3d56dd6fbe0c252d794664b66b23e497c7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3199d1d1_0ad2c80a",
         "filename": "kernel/sched/core.c",
         "patchSetId": 1
@@ -178,6 +202,30 @@
       "writtenOn": "2019-11-25T09:50:38Z",
       "side": 1,
       "message": "we are replacing task_util_est() with uclamp_task(). The intention of this patch is replacing boosted_task_util() with uclamp_task(). Since this modifies the functionality, better to push this change separately.",
+      "range": {
+        "startLine": 3808,
+        "startChar": 26,
+        "endLine": 3808,
+        "endChar": 37
+      },
+      "revId": "b118f3d56dd6fbe0c252d794664b66b23e497c7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e38d187_6941511e",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3808,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-11-25T12:31:13Z",
+      "side": 1,
+      "message": "Yes this does result a change of behavior. I\u0027ll split this into a different patch.",
+      "parentUuid": "deec122d_63334211",
       "range": {
         "startLine": 3808,
         "startChar": 26,
