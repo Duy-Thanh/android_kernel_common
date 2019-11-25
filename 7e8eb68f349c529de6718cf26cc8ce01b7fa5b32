@@ -16,6 +16,24 @@
       "revId": "7e8eb68f349c529de6718cf26cc8ce01b7fa5b32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec2505c3_b616c84d",
+        "filename": "sound/core/pcm_lib.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2053,
+      "author": {
+        "id": 1581431
+      },
+      "writtenOn": "2019-11-25T20:21:05Z",
+      "side": 1,
+      "message": "That comment is not valid. Will update a new patch removing the comment.",
+      "parentUuid": "8d8975d6_564f0188",
+      "revId": "7e8eb68f349c529de6718cf26cc8ce01b7fa5b32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
