@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8598b76d_6af2bd84",
+        "filename": "fs/ext4/namei.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1342,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-26T23:44:58Z",
+      "side": 0,
+      "message": "Why can\u0027t we keep \u0027const\u0027 here?",
+      "range": {
+        "startLine": 1342,
+        "startChar": 30,
+        "endLine": 1342,
+        "endChar": 35
+      },
+      "revId": "23f96be6b03acc73348e76b45ea114b3272b4850",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed7e3ba0_1f26f6cf",
+        "filename": "fs/ext4/ext4.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1980,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-26T23:44:58Z",
+      "side": 1,
+      "message": "What is the point of this field?  It\u0027s never used, and it\u0027s not actually the padding.  AFAICS, the padding is actually 0-3 bytes between the end of the used portion of \u0027name\u0027 and either the end of ext4_dir_entry_2 or the beginning of ext4_extended_dir_entry_2.",
+      "revId": "4233b14c0844411511c826ca32066fc0f3c850d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa28dcc2_28f2341b",
+        "filename": "fs/ext4/ext4.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2039,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-26T23:44:58Z",
+      "side": 1,
+      "message": "Perhaps add a wrapper for IS_CASEFOLDED(dir) and IS_ENCRYPTED(dir)?  Maybe ext4_has_hash_in_dirents() or ext4_uses_extended_dirent_2()?",
+      "range": {
+        "startLine": 2039,
+        "startChar": 12,
+        "endLine": 2039,
+        "endChar": 51
+      },
+      "revId": "4233b14c0844411511c826ca32066fc0f3c850d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f89d524_90a3fcff",
+        "filename": "fs/ext4/ext4.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2039,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-26T23:44:58Z",
+      "side": 1,
+      "message": "What does it mean for \u0027dir\u0027 to be NULL?",
+      "range": {
+        "startLine": 2039,
+        "startChar": 5,
+        "endLine": 2039,
+        "endChar": 8
+      },
+      "revId": "4233b14c0844411511c826ca32066fc0f3c850d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9a1ac54_2084032f",
+        "filename": "fs/ext4/ext4.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2044,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-26T23:44:58Z",
+      "side": 1,
+      "message": "The following would be easier to understand:\n\nreclen \u003d (name_len + 8 + EXT4_DIR_ROUND) \u0026 ~EXT4_DIR_ROUND;\nif (IS_CASEFOLDED(dir) \u0026\u0026 IS_ENCRYPTED(dir))\n        reclen +\u003d sizeof(ext4_extended_dir_entry_2);",
+      "revId": "4233b14c0844411511c826ca32066fc0f3c850d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83bcc0b8_95110a07",
+        "filename": "fs/ext4/ext4.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2503,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-26T23:44:58Z",
+      "side": 1,
+      "message": "Why is \u0027lblk\u0027 being passed around everywhere now?",
+      "range": {
+        "startLine": 2503,
+        "startChar": 7,
+        "endLine": 2503,
+        "endChar": 25
+      },
+      "revId": "4233b14c0844411511c826ca32066fc0f3c850d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64aa7bb3_9026d5de",
+        "filename": "fs/ext4/hash.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-26T23:44:58Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be an error?  With this scheme, the key is needed to compute the hash.",
+      "range": {
+        "startLine": 270,
+        "startChar": 3,
+        "endLine": 270,
+        "endChar": 22
+      },
+      "revId": "4233b14c0844411511c826ca32066fc0f3c850d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62a27cce_fea978cd",
+        "filename": "fs/ext4/namei.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1320,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-26T23:44:58Z",
+      "side": 1,
+      "message": "This can fail.",
+      "range": {
+        "startLine": 1320,
+        "startChar": 2,
+        "endLine": 1320,
+        "endChar": 27
+      },
+      "revId": "4233b14c0844411511c826ca32066fc0f3c850d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1300de36_fd68d475",
+        "filename": "fs/ext4/namei.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1382,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-26T23:44:58Z",
+      "side": 1,
+      "message": "Remove inline, since this function is getting much too long.",
+      "range": {
+        "startLine": 1382,
+        "startChar": 7,
+        "endLine": 1382,
+        "endChar": 13
+      },
+      "revId": "4233b14c0844411511c826ca32066fc0f3c850d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2fa982d_afd8ad9d",
+        "filename": "fs/ext4/super.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3843,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-26T23:44:58Z",
+      "side": 1,
+      "message": "Won\u0027t there need to be a new ext4 incompat feature flag that indicates the new directory entry format is in use?",
+      "revId": "4233b14c0844411511c826ca32066fc0f3c850d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
