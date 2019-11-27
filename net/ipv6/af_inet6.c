@@ -296,8 +296,14 @@ static int __inet6_bind(struct sock *sk, struct sockaddr *uaddr, int addr_len,
 		return -EINVAL;
 
 	snum = ntohs(addr->sin6_port);
+<<<<<<< HEAD   (3d21ef ANDROID: KVM: arm64: Fix size calculation of FFA memory rang)
 	if (!(flags & BIND_NO_CAP_NET_BIND_SERVICE) &&
 	    snum && inet_port_requires_bind_service(net, snum) &&
+=======
+	if (snum && inet_is_local_unbindable_port(net, snum))
+		return -EPERM;
+	if (snum && inet_port_requires_bind_service(net, snum) &&
+>>>>>>> CHANGE (8a4b8e ANDROID: net: introduce ip_local_unbindable_ports sysctl)
 	    !ns_capable(net->user_ns, CAP_NET_BIND_SERVICE))
 		return -EACCES;
 
