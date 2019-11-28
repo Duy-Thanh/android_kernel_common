@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ac218de9_a11eec04",
+        "filename": "fs/ext4/ext4.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1980,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2019-11-28T00:56:32Z",
+      "side": 1,
+      "message": "This padding accounts for the space that ext4_extended_dir_entry_2 may occupy, as it is placed immediately after the name, at name[name_len]. Adding in the struct itself would be misleading.",
+      "parentUuid": "ed7e3ba0_1f26f6cf",
+      "revId": "4233b14c0844411511c826ca32066fc0f3c850d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fa28dcc2_28f2341b",
         "filename": "fs/ext4/ext4.h",
         "patchSetId": 6
@@ -65,6 +83,30 @@
     },
     {
       "key": {
+        "uuid": "a2825594_f91ad0c7",
+        "filename": "fs/ext4/ext4.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2039,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2019-11-28T00:56:32Z",
+      "side": 1,
+      "message": "Addressed in a comment in the next version I\u0027m uploading shortly. The dir is NULL if the entry is dot or dotdot, or a similar fake entry, since those don\u0027t need the extended parts.",
+      "parentUuid": "5f89d524_90a3fcff",
+      "range": {
+        "startLine": 2039,
+        "startChar": 5,
+        "endLine": 2039,
+        "endChar": 8
+      },
+      "revId": "4233b14c0844411511c826ca32066fc0f3c850d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b9a1ac54_2084032f",
         "filename": "fs/ext4/ext4.h",
         "patchSetId": 6
@@ -93,6 +135,30 @@
       "writtenOn": "2019-11-26T23:44:58Z",
       "side": 1,
       "message": "Why is \u0027lblk\u0027 being passed around everywhere now?",
+      "range": {
+        "startLine": 2503,
+        "startChar": 7,
+        "endLine": 2503,
+        "endChar": 25
+      },
+      "revId": "4233b14c0844411511c826ca32066fc0f3c850d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f2107dc_e95c12b9",
+        "filename": "fs/ext4/ext4.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2503,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2019-11-28T00:56:32Z",
+      "side": 1,
+      "message": "We need lblk to know whether the entry we\u0027re looking at is dot or dotdot. If it is, then the entry uses the shorter length. We check that in ext4_check_dir_entry",
+      "parentUuid": "83bcc0b8_95110a07",
       "range": {
         "startLine": 2503,
         "startChar": 7,
@@ -185,6 +251,24 @@
       "writtenOn": "2019-11-26T23:44:58Z",
       "side": 1,
       "message": "Won\u0027t there need to be a new ext4 incompat feature flag that indicates the new directory entry format is in use?",
+      "revId": "4233b14c0844411511c826ca32066fc0f3c850d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6399024_9b93da16",
+        "filename": "fs/ext4/super.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3843,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2019-11-28T00:56:32Z",
+      "side": 1,
+      "message": "There is no incompatibility. This used to not be allowed, so there was no directory entry format for it. New filesystems that use this will be blocked from mounting on old kernels by the previous check, and all old filesystems are automatically compatible because they cannot contain casefolded and encrypted entries. Only casefolded and encrypted entries use the extended dirents.",
+      "parentUuid": "b2fa982d_afd8ad9d",
       "revId": "4233b14c0844411511c826ca32066fc0f3c850d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
