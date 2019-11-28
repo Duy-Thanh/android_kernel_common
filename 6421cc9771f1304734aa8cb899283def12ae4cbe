@@ -370,6 +370,30 @@
     },
     {
       "key": {
+        "uuid": "57f12859_6f29080b",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2019-11-28T00:21:46Z",
+      "side": 1,
+      "message": "Yes, although with the other change it isn\u0027t needed anymore.",
+      "parentUuid": "d7723b97_9858934c",
+      "range": {
+        "startLine": 187,
+        "startChar": 32,
+        "endLine": 187,
+        "endChar": 35
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "211f1e1b_7afd3de0",
         "filename": "include/linux/fscrypt.h",
         "patchSetId": 5
@@ -427,6 +451,30 @@
       "writtenOn": "2019-11-25T21:45:39Z",
       "side": 1,
       "message": "What is the padding field for?",
+      "range": {
+        "startLine": 192,
+        "startChar": 1,
+        "endLine": 192,
+        "endChar": 15
+      },
+      "revId": "6421cc9771f1304734aa8cb899283def12ae4cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c73e1b9_cc422e08",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2019-11-28T00:21:46Z",
+      "side": 1,
+      "message": "I was unsure what the compiler would do in the situation where it is 3 bytes off of alignment at the end of the struct, so I added in the padding manually. Probably unneeded.",
+      "parentUuid": "7fa9890d_76a2a295",
       "range": {
         "startLine": 192,
         "startChar": 1,
