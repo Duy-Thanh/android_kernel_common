@@ -22,6 +22,30 @@
       "revId": "23f96be6b03acc73348e76b45ea114b3272b4850",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63d10a5e_b85d7a3b",
+        "filename": "fs/ext4/namei.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1342,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2019-12-02T21:53:19Z",
+      "side": 0,
+      "message": "It now calls fscrypt_fname_disk_to_usr, which does not take a const inode.",
+      "parentUuid": "8598b76d_6af2bd84",
+      "range": {
+        "startLine": 1342,
+        "startChar": 30,
+        "endLine": 1342,
+        "endChar": 35
+      },
+      "revId": "23f96be6b03acc73348e76b45ea114b3272b4850",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
