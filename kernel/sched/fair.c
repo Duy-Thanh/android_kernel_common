@@ -3805,7 +3805,11 @@ util_est_dequeue(struct cfs_rq *cfs_rq, struct task_struct *p, bool task_sleep)
 
 static inline int task_fits_capacity(struct task_struct *p, long capacity)
 {
+#ifdef CONFIG_UCLAMP_TASK
+	return capacity * 1024 > uclamp_task(p) * capacity_margin;
+#else
 	return capacity * 1024 > task_util_est(p) * capacity_margin;
+#endif
 }
 
 static inline void update_misfit_status(struct task_struct *p, struct rq *rq)
