@@ -285,6 +285,9 @@ int __update_load_avg_se(u64 now, struct cfs_rq *cfs_rq, struct sched_entity *se
 		cfs_se_util_change(&se->avg);
 
 		trace_sched_load_se(se);
+		trace_uclamp_util_se(entity_is_task(se),
+				     container_of(se, struct task_struct, se),
+				     rq_of(cfs_rq));
 
 		return 1;
 	}
@@ -298,10 +301,13 @@ int __update_load_avg_cfs_rq(u64 now, struct cfs_rq *cfs_rq)
 				scale_load_down(cfs_rq->load.weight),
 				scale_load_down(cfs_rq->runnable_weight),
 				cfs_rq->curr != NULL)) {
+		unsigned int cpu = cpu_of(rq_of(cfs_rq));
+		bool __maybe_unused is_root_rq = (&cpu_rq(cpu)->cfs == cfs_rq);
 
 		___update_load_avg(&cfs_rq->avg, 1, 1);
 
 		trace_sched_load_cfs_rq(cfs_rq);
+		trace_uclamp_util_cfs(is_root_rq, cpu, cfs_rq);
 
 		return 1;
 	}
