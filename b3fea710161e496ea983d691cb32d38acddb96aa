@@ -118,6 +118,30 @@
       "revId": "b3fea710161e496ea983d691cb32d38acddb96aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71f0737b_d0c3f453",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7059,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-12-05T16:44:10Z",
+      "side": 1,
+      "message": "Now reading the comments again in more details I see that we want 5.4 to move to be like this. So leaving this as-is.",
+      "parentUuid": "25fcc98e_60bd409e",
+      "range": {
+        "startLine": 7059,
+        "startChar": 3,
+        "endLine": 7059,
+        "endChar": 61
+      },
+      "revId": "b3fea710161e496ea983d691cb32d38acddb96aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
