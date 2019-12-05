@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "abf425c1_79007c01",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-12-05T16:23:27Z",
+      "side": 1,
+      "message": "Hi Pavankumar\n\nSorry my earlier comment was accurate.\n\nIf I understand your comment correctly what you\u0027re saying we checked if prefer_idle \u003d\u003d 0 or !\u003d 0 but now we treat true as \u003e 0 which changes the behavior, correct? I don\u0027t know the history to be honest but I think checking for !\u003d 0 is fine by me and I\u0027ll do this change. Not sure if it really make any difference though..",
+      "parentUuid": "cf67dd06_e215a1f8",
+      "range": {
+        "startLine": 16,
+        "startChar": 35,
+        "endLine": 16,
+        "endChar": 56
+      },
+      "revId": "b118f3d56dd6fbe0c252d794664b66b23e497c7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3199d1d1_0ad2c80a",
         "filename": "kernel/sched/core.c",
         "patchSetId": 1
