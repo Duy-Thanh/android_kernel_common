@@ -191,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "123221a8_840644be",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-12-05T15:06:49Z",
+      "side": 1,
+      "message": "As agreed. I\u0027m dropping this patch from the series and will mark it as abandoned.",
+      "parentUuid": "4becc1ec_ed4fc88b",
+      "range": {
+        "startLine": 1226,
+        "startChar": 0,
+        "endLine": 1231,
+        "endChar": 2
+      },
+      "revId": "b118f3d56dd6fbe0c252d794664b66b23e497c7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "deec122d_63334211",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 1
