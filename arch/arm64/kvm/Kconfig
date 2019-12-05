@@ -76,4 +76,12 @@ config PKVM_MODULE_PATH
 	  Directory where the pKVM modules are found. If empty, the modules
 	  will be searched into the default path /lib/modules/<uname>.
 
+config KVM_ARM_HYP_DEBUG_UART
+	bool "Hack up some basic UART functionality at EL2"
+
+config KVM_ARM_HYP_DEBUG_UART_ADDR
+	hex "Physical address of the PL011 for EL2 to use"
+	depends on KVM_ARM_HYP_DEBUG_UART
+	default 0x09000000
+
 endif # VIRTUALIZATION
