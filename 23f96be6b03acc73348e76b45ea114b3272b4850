@@ -46,6 +46,30 @@
       "revId": "23f96be6b03acc73348e76b45ea114b3272b4850",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8365f743_b2a5a6e2",
+        "filename": "fs/ext4/namei.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1342,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-12-05T18:51:22Z",
+      "side": 0,
+      "message": "We should make fscrypt_fname_disk_to_usr() take a const inode instead.  I\u0027m planning to send out a few fscrypt cleanups for 5.6, and I\u0027ll include a patch which does that.",
+      "parentUuid": "63d10a5e_b85d7a3b",
+      "range": {
+        "startLine": 1342,
+        "startChar": 30,
+        "endLine": 1342,
+        "endChar": 35
+      },
+      "revId": "23f96be6b03acc73348e76b45ea114b3272b4850",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
