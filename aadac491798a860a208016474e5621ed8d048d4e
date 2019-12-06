@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee536d29_d66aefac",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1306,
+      "author": {
+        "id": 1598371
+      },
+      "writtenOn": "2019-12-06T09:58:17Z",
+      "side": 1,
+      "message": "Did not commented on the previous note form pavankumar:\n\n   \"until now we treated  prefer_idle as bool (though it is int)\"\n\nbut I still don\u0027t get the reason for this change.\n\nWhichever we got for `prefere_idle` or `latency_sensitive` we are now using an *unsigned* value.\nNegative values are not supported and *0 only* means we are *not* prefere_idle/latency_sensitive.\n\nAm I missing something?\nOtherwise, I honestly find more generic and appropriate the check for \u0027\u003e0\u0027\n\nUnless pavankumar is asking for a signed type because he cares about negative values?\nBut the usage of negative values has never been officially supported by AOSP, does it?",
+      "range": {
+        "startLine": 1306,
+        "startChar": 8,
+        "endLine": 1306,
+        "endChar": 37
+      },
+      "revId": "aadac491798a860a208016474e5621ed8d048d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02faffbe_c1385e52",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7742,
+      "author": {
+        "id": 1598371
+      },
+      "writtenOn": "2019-12-06T09:58:17Z",
+      "side": 1,
+      "message": "Does not this still require user-space changes?\n\nWith respect to `stune.prefer_idle` here we are changing both controller (`cpu` instead of `stune`) and attribute (`latency_sensitive` instead of `prefer_idle`).\n\nBoth the options require a change of the PowerHAL and libperfmanager configuration files.\nHowever, AFAIR, given the new cgroups abstraction library we have, the required changes should be limited to those configuration files.\n\nIf that\u0027s the case, I\u0027m still wondering why adding an (out-of-tree) `latency_sensitive` flag should be much better then just using the (in-tree) `cpu.shares` attribute, which has been already (even if only partially) tested.\n\nHonestly, by setting 1025 instead of 1024 for shares I don\u0027t expect big behavioral changes due to side-effects. I see a much bigger risk in switching from `stune` to the `cpu` controller, since this change forces the usage of task groups, which certainly has a much bigger impact in terms of scheduling decisions.\nBut that\u0027s also a risk we already decided to take and it will be there even if we use the `latency_sensitive` attribute.\n\nSo, the only argument remaining for me is that we prefer an out-of-tree solution vs a still under discussion in-tree solution, which IMHO is a bit weak.\n\nDid I miss something?",
+      "range": {
+        "startLine": 7742,
+        "startChar": 11,
+        "endLine": 7742,
+        "endChar": 35
+      },
+      "revId": "aadac491798a860a208016474e5621ed8d048d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
