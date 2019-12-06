@@ -45,6 +45,30 @@
       "revId": "aadac491798a860a208016474e5621ed8d048d4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7dbffbb5_a62eee7f",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7742,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-12-06T10:14:21Z",
+      "side": 1,
+      "message": "\u003e If that\u0027s the case, I\u0027m still wondering why adding an (out-of-tree) `latency_sensitive` flag should be much better then just using the (in-tree) `cpu.shares` attribute, which has been already (even if only partially) tested.\n\nI find it worse to overload an upstream concept with our stuff. We have out-of-tree code, we add an extra flag, and keep the upstream bits nice and clean instead of hiding things under the carpet.\nYes, switching to uclamp requires userspace changes, but having a dedicated flag keep the _concepts_ the same. I fail to see the benefits of the share-based approach (you need userspace changes in both cases), while I can see how this has risks and is going to confuse partners ...",
+      "parentUuid": "02faffbe_c1385e52",
+      "range": {
+        "startLine": 7742,
+        "startChar": 11,
+        "endLine": 7742,
+        "endChar": 35
+      },
+      "revId": "aadac491798a860a208016474e5621ed8d048d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
