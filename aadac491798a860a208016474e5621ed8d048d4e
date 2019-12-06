@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3d901634_be8809c7",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1306,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-12-06T16:40:44Z",
+      "side": 1,
+      "message": "TBH, I really don\u0027t care. Logically I see them being the same and I don\u0027t prefer one way over the other.",
+      "parentUuid": "ee536d29_d66aefac",
+      "range": {
+        "startLine": 1306,
+        "startChar": 8,
+        "endLine": 1306,
+        "endChar": 37
+      },
+      "revId": "aadac491798a860a208016474e5621ed8d048d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "02faffbe_c1385e52",
         "filename": "kernel/sched/core.c",
         "patchSetId": 2
@@ -60,6 +84,30 @@
       "side": 1,
       "message": "\u003e If that\u0027s the case, I\u0027m still wondering why adding an (out-of-tree) `latency_sensitive` flag should be much better then just using the (in-tree) `cpu.shares` attribute, which has been already (even if only partially) tested.\n\nI find it worse to overload an upstream concept with our stuff. We have out-of-tree code, we add an extra flag, and keep the upstream bits nice and clean instead of hiding things under the carpet.\nYes, switching to uclamp requires userspace changes, but having a dedicated flag keep the _concepts_ the same. I fail to see the benefits of the share-based approach (you need userspace changes in both cases), while I can see how this has risks and is going to confuse partners ...",
       "parentUuid": "02faffbe_c1385e52",
+      "range": {
+        "startLine": 7742,
+        "startChar": 11,
+        "endLine": 7742,
+        "endChar": 35
+      },
+      "revId": "aadac491798a860a208016474e5621ed8d048d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0281062_4d762bd3",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7742,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-12-06T16:40:44Z",
+      "side": 1,
+      "message": "AFAIU this is the solution we will use for 5.4. So we need the same solution here too. This field is used to replace prefer_idle in the energy path so we will need it there anyway, so why not reuse it?\n\nBeside we will have a similar per task and new cgroup attribute in mainline - which we will want to use then. So I see this a closer step towards the intended mainline solution. Unless I got it wrong and we don\u0027t want to use the new latency-{sensitive,nice,tolerance} attribuate that is on the list now?\n\nWhat I care about the most at the moment is that 5.4 and 4.19 behave the same in regard to this feature. Consistency is the key as they are going in together.",
+      "parentUuid": "7dbffbb5_a62eee7f",
       "range": {
         "startLine": 7742,
         "startChar": 11,
