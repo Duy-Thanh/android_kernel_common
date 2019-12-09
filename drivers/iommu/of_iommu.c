@@ -8,7 +8,12 @@
 #include <linux/export.h>
 #include <linux/iommu.h>
 #include <linux/limits.h>
+<<<<<<< HEAD   (5a17e3 ANDROID: gki_defconfig: Enable UCLAMP by default)
 #include <linux/module.h>
+=======
+#include <linux/pci.h>
+#include <linux/msi.h>
+>>>>>>> BRANCH (e42617 Linux 5.5-rc1)
 #include <linux/of.h>
 #include <linux/of_iommu.h>
 #include <linux/of_pci.h>

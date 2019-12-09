@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (5a17e3 ANDROID: gki_defconfig: Enable UCLAMP by default)
 =============
 Ioctl Numbers
 =============
@@ -361,3 +362,5 @@ Code  Seq#    Include File                                           Comments
 0xFD  all    linux/dm-ioctl.h
 0xFE  all    linux/isst_if.h
 ====  =====  ======================================================= ================================================================
+=======
+>>>>>>> BRANCH (e42617 Linux 5.5-rc1)

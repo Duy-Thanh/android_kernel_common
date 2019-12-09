@@ -11,4 +11,8 @@ obj-$(CONFIG_SCSI_UFSHCD_PCI) += ufshcd-pci.o
 obj-$(CONFIG_SCSI_UFSHCD_PLATFORM) += ufshcd-pltfrm.o
 obj-$(CONFIG_SCSI_UFS_HISI) += ufs-hisi.o
 obj-$(CONFIG_SCSI_UFS_MEDIATEK) += ufs-mediatek.o
+<<<<<<< HEAD   (5a17e3 ANDROID: gki_defconfig: Enable UCLAMP by default)
 ufshcd-core-$(CONFIG_SCSI_UFS_CRYPTO) += ufshcd-crypto.o
+=======
+obj-$(CONFIG_SCSI_UFS_TI_J721E) += ti-j721e-ufs.o
+>>>>>>> BRANCH (e42617 Linux 5.5-rc1)

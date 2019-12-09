@@ -46,7 +46,11 @@
  * @enabled_irqs:   Bitmap of currently enabled irqs.
  * @dual_edge_irqs: Bitmap of irqs that need sw emulated dual edge
  *                  detection.
+<<<<<<< HEAD   (5a17e3 ANDROID: gki_defconfig: Enable UCLAMP by default)
  * @skip_wake_irqs: Skip IRQs that are handled by wakeup interrupt contrroller
+=======
+ * @skip_wake_irqs: Skip IRQs that are handled by wakeup interrupt controller
+>>>>>>> BRANCH (e42617 Linux 5.5-rc1)
  * @soc;            Reference to soc_data of platform specific data.
  * @regs:           Base addresses for the TLMM tiles.
  */
@@ -819,10 +823,15 @@ static void msm_gpio_irq_disable(struct irq_data *d)
 	if (d->parent_data)
 		irq_chip_disable_parent(d);
 
+<<<<<<< HEAD   (5a17e3 ANDROID: gki_defconfig: Enable UCLAMP by default)
 	if (test_bit(d->hwirq, pctrl->skip_wake_irqs))
 		return;
 
 	msm_gpio_irq_mask(d);
+=======
+	if (!test_bit(d->hwirq, pctrl->skip_wake_irqs))
+		msm_gpio_irq_mask(d);
+>>>>>>> BRANCH (e42617 Linux 5.5-rc1)
 }
 
 static void msm_gpio_irq_unmask(struct irq_data *d)
@@ -964,6 +973,7 @@ static int msm_gpio_irq_set_wake(struct irq_data *d, unsigned int on)
 	struct msm_pinctrl *pctrl = gpiochip_get_data(gc);
 	unsigned long flags;
 
+<<<<<<< HEAD   (5a17e3 ANDROID: gki_defconfig: Enable UCLAMP by default)
 	if (d->parent_data)
 		irq_chip_set_wake_parent(d, on);
 
@@ -973,6 +983,17 @@ static int msm_gpio_irq_set_wake(struct irq_data *d, unsigned int on)
 	 * when TLMM is powered on. To allow that, enable the GPIO
 	 * summary line to be wakeup capable at GIC.
 	 */
+=======
+	/*
+	 * While they may not wake up when the TLMM is powered off,
+	 * some GPIOs would like to wakeup the system from suspend
+	 * when TLMM is powered on. To allow that, enable the GPIO
+	 * summary line to be wakeup capable at GIC.
+	 */
+	if (d->parent_data)
+		irq_chip_set_wake_parent(d, on);
+
+>>>>>>> BRANCH (e42617 Linux 5.5-rc1)
 	raw_spin_lock_irqsave(&pctrl->lock, flags);
 
 	irq_set_irq_wake(pctrl->irq, on);
@@ -1087,9 +1108,16 @@ static int msm_gpio_init(struct msm_pinctrl *pctrl)
 {
 	struct gpio_chip *chip;
 	struct gpio_irq_chip *girq;
+<<<<<<< HEAD   (5a17e3 ANDROID: gki_defconfig: Enable UCLAMP by default)
 	int ret;
 	unsigned ngpio = pctrl->soc->ngpios;
 	struct device_node *dn;
+=======
+	int i, ret;
+	unsigned gpio, ngpio = pctrl->soc->ngpios;
+	struct device_node *np;
+	bool skip;
+>>>>>>> BRANCH (e42617 Linux 5.5-rc1)
 
 	if (WARN_ON(ngpio > MAX_NR_GPIO))
 		return -EINVAL;
@@ -1116,6 +1144,7 @@ static int msm_gpio_init(struct msm_pinctrl *pctrl)
 	pctrl->irq_chip.irq_request_resources = msm_gpio_irq_reqres;
 	pctrl->irq_chip.irq_release_resources = msm_gpio_irq_relres;
 
+<<<<<<< HEAD   (5a17e3 ANDROID: gki_defconfig: Enable UCLAMP by default)
 	dn = of_parse_phandle(pctrl->dev->of_node, "wakeup-parent", 0);
 	if (dn) {
 		int i;
@@ -1129,6 +1158,21 @@ static int msm_gpio_init(struct msm_pinctrl *pctrl)
 			return -EPROBE_DEFER;
 		chip->irq.child_to_parent_hwirq = msm_gpio_wakeirq;
 
+=======
+	np = of_parse_phandle(pctrl->dev->of_node, "wakeup-parent", 0);
+	if (np) {
+		chip->irq.parent_domain = irq_find_matching_host(np,
+						 DOMAIN_BUS_WAKEUP);
+		of_node_put(np);
+		if (!chip->irq.parent_domain)
+			return -EPROBE_DEFER;
+		chip->irq.child_to_parent_hwirq = msm_gpio_wakeirq;
+
+		/*
+		 * Let's skip handling the GPIOs, if the parent irqchip
+		 * is handling the direct connect IRQ of the GPIO.
+		 */
+>>>>>>> BRANCH (e42617 Linux 5.5-rc1)
 		skip = irq_domain_qcom_handle_wakeup(chip->irq.parent_domain);
 		for (i = 0; skip && i < pctrl->soc->nwakeirq_map; i++) {
 			gpio = pctrl->soc->wakeirq_map[i].gpio;
@@ -1269,8 +1313,7 @@ int msm_pinctrl_probe(struct platform_device *pdev,
 				return PTR_ERR(pctrl->regs[i]);
 		}
 	} else {
-		res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
-		pctrl->regs[0] = devm_ioremap_resource(&pdev->dev, res);
+		pctrl->regs[0] = devm_platform_ioremap_resource(pdev, 0);
 		if (IS_ERR(pctrl->regs[0]))
 			return PTR_ERR(pctrl->regs[0]);
 	}

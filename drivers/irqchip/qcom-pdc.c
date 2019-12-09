@@ -19,8 +19,11 @@
 #include <linux/slab.h>
 #include <linux/types.h>
 
+<<<<<<< HEAD   (5a17e3 ANDROID: gki_defconfig: Enable UCLAMP by default)
 #include <linux/qcom_scm.h>
 
+=======
+>>>>>>> BRANCH (e42617 Linux 5.5-rc1)
 #define PDC_MAX_IRQS		168
 #define PDC_MAX_GPIO_IRQS	256
 
@@ -63,6 +66,26 @@ static u32 pdc_reg_read(int reg, u32 i)
 	return readl_relaxed(pdc_base + reg + i * sizeof(u32));
 }
 
+static int qcom_pdc_gic_get_irqchip_state(struct irq_data *d,
+					  enum irqchip_irq_state which,
+					  bool *state)
+{
+	if (d->hwirq == GPIO_NO_WAKE_IRQ)
+		return 0;
+
+	return irq_chip_get_parent_state(d, which, state);
+}
+
+static int qcom_pdc_gic_set_irqchip_state(struct irq_data *d,
+					  enum irqchip_irq_state which,
+					  bool value)
+{
+	if (d->hwirq == GPIO_NO_WAKE_IRQ)
+		return 0;
+
+	return irq_chip_set_parent_state(d, which, value);
+}
+
 static void pdc_enable_intr(struct irq_data *d, bool on)
 {
 	int pin_out = d->hwirq;
@@ -88,6 +111,7 @@ static void qcom_pdc_gic_disable(struct irq_data *d)
 	irq_chip_disable_parent(d);
 }
 
+<<<<<<< HEAD   (5a17e3 ANDROID: gki_defconfig: Enable UCLAMP by default)
 static int qcom_pdc_gic_get_irqchip_state(struct irq_data *d,
 		enum irqchip_irq_state which, bool *state)
 {
@@ -106,6 +130,8 @@ static int qcom_pdc_gic_set_irqchip_state(struct irq_data *d,
 	return irq_chip_set_parent_state(d, which, value);
 }
 
+=======
+>>>>>>> BRANCH (e42617 Linux 5.5-rc1)
 static void qcom_pdc_gic_enable(struct irq_data *d)
 {
 	if (d->hwirq == GPIO_NO_WAKE_IRQ)
@@ -222,6 +248,9 @@ static int qcom_pdc_gic_set_type(struct irq_data *d, unsigned int type)
 	int parent_hwirq = d->parent_data->hwirq;
 	enum pdc_irq_config_bits pdc_type;
 	int ret;
+
+	if (pin_out == GPIO_NO_WAKE_IRQ)
+		return 0;
 
 	if (pin_out == GPIO_NO_WAKE_IRQ)
 		return 0;
@@ -445,7 +474,10 @@ static int pdc_setup_pin_mapping(struct device_node *np)
 static int qcom_pdc_init(struct device_node *node, struct device_node *parent)
 {
 	struct irq_domain *parent_domain, *pdc_domain, *pdc_gpio_domain;
+<<<<<<< HEAD   (5a17e3 ANDROID: gki_defconfig: Enable UCLAMP by default)
 	struct resource res;
+=======
+>>>>>>> BRANCH (e42617 Linux 5.5-rc1)
 	int ret;
 
 	pdc_base = of_iomap(node, 0);
@@ -476,6 +508,7 @@ static int qcom_pdc_init(struct device_node *node, struct device_node *parent)
 		goto fail;
 	}
 
+<<<<<<< HEAD   (5a17e3 ANDROID: gki_defconfig: Enable UCLAMP by default)
 	ret = of_address_to_resource(node, 1, &res);
 	if (!ret) {
 		spi_cfg = kcalloc(1, sizeof(*spi_cfg), GFP_KERNEL);
@@ -502,6 +535,13 @@ static int qcom_pdc_init(struct device_node *node, struct device_node *parent)
 						      PDC_MAX_GPIO_IRQS,
 						      of_fwnode_handle(node),
 						      &qcom_pdc_gpio_ops, NULL);
+=======
+	pdc_gpio_domain = irq_domain_create_hierarchy(parent_domain,
+					IRQ_DOMAIN_FLAG_QCOM_PDC_WAKEUP,
+					PDC_MAX_GPIO_IRQS,
+					of_fwnode_handle(node),
+					&qcom_pdc_gpio_ops, NULL);
+>>>>>>> BRANCH (e42617 Linux 5.5-rc1)
 	if (!pdc_gpio_domain) {
 		pr_err("%pOF: PDC domain add failed for GPIO domain\n", node);
 		ret = -ENOMEM;
@@ -514,11 +554,14 @@ static int qcom_pdc_init(struct device_node *node, struct device_node *parent)
 
 remove:
 	irq_domain_remove(pdc_domain);
+<<<<<<< HEAD   (5a17e3 ANDROID: gki_defconfig: Enable UCLAMP by default)
 	kfree(spi_cfg);
+=======
+>>>>>>> BRANCH (e42617 Linux 5.5-rc1)
 fail:
 	kfree(pdc_region);
 	iounmap(pdc_base);
 	return ret;
 }
 
-IRQCHIP_DECLARE(pdc_sdm845, "qcom,sdm845-pdc", qcom_pdc_init);
+IRQCHIP_DECLARE(qcom_pdc, "qcom,pdc", qcom_pdc_init);

@@ -166,6 +166,7 @@ struct fscrypt_info {
 	/* The actual crypto transform used for encryption and decryption */
 	struct crypto_skcipher *ci_ctfm;
 
+<<<<<<< HEAD   (5a17e3 ANDROID: gki_defconfig: Enable UCLAMP by default)
 #ifdef CONFIG_FS_ENCRYPTION_INLINE_CRYPT
 	/*
 	 * The raw key for inline encryption, if this file is using inline
@@ -174,6 +175,8 @@ struct fscrypt_info {
 	const u8 *ci_inline_crypt_key;
 #endif
 
+=======
+>>>>>>> BRANCH (e42617 Linux 5.5-rc1)
 	/* True if the key should be freed when this fscrypt_info is freed */
 	bool ci_owns_key;
 
@@ -443,6 +446,15 @@ struct fscrypt_master_key {
 
 	/* Crypto API transforms for DIRECT_KEY policies, allocated on-demand */
 	struct crypto_skcipher	*mk_direct_tfms[__FSCRYPT_MODE_MAX + 1];
+<<<<<<< HEAD   (5a17e3 ANDROID: gki_defconfig: Enable UCLAMP by default)
+=======
+
+	/*
+	 * Crypto API transforms for filesystem-layer implementation of
+	 * IV_INO_LBLK_64 policies, allocated on-demand.
+	 */
+	struct crypto_skcipher	*mk_iv_ino_lblk_64_tfms[__FSCRYPT_MODE_MAX + 1];
+>>>>>>> BRANCH (e42617 Linux 5.5-rc1)
 
 	/*
 	 * Crypto API transforms for filesystem-layer implementation of
@@ -514,8 +526,12 @@ struct fscrypt_mode {
 	const char *cipher_str;
 	int keysize;
 	int ivsize;
+<<<<<<< HEAD   (5a17e3 ANDROID: gki_defconfig: Enable UCLAMP by default)
 	enum blk_crypto_mode_num blk_crypto_mode;
 	bool logged_impl_name;
+=======
+	int logged_impl_name;
+>>>>>>> BRANCH (e42617 Linux 5.5-rc1)
 };
 
 extern struct fscrypt_mode fscrypt_modes[];

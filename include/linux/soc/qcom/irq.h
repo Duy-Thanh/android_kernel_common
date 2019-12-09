@@ -21,6 +21,7 @@
 /**
  * irq_domain_qcom_handle_wakeup: Return if the domain handles interrupt
  *                                configuration
+<<<<<<< HEAD   (5a17e3 ANDROID: gki_defconfig: Enable UCLAMP by default)
  * @parent: irq domain
  *
  * This QCOM specific irq domain call returns if the interrupt controller
@@ -29,6 +30,16 @@
 static inline bool irq_domain_qcom_handle_wakeup(struct irq_domain *parent)
 {
 	return (parent->flags & IRQ_DOMAIN_FLAG_QCOM_PDC_WAKEUP);
+=======
+ * @d: irq domain
+ *
+ * This QCOM specific irq domain call returns if the interrupt controller
+ * requires the interrupt be masked at the child interrupt controller.
+ */
+static inline bool irq_domain_qcom_handle_wakeup(const struct irq_domain *d)
+{
+	return (d->flags & IRQ_DOMAIN_FLAG_QCOM_PDC_WAKEUP);
+>>>>>>> BRANCH (e42617 Linux 5.5-rc1)
 }
 
 #endif

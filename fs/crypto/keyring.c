@@ -47,8 +47,11 @@ static void free_master_key(struct fscrypt_master_key *mk)
 		crypto_free_skcipher(mk->mk_direct_tfms[i]);
 		crypto_free_skcipher(mk->mk_iv_ino_lblk_64_tfms[i]);
 	}
+<<<<<<< HEAD   (5a17e3 ANDROID: gki_defconfig: Enable UCLAMP by default)
 
 	fscrypt_evict_inline_crypt_keys(mk);
+=======
+>>>>>>> BRANCH (e42617 Linux 5.5-rc1)
 
 	key_put(mk->mk_users);
 	kzfree(mk);
