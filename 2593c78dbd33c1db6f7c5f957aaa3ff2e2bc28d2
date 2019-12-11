@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24240621_19385ef2",
+        "filename": "drivers/platform/msm/msm-geni-se.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-12-11T12:42:59Z",
+      "side": 1,
+      "message": "why do all of these wrapper functions need to be exported?  Why can\u0027t you just use the \"real\" calls instead?",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 13
+      },
+      "revId": "2593c78dbd33c1db6f7c5f957aaa3ff2e2bc28d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
