@@ -577,10 +577,6 @@ static struct task_struct *find_child_reaper(struct task_struct *father,
 	}
 
 	write_unlock_irq(&tasklist_lock);
-	if (unlikely(pid_ns == &init_pid_ns)) {
-		panic("Attempted to kill init! exitcode=0x%08x\n",
-			father->signal->group_exit_code ?: father->exit_code);
-	}
 
 	list_for_each_entry_safe(p, n, dead, ptrace_entry) {
 		list_del_init(&p->ptrace_entry);
@@ -783,6 +779,9 @@ void __noreturn do_exit(long code)
 		panic("Aiee, killing interrupt handler!");
 	if (unlikely(!tsk->pid))
 		panic("Attempted to kill the idle task!");
+	if (unlikely(is_global_init(tsk) &&
+		(signal_group_exit(tsk->signal) || thread_group_empty(tsk))))
+		panic("Attempted to kill init! exitcode=0x%08lx\n", code);
 
 	/*
 	 * If do_exit is called because this processes oopsed, it's possible
