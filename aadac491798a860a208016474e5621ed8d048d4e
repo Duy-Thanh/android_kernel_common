@@ -117,6 +117,30 @@
       "revId": "aadac491798a860a208016474e5621ed8d048d4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c64fe5b_e318e82f",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7742,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2019-12-12T03:35:23Z",
+      "side": 1,
+      "message": "Also note that userspace change related to latency_sensitive attribute will be contained within task profile abstraction. Therefore if that flag changes later on the change will affect only task_profiles.json file.",
+      "parentUuid": "e0281062_4d762bd3",
+      "range": {
+        "startLine": 7742,
+        "startChar": 11,
+        "endLine": 7742,
+        "endChar": 35
+      },
+      "revId": "aadac491798a860a208016474e5621ed8d048d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
