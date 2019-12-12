@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0d7da32_f82c73c2",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6991,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2019-12-12T03:43:41Z",
+      "side": 0,
+      "message": "This looks identical to task_fits_capacity(). Could we enhance and reuse it here? Would that also cover the case when stune is being used?",
+      "range": {
+        "startLine": 6991,
+        "startChar": 7,
+        "endLine": 6991,
+        "endChar": 46
+      },
+      "revId": "e12f9722f0a3b98488a5bb212b81c0d10da64f26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
