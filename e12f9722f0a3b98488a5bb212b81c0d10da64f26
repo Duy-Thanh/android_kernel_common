@@ -22,6 +22,30 @@
       "revId": "e12f9722f0a3b98488a5bb212b81c0d10da64f26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7181b02f_120ac351",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6991,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-12-12T12:09:32Z",
+      "side": 0,
+      "message": "min_cap is the return value of uclamp_task(); which will take stune boost into account if !CONFIG_UCLAMP \u0026\u0026 CONFIG_SCHED_TUNE. Otherwise it\u0027ll just use task_util_est() if both are disabled.\n\ntask_fits_capacity() will do something different.\n\nIt seems yes we can refactor the code to unify how this is used, but I think it\u0027s a bit too late in the cycle for this now as it\u0027d be a bit intrusive and there\u0027s some delicacy that I can\u0027t easily verify from my end. So sticking to this feels the safer option.",
+      "parentUuid": "c0d7da32_f82c73c2",
+      "range": {
+        "startLine": 6991,
+        "startChar": 7,
+        "endLine": 6991,
+        "endChar": 46
+      },
+      "revId": "e12f9722f0a3b98488a5bb212b81c0d10da64f26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
