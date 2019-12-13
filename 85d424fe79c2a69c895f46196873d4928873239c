@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "4aecb413_717a410d",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 12
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-12-13T19:59:44Z",
+      "side": 1,
+      "message": "For cases that should be modules but are currently broken as modules, maybe Kconfig.gki is the place to enable them temporarily while we figure it out (and we should file a bug to track them). Better if we can make them modules.",
+      "parentUuid": "097caecd_f049c793",
+      "revId": "85d424fe79c2a69c895f46196873d4928873239c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f776eb38_f03312fa",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 12
