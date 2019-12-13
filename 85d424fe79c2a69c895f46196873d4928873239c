@@ -16,6 +16,24 @@
       "revId": "85d424fe79c2a69c895f46196873d4928873239c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a138212_9cf393fd",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 12
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-12-13T19:50:16Z",
+      "side": 1,
+      "message": "Can\u0027t this be a module enabled in db845c_gki_defconfig?",
+      "parentUuid": "3f44aa33_eff0c758",
+      "revId": "85d424fe79c2a69c895f46196873d4928873239c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
