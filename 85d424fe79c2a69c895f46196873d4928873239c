@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "097caecd_f049c793",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 12
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-12-13T19:57:15Z",
+      "side": 1,
+      "message": "I\u0027ll give it a try again, as maybe the clk of-link stuff might have changed the situation since I last tested, but previously the device wouldn\u0027t boot and Bjorn made it seem like he didn\u0027t expect things to work without the clk driver built in.",
+      "parentUuid": "9a138212_9cf393fd",
+      "revId": "85d424fe79c2a69c895f46196873d4928873239c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f776eb38_f03312fa",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 12
