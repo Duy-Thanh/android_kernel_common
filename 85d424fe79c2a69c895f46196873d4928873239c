@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f44aa33_eff0c758",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 12
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2019-12-13T19:42:26Z",
+      "side": 1,
+      "message": "I thought gki_defconfig should not add SOC specific drivers, isn\u0027t it? Are we going to add Samsung and other SOC vendors clock drivers as well here?",
+      "revId": "85d424fe79c2a69c895f46196873d4928873239c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
