@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "34f37bec_c8508665",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 12
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-12-14T01:16:32Z",
+      "side": 1,
+      "message": "On this one, we run into trouble because the display smmu (smmu is built in) uses the gpucc (now a module) as the power domain. As we initialize the power domain via __genpd_dev_pm_attach(), we call driver_deferred_probe_check_state() which after initcall_done is set, returns ENODEV which causes the smmu to fail to initialize, despite the gpucc module loading shortly afterwards.\n\nI\u0027ve dug around and it looks like reverting https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003de01afc32502555beb2057ddd74401be38475d851\n\nlets it work when the gpucc is a module.\n\nI\u0027ll need to see what a proper fix would be for this.",
+      "parentUuid": "4aecb413_717a410d",
+      "revId": "85d424fe79c2a69c895f46196873d4928873239c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f776eb38_f03312fa",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 12
@@ -101,6 +119,30 @@
       "writtenOn": "2019-12-13T19:56:37Z",
       "side": 1,
       "message": "module in db845c_gki_defconfig?",
+      "range": {
+        "startLine": 384,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 21
+      },
+      "revId": "85d424fe79c2a69c895f46196873d4928873239c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efee70a5_2a7f6da6",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 12
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-12-14T01:16:32Z",
+      "side": 1,
+      "message": "So this one seems to work as a module now. Updating patchset.",
+      "parentUuid": "f776eb38_f03312fa",
       "range": {
         "startLine": 384,
         "startChar": 0,
