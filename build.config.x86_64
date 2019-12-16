@@ -9,3 +9,6 @@ arch/x86/boot/bzImage
 vmlinux
 System.map
 "
+EXT_MODULES="
+cuttlefish-modules/wlan_simulation/
+"
