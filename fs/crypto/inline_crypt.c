@@ -361,8 +361,7 @@ bool fscrypt_mergeable_bio(struct bio *bio, const struct inode *inode,
 	 */
 	return next_key == bc->raw_key &&
 		next_dun == bc->data_unit_num +
-			    (bio_sectors(bio) >>
-			     (bc->data_unit_size_bits - SECTOR_SHIFT));
+			    (bio->bi_iter.bi_size >> bc->data_unit_size_bits);
 }
 EXPORT_SYMBOL_GPL(fscrypt_mergeable_bio);
 

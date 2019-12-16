@@ -495,9 +495,6 @@ static inline int ll_new_hw_segment(struct request_queue *q,
 	if (blk_integrity_merge_bio(q, req, bio) == false)
 		goto no_merge;
 
-	if (WARN_ON_ONCE(!bio_crypt_ctx_compatible(bio, req->bio)))
-		goto no_merge;
-
 	/*
 	 * This will form the start of a new hw segment.  Bump both
 	 * counters.
@@ -517,6 +514,8 @@ int ll_back_merge_fn(struct request_queue *q, struct request *req,
 		return 0;
 	if (blk_integrity_rq(req) &&
 	    integrity_req_gap_back_merge(req, bio))
+		return 0;
+	if (!bio_crypt_ctx_mergeable(req->bio, blk_rq_bytes(req), bio))
 		return 0;
 	if (blk_rq_sectors(req) + bio_sectors(bio) >
 	    blk_rq_get_max_sectors(req, blk_rq_pos(req))) {
@@ -539,6 +538,8 @@ int ll_front_merge_fn(struct request_queue *q, struct request *req,
 		return 0;
 	if (blk_integrity_rq(req) &&
 	    integrity_req_gap_front_merge(req, bio))
+		return 0;
+	if (!bio_crypt_ctx_mergeable(bio, bio->bi_iter.bi_size, req->bio))
 		return 0;
 	if (blk_rq_sectors(req) + bio_sectors(bio) >
 	    blk_rq_get_max_sectors(req, bio->bi_iter.bi_sector)) {
@@ -619,6 +620,9 @@ static int ll_merge_requests_fn(struct request_queue *q, struct request *req,
 		return 0;
 
 	if (blk_integrity_merge_rq(q, req, next) == false)
+		return 0;
+
+	if (!bio_crypt_ctx_mergeable(req->bio, blk_rq_bytes(req), next->bio))
 		return 0;
 
 	/* Merge is OK... */
@@ -729,11 +733,6 @@ static struct request *attempt_merge(struct request_queue *q,
 	 */
 	if (req->write_hint != next->write_hint)
 		return NULL;
-
-	if (!bio_crypt_ctx_back_mergeable(req->bio, blk_rq_sectors(req),
-					  next->bio)) {
-		return NULL;
-	}
 
 	/*
 	 * If we are allowed to merge, then append bio list
@@ -861,6 +860,10 @@ bool blk_rq_merge_ok(struct request *rq, struct bio *bio)
 	if (blk_integrity_merge_bio(rq->q, rq, bio) == false)
 		return false;
 
+	/* must have compatible encryption contexts */
+	if (!bio_crypt_ctx_compatible(rq->bio, bio))
+		return false;
+
 	/* must be using the same buffer */
 	if (req_op(rq) == REQ_OP_WRITE_SAME &&
 	    !blk_write_same_mergeable(rq->bio, bio))
@@ -873,31 +876,16 @@ bool blk_rq_merge_ok(struct request *rq, struct bio *bio)
 	if (rq->write_hint != bio->bi_write_hint)
 		return false;
 
-	/* Only merge if the crypt contexts are compatible */
-	if (!bio_crypt_ctx_compatible(bio, rq->bio))
-		return false;
-
 	return true;
 }
 
 enum elv_merge blk_try_merge(struct request *rq, struct bio *bio)
 {
-	if (blk_discard_mergable(rq)) {
+	if (blk_discard_mergable(rq))
 		return ELEVATOR_DISCARD_MERGE;
-	} else if (blk_rq_pos(rq) + blk_rq_sectors(rq) ==
-		   bio->bi_iter.bi_sector) {
-		if (!bio_crypt_ctx_back_mergeable(rq->bio,
-						  blk_rq_sectors(rq), bio)) {
-			return ELEVATOR_NO_MERGE;
-		}
+	else if (blk_rq_pos(rq) + blk_rq_sectors(rq) == bio->bi_iter.bi_sector)
 		return ELEVATOR_BACK_MERGE;
-	} else if (blk_rq_pos(rq) - bio_sectors(bio) ==
-		   bio->bi_iter.bi_sector) {
-		if (!bio_crypt_ctx_back_mergeable(bio,
-						  bio_sectors(bio), rq->bio)) {
-			return ELEVATOR_NO_MERGE;
-		}
+	else if (blk_rq_pos(rq) - bio_sectors(bio) == bio->bi_iter.bi_sector)
 		return ELEVATOR_FRONT_MERGE;
-	}
 	return ELEVATOR_NO_MERGE;
 }

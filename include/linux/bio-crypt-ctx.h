@@ -137,9 +137,8 @@ extern bool bio_crypt_should_process(struct bio *bio, struct request_queue *q);
 
 extern bool bio_crypt_ctx_compatible(struct bio *b_1, struct bio *b_2);
 
-extern bool bio_crypt_ctx_back_mergeable(struct bio *b_1,
-					 unsigned int b1_sectors,
-					 struct bio *b_2);
+extern bool bio_crypt_ctx_mergeable(struct bio *b_1, unsigned int b1_bytes,
+				    struct bio *b_2);
 
 #else /* CONFIG_BLK_INLINE_ENCRYPTION */
 struct keyslot_manager;
@@ -214,9 +213,9 @@ static inline bool bio_crypt_ctx_compatible(struct bio *b_1, struct bio *b_2)
 	return true;
 }
 
-static inline bool bio_crypt_ctx_back_mergeable(struct bio *b_1,
-						unsigned int b1_sectors,
-						struct bio *b_2)
+static inline bool bio_crypt_ctx_mergeable(struct bio *b_1,
+					   unsigned int b1_bytes,
+					   struct bio *b_2)
 {
 	return true;
 }

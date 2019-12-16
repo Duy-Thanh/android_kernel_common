@@ -79,8 +79,10 @@ bool bio_crypt_should_process(struct bio *bio, struct request_queue *q)
 EXPORT_SYMBOL(bio_crypt_should_process);
 
 /*
- * Checks that two bio crypt contexts are compatible - i.e. that
- * they are mergeable except for data_unit_num continuity.
+ * Returns true if either both bios are unencrypted, or if they're both
+ * encrypted with the same key and thus are possibly mergeable.  This doesn't
+ * consider any particular merge direction; bio_crypt_ctx_mergeable() must still
+ * be called later to check the merge direction.
  */
 bool bio_crypt_ctx_compatible(struct bio *b_1, struct bio *b_2)
 {
@@ -98,12 +100,11 @@ bool bio_crypt_ctx_compatible(struct bio *b_1, struct bio *b_2)
 }
 
 /*
- * Checks that two bio crypt contexts are compatible, and also
- * that their data_unit_nums are continuous (and can hence be merged)
+ * Like bio_crypt_ctx_compatible(), but also checks that the data unit numbers
+ * are contiguous such that b_1 and b_2 can be merged in that order.
  */
-bool bio_crypt_ctx_back_mergeable(struct bio *b_1,
-				  unsigned int b1_sectors,
-				  struct bio *b_2)
+bool bio_crypt_ctx_mergeable(struct bio *b_1, unsigned int b1_bytes,
+			     struct bio *b_2)
 {
 	struct bio_crypt_ctx *bc1 = b_1->bi_crypt_context;
 	struct bio_crypt_ctx *bc2 = b_2->bi_crypt_context;
@@ -112,9 +113,8 @@ bool bio_crypt_ctx_back_mergeable(struct bio *b_1,
 		return false;
 
 	return !bio_has_crypt_ctx(b_1) ||
-		(bc1->data_unit_num +
-		(b1_sectors >> (bc1->data_unit_size_bits - 9)) ==
-		bc2->data_unit_num);
+		(bc1->data_unit_num + (b1_bytes >> bc1->data_unit_size_bits) ==
+		 bc2->data_unit_num);
 }
 
 void bio_crypt_ctx_release_keyslot(struct bio *bio)
