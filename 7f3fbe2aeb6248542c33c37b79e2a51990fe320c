@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48388866_0b072907",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-12-17T16:47:20Z",
+      "side": 1,
+      "message": "That\u0027s no longer true given that we use the out-of-tree latency-sensitive flag. Also it\u0027d be good to mention the changes you made to the original patch.",
+      "revId": "7f3fbe2aeb6248542c33c37b79e2a51990fe320c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
