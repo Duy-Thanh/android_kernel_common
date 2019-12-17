@@ -210,6 +210,10 @@ int keyslot_manager_get_slot_for_key(struct keyslot_manager *ksm,
 	int err;
 	struct keyslot *idle_slot;
 
+	/* If keyslot manager is passthrough, always return slot 0. */
+	if (ksm->num_slots == 0)
+		return 0;
+
 	down_read(&ksm->lock);
 	slot = find_and_grab_keyslot(ksm, key);
 	up_read(&ksm->lock);
@@ -292,6 +296,10 @@ void keyslot_manager_put_slot(struct keyslot_manager *ksm, unsigned int slot)
 {
 	unsigned long flags;
 
+	/* If keyslot manager is passthrough, nothing to do */
+	if (ksm->num_slots == 0)
+		return;
+
 	if (WARN_ON(slot >= ksm->num_slots))
 		return;
 
@@ -351,6 +359,12 @@ int keyslot_manager_evict_key(struct keyslot_manager *ksm,
 	int err;
 	struct keyslot *slotp;
 
+	if (keyslot_manager_is_passthrough(ksm)) {
+		if (ksm->ksm_ll_ops.keyslot_evict)
+			return ksm->ksm_ll_ops.keyslot_evict(ksm, key, -1);
+		return 0;
+	}
+
 	down_write(&ksm->lock);
 	slot = find_keyslot(ksm, key);
 	if (slot < 0) {
@@ -388,6 +402,9 @@ void keyslot_manager_reprogram_all_keys(struct keyslot_manager *ksm)
 {
 	unsigned int slot;
 
+	if (WARN_ON(keyslot_manager_is_passthrough(ksm)))
+		return;
+
 	down_write(&ksm->lock);
 	for (slot = 0; slot < ksm->num_slots; slot++) {
 		const struct keyslot *slotp = &ksm->slots[slot];
@@ -424,3 +441,45 @@ void keyslot_manager_destroy(struct keyslot_manager *ksm)
 	}
 }
 EXPORT_SYMBOL_GPL(keyslot_manager_destroy);
+
+/**
+ * keyslot_manager_create_passthrough() - Create a passthrough keyslot manager
+ * @ksm_ll_ops: The struct keyslot_mgmt_ll_ops for the device that this keyslot
+ *		manager will use to perform operations like evicting keys and
+ *		querying capabilities.
+ * @ll_priv_data: Private data passed as is to the functions in ksm_ll_ops.
+ *
+ * Allocate memory for and initialize a passthrough keyslot manager.
+ * Called by e.g. storage drivers to set up a keyslot manager in their
+ * request_queue, when the storage driver wants to manage its keys by itself.
+ * This is useful for inline encryption hardware that don't have a small fixed
+ * number of keyslots, and for layered devices.
+ *
+ * Context: This function may sleep
+ * Return: Pointer to constructed keyslot manager or NULL on error.
+ */
+struct keyslot_manager *keyslot_manager_create_passthrough(
+	const struct keyslot_mgmt_ll_ops *ksm_ll_ops,
+	const unsigned int crypto_mode_supported[BLK_ENCRYPTION_MODE_MAX],
+	void *ll_priv_data)
+{
+	struct keyslot_manager *ksm;
+
+	ksm = kzalloc(sizeof(*ksm), GFP_KERNEL);
+	if (!ksm)
+		return NULL;
+
+	ksm->num_slots = 0;
+	ksm->ll_priv_data = ll_priv_data;
+	ksm->ksm_ll_ops = *ksm_ll_ops;
+	memcpy(ksm->crypto_mode_supported, crypto_mode_supported,
+	       sizeof(ksm->crypto_mode_supported));
+	return ksm;
+}
+EXPORT_SYMBOL_GPL(keyslot_manager_create_passthrough);
+
+bool keyslot_manager_is_passthrough(struct keyslot_manager *ksm)
+{
+	return ksm->num_slots == 0;
+}
+EXPORT_SYMBOL_GPL(keyslot_manager_is_passthrough);
