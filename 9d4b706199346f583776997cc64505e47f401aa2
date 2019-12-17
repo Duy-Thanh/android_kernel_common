@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cab64e3e_d4711fa6",
+        "filename": "drivers/reset/hisilicon/hi6220_reset.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1467115
+      },
+      "writtenOn": "2019-12-17T10:48:14Z",
+      "side": 1,
+      "message": "I guess this version is fine, although there was a v2 of this patch which addressed some of the review feedback about returning on error immediately https://lkml.org/lkml/2019/4/19/253",
+      "revId": "9d4b706199346f583776997cc64505e47f401aa2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
