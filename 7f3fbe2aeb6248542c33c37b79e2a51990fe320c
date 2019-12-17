@@ -16,6 +16,24 @@
       "revId": "7f3fbe2aeb6248542c33c37b79e2a51990fe320c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a7174fa_cfbd6163",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-12-17T16:48:53Z",
+      "side": 1,
+      "message": "Okay. I\u0027ll update the commit message and push a new version tomorrow. Thanks!",
+      "parentUuid": "48388866_0b072907",
+      "revId": "7f3fbe2aeb6248542c33c37b79e2a51990fe320c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
