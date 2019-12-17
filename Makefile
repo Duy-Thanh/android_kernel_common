@@ -596,6 +596,8 @@ ifeq ($(dot-config),1)
 -include include/config/auto.conf
 
 ifeq ($(KBUILD_EXTMOD),)
+include/config/auto.conf.cmd: check-clang-specific-options
+
 # Read in dependencies to all Kconfig* files, make sure to run
 # oldconfig if changes are detected.
 -include include/config/auto.conf.cmd
@@ -1222,6 +1224,24 @@ ifdef CONFIG_UNWINDER_ORC
 	@false
 else
 	@echo "warning: Cannot use CONFIG_STACK_VALIDATION=y, please install libelf-dev, libelf-devel or elfutils-libelf-devel" >&2
+endif
+endif
+
+# Disable clang-specific config options when using a different compiler
+PHONY += check-clang-specific-options
+check-clang-specific-options: $(KCONFIG_CONFIG) FORCE
+ifneq ($(cc-name),clang)
+ifneq ($(findstring y,$(shell $(CONFIG_SHELL) \
+	$(srctree)/scripts/config --file $(KCONFIG_CONFIG) \
+		-s LTO_CLANG \
+		-s CFI_CLANG \
+		-s SHADOW_CALL_STACK)),)
+	@echo WARNING: Disabling clang-specific options with $(cc-name) >&2
+	$(Q)$(srctree)/scripts/config --file $(KCONFIG_CONFIG) \
+			-d LTO_CLANG \
+			-d CFI_CLANG \
+			-d SHADOW_CALL_STACK && \
+	$(MAKE) -f $(srctree)/Makefile olddefconfig
 endif
 endif
 
