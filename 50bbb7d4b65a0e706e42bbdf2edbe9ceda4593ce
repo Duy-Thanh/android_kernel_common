@@ -216,6 +216,30 @@
     },
     {
       "key": {
+        "uuid": "5bcff011_e54e6fcb",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1236,
+      "author": {
+        "id": 1598371
+      },
+      "writtenOn": "2019-12-18T16:51:37Z",
+      "side": 1,
+      "message": "Maybe, just for the shake of consistency, we should use the same pattern we use for the schedtune wrappers defined below (L1303)?\n\n\n    bool uclamp_latency_sensitive(struct task_struct *p)\n    {\n    #ifdef CONFIG_UCLAMP_TASK_GROUP\n        // The original code we have\n    #else\n        return false;\n    #endif",
+      "parentUuid": "ea08656f_16d120a3",
+      "range": {
+        "startLine": 1231,
+        "startChar": 0,
+        "endLine": 1236,
+        "endChar": 6
+      },
+      "revId": "50bbb7d4b65a0e706e42bbdf2edbe9ceda4593ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18bec5f3_c9fec5b6",
         "filename": "kernel/sched/sched.h",
         "patchSetId": 6
