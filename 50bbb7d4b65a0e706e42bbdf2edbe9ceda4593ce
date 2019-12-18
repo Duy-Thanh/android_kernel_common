@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "cfaefaa9_eb401ab8",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1219,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-12-18T15:26:05Z",
+      "side": 1,
+      "message": "You and Suren caught a lot of things that I missed. So thanks for your hawkeyes anyways! :)\n\nFWIW, I approached PeterZ to see what would be the best approach to handle controlling the default RT task util_min. If the solution is simple I might be able to get something FROMLIST backported. And we have a patch for the boost holding that I need to test and upload. But timing is too tight before xmas..",
+      "parentUuid": "212d8006_b0a55e16",
+      "range": {
+        "startLine": 1219,
+        "startChar": 0,
+        "endLine": 1219,
+        "endChar": 31
+      },
+      "revId": "50bbb7d4b65a0e706e42bbdf2edbe9ceda4593ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6980fc0_cc20e45e",
         "filename": "kernel/sched/core.c",
         "patchSetId": 6
