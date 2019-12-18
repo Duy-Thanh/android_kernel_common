@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "db784955_5ba579ef",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1219,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-12-18T14:56:07Z",
+      "side": 1,
+      "message": "Not as far as I can see. We are protected by #ifdef CONFIG_UCLAMP_TASK, but not \u0027_GROUP\u0027.",
+      "parentUuid": "bf365b1b_b7ec8aa5",
+      "range": {
+        "startLine": 1219,
+        "startChar": 0,
+        "endLine": 1219,
+        "endChar": 31
+      },
+      "revId": "50bbb7d4b65a0e706e42bbdf2edbe9ceda4593ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d6980fc0_cc20e45e",
         "filename": "kernel/sched/core.c",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2019-12-18T12:15:08Z",
       "side": 1,
       "message": "this is not needed I think",
+      "range": {
+        "startLine": 1231,
+        "startChar": 0,
+        "endLine": 1236,
+        "endChar": 6
+      },
+      "revId": "50bbb7d4b65a0e706e42bbdf2edbe9ceda4593ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8dc3e2d_647b6f9b",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1236,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-12-18T14:56:07Z",
+      "side": 1,
+      "message": "It is. we have 3 definitions for this.\n\n1. CONFIG_UCLAMP_TASK \u0026\u0026 CONFIG_UCLAMP_TASK_GROUP\n2. CONFIG_UCLAMP_TASK \u0026\u0026 ! CONFIG_UCLAMP_TASK_GROUP\n3. !CONFIG_UCLAMP_TASK\n\n#3 Ensures that the function fallsback to schedtune behavior if CONFIG_SCHED_TUNE is defined.",
+      "parentUuid": "d6980fc0_cc20e45e",
       "range": {
         "startLine": 1231,
         "startChar": 0,
@@ -68,6 +116,30 @@
       "revId": "50bbb7d4b65a0e706e42bbdf2edbe9ceda4593ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34fc5bde_45b97f88",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-12-18T14:56:07Z",
+      "side": 1,
+      "message": "Indeed. Removed it. Thanks!",
+      "parentUuid": "18bec5f3_c9fec5b6",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 1
+      },
+      "revId": "50bbb7d4b65a0e706e42bbdf2edbe9ceda4593ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
