@@ -22,6 +22,30 @@
       "revId": "8cb6cff709664ffd60a9f431ad61ffa9308ce658",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76465db3_4f85c42c",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6981,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-12-18T16:41:48Z",
+      "side": 1,
+      "message": "Yep! 😞 Fixed now in the previous patch where we do the conversion (ANDROID: sched/core: Move SchedTune task API into UtilClamp wrappers)",
+      "parentUuid": "c70b77b6_8ff13286",
+      "range": {
+        "startLine": 6980,
+        "startChar": 1,
+        "endLine": 6981,
+        "endChar": 44
+      },
+      "revId": "8cb6cff709664ffd60a9f431ad61ffa9308ce658",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
