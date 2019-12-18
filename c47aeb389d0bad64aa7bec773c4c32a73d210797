@@ -34,6 +34,24 @@
       "revId": "c47aeb389d0bad64aa7bec773c4c32a73d210797",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0990ef5_158c621f",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 13
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-12-18T22:20:07Z",
+      "side": 0,
+      "message": "Ah. When PCIEPORTBUS\u003dy PCIEAER defaults to \u003dy, which selects RAS.\n\nThat ok? Or do you want me to leave it in the defconfig?",
+      "parentUuid": "7d32667d_e2253030",
+      "revId": "c47aeb389d0bad64aa7bec773c4c32a73d210797",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
