@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "785e3b0a_88db9e82",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1219,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-12-18T15:38:36Z",
+      "side": 1,
+      "message": "Okay. I don\u0027t mind. I just thought it\u0027d be perfect to get everything uclamp related aligned upstream as much as possible. Both works for me.",
+      "parentUuid": "af86b0bb_da46f4a7",
+      "range": {
+        "startLine": 1219,
+        "startChar": 0,
+        "endLine": 1219,
+        "endChar": 31
+      },
+      "revId": "50bbb7d4b65a0e706e42bbdf2edbe9ceda4593ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6980fc0_cc20e45e",
         "filename": "kernel/sched/core.c",
         "patchSetId": 6
