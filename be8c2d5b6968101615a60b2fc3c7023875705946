@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b139f38a_c14e683e",
+        "filename": "fs/crypto/fscrypt_private.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-12-18T17:22:00Z",
+      "side": 1,
+      "message": "The order of these two lines is flipped in comparison to the v6 patchset.",
+      "range": {
+        "startLine": 539,
+        "startChar": 0,
+        "endLine": 540,
+        "endChar": 22
+      },
+      "revId": "be8c2d5b6968101615a60b2fc3c7023875705946",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6d2dc06_78e7b240",
+        "filename": "fs/f2fs/data.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-12-18T17:22:00Z",
+      "side": 1,
+      "message": "The v6 patchset has an extra set of braces here, but this patch doesn\u0027t.",
+      "range": {
+        "startLine": 715,
+        "startChar": 34,
+        "endLine": 716,
+        "endChar": 53
+      },
+      "revId": "be8c2d5b6968101615a60b2fc3c7023875705946",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
