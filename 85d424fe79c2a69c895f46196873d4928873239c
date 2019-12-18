@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "601a1f53_fbb290fe",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 12
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-12-18T21:54:54Z",
+      "side": 1,
+      "message": "Moved to Kconfig.gki (for the short term)",
+      "parentUuid": "d78f2c3c_d28ad33d",
+      "revId": "85d424fe79c2a69c895f46196873d4928873239c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f44aa33_eff0c758",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 12
@@ -108,6 +126,24 @@
     },
     {
       "key": {
+        "uuid": "d093dacf_7e2a801e",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 12
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-12-18T21:54:54Z",
+      "side": 1,
+      "message": "Moved to Kconfig.gki (for the short term)",
+      "parentUuid": "34f37bec_c8508665",
+      "revId": "85d424fe79c2a69c895f46196873d4928873239c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f776eb38_f03312fa",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 12
@@ -155,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "3533f818_cedcfb34",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 12
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-12-18T21:54:54Z",
+      "side": 1,
+      "message": "reworked as a module",
+      "parentUuid": "efee70a5_2a7f6da6",
+      "range": {
+        "startLine": 384,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 21
+      },
+      "revId": "85d424fe79c2a69c895f46196873d4928873239c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3023cef8_f36d8eb9",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 12
@@ -169,6 +229,24 @@
       "revId": "85d424fe79c2a69c895f46196873d4928873239c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fdd0329_c6f1b692",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 12
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-12-18T21:54:54Z",
+      "side": 1,
+      "message": "reworked as a module",
+      "parentUuid": "3023cef8_f36d8eb9",
+      "revId": "85d424fe79c2a69c895f46196873d4928873239c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
