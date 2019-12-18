@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "212d8006_b0a55e16",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1219,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-12-18T15:21:53Z",
+      "side": 1,
+      "message": "Ah, right, there\u0027s 2 config options, that\u0027s what confused me. I understand now, makes sense.",
+      "parentUuid": "db784955_5ba579ef",
+      "range": {
+        "startLine": 1219,
+        "startChar": 0,
+        "endLine": 1219,
+        "endChar": 31
+      },
+      "revId": "50bbb7d4b65a0e706e42bbdf2edbe9ceda4593ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6980fc0_cc20e45e",
         "filename": "kernel/sched/core.c",
         "patchSetId": 6
