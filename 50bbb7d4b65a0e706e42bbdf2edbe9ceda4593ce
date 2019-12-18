@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "af86b0bb_da46f4a7",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1219,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-12-18T15:30:32Z",
+      "side": 1,
+      "message": "\u003e FWIW, I approached PeterZ to see what would be the best approach to handle controlling the default RT task util_min. If the solution is simple I might be able to get something FROMLIST backported. And we have a patch for the boost holding that I need to test and upload. But timing is too tight before xmas.\n\nCool, thanks, that\u0027d be great to have an upstream solution indeed. For the specific case of the 4.19 backport, we can wire-up the existing SUGOV_RT_MAX_FREQ sched_feat for uclamp -- the knob is there, so it makes sense to make it behave consistently with uclamp and stune IMO.",
+      "parentUuid": "cfaefaa9_eb401ab8",
+      "range": {
+        "startLine": 1219,
+        "startChar": 0,
+        "endLine": 1219,
+        "endChar": 31
+      },
+      "revId": "50bbb7d4b65a0e706e42bbdf2edbe9ceda4593ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6980fc0_cc20e45e",
         "filename": "kernel/sched/core.c",
         "patchSetId": 6
