@@ -264,6 +264,30 @@
     },
     {
       "key": {
+        "uuid": "c401cd7d_d54240f7",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1236,
+      "author": {
+        "id": 1598371
+      },
+      "writtenOn": "2019-12-18T18:10:38Z",
+      "side": 1,
+      "message": "Honestly what I\u0027m proposing is quite unlikely to screw up something:\n- it\u0027s once of the last patches of this series\n- it\u0027s the last patch touching core.c\n\nSo, yes, it\u0027s just a nit pick which I should have pointed out when you added this guard for the first time in v2.\n\nNo strong feelings but I still think that consistency has a value, especially when it\u0027s cheap ;)",
+      "parentUuid": "05581178_d93ac183",
+      "range": {
+        "startLine": 1231,
+        "startChar": 0,
+        "endLine": 1236,
+        "endChar": 6
+      },
+      "revId": "50bbb7d4b65a0e706e42bbdf2edbe9ceda4593ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18bec5f3_c9fec5b6",
         "filename": "kernel/sched/sched.h",
         "patchSetId": 6
