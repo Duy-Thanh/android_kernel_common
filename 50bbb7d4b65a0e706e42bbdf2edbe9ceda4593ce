@@ -240,6 +240,30 @@
     },
     {
       "key": {
+        "uuid": "05581178_d93ac183",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1236,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-12-18T17:00:21Z",
+      "side": 1,
+      "message": "Yes we could. If there\u0027s no strong feeling about it, I\u0027d rather not to touch the code in the series except to fix something. It\u0027s big and the risk of messing up something else accidentally is high.",
+      "parentUuid": "5bcff011_e54e6fcb",
+      "range": {
+        "startLine": 1231,
+        "startChar": 0,
+        "endLine": 1236,
+        "endChar": 6
+      },
+      "revId": "50bbb7d4b65a0e706e42bbdf2edbe9ceda4593ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18bec5f3_c9fec5b6",
         "filename": "kernel/sched/sched.h",
         "patchSetId": 6
