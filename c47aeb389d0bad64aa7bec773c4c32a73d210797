@@ -52,6 +52,24 @@
       "revId": "c47aeb389d0bad64aa7bec773c4c32a73d210797",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d90eaa53_8a46e504",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 13
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-12-18T23:02:40Z",
+      "side": 0,
+      "message": "Added a comment in the commit about this.",
+      "parentUuid": "f0990ef5_158c621f",
+      "revId": "c47aeb389d0bad64aa7bec773c4c32a73d210797",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
