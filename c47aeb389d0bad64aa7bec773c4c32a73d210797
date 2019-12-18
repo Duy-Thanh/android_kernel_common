@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8b39d3d_8ea82e13",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 13
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-12-18T22:09:24Z",
+      "side": 0,
+      "message": "Why this is no longer needed?",
+      "revId": "c47aeb389d0bad64aa7bec773c4c32a73d210797",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

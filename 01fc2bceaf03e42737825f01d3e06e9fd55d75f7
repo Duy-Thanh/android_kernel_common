@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af2a69cc_ceb1ba12",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-12-18T22:09:24Z",
+      "side": 1,
+      "message": "Since this has been reduced to a couple of PCIE configs, should the commit message be updated and more precise?",
+      "revId": "01fc2bceaf03e42737825f01d3e06e9fd55d75f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
