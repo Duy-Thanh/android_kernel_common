@@ -397,6 +397,9 @@ static void mmc_setup_queue(struct mmc_queue *mq, struct mmc_card *card)
 	mutex_init(&mq->complete_lock);
 
 	init_waitqueue_head(&mq->wait);
+
+	if (host->cqe_ops->cqe_crypto_update_queue)
+		host->cqe_ops->cqe_crypto_update_queue(host, mq->queue);
 }
 
 static inline bool mmc_merge_capable(struct mmc_host *host)
