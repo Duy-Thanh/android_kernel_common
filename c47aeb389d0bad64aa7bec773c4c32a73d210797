@@ -70,6 +70,24 @@
       "revId": "c47aeb389d0bad64aa7bec773c4c32a73d210797",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef83c94f_2f4b3037",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 13
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-12-18T23:26:40Z",
+      "side": 0,
+      "message": "That\u0027s fine. I was just surprised. If savedefconfig says it shouldn\u0027t be there, I\u0027m ok with it. Thanks for tracking it down.",
+      "parentUuid": "d90eaa53_8a46e504",
+      "revId": "c47aeb389d0bad64aa7bec773c4c32a73d210797",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
