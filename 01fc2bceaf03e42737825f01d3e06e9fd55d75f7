@@ -16,6 +16,24 @@
       "revId": "01fc2bceaf03e42737825f01d3e06e9fd55d75f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c30653f_93e3cdfd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-12-18T22:14:53Z",
+      "side": 1,
+      "message": "Good point. Will respin.",
+      "parentUuid": "af2a69cc_ceb1ba12",
+      "revId": "01fc2bceaf03e42737825f01d3e06e9fd55d75f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }

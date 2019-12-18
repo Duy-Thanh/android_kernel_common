@@ -16,6 +16,24 @@
       "revId": "c47aeb389d0bad64aa7bec773c4c32a73d210797",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d32667d_e2253030",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 13
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2019-12-18T22:14:53Z",
+      "side": 0,
+      "message": "Let me double check. I think the PCIE bits pull it in, but I\u0027ll recheck just in case.",
+      "parentUuid": "d8b39d3d_8ea82e13",
+      "revId": "c47aeb389d0bad64aa7bec773c4c32a73d210797",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
