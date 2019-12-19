@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af12de7d_e04e11ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-12-19T17:33:40Z",
+      "side": 1,
+      "message": "Also, please change the commit message to describe what the changes are. If they really are so \"trivial\" that they don\u0027t need a description then there is no reason for the patch to exist.",
+      "revId": "244020f715a9e9a31bae760e29ce631fb78f92b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
