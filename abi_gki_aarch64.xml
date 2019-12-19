@@ -4837,61 +4837,61 @@
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='thread_info' type-id='type-id-790' visibility='default' filepath='include/linux/sched.h' line='630' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='256'>
+        <data-member access='public' layout-offset-in-bits='320'>
           <var-decl name='state' type-id='type-id-791' visibility='default' filepath='include/linux/sched.h' line='633' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='320'>
+        <data-member access='public' layout-offset-in-bits='384'>
           <var-decl name='stack' type-id='type-id-14' visibility='default' filepath='include/linux/sched.h' line='641' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='384'>
+        <data-member access='public' layout-offset-in-bits='448'>
           <var-decl name='usage' type-id='type-id-792' visibility='default' filepath='include/linux/sched.h' line='642' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='416'>
+        <data-member access='public' layout-offset-in-bits='480'>
           <var-decl name='flags' type-id='type-id-35' visibility='default' filepath='include/linux/sched.h' line='644' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='448'>
+        <data-member access='public' layout-offset-in-bits='512'>
           <var-decl name='ptrace' type-id='type-id-35' visibility='default' filepath='include/linux/sched.h' line='645' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='512'>
+        <data-member access='public' layout-offset-in-bits='576'>
           <var-decl name='wake_entry' type-id='type-id-586' visibility='default' filepath='include/linux/sched.h' line='648' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='576'>
+        <data-member access='public' layout-offset-in-bits='640'>
           <var-decl name='on_cpu' type-id='type-id-16' visibility='default' filepath='include/linux/sched.h' line='649' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='608'>
+        <data-member access='public' layout-offset-in-bits='672'>
           <var-decl name='cpu' type-id='type-id-35' visibility='default' filepath='include/linux/sched.h' line='652' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='640'>
+        <data-member access='public' layout-offset-in-bits='704'>
           <var-decl name='wakee_flips' type-id='type-id-35' visibility='default' filepath='include/linux/sched.h' line='654' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='704'>
+        <data-member access='public' layout-offset-in-bits='768'>
           <var-decl name='wakee_flip_decay_ts' type-id='type-id-15' visibility='default' filepath='include/linux/sched.h' line='655' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='768'>
+        <data-member access='public' layout-offset-in-bits='832'>
           <var-decl name='last_wakee' type-id='type-id-158' visibility='default' filepath='include/linux/sched.h' line='656' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='832'>
+        <data-member access='public' layout-offset-in-bits='896'>
           <var-decl name='recent_used_cpu' type-id='type-id-16' visibility='default' filepath='include/linux/sched.h' line='665' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='864'>
+        <data-member access='public' layout-offset-in-bits='928'>
           <var-decl name='wake_cpu' type-id='type-id-16' visibility='default' filepath='include/linux/sched.h' line='666' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='896'>
+        <data-member access='public' layout-offset-in-bits='960'>
           <var-decl name='on_rq' type-id='type-id-16' visibility='default' filepath='include/linux/sched.h' line='668' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='928'>
+        <data-member access='public' layout-offset-in-bits='992'>
           <var-decl name='prio' type-id='type-id-16' visibility='default' filepath='include/linux/sched.h' line='670' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='960'>
+        <data-member access='public' layout-offset-in-bits='1024'>
           <var-decl name='static_prio' type-id='type-id-16' visibility='default' filepath='include/linux/sched.h' line='671' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='992'>
+        <data-member access='public' layout-offset-in-bits='1056'>
           <var-decl name='normal_prio' type-id='type-id-16' visibility='default' filepath='include/linux/sched.h' line='672' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='1024'>
+        <data-member access='public' layout-offset-in-bits='1088'>
           <var-decl name='rt_priority' type-id='type-id-35' visibility='default' filepath='include/linux/sched.h' line='673' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='1088'>
+        <data-member access='public' layout-offset-in-bits='1152'>
           <var-decl name='sched_class' type-id='type-id-793' visibility='default' filepath='include/linux/sched.h' line='675' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1536'>
@@ -5378,7 +5378,7 @@
           <var-decl name='thread' type-id='type-id-842' visibility='default' filepath='include/linux/sched.h' line='1282' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='thread_info' size-in-bits='256' is-struct='yes' visibility='default' filepath='arch/arm64/include/asm/thread_info.h' line='26' column='1' id='type-id-790'>
+      <class-decl name='thread_info' size-in-bits='320' is-struct='yes' visibility='default' filepath='arch/arm64/include/asm/thread_info.h' line='26' column='1' id='type-id-790'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='flags' type-id='type-id-15' visibility='default' filepath='arch/arm64/include/asm/thread_info.h' line='27' column='1'/>
         </data-member>
@@ -5386,9 +5386,12 @@
           <var-decl name='addr_limit' type-id='type-id-843' visibility='default' filepath='arch/arm64/include/asm/thread_info.h' line='28' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='' type-id='type-id-844' visibility='default' filepath='arch/arm64/include/asm/thread_info.h' line='32' column='1'/>
+          <var-decl name='ttbr0' type-id='type-id-42' visibility='default' filepath='arch/arm64/include/asm/thread_info.h' line='30' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='192'>
+          <var-decl name='' type-id='type-id-844' visibility='default' filepath='arch/arm64/include/asm/thread_info.h' line='32' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='256'>
           <var-decl name='shadow_call_stack' type-id='type-id-14' visibility='default' filepath='arch/arm64/include/asm/thread_info.h' line='45' column='1'/>
         </data-member>
       </class-decl>
