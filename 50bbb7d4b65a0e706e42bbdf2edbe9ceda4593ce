@@ -288,6 +288,30 @@
     },
     {
       "key": {
+        "uuid": "0f40a59c_56c01274",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1236,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2019-12-19T09:20:02Z",
+      "side": 1,
+      "message": "I agree with Patrick, we have the ifdef _inside_ the functions for the schedtune stubs below, so this should be aligned. One way or the other (ifdef in or out), I don\u0027t mind, but consistency would be good.",
+      "parentUuid": "c401cd7d_d54240f7",
+      "range": {
+        "startLine": 1231,
+        "startChar": 0,
+        "endLine": 1236,
+        "endChar": 6
+      },
+      "revId": "50bbb7d4b65a0e706e42bbdf2edbe9ceda4593ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18bec5f3_c9fec5b6",
         "filename": "kernel/sched/sched.h",
         "patchSetId": 6
