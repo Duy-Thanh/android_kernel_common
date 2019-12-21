@@ -11,7 +11,17 @@
 #include <linux/bug.h>
 #include <linux/restart_block.h>
 
+<<<<<<< HEAD   (0b1cea Merge 4.4.206 into android-4.4-o)
 #ifdef CONFIG_THREAD_INFO_IN_TASK
+=======
+struct timespec;
+struct compat_timespec;
+
+#ifdef CONFIG_THREAD_INFO_IN_TASK
+#define current_thread_info() ((struct thread_info *)current)
+#endif
+
+>>>>>>> BRANCH (45c347 Linux 4.4.207)
 /*
  * For CONFIG_THREAD_INFO_IN_TASK kernels we need <asm/current.h> for the
  * definition of current, but for !CONFIG_THREAD_INFO_IN_TASK kernels,
