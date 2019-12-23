@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1f50f0e_670fc565",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-12-23T17:05:55Z",
+      "side": 1,
+      "message": "very crazy include path, why is this needed in this file?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 52
+      },
+      "revId": "f571d0912ec34a5166139d1ca149d25ae21eaf8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3d2762d_581f02ca",
+        "filename": "include/uapi/asm-generic/msm-geni-serial-ioctls.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-12-23T17:05:55Z",
+      "side": 1,
+      "message": "No custom ioctls for something as basic as a serial port.  Use the built-in kernel apis instead, you do not want to have to maintain a driver-specific user api for the next 20+ years.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 37
+      },
+      "revId": "f571d0912ec34a5166139d1ca149d25ae21eaf8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
