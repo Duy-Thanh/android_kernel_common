@@ -1247,6 +1247,14 @@ long ext4_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 	case FS_IOC_GETFSMAP:
 	case FS_IOC_ENABLE_VERITY:
 	case FS_IOC_MEASURE_VERITY:
+<<<<<<< HEAD   (1ed003 ANDROID: selinux: modify RTM_GETLINK permission)
+=======
+	case EXT4_IOC_CLEAR_ES_CACHE:
+	case EXT4_IOC_GETSTATE:
+	case EXT4_IOC_GET_ES_CACHE:
+	case EXT4_IOC_FSGETXATTR:
+	case EXT4_IOC_FSSETXATTR:
+>>>>>>> CHANGE (210ab3 FROMGIT: ext4: Add EXT4_IOC_FSGETXATTR/EXT4_IOC_FSSETXATTR t)
 		break;
 	default:
 		return -ENOIOCTLCMD;
