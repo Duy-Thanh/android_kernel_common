@@ -175,7 +175,7 @@ int detect_share_cap_flag(void)
 	struct cpufreq_policy *policy;
 
 	for_each_possible_cpu(cpu) {
-		policy = cpufreq_cpu_get(cpu);
+		policy = cpufreq_cpu_get_raw(cpu);
 
 		if (!policy)
 			return 0;
