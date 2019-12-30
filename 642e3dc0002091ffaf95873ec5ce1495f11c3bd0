@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96f8d710_4d3621c1",
+        "filename": "include/uapi/linux/netfilter/xt_IDLETIMER.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2019-12-30T18:42:24Z",
+      "side": 1,
+      "message": "I imagine this breaks userspace on either older or newer kernels.\n\nMost likely this has to be done via abusing the send_nl_msg field,\nor making sure we fit into a pre-existing hole.",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 17
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
