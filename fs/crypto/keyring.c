@@ -465,6 +465,7 @@ out_unlock:
 	return err;
 }
 
+#define RAW_SECRET_SIZE 32
 /*
  * Add a master encryption key to the filesystem, causing all files which were
  * encrypted with it to appear "unlocked" (decrypted) when accessed.
@@ -495,6 +496,9 @@ int fscrypt_ioctl_add_key(struct file *filp, void __user *_uarg)
 	struct fscrypt_add_key_arg __user *uarg = _uarg;
 	struct fscrypt_add_key_arg arg;
 	struct fscrypt_master_key_secret secret;
+	u8 _kdf_key[RAW_SECRET_SIZE];
+	u8 *kdf_key;
+	unsigned int kdf_key_size = 0;
 	int err;
 
 	if (copy_from_user(&arg, uarg, sizeof(arg)))
@@ -504,7 +508,9 @@ int fscrypt_ioctl_add_key(struct file *filp, void __user *_uarg)
 		return -EINVAL;
 
 	if (arg.raw_size < FSCRYPT_MIN_KEY_SIZE ||
-	    arg.raw_size > FSCRYPT_MAX_KEY_SIZE)
+	    arg.raw_size >
+		((arg.flags & FSCRYPT_ADD_KEY_FLAG_WRAPPED) ?
+			FSCRYPT_MAX_WRAPPED_KEY_SIZE : FSCRYPT_MAX_KEY_SIZE))
 		return -EINVAL;
 
 	if (memchr_inv(arg.__reserved, 0, sizeof(arg.__reserved)))
@@ -526,17 +532,36 @@ int fscrypt_ioctl_add_key(struct file *filp, void __user *_uarg)
 		err = -EACCES;
 		if (!capable(CAP_SYS_ADMIN))
 			goto out_wipe_secret;
+		if (arg.flags & FSCRYPT_ADD_KEY_FLAG_WRAPPED) {
+			err = -EINVAL;
+			goto out_wipe_secret;
+		}
+
 		break;
 	case FSCRYPT_KEY_SPEC_TYPE_IDENTIFIER:
-		err = fscrypt_init_hkdf(&secret.hkdf, secret.raw, secret.size);
+		err = -EINVAL;
+		if (arg.flags & ~FSCRYPT_ADD_KEY_FLAG_WRAPPED)
+			goto out_wipe_secret;
+		if (arg.flags & FSCRYPT_ADD_KEY_FLAG_WRAPPED) {
+			kdf_key = _kdf_key;
+			kdf_key_size = RAW_SECRET_SIZE;
+			err = fscrypt_derive_raw_secret(sb, secret.raw,
+							secret.size,
+							kdf_key, kdf_key_size);
+			if (err)
+				goto out_wipe_secret;
+		} else {
+			kdf_key = secret.raw;
+			kdf_key_size = secret.size;
+		}
+		err = fscrypt_init_hkdf(&secret.hkdf, kdf_key, kdf_key_size);
+		/*
+		 * Now that the HKDF context is initialized, the raw HKDF
+		 * key is no longer needed.
+		 */
+		memzero_explicit(kdf_key, kdf_key_size);
 		if (err)
 			goto out_wipe_secret;
-
-		/*
-		 * Now that the HKDF context is initialized, the raw key is no
-		 * longer needed.
-		 */
-		memzero_explicit(secret.raw, secret.size);
 
 		/* Calculate the key identifier and return it to userspace. */
 		err = fscrypt_hkdf_expand(&secret.hkdf,
