@@ -329,11 +329,15 @@ fscrypt_using_inline_encryption(const struct fscrypt_info *ci)
 
 extern int fscrypt_prepare_inline_crypt_key(
 					struct fscrypt_prepared_key *prep_key,
-					const u8 *raw_key,
+					const u8 *raw_key, unsigned int keysize,
 					const struct fscrypt_info *ci);
 
 extern void fscrypt_destroy_inline_crypt_key(
 					struct fscrypt_prepared_key *prep_key);
+
+extern int fscrypt_get_raw_secret(struct super_block *sb,
+				  u8 *secret, unsigned int secret_size,
+				  u8 *raw_secret, unsigned int raw_secret_size);
 
 /*
  * Check whether the crypto transform or blk-crypto key has been allocated in
@@ -367,7 +371,7 @@ static inline bool fscrypt_using_inline_encryption(
 
 static inline int
 fscrypt_prepare_inline_crypt_key(struct fscrypt_prepared_key *prep_key,
-				 const u8 *raw_key,
+				 const u8 *raw_key, unsigned int keysize,
 				 const struct fscrypt_info *ci)
 {
 	WARN_ON(1);
@@ -377,6 +381,15 @@ fscrypt_prepare_inline_crypt_key(struct fscrypt_prepared_key *prep_key,
 static inline void
 fscrypt_destroy_inline_crypt_key(struct fscrypt_prepared_key *prep_key)
 {
+}
+
+static inline int fscrypt_get_raw_secret(struct super_block *sb,
+					 u8 *secret, unsigned int secret_size,
+					 u8 *raw_secret,
+					 unsigned int raw_secret_size)
+{
+	WARN_ON(1);
+	return -EOPNOTSUPP;
 }
 
 static inline bool
@@ -403,8 +416,10 @@ struct fscrypt_master_key_secret {
 	/* Size of the raw key in bytes.  Set even if ->raw isn't set. */
 	u32			size;
 
-	/* For v1 policy keys: the raw key.  Wiped for v2 policy keys. */
-	u8			raw[FSCRYPT_MAX_KEY_SIZE];
+	/* For v1 policy keys: the raw key.  Wiped for v2 policy keys.
+	 * For wrapped keys using v2 policies, not wiped.
+	 */
+	u8			raw[FSCRYPT_MAX_WRAPPED_KEY_SIZE];
 
 } __randomize_layout;
 
@@ -549,13 +564,13 @@ fscrypt_mode_supports_direct_key(const struct fscrypt_mode *mode)
 }
 
 extern int fscrypt_prepare_key(struct fscrypt_prepared_key *prep_key,
-			       const u8 *raw_key,
+			       const u8 *raw_key, unsigned int keysize,
 			       const struct fscrypt_info *ci);
 
 extern void fscrypt_destroy_prepared_key(struct fscrypt_prepared_key *prep_key);
 
 extern int fscrypt_set_derived_key(struct fscrypt_info *ci,
-				   const u8 *derived_key);
+				   const u8 *derived_key, unsigned int keysize);
 
 /* keysetup_v1.c */
 
