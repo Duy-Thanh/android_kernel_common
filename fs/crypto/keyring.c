@@ -465,6 +465,7 @@ out_unlock:
 	return err;
 }
 
+#define RAW_SECRET_SIZE 32
 /*
  * Add a master encryption key to the filesystem, causing all files which were
  * encrypted with it to appear "unlocked" (decrypted) when accessed.
@@ -495,6 +496,9 @@ int fscrypt_ioctl_add_key(struct file *filp, void __user *_uarg)
 	struct fscrypt_add_key_arg __user *uarg = _uarg;
 	struct fscrypt_add_key_arg arg;
 	struct fscrypt_master_key_secret secret;
+	u8 raw_secret[RAW_SECRET_SIZE];
+	unsigned int secret_size = 0;
+	u8 *secret_p;
 	int err;
 
 	if (copy_from_user(&arg, uarg, sizeof(arg)))
@@ -504,7 +508,9 @@ int fscrypt_ioctl_add_key(struct file *filp, void __user *_uarg)
 		return -EINVAL;
 
 	if (arg.raw_size < FSCRYPT_MIN_KEY_SIZE ||
-	    arg.raw_size > FSCRYPT_MAX_KEY_SIZE)
+	    arg.raw_size >
+		((arg.flags & FSCRYPT_KEY_WRAPPED_KEY) ?
+			FSCRYPT_MAX_WRAPPED_KEY_SIZE : FSCRYPT_MAX_KEY_SIZE))
 		return -EINVAL;
 
 	if (memchr_inv(arg.__reserved, 0, sizeof(arg.__reserved)))
@@ -528,15 +534,29 @@ int fscrypt_ioctl_add_key(struct file *filp, void __user *_uarg)
 			goto out_wipe_secret;
 		break;
 	case FSCRYPT_KEY_SPEC_TYPE_IDENTIFIER:
-		err = fscrypt_init_hkdf(&secret.hkdf, secret.raw, secret.size);
+		if (arg.flags & FSCRYPT_KEY_WRAPPED_KEY) {
+			err = fscrypt_get_raw_secret(sb, secret.raw,
+						     secret.size, raw_secret,
+						     RAW_SECRET_SIZE);
+			if (err)
+				goto out_wipe_secret;
+			secret_p = raw_secret;
+			secret_size = RAW_SECRET_SIZE;
+		} else {
+			secret_p = secret.raw;
+			secret_size = secret.size;
+		}
+		err = fscrypt_init_hkdf(&secret.hkdf, secret_p, secret_size);
 		if (err)
 			goto out_wipe_secret;
 
-		/*
-		 * Now that the HKDF context is initialized, the raw key is no
-		 * longer needed.
-		 */
-		memzero_explicit(secret.raw, secret.size);
+		if (!(arg.flags & FSCRYPT_KEY_WRAPPED_KEY)) {
+			/*
+			 * Now that the HKDF context is initialized, the raw key is no
+			 * longer needed.
+			 */
+			memzero_explicit(secret.raw, secret.size);
+		}
 
 		/* Calculate the key identifier and return it to userspace. */
 		err = fscrypt_hkdf_expand(&secret.hkdf,

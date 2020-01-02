@@ -113,12 +113,14 @@ err_free_tfm:
  * (fs-layer or blk-crypto) will be used.
  */
 int fscrypt_prepare_key(struct fscrypt_prepared_key *prep_key,
-			const u8 *raw_key, const struct fscrypt_info *ci)
+			const u8 *raw_key, unsigned int keysize,
+			const struct fscrypt_info *ci)
 {
 	struct crypto_skcipher *tfm;
 
 	if (fscrypt_using_inline_encryption(ci))
-		return fscrypt_prepare_inline_crypt_key(prep_key, raw_key, ci);
+		return fscrypt_prepare_inline_crypt_key(prep_key,
+				raw_key, keysize, ci);
 
 	tfm = fscrypt_allocate_skcipher(ci->ci_mode, raw_key, ci->ci_inode);
 	if (IS_ERR(tfm))
@@ -139,10 +141,11 @@ void fscrypt_destroy_prepared_key(struct fscrypt_prepared_key *prep_key)
 }
 
 /* Given the per-file key, set up the file's crypto transform object */
-int fscrypt_set_derived_key(struct fscrypt_info *ci, const u8 *derived_key)
+int fscrypt_set_derived_key(struct fscrypt_info *ci,
+		const u8 *derived_key, unsigned int keysize)
 {
 	ci->ci_owns_key = true;
-	return fscrypt_prepare_key(&ci->ci_key, derived_key, ci);
+	return fscrypt_prepare_key(&ci->ci_key, derived_key, keysize, ci);
 }
 
 static int setup_per_mode_key(struct fscrypt_info *ci,
@@ -156,7 +159,8 @@ static int setup_per_mode_key(struct fscrypt_info *ci,
 	struct fscrypt_mode *mode = ci->ci_mode;
 	const u8 mode_num = mode - fscrypt_modes;
 	struct fscrypt_prepared_key *prep_key;
-	u8 mode_key[FSCRYPT_MAX_KEY_SIZE];
+	u8 key[FSCRYPT_MAX_WRAPPED_KEY_SIZE];
+	unsigned int keysize;
 	u8 hkdf_info[sizeof(mode_num) + sizeof(sb->s_uuid)];
 	unsigned int hkdf_infolen = 0;
 	int err;
@@ -175,22 +179,28 @@ static int setup_per_mode_key(struct fscrypt_info *ci,
 	if (fscrypt_is_key_prepared(prep_key, ci))
 		goto done_unlock;
 
-	BUILD_BUG_ON(sizeof(mode_num) != 1);
-	BUILD_BUG_ON(sizeof(sb->s_uuid) != 16);
-	BUILD_BUG_ON(sizeof(hkdf_info) != 17);
-	hkdf_info[hkdf_infolen++] = mode_num;
-	if (include_fs_uuid) {
-		memcpy(&hkdf_info[hkdf_infolen], &sb->s_uuid,
-		       sizeof(sb->s_uuid));
-		hkdf_infolen += sizeof(sb->s_uuid);
+	if (ci->ci_policy.v2.flags & FSCRYPT_POLICY_FLAG_WRAPPED_KEY) {
+		keysize = mk->mk_secret.size;
+		memcpy(key, mk->mk_secret.raw, keysize);
+	} else {
+		BUILD_BUG_ON(sizeof(mode_num) != 1);
+		BUILD_BUG_ON(sizeof(sb->s_uuid) != 16);
+		BUILD_BUG_ON(sizeof(hkdf_info) != 17);
+		hkdf_info[hkdf_infolen++] = mode_num;
+		if (include_fs_uuid) {
+			memcpy(&hkdf_info[hkdf_infolen], &sb->s_uuid,
+				   sizeof(sb->s_uuid));
+			hkdf_infolen += sizeof(sb->s_uuid);
+		}
+		keysize = mode->keysize;
+		err = fscrypt_hkdf_expand(&mk->mk_secret.hkdf,
+					  hkdf_context, hkdf_info, hkdf_infolen,
+					  key, keysize);
+		if (err)
+			goto out_unlock;
 	}
-	err = fscrypt_hkdf_expand(&mk->mk_secret.hkdf,
-				  hkdf_context, hkdf_info, hkdf_infolen,
-				  mode_key, mode->keysize);
-	if (err)
-		goto out_unlock;
-	err = fscrypt_prepare_key(prep_key, mode_key, ci);
-	memzero_explicit(mode_key, mode->keysize);
+	err = fscrypt_prepare_key(prep_key, key, keysize, ci);
+	memzero_explicit(key, keysize);
 	if (err)
 		goto out_unlock;
 done_unlock:
@@ -244,7 +254,7 @@ static int fscrypt_setup_v2_file_key(struct fscrypt_info *ci,
 	if (err)
 		return err;
 
-	err = fscrypt_set_derived_key(ci, derived_key);
+	err = fscrypt_set_derived_key(ci, derived_key, ci->ci_mode->keysize);
 	memzero_explicit(derived_key, ci->ci_mode->keysize);
 	return err;
 }
