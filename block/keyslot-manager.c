@@ -425,3 +425,24 @@ void keyslot_manager_destroy(struct keyslot_manager *ksm)
 	}
 }
 EXPORT_SYMBOL_GPL(keyslot_manager_destroy);
+
+int keyslot_manager_derive_raw_secret(struct keyslot_manager *ksm,
+				      const u8 *wrapped_key,
+				      unsigned int wrapped_key_size,
+				      u8 *secret, unsigned int secret_size)
+{
+	int err = 0;
+
+	down_write(&ksm->lock);
+	if (ksm->ksm_ll_ops.derive_raw_secret) {
+		err = ksm->ksm_ll_ops.derive_raw_secret(ksm, wrapped_key,
+							wrapped_key_size,
+							secret, secret_size);
+	} else {
+		err = -EOPNOTSUPP;
+	}
+	up_write(&ksm->lock);
+
+	return err;
+}
+EXPORT_SYMBOL_GPL(keyslot_manager_derive_raw_secret);
