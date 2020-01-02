@@ -201,6 +201,20 @@ therefore, if userspace derives the key from a low-entropy secret such
 as a passphrase, it is critical that a KDF designed for this purpose
 be used, such as scrypt, PBKDF2, or Argon2.
 
+Wrapped Keys
+------------
+
+To prevent key leakage with a kernel compromise, some Inline encryption
+hardware provide the capability to protect the keys in hardware without
+software having access to the plaintext keys.
+
+The master key is generated and wrapped using the hardware by userspace
+support wrapped keys. The inline encryption frameworks is extended to
+support retrieving a software 'secret' that can be used to derive the
+filename encryption key as well as the file identifier for v2 policies.
+The wrapped key is programmed into ICE which unwraps and derives a
+contents encryption key used to encrypt data.
+
 Key derivation function
 -----------------------
 
@@ -457,6 +471,8 @@ This structure must be initialized as follows:
   - FSCRYPT_POLICY_FLAG_IV_INO_LBLK_64: See `IV_INO_LBLK_64
     policies`_.  This is mutually exclusive with DIRECT_KEY and is not
     supported on v1 policies.
+  - FSCRYPT_POLICY_FLAG_WRAPPED_KEY: See `Wrapped keys`. This flag
+    denotes that a wrapped key needs to be for files with this policy.
 
 - For v2 encryption policies, ``__reserved`` must be zeroed.
 
@@ -638,7 +654,8 @@ follows::
     struct fscrypt_add_key_arg {
             struct fscrypt_key_specifier key_spec;
             __u32 raw_size;
-            __u32 __reserved[9];
+            __u32 __reserved[8];
+            __u32 flags;
             __u8 raw[];
     };
 
@@ -678,6 +695,9 @@ as follows:
 
 - ``raw_size`` must be the size of the ``raw`` key provided, in bytes.
 
+- ``flags`` contains the optional flags.
+  - FSCRYPT_KEY_FLAG_WRAPPED_KEY: This denotes the key present in ``raw``
+    is a wrapped key. Check `Wrapped Keys` section for more details.
 - ``raw`` is a variable-length field which must contain the actual
   key, ``raw_size`` bytes long.
 
