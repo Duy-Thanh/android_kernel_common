@@ -76,6 +76,7 @@ static bool supported_iv_ino_lblk_64_policy(
 bool fscrypt_supported_policy(const union fscrypt_policy *policy_u,
 			      const struct inode *inode)
 {
+	struct super_block *sb = inode->i_sb;
 	switch (policy_u->version) {
 	case FSCRYPT_POLICY_V1: {
 		const struct fscrypt_policy_v1 *policy = &policy_u->v1;
@@ -122,6 +123,18 @@ bool fscrypt_supported_policy(const union fscrypt_policy *policy_u,
 		    !supported_iv_ino_lblk_64_policy(policy, inode))
 			return false;
 
+		if (policy->flags & FSCRYPT_POLICY_FLAG_WRAPPED_KEY) {
+			if (!sb->s_cop->inline_crypt_enabled ||
+			    !sb->s_cop->inline_crypt_enabled(sb)) {
+				pr_err("inlinecrypt mount disabled and WRAPPED_KEY policy requested");
+				return false;
+			}
+			if (!(policy->flags & FSCRYPT_POLICY_FLAG_IV_INO_LBLK_64) ||
+			    !supported_iv_ino_lblk_64_policy(policy, inode)) {
+				pr_err("IV_INO_LBLK_64 flag not set and WRAPPED_KEY policy requested");
+				return false;
+			}
+		}
 		if (memchr_inv(policy->__reserved, 0,
 			       sizeof(policy->__reserved))) {
 			fscrypt_warn(inode,
