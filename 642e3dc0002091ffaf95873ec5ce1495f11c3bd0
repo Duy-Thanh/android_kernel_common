@@ -22,6 +22,29 @@
       "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8227debb_188c1a5d",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1611437
+      },
+      "writtenOn": "2020-01-03T12:35:59Z",
+      "side": 1,
+      "message": "Here we referred tg_info as pointer , and all the elements in structure are accessed individually by pointer reference  . So with and without kernel patch should work without any issues.",
+      "range": {
+        "startLine": 446,
+        "startChar": 26,
+        "endLine": 446,
+        "endChar": 27
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
