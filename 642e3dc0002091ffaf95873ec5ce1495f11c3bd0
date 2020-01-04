@@ -25,6 +25,167 @@
     },
     {
       "key": {
+        "uuid": "ba04ca87_63378663",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-01-04T11:02:20Z",
+      "side": 1,
+      "message": "you can just use \u003d {} instead of memset",
+      "range": {
+        "startLine": 180,
+        "startChar": 17,
+        "endLine": 180,
+        "endChar": 26
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0f8d82c_0d151078",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-01-04T11:02:20Z",
+      "side": 1,
+      "message": "drop the ! and reverse the order of the if/else",
+      "range": {
+        "startLine": 188,
+        "startChar": 6,
+        "endLine": 188,
+        "endChar": 7
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdad3395_7c9ea84d",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-01-04T11:02:20Z",
+      "side": 1,
+      "message": "maybe this should be a local variable instead of function scope - that seems to apply to a few other local vars as well",
+      "range": {
+        "startLine": 193,
+        "startChar": 3,
+        "endLine": 193,
+        "endChar": 16
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4e640ad_1e7c820f",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-01-04T11:02:20Z",
+      "side": 1,
+      "message": "are you certain this shouldn\u0027t be \u003e",
+      "range": {
+        "startLine": 202,
+        "startChar": 16,
+        "endLine": 202,
+        "endChar": 17
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93cdefd5_0352fa9a",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-01-04T11:02:20Z",
+      "side": 1,
+      "message": "again, drop the !, reverse if/else ordering",
+      "range": {
+        "startLine": 355,
+        "startChar": 5,
+        "endLine": 355,
+        "endChar": 6
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8443fd2c_4b47e93f",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-01-04T11:02:20Z",
+      "side": 1,
+      "message": "define it locally in the block where it is used",
+      "range": {
+        "startLine": 388,
+        "startChar": 1,
+        "endLine": 388,
+        "endChar": 8
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96505e65_4004aad5",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-01-04T11:02:20Z",
+      "side": 1,
+      "message": "and again",
+      "range": {
+        "startLine": 415,
+        "startChar": 6,
+        "endLine": 415,
+        "endChar": 7
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8227debb_188c1a5d",
         "filename": "net/netfilter/xt_IDLETIMER.c",
         "patchSetId": 1
@@ -41,6 +202,168 @@
         "startChar": 26,
         "endLine": 446,
         "endChar": 27
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f78ea0a5_28846392",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-01-04T11:02:20Z",
+      "side": 1,
+      "message": "I have no idea what you mean.",
+      "parentUuid": "8227debb_188c1a5d",
+      "range": {
+        "startLine": 446,
+        "startChar": 26,
+        "endLine": 446,
+        "endChar": 27
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5521e77e_e1c0a416",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-01-04T11:02:20Z",
+      "side": 1,
+      "message": "\u003d {};",
+      "range": {
+        "startLine": 449,
+        "startChar": 17,
+        "endLine": 449,
+        "endChar": 26
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2c9aebe_ab17227b",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-01-04T11:02:20Z",
+      "side": 1,
+      "message": "drop !, reverse if/else",
+      "range": {
+        "startLine": 486,
+        "startChar": 6,
+        "endLine": 486,
+        "endChar": 7
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35eff696_9cbec069",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-01-04T11:02:20Z",
+      "side": 1,
+      "message": "ktime_t tout \u003d ...",
+      "range": {
+        "startLine": 490,
+        "startChar": 3,
+        "endLine": 490,
+        "endChar": 7
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "938a3a6c_28d848de",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-01-04T11:02:20Z",
+      "side": 1,
+      "message": "perhaps simply struct timespace ktimespec \u003d ktime_to_timespec()",
+      "range": {
+        "startLine": 491,
+        "startChar": 3,
+        "endLine": 491,
+        "endChar": 12
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a30bd4fa_b81ee6b9",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-01-04T11:02:20Z",
+      "side": 1,
+      "message": "what if it\u0027s 0 sec but some number of nsec or msec?",
+      "range": {
+        "startLine": 493,
+        "startChar": 0,
+        "endLine": 493,
+        "endChar": 30
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f01460b_ac87b44b",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-01-04T11:02:20Z",
+      "side": 1,
+      "message": "reverse if/else",
+      "range": {
+        "startLine": 527,
+        "startChar": 6,
+        "endLine": 527,
+        "endChar": 7
       },
       "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
