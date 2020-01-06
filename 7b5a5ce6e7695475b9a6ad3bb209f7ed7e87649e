@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bbd94c1a_f119d031",
+        "filename": "fs/crypto/fname.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-06T23:56:49Z",
+      "side": 1,
+      "message": "Misleading indentation here.\n\nThis code would also be easier to read if the fields of struct fscrypt_nokey_name were handled in order, and also if the long name and short name cases were cleanly separated.  I.e.\n\n        if (hash) {\n                nokey_name.dirtree_hash[0] \u003d hash;\n                nokey_name.dirtree_hash[1] \u003d minor_hash;\n        } else {\n                nokey_name.dirtree_hash[0] \u003d 0;\n                nokey_name.dirtree_hash[1] \u003d 0;\n        }\n        if (iname-\u003elen \u003c\u003d FSCRYPT_FNAME_UNDIGESTED_SIZE) {\n                memcpy(nokey_name.bytes, iname-\u003ename, iname-\u003elen);\n                size \u003d offsetof(struct fscrypt_nokey_name, bytes[iname-\u003elen]);\n        } else {\n                memcpy(nokey_name.bytes, iname-\u003ename,\n                       FSCRYPT_FNAME_UNDIGESTED_SIZE);\n                /* compute sha256 of remaining name */\n                err \u003d fscrypt_do_sha256(nokey_name.sha256,\n                                \u0026iname-\u003ename[FSCRYPT_FNAME_UNDIGESTED_SIZE],\n                                iname-\u003elen - FSCRYPT_FNAME_UNDIGESTED_SIZE);\n                if (err)\n                        return err;\n                size \u003d offsetofend(struct fscrypt_nokey_name, sha256);\n        }",
+      "range": {
+        "startLine": 333,
+        "startChar": 2,
+        "endLine": 333,
+        "endChar": 46
+      },
+      "revId": "7b5a5ce6e7695475b9a6ad3bb209f7ed7e87649e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb73bb9a_77ab420b",
+        "filename": "fs/crypto/fname.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-06T23:56:49Z",
+      "side": 1,
+      "message": "Userspace can provide any arbitrary filename, so it\u0027s really important that it be validated correctly.  What if the decoded name ends in the middle of the \u0027sha256\u0027 field?  Also, is it really sufficient to only check the length before base64 decoding, not after?\n\nI suggest first just checking for names that would cause a buffer overflow in base64_decode().  Then do the full checks after base64_decode():\n\n        if (iname-\u003elen \u003e BASE64_CHARS(sizeof(struct fscrypt_nokey_name))) {\n                ret \u003d -ENOENT;\n                goto errout;\n        }\n        ret \u003d base64_decode(iname-\u003ename, iname-\u003elen, fname-\u003ecrypto_buf.name);\n        if ((int)ret \u003c offsetof(struct fscrypt_nokey_name, bytes[1]) ||\n            (ret \u003e offsetof(struct fscrypt_nokey_name, sha256) \u0026\u0026\n             ret !\u003d offsetofend(struct fscrypt_nokey_name, sha256))) {\n                ret \u003d -ENOENT;\n                goto errout;\n        }",
+      "range": {
+        "startLine": 431,
+        "startChar": 0,
+        "endLine": 441,
+        "endChar": 2
+      },
+      "revId": "7b5a5ce6e7695475b9a6ad3bb209f7ed7e87649e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1c910fc_994d04a3",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-06T23:56:49Z",
+      "side": 1,
+      "message": "No need to include sha.h from here anymore.",
+      "range": {
+        "startLine": 19,
+        "startChar": 9,
+        "endLine": 19,
+        "endChar": 23
+      },
+      "revId": "7b5a5ce6e7695475b9a6ad3bb209f7ed7e87649e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
