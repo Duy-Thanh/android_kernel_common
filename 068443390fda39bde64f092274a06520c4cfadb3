@@ -191,6 +191,30 @@
       "revId": "068443390fda39bde64f092274a06520c4cfadb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76c81b34_12343a78",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-01-07T13:54:08Z",
+      "side": 1,
+      "message": "\u003e if the race is extremely unlikely to happen here, I think \n\u003e cpufreq_cpu_get_raw() is the easiest way to force an unbound of cpufreq\n\u003e driver. What do you think?\n\nI think we should eliminate the race entirely and use the proper get()/put() API for that. The change should be trivial, so there is no good reason to use the _raw() variant.",
+      "parentUuid": "3bb1712e_0de39de8",
+      "range": {
+        "startLine": 178,
+        "startChar": 2,
+        "endLine": 178,
+        "endChar": 36
+      },
+      "revId": "068443390fda39bde64f092274a06520c4cfadb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
