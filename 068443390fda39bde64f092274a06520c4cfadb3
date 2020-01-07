@@ -118,6 +118,30 @@
       "revId": "068443390fda39bde64f092274a06520c4cfadb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af9d1f5d_e1af504d",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-01-07T10:17:56Z",
+      "side": 1,
+      "message": "Are you saying there\u0027s something special about related_cpus? cpufreq_ondemand.c uses it to access policy-\u003egovernor, policy-\u003egovernor_data and policy-\u003ecpus. I\u0027m not an expert in cpufreq subsystem but this seems to me a similar valid usage with the intention of cpufreq_cpu_get_raw(), but again I\u0027m no cpufreq expert.",
+      "parentUuid": "9342f3e6_9d21bd8e",
+      "range": {
+        "startLine": 178,
+        "startChar": 2,
+        "endLine": 178,
+        "endChar": 36
+      },
+      "revId": "068443390fda39bde64f092274a06520c4cfadb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
