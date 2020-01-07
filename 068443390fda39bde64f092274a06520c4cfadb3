@@ -46,6 +46,30 @@
       "revId": "068443390fda39bde64f092274a06520c4cfadb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b233bac_61074507",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-01-07T09:49:26Z",
+      "side": 1,
+      "message": "But the function is only parsing policy and not really using it for anything. So why do the unnecessary dance if cpufreq_cpu_get_raw() just gives you the required temporary reference?",
+      "parentUuid": "d68c7ff7_fd063a6e",
+      "range": {
+        "startLine": 178,
+        "startChar": 2,
+        "endLine": 178,
+        "endChar": 36
+      },
+      "revId": "068443390fda39bde64f092274a06520c4cfadb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
