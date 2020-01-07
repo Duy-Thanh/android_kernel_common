@@ -46,6 +46,30 @@
       "revId": "4c6e2875418708e365a3eab60760e22c78a7a4ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe5d18e9_d2bc5034",
+        "filename": "drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-01-07T20:33:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9332c0df_3c7fbab7",
+      "range": {
+        "startLine": 914,
+        "startChar": 0,
+        "endLine": 915,
+        "endChar": 41
+      },
+      "revId": "4c6e2875418708e365a3eab60760e22c78a7a4ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
