@@ -166,6 +166,31 @@
       "revId": "068443390fda39bde64f092274a06520c4cfadb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3bb1712e_0de39de8",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1554342
+      },
+      "writtenOn": "2020-01-07T13:51:59Z",
+      "side": 1,
+      "message": "\nHi all,\nI can\u0027t explain which approach is better, but I think both approaches are\neffective for the usage situation. The only thing worth noting is if there\nis a race with hotplug failure path, if so, we must have a get/put pair to\navoid such race; if the race is extremely unlikely to happen here, I think \ncpufreq_cpu_get_raw() is the easiest way to force an unbound of cpufreq\ndriver. What do you think?\n\nBRs,\nQiwu",
+      "parentUuid": "e28fa9a9_b7dee17a",
+      "range": {
+        "startLine": 178,
+        "startChar": 2,
+        "endLine": 178,
+        "endChar": 36
+      },
+      "tag": "mailMessageId\u003d\u003c20200107135154.GA17889@cqw-OptiPlex-7050\u003e",
+      "revId": "068443390fda39bde64f092274a06520c4cfadb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
