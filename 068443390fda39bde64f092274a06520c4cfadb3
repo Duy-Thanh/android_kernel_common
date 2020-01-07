@@ -22,6 +22,30 @@
       "revId": "068443390fda39bde64f092274a06520c4cfadb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d68c7ff7_fd063a6e",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1173283
+      },
+      "writtenOn": "2020-01-07T09:38:18Z",
+      "side": 1,
+      "message": "\u003e Why not just add the missing cpufreq_cpu_put() call instead ? You do want to increment the policy refcount while you use it I think.\n\nI think that\u0027s the way to go indeed.",
+      "parentUuid": "4dbaa13d_126095f2",
+      "range": {
+        "startLine": 178,
+        "startChar": 2,
+        "endLine": 178,
+        "endChar": 36
+      },
+      "revId": "068443390fda39bde64f092274a06520c4cfadb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
