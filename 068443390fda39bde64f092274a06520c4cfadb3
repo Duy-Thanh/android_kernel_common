@@ -70,6 +70,30 @@
       "revId": "068443390fda39bde64f092274a06520c4cfadb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c2a341c_31a2ba2e",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1173283
+      },
+      "writtenOn": "2020-01-07T09:58:51Z",
+      "side": 1,
+      "message": "We do dereference the policy to get its related_cpus cpumask, so we should have a get/put pair to ensure we can do these dereferences.",
+      "parentUuid": "4b233bac_61074507",
+      "range": {
+        "startLine": 178,
+        "startChar": 2,
+        "endLine": 178,
+        "endChar": 36
+      },
+      "revId": "068443390fda39bde64f092274a06520c4cfadb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
