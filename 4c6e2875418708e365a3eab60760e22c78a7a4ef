@@ -22,6 +22,30 @@
       "revId": "4c6e2875418708e365a3eab60760e22c78a7a4ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9332c0df_3c7fbab7",
+        "filename": "drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-01-07T20:33:32Z",
+      "side": 1,
+      "message": "I had asked Rob Clark about the warnings I was seeing and he said, something to the effect of \"oh, I guess we\u0027re just being too noisy\" and didn\u0027t seem very concerned. I\u0027ll recheck with him on this though.",
+      "parentUuid": "efd4b94f_49d48a99",
+      "range": {
+        "startLine": 914,
+        "startChar": 0,
+        "endLine": 915,
+        "endChar": 41
+      },
+      "revId": "4c6e2875418708e365a3eab60760e22c78a7a4ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
