@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "365f21cb_5268e4cf",
+        "filename": "include/uapi/linux/netfilter/xt_IDLETIMER.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1611437
+      },
+      "writtenOn": "2020-01-08T15:17:08Z",
+      "side": 1,
+      "message": "Updated it with latest patch . Moved timer_type below send_nl_msg and verified all cases . \ni.e with/without user space patch and with/without kernel patch . IDLETIMER is working as before \n.",
+      "parentUuid": "96f8d710_4d3621c1",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 17
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba04ca87_63378663",
         "filename": "net/netfilter/xt_IDLETIMER.c",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d85d903a_fd0011ce",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1611437
+      },
+      "writtenOn": "2020-01-08T15:17:08Z",
+      "side": 1,
+      "message": "Updated it with patch 3",
+      "parentUuid": "ba04ca87_63378663",
+      "range": {
+        "startLine": 180,
+        "startChar": 17,
+        "endLine": 180,
+        "endChar": 26
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "79985e4b_ec22cc07",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1611437
+      },
+      "writtenOn": "2020-01-08T15:17:08Z",
+      "side": 1,
+      "message": "Updated it with patch 3 .",
+      "parentUuid": "f0f8d82c_0d151078",
+      "range": {
+        "startLine": 188,
+        "startChar": 6,
+        "endLine": 188,
+        "endChar": 7
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cdad3395_7c9ea84d",
         "filename": "net/netfilter/xt_IDLETIMER.c",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "4e8669ca_c11869db",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1611437
+      },
+      "writtenOn": "2020-01-08T15:17:08Z",
+      "side": 1,
+      "message": "With new change we need expires_alarm variable outside if statement . And changes are made to other local variables . Updated it with patch 3",
+      "parentUuid": "cdad3395_7c9ea84d",
+      "range": {
+        "startLine": 193,
+        "startChar": 3,
+        "endLine": 193,
+        "endChar": 16
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c4e640ad_1e7c820f",
         "filename": "net/netfilter/xt_IDLETIMER.c",
         "patchSetId": 1
@@ -114,6 +210,30 @@
       "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8dfff79_d22b6c5b",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1611437
+      },
+      "writtenOn": "2020-01-08T15:17:08Z",
+      "side": 1,
+      "message": "Updated it with latest patch (Patch 3)",
+      "parentUuid": "c4e640ad_1e7c820f",
+      "range": {
+        "startLine": 202,
+        "startChar": 16,
+        "endLine": 202,
+        "endChar": 17
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "d3f3af9d_a63f5ab4",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1611437
+      },
+      "writtenOn": "2020-01-08T15:17:08Z",
+      "side": 1,
+      "message": "Agree... Updated with patch 3",
+      "parentUuid": "8443fd2c_4b47e93f",
+      "range": {
+        "startLine": 388,
+        "startChar": 1,
+        "endLine": 388,
+        "endChar": 8
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96505e65_4004aad5",
         "filename": "net/netfilter/xt_IDLETIMER.c",
         "patchSetId": 1
@@ -183,6 +327,30 @@
       "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18791127_67dc5c75",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1611437
+      },
+      "writtenOn": "2020-01-08T15:17:08Z",
+      "side": 1,
+      "message": "Done . Please check patch 3",
+      "parentUuid": "96505e65_4004aad5",
+      "range": {
+        "startLine": 415,
+        "startChar": 6,
+        "endLine": 415,
+        "endChar": 7
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -233,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "a475ccf6_a9397135",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1611437
+      },
+      "writtenOn": "2020-01-08T15:17:08Z",
+      "side": 1,
+      "message": "Yes . We have updated tg_info structure and verified all cases.",
+      "parentUuid": "f78ea0a5_28846392",
+      "range": {
+        "startLine": 446,
+        "startChar": 26,
+        "endLine": 446,
+        "endChar": 27
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5521e77e_e1c0a416",
         "filename": "net/netfilter/xt_IDLETIMER.c",
         "patchSetId": 1
@@ -253,6 +445,30 @@
       "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ce6fd9d_da633256",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1611437
+      },
+      "writtenOn": "2020-01-08T15:17:08Z",
+      "side": 1,
+      "message": "Used timespec64 and updated with patch 3",
+      "parentUuid": "5521e77e_e1c0a416",
+      "range": {
+        "startLine": 449,
+        "startChar": 17,
+        "endLine": 449,
+        "endChar": 26
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -279,6 +495,30 @@
     },
     {
       "key": {
+        "uuid": "fa0b6762_7ef8462b",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1611437
+      },
+      "writtenOn": "2020-01-08T15:17:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2c9aebe_ab17227b",
+      "range": {
+        "startLine": 486,
+        "startChar": 6,
+        "endLine": 486,
+        "endChar": 7
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "35eff696_9cbec069",
         "filename": "net/netfilter/xt_IDLETIMER.c",
         "patchSetId": 1
@@ -299,6 +539,30 @@
       "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ec5ab1f_09159262",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1611437
+      },
+      "writtenOn": "2020-01-08T15:17:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35eff696_9cbec069",
+      "range": {
+        "startLine": 490,
+        "startChar": 3,
+        "endLine": 490,
+        "endChar": 7
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -325,6 +589,30 @@
     },
     {
       "key": {
+        "uuid": "4e4a6bc2_ee91eac6",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1611437
+      },
+      "writtenOn": "2020-01-08T15:17:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "938a3a6c_28d848de",
+      "range": {
+        "startLine": 491,
+        "startChar": 3,
+        "endLine": 491,
+        "endChar": 12
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a30bd4fa_b81ee6b9",
         "filename": "net/netfilter/xt_IDLETIMER.c",
         "patchSetId": 1
@@ -336,6 +624,30 @@
       "writtenOn": "2020-01-04T11:02:20Z",
       "side": 1,
       "message": "what if it\u0027s 0 sec but some number of nsec or msec?",
+      "range": {
+        "startLine": 493,
+        "startChar": 0,
+        "endLine": 493,
+        "endChar": 30
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b243ec19_5d6ccd90",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1611437
+      },
+      "writtenOn": "2020-01-08T15:17:08Z",
+      "side": 1,
+      "message": "We run HARDIDLETIMER with secs resolution . We can ignore nsec and msec resolution.",
+      "parentUuid": "a30bd4fa_b81ee6b9",
       "range": {
         "startLine": 493,
         "startChar": 0,
@@ -368,6 +680,30 @@
       "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4218f2ef_6564a3e2",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1611437
+      },
+      "writtenOn": "2020-01-08T15:17:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f01460b_ac87b44b",
+      "range": {
+        "startLine": 527,
+        "startChar": 6,
+        "endLine": 527,
+        "endChar": 7
+      },
+      "revId": "642e3dc0002091ffaf95873ec5ce1495f11c3bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
