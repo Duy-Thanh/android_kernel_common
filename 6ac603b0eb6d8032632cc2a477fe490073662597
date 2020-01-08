@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b07c776_f83a763c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-01-08T11:09:37Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem to be a correct bug number. Well it is correct, but I doubt it is what you want. Could you double check it ?\n\nCould you also add \u0027Bug: 120440300\u0027 please ?",
+      "revId": "6ac603b0eb6d8032632cc2a477fe490073662597",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
