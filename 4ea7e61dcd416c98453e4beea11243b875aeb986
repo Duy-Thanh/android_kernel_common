@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd9fb4ee_bd2615cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-09T18:19:54Z",
+      "side": 1,
+      "message": "Lint is complaining that this isn\u0027t a lore.kernel.org link.  Use:\n\nLink: https://lore.kernel.org/r/20191218145136.172774-1-satyat@google.com",
+      "range": {
+        "startLine": 31,
+        "startChar": 6,
+        "endLine": 31,
+        "endChar": 74
+      },
+      "revId": "4ea7e61dcd416c98453e4beea11243b875aeb986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
