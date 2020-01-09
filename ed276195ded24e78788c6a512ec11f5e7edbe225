@@ -22,6 +22,30 @@
       "revId": "ed276195ded24e78788c6a512ec11f5e7edbe225",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6be5ba23_12047961",
+        "filename": "build.config.fvp",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-01-09T16:46:39Z",
+      "side": 1,
+      "message": "I\u0027m getting a mouse detected here, with dmesg output like:\n\n[    3.254199] input: PS/2 Generic Mouse as /devices/platform/smb@8000000/smb@8000000:motherboard/smb@8000000:motherboard:iofpga@3,00000000/1c070000.kmi/serio1/input/input2\n\nOnce Android is booted I can also see a mouse cursor if I move the mouse inside the model window. I wonder why that isn\u0027t working for you.",
+      "parentUuid": "9409356d_3cd2154b",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 28
+      },
+      "revId": "ed276195ded24e78788c6a512ec11f5e7edbe225",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
