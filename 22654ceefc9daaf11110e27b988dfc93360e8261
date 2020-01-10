@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ba91a1bc_abb1998b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1128769
+      },
+      "writtenOn": "2020-01-10T14:26:03Z",
+      "side": 1,
+      "message": "Makes sense, combined the statements.",
+      "parentUuid": "ab012c84_81fa5ec4",
+      "range": {
+        "startLine": 82,
+        "startChar": 2,
+        "endLine": 82,
+        "endChar": 15
+      },
+      "revId": "22654ceefc9daaf11110e27b988dfc93360e8261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "02916f1f_126f2f5b",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2020-01-10T10:03:46Z",
       "side": 1,
       "message": "Prefer we keep this it\u0027s own commit. Generally we want to preserve upstream commit history since they track things like bugs and fixes. This is a good example of where you\u0027re submitting a change with a known fix, but not obviously submitting the fix i.e. the change that contains the \"fixes: \u003chash\u003e\" entry.",
+      "range": {
+        "startLine": 86,
+        "startChar": 21,
+        "endLine": 86,
+        "endChar": 27
+      },
+      "revId": "22654ceefc9daaf11110e27b988dfc93360e8261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed93a4d6_4ce2fdd0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1128769
+      },
+      "writtenOn": "2020-01-10T14:26:03Z",
+      "side": 1,
+      "message": "It\u0027s been suggested that I fold the 1-liner fix into the backport (to minimize the number of distinct patches).\nI\u0027m not sure whether this is appropriate, but I\u0027ve added a \"Fixes: \" with the commit sha that I\u0027m backporting to highlight that it already carries a fix. WDYT?",
+      "parentUuid": "02916f1f_126f2f5b",
       "range": {
         "startLine": 86,
         "startChar": 21,
