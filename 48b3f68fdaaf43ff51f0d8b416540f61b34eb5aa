@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7cf43d13_3a339409",
+        "filename": "block/blk-crypto-fallback.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-10T21:13:29Z",
+      "side": 1,
+      "message": "No need to explicitly set function pointers to NULL.  Just don\u0027t change anything in this file.  Likewise for ufshcd-crypto.c.",
+      "range": {
+        "startLine": 151,
+        "startChar": 1,
+        "endLine": 151,
+        "endChar": 25
+      },
+      "revId": "48b3f68fdaaf43ff51f0d8b416540f61b34eb5aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "699bfad2_5ac15a38",
+        "filename": "include/linux/keyslot-manager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-10T21:13:29Z",
+      "side": 1,
+      "message": "The keyslot manager is a generic block layer thing, so the comment here shouldn\u0027t mention anything about fscrypt specifically.  It needs to document what this function does for any user of the block layer.",
+      "range": {
+        "startLine": 21,
+        "startChar": 70,
+        "endLine": 22,
+        "endChar": 52
+      },
+      "revId": "48b3f68fdaaf43ff51f0d8b416540f61b34eb5aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ceed30e_4c76cbc5",
+        "filename": "include/linux/keyslot-manager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-10T21:13:29Z",
+      "side": 1,
+      "message": "As I commented on the fscrypt patch, I think this would be much clearer if it was called derive_raw_secret(), and the \u0027key\u0027 and \u0027key_size\u0027 arguments were called \u0027wrapped_key\u0027 and \u0027wrapped-key_size\u0027.",
+      "range": {
+        "startLine": 35,
+        "startChar": 7,
+        "endLine": 35,
+        "endChar": 21
+      },
+      "revId": "48b3f68fdaaf43ff51f0d8b416540f61b34eb5aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
