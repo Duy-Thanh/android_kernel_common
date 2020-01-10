@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "790ee821_07387575",
+        "filename": "build.config.db845c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-01-10T19:29:08Z",
+      "side": 1,
+      "message": "TODO: Need to figure out how to generate the config to be used here from the fragment in the build tool.",
+      "revId": "0e31b781c7ee73ba890cc0c432b629550cc47b92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
