@@ -93,6 +93,30 @@
       "revId": "22654ceefc9daaf11110e27b988dfc93360e8261",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "016a86f5_14d59c4b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1128769
+      },
+      "writtenOn": "2020-01-10T15:12:16Z",
+      "side": 1,
+      "message": "Discussed with Jeff offline, he wasn\u0027t actively against this version.",
+      "parentUuid": "ed93a4d6_4ce2fdd0",
+      "range": {
+        "startLine": 86,
+        "startChar": 21,
+        "endLine": 86,
+        "endChar": 27
+      },
+      "revId": "22654ceefc9daaf11110e27b988dfc93360e8261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
