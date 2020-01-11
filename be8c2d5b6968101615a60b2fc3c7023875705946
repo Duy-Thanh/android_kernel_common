@@ -69,6 +69,30 @@
       "revId": "be8c2d5b6968101615a60b2fc3c7023875705946",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "848d41f1_853fe409",
+        "filename": "fs/f2fs/data.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-01-11T10:41:30Z",
+      "side": 1,
+      "message": "I think it\u0027s a little too sad to add brackets in the wrong places to avoid the probably small, if any merge conflict in future, especially since I\u0027m also correcting the bracketing in v7 of the patches, so there won\u0027t be conflicts past that point anyway - if it\u0027s fine, I\u0027d rather just leave this as is for now.",
+      "parentUuid": "8cdd36cf_4fb481b6",
+      "range": {
+        "startLine": 715,
+        "startChar": 34,
+        "endLine": 716,
+        "endChar": 53
+      },
+      "revId": "be8c2d5b6968101615a60b2fc3c7023875705946",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
