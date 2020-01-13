@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "d259f91c_862cfd26",
+        "filename": "include/linux/keyslot-manager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1619522
+      },
+      "writtenOn": "2020-01-13T20:49:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "699bfad2_5ac15a38",
+      "range": {
+        "startLine": 21,
+        "startChar": 70,
+        "endLine": 22,
+        "endChar": 52
+      },
+      "revId": "48b3f68fdaaf43ff51f0d8b416540f61b34eb5aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ceed30e_4c76cbc5",
         "filename": "include/linux/keyslot-manager.h",
         "patchSetId": 6
@@ -68,6 +92,30 @@
       "revId": "48b3f68fdaaf43ff51f0d8b416540f61b34eb5aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57a6c26b_a7e0cd3c",
+        "filename": "include/linux/keyslot-manager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1619522
+      },
+      "writtenOn": "2020-01-13T20:49:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ceed30e_4c76cbc5",
+      "range": {
+        "startLine": 35,
+        "startChar": 7,
+        "endLine": 35,
+        "endChar": 21
+      },
+      "revId": "48b3f68fdaaf43ff51f0d8b416540f61b34eb5aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
