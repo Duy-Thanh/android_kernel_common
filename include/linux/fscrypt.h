@@ -64,7 +64,10 @@ struct fscrypt_operations {
 	bool (*has_stable_inodes)(struct super_block *sb);
 	void (*get_ino_and_lblk_bits)(struct super_block *sb,
 				      int *ino_bits_ret, int *lblk_bits_ret);
+<<<<<<< HEAD   (5da111 Merge 4.19.95 into android-4.19)
 	bool (*inline_crypt_enabled)(struct super_block *sb);
+=======
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 };
 
 static inline bool fscrypt_has_encryption_key(const struct inode *inode)

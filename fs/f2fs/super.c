@@ -2350,11 +2350,14 @@ static void f2fs_get_ino_and_lblk_bits(struct super_block *sb,
 	*lblk_bits_ret = 8 * sizeof(block_t);
 }
 
+<<<<<<< HEAD   (5da111 Merge 4.19.95 into android-4.19)
 static bool f2fs_inline_crypt_enabled(struct super_block *sb)
 {
 	return F2FS_OPTION(F2FS_SB(sb)).inlinecrypt;
 }
 
+=======
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 static const struct fscrypt_operations f2fs_cryptops = {
 	.key_prefix		= "f2fs:",
 	.get_context		= f2fs_get_context,
@@ -2364,7 +2367,10 @@ static const struct fscrypt_operations f2fs_cryptops = {
 	.max_namelen		= F2FS_NAME_LEN,
 	.has_stable_inodes	= f2fs_has_stable_inodes,
 	.get_ino_and_lblk_bits	= f2fs_get_ino_and_lblk_bits,
+<<<<<<< HEAD   (5da111 Merge 4.19.95 into android-4.19)
 	.inline_crypt_enabled	= f2fs_inline_crypt_enabled,
+=======
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 };
 #endif
 

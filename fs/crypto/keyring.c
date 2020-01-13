@@ -47,8 +47,11 @@ static void free_master_key(struct fscrypt_master_key *mk)
 		crypto_free_skcipher(mk->mk_direct_tfms[i]);
 		crypto_free_skcipher(mk->mk_iv_ino_lblk_64_tfms[i]);
 	}
+<<<<<<< HEAD   (5da111 Merge 4.19.95 into android-4.19)
 
 	fscrypt_evict_inline_crypt_keys(mk);
+=======
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 
 	key_put(mk->mk_users);
 	kzfree(mk);

@@ -13,7 +13,11 @@
 
 #include "fscrypt_private.h"
 
+<<<<<<< HEAD   (5da111 Merge 4.19.95 into android-4.19)
 struct fscrypt_mode fscrypt_modes[] = {
+=======
+static struct fscrypt_mode available_modes[] = {
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 	[FSCRYPT_MODE_AES_256_XTS] = {
 		.friendly_name = "AES-256-XTS",
 		.cipher_str = "xts(aes)",
@@ -82,15 +86,13 @@ struct crypto_skcipher *fscrypt_allocate_skcipher(struct fscrypt_mode *mode,
 			    mode->cipher_str, PTR_ERR(tfm));
 		return tfm;
 	}
-	if (unlikely(!mode->logged_impl_name)) {
+	if (!xchg(&mode->logged_impl_name, 1)) {
 		/*
 		 * fscrypt performance can vary greatly depending on which
 		 * crypto algorithm implementation is used.  Help people debug
 		 * performance problems by logging the ->cra_driver_name the
-		 * first time a mode is used.  Note that multiple threads can
-		 * race here, but it doesn't really matter.
+		 * first time a mode is used.
 		 */
-		mode->logged_impl_name = true;
 		pr_info("fscrypt: %s using implementation \"%s\"\n",
 			mode->friendly_name,
 			crypto_skcipher_alg(tfm)->base.cra_driver_name);
@@ -112,13 +114,22 @@ int fscrypt_set_derived_key(struct fscrypt_info *ci, const u8 *derived_key)
 {
 	struct crypto_skcipher *tfm;
 
+<<<<<<< HEAD   (5da111 Merge 4.19.95 into android-4.19)
 	if (fscrypt_should_use_inline_encryption(ci))
 		return fscrypt_set_inline_crypt_key(ci, derived_key);
+=======
+	tfm = fscrypt_allocate_skcipher(ci->ci_mode, derived_key, ci->ci_inode);
+	if (IS_ERR(tfm))
+		return PTR_ERR(tfm);
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 
+<<<<<<< HEAD   (5da111 Merge 4.19.95 into android-4.19)
 	tfm = fscrypt_allocate_skcipher(ci->ci_mode, derived_key, ci->ci_inode);
 	if (IS_ERR(tfm))
 		return PTR_ERR(tfm);
 
+=======
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 	ci->ci_ctfm = tfm;
 	ci->ci_owns_key = true;
 	return 0;
@@ -208,8 +219,11 @@ static int fscrypt_setup_v2_file_key(struct fscrypt_info *ci,
 		 * the IVs.  This format is optimized for use with inline
 		 * encryption hardware compliant with the UFS or eMMC standards.
 		 */
+<<<<<<< HEAD   (5da111 Merge 4.19.95 into android-4.19)
 		if (fscrypt_should_use_inline_encryption(ci))
 			return fscrypt_setup_per_mode_inline_crypt_key(ci, mk);
+=======
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 		return setup_per_mode_key(ci, mk, mk->mk_iv_ino_lblk_64_tfms,
 					  HKDF_CONTEXT_IV_INO_LBLK_64_KEY,
 					  true);
@@ -336,10 +350,17 @@ static void put_crypt_info(struct fscrypt_info *ci)
 
 	if (ci->ci_direct_key)
 		fscrypt_put_direct_key(ci->ci_direct_key);
+<<<<<<< HEAD   (5da111 Merge 4.19.95 into android-4.19)
 	else if (ci->ci_owns_key) {
+=======
+	else if (ci->ci_owns_key)
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 		crypto_free_skcipher(ci->ci_ctfm);
+<<<<<<< HEAD   (5da111 Merge 4.19.95 into android-4.19)
 		fscrypt_free_inline_crypt_key(ci);
 	}
+=======
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 
 	key = ci->ci_master_key;
 	if (key) {
