@@ -1,0 +1,25 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000001344745",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1205996?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "d545bac9_4a3a8731",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-01-13T18:37:16Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Dmitry Shmidt \u003cdimitrysh@google.com\u003e",
+      "revId": "dd3a807637f9b1741416e632750668471ea38f17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
