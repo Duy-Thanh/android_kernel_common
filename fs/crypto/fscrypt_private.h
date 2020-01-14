@@ -180,6 +180,7 @@ struct fscrypt_info {
 
 	/* True if the key should be freed when this fscrypt_info is freed */
 	bool ci_owns_key;
+<<<<<<< HEAD   (41fe15 ANDROID: Enable HID_STEAM, HID_SONY, JOYSTICK_XPAD as y)
 
 #ifdef CONFIG_FS_ENCRYPTION_INLINE_CRYPT
 	/*
@@ -188,6 +189,8 @@ struct fscrypt_info {
 	 */
 	bool ci_inlinecrypt;
 #endif
+=======
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 
 	/*
 	 * Encryption mode used for this inode.  It corresponds to either the
@@ -476,11 +479,22 @@ struct fscrypt_master_key {
 	struct list_head	mk_decrypted_inodes;
 	spinlock_t		mk_decrypted_inodes_lock;
 
+<<<<<<< HEAD   (41fe15 ANDROID: Enable HID_STEAM, HID_SONY, JOYSTICK_XPAD as y)
 	/* Per-mode keys for DIRECT_KEY policies, allocated on-demand */
 	struct fscrypt_prepared_key mk_direct_keys[__FSCRYPT_MODE_MAX + 1];
 
 	/* Per-mode keys for IV_INO_LBLK_64 policies, allocated on-demand */
 	struct fscrypt_prepared_key mk_iv_ino_lblk_64_keys[__FSCRYPT_MODE_MAX + 1];
+=======
+	/* Crypto API transforms for DIRECT_KEY policies, allocated on-demand */
+	struct crypto_skcipher	*mk_direct_tfms[__FSCRYPT_MODE_MAX + 1];
+
+	/*
+	 * Crypto API transforms for filesystem-layer implementation of
+	 * IV_INO_LBLK_64 policies, allocated on-demand.
+	 */
+	struct crypto_skcipher	*mk_iv_ino_lblk_64_tfms[__FSCRYPT_MODE_MAX + 1];
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 
 } __randomize_layout;
 
@@ -536,8 +550,12 @@ struct fscrypt_mode {
 	const char *cipher_str;
 	int keysize;
 	int ivsize;
+<<<<<<< HEAD   (41fe15 ANDROID: Enable HID_STEAM, HID_SONY, JOYSTICK_XPAD as y)
 	bool logged_impl_name;
 	enum blk_crypto_mode_num blk_crypto_mode;
+=======
+	int logged_impl_name;
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 };
 
 extern struct fscrypt_mode fscrypt_modes[];
