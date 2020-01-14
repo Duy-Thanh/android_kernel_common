@@ -16,6 +16,24 @@
       "revId": "0e31b781c7ee73ba890cc0c432b629550cc47b92",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec3d725e_3faabf05",
+        "filename": "build.config.db845c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-01-14T04:51:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "790ee821_07387575",
+      "revId": "0e31b781c7ee73ba890cc0c432b629550cc47b92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
