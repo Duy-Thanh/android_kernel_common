@@ -70,6 +70,30 @@
       "revId": "ed276195ded24e78788c6a512ec11f5e7edbe225",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e6e3cfc_45cc3215",
+        "filename": "build.config.fvp",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1581772
+      },
+      "writtenOn": "2020-01-14T13:17:09Z",
+      "side": 1,
+      "message": "So unexpectedly, it turns out that no mouse gets detected on 4.19 (which is what I was using), but it does work fine on 4.14 and 5.4! Not sure what\u0027s going on...\n\nIn any case, INPUT_MOUSE and MOUSE_PS2 seem to be sufficient: INPUT_MOUSEDEV exposes the mouse as /dev/input/mouse0, but that doesn\u0027t seem to make any difference (if anything, it probably just makes EventHub detect the mouse twice, once through /dev/input/eventX and once through /dev/input/mouse0).",
+      "parentUuid": "b4f1392a_c0d49052",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 28
+      },
+      "revId": "ed276195ded24e78788c6a512ec11f5e7edbe225",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
