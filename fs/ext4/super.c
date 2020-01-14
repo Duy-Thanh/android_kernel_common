@@ -1361,11 +1361,14 @@ static void ext4_get_ino_and_lblk_bits(struct super_block *sb,
 	*lblk_bits_ret = 8 * sizeof(ext4_lblk_t);
 }
 
+<<<<<<< HEAD   (9e25a3 ANDROID: gki_defconfig: Enable blk-crypto fallback)
 static bool ext4_inline_crypt_enabled(struct super_block *sb)
 {
 	return test_opt(sb, INLINECRYPT);
 }
 
+=======
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 static const struct fscrypt_operations ext4_cryptops = {
 	.key_prefix		= "ext4:",
 	.get_context		= ext4_get_context,
@@ -1375,7 +1378,10 @@ static const struct fscrypt_operations ext4_cryptops = {
 	.max_namelen		= EXT4_NAME_LEN,
 	.has_stable_inodes	= ext4_has_stable_inodes,
 	.get_ino_and_lblk_bits	= ext4_get_ino_and_lblk_bits,
+<<<<<<< HEAD   (9e25a3 ANDROID: gki_defconfig: Enable blk-crypto fallback)
 	.inline_crypt_enabled	= ext4_inline_crypt_enabled,
+=======
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 };
 #endif
 

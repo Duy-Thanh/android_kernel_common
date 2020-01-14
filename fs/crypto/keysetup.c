@@ -13,7 +13,11 @@
 
 #include "fscrypt_private.h"
 
+<<<<<<< HEAD   (9e25a3 ANDROID: gki_defconfig: Enable blk-crypto fallback)
 struct fscrypt_mode fscrypt_modes[] = {
+=======
+static struct fscrypt_mode available_modes[] = {
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 	[FSCRYPT_MODE_AES_256_XTS] = {
 		.friendly_name = "AES-256-XTS",
 		.cipher_str = "xts(aes)",
@@ -32,7 +36,10 @@ struct fscrypt_mode fscrypt_modes[] = {
 		.cipher_str = "essiv(cbc(aes),sha256)",
 		.keysize = 16,
 		.ivsize = 16,
+<<<<<<< HEAD   (9e25a3 ANDROID: gki_defconfig: Enable blk-crypto fallback)
 		.blk_crypto_mode = BLK_ENCRYPTION_MODE_AES_128_CBC_ESSIV,
+=======
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 	},
 	[FSCRYPT_MODE_AES_128_CTS] = {
 		.friendly_name = "AES-128-CTS-CBC",
@@ -84,15 +91,13 @@ fscrypt_allocate_skcipher(struct fscrypt_mode *mode, const u8 *raw_key,
 			    mode->cipher_str, PTR_ERR(tfm));
 		return tfm;
 	}
-	if (unlikely(!mode->logged_impl_name)) {
+	if (!xchg(&mode->logged_impl_name, 1)) {
 		/*
 		 * fscrypt performance can vary greatly depending on which
 		 * crypto algorithm implementation is used.  Help people debug
 		 * performance problems by logging the ->cra_driver_name the
-		 * first time a mode is used.  Note that multiple threads can
-		 * race here, but it doesn't really matter.
+		 * first time a mode is used.
 		 */
-		mode->logged_impl_name = true;
 		pr_info("fscrypt: %s using implementation \"%s\"\n",
 			mode->friendly_name,
 			crypto_skcipher_alg(tfm)->base.cra_driver_name);
@@ -109,6 +114,7 @@ err_free_tfm:
 	return ERR_PTR(err);
 }
 
+<<<<<<< HEAD   (9e25a3 ANDROID: gki_defconfig: Enable blk-crypto fallback)
 /*
  * Prepare the crypto transform object or blk-crypto key in @prep_key, given the
  * raw key, encryption mode, and flag indicating which encryption implementation
@@ -140,19 +146,40 @@ void fscrypt_destroy_prepared_key(struct fscrypt_prepared_key *prep_key)
 	fscrypt_destroy_inline_crypt_key(prep_key);
 }
 
+=======
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 /* Given the per-file key, set up the file's crypto transform object */
 int fscrypt_set_derived_key(struct fscrypt_info *ci, const u8 *derived_key)
 {
+<<<<<<< HEAD   (9e25a3 ANDROID: gki_defconfig: Enable blk-crypto fallback)
 	ci->ci_owns_key = true;
 	return fscrypt_prepare_key(&ci->ci_key, derived_key, ci);
+=======
+	struct crypto_skcipher *tfm;
+
+	tfm = fscrypt_allocate_skcipher(ci->ci_mode, derived_key, ci->ci_inode);
+	if (IS_ERR(tfm))
+		return PTR_ERR(tfm);
+
+	ci->ci_ctfm = tfm;
+	ci->ci_owns_key = true;
+	return 0;
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 }
 
 static int setup_per_mode_key(struct fscrypt_info *ci,
 			      struct fscrypt_master_key *mk,
+<<<<<<< HEAD   (9e25a3 ANDROID: gki_defconfig: Enable blk-crypto fallback)
 			      struct fscrypt_prepared_key *keys,
+=======
+			      struct crypto_skcipher **tfms,
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 			      u8 hkdf_context, bool include_fs_uuid)
 {
+<<<<<<< HEAD   (9e25a3 ANDROID: gki_defconfig: Enable blk-crypto fallback)
 	static DEFINE_MUTEX(mode_key_setup_mutex);
+=======
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 	const struct inode *inode = ci->ci_inode;
 	const struct super_block *sb = inode->i_sb;
 	struct fscrypt_mode *mode = ci->ci_mode;
@@ -166,6 +193,7 @@ static int setup_per_mode_key(struct fscrypt_info *ci,
 	if (WARN_ON(mode_num > __FSCRYPT_MODE_MAX))
 		return -EINVAL;
 
+<<<<<<< HEAD   (9e25a3 ANDROID: gki_defconfig: Enable blk-crypto fallback)
 	prep_key = &keys[mode_num];
 	if (fscrypt_is_key_prepared(prep_key, ci)) {
 		ci->ci_key = *prep_key;
@@ -176,6 +204,12 @@ static int setup_per_mode_key(struct fscrypt_info *ci,
 
 	if (fscrypt_is_key_prepared(prep_key, ci))
 		goto done_unlock;
+=======
+	/* pairs with cmpxchg() below */
+	tfm = READ_ONCE(tfms[mode_num]);
+	if (likely(tfm != NULL))
+		goto done;
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 
 	BUILD_BUG_ON(sizeof(mode_num) != 1);
 	BUILD_BUG_ON(sizeof(sb->s_uuid) != 16);
@@ -190,9 +224,15 @@ static int setup_per_mode_key(struct fscrypt_info *ci,
 				  hkdf_context, hkdf_info, hkdf_infolen,
 				  mode_key, mode->keysize);
 	if (err)
+<<<<<<< HEAD   (9e25a3 ANDROID: gki_defconfig: Enable blk-crypto fallback)
 		goto out_unlock;
 	err = fscrypt_prepare_key(prep_key, mode_key, ci);
+=======
+		return err;
+	tfm = fscrypt_allocate_skcipher(mode, mode_key, inode);
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 	memzero_explicit(mode_key, mode->keysize);
+<<<<<<< HEAD   (9e25a3 ANDROID: gki_defconfig: Enable blk-crypto fallback)
 	if (err)
 		goto out_unlock;
 done_unlock:
@@ -201,6 +241,20 @@ done_unlock:
 out_unlock:
 	mutex_unlock(&mode_key_setup_mutex);
 	return err;
+=======
+	if (IS_ERR(tfm))
+		return PTR_ERR(tfm);
+
+	/* pairs with READ_ONCE() above */
+	prev_tfm = cmpxchg(&tfms[mode_num], NULL, tfm);
+	if (prev_tfm != NULL) {
+		crypto_free_skcipher(tfm);
+		tfm = prev_tfm;
+	}
+done:
+	ci->ci_ctfm = tfm;
+	return 0;
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 }
 
 static int fscrypt_setup_v2_file_key(struct fscrypt_info *ci,
@@ -224,6 +278,7 @@ static int fscrypt_setup_v2_file_key(struct fscrypt_info *ci,
 				     ci->ci_mode->friendly_name);
 			return -EINVAL;
 		}
+<<<<<<< HEAD   (9e25a3 ANDROID: gki_defconfig: Enable blk-crypto fallback)
 		return setup_per_mode_key(ci, mk, mk->mk_direct_keys,
 					  HKDF_CONTEXT_DIRECT_KEY, false);
 	} else if (ci->ci_policy.v2.flags &
@@ -235,6 +290,19 @@ static int fscrypt_setup_v2_file_key(struct fscrypt_info *ci,
 		 * encryption hardware compliant with the UFS or eMMC standards.
 		 */
 		return setup_per_mode_key(ci, mk, mk->mk_iv_ino_lblk_64_keys,
+=======
+		return setup_per_mode_key(ci, mk, mk->mk_direct_tfms,
+					  HKDF_CONTEXT_DIRECT_KEY, false);
+	} else if (ci->ci_policy.v2.flags &
+		   FSCRYPT_POLICY_FLAG_IV_INO_LBLK_64) {
+		/*
+		 * IV_INO_LBLK_64: encryption keys are derived from (master_key,
+		 * mode_num, filesystem_uuid), and inode number is included in
+		 * the IVs.  This format is optimized for use with inline
+		 * encryption hardware compliant with the UFS or eMMC standards.
+		 */
+		return setup_per_mode_key(ci, mk, mk->mk_iv_ino_lblk_64_tfms,
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 					  HKDF_CONTEXT_IV_INO_LBLK_64_KEY,
 					  true);
 	}
@@ -363,7 +431,11 @@ static void put_crypt_info(struct fscrypt_info *ci)
 	if (ci->ci_direct_key)
 		fscrypt_put_direct_key(ci->ci_direct_key);
 	else if (ci->ci_owns_key)
+<<<<<<< HEAD   (9e25a3 ANDROID: gki_defconfig: Enable blk-crypto fallback)
 		fscrypt_destroy_prepared_key(&ci->ci_key);
+=======
+		crypto_free_skcipher(ci->ci_ctfm);
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 
 	key = ci->ci_master_key;
 	if (key) {

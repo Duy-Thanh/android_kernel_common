@@ -2350,6 +2350,7 @@ static void f2fs_get_ino_and_lblk_bits(struct super_block *sb,
 	*lblk_bits_ret = 8 * sizeof(block_t);
 }
 
+<<<<<<< HEAD   (9e25a3 ANDROID: gki_defconfig: Enable blk-crypto fallback)
 static bool f2fs_inline_crypt_enabled(struct super_block *sb)
 {
 	return F2FS_OPTION(F2FS_SB(sb)).inlinecrypt;
@@ -2374,6 +2375,8 @@ static void f2fs_get_devices(struct super_block *sb,
 		devs[i] = bdev_get_queue(FDEV(i).bdev);
 }
 
+=======
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 static const struct fscrypt_operations f2fs_cryptops = {
 	.key_prefix		= "f2fs:",
 	.get_context		= f2fs_get_context,
@@ -2383,9 +2386,12 @@ static const struct fscrypt_operations f2fs_cryptops = {
 	.max_namelen		= F2FS_NAME_LEN,
 	.has_stable_inodes	= f2fs_has_stable_inodes,
 	.get_ino_and_lblk_bits	= f2fs_get_ino_and_lblk_bits,
+<<<<<<< HEAD   (9e25a3 ANDROID: gki_defconfig: Enable blk-crypto fallback)
 	.inline_crypt_enabled	= f2fs_inline_crypt_enabled,
 	.get_num_devices	= f2fs_get_num_devices,
 	.get_devices		= f2fs_get_devices,
+=======
+>>>>>>> BRANCH (c18847 docs: fs-verity: mention statx() support)
 };
 #endif
 
