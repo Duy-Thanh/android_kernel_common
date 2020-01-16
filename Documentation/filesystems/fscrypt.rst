@@ -302,6 +302,33 @@ For master keys used for v2 encryption policies, a unique 16-byte "key
 identifier" is also derived using the KDF.  This value is stored in
 the clear, since it is needed to reliably identify the key itself.
 
+Hardware-wrapped keys
+---------------------
+
+To prevent keys from being compromised if an attacker acquires read
+access to kernel memory, some inline encryption hardware supports
+protecting the keys in hardware without software having access to or
+the ability to set the plaintext keys.  Instead, software only sees
+"wrapped keys", which may differ on every boot.  The keys can be
+initially generated either by software (in which case they need to be
+imported to hardware to be wrapped), or directly by the hardware.
+
+fscrypt supports this type of hardware by allowing userspace to flag
+keys as being hardware-wrapped (FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED).
+When done, fscrypt will pass the wrapped key directly to the inline
+encryption hardware to encrypt file contents.  The hardware is
+responsible for internally unwrapping the key and deriving the actual
+file contents encryption key.
+
+fscrypt will also ask the inline encryption hardware to derive a
+software "secret".  fscrypt uses this secret as the master key for all
+other purposes besides file contents encryption, e.g. to derive
+filenames encryption keys and the key identifier.  (Thus, filenames
+keys remain in the clear in memory; only file contents keys are
+hardware-protected.)  The hardware should ensure that this secret is
+cryptographically isolated from the file contents key, e.g. by
+deriving both from the unwrapped key using different KDF contexts.
+
 Encryption modes and usage
 ==========================
 
@@ -638,7 +665,9 @@ follows::
     struct fscrypt_add_key_arg {
             struct fscrypt_key_specifier key_spec;
             __u32 raw_size;
-            __u32 __reserved[9];
+            __u32 __reserved[8];
+    #define FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED         0x00000001
+            __u32 flags;
             __u8 raw[];
     };
 
@@ -678,6 +707,11 @@ as follows:
 
 - ``raw_size`` must be the size of the ``raw`` key provided, in bytes.
 
+- ``flags`` contains optional flags from ``<linux/fscrypt.h>``:
+
+  - FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED: This denotes that the key is a
+    hardware-wrapped key.  See `Hardware-wrapped keys`_.
+
 - ``raw`` is a variable-length field which must contain the actual
   key, ``raw_size`` bytes long.
 
@@ -709,7 +743,8 @@ FS_IOC_ADD_ENCRYPTION_KEY can fail with the following errors:
 - ``ENOTTY``: this type of filesystem does not implement encryption
 - ``EOPNOTSUPP``: the kernel was not configured with encryption
   support for this filesystem, or the filesystem superblock has not
-  had encryption enabled on it
+  had encryption enabled on it, or FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED was
+  specified but the hardware doesn't support hardware-wrapped keys.
 
 Legacy method
 ~~~~~~~~~~~~~
