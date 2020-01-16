@@ -122,6 +122,13 @@ bool fscrypt_supported_policy(const union fscrypt_policy *policy_u,
 		    !supported_iv_ino_lblk_64_policy(policy, inode))
 			return false;
 
+		if ((policy->flags & FSCRYPT_POLICY_FLAG_HW_WRAPPED_KEY) &&
+		    !(policy->flags & FSCRYPT_POLICY_FLAG_IV_INO_LBLK_64)) {
+			fscrypt_warn(inode,
+				     "HW_WRAPPED_KEY flag is set, but IV_INO_LBLK_64 isn't");
+			return false;
+		}
+
 		if (memchr_inv(policy->__reserved, 0,
 			       sizeof(policy->__reserved))) {
 			fscrypt_warn(inode,
