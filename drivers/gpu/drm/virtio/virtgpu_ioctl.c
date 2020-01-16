@@ -436,24 +436,26 @@ static int virtio_gpu_transfer_to_host_ioctl(struct drm_device *dev, void *data,
 		goto out_unres;
 
 	convert_to_hw_box(&box, &args->box);
+
+	fence = virtio_gpu_fence_alloc(vgdev);
+	if (!fence) {
+		ret = -ENOMEM;
+		goto out_unres;
+	}
+
 	if (!vgdev->has_virgl_3d) {
 		virtio_gpu_cmd_transfer_to_host_2d
 			(vgdev, qobj, offset,
-			 box.w, box.h, box.x, box.y, NULL);
+			 box.w, box.h, box.x, box.y, fence);
 	} else {
-		fence = virtio_gpu_fence_alloc(vgdev);
-		if (!fence) {
-			ret = -ENOMEM;
-			goto out_unres;
-		}
 		virtio_gpu_cmd_transfer_to_host_3d
 			(vgdev, qobj,
 			 vfpriv ? vfpriv->ctx_id : 0, offset,
 			 args->level, &box, fence);
-		dma_resv_add_excl_fence(qobj->tbo.base.resv,
-						  &fence->f);
-		dma_fence_put(&fence->f);
 	}
+
+	dma_resv_add_excl_fence(qobj->tbo.base.resv, &fence->f);
+	dma_fence_put(&fence->f);
 
 out_unres:
 	virtio_gpu_object_unreserve(qobj);
