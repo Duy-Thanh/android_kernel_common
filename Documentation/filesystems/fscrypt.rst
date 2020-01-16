@@ -302,6 +302,34 @@ For master keys used for v2 encryption policies, a unique 16-byte "key
 identifier" is also derived using the KDF.  This value is stored in
 the clear, since it is needed to reliably identify the key itself.
 
+Hardware-wrapped keys
+---------------------
+
+To prevent keys from being compromised if an attacker acquires read
+access to kernel memory, some inline encryption hardware supports
+protecting the keys in hardware without software having access to or
+the ability to set the plaintext keys.  Instead, software only sees
+"wrapped keys", which may differ on every boot.  The keys can be
+initially generated either by software (in which case they need to be
+imported to hardware to be wrapped), or directly by the hardware.
+
+fscrypt supports this type of hardware by allowing userspace to flag
+keys as being hardware-wrapped (FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED) and
+flag files as being protected by a hardware-wrapped key
+(FSCRYPT_POLICY_FLAG_HW_WRAPPED_KEY).  When done, fscrypt will pass
+the wrapped key directly to the inline encryption hardware to encrypt
+file contents.  The hardware is responsible for internally unwrapping
+the key and deriving the actual file contents encryption key.
+
+fscrypt will also ask the inline encryption hardware to derive a
+software "secret".  fscrypt uses this secret as the master key for all
+other purposes besides file contents encryption, e.g. to derive
+filenames encryption keys and the key identifier.  (Thus, filenames
+keys remain in the clear in memory; only file contents keys are
+hardware-protected.)  The hardware should ensure that this secret is
+cryptographically isolated from the file contents key, e.g. by
+deriving both from the unwrapped key using different KDF contexts.
+
 Encryption modes and usage
 ==========================
 
@@ -457,6 +485,13 @@ This structure must be initialized as follows:
   - FSCRYPT_POLICY_FLAG_IV_INO_LBLK_64: See `IV_INO_LBLK_64
     policies`_.  This is mutually exclusive with DIRECT_KEY and is not
     supported on v1 policies.
+  - FSCRYPT_POLICY_FLAG_HW_WRAPPED_KEY: This flag denotes that this
+    policy uses a hardware-wrapped key.  If set, the files will only
+    be unlockable by a wrapped key tied to the specific hardware, and
+    only when the filesystem is mounted with the "inlinecrypt" mount
+    option.  This flag is only supported if the hardware supports it,
+    the encryption policy is v2, and the IV_INO_LBLK_64 flag is also
+    set.  See `Hardware-wrapped keys`_ for more information.
 
 - For v2 encryption policies, ``__reserved`` must be zeroed.
 
@@ -639,6 +674,7 @@ follows::
             struct fscrypt_key_specifier key_spec;
             __u32 raw_size;
             __u32 key_id;
+    #define FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED         0x00000001
             __u32 flags;
             __u32 __reserved[7];
             __u8 raw[];
@@ -692,15 +728,21 @@ as follows:
   field.  Otherwise ``key_id`` is the ID of a Linux keyring key of
   type "fscrypt-provisioning" whose payload is a :c:type:`struct
   fscrypt_provisioning_key_payload` whose ``raw`` field contains the
-  raw key and whose ``type`` field matches ``key_spec.type``.  Since
-  ``raw`` is variable-length, the total size of this key's payload
-  must be ``sizeof(struct fscrypt_provisioning_key_payload)`` plus the
-  raw key size.  The process must have Search permission on this key.
+  raw key and whose ``type`` field matches ``key_spec.type``
+  and whose ``flags`` field matches ``flags``.  Since ``raw`` is
+  variable-length, the total size of this key's payload must be
+  ``sizeof(struct fscrypt_provisioning_key_payload)`` plus the raw key
+  size.  The process must have Search permission on this key.
 
   Most users should leave this 0 and specify the raw key directly.
   The support for specifying a Linux keyring key is intended mainly to
   allow re-adding keys after a filesystem is unmounted and re-mounted,
   without having to store the raw keys in userspace memory.
+
+- ``flags`` contains optional flags from ``<linux/fscrypt.h>``:
+
+  - FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED: This denotes that the key is a
+    hardware-wrapped key.  See `Hardware-wrapped keys`_.
 
 - ``raw`` is a variable-length field which must contain the actual
   key, ``raw_size`` bytes long.  Alternatively, if ``key_id`` is
@@ -739,7 +781,8 @@ FS_IOC_ADD_ENCRYPTION_KEY can fail with the following errors:
 - ``ENOTTY``: this type of filesystem does not implement encryption
 - ``EOPNOTSUPP``: the kernel was not configured with encryption
   support for this filesystem, or the filesystem superblock has not
-  had encryption enabled on it
+  had encryption enabled on it, or FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED was
+  specified but the hardware doesn't support hardware-wrapped keys.
 
 Legacy method
 ~~~~~~~~~~~~~
