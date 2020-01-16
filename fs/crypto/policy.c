@@ -122,6 +122,12 @@ bool fscrypt_supported_policy(const union fscrypt_policy *policy_u,
 		    !supported_iv_ino_lblk_64_policy(policy, inode))
 			return false;
 
+		if ((policy->flags & FSCRYPT_POLICY_FLAG_WRAPPED_KEY) &&
+		    !(policy->flags & FSCRYPT_POLICY_FLAG_IV_INO_LBLK_64)) {
+			fscrypt_warn(inode,
+				     "IV_INO_LBLK_64 flag not set and WRAPPED_KEY policy requested");
+			return false;
+		}
 		if (memchr_inv(policy->__reserved, 0,
 			       sizeof(policy->__reserved))) {
 			fscrypt_warn(inode,
@@ -527,6 +533,6 @@ int fscrypt_inherit_context(struct inode *parent, struct inode *child,
 	res = parent->i_sb->s_cop->set_context(child, &ctx, ctxsize, fs_data);
 	if (res)
 		return res;
-	return preload ? fscrypt_get_encryption_info(child): 0;
+	return preload ? fscrypt_get_encryption_info(child) : 0;
 }
 EXPORT_SYMBOL(fscrypt_inherit_context);
