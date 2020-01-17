@@ -782,8 +782,11 @@ int f2fs_fill_dentries(struct dir_context *ctx, struct f2fs_dentry_ptr *d,
 	struct f2fs_dir_entry *de = NULL;
 	struct fscrypt_str de_name = FSTR_INIT(NULL, 0);
 	struct f2fs_sb_info *sbi = F2FS_I_SB(d->inode);
+<<<<<<< HEAD   (a41b0d Merge 4.19.96 into android-4.19-q)
 	struct blk_plug plug;
 	bool readdir_ra = sbi->readdir_ra == 1;
+=======
+>>>>>>> BRANCH (dc4ba5 Linux 4.19.97)
 	int err = 0;
 
 	bit_pos = ((unsigned long)ctx->pos % d->max);
@@ -849,8 +852,11 @@ int f2fs_fill_dentries(struct dir_context *ctx, struct f2fs_dentry_ptr *d,
 		ctx->pos = start_pos + bit_pos;
 	}
 out:
+<<<<<<< HEAD   (a41b0d Merge 4.19.96 into android-4.19-q)
 	if (readdir_ra)
 		blk_finish_plug(&plug);
+=======
+>>>>>>> BRANCH (dc4ba5 Linux 4.19.97)
 	return err;
 }
 
