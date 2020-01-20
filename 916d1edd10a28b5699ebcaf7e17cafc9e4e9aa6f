@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7b135a48_c187067b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1612695
+      },
+      "writtenOn": "2020-01-20T11:07:14Z",
+      "side": 1,
+      "message": "and network, sound, power and nvmem etc.",
+      "revId": "916d1edd10a28b5699ebcaf7e17cafc9e4e9aa6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bac508ef_a98d4ef1",
         "filename": "abi_gki_aarch64_whitelist",
         "patchSetId": 1
@@ -18,6 +35,29 @@
         "startChar": 2,
         "endLine": 411,
         "endChar": 11
+      },
+      "revId": "916d1edd10a28b5699ebcaf7e17cafc9e4e9aa6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ee229ff_9567af9b",
+        "filename": "abi_gki_aarch64_whitelist",
+        "patchSetId": 1
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1612695
+      },
+      "writtenOn": "2020-01-20T11:07:14Z",
+      "side": 1,
+      "message": "This is from our modules or gki itself?",
+      "range": {
+        "startLine": 545,
+        "startChar": 2,
+        "endLine": 545,
+        "endChar": 14
       },
       "revId": "916d1edd10a28b5699ebcaf7e17cafc9e4e9aa6f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
