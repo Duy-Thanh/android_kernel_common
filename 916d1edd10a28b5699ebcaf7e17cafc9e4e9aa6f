@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bac508ef_a98d4ef1",
+        "filename": "abi_gki_aarch64_whitelist",
+        "patchSetId": 1
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-01-20T11:03:10Z",
+      "side": 1,
+      "message": "I think we are sucking in too many symbols in here.  Shouldn\u0027t this whole addition be a separate file now that we support multiple files for the whitelist?",
+      "range": {
+        "startLine": 411,
+        "startChar": 2,
+        "endLine": 411,
+        "endChar": 11
+      },
+      "revId": "916d1edd10a28b5699ebcaf7e17cafc9e4e9aa6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
