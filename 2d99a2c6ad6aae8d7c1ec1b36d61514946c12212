@@ -16,6 +16,24 @@
       "revId": "2d99a2c6ad6aae8d7c1ec1b36d61514946c12212",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "994947cf_3a460dce",
+        "filename": "drivers/md/dm-table.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1640,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-21T20:22:24Z",
+      "side": 1,
+      "message": "If any child device needs the fallback, then we have to take the performance hit of using the fallback anyway.  So in that case we might as well just use the fallback *once* for the whole dm device, rather than use the fallback for potentially multiple child devices along with also using hardware inline encryption for potentially multiple child devices.  That minimizes the amount of work done.",
+      "parentUuid": "e21dfb7c_2088e8c5",
+      "revId": "2d99a2c6ad6aae8d7c1ec1b36d61514946c12212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
