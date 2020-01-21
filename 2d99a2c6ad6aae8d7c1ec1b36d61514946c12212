@@ -57,6 +57,24 @@
       "revId": "2d99a2c6ad6aae8d7c1ec1b36d61514946c12212",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e569b9ef_21eb08db",
+        "filename": "drivers/md/dm-table.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1640,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-21T23:45:41Z",
+      "side": 1,
+      "message": "Okay I was a bit confused.  Bios don\u0027t necessarily go to all child devices at the same time, so we only need to take the performance hit on devices that need the fallback.  However, it\u0027s still possible that bios could go to multiple child devices at once.  It would also seem weird to claim hardware support for crypto modes that aren\u0027t fully supported and may not even be supported at all.  And, the device-mapper core uses the intersection method for most other hardware features.  So I\u0027m still leaning towards my current approach.",
+      "parentUuid": "994947cf_3a460dce",
+      "revId": "2d99a2c6ad6aae8d7c1ec1b36d61514946c12212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
