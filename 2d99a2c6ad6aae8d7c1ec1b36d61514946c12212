@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e21dfb7c_2088e8c5",
+        "filename": "drivers/md/dm-table.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1640,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-01-21T19:55:59Z",
+      "side": 1,
+      "message": "Doing this will mean that even if all but one of the child targets supports a crypto mode, inline encryption will never be used for that mode with any child target (which perhaps we can live with), since blk-crypto will fallback to the crypto API before the bio even reaches the parent.\n\nBut if I\u0027m understanding correctly, the device mapper will resubmit a bio to the underlying device, which would have given blk-crypto another chance to work on the bio, had we not already decided to fallback (at which point we can decide to fallback to the crypto API).\n\nSo I think that while the parent should respect may_passthrough_inline_crypto (i.e. if any child target can\u0027t pass through inline encryption support, then the parent should declare that it doesn\u0027t support any crypto mode), if all child targets support passing through inline crypto support, then the parent should actually just blindly claim that it supports all crypto modes regardless of what the child targets actually support - this should let us make full use of inline encryption even in cases where a dm device maps over multiple devices, but only some of them support some crypto mode (if a bio is routed to a child device that supports that crypto mode, then we can make use of inline encryption there, instead of what we have in this patch where we always fall back to the crypto API before the bio even reaches the parent).\n\nIf the above does make sense, then the parent device mapper will always either support all crypto modes, or support no crypto mode at all - in that case, I think having \"keyslot_manager_intersect_modes\" in keyslot-manager.c is overkill since it will only ever be called with NULL as the second argument...\n\nAs an aside, I might have missed adding calls to bio_crypt_clone after some calls to __bio_clone_fast - I\u0027ll look through this again for v7 of the patch series.",
+      "revId": "2d99a2c6ad6aae8d7c1ec1b36d61514946c12212",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
