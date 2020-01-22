@@ -16,6 +16,24 @@
       "revId": "41e4362f9a4ba235935b0bd75746c4b8446c8dca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a0ba083_238f2fc5",
+        "filename": "abi_gki_aarch64_whitelist_unisoc",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1612695
+      },
+      "writtenOn": "2020-01-22T11:07:39Z",
+      "side": 1,
+      "message": "I am sorry that Liangcai has gone for his vacation 1 hour ago and he will come back after 10 days. But I have been rejected by gerrit to use the same Change-id with his patch.\n\nSo I made the changes and pushed a new one as https://android-review.googlesource.com/c/kernel/common/+/1213869\nIf it is ok to be merged you might close this one.\n\nThanks.\n-Orson",
+      "parentUuid": "e4e1ba19_40b53cc4",
+      "revId": "41e4362f9a4ba235935b0bd75746c4b8446c8dca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
