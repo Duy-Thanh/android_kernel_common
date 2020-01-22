@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c31c1bb2_a94f1bbd",
+        "filename": "abi_gki_aarch64_whitelist_unisoc",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-01-22T06:57:27Z",
+      "side": 1,
+      "message": "why are drivers opening and closing kernel files directly?\n\nAre you sure this is only the whitelist for your drivers and not all kernel modules in the system?",
+      "range": {
+        "startLine": 64,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 11
+      },
+      "revId": "a69292748d20381b1296f11fec7371ff95ca5a03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
