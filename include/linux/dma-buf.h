@@ -250,6 +250,38 @@ struct dma_buf_ops {
 
 	void *(*vmap)(struct dma_buf *);
 	void (*vunmap)(struct dma_buf *, void *vaddr);
+<<<<<<< HEAD   (3c76e8 ANDROID: Incremental fs: Fix compound page usercopy crash)
+=======
+
+	/**
+	 * @get_uuid
+	 *
+	 * This is called by dma_buf_get_uuid to get the UUID which identifies
+	 * the buffer to virtio devices.
+	 *
+	 * This callback is optional.
+	 *
+	 * Returns:
+	 *
+	 * 0 on success or a negative error code on failure. On success uuid
+	 * will be populated with the buffer's UUID.
+	 */
+	int (*get_uuid)(struct dma_buf *dmabuf, uuid_t *uuid);
+
+	/**
+	 * @get_flags:
+	 *
+	 * This is called by dma_buf_get_flags and is used to get the buffer's
+	 * flags.
+	 * This callback is optional.
+	 *
+	 * Returns:
+	 *
+	 * 0 on success or a negative error code on failure. On success flags
+	 * will be populated with the buffer's flags.
+	 */
+	int (*get_flags)(struct dma_buf *dmabuf, unsigned long *flags);
+>>>>>>> CHANGE (6834da FROMLIST: dma-buf: add support for virtio exported objects)
 };
 
 /**

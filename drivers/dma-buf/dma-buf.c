@@ -1183,6 +1183,35 @@ void dma_buf_vunmap(struct dma_buf *dmabuf, void *vaddr)
 }
 EXPORT_SYMBOL_GPL(dma_buf_vunmap);
 
+<<<<<<< HEAD   (3c76e8 ANDROID: Incremental fs: Fix compound page usercopy crash)
+=======
+int dma_buf_get_flags(struct dma_buf *dmabuf, unsigned long *flags)
+{
+	int ret = 0;
+
+	if (WARN_ON(!dmabuf) || !flags)
+		return -EINVAL;
+
+	if (dmabuf->ops->get_flags)
+		ret = dmabuf->ops->get_flags(dmabuf, flags);
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(dma_buf_get_flags);
+
+int dma_buf_get_uuid(struct dma_buf *dmabuf, uuid_t *uuid)
+{
+	if (WARN_ON(!dmabuf) || !uuid)
+		return -EINVAL;
+
+	if (!dmabuf->ops->get_uuid)
+		return -ENODEV;
+
+	return dmabuf->ops->get_uuid(dmabuf, uuid);
+}
+EXPORT_SYMBOL_GPL(dma_buf_get_uuid);
+
+>>>>>>> CHANGE (6834da FROMLIST: dma-buf: add support for virtio exported objects)
 #ifdef CONFIG_DEBUG_FS
 static int dma_buf_debug_show(struct seq_file *s, void *unused)
 {
