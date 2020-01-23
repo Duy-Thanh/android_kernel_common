@@ -6,6 +6,7 @@
 #include <linux/parser.h>
 #include <linux/errno.h>
 #include <linux/unicode.h>
+#include <linux/stringhash.h>
 
 #include "utf8n.h"
 
@@ -211,5 +212,73 @@ void utf8_unload(struct unicode_map *um)
 	kfree(um);
 }
 EXPORT_SYMBOL(utf8_unload);
+
+int utf8_d_init(struct dentry *dentry)
+{
+	const struct dentry *parent = READ_ONCE(dentry->d_parent);
+	const struct inode *inode = READ_ONCE(parent->d_inode);
+
+	if (inode && needs_casefold(inode))
+		dentry->d_flags |= DCACHE_CASEFOLDED_NAME;
+	return 0;
+}
+EXPORT_SYMBOL(utf8_d_init);
+
+int utf8_d_compare(const struct dentry *dentry, unsigned int len,
+			  const char *str, const struct qstr *name)
+{
+	const struct super_block *sb = dentry->d_sb;
+	const struct unicode_map *um = sb->s_encoding;
+	struct qstr entry = QSTR_INIT(str, len);
+	int ret;
+
+	if (!(dentry->d_flags & DCACHE_CASEFOLDED_NAME))
+		goto fallback;
+
+	ret = utf8_strncasecmp(um, name, &entry);
+	if (ret >= 0)
+		return ret;
+
+	if (sb_has_enc_strict_mode(sb))
+		return -EINVAL;
+fallback:
+	if (len != name->len)
+		return 1;
+	return !!memcmp(str, name->name, len);
+}
+EXPORT_SYMBOL(utf8_d_compare);
+
+int utf8_d_hash(const struct dentry *dentry, struct qstr *str)
+{
+	struct super_block *sb = dentry->d_sb;
+	const struct unicode_map *um = sb->s_encoding;
+	int ret = 0;
+	unsigned long hash;
+	const struct utf8data *data;
+	struct utf8cursor cur;
+	int c;
+
+	if (!(dentry->d_flags & DCACHE_CASEFOLDED_NAME))
+		return 0;
+
+	hash = init_name_hash(dentry);
+	data = utf8nfdicf(um->version);
+	if (utf8ncursor(&cur, data, str->name, str->len) < 0)
+		goto err;
+
+	while ((c = utf8byte(&cur))) {
+		if (c < 0)
+			goto err;
+		hash = partial_name_hash((unsigned char)c, hash);
+	}
+
+	str->hash = end_name_hash(hash);
+	return 0;
+err:
+	if (sb_has_enc_strict_mode(sb))
+		ret = -EINVAL;
+	return ret;
+}
+EXPORT_SYMBOL(utf8_d_hash);
 
 MODULE_LICENSE("GPL v2");
