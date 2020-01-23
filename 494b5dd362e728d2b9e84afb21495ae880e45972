@@ -142,6 +142,30 @@
       "revId": "494b5dd362e728d2b9e84afb21495ae880e45972",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37410164_bb3fc0d0",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5208,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2020-01-23T19:30:28Z",
+      "side": 1,
+      "message": "the thing is do we want to have all unbound kernel threads and root and other stuff to have max_clamp? that looks like an overkill, I think for iowait boost is _by_nature_ a boost so better to be linked to min_clamp (which is a boost signal I would image we have for TA and foreground tasks) ?",
+      "parentUuid": "41257d4f_eb57e50c",
+      "range": {
+        "startLine": 5208,
+        "startChar": 21,
+        "endLine": 5208,
+        "endChar": 35
+      },
+      "revId": "494b5dd362e728d2b9e84afb21495ae880e45972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
