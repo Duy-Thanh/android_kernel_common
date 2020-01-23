@@ -166,6 +166,30 @@
       "revId": "494b5dd362e728d2b9e84afb21495ae880e45972",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32f03188_7d1e244f",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5208,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-01-23T19:37:14Z",
+      "side": 1,
+      "message": "Either way could work IMO. One can argue that the iowait boost is part of the task request, and as such it should not escape the clamps. But re-implementing the iowait boost as a way to drive the min clamp is also a possible option, I totally agree. Either way, this is an interesting discussion topic for upstream I think. I CC\u0027d a few Arm folks who were planning to do work exactly in this area so we can combine the efforts there.\n\n@Arm: could you guys make sure to keep Wei in the loop and on CC when you have something to send upstream? It\u0027d be really good if whatever lands upstream works for Pixel and other android devices out there.",
+      "parentUuid": "37410164_bb3fc0d0",
+      "range": {
+        "startLine": 5208,
+        "startChar": 21,
+        "endLine": 5208,
+        "endChar": 35
+      },
+      "revId": "494b5dd362e728d2b9e84afb21495ae880e45972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
