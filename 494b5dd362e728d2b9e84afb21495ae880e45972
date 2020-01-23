@@ -46,6 +46,30 @@
       "revId": "494b5dd362e728d2b9e84afb21495ae880e45972",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdd9c8f4_77a970c1",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5208,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2020-01-23T18:57:16Z",
+      "side": 1,
+      "message": "do we have max_clamp for all background tasks? on older kernel with prefer_idle, this can link to prefer_idle which mapped to foreground/top_app tasks. The power efficiency probably not a top priority for upstream but for embedded system, it should be.\nthat\u0027s why we disabled this boost on Pixel phones but I am considering do it for foreground/TA for benefit of UX.",
+      "parentUuid": "005a8d6a_c7575fcd",
+      "range": {
+        "startLine": 5208,
+        "startChar": 21,
+        "endLine": 5208,
+        "endChar": 35
+      },
+      "revId": "494b5dd362e728d2b9e84afb21495ae880e45972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
