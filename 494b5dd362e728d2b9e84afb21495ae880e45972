@@ -94,6 +94,30 @@
       "revId": "494b5dd362e728d2b9e84afb21495ae880e45972",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b7aa2de7_1f86925d",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5208,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2020-01-23T19:08:27Z",
+      "side": 1,
+      "message": "We can introduce another toggle for each cgroup for fine tuning, and use task_profile to control that on Android. But I don\u0027t think upstream like that either.",
+      "parentUuid": "60cd0869_83f11dad",
+      "range": {
+        "startLine": 5208,
+        "startChar": 21,
+        "endLine": 5208,
+        "endChar": 35
+      },
+      "revId": "494b5dd362e728d2b9e84afb21495ae880e45972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
