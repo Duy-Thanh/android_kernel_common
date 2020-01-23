@@ -22,6 +22,30 @@
       "revId": "494b5dd362e728d2b9e84afb21495ae880e45972",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "005a8d6a_c7575fcd",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5208,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-01-23T18:39:10Z",
+      "side": 1,
+      "message": "Agreed, I don\u0027t think we\u0027ll be able as-is, but we could look at alternative -- perhaps the iowait boost should be capped by the max_clamp for instance ? That would match the uclamp idea I think.",
+      "parentUuid": "b841b843_80323ff2",
+      "range": {
+        "startLine": 5208,
+        "startChar": 21,
+        "endLine": 5208,
+        "endChar": 35
+      },
+      "revId": "494b5dd362e728d2b9e84afb21495ae880e45972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
