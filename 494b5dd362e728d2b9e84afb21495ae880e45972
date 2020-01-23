@@ -118,6 +118,30 @@
       "revId": "494b5dd362e728d2b9e84afb21495ae880e45972",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41257d4f_eb57e50c",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5208,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-01-23T19:10:34Z",
+      "side": 1,
+      "message": "The max_clamp attribute is already per-cgroup, do you see a problem using that ?",
+      "parentUuid": "b7aa2de7_1f86925d",
+      "range": {
+        "startLine": 5208,
+        "startChar": 21,
+        "endLine": 5208,
+        "endChar": 35
+      },
+      "revId": "494b5dd362e728d2b9e84afb21495ae880e45972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
