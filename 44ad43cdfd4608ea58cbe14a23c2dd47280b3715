@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f575b09b_f71eeadb",
+        "filename": "drivers/trusty/trusty-test.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-01-24T00:20:48Z",
+      "side": 1,
+      "message": "Factor out into helper function? trusty_test_share_objs?\n\nRegardless, put a comment here or on the new function explaining why you free objects if the share fails.",
+      "revId": "44ad43cdfd4608ea58cbe14a23c2dd47280b3715",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3a4a9d7_eb40e25b",
+        "filename": "drivers/trusty/trusty-test.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-01-24T00:20:48Z",
+      "side": 1,
+      "message": "If any of these fail, make sure to mark the whole test as failed. If we factor it out into a function, we could do this by setting the return value.",
+      "revId": "44ad43cdfd4608ea58cbe14a23c2dd47280b3715",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1286fac_20024883",
+        "filename": "drivers/trusty/trusty-test.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-01-24T00:20:48Z",
+      "side": 1,
+      "message": "Pull this loop out into its own function as well",
+      "revId": "44ad43cdfd4608ea58cbe14a23c2dd47280b3715",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
