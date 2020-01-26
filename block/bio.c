@@ -235,7 +235,12 @@ void bio_uninit(struct bio *bio)
 {
 	bio_disassociate_blkg(bio);
 
+<<<<<<< HEAD   (2aa217 ANDROID: update ABI following inline crypto changes)
 	bio_crypt_free_ctx(bio);
+=======
+	if (bio_integrity(bio))
+		bio_integrity_free(bio);
+>>>>>>> BRANCH (111e41 Linux 5.4.15)
 }
 EXPORT_SYMBOL(bio_uninit);
 
