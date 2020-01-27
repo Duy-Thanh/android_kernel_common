@@ -243,6 +243,16 @@ unsigned long schedutil_cpu_util(int cpu, unsigned long util_cfs,
 {
 	unsigned long dl_util, util, irq;
 	struct rq *rq = cpu_rq(cpu);
+	unsigned long hold_min = 0;
+
+	if (rq->uclamp_hold_expiry) {
+		if (jiffies > rq->uclamp_hold_expiry) {
+			rq->uclamp_hold_value = 0;
+			rq->uclamp_hold_expiry = 0;
+		} else {
+			hold_min = rq->uclamp_hold_value;
+		}
+	}
 
 	if (sched_feat(SUGOV_RT_MAX_FREQ) && !IS_BUILTIN(CONFIG_UCLAMP_TASK) &&
 	    type == FREQUENCY_UTIL && rt_rq_is_runnable(&rq->rt)) {
@@ -271,8 +281,10 @@ unsigned long schedutil_cpu_util(int cpu, unsigned long util_cfs,
 	 * frequency will be gracefully reduced with the utilization decay.
 	 */
 	util = util_cfs + cpu_util_rt(rq);
-	if (type == FREQUENCY_UTIL)
+	if (type == FREQUENCY_UTIL) {
 		util = uclamp_rq_util_with(rq, util, p);
+		util = max(hold_min, util);
+	}
 
 	dl_util = cpu_util_dl(rq);
 
