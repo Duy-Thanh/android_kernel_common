@@ -801,6 +801,17 @@ unsigned long shmem_partial_swap_usage(struct address_space *mapping,
 	return swapped << PAGE_SHIFT;
 }
 
+unsigned long shmem_swap_pages(struct address_space *mapping)
+{
+	struct inode *inode = mapping->host;
+	struct shmem_inode_info *info = SHMEM_I(inode);
+	unsigned long swapped;
+
+	swapped = READ_ONCE(info->swapped);
+	return swapped;
+}
+EXPORT_SYMBOL_GPL(shmem_swap_pages);
+
 /*
  * Determine (in bytes) how many of the shmem object's pages mapped by the
  * given vma is swapped out.
