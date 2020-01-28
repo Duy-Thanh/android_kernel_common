@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b69d94ff_f138b999",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 7006,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-01-28T15:04:38Z",
+      "side": 1,
+      "message": "This isn\u0027t functionally equivalent to upstream, could you please fix that ?\n\nhttps://lore.kernel.org/lkml/20191211113851.24241-6-valentin.schneider@arm.com/ should be straightforward to backport. For fits_capacity() just keep the calculation with capacity_margin as it is now.",
+      "range": {
+        "startLine": 7006,
+        "startChar": 24,
+        "endLine": 7006,
+        "endChar": 42
+      },
+      "revId": "b02d4a6041a3a26f61dfaa8c89ee2c5f8d75914e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
