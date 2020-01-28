@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47598faa_bf2873b3",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1217,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-01-28T14:53:58Z",
+      "side": 1,
+      "message": "Can be removed ?",
+      "range": {
+        "startLine": 1217,
+        "startChar": 0,
+        "endLine": 1217,
+        "endChar": 49
+      },
+      "revId": "84409e3294e94ce9ae6eb1c7845d091cdffb20b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
