@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f9de4e76_9eaca07d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-01-29T23:41:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b6f51930_07fece97",
+      "revId": "a70f067672d384bfbb2eaa50f8c8070c9b96d783",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7d6197b_34be5c47",
         "filename": "block/keyslot-manager.c",
         "patchSetId": 1
@@ -39,6 +57,30 @@
       "revId": "a70f067672d384bfbb2eaa50f8c8070c9b96d783",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82d7a918_f89596ab",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-01-29T23:41:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7d6197b_34be5c47",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 9
+      },
+      "revId": "a70f067672d384bfbb2eaa50f8c8070c9b96d783",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
