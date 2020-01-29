@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6f51930_07fece97",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-29T19:13:44Z",
+      "side": 1,
+      "message": "As always, it would be helpful to leave a note about anything nontrivial that needed to be changed in the backport.  I only found the differences because I redid everything myself to compare.  But reviewers don\u0027t always do that, they sometimes rely on any nontrivial conflicts being called out.",
+      "revId": "a70f067672d384bfbb2eaa50f8c8070c9b96d783",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7d6197b_34be5c47",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-29T19:13:44Z",
+      "side": 1,
+      "message": "Rather than changing the keyslot-manager code, which could introduce bugs and future merge conflicts, in this case I think it would be better to keep the code the same and just backport the atomic_dec_and_lock_irqsave() support from upstream.  I.e. cherry-pick \"atomic: Add irqsave variant of atomic_dec_and_lock()\":\n\n   git cherry-pick ccfbb5bed407053b27492a9adc06064d949a9aa6",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 9
+      },
+      "revId": "a70f067672d384bfbb2eaa50f8c8070c9b96d783",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
