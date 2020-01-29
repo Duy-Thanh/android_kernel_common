@@ -17,6 +17,7 @@
 #include <linux/mmc/card.h>
 
 #include "cqhci.h"
+#include "cqhci-crypto.h"
 
 #define DCMD_SLOT 31
 #define NUM_SLOTS 32
@@ -136,6 +137,8 @@ static void cqhci_dumpregs(struct cqhci_host *cq_host)
 	CQHCI_DUMP("Resp idx:  0x%08x | Resp arg: 0x%08x\n",
 		   cqhci_readl(cq_host, CQHCI_CRI),
 		   cqhci_readl(cq_host, CQHCI_CRA));
+
+	cqhci_crypto_debug(cq_host);
 
 	if (cq_host->ops->dumpregs)
 		cq_host->ops->dumpregs(mmc);
@@ -257,6 +260,11 @@ static void __cqhci_enable(struct cqhci_host *cq_host)
 	if (cq_host->caps & CQHCI_TASK_DESC_SZ_128)
 		cqcfg |= CQHCI_TASK_DESC_SZ;
 
+	if (cqhci_host_is_crypto_supported(cq_host)) {
+		cqhci_crypto_enable(cq_host);
+		cqcfg |= CQHCI_CRYPTO_ENABLE;
+	}
+
 	cqhci_writel(cq_host, cqcfg, CQHCI_CFG);
 
 	cqhci_writel(cq_host, lower_32_bits(cq_host->desc_dma_base),
@@ -288,6 +296,9 @@ static void __cqhci_enable(struct cqhci_host *cq_host)
 static void __cqhci_disable(struct cqhci_host *cq_host)
 {
 	u32 cqcfg;
+
+        if (cqhci_host_is_crypto_supported(cq_host))
+		cqhci_crypto_disable(cq_host);
 
 	cqcfg = cqhci_readl(cq_host, CQHCI_CFG);
 	cqcfg &= ~CQHCI_ENABLE;
@@ -556,6 +567,29 @@ static inline int cqhci_tag(struct mmc_request *mrq)
 	return mrq->cmd ? DCMD_SLOT : mrq->tag;
 }
 
+static inline void cqhci_prep_crypto_desc(struct cqhci_host *cq_host,
+					  u64 *task_desc, u64 crypto_ctx)
+{
+	__le64 *crypto_desc = NULL;
+
+	if (cq_host->caps & CQHCI_CAP_CRYPTO_SUPPORT) {
+		/*
+		 * Get the address of ice context for the given task descriptor.
+		 * ice context is present in the upper 64bits of task descriptor
+		 * crypto_conext_base_address = task_desc + 8-bytes
+		 */
+		crypto_desc = (__le64 __force *)((u8 *)task_desc +
+			    CQHCI_TASK_DESC_CRYPTO_PARAM_OFFSET);
+		memset(crypto_desc, 0, CQHCI_TASK_DESC_CRYPTO_PARAMS_SIZE);
+
+		/*
+		 *  Assign upper 64bits data of task descritor with ice context
+		 */
+		if (crypto_ctx)
+			*crypto_desc = cpu_to_le64(crypto_ctx);
+	}
+}
+
 static int cqhci_request(struct mmc_host *mmc, struct mmc_request *mrq)
 {
 	int err = 0;
@@ -564,6 +598,7 @@ static int cqhci_request(struct mmc_host *mmc, struct mmc_request *mrq)
 	int tag = cqhci_tag(mrq);
 	struct cqhci_host *cq_host = mmc->cqe_private;
 	unsigned long flags;
+	u64 crypto_ctx = 0;
 
 	if (!cq_host->enabled) {
 		pr_err("%s: cqhci: not enabled\n", mmc_hostname(mmc));
@@ -587,9 +622,18 @@ static int cqhci_request(struct mmc_host *mmc, struct mmc_request *mrq)
 	}
 
 	if (mrq->data) {
+		err = cqhci_crypto_get_ctx(cq_host, mrq, &crypto_ctx);
+		if (err) {
+			dev_err(mmc->parent,
+				"failed to retrieve crypto ctx for tag %d\n",
+				tag);
+			return err;
+		}
 		task_desc = (__le64 __force *)get_desc(cq_host, tag);
 		cqhci_prep_task_desc(mrq, &data, 1);
 		*task_desc = cpu_to_le64(data);
+		cqhci_prep_crypto_desc(cq_host, task_desc, crypto_ctx);
+
 		err = cqhci_prep_tran_desc(mrq, cq_host, tag);
 		if (err) {
 			pr_err("%s: cqhci: failed to setup tx desc: %d\n",
@@ -629,6 +673,14 @@ out_unlock:
 static void cqhci_crypto_update_queue(struct mmc_host *mmc,
 				      struct request_queue *queue)
 {
+	struct cqhci_host *cq_host = mmc->cqe_private;
+	if (cq_host->caps & CQHCI_CAP_CRYPTO_SUPPORT) {
+		if (queue)
+			cqhci_crypto_setup_rq_keyslot_manager(cq_host, queue);
+		else
+			dev_err(mmc->parent,
+				"can not register keyslot manager\n");
+	}
 }
 
 static void cqhci_recovery_needed(struct mmc_host *mmc, struct mmc_request *mrq,
@@ -1054,6 +1106,8 @@ static void cqhci_recovery_finish(struct mmc_host *mmc)
 
 	cqhci_set_irqs(cq_host, CQHCI_IS_MASK);
 
+	cqhci_crypto_recovery_finish(cq_host);
+
 	pr_debug("%s: cqhci: recovery done\n", mmc_hostname(mmc));
 }
 
@@ -1137,6 +1191,14 @@ int cqhci_init(struct cqhci_host *cq_host, struct mmc_host *mmc,
 	}
 
 	spin_lock_init(&cq_host->lock);
+
+	err = cqhci_host_init_crypto(cq_host);
+	if (err) {
+		dev_err(mmc->parent,
+			"CQHCI version %u.%02u Crypto initialization err %d\n",
+			cqhci_ver_major(cq_host), cqhci_ver_minor(cq_host),
+			err);
+	}
 
 	init_completion(&cq_host->halt_comp);
 	init_waitqueue_head(&cq_host->wait_queue);
