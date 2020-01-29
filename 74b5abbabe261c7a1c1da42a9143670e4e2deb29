@@ -22,6 +22,30 @@
       "revId": "74b5abbabe261c7a1c1da42a9143670e4e2deb29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecad58ee_f43a62f0",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4454,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-01-29T23:47:20Z",
+      "side": 1,
+      "message": "Made this change in the v5\u003d\u003ev6 update, because the original patch for this has the lines in this order too.",
+      "parentUuid": "dbf4c378_43e68101",
+      "range": {
+        "startLine": 4453,
+        "startChar": 0,
+        "endLine": 4454,
+        "endChar": 46
+      },
+      "revId": "74b5abbabe261c7a1c1da42a9143670e4e2deb29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
