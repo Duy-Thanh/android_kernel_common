@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74cf61fb_75eaa26b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-29T18:43:23Z",
+      "side": 1,
+      "message": "This should say \"cuttlefish_defconfig\".\n\nLikewise for the other commits that mention \"gki_defconfig\".",
+      "range": {
+        "startLine": 7,
+        "startChar": 19,
+        "endLine": 7,
+        "endChar": 32
+      },
+      "revId": "f28c7d35926b9baf85a1d4ebab021267a8c2c282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08c26a30_3db00380",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-29T18:43:23Z",
+      "side": 1,
+      "message": "I don\u0027t think \"BACKPORT:\" is supposed to be used in combination with \"ANDROID:\".   Just use \"ANDROID:\".\n\nLikewise for all the other commits where this occurs.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "f28c7d35926b9baf85a1d4ebab021267a8c2c282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
