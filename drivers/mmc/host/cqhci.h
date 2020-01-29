@@ -12,6 +12,7 @@
 #include <linux/wait.h>
 #include <linux/irqreturn.h>
 #include <asm/io.h>
+#include <linux/keyslot-manager.h>
 
 /* registers */
 /* version */
@@ -31,6 +32,7 @@
 #define CQHCI_DCMD			0x00001000
 #define CQHCI_TASK_DESC_SZ		0x00000100
 #define CQHCI_ENABLE			0x00000001
+#define CQHCI_CRYPTO_ENABLE		0x00000002
 
 /* control */
 #define CQHCI_CTL			0x0C
@@ -145,10 +147,16 @@
 #define CQHCI_CRYPTO_CONFIG_INDEX(x)	(((u64)(x) & 0xFF) << 32)
 #define CQHCI_CRYPTO_ENABLE(x)		(((u64)(x) & 0x1) << 47)
 
+/* crypto context is present in the upper 64bits of task descriptor */
+#define CQHCI_TASK_DESC_CRYPTO_PARAM_OFFSET	8
+/* crypto descriptor size */
+#define CQHCI_TASK_DESC_CRYPTO_PARAMS_SIZE	8
+
 struct cqhci_host_ops;
 struct mmc_host;
 struct mmc_request;
 struct cqhci_slot;
+struct cqhci_host;
 
 /* CCAP - Crypto Capability 100h */
 union cqhci_crypto_capabilities {
@@ -234,6 +242,7 @@ struct cqhci_host_crypto_variant_ops {
 struct cqhci_host {
 	const struct cqhci_host_ops *ops;
 	void __iomem *mmio;
+	void __iomem *icemmio;
 	struct mmc_host *mmc;
 
 	spinlock_t lock;
@@ -249,6 +258,7 @@ struct cqhci_host {
 	u32 dcmd_slot;
 	u32 caps;
 #define CQHCI_TASK_DESC_SZ_128		0x1
+#define CQHCI_CAP_CRYPTO_SUPPORT	0x2
 
 	u32 quirks;
 #define CQHCI_QUIRK_SHORT_TXFR_DESC_SZ	0x1
@@ -284,6 +294,14 @@ struct cqhci_host {
 	struct completion halt_comp;
 	wait_queue_head_t wait_queue;
 	struct cqhci_slot *slot;
+	const struct cqhci_host_crypto_variant_ops *crypto_vops;
+
+#ifdef CONFIG_MMC_CQHCI_CRYPTO
+	union cqhci_crypto_capabilities crypto_capabilities;
+	union cqhci_crypto_cap_entry *crypto_cap_array;
+	u32 crypto_cfg_register;
+	struct keyslot_manager *ksm;
+#endif /* CONFIG_SCSI_CQHCI_CRYPTO */
 };
 
 struct cqhci_host_ops {
