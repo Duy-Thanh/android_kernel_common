@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2df71f07_241b2377",
+        "filename": "include/linux/filter.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-01-29T14:00:54Z",
+      "side": 1,
+      "message": "ugh...",
+      "range": {
+        "startLine": 539,
+        "startChar": 36,
+        "endLine": 539,
+        "endChar": 37
+      },
+      "revId": "9e61c87b1f47b4dc3d48de83d85e9f17c320f91e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
