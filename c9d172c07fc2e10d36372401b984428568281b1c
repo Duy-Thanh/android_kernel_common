@@ -69,6 +69,30 @@
       "revId": "c9d172c07fc2e10d36372401b984428568281b1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3b37bd2_95ef5575",
+        "filename": "drivers/nvdimm/of_pmem.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002975
+      },
+      "writtenOn": "2020-01-30T20:27:55Z",
+      "side": 1,
+      "message": "No. Fixed.",
+      "parentUuid": "8bd11415_ef66888e",
+      "range": {
+        "startLine": 109,
+        "startChar": 3,
+        "endLine": 109,
+        "endChar": 12
+      },
+      "revId": "c9d172c07fc2e10d36372401b984428568281b1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
