@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "92d99098_69ef8691",
+        "filename": "drivers/nvdimm/of_pmem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-01-30T02:38:55Z",
+      "side": 1,
+      "message": "You don\u0027t even need that, you just need a while(np \u003d of_parse_phandle()). It\u0027ll return NULL when it hits the end.",
+      "parentUuid": "191c7b98_7d632028",
+      "range": {
+        "startLine": 102,
+        "startChar": 1,
+        "endLine": 103,
+        "endChar": 45
+      },
+      "revId": "59d76a1691af54eec59a9149514520b861a907d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "43cd0902_41d4f255",
         "filename": "drivers/nvdimm/of_pmem.c",
         "patchSetId": 2
@@ -136,6 +160,53 @@
         "startChar": 2,
         "endLine": 105,
         "endChar": 23
+      },
+      "revId": "59d76a1691af54eec59a9149514520b861a907d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "100b8a45_a74d6f9f",
+        "filename": "drivers/nvdimm/of_pmem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-01-30T02:38:55Z",
+      "side": 1,
+      "message": "Definitely a race. Good catch.",
+      "parentUuid": "43cd0902_41d4f255",
+      "range": {
+        "startLine": 105,
+        "startChar": 2,
+        "endLine": 105,
+        "endChar": 23
+      },
+      "revId": "59d76a1691af54eec59a9149514520b861a907d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e922f33_c772f7a0",
+        "filename": "drivers/nvdimm/of_pmem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-01-30T02:38:55Z",
+      "side": 1,
+      "message": "But I don\u0027t think passing it.node is the right thing to do here. Looking at nvdimm_*_region_create(), I\u0027d think np (the platform device\u0027s device_node) is the right thing to pass here.",
+      "range": {
+        "startLine": 113,
+        "startChar": 40,
+        "endLine": 113,
+        "endChar": 44
       },
       "revId": "59d76a1691af54eec59a9149514520b861a907d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
