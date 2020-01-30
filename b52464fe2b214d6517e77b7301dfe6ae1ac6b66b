@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2d10e93_cbe5154d",
+        "filename": "Documentation/devicetree/bindings/pmem/pmem-region.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-01-30T22:22:24Z",
+      "side": 1,
+      "message": "Just a FYI that if you send this upstream, the DT maintainers will want this doc update in a separate patch.",
+      "range": {
+        "startLine": 36,
+        "startChar": 3,
+        "endLine": 36,
+        "endChar": 9
+      },
+      "revId": "b52464fe2b214d6517e77b7301dfe6ae1ac6b66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16cc2037_8e6f641b",
+        "filename": "drivers/nvdimm/of_pmem.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-01-30T22:22:24Z",
+      "side": 1,
+      "message": "Or just do i++ here so that it\u0027s very clear \"i\" will be incremented unconditionally each time.\n\nNit: Use mr_np instead of mrp? np stands for node pointer.",
+      "range": {
+        "startLine": 101,
+        "startChar": 53,
+        "endLine": 101,
+        "endChar": 54
+      },
+      "revId": "b52464fe2b214d6517e77b7301dfe6ae1ac6b66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad3869cf_efec989c",
+        "filename": "drivers/nvdimm/of_pmem.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-01-30T22:22:24Z",
+      "side": 1,
+      "message": "If you do a continue after the dev_warn, the of_pmem_register_region doesn\u0027t need to be indented.",
+      "range": {
+        "startLine": 109,
+        "startChar": 3,
+        "endLine": 109,
+        "endChar": 26
+      },
+      "revId": "b52464fe2b214d6517e77b7301dfe6ae1ac6b66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f4552f4_bacba6f6",
+        "filename": "drivers/nvdimm/of_pmem.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-01-30T22:22:24Z",
+      "side": 1,
+      "message": "You can also do this put right after you are done using mrp. Which is right  after of_address_to_resource.",
+      "range": {
+        "startLine": 111,
+        "startChar": 2,
+        "endLine": 111,
+        "endChar": 13
+      },
+      "revId": "b52464fe2b214d6517e77b7301dfe6ae1ac6b66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
