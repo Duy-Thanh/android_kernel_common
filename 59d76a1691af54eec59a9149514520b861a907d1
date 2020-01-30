@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3a86b1b_19cdb980",
+        "filename": "drivers/nvdimm/of_pmem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-01-30T01:51:37Z",
+      "side": 1,
+      "message": "Nit: looks like the author of this driver used upside-down-christmas-tree style, suggest reverse sorting the stack definitions by line length. Might also use \"int i, ret;\"",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 9
+      },
+      "revId": "59d76a1691af54eec59a9149514520b861a907d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "191c7b98_7d632028",
+        "filename": "drivers/nvdimm/of_pmem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-01-30T01:51:37Z",
+      "side": 1,
+      "message": "Could you use of_for_each_phandle()?",
+      "range": {
+        "startLine": 102,
+        "startChar": 1,
+        "endLine": 103,
+        "endChar": 45
+      },
+      "revId": "59d76a1691af54eec59a9149514520b861a907d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43cd0902_41d4f255",
+        "filename": "drivers/nvdimm/of_pmem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-01-30T01:51:37Z",
+      "side": 1,
+      "message": "By putting it.node here and then passing it to of_pmem_register_region(), isn\u0027t there a race where it.node could go away?",
+      "range": {
+        "startLine": 105,
+        "startChar": 2,
+        "endLine": 105,
+        "endChar": 23
+      },
+      "revId": "59d76a1691af54eec59a9149514520b861a907d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
