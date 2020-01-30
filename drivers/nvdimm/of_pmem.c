@@ -14,13 +14,48 @@ struct of_pmem_private {
 	struct nvdimm_bus *bus;
 };
 
+static void of_pmem_register_region(struct platform_device *pdev,
+				    struct nvdimm_bus *bus,
+				    struct device_node *np,
+				    struct resource *res, bool is_volatile)
+{
+	struct nd_region_desc ndr_desc;
+	struct nd_region *region;
+
+	/*
+	 * NB: libnvdimm copies the data from ndr_desc into it's own
+	 * structures so passing a stack pointer is fine.
+	 */
+	memset(&ndr_desc, 0, sizeof(ndr_desc));
+	ndr_desc.attr_groups = region_attr_groups;
+	ndr_desc.numa_node = dev_to_node(&pdev->dev);
+	ndr_desc.target_node = ndr_desc.numa_node;
+	ndr_desc.res = res;
+	ndr_desc.of_node = np;
+	set_bit(ND_REGION_PAGEMAP, &ndr_desc.flags);
+
+	if (is_volatile)
+		region = nvdimm_volatile_region_create(bus, &ndr_desc);
+	else
+		region = nvdimm_pmem_region_create(bus, &ndr_desc);
+
+	if (!region)
+		dev_warn(&pdev->dev,
+			 "Unable to register region %pR from %pOF\n",
+			 ndr_desc.res, np);
+	else
+		dev_dbg(&pdev->dev, "Registered region %pR from %pOF\n",
+			ndr_desc.res, np);
+}
+
 static int of_pmem_region_probe(struct platform_device *pdev)
 {
 	struct of_pmem_private *priv;
-	struct device_node *np;
+	struct device_node *mrp, *np;
 	struct nvdimm_bus *bus;
+	struct resource res;
 	bool is_volatile;
-	int i;
+	int i, ret;
 
 	np = dev_of_node(&pdev->dev);
 	if (!np)
@@ -46,9 +81,11 @@ static int of_pmem_region_probe(struct platform_device *pdev)
 			is_volatile ? "volatile" : "non-volatile",  np);
 
 	for (i = 0; i < pdev->num_resources; i++) {
-		struct nd_region_desc ndr_desc;
-		struct nd_region *region;
+		of_pmem_register_region(pdev, bus, np, &pdev->resource[i],
+					is_volatile);
+	}
 
+<<<<<<< HEAD   (70f3f9 UPSTREAM: af_unix: fix garbage collect vs MSG_PEEK)
 		/*
 		 * NB: libnvdimm copies the data from ndr_desc into it's own
 		 * structures so passing a stack pointer is fine.
@@ -73,6 +110,20 @@ static int of_pmem_region_probe(struct platform_device *pdev)
 		else
 			dev_dbg(&pdev->dev, "Registered region %pR from %pOF\n",
 					ndr_desc.res, np);
+=======
+	i = 0;
+	while ((mr_np = of_parse_phandle(np, "memory-region", i++))) {
+		ret = of_address_to_resource(mr_np, 0, &res);
+		if (ret)
+			dev_warn(
+				&pdev->dev,
+				"Unable to acquire memory-region from %pOF: %d\n",
+				mr_np, ret);
+		else
+			of_pmem_register_region(pdev, bus, np, &res,
+						is_volatile);
+		of_node_put(mr_np);
+>>>>>>> CHANGE (3db364 FROMLIST: libnvdimm/of_pmem: handle memory-region in DT)
 	}
 
 	return 0;
