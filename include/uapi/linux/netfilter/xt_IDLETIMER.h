@@ -39,13 +39,18 @@
 #define NL_EVENT_TYPE_INACTIVE 0
 #define NL_EVENT_TYPE_ACTIVE 1
 
+#define XT_IDLETIMER_ALARM 0x01
+
 struct idletimer_tg_info {
 	__u32 timeout;
 
 	char label[MAX_IDLETIMER_LABEL_SIZE];
 
+
 	/* Use netlink messages for notification in addition to sysfs */
 	__u8 send_nl_msg;
+
+	__u8 timer_type;
 
 	/* for kernel module internal use only */
 	struct idletimer_tg *timer __attribute__((aligned(8)));
