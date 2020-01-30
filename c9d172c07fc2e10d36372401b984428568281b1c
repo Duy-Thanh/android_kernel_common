@@ -22,6 +22,30 @@
       "revId": "c9d172c07fc2e10d36372401b984428568281b1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a494c993_e17f8525",
+        "filename": "drivers/nvdimm/of_pmem.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002975
+      },
+      "writtenOn": "2020-01-30T16:47:09Z",
+      "side": 1,
+      "message": "I just refactored this to a separate function, but the comment below is providing an explanation.",
+      "parentUuid": "9eab9603_559989a4",
+      "range": {
+        "startLine": 33,
+        "startChar": 23,
+        "endLine": 33,
+        "endChar": 31
+      },
+      "revId": "c9d172c07fc2e10d36372401b984428568281b1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
