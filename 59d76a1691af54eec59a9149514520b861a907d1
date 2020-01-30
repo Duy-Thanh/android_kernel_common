@@ -211,6 +211,30 @@
       "revId": "59d76a1691af54eec59a9149514520b861a907d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1af335cc_1147f6a4",
+        "filename": "drivers/nvdimm/of_pmem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-01-30T02:43:05Z",
+      "side": 1,
+      "message": "Also if we decide it has to be it.node here for some reason, then we shouldn\u0027t of_put() it until we do nvdimm_bus_unregister() because the _region_create() APIs don\u0027t do a of_get() on the node. They assume the caller has a ref it won\u0027t release until the bus is unregistered (which will in turn result in the deregistration of these regions. This assumption is true for the platform device\u0027s device_node.",
+      "parentUuid": "4e922f33_c772f7a0",
+      "range": {
+        "startLine": 113,
+        "startChar": 40,
+        "endLine": 113,
+        "endChar": 44
+      },
+      "revId": "59d76a1691af54eec59a9149514520b861a907d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
