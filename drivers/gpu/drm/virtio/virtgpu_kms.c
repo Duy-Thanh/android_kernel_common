@@ -159,10 +159,33 @@ int virtio_gpu_init(struct drm_device *dev)
 	if (virtio_has_feature(vgdev->vdev, VIRTIO_GPU_F_EDID)) {
 		vgdev->has_edid = true;
 	}
+	if (virtio_has_feature(vgdev->vdev, VIRTIO_GPU_F_RESOURCE_SHARED)) {
+		vgdev->has_shared = true;
+	}
+	if (virtio_has_feature(vgdev->vdev, VIRTIO_GPU_F_RESOURCE_V2)) {
+		vgdev->has_resource_v2 = true;
+	}
+	if (virtio_has_feature(vgdev->vdev, VIRTIO_GPU_F_HOST_VISIBLE)) {
+		if (virtio_get_shm_region(vgdev->vdev, &vgdev->hostmem, 0)) {
+			vgdev->has_host_visible = true;
+			DRM_INFO("Host memory window: 0x%lx +0x%lx\n",
+				 (unsigned long)vgdev->hostmem.addr,
+				 (unsigned long)vgdev->hostmem.len);
+			drm_mm_init(&vgdev->host_visible_mm,
+				    (unsigned long)vgdev->hostmem.addr,
+				    (unsigned long)vgdev->hostmem.len);
+		} else {
+			DRM_INFO("Host memory window query failed.\n");
+		}
+	}
 
-	DRM_INFO("features: %cvirgl %cedid\n",
-		 vgdev->has_virgl_3d ? '+' : '-',
-		 vgdev->has_edid     ? '+' : '-');
+	DRM_INFO("features: %cvirgl %cedid %cshared %cresource_v2 " \
+		 "%chost visible\n",
+		 vgdev->has_virgl_3d     ? '+' : '-',
+		 vgdev->has_edid         ? '+' : '-',
+		 vgdev->has_shared       ? '+' : '-',
+		 vgdev->has_resource_v2  ? '+' : '-',
+		 vgdev->has_host_visible ? '+' : '-');
 
 	ret = virtio_find_vqs(vgdev->vdev, 2, vqs, callbacks, names, NULL);
 	if (ret) {
@@ -241,6 +264,10 @@ void virtio_gpu_deinit(struct drm_device *dev)
 	virtio_gpu_modeset_fini(vgdev);
 	virtio_gpu_free_vbufs(vgdev);
 	virtio_gpu_cleanup_cap_cache(vgdev);
+
+	if (vgdev->has_host_visible)
+		drm_mm_takedown(&vgdev->host_visible_mm);
+
 	kfree(vgdev->capsets);
 	kfree(vgdev);
 }

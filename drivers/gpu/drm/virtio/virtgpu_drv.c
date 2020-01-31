@@ -124,6 +124,7 @@ static int virtio_gpu_probe(struct virtio_device *vdev)
 		goto err_free;
 
 	drm_fbdev_generic_setup(vdev->priv, 32);
+
 	return 0;
 
 err_free:
@@ -137,7 +138,7 @@ static void virtio_gpu_remove(struct virtio_device *vdev)
 
 	drm_dev_unregister(dev);
 	virtio_gpu_deinit(dev);
-	drm_put_dev(dev);
+	drm_dev_put(dev);
 }
 
 static void virtio_gpu_config_changed(struct virtio_device *vdev)
@@ -163,6 +164,9 @@ static unsigned int features[] = {
 	VIRTIO_GPU_F_VIRGL,
 #endif
 	VIRTIO_GPU_F_EDID,
+	VIRTIO_GPU_F_RESOURCE_SHARED,
+	VIRTIO_GPU_F_RESOURCE_V2,
+	VIRTIO_GPU_F_HOST_VISIBLE,
 };
 static struct virtio_driver virtio_gpu_driver = {
 	.feature_table = features,

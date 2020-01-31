@@ -51,6 +51,37 @@
  */
 #define VIRTIO_GPU_F_EDID                1
 
+/*
+ * VIRTIO_GPU_CMD_RESOURCE_CREATE_2D_SHARED
+ * VIRTIO_GPU_CMD_RESOURCE_CREATE_V2 with GUEST_SHARED bit
+ */
+#define VIRTIO_GPU_F_RESOURCE_SHARED     2
+
+/*
+ * VIRTIO_GPU_CMD_RESOURCE_CREATE_V2
+ * VIRTIO_GPU_CMD_RESOURCE_TRANSFER_V2
+ * VIRTIO_GPU_CMD_SET_SCANOUT_V2
+ *
+ */
+#define VIRTIO_GPU_F_RESOURCE_V2         3
+
+/*
+ * VIRTIO_GPU_CMD_SUBMIT_3D_V2,
+ * VIRTIO_GPU_RESP_OK_SUBMIT_3D_V2
+ *
+ * FIXME:
+ *   Not sure the feature flag name will stay,
+ *   also not sure this makes sense stand-alone
+ *   so maybe this goes into a F_VULKAN
+ */
+#define VIRTIO_GPU_F_SUBMIT_CMD_V2       4
+
+/*
+ * VIRTIO_GPU_CMD_RESOURCE_MAP
+ * VIRTIO_GPU_CMD_RESOURCE_UMAP
+ */
+#define VIRTIO_GPU_F_HOST_VISIBLE        5
+
 enum virtio_gpu_ctrl_type {
 	VIRTIO_GPU_UNDEFINED = 0,
 
@@ -66,6 +97,8 @@ enum virtio_gpu_ctrl_type {
 	VIRTIO_GPU_CMD_GET_CAPSET_INFO,
 	VIRTIO_GPU_CMD_GET_CAPSET,
 	VIRTIO_GPU_CMD_GET_EDID,
+	VIRTIO_GPU_CMD_RESOURCE_CREATE_2D_SHARED,
+	VIRTIO_GPU_CMD_SET_SCANOUT_V2,
 
 	/* 3d commands */
 	VIRTIO_GPU_CMD_CTX_CREATE = 0x0200,
@@ -76,6 +109,13 @@ enum virtio_gpu_ctrl_type {
 	VIRTIO_GPU_CMD_TRANSFER_TO_HOST_3D,
 	VIRTIO_GPU_CMD_TRANSFER_FROM_HOST_3D,
 	VIRTIO_GPU_CMD_SUBMIT_3D,
+	VIRTIO_GPU_CMD_RESOURCE_CREATE_V2,
+	VIRTIO_GPU_CMD_SUBMIT_3D_V2,
+	VIRTIO_GPU_CMD_RESOURCE_MAP,
+	VIRTIO_GPU_CMD_RESOURCE_UNMAP,
+
+	/* TODO */
+	VIRTIO_GPU_CMD_TRANSFER_V2 = 0x0210,
 
 	/* cursor commands */
 	VIRTIO_GPU_CMD_UPDATE_CURSOR = 0x0300,
@@ -87,6 +127,8 @@ enum virtio_gpu_ctrl_type {
 	VIRTIO_GPU_RESP_OK_CAPSET_INFO,
 	VIRTIO_GPU_RESP_OK_CAPSET,
 	VIRTIO_GPU_RESP_OK_EDID,
+	VIRTIO_GPU_RESP_OK_SUBMIT_3D_V2,
+	VIRTIO_GPU_RESP_OK_MAP_INFO,
 
 	/* error responses */
 	VIRTIO_GPU_RESP_ERR_UNSPEC = 0x1200,
@@ -95,6 +137,7 @@ enum virtio_gpu_ctrl_type {
 	VIRTIO_GPU_RESP_ERR_INVALID_RESOURCE_ID,
 	VIRTIO_GPU_RESP_ERR_INVALID_CONTEXT_ID,
 	VIRTIO_GPU_RESP_ERR_INVALID_PARAMETER,
+	VIRTIO_GPU_RESP_ERR_NO_BACKING_STORAGE,
 };
 
 #define VIRTIO_GPU_FLAG_FENCE (1 << 0)
@@ -143,6 +186,7 @@ struct virtio_gpu_resource_unref {
 };
 
 /* VIRTIO_GPU_CMD_RESOURCE_CREATE_2D: create a 2d resource with a format */
+/* VIRTIO_GPU_CMD_RESOURCE_CREATE_2D_SHARED */
 struct virtio_gpu_resource_create_2d {
 	struct virtio_gpu_ctrl_hdr hdr;
 	__le32 resource_id;
@@ -157,6 +201,19 @@ struct virtio_gpu_set_scanout {
 	struct virtio_gpu_rect r;
 	__le32 scanout_id;
 	__le32 resource_id;
+};
+
+/* VIRTIO_GPU_CMD_SET_SCANOUT_V2 - TODO: add multiplanar support. modifiers? */
+struct virtio_gpu_set_scanout_v2 {
+	struct virtio_gpu_ctrl_hdr hdr;
+	struct virtio_gpu_rect r;
+	__le32 scanout_id;
+	__le32 resource_id;
+	__le32 format;
+	__le32 width;
+	__le32 height;
+	__le32 stride;
+	__le64 offset;
 };
 
 /* VIRTIO_GPU_CMD_RESOURCE_FLUSH */
@@ -243,6 +300,83 @@ struct virtio_gpu_resource_create_3d {
 	__le32 padding;
 };
 
+/* VIRTIO_GPU_CMD_RESOURCE_CREATE_V2 */
+struct virtio_gpu_resource_create_v2 {
+	struct virtio_gpu_ctrl_hdr hdr;
+	__le32 resource_id;
+#define VIRTIO_GPU_RESOURCE_TYPE_MASK       0x000f
+#define VIRTIO_GPU_RESOURCE_TYPE_DEFAULT_V1 0x0001
+#define VIRTIO_GPU_RESOURCE_TYPE_DEFAULT_V2 0x0002
+#define VIRTIO_GPU_RESOURCE_TYPE_HOST       0x0003
+#define VIRTIO_GPU_RESOURCE_TYPE_GUEST      0x0004
+/*
+ * Error cases:
+ * HOST_VISIBLE_BIT without VIRTIO_GPU_RESOURCE_TYPE_HOST
+ * VIRTGPU_RESOURCE_GUEST_SHARED_BIT without VIRTGPU_RESOURCE_TYPE_GUEST
+ */
+#define VIRTIO_GPU_RESOURCE_HOST_MASK             0x00f0
+#define VIRTIO_GPU_RESOURCE_HOST_VISIBLE_BIT      0x0010
+#define VIRTIO_GPU_RESOURCE_HOST_MAP_DIRECTLY_BIT 0x0020
+
+#define VIRTIO_GPU_RESOURCE_GUEST_MASK                  0x0f00
+#define VIRTIO_GPU_RESOURCE_GUEST_SHARED_BIT            0x0100
+#define VIRTIO_GPU_RESOURCE_GUEST_EMULATED_COHERENT_BIT 0x0200
+
+/*
+ * VIRTIO_GPU_SHAREABLE_BIT - host resource *can* be exported as an fd.
+ */
+#define VIRTIO_GPU_SHARE_MASK    0xf000
+#define VIRTIO_GPU_SHAREABLE_BIT 0x1000
+	__le32 flags;
+	__le64 size;
+	__le32 args_size;
+	__le32 nr_entries;
+	/*
+	 * args_size + sizeof(nr_entries * virtio_gpu_mem_entry) bytes
+	 * follow
+	 */
+};
+
+/* VIRTIO_GPU_CMD_TRANSFER_V2 */
+struct virtio_gpu_resource_transfer_v2 {
+	struct virtio_gpu_ctrl_hdr hdr;
+	__le32 resource_id;
+#define VIRTIO_GPU_TRANSFER_TO_HOST   0x0001
+#define VIRTIO_GPU_TRANSFER_FROM_HOST 0x0002
+	__le32 flags;
+	__le32 nr_ranges;
+	/* nr_ranges * sizeof(le64) [for offsets] +
+	 * nr_ranges * sizeof(le64) [for sizes]
+	 */
+};
+
+/* VIRTIO_GPU_CMD_RESOURCE_MAP */
+#define VIRTIO_GPU_MAP_FLAG_MASK      0x0f
+#define VIRTIO_GPU_MAP_FLAG_CACHED    0x00
+#define VIRTIO_GPU_MAP_FLAG_UNCACHED  0x01
+#define VIRTIO_GPU_MAP_FLAG_WC        0x02
+struct virtio_gpu_resource_map {
+	struct virtio_gpu_ctrl_hdr hdr;
+	__le32 resource_id;
+	__le32 map_flags;
+	__le64 addr;
+};
+
+/* VIRTIO_GPU_RESP_OK_MAP_INFO */
+struct virtio_gpu_resp_map_info {
+	struct virtio_gpu_ctrl_hdr hdr;
+	__u32 map_flags;
+	__u32 padding;
+};
+
+
+/* VIRTIO_GPU_CMD_RESOURCE_UNMAP */
+struct virtio_gpu_resource_unmap {
+	struct virtio_gpu_ctrl_hdr hdr;
+	__le32 resource_id;
+	__le32 padding;
+};
+
 /* VIRTIO_GPU_CMD_CTX_CREATE */
 struct virtio_gpu_ctx_create {
 	struct virtio_gpu_ctrl_hdr hdr;
@@ -268,6 +402,24 @@ struct virtio_gpu_cmd_submit {
 	struct virtio_gpu_ctrl_hdr hdr;
 	__le32 size;
 	__le32 padding;
+};
+
+/* VIRTIO_GPU_CMD_SUBMIT_3D_V2 */
+struct virtio_gpu_submit_v2 {
+	struct virtio_gpu_ctrl_hdr hdr;
+	__le32 request_id;
+	__le32 pad;
+	__le32 request_size;
+	__le32 response_size;
+	/* 'request_size' bytes go here */
+};
+
+/* VIRTIO_GPU_RESP_OK_SUBMIT_3D_V2 */
+struct virtio_gpu_resp_submit_v2 {
+	struct virtio_gpu_ctrl_hdr hdr;
+	__le32 request_id;
+	__le32 response_size;
+	/* 'response_size' bytes go here */
 };
 
 #define VIRTIO_GPU_CAPSET_VIRGL 1

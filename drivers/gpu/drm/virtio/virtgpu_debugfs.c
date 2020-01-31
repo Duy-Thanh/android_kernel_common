@@ -47,8 +47,15 @@ static int virtio_gpu_features(struct seq_file *m, void *data)
 
 	virtio_add_bool(m, "virgl", vgdev->has_virgl_3d);
 	virtio_add_bool(m, "edid", vgdev->has_edid);
+	virtio_add_bool(m, "shared resources", vgdev->has_shared);
+	virtio_add_bool(m, "v2 resources", vgdev->has_resource_v2);
 	virtio_add_int(m, "cap sets", vgdev->num_capsets);
 	virtio_add_int(m, "scanouts", vgdev->num_scanouts);
+	if (vgdev->hostmem.len) {
+		seq_printf(m, "%-16s : 0x%lx +0x%lx\n", "hostmem",
+			   (unsigned long)vgdev->hostmem.addr,
+			   (unsigned long)vgdev->hostmem.len);
+	}
 	return 0;
 }
 
@@ -64,9 +71,27 @@ virtio_gpu_debugfs_irq_info(struct seq_file *m, void *data)
 	return 0;
 }
 
+static int
+virtio_gpu_debugfs_host_visible_mm(struct seq_file *m, void *data)
+{
+	struct drm_info_node *node = (struct drm_info_node *) m->private;
+	struct virtio_gpu_device *vgdev = node->minor->dev->dev_private;
+	struct drm_printer p;
+
+	if (!vgdev->has_host_visible) {
+		seq_printf(m, "Host allocations not visible to guest\n");
+		return 0;
+	}
+
+	p = drm_seq_file_printer(m);
+	drm_mm_print(&vgdev->host_visible_mm, &p);
+	return 0;
+}
+
 static struct drm_info_list virtio_gpu_debugfs_list[] = {
 	{ "virtio-gpu-features", virtio_gpu_features },
 	{ "virtio-gpu-irq-fence", virtio_gpu_debugfs_irq_info, 0, NULL },
+	{ "virtio-gpu-host-visible-mm", virtio_gpu_debugfs_host_visible_mm },
 };
 
 #define VIRTIO_GPU_DEBUGFS_ENTRIES ARRAY_SIZE(virtio_gpu_debugfs_list)

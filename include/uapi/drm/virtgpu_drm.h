@@ -46,6 +46,16 @@ extern "C" {
 #define DRM_VIRTGPU_TRANSFER_TO_HOST 0x07
 #define DRM_VIRTGPU_WAIT     0x08
 #define DRM_VIRTGPU_GET_CAPS  0x09
+#define DRM_VIRTGPU_RESOURCE_CREATE_V2 0x0a
+#define DRM_VIRTGPU_EXECBUFFER_V2_REQUEST 0x0b
+#define DRM_VIRTGPU_EXECBUFFER_V2_RESPONSE 0x0c
+
+
+
+
+
+/*TODO*/
+#define DRM_VIRTGPU_RESOURCE_TRANSFER_V2 0xff
 
 #define VIRTGPU_EXECBUF_FENCE_FD_IN	0x01
 #define VIRTGPU_EXECBUF_FENCE_FD_OUT	0x02
@@ -54,10 +64,14 @@ extern "C" {
 		VIRTGPU_EXECBUF_FENCE_FD_OUT |\
 		0)
 
+#define VIRTGPU_MAP_CACHE_MASK      0x0f
+#define VIRTGPU_MAP_CACHE_CACHED    0x01
+#define VIRTGPU_MAP_CACHE_UNCACHED  0x02
+#define VIRTGPU_MAP_CACHE_WC        0x03
 struct drm_virtgpu_map {
 	__u64 offset; /* use for mmap system call */
 	__u32 handle;
-	__u32 pad;
+	__u32 map_flags;
 };
 
 struct drm_virtgpu_execbuffer {
@@ -69,8 +83,37 @@ struct drm_virtgpu_execbuffer {
 	__s32 fence_fd; /* in/out fence fd (see VIRTGPU_EXECBUF_FENCE_FD_IN/OUT) */
 };
 
+struct drm_virtgpu_execbuffer_v2_request {
+	__u32 request_id;
+	__u32 pad;
+	__u32 request_size;
+	__u32 response_size;
+	__u64 request; /* void */
+	__u64 bo_handles;
+	__u32 num_bo_handles;
+	__s32 fence_fd; /* in/out fence fd (see VIRTGPU_EXECBUF_FENCE_FD_IN/OUT) */
+};
+
+struct drm_virtgpu_execbuffer_v2_response {
+	__u32 request_id;
+	__u32 pad;
+	__u32 response_size;
+	__u64 response; /* void */
+};
+
 #define VIRTGPU_PARAM_3D_FEATURES 1 /* do we have 3D features in the hw */
 #define VIRTGPU_PARAM_CAPSET_QUERY_FIX 2 /* do we have the capset fix */
+/*
+ * DRM_VIRTGPU_RESOURCE_CREATE_V2
+ * DRM_VIRTGPU_RESOURCE_TRANSFER_V2
+ * RESOURCE_INFO with resource flags (yes, changing the old value is legal).
+ * VIRTGPU_MAP with flag flags (yes, changing the old value is legal).
+ */
+#define VIRTGPU_PARAM_RESOURCE_V2 3
+#define VIRTGPU_PARAM_EXECBUFFER_V2 4 /* DRM_VIRTGPU_EXECBUFFER_V2_REQUEST
+                                         DRM_VIRTGPU_EXECBUFFER_V2_RESPONSE */
+#define VIRTGPU_PARAM_HOST_VISIBLE 5 /* Dynamically allocated host memory shared with guest */
+#define VIRTGPU_PARAM_SHARED_GUEST 6  /* Guest system memory (usually -- dedicated heap?) shared with host */
 
 struct drm_virtgpu_getparam {
 	__u64 param;
@@ -100,7 +143,7 @@ struct drm_virtgpu_resource_info {
 	__u32 bo_handle;
 	__u32 res_handle;
 	__u32 size;
-	__u32 stride;
+	__u32 resource_flags;
 };
 
 struct drm_virtgpu_3d_box {
@@ -140,6 +183,48 @@ struct drm_virtgpu_get_caps {
 	__u32 pad;
 };
 
+struct drm_virtgpu_resource_create_v2 {
+#define VIRTGPU_RESOURCE_TYPE_MASK       0x000f
+#define VIRTGPU_RESOURCE_TYPE_DEFAULT_V1 0x0001
+#define VIRTGPU_RESOURCE_TYPE_DEFAULT_V2 0x0002
+#define VIRTGPU_RESOURCE_TYPE_HOST       0x0003
+#define VIRTGPU_RESOURCE_TYPE_GUEST      0x0004
+/*
+ * Error cases:
+ * HOST_VISIBLE_BIT without VIRTGPU_RESOURCE_TYPE_HOST
+ * VIRTGPU_RESOURCE_GUEST_SHARED_BIT without VIRTGPU_RESOURCE_TYPE_GUEST
+ */
+#define VIRTGPU_RESOURCE_HOST_MASK             0x00f0
+#define VIRTGPU_RESOURCE_HOST_VISIBLE_BIT      0x0010
+#define VIRTGPU_RESOURCE_HOST_MAP_DIRECTLY_BIT 0x0020
+
+#define VIRTGPU_RESOURCE_GUEST_MASK                  0x0f00
+#define VIRTGPU_RESOURCE_GUEST_SHARED_BIT            0x0100
+#define VIRTGPU_RESOURCE_GUEST_EMULATED_COHERENT_BIT 0x0200
+/*
+ * VIRTGPU_RESOURCE_SHAREABLE_BIT - host resource *can* be exported as an fd.
+ */
+#define VIRTGPU_RESOURCE_SHARE_MASK    0xf000
+#define VIRTGPU_RESOURCE_SHAREABLE_BIT 0x1000
+	__u32 flags;
+	__u32 args_size;
+	__u64 size;
+	__u32 bo_handle;
+	__u32 res_handle;
+	__u64 args;
+};
+
+struct drm_virtgpu_resource_transfer_v2 {
+	__u32 bo_handle;
+#define VIRTGPU_TRANSFER_TO_HOST   0x0001
+#define VIRTGPU_TRANSFER_FROM_HOST 0x0002
+	__u32 flags;
+	__u32 count;
+	__u64 offsets;        /* u64* */
+	__u64 ranges;         /* u64* */
+	__s32 fence_fd;       /* out */
+};
+
 #define DRM_IOCTL_VIRTGPU_MAP \
 	DRM_IOWR(DRM_COMMAND_BASE + DRM_VIRTGPU_MAP, struct drm_virtgpu_map)
 
@@ -174,6 +259,22 @@ struct drm_virtgpu_get_caps {
 #define DRM_IOCTL_VIRTGPU_GET_CAPS \
 	DRM_IOWR(DRM_COMMAND_BASE + DRM_VIRTGPU_GET_CAPS, \
 	struct drm_virtgpu_get_caps)
+
+#define DRM_IOCTL_VIRTGPU_RESOURCE_CREATE_V2				\
+	DRM_IOWR(DRM_COMMAND_BASE + DRM_VIRTGPU_RESOURCE_CREATE_V2,	\
+		struct drm_virtgpu_resource_create_v2)
+
+#define DRM_IOCTL_VIRTGPU_RESOURCE_TRANSFER_V2				\
+	DRM_IOWR(DRM_COMMAND_BASE + DRM_VIRTGPU_RESOURCE_TRANSFER_V2,	\
+		 struct drm_virtgpu_resource_transfer_v2)
+
+#define DRM_IOCTL_VIRTGPU_EXECBUFFER_V2_REQUEST			\
+	DRM_IOWR(DRM_COMMAND_BASE + DRM_VIRTGPU_EXECBUFFER_V2_REQUEST,	\
+		 struct drm_virtgpu_execbuffer_v2_request)
+
+#define DRM_IOCTL_VIRTGPU_EXECBUFFER_V2_RESPONSE			\
+        DRM_IOWR(DRM_COMMAND_BASE + DRM_VIRTGPU_EXECBUFFER_V2_RESPONSE, \
+		 struct drm_virtgpu_execbuffer_v2_response)
 
 #if defined(__cplusplus)
 }

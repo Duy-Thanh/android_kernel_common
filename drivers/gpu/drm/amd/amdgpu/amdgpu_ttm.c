@@ -68,11 +68,6 @@ static int amdgpu_map_buffer(struct ttm_buffer_object *bo,
 static int amdgpu_ttm_debugfs_init(struct amdgpu_device *adev);
 static void amdgpu_ttm_debugfs_fini(struct amdgpu_device *adev);
 
-static int amdgpu_invalidate_caches(struct ttm_bo_device *bdev, uint32_t flags)
-{
-	return 0;
-}
-
 /**
  * amdgpu_init_mem_type - Initialize a memory manager for a specific type of
  * memory request.
@@ -1522,11 +1517,8 @@ static bool amdgpu_ttm_bo_eviction_valuable(struct ttm_buffer_object *bo,
 	struct dma_fence *f;
 	int i;
 
-	/* Don't evict VM page tables while they are busy, otherwise we can't
-	 * cleanly handle page faults.
-	 */
 	if (bo->type == ttm_bo_type_kernel &&
-	    !dma_resv_test_signaled_rcu(bo->base.resv, true))
+	    !amdgpu_vm_evictable(ttm_to_amdgpu_bo(bo)))
 		return false;
 
 	/* If bo is a KFD BO, check if the bo belongs to the current process.
@@ -1640,7 +1632,6 @@ static struct ttm_bo_driver amdgpu_bo_driver = {
 	.ttm_tt_create = &amdgpu_ttm_tt_create,
 	.ttm_tt_populate = &amdgpu_ttm_tt_populate,
 	.ttm_tt_unpopulate = &amdgpu_ttm_tt_unpopulate,
-	.invalidate_caches = &amdgpu_invalidate_caches,
 	.init_mem_type = &amdgpu_init_mem_type,
 	.eviction_valuable = amdgpu_ttm_bo_eviction_valuable,
 	.evict_flags = &amdgpu_evict_flags,
