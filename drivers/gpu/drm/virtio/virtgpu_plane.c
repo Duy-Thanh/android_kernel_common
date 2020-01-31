@@ -142,6 +142,7 @@ static void virtio_gpu_primary_plane_update(struct drm_plane *plane,
 	struct virtio_gpu_framebuffer *vgfb;
 	struct virtio_gpu_object *bo;
 	uint32_t handle;
+	int ret = 0;
 
 	if (plane->state->crtc)
 		output = drm_crtc_to_virtio_gpu_output(plane->state->crtc);
@@ -160,7 +161,16 @@ static void virtio_gpu_primary_plane_update(struct drm_plane *plane,
 				 cpu_to_le32(plane->state->src_w >> 16),
 				 cpu_to_le32(plane->state->src_h >> 16),
 				 cpu_to_le32(plane->state->src_x >> 16),
-				 cpu_to_le32(plane->state->src_y >> 16), NULL);
+				 cpu_to_le32(plane->state->src_y >> 16), vgfb->fence);
+
+			ret = virtio_gpu_object_reserve(bo, false);
+			if (!ret) {
+				dma_resv_add_excl_fence(bo->tbo.base.resv, &vgfb->fence->f);
+				dma_fence_put(&vgfb->fence->f);
+				vgfb->fence = NULL;
+				virtio_gpu_object_unreserve(bo);
+				virtio_gpu_object_wait(bo, false);
+			}
 		}
 	} else {
 		handle = 0;
