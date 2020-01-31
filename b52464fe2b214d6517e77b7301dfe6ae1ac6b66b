@@ -187,6 +187,30 @@
       "revId": "b52464fe2b214d6517e77b7301dfe6ae1ac6b66b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85ec0455_7eacf401",
+        "filename": "drivers/nvdimm/of_pmem.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-01-31T23:13:57Z",
+      "side": 1,
+      "message": "You are right.",
+      "parentUuid": "469c414f_77124a73",
+      "range": {
+        "startLine": 111,
+        "startChar": 2,
+        "endLine": 111,
+        "endChar": 13
+      },
+      "revId": "b52464fe2b214d6517e77b7301dfe6ae1ac6b66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
