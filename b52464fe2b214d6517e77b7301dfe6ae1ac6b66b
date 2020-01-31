@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1fcdbb29_f73f6e11",
+        "filename": "Documentation/devicetree/bindings/pmem/pmem-region.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-01-31T17:00:58Z",
+      "side": 1,
+      "message": "Ack. I will send this on behalf of Kenny, and I\u0027ll split it into a series.",
+      "parentUuid": "f2d10e93_cbe5154d",
+      "range": {
+        "startLine": 36,
+        "startChar": 3,
+        "endLine": 36,
+        "endChar": 9
+      },
+      "revId": "b52464fe2b214d6517e77b7301dfe6ae1ac6b66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16cc2037_8e6f641b",
         "filename": "drivers/nvdimm/of_pmem.c",
         "patchSetId": 7
@@ -45,6 +69,30 @@
       "revId": "b52464fe2b214d6517e77b7301dfe6ae1ac6b66b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93282d47_d0a6644e",
+        "filename": "drivers/nvdimm/of_pmem.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-01-31T17:00:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16cc2037_8e6f641b",
+      "range": {
+        "startLine": 101,
+        "startChar": 53,
+        "endLine": 101,
+        "endChar": 54
+      },
+      "revId": "b52464fe2b214d6517e77b7301dfe6ae1ac6b66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "6ab4e22a_c3c0bf5e",
+        "filename": "drivers/nvdimm/of_pmem.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-01-31T17:00:58Z",
+      "side": 1,
+      "message": "I didn\u0027t change this because..",
+      "parentUuid": "ad3869cf_efec989c",
+      "range": {
+        "startLine": 109,
+        "startChar": 3,
+        "endLine": 109,
+        "endChar": 26
+      },
+      "revId": "b52464fe2b214d6517e77b7301dfe6ae1ac6b66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6f4552f4_bacba6f6",
         "filename": "drivers/nvdimm/of_pmem.c",
         "patchSetId": 7
@@ -82,6 +154,30 @@
       "writtenOn": "2020-01-30T22:22:24Z",
       "side": 1,
       "message": "You can also do this put right after you are done using mrp. Which is right  after of_address_to_resource.",
+      "range": {
+        "startLine": 111,
+        "startChar": 2,
+        "endLine": 111,
+        "endChar": 13
+      },
+      "revId": "b52464fe2b214d6517e77b7301dfe6ae1ac6b66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "469c414f_77124a73",
+        "filename": "drivers/nvdimm/of_pmem.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-01-31T17:00:58Z",
+      "side": 1,
+      "message": "..this doesn\u0027t work with the current code structure because the dev_warn() above uses mrp and not np. We should not put the mrp before printing it, right?",
+      "parentUuid": "6f4552f4_bacba6f6",
       "range": {
         "startLine": 111,
         "startChar": 2,
