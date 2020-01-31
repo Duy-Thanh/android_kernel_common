@@ -46,6 +46,30 @@
       "revId": "a3ebebb0e5354698b2ede321cb50c8893174bec0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a601aad3_14b037ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-01-31T10:39:17Z",
+      "side": 1,
+      "message": "It is a change I made to the original patch so it should be mentioned, I think. At least to make sure the commit message (which mentions fits_capacity()) sort of makes sense.",
+      "parentUuid": "cb792b56_72104bfa",
+      "range": {
+        "startLine": 53,
+        "startChar": 22,
+        "endLine": 54,
+        "endChar": 28
+      },
+      "revId": "a3ebebb0e5354698b2ede321cb50c8893174bec0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
