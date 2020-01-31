@@ -1,0 +1,25 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000001488273",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1169866?revision\u003d10",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "50186dd9_0c128eca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-01-31T09:15:32Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Quentin Perret \u003cqperret@google.com\u003e",
+      "revId": "37ea36db5ccacf5b97f980a259fdaa5d46218fea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
