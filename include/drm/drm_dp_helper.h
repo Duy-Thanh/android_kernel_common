@@ -307,7 +307,7 @@
 # define DP_DSC_THROUGHPUT_MODE_0_900       (12 << 0)
 # define DP_DSC_THROUGHPUT_MODE_0_950       (13 << 0)
 # define DP_DSC_THROUGHPUT_MODE_0_1000      (14 << 0)
-# define DP_DSC_THROUGHPUT_MODE_0_170       (15 << 4)
+# define DP_DSC_THROUGHPUT_MODE_0_170       (15 << 0) /* 1.4a */
 # define DP_DSC_THROUGHPUT_MODE_1_MASK      (0xf << 4)
 # define DP_DSC_THROUGHPUT_MODE_1_SHIFT     4
 # define DP_DSC_THROUGHPUT_MODE_1_UPSUPPORTED 0
@@ -391,6 +391,8 @@
 # define DP_DS_10BPC		            1
 # define DP_DS_12BPC		            2
 # define DP_DS_16BPC		            3
+
+#define DP_MAX_DOWNSTREAM_PORTS		    0x10
 
 /* DP Forward error Correction Registers */
 #define DP_FEC_CAPABILITY		    0x090    /* 1.4 */
@@ -700,14 +702,6 @@
 # define DP_TEST_COUNT_MASK		    0xf
 
 #define DP_TEST_PHY_PATTERN                 0x248
-# define DP_TEST_PHY_PATTERN_NONE			0x0
-# define DP_TEST_PHY_PATTERN_D10_2_NO_SCRAMBLING	0x1
-# define DP_TEST_PHY_PATTERN_SYMBOL_ERR_MEASUREMENT_CNT 0x2
-# define DP_TEST_PHY_PATTERN_PRBS7			0x3
-# define DP_TEST_PHY_PATTERN_80_BIT_CUSTOM_PATTERN	0x4
-# define DP_TEST_PHY_PATTERN_CP2520_PATTERN_1		0x5
-# define DP_TEST_PHY_PATTERN_CP2520_PATTERN_2		0x6
-# define DP_TEST_PHY_PATTERN_CP2520_PATTERN_3		0x7
 #define DP_TEST_80BIT_CUSTOM_PATTERN_7_0    0x250
 #define	DP_TEST_80BIT_CUSTOM_PATTERN_15_8   0x251
 #define	DP_TEST_80BIT_CUSTOM_PATTERN_23_16  0x252
@@ -1050,6 +1044,8 @@
 #define DP_SYMBOL_ERROR_COUNT_LANE2_PHY_REPEATER1	    0xf0039 /* 1.3 */
 #define DP_SYMBOL_ERROR_COUNT_LANE3_PHY_REPEATER1	    0xf003b /* 1.3 */
 #define DP_FEC_STATUS_PHY_REPEATER1			    0xf0290 /* 1.4 */
+#define DP_FEC_ERROR_COUNT_PHY_REPEATER1                    0xf0291 /* 1.4 */
+#define DP_FEC_CAPABILITY_PHY_REPEATER1                     0xf0294 /* 1.4a */
 
 /* Repeater modes */
 #define DP_PHY_REPEATER_MODE_TRANSPARENT		    0x55    /* 1.3 */

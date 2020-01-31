@@ -40,7 +40,6 @@ struct drm_encoder;
 struct drm_property;
 struct drm_property_blob;
 struct drm_printer;
-struct drm_panel;
 struct edid;
 struct i2c_adapter;
 
@@ -189,19 +188,19 @@ struct drm_hdmi_info {
 
 	/**
 	 * @y420_vdb_modes: bitmap of modes which can support ycbcr420
-	 * output only (not normal RGB/YCBCR444/422 outputs). There are total
-	 * 107 VICs defined by CEA-861-F spec, so the size is 128 bits to map
-	 * upto 128 VICs;
+	 * output only (not normal RGB/YCBCR444/422 outputs). The max VIC
+	 * defined by the CEA-861-G spec is 219, so the size is 256 bits to map
+	 * up to 256 VICs.
 	 */
-	unsigned long y420_vdb_modes[BITS_TO_LONGS(128)];
+	unsigned long y420_vdb_modes[BITS_TO_LONGS(256)];
 
 	/**
 	 * @y420_cmdb_modes: bitmap of modes which can support ycbcr420
-	 * output also, along with normal HDMI outputs. There are total 107
-	 * VICs defined by CEA-861-F spec, so the size is 128 bits to map upto
-	 * 128 VICs;
+	 * output also, along with normal HDMI outputs. The max VIC defined by
+	 * the CEA-861-G spec is 219, so the size is 256 bits to map up to 256
+	 * VICs.
 	 */
-	unsigned long y420_cmdb_modes[BITS_TO_LONGS(128)];
+	unsigned long y420_cmdb_modes[BITS_TO_LONGS(256)];
 
 	/** @y420_cmdb_map: bitmap of SVD index, to extraxt vcb modes */
 	u64 y420_cmdb_map;
@@ -1071,6 +1070,14 @@ struct drm_cmdline_mode {
 	unsigned int rotation_reflection;
 
 	/**
+	 * @panel_orientation:
+	 *
+	 * drm-connector "panel orientation" property override value,
+	 * DRM_MODE_PANEL_ORIENTATION_UNKNOWN if not set.
+	 */
+	enum drm_panel_orientation panel_orientation;
+
+	/**
 	 * @tv_margins: TV margins to apply to the mode.
 	 */
 	struct drm_connector_tv_margins tv_margins;
@@ -1344,54 +1351,6 @@ struct drm_connector {
 	/** @bad_edid_counter: track sinks that give us an EDID with invalid checksum */
 	unsigned bad_edid_counter;
 
-	/*
-	 * @pt_scan_info: PT scan info obtained from the VCDB of EDID
-	 * @it_scan_info: IT scan info obtained from the VCDB of EDID
-	 * @ce_scan_info: CE scan info obtained from the VCDB of EDID
-	 * @color_enc_fmt: Colorimetry encoding formats of sink
-	 * @hdr_eotf: Electro optical transfer function obtained from HDR block
-	 * @hdr_metadata_type_one: Metadata type one obtained from HDR block
-	 * @hdr_max_luminance: desired max luminance obtained from HDR block
-	 * @hdr_avg_luminance: desired avg luminance obtained from HDR block
-	 * @hdr_min_luminance: desired min luminance obtained from HDR block
-	 * @hdr_supported: does the sink support HDR content
-	 * @max_tmds_char: indicates the maximum TMDS Character Rate supported
-	 * @scdc_present: when set the sink supports SCDC functionality
-	 * @rr_capable: when set the sink is capable of initiating an
-	 *		SCDC read request
-	 * @supports_scramble: when set the sink supports less than
-	 *		340Mcsc scrambling
-	 * @flags_3d: 3D view(s) supported by the sink, see drm_edid.h
-	 *		DRM_EDID_3D_*)
-	 */
-	u8 pt_scan_info;
-	u8 it_scan_info;
-	u8 ce_scan_info;
-	u32 color_enc_fmt;
-	u32 hdr_eotf;
-	bool hdr_metadata_type_one;
-	u32 hdr_max_luminance;
-	u32 hdr_avg_luminance;
-	u32 hdr_min_luminance;
-	bool hdr_supported;
-	u8 hdr_plus_app_ver;
-
-	/* EDID bits HDMI 2.0
-	 * @max_tmds_char: indicates the maximum TMDS Character Rate supported
-	 * @scdc_present: when set the sink supports SCDC functionality
-	 * @rr_capable: when set the sink is capable of initiating an
-	 *		SCDC read request
-	 * @supports_scramble: when set the sink supports less than
-	 *		340Mcsc scrambling
-	 * @flags_3d: 3D view(s) supported by the sink, see drm_edid.h
-	 *		(DRM_EDID_3D_*)
-	 */
-	int max_tmds_char;	/* in Mcsc */
-	bool scdc_present;
-	bool rr_capable;
-	bool supports_scramble;
-	int flags_3d;
-
 	/**
 	 * @edid_corrupt: Indicates whether the last read EDID was corrupt. Used
 	 * in Displayport compliance testing - Displayport Link CTS Core 1.2
@@ -1463,13 +1422,6 @@ struct drm_connector {
 
 	/** @hdr_sink_metadata: HDR Metadata Information read from sink */
 	struct hdr_sink_metadata hdr_sink_metadata;
-
-	/**
-	 * @panel:
-	 *
-	 * Can find the panel which connected to drm_connector.
-	 */
-	struct drm_panel *panel;
 };
 
 #define obj_to_connector(x) container_of(x, struct drm_connector, base)
@@ -1600,8 +1552,13 @@ void drm_connector_set_link_status_property(struct drm_connector *connector,
 					    uint64_t link_status);
 void drm_connector_set_vrr_capable_property(
 		struct drm_connector *connector, bool capable);
-int drm_connector_init_panel_orientation_property(
-	struct drm_connector *connector, int width, int height);
+int drm_connector_set_panel_orientation(
+	struct drm_connector *connector,
+	enum drm_panel_orientation panel_orientation);
+int drm_connector_set_panel_orientation_with_quirk(
+	struct drm_connector *connector,
+	enum drm_panel_orientation panel_orientation,
+	int width, int height);
 int drm_connector_attach_max_bpc_property(struct drm_connector *connector,
 					  int min, int max);
 
