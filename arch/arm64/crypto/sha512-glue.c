@@ -27,7 +27,11 @@ EXPORT_SYMBOL(sha512_block_data_order);
 static void __sha512_block_data_order(struct sha512_state *sst, u8 const *src,
 				      int blocks)
 {
+<<<<<<< HEAD   (5cc45e Merge f0d874414329 ("Merge tag 'fscrypt-for-linus' of git://)
 	return sha512_block_data_order(sst->state, src, blocks);
+=======
+	sha512_block_data_order(sst->state, src, blocks);
+>>>>>>> BRANCH (a78208 Merge branch 'linus' of git://git.kernel.org/pub/scm/linux/k)
 }
 
 static int sha512_update(struct shash_desc *desc, const u8 *data,

@@ -30,7 +30,11 @@ EXPORT_SYMBOL(sha256_block_data_order);
 static void __sha256_block_data_order(struct sha256_state *sst, u8 const *src,
 				      int blocks)
 {
+<<<<<<< HEAD   (5cc45e Merge f0d874414329 ("Merge tag 'fscrypt-for-linus' of git://)
 	return sha256_block_data_order(sst->state, src, blocks);
+=======
+	sha256_block_data_order(sst->state, src, blocks);
+>>>>>>> BRANCH (a78208 Merge branch 'linus' of git://git.kernel.org/pub/scm/linux/k)
 }
 
 asmlinkage void sha256_block_neon(u32 *digest, const void *data,
@@ -39,7 +43,11 @@ asmlinkage void sha256_block_neon(u32 *digest, const void *data,
 static void __sha256_block_neon(struct sha256_state *sst, u8 const *src,
 				int blocks)
 {
+<<<<<<< HEAD   (5cc45e Merge f0d874414329 ("Merge tag 'fscrypt-for-linus' of git://)
 	return sha256_block_neon(sst->state, src, blocks);
+=======
+	sha256_block_neon(sst->state, src, blocks);
+>>>>>>> BRANCH (a78208 Merge branch 'linus' of git://git.kernel.org/pub/scm/linux/k)
 }
 
 static int crypto_sha256_arm64_update(struct shash_desc *desc, const u8 *data,

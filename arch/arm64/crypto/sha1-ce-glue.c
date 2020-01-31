@@ -31,8 +31,13 @@ asmlinkage void sha1_ce_transform(struct sha1_ce_state *sst, u8 const *src,
 static void __sha1_ce_transform(struct sha1_state *sst, u8 const *src,
 				int blocks)
 {
+<<<<<<< HEAD   (5cc45e Merge f0d874414329 ("Merge tag 'fscrypt-for-linus' of git://)
 	return sha1_ce_transform(container_of(sst, struct sha1_ce_state, sst),
 				 src, blocks);
+=======
+	sha1_ce_transform(container_of(sst, struct sha1_ce_state, sst), src,
+			  blocks);
+>>>>>>> BRANCH (a78208 Merge branch 'linus' of git://git.kernel.org/pub/scm/linux/k)
 }
 
 const u32 sha1_ce_offsetof_count = offsetof(struct sha1_ce_state, sst.count);

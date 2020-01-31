@@ -31,8 +31,13 @@ asmlinkage void sha2_ce_transform(struct sha256_ce_state *sst, u8 const *src,
 static void __sha2_ce_transform(struct sha256_state *sst, u8 const *src,
 				int blocks)
 {
+<<<<<<< HEAD   (5cc45e Merge f0d874414329 ("Merge tag 'fscrypt-for-linus' of git://)
 	return sha2_ce_transform(container_of(sst, struct sha256_ce_state, sst),
 				 src, blocks);
+=======
+	sha2_ce_transform(container_of(sst, struct sha256_ce_state, sst), src,
+			  blocks);
+>>>>>>> BRANCH (a78208 Merge branch 'linus' of git://git.kernel.org/pub/scm/linux/k)
 }
 
 const u32 sha256_ce_offsetof_count = offsetof(struct sha256_ce_state,
@@ -45,7 +50,11 @@ asmlinkage void sha256_block_data_order(u32 *digest, u8 const *src, int blocks);
 static void __sha256_block_data_order(struct sha256_state *sst, u8 const *src,
 				      int blocks)
 {
+<<<<<<< HEAD   (5cc45e Merge f0d874414329 ("Merge tag 'fscrypt-for-linus' of git://)
 	return sha256_block_data_order(sst->state, src, blocks);
+=======
+	sha256_block_data_order(sst->state, src, blocks);
+>>>>>>> BRANCH (a78208 Merge branch 'linus' of git://git.kernel.org/pub/scm/linux/k)
 }
 
 static int sha256_ce_update(struct shash_desc *desc, const u8 *data,
