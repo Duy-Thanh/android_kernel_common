@@ -22,6 +22,30 @@
       "revId": "a3ebebb0e5354698b2ede321cb50c8893174bec0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f069944d_e2a183d7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1173283
+      },
+      "writtenOn": "2020-01-31T10:39:14Z",
+      "side": 1,
+      "message": "No, this makes sense to have - feec() does use fits_capacity() *right* after the addition this patch is introducing, so if we didn\u0027t have the conflict on the function names this would be part of the conflict.",
+      "parentUuid": "cb792b56_72104bfa",
+      "range": {
+        "startLine": 53,
+        "startChar": 22,
+        "endLine": 54,
+        "endChar": 28
+      },
+      "revId": "a3ebebb0e5354698b2ede321cb50c8893174bec0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
