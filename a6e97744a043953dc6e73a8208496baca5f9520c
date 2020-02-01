@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "714cfd99_411c2cce",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1205,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-02-01T16:08:54Z",
+      "side": 1,
+      "message": "that fails to compile with CONFIG_SMP\u003dn\n/me goes fix",
+      "range": {
+        "startLine": 1205,
+        "startChar": 8,
+        "endLine": 1205,
+        "endChar": 24
+      },
+      "revId": "a6e97744a043953dc6e73a8208496baca5f9520c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
