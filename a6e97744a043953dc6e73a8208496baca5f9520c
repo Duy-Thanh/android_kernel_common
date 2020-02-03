@@ -22,6 +22,30 @@
       "revId": "a6e97744a043953dc6e73a8208496baca5f9520c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d52c62f2_8ab89107",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 1205,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-02-03T12:29:20Z",
+      "side": 1,
+      "message": "Thanks for fixing it",
+      "parentUuid": "714cfd99_411c2cce",
+      "range": {
+        "startLine": 1205,
+        "startChar": 8,
+        "endLine": 1205,
+        "endChar": 24
+      },
+      "revId": "a6e97744a043953dc6e73a8208496baca5f9520c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
