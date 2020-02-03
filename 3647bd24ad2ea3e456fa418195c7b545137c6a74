@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "e0cc1566_122855fb",
+        "filename": "drivers/md/dm-default-key.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-03T22:26:17Z",
+      "side": 1,
+      "message": "If you add a flags field to struct default_key_c, the extra argument wouldn\u0027t be needed here.",
+      "range": {
+        "startLine": 83,
+        "startChar": 8,
+        "endLine": 83,
+        "endChar": 27
+      },
+      "revId": "3647bd24ad2ea3e456fa418195c7b545137c6a74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50cc795f_1ce3de20",
+        "filename": "drivers/md/dm-default-key.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-03T22:26:17Z",
+      "side": 1,
+      "message": "Increase this to 4.",
+      "range": {
+        "startLine": 88,
+        "startChar": 6,
+        "endLine": 88,
+        "endChar": 7
+      },
+      "revId": "3647bd24ad2ea3e456fa418195c7b545137c6a74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "284620ca_20dc12b9",
+        "filename": "drivers/md/dm-default-key.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-03T22:26:17Z",
+      "side": 1,
+      "message": "The device mapper table syntax uses strings, so I don\u0027t think you should use a numeric \"flags\" argument like this.  Instead, how about adding a \"wrappedkey_v0\" argument?  When parsing, it can then be turned into a flag or a bool in struct default_key_c.",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 4
+      },
+      "revId": "3647bd24ad2ea3e456fa418195c7b545137c6a74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f63d5dc5_5e5054fe",
         "filename": "drivers/md/dm-default-key.c",
         "patchSetId": 4
@@ -13,6 +82,52 @@
       "writtenOn": "2020-02-03T22:05:06Z",
       "side": 1,
       "message": "This will let users specify with keys with lengths that are odd - so some malformed raw keys with incorrect length (like keys with one extra letter added at the end or anywhere in between) will actually end up being processed as if everything was fine. I think we need to now explicitly check that strlen(argv[1]) has even length.",
+      "revId": "3647bd24ad2ea3e456fa418195c7b545137c6a74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8821028e_e087be29",
+        "filename": "drivers/md/dm-default-key.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-03T22:26:17Z",
+      "side": 1,
+      "message": "Fix the indentation here.",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 13
+      },
+      "revId": "3647bd24ad2ea3e456fa418195c7b545137c6a74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5acd089d_44750a63",
+        "filename": "drivers/md/dm-default-key.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-03T22:26:17Z",
+      "side": 1,
+      "message": "Need to show the new option here if it was specified.\n\n(This can be tested using the \u0027dmctl table userdata\u0027 command on Android.)",
+      "range": {
+        "startLine": 344,
+        "startChar": 0,
+        "endLine": 352,
+        "endChar": 3
+      },
       "revId": "3647bd24ad2ea3e456fa418195c7b545137c6a74",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
