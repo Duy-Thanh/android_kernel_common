@@ -9,7 +9,9 @@
 
 #define DM_MSG_PREFIX		"default-key"
 
-#define DM_DEFAULT_KEY_MAX_KEY_SIZE	64
+#define DM_DEFAULT_KEY_MAX_WRAPPED_KEY_SIZE 128
+
+#define DM_DEFAULT_KEY_FLAG_HW_WRAPPED 0x1
 
 static const struct dm_default_key_cipher {
 	const char *name;
@@ -77,7 +79,8 @@ static void default_key_dtr(struct dm_target *ti)
 }
 
 static int default_key_ctr_optional(struct dm_target *ti,
-				    unsigned int argc, char **argv)
+				    unsigned int argc, char **argv,
+				    unsigned int *flags)
 {
 	struct default_key_c *dkc = ti->private;
 	struct dm_arg_set as;
@@ -115,6 +118,12 @@ static int default_key_ctr_optional(struct dm_target *ti,
 			}
 		} else if (!strcmp(opt_string, "iv_large_sectors")) {
 			iv_large_sectors = true;
+		} else if (sscanf(opt_string, "flags:%u%c",
+				  flags, &dummy) == 1) {
+			if (*flags & ~DM_DEFAULT_KEY_FLAG_HW_WRAPPED) {
+				ti->error = "Invalid flags provided";
+				return -EINVAL;
+			}
 		} else {
 			ti->error = "Invalid feature arguments";
 			return -EINVAL;
@@ -142,10 +151,13 @@ static int default_key_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 {
 	struct default_key_c *dkc;
 	const struct dm_default_key_cipher *cipher;
-	u8 raw_key[DM_DEFAULT_KEY_MAX_KEY_SIZE];
+	u8 raw_key[DM_DEFAULT_KEY_MAX_WRAPPED_KEY_SIZE];
+	unsigned int raw_key_size;
 	unsigned long long tmpll;
 	char dummy;
 	int err;
+	bool is_hw_wrapped = false;
+	unsigned int flags = 0;
 
 	if (argc < 5) {
 		ti->error = "Not enough arguments";
@@ -174,12 +186,13 @@ static int default_key_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 	}
 
 	/* <key> */
-	if (strlen(argv[1]) != 2 * cipher->key_size) {
-		ti->error = "Incorrect key size for cipher";
+	raw_key_size = strlen(argv[1]) / 2;
+	if (raw_key_size > DM_DEFAULT_KEY_MAX_WRAPPED_KEY_SIZE) {
+		ti->error = "Invalid keysize";
 		err = -EINVAL;
 		goto bad;
 	}
-	if (hex2bin(raw_key, argv[1], cipher->key_size) != 0) {
+	if (hex2bin(raw_key, argv[1], raw_key_size) != 0) {
 		ti->error = "Malformed key string";
 		err = -EINVAL;
 		goto bad;
@@ -212,7 +225,7 @@ static int default_key_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 	/* optional arguments */
 	dkc->sector_size = SECTOR_SIZE;
 	if (argc > 5) {
-		err = default_key_ctr_optional(ti, argc - 5, &argv[5]);
+		err = default_key_ctr_optional(ti, argc - 5, &argv[5], &flags);
 		if (err)
 			goto bad;
 	}
@@ -223,8 +236,19 @@ static int default_key_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 		goto bad;
 	}
 
+	if (flags & DM_DEFAULT_KEY_FLAG_HW_WRAPPED) {
+		is_hw_wrapped = true;
+	} else {
+		is_hw_wrapped = false;
+		if (raw_key_size != cipher->key_size) {
+			ti->error = "Incorrect key size for cipher";
+			err = -EINVAL;
+			 goto bad;
+		}
+	}
 	err = blk_crypto_init_key(&dkc->key, raw_key, cipher->key_size,
-				  false, cipher->mode_num, dkc->sector_size);
+				  is_hw_wrapped, cipher->mode_num,
+				  dkc->sector_size);
 	if (err) {
 		ti->error = "Error initializing blk-crypto key";
 		goto bad;
@@ -369,7 +393,7 @@ static void default_key_io_hints(struct dm_target *ti,
 
 static struct target_type default_key_target = {
 	.name			= "default-key",
-	.version		= {2, 0, 0},
+	.version		= {2, 1, 0},
 	.module			= THIS_MODULE,
 	.ctr			= default_key_ctr,
 	.dtr			= default_key_dtr,
