@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f63d5dc5_5e5054fe",
+        "filename": "drivers/md/dm-default-key.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-02-03T22:05:06Z",
+      "side": 1,
+      "message": "This will let users specify with keys with lengths that are odd - so some malformed raw keys with incorrect length (like keys with one extra letter added at the end or anywhere in between) will actually end up being processed as if everything was fine. I think we need to now explicitly check that strlen(argv[1]) has even length.",
+      "revId": "3647bd24ad2ea3e456fa418195c7b545137c6a74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
