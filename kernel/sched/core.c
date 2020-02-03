@@ -972,6 +972,63 @@ static inline void uclamp_rq_dec_id(struct rq *rq, struct task_struct *p,
 	}
 }
 
+static inline void update_uclamp_hold(struct rq *rq, struct task_struct *p)
+{
+	unsigned long hold_jiffies, exp;
+	unsigned long min_clamp;
+
+	if (!UCLAMP_HOLD_MS)
+		return;
+
+	exp = READ_ONCE(rq->uclamp_hold_expiry);
+
+	/*
+	 * If the previous hold has already expired, reset it.
+	 */
+	if (exp && time_after(jiffies, exp)) {
+		WRITE_ONCE(rq->uclamp_hold_value, 0);
+		WRITE_ONCE(rq->uclamp_hold_expiry, 0);
+
+		/* update our control variable too! */
+		exp = 0;
+	}
+
+	/*
+	 * Only apply the hold to RT tasks, unles SCHEDTUNE_BOOST_HOLD_ALL is
+	 * enabled.
+	 */
+	if (!sched_feat(SCHEDTUNE_BOOST_HOLD_ALL) && !task_has_rt_policy(p))
+		return;
+
+	hold_jiffies = msecs_to_jiffies(UCLAMP_HOLD_MS) + jiffies;
+	min_clamp = uclamp_eff_value(p, UCLAMP_MIN);
+
+	if (exp) {
+		/*
+		 * If the old hold is still active, only apply a new
+		 * hold only if the new one is higher.
+		 */
+		if (min_clamp > READ_ONCE(rq->uclamp_hold_value))
+			WRITE_ONCE(rq->uclamp_hold_value, min_clamp);
+
+	} else {
+		/*
+		 * If the old hold has expired, then simply apply this
+		 * new hold.
+		 */
+		WRITE_ONCE(rq->uclamp_hold_value, min_clamp);
+	}
+
+	/*
+	 * Since the hold duration is a compile constant, the new expiry is
+	 * always an extension of any currently active hold.
+	 *
+	 * If we can have variable hold duration, then we must ensure the new
+	 * expiry happens after any currently active hold.
+	 */
+	WRITE_ONCE(rq->uclamp_hold_expiry, hold_jiffies);
+}
+
 static inline void uclamp_rq_inc(struct rq *rq, struct task_struct *p)
 {
 	enum uclamp_id clamp_id;
@@ -985,17 +1042,26 @@ static inline void uclamp_rq_inc(struct rq *rq, struct task_struct *p)
 	/* Reset clamp idle holding when there is one RUNNABLE task */
 	if (rq->uclamp_flags & UCLAMP_FLAG_IDLE)
 		rq->uclamp_flags &= ~UCLAMP_FLAG_IDLE;
+
+	update_uclamp_hold(rq, p);
 }
 
 static inline void uclamp_rq_dec(struct rq *rq, struct task_struct *p)
 {
 	enum uclamp_id clamp_id;
+	unsigned long exp = READ_ONCE(rq->uclamp_hold_expiry);
 
 	if (unlikely(!p->sched_class->uclamp_enabled))
 		return;
 
 	for_each_clamp_id(clamp_id)
 		uclamp_rq_dec_id(rq, p, clamp_id);
+
+	/* remove rq min clamp hold if we can */
+	if (UCLAMP_HOLD_MS && exp && time_after(jiffies, exp)) {
+		WRITE_ONCE(rq->uclamp_hold_value, 0);
+		WRITE_ONCE(rq->uclamp_hold_expiry, 0);
+	}
 }
 
 static inline void

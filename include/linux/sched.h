@@ -589,6 +589,8 @@ struct sched_dl_entity {
 #ifdef CONFIG_UCLAMP_TASK
 /* Number of utilization clamp buckets (shorter alias) */
 #define UCLAMP_BUCKETS CONFIG_UCLAMP_BUCKETS_COUNT
+/* Boost hold value (shorter alias) */
+#define UCLAMP_HOLD_MS CONFIG_UCLAMP_HOLD_MS
 
 /*
  * Utilization clamp for a scheduling entity

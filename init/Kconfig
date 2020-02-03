@@ -726,6 +726,29 @@ config UCLAMP_BUCKETS_COUNT
 
 	  If in doubt, use the default value.
 
+config UCLAMP_HOLD_MS
+	int "Boost hold value in ms"
+	default 0
+	depends on UCLAMP_TASK
+	help
+	  When tasks come and go from a runqueue quickly, this can lead to
+	  boost being applied and removed quickly which sometimes means we
+	  cannot raise the CPU frequency again when we need to (due to the rate
+	  limit on frequency updates). This has proved to be a particular issue
+	  for RT tasks and alternative methods have been used in the past to
+	  work around it.
+
+	  A sched_feat guards the application of this to tasks - in the default
+	  configuration, task boosting only applied to tasks which have RT
+	  policy. Change SCHEDTUNE_BOOST_HOLD_ALL to true to apply it to all
+	  tasks regardless of class.
+
+	  By default no hold is applied. Some platforms found a 50ms value to
+	  be useful.
+
+	  Only set this if you find your RT tasks not getting the frequency
+	  they want despite being boosted (uclamp_min value > 0).
+
 endmenu
 
 #

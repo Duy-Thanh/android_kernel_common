@@ -907,6 +907,8 @@ struct rq {
 	/* Utilization clamp values based on CPU's RUNNABLE tasks */
 	struct uclamp_rq	uclamp[UCLAMP_CNT] ____cacheline_aligned;
 	unsigned int		uclamp_flags;
+	unsigned long		uclamp_hold_expiry;
+	unsigned long		uclamp_hold_value;
 #define UCLAMP_FLAG_IDLE 0x01
 #endif
 
@@ -2342,9 +2344,21 @@ unsigned long uclamp_rq_util_with(struct rq *rq, unsigned long util,
 	unsigned long min_util = READ_ONCE(rq->uclamp[UCLAMP_MIN].value);
 	unsigned long max_util = READ_ONCE(rq->uclamp[UCLAMP_MAX].value);
 
+	unsigned long hold_min = 0;
+	unsigned long exp;
+
 	if (p) {
 		min_util = max(min_util, uclamp_eff_value(p, UCLAMP_MIN));
 		max_util = max(max_util, uclamp_eff_value(p, UCLAMP_MAX));
+	}
+
+	if (UCLAMP_HOLD_MS) {
+		/* Apply uclamp hold request, if any. */
+		exp = READ_ONCE(rq->uclamp_hold_expiry);
+		if (exp && time_before(jiffies, exp))
+			hold_min = READ_ONCE(rq->uclamp_hold_value);
+
+		min_util = max(hold_min, min_util);
 	}
 
 	/*
