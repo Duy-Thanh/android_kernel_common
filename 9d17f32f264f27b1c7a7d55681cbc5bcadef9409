@@ -213,6 +213,30 @@
       "revId": "9d17f32f264f27b1c7a7d55681cbc5bcadef9409",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa17e878_cee2765d",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-02-05T16:41:50Z",
+      "side": 1,
+      "message": "Hmm I\u0027m starting to lose clarity in my head for today.\n\nBut FWIW, when jiffies wrap around, wouldn\u0027t unconditional check against 0 means it\u0027ll erroneously return true sometimes although we don\u0027t have a real expiry time set?",
+      "parentUuid": "c13999f0_5752fdd6",
+      "range": {
+        "startLine": 248,
+        "startChar": 1,
+        "endLine": 255,
+        "endChar": 2
+      },
+      "revId": "9d17f32f264f27b1c7a7d55681cbc5bcadef9409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
