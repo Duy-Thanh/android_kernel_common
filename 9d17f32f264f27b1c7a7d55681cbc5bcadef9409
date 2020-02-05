@@ -94,6 +94,30 @@
       "revId": "9d17f32f264f27b1c7a7d55681cbc5bcadef9409",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4e4720a_b79e67f7",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2020-02-05T15:44:29Z",
+      "side": 1,
+      "message": "I think I see the race - we will call schedutil_cpu_util() for every CPU in a perf domain at some point from the worker CPU, so if any of those other CPUs is in the middle of enqueuing a task and setting up a uclamp hold, we could potentially wipe it out.\nAt worst we could probably just end up not holding a frequency we should have in the event of a race, so it\u0027s likely not so bad, but perhaps we can just avoid writing rq vals here as VS suggested.\n\nWe could do everything the same except for writing the values here, so we\u0027d just need to lazily clear them somewhere else where we hold a rq lock.",
+      "parentUuid": "8d5b13b4_7ccdd2b1",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 2
+      },
+      "revId": "9d17f32f264f27b1c7a7d55681cbc5bcadef9409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
