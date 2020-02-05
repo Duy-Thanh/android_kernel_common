@@ -46,6 +46,30 @@
       "revId": "9d17f32f264f27b1c7a7d55681cbc5bcadef9409",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cfd54c1_a91d813d",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1173283
+      },
+      "writtenOn": "2020-02-05T12:45:09Z",
+      "side": 1,
+      "message": "IIUC what Pavan is getting to here is that this could be racing with `uclamp_rq_inc()` / `uclamp_rq_dec()`, that being said AFAICT that can only happen on a jiffy boundary.\n\nPerhaps a better thing would be to not write the `rq` values here; just do reads from this end and let the enqueue/dequeue machinery drive the hold fields.",
+      "parentUuid": "cc99faa6_77457385",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 2
+      },
+      "revId": "9d17f32f264f27b1c7a7d55681cbc5bcadef9409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
