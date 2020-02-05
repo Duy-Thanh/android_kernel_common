@@ -22,6 +22,30 @@
       "revId": "9d17f32f264f27b1c7a7d55681cbc5bcadef9409",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc99faa6_77457385",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-02-05T12:21:49Z",
+      "side": 1,
+      "message": "If you mean by racy it is not precise, then yes. But we think it\u0027s good enough. As you can see in the notebook I put in the comment in the last patch, we do overshoot the hold period. But it shouldn\u0027t be a problem in practice as you say. To get precise update without using a timer we need to sprinkle more calls to cpufreq_update_util() in various places..",
+      "parentUuid": "6e74578a_bdea4332",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 2
+      },
+      "revId": "9d17f32f264f27b1c7a7d55681cbc5bcadef9409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
