@@ -70,6 +70,30 @@
       "revId": "9d17f32f264f27b1c7a7d55681cbc5bcadef9409",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d5b13b4_7ccdd2b1",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-02-05T12:56:20Z",
+      "side": 1,
+      "message": "We\u0027ll overshoot the hold duration by quite a margin if we don\u0027t update here.\n\nThe cpufreq_update_util() must be called from RCU read side critical section. I need to look at the rules and unravel the call stack. But the enqueue should happen in the critical section too; I need to look at the code and add a comment about why this update is fine or at least call it out if it is indeed racy.",
+      "parentUuid": "1cfd54c1_a91d813d",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 2
+      },
+      "revId": "9d17f32f264f27b1c7a7d55681cbc5bcadef9409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
