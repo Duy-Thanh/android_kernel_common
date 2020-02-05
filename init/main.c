@@ -579,6 +579,22 @@ asmlinkage __visible void __init start_kernel(void)
 	 */
 	add_latent_entropy();
 	add_device_randomness(command_line, strlen(command_line));
+	if (IS_ENABLED(CONFIG_RANDOM_TRUST_BOOTLOADER)) {
+		size_t l = strlen(command_line);
+		char *rng_seed = strnstr(command_line, "entropy=", l);
+
+		if (rng_seed) {
+			char *end;
+
+			rng_seed += strlen("entropy=");
+			l -= rng_seed - command_line;
+			end = strnchr(rng_seed, l, ' ') ?: rng_seed + l;
+			l = end - rng_seed;
+			add_bootloader_randomness(rng_seed, l);
+			/* try to clear seed so it won't be found. */
+			memset(rng_seed, ' ', l);
+		}
+	}
 	boot_init_stack_canary();
 	mm_init_cpumask(&init_mm);
 	setup_command_line(command_line);
