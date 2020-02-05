@@ -237,6 +237,54 @@
       "revId": "9d17f32f264f27b1c7a7d55681cbc5bcadef9409",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fdf7452e_89481f48",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-02-05T16:44:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d4e4720a_b79e67f7",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 2
+      },
+      "revId": "9d17f32f264f27b1c7a7d55681cbc5bcadef9409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "31dbfa23_39aade2c",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-02-05T16:44:03Z",
+      "side": 1,
+      "message": "\u003e And yes, on the racy side... should not the tick give us a good enough granularity to do all the boost hold updates required to reset/release an hold?\n\nIs the tick atomic context? Can you point me out to the function where you were thinking we can do the reset at, besides the current checks at enqueue/dequeue?",
+      "parentUuid": "aa17e878_cee2765d",
+      "range": {
+        "startLine": 248,
+        "startChar": 1,
+        "endLine": 255,
+        "endChar": 2
+      },
+      "revId": "9d17f32f264f27b1c7a7d55681cbc5bcadef9409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
