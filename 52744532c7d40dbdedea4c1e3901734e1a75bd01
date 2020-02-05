@@ -45,6 +45,29 @@
       "revId": "52744532c7d40dbdedea4c1e3901734e1a75bd01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11da125d_31f37d61",
+        "filename": "init/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-02-05T23:56:34Z",
+      "side": 1,
+      "message": "Can not call this as it sleeps when we are above a \u0027trickle\u0027 threshold. We can not add more credit to the entropy as the input_pool is private (and should remain so).\n\nSo can not get from here to there without more mechanics :-(",
+      "range": {
+        "startLine": 593,
+        "startChar": 3,
+        "endLine": 593,
+        "endChar": 42
+      },
+      "revId": "52744532c7d40dbdedea4c1e3901734e1a75bd01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
