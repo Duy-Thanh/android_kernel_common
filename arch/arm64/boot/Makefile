@@ -14,9 +14,13 @@
 # Based on the ia64 boot/Makefile.
 #
 
+<<<<<<< HEAD   (bf0cb2 UPSTREAM: staging: most: net: fix buffer overflow)
 include $(srctree)/arch/arm64/boot/dts/Makefile
 
 targets := Image Image.gz
+=======
+targets := Image Image.bz2 Image.gz Image.lz4 Image.lzma Image.lzo
+>>>>>>> BRANCH (d6ccbf Linux 4.4.213)
 
 DTB_NAMES := $(subst $\",,$(CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE_NAMES))
 ifneq ($(DTB_NAMES),)
