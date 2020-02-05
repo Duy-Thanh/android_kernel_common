@@ -189,6 +189,30 @@
       "revId": "9d17f32f264f27b1c7a7d55681cbc5bcadef9409",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9ca2349_f739da9f",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1291841
+      },
+      "writtenOn": "2020-02-05T16:38:32Z",
+      "side": 1,
+      "message": "And yes, on the racy side... should not the tick give us a good enough granularity to do all the boost hold updates required to reset/release an hold?",
+      "parentUuid": "c13999f0_5752fdd6",
+      "range": {
+        "startLine": 248,
+        "startChar": 1,
+        "endLine": 255,
+        "endChar": 2
+      },
+      "revId": "9d17f32f264f27b1c7a7d55681cbc5bcadef9409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
