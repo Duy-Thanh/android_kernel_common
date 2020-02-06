@@ -141,6 +141,9 @@
 #define CQHCI_DAT_LENGTH(x)		(((x) & 0xFFFF) << 16)
 #define CQHCI_DAT_ADDR_LO(x)		(((x) & 0xFFFFFFFF) << 32)
 #define CQHCI_DAT_ADDR_HI(x)		(((x) & 0xFFFFFFFF) << 0)
+#define CQHCI_CRYPTO_DATA_UNIT_NUM(x)	(((u64)(x) & 0xFFFFFFFF) << 0)
+#define CQHCI_CRYPTO_CONFIG_INDEX(x)	(((u64)(x) & 0xFF) << 32)
+#define CQHCI_CRYPTO_ENABLE(x)		(((u64)(x) & 0x1) << 47)
 
 struct cqhci_host_ops;
 struct mmc_host;
@@ -200,6 +203,16 @@ union cqhci_crypto_cfg_entry {
 		u8 vsb[2];
 		u8 reserved_3[56];
 	};
+};
+
+struct cqhci_host_crypto_variant_ops {
+	int (*host_init_crypto)(struct cqhci_host *host,
+				const struct keyslot_mgmt_ll_ops *ksm_ops);
+	void (*enable)(struct cqhci_host *host);
+	void (*disable)(struct cqhci_host *host);
+	int (*debug)(struct cqhci_host *host);
+	int (*recovery_finish)(struct cqhci_host *host);
+	void *priv;
 };
 
 struct cqhci_host {
