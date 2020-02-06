@@ -878,29 +878,9 @@ EXPORT_SYMBOL_GPL(dma_buf_unmap_attachment);
  *   with calls to dma_buf_begin_cpu_access() and dma_buf_end_cpu_access()
  *   access.
  *
- *   To support dma_buf objects residing in highmem cpu access is page-based
- *   using an api similar to kmap. Accessing a dma_buf is done in aligned chunks
- *   of PAGE_SIZE size. Before accessing a chunk it needs to be mapped, which
- *   returns a pointer in kernel virtual address space. Afterwards the chunk
- *   needs to be unmapped again. There is no limit on how often a given chunk
- *   can be mapped and unmapped, i.e. the importer does not need to call
- *   begin_cpu_access again before mapping the same chunk again.
- *
- *   Interfaces::
- *      void \*dma_buf_kmap(struct dma_buf \*, unsigned long);
- *      void dma_buf_kunmap(struct dma_buf \*, unsigned long, void \*);
- *
- *   Implementing the functions is optional for exporters and for importers all
- *   the restrictions of using kmap apply.
- *
- *   dma_buf kmap calls outside of the range specified in begin_cpu_access are
- *   undefined. If the range is not PAGE_SIZE aligned, kmap needs to succeed on
- *   the partial chunks at the beginning and end but may return stale or bogus
- *   data outside of the range (in these partial chunks).
- *
- *   For some cases the overhead of kmap can be too high, a vmap interface
- *   is introduced. This interface should be used very carefully, as vmalloc
- *   space is a limited resources on many architectures.
+ *   Since for most kernel internal dma-buf accesses need the entire buffer, a
+ *   vmap interface is introduced. Note that on very old 32-bit architectures
+ *   vmalloc space might be limited and result in vmap calls failing.
  *
  *   Interfaces::
  *      void \*dma_buf_vmap(struct dma_buf \*dmabuf)
@@ -1074,6 +1054,7 @@ int dma_buf_end_cpu_access(struct dma_buf *dmabuf,
 }
 EXPORT_SYMBOL_GPL(dma_buf_end_cpu_access);
 
+<<<<<<< HEAD   (374b29 Merge 4cbc418a44d5 ("Merge branch 'cve-2019-3016' into kvm-n)
 int dma_buf_end_cpu_access_partial(struct dma_buf *dmabuf,
 				   enum dma_data_direction direction,
 				   unsigned int offset, unsigned int len)
@@ -1127,6 +1108,8 @@ void dma_buf_kunmap(struct dma_buf *dmabuf, unsigned long page_num,
 }
 EXPORT_SYMBOL_GPL(dma_buf_kunmap);
 
+=======
+>>>>>>> BRANCH (9f68e3 Merge tag 'drm-next-2020-01-30' of git://anongit.freedesktop)
 
 /**
  * dma_buf_mmap - Setup up a userspace mmap with the given vma
