@@ -202,6 +202,31 @@ union cqhci_crypto_cfg_entry {
 	};
 };
 
+struct cqhci_host_crypto_variant_ops {
+	void (*setup_rq_keyslot_manager)(struct cqhci_host *host,
+					 struct request_queue *q);
+	void (*destroy_rq_keyslot_manager)(struct cqhci_host *host,
+					   struct request_queue *q);
+	int (*host_init_crypto)(struct cqhci_host *host);
+	void (*enable)(struct cqhci_host *host);
+	void (*disable)(struct cqhci_host *host);
+	int (*suspend)(struct cqhci_host *host);
+	int (*resume)(struct cqhci_host *host);
+	int (*debug)(struct cqhci_host *host);
+	int (*prepare_crypto_desc)(struct cqhci_host *host,
+				   struct mmc_request *mrq,
+				   u64 *ice_ctx);
+	int (*complete_crypto_desc)(struct cqhci_host *host,
+				    struct mmc_request *mrq,
+				    u64 *ice_ctx);
+	int (*reset)(struct cqhci_host *host);
+	int (*recovery_finish)(struct cqhci_host *host);
+	int (*program_key)(struct cqhci_host *host,
+			   const union cqhci_crypto_cfg_entry *cfg,
+			   int slot);
+	void *priv;
+};
+
 struct cqhci_host {
 	const struct cqhci_host_ops *ops;
 	void __iomem *mmio;
