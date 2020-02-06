@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "46b51cda_0607c1b1",
+        "filename": "init/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-02-06T19:38:31Z",
+      "side": 1,
+      "message": "This is supposed to be after rng_seed_str[] (checkpatch.pl picks this up)",
+      "range": {
+        "startLine": 374,
+        "startChar": 18,
+        "endLine": 374,
+        "endChar": 30
+      },
+      "revId": "a334752e9efe63cb221c129e9e07d93b65f323ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
