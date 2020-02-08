@@ -109,8 +109,12 @@ endif
 quiet_cmd_modpost = MODPOST $(words $(modules)) modules
       cmd_modpost = sed 's/\.ko$$/$(modpost-ext)\.o/' $(MODORDER) | $(MODPOST)
 
+<<<<<<< HEAD   (c48342 ANDROID: gki_defconfig: Relocate INCREMENTAL_FS)
 __modpost: $(modules:.ko=$(modpost-ext).o)
 	@$(kecho) '  Building modules, stage 2.'
+=======
+__modpost:
+>>>>>>> BRANCH (a45ad7 Merge tag 'rproc-v5.6' of git://git.kernel.org/pub/scm/linux)
 	$(call cmd,modpost)
 ifneq ($(KBUILD_MODPOST_NOFINAL),1)
 	$(Q)$(MAKE) -f $(srctree)/scripts/Makefile.modfinal

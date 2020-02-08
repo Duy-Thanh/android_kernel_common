@@ -1136,6 +1136,7 @@ static int qcom_pcie_init_2_7_0(struct qcom_pcie *pcie)
 		goto err_disable_clocks;
 	}
 
+<<<<<<< HEAD   (c48342 ANDROID: gki_defconfig: Relocate INCREMENTAL_FS)
 	msleep(10);
 
 	ret = reset_control_deassert(res->pci_reset);
@@ -1179,6 +1180,49 @@ static int qcom_pcie_init_2_7_0(struct qcom_pcie *pcie)
 	return 0;
 err_assert_resets:
 	reset_control_assert(res->pci_reset);
+=======
+	usleep_range(1000, 1500);
+
+	ret = reset_control_deassert(res->pci_reset);
+	if (ret < 0) {
+		dev_err(dev, "cannot deassert pci reset\n");
+		goto err_disable_clocks;
+	}
+
+	ret = clk_prepare_enable(res->pipe_clk);
+	if (ret) {
+		dev_err(dev, "cannot prepare/enable pipe clock\n");
+		goto err_disable_clocks;
+	}
+
+	/* configure PCIe to RC mode */
+	writel(DEVICE_TYPE_RC, pcie->parf + PCIE20_PARF_DEVICE_TYPE);
+
+	/* enable PCIe clocks and resets */
+	val = readl(pcie->parf + PCIE20_PARF_PHY_CTRL);
+	val &= ~BIT(0);
+	writel(val, pcie->parf + PCIE20_PARF_PHY_CTRL);
+
+	/* change DBI base address */
+	writel(0, pcie->parf + PCIE20_PARF_DBI_BASE_ADDR);
+
+	/* MAC PHY_POWERDOWN MUX DISABLE  */
+	val = readl(pcie->parf + PCIE20_PARF_SYS_CTRL);
+	val &= ~BIT(29);
+	writel(val, pcie->parf + PCIE20_PARF_SYS_CTRL);
+
+	val = readl(pcie->parf + PCIE20_PARF_MHI_CLOCK_RESET_CTRL);
+	val |= BIT(4);
+	writel(val, pcie->parf + PCIE20_PARF_MHI_CLOCK_RESET_CTRL);
+
+	if (IS_ENABLED(CONFIG_PCI_MSI)) {
+		val = readl(pcie->parf + PCIE20_PARF_AXI_MSTR_WR_ADDR_HALT);
+		val |= BIT(31);
+		writel(val, pcie->parf + PCIE20_PARF_AXI_MSTR_WR_ADDR_HALT);
+	}
+
+	return 0;
+>>>>>>> BRANCH (a45ad7 Merge tag 'rproc-v5.6' of git://git.kernel.org/pub/scm/linux)
 err_disable_clocks:
 	clk_bulk_disable_unprepare(ARRAY_SIZE(res->clks), res->clks);
 err_disable_regulators:
