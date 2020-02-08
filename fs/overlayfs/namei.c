@@ -142,11 +142,19 @@ out:
 	return NULL;
 
 fail:
+<<<<<<< HEAD   (c48342 ANDROID: gki_defconfig: Relocate INCREMENTAL_FS)
 	pr_warn_ratelimited("overlayfs: failed to get origin (%zi)\n", res);
+=======
+	pr_warn_ratelimited("failed to get origin (%i)\n", res);
+>>>>>>> BRANCH (90568e Merge tag 'kvm-5.6-2' of git://git.kernel.org/pub/scm/virt/k)
 	goto out;
 invalid:
+<<<<<<< HEAD   (c48342 ANDROID: gki_defconfig: Relocate INCREMENTAL_FS)
 	pr_warn_ratelimited("overlayfs: invalid origin (%*phN)\n",
 			    (int)res, fh);
+=======
+	pr_warn_ratelimited("invalid origin (%*phN)\n", res, fh);
+>>>>>>> BRANCH (90568e Merge tag 'kvm-5.6-2' of git://git.kernel.org/pub/scm/virt/k)
 	goto out;
 }
 
@@ -324,16 +332,16 @@ int ovl_check_origin_fh(struct ovl_fs *ofs, struct ovl_fh *fh, bool connected,
 	struct dentry *origin = NULL;
 	int i;
 
-	for (i = 0; i < ofs->numlower; i++) {
+	for (i = 1; i < ofs->numlayer; i++) {
 		/*
 		 * If lower fs uuid is not unique among lower fs we cannot match
 		 * fh->uuid to layer.
 		 */
-		if (ofs->lower_layers[i].fsid &&
-		    ofs->lower_layers[i].fs->bad_uuid)
+		if (ofs->layers[i].fsid &&
+		    ofs->layers[i].fs->bad_uuid)
 			continue;
 
-		origin = ovl_decode_real_fh(fh, ofs->lower_layers[i].mnt,
+		origin = ovl_decode_real_fh(fh, ofs->layers[i].mnt,
 					    connected);
 		if (origin)
 			break;
@@ -356,13 +364,13 @@ int ovl_check_origin_fh(struct ovl_fs *ofs, struct ovl_fh *fh, bool connected,
 	}
 	**stackp = (struct ovl_path){
 		.dentry = origin,
-		.layer = &ofs->lower_layers[i]
+		.layer = &ofs->layers[i]
 	};
 
 	return 0;
 
 invalid:
-	pr_warn_ratelimited("overlayfs: invalid origin (%pd2, ftype=%x, origin ftype=%x).\n",
+	pr_warn_ratelimited("invalid origin (%pd2, ftype=%x, origin ftype=%x).\n",
 			    upperdentry, d_inode(upperdentry)->i_mode & S_IFMT,
 			    d_inode(origin)->i_mode & S_IFMT);
 	dput(origin);
@@ -451,7 +459,7 @@ out:
 
 fail:
 	inode = d_inode(real);
-	pr_warn_ratelimited("overlayfs: failed to verify %s (%pd2, ino=%lu, err=%i)\n",
+	pr_warn_ratelimited("failed to verify %s (%pd2, ino=%lu, err=%i)\n",
 			    is_upper ? "upper" : "origin", real,
 			    inode ? inode->i_ino : 0, err);
 	goto out;
@@ -477,7 +485,7 @@ struct dentry *ovl_index_upper(struct ovl_fs *ofs, struct dentry *index)
 		return upper ?: ERR_PTR(-ESTALE);
 
 	if (!d_is_dir(upper)) {
-		pr_warn_ratelimited("overlayfs: invalid index upper (%pd2, upper=%pd2).\n",
+		pr_warn_ratelimited("invalid index upper (%pd2, upper=%pd2).\n",
 				    index, upper);
 		dput(upper);
 		return ERR_PTR(-EIO);
@@ -591,12 +599,12 @@ out:
 	return err;
 
 fail:
-	pr_warn_ratelimited("overlayfs: failed to verify index (%pd2, ftype=%x, err=%i)\n",
+	pr_warn_ratelimited("failed to verify index (%pd2, ftype=%x, err=%i)\n",
 			    index, d_inode(index)->i_mode & S_IFMT, err);
 	goto out;
 
 orphan:
-	pr_warn_ratelimited("overlayfs: orphan index entry (%pd2, ftype=%x, nlink=%u)\n",
+	pr_warn_ratelimited("orphan index entry (%pd2, ftype=%x, nlink=%u)\n",
 			    index, d_inode(index)->i_mode & S_IFMT,
 			    d_inode(index)->i_nlink);
 	err = -ENOENT;
@@ -698,7 +706,7 @@ struct dentry *ovl_lookup_index(struct ovl_fs *ofs, struct dentry *upper,
 			index = NULL;
 			goto out;
 		}
-		pr_warn_ratelimited("overlayfs: failed inode index lookup (ino=%lu, key=%.*s, err=%i);\n"
+		pr_warn_ratelimited("failed inode index lookup (ino=%lu, key=%.*s, err=%i);\n"
 				    "overlayfs: mount with '-o index=off' to disable inodes index.\n",
 				    d_inode(origin)->i_ino, name.len, name.name,
 				    err);
@@ -725,13 +733,13 @@ struct dentry *ovl_lookup_index(struct ovl_fs *ofs, struct dentry *upper,
 		 * unlinked, which means that finding a lower origin on lookup
 		 * whose index is a whiteout should be treated as an error.
 		 */
-		pr_warn_ratelimited("overlayfs: bad index found (index=%pd2, ftype=%x, origin ftype=%x).\n",
+		pr_warn_ratelimited("bad index found (index=%pd2, ftype=%x, origin ftype=%x).\n",
 				    index, d_inode(index)->i_mode & S_IFMT,
 				    d_inode(origin)->i_mode & S_IFMT);
 		goto fail;
 	} else if (is_dir && verify) {
 		if (!upper) {
-			pr_warn_ratelimited("overlayfs: suspected uncovered redirected dir found (origin=%pd2, index=%pd2).\n",
+			pr_warn_ratelimited("suspected uncovered redirected dir found (origin=%pd2, index=%pd2).\n",
 					    origin, index);
 			goto fail;
 		}
@@ -740,7 +748,7 @@ struct dentry *ovl_lookup_index(struct ovl_fs *ofs, struct dentry *upper,
 		err = ovl_verify_upper(index, upper, false);
 		if (err) {
 			if (err == -ESTALE) {
-				pr_warn_ratelimited("overlayfs: suspected multiply redirected dir found (upper=%pd2, origin=%pd2, index=%pd2).\n",
+				pr_warn_ratelimited("suspected multiply redirected dir found (upper=%pd2, origin=%pd2, index=%pd2).\n",
 						    upper, origin, index);
 			}
 			goto fail;
@@ -887,7 +895,7 @@ struct dentry *ovl_lookup(struct inode *dir, struct dentry *dentry,
 
 	if (!d.stop && poe->numlower) {
 		err = -ENOMEM;
-		stack = kcalloc(ofs->numlower, sizeof(struct ovl_path),
+		stack = kcalloc(ofs->numlayer - 1, sizeof(struct ovl_path),
 				GFP_KERNEL);
 		if (!stack)
 			goto out_put_upper;
@@ -969,7 +977,7 @@ struct dentry *ovl_lookup(struct inode *dir, struct dentry *dentry,
 		 */
 		err = -EPERM;
 		if (d.redirect && !ofs->config.redirect_follow) {
-			pr_warn_ratelimited("overlayfs: refusing to follow redirect for (%pd2)\n",
+			pr_warn_ratelimited("refusing to follow redirect for (%pd2)\n",
 					    dentry);
 			goto out_put;
 		}
@@ -996,7 +1004,7 @@ struct dentry *ovl_lookup(struct inode *dir, struct dentry *dentry,
 
 		err = -EPERM;
 		if (!ofs->config.metacopy) {
-			pr_warn_ratelimited("overlay: refusing to follow metacopy origin for (%pd2)\n",
+			pr_warn_ratelimited("refusing to follow metacopy origin for (%pd2)\n",
 					    dentry);
 			goto out_put;
 		}
