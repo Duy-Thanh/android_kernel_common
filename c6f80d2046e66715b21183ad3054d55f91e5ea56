@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "520b763b_068e477b",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-02-10T20:57:09Z",
+      "side": 1,
+      "message": "This option has problems for GKI. We decided it\u0027s OK to enable ARCH options for the first GKI (we don\u0027t have time to fix the problems), but sometimes they enable other bool drivers, which bloats the main image. In the case of vexpress, the clk driver is enabled (CONFIG_COMMON_CLK_VERSATILE) and all of its sub options are bools, not tristates, like most other SoC clk drivers. I think we should hold vexpress to the same standard i.e. please update this driver to support being built as a module.",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 25
+      },
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de66123d_097cfdc0",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-02-10T20:57:09Z",
+      "side": 1,
+      "message": "Please switch over to the pl111 drm/kms driver and remove these. We will not support CONFIG_FB for any ecosystem partner in GKI.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 24
+      },
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff11adc8_04605e84",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-02-10T20:57:09Z",
+      "side": 1,
+      "message": "Please enable this in gki_defconfig",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 25
+      },
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "790872de_6b7babee",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-02-10T20:57:09Z",
+      "side": 1,
+      "message": "This looks fine to me; it can be built tristate.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 23
+      },
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e10cf59_dc88ca1e",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-02-10T20:57:09Z",
+      "side": 1,
+      "message": "Looks fine.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 27
+      },
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "038dba9a_693d3087",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-02-10T20:57:09Z",
+      "side": 1,
+      "message": "Looks fine.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 25
+      },
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "015d26e5_224e1124",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-02-10T20:57:09Z",
+      "side": 1,
+      "message": "You can drop this one, it seems to have been enabled in gki_defconfig.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 37
+      },
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
