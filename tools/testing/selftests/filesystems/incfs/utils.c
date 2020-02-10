@@ -250,6 +250,20 @@ int get_file_signature(int fd, unsigned char *buf, int buf_size)
 	return -errno;
 }
 
+int get_file_additional_data(int fd, unsigned char* hash,
+                             unsigned char *buf, int buf_size)
+{
+	struct incfs_get_file_additional_data_args args = {
+		.root_hash = ptr_to_u64(hash),
+		.additional_data = ptr_to_u64(buf),
+		.additional_data_buffer_size = buf_size
+	};
+
+	if (ioctl(fd, INCFS_IOC_READ_ADDITIONAL_DATA, &args) == 0)
+		return args.additional_data_size_out;
+	return -errno;
+}
+
 loff_t get_file_size(char *name)
 {
 	struct stat st;

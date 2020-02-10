@@ -25,6 +25,9 @@ int get_file_bmap(int cmd_fd, int ino, unsigned char *buf, int buf_size);
 
 int get_file_signature(int fd, unsigned char *buf, int buf_size);
 
+int get_file_additional_data(int fd, unsigned char* hash,
+		unsigned char *buf, int buf_size);
+
 int emit_node(int fd, char *filename, int *ino_out, int parent_ino,
 		size_t size, mode_t mode, char *attr);
 

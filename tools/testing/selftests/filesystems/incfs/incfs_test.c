@@ -1888,6 +1888,8 @@ static int signature_test(char *mount_dir)
 	const int file_num = test.files_count;
 	int i = 0;
 	unsigned char sig_buf[INCFS_MAX_SIGNATURE_SIZE];
+	unsigned char add_data[INCFS_MAX_SIGNATURE_SIZE];
+	unsigned char hash[INCFS_MAX_HASH_SIZE];
 	char *backing_dir;
 	int cmd_fd = -1;
 
@@ -1937,6 +1939,7 @@ static int signature_test(char *mount_dir)
 		int sig_len;
 		char *path;
 		int fd;
+		int size;
 
 		if (validate_test_file_content(mount_dir, file) < 0)
 			goto failure;
@@ -1950,6 +1953,8 @@ static int signature_test(char *mount_dir)
 		}
 
 		sig_len = get_file_signature(fd, sig_buf, ARRAY_SIZE(sig_buf));
+
+		size = get_file_additional_data(fd, hash, add_data, ARRAY_SIZE(add_data));
 
 		if (close(fd)) {
 			print_error("Can't close file");
@@ -1968,6 +1973,21 @@ static int signature_test(char *mount_dir)
 				file->name);
 			goto failure;
 		}
+
+		if (sig_len == 0)
+			continue;
+
+		if (memcmp(file->root_hash, hash, sizeof(hash))) {
+			ksft_print_msg("Hash mismatch\n");
+			goto failure;
+		}
+
+		if (size != strlen(file->sig.add_data) ||
+		    memcmp(add_data, file->sig.add_data, size)) {
+			ksft_print_msg("Additional data mismatch\n");
+			goto failure;
+		}
+
 	}
 
 	/* Unmount and mount again, to make sure the signature is persistent. */
@@ -1990,6 +2010,7 @@ static int signature_test(char *mount_dir)
 		int sig_len;
 		char *path;
 		int fd;
+		int size;
 
 		if (validate_test_file_content(mount_dir, file) < 0)
 			goto failure;
@@ -2003,6 +2024,8 @@ static int signature_test(char *mount_dir)
 		}
 
 		sig_len = get_file_signature(fd, sig_buf, ARRAY_SIZE(sig_buf));
+
+		size = get_file_additional_data(fd, hash, add_data, ARRAY_SIZE(add_data));
 
 		if (close(fd)) {
 			print_error("Can't close file");
@@ -2018,6 +2041,20 @@ static int signature_test(char *mount_dir)
 			memcmp(sig_buf, file->sig.data, sig_len)) {
 			ksft_print_msg("Signature mismatch %s.\n",
 				file->name);
+			goto failure;
+		}
+
+		if (sig_len == 0)
+			continue;
+
+		if (memcmp(file->root_hash, hash, sizeof(hash))) {
+			ksft_print_msg("Hash mismatch\n");
+			goto failure;
+		}
+
+		if (size != strlen(file->sig.add_data) ||
+		    memcmp(add_data, file->sig.add_data, size)) {
+			ksft_print_msg("Additional data mismatch\n");
 			goto failure;
 		}
 	}

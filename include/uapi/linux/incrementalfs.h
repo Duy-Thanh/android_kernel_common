@@ -48,6 +48,10 @@
 #define INCFS_IOC_READ_FILE_SIGNATURE                                          \
 	_IOWR(INCFS_IOCTL_BASE_CODE, 31, struct incfs_get_file_sig_args)
 
+/* Read additional data */
+#define INCFS_IOC_READ_ADDITIONAL_DATA                                         \
+	_IOWR(INCFS_IOCTL_BASE_CODE, 32, struct incfs_get_file_sig_args)
+
 enum incfs_compression_alg {
 	COMPRESSION_NONE = 0,
 	COMPRESSION_LZ4 = 1
@@ -250,6 +254,38 @@ struct incfs_get_file_sig_args {
 	 * It is set after ioctl done.
 	 */
 	__u32 file_signature_len_out;
+};
+
+/*
+ * Request additional data from a file
+ * Argument for INCFS_IOC_READ_FILE_ADDITIONAL_DATA ioctl
+ */
+struct incfs_get_file_additional_data_args {
+	/*
+	 * A pointer to file's root hash (if determined != 0)
+	 * Actual hash size determined by hash_tree_alg.
+	 * Size of the buffer should be at least INCFS_MAX_HASH_SIZE
+	 *
+	 * Equivalent to: u8 *root_hash;
+	 */
+	__aligned_u64 root_hash;
+
+	/*
+	 * A pointer to buffer to return additional data
+	 *
+	 * Equivalent to: u8 *additional data;
+	 */
+	__aligned_u64 additional_data;
+
+	/*
+	 * Size of additional data buffer
+	 */
+	__u32 additional_data_buffer_size;
+
+	/*
+	 * Number of bytes returned
+	 */
+	__u32 additional_data_size_out;
 };
 
 #endif /* _UAPI_LINUX_INCREMENTALFS_H */

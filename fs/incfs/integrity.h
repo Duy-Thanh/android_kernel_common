@@ -67,6 +67,9 @@ int incfs_calc_digest(struct incfs_hash_alg *alg, struct mem_range data,
 int incfs_validate_pkcs7_signature(struct mem_range pkcs7_blob,
 	struct mem_range root_hash, struct mem_range add_data);
 
+int incfs_get_pkcs7_additional_data(struct mem_range pkcs7_blob, void* hash,
+				void *add_data, size_t add_data_len);
+
 void incfs_free_signature_info(struct signature_info *si);
 
 #endif /* _INCFS_INTEGRITY_H */
