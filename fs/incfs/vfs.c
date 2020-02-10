@@ -1417,6 +1417,92 @@ out:
 	return error;
 }
 
+static long ioctl_read_additional_data(struct file *f, void __user *arg)
+{
+	struct incfs_get_file_additional_data_args __user *args_usr_ptr = arg;
+	struct incfs_get_file_additional_data_args args = {};
+	int error = 0;
+	int read_result = 0;
+	void *signature;
+	size_t signature_len;
+	void *hash = 0;
+	void *additional_data_buffer = 0;
+	struct data_file *df = get_incfs_data_file(f);
+
+	if (!df)
+		return -EINVAL;
+
+	if (!df->df_signature) {
+		pr_debug("No file signature - can't read additional data\n");
+		return -EINVAL;
+	}
+
+	if (!access_ok(VERIFY_READ, args_usr_ptr, sizeof(args)))
+		return -EFAULT;
+	if (copy_from_user(&args, args_usr_ptr, sizeof(args)) > 0)
+		return -EINVAL;
+
+	if (!access_ok(VERIFY_WRITE, u64_to_user_ptr(args.additional_data),
+			args.additional_data_buffer_size))
+		return -EFAULT;
+
+	signature_len = df->df_signature->sig_size;
+	signature = kzalloc(signature_len, GFP_NOFS);
+	if (!signature)
+		return -ENOMEM;
+
+	error = incfs_read_file_signature(df, range(signature, signature_len));
+	if (error < 0)
+		goto out;
+
+	hash = kzalloc(INCFS_MAX_HASH_SIZE, GFP_NOFS);
+	additional_data_buffer = kzalloc(args.additional_data_buffer_size,
+					 GFP_NOFS);
+	if (!hash || !additional_data_buffer) {
+		error = -ENOMEM;
+		goto out;
+	}
+
+	read_result = incfs_get_pkcs7_additional_data(
+			range(signature, signature_len),
+			hash, additional_data_buffer,
+			args.additional_data_buffer_size);
+
+	if (read_result < 0) {
+		error = read_result;
+		goto out;
+	}
+
+	if (copy_to_user(u64_to_user_ptr(args.root_hash),
+			 hash, INCFS_MAX_HASH_SIZE)) {
+		error = -EFAULT;
+		goto out;
+	}
+
+	if (copy_to_user(u64_to_user_ptr(args.additional_data),
+			 additional_data_buffer,
+			 read_result)) {
+		error = -EFAULT;
+		goto out;
+	}
+
+	args.additional_data_size_out = read_result;
+	if (copy_to_user(args_usr_ptr, &args, sizeof(args)))
+	{
+		error = -EFAULT;
+		goto out;
+	}
+
+	error = 0;
+
+out:
+	kfree(signature);
+	kfree(hash);
+	kfree(additional_data_buffer);
+
+	return error;
+}
+
 static long dispatch_ioctl(struct file *f, unsigned int req, unsigned long arg)
 {
 	struct mount_info *mi = get_mount_info(file_superblock(f));
@@ -1426,6 +1512,8 @@ static long dispatch_ioctl(struct file *f, unsigned int req, unsigned long arg)
 		return ioctl_create_file(mi, (void __user *)arg);
 	case INCFS_IOC_READ_FILE_SIGNATURE:
 		return ioctl_read_file_signature(f, (void __user *)arg);
+	case INCFS_IOC_READ_ADDITIONAL_DATA:
+		return ioctl_read_additional_data(f, (void __user *)arg);
 	default:
 		return -EINVAL;
 	}

@@ -74,6 +74,54 @@ out:
 	return err;
 }
 
+int incfs_get_pkcs7_additional_data(struct mem_range pkcs7_blob, void* hash,
+				void *add_data, size_t add_data_len)
+{
+	struct pkcs7_message *pkcs7 = NULL;
+	const void *data = NULL;
+	size_t data_len = 0;
+	int err;
+
+	pkcs7 = pkcs7_parse_message(pkcs7_blob.data, pkcs7_blob.len);
+	if (IS_ERR(pkcs7)) {
+		pr_debug("PKCS#7 parsing error. ptr=%p size=%ld err=%ld\n",
+			pkcs7_blob.data, pkcs7_blob.len, -PTR_ERR(pkcs7));
+		return PTR_ERR(pkcs7);
+	}
+
+	err = pkcs7_get_content_data(pkcs7, &data, &data_len, NULL);
+	if (err || data_len == 0 || data == NULL) {
+		pr_debug("PKCS#7 message does not contain data\n");
+		err = -EBADMSG;
+		goto out;
+	}
+
+	if (data_len < INCFS_MAX_HASH_SIZE) {
+		pr_debug("PKCS#7 data size too small.\n");
+		err = -EBADMSG;
+		goto out;
+	}
+
+	/* TODO fix hard coding of hash size */
+	memcpy(hash, data, INCFS_MAX_HASH_SIZE);
+	data_len -= INCFS_MAX_HASH_SIZE;
+	data += INCFS_MAX_HASH_SIZE;
+
+	if (data_len > add_data_len) {
+		pr_debug("additional data buffer too small.\n");
+		err = -E2BIG;
+		goto out;
+	}
+
+	memcpy(add_data, data, data_len);
+	err = data_len;
+
+out:
+	pkcs7_free_message(pkcs7);
+	return err;
+}
+
+
 struct incfs_hash_alg *incfs_get_hash_alg(enum incfs_hash_tree_algorithm id)
 {
 	static struct incfs_hash_alg sha256 = {
