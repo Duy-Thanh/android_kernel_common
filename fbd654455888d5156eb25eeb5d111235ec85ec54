@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e2e3877_16dea23d",
+        "filename": "drivers/md/dm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2260,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-11T00:07:30Z",
+      "side": 1,
+      "message": "Can you move this new code to after dm_keyslot_evict(), so it\u0027s kept in the same order as the fields of keyslot_mgmt_ll_ops?",
+      "revId": "fbd654455888d5156eb25eeb5d111235ec85ec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdb9ce38_f1b78289",
+        "filename": "drivers/md/dm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2276,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-11T00:07:30Z",
+      "side": 1,
+      "message": "This assumes that q-\u003eksm is non-NULL, which isn\u0027t necessarily the case.",
+      "range": {
+        "startLine": 2276,
+        "startChar": 41,
+        "endLine": 2276,
+        "endChar": 47
+      },
+      "revId": "fbd654455888d5156eb25eeb5d111235ec85ec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aafa10fa_1e3d0098",
+        "filename": "drivers/md/dm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2287,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-11T00:07:30Z",
+      "side": 1,
+      "message": "Given that the wrapped key has nothing to do with any particular device, can you please look into making derive_raw_secret() a system-wide function that\u0027s registered with blk-crypto, rather than associated with a specific device?  If you did that, there would be no need for this patch.",
+      "range": {
+        "startLine": 2286,
+        "startChar": 55,
+        "endLine": 2287,
+        "endChar": 66
+      },
+      "revId": "fbd654455888d5156eb25eeb5d111235ec85ec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "854a515d_3c8179a3",
+        "filename": "drivers/md/dm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2288,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-11T00:07:30Z",
+      "side": 1,
+      "message": "\"fromt he\" \u003d\u003e \"from the\".",
+      "range": {
+        "startLine": 2288,
+        "startChar": 20,
+        "endLine": 2288,
+        "endChar": 28
+      },
+      "revId": "fbd654455888d5156eb25eeb5d111235ec85ec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b79468cf_139ac556",
+        "filename": "drivers/md/dm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2305,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-11T00:07:30Z",
+      "side": 1,
+      "message": "This never initializes \u0027err\u0027.  I think you want to initialize it to -EOPNOTSUPP.  Can you use a designated initializer?\n\n        struct dm_derive_raw_secret_args args \u003d {                                \n                .wrapped_key \u003d wrapped_key,                                      \n                .wrapped_key_size \u003d wrapped_key_size,                            \n                .secret \u003d secret,                                                \n                .secret_size \u003d secret_size,                                      \n                .err \u003d -EOPNOTSUPP;                                              \n        };",
+      "range": {
+        "startLine": 2301,
+        "startChar": 0,
+        "endLine": 2305,
+        "endChar": 32
+      },
+      "revId": "fbd654455888d5156eb25eeb5d111235ec85ec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93a065ac_e2b2650e",
+        "filename": "drivers/md/dm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2309,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-11T00:07:30Z",
+      "side": 1,
+      "message": "I think you want to return -EOPNOTSUPP here, not success.",
+      "range": {
+        "startLine": 2309,
+        "startChar": 2,
+        "endLine": 2309,
+        "endChar": 11
+      },
+      "revId": "fbd654455888d5156eb25eeb5d111235ec85ec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
