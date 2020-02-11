@@ -22,6 +22,30 @@
       "revId": "3dc5038156d8475cd9ec085271dbe6251b3d9254",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6849677_158f6f8f",
+        "filename": "drivers/iommu/arm-smmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1719,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-02-11T19:06:53Z",
+      "side": 1,
+      "message": "Practically, I\u0027m submitting this to keep the db845c working against android-mainline. :) As for the deeper rational for the changes in the code I\u0027d have to defer to Bjorn. He mentioned may have some changes pending so I\u0027ll try to rework this series with those as soon as they are available.",
+      "parentUuid": "4c683846_79b5b190",
+      "range": {
+        "startLine": 1719,
+        "startChar": 11,
+        "endLine": 1719,
+        "endChar": 34
+      },
+      "revId": "3dc5038156d8475cd9ec085271dbe6251b3d9254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
