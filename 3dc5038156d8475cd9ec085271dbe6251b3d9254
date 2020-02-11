@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c683846_79b5b190",
+        "filename": "drivers/iommu/arm-smmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1719,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2020-02-11T09:26:26Z",
+      "side": 1,
+      "message": "This just looks like a buggy version of the current downstream code in `qcom_sdm845_smmu500_cfg_probe()`. Why are you replacing that, and why are you moving it into the core arm-smmu.c file?\n\nIf we need to solve this more generally, then it should be described by firmware in a way which works for multiple IOMMU drivers. I think there was even an ACPI proposal kicking around for this, so I\u0027ll chase that up...",
+      "range": {
+        "startLine": 1719,
+        "startChar": 11,
+        "endLine": 1719,
+        "endChar": 34
+      },
+      "revId": "3dc5038156d8475cd9ec085271dbe6251b3d9254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
