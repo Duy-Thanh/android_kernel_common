@@ -70,6 +70,30 @@
       "revId": "3dc5038156d8475cd9ec085271dbe6251b3d9254",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa6cd683_0438f657",
+        "filename": "drivers/iommu/arm-smmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1719,
+      "author": {
+        "id": 1006322
+      },
+      "writtenOn": "2020-02-11T19:57:16Z",
+      "side": 1,
+      "message": "I didn\u0027t realize that I pointed John to an older version of the proposed implementation of this. I have rebased the patches I posted a few weeks back, that has this in arm-smmu-qcom.c and will share this with John.\n\nPer your feedback, Will, I have started looking at Thierry\u0027s proposal for setting up identify mappings instead and am trying to conclude if/how we can go this route instead. I will follow up on that thread.",
+      "parentUuid": "4af22120_7f9f83c3",
+      "range": {
+        "startLine": 1719,
+        "startChar": 11,
+        "endLine": 1719,
+        "endChar": 34
+      },
+      "revId": "3dc5038156d8475cd9ec085271dbe6251b3d9254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
