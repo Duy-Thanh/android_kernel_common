@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a242bfae_ef10ec10",
+        "filename": "drivers/md/dm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2260,
+      "author": {
+        "id": 1619522
+      },
+      "writtenOn": "2020-02-11T06:37:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e2e3877_16dea23d",
+      "revId": "fbd654455888d5156eb25eeb5d111235ec85ec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cdb9ce38_f1b78289",
         "filename": "drivers/md/dm.c",
         "patchSetId": 2
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "8db705ae_fb262edb",
+        "filename": "drivers/md/dm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2276,
+      "author": {
+        "id": 1619522
+      },
+      "writtenOn": "2020-02-11T06:37:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdb9ce38_f1b78289",
+      "range": {
+        "startLine": 2276,
+        "startChar": 41,
+        "endLine": 2276,
+        "endChar": 47
+      },
+      "revId": "fbd654455888d5156eb25eeb5d111235ec85ec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aafa10fa_1e3d0098",
         "filename": "drivers/md/dm.c",
         "patchSetId": 2
@@ -53,6 +95,30 @@
       "writtenOn": "2020-02-11T00:07:30Z",
       "side": 1,
       "message": "Given that the wrapped key has nothing to do with any particular device, can you please look into making derive_raw_secret() a system-wide function that\u0027s registered with blk-crypto, rather than associated with a specific device?  If you did that, there would be no need for this patch.",
+      "range": {
+        "startLine": 2286,
+        "startChar": 55,
+        "endLine": 2287,
+        "endChar": 66
+      },
+      "revId": "fbd654455888d5156eb25eeb5d111235ec85ec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d0bc871_73af42b8",
+        "filename": "drivers/md/dm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2287,
+      "author": {
+        "id": 1619522
+      },
+      "writtenOn": "2020-02-11T06:37:15Z",
+      "side": 1,
+      "message": "That is a big change and will require changes to fscrypt, given the timelines will keep this for now and look into that while upstreaming the changes.",
+      "parentUuid": "aafa10fa_1e3d0098",
       "range": {
         "startLine": 2286,
         "startChar": 55,
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "c3d5690a_343ffda4",
+        "filename": "drivers/md/dm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2288,
+      "author": {
+        "id": 1619522
+      },
+      "writtenOn": "2020-02-11T06:37:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "854a515d_3c8179a3",
+      "range": {
+        "startLine": 2288,
+        "startChar": 20,
+        "endLine": 2288,
+        "endChar": 28
+      },
+      "revId": "fbd654455888d5156eb25eeb5d111235ec85ec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b79468cf_139ac556",
         "filename": "drivers/md/dm.c",
         "patchSetId": 2
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "dc730c1d_55963df6",
+        "filename": "drivers/md/dm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2305,
+      "author": {
+        "id": 1619522
+      },
+      "writtenOn": "2020-02-11T06:37:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b79468cf_139ac556",
+      "range": {
+        "startLine": 2301,
+        "startChar": 0,
+        "endLine": 2305,
+        "endChar": 32
+      },
+      "revId": "fbd654455888d5156eb25eeb5d111235ec85ec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "93a065ac_e2b2650e",
         "filename": "drivers/md/dm.c",
         "patchSetId": 2
@@ -131,6 +245,30 @@
       "revId": "fbd654455888d5156eb25eeb5d111235ec85ec54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2168e1b_ff190e2b",
+        "filename": "drivers/md/dm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2309,
+      "author": {
+        "id": 1619522
+      },
+      "writtenOn": "2020-02-11T06:37:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93a065ac_e2b2650e",
+      "range": {
+        "startLine": 2309,
+        "startChar": 2,
+        "endLine": 2309,
+        "endChar": 11
+      },
+      "revId": "fbd654455888d5156eb25eeb5d111235ec85ec54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
