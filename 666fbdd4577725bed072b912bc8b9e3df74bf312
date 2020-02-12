@@ -1,0 +1,25 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000001587447",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1232175?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "b586012a_c2129237",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-02-12T06:14:50Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: baolin wang \u003cbaolin.wang@unisoc.corp-partner.google.com\u003e",
+      "revId": "666fbdd4577725bed072b912bc8b9e3df74bf312",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
