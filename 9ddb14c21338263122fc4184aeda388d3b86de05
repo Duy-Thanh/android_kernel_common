@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c0b2d54_0c46a5eb",
+        "filename": "drivers/md/dm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2320,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-12T00:27:20Z",
+      "side": 1,
+      "message": "There should be a blank line after the declarations.",
+      "range": {
+        "startLine": 2319,
+        "startChar": 0,
+        "endLine": 2320,
+        "endChar": 15
+      },
+      "revId": "9ddb14c21338263122fc4184aeda388d3b86de05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb9fe8e1_20be06d6",
+        "filename": "drivers/md/dm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2322,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-12T00:27:20Z",
+      "side": 1,
+      "message": "If derive_raw_key() succeeded on a previous device in the target currently being iterated over, this will override the success status with EOPNOTSUPP.\n\nI think you want to skip calling derive_raw_key() again if one device already succeeded.\n\nNote that the check after -\u003eiterate_devices() is not sufficient, because -\u003eiterate_devices() can iterate over multiple devices.  I.e. a device mapper device can have multiple targets, each of which can have multiple underlying devices.",
+      "range": {
+        "startLine": 2321,
+        "startChar": 0,
+        "endLine": 2322,
+        "endChar": 11
+      },
+      "revId": "9ddb14c21338263122fc4184aeda388d3b86de05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2fbb8380_babc6638",
+        "filename": "drivers/md/dm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2325,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-12T00:27:20Z",
+      "side": 1,
+      "message": "You could just assign to args-\u003eerr directly and remove the \u0027err\u0027 variable.",
+      "range": {
+        "startLine": 2325,
+        "startChar": 1,
+        "endLine": 2325,
+        "endChar": 4
+      },
+      "revId": "9ddb14c21338263122fc4184aeda388d3b86de05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ff0f60d_2130cfbd",
+        "filename": "drivers/md/dm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2337,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-12T00:27:20Z",
+      "side": 1,
+      "message": "\"the first device\" \u003d\u003e \"the first device that supports derive_raw_secret()\"",
+      "range": {
+        "startLine": 2337,
+        "startChar": 25,
+        "endLine": 2337,
+        "endChar": 41
+      },
+      "revId": "9ddb14c21338263122fc4184aeda388d3b86de05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
