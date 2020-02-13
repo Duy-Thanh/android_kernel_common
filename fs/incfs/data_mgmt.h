@@ -131,6 +131,12 @@ struct mount_info {
 
 	/* Temporary buffer for read logger. */
 	struct read_log mi_log;
+
+	void *log_xattr;
+	size_t log_xattr_size;
+
+	void *pending_read_xattr;
+	size_t pending_read_xattr_size;
 };
 
 struct data_file_block {
@@ -233,6 +239,7 @@ struct inode_info {
 
 struct dentry_info {
 	struct path backing_path;
+	struct mount_info *mount_info;
 };
 
 struct mount_info *incfs_alloc_mount_info(struct super_block *sb,
