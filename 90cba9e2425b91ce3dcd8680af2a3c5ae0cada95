@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d78a201a_47fef1c0",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1598371
+      },
+      "writtenOn": "2020-02-13T09:35:23Z",
+      "side": 1,
+      "message": "nit-pick: cannot we move all this logic into the uclamp_rq_util_with() and just avoid to clobber schedutil with a uclamp specific concept?",
+      "range": {
+        "startLine": 264,
+        "startChar": 1,
+        "endLine": 266,
+        "endChar": 46
+      },
+      "revId": "90cba9e2425b91ce3dcd8680af2a3c5ae0cada95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
