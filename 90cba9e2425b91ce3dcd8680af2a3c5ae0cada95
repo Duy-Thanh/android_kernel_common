@@ -22,6 +22,30 @@
       "revId": "90cba9e2425b91ce3dcd8680af2a3c5ae0cada95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d714e67_709951fb",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-02-13T11:30:56Z",
+      "side": 1,
+      "message": "It was inside uclamp_rq_util_with() in earlier version but then moved here after some code reshuffle and few fixups.\n\nI think we can move this back, yes. Will do.",
+      "parentUuid": "d78a201a_47fef1c0",
+      "range": {
+        "startLine": 264,
+        "startChar": 1,
+        "endLine": 266,
+        "endChar": 46
+      },
+      "revId": "90cba9e2425b91ce3dcd8680af2a3c5ae0cada95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
