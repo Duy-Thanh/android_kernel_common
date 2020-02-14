@@ -20,6 +20,27 @@
       "revId": "ebbe3352c5678467ecaa7da8fea126f8e04aec31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000001617092",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1235555?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "8c25ab89_61503569",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-02-14T15:24:22Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Alistair Delva \u003cadelva@google.com\u003e",
+      "revId": "ebbe3352c5678467ecaa7da8fea126f8e04aec31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
