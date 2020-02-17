@@ -137,6 +137,30 @@
     },
     {
       "key": {
+        "uuid": "16d40a3c_580f38fa",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-02-17T17:53:18Z",
+      "side": 1,
+      "message": "Can you add me onto the thread about this? I don\u0027t think it\u0027s true. We have another virtual device in AOSP using really old gralloc/hwcomposer and it works fine with drm/kms and full software rendering using swiftshader. I believe this should be possible for ranchu/fvp too.",
+      "parentUuid": "afb86c6e_d7962975",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 24
+      },
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ff11adc8_04605e84",
         "filename": "build.config.fvp",
         "patchSetId": 7
