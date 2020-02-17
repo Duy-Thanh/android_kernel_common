@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ef64ade_f5fb9d04",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1581772
+      },
+      "writtenOn": "2020-02-17T17:34:55Z",
+      "side": 1,
+      "message": "Because of aosp/1223791, we now need to set BUILD_INITRAMFS\u003d1 ourselves.",
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "520b763b_068e477b",
         "filename": "build.config.fvp",
         "patchSetId": 7
