@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b7732f3_193d477e",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-02-17T15:43:29Z",
+      "side": 1,
+      "message": "why do you need an early console for a GKI kernel anyway?  What is this going to help with?",
+      "range": {
+        "startLine": 294,
+        "startChar": 0,
+        "endLine": 294,
+        "endChar": 31
+      },
+      "revId": "b7c32810038f51632a101501294b07b9fa6c8d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
