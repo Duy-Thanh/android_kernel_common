@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "e82bb178_282d855a",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1581772
+      },
+      "writtenOn": "2020-02-17T15:46:16Z",
+      "side": 1,
+      "message": "This is indeed something that needs fixing, I\u0027ve raised this on our side.",
+      "parentUuid": "e46ae5b3_d5ea1249",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 25
+      },
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "de66123d_097cfdc0",
         "filename": "build.config.fvp",
         "patchSetId": 7
@@ -60,6 +84,30 @@
       "writtenOn": "2020-02-10T20:57:09Z",
       "side": 1,
       "message": "Please switch over to the pl111 drm/kms driver and remove these. We will not support CONFIG_FB for any ecosystem partner in GKI.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 24
+      },
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afb86c6e_d7962975",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1581772
+      },
+      "writtenOn": "2020-02-17T15:46:16Z",
+      "side": 1,
+      "message": "I\u0027ve been in touch with marissaw@ and lfy@ about upgrading the allocator/mapper HALs and Gralloc implementation for fvp, which would allow use to use DRM instead of FBDEV. Unfortunately it looks like the support for full SW rendering for arbitrary devices is not quite there yet in AOSP, and was advised to wait until Android 11 is released. Until then I don\u0027t think we can easily get rid of CONFIG_FB.",
+      "parentUuid": "de66123d_097cfdc0",
       "range": {
         "startLine": 7,
         "startChar": 0,
