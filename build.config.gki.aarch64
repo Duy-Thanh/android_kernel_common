@@ -8,3 +8,4 @@ ADDITIONAL_KMI_WHITELISTS="
 abi_gki_aarch64_cuttlefish_whitelist
 abi_gki_aarch64_db845c_whitelist
 "
+TRIM_NONLISTED_KMI=1
