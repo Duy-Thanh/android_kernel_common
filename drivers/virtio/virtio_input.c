@@ -157,6 +157,8 @@ static void virtinput_cfg_abs(struct virtio_input *vi, int abs)
 {
 	u32 mi, ma, re, fu, fl;
 
+	mi = 0;
+
 	virtinput_cfg_select(vi, VIRTIO_INPUT_CFG_ABS_INFO, abs);
 	virtio_cread(vi->vdev, struct virtio_input_config, u.abs.min, &mi);
 	virtio_cread(vi->vdev, struct virtio_input_config, u.abs.max, &ma);
