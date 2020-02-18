@@ -1,0 +1,25 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000001644852",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1238986?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "52c8ed49_f2841537",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-02-18T22:55:43Z",
+      "side": 1,
+      "message": "Commit does not link to an upstream reference at lore\nPlease add a line like \u0027Link: https://lore.kernel.org/...\u0027",
+      "revId": "ba85294233e6c850119f8b05c5e0af4b14fed133",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
