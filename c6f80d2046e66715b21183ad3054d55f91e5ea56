@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "dad079ab_371bc569",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-02-19T22:56:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a8d8157_69b87314",
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "520b763b_068e477b",
         "filename": "build.config.fvp",
         "patchSetId": 7
@@ -114,6 +132,30 @@
       "side": 1,
       "message": "This is indeed something that needs fixing, I\u0027ve raised this on our side.",
       "parentUuid": "e46ae5b3_d5ea1249",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 25
+      },
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3b68bd7_3c3eb7ba",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-02-19T22:56:01Z",
+      "side": 1,
+      "message": "Moved CONFIG_ARCH_VEXPRESS\u003dy to gki_defconfig. I\u0027ll leave the rest of the work to Kevin\u0027s team for now.",
+      "parentUuid": "e82bb178_282d855a",
       "range": {
         "startLine": 6,
         "startChar": 0,
@@ -221,6 +263,30 @@
     },
     {
       "key": {
+        "uuid": "6c188d61_5f7cb709",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-02-19T22:56:01Z",
+      "side": 1,
+      "message": "I looked at switching this over to DRM, but I couldn\u0027t get it to work (I\u0027ll update the thread with details), so I left this as is for now.",
+      "parentUuid": "169c2beb_acf032ac",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 24
+      },
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ff11adc8_04605e84",
         "filename": "build.config.fvp",
         "patchSetId": 7
@@ -241,6 +307,30 @@
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a883f17_66e5717a",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-02-19T22:56:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff11adc8_04605e84",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 25
+      },
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -333,6 +423,30 @@
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4551ea7c_d1ccaaa6",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-02-19T22:56:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "015d26e5_224e1124",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 37
+      },
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
