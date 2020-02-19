@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a920182e_34be03e6",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-02-19T08:27:56Z",
+      "side": 1,
+      "message": "BIT()?",
+      "range": {
+        "startLine": 682,
+        "startChar": 46,
+        "endLine": 682,
+        "endChar": 52
+      },
+      "revId": "8c03dd58662ff971da2348cc2cdcdc6f35f60f93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
