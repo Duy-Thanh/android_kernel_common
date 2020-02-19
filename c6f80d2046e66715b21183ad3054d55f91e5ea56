@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0a8d8157_69b87314",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1581772
+      },
+      "writtenOn": "2020-02-19T10:44:53Z",
+      "side": 1,
+      "message": "Also to avoid the sdcard daemon crashing:\n\n         -m SDCARD_FS \\",
+      "parentUuid": "4266501a_43622ce2",
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "520b763b_068e477b",
         "filename": "build.config.fvp",
         "patchSetId": 7
