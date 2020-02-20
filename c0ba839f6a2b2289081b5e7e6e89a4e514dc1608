@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ae56d72_a2d007e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-02-20T10:13:44Z",
+      "side": 1,
+      "message": "Nit: best practice implies using a \u0027BACKPORT\u0027 tag if any manual change to the patch was involved, even if the change is small and trivial as is the case here. Do you mind rebasing and changing this ?",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 42
+      },
+      "revId": "c0ba839f6a2b2289081b5e7e6e89a4e514dc1608",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
