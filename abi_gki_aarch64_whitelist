@@ -1,2 +1,46 @@
 [abi_whitelist]
   dummy_symbol
+
+# required by br_netfilter.ko
+  br_dev_queue_push_xmit
+  br_forward_finish
+  br_handle_frame_finish
+  dst_release
+  init_net
+  ip_do_fragment
+  ip_route_input_noref
+  ip_route_output_flow
+  kfree
+  kfree_skb
+  kmalloc_caches
+  kmem_cache_alloc_trace
+  __ll_sc___cmpxchg_case_mb_4
+  memcpy
+  neigh_destroy
+  nf_br_ops
+  nf_hook_slow
+  nf_ipv6_ops
+  nf_register_net_hooks
+  nf_unregister_net_hooks
+  preempt_schedule
+  printk
+  proc_dointvec
+  pskb_expand_head
+  __pskb_pull_tail
+  pskb_trim_rcsum_slow
+  __rcu_read_lock
+  __rcu_read_unlock
+  refcount_dec_and_test_checked
+  register_netdevice_notifier
+  register_net_sysctl
+  register_pernet_subsys
+  rtnl_is_locked
+  skb_pull
+  skb_pull_rcsum
+  skb_push
+  __stack_chk_fail
+  __stack_chk_guard
+  unregister_netdevice_notifier
+  unregister_net_sysctl_table
+  unregister_pernet_subsys
+  __warn_printk
