@@ -22,6 +22,30 @@
       "revId": "c0ba839f6a2b2289081b5e7e6e89a4e514dc1608",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d453c1f_c3bdd3c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1173283
+      },
+      "writtenOn": "2020-02-20T10:42:33Z",
+      "side": 1,
+      "message": "Sure, lemme get this done. Sorry for the oversight.",
+      "parentUuid": "2ae56d72_a2d007e9",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 42
+      },
+      "revId": "c0ba839f6a2b2289081b5e7e6e89a4e514dc1608",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
