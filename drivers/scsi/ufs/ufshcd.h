@@ -341,6 +341,8 @@ struct ufs_hba_variant_ops {
 	void	(*device_reset)(struct ufs_hba *hba);
 	int	(*program_key)(struct ufs_hba *hba,
 			       const union ufs_crypto_cfg_entry *cfg, int slot);
+	size_t	(*get_vs_prdt_size)(struct ufs_hba *hba);
+	void	(*set_vs_prdt_fields)(struct ufs_hba *hba, u8 *ptr);
 };
 
 struct keyslot_mgmt_ll_ops;
@@ -791,6 +793,8 @@ struct ufs_hba {
 	u32 crypto_cfg_register;
 	struct keyslot_manager *ksm;
 #endif /* CONFIG_SCSI_UFS_CRYPTO */
+
+	size_t prdt_entry_size;
 };
 
 /* Returns true if clocks can be gated. Otherwise false */
@@ -1152,6 +1156,19 @@ static inline void ufshcd_vops_device_reset(struct ufs_hba *hba)
 		hba->vops->device_reset(hba);
 		ufshcd_update_reg_hist(&hba->ufs_stats.dev_reset, 0);
 	}
+}
+
+static inline size_t ufshcd_vops_get_vs_prdt_size(struct ufs_hba *hba)
+{
+	if (hba->vops && hba->vops->get_vs_prdt_size)
+		return hba->vops->get_vs_prdt_size(hba);
+	return 0;
+}
+
+static inline void ufshcd_vops_set_vs_prdt_fields(struct ufs_hba *hba, u8 *ptr)
+{
+	if (hba->vops && hba->vops->set_vs_prdt_fields)
+		hba->vops->set_vs_prdt_fields(hba, ptr);
 }
 
 extern struct ufs_pm_lvl_states ufs_pm_lvl_states[];
