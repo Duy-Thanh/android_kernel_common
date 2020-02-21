@@ -476,7 +476,7 @@ void ufshcd_print_trs(struct ufs_hba *hba, unsigned long bitmap, bool pr_prdt)
 
 		if (pr_prdt)
 			ufshcd_hex_dump("UPIU PRDT: ", lrbp->ucd_prdt_ptr,
-				sizeof(struct ufshcd_sg_entry) * prdt_length);
+					hba->prdt_entry_size * prdt_length);
 	}
 }
 
@@ -2146,6 +2146,8 @@ static int ufshcd_map_sg(struct ufs_hba *hba, struct ufshcd_lrb *lrbp)
 	struct scsi_cmnd *cmd;
 	int sg_segments;
 	int i;
+	size_t prdt_byte_size = sizeof(struct ufshcd_sg_entry) +
+					ufshcd_vops_get_vs_prdt_size(hba);
 
 	cmd = lrbp->cmd;
 	sg_segments = scsi_dma_map(cmd);
@@ -2156,7 +2158,7 @@ static int ufshcd_map_sg(struct ufs_hba *hba, struct ufshcd_lrb *lrbp)
 		if (hba->quirks & UFSHCD_QUIRK_PRDT_BYTE_GRAN)
 			lrbp->utr_descriptor_ptr->prd_table_length =
 				cpu_to_le16((u16)(sg_segments *
-					sizeof(struct ufshcd_sg_entry)));
+							prdt_byte_size));
 		else
 			lrbp->utr_descriptor_ptr->prd_table_length =
 				cpu_to_le16((u16) (sg_segments));
@@ -2171,6 +2173,9 @@ static int ufshcd_map_sg(struct ufs_hba *hba, struct ufshcd_lrb *lrbp)
 			prd_table[i].upper_addr =
 				cpu_to_le32(upper_32_bits(sg->dma_address));
 			prd_table[i].reserved = 0;
+
+			ufshcd_vops_set_vs_prdt_fields(hba, (u8 *)&prd_table[i]
+					+ sizeof(struct ufshcd_sg_entry));
 		}
 	} else {
 		lrbp->utr_descriptor_ptr->prd_table_length = 0;
@@ -3463,9 +3468,12 @@ static int ufshcd_get_ref_clk_gating_wait(struct ufs_hba *hba)
 static int ufshcd_memory_alloc(struct ufs_hba *hba)
 {
 	size_t utmrdl_size, utrdl_size, ucdl_size;
+	size_t prdt_size = sizeof(struct ufshcd_sg_entry) +
+				ufshcd_vops_get_vs_prdt_size(hba);
 
 	/* Allocate memory for UTP command descriptors */
-	ucdl_size = (sizeof(struct utp_transfer_cmd_desc) * hba->nutrs);
+	ucdl_size = (sizeof(struct utp_transfer_cmd_desc) + prdt_size) *
+						hba->nutrs;
 	hba->ucdl_base_addr = dmam_alloc_coherent(hba->dev,
 						  ucdl_size,
 						  &hba->ucdl_dma_addr,
@@ -3559,7 +3567,7 @@ static void ufshcd_host_memory_configure(struct ufs_hba *hba)
 	response_offset =
 		offsetof(struct utp_transfer_cmd_desc, response_upiu);
 	prdt_offset =
-		offsetof(struct utp_transfer_cmd_desc, prd_table);
+		sizeof(struct utp_transfer_cmd_desc);
 
 	cmd_desc_size = sizeof(struct utp_transfer_cmd_desc);
 	cmd_desc_dma_addr = hba->ucdl_dma_addr;
@@ -3600,8 +3608,8 @@ static void ufshcd_host_memory_configure(struct ufs_hba *hba)
 			(struct utp_upiu_rsp *)cmd_descp[i].response_upiu;
 		hba->lrb[i].ucd_rsp_dma_addr = cmd_desc_element_addr +
 				response_offset;
-		hba->lrb[i].ucd_prdt_ptr =
-			(struct ufshcd_sg_entry *)cmd_descp[i].prd_table;
+		hba->lrb[i].ucd_prdt_ptr = (struct ufshcd_sg_entry *)
+				((u8 *)(cmd_descp + i) + prdt_offset);
 		hba->lrb[i].ucd_prdt_dma_addr = cmd_desc_element_addr +
 				prdt_offset;
 	}
@@ -8491,6 +8499,10 @@ int ufshcd_init(struct ufs_hba *hba, void __iomem *mmio_base, unsigned int irq)
 		dev_err(hba->dev, "set dma mask failed\n");
 		goto out_disable;
 	}
+
+	/* Set PRDT entry byte size */
+	hba->prdt_entry_size = sizeof(struct ufshcd_sg_entry) +
+				ufshcd_vops_get_vs_prdt_size(hba);
 
 	/* Allocate memory for host memory space */
 	err = ufshcd_memory_alloc(hba);

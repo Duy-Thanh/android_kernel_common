@@ -448,12 +448,13 @@ struct ufshcd_sg_entry {
  * struct utp_transfer_cmd_desc - UFS Command Descriptor structure
  * @command_upiu: Command UPIU Frame address
  * @response_upiu: Response UPIU Frame address
- * @prd_table: Physical Region Descriptor
+ *
+ * UCD contains PRDT but the member for that is defined to support
+ * variant prdt formats.
  */
 struct utp_transfer_cmd_desc {
 	u8 command_upiu[ALIGNED_UPIU_SIZE];
 	u8 response_upiu[ALIGNED_UPIU_SIZE];
-	struct ufshcd_sg_entry    prd_table[SG_ALL];
 };
 
 /**
