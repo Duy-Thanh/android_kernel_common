@@ -16,6 +16,24 @@
       "revId": "d5bee204e4eb15aed680284777954333e934f2ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5dfba56_be0d4931",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2158,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-24T22:52:57Z",
+      "side": 1,
+      "message": "Yes, void pointer arithmetic is fine in the Linux kernel.  Linux can only be compiled with gcc and clang, and it already uses lots of compiler extensions.  `prd \u003d (struct ufshcd_sg_entry *)((u8 *)prd + hba-\u003esg_entry_size);` would work too, but it\u0027s more verbose.",
+      "parentUuid": "1ee5cd76_9154681b",
+      "revId": "d5bee204e4eb15aed680284777954333e934f2ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
