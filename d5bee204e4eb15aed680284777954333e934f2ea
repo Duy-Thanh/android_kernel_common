@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ee5cd76_9154681b",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2158,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-02-24T22:48:20Z",
+      "side": 1,
+      "message": "Possible nit: I believe arithmetic on (void *) is a compiler extension - are we alright with those in the kernel?",
+      "revId": "d5bee204e4eb15aed680284777954333e934f2ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
