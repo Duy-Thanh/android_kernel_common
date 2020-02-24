@@ -51,8 +51,12 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
 	struct inode *inode = file_inode(vmf->vma->vm_file);
 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
 	struct dnode_of_data dn;
+<<<<<<< HEAD   (e12432 ANDROID: ufs, block: fix crypto power management and move in)
 	bool need_alloc = true;
 	int err = 0;
+=======
+	int err;
+>>>>>>> BRANCH (f22dcb Linux 5.4.22)
 
 	if (unlikely(f2fs_cp_error(sbi))) {
 		err = -EIO;
@@ -64,6 +68,7 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
 		goto err;
 	}
 
+<<<<<<< HEAD   (e12432 ANDROID: ufs, block: fix crypto power management and move in)
 #ifdef CONFIG_F2FS_FS_COMPRESSION
 	if (f2fs_compressed_file(inode)) {
 		int ret = f2fs_is_compressed_cluster(inode, page->index);
@@ -83,6 +88,10 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
 	/* should do out of any locked page */
 	if (need_alloc)
 		f2fs_balance_fs(sbi, true);
+=======
+	/* should do out of any locked page */
+	f2fs_balance_fs(sbi, true);
+>>>>>>> BRANCH (f22dcb Linux 5.4.22)
 
 	sb_start_pagefault(inode->i_sb);
 
