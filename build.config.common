@@ -6,7 +6,6 @@ LD=ld.lld
 NM=llvm-nm
 OBJCOPY=llvm-objcopy
 CLANG_PREBUILT_BIN=prebuilts-master/clang/host/linux-x86/clang-r377782b/bin
-BUILDTOOLS_PREBUILT_BIN=build/build-tools/path/linux-x86
 
 EXTRA_CMDS=''
 STOP_SHIP_TRACEPRINTK=1
