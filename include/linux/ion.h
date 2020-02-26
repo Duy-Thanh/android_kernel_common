@@ -309,6 +309,19 @@ struct dma_buf *ion_alloc(size_t len, unsigned int heap_id_mask,
  */
 int ion_free(struct ion_buffer *buffer);
 
+/**
+ * ion_query_heaps_kernel - Returns information about available heaps to
+ * in-kernel clients.
+ *
+ * @hdata:             pointer to array of struct ion_heap_data.
+ * @count:             size of @hdata array.
+ *
+ * Returns the number of available heaps and populates @hdata with information
+ * regarding the same. When invoked with count as 0, the function with return
+ * the number of available heaps without modifying hdata.
+ */
+
+int ion_query_heaps_kernel(struct ion_heap_data *hdata, unsigned int count);
 #else
 
 static inline int __ion_device_add_heap(struct ion_heap *heap,
@@ -380,5 +393,10 @@ static inline int ion_free(struct ion_buffer *buffer)
 	return 0;
 }
 
+static inline int ion_query_heaps_kernel(struct ion_heap_data *hdata,
+					 unsigned int count)
+{
+	return 0;
+}
 #endif /* CONFIG_ION */
 #endif /* _ION_KERNEL_H */
