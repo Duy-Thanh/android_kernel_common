@@ -1530,8 +1530,14 @@ static void __queue_delayed_work(int cpu, struct workqueue_struct *wq,
 	struct work_struct *work = &dwork->work;
 
 	WARN_ON_ONCE(!wq);
+<<<<<<< HEAD   (e723e5 ANDROID: increase limit on sched-tune boost groups)
 	WARN_ON_ONCE(timer->function != delayed_work_timer_fn ||
 		     timer->data != (unsigned long)dwork);
+=======
+#ifndef CONFIG_CFI
+	WARN_ON_ONCE(timer->function != delayed_work_timer_fn);
+#endif
+>>>>>>> CHANGE (8028f7 ANDROID: Disable wq fp check in CFI builds)
 	WARN_ON_ONCE(timer_pending(timer));
 	WARN_ON_ONCE(!list_empty(&work->entry));
 
