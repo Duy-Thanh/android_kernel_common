@@ -62,6 +62,37 @@ static int ion_alloc_fd(size_t len, unsigned int heap_id_mask,
 	return fd;
 }
 
+int ion_query_heaps_kernel(struct ion_heap_data *hdata, unsigned int count)
+{
+	struct ion_device *dev = internal_dev;
+	int i = 0, ret = 0;
+	struct ion_heap *heap;
+
+	down_read(&dev->lock);
+
+	// If count is 0, return without updating hdata.
+	if (count == 0) {
+		ret = dev->heap_cnt;
+		goto out;
+	}
+
+	plist_for_each_entry(heap, &dev->heaps, node) {
+		strncpy(hdata[i].name, heap->name, MAX_HEAP_NAME);
+		hdata[i].name[sizeof(hdata[i].name) - 1] = '\0';
+		hdata[i].type = heap->type;
+		hdata[i].heap_id = heap->id;
+
+		i++;
+		if (i >= count)
+			break;
+	}
+
+	ret = i;
+out:
+	up_read(&dev->lock);
+	return ret;
+}
+
 static int ion_query_heaps(struct ion_heap_query *query)
 {
 	struct ion_device *dev = internal_dev;
