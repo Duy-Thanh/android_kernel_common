@@ -37,7 +37,11 @@ void apply_alternatives(void *start, size_t length);
 	" .byte 662b-661b\n"				/* source len      */ \
 	" .byte 664f-663f\n"				/* replacement len */
 
+<<<<<<< HEAD   (ec932f UPSTREAM: sched/psi: Fix OOB write when writing 0 bytes to P)
 #define ALTINSTR_ENTRY_CB(feature,cb)					      \
+=======
+#define ALTINSTR_ENTRY_CB(feature, cb)					      \
+>>>>>>> BRANCH (78d697 Linux 4.14.172)
 	" .word 661b - .\n"				/* label           */ \
 	" .word " __stringify(cb) "- .\n"		/* callback */	      \
 	" .hword " __stringify(feature) "\n"		/* feature bit     */ \
@@ -83,7 +87,11 @@ void apply_alternatives(void *start, size_t length);
 	oldinstr "\n"							\
 	"662:\n"							\
 	".pushsection .altinstructions,\"a\"\n"				\
+<<<<<<< HEAD   (ec932f UPSTREAM: sched/psi: Fix OOB write when writing 0 bytes to P)
 	ALTINSTR_ENTRY_CB(feature,cb)					\
+=======
+	ALTINSTR_ENTRY_CB(feature, cb)					\
+>>>>>>> BRANCH (78d697 Linux 4.14.172)
 	".popsection\n"							\
 	"663:\n\t"							\
 	"664:\n\t"							\
