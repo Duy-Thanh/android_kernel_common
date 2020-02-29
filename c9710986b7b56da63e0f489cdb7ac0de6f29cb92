@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f8ba897_853f1db0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-02-29T05:16:27Z",
+      "side": 1,
+      "message": "\u003e ANDROID: commits need to contain a Bug: or Fixes: line\n\n\nUh. It does have a Fixes line. Go home Lint, its been a long week. :)",
+      "parentUuid": "00490aeb_7c0eaa82",
+      "revId": "c9710986b7b56da63e0f489cdb7ac0de6f29cb92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
