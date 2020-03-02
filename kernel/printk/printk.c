@@ -376,6 +376,12 @@ struct printk_log {
 #ifdef CONFIG_PRINTK_CALLER
 	u32 caller_id;            /* thread id or processor id */
 #endif
+#ifdef CONFIG_PRINTK_PROCESS
+	char process[16];	/* process name */
+	pid_t pid;		/* process id */
+	u8 cpu;			/* cpu id */
+	u8 in_interrupt;	/* interrupt context */
+#endif
 }
 #ifdef CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS
 __packed __aligned(4)
@@ -442,7 +448,9 @@ static u64 exclusive_console_stop_seq;
 static u64 clear_seq;
 static u32 clear_idx;
 
-#ifdef CONFIG_PRINTK_CALLER
+#if defined(CONFIG_PRINTK_CALLER) && defined(CONFIG_PRINTK_PROCESS)
+#define PREFIX_MAX		64
+#elif defined(CONFIG_PRINTK_CALLER) || defined(CONFIG_PRINTK_PROCESS)
 #define PREFIX_MAX		48
 #else
 #define PREFIX_MAX		32
@@ -666,6 +674,13 @@ static int log_store(u32 caller_id, int facility, int level,
 #endif
 	memset(log_dict(msg) + dict_len, 0, pad_len);
 	msg->len = size;
+#ifdef CONFIG_PRINTK_PROCESS
+	strncpy(msg->process, current->comm, sizeof(msg->process) - 1);
+	msg->process[sizeof(msg->process) - 1] = '\0';
+	msg->pid = task_pid_nr(current);
+	msg->cpu = smp_processor_id();
+	msg->in_interrupt = in_interrupt() ? 1 : 0;
+#endif
 
 	/* insert message */
 	log_next_idx += msg->len;
@@ -1320,6 +1335,17 @@ static size_t print_caller(u32 id, char *buf)
 #else
 #define print_caller(id, buf) 0
 #endif
+#ifdef CONFIG_PRINTK_PROCESS
+static size_t print_process(const struct printk_log *msg, char *buf)
+
+{
+	return sprintf(buf, "%c[%1d:%15s:%5d]",
+			msg->in_interrupt ? 'I' : ' ', msg->cpu,
+			msg->process, msg->pid);
+}
+#else
+#define print_process(msg, buf) 0
+#endif
 
 static size_t print_prefix(const struct printk_log *msg, bool syslog,
 			   bool time, char *buf)
@@ -1332,6 +1358,7 @@ static size_t print_prefix(const struct printk_log *msg, bool syslog,
 	if (time)
 		len += print_time(msg->ts_nsec, buf + len);
 
+	len += print_process(msg, buf + len);
 	len += print_caller(msg->caller_id, buf + len);
 
 	if (IS_ENABLED(CONFIG_PRINTK_CALLER) || time) {
