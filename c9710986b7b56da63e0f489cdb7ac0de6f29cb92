@@ -17,6 +17,24 @@
       "revId": "c9710986b7b56da63e0f489cdb7ac0de6f29cb92",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6df18ec5_5a47af97",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-03-02T10:35:51Z",
+      "side": 1,
+      "message": "The trailing dot is unexpected. I adjusted the commit message and created a change for the linter to not be so picky. Period :-)",
+      "parentUuid": "3f8ba897_853f1db0",
+      "revId": "c9710986b7b56da63e0f489cdb7ac0de6f29cb92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
