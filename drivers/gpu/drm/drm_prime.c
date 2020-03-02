@@ -716,6 +716,131 @@ int drm_gem_prime_mmap(struct drm_gem_object *obj, struct vm_area_struct *vma)
 EXPORT_SYMBOL(drm_gem_prime_mmap);
 
 /**
+<<<<<<< HEAD   (6834da FROMLIST: dma-buf: add support for virtio exported objects)
+=======
+ * drm_gem_dmabuf_mmap - dma_buf mmap implementation for GEM
+ * @dma_buf: buffer to be mapped
+ * @vma: virtual address range
+ *
+ * Provides memory mapping for the buffer. This can be used as the
+ * &dma_buf_ops.mmap callback. It just forwards to &drm_driver.gem_prime_mmap,
+ * which should be set to drm_gem_prime_mmap().
+ *
+ * FIXME: There's really no point to this wrapper, drivers which need anything
+ * else but drm_gem_prime_mmap can roll their own &dma_buf_ops.mmap callback.
+ *
+ * Returns 0 on success or a negative error code on failure.
+ */
+int drm_gem_dmabuf_mmap(struct dma_buf *dma_buf, struct vm_area_struct *vma)
+{
+	struct drm_gem_object *obj = dma_buf->priv;
+	struct drm_device *dev = obj->dev;
+
+	if (!dev->driver->gem_prime_mmap)
+		return -ENOSYS;
+
+	return dev->driver->gem_prime_mmap(obj, vma);
+}
+EXPORT_SYMBOL(drm_gem_dmabuf_mmap);
+
+/**
+ * drm_gem_dmabuf_get_uuid - dma_buf get_uuid implementation for GEM
+ * @dma_buf: buffer to query
+ * @uuid: uuid outparam
+ *
+ * Queries the buffer's virtio UUID. This can be used as the
+ * &dma_buf_ops.get_uuid callback. Calls into &drm_driver.gem_prime_get_uuid.
+ *
+ * Returns 0 on success or a negative error code on failure.
+ */
+int drm_gem_dmabuf_get_uuid(struct dma_buf *dma_buf, uuid_t *uuid)
+{
+	struct drm_gem_object *obj = dma_buf->priv;
+	struct drm_device *dev = obj->dev;
+
+	if (!dev->driver->gem_prime_get_uuid)
+		return -ENODEV;
+
+	return dev->driver->gem_prime_get_uuid(obj, uuid);
+}
+EXPORT_SYMBOL(drm_gem_dmabuf_get_uuid);
+
+static const struct dma_buf_ops drm_gem_prime_dmabuf_ops =  {
+	.cache_sgt_mapping = true,
+	.attach = drm_gem_map_attach,
+	.detach = drm_gem_map_detach,
+	.map_dma_buf = drm_gem_map_dma_buf,
+	.unmap_dma_buf = drm_gem_unmap_dma_buf,
+	.release = drm_gem_dmabuf_release,
+	.mmap = drm_gem_dmabuf_mmap,
+	.vmap = drm_gem_dmabuf_vmap,
+	.vunmap = drm_gem_dmabuf_vunmap,
+	.get_uuid = drm_gem_dmabuf_get_uuid,
+};
+
+/**
+ * drm_prime_pages_to_sg - converts a page array into an sg list
+ * @pages: pointer to the array of page pointers to convert
+ * @nr_pages: length of the page vector
+ *
+ * This helper creates an sg table object from a set of pages
+ * the driver is responsible for mapping the pages into the
+ * importers address space for use with dma_buf itself.
+ *
+ * This is useful for implementing &drm_gem_object_funcs.get_sg_table.
+ */
+struct sg_table *drm_prime_pages_to_sg(struct page **pages, unsigned int nr_pages)
+{
+	struct sg_table *sg = NULL;
+	int ret;
+
+	sg = kmalloc(sizeof(struct sg_table), GFP_KERNEL);
+	if (!sg) {
+		ret = -ENOMEM;
+		goto out;
+	}
+
+	ret = sg_alloc_table_from_pages(sg, pages, nr_pages, 0,
+				nr_pages << PAGE_SHIFT, GFP_KERNEL);
+	if (ret)
+		goto out;
+
+	return sg;
+out:
+	kfree(sg);
+	return ERR_PTR(ret);
+}
+EXPORT_SYMBOL(drm_prime_pages_to_sg);
+
+/**
+ * drm_gem_prime_export - helper library implementation of the export callback
+ * @obj: GEM object to export
+ * @flags: flags like DRM_CLOEXEC and DRM_RDWR
+ *
+ * This is the implementation of the &drm_gem_object_funcs.export functions for GEM drivers
+ * using the PRIME helpers. It is used as the default in
+ * drm_gem_prime_handle_to_fd().
+ */
+struct dma_buf *drm_gem_prime_export(struct drm_gem_object *obj,
+				     int flags)
+{
+	struct drm_device *dev = obj->dev;
+	struct dma_buf_export_info exp_info = {
+		.exp_name = KBUILD_MODNAME, /* white lie for debug */
+		.owner = dev->driver->fops->owner,
+		.ops = &drm_gem_prime_dmabuf_ops,
+		.size = obj->size,
+		.flags = flags,
+		.priv = obj,
+		.resv = obj->resv,
+	};
+
+	return drm_gem_dmabuf_export(dev, &exp_info);
+}
+EXPORT_SYMBOL(drm_gem_prime_export);
+
+/**
+>>>>>>> CHANGE (cb1f27 FROMLIST: drm/prime: add support for virtio exported objects)
  * drm_gem_prime_import_dev - core implementation of the import callback
  * @dev: drm_device to import into
  * @dma_buf: dma-buf object to import
