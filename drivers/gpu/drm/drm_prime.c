@@ -362,6 +362,18 @@ static void drm_gem_dmabuf_vunmap(struct dma_buf *dma_buf, void *vaddr)
 	dev->driver->gem_prime_vunmap(obj, vaddr);
 }
 
+int drm_gem_dmabuf_get_uuid(struct dma_buf *dma_buf, uuid_t *uuid)
+{
+	struct drm_gem_object *obj = dma_buf->priv;
+	struct drm_device *dev = obj->dev;
+
+	if (!dev->driver->gem_prime_get_uuid)
+		return -ENODEV;
+
+	return dev->driver->gem_prime_get_uuid(obj, uuid);
+}
+EXPORT_SYMBOL(drm_gem_dmabuf_get_uuid);
+
 static void *drm_gem_dmabuf_kmap_atomic(struct dma_buf *dma_buf,
 					unsigned long page_num)
 {
@@ -410,6 +422,7 @@ static const struct dma_buf_ops drm_gem_prime_dmabuf_ops =  {
 	.mmap = drm_gem_dmabuf_mmap,
 	.vmap = drm_gem_dmabuf_vmap,
 	.vunmap = drm_gem_dmabuf_vunmap,
+	.get_uuid = drm_gem_dmabuf_get_uuid,
 };
 
 /**
