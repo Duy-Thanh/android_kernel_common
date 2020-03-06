@@ -1,0 +1,25 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000001848942",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1251762?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "420ff165_eac26cff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-03-06T00:00:56Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Thinh Nguyen \u003cThinh.Nguyen@synopsys.com\u003e",
+      "revId": "a1d339b7c6c1301e2c57d678f022bbf82d9aef4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
