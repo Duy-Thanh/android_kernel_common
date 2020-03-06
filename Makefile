@@ -1142,6 +1142,8 @@ cmd_link-vmlinux =                                                 \
 	$(if $(ARCH_POSTLINK), $(MAKE) -f $(ARCH_POSTLINK) $@, true)
 
 vmlinux: scripts/link-vmlinux.sh autoksyms_recursive $(vmlinux-deps) FORCE
+	@echo $(KBUILD_VMLINUX_OBJS) > vmlinux.objs
+	@echo $(KBUILD_VMLINUX_LIBS) > vmlinux.libs
 	+$(call if_changed,link-vmlinux)
 
 targets := vmlinux
@@ -1414,7 +1416,8 @@ endif # CONFIG_MODULES
 
 # Directories & files removed with 'make clean'
 CLEAN_DIRS  += include/ksym
-CLEAN_FILES += modules.builtin modules.builtin.modinfo modules.nsdeps
+CLEAN_FILES += modules.builtin modules.builtin.modinfo modules.nsdeps \
+	       vmlinux.objs vmlinux.libs
 
 # Directories & files removed with 'make mrproper'
 MRPROPER_DIRS  += include/config include/generated          \
