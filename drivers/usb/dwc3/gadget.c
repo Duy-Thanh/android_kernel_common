@@ -1071,7 +1071,18 @@ static void dwc3_prepare_one_trb_sg(struct dwc3_ep *dep,
 		unsigned int rem = length % maxp;
 		unsigned chain = true;
 
+<<<<<<< HEAD   (fa37c2 ANDROID: cpufreq: times: Remove per-UID time in state tracki)
 		if ((req->num_queued_sgs + 1) == req->request.num_mapped_sgs)
+=======
+		/*
+		 * IOMMU driver is coalescing the list of sgs which shares a
+		 * page boundary into one and giving it to USB driver. With
+		 * this the number of sgs mapped is not equal to the number of
+		 * sgs passed. So mark the chain bit to false if it isthe last
+		 * mapped sg.
+		 */
+		if (i == remaining - 1)
+>>>>>>> BRANCH (2c523b Linux 5.6-rc5)
 			chain = false;
 
 		if (rem && usb_endpoint_dir_out(dep->endpoint.desc) && !chain) {

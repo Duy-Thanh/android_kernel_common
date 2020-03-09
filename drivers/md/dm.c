@@ -1791,7 +1791,8 @@ static int dm_any_congested(void *congested_data, int bdi_bits)
 			 * With request-based DM we only need to check the
 			 * top-level queue for congestion.
 			 */
-			r = md->queue->backing_dev_info->wb.state & bdi_bits;
+			struct backing_dev_info *bdi = md->queue->backing_dev_info;
+			r = bdi->wb.congested->state & bdi_bits;
 		} else {
 			map = dm_get_live_table_fast(md);
 			if (map)
@@ -1857,6 +1858,7 @@ static const struct dax_operations dm_dax_ops;
 
 static void dm_wq_work(struct work_struct *work);
 
+<<<<<<< HEAD   (fa37c2 ANDROID: cpufreq: times: Remove per-UID time in state tracki)
 static void dm_init_normal_md_queue(struct mapped_device *md)
 {
 	/*
@@ -1868,6 +1870,8 @@ static void dm_init_normal_md_queue(struct mapped_device *md)
 
 static void dm_destroy_inline_encryption(struct request_queue *q);
 
+=======
+>>>>>>> BRANCH (2c523b Linux 5.6-rc5)
 static void cleanup_mapped_device(struct mapped_device *md)
 {
 	if (md->wq)
@@ -2256,6 +2260,7 @@ struct queue_limits *dm_get_queue_limits(struct mapped_device *md)
 }
 EXPORT_SYMBOL_GPL(dm_get_queue_limits);
 
+<<<<<<< HEAD   (fa37c2 ANDROID: cpufreq: times: Remove per-UID time in state tracki)
 #ifdef CONFIG_BLK_INLINE_ENCRYPTION
 struct dm_keyslot_evict_args {
 	const struct blk_crypto_key *key;
@@ -2410,6 +2415,13 @@ static inline void dm_destroy_inline_encryption(struct request_queue *q)
 {
 }
 #endif /* !CONFIG_BLK_INLINE_ENCRYPTION */
+=======
+static void dm_init_congested_fn(struct mapped_device *md)
+{
+	md->queue->backing_dev_info->congested_data = md;
+	md->queue->backing_dev_info->congested_fn = dm_any_congested;
+}
+>>>>>>> BRANCH (2c523b Linux 5.6-rc5)
 
 /*
  * Setup the DM device's queue based on md's type
@@ -2427,11 +2439,12 @@ int dm_setup_md_queue(struct mapped_device *md, struct dm_table *t)
 			DMERR("Cannot initialize queue for request-based dm-mq mapped device");
 			return r;
 		}
+		dm_init_congested_fn(md);
 		break;
 	case DM_TYPE_BIO_BASED:
 	case DM_TYPE_DAX_BIO_BASED:
 	case DM_TYPE_NVME_BIO_BASED:
-		dm_init_normal_md_queue(md);
+		dm_init_congested_fn(md);
 		break;
 	case DM_TYPE_NONE:
 		WARN_ON_ONCE(true);
@@ -2537,6 +2550,7 @@ static void __dm_destroy(struct mapped_device *md, bool wait)
 	map = dm_get_live_table(md, &srcu_idx);
 	if (!dm_suspended_md(md)) {
 		dm_table_presuspend_targets(map);
+		set_bit(DMF_SUSPENDED, &md->flags);
 		dm_table_postsuspend_targets(map);
 	}
 	/* dm_put_live_table must be before msleep, otherwise deadlock is possible */
