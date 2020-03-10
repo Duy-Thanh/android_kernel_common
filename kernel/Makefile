@@ -3,6 +3,9 @@
 # Makefile for the linux kernel.
 #
 
+ifdef CONFIG_ZONE_MOVABLE_CMA
+subdir-ccflags-y += -I$(srctree)/drivers/misc/mediatek/include
+endif
 obj-y     = fork.o exec_domain.o panic.o \
 	    cpu.o exit.o softirq.o resource.o \
 	    sysctl.o sysctl_binary.o capability.o ptrace.o user.o \
