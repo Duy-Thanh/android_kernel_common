@@ -132,6 +132,11 @@ static const struct file_operations incfs_file_ops = {
 	.compat_ioctl = dispatch_ioctl
 };
 
+enum FILL_PERMISSION {
+	CANT_FILL = 0,
+	CAN_FILL = 1,
+};
+
 static const struct file_operations incfs_pending_read_file_ops = {
 	.read = pending_reads_read,
 	.poll = pending_reads_poll,
@@ -1365,6 +1370,9 @@ static long ioctl_fill_blocks(struct file *f, void __user *arg)
 	if (!df)
 		return -EBADF;
 
+	if ((int)f->private_data != CAN_FILL)
+		return -EPERM;
+
 	if (copy_from_user(&fill_blocks, usr_fill_blocks, sizeof(fill_blocks)))
 		return -EFAULT;
 
@@ -1417,6 +1425,73 @@ static long ioctl_fill_blocks(struct file *f, void __user *arg)
 	return i;
 }
 
+static long ioctl_open_fill(struct file *f, void __user *arg)
+{
+	struct incfs_open_fill __user *usr_open_fill = arg;
+	struct incfs_open_fill open_fill;
+	char *filename;
+	long error;
+	struct file *file = 0;
+
+	if (f->f_op != &incfs_pending_read_file_ops)
+		return -EPERM;
+
+	if (copy_from_user(&open_fill, usr_open_fill, sizeof(open_fill)))
+		return -EFAULT;
+
+	if (open_fill.length > PATH_MAX)
+		return -E2BIG;
+
+	filename = kzalloc(open_fill.length + 1, GFP_NOFS);
+	if (!filename)
+		return -ENOMEM;
+
+	if (copy_from_user(filename, u64_to_user_ptr(open_fill.filename),
+			   open_fill.length)) {
+		error = -EFAULT;
+		goto out;
+	}
+
+	file = filp_open(filename, open_fill.flags, open_fill.mode);
+	if (IS_ERR(file)) {
+		error = PTR_ERR(file);
+		file = NULL;
+		goto out;
+	}
+
+	if (file->f_op != &incfs_file_ops) {
+		error = -EPERM;
+		goto out;
+	}
+
+	switch ((int)file->private_data) {
+	case CANT_FILL:
+		file->private_data = (void*) CAN_FILL;
+		break;
+
+	case CAN_FILL:
+		break;
+
+	default:
+		pr_debug("Invalid file private data");
+		error = -EFAULT;
+		goto out;
+	}
+
+	error = get_unused_fd_flags(open_fill.flags);
+	if (error < 0)
+		goto out;
+
+	fd_install(error, file);
+	file = NULL;
+
+out:
+	if (file)
+		filp_close(file, NULL);
+
+	kfree (filename);
+	return error;
+}
 
 static long ioctl_read_file_signature(struct file *f, void __user *arg)
 {
@@ -1475,6 +1550,8 @@ static long dispatch_ioctl(struct file *f, unsigned int req, unsigned long arg)
 		return ioctl_create_file(mi, (void __user *)arg);
 	case INCFS_IOC_FILL_BLOCKS:
 		return ioctl_fill_blocks(f, (void __user *)arg);
+	case INCFS_IOC_OPEN_FILL:
+		return ioctl_open_fill(f, (void __user *)arg);
 	case INCFS_IOC_READ_FILE_SIGNATURE:
 		return ioctl_read_file_signature(f, (void __user *)arg);
 	default:
@@ -1905,9 +1982,10 @@ static int file_open(struct inode *inode, struct file *file)
 		goto out;
 	}
 
-	if (S_ISREG(inode->i_mode))
+	if (S_ISREG(inode->i_mode)) {
 		err = make_inode_ready_for_data_ops(mi, inode, backing_file);
-	else if (S_ISDIR(inode->i_mode)) {
+		file->private_data = NULL;
+	} else if (S_ISDIR(inode->i_mode)) {
 		struct dir_file *dir = NULL;
 
 		dir = incfs_open_dir_file(mi, backing_file);
