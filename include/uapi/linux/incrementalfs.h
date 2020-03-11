@@ -49,12 +49,21 @@
 	_IOR(INCFS_IOCTL_BASE_CODE, 31, struct incfs_get_file_sig_args)
 
 /*
- * Fill in one or more data block
+ * Fill in one or more data block. This may only be called on a handle
+ * opened with INCFS_IOC_OPEN_FOR_FILLING
  *
  * Returns number of blocks filled in, or error if none were
  */
 #define INCFS_IOC_FILL_BLOCKS \
 	_IOR(INCFS_IOCTL_BASE_CODE, 32, struct incfs_fill_blocks)
+
+/*
+ * Open a file allowing INCFS_IOC_FILL_BLOCKS
+ *
+ * Returns file handle, or error
+ */
+#define INCFS_IOC_OPEN_FILL \
+	_IOW(INCFS_IOCTL_BASE_CODE, 33, struct incfs_open_fill)
 
 enum incfs_compression_alg {
 	COMPRESSION_NONE = 0,
@@ -132,6 +141,26 @@ struct incfs_fill_blocks {
 
 	/* A pointer to an array of incfs_fill_block structs */
 	__aligned_u64 fill_blocks;
+};
+
+/*
+ * Open a file for block filling
+ * May only be called on .pending_reads file
+ *
+ * Argument for INCFS_IOC_OPEN_FILL
+ */
+struct incfs_open_fill {
+	/* Length of filename */
+	__u64 length;
+
+	/* Open flags */
+	__u32 flags;
+
+	/* Mode */
+	__u32 mode;
+
+	/* Pointer to filename (need not be null terminated) */
+	__aligned_u64 filename;
 };
 
 enum incfs_hash_tree_algorithm {
