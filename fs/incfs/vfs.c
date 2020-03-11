@@ -460,9 +460,6 @@ static ssize_t pending_reads_read(struct file *f, char __user *buf, size_t len,
 	ssize_t result = 0;
 	int i = 0;
 
-	if (!access_ok(buf, len))
-		return -EFAULT;
-
 	if (!incfs_fresh_pending_reads_exist(mi, last_known_read_sn))
 		return 0;
 
@@ -851,9 +848,6 @@ static struct signature_info *incfs_copy_signature_info_from_user(
 	if (!original)
 		return NULL;
 
-	if (!access_ok(original, sizeof(usr_si)))
-		return ERR_PTR(-EFAULT);
-
 	if (copy_from_user(&usr_si, original, sizeof(usr_si)) > 0)
 		return ERR_PTR(-EFAULT);
 
@@ -1183,10 +1177,7 @@ static long ioctl_create_file(struct mount_info *mi,
 		error = -EFAULT;
 		goto out;
 	}
-	if (!access_ok(usr_args, sizeof(args))) {
-		error = -EFAULT;
-		goto out;
-	}
+
 	if (copy_from_user(&args, usr_args, sizeof(args)) > 0) {
 		error = -EFAULT;
 		goto out;
@@ -1312,12 +1303,6 @@ static long ioctl_create_file(struct mount_info *mi,
 			goto delete_index_file;
 		}
 
-		if (!access_ok(u64_to_user_ptr(args.file_attr),
-			       args.file_attr_len)) {
-			error = -EFAULT;
-			goto delete_index_file;
-		}
-
 		if (copy_from_user(attr_value,
 				u64_to_user_ptr(args.file_attr),
 				args.file_attr_len) > 0) {
@@ -1380,9 +1365,6 @@ static long ioctl_fill_blocks(struct file *f, void __user *arg)
 	if (!df)
 		return -EBADF;
 
-	if (!access_ok(usr_fill_blocks, sizeof(fill_blocks)))
-		return -EFAULT;
-
 	if (copy_from_user(&fill_blocks, usr_fill_blocks, sizeof(fill_blocks)))
 		return -EFAULT;
 
@@ -1394,10 +1376,6 @@ static long ioctl_fill_blocks(struct file *f, void __user *arg)
 	for (i = 0; i < fill_blocks.count; i++) {
 		struct incfs_fill_block fill_block = {};
 
-		if (!access_ok(&usr_fill_block_array[i],
-			       sizeof(fill_block)))
-			return -EFAULT;
-
 		if (copy_from_user(&fill_block, &usr_fill_block_array[i],
 				   sizeof(fill_block)) > 0) {
 			error = -EFAULT;
@@ -1408,11 +1386,7 @@ static long ioctl_fill_blocks(struct file *f, void __user *arg)
 			error = -E2BIG;
 			break;
 		}
-		if (!access_ok(u64_to_user_ptr(fill_block.data),
-			       fill_block.data_len)) {
-			error = -EFAULT;
-			break;
-		}
+
 		if (copy_from_user(data_buf, u64_to_user_ptr(fill_block.data),
 				   fill_block.data_len) > 0) {
 			error = -EFAULT;
@@ -1457,14 +1431,8 @@ static long ioctl_read_file_signature(struct file *f, void __user *arg)
 	if (!df)
 		return -EINVAL;
 
-	if (!access_ok(args_usr_ptr, sizeof(args)))
-		return -EFAULT;
 	if (copy_from_user(&args, args_usr_ptr, sizeof(args)) > 0)
 		return -EINVAL;
-
-	if (!access_ok(u64_to_user_ptr(args.file_signature),
-			args.file_signature_buf_size))
-		return -EFAULT;
 
 	sig_buf_size = args.file_signature_buf_size;
 	if (sig_buf_size > INCFS_MAX_SIGNATURE_SIZE)
