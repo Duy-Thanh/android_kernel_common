@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84cd0c7c_8a999b39",
+        "filename": "tools/testing/selftests/filesystems/incfs/incfs_test.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1142024
+      },
+      "writtenOn": "2020-03-11T23:50:49Z",
+      "side": 0,
+      "message": "What happened to compression?",
+      "range": {
+        "startLine": 407,
+        "startChar": 2,
+        "endLine": 408,
+        "endChar": 49
+      },
+      "revId": "5ef359df159afa82c1b89357b617aa4860da550d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a7099e3_0c7279f7",
+        "filename": "tools/testing/selftests/filesystems/incfs/incfs_test.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1277,
+      "author": {
+        "id": 1142024
+      },
+      "writtenOn": "2020-03-11T23:50:49Z",
+      "side": 0,
+      "message": "Why are we not loading tree here any more?",
+      "range": {
+        "startLine": 1277,
+        "startChar": 8,
+        "endLine": 1277,
+        "endChar": 22
+      },
+      "revId": "5ef359df159afa82c1b89357b617aa4860da550d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc6bfe76_a1ebaf74",
+        "filename": "tools/testing/selftests/filesystems/incfs/incfs_test.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1492,
+      "author": {
+        "id": 1142024
+      },
+      "writtenOn": "2020-03-11T23:50:49Z",
+      "side": 0,
+      "message": "ditto",
+      "range": {
+        "startLine": 1492,
+        "startChar": 8,
+        "endLine": 1492,
+        "endChar": 22
+      },
+      "revId": "5ef359df159afa82c1b89357b617aa4860da550d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
