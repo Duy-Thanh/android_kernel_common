@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fa06b556_bdc7445c",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1483,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-03-12T13:46:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d389c31_34252d07",
+      "range": {
+        "startLine": 1483,
+        "startChar": 1,
+        "endLine": 1483,
+        "endChar": 6
+      },
+      "revId": "de94eebaa08f81c75a0ba5896039d152c5098768",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a17ab7a_4a7b0c26",
         "filename": "include/uapi/linux/incrementalfs.h",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "de94eebaa08f81c75a0ba5896039d152c5098768",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d712cf6c_9cc74d08",
+        "filename": "include/uapi/linux/incrementalfs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-03-12T13:46:39Z",
+      "side": 1,
+      "message": "I added this to the existing tests - check out open_file_by_id and how it is used.\n\nHowever, you reminded me that INCFS_IOC_OPEN_FILL may only be called on .pending_reads, so I added a comment to that effect and further modified open_file_by_id to test that too",
+      "parentUuid": "4a17ab7a_4a7b0c26",
+      "range": {
+        "startLine": 52,
+        "startChar": 35,
+        "endLine": 53,
+        "endChar": 41
+      },
+      "revId": "de94eebaa08f81c75a0ba5896039d152c5098768",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
