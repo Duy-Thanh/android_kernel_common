@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5f7595c_71a7cd1b",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-12T20:20:18Z",
+      "side": 1,
+      "message": "strncpy_from_user() ?",
+      "range": {
+        "startLine": 1444,
+        "startChar": 0,
+        "endLine": 1456,
+        "endChar": 2
+      },
+      "revId": "fc0e85795101b6fdd24ad527db00043b3506ca21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c121d7af_96e7437e",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1458,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-12T20:20:18Z",
+      "side": 1,
+      "message": "do you want to enforce some flags here, e.g. \"execute\" is probably not a good idea, but \"write\" is required.\nyou also may want to add a \"read\" permission if IncFS ever needs to read from the same fd\nIt may actually be a good idea to make it \"additional flags\" field, e.g. to let the user set O_CLOEXEC, and enforce the write-only mode inside the driver",
+      "range": {
+        "startLine": 1458,
+        "startChar": 28,
+        "endLine": 1458,
+        "endChar": 43
+      },
+      "revId": "fc0e85795101b6fdd24ad527db00043b3506ca21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebf83345_ba7704b2",
+        "filename": "include/uapi/linux/incrementalfs.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-12T20:20:18Z",
+      "side": 1,
+      "message": "nit: explicitly add a reserved __u32 to plug the alignment hole, esp on 32-bits?",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 3
+      },
+      "revId": "fc0e85795101b6fdd24ad527db00043b3506ca21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
