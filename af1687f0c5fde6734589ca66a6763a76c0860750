@@ -1,0 +1,46 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000001937135",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1256150?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "40c87799_7b9b2d30",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-03-12T08:13:27Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha",
+      "revId": "af1687f0c5fde6734589ca66a6763a76c0860750",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000001937135",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1256150?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "1fef2de9_7e8dec96",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-03-12T08:13:27Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Baolin Wang \u003cbaolin.wang@unisoc.corp-partner.google.com\u003e",
+      "revId": "af1687f0c5fde6734589ca66a6763a76c0860750",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
