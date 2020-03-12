@@ -470,15 +470,17 @@ __primary_switched:
 	b	start_kernel
 ENDPROC(__primary_switched)
 
+	.pushsection ".rodata", "a"
+ENTRY(kimage_vaddr)
+	.quad		_text - TEXT_OFFSET
+EXPORT_SYMBOL(kimage_vaddr)
+	.popsection
+
 /*
  * end early head section, begin head code that is also used for
  * hotplug and needs to have the same protections as the text region
  */
 	.section ".idmap.text","awx"
-
-ENTRY(kimage_vaddr)
-	.quad		_text - TEXT_OFFSET
-EXPORT_SYMBOL(kimage_vaddr)
 
 /*
  * If we're fortunate enough to boot at EL2, ensure that the world is
