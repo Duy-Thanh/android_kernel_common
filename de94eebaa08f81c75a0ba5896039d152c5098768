@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d389c31_34252d07",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1483,
+      "author": {
+        "id": 1142024
+      },
+      "writtenOn": "2020-03-12T00:07:14Z",
+      "side": 1,
+      "message": "You\u0027re using error as fd here. Please create a separate fd variable.",
+      "range": {
+        "startLine": 1483,
+        "startChar": 1,
+        "endLine": 1483,
+        "endChar": 6
+      },
+      "revId": "de94eebaa08f81c75a0ba5896039d152c5098768",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a17ab7a_4a7b0c26",
+        "filename": "include/uapi/linux/incrementalfs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1142024
+      },
+      "writtenOn": "2020-03-12T00:07:14Z",
+      "side": 1,
+      "message": "Would be nice to have a test for this assertion",
+      "range": {
+        "startLine": 52,
+        "startChar": 35,
+        "endLine": 53,
+        "endChar": 41
+      },
+      "revId": "de94eebaa08f81c75a0ba5896039d152c5098768",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
