@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "24dd1835_802a871d",
+        "filename": "tools/testing/selftests/filesystems/incfs/incfs_test.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-03-12T13:52:45Z",
+      "side": 0,
+      "message": "We set that in the if condition above.",
+      "parentUuid": "84cd0c7c_8a999b39",
+      "range": {
+        "startLine": 407,
+        "startChar": 2,
+        "endLine": 408,
+        "endChar": 49
+      },
+      "revId": "5ef359df159afa82c1b89357b617aa4860da550d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a7099e3_0c7279f7",
         "filename": "tools/testing/selftests/filesystems/incfs/incfs_test.c",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "abd1b994_3a395a77",
+        "filename": "tools/testing/selftests/filesystems/incfs/incfs_test.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1277,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-03-12T13:52:45Z",
+      "side": 0,
+      "message": "Because it never worked. The test was only passing because https://android-review.googlesource.com/c/kernel/common/+/1254764/2/tools/testing/selftests/filesystems/incfs/incfs_test.c#b849 is buggy - it\u0027s comparing signed to unsigned, which means the signed error gets cast to a large positive number. We don\u0027t currently support setting hashes unless signatures are enabled.",
+      "parentUuid": "2a7099e3_0c7279f7",
+      "range": {
+        "startLine": 1277,
+        "startChar": 8,
+        "endLine": 1277,
+        "endChar": 22
+      },
+      "revId": "5ef359df159afa82c1b89357b617aa4860da550d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bc6bfe76_a1ebaf74",
         "filename": "tools/testing/selftests/filesystems/incfs/incfs_test.c",
         "patchSetId": 2
@@ -68,6 +116,30 @@
       "revId": "5ef359df159afa82c1b89357b617aa4860da550d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7767aa1_65bd7f5a",
+        "filename": "tools/testing/selftests/filesystems/incfs/incfs_test.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1492,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-03-12T13:52:45Z",
+      "side": 0,
+      "message": "See above",
+      "parentUuid": "bc6bfe76_a1ebaf74",
+      "range": {
+        "startLine": 1492,
+        "startChar": 8,
+        "endLine": 1492,
+        "endChar": 22
+      },
+      "revId": "5ef359df159afa82c1b89357b617aa4860da550d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
