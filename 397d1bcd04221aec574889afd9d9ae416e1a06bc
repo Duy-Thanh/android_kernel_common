@@ -22,6 +22,30 @@
       "revId": "397d1bcd04221aec574889afd9d9ae416e1a06bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "511900c0_cc3f9d8c",
+        "filename": "drivers/thermal/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1639246
+      },
+      "writtenOn": "2020-03-13T10:02:05Z",
+      "side": 1,
+      "message": "Yes, It will be better if we can enable ARCH_SPRD in the gki config.\nI think our colleague will craete a patch to enable it later.",
+      "parentUuid": "22e83389_f2bf6628",
+      "range": {
+        "startLine": 423,
+        "startChar": 12,
+        "endLine": 423,
+        "endChar": 21
+      },
+      "revId": "397d1bcd04221aec574889afd9d9ae416e1a06bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
