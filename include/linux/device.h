@@ -154,8 +154,8 @@ struct bus_type {
 
 	bool need_parent_lock;
 
-	ANDROID_KABI_RESERVE(1);
-	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_USE(1, unsigned int foo);
+	ANDROID_KABI_USE2(2, u32 bar, u32 baz);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
 };
