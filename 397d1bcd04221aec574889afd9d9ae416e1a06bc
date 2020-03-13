@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22e83389_f2bf6628",
+        "filename": "drivers/thermal/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-03-13T07:41:49Z",
+      "side": 1,
+      "message": "Do we also need to enable this in our gki config file?",
+      "range": {
+        "startLine": 423,
+        "startChar": 12,
+        "endLine": 423,
+        "endChar": 21
+      },
+      "revId": "397d1bcd04221aec574889afd9d9ae416e1a06bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
