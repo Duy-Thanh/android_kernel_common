@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000001966416",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1258582?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "32fe98fa_c5851a87",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-03-13T20:08:28Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a Bug: or Fixes: line",
+      "revId": "e8e42fedfa8ae86a7b64632ba5965d8b45667d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000001966416",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1258582?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "524a4bc5_3dc69615",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-03-13T20:08:28Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Alistair Delva \u003cadelva@google.com\u003e",
+      "revId": "e8e42fedfa8ae86a7b64632ba5965d8b45667d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000001966416",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1258582?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "a0671da3_0ebe0c05",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-03-13T20:08:28Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Alistair Delva \u003cadelva@google.com\u003e",
+      "revId": "e8e42fedfa8ae86a7b64632ba5965d8b45667d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
