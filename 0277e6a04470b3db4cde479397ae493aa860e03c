@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0484f7da_8f79bb9b",
+        "filename": "drivers/trusty/trusty-mem.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2020-03-16T10:42:13Z",
+      "side": 1,
+      "message": "CACHEABLE",
+      "range": {
+        "startLine": 23,
+        "startChar": 28,
+        "endLine": 23,
+        "endChar": 36
+      },
+      "revId": "0277e6a04470b3db4cde479397ae493aa860e03c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
