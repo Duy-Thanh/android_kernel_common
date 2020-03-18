@@ -351,7 +351,7 @@ static int get_data_file_block(struct data_file *df, int index,
 	blockmap_off = df->df_blockmap_off;
 	bfc = df->df_backing_file_context;
 
-	if (index < 0 || index >= df->df_block_count || blockmap_off == 0)
+	if (index < 0 || blockmap_off == 0)
 		return -EINVAL;
 
 	error = incfs_read_blockmap_entry(bfc, index, blockmap_off, &bme);
@@ -369,6 +369,63 @@ static int get_data_file_block(struct data_file *df, int index,
 					 COMPRESSION_LZ4 :
 					 COMPRESSION_NONE;
 	return 0;
+}
+
+static int copy_one_range(struct incfs_filled_range *range, void __user *buffer,
+			  u32 size, u32 *size_out)
+{
+	if (*size_out + sizeof(*range) > size)
+		return -ERANGE;
+
+	if (copy_to_user(((char *)buffer) + *size_out, range,
+			 sizeof(*range)))
+		return -EFAULT;
+
+	*size_out += sizeof(*range);
+	return 0;
+}
+
+int incfs_get_filled_blocks(struct data_file *df, void __user *buffer, u32 size,
+		u32 *size_out)
+{
+	u64 index;
+	int error = 0;
+	bool in_range = false;
+	struct incfs_filled_range range;
+	u32 max_index = df->df_block_count;
+
+	if (df->df_signature)
+		max_index += df->df_signature->hash_size/ INCFS_DATA_FILE_BLOCK_SIZE;
+	*size_out = 0;
+	for (index = 0; index < max_index; ++index) {
+		struct data_file_block dfb;
+
+		error = get_data_file_block(df, index, &dfb);
+		if (error)
+			return error;
+
+		if (is_data_block_present(&dfb) == in_range)
+			continue;
+
+		if (!in_range) {
+			in_range = true;
+			range.begin = index;
+		} else {
+			in_range = false;
+			range.end = index - 1;
+			error = copy_one_range(&range, buffer, size, size_out);
+			if (error)
+				return error;
+		}
+
+	}
+
+	if (in_range) {
+		range.end = index - 1;
+		error = copy_one_range(&range, buffer, size, size_out);
+	}
+
+	return error;
 }
 
 static bool is_read_done(struct pending_read *read)
@@ -746,7 +803,7 @@ int incfs_process_new_hash_block(struct data_file *df,
 	if (!error)
 		error = incfs_write_hash_block_to_backing_file(
 			bfc, range(data, block->data_len), block->block_index,
-			hash_area_base);
+			hash_area_base, df->df_blockmap_off, df->df_size);
 	mutex_unlock(&bfc->bc_mutex);
 	return error;
 }
@@ -762,7 +819,7 @@ static int process_blockmap_md(struct incfs_blockmap *bm,
 	if (!df)
 		return -EFAULT;
 
-	if (df->df_block_count != block_count)
+	if (df->df_block_count > block_count)
 		return -EBADMSG;
 
 	df->df_blockmap_off = base_off;

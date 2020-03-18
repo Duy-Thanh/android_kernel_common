@@ -178,6 +178,7 @@ struct incfs_file_header {
 
 enum incfs_block_map_entry_flags {
 	INCFS_BLOCK_COMPRESSED_LZ4 = (1 << 0),
+	INCFS_BLOCK_HASH = (1 << 1),
 };
 
 /* Block map entry pointing to an actual location of the data block. */
@@ -284,7 +285,7 @@ void incfs_free_bfc(struct backing_file_context *bfc);
 
 /* Writing stuff */
 int incfs_write_blockmap_to_backing_file(struct backing_file_context *bfc,
-					 u32 block_count, loff_t *map_base_off);
+					 u32 block_count);
 
 int incfs_write_fh_to_backing_file(struct backing_file_context *bfc,
 				   incfs_uuid_t *uuid, u64 file_size);
@@ -296,7 +297,8 @@ int incfs_write_data_block_to_backing_file(struct backing_file_context *bfc,
 
 int incfs_write_hash_block_to_backing_file(struct backing_file_context *bfc,
 					struct mem_range block,
-					int block_index, loff_t hash_area_off);
+					int block_index, loff_t hash_area_off,
+					loff_t bm_base_off, int file_size);
 
 int incfs_write_file_attr_to_backing_file(struct backing_file_context *bfc,
 		struct mem_range value, struct incfs_file_attr *attr);

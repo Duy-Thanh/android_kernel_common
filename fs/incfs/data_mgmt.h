@@ -230,6 +230,9 @@ ssize_t incfs_read_data_file_block(struct mem_range dst, struct data_file *df,
 				   int index, int timeout_ms,
 				   struct mem_range tmp);
 
+int incfs_get_filled_blocks(struct data_file *df, void __user *buffer, u32 size,
+			    u32 *size_out);
+
 int incfs_read_file_signature(struct data_file *df, struct mem_range dst);
 
 int incfs_process_new_data_block(struct data_file *df,
