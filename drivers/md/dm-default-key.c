@@ -151,6 +151,37 @@ static int default_key_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 	char dummy;
 	int err;
 
+	/* <dev_path> */
+	err = dm_get_device(ti, argv[3], dm_table_get_mode(ti->table),
+					&dkc->dev);
+
+	if (err) {
+		ti->error = "Device lookup failed";
+		goto bad;
+	}
+
+	// v1 on disk format
+	if (argc >= 4 && !strcmp(argv[0], "AES-256-XTS")) {
+		argc = 0;
+		_argv[argc++] = "aes-xts-plain64";
+		_argv[argc++] = argv[1];
+		_argv[argc++] = dkc->dev->bdev->bd_part->start_sect;
+		_argv[argc++] = argv[2];
+		_argv[argc++] = argv[3];
+		_argv[argc++] = "3";
+		_argv[argc++] = "allow_discards";
+
+		if (!strcmp(dkc->dev->bdev->bd_disk->disk_name, "sdhci",
+							sizeof("sdhci")))
+			_argv[argc++] = "sector_size:512";
+		else
+			_argv[argc++] = "sector_size:4096";
+
+		_argv[argc++] = "iv_large_sectors";
+		_argv[argc] = NULL;
+		argv = _argv;
+	}
+
 	if (argc < 5) {
 		ti->error = "Not enough arguments";
 		return -EINVAL;
@@ -196,14 +227,6 @@ static int default_key_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 	if (sscanf(argv[2], "%llu%c", &dkc->iv_offset, &dummy) != 1) {
 		ti->error = "Invalid iv_offset sector";
 		err = -EINVAL;
-		goto bad;
-	}
-
-	/* <dev_path> */
-	err = dm_get_device(ti, argv[3], dm_table_get_mode(ti->table),
-			    &dkc->dev);
-	if (err) {
-		ti->error = "Device lookup failed";
 		goto bad;
 	}
 
