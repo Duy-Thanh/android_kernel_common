@@ -410,7 +410,7 @@ void blk_integrity_register(struct gendisk *disk, struct blk_integrity *template
 
 	disk->queue->backing_dev_info->capabilities |= BDI_CAP_STABLE_WRITES;
 
-#ifdef BLK_INLINE_ENCRYPTION
+#ifdef CONFIG_BLK_INLINE_ENCRYPTION
 	if (disk->queue->ksm) {
 		pr_warn("blk-integrity: Integrity and hardware inline encryption are not supported together. Unregistering keyslot manager from request queue, to disable hardware inline encryption.");
 		blk_ksm_unregister(disk->queue);
