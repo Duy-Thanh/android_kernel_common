@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002052714",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1264187?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "16c319e8_6d4575da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-03-20T20:29:15Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha",
+      "revId": "a876138801664581be4594d035c6cc416af1776c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002052714",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1264187?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "41c87f01_04bb33e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-03-20T20:29:15Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Saravana Kannan \u003csaravanak@google.com\u003e",
+      "revId": "a876138801664581be4594d035c6cc416af1776c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002052714",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1264187?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "4d3a0a15_fb8d2b2a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-03-20T20:29:15Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Saravana Kannan \u003csaravanak@google.com\u003e",
+      "revId": "a876138801664581be4594d035c6cc416af1776c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
