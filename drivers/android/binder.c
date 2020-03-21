@@ -553,6 +553,9 @@ enum {
  * @is_dead:              thread is dead and awaiting free
  *                        when outstanding transactions are cleaned up
  *                        (protected by @proc->inner_lock)
+ * @is_selected:          thread has been selected as target
+ *                        for proc work
+ *                        (protected by @proc->inner_lock)
  * @task:                 struct task_struct for this thread
  *
  * Bookkeeping structure for binder threads.
@@ -573,6 +576,7 @@ struct binder_thread {
 	struct binder_stats stats;
 	atomic_t tmp_ref;
 	bool is_dead;
+	bool is_selected;
 	struct task_struct *task;
 };
 
@@ -1009,8 +1013,10 @@ binder_select_thread_ilocked(struct binder_proc *proc)
 					  struct binder_thread,
 					  waiting_thread_node);
 
-	if (thread)
+	if (thread) {
 		list_del_init(&thread->waiting_thread_node);
+		thread->is_selected = true;
+	}
 
 	return thread;
 }
@@ -2949,10 +2955,11 @@ retry_after_prio_restore:
 			binder_restore_priority(thread->task,
 						proc->default_priority);
 			binder_inner_proc_lock(proc);
-			list_add(&thread->waiting_thread_node,
-				 &proc->waiting_threads);
+			thread->is_selected = false;
+			wake_up_interruptible(&thread->wait);
 			binder_inner_proc_unlock(proc);
 			thread = NULL;
+			pending_async = false;
 			goto retry_after_prio_restore;
 		}
 	}
@@ -4294,7 +4301,7 @@ static int binder_wait_for_work(struct binder_thread *thread,
 		prepare_to_wait(&thread->wait, &wait, TASK_INTERRUPTIBLE);
 		if (binder_has_work_ilocked(thread, do_proc_work))
 			break;
-		if (do_proc_work)
+		if (do_proc_work && !thread->is_selected)
 			list_add(&thread->waiting_thread_node,
 				 &proc->waiting_threads);
 		binder_inner_proc_unlock(proc);
@@ -4307,6 +4314,8 @@ static int binder_wait_for_work(struct binder_thread *thread,
 		}
 	}
 	finish_wait(&thread->wait, &wait);
+	if (ret != -ERESTARTSYS)
+		thread->is_selected = false;
 	binder_inner_proc_unlock(proc);
 	freezer_count();
 
