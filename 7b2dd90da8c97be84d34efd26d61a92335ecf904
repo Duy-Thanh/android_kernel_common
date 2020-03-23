@@ -22,6 +22,30 @@
       "revId": "7b2dd90da8c97be84d34efd26d61a92335ecf904",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12eb6220_500ba431",
+        "filename": "abi_gki_aarch64_db845c_whitelist",
+        "patchSetId": 3
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-03-23T19:09:14Z",
+      "side": 1,
+      "message": "So xhci-pci is needed for the USB_XHCI_PCI_RENESAS. \n\nThen it looks like xhci-plat gets pulled in by DWC3:\nconfig USB_DWC3\n        tristate \"DesignWare USB3 DRD Core Support\"\n        depends on (USB || USB_GADGET) \u0026\u0026 HAS_DMA\n        select USB_XHCI_PLATFORM if USB_XHCI_HCD",
+      "parentUuid": "16f5369c_ef2f871c",
+      "range": {
+        "startLine": 1164,
+        "startChar": 15,
+        "endLine": 1164,
+        "endChar": 23
+      },
+      "revId": "7b2dd90da8c97be84d34efd26d61a92335ecf904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
