@@ -48,6 +48,7 @@ struct log_sector {
 struct bow_range {
 	struct rb_node		node;
 	sector_t		sector;
+	sector_t		ori_sector;
 	enum {
 		INVALID,	/* Type not set */
 		SECTOR0,	/* First sector - holds log record */
@@ -103,6 +104,11 @@ sector_t range_top(struct bow_range *br)
 u64 range_size(struct bow_range *br)
 {
 	return (range_top(br) - br->sector) * SECTOR_SIZE;
+}
+
+u64 ori_range_size(struct bow_range *br)
+{
+	return (range_top(br) - br->ori_sector) * SECTOR_SIZE;
 }
 
 static sector_t bvec_top(struct bvec_iter *bi_iter)
@@ -754,6 +760,9 @@ static int prepare_unchanged_range(struct bow_context *bc, struct bow_range *br,
 	if (!backup_br)
 		return BLK_STS_NOSPC;
 
+	if (backup_br->ori_sector == 0)
+		backup_br->ori_sector = backup_br->sector;
+
 	/* Carve out a backup range. This may be smaller than the br given */
 	backup_bi.bi_sector = backup_br->sector;
 	backup_bi.bi_size = min(range_size(backup_br), (u64) bi_iter->bi_size);
@@ -792,8 +801,10 @@ static int prepare_unchanged_range(struct bow_context *bc, struct bow_range *br,
 	 */
 	original_type = br->type;
 	sector0 = backup_br->sector;
-	if (backup_br->type == TRIMMED)
+	if (backup_br->type == TRIMMED) {
 		list_del(&backup_br->trimmed_list);
+		bc->trims_total -= ori_range_size(backup_br);
+	}
 	backup_br->type = br->type == SECTOR0_CURRENT ? SECTOR0_CURRENT
 						      : BACKUP;
 	br->type = CHANGED;
