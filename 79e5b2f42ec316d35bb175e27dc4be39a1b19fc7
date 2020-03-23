@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d925634_5d0ab999",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-23T19:02:48Z",
+      "side": 1,
+      "message": "missing the minus",
+      "range": {
+        "startLine": 408,
+        "startChar": 10,
+        "endLine": 408,
+        "endChar": 16
+      },
+      "revId": "79e5b2f42ec316d35bb175e27dc4be39a1b19fc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e56c958_93b81418",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-23T19:02:48Z",
+      "side": 1,
+      "message": "I\u0027m really hoping for the compiler to vectorize this. Otherwise this will be SLOW\nEmulator\u0027s code has the same function and we had to add a handcrafted implementation there - it was taking noticeable part of the snapshot saving time: https://cs.corp.google.com/android/external/qemu/android/android-emu/android/snapshot/Snapshotter.cpp?rcl\u003d59bd65fa340de652ea4f60cad1755420a755604f\u0026l\u003d62",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 416,
+        "endChar": 3
+      },
+      "revId": "79e5b2f42ec316d35bb175e27dc4be39a1b19fc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "593e22d5_e0135562",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-23T19:02:48Z",
+      "side": 1,
+      "message": "|end| usually refers to the one-past-last element, at least everywhere in C++, e.g. https://en.cppreference.com/w/cpp/iterator/end : \"Returns an iterator to the end (i.e. the element after the last element) ...\"",
+      "range": {
+        "startLine": 447,
+        "startChar": 3,
+        "endLine": 447,
+        "endChar": 25
+      },
+      "revId": "79e5b2f42ec316d35bb175e27dc4be39a1b19fc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a160e0eb_28a84899",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-23T19:02:48Z",
+      "side": 1,
+      "message": "ditto about one-past-end",
+      "range": {
+        "startLine": 456,
+        "startChar": 13,
+        "endLine": 456,
+        "endChar": 24
+      },
+      "revId": "79e5b2f42ec316d35bb175e27dc4be39a1b19fc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "095fcb0d_b516679a",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-23T19:02:48Z",
+      "side": 1,
+      "message": "what is this? I thought hash blocks will simply continue indexing from |df_block_count|, having hash block 0 as |df_block_count| etc\nthis way: I won\u0027t need to double check if there\u0027s this special separator in the array or not, and if everything\u0027s loaded you need to return exactly one range covering both data and hash blocks",
+      "range": {
+        "startLine": 465,
+        "startChar": 0,
+        "endLine": 469,
+        "endChar": 15
+      },
+      "revId": "79e5b2f42ec316d35bb175e27dc4be39a1b19fc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac221bab_48e8b2d1",
+        "filename": "include/uapi/linux/incrementalfs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-23T19:02:48Z",
+      "side": 1,
+      "message": "bytes or ranges?",
+      "range": {
+        "startLine": 78,
+        "startChar": 9,
+        "endLine": 78,
+        "endChar": 15
+      },
+      "revId": "79e5b2f42ec316d35bb175e27dc4be39a1b19fc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4532a3a_d31c046d",
+        "filename": "include/uapi/linux/incrementalfs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-23T19:02:48Z",
+      "side": 1,
+      "message": "is this in page offsets or byte offsets? for blocks we can get away with u32, supporting up to 16TB files",
+      "range": {
+        "startLine": 291,
+        "startChar": 0,
+        "endLine": 296,
+        "endChar": 0
+      },
+      "revId": "79e5b2f42ec316d35bb175e27dc4be39a1b19fc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

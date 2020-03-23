@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba37019e_ec234343",
+        "filename": "include/uapi/linux/incrementalfs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-23T19:02:48Z",
+      "side": 1,
+      "message": "need to document the range format. E.g. {uint16 start, uint16 count} or [start, end), or different type. Even better to add a struct and use it instead, and return the count of ranges instead of count of bytes",
+      "range": {
+        "startLine": 288,
+        "startChar": 4,
+        "endLine": 288,
+        "endChar": 53
+      },
+      "revId": "584866475e30683448514a3d51966ddd00932a56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
