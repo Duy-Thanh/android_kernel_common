@@ -46,6 +46,30 @@
       "revId": "7b2dd90da8c97be84d34efd26d61a92335ecf904",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "745a31a3_b672468b",
+        "filename": "abi_gki_aarch64_db845c_whitelist",
+        "patchSetId": 3
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-03-23T19:15:45Z",
+      "side": 1,
+      "message": "Ah, that\u0027s a mess, thanks for figuring this out :)",
+      "parentUuid": "12eb6220_500ba431",
+      "range": {
+        "startLine": 1164,
+        "startChar": 15,
+        "endLine": 1164,
+        "endChar": 23
+      },
+      "revId": "7b2dd90da8c97be84d34efd26d61a92335ecf904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
