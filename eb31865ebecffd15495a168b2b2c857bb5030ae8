@@ -22,6 +22,30 @@
       "revId": "eb31865ebecffd15495a168b2b2c857bb5030ae8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64dc07df_4eff2f1c",
+        "filename": "abi_gki_aarch64_qcom_whitelist",
+        "patchSetId": 2
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1577720
+      },
+      "writtenOn": "2020-03-23T16:56:25Z",
+      "side": 1,
+      "message": "QCOM tree currently has some build issues if we disable DEBUG_FS. Is it okay to remove these symbols by hand?",
+      "parentUuid": "fe41ad49_ead86937",
+      "range": {
+        "startLine": 297,
+        "startChar": 2,
+        "endLine": 315,
+        "endChar": 26
+      },
+      "revId": "eb31865ebecffd15495a168b2b2c857bb5030ae8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
