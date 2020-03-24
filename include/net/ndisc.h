@@ -41,9 +41,9 @@ enum {
 	ND_OPT_DNSSL = 31,		/* RFC6106 */
 	ND_OPT_6CO = 34,		/* RFC6775 */
 	ND_OPT_CAPTIVE_PORTAL = 37,	/* RFC7710 */
+	ND_OPT_PREF64 = 38,		/* RFC-ietf-6man-ra-pref64-09 */
 	__ND_OPT_MAX
 };
-
 #define MAX_RTR_SOLICITATION_DELAY	HZ
 
 #define ND_REACHABLE_TIME		(30*HZ)
