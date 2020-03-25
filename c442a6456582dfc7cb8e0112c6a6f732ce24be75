@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6dfe358e_7ea5e661",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2020-03-25T19:46:56Z",
+      "side": 1,
+      "message": "magic number\nit\u0027s also used on line 287",
+      "range": {
+        "startLine": 235,
+        "startChar": 47,
+        "endLine": 235,
+        "endChar": 48
+      },
+      "revId": "c442a6456582dfc7cb8e0112c6a6f732ce24be75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "942722ff_183d3601",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2020-03-25T19:46:56Z",
+      "side": 1,
+      "message": "you already have \"i\" declared above",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 298,
+        "endChar": 11
+      },
+      "revId": "c442a6456582dfc7cb8e0112c6a6f732ce24be75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54853fe3_c5b17634",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2020-03-25T19:46:56Z",
+      "side": 1,
+      "message": "why do you need to keep track of count at this point?",
+      "range": {
+        "startLine": 335,
+        "startChar": 0,
+        "endLine": 335,
+        "endChar": 15
+      },
+      "revId": "c442a6456582dfc7cb8e0112c6a6f732ce24be75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4c45ec4_547f62cd",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2020-03-25T19:46:56Z",
+      "side": 1,
+      "message": "You need to pass ID here.",
+      "range": {
+        "startLine": 546,
+        "startChar": 47,
+        "endLine": 546,
+        "endChar": 48
+      },
+      "revId": "c442a6456582dfc7cb8e0112c6a6f732ce24be75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
