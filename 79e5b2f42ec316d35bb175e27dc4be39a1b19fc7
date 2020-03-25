@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "134b7699_906744fc",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-03-25T21:58:31Z",
+      "side": 1,
+      "message": "OK, done",
+      "parentUuid": "4c9899aa_75d5b66f",
+      "range": {
+        "startLine": 447,
+        "startChar": 3,
+        "endLine": 447,
+        "endChar": 25
+      },
+      "revId": "79e5b2f42ec316d35bb175e27dc4be39a1b19fc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a160e0eb_28a84899",
         "filename": "fs/incfs/data_mgmt.c",
         "patchSetId": 2
@@ -202,6 +226,30 @@
       "side": 1,
       "message": "ditto to the answer",
       "parentUuid": "a160e0eb_28a84899",
+      "range": {
+        "startLine": 456,
+        "startChar": 13,
+        "endLine": 456,
+        "endChar": 24
+      },
+      "revId": "79e5b2f42ec316d35bb175e27dc4be39a1b19fc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4400a24e_456d06ed",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-03-25T21:58:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b432b937_068dc9de",
       "range": {
         "startLine": 456,
         "startChar": 13,
