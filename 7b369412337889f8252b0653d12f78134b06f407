@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af5eb129_172ae2df",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-03-25T01:28:41Z",
+      "side": 1,
+      "message": "This doesn\u0027t match the upstream patch (it has revision \u003d\u003d 1).\n\nI\u0027m not entirely sure what the correct fix is... but changing it to 2 isn\u0027t it.\nSince this is userspace visible versioning.\n\nSome sort of non trivial conflict resolution has to happen... :-(",
+      "range": {
+        "startLine": 718,
+        "startChar": 13,
+        "endLine": 718,
+        "endChar": 14
+      },
+      "revId": "7b369412337889f8252b0653d12f78134b06f407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
