@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d01667af_8fe39de4",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-25T18:54:29Z",
+      "side": 1,
+      "message": "do you want to add the |starting_index| parameter to allow for resumption?",
+      "range": {
+        "startLine": 388,
+        "startChar": 27,
+        "endLine": 389,
+        "endChar": 16
+      },
+      "revId": "bff9a41d2730beee3b6a9ac997ba537b5acf23d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "820366d9_7b84bdd1",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-25T18:54:29Z",
+      "side": 1,
+      "message": "I\u0027d still prefer to have the common [begin, end) open-ended range. It\u0027s actually simpler to handle everywhere. It doesn\u0027t need any +-1s, or \u003c\u003d vs \u003c.",
+      "range": {
+        "startLine": 399,
+        "startChar": 34,
+        "endLine": 399,
+        "endChar": 38
+      },
+      "revId": "bff9a41d2730beee3b6a9ac997ba537b5acf23d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d6d97fe_246174bb",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-25T18:54:29Z",
+      "side": 1,
+      "message": "any this error can be a EINTR, where it would be nice to try copying out the current unfinished range - especially if it\u0027s a long one.",
+      "range": {
+        "startLine": 412,
+        "startChar": 1,
+        "endLine": 412,
+        "endChar": 16
+      },
+      "revId": "bff9a41d2730beee3b6a9ac997ba537b5acf23d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e61026e7_33cfa711",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-25T18:54:29Z",
+      "side": 1,
+      "message": "can this fail? it\u0027s probably better to add a comment explaining why we don\u0027t care here. Or, even, log the error if it fails.",
+      "range": {
+        "startLine": 438,
+        "startChar": 1,
+        "endLine": 439,
+        "endChar": 25
+      },
+      "revId": "bff9a41d2730beee3b6a9ac997ba537b5acf23d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "467f3cf8_78cf213c",
+        "filename": "fs/incfs/data_mgmt.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-25T18:54:29Z",
+      "side": 1,
+      "message": "as I understand this is a breaking change. Need to notify everyone and have a nice failure mode for previous versions of the driver.",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 21
+      },
+      "revId": "bff9a41d2730beee3b6a9ac997ba537b5acf23d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4244353_b54b8f47",
+        "filename": "fs/incfs/data_mgmt.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-25T18:54:29Z",
+      "side": 1,
+      "message": "do you want to define a struct for a range or a bitmap here, or in some other way describe the format of the buffer?",
+      "range": {
+        "startLine": 240,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 22
+      },
+      "revId": "bff9a41d2730beee3b6a9ac997ba537b5acf23d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1c1ed4f_f19fd1b3",
+        "filename": "include/uapi/linux/incrementalfs.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-25T18:54:29Z",
+      "side": 1,
+      "message": "ditto about the starting_index field to let resuming after a EINTR.",
+      "range": {
+        "startLine": 307,
+        "startChar": 1,
+        "endLine": 307,
+        "endChar": 28
+      },
+      "revId": "bff9a41d2730beee3b6a9ac997ba537b5acf23d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca8e69bd_9dedcdf1",
+        "filename": "include/uapi/linux/incrementalfs.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-25T18:54:29Z",
+      "side": 1,
+      "message": "so it will remain the bytes, not ranges written?",
+      "range": {
+        "startLine": 312,
+        "startChar": 14,
+        "endLine": 312,
+        "endChar": 20
+      },
+      "revId": "bff9a41d2730beee3b6a9ac997ba537b5acf23d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

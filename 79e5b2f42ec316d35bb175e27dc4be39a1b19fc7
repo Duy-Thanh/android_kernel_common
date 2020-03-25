@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "4c9899aa_75d5b66f",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-25T18:54:29Z",
+      "side": 1,
+      "message": "No, it\u0027s not. if you update \"out.end \u003d index\" in the beginning of the loop before even checking if the index is filed or not this would make open ranges work. open ranges are *much* easier to work with overall",
+      "parentUuid": "230060c0_8f83fc8f",
+      "range": {
+        "startLine": 447,
+        "startChar": 3,
+        "endLine": 447,
+        "endChar": 25
+      },
+      "revId": "79e5b2f42ec316d35bb175e27dc4be39a1b19fc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a160e0eb_28a84899",
         "filename": "fs/incfs/data_mgmt.c",
         "patchSetId": 2
