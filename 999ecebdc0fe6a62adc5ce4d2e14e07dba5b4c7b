@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36208fe4_b376eaf2",
+        "filename": "drivers/md/dm-bow.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-03-25T14:24:05Z",
+      "side": 1,
+      "message": "I don\u0027t believe we need this",
+      "revId": "999ecebdc0fe6a62adc5ce4d2e14e07dba5b4c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbf66d24_d11f3e81",
+        "filename": "drivers/md/dm-bow.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-03-25T14:24:05Z",
+      "side": 1,
+      "message": "Or this",
+      "revId": "999ecebdc0fe6a62adc5ce4d2e14e07dba5b4c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60eddf66_8dde67a3",
+        "filename": "drivers/md/dm-bow.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-03-25T14:24:05Z",
+      "side": 1,
+      "message": "Or this",
+      "revId": "999ecebdc0fe6a62adc5ce4d2e14e07dba5b4c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "390232a9_8ac6f1a6",
+        "filename": "drivers/md/dm-bow.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-03-25T14:24:05Z",
+      "side": 1,
+      "message": "Neither your fix nor mine is correct. The problem here is that split_range takes a br, splits it into two (in our case - it can split it into three in the non-backup case). However, the way it does this is to use the original range as the top part, and create a new range which it copies over the pointer passed in which is the lower part. It does *not* set the type, so we do not adjust the trim in this code (yours or mine). However, later, when the backup_br is finally used up completely, we do not split it into two, and then your code correctly deletes the original size. So yours is more correct than mine, but still lags the truth. Also yours will go wrong in cases like if the trailing backup range is split in half by a write - then when the upper one is used up, it will delete far more than it should.\n\nThe best fix, given this analysis, is simply to always subtract the size of the backup range - put bc-\u003etrims_total -\u003d range_size(backup_br) before the if statement, and I think that will work!",
+      "revId": "999ecebdc0fe6a62adc5ce4d2e14e07dba5b4c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
