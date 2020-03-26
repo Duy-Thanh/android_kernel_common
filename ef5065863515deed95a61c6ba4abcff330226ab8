@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b6615a7_3bb51965",
+        "filename": "drivers/mmc/host/cqhci-crypto.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-03-26T21:14:45Z",
+      "side": 1,
+      "message": "Missing a return after this.",
+      "range": {
+        "startLine": 129,
+        "startChar": 2,
+        "endLine": 129,
+        "endChar": 49
+      },
+      "revId": "ef5065863515deed95a61c6ba4abcff330226ab8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
