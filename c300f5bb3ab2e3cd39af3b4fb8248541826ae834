@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70ac097d_b53521c8",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2958,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2020-03-26T09:14:33Z",
+      "side": 1,
+      "message": "I\u0027m trying to understand the exact race; one scenario I can come up with is:\n\n1) We get a new oneway transaction, for which we select T1 (which must be waiting in binder_wait_for_work())\n2) We end up in this branch and find out the node was assigned another async transaction, so we need to find another thread\n3) T1 wakes up for unrelated reasons (a signal?), removes itself from waiting_threads again\n4) \n4) T1 enters binder_wait_for_work() again",
+      "range": {
+        "startLine": 2958,
+        "startChar": 3,
+        "endLine": 2958,
+        "endChar": 31
+      },
+      "revId": "c300f5bb3ab2e3cd39af3b4fb8248541826ae834",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
