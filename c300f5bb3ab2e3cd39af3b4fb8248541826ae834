@@ -46,6 +46,30 @@
       "revId": "c300f5bb3ab2e3cd39af3b4fb8248541826ae834",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0b3aa06_57d3fa67",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2958,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-03-26T15:20:56Z",
+      "side": 1,
+      "message": "Yes, that\u0027s how I understand the race (but haven\u0027t confirmed the source of the spurious wake -- must be a signal). Good idea to just wake the thread here instead of requeuing on waiting_threads. I\u0027ll update.\n\nI think we still need thread-\u003eis_selected (or something similar) since any spurious wake prior to queuing will put the thread back on the waiting_threads list unless there is something like thread-\u003eis_selected to prevent it -- which means another client could select the thread while we are changing the priority. So, I think we still need this line, but should replace the list_add below at L2959 with a wake.",
+      "parentUuid": "6d276f5b_980f3931",
+      "range": {
+        "startLine": 2958,
+        "startChar": 3,
+        "endLine": 2958,
+        "endChar": 31
+      },
+      "revId": "c300f5bb3ab2e3cd39af3b4fb8248541826ae834",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
