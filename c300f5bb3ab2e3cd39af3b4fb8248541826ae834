@@ -94,6 +94,30 @@
       "revId": "c300f5bb3ab2e3cd39af3b4fb8248541826ae834",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10f87e7d_e15d6db5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2958,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-03-26T15:59:45Z",
+      "side": 1,
+      "message": "Ah, yes, that\u0027s an issue in the signal case. Good catch. So that should be:\n\n  if (ret !\u003d -ERESTARTSYS)\n    thread-\u003eis_selected \u003d false;\n\nor maybe \"if (ret) ...\"",
+      "parentUuid": "699ad169_010d6c4a",
+      "range": {
+        "startLine": 2958,
+        "startChar": 3,
+        "endLine": 2958,
+        "endChar": 31
+      },
+      "revId": "c300f5bb3ab2e3cd39af3b4fb8248541826ae834",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
