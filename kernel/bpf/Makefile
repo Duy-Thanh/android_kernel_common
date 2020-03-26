@@ -30,3 +30,5 @@ endif
 ifeq ($(CONFIG_BPF_JIT),y)
 obj-$(CONFIG_BPF_SYSCALL) += bpf_struct_ops.o
 endif
+
+UBSAN_SANITIZE := n
