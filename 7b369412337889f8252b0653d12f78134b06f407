@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a5412911_b857166a",
+        "filename": "include/uapi/linux/netfilter/xt_IDLETIMER.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1591842
+      },
+      "writtenOn": "2020-03-26T03:32:10Z",
+      "side": 1,
+      "message": "Yes, this is not present in the upstream patch. But, this is present in Google\u0027s kernel. as per line:49, send_nl_msg was added to this struct. I\u0027m simply ensuring that the v1 struct also has the same field. I didn\u0027t understand why timer_type and send_nl_msg will occupy the same bit. My understanding is that this is 8 byte aligned, so won\u0027t these be adjacent fields?",
+      "parentUuid": "6613c0a4_527e755b",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 18
+      },
+      "revId": "7b369412337889f8252b0653d12f78134b06f407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "af5eb129_172ae2df",
         "filename": "net/netfilter/xt_IDLETIMER.c",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2020-03-25T01:28:41Z",
       "side": 1,
       "message": "This doesn\u0027t match the upstream patch (it has revision \u003d\u003d 1).\n\nI\u0027m not entirely sure what the correct fix is... but changing it to 2 isn\u0027t it.\nSince this is userspace visible versioning.\n\nSome sort of non trivial conflict resolution has to happen... :-(",
+      "range": {
+        "startLine": 718,
+        "startChar": 13,
+        "endLine": 718,
+        "endChar": 14
+      },
+      "revId": "7b369412337889f8252b0653d12f78134b06f407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9897868f_8afbf104",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1591842
+      },
+      "writtenOn": "2020-03-26T03:32:10Z",
+      "side": 1,
+      "message": "Yes, upstream patch doesn\u0027t have .revision in the previous entry i.e. code corresponding to line:706. Now, as Google\u0027s kernel has .revision updated to 1, as per my understanding the .revision field has to be updated for the new entry, if that\u0027s not correct, even I\u0027m not sure what is the right fix.",
+      "parentUuid": "af5eb129_172ae2df",
       "range": {
         "startLine": 718,
         "startChar": 13,
