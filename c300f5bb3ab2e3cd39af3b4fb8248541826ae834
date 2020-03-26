@@ -70,6 +70,30 @@
       "revId": "c300f5bb3ab2e3cd39af3b4fb8248541826ae834",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "699ad169_010d6c4a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2958,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2020-03-26T15:41:04Z",
+      "side": 1,
+      "message": "Ah yes I hadn\u0027t realized that. In that case, don\u0027t we still have a problem if we have a spurious wake and set is_selected to false in L4318?\n\nDoesn\u0027t this also mean this problem existed for synchronous transactions before your sleep fix in 5.4? I guess in that case, if we came into this function with a thread already selected, somebody else could never select that same thread anyway, because of the transaction stack.",
+      "parentUuid": "c0b3aa06_57d3fa67",
+      "range": {
+        "startLine": 2958,
+        "startChar": 3,
+        "endLine": 2958,
+        "endChar": 31
+      },
+      "revId": "c300f5bb3ab2e3cd39af3b4fb8248541826ae834",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
