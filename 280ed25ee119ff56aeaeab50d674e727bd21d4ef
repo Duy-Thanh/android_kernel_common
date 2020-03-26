@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a69e030_f7158fed",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-03-26T17:25:47Z",
+      "side": 1,
+      "message": "here we couldn\u0027t copy the range out. Even if that\u0027s because of a EINTR I doubt we should retry the copying",
+      "range": {
+        "startLine": 437,
+        "startChar": 3,
+        "endLine": 439,
+        "endChar": 10
+      },
+      "revId": "280ed25ee119ff56aeaeab50d674e727bd21d4ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
