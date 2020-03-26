@@ -22,6 +22,30 @@
       "revId": "c300f5bb3ab2e3cd39af3b4fb8248541826ae834",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d276f5b_980f3931",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2958,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2020-03-26T09:20:14Z",
+      "side": 1,
+      "message": "I\u0027m not sure what happened to my comment 😞\n\n1) We get a new oneway transaction, for which we select T1 (which must be waiting in binder_wait_for_work())\n2) We end up in this branch and find out the node was assigned another async transaction, so we need to find another thread; we run until line 2957 before we get scheduled out\n3) T1 wakes up for unrelated reasons (a signal?), removes itself from waiting_threads again\n4) We continue running here, and add T1 back to waiting_threads\n5) Somebody selects T1 for work (but doesn\u0027t queue it yet), and removes it from waiting_threads\n6) T1 enters binder_wait_for_work() again, and adds itself back to waiting_threads\n7) Now somebody else can select T1 again\n\nIf this is indeed the scenario, it seems the problem is adding a thread to waiting_threads in different places. Can we instead just wake up the selected thread in L2959? That will have the thread add itself back to waiting_threads, and feels safer/more maintainable. That is anyway also the documented requirement from select_thread_ilocked:\n\n * Note that calling this function moves the thread off the waiting_threads\n * list, so it can only be woken up by the caller of this function, or a\n * signal. Therefore, callers *should* always wake up the thread this function\n * returns.\n\nthe pending_async fix on L2963 LGTM.",
+      "parentUuid": "70ac097d_b53521c8",
+      "range": {
+        "startLine": 2958,
+        "startChar": 3,
+        "endLine": 2958,
+        "endChar": 31
+      },
+      "revId": "c300f5bb3ab2e3cd39af3b4fb8248541826ae834",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
