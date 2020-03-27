@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fa8fb9a1_55827952",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 12
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-03-27T03:19:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1cc3bb14_45036011",
+      "range": {
+        "startLine": 85,
+        "startChar": 8,
+        "endLine": 85,
+        "endChar": 18
+      },
+      "revId": "4bf0232ff64a7898ecfad73bea4db84d401da85d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b2274ebd_c701a424",
         "filename": "init/Kconfig.gki",
         "patchSetId": 12
@@ -36,6 +60,30 @@
       "writtenOn": "2020-03-27T01:51:22Z",
       "side": 1,
       "message": "Remove. Sandeep took care of this one.",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 15
+      },
+      "revId": "4bf0232ff64a7898ecfad73bea4db84d401da85d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa6bd7d8_8f9b7050",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 12
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-03-27T03:19:26Z",
+      "side": 1,
+      "message": "Uh. I\u0027m not seeing this in the current config? Is there an outstanding patch somewhere?",
+      "parentUuid": "b2274ebd_c701a424",
       "range": {
         "startLine": 86,
         "startChar": 8,
@@ -68,6 +116,30 @@
       "revId": "4bf0232ff64a7898ecfad73bea4db84d401da85d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92e93f08_7a65dee8",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 12
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-03-27T03:19:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "90515db0_cc18948a",
+      "range": {
+        "startLine": 147,
+        "startChar": 8,
+        "endLine": 147,
+        "endChar": 30
+      },
+      "revId": "4bf0232ff64a7898ecfad73bea4db84d401da85d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
