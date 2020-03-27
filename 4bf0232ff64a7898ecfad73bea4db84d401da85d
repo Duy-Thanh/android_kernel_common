@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "7ab4cdb5_47461300",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 12
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-03-27T21:23:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fa6bd7d8_8f9b7050",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 15
+      },
+      "revId": "4bf0232ff64a7898ecfad73bea4db84d401da85d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90515db0_cc18948a",
         "filename": "init/Kconfig.gki",
         "patchSetId": 12
