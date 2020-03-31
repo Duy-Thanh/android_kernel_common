@@ -16,6 +16,24 @@
       "revId": "0729fafb85bd79248b9bd55efad45dc563de7563",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3291889c_8129b090",
+        "filename": "build.config.gki.aarch64",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-03-31T07:27:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a4e7e8d_09c8230d",
+      "revId": "0729fafb85bd79248b9bd55efad45dc563de7563",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
