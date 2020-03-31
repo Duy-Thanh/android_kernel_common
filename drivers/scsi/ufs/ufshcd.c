@@ -338,7 +338,7 @@ static void ufshcd_add_command_trace(struct ufs_hba *hba,
 		unsigned int tag, const char *str)
 {
 	sector_t lba = -1;
-	u8 opcode = 0;
+	u8 opcode = 0, group_id = 0;
 	u32 intr, doorbell;
 	struct ufshcd_lrb *lrbp = &hba->lrb[tag];
 	struct scsi_cmnd *cmd = lrbp->cmd;
@@ -364,13 +364,15 @@ static void ufshcd_add_command_trace(struct ufs_hba *hba,
 				lba = cmd->request->bio->bi_iter.bi_sector;
 			transfer_len = be32_to_cpu(
 				lrbp->ucd_req_ptr->sc.exp_data_transfer_len);
+			if (opcode == WRITE_10)
+				group_id = lrbp->cmd->cmnd[6];
 		}
 	}
 
 	intr = ufshcd_readl(hba, REG_INTERRUPT_STATUS);
 	doorbell = ufshcd_readl(hba, REG_UTP_TRANSFER_REQ_DOOR_BELL);
 	trace_ufshcd_command(dev_name(hba->dev), str, tag,
-				doorbell, transfer_len, intr, lba, opcode);
+			doorbell, transfer_len, intr, lba, opcode, group_id);
 }
 
 static void ufshcd_print_clk_freqs(struct ufs_hba *hba)
@@ -2537,6 +2539,32 @@ static void ufshcd_init_lrb(struct ufs_hba *hba, struct ufshcd_lrb *lrb, int i)
 	lrb->ucd_prdt_dma_addr = cmd_desc_element_addr + prdt_offset;
 }
 
+static int enable_group_id = 0;
+module_param(enable_group_id, uint, 0444);
+MODULE_PARM_DESC(enable_group_id,
+		"Assign a group_id, 10001b, to UFS on REQ_META");
+static inline void ufshcd_prepare_group_id(struct ufs_hba *hba,
+			struct request *rq, struct ufshcd_lrb *lrbp)
+{
+	struct ufs_dev_info *dev_info = &hba->dev_info;
+	u8 opcode;
+
+	if (!enable_group_id)
+		return;
+
+	if (!(rq->cmd_flags & REQ_META))
+		return;
+
+	if (hba->dev_info.wspecversion <= 0x300)
+		return;
+
+	opcode = (u8)(*lrbp->cmd->cmnd);
+	if (opcode == WRITE_10)
+		lrbp->cmd->cmnd[6] = 0x11;
+	else if (opcode == WRITE_16)
+		lrbp->cmd->cmnd[14] = 0x11;
+}
+
 /**
  * ufshcd_queuecommand - main entry point for SCSI requests
  * @host: SCSI host pointer
@@ -2611,6 +2639,8 @@ static int ufshcd_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *cmd)
 	lrbp->task_tag = tag;
 	lrbp->lun = ufshcd_scsi_to_upiu_lun(cmd->device->lun);
 	lrbp->intr_cmd = !ufshcd_is_intr_aggr_allowed(hba) ? true : false;
+
+	ufshcd_prepare_group_id(hba, cmd->request, lrbp);
 
 	ufshcd_prepare_lrbp_crypto(cmd->request, lrbp);
 
