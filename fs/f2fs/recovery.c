@@ -133,6 +133,12 @@ static int recover_dentry(struct inode *inode, struct page *ipage,
 
 	dir = entry->inode;
 
+	if (unlikely(IS_ENCRYPTED(dir) && IS_CASEFOLDED(dir))) {
+		WARN_ON(1);
+		err = -EINVAL;
+		goto out;
+	}
+
 	memset(&fname, 0, sizeof(struct fscrypt_name));
 	fname.disk_name.len = le32_to_cpu(raw_inode->i_namelen);
 	fname.disk_name.name = raw_inode->i_name;

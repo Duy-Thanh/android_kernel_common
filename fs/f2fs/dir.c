@@ -163,7 +163,7 @@ static void f2fs_fname_setup_ci_filename(struct inode *dir,
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
 
-	if (!IS_CASEFOLDED(dir)) {
+	if (!needs_casefold(dir)) {
 		cf_name->name = NULL;
 		return;
 	}
@@ -528,8 +528,19 @@ struct page *f2fs_init_inode_metadata(struct inode *inode, struct inode *dir,
 
 	if (new_name) {
 		init_dent_inode(new_name, page);
-		if (IS_ENCRYPTED(dir))
+		if (IS_ENCRYPTED(dir)) {
 			file_set_enc_name(inode);
+			/*
+			 * This makes fsync() call checkpoint to store dentry.
+			 * Once inode block is checkpointed, it won't mark
+			 * dentry bit, DENT_BIT_SHIFT, in the inode block.
+			 * IOWs, we won't reach out to recover_dentry() which
+			 * requires hash and i_name, even if pino is fixed by
+			 * fsync(). (ref. f2fs_need_dentry_mark())
+			 */
+			if (IS_CASEFOLDED(dir))
+				file_lost_pino(inode);
+		}
 	}
 
 	/*
