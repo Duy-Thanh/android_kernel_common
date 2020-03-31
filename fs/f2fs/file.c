@@ -176,6 +176,8 @@ static inline enum cp_reason_type need_do_checkpoint(struct inode *inode)
 
 	if (!S_ISREG(inode->i_mode))
 		cp_reason = CP_NON_REGULAR;
+	else if (f2fs_encrypted_file(inode) && IS_CASEFOLDED(inode))
+		cp_reason = CP_ENCRYPTED_CASEFOLDED;
 	else if (f2fs_compressed_file(inode))
 		cp_reason = CP_COMPRESSED;
 	else if (inode->i_nlink != 1)

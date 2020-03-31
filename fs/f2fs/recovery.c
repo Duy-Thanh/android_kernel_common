@@ -143,6 +143,10 @@ static int recover_dentry(struct inode *inode, struct page *ipage,
 		goto out;
 	}
 retry:
+	if (f2fs_encrypted_file(dir) && IS_CASEFOLDED(dir)) {
+		err = -EINVAL;
+		goto out;
+	}
 	de = __f2fs_find_entry(dir, &fname, &page);
 	if (de && inode->i_ino == le32_to_cpu(de->ino))
 		goto out_put;
