@@ -735,7 +735,8 @@ struct f2fs_inode_info {
 	unsigned long flags[BITS_TO_LONGS(FI_MAX)];	/* use to pass per-file flags */
 	struct rw_semaphore i_sem;	/* protect fi info */
 	atomic_t dirty_pages;		/* # of dirty pages */
-	f2fs_hash_t chash;		/* hash value of given file name */
+	f2fs_hash_t hash;		/* hash of given file name */
+	f2fs_hash_t chash;		/* cached hash of given file name */
 	unsigned int clevel;		/* maximum level of given file name */
 	struct task_struct *task;	/* lookup and create consistency */
 	struct task_struct *cp_task;	/* separate cp/wb IO stats*/

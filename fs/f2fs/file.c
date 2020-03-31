@@ -21,6 +21,7 @@
 #include <linux/uuid.h>
 #include <linux/file.h>
 #include <linux/nls.h>
+#include <asm/unaligned.h>
 
 #include "f2fs.h"
 #include "node.h"
@@ -161,9 +162,25 @@ static const struct vm_operations_struct f2fs_file_vm_ops = {
 	.page_mkwrite	= f2fs_vm_page_mkwrite,
 };
 
+static int f2fs_recover_dent_inode(const struct qstr *name,
+				struct inode *dir, struct inode *inode)
+{
+	if (!(IS_ENCRYPTED(dir) && IS_CASEFOLDED(dir)))
+		return 1;
+
+	if (name->len < F2FS_NAME_LEN - sizeof(f2fs_hash_t)) {
+		F2FS_I(inode)->hash = f2fs_dentry_hash(dir, name, NULL);
+		/* inode will be dirtied when updating pino afterwards */
+		return 1;
+	}
+	return 0;
+}
+
 static int get_parent_ino(struct inode *inode, nid_t *pino)
 {
 	struct dentry *dentry;
+	struct inode *dir;
+	int fix;
 
 	/*
 	 * Make sure to get the non-deleted alias.  The alias associated with
@@ -173,9 +190,16 @@ static int get_parent_ino(struct inode *inode, nid_t *pino)
 	if (!dentry)
 		return 0;
 
-	*pino = parent_ino(dentry);
+	/* parent inode won't be evicted */
+	dir = igrab(d_inode(dentry->d_parent));
 	dput(dentry);
-	return 1;
+	if (!dir)
+		return 0;
+
+	*pino = dir->i_ino;
+	fix = f2fs_recover_dent_inode(&dentry->d_name, dir, inode);
+	iput(dir);
+	return fix;
 }
 
 static inline enum cp_reason_type need_do_checkpoint(struct inode *inode)

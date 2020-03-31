@@ -10,6 +10,7 @@
 #include <linux/buffer_head.h>
 #include <linux/backing-dev.h>
 #include <linux/writeback.h>
+ #include <asm/unaligned.h>
 
 #include "f2fs.h"
 #include "node.h"
@@ -637,6 +638,14 @@ void f2fs_update_inode(struct inode *inode, struct page *node_page)
 	F2FS_I(inode)->i_disk_time[1] = inode->i_ctime;
 	F2FS_I(inode)->i_disk_time[2] = inode->i_mtime;
 	F2FS_I(inode)->i_disk_time[3] = F2FS_I(inode)->i_crtime;
+
+	if (!file_wrong_pino(inode) && F2FS_I(inode)->hash) {
+		f2fs_hash_t *hash = (f2fs_hash_t *)&ri->i_name[name->len];
+
+		put_unaligned(F2FS_I(inode)->hash, hash);
+		/* writing once is enough */
+		F2FS_I(inode)->hash = 0;
+	}
 
 #ifdef CONFIG_F2FS_CHECK_FS
 	f2fs_inode_chksum_set(F2FS_I_SB(inode), node_page);

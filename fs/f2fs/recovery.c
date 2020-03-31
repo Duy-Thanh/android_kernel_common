@@ -7,6 +7,8 @@
  */
 #include <linux/fs.h>
 #include <linux/f2fs_fs.h>
+#include <asm/unaligned.h>
+
 #include "f2fs.h"
 #include "node.h"
 #include "segment.h"
@@ -143,6 +145,17 @@ static int recover_dentry(struct inode *inode, struct page *ipage,
 		goto out;
 	}
 retry:
+	if (IS_ENCRYPTED(dir) && IS_CASEFOLDED(dir)) {
+		if (fname.disk_name.len > F2FS_NAME_LEN - sizeof(f2fs_hash_t)) {
+			err = -EINVAL;
+			goto out;
+		}
+
+		fname.hash = get_unaligned_le32(
+				&raw_inode->i_name[fname.disk_name.len]);
+		/* Repurpose the minor_hash field to mean "hash is available" */
+		fname.minor_hash = 1;
+	}
 	de = __f2fs_find_entry(dir, &fname, &page);
 	if (de && inode->i_ino == le32_to_cpu(de->ino))
 		goto out_put;
@@ -173,6 +186,9 @@ retry:
 		goto retry;
 	} else if (IS_ERR(page)) {
 		err = PTR_ERR(page);
+	} else if (IS_ENCRYPTED(dir) && IS_CASEFOLDED(dir)) {
+		/* we need a plain file name to add a dentry */
+		err = -EINVAL;
 	} else {
 		err = f2fs_add_dentry(dir, &fname, inode,
 					inode->i_ino, inode->i_mode);
