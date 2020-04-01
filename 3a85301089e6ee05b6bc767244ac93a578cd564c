@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b63500b8_06622312",
+        "filename": "abi_gki_aarch64_qcom_whitelist",
+        "patchSetId": 1
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-04-01T13:18:20Z",
+      "side": 1,
+      "message": "I would also remove these two",
+      "range": {
+        "startLine": 793,
+        "startChar": 0,
+        "endLine": 794,
+        "endChar": 11
+      },
+      "revId": "3a85301089e6ee05b6bc767244ac93a578cd564c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
