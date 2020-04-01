@@ -87,6 +87,30 @@
       "revId": "3a85301089e6ee05b6bc767244ac93a578cd564c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ff8bf74_183e5c5b",
+        "filename": "abi_gki_aarch64_unisoc_whitelist",
+        "patchSetId": 1
+      },
+      "lineNbr": 1450,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-01T14:39:14Z",
+      "side": 1,
+      "message": "good catch, that looks odd.  will track down, thanks.",
+      "parentUuid": "02c56d21_e0bda674",
+      "range": {
+        "startLine": 1450,
+        "startChar": 0,
+        "endLine": 1450,
+        "endChar": 11
+      },
+      "revId": "3a85301089e6ee05b6bc767244ac93a578cd564c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
