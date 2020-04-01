@@ -228,19 +228,17 @@ out:
 }
 EXPORT_SYMBOL(ufshcd_hba_init_crypto_spec);
 
-void ufshcd_crypto_setup_rq_keyslot_manager_spec(struct ufs_hba *hba,
-						 struct request_queue *q)
+void ufshcd_crypto_setup_rq_keyslot_manager(struct ufs_hba *hba,
+					    struct request_queue *q)
 {
 	if ((hba->caps & UFSHCD_CAP_CRYPTO))
 		blk_ksm_register(&hba->ksm, q);
 }
-EXPORT_SYMBOL(ufshcd_crypto_setup_rq_keyslot_manager_spec);
 
-void ufshcd_crypto_destroy_keyslot_manager_spec(struct ufs_hba *hba)
+void ufshcd_crypto_destroy_keyslot_manager(struct ufs_hba *hba)
 {
 	blk_ksm_destroy(&hba->ksm);
 }
-EXPORT_SYMBOL(ufshcd_crypto_destroy_keyslot_manager_spec);
 
 /* Crypto Variant Ops Support */
 
@@ -259,27 +257,6 @@ int ufshcd_hba_init_crypto(struct ufs_hba *hba)
 							 &ufshcd_ksm_ops);
 
 	return ufshcd_hba_init_crypto_spec(hba, &ufshcd_ksm_ops);
-}
-
-void ufshcd_crypto_setup_rq_keyslot_manager(struct ufs_hba *hba,
-					    struct request_queue *q)
-{
-	if (hba->crypto_vops && hba->crypto_vops->setup_rq_keyslot_manager) {
-		hba->crypto_vops->setup_rq_keyslot_manager(hba, q);
-		return;
-	}
-
-	ufshcd_crypto_setup_rq_keyslot_manager_spec(hba, q);
-}
-
-void ufshcd_crypto_destroy_keyslot_manager(struct ufs_hba *hba)
-{
-	if (hba->crypto_vops && hba->crypto_vops->destroy_keyslot_manager) {
-		hba->crypto_vops->destroy_keyslot_manager(hba);
-		return;
-	}
-
-	ufshcd_crypto_destroy_keyslot_manager_spec(hba);
 }
 
 void ufshcd_prepare_lrbp_crypto(struct ufs_hba *hba,
@@ -312,12 +289,6 @@ int ufshcd_complete_lrbp_crypto(struct ufs_hba *hba,
 	return 0;
 }
 
-void ufshcd_crypto_debug(struct ufs_hba *hba)
-{
-	if (hba->crypto_vops && hba->crypto_vops->debug)
-		hba->crypto_vops->debug(hba);
-}
-
 int ufshcd_crypto_suspend(struct ufs_hba *hba,
 			  enum ufs_pm_op pm_op)
 {
@@ -334,10 +305,4 @@ int ufshcd_crypto_resume(struct ufs_hba *hba,
 		return hba->crypto_vops->resume(hba, pm_op);
 
 	return 0;
-}
-
-void ufshcd_crypto_set_vops(struct ufs_hba *hba,
-			    struct ufs_hba_crypto_variant_ops *crypto_vops)
-{
-	hba->crypto_vops = crypto_vops;
 }
