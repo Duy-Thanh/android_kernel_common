@@ -419,8 +419,6 @@ static void ufshcd_print_host_regs(struct ufs_hba *hba)
 	ufshcd_print_clk_freqs(hba);
 
 	ufshcd_vops_dbg_register_dump(hba);
-
-	ufshcd_crypto_debug(hba);
 }
 
 static
@@ -4871,10 +4869,6 @@ static void __ufshcd_transfer_req_compl(struct ufs_hba *hba,
 			result = ufshcd_transfer_rsp_status(hba, lrbp);
 			scsi_dma_unmap(cmd);
 			cmd->result = result;
-#ifdef CONFIG_SCSI_UFS_CRYPTO
-			if (lrbp->crypto_key_slot >= 0)
-				ufshcd_complete_lrbp_crypto(hba, cmd, lrbp);
-#endif
 			/* Mark completed command as NULL in LRB */
 			lrbp->cmd = NULL;
 			lrbp->compl_time_stamp = ktime_get();
