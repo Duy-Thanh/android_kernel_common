@@ -46,6 +46,24 @@
       "revId": "3a85301089e6ee05b6bc767244ac93a578cd564c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb6c83be_681c6c78",
+        "filename": "abi_gki_aarch64_qcom_whitelist",
+        "patchSetId": 1
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-04-01T14:04:19Z",
+      "side": 1,
+      "message": "luckily it\u0027s dead in R\nsadly not in aosp still.\n\nFor real, if possible kill them. I\u0027ve seen many OEMs reading from partitions instead of using firmware requests, and for copying files into their custom partitions for logging ( ex Asus has asdf where it literally copies files in it, same for OnePlus with reserve1 )\nThis shouldn\u0027t be allowed, and looks ugly.",
+      "parentUuid": "",
+      "revId": "3a85301089e6ee05b6bc767244ac93a578cd564c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
