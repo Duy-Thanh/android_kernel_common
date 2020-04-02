@@ -1002,9 +1002,12 @@ struct task_struct {
 	struct held_lock		held_locks[MAX_LOCK_DEPTH];
 #endif
 
-#ifdef CONFIG_UBSAN
-	unsigned int			in_ubsan;
-#endif
+	/*
+	 * Unused unless CONFIG_UBSAN is set.
+	 * This is nevertheless defined unconditional to maintain ABI compatibility
+	 * between kernels that have this feature enabled and those that do not.
+	 */
+	unsigned int in_ubsan;
 
 	/* Journalling filesystem info: */
 	void				*journal_info;
