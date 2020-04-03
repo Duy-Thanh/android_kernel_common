@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "f353f2d0_574c7c32",
+        "filename": "fs/f2fs/file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-03T23:07:23Z",
+      "side": 1,
+      "message": "Isn\u0027t this case unreachable, since CASEFOLD is only set on directories?  See:\n\n /* Flags that are appropriate for regular files (all but dir-specific ones). */\n #define F2FS_REG_FLMASK         (~(F2FS_DIRSYNC_FL | F2FS_PROJINHERIT_FL | \\\n                                F2FS_CASEFOLD_FL))",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 38
+      },
+      "revId": "fb7f1631f7351aebbb213ce6dd7586f306e0cd50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c2c43d50_a7d5a81d",
         "filename": "fs/f2fs/recovery.c",
         "patchSetId": 3
