@@ -16,6 +16,24 @@
       "revId": "b8a72201a6a0b2f5a1e9aca331a0a44b80c308d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17cd8636_c39611b2",
+        "filename": "block/blk-crypto-fallback.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-03T23:57:13Z",
+      "side": 1,
+      "message": "This is still v6, so there\u0027s still the fallback when programming a keyslot fails:\n\n        /* Get device keyslot if supported */\n        if (keyslot_manager_crypto_mode_supported(q-\u003eksm,\n                                                  bc-\u003ebc_key-\u003ecrypto_mode,\n                                                  bc-\u003ebc_key-\u003edata_unit_size,\n                                                  bc-\u003ebc_key-\u003eis_hw_wrapped)) {\n                err \u003d bio_crypt_ctx_acquire_keyslot(bc, q-\u003eksm);\n                if (!err)\n                        return 0;\n\n                pr_warn_once(\"Failed to acquire keyslot for %s (err\u003d%d).  Falling back to crypto API.\\n\",\n                             bio-\u003ebi_disk-\u003edisk_name, err);\n        }\n\n        /* Fallback to crypto API */\n        err \u003d blk_crypto_fallback_submit_bio(bio_ptr);\n        if (err)\n                goto out;\n\nSo, it\u0027s theoretically possible to get into blk-crypto-fallback with a wrapped key.\n\nBut for v9 it did look like the checks here were unnecessary and could be removed.",
+      "parentUuid": "1869b9ea_e0231096",
+      "revId": "b8a72201a6a0b2f5a1e9aca331a0a44b80c308d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
