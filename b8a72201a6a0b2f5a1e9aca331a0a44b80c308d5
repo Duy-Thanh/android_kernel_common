@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1869b9ea_e0231096",
+        "filename": "block/blk-crypto-fallback.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-04-03T23:51:50Z",
+      "side": 1,
+      "message": "Since we\u0027re checking for wrapped keys now in blk_crypto_start_using_mode, do we still need this check here? I don\u0027t think it can be triggered anymore...",
+      "revId": "b8a72201a6a0b2f5a1e9aca331a0a44b80c308d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
