@@ -30,6 +30,7 @@ static inline unsigned long topology_get_freq_scale(int cpu)
 	return per_cpu(freq_scale, cpu);
 }
 
+<<<<<<< HEAD   (2fb9b7 ANDROID: Incremental fs: Fix remount)
 DECLARE_PER_CPU(unsigned long, max_freq_scale);
 
 struct sched_domain;
@@ -38,6 +39,9 @@ unsigned long topology_get_max_freq_scale(struct sched_domain *sd, int cpu)
 {
 	return per_cpu(max_freq_scale, cpu);
 }
+=======
+bool arch_freq_counters_available(struct cpumask *cpus);
+>>>>>>> BRANCH (1a323e x86: get rid of 'errret' argument to __get_user_xyz() macros)
 
 DECLARE_PER_CPU(unsigned long, thermal_pressure);
 

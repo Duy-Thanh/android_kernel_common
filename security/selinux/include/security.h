@@ -79,6 +79,7 @@ enum {
 	POLICYDB_CAPABILITY_ALWAYSNETWORK,
 	POLICYDB_CAPABILITY_CGROUPSECLABEL,
 	POLICYDB_CAPABILITY_NNP_NOSUID_TRANSITION,
+	POLICYDB_CAPABILITY_GENFS_SECLABEL_SYMLINKS,
 	__POLICYDB_CAPABILITY_MAX
 };
 #define POLICYDB_CAPABILITY_MAX (__POLICYDB_CAPABILITY_MAX - 1)
@@ -108,7 +109,14 @@ struct selinux_state {
 	bool checkreqprot;
 	bool initialized;
 	bool policycap[__POLICYDB_CAPABILITY_MAX];
+<<<<<<< HEAD   (2fb9b7 ANDROID: Incremental fs: Fix remount)
 	bool android_netlink_route;
+=======
+
+	struct page *status_page;
+	struct mutex status_lock;
+
+>>>>>>> BRANCH (1a323e x86: get rid of 'errret' argument to __get_user_xyz() macros)
 	struct selinux_avc *avc;
 	struct selinux_ss *ss;
 } __randomize_layout;
@@ -210,11 +218,19 @@ static inline bool selinux_policycap_nnp_nosuid_transition(void)
 	return state->policycap[POLICYDB_CAPABILITY_NNP_NOSUID_TRANSITION];
 }
 
+<<<<<<< HEAD   (2fb9b7 ANDROID: Incremental fs: Fix remount)
 static inline bool selinux_android_nlroute_getlink(void)
 {
 	struct selinux_state *state = &selinux_state;
 
 	return state->android_netlink_route;
+=======
+static inline bool selinux_policycap_genfs_seclabel_symlinks(void)
+{
+	struct selinux_state *state = &selinux_state;
+
+	return state->policycap[POLICYDB_CAPABILITY_GENFS_SECLABEL_SYMLINKS];
+>>>>>>> BRANCH (1a323e x86: get rid of 'errret' argument to __get_user_xyz() macros)
 }
 
 int security_mls_enabled(struct selinux_state *state);
