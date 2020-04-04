@@ -1,0 +1,46 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002290982",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1278796?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "41af4058_391cb5d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-04-04T04:59:38Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Yurii Zubrytskyi \u003czyy@google.com\u003e",
+      "revId": "62442abc5f26de898c64839406c7592282080a67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002290982",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1278796?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5b174d10_518e3112",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-04-04T04:59:38Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Yurii Zubrytskyi \u003czyy@google.com\u003e",
+      "revId": "62442abc5f26de898c64839406c7592282080a67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
