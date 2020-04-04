@@ -49,6 +49,29 @@
     },
     {
       "key": {
+        "uuid": "2d8dbec9_9ec70ddf",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1664259
+      },
+      "writtenOn": "2020-04-04T06:49:01Z",
+      "side": 1,
+      "message": "remove extra semicolon",
+      "range": {
+        "startLine": 201,
+        "startChar": 0,
+        "endLine": 201,
+        "endChar": 55
+      },
+      "revId": "7b369412337889f8252b0653d12f78134b06f407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "af5eb129_172ae2df",
         "filename": "net/netfilter/xt_IDLETIMER.c",
         "patchSetId": 6
@@ -89,6 +112,52 @@
         "startChar": 13,
         "endLine": 718,
         "endChar": 14
+      },
+      "revId": "7b369412337889f8252b0653d12f78134b06f407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a146c95_aedd5cc9",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1664259
+      },
+      "writtenOn": "2020-04-04T06:49:01Z",
+      "side": 1,
+      "message": "755 is not needed",
+      "range": {
+        "startLine": 755,
+        "startChar": 27,
+        "endLine": 755,
+        "endChar": 39
+      },
+      "revId": "7b369412337889f8252b0653d12f78134b06f407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09daec22_8f88fb03",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1664259
+      },
+      "writtenOn": "2020-04-04T06:49:01Z",
+      "side": 1,
+      "message": "Line number 774 is not required.",
+      "range": {
+        "startLine": 774,
+        "startChar": 36,
+        "endLine": 774,
+        "endChar": 37
       },
       "revId": "7b369412337889f8252b0653d12f78134b06f407",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
