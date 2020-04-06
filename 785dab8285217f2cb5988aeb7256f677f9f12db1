@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce66ce8e_847ad82e",
+        "filename": "include/linux/mmc/host.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-04-06T19:29:25Z",
+      "side": 1,
+      "message": "I think we need description for this operation, like the others in this struct",
+      "revId": "785dab8285217f2cb5988aeb7256f677f9f12db1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
