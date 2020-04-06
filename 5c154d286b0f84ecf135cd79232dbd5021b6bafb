@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d38d9f0_30f18ab8",
+        "filename": "drivers/mmc/host/cqhci.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-06T11:12:53Z",
+      "side": 1,
+      "message": "why is this line commented out?",
+      "range": {
+        "startLine": 638,
+        "startChar": 0,
+        "endLine": 638,
+        "endChar": 49
+      },
+      "revId": "5c154d286b0f84ecf135cd79232dbd5021b6bafb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
