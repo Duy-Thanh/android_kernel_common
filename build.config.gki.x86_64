@@ -2,3 +2,9 @@
 . ${ROOT_DIR}/common/build.config.x86_64
 . ${ROOT_DIR}/common/build.config.gki
 
+ABI_DEFINITION=abi_gki_x86_64.xml
+KMI_WHITELIST=abi_gki_x86_64_whitelist
+ADDITIONAL_KMI_WHITELISTS="
+abi_gki_x86_64_cuttlefish_whitelist
+"
+TRIM_NONLISTED_KMI=1
