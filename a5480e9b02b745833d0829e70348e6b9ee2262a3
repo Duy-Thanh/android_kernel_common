@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be2aca2e_937a541b",
+        "filename": "drivers/mmc/host/Kconfig",
+        "patchSetId": 7
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-06T11:11:20Z",
+      "side": 1,
+      "message": "can this be a module?  If not, why not?",
+      "range": {
+        "startLine": 1051,
+        "startChar": 1,
+        "endLine": 1051,
+        "endChar": 5
+      },
+      "revId": "a5480e9b02b745833d0829e70348e6b9ee2262a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "251d2348_a0714d16",
+        "filename": "drivers/mmc/host/cqhci-crypto.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-06T11:11:20Z",
+      "side": 1,
+      "message": "no license?  Not good.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 26
+      },
+      "revId": "a5480e9b02b745833d0829e70348e6b9ee2262a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b0c1fd3_7ddc67f0",
+        "filename": "drivers/mmc/host/cqhci-crypto.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-06T11:11:20Z",
+      "side": 1,
+      "message": "EXPORT_SYMBOL_GPL()?  for this and all others?",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 13
+      },
+      "revId": "a5480e9b02b745833d0829e70348e6b9ee2262a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f3939af_ee9dfcc7",
+        "filename": "drivers/mmc/host/cqhci-crypto.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-06T11:11:20Z",
+      "side": 1,
+      "message": "why doesn\u0027t the cqhci_writel() function handle these crazy wmb() calls for you automatically?",
+      "range": {
+        "startLine": 134,
+        "startChar": 1,
+        "endLine": 134,
+        "endChar": 4
+      },
+      "revId": "a5480e9b02b745833d0829e70348e6b9ee2262a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5ca1222_0c287bfa",
+        "filename": "drivers/mmc/host/cqhci-crypto.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-06T11:11:20Z",
+      "side": 1,
+      "message": "dev_err() for here and all others?  No driver should ever have a pr_* call in it, you always have access to a \u0027struct device\u0027.",
+      "range": {
+        "startLine": 280,
+        "startChar": 2,
+        "endLine": 280,
+        "endChar": 8
+      },
+      "revId": "a5480e9b02b745833d0829e70348e6b9ee2262a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "741bcb1b_d8658741",
+        "filename": "drivers/mmc/host/cqhci-crypto.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-06T11:11:20Z",
+      "side": 1,
+      "message": "why ifdef here for the whole file?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 30
+      },
+      "revId": "a5480e9b02b745833d0829e70348e6b9ee2262a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
