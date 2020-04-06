@@ -46,6 +46,30 @@
       "revId": "faa0b81077cda778047930b17ae58605bde821ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c03cd23_3b308f7e",
+        "filename": "drivers/firmware/qcom_scm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1577720
+      },
+      "writtenOn": "2020-04-06T20:09:20Z",
+      "side": 1,
+      "message": "Thanks for the test. Also, you are right. I think the init level was changed to satisfy the clocks\u0027 dependency requirements, which should be fine when we have of_devlink in-place.",
+      "parentUuid": "f7eff040_ca34c289",
+      "range": {
+        "startLine": 639,
+        "startChar": 0,
+        "endLine": 639,
+        "endChar": 15
+      },
+      "revId": "faa0b81077cda778047930b17ae58605bde821ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
