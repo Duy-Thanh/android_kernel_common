@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3bfe0768_faabdd74",
+        "filename": "drivers/firmware/qcom_scm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1577720
+      },
+      "writtenOn": "2020-04-06T19:41:43Z",
+      "side": 1,
+      "message": "Not sure if you got a chance to do a boot-test, but since this subsys_initcall() will be translated to module_init(), I was wondering if you\u0027ve seen any issues with respect to this?",
+      "range": {
+        "startLine": 639,
+        "startChar": 0,
+        "endLine": 639,
+        "endChar": 15
+      },
+      "revId": "faa0b81077cda778047930b17ae58605bde821ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
