@@ -393,6 +393,157 @@ int trusty_share_memory_compat(struct device *dev, uint64_t *id,
 }
 EXPORT_SYMBOL(trusty_share_memory_compat);
 
+static int trusty_reclaim_memory_check_pages(struct trusty_state *s,
+					     uint64_t id,
+					     struct scatterlist *sglist,
+					     unsigned int nents)
+{
+	int ret;
+	struct scatterlist *sg;
+	size_t count;
+	unsigned int i;
+	size_t len;
+	size_t endpoint_count = 1;
+	struct spci_memory_transaction_descriptor *mtd_req = s->spci_tx;
+	size_t mtd_req_size =
+		offsetof(struct spci_memory_transaction_descriptor,
+			 endpoint_memory_access_descriptors[endpoint_count]);
+	struct spci_memory_transaction_descriptor *mtd_resp = s->spci_rx;
+	struct spci_endpoint_memory_access_descriptor *emad_resp =
+		&mtd_resp->endpoint_memory_access_descriptors[0];
+	size_t comp_mrd_offset =
+		offsetof(struct spci_memory_transaction_descriptor,
+			 endpoint_memory_access_descriptors[endpoint_count]);
+	struct spci_composite_memory_region_descriptor *comp_mrd;
+	struct spci_constituent_memory_region_descriptor *cons_mrd =
+		comp_mrd->address_range_array;
+	size_t cons_mrd_offset = (void *)cons_mrd - s->spci_tx;
+	struct smc_ret8 smc_ret;
+
+	dev_dbg(s->dev, "%s\n", __func__);
+
+	len = 0;
+	for_each_sg(sglist, sg, nents, i)
+		len += sg_dma_len(sg);
+
+	mutex_lock(&s->share_memory_msg_lock);
+
+	memset(mtd_req, 0, mtd_req_size);
+	mtd_req->sender_id = s->spci_local_id;
+	mtd_req->handle = id;
+
+	smc_ret = trusty_smc8(SMC_FC_SPCI_MEM_RETRIEVE_REQ, 0, 0, mtd_req_size,
+			      mtd_req_size, 0, 0, 0);
+	if (smc_ret.r0 != SMC_FC_SPCI_MEM_RETRIEVE_RESP) {
+		dev_err(s->dev, "%s: SMC_FC_SPCI_MEM_RETRIEVE_REQ failed 0x%x 0x%x 0x%x\n",
+			__func__, smc_ret.r0, smc_ret.r1, smc_ret.r2);
+		ret = -EIO;
+		goto err_retrieve;
+	}
+
+	comp_mrd_offset = emad_resp->composite_memory_region_descriptor_offset;
+	if (comp_mrd_offset > PAGE_SIZE - sizeof(*comp_mrd)) {
+		dev_err(s->dev, "%s: got bad comp_mrd_offset, %zd\n",
+			__func__, comp_mrd_offset);
+		ret = -EIO;
+		goto err_bad_desc;
+	}
+	comp_mrd = s->spci_rx + comp_mrd_offset;
+	cons_mrd = comp_mrd->address_range_array;
+	cons_mrd_offset = (void *)cons_mrd - s->spci_rx;
+
+	if (comp_mrd->total_page_count != len / PAGE_SIZE) {
+		dev_err(s->dev, "%s: got bad total_page_count, %d != %zd\n",
+			__func__, comp_mrd->total_page_count, len / PAGE_SIZE);
+		ret = -EIO;
+		goto err_bad_desc;
+	}
+
+	if (comp_mrd->address_range_count != nents) {
+		dev_err(s->dev, "%s: got bad address_range_count, %d != %zd\n",
+			__func__, comp_mrd->address_range_count, nents);
+		ret = -EIO;
+		goto err_bad_desc;
+	}
+
+	if (smc_ret.r4 != cons_mrd_offset + nents * sizeof(*cons_mrd)) {
+		dev_err(s->dev, "%s: got bad total len, %ld != %zd\n",
+			__func__, smc_ret.r4,
+			cons_mrd_offset + nents * sizeof(*cons_mrd));
+		ret = -EIO;
+		goto err_bad_desc;
+	}
+
+	sg = sglist;
+	count = nents;
+	while (count) {
+		size_t i;
+		size_t lcount = (smc_ret.r3 - cons_mrd_offset) /
+				sizeof(*cons_mrd);
+		size_t fragment_len = lcount * sizeof(*cons_mrd) +
+				      cons_mrd_offset;
+		if (smc_ret.r3 != fragment_len || smc_ret.r3 > PAGE_SIZE ||
+		    !lcount || lcount > count) {
+			dev_err(s->dev,
+				"%s: got bad fragment len, %ld/%zd, lcount %zd, count %zd\n",
+				__func__, smc_ret.r3, fragment_len, lcount,
+				count);
+			ret = -EIO;
+			goto err_bad_desc;
+		}
+
+		for (i = 0; i < lcount; i++) {
+			if (cons_mrd[i].address != sg_dma_address(sg)) {
+				dev_err(s->dev, "%s: got bad address, %lx != %lx\n",
+					__func__, cons_mrd[i].address,
+					sg_dma_address(sg));
+				ret = -EIO;
+				goto err_bad_desc;
+			}
+			if (cons_mrd[i].page_count !=
+			    sg_dma_len(sg) / PAGE_SIZE) {
+				dev_err(s->dev, "%s: got bad page count, 0x%x != 0x%lx\n",
+					__func__, cons_mrd[i].page_count,
+					sg_dma_len(sg) / PAGE_SIZE);
+				ret = -EIO;
+				goto err_bad_desc;
+			}
+			sg = sg_next(sg);
+		}
+		count -= lcount;
+		if (!count) {
+			ret = 0;
+			break;
+		}
+
+		smc_ret = trusty_smc8(SMC_FC_SPCI_MEM_OP_RESUME, smc_ret.r5, 0,
+				      0, 0, 0, 0, 0);
+		if (smc_ret.r0 != SMC_FC_SPCI_MEM_RETRIEVE_RESP) {
+			dev_err(s->dev, "%s: SMC_FC_SPCI_MEM_OP_RESUME failed 0x%x 0x%x 0x%\n",
+				__func__, smc_ret.r0, smc_ret.r1, smc_ret.r2);
+			ret = -EIO;
+			goto err_retrieve;
+		}
+
+		cons_mrd = s->spci_rx;
+		cons_mrd_offset = 0;
+	}
+
+	count = nents;
+
+err_bad_desc:
+err_retrieve:
+	mutex_unlock(&s->share_memory_msg_lock);
+
+	if (!ret) {
+		dev_dbg(s->dev, "%s: done\n", __func__);
+		return 0;
+	}
+
+	dev_err(s->dev, "%s: failed %d", __func__, ret);
+	return ret;
+}
+
 int trusty_reclaim_memory(struct device *dev, uint64_t id,
 			  struct scatterlist *sglist, unsigned int nents)
 {
@@ -419,6 +570,10 @@ int trusty_reclaim_memory(struct device *dev, uint64_t id,
 		dev_dbg(s->dev, "%s: done\n", __func__);
 		return 0;
 	}
+
+	ret = trusty_reclaim_memory_check_pages(s, id, sglist, nents);
+	if (ret)
+		return ret;
 
 	mutex_lock(&s->share_memory_msg_lock);
 
