@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc3438e6_045efbfc",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-04-06T22:06:09Z",
+      "side": 1,
+      "message": "Since this is only reading one field, why not make that explicit?\nlog_state.generation_id \u003d READ_ONCE(mi-\u003emi_log.rl_state.generation_id) + 1;",
+      "range": {
+        "startLine": 79,
+        "startChar": 14,
+        "endLine": 79,
+        "endChar": 23
+      },
+      "revId": "3ee52ff3367d84807454310cce5ed31732a33a3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65c9e07b_7338b876",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-04-06T22:06:09Z",
+      "side": 1,
+      "message": "READ_ONCE is not the same as atomic, is it? This can, at least in theory, return 0 when it\u0027s not 0",
+      "revId": "3ee52ff3367d84807454310cce5ed31732a33a3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e60b9bb_22f34f82",
+        "filename": "fs/incfs/data_mgmt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-04-06T22:06:09Z",
+      "side": 1,
+      "message": "Is this wise? I feel that it\u0027s not inconceivable someone might use a \u003e256 page log buffer, at least in some test environment. And this is not space critical. I\u0027m guessing this is to maintain partial compatibility with userspace?",
+      "revId": "3ee52ff3367d84807454310cce5ed31732a33a3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce364a20_0956f413",
+        "filename": "fs/incfs/data_mgmt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-04-06T22:06:09Z",
+      "side": 1,
+      "message": "Just add that \u0027Taken for writing when resizing the buffer\u0027\nIt\u0027s a bit confusing to have a read/write lock that\u0027s taken for reading when you\u0027re writing.",
+      "revId": "3ee52ff3367d84807454310cce5ed31732a33a3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecd3afb4_176e2f14",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-04-06T22:06:09Z",
+      "side": 1,
+      "message": "is it OK not to change this to READ_ONCE? I\u0027m guessing yes, because we initialize it exactly once.",
+      "range": {
+        "startLine": 643,
+        "startChar": 22,
+        "endLine": 643,
+        "endChar": 28
+      },
+      "revId": "3ee52ff3367d84807454310cce5ed31732a33a3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
