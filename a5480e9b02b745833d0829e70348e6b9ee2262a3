@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "eb14a8a9_407734f8",
+        "filename": "drivers/mmc/host/Kconfig",
+        "patchSetId": 7
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1661652
+      },
+      "writtenOn": "2020-04-07T10:20:15Z",
+      "side": 1,
+      "message": "It can not be loaded as module as Crypto engine is closely tied with host controller and needs initialization during early bootup along with host controller. Also It can not be removed dynamically as it will break data encryption at host controller Hardware.",
+      "parentUuid": "be2aca2e_937a541b",
+      "range": {
+        "startLine": 1051,
+        "startChar": 1,
+        "endLine": 1051,
+        "endChar": 5
+      },
+      "revId": "a5480e9b02b745833d0829e70348e6b9ee2262a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "251d2348_a0714d16",
         "filename": "drivers/mmc/host/cqhci-crypto.c",
         "patchSetId": 7
@@ -45,6 +69,30 @@
       "revId": "a5480e9b02b745833d0829e70348e6b9ee2262a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0fc17c1_e0c93c5b",
+        "filename": "drivers/mmc/host/cqhci-crypto.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1661652
+      },
+      "writtenOn": "2020-04-07T10:20:15Z",
+      "side": 1,
+      "message": "License is under review internally as of now. Will update in subsequent patches.",
+      "parentUuid": "251d2348_a0714d16",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 26
+      },
+      "revId": "a5480e9b02b745833d0829e70348e6b9ee2262a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "a700e61d_16c81d6a",
+        "filename": "drivers/mmc/host/cqhci-crypto.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1661652
+      },
+      "writtenOn": "2020-04-07T10:20:15Z",
+      "side": 1,
+      "message": "Actually exporting these are not needed at all. Fixed.",
+      "parentUuid": "7b0c1fd3_7ddc67f0",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 13
+      },
+      "revId": "a5480e9b02b745833d0829e70348e6b9ee2262a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6f3939af_ee9dfcc7",
         "filename": "drivers/mmc/host/cqhci-crypto.c",
         "patchSetId": 7
@@ -91,6 +163,30 @@
       "revId": "a5480e9b02b745833d0829e70348e6b9ee2262a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a58de33_951b6ec4",
+        "filename": "drivers/mmc/host/cqhci-crypto.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1661652
+      },
+      "writtenOn": "2020-04-07T10:20:15Z",
+      "side": 1,
+      "message": "cqhci_writel() function is legacy. I am not sure why this do not handle wmb() call but one reason can be that putting it inside the write call by default will always invoke barrier operation which might not be necessary in all scenarios. So it is up to user to decide when to invoke a memory barrier operation to ensure onus is on caller of the API and caller must be fully aware of the use case which is invoking a barrier operation.",
+      "parentUuid": "6f3939af_ee9dfcc7",
+      "range": {
+        "startLine": 134,
+        "startChar": 1,
+        "endLine": 134,
+        "endChar": 4
+      },
+      "revId": "a5480e9b02b745833d0829e70348e6b9ee2262a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "d6084705_27ca1210",
+        "filename": "drivers/mmc/host/cqhci-crypto.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1661652
+      },
+      "writtenOn": "2020-04-07T10:20:15Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "c5ca1222_0c287bfa",
+      "range": {
+        "startLine": 280,
+        "startChar": 2,
+        "endLine": 280,
+        "endChar": 8
+      },
+      "revId": "a5480e9b02b745833d0829e70348e6b9ee2262a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "741bcb1b_d8658741",
         "filename": "drivers/mmc/host/cqhci-crypto.h",
         "patchSetId": 7
@@ -137,6 +257,30 @@
       "revId": "a5480e9b02b745833d0829e70348e6b9ee2262a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26a11237_eda49776",
+        "filename": "drivers/mmc/host/cqhci-crypto.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1661652
+      },
+      "writtenOn": "2020-04-07T10:20:15Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "741bcb1b_d8658741",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 30
+      },
+      "revId": "a5480e9b02b745833d0829e70348e6b9ee2262a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
