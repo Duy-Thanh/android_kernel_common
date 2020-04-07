@@ -22,6 +22,30 @@
       "revId": "5c154d286b0f84ecf135cd79232dbd5021b6bafb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "967abc6d_7c9ba50f",
+        "filename": "drivers/mmc/host/cqhci.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1661652
+      },
+      "writtenOn": "2020-04-07T13:14:23Z",
+      "side": 1,
+      "message": "This was shared as to-do patch and this is fixed/implemented in I72b85d572d7c76b966e34b80e7e8eca83a2bb35f.",
+      "parentUuid": "0d38d9f0_30f18ab8",
+      "range": {
+        "startLine": 638,
+        "startChar": 0,
+        "endLine": 638,
+        "endChar": 49
+      },
+      "revId": "5c154d286b0f84ecf135cd79232dbd5021b6bafb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
