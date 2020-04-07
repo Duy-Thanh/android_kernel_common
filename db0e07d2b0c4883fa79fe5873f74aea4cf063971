@@ -46,6 +46,121 @@
       "revId": "db0e07d2b0c4883fa79fe5873f74aea4cf063971",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "522597d3_816e5e2e",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-07T18:10:25Z",
+      "side": 1,
+      "message": "if you are under a spinlock, you need GPF_ATOMIC also here, right?",
+      "range": {
+        "startLine": 69,
+        "startChar": 41,
+        "endLine": 69,
+        "endChar": 49
+      },
+      "revId": "db0e07d2b0c4883fa79fe5873f74aea4cf063971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46dcc606_89d04edf",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-07T18:10:25Z",
+      "side": 1,
+      "message": "the WRITE_ONCE stuff is new, shouldn\u0027t that be in a separate patch?  This is doing multiple things here...",
+      "range": {
+        "startLine": 76,
+        "startChar": 2,
+        "endLine": 76,
+        "endChar": 12
+      },
+      "revId": "db0e07d2b0c4883fa79fe5873f74aea4cf063971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "229f7c9b_981cb4cc",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-07T18:10:25Z",
+      "side": 1,
+      "message": "you changed the logic here, previously you always set this to NULL the first time in, if you don\u0027t have memory, now you will not, is that ok?",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 49
+      },
+      "revId": "db0e07d2b0c4883fa79fe5873f74aea4cf063971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8dcf49d6_c8443539",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-07T18:10:25Z",
+      "side": 1,
+      "message": "again, change in logic, if size is 0, you still wake everything up, is that ok?",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 32
+      },
+      "revId": "db0e07d2b0c4883fa79fe5873f74aea4cf063971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39eb96d8_ac068c18",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-07T18:10:25Z",
+      "side": 1,
+      "message": "why READ_ONCE?",
+      "range": {
+        "startLine": 592,
+        "startChar": 11,
+        "endLine": 592,
+        "endChar": 20
+      },
+      "revId": "db0e07d2b0c4883fa79fe5873f74aea4cf063971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
