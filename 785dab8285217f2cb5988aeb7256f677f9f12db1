@@ -16,6 +16,24 @@
       "revId": "785dab8285217f2cb5988aeb7256f677f9f12db1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e959799_8841f941",
+        "filename": "include/linux/mmc/host.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1661652
+      },
+      "writtenOn": "2020-04-07T11:47:32Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "ce66ce8e_847ad82e",
+      "revId": "785dab8285217f2cb5988aeb7256f677f9f12db1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
