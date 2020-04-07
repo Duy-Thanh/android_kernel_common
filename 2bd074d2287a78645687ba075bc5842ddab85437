@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1664ed93_0c235e33",
+        "filename": "Documentation/devicetree/bindings/display/msm/gmu.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-04-07T07:36:14Z",
+      "side": 1,
+      "message": "From discussion with Jordan this morning, I think the dma-ranges bits can be dropped too, since he changes his approach and that bit didn\u0027t go upstream.",
+      "revId": "2bd074d2287a78645687ba075bc5842ddab85437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
