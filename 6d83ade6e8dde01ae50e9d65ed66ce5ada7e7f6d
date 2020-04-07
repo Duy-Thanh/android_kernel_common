@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c10a924_85784090",
+        "filename": "drivers/mmc/host/cqhci-crypto.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-04-07T11:07:21Z",
+      "side": 1,
+      "message": "Are the wmb calls actually necessary?\nBased on the kernel documentation (https://www.kernel.org/doc/Documentation/memory-barriers.txt), under section \"KERNEL I/O BARRIER EFFECTS\"\n\n\"All readX() and writeX() accesses to the same peripheral are ordered with respect to each other\"\n\nand that readX_relaxed and writeX_relaxed\n\n\"are still guaranteed to be ordered with respect to other accesses from the same CPU thread\nto the same peripheral when operating on __iomem pointers mapped with the default\nI/O attributes.\"",
+      "revId": "6d83ade6e8dde01ae50e9d65ed66ce5ada7e7f6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
