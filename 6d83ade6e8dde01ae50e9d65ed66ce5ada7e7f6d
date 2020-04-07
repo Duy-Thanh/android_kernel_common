@@ -16,6 +16,24 @@
       "revId": "6d83ade6e8dde01ae50e9d65ed66ce5ada7e7f6d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4dc5a4c9_25034061",
+        "filename": "drivers/mmc/host/cqhci-crypto.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-07T12:22:39Z",
+      "side": 1,
+      "message": "agreed, wmb() does nor \"flush\" anything.",
+      "parentUuid": "9c10a924_85784090",
+      "revId": "6d83ade6e8dde01ae50e9d65ed66ce5ada7e7f6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }

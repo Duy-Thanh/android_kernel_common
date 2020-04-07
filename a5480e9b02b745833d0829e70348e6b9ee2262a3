@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "30412fed_4762ccdc",
+        "filename": "drivers/mmc/host/cqhci-crypto.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-07T12:22:39Z",
+      "side": 1,
+      "message": "I think we all know what the license will be, but if you need to wait, that\u0027s fine 😊",
+      "parentUuid": "e0fc17c1_e0c93c5b",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 26
+      },
+      "revId": "a5480e9b02b745833d0829e70348e6b9ee2262a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b0c1fd3_7ddc67f0",
         "filename": "drivers/mmc/host/cqhci-crypto.c",
         "patchSetId": 7
