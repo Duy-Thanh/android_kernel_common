@@ -22,6 +22,30 @@
       "revId": "db0e07d2b0c4883fa79fe5873f74aea4cf063971",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5f5dad1_dea0bb0d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-04-07T18:09:06Z",
+      "side": 1,
+      "message": "yes, as here we\u0027re taking a read lock for an extended period of time (e.g. incfs_collect_logged_reads() in data_mgmt.c) - and expect the \"writer\" to wait for those. The only \"writer\" is a remount call handler, and is completely fine to wait for milliseconds",
+      "parentUuid": "b2cd6c37_9c70352d",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 27
+      },
+      "revId": "db0e07d2b0c4883fa79fe5873f74aea4cf063971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
