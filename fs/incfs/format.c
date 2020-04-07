@@ -90,7 +90,7 @@ static int truncate_backing_file(struct backing_file_context *bfc,
 }
 
 /* Append a given number of zero bytes to the end of the backing file. */
-static int append_zeros(struct backing_file_context *bfc, size_t len)
+static int append_zeros(struct backing_file_context *bfc, size_t len, bool sync)
 {
 	loff_t file_size = 0;
 	loff_t new_last_byte_offset = 0;
@@ -115,7 +115,9 @@ static int append_zeros(struct backing_file_context *bfc, size_t len)
 	if (res)
 		return res;
 
-	res = vfs_fsync_range(bfc->bc_file, file_size, file_size + len, 1);
+	if (sync)
+		res = vfs_fsync_range(bfc->bc_file, file_size, file_size + len,
+				      1);
 	return res;
 }
 
@@ -186,7 +188,7 @@ static int append_md_to_backing_file(struct backing_file_context *bfc,
 	/* Write the metadata record to the end of the backing file */
 	record_offset = file_pos;
 	new_md_offset = cpu_to_le64(record_offset);
-	result = write_to_bf(bfc, record, record_size, file_pos, true);
+	result = write_to_bf(bfc, record, record_size, file_pos, false);
 	if (result)
 		return result;
 
@@ -207,7 +209,7 @@ static int append_md_to_backing_file(struct backing_file_context *bfc,
 				    fh_first_md_offset);
 	}
 	result = write_to_bf(bfc, &new_md_offset, sizeof(new_md_offset),
-				file_pos, true);
+			     file_pos, false);
 	if (result)
 		return result;
 
@@ -250,7 +252,7 @@ int incfs_write_blockmap_to_backing_file(struct backing_file_context *bfc,
 
 	/* Reserve 0-filled space for the blockmap body in the backing file. */
 	file_end = incfs_get_end_offset(bfc->bc_file);
-	result = append_zeros(bfc, map_size);
+	result = append_zeros(bfc, map_size, false);
 	if (result)
 		return result;
 
@@ -354,7 +356,7 @@ int incfs_write_signature_to_backing_file(struct backing_file_context *bfc,
 		 * If root hash is not the only hash in the tree.
 		 * reserve 0-filled space for the tree.
 		 */
-		result = append_zeros(bfc, tree_size + alignment);
+		result = append_zeros(bfc, tree_size + alignment, true);
 		if (result)
 			goto err;
 
