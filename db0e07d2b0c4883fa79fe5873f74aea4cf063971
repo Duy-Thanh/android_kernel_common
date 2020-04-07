@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "33aedb2a_4fe7d166",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-04-07T18:16:31Z",
+      "side": 1,
+      "message": "I\u0027m not, line 74 takes the lock",
+      "parentUuid": "522597d3_816e5e2e",
+      "range": {
+        "startLine": 69,
+        "startChar": 41,
+        "endLine": 69,
+        "endChar": 49
+      },
+      "revId": "db0e07d2b0c4883fa79fe5873f74aea4cf063971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "46dcc606_89d04edf",
         "filename": "fs/incfs/data_mgmt.c",
         "patchSetId": 9
@@ -118,6 +142,54 @@
     },
     {
       "key": {
+        "uuid": "f0579155_1437b5fd",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-04-07T18:16:31Z",
+      "side": 1,
+      "message": "yes, old code was really bad and mostly didn\u0027t work correctly here. This CL is the result of the first ~10 remount calls 😊",
+      "parentUuid": "229f7c9b_981cb4cc",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 49
+      },
+      "revId": "db0e07d2b0c4883fa79fe5873f74aea4cf063971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0573a238_e8b77de6",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-04-07T18:16:31Z",
+      "side": 1,
+      "message": "as I understand write_once would guarantee the readers see the new buffer value. Old code didn\u0027t care about multithreading at all, and this CL is a single fix for the issue",
+      "parentUuid": "46dcc606_89d04edf",
+      "range": {
+        "startLine": 76,
+        "startChar": 2,
+        "endLine": 76,
+        "endChar": 12
+      },
+      "revId": "db0e07d2b0c4883fa79fe5873f74aea4cf063971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8dcf49d6_c8443539",
         "filename": "fs/incfs/data_mgmt.c",
         "patchSetId": 9
@@ -129,6 +201,30 @@
       "writtenOn": "2020-04-07T18:10:25Z",
       "side": 1,
       "message": "again, change in logic, if size is 0, you still wake everything up, is that ok?",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 32
+      },
+      "revId": "db0e07d2b0c4883fa79fe5873f74aea4cf063971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5e28909_6f99368b",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-04-07T18:16:31Z",
+      "side": 1,
+      "message": "thanks, that\u0027s something I missed",
+      "parentUuid": "8dcf49d6_c8443539",
       "range": {
         "startLine": 278,
         "startChar": 0,
@@ -161,6 +257,30 @@
       "revId": "db0e07d2b0c4883fa79fe5873f74aea4cf063971",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e4dcf86_1818f734",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-04-07T18:16:31Z",
+      "side": 1,
+      "message": "my understanding of read/write_once is it guarantees the reads happen at this place and the ordering of stuff around it. rl_size can change in the remount handler, and I want to make sure the new buffer value is available together with it here",
+      "parentUuid": "39eb96d8_ac068c18",
+      "range": {
+        "startLine": 592,
+        "startChar": 11,
+        "endLine": 592,
+        "endChar": 20
+      },
+      "revId": "db0e07d2b0c4883fa79fe5873f74aea4cf063971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
