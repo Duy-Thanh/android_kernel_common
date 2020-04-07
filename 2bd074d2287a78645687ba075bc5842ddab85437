@@ -16,6 +16,24 @@
       "revId": "2bd074d2287a78645687ba075bc5842ddab85437",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51b9fe48_efc5b4f9",
+        "filename": "Documentation/devicetree/bindings/display/msm/gmu.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-07T08:18:03Z",
+      "side": 1,
+      "message": "That\u0027s great, but this file now just matches what is upstream, so that type of cleanup can happen there, no need to do it here 😊",
+      "parentUuid": "1664ed93_0c235e33",
+      "revId": "2bd074d2287a78645687ba075bc5842ddab85437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
