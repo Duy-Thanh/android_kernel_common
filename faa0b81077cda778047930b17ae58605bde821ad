@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "e9f1159e_c9d719b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-04-08T00:15:26Z",
+      "side": 1,
+      "message": "The PCIEPORTBUS change already has the correct bug.",
+      "parentUuid": "e3b8871f_25ae1261",
+      "revId": "faa0b81077cda778047930b17ae58605bde821ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3bfe0768_faabdd74",
         "filename": "drivers/firmware/qcom_scm.c",
         "patchSetId": 1
