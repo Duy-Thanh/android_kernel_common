@@ -57,7 +57,7 @@ static int fmp_ufshcd_map_sg_crypto(struct ufs_hba *hba,
 	struct request_queue *q = cmd->request->q;
 	int sg_segments = scsi_sg_count(lrbp->cmd);
 	struct scatterlist *sg;
-	struct fmp_crypto_info *fmp_info;
+	struct fmp_crypto_info fmp_info;
 	struct fmp_request req;
 	int ret = 0;
 	int idx = 0;
@@ -79,14 +79,10 @@ static int fmp_ufshcd_map_sg_crypto(struct ufs_hba *hba,
 		}
 		return 0;
 	}
+	fmp_info.enc_mode = EXYNOS_FMP_FILE_ENC;
+	fmp_info.algo_mode = EXYNOS_FMP_ALGO_MODE_AES_XTS;
 
-	fmp_info = keyslot_manager_private(q->ksm);
-	if (!fmp_info) {
-		pr_err("%s: fails to get fmp_info. ret:%d\n", __func__, ret);
-		return -EINVAL;
-	}
-
-	ret = exynos_fmp_setkey(fmp_info,
+	ret = exynos_fmp_setkey(&fmp_info,
 		(u8 *)bio->bi_crypt_context->bc_key->raw,
 		bio->bi_crypt_context->bc_key->size, 0);
 	if (ret) {
@@ -103,7 +99,7 @@ encrypt:
 		if (!req.fips)
 			iv = bio->bi_crypt_context->bc_dun[0] + idx;
 		req.table = prd;
-		ret = exynos_fmp_crypt(fmp_info, &req);
+		ret = exynos_fmp_crypt(&fmp_info, &req);
 		if (ret) {
 			pr_err("%s: fails to crypt fmp key. ret:%d\n", __func__, ret);
 			return ret;
@@ -121,7 +117,7 @@ static int fmp_ufshcd_complete_lrbp_crypto(struct ufs_hba *hba,
 	struct request_queue *q = cmd->request->q;
 	int sg_segments = scsi_sg_count(lrbp->cmd);
 	struct scatterlist *sg;
-	struct fmp_crypto_info *fmp_info;
+	struct fmp_crypto_info fmp_info;
 	struct fmp_request req;
 	int ret = 0;
 	int idx = 0;
@@ -130,19 +126,13 @@ static int fmp_ufshcd_complete_lrbp_crypto(struct ufs_hba *hba,
 	if (!bio || !q)
 		return 0;
 
-	if (!q->ksm || !bio->bi_crypt_context)
+	if (!q->ksm || !bio_crypt_should_process(cmd->request))
 		return 0;
-
-	fmp_info = keyslot_manager_private(q->ksm);
-	if (!fmp_info) {
-		pr_err("%s: fails to get fmp_info. ret:%d\n", __func__, ret);
-		return -EINVAL;
-	}
 
 	prd = (struct ufshcd_sg_entry *)lrbp->ucd_prdt_ptr;
 	scsi_for_each_sg(lrbp->cmd, sg, sg_segments, idx) {
 		req.table = prd;
-		ret = exynos_fmp_clear(fmp_info, &req);
+		ret = exynos_fmp_clear(&fmp_info, &req);
 		if (ret) {
 			pr_warn("%s: fails to clear fips\n", __func__);
 			break;
@@ -171,8 +161,6 @@ static const struct keyslot_mgmt_ll_ops fmp_ksm_ops = {
 	.keyslot_evict		= fmp_ufshcd_crypto_keyslot_evict,
 };
 
-static struct fmp_crypto_info fmp_info;
-
 static int fmp_ufshcd_hba_init_crypto_spec(struct ufs_hba *hba,
 					const struct keyslot_mgmt_ll_ops *ksm_ops)
 {
@@ -180,10 +168,8 @@ static int fmp_ufshcd_hba_init_crypto_spec(struct ufs_hba *hba,
 		[BLK_ENCRYPTION_MODE_AES_256_XTS] = 4096,
 	};
 
-	fmp_info.enc_mode = EXYNOS_FMP_FILE_ENC;
-	fmp_info.algo_mode = EXYNOS_FMP_ALGO_MODE_AES_XTS;
 	hba->ksm = keyslot_manager_create_passthrough(NULL, &fmp_ksm_ops,
-					  crypto_modes_supported, &fmp_info);
+					  crypto_modes_supported, NULL);
 	if (!hba->ksm) {
 		pr_info("%s fails to get keyslot manager\n", __func__);
 		return -EINVAL;
