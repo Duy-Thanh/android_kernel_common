@@ -34,6 +34,24 @@
       "revId": "6d83ade6e8dde01ae50e9d65ed66ce5ada7e7f6d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c078fe2_aadaa730",
+        "filename": "drivers/mmc/host/cqhci-crypto.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1661652
+      },
+      "writtenOn": "2020-04-08T08:55:06Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "4dc5a4c9_25034061",
+      "revId": "6d83ade6e8dde01ae50e9d65ed66ce5ada7e7f6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
