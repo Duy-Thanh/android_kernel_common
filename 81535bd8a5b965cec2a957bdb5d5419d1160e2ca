@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fbc61952_d8869fd2",
+        "filename": "drivers/irqchip/qcom-pdc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1674446
+      },
+      "writtenOn": "2020-04-08T19:06:14Z",
+      "side": 1,
+      "message": "This function is not exported as GPL. Did this not report an issue?",
+      "range": {
+        "startLine": 512,
+        "startChar": 1,
+        "endLine": 512,
+        "endChar": 28
+      },
+      "revId": "81535bd8a5b965cec2a957bdb5d5419d1160e2ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
