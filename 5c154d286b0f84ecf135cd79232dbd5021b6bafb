@@ -46,6 +46,30 @@
       "revId": "5c154d286b0f84ecf135cd79232dbd5021b6bafb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fdd3e456_b028cae5",
+        "filename": "drivers/mmc/host/cqhci.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-08T09:06:41Z",
+      "side": 1,
+      "message": "Don\u0027t add bugs/issues that you have to resolve later on 😊",
+      "parentUuid": "967abc6d_7c9ba50f",
+      "range": {
+        "startLine": 638,
+        "startChar": 0,
+        "endLine": 638,
+        "endChar": 49
+      },
+      "revId": "5c154d286b0f84ecf135cd79232dbd5021b6bafb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
