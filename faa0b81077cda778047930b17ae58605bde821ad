@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "afd258ff_ecdf6ff8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-04-08T04:11:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9f1159e_c9d719b0",
+      "revId": "faa0b81077cda778047930b17ae58605bde821ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3bfe0768_faabdd74",
         "filename": "drivers/firmware/qcom_scm.c",
         "patchSetId": 1
