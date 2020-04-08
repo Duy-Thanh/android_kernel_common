@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (f737d0 ANDROID: fix build problem in drivers/soc/qcom/rpmh-rsc.c)
 // SPDX-License-Identifier: GPL-2.0
 /*
  * RTC subsystem, initialize system time on startup
@@ -65,3 +66,5 @@ err_open:
 
 	return err;
 }
+=======
+>>>>>>> BRANCH (7e6342 Merge tag 'acpi-5.7-rc1-2' of git://git.kernel.org/pub/scm/l)
