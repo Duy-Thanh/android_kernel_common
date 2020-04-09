@@ -1,0 +1,25 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002365401",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1281748?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "18f54a32_50eeb19e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-04-09T00:37:58Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nANDROID: Patch only relevant for Android, unlikely to be upstreamed",
+      "revId": "6278bcc10b1029b0f08818c36a9e37331de45937",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
