@@ -46,6 +46,30 @@
       "revId": "81535bd8a5b965cec2a957bdb5d5419d1160e2ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa8da9d7_f080eb18",
+        "filename": "drivers/irqchip/qcom-pdc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-04-09T19:40:56Z",
+      "side": 1,
+      "message": "Ok, so I think this is a problem. I did indeed find that building and loading the qcom-pdc driver as a module doesn\u0027t cause any trouble for db845c. However Lina\u0027s point that it uses a non-exported symbol is very concerning.\n\nThe reason I\u0027m not running into trouble is that the db845c doesn\u0027t actually use the qcom-pdc driver. There\u0027s no actual user of the\"qcom,sdm845-pdc\" compatible string in the android-5.4 tree.  The driver seems to load ok, but nothing calls qcom_pdc_init (Though I\u0027m not sure yet why we don\u0027t see missing symbol errors on module load? - maybe dead code removal? That\u0027s not clear).\n\nWe need to decide if we can safely move qcom-pdc to a module (and what device can we test that with), or if this effort to move the QCOM_SCM driver to a module is actually what is wanted.",
+      "parentUuid": "d9e745e5_cfa26bbd",
+      "range": {
+        "startLine": 512,
+        "startChar": 1,
+        "endLine": 512,
+        "endChar": 28
+      },
+      "revId": "81535bd8a5b965cec2a957bdb5d5419d1160e2ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
