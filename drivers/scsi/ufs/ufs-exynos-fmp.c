@@ -31,15 +31,10 @@ enum fmp_crypto_api {
 	api_max,
 };
 
-static void fmp_ufshcd_crypto_setup_rq_keyslot_manager_spec(struct ufs_hba *hba,
-						 struct request_queue *q)
+static void fmp_ufshcd_crypto_setup_rq_keyslot_manager(struct ufs_hba *hba,
+						       struct request_queue *q)
 {
 	q->ksm = hba->ksm;
-}
-
-static void fmp_ufshcd_crypto_destroy_rq_keyslot_manager(struct ufs_hba *hba,
-					      struct request_queue *q)
-{
 }
 
 static int fmp_ufshcd_prepare_lrbp_crypto(struct ufs_hba *hba,
@@ -142,33 +137,18 @@ static int fmp_ufshcd_complete_lrbp_crypto(struct ufs_hba *hba,
 	return 0;
 }
 
-static int fmp_ufshcd_crypto_keyslot_program(struct keyslot_manager *ksm,
-					 const struct blk_crypto_key *key,
-					 unsigned int slot)
-{
-	return 0;
-}
-
-static int fmp_ufshcd_crypto_keyslot_evict(struct keyslot_manager *ksm,
-				       const struct blk_crypto_key *key,
-				       unsigned int slot)
-{
-	return 0;
-}
-
 static const struct keyslot_mgmt_ll_ops fmp_ksm_ops = {
-	.keyslot_program	= fmp_ufshcd_crypto_keyslot_program,
-	.keyslot_evict		= fmp_ufshcd_crypto_keyslot_evict,
 };
 
-static int fmp_ufshcd_hba_init_crypto_spec(struct ufs_hba *hba,
-					const struct keyslot_mgmt_ll_ops *ksm_ops)
+static int fmp_ufshcd_hba_init_crypto(struct ufs_hba *hba,
+				      const struct keyslot_mgmt_ll_ops *ksm_ops)
 {
 	unsigned int crypto_modes_supported[BLK_ENCRYPTION_MODE_MAX] = {
 		[BLK_ENCRYPTION_MODE_AES_256_XTS] = 4096,
 	};
 
 	hba->ksm = keyslot_manager_create_passthrough(NULL, &fmp_ksm_ops,
+					  BLK_CRYPTO_FEATURE_STANDARD_KEYS,
 					  crypto_modes_supported, NULL);
 	if (!hba->ksm) {
 		pr_info("%s fails to get keyslot manager\n", __func__);
@@ -177,30 +157,16 @@ static int fmp_ufshcd_hba_init_crypto_spec(struct ufs_hba *hba,
 	return 0;
 }
 
-static void fmp_ufshcd_enable(struct ufs_hba *hba)
-{
-}
-
-static int fmp_ufshcd_suspend_crypto(struct ufs_hba *hba, enum ufs_pm_op pm_op)
-{
-	return 0;
-}
-
-static int fmp_ufshcd_resume_crypto(struct ufs_hba *hba, enum ufs_pm_op pm_op)
-{
-	exynos_fmp_sec_cfg(0, 0, 0);
-	return 0;
-}
+/* Move to exynos_ufs_resume(), i.e. ufs_hba_variant_ops::resume() */
+/*static int fmp_ufshcd_resume_crypto(struct ufs_hba *hba, enum ufs_pm_op pm_op)*/
+/*{*/
+	/*exynos_fmp_sec_cfg(0, 0, 0);*/
+	/*return 0;*/
+/*}*/
 
 static struct ufs_hba_crypto_variant_ops exynos_ufs_fmp_ops = {
-	.setup_rq_keyslot_manager = fmp_ufshcd_crypto_setup_rq_keyslot_manager_spec,
-	.destroy_rq_keyslot_manager = fmp_ufshcd_crypto_destroy_rq_keyslot_manager,
-	.hba_init_crypto = fmp_ufshcd_hba_init_crypto_spec,
-	.enable = fmp_ufshcd_enable,
-	.disable = fmp_ufshcd_enable,
-	.suspend = fmp_ufshcd_suspend_crypto,
-	.resume = fmp_ufshcd_resume_crypto,
-	.debug = NULL,
+	.setup_rq_keyslot_manager = fmp_ufshcd_crypto_setup_rq_keyslot_manager,
+	.hba_init_crypto = fmp_ufshcd_hba_init_crypto,
 	.map_sg_crypto = fmp_ufshcd_map_sg_crypto,
 	.prepare_lrbp_crypto = fmp_ufshcd_prepare_lrbp_crypto,
 	.complete_lrbp_crypto = fmp_ufshcd_complete_lrbp_crypto,
