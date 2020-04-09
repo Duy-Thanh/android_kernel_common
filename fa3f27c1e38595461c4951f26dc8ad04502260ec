@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf33654f_e524de41",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-04-09T15:23:10Z",
+      "side": 1,
+      "message": "drivers/clk/imx/Kconfig:        def_bool ARCH_MXC\ndrivers/irqchip/Kconfig:        default ARCH_MXC\ndrivers/irqchip/Kconfig:        def_bool y if ARCH_MXC || COMPILE_TEST\ndrivers/net/ethernet/freescale/Kconfig: default ARCH_MXC || SOC_IMX28 if ARM\ndrivers/phy/freescale/Kconfig:  default ARCH_MXC \u0026\u0026 ARM64\ndrivers/reset/Kconfig:  default SOC_IMX7D || (ARM64 \u0026\u0026 ARCH_MXC)\n\nCan you make sure all of these drivers are either disabled in this change, or you have made the necessary changes to build them as modules instead? (irqchip, clk/imx, imx ethernet, phy driver and reset driver). Thanks!",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 15
+      },
+      "revId": "fa3f27c1e38595461c4951f26dc8ad04502260ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdba7d67_b5063632",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-04-09T15:23:10Z",
+      "side": 1,
+      "message": "can this be modularized? we can take the changes",
+      "range": {
+        "startLine": 309,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 21
+      },
+      "revId": "fa3f27c1e38595461c4951f26dc8ad04502260ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21b8c64f_3988559e",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-04-09T15:23:10Z",
+      "side": 1,
+      "message": "this should be possible to modularize, with changes. we can take the changes",
+      "range": {
+        "startLine": 384,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 17
+      },
+      "revId": "fa3f27c1e38595461c4951f26dc8ad04502260ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
