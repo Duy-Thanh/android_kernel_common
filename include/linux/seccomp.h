@@ -11,10 +11,46 @@
 
 #ifdef CONFIG_SECCOMP
 
+#include <linux/mutex.h>
+#include <linux/refcount.h>
 #include <linux/thread_info.h>
 #include <asm/seccomp.h>
 
+struct bpf_prog;
+struct notification;
 struct seccomp_filter;
+/**
+ * struct seccomp_filter - container for seccomp BPF programs
+ *
+ * @usage: reference count to manage the object lifetime.
+ *         get/put helpers should be used when accessing an instance
+ *         outside of a lifetime-guarded section.  In general, this
+ *         is only needed for handling filters shared across tasks.
+ * @log: true if all actions except for SECCOMP_RET_ALLOW should be logged
+ * @prev: points to a previously installed, or inherited, filter
+ * @prog: the BPF program to evaluate
+ * @notif: the struct that holds all notification related information
+ * @notify_lock: A lock for all notification-related accesses.
+ *
+ * seccomp_filter objects are organized in a tree linked via the @prev
+ * pointer.  For any task, it appears to be a singly-linked list starting
+ * with current->seccomp.filter, the most recently attached or inherited filter.
+ * However, multiple filters may share a @prev node, by way of fork(), which
+ * results in a unidirectional tree existing in memory.  This is similar to
+ * how namespaces work.
+ *
+ * seccomp_filter objects should never be modified after being attached
+ * to a task_struct (other than @usage).
+ */
+struct seccomp_filter {
+	refcount_t usage;
+	bool log;
+	struct seccomp_filter *prev;
+	struct bpf_prog *prog;
+	struct notification *notif;
+	struct mutex notify_lock;
+};
+
 /**
  * struct seccomp - the state of a seccomp'ed process
  *

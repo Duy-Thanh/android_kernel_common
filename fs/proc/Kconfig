@@ -107,3 +107,8 @@ config PROC_PID_ARCH_STATUS
 config PROC_CPU_RESCTRL
 	def_bool n
 	depends on PROC_FS
+
+config PROC_PID_SECCOMP
+	bool "/proc/<pid>/seccomp support"
+	help
+	  Provides an interface to read back a seccomp filter of a process.

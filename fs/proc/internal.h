@@ -273,6 +273,11 @@ extern struct proc_dir_entry proc_root;
 extern void proc_self_init(void);
 
 /*
+ * seccomp.c
+ */
+extern const struct file_operations proc_pid_seccomp_operations;
+
+/*
  * task_[no]mmu.c
  */
 struct mem_size_stats;
