@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "e84449e0_839a5584",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-04-10T15:21:31Z",
+      "side": 1,
+      "message": "That sounds like the right approach. It\u0027s better if you can upstream your changes. We require that you at least send them upstream for review. However, we can still take your changes in GKI. You can send upstream and then post them on here too with \"Link:\" tags in your commit message.",
+      "parentUuid": "a1ee557a_62285f89",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 15
+      },
+      "revId": "fa3f27c1e38595461c4951f26dc8ad04502260ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bdba7d67_b5063632",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
