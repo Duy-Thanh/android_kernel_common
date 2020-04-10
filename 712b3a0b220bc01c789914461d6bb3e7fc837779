@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "756b50cf_305276e3",
+        "filename": "drivers/base/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2070,
+      "author": {
+        "id": 1206463
+      },
+      "writtenOn": "2020-04-10T09:31:43Z",
+      "side": 1,
+      "message": "Hi Saravana,\n\n    We observe this part will take much time during the dts populating (during of_platform_default_populate_init()) if we have a big dts(about ~300 nodes).\n    Did you find similar issue on your side? Any refine we can do?\n    Thanks so much!",
+      "range": {
+        "startLine": 2070,
+        "startChar": 1,
+        "endLine": 2070,
+        "endChar": 42
+      },
+      "revId": "712b3a0b220bc01c789914461d6bb3e7fc837779",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
