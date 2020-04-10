@@ -1301,6 +1301,9 @@ static int of_fwnode_add_links(const struct fwnode_handle *fwnode,
 	if (unlikely(!is_of_node(fwnode)))
 		return 0;
 
+	if (of_devlink_defer)
+		return -ENODEV;
+
 	return of_link_to_suppliers(dev, to_of_node(fwnode));
 }
 
