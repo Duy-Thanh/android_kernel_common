@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a1ee557a_62285f89",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2020-04-10T01:49:37Z",
+      "side": 1,
+      "message": "ok. We are trying to make those driver dependency on ARCH_MXC as module. Does these change in Kconfig will upstream to AOSP or linux community?",
+      "parentUuid": "cf33654f_e524de41",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 15
+      },
+      "revId": "fa3f27c1e38595461c4951f26dc8ad04502260ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bdba7d67_b5063632",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "cc344903_869b0e4f",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2020-04-10T01:49:37Z",
+      "side": 1,
+      "message": "ok. Will make it as module.",
+      "parentUuid": "bdba7d67_b5063632",
+      "range": {
+        "startLine": 309,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 21
+      },
+      "revId": "fa3f27c1e38595461c4951f26dc8ad04502260ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "21b8c64f_3988559e",
         "filename": "arch/arm64/configs/gki_defconfig",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2020-04-09T15:23:10Z",
       "side": 1,
       "message": "this should be possible to modularize, with changes. we can take the changes",
+      "range": {
+        "startLine": 384,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 17
+      },
+      "revId": "fa3f27c1e38595461c4951f26dc8ad04502260ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3075009e_a6d87bc9",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2020-04-10T01:49:37Z",
+      "side": 1,
+      "message": "ok. I will try to make it as module.",
+      "parentUuid": "21b8c64f_3988559e",
       "range": {
         "startLine": 384,
         "startChar": 0,
