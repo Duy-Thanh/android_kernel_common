@@ -22,6 +22,30 @@
       "revId": "712b3a0b220bc01c789914461d6bb3e7fc837779",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab1a4550_1ddb266f",
+        "filename": "drivers/base/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2070,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-04-10T17:09:57Z",
+      "side": 1,
+      "message": "Ah, thanks for reminding me about this. This was one of the things at the bottom of my TODO list. Do you have any hard numbers on the time spent here that\u0027s not useful (as in, calls to there where no new device links are made)? Without hard numbers, it\u0027s going to be hard to push for an optimization for this upstream. Also, this part of the code is tricky. It might be easy to fix it for your case, but it could break some other corner case.\n\nI haven\u0027t seen any noticeable delays in boot due to this but I didn\u0027t take measurements either. Just eye balling the boot time.",
+      "parentUuid": "756b50cf_305276e3",
+      "range": {
+        "startLine": 2070,
+        "startChar": 1,
+        "endLine": 2070,
+        "endChar": 42
+      },
+      "revId": "712b3a0b220bc01c789914461d6bb3e7fc837779",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
