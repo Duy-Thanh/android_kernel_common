@@ -38,6 +38,7 @@ struct alias_prop {
 extern struct mutex of_mutex;
 extern struct list_head aliases_lookup;
 extern struct kset *of_kset;
+extern bool of_devlink_defer;
 
 #if defined(CONFIG_OF_DYNAMIC)
 extern int of_property_notify(int action, struct device_node *np,
