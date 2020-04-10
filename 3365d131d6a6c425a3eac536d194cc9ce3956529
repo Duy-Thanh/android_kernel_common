@@ -1,0 +1,46 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002403193",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1284712?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "d4b86dfa_7408f2ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-04-10T17:58:09Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Bhargav Gurappadi \u003cbhargavg1@codeaurora.org\u003e",
+      "revId": "3365d131d6a6c425a3eac536d194cc9ce3956529",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002403193",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1284712?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "a55f2e59_133effbd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-04-10T17:58:09Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a Bug: or Fixes: line",
+      "revId": "3365d131d6a6c425a3eac536d194cc9ce3956529",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
