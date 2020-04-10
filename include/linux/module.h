@@ -28,6 +28,14 @@
 #include <linux/percpu.h>
 #include <asm/module.h>
 
+// test gki
+struct gki_test {
+  char test_char;
+  int  test_int;
+};
+
+extern struct gki_test gki_test_2;
+
 /* Not Yet Implemented */
 #define MODULE_SUPPORTED_DEVICE(name)
 

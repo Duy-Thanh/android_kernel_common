@@ -27,6 +27,7 @@ static void sprd_clk_set_regmap(const struct sprd_clk_desc *desc,
 	int i;
 	struct sprd_clk_common *cclk;
 
+    gki_test_1.test_int = 1;
 	for (i = 0; i < desc->num_clk_clks; i++) {
 		cclk = desc->clk_clks[i];
 		if (!cclk)

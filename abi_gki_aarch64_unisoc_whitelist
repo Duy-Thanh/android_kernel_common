@@ -646,6 +646,7 @@
   divider_get_val
   divider_recalc_rate
   divider_round_rate_parent
+  gki_test_1
   of_clk_hw_onecell_get
 
 # required by dwc3-haps.ko

@@ -14,6 +14,9 @@
 #include <linux/platform_device.h>
 #include <linux/scpi_protocol.h>
 
+struct gki_test gki_test_2;
+EXPORT_SYMBOL(gki_test_2);
+
 struct scpi_clk {
 	u32 id;
 	struct clk_hw hw;
