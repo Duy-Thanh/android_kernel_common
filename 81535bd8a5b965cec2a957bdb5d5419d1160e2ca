@@ -94,6 +94,30 @@
       "revId": "81535bd8a5b965cec2a957bdb5d5419d1160e2ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f96e0f88_3c7699d8",
+        "filename": "drivers/irqchip/qcom-pdc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-04-10T18:08:37Z",
+      "side": 1,
+      "message": "So yea, I\u0027ve backported the changes to enable the pdc on db845c. But the dts wakeup-parent line added to the tlmm causes the board to fail to boot (when PDC is a module) in early boot.\n\nSo that turned into a rabbit hole of trying to get earlycon working, and it seems UFS isn\u0027t loading (nor pinctrl), but I\u0027m still a bit stuck on why that dts change causes that (I\u0027m guessing its missing something like the of_devlink bits, but am unsure).\n\nAdditionally Saravana pointed out that IRQCHIP_DECLARE becomes a no-op if MODULE is enabled for the driver, which explains why we didn\u0027t see the export symbol warning, since the init code really is dead in that case. So I\u0027ve reworked the platform device/probe bits, and did finally see the export issue in the build (along with two other missing exports).\n\nI\u0027ll continue to work today on narrowing down why adding the wakup-parent link causes pinctrl driver to not load (and the board to fail booting), and then will feel better about moving it to a module.",
+      "parentUuid": "99abcc87_b4f49130",
+      "range": {
+        "startLine": 512,
+        "startChar": 1,
+        "endLine": 512,
+        "endChar": 28
+      },
+      "revId": "81535bd8a5b965cec2a957bdb5d5419d1160e2ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
