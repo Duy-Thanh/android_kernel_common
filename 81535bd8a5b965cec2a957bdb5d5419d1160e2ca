@@ -70,6 +70,30 @@
       "revId": "81535bd8a5b965cec2a957bdb5d5419d1160e2ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99abcc87_b4f49130",
+        "filename": "drivers/irqchip/qcom-pdc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1674446
+      },
+      "writtenOn": "2020-04-10T16:15:23Z",
+      "side": 1,
+      "message": "The SDM845 uses PDC and you would need that to resume from wakeup capable GPIOs, if we ever suspend with deep idle states. The PDC driver patch was submitted here -\nhttps://patchwork.kernel.org/patch/11247151/\n\nThe TLMM interrupt controller should setup the mapping to PDC (as its parent), which was possibly merged later than 5.4 is here -\nhttps://lkml.org/lkml/2019/11/15/1085\n\nDo we see any problems exporting the symbol?",
+      "parentUuid": "fa8da9d7_f080eb18",
+      "range": {
+        "startLine": 512,
+        "startChar": 1,
+        "endLine": 512,
+        "endChar": 28
+      },
+      "revId": "81535bd8a5b965cec2a957bdb5d5419d1160e2ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
