@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3da29feb_4d135040",
+        "filename": "drivers/irqchip/qcom-pdc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-04-11T01:49:30Z",
+      "side": 1,
+      "message": "You might want to do a parent \u003d\u003d np and then set parent \u003d NULL like it\u0027s done in the irq framework.\n\nI plan to send a patch upstream sometime to boiler plate this whole thing into 2 lines of macros like. Hopefully soon.\n\nIRQCHIP_MODULE_START()\nIRQCHIP_MODULE_END()",
+      "range": {
+        "startLine": 532,
+        "startChar": 26,
+        "endLine": 532,
+        "endChar": 32
+      },
+      "revId": "dc482b80b209e387fd3398a11b9395bdb8928cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
