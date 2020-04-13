@@ -334,6 +334,30 @@
     },
     {
       "key": {
+        "uuid": "6e720475_12a887b0",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-04-13T18:39:06Z",
+      "side": 1,
+      "message": "CONFIG_INPUT_MOUSE\u003dy is the default, so in order to avoid savedefconfig errors when building the GKI I removed this line from gki_defconfig. This also required disabling CONFIG_MOUSE_PS2 in gki_defconfig (which is default when INPUT_MOUSE is enabled) to avoid linking the PS2 mouse driver into the GKI.",
+      "parentUuid": "5a883f17_66e5717a",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 25
+      },
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "790872de_6b7babee",
         "filename": "build.config.fvp",
         "patchSetId": 7
