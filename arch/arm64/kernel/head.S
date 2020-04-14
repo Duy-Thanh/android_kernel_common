@@ -987,3 +987,6 @@ __primary_switch:
 	adrp	x0, __PHYS_OFFSET
 	br	x8
 ENDPROC(__primary_switch)
+
+EXPORT_SYMBOL(_text)
+EXPORT_SYMBOL(_etext)
