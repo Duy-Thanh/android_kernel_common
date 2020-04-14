@@ -22,6 +22,30 @@
       "revId": "dc482b80b209e387fd3398a11b9395bdb8928cd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98cb0cab_53034f88",
+        "filename": "drivers/irqchip/qcom-pdc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-04-14T05:47:23Z",
+      "side": 1,
+      "message": "reworked to use the patch you sent to the list.",
+      "parentUuid": "3da29feb_4d135040",
+      "range": {
+        "startLine": 532,
+        "startChar": 26,
+        "endLine": 532,
+        "endChar": 32
+      },
+      "revId": "dc482b80b209e387fd3398a11b9395bdb8928cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
