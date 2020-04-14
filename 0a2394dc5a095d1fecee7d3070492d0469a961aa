@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "738b429a_9eef06ee",
+        "filename": "drivers/base/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2942,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2020-04-14T07:33:21Z",
+      "side": 1,
+      "message": "Based on the whitelist, this is called by cpu_isolate.ko",
+      "parentUuid": "23257dd4_af7dd75f",
+      "range": {
+        "startLine": 2942,
+        "startChar": 0,
+        "endLine": 2942,
+        "endChar": 33
+      },
+      "revId": "0a2394dc5a095d1fecee7d3070492d0469a961aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cb283186_2542acd5",
         "filename": "fs/kernfs/symlink.c",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2020-04-14T07:12:53Z",
       "side": 1,
       "message": "kernel modules should not be calling vfs calls like this.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 38
+      },
+      "revId": "0a2394dc5a095d1fecee7d3070492d0469a961aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42dc6f41_4b801ec5",
+        "filename": "fs/kernfs/symlink.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2020-04-14T07:33:21Z",
+      "side": 1,
+      "message": "Based on the whitelist, this is called by msm_adreno.ko",
+      "parentUuid": "cb283186_2542acd5",
       "range": {
         "startLine": 57,
         "startChar": 0,
