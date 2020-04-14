@@ -1009,6 +1009,12 @@ out:
 	return ret;
 }
 
+static inline void ufshcd_cancel_gate_work(struct ufs_hba *hba)
+{
+	hrtimer_cancel(&hba->clk_gating.gate_hrtimer);
+	cancel_work_sync(&hba->clk_gating.gate_work);
+}
+
 /**
  * ufshcd_is_devfreq_scaling_required - check if scaling is required or not
  * @hba: per adapter instance
@@ -1516,7 +1522,7 @@ static void ufshcd_ungate_work(struct work_struct *work)
 	struct ufs_hba *hba = container_of(work, struct ufs_hba,
 			clk_gating.ungate_work);
 
-	cancel_delayed_work_sync(&hba->clk_gating.gate_work);
+	ufshcd_cancel_gate_work(hba);
 
 	spin_lock_irqsave(hba->host->host_lock, flags);
 	if (hba->clk_gating.state == CLKS_ON) {
@@ -1586,7 +1592,7 @@ start:
 		}
 		break;
 	case REQ_CLKS_OFF:
-		if (cancel_delayed_work(&hba->clk_gating.gate_work)) {
+		if (hrtimer_try_to_cancel(&hba->clk_gating.gate_hrtimer) == 1) {
 			hba->clk_gating.state = CLKS_ON;
 			trace_ufshcd_clk_gating(dev_name(hba->dev),
 						hba->clk_gating.state);
@@ -1634,7 +1640,7 @@ EXPORT_SYMBOL_GPL(ufshcd_hold);
 static void ufshcd_gate_work(struct work_struct *work)
 {
 	struct ufs_hba *hba = container_of(work, struct ufs_hba,
-			clk_gating.gate_work.work);
+			clk_gating.gate_work);
 	unsigned long flags;
 
 	spin_lock_irqsave(hba->host->host_lock, flags);
@@ -1715,9 +1721,10 @@ static void __ufshcd_release(struct ufs_hba *hba)
 
 	hba->clk_gating.state = REQ_CLKS_OFF;
 	trace_ufshcd_clk_gating(dev_name(hba->dev), hba->clk_gating.state);
-	queue_delayed_work(hba->clk_gating.clk_gating_workq,
-			   &hba->clk_gating.gate_work,
-			   msecs_to_jiffies(hba->clk_gating.delay_ms));
+
+	hrtimer_start(&hba->clk_gating.gate_hrtimer,
+			ms_to_ktime(hba->clk_gating.delay_ms),
+			HRTIMER_MODE_REL);
 }
 
 void ufshcd_release(struct ufs_hba *hba)
@@ -1824,7 +1831,7 @@ static void ufshcd_init_clk_gating(struct ufs_hba *hba)
 		return;
 
 	hba->clk_gating.delay_ms = 150;
-	INIT_DELAYED_WORK(&hba->clk_gating.gate_work, ufshcd_gate_work);
+	INIT_WORK(&hba->clk_gating.gate_work, ufshcd_gate_work);
 	INIT_WORK(&hba->clk_gating.ungate_work, ufshcd_ungate_work);
 
 	snprintf(wq_name, ARRAY_SIZE(wq_name), "ufs_clk_gating_%d",
@@ -1857,8 +1864,8 @@ static void ufshcd_exit_clk_gating(struct ufs_hba *hba)
 		return;
 	device_remove_file(hba->dev, &hba->clk_gating.delay_attr);
 	device_remove_file(hba->dev, &hba->clk_gating.enable_attr);
+	ufshcd_cancel_gate_work(hba);
 	cancel_work_sync(&hba->clk_gating.ungate_work);
-	cancel_delayed_work_sync(&hba->clk_gating.gate_work);
 	destroy_workqueue(hba->clk_gating.clk_gating_workq);
 }
 
