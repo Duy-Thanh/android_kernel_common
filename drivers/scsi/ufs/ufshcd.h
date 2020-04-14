@@ -374,27 +374,43 @@ enum clk_gating_state {
 
 /**
  * struct ufs_clk_gating - UFS clock gating related info
- * @gate_work: worker to turn off clocks after some delay as specified in
- * delay_ms
+ * @gate_hrtimer: hrtimer to invoke @gate_work after some delay as
+ * specified in @delay_ms
+ * @gate_work: worker to turn off clocks
  * @ungate_work: worker to turn on clocks that will be used in case of
  * interrupt context
  * @state: the current clocks state
- * @delay_ms: gating delay in ms
+ * @delay_ms: current gating delay in ms
+ * @delay_ms_pwr_save: gating delay (in ms) in power save mode
+ * @delay_ms_perf: gating delay (in ms) in performance mode
  * @is_suspended: clk gating is suspended when set to 1 which can be used
  * during suspend/resume
- * @delay_attr: sysfs attribute to control delay_attr
+ * @delay_attr: sysfs attribute to control delay_ms if clock scaling is disabled
+ * @delay_pwr_save_attr: sysfs attribute to control delay_ms_pwr_save
+ * @delay_perf_attr: sysfs attribute to control delay_ms_perf
  * @enable_attr: sysfs attribute to enable/disable clock gating
  * @is_enabled: Indicates the current status of clock gating
  * @active_reqs: number of requests that are pending and should be waited for
  * completion before gating clocks.
  */
+
 struct ufs_clk_gating {
-	struct delayed_work gate_work;
+	/* vendor field */
+	struct hrtimer gate_hrtimer;
+	struct work_struct gate_work;
 	struct work_struct ungate_work;
 	enum clk_gating_state state;
 	unsigned long delay_ms;
+	/* vendor field */
+	unsigned long delay_ms_pwr_save;
+	/* vendor field */
+	unsigned long delay_ms_perf;
 	bool is_suspended;
 	struct device_attribute delay_attr;
+	/* vendor field */
+	struct device_attribute delay_pwr_save_attr;
+	/* vendor field */
+	struct device_attribute delay_perf_attr;
 	struct device_attribute enable_attr;
 	bool is_enabled;
 	int active_reqs;
