@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23257dd4_af7dd75f",
+        "filename": "drivers/base/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2942,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-14T07:12:53Z",
+      "side": 1,
+      "message": "No, this should not be exported, it is not for use for kernel modules.",
+      "range": {
+        "startLine": 2942,
+        "startChar": 0,
+        "endLine": 2942,
+        "endChar": 33
+      },
+      "revId": "0a2394dc5a095d1fecee7d3070492d0469a961aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb283186_2542acd5",
+        "filename": "fs/kernfs/symlink.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-14T07:12:53Z",
+      "side": 1,
+      "message": "kernel modules should not be calling vfs calls like this.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 38
+      },
+      "revId": "0a2394dc5a095d1fecee7d3070492d0469a961aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
