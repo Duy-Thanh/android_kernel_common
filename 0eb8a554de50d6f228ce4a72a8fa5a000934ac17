@@ -45,6 +45,30 @@
       "revId": "0eb8a554de50d6f228ce4a72a8fa5a000934ac17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9278f44_e431f371",
+        "filename": "abi_gki_aarch64_qcom_whitelist",
+        "patchSetId": 2
+      },
+      "lineNbr": 1080,
+      "author": {
+        "id": 1577720
+      },
+      "writtenOn": "2020-04-15T17:44:36Z",
+      "side": 1,
+      "message": "I see that it\u0027s required by usb_f_mass_storage.ko. Need to check why CONFIG_USB_F_MASS_STORAGE getting enabled as a module in our tree. But I\u0027ll go ahead and remove kernel_[read|write] manually.",
+      "parentUuid": "ec3cbd6e_cf40f8f7",
+      "range": {
+        "startLine": 1080,
+        "startChar": 0,
+        "endLine": 1080,
+        "endChar": 14
+      },
+      "revId": "0eb8a554de50d6f228ce4a72a8fa5a000934ac17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
