@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22468f10_8e2c5c73",
+        "filename": "drivers/gpu/drm/drm_connector.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1475,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2020-04-15T23:58:37Z",
+      "side": 1,
+      "message": "EXPORT_SYMBOL_GPL?",
+      "range": {
+        "startLine": 1475,
+        "startChar": 0,
+        "endLine": 1475,
+        "endChar": 13
+      },
+      "revId": "95bcebee0d107e9dea79754aa331737e0a9fc673",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
