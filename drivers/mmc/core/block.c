@@ -43,11 +43,11 @@
 #include <linux/mmc/card.h>
 #include <linux/mmc/host.h>
 #include <linux/mmc/mmc.h>
-#include <linux/mmc/mmc-crypto.h>
 #include <linux/mmc/sd.h>
 
 #include <linux/uaccess.h>
 
+#include "crypto.h"
 #include "queue.h"
 #include "block.h"
 #include "core.h"
@@ -168,10 +168,10 @@ MODULE_PARM_DESC(perdev_minors, "Minors numbers to allocate per device");
 
 static inline int mmc_blk_part_switch(struct mmc_card *card,
 				      unsigned int part_type);
-static int mmc_blk_rw_rq_prep(struct mmc_queue_req *mqrq,
-			      struct mmc_card *card,
-			      int disable_multi,
-			      struct mmc_queue *mq);
+static void mmc_blk_rw_rq_prep(struct mmc_queue_req *mqrq,
+			       struct mmc_card *card,
+			       int disable_multi,
+			       struct mmc_queue *mq);
 static void mmc_blk_hsq_req_done(struct mmc_request *mrq);
 
 static struct mmc_blk_data *mmc_blk_get(struct gendisk *disk)
@@ -1231,16 +1231,15 @@ static void mmc_blk_eval_resp_error(struct mmc_blk_request *brq)
 	}
 }
 
-static int mmc_blk_data_prep(struct mmc_queue *mq, struct mmc_queue_req *mqrq,
-			     int disable_multi, bool *do_rel_wr_p,
-			     bool *do_data_tag_p)
+static void mmc_blk_data_prep(struct mmc_queue *mq, struct mmc_queue_req *mqrq,
+			      int disable_multi, bool *do_rel_wr_p,
+			      bool *do_data_tag_p)
 {
 	struct mmc_blk_data *md = mq->blkdata;
 	struct mmc_card *card = md->queue.card;
 	struct mmc_blk_request *brq = &mqrq->brq;
 	struct request *req = mmc_queue_req_to_req(mqrq);
 	bool do_rel_wr, do_data_tag;
-	int err;
 
 	/*
 	 * Reliable writes are used to implement Forced Unit Access and
@@ -1252,9 +1251,7 @@ static int mmc_blk_data_prep(struct mmc_queue *mq, struct mmc_queue_req *mqrq,
 
 	memset(brq, 0, sizeof(struct mmc_blk_request));
 
-	err = mmc_prepare_mqr_crypto(mq->card->host, &brq->mrq, req);
-	if (err)
-		return err;
+	mmc_crypto_prepare_request(mqrq);
 
 	brq->mrq.data = &brq->data;
 	brq->mrq.tag = req->tag;
@@ -1366,8 +1363,6 @@ static int mmc_blk_data_prep(struct mmc_queue *mq, struct mmc_queue_req *mqrq,
 
 	if (do_data_tag_p)
 		*do_data_tag_p = do_data_tag;
-
-	return 0;
 }
 
 #define MMC_CQE_RETRIES 2
@@ -1499,9 +1494,7 @@ static int mmc_blk_hsq_issue_rw_rq(struct mmc_queue *mq, struct request *req)
 	struct mmc_host *host = mq->card->host;
 	int err;
 
-	err = mmc_blk_rw_rq_prep(mqrq, mq->card, 0, mq);
-	if (err)
-		return err;
+	mmc_blk_rw_rq_prep(mqrq, mq->card, 0, mq);
 	mqrq->brq.mrq.done = mmc_blk_hsq_req_done;
 	mmc_pre_req(host, &mqrq->brq.mrq);
 
@@ -1516,34 +1509,27 @@ static int mmc_blk_cqe_issue_rw_rq(struct mmc_queue *mq, struct request *req)
 {
 	struct mmc_queue_req *mqrq = req_to_mmc_queue_req(req);
 	struct mmc_host *host = mq->card->host;
-	int err;
 
 	if (host->hsq_enabled)
 		return mmc_blk_hsq_issue_rw_rq(mq, req);
 
-	err = mmc_blk_data_prep(mq, mqrq, 0, NULL, NULL);
-	if (err)
-		return err;
+	mmc_blk_data_prep(mq, mqrq, 0, NULL, NULL);
 
 	return mmc_blk_cqe_start_req(mq->card->host, &mqrq->brq.mrq);
 }
 
-static int mmc_blk_rw_rq_prep(struct mmc_queue_req *mqrq,
-			      struct mmc_card *card,
-			      int disable_multi,
-			      struct mmc_queue *mq)
+static void mmc_blk_rw_rq_prep(struct mmc_queue_req *mqrq,
+			       struct mmc_card *card,
+			       int disable_multi,
+			       struct mmc_queue *mq)
 {
 	u32 readcmd, writecmd;
 	struct mmc_blk_request *brq = &mqrq->brq;
 	struct request *req = mmc_queue_req_to_req(mqrq);
 	struct mmc_blk_data *md = mq->blkdata;
 	bool do_rel_wr, do_data_tag;
-	int err;
 
-	err = mmc_blk_data_prep(mq, mqrq, disable_multi, &do_rel_wr,
-				&do_data_tag);
-	if (err)
-		return err;
+	mmc_blk_data_prep(mq, mqrq, disable_multi, &do_rel_wr, &do_data_tag);
 
 	brq->mrq.cmd = &brq->cmd;
 
@@ -1596,8 +1582,6 @@ static int mmc_blk_rw_rq_prep(struct mmc_queue_req *mqrq,
 		brq->sbc.flags = MMC_RSP_R1 | MMC_CMD_AC;
 		brq->mrq.sbc = &brq->sbc;
 	}
-
-	return 0;
 }
 
 #define MMC_MAX_RETRIES		5
@@ -1650,9 +1634,7 @@ static void mmc_blk_read_single(struct mmc_queue *mq, struct request *req)
 		u32 status;
 		int err;
 
-		err = mmc_blk_rw_rq_prep(mqrq, card, 1, mq);
-		if (err)
-			goto error_exit;
+		mmc_blk_rw_rq_prep(mqrq, card, 1, mq);
 
 		mmc_wait_for_req(host, mrq);
 
@@ -1883,8 +1865,6 @@ static void mmc_blk_mq_complete_rq(struct mmc_queue *mq, struct request *req)
 {
 	struct mmc_queue_req *mqrq = req_to_mmc_queue_req(req);
 	unsigned int nr_bytes = mqrq->brq.data.bytes_xfered;
-
-	mmc_complete_mqr_crypto(mq->card->host);
 
 	if (nr_bytes) {
 		if (blk_update_request(req, BLK_STS_OK, nr_bytes))
@@ -2168,9 +2148,7 @@ static int mmc_blk_mq_issue_rw_rq(struct mmc_queue *mq,
 	struct request *prev_req = NULL;
 	int err = 0;
 
-	err = mmc_blk_rw_rq_prep(mqrq, mq->card, 0, mq);
-	if (err)
-		return err;
+	mmc_blk_rw_rq_prep(mqrq, mq->card, 0, mq);
 
 	mqrq->brq.mrq.done = mmc_blk_mq_req_done;
 

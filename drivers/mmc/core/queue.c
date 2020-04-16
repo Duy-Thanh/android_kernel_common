@@ -14,8 +14,8 @@
 
 #include <linux/mmc/card.h>
 #include <linux/mmc/host.h>
-#include <linux/mmc/mmc-crypto.h>
 
+#include "crypto.h"
 #include "queue.h"
 #include "block.h"
 #include "core.h"

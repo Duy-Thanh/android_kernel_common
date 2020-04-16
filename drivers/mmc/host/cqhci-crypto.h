@@ -1,32 +1,36 @@
 //SPDX-License-Identifier: GPL-2.0
 /*
-* Copyright 2019 Google LLC
+* Copyright 2020 Google LLC
 */
 
 #ifndef LINUX_MMC_CQHCI_CRYPTO_H
 #define LINUX_MMC_CQHCI_CRYPTO_H
 
-#include <linux/mmc/host.h>
+#include "cqhci.h"
 
 #ifdef CONFIG_MMC_CRYPTO
 
-extern const struct mmc_crypto_variant_ops cqhci_crypto_vops;
+int cqhci_host_init_crypto(struct cqhci_host *host);
 
-void cqhci_crypto_recovery_finish(struct mmc_host *mmc);
+int cqhci_prep_crypto_desc(struct mmc_request *mrq, __le64 *task_desc);
 
-int cqhci_prep_crypto_desc(struct mmc_host *mmc, struct mmc_request *mrq,
-			   u64 *task_desc);
+void cqhci_crypto_recovery_finish(struct cqhci_host *host);
 
 #else /* CONFIG_MMC_CRYPTO */
 
-void cqhci_crypto_recovery_finish(struct mmc_host *mmc) { }
-
-static inline int cqhci_prep_crypto_desc(struct mmc_host *mmc,
-					 struct mmc_request *mrq,
-					 u64 *task_desc)
+static inline int cqhci_host_init_crypto(struct cqhci_host *host)
 {
 	return 0;
 }
+
+static inline int cqhci_prep_crypto_desc(struct mmc_request *mrq,
+					 __le64 *task_desc)
+{
+	return 0;
+}
+
+static inline void cqhci_crypto_recovery_finish(struct cqhci_host *host) { }
+
 
 #endif /* CONFIG_MMC_CRYPTO */
 

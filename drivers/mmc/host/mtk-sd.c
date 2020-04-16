@@ -4,6 +4,9 @@
  * Author: Chaotian.Jing <chaotian.jing@mediatek.com>
  */
 
+#include <asm/unaligned.h>
+#include <linux/blk-crypto.h>
+#include <linux/keyslot-manager.h>
 #include <linux/module.h>
 #include <linux/clk.h>
 #include <linux/delay.h>
@@ -27,7 +30,6 @@
 #include <linux/mmc/core.h>
 #include <linux/mmc/host.h>
 #include <linux/mmc/mmc.h>
-#include <linux/mmc/mmc-crypto.h>
 #include <linux/mmc/sd.h>
 #include <linux/mmc/sdio.h>
 #include <linux/mmc/slot-gpio.h>
@@ -90,6 +92,17 @@
 #define MSDC_AES_CTR1_GP1 0x694
 #define MSDC_AES_CTR2_GP1 0x698
 #define MSDC_AES_CTR3_GP1 0x69C
+
+enum msdc_crypto_alg {
+	MSDC_CRYPTO_ALG_BITLOCKER_AES_CBC	= 1,
+	MSDC_CRYPTO_ALG_AES_ECB			= 2,
+	MSDC_CRYPTO_ALG_ESSIV_AES_CBC		= 3,
+	MSDC_CRYPTO_ALG_AES_XTS			= 4,
+};
+
+enum msdc_crypto_key_size {
+	MSDC_CRYPTO_KEY_SIZE_256	= 2,
+};
 
 /*--------------------------------------------------------------------------*/
 /* Top Pad Register Offset                                                  */
@@ -575,39 +588,6 @@ static const struct of_device_id msdc_of_ids[] = {
 };
 MODULE_DEVICE_TABLE(of, msdc_of_ids);
 
-/*--------------------------------------------------------------------------*/
-/* enum                                                    */
-/*--------------------------------------------------------------------------*/
-enum msdc_crypto_alg {
-	MSDC_CRYPTO_ALG_BITLOCKER_AES_CBC	= 1,
-	MSDC_CRYPTO_ALG_AES_ECB			= 2,
-	MSDC_CRYPTO_ALG_ESSIV_AES_CBC		= 3,
-	MSDC_CRYPTO_ALG_AES_XTS			= 4,
-};
-
-enum msdc_crypto_key_size {
-	MSDC_CRYPTO_KEY_SIZE_256	= 2,
-};
-
-/*--------------------------------------------------------------------------*/
-/* function                                                    */
-/*--------------------------------------------------------------------------*/
-
-#define MSDC_SET_BIT32(host, reg, bs) \
-	do { \
-		unsigned int tv = readl(host->base + reg);\
-		tv |= (u32)(bs); \
-		writel(tv, host->base + reg); \
-	} while (0)
-
-#define MSDC_CLR_BIT32(host, reg, bs) \
-	do { \
-		unsigned int tv = readl(host->base + reg);\
-		tv &= ~((u32)(bs)); \
-		writel(tv, host->base + reg); \
-	} while (0)
-
-
 static void sdr_set_bits(void __iomem *reg, u32 bs)
 {
 	u32 val = readl(reg);
@@ -655,6 +635,133 @@ static void msdc_reset_hw(struct msdc_host *host)
 	val = readl(host->base + MSDC_INT);
 	writel(val, host->base + MSDC_INT);
 }
+
+#ifdef CONFIG_MMC_CRYPTO
+static int msdc_prepare_crypto(struct msdc_host *host,
+			       const struct mmc_request *mrq)
+{
+	const u64 data_unit_num = mrq->data_unit_num;
+	const bool enc = (mrq->data->flags & MMC_DATA_WRITE) != 0;
+	unsigned int aes_switch_dir;
+	unsigned long polling_tmo;
+
+	if (mrq->crypto_key_slot < 0)
+		return 0;
+
+	if (WARN_ON((readl(host->base + MSDC_AES_CFG_GP1) & MSDC_AES_MODE_1) !=
+		    MSDC_CRYPTO_ALG_AES_XTS))
+		return -EINVAL;
+
+	/* 1. set IV */
+	writel(lower_32_bits(data_unit_num), host->base + MSDC_AES_CTR0_GP1);
+	writel(upper_32_bits(data_unit_num), host->base + MSDC_AES_CTR1_GP1);
+	writel(0, host->base + MSDC_AES_CTR2_GP1);
+	writel(0, host->base + MSDC_AES_CTR3_GP1);
+
+	/* 2. enable AES path */
+	sdr_set_bits(host->base + MSDC_AES_SWST, MSDC_AES_BYPASS);
+
+	if (enc)
+		aes_switch_dir = MSDC_AES_SWITCH_START_ENC;
+	else
+		aes_switch_dir = MSDC_AES_SWITCH_START_DEC;
+
+	/* 3. AES switch start (flush the configure) */
+	sdr_set_bits(host + MSDC_AES_SWST, aes_switch_dir);
+	polling_tmo = jiffies + HZ*3;
+	while (readl(host->base + MSDC_AES_SWST) & aes_switch_dir) {
+		if (time_after(jiffies, polling_tmo)) {
+			WARN(1, "msdc error: trigger AES %s timeout!\n",
+			     enc ? "ENC" : "DEC");
+			return -EINVAL;
+		}
+	}
+	return 0;
+}
+
+static void msdc_unprepare_crypto(struct msdc_host *host)
+{
+	if (!(readl(host->base + MSDC_AES_SWST) & MSDC_AES_BYPASS))
+		sdr_set_bits(host + MSDC_AES_SWST, MSDC_AES_BYPASS);
+}
+
+static int msdc_program_key(struct msdc_host *host,
+			    const struct blk_crypto_key *key, unsigned int slot)
+{
+	u32 config;
+	int i;
+
+	if (WARN_ON(key->crypto_mode != BLK_ENCRYPTION_MODE_AES_256_XTS))
+		return -EINVAL;
+
+	/* write AES config */
+	config = (key->data_unit_size << 16) |
+		 (MSDC_CRYPTO_KEY_SIZE_256 << 8) |
+		 (MSDC_CRYPTO_ALG_AES_XTS << 0);
+	writel(config, host + MSDC_AES_CFG_GP1);
+
+	/* write KEY and TKEY */
+	BUILD_BUG_ON(MSDC_AES_TKEY_GP1 != MSDC_AES_KEY_GP1 + 32);
+	for (i = 0; i < key->size; i += 4)
+		writel(get_unaligned_le32(&key->raw[i]),
+		       host->base + MSDC_AES_KEY_GP1 + i);
+	return 0;
+}
+
+static int msdc_keyslot_program(struct keyslot_manager *ksm,
+				const struct blk_crypto_key *key,
+				unsigned int slot)
+{
+	return msdc_program_key(keyslot_manager_private(ksm), key, slot);
+}
+
+static int msdc_keyslot_evict(struct keyslot_manager *ksm,
+			      const struct blk_crypto_key *key,
+			      unsigned int slot)
+{
+	struct blk_crypto_key zeroed_key = { .size = key->size };
+
+	return msdc_program_key(keyslot_manager_private(ksm), &zeroed_key,
+				slot);
+}
+
+static const struct keyslot_mgmt_ll_ops msdc_ksm_ops = {
+	.keyslot_program = msdc_keyslot_program,
+	.keyslot_evict = msdc_keyslot_evict,
+};
+
+static int msdc_init_crypto(struct msdc_host *host)
+{
+	const unsigned int crypto_mode_supported[BLK_ENCRYPTION_MODE_MAX] = {
+		[BLK_ENCRYPTION_MODE_AES_256_XTS] = 512,
+	};
+	struct keyslot_manager *ksm;
+
+	ksm = keyslot_manager_create(host->dev, 1, &msdc_ksm_ops,
+				     BLK_CRYPTO_FEATURE_STANDARD_KEYS,
+				     crypto_mode_supported, host);
+	if (!ksm)
+		return -ENOMEM;
+
+	host->mmc->ksm = ksm;
+	return 0;
+}
+#else /* CONFIG_MMC_CRYPTO */
+static inline int msdc_prepare_crypto(struct msdc_host *host,
+				      const struct mmc_request *req)
+{
+	return 0;
+}
+
+static inline void msdc_unprepare_crypto(struct msdc_host *host)
+{
+}
+
+static inline int msdc_init_crypto(struct msdc_host *host)
+{
+	return 0;
+}
+#endif /* CONFIG_MMC_CRYPTO */
 
 static void msdc_cmd_next(struct msdc_host *host,
 		struct mmc_request *mrq, struct mmc_command *cmd);
@@ -796,14 +903,9 @@ static void msdc_set_timeout(struct msdc_host *host, u32 ns, u32 clks)
 	sdr_set_field(host->base + SDC_CFG, SDC_CFG_DTOC, timeout);
 }
 
-static void msdc_gate_clock(struct mmc_host *mmc)
+static void msdc_gate_clock(struct msdc_host *host)
 {
-	struct msdc_host *host = mmc_priv(mmc);
-
-	if (!host)
-		return;
-
-	if (mmc->caps2 & MMC_CAP2_CRYPTO)
+	if (host->mmc->caps2 & MMC_CAP2_CRYPTO)
 		clk_disable_unprepare(host->crypto_clk);
 	clk_disable_unprepare(host->src_clk_cg);
 	clk_disable_unprepare(host->src_clk);
@@ -811,20 +913,14 @@ static void msdc_gate_clock(struct mmc_host *mmc)
 	clk_disable_unprepare(host->h_clk);
 }
 
-static void msdc_ungate_clock(struct mmc_host *mmc)
+static void msdc_ungate_clock(struct msdc_host *host)
 {
-	struct msdc_host *host = mmc_priv(mmc);
-
-	if (!host)
-		return;
-
 	clk_prepare_enable(host->h_clk);
 	clk_prepare_enable(host->bus_clk);
 	clk_prepare_enable(host->src_clk);
 	clk_prepare_enable(host->src_clk_cg);
-	if (mmc->caps2 & MMC_CAP2_CRYPTO)
+	if (host->mmc->caps2 & MMC_CAP2_CRYPTO)
 		clk_prepare_enable(host->crypto_clk);
-
 	while (!(readl(host->base + MSDC_CFG) & MSDC_CFG_CKSTB))
 		cpu_relax();
 }
@@ -1179,6 +1275,8 @@ static bool msdc_cmd_done(struct msdc_host *host, int events,
 
 	sdr_clr_bits(host->base + MSDC_INTEN, cmd_ints_mask);
 
+	msdc_unprepare_crypto(host);
+
 	if (cmd->flags & MMC_RSP_PRESENT) {
 		if (cmd->flags & MMC_RSP_136) {
 			rsp[0] = readl(host->base + SDC_RESP3);
@@ -1304,10 +1402,18 @@ static void msdc_cmd_next(struct msdc_host *host,
 static void msdc_ops_request(struct mmc_host *mmc, struct mmc_request *mrq)
 {
 	struct msdc_host *host = mmc_priv(mmc);
+	int err;
 
 	host->error = 0;
 	WARN_ON(host->mrq);
 	host->mrq = mrq;
+
+	err = msdc_prepare_crypto(host, mrq);
+	if (err) {
+		mrq->cmd->error = err;
+		mmc_request_done(mmc, mrq);
+		return;
+	}
 
 	if (mrq->data)
 		msdc_prepare_data(host, mrq);
@@ -2247,167 +2353,6 @@ static int msdc_get_cd(struct mmc_host *mmc)
 		return !val;
 }
 
-#ifdef CONFIG_MMC_CRYPTO
-
-/* non-cqe only set IV here */
-static int msdc_set_crypto(struct msdc_host *host, u64 data_unit_num, int ddir)
-{
-	u32 aes_mode_current = 0;
-	u32 ctr[4] = {0};
-	unsigned long polling_tmo = 0;
-	unsigned int aes_switch_dir;
-
-	aes_mode_current = MSDC_AES_MODE_1 &
-			   readl(host->base + MSDC_AES_CFG_GP1);
-
-	switch (aes_mode_current) {
-	case MSDC_CRYPTO_ALG_AES_XTS:
-	{
-		ctr[0] = lower_32_bits(data_unit_num);
-		ctr[1] = upper_32_bits(data_unit_num);
-		break;
-	}
-	default:
-		WARN_ON(1);
-		return -EINVAL;
-	}
-	/* 1. set IV */
-	writel(ctr[0], host->base + MSDC_AES_CTR0_GP1);
-	writel(ctr[1], host->base + MSDC_AES_CTR1_GP1);
-	writel(ctr[2], host->base + MSDC_AES_CTR2_GP1);
-	writel(ctr[3], host->base + MSDC_AES_CTR3_GP1);
-
-	/* 2. enable AES path */
-	MSDC_CLR_BIT32(host, MSDC_AES_SWST, MSDC_AES_BYPASS);
-
-	if (ddir == WRITE)
-		aes_switch_dir = MSDC_AES_SWITCH_START_ENC;
-	else
-		aes_switch_dir = MSDC_AES_SWITCH_START_DEC;
-
-	/* 3. AES switch start (flush the configure) */
-	MSDC_SET_BIT32(host, MSDC_AES_SWST, aes_switch_dir);
-	polling_tmo = jiffies + HZ*3;
-	while (readl(host->base + MSDC_AES_SWST) & aes_switch_dir) {
-		if (time_after(jiffies, polling_tmo)) {
-			pr_notice("msdc error: trigger AES %s timeout!\n",
-				  ddir == WRITE ? "ENC" : "DEC");
-			WARN_ON(1);
-			return -EINVAL;
-		}
-	}
-	return 0;
-}
-
-/* set crypto information */
-static int msdc_prepare_mqr_crypto(struct mmc_host *host,
-				   struct mmc_request *mrq,
-				   struct request *req)
-{
-	struct msdc_host *ll_host = mmc_priv(host);
-
-	mmc_prepare_mqr_crypto_spec(host, mrq, req);
-	if (mrq->crypto_key_slot == -1)
-		return 0;
-
-	/* TODO: Are we really alright with rejecting a 0 data_unit_num? */
-	if (unlikely(!mrq->data_unit_num))
-		return -EINVAL;
-
-	/* switch crypto engine to MSDC */
-	return msdc_set_crypto(ll_host, mrq->data_unit_num, rq_data_dir(req));
-}
-
-/* only non-cqe uses this to set key */
-static int msdc_crypto_program_key(struct mmc_host *host,
-				   const union mmc_crypto_cfg_entry *cfg,
-				   int slot)
-{
-	struct msdc_host *ll_host = mmc_priv(host);
-	int i;
-	int iv[4] = {0};
-	u32 config;
-	u32 *key = (u32 *)&cfg->crypto_key[0];
-
-	if (!ll_host || !ll_host->base)
-		return -EINVAL;
-
-	if (WARN_ON(host->crypto_cap_array[cfg->crypto_cap_idx].key_size !=
-		    MMC_CRYPTO_KEY_SIZE_256) ||
-	    WARN_ON(host->crypto_cap_array[cfg->crypto_cap_idx].algorithm_id !=
-		    MMC_CRYPTO_ALG_AES_XTS))
-		return -EINVAL;
-
-	/* please note that we used 512 rather than cfg.data_unit_size */
-	config = (512) << 16 | MSDC_CRYPTO_KEY_SIZE_256 << 8 |
-		 MSDC_CRYPTO_ALG_AES_XTS << 0;
-
-	/* switch crypto engine to MSDC */
-	/* TODO: Is this code incomplete? */
-
-	/* write AES config */
-	MSDC_SET_BIT32(ll_host, MSDC_AES_CFG_GP1, config);
-
-	/* IV */
-	for (i = 0; i < 4; i++)
-		writel(iv[i], ll_host->base + (MSDC_AES_IV0_GP1 + i * 4));
-
-	/* KEY */
-	for (i = 0; i < 8; i++)
-		writel(key[i], ll_host->base + (MSDC_AES_KEY_GP1 + i * 4));
-	/* TKEY */
-	for (i = 0; i < 8; i++)
-		writel(&cfg->crypto_key[MMC_CRYPTO_KEY_MAX_SIZE/2],
-		       ll_host->base + (MSDC_AES_TKEY_GP1 + i * 4));
-
-	return 0;
-}
-
-static int msdc_complete_mqr_crypto(struct mmc_host *host)
-{
-	struct msdc_host *ll_host = mmc_priv(host);
-
-	/* only for non-cqe, cqe needs nothing */
-	if ((readl(ll_host->base + MSDC_AES_SWST) & MSDC_AES_BYPASS) == 0) {
-		/* disable AES path by set bypass bit */
-		MSDC_SET_BIT32(ll_host, MSDC_AES_SWST, MSDC_AES_BYPASS);
-	}
-	return 0;
-}
-
-static void msdc_host_init_crypto(struct mmc_host *host)
-{
-	host->crypto_capabilities.config_count = 0;
-	/* in non-CQHCI, support only one */
-	host->crypto_capabilities.num_crypto_cap = 1;
-}
-
-static int msdc_get_crypto_capabilities(struct mmc_host *host)
-{
-	/*
-	 * non-cqe has only one algorithm
-	 * algorithm_id : AES-XTS (04)
-	 * sdus_mask: meaningless (09)
-	 * key_size: 256bits (02)
-	 * reserved: 0x5A
-	 */
-	host->crypto_cap_array[0].algorithm_id = MMC_CRYPTO_ALG_AES_XTS;
-	host->crypto_cap_array[0].sdus_mask = 9;
-	host->crypto_cap_array[0].key_size = MMC_CRYPTO_KEY_SIZE_256;
-	host->crypto_cap_array[0].reserved = 0x5A;
-
-	return 0;
-}
-
-static const struct mmc_crypto_variant_ops msdc_crypto_var_ops = {
-	.host_init_crypto = msdc_host_init_crypto,
-	.get_crypto_capabilities = msdc_get_crypto_capabilities,
-	.prepare_mqr_crypto = msdc_prepare_mqr_crypto,
-	.host_program_key = msdc_crypto_program_key,
-	.complete_mqr_crypto = msdc_complete_mqr_crypto,
-};
-#endif
-
 static const struct mmc_host_ops mt_msdc_ops = {
 	.post_req = msdc_post_req,
 	.pre_req = msdc_pre_req,
@@ -2563,10 +2508,7 @@ static int msdc_drv_probe(struct platform_device *pdev)
 		mmc->caps2 |= MMC_CAP2_SDIO_IRQ_NOTHREAD;
 
 	mmc->caps |= MMC_CAP_ERASE | MMC_CAP_CMD23;
-#ifdef CONFIG_MMC_CRYPTO
 	mmc->caps2 |= MMC_CAP2_CRYPTO;
-	mmc->crypto_vops = &msdc_crypto_var_ops;
-#endif
 	/* MMC core transfer sizes tunable parameters */
 	mmc->max_segs = MAX_BD_NUM;
 	if (host->dev_comp->support_64g)
@@ -2598,7 +2540,7 @@ static int msdc_drv_probe(struct platform_device *pdev)
 	spin_lock_init(&host->lock);
 
 	platform_set_drvdata(pdev, mmc);
-	msdc_ungate_clock(mmc);
+	msdc_ungate_clock(host);
 	msdc_init_hw(host);
 
 	ret = devm_request_irq(&pdev->dev, host->irq, msdc_irq,
@@ -2611,11 +2553,9 @@ static int msdc_drv_probe(struct platform_device *pdev)
 	pm_runtime_use_autosuspend(host->dev);
 	pm_runtime_enable(host->dev);
 
-	ret = mmc_init_crypto(mmc);
+	ret = msdc_init_crypto(host);
 	if (ret)
-		pr_notice("Couldn't initialize inline crypto.\n");
-	else
-		mmc_crypto_enable(mmc);
+		goto end;
 
 	ret = mmc_add_host(mmc);
 
@@ -2628,7 +2568,7 @@ end:
 release:
 	platform_set_drvdata(pdev, NULL);
 	msdc_deinit_hw(host);
-	msdc_gate_clock(mmc);
+	msdc_gate_clock(host);
 release_mem:
 	if (host->dma.gpd)
 		dma_free_coherent(&pdev->dev,
@@ -2657,7 +2597,7 @@ static int msdc_drv_remove(struct platform_device *pdev)
 	platform_set_drvdata(pdev, NULL);
 	mmc_remove_host(host->mmc);
 	msdc_deinit_hw(host);
-	msdc_gate_clock(mmc);
+	msdc_gate_clock(host);
 
 	pm_runtime_disable(host->dev);
 	pm_runtime_put_noidle(host->dev);
@@ -2736,7 +2676,7 @@ static int msdc_runtime_suspend(struct device *dev)
 	struct msdc_host *host = mmc_priv(mmc);
 
 	msdc_save_reg(host);
-	msdc_gate_clock(mmc);
+	msdc_gate_clock(host);
 	return 0;
 }
 
@@ -2745,7 +2685,7 @@ static int msdc_runtime_resume(struct device *dev)
 	struct mmc_host *mmc = dev_get_drvdata(dev);
 	struct msdc_host *host = mmc_priv(mmc);
 
-	msdc_ungate_clock(mmc);
+	msdc_ungate_clock(host);
 	msdc_restore_reg(host);
 	return 0;
 }
