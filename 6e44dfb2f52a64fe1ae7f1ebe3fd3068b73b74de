@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002499012",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1287773?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "eca4d69d_862345fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-04-16T19:12:43Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nANDROID: Patch only relevant for Android, unlikely to be upstreamed",
+      "revId": "6e44dfb2f52a64fe1ae7f1ebe3fd3068b73b74de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002499012",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1287773?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "ff4ee21d_9092f743",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-04-16T19:12:43Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Gerrit Code Review \u003cnoreply-gerritcodereview@google.com\u003e",
+      "revId": "6e44dfb2f52a64fe1ae7f1ebe3fd3068b73b74de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002499012",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1287773?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "1d59b8ca_b9e4d48c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-04-16T19:12:43Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Matthias Maennich \u003cmaennich@google.com\u003e",
+      "revId": "6e44dfb2f52a64fe1ae7f1ebe3fd3068b73b74de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
