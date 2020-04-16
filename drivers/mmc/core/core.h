@@ -10,7 +10,6 @@
 
 #include <linux/delay.h>
 #include <linux/sched.h>
-#include <linux/mmc/mmc-crypto.h>
 
 struct mmc_host;
 struct mmc_card;
