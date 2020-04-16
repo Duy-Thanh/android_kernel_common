@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14b60c62_a513622b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2020-04-16T00:01:25Z",
+      "side": 1,
+      "message": "Missing (cherry picked from commit XXX)",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 67
+      },
+      "revId": "c72a4ef50d6cfc8293b7836fc8f9824b624d56ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73181c1b_88183a87",
+        "filename": "drivers/gpu/drm/drm_panel.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2020-04-16T00:01:25Z",
+      "side": 1,
+      "message": "EXPORT_SYMBOL_GPL",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 43
+      },
+      "revId": "c72a4ef50d6cfc8293b7836fc8f9824b624d56ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
