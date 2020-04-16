@@ -1,0 +1,25 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002493951",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1274715?revision\u003d4",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "536471b8_eaf0ce52",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-04-16T15:26:17Z",
+      "side": 1,
+      "message": "Commit does not refer to the upstream commit\nPlease add a line like \u0027(cherry picked from commit \u003csha1\u003e)\u0027",
+      "revId": "17fd2df2e53200c83dc62908c5fe11c06bab62d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
