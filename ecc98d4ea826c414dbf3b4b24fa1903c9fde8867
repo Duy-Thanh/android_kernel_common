@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8245afc8_870023e0",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-17T18:00:18Z",
+      "side": 1,
+      "message": "The key can\u0027t just be unconditionally cleared like this, because -\u003ekeyslot_key might differ from \u0027key\u0027.\n\nHow about making -\u003ekeyslot_key point to the blk_crypto_key, rather than contain the raw key bytes?  Then, here evict if -\u003ekeyslot_key \u003d\u003d key.  And in msdc_prepare_crypto(), program the key if -\u003ekeyslot_key !\u003d key.",
+      "range": {
+        "startLine": 716,
+        "startChar": 0,
+        "endLine": 729,
+        "endChar": 1
+      },
+      "revId": "ecc98d4ea826c414dbf3b4b24fa1903c9fde8867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "683d715b_c9cf8cc8",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-17T18:00:18Z",
+      "side": 1,
+      "message": "This needs to be renamed to msdc_complete_crypto() to match the above.",
+      "range": {
+        "startLine": 761,
+        "startChar": 19,
+        "endLine": 761,
+        "endChar": 40
+      },
+      "revId": "ecc98d4ea826c414dbf3b4b24fa1903c9fde8867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28343041_1903d9bb",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1426,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-17T18:00:18Z",
+      "side": 1,
+      "message": "Unrelated whitespace change",
+      "revId": "ecc98d4ea826c414dbf3b4b24fa1903c9fde8867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
