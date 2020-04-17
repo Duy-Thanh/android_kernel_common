@@ -249,6 +249,7 @@ static inline void *freelist_ptr(const struct kmem_cache *s, void *ptr,
 				 unsigned long ptr_addr)
 {
 #ifdef CONFIG_SLAB_FREELIST_HARDENED
+<<<<<<< HEAD   (d7a79a ANDROID: GKI: update abi definition due to previous changes )
 	/*
 	 * When CONFIG_KASAN_SW_TAGS is enabled, ptr_addr might be tagged.
 	 * Normally, this doesn't cause any issues, as both set_freepointer()
@@ -261,6 +262,9 @@ static inline void *freelist_ptr(const struct kmem_cache *s, void *ptr,
 	 */
 	return (void *)((unsigned long)ptr ^ s->random ^
 			(unsigned long)kasan_reset_tag((void *)ptr_addr));
+=======
+	return (void *)((unsigned long)ptr ^ s->random ^ swab(ptr_addr));
+>>>>>>> BRANCH (8488c3 Linux 4.19.116)
 #else
 	return ptr;
 #endif
