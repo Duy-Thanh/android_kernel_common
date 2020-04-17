@@ -385,6 +385,30 @@
     },
     {
       "key": {
+        "uuid": "c6c0b053_93f5b8da",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2342,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-17T17:06:39Z",
+      "side": 1,
+      "message": "fscrypt currently only supports data_unit_size \u003d\u003d fs_block_size, which on Android is 4096.  If you added support for data_unit_size \u003d\u003d 512, then that is your own custom vendor-specific addition (which I hope received proper cryptographic review).  We aren\u0027t making changes to GKI to support legacy vendor-specific encryption formats; that is on you to support on existing devices.  We already had this discussion for FSCRYPT_MODE_PRIVATE and Mediatek agreed to carry the change themselves.\n\n*If* you were to need support for data_unit_size \u003d\u003d 512 on new devices launching with R, then that would be a different story, and you would need to request it as a new feature, which would need to be properly implemented, tested, documented, and supported.  However, it sounds like on new devices you only need data_unit_size \u003d\u003d 4096.  So for GKI, we\u0027ll actually be good to go w.r.t. Mediatek as soon as we submit support for CQHCI crypto, right?",
+      "parentUuid": "7ad9334b_079159af",
+      "range": {
+        "startLine": 2342,
+        "startChar": 1,
+        "endLine": 2342,
+        "endChar": 55
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "34064f71_1edfa99b",
         "filename": "drivers/mmc/host/mtk-sd.c",
         "patchSetId": 1
@@ -429,6 +453,30 @@
       "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a59fa64_eff79b95",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2360,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-17T17:06:39Z",
+      "side": 1,
+      "message": "Fixed now.",
+      "parentUuid": "145e7a47_9180b891",
+      "range": {
+        "startLine": 2360,
+        "startChar": 9,
+        "endLine": 2360,
+        "endChar": 52
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -479,6 +527,30 @@
     },
     {
       "key": {
+        "uuid": "375b9779_d5eeea5f",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2375,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-17T17:06:39Z",
+      "side": 1,
+      "message": "No, mmc_blk_mq_compete_rq() seemed to be the wrong place, see my other comments.  This logic belongs in the low-level driver, so that the hardware registers get updated just before/after an actual physical request.  Please see this latest patch where Satya and I have fixed this up.",
+      "parentUuid": "497d66c2_59a12b9f",
+      "range": {
+        "startLine": 2370,
+        "startChar": 0,
+        "endLine": 2375,
+        "endChar": 10
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "de8e9ec0_afa5907b",
         "filename": "drivers/mmc/host/mtk-sd.c",
         "patchSetId": 1
@@ -514,6 +586,30 @@
       "side": 1,
       "message": "NO, CQE is a standard part of eMMC 5.2 spec, 32 slots, it\u0027s different with my patch also",
       "parentUuid": "de8e9ec0_afa5907b",
+      "range": {
+        "startLine": 2380,
+        "startChar": 1,
+        "endLine": 2380,
+        "endChar": 44
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "470cb30c_23d6038a",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2380,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-17T17:06:39Z",
+      "side": 1,
+      "message": "Great.  Just so I understand correctly, your CQE (standard) hardware supports 32 keyslots, but your pre-CQE (legacy / nonstandard) hardware supports only 1 keyslot.  Right?",
+      "parentUuid": "b1f42c8f_e6b3cde9",
       "range": {
         "startLine": 2380,
         "startChar": 1,
@@ -597,6 +693,30 @@
     },
     {
       "key": {
+        "uuid": "9089bcd5_9ef08898",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2390,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-17T17:06:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56bab530_adc4efbb",
+      "range": {
+        "startLine": 2390,
+        "startChar": 2,
+        "endLine": 2390,
+        "endChar": 31
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0fe4f315_52ac0eaf",
         "filename": "drivers/mmc/host/mtk-sd.c",
         "patchSetId": 1
@@ -641,6 +761,30 @@
       "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "445b7813_f405a860",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2397,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-17T17:06:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6282b46_a495fda6",
+      "range": {
+        "startLine": 2397,
+        "startChar": 1,
+        "endLine": 2397,
+        "endChar": 43
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
