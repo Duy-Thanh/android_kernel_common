@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "aeec4b6c_99fa736f",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-04-17T12:49:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40cb059a_9c1dec08",
+      "range": {
+        "startLine": 799,
+        "startChar": 28,
+        "endLine": 799,
+        "endChar": 49
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6bd08ef5_467907ee",
         "filename": "drivers/mmc/host/mtk-sd.c",
         "patchSetId": 1
@@ -190,6 +214,30 @@
     },
     {
       "key": {
+        "uuid": "90590105_d7a9de21",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-04-17T12:49:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bd08ef5_467907ee",
+      "range": {
+        "startLine": 814,
+        "startChar": 30,
+        "endLine": 814,
+        "endChar": 51
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7cf7f6e1_9c9ecdcf",
         "filename": "drivers/mmc/host/mtk-sd.c",
         "patchSetId": 1
@@ -225,6 +273,24 @@
     },
     {
       "key": {
+        "uuid": "16ad4a95_4d216c60",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2253,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-04-17T12:49:06Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7cf7f6e1_9c9ecdcf",
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "447c0e94_55f88c2b",
         "filename": "drivers/mmc/host/mtk-sd.c",
         "patchSetId": 1
@@ -245,6 +311,30 @@
       "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4884f12a_9eae1035",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2303,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-04-17T12:49:06Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "447c0e94_55f88c2b",
+      "range": {
+        "startLine": 2303,
+        "startChar": 11,
+        "endLine": 2303,
+        "endChar": 34
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -470,6 +560,30 @@
       "writtenOn": "2020-04-17T11:45:41Z",
       "side": 1,
       "message": "Sure, for non-cqe, please see the detail in my answer to Satya if needs",
+      "parentUuid": "6321bc42_2f42dfae",
+      "range": {
+        "startLine": 2390,
+        "startChar": 2,
+        "endLine": 2390,
+        "endChar": 31
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56bab530_adc4efbb",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2390,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-04-17T12:49:06Z",
+      "side": 1,
+      "message": "Yes, it\u0027s definitely not meaningless - I left a comment on the original patch asking why the \"meaningless\" comment is there when I uploaded this path (and likewise for reserved below), but it hasn\u0027t been answered yet - I should\u0027ve just removed the comment entirely.",
       "parentUuid": "6321bc42_2f42dfae",
       "range": {
         "startLine": 2390,
