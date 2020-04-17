@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6caf5ba5_676576b4",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1409360
+      },
+      "writtenOn": "2020-04-17T11:45:41Z",
+      "side": 1,
+      "message": "Sure!",
+      "parentUuid": "e48d4a20_5e458888",
+      "range": {
+        "startLine": 596,
+        "startChar": 8,
+        "endLine": 596,
+        "endChar": 22
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bd95bf87_0afed92d",
         "filename": "drivers/mmc/host/mtk-sd.c",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2020-04-16T18:53:42Z",
       "side": 1,
       "message": "Why not use sdr_clear_bits()?  It\u0027s just below.",
+      "range": {
+        "startLine": 603,
+        "startChar": 8,
+        "endLine": 603,
+        "endChar": 22
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92ad5c11_8a5fa28f",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1409360
+      },
+      "writtenOn": "2020-04-17T11:45:41Z",
+      "side": 1,
+      "message": "Sure!",
+      "parentUuid": "bd95bf87_0afed92d",
       "range": {
         "startLine": 603,
         "startChar": 8,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "4f7781f0_93c37ba3",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1409360
+      },
+      "writtenOn": "2020-04-17T11:45:41Z",
+      "side": 1,
+      "message": "I see, I will check it.",
+      "parentUuid": "40cb059a_9c1dec08",
+      "range": {
+        "startLine": 799,
+        "startChar": 28,
+        "endLine": 799,
+        "endChar": 49
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6bd08ef5_467907ee",
         "filename": "drivers/mmc/host/mtk-sd.c",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "2e38597b_4e25bc0d",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 1409360
+      },
+      "writtenOn": "2020-04-17T11:45:41Z",
+      "side": 1,
+      "message": "same as above",
+      "parentUuid": "6bd08ef5_467907ee",
+      "range": {
+        "startLine": 814,
+        "startChar": 30,
+        "endLine": 814,
+        "endChar": 51
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7cf7f6e1_9c9ecdcf",
         "filename": "drivers/mmc/host/mtk-sd.c",
         "patchSetId": 1
@@ -105,6 +201,24 @@
       "writtenOn": "2020-04-16T18:53:42Z",
       "side": 1,
       "message": "This can be simplified, e.g. there\u0027s no need for some of the local variables.\n\nstatic int msdc_set_crypto(struct msdc_host *host, u64 data_unit_num, bool enc)\n{\n        unsigned int aes_switch_dir;\n        unsigned long polling_tmo;\n\n        if (WARN_ON((readl(host-\u003ebase + MSDC_AES_CFG_GP1) \u0026 MSDC_AES_MODE_1) !\u003d\n                    MSDC_CRYPTO_ALG_AES_XTS))\n                return -EINVAL;\n\n        /* 1. set IV */\n        writel(lower_32_bits(data_unit_num), host-\u003ebase + MSDC_AES_CTR0_GP1);\n        writel(upper_32_bits(data_unit_num), host-\u003ebase + MSDC_AES_CTR1_GP1);\n        writel(0, host-\u003ebase + MSDC_AES_CTR2_GP1);\n        writel(0, host-\u003ebase + MSDC_AES_CTR3_GP1);\n\n        /* 2. enable AES path */\n        sdr_set_bits(host-\u003ebase + MSDC_AES_SWST, MSDC_AES_BYPASS);\n\n        if (enc)\n                aes_switch_dir \u003d MSDC_AES_SWITCH_START_ENC;\n        else\n                aes_switch_dir \u003d MSDC_AES_SWITCH_START_DEC;\n\n        /* 3. AES switch start (flush the configure) */\n        sdr_set_bits(host + MSDC_AES_SWST, aes_switch_dir);\n        polling_tmo \u003d jiffies + HZ*3;\n        while (readl(host-\u003ebase + MSDC_AES_SWST) \u0026 aes_switch_dir) {\n                if (time_after(jiffies, polling_tmo)) {\n                        WARN(1, \"msdc error: trigger AES %s timeout!\\n\",\n                             enc ? \"ENC\" : \"DEC\");\n                        return -EINVAL;\n                }\n        }\n}",
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e78ee3ec_5d232b8c",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2253,
+      "author": {
+        "id": 1409360
+      },
+      "writtenOn": "2020-04-17T11:45:41Z",
+      "side": 1,
+      "message": "okay, I will retry",
+      "parentUuid": "7cf7f6e1_9c9ecdcf",
       "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -157,6 +271,30 @@
     },
     {
       "key": {
+        "uuid": "7ad9334b_079159af",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2342,
+      "author": {
+        "id": 1409360
+      },
+      "writtenOn": "2020-04-17T11:45:41Z",
+      "side": 1,
+      "message": "Shall I know what is the problem? I\u0027m sorry about I don\u0027t get it...\n\nMediatek mmc host can support data unit size is 4096, but MTK has a long HW FBE history with 512 bytes data size, we maybe have to handle OTA problem if we change the size from 512 to 4096, whether is there any solution to support different lower device data unit size?",
+      "parentUuid": "fc216827_79100d3f",
+      "range": {
+        "startLine": 2342,
+        "startChar": 1,
+        "endLine": 2342,
+        "endChar": 55
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "34064f71_1edfa99b",
         "filename": "drivers/mmc/host/mtk-sd.c",
         "patchSetId": 1
@@ -168,6 +306,30 @@
       "writtenOn": "2020-04-16T18:53:42Z",
       "side": 1,
       "message": "This is writing the pointer to the key, not the key itself.",
+      "range": {
+        "startLine": 2360,
+        "startChar": 9,
+        "endLine": 2360,
+        "endChar": 52
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "145e7a47_9180b891",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2360,
+      "author": {
+        "id": 1409360
+      },
+      "writtenOn": "2020-04-17T11:45:41Z",
+      "side": 1,
+      "message": "Wow，It seems different with my patch...",
+      "parentUuid": "34064f71_1edfa99b",
       "range": {
         "startLine": 2360,
         "startChar": 9,
@@ -203,6 +365,30 @@
     },
     {
       "key": {
+        "uuid": "497d66c2_59a12b9f",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2375,
+      "author": {
+        "id": 1409360
+      },
+      "writtenOn": "2020-04-17T11:45:41Z",
+      "side": 1,
+      "message": "It will be call in mmc_blk_mq_compete_rq(), I think it is the end of request",
+      "parentUuid": "973c6506_2e73071f",
+      "range": {
+        "startLine": 2370,
+        "startChar": 0,
+        "endLine": 2375,
+        "endChar": 10
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "de8e9ec0_afa5907b",
         "filename": "drivers/mmc/host/mtk-sd.c",
         "patchSetId": 1
@@ -214,6 +400,30 @@
       "writtenOn": "2020-04-16T18:53:42Z",
       "side": 1,
       "message": "Mediatek\u0027s hardware only has one keyslot??",
+      "range": {
+        "startLine": 2380,
+        "startChar": 1,
+        "endLine": 2380,
+        "endChar": 44
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1f42c8f_e6b3cde9",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2380,
+      "author": {
+        "id": 1409360
+      },
+      "writtenOn": "2020-04-17T11:45:41Z",
+      "side": 1,
+      "message": "NO, CQE is a standard part of eMMC 5.2 spec, 32 slots, it\u0027s different with my patch also",
+      "parentUuid": "de8e9ec0_afa5907b",
       "range": {
         "startLine": 2380,
         "startChar": 1,
@@ -249,6 +459,30 @@
     },
     {
       "key": {
+        "uuid": "e5c35aae_04356170",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2390,
+      "author": {
+        "id": 1409360
+      },
+      "writtenOn": "2020-04-17T11:45:41Z",
+      "side": 1,
+      "message": "Sure, for non-cqe, please see the detail in my answer to Satya if needs",
+      "parentUuid": "6321bc42_2f42dfae",
+      "range": {
+        "startLine": 2390,
+        "startChar": 2,
+        "endLine": 2390,
+        "endChar": 31
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0fe4f315_52ac0eaf",
         "filename": "drivers/mmc/host/mtk-sd.c",
         "patchSetId": 1
@@ -260,6 +494,30 @@
       "writtenOn": "2020-04-16T18:53:42Z",
       "side": 1,
       "message": "Setting \u0027reserved\u0027 doesn\u0027t seem to have any point.",
+      "range": {
+        "startLine": 2397,
+        "startChar": 1,
+        "endLine": 2397,
+        "endChar": 43
+      },
+      "revId": "abf00a74cf5d92f0c58575ab97ae526ef0b68c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6282b46_a495fda6",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2397,
+      "author": {
+        "id": 1409360
+      },
+      "writtenOn": "2020-04-17T11:45:41Z",
+      "side": 1,
+      "message": "ya, the meaning is only for MTK non-standard CQE path (SW-CQE), same as above",
+      "parentUuid": "0fe4f315_52ac0eaf",
       "range": {
         "startLine": 2397,
         "startChar": 1,
