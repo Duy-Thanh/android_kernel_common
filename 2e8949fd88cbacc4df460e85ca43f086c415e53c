@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1adcc98d_faf60ec2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-17T20:33:07Z",
+      "side": 1,
+      "message": "Their new hardware does support CQE, right?  So this is only for their legacy hardware?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 37
+      },
+      "revId": "2e8949fd88cbacc4df460e85ca43f086c415e53c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d93c6cfa_0b384e6e",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-17T20:33:07Z",
+      "side": 1,
+      "message": "Question for Mediatek --- what\u0027s the difference between the CTR and IV registers (MSDC_AES_CTR0_GP1 and MSDC_AES_IV0_GP1)?  Which is the correct set of registers to use to set the IV for AES-256-XTS?",
+      "range": {
+        "startLine": 666,
+        "startChar": 0,
+        "endLine": 669,
+        "endChar": 43
+      },
+      "revId": "2e8949fd88cbacc4df460e85ca43f086c415e53c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0645e94_31977fb6",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1418,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-17T20:33:07Z",
+      "side": 1,
+      "message": "I think this needs to go before setting \u0027host-\u003emrq \u003d mrq;\u0027 above.  Otherwise \u0027host-\u003emrq\u0027 will remain set.",
+      "range": {
+        "startLine": 1418,
+        "startChar": 1,
+        "endLine": 1418,
+        "endChar": 38
+      },
+      "revId": "2e8949fd88cbacc4df460e85ca43f086c415e53c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
