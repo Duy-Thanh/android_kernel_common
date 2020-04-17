@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3fd1613c_fd62ce81",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-04-17T21:55:03Z",
+      "side": 1,
+      "message": "I\u0027ll reword this to make it clear that this is only for legacy hardware. It\u0027s just that the Mediatek code that\u0027s in android-common right now doesn\u0027t support CQE at all. Mediatek said they\u0027d put their CQE code up - once they put it up, this patch will need to be reworked slightly to make use of the code in the CQHCI patch later in this series.",
+      "parentUuid": "1adcc98d_faf60ec2",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 37
+      },
+      "revId": "2e8949fd88cbacc4df460e85ca43f086c415e53c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d93c6cfa_0b384e6e",
         "filename": "drivers/mmc/host/mtk-sd.c",
         "patchSetId": 3
@@ -68,6 +92,30 @@
       "revId": "2e8949fd88cbacc4df460e85ca43f086c415e53c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc978c20_a8aae2b4",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1418,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-04-17T21:55:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0645e94_31977fb6",
+      "range": {
+        "startLine": 1418,
+        "startChar": 1,
+        "endLine": 1418,
+        "endChar": 38
+      },
+      "revId": "2e8949fd88cbacc4df460e85ca43f086c415e53c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
