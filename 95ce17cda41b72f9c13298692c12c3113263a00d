@@ -16,6 +16,24 @@
       "revId": "95ce17cda41b72f9c13298692c12c3113263a00d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b14ddd91_40490a69",
+        "filename": "drivers/gpu/drm/drm_dp_mst_topology.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2099,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2020-04-17T23:27:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97814e18_a7256cd5",
+      "revId": "95ce17cda41b72f9c13298692c12c3113263a00d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
