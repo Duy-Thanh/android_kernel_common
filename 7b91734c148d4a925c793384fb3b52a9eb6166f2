@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "423999ba_301b8167",
+        "filename": "drivers/gpu/drm/drm_dp_mst_topology.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2610,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2020-04-17T21:10:56Z",
+      "side": 1,
+      "message": "EXPORT_SYMBOL_GPL",
+      "range": {
+        "startLine": 2610,
+        "startChar": 0,
+        "endLine": 2610,
+        "endChar": 13
+      },
+      "revId": "7b91734c148d4a925c793384fb3b52a9eb6166f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
