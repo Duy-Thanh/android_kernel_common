@@ -1,0 +1,46 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002525837",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1288269?revision\u003d7",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e9740e36_daab5d15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-04-17T22:22:49Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Alistair Delva \u003cadelva@google.com\u003e",
+      "revId": "48f0635844f2791cfa62d688e55d6cdf9a4effab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002525837",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1288269?revision\u003d7",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e4546199_2cb937e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-04-17T22:22:49Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nANDROID: Patch only relevant for Android, unlikely to be upstreamed",
+      "revId": "48f0635844f2791cfa62d688e55d6cdf9a4effab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
