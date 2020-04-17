@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c8368e7_9fbed416",
+        "filename": "drivers/mmc/host/cqhci-crypto.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-17T20:54:19Z",
+      "side": 1,
+      "message": "Nit: there\u0027s an extra blank line here.",
+      "revId": "ae2ecacc3566c89d4a10ae21737e1f6f0f1d7d3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
