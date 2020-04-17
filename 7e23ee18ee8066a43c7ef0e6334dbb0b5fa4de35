@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5841ddc5_5c33ae34",
+        "filename": "lib/vsprintf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1736,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2020-04-17T17:35:13Z",
+      "side": 1,
+      "message": "EXPORT_SYMBOL_GPL .. and do you really need to export this. If its only used from ion-core, thats a \u0027bool\u0027 kconfig and will always be compiled into the kernel?\n\nThis will only be needed if you are looking or heap code to use this and in that case, those heaps can come from aywhere and you won\u0027t get the stats.\n\nAs much as possible, try to add things into ion-core, so it shows up on all devices.",
+      "range": {
+        "startLine": 1736,
+        "startChar": 0,
+        "endLine": 1736,
+        "endChar": 13
+      },
+      "revId": "7e23ee18ee8066a43c7ef0e6334dbb0b5fa4de35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
