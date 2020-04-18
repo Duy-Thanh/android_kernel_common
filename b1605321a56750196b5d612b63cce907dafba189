@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5481371e_5a833e20",
+        "filename": "drivers/extcon/extcon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2020-04-18T05:57:26Z",
+      "side": 1,
+      "message": "Technically should be EXPORT_SYMBOL_GPL, but since this is a cherry-pick I\u0027ll +2 anyway",
+      "range": {
+        "startLine": 503,
+        "startChar": 0,
+        "endLine": 503,
+        "endChar": 13
+      },
+      "revId": "b1605321a56750196b5d612b63cce907dafba189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
