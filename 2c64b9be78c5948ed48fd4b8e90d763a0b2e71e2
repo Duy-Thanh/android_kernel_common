@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96491250_86b1fc50",
+        "filename": "include/linux/mmc/host.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-20T22:43:53Z",
+      "side": 1,
+      "message": "How about keeping this as (1 \u003c\u003c 27) like android-mainline, in case someone backports the (1 \u003c\u003c 26) bit?  This type of thing happens...: https://android-review.googlesource.com/c/kernel/common/+/1222875",
+      "range": {
+        "startLine": 371,
+        "startChar": 25,
+        "endLine": 371,
+        "endChar": 34
+      },
+      "revId": "2c64b9be78c5948ed48fd4b8e90d763a0b2e71e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
