@@ -22,6 +22,30 @@
       "revId": "7e23ee18ee8066a43c7ef0e6334dbb0b5fa4de35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db24d030_d60f11cb",
+        "filename": "lib/vsprintf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1736,
+      "author": {
+        "id": 1386032
+      },
+      "writtenOn": "2020-04-20T09:04:39Z",
+      "side": 1,
+      "message": "Changed to EXPORT_SYMBOL_GPL. As discussed I agree, however in 4.19 even ion-core is compiled as a module. Should we export the symbol for 4.19 only (not for subsequent kernels)?",
+      "parentUuid": "5841ddc5_5c33ae34",
+      "range": {
+        "startLine": 1736,
+        "startChar": 0,
+        "endLine": 1736,
+        "endChar": 13
+      },
+      "revId": "7e23ee18ee8066a43c7ef0e6334dbb0b5fa4de35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
