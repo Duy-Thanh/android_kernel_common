@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "f6f8204c_1985e806",
+        "filename": "drivers/clocksource/timer-sprd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-04-20T16:36:52Z",
+      "side": 1,
+      "message": "No, timer, irqchip, a few clock, etc get special treatment during early boot so that sched timer can work. The OF_DECLARE stuff hooks these calls into a table that those frameworks parse way before any init calls.",
+      "parentUuid": "3b916d85_50dbd954",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 42
+      },
+      "revId": "df2c0f7188aeba1f418956954a66514a35d6c761",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "67a7d2a7_2d1e3bc6",
         "filename": "drivers/clocksource/timer-sprd.c",
         "patchSetId": 1
@@ -59,6 +83,30 @@
       "writtenOn": "2020-04-20T11:52:41Z",
       "side": 1,
       "message": "I think you can drop these if you get rid of the #ifdef MODULE above, right?",
+      "range": {
+        "startLine": 237,
+        "startChar": 1,
+        "endLine": 239,
+        "endChar": 28
+      },
+      "revId": "df2c0f7188aeba1f418956954a66514a35d6c761",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7df411cf_129f7ed5",
+        "filename": "drivers/clocksource/timer-sprd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-04-20T16:36:52Z",
+      "side": 1,
+      "message": "So this part is needed if it\u0027s built in because these devices don\u0027t probe using driver core.",
+      "parentUuid": "67a7d2a7_2d1e3bc6",
       "range": {
         "startLine": 237,
         "startChar": 1,
