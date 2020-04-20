@@ -46,6 +46,30 @@
       "revId": "7e23ee18ee8066a43c7ef0e6334dbb0b5fa4de35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "03c222bd_15a70a3f",
+        "filename": "lib/vsprintf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1736,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-04-20T19:04:03Z",
+      "side": 1,
+      "message": "Yes, it should only be needed in ACK 4.19 if ion-core is the only consumer. ion-core is built in(with heaps as modules) starting in ACK 5.4 and android-mainline and hence we wouldn\u0027t need it on those branches.",
+      "parentUuid": "db24d030_d60f11cb",
+      "range": {
+        "startLine": 1736,
+        "startChar": 0,
+        "endLine": 1736,
+        "endChar": 13
+      },
+      "revId": "7e23ee18ee8066a43c7ef0e6334dbb0b5fa4de35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
