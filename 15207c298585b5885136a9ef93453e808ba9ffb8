@@ -22,6 +22,30 @@
       "revId": "15207c298585b5885136a9ef93453e808ba9ffb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02479687_54e4eaa3",
+        "filename": "lib/vsprintf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1736,
+      "author": {
+        "id": 1386032
+      },
+      "writtenOn": "2020-04-21T22:15:43Z",
+      "side": 1,
+      "message": "Yes, 5.4 will not include it",
+      "parentUuid": "9b09364b_e449cfe7",
+      "range": {
+        "startLine": 1736,
+        "startChar": 0,
+        "endLine": 1736,
+        "endChar": 17
+      },
+      "revId": "15207c298585b5885136a9ef93453e808ba9ffb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
