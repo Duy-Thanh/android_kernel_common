@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b09364b_e449cfe7",
+        "filename": "lib/vsprintf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1736,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-04-21T22:12:26Z",
+      "side": 1,
+      "message": "this export will not be needed in 5.4 branch because in there ION core is compiled as part of the kernel.",
+      "range": {
+        "startLine": 1736,
+        "startChar": 0,
+        "endLine": 1736,
+        "endChar": 17
+      },
+      "revId": "15207c298585b5885136a9ef93453e808ba9ffb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
