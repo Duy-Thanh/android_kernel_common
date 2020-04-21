@@ -22,6 +22,30 @@
       "revId": "2842d11fa3097e80caa36ca1e78d649715dea341",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63d08a77_cb13f4d7",
+        "filename": "drivers/staging/android/ion/ion_trace.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1386032
+      },
+      "writtenOn": "2020-04-21T17:47:00Z",
+      "side": 1,
+      "message": "Unfortunately there\u0027s no single-read guard in trace macros (see TRACE_HEADER_MULTI_READ), so even inlining would not solve this.\n\nI\u0027ve removed the unnecessary local.",
+      "parentUuid": "bac1aa25_8b572989",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 6
+      },
+      "revId": "2842d11fa3097e80caa36ca1e78d649715dea341",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
