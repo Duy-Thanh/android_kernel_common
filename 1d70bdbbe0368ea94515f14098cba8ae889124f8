@@ -22,6 +22,30 @@
       "revId": "1d70bdbbe0368ea94515f14098cba8ae889124f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ac05cb5_408f1b4c",
+        "filename": "include/linux/fsnotify.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-04-21T11:35:51Z",
+      "side": 0,
+      "message": "From what I checked with db845c build, it seems OK with these lines removed directly.",
+      "parentUuid": "9bc54eef_d1dc8f8d",
+      "range": {
+        "startLine": 263,
+        "startChar": 0,
+        "endLine": 269,
+        "endChar": 2
+      },
+      "revId": "1d70bdbbe0368ea94515f14098cba8ae889124f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
