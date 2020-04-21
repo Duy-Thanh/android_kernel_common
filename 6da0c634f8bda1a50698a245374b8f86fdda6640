@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e14b989b_6b56457e",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-04-21T16:13:26Z",
+      "side": 1,
+      "message": "Missing struct mutex dev_lock; prior to card_num to match ABI",
+      "range": {
+        "startLine": 69,
+        "startChar": 1,
+        "endLine": 69,
+        "endChar": 14
+      },
+      "revId": "6da0c634f8bda1a50698a245374b8f86fdda6640",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
