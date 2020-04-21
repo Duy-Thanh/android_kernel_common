@@ -41,6 +41,48 @@
       "revId": "8adde2e6fc6267d6620085730372c36400d8b960",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002562462",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1291027?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "222bdcb2_bfc65f45",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-04-21T00:39:30Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Marco Ballesio \u003cbalejs@google.com\u003e",
+      "revId": "8adde2e6fc6267d6620085730372c36400d8b960",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002562462",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1291027?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "23d484fd_3301ce2d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-04-21T00:39:30Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream",
+      "revId": "8adde2e6fc6267d6620085730372c36400d8b960",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
