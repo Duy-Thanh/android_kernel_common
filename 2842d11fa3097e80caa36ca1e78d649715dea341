@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bac1aa25_8b572989",
+        "filename": "drivers/staging/android/ion/ion_trace.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-04-21T16:21:00Z",
+      "side": 1,
+      "message": "You can get rid of the #ifdefs by declaring this function as inline and simplifying it:\n\nstatic inline unsigned int __ion_ptr_to_hash(const void *ptr)\n{\n\tunsigned long hashval;\n\n\tif (ptr_to_hashval(ptr, \u0026hashval))\n\t\treturn 0;\n\n\t/* The hashed value is only 32-bit */\n\treturn (unsigned int)hashval;\n}",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 6
+      },
+      "revId": "2842d11fa3097e80caa36ca1e78d649715dea341",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
