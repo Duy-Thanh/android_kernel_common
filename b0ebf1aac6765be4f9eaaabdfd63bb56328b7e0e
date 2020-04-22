@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79268d28_031db20d",
+        "filename": "include/linux/usb/hcd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-04-22T21:36:55Z",
+      "side": 1,
+      "message": "Since these are unisoc-specific, can these be changed to \n\n  u64 android_vendor_data[2];",
+      "revId": "b0ebf1aac6765be4f9eaaabdfd63bb56328b7e0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
