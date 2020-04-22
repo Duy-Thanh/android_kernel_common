@@ -1936,12 +1936,13 @@ static int validate_logs(char *mount_dir, int log_fd, struct test_file *file,
 			 bool no_rlog)
 {
 	uint8_t data[INCFS_DATA_FILE_BLOCK_SIZE];
-	struct incfs_pending_read_info prs[100] = {};
+	struct incfs_pending_read_info prs[1000] = {};
 	int prs_size = ARRAY_SIZE(prs);
 	int block_cnt = 1 + (file->size - 1) / INCFS_DATA_FILE_BLOCK_SIZE;
+	int expected_read_block_cnt;
 	int res;
 	int read_count;
-	int i;
+	int i, j;
 	char *filename = concat_file_name(mount_dir, file->name);
 	int fd;
 
@@ -1952,10 +1953,22 @@ static int validate_logs(char *mount_dir, int log_fd, struct test_file *file,
 
 	if (block_cnt > prs_size)
 		block_cnt = prs_size;
+	expected_read_block_cnt = block_cnt;
 
 	for (i = 0; i < block_cnt; i++) {
 		res = pread(fd, data, sizeof(data),
 			    INCFS_DATA_FILE_BLOCK_SIZE * i);
+
+		/* Make some read logs of type SAME_FILE_NEXT_BLOCK */
+		if (i % 10 == 0)
+			usleep(20000);
+
+		/* Skip some blocks to make logs of type SAME_FILE */
+		if (i % 10 == 5) {
+			++i;
+			--expected_read_block_cnt;
+		}
+
 		if (res <= 0)
 			goto failure;
 	}
@@ -1979,14 +1992,14 @@ static int validate_logs(char *mount_dir, int log_fd, struct test_file *file,
 		goto failure;
 	}
 
-	if (read_count != block_cnt) {
+	if (read_count != expected_read_block_cnt) {
 		ksft_print_msg("Bad log read count %s %d %d.\n", file->name,
-			       read_count, block_cnt);
+			       read_count, expected_read_block_cnt);
 		goto failure;
 	}
 
-	for (i = 0; i < read_count; i++) {
-		struct incfs_pending_read_info *read = &prs[i];
+	for (i = 0, j = 0; j < read_count; i++, j++) {
+		struct incfs_pending_read_info *read = &prs[j];
 
 		if (!same_id(&read->file_id, &file->id)) {
 			ksft_print_msg("Bad log read ino %s\n", file->name);
@@ -1999,8 +2012,8 @@ static int validate_logs(char *mount_dir, int log_fd, struct test_file *file,
 			goto failure;
 		}
 
-		if (i != 0) {
-			unsigned long psn = prs[i - 1].serial_number;
+		if (j != 0) {
+			unsigned long psn = prs[j - 1].serial_number;
 
 			if (read->serial_number != psn + 1) {
 				ksft_print_msg("Bad log read sn %s %d %d.\n",
@@ -2015,6 +2028,9 @@ static int validate_logs(char *mount_dir, int log_fd, struct test_file *file,
 				       file->name);
 			goto failure;
 		}
+
+		if (i % 10 == 5)
+			++i;
 	}
 
 success:
