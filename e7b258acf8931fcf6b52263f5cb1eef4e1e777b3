@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "fd617e3a_bf88e4d7",
+        "filename": "include/linux/fsnotify.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1090891
+      },
+      "writtenOn": "2020-04-22T17:25:45Z",
+      "side": 0,
+      "message": "so \"ANDROID: vfs: add d_canonical_path for stacked filesystem support\" for linux mainline kernel is remove lower_path, i test sdcardfs on 5.7rc2 two days, seem normal work.\n5.7, https://github.com/youling257/android-4.9/commit/af8d889d3d9d8b57c8cb5a85fe23b30a0cb914ec\n5.6 https://github.com/youling257/android-4.9/commit/2a3057ad7319ec068425c6bd19030003cc05c3b9",
+      "revId": "e7b258acf8931fcf6b52263f5cb1eef4e1e777b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "943cd9d0_d3b42fc3",
         "filename": "include/linux/fsnotify.h",
         "patchSetId": 2
@@ -22,6 +39,30 @@
       "revId": "e7b258acf8931fcf6b52263f5cb1eef4e1e777b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1185aa93_dc01aa2f",
+        "filename": "include/linux/fsnotify.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1090891
+      },
+      "writtenOn": "2020-04-22T17:25:45Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "943cd9d0_d3b42fc3",
+      "range": {
+        "startLine": 270,
+        "startChar": 1,
+        "endLine": 270,
+        "endChar": 34
+      },
+      "revId": "e7b258acf8931fcf6b52263f5cb1eef4e1e777b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
