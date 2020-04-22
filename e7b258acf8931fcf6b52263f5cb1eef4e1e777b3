@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "943cd9d0_d3b42fc3",
+        "filename": "include/linux/fsnotify.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-04-22T16:03:26Z",
+      "side": 0,
+      "message": "As an ugly workaround, is to only change this fsnotify_file(file, mask); line to fsnotify_file(file, mask);, and leave other lines not changed.\n\nThere might be another workaround to use fsnotify_dentry for the fsnotify_parent and fsnotify calls in the if block, but I need to check more to understand how to update that.\n\nMaybe you have good understanding on the implementation, and could find the workaround quickly.",
+      "range": {
+        "startLine": 270,
+        "startChar": 1,
+        "endLine": 270,
+        "endChar": 34
+      },
+      "revId": "e7b258acf8931fcf6b52263f5cb1eef4e1e777b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
