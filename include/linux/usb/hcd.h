@@ -415,6 +415,10 @@ struct hc_driver {
 	int	(*find_raw_port_number)(struct usb_hcd *, int);
 	/* Call for power on/off the port if necessary */
 	int	(*port_power)(struct usb_hcd *hcd, int portnum, bool enable);
+	/* USB audio offload */
+	void	(*offload_config)(struct usb_hcd *hcd, int ep_num, int mono,
+		int is_pcm_24, int width, int rate, int offload_used);
+	void	(*set_offload_mode)(struct usb_hcd *hcd, bool is_offload);
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
