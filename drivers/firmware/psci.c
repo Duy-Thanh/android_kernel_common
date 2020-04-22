@@ -268,7 +268,7 @@ static int __init psci_features(u32 psci_func_id)
 }
 
 #ifdef CONFIG_CPU_IDLE
-static DEFINE_PER_CPU_READ_MOSTLY(u32 *, psci_power_state);
+DEFINE_PER_CPU_READ_MOSTLY(u32 *, psci_power_state);
 
 static int psci_dt_cpu_init_idle(struct device_node *cpu_node, int cpu)
 {
@@ -397,28 +397,40 @@ int psci_cpu_init_idle(unsigned int cpu)
 	return ret;
 }
 
-static int psci_suspend_finisher(unsigned long state_id)
+static int psci_suspend_finisher(unsigned long state)
 {
-	return psci_ops.cpu_suspend(state_id,
+	return psci_ops.cpu_suspend(state,
 				    __pa_symbol(cpu_resume));
 }
-int psci_cpu_suspend_enter(unsigned long state_id)
+
+int psci_cpu_suspend_enter(u32 state)
 {
 	int ret;
+
+	if (!psci_power_state_loses_context(state))
+		ret = psci_ops.cpu_suspend(state, 0);
+	else
+		ret = cpu_suspend(state, psci_suspend_finisher);
+
+	return ret;
+}
+
+int psci_cpu_suspend_enter_index(unsigned long index)
+{
+	u32 *state;
 
 	/*
 	 * idle state index 0 corresponds to wfi, should never be called
 	 * from the cpu_suspend operations
 	 */
-	if (WARN_ON_ONCE(!state_id))
+	if (WARN_ON_ONCE(!index))
 		return -EINVAL;
 
-	if (!psci_power_state_loses_context(state_id))
-		ret = psci_ops.cpu_suspend(state_id, 0);
-	else
-		ret = cpu_suspend(state_id, psci_suspend_finisher);
+	state = __this_cpu_read(psci_power_state);
+	if (!state)
+		return -EOPNOTSUPP;
 
-	return ret;
+	return psci_cpu_suspend_enter(state[index - 1]);
 }
 
 /* ARM specific CPU idle operations */

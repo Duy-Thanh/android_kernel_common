@@ -23,7 +23,11 @@
 bool psci_tos_resident_on(int cpu);
 
 int psci_cpu_init_idle(unsigned int cpu);
-int psci_cpu_suspend_enter(unsigned long index);
+int psci_cpu_suspend_enter(u32 state);
+int psci_cpu_suspend_enter_index(unsigned long index);
+#ifdef CONFIG_CPU_IDLE
+extern DEFINE_PER_CPU_READ_MOSTLY(u32 *, psci_power_state);
+#endif
 
 enum psci_conduit {
 	PSCI_CONDUIT_NONE,

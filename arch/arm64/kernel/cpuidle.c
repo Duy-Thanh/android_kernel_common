@@ -57,10 +57,14 @@ int acpi_processor_ffh_lpi_probe(unsigned int cpu)
 
 int acpi_processor_ffh_lpi_enter(struct acpi_lpi_state *lpi)
 {
+	u32 state = lpi->address;
+
 	if (ARM64_LPI_IS_RETENTION_STATE(lpi->arch_flags))
-		return CPU_PM_CPU_IDLE_ENTER_RETENTION(arm_cpuidle_suspend,
-						lpi->index);
+		return CPU_PM_CPU_IDLE_ENTER_RETENTION_PARAM(
+						psci_cpu_suspend_enter,
+						lpi->index, state);
 	else
-		return CPU_PM_CPU_IDLE_ENTER(arm_cpuidle_suspend, lpi->index);
+		return CPU_PM_CPU_IDLE_ENTER_PARAM(psci_cpu_suspend_enter,
+						   lpi->index, state);
 }
 #endif
