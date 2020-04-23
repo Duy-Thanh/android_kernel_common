@@ -16,6 +16,24 @@
       "revId": "b0ebf1aac6765be4f9eaaabdfd63bb56328b7e0e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9244ced_82198162",
+        "filename": "include/linux/usb/hcd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1598974
+      },
+      "writtenOn": "2020-04-23T02:04:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "79268d28_031db20d",
+      "revId": "b0ebf1aac6765be4f9eaaabdfd63bb56328b7e0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
