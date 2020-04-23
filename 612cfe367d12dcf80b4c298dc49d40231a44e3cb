@@ -1,0 +1,25 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002627445",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1293916?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "bc8cfc12_f1c46616",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-04-23T10:03:39Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: hajun.sung \u003chajun.sung@samsung.com\u003e",
+      "revId": "612cfe367d12dcf80b4c298dc49d40231a44e3cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
