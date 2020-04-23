@@ -1838,9 +1838,6 @@
   cpufreq_platform_cooling_register
   __tracepoint_clock_set_rate
 
-# required by msm_minidump.ko
-  linux_banner
-
 # required by msm_npu.ko
   kmem_cache_create_usercopy
 
