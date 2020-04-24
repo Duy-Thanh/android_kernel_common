@@ -3,8 +3,7 @@
 # Allwinner sunXi SoC drivers
 #
 config SUNXI_SRAM
-	bool
-	default ARCH_SUNXI
+	tristate
 	select REGMAP_MMIO
 	help
 	  Say y here to enable the SRAM controller support. This
