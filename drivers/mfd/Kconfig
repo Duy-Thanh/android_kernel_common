@@ -1278,8 +1278,7 @@ config MFD_STA2X11
 	select REGMAP_MMIO
 
 config MFD_SUN6I_PRCM
-	bool "Allwinner A31 PRCM controller"
-	depends on ARCH_SUNXI || COMPILE_TEST
+	tristate "Allwinner A31 PRCM controller"
 	select MFD_CORE
 	help
 	  Support for the PRCM (Power/Reset/Clock Management) unit available

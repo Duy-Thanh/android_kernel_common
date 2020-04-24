@@ -376,8 +376,7 @@ config ARM64_ERRATUM_858921
 	  core is detected.
 
 config SUN50I_ERRATUM_UNKNOWN1
-	bool "Workaround for Allwinner A64 erratum UNKNOWN1"
-	default y
+	tristate "Workaround for Allwinner A64 erratum UNKNOWN1"
 	depends on ARM_ARCH_TIMER && ARM64 && ARCH_SUNXI
 	select ARM_ARCH_TIMER_OOL_WORKAROUND
 	help
