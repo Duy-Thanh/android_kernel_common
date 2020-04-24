@@ -677,7 +677,7 @@ config CRYPTO_DEV_SUN4I_SS
 	  will be called sun4i-ss.
 
 config CRYPTO_DEV_SUN4I_SS_PRNG
-	bool "Support for Allwinner Security System PRNG"
+	tristate "Support for Allwinner Security System PRNG"
 	depends on CRYPTO_DEV_SUN4I_SS
 	select CRYPTO_RNG
 	help

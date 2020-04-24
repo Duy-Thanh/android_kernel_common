@@ -129,7 +129,7 @@ config RESET_SCMI
 
 config RESET_SIMPLE
 	bool "Simple Reset Controller Driver" if COMPILE_TEST
-	default ARCH_STM32 || ARCH_STRATIX10 || ARCH_SUNXI || ARCH_ZX || ARCH_ASPEED || ARCH_BITMAIN || ARC
+	default ARCH_STM32 || ARCH_STRATIX10 || ARCH_ZX || ARCH_ASPEED || ARCH_BITMAIN || ARC
 	help
 	  This enables a simple reset controller driver for reset lines that
 	  that can be asserted and deasserted by toggling bits in a contiguous,
@@ -158,8 +158,7 @@ config RESET_SOCFPGA
 	  driver gets initialized early during platform init calls.
 
 config RESET_SUNXI
-	bool "Allwinner SoCs Reset Driver" if COMPILE_TEST && !ARCH_SUNXI
-	default ARCH_SUNXI
+	tristate "Allwinner SoCs Reset Driver" if COMPILE_TEST && !ARCH_SUNXI
 	select RESET_SIMPLE
 	help
 	  This enables the reset driver for Allwinner SoCs.

@@ -175,7 +175,6 @@ config DWMAC_STM32
 
 config DWMAC_SUNXI
 	tristate "Allwinner GMAC support"
-	default ARCH_SUNXI
 	depends on OF && (ARCH_SUNXI || COMPILE_TEST)
 	---help---
 	  Support for Allwinner A20/A31 GMAC ethernet controllers.
@@ -186,7 +185,6 @@ config DWMAC_SUNXI
 
 config DWMAC_SUN8I
 	tristate "Allwinner sun8i GMAC support"
-	default ARCH_SUNXI
 	depends on OF && (ARCH_SUNXI || COMPILE_TEST)
 	select MDIO_BUS_MUX
 	---help---

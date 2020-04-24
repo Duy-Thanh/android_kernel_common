@@ -15,7 +15,6 @@ config ARCH_AGILEX
 
 config ARCH_SUNXI
 	bool "Allwinner sunxi 64-bit SoC Family"
-	select ARCH_HAS_RESET_CONTROLLER
 	select GENERIC_IRQ_CHIP
 	select PINCTRL
 	select RESET_CONTROLLER
