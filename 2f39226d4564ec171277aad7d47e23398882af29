@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63a3d643_1f51ff2a",
+        "filename": "include/vdso/bits.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-04-26T17:54:51Z",
+      "side": 1,
+      "message": "This introduces a module signature CRC error",
+      "range": {
+        "startLine": 7,
+        "startChar": 19,
+        "endLine": 7,
+        "endChar": 24
+      },
+      "revId": "2f39226d4564ec171277aad7d47e23398882af29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
