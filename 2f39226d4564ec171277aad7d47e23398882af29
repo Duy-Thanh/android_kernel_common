@@ -22,6 +22,30 @@
       "revId": "2f39226d4564ec171277aad7d47e23398882af29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "616e1f84_b87c6571",
+        "filename": "include/vdso/bits.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-04-26T19:06:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63a3d643_1f51ff2a",
+      "range": {
+        "startLine": 7,
+        "startChar": 19,
+        "endLine": 7,
+        "endChar": 24
+      },
+      "revId": "2f39226d4564ec171277aad7d47e23398882af29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
