@@ -22,6 +22,30 @@
       "revId": "0efbc6e50475a746d1bd05b91c10ae57308d6d63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1844c6e_092d94e5",
+        "filename": "drivers/android/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-04-26T23:54:07Z",
+      "side": 1,
+      "message": "Yes, definitely.",
+      "parentUuid": "d1c81805_0c3c7e73",
+      "range": {
+        "startLine": 5,
+        "startChar": 60,
+        "endLine": 5,
+        "endChar": 71
+      },
+      "revId": "0efbc6e50475a746d1bd05b91c10ae57308d6d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
