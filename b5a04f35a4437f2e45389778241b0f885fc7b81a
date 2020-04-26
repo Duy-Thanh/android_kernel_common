@@ -1,0 +1,46 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002670741",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1293919?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "0b2bba07_d500349c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-04-26T08:00:28Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: liyong \u003cliyong@allwinnertech.com\u003e",
+      "revId": "b5a04f35a4437f2e45389778241b0f885fc7b81a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002670741",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1293919?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "d39ca74b_a42bb962",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-04-26T08:00:28Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a Bug: or Fixes: line",
+      "revId": "b5a04f35a4437f2e45389778241b0f885fc7b81a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
