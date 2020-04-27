@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "d73eda37_425fa12e",
+        "filename": "include/trace/events/vendor_hook.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-04-27T15:44:36Z",
+      "side": 1,
+      "message": "I thought of that, but the existing cases I could find were in trace/events and there isn\u0027t a good alternative. Of course we could create trace/tracepoints or trace/hooks... would that be better? I didn\u0027t think this was worth creating a new directory for.\n\nWhere do you think it should go?",
+      "parentUuid": "a8617670_19cf7068",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 13,
+        "endChar": 3
+      },
+      "revId": "0efbc6e50475a746d1bd05b91c10ae57308d6d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4d03908b_99177734",
         "filename": "kernel/exit.c",
         "patchSetId": 1
@@ -83,6 +107,30 @@
       "writtenOn": "2020-04-27T07:41:28Z",
       "side": 1,
       "message": "Is this going to be used in this case? Or was it just for the example to show how we would have a return value from a tracepoint?",
+      "range": {
+        "startLine": 716,
+        "startChar": 1,
+        "endLine": 716,
+        "endChar": 9
+      },
+      "revId": "0efbc6e50475a746d1bd05b91c10ae57308d6d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb71c937_8d37b39b",
+        "filename": "kernel/exit.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-04-27T15:44:36Z",
+      "side": 1,
+      "message": "It was just an example -- I should have added a conditional after the trace as part of the example.",
+      "parentUuid": "4d03908b_99177734",
       "range": {
         "startLine": 716,
         "startChar": 1,
