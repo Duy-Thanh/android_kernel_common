@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0911c966_8c0118da",
+        "filename": "abi_gki_aarch64_unisoc_whitelist",
+        "patchSetId": 3
+      },
+      "lineNbr": 2165,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-04-27T07:30:00Z",
+      "side": 0,
+      "message": "we can\u0027t remove symbols from the whitelist anymore",
+      "revId": "dd7b0d0aaac359d0bd53f11e76bc2aee010b6e1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
