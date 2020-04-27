@@ -16,6 +16,24 @@
       "revId": "dd7b0d0aaac359d0bd53f11e76bc2aee010b6e1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "229907bc_bb59275c",
+        "filename": "abi_gki_aarch64_unisoc_whitelist",
+        "patchSetId": 3
+      },
+      "lineNbr": 2165,
+      "author": {
+        "id": 1639060
+      },
+      "writtenOn": "2020-04-27T07:53:33Z",
+      "side": 0,
+      "message": "Adding kernel_read is my mistake and I need to fix it.\nOtherwise, greg\u0027s deletion of kernel_read will be in vain.",
+      "parentUuid": "0911c966_8c0118da",
+      "revId": "dd7b0d0aaac359d0bd53f11e76bc2aee010b6e1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
