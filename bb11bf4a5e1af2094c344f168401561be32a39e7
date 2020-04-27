@@ -22,6 +22,30 @@
       "revId": "bb11bf4a5e1af2094c344f168401561be32a39e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5bb78cf9_cf7026da",
+        "filename": "abi_gki_aarch64_unisoc_whitelist",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-04-27T10:03:48Z",
+      "side": 0,
+      "message": "Right, that seems to be an error. My script clearly failed somewhere, I\u0027ll go fix it. Sorry for the noise.",
+      "parentUuid": "c7d35312_fcb2a5ec",
+      "range": {
+        "startLine": 100,
+        "startChar": 1,
+        "endLine": 100,
+        "endChar": 21
+      },
+      "revId": "bb11bf4a5e1af2094c344f168401561be32a39e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
