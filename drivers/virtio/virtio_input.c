@@ -3,7 +3,11 @@
 #include <linux/virtio.h>
 #include <linux/virtio_config.h>
 #include <linux/input.h>
+<<<<<<< HEAD   (79c3a2 ANDROID: Remove VLA from uid_sys_stats.c)
 #include <linux/input/mt.h>
+=======
+#include <linux/slab.h>
+>>>>>>> BRANCH (6a8b55 Linux 5.7-rc3)
 
 #include <uapi/linux/virtio_ids.h>
 #include <uapi/linux/virtio_input.h>
