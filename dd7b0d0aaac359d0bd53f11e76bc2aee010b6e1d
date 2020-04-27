@@ -52,6 +52,24 @@
       "revId": "dd7b0d0aaac359d0bd53f11e76bc2aee010b6e1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d297b67_3c4d43e1",
+        "filename": "abi_gki_aarch64_unisoc_whitelist",
+        "patchSetId": 3
+      },
+      "lineNbr": 2165,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-27T11:44:08Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "651d9bf7_bf414b48",
+      "revId": "dd7b0d0aaac359d0bd53f11e76bc2aee010b6e1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
