@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "0bf92683_8221811f",
+        "filename": "include/trace/events/vendor_hook.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-04-27T16:38:34Z",
+      "side": 1,
+      "message": "No strong opinion really. It just felt a little odd to add a trace point w/o trace event in the \u0027events\u0027 folder, but I see your point.\n\nI suppose having a \u0027trace/hooks\u0027 folder might help a little bit keeping the hooks well separated. We could have, say, \u0027hooks/sched.h\u0027 for all sched hooks, without having to touch the upstream code in \u0027events/sched.h\u0027.",
+      "parentUuid": "d73eda37_425fa12e",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 13,
+        "endChar": 3
+      },
+      "revId": "0efbc6e50475a746d1bd05b91c10ae57308d6d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4d03908b_99177734",
         "filename": "kernel/exit.c",
         "patchSetId": 1
