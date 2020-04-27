@@ -46,6 +46,30 @@
       "revId": "bb11bf4a5e1af2094c344f168401561be32a39e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86df845a_91c7411b",
+        "filename": "abi_gki_aarch64_unisoc_whitelist",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-04-27T10:17:42Z",
+      "side": 0,
+      "message": "OK, the issue is with dev_kfree_skb_any() which is a static inline function and shouldn\u0027t be in your whitelist (I went a bit too fast with grep).\n\nI\u0027ll push an update, thank you for the careful review.",
+      "parentUuid": "5bb78cf9_cf7026da",
+      "range": {
+        "startLine": 100,
+        "startChar": 1,
+        "endLine": 100,
+        "endChar": 21
+      },
+      "revId": "bb11bf4a5e1af2094c344f168401561be32a39e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
