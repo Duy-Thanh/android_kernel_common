@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "55f50add_e77378dc",
+        "filename": "include/trace/events/vendor_hook.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-04-27T23:42:01Z",
+      "side": 1,
+      "message": "trace/hooks might be the right thing. There will probably be clusters of these hooks in different subsystems so there could easily be as many as 10 files.\n\nGreg- what do you recommend?\n\nFor instantiating them, are you ok with the single android/drivers/vendor_hooks.c? I don\u0027t think there\u0027s a lot of value in separating that into a bunch of files.",
+      "parentUuid": "0bf92683_8221811f",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 13,
+        "endChar": 3
+      },
+      "revId": "0efbc6e50475a746d1bd05b91c10ae57308d6d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4d03908b_99177734",
         "filename": "kernel/exit.c",
         "patchSetId": 1
