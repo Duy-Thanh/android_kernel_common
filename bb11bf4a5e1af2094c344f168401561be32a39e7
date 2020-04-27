@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7d35312_fcb2a5ec",
+        "filename": "abi_gki_aarch64_unisoc_whitelist",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1639060
+      },
+      "writtenOn": "2020-04-27T09:48:39Z",
+      "side": 0,
+      "message": "This symbols is exported,and other whitelists also contain this symbols。\n\ngrep -rn \"__dev_kfree_skb_any\"\nnet/core/dev.c:2736:void __dev_kfree_skb_any(struct sk_buff *skb, enum skb_free_reason reason)\nnet/core/dev.c:2743:EXPORT_SYMBOL(__dev_kfree_skb_any);\nabi_gki_aarch64_qcom_whitelist:358:  __dev_kfree_skb_any\nabi_gki_aarch64_cuttlefish_whitelist:28:  __dev_kfree_skb_any\nabi_gki_aarch64_goldfish_whitelist:54:  __dev_kfree_skb_any\ninclude/linux/netdevice.h:3587:void __dev_kfree_skb_any(struct sk_buff *skb, enum skb_free_reason reason);\ninclude/linux/netdevice.h:3620:\t__dev_kfree_skb_any(skb, SKB_REASON_DROPPED);\ninclude/linux/netdevice.h:3625:\t__dev_kfree_skb_any(skb, SKB_REASON_CONSUMED);\nabi_gki_aarch64_unisoc_whitelist:118:  __dev_kfree_skb_any\nabi_gki_aarch64_db845c_whitelist:67:  __dev_kfree_skb_any",
+      "range": {
+        "startLine": 100,
+        "startChar": 1,
+        "endLine": 100,
+        "endChar": 21
+      },
+      "revId": "bb11bf4a5e1af2094c344f168401561be32a39e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
