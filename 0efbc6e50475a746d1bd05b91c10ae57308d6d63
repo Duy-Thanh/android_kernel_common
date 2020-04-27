@@ -46,6 +46,52 @@
       "revId": "0efbc6e50475a746d1bd05b91c10ae57308d6d63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8617670_19cf7068",
+        "filename": "include/trace/events/vendor_hook.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-04-27T07:41:28Z",
+      "side": 1,
+      "message": "Nit: given that this doesn\u0027t actually provide a trace event, I\u0027m thinking include/trace/events/ might not be the best location for that file?",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 13,
+        "endChar": 3
+      },
+      "revId": "0efbc6e50475a746d1bd05b91c10ae57308d6d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d03908b_99177734",
+        "filename": "kernel/exit.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-04-27T07:41:28Z",
+      "side": 1,
+      "message": "Is this going to be used in this case? Or was it just for the example to show how we would have a return value from a tracepoint?",
+      "range": {
+        "startLine": 716,
+        "startChar": 1,
+        "endLine": 716,
+        "endChar": 9
+      },
+      "revId": "0efbc6e50475a746d1bd05b91c10ae57308d6d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
