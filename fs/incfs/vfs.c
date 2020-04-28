@@ -749,6 +749,20 @@ static struct dentry *incfs_lookup_dentry(struct dentry *parent,
 	return result;
 }
 
+static int chmod(struct dentry *dentry, umode_t mode)
+{
+	struct inode *inode = dentry->d_inode;
+	struct iattr newattrs;
+	int error;
+
+	inode_lock(inode);
+	newattrs.ia_mode = (mode & S_IALLUGO) | (inode->i_mode & ~S_IALLUGO);
+	newattrs.ia_valid = ATTR_MODE | ATTR_CTIME;
+	error = notify_change(dentry, &newattrs, NULL);
+	inode_unlock(inode);
+	return error;
+}
+
 static struct dentry *open_or_create_index_dir(struct dentry *backing_dir)
 {
 	static const char name[] = ".index";
@@ -777,6 +791,13 @@ static struct dentry *open_or_create_index_dir(struct dentry *backing_dir)
 	if (!d_really_is_positive(index_dentry)) {
 		dput(index_dentry);
 		return ERR_PTR(-EINVAL);
+	}
+
+	err = chmod(index_dentry, 0777);
+	if (err) {
+		pr_debug("incfs: .index mkdir chmod err: %d\n", err);
+		dput(index_dentry);
+		return ERR_PTR(err);
 	}
 
 	return index_dentry;
@@ -1060,27 +1081,6 @@ static int validate_name(char *file_name)
 			return -EINVAL;
 
 	return 0;
-}
-
-static int chmod(struct dentry *dentry, umode_t mode)
-{
-	struct inode *inode = dentry->d_inode;
-	struct inode *delegated_inode = NULL;
-	struct iattr newattrs;
-	int error;
-
-retry_deleg:
-	inode_lock(inode);
-	newattrs.ia_mode = (mode & S_IALLUGO) | (inode->i_mode & ~S_IALLUGO);
-	newattrs.ia_valid = ATTR_MODE | ATTR_CTIME;
-	error = notify_change(dentry, &newattrs, &delegated_inode);
-	inode_unlock(inode);
-	if (delegated_inode) {
-		error = break_deleg_wait(&delegated_inode);
-		if (!error)
-			goto retry_deleg;
-	}
-	return error;
 }
 
 static long ioctl_create_file(struct mount_info *mi,
@@ -1622,7 +1622,7 @@ static int dir_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode)
 	}
 
 	inode_lock_nested(dir_node->n_backing_inode, I_MUTEX_PARENT);
-	err = vfs_mkdir(dir_node->n_backing_inode, backing_dentry, mode | 0222);
+	err = vfs_mkdir(dir_node->n_backing_inode, backing_dentry, mode | 0775);
 	inode_unlock(dir_node->n_backing_inode);
 	if (!err) {
 		struct inode *inode = NULL;
@@ -1631,7 +1631,11 @@ static int dir_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode)
 			err = -EINVAL;
 			goto out;
 		}
-
+		err = chmod(backing_dentry, mode | 0775);
+		if (err) {
+			pr_debug("incfs: mkdir chmod err: %d\n", err);
+			goto out;
+		}
 		inode = fetch_regular_inode(dir->i_sb, backing_dentry);
 		if (IS_ERR(inode)) {
 			err = PTR_ERR(inode);
