@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "0c409560_07e829ec",
+        "filename": "drivers/android/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-04-28T01:10:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1844c6e_092d94e5",
+      "range": {
+        "startLine": 5,
+        "startChar": 60,
+        "endLine": 5,
+        "endChar": 71
+      },
+      "revId": "0efbc6e50475a746d1bd05b91c10ae57308d6d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a8617670_19cf7068",
         "filename": "include/trace/events/vendor_hook.h",
         "patchSetId": 1
@@ -144,6 +168,30 @@
     },
     {
       "key": {
+        "uuid": "c6d4719c_d5dc6ff6",
+        "filename": "include/trace/events/vendor_hook.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-04-28T01:10:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55f50add_e77378dc",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 13,
+        "endChar": 3
+      },
+      "revId": "0efbc6e50475a746d1bd05b91c10ae57308d6d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d03908b_99177734",
         "filename": "kernel/exit.c",
         "patchSetId": 1
@@ -188,6 +236,30 @@
       "revId": "0efbc6e50475a746d1bd05b91c10ae57308d6d63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aee30395_4acfc9e8",
+        "filename": "kernel/exit.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-04-28T01:10:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb71c937_8d37b39b",
+      "range": {
+        "startLine": 716,
+        "startChar": 1,
+        "endLine": 716,
+        "endChar": 9
+      },
+      "revId": "0efbc6e50475a746d1bd05b91c10ae57308d6d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
