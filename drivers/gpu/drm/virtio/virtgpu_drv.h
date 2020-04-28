@@ -241,7 +241,7 @@ struct virtio_gpu_device {
 	uint32_t num_capsets;
 	struct list_head cap_cache;
 
-	/* coherent memory */
+	/* coherent memory info */
 	int cbar;
 	unsigned long caddr;
 	unsigned long csize;
