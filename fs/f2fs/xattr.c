@@ -560,6 +560,7 @@ out:
 ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
 {
 	struct inode *inode = d_inode(dentry);
+	nid_t xnid = F2FS_I(inode)->i_xattr_nid;
 	struct f2fs_xattr_entry *entry;
 	void *base_addr, *last_base_addr;
 	int error = 0;
@@ -571,7 +572,11 @@ ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
 	if (error)
 		return error;
 
+<<<<<<< HEAD   (e32f5e ANDROID: virt_wifi: fix export symbol types)
 	last_base_addr = (void *)base_addr + XATTR_SIZE(inode);
+=======
+	last_base_addr = (void *)base_addr + XATTR_SIZE(xnid, inode);
+>>>>>>> BRANCH (aa73bc Linux 5.4.36)
 
 	list_for_each_xattr(entry, base_addr) {
 		const struct xattr_handler *handler =
