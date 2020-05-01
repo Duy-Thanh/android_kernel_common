@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fb7ea0ae_5bad44a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-05-01T09:51:25Z",
+      "side": 1,
+      "message": "Actually, one more question I\u0027m not sure to understand this. How could an offline CPU call anything at all?",
+      "range": {
+        "startLine": 22,
+        "startChar": 22,
+        "endLine": 23,
+        "endChar": 33
+      },
+      "revId": "aadd6f967608c4a44fb255596f9324cfd9959866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
