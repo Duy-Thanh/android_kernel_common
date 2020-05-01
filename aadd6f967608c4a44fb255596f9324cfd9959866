@@ -22,6 +22,30 @@
       "revId": "aadd6f967608c4a44fb255596f9324cfd9959866",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65055fd7_772bb92b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-05-01T15:32:22Z",
+      "side": 1,
+      "message": "I presume these are cases where the cpu is in transition. It might be related to their implementation of cpu isolation too. I don\u0027t know the details other than this was a blocker for QC on the hooks.",
+      "parentUuid": "fb7ea0ae_5bad44a9",
+      "range": {
+        "startLine": 22,
+        "startChar": 22,
+        "endLine": 23,
+        "endChar": 33
+      },
+      "revId": "aadd6f967608c4a44fb255596f9324cfd9959866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
