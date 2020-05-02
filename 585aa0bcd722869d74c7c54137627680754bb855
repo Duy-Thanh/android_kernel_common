@@ -22,6 +22,30 @@
       "revId": "585aa0bcd722869d74c7c54137627680754bb855",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5914cb7_36cedc6a",
+        "filename": "arch/arm64/include/asm/lse.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-05-02T15:30:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b841ae2e_3207be8d",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 44
+      },
+      "revId": "585aa0bcd722869d74c7c54137627680754bb855",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
