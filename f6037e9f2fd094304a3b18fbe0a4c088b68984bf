@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0fc329d_94e96312",
+        "filename": "kernel/dma/mapping.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-05-02T04:34:10Z",
+      "side": 1,
+      "message": "NB: this is %pK in the blob, no problem.",
+      "range": {
+        "startLine": 323,
+        "startChar": 56,
+        "endLine": 323,
+        "endChar": 58
+      },
+      "revId": "f6037e9f2fd094304a3b18fbe0a4c088b68984bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
