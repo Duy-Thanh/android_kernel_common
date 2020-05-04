@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7df839dd_2370247e",
+        "filename": "fs/f2fs/dir.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-04T17:06:26Z",
+      "side": 1,
+      "message": "Since this is at the end of the arguments and is non-const, it looks like a value that\u0027s returned by reference.  But it\u0027s actually an input argument.  So it should be \u0027const\u0027 and go before any output arguments.  Like:\n\n          struct fscrypt_name *fname,\n          const f2fs_hash_t *hash,\n          struct page **res_page)\n\nLikewise for everywhere else in this patch where \u0027f2fs_hash_t *\u0027 is being passed to a function.",
+      "range": {
+        "startLine": 275,
+        "startChar": 5,
+        "endLine": 275,
+        "endChar": 22
+      },
+      "revId": "c9c9cee8988c6ccaa28748d6052c3dc36bfdf448",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5617007_c225fbab",
+        "filename": "fs/f2fs/dir.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-04T17:06:26Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be simpler to hash the name here (if the hash is not provided)?  Then f2fs_find_in_inline_dir() and find_in_level() would just take the hash by value, and we wouldn\u0027t have to re-calculate the hash for every level in the tree.",
+      "revId": "c9c9cee8988c6ccaa28748d6052c3dc36bfdf448",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4999527f_dd6a595a",
+        "filename": "fs/f2fs/dir.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-04T17:06:26Z",
+      "side": 1,
+      "message": "As long as we\u0027re calculating the hash in this function, wouldn\u0027t it be simpler to pass it by value to f2fs_add_inline_entry() as well?",
+      "range": {
+        "startLine": 752,
+        "startChar": 1,
+        "endLine": 752,
+        "endChar": 69
+      },
+      "revId": "c9c9cee8988c6ccaa28748d6052c3dc36bfdf448",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "182337a7_73d1c900",
+        "filename": "fs/f2fs/file.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-04T17:06:26Z",
+      "side": 1,
+      "message": "This looks buggy --- what if the name is \u003e\u003d 251 bytes?  If it\u0027s okay to skip this logic for some filenames, why is it needed at all?",
+      "range": {
+        "startLine": 181,
+        "startChar": 1,
+        "endLine": 181,
+        "endChar": 55
+      },
+      "revId": "c9c9cee8988c6ccaa28748d6052c3dc36bfdf448",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bd78ff6_c655a86b",
+        "filename": "fs/f2fs/file.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-04T17:06:26Z",
+      "side": 1,
+      "message": "How do you know that this is 4-byte aligned?",
+      "range": {
+        "startLine": 182,
+        "startChar": 2,
+        "endLine": 182,
+        "endChar": 60
+      },
+      "revId": "c9c9cee8988c6ccaa28748d6052c3dc36bfdf448",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b8e752c_9d98d6eb",
+        "filename": "fs/f2fs/file.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-04T17:06:26Z",
+      "side": 1,
+      "message": "The above code doesn\u0027t take a reference to \u0027parent\u0027.  What stops it from being freed?",
+      "range": {
+        "startLine": 209,
+        "startChar": 48,
+        "endLine": 209,
+        "endChar": 54
+      },
+      "revId": "c9c9cee8988c6ccaa28748d6052c3dc36bfdf448",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7fa44d9_ad23a2be",
+        "filename": "fs/f2fs/recovery.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-04T17:06:26Z",
+      "side": 1,
+      "message": "No warning message?\n\nAlso this needs to goto out.",
+      "range": {
+        "startLine": 150,
+        "startChar": 3,
+        "endLine": 150,
+        "endChar": 18
+      },
+      "revId": "c9c9cee8988c6ccaa28748d6052c3dc36bfdf448",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46192098_d55940fb",
+        "filename": "fs/f2fs/recovery.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-04T17:06:26Z",
+      "side": 1,
+      "message": "How do you know that this is 4-byte aligned?",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 46
+      },
+      "revId": "c9c9cee8988c6ccaa28748d6052c3dc36bfdf448",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
