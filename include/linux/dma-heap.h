@@ -62,4 +62,20 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info);
  */
 void dma_heap_put(struct dma_heap *heap);
 
+/**
+ * dma_heap_find - Returns the registered dma_heap with the specified name
+ * @name: Name of the heap to find
+ */
+struct dma_heap *dma_heap_find(const char* name);
+
+/**
+ * dma_heap_buffer_alloc - Allocate dma-buf from a dma_heap
+ * @heap:	dma_heap to allocate from
+ * @len:	size to allocate
+ * @fd_flags:	flags to set on returned dma-buf fd
+ * @heap_flags:	flags to pass to the dma heap
+ */
+int dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
+                          unsigned int fd_flags,
+                          unsigned int heap_flags);
 #endif /* _DMA_HEAPS_H */
