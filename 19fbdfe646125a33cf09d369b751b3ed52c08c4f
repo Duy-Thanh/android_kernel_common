@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1b1ae86d_87364314",
+        "filename": "fs/f2fs/dir.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2020-05-05T22:29:27Z",
+      "side": 1,
+      "message": "Because we can\u0027t recreate the dentry due to the missing key during recovery. We check hash and encrypted name to recover data blocks. So, by lost_pino() fsync will call checkpoint to keep its dentry correctly first, and further fsync() is unnecessary to call checkpoint, since we need to recover data blocks only.",
+      "parentUuid": "ff6d5658_b7f1cd43",
+      "range": {
+        "startLine": 534,
+        "startChar": 4,
+        "endLine": 534,
+        "endChar": 26
+      },
+      "revId": "19fbdfe646125a33cf09d369b751b3ed52c08c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41ee469c_18ed4e6a",
         "filename": "fs/f2fs/file.c",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2020-05-05T19:42:30Z",
       "side": 1,
       "message": "I\u0027m still having a hard time understanding this.  Why is this updating the inode page directly, instead of marking the inode dirty like how the update of p_ino works?",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 58
+      },
+      "revId": "19fbdfe646125a33cf09d369b751b3ed52c08c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8ef87bf_dc15e2bc",
+        "filename": "fs/f2fs/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2020-05-05T22:29:27Z",
+      "side": 1,
+      "message": "We can guarantee to get dir_inode during f2fs_write_inode()/f2fs_update_inode().",
+      "parentUuid": "41ee469c_18ed4e6a",
       "range": {
         "startLine": 174,
         "startChar": 0,
@@ -95,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "ce781ecd_3b18a67f",
+        "filename": "fs/f2fs/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2020-05-05T22:29:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "359a2ce7_36a9245d",
+      "range": {
+        "startLine": 182,
+        "startChar": 2,
+        "endLine": 182,
+        "endChar": 60
+      },
+      "revId": "19fbdfe646125a33cf09d369b751b3ed52c08c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "880eaf7d_87d2ad26",
         "filename": "fs/f2fs/file.c",
         "patchSetId": 1
@@ -138,6 +210,30 @@
       "revId": "19fbdfe646125a33cf09d369b751b3ed52c08c4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06781bcc_c017ac3e",
+        "filename": "fs/f2fs/hash.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2020-05-05T22:29:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "21ff26b5_12cec729",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 35
+      },
+      "revId": "19fbdfe646125a33cf09d369b751b3ed52c08c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -188,6 +284,30 @@
     },
     {
       "key": {
+        "uuid": "58dba061_06657909",
+        "filename": "fs/f2fs/recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2020-05-05T22:29:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fbacf6a_b8f0c7cd",
+      "range": {
+        "startLine": 148,
+        "startChar": 3,
+        "endLine": 148,
+        "endChar": 18
+      },
+      "revId": "19fbdfe646125a33cf09d369b751b3ed52c08c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f66f56a_dd4730bf",
         "filename": "fs/f2fs/recovery.c",
         "patchSetId": 1
@@ -208,6 +328,30 @@
       "revId": "19fbdfe646125a33cf09d369b751b3ed52c08c4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59c617f8_057ee98a",
+        "filename": "fs/f2fs/recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2020-05-05T22:29:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f66f56a_dd4730bf",
+      "range": {
+        "startLine": 150,
+        "startChar": 15,
+        "endLine": 150,
+        "endChar": 26
+      },
+      "revId": "19fbdfe646125a33cf09d369b751b3ed52c08c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -234,6 +378,30 @@
     },
     {
       "key": {
+        "uuid": "277d7d99_fe9112f2",
+        "filename": "fs/f2fs/recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2020-05-05T22:29:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6ce10f1_8fae2c45",
+      "range": {
+        "startLine": 152,
+        "startChar": 2,
+        "endLine": 152,
+        "endChar": 23
+      },
+      "revId": "19fbdfe646125a33cf09d369b751b3ed52c08c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0f03e3f7_14402d75",
         "filename": "fs/f2fs/recovery.c",
         "patchSetId": 1
@@ -245,6 +413,30 @@
       "writtenOn": "2020-05-05T19:42:30Z",
       "side": 1,
       "message": "Why mark the hash as no longer valid?  Isn\u0027t it still needed for f2fs_add_dentry()?",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 24
+      },
+      "revId": "19fbdfe646125a33cf09d369b751b3ed52c08c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b972ecc2_b1c15004",
+        "filename": "fs/f2fs/recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2020-05-05T22:29:27Z",
+      "side": 1,
+      "message": "I need to handle an error in this case.",
+      "parentUuid": "0f03e3f7_14402d75",
       "range": {
         "startLine": 185,
         "startChar": 0,
