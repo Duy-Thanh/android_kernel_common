@@ -50,7 +50,7 @@ static dev_t dma_heap_devt;
 static struct class *dma_heap_class;
 static DEFINE_XARRAY_ALLOC(dma_heap_minors);
 
-static struct dma_heap *dma_heap_find(const char *name)
+struct dma_heap *dma_heap_find(const char *name)
 {
 	struct dma_heap *h;
 
@@ -65,10 +65,12 @@ static struct dma_heap *dma_heap_find(const char *name)
 	mutex_unlock(&heap_list_lock);
 	return NULL;
 }
+EXPORT_SYMBOL_GPL(dma_heap_find);
 
-static int dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
-				 unsigned int fd_flags,
-				 unsigned int heap_flags)
+
+int dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
+			  unsigned int fd_flags,
+			  unsigned int heap_flags)
 {
 	if (fd_flags & ~DMA_HEAP_VALID_FD_FLAGS)
 		return -EINVAL;
@@ -85,6 +87,7 @@ static int dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
 
 	return heap->ops->allocate(heap, len, fd_flags, heap_flags);
 }
+EXPORT_SYMBOL_GPL(dma_heap_buffer_alloc);
 
 static int dma_heap_open(struct inode *inode, struct file *file)
 {
