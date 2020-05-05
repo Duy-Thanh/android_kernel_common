@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e326169b_c9e1e948",
+        "filename": "fs/f2fs/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2020-05-05T06:13:33Z",
+      "side": 1,
+      "message": "copying from other review, this will most likely not be aligned.",
+      "range": {
+        "startLine": 182,
+        "startChar": 2,
+        "endLine": 182,
+        "endChar": 60
+      },
+      "revId": "19fbdfe646125a33cf09d369b751b3ed52c08c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "880eaf7d_87d2ad26",
+        "filename": "fs/f2fs/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2020-05-05T06:13:33Z",
+      "side": 1,
+      "message": "From other review, this does not hold a reference on parent to ensure it isn\u0027t freed from under us.",
+      "range": {
+        "startLine": 209,
+        "startChar": 48,
+        "endLine": 209,
+        "endChar": 54
+      },
+      "revId": "19fbdfe646125a33cf09d369b751b3ed52c08c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49746019_181e7a82",
+        "filename": "fs/f2fs/recovery.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2020-05-05T06:13:33Z",
+      "side": 1,
+      "message": "copying from other review, this should goto out",
+      "range": {
+        "startLine": 148,
+        "startChar": 3,
+        "endLine": 148,
+        "endChar": 18
+      },
+      "revId": "19fbdfe646125a33cf09d369b751b3ed52c08c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
