@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "77e76908_eb34a2ae",
+        "filename": "fs/f2fs/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2020-05-06T04:54:55Z",
+      "side": 1,
+      "message": "I\u0027ve checked other filesystems and they\u0027re actually doing like this. So, I assumed it\u0027d be safe. e.g., ext4_sync_parent().",
+      "parentUuid": "664e3c1b_02089233",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 40
+      },
+      "revId": "da149ee934d08f70e2cf5ce9537be3ca83c8e680",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "780923b1_53efe0cd",
         "filename": "fs/f2fs/recovery.c",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2020-05-06T01:01:14Z",
       "side": 1,
       "message": "Why is this needed?  We do have the hash already.  Is the issue that we need the plaintext name to check for a case-insensitive collision?  f2fs_add_dentry() doesn\u0027t seem to check for collisions, so I don\u0027t think that can be it?",
+      "range": {
+        "startLine": 190,
+        "startChar": 2,
+        "endLine": 190,
+        "endChar": 49
+      },
+      "revId": "da149ee934d08f70e2cf5ce9537be3ca83c8e680",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a602f50_a6f80098",
+        "filename": "fs/f2fs/recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2020-05-06T04:54:55Z",
+      "side": 1,
+      "message": "It\u0027s not hash collision problem, but we need to give the exact hash value given utf_name-\u003esiphash() to look up in multi-level hash tables of dir inode. But the stored name in inode block is encrypted file name from plaintext name.",
+      "parentUuid": "780923b1_53efe0cd",
       "range": {
         "startLine": 190,
         "startChar": 2,
