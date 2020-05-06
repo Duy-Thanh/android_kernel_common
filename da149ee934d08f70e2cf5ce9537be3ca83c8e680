@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "0512a549_c3b9b881",
+        "filename": "fs/f2fs/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-06T17:08:56Z",
+      "side": 1,
+      "message": "It\u0027s not safe.  ext4_sync_parent() is broken too.  I can reproduce a NULL dereference in ext4_sync_parent() if I add an udelay() between reading d_parent and reading d_parent-\u003ed_inode.  I\u0027ll fix that when I get a chance...\n\nspin_lock(\u0026dentry-\u003ed_lock) is needed to stabilize d_parent.  See: https://www.kernel.org/doc/html/latest/filesystems/path-lookup.html#dentry-d-lock",
+      "parentUuid": "77e76908_eb34a2ae",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 40
+      },
+      "revId": "da149ee934d08f70e2cf5ce9537be3ca83c8e680",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "780923b1_53efe0cd",
         "filename": "fs/f2fs/recovery.c",
         "patchSetId": 2
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "It\u0027s not hash collision problem, but we need to give the exact hash value given utf_name-\u003esiphash() to look up in multi-level hash tables of dir inode. But the stored name in inode block is encrypted file name from plaintext name.",
       "parentUuid": "780923b1_53efe0cd",
+      "range": {
+        "startLine": 190,
+        "startChar": 2,
+        "endLine": 190,
+        "endChar": 49
+      },
+      "revId": "da149ee934d08f70e2cf5ce9537be3ca83c8e680",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b978503d_7d2731e7",
+        "filename": "fs/f2fs/recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-06T17:08:56Z",
+      "side": 1,
+      "message": "But the hash is stored on-disk in i_name.  That\u0027s the point of this change, right?  So why can\u0027t we insert the name?  And why would we even bother storing the hash for recovery if we don\u0027t actually try to recover the file?",
+      "parentUuid": "2a602f50_a6f80098",
       "range": {
         "startLine": 190,
         "startChar": 2,
