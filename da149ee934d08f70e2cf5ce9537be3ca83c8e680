@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "f32413c7_1fc62a42",
+        "filename": "fs/f2fs/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-06T17:27:28Z",
+      "side": 1,
+      "message": "I think the best solution is to use dget_parent().  Here that would look like:\n\n parent \u003d dget_parent(dentry);\n dir \u003d parent-\u003ed_inode;\n\n *pino \u003d dir-\u003ei_ino;\n fix \u003d f2fs_recover_dent_inode(\u0026dentry-\u003ed_name, dir, inode);\n\n dput(parent);\n return fix;\n\n(No need to grab \u0027parent-\u003ed_inode\u0027, since it\u0027s pinned by the reference on \u0027parent\u0027.)",
+      "parentUuid": "0512a549_c3b9b881",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 40
+      },
+      "revId": "da149ee934d08f70e2cf5ce9537be3ca83c8e680",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "780923b1_53efe0cd",
         "filename": "fs/f2fs/recovery.c",
         "patchSetId": 2
