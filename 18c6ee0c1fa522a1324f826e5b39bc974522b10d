@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bef629a1_cac230b7",
+        "filename": "fs/f2fs/file.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2020-05-06T22:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bb0b2b5_818fdd42",
+      "range": {
+        "startLine": 172,
+        "startChar": 24,
+        "endLine": 172,
+        "endChar": 58
+      },
+      "revId": "18c6ee0c1fa522a1324f826e5b39bc974522b10d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e05530c1_9c7747f5",
         "filename": "fs/f2fs/file.c",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2020-05-06T17:08:56Z",
       "side": 1,
       "message": "I\u0027m still really confused about how this \"fix p_ino and re-enable roll-forward recovery\" thing is supposed to work.  Doesn\u0027t -\u003ei_name have to be updated for it to work, as the filename in the new directory may be different from the filename in the old directory?  And now this is hashing some other filename that may be different from -\u003ei_name; how can that possibly be correct?",
+      "range": {
+        "startLine": 198,
+        "startChar": 7,
+        "endLine": 198,
+        "endChar": 60
+      },
+      "revId": "18c6ee0c1fa522a1324f826e5b39bc974522b10d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb6d6f38_c336416e",
+        "filename": "fs/f2fs/file.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2020-05-06T22:00:55Z",
+      "side": 1,
+      "message": "i_name is used when adding a dentry back during roll-forward recovery. The candidate was marked by f2fs_need_dentry_mark() which indicates never-checkpointed and fsynced file. So, first fsync() by lost_pino calls checkpoint, so that we won\u0027t reach out to recover_dentry(). So, I realized that we don\u0027t need to store any hash at all.",
+      "parentUuid": "e05530c1_9c7747f5",
       "range": {
         "startLine": 198,
         "startChar": 7,
