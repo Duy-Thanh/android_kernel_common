@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "664e3c1b_02089233",
+        "filename": "fs/f2fs/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-06T01:01:14Z",
+      "side": 1,
+      "message": "What guarantees that -\u003ed_parent is stable here?  If it\u0027s unstable, then d_inode(d_parent) could appear to be NULL, and we\u0027d need to protect this line by spin_lock(\u0026dentry-\u003ed_lock) to guarantee a non-NULL inode.",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 40
+      },
+      "revId": "da149ee934d08f70e2cf5ce9537be3ca83c8e680",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "780923b1_53efe0cd",
+        "filename": "fs/f2fs/recovery.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-06T01:01:14Z",
+      "side": 1,
+      "message": "Why is this needed?  We do have the hash already.  Is the issue that we need the plaintext name to check for a case-insensitive collision?  f2fs_add_dentry() doesn\u0027t seem to check for collisions, so I don\u0027t think that can be it?",
+      "range": {
+        "startLine": 190,
+        "startChar": 2,
+        "endLine": 190,
+        "endChar": 49
+      },
+      "revId": "da149ee934d08f70e2cf5ce9537be3ca83c8e680",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
