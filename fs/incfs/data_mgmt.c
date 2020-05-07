@@ -8,6 +8,7 @@
 #include <linux/file.h>
 #include <linux/ktime.h>
 #include <linux/mm.h>
+#include <linux/pagemap.h>
 #include <linux/lz4.h>
 #include <linux/crc32.h>
 
@@ -379,6 +380,7 @@ static int validate_hash_tree(struct file *bf, struct data_file *df,
 	int hash_per_block;
 	int lvl = 0;
 	int res;
+	struct page *saved_page = NULL;
 
 	tree = df->df_hash_tree;
 	sig = df->df_signature;
@@ -402,13 +404,40 @@ static int validate_hash_tree(struct file *bf, struct data_file *df,
 			% INCFS_DATA_FILE_BLOCK_SIZE;
 		struct mem_range buf_range = range(buf,
 					INCFS_DATA_FILE_BLOCK_SIZE);
-		ssize_t read_res = incfs_kread(bf, buf,
-				INCFS_DATA_FILE_BLOCK_SIZE, hash_block_off);
+		struct page *page = NULL;
+		bool aligned = (hash_block_off &
+				(INCFS_DATA_FILE_BLOCK_SIZE - 1)) == 0;
 
-		if (read_res < 0)
-			return read_res;
-		if (read_res != INCFS_DATA_FILE_BLOCK_SIZE)
-			return -EIO;
+		if (aligned) {
+			void *page_contents = NULL;
+
+			page = find_get_page_flags(bf->f_inode->i_mapping,
+				hash_block_off / INCFS_DATA_FILE_BLOCK_SIZE,
+				FGP_ACCESSED);
+
+			if (!page || !PageUptodate(page)) {
+				if (page)
+					put_page(page);
+				page = read_mapping_page(bf->f_inode->i_mapping,
+					hash_block_off /
+					INCFS_DATA_FILE_BLOCK_SIZE,
+					NULL);
+			}
+
+			if (IS_ERR(page))
+				return PTR_ERR(page);
+
+			page_contents = page_address(page);
+			memcpy(buf, page_contents, INCFS_DATA_FILE_BLOCK_SIZE);
+		} else {
+			size_t read_res = incfs_kread(bf, buf,
+					INCFS_DATA_FILE_BLOCK_SIZE, hash_block_off);
+
+			if (read_res < 0)
+				return read_res;
+			if (read_res != INCFS_DATA_FILE_BLOCK_SIZE)
+				return -EIO;
+		}
 
 		saved_digest_rng = range(buf + hash_off_in_block, digest_size);
 		if (!incfs_equal_ranges(calc_digest_rng, saved_digest_rng)) {
@@ -425,8 +454,27 @@ static int validate_hash_tree(struct file *bf, struct data_file *df,
 
 			if (zero)
 				pr_debug("incfs: Note saved_digest all zero - did you forget to load the hashes?\n");
+
+			if (saved_page)
+				put_page(saved_page);
+			if (page)
+				put_page(page);
 			return -EBADMSG;
 		}
+
+		if (saved_page) {
+			SetPageChecked(saved_page);
+			put_page(saved_page);
+			saved_page = NULL;
+		}
+
+		if (page && PageChecked(page)) {
+			put_page(page);
+			return 0;
+		}
+
+		saved_page = page;
+		page = NULL;
 
 		res = incfs_calc_digest(tree->alg, buf_range, calc_digest_rng);
 		if (res)
@@ -437,8 +485,13 @@ static int validate_hash_tree(struct file *bf, struct data_file *df,
 	root_hash_rng = range(tree->root_hash, digest_size);
 	if (!incfs_equal_ranges(calc_digest_rng, root_hash_rng)) {
 		pr_debug("incfs: Root hash mismatch blk:%d\n", block_index);
+		if (saved_page)
+			put_page(saved_page);
 		return -EBADMSG;
 	}
+
+	SetPageChecked(saved_page);
+	put_page(saved_page);
 	return 0;
 }
 
