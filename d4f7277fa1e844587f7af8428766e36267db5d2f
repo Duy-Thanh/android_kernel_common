@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e0a3ff0_bfde88ed",
+        "filename": "fs/f2fs/recovery.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-07T18:37:32Z",
+      "side": 1,
+      "message": "WARN_ON should go in the if condition:\n\n    if (WARN_ON(IS_ENCRYPTED(dir) \u0026\u0026 IS_CASEFOLDED(dir)))\n\n... although really this shouldn\u0027t use WARN_ON() at all, since WARN_ON() is only for kernel bugs, not for corrupt on-disk data.",
+      "range": {
+        "startLine": 136,
+        "startChar": 1,
+        "endLine": 136,
+        "endChar": 57
+      },
+      "revId": "d4f7277fa1e844587f7af8428766e36267db5d2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
