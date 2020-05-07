@@ -39,6 +39,30 @@
       "revId": "7322165e23811e6acc6a921aad27105c8c400e9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a95065ec_7edb17e1",
+        "filename": "fs/f2fs/dir.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2020-05-07T01:23:36Z",
+      "side": 1,
+      "message": "Yes, it\u0027s only used for newly created files.\n\nI conservatively started from the naive approach to deal with renaming cases with LOST_PINO where \"do checkpoint, since we can\u0027t recover dentry givne on-disk i_name\". Yes, at a glance, we can relax need_do_checkpoint() by adding file_wrong_pino \u0026\u0026 !f2fs_is_checkpointed_node().",
+      "parentUuid": "81b9709e_f2b2ddd1",
+      "range": {
+        "startLine": 541,
+        "startChar": 0,
+        "endLine": 542,
+        "endChar": 26
+      },
+      "revId": "7322165e23811e6acc6a921aad27105c8c400e9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
