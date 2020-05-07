@@ -46,6 +46,30 @@
       "revId": "d4f7277fa1e844587f7af8428766e36267db5d2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4519eb0_2f7e7566",
+        "filename": "fs/f2fs/recovery.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-07T21:23:25Z",
+      "side": 1,
+      "message": "It\u0027s a kernel bug for the kernel to create such data on-disk, but not for it to find such data on-disk, since userspace can pass any arbitrary filesystem image to mount().\n\nRegarding https://lkml.kernel.org/r/20200507075905.953777-1-ebiggers@kernel.org:  patches 1-3 can go upstream in 5.8.  You *could* upstream patch 4 too, but it would be better to upstream the dentry_ops prerequisite first so that we could actually support the feature.  If we do upstream it anyway, I\u0027ll need to make it clear in the commit message that it\u0027s just preparing to support the feature, not actually supporting it yet.\n\nIf the question is about backporting to the Android common kernels, I don\u0027t know; it\u0027s mostly up to you and the kernel team.  It seems late for R for a change that needs more testing, but then again this whole feature is late for R and needs more testing anyway...",
+      "parentUuid": "9256c1f0_7f37c5c2",
+      "range": {
+        "startLine": 136,
+        "startChar": 1,
+        "endLine": 136,
+        "endChar": 57
+      },
+      "revId": "d4f7277fa1e844587f7af8428766e36267db5d2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
