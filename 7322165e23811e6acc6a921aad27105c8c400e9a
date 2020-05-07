@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a052398_56a5aed1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-07T00:19:08Z",
+      "side": 1,
+      "message": "Update the commit message?",
+      "revId": "7322165e23811e6acc6a921aad27105c8c400e9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81b9709e_f2b2ddd1",
+        "filename": "fs/f2fs/dir.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-07T00:19:08Z",
+      "side": 1,
+      "message": "This makes a little more sense.  But does this mean that f2fs_sync_file() syncs the filename only for new files?  I.e. recover_dentry() can never trigger later if links are created or deleted or if the filesystem is re-mounted?\n\nI\u0027m still a bit confused by the LOST_PINO flag.  It seems to be overloaded to mean two different things: either (a) the i_pino and i_name fields may be wrong, or (b) fsync\u0027ing the file will force a checkpoint.  But if f2fs_sync_file() only syncs the filename if the file is new, then why does it force a checkpoint whenever LOST_PINO?  Wouldn\u0027t it make more sense to use \u0027LOST_PINO \u0026\u0026 file is newly created\u0027, so that setting LOST_PINO doesn\u0027t cause unnecessary checkpoints?\n\nAlso, recover_dentry() should still check IS_ENCRYPTED() and IS_CASEFOLDED(), and return an error rather than crashing.",
+      "range": {
+        "startLine": 541,
+        "startChar": 0,
+        "endLine": 542,
+        "endChar": 26
+      },
+      "revId": "7322165e23811e6acc6a921aad27105c8c400e9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
