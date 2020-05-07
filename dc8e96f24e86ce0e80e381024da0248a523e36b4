@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d731a15d_96ef9d1b",
+        "filename": "abi_gki_aarch64_qcom_whitelist",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-05-07T02:14:04Z",
+      "side": 0,
+      "message": "This is exported in the kernel. Not sure what you mean.\n\narch/arm64/kernel/arm64ksyms.c:EXPORT_SYMBOL_GPL(__dma_flush_area);",
+      "range": {
+        "startLine": 232,
+        "startChar": 2,
+        "endLine": 232,
+        "endChar": 18
+      },
+      "revId": "dc8e96f24e86ce0e80e381024da0248a523e36b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41f726ec_2b2792ba",
+        "filename": "abi_gki_aarch64_qcom_whitelist",
+        "patchSetId": 2
+      },
+      "lineNbr": 1385,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-05-07T02:14:04Z",
+      "side": 0,
+      "message": "This is too.\n\nkernel/dma/coherent.c:EXPORT_SYMBOL_GPL(dma_get_device_base);",
+      "range": {
+        "startLine": 1385,
+        "startChar": 2,
+        "endLine": 1385,
+        "endChar": 21
+      },
+      "revId": "dc8e96f24e86ce0e80e381024da0248a523e36b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
