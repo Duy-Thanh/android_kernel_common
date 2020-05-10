@@ -1,0 +1,25 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002887986",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1306706?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "6b0170ae_bd41a5bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-05-10T19:48:30Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a Bug: or Fixes: line",
+      "revId": "ab234fc646b3eda8f2e6770d3c589d05cc5cf6a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
