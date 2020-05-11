@@ -1199,17 +1199,27 @@ emul:
 			if (!cpu_has_mips_r6 || delay_slot(xcp))
 				return SIGILL;
 
+<<<<<<< HEAD   (96b09c UPSTREAM: net: socket: set sock->sk to NULL after calling pr)
 			likely = 0;
 			cond = 0;
+=======
+			cond = likely = 0;
+>>>>>>> BRANCH (4265b9 Revert "net: ipv6: Fix processing of RAs in presence of VRF")
 			fpr = &current->thread.fpu.fpr[MIPSInst_RT(ir)];
 			bit0 = get_fpr32(fpr, 0) & 0x1;
 			switch (MIPSInst_RS(ir)) {
 			case bc1eqz_op:
+<<<<<<< HEAD   (96b09c UPSTREAM: net: socket: set sock->sk to NULL after calling pr)
 				MIPS_FPU_EMU_INC_STATS(bc1eqz);
+=======
+>>>>>>> BRANCH (4265b9 Revert "net: ipv6: Fix processing of RAs in presence of VRF")
 				cond = bit0 == 0;
 				break;
 			case bc1nez_op:
+<<<<<<< HEAD   (96b09c UPSTREAM: net: socket: set sock->sk to NULL after calling pr)
 				MIPS_FPU_EMU_INC_STATS(bc1nez);
+=======
+>>>>>>> BRANCH (4265b9 Revert "net: ipv6: Fix processing of RAs in presence of VRF")
 				cond = bit0 != 0;
 				break;
 			}
