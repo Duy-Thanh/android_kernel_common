@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97cd8913_53b3bbeb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1038033
+      },
+      "writtenOn": "2020-05-13T04:00:42Z",
+      "side": 1,
+      "message": "s/Hande/Handle/",
+      "range": {
+        "startLine": 7,
+        "startChar": 15,
+        "endLine": 7,
+        "endChar": 20
+      },
+      "revId": "606d05233defbe35fcba5726eed1fbd8905a024e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3619208e_892f30e7",
+        "filename": "fs/ext4/ext4.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 2057,
+      "author": {
+        "id": 1038033
+      },
+      "writtenOn": "2020-05-13T04:00:42Z",
+      "side": 1,
+      "message": "This padding field here is heavily misleading, and can\u0027t be used, since it\u0027s not literally right after name[EXT4_NAME_LEN].   Perhaps it would be better to remove it, and then in the documentation of ext4_extended_dir_entry_2, document it to be located after the file name at the next 4 byte aligned boundary.\n\nI\u0027d also suggest consider renaming ext4_extended_dir_entry2 to something like struct ext4_dir_entry_hash since that\u0027s what it is; this should make the code much clearer.",
+      "range": {
+        "startLine": 2057,
+        "startChar": 0,
+        "endLine": 2057,
+        "endChar": 56
+      },
+      "revId": "606d05233defbe35fcba5726eed1fbd8905a024e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f5d74f4_86a5f850",
+        "filename": "fs/ext4/ext4.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 2065,
+      "author": {
+        "id": 1038033
+      },
+      "writtenOn": "2020-05-13T04:00:42Z",
+      "side": 1,
+      "message": "Hmm, you\u0027re locating the directory entry hash immediaetly after name[name_len]?    Thats going to be problematic on some archtectures where 32-bit integers have to be located on 32-bit aligned boundaries.   Given that the rec_len is rounded up to 4-byte boundary, it\u0027s not going to save any space in the directory.  It would be better to make the directory entry hash to also be at the next 4 byte boundary after de-\u003ename[].   Otherwise EXT4_DIRENT_HASH() and EXT4_DIRENT_MINOR_HASH() will cause CPU traps on some architecures with a 75% probability.",
+      "range": {
+        "startLine": 2065,
+        "startChar": 0,
+        "endLine": 2065,
+        "endChar": 46
+      },
+      "revId": "606d05233defbe35fcba5726eed1fbd8905a024e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
