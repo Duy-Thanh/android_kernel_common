@@ -34,6 +34,9 @@
 #include <linux/usb/audio-v3.h>
 #include <linux/module.h>
 
+#ifdef CONFIG_SND_EXYNOS_USB_AUDIO
+#include <linux/usb/exynos_usb_audio.h>
+#endif
 #include <sound/control.h>
 #include <sound/core.h>
 #include <sound/info.h>
@@ -631,6 +634,9 @@ static int usb_audio_probe(struct usb_interface *intf,
 	struct usb_host_interface *alts;
 	int ifnum;
 	u32 id;
+#ifdef CONFIG_SND_EXYNOS_USB_AUDIO
+	struct usb_interface_descriptor *altsd;
+#endif
 
 	alts = &intf->altsetting[0];
 	ifnum = get_iface_desc(alts)->bInterfaceNumber;
@@ -644,6 +650,25 @@ static int usb_audio_probe(struct usb_interface *intf,
 	err = snd_usb_apply_boot_quirk(dev, intf, quirk, id);
 	if (err < 0)
 		return err;
+
+#ifdef CONFIG_SND_EXYNOS_USB_AUDIO
+	altsd = get_iface_desc(alts);
+	if ((altsd->bInterfaceClass == USB_CLASS_AUDIO ||
+		altsd->bInterfaceClass == USB_CLASS_VENDOR_SPEC) &&
+		altsd->bInterfaceSubClass == USB_SUBCLASS_MIDISTREAMING) {
+			pr_info("USB_AUDIO_IPC : %s - MIDI device detected!\n", __func__);
+	} else {
+		pr_info("USB_AUDIO_IPC : %s - No MIDI device detected!\n", __func__);
+		if (!usb_audio->is_audio) {
+			pr_info("USB_AUDIO_IPC : %s - USB Audio set!\n", __func__);
+			exynos_usb_audio_set_device(dev);
+			exynos_usb_audio_conn(1);
+			exynos_usb_audio_hcd(dev);
+			exynos_usb_audio_desc(dev);
+			exynos_usb_audio_map_buf(dev);
+		}
+	}
+#endif
 
 	/*
 	 * found a config.  now register to ALSA
@@ -742,6 +767,14 @@ static int usb_audio_probe(struct usb_interface *intf,
 	usb_set_intfdata(intf, chip);
 	atomic_dec(&chip->active);
 	mutex_unlock(&register_mutex);
+
+#ifdef CONFIG_SND_EXYNOS_USB_AUDIO
+	if (dev->do_remote_wakeup)
+		usb_enable_autosuspend(dev);
+
+	pr_info("%s done\n", __func__);
+#endif
+
 	return 0;
 
  __error:
@@ -774,6 +807,10 @@ static void usb_audio_disconnect(struct usb_interface *intf)
 
 	if (chip->disconnect_cb)
 		chip->disconnect_cb(chip);
+
+#ifdef CONFIG_SND_EXYNOS_USB_AUDIO
+	exynos_usb_audio_conn(0);
+#endif
 
 	mutex_lock(&register_mutex);
 	if (atomic_inc_return(&chip->shutdown) == 1) {
