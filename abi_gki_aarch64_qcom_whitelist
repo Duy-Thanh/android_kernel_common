@@ -1137,6 +1137,7 @@
   kmem_cache_free
   kmemdup
   kmemdup_nul
+  kobj_sysfs_ops
   kobject_create_and_add
   kobject_del
   kobject_init_and_add
@@ -1665,6 +1666,7 @@
   __rcu_read_lock
   __rcu_read_unlock
   rdev_get_drvdata
+  reboot_mode
   refcount_dec_and_lock
   refcount_dec_and_test_checked
   refcount_dec_checked
