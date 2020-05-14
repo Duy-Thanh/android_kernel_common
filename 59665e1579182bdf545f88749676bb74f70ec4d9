@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0b1c204b_f92b833b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1260402
+      },
+      "writtenOn": "2020-05-14T03:19:13Z",
+      "side": 1,
+      "message": "Ok, but I guess android-5.4-stable/README.md should be modified 😊\n\nExample:\nif the upstream commit message is\n        important patch from upstream\n\n        This is the detailed description of the important patch\n\n        Signed-off-by: Fred Jones \u003cfred.jones@foo.org\u003e\n    - then Joe Smith would upload the patch for the common kernel as\n        UPSTREAM: important patch from upstream\n\n        This is the detailed description of the important patch\n\n        Signed-off-by: Fred Jones \u003cfred.jones@foo.org\u003e\n\n        Bug: 135791357\n        Change-Id: I4caaaa566ea080fa148c5e768bb1a0b6f7201c01\n        (cherry-picked from c31e73121f4c1ec41143423ac6ce3ce6dafdcec1)\n        Signed-off-by: Joe Smith \u003cjoe.smith@foo.org\u003e",
+      "parentUuid": "06905eb1_185898f3",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 0
+      },
+      "revId": "59665e1579182bdf545f88749676bb74f70ec4d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "73275b2d_33d218c8",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "59665e1579182bdf545f88749676bb74f70ec4d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a74f9a6c_a8ba80be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1260402
+      },
+      "writtenOn": "2020-05-14T03:19:13Z",
+      "side": 1,
+      "message": "OK",
+      "parentUuid": "73275b2d_33d218c8",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 76
+      },
+      "revId": "59665e1579182bdf545f88749676bb74f70ec4d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
