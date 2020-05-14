@@ -278,7 +278,7 @@ void incfs_free_dir_file(struct dir_file *dir);
 
 ssize_t incfs_read_data_file_block(struct mem_range dst, struct data_file *df,
 				   int index, int timeout_ms,
-				   struct mem_range tmp);
+				   struct mem_range* tmp);
 
 int incfs_get_filled_blocks(struct data_file *df,
 			    struct incfs_get_filled_blocks_args *arg);

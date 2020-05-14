@@ -809,17 +809,14 @@ static int read_single_page(struct file *f, struct page *page)
 	timeout_ms = df->df_mount_info->mi_options.read_timeout_ms;
 
 	if (offset < size) {
-		struct mem_range tmp = {
-			.len = 2 * INCFS_DATA_FILE_BLOCK_SIZE
-		};
+		struct mem_range tmp = {};
 
-		tmp.data = (u8 *)__get_free_pages(GFP_NOFS, get_order(tmp.len));
 		bytes_to_read = min_t(loff_t, size - offset, PAGE_SIZE);
 		read_result = incfs_read_data_file_block(
 			range(page_start, bytes_to_read), df, block_index,
-			timeout_ms, tmp);
+			timeout_ms, &tmp);
 
-		free_pages((unsigned long)tmp.data, get_order(tmp.len));
+		if (tmp.data) kfree(tmp.data);
 	} else {
 		bytes_to_read = 0;
 		read_result = 0;

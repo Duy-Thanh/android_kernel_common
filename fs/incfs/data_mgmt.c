@@ -391,9 +391,9 @@ static void log_block_read(struct mount_info *mi, incfs_uuid_t *id,
 
 static int validate_hash_tree(struct file *bf, struct data_file *df,
 			      int block_index, struct mem_range data,
-			      u8 *tmp_buf)
+			      struct mem_range *tmp_range)
 {
-	u8 digest[INCFS_MAX_HASH_SIZE] = {};
+	u8 digest[INCFS_MAX_HASH_SIZE];
 	struct mtree *tree = NULL;
 	struct incfs_df_signature *sig = NULL;
 	struct mem_range calc_digest_rng;
@@ -437,16 +437,24 @@ static int validate_hash_tree(struct file *bf, struct data_file *df,
 				bf->f_inode->i_mapping,
 				hash_block_off / INCFS_DATA_FILE_BLOCK_SIZE,
 				NULL);
-
-			if (IS_ERR(page))
-				return PTR_ERR(page);
+			if (IS_ERR_OR_NULL(page))
+				return page ? PTR_ERR(page) : -ENOMEM;
 
 			actual_buf = page_address(page);
 		} else {
-			size_t read_res =
-				incfs_kread(bf, tmp_buf,
-					    INCFS_DATA_FILE_BLOCK_SIZE,
-					    hash_block_off);
+			size_t read_res;
+
+			if (!tmp_range->data) {
+				tmp_range->len = INCFS_DATA_FILE_BLOCK_SIZE;
+				tmp_range->data = kmalloc(tmp_range->len, GFP_NOFS);
+				if (!tmp_range->data) return -ENOMEM;
+			} else if (tmp_range->len < INCFS_DATA_FILE_BLOCK_SIZE)
+				return -EOVERFLOW;
+
+			actual_buf = tmp_range->data;
+			read_res = incfs_kread(bf, actual_buf,
+					       INCFS_DATA_FILE_BLOCK_SIZE,
+					       hash_block_off);
 
 			if (read_res < 0)
 				return read_res;
@@ -935,20 +943,17 @@ static int wait_for_data_block(struct data_file *df, int block_index,
 
 ssize_t incfs_read_data_file_block(struct mem_range dst, struct data_file *df,
 				   int index, int timeout_ms,
-				   struct mem_range tmp)
+				   struct mem_range* tmp)
 {
 	loff_t pos;
 	ssize_t result;
 	size_t bytes_to_read;
 	struct mount_info *mi = NULL;
 	struct file *bf = NULL;
-	struct data_file_block block = {};
+	struct data_file_block block;
 
 	if (!dst.data || !df)
 		return -EFAULT;
-
-	if (tmp.len < 2 * INCFS_DATA_FILE_BLOCK_SIZE)
-		return -ERANGE;
 
 	mi = df->df_mount_info;
 	bf = df->df_backing_file_context->bc_file;
@@ -958,34 +963,68 @@ ssize_t incfs_read_data_file_block(struct mem_range dst, struct data_file *df,
 		goto out;
 
 	pos = block.db_backing_file_data_offset;
+	bytes_to_read = block.db_stored_size;
 	if (block.db_comp_alg == COMPRESSION_NONE) {
-		bytes_to_read = min(dst.len, block.db_stored_size);
+		bytes_to_read = min(bytes_to_read, dst.len);
 		result = incfs_kread(bf, dst.data, bytes_to_read, pos);
 
 		/* Some data was read, but not enough */
 		if (result >= 0 && result != bytes_to_read)
 			result = -EIO;
 	} else {
-		bytes_to_read = min(tmp.len, block.db_stored_size);
-		result = incfs_kread(bf, tmp.data, bytes_to_read, pos);
-		if (result == bytes_to_read) {
-			result =
-				decompress(range(tmp.data, bytes_to_read), dst);
+		struct page *page = NULL;
+		u8 *buf = NULL;
+		const int first_byte_page_index = pos / PAGE_SIZE;
+		const int last_byte_page_index = (pos + bytes_to_read - 1) / PAGE_SIZE;
+		if (first_byte_page_index == last_byte_page_index) {
+			page = read_mapping_page(bf->f_inode->i_mapping,
+						 first_byte_page_index,
+						 NULL);
+			if (IS_ERR(page)) {
+				result = PTR_ERR(page);
+				goto out;
+			} else if (page)
+				buf = page_address(page) + pos % PAGE_SIZE;
+		}
+		if (!buf) {
+			if (!tmp->data) {
+				tmp->len = LZ4_COMPRESSBOUND(INCFS_DATA_FILE_BLOCK_SIZE);
+				if (tmp->len < block.db_stored_size) {
+					result = -EOVERFLOW;
+					goto out;
+				}
+				tmp->data = kmalloc(tmp->len, GFP_NOFS);
+				if (!tmp->data) {
+					result = -ENOMEM;
+					goto out;
+				}
+			} else if (tmp->len < bytes_to_read) {
+				result = -EOVERFLOW;
+				goto out;
+			}
+			buf = tmp->data;
+			result = incfs_kread(bf, buf, bytes_to_read, pos);
+			if (result != bytes_to_read) {
+				if (result >= 0)
+					result = -EIO;
+				goto out;
+			}
+		}
+		result = decompress(range(buf, bytes_to_read), dst);
+		if (page)
+			put_page(page);
+
 			if (result < 0) {
 				const char *name =
 					bf->f_path.dentry->d_name.name;
 
 				pr_warn_once("incfs: Decompression error. %s",
 					     name);
-			}
-		} else if (result >= 0) {
-			/* Some data was read, but not enough */
-			result = -EIO;
 		}
 	}
 
 	if (result > 0) {
-		int err = validate_hash_tree(bf, df, index, dst, tmp.data);
+		int err = validate_hash_tree(bf, df, index, dst, tmp);
 
 		if (err < 0)
 			result = err;
