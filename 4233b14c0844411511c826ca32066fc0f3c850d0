@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "7d5fb4e2_2cd6cbe5",
+        "filename": "fs/ext4/ext4.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1980,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2020-05-14T21:08:45Z",
+      "side": 1,
+      "message": "Since we don\u0027t actually use the length of the struct, and never rely on a stack declared instance having the hash entries appended, we don\u0027t need that entry at all.",
+      "parentUuid": "ac218de9_a11eec04",
+      "revId": "4233b14c0844411511c826ca32066fc0f3c850d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa28dcc2_28f2341b",
         "filename": "fs/ext4/ext4.h",
         "patchSetId": 6
@@ -104,6 +122,30 @@
       "revId": "4233b14c0844411511c826ca32066fc0f3c850d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "856d566d_99e6efd8",
+        "filename": "fs/ext4/ext4.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2039,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2020-05-14T21:08:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2825594_f91ad0c7",
+      "range": {
+        "startLine": 2039,
+        "startChar": 5,
+        "endLine": 2039,
+        "endChar": 8
+      },
+      "revId": "4233b14c0844411511c826ca32066fc0f3c850d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
