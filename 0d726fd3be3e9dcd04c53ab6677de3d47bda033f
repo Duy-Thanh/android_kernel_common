@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b270e864_39055da4",
+        "filename": "fs/ext4/ext4.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 2038,
+      "author": {
+        "id": 1038033
+      },
+      "writtenOn": "2020-05-15T17:59:48Z",
+      "side": 1,
+      "message": "Minor nit: remove this empty line, please?",
+      "range": {
+        "startLine": 2038,
+        "startChar": 0,
+        "endLine": 2038,
+        "endChar": 0
+      },
+      "revId": "0d726fd3be3e9dcd04c53ab6677de3d47bda033f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be7dd6fa_76356a3f",
+        "filename": "fs/ext4/ext4.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 2123,
+      "author": {
+        "id": 1038033
+      },
+      "writtenOn": "2020-05-15T17:59:48Z",
+      "side": 1,
+      "message": "Another minor nit: please avoid having an empty line between the comment and function which it describes.",
+      "range": {
+        "startLine": 2123,
+        "startChar": 0,
+        "endLine": 2123,
+        "endChar": 0
+      },
+      "revId": "0d726fd3be3e9dcd04c53ab6677de3d47bda033f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74e0c1c5_201092d8",
+        "filename": "fs/ext4/namei.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1038033
+      },
+      "writtenOn": "2020-05-15T17:59:48Z",
+      "side": 1,
+      "message": "It would be good to have a check to make sure that if ext4_hash_in_dirent is true, that root-\u003einfo.hash_version must be DX_HASH_SIPHASH.   Similarly, if ext4_hash_in_dirent is false the hash_version must not be DX_HASH_SIPHASH.   Otherwise, file system fuzzers may cause any kind of mischief.",
+      "revId": "0d726fd3be3e9dcd04c53ab6677de3d47bda033f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
