@@ -8,6 +8,7 @@
 #include <linux/slab.h>
 #include <linux/uaccess.h>
 #include <linux/vmalloc.h>
+#include <linux/module.h>
 #include <uapi/linux/dma-heap.h>
 
 #include "heap-helpers.h"
@@ -24,6 +25,7 @@ void init_heap_helper_buffer(struct heap_helper_buffer *buffer,
 	INIT_LIST_HEAD(&buffer->attachments);
 	buffer->free = free;
 }
+EXPORT_SYMBOL(init_heap_helper_buffer);
 
 struct dma_buf *heap_helper_export_dmabuf(struct heap_helper_buffer *buffer,
 					  int fd_flags)
@@ -37,6 +39,7 @@ struct dma_buf *heap_helper_export_dmabuf(struct heap_helper_buffer *buffer,
 
 	return dma_buf_export(&exp_info);
 }
+EXPORT_SYMBOL(heap_helper_export_dmabuf);
 
 static void *dma_heap_map_kernel(struct heap_helper_buffer *buffer)
 {
@@ -269,3 +272,12 @@ const struct dma_buf_ops heap_helper_ops = {
 	.vmap = dma_heap_dma_buf_vmap,
 	.vunmap = dma_heap_dma_buf_vunmap,
 };
+
+static int stub(void);
+static int stub(void)
+{
+	return 0;
+}
+
+module_init(stub);
+MODULE_DESCRIPTION("Blank");

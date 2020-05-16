@@ -191,6 +191,7 @@ void *dma_heap_get_drvdata(struct dma_heap *heap)
 {
 	return heap->priv;
 }
+EXPORT_SYMBOL(dma_heap_get_drvdata);
 
 /**
  * dma_heap_get_heap_dev() - gets the struct device associated
@@ -204,6 +205,7 @@ struct device *dma_heap_get_heap_dev(struct dma_heap *heap)
 {
 	return get_device(heap->heap_dev);
 }
+EXPORT_SYMBOL(dma_heap_get_heap_dev);
 
 struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
 {
@@ -289,6 +291,7 @@ err0:
 	kfree(heap);
 	return err_ret;
 }
+EXPORT_SYMBOL(dma_heap_add);
 
 static char *dma_heap_devnode(struct device *dev, umode_t *mode)
 {
