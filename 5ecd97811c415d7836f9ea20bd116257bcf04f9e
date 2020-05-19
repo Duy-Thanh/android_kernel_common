@@ -22,6 +22,23 @@
       "revId": "5ecd97811c415d7836f9ea20bd116257bcf04f9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe61297f_debb5080",
+        "filename": "drivers/dma-buf/heaps/heap-helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-05-19T23:23:40Z",
+      "side": 1,
+      "message": "Similar to Hridya\u0027s comment we probably don\u0027t need to add the module_init stubs on the heap helpers, as I\u0027m not sure it makes a ton of sense to have this as a module.",
+      "revId": "5ecd97811c415d7836f9ea20bd116257bcf04f9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
