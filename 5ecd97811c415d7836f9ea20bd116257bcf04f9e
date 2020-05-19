@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "245afd2a_35008cf0",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-05-19T23:26:24Z",
+      "side": 1,
+      "message": "EXPORT_SYMBOL_GPL might be more appropriate (for all of these exports)",
+      "revId": "5ecd97811c415d7836f9ea20bd116257bcf04f9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7c8fcfa4_28266866",
         "filename": "drivers/dma-buf/heaps/Kconfig",
         "patchSetId": 2
@@ -19,6 +36,23 @@
         "endLine": 2,
         "endChar": 32
       },
+      "revId": "5ecd97811c415d7836f9ea20bd116257bcf04f9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0c2202c_5b2a63d8",
+        "filename": "drivers/dma-buf/heaps/heap-helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-05-19T23:26:24Z",
+      "side": 1,
+      "message": "EXPORT_SYMBOL_GPL in here too?",
       "revId": "5ecd97811c415d7836f9ea20bd116257bcf04f9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
