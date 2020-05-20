@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0eeb054a_e2b9f6c1",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-05-20T09:40:21Z",
+      "side": 1,
+      "message": "that is correct, all new exports in the AOSP trees need to be _GPL please.",
+      "parentUuid": "245afd2a_35008cf0",
+      "revId": "5ecd97811c415d7836f9ea20bd116257bcf04f9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7c8fcfa4_28266866",
         "filename": "drivers/dma-buf/heaps/Kconfig",
         "patchSetId": 2
