@@ -2420,6 +2420,7 @@
   keyslot_manager_set_max_dun_bytes
   __ll_sc_atomic64_fetch_andnot_release
   __ll_sc_atomic64_fetch_or_acquire
+  mm_event_end
   __scsi_add_device
   scsi_add_host_with_dma
   scsi_block_requests
