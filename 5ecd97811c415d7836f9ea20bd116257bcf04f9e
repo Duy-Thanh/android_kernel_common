@@ -109,6 +109,24 @@
       "revId": "5ecd97811c415d7836f9ea20bd116257bcf04f9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3756988_088eb8fc",
+        "filename": "drivers/dma-buf/heaps/heap-helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-05-21T21:30:24Z",
+      "side": 1,
+      "message": "So, I suspect it would be better to have your own dmabuf op structure for your custom heap, as the heap helper logic is just trying to avoid duplicative code in the upstream heaps.\n\nI\u0027ve got a skeleton heap driver here:\nhttps://git.linaro.org/people/john.stultz/android-dev.git/commit/?h\u003ddev/dma-buf-heap-skeleton\u0026id\u003d27fbc53977f2c1fb4f3d73779ae9bc5c171d77f4\n\nWhich might be a better starting point.",
+      "parentUuid": "4d8e967b_6f2ed043",
+      "revId": "5ecd97811c415d7836f9ea20bd116257bcf04f9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
