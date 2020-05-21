@@ -1798,6 +1798,8 @@ static struct regulator_dev *regulator_dev_lookup(struct device *dev,
  */
 static void regulator_add_boot_limits(struct regulator_dev *rdev)
 {
+	int boot_uV;
+
 	/* We already set up boot limits. */
 	if (rdev->boot_limits)
 		return;
@@ -1829,6 +1831,13 @@ static void regulator_add_boot_limits(struct regulator_dev *rdev)
 		return;
 	}
 	rdev->open_count++;
+
+	if (regulator_ops_is_valid(rdev, REGULATOR_CHANGE_VOLTAGE)) {
+		boot_uV = regulator_get_voltage_rdev(rdev);
+		if (boot_uV > 0)
+			regulator_set_voltage(rdev->boot_limits, boot_uV,
+								 INT_MAX);
+	}
 
 	if (regulator_enable(rdev->boot_limits)) {
 		dev_err(&rdev->dev, "Unable to set boot limits\n");
@@ -1862,10 +1871,12 @@ static int regulator_del_boot_limits(struct regulator_dev *rdev, bool handoff)
 		return 0;
 
 	rdev_info(rdev, "removing boot limits\n");
-	if (!handoff)
+	if (!handoff) {
 		regulator_disable(rdev->boot_limits);
-	else
+		regulator_set_voltage(rdev->boot_limits, 0, INT_MAX);
+	} else {
 		rdev->use_count--;
+	}
 	destroy_regulator(rdev->boot_limits);
 	/*
 	 * Set it to an error value so that boot limits can't be set again once
