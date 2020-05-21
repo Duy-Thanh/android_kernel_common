@@ -71,9 +71,10 @@ int trusty_encode_page_info(struct ns_mem_page_info *inf,
 
 struct scatterlist;
 typedef u64 trusty_shared_mem_id_t;
+#define TRUSTY_SHARE_MEM_FLAG_LEND (1U << 0)
 int trusty_share_memory(struct device *dev, trusty_shared_mem_id_t *id,
 			struct scatterlist *sglist, unsigned int nents,
-			pgprot_t pgprot);
+			pgprot_t pgprot, unsigned int flags);
 int trusty_share_memory_compat(struct device *dev, trusty_shared_mem_id_t *id,
 			       struct scatterlist *sglist, unsigned int nents,
 			       pgprot_t pgprot);
