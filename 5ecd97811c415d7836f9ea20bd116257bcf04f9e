@@ -91,6 +91,24 @@
       "revId": "5ecd97811c415d7836f9ea20bd116257bcf04f9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d8e967b_6f2ed043",
+        "filename": "drivers/dma-buf/heaps/heap-helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1525056
+      },
+      "writtenOn": "2020-05-21T21:11:15Z",
+      "side": 1,
+      "message": "Being a module will allow for overriding the dma buf ops implementation in here but otherwise it can be duplicated.....so would be good to understand if this will remain as non-module or become a module.",
+      "parentUuid": "fe61297f_debb5080",
+      "revId": "5ecd97811c415d7836f9ea20bd116257bcf04f9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
