@@ -1784,6 +1784,115 @@ static struct regulator_dev *regulator_dev_lookup(struct device *dev,
 	return ERR_PTR(-ENODEV);
 }
 
+/**
+ * regulator_add_boot_limits - Set up boot limits for a regulator device.
+ * @rdev: regulator device to set up boot limits for.
+ *
+ * Makes requests on the regulator device @rdev so that its operating state
+ * doesn't drop below the state in which the bootloader left it at before
+ * starting the kernel.
+ *
+ * If boot limits has already been set up, this function doesn't do anything.
+ *
+ * The boot limits can be dropped later by calling regulator_del_boot_limits().
+ */
+static void regulator_add_boot_limits(struct regulator_dev *rdev)
+{
+	/* We already set up boot limits. */
+	if (rdev->boot_limits)
+		return;
+
+	/*
+	 * If the regulator is disabled or has an error getting the status,
+	 * assume it's not on. We won't explicitly turn it off now, that can
+	 * happen later.
+	 */
+	if (_regulator_is_enabled(rdev) <= 0)
+		return;
+
+	/* Wait for supply to get resolved */
+	if (rdev->supply_name && !rdev->supply)
+		return;
+
+	/* Wait for coupled regulators to be resolved */
+	if (rdev->coupling_desc.n_resolved != rdev->coupling_desc.n_coupled)
+		return;
+
+	/*
+	 * Get a reference to a regulator to set up boot limits to prevent it
+	 * from going below the state in which the boot loader left it in.
+	 */
+	rdev->boot_limits = create_regulator(rdev, NULL, "BOOT-LIMITS");
+	if (rdev->boot_limits == NULL) {
+		dev_err(&rdev->dev, "Unable to get boot limits handle\n");
+		rdev->boot_limits = ERR_PTR(-EPERM);
+		return;
+	}
+	rdev->open_count++;
+
+	if (regulator_enable(rdev->boot_limits)) {
+		dev_err(&rdev->dev, "Unable to set boot limits\n");
+		destroy_regulator(rdev->boot_limits);
+		rdev->boot_limits = ERR_PTR(-EPERM);
+	}
+}
+
+/**
+ * regulator_del_boot_limits - Remove boot limits for a regulator device.
+ * @rdev: regulator device to remove boot limits for.
+ * @handoff: Flag to control if the regulator should be handed off without a
+ *	     state change to the hardware.
+ *
+ * If boot limits has never been set up for this regulator, this function
+ * doesn't do anything and returns immediately.
+ *
+ * If boot limits have already been set up for the regulator device @rdev, this
+ * functions removes the boot limits so that operating state of @rdev can drop below
+ * the state in which the bootloader left it at before starting the kernel.
+ *
+ * In addition, if @handoff is NOT set, the function immediately updates the
+ * state of the regulator (potentially disabling it too).  Otherwise, this
+ * function removes the boot limits and leaves the regulator state update to
+ * subsequent requests by other consumers. This is mainly useful for removing
+ * the boot limits when an exclusive consumer takes control of the regulator.
+ */
+static int regulator_del_boot_limits(struct regulator_dev *rdev, bool handoff)
+{
+	if (IS_ERR_OR_NULL(rdev->boot_limits))
+		return 0;
+
+	rdev_info(rdev, "removing boot limits\n");
+	if (!handoff)
+		regulator_disable(rdev->boot_limits);
+	else
+		rdev->use_count--;
+	destroy_regulator(rdev->boot_limits);
+	/*
+	 * Set it to an error value so that boot limits can't be set again once
+	 * it has been removed.
+	 */
+	rdev->boot_limits = ERR_PTR(-EINVAL);
+	return 0;
+}
+
+static int regulator_del_boot_limits_by_dev(struct device *dev, void *data)
+{
+	struct regulator_dev *rdev = dev_to_rdev(dev);
+
+	if (dev->parent != data)
+		return 0;
+
+	regulator_del_boot_limits(rdev, false);
+	return 0;
+}
+
+void regulator_sync_state(struct device *dev)
+{
+	class_for_each_device(&regulator_class, NULL, dev,
+			      regulator_del_boot_limits_by_dev);
+}
+EXPORT_SYMBOL_GPL(regulator_sync_state);
+
 static int regulator_resolve_supply(struct regulator_dev *rdev)
 {
 	struct regulator_dev *r;
@@ -1842,6 +1951,10 @@ static int regulator_resolve_supply(struct regulator_dev *rdev)
 		return ret;
 	}
 
+	mutex_lock(&regulator_list_mutex);
+	regulator_add_boot_limits(rdev);
+	mutex_unlock(&regulator_list_mutex);
+
 	/*
 	 * In set_machine_constraints() we may have turned this regulator on
 	 * but we couldn't propagate to the supply if it hadn't been resolved
@@ -1866,7 +1979,7 @@ struct regulator *_regulator_get(struct device *dev, const char *id,
 	struct regulator_dev *rdev;
 	struct regulator *regulator;
 	struct device_link *link;
-	int ret;
+	int ret, open_count;
 
 	if (get_type >= MAX_GET_TYPE) {
 		dev_err(dev, "invalid type %d in %s\n", get_type, __func__);
@@ -1923,7 +2036,15 @@ struct regulator *_regulator_get(struct device *dev, const char *id,
 		return regulator;
 	}
 
-	if (get_type == EXCLUSIVE_GET && rdev->open_count) {
+	/*
+	 * Adjust for boot limits that'll be dropped if EXCLUSIVE_GET can
+	 * succeed.
+	 */
+	open_count = rdev->open_count;
+	if (!IS_ERR_OR_NULL(rdev->boot_limits))
+		open_count--;
+
+	if (get_type == EXCLUSIVE_GET && open_count) {
 		regulator = ERR_PTR(-EBUSY);
 		put_device(&rdev->dev);
 		return regulator;
@@ -1962,6 +2083,9 @@ struct regulator *_regulator_get(struct device *dev, const char *id,
 
 	rdev->open_count++;
 	if (get_type == EXCLUSIVE_GET) {
+		/* Drop boot limits before exclusive consumer */
+		regulator_del_boot_limits(rdev, true);
+
 		rdev->exclusive = 1;
 
 		ret = _regulator_is_enabled(rdev);
@@ -4979,7 +5103,9 @@ static void regulator_resolve_coupling(struct regulator_dev *rdev)
 		c_desc->n_resolved++;
 
 		regulator_resolve_coupling(c_rdev);
+		regulator_add_boot_limits(c_rdev);
 	}
+	regulator_add_boot_limits(rdev);
 }
 
 static void regulator_remove_coupling(struct regulator_dev *rdev)
@@ -5296,6 +5422,8 @@ regulator_register(const struct regulator_desc *regulator_desc,
 		goto unset_supplies;
 
 	rdev_init_debugfs(rdev);
+
+	dev_set_drv_sync_state(rdev->dev.parent, regulator_sync_state);
 
 	/* try to resolve regulators coupling since a new one was registered */
 	mutex_lock(&regulator_list_mutex);
@@ -5825,6 +5953,17 @@ unlock:
 	return 0;
 }
 
+static int regulator_boot_limits_timeout(struct device *dev, void *data)
+{
+	struct regulator_dev *rdev = dev_to_rdev(dev);
+
+	regulator_del_boot_limits(rdev, false);
+	return 0;
+}
+
+static unsigned int regulator_cleanup_timeout = 30000;
+core_param(regulator_cleanup_timeout, regulator_cleanup_timeout, uint, 0);
+
 static void regulator_init_complete_work_function(struct work_struct *work)
 {
 	/*
@@ -5836,6 +5975,16 @@ static void regulator_init_complete_work_function(struct work_struct *work)
 	 */
 	class_for_each_device(&regulator_class, NULL, NULL,
 			      regulator_register_resolve_supply);
+
+	/*
+	 * If regulator_cleanup_timeout is set to a non-zero value, it probably
+	 * means some of the consumers will never probe or the regulators have
+	 * some restrictions on how long they can stay ON. So, don't wait
+	 * forever for consumer devices to probe.
+	 */
+	if (regulator_cleanup_timeout)
+		class_for_each_device(&regulator_class, NULL, NULL,
+				      regulator_boot_limits_timeout);
 
 	/* If we have a full configuration then disable any regulators
 	 * we have permission to change the status for and which are
@@ -5872,7 +6021,7 @@ static int __init regulator_init_complete(void)
 	 * command line option might be useful.
 	 */
 	schedule_delayed_work(&regulator_init_complete_work,
-			      msecs_to_jiffies(30000));
+			      msecs_to_jiffies(regulator_cleanup_timeout));
 
 	return 0;
 }
