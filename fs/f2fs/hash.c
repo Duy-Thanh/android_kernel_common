@@ -68,14 +68,16 @@ static void str2hashbuf(const unsigned char *msg, size_t len,
 		*buf++ = pad;
 }
 
+<<<<<<< HEAD   (8ca744 ANDROID: GKI update kernel abi for 5.4.42 merge)
 static f2fs_hash_t __f2fs_dentry_hash(const struct inode *dir,
 				const struct qstr *name_info,
 				const struct fscrypt_name *fname)
+=======
+static u32 TEA_hash_name(const u8 *p, size_t len)
+>>>>>>> BRANCH (2d9a99 f2fs: flush dirty meta pages when flushing them)
 {
-	__u32 hash;
-	f2fs_hash_t f2fs_hash;
-	const unsigned char *p;
 	__u32 in[8], buf[4];
+<<<<<<< HEAD   (8ca744 ANDROID: GKI update kernel abi for 5.4.42 merge)
 	const unsigned char *name = name_info->name;
 	size_t len = name_info->len;
 
@@ -85,6 +87,8 @@ static f2fs_hash_t __f2fs_dentry_hash(const struct inode *dir,
 
 	if (is_dot_dotdot(name_info))
 		return 0;
+=======
+>>>>>>> BRANCH (2d9a99 f2fs: flush dirty meta pages when flushing them)
 
 	if (IS_CASEFOLDED(dir) && IS_ENCRYPTED(dir)) {
 		f2fs_hash = cpu_to_le32(fscrypt_fname_siphash(dir, name_info));
@@ -97,7 +101,6 @@ static f2fs_hash_t __f2fs_dentry_hash(const struct inode *dir,
 	buf[2] = 0x98badcfe;
 	buf[3] = 0x10325476;
 
-	p = name;
 	while (1) {
 		str2hashbuf(p, len, in, 4);
 		TEA_transform(buf, in);
@@ -106,14 +109,22 @@ static f2fs_hash_t __f2fs_dentry_hash(const struct inode *dir,
 			break;
 		len -= 16;
 	}
-	hash = buf[0];
-	f2fs_hash = cpu_to_le32(hash & ~F2FS_HASH_COL_BIT);
-	return f2fs_hash;
+	return buf[0] & ~F2FS_HASH_COL_BIT;
 }
 
+<<<<<<< HEAD   (8ca744 ANDROID: GKI update kernel abi for 5.4.42 merge)
 f2fs_hash_t f2fs_dentry_hash(const struct inode *dir,
 		const struct qstr *name_info, const struct fscrypt_name *fname)
+=======
+/*
+ * Compute @fname->hash.  For all directories, @fname->disk_name must be set.
+ * For casefolded directories, @fname->usr_fname must be set, and also
+ * @fname->cf_name if the filename is valid Unicode.
+ */
+void f2fs_hash_filename(const struct inode *dir, struct f2fs_filename *fname)
+>>>>>>> BRANCH (2d9a99 f2fs: flush dirty meta pages when flushing them)
 {
+<<<<<<< HEAD   (8ca744 ANDROID: GKI update kernel abi for 5.4.42 merge)
 #ifdef CONFIG_UNICODE
 	struct f2fs_sb_info *sbi = F2FS_SB(dir->i_sb);
 	const struct unicode_map *um = dir->i_sb->s_encoding;
@@ -121,10 +132,14 @@ f2fs_hash_t f2fs_dentry_hash(const struct inode *dir,
 	unsigned char *buff;
 	struct qstr folded;
 	const struct qstr *name = fname ? fname->usr_fname : name_info;
+=======
+	const u8 *name = fname->disk_name.name;
+	size_t len = fname->disk_name.len;
+>>>>>>> BRANCH (2d9a99 f2fs: flush dirty meta pages when flushing them)
 
-	if (!name_info->len || !IS_CASEFOLDED(dir))
-		goto opaque_seq;
+	WARN_ON_ONCE(!name);
 
+<<<<<<< HEAD   (8ca744 ANDROID: GKI update kernel abi for 5.4.42 merge)
 	if (IS_ENCRYPTED(dir) && !fscrypt_has_encryption_key(dir))
 		goto opaque_seq;
 
@@ -135,15 +150,40 @@ f2fs_hash_t f2fs_dentry_hash(const struct inode *dir,
 	if (dlen < 0) {
 		kvfree(buff);
 		goto opaque_seq;
+=======
+	if (is_dot_dotdot(name, len)) {
+		fname->hash = 0;
+		return;
+>>>>>>> BRANCH (2d9a99 f2fs: flush dirty meta pages when flushing them)
 	}
+<<<<<<< HEAD   (8ca744 ANDROID: GKI update kernel abi for 5.4.42 merge)
 	folded.name = buff;
 	folded.len = dlen;
 	r = __f2fs_dentry_hash(dir, &folded, fname);
+=======
+>>>>>>> BRANCH (2d9a99 f2fs: flush dirty meta pages when flushing them)
 
-	kvfree(buff);
-	return r;
-
-opaque_seq:
+#ifdef CONFIG_UNICODE
+	if (IS_CASEFOLDED(dir)) {
+		/*
+		 * If the casefolded name is provided, hash it instead of the
+		 * on-disk name.  If the casefolded name is *not* provided, that
+		 * should only be because the name wasn't valid Unicode, so fall
+		 * back to treating the name as an opaque byte sequence.
+		 */
+		WARN_ON_ONCE(!fname->usr_fname->name);
+		if (fname->cf_name.name) {
+			name = fname->cf_name.name;
+			len = fname->cf_name.len;
+		} else {
+			name = fname->usr_fname->name;
+			len = fname->usr_fname->len;
+		}
+	}
 #endif
+<<<<<<< HEAD   (8ca744 ANDROID: GKI update kernel abi for 5.4.42 merge)
 	return __f2fs_dentry_hash(dir, name_info, fname);
+=======
+	fname->hash = cpu_to_le32(TEA_hash_name(name, len));
+>>>>>>> BRANCH (2d9a99 f2fs: flush dirty meta pages when flushing them)
 }
