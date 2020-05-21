@@ -218,7 +218,7 @@ EXPORT_SYMBOL(trusty_std_call32);
 
 int trusty_share_memory(struct device *dev, uint64_t *id,
 			struct scatterlist *sglist, unsigned int nents,
-			pgprot_t pgprot)
+			pgprot_t pgprot, unsigned int flags)
 {
 	struct trusty_state *s = platform_get_drvdata(to_platform_device(dev));
 	int ret;
@@ -238,6 +238,7 @@ int trusty_share_memory(struct device *dev, uint64_t *id,
 	struct smc_ret8 smc_ret;
 	uint32_t cookie_low;
 	uint32_t cookie_high;
+	ulong first_ffa_cmd;
 
 	dev_dbg(s->dev, "%s\n", __func__);
 
@@ -246,6 +247,14 @@ int trusty_share_memory(struct device *dev, uint64_t *id,
 
 	if (WARN_ON(nents < 1))
 		return -EINVAL;
+
+	if (WARN_ON(flags & ~TRUSTY_SHARE_MEM_FLAG_LEND))
+		return -EINVAL;
+
+	if (flags & TRUSTY_SHARE_MEM_FLAG_LEND)
+		first_ffa_cmd = SMC_FC_FFA_MEM_LEND;
+	else
+		first_ffa_cmd = SMC_FC_FFA_MEM_SHARE;
 
 	if (nents != 1 && s->api_version < TRUSTY_API_VERSION_MEM_OBJ) {
 		dev_err(s->dev, "%s: old trusty version does not support non-contiguous memory objects\n",
@@ -318,7 +327,7 @@ int trusty_share_memory(struct device *dev, uint64_t *id,
 		count -= lcount;
 		if (cons_mrd_offset) {
 			/* First fragment */
-			smc_ret = trusty_smc8(SMC_FC_FFA_MEM_SHARE, total_len,
+			smc_ret = trusty_smc8(first_ffa_cmd, total_len,
 					      fragment_len, 0, 0, 0, 0, 0);
 		} else {
 			smc_ret = trusty_smc8(SMC_FC_FFA_MEM_FRAG_TX,
@@ -359,9 +368,9 @@ int trusty_share_memory(struct device *dev, uint64_t *id,
 				break;
 			}
 		} else {
-			dev_err(s->dev, "%s: fragment_len %zd/%zd, SMC_FC_FFA_MEM_SHARE failed 0x%x 0x%x 0x%x",
+			dev_err(s->dev, "%s: fragment_len %zd/%zd, FF-A cmd 0x%x failed 0x%x 0x%x 0x%x",
 				__func__, fragment_len, total_len,
-				smc_ret.r0, smc_ret.r1, smc_ret.r2);
+				first_ffa_cmd, smc_ret.r0, smc_ret.r1, smc_ret.r2);
 			ret = -EIO;
 			break;
 		}
@@ -403,7 +412,7 @@ int trusty_share_memory_compat(struct device *dev, uint64_t *id,
 	int ret;
 	struct trusty_state *s = platform_get_drvdata(to_platform_device(dev));
 
-	ret = trusty_share_memory(dev, id, sglist, nents, pgprot);
+	ret = trusty_share_memory(dev, id, sglist, nents, pgprot, 0);
 	if (!ret && s->api_version < TRUSTY_API_VERSION_PHYS_MEM_OBJ)
 		*id &= 0x0000FFFFFFFFF000ull;
 
