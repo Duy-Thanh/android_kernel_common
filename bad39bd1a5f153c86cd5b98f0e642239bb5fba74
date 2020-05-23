@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9287680_e6ee351f",
+        "filename": "tools/testing/selftests/filesystems/incfs/utils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-05-23T19:37:39Z",
+      "side": 1,
+      "message": "as you found out, should this first have a fsync()-kind of a call to make sure all dirty pages are cleared?",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 1
+      },
+      "revId": "bad39bd1a5f153c86cd5b98f0e642239bb5fba74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
