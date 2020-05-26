@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0340fa9_8c0d66f7",
+        "filename": "sound/usb/card.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-05-26T09:57:31Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be on a per-device basis?",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 43
+      },
+      "revId": "a4b03b497b31f5a581ffe3ab0d71423307fccf95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b4d4bb3_9d4cfa2a",
+        "filename": "sound/usb/card.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-05-26T09:57:31Z",
+      "side": 1,
+      "message": "should be prefixed with \"snd_\"",
+      "range": {
+        "startLine": 182,
+        "startChar": 5,
+        "endLine": 182,
+        "endChar": 25
+      },
+      "revId": "a4b03b497b31f5a581ffe3ab0d71423307fccf95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f7e4bf8_d112bdda",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-05-26T09:57:31Z",
+      "side": 1,
+      "message": "no kerneldoc saying what these callbacks should be doing?",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 29
+      },
+      "revId": "a4b03b497b31f5a581ffe3ab0d71423307fccf95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
