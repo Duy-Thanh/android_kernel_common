@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "7f99f769_616894ff",
+        "filename": "sound/usb/card.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-05-26T11:22:03Z",
+      "side": 1,
+      "message": "Is there anything guaranteeing that usb_audio_ops is set by the time we reach this (or any of the similar checks you\u0027ve added below)? What happens if set_vender_interface() hasn\u0027t been called? We dereference a null pointer?",
+      "range": {
+        "startLine": 655,
+        "startChar": 5,
+        "endLine": 655,
+        "endChar": 31
+      },
+      "revId": "a4b03b497b31f5a581ffe3ab0d71423307fccf95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2b4d4bb3_9d4cfa2a",
         "filename": "sound/usb/card.h",
         "patchSetId": 1
