@@ -49,6 +49,53 @@
     },
     {
       "key": {
+        "uuid": "66923461_9be74f7f",
+        "filename": "sound/usb/card.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-05-26T12:41:18Z",
+      "side": 1,
+      "message": "That isn\u0027t the case on many systems, this has to be a per-device thing for obvious reasons.",
+      "parentUuid": "06d1f233_621b284d",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 43
+      },
+      "revId": "a4b03b497b31f5a581ffe3ab0d71423307fccf95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c50374fe_bd11d305",
+        "filename": "sound/usb/card.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-05-26T12:41:18Z",
+      "side": 1,
+      "message": "Who calls this?",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 40
+      },
+      "revId": "a4b03b497b31f5a581ffe3ab0d71423307fccf95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7f99f769_616894ff",
         "filename": "sound/usb/card.c",
         "patchSetId": 1
