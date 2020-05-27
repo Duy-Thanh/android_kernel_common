@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f644da8e_eaf952ab",
+        "filename": "fs/f2fs/recovery.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-27T17:39:46Z",
+      "side": 1,
+      "message": "Isn\u0027t this missing the case for IS_ENCRYPTED() \u0026\u0026 IS_CASEFOLDED()?  My patch had it: https://lkml.kernel.org/linux-f2fs-devel/20200507075905.953777-5-ebiggers@kernel.org",
+      "range": {
+        "startLine": 131,
+        "startChar": 1,
+        "endLine": 131,
+        "endChar": 26
+      },
+      "revId": "d1f66e4d272849a219128c819c64621a051cbe86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
