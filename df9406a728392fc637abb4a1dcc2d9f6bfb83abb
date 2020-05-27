@@ -1,0 +1,25 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003149406",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1306910?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "edd3e7ee_09cdafe4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-05-27T21:37:25Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Maciej Żenczykowski \u003cmaze@google.com\u003e",
+      "revId": "df9406a728392fc637abb4a1dcc2d9f6bfb83abb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
