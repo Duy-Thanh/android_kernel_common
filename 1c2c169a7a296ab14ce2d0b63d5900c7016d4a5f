@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42f0229a_3357b28f",
+        "filename": "abi_gki_aarch64_qcom_whitelist",
+        "patchSetId": 3
+      },
+      "lineNbr": 1165,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-05-27T06:58:28Z",
+      "side": 1,
+      "message": "I keep deleting this, and kernel_write, from the whitelists.  What keeps trying to drag it back in?  What kernel module needs this?  It was removed from the whitelist by the request of the security team.",
+      "range": {
+        "startLine": 1165,
+        "startChar": 0,
+        "endLine": 1165,
+        "endChar": 13
+      },
+      "revId": "1c2c169a7a296ab14ce2d0b63d5900c7016d4a5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
