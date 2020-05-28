@@ -22,6 +22,30 @@
       "revId": "1c2c169a7a296ab14ce2d0b63d5900c7016d4a5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "872ca2c3_0c592f94",
+        "filename": "abi_gki_aarch64_qcom_whitelist",
+        "patchSetId": 3
+      },
+      "lineNbr": 1165,
+      "author": {
+        "id": 1577720
+      },
+      "writtenOn": "2020-05-28T05:30:22Z",
+      "side": 1,
+      "message": "Removed from the whitelist",
+      "parentUuid": "42f0229a_3357b28f",
+      "range": {
+        "startLine": 1165,
+        "startChar": 0,
+        "endLine": 1165,
+        "endChar": 13
+      },
+      "revId": "1c2c169a7a296ab14ce2d0b63d5900c7016d4a5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }

@@ -22,6 +22,30 @@
       "revId": "f5c2a902f3c0179001275461223154e1b19cbb11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3172a126_81ba3888",
+        "filename": "abi_gki_aarch64_qcom_whitelist",
+        "patchSetId": 4
+      },
+      "lineNbr": 2196,
+      "author": {
+        "id": 1577720
+      },
+      "writtenOn": "2020-05-28T05:30:22Z",
+      "side": 1,
+      "message": "I think it\u0027s a stale symbol from tda8290 tuner driver. I\u0027ll get rid of this and the _put version.",
+      "parentUuid": "849bf85f_65e657ee",
+      "range": {
+        "startLine": 2196,
+        "startChar": 2,
+        "endLine": 2196,
+        "endChar": 14
+      },
+      "revId": "f5c2a902f3c0179001275461223154e1b19cbb11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
