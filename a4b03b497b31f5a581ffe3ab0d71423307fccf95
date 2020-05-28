@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "203bc596_359c86ad",
+        "filename": "sound/usb/card.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1697067
+      },
+      "writtenOn": "2020-05-28T01:10:29Z",
+      "side": 1,
+      "message": "It is currently implemented with F/W to operate in a limited scenario that supports only one device.",
+      "parentUuid": "66923461_9be74f7f",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 43
+      },
+      "revId": "a4b03b497b31f5a581ffe3ab0d71423307fccf95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c50374fe_bd11d305",
         "filename": "sound/usb/card.c",
         "patchSetId": 1
@@ -93,6 +117,30 @@
       "revId": "a4b03b497b31f5a581ffe3ab0d71423307fccf95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13930711_2cd6025e",
+        "filename": "sound/usb/card.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1697067
+      },
+      "writtenOn": "2020-05-28T01:10:29Z",
+      "side": 1,
+      "message": "This function is called on vendor module(sound/usb/exynos_usb_audio.c).\nIt is called in initialize time.",
+      "parentUuid": "c50374fe_bd11d305",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 40
+      },
+      "revId": "a4b03b497b31f5a581ffe3ab0d71423307fccf95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -164,6 +212,30 @@
       "revId": "a4b03b497b31f5a581ffe3ab0d71423307fccf95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdb1bf93_4d7e3800",
+        "filename": "sound/usb/card.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1697067
+      },
+      "writtenOn": "2020-05-28T01:10:29Z",
+      "side": 1,
+      "message": "Registration of the function must be guaranteed to be registered in each vendor\u0027s module. If it is not registered, it will not work.",
+      "parentUuid": "2c998c4e_e648eba9",
+      "range": {
+        "startLine": 655,
+        "startChar": 5,
+        "endLine": 655,
+        "endChar": 31
+      },
+      "revId": "a4b03b497b31f5a581ffe3ab0d71423307fccf95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
