@@ -239,6 +239,30 @@
     },
     {
       "key": {
+        "uuid": "6efb7608_379b75ea",
+        "filename": "sound/usb/card.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-05-28T09:26:36Z",
+      "side": 1,
+      "message": "\u003e Registration of the function must be guaranteed to be registered in each vendor\u0027s module. If it is not registered, it will not work.\n\nIf I am not mistaken \u0027it will not work\u0027 means \u0027we will dereference a NULL pointer, causing the kernel to crash\u0027. Sounds pretty bad to me.\n\nHow about you change the conditions to \u0027if (usb_audio_ops \u0026\u0026 usb_audio_ops-\u003evendor_conn)\u0027 so the usb_audio_ops stuff is actually properly optional?",
+      "parentUuid": "fdb1bf93_4d7e3800",
+      "range": {
+        "startLine": 655,
+        "startChar": 5,
+        "endLine": 655,
+        "endChar": 31
+      },
+      "revId": "a4b03b497b31f5a581ffe3ab0d71423307fccf95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2b4d4bb3_9d4cfa2a",
         "filename": "sound/usb/card.h",
         "patchSetId": 1
