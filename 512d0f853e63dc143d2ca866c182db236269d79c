@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "042b1130_f316d5dc",
+        "filename": "arch/arm64/configs/cuttlefish_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2020-05-29T23:42:46Z",
+      "side": 0,
+      "message": "Why are these being removed? Were they already effectively disabled or non-existent?",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 18
+      },
+      "revId": "512d0f853e63dc143d2ca866c182db236269d79c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
