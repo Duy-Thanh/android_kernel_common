@@ -22,6 +22,30 @@
       "revId": "8c9879281031ed451a29480ac9dfe225e8149629",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6b16230_b879ee43",
+        "filename": "abi_gki_aarch64_qcom_whitelist",
+        "patchSetId": 6
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1577720
+      },
+      "writtenOn": "2020-05-29T14:31:12Z",
+      "side": 1,
+      "message": "But we compile sdcardfs.ko internally as we still haven\u0027t switched to fuse_fs",
+      "parentUuid": "8a19d21e_6ffdc3ff",
+      "range": {
+        "startLine": 244,
+        "startChar": 2,
+        "endLine": 244,
+        "endChar": 16
+      },
+      "revId": "8c9879281031ed451a29480ac9dfe225e8149629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
