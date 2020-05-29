@@ -1290,6 +1290,7 @@ void fw_devlink_resume(void)
 	driver_deferred_probe_force_trigger();
 out:
 	mutex_unlock(&defer_fw_devlink_lock);
+	driver_deferred_probe_flush();
 }
 /* Device links support end. */
 
