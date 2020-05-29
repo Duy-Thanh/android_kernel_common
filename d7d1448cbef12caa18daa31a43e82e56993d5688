@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe7b231b_9659b261",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 8466,
+      "author": {
+        "id": 1646687
+      },
+      "writtenOn": "2020-05-29T00:51:12Z",
+      "side": 1,
+      "message": "What do you think if you change \u0027bool allow_unmovable\u0027 to \u0027int isol_flags\u0027 to remove conditional expression in the arguments list of start_isolate_page_range() below?",
+      "range": {
+        "startLine": 8466,
+        "startChar": 21,
+        "endLine": 8466,
+        "endChar": 41
+      },
+      "revId": "d7d1448cbef12caa18daa31a43e82e56993d5688",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
