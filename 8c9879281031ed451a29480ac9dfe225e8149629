@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a19d21e_6ffdc3ff",
+        "filename": "abi_gki_aarch64_qcom_whitelist",
+        "patchSetId": 6
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-05-29T13:06:55Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be needed anymore, along with a number of the other symbols added for sdcardfs in this commit, as it is now gone from the tree.",
+      "range": {
+        "startLine": 244,
+        "startChar": 2,
+        "endLine": 244,
+        "endChar": 16
+      },
+      "revId": "8c9879281031ed451a29480ac9dfe225e8149629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
