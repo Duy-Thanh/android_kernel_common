@@ -149,6 +149,9 @@ struct ion_buffer *ion_buffer_alloc(struct ion_device *dev, size_t len,
 	if (!len)
 		return ERR_PTR(-EINVAL);
 
+	if (heap_id_mask & ION_HEAP_SYSTEM)
+		heap_id_mask |= ION_HEAP_VENDOR_SYSTEM;
+
 	down_read(&dev->lock);
 	plist_for_each_entry(heap, &dev->heaps, node) {
 		/* if the caller didn't specify this heap id */
