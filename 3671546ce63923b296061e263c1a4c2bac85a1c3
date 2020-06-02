@@ -1,0 +1,25 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003223818",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1322419?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "3350bdf6_88c5481b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-02T08:04:03Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Hyesoo Yu \u003c13019813hyesooyu@gmail.com\u003e",
+      "revId": "3671546ce63923b296061e263c1a4c2bac85a1c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
