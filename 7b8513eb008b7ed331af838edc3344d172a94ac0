@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b722b46_d0f42cf0",
+        "filename": "drivers/md/dm-bow.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-06-03T03:09:35Z",
+      "side": 0,
+      "message": "Moving this code into -\u003eio_limits() is actually a separate bug fix, right?  (dm-bow shouldn\u0027t modify the limits of the underlying device.)  Could you mention this in the commit message?",
+      "range": {
+        "startLine": 654,
+        "startChar": 0,
+        "endLine": 662,
+        "endChar": 2
+      },
+      "revId": "7b8513eb008b7ed331af838edc3344d172a94ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
