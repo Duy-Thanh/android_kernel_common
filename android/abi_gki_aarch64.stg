@@ -338773,6 +338773,15 @@ elf_symbol {
   full_name: "memblock_end_of_DRAM"
 }
 elf_symbol {
+  id: 0x4fb91c54
+  name: "memblock_free"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa6ecab47
+  type_id: 0x1567dd7e
+  full_name: "memblock_free"
+}
+elf_symbol {
   id: 0xaa97e158
   name: "memchr"
   is_defined: true
@@ -369456,6 +369465,10 @@ symbols {
   symbol {
     key: "memblock_end_of_DRAM"
     value: 0x746374fa
+  }
+  symbol {
+    key: "memblock_free"
+    value: 0x4fb91c54
   }
   symbol {
     key: "memchr"
