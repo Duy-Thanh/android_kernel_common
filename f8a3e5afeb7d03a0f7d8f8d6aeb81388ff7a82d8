@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f85c2f67_2fa9c4f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-06-04T16:23:59Z",
+      "side": 1,
+      "message": "Add:\n\nFixes: 06a813d6df58 (\"BACKPORT: FROMLIST: fscrypt: add support for IV_INO_LBLK_32 policies\")",
+      "revId": "f8a3e5afeb7d03a0f7d8f8d6aeb81388ff7a82d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
