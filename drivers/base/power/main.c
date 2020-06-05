@@ -39,6 +39,9 @@
 #include "../base.h"
 #include "power.h"
 
+EXPORT_TRACEPOINT_SYMBOL_GPL(device_pm_callback_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(device_pm_callback_end);
+
 typedef int (*pm_callback_t)(struct device *);
 
 /*
