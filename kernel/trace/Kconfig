@@ -81,6 +81,17 @@ config RING_BUFFER_ALLOW_SWAP
 	 Allow the use of ring_buffer_swap_cpu.
 	 Adds a very slight overhead to tracing when enabled.
 
+config TRACE_RW
+	bool "Register read/write tracing"
+	select TRACING
+	default n
+	help
+	  Create tracepoints for IO read/write operations, so that
+	  modules can register hooks to use them.
+
+	  Disable this option, when there is support from corresponding
+	  architecture.
+
 config PREEMPTIRQ_TRACEPOINTS
 	bool
 	depends on TRACE_PREEMPT_TOGGLE || TRACE_IRQFLAGS
