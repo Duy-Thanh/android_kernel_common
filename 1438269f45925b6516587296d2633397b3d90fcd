@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76799f92_fa8a1775",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6708,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-06-08T07:55:57Z",
+      "side": 1,
+      "message": "I would suggest to take this out of the \u0027if (sd_flag \u0026 SD_BALANCE_WAKE)\u0027 to let partners change the fork/exec balance path if need be. Also, this would avoid the cost of running find_energy_efficient_cpu() for nothing when the hook is active.\n\nI suggest something along the lines of:\n\nif (trace_android_rvh_find_energy_efficient_cpu_enabled()) {\n        int target_cpu \u003d -1;\n        trace_android_rvh_find_energy_efficient_cpu(p, prev_cpu, sync, \u0026target_cpu);\n        if (ret_cpu \u003e\u003d 0)\n                return target_cpu;\n}\n\nat the top of select_task_rq_fair(). Thoughts?",
+      "range": {
+        "startLine": 6708,
+        "startChar": 3,
+        "endLine": 6708,
+        "endChar": 76
+      },
+      "revId": "1438269f45925b6516587296d2633397b3d90fcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
