@@ -46,6 +46,30 @@
       "revId": "1438269f45925b6516587296d2633397b3d90fcd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05351b7d_f2b59026",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6708,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-06-08T09:20:30Z",
+      "side": 1,
+      "message": "Sounds good, thanks.",
+      "parentUuid": "f0c65544_3d1cb435",
+      "range": {
+        "startLine": 6708,
+        "startChar": 3,
+        "endLine": 6708,
+        "endChar": 76
+      },
+      "revId": "1438269f45925b6516587296d2633397b3d90fcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
