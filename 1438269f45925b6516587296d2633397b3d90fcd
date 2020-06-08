@@ -22,6 +22,30 @@
       "revId": "1438269f45925b6516587296d2633397b3d90fcd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0c65544_3d1cb435",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6708,
+      "author": {
+        "id": 1655301
+      },
+      "writtenOn": "2020-06-08T09:19:09Z",
+      "side": 1,
+      "message": "If we want to put the hook at the top of select_task_rq_fair(), I think the trace should be renamed to trace_android_rvh_select_task_rq_fair() and modify the parameters. I\u0027ll modify it in patchset 3.",
+      "parentUuid": "76799f92_fa8a1775",
+      "range": {
+        "startLine": 6708,
+        "startChar": 3,
+        "endLine": 6708,
+        "endChar": 76
+      },
+      "revId": "1438269f45925b6516587296d2633397b3d90fcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
