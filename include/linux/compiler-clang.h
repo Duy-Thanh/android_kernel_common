@@ -43,6 +43,7 @@
  */
 #define barrier() __asm__ __volatile__("" : : : "memory")
 
+<<<<<<< HEAD   (294257 Revert "FROMLIST: add support for Clang's Shadow Call Stack )
 
 #ifdef CONFIG_LTO_CLANG
 #ifdef CONFIG_FTRACE_MCOUNT_RECORD
@@ -52,4 +53,8 @@
 
 
 #define __nocfi		__attribute__((__no_sanitize__("cfi")))
+=======
+#if __has_feature(shadow_call_stack)
+# define __noscs	__attribute__((__no_sanitize__("shadow-call-stack")))
+>>>>>>> BRANCH (533b22 Merge tag 'arm64-upstream' of git://git.kernel.org/pub/scm/l)
 #endif
