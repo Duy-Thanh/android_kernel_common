@@ -197,12 +197,17 @@ struct ftrace_likely_data {
 # define randomized_struct_fields_end
 #endif
 
+<<<<<<< HEAD   (294257 Revert "FROMLIST: add support for Clang's Shadow Call Stack )
 #ifndef __norecordmcount
 # define __norecordmcount
 #endif
 
 #ifndef __nocfi
 # define __nocfi
+=======
+#ifndef __noscs
+# define __noscs
+>>>>>>> BRANCH (533b22 Merge tag 'arm64-upstream' of git://git.kernel.org/pub/scm/l)
 #endif
 
 #ifndef asm_volatile_goto

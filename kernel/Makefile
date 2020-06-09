@@ -106,7 +106,11 @@ obj-$(CONFIG_TRACEPOINTS) += trace/
 obj-$(CONFIG_IRQ_WORK) += irq_work.o
 obj-$(CONFIG_CPU_PM) += cpu_pm.o
 obj-$(CONFIG_BPF) += bpf/
+<<<<<<< HEAD   (294257 Revert "FROMLIST: add support for Clang's Shadow Call Stack )
 obj-$(CONFIG_CFI_CLANG) += cfi.o
+=======
+obj-$(CONFIG_SHADOW_CALL_STACK) += scs.o
+>>>>>>> BRANCH (533b22 Merge tag 'arm64-upstream' of git://git.kernel.org/pub/scm/l)
 
 obj-$(CONFIG_PERF_EVENTS) += events/
 
