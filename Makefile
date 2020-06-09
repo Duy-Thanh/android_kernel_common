@@ -876,6 +876,7 @@ ifdef CONFIG_LIVEPATCH
 KBUILD_CFLAGS += $(call cc-option, -flive-patching=inline-clone)
 endif
 
+<<<<<<< HEAD   (294257 Revert "FROMLIST: add support for Clang's Shadow Call Stack )
 ifdef CONFIG_LTO_CLANG
 ifdef CONFIG_THINLTO
 CC_FLAGS_LTO_CLANG := -flto=thin $(call cc-option, -fsplit-lto-unit)
@@ -918,6 +919,12 @@ endif
 CC_FLAGS_LTO	+= $(CC_FLAGS_CFI)
 KBUILD_CFLAGS	+= $(CC_FLAGS_CFI)
 export CC_FLAGS_CFI
+=======
+ifdef CONFIG_SHADOW_CALL_STACK
+CC_FLAGS_SCS	:= -fsanitize=shadow-call-stack
+KBUILD_CFLAGS	+= $(CC_FLAGS_SCS)
+export CC_FLAGS_SCS
+>>>>>>> BRANCH (533b22 Merge tag 'arm64-upstream' of git://git.kernel.org/pub/scm/l)
 endif
 
 # arch Makefile may override CC so keep this after arch Makefile is included
