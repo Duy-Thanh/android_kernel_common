@@ -1,0 +1,46 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003354180",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1328369?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "8b9199ec_7d814701",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-10T10:42:33Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha",
+      "revId": "c95ecbdb7da05d9135d93478757ced0c0d5cce80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003354180",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1328369?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "bd532620_febeae54",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-10T10:42:33Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Vamsi Krishna \u003cvamsin@codeaurora.org\u003e",
+      "revId": "c95ecbdb7da05d9135d93478757ced0c0d5cce80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
