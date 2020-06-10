@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9f92b9d_a0153f46",
+        "filename": "drivers/of/property.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-06-10T00:49:45Z",
+      "side": 1,
+      "message": "Ugh... I\u0027m falling through an error case without a return. I\u0027ll fix this.",
+      "range": {
+        "startLine": 1102,
+        "startChar": 11,
+        "endLine": 1102,
+        "endChar": 17
+      },
+      "revId": "bd91e136b89bf6b1d11dc596a82d04721b1c0394",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
