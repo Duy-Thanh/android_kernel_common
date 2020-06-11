@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9315c7af_fec2d4d1",
+        "filename": "scripts/module-lto.lds.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-06-11T20:09:48Z",
+      "side": 1,
+      "message": "ah, glad you added https://android-review.googlesource.com/c/kernel/common/+/1329278/5#message-f0d1f8f69d066df07c9b9edbf4463e3edb1ee39b here.",
+      "revId": "269e56aa35625cc17b7672c683223127333ab5ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
