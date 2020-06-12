@@ -1055,9 +1055,21 @@ __weak struct cpufreq_governor *cpufreq_default_governor(void)
 	return NULL;
 }
 
+static struct cpufreq_governor *cpufreq_find_default_governor(void)
+{
+	struct cpufreq_governor *gov = NULL;
+
+	if (cpufreq_driver->default_gov) {
+		gov = find_governor(cpufreq_driver->default_gov);
+		WARN_ON(!gov);
+	}
+
+	return gov ? gov : cpufreq_default_governor();
+}
+
 static int cpufreq_init_policy(struct cpufreq_policy *policy)
 {
-	struct cpufreq_governor *def_gov = cpufreq_default_governor();
+	struct cpufreq_governor *def_gov = cpufreq_find_default_governor();
 	struct cpufreq_governor *gov = NULL;
 	unsigned int pol = CPUFREQ_POLICY_UNKNOWN;
 

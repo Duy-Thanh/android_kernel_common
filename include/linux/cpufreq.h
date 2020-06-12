@@ -368,6 +368,12 @@ struct cpufreq_driver {
 	/* platform specific boost support code */
 	bool		boost_enabled;
 	int		(*set_boost)(int state);
+
+	/*
+	 * Default governor for this driver, takes precedence over the default
+	 * specified via Kconfig.
+	 */
+	char		*default_gov;
 };
 
 /* flags */
