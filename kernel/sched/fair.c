@@ -5926,7 +5926,7 @@ schedtune_margin(unsigned long signal, long boost)
 	return margin;
 }
 
-static inline int
+inline int
 schedtune_cpu_margin(unsigned long util, int cpu)
 {
 	int boost = schedtune_cpu_boost(cpu);
@@ -5966,7 +5966,7 @@ stune_util(int cpu, unsigned long other_util)
 
 #else /* CONFIG_SCHED_TUNE */
 
-static inline int
+inline int
 schedtune_cpu_margin(unsigned long util, int cpu)
 {
 	return 0;
