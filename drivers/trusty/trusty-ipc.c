@@ -25,6 +25,8 @@
 #include <linux/sched/signal.h>
 #include <linux/compat.h>
 #include <linux/uio.h>
+#include <linux/file.h>
+#include <linux/shmem_fs.h>
 
 #include <linux/virtio.h>
 #include <linux/virtio_ids.h>
@@ -59,10 +61,16 @@ struct tipc_dev_config {
 	char dev_name[MAX_DEV_NAME_LEN];
 } __packed;
 
+struct tipc_shm {
+	trusty_shared_mem_id_t obj_id;
+	u64 size;
+};
+
 struct tipc_msg_hdr {
 	u32 src;
 	u32 dst;
-	u32 reserved;
+	u16 reserved;
+	u16 shm_cnt;
 	u16 len;
 	u16 flags;
 	u8 data[0];
@@ -74,6 +82,7 @@ enum tipc_ctrl_msg_types {
 	TIPC_CTRL_MSGTYPE_CONN_REQ,
 	TIPC_CTRL_MSGTYPE_CONN_RSP,
 	TIPC_CTRL_MSGTYPE_DISC_REQ,
+	TIPC_CTRL_MSGTYPE_RELEASE,
 };
 
 struct tipc_ctrl_msg {
@@ -96,6 +105,10 @@ struct tipc_conn_rsp_body {
 
 struct tipc_disc_req_body {
 	u32 target;
+} __packed;
+
+struct tipc_release_body {
+	trusty_shared_mem_id_t id;
 } __packed;
 
 struct tipc_cdev_node {
@@ -148,6 +161,126 @@ struct tipc_chan {
 	u32 max_msg_cnt;
 	char srv_name[MAX_SRV_NAME_LEN];
 };
+
+struct shared_handle {
+	struct rb_node node;
+	struct tipc_shm tipc;
+	struct device *dev;
+	struct sg_table sgt;
+	bool shared;
+};
+
+static struct rb_root shared_handles_rb = RB_ROOT;
+/* protects shared_handles_rb, which holds the currently known shared handles */
+static DEFINE_MUTEX(shared_handles_lock);
+
+static int new_shared_handle(struct shared_handle **shared_handle)
+{
+	/* Zeroing is load bearing, don't switch to kmalloc */
+	struct shared_handle *out = kzalloc(sizeof(*out),
+					    GFP_KERNEL);
+	if (!out)
+		return -ENOMEM;
+
+	*shared_handle = out;
+
+	return 0;
+}
+
+static int drop_shared_handle(struct shared_handle *shared_handle)
+{
+	int ret;
+	struct sg_page_iter piter;
+
+	if (shared_handle->shared) {
+		ret = trusty_reclaim_memory(shared_handle->dev,
+					    shared_handle->tipc.obj_id,
+					    shared_handle->sgt.sgl,
+					    shared_handle->sgt.orig_nents);
+		if (ret) {
+			/*
+			 * We can't safely release this, it may still be in
+			 * use outside Linux.
+			 */
+			pr_warn("Failed to drop handle, leaking...\n");
+			return ret;
+		}
+	}
+
+	for_each_sg_page(shared_handle->sgt.sgl, &piter,
+			 shared_handle->sgt.orig_nents, 0) {
+		page_ref_dec(sg_page_iter_page(&piter));
+	}
+
+	sg_free_table(&shared_handle->sgt);
+
+	kfree(shared_handle);
+
+	return 0;
+}
+
+static void register_shared_handle_locked(struct shared_handle *new_handle)
+{
+	struct rb_node **new = &shared_handles_rb.rb_node;
+	struct rb_node *parent = NULL;
+
+	while (*new) {
+		struct shared_handle *handle =
+			rb_entry(*new, struct shared_handle, node);
+		parent = *new;
+		if (handle->tipc.obj_id == new_handle->tipc.obj_id) {
+			/* The handle is already registered? */
+			pr_err("Tried to register same handle twice\n");
+			return;
+		} else if (handle->tipc.obj_id > new_handle->tipc.obj_id) {
+			new = &((*new)->rb_left);
+		} else {
+			new = &((*new)->rb_right);
+		}
+	}
+
+	rb_link_node(&new_handle->node, parent, new);
+	rb_insert_color(&new_handle->node, &shared_handles_rb);
+}
+
+static void register_shared_handle(struct shared_handle **shared_handle)
+{
+	mutex_lock(&shared_handles_lock);
+	register_shared_handle_locked(*shared_handle);
+	*shared_handle = NULL;
+	mutex_unlock(&shared_handles_lock);
+}
+
+static struct shared_handle *take_shared_handle_locked(trusty_shared_mem_id_t
+						       obj_id)
+{
+	struct rb_node *node = shared_handles_rb.rb_node;
+
+	while (node) {
+		struct shared_handle *handle =
+			rb_entry(node, struct shared_handle, node);
+		if (obj_id == handle->tipc.obj_id) {
+			rb_erase(node, &shared_handles_rb);
+			return handle;
+		} else if (obj_id < handle->tipc.obj_id) {
+			node = node->rb_left;
+		} else {
+			node = node->rb_right;
+		}
+	}
+
+	return NULL;
+}
+
+static struct shared_handle *take_shared_handle(trusty_shared_mem_id_t obj_id)
+{
+	struct shared_handle *out;
+
+	mutex_lock(&shared_handles_lock);
+	out = take_shared_handle_locked(obj_id);
+	mutex_unlock(&shared_handles_lock);
+	return out;
+}
 
 static struct class *tipc_class;
 static unsigned int tipc_major;
@@ -205,6 +338,7 @@ static struct tipc_msg_buf *vds_alloc_msg_buf(struct tipc_virtio_dev *vds,
 	}
 
 	mb->buf_sz = sz;
+	mb->shm_cnt = 0;
 
 	return mb;
 
@@ -293,6 +427,7 @@ static struct tipc_msg_buf *_get_txbuf_locked(struct tipc_virtio_dev *vds)
 		mb = list_first_entry(&vds->free_buf_list,
 				      struct tipc_msg_buf, node);
 		list_del(&mb->node);
+		mb->shm_cnt = 0;
 		vds->free_msg_buf_cnt--;
 	} else {
 		if (vds->msg_buf_cnt >= vds->msg_buf_max_cnt)
@@ -494,6 +629,7 @@ static void fill_msg_hdr(struct tipc_msg_buf *mb, u32 src, u32 dst)
 	hdr->dst = dst;
 	hdr->len = mb_avail_data(mb);
 	hdr->flags = 0;
+	hdr->shm_cnt = mb->shm_cnt;
 	hdr->reserved = 0;
 }
 
@@ -935,6 +1071,260 @@ static int dn_connect_ioctl(struct tipc_dn_chan *dn, char __user *usr_name)
 	return dn_wait_for_reply(dn, REPLY_TIMEOUT);
 }
 
+static int dn_share_fd(struct tipc_dn_chan *dn, int fd,
+		       struct shared_handle **out)
+{
+	int ret;
+	int shmem_err;
+	struct file *file;
+	pgprot_t prot;
+	size_t shm_size;
+	size_t max_pages;
+	pgoff_t pg_idx;
+	struct shared_handle *shared_handle;
+	struct page **pages = NULL;
+
+	if (dn->state != TIPC_CONNECTED) {
+		pr_debug("Tried to share fd while not connected\n");
+		return -ENOTCONN;
+	}
+
+	file = fget(fd);
+	if (!file) {
+		pr_debug("Invalid fd (%d)\n", fd);
+		return -EBADF;
+	}
+
+	if (!shmem_file(file)) {
+		pr_debug("Tried to send non-shmem fd\n");
+		ret = -EINVAL;
+		goto cleanup_file;
+	}
+
+	if (!(file->f_mode & FMODE_READ)) {
+		pr_debug("Cannot create write-only mapping\n");
+		/* This error matches mmap() behavior for write-only fds */
+		ret = -EACCES;
+		goto cleanup_file;
+	}
+
+	prot = (file->f_mode & FMODE_WRITE) ? PAGE_KERNEL : PAGE_KERNEL_RO;
+
+	shm_size = i_size_read(file->f_inode);
+
+	max_pages = DIV_ROUND_UP(shm_size, PAGE_SIZE);
+
+	pages = kmalloc_array(max_pages, sizeof(struct page *), GFP_KERNEL);
+
+	ret = new_shared_handle(&shared_handle);
+	if (ret)
+		goto cleanup_file;
+
+	for (pg_idx = 0; pg_idx < max_pages; pg_idx++) {
+		struct page *page;
+
+		shmem_err = shmem_getpage(file->f_inode, pg_idx, &page,
+					  SGP_CACHE);
+		if (shmem_err < 0) {
+			pr_debug("shmem_getpage(%d) failed: %d\n", pg_idx,
+				 shmem_err);
+			ret = shmem_err;
+			goto cleanup_pages;
+		}
+		set_page_dirty(page);
+		page_ref_inc(page);
+		unlock_page(page);
+
+		pages[pg_idx] = page;
+	}
+
+	ret = sg_alloc_table_from_pages(&shared_handle->sgt,
+					pages, max_pages, 0,
+					shm_size, GFP_KERNEL);
+	if (ret < 0) {
+		pr_debug("sg_alloc_table_from_pages failed: %d\n", ret);
+		goto cleanup_pages;
+	}
+
+	shared_handle->dev = dn->chan->vds->vdev->dev.parent->parent;
+
+	ret = trusty_share_memory(shared_handle->dev,
+				  &shared_handle->tipc.obj_id,
+				  shared_handle->sgt.sgl,
+				  shared_handle->sgt.orig_nents, prot);
+	if (ret < 0) {
+		pr_debug("trusty_share_memory failed: %d\n", ret);
+		goto cleanup_handle;
+	}
+	shared_handle->shared = true;
+
+	shared_handle->tipc.size = shm_size;
+	*out = shared_handle;
+	ret = 0;
+	goto cleanup_file;
+
+cleanup_pages:
+	for (pg_idx--; pg_idx >= 0; pg_idx--)
+		page_ref_dec(pages[pg_idx]);
+cleanup_handle:
+	drop_shared_handle(shared_handle);
+cleanup_file:
+	fput(file);
+	kfree(pages);
+	return ret;
+}
+
+static ssize_t txbuf_write_iter(struct tipc_msg_buf *txbuf,
+				struct iov_iter *iter)
+{
+	size_t len;
+	/* message length */
+	len = iov_iter_count(iter);
+
+	/* check available space */
+	if (len > mb_avail_space(txbuf))
+		return -EMSGSIZE;
+
+	/* copy in message data */
+	if (copy_from_iter(mb_put_data(txbuf, len), len, iter) != len)
+		return -EFAULT;
+
+	return len;
+}
+
+static ssize_t txbuf_write_handles(struct tipc_msg_buf *txbuf,
+				   struct shared_handle **shm_handles,
+				   size_t shm_cnt)
+{
+	size_t idx;
+
+	/* message length */
+	size_t len = shm_cnt * sizeof(struct tipc_shm);
+
+	/* check available space */
+	if (len > mb_avail_space(txbuf))
+		return -EMSGSIZE;
+
+	/* copy over handles */
+	for (idx = 0; idx < shm_cnt; idx++) {
+		memcpy(mb_put_data(txbuf, sizeof(struct tipc_shm)),
+		       &shm_handles[idx]->tipc,
+		       sizeof(struct tipc_shm));
+	}
+
+	txbuf->shm_cnt += shm_cnt;
+
+	return len;
+}
+
+static long filp_send_ioctl(struct file *filp,
+			    const struct tipc_send_msg_req __user *arg)
+{
+	struct tipc_send_msg_req req;
+	struct iovec fast_iovs[UIO_FASTIOV];
+	struct iovec *iov = fast_iovs;
+	struct iov_iter iter;
+	struct trusty_shm *shm;
+	struct shared_handle **shm_handles;
+	int shm_idx;
+	struct tipc_dn_chan *dn = filp->private_data;
+	long timeout = TXBUF_TIMEOUT;
+	struct tipc_msg_buf *txbuf = NULL;
+	long ret = 0;
+	ssize_t data_len = 0;
+	ssize_t shm_len = 0;
+
+	if (copy_from_user(&req, arg, sizeof(req)))
+		return -EFAULT;
+
+	shm = kmalloc_array(req.shm_cnt, sizeof(*shm), GFP_KERNEL);
+	if (!shm) {
+		ret = -ENOMEM;
+		goto release_dyn;
+	}
+
+	shm_handles = kmalloc_array(req.shm_cnt, sizeof(*shm_handles),
+				    GFP_KERNEL);
+	if (!shm_handles) {
+		ret = -ENOMEM;
+		goto release_dyn;
+	}
+
+	if (copy_from_user(shm, u64_to_user_ptr(req.shm),
+			   req.shm_cnt * sizeof(struct trusty_shm))) {
+		ret = -EFAULT;
+		goto release_dyn;
+	}
+
+	ret = import_iovec(READ, u64_to_user_ptr(req.iov), req.iov_cnt,
+			   ARRAY_SIZE(fast_iovs), &iov, &iter);
+	if (ret < 0) {
+		pr_debug("Failed to import iovec\n");
+		goto release_dyn;
+	}
+
+	for (shm_idx = 0; shm_idx < req.shm_cnt; shm_idx++) {
+		switch (shm[shm_idx].transfer) {
+		case TRUSTY_SHARE:
+			ret = dn_share_fd(dn, shm[shm_idx].fd,
+					  &shm_handles[shm_idx]);
+			if (ret) {
+				pr_debug("Forwarding shared memory failed\n");
+				goto recover_mem;
+			}
+			break;
+		default:
+			pr_err("Unknown transfer type: 0x%x\n",
+			       shm[shm_idx].transfer);
+			goto recover_mem;
+		}
+	}
+
+	if (filp->f_flags & O_NONBLOCK)
+		timeout = 0;
+
+	txbuf = tipc_chan_get_txbuf_timeout(dn->chan, timeout);
+
+	data_len = txbuf_write_iter(txbuf, &iter);
+	if (data_len < 0) {
+		ret = data_len;
+		goto release_txbuf;
+	}
+
+	shm_len = txbuf_write_handles(txbuf, shm_handles, req.shm_cnt);
+	if (shm_len < 0) {
+		ret = shm_len;
+		goto release_txbuf;
+	}
+
+	/*
+	 * These need to be aded to the index before queueing the message.
+	 * As soon as the message is sent, we may receive a message back from
+	 * Trusty saying it's no longer in use, and the shared_handle needs
+	 * to be there when that happens.
+	 */
+	for (shm_idx = 0; shm_idx < req.shm_cnt; shm_idx++)
+		register_shared_handle(&shm_handles[shm_idx]);
+
+	ret = tipc_chan_queue_msg(dn->chan, txbuf);
+	if (ret)
+		goto release_txbuf;
+
+	ret = data_len;
+	goto release_dyn;
+
+release_txbuf:
+	tipc_chan_put_txbuf(dn->chan, txbuf);
+recover_mem:
+	for (shm_idx--; shm_idx >= 0; shm_idx--)
+		drop_shared_handle(shm_handles[shm_idx]);
+release_dyn:
+	kfree(shm);
+	kfree(shm_handles);
+	kfree(iov);
+	return ret;
+}
+
 static long tipc_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
 	int ret;
@@ -946,6 +1336,11 @@ static long tipc_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	switch (cmd) {
 	case TIPC_IOC_CONNECT:
 		ret = dn_connect_ioctl(dn, (char __user *)arg);
+		break;
+	case TIPC_IOC_SEND_MSG:
+		ret = filp_send_ioctl(filp,
+				      (const struct tipc_send_msg_req __user *)
+				      arg);
 		break;
 	default:
 		pr_warn("%s: Unhandled ioctl cmd: 0x%x\n",
@@ -1048,34 +1443,24 @@ out:
 
 static ssize_t tipc_write_iter(struct kiocb *iocb, struct iov_iter *iter)
 {
-	ssize_t ret;
-	size_t len;
-	long timeout = TXBUF_TIMEOUT;
-	struct tipc_msg_buf *txbuf = NULL;
 	struct file *filp = iocb->ki_filp;
 	struct tipc_dn_chan *dn = filp->private_data;
+	long timeout = TXBUF_TIMEOUT;
+	struct tipc_msg_buf *txbuf = NULL;
+	ssize_t ret = 0;
+	ssize_t len = 0;
 
 	if (filp->f_flags & O_NONBLOCK)
 		timeout = 0;
 
 	txbuf = tipc_chan_get_txbuf_timeout(dn->chan, timeout);
+
 	if (IS_ERR(txbuf))
 		return PTR_ERR(txbuf);
 
-	/* message length */
-	len = iov_iter_count(iter);
-
-	/* check available space */
-	if (len > mb_avail_space(txbuf)) {
-		ret = -EMSGSIZE;
+	len = txbuf_write_iter(txbuf, iter);
+	if (len < 0)
 		goto err_out;
-	}
-
-	/* copy in message data */
-	if (copy_from_iter(mb_put_data(txbuf, len), len, iter) != len) {
-		ret = -EFAULT;
-		goto err_out;
-	}
 
 	/* queue message */
 	ret = tipc_chan_queue_msg(dn->chan, txbuf);
@@ -1371,6 +1756,41 @@ static void _handle_disc_req(struct tipc_virtio_dev *vds,
 	}
 }
 
+static void _handle_release(struct tipc_virtio_dev *vds,
+			    struct tipc_release_body *req, size_t len)
+{
+	struct shared_handle *handle = NULL;
+	int ret = 0;
+
+	if (len < sizeof(*req)) {
+		pr_err("Received undersized release control message\n");
+		return;
+	}
+
+	handle = take_shared_handle(req->id);
+	if (!handle) {
+		pr_err("Received release control message for untracked handle: 0x%llx\n",
+		       req->id);
+		return;
+	}
+
+	ret = drop_shared_handle(handle);
+
+	if (ret) {
+		pr_err("Failed to release handle 0x%llx upon request: (%d)\n",
+		       req->id, ret);
+		/*
+		 * Put the handle back in case we got a spurious release now and
+		 * get a real one later. The most likely scenario for a spurious
+		 * release is that a handle is somehow multiply shared. In that
+		 * case, the other share of the handle should generate a real
+		 * release later. This path should not happen, we're just trying
+		 * to be robust.
+		 */
+		register_shared_handle(&handle);
+	}
+}
+
 static void _handle_ctrl_msg(struct tipc_virtio_dev *vds,
 			     void *data, int len, u32 src)
 {
@@ -1404,6 +1824,11 @@ static void _handle_ctrl_msg(struct tipc_virtio_dev *vds,
 	case TIPC_CTRL_MSGTYPE_DISC_REQ:
 		_handle_disc_req(vds, (struct tipc_disc_req_body *)msg->body,
 				 msg->body_len);
+	break;
+
+	case TIPC_CTRL_MSGTYPE_RELEASE:
+		_handle_release(vds, (struct tipc_release_body *)msg->body,
+				msg->body_len);
 	break;
 
 	default:
@@ -1444,8 +1869,9 @@ static int _handle_rxbuf(struct tipc_virtio_dev *vds,
 		goto drop_it;
 	}
 
-	dev_dbg(dev, "From: %d, To: %d, Len: %d, Flags: 0x%x, Reserved: %d\n",
-		msg->src, msg->dst, msg->len, msg->flags, msg->reserved);
+	dev_dbg(dev, "From: %d, To: %d, Len: %d, Flags: 0x%x, Reserved: %d, shm_cnt: %d\n",
+		msg->src, msg->dst, msg->len, msg->flags, msg->reserved,
+		msg->shm_cnt);
 
 	/* message directed to control endpoint is a special case */
 	if (msg->dst == TIPC_CTRL_ADDR) {
