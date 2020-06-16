@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "77f7f932_ea3528c8",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1534,
+      "author": {
+        "id": 1138223
+      },
+      "writtenOn": "2020-06-16T02:54:14Z",
+      "side": 1,
+      "message": "If no \".release\" registered, the kernel will output the warning during shutdown() process. The warning happened in: https://android.googlesource.com/kernel/common/+/refs/heads/android-5.4-stable/drivers/base/core.c#1525",
+      "parentUuid": "a84a1dc1_091e96b8",
+      "revId": "b22a2d285b9783b04a98fd05b62a9062ab1bf732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "53e5eb8f_d2f11dfd",
         "filename": "drivers/trusty/trusty-virtio.c",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2020-06-16T02:23:41Z",
       "side": 1,
       "message": "why is remove not enough?",
+      "revId": "b22a2d285b9783b04a98fd05b62a9062ab1bf732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "736ae7a1_33772495",
+        "filename": "drivers/trusty/trusty-virtio.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 1138223
+      },
+      "writtenOn": "2020-06-16T02:54:14Z",
+      "side": 1,
+      "message": "During the reboot, didn\u0027t see the \"remove\" triggered. Since \"remove\" is triggered from driver_unregister(), when reboot the Linux kernel, won\u0027t trigger the driver_unregister(). So have to use shutdown to handle the virtio removement.",
+      "parentUuid": "53e5eb8f_d2f11dfd",
       "revId": "b22a2d285b9783b04a98fd05b62a9062ab1bf732",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
