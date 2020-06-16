@@ -2,6 +2,42 @@
   "comments": [
     {
       "key": {
+        "uuid": "045067c1_17ed1f3e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1138223
+      },
+      "writtenOn": "2020-06-16T08:21:31Z",
+      "side": 1,
+      "message": "\u003e Commit does not have a valid tag, such as ANDROID:\n\u003e \n\u003e FROMGIT: Patch from an upstream git repository, needs reference to upstream sha\n\u003e ANDROID: Patch only relevant for Android, unlikely to be upstreamed\n\u003e UPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\n\u003e BACKPORT: Modified patch from upstream, needs reference to upstream sha\n\u003e FROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease fix.",
+      "parentUuid": "013dee46_92e51da6",
+      "revId": "b22a2d285b9783b04a98fd05b62a9062ab1bf732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c12ba5a_0e29323d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1138223
+      },
+      "writtenOn": "2020-06-16T08:21:31Z",
+      "side": 1,
+      "message": "\u003e Commit does not have a valid tag, such as ANDROID:\n\u003e \n\u003e FROMGIT: Patch from an upstream git repository, needs reference to upstream sha\n\u003e ANDROID: Patch only relevant for Android, unlikely to be upstreamed\n\u003e UPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\n\u003e BACKPORT: Modified patch from upstream, needs reference to upstream sha\n\u003e FROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease fix.",
+      "parentUuid": "48d31645_d22b0373",
+      "revId": "b22a2d285b9783b04a98fd05b62a9062ab1bf732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a84a1dc1_091e96b8",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 1
