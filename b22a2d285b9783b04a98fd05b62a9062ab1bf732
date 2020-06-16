@@ -38,6 +38,52 @@
     },
     {
       "key": {
+        "uuid": "319051a6_98bc612a",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1521,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-16T09:53:19Z",
+      "side": 1,
+      "message": "coding style.",
+      "range": {
+        "startLine": 1521,
+        "startChar": 0,
+        "endLine": 1521,
+        "endChar": 53
+      },
+      "revId": "b22a2d285b9783b04a98fd05b62a9062ab1bf732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8c0ad4b_4e24a65c",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1522,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-16T09:53:19Z",
+      "side": 1,
+      "message": "As stated below, this is so wrong...",
+      "range": {
+        "startLine": 1522,
+        "startChar": 0,
+        "endLine": 1522,
+        "endChar": 37
+      },
+      "revId": "b22a2d285b9783b04a98fd05b62a9062ab1bf732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a84a1dc1_091e96b8",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 1
@@ -67,6 +113,24 @@
       "side": 1,
       "message": "If no \".release\" registered, the kernel will output the warning during shutdown() process. The warning happened in: https://android.googlesource.com/kernel/common/+/refs/heads/android-5.4-stable/drivers/base/core.c#1525",
       "parentUuid": "a84a1dc1_091e96b8",
+      "revId": "b22a2d285b9783b04a98fd05b62a9062ab1bf732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7eb5d133_1345bc97",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1534,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-16T09:53:19Z",
+      "side": 1,
+      "message": "Yes, that is because you are supposed to have a VALID release function.\n\nDon\u0027t try to out-smart the kernel, that warning was put there for a very good reason. It is telling you that you have broken code.  This is NOT how to fix it.",
+      "parentUuid": "77f7f932_ea3528c8",
       "revId": "b22a2d285b9783b04a98fd05b62a9062ab1bf732",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
