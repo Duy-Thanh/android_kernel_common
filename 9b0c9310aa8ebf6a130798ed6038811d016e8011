@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "afa1ad35_bc403fd0",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-06-16T03:15:50Z",
+      "side": 1,
+      "message": "add kerneldoc. This looks like a buffer that user-space fills out, if so it should go in include/uapi/. Also if transfer is supposed to be one of enum transfer_kind then match the names. Also reserve padding bytes so you can validate all the data user-space pass in.",
+      "revId": "9b0c9310aa8ebf6a130798ed6038811d016e8011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "745ea099_33c6cdcd",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-06-16T03:15:50Z",
+      "side": 1,
+      "message": "these also belong in include/uapi/",
+      "revId": "9b0c9310aa8ebf6a130798ed6038811d016e8011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2245ff13_43ceab56",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-06-16T03:15:50Z",
+      "side": 1,
+      "message": "where do you release this reference?",
+      "revId": "9b0c9310aa8ebf6a130798ed6038811d016e8011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24b45d4f_70060784",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1149,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-06-16T03:15:50Z",
+      "side": 1,
+      "message": "Why not add this when you implement it?",
+      "revId": "9b0c9310aa8ebf6a130798ed6038811d016e8011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
