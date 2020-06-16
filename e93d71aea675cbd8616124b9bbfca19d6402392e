@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37f237b7_6487f50d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-06-16T16:45:08Z",
+      "side": 1,
+      "message": "AFAICT this was never considered in the past for schedtune? I looked at the tree before we added uclamp support and I couldn\u0027t see the boosting taking into consideration.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 65
+      },
+      "revId": "e93d71aea675cbd8616124b9bbfca19d6402392e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a76e615_bea4b4c8",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-06-16T16:45:08Z",
+      "side": 1,
+      "message": "If you put this in compute_energy() instead after the call to schedutil_cpu_ the fix would be a lot easier to review and verify. You will not have to export schedtune_cpu_margin() then too.\n\ndiff --git a/kernel/sched/fair.c b/kernel/sched/fair.c\nindex 0c5940d3fd70..8daa2f0ee488 100644\n--- a/kernel/sched/fair.c\n+++ b/kernel/sched/fair.c\n@@ -7045,6 +7045,9 @@ compute_energy(struct task_struct *p, int dst_cpu, struct perf_domain *pd)\n                        tsk \u003d cpu \u003d\u003d dst_cpu ? p : NULL;\n                        cpu_util \u003d schedutil_cpu_util(cpu, util_cfs, cpu_cap,\n                                                      FREQUENCY_UTIL, tsk);\n+#ifdef CONFIG_SCHED_TUNE\n+                       cpu_util +\u003d schedtune_cpu_margin(cpu_util, cpu);\n+#endif\n                        max_util \u003d max(max_util, cpu_util);\n                }",
+      "range": {
+        "startLine": 278,
+        "startChar": 2,
+        "endLine": 278,
+        "endChar": 42
+      },
+      "revId": "e93d71aea675cbd8616124b9bbfca19d6402392e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "269b5b7f_204a0fea",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-06-16T16:45:08Z",
+      "side": 1,
+      "message": "cfs utilization could go above SCHED_CAPACITY_SCALE, so you lost the capping part that was done in stune_util().",
+      "range": {
+        "startLine": 336,
+        "startChar": 26,
+        "endLine": 336,
+        "endChar": 43
+      },
+      "revId": "e93d71aea675cbd8616124b9bbfca19d6402392e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fb0e5fc_fe9a5b01",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-06-16T16:45:08Z",
+      "side": 1,
+      "message": "I can\u0027t see the function signature has changed. Changed this by mistake? I pulled your changeset and I can indeed see a compilation failure on android-4.19 branch.",
+      "range": {
+        "startLine": 338,
+        "startChar": 51,
+        "endLine": 338,
+        "endChar": 57
+      },
+      "revId": "e93d71aea675cbd8616124b9bbfca19d6402392e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
