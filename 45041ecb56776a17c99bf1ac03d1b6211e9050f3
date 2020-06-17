@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e9c274f_5d8ec6cb",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-06-17T09:48:34Z",
+      "side": 1,
+      "message": "Hmm okay if you want to keep the current approach that\u0027s fine. But this raises few questions.\n\nstune_util() is only used by this function. I suggest keeping the function call as is and modify the function itself to not account for the margin in its return value.\n\nBut this stune_util() will be almost identical to cpu_util_freq(), so the whole #ifdef can go away. cpu_util_freq() is actually more robust and caps by capacity_orig_of(cpu).\n\nso I think we can remove stune_util() all together in favour of cpu_util_freq() and unify this bit here since the margin addition is handled later.\n\nThere will  be a tricky question to answer of whether to keep the trace_sched_boost_cpu() or drop it.. I don\u0027t know tbh. There might be users who still want it. So it depends on your target audience. Not sure how many vendors do you expect to pick this branch still.\n\nIf we do need to keep it, you can add it to the new location where schedtune_cpu_margin() is called.",
+      "range": {
+        "startLine": 336,
+        "startChar": 22,
+        "endLine": 337,
+        "endChar": 52
+      },
+      "revId": "45041ecb56776a17c99bf1ac03d1b6211e9050f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
