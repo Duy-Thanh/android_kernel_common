@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40bea133_aea96bb1",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5962,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-06-17T15:49:15Z",
+      "side": 1,
+      "message": "Err, util has always had many types. unsigned long would have been better, but to be honest, it\u0027s already inconsistent so what you did makes sense in the context of this patch.",
+      "range": {
+        "startLine": 5962,
+        "startChar": 7,
+        "endLine": 5962,
+        "endChar": 11
+      },
+      "revId": "ce67d824153c9fa89ba4e961166d76fcde4a87c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
