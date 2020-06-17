@@ -1,0 +1,31 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003469950",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1340611?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "44e78f25_240d23dc",
+        "filename": "kernel/sched/cpudeadline.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-17T05:11:36Z",
+      "side": 1,
+      "message": "This file contains a set of conflict markers.If this is a false alarm, add IGNORE_MERGE_CONFLICT_CHECK\u003d\u003d\u003creason\u003e to your commit message.",
+      "range": {
+        "startLine": 131,
+        "startChar": 1,
+        "endLine": 131,
+        "endChar": 7
+      },
+      "revId": "8730ced2df52386b022915292ad91f9b249328d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
