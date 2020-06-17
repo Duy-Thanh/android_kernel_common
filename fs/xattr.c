@@ -202,6 +202,7 @@ int __vfs_setxattr_noperm(struct dentry *dentry, const char *name,
 
 	return error;
 }
+EXPORT_SYMBOL(__vfs_setxattr_noperm);
 
 
 int
