@@ -22,6 +22,30 @@
       "revId": "45041ecb56776a17c99bf1ac03d1b6211e9050f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77fd72a0_48e95ebf",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2020-06-17T15:43:27Z",
+      "side": 1,
+      "message": "Thanks for your great insight :) I have updated it based on your suggestion. Please take a look, thanks.",
+      "parentUuid": "2e9c274f_5d8ec6cb",
+      "range": {
+        "startLine": 336,
+        "startChar": 22,
+        "endLine": 337,
+        "endChar": 52
+      },
+      "revId": "45041ecb56776a17c99bf1ac03d1b6211e9050f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
