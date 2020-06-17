@@ -22,6 +22,30 @@
       "revId": "ce67d824153c9fa89ba4e961166d76fcde4a87c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57771c2b_e553cc5a",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5962,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2020-06-17T16:02:01Z",
+      "side": 1,
+      "message": "Well, I modified it because I saw schedtune_margin() returns long. I changed both 2 schedtune_cpu_margin() functions (separated by CONFIG_SCHED_TUNE). Do you mean they could have different return types, or they both should return unsigned long (however, margin could be negative iiuc)?",
+      "parentUuid": "40bea133_aea96bb1",
+      "range": {
+        "startLine": 5962,
+        "startChar": 7,
+        "endLine": 5962,
+        "endChar": 11
+      },
+      "revId": "ce67d824153c9fa89ba4e961166d76fcde4a87c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
