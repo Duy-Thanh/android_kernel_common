@@ -46,6 +46,30 @@
       "revId": "ce67d824153c9fa89ba4e961166d76fcde4a87c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "690eda56_cbaafd7f",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5962,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-06-17T16:12:43Z",
+      "side": 1,
+      "message": "Yes it\u0027s not your fault. The code is already inconsistent on how it deals with the type of util. Your change makes sense. We could make this unsigned long but I don\u0027t think the churn is worth it since there are other places that define this as long too. schedtune_task_margin() above it is one example. So all is good :)",
+      "parentUuid": "57771c2b_e553cc5a",
+      "range": {
+        "startLine": 5962,
+        "startChar": 7,
+        "endLine": 5962,
+        "endChar": 11
+      },
+      "revId": "ce67d824153c9fa89ba4e961166d76fcde4a87c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
