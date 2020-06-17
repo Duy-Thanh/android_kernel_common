@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73655872_7cbe17ef",
+        "filename": "block/blk-crypto-fallback.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-06-17T17:55:56Z",
+      "side": 1,
+      "message": "This EXPORT_SYMBOL_GPL() is in the wrong place.",
+      "range": {
+        "startLine": 667,
+        "startChar": 0,
+        "endLine": 667,
+        "endChar": 46
+      },
+      "revId": "c8aa14cff69cfcd4bd6494f41ea65112f63ea98e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b01a917_78121cbc",
+        "filename": "block/blk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-06-17T17:55:56Z",
+      "side": 1,
+      "message": "These two includes are in the opposite order upstream.  Best to keep them in the same order.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 28
+      },
+      "revId": "c8aa14cff69cfcd4bd6494f41ea65112f63ea98e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be3c348f_de84a255",
+        "filename": "drivers/md/dm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2419,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-06-17T17:55:56Z",
+      "side": 1,
+      "message": "This newly added comment (in currently Android-specific code) is redundant with the comment above.",
+      "range": {
+        "startLine": 2416,
+        "startChar": 0,
+        "endLine": 2419,
+        "endChar": 4
+      },
+      "revId": "c8aa14cff69cfcd4bd6494f41ea65112f63ea98e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c0396ba_2f8d5639",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-06-17T17:55:56Z",
+      "side": 1,
+      "message": "The definition of UFSHCD_QUIRK_BROKEN_CRYPTO should be removed.",
+      "range": {
+        "startLine": 561,
+        "startChar": 0,
+        "endLine": 565,
+        "endChar": 40
+      },
+      "revId": "c8aa14cff69cfcd4bd6494f41ea65112f63ea98e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "262b72d2_bd0f173d",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-06-17T17:55:56Z",
+      "side": 1,
+      "message": "Better to make this have value 1 \u003c\u003c 8, since we know that 1 \u003c\u003c 7 conflicts with something upstream already (it just hasn\u0027t gotten merged into android-mainline yet).",
+      "range": {
+        "startLine": 604,
+        "startChar": 0,
+        "endLine": 608,
+        "endChar": 30
+      },
+      "revId": "c8aa14cff69cfcd4bd6494f41ea65112f63ea98e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44247ede_ad9d5ba7",
+        "filename": "fs/f2fs/data.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-06-17T17:55:56Z",
+      "side": 1,
+      "message": "There are some weird whitespace changes in this commit.  These look to be caused by putting \"FROMLIST: f2fs: fix use-after-free when accessing bio-\u003ebi_crypt_context\" in a separate commit.  It would be better to just fold it in, like you did in the latest version of \"f2fs: add inline encryption support\" you posted upstream.  The separate patch is only needed on branches like android-5.4-stable that aren\u0027t being updated to the latest inline encryption patches.",
+      "range": {
+        "startLine": 795,
+        "startChar": 0,
+        "endLine": 795,
+        "endChar": 21
+      },
+      "revId": "c8aa14cff69cfcd4bd6494f41ea65112f63ea98e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e60eb0a9_f8e15c0f",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-06-17T17:55:56Z",
+      "side": 1,
+      "message": "These two kerneldoc comments differ slightly between this and the latest patch you posted upstream.",
+      "range": {
+        "startLine": 640,
+        "startChar": 0,
+        "endLine": 663,
+        "endChar": 3
+      },
+      "revId": "c8aa14cff69cfcd4bd6494f41ea65112f63ea98e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
