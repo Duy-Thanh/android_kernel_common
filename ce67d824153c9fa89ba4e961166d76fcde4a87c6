@@ -70,6 +70,30 @@
       "revId": "ce67d824153c9fa89ba4e961166d76fcde4a87c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9af3b1b9_cd6a7e19",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5962,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2020-06-18T01:35:57Z",
+      "side": 1,
+      "message": "Thanks a lot for reviewing this patch :)",
+      "parentUuid": "690eda56_cbaafd7f",
+      "range": {
+        "startLine": 5962,
+        "startChar": 7,
+        "endLine": 5962,
+        "endChar": 11
+      },
+      "revId": "ce67d824153c9fa89ba4e961166d76fcde4a87c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
