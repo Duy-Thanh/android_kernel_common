@@ -1,0 +1,46 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003492776",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1343153?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "12ae3113_4f0b34f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-18T01:49:45Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a Bug: or Fixes: line",
+      "revId": "032c28a9d8ef9860dc75af2d3c632972561b2836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003492776",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1343153?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "4551989b_db08228a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-18T01:49:45Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Tri Vo \u003ctrong@google.com\u003e",
+      "revId": "032c28a9d8ef9860dc75af2d3c632972561b2836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
