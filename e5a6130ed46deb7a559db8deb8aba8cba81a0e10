@@ -34,6 +34,29 @@
       "revId": "e5a6130ed46deb7a559db8deb8aba8cba81a0e10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a802478_aaf4381c",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2020-06-18T16:00:56Z",
+      "side": 1,
+      "message": "Could you remove this include too? Only thing it contains is __asmeq.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 25
+      },
+      "revId": "e5a6130ed46deb7a559db8deb8aba8cba81a0e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
