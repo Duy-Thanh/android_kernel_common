@@ -1,3 +1,8 @@
+<<<<<<< HEAD   (9e05d6 ANDROID: GKI: scripts: Makefile: update the lz4 command)
+=======
+CONFIG_UAPI_HEADER_TEST=y
+CONFIG_KERNEL_LZ4=y
+>>>>>>> CHANGE (a48f76 ANDROID: gki_defconfig: x86: Enable KERNEL_LZ4)
 # CONFIG_USELIB is not set
 CONFIG_AUDIT=y
 CONFIG_NO_HZ=y
