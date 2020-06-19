@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "441582ee_fdf052ae",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-06-19T21:58:55Z",
+      "side": 1,
+      "message": "The trusty api and type is landed. You are calling trusty_share_memory so trusty_reclaim_memory I don\u0027t know why you are not using the type that those apis expect.",
+      "revId": "367973bd99509e22b6171a2ae4769d6dc628e602",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64a5746a_bb5bf98d",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-06-19T21:58:55Z",
+      "side": 1,
+      "message": "you are not handling this return code in a consistent way. Print error here?",
+      "revId": "367973bd99509e22b6171a2ae4769d6dc628e602",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02c26e12_122ee1f8",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1775,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-06-19T21:58:55Z",
+      "side": 1,
+      "message": "return? drop_shared_handle does not check if handle is NULL",
+      "revId": "367973bd99509e22b6171a2ae4769d6dc628e602",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eed8d877_61fac8a1",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1786,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-06-19T21:58:55Z",
+      "side": 1,
+      "message": "when does this happen, and why do you expect to get another one later?",
+      "revId": "367973bd99509e22b6171a2ae4769d6dc628e602",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c905d05_34734cff",
+        "filename": "include/uapi/linux/trusty/ioctl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-06-19T21:58:55Z",
+      "side": 1,
+      "message": "only if sharing with trustzone",
+      "range": {
+        "startLine": 27,
+        "startChar": 63,
+        "endLine": 27,
+        "endChar": 66
+      },
+      "revId": "367973bd99509e22b6171a2ae4769d6dc628e602",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ca09bb2_88939b8c",
+        "filename": "include/uapi/linux/trusty/ioctl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-06-19T21:58:55Z",
+      "side": 1,
+      "message": "can you make a separate patch to move the existing defines first?",
+      "revId": "367973bd99509e22b6171a2ae4769d6dc628e602",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
