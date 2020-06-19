@@ -37,6 +37,29 @@
     },
     {
       "key": {
+        "uuid": "afedbeea_7a7ba492",
+        "filename": "drivers/trusty/trusty-smc.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2020-06-19T01:21:56Z",
+      "side": 1,
+      "message": "This one can go away too.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 25
+      },
+      "revId": "e5a6130ed46deb7a559db8deb8aba8cba81a0e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5a802478_aaf4381c",
         "filename": "drivers/trusty/trusty.c",
         "patchSetId": 2
