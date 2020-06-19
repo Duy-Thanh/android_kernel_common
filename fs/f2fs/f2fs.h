@@ -137,10 +137,14 @@ struct f2fs_mount_info {
 	int fsync_mode;			/* fsync policy */
 	int fs_mode;			/* fs mode: LFS or ADAPTIVE */
 	int bggc_mode;			/* bggc mode: off, on or sync */
+<<<<<<< HEAD   (2f8b07 ANDROID: GKI: enable CONFIG_EXT4_FS_POSIX_ACL.)
 	bool test_dummy_encryption;	/* test dummy encryption */
 #ifdef CONFIG_FS_ENCRYPTION
 	bool inlinecrypt;		/* inline encryption enabled */
 #endif
+=======
+	struct fscrypt_dummy_context dummy_enc_ctx; /* test dummy encryption */
+>>>>>>> BRANCH (2aedb8 fscrypt: remove stale definition)
 	block_t unusable_cap_perc;	/* percentage for cap */
 	block_t unusable_cap;		/* Amount of space allowed to be
 					 * unusable when disabling checkpoint
@@ -1319,7 +1323,7 @@ enum fsync_mode {
 
 #ifdef CONFIG_FS_ENCRYPTION
 #define DUMMY_ENCRYPTION_ENABLED(sbi) \
-			(unlikely(F2FS_OPTION(sbi).test_dummy_encryption))
+	(unlikely(F2FS_OPTION(sbi).dummy_enc_ctx.ctx != NULL))
 #else
 #define DUMMY_ENCRYPTION_ENABLED(sbi) (0)
 #endif
