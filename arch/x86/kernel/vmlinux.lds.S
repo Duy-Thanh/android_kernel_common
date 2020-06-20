@@ -34,14 +34,18 @@ OUTPUT_FORMAT(CONFIG_OUTPUT_FORMAT, CONFIG_OUTPUT_FORMAT, CONFIG_OUTPUT_FORMAT)
 #ifdef CONFIG_X86_32
 OUTPUT_ARCH(i386)
 ENTRY(phys_startup_32)
-jiffies = jiffies_64;
 #else
 OUTPUT_ARCH(i386:x86-64)
 ENTRY(phys_startup_64)
-jiffies_64 = jiffies;
 #endif
 
+<<<<<<< HEAD   (34a0c1 Merge 4.4.227 into android-4.4-o)
 #if defined(CONFIG_X86_64)
+=======
+jiffies = jiffies_64;
+
+#if defined(CONFIG_X86_64) && defined(CONFIG_DEBUG_RODATA)
+>>>>>>> BRANCH (ddb4a7 Linux 4.4.228)
 /*
  * On 64-bit, align RODATA to 2MB so we retain large page mappings for
  * boundaries spanning kernel text, rodata and data sections.
