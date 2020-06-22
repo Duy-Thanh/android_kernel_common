@@ -1,0 +1,25 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003565617",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1344892?revision\u003d4",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f8a5bdc1_8875f7d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-22T20:31:22Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Eric Biggers \u003cebiggers@google.com\u003e",
+      "revId": "ec877350d0e8c1dba4ec7809a87000e3f0f17911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
