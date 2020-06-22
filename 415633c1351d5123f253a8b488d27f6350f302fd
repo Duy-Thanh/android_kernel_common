@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b53a3828_fc2b1fef",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 6710,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-06-22T22:13:12Z",
+      "side": 1,
+      "message": "can\u0027t this just be:\n\n  int target_cpu \u003d -1;\n\n  trace_android_rvh_select_task_rq_fair(p, prev_cpu, sd_flag,\n\t\t\t\t        wake_flags, \u0026target_cpu);\n  if (target_cpu \u003e\u003d 0)\n    return target_cpu;\n\nis there a need for the call to trace_.._enabled()?",
+      "range": {
+        "startLine": 6703,
+        "startChar": 1,
+        "endLine": 6710,
+        "endChar": 2
+      },
+      "revId": "415633c1351d5123f253a8b488d27f6350f302fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
