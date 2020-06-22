@@ -166,7 +166,11 @@ static int setup_per_mode_enc_key(struct fscrypt_info *ci,
 	const struct super_block *sb = inode->i_sb;
 	struct fscrypt_mode *mode = ci->ci_mode;
 	const u8 mode_num = mode - fscrypt_modes;
+<<<<<<< HEAD   (d6d7b1 Merge 4.14.185 into android-4.14-stable)
 	struct fscrypt_prepared_key *prep_key;
+=======
+	struct crypto_skcipher *tfm;
+>>>>>>> BRANCH (3cec60 fscrypt: remove stale definition)
 	u8 mode_key[FSCRYPT_MAX_KEY_SIZE];
 	u8 hkdf_info[sizeof(mode_num) + sizeof(sb->s_uuid)];
 	unsigned int hkdf_infolen = 0;
@@ -175,11 +179,35 @@ static int setup_per_mode_enc_key(struct fscrypt_info *ci,
 	if (WARN_ON(mode_num > __FSCRYPT_MODE_MAX))
 		return -EINVAL;
 
+<<<<<<< HEAD   (d6d7b1 Merge 4.14.185 into android-4.14-stable)
 	prep_key = &keys[mode_num];
 	if (fscrypt_is_key_prepared(prep_key, ci)) {
 		ci->ci_key = *prep_key;
 		return 0;
+=======
+	/* pairs with smp_store_release() below */
+	tfm = READ_ONCE(tfms[mode_num]);
+	if (likely(tfm != NULL)) {
+		ci->ci_ctfm = tfm;
+		return 0;
 	}
+
+	mutex_lock(&fscrypt_mode_key_setup_mutex);
+
+	if (tfms[mode_num])
+		goto done_unlock;
+
+	BUILD_BUG_ON(sizeof(mode_num) != 1);
+	BUILD_BUG_ON(sizeof(sb->s_uuid) != 16);
+	BUILD_BUG_ON(sizeof(hkdf_info) != 17);
+	hkdf_info[hkdf_infolen++] = mode_num;
+	if (include_fs_uuid) {
+		memcpy(&hkdf_info[hkdf_infolen], &sb->s_uuid,
+		       sizeof(sb->s_uuid));
+		hkdf_infolen += sizeof(sb->s_uuid);
+>>>>>>> BRANCH (3cec60 fscrypt: remove stale definition)
+	}
+<<<<<<< HEAD   (d6d7b1 Merge 4.14.185 into android-4.14-stable)
 
 	mutex_lock(&fscrypt_mode_key_setup_mutex);
 
@@ -227,9 +255,28 @@ static int setup_per_mode_enc_key(struct fscrypt_info *ci,
 		memzero_explicit(mode_key, mode->keysize);
 		if (err)
 			goto out_unlock;
+=======
+	err = fscrypt_hkdf_expand(&mk->mk_secret.hkdf,
+				  hkdf_context, hkdf_info, hkdf_infolen,
+				  mode_key, mode->keysize);
+	if (err)
+		goto out_unlock;
+	tfm = fscrypt_allocate_skcipher(mode, mode_key, inode);
+	memzero_explicit(mode_key, mode->keysize);
+	if (IS_ERR(tfm)) {
+		err = PTR_ERR(tfm);
+		goto out_unlock;
+>>>>>>> BRANCH (3cec60 fscrypt: remove stale definition)
 	}
+<<<<<<< HEAD   (d6d7b1 Merge 4.14.185 into android-4.14-stable)
 done_unlock:
 	ci->ci_key = *prep_key;
+=======
+	/* pairs with READ_ONCE() above */
+	smp_store_release(&tfms[mode_num], tfm);
+done_unlock:
+	ci->ci_ctfm = tfm;
+>>>>>>> BRANCH (3cec60 fscrypt: remove stale definition)
 	err = 0;
 out_unlock:
 	mutex_unlock(&fscrypt_mode_key_setup_mutex);
@@ -513,21 +560,18 @@ int fscrypt_get_encryption_info(struct inode *inode)
 
 	res = inode->i_sb->s_cop->get_context(inode, &ctx, sizeof(ctx));
 	if (res < 0) {
-		if (!fscrypt_dummy_context_enabled(inode) ||
-		    IS_ENCRYPTED(inode)) {
+		const union fscrypt_context *dummy_ctx =
+			fscrypt_get_dummy_context(inode->i_sb);
+
+		if (IS_ENCRYPTED(inode) || !dummy_ctx) {
 			fscrypt_warn(inode,
 				     "Error %d getting encryption context",
 				     res);
 			return res;
 		}
 		/* Fake up a context for an unencrypted directory */
-		memset(&ctx, 0, sizeof(ctx));
-		ctx.version = FSCRYPT_CONTEXT_V1;
-		ctx.v1.contents_encryption_mode = FSCRYPT_MODE_AES_256_XTS;
-		ctx.v1.filenames_encryption_mode = FSCRYPT_MODE_AES_256_CTS;
-		memset(ctx.v1.master_key_descriptor, 0x42,
-		       FSCRYPT_KEY_DESCRIPTOR_SIZE);
-		res = sizeof(ctx.v1);
+		res = fscrypt_context_size(dummy_ctx);
+		memcpy(&ctx, dummy_ctx, res);
 	}
 
 	crypt_info = kmem_cache_zalloc(fscrypt_info_cachep, GFP_NOFS);
@@ -593,7 +637,8 @@ out:
 EXPORT_SYMBOL(fscrypt_get_encryption_info);
 
 /**
- * fscrypt_put_encryption_info - free most of an inode's fscrypt data
+ * fscrypt_put_encryption_info() - free most of an inode's fscrypt data
+ * @inode: an inode being evicted
  *
  * Free the inode's fscrypt_info.  Filesystems must call this when the inode is
  * being evicted.  An RCU grace period need not have elapsed yet.
@@ -606,7 +651,8 @@ void fscrypt_put_encryption_info(struct inode *inode)
 EXPORT_SYMBOL(fscrypt_put_encryption_info);
 
 /**
- * fscrypt_free_inode - free an inode's fscrypt data requiring RCU delay
+ * fscrypt_free_inode() - free an inode's fscrypt data requiring RCU delay
+ * @inode: an inode being freed
  *
  * Free the inode's cached decrypted symlink target, if any.  Filesystems must
  * call this after an RCU grace period, just before they free the inode.
@@ -621,7 +667,8 @@ void fscrypt_free_inode(struct inode *inode)
 EXPORT_SYMBOL(fscrypt_free_inode);
 
 /**
- * fscrypt_drop_inode - check whether the inode's master key has been removed
+ * fscrypt_drop_inode() - check whether the inode's master key has been removed
+ * @inode: an inode being considered for eviction
  *
  * Filesystems supporting fscrypt must call this from their ->drop_inode()
  * method so that encrypted inodes are evicted as soon as they're no longer in
