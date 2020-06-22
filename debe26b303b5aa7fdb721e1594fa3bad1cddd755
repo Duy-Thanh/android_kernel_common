@@ -1,0 +1,46 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003567993",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1345078?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "4bb11c71_4a8723aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-22T22:15:23Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Prasad Sodagudi \u003cpsodagud@codeaurora.org\u003e",
+      "revId": "debe26b303b5aa7fdb721e1594fa3bad1cddd755",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003567993",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1345078?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "47f96e56_c38230ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-22T22:15:23Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a Bug: or Fixes: line",
+      "revId": "debe26b303b5aa7fdb721e1594fa3bad1cddd755",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
