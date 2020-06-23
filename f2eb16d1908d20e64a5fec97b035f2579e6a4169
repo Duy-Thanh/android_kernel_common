@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d0a8c19_7069d24f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-06-23T18:07:31Z",
+      "side": 1,
+      "message": "The existing description used includes: ... and the original long description to list squashed changes, so it would be better to keep a consistent format. Also adding your own sign-off would be useful as the a future rebase will likely drop your name if it is only listed in the commit tag.",
+      "revId": "f2eb16d1908d20e64a5fec97b035f2579e6a4169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
