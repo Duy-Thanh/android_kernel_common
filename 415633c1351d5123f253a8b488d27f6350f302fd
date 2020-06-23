@@ -46,6 +46,30 @@
       "revId": "415633c1351d5123f253a8b488d27f6350f302fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f6c4235_0873f373",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 6710,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-06-23T08:04:07Z",
+      "side": 1,
+      "message": "\u003e is there a need for the call to trace_.._enabled()?\n\nNo, there is no logic difference. Putting everything under the *_enabled() thing isn\u0027t a must-have, it\u0027s just an optimization to avoid the if (target \u003e\u003d 0) when the hook is disabled. That is, *_enabled() is a static key, which is faster to check than a standard condition. It\u0027s possible the compiler will figure it out on its own, but who trusts compilers ;) ?",
+      "parentUuid": "fc3e3135_68cb5b12",
+      "range": {
+        "startLine": 6703,
+        "startChar": 1,
+        "endLine": 6710,
+        "endChar": 2
+      },
+      "revId": "415633c1351d5123f253a8b488d27f6350f302fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
