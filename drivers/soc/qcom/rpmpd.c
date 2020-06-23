@@ -4,6 +4,7 @@
 #include <linux/err.h>
 #include <linux/init.h>
 #include <linux/kernel.h>
+#include <linux/module.h>
 #include <linux/mutex.h>
 #include <linux/module.h>
 #include <linux/pm_domain.h>
@@ -427,4 +428,7 @@ core_initcall(rpmpd_init);
 
 MODULE_DESCRIPTION("Qualcomm Technologies, Inc. RPM Power Domain Driver");
 MODULE_LICENSE("GPL v2");
+<<<<<<< HEAD   (c85f93 Revert "Revert "module: Make module_enable_ro() static again)
 MODULE_ALIAS("platform:qcom-rpmpd");
+=======
+>>>>>>> BRANCH (7ae771 Merge tag 'powerpc-5.8-1' of git://git.kernel.org/pub/scm/li)
