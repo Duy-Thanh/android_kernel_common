@@ -70,6 +70,30 @@
       "revId": "415633c1351d5123f253a8b488d27f6350f302fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "487c4f11_e64428e9",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 6710,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-06-23T15:26:21Z",
+      "side": 1,
+      "message": "Let\u0027s not start this pattern unless/until we have some evidence that it really makes a difference. If it does, we can go back and add a check like this in hot paths.",
+      "parentUuid": "1f6c4235_0873f373",
+      "range": {
+        "startLine": 6703,
+        "startChar": 1,
+        "endLine": 6710,
+        "endChar": 2
+      },
+      "revId": "415633c1351d5123f253a8b488d27f6350f302fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
