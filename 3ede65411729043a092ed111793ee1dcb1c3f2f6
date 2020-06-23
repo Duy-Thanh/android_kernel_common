@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02ad9611_286a936f",
+        "filename": "arch/arm64/mm/flush.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-23T08:45:22Z",
+      "side": 1,
+      "message": "EXPORT_SYMBOL_GPL() please.",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 13
+      },
+      "revId": "3ede65411729043a092ed111793ee1dcb1c3f2f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
