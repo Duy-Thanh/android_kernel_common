@@ -16,6 +16,24 @@
       "revId": "ec3dbbb5ae9e91704f07c82b3a3609a25c629ac2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82a0f146_ffa3d9c0",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1274,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2020-06-24T18:54:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ea62f9b7_3cf0cccf",
+      "revId": "ec3dbbb5ae9e91704f07c82b3a3609a25c629ac2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
