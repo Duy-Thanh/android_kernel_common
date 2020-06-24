@@ -26,6 +26,7 @@
 #include <linux/usb/cdc.h>
 #include "visor.h"
 
+
 /*
  * Version Information
  */
