@@ -14,6 +14,7 @@
  *
  */
 
+
 #include <linux/kernel.h>
 #include <linux/errno.h>
 #include <linux/slab.h>
@@ -28,6 +29,7 @@
 #include <linux/usb/serial.h>
 #include <linux/usb/cdc.h>
 #include "visor.h"
+
 
 /*
  * Version Information
