@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea62f9b7_3cf0cccf",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1274,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-06-24T18:14:05Z",
+      "side": 1,
+      "message": "this gets stuck in an infinite loop if there are any clients active.",
+      "revId": "ec3dbbb5ae9e91704f07c82b3a3609a25c629ac2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
