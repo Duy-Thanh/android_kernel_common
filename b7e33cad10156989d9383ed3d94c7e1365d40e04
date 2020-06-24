@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e317710_33f11460",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-06-24T01:42:13Z",
+      "side": 1,
+      "message": "It is used in the next patch. This is not where I meant this patch should be squashed. It can be safely squashed into the change that removed the calls to trusty_call32_mem_buf",
+      "revId": "b7e33cad10156989d9383ed3d94c7e1365d40e04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
