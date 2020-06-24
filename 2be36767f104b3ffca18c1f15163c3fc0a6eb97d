@@ -34,6 +34,24 @@
       "revId": "2be36767f104b3ffca18c1f15163c3fc0a6eb97d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "000093b3_15c976eb",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2020-06-24T18:54:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b569ebe5_58b61842",
+      "revId": "2be36767f104b3ffca18c1f15163c3fc0a6eb97d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
