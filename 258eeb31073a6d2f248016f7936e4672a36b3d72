@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab3af61a_9eb239e8",
+        "filename": "drivers/trusty/trusty-virtio.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-06-24T18:11:14Z",
+      "side": 1,
+      "message": "This is not necessarily safe. \u0026tvdev-\u003evdev is a reference counted object. unregister_virtio_device drops the reference it had, but there could be others.",
+      "revId": "258eeb31073a6d2f248016f7936e4672a36b3d72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
