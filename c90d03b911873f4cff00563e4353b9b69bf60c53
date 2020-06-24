@@ -16,6 +16,24 @@
       "revId": "c90d03b911873f4cff00563e4353b9b69bf60c53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf8fbdaf_0bf5e644",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2020-06-24T18:54:36Z",
+      "side": 1,
+      "message": "The patch only exists in Android trees. So I think it makes sense to keep the tag until we send this upstream.",
+      "parentUuid": "203aa227_012956f3",
+      "revId": "c90d03b911873f4cff00563e4353b9b69bf60c53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
