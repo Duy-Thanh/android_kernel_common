@@ -9,8 +9,8 @@
  * See Documentation/usb/usb-serial.rst for more information on using this
  * driver
  *
+ *
  */
-
 #include <linux/kernel.h>
 #include <linux/errno.h>
 #include <linux/slab.h>
