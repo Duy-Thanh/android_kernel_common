@@ -22,6 +22,98 @@
       "revId": "dff5e27ad16260c4f20ec57942b8753b46e6f83c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18005cda_2952aca7",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-25T10:13:46Z",
+      "side": 1,
+      "message": "export it?",
+      "range": {
+        "startLine": 51,
+        "startChar": 17,
+        "endLine": 51,
+        "endChar": 30
+      },
+      "revId": "dff5e27ad16260c4f20ec57942b8753b46e6f83c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c22aecf8_105f2108",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-25T10:13:46Z",
+      "side": 1,
+      "message": "Is this a TODO?  This just finds the first one in the list that matches, has nothing to do with uniqueness...",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 31
+      },
+      "revId": "dff5e27ad16260c4f20ec57942b8753b46e6f83c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c0841a3_491ba5fd",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-25T10:13:46Z",
+      "side": 1,
+      "message": "no reference counting for a structure that you just passed off to someone else?\n\nThat\u0027s ripe for abuse and failures...\n\nIsn\u0027t there a section in codingstyle about pointers without references?  😊",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 12
+      },
+      "revId": "dff5e27ad16260c4f20ec57942b8753b46e6f83c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a50a294_1d3af1ea",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-25T10:13:46Z",
+      "side": 1,
+      "message": "don\u0027t you need to EXPORT_SYMBOL_GPL() this so that people can use it?",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 25
+      },
+      "revId": "dff5e27ad16260c4f20ec57942b8753b46e6f83c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
