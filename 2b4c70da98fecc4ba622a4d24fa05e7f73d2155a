@@ -22,6 +22,30 @@
       "revId": "2b4c70da98fecc4ba622a4d24fa05e7f73d2155a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df251662_3b622487",
+        "filename": "fs/f2fs/data.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-06-25T16:13:03Z",
+      "side": 1,
+      "message": "http://aosp/1341673 synced android-mainline to the latest inline encryption patches, including https://lkml.kernel.org/linux-f2fs-devel/20200617075732.213198-4-satyat@google.com for f2fs.  The other ACK branches are still on an older version of the inline encryption patches.  Among many other things, that means this \u0027f2fs_set_bio_crypt_ctx()\u0027 line is in a slightly different order.  So this difference is expected, currently.\n\nWe can\u0027t easily upgrade the fscrypt/ext4/f2fs patches on the other ACK branches they depend on blk-crypto; and we can\u0027t upgrade blk-crypto to the upstreamed version without breaking the KMI and because a vendor has objected to it.\n\nI suggest we wait for Satya\u0027s patch series \"[PATCH 0/4] Inline Encryption Support for fscrypt\" to be upstream (in Linus\u0027 tree) in 5.9.  Then we\u0027ll update android-mainline to it, and then I\u0027ll backport it to the other ACK branches as best I can without upgrading blk-crypto.  We *could* do that earlier, but the patches are still subject to change, so it would be better to wait for the final upstreamed versions.",
+      "parentUuid": "90f90132_ce2b992f",
+      "range": {
+        "startLine": 922,
+        "startChar": 2,
+        "endLine": 923,
+        "endChar": 27
+      },
+      "revId": "2b4c70da98fecc4ba622a4d24fa05e7f73d2155a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
