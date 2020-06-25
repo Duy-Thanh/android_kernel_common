@@ -374,6 +374,7 @@ struct usb_gadget_ops {
  * @connected: True if gadget is connected.
  * @lpm_capable: If the gadget max_speed is FULL or HIGH, this flag
  *	indicates that it supports LPM as per the LPM ECN & errata.
+ * @irq: the interrupt number for device controller.
  *
  * Gadgets have a mostly-portable "gadget driver" implementing device
  * functions, handling all usb configurations and interfaces.  Gadget
@@ -428,11 +429,15 @@ struct usb_gadget {
 	unsigned			deactivated:1;
 	unsigned			connected:1;
 	unsigned			lpm_capable:1;
+<<<<<<< HEAD   (cbe59e ANDROID: GKI: USB: Gadget: add Android ABI padding to struct)
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
+=======
+	int				irq;
+>>>>>>> BRANCH (4e9688 Linux 5.4.49)
 };
 #define work_to_gadget(w)	(container_of((w), struct usb_gadget, work))
 
