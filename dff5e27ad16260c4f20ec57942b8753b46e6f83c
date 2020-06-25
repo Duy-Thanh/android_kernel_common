@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "965825de_50f419af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2020-06-25T06:05:02Z",
+      "side": 1,
+      "message": "Did you mean to write \"submitting it to Android Common in the hopes ...\"?",
+      "range": {
+        "startLine": 22,
+        "startChar": 17,
+        "endLine": 22,
+        "endChar": 48
+      },
+      "revId": "dff5e27ad16260c4f20ec57942b8753b46e6f83c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
