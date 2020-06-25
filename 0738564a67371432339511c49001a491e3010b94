@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "536d3312_d43e2535",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2020-06-25T22:14:47Z",
+      "side": 1,
+      "message": "actually here, we should clean the cache, trying another fix.",
+      "range": {
+        "startLine": 137,
+        "startChar": 2,
+        "endLine": 137,
+        "endChar": 14
+      },
+      "revId": "0738564a67371432339511c49001a491e3010b94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
