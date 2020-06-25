@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90f90132_ce2b992f",
+        "filename": "fs/f2fs/data.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2020-06-25T15:57:37Z",
+      "side": 1,
+      "message": "https://android.googlesource.com/kernel/common/+/refs/heads/android-5.4/fs/f2fs/data.c#919\n\nCan we sync the code with other branches?",
+      "range": {
+        "startLine": 922,
+        "startChar": 2,
+        "endLine": 923,
+        "endChar": 27
+      },
+      "revId": "2b4c70da98fecc4ba622a4d24fa05e7f73d2155a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
