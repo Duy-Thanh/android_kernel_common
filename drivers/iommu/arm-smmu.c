@@ -935,7 +935,7 @@ static void arm_smmu_write_sme(struct arm_smmu_device *smmu, int idx)
 {
 	arm_smmu_write_s2cr(smmu, idx);
 	if (smmu->smrs)
-		arm_smmu_write_smr(smmu, idx);
+		arm_smmu_write_smr(smmu, idx);;
 }
 
 /*
