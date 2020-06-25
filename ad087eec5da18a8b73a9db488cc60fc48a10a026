@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8be93c8e_e3ea5da2",
+        "filename": "drivers/trusty/trusty-test.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2020-06-25T01:11:22Z",
+      "side": 1,
+      "message": "Google LLC not Inc.",
+      "range": {
+        "startLine": 3,
+        "startChar": 22,
+        "endLine": 3,
+        "endChar": 34
+      },
+      "revId": "ad087eec5da18a8b73a9db488cc60fc48a10a026",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e38827f_3e5cfbc8",
+        "filename": "drivers/trusty/trusty-test.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2020-06-25T01:11:22Z",
+      "side": 1,
+      "message": "warning: variable \u0027obj\u0027 is uninitialized when used here",
+      "range": {
+        "startLine": 311,
+        "startChar": 9,
+        "endLine": 311,
+        "endChar": 12
+      },
+      "revId": "ad087eec5da18a8b73a9db488cc60fc48a10a026",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
