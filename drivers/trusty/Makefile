@@ -11,3 +11,5 @@ obj-$(CONFIG_TRUSTY_TEST)	+= trusty-test.o
 obj-$(CONFIG_TRUSTY)		+= trusty-mem.o
 obj-$(CONFIG_TRUSTY_VIRTIO)	+= trusty-virtio.o
 obj-$(CONFIG_TRUSTY_VIRTIO_IPC)	+= trusty-ipc.o
+
+ccflags-y += -Wall -Werror
