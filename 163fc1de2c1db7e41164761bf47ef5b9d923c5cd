@@ -1,0 +1,46 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003633935",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1351204?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e53f666b_c3cd7a15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-26T02:11:12Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Saravana Kannan \u003csaravanak@google.com\u003e",
+      "revId": "163fc1de2c1db7e41164761bf47ef5b9d923c5cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003633935",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1351204?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "032bb5e1_85c5e8ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-26T02:11:12Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream",
+      "revId": "163fc1de2c1db7e41164761bf47ef5b9d923c5cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
