@@ -22,6 +22,30 @@
       "revId": "9de6d75d464ba5039461f282cf1a307eb50a9690",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99aafe7e_560967ff",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2020-06-26T05:20:28Z",
+      "side": 1,
+      "message": "Yeah, in our internal bug, I actually pointed the difference of the 2 versions (cannot add your there). This patch also needed for non-limit changed cases, when the update got rate limited, and we vote same again, e.g. some jank test.",
+      "parentUuid": "81667587_5c92f2cf",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 15
+      },
+      "revId": "9de6d75d464ba5039461f282cf1a307eb50a9690",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
