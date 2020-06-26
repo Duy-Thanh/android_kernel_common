@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "81667587_5c92f2cf",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1129709
+      },
+      "writtenOn": "2020-06-26T04:59:13Z",
+      "side": 1,
+      "message": "You should skip rate limiting when there is a limit-change. There is no other right solution here. If you are running at 1 GHz now and new limits are 100 MHz to 800 MHz, you need to fallback to 800 MHz, you just can\u0027t ignore that due to rate-limiting.",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 15
+      },
+      "revId": "9de6d75d464ba5039461f282cf1a307eb50a9690",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
