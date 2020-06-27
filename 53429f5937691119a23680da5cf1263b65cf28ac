@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003651690",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1348473?revision\u003d5",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "3faaa7cb_8d7633a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-27T07:54:12Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a Bug: or Fixes: line",
+      "revId": "53429f5937691119a23680da5cf1263b65cf28ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003651690",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1348473?revision\u003d5",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "16ed9c96_2c9fd003",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-27T07:54:12Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Greg Kroah-Hartman \u003cgregkh@google.com\u003e",
+      "revId": "53429f5937691119a23680da5cf1263b65cf28ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003651690",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1348473?revision\u003d5",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "402ff54a_d1f753f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-27T07:54:12Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Greg Kroah-Hartman \u003cgregkh@google.com\u003e",
+      "revId": "53429f5937691119a23680da5cf1263b65cf28ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
