@@ -49,6 +49,76 @@
     },
     {
       "key": {
+        "uuid": "9d6911dd_d0755dc7",
+        "filename": "sound/usb/card.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-28T11:50:48Z",
+      "side": 1,
+      "message": "It might be \"made for you\", but that doesn\u0027t mean you shouldn\u0027t do it correctly.\n\nDon\u0027t use a global pointer, use a per-host-controller pointer if that is the thing that is talking to the hardware here.  Store it in your host controller\u0027s structure and you should be fine, no need to have anything global.",
+      "parentUuid": "9cb6244c_15b73bd3",
+      "range": {
+        "startLine": 184,
+        "startChar": 1,
+        "endLine": 184,
+        "endChar": 14
+      },
+      "revId": "2ad2d41d323bff796a62ea77cd13d8551e3b742c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "309f00a1_07b2c2fb",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-28T11:50:48Z",
+      "side": 1,
+      "message": "why do you need this pointer, the usb_interface has this information, right?",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 28
+      },
+      "revId": "2ad2d41d323bff796a62ea77cd13d8551e3b742c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1804499a_580e3056",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-28T11:50:48Z",
+      "side": 1,
+      "message": "you have to know what interface/device was removed, why is there no pointer here as well?",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 27
+      },
+      "revId": "2ad2d41d323bff796a62ea77cd13d8551e3b742c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c80487bf_5d63cd0f",
         "filename": "sound/usb/usbaudio.h",
         "patchSetId": 1
@@ -89,6 +159,145 @@
         "startChar": 0,
         "endLine": 144,
         "endChar": 54
+      },
+      "revId": "2ad2d41d323bff796a62ea77cd13d8551e3b742c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45704b0d_0b642a34",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-28T11:50:48Z",
+      "side": 1,
+      "message": "at this callback you do not know the device that is being talked about, but if you have a pointer to an usb interface, that will give you the needed information.",
+      "parentUuid": "e14db8ec_8124ef51",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 54
+      },
+      "revId": "2ad2d41d323bff796a62ea77cd13d8551e3b742c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb66ea4d_60e6c228",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-28T11:50:48Z",
+      "side": 1,
+      "message": "why not usb_interface *?  That is what the USB driver stack works on, not devices, right?",
+      "range": {
+        "startLine": 146,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 51
+      },
+      "revId": "2ad2d41d323bff796a62ea77cd13d8551e3b742c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b97db12b_f1167523",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-28T11:50:48Z",
+      "side": 1,
+      "message": "why not usb_interface?",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 148,
+        "endChar": 52
+      },
+      "revId": "2ad2d41d323bff796a62ea77cd13d8551e3b742c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e574203e_3c51d2c5",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-28T11:50:48Z",
+      "side": 1,
+      "message": "no device being passed in, why not?",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 50
+      },
+      "revId": "2ad2d41d323bff796a62ea77cd13d8551e3b742c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f44d38d6_1a11c018",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-28T11:50:48Z",
+      "side": 1,
+      "message": "why 2 void pointers, why not give the real type?\nAnd what device is being touched here?",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 52
+      },
+      "revId": "2ad2d41d323bff796a62ea77cd13d8551e3b742c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bd2575a_1e5f20c9",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-28T11:50:48Z",
+      "side": 1,
+      "message": "what is private_value to be used for?",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 33
       },
       "revId": "2ad2d41d323bff796a62ea77cd13d8551e3b742c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
