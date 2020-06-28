@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "146b05a5_cbebc02f",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-28T12:04:33Z",
+      "side": 1,
+      "message": "is false on or off?\n\nMake apis obvious please.",
+      "range": {
+        "startLine": 151,
+        "startChar": 29,
+        "endLine": 151,
+        "endChar": 34
+      },
+      "revId": "0acba1f7ccd10cea42cc705bacde322e0e6dc759",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9f78e90_4a4fb8c6",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-28T12:04:33Z",
+      "side": 1,
+      "message": "in or out?  Why not just pass the usb endpoint so you can know the proper type then?",
+      "range": {
+        "startLine": 151,
+        "startChar": 36,
+        "endLine": 151,
+        "endChar": 50
+      },
+      "revId": "0acba1f7ccd10cea42cc705bacde322e0e6dc759",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
