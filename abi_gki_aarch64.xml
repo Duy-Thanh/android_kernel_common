@@ -3368,6 +3368,14 @@
       <elf-symbol name='sysfs_streq' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
       <elf-symbol name='tasklet_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
       <elf-symbol name='tasklet_kill' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
+      <elf-symbol name='tcpm_cc_change' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
+      <elf-symbol name='tcpm_pd_hard_reset' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
+      <elf-symbol name='tcpm_pd_receive' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
+      <elf-symbol name='tcpm_pd_transmit_complete' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
+      <elf-symbol name='tcpm_register_port' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
+      <elf-symbol name='tcpm_tcpc_reset' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
+      <elf-symbol name='tcpm_unregister_port' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
+      <elf-symbol name='tcpm_vbus_change' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
       <elf-symbol name='thermal_cdev_update' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
       <elf-symbol name='thermal_cooling_device_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
       <elf-symbol name='thermal_of_cooling_device_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
@@ -3469,13 +3477,8 @@
       <elf-symbol name='typec_altmode_notify' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
       <elf-symbol name='typec_altmode_update_active' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
       <elf-symbol name='typec_altmode_vdm' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
-      <elf-symbol name='typec_find_port_data_role' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
-      <elf-symbol name='typec_find_port_power_role' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
-      <elf-symbol name='typec_find_power_role' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
       <elf-symbol name='typec_get_drvdata' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
-      <elf-symbol name='typec_match_altmode' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
       <elf-symbol name='typec_partner_register_altmode' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
-      <elf-symbol name='typec_partner_set_identity' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
       <elf-symbol name='typec_port_register_altmode' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
       <elf-symbol name='typec_register_partner' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
       <elf-symbol name='typec_register_port' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
@@ -3667,7 +3670,11 @@
       <elf-symbol name='usb_reset_configuration' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
       <elf-symbol name='usb_reset_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
       <elf-symbol name='usb_reset_endpoint' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
+      <elf-symbol name='usb_role_switch_get' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
+      <elf-symbol name='usb_role_switch_get_role' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
+      <elf-symbol name='usb_role_switch_put' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
       <elf-symbol name='usb_role_switch_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
+      <elf-symbol name='usb_role_switch_set_role' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
       <elf-symbol name='usb_role_switch_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
       <elf-symbol name='usb_root_hub_lost_power' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
       <elf-symbol name='usb_set_device_state' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes'/>
@@ -78617,41 +78624,6 @@
       </function-decl>
     </abi-instr>
     <abi-instr version='1.0' address-size='64' path='drivers/usb/roles/class.c' language='LANG_C89'>
-      <class-decl name='usb_role_switch' size-in-bits='7808' is-struct='yes' visibility='default' filepath='drivers/usb/roles/class.c' line='19' column='1' id='3b2a0df7'>
-        <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='dev' type-id='66e487eb' visibility='default' filepath='drivers/usb/roles/class.c' line='20' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='7104'>
-          <var-decl name='lock' type-id='925167dc' visibility='default' filepath='drivers/usb/roles/class.c' line='21' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='7360'>
-          <var-decl name='role' type-id='c675b073' visibility='default' filepath='drivers/usb/roles/class.c' line='22' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='7424'>
-          <var-decl name='usb2_port' type-id='fa0b179b' visibility='default' filepath='drivers/usb/roles/class.c' line='25' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='7488'>
-          <var-decl name='usb3_port' type-id='fa0b179b' visibility='default' filepath='drivers/usb/roles/class.c' line='26' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='7552'>
-          <var-decl name='udc' type-id='fa0b179b' visibility='default' filepath='drivers/usb/roles/class.c' line='27' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='7616'>
-          <var-decl name='set' type-id='265b58a4' visibility='default' filepath='drivers/usb/roles/class.c' line='28' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='7680'>
-          <var-decl name='get' type-id='3341a400' visibility='default' filepath='drivers/usb/roles/class.c' line='29' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='7744'>
-          <var-decl name='allow_userspace_control' type-id='b50a4934' visibility='default' filepath='drivers/usb/roles/class.c' line='30' column='1'/>
-        </data-member>
-      </class-decl>
-      <enum-decl name='usb_role' filepath='include/linux/usb/role.h' line='10' column='1' id='c675b073'>
-        <underlying-type type-id='6406df84'/>
-        <enumerator name='USB_ROLE_NONE' value='0'/>
-        <enumerator name='USB_ROLE_HOST' value='1'/>
-        <enumerator name='USB_ROLE_DEVICE' value='2'/>
-      </enum-decl>
       <typedef-decl name='usb_role_switch_set_t' type-id='91d6713d' filepath='include/linux/usb/role.h' line='16' column='1' id='265b58a4'/>
       <typedef-decl name='usb_role_switch_get_t' type-id='be8d9c5e' filepath='include/linux/usb/role.h' line='17' column='1' id='3341a400'/>
       <class-decl name='usb_role_switch_desc' size-in-bits='448' is-struct='yes' visibility='default' filepath='include/linux/usb/role.h' line='35' column='1' id='6d84fe29'>
@@ -78681,11 +78653,14 @@
       <pointer-type-def type-id='40fcf9ec' size-in-bits='64' id='143d32b2'/>
       <pointer-type-def type-id='c598cb04' size-in-bits='64' id='be8d9c5e'/>
       <pointer-type-def type-id='53f72e39' size-in-bits='64' id='91d6713d'/>
-      <pointer-type-def type-id='3b2a0df7' size-in-bits='64' id='3e3cd44f'/>
       <function-decl name='usb_role_switch_register' mangled-name='usb_role_switch_register' filepath='drivers/usb/roles/class.c' line='285' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_role_switch_register'>
         <parameter type-id='fa0b179b' name='parent' filepath='drivers/usb/roles/class.c' line='285' column='1'/>
         <parameter type-id='143d32b2' name='desc' filepath='drivers/usb/roles/class.c' line='286' column='1'/>
         <return type-id='3e3cd44f'/>
+      </function-decl>
+      <function-decl name='usb_role_switch_get_role' mangled-name='usb_role_switch_get_role' filepath='drivers/usb/roles/class.c' line='68' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_role_switch_get_role'>
+        <parameter type-id='3e3cd44f' name='sw' filepath='drivers/usb/roles/class.c' line='68' column='1'/>
+        <return type-id='c675b073'/>
       </function-decl>
       <function-decl name='usb_role_switch_unregister' mangled-name='usb_role_switch_unregister' filepath='drivers/usb/roles/class.c' line='331' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_role_switch_unregister'>
         <parameter type-id='3e3cd44f' name='sw' filepath='drivers/usb/roles/class.c' line='331' column='1'/>
@@ -78704,7 +78679,6 @@
     <abi-instr version='1.0' address-size='64' path='drivers/usb/typec/bus.c' language='LANG_C89'>
       <qualified-type-def type-id='17a13961' const='yes' id='2974aa72'/>
       <pointer-type-def type-id='2974aa72' size-in-bits='64' id='9aa82888'/>
-      <pointer-type-def type-id='02913b69' size-in-bits='64' id='4da04a79'/>
       <function-decl name='typec_altmode_notify' mangled-name='typec_altmode_notify' filepath='drivers/usb/typec/bus.c' line='51' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='typec_altmode_notify'>
         <parameter type-id='02913b69' name='adev' filepath='drivers/usb/typec/bus.c' line='51' column='1'/>
         <parameter type-id='7359adad' name='conf' filepath='drivers/usb/typec/bus.c' line='52' column='1'/>
@@ -78726,13 +78700,6 @@
       <function-decl name='typec_altmode_get_partner' mangled-name='typec_altmode_get_partner' filepath='drivers/usb/typec/bus.c' line='193' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='typec_altmode_get_partner'>
         <parameter type-id='02913b69' name='adev' filepath='drivers/usb/typec/bus.c' line='193' column='1'/>
         <return type-id='9aa82888'/>
-      </function-decl>
-      <function-decl name='typec_match_altmode' mangled-name='typec_match_altmode' filepath='drivers/usb/typec/bus.c' line='270' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='typec_match_altmode'>
-        <parameter type-id='4da04a79' name='altmodes' filepath='drivers/usb/typec/bus.c' line='270' column='1'/>
-        <parameter type-id='b59d7dce' name='n' filepath='drivers/usb/typec/bus.c' line='271' column='1'/>
-        <parameter type-id='1dc6a898' name='svid' filepath='drivers/usb/typec/bus.c' line='271' column='1'/>
-        <parameter type-id='f9b06939' name='mode' filepath='drivers/usb/typec/bus.c' line='271' column='1'/>
-        <return type-id='02913b69'/>
       </function-decl>
     </abi-instr>
     <abi-instr version='1.0' address-size='64' path='drivers/usb/typec/class.c' language='LANG_C89'>
@@ -79034,10 +79001,6 @@
         <parameter type-id='02913b69' name='adev' filepath='drivers/usb/typec/class.c' line='547' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='typec_partner_set_identity' mangled-name='typec_partner_set_identity' filepath='drivers/usb/typec/class.c' line='607' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='typec_partner_set_identity'>
-        <parameter type-id='33ca4bbb' name='partner' filepath='drivers/usb/typec/class.c' line='607' column='1'/>
-        <return type-id='95e97e5e'/>
-      </function-decl>
       <function-decl name='typec_partner_register_altmode' mangled-name='typec_partner_register_altmode' filepath='drivers/usb/typec/class.c' line='630' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='typec_partner_register_altmode'>
         <parameter type-id='33ca4bbb' name='partner' filepath='drivers/usb/typec/class.c' line='630' column='1'/>
         <parameter type-id='064c3738' name='desc' filepath='drivers/usb/typec/class.c' line='631' column='1'/>
@@ -79071,18 +79034,6 @@
         <parameter type-id='b977ca56' name='port' filepath='drivers/usb/typec/class.c' line='1367' column='1'/>
         <parameter type-id='44ea1984' name='opmode' filepath='drivers/usb/typec/class.c' line='1368' column='1'/>
         <return type-id='48b5725f'/>
-      </function-decl>
-      <function-decl name='typec_find_port_power_role' mangled-name='typec_find_port_power_role' filepath='drivers/usb/typec/class.c' line='1401' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='typec_find_port_power_role'>
-        <parameter type-id='80f4b756' name='name' filepath='drivers/usb/typec/class.c' line='1401' column='1'/>
-        <return type-id='95e97e5e'/>
-      </function-decl>
-      <function-decl name='typec_find_power_role' mangled-name='typec_find_power_role' filepath='drivers/usb/typec/class.c' line='1416' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='typec_find_power_role'>
-        <parameter type-id='80f4b756' name='name' filepath='drivers/usb/typec/class.c' line='1416' column='1'/>
-        <return type-id='95e97e5e'/>
-      </function-decl>
-      <function-decl name='typec_find_port_data_role' mangled-name='typec_find_port_data_role' filepath='drivers/usb/typec/class.c' line='1430' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='typec_find_port_data_role'>
-        <parameter type-id='80f4b756' name='name' filepath='drivers/usb/typec/class.c' line='1430' column='1'/>
-        <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='typec_set_orientation' mangled-name='typec_set_orientation' filepath='drivers/usb/typec/class.c' line='1447' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='typec_set_orientation'>
         <parameter type-id='b977ca56' name='port' filepath='drivers/usb/typec/class.c' line='1447' column='1'/>
@@ -79163,6 +79114,754 @@
         <parameter type-id='02913b69'/>
         <parameter type-id='19c2251e'/>
         <return type-id='48b5725f'/>
+      </function-type>
+    </abi-instr>
+    <abi-instr version='1.0' address-size='64' path='drivers/usb/typec/tcpm/tcpm.c' language='LANG_C89'>
+
+
+
+      <array-type-def dimensions='1' type-id='2f162548' size-in-bits='224' id='e369592a'>
+        <subrange length='7' type-id='7ff19f0f' id='16fc326e'/>
+
+      </array-type-def>
+      <class-decl name='usb_role_switch' size-in-bits='7808' is-struct='yes' visibility='default' is-declaration-only='yes' id='3b2a0df7'/>
+      <array-type-def dimensions='1' type-id='02913b69' size-in-bits='6144' id='6fcbfa84'>
+        <subrange length='96' type-id='7ff19f0f' id='1df62250'/>
+
+      </array-type-def>
+      <array-type-def dimensions='1' type-id='968d5b5b' size-in-bits='9216' id='589abf66'>
+        <subrange length='96' type-id='7ff19f0f' id='1df62250'/>
+
+      </array-type-def>
+      <array-type-def dimensions='1' type-id='1dc6a898' size-in-bits='256' id='42c6815a'>
+        <subrange length='16' type-id='7ff19f0f' id='848d0938'/>
+
+      </array-type-def>
+      <array-type-def dimensions='1' type-id='19c2251e' size-in-bits='224' id='1c69cda2'>
+        <subrange length='7' type-id='7ff19f0f' id='16fc326e'/>
+
+      </array-type-def>
+      <array-type-def dimensions='1' type-id='8bff8096' size-in-bits='65536' id='bad1511f'>
+        <subrange length='1024' type-id='7ff19f0f' id='c60446f8'/>
+
+      </array-type-def>
+      <array-type-def dimensions='1' type-id='f9b06939' size-in-bits='208' id='50390288'>
+        <subrange length='26' type-id='7ff19f0f' id='41d81c65'/>
+
+      </array-type-def>
+      <class-decl name='tcpm_port' size-in-bits='97216' is-struct='yes' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='194' column='1' id='902061bb'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='dev' type-id='fa0b179b' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='195' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='lock' type-id='925167dc' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='197' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='320'>
+          <var-decl name='wq' type-id='242e3d19' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='198' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='384'>
+          <var-decl name='typec_caps' type-id='1f2b9a61' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='200' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='960'>
+          <var-decl name='typec_port' type-id='b977ca56' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='201' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1024'>
+          <var-decl name='tcpc' type-id='15b1f129' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='203' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1088'>
+          <var-decl name='role_sw' type-id='3e3cd44f' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='204' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1152'>
+          <var-decl name='vconn_role' type-id='ad61830a' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='206' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1184'>
+          <var-decl name='pwr_role' type-id='ad61830a' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='207' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1216'>
+          <var-decl name='data_role' type-id='e453a0cb' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='208' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1248'>
+          <var-decl name='pwr_opmode' type-id='44ea1984' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='209' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1280'>
+          <var-decl name='partner_ident' type-id='57bfbe05' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='211' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1408'>
+          <var-decl name='partner_desc' type-id='3ad5d94d' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='212' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1536'>
+          <var-decl name='partner' type-id='33ca4bbb' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='213' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1600'>
+          <var-decl name='cc_req' type-id='c2d135ef' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='215' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1632'>
+          <var-decl name='cc1' type-id='c2d135ef' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='217' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1664'>
+          <var-decl name='cc2' type-id='c2d135ef' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='218' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1696'>
+          <var-decl name='polarity' type-id='551eebc9' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='219' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1728'>
+          <var-decl name='attached' type-id='b50a4934' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='221' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1736'>
+          <var-decl name='connected' type-id='b50a4934' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='222' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1760'>
+          <var-decl name='port_type' type-id='0a19b04e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='223' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1792'>
+          <var-decl name='vbus_present' type-id='b50a4934' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='224' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1800'>
+          <var-decl name='vbus_never_low' type-id='b50a4934' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='225' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1808'>
+          <var-decl name='vbus_source' type-id='b50a4934' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='226' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1816'>
+          <var-decl name='vbus_charge' type-id='b50a4934' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='227' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1824'>
+          <var-decl name='send_discover' type-id='b50a4934' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='229' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1832'>
+          <var-decl name='op_vsafe5v' type-id='b50a4934' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='230' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1856'>
+          <var-decl name='try_role' type-id='95e97e5e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='232' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1888'>
+          <var-decl name='try_snk_count' type-id='95e97e5e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='233' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1920'>
+          <var-decl name='try_src_count' type-id='95e97e5e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='234' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1952'>
+          <var-decl name='queued_message' type-id='1d843e9c' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='236' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1984'>
+          <var-decl name='enter_state' type-id='c698cee4' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='238' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='2016'>
+          <var-decl name='prev_state' type-id='c698cee4' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='239' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='2048'>
+          <var-decl name='state' type-id='c698cee4' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='240' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='2080'>
+          <var-decl name='delayed_state' type-id='c698cee4' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='241' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='2112'>
+          <var-decl name='delayed_runtime' type-id='7359adad' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='242' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='2176'>
+          <var-decl name='delay_ms' type-id='7359adad' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='243' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='2240'>
+          <var-decl name='pd_event_lock' type-id='fb4018a0' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='245' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='2272'>
+          <var-decl name='pd_events' type-id='19c2251e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='246' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='2304'>
+          <var-decl name='event_work' type-id='ef9025d0' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='248' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='2688'>
+          <var-decl name='state_machine' type-id='5ad6e0ef' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='249' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='3776'>
+          <var-decl name='vdm_state_machine' type-id='5ad6e0ef' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='250' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='4864'>
+          <var-decl name='state_machine_running' type-id='b50a4934' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='251' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='4928'>
+          <var-decl name='tx_complete' type-id='f9fef04f' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='253' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='5184'>
+          <var-decl name='tx_status' type-id='a2f9e316' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='254' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='5248'>
+          <var-decl name='swap_lock' type-id='925167dc' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='256' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='5504'>
+          <var-decl name='swap_pending' type-id='b50a4934' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='257' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='5512'>
+          <var-decl name='non_pd_role_swap' type-id='b50a4934' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='258' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='5568'>
+          <var-decl name='swap_complete' type-id='f9fef04f' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='259' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='5824'>
+          <var-decl name='swap_status' type-id='95e97e5e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='260' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='5856'>
+          <var-decl name='negotiated_rev' type-id='f0981eeb' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='262' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='5888'>
+          <var-decl name='message_id' type-id='f0981eeb' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='263' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='5920'>
+          <var-decl name='caps_count' type-id='f0981eeb' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='264' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='5952'>
+          <var-decl name='hard_reset_count' type-id='f0981eeb' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='265' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='5984'>
+          <var-decl name='pd_capable' type-id='b50a4934' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='266' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='5992'>
+          <var-decl name='explicit_contract' type-id='b50a4934' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='267' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='6016'>
+          <var-decl name='rx_msgid' type-id='f0981eeb' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='268' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='6048'>
+          <var-decl name='sink_request' type-id='19c2251e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='271' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='6080'>
+          <var-decl name='source_caps' type-id='1c69cda2' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='272' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='6304'>
+          <var-decl name='nr_source_caps' type-id='f0981eeb' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='273' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='6336'>
+          <var-decl name='sink_caps' type-id='1c69cda2' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='274' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='6560'>
+          <var-decl name='nr_sink_caps' type-id='f0981eeb' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='275' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='6592'>
+          <var-decl name='src_pdo' type-id='1c69cda2' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='278' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='6816'>
+          <var-decl name='nr_src_pdo' type-id='f0981eeb' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='279' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='6848'>
+          <var-decl name='snk_pdo' type-id='1c69cda2' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='280' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='7072'>
+          <var-decl name='nr_snk_pdo' type-id='f0981eeb' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='281' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='7104'>
+          <var-decl name='snk_vdo' type-id='5867ed7f' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='282' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='7296'>
+          <var-decl name='nr_snk_vdo' type-id='f0981eeb' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='283' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='7328'>
+          <var-decl name='operating_snk_mw' type-id='f0981eeb' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='285' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='7360'>
+          <var-decl name='update_sink_caps' type-id='b50a4934' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='286' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='7392'>
+          <var-decl name='current_limit' type-id='19c2251e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='289' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='7424'>
+          <var-decl name='supply_voltage' type-id='19c2251e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='290' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='7488'>
+          <var-decl name='psy' type-id='c0c93c9e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='293' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='7552'>
+          <var-decl name='psy_desc' type-id='6d39b2d0' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='294' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='8320'>
+          <var-decl name='usb_type' type-id='1f7f0095' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='295' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='8352'>
+          <var-decl name='bist_request' type-id='19c2251e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='297' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='8384'>
+          <var-decl name='vdm_state' type-id='da4a4188' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='300' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='8416'>
+          <var-decl name='vdm_retries' type-id='19c2251e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='301' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='8448'>
+          <var-decl name='vdo_data' type-id='1c69cda2' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='303' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='8672'>
+          <var-decl name='vdo_count' type-id='f9b06939' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='304' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='8704'>
+          <var-decl name='vdo_retry' type-id='19c2251e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='306' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='8736'>
+          <var-decl name='pps_data' type-id='4ff0f7bc' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='309' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='8960'>
+          <var-decl name='pps_complete' type-id='f9fef04f' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='310' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='9216'>
+          <var-decl name='pps_pending' type-id='b50a4934' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='311' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='9248'>
+          <var-decl name='pps_status' type-id='95e97e5e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='312' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='9280'>
+          <var-decl name='mode_data' type-id='1d816e22' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='315' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='18880'>
+          <var-decl name='partner_altmode' type-id='6fcbfa84' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='316' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='25024'>
+          <var-decl name='port_altmode' type-id='6fcbfa84' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='317' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='31168'>
+          <var-decl name='max_wait' type-id='7359adad' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='320' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='31232'>
+          <var-decl name='self_powered' type-id='b50a4934' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='323' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='31296'>
+          <var-decl name='dentry' type-id='27675065' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='326' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='31360'>
+          <var-decl name='logbuffer_lock' type-id='925167dc' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='327' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='31616'>
+          <var-decl name='logbuffer_head' type-id='95e97e5e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='328' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='31648'>
+          <var-decl name='logbuffer_tail' type-id='95e97e5e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='329' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='31680'>
+          <var-decl name='logbuffer' type-id='bad1511f' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='330' column='1'/>
+        </data-member>
+      </class-decl>
+      <class-decl name='tcpc_dev' size-in-bits='1024' is-struct='yes' visibility='default' filepath='include/linux/usb/tcpm.h' line='123' column='1' id='3a8363f1'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='config' type-id='4682930f' visibility='default' filepath='include/linux/usb/tcpm.h' line='124' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='fwnode' type-id='4a935625' visibility='default' filepath='include/linux/usb/tcpm.h' line='125' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='init' type-id='f581f1cf' visibility='default' filepath='include/linux/usb/tcpm.h' line='127' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='192'>
+          <var-decl name='get_vbus' type-id='f581f1cf' visibility='default' filepath='include/linux/usb/tcpm.h' line='128' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='256'>
+          <var-decl name='get_current_limit' type-id='f581f1cf' visibility='default' filepath='include/linux/usb/tcpm.h' line='129' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='320'>
+          <var-decl name='set_cc' type-id='8a62cb71' visibility='default' filepath='include/linux/usb/tcpm.h' line='130' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='384'>
+          <var-decl name='get_cc' type-id='fac661b7' visibility='default' filepath='include/linux/usb/tcpm.h' line='131' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='448'>
+          <var-decl name='set_polarity' type-id='0123907b' visibility='default' filepath='include/linux/usb/tcpm.h' line='133' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='512'>
+          <var-decl name='set_vconn' type-id='7f6ac72a' visibility='default' filepath='include/linux/usb/tcpm.h' line='135' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='576'>
+          <var-decl name='set_vbus' type-id='7a202df3' visibility='default' filepath='include/linux/usb/tcpm.h' line='136' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='640'>
+          <var-decl name='set_current_limit' type-id='f24f1c45' visibility='default' filepath='include/linux/usb/tcpm.h' line='137' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='704'>
+          <var-decl name='set_pd_rx' type-id='7f6ac72a' visibility='default' filepath='include/linux/usb/tcpm.h' line='138' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='768'>
+          <var-decl name='set_roles' type-id='8ca76d9f' visibility='default' filepath='include/linux/usb/tcpm.h' line='139' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='832'>
+          <var-decl name='start_toggling' type-id='926bf87a' visibility='default' filepath='include/linux/usb/tcpm.h' line='141' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='896'>
+          <var-decl name='try_role' type-id='e5015ca6' visibility='default' filepath='include/linux/usb/tcpm.h' line='144' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='960'>
+          <var-decl name='pd_transmit' type-id='cc0a6f53' visibility='default' filepath='include/linux/usb/tcpm.h' line='145' column='1'/>
+        </data-member>
+      </class-decl>
+      <class-decl name='tcpc_config' size-in-bits='576' is-struct='yes' visibility='default' filepath='include/linux/usb/tcpm.h' line='67' column='1' id='a63ee284'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='src_pdo' type-id='aded214c' visibility='default' filepath='include/linux/usb/tcpm.h' line='68' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='nr_src_pdo' type-id='f0981eeb' visibility='default' filepath='include/linux/usb/tcpm.h' line='69' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='snk_pdo' type-id='aded214c' visibility='default' filepath='include/linux/usb/tcpm.h' line='71' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='192'>
+          <var-decl name='nr_snk_pdo' type-id='f0981eeb' visibility='default' filepath='include/linux/usb/tcpm.h' line='72' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='256'>
+          <var-decl name='snk_vdo' type-id='aded214c' visibility='default' filepath='include/linux/usb/tcpm.h' line='74' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='320'>
+          <var-decl name='nr_snk_vdo' type-id='f0981eeb' visibility='default' filepath='include/linux/usb/tcpm.h' line='75' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='352'>
+          <var-decl name='operating_snk_mw' type-id='f0981eeb' visibility='default' filepath='include/linux/usb/tcpm.h' line='77' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='384'>
+          <var-decl name='type' type-id='0a19b04e' visibility='default' filepath='include/linux/usb/tcpm.h' line='79' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='416'>
+          <var-decl name='data' type-id='89aae82e' visibility='default' filepath='include/linux/usb/tcpm.h' line='80' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='448'>
+          <var-decl name='default_role' type-id='ad61830a' visibility='default' filepath='include/linux/usb/tcpm.h' line='81' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='480'>
+          <var-decl name='try_role_hw' type-id='b50a4934' visibility='default' filepath='include/linux/usb/tcpm.h' line='82' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='488'>
+          <var-decl name='self_powered' type-id='b50a4934' visibility='default' filepath='include/linux/usb/tcpm.h' line='83' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='512'>
+          <var-decl name='alt_modes' type-id='064c3738' visibility='default' filepath='include/linux/usb/tcpm.h' line='85' column='1'/>
+        </data-member>
+      </class-decl>
+      <enum-decl name='typec_cc_status' filepath='include/linux/usb/tcpm.h' line='13' column='1' id='c2d135ef'>
+        <underlying-type type-id='6406df84'/>
+        <enumerator name='TYPEC_CC_OPEN' value='0'/>
+        <enumerator name='TYPEC_CC_RA' value='1'/>
+        <enumerator name='TYPEC_CC_RD' value='2'/>
+        <enumerator name='TYPEC_CC_RP_DEF' value='3'/>
+        <enumerator name='TYPEC_CC_RP_1_5' value='4'/>
+        <enumerator name='TYPEC_CC_RP_3_0' value='5'/>
+      </enum-decl>
+      <enum-decl name='typec_cc_polarity' filepath='include/linux/usb/tcpm.h' line='22' column='1' id='551eebc9'>
+        <underlying-type type-id='6406df84'/>
+        <enumerator name='TYPEC_POLARITY_CC1' value='0'/>
+        <enumerator name='TYPEC_POLARITY_CC2' value='1'/>
+      </enum-decl>
+      <enum-decl name='tcpm_transmit_type' filepath='include/linux/usb/tcpm.h' line='38' column='1' id='c2132904'>
+        <underlying-type type-id='6406df84'/>
+        <enumerator name='TCPC_TX_SOP' value='0'/>
+        <enumerator name='TCPC_TX_SOP_PRIME' value='1'/>
+        <enumerator name='TCPC_TX_SOP_PRIME_PRIME' value='2'/>
+        <enumerator name='TCPC_TX_SOP_DEBUG_PRIME' value='3'/>
+        <enumerator name='TCPC_TX_SOP_DEBUG_PRIME_PRIME' value='4'/>
+        <enumerator name='TCPC_TX_HARD_RESET' value='5'/>
+        <enumerator name='TCPC_TX_CABLE_RESET' value='6'/>
+        <enumerator name='TCPC_TX_BIST_MODE_2' value='7'/>
+      </enum-decl>
+      <class-decl name='pd_message' size-in-bits='240' is-struct='yes' visibility='default' filepath='include/linux/usb/pd.h' line='194' column='1' id='144ab5f9'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='header' type-id='23119536' visibility='default' filepath='include/linux/usb/pd.h' line='195' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='16'>
+          <var-decl name='' type-id='ac5ab5ab' visibility='default' filepath='include/linux/usb/pd.h' line='196' column='1'/>
+        </data-member>
+      </class-decl>
+      <union-decl name='__anonymous_union__' size-in-bits='224' is-anonymous='yes' visibility='default' filepath='include/linux/usb/pd.h' line='196' column='1' id='ac5ab5ab'>
+        <data-member access='private'>
+          <var-decl name='payload' type-id='e369592a' visibility='default' filepath='include/linux/usb/pd.h' line='197' column='1'/>
+        </data-member>
+        <data-member access='private'>
+          <var-decl name='ext_msg' type-id='9d90420f' visibility='default' filepath='include/linux/usb/pd.h' line='198' column='1'/>
+        </data-member>
+      </union-decl>
+      <class-decl name='pd_chunked_ext_message_data' size-in-bits='224' is-struct='yes' visibility='default' filepath='include/linux/usb/pd.h' line='183' column='1' id='9d90420f'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='header' type-id='23119536' visibility='default' filepath='include/linux/usb/pd.h' line='184' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='16'>
+          <var-decl name='data' type-id='50390288' visibility='default' filepath='include/linux/usb/pd.h' line='185' column='1'/>
+        </data-member>
+      </class-decl>
+      <enum-decl name='pd_msg_request' filepath='drivers/usb/typec/tcpm/tcpm.c' line='153' column='1' id='1d843e9c'>
+        <underlying-type type-id='6406df84'/>
+        <enumerator name='PD_MSG_NONE' value='0'/>
+        <enumerator name='PD_MSG_CTRL_REJECT' value='1'/>
+        <enumerator name='PD_MSG_CTRL_WAIT' value='2'/>
+        <enumerator name='PD_MSG_CTRL_NOT_SUPP' value='3'/>
+        <enumerator name='PD_MSG_DATA_SINK_CAP' value='4'/>
+        <enumerator name='PD_MSG_DATA_SOURCE_CAP' value='5'/>
+      </enum-decl>
+      <enum-decl name='tcpm_state' filepath='drivers/usb/typec/tcpm/tcpm.c' line='134' column='1' id='c698cee4'>
+        <underlying-type type-id='6406df84'/>
+        <enumerator name='INVALID_STATE' value='0'/>
+        <enumerator name='TOGGLING' value='1'/>
+        <enumerator name='SRC_UNATTACHED' value='2'/>
+        <enumerator name='SRC_ATTACH_WAIT' value='3'/>
+        <enumerator name='SRC_ATTACHED' value='4'/>
+        <enumerator name='SRC_STARTUP' value='5'/>
+        <enumerator name='SRC_SEND_CAPABILITIES' value='6'/>
+        <enumerator name='SRC_SEND_CAPABILITIES_TIMEOUT' value='7'/>
+        <enumerator name='SRC_NEGOTIATE_CAPABILITIES' value='8'/>
+        <enumerator name='SRC_TRANSITION_SUPPLY' value='9'/>
+        <enumerator name='SRC_READY' value='10'/>
+        <enumerator name='SRC_WAIT_NEW_CAPABILITIES' value='11'/>
+        <enumerator name='SNK_UNATTACHED' value='12'/>
+        <enumerator name='SNK_ATTACH_WAIT' value='13'/>
+        <enumerator name='SNK_DEBOUNCED' value='14'/>
+        <enumerator name='SNK_ATTACHED' value='15'/>
+        <enumerator name='SNK_STARTUP' value='16'/>
+        <enumerator name='SNK_DISCOVERY' value='17'/>
+        <enumerator name='SNK_DISCOVERY_DEBOUNCE' value='18'/>
+        <enumerator name='SNK_DISCOVERY_DEBOUNCE_DONE' value='19'/>
+        <enumerator name='SNK_WAIT_CAPABILITIES' value='20'/>
+        <enumerator name='SNK_NEGOTIATE_CAPABILITIES' value='21'/>
+        <enumerator name='SNK_NEGOTIATE_PPS_CAPABILITIES' value='22'/>
+        <enumerator name='SNK_TRANSITION_SINK' value='23'/>
+        <enumerator name='SNK_TRANSITION_SINK_VBUS' value='24'/>
+        <enumerator name='SNK_READY' value='25'/>
+        <enumerator name='ACC_UNATTACHED' value='26'/>
+        <enumerator name='DEBUG_ACC_ATTACHED' value='27'/>
+        <enumerator name='AUDIO_ACC_ATTACHED' value='28'/>
+        <enumerator name='AUDIO_ACC_DEBOUNCE' value='29'/>
+        <enumerator name='HARD_RESET_SEND' value='30'/>
+        <enumerator name='HARD_RESET_START' value='31'/>
+        <enumerator name='SRC_HARD_RESET_VBUS_OFF' value='32'/>
+        <enumerator name='SRC_HARD_RESET_VBUS_ON' value='33'/>
+        <enumerator name='SNK_HARD_RESET_SINK_OFF' value='34'/>
+        <enumerator name='SNK_HARD_RESET_WAIT_VBUS' value='35'/>
+        <enumerator name='SNK_HARD_RESET_SINK_ON' value='36'/>
+        <enumerator name='SOFT_RESET' value='37'/>
+        <enumerator name='SOFT_RESET_SEND' value='38'/>
+        <enumerator name='DR_SWAP_ACCEPT' value='39'/>
+        <enumerator name='DR_SWAP_SEND' value='40'/>
+        <enumerator name='DR_SWAP_SEND_TIMEOUT' value='41'/>
+        <enumerator name='DR_SWAP_CANCEL' value='42'/>
+        <enumerator name='DR_SWAP_CHANGE_DR' value='43'/>
+        <enumerator name='PR_SWAP_ACCEPT' value='44'/>
+        <enumerator name='PR_SWAP_SEND' value='45'/>
+        <enumerator name='PR_SWAP_SEND_TIMEOUT' value='46'/>
+        <enumerator name='PR_SWAP_CANCEL' value='47'/>
+        <enumerator name='PR_SWAP_START' value='48'/>
+        <enumerator name='PR_SWAP_SRC_SNK_TRANSITION_OFF' value='49'/>
+        <enumerator name='PR_SWAP_SRC_SNK_SOURCE_OFF' value='50'/>
+        <enumerator name='PR_SWAP_SRC_SNK_SOURCE_OFF_CC_DEBOUNCED' value='51'/>
+        <enumerator name='PR_SWAP_SRC_SNK_SINK_ON' value='52'/>
+        <enumerator name='PR_SWAP_SNK_SRC_SINK_OFF' value='53'/>
+        <enumerator name='PR_SWAP_SNK_SRC_SOURCE_ON' value='54'/>
+        <enumerator name='PR_SWAP_SNK_SRC_SOURCE_ON_VBUS_RAMPED_UP' value='55'/>
+        <enumerator name='VCONN_SWAP_ACCEPT' value='56'/>
+        <enumerator name='VCONN_SWAP_SEND' value='57'/>
+        <enumerator name='VCONN_SWAP_SEND_TIMEOUT' value='58'/>
+        <enumerator name='VCONN_SWAP_CANCEL' value='59'/>
+        <enumerator name='VCONN_SWAP_START' value='60'/>
+        <enumerator name='VCONN_SWAP_WAIT_FOR_VCONN' value='61'/>
+        <enumerator name='VCONN_SWAP_TURN_ON_VCONN' value='62'/>
+        <enumerator name='VCONN_SWAP_TURN_OFF_VCONN' value='63'/>
+        <enumerator name='SNK_TRY' value='64'/>
+        <enumerator name='SNK_TRY_WAIT' value='65'/>
+        <enumerator name='SNK_TRY_WAIT_DEBOUNCE' value='66'/>
+        <enumerator name='SNK_TRY_WAIT_DEBOUNCE_CHECK_VBUS' value='67'/>
+        <enumerator name='SRC_TRYWAIT' value='68'/>
+        <enumerator name='SRC_TRYWAIT_DEBOUNCE' value='69'/>
+        <enumerator name='SRC_TRYWAIT_UNATTACHED' value='70'/>
+        <enumerator name='SRC_TRY' value='71'/>
+        <enumerator name='SRC_TRY_WAIT' value='72'/>
+        <enumerator name='SRC_TRY_DEBOUNCE' value='73'/>
+        <enumerator name='SNK_TRYWAIT' value='74'/>
+        <enumerator name='SNK_TRYWAIT_DEBOUNCE' value='75'/>
+        <enumerator name='SNK_TRYWAIT_VBUS' value='76'/>
+        <enumerator name='BIST_RX' value='77'/>
+        <enumerator name='GET_STATUS_SEND' value='78'/>
+        <enumerator name='GET_STATUS_SEND_TIMEOUT' value='79'/>
+        <enumerator name='GET_PPS_STATUS_SEND' value='80'/>
+        <enumerator name='GET_PPS_STATUS_SEND_TIMEOUT' value='81'/>
+        <enumerator name='ERROR_RECOVERY' value='82'/>
+        <enumerator name='PORT_RESET' value='83'/>
+        <enumerator name='PORT_RESET_WAIT_OFF' value='84'/>
+      </enum-decl>
+      <enum-decl name='tcpm_transmit_status' filepath='include/linux/usb/tcpm.h' line='32' column='1' id='a2f9e316'>
+        <underlying-type type-id='6406df84'/>
+        <enumerator name='TCPC_TX_SUCCESS' value='0'/>
+        <enumerator name='TCPC_TX_DISCARDED' value='1'/>
+        <enumerator name='TCPC_TX_FAILED' value='2'/>
+      </enum-decl>
+      <enum-decl name='vdm_states' filepath='drivers/usb/typec/tcpm/tcpm.c' line='142' column='1' id='da4a4188'>
+        <underlying-type type-id='6406df84'/>
+        <enumerator name='VDM_STATE_ERR_BUSY' value='-3'/>
+        <enumerator name='VDM_STATE_ERR_SEND' value='-2'/>
+        <enumerator name='VDM_STATE_ERR_TMOUT' value='-1'/>
+        <enumerator name='VDM_STATE_DONE' value='0'/>
+        <enumerator name='VDM_STATE_READY' value='1'/>
+        <enumerator name='VDM_STATE_BUSY' value='2'/>
+        <enumerator name='VDM_STATE_WAIT_RSP_BUSY' value='3'/>
+      </enum-decl>
+      <class-decl name='pd_pps_data' size-in-bits='192' is-struct='yes' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='184' column='1' id='4ff0f7bc'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='min_volt' type-id='19c2251e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='185' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='32'>
+          <var-decl name='max_volt' type-id='19c2251e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='186' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='max_curr' type-id='19c2251e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='187' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='96'>
+          <var-decl name='out_volt' type-id='19c2251e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='188' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='op_curr' type-id='19c2251e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='189' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='160'>
+          <var-decl name='supported' type-id='b50a4934' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='190' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='168'>
+          <var-decl name='active' type-id='b50a4934' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='191' column='1'/>
+        </data-member>
+      </class-decl>
+      <class-decl name='pd_mode_data' size-in-bits='9568' is-struct='yes' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='176' column='1' id='1d816e22'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='svid_index' type-id='95e97e5e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='177' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='32'>
+          <var-decl name='nsvids' type-id='95e97e5e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='178' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='svids' type-id='42c6815a' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='179' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='320'>
+          <var-decl name='altmodes' type-id='95e97e5e' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='180' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='352'>
+          <var-decl name='altmode_desc' type-id='589abf66' visibility='default' filepath='drivers/usb/typec/tcpm/tcpm.c' line='181' column='1'/>
+        </data-member>
+      </class-decl>
+      <enum-decl name='usb_role' filepath='include/linux/usb/role.h' line='10' column='1' id='c675b073'>
+        <underlying-type type-id='6406df84'/>
+        <enumerator name='USB_ROLE_NONE' value='0'/>
+        <enumerator name='USB_ROLE_HOST' value='1'/>
+        <enumerator name='USB_ROLE_DEVICE' value='2'/>
+      </enum-decl>
+      <qualified-type-def type-id='144ab5f9' const='yes' id='d9c5862c'/>
+      <pointer-type-def type-id='d9c5862c' size-in-bits='64' id='d7f1fb72'/>
+      <qualified-type-def type-id='a63ee284' const='yes' id='1843063f'/>
+      <pointer-type-def type-id='1843063f' size-in-bits='64' id='4682930f'/>
+      <pointer-type-def type-id='cb593833' size-in-bits='64' id='f581f1cf'/>
+      <pointer-type-def type-id='e1106ed7' size-in-bits='64' id='cc0a6f53'/>
+      <pointer-type-def type-id='e1d380a7' size-in-bits='64' id='0123907b'/>
+      <pointer-type-def type-id='198938b5' size-in-bits='64' id='8a62cb71'/>
+      <pointer-type-def type-id='aeac61b0' size-in-bits='64' id='926bf87a'/>
+      <pointer-type-def type-id='e073b6fc' size-in-bits='64' id='e5015ca6'/>
+      <pointer-type-def type-id='1fbc513b' size-in-bits='64' id='fac661b7'/>
+      <pointer-type-def type-id='daf63770' size-in-bits='64' id='7f6ac72a'/>
+      <pointer-type-def type-id='a08a663b' size-in-bits='64' id='8ca76d9f'/>
+      <pointer-type-def type-id='7adec5ff' size-in-bits='64' id='7a202df3'/>
+      <pointer-type-def type-id='e6814f11' size-in-bits='64' id='f24f1c45'/>
+      <pointer-type-def type-id='3a8363f1' size-in-bits='64' id='15b1f129'/>
+      <pointer-type-def type-id='902061bb' size-in-bits='64' id='426e425b'/>
+      <pointer-type-def type-id='c2d135ef' size-in-bits='64' id='741cc96e'/>
+      <pointer-type-def type-id='3b2a0df7' size-in-bits='64' id='3e3cd44f'/>
+      <function-decl name='tcpm_register_port' mangled-name='tcpm_register_port' filepath='drivers/usb/typec/tcpm/tcpm.c' line='4750' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='tcpm_register_port'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/usb/typec/tcpm/tcpm.c' line='4750' column='1'/>
+        <parameter type-id='15b1f129' name='tcpc' filepath='drivers/usb/typec/tcpm/tcpm.c' line='4750' column='1'/>
+        <return type-id='426e425b'/>
+      </function-decl>
+      <function-decl name='tcpm_pd_transmit_complete' mangled-name='tcpm_pd_transmit_complete' filepath='drivers/usb/typec/tcpm/tcpm.c' line='641' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='tcpm_pd_transmit_complete'>
+        <parameter type-id='426e425b' name='port' filepath='drivers/usb/typec/tcpm/tcpm.c' line='641' column='1'/>
+        <parameter type-id='a2f9e316' name='status' filepath='drivers/usb/typec/tcpm/tcpm.c' line='642' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='tcpm_pd_receive' mangled-name='tcpm_pd_receive' filepath='drivers/usb/typec/tcpm/tcpm.c' line='1991' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='tcpm_pd_receive'>
+        <parameter type-id='426e425b' name='port' filepath='drivers/usb/typec/tcpm/tcpm.c' line='1991' column='1'/>
+        <parameter type-id='d7f1fb72' name='msg' filepath='drivers/usb/typec/tcpm/tcpm.c' line='1991' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='tcpm_cc_change' mangled-name='tcpm_cc_change' filepath='drivers/usb/typec/tcpm/tcpm.c' line='3966' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='tcpm_cc_change'>
+        <parameter type-id='426e425b' name='port' filepath='drivers/usb/typec/tcpm/tcpm.c' line='3966' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='tcpm_vbus_change' mangled-name='tcpm_vbus_change' filepath='drivers/usb/typec/tcpm/tcpm.c' line='3975' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='tcpm_vbus_change'>
+        <parameter type-id='426e425b' name='port' filepath='drivers/usb/typec/tcpm/tcpm.c' line='3975' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='tcpm_pd_hard_reset' mangled-name='tcpm_pd_hard_reset' filepath='drivers/usb/typec/tcpm/tcpm.c' line='3984' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='tcpm_pd_hard_reset'>
+        <parameter type-id='426e425b' name='port' filepath='drivers/usb/typec/tcpm/tcpm.c' line='3984' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='tcpm_tcpc_reset' mangled-name='tcpm_tcpc_reset' filepath='drivers/usb/typec/tcpm/tcpm.c' line='4386' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='tcpm_tcpc_reset'>
+        <parameter type-id='426e425b' name='port' filepath='drivers/usb/typec/tcpm/tcpm.c' line='4386' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='usb_role_switch_get' mangled-name='usb_role_switch_get' filepath='include/linux/usb/role.h' line='49' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_role_switch_get'>
+        <parameter type-id='fa0b179b'/>
+        <return type-id='3e3cd44f'/>
+      </function-decl>
+      <function-decl name='usb_role_switch_put' mangled-name='usb_role_switch_put' filepath='include/linux/usb/role.h' line='51' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_role_switch_put'>
+        <parameter type-id='3e3cd44f'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='tcpm_unregister_port' mangled-name='tcpm_unregister_port' filepath='drivers/usb/typec/tcpm/tcpm.c' line='4860' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='tcpm_unregister_port'>
+        <parameter type-id='426e425b' name='port' filepath='drivers/usb/typec/tcpm/tcpm.c' line='4860' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='usb_role_switch_set_role' mangled-name='usb_role_switch_set_role' filepath='include/linux/usb/role.h' line='47' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_role_switch_set_role'>
+        <parameter type-id='3e3cd44f'/>
+        <parameter type-id='c675b073'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-type size-in-bits='64' id='cb593833'>
+        <parameter type-id='15b1f129'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
+      <function-type size-in-bits='64' id='e1106ed7'>
+        <parameter type-id='15b1f129'/>
+        <parameter type-id='c2132904'/>
+        <parameter type-id='d7f1fb72'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
+      <function-type size-in-bits='64' id='e1d380a7'>
+        <parameter type-id='15b1f129'/>
+        <parameter type-id='551eebc9'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
+      <function-type size-in-bits='64' id='198938b5'>
+        <parameter type-id='15b1f129'/>
+        <parameter type-id='c2d135ef'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
+      <function-type size-in-bits='64' id='aeac61b0'>
+        <parameter type-id='15b1f129'/>
+        <parameter type-id='0a19b04e'/>
+        <parameter type-id='c2d135ef'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
+      <function-type size-in-bits='64' id='e073b6fc'>
+        <parameter type-id='15b1f129'/>
+        <parameter type-id='95e97e5e'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
+      <function-type size-in-bits='64' id='1fbc513b'>
+        <parameter type-id='15b1f129'/>
+        <parameter type-id='741cc96e'/>
+        <parameter type-id='741cc96e'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
+      <function-type size-in-bits='64' id='daf63770'>
+        <parameter type-id='15b1f129'/>
+        <parameter type-id='b50a4934'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
+      <function-type size-in-bits='64' id='a08a663b'>
+        <parameter type-id='15b1f129'/>
+        <parameter type-id='b50a4934'/>
+        <parameter type-id='ad61830a'/>
+        <parameter type-id='e453a0cb'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
+      <function-type size-in-bits='64' id='7adec5ff'>
+        <parameter type-id='15b1f129'/>
+        <parameter type-id='b50a4934'/>
+        <parameter type-id='b50a4934'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
+      <function-type size-in-bits='64' id='e6814f11'>
+        <parameter type-id='15b1f129'/>
+        <parameter type-id='19c2251e'/>
+        <parameter type-id='19c2251e'/>
+        <return type-id='95e97e5e'/>
       </function-type>
     </abi-instr>
     <abi-instr version='1.0' address-size='64' path='drivers/video/backlight/backlight.c' language='LANG_C89'>
@@ -81142,7 +81841,7 @@
           <var-decl name='type' type-id='7f8e7476' visibility='default' filepath='include/linux/fs_context.h' line='66' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='' type-id='ac5ab5ab' visibility='default' filepath='include/linux/fs_context.h' line='67' column='1'/>
+          <var-decl name='' type-id='ac5ab5ac' visibility='default' filepath='include/linux/fs_context.h' line='67' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='192'>
           <var-decl name='size' type-id='b59d7dce' visibility='default' filepath='include/linux/fs_context.h' line='73' column='1'/>
@@ -81161,7 +81860,7 @@
         <enumerator name='fs_value_is_filename_empty' value='5'/>
         <enumerator name='fs_value_is_file' value='6'/>
       </enum-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/fs_context.h' line='67' column='1' id='ac5ab5ab'>
+      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/fs_context.h' line='67' column='1' id='ac5ab5ac'>
         <data-member access='private'>
           <var-decl name='string' type-id='26a90f95' visibility='default' filepath='include/linux/fs_context.h' line='68' column='1'/>
         </data-member>
@@ -81669,7 +82368,7 @@
       </function-decl>
     </abi-instr>
     <abi-instr version='1.0' address-size='64' path='fs/block_dev.c' language='LANG_C89'>
-      <union-decl name='__anonymous_union__' size-in-bits='320' is-anonymous='yes' visibility='default' filepath='include/linux/mm_types.h' line='78' column='1' id='ac5ab5ac'>
+      <union-decl name='__anonymous_union__' size-in-bits='320' is-anonymous='yes' visibility='default' filepath='include/linux/mm_types.h' line='78' column='1' id='ac5ab5ad'>
         <data-member access='private'>
           <var-decl name='' type-id='e7f43f80' visibility='default' filepath='include/linux/mm_types.h' line='79' column='1'/>
         </data-member>
@@ -83026,7 +83725,7 @@
       </function-decl>
     </abi-instr>
     <abi-instr version='1.0' address-size='64' path='fs/open.c' language='LANG_C89'>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/fsnotify_backend.h' line='298' column='1' id='ac5ab5ad'>
+      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/fsnotify_backend.h' line='298' column='1' id='ac5ab5ae'>
         <data-member access='private'>
           <var-decl name='obj' type-id='c66f5ec5' visibility='default' filepath='include/linux/fsnotify_backend.h' line='300' column='1'/>
         </data-member>
@@ -83094,10 +83793,10 @@
           <var-decl name='e_perm' type-id='8efea9e5' visibility='default' filepath='include/linux/posix_acl.h' line='20' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='32'>
-          <var-decl name='' type-id='ac5ab5ae' visibility='default' filepath='include/linux/posix_acl.h' line='21' column='1'/>
+          <var-decl name='' type-id='ac5ab5af' visibility='default' filepath='include/linux/posix_acl.h' line='21' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/linux/posix_acl.h' line='21' column='1' id='ac5ab5ae'>
+      <union-decl name='__anonymous_union__' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/linux/posix_acl.h' line='21' column='1' id='ac5ab5af'>
         <data-member access='private'>
           <var-decl name='e_uid' type-id='d80b72e6' visibility='default' filepath='include/linux/posix_acl.h' line='22' column='1'/>
         </data-member>
@@ -83535,7 +84234,7 @@
       </function-decl>
     </abi-instr>
     <abi-instr version='1.0' address-size='64' path='fs/proc/generic.c' language='LANG_C89'>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='fs/proc/internal.h' line='44' column='1' id='ac5ab5af'>
+      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='fs/proc/internal.h' line='44' column='1' id='ac5ab5b0'>
         <data-member access='private'>
           <var-decl name='seq_ops' type-id='943a1b48' visibility='default' filepath='fs/proc/internal.h' line='45' column='1'/>
         </data-member>
@@ -83797,7 +84496,7 @@
           <var-decl name='type' type-id='fec738e2' visibility='default' filepath='include/linux/property.h' line='235' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='192'>
-          <var-decl name='' type-id='ac5ab5b0' visibility='default' filepath='include/linux/property.h' line='236' column='1'/>
+          <var-decl name='' type-id='ac5ab5b1' visibility='default' filepath='include/linux/property.h' line='236' column='1'/>
         </data-member>
       </class-decl>
       <enum-decl name='dev_prop_type' filepath='include/linux/property.h' line='19' column='1' id='fec738e2'>
@@ -83809,7 +84508,7 @@
         <enumerator name='DEV_PROP_STRING' value='4'/>
         <enumerator name='DEV_PROP_MAX' value='5'/>
       </enum-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/property.h' line='236' column='1' id='ac5ab5b0'>
+      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/property.h' line='236' column='1' id='ac5ab5b1'>
         <data-member access='private'>
           <var-decl name='pointer' type-id='f6cbf13d' visibility='default' filepath='include/linux/property.h' line='243' column='1'/>
         </data-member>
@@ -84103,7 +84802,7 @@
           <var-decl name='flags' type-id='f0981eeb' visibility='default' filepath='include/linux/splice.h' line='32' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='u' type-id='ac5ab5b1' visibility='default' filepath='include/linux/splice.h' line='40' column='1'/>
+          <var-decl name='u' type-id='ac5ab5b2' visibility='default' filepath='include/linux/splice.h' line='40' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='192'>
           <var-decl name='pos' type-id='69bf7bee' visibility='default' filepath='include/linux/splice.h' line='41' column='1'/>
@@ -84118,7 +84817,7 @@
           <var-decl name='need_wakeup' type-id='b50a4934' visibility='default' filepath='include/linux/splice.h' line='44' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/splice.h' line='36' column='1' id='ac5ab5b1'>
+      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/splice.h' line='36' column='1' id='ac5ab5b2'>
         <data-member access='private'>
           <var-decl name='userptr' type-id='eaa32e2f' visibility='default' filepath='include/linux/splice.h' line='37' column='1'/>
         </data-member>
@@ -85660,7 +86359,7 @@
           <var-decl name='time_running' type-id='d3130597' visibility='default' filepath='include/uapi/linux/perf_event.h' line='517' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='320'>
-          <var-decl name='' type-id='ac5ab5b2' visibility='default' filepath='include/uapi/linux/perf_event.h' line='518' column='1'/>
+          <var-decl name='' type-id='ac5ab5b3' visibility='default' filepath='include/uapi/linux/perf_event.h' line='518' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='384'>
           <var-decl name='pmc_width' type-id='d315442e' visibility='default' filepath='include/uapi/linux/perf_event.h' line='540' column='1'/>
@@ -85708,7 +86407,7 @@
           <var-decl name='aux_size' type-id='d3130597' visibility='default' filepath='include/uapi/linux/perf_event.h' line='629' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/perf_event.h' line='518' column='1' id='ac5ab5b2'>
+      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/perf_event.h' line='518' column='1' id='ac5ab5b3'>
         <data-member access='private'>
           <var-decl name='capabilities' type-id='d3130597' visibility='default' filepath='include/uapi/linux/perf_event.h' line='519' column='1'/>
         </data-member>
@@ -86401,7 +87100,7 @@
       </function-decl>
     </abi-instr>
     <abi-instr version='1.0' address-size='64' path='kernel/jump_label.c' language='LANG_C89'>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/jump_label.h' line='102' column='1' id='ac5ab5b3'>
+      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/jump_label.h' line='102' column='1' id='ac5ab5b4'>
         <data-member access='private'>
           <var-decl name='type' type-id='7359adad' visibility='default' filepath='include/linux/jump_label.h' line='103' column='1'/>
         </data-member>
@@ -86887,7 +87586,7 @@
       </function-type>
     </abi-instr>
     <abi-instr version='1.0' address-size='64' path='kernel/params.c' language='LANG_C89'>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/moduleparam.h' line='76' column='1' id='ac5ab5b4'>
+      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/moduleparam.h' line='76' column='1' id='ac5ab5b5'>
         <data-member access='private'>
           <var-decl name='arg' type-id='eaa32e2f' visibility='default' filepath='include/linux/moduleparam.h' line='77' column='1'/>
         </data-member>
@@ -97906,7 +98605,7 @@
       </function-type>
     </abi-instr>
     <abi-instr version='1.0' address-size='64' path='kernel/signal.c' language='LANG_C89'>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/uio.h' line='39' column='1' id='ac5ab5b5'>
+      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/uio.h' line='39' column='1' id='ac5ab5b6'>
         <data-member access='private'>
           <var-decl name='iov' type-id='2c556848' visibility='default' filepath='include/linux/uio.h' line='40' column='1'/>
         </data-member>
@@ -98202,7 +98901,7 @@
           <var-decl name='reserved' type-id='d315442e' visibility='default' filepath='include/uapi/linux/genetlink.h' line='16' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='384' is-anonymous='yes' visibility='default' filepath='include/linux/netlink.h' line='195' column='1' id='ac5ab5b6'>
+      <union-decl name='__anonymous_union__' size-in-bits='384' is-anonymous='yes' visibility='default' filepath='include/linux/netlink.h' line='195' column='1' id='ac5ab5b7'>
         <data-member access='private'>
           <var-decl name='ctx' type-id='6aa9aca0' visibility='default' filepath='include/linux/netlink.h' line='196' column='1'/>
         </data-member>
@@ -98982,7 +99681,7 @@
     </abi-instr>
     <abi-instr version='1.0' address-size='64' path='kernel/trace/trace_events.c' language='LANG_C89'>
       <class-decl name='prog_entry' is-struct='yes' visibility='default' is-declaration-only='yes' id='da952956'/>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/trace_events.h' line='257' column='1' id='ac5ab5b7'>
+      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/trace_events.h' line='257' column='1' id='ac5ab5b8'>
         <data-member access='private'>
           <var-decl name='name' type-id='26a90f95' visibility='default' filepath='include/linux/trace_events.h' line='258' column='1'/>
         </data-member>
@@ -99113,7 +99812,7 @@
       </class-decl>
       <class-decl name='worker' size-in-bits='1216' is-struct='yes' visibility='default' filepath='kernel/workqueue_internal.h' line='24' column='1' id='146df21f'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='' type-id='ac5ab5b8' visibility='default' filepath='kernel/workqueue_internal.h' line='26' column='1'/>
+          <var-decl name='' type-id='ac5ab5b9' visibility='default' filepath='kernel/workqueue_internal.h' line='26' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
           <var-decl name='current_work' type-id='83c1bde6' visibility='default' filepath='kernel/workqueue_internal.h' line='31' column='1'/>
@@ -99158,7 +99857,7 @@
           <var-decl name='last_func' type-id='72666d3f' visibility='default' filepath='kernel/workqueue_internal.h' line='59' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='kernel/workqueue_internal.h' line='26' column='1' id='ac5ab5b8'>
+      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='kernel/workqueue_internal.h' line='26' column='1' id='ac5ab5b9'>
         <data-member access='private'>
           <var-decl name='entry' type-id='72f469ec' visibility='default' filepath='kernel/workqueue_internal.h' line='27' column='1'/>
         </data-member>
@@ -100110,7 +100809,7 @@
           <var-decl name='array' type-id='60075f2a' visibility='default' filepath='include/linux/xarray.h' line='1093' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='192'>
-          <var-decl name='' type-id='ac5ab5b9' visibility='default' filepath='include/linux/xarray.h' line='1094' column='1'/>
+          <var-decl name='' type-id='ac5ab5ba' visibility='default' filepath='include/linux/xarray.h' line='1094' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='320'>
           <var-decl name='slots' type-id='56f066f9' visibility='default' filepath='include/linux/xarray.h' line='1098' column='1'/>
@@ -100119,7 +100818,7 @@
           <var-decl name='' type-id='f6cbf13f' visibility='default' filepath='include/linux/xarray.h' line='1099' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/linux/xarray.h' line='1094' column='1' id='ac5ab5b9'>
+      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/linux/xarray.h' line='1094' column='1' id='ac5ab5ba'>
         <data-member access='private'>
           <var-decl name='private_list' type-id='72f469ec' visibility='default' filepath='include/linux/xarray.h' line='1095' column='1'/>
         </data-member>
@@ -100637,7 +101336,7 @@
     </abi-instr>
     <abi-instr version='1.0' address-size='64' path='mm/process_vm_access.c' language='LANG_C89'>
       <class-decl name='bio_vec' is-struct='yes' visibility='default' is-declaration-only='yes' id='40af3609'/>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/uio.h' line='39' column='1' id='ac5ab5ba'>
+      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/uio.h' line='39' column='1' id='ac5ab5bb'>
         <data-member access='private'>
           <var-decl name='iov' type-id='2c556848' visibility='default' filepath='include/linux/uio.h' line='40' column='1'/>
         </data-member>
@@ -102913,7 +103612,7 @@
         <subrange length='128' type-id='7ff19f0f' id='1eb1687a'/>
 
       </array-type-def>
-      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/net/ip6_fib.h' line='146' column='1' id='ac5ab5bb'>
+      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/net/ip6_fib.h' line='146' column='1' id='ac5ab5bc'>
         <data-member access='private'>
           <var-decl name='fib6_siblings' type-id='72f469ec' visibility='default' filepath='include/net/ip6_fib.h' line='147' column='1'/>
         </data-member>
@@ -103311,7 +104010,7 @@
           <var-decl name='dma' type-id='cf29c9b3' visibility='default' filepath='include/net/xdp_sock.h' line='28' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='320' is-anonymous='yes' visibility='default' filepath='include/linux/mm_types.h' line='78' column='1' id='ac5ab5bc'>
+      <union-decl name='__anonymous_union__' size-in-bits='320' is-anonymous='yes' visibility='default' filepath='include/linux/mm_types.h' line='78' column='1' id='ac5ab5bd'>
         <data-member access='private'>
           <var-decl name='' type-id='687f9679' visibility='default' filepath='include/linux/mm_types.h' line='79' column='1'/>
         </data-member>
@@ -103720,7 +104419,7 @@
       </function-decl>
     </abi-instr>
     <abi-instr version='1.0' address-size='64' path='net/ipv4/arp.c' language='LANG_C89'>
-      <union-decl name='__anonymous_union__' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/linux/skbuff.h' line='687' column='1' id='ac5ab5bd'>
+      <union-decl name='__anonymous_union__' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/linux/skbuff.h' line='687' column='1' id='ac5ab5be'>
         <data-member access='private'>
           <var-decl name='' type-id='697f980d' visibility='default' filepath='include/linux/skbuff.h' line='688' column='1'/>
         </data-member>
@@ -103831,7 +104530,7 @@
       </function-decl>
     </abi-instr>
     <abi-instr version='1.0' address-size='64' path='net/ipv6/ip6_output.c' language='LANG_C89'>
-      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/net/xfrm.h' line='149' column='1' id='ac5ab5be'>
+      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/net/xfrm.h' line='149' column='1' id='ac5ab5bf'>
         <data-member access='private'>
           <var-decl name='gclist' type-id='03a4a074' visibility='default' filepath='include/net/xfrm.h' line='150' column='1'/>
         </data-member>
@@ -103986,10 +104685,6 @@
       </array-type-def>
       <array-type-def dimensions='1' type-id='b59d7dce' size-in-bits='256' id='314f9837'>
         <subrange length='4' type-id='7ff19f0f' id='16fe7105'/>
-
-      </array-type-def>
-      <array-type-def dimensions='1' type-id='1dc6a898' size-in-bits='256' id='42c6815a'>
-        <subrange length='16' type-id='7ff19f0f' id='848d0938'/>
 
       </array-type-def>
       <class-decl name='ieee80211_hw' size-in-bits='1472' is-struct='yes' visibility='default' filepath='include/net/mac80211.h' line='2469' column='1' id='3d75a1cd'>
@@ -106481,7 +107176,7 @@
           <var-decl name='u3' type-id='8c17f46b' visibility='default' filepath='include/net/netfilter/nf_conntrack_tuple.h' line='42' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='u' type-id='ac5ab5bf' visibility='default' filepath='include/net/netfilter/nf_conntrack_tuple.h' line='65' column='1'/>
+          <var-decl name='u' type-id='ac5ab5c0' visibility='default' filepath='include/net/netfilter/nf_conntrack_tuple.h' line='65' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='144'>
           <var-decl name='protonum' type-id='892641a4' visibility='default' filepath='include/net/netfilter/nf_conntrack_tuple.h' line='68' column='1'/>
@@ -106490,7 +107185,7 @@
           <var-decl name='dir' type-id='892641a4' visibility='default' filepath='include/net/netfilter/nf_conntrack_tuple.h' line='71' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='16' is-anonymous='yes' visibility='default' filepath='include/net/netfilter/nf_conntrack_tuple.h' line='43' column='1' id='ac5ab5bf'>
+      <union-decl name='__anonymous_union__' size-in-bits='16' is-anonymous='yes' visibility='default' filepath='include/net/netfilter/nf_conntrack_tuple.h' line='43' column='1' id='ac5ab5c0'>
         <data-member access='private'>
           <var-decl name='all' type-id='84a5c3d4' visibility='default' filepath='include/net/netfilter/nf_conntrack_tuple.h' line='45' column='1'/>
         </data-member>
@@ -107974,7 +108669,7 @@
       </function-decl>
     </abi-instr>
     <abi-instr version='1.0' address-size='64' path='net/sched/sch_htb.c' language='LANG_C89'>
-      <union-decl name='__anonymous_union__' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/linux/skbuff.h' line='687' column='1' id='ac5ab5c0'>
+      <union-decl name='__anonymous_union__' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/linux/skbuff.h' line='687' column='1' id='ac5ab5c1'>
         <data-member access='private'>
           <var-decl name='' type-id='e7f43f8c' visibility='default' filepath='include/linux/skbuff.h' line='688' column='1'/>
         </data-member>
@@ -113840,10 +114535,10 @@
           <var-decl name='seq_ctrl' type-id='23119536' visibility='default' filepath='include/linux/ieee80211.h' line='907' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='192'>
-          <var-decl name='u' type-id='ac5ab5c1' visibility='default' filepath='include/linux/ieee80211.h' line='1062' column='1'/>
+          <var-decl name='u' type-id='ac5ab5c2' visibility='default' filepath='include/linux/ieee80211.h' line='1062' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='208' is-anonymous='yes' visibility='default' filepath='include/linux/ieee80211.h' line='908' column='1' id='ac5ab5c1'>
+      <union-decl name='__anonymous_union__' size-in-bits='208' is-anonymous='yes' visibility='default' filepath='include/linux/ieee80211.h' line='908' column='1' id='ac5ab5c2'>
         <data-member access='private'>
           <var-decl name='auth' type-id='e7f43f8d' visibility='default' filepath='include/linux/ieee80211.h' line='915' column='1'/>
         </data-member>
@@ -115259,7 +115954,7 @@
           <var-decl name='owner' type-id='63eb2bf2' visibility='default' filepath='include/uapi/sound/asound.h' line='908' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='640'>
-          <var-decl name='value' type-id='ac5ab5c2' visibility='default' filepath='include/uapi/sound/asound.h' line='928' column='1'/>
+          <var-decl name='value' type-id='ac5ab5c3' visibility='default' filepath='include/uapi/sound/asound.h' line='928' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1664'>
           <var-decl name='dimen' type-id='f6cbf147' visibility='default' filepath='include/uapi/sound/asound.h' line='932' column='1'/>
@@ -115269,7 +115964,7 @@
         </data-member>
       </class-decl>
       <typedef-decl name='snd_ctl_elem_type_t' type-id='95e97e5e' filepath='include/uapi/sound/asound.h' line='839' column='1' id='e31355f5'/>
-      <union-decl name='__anonymous_union__' size-in-bits='1024' is-anonymous='yes' visibility='default' filepath='include/uapi/sound/asound.h' line='909' column='1' id='ac5ab5c2'>
+      <union-decl name='__anonymous_union__' size-in-bits='1024' is-anonymous='yes' visibility='default' filepath='include/uapi/sound/asound.h' line='909' column='1' id='ac5ab5c3'>
         <data-member access='private'>
           <var-decl name='integer' type-id='e7f43f8e' visibility='default' filepath='include/uapi/sound/asound.h' line='914' column='1'/>
         </data-member>
@@ -116404,7 +117099,7 @@
           <var-decl name='content' type-id='8efea9e5' visibility='default' filepath='include/sound/info.h' line='64' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='256'>
-          <var-decl name='c' type-id='ac5ab5c3' visibility='default' filepath='include/sound/info.h' line='68' column='1'/>
+          <var-decl name='c' type-id='ac5ab5c4' visibility='default' filepath='include/sound/info.h' line='68' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='384'>
           <var-decl name='parent' type-id='b9608bfd' visibility='default' filepath='include/sound/info.h' line='69' column='1'/>
@@ -116572,7 +117267,7 @@
         <parameter type-id='00aa6a0e'/>
         <return type-id='48b5725f'/>
       </function-type>
-      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/sound/info.h' line='65' column='1' id='ac5ab5c3'>
+      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/sound/info.h' line='65' column='1' id='ac5ab5c4'>
         <data-member access='private'>
           <var-decl name='text' type-id='cf87b76c' visibility='default' filepath='include/sound/info.h' line='66' column='1'/>
         </data-member>
@@ -117401,10 +118096,10 @@
           <var-decl name='type' type-id='2f162548' visibility='default' filepath='include/uapi/sound/asoc.h' line='253' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='' type-id='ac5ab5c4' visibility='default' filepath='include/uapi/sound/asoc.h' line='254' column='1'/>
+          <var-decl name='' type-id='ac5ab5c5' visibility='default' filepath='include/uapi/sound/asoc.h' line='254' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='1024' is-anonymous='yes' visibility='default' filepath='include/uapi/sound/asoc.h' line='254' column='1' id='ac5ab5c4'>
+      <union-decl name='__anonymous_union__' size-in-bits='1024' is-anonymous='yes' visibility='default' filepath='include/uapi/sound/asoc.h' line='254' column='1' id='ac5ab5c5'>
         <data-member access='private'>
           <var-decl name='data' type-id='28645bde' visibility='default' filepath='include/uapi/sound/asoc.h' line='255' column='1'/>
         </data-member>
@@ -119574,7 +120269,7 @@
       </function-decl>
     </abi-instr>
     <abi-instr version='1.0' address-size='64' path='sound/soc/soc-utils.c' language='LANG_C89'>
-      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/sound/info.h' line='65' column='1' id='ac5ab5c5'>
+      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/sound/info.h' line='65' column='1' id='ac5ab5c6'>
         <data-member access='private'>
           <var-decl name='text' type-id='cf87b76c' visibility='default' filepath='include/sound/info.h' line='66' column='1'/>
         </data-member>
@@ -120206,7 +120901,7 @@
       </function-type>
     </abi-instr>
     <abi-instr version='1.0' address-size='64' path='sound/usb/pcm.c' language='LANG_C89'>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/media/media-entity.h' line='311' column='1' id='ac5ab5c6'>
+      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/media/media-entity.h' line='311' column='1' id='ac5ab5c7'>
         <data-member access='private'>
           <var-decl name='dev' type-id='687f967f' visibility='default' filepath='include/media/media-entity.h' line='315' column='1'/>
         </data-member>
