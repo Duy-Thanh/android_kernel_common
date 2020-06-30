@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003684501",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1348473?revision\u003d7",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "50d2bd72_87ae9955",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-30T13:12:25Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Greg Kroah-Hartman \u003cgregkh@google.com\u003e",
+      "revId": "70716f3fdb5f235052541e55a9ce34645ed694ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003684501",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1348473?revision\u003d7",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "32068b17_8c3508fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-30T13:12:25Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Greg Kroah-Hartman \u003cgregkh@google.com\u003e",
+      "revId": "70716f3fdb5f235052541e55a9ce34645ed694ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000003684501",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1348473?revision\u003d7",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "916e944a_627b6550",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-06-30T13:12:25Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a Bug: or Fixes: line",
+      "revId": "70716f3fdb5f235052541e55a9ce34645ed694ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
