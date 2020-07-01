@@ -45,6 +45,30 @@
       "revId": "0acba1f7ccd10cea42cc705bacde322e0e6dc759",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "090e2036_0bf2fa90",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1697067
+      },
+      "writtenOn": "2020-07-01T13:23:43Z",
+      "side": 1,
+      "message": "on is 1, \ndirection can has.\n 168         SNDRV_PCM_STREAM_PLAYBACK \u003d 0,\n 169         SNDRV_PCM_STREAM_CAPTURE,\n 170         SNDRV_PCM_STREAM_LAST \u003d SNDRV_PCM_STREAM_CAPTURE,",
+      "parentUuid": "146b05a5_cbebc02f",
+      "range": {
+        "startLine": 151,
+        "startChar": 29,
+        "endLine": 151,
+        "endChar": 34
+      },
+      "revId": "0acba1f7ccd10cea42cc705bacde322e0e6dc759",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
