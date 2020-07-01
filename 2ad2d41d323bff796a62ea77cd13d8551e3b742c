@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "2aa60dc3_d5dad80e",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-01T13:34:02Z",
+      "side": 1,
+      "message": "the firmware should ask for what device is removed, please pass that to make the api look sane 😊",
+      "parentUuid": "84be257d_4ed52dad",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 27
+      },
+      "revId": "2ad2d41d323bff796a62ea77cd13d8551e3b742c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c80487bf_5d63cd0f",
         "filename": "sound/usb/usbaudio.h",
         "patchSetId": 1
@@ -403,6 +427,30 @@
     },
     {
       "key": {
+        "uuid": "8cf9e9b4_b207d01d",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-01T13:34:02Z",
+      "side": 1,
+      "message": "Do not use a global structure there either, that\u0027s broken, consider when you plug in multiple devices, or a multi-interface device with two audio devices in one physical device.",
+      "parentUuid": "42ebcb91_74500db4",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 50
+      },
+      "revId": "2ad2d41d323bff796a62ea77cd13d8551e3b742c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f44d38d6_1a11c018",
         "filename": "sound/usb/usbaudio.h",
         "patchSetId": 1
@@ -438,6 +486,30 @@
       "side": 1,
       "message": "This is real type \"struct audioformat *fp\". But Too many files are included usbaudio.h. It makes warning.",
       "parentUuid": "f44d38d6_1a11c018",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 52
+      },
+      "revId": "2ad2d41d323bff796a62ea77cd13d8551e3b742c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3afb8cae_4210f4dc",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-01T13:34:02Z",
+      "side": 1,
+      "message": "Use a real type please.",
+      "parentUuid": "db8d18c2_70481a06",
       "range": {
         "startLine": 153,
         "startChar": 0,

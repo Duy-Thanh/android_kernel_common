@@ -69,6 +69,30 @@
       "revId": "0acba1f7ccd10cea42cc705bacde322e0e6dc759",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99e965e8_7b813d14",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-01T13:34:02Z",
+      "side": 1,
+      "message": "Then used an enumerated type please.",
+      "parentUuid": "090e2036_0bf2fa90",
+      "range": {
+        "startLine": 151,
+        "startChar": 29,
+        "endLine": 151,
+        "endChar": 34
+      },
+      "revId": "0acba1f7ccd10cea42cc705bacde322e0e6dc759",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
