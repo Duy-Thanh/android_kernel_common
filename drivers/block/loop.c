@@ -1286,7 +1286,7 @@ loop_set_status(struct loop_device *lo, const struct loop_info64 *info)
 	if (lo->lo_offset != info->lo_offset ||
 	    lo->lo_sizelimit != info->lo_sizelimit) {
 		sync_blockdev(lo->lo_device);
-		kill_bdev(lo->lo_device);
+		invalidate_bdev(lo->lo_device);
 	}
 
 	/* I/O need to be drained during transfer transition */
@@ -1558,16 +1558,29 @@ static int loop_set_block_size(struct loop_device *lo, unsigned long arg)
 	if (arg < 512 || arg > PAGE_SIZE || !is_power_of_2(arg))
 		return -EINVAL;
 
+<<<<<<< HEAD   (ad0c0a ANDROID: GKI: revert part of the ufshcd_* export removals)
 	if (lo->lo_queue->limits.logical_block_size == arg)
 		return 0;
 
 	sync_blockdev(lo->lo_device);
 	kill_bdev(lo->lo_device);
+=======
+	if (lo->lo_queue->limits.logical_block_size != arg) {
+		sync_blockdev(lo->lo_device);
+		invalidate_bdev(lo->lo_device);
+	}
+>>>>>>> BRANCH (e75220 Linux 5.4.50)
 
 	blk_mq_freeze_queue(lo->lo_queue);
 
+<<<<<<< HEAD   (ad0c0a ANDROID: GKI: revert part of the ufshcd_* export removals)
 	/* kill_bdev should have truncated all the pages */
 	if (lo->lo_device->bd_inode->i_mapping->nrpages) {
+=======
+	/* invalidate_bdev should have truncated all the pages */
+	if (lo->lo_queue->limits.logical_block_size != arg &&
+			lo->lo_device->bd_inode->i_mapping->nrpages) {
+>>>>>>> BRANCH (e75220 Linux 5.4.50)
 		err = -EAGAIN;
 		pr_warn("%s: loop%d (%s) has still dirty pages (nrpages=%lu)\n",
 			__func__, lo->lo_number, lo->lo_file_name,
