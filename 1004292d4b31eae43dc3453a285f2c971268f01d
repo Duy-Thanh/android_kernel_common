@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e308d67_c92820c1",
+        "filename": "drivers/base/power/main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-01T15:41:39Z",
+      "side": 1,
+      "message": "Please move these export statements to the file where the symbols are instantiated. In this case kernel/trace/power-traces.c. (the tracepoint is instantiated in the file where trace/events/power.h is included with #define CREATE_TRACE_POINTS).",
+      "revId": "1004292d4b31eae43dc3453a285f2c971268f01d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
