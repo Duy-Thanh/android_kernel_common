@@ -1634,3 +1634,4 @@ module_init(init_iso9660_fs)
 module_exit(exit_iso9660_fs)
 MODULE_DESCRIPTION("ISO 9660 CDROM file system support");
 MODULE_LICENSE("GPL");
+MODULE_IMPORT_NS(ANDROID_GKI_VFS_EXPORT_ONLY);

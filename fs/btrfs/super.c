@@ -2643,6 +2643,7 @@ module_exit(exit_btrfs_fs)
 
 MODULE_DESCRIPTION("B-Tree File System (BTRFS)");
 MODULE_LICENSE("GPL");
+MODULE_IMPORT_NS(ANDROID_GKI_VFS_EXPORT_ONLY);
 MODULE_SOFTDEP("pre: crc32c");
 MODULE_SOFTDEP("pre: xxhash64");
 MODULE_SOFTDEP("pre: sha256");

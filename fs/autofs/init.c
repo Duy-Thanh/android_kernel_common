@@ -40,3 +40,4 @@ module_init(init_autofs_fs)
 module_exit(exit_autofs_fs)
 MODULE_DESCRIPTION("Kernel automounter support");
 MODULE_LICENSE("GPL");
+MODULE_IMPORT_NS(ANDROID_GKI_VFS_EXPORT_ONLY);

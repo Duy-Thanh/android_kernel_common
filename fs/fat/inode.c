@@ -1981,3 +1981,4 @@ module_exit(exit_fat_fs)
 
 MODULE_DESCRIPTION("Core FAT filesystem support");
 MODULE_LICENSE("GPL");
+MODULE_IMPORT_NS(ANDROID_GKI_VFS_EXPORT_ONLY);
