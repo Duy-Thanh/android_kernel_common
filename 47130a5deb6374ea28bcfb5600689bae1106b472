@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9be5696_c95e2747",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-02T12:30:16Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Code-Review-2\n\u003e \n\u003e Should go into stable kernels instead.\n\nOops, this file is not in the 5.4 tree upstream, my fault!",
+      "revId": "47130a5deb6374ea28bcfb5600689bae1106b472",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
