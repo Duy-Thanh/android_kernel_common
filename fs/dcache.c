@@ -1976,7 +1976,7 @@ void d_instantiate(struct dentry *entry, struct inode * inode)
 		spin_unlock(&inode->i_lock);
 	}
 }
-EXPORT_SYMBOL(d_instantiate);
+EXPORT_SYMBOL_NS(d_instantiate, ANDROID_GKI_VFS_EXPORT_ONLY);
 
 /*
  * This should be equivalent to d_instantiate() + unlock_new_inode(),
@@ -2110,7 +2110,7 @@ struct dentry *d_obtain_alias(struct inode *inode)
 {
 	return __d_obtain_alias(inode, true);
 }
-EXPORT_SYMBOL(d_obtain_alias);
+EXPORT_SYMBOL_NS(d_obtain_alias, ANDROID_GKI_VFS_EXPORT_ONLY);
 
 /**
  * d_obtain_root - find or allocate a dentry for a given inode
@@ -2184,7 +2184,7 @@ struct dentry *d_add_ci(struct dentry *dentry, struct inode *inode,
 	}
 	return found;
 }
-EXPORT_SYMBOL(d_add_ci);
+EXPORT_SYMBOL_NS(d_add_ci, ANDROID_GKI_VFS_EXPORT_ONLY);
 
 
 static inline bool d_same_name(const struct dentry *dentry,
@@ -3065,7 +3065,7 @@ out:
 	__d_add(dentry, inode);
 	return NULL;
 }
-EXPORT_SYMBOL(d_splice_alias);
+EXPORT_SYMBOL_NS(d_splice_alias, ANDROID_GKI_VFS_EXPORT_ONLY);
 
 /*
  * Test whether new_dentry is a subdirectory of old_dentry.
