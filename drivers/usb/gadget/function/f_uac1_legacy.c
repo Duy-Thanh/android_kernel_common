@@ -1015,4 +1015,5 @@ static struct usb_function *f_audio_alloc(struct usb_function_instance *fi)
 
 DECLARE_USB_FUNCTION_INIT(uac1_legacy, f_audio_alloc_inst, f_audio_alloc);
 MODULE_LICENSE("GPL");
+MODULE_IMPORT_NS(ANDROID_GKI_VFS_EXPORT_ONLY);
 MODULE_AUTHOR("Bryan Wu");

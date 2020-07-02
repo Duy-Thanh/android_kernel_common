@@ -595,5 +595,6 @@ static int __init test_lockup_init(void)
 module_init(test_lockup_init);
 
 MODULE_LICENSE("GPL");
+MODULE_IMPORT_NS(ANDROID_GKI_VFS_EXPORT_ONLY);
 MODULE_AUTHOR("Konstantin Khlebnikov <khlebnikov@yandex-team.ru>");
 MODULE_DESCRIPTION("Test module to generate lockups");

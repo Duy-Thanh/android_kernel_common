@@ -520,3 +520,4 @@ ssize_t fsg_store_inquiry_string(struct fsg_lun *curlun, const char *buf,
 EXPORT_SYMBOL_GPL(fsg_store_inquiry_string);
 
 MODULE_LICENSE("GPL");
+MODULE_IMPORT_NS(ANDROID_GKI_VFS_EXPORT_ONLY);
