@@ -3644,6 +3644,7 @@ static void __exit target_core_exit_configfs(void)
 MODULE_DESCRIPTION("Target_Core_Mod/ConfigFS");
 MODULE_AUTHOR("nab@Linux-iSCSI.org");
 MODULE_LICENSE("GPL");
+MODULE_IMPORT_NS(ANDROID_GKI_VFS_EXPORT_ONLY);
 
 module_init(target_core_init_configfs);
 module_exit(target_core_exit_configfs);

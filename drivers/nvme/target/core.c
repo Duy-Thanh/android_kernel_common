@@ -1602,3 +1602,4 @@ module_init(nvmet_init);
 module_exit(nvmet_exit);
 
 MODULE_LICENSE("GPL v2");
+MODULE_IMPORT_NS(ANDROID_GKI_VFS_EXPORT_ONLY);

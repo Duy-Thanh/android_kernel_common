@@ -956,6 +956,7 @@ static void __exit fileio_module_exit(void)
 MODULE_DESCRIPTION("TCM FILEIO subsystem plugin");
 MODULE_AUTHOR("nab@Linux-iSCSI.org");
 MODULE_LICENSE("GPL");
+MODULE_IMPORT_NS(ANDROID_GKI_VFS_EXPORT_ONLY);
 
 module_init(fileio_module_init);
 module_exit(fileio_module_exit);
