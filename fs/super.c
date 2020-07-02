@@ -1739,7 +1739,7 @@ void kill_block_super(struct super_block *sb)
 	}
 }
 
-EXPORT_SYMBOL(kill_block_super);
+EXPORT_SYMBOL_NS(kill_block_super, "ANDROID_GKI_VFS_EXPORT_ONLY");
 #endif
 
 /**

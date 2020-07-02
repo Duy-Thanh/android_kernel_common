@@ -432,4 +432,5 @@ module_init(init_qnx4_fs)
 module_exit(exit_qnx4_fs)
 MODULE_DESCRIPTION("QNX4 file system");
 MODULE_LICENSE("GPL");
+MODULE_IMPORT_NS("ANDROID_GKI_VFS_EXPORT_ONLY");
 

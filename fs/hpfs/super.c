@@ -785,3 +785,4 @@ module_init(init_hpfs_fs)
 module_exit(exit_hpfs_fs)
 MODULE_DESCRIPTION("OS/2 HPFS file system support");
 MODULE_LICENSE("GPL");
+MODULE_IMPORT_NS("ANDROID_GKI_VFS_EXPORT_ONLY");

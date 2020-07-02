@@ -1494,3 +1494,4 @@ module_init(init_ufs_fs)
 module_exit(exit_ufs_fs)
 MODULE_DESCRIPTION("UFS Filesystem");
 MODULE_LICENSE("GPL");
+MODULE_IMPORT_NS("ANDROID_GKI_VFS_EXPORT_ONLY");

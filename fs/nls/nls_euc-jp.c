@@ -579,3 +579,4 @@ module_exit(exit_nls_euc_jp)
 
 MODULE_DESCRIPTION("NLS Japanese charset (EUC-JP)");
 MODULE_LICENSE("Dual BSD/GPL");
+MODULE_IMPORT_NS("ANDROID_GKI_VFS_EXPORT_ONLY");
