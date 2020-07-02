@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1017ab7_7d3af95c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-02T12:05:32Z",
+      "side": 1,
+      "message": "\u003e Patch Set 4:\n\u003e \n\u003e @liangcai\n\u003e \n\u003e It is conflict now.\n\u003e \n\u003e Need rebase?\n\nI can do this as the .xml file also needs updating...",
+      "revId": "43e73adc305204f1b104ab7b0f170a83fa0ea016",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
