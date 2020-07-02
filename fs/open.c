@@ -322,7 +322,7 @@ int vfs_fallocate(struct file *file, int mode, loff_t offset, loff_t len)
 	file_end_write(file);
 	return ret;
 }
-EXPORT_SYMBOL_GPL(vfs_fallocate);
+EXPORT_SYMBOL_NS_GPL(vfs_fallocate, ANDROID_GKI_VFS_EXPORT_ONLY);
 
 int ksys_fallocate(int fd, int mode, loff_t offset, loff_t len)
 {
@@ -963,7 +963,7 @@ struct file *dentry_open(const struct path *path, int flags,
 	}
 	return f;
 }
-EXPORT_SYMBOL(dentry_open);
+EXPORT_SYMBOL_NS(dentry_open, ANDROID_GKI_VFS_EXPORT_ONLY);
 
 struct file *open_with_fake_path(const struct path *path, int flags,
 				struct inode *inode, const struct cred *cred)
@@ -1158,7 +1158,7 @@ struct file *filp_open(const char *filename, int flags, umode_t mode)
 	}
 	return file;
 }
-EXPORT_SYMBOL(filp_open);
+EXPORT_SYMBOL_NS(filp_open, ANDROID_GKI_VFS_EXPORT_ONLY);
 
 /* ANDROID: Allow drivers to open only block files from kernel mode */
 struct file *filp_open_block(const char *filename, int flags, umode_t mode)
@@ -1326,7 +1326,7 @@ int filp_close(struct file *filp, fl_owner_t id)
 	return retval;
 }
 
-EXPORT_SYMBOL(filp_close);
+EXPORT_SYMBOL_NS(filp_close, ANDROID_GKI_VFS_EXPORT_ONLY);
 
 /*
  * Careful here! We test whether the file pointer is NULL before
@@ -1390,7 +1390,7 @@ int generic_file_open(struct inode * inode, struct file * filp)
 	return 0;
 }
 
-EXPORT_SYMBOL(generic_file_open);
+EXPORT_SYMBOL_NS(generic_file_open, ANDROID_GKI_VFS_EXPORT_ONLY);
 
 /*
  * This is used by subsystems that don't want seekable
