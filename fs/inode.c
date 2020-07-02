@@ -1948,7 +1948,7 @@ int file_remove_privs(struct file *file)
 
 	return error;
 }
-EXPORT_SYMBOL(file_remove_privs);
+EXPORT_SYMBOL_NS(file_remove_privs, ANDROID_GKI_VFS_EXPORT_ONLY);
 
 /**
  *	file_update_time	-	update mtime and ctime time
@@ -1996,7 +1996,7 @@ int file_update_time(struct file *file)
 
 	return ret;
 }
-EXPORT_SYMBOL(file_update_time);
+EXPORT_SYMBOL_NS(file_update_time, ANDROID_GKI_VFS_EXPORT_ONLY);
 
 /* Caller must hold the file's inode lock */
 int file_modified(struct file *file)
