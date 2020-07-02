@@ -172,7 +172,7 @@ int sb_set_blocksize(struct super_block *sb, int size)
 	return sb->s_blocksize;
 }
 
-EXPORT_SYMBOL(sb_set_blocksize);
+EXPORT_SYMBOL_NS(sb_set_blocksize, ANDROID_GKI_VFS_EXPORT_ONLY);
 
 int sb_min_blocksize(struct super_block *sb, int size)
 {
@@ -182,7 +182,7 @@ int sb_min_blocksize(struct super_block *sb, int size)
 	return sb_set_blocksize(sb, size);
 }
 
-EXPORT_SYMBOL(sb_min_blocksize);
+EXPORT_SYMBOL_NS(sb_min_blocksize, ANDROID_GKI_VFS_EXPORT_ONLY);
 
 int __sync_blockdev(struct block_device *bdev, int wait)
 {
