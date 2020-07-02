@@ -6,6 +6,8 @@
 # Rewritten to use lists instead of if-statements.
 # 
 
+subdir-ccflags-y += -DDEFAULT_SYMBOL_NAMESPACE=VFS_INTERNAL_I_AM_REALLY_A_FILESYSTEM_AND_AM_NOT_A_DRIVER
+
 obj-y :=	open.o read_write.o file_table.o super.o \
 		char_dev.o stat.o exec.o pipe.o namei.o fcntl.o \
 		ioctl.o readdir.o select.o dcache.o inode.o \
