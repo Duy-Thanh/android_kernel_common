@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "efa1192b_16a3ca4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-06T05:51:10Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Code-Review-1\n\u003e \n\u003e Note, we need to update documentation as well and we should do this across all branches.\n\nI agree, this was about seeing if this would work with the build system or not first 😊\n\n\n\u003e Also, how about we also take the chance and move them in a subdirectory (abi/ ?) as suggested in b/155573384.\n\nOh I would love that, I was thinking android/ to dump all of our files into, but abi/ sounds good to me!",
+      "revId": "bd85b66806069ca61cc9e7a41f7611c1c1b798d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
