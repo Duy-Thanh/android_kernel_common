@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2bd82b42_91d899b3",
+        "filename": "sound/usb/card.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-06T16:57:34Z",
+      "side": 1,
+      "message": "what is \"0\" here?",
+      "range": {
+        "startLine": 741,
+        "startChar": 43,
+        "endLine": 741,
+        "endChar": 44
+      },
+      "revId": "9d80c000127ba38f4215735daf6e57ecb64cba51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4fad913_3797aad4",
+        "filename": "sound/usb/card.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-06T16:57:34Z",
+      "side": 1,
+      "message": "should be per-host controller device.",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 75
+      },
+      "revId": "9d80c000127ba38f4215735daf6e57ecb64cba51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e934addf_35e08e1b",
+        "filename": "sound/usb/clock.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-06T16:57:34Z",
+      "side": 1,
+      "message": "what is 0 here?",
+      "range": {
+        "startLine": 646,
+        "startChar": 52,
+        "endLine": 646,
+        "endChar": 53
+      },
+      "revId": "9d80c000127ba38f4215735daf6e57ecb64cba51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4b9cdfb_bd1f8488",
+        "filename": "sound/usb/pcm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1510,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-06T16:57:34Z",
+      "side": 1,
+      "message": "why is only one of the callbacks actually checked to see if it worked or not?",
+      "range": {
+        "startLine": 1510,
+        "startChar": 17,
+        "endLine": 1510,
+        "endChar": 31
+      },
+      "revId": "9d80c000127ba38f4215735daf6e57ecb64cba51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d097e15f_9c066347",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-06T16:57:34Z",
+      "side": 1,
+      "message": "no global variable please, this restricts this to only one, this should be per-host-controller, right?",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 54
+      },
+      "revId": "9d80c000127ba38f4215735daf6e57ecb64cba51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "841301c1_67f3322c",
+        "filename": "sound/usb/usbaudio.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-06T16:57:34Z",
+      "side": 1,
+      "message": "where are these used?  Why not make this an enumerated type so we know exactly where they should be used?",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 22
+      },
+      "revId": "9d80c000127ba38f4215735daf6e57ecb64cba51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
