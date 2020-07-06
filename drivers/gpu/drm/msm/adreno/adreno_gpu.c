@@ -194,7 +194,11 @@ adreno_iommu_create_address_space(struct msm_gpu *gpu,
 	struct msm_gem_address_space *aspace;
 
 	aspace = msm_gem_address_space_create(mmu, "gpu", SZ_16M,
+<<<<<<< HEAD   (6883a1 Revert "ANDROID: fscrypt: add key removal notifier chain")
 		0xffffffff);
+=======
+		0xffffffff - SZ_16M);
+>>>>>>> BRANCH (dcb7fd Linux 5.8-rc4)
 
 	if (IS_ERR(aspace) && !IS_ERR(mmu))
 		mmu->funcs->destroy(mmu);
