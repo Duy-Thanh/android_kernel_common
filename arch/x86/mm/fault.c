@@ -1143,6 +1143,11 @@ void do_user_addr_fault(struct pt_regs *regs,
 	vm_fault_t fault, major = 0;
 	unsigned int flags = FAULT_FLAG_DEFAULT;
 
+	bool was_major = false;
+	ktime_t event_ts;
+
+	mm_event_start(&event_ts);
+
 	tsk = current;
 	mm = tsk->mm;
 
@@ -1325,12 +1330,18 @@ good_area:
 	 * returned VM_FAULT_MAJOR, we account it as a major fault.
 	 */
 	if (major) {
+		was_major = true;
 		tsk->maj_flt++;
 		perf_sw_event(PERF_COUNT_SW_PAGE_FAULTS_MAJ, 1, regs, address);
 	} else {
 		tsk->min_flt++;
 		perf_sw_event(PERF_COUNT_SW_PAGE_FAULTS_MIN, 1, regs, address);
 	}
+
+	if (was_major)
+		mm_event_end(MM_MAJ_FAULT, event_ts);
+	else
+		mm_event_end(MM_MIN_FAULT, event_ts);
 
 	check_v8086_mode(regs, address, tsk);
 }

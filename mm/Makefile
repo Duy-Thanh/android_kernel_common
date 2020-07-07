@@ -40,6 +40,9 @@ mmu-$(CONFIG_MMU)	:= highmem.o memory.o mincore.o \
 			   msync.o page_vma_mapped.o pagewalk.o \
 			   pgtable-generic.o rmap.o vmalloc.o
 
+ifdef CONFIG_MM_EVENT_STAT
+mmu-$(CONFIG_MMU)	+= mm_event.o
+endif
 
 ifdef CONFIG_CROSS_MEMORY_ATTACH
 mmu-$(CONFIG_MMU)	+= process_vm_access.o
