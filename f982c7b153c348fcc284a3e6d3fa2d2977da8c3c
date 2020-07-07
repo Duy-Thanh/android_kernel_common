@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a34252e_b89abfc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-07-07T03:17:50Z",
+      "side": 1,
+      "message": "Hey Saravana: Wanted to check in on this, as its still needed for to boot android-mainline on db845c w/o disabling fw_devlink (or setting \u003dpermissive) in the boot args.\n\nAre there still plans for this to land upstream or in android-mainline?",
+      "revId": "f982c7b153c348fcc284a3e6d3fa2d2977da8c3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
