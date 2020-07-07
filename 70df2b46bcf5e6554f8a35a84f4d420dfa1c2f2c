@@ -16,6 +16,24 @@
       "revId": "70df2b46bcf5e6554f8a35a84f4d420dfa1c2f2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b66c31b_9c30a8da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2020-07-07T08:06:22Z",
+      "side": 1,
+      "message": "our csi driver mx6s_capture.c(this driver still not upstreamed) use vb2_dma_contig_memops as below \nq-\u003emem_ops \u003d \u0026vb2_dma_contig_memops;\n\nmem_ops is need in videobuf2-core.c to operate dma buffer.",
+      "parentUuid": "49dbdeee_6d913aee",
+      "revId": "70df2b46bcf5e6554f8a35a84f4d420dfa1c2f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
