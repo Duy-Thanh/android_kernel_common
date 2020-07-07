@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0bfa4810_7cc7915f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-07T20:21:19Z",
+      "side": 1,
+      "message": "Please send these Kconfig changes upstream. Once they land upstream we can take them into the appropriate common kernel branches.\n",
+      "revId": "a0a5ca0a2c1f9ca492be3b94e129f840ff84980e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
