@@ -16,6 +16,24 @@
       "revId": "0e755afd49cda7845980463c70f16ab8d6918260",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77531f11_9c55a045",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1697067
+      },
+      "writtenOn": "2020-07-08T12:16:38Z",
+      "side": 1,
+      "message": "I will check USB audio working.\nThanks your modification.",
+      "parentUuid": "5f27ee98_5e91471e",
+      "revId": "0e755afd49cda7845980463c70f16ab8d6918260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
