@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "157acfcd_668fca02",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2112,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-07-08T08:59:04Z",
+      "side": 1,
+      "message": "Could you please move this to individual sched classes instead, following the model of https://android-review.googlesource.com/c/kernel/common/+/1324115 ? Some partners might want to override some classes (fair and rt, probably) but not others (e.g. deadline). Also, that would keep vendor hooks under the protection of select_fallback_rq() below, which makes GKI safer to use.",
+      "range": {
+        "startLine": 2105,
+        "startChar": 1,
+        "endLine": 2112,
+        "endChar": 2
+      },
+      "revId": "32ff2402a870a471247ce73a598d214bb63acd94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
