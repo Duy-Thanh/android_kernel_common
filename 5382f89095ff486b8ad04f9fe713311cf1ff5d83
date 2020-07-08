@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e655e2ad_2c15fb5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-07-08T03:23:38Z",
+      "side": 1,
+      "message": "Please refer to my explanation in https://buganizer.corp.google.com/issues/160656259#comment2 why we did not add these paddings.\nUnless I\u0027m missing something, you don\u0027t need these paddings to pass GKI 1.0 compliance. Just add the actual fields with #ifdef SPECULATIVE_PAGE_FAULT and enable CONFIG_SPECULATIVE_PAGE_FAULT in production kernel only.\nIn GKI 2.0 we do not intend to support SPF unless it is adopted by upstream.",
+      "revId": "5382f89095ff486b8ad04f9fe713311cf1ff5d83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
