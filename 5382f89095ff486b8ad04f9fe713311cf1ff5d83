@@ -33,6 +33,23 @@
       "revId": "5382f89095ff486b8ad04f9fe713311cf1ff5d83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "34ad6d3e_9449f1de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-07-08T19:12:34Z",
+      "side": 1,
+      "message": "Ok, I discussed the issue with Todd and Sandeep and we are in agreement that these fields are needed to keep GKI and prod modules ABI compatible. This is done for GKI 1.0 only but in GKI 2.0 we will remove these padding fields.",
+      "revId": "5382f89095ff486b8ad04f9fe713311cf1ff5d83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
