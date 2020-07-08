@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ec7e9abb_97b0830a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-08T12:10:22Z",
+      "side": 1,
+      "message": "backport of the android-mainline rework of this patch.",
+      "revId": "cb0540ecca94296708d5c044470dbbcd3d4eba73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
