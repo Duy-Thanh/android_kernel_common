@@ -158,6 +158,7 @@ void log_irq_wakeup_reason(int irq)
 
 	spin_unlock_irqrestore(&wakeup_reason_lock, flags);
 }
+EXPORT_SYMBOL_GPL(log_irq_wakeup_reason);
 
 void log_threaded_irq_wakeup_reason(int irq, int parent_irq)
 {
