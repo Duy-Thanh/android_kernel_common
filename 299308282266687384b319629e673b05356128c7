@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4093504a_99bfccfb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-09T20:50:18Z",
+      "side": 1,
+      "message": "Please move these export statements to the file where the symbols are instantiated. In this case kernel/trace/power-traces.c. (the tracepoint is instantiated in the file where trace/events/power.h is included with #define CREATE_TRACE_POINTS).",
+      "revId": "299308282266687384b319629e673b05356128c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
