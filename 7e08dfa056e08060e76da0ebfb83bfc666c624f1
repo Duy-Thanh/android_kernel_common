@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8f7cf853_75340afa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-07-09T22:30:33Z",
+      "side": 1,
+      "message": "As this affects common qcom code, setting this -1 so its not merged until qcom devs +1 this.",
+      "revId": "7e08dfa056e08060e76da0ebfb83bfc666c624f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
