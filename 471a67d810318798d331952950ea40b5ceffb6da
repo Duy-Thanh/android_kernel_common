@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59be1c60_a76d1ad4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-09T20:48:43Z",
+      "side": 1,
+      "message": "This patch was reapplied here because of the branch name-change.\n\nPlease fix the issues raised for this patch in aosp/1282827.",
+      "revId": "471a67d810318798d331952950ea40b5ceffb6da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
