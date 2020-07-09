@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "38af1119_3792eb9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-07-09T21:57:15Z",
+      "side": 1,
+      "message": "Initial pass at wifi for db845c on android-5.4\n\nDepends on https://android-review.googlesource.com/c/device/linaro/dragonboard/+/1359342 in userland\n\nMany thanks to Amit and Bjorn for their help getting this sorted out.\n\nI\u0027ll need to respin the kabi update as things changed on me while I was generating this.",
+      "revId": "ef60d451356c38efe4c016521839a03f12117cc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
