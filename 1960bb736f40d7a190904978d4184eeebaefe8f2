@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5fddfb1_f64ee403",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1723023
+      },
+      "writtenOn": "2020-07-10T11:27:17Z",
+      "side": 1,
+      "message": "\u003e Patch Set 2:\n\u003e \n\u003e I\u0027ll take a closer look at this tomorrow, but off the cuff, I\u0027m curious about why   would need to be exported; it may easily be a lack of awareness on my part, but I\u0027m not sure why that would ever be called anywhere other than where it is now.   (or whatever I called the threaded one; no source within reach ATM), on the other hand, absolutely will be called by drivers and I should have exported it and failed to do so.\n\nExcept for module driver, built-in kernel drivers can utilize log_irq_wakeup_reason() safely.\nAdding EXPORT_SYMBOL_GPL could help built-in drivers transform to module drivers which is aligned with ongoing GKI progress.\n",
+      "revId": "1960bb736f40d7a190904978d4184eeebaefe8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
