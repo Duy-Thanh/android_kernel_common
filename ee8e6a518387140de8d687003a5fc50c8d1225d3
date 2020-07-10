@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06d8de58_921e309b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-07-10T19:29:09Z",
+      "side": 1,
+      "message": "Todd/Matthias: I\u0027m a little nervous about the Changed variables section in the abi report. Can you make sure to take a second look at that to make sure the tooling is working as it should? Seeing lots of not-wifi-related variables drop to size 0 seems concerning?",
+      "revId": "ee8e6a518387140de8d687003a5fc50c8d1225d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
