@@ -51,6 +51,24 @@
       "revId": "1960bb736f40d7a190904978d4184eeebaefe8f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "016db191_9ed31b41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1241955
+      },
+      "writtenOn": "2020-07-10T18:20:07Z",
+      "side": 1,
+      "message": "As for the earlier proposed changes to print_wakeup_reasons(), I agree that a change is needed (as a result of the 4.14 s2idle refactor), but the proposed change is not the right fix.  Please loop me in on the other patch where we can discuss that, as I can provide a lot of context and help steer this toward a correct solution.",
+      "parentUuid": "378fd6a6_e454a96a",
+      "revId": "1960bb736f40d7a190904978d4184eeebaefe8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
