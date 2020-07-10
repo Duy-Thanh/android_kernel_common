@@ -70,6 +70,30 @@
       "revId": "987d0b5bcf096a478aaf96faf5a288b4c95e9d37",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44383368_462ccd73",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1723023
+      },
+      "writtenOn": "2020-07-10T08:26:08Z",
+      "side": 0,
+      "message": "Sure, I will prepare another patch.\n\nlog_irq_wakeup_reason() comes from log_wakeup_reason() by this patch https://android-review.googlesource.com/c/kernel/common/+/1281243\n\nBefore that, every call to log_wakeup_reason() would print corresponding logs.\nAnd now, log_irq_wakeup_reason() works as following:\n\nif any wakeup source being activated during resume flow:\n    print wakeup source logs\nelse\n    print wakeup irq logs\n\nI am wondering that both wakeup source and wakeup irq logs should be printed\nLet\u0027s discuss this at another patch.",
+      "parentUuid": "0f19f9dd_0a6f2d3b",
+      "range": {
+        "startLine": 263,
+        "startChar": 2,
+        "endLine": 264,
+        "endChar": 9
+      },
+      "revId": "987d0b5bcf096a478aaf96faf5a288b4c95e9d37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
