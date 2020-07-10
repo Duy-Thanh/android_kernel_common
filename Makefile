@@ -4,7 +4,7 @@ PATCHLEVEL = 8
 SUBLEVEL = 0
 EXTRAVERSION = -rc4
 NAME = Kleptomaniac Octopus
-
+dickey testing only
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
 # More info can be located in ./README
