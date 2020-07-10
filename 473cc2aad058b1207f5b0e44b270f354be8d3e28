@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02b5c06e_3d2eabc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2020-07-10T15:53:12Z",
+      "side": 1,
+      "message": "Boots to UI. BT/WiFi/Analog-Audio works. Can\u0027t test HDMI-Audio.",
+      "revId": "473cc2aad058b1207f5b0e44b270f354be8d3e28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
