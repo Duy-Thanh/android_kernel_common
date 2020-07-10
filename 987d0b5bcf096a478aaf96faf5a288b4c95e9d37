@@ -46,6 +46,30 @@
       "revId": "987d0b5bcf096a478aaf96faf5a288b4c95e9d37",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f19f9dd_0a6f2d3b",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-10T07:49:33Z",
+      "side": 0,
+      "message": "Then that\u0027s a bug/issue you should send upstream, and not include in this \"export a symbol\" patch.  Patches should only do one logical thing, not multiple ones.\n\nPlease send that upstream and we will be glad to backport it here.\n\nAnd if log_irq_wakeup_reason() is obsolete with the code as-is, why do you need it anywhere?  Doing logic based on log files is not a good way to interact with the kernel :)",
+      "parentUuid": "b5a3f35a_ba8fa758",
+      "range": {
+        "startLine": 263,
+        "startChar": 2,
+        "endLine": 264,
+        "endChar": 9
+      },
+      "revId": "987d0b5bcf096a478aaf96faf5a288b4c95e9d37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
