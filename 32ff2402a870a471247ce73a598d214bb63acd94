@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "56d766c9_da93d3dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-10T15:33:12Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 9,
+        "startChar": 4,
+        "endLine": 9,
+        "endChar": 11
+      },
+      "revId": "32ff2402a870a471247ce73a598d214bb63acd94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "157acfcd_668fca02",
         "filename": "kernel/sched/core.c",
         "patchSetId": 2
