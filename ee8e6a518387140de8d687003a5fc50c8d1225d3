@@ -33,6 +33,24 @@
       "revId": "ee8e6a518387140de8d687003a5fc50c8d1225d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4ae48c9_b7c22727",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 122010,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-07-10T19:50:44Z",
+      "side": 1,
+      "message": "ack! will do! thanks for pointing that out!",
+      "parentUuid": "ddd7e87d_1794894f",
+      "revId": "ee8e6a518387140de8d687003a5fc50c8d1225d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
