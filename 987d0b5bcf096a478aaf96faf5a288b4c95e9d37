@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "190cc500_d3de41c8",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-10T06:26:15Z",
+      "side": 0,
+      "message": "why did you remove these lines?  That feels wrong.",
+      "range": {
+        "startLine": 263,
+        "startChar": 2,
+        "endLine": 264,
+        "endChar": 9
+      },
+      "revId": "987d0b5bcf096a478aaf96faf5a288b4c95e9d37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
