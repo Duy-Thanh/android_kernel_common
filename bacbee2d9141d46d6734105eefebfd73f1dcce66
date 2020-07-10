@@ -16,6 +16,24 @@
       "revId": "bacbee2d9141d46d6734105eefebfd73f1dcce66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17b5b57d_f8120a82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-07-10T18:35:10Z",
+      "side": 1,
+      "message": "ack. will drop.",
+      "parentUuid": "e7006360_ada4c13d",
+      "revId": "bacbee2d9141d46d6734105eefebfd73f1dcce66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
