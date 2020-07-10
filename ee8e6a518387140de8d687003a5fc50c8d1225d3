@@ -51,6 +51,24 @@
       "revId": "ee8e6a518387140de8d687003a5fc50c8d1225d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "880db181_150d2e44",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 122010,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-07-10T20:02:37Z",
+      "side": 1,
+      "message": "that was an update addressing quite some things: aosp/1347564\n\nIt is a good idea to do `repo sync` or `repo sync build/` before updating the ABI representation",
+      "parentUuid": "c4ae48c9_b7c22727",
+      "revId": "ee8e6a518387140de8d687003a5fc50c8d1225d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
