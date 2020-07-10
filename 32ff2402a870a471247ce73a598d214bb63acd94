@@ -22,6 +22,30 @@
       "revId": "32ff2402a870a471247ce73a598d214bb63acd94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f4cc486_720db40d",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2112,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-07-10T08:04:11Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common/+/1324115 has now been merged. Could you please rebase this patch on top, and align the hooks you need with the model of trace_android_rvh_select_task_rq_fair()?",
+      "parentUuid": "157acfcd_668fca02",
+      "range": {
+        "startLine": 2105,
+        "startChar": 1,
+        "endLine": 2112,
+        "endChar": 2
+      },
+      "revId": "32ff2402a870a471247ce73a598d214bb63acd94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
