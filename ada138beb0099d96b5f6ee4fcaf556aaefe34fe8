@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f15f38e3_8522b42b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-07-10T02:40:50Z",
+      "side": 1,
+      "message": "This out-of-tree feature is unlikely to be accepted by upstream and therefore will not be merged into AOSP. Why are you uploading mm_events here (even with DO NOT MERGE tag)?",
+      "revId": "ada138beb0099d96b5f6ee4fcaf556aaefe34fe8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
