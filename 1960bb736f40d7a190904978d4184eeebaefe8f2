@@ -16,6 +16,23 @@
       "revId": "1960bb736f40d7a190904978d4184eeebaefe8f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "73bef732_bd23eb90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-10T15:48:29Z",
+      "side": 1,
+      "message": "Greg- FYI- wakeup_reasons is android-specific so this patch can\u0027t go upstream",
+      "revId": "1960bb736f40d7a190904978d4184eeebaefe8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
