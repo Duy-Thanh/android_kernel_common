@@ -33,6 +33,24 @@
       "revId": "1960bb736f40d7a190904978d4184eeebaefe8f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "378fd6a6_e454a96a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1241955
+      },
+      "writtenOn": "2020-07-10T17:31:18Z",
+      "side": 1,
+      "message": "I understand that exporting it would allow module drives to call it.  What I don\u0027t understand is why any driver would ever need to call this function, whether it\u0027s a built-in kernel driver or a module driver.  What are the conditions in which you believe this needs to be called anywhere other than pm_system_irq_wakeup()?\n\nThe only case I\u0027m aware of that does need special handling is nested threaded IRQs, where we only know the parent IRQ - not the child IRQ that actually caused the wakeup - when pm_system_irq_wakeup() runs.  That\u0027s what log_threaded_irq_wakeup_reason() is for; it essentially replaces the already-logged parent IRQ that was captured via log_irq_wakeup_reason() with the child IRQ we actually care about, once we know what that is.\n\n(And again, it was definitely a mistake that I didn\u0027t export log_threaded_irq_wakeup_reason(); that needs to happen.)\n\nI am not an expert here, so maybe there is a valid reason for a driver to call this. I just don\u0027t know what it is, and would like to understand before approving the change.",
+      "parentUuid": "b5fddfb1_f64ee403",
+      "revId": "1960bb736f40d7a190904978d4184eeebaefe8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
