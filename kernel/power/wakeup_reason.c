@@ -260,8 +260,6 @@ static void print_wakeup_sources(void)
 
 	if (suspend_abort) {
 		pr_info("Abort: %s\n", non_irq_wake_reason);
-		spin_unlock_irqrestore(&wakeup_reason_lock, flags);
-		return;
 	}
 
 	if (!list_empty(&leaf_irqs))
