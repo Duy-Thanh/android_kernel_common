@@ -22,6 +22,30 @@
       "revId": "987d0b5bcf096a478aaf96faf5a288b4c95e9d37",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5a3f35a_ba8fa758",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1723023
+      },
+      "writtenOn": "2020-07-10T06:44:03Z",
+      "side": 0,
+      "message": "suspend_abort is set by the following resume flow\nsuspend_devices_and_enter\n-\u003e suspend_enter\n  -\u003e s2idle_loop\n    -\u003e pm_wakeup_pending\n      -\u003e log_suspend_abort_reason\n        -\u003e__log_abort_or_abnormal_wake(true, fmt, args);\n\nIn this case, if a wakeup source is activated, print_wakeup_sources() would only print active wakeup sources and then return. \nWakeup irqs recorded by log_irq_wakeup_reason() are ignored.\nThis would make log_irq_wakeup_reason() obsolete.",
+      "parentUuid": "190cc500_d3de41c8",
+      "range": {
+        "startLine": 263,
+        "startChar": 2,
+        "endLine": 264,
+        "endChar": 9
+      },
+      "revId": "987d0b5bcf096a478aaf96faf5a288b4c95e9d37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
