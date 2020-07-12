@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e109edc_6e1d2da3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1697067
+      },
+      "writtenOn": "2020-07-12T09:38:18Z",
+      "side": 1,
+      "message": "Interface was working good.\nI Change some parts for 5.4 kernel. But i can\u0027t push patch.\nI will check with other members. And will push fixed patch for kernel 5.4.\n",
+      "revId": "673bd29889298d59c018c4eb8c11d0c735bcf542",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eed5d36d_32b258c2",
+        "filename": "sound/usb/card.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1697067
+      },
+      "writtenOn": "2020-07-12T09:38:18Z",
+      "side": 1,
+      "message": "I think need change to \"snd_vendor_set_ops\". isn\u0027t it?",
+      "range": {
+        "startLine": 127,
+        "startChar": 18,
+        "endLine": 127,
+        "endChar": 42
+      },
+      "revId": "673bd29889298d59c018c4eb8c11d0c735bcf542",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
