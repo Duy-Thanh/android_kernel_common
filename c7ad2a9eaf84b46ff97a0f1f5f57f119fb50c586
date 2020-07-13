@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e6b74ee_871bdbbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-13T14:23:54Z",
+      "side": 1,
+      "message": "Are you sure this doesn\u0027t conflict/duplicate the patches sent upstream today by someone else wanting to do much the same thing:\nhttps://lore.kernel.org/r/38b7b1dc10cf608faceae923374791a52a450919.1594612572.git.huangqiwu@xiaomi.com\n\nAnd can you send your change upstream first, so that you get a reserved value for these enumerated types?",
+      "revId": "c7ad2a9eaf84b46ff97a0f1f5f57f119fb50c586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5fc15301_8003fc7e",
+        "filename": "include/linux/power_supply.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-13T14:23:54Z",
+      "side": 1,
+      "message": "no comment?",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 28
+      },
+      "revId": "c7ad2a9eaf84b46ff97a0f1f5f57f119fb50c586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
