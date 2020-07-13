@@ -69,6 +69,24 @@
       "revId": "7f7bb08d39bcea13e3e3c0e1d48e589c93f5d8a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9d92927f_fb83d0c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-07-13T23:11:42Z",
+      "side": 1,
+      "message": "I don\u0027t have any urgent need for it in the short term, so I\u0027m ok with waiting for a backport. But I\u0027ll defer to QCOM on their reasons for submitting it.",
+      "parentUuid": "69a892d7_a0eac5eb",
+      "revId": "7f7bb08d39bcea13e3e3c0e1d48e589c93f5d8a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
