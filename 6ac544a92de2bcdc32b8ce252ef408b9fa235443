@@ -16,6 +16,24 @@
       "revId": "6ac544a92de2bcdc32b8ce252ef408b9fa235443",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8fba5fde_ef6c0e42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1697067
+      },
+      "writtenOn": "2020-07-13T07:56:31Z",
+      "side": 1,
+      "message": "Between android-mainline and android-5.4 one thing different on \"sound/usb/pcm.c\"\nSo, I was change code \u0026 tring push to AOSP.\nBut, I met look\u0027s like permission error.\nI can not push to android-5.4. Could you help me?\nThis is different parts.\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n@@ -1033,10 +1043,15 @@ static int snd_usb_pcm_prepare(struct snd_pcm_substream *substream)\n                goto unlock;\n        }\n\n-       snd_usb_endpoint_sync_pending_stop(subs-\u003esync_endpoint);\n-       snd_usb_endpoint_sync_pending_stop(subs-\u003edata_endpoint);\n+       if (snd_vendor_get_ops())\n+               ret \u003d snd_usb_pcm_change_state(subs, UAC3_PD_STATE_D0);\n+       else {\n+               snd_usb_endpoint_sync_pending_stop(subs-\u003esync_endpoint);\n+               snd_usb_endpoint_sync_pending_stop(subs-\u003edata_endpoint);\n+\n+               ret \u003d snd_usb_pcm_change_state(subs, UAC3_PD_STATE_D0);\n+       }\n\n-       ret \u003d snd_usb_pcm_change_state(subs, UAC3_PD_STATE_D0);\n        if (ret \u003c 0)\n                goto unlock;\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\nAnd other things are good for working.\nThanks for your help.",
+      "parentUuid": "c9f9b63d_0c71aa53",
+      "revId": "6ac544a92de2bcdc32b8ce252ef408b9fa235443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
