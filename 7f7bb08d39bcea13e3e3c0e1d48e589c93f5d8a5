@@ -16,6 +16,23 @@
       "revId": "7f7bb08d39bcea13e3e3c0e1d48e589c93f5d8a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81a1aee6_5daa41fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-13T22:47:41Z",
+      "side": 1,
+      "message": "Please send this one upstream. I like msm-pinctrl becoming a module, and I don\u0027t see why this should be android-specific",
+      "revId": "7f7bb08d39bcea13e3e3c0e1d48e589c93f5d8a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
