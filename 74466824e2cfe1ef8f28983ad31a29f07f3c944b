@@ -37,6 +37,23 @@
     },
     {
       "key": {
+        "uuid": "c3907815_f24b03b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-13T16:07:46Z",
+      "side": 1,
+      "message": "I think you built this against the wrong kernel configuration 😞",
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcecc0c0_7fc125b1",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 2
@@ -167,6 +184,30 @@
       "side": 1,
       "message": "Why don\u0027t we make this module built-in?\nI\u0027ve seen many vendors use it",
       "parentUuid": "079b95d7_3e872c44",
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e07cf6fd_66c37daf",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-13T16:07:46Z",
+      "side": 1,
+      "message": "usb_f_mass_storage is built into this gki configuration, I do not think you ran this against the correct tree.\n\nAlways make sure to do it against a clean tree (no old kernel modules left around)",
+      "parentUuid": "facc2b21_3e3f161a",
+      "range": {
+        "startLine": 855,
+        "startChar": 0,
+        "endLine": 855,
+        "endChar": 11
+      },
       "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
