@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "beeaca2d_0134c079",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-13T12:45:56Z",
+      "side": 1,
+      "message": "Any chance you can sort these by module names so we have a better way to review them and see if they are valid to be used or not?",
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcecc0c0_7fc125b1",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-13T12:45:56Z",
+      "side": 1,
+      "message": "what needs this symbol?",
+      "range": {
+        "startLine": 853,
+        "startChar": 2,
+        "endLine": 853,
+        "endChar": 6
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d181f5f1_c3b73541",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 2
@@ -18,6 +58,76 @@
         "startChar": 0,
         "endLine": 855,
         "endChar": 11
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9aa0569_7b1ea332",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-13T12:45:56Z",
+      "side": 1,
+      "message": "Very true, this, and the vfs_* functions, are not for drivers to use.",
+      "parentUuid": "d181f5f1_c3b73541",
+      "range": {
+        "startLine": 855,
+        "startChar": 0,
+        "endLine": 855,
+        "endChar": 11
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "812cf18c_566c3106",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-13T12:45:56Z",
+      "side": 1,
+      "message": "hm, that is very suspect, what driver needs this?  That would create a new user/kernel api that goes around Treble stuff :(",
+      "range": {
+        "startLine": 1001,
+        "startChar": 2,
+        "endLine": 1001,
+        "endChar": 17
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5eb6d9b_101bf1e1",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1046,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-13T12:45:56Z",
+      "side": 1,
+      "message": "what needs this?\n\nAnd isn\u0027t this already in the list?",
+      "range": {
+        "startLine": 1046,
+        "startChar": 2,
+        "endLine": 1046,
+        "endChar": 12
       },
       "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
