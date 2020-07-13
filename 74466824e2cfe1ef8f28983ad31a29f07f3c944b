@@ -155,6 +155,24 @@
     },
     {
       "key": {
+        "uuid": "facc2b21_3e3f161a",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-07-13T16:02:40Z",
+      "side": 1,
+      "message": "Why don\u0027t we make this module built-in?\nI\u0027ve seen many vendors use it",
+      "parentUuid": "079b95d7_3e872c44",
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "812cf18c_566c3106",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 2
