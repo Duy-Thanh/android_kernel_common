@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ba67d89_bd7f83c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-13T15:34:37Z",
+      "side": 1,
+      "message": "Also needs to be rebased.",
+      "revId": "344a3f1fec4884e4ca3b84695d2791f247b04a17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b91406e_1c368496",
+        "filename": "include/linux/power_supply.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-13T15:34:37Z",
+      "side": 1,
+      "message": "typo?",
+      "range": {
+        "startLine": 188,
+        "startChar": 33,
+        "endLine": 188,
+        "endChar": 40
+      },
+      "revId": "344a3f1fec4884e4ca3b84695d2791f247b04a17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
