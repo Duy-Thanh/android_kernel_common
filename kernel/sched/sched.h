@@ -2572,3 +2572,12 @@ static inline bool is_per_cpu_kthread(struct task_struct *p)
 
 void swake_up_all_locked(struct swait_queue_head *q);
 void __prepare_to_swait(struct swait_queue_head *q, struct swait_queue *wait);
+
+/* isolation externs */
+extern void init_sched_groups_capacity(int cpu, struct sched_domain *sd);
+extern void watchdog_enable(unsigned int cpu);
+extern void watchdog_disable(unsigned int cpu);
+extern bool watchdog_configured(unsigned int cpu);
+extern void migrate_tasks(struct rq *dead_rq, struct rq_flags *rf,
+			  bool migrate_pinned_tasks);
+extern void calc_load_migrate(struct rq *rq);
