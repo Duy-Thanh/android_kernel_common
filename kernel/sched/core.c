@@ -228,7 +228,6 @@ rq_csd_init(struct rq *rq, call_single_data_t *csd, smp_call_func_t func)
 	csd->func = func;
 	csd->info = rq;
 }
-
 #ifdef CONFIG_SCHED_HRTICK
 /*
  * Use HR-timers to deliver accurate preemption points.
@@ -6292,7 +6291,7 @@ void idle_task_exit(void)
  *
  * Also see the comment "Global load-average calculations".
  */
-static void calc_load_migrate(struct rq *rq)
+void calc_load_migrate(struct rq *rq)
 {
 	long delta = calc_load_fold_active(rq, 1);
 	if (delta)
@@ -6317,6 +6316,38 @@ static struct task_struct *__pick_migrate_task(struct rq *rq)
 }
 
 /*
+ * Remove a task from the runqueue and pretend that it's migrating. This
+ * should prevent migrations for the detached task and disallow further
+ * changes to tsk_cpus_allowed.
+ */
+void
+detach_one_task_core(struct task_struct *p, struct rq *rq,
+		     struct list_head *tasks)
+{
+	lockdep_assert_held(&rq->lock);
+
+	p->on_rq = TASK_ON_RQ_MIGRATING;
+	deactivate_task(rq, p, 0);
+	list_add(&p->se.group_node, tasks);
+}
+
+void attach_tasks_core(struct list_head *tasks, struct rq *rq)
+{
+	struct task_struct *p;
+
+	lockdep_assert_held(&rq->lock);
+
+	while (!list_empty(tasks)) {
+		p = list_first_entry(tasks, struct task_struct, se.group_node);
+		list_del_init(&p->se.group_node);
+
+		BUG_ON(task_rq(p) != rq);
+		activate_task(rq, p, 0);
+		p->on_rq = TASK_ON_RQ_QUEUED;
+	}
+}
+
+/*
  * Migrate all tasks from the rq, sleeping tasks will be migrated by
  * try_to_wake_up()->select_task_rq().
  *
@@ -6324,12 +6355,18 @@ static struct task_struct *__pick_migrate_task(struct rq *rq)
  * there's no concurrency possible, we hold the required locks anyway
  * because of lock validation efforts.
  */
-static void migrate_tasks(struct rq *dead_rq, struct rq_flags *rf)
+void migrate_tasks(struct rq *dead_rq, struct rq_flags *rf,
+		   bool migrate_pinned_tasks)
 {
 	struct rq *rq = dead_rq;
 	struct task_struct *next, *stop = rq->stop;
 	struct rq_flags orf = *rf;
 	int dest_cpu;
+	unsigned int num_pinned_kthreads = 1; /* this thread */
+	LIST_HEAD(tasks);
+	cpumask_t avail_cpus;
+
+	cpumask_andnot(&avail_cpus, cpu_online_mask, cpu_isolated_mask);
 
 	/*
 	 * Fudge the rq selection such that the below task selection loop
@@ -6359,6 +6396,14 @@ static void migrate_tasks(struct rq *dead_rq, struct rq_flags *rf)
 
 		next = __pick_migrate_task(rq);
 
+		if (!migrate_pinned_tasks && next->flags & PF_KTHREAD &&
+			!cpumask_intersects(&avail_cpus, &next->cpus_mask)) {
+			detach_one_task_core(next, rq, &tasks);
+			num_pinned_kthreads += 1;
+			continue;
+		}
+
+
 		/*
 		 * Rules for changing task_struct::cpus_mask are holding
 		 * both pi_lock and rq->lock, such that holding either
@@ -6371,13 +6416,19 @@ static void migrate_tasks(struct rq *dead_rq, struct rq_flags *rf)
 		rq_unlock(rq, rf);
 		raw_spin_lock(&next->pi_lock);
 		rq_relock(rq, rf);
+		if (!(rq->clock_update_flags & RQCF_UPDATED))
+			update_rq_clock(rq);
 
 		/*
 		 * Since we're inside stop-machine, _nothing_ should have
 		 * changed the task, WARN if weird stuff happened, because in
 		 * that case the above rq->lock drop is a fail too.
+		 * However, during cpu isolation the load balancer might have
+		 * interferred since we don't stop all CPUs. Ignore warning for
+		 * this case.
 		 */
-		if (WARN_ON(task_rq(next) != rq || !task_on_rq_queued(next))) {
+		if (task_rq(next) != rq || !task_on_rq_queued(next)) {
+			WARN_ON(migrate_pinned_tasks);
 			raw_spin_unlock(&next->pi_lock);
 			continue;
 		}
@@ -6390,12 +6441,18 @@ static void migrate_tasks(struct rq *dead_rq, struct rq_flags *rf)
 			rq = dead_rq;
 			*rf = orf;
 			rq_relock(rq, rf);
+			if (!(rq->clock_update_flags & RQCF_UPDATED))
+				update_rq_clock(rq);
 		}
 		raw_spin_unlock(&next->pi_lock);
 	}
 
 	rq->stop = stop;
+
+	if (num_pinned_kthreads > 1)
+		attach_tasks_core(&tasks, rq);
 }
+
 #endif /* CONFIG_HOTPLUG_CPU */
 
 void set_rq_online(struct rq *rq)
@@ -6577,7 +6634,7 @@ int sched_cpu_dying(unsigned int cpu)
 		BUG_ON(!cpumask_test_cpu(cpu, rq->rd->span));
 		set_rq_offline(rq);
 	}
-	migrate_tasks(rq, &rf);
+	migrate_tasks(rq, &rf, true);
 	BUG_ON(rq->nr_running != 1);
 	rq_unlock_irqrestore(rq, &rf);
 
