@@ -309,6 +309,30 @@
     },
     {
       "key": {
+        "uuid": "2c7b8834_9657a0ff",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1670145
+      },
+      "writtenOn": "2020-07-13T21:16:47Z",
+      "side": 1,
+      "message": "This is for our hypervisor only. Why can\u0027t I use it for our hypervisor?",
+      "parentUuid": "202c4aff_f0f39e66",
+      "range": {
+        "startLine": 1001,
+        "startChar": 2,
+        "endLine": 1001,
+        "endChar": 17
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f5eb6d9b_101bf1e1",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 2
