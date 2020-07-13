@@ -238,6 +238,30 @@
     },
     {
       "key": {
+        "uuid": "9fdbf80a_1f5b90e4",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1721954
+      },
+      "writtenOn": "2020-07-13T23:54:03Z",
+      "side": 1,
+      "message": "taken care in next patch",
+      "parentUuid": "e07cf6fd_66c37daf",
+      "range": {
+        "startLine": 855,
+        "startChar": 0,
+        "endLine": 855,
+        "endChar": 11
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "812cf18c_566c3106",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 2
@@ -357,6 +381,30 @@
     },
     {
       "key": {
+        "uuid": "bd530b33_fea03437",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1721954
+      },
+      "writtenOn": "2020-07-13T23:54:03Z",
+      "side": 1,
+      "message": "We see all other hypervisors using it like Xen, HyperV, KVM etc",
+      "parentUuid": "f0fcd3b0_c05f7bb0",
+      "range": {
+        "startLine": 1001,
+        "startChar": 2,
+        "endLine": 1001,
+        "endChar": 17
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f5eb6d9b_101bf1e1",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 2
@@ -428,6 +476,29 @@
     },
     {
       "key": {
+        "uuid": "621915a6_651398ef",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 1721954
+      },
+      "writtenOn": "2020-07-13T23:54:03Z",
+      "side": 1,
+      "message": "removing in next patchset",
+      "range": {
+        "startLine": 1110,
+        "startChar": 2,
+        "endLine": 1110,
+        "endChar": 6
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b19f632f_f1b2952e",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 2
@@ -472,6 +543,30 @@
       "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a02cddf9_9cf7d2b4",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1165,
+      "author": {
+        "id": 1721954
+      },
+      "writtenOn": "2020-07-13T23:54:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31b4fc47_b0308269",
+      "range": {
+        "startLine": 1165,
+        "startChar": 0,
+        "endLine": 1165,
+        "endChar": 13
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -546,6 +641,30 @@
     },
     {
       "key": {
+        "uuid": "396aaaa1_00368eb7",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1169,
+      "author": {
+        "id": 1721954
+      },
+      "writtenOn": "2020-07-13T23:54:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "052e4070_855b111e",
+      "range": {
+        "startLine": 1169,
+        "startChar": 0,
+        "endLine": 1169,
+        "endChar": 14
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a01c07e0_6c665160",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 2
@@ -614,6 +733,30 @@
       "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77fc76d7_1a9b3788",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 2550,
+      "author": {
+        "id": 1721954
+      },
+      "writtenOn": "2020-07-13T23:54:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6e7e30b_dde3bd10",
+      "range": {
+        "startLine": 2538,
+        "startChar": 0,
+        "endLine": 2550,
+        "endChar": 11
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
