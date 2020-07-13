@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "68c950bd_4f6e6878",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-13T13:10:24Z",
+      "side": 1,
+      "message": "what does this mean?  What is \"udisk\"?\nAnd what about UAS driver, don\u0027t you also want to support that if you have usb-storage support?\n\nAnd if you have usb-storage, what about all of the variant options for it, don\u0027t you need/want them too?",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 35
+      },
+      "revId": "2bd17b3e462681d6f74e9d326abd84b224195a23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
