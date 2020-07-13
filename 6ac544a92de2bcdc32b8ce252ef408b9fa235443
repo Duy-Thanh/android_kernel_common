@@ -34,6 +34,24 @@
       "revId": "6ac544a92de2bcdc32b8ce252ef408b9fa235443",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7258a81c_f3859d60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-13T14:10:49Z",
+      "side": 1,
+      "message": "The android 5.4 branch names changed last week, are you sure you set them to be the correct ones?\n\nAfter this is merged, I\u0027ll cherry-pick the patch to the 5.4 branches and see how that goes, thanks!",
+      "parentUuid": "8fba5fde_ef6c0e42",
+      "revId": "6ac544a92de2bcdc32b8ce252ef408b9fa235443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
