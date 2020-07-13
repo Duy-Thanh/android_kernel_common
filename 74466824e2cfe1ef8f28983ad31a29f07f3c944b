@@ -333,6 +333,30 @@
     },
     {
       "key": {
+        "uuid": "f0fcd3b0_c05f7bb0",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1670145
+      },
+      "writtenOn": "2020-07-13T21:18:19Z",
+      "side": 1,
+      "message": "... these APIs will be used by our internal hypervisor. If not allowed, we will anyway create more downstream paths or /sysfs entries.",
+      "parentUuid": "2c7b8834_9657a0ff",
+      "range": {
+        "startLine": 1001,
+        "startChar": 2,
+        "endLine": 1001,
+        "endChar": 17
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f5eb6d9b_101bf1e1",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 2
