@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d181f5f1_c3b73541",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-07-13T11:09:38Z",
+      "side": 1,
+      "message": "+greg: I don\u0027t think we want this.",
+      "range": {
+        "startLine": 855,
+        "startChar": 0,
+        "endLine": 855,
+        "endChar": 11
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b19f632f_f1b2952e",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1165,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-07-13T11:09:38Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 1165,
+        "startChar": 0,
+        "endLine": 1165,
+        "endChar": 13
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5682183_17f9ed98",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1169,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-07-13T11:09:38Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 1169,
+        "startChar": 0,
+        "endLine": 1169,
+        "endChar": 14
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a01c07e0_6c665160",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 2550,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-07-13T11:09:38Z",
+      "side": 1,
+      "message": "Where are these coming from? you shouldn\u0027t use VFS functions in your kernel module",
+      "range": {
+        "startLine": 2538,
+        "startChar": 0,
+        "endLine": 2550,
+        "endChar": 11
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
