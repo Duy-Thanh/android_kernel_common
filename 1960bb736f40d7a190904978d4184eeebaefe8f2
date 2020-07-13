@@ -69,6 +69,24 @@
       "revId": "1960bb736f40d7a190904978d4184eeebaefe8f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1a8ecd9_db2ccacf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1723023
+      },
+      "writtenOn": "2020-07-13T02:25:58Z",
+      "side": 1,
+      "message": "Hi Kelly,\nYes I agree that irq might be triggered first by its parent.\nAnd log_irq_wakeup_reason() would be called during wakeup irq handling.\n\nExporting log_threaded_irq_wakeup_reason is more reasonable.",
+      "parentUuid": "016db191_9ed31b41",
+      "revId": "1960bb736f40d7a190904978d4184eeebaefe8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
