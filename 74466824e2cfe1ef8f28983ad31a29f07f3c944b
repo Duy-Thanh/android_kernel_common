@@ -101,6 +101,30 @@
     },
     {
       "key": {
+        "uuid": "b8f165d5_1740aa47",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-13T16:11:09Z",
+      "side": 1,
+      "message": "Ah, that code, ick.  Ok, that\u0027s fine.",
+      "parentUuid": "7a4b4d7a_42e48e03",
+      "range": {
+        "startLine": 853,
+        "startChar": 2,
+        "endLine": 853,
+        "endChar": 6
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d181f5f1_c3b73541",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 2
@@ -261,6 +285,30 @@
     },
     {
       "key": {
+        "uuid": "202c4aff_f0f39e66",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-13T16:11:09Z",
+      "side": 1,
+      "message": "No that should not be used for any driver, it is only for hypervisors, again, because you are creating a new user/kernel api that goes around the Treble interfaces.",
+      "parentUuid": "fcb891d6_84b95016",
+      "range": {
+        "startLine": 1001,
+        "startChar": 2,
+        "endLine": 1001,
+        "endChar": 17
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f5eb6d9b_101bf1e1",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 2
@@ -305,6 +353,30 @@
       "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6717238_4b22f0f6",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1046,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-13T16:11:09Z",
+      "side": 1,
+      "message": "Was looking at the wrong branch, sorry :)",
+      "parentUuid": "9ac9fbe3_0cf587bb",
+      "range": {
+        "startLine": 1046,
+        "startChar": 2,
+        "endLine": 1046,
+        "endChar": 12
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -402,6 +474,30 @@
     },
     {
       "key": {
+        "uuid": "052e4070_855b111e",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1169,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-13T16:11:09Z",
+      "side": 1,
+      "message": "Yes, no kernel driver should use this function.",
+      "parentUuid": "6b79512e_435863db",
+      "range": {
+        "startLine": 1169,
+        "startChar": 0,
+        "endLine": 1169,
+        "endChar": 14
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a01c07e0_6c665160",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 2
@@ -437,6 +533,30 @@
       "side": 1,
       "message": "i do see something the drivers are referring\n\n1116 # required by usb_f_mass_storage.ko\n1133   vfs_fsync\n\n1620 # required by frpc-adsprpc.ko\n1621   set_normalized_timespec64\n1622   try_wait_for_completion\n1623   vfs_statx\n\nI will explore other vfs_* functions whether any other drivers are using are not.\nDo you see an issue using vfs_fsync \u0026 vfs_statx at present now?",
       "parentUuid": "a01c07e0_6c665160",
+      "range": {
+        "startLine": 2538,
+        "startChar": 0,
+        "endLine": 2550,
+        "endChar": 11
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6e7e30b_dde3bd10",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 2550,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-13T16:11:09Z",
+      "side": 1,
+      "message": "No vfs_* functions should be used by drivers.",
+      "parentUuid": "4f4a49c4_b88140a9",
       "range": {
         "startLine": 2538,
         "startChar": 0,
