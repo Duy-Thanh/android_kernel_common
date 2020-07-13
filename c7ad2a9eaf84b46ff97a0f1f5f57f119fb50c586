@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "88786752_08ed24a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1697618
+      },
+      "writtenOn": "2020-07-13T14:48:58Z",
+      "side": 1,
+      "message": "The patchset you commented is for quick ahrge type in other structure(power_supply_attrs, power_supply_property).\n\nIn addition, as mentioned in bug 160750558, this change is intended to fix type mismatch between kernel and Android platform, and you were advised to submit this patch AOSP to me",
+      "parentUuid": "8e6b74ee_871bdbbe",
+      "revId": "c7ad2a9eaf84b46ff97a0f1f5f57f119fb50c586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5fc15301_8003fc7e",
         "filename": "include/linux/power_supply.h",
         "patchSetId": 1
@@ -39,6 +57,30 @@
       "revId": "c7ad2a9eaf84b46ff97a0f1f5f57f119fb50c586",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae7c7373_e58e58d1",
+        "filename": "include/linux/power_supply.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1697618
+      },
+      "writtenOn": "2020-07-13T14:48:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fc15301_8003fc7e",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 28
+      },
+      "revId": "c7ad2a9eaf84b46ff97a0f1f5f57f119fb50c586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
