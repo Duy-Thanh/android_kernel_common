@@ -33,6 +33,24 @@
       "revId": "7f7bb08d39bcea13e3e3c0e1d48e589c93f5d8a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d24baf2_f22d057a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-07-13T22:55:58Z",
+      "side": 1,
+      "message": "So this has been submitted upstream\nhttps://lore.kernel.org/lkml/20200625001039.56174-5-john.stultz@linaro.org/\n\nI\u0027m hoping to send another round on it soon, though I have to rework the QCOM_SCM patch first per maintainer feedback.\n\nAs for this submission, it seems ok to me, previously I didn\u0027t submit it to android-5.4 as it wasn\u0027t required like it was for android-mainline to enable QCOM_SCM as a module and wanted to minimize disruption to qcom, so if they want it I don\u0027t have any objections in theory.\n\nI\u0027ve not yet tested this series, so I can\u0027t confirm yet its ok w/ db845c, but I will do that later today after I get through some other tasks.",
+      "parentUuid": "81a1aee6_5daa41fe",
+      "revId": "7f7bb08d39bcea13e3e3c0e1d48e589c93f5d8a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
