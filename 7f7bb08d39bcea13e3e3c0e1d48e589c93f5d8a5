@@ -51,6 +51,24 @@
       "revId": "7f7bb08d39bcea13e3e3c0e1d48e589c93f5d8a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69a892d7_a0eac5eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-13T23:05:44Z",
+      "side": 1,
+      "message": "It sounds like it won\u0027t land upstream right away. Given that this is for Android S, is there any reason we can\u0027t wait for it to land and then backport?",
+      "parentUuid": "6d24baf2_f22d057a",
+      "revId": "7f7bb08d39bcea13e3e3c0e1d48e589c93f5d8a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
