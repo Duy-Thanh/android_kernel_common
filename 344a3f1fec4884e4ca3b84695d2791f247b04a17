@@ -39,6 +39,30 @@
       "revId": "344a3f1fec4884e4ca3b84695d2791f247b04a17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "070b2a87_9f938ab2",
+        "filename": "include/linux/power_supply.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1697618
+      },
+      "writtenOn": "2020-07-14T02:36:15Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "0b91406e_1c368496",
+      "range": {
+        "startLine": 188,
+        "startChar": 33,
+        "endLine": 188,
+        "endChar": 40
+      },
+      "revId": "344a3f1fec4884e4ca3b84695d2791f247b04a17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
