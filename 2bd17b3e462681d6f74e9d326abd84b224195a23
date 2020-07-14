@@ -193,6 +193,24 @@
       "revId": "2bd17b3e462681d6f74e9d326abd84b224195a23",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1736e13_a89f0e7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2020-07-14T13:06:29Z",
+      "side": 1,
+      "message": "I find all CONFIG_USB_STORAGE_* is not defined in arch/arm64/configs/defconfig.\nSo these configures should also do not included in gki configures according former rules. @Todd @Alistair, could do have a confirm?",
+      "parentUuid": "c96c27bc_94d905e5",
+      "revId": "2bd17b3e462681d6f74e9d326abd84b224195a23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
