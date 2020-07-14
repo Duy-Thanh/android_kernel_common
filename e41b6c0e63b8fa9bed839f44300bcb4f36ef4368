@@ -89,6 +89,30 @@
     },
     {
       "key": {
+        "uuid": "e6ba296f_37f4283d",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 3
+      },
+      "lineNbr": 2190,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-14T21:43:59Z",
+      "side": 1,
+      "message": "Murali, The problem is that symbol_get() allows the caller to lookup any symbol so it defeats the whole purpose of a stable KMI (and the notion of EXPORTs). There is no way to maintain stability for symbols found via symbol_get().",
+      "parentUuid": "1e79cf43_7707987a",
+      "range": {
+        "startLine": 2189,
+        "startChar": 2,
+        "endLine": 2190,
+        "endChar": 14
+      },
+      "revId": "e41b6c0e63b8fa9bed839f44300bcb4f36ef4368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "874bb5f4_3d8df2c7",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 3
