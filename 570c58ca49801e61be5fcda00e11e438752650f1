@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a95a491_10db0b07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-07-14T22:27:43Z",
+      "side": 1,
+      "message": "-1 for now; I\u0027d like more information on the bug from the reporter as to what symbol is failing in what driver, so that we might have a better sense for why merging these sections appears to be problematic.  Otherwise this is just guessing at what\u0027s going wrong without understanding it.",
+      "revId": "570c58ca49801e61be5fcda00e11e438752650f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
