@@ -246,6 +246,24 @@
       "revId": "2bd17b3e462681d6f74e9d326abd84b224195a23",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "31b191df_e18df62c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2020-07-14T13:34:41Z",
+      "side": 1,
+      "message": "I only have one concern about your change. CONFIG_USB_UAS is not define in archarm64/configs/deconfig, can it been defined in gki by default?",
+      "parentUuid": "f2955ef9_c5f7ea2a",
+      "revId": "2bd17b3e462681d6f74e9d326abd84b224195a23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
