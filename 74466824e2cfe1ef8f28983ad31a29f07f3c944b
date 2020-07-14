@@ -829,6 +829,30 @@
       "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c11b4ddf_aa6e2312",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 2550,
+      "author": {
+        "id": 1729710
+      },
+      "writtenOn": "2020-07-14T19:05:09Z",
+      "side": 1,
+      "message": "Hi Greg, I am from the fastrpc team and we use the \"vfs_stat\" API in our driver. Our usecase is pretty simple - to check if a particular device file is present on the target filesystem.\n\nSince the API has been deprecated now, do you have any safe alternatives for stat-ing a file?",
+      "parentUuid": "c629578c_6fdab207",
+      "range": {
+        "startLine": 2538,
+        "startChar": 0,
+        "endLine": 2550,
+        "endChar": 11
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
