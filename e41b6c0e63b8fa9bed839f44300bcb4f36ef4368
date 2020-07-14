@@ -113,6 +113,30 @@
     },
     {
       "key": {
+        "uuid": "50398b36_dbcd725d",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 3
+      },
+      "lineNbr": 2190,
+      "author": {
+        "id": 1721954
+      },
+      "writtenOn": "2020-07-14T22:06:24Z",
+      "side": 1,
+      "message": "thanks for details",
+      "parentUuid": "e6ba296f_37f4283d",
+      "range": {
+        "startLine": 2189,
+        "startChar": 2,
+        "endLine": 2190,
+        "endChar": 14
+      },
+      "revId": "e41b6c0e63b8fa9bed839f44300bcb4f36ef4368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "874bb5f4_3d8df2c7",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 3
