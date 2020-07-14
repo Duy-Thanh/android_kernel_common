@@ -405,6 +405,30 @@
     },
     {
       "key": {
+        "uuid": "d0b93e26_ac9623fd",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-14T06:20:35Z",
+      "side": 1,
+      "message": "What is the expected use for this given that I don\u0027t see that sysfs path api being used by any HAL?\n\nAnd why would this be needed for GKI 1.0?",
+      "parentUuid": "bd530b33_fea03437",
+      "range": {
+        "startLine": 1001,
+        "startChar": 2,
+        "endLine": 1001,
+        "endChar": 17
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f5eb6d9b_101bf1e1",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 2
@@ -757,6 +781,30 @@
       "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c629578c_6fdab207",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 2550,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-14T06:20:35Z",
+      "side": 1,
+      "message": "Done?",
+      "parentUuid": "77fc76d7_1a9b3788",
+      "range": {
+        "startLine": 2538,
+        "startChar": 0,
+        "endLine": 2550,
+        "endChar": 11
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
