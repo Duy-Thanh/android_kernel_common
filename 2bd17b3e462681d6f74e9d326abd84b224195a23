@@ -139,6 +139,24 @@
       "revId": "2bd17b3e462681d6f74e9d326abd84b224195a23",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "527d25a0_37f2dae6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-14T07:42:29Z",
+      "side": 1,
+      "message": "You will want all of those vendor-specific devices as well, as you do not control what people plug into your system, right?\n\nIn looking at this further, yes, I think we should enable this, and CONFIG_UAB_UAS as well.  Other vendors have also asked for this.  If you redo this patch with all of the above enabled I will be glad to accept it.",
+      "parentUuid": "0ed4dd29_8f5e2adf",
+      "revId": "2bd17b3e462681d6f74e9d326abd84b224195a23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
