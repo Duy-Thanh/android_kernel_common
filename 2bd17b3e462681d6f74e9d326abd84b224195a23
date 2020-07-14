@@ -87,6 +87,23 @@
       "revId": "2bd17b3e462681d6f74e9d326abd84b224195a23",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e9848ba_722f9a30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-14T06:15:24Z",
+      "side": 1,
+      "message": "As these options are not required for CTS compliance, why are they needed in the base GKI image?\n\nCan\u0027t you just enable them in your own kernel configuration fragment for your board instead?",
+      "revId": "2bd17b3e462681d6f74e9d326abd84b224195a23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
