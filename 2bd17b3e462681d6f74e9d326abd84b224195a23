@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8c2d2303_4fda633a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2020-07-14T01:09:09Z",
+      "side": 1,
+      "message": "I mean \"U disk\", it\u0027s used widely in vehicle device.\n\"USB Attached SCSI“ is used for moving data either to or from system using different types of USB storage devices like hard disk drives or HDDs.\nSo I do not add UAS here.\n\nAnd what\u0027s the other configure about usb-storage do you mean? It seems I do not need them if I just enable U disk.",
+      "parentUuid": "68c950bd_4f6e6878",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 35
+      },
+      "revId": "2bd17b3e462681d6f74e9d326abd84b224195a23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fbb19450_0e8917f5",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
