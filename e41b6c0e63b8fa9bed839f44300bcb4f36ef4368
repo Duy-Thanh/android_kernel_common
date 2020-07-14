@@ -114,6 +114,24 @@
       "revId": "e41b6c0e63b8fa9bed839f44300bcb4f36ef4368",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "571d51a4_c34105ab",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 3
+      },
+      "lineNbr": 2538,
+      "author": {
+        "id": 1721954
+      },
+      "writtenOn": "2020-07-14T18:20:32Z",
+      "side": 1,
+      "message": "I am checking with the driver owner internally to understand the motivation.\nCurious, is it a problem to use these APIs by drivers?",
+      "parentUuid": "0f39c5a9_1f2916af",
+      "revId": "e41b6c0e63b8fa9bed839f44300bcb4f36ef4368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
