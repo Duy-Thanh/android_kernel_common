@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "683581f8_36312252",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 3
+      },
+      "lineNbr": 1256,
+      "author": {
+        "id": 1721954
+      },
+      "writtenOn": "2020-07-14T16:09:03Z",
+      "side": 1,
+      "message": "These symbols are required by many modules. some of them are\n\nSymbol __list_add_valid required by sps_drv.ko but not provided\nSymbol __list_del_entry_valid required by sps_drv.ko but not provided\n.\n.\nSymbol __list_del_entry_valid required by msm-cvp.ko but not provided",
+      "range": {
+        "startLine": 1256,
+        "startChar": 2,
+        "endLine": 1256,
+        "endChar": 24
+      },
+      "revId": "e41b6c0e63b8fa9bed839f44300bcb4f36ef4368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "679077ea_27a80441",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 3
+      },
+      "lineNbr": 1692,
+      "author": {
+        "id": 1721954
+      },
+      "writtenOn": "2020-07-14T16:09:03Z",
+      "side": 1,
+      "message": "some of the modules required are \nSymbol ___ratelimit required by msm-vidc.ko but not provided\nSymbol ___ratelimit required by wcd938x_dlkm.ko but not provided\nSymbol ___ratelimit required by dwc3.ko but not provided\nSymbol ___ratelimit required by usb_f_diag.ko but not provided\nSymbol ___ratelimit required by msm_ion_heaps.ko but not provided",
+      "revId": "e41b6c0e63b8fa9bed839f44300bcb4f36ef4368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "874bb5f4_3d8df2c7",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 3
+      },
+      "lineNbr": 2237,
+      "author": {
+        "id": 1721954
+      },
+      "writtenOn": "2020-07-14T16:09:03Z",
+      "side": 1,
+      "message": "Symbol time64_to_tm required by synx-driver.ko but not provided",
+      "revId": "e41b6c0e63b8fa9bed839f44300bcb4f36ef4368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b47b822_2f388bd4",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 3
+      },
+      "lineNbr": 2538,
+      "author": {
+        "id": 1721954
+      },
+      "writtenOn": "2020-07-14T16:09:03Z",
+      "side": 1,
+      "message": "Symbol vfs_statx required by frpc-adsprpc.ko but not provided",
+      "revId": "e41b6c0e63b8fa9bed839f44300bcb4f36ef4368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
