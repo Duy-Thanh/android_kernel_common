@@ -105,6 +105,23 @@
       "revId": "7f7bb08d39bcea13e3e3c0e1d48e589c93f5d8a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "019c8f27_fecbac34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2020-07-14T22:18:58Z",
+      "side": 1,
+      "message": "I have raised these changes to have common changes between android-11-5.4 and android-12-5.4 branches. \n\nIt would be great if you have all the three active branches(android-11-5.4, android-12-5.4 and android-mainline) have same set of changes. \n\n-Thanks, Prasad",
+      "revId": "7f7bb08d39bcea13e3e3c0e1d48e589c93f5d8a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
