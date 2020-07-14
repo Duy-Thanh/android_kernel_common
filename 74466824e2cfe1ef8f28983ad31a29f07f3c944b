@@ -853,6 +853,30 @@
       "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc07df37_ea7483a4",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 2550,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-14T19:37:08Z",
+      "side": 1,
+      "message": "Why do you care about a file at all?  The fastrpc driver in mainline does not call any vfs_* functions, why does your modified one do that?",
+      "parentUuid": "c11b4ddf_aa6e2312",
+      "range": {
+        "startLine": 2538,
+        "startChar": 0,
+        "endLine": 2550,
+        "endChar": 11
+      },
+      "revId": "74466824e2cfe1ef8f28983ad31a29f07f3c944b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }

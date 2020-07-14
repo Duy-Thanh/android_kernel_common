@@ -132,6 +132,24 @@
       "revId": "e41b6c0e63b8fa9bed839f44300bcb4f36ef4368",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c093d0e8_660ec0a8",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 3
+      },
+      "lineNbr": 2538,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-14T19:37:08Z",
+      "side": 1,
+      "message": "Yes, drivers should never touch a filesystem, that shows there is a user/kernel abi there that should not be there.",
+      "parentUuid": "571d51a4_c34105ab",
+      "revId": "e41b6c0e63b8fa9bed839f44300bcb4f36ef4368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
