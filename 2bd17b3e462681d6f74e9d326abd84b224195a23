@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "db311be9_66dcd0bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2020-07-14T01:52:54Z",
+      "side": 1,
+      "message": "maybe we still no need UAS which support high speed transation on vehicle devices.\nI will add back UAS and have a test on imx device if you want to enable it by default.",
+      "parentUuid": "8c2d2303_4fda633a",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 35
+      },
+      "revId": "2bd17b3e462681d6f74e9d326abd84b224195a23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fbb19450_0e8917f5",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
