@@ -211,6 +211,23 @@
       "revId": "2bd17b3e462681d6f74e9d326abd84b224195a23",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7511d52c_6ef42254",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-14T13:09:10Z",
+      "side": 1,
+      "message": "See https://android-review.googlesource.com/c/kernel/common/+/1361929 for this enabling both options, you are right, we can keep the other storage \"drivers\" out for now, they are not needed for GKI 1.0 at all.",
+      "revId": "2bd17b3e462681d6f74e9d326abd84b224195a23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
