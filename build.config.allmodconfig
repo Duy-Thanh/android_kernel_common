@@ -9,6 +9,14 @@ function update_config() {
          -d CPU_BIG_ENDIAN \
          -d STM \
          -d TEST_MEMCAT_P \
+	 -d NFS_V4		\
+	 -d CAIF		\
+	 -d FSL_ENETC		\
+	 -d FSL_ENETC_VF	\
+	 -d DRM_I915		\
+	 -d MEDIA_PCI_SUPPORT	\
+	 -d DVB_USB		\
+	 -d DVB_USB_V2		\
          -e UNWINDER_FRAME_POINTER \
 
     (cd ${OUT_DIR} && \
