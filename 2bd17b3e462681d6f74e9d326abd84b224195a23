@@ -175,6 +175,24 @@
       "revId": "2bd17b3e462681d6f74e9d326abd84b224195a23",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c96c27bc_94d905e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-14T12:52:42Z",
+      "side": 1,
+      "message": "We do not support gki modules for 1.0, sorry, just build them all into the kernel.",
+      "parentUuid": "82496b2d_a598810b",
+      "revId": "2bd17b3e462681d6f74e9d326abd84b224195a23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
