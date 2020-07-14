@@ -87,6 +87,24 @@
       "revId": "7f7bb08d39bcea13e3e3c0e1d48e589c93f5d8a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c052bb93_5cb6fae1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2020-07-14T22:16:47Z",
+      "side": 1,
+      "message": "Hi John, \n\nI just checked your upstream change and observed that help text is missing. Without the help text, menuconfig would not give chance to update the config file. \n\ndrivers/pinctrl/qcom/Kconfig\n\n\nconfig PINCTRL_MSM\nhelp\n          This is Qualcomm Technologies, Inc msm platform TLMM\n\t  generic driver. This provides interfaces to chipset specific\n\t  clients drivers use the TLMM block.\n\t  Say yes here to enable Qualcomm TLMM driver.\n\n-Thanks, Prasad",
+      "parentUuid": "9d92927f_fb83d0c7",
+      "revId": "7f7bb08d39bcea13e3e3c0e1d48e589c93f5d8a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
