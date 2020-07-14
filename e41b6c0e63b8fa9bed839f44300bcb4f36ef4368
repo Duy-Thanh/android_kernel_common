@@ -65,6 +65,30 @@
     },
     {
       "key": {
+        "uuid": "1e79cf43_7707987a",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 3
+      },
+      "lineNbr": 2190,
+      "author": {
+        "id": 1721954
+      },
+      "writtenOn": "2020-07-14T21:31:50Z",
+      "side": 1,
+      "message": "Do you see an issue?\nWe have an external driver which is referring below symbols.\nI just glance through kernel and there are other drivers which are using these symbols.\n\n#define symbol_put(x) __symbol_put(__stringify(x))\n#define symbol_get(x) ((typeof(\u0026x))(__symbol_get(__stringify(x))))",
+      "parentUuid": "c2ef947a_89cc29af",
+      "range": {
+        "startLine": 2189,
+        "startChar": 2,
+        "endLine": 2190,
+        "endChar": 14
+      },
+      "revId": "e41b6c0e63b8fa9bed839f44300bcb4f36ef4368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "874bb5f4_3d8df2c7",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 3
