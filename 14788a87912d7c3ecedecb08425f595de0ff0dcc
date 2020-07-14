@@ -16,6 +16,29 @@
       "revId": "14788a87912d7c3ecedecb08425f595de0ff0dcc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79276853_51e08139",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-07-14T00:03:19Z",
+      "side": 1,
+      "message": "typo: shrunk",
+      "range": {
+        "startLine": 338,
+        "startChar": 28,
+        "endLine": 338,
+        "endChar": 29
+      },
+      "revId": "14788a87912d7c3ecedecb08425f595de0ff0dcc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
