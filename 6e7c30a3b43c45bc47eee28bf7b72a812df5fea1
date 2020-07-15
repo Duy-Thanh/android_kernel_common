@@ -51,6 +51,24 @@
       "revId": "6e7c30a3b43c45bc47eee28bf7b72a812df5fea1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa4379d2_347305ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-15T13:55:38Z",
+      "side": 1,
+      "message": "In the future, using links from lore.kernel.org is nicer as lkml.org does not work well for many users, and is not under control by the kernel community.\n\nYou can use the lore.kernel.org link as a FROMLIST: header for this patch.",
+      "parentUuid": "69062b24_cdca6cf2",
+      "revId": "6e7c30a3b43c45bc47eee28bf7b72a812df5fea1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
