@@ -33,6 +33,24 @@
       "revId": "6e7c30a3b43c45bc47eee28bf7b72a812df5fea1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69062b24_cdca6cf2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1697618
+      },
+      "writtenOn": "2020-07-15T13:31:43Z",
+      "side": 1,
+      "message": "I submitted this patch to Linux mainline. Please refer to https://lkml.org/lkml/2020/7/15/68",
+      "parentUuid": "211e05bc_7bddb5a1",
+      "revId": "6e7c30a3b43c45bc47eee28bf7b72a812df5fea1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
