@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6bb16b7d_87b6ad65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-15T19:03:24Z",
+      "side": 1,
+      "message": "Can you upload the same version to both branches so I can see the diff? Uploading the new version here is probably easiest as it is too late to upload the old version as patchset 1 in the new branch.",
+      "parentUuid": "74592679_14d0e5aa",
+      "revId": "367973bd99509e22b6171a2ae4769d6dc628e602",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "441582ee_fdf052ae",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 3
