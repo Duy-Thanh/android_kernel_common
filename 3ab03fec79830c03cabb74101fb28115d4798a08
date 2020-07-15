@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2bf7148_27eeb67e",
+        "filename": "include/drm/drm_panel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-15T21:20:57Z",
+      "side": 1,
+      "message": "There are no users of this. Why is it needed outside vendor modules. Seems like it should be defined in some qcom-specific header file",
+      "revId": "3ab03fec79830c03cabb74101fb28115d4798a08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
