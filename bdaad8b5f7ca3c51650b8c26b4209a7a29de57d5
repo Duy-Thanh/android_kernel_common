@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a219deea_2ad67f15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-07-15T16:50:25Z",
+      "side": 1,
+      "message": "\u003e ANDROID: commits need to contain a Bug: or Fixes: line\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nPlease fix.",
+      "parentUuid": "d7bf60ce_a13326e4",
+      "revId": "bdaad8b5f7ca3c51650b8c26b4209a7a29de57d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
