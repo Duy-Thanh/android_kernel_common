@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "74592679_14d0e5aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-07-15T18:57:39Z",
+      "side": 1,
+      "message": "See https://android-review.googlesource.com/c/kernel/common/+/1363878 for new change, evidently targeting android-trusty-5.4 makes a new change, even with the same Change-Id",
+      "revId": "367973bd99509e22b6171a2ae4769d6dc628e602",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "441582ee_fdf052ae",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 3
