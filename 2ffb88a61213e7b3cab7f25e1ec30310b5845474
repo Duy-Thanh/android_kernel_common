@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63095b41_fc56cbb5",
+        "filename": "include/uapi/linux/trusty/ioctl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-15T22:50:25Z",
+      "side": 1,
+      "message": "I think this should be trusty-ipc.h or something similar. We may want to expose other trusty user-space interfaces.",
+      "revId": "2ffb88a61213e7b3cab7f25e1ec30310b5845474",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
