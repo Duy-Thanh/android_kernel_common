@@ -34,6 +34,24 @@
       "revId": "1db4447cab4df7a5dcc98d76e2b01c534505591f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7731b907_80dcdfbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-07-15T18:07:57Z",
+      "side": 1,
+      "message": "NB: I ran build_abi.sh --update.\n\nalloc_io_pgtable_ops is \u0027require by\u0027 arm_smmu.ko according to db845c for example. There is no way for this symbol to disappear. I should have a build error.\n\nI will investigate some more, otherwise removing symbols from qcom and db845c lists and upload.",
+      "parentUuid": "80c29c91_da3a39df",
+      "revId": "1db4447cab4df7a5dcc98d76e2b01c534505591f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
