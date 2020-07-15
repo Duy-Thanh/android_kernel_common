@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a302221e_6cbd7c85",
+        "filename": "include/drm/drm_panel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-15T21:31:42Z",
+      "side": 1,
+      "message": "How about using ANDROID_VENDOR_DATA? Since both refresh_rate and id are 32-bit you could use 1 ANDROID_VENDOR_DATA() field for both. Your call.",
+      "revId": "b99519544144fe292ff909bd4d5530f18da1ef63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
