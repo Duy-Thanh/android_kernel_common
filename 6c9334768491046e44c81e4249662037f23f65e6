@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5fd12dec_38c7be6b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-07-15T16:49:01Z",
+      "side": 1,
+      "message": "\u003e Commit does not have a valid tag, such as ANDROID:\n\u003e \n\u003e ANDROID: Patch only relevant for Android, unlikely to be upstreamed\n\u003e FROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\u003e UPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\n\u003e FROMGIT: Patch from an upstream git repository, needs reference to upstream sha\n\u003e BACKPORT: Modified patch from upstream, needs reference to upstream sha\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nPlease fix.",
+      "parentUuid": "135bf99b_f07b0d38",
+      "revId": "6c9334768491046e44c81e4249662037f23f65e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
