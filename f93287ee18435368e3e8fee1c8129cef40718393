@@ -34,6 +34,24 @@
       "revId": "f93287ee18435368e3e8fee1c8129cef40718393",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a26cdbb_bae3a88c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-07-15T20:14:15Z",
+      "side": 1,
+      "message": "I am expecting build_abi.sh to tell me about the whitelist issue, but I guess I can merge that into my build/test/test/checkin script.",
+      "parentUuid": "56b90ddd_e4c34a21",
+      "revId": "f93287ee18435368e3e8fee1c8129cef40718393",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
