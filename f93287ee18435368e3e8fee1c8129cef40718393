@@ -52,6 +52,24 @@
       "revId": "f93287ee18435368e3e8fee1c8129cef40718393",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b0460f3_3069623e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-07-15T20:16:14Z",
+      "side": 1,
+      "message": "It fails the build (the normal build.sh), see https://android-build.googleplex.com/builds/pending/P15685570/kernel_aarch64/latest/view/logs/build_error.log:\n\n ERROR: Differences between ksymtab and whitelist detected!\n Symbols missing from ksymtab:\n  - alloc_io_pgtable_ops\n  - free_io_pgtable_ops\n  - of_genpd_add_provider_onecell\n  - of_genpd_add_provider_simple\n  - of_genpd_add_subdomain\n  - of_genpd_del_provider\n  - pm_genpd_add_subdomain\n  - pm_genpd_init\n  - pm_genpd_remove\n  - pm_genpd_remove_subdomain\n  - qcom_smem_state_get\n  - qcom_smem_state_register\n  - qcom_smem_state_unregister\n  - qcom_smem_state_update_bits\n  - wireless_send_event\n Symbols missing from whitelist:",
+      "parentUuid": "0a26cdbb_bae3a88c",
+      "revId": "f93287ee18435368e3e8fee1c8129cef40718393",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
