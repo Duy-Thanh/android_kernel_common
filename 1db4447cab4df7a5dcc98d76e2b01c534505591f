@@ -52,6 +52,24 @@
       "revId": "1db4447cab4df7a5dcc98d76e2b01c534505591f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40cc5aae_163dad67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-07-15T18:52:24Z",
+      "side": 1,
+      "message": "Note, in addition to what you are saying in the commit message of the parent change, you are also removing `select GKI_HIDDEN_QCOM_CONFIGS` from the `GKI_HACKS_TO_FIX`. Is that relevant?",
+      "parentUuid": "7731b907_80dcdfbb",
+      "revId": "1db4447cab4df7a5dcc98d76e2b01c534505591f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
