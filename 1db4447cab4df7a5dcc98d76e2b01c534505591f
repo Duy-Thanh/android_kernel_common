@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b8132a0_318c1a88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-07-15T15:40:35Z",
+      "side": 1,
+      "message": "What is wrong with build_abi.sh, it appears to be ignoring the qcom+db845 symbol lists?",
+      "revId": "1db4447cab4df7a5dcc98d76e2b01c534505591f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
