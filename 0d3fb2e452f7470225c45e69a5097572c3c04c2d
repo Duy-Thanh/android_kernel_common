@@ -34,6 +34,23 @@
       "revId": "0d3fb2e452f7470225c45e69a5097572c3c04c2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a53e8b8e_7ac53036",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-07-16T15:45:11Z",
+      "side": 1,
+      "message": "My sm8150 device has broken Bluetooth without this module built-in ( because of the earlycon module param, here used for console ) \nBT can be used connected UART via the GENI console",
+      "revId": "0d3fb2e452f7470225c45e69a5097572c3c04c2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
