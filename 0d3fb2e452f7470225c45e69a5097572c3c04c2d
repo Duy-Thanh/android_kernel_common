@@ -51,6 +51,41 @@
       "revId": "0d3fb2e452f7470225c45e69a5097572c3c04c2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c27fada_c02b0011",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-07-16T16:12:20Z",
+      "side": 1,
+      "message": "Most for debugging purpose I think, if we do not have the serial console enabled early, we could not see any log on the serial console unless the qcom_geni_serial.ko module loaded successfully.\n\nFor example, with the CONFIG_USB_EHCI_HCD enabled in gki_defconfig by default, we should remove it from the db845c_gki.fragment, otherwise there would be ko loading problem in the first stable of boot which would cause the board reboot and reboot again.\nWith the serial console enabled early, we could see the message obviously like here: https://pastebin.ubuntu.com/p/KS4QNkfvKS/\n\nBut if we do not have the serial console enabled early, there is nothing useful printed on the serial console, like the output here: https://pastebin.ubuntu.com/p/SNSpK4FVGS/\n\nSo I think we should have the console module built in the kernel by default, to help identify the problem quickly.",
+      "parentUuid": "4b89eb3a_a05e86b1",
+      "revId": "0d3fb2e452f7470225c45e69a5097572c3c04c2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ddff129_746a5414",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-07-16T16:12:20Z",
+      "side": 1,
+      "message": "Sorry, there are still other problems need to be fixed,\nwill check that first, and then mark it for review again. ",
+      "revId": "0d3fb2e452f7470225c45e69a5097572c3c04c2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
