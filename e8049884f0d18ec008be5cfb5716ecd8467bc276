@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1233cbbd_fe90f6d2",
+        "filename": "arch/arm64/configs/db845c_gki.fragment",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1506597
+      },
+      "writtenOn": "2020-07-16T21:05:59Z",
+      "side": 1,
+      "message": "CONFIG_QCOM_RPMH\u003dy should be removed from gki_defconfig as well.",
+      "revId": "e8049884f0d18ec008be5cfb5716ecd8467bc276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
