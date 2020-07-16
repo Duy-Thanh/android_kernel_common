@@ -16,6 +16,24 @@
       "revId": "522f9fa2781209af7a3123c061c66423220dcab1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1492dfa0_db81dddc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-07-16T11:34:22Z",
+      "side": 1,
+      "message": "Hm yeah, this indeed breaks the ABI, but is the ABI _stable_ in here yet?\nI\u0027d rather prefer to see it changing",
+      "parentUuid": "136c30b4_1639d7a9",
+      "revId": "522f9fa2781209af7a3123c061c66423220dcab1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
