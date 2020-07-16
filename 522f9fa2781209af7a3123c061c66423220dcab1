@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "136c30b4_1639d7a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-16T11:32:35Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1:\n\u003e \n\u003e Was this meant for the 12 branch?\n\nYup, it\u0027s an abi breakage fix.\n\nAh, hm, do we care about it for this branch, good question, let me go figure that out...",
+      "revId": "522f9fa2781209af7a3123c061c66423220dcab1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
