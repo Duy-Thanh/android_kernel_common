@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f8a361a8_03310698",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2020-07-17T09:31:22Z",
+      "side": 1,
+      "message": "I\u0027d very much like this change or upstream backport to be cherry-picked on android12-5.4 as well. The initial driver, which we merged for db845c in android-5.4 is a bit picky about the monitors and almost never work with HD TVs. My usual monitor gave up today and had to connect to a TV display and it worked thanks to this patch on android11-5.4 series.",
+      "revId": "f2ddade04bf369176b477fbc7a7d14b82d2777f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
