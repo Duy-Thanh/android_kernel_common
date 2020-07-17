@@ -16,6 +16,24 @@
       "revId": "2ffb88a61213e7b3cab7f25e1ec30310b5845474",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9491f19c_19498c6d",
+        "filename": "include/uapi/linux/trusty/ioctl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-07-17T19:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63095b41_fc56cbb5",
+      "revId": "2ffb88a61213e7b3cab7f25e1ec30310b5845474",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
