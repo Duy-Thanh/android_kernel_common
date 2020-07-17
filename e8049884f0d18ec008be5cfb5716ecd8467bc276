@@ -16,6 +16,24 @@
       "revId": "e8049884f0d18ec008be5cfb5716ecd8467bc276",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b914a6d_201dd549",
+        "filename": "arch/arm64/configs/db845c_gki.fragment",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-17T00:20:39Z",
+      "side": 1,
+      "message": "Done earlier in the series: aosp/1365004",
+      "parentUuid": "1233cbbd_fe90f6d2",
+      "revId": "e8049884f0d18ec008be5cfb5716ecd8467bc276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
