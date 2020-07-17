@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "eea1ef3e_676041b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2020-07-17T22:33:01Z",
+      "side": 1,
+      "message": "Probably, this is QC code. Should we ask them to upstream it?",
+      "parentUuid": "323373c5_4c1f898e",
+      "revId": "f35f6c67461f20ebaa363a6ff772e890f123c561",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96c1c841_0c672786",
         "filename": "sound/soc/soc-compress.c",
         "patchSetId": 1
