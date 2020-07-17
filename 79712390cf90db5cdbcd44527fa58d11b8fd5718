@@ -33,6 +33,24 @@
       "revId": "79712390cf90db5cdbcd44527fa58d11b8fd5718",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6da6fc5_e327db27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-17T14:45:00Z",
+      "side": 1,
+      "message": "Failure looks bogus:\n+ make O\u003d/buildbot/src/android/common-android11-5.4/out/android11-5.4/common CC\u003dclang HOSTCC\u003dclang LD\u003dld.lld NM\u003dllvm-nm OBJCOPY\u003dllvm-objcopy DEPMOD\u003ddepmod -j80\nfatal: this operation must be run in a work tree\nLLVM ERROR: IO failure on output stream: Broken pipe\nLLVM ERROR: IO failure on output stream: Broken pipe\nLLVM ERROR: IO failure on output stream: Broken pipe\nLLVM ERROR: IO failure on output stream: Broken pipe\nLLVM ERROR: IO failure on output stream: Broken pipe\nLLVM ERROR: IO failure on output stream: Broken pipe\nLLVM ERROR: IO failure on output stream: Broken pipe\n\n\nRetrying...",
+      "parentUuid": "15370bbb_8c106b3f",
+      "revId": "79712390cf90db5cdbcd44527fa58d11b8fd5718",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
