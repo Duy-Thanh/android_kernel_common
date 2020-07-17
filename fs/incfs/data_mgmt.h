@@ -130,6 +130,7 @@ struct mount_info {
 	 *  - data_file_segment.reads_list_head
 	 */
 	struct mutex mi_pending_reads_mutex;
+	rwlock_t rwlock;
 
 	/* List of active pending_read objects */
 	struct list_head mi_reads_list_head;

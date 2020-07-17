@@ -845,12 +845,6 @@ static int wait_for_data_block(struct data_file *df, int block_index,
 	if (error)
 		return error;
 
-	/* If the block was found, just return it. No need to wait. */
-	if (is_data_block_present(&block)) {
-		*res_block = block;
-		return 0;
-	}
-
 	mi = df->df_mount_info;
 
 	if (timeout_ms == 0) {
