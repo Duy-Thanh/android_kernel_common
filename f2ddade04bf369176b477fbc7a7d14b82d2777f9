@@ -16,6 +16,24 @@
       "revId": "f2ddade04bf369176b477fbc7a7d14b82d2777f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c272b7c_89e7bbfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-17T10:31:38Z",
+      "side": 1,
+      "message": "Feel free to submit the patches to that branch and we will be glad to review them.",
+      "parentUuid": "f8a361a8_03310698",
+      "revId": "f2ddade04bf369176b477fbc7a7d14b82d2777f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
