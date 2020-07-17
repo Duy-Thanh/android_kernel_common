@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64845f8a_65d30d1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1248639
+      },
+      "writtenOn": "2020-07-17T05:44:51Z",
+      "side": 1,
+      "message": "\u003e Patch Set 4:\n\u003e \n\u003e \u003e Patch Set 4:\n\u003e \u003e \n\u003e \u003e Miles, you can use gki_defconfig to boot in QEMU, we are booting our cuttlefish virtual platform with it. I don\u0027t have a problem with this tiny patch, but I don\u0027t understand how it helps. If you are bisecting, most of your bisection points will not have this change (because it\u0027s on the Android Common Kernel branch) so you will have to cherry-pick it at each bisection point anyway, why not just cherry-pick gki_defconfig?\n\u003e \n\u003e Yes, I agree that people have to cherry-pick this change when bisecting. But they have to know which patch to cherry-pick first. With the proper commit message (with error messages), people can find the fix easier.\n\u003e If we can merge this patch to android-4.19-stable, people will first solve the mount issue by bisecting to this patch and they will do the cheery-pick for other bisect points.\n\u003e \n\u003e Thanks for telling me that gki_defconfig works. However, there is no gki_defconfig in Linux, so it is more convenient to make defconfig works for both Linux and android common kernel. People can boot Linux and android common kernel with defconfig.\n\u003e \n\u003e It took me a few days to get this point. When I did bisect between (4.19.80-4.19.130), there are some bisect points have the a result of \"boot failed with no console output\" (not boot failed because of CONFIG_TMPFS\u003dn), it makes the bisecting more difficult. \n\u003e \n\u003e android-4.19.80 (boot pass)\n\u003e andorid-4.19.105 (boot pass)\n\u003e android-4.19.106 (boot failed because of CONFIG_TMPFS\u003dn)\n\u003e android-4.19.130 (boot failed because of CONFIG_TMPFS\u003dn)\n\nI tried gki_defconfig@android-4.19 but it does not work on my QEMU.\n\nmount: mounting devtmpfs on /dev failed: No such device\n[    5.327322] start-udev (146) used greatest stack depth: 13312 bytes left\n[    5.330409] Kernel panic - not syncing: Attempted to kill init! exitcode\u003d0x0000ff00\n[    5.330409]\n[    5.330853] CPU: 0 PID: 1 Comm: init Not tainted 4.19.132-00053-g84e816e75331 #2\n[    5.331040] Hardware name: linux,dummy-virt (DT)\n[    5.331283] Call trace:\n[    5.331409]  dump_backtrace.cfi_jt+0x0/0x4\n[    5.331568]  dump_stack+0xbc/0xf8\n[    5.331663]  panic+0x150/0x350\n[    5.331750]  exit_mm+0x0/0x1fc\n[    5.331831]  __arm64_sys_exit_group+0x0/0x14\n[    5.331938]  __wake_up_parent+0x0/0x30\n[    5.332039]  __se_sys_exit_group+0x0/0x14\n[    5.332140]  el0_svc_common+0xb4/0x18c\n[    5.332235]  el0_svc_handler+0x60/0x6c\n[    5.332329]  el0_svc+0x8/0xc\n[    5.332605] SMP: stopping secondary CPUs\n[    5.336073] Kernel Offset: disabled\n[    5.336300] CPU features: 0x00000000,20006002\n[    5.336433] Memory Limit: none\n[    5.336762] Rebooting in 5 seconds..\n",
+      "revId": "60b65ce412ef726ed42e16680583c92527e15c3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
