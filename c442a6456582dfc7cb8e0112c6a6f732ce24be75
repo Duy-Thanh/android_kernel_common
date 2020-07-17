@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9aa64832_7355318c",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-17T00:12:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6dfe358e_7ea5e661",
+      "range": {
+        "startLine": 235,
+        "startChar": 47,
+        "endLine": 235,
+        "endChar": 48
+      },
+      "revId": "c442a6456582dfc7cb8e0112c6a6f732ce24be75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "942722ff_183d3601",
         "filename": "drivers/trusty/trusty.c",
         "patchSetId": 22
@@ -45,6 +69,30 @@
       "revId": "c442a6456582dfc7cb8e0112c6a6f732ce24be75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9e1ad3b_3682ce14",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-17T00:12:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "942722ff_183d3601",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 298,
+        "endChar": 11
+      },
+      "revId": "c442a6456582dfc7cb8e0112c6a6f732ce24be75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "b6f2e30a_7639fd50",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-17T00:12:01Z",
+      "side": 1,
+      "message": "I don\u0027t need it anymore, it is a leftover from code below using it.",
+      "parentUuid": "54853fe3_c5b17634",
+      "range": {
+        "startLine": 335,
+        "startChar": 0,
+        "endLine": 335,
+        "endChar": 15
+      },
+      "revId": "c442a6456582dfc7cb8e0112c6a6f732ce24be75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c4c45ec4_547f62cd",
         "filename": "drivers/trusty/trusty.c",
         "patchSetId": 22
@@ -82,6 +154,30 @@
       "writtenOn": "2020-03-25T19:46:56Z",
       "side": 1,
       "message": "You need to pass ID here.",
+      "range": {
+        "startLine": 546,
+        "startChar": 47,
+        "endLine": 546,
+        "endChar": 48
+      },
+      "revId": "c442a6456582dfc7cb8e0112c6a6f732ce24be75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "671ac989_43a99819",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-17T00:12:01Z",
+      "side": 1,
+      "message": "I think the spec is a little unclear on that. For the matching map call we did not pass an id. The description of FFA_RXTX_UNMAP says the hypervisor passes the id in w1, so it seem like an oversight that it is not mentioned in the description of w1 itself what the value should be when called from the endpoint.",
+      "parentUuid": "c4c45ec4_547f62cd",
       "range": {
         "startLine": 546,
         "startChar": 47,

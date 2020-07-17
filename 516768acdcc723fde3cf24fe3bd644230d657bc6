@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a147c4fe_d6a5d714",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-17T00:12:01Z",
+      "side": 1,
+      "message": "Some resolved comments are addressed in https://android-review.googlesource.com/c/kernel/common/+/1364120 patchset 2",
+      "revId": "516768acdcc723fde3cf24fe3bd644230d657bc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
