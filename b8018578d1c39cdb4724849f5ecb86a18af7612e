@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ffe5188d_0bb9d75e",
+        "filename": "drivers/staging/android/ion/ion_dma_buf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2020-07-19T06:29:09Z",
+      "side": 1,
+      "message": "warning: unused variable \u0027vaddr\u0027 [-Wunused-variable]\n\nPlease consider a follow up patch to address this compiler warning.",
+      "revId": "b8018578d1c39cdb4724849f5ecb86a18af7612e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
