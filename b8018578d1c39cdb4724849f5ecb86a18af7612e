@@ -16,6 +16,24 @@
       "revId": "b8018578d1c39cdb4724849f5ecb86a18af7612e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c287715_0054f757",
+        "filename": "drivers/staging/android/ion/ion_dma_buf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2020-07-19T17:21:52Z",
+      "side": 1,
+      "message": "I uploaded a follow up patch at I0b9061651c9349420018169eeda152e53b9b7f95",
+      "parentUuid": "ffe5188d_0bb9d75e",
+      "revId": "b8018578d1c39cdb4724849f5ecb86a18af7612e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
