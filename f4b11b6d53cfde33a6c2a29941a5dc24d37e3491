@@ -34,6 +34,24 @@
       "revId": "f4b11b6d53cfde33a6c2a29941a5dc24d37e3491",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "20367538_a926ab5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1577720
+      },
+      "writtenOn": "2020-07-20T18:48:45Z",
+      "side": 1,
+      "message": "And does it change every time the module is built (even with uncommited changes)?",
+      "parentUuid": "ad657087_211e3466",
+      "revId": "f4b11b6d53cfde33a6c2a29941a5dc24d37e3491",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
