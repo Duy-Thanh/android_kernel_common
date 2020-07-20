@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97188383_b3146a62",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-07-20T15:38:32Z",
+      "side": 1,
+      "message": "We do file operations within get_data_file_block - is it OK to do such things within a spinlock? Also the old way was interruptable, this new lock isn\u0027t. Again, is that OK?",
+      "revId": "fb1cf81f7dee4e74f63a24d7a300e68f1b395ce0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "deeedcdf_9e2f113d",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-07-20T15:38:32Z",
+      "side": 1,
+      "message": "This is changing the lock logic - we were adding the pending read within the lock before. Also, we can now have multiple readers adding pending reads. Are you sure this is OK?",
+      "revId": "fb1cf81f7dee4e74f63a24d7a300e68f1b395ce0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
