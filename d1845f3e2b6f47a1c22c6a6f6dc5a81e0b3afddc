@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a19e611_2289e768",
+        "filename": "drivers/media/v4l2-core/v4l2-ctrls.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-07-20T22:38:42Z",
+      "side": 1,
+      "message": "Just a FYI, this part is already upstream. Only the \"Unknown\" is missing. But maybe we don\u0027t need that? Also. 6 shows up as \"6.0\" upstream. Not sure if that matters.",
+      "range": {
+        "startLine": 345,
+        "startChar": 0,
+        "endLine": 348,
+        "endChar": 8
+      },
+      "revId": "d1845f3e2b6f47a1c22c6a6f6dc5a81e0b3afddc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5940a69_3d9bba06",
+        "filename": "drivers/media/v4l2-core/v4l2-ctrls.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-07-20T22:38:42Z",
+      "side": 1,
+      "message": "This is upstream too.",
+      "range": {
+        "startLine": 376,
+        "startChar": 2,
+        "endLine": 376,
+        "endChar": 21
+      },
+      "revId": "d1845f3e2b6f47a1c22c6a6f6dc5a81e0b3afddc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
