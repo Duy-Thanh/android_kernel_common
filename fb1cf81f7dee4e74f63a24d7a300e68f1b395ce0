@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "afe2ae3a_f398dc3f",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2020-07-20T16:44:47Z",
+      "side": 1,
+      "message": "read_lock() isn\u0027t a spinlock(). read_lock() is still a blocking call. This function will sleep if there are writers (when blockmap is getting updated. Please see call to incfs_write_data_block_to_backing_file below). get_data_file_block() is reading the blockmap, so it is ok to have multiple readers.",
+      "parentUuid": "97188383_b3146a62",
+      "revId": "fb1cf81f7dee4e74f63a24d7a300e68f1b395ce0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "deeedcdf_9e2f113d",
         "filename": "fs/incfs/data_mgmt.c",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2020-07-20T15:38:32Z",
       "side": 1,
       "message": "This is changing the lock logic - we were adding the pending read within the lock before. Also, we can now have multiple readers adding pending reads. Are you sure this is OK?",
+      "revId": "fb1cf81f7dee4e74f63a24d7a300e68f1b395ce0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38aafb67_d9780edc",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2020-07-20T16:44:47Z",
+      "side": 1,
+      "message": "Yes. You are right; but we don\u0027t need lock here.. the lock here is meant only for reading from the file to update the block. \n\nWe already have per mount mutex lock (mi-\u003emi_pending_reads_mutex) when adding pending reads by multiple readers, so the list is already protected at the mount level. so, it should be safe to release the read lock.",
+      "parentUuid": "deeedcdf_9e2f113d",
       "revId": "fb1cf81f7dee4e74f63a24d7a300e68f1b395ce0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
