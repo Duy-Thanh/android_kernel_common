@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e80be76_2883e381",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-07-20T17:35:19Z",
+      "side": 1,
+      "message": "If you do this, you need to update cuttlefish-modules to enable the feature \u003dm, and then regenerate the cuttlefish symbol list and aarch64 abi to ensure the feature continues to work (cuttlefish uses zram/zpool).",
+      "revId": "81955ca7135ff4eb4bb02cb83d98e2f418807870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
