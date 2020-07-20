@@ -70,6 +70,23 @@
       "revId": "f4b11b6d53cfde33a6c2a29941a5dc24d37e3491",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3eb62348_a9f24806",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-20T18:58:44Z",
+      "side": 1,
+      "message": "This breaks deterministic builds 😞\n\nWhy not send this upstream if it is really needed?",
+      "revId": "f4b11b6d53cfde33a6c2a29941a5dc24d37e3491",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
