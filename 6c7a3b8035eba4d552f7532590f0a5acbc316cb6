@@ -22,6 +22,29 @@
       "revId": "6c7a3b8035eba4d552f7532590f0a5acbc316cb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "608e3e71_eea28170",
+        "filename": "include/linux/tick.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-07-20T20:53:49Z",
+      "side": 1,
+      "message": "Seems unnecessarily complicated for 4.19 specific change. Just have a function pointer as the parameter.",
+      "range": {
+        "startLine": 118,
+        "startChar": 48,
+        "endLine": 118,
+        "endChar": 77
+      },
+      "revId": "6c7a3b8035eba4d552f7532590f0a5acbc316cb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
