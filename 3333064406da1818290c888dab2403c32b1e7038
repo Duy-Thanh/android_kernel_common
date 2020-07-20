@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73019f32_e06958d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-20T22:15:22Z",
+      "side": 1,
+      "message": "What is the naming scheme you are using here?",
+      "revId": "3333064406da1818290c888dab2403c32b1e7038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "414567a7_19330075",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-20T22:15:22Z",
+      "side": 1,
+      "message": "All the other structs here have a tipc_ prefix. Why is this different?",
+      "revId": "3333064406da1818290c888dab2403c32b1e7038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f60076f2_f54c377e",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-20T22:15:22Z",
+      "side": 1,
+      "message": "why is this split across two lines?",
+      "revId": "3333064406da1818290c888dab2403c32b1e7038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b587384f_9b574259",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1172,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-20T22:15:22Z",
+      "side": 1,
+      "message": "is this not unsigned? It will underflow if you fail to get the first page",
+      "range": {
+        "startLine": 1172,
+        "startChar": 6,
+        "endLine": 1172,
+        "endChar": 12
+      },
+      "revId": "3333064406da1818290c888dab2403c32b1e7038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
