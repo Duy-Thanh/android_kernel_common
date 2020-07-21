@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2dada242_c5992ace",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-07-21T17:50:55Z",
+      "side": 1,
+      "message": "Sorry, my bad. This is the new goto label.",
+      "parentUuid": "086a654a_818343ec",
+      "revId": "f2ad5e39f6189c3b25998864aa20485f8f67d442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "08ebadf3_35fd5a62",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
