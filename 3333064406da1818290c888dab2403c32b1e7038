@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "a36f1c24_f0493220",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-07-21T00:59:47Z",
+      "side": 1,
+      "message": "Several places in the file the `type_action` naming scheme is used. The `_something` scheme is also in use, and I mimicked that for `_handle_release` since all the other handlers used it.\n\nI see that I used the `action_type` naming scheme for the `tipc_shared_handle` type. Would it fix this issue to rename those in `type_action` form?",
+      "parentUuid": "26051455_b92de53f",
+      "revId": "3333064406da1818290c888dab2403c32b1e7038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "414567a7_19330075",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 4
@@ -136,6 +154,24 @@
       "writtenOn": "2020-07-21T00:45:32Z",
       "side": 1,
       "message": "these used to be before any functions.",
+      "revId": "3333064406da1818290c888dab2403c32b1e7038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dae7e442_e4315395",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-07-21T00:59:47Z",
+      "side": 1,
+      "message": "That\u0027s true. I placed the functions where they are in order to put them directly next to their state variables (the mutex and the tree) and the type they correspond to.\n\nIf you want all functions to come after all variables, I can reorder things.",
+      "parentUuid": "251c298f_c905402e",
       "revId": "3333064406da1818290c888dab2403c32b1e7038",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
