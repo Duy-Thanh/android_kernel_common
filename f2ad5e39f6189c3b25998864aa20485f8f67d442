@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "62545470_495cf280",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-07-21T14:36:52Z",
+      "side": 1,
+      "message": "I believe you\u0027ve removed this part of the fix?",
+      "revId": "f2ad5e39f6189c3b25998864aa20485f8f67d442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "08ebadf3_35fd5a62",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -16,6 +33,23 @@
       "revId": "f2ad5e39f6189c3b25998864aa20485f8f67d442",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd05f27c_cf6a675a",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-07-21T14:36:52Z",
+      "side": 1,
+      "message": "Do we also have to unlock the page?\n\nSince we\u0027re fixing this, I think it might be better to move the kmap until after this call, and then this is unnecessary. But I still wonder if we have to unlock the page in that situation?\n\nAlso I prefer to never duplicate cleanup - once you start, it tends to get out of hand, so add an out: label and jump to it if there is cleanup to do.",
+      "revId": "f2ad5e39f6189c3b25998864aa20485f8f67d442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
