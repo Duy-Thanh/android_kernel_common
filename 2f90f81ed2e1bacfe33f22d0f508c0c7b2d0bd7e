@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2799673c_8b7b693e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-07-21T02:41:21Z",
+      "side": 1,
+      "message": "Roman, are you using zram/zpool on the android emulator?",
+      "revId": "2f90f81ed2e1bacfe33f22d0f508c0c7b2d0bd7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
