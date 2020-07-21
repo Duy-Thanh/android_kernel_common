@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "26051455_b92de53f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-21T00:45:32Z",
+      "side": 1,
+      "message": "We usually use a common prefix for all our functions so that it is easier to see which calls are internal, but this file seems to use more than one. some of your new functions don\u0027t seem to have a prefix at all though.",
+      "parentUuid": "9c8876bb_a2a5cf42",
+      "revId": "3333064406da1818290c888dab2403c32b1e7038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "414567a7_19330075",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 4
@@ -104,6 +122,23 @@
       "revId": "3333064406da1818290c888dab2403c32b1e7038",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "251c298f_c905402e",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-21T00:45:32Z",
+      "side": 1,
+      "message": "these used to be before any functions.",
+      "revId": "3333064406da1818290c888dab2403c32b1e7038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     },
     {
       "key": {
