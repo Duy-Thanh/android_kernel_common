@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4913c9f4_fd0cb246",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-07-21T18:47:13Z",
+      "side": 1,
+      "message": "curious if this needs to be cleaned up if any early return happens in the function, e.g. if the second is_data_block_present() check succeeds",
+      "range": {
+        "startLine": 837,
+        "startChar": 9,
+        "endLine": 837,
+        "endChar": 25
+      },
+      "revId": "308fc4c0686d38c2279cbcbbc6c26956d1f51611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84569cfa_8820c6db",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 840,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-07-21T18:47:13Z",
+      "side": 1,
+      "message": "double check for presence was there because it happened once under a lock and once after unlocking it. Now, when both are out of the lock, it can be done once",
+      "range": {
+        "startLine": 840,
+        "startChar": 5,
+        "endLine": 840,
+        "endChar": 26
+      },
+      "revId": "308fc4c0686d38c2279cbcbbc6c26956d1f51611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d938bcf_9e1d16e7",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-07-21T18:47:13Z",
+      "side": 1,
+      "message": "nit: please clean this up while you\u0027re here",
+      "range": {
+        "startLine": 1321,
+        "startChar": 0,
+        "endLine": 1321,
+        "endChar": 61
+      },
+      "revId": "308fc4c0686d38c2279cbcbbc6c26956d1f51611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
