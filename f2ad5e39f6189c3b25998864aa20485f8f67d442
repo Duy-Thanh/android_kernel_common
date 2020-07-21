@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "086a654a_818343ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2020-07-21T16:31:18Z",
+      "side": 1,
+      "message": "Should this be removed ? It is just handling gracefully the error path. The current code path in all over assumes that dentry passed to path_put is never null which doesn\u0027t seem right theoretically.",
+      "parentUuid": "62545470_495cf280",
+      "revId": "f2ad5e39f6189c3b25998864aa20485f8f67d442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "08ebadf3_35fd5a62",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -47,6 +65,24 @@
       "writtenOn": "2020-07-21T14:36:52Z",
       "side": 1,
       "message": "Do we also have to unlock the page?\n\nSince we\u0027re fixing this, I think it might be better to move the kmap until after this call, and then this is unnecessary. But I still wonder if we have to unlock the page in that situation?\n\nAlso I prefer to never duplicate cleanup - once you start, it tends to get out of hand, so add an out: label and jump to it if there is cleanup to do.",
+      "revId": "f2ad5e39f6189c3b25998864aa20485f8f67d442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd7f0b7e_17225473",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2020-07-21T16:31:18Z",
+      "side": 1,
+      "message": "Yes, we need to  unamp; this is a bug. I can move the map after the check.",
+      "parentUuid": "fd05f27c_cf6a675a",
       "revId": "f2ad5e39f6189c3b25998864aa20485f8f67d442",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
