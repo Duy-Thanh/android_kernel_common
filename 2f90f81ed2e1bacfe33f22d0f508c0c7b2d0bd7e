@@ -16,6 +16,23 @@
       "revId": "2f90f81ed2e1bacfe33f22d0f508c0c7b2d0bd7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a5f2406_1e19c1fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2020-07-21T14:20:57Z",
+      "side": 1,
+      "message": "\u003e Patch Set 2:\n\u003e \n\u003e Sorry to jump in, but is this made so that OEMs can override the zram implementation with their own?\n\nYes this is to allow vendor override. Some vendors have a lot of zram customizations. We will enforce that a compatible implementation is provide with VTS tests.\n\n\u003e I\u0027ve worked on quite a lot of devices and didn\u0027t really see much /changes/ there worth moving this to vendor, and definitely something that can be done with vendor_hooks of really needed\n\u003e \n\u003e I can see this module being almost always enabled so is there really any benefit in having it a module?\n\nThe plan is to have a core zram in GKI with hooks but for the Android S time line we are allowing vendors to provide their own.\n\n",
+      "revId": "2f90f81ed2e1bacfe33f22d0f508c0c7b2d0bd7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
