@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "ee1dcac7_62b5bd0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-21T19:45:38Z",
+      "side": 1,
+      "message": "I think that would help.",
+      "parentUuid": "a36f1c24_f0493220",
+      "revId": "3333064406da1818290c888dab2403c32b1e7038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "414567a7_19330075",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 4
@@ -172,6 +190,24 @@
       "side": 1,
       "message": "That\u0027s true. I placed the functions where they are in order to put them directly next to their state variables (the mutex and the tree) and the type they correspond to.\n\nIf you want all functions to come after all variables, I can reorder things.",
       "parentUuid": "251c298f_c905402e",
+      "revId": "3333064406da1818290c888dab2403c32b1e7038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99974e14_ca841d54",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-21T19:45:38Z",
+      "side": 1,
+      "message": "You can technically still do that without inserting your code above the existing global state. To be more consistent with the existing style I think it would be better to place your type with the other types and move your code down so it is below some of the more generic existing helpers. E.g. before tipc_create_channel. The existing code is not all that consistent though. The dn_ functions and state seems to be structures more as a separate file inserted into this mostly tipc_ file.",
+      "parentUuid": "dae7e442_e4315395",
       "revId": "3333064406da1818290c888dab2403c32b1e7038",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
