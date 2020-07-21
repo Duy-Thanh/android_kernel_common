@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "c4416378_340a0068",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2020-07-21T08:38:23Z",
+      "side": 1,
+      "message": "I have changed the code to use rwsem which should cut down CPU usage as they sleep now if the lock is not available. After going through rwlock implementation, it seems to be spinning and may have little overhead as the read/writes to backing store may sleep once the lock is held. This should improve read performance especially when there are multiple reads on same segment and if the I/O traffic is sequential.",
+      "parentUuid": "afe2ae3a_f398dc3f",
+      "revId": "fb1cf81f7dee4e74f63a24d7a300e68f1b395ce0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "deeedcdf_9e2f113d",
         "filename": "fs/incfs/data_mgmt.c",
         "patchSetId": 2
