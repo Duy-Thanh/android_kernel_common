@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fabf9a68_372f7af6",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-22T20:17:42Z",
+      "side": 1,
+      "message": "This error can\u0027t happen if the other side is following the spec, so I don\u0027t think that section is very relevant. As far as we are concerned, transmission of fragments is no longer in-progress.",
+      "parentUuid": "e550a733_f153cf88",
+      "revId": "a9b797715c29518e1c984a109d8b7f84b7edc84e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "333d0b86_21347d16",
         "filename": "drivers/trusty/trusty.c",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2020-07-22T19:52:28Z",
       "side": 1,
       "message": "In this case, don\u0027t we need to permanently hold the pages we were trying to share, as FFA has declared it took the share, even if it doesn\u0027t make sense? Is that the caller\u0027s responsibility?\n\nAlternatively, we could RECLAIM along this error path to undo the broken share. We could also leave RECLAIM as an option for the caller to recover, but then the caller needs to be able to distinguish -EIO (early success) from -EIO (fragments didn\u0027t fill) in order to be able to walk back the early success.",
+      "revId": "a9b797715c29518e1c984a109d8b7f84b7edc84e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1bb5d10_f583c6d9",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-22T20:17:42Z",
+      "side": 1,
+      "message": "We can try to reclaim, but this only happens if the other side does not follow the spec, so all bets are off at this point.\n\nPerhaps reclaiming on any error after the first fragment has been sent, and panic on reclaim failure is the best option. It would be more applicable to the else block here though.",
+      "parentUuid": "333d0b86_21347d16",
       "revId": "a9b797715c29518e1c984a109d8b7f84b7edc84e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -50,6 +86,24 @@
       "revId": "a9b797715c29518e1c984a109d8b7f84b7edc84e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b1c7a85_b0195f20",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-22T20:17:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "16013898_27b0d373",
+      "revId": "a9b797715c29518e1c984a109d8b7f84b7edc84e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
