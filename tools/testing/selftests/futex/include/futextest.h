@@ -39,7 +39,7 @@ typedef volatile u_int32_t futex_t;
 #define FUTEX_CMP_REQUEUE_PI		12
 #endif
 #ifndef FUTEX_SWAP
-#define FUTEX_SWAP			13
+#define FUTEX_SWAP			14
 #endif
 #ifndef FUTEX_WAIT_REQUEUE_PI_PRIVATE
 #define FUTEX_WAIT_REQUEUE_PI_PRIVATE	(FUTEX_WAIT_REQUEUE_PI | \

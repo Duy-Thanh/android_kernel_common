@@ -105,7 +105,7 @@ long do_futex(u32 __user *uaddr, int op, u32 val, ktime_t *timeout,
 		val3 = FUTEX_BITSET_MATCH_ANY;
 		fallthrough;
 	case FUTEX_WAIT_BITSET:
-		return futex_wait(uaddr, flags, val, timeout, val3);
+		return futex_wait(uaddr, flags, val, timeout, val3, NULL);
 	case FUTEX_WAKE:
 		val3 = FUTEX_BITSET_MATCH_ANY;
 		fallthrough;
@@ -132,6 +132,8 @@ long do_futex(u32 __user *uaddr, int op, u32 val, ktime_t *timeout,
 					     uaddr2);
 	case FUTEX_CMP_REQUEUE_PI:
 		return futex_requeue(uaddr, flags, uaddr2, val, val2, &val3, 1);
+	case FUTEX_SWAP:
+		return futex_swap(uaddr, flags, val, timeout, uaddr2);
 	}
 	return -ENOSYS;
 }
@@ -144,6 +146,7 @@ static __always_inline bool futex_cmd_has_timeout(u32 cmd)
 	case FUTEX_LOCK_PI2:
 	case FUTEX_WAIT_BITSET:
 	case FUTEX_WAIT_REQUEUE_PI:
+	case FUTEX_SWAP:
 		return true;
 	}
 	return false;
@@ -156,7 +159,7 @@ futex_init_timeout(u32 cmd, u32 op, struct timespec64 *ts, ktime_t *t)
 		return -EINVAL;
 
 	*t = timespec64_to_ktime(*ts);
-	if (cmd == FUTEX_WAIT)
+	if (cmd == FUTEX_WAIT || cmd == FUTEX_SWAP)
 		*t = ktime_add_safe(ktime_get(), *t);
 	else if (cmd != FUTEX_LOCK_PI && !(op & FUTEX_CLOCK_REALTIME))
 		*t = timens_ktime_to_host(CLOCK_MONOTONIC, *t);

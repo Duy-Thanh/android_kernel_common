@@ -4,6 +4,7 @@
 
 #include <linux/futex.h>
 #include <linux/rtmutex.h>
+#include <linux/sched.h>
 #include <linux/sched/wake_q.h>
 
 #ifdef CONFIG_PREEMPT_RT
@@ -143,7 +144,8 @@ static inline int futex_match(union futex_key *key1, union futex_key *key2)
 extern int futex_wait_setup(u32 __user *uaddr, u32 val, unsigned int flags,
 			    struct futex_q *q, struct futex_hash_bucket **hb);
 extern void futex_wait_queue(struct futex_hash_bucket *hb, struct futex_q *q,
-				   struct hrtimer_sleeper *timeout);
+				   struct hrtimer_sleeper *timeout,
+				   struct task_struct *next);
 extern void futex_wake_mark(struct wake_q_head *wake_q, struct futex_q *q);
 
 extern int fault_in_user_writeable(u32 __user *uaddr);
@@ -265,7 +267,10 @@ extern int futex_requeue(u32 __user *uaddr1, unsigned int flags,
 			 u32 *cmpval, int requeue_pi);
 
 extern int futex_wait(u32 __user *uaddr, unsigned int flags, u32 val,
-		      ktime_t *abs_time, u32 bitset);
+		      ktime_t *abs_time, u32 bitset, struct task_struct *next);
+
+extern int futex_swap(u32 __user *uaddr, unsigned int flags, u32 val,
+		      ktime_t *abs_time, u32 __user *uaddr2);
 
 /**
  * struct futex_vector - Auxiliary struct for futex_waitv()
