@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "035bcf87_1211b846",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-22T23:42:12Z",
+      "side": 1,
+      "message": "Only 2 people on the trusty team has code review permission on the android kernel. This change should at least give the rest of the team review access to the current trusty kernel.",
+      "revId": "b256a4efd57aaca8c5772796ee3e05ab445785ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
