@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "6ea0e2ba_b9f1682f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-07-22T17:40:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee1dcac7_62b5bd0a",
+      "revId": "3333064406da1818290c888dab2403c32b1e7038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "414567a7_19330075",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 4
@@ -211,6 +229,24 @@
       "revId": "3333064406da1818290c888dab2403c32b1e7038",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3db90f22_2cfd35d6",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-07-22T17:40:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99974e14_ca841d54",
+      "revId": "3333064406da1818290c888dab2403c32b1e7038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
