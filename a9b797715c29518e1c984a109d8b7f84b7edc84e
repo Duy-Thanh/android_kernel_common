@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e550a733_f153cf88",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-07-22T19:52:28Z",
+      "side": 1,
+      "message": "If we get a fragment like this, isn\u0027t the state machine FF-A side likely kaput? Can we still send other messages? If we can\u0027t, we should disable the driver.\n\n12.2.2.3.9 from FF-A seems to indicate that we\u0027re not allowed to abort, so should we just spew dummy fragments until it errors?",
+      "revId": "a9b797715c29518e1c984a109d8b7f84b7edc84e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "333d0b86_21347d16",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-07-22T19:52:28Z",
+      "side": 1,
+      "message": "In this case, don\u0027t we need to permanently hold the pages we were trying to share, as FFA has declared it took the share, even if it doesn\u0027t make sense? Is that the caller\u0027s responsibility?\n\nAlternatively, we could RECLAIM along this error path to undo the broken share. We could also leave RECLAIM as an option for the caller to recover, but then the caller needs to be able to distinguish -EIO (early success) from -EIO (fragments didn\u0027t fill) in order to be able to walk back the early success.",
+      "revId": "a9b797715c29518e1c984a109d8b7f84b7edc84e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16013898_27b0d373",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-07-22T19:52:28Z",
+      "side": 1,
+      "message": "If we want to allow the caller to clean up via RECLAIM as in the comment above, we can keep this. Otherwise, this should be in the if (!ret) block so that we don\u0027t modify the out param on failure.",
+      "revId": "a9b797715c29518e1c984a109d8b7f84b7edc84e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e6038b5_98c42dfe",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-07-22T19:52:28Z",
+      "side": 1,
+      "message": "Move to a #define or constant",
+      "range": {
+        "startLine": 553,
+        "startChar": 20,
+        "endLine": 553,
+        "endChar": 26
+      },
+      "revId": "a9b797715c29518e1c984a109d8b7f84b7edc84e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
