@@ -127,6 +127,30 @@
       "revId": "a9b797715c29518e1c984a109d8b7f84b7edc84e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25f3dc61_4b2f0220",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-22T20:22:57Z",
+      "side": 1,
+      "message": "I\u0027m not sure that is a step in the right direction. If we want it to be configurable I can put it in the device tree as the TODO above mention, but I don\u0027t want to move the value away from the TODO.",
+      "parentUuid": "8e6038b5_98c42dfe",
+      "range": {
+        "startLine": 553,
+        "startChar": 20,
+        "endLine": 553,
+        "endChar": 26
+      },
+      "revId": "a9b797715c29518e1c984a109d8b7f84b7edc84e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
