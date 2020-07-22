@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "a1376542_e43f53e1",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-22T22:45:13Z",
+      "side": 1,
+      "message": "I take that last part back. In the else case, which is the only case we should be able to hit, the SPD and/or hypervisor should have already destroyed the partial object.",
+      "parentUuid": "f1bb5d10_f583c6d9",
+      "revId": "a9b797715c29518e1c984a109d8b7f84b7edc84e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "16013898_27b0d373",
         "filename": "drivers/trusty/trusty.c",
         "patchSetId": 3
