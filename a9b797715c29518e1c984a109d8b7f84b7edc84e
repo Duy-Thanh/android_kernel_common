@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "539c65b6_c922da0f",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-23T19:51:10Z",
+      "side": 1,
+      "message": "Marking as resolved so auto-submit can succeed.",
+      "parentUuid": "b0745661_0ca6973a",
+      "revId": "a9b797715c29518e1c984a109d8b7f84b7edc84e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "333d0b86_21347d16",
         "filename": "drivers/trusty/trusty.c",
         "patchSetId": 3
@@ -105,6 +123,24 @@
       "revId": "a9b797715c29518e1c984a109d8b7f84b7edc84e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "331fadf3_3b295555",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-23T19:51:10Z",
+      "side": 1,
+      "message": "Marking as resolved so auto-submit can succeed.",
+      "parentUuid": "a1376542_e43f53e1",
+      "revId": "a9b797715c29518e1c984a109d8b7f84b7edc84e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -187,6 +223,30 @@
       "revId": "a9b797715c29518e1c984a109d8b7f84b7edc84e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b5fbe22_72b4281d",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-23T19:51:10Z",
+      "side": 1,
+      "message": "Marking as resolved so auto-submit can succeed.",
+      "parentUuid": "25f3dc61_4b2f0220",
+      "range": {
+        "startLine": 553,
+        "startChar": 20,
+        "endLine": 553,
+        "endChar": 26
+      },
+      "revId": "a9b797715c29518e1c984a109d8b7f84b7edc84e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
