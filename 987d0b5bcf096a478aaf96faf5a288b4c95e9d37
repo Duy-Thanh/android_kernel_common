@@ -94,6 +94,30 @@
       "revId": "987d0b5bcf096a478aaf96faf5a288b4c95e9d37",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "693d8b94_6d95d68b",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T02:12:29Z",
+      "side": 0,
+      "message": "fixed",
+      "parentUuid": "44383368_462ccd73",
+      "range": {
+        "startLine": 263,
+        "startChar": 2,
+        "endLine": 264,
+        "endChar": 9
+      },
+      "revId": "987d0b5bcf096a478aaf96faf5a288b4c95e9d37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
