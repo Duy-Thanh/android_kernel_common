@@ -16,6 +16,24 @@
       "revId": "ba15052bde724ab3594f1cd5ed806e61d48f9dd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1236976_e3bd31f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1723023
+      },
+      "writtenOn": "2020-07-23T01:53:19Z",
+      "side": 1,
+      "message": "Hi Kelly,\nThanks for correcting!\nExporting log_threaded_irq_wakeup_reason() would be sufficient for kernel drivers.\nIdealy, any wakeup irq should use enable_irq_wake() to inform PM core and thus log_irq_wakeup_reason() is called.\nThe corresponding IRQ handler could utilize log_threaded_irq_wakeup_reason() if its child IRQ is actually triggered.\n\nFor log_abnormal_wakeup_reason(), in my opinion, the current handling flow is sufficient: During each suspend callback stage, pm_wakeup_pending() is called to check if a wakeup source is activated.",
+      "parentUuid": "d1f93da4_8d5a6714",
+      "revId": "ba15052bde724ab3594f1cd5ed806e61d48f9dd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
