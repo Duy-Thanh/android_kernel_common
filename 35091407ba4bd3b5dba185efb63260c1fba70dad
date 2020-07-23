@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "2adf3274_3e211c76",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T00:37:08Z",
+      "side": 1,
+      "message": "Can we have a much more detailed description of this feature. Everything in this patch should be mentioned. If we accept this into android common, then all partners have the right to use it and the Android kernel team has to support it.  Also describe the functions that are exposed by this patch to manage it.\n\nThe commit message must also describe *why* this needed. You don\u0027t have to disclose your private policies for how the feature is used by QCOM, but it does have to have a high level justification for why it needed.",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "01f94864_fea86e59",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -16,6 +33,159 @@
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c4e318b_8b8574c4",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6359,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T00:37:08Z",
+      "side": 1,
+      "message": "What are the cases where migrate_pinned_tasks would be true?",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "567f2138_ed394441",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6413,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T00:37:08Z",
+      "side": 1,
+      "message": "Is the above assumption still valid for protecting the state of the tasks list being built by repeatedly calling detach_one_task_core(). Can the tasks on the local list be affected when the lock is dropped?",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4855ab15_ba5df92a",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2583,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T00:37:08Z",
+      "side": 1,
+      "message": "Can we move these to a separate isolate.h?",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "810e7914_8bc220e0",
+        "filename": "kernel/sched/topology.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1128,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T00:37:08Z",
+      "side": 1,
+      "message": "why does this need to be exported?",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb5af359_6d2d6702",
+        "filename": "kernel/sched/trace.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T00:37:08Z",
+      "side": 1,
+      "message": "Should this file be include/trace/events/isolate.h instead? kernel/sched/trace.h is misleading since the *real* sched tracing is in include/trace/events/sched.h",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "785d0e2d_6f3b92ff",
+        "filename": "kernel/time/hrtimer.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2026,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T00:37:08Z",
+      "side": 1,
+      "message": "why dropping CONFIG_CPUSETS?",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d1858a3_b44f2d9c",
+        "filename": "kernel/time/hrtimer.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2124,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T00:37:08Z",
+      "side": 1,
+      "message": "I think this hrtimers stuff should be in a separate patch from the main isolation stuff so you can explain why these changes are required and why the dependency on CPUSETS is different.",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aff3a3a3_fb1785c0",
+        "filename": "kernel/watchdog.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T00:37:08Z",
+      "side": 1,
+      "message": "This watchdog stuff seems like it should be in a separate patch so you can discuss it in the commit message.",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf1c6663_ee39a7bb",
+        "filename": "kernel/watchdog.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T00:37:08Z",
+      "side": 1,
+      "message": "why does this need to be external?",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }

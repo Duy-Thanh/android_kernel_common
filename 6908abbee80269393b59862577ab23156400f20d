@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e3c3fafd_5c3a40d7",
+        "filename": "kernel/time/hrtimer.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2088,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T00:37:08Z",
+      "side": 0,
+      "message": "why is it ok to remove this?",
+      "revId": "6908abbee80269393b59862577ab23156400f20d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf5a12fc_872e689f",
+        "filename": "kernel/time/timer.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2023,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T00:37:08Z",
+      "side": 0,
+      "message": "why removing?",
+      "revId": "6908abbee80269393b59862577ab23156400f20d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
