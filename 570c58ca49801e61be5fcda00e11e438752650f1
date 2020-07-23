@@ -16,6 +16,23 @@
       "revId": "570c58ca49801e61be5fcda00e11e438752650f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ebf574b_7d2e9039",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-07-23T21:04:05Z",
+      "side": 1,
+      "message": "It looks like merging these is indeed breaking kernel modules; switching from compound literals (ie. anonymous static variables) to static variables fixes a reported boot failure.  Will look into that more, but for now, it seems unsafe to merge these.",
+      "revId": "570c58ca49801e61be5fcda00e11e438752650f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
