@@ -3,5 +3,13 @@
 #define _ASM_CLOCKSOURCE_H
 
 #include <asm/vdso/clocksource.h>
+<<<<<<< HEAD   (2df259 ANDROID: KABI updates for db845c (USB_EHCI_HCD, USB_EHCI_HCD)
+=======
+
+struct arch_clocksource_data {
+	/* Usable for direct VDSO access? */
+	enum vdso_arch_clockmode clock_mode;
+};
+>>>>>>> BRANCH (d811d2 Linux 5.4.53)
 
 #endif
