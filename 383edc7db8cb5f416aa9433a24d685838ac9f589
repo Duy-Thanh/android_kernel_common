@@ -16,6 +16,24 @@
       "revId": "383edc7db8cb5f416aa9433a24d685838ac9f589",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bbd752be_390c39d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T14:49:31Z",
+      "side": 1,
+      "message": "There is a patch for upstream, but they ran into some issues with it (that don\u0027t affect the android11-5.4 case). Since QC needs this now, we agreed that we\u0027d take this into android11-5.4, but wait for the upstream version for android12-5.4 and android-mainline.",
+      "parentUuid": "13694ed7_f80842d9",
+      "revId": "383edc7db8cb5f416aa9433a24d685838ac9f589",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
