@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a60d3239_4fe1125b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-07-23T15:28:17Z",
+      "side": 1,
+      "message": "I still haven\u0027t reviewed this and the next one. But a quick look shows that it is intrusive in some areas. Ideally this kind of change better be protected with a CONFIG option so users who don\u0027t need it can avoid this extra complexity in their code.\n\nI appreciate it won\u0027t be easy but I strongly recommend to consider this when refactoring as Todd suggested as it\u0027ll give an extra incentive knowing that it can be disabled keeping the current behavior/code intact for users that don\u0027t care.",
+      "parentUuid": "2adf3274_3e211c76",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "01f94864_fea86e59",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
