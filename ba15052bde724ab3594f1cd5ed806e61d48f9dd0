@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d1f93da4_8d5a6714",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1241955
+      },
+      "writtenOn": "2020-07-23T00:37:34Z",
+      "side": 1,
+      "message": "Apologies if I am misunderstanding, but it looks like the export is still on log_irq_wakeup_reason rather than log_threaded_irq_wakeup_reason?\n\nAlso, just to clarify: I don\u0027t necessarily object to exporting both log_threaded_irq_wakeup_reason() and log_irq_wakeup_reason().  Exporting log_abnormal_wakeup_reason() might even make sense.  I would just like to understand more about why, if there\u0027s a need that I failed to anticipate.",
+      "revId": "ba15052bde724ab3594f1cd5ed806e61d48f9dd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
