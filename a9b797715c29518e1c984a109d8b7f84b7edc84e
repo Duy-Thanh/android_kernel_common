@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "b0745661_0ca6973a",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-07-23T17:49:16Z",
+      "side": 1,
+      "message": "Yes we should still be able to send other messages though. The memory share messages are identified by the cookie and can be interleaved. Leaving this one in a bad state will reduce the amount of memory available for other areas but will not necessarily prevent the system from booting.",
+      "parentUuid": "fabf9a68_372f7af6",
+      "revId": "a9b797715c29518e1c984a109d8b7f84b7edc84e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "333d0b86_21347d16",
         "filename": "drivers/trusty/trusty.c",
         "patchSetId": 3
