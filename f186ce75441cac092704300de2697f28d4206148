@@ -33,6 +33,91 @@
       "revId": "f186ce75441cac092704300de2697f28d4206148",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab3c7fa2_cd50af43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T00:53:55Z",
+      "side": 1,
+      "message": "I think this patch should be split into several (I point out a few). As it is, it is a hodge-podge of changes related to isolation. The commit message gives almost no insight into the motivation and rationale for the changes.\n\nPlease organize the patches such that the commit message provides a complete description of the changes being made. This would likely be easier if the patch is split into smaller patches of related changes.",
+      "revId": "f186ce75441cac092704300de2697f28d4206148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9acea8d2_06d8acd0",
+        "filename": "include/linux/sched/isolation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T00:53:55Z",
+      "side": 1,
+      "message": "why is this needed?",
+      "revId": "f186ce75441cac092704300de2697f28d4206148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1dbd704_583d358d",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1004,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T00:53:55Z",
+      "side": 1,
+      "message": "why is tasks_frozen part of this patch?",
+      "revId": "f186ce75441cac092704300de2697f28d4206148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb5e5909_91018ee9",
+        "filename": "kernel/irq/cpuhotplug.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T00:53:55Z",
+      "side": 1,
+      "message": "This seems like it should be in its own patch so you can describe it in the commit messae",
+      "revId": "f186ce75441cac092704300de2697f28d4206148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2f75a02_410b26c0",
+        "filename": "kernel/smp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-23T00:53:55Z",
+      "side": 1,
+      "message": "I think a comment regarding s2idle_state would be useful here.",
+      "revId": "f186ce75441cac092704300de2697f28d4206148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
