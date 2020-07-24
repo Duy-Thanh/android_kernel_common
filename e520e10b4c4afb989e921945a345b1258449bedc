@@ -16,6 +16,24 @@
       "revId": "e520e10b4c4afb989e921945a345b1258449bedc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d578b92_82eaca1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-24T08:13:04Z",
+      "side": 1,
+      "message": "Yeah, odd check from TH when dealing with rebased patches sorry.\n\nAlso, no need to have the cherry-picked line if you are just taking this from another branch, that should only be needed when backporting from upstream.  The Change-Id: line will correctly track patches like this across branches, as you can see here in gerrit.\n\nI\u0027ve cleaned up the changelog and resubmitted it, let\u0027s see what happens :)",
+      "parentUuid": "a59c9b17_ec6b2a3b",
+      "revId": "e520e10b4c4afb989e921945a345b1258449bedc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
