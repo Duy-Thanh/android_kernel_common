@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a59c9b17_ec6b2a3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1297255
+      },
+      "writtenOn": "2020-07-24T01:31:34Z",
+      "side": 1,
+      "message": "Hi Greg, \n\nCan I put you as \"Signed-off-by\" ? Presubmit failed because \"Signed-off-by\" should not be author.",
+      "revId": "e520e10b4c4afb989e921945a345b1258449bedc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
