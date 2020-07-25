@@ -1694,6 +1694,29 @@ _emodinst_post: _emodinst_
 clean-dirs := $(KBUILD_EXTMOD)
 clean: rm-files := $(KBUILD_EXTMOD)/Module.symvers $(KBUILD_EXTMOD)/modules.nsdeps
 
+# ---------------------------------------------------------------------------
+# Kernel headers
+
+#Default location for installed headers
+export INSTALL_HDR_PATH = $(objtree)/$(KBUILD_EXTMOD)/usr
+
+quiet_cmd_headers_install = INSTALL $(INSTALL_HDR_PATH)/include
+      cmd_headers_install = \
+	mkdir -p $(INSTALL_HDR_PATH); \
+	rsync -mrl --include='*/' --include='*\.h' --exclude='*' \
+	$(KBUILD_EXTMOD)/usr/include $(INSTALL_HDR_PATH)
+
+PHONY += headers_install
+headers_install: headers
+	$(call cmd,headers_install)
+
+hdr-inst := -f $(srctree)/scripts/Makefile.headersinst dst=$(KBUILD_EXTMOD)/usr/include objtree=$(objtree)/$(KBUILD_EXTMOD) obj
+
+PHONY += headers
+headers:
+	$(Q)$(MAKE) $(hdr-inst)=$(KBUILD_EXTMOD)/include/uapi
+	$(Q)$(MAKE) $(hdr-inst)=$(KBUILD_EXTMOD)/arch/$(SRCARCH)/include/uapi
+
 PHONY += help
 help:
 	@echo  '  Building external modules.'
@@ -1701,6 +1724,8 @@ help:
 	@echo  ''
 	@echo  '  modules         - default target, build the module(s)'
 	@echo  '  modules_install - install the module'
+	@echo  '  headers_install - Install sanitised kernel headers to INSTALL_HDR_PATH'; \
+	 echo  '                    (default: $(abspath $(INSTALL_HDR_PATH)))';
 	@echo  '  clean           - remove generated files in module directory only'
 	@echo  ''
 
