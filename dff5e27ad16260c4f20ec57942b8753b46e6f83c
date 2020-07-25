@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "7c36ea6f_928532e1",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-07-25T04:09:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "18005cda_2952aca7",
+      "range": {
+        "startLine": 51,
+        "startChar": 17,
+        "endLine": 51,
+        "endChar": 30
+      },
+      "revId": "dff5e27ad16260c4f20ec57942b8753b46e6f83c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c22aecf8_105f2108",
         "filename": "drivers/dma-buf/dma-heap.c",
         "patchSetId": 1
@@ -68,6 +92,30 @@
       "revId": "dff5e27ad16260c4f20ec57942b8753b46e6f83c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46158250_c9917cab",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-07-25T04:09:51Z",
+      "side": 1,
+      "message": "Sorry, this comment was copied in from the heap_add code where we check that there is no other heaps with the same name before we add a new one. I\u0027ll remove it.",
+      "parentUuid": "c22aecf8_105f2108",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 31
+      },
+      "revId": "dff5e27ad16260c4f20ec57942b8753b46e6f83c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "7880cf1c_55e63f7a",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-07-25T04:09:51Z",
+      "side": 1,
+      "message": "Good point. Right now, heaps are never removed once added (current heaps upstream aren\u0027t modular), but I can clean that up so if we do have modular heaps that are unloadable, it will work properly.",
+      "parentUuid": "1c0841a3_491ba5fd",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 12
+      },
+      "revId": "dff5e27ad16260c4f20ec57942b8753b46e6f83c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a50a294_1d3af1ea",
         "filename": "drivers/dma-buf/dma-heap.c",
         "patchSetId": 1
@@ -114,6 +186,30 @@
       "revId": "dff5e27ad16260c4f20ec57942b8753b46e6f83c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fadcf62_ee0f3e03",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-07-25T04:09:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6a50a294_1d3af1ea",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 25
+      },
+      "revId": "dff5e27ad16260c4f20ec57942b8753b46e6f83c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
