@@ -54,6 +54,23 @@
     },
     {
       "key": {
+        "uuid": "7fde4eb5_06fe6997",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2473,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-07-27T12:35:37Z",
+      "side": 1,
+      "message": "Doesn\u0027t seem to be used. Those functions seem to be called from the ia64 arch.",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5c4e318b_8b8574c4",
         "filename": "kernel/sched/core.c",
         "patchSetId": 6
@@ -71,6 +88,46 @@
     },
     {
       "key": {
+        "uuid": "6d4b7be4_758d1952",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6359,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-07-27T12:35:37Z",
+      "side": 1,
+      "message": "This new argument should be documented in the comment section above.",
+      "range": {
+        "startLine": 6359,
+        "startChar": 10,
+        "endLine": 6359,
+        "endChar": 30
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e39bdab_0aa2259e",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6404,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-07-27T12:35:37Z",
+      "side": 1,
+      "message": "Maybe __pick_migrate_task() could handle this case to avoid having a new list here and just skip the kthreads ?",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "567f2138_ed394441",
         "filename": "kernel/sched/core.c",
         "patchSetId": 6
@@ -82,6 +139,138 @@
       "writtenOn": "2020-07-23T00:37:08Z",
       "side": 1,
       "message": "Is the above assumption still valid for protecting the state of the tasks list being built by repeatedly calling detach_one_task_core(). Can the tasks on the local list be affected when the lock is dropped?",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d8bebd5_3a52746d",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6419,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-07-27T12:35:37Z",
+      "side": 1,
+      "message": "I am not sure to understand why this update_rq_clock appeared here. Could you develop ?",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "732cca9e_7f3965ce",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-07-27T12:35:37Z",
+      "side": 1,
+      "message": "I haven\u0027t found a call to (sched_unisolate_cpu()) from the hotplug patch in this patch, is 1) really the case ?",
+      "range": {
+        "startLine": 81,
+        "startChar": 1,
+        "endLine": 81,
+        "endChar": 21
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87c5a8ec_820eb3d8",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-07-27T12:35:37Z",
+      "side": 1,
+      "message": "This can be confusing with the \"isolcpu\" feature. \n\nMaybe \"pause\" would be a better naming ?",
+      "range": {
+        "startLine": 98,
+        "startChar": 4,
+        "endLine": 98,
+        "endChar": 21
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed1ff5eb_8b7b7b70",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-07-27T12:35:37Z",
+      "side": 1,
+      "message": "trace_clock_local() might be more appropriate",
+      "range": {
+        "startLine": 106,
+        "startChar": 15,
+        "endLine": 106,
+        "endChar": 26
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ed34c9d_56c5fd88",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-07-27T12:35:37Z",
+      "side": 1,
+      "message": "It is probably worth considering a better sync mechanism.",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 5
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46f144f6_960ba195",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-07-27T12:35:37Z",
+      "side": 1,
+      "message": "The watchdog should only trigger once every few seconds. Is it really worth disabling it ? Do you have any interesting numbers to back it ?\n\nThe watchdog part probably deserve its own patch.",
+      "range": {
+        "startLine": 153,
+        "startChar": 1,
+        "endLine": 153,
+        "endChar": 23
+      },
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
