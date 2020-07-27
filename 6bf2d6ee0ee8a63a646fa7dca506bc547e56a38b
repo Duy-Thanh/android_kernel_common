@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "d4a2fa5b_f1ef3491",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-27T15:21:03Z",
+      "side": 1,
+      "message": "Can one of these vendors file a bug asking for it?",
+      "revId": "6bf2d6ee0ee8a63a646fa7dca506bc547e56a38b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2503aa89_d446caae",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
