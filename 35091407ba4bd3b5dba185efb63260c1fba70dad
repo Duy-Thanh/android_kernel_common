@@ -162,6 +162,29 @@
     },
     {
       "key": {
+        "uuid": "e84fd854_f873cb56",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-07-27T17:18:31Z",
+      "side": 1,
+      "message": "What is this doing? IIUC the isolation stuff has no impact on sched_group_span(), what are we expecting from this call?",
+      "range": {
+        "startLine": 64,
+        "startChar": 2,
+        "endLine": 64,
+        "endChar": 38
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "732cca9e_7f3965ce",
         "filename": "kernel/sched/isolate.c",
         "patchSetId": 6
@@ -185,6 +208,29 @@
     },
     {
       "key": {
+        "uuid": "3f8d4d00_3f25d794",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-07-27T17:18:31Z",
+      "side": 1,
+      "message": "How is this different from 1) ?",
+      "range": {
+        "startLine": 86,
+        "startChar": 6,
+        "endLine": 86,
+        "endChar": 33
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "87c5a8ec_820eb3d8",
         "filename": "kernel/sched/isolate.c",
         "patchSetId": 6
@@ -200,6 +246,29 @@
         "startLine": 98,
         "startChar": 4,
         "endLine": 98,
+        "endChar": 21
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecf0e9a8_536c46e6",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-07-27T17:18:31Z",
+      "side": 1,
+      "message": "No cpumasks on the stack please.",
+      "range": {
+        "startLine": 101,
+        "startChar": 1,
+        "endLine": 101,
         "endChar": 21
       },
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
@@ -231,6 +300,52 @@
     },
     {
       "key": {
+        "uuid": "0d0f6d98_3f3adcec",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-07-27T17:18:31Z",
+      "side": 1,
+      "message": "Do you really need all 3 conditions? cpu_possible() should already encapsulate all that no?",
+      "range": {
+        "startLine": 112,
+        "startChar": 13,
+        "endLine": 112,
+        "endChar": 73
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5780daa5_e9fb0991",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-07-27T17:18:31Z",
+      "side": 1,
+      "message": "Why is this here?",
+      "range": {
+        "startLine": 118,
+        "startChar": 1,
+        "endLine": 118,
+        "endChar": 18
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4ed34c9d_56c5fd88",
         "filename": "kernel/sched/isolate.c",
         "patchSetId": 6
@@ -242,6 +357,30 @@
       "writtenOn": "2020-07-27T12:35:37Z",
       "side": 1,
       "message": "It is probably worth considering a better sync mechanism.",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 5
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "698c1c82_2ed03290",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-07-27T17:18:31Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "4ed34c9d_56c5fd88",
       "range": {
         "startLine": 138,
         "startChar": 0,
