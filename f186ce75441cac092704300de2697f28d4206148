@@ -104,6 +104,92 @@
     },
     {
       "key": {
+        "uuid": "232d6546_167d8a4f",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6510,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-07-27T12:41:39Z",
+      "side": 1,
+      "message": "Why changing the allow_is policy here and not allowing PF_KTHREAD tasks ?",
+      "range": {
+        "startLine": 6510,
+        "startChar": 2,
+        "endLine": 6510,
+        "endChar": 59
+      },
+      "revId": "f186ce75441cac092704300de2697f28d4206148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdc054e0_2156c9ae",
+        "filename": "kernel/sched/cpupri.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-07-27T12:41:39Z",
+      "side": 1,
+      "message": "It\u0027s probably better to filter it out of this function to handle the case handle the case !sched_asym_cpucapacity in rt.c ?",
+      "range": {
+        "startLine": 137,
+        "startChar": 2,
+        "endLine": 137,
+        "endChar": 42
+      },
+      "revId": "f186ce75441cac092704300de2697f28d4206148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9be278a7_ac55c1db",
+        "filename": "kernel/sched/cpupri.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-07-27T12:41:39Z",
+      "side": 1,
+      "message": "What about deadline tasks ? And in particular cpudl_find() ? Couldn\u0027t it use an isolated CPU ? If yes, is it expected ?",
+      "revId": "f186ce75441cac092704300de2697f28d4206148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82ef1be1_b4cb809b",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10536,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-07-27T12:41:39Z",
+      "side": 1,
+      "message": "cpu_isolated() ?",
+      "range": {
+        "startLine": 10536,
+        "startChar": 1,
+        "endLine": 10536,
+        "endChar": 27
+      },
+      "revId": "f186ce75441cac092704300de2697f28d4206148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e2f75a02_410b26c0",
         "filename": "kernel/smp.c",
         "patchSetId": 1
@@ -115,6 +201,23 @@
       "writtenOn": "2020-07-23T00:53:55Z",
       "side": 1,
       "message": "I think a comment regarding s2idle_state would be useful here.",
+      "revId": "f186ce75441cac092704300de2697f28d4206148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d241e478_b822b0f4",
+        "filename": "mm/vmstat.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1819,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-07-27T12:41:39Z",
+      "side": 1,
+      "message": "Once isolated the CPU will mostly go idle. Isn\u0027t quiet_vmstat() enough to prevent any unnecessary wakeups ?",
       "revId": "f186ce75441cac092704300de2697f28d4206148",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
