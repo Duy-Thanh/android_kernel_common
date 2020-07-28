@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed28c190_44004ab0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-28T21:32:33Z",
+      "side": 1,
+      "message": "The commit message doesn\u0027t seem to match the code (I don\u0027t see any \"notifier inside sde code\" or msm_drm_notifier data)",
+      "revId": "21c204daea5f1889e4d1a2b15006b5d387c085bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74407645_a0f4d336",
+        "filename": "include/drm/drm_panel.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-28T21:32:33Z",
+      "side": 1,
+      "message": "Why can\u0027t this be done in a qcom-specific header (qcom_drm_panel.h)?\n\n  #include \u003cdrm/drm_panel.h\u003e\n  enum {\n    DRM_PANEL_BLANK_LP \u003d DRM_PANEL_BLANK_LP + 1,\n    DRM_PANEL_BLANK_FPS_CHANGE,\n  };\n\n  struct qcom_drm_panel_notifier{\n    struct drm_panel_notifier notifier;\n    int refresh_rate;\n    uint32_t id;\n  };",
+      "revId": "21c204daea5f1889e4d1a2b15006b5d387c085bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
