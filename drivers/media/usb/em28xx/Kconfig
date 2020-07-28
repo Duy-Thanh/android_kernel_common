@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-2.0-only
 config VIDEO_EM28XX
-	tristate "Empia EM28xx USB devices support"
+	bool "Empia EM28xx USB devices support"
 	depends on VIDEO_DEV && I2C
 	select VIDEO_TUNER
 	select VIDEO_TVEEPROM

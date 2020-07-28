@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-2.0-only
 config VIDEO_CX231XX
-	tristate "Conexant cx231xx USB video capture support"
+	bool "Conexant cx231xx USB video capture support"
 	depends on VIDEO_DEV && I2C && I2C_MUX
 	select VIDEO_TUNER
 	select VIDEO_TVEEPROM
