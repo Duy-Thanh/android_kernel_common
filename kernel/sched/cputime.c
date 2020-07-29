@@ -467,7 +467,7 @@ void thread_group_cputime_adjusted(struct task_struct *p, u64 *ut, u64 *st)
 	*ut = cputime.utime;
 	*st = cputime.stime;
 }
-
+EXPORT_SYMBOL_GPL(thread_group_cputime_adjusted);
 #else /* !CONFIG_VIRT_CPU_ACCOUNTING_NATIVE: */
 
 /*
