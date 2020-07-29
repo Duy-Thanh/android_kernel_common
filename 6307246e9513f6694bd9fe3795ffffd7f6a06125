@@ -22,6 +22,30 @@
       "revId": "6307246e9513f6694bd9fe3795ffffd7f6a06125",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a357c21_3f5dfd0a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2020-07-29T12:41:38Z",
+      "side": 1,
+      "message": "ok. I just reference head  message according old patch and change to \"BACKPORT\"\nThis patch is from aosp/upstream-master",
+      "parentUuid": "fd766128_17294b1d",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "6307246e9513f6694bd9fe3795ffffd7f6a06125",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
