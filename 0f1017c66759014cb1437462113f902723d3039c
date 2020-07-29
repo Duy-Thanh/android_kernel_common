@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e279ca7b_4762014d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2020-07-29T07:49:11Z",
+      "side": 1,
+      "message": "fix below error when run  build_abi.sh\n\u0027struct sdhci_ops at sdhci.h:613:1\u0027 changed:\n  type size changed from 1792 to 1856 (in bits)\n  1 data member insertion:\n    \u0027void (sdhci_host*)* sdhci_ops::dump_vendor_regs\u0027, at offset 1792 (in bits) at sdhci.h:654:1\n  12 impacted interfaces",
+      "revId": "0f1017c66759014cb1437462113f902723d3039c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
