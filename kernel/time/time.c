@@ -671,6 +671,7 @@ u64 jiffies_64_to_clock_t(u64 x)
 }
 EXPORT_SYMBOL(jiffies_64_to_clock_t);
 
+EXPORT_SYMBOL_GPL(nsec_to_clock_t);
 u64 nsec_to_clock_t(u64 x)
 {
 #if (NSEC_PER_SEC % USER_HZ) == 0
