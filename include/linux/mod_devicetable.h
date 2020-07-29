@@ -299,7 +299,11 @@ struct pcmcia_device_id {
 #define INPUT_DEVICE_ID_LED_MAX		0x0f
 #define INPUT_DEVICE_ID_SND_MAX		0x07
 #define INPUT_DEVICE_ID_FF_MAX		0x7f
+<<<<<<< HEAD   (05b997 ANDROID: build: update ABI definitions)
 #define INPUT_DEVICE_ID_SW_MAX		0x20
+=======
+#define INPUT_DEVICE_ID_SW_MAX		0x10
+>>>>>>> BRANCH (205a42 Linux 4.19.135)
 #define INPUT_DEVICE_ID_PROP_MAX	0x1f
 
 #define INPUT_DEVICE_ID_MATCH_BUS	1
