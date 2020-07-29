@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fbbf1096_440bb21e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2020-07-29T21:09:39Z",
+      "side": 1,
+      "message": "Needed for https://android-review.googlesource.com/c/kernel/cuttlefish-modules/+/1378457 per Alistair\u0027s comments.",
+      "revId": "95c511558b3b36ea1fb769b34aaca9b7790f7ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
