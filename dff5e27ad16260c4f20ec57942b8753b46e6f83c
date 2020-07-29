@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "84da1c61_42d18948",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-07-29T22:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "965825de_50f419af",
+      "range": {
+        "startLine": 22,
+        "startChar": 17,
+        "endLine": 22,
+        "endChar": 48
+      },
+      "revId": "dff5e27ad16260c4f20ec57942b8753b46e6f83c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18005cda_2952aca7",
         "filename": "drivers/dma-buf/dma-heap.c",
         "patchSetId": 1
