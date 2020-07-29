@@ -69,6 +69,7 @@ EXPORT_SYMBOL(avenrun); /* should be removed */
  *
  * These values are estimates at best, so no need for locking.
  */
+ EXPORT_SYMBOL_GPL(get_avenrun);
 void get_avenrun(unsigned long *loads, unsigned long offset, int shift)
 {
 	loads[0] = (avenrun[0] + offset) << shift;
