@@ -16,6 +16,167 @@
       "revId": "babbef5dd1835670cb1724b3cc6f6bc9ec12951c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7678f4c9_5a419935",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-07-30T21:55:58Z",
+      "side": 1,
+      "message": "nit: current_uid() ?",
+      "range": {
+        "startLine": 748,
+        "startChar": 15,
+        "endLine": 748,
+        "endChar": 34
+      },
+      "revId": "babbef5dd1835670cb1724b3cc6f6bc9ec12951c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "faf1c27a_75f5e040",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1350,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-07-30T21:55:58Z",
+      "side": 1,
+      "message": "should it be either/or instead of potentially both? Esp. given that there\u0027s just one |reads_size| argument",
+      "range": {
+        "startLine": 1348,
+        "startChar": 2,
+        "endLine": 1350,
+        "endChar": 15
+      },
+      "revId": "babbef5dd1835670cb1724b3cc6f6bc9ec12951c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef172e0b_b3d22ae1",
+        "filename": "fs/incfs/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-07-30T21:55:58Z",
+      "side": 1,
+      "message": "is there a way to export this name in the incrementalfs.h header?",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 69
+      },
+      "revId": "babbef5dd1835670cb1724b3cc6f6bc9ec12951c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc1ab2e6_6553b124",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-07-30T21:55:58Z",
+      "side": 1,
+      "message": "does it cover both pending reads and read logs? the name doesn\u0027t differentiate between the two, and I can assure you that we will need to eventually add the same thing to read logs if we don\u0027t now, making this name strange",
+      "range": {
+        "startLine": 244,
+        "startChar": 20,
+        "endLine": 244,
+        "endChar": 30
+      },
+      "revId": "babbef5dd1835670cb1724b3cc6f6bc9ec12951c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75e11483_3573947c",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-07-30T21:55:58Z",
+      "side": 1,
+      "message": "can we ensure this option never changes on remount? otherwise the client code will need to double check incfs mount options every time it\u0027s getting pending reads - and that is both expensive and inconvenient.",
+      "range": {
+        "startLine": 306,
+        "startChar": 9,
+        "endLine": 306,
+        "endChar": 19
+      },
+      "revId": "babbef5dd1835670cb1724b3cc6f6bc9ec12951c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89f1c746_c913e809",
+        "filename": "include/uapi/linux/incrementalfs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-07-30T21:55:58Z",
+      "side": 1,
+      "message": "_with_uid ? Greg wasn\u0027t happy at all when I tried \"ext\" or similarly-suffixed names before",
+      "range": {
+        "startLine": 131,
+        "startChar": 7,
+        "endLine": 131,
+        "endChar": 31
+      },
+      "revId": "babbef5dd1835670cb1724b3cc6f6bc9ec12951c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a9b309d_12a1b074",
+        "filename": "include/uapi/linux/incrementalfs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-07-30T21:55:58Z",
+      "side": 1,
+      "message": "curious if you can simply insert the old struct here as a first data member instead of copy-pasting the fields",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 11
+      },
+      "revId": "babbef5dd1835670cb1724b3cc6f6bc9ec12951c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
