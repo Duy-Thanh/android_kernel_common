@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84f4edf8_4711e617",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-07-30T21:01:25Z",
+      "side": 1,
+      "message": "Yurii - can you take a quick look? I need to add log handling before this is done, but does this seem like the right approach? And can you think of a nicer way of coding it?",
+      "revId": "babbef5dd1835670cb1724b3cc6f6bc9ec12951c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
