@@ -745,6 +745,7 @@ static struct pending_read *add_pending_read(struct data_file *df,
 	result->file_id = df->df_id;
 	result->block_index = block_index;
 	result->timestamp_us = ktime_to_us(ktime_get());
+	result->uid = current_cred()->uid.val;
 
 	spin_lock(&mi->pending_read_lock);
 
@@ -1308,6 +1309,7 @@ bool incfs_fresh_pending_reads_exist(struct mount_info *mi, int last_number)
 
 int incfs_collect_pending_reads(struct mount_info *mi, int sn_lowerbound,
 				struct incfs_pending_read_info *reads,
+				struct incfs_pending_read_info2 *reads2,
 				int reads_size, int *new_max_sn)
 {
 	int reported_reads = 0;
@@ -1336,10 +1338,24 @@ int incfs_collect_pending_reads(struct mount_info *mi, int sn_lowerbound,
 		if (entry->serial_number <= sn_lowerbound)
 			continue;
 
-		reads[reported_reads].file_id = entry->file_id;
-		reads[reported_reads].block_index = entry->block_index;
-		reads[reported_reads].serial_number = entry->serial_number;
-		reads[reported_reads].timestamp_us = entry->timestamp_us;
+		if (reads) {
+			reads[reported_reads].file_id = entry->file_id;
+			reads[reported_reads].block_index = entry->block_index;
+			reads[reported_reads].serial_number =
+				entry->serial_number;
+			reads[reported_reads].timestamp_us =
+				entry->timestamp_us;
+		}
+
+		if (reads2) {
+			reads2[reported_reads].file_id = entry->file_id;
+			reads2[reported_reads].block_index = entry->block_index;
+			reads2[reported_reads].serial_number =
+				entry->serial_number;
+			reads2[reported_reads].timestamp_us =
+				entry->timestamp_us;
+			reads2[reported_reads].uid = entry->uid;
+		}
 
 		if (entry->serial_number > *new_max_sn)
 			*new_max_sn = entry->serial_number;

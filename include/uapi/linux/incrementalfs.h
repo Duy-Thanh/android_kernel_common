@@ -125,6 +125,29 @@ struct incfs_pending_read_info {
 };
 
 /*
+ * Description of a pending read. A pending read - a read call by
+ * a userspace program for which the filesystem currently doesn't have data.
+ */
+struct incfs_pending_read_info2 {
+	/* Id of a file that is being read from. */
+	incfs_uuid_t file_id;
+
+	/* A number of microseconds since system boot to the read. */
+	__aligned_u64 timestamp_us;
+
+	/* Index of a file block that is being read. */
+	__u32 block_index;
+
+	/* A serial number of this pending read. */
+	__u32 serial_number;
+
+	/* The UID of the reading process */
+	__u32 uid;
+
+	__u32 reserved;
+};
+
+/*
  * Description of a data or hash block to add to a data file.
  */
 struct incfs_fill_block {

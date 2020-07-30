@@ -656,6 +656,55 @@ static int data_producer(const char *mount_dir, struct test_files_set *test_set)
 	return ret;
 }
 
+static int data_producer2(const char *mount_dir,
+			  struct test_files_set *test_set)
+{
+	int ret = 0;
+	int timeout_ms = 1000;
+	struct incfs_pending_read_info2 prs[100] = {};
+	int prs_size = ARRAY_SIZE(prs);
+	int fd = open_commands_file(mount_dir);
+
+	if (fd < 0)
+		return -errno;
+
+	while ((ret = wait_for_pending_reads2(fd, timeout_ms, prs, prs_size)) >
+	       0) {
+		int read_count = ret;
+		int i;
+
+		for (i = 0; i < read_count; i++) {
+			int j = 0;
+			struct test_file *file = NULL;
+
+			for (j = 0; j < test_set->files_count; j++) {
+				bool same = same_id(&(test_set->files[j].id),
+					&(prs[i].file_id));
+
+				if (same) {
+					file = &test_set->files[j];
+					break;
+				}
+			}
+			if (!file) {
+				ksft_print_msg(
+					"Unknown file in pending reads.\n");
+				break;
+			}
+
+			ret = emit_test_block(mount_dir, file,
+				prs[i].block_index);
+			if (ret < 0) {
+				ksft_print_msg("Emitting test data error: %s\n",
+						strerror(-ret));
+				break;
+			}
+		}
+	}
+	close(fd);
+	return ret;
+}
+
 static int build_mtree(struct test_file *file)
 {
 	char data[INCFS_DATA_FILE_BLOCK_SIZE] = {};
@@ -1734,7 +1783,8 @@ static int multiple_providers_test(const char *mount_dir)
 		goto failure;
 
 	/* Mount FS and release the backing file.  (10s wait time) */
-	if (mount_fs(mount_dir, backing_dir, 10000) != 0)
+	if (mount_fs_opt(mount_dir, backing_dir,
+			 "read_timeout_ms=10000,report_uid", false) != 0)
 		goto failure;
 
 	cmd_fd = open_commands_file(mount_dir);
@@ -1761,7 +1811,7 @@ static int multiple_providers_test(const char *mount_dir)
 			 * pending reads.
 			 */
 
-			ret = data_producer(mount_dir, &test);
+			ret = data_producer2(mount_dir, &test);
 			exit(-ret);
 		} else if (producer_pid > 0) {
 			producer_pids[i] = producer_pid;
