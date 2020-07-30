@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de47cc8f_04f027f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-07-30T20:55:05Z",
+      "side": 1,
+      "message": "Probably best to add:\n  Bug: 146449535\n\nfor this.\n",
+      "revId": "62c2dbb00086065d3b76df0df8f9ed3962596532",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
