@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "7c6f17c7_29f1798a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-07-30T16:41:18Z",
+      "side": 1,
+      "message": "If you ever intend to upstream this series, I suggest looking at this discussion around a series that tries to introduce ‘task isolation’.\n\nhttps://lore.kernel.org/lkml/87a6zpx6jb.fsf@nanos.tec.linutronix.de/\n\nUpstream is not against new features, but they certainly want to see a clearer explanation of why it is needed.",
+      "parentUuid": "a60d3239_4fe1125b",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "01f94864_fea86e59",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -54,6 +72,52 @@
     },
     {
       "key": {
+        "uuid": "3a565bf5_2b73f36a",
+        "filename": "include/linux/cpumask.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-07-30T16:41:18Z",
+      "side": 1,
+      "message": "nit: \"is isolated\"\n\nAFAICS all these definitions are independent. In the spirit of keeping non upstream code separate, is it possible to pull them out into their own header? This way less chances of conflicts with backported upstream code.",
+      "range": {
+        "startLine": 58,
+        "startChar": 52,
+        "endLine": 58,
+        "endChar": 60
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d66865ad_e18d0bea",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2452,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-07-30T16:41:18Z",
+      "side": 1,
+      "message": "Similarly, if cpu isolation features can be confined into its own headers and C files, it\u0027ll reduce friction and conflict with upstream code.",
+      "range": {
+        "startLine": 2452,
+        "startChar": 0,
+        "endLine": 2452,
+        "endChar": 49
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7fde4eb5_06fe6997",
         "filename": "kernel/cpu.c",
         "patchSetId": 6
@@ -65,6 +129,52 @@
       "writtenOn": "2020-07-27T12:35:37Z",
       "side": 1,
       "message": "Doesn\u0027t seem to be used. Those functions seem to be called from the ia64 arch.",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90958512_da72aff3",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6295,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-07-30T16:41:18Z",
+      "side": 1,
+      "message": "Exporting all the functions you require in a separate patch would be a better approach.",
+      "range": {
+        "startLine": 6295,
+        "startChar": 0,
+        "endLine": 6295,
+        "endChar": 37
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd7299b2_e26095d2",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6334,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-07-30T16:41:18Z",
+      "side": 1,
+      "message": "Would it be difficult to move these 2 functions into your cpu isolation header/C file?",
+      "range": {
+        "startLine": 6334,
+        "startChar": 0,
+        "endLine": 6334,
+        "endChar": 69
+      },
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -104,6 +214,29 @@
         "startChar": 10,
         "endLine": 6359,
         "endChar": 30
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99af4e3f_044e6058",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6367,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-07-30T16:41:18Z",
+      "side": 1,
+      "message": "Allocating a cpumask_t on the stack is not preferable. You add something similar in sched_setaffinity(). See how it\u0027s using cpumask_var_t and alloc_cpumask_var().",
+      "range": {
+        "startLine": 6367,
+        "startChar": 1,
+        "endLine": 6367,
+        "endChar": 10
       },
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
@@ -156,6 +289,24 @@
       "writtenOn": "2020-07-27T12:35:37Z",
       "side": 1,
       "message": "I am not sure to understand why this update_rq_clock appeared here. Could you develop ?",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1e9662d_2d78ba4b",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6419,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-07-30T16:41:18Z",
+      "side": 1,
+      "message": "Yes, this update_rq_clock() looks randomly placed here. There\u0027s another one below.",
+      "parentUuid": "4d8bebd5_3a52746d",
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -501,6 +652,47 @@
     },
     {
       "key": {
+        "uuid": "3caddb83_72d006df",
+        "filename": "kernel/time/hrtimer.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2124,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-07-30T16:41:18Z",
+      "side": 1,
+      "message": "Agreed. The changes here don\u0027t belong to the isolation patch and should be part of the earlier hrtimer changes.",
+      "parentUuid": "0d1858a3_b44f2d9c",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b8b27b1_f9bcdb0e",
+        "filename": "kernel/time/timer.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2004,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-07-30T16:41:18Z",
+      "side": 1,
+      "message": "This needs a comment. What problem did you see that warranted this change?",
+      "range": {
+        "startLine": 2004,
+        "startChar": 2,
+        "endLine": 2004,
+        "endChar": 23
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "aff3a3a3_fb1785c0",
         "filename": "kernel/watchdog.c",
         "patchSetId": 6
@@ -512,6 +704,75 @@
       "writtenOn": "2020-07-23T00:37:08Z",
       "side": 1,
       "message": "This watchdog stuff seems like it should be in a separate patch so you can discuss it in the commit message.",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8b78620_b0cdf264",
+        "filename": "kernel/watchdog.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-07-30T16:41:18Z",
+      "side": 1,
+      "message": "Makes sense to wrap this with sched_isolate_watchdog_enable_entry() function?",
+      "range": {
+        "startLine": 455,
+        "startChar": 1,
+        "endLine": 456,
+        "endChar": 9
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12703f50_66f8f120",
+        "filename": "kernel/watchdog.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-07-30T16:41:18Z",
+      "side": 1,
+      "message": "Similarly, can we wrap it with sched_isolate_watchdog_enable_exit() function? Should help keeping the feature separated and protected with a CONFIG option.",
+      "range": {
+        "startLine": 473,
+        "startChar": 1,
+        "endLine": 480,
+        "endChar": 14
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00f797b2_1031ad6b",
+        "filename": "kernel/watchdog.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-07-30T16:41:18Z",
+      "side": 1,
+      "message": "ditto as above.",
+      "range": {
+        "startLine": 486,
+        "startChar": 1,
+        "endLine": 489,
+        "endChar": 9
+      },
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
