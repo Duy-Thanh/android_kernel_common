@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dce692e6_662dc96c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-30T21:22:13Z",
+      "side": 1,
+      "message": "Same comment as on previous commit, if Android userspace does not use this, there\u0027s no good reason to enable it at this time. ",
+      "revId": "bdd4ceb8d2dd214c9d64ef333b9b5299d2245b3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
