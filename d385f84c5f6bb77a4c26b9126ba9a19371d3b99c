@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0c85d42c_200e1c79",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1727248
+      },
+      "writtenOn": "2020-07-30T04:16:56Z",
+      "side": 1,
+      "message": "I have edited all commits with comments limited to 72 columns.",
+      "parentUuid": "92b50612_6ebc2db8",
+      "range": {
+        "startLine": 9,
+        "startChar": 4,
+        "endLine": 11,
+        "endChar": 168
+      },
+      "revId": "d385f84c5f6bb77a4c26b9126ba9a19371d3b99c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a05d9113_498b23f1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
