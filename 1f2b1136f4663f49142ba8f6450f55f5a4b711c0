@@ -16,6 +16,24 @@
       "revId": "1f2b1136f4663f49142ba8f6450f55f5a4b711c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "497d3c65_30f2bcda",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-07-31T23:22:20Z",
+      "side": 1,
+      "message": "Good point! Thanks for catching that. I\u0027ll revise and resubmit.",
+      "parentUuid": "ca61861b_02cb2240",
+      "revId": "1f2b1136f4663f49142ba8f6450f55f5a4b711c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
