@@ -33,6 +33,23 @@
       "revId": "62c2dbb00086065d3b76df0df8f9ed3962596532",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "088108d9_78d2f5e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-07-31T02:23:06Z",
+      "side": 1,
+      "message": "And maybe we could also disable the CONFIG_EROFS_FS config explicitly here?\nwhich is set to m in the gki_defconfig.",
+      "revId": "62c2dbb00086065d3b76df0df8f9ed3962596532",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
