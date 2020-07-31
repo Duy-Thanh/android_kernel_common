@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca61861b_02cb2240",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-07-31T20:54:59Z",
+      "side": 1,
+      "message": "Hi John, I was wondering if we should have the mutex lock/unlock in dma_buf_put() instead of around the list member deletion in dma_heap_release(). Shouldn\u0027t it be possible for dma_heap_release() to race with dma_heap_find() for the mutex and if dma_heap_find() gets it first, it would end up getting a pointer to the heap right before it got destroyed by dma_heap_release? (Or maybe we should use kref_get_unless_zero() in dma_heap_find() instead of kref_get())?",
+      "revId": "1f2b1136f4663f49142ba8f6450f55f5a4b711c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
