@@ -16,6 +16,29 @@
       "revId": "c82db9368eeb68fb58815283d06ba1cb5acf4e5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84ec4eab_eab09658",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-01T12:47:24Z",
+      "side": 1,
+      "message": "what is this needed for?\n\nNo driver should need this that I can determine.\n\nSame for many other \"vfs core\" exports you have listed in here, why?",
+      "range": {
+        "startLine": 486,
+        "startChar": 0,
+        "endLine": 486,
+        "endChar": 8
+      },
+      "revId": "c82db9368eeb68fb58815283d06ba1cb5acf4e5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
