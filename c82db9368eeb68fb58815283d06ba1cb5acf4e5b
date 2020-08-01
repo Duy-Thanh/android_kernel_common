@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71d0469e_fe278ad2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-01T12:45:40Z",
+      "side": 1,
+      "message": "Any chance you can break these out by driver names so that we can review them easier?\n\nSee examples of this in the abi_gki_arch64_hikey960 file.",
+      "revId": "c82db9368eeb68fb58815283d06ba1cb5acf4e5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
