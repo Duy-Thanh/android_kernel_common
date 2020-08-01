@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "419602c9_e7400150",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-01T21:06:17Z",
+      "side": 1,
+      "message": "Add a \"Fixes:\" tag citing the patch that introduced the issue.",
+      "revId": "eb2a1bb1e910b7ad5cb0396bfbe78ab1e16750b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
