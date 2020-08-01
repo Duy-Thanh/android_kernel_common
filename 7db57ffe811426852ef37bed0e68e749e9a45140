@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcf0c846_a640bd9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-01T10:13:17Z",
+      "side": 1,
+      "message": "Nice work on the series, only minor documentation change might be needed.",
+      "revId": "7db57ffe811426852ef37bed0e68e749e9a45140",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e01c36a_3fdff897",
+        "filename": "include/linux/dma-heap.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-01T10:13:17Z",
+      "side": 1,
+      "message": "Say here that the the return value MUST be released with a call to dma_heap_put() when done with, otherwise you will have a memory leak.",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 3
+      },
+      "revId": "7db57ffe811426852ef37bed0e68e749e9a45140",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
