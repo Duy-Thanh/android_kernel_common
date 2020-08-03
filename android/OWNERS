@@ -1,0 +1,13 @@
+# If we ever add another OWNERS above this directory, it's likely to be
+# more permissive, so don't inherit from it
+set noparent
+# See b/161933860
+# Open code gki-abi-approvers@google.com for now
+adelva@google.com
+sspatil@google.com
+saravanak@google.com
+tkjos@google.com
+willmcvicker@google.com
+# Downstream boards maintained directly in this manifest branch
+per-file abi_gki_aarch64_cuttlefish = adelva@google.com, rammuthiah@google.com
+per-file abi_gki_aarch64_goldfish = rkir@google.com
