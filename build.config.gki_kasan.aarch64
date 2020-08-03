@@ -1,3 +1,9 @@
+<<<<<<< HEAD   (f0416d Revert "binder: Prevent context manager from incrementing re)
 . ${ROOT_DIR}/common/build.config.common
 . ${ROOT_DIR}/common/build.config.aarch64
 . ${ROOT_DIR}/common/build.config.gki_kasan
+=======
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.common
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.aarch64
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.gki_kasan
+>>>>>>> CHANGE (931718 ANDROID: drop KERNEL_DIR setting in build.config.common)
