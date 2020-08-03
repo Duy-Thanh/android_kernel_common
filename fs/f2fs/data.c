@@ -472,6 +472,7 @@ static void f2fs_set_bio_crypt_ctx(struct bio *bio, const struct inode *inode,
 	 */
 	if (!fio || !fio->encrypted_page)
 		fscrypt_set_bio_crypt_ctx(bio, inode, first_idx, gfp_mask);
+<<<<<<< HEAD   (5a0b0e Merge 5.8 into android-mainline)
 	else if (fscrypt_inode_should_skip_dm_default_key(inode))
 		bio_set_skip_dm_default_key(bio);
 }
@@ -488,6 +489,20 @@ static bool f2fs_crypt_mergeable_bio(struct bio *bio, const struct inode *inode,
 		return !bio_has_crypt_ctx(bio) &&
 			(bio_should_skip_dm_default_key(bio) ==
 			 fscrypt_inode_should_skip_dm_default_key(inode));
+=======
+}
+
+static bool f2fs_crypt_mergeable_bio(struct bio *bio, const struct inode *inode,
+				     pgoff_t next_idx,
+				     const struct f2fs_io_info *fio)
+{
+	/*
+	 * The f2fs garbage collector sets ->encrypted_page when it wants to
+	 * read/write raw data without encryption.
+	 */
+	if (fio && fio->encrypted_page)
+		return !bio_has_crypt_ctx(bio);
+>>>>>>> BRANCH (320816 Merge tag 'filelock-v5.9-1' of git://git.kernel.org/pub/scm/)
 
 	return fscrypt_mergeable_bio(bio, inode, next_idx);
 }

@@ -118,24 +118,39 @@ err_free_tfm:
  * (fs-layer or blk-crypto) will be used.
  */
 int fscrypt_prepare_key(struct fscrypt_prepared_key *prep_key,
+<<<<<<< HEAD   (5a0b0e Merge 5.8 into android-mainline)
 			const u8 *raw_key, unsigned int raw_key_size,
 			bool is_hw_wrapped, const struct fscrypt_info *ci)
+=======
+			const u8 *raw_key, const struct fscrypt_info *ci)
+>>>>>>> BRANCH (320816 Merge tag 'filelock-v5.9-1' of git://git.kernel.org/pub/scm/)
 {
 	struct crypto_skcipher *tfm;
 
 	if (fscrypt_using_inline_encryption(ci))
+<<<<<<< HEAD   (5a0b0e Merge 5.8 into android-mainline)
 		return fscrypt_prepare_inline_crypt_key(prep_key,
 				raw_key, raw_key_size, is_hw_wrapped, ci);
 
 	if (WARN_ON(is_hw_wrapped || raw_key_size != ci->ci_mode->keysize))
 		return -EINVAL;
+=======
+		return fscrypt_prepare_inline_crypt_key(prep_key, raw_key, ci);
+>>>>>>> BRANCH (320816 Merge tag 'filelock-v5.9-1' of git://git.kernel.org/pub/scm/)
 
 	tfm = fscrypt_allocate_skcipher(ci->ci_mode, raw_key, ci->ci_inode);
 	if (IS_ERR(tfm))
 		return PTR_ERR(tfm);
 	/*
+<<<<<<< HEAD   (5a0b0e Merge 5.8 into android-mainline)
 	 * Pairs with READ_ONCE() in fscrypt_is_key_prepared().  (Only matters
 	 * for the per-mode keys, which are shared by multiple inodes.)
+=======
+	 * Pairs with the smp_load_acquire() in fscrypt_is_key_prepared().
+	 * I.e., here we publish ->tfm with a RELEASE barrier so that
+	 * concurrent tasks can ACQUIRE it.  Note that this concurrency is only
+	 * possible for per-mode keys, not for per-file keys.
+>>>>>>> BRANCH (320816 Merge tag 'filelock-v5.9-1' of git://git.kernel.org/pub/scm/)
 	 */
 	smp_store_release(&prep_key->tfm, tfm);
 	return 0;
@@ -152,8 +167,12 @@ void fscrypt_destroy_prepared_key(struct fscrypt_prepared_key *prep_key)
 int fscrypt_set_per_file_enc_key(struct fscrypt_info *ci, const u8 *raw_key)
 {
 	ci->ci_owns_key = true;
+<<<<<<< HEAD   (5a0b0e Merge 5.8 into android-mainline)
 	return fscrypt_prepare_key(&ci->ci_enc_key, raw_key, ci->ci_mode->keysize,
 				   false /*is_hw_wrapped*/, ci);
+=======
+	return fscrypt_prepare_key(&ci->ci_enc_key, raw_key, ci);
+>>>>>>> BRANCH (320816 Merge tag 'filelock-v5.9-1' of git://git.kernel.org/pub/scm/)
 }
 
 static int setup_per_mode_enc_key(struct fscrypt_info *ci,
@@ -227,6 +246,18 @@ static int setup_per_mode_enc_key(struct fscrypt_info *ci,
 		if (err)
 			goto out_unlock;
 	}
+<<<<<<< HEAD   (5a0b0e Merge 5.8 into android-mainline)
+=======
+	err = fscrypt_hkdf_expand(&mk->mk_secret.hkdf,
+				  hkdf_context, hkdf_info, hkdf_infolen,
+				  mode_key, mode->keysize);
+	if (err)
+		goto out_unlock;
+	err = fscrypt_prepare_key(prep_key, mode_key, ci);
+	memzero_explicit(mode_key, mode->keysize);
+	if (err)
+		goto out_unlock;
+>>>>>>> BRANCH (320816 Merge tag 'filelock-v5.9-1' of git://git.kernel.org/pub/scm/)
 done_unlock:
 	ci->ci_enc_key = *prep_key;
 	err = 0;
@@ -241,7 +272,7 @@ int fscrypt_derive_dirhash_key(struct fscrypt_info *ci,
 	int err;
 
 	err = fscrypt_hkdf_expand(&mk->mk_secret.hkdf, HKDF_CONTEXT_DIRHASH_KEY,
-				  ci->ci_nonce, FS_KEY_DERIVATION_NONCE_SIZE,
+				  ci->ci_nonce, FSCRYPT_FILE_NONCE_SIZE,
 				  (u8 *)&ci->ci_dirhash_key,
 				  sizeof(ci->ci_dirhash_key));
 	if (err)
@@ -330,8 +361,7 @@ static int fscrypt_setup_v2_file_key(struct fscrypt_info *ci,
 
 		err = fscrypt_hkdf_expand(&mk->mk_secret.hkdf,
 					  HKDF_CONTEXT_PER_FILE_ENC_KEY,
-					  ci->ci_nonce,
-					  FS_KEY_DERIVATION_NONCE_SIZE,
+					  ci->ci_nonce, FSCRYPT_FILE_NONCE_SIZE,
 					  derived_key, ci->ci_mode->keysize);
 		if (err)
 			return err;
@@ -369,6 +399,10 @@ static int setup_file_encryption_key(struct fscrypt_info *ci,
 	struct fscrypt_master_key *mk = NULL;
 	struct fscrypt_key_specifier mk_spec;
 	int err;
+
+	err = fscrypt_select_encryption_impl(ci);
+	if (err)
+		return err;
 
 	switch (ci->ci_policy.version) {
 	case FSCRYPT_POLICY_V1:
@@ -540,7 +574,7 @@ int fscrypt_get_encryption_info(struct inode *inode)
 	}
 
 	memcpy(crypt_info->ci_nonce, fscrypt_context_nonce(&ctx),
-	       FS_KEY_DERIVATION_NONCE_SIZE);
+	       FSCRYPT_FILE_NONCE_SIZE);
 
 	if (!fscrypt_supported_policy(&crypt_info->ci_policy, inode)) {
 		res = -EINVAL;
@@ -559,7 +593,17 @@ int fscrypt_get_encryption_info(struct inode *inode)
 	if (res)
 		goto out;
 
+	/*
+	 * Multiple tasks may race to set ->i_crypt_info, so use
+	 * cmpxchg_release().  This pairs with the smp_load_acquire() in
+	 * fscrypt_get_info().  I.e., here we publish ->i_crypt_info with a
+	 * RELEASE barrier so that other tasks can ACQUIRE it.
+	 */
 	if (cmpxchg_release(&inode->i_crypt_info, NULL, crypt_info) == NULL) {
+		/*
+		 * We won the race and set ->i_crypt_info to our crypt_info.
+		 * Now link it into the master key's inode list.
+		 */
 		if (master_key) {
 			struct fscrypt_master_key *mk =
 				master_key->payload.data[0];
@@ -630,7 +674,7 @@ EXPORT_SYMBOL(fscrypt_free_inode);
  */
 int fscrypt_drop_inode(struct inode *inode)
 {
-	const struct fscrypt_info *ci = READ_ONCE(inode->i_crypt_info);
+	const struct fscrypt_info *ci = fscrypt_get_info(inode);
 	const struct fscrypt_master_key *mk;
 
 	/*
