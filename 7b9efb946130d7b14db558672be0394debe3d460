@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94b965bc_9557e723",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-03T12:54:36Z",
+      "side": 1,
+      "message": "A few questions about some of these requested symbols:",
+      "revId": "7b9efb946130d7b14db558672be0394debe3d460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "194f61c6_e9a25a03",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 3
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-03T12:54:36Z",
+      "side": 1,
+      "message": "what is this needed for?  no kernel driver should be messing with files from a driver.",
+      "range": {
+        "startLine": 719,
+        "startChar": 0,
+        "endLine": 719,
+        "endChar": 12
+      },
+      "revId": "7b9efb946130d7b14db558672be0394debe3d460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a4a4f80_156da993",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 3
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-03T12:54:36Z",
+      "side": 1,
+      "message": "no kernel driver should ever need this symbol.  Let the core kernel handle stuff like this please.",
+      "range": {
+        "startLine": 776,
+        "startChar": 0,
+        "endLine": 776,
+        "endChar": 13
+      },
+      "revId": "7b9efb946130d7b14db558672be0394debe3d460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "286d7294_5a609160",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 3
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-03T12:54:36Z",
+      "side": 1,
+      "message": "no driver should ever be calling this function.",
+      "range": {
+        "startLine": 1015,
+        "startChar": 0,
+        "endLine": 1015,
+        "endChar": 18
+      },
+      "revId": "7b9efb946130d7b14db558672be0394debe3d460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0543eac_e9f7365b",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 3
+      },
+      "lineNbr": 1172,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-03T12:54:36Z",
+      "side": 1,
+      "message": "why is this needed?",
+      "range": {
+        "startLine": 1172,
+        "startChar": 2,
+        "endLine": 1172,
+        "endChar": 15
+      },
+      "revId": "7b9efb946130d7b14db558672be0394debe3d460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed7deb42_1219f5c0",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 3
+      },
+      "lineNbr": 1501,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-03T12:54:36Z",
+      "side": 1,
+      "message": "no, this is not needed by a driver.",
+      "range": {
+        "startLine": 1501,
+        "startChar": 0,
+        "endLine": 1501,
+        "endChar": 21
+      },
+      "revId": "7b9efb946130d7b14db558672be0394debe3d460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e41ba9b9_2b24109a",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 3
+      },
+      "lineNbr": 2362,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-03T12:54:36Z",
+      "side": 1,
+      "message": "are you sure this is still needed?  I thought the newer wireless api didn\u0027t need this.",
+      "range": {
+        "startLine": 2362,
+        "startChar": 0,
+        "endLine": 2362,
+        "endChar": 21
+      },
+      "revId": "7b9efb946130d7b14db558672be0394debe3d460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
