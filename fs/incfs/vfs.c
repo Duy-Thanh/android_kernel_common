@@ -1525,6 +1525,63 @@ static long ioctl_get_filled_blocks(struct file *f, void __user *arg)
 	return error;
 }
 
+static long ioctl_read_merkle_tree(struct file *f, void __user *arg)
+{
+	struct incfs_read_merkle_tree_args __user *args_usr_ptr = arg;
+	struct incfs_read_merkle_tree_args args = {};
+	struct data_file *df = get_incfs_data_file(f);
+	int read = 0;
+	struct mem_range buf;
+	u8 *user_buf;
+	size_t offset;
+
+	if (!df)
+		return -EINVAL;
+
+	if (copy_from_user(&args, args_usr_ptr, sizeof(args)) > 0)
+		return -EINVAL;
+
+	/* For now we only support block-aligned reads. */
+	if (!IS_ALIGNED(args.offset | args.length, INCFS_DATA_FILE_BLOCK_SIZE))
+		return -EINVAL;
+
+	buf = (struct mem_range) {
+		.data = kzalloc(INCFS_DATA_FILE_BLOCK_SIZE, GFP_NOFS),
+		.len = INCFS_DATA_FILE_BLOCK_SIZE,
+	};
+
+	if (!buf.data)
+		return -ENOMEM;
+
+	user_buf = u64_to_user_ptr(args.buf);
+
+	for (offset = args.offset; offset < args.offset + args.length;
+	     offset += buf.len) {
+		int error = incfs_read_merkle_tree_blocks(buf, df, offset);
+
+		if (error < 0) {
+			if (read == 0)
+				read = error;
+			break;
+		}
+
+		if (error != buf.len)
+			break;
+
+		if (copy_to_user(user_buf, buf.data, buf.len)) {
+			if (read == 0)
+				read = -EFAULT;
+			break;
+		}
+
+		user_buf += buf.len;
+		read += error;
+	}
+
+	kfree(buf.data);
+	return read;
+}
+
 static long dispatch_ioctl(struct file *f, unsigned int req, unsigned long arg)
 {
 	struct mount_info *mi = get_mount_info(file_superblock(f));
@@ -1540,6 +1597,8 @@ static long dispatch_ioctl(struct file *f, unsigned int req, unsigned long arg)
 		return ioctl_read_file_signature(f, (void __user *)arg);
 	case INCFS_IOC_GET_FILLED_BLOCKS:
 		return ioctl_get_filled_blocks(f, (void __user *)arg);
+	case INCFS_IOC_READ_MERKLE_TREE:
+		return ioctl_read_merkle_tree(f, (void __user *)arg);
 	default:
 		return -EINVAL;
 	}

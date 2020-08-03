@@ -844,7 +844,6 @@ static int load_hash_tree(const char *mount_dir, struct test_file *file)
 		err = errno;
 	else {
 		err = 0;
-		free(file->mtree);
 	}
 
 failure:
@@ -1863,6 +1862,55 @@ failure:
 	return TEST_FAILURE;
 }
 
+static int validate_hash_tree(const char *mount_dir, struct test_file *file)
+{
+	char *filename = concat_file_name(mount_dir, file->name);
+	int fd;
+	int result = -EINVAL;
+	unsigned char *buf;
+	int i;
+
+	fd = open(filename, O_RDONLY | O_CLOEXEC);
+	free(filename);
+	if (fd < 0)
+		return result;
+
+	buf = malloc(INCFS_DATA_FILE_BLOCK_SIZE * 8);
+	if (!buf)
+		goto out;
+
+	for (i = 0; i < file->mtree_block_count; ) {
+		int blocks_to_read = i % 7 + 1;
+		struct incfs_read_merkle_tree_args args = {
+			.offset = i * INCFS_DATA_FILE_BLOCK_SIZE,
+			.length = blocks_to_read * INCFS_DATA_FILE_BLOCK_SIZE,
+			.buf = ptr_to_u64(buf),
+		};
+		int result = ioctl(fd, INCFS_IOC_READ_MERKLE_TREE, &args);
+
+		if (result < 0)
+			goto out;
+
+		if (result != min(args.length,
+				  (file->mtree_block_count - i) *
+					INCFS_DATA_FILE_BLOCK_SIZE))
+			goto out;
+
+		if (memcmp(buf, file->mtree[i].data, result))
+			goto out;
+
+		i += blocks_to_read;
+	}
+
+	result = 0;
+
+out:
+	free(file->mtree);
+	free(buf);
+	close(fd);
+	return result;
+}
+
 static int hash_tree_test(const char *mount_dir)
 {
 	char *backing_dir;
@@ -1928,6 +1976,8 @@ static int hash_tree_test(const char *mount_dir)
 				goto failure;
 			}
 		} else if (validate_test_file_content(mount_dir, file) < 0)
+			goto failure;
+		else if (validate_hash_tree(mount_dir, file) < 0)
 			goto failure;
 	}
 
