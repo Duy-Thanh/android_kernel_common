@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "23f8a830_b1f7ffb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-08-03T02:43:58Z",
+      "side": 1,
+      "message": "Because symbols come from several platforms, and some devices aren\u0027t released, so I don\u0027t break them for keep devices info.",
+      "parentUuid": "71d0469e_fe278ad2",
+      "revId": "c82db9368eeb68fb58815283d06ba1cb5acf4e5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "84ec4eab_eab09658",
         "filename": "android/abi_gki_aarch64_vivo",
         "patchSetId": 1
@@ -39,6 +57,30 @@
       "revId": "c82db9368eeb68fb58815283d06ba1cb5acf4e5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9aabeb26_d29c6e3c",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-08-03T02:43:58Z",
+      "side": 1,
+      "message": "These symbols from sdcardfs.ko, I have remove them now.",
+      "parentUuid": "84ec4eab_eab09658",
+      "range": {
+        "startLine": 486,
+        "startChar": 0,
+        "endLine": 486,
+        "endChar": 8
+      },
+      "revId": "c82db9368eeb68fb58815283d06ba1cb5acf4e5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
