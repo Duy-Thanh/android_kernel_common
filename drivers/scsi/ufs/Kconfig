@@ -151,6 +151,14 @@ config SCSI_UFS_BSG
 	  Select this if you need a bsg device node for your UFS controller.
 	  If unsure, say N.
 
+config CONFIG_SCSI_UFS_VENDOR_WB
+	tristate "Write Booster Vendor specific feature support"
+	depends on SCSI_UFSHCD
+	help
+	  Enable Write Booster vendor specific.
+	  Enable this operation disables WB on the probe.
+	  Will check the WB buffer and flush operation before entering the suspend.
+
 config SCSI_UFS_CRYPTO
 	bool "UFS Crypto Engine Support"
 	depends on SCSI_UFSHCD && BLK_INLINE_ENCRYPTION
