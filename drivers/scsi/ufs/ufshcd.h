@@ -1283,7 +1283,7 @@ static inline int ufshcd_wb_toggle_flush_vendor(struct ufs_hba *hba,
 						enum ufs_pm_op pm_op)
 {
 	if (!hba->wb_ops || !hba->wb_ops->wb_toggle_flush_vendor)
-		return -1;
+		return -EINVAL;
 
 	return hba->wb_ops->wb_toggle_flush_vendor(hba, pm_op);
 }
@@ -1291,7 +1291,7 @@ static inline int ufshcd_wb_toggle_flush_vendor(struct ufs_hba *hba,
 static int ufshcd_wb_alloc_units_vendor(struct ufs_hba *hba)
 {
 	if (!hba->wb_ops || !hba->wb_ops->wb_alloc_units_vendor)
-		return -1;
+		return -EINVAL;
 
 	return hba->wb_ops->wb_alloc_units_vendor(hba);
 }
@@ -1299,7 +1299,7 @@ static int ufshcd_wb_alloc_units_vendor(struct ufs_hba *hba)
 static int ufshcd_wb_ctrl_vendor(struct ufs_hba *hba, bool enable)
 {
 	if (!hba->wb_ops || !hba->wb_ops->wb_ctrl_vendor)
-		return -1;
+		return -EINVAL;
 
 	return hba->wb_ops->wb_ctrl_vendor(hba, enable);
 }
@@ -1307,7 +1307,7 @@ static int ufshcd_wb_ctrl_vendor(struct ufs_hba *hba, bool enable)
 static int ufshcd_wb_reset_vendor(struct ufs_hba *hba)
 {
 	if (!hba->wb_ops || !hba->wb_ops->wb_reset_vendor)
-		return -1;
+		return -EINVAL;
 
 	return hba->wb_ops->wb_reset_vendor(hba, false);
 }
