@@ -20,6 +20,7 @@
 #include <linux/sched.h>
 #include <linux/sched/idle.h>
 #include <linux/hypervisor.h>
+#include <linux/suspend.h>
 
 #include "smpboot.h"
 #include "sched/smp.h"
@@ -819,7 +820,8 @@ void wake_up_all_idle_cpus(void)
 	for_each_online_cpu(cpu) {
 		if (cpu == smp_processor_id())
 			continue;
-
+		if (cpu_paused(cpu) && s2idle_state != S2IDLE_STATE_ENTER)
+			continue;
 		wake_up_if_idle(cpu);
 	}
 	preempt_enable();

@@ -47,6 +47,29 @@ static int do_unpause_work_cpu_stop(void *data)
 	return 0;
 }
 
+static void sched_update_group_capacities(int cpu)
+{
+	struct sched_domain *sd;
+
+	mutex_lock(&sched_domains_mutex);
+	rcu_read_lock();
+
+	for_each_domain(cpu, sd) {
+		int balance_cpu = group_balance_cpu(sd->groups);
+
+		init_sched_groups_capacity(cpu, sd);
+		/*
+		 * Need to ensure this is also called with balancing
+		 * cpu.
+		 */
+		if (cpu != balance_cpu)
+			init_sched_groups_capacity(balance_cpu, sd);
+	}
+
+	rcu_read_unlock();
+	mutex_unlock(&sched_domains_mutex);
+}
+
 static unsigned int cpu_pause_vote[NR_CPUS];
 
 /*
@@ -109,6 +132,7 @@ int sched_pause_cpu(int cpu)
 
 	calc_load_migrate(rq);
 	update_max_interval();
+	sched_update_group_capacities(cpu);
 
 out:
 	cpu_maps_update_done();
@@ -147,6 +171,7 @@ int sched_unpause_cpu_unlocked(int cpu)
 
 	set_cpu_paused(cpu, false);
 	update_max_interval();
+	sched_update_group_capacities(cpu);
 
 	if (cpu_online(cpu)) {
 		stop_cpus(cpumask_of(cpu), do_unpause_work_cpu_stop, 0);

@@ -1617,6 +1617,7 @@ static int __set_cpus_allowed_ptr(struct task_struct *p,
 	struct rq_flags rf;
 	struct rq *rq;
 	int ret = 0;
+	cpumask_t allowed_mask;
 
 	rq = task_rq_lock(p, &rf);
 	update_rq_clock(rq);
@@ -1637,18 +1638,20 @@ static int __set_cpus_allowed_ptr(struct task_struct *p,
 		goto out;
 	}
 
-	if (cpumask_equal(&p->cpus_mask, new_mask))
+	if (cpumask_equal(p->cpus_ptr, new_mask))
 		goto out;
 
-	/*
-	 * Picking a ~random cpu helps in cases where we are changing affinity
-	 * for groups of tasks (ie. cpuset), so that load balancing is not
-	 * immediately required to distribute the tasks within their new mask.
-	 */
-	dest_cpu = cpumask_any_and_distribute(cpu_valid_mask, new_mask);
+	cpumask_andnot(&allowed_mask, new_mask, cpu_paused_mask);
+	cpumask_and(&allowed_mask, &allowed_mask, cpu_valid_mask);
+
+	dest_cpu = cpumask_any(&allowed_mask);
 	if (dest_cpu >= nr_cpu_ids) {
-		ret = -EINVAL;
-		goto out;
+		cpumask_and(&allowed_mask, cpu_valid_mask, new_mask);
+		dest_cpu = cpumask_any(&allowed_mask);
+		if (!cpumask_intersects(new_mask, cpu_valid_mask)) {
+			ret = -EINVAL;
+			goto out;
+		}
 	}
 
 	do_set_cpus_allowed(p, new_mask);
@@ -1664,7 +1667,7 @@ static int __set_cpus_allowed_ptr(struct task_struct *p,
 	}
 
 	/* Can the task run on the task's current CPU? If so, we're done */
-	if (cpumask_test_cpu(task_cpu(p), new_mask))
+	if (cpumask_test_cpu(task_cpu(p), &allowed_mask))
 		goto out;
 
 	if (task_running(rq, p) || p->state == TASK_WAKING) {
@@ -2016,12 +2019,13 @@ EXPORT_SYMBOL_GPL(kick_process);
  * select_task_rq() below may allow selection of !active CPUs in order
  * to satisfy the above rules.
  */
-static int select_fallback_rq(int cpu, struct task_struct *p)
+static int select_fallback_rq(int cpu, struct task_struct *p, bool allow_pause)
 {
 	int nid = cpu_to_node(cpu);
 	const struct cpumask *nodemask = NULL;
-	enum { cpuset, possible, fail } state = cpuset;
+	enum { cpuset, possible, fail, bug } state = cpuset;
 	int dest_cpu;
+	int paused_candidate = -1;
 
 	/*
 	 * If the node that the CPU is on has been offlined, cpu_to_node()
@@ -2035,6 +2039,8 @@ static int select_fallback_rq(int cpu, struct task_struct *p)
 		for_each_cpu(dest_cpu, nodemask) {
 			if (!cpu_active(dest_cpu))
 				continue;
+			if (cpu_paused(dest_cpu))
+				continue;
 			if (cpumask_test_cpu(dest_cpu, p->cpus_ptr))
 				return dest_cpu;
 		}
@@ -2046,6 +2052,16 @@ static int select_fallback_rq(int cpu, struct task_struct *p)
 			if (!is_cpu_allowed(p, dest_cpu))
 				continue;
 
+			if (cpu_paused(dest_cpu)) {
+				if (allow_pause)
+					paused_candidate = dest_cpu;
+				continue;
+			}
+			goto out;
+		}
+
+		if (paused_candidate != -1) {
+			dest_cpu = paused_candidate;
 			goto out;
 		}
 
@@ -2064,6 +2080,11 @@ static int select_fallback_rq(int cpu, struct task_struct *p)
 			break;
 
 		case fail:
+			allow_pause = true;
+			state = bug;
+			break;
+
+		case bug:
 			BUG();
 			break;
 		}
@@ -2091,6 +2112,8 @@ out:
 static inline
 int select_task_rq(struct task_struct *p, int cpu, int sd_flags, int wake_flags)
 {
+	bool allow_paused = (p->flags & PF_KTHREAD);
+
 	lockdep_assert_held(&p->pi_lock);
 
 	if (p->nr_cpus_allowed > 1)
@@ -2108,8 +2131,9 @@ int select_task_rq(struct task_struct *p, int cpu, int sd_flags, int wake_flags)
 	 * [ this allows ->select_task() to simply return task_cpu(p) and
 	 *   not worry about this generic constraint ]
 	 */
-	if (unlikely(!is_cpu_allowed(p, cpu)))
-		cpu = select_fallback_rq(task_cpu(p), p);
+	if (unlikely(!is_cpu_allowed(p, cpu)) ||
+			(cpu_paused(cpu) && !allow_paused))
+		cpu = select_fallback_rq(task_cpu(p), p, allow_paused);
 
 	return cpu;
 }
@@ -2316,13 +2340,46 @@ void send_call_function_single_ipi(int cpu)
 		trace_sched_wake_idle_without_ipi(cpu);
 }
 
-/*
- * Queue a task on the target CPUs wake_list and wake the CPU via IPI if
- * necessary. The wakee CPU on receipt of the IPI will queue the task
- * via sched_ttwu_wakeup() for activation so the wakee incurs the cost
- * of the wakeup instead of the waker.
- */
-static void __ttwu_queue_wakelist(struct task_struct *p, int cpu, int wake_flags)
+void scheduler_ipi(void)
+{
+	int __maybe_unused cpu = smp_processor_id();
+	/*
+	 * Fold TIF_NEED_RESCHED into the preempt_count; anybody setting
+	 * TIF_NEED_RESCHED remotely (for the first time) will also send
+	 * this IPI.
+	 */
+	preempt_fold_need_resched();
+
+	if (llist_empty(&this_rq()->wake_list) && !got_nohz_idle_kick())
+		return;
+
+	/*
+	 * Not all reschedule IPI handlers call irq_enter/irq_exit, since
+	 * traditionally all their work was done from the interrupt return
+	 * path. Now that we actually do some work, we need to make sure
+	 * we do call them.
+	 *
+	 * Some archs already do call them, luckily irq_enter/exit nest
+	 * properly.
+	 *
+	 * Arguably we should visit all archs and update all handlers,
+	 * however a fair share of IPIs are still resched only so this would
+	 * somewhat pessimize the simple resched case.
+	 */
+	irq_enter();
+	sched_ttwu_pending();
+
+	/*
+	 * Check if someone kicked us for doing the nohz idle load balance.
+	 */
+	if (unlikely(got_nohz_idle_kick()) && !cpu_paused(cpu)) {
+		this_rq()->idle_balance = 1;
+		raise_softirq_irqoff(SCHED_SOFTIRQ);
+	}
+	irq_exit();
+}
+
+static void ttwu_queue_remote(struct task_struct *p, int cpu, int wake_flags)
 {
 	struct rq *rq = cpu_rq(cpu);
 
@@ -3571,7 +3628,7 @@ void sched_exec(void)
 	if (dest_cpu == smp_processor_id())
 		goto unlock;
 
-	if (likely(cpu_active(dest_cpu))) {
+	if (likely(cpu_active(dest_cpu) && likely(!cpu_paused(dest_cpu)))) {
 		struct migration_arg arg = { p, dest_cpu };
 
 		raw_spin_unlock_irqrestore(&p->pi_lock, flags);
@@ -5481,6 +5538,8 @@ long sched_setaffinity(pid_t pid, const struct cpumask *in_mask)
 	cpumask_var_t cpus_allowed, new_mask;
 	struct task_struct *p;
 	int retval;
+	int dest_cpu;
+	cpumask_t allowed_mask;
 
 	rcu_read_lock();
 
@@ -5542,20 +5601,27 @@ long sched_setaffinity(pid_t pid, const struct cpumask *in_mask)
 	}
 #endif
 again:
-	retval = __set_cpus_allowed_ptr(p, new_mask, true);
+	cpumask_andnot(&allowed_mask, new_mask, cpu_paused_mask);
+	dest_cpu = cpumask_any_and(cpu_active_mask, &allowed_mask);
+	if (dest_cpu < nr_cpu_ids) {
+		retval = __set_cpus_allowed_ptr(p, new_mask, true);
 
-	if (!retval) {
-		cpuset_cpus_allowed(p, cpus_allowed);
-		if (!cpumask_subset(new_mask, cpus_allowed)) {
-			/*
-			 * We must have raced with a concurrent cpuset
-			 * update. Just reset the cpus_allowed to the
-			 * cpuset's cpus_allowed
-			 */
-			cpumask_copy(new_mask, cpus_allowed);
-			goto again;
+		if (!retval) {
+			cpuset_cpus_allowed(p, cpus_allowed);
+			if (!cpumask_subset(new_mask, cpus_allowed)) {
+				/*
+				 * We must have raced with a concurrent cpuset
+				 * update. Just reset the cpus_allowed to the
+				 * cpuset's cpus_allowed
+				 */
+				cpumask_copy(new_mask, cpus_allowed);
+				goto again;
+			}
 		}
+	} else {
+		retval = -EINVAL;
 	}
+
 out_free_new_mask:
 	free_cpumask_var(new_mask);
 out_free_cpus_allowed:
@@ -5619,6 +5685,14 @@ long sched_getaffinity(pid_t pid, struct cpumask *mask)
 
 	raw_spin_lock_irqsave(&p->pi_lock, flags);
 	cpumask_and(mask, &p->cpus_mask, cpu_active_mask);
+
+	/* The userspace tasks are forbidden to run on
+	 * paused CPUs. So exclude paused CPUs from
+	 * the getaffinity.
+	 */
+	if (!(p->flags & PF_KTHREAD))
+		cpumask_andnot(mask, mask, cpu_paused_mask);
+
 	raw_spin_unlock_irqrestore(&p->pi_lock, flags);
 
 out_unlock:
@@ -6450,7 +6524,7 @@ void migrate_tasks(struct rq *dead_rq, struct rq_flags *rf,
 		}
 
 		/* Find suitable destination for @next, with force if needed. */
-		dest_cpu = select_fallback_rq(dead_rq->cpu, next);
+		dest_cpu = select_fallback_rq(dead_rq->cpu, next, false);
 		rq = __migrate_task(rq, rf, next, dest_cpu);
 		if (rq != dead_rq) {
 			rq_unlock(rq, rf);

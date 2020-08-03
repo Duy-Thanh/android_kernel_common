@@ -183,9 +183,38 @@ static struct attribute_group crash_note_cpu_attr_group = {
 };
 #endif
 
+#ifdef CONFIG_HOTPLUG_CPU
+static ssize_t pause_show(struct device *dev,
+				struct device_attribute *attr, char *buf)
+{
+	struct cpu *cpu = container_of(dev, struct cpu, dev);
+	ssize_t rc;
+	int cpuid = cpu->dev.id;
+	unsigned int paused = cpu_paused(cpuid);
+
+	rc = scnprintf(buf, PAGE_SIZE-2, "%d\n", paused);
+
+	return rc;
+}
+
+static DEVICE_ATTR_RO(pause);
+
+static struct attribute *cpu_paused_attrs[] = {
+	&dev_attr_pause.attr,
+	NULL
+};
+
+static struct attribute_group cpu_paused_attr_group = {
+	.attrs = cpu_paused_attrs,
+};
+#endif /* CONFIG_HOTPLUG_CPU */
+
 static const struct attribute_group *common_cpu_attr_groups[] = {
 #ifdef CONFIG_KEXEC
 	&crash_note_cpu_attr_group,
+#endif
+#ifdef CONFIG_HOTPLUG_CPU
+	&cpu_paused_attr_group,
 #endif
 	NULL
 };
@@ -193,6 +222,9 @@ static const struct attribute_group *common_cpu_attr_groups[] = {
 static const struct attribute_group *hotplugable_cpu_attr_groups[] = {
 #ifdef CONFIG_KEXEC
 	&crash_note_cpu_attr_group,
+#endif
+#ifdef CONFIG_HOTPLUG_CPU
+	&cpu_paused_attr_group,
 #endif
 	NULL
 };
@@ -223,6 +255,7 @@ static struct cpu_attr cpu_attrs[] = {
 	_CPU_ATTR(online, &__cpu_online_mask),
 	_CPU_ATTR(possible, &__cpu_possible_mask),
 	_CPU_ATTR(present, &__cpu_present_mask),
+	_CPU_ATTR(core_ctl_paused, &__cpu_paused_mask),
 };
 
 /*
@@ -268,24 +301,24 @@ static ssize_t print_cpus_offline(struct device *dev,
 }
 static DEVICE_ATTR(offline, 0444, print_cpus_offline, NULL);
 
-static ssize_t print_cpus_isolated(struct device *dev,
+static ssize_t print_cpus_paused(struct device *dev,
 				  struct device_attribute *attr, char *buf)
 {
 	int n;
-	cpumask_var_t isolated;
+	cpumask_var_t paused;
 
-	if (!alloc_cpumask_var(&isolated, GFP_KERNEL))
+	if (!alloc_cpumask_var(&paused, GFP_KERNEL))
 		return -ENOMEM;
 
-	cpumask_andnot(isolated, cpu_possible_mask,
+	cpumask_andnot(paused, cpu_possible_mask,
 		       housekeeping_cpumask(HK_FLAG_DOMAIN));
-	n = sprintf(buf, "%*pbl\n", cpumask_pr_args(isolated));
+	n = sprintf(buf, "%*pbl\n", cpumask_pr_args(paused));
 
-	free_cpumask_var(isolated);
+	free_cpumask_var(paused);
 
 	return n;
 }
-static DEVICE_ATTR(isolated, 0444, print_cpus_isolated, NULL);
+static DEVICE_ATTR(paused, 0444, print_cpus_paused, NULL);
 
 #ifdef CONFIG_NO_HZ_FULL
 static ssize_t print_cpus_nohz_full(struct device *dev,
@@ -467,9 +500,10 @@ static struct attribute *cpu_root_attrs[] = {
 	&cpu_attrs[0].attr.attr,
 	&cpu_attrs[1].attr.attr,
 	&cpu_attrs[2].attr.attr,
+	&cpu_attrs[3].attr.attr,
 	&dev_attr_kernel_max.attr,
 	&dev_attr_offline.attr,
-	&dev_attr_isolated.attr,
+	&dev_attr_paused.attr,
 #ifdef CONFIG_NO_HZ_FULL
 	&dev_attr_nohz_full.attr,
 #endif

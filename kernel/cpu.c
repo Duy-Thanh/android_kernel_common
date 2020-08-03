@@ -1001,6 +1001,9 @@ static int __ref _cpu_down(unsigned int cpu, int tasks_frozen,
 	if (!cpu_present(cpu))
 		return -EINVAL;
 
+	if (!tasks_frozen && !cpu_paused(cpu) && num_online_unpaused_cpus() == 1)
+		return -EBUSY;
+
 	cpus_write_lock();
 
 	cpuhp_tasks_frozen = tasks_frozen;

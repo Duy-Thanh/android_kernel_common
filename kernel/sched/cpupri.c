@@ -134,6 +134,9 @@ int cpupri_find_fitness(struct cpupri *cp, struct task_struct *p,
 		if (!lowest_mask || !fitness_fn)
 			return 1;
 
+		cpumask_andnot(lowest_mask, lowest_mask,
+			       cpu_paused_mask);
+
 		/* Ensure the capacity of the CPUs fit the task */
 		for_each_cpu(cpu, lowest_mask) {
 			if (!fitness_fn(p, cpu))
