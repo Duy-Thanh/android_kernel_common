@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d94f5da0_67769eff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-04T07:56:33Z",
+      "side": 1,
+      "message": "Can you put that in the changelog message please?\n\nAnd the patch needs to be rebased, I can\u0027t do it automatically as there are conflicts in the .xml file (as expected.)",
+      "parentUuid": "8bbb403d_a7ac7f59",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 54
+      },
+      "revId": "7b9efb946130d7b14db558672be0394debe3d460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "94b965bc_9557e723",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
