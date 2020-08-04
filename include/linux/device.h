@@ -1271,6 +1271,7 @@ struct dev_links_info {
  * a higher-level representation of the device.
  */
 struct device {
+	int test_if_this_breaks_the_abi;
 	struct kobject kobj;
 	struct device		*parent;
 
