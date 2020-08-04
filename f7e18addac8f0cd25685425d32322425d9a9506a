@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d17e098_88e97f94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-04T09:02:04Z",
+      "side": 1,
+      "message": "Looks good now, thanks!\n\nBut needs to be rebased to be able to be merged.",
+      "revId": "f7e18addac8f0cd25685425d32322425d9a9506a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
