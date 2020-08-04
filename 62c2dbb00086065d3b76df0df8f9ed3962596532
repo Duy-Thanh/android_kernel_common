@@ -50,6 +50,24 @@
       "revId": "62c2dbb00086065d3b76df0df8f9ed3962596532",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "38ec0a35_a63dd30f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2020-08-04T11:18:12Z",
+      "side": 1,
+      "message": "I do not see CONFIG_EROFS_FS in android-mainline\u0027s gki_defconfig.",
+      "parentUuid": "088108d9_78d2f5e7",
+      "revId": "62c2dbb00086065d3b76df0df8f9ed3962596532",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
