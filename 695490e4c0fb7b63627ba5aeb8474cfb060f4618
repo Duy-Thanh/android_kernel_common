@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "909264b4_8bc25897",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-08-04T04:20:45Z",
+      "side": 1,
+      "message": "this is also breaking on R GSI, see b/162258336",
+      "revId": "695490e4c0fb7b63627ba5aeb8474cfb060f4618",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
