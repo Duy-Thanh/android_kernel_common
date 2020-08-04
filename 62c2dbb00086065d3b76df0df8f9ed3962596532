@@ -68,6 +68,24 @@
       "revId": "62c2dbb00086065d3b76df0df8f9ed3962596532",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fdc2bf7_0bfcf298",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-08-04T15:02:09Z",
+      "side": 1,
+      "message": "Sorry, my fault, I did not check it with the android-mainline branch.",
+      "parentUuid": "38ec0a35_a63dd30f",
+      "revId": "62c2dbb00086065d3b76df0df8f9ed3962596532",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
