@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "f04f5cd3_a7bee5b4",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-08-05T23:49:28Z",
+      "side": 1,
+      "message": "Hrm.. That looks like a good point. Thinking ION did the same, I realized it has a separate function that returns a dmabuf and then the fd varient that calls the dma_buf_fd bit.\n\nLooks like we should rework the heap allocate() to return a dmabuf instead of the fd.\n\nI really appreciate this feedback!",
+      "parentUuid": "b3ee761f_412828fc",
+      "revId": "7db57ffe811426852ef37bed0e68e749e9a45140",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1e01c36a_3fdff897",
         "filename": "include/linux/dma-heap.h",
         "patchSetId": 5
