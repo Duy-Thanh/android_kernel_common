@@ -34,6 +34,24 @@
       "revId": "0939eda0346d0d08211b9b0d0a4efa8a164f19a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57ef5a82_b10ec0af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-08-05T20:54:35Z",
+      "side": 1,
+      "message": "I\u0027m okay with this only if the list is enforced, that means, we do not allow modules in output which are not mentioned in the list to simply not be copied/stripped/symbol analyzed. If there is a single additional module in the build which is unlisted, it should be a fatal error.",
+      "parentUuid": "645204dc_a2b914c5",
+      "revId": "0939eda0346d0d08211b9b0d0a4efa8a164f19a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
