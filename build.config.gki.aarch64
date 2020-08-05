@@ -2,3 +2,4 @@
 . ${ROOT_DIR}/common/build.config.aarch64
 . ${ROOT_DIR}/common/build.config.gki
 
+MODULES_ORDER=android/gki_aarch64_modules
