@@ -16,6 +16,24 @@
       "revId": "0939eda0346d0d08211b9b0d0a4efa8a164f19a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "645204dc_a2b914c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-08-05T16:11:23Z",
+      "side": 1,
+      "message": "This list takes one GKI kernel build to re-generate when it is out-of-sync, so that should be fine no?\n\nWe agreed a list would have to be checked in somewhere so partners can use it downstream when using the ABI tools. Having it in the kernel source tree itself solves that problem and allows for some nice things, e.g. we can be sure the list is never out of date.",
+      "parentUuid": "347cbf32_ed1eaf79",
+      "revId": "0939eda0346d0d08211b9b0d0a4efa8a164f19a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
