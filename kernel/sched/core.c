@@ -29,6 +29,9 @@
 
 #include <trace/hooks/sched.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/dtask.h>
+
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
  * associated with them) to allow external modules to probe them.
@@ -6460,7 +6463,12 @@ void sched_show_task(struct task_struct *p)
 		(unsigned long)task_thread_info(p)->flags);
 
 	print_worker_info(KERN_INFO, p);
+<<<<<<< HEAD   (023411 ANDROID: Use DTC from the hermetic toolchain)
 	show_stack(p, NULL, KERN_INFO);
+=======
+	trace_android_vh_sched_show_task(p);
+	show_stack(p, NULL);
+>>>>>>> CHANGE (b519ac ANDROID: vendor_hooks: add waiting information for blocked t)
 	put_task_stack(p);
 }
 EXPORT_SYMBOL_GPL(sched_show_task);

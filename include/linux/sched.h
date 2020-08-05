@@ -32,8 +32,13 @@
 #include <linux/task_io_accounting.h>
 #include <linux/posix-timers.h>
 #include <linux/rseq.h>
+<<<<<<< HEAD   (023411 ANDROID: Use DTC from the hermetic toolchain)
 #include <linux/seqlock.h>
 #include <linux/kcsan.h>
+=======
+#include <linux/android_kabi.h>
+#include <linux/android_vendor.h>
+>>>>>>> CHANGE (b519ac ANDROID: vendor_hooks: add waiting information for blocked t)
 
 /* task_struct member predeclarations (sorted alphabetically): */
 struct audit_context;
@@ -1311,6 +1316,7 @@ struct task_struct {
 	unsigned long			prev_lowest_stack;
 #endif
 
+<<<<<<< HEAD   (023411 ANDROID: Use DTC from the hermetic toolchain)
 #ifdef CONFIG_X86_MCE
 	u64				mce_addr;
 	__u64				mce_ripv : 1,
@@ -1318,6 +1324,18 @@ struct task_struct {
 					__mce_reserved : 62;
 	struct callback_head		mce_kill_me;
 #endif
+=======
+	ANDROID_VENDOR_DATA_ARRAY(1, 2);
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_RESERVE(3);
+	ANDROID_KABI_RESERVE(4);
+	ANDROID_KABI_RESERVE(5);
+	ANDROID_KABI_RESERVE(6);
+	ANDROID_KABI_RESERVE(7);
+	ANDROID_KABI_RESERVE(8);
+>>>>>>> CHANGE (b519ac ANDROID: vendor_hooks: add waiting information for blocked t)
 
 	/*
 	 * New fields for task_struct should be added above here, so that
