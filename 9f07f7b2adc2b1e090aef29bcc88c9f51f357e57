@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef344880_1a1b65e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1409360
+      },
+      "writtenOn": "2020-08-05T11:40:10Z",
+      "side": 1,
+      "message": "Hi Paul,\n\nJust like my comment, we still have incfs magic number compatible issues in 32-bit platforms, my patch is only for ARM but x86, I\u0027m not sure whether we need to fix them one by one or consider to change magic directly.\n\nThank you!",
+      "revId": "9f07f7b2adc2b1e090aef29bcc88c9f51f357e57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
