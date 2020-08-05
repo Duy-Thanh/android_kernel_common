@@ -16,6 +16,23 @@
       "revId": "9f07f7b2adc2b1e090aef29bcc88c9f51f357e57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87033c4f_5f2e3381",
+        "filename": "include/uapi/linux/incrementalfs.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-08-05T15:53:43Z",
+      "side": 1,
+      "message": "Do we need this conditional? A bit of testing suggests that just defining \n\n#define INCFS_MAGIC_NUMBER (unsigned long)(0x5346434e49ul)\n\nworks as desired on 32-bit and 64-bit platforms (i.e. it gets truncated on 32-bits and all works, but stays full length on 64-bits)\n\nThat will also solve non-ARM64 issues.",
+      "revId": "9f07f7b2adc2b1e090aef29bcc88c9f51f357e57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
