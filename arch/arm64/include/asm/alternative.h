@@ -77,9 +77,13 @@ static inline void apply_alternatives_module(void *start, size_t length) { }
 	"663:\n\t"							\
 	newinstr "\n"							\
 	"664:\n\t"							\
+<<<<<<< HEAD   (1646c5 ANDROID: kallsyms: increase KSYM_NAME_LEN)
 	".popsection\n\t"						\
+=======
+>>>>>>> BRANCH (1b940b Linux 5.4.56)
 	".org	. - (664b-663b) + (662b-661b)\n\t"			\
-	".org	. - (662b-661b) + (664b-663b)\n"			\
+	".org	. - (662b-661b) + (664b-663b)\n\t"			\
+	".previous\n"							\
 	".endif\n"
 
 #define __ALTERNATIVE_CFG_CB(oldinstr, feature, cfg_enabled, cb)	\
