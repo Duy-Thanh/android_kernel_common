@@ -16,6 +16,29 @@
       "revId": "6673571b6d8ec47b18bed91feae209eee8022263",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed4557be_b3a042f6",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1286,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-06T06:55:37Z",
+      "side": 1,
+      "message": "do not make up error codes, return real values please (-EINVAL?)",
+      "range": {
+        "startLine": 1286,
+        "startChar": 9,
+        "endLine": 1286,
+        "endChar": 11
+      },
+      "revId": "6673571b6d8ec47b18bed91feae209eee8022263",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
