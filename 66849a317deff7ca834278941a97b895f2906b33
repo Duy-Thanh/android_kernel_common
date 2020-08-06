@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8bd1e39_7a896d62",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6323,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-06T17:23:47Z",
+      "side": 1,
+      "message": "Please add that we should be here only for pinned tasks that are inhibited from migrating from paused cores",
+      "revId": "66849a317deff7ca834278941a97b895f2906b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e8d928f_e3da10e8",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6325,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-06T17:23:47Z",
+      "side": 1,
+      "message": "Should this be \"detach_one_pinned_task_core()\"?\n\nIs there a way to assert that the task is pinned?",
+      "revId": "66849a317deff7ca834278941a97b895f2906b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88a539cd_d091ebfd",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6334,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-06T17:23:47Z",
+      "side": 1,
+      "message": "\"reattach_pinned_task_core()\"?",
+      "revId": "66849a317deff7ca834278941a97b895f2906b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "435e9b49_c82ce4df",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6431,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-06T17:23:47Z",
+      "side": 1,
+      "message": "\"with\"?",
+      "range": {
+        "startLine": 6431,
+        "startChar": 30,
+        "endLine": 6431,
+        "endChar": 51
+      },
+      "revId": "66849a317deff7ca834278941a97b895f2906b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81b0c9a4_2e7974a2",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6436,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-06T17:23:47Z",
+      "side": 1,
+      "message": "I don\u0027t see anything about this in the commit message",
+      "revId": "66849a317deff7ca834278941a97b895f2906b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
