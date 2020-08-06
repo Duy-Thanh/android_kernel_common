@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fb97e53_8d339897",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-06T06:54:12Z",
+      "side": 1,
+      "message": "code review comments, and we need a bug number.",
+      "revId": "dee780f0479f5752865005ba18d5bbc5282497a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f032abc_f54409c2",
+        "filename": "drivers/scsi/ufs/ufs_ctmwb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-06T06:54:12Z",
+      "side": 1,
+      "message": "no spdx or copyright line?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 19
+      },
+      "revId": "dee780f0479f5752865005ba18d5bbc5282497a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2553aea_104ab9eb",
+        "filename": "drivers/scsi/ufs/ufs_ctmwb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-06T06:54:12Z",
+      "side": 1,
+      "message": "only 1 is allowed?",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 37
+      },
+      "revId": "dee780f0479f5752865005ba18d5bbc5282497a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a75fcbb6_079c6169",
+        "filename": "drivers/scsi/ufs/ufs_ctmwb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-06T06:54:12Z",
+      "side": 1,
+      "message": "all of these debugging comments can be removed.  Please either use ftrace or worst case, dev_dbg().",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 62
+      },
+      "revId": "dee780f0479f5752865005ba18d5bbc5282497a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c56dc08_7aa3438c",
+        "filename": "drivers/scsi/ufs/ufs_ctmwb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-06T06:54:12Z",
+      "side": 1,
+      "message": "__func__ is never needed for a dev_*() call, you can get it automatically from the output if you want it.",
+      "range": {
+        "startLine": 113,
+        "startChar": 4,
+        "endLine": 113,
+        "endChar": 12
+      },
+      "revId": "dee780f0479f5752865005ba18d5bbc5282497a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18597fb0_dd92638b",
+        "filename": "drivers/scsi/ufs/ufs_ctmwb.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-06T06:54:12Z",
+      "side": 1,
+      "message": "no SPDX license line?\n\nCopyright?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "dee780f0479f5752865005ba18d5bbc5282497a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
