@@ -65,6 +65,30 @@
     },
     {
       "key": {
+        "uuid": "2d3b6933_a2f81227",
+        "filename": "drivers/scsi/ufs/ufs_ctmwb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1741040
+      },
+      "writtenOn": "2020-08-06T11:15:18Z",
+      "side": 1,
+      "message": "yes. this value use only at ufs_ctmwb.c",
+      "parentUuid": "b2553aea_104ab9eb",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 37
+      },
+      "revId": "dee780f0479f5752865005ba18d5bbc5282497a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a75fcbb6_079c6169",
         "filename": "drivers/scsi/ufs/ufs_ctmwb.c",
         "patchSetId": 2
