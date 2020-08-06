@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ada0a2e_f72a5ff6",
+        "filename": "drivers/base/cpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-06T18:20:34Z",
+      "side": 1,
+      "message": "This seems like it could be a separate patch to expose a sysfs node.\n\nWho is the consumer of this interface? Can it be exposed by a vendor module instead just for use by vendor code?",
+      "revId": "b8e35d038325a966544b9a0792a2ab3815c83fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b13e84da_90e552ff",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1004,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-06T18:20:34Z",
+      "side": 1,
+      "message": "why is !tasks_frozen part of this conditional?",
+      "revId": "b8e35d038325a966544b9a0792a2ab3815c83fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab6abfe2_c225ded1",
+        "filename": "kernel/irq/cpuhotplug.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-06T18:20:34Z",
+      "side": 1,
+      "message": "The affect of pause on affinity should be described in the commit message\n\nWhat happens if there is a cpuset with 1 member cpu and that cpu is paused? Is the task now scheduled on any available even though it is not in the cpuset? When the cpu is unpaused, is that task moved back to the cpu that is a member?",
+      "revId": "b8e35d038325a966544b9a0792a2ab3815c83fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57c50e3a_b51f3241",
+        "filename": "kernel/irq/cpuhotplug.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-06T18:20:34Z",
+      "side": 1,
+      "message": "why?",
+      "revId": "b8e35d038325a966544b9a0792a2ab3815c83fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44a4ee9a_d00b7247",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2021,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-06T18:20:34Z",
+      "side": 1,
+      "message": "Please add some comments on the behavior of fallback selection with pause.",
+      "revId": "b8e35d038325a966544b9a0792a2ab3815c83fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
