@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "a59cf203_7e2e618d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-06T12:14:13Z",
+      "side": 1,
+      "message": "As the lint tool says, yes.  Please follow the contribution guidelines that it pointed you at, otherwise we can not accept it.",
+      "parentUuid": "9f5db409_d30050c7",
+      "revId": "6673571b6d8ec47b18bed91feae209eee8022263",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed4557be_b3a042f6",
         "filename": "drivers/scsi/ufs/ufshcd.h",
         "patchSetId": 2
