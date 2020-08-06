@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6522fc3c_7cc074da",
+        "filename": "drivers/scsi/ufs/ufs_ctmwb.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-06T12:10:00Z",
+      "side": 1,
+      "message": "now I don\u0027t trust that this really is correct at all 😊\n\nCan you get your legal group to look at this and use the correct wording that they require please?",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "7b1421113649911189ba8c14d0c9663c5bfea3df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
