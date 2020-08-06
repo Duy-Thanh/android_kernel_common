@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ccbe177d_288ba157",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6325,
+      "author": {
+        "id": 1318918
+      },
+      "writtenOn": "2020-08-06T21:20:21Z",
+      "side": 1,
+      "message": "This is a static function and is called only in that specific instance where a pinned kernel thread needs to be detached temporarily. We can improve the comment for this function.\nAnd also change the name of the function\n\ndetach_one_pinned_task_core()\n\nbut adding the same check again - something like below - \n(next-\u003eflags \u0026 PF_KTHREAD) \u0026\u0026 !cpumask_intersects(\u0026avail_cpus, \u0026next-\u003ecpus_mask)\ndoesnt seem useful",
+      "parentUuid": "7e8d928f_e3da10e8",
+      "revId": "66849a317deff7ca834278941a97b895f2906b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "88a539cd_d091ebfd",
         "filename": "kernel/sched/core.c",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2020-08-06T17:23:47Z",
       "side": 1,
       "message": "\"reattach_pinned_task_core()\"?",
+      "revId": "66849a317deff7ca834278941a97b895f2906b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7b5a799_cc40ee43",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6334,
+      "author": {
+        "id": 1318918
+      },
+      "writtenOn": "2020-08-06T21:20:21Z",
+      "side": 1,
+      "message": "Lets do \"tasks\" instead of task like so\nreattach_pinned_tasks_core()",
+      "parentUuid": "88a539cd_d091ebfd",
       "revId": "66849a317deff7ca834278941a97b895f2906b33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
