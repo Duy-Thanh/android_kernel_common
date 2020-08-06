@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae4fb17a_18066cce",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-08-06T23:35:49Z",
+      "side": 1,
+      "message": "nit: this can be changed to \"get page/error check\" and \"cast\" steps instead",
+      "range": {
+        "startLine": 635,
+        "startChar": 0,
+        "endLine": 645,
+        "endChar": 2
+      },
+      "revId": "ed2ec7ba7b078a7c35c096ae88d5e2b59caec8aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90f39f9f_3f40ffe7",
+        "filename": "include/uapi/linux/incrementalfs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-08-06T23:35:49Z",
+      "side": 1,
+      "message": "nit: space",
+      "range": {
+        "startLine": 130,
+        "startChar": 32,
+        "endLine": 130,
+        "endChar": 34
+      },
+      "revId": "ed2ec7ba7b078a7c35c096ae88d5e2b59caec8aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
