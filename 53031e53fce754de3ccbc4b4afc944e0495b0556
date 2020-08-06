@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c82a1c0b_c77aaaf5",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 8
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-08-06T16:08:18Z",
+      "side": 1,
+      "message": "Greg: are you sure?\nhttps://android-review.googlesource.com/c/kernel/common/+/1276175",
+      "range": {
+        "startLine": 1007,
+        "startChar": 0,
+        "endLine": 1007,
+        "endChar": 14
+      },
+      "revId": "53031e53fce754de3ccbc4b4afc944e0495b0556",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
