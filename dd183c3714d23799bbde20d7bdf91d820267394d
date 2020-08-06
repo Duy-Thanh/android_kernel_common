@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c990634_9a3a17ce",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 7
+      },
+      "lineNbr": 1944,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-06T12:16:29Z",
+      "side": 1,
+      "message": "these symbols are not exported at all.  How did you generate this list?",
+      "range": {
+        "startLine": 1943,
+        "startChar": 2,
+        "endLine": 1944,
+        "endChar": 14
+      },
+      "revId": "dd183c3714d23799bbde20d7bdf91d820267394d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
