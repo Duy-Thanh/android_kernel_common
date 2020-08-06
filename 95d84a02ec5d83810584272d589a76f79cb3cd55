@@ -16,6 +16,24 @@
       "revId": "95d84a02ec5d83810584272d589a76f79cb3cd55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ca015f4_b462552d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-06T18:21:50Z",
+      "side": 1,
+      "message": "I guess you do this in a later patch. Perhaps just a brief definition here.",
+      "parentUuid": "852e7b76_b7dd2436",
+      "revId": "95d84a02ec5d83810584272d589a76f79cb3cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
