@@ -39,6 +39,30 @@
       "revId": "dd183c3714d23799bbde20d7bdf91d820267394d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f386bbca_1fbe24a9",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 7
+      },
+      "lineNbr": 1944,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-08-06T12:28:14Z",
+      "side": 1,
+      "message": "By extract_symbols script, maybe I use the old vmlinux to generate whitelist, I update it again by new vmlinux.",
+      "parentUuid": "1c990634_9a3a17ce",
+      "range": {
+        "startLine": 1943,
+        "startChar": 2,
+        "endLine": 1944,
+        "endChar": 14
+      },
+      "revId": "dd183c3714d23799bbde20d7bdf91d820267394d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
