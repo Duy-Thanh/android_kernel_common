@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18f06635_c9f3132d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2020-08-06T17:49:26Z",
+      "side": 1,
+      "message": "Please use \"symbol list\" instead",
+      "range": {
+        "startLine": 7,
+        "startChar": 34,
+        "endLine": 7,
+        "endChar": 43
+      },
+      "revId": "102ae951a8b73b504288395f6220ba932026eb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
