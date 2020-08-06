@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "d78a40e9_7d3ff7f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-06T12:16:53Z",
+      "side": 1,
+      "message": "Build errors are:\n\nERROR: Differences between ksymtab and symbol list detected!\nSymbols missing from ksymtab:\n - __symbol_get\n - __symbol_put\n - cmd_db_read_addr\n - cmd_db_read_aux_data\n - cmd_db_read_slave_id\n - cmd_db_ready\n - rpmh_flush\n - rpmh_invalidate\n - rpmh_write\n - rpmh_write_async\n - rpmh_write_batch\nSymbols missing from symbol list:",
+      "revId": "dd183c3714d23799bbde20d7bdf91d820267394d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c990634_9a3a17ce",
         "filename": "android/abi_gki_aarch64_vivo",
         "patchSetId": 7
