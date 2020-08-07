@@ -70,6 +70,41 @@
       "revId": "95d84a02ec5d83810584272d589a76f79cb3cd55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c2aa080_1b1c4022",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T18:00:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d86b1838_84b4b1bd",
+      "revId": "95d84a02ec5d83810584272d589a76f79cb3cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd1a2e1f_3ed1f0fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T18:00:21Z",
+      "side": 1,
+      "message": "Hi! This will be submitted in next patch.  Stephen.",
+      "revId": "95d84a02ec5d83810584272d589a76f79cb3cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
