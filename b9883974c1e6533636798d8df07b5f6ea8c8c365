@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15763eaa_7e4952e9",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-07T22:36:36Z",
+      "side": 1,
+      "message": "WARN_ON(... ? There is only one caller that checks the return code of this function",
+      "revId": "b9883974c1e6533636798d8df07b5f6ea8c8c365",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
