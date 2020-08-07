@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "1a7b2709_98b57c17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T22:56:15Z",
+      "side": 1,
+      "message": "more comments... ",
+      "revId": "b8e35d038325a966544b9a0792a2ab3815c83fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ada0a2e_f72a5ff6",
         "filename": "drivers/base/cpu.c",
         "patchSetId": 2
@@ -67,6 +84,24 @@
       "revId": "b8e35d038325a966544b9a0792a2ab3815c83fbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51cc3647_86016a4b",
+        "filename": "kernel/irq/cpuhotplug.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T22:56:15Z",
+      "side": 1,
+      "message": "Previously PM QoS is not getting notifications if irq affinity is changed by core pause with irq_do_set_affinity. Use irq_set_affinity_locked instead to get notifications when updating affinity.",
+      "parentUuid": "57c50e3a_b51f3241",
+      "revId": "b8e35d038325a966544b9a0792a2ab3815c83fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
