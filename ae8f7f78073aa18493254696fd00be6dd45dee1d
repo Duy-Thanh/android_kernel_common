@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03767120_bc77531a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-08-07T23:33:07Z",
+      "side": 1,
+      "message": "Bypassing presubmit failure since it\u0027s just a checkpatch warning about S_IRUSR. Since this is a revert, that\u0027s not something I should change.",
+      "revId": "ae8f7f78073aa18493254696fd00be6dd45dee1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
