@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "4c50d578_3b205698",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-07T21:58:53Z",
+      "side": 1,
+      "message": "I made the structure global because the handle namespace is over our communication with the SPM, not specific tipc devices. If we evolve to a platform where the SPM supports multi-way sharing, this will be a lot easier to extend than a per-tipc version. as we can just change the dev pointer to be an array of dev pointers.\n\nThis is safe to be global because the only thing done with these shared handles is to release them upon confirmation from FF-A. The worst thing a misbehaving tipc instance can trick us into doing is asking the FF-A if a handle can be reclaimed spuriously, which is already properly handled.",
+      "parentUuid": "57a01582_19b26d7d",
+      "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "043732eb_e610acb0",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 8
@@ -50,6 +68,24 @@
       "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e88ec18_2e7d81b5",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-07T21:58:53Z",
+      "side": 1,
+      "message": "I\u0027ve removed the comment. The fields need to be set to zero so that it\u0027s safe to drop the handle before any further initialization is done. Specifically, shared needs to be false and sgt.sgl needs to be NULL.",
+      "parentUuid": "043732eb_e610acb0",
+      "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "b12446d0_67c3958b",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-07T21:58:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd993fcf_01c8e79a",
+      "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6b9c8f0f_92328ab3",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 8
@@ -81,6 +135,24 @@
       "writtenOn": "2020-08-07T19:53:36Z",
       "side": 1,
       "message": "How do you share memory for read only access with trusty using this? While you should obviously not be allowed to give trusty write access to a read-only file, we may want to restrict sharing to read access only even if the sender has write access.",
+      "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a72fd5b2_51cd9519",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1115,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-07T21:58:53Z",
+      "side": 1,
+      "message": "The intention is that the sender will use file sealing on the fd to drop permissions.\n\nThe userspace API is analogous to the domain socket API. If you want the receiver to have fewer permissions than you do, you need to create a reduced permission version of the fd first.",
+      "parentUuid": "6b9c8f0f_92328ab3",
       "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "7dc7b521_1f7a3118",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1176,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-07T21:58:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6de0e57b_68874895",
+      "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0fefce66_420cece9",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 8
@@ -118,6 +208,24 @@
       "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "babd32ee_21606c09",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1320,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-07T21:58:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fefce66_420cece9",
+      "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
