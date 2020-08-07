@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65bde897_3dd9b97b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-07T10:43:12Z",
+      "side": 1,
+      "message": "This seems to be rejected from upstream.  Are you going to be reworking it based on their review comments and get into mergable shape?  We don\u0027t want to accept something here that will never be accepted upstream, as then we have to maintain it for 10+ years...",
+      "revId": "065798dd423b83e2d26f03e1fc5a09fe389d8ad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
