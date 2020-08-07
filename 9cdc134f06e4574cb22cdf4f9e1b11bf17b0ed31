@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5948c92e_6e0be965",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-07T13:05:22Z",
+      "side": 1,
+      "message": "Known upstream arm32 build failure.",
+      "revId": "9cdc134f06e4574cb22cdf4f9e1b11bf17b0ed31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
