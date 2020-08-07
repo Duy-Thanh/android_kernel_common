@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "be7cfb7b_817f2319",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T22:49:28Z",
+      "side": 1,
+      "message": "Updates to comments.  Thanks again.",
+      "revId": "767969d91d518b46501392a50c0c2966d7b660a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2fba8e89_659f0d08",
         "filename": "kernel/sched/pause.c",
         "patchSetId": 7
@@ -39,6 +56,30 @@
       "revId": "767969d91d518b46501392a50c0c2966d7b660a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cfe8678_ae2bc8e3",
+        "filename": "kernel/sched/pause.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T22:49:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fba8e89_659f0d08",
+      "range": {
+        "startLine": 66,
+        "startChar": 49,
+        "endLine": 66,
+        "endChar": 60
+      },
+      "revId": "767969d91d518b46501392a50c0c2966d7b660a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -90,6 +131,24 @@
       "revId": "767969d91d518b46501392a50c0c2966d7b660a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48271aa3_52fcaa86",
+        "filename": "kernel/sched/pause.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T22:49:28Z",
+      "side": 1,
+      "message": "From the commit message (which was rewritten)\n\nThis adds cpu pause APIs to the scheduler to pause and unpause\nCPUs. Pausing and unpausing a CPU can be used in place of hotplug.\nPausing and unpausing a CPU is faster than hotplug and can thus\nbe used to optimize the performance and power of multi-core CPUs.\n\nHopefully that is sufficient.  Please let me know otherwise.",
+      "parentUuid": "51aeebe1_2fff3fe4",
+      "revId": "767969d91d518b46501392a50c0c2966d7b660a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
