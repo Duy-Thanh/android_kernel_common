@@ -1,0 +1,139 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004274080",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1393926?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "b0afb3af_89ed0b7e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-07T16:52:05Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027they\u0027, \u0027them\u0027, or \u0027person\u0027; see https://developers.google.com/style/word-list#gender for more details.",
+      "range": {
+        "startLine": 7,
+        "startChar": 34,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "b28b48ff00919e0721c10cd5ad277a86e876c31d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004274080",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1393926?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "da98c4a3_7349ee70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-07T16:52:05Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027they\u0027, \u0027them\u0027, or \u0027person\u0027; see https://developers.google.com/style/word-list#gender for more details.",
+      "range": {
+        "startLine": 11,
+        "startChar": 29,
+        "endLine": 11,
+        "endChar": 33
+      },
+      "revId": "b28b48ff00919e0721c10cd5ad277a86e876c31d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004274080",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1393926?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "69a48f82_530fb65f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-07T16:52:05Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027they\u0027, \u0027them\u0027, or \u0027person\u0027; see https://developers.google.com/style/word-list#gender for more details.",
+      "range": {
+        "startLine": 13,
+        "startChar": 44,
+        "endLine": 13,
+        "endChar": 48
+      },
+      "revId": "b28b48ff00919e0721c10cd5ad277a86e876c31d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004274080",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1393926?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "01a94389_629a8f99",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-07T16:52:05Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027they\u0027, \u0027them\u0027, or \u0027person\u0027; see https://developers.google.com/style/word-list#gender for more details.",
+      "range": {
+        "startLine": 342,
+        "startChar": 17,
+        "endLine": 342,
+        "endChar": 21
+      },
+      "revId": "b28b48ff00919e0721c10cd5ad277a86e876c31d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004274080",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1393926?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "cd7bb17e_4f253b45",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3523,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-07T16:52:05Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027they\u0027, \u0027them\u0027, or \u0027person\u0027; see https://developers.google.com/style/word-list#gender for more details.",
+      "range": {
+        "startLine": 3523,
+        "startChar": 42,
+        "endLine": 3523,
+        "endChar": 46
+      },
+      "revId": "b28b48ff00919e0721c10cd5ad277a86e876c31d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
