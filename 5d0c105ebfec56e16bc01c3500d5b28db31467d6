@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0655e02_54595847",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-07T19:53:36Z",
+      "side": 1,
+      "message": "@gmar please review. Who else uses this header. Why did we have 32 bits reserved here?",
+      "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57a01582_19b26d7d",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-07T19:53:36Z",
+      "side": 1,
+      "message": "why is this global? If there are multiple tipc instances, a handle shared with one instance should not be accessible to a different instance.",
+      "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "043732eb_e610acb0",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-07T19:53:36Z",
+      "side": 1,
+      "message": "That is almost always the case when kzalloc alloc is used. I\u0027m not sure this comment provides any useful information. Are there specific fields that need to be set to 0?",
+      "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd993fcf_01c8e79a",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-07T19:53:36Z",
+      "side": 1,
+      "message": "make sure it is not in the rbtree first?",
+      "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b9c8f0f_92328ab3",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1115,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-07T19:53:36Z",
+      "side": 1,
+      "message": "How do you share memory for read only access with trusty using this? While you should obviously not be allowed to give trusty write access to a read-only file, we may want to restrict sharing to read access only even if the sender has write access.",
+      "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6de0e57b_68874895",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1176,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-07T19:53:36Z",
+      "side": 1,
+      "message": "this is still wrong. If pg_idx is unsigned then pg_idx \u003e\u003d 0 is always true.",
+      "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0fefce66_420cece9",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1320,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-07T19:53:36Z",
+      "side": 1,
+      "message": "you are jumping to the same cleanup point here as you do before inserting the handles in the rbtree, but I don\u0027t see any code that would remove it from the tree before freeing it.",
+      "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
