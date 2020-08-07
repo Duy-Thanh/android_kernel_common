@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "36804b1c_a7db240a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T19:20:30Z",
+      "side": 1,
+      "message": "Hi.  Addressed the comments made here.  Sincerely, Stephen Dickey",
+      "revId": "66849a317deff7ca834278941a97b895f2906b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c8bd1e39_7a896d62",
         "filename": "kernel/sched/core.c",
         "patchSetId": 1
@@ -16,6 +33,24 @@
       "revId": "66849a317deff7ca834278941a97b895f2906b33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15b54b0f_a7a6fc24",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6323,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T19:20:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8bd1e39_7a896d62",
+      "revId": "66849a317deff7ca834278941a97b895f2906b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -54,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5f88e46e_51110cf5",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6325,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T19:20:30Z",
+      "side": 1,
+      "message": "Done for Now.\nRenamed to detach_one_pinned_task_core(), Didn\u0027t add an assert due to Abhijeet comment.",
+      "parentUuid": "ccbe177d_288ba157",
+      "revId": "66849a317deff7ca834278941a97b895f2906b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "88a539cd_d091ebfd",
         "filename": "kernel/sched/core.c",
         "patchSetId": 1
@@ -89,6 +142,24 @@
     },
     {
       "key": {
+        "uuid": "96781bf3_7da4cd21",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6334,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T19:20:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7b5a799_cc40ee43",
+      "revId": "66849a317deff7ca834278941a97b895f2906b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "435e9b49_c82ce4df",
         "filename": "kernel/sched/core.c",
         "patchSetId": 1
@@ -112,6 +183,30 @@
     },
     {
       "key": {
+        "uuid": "f52f5a8d_79b400f8",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6431,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T19:20:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "435e9b49_c82ce4df",
+      "range": {
+        "startLine": 6431,
+        "startChar": 30,
+        "endLine": 6431,
+        "endChar": 51
+      },
+      "revId": "66849a317deff7ca834278941a97b895f2906b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "81b0c9a4_2e7974a2",
         "filename": "kernel/sched/core.c",
         "patchSetId": 1
@@ -126,6 +221,24 @@
       "revId": "66849a317deff7ca834278941a97b895f2906b33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1004834a_4cac9721",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6436,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T19:20:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81b0c9a4_2e7974a2",
+      "revId": "66849a317deff7ca834278941a97b895f2906b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
