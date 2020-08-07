@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "2e3d8807_d239f83a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741040
+      },
+      "writtenOn": "2020-08-07T03:02:50Z",
+      "side": 1,
+      "message": "I do not know lint tool says,,\nplease explain about bug number.\nit just add code for using write booster of vendor",
+      "parentUuid": "a59cf203_7e2e618d",
+      "revId": "6673571b6d8ec47b18bed91feae209eee8022263",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed4557be_b3a042f6",
         "filename": "drivers/scsi/ufs/ufshcd.h",
         "patchSetId": 2
