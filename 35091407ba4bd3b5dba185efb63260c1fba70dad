@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "f0bf08b5_3ebffe01",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "Ack.  Please re-review with consideration of patchset 7.  The \"usage\" patch will be further broken down in a subsequent patchset 8 or later.",
+      "parentUuid": "7c6f17c7_29f1798a",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "01f94864_fea86e59",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -95,6 +113,30 @@
     },
     {
       "key": {
+        "uuid": "6277de2e_b2f23aff",
+        "filename": "include/linux/cpumask.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "The functionality added for isolation (aka pause) to this file is extremely similar to existing functionality.  It seems right to me for it to be here.  I would prefer to not change this at this time, but perhaps after we get more review of the split patches (patchset 7,8, 9)",
+      "parentUuid": "3a565bf5_2b73f36a",
+      "range": {
+        "startLine": 58,
+        "startChar": 52,
+        "endLine": 58,
+        "endChar": 60
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d66865ad_e18d0bea",
         "filename": "kernel/cpu.c",
         "patchSetId": 6
@@ -118,6 +160,30 @@
     },
     {
       "key": {
+        "uuid": "96bc6c01_793c804e",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2452,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "We need to re-review this line of thinking after the name change to pause.",
+      "parentUuid": "d66865ad_e18d0bea",
+      "range": {
+        "startLine": 2452,
+        "startChar": 0,
+        "endLine": 2452,
+        "endChar": 49
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7fde4eb5_06fe6997",
         "filename": "kernel/cpu.c",
         "patchSetId": 6
@@ -132,6 +198,24 @@
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f1ff1d3_1876dacd",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2473,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "Done, Will be in patchset 8.",
+      "parentUuid": "7fde4eb5_06fe6997",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -158,6 +242,30 @@
     },
     {
       "key": {
+        "uuid": "2b7cb25d_3d5de55c",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6295,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "Done, see subsequent patchsets",
+      "parentUuid": "90958512_da72aff3",
+      "range": {
+        "startLine": 6295,
+        "startChar": 0,
+        "endLine": 6295,
+        "endChar": 37
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd7299b2_e26095d2",
         "filename": "kernel/sched/core.c",
         "patchSetId": 6
@@ -178,6 +286,30 @@
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f2dcf8d_281c6cc7",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6334,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "This was moved here to be used and maintained locally.",
+      "parentUuid": "cd7299b2_e26095d2",
+      "range": {
+        "startLine": 6334,
+        "startChar": 0,
+        "endLine": 6334,
+        "endChar": 69
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -221,6 +353,48 @@
     },
     {
       "key": {
+        "uuid": "f225b9e6_e4d10dfd",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6359,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c4e318b_8b8574c4",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed75b198_4d358c39",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6359,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d4b7be4_758d1952",
+      "range": {
+        "startLine": 6359,
+        "startChar": 10,
+        "endLine": 6359,
+        "endChar": 30
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99af4e3f_044e6058",
         "filename": "kernel/sched/core.c",
         "patchSetId": 6
@@ -244,6 +418,30 @@
     },
     {
       "key": {
+        "uuid": "92a4a925_a66a7ea0",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6367,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "This section will be updated in a later patch to incorporate some of Vincent\u0027s ideas.  The current plan is to make use of __pick_migrate_task(), and it is expected these variables will be eliminated.",
+      "parentUuid": "99af4e3f_044e6058",
+      "range": {
+        "startLine": 6367,
+        "startChar": 1,
+        "endLine": 6367,
+        "endChar": 10
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8e39bdab_0aa2259e",
         "filename": "kernel/sched/core.c",
         "patchSetId": 6
@@ -255,6 +453,24 @@
       "writtenOn": "2020-07-27T12:35:37Z",
       "side": 1,
       "message": "Maybe __pick_migrate_task() could handle this case to avoid having a new list here and just skip the kthreads ?",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d2451a8_2a40451f",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6404,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "we\u0027ll be trying to incorporate your ideas in this area.",
+      "parentUuid": "8e39bdab_0aa2259e",
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -313,6 +529,24 @@
     },
     {
       "key": {
+        "uuid": "9bb08593_d8833deb",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6419,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "Additional comments in later patches.  This is a fix for a warn that happens during pause.",
+      "parentUuid": "a1e9662d_2d78ba4b",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e84fd854_f873cb56",
         "filename": "kernel/sched/isolate.c",
         "patchSetId": 6
@@ -333,6 +567,30 @@
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1502d18_dfb7605e",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "The group weight will be updated in init_sched_groups_capacity, but paused cpus will not be accounted in that weight.",
+      "parentUuid": "e84fd854_f873cb56",
+      "range": {
+        "startLine": 64,
+        "startChar": 2,
+        "endLine": 64,
+        "endChar": 38
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -382,6 +640,30 @@
     },
     {
       "key": {
+        "uuid": "9816c4ed_fcf4abfc",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "If a cpu is already offline, it cannot be further paused (it is not running).  There are better definitions of pause in subsequent patches.",
+      "parentUuid": "3f8d4d00_3f25d794",
+      "range": {
+        "startLine": 86,
+        "startChar": 6,
+        "endLine": 86,
+        "endChar": 33
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "87c5a8ec_820eb3d8",
         "filename": "kernel/sched/isolate.c",
         "patchSetId": 6
@@ -402,6 +684,30 @@
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e51fe15_a567c902",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "renamed in later patchset.",
+      "parentUuid": "87c5a8ec_820eb3d8",
+      "range": {
+        "startLine": 98,
+        "startChar": 4,
+        "endLine": 98,
+        "endChar": 21
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -544,6 +850,30 @@
     },
     {
       "key": {
+        "uuid": "86f369f9_cb45cc61",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "This section is no longer necessary in later kernels.  Remove.",
+      "parentUuid": "698c1c82_2ed03290",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 5
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "46f144f6_960ba195",
         "filename": "kernel/sched/isolate.c",
         "patchSetId": 6
@@ -564,6 +894,30 @@
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24b49990_10baafd1",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "Watchdog part is further separated in later patchsets.  CPUs can remain in pause indefinitely, and if there are no pinned threads, go into a nohz state.",
+      "parentUuid": "46f144f6_960ba195",
+      "range": {
+        "startLine": 153,
+        "startChar": 1,
+        "endLine": 153,
+        "endChar": 23
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -601,6 +955,24 @@
     },
     {
       "key": {
+        "uuid": "767819fe_d95f28d3",
+        "filename": "kernel/sched/topology.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1128,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "paused cpus will affect the weight, it doesn\u0027t yet in this patch.",
+      "parentUuid": "810e7914_8bc220e0",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb5af359_6d2d6702",
         "filename": "kernel/sched/trace.h",
         "patchSetId": 6
@@ -615,6 +987,24 @@
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c629bcf9_e12eb1ac",
+        "filename": "kernel/sched/trace.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb5af359_6d2d6702",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -710,6 +1100,24 @@
     },
     {
       "key": {
+        "uuid": "9f8deb8f_337e7ef8",
+        "filename": "kernel/watchdog.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "this is eliminated in later patchsets.",
+      "parentUuid": "aff3a3a3_fb1785c0",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c8b78620_b0cdf264",
         "filename": "kernel/watchdog.c",
         "patchSetId": 6
@@ -730,6 +1138,30 @@
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9bf368f_0359f993",
+        "filename": "kernel/watchdog.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "This is eliminated.",
+      "parentUuid": "c8b78620_b0cdf264",
+      "range": {
+        "startLine": 455,
+        "startChar": 1,
+        "endLine": 456,
+        "endChar": 9
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -756,6 +1188,30 @@
     },
     {
       "key": {
+        "uuid": "ecd0a7a3_c711f74b",
+        "filename": "kernel/watchdog.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "This is eliminated.",
+      "parentUuid": "12703f50_66f8f120",
+      "range": {
+        "startLine": 473,
+        "startChar": 1,
+        "endLine": 480,
+        "endChar": 14
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "00f797b2_1031ad6b",
         "filename": "kernel/watchdog.c",
         "patchSetId": 6
@@ -779,6 +1235,30 @@
     },
     {
       "key": {
+        "uuid": "330bd1e5_f0e69bb5",
+        "filename": "kernel/watchdog.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00f797b2_1031ad6b",
+      "range": {
+        "startLine": 486,
+        "startChar": 1,
+        "endLine": 489,
+        "endChar": 9
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cf1c6663_ee39a7bb",
         "filename": "kernel/watchdog.c",
         "patchSetId": 6
@@ -793,6 +1273,24 @@
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb58877c_55597ab9",
+        "filename": "kernel/watchdog.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-07T21:33:34Z",
+      "side": 1,
+      "message": "Done, Removed.",
+      "parentUuid": "cf1c6663_ee39a7bb",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
