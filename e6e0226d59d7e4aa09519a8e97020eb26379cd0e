@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b5caad4_2a9e9e23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2020-08-08T13:42:16Z",
+      "side": 1,
+      "message": "I updated android/abi_gki_aarch64.xml file also, but it has so many fixes.\nI think it is not good for your ABI setup, so I removed it.\n\nPlease review our whitelist and please apply it to android11-5.4 also.\nWe need that fix in android R version.\n\nThanks.",
+      "revId": "e6e0226d59d7e4aa09519a8e97020eb26379cd0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
