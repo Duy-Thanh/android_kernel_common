@@ -16,6 +16,23 @@
       "revId": "e6e0226d59d7e4aa09519a8e97020eb26379cd0e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ab6380f_bd2f702e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2020-08-08T13:52:40Z",
+      "side": 1,
+      "message": "I removed \"android/abi_gki_aarch64.xml\" file because Lint checked so many problems.\n",
+      "revId": "e6e0226d59d7e4aa09519a8e97020eb26379cd0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
