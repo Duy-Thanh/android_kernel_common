@@ -36,6 +36,41 @@
     },
     {
       "key": {
+        "uuid": "3391b406_c9b7475d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2020-08-10T08:07:42Z",
+      "side": 1,
+      "message": "OK, I\u0027ll check it and update ASAP. Thanks.",
+      "parentUuid": "85a537e8_d03e9393",
+      "revId": "581cf45e3dc2dd16dc74a551300b6436c6f5b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2fdfaf6c_3268992f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2020-08-10T08:07:42Z",
+      "side": 1,
+      "message": "I\u0027ll check it again.\nWe removed sdcardfs also. Check it and reply soon.",
+      "revId": "581cf45e3dc2dd16dc74a551300b6436c6f5b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a9d8384_f308a553",
         "filename": "android/abi_gki_aarch64_exynos",
         "patchSetId": 2
@@ -70,6 +105,30 @@
       "writtenOn": "2020-08-10T08:03:13Z",
       "side": 1,
       "message": "why just these two?  I think the d_path and these two are left over from your old tree which had sdcardfs, which is now gone.  Can you please regenerate this against the properly built image that does not have sdcardfs as these symbols should no longer be needed by anyone.",
+      "range": {
+        "startLine": 385,
+        "startChar": 2,
+        "endLine": 386,
+        "endChar": 11
+      },
+      "revId": "581cf45e3dc2dd16dc74a551300b6436c6f5b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25351a78_e01ff387",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2020-08-10T08:07:42Z",
+      "side": 1,
+      "message": "OK, I\u0027ll check it.",
+      "parentUuid": "b8401136_e7d76ac1",
       "range": {
         "startLine": 385,
         "startChar": 2,
