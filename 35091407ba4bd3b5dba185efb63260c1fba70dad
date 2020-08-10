@@ -442,6 +442,30 @@
     },
     {
       "key": {
+        "uuid": "59083dcb_56d023fc",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6367,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T18:33:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92a4a925_a66a7ea0",
+      "range": {
+        "startLine": 6367,
+        "startChar": 1,
+        "endLine": 6367,
+        "endChar": 10
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e39bdab_0aa2259e",
         "filename": "kernel/sched/core.c",
         "patchSetId": 6
@@ -477,6 +501,24 @@
     },
     {
       "key": {
+        "uuid": "fbcc3059_2d21067f",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6404,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T18:33:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d2451a8_2a40451f",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "567f2138_ed394441",
         "filename": "kernel/sched/core.c",
         "patchSetId": 6
@@ -491,6 +533,24 @@
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a9a13ae_3349b134",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6413,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T18:33:41Z",
+      "side": 1,
+      "message": "The behavior will be changed in subsequent patchesets, such that there is no detach/attach.",
+      "parentUuid": "567f2138_ed394441",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -641,6 +701,30 @@
     },
     {
       "key": {
+        "uuid": "004364d3_b9d5437d",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T18:33:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "caf31d06_c61a9f65",
+      "range": {
+        "startLine": 81,
+        "startChar": 1,
+        "endLine": 81,
+        "endChar": 21
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f8d4d00_3f25d794",
         "filename": "kernel/sched/isolate.c",
         "patchSetId": 6
@@ -781,6 +865,30 @@
     },
     {
       "key": {
+        "uuid": "beaba58a_60b296e0",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T18:33:41Z",
+      "side": 1,
+      "message": "This is keyed off of trace_sched_isolate() because start_time is used below, only when that call is made (nor not made) based upon when the trace is enabled.",
+      "parentUuid": "ed1ff5eb_8b7b7b70",
+      "range": {
+        "startLine": 106,
+        "startChar": 15,
+        "endLine": 106,
+        "endChar": 26
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d0f6d98_3f3adcec",
         "filename": "kernel/sched/isolate.c",
         "patchSetId": 6
@@ -804,6 +912,30 @@
     },
     {
       "key": {
+        "uuid": "688ebda7_8fd67904",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T18:33:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d0f6d98_3f3adcec",
+      "range": {
+        "startLine": 112,
+        "startChar": 13,
+        "endLine": 112,
+        "endChar": 73
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5780daa5_e9fb0991",
         "filename": "kernel/sched/isolate.c",
         "patchSetId": 6
@@ -824,6 +956,30 @@
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24cb4ae3_f5255bb9",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T18:33:41Z",
+      "side": 1,
+      "message": "it is used below.  I\u0027ll move it to just before its usage in calc_load_migrate().",
+      "parentUuid": "5780daa5_e9fb0991",
+      "range": {
+        "startLine": 118,
+        "startChar": 1,
+        "endLine": 118,
+        "endChar": 18
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -959,6 +1115,24 @@
       "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9e32bb5_2c2018c9",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2583,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T18:33:41Z",
+      "side": 1,
+      "message": "Yes.  Done",
+      "parentUuid": "4855ab15_ba5df92a",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
