@@ -105,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "448fbc62_18d1bc62",
+        "filename": "kernel/irq/cpuhotplug.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T19:09:49Z",
+      "side": 1,
+      "message": "Moving the text/description, it shouldn\u0027t have been here.",
+      "parentUuid": "ab6abfe2_c225ded1",
+      "revId": "b8e35d038325a966544b9a0792a2ab3815c83fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "57c50e3a_b51f3241",
         "filename": "kernel/irq/cpuhotplug.c",
         "patchSetId": 2
@@ -154,6 +172,24 @@
       "revId": "b8e35d038325a966544b9a0792a2ab3815c83fbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b36e44a6_0db6b65d",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2021,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T19:09:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44a4ee9a_d00b7247",
+      "revId": "b8e35d038325a966544b9a0792a2ab3815c83fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
