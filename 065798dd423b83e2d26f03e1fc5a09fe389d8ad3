@@ -34,6 +34,24 @@
       "revId": "065798dd423b83e2d26f03e1fc5a09fe389d8ad3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5deb292c_80579ba7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-10T11:44:33Z",
+      "side": 1,
+      "message": "Please work with the scsi developers and maintainers to get this accepted.  Part of that is working through their objections to create something that is acceptable for everyone involved.\n\nYou should explain why this is needed, and what the benefits are, along with a the code that uses the new hooks.",
+      "parentUuid": "9febb9ad_d2437920",
+      "revId": "065798dd423b83e2d26f03e1fc5a09fe389d8ad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
