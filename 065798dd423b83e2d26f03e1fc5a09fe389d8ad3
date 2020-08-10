@@ -16,6 +16,24 @@
       "revId": "065798dd423b83e2d26f03e1fc5a09fe389d8ad3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9febb9ad_d2437920",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741040
+      },
+      "writtenOn": "2020-08-10T11:06:44Z",
+      "side": 1,
+      "message": "If that\u0027s the reasoning, why would I keep a patch on aosp?\nOnly \"Christoph Hellwig\" were negative.\nIf this code not merged, we can not use Write booster. In other words, hpb is the same.\nIf an unexpected urgent issue occurs, it is the basic patch to solve it during developing mobile device. At that time we have no time. \nAnd each vendor has a slightly different spec for performance, but it cannot be satisfied.\nIf you not agree this patch, the feature for ufs performance can\u0027t put anything in.",
+      "parentUuid": "65bde897_3dd9b97b",
+      "revId": "065798dd423b83e2d26f03e1fc5a09fe389d8ad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
