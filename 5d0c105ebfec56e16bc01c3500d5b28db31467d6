@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "8c568930_bd86127b",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-10T19:08:06Z",
+      "side": 1,
+      "message": "If it\u0027s per-SPM, then we don\u0027t want it to be per-tipc-device either. I\u0027ve made it per-device to land it though. We can change it once it matters.",
+      "parentUuid": "0d4714ae_08748cda",
+      "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "043732eb_e610acb0",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 8
@@ -174,6 +192,24 @@
       "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0567ce4b_cac48811",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1115,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-10T19:08:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a72fd5b2_51cd9519",
+      "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
