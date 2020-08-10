@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b96c45f_122f2c8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-10T11:41:32Z",
+      "side": 1,
+      "message": "Where was the discussion of this upstream?  Can you point to the email thread on lore.kernel.org?",
+      "revId": "5bb3ae2bd508844a205491b868778e17cc6377d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f25afdad_08c92707",
+        "filename": "arch/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-10T11:41:32Z",
+      "side": 1,
+      "message": "this is always the default, no need to have this.",
+      "range": {
+        "startLine": 845,
+        "startChar": 0,
+        "endLine": 845,
+        "endChar": 10
+      },
+      "revId": "5bb3ae2bd508844a205491b868778e17cc6377d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1994582e_0b34e58f",
+        "filename": "kernel/signal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-10T11:41:32Z",
+      "side": 1,
+      "message": "IS_ENABLED() is for stuff like this.",
+      "range": {
+        "startLine": 899,
+        "startChar": 0,
+        "endLine": 899,
+        "endChar": 37
+      },
+      "revId": "5bb3ae2bd508844a205491b868778e17cc6377d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
