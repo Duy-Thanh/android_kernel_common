@@ -50,6 +50,41 @@
       "revId": "e6e0226d59d7e4aa09519a8e97020eb26379cd0e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "556b2758_88b182b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2020-08-10T00:48:41Z",
+      "side": 1,
+      "message": "Hello, I want this patch to apply android11-5.4. But previous patch was commented like below :\n\n\nhttps://android-review.googlesource.com/c/kernel/common/+/1345447\n\n Matthias Maennich\nAbandoned\n\nThis branch got renamed. Please submit the next patch set to android12-5.4.\n\nCan I update to android11-5.4 ?? If I can, I\u0027ll update that branch again. Thanks.",
+      "parentUuid": "8160e822_c1878fe7",
+      "revId": "e6e0226d59d7e4aa09519a8e97020eb26379cd0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9429850_614ce769",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2020-08-10T00:48:41Z",
+      "side": 1,
+      "message": "This is for android11-5.4.\nI think I have to upload to android11-5.4 Becase Lint blocked with android12-5.4 action.\n\nI thought that I have to update android12-5.4 first, then you push down to android11-5.4.\nBut it must be wrong for ABI (ABI can be different from android12-5.4 and android11-5.4)\n\nIf I am right, please give -2 score here, I\u0027ll upload android11-5.4 again.\n\nThanks.",
+      "revId": "e6e0226d59d7e4aa09519a8e97020eb26379cd0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
