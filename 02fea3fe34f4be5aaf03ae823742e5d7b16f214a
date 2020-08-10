@@ -1,0 +1,31 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004311618",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1393233?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "1865990c_2b12f406",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-10T21:46:47Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027valid\u0027, \u0027validity check\u0027 or \u0027initial check\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 66,
+        "endChar": 10
+      },
+      "revId": "02fea3fe34f4be5aaf03ae823742e5d7b16f214a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
