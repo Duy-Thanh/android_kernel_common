@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "bd535126_83c44af0",
+        "filename": "drivers/base/cpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T18:29:57Z",
+      "side": 1,
+      "message": "this will be separated in a different patch-set and/or re-evaluated.",
+      "parentUuid": "2ada0a2e_f72a5ff6",
+      "revId": "b8e35d038325a966544b9a0792a2ab3815c83fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b13e84da_90e552ff",
         "filename": "kernel/cpu.c",
         "patchSetId": 2
