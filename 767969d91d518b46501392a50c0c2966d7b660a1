@@ -135,6 +135,24 @@
     },
     {
       "key": {
+        "uuid": "da9bdc98_79d7c68e",
+        "filename": "kernel/sched/pause.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T18:36:45Z",
+      "side": 1,
+      "message": "_unlocked() version is called when cpu_maps_update_begin() has already been called.",
+      "parentUuid": "397d45ec_78e1c74c",
+      "revId": "767969d91d518b46501392a50c0c2966d7b660a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "51aeebe1_2fff3fe4",
         "filename": "kernel/sched/pause.c",
         "patchSetId": 7
@@ -211,6 +229,30 @@
     },
     {
       "key": {
+        "uuid": "a1fc6a12_33656b48",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 2576,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T18:36:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e20d7c2_a7e21aea",
+      "range": {
+        "startLine": 2576,
+        "startChar": 3,
+        "endLine": 2576,
+        "endChar": 13
+      },
+      "revId": "767969d91d518b46501392a50c0c2966d7b660a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a450097_4eb87460",
         "filename": "kernel/sched/sched.h",
         "patchSetId": 7
@@ -243,6 +285,24 @@
       "revId": "767969d91d518b46501392a50c0c2966d7b660a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82f25897_bb134c6a",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 2582,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T18:36:45Z",
+      "side": 1,
+      "message": "these will be moved to pause.h",
+      "parentUuid": "013cbeb0_df950bac",
+      "revId": "767969d91d518b46501392a50c0c2966d7b660a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
