@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "7c1c9ef2_fa28ecd6",
+        "filename": "include/linux/sched/isolation.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T23:27:57Z",
+      "side": 1,
+      "message": "Split into separate patch, and description in commit.",
+      "parentUuid": "9acea8d2_06d8acd0",
+      "revId": "f186ce75441cac092704300de2697f28d4206148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a1dbd704_583d358d",
         "filename": "kernel/cpu.c",
         "patchSetId": 1
@@ -87,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "8c96828d_7f6309f7",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1004,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T23:27:57Z",
+      "side": 1,
+      "message": "new patch for this, with message.  \n\n    ANDROID: cpu-hotplug: Keep atleast 1 online and un-paused CPU\n    \n    The PM_QOS_CPU_DMA_LATENCY vote attached to an IRQ is discarded,\n    if it is affined to a paused CPU. So one cpu at least is needed\n    in online and un-pause state, for CPU hotplug.",
+      "parentUuid": "a1dbd704_583d358d",
+      "revId": "f186ce75441cac092704300de2697f28d4206148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb5e5909_91018ee9",
         "filename": "kernel/irq/cpuhotplug.c",
         "patchSetId": 1
@@ -101,6 +137,24 @@
       "revId": "f186ce75441cac092704300de2697f28d4206148",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8b5503b_8228c0cd",
+        "filename": "kernel/irq/cpuhotplug.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T23:27:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb5e5909_91018ee9",
+      "revId": "f186ce75441cac092704300de2697f28d4206148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -124,6 +178,30 @@
       "revId": "f186ce75441cac092704300de2697f28d4206148",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60963cbf_113e0b8d",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6510,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T23:27:57Z",
+      "side": 1,
+      "message": "separated this change and providing justification separately.  this particular call should be indicating that isolated cpus (aka paused cpus) are not allowed when considering a fallback rq for this process.  however, in general, we allow paused cpus to be considered when the task is a kthread (see select_task_rq()).",
+      "parentUuid": "232d6546_167d8a4f",
+      "range": {
+        "startLine": 6510,
+        "startChar": 2,
+        "endLine": 6510,
+        "endChar": 59
+      },
+      "revId": "f186ce75441cac092704300de2697f28d4206148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -167,6 +245,24 @@
     },
     {
       "key": {
+        "uuid": "09aa5ff6_508024b1",
+        "filename": "kernel/sched/cpupri.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T23:27:57Z",
+      "side": 1,
+      "message": "The behavior as I understand it is that all tasks are migrated off of isolated (aka paused) cpus, with the only exception being kthreads.",
+      "parentUuid": "9be278a7_ac55c1db",
+      "revId": "f186ce75441cac092704300de2697f28d4206148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "82ef1be1_b4cb809b",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 1
@@ -204,6 +300,24 @@
       "revId": "f186ce75441cac092704300de2697f28d4206148",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84183c19_5cb9c44b",
+        "filename": "kernel/smp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T23:27:57Z",
+      "side": 1,
+      "message": "This has been called out separately now, and has it\u0027s own commit id.  The text is:\n\n    Regardless if CPU is paused or not, wake up all the CPUs during\n    suspend to idle is needed, so that each CPU can disable their\n    local tick device, etc. If not all cpus are woken up, then\n    the system isn\u0027t fully suspended and things (e.g. sched_clock and\n    timekeeping) are never stopped properly.",
+      "parentUuid": "e2f75a02_410b26c0",
+      "revId": "f186ce75441cac092704300de2697f28d4206148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
