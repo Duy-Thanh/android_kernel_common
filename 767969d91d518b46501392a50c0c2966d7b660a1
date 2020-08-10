@@ -100,6 +100,24 @@
     },
     {
       "key": {
+        "uuid": "01fe6390_d4d15d93",
+        "filename": "kernel/sched/pause.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1318918
+      },
+      "writtenOn": "2020-08-10T14:49:43Z",
+      "side": 1,
+      "message": "There is no helper api in cpuhotplug. \n\n\nAre you suggesting we add this in kernel/cpu.c\n\nbool in_cpu_maps_update(void)\n{\n   return mutex_is_locked(\u0026cpu_add_remove_lock);\n}\n\nand call it here and BUG() if not true?",
+      "parentUuid": "535bae17_8906d16c",
+      "revId": "767969d91d518b46501392a50c0c2966d7b660a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "397d45ec_78e1c74c",
         "filename": "kernel/sched/pause.c",
         "patchSetId": 7
@@ -152,6 +170,24 @@
     },
     {
       "key": {
+        "uuid": "eb327c3a_bd5ccc75",
+        "filename": "kernel/sched/pause.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1318918
+      },
+      "writtenOn": "2020-08-10T14:49:43Z",
+      "side": 1,
+      "message": "Specifically, we do not have (or intend to) a sysfs interface to pause cpu via userspace. Our usecases are all within kernel.",
+      "parentUuid": "48271aa3_52fcaa86",
+      "revId": "767969d91d518b46501392a50c0c2966d7b660a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e20d7c2_a7e21aea",
         "filename": "kernel/sched/sched.h",
         "patchSetId": 7
@@ -186,6 +222,24 @@
       "writtenOn": "2020-08-06T17:47:06Z",
       "side": 1,
       "message": "Shouldn\u0027t these be discussed in the commit message if they form part of the interface to cpu pause",
+      "revId": "767969d91d518b46501392a50c0c2966d7b660a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "013cbeb0_df950bac",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 2582,
+      "author": {
+        "id": 1318918
+      },
+      "writtenOn": "2020-08-10T14:49:43Z",
+      "side": 1,
+      "message": "Todd, the need to call calc_load_migrate() are mentioned in the commit text.\n\n\nThe pausing and unpausing paths mimic some of the same steps as\ncpu dying, like updating the balance interval, and updating the\nload average.",
+      "parentUuid": "1a450097_4eb87460",
       "revId": "767969d91d518b46501392a50c0c2966d7b660a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
