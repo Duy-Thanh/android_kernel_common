@@ -997,6 +997,24 @@
     },
     {
       "key": {
+        "uuid": "4a2ba605_6c510d8a",
+        "filename": "kernel/sched/topology.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1128,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T17:15:30Z",
+      "side": 1,
+      "message": "this was updated in a later patchset, and moved to the same patchset that actually used this api.",
+      "parentUuid": "767819fe_d95f28d3",
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb5af359_6d2d6702",
         "filename": "kernel/sched/trace.h",
         "patchSetId": 6
