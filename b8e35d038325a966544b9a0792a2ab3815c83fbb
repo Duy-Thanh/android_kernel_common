@@ -123,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "898f6896_89a245ca",
+        "filename": "kernel/irq/cpuhotplug.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2020-08-10T23:33:06Z",
+      "side": 1,
+      "message": "There are changes to handle the case of 1 cpu and the cpu is paused.  this is disallowed.  this has been broken out separately so hopefully will be more clear.",
+      "parentUuid": "448fbc62_18d1bc62",
+      "revId": "b8e35d038325a966544b9a0792a2ab3815c83fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "57c50e3a_b51f3241",
         "filename": "kernel/irq/cpuhotplug.c",
         "patchSetId": 2
