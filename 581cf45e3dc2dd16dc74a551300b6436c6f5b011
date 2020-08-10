@@ -71,6 +71,23 @@
     },
     {
       "key": {
+        "uuid": "c106abde_f533af44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2020-08-10T09:40:10Z",
+      "side": 1,
+      "message": "I double checked \"NO MORE SDCARDFS\" config in built \".config\" file.\n\nAnd our driver engineers are checking why this API (d_path, filp_close, filp_open) is needed.",
+      "revId": "581cf45e3dc2dd16dc74a551300b6436c6f5b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a9d8384_f308a553",
         "filename": "android/abi_gki_aarch64_exynos",
         "patchSetId": 2
@@ -129,6 +146,30 @@
       "side": 1,
       "message": "OK, I\u0027ll check it.",
       "parentUuid": "b8401136_e7d76ac1",
+      "range": {
+        "startLine": 385,
+        "startChar": 2,
+        "endLine": 386,
+        "endChar": 11
+      },
+      "revId": "581cf45e3dc2dd16dc74a551300b6436c6f5b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fed03fd_b3dfc39a",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2020-08-10T09:40:10Z",
+      "side": 1,
+      "message": "We removed sdcardfs also. No more in \".config\" file.\nOur each driver engineer is checking why this API (d_path, filp_close, open) is needed.\nThanks.",
+      "parentUuid": "25351a78_e01ff387",
       "range": {
         "startLine": 385,
         "startChar": 2,
