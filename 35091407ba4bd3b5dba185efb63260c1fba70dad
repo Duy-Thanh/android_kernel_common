@@ -617,6 +617,30 @@
     },
     {
       "key": {
+        "uuid": "caf31d06_c61a9f65",
+        "filename": "kernel/sched/isolate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1318918
+      },
+      "writtenOn": "2020-08-10T16:31:55Z",
+      "side": 1,
+      "message": "Hello Vincent,\n\nThe call to sched_unisolate_cpu_unlocked()  [the unlocked means the cpus_update_map_being() lock is already held i.e. the hotplug path] happens from our load checking code. It basically checks load every few mS, and decides to isoalte/unisolate cpus. If it finds that a core isolated by him is being offlined, it unisolates it just before offlining. This all happens in a cpuhp state callback.",
+      "parentUuid": "732cca9e_7f3965ce",
+      "range": {
+        "startLine": 81,
+        "startChar": 1,
+        "endLine": 81,
+        "endChar": 21
+      },
+      "revId": "35091407ba4bd3b5dba185efb63260c1fba70dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3f8d4d00_3f25d794",
         "filename": "kernel/sched/isolate.c",
         "patchSetId": 6
