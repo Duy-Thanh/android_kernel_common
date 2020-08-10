@@ -8176,10 +8176,16 @@ void update_group_capacity(struct sched_domain *sd, int cpu)
 		group = child->groups;
 		do {
 			struct sched_group_capacity *sgc = group->sgc;
+			__maybe_unused cpumask_t *cpus =
+					sched_group_span(group);
 
-			capacity += sgc->capacity;
-			min_capacity = min(sgc->min_capacity, min_capacity);
-			max_capacity = max(sgc->max_capacity, max_capacity);
+			if (!cpu_paused(cpumask_first(cpus))) {
+				capacity += sgc->capacity;
+				min_capacity = min(sgc->min_capacity,
+							min_capacity);
+				max_capacity = max(sgc->max_capacity,
+							max_capacity);
+			}
 			group = group->next;
 		} while (group != child->groups);
 	}
@@ -8428,24 +8434,26 @@ static inline void update_sg_lb_stats(struct lb_env *env,
 		}
 	}
 
-	/* Check if dst CPU is idle and preferred to this group */
-	if (env->sd->flags & SD_ASYM_PACKING &&
-	    env->idle != CPU_NOT_IDLE &&
-	    sgs->sum_h_nr_running &&
-	    sched_asym_prefer(env->dst_cpu, group->asym_prefer_cpu)) {
-		sgs->group_asym_packing = 1;
+	/* Paused CPU has no weight */
+	if (cpumask_subset(sched_group_span(group), cpu_paused_mask)) {
+		sgs->group_capacity = 0;
+		sgs->avg_load = 0;
+		sgs->group_no_capacity = 1;
+		sgs->group_type = group_other;
+		sgs->group_weight = group->group_weight;
+	} else {
+
+		sgs->group_capacity = group->sgc->capacity;
+
+		sgs->group_weight = group->group_weight;
+
+		sgs->group_type = group_classify(env->sd->imbalance_pct, group, sgs);
+
+		/* Computing avg_load makes sense only when group is overloaded */
+		if (sgs->group_type == group_overloaded)
+			sgs->avg_load = (sgs->group_load * SCHED_CAPACITY_SCALE) /
+					sgs->group_capacity;
 	}
-
-	sgs->group_capacity = group->sgc->capacity;
-
-	sgs->group_weight = group->group_weight;
-
-	sgs->group_type = group_classify(env->sd->imbalance_pct, group, sgs);
-
-	/* Computing avg_load makes sense only when group is overloaded */
-	if (sgs->group_type == group_overloaded)
-		sgs->avg_load = (sgs->group_load * SCHED_CAPACITY_SCALE) /
-				sgs->group_capacity;
 }
 
 /**
@@ -8467,6 +8475,7 @@ static bool update_sd_pick_busiest(struct lb_env *env,
 				   struct sg_lb_stats *sgs)
 {
 	struct sg_lb_stats *busiest = &sds->busiest_stat;
+	cpumask_t tmp_cpus;
 
 	/* Make sure that there is at least one task to pull */
 	if (!sgs->sum_h_nr_running)
@@ -8487,6 +8496,11 @@ static bool update_sd_pick_busiest(struct lb_env *env,
 		return true;
 
 	if (sgs->group_type < busiest->group_type)
+		return false;
+
+	/* determine if all cpus in group are paused, and reject if so */
+	cpumask_and(&tmp_cpus, sched_group_span(sg), cpu_paused_mask);
+	if (cpumask_equal(&tmp_cpus, cpu_paused_mask))
 		return false;
 
 	/*
@@ -10057,6 +10071,10 @@ static inline int find_new_ilb(void)
 
 	for_each_cpu_and(ilb, nohz.idle_cpus_mask,
 			      housekeeping_cpumask(HK_FLAG_MISC)) {
+		/* return the first idle, unpaused cpu */
+		if (cpu_paused(ilb))
+			continue;
+
 		if (idle_cpu(ilb))
 			return ilb;
 	}
