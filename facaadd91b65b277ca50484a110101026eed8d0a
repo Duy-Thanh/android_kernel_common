@@ -1,0 +1,31 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004324763",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1393929?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "3dd4ee5f_b8b08d01",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-11T10:54:37Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027they\u0027, \u0027them\u0027, or \u0027person\u0027; see https://developers.google.com/style/word-list#gender for more details.",
+      "range": {
+        "startLine": 14,
+        "startChar": 21,
+        "endLine": 14,
+        "endChar": 25
+      },
+      "revId": "facaadd91b65b277ca50484a110101026eed8d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
