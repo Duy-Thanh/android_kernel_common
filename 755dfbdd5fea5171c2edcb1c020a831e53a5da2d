@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "410c6e34_9fb4419d",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1223,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-11T22:00:37Z",
+      "side": 1,
+      "message": "Why are you freeing after the file which you allocated first? When you are using multiple error labels to recover from errors it is easier to follow if you tear down in the opposite order from the set-up and don\u0027t tear down state that you have not yet set up.",
+      "revId": "755dfbdd5fea5171c2edcb1c020a831e53a5da2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90e1b451_f3e872cb",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1914,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-11T22:00:37Z",
+      "side": 1,
+      "message": "dev_err",
+      "range": {
+        "startLine": 1914,
+        "startChar": 4,
+        "endLine": 1914,
+        "endChar": 10
+      },
+      "revId": "755dfbdd5fea5171c2edcb1c020a831e53a5da2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
