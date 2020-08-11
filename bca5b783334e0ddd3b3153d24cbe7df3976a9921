@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14259c19_37a452f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-11T20:21:15Z",
+      "side": 1,
+      "message": "It is a \"tristate\" -- can\u0027t it be enabled as a module downstream? Why does this need to be in gki_defconfig?",
+      "revId": "bca5b783334e0ddd3b3153d24cbe7df3976a9921",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
