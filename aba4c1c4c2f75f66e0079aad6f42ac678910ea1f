@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8573b431_47a07c87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-08-11T12:00:59Z",
+      "side": 1,
+      "message": "This change depends on change here: https://android-review.googlesource.com/c/kernel/common/+/1396167,\notherwise it would crash during the boot.",
+      "revId": "aba4c1c4c2f75f66e0079aad6f42ac678910ea1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
