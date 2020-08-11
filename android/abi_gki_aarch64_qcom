@@ -287,7 +287,6 @@
   get_cpu_device
   get_device
   __get_free_pages
-  get_next_event_cpu
   get_pid_task
   get_random_bytes
   __get_task_comm
@@ -1315,9 +1314,6 @@
   proc_create
   seq_write
 
-# required by google-battery.ko
-  simple_strtoull
-
 # required by google-bms.ko
   full_name_hash
 
@@ -1910,6 +1906,7 @@
   cpuidle_unregister_driver
   cpu_pm_enter
   cpu_pm_exit
+  get_next_event_cpu
   param_get_bool
   param_get_uint
   pending_ipi
