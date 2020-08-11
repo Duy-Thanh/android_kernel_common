@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8f3496ad_f61e8969",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-11T00:30:27Z",
+      "side": 1,
+      "message": "add comment what this warn_on means and why it is ok to proceed when it triggers?",
+      "revId": "e54abb0cb640d88dc759c211ed20869c988b97dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba9a3059_d01f096c",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 11
@@ -48,6 +65,30 @@
     },
     {
       "key": {
+        "uuid": "db198f4b_8e021bf3",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1183,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-11T00:30:27Z",
+      "side": 1,
+      "message": "Once sg_alloc_table_from_pages has succeeded tipc_shared_handle_drop should clean up the pages. A comment would be useful here or on the cleanup_pages label though.",
+      "parentUuid": "aad339e0_4ca49a61",
+      "range": {
+        "startLine": 1183,
+        "startChar": 7,
+        "endLine": 1183,
+        "endChar": 21
+      },
+      "revId": "e54abb0cb640d88dc759c211ed20869c988b97dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d1866aff_89b45aba",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 11
@@ -59,6 +100,30 @@
       "writtenOn": "2020-08-10T21:28:26Z",
       "side": 1,
       "message": "must be initialized otherwise you might free garbage.",
+      "range": {
+        "startLine": 1256,
+        "startChar": 29,
+        "endLine": 1256,
+        "endChar": 41
+      },
+      "revId": "e54abb0cb640d88dc759c211ed20869c988b97dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e939cbe_dc47f158",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1256,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-11T00:30:27Z",
+      "side": 1,
+      "message": "or use more labels. Did the compiler not complain about this?",
+      "parentUuid": "d1866aff_89b45aba",
       "range": {
         "startLine": 1256,
         "startChar": 29,
@@ -110,6 +175,29 @@
         "startChar": 0,
         "endLine": 1317,
         "endChar": 0
+      },
+      "revId": "e54abb0cb640d88dc759c211ed20869c988b97dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95300eae_fc959b07",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-11T00:30:27Z",
+      "side": 1,
+      "message": "why are you using release_idx as the loop variable but releasing shm_idx? Also, why base your loop on shm_idx when shm_idx should always be req.shm_cnt at this point (and has been reused after the value that recover_mem relies on)?",
+      "range": {
+        "startLine": 1348,
+        "startChar": 43,
+        "endLine": 1348,
+        "endChar": 50
       },
       "revId": "e54abb0cb640d88dc759c211ed20869c988b97dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
