@@ -1,0 +1,85 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004324776",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1393924?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f86fc979_c6fb03a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-11T10:54:38Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027they\u0027, \u0027them\u0027, or \u0027person\u0027; see https://developers.google.com/style/word-list#gender for more details.",
+      "range": {
+        "startLine": 7,
+        "startChar": 24,
+        "endLine": 7,
+        "endChar": 28
+      },
+      "revId": "9eb4bb0049a1666565d71ff1c18baf6c2e858738",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004324776",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1393924?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "fc66b390_8142c95a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-11T10:54:38Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027they\u0027, \u0027them\u0027, or \u0027person\u0027; see https://developers.google.com/style/word-list#gender for more details.",
+      "range": {
+        "startLine": 9,
+        "startChar": 7,
+        "endLine": 9,
+        "endChar": 11
+      },
+      "revId": "9eb4bb0049a1666565d71ff1c18baf6c2e858738",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004324776",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1393924?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "ddf71529_820b68d4",
+        "filename": "include/linux/ieee80211.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 3165,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-11T10:54:38Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027they\u0027, \u0027them\u0027, or \u0027person\u0027; see https://developers.google.com/style/word-list#gender for more details.",
+      "range": {
+        "startLine": 3165,
+        "startChar": 2,
+        "endLine": 3165,
+        "endChar": 6
+      },
+      "revId": "9eb4bb0049a1666565d71ff1c18baf6c2e858738",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
