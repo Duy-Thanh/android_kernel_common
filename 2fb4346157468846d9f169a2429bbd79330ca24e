@@ -34,6 +34,24 @@
       "revId": "2fb4346157468846d9f169a2429bbd79330ca24e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "619aa831_6e2cbe6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-12T17:09:19Z",
+      "side": 1,
+      "message": "I did so for android11-5.4 to try to reduce the abi surface we had to support.\n\nIf you need this for 11-5.4 I have no problem, but for 12 the goal is to move back to modules where ever possible so that systems do not waste memory for hardware that is not present.",
+      "parentUuid": "d3290cad_55ef5ef5",
+      "revId": "2fb4346157468846d9f169a2429bbd79330ca24e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
