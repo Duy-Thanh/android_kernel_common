@@ -200,6 +200,30 @@
     },
     {
       "key": {
+        "uuid": "2fa31963_b62aa1b5",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1063916
+      },
+      "writtenOn": "2020-08-12T11:30:51Z",
+      "side": 1,
+      "message": "1) As you know, SecureOS(ex, Trusty) is based on TrustZone and it is not based on LSM like as SELinux. And current our SecureOS Kernel driver is interface for SecureOS in Secure World of TrustZone. So, the kernel driver get d_path() to make hash to distinguish client application and the hash value is used by Secure World of TrustZone. So, I think using LSM is not reasonable for this SecureOS case.\nAnd SecureOS kernel driver is using d_path() just to get application path information. So, I think it is not breaking isolation between kernel and user space.. :(\n\n2) Currently, Many security feature of Android is already run based on SecureOS(ex, Keymaster, Gatekeeper, FingerPrint, and so on). So, if we cannot enable SecureOS correctly, these Security feature cannot run and CTS is also will be problem.",
+      "parentUuid": "da34e6c1_9428be78",
+      "range": {
+        "startLine": 360,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 8
+      },
+      "revId": "581cf45e3dc2dd16dc74a551300b6436c6f5b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b8401136_e7d76ac1",
         "filename": "android/abi_gki_aarch64_exynos",
         "patchSetId": 2
