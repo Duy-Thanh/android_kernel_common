@@ -281,6 +281,8 @@ struct data_file {
 
 	/* The verity file digest, set when verity is enabled */
 	struct mem_range df_verity_file_digest;
+
+	struct incfs_df_verity_signature *df_verity_signature;
 };
 
 struct dir_file {

@@ -1297,7 +1297,12 @@ static int file_open(struct inode *inode, struct file *file)
 		file->private_data = fd;
 
 		err = make_inode_ready_for_data_ops(mi, inode, backing_file);
+		if (err)
+			goto out;
 
+		err = incfs_fsverity_file_open(inode, file);
+		if (err)
+			goto out;
 	} else if (S_ISDIR(inode->i_mode)) {
 		struct dir_file *dir = NULL;
 

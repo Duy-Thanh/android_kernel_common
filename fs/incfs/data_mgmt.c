@@ -5,6 +5,7 @@
 #include <linux/crc32.h>
 #include <linux/delay.h>
 #include <linux/file.h>
+#include <linux/fsverity.h>
 #include <linux/gfp.h>
 #include <linux/ktime.h>
 #include <linux/lz4.h>
@@ -18,6 +19,7 @@
 #include "data_mgmt.h"
 #include "format.h"
 #include "integrity.h"
+#include "verity.h"
 
 static int incfs_scan_metadata_chain(struct data_file *df);
 
@@ -322,7 +324,9 @@ void incfs_free_data_file(struct data_file *df)
 
 	incfs_free_mtree(df->df_hash_tree);
 	incfs_free_bfc(df->df_backing_file_context);
+	kfree(df->df_signature);
 	kfree(df->df_verity_file_digest.data);
+	kfree(df->df_verity_signature);
 	kfree(df);
 }
 
@@ -346,6 +350,7 @@ int make_inode_ready_for_data_ops(struct mount_info *mi,
 		}
 	} else
 		err = -EBADF;
+
 	inode_unlock(inode);
 	return err;
 }
@@ -1461,7 +1466,29 @@ static int process_status_md(struct incfs_status *is,
 		   df->df_initial_hash_blocks_written);
 
 	df->df_status_offset = handler->md_record_offset;
+	return 0;
+}
 
+static int process_file_verity_signature_md(
+		struct incfs_file_verity_signature *vs,
+		struct metadata_handler *handler)
+{
+	struct data_file *df = handler->context;
+	struct incfs_df_verity_signature *verity_signature;
+
+	if (!df)
+		return -EFAULT;
+
+	verity_signature = kzalloc(sizeof(*verity_signature), GFP_NOFS);
+	if (!verity_signature)
+		return -ENOMEM;
+
+	verity_signature->offset = le64_to_cpu(vs->vs_offset);
+	verity_signature->size = le32_to_cpu(vs->vs_size);
+	if (verity_signature->size > FS_VERITY_MAX_SIGNATURE_SIZE)
+		return -EFAULT;
+
+	df->df_verity_signature = verity_signature;
 	return 0;
 }
 
@@ -1487,6 +1514,7 @@ static int incfs_scan_metadata_chain(struct data_file *df)
 	handler->handle_blockmap = process_blockmap_md;
 	handler->handle_signature = process_file_signature_md;
 	handler->handle_status = process_status_md;
+	handler->handle_verity_signature = process_file_verity_signature_md;
 
 	while (handler->md_record_offset > 0) {
 		error = incfs_read_next_metadata_record(bfc, handler);
