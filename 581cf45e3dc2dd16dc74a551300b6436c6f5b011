@@ -105,6 +105,23 @@
     },
     {
       "key": {
+        "uuid": "4d3367f4_29701924",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-12T14:33:58Z",
+      "side": 1,
+      "message": "Want me to redo this patch, removing the symbols that are not in our tree, to make this easier for you all?",
+      "revId": "581cf45e3dc2dd16dc74a551300b6436c6f5b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a9d8384_f308a553",
         "filename": "android/abi_gki_aarch64_exynos",
         "patchSetId": 2
