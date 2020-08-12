@@ -16,6 +16,24 @@
       "revId": "b99519544144fe292ff909bd4d5530f18da1ef63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1917f99_d7e26032",
+        "filename": "include/drm/drm_panel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-12T16:46:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a302221e_6cbd7c85",
+      "revId": "b99519544144fe292ff909bd4d5530f18da1ef63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
