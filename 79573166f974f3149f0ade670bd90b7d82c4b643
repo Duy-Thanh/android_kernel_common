@@ -34,6 +34,98 @@
       "revId": "79573166f974f3149f0ade670bd90b7d82c4b643",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b194cbae_63e67683",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1837,
+      "author": {
+        "id": 1045553
+      },
+      "writtenOn": "2020-08-12T22:28:01Z",
+      "side": 1,
+      "message": "\u003e 80 col",
+      "range": {
+        "startLine": 1837,
+        "startChar": 2,
+        "endLine": 1837,
+        "endChar": 80
+      },
+      "revId": "79573166f974f3149f0ade670bd90b7d82c4b643",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "448f533d_939f4a2e",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1846,
+      "author": {
+        "id": 1045553
+      },
+      "writtenOn": "2020-08-12T22:28:01Z",
+      "side": 1,
+      "message": "..",
+      "range": {
+        "startLine": 1845,
+        "startChar": 2,
+        "endLine": 1846,
+        "endChar": 19
+      },
+      "revId": "79573166f974f3149f0ade670bd90b7d82c4b643",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a8de7b1_46cc5dd9",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1922,
+      "author": {
+        "id": 1045553
+      },
+      "writtenOn": "2020-08-12T22:28:01Z",
+      "side": 1,
+      "message": "80 col",
+      "range": {
+        "startLine": 1922,
+        "startChar": 4,
+        "endLine": 1922,
+        "endChar": 64
+      },
+      "revId": "79573166f974f3149f0ade670bd90b7d82c4b643",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23f11685_5174cb78",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1925,
+      "author": {
+        "id": 1045553
+      },
+      "writtenOn": "2020-08-12T22:28:01Z",
+      "side": 1,
+      "message": "...",
+      "range": {
+        "startLine": 1925,
+        "startChar": 3,
+        "endLine": 1925,
+        "endChar": 91
+      },
+      "revId": "79573166f974f3149f0ade670bd90b7d82c4b643",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
