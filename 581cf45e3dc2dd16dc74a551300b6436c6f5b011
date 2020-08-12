@@ -122,6 +122,23 @@
     },
     {
       "key": {
+        "uuid": "f6e20e10_58db314d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-12T14:34:25Z",
+      "side": 1,
+      "message": "It needs to be combined with a .xml file update at the same time anyway.",
+      "revId": "581cf45e3dc2dd16dc74a551300b6436c6f5b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a9d8384_f308a553",
         "filename": "android/abi_gki_aarch64_exynos",
         "patchSetId": 2
