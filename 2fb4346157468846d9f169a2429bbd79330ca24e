@@ -16,6 +16,24 @@
       "revId": "2fb4346157468846d9f169a2429bbd79330ca24e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3290cad_55ef5ef5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2020-08-12T16:50:40Z",
+      "side": 1,
+      "message": "BT low-level drivers for TI, QCT and BCM are built-in only. You allowed TI\u0027s and QCT\u0027s in order to export less API. Can\u0027t we allow BCM too? Our board is using BCM driver.",
+      "parentUuid": "fdb820a0_786b2549",
+      "revId": "2fb4346157468846d9f169a2429bbd79330ca24e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
