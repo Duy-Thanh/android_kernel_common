@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2a660b72_0194612e",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1223,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-12T18:29:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "410c6e34_9fb4419d",
+      "revId": "755dfbdd5fea5171c2edcb1c020a831e53a5da2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90e1b451_f3e872cb",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 12
@@ -39,6 +57,30 @@
       "revId": "755dfbdd5fea5171c2edcb1c020a831e53a5da2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f3e3d47_a88476c7",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1914,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-12T18:29:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90e1b451_f3e872cb",
+      "range": {
+        "startLine": 1914,
+        "startChar": 4,
+        "endLine": 1914,
+        "endChar": 10
+      },
+      "revId": "755dfbdd5fea5171c2edcb1c020a831e53a5da2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
