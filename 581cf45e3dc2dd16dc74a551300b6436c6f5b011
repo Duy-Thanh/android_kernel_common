@@ -157,6 +157,24 @@
     },
     {
       "key": {
+        "uuid": "b8738be7_47f54462",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-12T15:02:18Z",
+      "side": 1,
+      "message": "Reworked patch submitted, along with the .xml file update at the same time to keep the build system happy.",
+      "parentUuid": "09d77ed2_4edced3e",
+      "revId": "581cf45e3dc2dd16dc74a551300b6436c6f5b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a9d8384_f308a553",
         "filename": "android/abi_gki_aarch64_exynos",
         "patchSetId": 2
