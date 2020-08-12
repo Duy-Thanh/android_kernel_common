@@ -224,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "8ee5ce72_4e2192cc",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-12T13:17:15Z",
+      "side": 1,
+      "message": "Do you have a pointer to this kernel code anywhere?  Using d_path should only be needed for a filesystem, nothing else, as what it gives you is probably not what you really need for this type of thing.",
+      "parentUuid": "2fa31963_b62aa1b5",
+      "range": {
+        "startLine": 360,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 8
+      },
+      "revId": "581cf45e3dc2dd16dc74a551300b6436c6f5b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b8401136_e7d76ac1",
         "filename": "android/abi_gki_aarch64_exynos",
         "patchSetId": 2
