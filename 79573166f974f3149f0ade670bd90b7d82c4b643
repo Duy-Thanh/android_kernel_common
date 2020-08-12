@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "24fe0cd6_6c12e2b1",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1837,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-12T22:43:37Z",
+      "side": 1,
+      "message": "That is true, but you don\u0027t have to put the string on the same line as \"dev, \". Splitting it will not get you below 80 here, but it would for some of your messages.",
+      "parentUuid": "93b48188_2ea68341",
+      "range": {
+        "startLine": 1837,
+        "startChar": 2,
+        "endLine": 1837,
+        "endChar": 80
+      },
+      "revId": "79573166f974f3149f0ade670bd90b7d82c4b643",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "448f533d_939f4a2e",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 14
