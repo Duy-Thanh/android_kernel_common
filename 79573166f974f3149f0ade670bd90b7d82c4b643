@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "91aebe2a_e8ad0be0",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1382,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-12T22:07:17Z",
+      "side": 1,
+      "message": "You could swap the polarity of this and avoid the goto in the success path.\ne.g.\ncommon_cleanup:\n...\nreturn ret;\n...\nshm_share_failed:\n\tfor (shm_idx--; shm_idx \u003e\u003d 0; shm_idx--)\n\t\ttipc_shared_handle_drop(shm_handles[shm_idx]);\n\n\tgoto common_cleanup;\n}",
+      "revId": "79573166f974f3149f0ade670bd90b7d82c4b643",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
