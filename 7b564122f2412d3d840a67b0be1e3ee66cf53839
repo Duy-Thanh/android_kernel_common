@@ -70,6 +70,30 @@
       "revId": "7b564122f2412d3d840a67b0be1e3ee66cf53839",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be0c9a4a_6d7d69e2",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-12T09:30:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3034d4e0_0dc7e410",
+      "range": {
+        "startLine": 44,
+        "startChar": 18,
+        "endLine": 44,
+        "endChar": 27
+      },
+      "revId": "7b564122f2412d3d840a67b0be1e3ee66cf53839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
