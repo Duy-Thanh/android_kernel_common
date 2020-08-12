@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (ab8e32 ANDROID: soc: qcom: rpmh: fix bad merge resolution)
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * Copyright (c) 2019, The Linux Foundation. All rights reserved.
@@ -119,3 +120,5 @@ struct arm_smmu_device *qcom_smmu_impl_init(struct arm_smmu_device *smmu)
 
 	return &qsmmu->smmu;
 }
+=======
+>>>>>>> BRANCH (fb893d Merge tag 'tag-chrome-platform-for-v5.9' of git://git.kernel)

@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (ab8e32 ANDROID: soc: qcom: rpmh: fix bad merge resolution)
 /* SPDX-License-Identifier: GPL-2.0-only */
 /*
  * IOMMU API for ARM architected SMMU implementations.
@@ -470,3 +471,5 @@ struct arm_smmu_device *qcom_smmu_impl_init(struct arm_smmu_device *smmu);
 int arm_mmu500_reset(struct arm_smmu_device *smmu);
 
 #endif /* _ARM_SMMU_H */
+=======
+>>>>>>> BRANCH (fb893d Merge tag 'tag-chrome-platform-for-v5.9' of git://git.kernel)

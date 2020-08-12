@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (ab8e32 ANDROID: soc: qcom: rpmh: fix bad merge resolution)
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * IOMMU API for ARM architected SMMU implementations.
@@ -2351,3 +2352,5 @@ MODULE_DESCRIPTION("IOMMU API for ARM architected SMMU implementations");
 MODULE_AUTHOR("Will Deacon <will@kernel.org>");
 MODULE_ALIAS("platform:arm-smmu");
 MODULE_LICENSE("GPL v2");
+=======
+>>>>>>> BRANCH (fb893d Merge tag 'tag-chrome-platform-for-v5.9' of git://git.kernel)
