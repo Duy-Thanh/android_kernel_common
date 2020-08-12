@@ -22,6 +22,30 @@
       "revId": "7b564122f2412d3d840a67b0be1e3ee66cf53839",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "401c4503_6dbea209",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1727248
+      },
+      "writtenOn": "2020-08-12T05:03:52Z",
+      "side": 1,
+      "message": "Can you please clarify on what you mean by CPU versions?\n\nAlso we are not using or accessing this variable directly.. we received modpost error for this variable on building our module as a loadable module.",
+      "parentUuid": "7d05cb69_657e908f",
+      "range": {
+        "startLine": 44,
+        "startChar": 18,
+        "endLine": 44,
+        "endChar": 27
+      },
+      "revId": "7b564122f2412d3d840a67b0be1e3ee66cf53839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
