@@ -135,6 +135,30 @@
     },
     {
       "key": {
+        "uuid": "80ae4c41_43356fb1",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-12T09:27:35Z",
+      "side": 1,
+      "message": "Use the provided LSM interfaces instead, they will give you what you need here in a correct format, and api.  Trying to \"tack-on\" a security model outside of the LSM model is not the correct way to do anything, and will cause problems, if it even properly works.",
+      "parentUuid": "ce31b352_3ee1b9ec",
+      "range": {
+        "startLine": 360,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 8
+      },
+      "revId": "581cf45e3dc2dd16dc74a551300b6436c6f5b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b8401136_e7d76ac1",
         "filename": "android/abi_gki_aarch64_exynos",
         "patchSetId": 2
