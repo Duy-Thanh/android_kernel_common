@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fb0d6add_86133539",
+        "filename": "kernel/futex.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2232,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-12T15:27:28Z",
+      "side": 1,
+      "message": "Do you need the whole structure for futex_q and futex_hash_bucket? KMI would be simpler if you just pass pointers to the fields that are needed.",
+      "revId": "a8eacf0a115ab4d0ef6870cbe179655164e7376e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
