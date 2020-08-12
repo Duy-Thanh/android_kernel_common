@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d223cfa_661f3d4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-08-12T22:08:37Z",
+      "side": 1,
+      "message": "The CTS test failure \u0027android.os.cts.SeccompTest#testKernelBasicTests\u0027 does not seem related to this fix. Since the boot tests are passing, I am bypassing presubmit to unblock boot on CF.",
+      "revId": "852e4c4f82715aee7829b3958ae44172e69c1662",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
