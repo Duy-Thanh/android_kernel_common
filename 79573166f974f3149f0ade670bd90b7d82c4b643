@@ -60,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "93b48188_2ea68341",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1837,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-12T22:34:25Z",
+      "side": 1,
+      "message": "Linux style says don\u0027t break strings that get sent to the user:\nhttps://www.kernel.org/doc/html/v4.10/process/coding-style.html#breaking-long-lines-and-strings",
+      "parentUuid": "b194cbae_63e67683",
+      "range": {
+        "startLine": 1837,
+        "startChar": 2,
+        "endLine": 1837,
+        "endChar": 80
+      },
+      "revId": "79573166f974f3149f0ade670bd90b7d82c4b643",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "448f533d_939f4a2e",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 14
@@ -80,6 +104,30 @@
       "revId": "79573166f974f3149f0ade670bd90b7d82c4b643",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36b87b33_a835518c",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1846,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-12T22:34:25Z",
+      "side": 1,
+      "message": "See previous response.",
+      "parentUuid": "448f533d_939f4a2e",
+      "range": {
+        "startLine": 1845,
+        "startChar": 2,
+        "endLine": 1846,
+        "endChar": 19
+      },
+      "revId": "79573166f974f3149f0ade670bd90b7d82c4b643",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -106,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "bc8eb005_fe355fa7",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1922,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-12T22:34:25Z",
+      "side": 1,
+      "message": "See previous response.",
+      "parentUuid": "4a8de7b1_46cc5dd9",
+      "range": {
+        "startLine": 1922,
+        "startChar": 4,
+        "endLine": 1922,
+        "endChar": 64
+      },
+      "revId": "79573166f974f3149f0ade670bd90b7d82c4b643",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "23f11685_5174cb78",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 14
@@ -126,6 +198,30 @@
       "revId": "79573166f974f3149f0ade670bd90b7d82c4b643",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52395e47_16a6ef92",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1925,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-12T22:34:25Z",
+      "side": 1,
+      "message": "See previous response.",
+      "parentUuid": "23f11685_5174cb78",
+      "range": {
+        "startLine": 1925,
+        "startChar": 3,
+        "endLine": 1925,
+        "endChar": 91
+      },
+      "revId": "79573166f974f3149f0ade670bd90b7d82c4b643",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
