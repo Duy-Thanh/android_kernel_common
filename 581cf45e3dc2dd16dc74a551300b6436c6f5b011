@@ -272,6 +272,30 @@
     },
     {
       "key": {
+        "uuid": "badb3b31_a0b62c1c",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-12T14:24:54Z",
+      "side": 1,
+      "message": "You can\u0027t directly access exe_file of mm-\u003e unless you have the reference count, otherwise it could go away under you, please use get_mm_exe_file() and then drop the reference afterward.\n\nAlso, if all you need is a hash, what\u0027s wrong with the dentry pointer?  It is a hash already.\n\nd_path does not handle namespaces from what I remember, which is why it does not always resolve the same file to the same \"path\" at all times, so you have to be very careful when using it.\n\nAnyway, if this is required for your systems, ok, we can allow it, I don\u0027t want you to have to rewrite any code like this so late in the process 😊",
+      "parentUuid": "5bcbc750_08fed5f3",
+      "range": {
+        "startLine": 360,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 8
+      },
+      "revId": "581cf45e3dc2dd16dc74a551300b6436c6f5b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b8401136_e7d76ac1",
         "filename": "android/abi_gki_aarch64_exynos",
         "patchSetId": 2
