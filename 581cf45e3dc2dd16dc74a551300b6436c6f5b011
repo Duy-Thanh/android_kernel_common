@@ -248,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "5bcbc750_08fed5f3",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1063916
+      },
+      "writtenOn": "2020-08-12T13:50:55Z",
+      "side": 1,
+      "message": "I\u0027m not sure that I understood intention of your comment. But, anyway, below is SecureOS kernel driver code to get file path information to make hash value of the file path. Actually, the file path is used for ID value of Client Application of SecureOS in Secure World of TrustZone.\nSo, I think the file path is enough for our purpose to distinguish the Client Application in point of SecureOS view.\nAnd if we cannot use the d_path for this SecureOS\u0027s purpose, could you please recommend other function for this purpose?\n\n\u003cd_path used for SecureOS kernel driver\u003e\n........\n\n 245         path \u003d d_path(\u0026mm-\u003eexe_file-\u003ef_path, buf, PAGE_SIZE);\n 246         if (IS_ERR(path)) {\n 247                 ret \u003d PTR_ERR(path);\n 248                 goto end;\n 249         }\n 250 \n 251         mc_dev_devel(\"process path \u003d\");\n 252         {\n 253                 char *c;\n 254 \n 255                 for (c \u003d path; *c; c++)\n 256                         mc_dev_devel(\"%c %d\", *c, *c);\n 257         }\n 258 \n 259         path_len \u003d (unsigned int)strnlen(path, PAGE_SIZE);\n 260         mc_dev_devel(\"path_len \u003d %u\", path_len);\n 261         /* Compute hash of path */\n 262         desc.tfm \u003d crypto_alloc_hash(\"sha1\", 0, CRYPTO_ALG_ASYNC);\n 263         if (IS_ERR(desc.tfm)) {\n 264                 ret \u003d PTR_ERR(desc.tfm);\n 265                 mc_dev_devel(\"could not alloc hash \u003d %d\", ret);\n 266                 goto end;\n 267         }\n 268 \n 269         sg_init_one(\u0026sg, path, path_len);\n 270         crypto_hash_init(\u0026desc);\n 271         crypto_hash_update(\u0026desc, \u0026sg, path_len);\n 272         if (data) {\n 273                 mc_dev_devel(\"current process path: hashing additional data\");\n 274                 sg_init_one(\u0026sg, data, data_len);\n 275                 crypto_hash_update(\u0026desc, \u0026sg, data_len);\n 276         }\n 277 \n 278         crypto_hash_final(\u0026desc, hash);\n 279         crypto_free_hash(desc.tfm);\n.........",
+      "parentUuid": "8ee5ce72_4e2192cc",
+      "range": {
+        "startLine": 360,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 8
+      },
+      "revId": "581cf45e3dc2dd16dc74a551300b6436c6f5b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b8401136_e7d76ac1",
         "filename": "android/abi_gki_aarch64_exynos",
         "patchSetId": 2
