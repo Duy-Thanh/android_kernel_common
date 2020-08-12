@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fdb820a0_786b2549",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-12T09:36:09Z",
+      "side": 1,
+      "message": "Why does this have to be built-in for this branch?  Can\u0027t it be a module?\n\nFor android11-5.4 I could understand it needed to be built in, but not here...",
+      "revId": "2fb4346157468846d9f169a2429bbd79330ca24e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
