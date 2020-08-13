@@ -14,7 +14,13 @@
 #include <trace/hooks/binder.h>
 #include <trace/hooks/rwsem.h>
 #include <trace/hooks/futex.h>
+<<<<<<< HEAD   (7aa425 ANDROID: ABI: FPSIMD save/restore using vendor_hooks)
 #include <trace/hooks/fpsimd.h>
+=======
+#include <trace/hooks/dtask.h>
+#include <trace/hooks/cpuidle.h>
+#include <trace/hooks/topology.h>
+>>>>>>> CHANGE (e209b3 ANDROID: sched: add vendor hook for correcting cpu capacity)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -26,6 +32,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_prepare_prio_fork);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_finish_prio_fork);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_user_nice);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_setscheduler);
+<<<<<<< HEAD   (7aa425 ANDROID: ABI: FPSIMD save/restore using vendor_hooks)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_wait_start);
@@ -35,6 +42,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_wait_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_show_task);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ptype_head);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kfree_skb);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_arch_set_freq_scale);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_fpsimd_save);
+>>>>>>> CHANGE (e209b3 ANDROID: sched: add vendor hook for correcting cpu capacity)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_set_priority);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_restore_priority);

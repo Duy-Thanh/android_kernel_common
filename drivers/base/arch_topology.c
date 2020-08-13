@@ -20,6 +20,7 @@
 #include <linux/percpu.h>
 #include <linux/sched.h>
 #include <linux/smp.h>
+#include <trace/hooks/topology.h>
 
 DEFINE_PER_CPU(unsigned long, freq_scale) = SCHED_CAPACITY_SCALE;
 DEFINE_PER_CPU(unsigned long, max_cpu_freq);
@@ -33,7 +34,13 @@ void arch_set_freq_scale(struct cpumask *cpus, unsigned long cur_freq,
 
 	scale = (cur_freq << SCHED_CAPACITY_SHIFT) / max_freq;
 
+<<<<<<< HEAD   (7aa425 ANDROID: ABI: FPSIMD save/restore using vendor_hooks)
 	for_each_cpu(i, cpus) {
+=======
+	trace_android_vh_arch_set_freq_scale(cur_freq, max_freq, &scale);
+
+	for_each_cpu(i, cpus)
+>>>>>>> CHANGE (e209b3 ANDROID: sched: add vendor hook for correcting cpu capacity)
 		per_cpu(freq_scale, i) = scale;
 		per_cpu(max_cpu_freq, i) = max_freq;
 	}
