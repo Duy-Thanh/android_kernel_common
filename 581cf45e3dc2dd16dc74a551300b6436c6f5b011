@@ -366,6 +366,30 @@
     },
     {
       "key": {
+        "uuid": "d3438928_2851cdec",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1063916
+      },
+      "writtenOn": "2020-08-13T00:54:32Z",
+      "side": 1,
+      "message": "Thanks for your comment and allowing d_path. If you allow to use d_path, I think it is very helpful for us.\nBut, it seems the last patch set seems remove the d_path. So, we will add d_path() to the new patch again.",
+      "parentUuid": "badb3b31_a0b62c1c",
+      "range": {
+        "startLine": 360,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 8
+      },
+      "revId": "581cf45e3dc2dd16dc74a551300b6436c6f5b011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b8401136_e7d76ac1",
         "filename": "android/abi_gki_aarch64_exynos",
         "patchSetId": 2
