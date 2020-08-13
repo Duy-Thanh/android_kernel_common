@@ -47,6 +47,18 @@ struct iommu_flush_ops {
 };
 
 /**
+ * struct iommu_pgtable_ops - IOMMU callbacks for page table memory management.
+ *
+ * @alloc_pgtable: Allocate page table memory, and return the virtual address of
+ *                 the start of the region.
+ * @free_pgtable: Free page table memory.
+ */
+struct iommu_pgtable_ops {
+	void *(*alloc_pgtable)(void *cookie, size_t size, gfp_t gfp_mask);
+	void (*free_pgtable)(void *cookie, void *virt, size_t size);
+}
+
+/**
  * struct io_pgtable_cfg - Configuration data for a set of page tables.
  *
  * @quirks:        A bitmap of hardware quirks that require some special
@@ -58,6 +70,8 @@ struct iommu_flush_ops {
  * @coherent_walk  A flag to indicate whether or not page table walks made
  *                 by the IOMMU are coherent with the CPU caches.
  * @tlb:           TLB management callbacks for this set of tables.
+ * @iommu_pgtable_ops: IOMMU page table memory management callbacks (optional;
+ *                     defaults to the buddy allocator if not present).
  * @iommu_dev:     The device representing the DMA configuration for the
  *                 page table walker.
  */
@@ -95,6 +109,7 @@ struct io_pgtable_cfg {
 	unsigned int			oas;
 	bool				coherent_walk;
 	const struct iommu_flush_ops	*tlb;
+	const struct iommu_pgtable_ops  *iommu_pgtable_ops;
 	struct device			*iommu_dev;
 
 	/* Low-level data specific to the table format */
@@ -166,6 +181,30 @@ struct io_pgtable_ops *alloc_io_pgtable_ops(enum io_pgtable_fmt fmt,
  */
 void free_io_pgtable_ops(struct io_pgtable_ops *ops);
 
+/**
+ * io_pgtable_alloc_pages - Allocate memory for page tables using an IOMMU
+ *                          driver's provided callback, or the buddy allocator.
+ *
+ * @cfg:      The page table configuration. This will be used to determine if
+ *            the page table memory should be allocated through the IOMMU
+ *            driver's callback, or the buddy allocator.
+ * @size:     The size of the allocation.
+ * @gfp_mask: The GFP mask to be used with the allocation
+ */
+void *io_pgtable_alloc_pages(struct io_pgtable_cfg *cfg, size_t size,
+                             gfp_t gfp_mask);
+
+/**
+ * io_pgtable_free_pages - Free memory for page tables using an IOMMU
+ *                         driver's provided callback, or the buddy allocator.
+ *
+ * @cfg:      The page table configuration. This will be used to determine if
+ *            the page table memory should be allocated through the IOMMU
+ *            driver's callback, or the buddy allocator.
+ * @virt:     The virtual address of the memory to free.
+ * @size:     The size of the allocation.
+ */
+void io_pgtable_free_pages(struct io_pgtable_cfg *cfg, void *virt, size_t size);
 
 /*
  * Internal structures for page table allocator implementations.

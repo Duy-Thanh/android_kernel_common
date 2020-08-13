@@ -68,3 +68,40 @@ void free_io_pgtable_ops(struct io_pgtable_ops *ops)
 	io_pgtable_init_table[iop->fmt]->free(iop);
 }
 EXPORT_SYMBOL_GPL(free_io_pgtable_ops);
+
+void *io_pgtable_alloc_pages(struct io_pgtable_cfg *cfg, size_t size,
+			     gfp_t gfp_mask)
+{
+	struct device *dev;
+	struct page *p;
+	struct io_pgtable *iop;
+
+	if (!cfg)
+		return NULL;
+
+	iop = container_of(cfg, struct io_pgtable, cfg);
+	if (cfg->iommu_pgtable_ops && cfg->iommu_pgtable_ops->alloc_pgtable)
+		return cfg->iommu_pgtable_ops->alloc_pgtable(iop->cookie, size,
+							     gfp_mask);
+
+	dev = cfg->iommu_dev;
+	p =  alloc_pages_node(dev ? dev_to_node(dev) : NUMA_NO_NODE,
+			      gfp_mask, get_order(size));
+	if (!p)
+		return NULL;
+	return page_address(p);
+}
+
+void io_pgtable_free_pages(struct io_pgtable_cfg *cfg, void *virt, size_t size)
+{
+	struct io_pgtable *iop;
+
+	if (!cfg)
+		return;
+
+	iop = container_of(cfg, struct io_pgtable, cfg);
+	if (cfg->iommu_pgtable_ops && cfg->iommu_pgtable_ops->free_pgtable)
+		cfg->iommu_pgtable_ops->free_pgtable(iop->cookie, virt, size);
+	else
+		free_pages((unsigned long)virt, get_order(size));
+}
