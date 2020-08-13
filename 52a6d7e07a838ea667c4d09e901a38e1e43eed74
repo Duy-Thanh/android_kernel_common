@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f85d6117_26910e76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2020-08-13T15:59:56Z",
+      "side": 1,
+      "message": "This upstream-labibb topic is a clean cherry-pick of upstream lab-ibb regulator landed in v5.9. This regulator driver is used to power up Qcom sdm845 display panels. Helps in running GKI on Pixel 3 and Poco F1 phones. This driver can be built as a module, but this series does change core regulator_desc structure.",
+      "revId": "52a6d7e07a838ea667c4d09e901a38e1e43eed74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
