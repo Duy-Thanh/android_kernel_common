@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b41af5d_e329ae03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-13T14:57:13Z",
+      "side": 1,
+      "message": "Please add comments in the commit message about why this needs to be restricted vendor hook.",
+      "revId": "3e19f86bced801665920925516351e92341b874a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
