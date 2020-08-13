@@ -44,11 +44,19 @@
 #include <trace/hooks/hung_task.h>
 #include <trace/hooks/rwsem.h>
 #include <trace/hooks/futex.h>
+<<<<<<< HEAD   (325dd3 ANDROID: GKI: Remove dev_pm_opp_add Symbol)
+=======
+#include <trace/hooks/fips140.h>
+#include <trace/hooks/dmabuf.h>
+#include <trace/hooks/timer.h>
+#include <trace/hooks/topology.h>
+>>>>>>> CHANGE (84d818 ANDROID: sched: add vendor hook for correcting cpu capacity)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
  * associated with them) to allow external modules to probe them.
  */
+<<<<<<< HEAD   (325dd3 ANDROID: GKI: Remove dev_pm_opp_add Symbol)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rtmutex_wait_start);
@@ -57,6 +65,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_wait_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_wait_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_wait_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_wait_finish);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_arch_set_freq_scale);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_fpsimd_save);
+>>>>>>> CHANGE (84d818 ANDROID: sched: add vendor hook for correcting cpu capacity)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_set_priority);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_restore_priority);
