@@ -78,6 +78,30 @@
     },
     {
       "key": {
+        "uuid": "a5dc9b6f_53d0a51d",
+        "filename": "drivers/dma-buf/heaps/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-08-13T19:14:12Z",
+      "side": 1,
+      "message": "Marking as resolved since this content has been removed in the final PS.",
+      "parentUuid": "7c8fcfa4_28266866",
+      "range": {
+        "startLine": 2,
+        "startChar": 1,
+        "endLine": 2,
+        "endChar": 32
+      },
+      "revId": "5ecd97811c415d7836f9ea20bd116257bcf04f9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c0c2202c_5b2a63d8",
         "filename": "drivers/dma-buf/heaps/heap-helpers.c",
         "patchSetId": 2
@@ -92,6 +116,24 @@
       "revId": "5ecd97811c415d7836f9ea20bd116257bcf04f9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec4bebe4_ccf5bbd6",
+        "filename": "drivers/dma-buf/heaps/heap-helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-08-13T19:14:12Z",
+      "side": 1,
+      "message": "Marking as resolved since this content has been removed in the final PS.",
+      "parentUuid": "c0c2202c_5b2a63d8",
+      "revId": "5ecd97811c415d7836f9ea20bd116257bcf04f9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -145,6 +187,24 @@
       "revId": "5ecd97811c415d7836f9ea20bd116257bcf04f9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c03d5c97_c2a6ae29",
+        "filename": "drivers/dma-buf/heaps/heap-helpers.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-08-13T19:14:12Z",
+      "side": 1,
+      "message": "Marking as resolved since this content has been removed in the final PS.",
+      "parentUuid": "c3756988_088eb8fc",
+      "revId": "5ecd97811c415d7836f9ea20bd116257bcf04f9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
