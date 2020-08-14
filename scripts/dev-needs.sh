@@ -28,41 +28,60 @@ EOF
 
 function dev_to_detail() {
 	local i=0
-	for s in $@
+	while [ $i -lt ${#OUT_LIST[@]} ]
 	do
-		echo $(printf "%05u" ${i})$'\t'$(detail ${s})
-		i=$((i+1))
+		local C=${OUT_LIST[i]} 
+		local S=${OUT_LIST[i+1]} 
+		local D=$(detail $C $S)
+		if [ ! -z "$D" ]
+		then
+			printf '%05u\t%s\n' ${i} "$D"
+		fi
+		i=$((i+2))
 	done
 }
 
 function already_seen() {
-	for o in ${OUT_LIST[@]}
+	local i=0
+	while [ $i -lt ${#OUT_LIST[@]} ]
 	do
-		if [ "$1" = "$o" ]
+		if [ "$1" = "${OUT_LIST[$i]}" ]
 		then
 			# if-statement treats 0 (no-error) as true
 			return 0
 		fi
+		i=$(($i+2))
 	done
 
 	# if-statement treats 1 (error) as false
 	return 1
 }
 
+# Return 0 (no-error/true) if parent was added
+function add_parent() {
+	local CON=$1
+	# $CON could be a symlink path. So, we need to find the real path and
+	# then go up one level to find the real parent.
+	local PARENT=$(realpath $CON/..)
+
+	while [ ! -e ${PARENT}/driver ]
+	do
+		if [ "$PARENT" = "/sys/devices" ]
+		then
+			return 1
+		fi
+		PARENT=$(realpath $PARENT/..)
+	done
+
+	CONSUMERS+=($PARENT)
+	OUT_LIST+=(${CON} ${PARENT})
+	return 0
+}
+
+# Return 0 (no-error/true) if one or more suppliers were added
 function add_suppliers() {
-	CON=$1
-
-	if already_seen $CON
-	then
-		return 1
-	fi
-
-	# If this is not a device with a driver, we don't care about its
-	# suppliers.
-	if [ ! -e $CON/driver ]
-	then
-		return 1
-	fi
+	local CON=$1
+	local RET=1
 
 	SUPPLIER_LINKS=$(ls -1d $CON/supplier:* 2>/dev/null)
 	for SL in $SUPPLIER_LINKS;
@@ -78,9 +97,17 @@ function add_suppliers() {
 
 		SUPPLIER=$(realpath $SL/supplier)
 
+		if [ ! -e $SUPPLIER/driver ]
+		then
+			continue
+		fi
+
 		CONSUMERS+=($SUPPLIER)
+		OUT_LIST+=(${CON} ${SUPPLIER})
+		RET=0
 	done
-	return 0
+
+	return $RET
 }
 
 case $1 in
@@ -141,6 +168,17 @@ case $1 in
 		}
 		shift
 		;;
+	-g)
+		function detail() {
+			if [ "$2" != "ROOT" ]
+			then
+				echo -n "\"$(basename $1)\"->\"$(basename $2)\""
+			else
+				echo -n "\"$(basename $1)\""
+			fi
+		}
+		shift
+		;;
 	*)
 		function detail() { echo -n $1; }
 		;;
@@ -163,14 +201,19 @@ do
 	CONSUMER=$(realpath ${CONSUMERS[$i]})
 	i=$(($i+1))
 
-	# The $CONSUMER could be a symlink path. So, we need to find the real
-	# path and then go up one level to find the real parent.
-	PARENT=$(realpath $CONSUMER/..)
-
-	if [ "${PARENT}" != "/sys/devices" ]
+	if already_seen ${CONSUMER}
 	then
-		CONSUMERS+=(${PARENT})
+		continue
 	fi
+
+	# If this is not a device with a driver, we don't care about its
+	# suppliers.
+	if [ ! -e ${CONSUMER}/driver ]
+	then
+		continue
+	fi
+
+	ROOT=1
 
 	# Add suppliers to CONSUMERS list and output the consumer details.
 	#
@@ -180,12 +223,22 @@ do
 	# sync_state_only device links inside add_suppliers.
 	if add_suppliers ${CONSUMER}
 	then
-		OUT_LIST+=(${CONSUMER})
+		ROOT=0
+	fi
+
+	if add_parent ${CONSUMER}
+	then
+		ROOT=0
+	fi
+
+	if [ $ROOT -eq 1 ]
+	then
+		OUT_LIST+=(${CONSUMER} "ROOT")
 	fi
 done
 
 # Can NOT combine sort and uniq using sort -suk2 because stable sort in Android
 # isn't really stable.
-dev_to_detail ${OUT_LIST[@]} | sort -k2 -k1 | uniq -f 1 | sort | cut -f2-
+dev_to_detail | sort -k2 -k1 | uniq -f 1 | sort | cut -f2-
 
 exit 0
