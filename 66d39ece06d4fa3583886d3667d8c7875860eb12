@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f8a9f781_9ba2c900",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-08-14T23:36:05Z",
+      "side": 1,
+      "message": "Updated to address Chris\u0027 feedback. Still no in-tree users, so not super well tested, but I did boot and validate on HiKey960 that conventional userspace DMA BUF Heaps functionality still works ok.",
+      "revId": "66d39ece06d4fa3583886d3667d8c7875860eb12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
