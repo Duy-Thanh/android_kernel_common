@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "007c6734_b8e2ec13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-08-17T23:08:34Z",
+      "side": 1,
+      "message": "One test fails on android-mainline:\n\n##### ./pf_key_test.py (10/24)\n\nWARNING: No route found for IPv6 destination :: (no default route?)\nF\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nFAIL: testAddDelSa (__main__.PfKeyTest)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"./pf_key_test.py\", line 89, in testAddDelSa\n    self.assertEqual(128, attrs4[\"XFRMA_ALG_AUTH_TRUNC\"].trunc_len)\nAssertionError: 128 !\u003d 96\n\n----------------------------------------------------------------------\nRan 1 test in 0.059s\n\nFAILED (failures\u003d1)\n\nBut this is the expected failure which https://android-review.googlesource.com/c/kernel/tests/+/1402093 should fix.",
+      "revId": "7cfa80d2f4788803f9ae06dbb8901bbd76381568",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
