@@ -1,0 +1,85 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004469721",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1396168?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "99573aeb_b7d6de15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-17T23:25:22Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details.",
+      "range": {
+        "startLine": 7,
+        "startChar": 31,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "ad098ef73ec104efda11c8ebb4034f215ac9e814",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004469721",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1396168?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "7a2a0eea_a80a3ea2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-17T23:25:22Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details.",
+      "range": {
+        "startLine": 19,
+        "startChar": 16,
+        "endLine": 19,
+        "endChar": 21
+      },
+      "revId": "ad098ef73ec104efda11c8ebb4034f215ac9e814",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004469721",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1396168?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "8ddc469c_27126b79",
+        "filename": "sound/soc/qcom/qdsp6/q6routing.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-17T23:25:22Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details.",
+      "range": {
+        "startLine": 986,
+        "startChar": 4,
+        "endLine": 986,
+        "endChar": 9
+      },
+      "revId": "ad098ef73ec104efda11c8ebb4034f215ac9e814",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
