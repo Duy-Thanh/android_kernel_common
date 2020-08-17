@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d17d6083_d7243a8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-17T07:28:31Z",
+      "side": 1,
+      "message": "The lint warning is pointing to a commit that is about to be merged, so it is ok.",
+      "revId": "9edfd6c57a107c02b294dc0142bc464cf629c955",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
