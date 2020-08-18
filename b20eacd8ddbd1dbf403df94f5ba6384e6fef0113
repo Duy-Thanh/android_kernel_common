@@ -34,6 +34,24 @@
       "revId": "b20eacd8ddbd1dbf403df94f5ba6384e6fef0113",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6298e991_73821208",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-08-18T08:47:36Z",
+      "side": 1,
+      "message": "Right, but I don\u0027t know which ones are considered active or whether that is even the right choice.\n\nJust android12-5.4 is \u0027active\u0027 AFAIK, since I think android11-5.4 is locked down, and there is no android12 version of anything below 5.4.\n\nBut shouldn\u0027t this land in all 3.18+ ACK branches?",
+      "parentUuid": "bb8b7969_faeb314b",
+      "revId": "b20eacd8ddbd1dbf403df94f5ba6384e6fef0113",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
