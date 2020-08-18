@@ -16,6 +16,23 @@
       "revId": "cba0e7af5d5c98c85b606f02d16f6d704d60f96c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dcc73f41_dc06e6d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-18T11:48:21Z",
+      "side": 1,
+      "message": "sdcardfs is long gone from the android kernel and is not supported anymore, sorry.",
+      "revId": "cba0e7af5d5c98c85b606f02d16f6d704d60f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
