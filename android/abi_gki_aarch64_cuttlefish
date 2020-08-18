@@ -27,6 +27,7 @@
   call_rcu
   cancel_delayed_work
   cancel_delayed_work_sync
+  cancel_work_sync
   capable
   cfg80211_inform_bss_data
   cfg80211_put_bss
@@ -66,7 +67,9 @@
   destroy_workqueue
   _dev_err
   device_add_disk
+  device_create_file
   device_register
+  device_remove_file
   device_unregister
   _dev_info
   __dev_kfree_skb_any
@@ -112,6 +115,7 @@
   ida_free
   idr_alloc
   idr_destroy
+  idr_find
   idr_remove
   iget5_locked
   __init_rwsem
@@ -124,6 +128,7 @@
   iput
   iterate_dir
   jiffies
+  jiffies_to_msecs
   kern_path
   kfree
   kfree_skb
@@ -160,6 +165,7 @@
   __module_get
   module_layout
   module_put
+  __msecs_to_jiffies
   msleep
   __mutex_init
   mutex_is_locked
@@ -283,6 +289,7 @@
   strlcpy
   strlen
   strncpy
+  strscpy
   strsep
   strstr
   submit_bio
@@ -356,6 +363,7 @@
   vring_interrupt
   vring_transport_features
   wait_for_completion
+  wait_for_completion_timeout
   wait_woken
   __wake_up
   __warn_printk
@@ -365,14 +373,63 @@
   bus_register
   bus_unregister
 
+# required by cdc-acm.ko
+  cdc_parse_cdc_header
+  default_wake_function
+  ktime_get_mono_fast_ns
+  put_tty_driver
+  refcount_inc_not_zero_checked
+  __tty_alloc_driver
+  tty_flip_buffer_push
+  tty_insert_flip_string_fixed_flag
+  tty_kref_put
+  tty_port_close
+  tty_port_hangup
+  tty_port_init
+  tty_port_open
+  tty_port_put
+  tty_port_register_device
+  tty_port_tty_get
+  tty_port_tty_hangup
+  tty_port_tty_wakeup
+  tty_register_driver
+  tty_set_operations
+  tty_standard_install
+  tty_std_termios
+  tty_termios_baud_rate
+  tty_unregister_device
+  tty_unregister_driver
+  tty_vhangup
+  usb_alloc_coherent
+  usb_alloc_urb
+  usb_anchor_urb
+  usb_autopm_get_interface
+  usb_autopm_get_interface_async
+  usb_autopm_get_interface_no_resume
+  usb_autopm_put_interface
+  usb_autopm_put_interface_async
+  usb_clear_halt
+  usb_control_msg
+  usb_deregister
+  usb_driver_claim_interface
+  usb_driver_release_interface
+  usb_find_common_endpoints
+  usb_free_coherent
+  usb_free_urb
+  usb_get_from_anchor
+  usb_get_intf
+  usb_ifnum_to_if
+  usb_kill_urb
+  usb_put_intf
+  usb_register_driver
+  usb_submit_urb
+
 # required by dummy-cpufreq.ko
   cpufreq_generic_attr
   cpufreq_register_driver
   cpufreq_unregister_driver
 
 # required by dummy_hcd.ko
-  device_create_file
-  device_remove_file
   ktime_get_ts64
   platform_device_add_data
   sg_miter_next
@@ -421,7 +478,6 @@
   sb_set_blocksize
   simple_get_link
   strnlen
-  strscpy
   __sw_hweight64
   trace_print_flags_seq
   vm_map_ram
@@ -484,7 +540,6 @@
   lookup_one_len
   LZ4_decompress_safe
   match_int
-  __msecs_to_jiffies
   notify_change
   set_anon_super
   sget
@@ -525,6 +580,21 @@
   netdev_lower_state_changed
   netdev_pick_tx
   pci_bus_type
+
+# required by pulse8-cec.ko
+  cec_allocate_adapter
+  cec_delete_adapter
+  cec_received_msg_ts
+  cec_register_adapter
+  cec_s_log_addrs
+  cec_s_phys_addr
+  cec_transmit_attempt_done_ts
+  cec_unregister_adapter
+  serio_close
+  serio_open
+  __serio_register_driver
+  serio_unregister_driver
+  time64_to_tm
 
 # required by rtc-test.ko
   device_init_wakeup
@@ -651,7 +721,6 @@
   hash_digest_size
   idr_get_next
   idr_replace
-  jiffies_to_msecs
   jiffies_to_usecs
   krealloc
   memchr_inv
@@ -854,7 +923,6 @@
   string_get_size
 
 # required by virtio_console.ko
-  cancel_work_sync
   cdev_add
   cdev_alloc
   cdev_del
@@ -1069,7 +1137,6 @@
   usb_root_hub_lost_power
   usb_wakeup_notification
   vsnprintf
-  wait_for_completion_timeout
 
 # required by xhci-pci.ko
   pci_d3cold_disable
@@ -1098,7 +1165,6 @@
   fsync_bdev
   generic_end_io_acct
   generic_start_io_acct
-  idr_find
   idr_for_each
   kstrtoint
   kstrtou16
