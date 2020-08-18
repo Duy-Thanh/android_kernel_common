@@ -44,6 +44,7 @@
 #include <linux/thread_info.h>
 #include <linux/prctl.h>
 #include <trace/hooks/fpsimd.h>
+#include <trace/hooks/mpam.h>
 
 #include <asm/alternative.h>
 #include <asm/arch_gicv3.h>
@@ -526,6 +527,7 @@ __notrace_funcgraph struct task_struct *__switch_to(struct task_struct *prev,
 	entry_task_switch(next);
 	uao_thread_switch(next);
 	ssbs_thread_switch(next);
+	trace_android_vh_mpam_set(prev, next);
 
 	/*
 	 * Complete any pending TLB or cache maintenance on this CPU in case
