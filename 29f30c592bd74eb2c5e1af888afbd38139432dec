@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b33fb82_a022fc2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2020-08-18T00:41:04Z",
+      "side": 1,
+      "message": "LGTM, but net_tests failed. Perhaps because run_net_test.sh doesn\u0027t set CONFIG_ANDROID?",
+      "revId": "29f30c592bd74eb2c5e1af888afbd38139432dec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
