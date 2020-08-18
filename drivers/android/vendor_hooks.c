@@ -65,6 +65,7 @@
 #include <trace/hooks/fips140.h>
 #include <trace/hooks/remoteproc.h>
 #include <trace/hooks/shmem_fs.h>
+#include <trace/hooks/net.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -107,6 +108,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_wait_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_wait_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_wait_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_show_task);
+<<<<<<< HEAD   (c0efdc ANDROID: android: export kernel function vm_unmapped_area)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shmem_alloc_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_idle_enter);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_idle_exit);
@@ -343,3 +345,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_force_compatible_post);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_print_transaction_info);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_setscheduler_uclamp);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ptype_head);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kfree_skb);
