@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "17e8c5e5_bf909b2c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-18T16:06:34Z",
+      "side": 1,
+      "message": "This still doesn\u0027t tell me why you needed to use \"restricted\" vendor hooks instead of normal ones.\n\nPlease add a sentence that starts with \"Restricted vendor hooks were used instead of normal ones because...\"",
+      "revId": "0059a6d6028e8503c0d4de83eddb3034dc5156eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
