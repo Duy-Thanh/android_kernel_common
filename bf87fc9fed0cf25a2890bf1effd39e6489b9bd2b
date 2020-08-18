@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a142822e_11462780",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-18T15:22:51Z",
+      "side": 1,
+      "message": "Should this be sent upstream?",
+      "revId": "bf87fc9fed0cf25a2890bf1effd39e6489b9bd2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a9ceb9a9_99243db5",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-18T15:22:51Z",
+      "side": 1,
+      "message": "/* .. */",
+      "revId": "bf87fc9fed0cf25a2890bf1effd39e6489b9bd2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
