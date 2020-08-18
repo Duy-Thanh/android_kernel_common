@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea15f52a_c92f0a23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-08-18T08:36:28Z",
+      "side": 1,
+      "message": "Since this is a bugfix, which ACK branches should it be cherrypicked to?",
+      "revId": "b20eacd8ddbd1dbf403df94f5ba6384e6fef0113",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
