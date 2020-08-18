@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a55e2be_814b5d59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1248639
+      },
+      "writtenOn": "2020-08-18T09:43:36Z",
+      "side": 1,
+      "message": "Hi Reviewers,\n\nI pushed this patch to export vfs_write. \nI also folded c3c84f473434 (\"ANDROID: sdcardfs: fix export symbol types\") into this patch.",
+      "revId": "cba0e7af5d5c98c85b606f02d16f6d704d60f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
