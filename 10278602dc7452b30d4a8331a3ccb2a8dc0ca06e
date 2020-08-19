@@ -1,0 +1,46 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004506859",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1404474?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "c8bf3675_d970c9a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-19T08:25:30Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Sebastian Andrzej Siewior \u003cbigeasy@linutronix.de\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 327236005 android-build.ayeaye-python-dispatcher_20200818.05_p0",
+      "revId": "10278602dc7452b30d4a8331a3ccb2a8dc0ca06e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004506859",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1404474?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "b0b89d31_638e6fd4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-19T08:25:30Z",
+      "side": 1,
+      "message": "Commit does not link to an upstream reference at lore\nPlease add a line like \u0027Link: https://lore.kernel.org/...\u0027\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 327236005 android-build.ayeaye-python-dispatcher_20200818.05_p0",
+      "revId": "10278602dc7452b30d4a8331a3ccb2a8dc0ca06e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
