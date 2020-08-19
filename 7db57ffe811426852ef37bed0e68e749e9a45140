@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "93976c92_0e93dfbb",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1697971
+      },
+      "writtenOn": "2020-08-19T04:52:19Z",
+      "side": 1,
+      "message": "Ah, and course, we\u0027d also need an equivalent in-kernel free() function.",
+      "parentUuid": "f04f5cd3_a7bee5b4",
+      "revId": "7db57ffe811426852ef37bed0e68e749e9a45140",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1e01c36a_3fdff897",
         "filename": "include/linux/dma-heap.h",
         "patchSetId": 5
