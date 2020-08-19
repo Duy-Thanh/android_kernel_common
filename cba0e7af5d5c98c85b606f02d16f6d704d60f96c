@@ -51,6 +51,24 @@
       "revId": "cba0e7af5d5c98c85b606f02d16f6d704d60f96c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ea66710_a9da1498",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-19T11:30:21Z",
+      "side": 1,
+      "message": "Please never use kernel_write from within a driver, that is only for filesystems to use.",
+      "parentUuid": "3258ef17_a01fae8e",
+      "revId": "cba0e7af5d5c98c85b606f02d16f6d704d60f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
