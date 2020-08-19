@@ -1,0 +1,79 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004499184",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1404228?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "82a064cb_eea590d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-19T01:24:22Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a Bug: or Fixes: line\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 327236005 android-build.ayeaye-python-dispatcher_20200818.05_p0",
+      "revId": "f042866f3dc8eb7b8593170936f8ee9e25d239cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004499186",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1404228?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "3a6b1a1b_78b5d421",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-19T01:24:22Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027deny list\u0027 or \u0027allow list\u0027; see https://developers.google.com/style/word-list#blacklist for more details.",
+      "range": {
+        "startLine": 13,
+        "startChar": 52,
+        "endLine": 13,
+        "endChar": 61
+      },
+      "revId": "f042866f3dc8eb7b8593170936f8ee9e25d239cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004499186",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1404228?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "91ff61ff_8c3ce48d",
+        "filename": "android/abi_gki_aarch64_hikey960",
+        "patchSetId": 1
+      },
+      "lineNbr": 1444,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-19T01:24:22Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 1444,
+        "startChar": 28,
+        "endLine": 1444,
+        "endChar": 33
+      },
+      "revId": "f042866f3dc8eb7b8593170936f8ee9e25d239cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
