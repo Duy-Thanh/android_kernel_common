@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16d9bb38_978ac469",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-08-19T16:44:23Z",
+      "side": 1,
+      "message": "Hi, All\n\nI am not sure why the following commit does not update this for db845c as well:\n    61837660f5751 (\"ANDROID: ABI: update ABI after 6GHz bad support\")\n\n\nPlease help to check if there is any other issues with this change\n\nThanks,\nYongqin Liu\n",
+      "revId": "a2bf50800d51263181a65cdc8918ce9bfe23c8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
