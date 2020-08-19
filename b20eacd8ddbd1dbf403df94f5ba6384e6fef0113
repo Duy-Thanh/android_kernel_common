@@ -52,6 +52,24 @@
       "revId": "b20eacd8ddbd1dbf403df94f5ba6384e6fef0113",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b8666866_5ff8b18b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-19T06:17:00Z",
+      "side": 1,
+      "message": "Yes, it should go into all of the actively supported branches, sorry for not being specific earlier.  That list currently is:\n  android-3.18\n  android-4.4-o\n  android-4.4-p\n  android-4.9-o\n  android-4.9-p\n  android-4.9-q\n  android-4.14-p\n  android-4.14-q\n  android-4.14-stable\n  android-4.19-q\n  android-4.19-stable\n  android11-5.4\n  android12-5.4\n  android-mainline",
+      "parentUuid": "6298e991_73821208",
+      "revId": "b20eacd8ddbd1dbf403df94f5ba6384e6fef0113",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
