@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5cfeef39_145ae203",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-19T20:24:07Z",
+      "side": 1,
+      "message": "Given that CPUSETS are enabled for GKI, why is this patch needed?",
+      "revId": "4366e6980399fd6fa262abf612beeb620f09cd71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
