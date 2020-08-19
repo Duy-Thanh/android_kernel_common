@@ -16,6 +16,23 @@
       "revId": "7fd7db9c005ec25eefd642be43c372d6b6998eb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d51fcf8_cd7421c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-19T14:12:15Z",
+      "side": 1,
+      "message": "I thought we had a different way of implementing this in the past.\n\nMark?",
+      "revId": "7fd7db9c005ec25eefd642be43c372d6b6998eb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
