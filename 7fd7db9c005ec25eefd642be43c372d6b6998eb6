@@ -33,6 +33,24 @@
       "revId": "7fd7db9c005ec25eefd642be43c372d6b6998eb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a478b808_fa7df433",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-19T14:13:20Z",
+      "side": 1,
+      "message": "the kernel abi is breaking with this patch, which is being reported by the build system and Lint, so that needs to be fixed up somehow (either by changing the patch, or updating the .xml file.)",
+      "parentUuid": "3f48dad5_15f29921",
+      "revId": "7fd7db9c005ec25eefd642be43c372d6b6998eb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
