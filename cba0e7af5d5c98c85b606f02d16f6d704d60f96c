@@ -33,6 +33,24 @@
       "revId": "cba0e7af5d5c98c85b606f02d16f6d704d60f96c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3258ef17_a01fae8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1248639
+      },
+      "writtenOn": "2020-08-19T10:55:12Z",
+      "side": 1,
+      "message": "got it.\n\nI found that we can use kernel_write instead of vfs_wirte, so we do not need to export vfs_write in android-mainline.\n\nsorry for the noise",
+      "parentUuid": "dcc73f41_dc06e6d1",
+      "revId": "cba0e7af5d5c98c85b606f02d16f6d704d60f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
