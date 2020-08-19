@@ -1,0 +1,46 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004505112",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1403372?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "3cd93512_02bf5f7b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-19T06:20:20Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: C-J.Chen \u003cC-J.Chen@mediatek.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 327236005 android-build.ayeaye-python-dispatcher_20200818.05_p0",
+      "revId": "dd090af026ec98658902bbe4c44ec3b5910954d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004505112",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1403372?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "73c6c8b3_544a2d58",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-19T06:20:20Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: C-J.Chen \u003cC-J.Chen@mediatek.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 327236005 android-build.ayeaye-python-dispatcher_20200818.05_p0",
+      "revId": "dd090af026ec98658902bbe4c44ec3b5910954d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
