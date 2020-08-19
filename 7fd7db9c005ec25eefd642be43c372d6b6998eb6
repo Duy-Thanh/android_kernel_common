@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f48dad5_15f29921",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1749695
+      },
+      "writtenOn": "2020-08-19T12:41:24Z",
+      "side": 1,
+      "message": "Hello, I\u0027m Wooyeon Kim that in charge of Camera driver in S.LSI.\nCan anyone explain in detail the cause of Lint giving score -1? \nWhen pushing to android-main line, there was no special issue.\n\nThanks.",
+      "revId": "7fd7db9c005ec25eefd642be43c372d6b6998eb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
