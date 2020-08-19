@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7578fbfb_c3c98642",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-19T20:29:20Z",
+      "side": 1,
+      "message": "Remove Vincent here or change to \"Suggested-by:\"",
+      "revId": "84257db0b50ed6819168129ffeea4ff5ea4aee4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5d8d7bf2_0185410f",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
