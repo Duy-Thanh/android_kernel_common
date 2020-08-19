@@ -22,6 +22,30 @@
       "revId": "90fbef09f1479a59ccfd88ceb2a46541c55f5849",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e69436a0_cb4dfdeb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-19T19:22:28Z",
+      "side": 1,
+      "message": "...and in the commit message. What \"detail info\" is needed?",
+      "parentUuid": "335237a3_8b4da555",
+      "range": {
+        "startLine": 9,
+        "startChar": 14,
+        "endLine": 9,
+        "endChar": 18
+      },
+      "revId": "90fbef09f1479a59ccfd88ceb2a46541c55f5849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
