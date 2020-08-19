@@ -200,6 +200,7 @@
   idr_find
   idr_get_next
   idr_remove
+  ieee80211_get_channel_khz
   iget5_locked
   init_timer_key
   init_wait_entry
@@ -627,6 +628,7 @@
   ieee80211_beacon_get_tim
   ieee80211_beacon_loss
   ieee80211_bss_get_elem
+  ieee80211_channel_to_freq_khz
   ieee80211_connection_loss
   ieee80211_csa_finish
   ieee80211_csa_is_complete
