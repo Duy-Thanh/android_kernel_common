@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96110b2f_f41033bb",
+        "filename": "tools/testing/selftests/filesystems/incfs/incfs_test.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 2105,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-08-19T16:36:01Z",
+      "side": 1,
+      "message": "do you want to check the uid value as well?",
+      "range": {
+        "startLine": 2105,
+        "startChar": 24,
+        "endLine": 2105,
+        "endChar": 34
+      },
+      "revId": "fde5bebdc75ecc5e752d69d650c677d429a1340b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
