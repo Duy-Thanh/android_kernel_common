@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21e0417f_debbc63e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-08-20T17:01:13Z",
+      "side": 1,
+      "message": "configuration options should be enabled for arm64 and x86 to keep cuttlefish_x86 with its arm64 equivalent.",
+      "revId": "ad2032904a9d56b00d64ba9f055a84411a1921f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
