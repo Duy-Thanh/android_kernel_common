@@ -46,6 +46,30 @@
       "revId": "f2a44ef61065b9c3d0e599957ec54cc0ceee7bbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d30a616_03313bf6",
+        "filename": "android/abi_gki_aarch64_hikey960",
+        "patchSetId": 3
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-20T11:05:17Z",
+      "side": 1,
+      "message": "forgot about gadgetfs.  But that shouldn\u0027t be needed, and doesn\u0027t seem to be part of the config here as a module, so what is causing that to be built?",
+      "parentUuid": "2a19c041_1bf8b806",
+      "range": {
+        "startLine": 354,
+        "startChar": 0,
+        "endLine": 354,
+        "endChar": 21
+      },
+      "revId": "f2a44ef61065b9c3d0e599957ec54cc0ceee7bbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
