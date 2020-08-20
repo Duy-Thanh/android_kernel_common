@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f78fbb3_fa8179ac",
+        "filename": "android/abi_gki_aarch64_hikey960",
+        "patchSetId": 3
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-20T10:49:43Z",
+      "side": 1,
+      "message": "shouldn\u0027t this, and the other filesystem-specific exports be down in the incfs section?",
+      "range": {
+        "startLine": 354,
+        "startChar": 0,
+        "endLine": 354,
+        "endChar": 21
+      },
+      "revId": "f2a44ef61065b9c3d0e599957ec54cc0ceee7bbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
