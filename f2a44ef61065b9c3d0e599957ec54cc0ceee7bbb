@@ -70,6 +70,30 @@
       "revId": "f2a44ef61065b9c3d0e599957ec54cc0ceee7bbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ca17989_2dd4f658",
+        "filename": "android/abi_gki_aarch64_hikey960",
+        "patchSetId": 3
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-08-20T12:21:10Z",
+      "side": 1,
+      "message": "It is built as a module for hikey960, see the relevant config fragment: https://android.googlesource.com/kernel/common/+/refs/heads/android11-5.4/arch/arm64/configs/hikey960_gki.fragment#40\n\nBut I don\u0027t actually know if it is really used or not.\n@John: do we still need gadgetfs?",
+      "parentUuid": "2d30a616_03313bf6",
+      "range": {
+        "startLine": 354,
+        "startChar": 0,
+        "endLine": 354,
+        "endChar": 21
+      },
+      "revId": "f2a44ef61065b9c3d0e599957ec54cc0ceee7bbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
