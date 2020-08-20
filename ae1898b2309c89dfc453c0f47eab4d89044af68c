@@ -22,6 +22,30 @@
       "revId": "ae1898b2309c89dfc453c0f47eab4d89044af68c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e03118df_bd6b64c5",
+        "filename": "kernel/futex.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2364,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-20T19:31:25Z",
+      "side": 1,
+      "message": "We discussed motivation in chat and this landed a while ago in android-mainline.",
+      "parentUuid": "b5c72975_4461e786",
+      "range": {
+        "startLine": 2364,
+        "startChar": 6,
+        "endLine": 2364,
+        "endChar": 19
+      },
+      "revId": "ae1898b2309c89dfc453c0f47eab4d89044af68c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
