@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6745585_504a389a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-08-20T21:10:41Z",
+      "side": 1,
+      "message": "This still applies cleanly to the android-mainline branch AFAIK and is being actively used by developers working with FVP. I will upload a new version.",
+      "revId": "8f9decd37bdafb9b5ffbf1718fcbb28ba52e1c63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
