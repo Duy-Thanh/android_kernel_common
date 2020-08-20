@@ -1117,6 +1117,12 @@ int remove_cpu(unsigned int cpu)
 }
 EXPORT_SYMBOL_GPL(remove_cpu);
 
+int pause_cpu(unsigned int cpu)
+{
+	return cpu_down(cpu, CPUHP_AP_LIMIT);
+}
+EXPORT_SYMBOL_GPL(pause_cpu);
+
 void smp_shutdown_nonboot_cpus(unsigned int primary_cpu)
 {
 	unsigned int cpu;
@@ -1329,6 +1335,12 @@ int add_cpu(unsigned int cpu)
 	return ret;
 }
 EXPORT_SYMBOL_GPL(add_cpu);
+
+int resume_cpu(unsigned int cpu)
+{
+	return cpu_up(cpu, CPUHP_ONLINE);
+}
+EXPORT_SYMBOL_GPL(resume_cpu);
 
 /**
  * bringup_hibernate_cpu - Bring up the CPU that we hibernated on
