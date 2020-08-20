@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a11c77d3_aa68206a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-08-20T16:41:54Z",
+      "side": 1,
+      "message": "Hi, All\n\nCould you please help to check if we could have this change merged?\nwith the earlycon function enabled, we could find what\u0027s problem with the ko loading at the first boot stage quickly, otherwise we need to check all the possible problems as we could not see the details with kernel message, we could only see the board rebooted again and again with only the bootloader messages.\n\n\nThanks,\nYongqin Liu",
+      "revId": "d0eb8dfbf61414b4998cbe1a3db16d693347cc8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
