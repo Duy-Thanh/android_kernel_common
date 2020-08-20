@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dd3c87a7_4dade300",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1749695
+      },
+      "writtenOn": "2020-08-20T13:47:18Z",
+      "side": 1,
+      "message": "Dear all\n\nAs discussed via 149632552, It is required to use android VH to support LSI fpsimd ops.\nAlso, migrate from android-mainline to android11-5.4 required as reported via 165161482.\nI hope this commit will be applied.\n\nThanks.\n",
+      "revId": "b23efb4a2e0dc911d9a172e4aae4b001afa0637d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
