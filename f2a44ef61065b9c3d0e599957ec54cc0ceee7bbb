@@ -94,6 +94,30 @@
       "revId": "f2a44ef61065b9c3d0e599957ec54cc0ceee7bbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae726c71_0db84d7d",
+        "filename": "android/abi_gki_aarch64_hikey960",
+        "patchSetId": 3
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-08-20T21:17:49Z",
+      "side": 1,
+      "message": "I don\u0027t really know right off. I\u0027ll try to check it out, but I\u0027m a bit underwater this week.",
+      "parentUuid": "6ca17989_2dd4f658",
+      "range": {
+        "startLine": 354,
+        "startChar": 0,
+        "endLine": 354,
+        "endChar": 21
+      },
+      "revId": "f2a44ef61065b9c3d0e599957ec54cc0ceee7bbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
