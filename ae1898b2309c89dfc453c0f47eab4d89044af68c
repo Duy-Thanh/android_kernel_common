@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5c72975_4461e786",
+        "filename": "kernel/futex.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2364,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-20T15:33:07Z",
+      "side": 1,
+      "message": "how can this happen?  And what is this fixing or allowing to have happen in the future?",
+      "range": {
+        "startLine": 2364,
+        "startChar": 6,
+        "endLine": 2364,
+        "endChar": 19
+      },
+      "revId": "ae1898b2309c89dfc453c0f47eab4d89044af68c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
