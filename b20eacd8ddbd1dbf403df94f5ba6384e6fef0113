@@ -88,6 +88,23 @@
       "revId": "b20eacd8ddbd1dbf403df94f5ba6384e6fef0113",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc7d4d16_01307a1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-08-20T19:16:17Z",
+      "side": 1,
+      "message": "(btw. this was a lot of busywork, I wonder if any phones will actually even pick up the fix, or even care)",
+      "revId": "b20eacd8ddbd1dbf403df94f5ba6384e6fef0113",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
