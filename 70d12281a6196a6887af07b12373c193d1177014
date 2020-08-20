@@ -1,0 +1,1078 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542611",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5a615782_b7a375ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a Bug: or Fixes: line\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 327436447 android-build.ayeaye-python-dispatcher_20200819.05_p0",
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "d0db5c78_98417d4f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 607,
+        "startChar": 37,
+        "endLine": 607,
+        "endChar": 42
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "af95be3b_71908911",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 1539,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 1539,
+        "startChar": 34,
+        "endLine": 1539,
+        "endChar": 40
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "d591ace3_e435f07f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 1543,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 1543,
+        "startChar": 35,
+        "endLine": 1543,
+        "endChar": 41
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "6a7e5712_231d89bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 2975,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 2975,
+        "startChar": 32,
+        "endLine": 2975,
+        "endChar": 37
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "8abc9b45_ea50f3f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 2979,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 2979,
+        "startChar": 38,
+        "endLine": 2979,
+        "endChar": 43
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "806293b5_1db30d3f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 3003,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 3003,
+        "startChar": 42,
+        "endLine": 3003,
+        "endChar": 47
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f99bb02d_68d32c51",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 6595,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 6595,
+        "startChar": 31,
+        "endLine": 6595,
+        "endChar": 37
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "6c80b0c4_2744dd34",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 6899,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 6899,
+        "startChar": 45,
+        "endLine": 6899,
+        "endChar": 50
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "0ecb9b14_fded0f45",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7327,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 7327,
+        "startChar": 35,
+        "endLine": 7327,
+        "endChar": 41
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "0858254d_e45da739",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7527,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 7527,
+        "startChar": 33,
+        "endLine": 7527,
+        "endChar": 39
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "69c01dc8_793c6116",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9335,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 9335,
+        "startChar": 37,
+        "endLine": 9335,
+        "endChar": 43
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "9a6b7620_8d5a5943",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9339,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 9339,
+        "startChar": 39,
+        "endLine": 9339,
+        "endChar": 45
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "d02560c3_e1c5f4b1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9355,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 9355,
+        "startChar": 55,
+        "endLine": 9355,
+        "endChar": 61
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "89a22390_252e8ce0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9375,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 9375,
+        "startChar": 39,
+        "endLine": 9375,
+        "endChar": 45
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "cbc1af27_da45bb27",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9415,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 9415,
+        "startChar": 50,
+        "endLine": 9415,
+        "endChar": 55
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "13e69108_1d50d977",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9427,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 9427,
+        "startChar": 44,
+        "endLine": 9427,
+        "endChar": 49
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "84f89dcc_0ed6877e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10035,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 10035,
+        "startChar": 50,
+        "endLine": 10035,
+        "endChar": 56
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "8943891c_77f6a2dd",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 276,
+        "startChar": 37,
+        "endLine": 276,
+        "endChar": 42
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "c7c855d8_706f0468",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 602,
+        "startChar": 34,
+        "endLine": 602,
+        "endChar": 40
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "d836de83_174e5f63",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 603,
+        "startChar": 34,
+        "endLine": 603,
+        "endChar": 40
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "6d4f910f_d4b2d67c",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1023,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 1023,
+        "startChar": 32,
+        "endLine": 1023,
+        "endChar": 37
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5073e75f_5212e184",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1024,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 1024,
+        "startChar": 32,
+        "endLine": 1024,
+        "endChar": 37
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "778ab014_d274d081",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 1033,
+        "startChar": 36,
+        "endLine": 1033,
+        "endChar": 41
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "ada6f950_5636c1aa",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 2251,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 2251,
+        "startChar": 31,
+        "endLine": 2251,
+        "endChar": 37
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "94c418cf_d5d51497",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 2343,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 2343,
+        "startChar": 39,
+        "endLine": 2343,
+        "endChar": 44
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f1f1774c_06a0c907",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 2455,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 2455,
+        "startChar": 34,
+        "endLine": 2455,
+        "endChar": 40
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "a786e64c_121c7677",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 2506,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 2506,
+        "startChar": 32,
+        "endLine": 2506,
+        "endChar": 38
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "130b632a_d0203beb",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3113,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 3113,
+        "startChar": 37,
+        "endLine": 3113,
+        "endChar": 43
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "bf49e612_0fa625c0",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3114,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 3114,
+        "startChar": 39,
+        "endLine": 3114,
+        "endChar": 45
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "555c7c74_64199081",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3119,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 3119,
+        "startChar": 45,
+        "endLine": 3119,
+        "endChar": 51
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f9db57c5_6093f0ee",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3124,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 3124,
+        "startChar": 38,
+        "endLine": 3124,
+        "endChar": 44
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "9f5b964b_e82f61f8",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3134,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 3134,
+        "startChar": 50,
+        "endLine": 3134,
+        "endChar": 55
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "6b83cb0b_3195a615",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3137,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 3137,
+        "startChar": 44,
+        "endLine": 3137,
+        "endChar": 49
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "3038f1f0_e1897618",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3301,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 3301,
+        "startChar": 38,
+        "endLine": 3301,
+        "endChar": 44
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "4c201073_7c352530",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 29392,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 29392,
+        "startChar": 28,
+        "endLine": 29392,
+        "endChar": 34
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "ffb69e95_fd3e0c4f",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 29627,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 29627,
+        "startChar": 26,
+        "endLine": 29627,
+        "endChar": 32
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "dee4bd06_d895cfc8",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 29925,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 29925,
+        "startChar": 26,
+        "endLine": 29925,
+        "endChar": 32
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "ec4ad03d_4d60b1ec",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 34470,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 34470,
+        "startChar": 28,
+        "endLine": 34470,
+        "endChar": 34
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004542616",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405867?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "43901726_17ad139b",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 104012,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-20T16:04:08Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 104012,
+        "startChar": 34,
+        "endLine": 104012,
+        "endChar": 40
+      },
+      "revId": "70d12281a6196a6887af07b12373c193d1177014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
