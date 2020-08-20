@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c346684_ff5d04ba",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-20T18:06:47Z",
+      "side": 1,
+      "message": "why do you need a separate lock for this? Have you tested this with lock debugging enabled to make sure you always take the locks in the same order?",
+      "revId": "9c7fe69acca40038aba8e3e4b6905835e3255e40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e302ab7f_d44526ce",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-20T18:06:47Z",
+      "side": 1,
+      "message": "WARN_ON(!mutex_is_locked( ?",
+      "revId": "9c7fe69acca40038aba8e3e4b6905835e3255e40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6732170f_ffb4fc19",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1919,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-20T18:06:47Z",
+      "side": 1,
+      "message": "ok, but you then go on to subtract it which will underflow.",
+      "revId": "9c7fe69acca40038aba8e3e4b6905835e3255e40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

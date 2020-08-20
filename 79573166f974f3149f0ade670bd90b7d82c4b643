@@ -155,6 +155,30 @@
     },
     {
       "key": {
+        "uuid": "5d7bccd1_04933b29",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1846,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-20T18:06:47Z",
+      "side": 1,
+      "message": "See previous response. Also the , should go on the same line as the string.",
+      "parentUuid": "36b87b33_a835518c",
+      "range": {
+        "startLine": 1845,
+        "startChar": 2,
+        "endLine": 1846,
+        "endChar": 19
+      },
+      "revId": "79573166f974f3149f0ade670bd90b7d82c4b643",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4a8de7b1_46cc5dd9",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 14
@@ -199,6 +223,30 @@
       "revId": "79573166f974f3149f0ade670bd90b7d82c4b643",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "547b435a_0f644954",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 1922,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-20T18:06:47Z",
+      "side": 1,
+      "message": "While strings that break the 80col margin without arguments are not very common, there are some. I did not see any that puts the following \");\" on its own line though.",
+      "parentUuid": "bc8eb005_fe355fa7",
+      "range": {
+        "startLine": 1922,
+        "startChar": 4,
+        "endLine": 1922,
+        "endChar": 64
+      },
+      "revId": "79573166f974f3149f0ade670bd90b7d82c4b643",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     },
     {
       "key": {
