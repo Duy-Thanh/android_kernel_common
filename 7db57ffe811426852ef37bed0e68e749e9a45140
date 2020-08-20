@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "8d9ef24e_ea31fcdf",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-08-20T21:48:44Z",
+      "side": 1,
+      "message": "Actually, sorry, wasn\u0027t thinking clearly earlier.\n\nChris: I believe call dma_buf_put() on the returned dma_buf* should function as a free() hook. \n\nIf you think its helpful I can add a dma_heap_buffer_free() wrapper to that? \n\nI still I need to write up a simple test driver for this to make sure I\u0027ve got things handled properly.",
+      "parentUuid": "819bacf0_545722d9",
+      "revId": "7db57ffe811426852ef37bed0e68e749e9a45140",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1e01c36a_3fdff897",
         "filename": "include/linux/dma-heap.h",
         "patchSetId": 5
