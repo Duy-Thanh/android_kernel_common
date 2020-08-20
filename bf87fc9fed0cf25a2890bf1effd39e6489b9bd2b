@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6b627e61_cc14c5d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2020-08-20T07:52:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a142822e_11462780",
+      "revId": "bf87fc9fed0cf25a2890bf1effd39e6489b9bd2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a9ceb9a9_99243db5",
         "filename": "drivers/android/binder_alloc.c",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "bf87fc9fed0cf25a2890bf1effd39e6489b9bd2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1733f78_bf08e9eb",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2020-08-20T07:52:47Z",
+      "side": 1,
+      "message": "Fixed in upstream version",
+      "parentUuid": "a9ceb9a9_99243db5",
+      "revId": "bf87fc9fed0cf25a2890bf1effd39e6489b9bd2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
