@@ -52,6 +52,24 @@
       "revId": "ad2032904a9d56b00d64ba9f055a84411a1921f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b16aaa4d_66c2c01f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-08-21T22:02:48Z",
+      "side": 1,
+      "message": "Cuttlefish is currently the primary device for the x86 gki_defconfig. Maybe more will come in the future.\n\nWhile most vendors focus on arm64, we want to keep the arm64 and x86 configuration in sync where possible. A lot of our testing happens on x86 and keeping the configs in sync makes tests on x86 more relevant for arm64.\n\nSo, if this configuration is available in x86, please enable it there as well. If not, ack that and I am sorry for the noise :-)",
+      "parentUuid": "460842e6_127600c6",
+      "revId": "ad2032904a9d56b00d64ba9f055a84411a1921f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
