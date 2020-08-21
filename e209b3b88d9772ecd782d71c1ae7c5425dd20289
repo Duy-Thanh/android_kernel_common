@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "98df816f_e967ddb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-08-21T04:09:47Z",
+      "side": 1,
+      "message": "Hi, All\n\nThis change caused our x15 android-mainline kernel build failed with following error:\n\nhttps://ci.linaro.org/job/lkft-generic-omap-build/139/console\n\n23:07:34 /home/buildslave/srv/lkft/workspace/kernel/common/mainline/drivers/base/arch_topology.c:47:2: error: implicit declaration of function \u0027trace_android_vh_arch_set_freq_scale\u0027 [-Werror,-Wimplicit-function-declaration]\n23:07:34         trace_android_vh_arch_set_freq_scale(cur_freq, max_freq, \u0026scale);\n23:07:34         ^\n23:07:34   CC      drivers/mtd/spi-nor/sfdp.o\n23:07:34 1 error generated.\n23:07:34 make[3]: *** [/home/buildslave/srv/lkft/workspace/kernel/common/mainline/scripts/Makefile.build:283: drivers/base/arch_topology.o] Error 1\n23:07:34 make[2]: *** [/home/buildslave/srv/lkft/workspace/kernel/common/mainline/scripts/Makefile.build:500: drivers/base] Error 2\n23:07:34 make[2]: *** Waiting for unfinished jobs....\n\n\nThanks,\nYongqin Liu\n",
+      "revId": "e209b3b88d9772ecd782d71c1ae7c5425dd20289",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f5aef05_00bd0f85",
         "filename": "include/trace/hooks/topology.h",
         "patchSetId": 8
