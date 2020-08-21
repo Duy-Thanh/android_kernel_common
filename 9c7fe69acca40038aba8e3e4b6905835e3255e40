@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1e0b7c1a_e68f740a",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-21T20:08:07Z",
+      "side": 1,
+      "message": "I have now tested with lock debugging enabled.\n\nIt does not need to be a separate lock, but the locking mechanism gets more complicated around the release path on a failed message if we have only 1. The device is held locked on that path, so if we use the same lock, every function on that path needs _locked variants, or we need to release the lock at the start of the drop handling and reacquire after, both of which are not great complexity-wise.",
+      "parentUuid": "6c346684_ff5d04ba",
+      "revId": "9c7fe69acca40038aba8e3e4b6905835e3255e40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e302ab7f_d44526ce",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 16
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "47225132_12efa656",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-21T20:08:07Z",
+      "side": 1,
+      "message": "Removed _locked subfunc, was used for a different solution, no longer needed.",
+      "parentUuid": "e302ab7f_d44526ce",
+      "revId": "9c7fe69acca40038aba8e3e4b6905835e3255e40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6732170f_ffb4fc19",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 16
@@ -50,6 +86,24 @@
       "revId": "9c7fe69acca40038aba8e3e4b6905835e3255e40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "859fd0c7_84055dd2",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1919,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-21T20:08:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6732170f_ffb4fc19",
+      "revId": "9c7fe69acca40038aba8e3e4b6905835e3255e40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
