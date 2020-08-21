@@ -1,0 +1,58 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004560507",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1407040?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "9289c914_8a2a15c4",
+        "filename": "drivers/i2c/busses/i2c-bcm-iproc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-21T15:13:33Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 1040,
+        "startChar": 12,
+        "endLine": 1040,
+        "endChar": 17
+      },
+      "revId": "dfc4ba030db635ec939342f3a37265b08f6cc9c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004560507",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1407040?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5c6b9e67_7e5cac20",
+        "filename": "drivers/nvdimm/security.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-21T15:13:33Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 460,
+        "startChar": 58,
+        "endLine": 460,
+        "endChar": 64
+      },
+      "revId": "dfc4ba030db635ec939342f3a37265b08f6cc9c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
