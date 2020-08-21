@@ -1,0 +1,40 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53f67c5a_244f7cec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1745236
+      },
+      "writtenOn": "2020-08-21T06:14:21Z",
+      "side": 1,
+      "message": "\u003e Commit is not signed off by the committer!\n\u003e \n\u003e Missing tag: Signed-off-by: Frankie Chang \u003cfrankie.chang@mediatek.com\u003e\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 327642562 android-build.ayeaye-python-dispatcher_20200820.05_p0\n\nResolved.",
+      "parentUuid": "22b0091a_ebf385af",
+      "revId": "e94f3d42a63fc9b4ed22f4282abfd97cdc3a27e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "11e5cf42_de551b31",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1745236
+      },
+      "writtenOn": "2020-08-21T06:14:21Z",
+      "side": 1,
+      "message": "\u003e Commit is not signed off by the author!\n\u003e \n\u003e Missing tag: Signed-off-by: Frankie Chang \u003cfrankie.chang@mediatek.com\u003e\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 327642562 android-build.ayeaye-python-dispatcher_20200820.05_p0\n\nResolved.",
+      "parentUuid": "ab01f7a1_90a00654",
+      "revId": "e94f3d42a63fc9b4ed22f4282abfd97cdc3a27e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
