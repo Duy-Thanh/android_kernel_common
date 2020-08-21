@@ -187,7 +187,10 @@ int ufshcd_hba_init_crypto_capabilities(struct ufs_hba *hba)
 	hba->ksm.ksm_ll_ops = ufshcd_ksm_ops;
 	/* UFS only supports 8 bytes for any DUN */
 	hba->ksm.max_dun_bytes_supported = 8;
+<<<<<<< HEAD   (2f4d6c ANDROID: arm64: add __va_function)
 	hba->ksm.features = BLK_CRYPTO_FEATURE_STANDARD_KEYS;
+=======
+>>>>>>> BRANCH (b20984 fs-verity: use smp_load_acquire() for ->i_verity_info)
 	hba->ksm.dev = hba->dev;
 
 	/*

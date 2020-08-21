@@ -27,7 +27,10 @@
 #include <linux/pr.h>
 #include <linux/refcount.h>
 #include <linux/blk-crypto.h>
+<<<<<<< HEAD   (2f4d6c ANDROID: arm64: add __va_function)
 #include <linux/keyslot-manager.h>
+=======
+>>>>>>> BRANCH (b20984 fs-verity: use smp_load_acquire() for ->i_verity_info)
 
 #define DM_MSG_PREFIX "core"
 
