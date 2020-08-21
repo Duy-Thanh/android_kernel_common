@@ -16,6 +16,24 @@
       "revId": "c0f643578295dfb1b93c0417561531228a46f5ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "515cd5c9_a517fb88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1697971
+      },
+      "writtenOn": "2020-08-21T18:56:30Z",
+      "side": 1,
+      "message": "I\u0027m comfortable with it being merged, the changes looked good to me.",
+      "parentUuid": "2195d189_483260be",
+      "revId": "c0f643578295dfb1b93c0417561531228a46f5ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
