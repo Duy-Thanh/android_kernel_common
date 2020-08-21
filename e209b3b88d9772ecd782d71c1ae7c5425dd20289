@@ -56,6 +56,30 @@
       "revId": "e209b3b88d9772ecd782d71c1ae7c5425dd20289",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01b79d1a_a92b1b37",
+        "filename": "include/trace/hooks/topology.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1655301
+      },
+      "writtenOn": "2020-08-21T04:23:29Z",
+      "side": 1,
+      "message": "I\u0027ll upload a patch to fix it.\nSorry for the typo.",
+      "parentUuid": "8f5aef05_00bd0f85",
+      "range": {
+        "startLine": 21,
+        "startChar": 8,
+        "endLine": 21,
+        "endChar": 45
+      },
+      "revId": "e209b3b88d9772ecd782d71c1ae7c5425dd20289",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
