@@ -34,6 +34,24 @@
       "revId": "ad2032904a9d56b00d64ba9f055a84411a1921f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "460842e6_127600c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-08-21T09:59:14Z",
+      "side": 1,
+      "message": "Hi, Matthias\n\nSorry, I am not sure I get what you said here.\n\nCould you please help to explain more on what else I should do to have this change merged?\n\nThe configs of CONFIG_SERIAL_QCOM_GENI/CONFIG_SERIAL_QCOM_GENI_CONSOLE/CONFIG_QCOM_GENI_SE\n\nwon\u0027t be used by cuttlefish I guess, what problems might be caused for them?\n\nThanks,\nYongqin Liu",
+      "parentUuid": "7005633d_ae845827",
+      "revId": "ad2032904a9d56b00d64ba9f055a84411a1921f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
