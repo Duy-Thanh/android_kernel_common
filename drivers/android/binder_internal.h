@@ -14,6 +14,11 @@
 #include <linux/uidgid.h>
 #include "binder_alloc.h"
 
+#if IS_ENABLED(CONFIG_BINDER_TRANSACTION_LATENCY_TRACKING)
+#include <linux/rtc.h>
+#include <linux/time.h>
+#endif
+
 struct binder_context {
 	struct binder_node *binder_context_mgr_node;
 	struct mutex context_mgr_node_lock;
@@ -546,6 +551,14 @@ struct binder_transaction {
 	 */
 	spinlock_t lock;
 	ANDROID_VENDOR_DATA(1);
+	/**
+         * @timestamp and @tv are used to record the time
+         * that the binder transaction startup
+         */
+#if IS_ENABLED(CONFIG_BINDER_TRANSACTION_LATENCY_TRACKING)
+       struct timespec64 timestamp;
+       struct timeval tv;
+#endif
 };
 
 /**
