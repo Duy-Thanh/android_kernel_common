@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "103a4d12_809536fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-08-22T23:34:41Z",
+      "side": 1,
+      "message": "Dmitry, can you cherry-pick aosp/1326839 as well? Looks like you\u0027ll need it.",
+      "revId": "6a37d01deefefb4e7146a500fde933b52b4b3c02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
