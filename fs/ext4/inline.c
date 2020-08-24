@@ -277,7 +277,7 @@ static int ext4_create_inline_data(handle_t *handle,
 		len = 0;
 	}
 
-	/* Insert the the xttr entry. */
+	/* Insert the xttr entry. */
 	i.value = value;
 	i.value_len = len;
 
@@ -1725,7 +1725,11 @@ int ext4_delete_inline_entry(handle_t *handle,
 	if (err)
 		goto out;
 
+<<<<<<< HEAD   (ccae99 ANDROID: GKI: enable QCOM and HISI UFS drivers)
 	err = ext4_generic_delete_entry(handle, dir, de_del, 0, bh,
+=======
+	err = ext4_generic_delete_entry(dir, de_del, bh,
+>>>>>>> BRANCH (d012a7 Linux 5.9-rc2)
 					inline_start, inline_size, 0);
 	if (err)
 		goto out;
