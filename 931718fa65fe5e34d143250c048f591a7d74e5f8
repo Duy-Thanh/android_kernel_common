@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a10e7dc5_c8107f5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-08-25T19:20:29Z",
+      "side": 1,
+      "message": "Hrm.. The removal of KERNEL_DIR\u003dcommon seems to be breaking my build env.\n\nI suspect its due to my running the build via linking the common/build.config.hikey960 to build.config and running build/build.sh, instead of using BUILD_CONFIG env value?",
+      "revId": "931718fa65fe5e34d143250c048f591a7d74e5f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
