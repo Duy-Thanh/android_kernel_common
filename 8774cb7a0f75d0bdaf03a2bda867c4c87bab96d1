@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ca262908_3d707f98",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-25T19:54:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c226e8f_c75637f4",
+      "revId": "8774cb7a0f75d0bdaf03a2bda867c4c87bab96d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "abf1dd87_eda6e82e",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 17
@@ -33,6 +51,24 @@
       "revId": "8774cb7a0f75d0bdaf03a2bda867c4c87bab96d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f405be3e_979248a7",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-25T19:54:17Z",
+      "side": 1,
+      "message": "It was used in a previous revision for single-exit code (Successfully registered handles would be NULL, and so wouldn\u0027t be dropped on the way out of the function). It\u0027s not needed anymore so I\u0027ve removed it.",
+      "parentUuid": "abf1dd87_eda6e82e",
+      "revId": "8774cb7a0f75d0bdaf03a2bda867c4c87bab96d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
