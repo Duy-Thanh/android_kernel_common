@@ -1,0 +1,52 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004613022",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1404750?revision\u003d5",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "8f7a8111_564d8eb5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-25T23:30:09Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Todd Kjos \u003ctkjos@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 327875072 android-build.ayeaye-python-dispatcher_20200821.05_p1",
+      "revId": "7a22bc606469116f22f25a7a3da3e06204931aa6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004613014",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1404750?revision\u003d5",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "7db07036_827f7085",
+        "filename": "android/abi_gki_aarch64_hikey960",
+        "patchSetId": 5
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-25T23:30:09Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 676,
+        "startChar": 28,
+        "endLine": 676,
+        "endChar": 33
+      },
+      "revId": "7a22bc606469116f22f25a7a3da3e06204931aa6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
