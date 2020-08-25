@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7919ce9f_3d32c562",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-25T20:45:56Z",
+      "side": 1,
+      "message": "Does this compile? Shouldn\u0027t it be:\n\n  #define UFSHCI_QUIRK_SKIP_MANUAL_WB_FLUSH_CTRL 0x2000",
+      "revId": "c0225dbb67603a50e7bf1bacf9f80b94a8e84698",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
