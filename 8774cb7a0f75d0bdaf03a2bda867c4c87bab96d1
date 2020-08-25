@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c226e8f_c75637f4",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-25T19:31:54Z",
+      "side": 1,
+      "message": "You are returning with the lock held here.",
+      "revId": "8774cb7a0f75d0bdaf03a2bda867c4c87bab96d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abf1dd87_eda6e82e",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-25T19:31:54Z",
+      "side": 1,
+      "message": "Why are you setting this to NULL? The callers seem to either not use this value again, or crash if you have set it to NULL.",
+      "revId": "8774cb7a0f75d0bdaf03a2bda867c4c87bab96d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
