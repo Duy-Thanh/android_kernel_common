@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0437ed29_ddf29383",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-25T20:20:38Z",
+      "side": 1,
+      "message": "not necessarily related to this patch, but this struct needs some documentation. E.g. why does it have a reserved field? How are version mismatches handled?",
+      "revId": "141ea3cff38b6172b20406c26f04c42f625e2403",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b63d89b_725343e9",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-25T20:20:38Z",
+      "side": 1,
+      "message": "add comment tp explain WARN_ON? Does it just leak memory? Is it still safe to free vds?",
+      "revId": "141ea3cff38b6172b20406c26f04c42f625e2403",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06efc3c9_fba501bd",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-25T20:20:38Z",
+      "side": 1,
+      "message": "why not move this after tipc_shared_handle_take as that does not seem to depend on this directly or indirectly?",
+      "revId": "141ea3cff38b6172b20406c26f04c42f625e2403",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "051805c7_5f861ae7",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-25T20:20:38Z",
+      "side": 1,
+      "message": "WARN_ON?",
+      "range": {
+        "startLine": 615,
+        "startChar": 6,
+        "endLine": 615,
+        "endChar": 52
+      },
+      "revId": "141ea3cff38b6172b20406c26f04c42f625e2403",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9db6ab11_2fa47900",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-08-25T20:20:38Z",
+      "side": 1,
+      "message": "Can this actually happen? The cleanup paths don\u0027t seem to handle this case.",
+      "revId": "141ea3cff38b6172b20406c26f04c42f625e2403",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
