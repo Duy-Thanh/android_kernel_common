@@ -16,6 +16,24 @@
       "revId": "931718fa65fe5e34d143250c048f591a7d74e5f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f2c94d7_c5e8db0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-08-25T19:55:32Z",
+      "side": 1,
+      "message": "That is actually a valid way and should be supported. Sorry about that. YongQin, can you please address that?",
+      "parentUuid": "a10e7dc5_c8107f5d",
+      "revId": "931718fa65fe5e34d143250c048f591a7d74e5f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
