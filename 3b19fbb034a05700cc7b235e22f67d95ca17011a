@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd358b02_7e513ac7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-08-25T04:19:06Z",
+      "side": 1,
+      "message": "Hi, All\n\nThis change make it possible to build kernel with LTO enabled for devices like hikey,\nand it also means that we could inherit the common config files like build.config.common and build.config.aarch64\n\nThanks,\nYongqin Liu",
+      "revId": "3b19fbb034a05700cc7b235e22f67d95ca17011a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
