@@ -1,0 +1,46 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004614655",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1404752?revision\u003d6",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e84fb5d0_f80584ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-26T00:42:04Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a Bug: or Fixes: line\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 327875072 android-build.ayeaye-python-dispatcher_20200821.05_p1",
+      "revId": "d1b54ba9a80234f7a3f4fd4ca14e3d20deedc83c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004614655",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1404752?revision\u003d6",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "89b476f9_94205187",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-26T00:42:04Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Todd Kjos \u003ctkjos@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 327875072 android-build.ayeaye-python-dispatcher_20200821.05_p1",
+      "revId": "d1b54ba9a80234f7a3f4fd4ca14e3d20deedc83c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
