@@ -1,0 +1,31 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004632886",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1405293?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "92447a2f_3c0214c1",
+        "filename": "Documentation/admin-guide/kernel-parameters.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-26T22:36:05Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027deny list\u0027 or \u0027allow list\u0027; see https://developers.google.com/style/word-list#blacklist for more details.",
+      "range": {
+        "startLine": 498,
+        "startChar": 9,
+        "endLine": 498,
+        "endChar": 18
+      },
+      "revId": "ce5f91bdfa3b47356b35661f84173eeef05d1299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
