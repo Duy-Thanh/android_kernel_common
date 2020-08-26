@@ -16,6 +16,24 @@
       "revId": "3308028595e96398d9ddde2b08e291ccb34e1dc3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "058b229f_d4e8eb7a",
+        "filename": "drivers/scsi/ufs/ufs-mediatek.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-08-26T02:17:48Z",
+      "side": 1,
+      "message": "Can you check it again, looking at what\u0027s actually on this branch?  This is for android12-5.4, not android11-5.4.  We\u0027ve backported the latest ufshcd-crypto patches from upstream to android12-5.4.  It\u0027s only the Android 11 kernels (android11-5.4, android-4.19-stable, and android-4.14-stable) that still have the old patches.",
+      "parentUuid": "83679766_f5bdb9cf",
+      "revId": "3308028595e96398d9ddde2b08e291ccb34e1dc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
