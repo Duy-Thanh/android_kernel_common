@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83679766_f5bdb9cf",
+        "filename": "drivers/scsi/ufs/ufs-mediatek.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1294339
+      },
+      "writtenOn": "2020-08-26T02:08:21Z",
+      "side": 1,
+      "message": "This condition works in Linux mainstream but does not work in Android Common Kernel 5.4, thus it shall be modified as below instead:\n\nif (ufshcd_hba_is_crypto_supported(hba))\n\nThis is because UFSHCD_CAP_CRYPTO would be disabled by below call stack:\n\nufshcd_hba_enable() -\u003e\nufshcd_hba_stop() -\u003e\nufshcd_crypto_disable() -\u003e\nufshcd_crypto_disable_spec()\n\nAnd then,\n\nufshcd_vops_hce_enable_notify() -\u003e\nufs_mtk_hce_enable_notify() will not see UFSHCD_CAP_CRYPTO in hba-\u003ecaps, so finally Crypto feature in MediaTek platform will not be enabled.\n\nExcept for above essential modification, others are fine and have been tested by ourselves.\n\nThanks Eric for the backport.",
+      "revId": "3308028595e96398d9ddde2b08e291ccb34e1dc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
