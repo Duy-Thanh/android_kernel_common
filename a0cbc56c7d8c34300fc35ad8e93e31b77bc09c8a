@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe71b0d2_441f6ff0",
+        "filename": "arch/arm64/kernel/process.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-26T19:14:50Z",
+      "side": 1,
+      "message": "There is another hook with the same signature at line 540. Can you use that instead of adding a new hook?",
+      "revId": "a0cbc56c7d8c34300fc35ad8e93e31b77bc09c8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
