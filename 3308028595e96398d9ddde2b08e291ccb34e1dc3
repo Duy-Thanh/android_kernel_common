@@ -34,6 +34,24 @@
       "revId": "3308028595e96398d9ddde2b08e291ccb34e1dc3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9dad0dd5_967af9b7",
+        "filename": "drivers/scsi/ufs/ufs-mediatek.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1294339
+      },
+      "writtenOn": "2020-08-26T02:25:50Z",
+      "side": 1,
+      "message": "Thanks for the reminding! I just noticed that Android 12 5.4 is fine with this patch. Thanks : )",
+      "parentUuid": "058b229f_d4e8eb7a",
+      "revId": "3308028595e96398d9ddde2b08e291ccb34e1dc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
