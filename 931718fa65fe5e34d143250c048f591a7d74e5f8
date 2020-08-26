@@ -34,6 +34,24 @@
       "revId": "931718fa65fe5e34d143250c048f591a7d74e5f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1ac167c_5d992915",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-08-26T03:31:26Z",
+      "side": 1,
+      "message": "Checked with John, and it\u0027s because the build project was not repo synced.\n\nThe link method is supported. When BUILD_CONFIG was not set, it will be set to build.config by default in the _setup_env.sh script, it\u0027s same as run with BUILD_CONFIG\u003dbuild.config, and the realpath command used could help to get the resolved path even the build.config is a link.",
+      "parentUuid": "8f2c94d7_c5e8db0e",
+      "revId": "931718fa65fe5e34d143250c048f591a7d74e5f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
