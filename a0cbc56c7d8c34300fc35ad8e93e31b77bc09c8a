@@ -16,6 +16,24 @@
       "revId": "a0cbc56c7d8c34300fc35ad8e93e31b77bc09c8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "645a6181_14e27583",
+        "filename": "arch/arm64/kernel/process.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1749480
+      },
+      "writtenOn": "2020-08-27T01:32:48Z",
+      "side": 1,
+      "message": "I have reply to issue tracker.\nPlease check message there",
+      "parentUuid": "fe71b0d2_441f6ff0",
+      "revId": "a0cbc56c7d8c34300fc35ad8e93e31b77bc09c8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
