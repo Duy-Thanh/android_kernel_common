@@ -27,7 +27,10 @@
 #include <linux/pr.h>
 #include <linux/refcount.h>
 #include <linux/blk-crypto.h>
+<<<<<<< HEAD   (8c7bf5 ANDROID: GKI: update xml due to 5.4.60 changes)
 #include <linux/keyslot-manager.h>
+=======
+>>>>>>> BRANCH (b20984 fs-verity: use smp_load_acquire() for ->i_verity_info)
 
 #define DM_MSG_PREFIX "core"
 

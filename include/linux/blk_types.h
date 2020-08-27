@@ -178,9 +178,12 @@ struct bio {
 
 #ifdef CONFIG_BLK_INLINE_ENCRYPTION
 	struct bio_crypt_ctx	*bi_crypt_context;
+<<<<<<< HEAD   (8c7bf5 ANDROID: GKI: update xml due to 5.4.60 changes)
 #if IS_ENABLED(CONFIG_DM_DEFAULT_KEY)
 	bool			bi_skip_dm_default_key;
 #endif
+=======
+>>>>>>> BRANCH (b20984 fs-verity: use smp_load_acquire() for ->i_verity_info)
 #endif
 
 	union {

@@ -55,8 +55,11 @@
 #include <linux/clk.h>
 #include <linux/completion.h>
 #include <linux/regulator/consumer.h>
+<<<<<<< HEAD   (8c7bf5 ANDROID: GKI: update xml due to 5.4.60 changes)
 #include <linux/bitfield.h>
 #include <linux/devfreq.h>
+=======
+>>>>>>> BRANCH (b20984 fs-verity: use smp_load_acquire() for ->i_verity_info)
 #include <linux/keyslot-manager.h>
 #include "unipro.h"
 
@@ -359,6 +362,7 @@ struct ufs_hba_variant_ops {
 	void	(*dbg_register_dump)(struct ufs_hba *hba);
 	int	(*phy_initialization)(struct ufs_hba *);
 	void	(*device_reset)(struct ufs_hba *hba);
+<<<<<<< HEAD   (8c7bf5 ANDROID: GKI: update xml due to 5.4.60 changes)
 	void	(*config_scaling_param)(struct ufs_hba *hba,
 					struct devfreq_dev_profile *profile,
 					void *data);
@@ -369,6 +373,10 @@ struct ufs_hba_variant_ops {
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
+=======
+	int	(*program_key)(struct ufs_hba *hba,
+			       const union ufs_crypto_cfg_entry *cfg, int slot);
+>>>>>>> BRANCH (b20984 fs-verity: use smp_load_acquire() for ->i_verity_info)
 };
 
 /* clock gating state  */
@@ -777,6 +785,7 @@ struct ufs_hba {
 	 */
 #define UFSHCD_CAP_KEEP_AUTO_BKOPS_ENABLED_EXCEPT_SUSPEND (1 << 5)
 	/*
+<<<<<<< HEAD   (8c7bf5 ANDROID: GKI: update xml due to 5.4.60 changes)
 	 * This capability allows host controller driver to automatically
 	 * enable runtime power management by itself instead of waiting
 	 * for userspace to control the power management.
@@ -789,6 +798,8 @@ struct ufs_hba {
 	 */
 #define UFSHCD_CAP_WB_EN (1 << 7)
 	/*
+=======
+>>>>>>> BRANCH (b20984 fs-verity: use smp_load_acquire() for ->i_verity_info)
 	 * This capability allows the host controller driver to use the
 	 * inline crypto engine, if it is present
 	 */
@@ -808,6 +819,7 @@ struct ufs_hba {
 	struct device		bsg_dev;
 	struct request_queue	*bsg_queue;
 
+<<<<<<< HEAD   (8c7bf5 ANDROID: GKI: update xml due to 5.4.60 changes)
 	bool wb_buf_flush_enabled;
 	bool wb_enabled;
 	struct delayed_work rpm_dev_flush_recheck_work;
@@ -823,6 +835,14 @@ struct ufs_hba {
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
+=======
+#ifdef CONFIG_SCSI_UFS_CRYPTO
+	union ufs_crypto_capabilities crypto_capabilities;
+	union ufs_crypto_cap_entry *crypto_cap_array;
+	u32 crypto_cfg_register;
+	struct blk_keyslot_manager ksm;
+#endif
+>>>>>>> BRANCH (b20984 fs-verity: use smp_load_acquire() for ->i_verity_info)
 };
 
 /* Returns true if clocks can be gated. Otherwise false */

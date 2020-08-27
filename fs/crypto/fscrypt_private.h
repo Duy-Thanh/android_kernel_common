@@ -21,8 +21,11 @@
 #define FSCRYPT_FILE_NONCE_SIZE	16
 
 #define FSCRYPT_MIN_KEY_SIZE	16
+<<<<<<< HEAD   (8c7bf5 ANDROID: GKI: update xml due to 5.4.60 changes)
 
 #define FSCRYPT_MAX_HW_WRAPPED_KEY_SIZE	128
+=======
+>>>>>>> BRANCH (b20984 fs-verity: use smp_load_acquire() for ->i_verity_info)
 
 #define FSCRYPT_CONTEXT_V1	1
 #define FSCRYPT_CONTEXT_V2	2
@@ -329,6 +332,7 @@ void fscrypt_destroy_hkdf(struct fscrypt_hkdf *hkdf);
 
 /* inline_crypt.c */
 #ifdef CONFIG_FS_ENCRYPTION_INLINE_CRYPT
+<<<<<<< HEAD   (8c7bf5 ANDROID: GKI: update xml due to 5.4.60 changes)
 int fscrypt_select_encryption_impl(struct fscrypt_info *ci,
 				   bool is_hw_wrapped_key);
 
@@ -411,6 +415,68 @@ static inline int fscrypt_derive_raw_secret(struct super_block *sb,
 	fscrypt_warn(NULL,
 		     "kernel built without support for hardware-wrapped keys");
 	return -EOPNOTSUPP;
+=======
+int fscrypt_select_encryption_impl(struct fscrypt_info *ci);
+
+static inline bool
+fscrypt_using_inline_encryption(const struct fscrypt_info *ci)
+{
+	return ci->ci_inlinecrypt;
+}
+
+int fscrypt_prepare_inline_crypt_key(struct fscrypt_prepared_key *prep_key,
+				     const u8 *raw_key,
+				     const struct fscrypt_info *ci);
+
+void fscrypt_destroy_inline_crypt_key(struct fscrypt_prepared_key *prep_key);
+
+/*
+ * Check whether the crypto transform or blk-crypto key has been allocated in
+ * @prep_key, depending on which encryption implementation the file will use.
+ */
+static inline bool
+fscrypt_is_key_prepared(struct fscrypt_prepared_key *prep_key,
+			const struct fscrypt_info *ci)
+{
+	/*
+	 * The two smp_load_acquire()'s here pair with the smp_store_release()'s
+	 * in fscrypt_prepare_inline_crypt_key() and fscrypt_prepare_key().
+	 * I.e., in some cases (namely, if this prep_key is a per-mode
+	 * encryption key) another task can publish blk_key or tfm concurrently,
+	 * executing a RELEASE barrier.  We need to use smp_load_acquire() here
+	 * to safely ACQUIRE the memory the other task published.
+	 */
+	if (fscrypt_using_inline_encryption(ci))
+		return smp_load_acquire(&prep_key->blk_key) != NULL;
+	return smp_load_acquire(&prep_key->tfm) != NULL;
+}
+
+#else /* CONFIG_FS_ENCRYPTION_INLINE_CRYPT */
+
+static inline int fscrypt_select_encryption_impl(struct fscrypt_info *ci)
+{
+	return 0;
+}
+
+static inline bool
+fscrypt_using_inline_encryption(const struct fscrypt_info *ci)
+{
+	return false;
+}
+
+static inline int
+fscrypt_prepare_inline_crypt_key(struct fscrypt_prepared_key *prep_key,
+				 const u8 *raw_key,
+				 const struct fscrypt_info *ci)
+{
+	WARN_ON(1);
+	return -EOPNOTSUPP;
+}
+
+static inline void
+fscrypt_destroy_inline_crypt_key(struct fscrypt_prepared_key *prep_key)
+{
+>>>>>>> BRANCH (b20984 fs-verity: use smp_load_acquire() for ->i_verity_info)
 }
 
 static inline bool
@@ -593,8 +659,12 @@ struct fscrypt_mode {
 extern struct fscrypt_mode fscrypt_modes[];
 
 int fscrypt_prepare_key(struct fscrypt_prepared_key *prep_key,
+<<<<<<< HEAD   (8c7bf5 ANDROID: GKI: update xml due to 5.4.60 changes)
 			const u8 *raw_key, unsigned int raw_key_size,
 			bool is_hw_wrapped, const struct fscrypt_info *ci);
+=======
+			const u8 *raw_key, const struct fscrypt_info *ci);
+>>>>>>> BRANCH (b20984 fs-verity: use smp_load_acquire() for ->i_verity_info)
 
 void fscrypt_destroy_prepared_key(struct fscrypt_prepared_key *prep_key);
 

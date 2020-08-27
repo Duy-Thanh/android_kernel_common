@@ -235,9 +235,12 @@ void bio_uninit(struct bio *bio)
 {
 	bio_disassociate_blkg(bio);
 
+<<<<<<< HEAD   (8c7bf5 ANDROID: GKI: update xml due to 5.4.60 changes)
 	if (bio_integrity(bio))
 		bio_integrity_free(bio);
 
+=======
+>>>>>>> BRANCH (b20984 fs-verity: use smp_load_acquire() for ->i_verity_info)
 	bio_crypt_free_ctx(bio);
 }
 EXPORT_SYMBOL(bio_uninit);

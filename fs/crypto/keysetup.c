@@ -118,17 +118,25 @@ err_free_tfm:
  * (fs-layer or blk-crypto) will be used.
  */
 int fscrypt_prepare_key(struct fscrypt_prepared_key *prep_key,
+<<<<<<< HEAD   (8c7bf5 ANDROID: GKI: update xml due to 5.4.60 changes)
 			const u8 *raw_key, unsigned int raw_key_size,
 			bool is_hw_wrapped, const struct fscrypt_info *ci)
+=======
+			const u8 *raw_key, const struct fscrypt_info *ci)
+>>>>>>> BRANCH (b20984 fs-verity: use smp_load_acquire() for ->i_verity_info)
 {
 	struct crypto_skcipher *tfm;
 
 	if (fscrypt_using_inline_encryption(ci))
+<<<<<<< HEAD   (8c7bf5 ANDROID: GKI: update xml due to 5.4.60 changes)
 		return fscrypt_prepare_inline_crypt_key(prep_key,
 				raw_key, raw_key_size, is_hw_wrapped, ci);
 
 	if (WARN_ON(is_hw_wrapped || raw_key_size != ci->ci_mode->keysize))
 		return -EINVAL;
+=======
+		return fscrypt_prepare_inline_crypt_key(prep_key, raw_key, ci);
+>>>>>>> BRANCH (b20984 fs-verity: use smp_load_acquire() for ->i_verity_info)
 
 	tfm = fscrypt_allocate_skcipher(ci->ci_mode, raw_key, ci->ci_inode);
 	if (IS_ERR(tfm))
@@ -154,9 +162,13 @@ void fscrypt_destroy_prepared_key(struct fscrypt_prepared_key *prep_key)
 int fscrypt_set_per_file_enc_key(struct fscrypt_info *ci, const u8 *raw_key)
 {
 	ci->ci_owns_key = true;
+<<<<<<< HEAD   (8c7bf5 ANDROID: GKI: update xml due to 5.4.60 changes)
 	return fscrypt_prepare_key(&ci->ci_enc_key, raw_key,
 				   ci->ci_mode->keysize,
 				   false /*is_hw_wrapped*/, ci);
+=======
+	return fscrypt_prepare_key(&ci->ci_enc_key, raw_key, ci);
+>>>>>>> BRANCH (b20984 fs-verity: use smp_load_acquire() for ->i_verity_info)
 }
 
 static int setup_per_mode_enc_key(struct fscrypt_info *ci,
@@ -230,6 +242,18 @@ static int setup_per_mode_enc_key(struct fscrypt_info *ci,
 		if (err)
 			goto out_unlock;
 	}
+<<<<<<< HEAD   (8c7bf5 ANDROID: GKI: update xml due to 5.4.60 changes)
+=======
+	err = fscrypt_hkdf_expand(&mk->mk_secret.hkdf,
+				  hkdf_context, hkdf_info, hkdf_infolen,
+				  mode_key, mode->keysize);
+	if (err)
+		goto out_unlock;
+	err = fscrypt_prepare_key(prep_key, mode_key, ci);
+	memzero_explicit(mode_key, mode->keysize);
+	if (err)
+		goto out_unlock;
+>>>>>>> BRANCH (b20984 fs-verity: use smp_load_acquire() for ->i_verity_info)
 done_unlock:
 	ci->ci_enc_key = *prep_key;
 	err = 0;
@@ -371,6 +395,10 @@ static int setup_file_encryption_key(struct fscrypt_info *ci,
 	struct fscrypt_master_key *mk = NULL;
 	struct fscrypt_key_specifier mk_spec;
 	int err;
+
+	err = fscrypt_select_encryption_impl(ci);
+	if (err)
+		return err;
 
 	switch (ci->ci_policy.version) {
 	case FSCRYPT_POLICY_V1:
