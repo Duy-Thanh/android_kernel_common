@@ -52,6 +52,29 @@
       "revId": "a0cbc56c7d8c34300fc35ad8e93e31b77bc09c8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8fe9592_8bd94692",
+        "filename": "arch/arm64/kernel/process.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1749480
+      },
+      "writtenOn": "2020-08-27T05:02:53Z",
+      "side": 1,
+      "message": "Add new hook is needed, because MPAM is related to cache or dram monitor.\n \nTherefore, mpam setting need to be done before dsb instruction at line 538.",
+      "range": {
+        "startLine": 537,
+        "startChar": 0,
+        "endLine": 537,
+        "endChar": 2
+      },
+      "revId": "a0cbc56c7d8c34300fc35ad8e93e31b77bc09c8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
