@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e84f730f_f5ed6161",
+        "filename": "drivers/power/supply/qcom_smbb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-27T13:09:00Z",
+      "side": 1,
+      "message": "shouldn\u0027t these be BIT() values as well?",
+      "range": {
+        "startLine": 93,
+        "startChar": 9,
+        "endLine": 98,
+        "endChar": 0
+      },
+      "revId": "58c35cbfaeb3edec202996d15a9441d71bc60755",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
