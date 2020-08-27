@@ -34,6 +34,24 @@
       "revId": "a0cbc56c7d8c34300fc35ad8e93e31b77bc09c8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e67ee23_8bcffc84",
+        "filename": "arch/arm64/kernel/process.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-27T02:54:57Z",
+      "side": 1,
+      "message": "Can you add a comment in the code here pointing out that the hook must be placed before the dsb()",
+      "parentUuid": "645a6181_14e27583",
+      "revId": "a0cbc56c7d8c34300fc35ad8e93e31b77bc09c8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
