@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eac728ae_a7346041",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-08-27T03:22:48Z",
+      "side": 1,
+      "message": "Hi, Alistair, Todd\n\nCould we have this change merged for the android-mainline branch first,\nand update when new solution ready?\n\nThanks,\nYongqin Liu",
+      "revId": "007dd4c9829efda843af88040430b06d655ae171",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
