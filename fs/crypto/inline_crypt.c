@@ -468,7 +468,7 @@ bool fscrypt_dio_supported(struct kiocb *iocb, struct iov_iter *iter)
 	 * Since the granularity of encryption is filesystem blocks, the I/O
 	 * must be block aligned -- not just disk sector aligned.
 	 */
-	if (!IS_ALIGNED(iocb->ki_pos | iov_iter_alignment(iter), blocksize))
+	if (!IS_ALIGNED(iocb->ki_pos | iov_iter_count(iter), blocksize))
 		return false;
 
 	return true;
