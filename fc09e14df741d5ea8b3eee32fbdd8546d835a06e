@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b91f924b_d100ce92",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-27T13:03:28Z",
+      "side": 1,
+      "message": "is this 1\u003c\u003c11?  If so, that\u0027s already a reserved value upstream for a different quirk.",
+      "range": {
+        "startLine": 743,
+        "startChar": 49,
+        "endLine": 743,
+        "endChar": 55
+      },
+      "revId": "fc09e14df741d5ea8b3eee32fbdd8546d835a06e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
