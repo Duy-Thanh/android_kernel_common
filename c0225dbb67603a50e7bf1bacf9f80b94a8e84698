@@ -16,6 +16,24 @@
       "revId": "c0225dbb67603a50e7bf1bacf9f80b94a8e84698",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a06941e_eca58b15",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1642820
+      },
+      "writtenOn": "2020-08-27T06:04:24Z",
+      "side": 1,
+      "message": "ah. this is not the same with current scsi mainline. sorry, I\u0027ll post again",
+      "parentUuid": "7919ce9f_3d32c562",
+      "revId": "c0225dbb67603a50e7bf1bacf9f80b94a8e84698",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
