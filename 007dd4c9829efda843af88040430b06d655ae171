@@ -16,6 +16,23 @@
       "revId": "007dd4c9829efda843af88040430b06d655ae171",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27c4c7c6_0f774fab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-08-27T03:35:49Z",
+      "side": 1,
+      "message": "Luca\u0027s right afaik, it will break downstream. Can you see if Mukesh\u0027s patch in aosp/1279272 can work on db845c?",
+      "revId": "007dd4c9829efda843af88040430b06d655ae171",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
