@@ -75,6 +75,30 @@
       "revId": "a0cbc56c7d8c34300fc35ad8e93e31b77bc09c8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1717d19f_fccf984b",
+        "filename": "arch/arm64/kernel/process.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-27T05:11:14Z",
+      "side": 1,
+      "message": "I meant for you to add an actual code comment at line 530 explaining that the hook is needed before the call to dsb(). The comment will help people looking at this code to understand why you couldn\u0027t just use the hook at line 540.",
+      "parentUuid": "e8fe9592_8bd94692",
+      "range": {
+        "startLine": 537,
+        "startChar": 0,
+        "endLine": 537,
+        "endChar": 2
+      },
+      "revId": "a0cbc56c7d8c34300fc35ad8e93e31b77bc09c8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
