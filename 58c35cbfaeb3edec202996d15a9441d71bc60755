@@ -22,6 +22,30 @@
       "revId": "58c35cbfaeb3edec202996d15a9441d71bc60755",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c1d9faa_a76e4b6f",
+        "filename": "drivers/power/supply/qcom_smbb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1269050
+      },
+      "writtenOn": "2020-08-27T14:19:32Z",
+      "side": 1,
+      "message": "The charging power is similar to the voltage and current values.I think BIT() is not well",
+      "parentUuid": "e84f730f_f5ed6161",
+      "range": {
+        "startLine": 93,
+        "startChar": 9,
+        "endLine": 98,
+        "endChar": 0
+      },
+      "revId": "58c35cbfaeb3edec202996d15a9441d71bc60755",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
