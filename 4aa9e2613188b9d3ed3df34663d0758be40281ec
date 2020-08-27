@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60c4a7e4_d560c8a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-08-27T15:57:14Z",
+      "side": 1,
+      "message": "NB: missed in 4.19, present on 5.4+",
+      "revId": "4aa9e2613188b9d3ed3df34663d0758be40281ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
