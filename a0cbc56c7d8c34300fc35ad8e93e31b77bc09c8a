@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "0c11de3a_b3ef14c3",
+        "filename": "arch/arm64/kernel/process.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1749480
+      },
+      "writtenOn": "2020-08-27T05:40:00Z",
+      "side": 1,
+      "message": "I have added comment message in the code.\nThanks.",
+      "parentUuid": "7e67ee23_8bcffc84",
+      "revId": "a0cbc56c7d8c34300fc35ad8e93e31b77bc09c8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e8fe9592_8bd94692",
         "filename": "arch/arm64/kernel/process.c",
         "patchSetId": 7
