@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "43b5b734_796e4fa5",
+        "filename": "arch/arm64/kernel/process.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1749480
+      },
+      "writtenOn": "2020-08-28T01:33:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c11de3a_b3ef14c3",
+      "revId": "a0cbc56c7d8c34300fc35ad8e93e31b77bc09c8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e8fe9592_8bd94692",
         "filename": "arch/arm64/kernel/process.c",
         "patchSetId": 7
@@ -117,6 +135,30 @@
       "revId": "a0cbc56c7d8c34300fc35ad8e93e31b77bc09c8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c00cf64_30dfe83e",
+        "filename": "arch/arm64/kernel/process.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1749480
+      },
+      "writtenOn": "2020-08-28T01:33:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1717d19f_fccf984b",
+      "range": {
+        "startLine": 537,
+        "startChar": 0,
+        "endLine": 537,
+        "endChar": 2
+      },
+      "revId": "a0cbc56c7d8c34300fc35ad8e93e31b77bc09c8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
