@@ -272,15 +272,31 @@ __scmi_xfer_put(struct scmi_xfers_info *minfo, struct scmi_xfer *xfer)
 	spin_unlock_irqrestore(&minfo->xfer_lock, flags);
 }
 
+static void scmi_handle_notification_direct(struct scmi_chan_info *cinfo,
+					    struct scmi_xfer *xfer, u32 msg_hdr)
+{
+	ktime_t ts;
+	struct device *dev = cinfo->dev;
+
+	ts = ktime_get_boottime_ns();
+
+	unpack_scmi_header(msg_hdr, &xfer->hdr);
+	scmi_dump_header_dbg(dev, &xfer->hdr);
+	scmi_notify(cinfo->handle, xfer->hdr.protocol_id,
+		    xfer->hdr.id, xfer->rx.buf, xfer->rx.len, ts);
+
+	trace_scmi_rx_done(xfer->transfer_id, xfer->hdr.id,
+			   xfer->hdr.protocol_id, xfer->hdr.seq,
+			   MSG_TYPE_NOTIFICATION);
+}
+
 static void scmi_handle_notification(struct scmi_chan_info *cinfo, u32 msg_hdr)
 {
 	struct scmi_xfer *xfer;
 	struct device *dev = cinfo->dev;
 	struct scmi_info *info = handle_to_scmi_info(cinfo->handle);
 	struct scmi_xfers_info *minfo = &info->rx_minfo;
-	ktime_t ts;
 
-	ts = ktime_get_boottime();
 	xfer = scmi_xfer_get(cinfo->handle, minfo);
 	if (IS_ERR(xfer)) {
 		dev_err(dev, "failed to get free message slot (%ld)\n",
@@ -289,20 +305,38 @@ static void scmi_handle_notification(struct scmi_chan_info *cinfo, u32 msg_hdr)
 		return;
 	}
 
-	unpack_scmi_header(msg_hdr, &xfer->hdr);
-	scmi_dump_header_dbg(dev, &xfer->hdr);
 	info->desc->ops->fetch_notification(cinfo, info->desc->max_msg_size,
 					    xfer);
-	scmi_notify(cinfo->handle, xfer->hdr.protocol_id,
-		    xfer->hdr.id, xfer->rx.buf, xfer->rx.len, ts);
 
-	trace_scmi_rx_done(xfer->transfer_id, xfer->hdr.id,
-			   xfer->hdr.protocol_id, xfer->hdr.seq,
-			   MSG_TYPE_NOTIFICATION);
+	scmi_handle_notification_direct(cinfo, xfer, msg_hdr);
 
 	__scmi_xfer_put(minfo, xfer);
 
 	info->desc->ops->clear_channel(cinfo);
+}
+
+
+static void scmi_handle_response_direct(struct scmi_chan_info *cinfo,
+					struct scmi_xfer *xfer, u8 msg_type)
+{
+	struct device *dev = cinfo->dev;
+	struct scmi_info *info = handle_to_scmi_info(cinfo->handle);
+
+	scmi_dump_header_dbg(dev, &xfer->hdr);
+
+	info->desc->ops->fetch_response(cinfo, xfer);
+
+	trace_scmi_rx_done(xfer->transfer_id, xfer->hdr.id,
+			   xfer->hdr.protocol_id, xfer->hdr.seq,
+			   msg_type);
+
+	if (msg_type == MSG_TYPE_DELAYED_RESP){
+		info->desc->ops->clear_channel(cinfo);
+		complete(xfer->async_done);
+	}
+	else{
+		complete(&xfer->done);
+	}
 }
 
 static void scmi_handle_response(struct scmi_chan_info *cinfo,
@@ -337,20 +371,7 @@ static void scmi_handle_response(struct scmi_chan_info *cinfo,
 		return;
 	}
 
-	scmi_dump_header_dbg(dev, &xfer->hdr);
-
-	info->desc->ops->fetch_response(cinfo, xfer);
-
-	trace_scmi_rx_done(xfer->transfer_id, xfer->hdr.id,
-			   xfer->hdr.protocol_id, xfer->hdr.seq,
-			   msg_type);
-
-	if (msg_type == MSG_TYPE_DELAYED_RESP) {
-		info->desc->ops->clear_channel(cinfo);
-		complete(xfer->async_done);
-	} else {
-		complete(&xfer->done);
-	}
+	scmi_handle_response_direct(cinfo, xfer, msg_type);
 }
 
 /**
@@ -398,18 +419,24 @@ void *scmi_get_transport_info(struct device *dev)
  * NOTE: This function will be invoked in IRQ context, hence should be
  * as optimal as possible.
  */
-void scmi_rx_callback(struct scmi_chan_info *cinfo, u32 msg_hdr)
+void scmi_rx_callback(struct scmi_chan_info *cinfo, u32 msg_hdr, struct scmi_xfer *xfer)
 {
 	u16 xfer_id = MSG_XTRACT_TOKEN(msg_hdr);
 	u8 msg_type = MSG_XTRACT_TYPE(msg_hdr);
 
 	switch (msg_type) {
 	case MSG_TYPE_NOTIFICATION:
-		scmi_handle_notification(cinfo, msg_hdr);
+		if (xfer)
+			scmi_handle_notification_direct(cinfo, xfer, msg_hdr);
+		else
+			scmi_handle_notification(cinfo, msg_hdr);
 		break;
 	case MSG_TYPE_COMMAND:
 	case MSG_TYPE_DELAYED_RESP:
-		scmi_handle_response(cinfo, xfer_id, msg_type);
+		if (xfer)
+			scmi_handle_response_direct(cinfo, xfer, msg_type);
+		else
+			scmi_handle_response(cinfo, xfer_id, msg_type);
 		break;
 	default:
 		WARN_ONCE(1, "received unknown msg_type:%d\n", msg_type);
@@ -1644,6 +1671,9 @@ static const struct of_device_id scmi_of_match[] = {
 #ifdef CONFIG_MAILBOX
 	{ .compatible = "arm,scmi", .data = &scmi_mailbox_desc },
 #endif
+#ifdef CONFIG_VIRTIO_SCMI
+	{ .compatible = "arm,scmi-virtio", .data = &scmi_virtio_desc},
+#endif
 #ifdef CONFIG_HAVE_ARM_SMCCC_DISCOVERY
 	{ .compatible = "arm,scmi-smc", .data = &scmi_smc_desc},
 #endif
@@ -1664,7 +1694,13 @@ static struct platform_driver scmi_driver = {
 
 static int __init scmi_driver_init(void)
 {
+	int ret;
+
 	scmi_bus_init();
+
+	ret = virtio_scmi_init();
+	if (ret)
+		return ret;
 
 	scmi_base_register();
 
@@ -1693,6 +1729,7 @@ static void __exit scmi_driver_exit(void)
 	scmi_system_unregister();
 
 	scmi_bus_exit();
+	virtio_scmi_exit();
 
 	platform_driver_unregister(&scmi_driver);
 }

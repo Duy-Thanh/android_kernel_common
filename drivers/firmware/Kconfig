@@ -9,7 +9,7 @@ menu "Firmware Drivers"
 config ARM_SCMI_PROTOCOL
 	tristate "ARM System Control and Management Interface (SCMI) Message Protocol"
 	depends on ARM || ARM64 || COMPILE_TEST
-	depends on ARM_SCMI_HAVE_SHMEM
+	depends on ARM_SCMI_HAVE_SHMEM  || VIRTIO_SCMI
 	help
 	  ARM System Control and Management Interface (SCMI) protocol is a
 	  set of operating system-independent software interfaces that are
@@ -33,6 +33,16 @@ config ARM_SCMI_HAVE_SHMEM
 	help
 	  This declares whether a shared memory based transport for SCMI is
 	  available.
+
+config VIRTIO_SCMI
+	bool "Virtio transport for SCMI"
+	default n
+	depends on VIRTIO
+	help
+	  This enables the virtio based transport for SCMI.
+
+	  If you want to use the ARM SCMI protocol between the virtio guest and
+	  a host providing a virtio SCMI device, answer Y.
 
 config ARM_SCMI_POWER_DOMAIN
 	tristate "SCMI power domain driver"
