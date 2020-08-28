@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56090207_bed712c4",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-28T09:22:00Z",
+      "side": 1,
+      "message": "why is this being checked?  We can\u0027t export this as it should not be changed.",
+      "range": {
+        "startLine": 337,
+        "startChar": 2,
+        "endLine": 337,
+        "endChar": 13
+      },
+      "revId": "d96c0d66349f0ba9aa5257aa01f6ed122a1d7650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "065fe87c_44d22778",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 2
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-28T09:22:00Z",
+      "side": 1,
+      "message": "should not be needed for drivers.",
+      "range": {
+        "startLine": 558,
+        "startChar": 2,
+        "endLine": 558,
+        "endChar": 12
+      },
+      "revId": "d96c0d66349f0ba9aa5257aa01f6ed122a1d7650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70c2e5da_08597f2d",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 2
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-08-28T09:22:00Z",
+      "side": 1,
+      "message": "also should not be needed.",
+      "range": {
+        "startLine": 559,
+        "startChar": 0,
+        "endLine": 559,
+        "endChar": 11
+      },
+      "revId": "d96c0d66349f0ba9aa5257aa01f6ed122a1d7650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
