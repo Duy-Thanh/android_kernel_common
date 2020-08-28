@@ -33,6 +33,24 @@
       "revId": "007dd4c9829efda843af88040430b06d655ae171",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0ee989b_11688909",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-08-28T12:43:59Z",
+      "side": 1,
+      "message": "I checked the change from mailing list, but it seems not ready for use yet.\nOr I used it incorrectly.\nI submitted the change from mailing list and my hack here:\nhttps://android-review.googlesource.com/q/topic:%22hack-msm_geni%22+(status:open%20OR%20status:merged)\n\nI could not check if the earlycon is enabled as the serial console are all garbled messages, and the beginning of the kernel messages are missed.",
+      "parentUuid": "27c4c7c6_0f774fab",
+      "revId": "007dd4c9829efda843af88040430b06d655ae171",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
