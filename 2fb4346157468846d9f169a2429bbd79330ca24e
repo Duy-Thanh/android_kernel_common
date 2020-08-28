@@ -52,6 +52,24 @@
       "revId": "2fb4346157468846d9f169a2429bbd79330ca24e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d27fe727_ac07b1c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-08-28T19:47:03Z",
+      "side": 1,
+      "message": "Greg- android12-5.4 is still GKI 1.0. We don\u0027t need to optimize for size here. We do want to optimize for size in android-mainline and any new LTS derived from it. So this wouldn\u0027t be ok in android12-5.10 (GKI 2.0).",
+      "parentUuid": "619aa831_6e2cbe6c",
+      "revId": "2fb4346157468846d9f169a2429bbd79330ca24e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
