@@ -22,6 +22,30 @@
       "revId": "fc09e14df741d5ea8b3eee32fbdd8546d835a06e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78d5a987_793871d2",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1642820
+      },
+      "writtenOn": "2020-08-28T05:59:08Z",
+      "side": 1,
+      "message": "I wrote \u00271\u003c\u003c11\u0027 based on scsi/queue-5.9 from mainline and there is a different style to define quirks. 11, 0x2000 or whatever doesn\u0027t matter and it just need to distinguish among each other because ufshcd.c just uses the defined name, not 11 or 0x2000.\n\nIn the version of android11-5.4, the style like \u00270x2000\u0027 is used, so in here, using 0x2000 is right, I think.",
+      "parentUuid": "b91f924b_d100ce92",
+      "range": {
+        "startLine": 743,
+        "startChar": 49,
+        "endLine": 743,
+        "endChar": 55
+      },
+      "revId": "fc09e14df741d5ea8b3eee32fbdd8546d835a06e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
