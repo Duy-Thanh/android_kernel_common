@@ -964,7 +964,7 @@ config SERIAL_MSM_CONSOLE
 
 config SERIAL_MSM_GENI_EARLY_CONSOLE
 	bool "MSM on-chip GENI HW based early console support"
-	select SERIAL_MSM_GENI_HALF_SAMPLING
+	depends on QCOM_GENI_SE
 	help
 	  Serial early console driver for Qualcomm Technologies Inc's GENI
 	  based QUP hardware.

@@ -1530,7 +1530,7 @@
 			};
 
 			uart9: serial@a84000 {
-				compatible = "qcom,geni-debug-uart";
+				compatible = "qcom,msm-geni-console";
 				reg = <0 0x00a84000 0 0x4000>;
 				clock-names = "se";
 				clocks = <&gcc GCC_QUPV3_WRAP1_S1_CLK>;
