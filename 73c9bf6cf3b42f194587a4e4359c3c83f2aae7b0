@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6485e4ec_e5c0e4d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2020-08-28T19:43:15Z",
+      "side": 1,
+      "message": "Hi Greg, I checked with Todd - for android12-5.4 it is acceptable. Also two other low-level BT drivers (TI and QCT) are already there.",
+      "revId": "73c9bf6cf3b42f194587a4e4359c3c83f2aae7b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
