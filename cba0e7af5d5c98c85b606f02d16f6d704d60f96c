@@ -87,6 +87,23 @@
       "revId": "cba0e7af5d5c98c85b606f02d16f6d704d60f96c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e744b636_21dedd2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-08-31T13:11:33Z",
+      "side": 1,
+      "message": "Hi, Miles\n\nAlthough the sdcardfs is not supported by the android kernel, from the comment here, it seems you could compile the sdcardfs feature as a module without patch on the kernel tree, could you share how you implement that?\nFor now, to build the sdcardfs feature as a module and make it work with the gki kernel, I need to apply several patches[1] on the android-mainline kernel tree.\n\nIf we could build the sdcardfs as an external module, and no need to apply patches on to the android-mainline kernel, it would be great, not sure if you have done anything like that on your side, and could share something with it.\n\nThanks in advance!\n\n[1]: https://android-git.linaro.org/android-patchsets.git/tree/lkft-mainline-gki",
+      "revId": "cba0e7af5d5c98c85b606f02d16f6d704d60f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
