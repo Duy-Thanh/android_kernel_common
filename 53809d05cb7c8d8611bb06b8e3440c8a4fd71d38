@@ -16,6 +16,24 @@
       "revId": "53809d05cb7c8d8611bb06b8e3440c8a4fd71d38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba02c391_db849e8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2020-08-31T22:15:31Z",
+      "side": 1,
+      "message": "trusty-irq has its own compatible string and module_init/module_exit functions. So I think it makes sense for it to be a separate module.",
+      "parentUuid": "83df0f82_68392863",
+      "revId": "53809d05cb7c8d8611bb06b8e3440c8a4fd71d38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
