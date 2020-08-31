@@ -104,6 +104,24 @@
       "revId": "cba0e7af5d5c98c85b606f02d16f6d704d60f96c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84f44c39_a848933a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1248639
+      },
+      "writtenOn": "2020-08-31T15:41:46Z",
+      "side": 1,
+      "message": "Hi YongQing,\n\nI did not build sdcarfs feature as a module.\n\nI was trying to build one of our internal driver with android-mainline tree and I found that vfs_read() is not a export symbol in the android-main tree.",
+      "parentUuid": "e744b636_21dedd2e",
+      "revId": "cba0e7af5d5c98c85b606f02d16f6d704d60f96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
