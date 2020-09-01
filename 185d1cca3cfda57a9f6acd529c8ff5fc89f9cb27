@@ -16,6 +16,29 @@
       "revId": "185d1cca3cfda57a9f6acd529c8ff5fc89f9cb27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da741b3d_660d741f",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5705,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-01T08:05:49Z",
+      "side": 1,
+      "message": "why this change?  That\u0027s not what is upstream.\n\nWhy not add all missing features if this is needed, that way the api is known to be correct with future kernel releases?\n\nAlso, what code is using this, it should require some core wireless changes too, right?",
+      "range": {
+        "startLine": 5705,
+        "startChar": 50,
+        "endLine": 5705,
+        "endChar": 54
+      },
+      "revId": "185d1cca3cfda57a9f6acd529c8ff5fc89f9cb27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
