@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "b5172c48_7d323c5d",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 3
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-01T14:12:20Z",
+      "side": 1,
+      "message": "It depends on the specific driver, no individual driver should ever be opening or closing a file from the filesystem directly, right?  Use the user/kernel apis that the driver\u0027s \"class\" supports (input, serial, block, camera, graphics, etc.) instead.",
+      "parentUuid": "953d4276_c3d5c5e8",
+      "range": {
+        "startLine": 557,
+        "startChar": 2,
+        "endLine": 557,
+        "endChar": 12
+      },
+      "revId": "3e72f5cd9c00c62b289e23d32a16481cd61b2dab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1ae690a0_29451e55",
         "filename": "android/abi_gki_aarch64_galaxy",
         "patchSetId": 3
