@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "11f692d7_73bbc9db",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 2
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1635667
+      },
+      "writtenOn": "2020-09-01T10:19:00Z",
+      "side": 1,
+      "message": "Many modules are using filp_open and filp_close, can not remove it in modules due to schedule\n\nCould you allow these symbols on Android 11(kernel 5.4)?\nWe will remove it on android 12.\n\nAnd if you know any symbols that not allow using in kernel modules please let me know.",
+      "parentUuid": "065fe87c_44d22778",
+      "range": {
+        "startLine": 558,
+        "startChar": 2,
+        "endLine": 558,
+        "endChar": 12
+      },
+      "revId": "d96c0d66349f0ba9aa5257aa01f6ed122a1d7650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70c2e5da_08597f2d",
         "filename": "android/abi_gki_aarch64_galaxy",
         "patchSetId": 2
