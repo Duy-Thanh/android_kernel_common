@@ -39,8 +39,6 @@ static int qcom_cpufreq_hw_target_index(struct cpufreq_policy *policy,
 
 	writel_relaxed(index, perf_state_reg);
 
-	arch_set_freq_scale(policy->related_cpus, freq,
-			    policy->cpuinfo.max_freq);
 	return 0;
 }
 
@@ -66,8 +64,7 @@ static unsigned int qcom_cpufreq_hw_fast_switch(struct cpufreq_policy *policy,
 						unsigned int target_freq)
 {
 	void __iomem *perf_state_reg = policy->driver_data;
-	int index;
-	unsigned long freq;
+	unsigned int index;
 
 	index = policy->cached_resolved_idx;
 	if (index < 0)
@@ -75,11 +72,7 @@ static unsigned int qcom_cpufreq_hw_fast_switch(struct cpufreq_policy *policy,
 
 	writel_relaxed(index, perf_state_reg);
 
-	freq = policy->freq_table[index].frequency;
-	arch_set_freq_scale(policy->related_cpus, freq,
-			    policy->cpuinfo.max_freq);
-
-	return freq;
+	return policy->freq_table[index].frequency;
 }
 
 static int qcom_cpufreq_hw_read_lut(struct device *cpu_dev,
