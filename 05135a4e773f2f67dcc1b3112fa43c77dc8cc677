@@ -1,0 +1,25 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004719112",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1413339?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "1dc24cbb_c8629bbf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-09-01T10:46:08Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: shuosheng huang \u003chuangshuosheng@allwinnertech.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 329316375 android-build.ayeaye-python-dispatcher_20200831.05_p0",
+      "revId": "05135a4e773f2f67dcc1b3112fa43c77dc8cc677",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
