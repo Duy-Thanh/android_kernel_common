@@ -134,6 +134,29 @@
       "revId": "3e72f5cd9c00c62b289e23d32a16481cd61b2dab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b38b2001_3eff8100",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 3
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-01T16:49:54Z",
+      "side": 1,
+      "message": "be careful with these functions, they have been proven to not be really random, and you should not use these for anything that should not be determined by a user.",
+      "range": {
+        "startLine": 1111,
+        "startChar": 2,
+        "endLine": 1112,
+        "endChar": 13
+      },
+      "revId": "3e72f5cd9c00c62b289e23d32a16481cd61b2dab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
