@@ -16,6 +16,23 @@
       "revId": "0d51b40a690f3157162db54d88969f8d8ddf49d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c48f018e_1e6e38ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-02T14:29:36Z",
+      "side": 1,
+      "message": "This is failing in an odd way, you are asking for symbols to be exported, that are not in our kernel builds at all.\n\nFor example, since debugfs is not enabled, there are no debugfs symbols to be able to be added to the symbol list.\n\nHere is the full error that is being reported, please fix up your symbol list and try again:\n\n```\nSymbols missing from ksymtab:\n - __raw_spin_lock_init\n - debug_check_no_locks_held\n - debugfs_create_bool\n - debugfs_create_dir\n - debugfs_create_file\n - debugfs_create_regset32\n - debugfs_create_symlink\n - debugfs_create_u32\n - debugfs_create_x32\n - debugfs_remove\n - debugfs_remove_recursive\n - destroy_hrtimer_on_stack\n - destroy_timer_on_stack\n - hrtimer_init_on_stack\n - ieee80211_channel_to_frequency\n - ieee80211_frequency_to_channel\n - ieee80211_get_channel\n - lock_acquire\n - lock_is_held_type\n - lock_release\n - lockdep_init_map\n - mutex_destroy\n - mutex_lock_interruptible_nested\n - mutex_lock_nested\n - rcu_bh_lock_map\n - rcu_lock_map\n - rcu_read_lock_bh_held\n - rcu_read_lock_held\n```",
+      "revId": "0d51b40a690f3157162db54d88969f8d8ddf49d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
