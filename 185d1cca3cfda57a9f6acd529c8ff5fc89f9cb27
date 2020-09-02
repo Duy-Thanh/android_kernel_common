@@ -63,6 +63,30 @@
       "revId": "185d1cca3cfda57a9f6acd529c8ff5fc89f9cb27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4667397_6148542a",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5705,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-02T18:30:28Z",
+      "side": 1,
+      "message": "\"BACKPORT:\" means that it IS the upstream patch, backported to the release. Since so many patches are missing that affect this one, this is very different from the upstream version and it would be better to relabel the patch \"ANDROID:\". Please indicate the heritage in the commit message and include all of the missing enums instead of using \"\u003d50\". Make it clear in the commit message that all of the changes are consistent with the upstream definition.\n\nAlso, the commit message should mention the consumer of this (I assume in your case this is vendor code). For UAPI changes, we want explicit statements that this does not affect android platform code -- only vendor code.",
+      "parentUuid": "7a58ad71_056f7214",
+      "range": {
+        "startLine": 5705,
+        "startChar": 50,
+        "endLine": 5705,
+        "endChar": 54
+      },
+      "revId": "185d1cca3cfda57a9f6acd529c8ff5fc89f9cb27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
