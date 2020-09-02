@@ -1,0 +1,52 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004746507",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1417531?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e5434bce_ef6332e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-09-02T15:54:24Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Todd Kjos \u003ctkjos@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 329523597 android-build.ayeaye-python-dispatcher_20200901.05_p0",
+      "revId": "054b210d8164b31a6dd38fc5384bfd758a50e3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004746510",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1417531?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "95d06958_efc96ebd",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 73191,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-09-02T15:54:24Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details.",
+      "range": {
+        "startLine": 73191,
+        "startChar": 26,
+        "endLine": 73191,
+        "endChar": 31
+      },
+      "revId": "054b210d8164b31a6dd38fc5384bfd758a50e3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
