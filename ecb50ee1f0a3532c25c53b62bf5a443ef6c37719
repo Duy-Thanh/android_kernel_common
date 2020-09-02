@@ -1,0 +1,187 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004743179",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1413336?revision\u003d6",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "9383d1c2_13abf389",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-09-02T10:34:41Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Greg Kroah-Hartman \u003cgregkh@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 329523597 android-build.ayeaye-python-dispatcher_20200901.05_p0",
+      "revId": "ecb50ee1f0a3532c25c53b62bf5a443ef6c37719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004743177",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1413336?revision\u003d6",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e2b599da_3ac155fc",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-09-02T10:34:41Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027deny list\u0027 or \u0027allow list\u0027; see https://developers.google.com/style/word-list#blacklist for more details.",
+      "range": {
+        "startLine": 1,
+        "startChar": 5,
+        "endLine": 1,
+        "endChar": 14
+      },
+      "revId": "ecb50ee1f0a3532c25c53b62bf5a443ef6c37719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004743177",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1413336?revision\u003d6",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "94239395_5ae1bf14",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 6
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-09-02T10:34:41Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 510,
+        "startChar": 10,
+        "endLine": 510,
+        "endChar": 15
+      },
+      "revId": "ecb50ee1f0a3532c25c53b62bf5a443ef6c37719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004743177",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1413336?revision\u003d6",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "fcbdea5b_012f63e4",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 6
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-09-02T10:34:41Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 511,
+        "startChar": 10,
+        "endLine": 511,
+        "endChar": 15
+      },
+      "revId": "ecb50ee1f0a3532c25c53b62bf5a443ef6c37719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004743177",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1413336?revision\u003d6",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "0cb87b35_3f017941",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 6
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-09-02T10:34:41Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 520,
+        "startChar": 14,
+        "endLine": 520,
+        "endChar": 19
+      },
+      "revId": "ecb50ee1f0a3532c25c53b62bf5a443ef6c37719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004743177",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1413336?revision\u003d6",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "71bf5556_7a24c9c8",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 6
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-09-02T10:34:41Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 1033,
+        "startChar": 10,
+        "endLine": 1033,
+        "endChar": 16
+      },
+      "revId": "ecb50ee1f0a3532c25c53b62bf5a443ef6c37719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004743177",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1413336?revision\u003d6",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "a1128a8a_6facaf50",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 6
+      },
+      "lineNbr": 1334,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-09-02T10:34:41Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 1334,
+        "startChar": 28,
+        "endLine": 1334,
+        "endChar": 33
+      },
+      "revId": "ecb50ee1f0a3532c25c53b62bf5a443ef6c37719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
