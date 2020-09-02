@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1e057cb_31a03124",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-02T10:32:49Z",
+      "side": 1,
+      "message": "Lint is wrong here, the abi has not changed.",
+      "revId": "eebbc84b46b77493bbabc83d409e83c787dec073",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
