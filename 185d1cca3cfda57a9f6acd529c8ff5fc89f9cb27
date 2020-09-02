@@ -39,6 +39,30 @@
       "revId": "185d1cca3cfda57a9f6acd529c8ff5fc89f9cb27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a58ad71_056f7214",
+        "filename": "include/uapi/linux/nl80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5705,
+      "author": {
+        "id": 1711342
+      },
+      "writtenOn": "2020-09-02T18:04:27Z",
+      "side": 1,
+      "message": "This is change is to make sure NL80211_EXT_FEATURE_OPERATING_CHANNEL_VALIDATION is assigned with exact value as that of upstream so that there won\u0027t be any issue with userspace components that use latest uapi files.\n\nI have initially tried to bring in all commits that are required to pull all missing NL80211_EXT_FEATURE_* flags in between. But some of the commits are giving conflicts. In order to resolve them I tried picking dependent commits also but the dependency chain is growing and overall the code churn increased. \n\nAs this is the only feature that is required for new Wi-FI security feature \"Operating channel validation\", I thought of pulling in this change alone by assigning the exact value as that of upstream code. This commit is to indicate whether the Wi-Fi firmware/driver is supporting this feature or not. This feature flag will be used in wpa_supplicant project in userspace.\n\nCould you please suggest a way further here to get this change merged? Can I add all missing NL80211_EXT_FEATURE_* flags in this commit itself, something like below?\n\ndiff --git a/include/uapi/linux/nl80211.h b/include/uapi/linux/nl80211.h\nindex 05e7a41..cefee29 100644\n--- a/include/uapi/linux/nl80211.h\n+++ b/include/uapi/linux/nl80211.h\n@@ -5699,6 +5699,13 @@ enum nl80211_ext_feature_index {\n        NL80211_EXT_FEATURE_AQL,\n        NL80211_EXT_FEATURE_BEACON_PROTECTION,\n        NL80211_EXT_FEATURE_CONTROL_PORT_NO_PREAUTH,\n+       NL80211_EXT_FEATURE_PROTECTED_TWT,\n+       NL80211_EXT_FEATURE_DEL_IBSS_STA,\n+       NL80211_EXT_FEATURE_MULTICAST_REGISTRATIONS,\n+       NL80211_EXT_FEATURE_BEACON_PROTECTION_CLIENT,\n+       NL80211_EXT_FEATURE_SCAN_FREQ_KHZ,\n+       NL80211_EXT_FEATURE_CONTROL_PORT_OVER_NL80211_TX_STATUS,\n+       NL80211_EXT_FEATURE_OPERATING_CHANNEL_VALIDATION,\n \n        /* add new features before the definition below */\n        NUM_NL80211_EXT_FEATURES,",
+      "parentUuid": "da741b3d_660d741f",
+      "range": {
+        "startLine": 5705,
+        "startChar": 50,
+        "endLine": 5705,
+        "endChar": 54
+      },
+      "revId": "185d1cca3cfda57a9f6acd529c8ff5fc89f9cb27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
