@@ -16,6 +16,24 @@
       "revId": "9cbe454692aba44f9d6e01906145167458e7018b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8fd52f7_000796f9",
+        "filename": "drivers/trusty/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2020-09-03T01:31:06Z",
+      "side": 1,
+      "message": "Good point. I don\u0027t know the cause of the dependency. Let me check (or ask someone to check) if there is a problem w.r.t load order on real environments.",
+      "parentUuid": "7bee0c79_87b945a4",
+      "revId": "9cbe454692aba44f9d6e01906145167458e7018b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
