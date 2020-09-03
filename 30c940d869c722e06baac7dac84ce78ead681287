@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c1adc1c_1ac7cd4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-03T16:34:05Z",
+      "side": 1,
+      "message": "Breaks KMI. Needs to wait until a KMI change can be accepted.",
+      "revId": "30c940d869c722e06baac7dac84ce78ead681287",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
