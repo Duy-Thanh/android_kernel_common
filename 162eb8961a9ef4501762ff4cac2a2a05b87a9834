@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0024b2d3_8d0abcf5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-03T22:56:04Z",
+      "side": 1,
+      "message": "Please update as \"FROMGIT\" once they land in a maintainer tree upstream. I notice that Greg was having trouble applying this patchset, so please work with him to land it in his tree and then we can land it here.",
+      "revId": "162eb8961a9ef4501762ff4cac2a2a05b87a9834",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
