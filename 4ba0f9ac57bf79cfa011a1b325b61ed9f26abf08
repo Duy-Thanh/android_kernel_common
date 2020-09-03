@@ -16,6 +16,24 @@
       "revId": "4ba0f9ac57bf79cfa011a1b325b61ed9f26abf08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c34781f_48a49622",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1635667
+      },
+      "writtenOn": "2020-09-03T10:57:51Z",
+      "side": 1,
+      "message": "Symbol name has been changed by ac2e6c2e7e42e in android11-5.4\nBut not changed in our BSP yet\n\nRemoved it",
+      "parentUuid": "7e5bb8f7_ad7d37ca",
+      "revId": "4ba0f9ac57bf79cfa011a1b325b61ed9f26abf08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
