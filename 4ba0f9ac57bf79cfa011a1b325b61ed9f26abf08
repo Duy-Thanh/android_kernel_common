@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e5bb8f7_ad7d37ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-03T09:38:22Z",
+      "side": 1,
+      "message": "this is still failing to build:\n\nSymbols missing from ksymtab:\n - ieee80211_channel_to_frequency\n - ieee80211_frequency_to_channel\n - ieee80211_get_channel\n\nThese functions are not part of the gki build for arm64 kernels.  If you are relying on those symbols, please submit a patch to change the kernel configuration to add them, as that must be what you are doing already in order to be able to generate this symbol list, correct?",
+      "revId": "4ba0f9ac57bf79cfa011a1b325b61ed9f26abf08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
