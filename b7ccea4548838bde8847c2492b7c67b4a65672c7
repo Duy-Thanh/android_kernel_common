@@ -22,6 +22,30 @@
       "revId": "b7ccea4548838bde8847c2492b7c67b4a65672c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39462f11_931ae436",
+        "filename": "drivers/irqchip/qcom-pdc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-09-03T02:56:12Z",
+      "side": 1,
+      "message": "Yea, as the conversions were reverted, I figured I\u0027d just get android-mainline back in line with what it had previously.\n\nI know Marc is working on a redo of the conversion series to address the built-in case better, so hopefully it will be back upstream in the next merge window.\n\nThough let me know if you would rather it be switched to your macro version, and I\u0027ll do that.",
+      "parentUuid": "e7a44c55_45352919",
+      "range": {
+        "startLine": 552,
+        "startChar": 14,
+        "endLine": 552,
+        "endChar": 15
+      },
+      "revId": "b7ccea4548838bde8847c2492b7c67b4a65672c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
