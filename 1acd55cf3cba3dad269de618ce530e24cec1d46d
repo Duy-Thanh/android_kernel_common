@@ -33,6 +33,23 @@
       "revId": "1acd55cf3cba3dad269de618ce530e24cec1d46d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "673e230f_d3334aa5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2020-09-03T11:14:58Z",
+      "side": 1,
+      "message": "please check below url also,\nWhen I change abi_gki_aarch64_exynos and build with \"build_abi.sh\", then abi change (including CRC) happened.\n\n\nhttps://partnerissuetracker.corp.google.com/issues/167650864",
+      "revId": "1acd55cf3cba3dad269de618ce530e24cec1d46d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
