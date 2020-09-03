@@ -50,6 +50,24 @@
       "revId": "1acd55cf3cba3dad269de618ce530e24cec1d46d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f04b9643_9a356d93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-03T11:27:33Z",
+      "side": 1,
+      "message": "This is a current bug in the build infrastructure, the commit looks fine as-is, you didn\u0027t do anything wrong.  Waiting for some more reviewers before merging, should happen later today...",
+      "parentUuid": "673e230f_d3334aa5",
+      "revId": "1acd55cf3cba3dad269de618ce530e24cec1d46d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
