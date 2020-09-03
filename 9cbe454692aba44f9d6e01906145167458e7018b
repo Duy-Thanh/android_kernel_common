@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7bee0c79_87b945a4",
+        "filename": "drivers/trusty/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-03T00:03:37Z",
+      "side": 1,
+      "message": "Note that changing the Kconfig doesn\u0027t affect the module load order.  What is the reason that these two modules need to be loaded in a particular order?",
+      "revId": "9cbe454692aba44f9d6e01906145167458e7018b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
