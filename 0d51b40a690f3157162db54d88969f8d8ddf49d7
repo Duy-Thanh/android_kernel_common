@@ -33,6 +33,24 @@
       "revId": "0d51b40a690f3157162db54d88969f8d8ddf49d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e45fa214_887ae08d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1635667
+      },
+      "writtenOn": "2020-09-03T02:09:44Z",
+      "side": 1,
+      "message": "removed a debug relate symbols\n\nbut this symbols.. many wireless devices are using it in ACK\n - ieee80211_channel_to_frequency\n - ieee80211_frequency_to_channel\n - ieee80211_get_channel\n\nCan I keep it in symbol list?",
+      "parentUuid": "c48f018e_1e6e38ad",
+      "revId": "0d51b40a690f3157162db54d88969f8d8ddf49d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
