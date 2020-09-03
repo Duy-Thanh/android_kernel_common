@@ -16,6 +16,23 @@
       "revId": "1acd55cf3cba3dad269de618ce530e24cec1d46d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e5086b07_95ec90bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2020-09-03T11:13:47Z",
+      "side": 1,
+      "message": "Hello, Lint give me -1 score for this patch.\nThis patch including \"abi_gki_aarch64.xml\" file fix.\n\nDo I have to remove it and only fix abi_gki_aarch64_exynos here?",
+      "revId": "1acd55cf3cba3dad269de618ce530e24cec1d46d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
