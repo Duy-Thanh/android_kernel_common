@@ -52,4 +52,17 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_finished);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_rwsem_list_add);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_futex_plist_add);
+<<<<<<< HEAD   (b63f9e ANDROID: GKI: rename symbol list section)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ipi_stop);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_wait_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_wait_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_show_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_idle);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mpam_set);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_find_busiest_group);
+>>>>>>> CHANGE (a2ca84 ANDROID: sched: add restrict vendor hook to modify load bala)
