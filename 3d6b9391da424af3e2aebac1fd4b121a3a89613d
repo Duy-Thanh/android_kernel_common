@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9bf43f3c_f4e5b130",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-03T14:29:53Z",
+      "side": 1,
+      "message": "Let\u0027s try a simpler thing to start with, a symbol list with no added symbols to the .xml file.\n\nThat way we get the initial huge list merged, and then you can submit additions for anything remaining that is missed.",
+      "revId": "3d6b9391da424af3e2aebac1fd4b121a3a89613d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
