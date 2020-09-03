@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7a44c55_45352919",
+        "filename": "drivers/irqchip/qcom-pdc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-09-03T02:43:24Z",
+      "side": 1,
+      "message": "My macro helpers landed upstream. You could use those and drop all of this to 3 lines if you want.\n\nI had also changed this driver and MTK drivers to be platform drivers. But looks like some MTK boards had issues so all the platform driver conversions were reverted.\n\nSo you could do something like 5be57099d44550d2c4cf44a86c44df87edb79a57 if you want. Not a strong opinion though.",
+      "range": {
+        "startLine": 552,
+        "startChar": 14,
+        "endLine": 552,
+        "endChar": 15
+      },
+      "revId": "b7ccea4548838bde8847c2492b7c67b4a65672c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
