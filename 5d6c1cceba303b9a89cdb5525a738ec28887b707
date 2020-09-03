@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6545c218_e3d47793",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-03T15:40:50Z",
+      "side": 1,
+      "message": "Very curious how this ever worked!  Is trusty not actually tested on arm32 yet?",
+      "range": {
+        "startLine": 345,
+        "startChar": 29,
+        "endLine": 345,
+        "endChar": 51
+      },
+      "revId": "5d6c1cceba303b9a89cdb5525a738ec28887b707",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
