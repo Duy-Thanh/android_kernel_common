@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "92fa9e5b_6df86f46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2020-09-03T10:03:04Z",
+      "side": 1,
+      "message": "Please check abi xml.\nAdding only 2 APIs (one is duplicated with other vendors) but CRC change happened.\n\nIf only symbol list update is possible, I\u0027ll change this patch.\n\nThanks.",
+      "revId": "1acd55cf3cba3dad269de618ce530e24cec1d46d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
