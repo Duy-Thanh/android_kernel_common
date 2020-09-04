@@ -20,6 +20,8 @@
 #include <linux/vmalloc.h>
 #include <asm/page.h>
 
+#include <trace/hooks/debug.h>
+
 /**
  * struct persistent_ram_buffer - persistent circular RAM buffer
  *
@@ -286,6 +288,7 @@ static int notrace persistent_ram_update_user(struct persistent_ram_zone *prz,
 	int ret = unlikely(__copy_from_user(buffer->data + start, s, count)) ?
 		-EFAULT : 0;
 	persistent_ram_update_ecc(prz, start, count);
+	trace_android_vh_pmsg_write_user(buffer->data + start, count);
 	return ret;
 }
 

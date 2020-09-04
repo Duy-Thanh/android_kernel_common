@@ -15,8 +15,13 @@
 DECLARE_HOOK(android_vh_ipi_stop,
 	TP_PROTO(struct pt_regs *regs),
 	TP_ARGS(regs))
+
+DECLARE_HOOK(android_vh_pmsg_write_user,
+	TP_PROTO(char *buf, size_t count),
+	TP_ARGS(buf, count))
 #else
 #define trace_android_vh_ipi_stop(regs)
+#define trace_android_vh_pmsg_write_user(buf, count)
 #endif
 
 #endif /* _TRACE_HOOK_DEBUG_H */
