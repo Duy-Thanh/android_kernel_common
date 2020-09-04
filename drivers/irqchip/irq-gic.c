@@ -301,8 +301,11 @@ static int gic_set_type(struct irq_data *d, unsigned int type)
 	int ret;
 
 	/* Interrupt configuration for SGIs can't be changed */
-	if (gicirq < 16)
+	if (gicirq < 16) {
+		if (type == IRQ_TYPE_EDGE_RISING)
+			return 0;
 		return -EINVAL;
+	}
 
 	/* SPIs have restrictions on the supported types */
 	if (gicirq >= 32 && type != IRQ_TYPE_LEVEL_HIGH &&
@@ -1045,6 +1048,9 @@ static int gic_irq_domain_translate(struct irq_domain *d,
 			break;
 		case 1:			/* PPI */
 			*hwirq = fwspec->param[1] + 16;
+			break;
+		case 4:			/* SGI */
+			*hwirq = fwspec->param[1];
 			break;
 		default:
 			return -EINVAL;

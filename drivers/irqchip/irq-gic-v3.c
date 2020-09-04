@@ -555,8 +555,11 @@ static int gic_set_type(struct irq_data *d, unsigned int type)
 	int ret;
 
 	/* Interrupt configuration for SGIs can't be changed */
-	if (irq < 16)
+	if (irq < 16) {
+		if (type == IRQ_TYPE_EDGE_RISING)
+			return 0;
 		return -EINVAL;
+	}
 
 	range = get_intid_range(d);
 
@@ -1352,6 +1355,9 @@ static int gic_irq_domain_translate(struct irq_domain *d,
 			break;
 		case 3:			/* EPPI */
 			*hwirq = fwspec->param[1] + EPPI_BASE_INTID;
+			break;
+		case 4:			/* SGI */
+			*hwirq = fwspec->param[1];
 			break;
 		case GIC_IRQ_TYPE_LPI:	/* LPI */
 			*hwirq = fwspec->param[1];
