@@ -19,9 +19,14 @@ DECLARE_HOOK(android_vh_ipi_stop,
 DECLARE_HOOK(android_vh_pmsg_write_user,
 	TP_PROTO(char *buf, size_t count),
 	TP_ARGS(buf, count))
+
+DECLARE_HOOK(android_vh_printk_store,
+	TP_PROTO(int facility, int level),
+	TP_ARGS(facility, level))
 #else
 #define trace_android_vh_ipi_stop(regs)
 #define trace_android_vh_pmsg_write_user(buf, count)
+#define trace_android_vh_printk_store(facility, level)
 #endif
 
 #endif /* _TRACE_HOOK_DEBUG_H */
