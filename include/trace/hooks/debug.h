@@ -22,8 +22,13 @@ DECLARE_HOOK(android_vh_input_handle_event,
 	TP_PROTO(struct input_dev *dev, unsigned int type,
 		unsigned int code, int value),
 	TP_ARGS(dev, type, code, value))
+
+DECLARE_HOOK(android_vh_printk_store,
+	TP_PROTO(int facility, int level),
+	TP_ARGS(facility, level))
 #else
 #define trace_android_vh_ipi_stop(regs)
+#define trace_android_vh_printk_store(facility, level)
 #define trace_android_vh_input_handle_event(dev, type, code, value)
 #endif
 

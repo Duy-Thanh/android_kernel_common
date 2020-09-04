@@ -2007,6 +2007,7 @@ asmlinkage int vprintk_emit(int facility, int level,
 	pending_output = (curr_log_seq != log_next_seq);
 	logbuf_unlock_irqrestore(flags);
 
+	trace_android_vh_printk_store(facility, level);
 	/* If called from the scheduler, we can not call up(). */
 	if (!in_sched && pending_output) {
 		/*
