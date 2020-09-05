@@ -7,7 +7,9 @@
  *  will override the DECLARE_RESTRICTED_HOOK and break the second include.
  */
 
+#ifndef __GENKSYMS__
 #include <linux/tracepoint.h>
+#endif
 
 #define DECLARE_HOOK DECLARE_TRACE
 
