@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c1601c4_f8195e1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-08T07:34:10Z",
+      "side": 1,
+      "message": "We need a bug number for this series (odd Lint didn\u0027t catch that), but also, this causes an ABI breakage, right?  If so, it will have to wait until the next sync when we are allowed to change the abi signatures.\n\nAlso, this should go into the android12-5.4 branch as well, right?",
+      "revId": "f8636b9ccb2d639aa2ff4d7ae252c42774b30745",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
