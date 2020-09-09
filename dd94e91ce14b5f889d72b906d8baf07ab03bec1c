@@ -52,6 +52,24 @@
       "revId": "dd94e91ce14b5f889d72b906d8baf07ab03bec1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3049787a_b485fe6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-09T16:37:48Z",
+      "side": 1,
+      "message": "Yes, that works, but you forgot to check in the .xml file change that the above command should have modified, which adds the new symbol to the .xml list.\n\nThat\u0027s all I did here, your build did fail with a \"ABI changed\", but it is at a \"warning\" level at the moment and does not keep the commits from being merged.",
+      "parentUuid": "e104328d_6d5b9046",
+      "revId": "dd94e91ce14b5f889d72b906d8baf07ab03bec1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
