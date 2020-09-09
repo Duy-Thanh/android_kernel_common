@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0fee8653_c905240e",
+        "filename": "kernel/printk/printk.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2010,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-09T19:28:52Z",
+      "side": 1,
+      "message": "Is facility and level all you need to do what you describe in the log:\n\n\"But the log has saved structure type in log_buf.\nSo we want to collect the log on runtime to string format at other\nreserved memory.\"\n\nCan you add to the commit message or with comments here how the facility and level allow you to collect the log. Presumably the common case is facility\u003dLOG_KERN -- is this hook going to copy the whole kernel log every time vprintk_emit() is called?",
+      "revId": "49fbe5b4714fefb59ccdc081af6e432c7970a961",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
