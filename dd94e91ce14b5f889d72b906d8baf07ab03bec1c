@@ -34,6 +34,24 @@
       "revId": "dd94e91ce14b5f889d72b906d8baf07ab03bec1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e104328d_6d5b9046",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-09-09T12:31:43Z",
+      "side": 1,
+      "message": "\u003e I rebuilt the abi .xml file by using the build/build_abi.sh script in the kernel repo.\n\nso it is the same as what I did before?\nBUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build_abi.sh --update --print-report\n\nAnd are there any build broken or any test failed because that idr_alloc_u32 is not added in abi_gki_aarch64.xml?\nask here just want to know how to check if the abi_gki_aarch64.xml file should be updated, and avoid missing the update next time.",
+      "parentUuid": "cba91c20_84020af7",
+      "revId": "dd94e91ce14b5f889d72b906d8baf07ab03bec1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
