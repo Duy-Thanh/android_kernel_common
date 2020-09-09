@@ -16,6 +16,24 @@
       "revId": "446588f9b481b8987942321f7a6681125a69082b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "876cc724_70e86adb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1595743
+      },
+      "writtenOn": "2020-09-09T17:01:20Z",
+      "side": 1,
+      "message": "Can you please explain more? Adding changes to allowed ABI list is not accepted in android11-5.4 now?",
+      "parentUuid": "77cecfff_6ec2eaae",
+      "revId": "446588f9b481b8987942321f7a6681125a69082b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
