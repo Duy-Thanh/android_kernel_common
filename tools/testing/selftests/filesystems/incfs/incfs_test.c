@@ -212,6 +212,17 @@ static char *get_index_filename(const char *mnt_dir, incfs_uuid_t id)
 	return strdup(path);
 }
 
+static char *get_incomplete_filename(const char *mnt_dir, incfs_uuid_t id)
+{
+	char path[FILENAME_MAX];
+	char str_id[1 + 2 * sizeof(id)];
+
+	bin2hex(str_id, id.bytes, sizeof(id.bytes));
+	snprintf(path, ARRAY_SIZE(path), "%s/.incomplete/%s", mnt_dir, str_id);
+
+	return strdup(path);
+}
+
 int open_file_by_id(const char *mnt_dir, incfs_uuid_t id, bool use_ioctl)
 {
 	char *path = get_index_filename(mnt_dir, id);
@@ -972,6 +983,7 @@ static bool iterate_directory(const char *dir_to_iterate, bool root,
 		{INCFS_PENDING_READS_FILENAME, true, false},
 		{INCFS_BLOCKS_WRITTEN_FILENAME, true, false},
 		{".index", true, false},
+		{".incomplete", true, false},
 		{"..", false, false},
 		{".", false, false},
 	};
@@ -3100,8 +3112,11 @@ static int validate_block_count(const char *mount_dir, const char *backing_dir,
 				struct test_file *file)
 {
 	int block_cnt = 1 + (file->size - 1) / INCFS_DATA_FILE_BLOCK_SIZE;
+	struct stat stat_buf_incomplete, stat_buf_file;
 	char *filename = concat_file_name(mount_dir, file->name);
 	char *backing_filename = concat_file_name(backing_dir, file->name);
+	char *incomplete_filename = get_incomplete_filename(mount_dir,
+							    file->id);
 	int fd;
 	struct incfs_get_block_count_args bca = {};
 	int test_result = TEST_FAILURE;
@@ -3114,6 +3129,20 @@ static int validate_block_count(const char *mount_dir, const char *backing_dir,
 	};
 	int cmd_fd = -1;
 	struct incfs_permit_fill permit_fill;
+
+	result = stat(incomplete_filename, &stat_buf_incomplete);
+	if (result)
+		goto out;
+
+	result = stat(filename, &stat_buf_file);
+	if (result)
+		goto out;
+
+	if (stat_buf_file.st_ino != stat_buf_incomplete.st_ino)
+		goto out;
+
+	if (stat_buf_file.st_nlink != 3)
+		goto out;
 
 	fd = open(filename, O_RDONLY | O_CLOEXEC);
 	if (fd <= 0)
@@ -3187,12 +3216,22 @@ static int validate_block_count(const char *mount_dir, const char *backing_dir,
 	    bca.filled_blocks_out != (block_cnt + 1) / 2)
 		goto out;
 
+
+	for (i = 1; i < block_cnt; i += 2)
+		if (emit_test_block(mount_dir, file, i))
+			goto out;
+
+	result = stat(incomplete_filename, &stat_buf_incomplete);
+	if (!result || errno != ENOENT)
+		goto out;
+
 	test_result = TEST_SUCCESS;
 out:
 	free(backing_filename);
 	close(cmd_fd);
 	free(filename);
 	close(fd);
+	free(incomplete_filename);
 	return test_result;
 }
 
