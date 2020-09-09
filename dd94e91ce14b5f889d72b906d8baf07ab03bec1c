@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35fc1c26_8e494540",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-09-09T12:06:14Z",
+      "side": 1,
+      "message": "Hi, Greg\n\nJust curious which build would be broken without this change?\nI tested the db845c build with the gki kernel(with the build.config.gki.aarch64 config),\nand no boot problems reported.\n\nBTW, I also tried with following commands to update the abi xml:\n$ ./build/abi/bootstrap\n\u003cfollow instructions for adding needed path variables\u003e\n$ BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build_abi.sh --update --print-report\n\nbut not get changes as clean you submitted here, could you please share the instructions you did for this change?",
+      "revId": "dd94e91ce14b5f889d72b906d8baf07ab03bec1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
