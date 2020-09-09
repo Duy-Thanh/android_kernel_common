@@ -59,12 +59,7 @@ struct page;
 
 extern struct cma *dma_contiguous_default_area;
 
-static inline struct cma *dev_get_cma_area(struct device *dev)
-{
-	if (dev && dev->cma_area)
-		return dev->cma_area;
-	return dma_contiguous_default_area;
-}
+struct cma *dev_get_cma_area(struct device *dev);
 
 static inline void dev_set_cma_area(struct device *dev, struct cma *cma)
 {

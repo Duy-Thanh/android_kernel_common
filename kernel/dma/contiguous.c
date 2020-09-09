@@ -178,6 +178,14 @@ int __init dma_contiguous_reserve_area(phys_addr_t size, phys_addr_t base,
 	return 0;
 }
 
+struct cma *dev_get_cma_area(struct device *dev)
+{
+	if (dev && dev->cma_area)
+		return dev->cma_area;
+	return dma_contiguous_default_area;
+}
+EXPORT_SYMBOL_GPL(dev_get_cma_area);
+
 /**
  * dma_alloc_from_contiguous() - allocate pages from contiguous area
  * @dev:   Pointer to device for which the allocation is performed.
