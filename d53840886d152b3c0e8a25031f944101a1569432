@@ -16,6 +16,41 @@
       "revId": "d53840886d152b3c0e8a25031f944101a1569432",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "adf01dcf_b73c5850",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-09-09T08:29:58Z",
+      "side": 1,
+      "message": "The cma_heap.ko is not loaded by default if not put it in the ramdisk.img,\nWith putting it in the ramdisk.img, I could see the homescreen on the hdmi monitor now,\nconsole:/ # lsmod |grep cma                                                                          \nion_cma_heap           20480  0                                                                      \ncma_heap               16384  0 [permanent]                                                          \nconsole:/ #",
+      "parentUuid": "e48de52b_034520f6",
+      "revId": "d53840886d152b3c0e8a25031f944101a1569432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b6bbbc8_8296377f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-09-09T08:29:58Z",
+      "side": 1,
+      "message": "Hi, John\n\nThese two changes help to show the home screen on the hdmi monitor with android-mainline gki kernel, when build CONFIG_DMABUF_HEAPS_CMA as a module and put it in the ramdiks.img file.\n\nThanks,\nYongqin Liu ",
+      "revId": "d53840886d152b3c0e8a25031f944101a1569432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
