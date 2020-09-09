@@ -33,10 +33,13 @@
 									\
 		it_func_ptr = (tp)->funcs;				\
 		if (it_func_ptr) {					\
-			it_func = (it_func_ptr)->func;			\
-			__data = (it_func_ptr)->data;			\
-			((void(*)(proto))(it_func))(args);		\
-			WARN_ON(((++it_func_ptr)->func));		\
+			do {						\
+				it_func = (it_func_ptr)->func;          \
+				if (it_func) {				\
+					__data = (it_func_ptr)->data;	\
+					((void(*)(proto))(it_func))(args); \
+				}					\
+			} while ((++it_func_ptr)->func);                \
 		}							\
 	} while (0)
 
@@ -58,13 +61,10 @@
 	static inline int						\
 	register_trace_##name(void (*probe)(data_proto), void *data) 	\
 	{								\
-		/* only allow a single attachment */			\
-		if (trace_##name##_enabled())				\
-			return -EBUSY;					\
-		return tracepoint_probe_register(&__tracepoint_##name,	\
+		return tracehook_probe_register(&__tracepoint_##name,	\
 						(void *)probe, data);	\
-	}								\
-	/* vendor hooks cannot be unregistered */			\
+	}
+	/* vendor hooks cannot be unregistered */
 
 #undef DECLARE_RESTRICTED_HOOK
 #define DECLARE_RESTRICTED_HOOK(name, proto, args, cond)		\

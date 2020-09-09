@@ -37,6 +37,8 @@ extern struct srcu_struct tracepoint_srcu;
 extern int
 tracepoint_probe_register(struct tracepoint *tp, void *probe, void *data);
 extern int
+tracehook_probe_register(struct tracepoint *tp, void *probe, void *data);
+extern int
 tracepoint_probe_register_prio(struct tracepoint *tp, void *probe, void *data,
 			       int prio);
 extern int

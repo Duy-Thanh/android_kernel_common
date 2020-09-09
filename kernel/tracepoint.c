@@ -60,6 +60,13 @@ static inline void *allocate_probes(int count)
 	return p == NULL ? NULL : p->probes;
 }
 
+static inline void *allocate_probes_z(int count)
+{
+	struct tp_probes *p  = kzalloc(struct_size(p, probes, count),
+				       GFP_KERNEL);
+	return p == NULL ? NULL : p->probes;
+}
+
 static void srcu_free_old_probes(struct rcu_head *head)
 {
 	kfree(container_of(head, struct tp_probes, rcu));
@@ -173,6 +180,48 @@ func_add(struct tracepoint_func **funcs, struct tracepoint_func *tp_func,
 	return old;
 }
 
+#define MAX_TRACE_HOOK_PROBES 4
+static struct tracepoint_func *
+func_add_hook(struct tracepoint_func **funcs, struct tracepoint_func *tp_func)
+{
+	struct tracepoint_func *existing;
+	int nr_probes = 0;
+
+	if (WARN_ON(!tp_func->func))
+		return ERR_PTR(-EINVAL);
+
+	debug_print_probes(*funcs);
+	existing = *funcs;
+
+	if (!existing) {
+		/* no memory exists yet. allocated fixed # entries */
+		existing = allocate_probes_z(MAX_TRACE_HOOK_PROBES + 1);
+		if (!existing)
+			return ERR_PTR(-ENOMEM);
+		*funcs = existing;
+	}
+
+	while (existing[nr_probes].func)
+		nr_probes++;
+
+	/* limit number of probes */
+	if (nr_probes >= MAX_TRACE_HOOK_PROBES)
+		return ERR_PTR(-EBUSY);
+
+	existing[nr_probes].data = tp_func->data;
+	existing[nr_probes].prio = tp_func->prio;
+
+	/* prevent reordering */
+	wmb();
+
+	existing[nr_probes].func = tp_func->func;
+
+	/* existing[nr_probes+1] is already zero'd. */
+	debug_print_probes(*funcs);
+
+	return existing;
+}
+
 static void *func_remove(struct tracepoint_func **funcs,
 		struct tracepoint_func *tp_func)
 {
@@ -254,6 +303,34 @@ static int tracepoint_add_func(struct tracepoint *tp,
 	if (!static_key_enabled(&tp->key))
 		static_key_slow_inc(&tp->key);
 	release_probes(old);
+	return 0;
+}
+
+/*
+ * Add the probe function to a tracehook.
+ *
+ * will add the hook to existing memory, or if not available
+ * will allocate a sufficient memory to store MAX_TRACE_HOOK_PROBES
+ */
+static int tracehook_add_func(struct tracepoint *tp,
+			      struct tracepoint_func *func)
+{
+	struct tracepoint_func *tp_funcs, *existing;
+
+	tp_funcs = tp->funcs;
+
+	existing = func_add_hook(&tp_funcs, func);
+
+	if (IS_ERR(existing)) {
+		WARN_ON_ONCE(PTR_ERR(existing) != -ENOMEM);
+		return PTR_ERR(existing);
+	}
+
+	tp->funcs = tp_funcs;
+
+	if (!static_key_enabled(&tp->key))
+		static_key_slow_inc(&tp->key);
+
 	return 0;
 }
 
@@ -357,6 +434,33 @@ int tracepoint_probe_unregister(struct tracepoint *tp, void *probe, void *data)
 	return ret;
 }
 EXPORT_SYMBOL_GPL(tracepoint_probe_unregister);
+
+/**
+ * tracehook_probe_register -  Connect a probe to a tracehook
+ * @tp: tracepoint
+ * @probe: probe handler
+ * @data: tracepoint data
+ *
+ * Returns 0 if ok, error value on error.
+ * Note: if @tp is within a module, the caller is responsible for
+ * unregistering the probe before the module is gone. This can be
+ * performed either with a tracepoint module going notifier, or from
+ * within module exit functions.
+ */
+int tracehook_probe_register(struct tracepoint *tp, void *probe, void *data)
+{
+	struct tracepoint_func tp_func;
+	int ret;
+
+	mutex_lock(&tracepoints_mutex);
+	tp_func.func = probe;
+	tp_func.data = data;
+	tp_func.prio = TRACEPOINT_DEFAULT_PRIO;
+	ret = tracehook_add_func(tp, &tp_func);
+	mutex_unlock(&tracepoints_mutex);
+	return ret;
+}
+EXPORT_SYMBOL_GPL(tracehook_probe_register);
 
 static void for_each_tracepoint_range(
 		tracepoint_ptr_t *begin, tracepoint_ptr_t *end,
