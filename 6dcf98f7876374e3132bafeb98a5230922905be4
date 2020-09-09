@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004846600",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1423340?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5c5082a0_a80a46f4",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 73053,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-09-09T20:37:57Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details.",
+      "range": {
+        "startLine": 73053,
+        "startChar": 26,
+        "endLine": 73053,
+        "endChar": 31
+      },
+      "revId": "6dcf98f7876374e3132bafeb98a5230922905be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004846600",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1423340?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "d526da95_03acc10d",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 81471,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-09-09T20:37:57Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details.",
+      "range": {
+        "startLine": 81471,
+        "startChar": 26,
+        "endLine": 81471,
+        "endChar": 31
+      },
+      "revId": "6dcf98f7876374e3132bafeb98a5230922905be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004846600",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1423340?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5ddbe7d9_d9c0beb6",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 81796,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-09-09T20:37:57Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details.",
+      "range": {
+        "startLine": 81796,
+        "startChar": 26,
+        "endLine": 81796,
+        "endChar": 31
+      },
+      "revId": "6dcf98f7876374e3132bafeb98a5230922905be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004846600",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1423340?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "965988e5_2d03d8b4",
+        "filename": "android/abi_gki_aarch64_workarounds",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-09-09T20:37:57Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027deny list\u0027 or \u0027allow list\u0027; see https://developers.google.com/style/word-list#blacklist for more details.",
+      "range": {
+        "startLine": 1,
+        "startChar": 5,
+        "endLine": 1,
+        "endChar": 14
+      },
+      "revId": "6dcf98f7876374e3132bafeb98a5230922905be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
