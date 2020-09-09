@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aede3c21_0925e106",
+        "filename": "drivers/trusty/trusty-virtio.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-09T21:23:04Z",
+      "side": 1,
+      "message": "Why is this needed?  If it\u0027s needed, perhaps there should be a comment that explains it?",
+      "revId": "46ecc936b9183c006b52086c4833f9750ed16720",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
