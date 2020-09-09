@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e48de52b_034520f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-09-09T06:27:03Z",
+      "side": 1,
+      "message": "YongQin: Give these two a try with your HiKey960 android-mainline tree (configuring the cma heap as a module).",
+      "revId": "d53840886d152b3c0e8a25031f944101a1569432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
