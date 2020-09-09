@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3008763f_eb53d40c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2020-09-09T18:23:50Z",
+      "side": 1,
+      "message": "Added this couple of comments to highlight what is currently puzzling me the most.\nThanks in advance for your feedback!",
+      "revId": "40a4571142238e6625e75f354f0568f82113a9a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "12662740_1c61f5db",
+        "filename": "fs/fuse/passthrough.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2020-09-09T18:23:50Z",
+      "side": 1,
+      "message": "Do you think we actually need to acquire these locks?\nI saw other other places where inode::i_*time fields were updated with no (evident) locks acquired, for example, this happens in overlayfs:\n- ovl_write_iter() -\u003e ovl_copyattr(). This happens under inode_lock(inode) context.\n- ovl_read_iter() -\u003e ovl_file_accessed(). No locks held here.",
+      "range": {
+        "startLine": 21,
+        "startChar": 1,
+        "endLine": 21,
+        "endChar": 25
+      },
+      "revId": "40a4571142238e6625e75f354f0568f82113a9a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd673ea2_0c07a7bd",
+        "filename": "fs/fuse/passthrough.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2020-09-09T18:23:50Z",
+      "side": 1,
+      "message": "Why is this locking required only for write operations?\nWhy there is no similar locking in read operations? What is this actually protecting?",
+      "range": {
+        "startLine": 113,
+        "startChar": 1,
+        "endLine": 113,
+        "endChar": 24
+      },
+      "revId": "40a4571142238e6625e75f354f0568f82113a9a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
