@@ -16,6 +16,24 @@
       "revId": "dd94e91ce14b5f889d72b906d8baf07ab03bec1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cba91c20_84020af7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-09T12:18:07Z",
+      "side": 1,
+      "message": "I rebuilt the abi .xml file by using the build/build_abi.sh script in the kernel repo.",
+      "parentUuid": "35fc1c26_8e494540",
+      "revId": "dd94e91ce14b5f889d72b906d8baf07ab03bec1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
