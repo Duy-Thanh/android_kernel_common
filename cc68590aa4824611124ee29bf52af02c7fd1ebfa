@@ -16,6 +16,29 @@
       "revId": "cc68590aa4824611124ee29bf52af02c7fd1ebfa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "18966f34_49d14da3",
+        "filename": "drivers/dma-buf/heaps/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-09-10T21:50:28Z",
+      "side": 1,
+      "message": "Hi John,\n\nThe plan to have the system DMA-BUF heap as built in(similar to the ION system heap). We do not want it to be override-able so that framework code will always have the option to use a generic heap(with predictable behavior). We also want it built-in so that it is guaranteed to exist on all devices.",
+      "range": {
+        "startLine": 2,
+        "startChar": 1,
+        "endLine": 2,
+        "endChar": 31
+      },
+      "revId": "cc68590aa4824611124ee29bf52af02c7fd1ebfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
