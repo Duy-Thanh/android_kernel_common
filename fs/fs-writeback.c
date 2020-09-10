@@ -1238,7 +1238,11 @@ static bool inode_dirtied_after(struct inode *inode, unsigned long t)
  */
 static int move_expired_inodes(struct list_head *delaying_queue,
 			       struct list_head *dispatch_queue,
+<<<<<<< HEAD   (3a3ba4 UPSTREAM: udp: initialize is_flist with 0 in udp_gro_receive)
 			       unsigned long dirtied_before)
+=======
+			       int flags, unsigned long dirtied_before)
+>>>>>>> BRANCH (933cf1 Linux 5.4.62)
 {
 	LIST_HEAD(tmp);
 	struct list_head *pos, *node;
@@ -1254,6 +1258,11 @@ static int move_expired_inodes(struct list_head *delaying_queue,
 		list_move(&inode->i_io_list, &tmp);
 		moved++;
 		spin_lock(&inode->i_lock);
+<<<<<<< HEAD   (3a3ba4 UPSTREAM: udp: initialize is_flist with 0 in udp_gro_receive)
+=======
+		if (flags & EXPIRE_DIRTY_ATIME)
+			inode->i_state |= I_DIRTY_TIME_EXPIRED;
+>>>>>>> BRANCH (933cf1 Linux 5.4.62)
 		inode->i_state |= I_SYNC_QUEUED;
 		spin_unlock(&inode->i_lock);
 		if (sb_is_blkdev_sb(inode->i_sb))
@@ -1301,11 +1310,19 @@ static void queue_io(struct bdi_writeback *wb, struct wb_writeback_work *work,
 
 	assert_spin_locked(&wb->list_lock);
 	list_splice_init(&wb->b_more_io, &wb->b_io);
+<<<<<<< HEAD   (3a3ba4 UPSTREAM: udp: initialize is_flist with 0 in udp_gro_receive)
 	moved = move_expired_inodes(&wb->b_dirty, &wb->b_io, dirtied_before);
+=======
+	moved = move_expired_inodes(&wb->b_dirty, &wb->b_io, 0, dirtied_before);
+>>>>>>> BRANCH (933cf1 Linux 5.4.62)
 	if (!work->for_sync)
 		time_expire_jif = jiffies - dirtytime_expire_interval * HZ;
 	moved += move_expired_inodes(&wb->b_dirty_time, &wb->b_io,
+<<<<<<< HEAD   (3a3ba4 UPSTREAM: udp: initialize is_flist with 0 in udp_gro_receive)
 				     time_expire_jif);
+=======
+				     EXPIRE_DIRTY_ATIME, time_expire_jif);
+>>>>>>> BRANCH (933cf1 Linux 5.4.62)
 	if (moved)
 		wb_io_lists_populated(wb);
 	trace_writeback_queue_io(wb, work, dirtied_before, moved);
