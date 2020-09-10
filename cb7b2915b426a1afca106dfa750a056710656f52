@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "70ddfc79_d15e2cad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1272377
+      },
+      "writtenOn": "2020-09-10T20:38:10Z",
+      "side": 1,
+      "message": "Do I understand correctly, that there will be the .incomplete directory, that should not be deduplicated (app deduplication is the ARC++ feature)?",
+      "revId": "cb7b2915b426a1afca106dfa750a056710656f52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "86e6d30b_6c967a07",
         "filename": "fs/incfs/pseudo_files.c",
         "patchSetId": 3
