@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8fd533e5_a91fe680",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-09-10T22:12:23Z",
+      "side": 1,
+      "message": "thanks!",
+      "parentUuid": "6f69fcfb_b967c7d6",
+      "revId": "cc68590aa4824611124ee29bf52af02c7fd1ebfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "18966f34_49d14da3",
         "filename": "drivers/dma-buf/heaps/Kconfig",
         "patchSetId": 2
@@ -48,6 +66,30 @@
       "writtenOn": "2020-09-10T21:50:28Z",
       "side": 1,
       "message": "Hi John,\n\nThe plan to have the system DMA-BUF heap as built in(similar to the ION system heap). We do not want it to be override-able so that framework code will always have the option to use a generic heap(with predictable behavior). We also want it built-in so that it is guaranteed to exist on all devices.",
+      "range": {
+        "startLine": 2,
+        "startChar": 1,
+        "endLine": 2,
+        "endChar": 31
+      },
+      "revId": "cc68590aa4824611124ee29bf52af02c7fd1ebfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c6a827d_c8b81dd9",
+        "filename": "drivers/dma-buf/heaps/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-09-10T22:12:23Z",
+      "side": 1,
+      "message": "Ok, I\u0027ll rescope this patch(forward port of a patch I sent to the list long ago) to be for CMA heap only.",
+      "parentUuid": "18966f34_49d14da3",
       "range": {
         "startLine": 2,
         "startChar": 1,
