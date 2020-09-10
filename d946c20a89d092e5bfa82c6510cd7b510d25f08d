@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "365dfddb_e31a42d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2020-09-10T08:13:56Z",
+      "side": 1,
+      "message": "Is there a link to a bug report for genksyms?\n\nAlso, the XML change is quite large and changes some declaration-only types to declaration-only with size (which has to be the silliest thing ever). Could you dwarfdump to spot check one of these and if it\u0027s libabigail, please open a bug? Thanks!",
+      "revId": "d946c20a89d092e5bfa82c6510cd7b510d25f08d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
