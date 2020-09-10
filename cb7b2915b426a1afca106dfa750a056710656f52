@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "86e6d30b_6c967a07",
+        "filename": "fs/incfs/pseudo_files.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-09-10T20:04:26Z",
+      "side": 1,
+      "message": "copy-paste",
+      "range": {
+        "startLine": 578,
+        "startChar": 42,
+        "endLine": 578,
+        "endChar": 48
+      },
+      "revId": "cb7b2915b426a1afca106dfa750a056710656f52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b01e888_25e7143c",
+        "filename": "fs/incfs/pseudo_files.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-09-10T20:04:26Z",
+      "side": 1,
+      "message": "zero-sized file doesn\u0027t need to be linked here",
+      "range": {
+        "startLine": 719,
+        "startChar": 1,
+        "endLine": 719,
+        "endChar": 63
+      },
+      "revId": "cb7b2915b426a1afca106dfa750a056710656f52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f460cdc5_a7e34807",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-09-10T20:04:26Z",
+      "side": 1,
+      "message": "does this include hash blocks as well?",
+      "range": {
+        "startLine": 528,
+        "startChar": 22,
+        "endLine": 528,
+        "endChar": 44
+      },
+      "revId": "cb7b2915b426a1afca106dfa750a056710656f52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c234562_e4302ccc",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-09-10T20:04:26Z",
+      "side": 1,
+      "message": "is it ok to dput() error value?",
+      "range": {
+        "startLine": 540,
+        "startChar": 32,
+        "endLine": 540,
+        "endChar": 62
+      },
+      "revId": "cb7b2915b426a1afca106dfa750a056710656f52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54c076a0_82767454",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-09-10T20:04:26Z",
+      "side": 1,
+      "message": "copy-paste",
+      "range": {
+        "startLine": 850,
+        "startChar": 35,
+        "endLine": 850,
+        "endChar": 40
+      },
+      "revId": "cb7b2915b426a1afca106dfa750a056710656f52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33165560_85baea95",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-09-10T20:04:26Z",
+      "side": 1,
+      "message": "reset to null?",
+      "range": {
+        "startLine": 918,
+        "startChar": 18,
+        "endLine": 918,
+        "endChar": 35
+      },
+      "revId": "cb7b2915b426a1afca106dfa750a056710656f52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00963347_9df44929",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 931,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-09-10T20:04:26Z",
+      "side": 1,
+      "message": "reset to null?",
+      "range": {
+        "startLine": 931,
+        "startChar": 18,
+        "endLine": 931,
+        "endChar": 40
+      },
+      "revId": "cb7b2915b426a1afca106dfa750a056710656f52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eea1e1cc_c81af236",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1550,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-09-10T20:04:26Z",
+      "side": 1,
+      "message": "reset to null here and later?",
+      "range": {
+        "startLine": 1547,
+        "startChar": 2,
+        "endLine": 1550,
+        "endChar": 11
+      },
+      "revId": "cb7b2915b426a1afca106dfa750a056710656f52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
