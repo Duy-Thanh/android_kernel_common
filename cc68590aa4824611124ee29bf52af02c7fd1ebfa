@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6f69fcfb_b967c7d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-09-10T21:51:58Z",
+      "side": 1,
+      "message": "Thanks for the CL John! I think this one should work: 155218010",
+      "parentUuid": "01dbf851_04b8b436",
+      "revId": "cc68590aa4824611124ee29bf52af02c7fd1ebfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18966f34_49d14da3",
         "filename": "drivers/dma-buf/heaps/Kconfig",
         "patchSetId": 2
