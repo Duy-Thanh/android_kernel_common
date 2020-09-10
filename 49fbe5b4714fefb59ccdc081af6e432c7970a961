@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0be424d0_43e284af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-10T15:30:08Z",
+      "side": 1,
+      "message": "Please rebase without the abandoned patch.",
+      "revId": "49fbe5b4714fefb59ccdc081af6e432c7970a961",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0fee8653_c905240e",
         "filename": "kernel/printk/printk.c",
         "patchSetId": 1
@@ -34,6 +51,24 @@
       "revId": "49fbe5b4714fefb59ccdc081af6e432c7970a961",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a87221c_2511f87e",
+        "filename": "kernel/printk/printk.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2010,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-10T15:30:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d7c94328_8de047d3",
+      "revId": "49fbe5b4714fefb59ccdc081af6e432c7970a961",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
