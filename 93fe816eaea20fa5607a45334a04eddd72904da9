@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a35b0b26_f0ae636a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2020-09-10T13:32:08Z",
+      "side": 1,
+      "message": "Thanks drosen@ for this pointer: https://www.kernel.org/doc/html/latest/filesystems/locking.html\n",
+      "revId": "93fe816eaea20fa5607a45334a04eddd72904da9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
