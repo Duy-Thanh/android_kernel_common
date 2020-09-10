@@ -16,6 +16,24 @@
       "revId": "49fbe5b4714fefb59ccdc081af6e432c7970a961",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7c94328_8de047d3",
+        "filename": "kernel/printk/printk.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2010,
+      "author": {
+        "id": 1710531
+      },
+      "writtenOn": "2020-09-10T04:54:08Z",
+      "side": 1,
+      "message": "kmsg_dump_get_line() is called in vendor hook.\n\nThe log level determines whether to save or not depending on the level.\nThe facility is sometimes used to classify the kernel logs delivered by the platform.\n\nMy implementation is that when I register kmsg_dump using kmsg_dump_register(), I copy all kernel log until current log data. And every vprintk_emit is called, I save the log line using kmsg_dump_get_line().",
+      "parentUuid": "0fee8653_c905240e",
+      "revId": "49fbe5b4714fefb59ccdc081af6e432c7970a961",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
