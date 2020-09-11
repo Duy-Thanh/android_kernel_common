@@ -52,6 +52,24 @@
       "revId": "21f8103558bb177b1520c482463a172c2a43ab95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "917c16ef_a40b4493",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-09-11T22:07:24Z",
+      "side": 1,
+      "message": "The crash is a bug that need to be fixed, preferably before adding the softdep as it is easier to check. I think it OK to use the softdep to make it functional though.",
+      "parentUuid": "7b34fdef_855c0297",
+      "revId": "21f8103558bb177b1520c482463a172c2a43ab95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
