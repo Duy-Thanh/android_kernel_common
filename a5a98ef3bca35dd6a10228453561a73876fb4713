@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d5db6251_02702cf8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-09-11T04:50:45Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we make this \u0027BACKPORT: FROMLIST\u0027 since it applies to the  \u0027patch has been submitted to LKML, but not accepted into any maintainer tree\u0027 category of https://android.googlesource.com/kernel/common/+/android-mainline-tracking/README.md ?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 17
+      },
+      "revId": "a5a98ef3bca35dd6a10228453561a73876fb4713",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
