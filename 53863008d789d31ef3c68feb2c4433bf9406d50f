@@ -16,6 +16,24 @@
       "revId": "53863008d789d31ef3c68feb2c4433bf9406d50f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc364c95_c54dd5a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2020-09-11T23:58:54Z",
+      "side": 1,
+      "message": "Depends on platform? I\u0027m not sure it\u0027s acceptable in mainline.",
+      "parentUuid": "aee83055_aa36c291",
+      "revId": "53863008d789d31ef3c68feb2c4433bf9406d50f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
