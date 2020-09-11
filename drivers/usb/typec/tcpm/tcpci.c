@@ -751,6 +751,23 @@ static int tcpci_parse_config(struct tcpci *tcpci)
 	return 0;
 }
 
+void tcpci_auto_discharge_update(struct tcpci *tcpci)
+{
+	if (!tcpci || !tcpci->data)
+		return;
+	if (tcpci->data->auto_discharge_disconnect) {
+		tcpci->tcpc.enable_auto_vbus_discharge = tcpci_enable_auto_vbus_discharge;
+		tcpci->tcpc.set_auto_vbus_discharge_threshold =
+			tcpci_set_auto_vbus_discharge_threshold;
+		regmap_update_bits(tcpci->regmap, TCPC_POWER_CTRL, TCPC_POWER_CTRL_BLEED_DISCHARGE,
+				   TCPC_POWER_CTRL_BLEED_DISCHARGE);
+	} else {
+		tcpci->tcpc.enable_auto_vbus_discharge = NULL;
+		tcpci->tcpc.set_auto_vbus_discharge_threshold = NULL;
+	}
+}
+EXPORT_SYMBOL_GPL(tcpci_auto_discharge_update);
+
 struct tcpci *tcpci_register_port(struct device *dev, struct tcpci_data *data)
 {
 	struct tcpci *tcpci;
@@ -782,14 +799,6 @@ struct tcpci *tcpci_register_port(struct device *dev, struct tcpci_data *data)
 	tcpci->tcpc.set_partner_usb_comm_capable = tcpci_set_partner_usb_comm_capable;
 	tcpci->tcpc.set_current_limit = tcpci_set_current_limit;
 	tcpci->tcpc.set_pd_capable = tcpci_set_pd_capable;
-
-	if (tcpci->data->auto_discharge_disconnect) {
-		tcpci->tcpc.enable_auto_vbus_discharge = tcpci_enable_auto_vbus_discharge;
-		tcpci->tcpc.set_auto_vbus_discharge_threshold =
-			tcpci_set_auto_vbus_discharge_threshold;
-		regmap_update_bits(tcpci->regmap, TCPC_POWER_CTRL, TCPC_POWER_CTRL_BLEED_DISCHARGE,
-				   TCPC_POWER_CTRL_BLEED_DISCHARGE);
-	}
 
 	if (tcpci->data->vbus_vsafe0v)
 		tcpci->tcpc.is_vbus_vsafe0v = tcpci_is_vbus_vsafe0v;
