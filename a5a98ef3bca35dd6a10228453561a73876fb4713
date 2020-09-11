@@ -22,6 +22,30 @@
       "revId": "a5a98ef3bca35dd6a10228453561a73876fb4713",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1920421b_e7a35657",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-09-11T04:53:28Z",
+      "side": 1,
+      "message": "It was submitted to the list, but basically nacked, so I feel like tagging it as ANDROID: is more appropriate. FROMLIST seems to have the optimism that its \"almost upstream\". \n\nI\u0027m happy to add a Link: tag though to the discussion.",
+      "parentUuid": "d5db6251_02702cf8",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 17
+      },
+      "revId": "a5a98ef3bca35dd6a10228453561a73876fb4713",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
