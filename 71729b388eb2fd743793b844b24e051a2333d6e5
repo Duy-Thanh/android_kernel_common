@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "487b62ba_1c67ca35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-09-11T19:04:10Z",
+      "side": 1,
+      "message": "This could use a change description explaining what happens without this change",
+      "revId": "71729b388eb2fd743793b844b24e051a2333d6e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d7bf8b8_2872000c",
+        "filename": "drivers/trusty/trusty-virtio.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-09-11T19:04:10Z",
+      "side": 1,
+      "message": "Did you link the wrong bug here? That bug does not seem to be about fixing this TODO statement.",
+      "range": {
+        "startLine": 847,
+        "startChar": 8,
+        "endLine": 847,
+        "endChar": 19
+      },
+      "revId": "71729b388eb2fd743793b844b24e051a2333d6e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
