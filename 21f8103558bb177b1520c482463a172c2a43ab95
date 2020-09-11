@@ -16,6 +16,24 @@
       "revId": "21f8103558bb177b1520c482463a172c2a43ab95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cc5a47c_da7bb8e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2020-09-11T21:42:37Z",
+      "side": 1,
+      "message": "I don\u0027t know why trusty-virtio fails without trusty-ipc. And I don\u0027t think it\u0027s a worthwhile investment of time to look into this just to merge a workaround.",
+      "parentUuid": "e95c1aa1_e5d6e9c8",
+      "revId": "21f8103558bb177b1520c482463a172c2a43ab95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
