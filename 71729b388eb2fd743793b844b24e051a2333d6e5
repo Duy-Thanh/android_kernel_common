@@ -39,6 +39,30 @@
       "revId": "71729b388eb2fd743793b844b24e051a2333d6e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e5a325e_f8397d21",
+        "filename": "drivers/trusty/trusty-virtio.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2020-09-11T19:24:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d7bf8b8_2872000c",
+      "range": {
+        "startLine": 847,
+        "startChar": 8,
+        "endLine": 847,
+        "endChar": 19
+      },
+      "revId": "71729b388eb2fd743793b844b24e051a2333d6e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
