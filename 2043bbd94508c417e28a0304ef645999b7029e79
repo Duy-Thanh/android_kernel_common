@@ -16,6 +16,24 @@
       "revId": "2043bbd94508c417e28a0304ef645999b7029e79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "57c37ba3_125f4642",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2020-09-11T23:58:05Z",
+      "side": 1,
+      "message": "There\u0027s a general code to clear UAC. I had to do this explicitly for early bring-up stage specific vendor.",
+      "parentUuid": "5e66a81f_00546925",
+      "revId": "2043bbd94508c417e28a0304ef645999b7029e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
