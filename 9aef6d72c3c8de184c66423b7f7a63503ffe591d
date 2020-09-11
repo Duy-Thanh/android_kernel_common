@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f60922c_f1ebc86d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-11T15:22:56Z",
+      "side": 1,
+      "message": "Build error:\n\n/usr/local/google/buildbot/src/android/common-android11-5.4/common/kernel/printk/printk.c:2010:2: error: implicit declaration of function \u0027trace_android_vh_printk_store\u0027 [-Werror,-Wimplicit-function-declaration]\n        trace_android_vh_printk_store(facility, level);\n\nPlease build and test your changes before submitting.",
+      "revId": "9aef6d72c3c8de184c66423b7f7a63503ffe591d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63e1f9bd_313a105e",
+        "filename": "kernel/printk/printk.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2010,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-11T15:22:56Z",
+      "side": 1,
+      "message": "/usr/local/google/buildbot/src/android/common-android11-5.4/common/kernel/printk/printk.c:2010:2: error: implicit declaration of function \u0027trace_android_vh_printk_store\u0027 [-Werror,-Wimplicit-function-declaration]\n        trace_android_vh_printk_store(facility, level);",
+      "revId": "9aef6d72c3c8de184c66423b7f7a63503ffe591d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
