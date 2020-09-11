@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "717e017e_a51c83fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-09-11T23:46:42Z",
+      "side": 1,
+      "message": "Could these be added to a separate sysfs root for the driver backend, so we don\u0027t need to add them to ufshcd?",
+      "revId": "b83ebf1bc7a5e7bb64c91d28c5c44c360d516824",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
