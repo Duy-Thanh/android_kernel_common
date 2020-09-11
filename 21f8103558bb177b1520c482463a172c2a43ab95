@@ -34,6 +34,24 @@
       "revId": "21f8103558bb177b1520c482463a172c2a43ab95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b34fdef_855c0297",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-11T21:49:11Z",
+      "side": 1,
+      "message": "Module softdeps are supposed to be optional, though.  I.e. it\u0027s allowed to load a module without its soft dependencies.  Features don\u0027t have to work, but there shouldn\u0027t be a kernel panic.  If there is a kernel panic, then there is a bug that needs to be fixed.\n\nMaybe these two modules just don\u0027t make sense without each other and they should be merged into one?  To decide, you need to figure out what the dependency actually is.",
+      "parentUuid": "8cc5a47c_da7bb8e6",
+      "revId": "21f8103558bb177b1520c482463a172c2a43ab95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
