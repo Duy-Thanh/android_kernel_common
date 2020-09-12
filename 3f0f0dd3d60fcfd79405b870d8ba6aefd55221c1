@@ -16,6 +16,23 @@
       "revId": "3f0f0dd3d60fcfd79405b870d8ba6aefd55221c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3745ab1_faccff79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1762366
+      },
+      "writtenOn": "2020-09-12T09:35:54Z",
+      "side": 1,
+      "message": "Merge 5.4.62 into android11-5.4-lts\n\nChanges in 5.4.62\n\tpowerpc/64s: Don\u0027t init FSCR_DSCR in __init_FSCR()\n\tbinfmt_flat: revert \"binfmt_flat: don\u0027t offset the data start\"\n\tgre6: Fix reception with IP6_TNL_F_RCV_DSCP_COPY\n\tnet: Fix potential wrong skb-\u003eprotocol in skb_vlan_untag()\n\tnet: nexthop: don\u0027t allow empty NHA_GROUP\n\tnet: qrtr: fix usage of idr in port assignment to socket\n\tnet: sctp: Fix negotiation of the number of data streams.\n\tnet/smc: Prevent kernel-infoleak in __smc_diag_dump()\n\ttipc: fix uninit skb-\u003edata in tipc_nl_compat_dumpit()\n\tnet: ena: Make missed_tx stat incremental\n\tnet/sched: act_ct: Fix skb double-free in tcf_ct_handle_fragments() error flow\n\tipvlan: fix device features",
+      "revId": "3f0f0dd3d60fcfd79405b870d8ba6aefd55221c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
