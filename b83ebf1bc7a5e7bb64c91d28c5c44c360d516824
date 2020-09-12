@@ -34,6 +34,24 @@
       "revId": "b83ebf1bc7a5e7bb64c91d28c5c44c360d516824",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3746f53c_7ee4e5b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-09-12T00:06:27Z",
+      "side": 1,
+      "message": "Those places can be updated to check two locations. Adding sysfs files is uapi, so it has to be maintained forever; therefore, we must only do it if not possible any other way.",
+      "parentUuid": "8afa1c47_9f898ba0",
+      "revId": "b83ebf1bc7a5e7bb64c91d28c5c44c360d516824",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
