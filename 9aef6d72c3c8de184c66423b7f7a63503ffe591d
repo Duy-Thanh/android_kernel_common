@@ -33,6 +33,24 @@
       "revId": "9aef6d72c3c8de184c66423b7f7a63503ffe591d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99826a2e_73e3d1fd",
+        "filename": "kernel/printk/printk.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2010,
+      "author": {
+        "id": 1710531
+      },
+      "writtenOn": "2020-09-14T03:37:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63e1f9bd_313a105e",
+      "revId": "9aef6d72c3c8de184c66423b7f7a63503ffe591d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
