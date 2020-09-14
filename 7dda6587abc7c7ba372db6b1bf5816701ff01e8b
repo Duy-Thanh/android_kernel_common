@@ -16,6 +16,24 @@
       "revId": "7dda6587abc7c7ba372db6b1bf5816701ff01e8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "82212351_2fbeef93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-14T18:26:23Z",
+      "side": 1,
+      "message": "I don\u0027t think so.  I think this change only makes a difference when the inline_data feature is enabled, and Android doesn\u0027t use that.",
+      "parentUuid": "0fb2131d_ed072851",
+      "revId": "7dda6587abc7c7ba372db6b1bf5816701ff01e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
