@@ -1,0 +1,52 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004927459",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1419669?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "4b81327c_e8b1fbe9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-09-14T20:23:20Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a properly formatted Bug: or Fixes: line\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 330951664 android-build.ayeaye-python-dispatcher_20200910.05_p0",
+      "revId": "52a118f903da4b770702c0f305d8c34c6d767901",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004927441",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1419669?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "c3453246_78b7f404",
+        "filename": "include/linux/trusty/sm_err.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-09-14T20:23:20Z",
+      "side": 1,
+      "message": "Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 111
+      },
+      "revId": "52a118f903da4b770702c0f305d8c34c6d767901",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
