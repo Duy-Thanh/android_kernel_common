@@ -330,6 +330,9 @@ struct tcpm_port {
 	/* port belongs to a self powered device */
 	bool self_powered;
 
+	/* Port is still in tCCDebounce */
+	bool debouncing;
+
 #ifdef CONFIG_DEBUG_FS
 	struct dentry *dentry;
 	struct mutex logbuffer_lock;	/* log buffer access lock */
@@ -712,6 +715,21 @@ static int tcpm_set_vconn(struct tcpm_port *port, bool enable)
 
 	return ret;
 }
+
+bool tcpm_is_debouncing(struct tcpm_port *port)
+{
+	bool debounce;
+
+	if (!port)
+		return false;
+
+	mutex_lock(&port->lock);
+	debounce = port->debouncing;
+	mutex_unlock(&port->lock);
+
+	return debounce;
+}
+EXPORT_SYMBOL_GPL(tcpm_is_debouncing);
 
 static u32 tcpm_get_current_limit(struct tcpm_port *port)
 {
@@ -2722,6 +2740,7 @@ static int tcpm_src_attach(struct tcpm_port *port)
 	port->partner = NULL;
 
 	port->attached = true;
+	port->debouncing = false;
 	port->send_discover = true;
 
 	return 0;
@@ -2830,6 +2849,7 @@ static int tcpm_snk_attach(struct tcpm_port *port)
 	port->partner = NULL;
 
 	port->attached = true;
+	port->debouncing = false;
 	port->send_discover = true;
 
 	return 0;
@@ -2857,6 +2877,7 @@ static int tcpm_acc_attach(struct tcpm_port *port)
 	tcpm_typec_connect(port);
 
 	port->attached = true;
+	port->debouncing = false;
 
 	return 0;
 }
@@ -2937,6 +2958,15 @@ static void run_state_machine(struct tcpm_port *port)
 		break;
 	/* SRC states */
 	case SRC_UNATTACHED:
+		if (port->debouncing) {
+			port->debouncing = false;
+			if (port->tcpc->check_contaminant) {
+				port->tcpc->check_contaminant(port->tcpc);
+				/* Contaminant detection would handle toggling */
+				tcpm_set_state(port, TOGGLING, 0);
+				break;
+			}
+		}
 		if (!port->non_pd_role_swap)
 			tcpm_swap_complete(port, -ENOTCONN);
 		tcpm_src_detach(port);
@@ -2949,6 +2979,7 @@ static void run_state_machine(struct tcpm_port *port)
 			tcpm_set_state(port, SNK_UNATTACHED, PD_T_DRP_SNK);
 		break;
 	case SRC_ATTACH_WAIT:
+		port->debouncing = true;
 		if (tcpm_port_is_debug(port))
 			tcpm_set_state(port, DEBUG_ACC_ATTACHED,
 				       PD_T_CC_DEBOUNCE);
@@ -2963,6 +2994,7 @@ static void run_state_machine(struct tcpm_port *port)
 		break;
 
 	case SNK_TRY:
+		port->debouncing = false;
 		port->try_snk_count++;
 		/*
 		 * Requirements:
@@ -3135,6 +3167,15 @@ static void run_state_machine(struct tcpm_port *port)
 
 	/* SNK states */
 	case SNK_UNATTACHED:
+		if (port->debouncing) {
+			port->debouncing = false;
+			if (port->tcpc->check_contaminant) {
+				port->tcpc->check_contaminant(port->tcpc);
+				/* Contaminant detection would handle toggling */
+				tcpm_set_state(port, TOGGLING, 0);
+				break;
+			}
+		}
 		if (!port->non_pd_role_swap)
 			tcpm_swap_complete(port, -ENOTCONN);
 		tcpm_pps_complete(port, -ENOTCONN);
@@ -3148,6 +3189,7 @@ static void run_state_machine(struct tcpm_port *port)
 			tcpm_set_state(port, SRC_UNATTACHED, PD_T_DRP_SRC);
 		break;
 	case SNK_ATTACH_WAIT:
+		port->debouncing = true;
 		if ((port->cc1 == TYPEC_CC_OPEN &&
 		     port->cc2 != TYPEC_CC_OPEN) ||
 		    (port->cc1 != TYPEC_CC_OPEN &&
@@ -3159,17 +3201,20 @@ static void run_state_machine(struct tcpm_port *port)
 				       PD_T_PD_DEBOUNCE);
 		break;
 	case SNK_DEBOUNCED:
-		if (tcpm_port_is_disconnected(port))
+		if (tcpm_port_is_disconnected(port)) {
 			tcpm_set_state(port, SNK_UNATTACHED,
 				       PD_T_PD_DEBOUNCE);
-		else if (port->vbus_present)
+		} else if (port->vbus_present) {
 			tcpm_set_state(port,
 				       tcpm_try_src(port) ? SRC_TRY
 							  : SNK_ATTACHED,
 				       0);
-		else
+			port->debouncing = false;
+		} else {
 			/* Wait for VBUS, but not forever */
 			tcpm_set_state(port, PORT_RESET, PD_T_PS_SOURCE_ON);
+			port->debouncing = false;
+		}
 		break;
 
 	case SRC_TRY:
@@ -3987,6 +4032,7 @@ static void _tcpm_pd_vbus_off(struct tcpm_port *port)
 	case SNK_TRYWAIT_DEBOUNCE:
 		break;
 	case SNK_ATTACH_WAIT:
+		port->debouncing = false;
 		tcpm_set_state(port, SNK_UNATTACHED, 0);
 		break;
 
