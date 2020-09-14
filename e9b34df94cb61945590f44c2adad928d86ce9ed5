@@ -1,0 +1,79 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004927412",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1419673?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "bb70bc95_8497f1f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-09-14T20:23:18Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a properly formatted Bug: or Fixes: line\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 330951664 android-build.ayeaye-python-dispatcher_20200910.05_p0",
+      "revId": "e9b34df94cb61945590f44c2adad928d86ce9ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004927408",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1419673?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "de84092a_81b4f3ba",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1429,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-09-14T20:23:18Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027valid\u0027, \u0027validity check\u0027 or \u0027initial check\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 1429,
+        "startChar": 12,
+        "endLine": 1429,
+        "endChar": 18
+      },
+      "revId": "e9b34df94cb61945590f44c2adad928d86ce9ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004927408",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1419673?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "bf5aa1a0_02329b06",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1583,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-09-14T20:23:18Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027valid\u0027, \u0027validity check\u0027 or \u0027initial check\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 1583,
+        "startChar": 19,
+        "endLine": 1583,
+        "endChar": 25
+      },
+      "revId": "e9b34df94cb61945590f44c2adad928d86ce9ed5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
