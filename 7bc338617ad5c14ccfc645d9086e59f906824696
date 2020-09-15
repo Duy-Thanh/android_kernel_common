@@ -1,0 +1,85 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004942871",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1427908?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "a2862965_1d6949c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-09-15T14:07:20Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details.",
+      "range": {
+        "startLine": 11,
+        "startChar": 67,
+        "endLine": 11,
+        "endChar": 72
+      },
+      "revId": "7bc338617ad5c14ccfc645d9086e59f906824696",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004942871",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1427908?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "c184e784_615e1b51",
+        "filename": "sound/usb/quirks-table.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3421,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-09-15T14:07:20Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details.",
+      "range": {
+        "startLine": 3421,
+        "startChar": 29,
+        "endLine": 3421,
+        "endChar": 34
+      },
+      "revId": "7bc338617ad5c14ccfc645d9086e59f906824696",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004942871",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1427908?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "0ef99138_515fd10f",
+        "filename": "sound/usb/quirks-table.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 3422,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-09-15T14:07:20Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details.",
+      "range": {
+        "startLine": 3422,
+        "startChar": 39,
+        "endLine": 3422,
+        "endChar": 44
+      },
+      "revId": "7bc338617ad5c14ccfc645d9086e59f906824696",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
