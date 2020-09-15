@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fb19bd3a_e6b43722",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1756091
+      },
+      "writtenOn": "2020-09-15T03:15:15Z",
+      "side": 1,
+      "message": "Please review the vendor hooks.\nWhen some processes crashed, we want to save more exception context.\nSo we add vendor hooks to __show_regs functions for debugging.",
+      "revId": "c09fe9feced9797a06a52fb00c7bd81aca7aed51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
