@@ -1,0 +1,31 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004942855",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1427913?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "eeb1955d_2351318b",
+        "filename": "sound/usb/card.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-09-15T14:07:19Z",
+      "side": 1,
+      "message": "Lines longer than 100 characters should be wrapped to improve readability; see https://source.android.com/setup/contribute/code-style#limit-line-length for more details.",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 105
+      },
+      "revId": "e764dff177045ddf30a76cfbc493c9abc7b1249a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
