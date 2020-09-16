@@ -22,6 +22,30 @@
       "revId": "916c8c10c1d565da75c407405edf9e39517211a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d75fd9b_decf1593",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-09-16T17:43:19Z",
+      "side": 1,
+      "message": "Right, they change here, but they do once and for all.\n\nIndeed, all ehci-hcd CRCs are now computed using the expanded device_node struct, thanks to the previous change. Before that, the expansion used for CRC calculation in the entire file depended on which EXPORT was seen first by the parser. If that was ehci_handshake, device_node would expand to \u0027UNKNOWN\u0027, and if that was a later symbol, it would expand \u0027properly\u0027. Given that you added \u0027ehci_handshake\u0027 to the symbol list, all CRCs on the left here are computed using \u0027UNKOWN\u0027. Now, they\u0027re computed using the proper expansion. You can try to re-add ehci_handshake to the symbol list on top of this patch, and this time the CRCs shouldn\u0027t change!\n\nOne note, I actually just found a more robust implementation of that, which is the one I suggested on the list, check your inbox :)",
+      "parentUuid": "23d9d53f_eae3a22a",
+      "range": {
+        "startLine": 1430,
+        "startChar": 138,
+        "endLine": 1430,
+        "endChar": 148
+      },
+      "revId": "916c8c10c1d565da75c407405edf9e39517211a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
