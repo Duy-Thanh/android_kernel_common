@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23d9d53f_eae3a22a",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-09-16T17:33:45Z",
+      "side": 1,
+      "message": "they should actually not change here .... why do they?",
+      "range": {
+        "startLine": 1430,
+        "startChar": 138,
+        "endLine": 1430,
+        "endChar": 148
+      },
+      "revId": "916c8c10c1d565da75c407405edf9e39517211a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
