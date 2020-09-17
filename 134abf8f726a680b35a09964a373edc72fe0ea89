@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a274648_ae840bee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-17T18:43:01Z",
+      "side": 1,
+      "message": "Adding Code-Review-2 to prevent this from being submitted to this branch because the Android common kernels only need the prerequisites for the Trusty driver, not the Trusty driver itself.",
+      "revId": "134abf8f726a680b35a09964a373edc72fe0ea89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
