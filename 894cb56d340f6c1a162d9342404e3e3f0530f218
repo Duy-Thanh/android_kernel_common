@@ -1,0 +1,46 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004994096",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1419671?revision\u003d4",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "2b57e372_86f4817f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-09-17T05:51:46Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a properly formatted Bug: or Fixes: line\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 332015198 android-build.ayeaye-python-dispatcher_20200916.04_p0",
+      "revId": "894cb56d340f6c1a162d9342404e3e3f0530f218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004994096",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1419671?revision\u003d4",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5dfac7fa_13a29cd4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-09-17T05:51:46Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Riley Andrews \u003criandrews@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 332015198 android-build.ayeaye-python-dispatcher_20200916.04_p0",
+      "revId": "894cb56d340f6c1a162d9342404e3e3f0530f218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
