@@ -13,6 +13,7 @@
 #include <net/ip.h>
 #include <net/xfrm.h>
 #include <net/icmp.h>
+#include <trace/hooks/xfrm.h>
 
 static int xfrm4_tunnel_check_size(struct sk_buff *skb)
 {
@@ -68,13 +69,16 @@ static int __xfrm4_output(struct net *net, struct sock *sk, struct sk_buff *skb)
 	struct xfrm_state *x = skb_dst(skb)->xfrm;
 	const struct xfrm_state_afinfo *afinfo;
 	int ret = -EAFNOSUPPORT;
-
+	int vh_ret = 1;
 #ifdef CONFIG_NETFILTER
 	if (!x) {
 		IPCB(skb)->flags |= IPSKB_REROUTED;
 		return dst_output(net, sk, skb);
 	}
 #endif
+	trace_android_vh__xfrm4_output(net, sk, skb, &vh_ret);
+	if (vh_ret < 1)
+		return vh_ret;
 
 	rcu_read_lock();
 	afinfo = xfrm_state_afinfo_get_rcu(x->outer_mode.family);
