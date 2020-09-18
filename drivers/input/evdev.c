@@ -24,6 +24,7 @@
 #include <linux/device.h>
 #include <linux/cdev.h>
 #include "input-compat.h"
+#include <trace/hooks/evdev.h>
 
 struct evdev {
 	int open;
@@ -294,6 +295,8 @@ static void evdev_events(struct input_handle *handle,
 	struct evdev *evdev = handle->private;
 	struct evdev_client *client;
 	ktime_t *ev_time = input_get_timestamp(handle->dev);
+
+        trace_android_vh_pass_input_event(vals, count);
 
 	rcu_read_lock();
 
