@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41449a41_06b12e14",
+        "filename": "drivers/trusty/trusty-test.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-19T12:23:50Z",
+      "side": 1,
+      "message": "sysfs is \"one value per file\", why not just put this in debugfs?",
+      "range": {
+        "startLine": 349,
+        "startChar": 0,
+        "endLine": 349,
+        "endChar": 62
+      },
+      "revId": "708271cc629db56515802f50948b86f05ac71997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a8dbfb0_e9487681",
+        "filename": "drivers/trusty/trusty-test.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-19T12:23:50Z",
+      "side": 1,
+      "message": "where is this file documented in Documentation/ABI/ ?",
+      "range": {
+        "startLine": 382,
+        "startChar": 0,
+        "endLine": 382,
+        "endChar": 32
+      },
+      "revId": "708271cc629db56515802f50948b86f05ac71997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34f49320_878df3b6",
+        "filename": "drivers/trusty/trusty-test.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-19T12:23:50Z",
+      "side": 1,
+      "message": "static?",
+      "range": {
+        "startLine": 382,
+        "startChar": 0,
+        "endLine": 382,
+        "endChar": 14
+      },
+      "revId": "708271cc629db56515802f50948b86f05ac71997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "753f91bc_08c59f8b",
+        "filename": "drivers/trusty/trusty-test.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-19T12:23:50Z",
+      "side": 1,
+      "message": "default_groups()?",
+      "range": {
+        "startLine": 409,
+        "startChar": 0,
+        "endLine": 409,
+        "endChar": 65
+      },
+      "revId": "708271cc629db56515802f50948b86f05ac71997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29ff1f06_74731e1d",
+        "filename": "drivers/trusty/trusty-test.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-19T12:23:50Z",
+      "side": 1,
+      "message": "ftrace is your friend.",
+      "range": {
+        "startLine": 426,
+        "startChar": 0,
+        "endLine": 426,
+        "endChar": 39
+      },
+      "revId": "708271cc629db56515802f50948b86f05ac71997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "372c5edc_bd2607c2",
+        "filename": "drivers/trusty/trusty-test.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-19T12:23:50Z",
+      "side": 1,
+      "message": "not needed.",
+      "range": {
+        "startLine": 446,
+        "startChar": 0,
+        "endLine": 446,
+        "endChar": 23
+      },
+      "revId": "708271cc629db56515802f50948b86f05ac71997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c7a555f_dc9e2549",
+        "filename": "drivers/trusty/trusty-test.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-19T12:23:50Z",
+      "side": 1,
+      "message": "use proper #ifdef thing first please.",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 12
+      },
+      "revId": "708271cc629db56515802f50948b86f05ac71997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
