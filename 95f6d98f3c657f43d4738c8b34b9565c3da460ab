@@ -16,6 +16,24 @@
       "revId": "95f6d98f3c657f43d4738c8b34b9565c3da460ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "661e06d0_25281e55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1365444
+      },
+      "writtenOn": "2020-09-20T15:49:59Z",
+      "side": 1,
+      "message": "Yes, I could only find the mismerge on the -q branches.\n\nThis commit brings it back in line with 4.19-stable/4.14-stable",
+      "parentUuid": "9b0abf29_3d7a1e34",
+      "revId": "95f6d98f3c657f43d4738c8b34b9565c3da460ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
