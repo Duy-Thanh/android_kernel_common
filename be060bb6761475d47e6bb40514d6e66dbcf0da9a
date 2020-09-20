@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c2ad8df_246fb12f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1766562
+      },
+      "writtenOn": "2020-09-20T01:24:18Z",
+      "side": 1,
+      "message": "\u003e ✔️ All files and artifacts have passed presubmit lint checks\n\u003e For more details see (https://android-build.googleplex.com/builds/treetop/android-review/1431393?revision\u003d2)\n\u003e \n\u003e Have a question? Found a bug? http://go/presubmit-lint-bug\n\nPlease fix.",
+      "parentUuid": "ed4c2cf4_0c703caa",
+      "revId": "be060bb6761475d47e6bb40514d6e66dbcf0da9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
