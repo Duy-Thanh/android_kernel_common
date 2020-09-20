@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b0abf29_3d7a1e34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-20T15:45:30Z",
+      "side": 1,
+      "message": "Why just these two branches?  Was it only a -q thing that caused the mis-merge?\n\nJaegeuk, can you verify this is ok?",
+      "revId": "95f6d98f3c657f43d4738c8b34b9565c3da460ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
