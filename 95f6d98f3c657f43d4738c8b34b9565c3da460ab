@@ -34,6 +34,24 @@
       "revId": "95f6d98f3c657f43d4738c8b34b9565c3da460ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2cca82a2_3a6c1768",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2020-09-20T20:07:00Z",
+      "side": 1,
+      "message": "It looks correct.\n\n- android-4.14-q : wrong\n- android-4.19-q : wrong\n\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n- android-4.14 : ok\n- android-4.14-q-release : ok\n- android-4.14-r : ok\n- android-4.14-stable : ok\n- android-4.19 : ok\n- android-4.19-q-release : ok\n- android-4.19-r : ok\n- android-4.19-stable : ok\n- android-5.4 : ok\n- android-5.4-stable : ok\n- android11-5.4 : ok\n- android11-5.4-lts : ok\n- android12-5.4 : ok",
+      "parentUuid": "661e06d0_25281e55",
+      "revId": "95f6d98f3c657f43d4738c8b34b9565c3da460ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
