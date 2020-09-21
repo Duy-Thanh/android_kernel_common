@@ -864,6 +864,7 @@ config CC_HAVE_SHADOW_CALL_STACK
 
 config ARM64_DMA_USE_IOMMU
 	bool "ARM64 DMA iommu integration"
+	default y
 	select ARM_HAS_SG_CHAIN
 	select NEED_SG_DMA_LENGTH
 	help
