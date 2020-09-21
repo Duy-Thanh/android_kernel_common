@@ -7,9 +7,9 @@
  * linux side consumer thread.
  */
 struct log_rb {
-	volatile uint32_t alloc;
-	volatile uint32_t put;
-	uint32_t sz;
+	volatile u32 alloc;
+	volatile u32 put;
+	u32 sz;
 	volatile char data[];
 } __packed;
 
