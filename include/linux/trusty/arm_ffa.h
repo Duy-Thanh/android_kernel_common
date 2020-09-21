@@ -40,7 +40,7 @@
  * Current implementation only supports VMIDs. FFA spec also support stream
  * endpoint ids.
  */
-typedef uint16_t ffa_endpoint_id16_t;
+typedef u16 ffa_endpoint_id16_t;
 
 /**
  * struct ffa_cons_mrd - Constituent memory region descriptor
@@ -52,9 +52,9 @@ typedef uint16_t ffa_endpoint_id16_t;
  *         Reserve bytes 12-15 to pad struct size to 16 bytes.
  */
 struct ffa_cons_mrd {
-	uint64_t address;
-	uint32_t page_count;
-	uint32_t reserved_12_15;
+	u64 address;
+	u32 page_count;
+	u32 reserved_12_15;
 };
 STATIC_ASSERT(sizeof(struct ffa_cons_mrd) == 16);
 
@@ -72,9 +72,9 @@ STATIC_ASSERT(sizeof(struct ffa_cons_mrd) == 16);
  *         Array of &struct ffa_cons_mrd entries.
  */
 struct ffa_comp_mrd {
-	uint32_t total_page_count;
-	uint32_t address_range_count;
-	uint64_t reserved_8_15;
+	u32 total_page_count;
+	u32 address_range_count;
+	u64 reserved_8_15;
 	struct ffa_cons_mrd address_range_array[];
 };
 STATIC_ASSERT(sizeof(struct ffa_comp_mrd) == 16);
@@ -101,7 +101,7 @@ STATIC_ASSERT(sizeof(struct ffa_comp_mrd) == 16);
  * * @FFA_MEM_ATTR_INNER_SHAREABLE
  *     Inner Shareable. Combine with FFA_MEM_ATTR_NORMAL_MEMORY_*.
  */
-typedef uint8_t ffa_mem_attr8_t;
+typedef u8 ffa_mem_attr8_t;
 #define FFA_MEM_ATTR_DEVICE_NGNRNE ((1U << 4) | (0x0U << 2))
 #define FFA_MEM_ATTR_DEVICE_NGNRE ((1U << 4) | (0x1U << 2))
 #define FFA_MEM_ATTR_DEVICE_NGRE ((1U << 4) | (0x2U << 2))
@@ -124,7 +124,7 @@ typedef uint8_t ffa_mem_attr8_t;
  * * @FFA_MEM_PERM_X
  *     Request executable mapping.
  */
-typedef uint8_t ffa_mem_perm8_t;
+typedef u8 ffa_mem_perm8_t;
 #define FFA_MEM_PERM_RO (1U << 0)
 #define FFA_MEM_PERM_RW (1U << 1)
 #define FFA_MEM_PERM_NX (1U << 2)
@@ -137,7 +137,7 @@ typedef uint8_t ffa_mem_perm8_t;
  *     Other borrower. Memory region must not be or was not retrieved on behalf
  *     of this endpoint.
  */
-typedef uint8_t ffa_mem_flag8_t;
+typedef u8 ffa_mem_flag8_t;
 #define FFA_MEM_FLAG_OTHER (1U << 0)
 
 /**
@@ -159,7 +159,7 @@ typedef uint8_t ffa_mem_flag8_t;
  * * @FFA_MTD_FLAG_ADDRESS_RANGE_ALIGNMENT_HINT_MASK
  *     Not supported by this implementation.
  */
-typedef uint32_t ffa_mtd_flag32_t;
+typedef u32 ffa_mtd_flag32_t;
 #define FFA_MTD_FLAG_ZERO_MEMORY (1U << 0)
 #define FFA_MTD_FLAG_TIME_SLICING (1U << 1)
 #define FFA_MTD_FLAG_ZERO_MEMORY_AFTER_RELINQUISH (1U << 2)
@@ -194,8 +194,8 @@ STATIC_ASSERT(sizeof(struct ffa_mapd) == 4);
  */
 struct ffa_emad {
 	struct ffa_mapd mapd;
-	uint32_t comp_mrd_offset;
-	uint64_t reserved_8_15;
+	u32 comp_mrd_offset;
+	u64 reserved_8_15;
 };
 STATIC_ASSERT(sizeof(struct ffa_emad) == 16);
 
@@ -223,12 +223,12 @@ STATIC_ASSERT(sizeof(struct ffa_emad) == 16);
 struct ffa_mtd {
 	ffa_endpoint_id16_t sender_id;
 	ffa_mem_attr8_t memory_region_attributes;
-	uint8_t reserved_3;
+	u8 reserved_3;
 	ffa_mtd_flag32_t flags;
-	uint64_t handle;
-	uint64_t tag;
-	uint32_t reserved_24_27;
-	uint32_t emad_count;
+	u64 handle;
+	u64 tag;
+	u32 reserved_24_27;
+	u32 emad_count;
 	struct ffa_emad emad[];
 };
 STATIC_ASSERT(sizeof(struct ffa_mtd) == 32);
@@ -247,9 +247,9 @@ STATIC_ASSERT(sizeof(struct ffa_mtd) == 32);
  *         Array of endpoint ids.
  */
 struct ffa_mem_relinquish_descriptor {
-	uint64_t handle;
-	uint32_t flags;
-	uint32_t endpoint_count;
+	u64 handle;
+	u32 flags;
+	u32 endpoint_count;
 	ffa_endpoint_id16_t endpoint_array[];
 };
 STATIC_ASSERT(sizeof(struct ffa_mem_relinquish_descriptor) == 16);
