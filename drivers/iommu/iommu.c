@@ -1712,7 +1712,10 @@ size_t iommu_map_sg(struct iommu_domain *domain,
 {
 	size_t mapped;
 
-	mapped = domain->ops->map_sg(domain, iova, sg, nents, prot);
+	if (domain->ops->map_sg)
+		mapped = domain->ops->map_sg(domain, iova, sg, nents, prot);
+	else
+		mapped = default_iommu_map_sg(domain, iova, sg, nents, prot);
 	trace_map_sg(domain, iova, mapped, prot);
 	return mapped;
 }
