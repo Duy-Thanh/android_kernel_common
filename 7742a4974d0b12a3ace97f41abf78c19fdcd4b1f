@@ -16,6 +16,24 @@
       "revId": "7742a4974d0b12a3ace97f41abf78c19fdcd4b1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f9c1918_40efca42",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-09-22T19:08:55Z",
+      "side": 1,
+      "message": "Rebase error. Removed it.",
+      "parentUuid": "394e15c2_867787f5",
+      "revId": "7742a4974d0b12a3ace97f41abf78c19fdcd4b1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
