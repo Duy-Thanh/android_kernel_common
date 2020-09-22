@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2498d30_b462fd6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-09-22T01:07:52Z",
+      "side": 1,
+      "message": "any chance of a response to my questions on the message header?",
+      "revId": "0b19e7c01588743ce6529b04c9e9b0cfd11c2de9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ec41853b_be9e939b",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-09-22T01:07:52Z",
+      "side": 1,
+      "message": "WARN_ON only prints an error and a stack trace. If you want to avoid further corruption, I would put it inside an if statement:\nif (WARN_ON(cond))\n  goto err;\n\nIn this particular case \u0027if \u003c elif \u003e else warn/goto\u0027 would also make sense",
+      "revId": "0b19e7c01588743ce6529b04c9e9b0cfd11c2de9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "486ac6dc_51ac0c9c",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 1837,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-09-22T01:07:52Z",
+      "side": 1,
+      "message": "I don\u0027t think this comment is accurate. It seems to imply that this error can occur in valid code. If you try to share a handle twice in a way that would trigger this error, then you also have a race where the release could happen first and the handle would fail to retrieve on the other side.",
+      "revId": "0b19e7c01588743ce6529b04c9e9b0cfd11c2de9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
