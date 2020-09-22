@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "60ee6b8e_81be4aa5",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-09-22T21:33:30Z",
+      "side": 1,
+      "message": "In theory we could expand the size of this header based on the Trusty version negotiation, but it would likely be painful to support multiple sizes directly in Trusty since the payload is currently accessed through the `data` flex array. The contents of `reserved` are zeroed by the Linux driver, so a newer Trusty will still receive a valid handle count (0). Past versions of Trusty ignore the contents of reserved, and the data segment + header will be smaller than the whole buffer, so Trusty will reject packets with handles in them (which makes sense since it can\u0027t support them).",
+      "parentUuid": "a5da4a2a_5ae323fb",
+      "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "57a01582_19b26d7d",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 8
