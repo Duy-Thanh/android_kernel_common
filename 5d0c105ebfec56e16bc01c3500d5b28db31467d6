@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bd208a78_3c79dcee",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1045553
+      },
+      "writtenOn": "2020-09-22T18:00:24Z",
+      "side": 1,
+      "message": "This field is not used for anything. As I recall, It was reserved to  support passing handles. It can be used for any purpose we want.",
+      "parentUuid": "d0655e02_54595847",
+      "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "57a01582_19b26d7d",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 8
