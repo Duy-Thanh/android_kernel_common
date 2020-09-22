@@ -1253,7 +1253,6 @@ const char * const vmstat_text[] = {
 	"unevictable_pgs_cleared",
 	"unevictable_pgs_stranded",
 
-#ifdef CONFIG_TRANSPARENT_HUGEPAGE
 	"thp_fault_alloc",
 	"thp_fault_fallback",
 	"thp_collapse_alloc",
@@ -1271,7 +1270,6 @@ const char * const vmstat_text[] = {
 	"thp_zero_page_alloc_failed",
 	"thp_swpout",
 	"thp_swpout_fallback",
-#endif
 #ifdef CONFIG_MEMORY_BALLOON
 	"balloon_inflate",
 	"balloon_deflate",

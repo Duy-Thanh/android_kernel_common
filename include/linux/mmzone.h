@@ -693,13 +693,11 @@ struct zonelist {
 extern struct page *mem_map;
 #endif
 
-#ifdef CONFIG_TRANSPARENT_HUGEPAGE
 struct deferred_split {
 	spinlock_t split_queue_lock;
 	struct list_head split_queue;
 	unsigned long split_queue_len;
 };
-#endif
 
 /*
  * On NUMA machines, each NUMA node would have a pg_data_t to describe
@@ -781,9 +779,7 @@ typedef struct pglist_data {
 	unsigned long first_deferred_pfn;
 #endif /* CONFIG_DEFERRED_STRUCT_PAGE_INIT */
 
-#ifdef CONFIG_TRANSPARENT_HUGEPAGE
 	struct deferred_split deferred_split_queue;
-#endif
 
 	/* Fields commonly accessed by the page reclaim scanner */
 	struct lruvec		lruvec;
