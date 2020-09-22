@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "a5da4a2a_5ae323fb",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-09-22T21:00:56Z",
+      "side": 1,
+      "message": "Is it reserved to make adding handle support possible in a backward compatible way, or is header fixed size?",
+      "parentUuid": "bd208a78_3c79dcee",
+      "revId": "5d0c105ebfec56e16bc01c3500d5b28db31467d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "57a01582_19b26d7d",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 8

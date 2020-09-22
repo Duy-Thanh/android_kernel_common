@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8aea1950_d270b121",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-09-22T21:00:56Z",
+      "side": 1,
+      "message": "I have not checked all your error paths. +2 assuming you have checked this yourself",
+      "revId": "a6e9dabe549a87aa76798ddf28dc5bf9f2dcda5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
