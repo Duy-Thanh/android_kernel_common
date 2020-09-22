@@ -16,6 +16,24 @@
       "revId": "4a6ae9589e3a6e84e210c8134efdb2c356eebb7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68915985_be2c1b18",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-09-22T21:17:51Z",
+      "side": 1,
+      "message": "Accident cleaning up the rebase. Replaced it and bumped the year.",
+      "parentUuid": "4a8187b5_87a604f9",
+      "revId": "4a6ae9589e3a6e84e210c8134efdb2c356eebb7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
