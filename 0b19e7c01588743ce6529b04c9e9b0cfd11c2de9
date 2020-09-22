@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6069c049_9bc0fe0d",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-09-22T19:08:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec41853b_be9e939b",
+      "revId": "0b19e7c01588743ce6529b04c9e9b0cfd11c2de9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "486ac6dc_51ac0c9c",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 21
@@ -50,6 +68,24 @@
       "revId": "0b19e7c01588743ce6529b04c9e9b0cfd11c2de9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05e2adf8_f8dd32ab",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 1837,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-09-22T19:08:55Z",
+      "side": 1,
+      "message": "Removed the example scenario. \"This path should not happen\" should indicate this is not a valid scenario.",
+      "parentUuid": "486ac6dc_51ac0c9c",
+      "revId": "0b19e7c01588743ce6529b04c9e9b0cfd11c2de9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
