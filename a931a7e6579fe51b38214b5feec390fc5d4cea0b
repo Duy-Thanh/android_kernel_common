@@ -34,6 +34,24 @@
       "revId": "a931a7e6579fe51b38214b5feec390fc5d4cea0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bee21f1_bab6405c",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1390,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-09-23T19:16:53Z",
+      "side": 1,
+      "message": "This is the 5.4 kernel so returning -ENOIOCTLCMD in both cases might be safer than return -ENOTTY bot both.",
+      "parentUuid": "878bd3ef_476b6988",
+      "revId": "a931a7e6579fe51b38214b5feec390fc5d4cea0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
