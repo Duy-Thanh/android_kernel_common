@@ -33,6 +33,52 @@
       "revId": "d38d58db20647d0f21003de0716ec84f52047202",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "efd00a7f_41ea0ad6",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2964,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-23T18:22:05Z",
+      "side": 1,
+      "message": "no return value?",
+      "range": {
+        "startLine": 2964,
+        "startChar": 0,
+        "endLine": 2964,
+        "endChar": 46
+      },
+      "revId": "d38d58db20647d0f21003de0716ec84f52047202",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a50cabeb_af47b4a5",
+        "filename": "include/linux/usb/tcpm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-23T18:22:05Z",
+      "side": 1,
+      "message": "int?",
+      "range": {
+        "startLine": 113,
+        "startChar": 1,
+        "endLine": 113,
+        "endChar": 5
+      },
+      "revId": "d38d58db20647d0f21003de0716ec84f52047202",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
