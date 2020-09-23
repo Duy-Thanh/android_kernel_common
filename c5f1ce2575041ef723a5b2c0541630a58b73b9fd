@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4bfdf753_7f2e2338",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-23T07:09:59Z",
+      "side": 1,
+      "message": "oops, this breaks things, it needs to be redone to not require the previous serial patch.",
+      "revId": "c5f1ce2575041ef723a5b2c0541630a58b73b9fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
