@@ -52,6 +52,24 @@
       "revId": "a931a7e6579fe51b38214b5feec390fc5d4cea0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ab505f8_6249ae9e",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1390,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-23T19:30:41Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s any safer, since this driver doesn\u0027t use the ioctl translation table in fs/compat_ioctl.c, and it *can\u0027t* because that wouldn\u0027t be compatible with GKI.  ENOTTY seems more future-proof since ENOIOCTLCMD is now obsolete, so I\u0027m leaning towards using ENOTTY.",
+      "parentUuid": "7bee21f1_bab6405c",
+      "revId": "a931a7e6579fe51b38214b5feec390fc5d4cea0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
