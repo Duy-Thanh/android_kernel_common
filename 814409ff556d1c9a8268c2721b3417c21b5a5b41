@@ -16,6 +16,24 @@
       "revId": "814409ff556d1c9a8268c2721b3417c21b5a5b41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ca0d148_912f9190",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-23T15:34:43Z",
+      "side": 1,
+      "message": "+1. We maintain the binder driver upstream, please submit there.",
+      "parentUuid": "23b05fb4_341bd9b3",
+      "revId": "814409ff556d1c9a8268c2721b3417c21b5a5b41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
