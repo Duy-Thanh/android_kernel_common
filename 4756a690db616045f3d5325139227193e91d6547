@@ -183,6 +183,30 @@
     },
     {
       "key": {
+        "uuid": "bddd63ee_c0e881cf",
+        "filename": "kernel/trace/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-23T02:41:04Z",
+      "side": 1,
+      "message": "but it is better default to \u0027n\u0027 and add CONFIG_TRACE_RW to gki_defconfig so we can more easily see what is enabled.",
+      "parentUuid": "ed2a093a_8137140a",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 10
+      },
+      "revId": "4756a690db616045f3d5325139227193e91d6547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a2871b62_08d138f0",
         "filename": "kernel/trace/trace_readwrite.c",
         "patchSetId": 1
