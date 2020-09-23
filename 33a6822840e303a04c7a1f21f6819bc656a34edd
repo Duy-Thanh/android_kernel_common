@@ -16,6 +16,24 @@
       "revId": "33a6822840e303a04c7a1f21f6819bc656a34edd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "723b5a9f_8d30fa73",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1402,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-23T18:29:42Z",
+      "side": 1,
+      "message": "This is the way that compat ioctl handlers are usually written.  Look at ext4_ioctl(), for example.  Usually most compat ioctls are either the same as the non-compat ioctls or just have different numbers, so it\u0027s simplest to handle them by calling the non-compat ioctl handler (after optionally translating the ioctl number).  It\u0027s not necessary to directly call the functions that implement each individual ioctl command.\n\nIn cases where a compat ioctl command actually has to be implemented differently, it can just be handled in the switch statement.  It happens that TIPC_IOC_SEND_MSG will need that, but that\u0027s the exception rather than the rule.",
+      "parentUuid": "b193ace0_d2fce550",
+      "revId": "33a6822840e303a04c7a1f21f6819bc656a34edd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
