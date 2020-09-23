@@ -16,6 +16,24 @@
       "revId": "a931a7e6579fe51b38214b5feec390fc5d4cea0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "878bd3ef_476b6988",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1390,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-23T19:14:26Z",
+      "side": 1,
+      "message": "Most compat_ioctl() implementations return -ENOIOCTLCMD.\n\nIt seems the reason for doing that is now obsolete, though, so I suppose we should just use ENOTTY for both.\n\n(ENOIOCTLCMD enabled fallback to the ioctl translation table defined in fs/compat_ioctl.c.  But that was removed in Linux v5.6, and this driver isn\u0027t using that table anyway.)",
+      "parentUuid": "edd55f3e_d8d00d3d",
+      "revId": "a931a7e6579fe51b38214b5feec390fc5d4cea0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
