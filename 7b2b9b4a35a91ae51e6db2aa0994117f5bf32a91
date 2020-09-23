@@ -33,6 +33,42 @@
       "revId": "7b2b9b4a35a91ae51e6db2aa0994117f5bf32a91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afa75639_6b1a0c24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2020-09-23T20:25:37Z",
+      "side": 1,
+      "message": "We don\u0027t plan to pursue this further on the upstream right away. The solving the comments made by upstream may take significant time for us right now, but we will definitely think if we can solve comments made by upstream.",
+      "parentUuid": "1f2294d8_437da133",
+      "revId": "7b2b9b4a35a91ae51e6db2aa0994117f5bf32a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7d67520_0ce8fe6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2020-09-23T20:25:37Z",
+      "side": 1,
+      "message": "as I have mentioned on the buganizer. The usefulness of this patch along with DCC outweigh serial driver in case of QC. GKI w/ limited debug ability these kind of features will help to speed up the debugging. We can remove after say FRC of Android release for Android S from the android12-5.4 as well.",
+      "parentUuid": "1e308790_93d2cdd1",
+      "revId": "7b2b9b4a35a91ae51e6db2aa0994117f5bf32a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
