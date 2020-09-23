@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "5f704cf7_fc8b5416",
+        "filename": "arch/arm64/include/asm/io.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2020-09-23T00:23:49Z",
+      "side": 1,
+      "message": "I have kept logging before to capture address information before read operation. In some cases CPU might not be able to read that address due to un clocked region.",
+      "parentUuid": "8c9ad48e_12088650",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 19
+      },
+      "revId": "4756a690db616045f3d5325139227193e91d6547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5bb80d06_6a8e9794",
         "filename": "include/linux/iorw.h",
         "patchSetId": 1
@@ -53,6 +77,30 @@
       "writtenOn": "2020-09-22T10:18:33Z",
       "side": 1,
       "message": "you are only logging the address, not the value, is that intentional?  Feels like only half of the data you really need/want.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 52
+      },
+      "revId": "4756a690db616045f3d5325139227193e91d6547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65e7ba73_8abd9730",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2020-09-23T00:23:49Z",
+      "side": 1,
+      "message": "Hi Greg KH,\n\nYes. We just need address information. Data would be part of the CPU register when device crashes and ramdumps help to find the register contents/\n\nAddress information helps, what peripheral address cpu last read/write.",
+      "parentUuid": "5bb80d06_6a8e9794",
       "range": {
         "startLine": 11,
         "startChar": 0,
@@ -111,6 +159,30 @@
     },
     {
       "key": {
+        "uuid": "ed2a093a_8137140a",
+        "filename": "kernel/trace/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2020-09-23T00:23:49Z",
+      "side": 1,
+      "message": "I have kept \"default y\" because of GKI. Google GKI image can provide the tracpoints and vendor modules can register.\n\nFrom vendor side, we will have two flavors of build. \n1) perf build where no vendor module registers with these trace points.\n2) debug build, where one of the vendor module registers and logs into uncached memory area. \n\nBut for the above two use cases, Google GKI image is common. So there won\u0027t be any performance hit in the 1) case.",
+      "parentUuid": "473e90b8_2b245af3",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 10
+      },
+      "revId": "4756a690db616045f3d5325139227193e91d6547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a2871b62_08d138f0",
         "filename": "kernel/trace/trace_readwrite.c",
         "patchSetId": 1
@@ -122,6 +194,30 @@
       "writtenOn": "2020-09-22T10:18:33Z",
       "side": 1,
       "message": "copyright line needed.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 2
+      },
+      "revId": "4756a690db616045f3d5325139227193e91d6547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80680be9_f4f3266b",
+        "filename": "kernel/trace/trace_readwrite.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2020-09-23T00:23:49Z",
+      "side": 1,
+      "message": "Thanks. I will add\n/*\n * Copyright (c) 2020, The Linux Foundation. All rights reserved.\n */",
+      "parentUuid": "a2871b62_08d138f0",
       "range": {
         "startLine": 2,
         "startChar": 0,
@@ -157,6 +253,30 @@
     },
     {
       "key": {
+        "uuid": "aa885ef9_0b583df3",
+        "filename": "kernel/trace/trace_readwrite.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2020-09-23T00:23:49Z",
+      "side": 1,
+      "message": "sure. will use the _GPL",
+      "parentUuid": "9d3b166e_d7184faf",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 13
+      },
+      "revId": "4756a690db616045f3d5325139227193e91d6547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "daa44139_f46fd595",
         "filename": "kernel/trace/trace_readwrite.c",
         "patchSetId": 1
@@ -168,6 +288,30 @@
       "writtenOn": "2020-09-22T10:18:33Z",
       "side": 1,
       "message": "EXPORT_SYMBOL_GPL()",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 13
+      },
+      "revId": "4756a690db616045f3d5325139227193e91d6547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4746196_5f2473d5",
+        "filename": "kernel/trace/trace_readwrite.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2020-09-23T00:23:49Z",
+      "side": 1,
+      "message": "yes. I will add _GPL.",
+      "parentUuid": "daa44139_f46fd595",
       "range": {
         "startLine": 29,
         "startChar": 0,
