@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "9716032f_5af0ee18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-23T06:39:53Z",
+      "side": 1,
+      "message": "And again, the meta-comment, why is this not sent upstream first?",
+      "revId": "4756a690db616045f3d5325139227193e91d6547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c9ad48e_12088650",
         "filename": "arch/arm64/include/asm/io.h",
         "patchSetId": 1
@@ -66,6 +83,30 @@
     },
     {
       "key": {
+        "uuid": "96b068f8_30967fda",
+        "filename": "arch/arm64/include/asm/io.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-23T06:39:53Z",
+      "side": 1,
+      "message": "If it is an \"unclocked region\" then the submitter is buggy and needs to be fixed, trace here will not help with that.",
+      "parentUuid": "5f704cf7_fc8b5416",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 19
+      },
+      "revId": "4756a690db616045f3d5325139227193e91d6547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5bb80d06_6a8e9794",
         "filename": "include/linux/iorw.h",
         "patchSetId": 1
@@ -101,6 +142,30 @@
       "side": 1,
       "message": "Hi Greg KH,\n\nYes. We just need address information. Data would be part of the CPU register when device crashes and ramdumps help to find the register contents/\n\nAddress information helps, what peripheral address cpu last read/write.",
       "parentUuid": "5bb80d06_6a8e9794",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 52
+      },
+      "revId": "4756a690db616045f3d5325139227193e91d6547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92c3b11b_b238c734",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-23T06:39:53Z",
+      "side": 1,
+      "message": "If you crash, because of this, then you know where you crashed and this trace will not help with that.\n\nWhat exactly is this code supposed to be used for?  Just bring-up of a driver?  Why does this need to be on a shipping device?",
+      "parentUuid": "65e7ba73_8abd9730",
       "range": {
         "startLine": 11,
         "startChar": 0,
