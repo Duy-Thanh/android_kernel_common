@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c297697_a1cd8bc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-09-23T17:35:25Z",
+      "side": 1,
+      "message": "Can you change the messages to pr_debug/dev_dbg instead of removing them?",
+      "revId": "52c5b768804dc99b22ad0073b8faa9d4531da1fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
