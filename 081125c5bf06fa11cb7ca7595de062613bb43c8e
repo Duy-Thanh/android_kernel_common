@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b81deeae_ae215553",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-23T23:55:12Z",
+      "side": 1,
+      "message": "Using shmem_file() and shmem_getpage() doesn\u0027t work when the Trusty driver is a module, since these symbols aren\u0027t exported.\n\nI wonder if using a shmem file descriptor is the wrong approach.  It\u0027s only used to get some pages.\n\nDid you consider using a user virtual address and get_user_pages() instead?  I think that would be more similar to other kernel APIs.",
+      "revId": "081125c5bf06fa11cb7ca7595de062613bb43c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b06e59a_5400b3b1",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-23T23:55:12Z",
+      "side": 1,
+      "message": "Is the page marked dirty here because it can later be written to by Trusty?  The correct time to do that is when releasing the page, not when getting it.",
+      "revId": "081125c5bf06fa11cb7ca7595de062613bb43c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48dfaeee_5e5339a9",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-23T23:55:12Z",
+      "side": 1,
+      "message": "Why is this incrementing the reference count again?  shmem_getpage() already took a reference.",
+      "revId": "081125c5bf06fa11cb7ca7595de062613bb43c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88ed6de1_f87ea73c",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-23T23:55:12Z",
+      "side": 1,
+      "message": "Why not put_page()?",
+      "revId": "081125c5bf06fa11cb7ca7595de062613bb43c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "663c2c65_29113d89",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-23T23:55:12Z",
+      "side": 1,
+      "message": "There\u0027s no error code being set if this error occcurs.",
+      "revId": "081125c5bf06fa11cb7ca7595de062613bb43c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
