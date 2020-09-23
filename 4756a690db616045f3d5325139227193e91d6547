@@ -107,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "42e1d5a6_9a12a435",
+        "filename": "arch/arm64/include/asm/io.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-09-23T22:47:18Z",
+      "side": 1,
+      "message": "They want to catch the buggy driver and they are logging the read before it happens to figure out which driver is doing it. The know which driver because the address of the read would belong to a known device region. At least, that my educated guess.",
+      "parentUuid": "96b068f8_30967fda",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 19
+      },
+      "revId": "4756a690db616045f3d5325139227193e91d6547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5bb80d06_6a8e9794",
         "filename": "include/linux/iorw.h",
         "patchSetId": 1
