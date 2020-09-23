@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b193ace0_d2fce550",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1402,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-09-23T18:14:30Z",
+      "side": 1,
+      "message": "What is the reason for this change? We need to add TIPC_IOC_SEND_MSG support, but it will not work if you call tipc_ioctl as the struct contains pointers to iovecs. Do you want a mixed mode switch where the TIPC_IOC32_CONNECT case breaks but TIPC_IOC32_SEND_MSG returns? It might be simpler to keep the old structure.",
+      "revId": "33a6822840e303a04c7a1f21f6819bc656a34edd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
