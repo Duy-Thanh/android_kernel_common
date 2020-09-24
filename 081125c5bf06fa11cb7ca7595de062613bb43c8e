@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5ef76930_edce31e1",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-09-24T00:02:00Z",
+      "side": 1,
+      "message": "This is for symmetry with the next tier of the feature, which will support operating on Ion buffers which cannot necessarily be mapped into Linux. It\u0027d be weird if one form of memory used a file descriptor and the other didn\u0027t.",
+      "parentUuid": "b81deeae_ae215553",
+      "revId": "081125c5bf06fa11cb7ca7595de062613bb43c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6b06e59a_5400b3b1",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 24
@@ -30,6 +48,24 @@
       "writtenOn": "2020-09-23T23:55:12Z",
       "side": 1,
       "message": "Is the page marked dirty here because it can later be written to by Trusty?  The correct time to do that is when releasing the page, not when getting it.",
+      "revId": "081125c5bf06fa11cb7ca7595de062613bb43c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eee83ef2_fad764e4",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-09-24T00:02:00Z",
+      "side": 1,
+      "message": "Yes, it is marked dirty because Trusty may write to it. I can move this to release if I misunderstood when it needed to be made dirty.",
+      "parentUuid": "6b06e59a_5400b3b1",
       "revId": "081125c5bf06fa11cb7ca7595de062613bb43c8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "11a7c397_ea9377d3",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-09-24T00:02:00Z",
+      "side": 1,
+      "message": "I didn\u0027t think shmem_getpage had taken a reference. This should be removed.",
+      "parentUuid": "48dfaeee_5e5339a9",
+      "revId": "081125c5bf06fa11cb7ca7595de062613bb43c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "88ed6de1_f87ea73c",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 24
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "d0a6b661_606f35f3",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-09-24T00:02:00Z",
+      "side": 1,
+      "message": "That would probably be cleaner yes, I will fix that.",
+      "parentUuid": "88ed6de1_f87ea73c",
+      "revId": "081125c5bf06fa11cb7ca7595de062613bb43c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "663c2c65_29113d89",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 24
@@ -81,6 +153,24 @@
       "writtenOn": "2020-09-23T23:55:12Z",
       "side": 1,
       "message": "There\u0027s no error code being set if this error occcurs.",
+      "revId": "081125c5bf06fa11cb7ca7595de062613bb43c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b7bc2b3_59a8175c",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 24
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-09-24T00:02:00Z",
+      "side": 1,
+      "message": "I will fix this.",
+      "parentUuid": "663c2c65_29113d89",
       "revId": "081125c5bf06fa11cb7ca7595de062613bb43c8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
