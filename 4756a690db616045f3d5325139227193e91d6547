@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "30210f65_b1b0c077",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-24T10:56:55Z",
+      "side": 1,
+      "message": "upstream agreed with the goal here, but that patch set does it much much differently than what you are proposing here.\n\nThat thread does say \"just use ftrace\", which also will work, just make these not be inline and all should work properly for ftrace to log what you want to log, correct?\n\nAgain, try sending this upstream, if you don\u0027t want to use ftrace, and include the reasons why ftrace will not work for you in the patch changelog, as this patch is much different from your above link.",
+      "parentUuid": "f3364165_5f5316a4",
+      "revId": "4756a690db616045f3d5325139227193e91d6547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8c9ad48e_12088650",
         "filename": "arch/arm64/include/asm/io.h",
         "patchSetId": 1
