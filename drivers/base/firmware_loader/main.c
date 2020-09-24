@@ -253,7 +253,11 @@ static void __free_fw_priv(struct kref *ref)
 	spin_unlock(&fwc->lock);
 
 	if (fw_is_paged_buf(fw_priv))
+<<<<<<< HEAD   (6edc66 Merge branch 'android11-5.4' into 'android11-5.4-lts')
 		fw_free_paged_buf(fw_priv); /* free leftover pages */
+=======
+		fw_free_paged_buf(fw_priv);
+>>>>>>> BRANCH (a4bea6 Linux 5.4.67)
 	else if (!fw_priv->allocated_size)
 		vfree(fw_priv->data);
 
