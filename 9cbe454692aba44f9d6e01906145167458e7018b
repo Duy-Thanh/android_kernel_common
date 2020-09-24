@@ -34,6 +34,24 @@
       "revId": "9cbe454692aba44f9d6e01906145167458e7018b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39188ef6_7d86af98",
+        "filename": "drivers/trusty/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2020-09-24T00:08:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8fd52f7_000796f9",
+      "revId": "9cbe454692aba44f9d6e01906145167458e7018b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
