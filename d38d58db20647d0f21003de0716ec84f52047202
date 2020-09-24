@@ -77,6 +77,30 @@
     },
     {
       "key": {
+        "uuid": "331ddc86_ff705792",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2964,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2020-09-24T09:15:45Z",
+      "side": 1,
+      "message": "Returning a value now to indicate if restarting toggling is handled by the check_contaminant callback.",
+      "parentUuid": "efd00a7f_41ea0ad6",
+      "range": {
+        "startLine": 2964,
+        "startChar": 0,
+        "endLine": 2964,
+        "endChar": 46
+      },
+      "revId": "d38d58db20647d0f21003de0716ec84f52047202",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a50cabeb_af47b4a5",
         "filename": "include/linux/usb/tcpm.h",
         "patchSetId": 3
@@ -97,6 +121,30 @@
       "revId": "d38d58db20647d0f21003de0716ec84f52047202",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b219a531_46090f5e",
+        "filename": "include/linux/usb/tcpm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2020-09-24T09:15:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a50cabeb_af47b4a5",
+      "range": {
+        "startLine": 113,
+        "startChar": 1,
+        "endLine": 113,
+        "endChar": 5
+      },
+      "revId": "d38d58db20647d0f21003de0716ec84f52047202",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
