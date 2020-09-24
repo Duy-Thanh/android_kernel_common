@@ -16,6 +16,23 @@
       "revId": "eed9382d521763c70e016ba7415516ea7186d881",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef3cbfe7_79ed705e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-24T11:27:40Z",
+      "side": 1,
+      "message": "Ah, nevermind, these are fine to go in as-is, no need for them to go to stable trees that I can see.",
+      "revId": "eed9382d521763c70e016ba7415516ea7186d881",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
