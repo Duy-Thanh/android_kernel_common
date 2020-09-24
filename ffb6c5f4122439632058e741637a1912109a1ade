@@ -34,6 +34,23 @@
       "revId": "ffb6c5f4122439632058e741637a1912109a1ade",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "561bfc3c_2f12b58f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1430422
+      },
+      "writtenOn": "2020-09-24T17:39:40Z",
+      "side": 1,
+      "message": "\u003e This behavior is the default for BFD.\n\nA bit clarification: the default behavior of GNU ld is on-demand DT_TEXTREL/DF_TEXTREL.\n-z notext alwayys adds DF_TEXTREL. On-demand DF_TEXTREL does not add the tag if it is not needed.\n\n (From GNU ld 2.35 onwards, the configure time --enable-textrel-check\u003derror is probably similar to LLD\u0027s current behavior)",
+      "revId": "ffb6c5f4122439632058e741637a1912109a1ade",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
