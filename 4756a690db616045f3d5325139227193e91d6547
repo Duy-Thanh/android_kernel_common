@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "f3364165_5f5316a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2020-09-24T00:30:06Z",
+      "side": 1,
+      "message": "It is hard to convince the upstream  team for this feature.  Here is the other attempt Qualcomm made but it was not successful. Let me know if you want us to send to upstream again. \n\nhttps://lore.kernel.org/lkml/cover.1535119710.git.saiprakash.ranjan@codeaurora.org/\n\n\nI agree with you, this trace events are helpful for other vendors too and not sure how to get it up streamed.",
+      "parentUuid": "9716032f_5af0ee18",
+      "revId": "4756a690db616045f3d5325139227193e91d6547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c9ad48e_12088650",
         "filename": "arch/arm64/include/asm/io.h",
         "patchSetId": 1
@@ -119,6 +137,30 @@
       "side": 1,
       "message": "They want to catch the buggy driver and they are logging the read before it happens to figure out which driver is doing it. The know which driver because the address of the read would belong to a known device region. At least, that my educated guess.",
       "parentUuid": "96b068f8_30967fda",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 19
+      },
+      "revId": "4756a690db616045f3d5325139227193e91d6547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b463cf3_0c96d0d6",
+        "filename": "arch/arm64/include/asm/io.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2020-09-24T00:30:06Z",
+      "side": 1,
+      "message": "Hi Greg KH,\n\nI think, you might be looking at the logging the register contents logging too. I will add another patch for that use case later if any OEMS are interested. \n\nCurrently, Qualcomm need logging of register address only and it don\u0027t need contents of the registers for GKI 2.0 program. This is a must feature for Qualcomm developer community to debug OEM issues and Qualcomm internal reproduced issues.  Please consider the first use case of logging register address first and we can  extend to register contents later. \n\nThis feature should be part of GKI as GKI image may also exhibit unclocked register access problems. \n\nTwo dependent patches of logging the IRQ and Context switch IDs are also needed for Qualcomm use cases and this is primary debug feature on Qualcomm kernel. \n\n-Thanks, Prasad",
+      "parentUuid": "42e1d5a6_9a12a435",
       "range": {
         "startLine": 57,
         "startChar": 0,
@@ -284,6 +326,30 @@
       "side": 1,
       "message": "but it is better default to \u0027n\u0027 and add CONFIG_TRACE_RW to gki_defconfig so we can more easily see what is enabled.",
       "parentUuid": "ed2a093a_8137140a",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 10
+      },
+      "revId": "4756a690db616045f3d5325139227193e91d6547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d26b0c7_696a43f0",
+        "filename": "kernel/trace/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2020-09-24T00:30:06Z",
+      "side": 1,
+      "message": "Sure.  Todd. I will address this comment in the next patchset.",
+      "parentUuid": "bddd63ee_c0e881cf",
       "range": {
         "startLine": 87,
         "startChar": 0,
