@@ -244,6 +244,30 @@
     },
     {
       "key": {
+        "uuid": "5ad79b30_e1ba186d",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2020-09-24T03:59:01Z",
+      "side": 1,
+      "message": "Hi Greg KH, \nWhat exactly is this code supposed to be used for?   Just bring-up of a driver?  \n\u003cPrasad\u003e This code is used for tracking the read and write operation of memory mapped IO address space. We know what are all operation cpu is doing from peripheral driver point of view and helps us to debug issues in all the levels(bring up, product level testing or field devices testing and OEMS mass production level testing). \n\n\n\nWhy does this need to be on a shipping device?\n\u003cPrasad\u003e Good Question. This is just adding trace_events and it would add any performance as per knowledge.  Qualcomm would maintain two builds (debug builds and perf builds). In the debug builds Qualcomm would register to these trace points to login into un cached buffer. But in the perf builds, no module would register to these trace points, so no op. \n\n\nWe need this as part of Google GKI boot image and Qualcomm downstream module can register in the debug variants of build testing and in perf variant no module would get registered.\n\n\n-Thanks, Prasad",
+      "parentUuid": "92c3b11b_b238c734",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 52
+      },
+      "revId": "4756a690db616045f3d5325139227193e91d6547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ddd9969e_31525c7b",
         "filename": "include/trace/events/rwio.h",
         "patchSetId": 1
@@ -255,6 +279,30 @@
       "writtenOn": "2020-09-22T10:20:01Z",
       "side": 1,
       "message": "%p should be used for addresses, right?",
+      "range": {
+        "startLine": 27,
+        "startChar": 29,
+        "endLine": 27,
+        "endChar": 32
+      },
+      "revId": "4756a690db616045f3d5325139227193e91d6547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a019914_b21cb5e7",
+        "filename": "include/trace/events/rwio.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2020-09-24T03:59:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddd9969e_31525c7b",
       "range": {
         "startLine": 27,
         "startChar": 29,
