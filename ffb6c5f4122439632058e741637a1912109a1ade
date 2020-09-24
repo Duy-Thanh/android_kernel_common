@@ -16,6 +16,24 @@
       "revId": "ffb6c5f4122439632058e741637a1912109a1ade",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7337d820_64b84d32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-09-24T17:32:13Z",
+      "side": 1,
+      "message": "Sorry, I had the defaults backwards, 2. above should have been:\n\n\u003e 2. this bug is exacerbated by ld.bfd defaulting to -z notext, while ld.lld is stricter in that it defaults to -z text.",
+      "parentUuid": "5c9f4348_26664da6",
+      "revId": "ffb6c5f4122439632058e741637a1912109a1ade",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
