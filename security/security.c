@@ -29,6 +29,8 @@
 #include <linux/msg.h>
 #include <net/flow.h>
 
+#include <trace/hooks/security.h>
+
 #define MAX_LSM_EVM_XATTR	2
 
 /* How many LSMs were built into the kernel? */
@@ -807,6 +809,7 @@ int security_bprm_check(struct linux_binprm *bprm)
 	ret = call_int_hook(bprm_check_security, 0, bprm);
 	if (ret)
 		return ret;
+	trace_android_vh_security_bprm_check(bprm);
 	return ima_bprm_check(bprm);
 }
 
@@ -957,6 +960,7 @@ void security_inode_free(struct inode *inode)
 {
 	integrity_inode_free(inode);
 	call_void_hook(inode_free_security, inode);
+	trace_android_vh_security_inode_free(inode);
 	/*
 	 * The inode may still be referenced in a path walk and
 	 * a call to security_inode_permission() can be made
@@ -1263,6 +1267,8 @@ int security_inode_setxattr(struct dentry *dentry, const char *name,
 		ret = cap_inode_setxattr(dentry, name, value, size, flags);
 	if (ret)
 		return ret;
+	trace_android_vh_security_inode_setxattr(dentry, name,
+						 value, size, flags);
 	ret = ima_inode_setxattr(dentry, name, value, size);
 	if (ret)
 		return ret;
@@ -1276,6 +1282,8 @@ void security_inode_post_setxattr(struct dentry *dentry, const char *name,
 		return;
 	call_void_hook(inode_post_setxattr, dentry, name, value, size, flags);
 	evm_inode_post_setxattr(dentry, name, value, size);
+	trace_android_vh_security_inode_post_setxattr(dentry, name,
+							 value, size, flags);
 }
 
 int security_inode_getxattr(struct dentry *dentry, const char *name)
@@ -1307,6 +1315,7 @@ int security_inode_removexattr(struct dentry *dentry, const char *name)
 		ret = cap_inode_removexattr(dentry, name);
 	if (ret)
 		return ret;
+	trace_android_vh_security_inode_removexattr(dentry, name);
 	ret = ima_inode_removexattr(dentry, name);
 	if (ret)
 		return ret;
@@ -1440,6 +1449,7 @@ void security_file_free(struct file *file)
 		file->f_security = NULL;
 		kmem_cache_free(lsm_file_cache, blob);
 	}
+	trace_android_vh_security_file_free(file);
 }
 
 int security_file_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
@@ -1489,6 +1499,7 @@ int security_mmap_file(struct file *file, unsigned long prot,
 					mmap_prot(file, prot), flags);
 	if (ret)
 		return ret;
+	trace_android_vh_security_mmap_file(file, prot, flags);
 	return ima_file_mmap(file, prot);
 }
 
@@ -1542,15 +1553,24 @@ int security_file_open(struct file *file)
 	if (ret)
 		return ret;
 
+	trace_android_vh_security_file_open(file);
 	return fsnotify_perm(file, MAY_OPEN);
 }
 
 int security_task_alloc(struct task_struct *task, unsigned long clone_flags)
 {
-	int rc = lsm_task_alloc(task);
+	int rc = 0;
 
+	trace_android_vh_security_task_alloc(task, clone_flags, &rc);
 	if (rc)
 		return rc;
+
+	rc = lsm_task_alloc(task);
+	if (rc) {
+		trace_android_vh_security_task_free(task);
+		return rc;
+	}
+
 	rc = call_int_hook(task_alloc, 0, task, clone_flags);
 	if (unlikely(rc))
 		security_task_free(task);
@@ -1561,6 +1581,7 @@ void security_task_free(struct task_struct *task)
 {
 	call_void_hook(task_free, task);
 
+	trace_android_vh_security_task_free(task);
 	kfree(task->security);
 	task->security = NULL;
 }

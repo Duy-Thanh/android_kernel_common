@@ -22,6 +22,7 @@
 #include <trace/hooks/mm.h>
 #include <trace/hooks/kernel.h>
 #include <trace/hooks/fs.h>
+#include <trace/hooks/security.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -66,3 +67,13 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_process_vm_rw_core);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ptrace);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_copy_process);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exec_binprm_fail);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_security_bprm_check);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_security_inode_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_security_inode_setxattr);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_security_inode_post_setxattr);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_security_inode_removexattr);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_security_file_open);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_security_file_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_security_mmap_file);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_security_task_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_security_task_free);
