@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6ea4321_3d51946a",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2968,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-24T10:46:57Z",
+      "side": 1,
+      "message": "\"must\"?",
+      "range": {
+        "startLine": 2968,
+        "startChar": 29,
+        "endLine": 2968,
+        "endChar": 34
+      },
+      "revId": "1f16d824a8bdc832d591373d4981fa7fe50b23e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
