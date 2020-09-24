@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "c8b84e18_ebe6a1a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2020-09-24T15:27:44Z",
+      "side": 1,
+      "message": "Sure. I will post this patch to upstream and seek inputs there too.  Can you review first two patches in this patch series. I think, we can  merge those patches independently register tracing.",
+      "parentUuid": "30210f65_b1b0c077",
+      "revId": "4756a690db616045f3d5325139227193e91d6547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8c9ad48e_12088650",
         "filename": "arch/arm64/include/asm/io.h",
         "patchSetId": 1
