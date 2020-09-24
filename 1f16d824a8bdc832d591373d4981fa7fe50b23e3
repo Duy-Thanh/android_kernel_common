@@ -22,6 +22,30 @@
       "revId": "1f16d824a8bdc832d591373d4981fa7fe50b23e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc941e04_8811b7ff",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2968,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-09-24T16:39:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a6ea4321_3d51946a",
+      "range": {
+        "startLine": 2968,
+        "startChar": 29,
+        "endLine": 2968,
+        "endChar": 34
+      },
+      "revId": "1f16d824a8bdc832d591373d4981fa7fe50b23e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
