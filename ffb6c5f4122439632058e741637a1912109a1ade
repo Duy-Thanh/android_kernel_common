@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c9f4348_26664da6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-09-24T17:10:07Z",
+      "side": 1,
+      "message": "I was thinking we could guard this additionally with CONFIG_LD_IS_LLD, but:\n1. ld.bfd also supports -z notext\n2. this bug is exacerbated by ld.bfd defaulting to -z text, while ld.lld is stricter in that it defaults to -z notext.\n\nNote: this patch is strictly for linking 32b x86 w/ LLD in 5.4.\n\nThis is a much simpler fix than trying to backport this 7 patch series:\nhttps://lore.kernel.org/lkml/20200717201801.3661843-2-nivedita@alum.mit.edu/T/#u",
+      "revId": "ffb6c5f4122439632058e741637a1912109a1ade",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
