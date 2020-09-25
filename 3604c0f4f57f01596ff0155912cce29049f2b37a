@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "54ee1f22_5bfca342",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-25T10:50:46Z",
+      "side": 1,
+      "message": "CFI_CLANG is not defined in this kernel branch, so it\u0027s pretty hard to hit any problems with it 😊\n\nMaybe add this to the CFI patchset that is currently being worked on out-of-branch?",
+      "revId": "3604c0f4f57f01596ff0155912cce29049f2b37a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
