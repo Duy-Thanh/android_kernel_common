@@ -16,6 +16,24 @@
       "revId": "2074b54acdcb8332ac496ff7816f6f3d80bd1ade",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef4a718e_877996f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-25T22:32:51Z",
+      "side": 1,
+      "message": "Greg KH felt these should be removed.  If you disagree, please comment here: https://android-review.googlesource.com/c/kernel/common/+/1419669/comment/96ef9327_207bc4d1",
+      "parentUuid": "edbca9b2_213321d3",
+      "revId": "2074b54acdcb8332ac496ff7816f6f3d80bd1ade",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
