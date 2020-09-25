@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "02b7d3b5_322c7df7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1769527
+      },
+      "writtenOn": "2020-09-25T02:21:06Z",
+      "side": 1,
+      "message": "Get it. Thanks. I will add it in next version.",
+      "parentUuid": "27745b54_1efce87a",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 54
+      },
+      "revId": "ff01962563be8f94d01171937b089bd3eebc62f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b6e0af21_e7fd38ed",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
