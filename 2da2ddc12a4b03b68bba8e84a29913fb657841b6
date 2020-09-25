@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "43c1dd2c_b35d3676",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-09-25T21:44:01Z",
+      "side": 1,
+      "message": "Before this change, the attribute was only created if we successfully got the version. If we always create the attribute, I think also need to that the string exists in the show function.",
+      "revId": "2da2ddc12a4b03b68bba8e84a29913fb657841b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
