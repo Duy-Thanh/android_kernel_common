@@ -16,6 +16,24 @@
       "revId": "2da2ddc12a4b03b68bba8e84a29913fb657841b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "80ac18cf_108ca2b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-25T22:00:03Z",
+      "side": 1,
+      "message": "As-is, the file would show \"(null)\" in that case.  How about showing \"unknown\" instead?",
+      "parentUuid": "43c1dd2c_b35d3676",
+      "revId": "2da2ddc12a4b03b68bba8e84a29913fb657841b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
