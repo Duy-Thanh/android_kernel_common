@@ -16,6 +16,24 @@
       "revId": "0a96dce34ee43b5d05c6a3c2ab1437487ec85201",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5128152_1f0df5ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-25T23:10:48Z",
+      "side": 1,
+      "message": "Sure, it\u0027s not a hard rule.  If you really don\u0027t want this I will drop it; I\u0027m just trying to avoid anything that looks unusual as far as Linux kernel code is concerned...",
+      "parentUuid": "78f954b6_5c563229",
+      "revId": "0a96dce34ee43b5d05c6a3c2ab1437487ec85201",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
