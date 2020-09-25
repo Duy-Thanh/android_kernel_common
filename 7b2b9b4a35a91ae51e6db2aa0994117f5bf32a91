@@ -105,6 +105,24 @@
       "revId": "7b2b9b4a35a91ae51e6db2aa0994117f5bf32a91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71f7af7d_22485029",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-25T18:13:47Z",
+      "side": 1,
+      "message": "GKI 2.0 kernels are meant for system debugging (and product). I guess the question is whether android-mainline needs to carry these kinds of debugging patches prior to android12-5.10 branching off.",
+      "parentUuid": "f913285b_fc609d56",
+      "revId": "7b2b9b4a35a91ae51e6db2aa0994117f5bf32a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
