@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1628fb52_ee98e1c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-09-25T08:41:29Z",
+      "side": 1,
+      "message": "Hi, Alistair, All\n\nI only tested with the build command, did not test if the generated kernel works correctly.\nAnd if we want to have this change merged, please help to add a bug link for this change.\n\nThanks,\nYongqin Liu",
+      "revId": "a284055b733648db5a65ced4fd29b230c73d1b5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
