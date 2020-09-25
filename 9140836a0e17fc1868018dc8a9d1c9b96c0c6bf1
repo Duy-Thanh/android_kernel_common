@@ -16,6 +16,24 @@
       "revId": "9140836a0e17fc1868018dc8a9d1c9b96c0c6bf1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c19b4ffd_2e7eba61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-25T23:07:14Z",
+      "side": 1,
+      "message": "The function graph tracer can show when functions return, though not whether it\u0027s success or failure.\n\nHalf the \"%s: done\" messages could occur for either success or failure, which made them ambiguous.  Also, it\u0027s normally better to reserve logging for errors instead of for success.\n\nIf you really want some of these messages we can keep them anyway, but I\u0027ll need to adjust them to remove __func__ to satisfy Greg\u0027s comment.",
+      "parentUuid": "e3416175_df8deda7",
+      "revId": "9140836a0e17fc1868018dc8a9d1c9b96c0c6bf1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
