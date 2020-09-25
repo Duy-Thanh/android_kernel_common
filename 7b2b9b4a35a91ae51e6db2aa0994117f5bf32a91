@@ -123,6 +123,24 @@
       "revId": "7b2b9b4a35a91ae51e6db2aa0994117f5bf32a91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2bc08ea_9bce0946",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2020-09-25T18:38:01Z",
+      "side": 1,
+      "message": "Yes, we would like to have this earlier. I would like to treat these patches as similar to serial port driver we plan to put it as part of the GKI kernel.",
+      "parentUuid": "71f7af7d_22485029",
+      "revId": "7b2b9b4a35a91ae51e6db2aa0994117f5bf32a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
