@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "702f1bb5_6c230686",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-09-25T21:55:15Z",
+      "side": 1,
+      "message": "are these pointers guaranteed to not be NULL?",
+      "revId": "d1a24ff79d526f881350a144ec3f121940e40571",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
