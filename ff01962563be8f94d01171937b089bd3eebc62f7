@@ -128,6 +128,24 @@
       "revId": "ff01962563be8f94d01171937b089bd3eebc62f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1396accc_2e30f919",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1079098
+      },
+      "writtenOn": "2020-09-25T01:25:48Z",
+      "side": 1,
+      "message": "it is not bug fix but MTK need this patch to make GKI work on MTK platform.\nIOMMU is built-in module.",
+      "parentUuid": "07697a92_2869cea3",
+      "revId": "ff01962563be8f94d01171937b089bd3eebc62f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
