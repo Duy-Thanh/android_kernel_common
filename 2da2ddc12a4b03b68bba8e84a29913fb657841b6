@@ -34,6 +34,24 @@
       "revId": "2da2ddc12a4b03b68bba8e84a29913fb657841b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f425271e_10adbfaa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-09-25T22:21:50Z",
+      "side": 1,
+      "message": "\"unknown\", \"\" or return and error would all be better \"(null)\". Returning an error would be the closest to the existing behavior though.",
+      "parentUuid": "80ac18cf_108ca2b9",
+      "revId": "2da2ddc12a4b03b68bba8e84a29913fb657841b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
