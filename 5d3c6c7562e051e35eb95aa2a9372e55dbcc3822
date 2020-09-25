@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ddab574_12a8d8fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-09-25T22:37:40Z",
+      "side": 1,
+      "message": "Some of these header files are shared with the EL3 firmware and trusty. Using linux specific types makes them harder to keep in sync.",
+      "revId": "5d3c6c7562e051e35eb95aa2a9372e55dbcc3822",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
