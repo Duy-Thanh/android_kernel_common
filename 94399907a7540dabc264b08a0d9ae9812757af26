@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a721a137_e2dc4ea6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-25T13:06:57Z",
+      "side": 1,
+      "message": "Hooks on top of security hooks is, well, odd.\n\nWhy not just be a LSM interface?  That\u0027s what these security functions are there for, please don\u0027t invent another layer that is not needed.",
+      "revId": "94399907a7540dabc264b08a0d9ae9812757af26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
