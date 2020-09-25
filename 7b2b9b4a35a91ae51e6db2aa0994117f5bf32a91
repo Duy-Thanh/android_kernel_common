@@ -87,6 +87,24 @@
       "revId": "7b2b9b4a35a91ae51e6db2aa0994117f5bf32a91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f913285b_fc609d56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2020-09-25T18:05:58Z",
+      "side": 1,
+      "message": "Well we can continue to differ on this but product which supposed to be launched needs to be debugged as well. In this case this driver is pretty useful to us and very low overhead. We will end up not debugging GKI kernel and filing more bugs to Google :). It is hard for me to explain but in my view this is important. I will talk with Sandeep and Todd in my sync-up.",
+      "parentUuid": "74953727_f06bfae4",
+      "revId": "7b2b9b4a35a91ae51e6db2aa0994117f5bf32a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
