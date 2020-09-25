@@ -69,6 +69,24 @@
       "revId": "7b2b9b4a35a91ae51e6db2aa0994117f5bf32a91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74953727_f06bfae4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-25T13:13:52Z",
+      "side": 1,
+      "message": "GKI is not meant for bring-up kernels, so adding debugging functionality does not make sense, especially when the changes were rejected from upstream 😞",
+      "parentUuid": "d7d67520_0ce8fe6c",
+      "revId": "7b2b9b4a35a91ae51e6db2aa0994117f5bf32a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
