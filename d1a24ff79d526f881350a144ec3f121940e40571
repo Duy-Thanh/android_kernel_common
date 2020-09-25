@@ -16,6 +16,24 @@
       "revId": "d1a24ff79d526f881350a144ec3f121940e40571",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "935f716b_76ae2c31",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-25T22:51:10Z",
+      "side": 1,
+      "message": "Looks like it.  Each one is set when the corresponding struct is allocated.",
+      "parentUuid": "702f1bb5_6c230686",
+      "revId": "d1a24ff79d526f881350a144ec3f121940e40571",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
