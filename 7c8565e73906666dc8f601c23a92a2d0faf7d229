@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9f78da99_6713c1bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-25T13:04:47Z",
+      "side": 1,
+      "message": "Again, internal function.\n\nBut, do you really need this, given what it does?",
+      "revId": "7c8565e73906666dc8f601c23a92a2d0faf7d229",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
