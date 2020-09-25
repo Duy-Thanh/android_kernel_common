@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ffeb8dc7_4c254b94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-25T13:05:57Z",
+      "side": 1,
+      "message": "Why not just the IMA layer, or the LSM layer, to get this information today?  Why do you need to add another notifier at this place?",
+      "revId": "3b951525fffc60a85379ae3f095787996d46d9d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
