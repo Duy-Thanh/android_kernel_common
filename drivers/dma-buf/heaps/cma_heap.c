@@ -66,7 +66,7 @@ struct dma_buf *cma_heap_allocate(struct dma_heap *heap,
 	helper_buffer->heap = heap;
 	helper_buffer->size = len;
 
-	cma_pages = cma_alloc(cma_heap->cma, nr_pages, align, false);
+	cma_pages = cma_alloc(cma_heap->cma, nr_pages, align, 0);
 	if (!cma_pages)
 		goto free_buf;
 

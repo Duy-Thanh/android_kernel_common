@@ -524,6 +524,17 @@ config CMA_AREAS
 
 	  If unsure, leave the default value "7".
 
+config CMA_RETRY_SLEEP_DURATION
+	int "Sleep duration between retries"
+	depends on CMA
+	default 100
+	help
+	  Time to sleep for in milliseconds between the indefinite
+	  retries of a CMA allocation that are induced by passing
+	  __GFP_NOFAIL to cma_alloc().
+
+	  If unsure, leave the value as "100".
+
 config MEM_SOFT_DIRTY
 	bool "Track memory changes"
 	depends on CHECKPOINT_RESTORE && HAVE_ARCH_SOFT_DIRTY && PROC_FS
