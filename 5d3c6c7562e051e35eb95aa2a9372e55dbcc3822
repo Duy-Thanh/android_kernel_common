@@ -34,6 +34,24 @@
       "revId": "5d3c6c7562e051e35eb95aa2a9372e55dbcc3822",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64731296_ee479325",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2020-09-25T23:39:14Z",
+      "side": 1,
+      "message": "Yes that license would probably be better. linux/bits.h is probably just a remainder from a previous checkpatch complaint",
+      "parentUuid": "78e06533_3cd04ff5",
+      "revId": "5d3c6c7562e051e35eb95aa2a9372e55dbcc3822",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
