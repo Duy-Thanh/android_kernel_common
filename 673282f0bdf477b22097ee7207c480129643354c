@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "886e96ff_7a110b0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-25T16:10:53Z",
+      "side": 1,
+      "message": "Please build/test your changes.",
+      "revId": "673282f0bdf477b22097ee7207c480129643354c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dac24019_8233d06c",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-25T16:10:53Z",
+      "side": 1,
+      "message": "Does this build?",
+      "revId": "673282f0bdf477b22097ee7207c480129643354c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
