@@ -16,6 +16,24 @@
       "revId": "3b951525fffc60a85379ae3f095787996d46d9d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8de13dd6_9ca5a1bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757595
+      },
+      "writtenOn": "2020-09-25T23:28:40Z",
+      "side": 1,
+      "message": "Hello Mr. Greg Kroah-Hartman.\nAs you can see, we\u0027re already doing like that.\nhttps://opensource.samsung.com/uploadSearch?searchValue\u003dG986B\n[KERNEL]/security/security.c | grep five\n\nBut, to satisfy GKI 1.0 and 2.0 requirements, we need to use vendor hooks and add a VENDOR_DATA. Please consider about it.\n\nThanks.",
+      "parentUuid": "ffeb8dc7_4c254b94",
+      "revId": "3b951525fffc60a85379ae3f095787996d46d9d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
