@@ -16,6 +16,24 @@
       "revId": "5d3c6c7562e051e35eb95aa2a9372e55dbcc3822",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78e06533_3cd04ff5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-25T23:28:34Z",
+      "side": 1,
+      "message": "Looks like the shared headers are arm_ffa.h, smcall.h, and sm_err.h, where only arm_ffa.h is changed by this patch.\n\nIt\u0027s surprising that arm_ffa.h is shared with Trusty when it has a GPLv2 license and includes \u003clinux/bits.h\u003e.  Shouldn\u0027t it be standalone and MIT-licensed instead, like smcall.h and sm_err.h?",
+      "parentUuid": "3ddab574_12a8d8fe",
+      "revId": "5d3c6c7562e051e35eb95aa2a9372e55dbcc3822",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
