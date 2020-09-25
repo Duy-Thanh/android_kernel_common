@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73f0c3e5_67f6cbe1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2020-09-25T16:30:02Z",
+      "side": 1,
+      "message": "We don\u0027t build goldfish 4.14 from common, we use kernel/goldfish/+/refs/heads/android-goldfish-4.14-dev",
+      "revId": "843b18bfc713be523d8d93cbbfe9566f450baf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
