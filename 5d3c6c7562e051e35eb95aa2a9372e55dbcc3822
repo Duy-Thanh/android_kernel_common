@@ -52,6 +52,24 @@
       "revId": "5d3c6c7562e051e35eb95aa2a9372e55dbcc3822",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9395a80_662d2fc5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-26T00:33:16Z",
+      "side": 1,
+      "message": "Dropped the changes to arm_ffa.h.\n\nThe license change will need to be done later.",
+      "parentUuid": "64731296_ee479325",
+      "revId": "5d3c6c7562e051e35eb95aa2a9372e55dbcc3822",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
