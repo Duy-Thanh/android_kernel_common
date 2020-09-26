@@ -16,6 +16,24 @@
       "revId": "843b18bfc713be523d8d93cbbfe9566f450baf62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3691044_4bcb2e13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-09-26T03:01:51Z",
+      "side": 1,
+      "message": "hmm, then should we remove the build.config.goldfish.* files from the kernel/common 4.14 branch to avoid the confusion?",
+      "parentUuid": "73f0c3e5_67f6cbe1",
+      "revId": "843b18bfc713be523d8d93cbbfe9566f450baf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
