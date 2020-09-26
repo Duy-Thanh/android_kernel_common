@@ -52,6 +52,24 @@
       "revId": "9140836a0e17fc1868018dc8a9d1c9b96c0c6bf1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07f1cfd9_b005aa4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-26T00:25:01Z",
+      "side": 1,
+      "message": "Change now removes function entry logging only.",
+      "parentUuid": "90e2e2c4_ec6f8ce6",
+      "revId": "9140836a0e17fc1868018dc8a9d1c9b96c0c6bf1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
