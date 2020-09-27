@@ -39,6 +39,29 @@
       "revId": "5f26ce94937d69ffd7ac76c841b5f5f9691698ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee38cf66_fcd429f5",
+        "filename": "android/abi_gki_aarch64_xiaomi",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-27T13:31:27Z",
+      "side": 1,
+      "message": "this is a \"new\" one, and would need modification of the .xml file, right?\n\nWhy is it needed?",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 18
+      },
+      "revId": "5f26ce94937d69ffd7ac76c841b5f5f9691698ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
