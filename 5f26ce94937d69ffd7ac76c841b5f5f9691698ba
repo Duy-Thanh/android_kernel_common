@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "cf0de4e4_c9a6c887",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-27T13:30:35Z",
+      "side": 1,
+      "message": "These are just the symbols needed for the extfat.ko filesystem driver, right?\n\nYou can put a comment at the top of the chunk of symbols saying that to make it easier to review, like the abi_gki_aarch64_unisoc file has.\n\nThanks!",
+      "revId": "5f26ce94937d69ffd7ac76c841b5f5f9691698ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "02a6aec2_8a843974",
         "filename": "android/abi_gki_aarch64_xiaomi",
         "patchSetId": 1
