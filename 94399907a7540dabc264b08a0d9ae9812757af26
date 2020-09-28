@@ -16,6 +16,24 @@
       "revId": "94399907a7540dabc264b08a0d9ae9812757af26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15c58865_c0ab215c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1691940
+      },
+      "writtenOn": "2020-09-28T08:01:31Z",
+      "side": 1,
+      "message": "We agree, this is odd. We did that because we didn\u0027t find a better way. \nThe problem is that a loadable module can\u0027t register LSM hooks. `security_add_hooks\u0027 isn\u0027t exported and is marked as `__init\u0027 and `security_hook_heads\u0027 is marked as `__lsm_ro_after_init\u0027. So we can\u0027t register new hooks after Kernel initialization. That\u0027s why we had to add these hooks.\n\nPlease, correct us if we missed something. If you know a better way, please, share.",
+      "parentUuid": "a721a137_e2dc4ea6",
+      "revId": "94399907a7540dabc264b08a0d9ae9812757af26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
