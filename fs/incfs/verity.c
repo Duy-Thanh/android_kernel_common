@@ -42,6 +42,7 @@
  */
 struct fsverity_info {
 	u8 measurement[FS_VERITY_MAX_DIGEST_SIZE];
+	size_t measurement_size;
 };
 
 /* Arbitrary limit to bound the kmalloc() size.  Can be changed. */
@@ -185,6 +186,7 @@ static struct fsverity_info *fsverity_create_info(const struct inode *inode,
 	}
 	pr_debug("Computed file measurement: %s:%*phN\n",
 		 hash_alg->name, hash_alg->digest_size, vi->measurement);
+	vi->measurement_size = hash_alg->digest_size;
 
 	err = __fsverity_verify_signature(inode, desc->signature,
 					  le32_to_cpu(desc->sig_size),
@@ -456,3 +458,37 @@ int incfs_fsverity_file_open(struct inode *inode, struct file *filp)
 	return ensure_verity_info(inode, filp);
 }
 
+int incfs_verity_measure(struct file *filp, void __user *_uarg)
+{
+	const struct inode *inode = file_inode(filp);
+	struct fsverity_digest __user *uarg = _uarg;
+	const struct fsverity_info *vi;
+	struct fsverity_digest arg;
+
+	vi = fsverity_get_info(inode);
+	if (!vi)
+		return -ENODATA; /* not a verity file */
+
+	/*
+	 * The user specifies the digest_size their buffer has space for; we can
+	 * return the digest if it fits in the available space.  We write back
+	 * the actual size, which may be shorter than the user-specified size.
+	 */
+
+	if (get_user(arg.digest_size, &uarg->digest_size))
+		return -EFAULT;
+	if (arg.digest_size < vi->measurement_size)
+		return -EOVERFLOW;
+
+	memset(&arg, 0, sizeof(arg));
+	arg.digest_algorithm = 1; /* TODO - don't hard code */
+	arg.digest_size = vi->measurement_size;
+
+	if (copy_to_user(uarg, &arg, sizeof(arg)))
+		return -EFAULT;
+
+	if (copy_to_user(uarg->digest, vi->measurement, vi->measurement_size))
+		return -EFAULT;
+
+	return 0;
+}
