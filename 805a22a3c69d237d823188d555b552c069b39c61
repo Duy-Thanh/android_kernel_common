@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a4698e7_aa120436",
+        "filename": "arch/arm64/kernel/signal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2020-09-28T10:16:40Z",
+      "side": 1,
+      "message": "What if CONFIG_CPUMASK_OFFSTACK is selected?",
+      "revId": "805a22a3c69d237d823188d555b552c069b39c61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
