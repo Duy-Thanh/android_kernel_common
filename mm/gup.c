@@ -896,7 +896,7 @@ static __always_inline long __get_user_pages_locked(struct task_struct *tsk,
 		BUG_ON(*locked != 1);
 	}
 
-	atomic_set(&current->mm->has_pinned, 1);
+	atomic_set(&mm->has_pinned, 1);
 
 	if (pages)
 		flags |= FOLL_GET;
