@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4840408c_85f3342c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1655301
+      },
+      "writtenOn": "2020-09-28T03:30:55Z",
+      "side": 1,
+      "message": "Sorry...I did not use git --amend to add the modification to this commit.\nI\u0027ve test it by building gki_defconfig with/without CONFIG_ANDROID_VENDOR_HOOKS.\nNew patchset is uploaded.",
+      "parentUuid": "886e96ff_7a110b0c",
+      "revId": "673282f0bdf477b22097ee7207c480129643354c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dac24019_8233d06c",
         "filename": "drivers/base/arch_topology.c",
         "patchSetId": 1
