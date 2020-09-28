@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ede3960_d06a9619",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-09-28T12:02:44Z",
+      "side": 1,
+      "message": "Can you provide a bug number and fix up the other errors reported by lint?\n\nOtherwise, looks fine to me when that is resolved.",
+      "revId": "a26534ecdbca920038b18990e3321fade45b5c16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
