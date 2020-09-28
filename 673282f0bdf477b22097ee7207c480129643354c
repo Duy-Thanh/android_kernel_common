@@ -51,6 +51,24 @@
       "revId": "673282f0bdf477b22097ee7207c480129643354c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea4e70bf_c6cf0c85",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-28T17:52:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dac24019_8233d06c",
+      "revId": "673282f0bdf477b22097ee7207c480129643354c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
