@@ -1,0 +1,79 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005216938",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1419673?revision\u003d11",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "be10cab4_5a3caf30",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-09-28T19:04:59Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a properly formatted Bug: or Fixes: line\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 333524424 android-build.ayeaye-python-dispatcher_20200924.05_p0",
+      "revId": "c10bcd59fa023efc0984206e8424609e4833fdd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005216925",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1419673?revision\u003d11",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "889fc307_28c4a3e2",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1932,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-09-28T19:04:59Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027valid\u0027, \u0027validity check\u0027 or \u0027initial check\u0027; see https://source.android.com/setup/contribute/respectful-code for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 1932,
+        "startChar": 12,
+        "endLine": 1932,
+        "endChar": 18
+      },
+      "revId": "c10bcd59fa023efc0984206e8424609e4833fdd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005216925",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1419673?revision\u003d11",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f7dddb1b_6a79f289",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 2089,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-09-28T19:04:59Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027valid\u0027, \u0027validity check\u0027 or \u0027initial check\u0027; see https://source.android.com/setup/contribute/respectful-code for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 2089,
+        "startChar": 19,
+        "endLine": 2089,
+        "endChar": 25
+      },
+      "revId": "c10bcd59fa023efc0984206e8424609e4833fdd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
