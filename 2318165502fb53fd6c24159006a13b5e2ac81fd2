@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2350a56a_c5658295",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-09-29T15:27:03Z",
+      "side": 1,
+      "message": "Is this needed on android-4.19-stable or android-4.14-stable? They have CFI too.",
+      "revId": "2318165502fb53fd6c24159006a13b5e2ac81fd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
