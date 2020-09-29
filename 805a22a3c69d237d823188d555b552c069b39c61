@@ -34,6 +34,24 @@
       "revId": "805a22a3c69d237d823188d555b552c069b39c61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5e154a7_3dab6330",
+        "filename": "arch/arm64/kernel/signal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2020-09-29T11:10:09Z",
+      "side": 1,
+      "message": "And allocates a NR_CPUS bitmap on the stack, instead of something that actually matches the runtime configuration (which is what _var_t provides, and is explicitly designed for stack usage).",
+      "parentUuid": "fe003a7a_6df9e70e",
+      "revId": "805a22a3c69d237d823188d555b552c069b39c61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
