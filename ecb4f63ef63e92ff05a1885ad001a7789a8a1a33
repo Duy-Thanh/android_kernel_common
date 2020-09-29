@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc085dbd_45165e6f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-29T00:05:33Z",
+      "side": 1,
+      "message": "Do you think this is going to land upstream? It\u0027s been several months...should this be changed to \"ANDROID: \"?\n\nHaving said that, it wasn\u0027t rejected upstream, it may just need some followup.",
+      "revId": "ecb4f63ef63e92ff05a1885ad001a7789a8a1a33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65dc0e89_b912ebb7",
+        "filename": "drivers/rpmsg/rpmsg_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-29T00:05:33Z",
+      "side": 1,
+      "message": "Is this right?",
+      "revId": "ecb4f63ef63e92ff05a1885ad001a7789a8a1a33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
