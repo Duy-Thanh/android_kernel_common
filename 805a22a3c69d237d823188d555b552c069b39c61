@@ -52,6 +52,24 @@
       "revId": "805a22a3c69d237d823188d555b552c069b39c61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e7ac94b_80564654",
+        "filename": "arch/arm64/kernel/signal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-09-29T11:45:14Z",
+      "side": 1,
+      "message": "Agreed. How does the below look to you? I used GFP_ATOMIC for this context. If the allocation fails we ignore the intersection and just set the affinity to aarch32_el0_mask. Compile tested only. Waiting for the FVP to come up to run some tests.\n\ndiff --git a/arch/arm64/kernel/signal.c b/arch/arm64/kernel/signal.c\nindex b78db3411cf9..191b41a5e57a 100644\n--- a/arch/arm64/kernel/signal.c\n+++ b/arch/arm64/kernel/signal.c\n@@ -917,10 +917,19 @@ static void set_32bit_cpus_allowed(void)\n         * task has. If it spans no compatible CPU, disregard it entirely.\n         */\n        if (cpumask_intersects(current-\u003ecpus_ptr, \u0026aarch32_el0_mask)) {\n-               cpumask_t cpus_allowed;\n+               cpumask_var_t cpus_allowed;\n\n-               cpumask_and(\u0026cpus_allowed, current-\u003ecpus_ptr, \u0026aarch32_el0_mask);\n-               ret \u003d set_cpus_allowed_ptr(current, \u0026cpus_allowed);\n+               if (!alloc_cpumask_var(\u0026cpus_allowed, GFP_ATOMIC)) {\n+\n+                       ret \u003d set_cpus_allowed_ptr(current, \u0026aarch32_el0_mask);\n+\n+               } else {\n+\n+                       cpumask_and(cpus_allowed, current-\u003ecpus_ptr, \u0026aarch32_el0_mask);\n+                       ret \u003d set_cpus_allowed_ptr(current, cpus_allowed);\n+                       free_cpumask_var(cpus_allowed);\n+\n+               }\n        } else {\n                ret \u003d set_cpus_allowed_ptr(current, \u0026aarch32_el0_mask);\n        }",
+      "parentUuid": "b5e154a7_3dab6330",
+      "revId": "805a22a3c69d237d823188d555b552c069b39c61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
