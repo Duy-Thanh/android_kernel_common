@@ -16,6 +16,24 @@
       "revId": "805a22a3c69d237d823188d555b552c069b39c61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe003a7a_6df9e70e",
+        "filename": "arch/arm64/kernel/signal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-09-29T10:06:12Z",
+      "side": 1,
+      "message": "cpumask_t isn\u0027t affected by this CONFIG. We can convert it to cpumask_var_t and do the alloc/free dance. But the above is simpler IMHO.",
+      "parentUuid": "1a4698e7_aa120436",
+      "revId": "805a22a3c69d237d823188d555b552c069b39c61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
