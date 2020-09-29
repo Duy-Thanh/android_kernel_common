@@ -16,8 +16,14 @@
 #include <trace/hooks/dtask.h>
 #include <trace/hooks/cpuidle.h>
 #include <trace/hooks/topology.h>
+<<<<<<< HEAD   (a428f6 FROMGIT: drm/virtio: Fix use after free in get_capset_info c)
 #include <trace/hooks/mpam.h>
 #include <trace/hooks/gic.h>
+=======
+#include <trace/hooks/debug.h>
+#include <trace/hooks/minidump.h>
+#include <trace/hooks/wqlockup.h>
+>>>>>>> CHANGE (2ea974 ANDROID: workqueue: add vendor hook for wq lockup informatio)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -46,6 +52,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_finished);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_rwsem_list_add);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_futex_plist_add);
+<<<<<<< HEAD   (a428f6 FROMGIT: drm/virtio: Fix use after free in get_capset_info c)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_wait_start);
@@ -57,3 +64,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_idle);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mpam_set);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_find_busiest_group);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gic_resume);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_fpsimd_save);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ipi_stop);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_printk_store);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_regs);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_lockup_pool);
+>>>>>>> CHANGE (2ea974 ANDROID: workqueue: add vendor hook for wq lockup informatio)
