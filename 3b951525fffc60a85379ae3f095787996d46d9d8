@@ -34,6 +34,24 @@
       "revId": "3b951525fffc60a85379ae3f095787996d46d9d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d4cb2a1e_3eff4528",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1691940
+      },
+      "writtenOn": "2020-09-29T09:10:28Z",
+      "side": 1,
+      "message": "android_vh_fput -\u003e Sorry, we missed that we can use security_file_free. Thank you.\nBut you set \"-2\" in the review \"Add vendor hooks to security.c\". There is a vendor hook in security_file_free. Could you, please, answer to my comment there?\n\nandroid_vh_post_setattr -\u003e We need to handle the situation when an attr has been changed successfully. We can\u0027t use security_inode_setattr because it\u0027s called before \"setattr\" operation. \n\nandroid_vh_exec_binprm_fail -\u003e We haven\u0027t found how to replace it with LSM\n\nWhy not IMA layer. IMA is disabled by default at this moment. IMA doesn\u0027t provide API for subscribing to events.",
+      "parentUuid": "8de13dd6_9ca5a1bc",
+      "revId": "3b951525fffc60a85379ae3f095787996d46d9d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
