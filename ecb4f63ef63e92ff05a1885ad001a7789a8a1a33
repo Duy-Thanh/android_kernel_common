@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "af562c87_9d2010f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1729056
+      },
+      "writtenOn": "2020-09-29T22:32:55Z",
+      "side": 1,
+      "message": "Bjorn and I have come to an agreement offline. \n\nWhile the signal functionality is needed, the way it is implemented here is not the best. The accompanying glink patch more or less copies the serial ioctl handler line for line and we want to reduce that redundancy in the code:\nhttps://patchwork.kernel.org/patch/11751263/\n\nST is working on an RPMSG TTY driver which would need to implement these signals for the rpmsg framework. We want to leverage the resulting TTY driver and incorporate it into qcom_glink_native and rpmsg_char. The timeline for this is currently undefined which is why we want to merged this change on android mainline.\n\nI think switching the tag to \"ANDROID: \" would be right for this change.",
+      "parentUuid": "fc085dbd_45165e6f",
+      "revId": "ecb4f63ef63e92ff05a1885ad001a7789a8a1a33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "65dc0e89_b912ebb7",
         "filename": "drivers/rpmsg/rpmsg_internal.h",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2020-09-29T00:05:33Z",
       "side": 1,
       "message": "Is this right?",
+      "revId": "ecb4f63ef63e92ff05a1885ad001a7789a8a1a33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ec4376c_a90228e2",
+        "filename": "drivers/rpmsg/rpmsg_internal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1729056
+      },
+      "writtenOn": "2020-09-29T22:32:55Z",
+      "side": 1,
+      "message": "No, I will fix the copyrights in the next revision.",
+      "parentUuid": "65dc0e89_b912ebb7",
       "revId": "ecb4f63ef63e92ff05a1885ad001a7789a8a1a33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
