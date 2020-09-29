@@ -16,6 +16,24 @@
       "revId": "3c96d796df3c7dd04ca7b67f9b07038226ad56bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "727813b3_2d03e156",
+        "filename": "drivers/trusty/trusty-log.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-29T22:53:38Z",
+      "side": 1,
+      "message": "Done, though it\u0027s another case where the headers don\u0027t even have the same license...",
+      "parentUuid": "d4c8150f_61898ebd",
+      "revId": "3c96d796df3c7dd04ca7b67f9b07038226ad56bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
