@@ -121,6 +121,7 @@ enum incfs_metadata_type {
 	INCFS_MD_SIGNATURE = 3,
 	INCFS_MD_STATUS = 4,
 	INCFS_MD_VERITY_DESCRIPTOR = 5,
+	INCFS_MD_SIGNATURE_INCOMPLETE = 6,
 };
 
 enum incfs_file_header_flags {
@@ -225,7 +226,16 @@ struct incfs_blockmap {
 	__le32 m_block_count;
 } __packed;
 
-/* Metadata record for file signature. Type = INCFS_MD_SIGNATURE */
+/*
+ * Metadata record for file signature. Type = INCFS_MD_SIGNATURE
+ *
+ * Note - this is also the record for MD_SIGNATURE_INCOMPLETE.
+ * When FS_IOC_ENABLE_VERITY is called on a file with no signature, a sigature,
+ * hash tree and metadata record are created and then populated. The populating
+ * can be interrupted, so by marking the record MD_SIGNATURE_INCOMPLETE, we
+ * signal that the contents are invalid but the space can be reused on the next
+ * attempt.
+ */
 struct incfs_file_signature {
 	struct incfs_md_header sg_header;
 
@@ -341,7 +351,8 @@ int incfs_write_hash_block_to_backing_file(struct backing_file_context *bfc,
 					   loff_t file_size);
 
 int incfs_write_signature_to_backing_file(struct backing_file_context *bfc,
-					  struct mem_range sig, u32 tree_size);
+				struct mem_range sig, u32 tree_size,
+				loff_t *tree_offset, loff_t *sig_offset);
 
 int incfs_write_status_to_backing_file(struct backing_file_context *bfc,
 				       loff_t status_offset,

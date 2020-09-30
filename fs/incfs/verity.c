@@ -98,6 +98,7 @@ static int incfs_get_root_hash(struct file *filp,
 			       u8 *root_hash)
 {
 	struct data_file *df = get_incfs_data_file(filp);
+	struct mtree *hash_tree;
 
 	if (!df)
 		return -EINVAL;
@@ -106,6 +107,13 @@ static int incfs_get_root_hash(struct file *filp,
 	    arg->block_size != INCFS_DATA_FILE_BLOCK_SIZE ||
 	    arg->salt_size != 0)
 		return -EINVAL;
+	/*
+	 * Memory barrier to ensure hash tree fully present if being added via
+	 * enable verity
+	 */
+	hash_tree = smp_load_acquire(&df->df_hash_tree);
+	if (!hash_tree)
+		return -EOPNOTSUPP;
 
 	memcpy(root_hash, df->df_hash_tree->root_hash,
 	       df->df_hash_tree->alg->digest_size);

@@ -270,8 +270,19 @@ struct data_file {
 	/* Offset to status metadata header */
 	loff_t df_status_offset;
 
+	/*
+	 * Mutex acquired to enable verity. Note that df_hash_tree is set by
+	 * enable verity
+	 */
+	struct mutex df_enable_verity;
+
+	/*
+	 * Set either at construction time or by enabling verity. In the latter
+	 * case, set via smp_store_release, so use smp_load_acquire to read it
+	 */
 	struct mtree *df_hash_tree;
 
+	/* Guaranteed set if df_hash_tree is set. */
 	struct incfs_df_signature *df_signature;
 
 	struct incfs_df_verity_descriptor *df_verity_descriptor;
