@@ -3563,14 +3563,16 @@ static int enable_verity(const char *mount_dir, struct test_file *file,
 		.sig_ptr = 0,
 	};
 	unsigned char *sig = NULL;
-	size_t sig_len;
+	size_t sig_len = 0;
 	uint64_t flags;
 
 	TEST(filename = concat_file_name(mount_dir, file->name), filename);
 	TEST(fd = open(filename, O_RDONLY | O_CLOEXEC), fd != -1);
 	TESTEQUAL(ioctl(fd, FS_IOC_GETFLAGS, &flags), 0);
 	TESTEQUAL(flags & FS_VERITY_FL, 0);
-	TESTEQUAL(sign(key, cert, file->root_hash, 32, &sig, &sig_len), 0);
+	if (key)
+		TESTEQUAL(sign(key, cert, file->root_hash, 32, &sig, &sig_len),
+			  0);
 
 	fear.sig_size = sig_len;
 	fear.sig_ptr = ptr_to_u64(sig);
@@ -3655,6 +3657,69 @@ static int verity_test(const char *mount_dir)
 out:
 	X509_free(cert);
 	EVP_PKEY_free(key);
+	close(cmd_fd);
+	umount(mount_dir);
+	free(backing_dir);
+	return result;
+}
+
+static int verity_file_valid(const char *mount_dir, struct test_file *file)
+{
+	int result = TEST_FAILURE;
+	char *filename = NULL;
+	int fd = -1;
+	uint8_t buffer[INCFS_DATA_FILE_BLOCK_SIZE];
+	struct incfs_get_file_sig_args gfsa = {
+		.file_signature = ptr_to_u64(buffer),
+		.file_signature_buf_size = sizeof(buffer),
+	};
+	int i;
+
+	TEST(filename = concat_file_name(mount_dir, file->name), filename);
+	TEST(fd = open(filename, O_RDONLY | O_CLOEXEC), fd != -1);
+	TESTEQUAL(ioctl(fd, INCFS_IOC_READ_FILE_SIGNATURE, &gfsa), 0);
+	for (i = 0; i < file->size; i += sizeof(buffer))
+		TESTEQUAL(pread(fd, buffer, sizeof(buffer), i),
+			  file->size - i > sizeof(buffer) ?
+				sizeof(buffer) : file->size - i);
+
+	result = TEST_SUCCESS;
+out:
+	close(fd);
+	free(filename);
+	return result;
+}
+
+static int enable_verity_test(const char *mount_dir)
+{
+	int result = TEST_FAILURE;
+	char *backing_dir = NULL;
+	int cmd_fd = -1;
+	struct test_files_set test = get_test_files_set();
+	int i;
+
+	TEST(backing_dir = create_backing_dir(mount_dir), backing_dir);
+	TESTEQUAL(mount_fs(mount_dir, backing_dir, 0), 0);
+	TEST(cmd_fd = open_commands_file(mount_dir), cmd_fd != -1);
+	for (i = 0; i < test.files_count; ++i) {
+		struct test_file *file = &test.files[i];
+
+		TESTEQUAL(emit_file(cmd_fd, NULL, file->name, &file->id,
+				     file->size, NULL), 0);
+		TESTEQUAL(emit_test_file_data(mount_dir, file), 0);
+		TESTEQUAL(enable_verity(mount_dir, file, NULL, NULL), 0);
+	}
+
+	/* Check files are valid on disk */
+	close(cmd_fd);
+	cmd_fd = -1;
+	TESTEQUAL(umount(mount_dir), 0);
+	TESTEQUAL(mount_fs(mount_dir, backing_dir, 0), 0);
+	for (i = 0; i < test.files_count; ++i)
+		TESTEQUAL(verity_file_valid(mount_dir, &test.files[i]), 0);
+
+	result = TEST_SUCCESS;
+out:
 	close(cmd_fd);
 	umount(mount_dir);
 	free(backing_dir);
@@ -3775,6 +3840,7 @@ int main(int argc, char *argv[])
 		MAKE_TEST(hash_block_count_test),
 		MAKE_TEST(per_uid_read_timeouts_test),
 		MAKE_TEST(verity_test),
+		MAKE_TEST(enable_verity_test),
 	};
 #undef MAKE_TEST
 
