@@ -108,12 +108,18 @@ static int incfs_write_merkle_tree_block(struct inode *inode, const void *buf,
 static int incfs_get_root_hash(struct file *filp, u8 *root_hash)
 {
 	struct data_file *df = get_incfs_data_file(filp);
+	struct mtree *hash_tree;
 
 	pr_debug("Enter\n");
 	if (!df)
 		return -EINVAL;
 
-	if (!df->df_hash_tree)
+	/*
+	 * Memory barrier to ensure hash tree fully present if being added via
+	 * enable verity
+	 */
+	hash_tree = smp_load_acquire(&df->df_hash_tree);
+	if (!hash_tree)
 		return -EOPNOTSUPP;
 
 	memcpy(root_hash, df->df_hash_tree->root_hash,
