@@ -273,8 +273,23 @@ struct data_file {
 	/* Offset to status metadata header */
 	loff_t df_status_offset;
 
+	/*
+	 * Mutex acquired while building the hash tree as part of enabling
+	 * verity. Note that df_hash_tree is set by enable verity.
+	 *
+	 * The backing file mutex bc_mutex  may be taken while this mutex is
+	 * held.
+	 */
+	struct mutex df_build_merkle_tree;
+
+	/*
+	 * Set either at construction time or during enabling verity. In the
+	 * latter case, set via smp_store_release, so use smp_load_acquire to
+	 * read it
+	 */
 	struct mtree *df_hash_tree;
 
+	/* Guaranteed set if df_hash_tree is set. */
 	struct incfs_df_signature *df_signature;
 
 	/*

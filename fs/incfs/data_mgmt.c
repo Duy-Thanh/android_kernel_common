@@ -262,6 +262,8 @@ struct data_file *incfs_open_data_file(struct mount_info *mi, struct file *bf)
 		goto out;
 	}
 
+	mutex_init(&df->df_build_merkle_tree);
+
 	df->df_backing_file_context = bfc;
 	df->df_mount_info = mi;
 	for (i = 0; i < ARRAY_SIZE(df->df_segments); i++)
@@ -333,6 +335,7 @@ void incfs_free_data_file(struct data_file *df)
 	kfree(df->df_signature);
 	kfree(df->df_verity_file_digest.data);
 	kfree(df->df_verity_signature);
+	mutex_destroy(&df->df_build_merkle_tree);
 	kfree(df);
 }
 
@@ -598,7 +601,11 @@ static int validate_hash_tree(struct backing_file_context *bfc, struct file *f,
 	int hash_per_block;
 	pgoff_t file_pages;
 
-	tree = df->df_hash_tree;
+	/*
+	 * Memory barrier to make sure tree is fully present if added via enable
+	 * verity
+	 */
+	tree = smp_load_acquire(&df->df_hash_tree);
 	sig = df->df_signature;
 	if (!tree || !sig)
 		return 0;
@@ -1542,8 +1549,28 @@ static int incfs_scan_metadata_chain(struct data_file *df)
 		int hash_block_count = get_blocks_count_for_size(
 			df->df_hash_tree->hash_tree_area_size);
 
+		/*
+		 * There are two valid formats. Files created with a merkle
+		 * tree have a blockmap that contains both the hash blocks
+		 * and the data blocks, thus:
+		 *
+		 * df->df_data_block_count + hash_block_count == df->df_total_block_count
+		 *
+		 * However, files that have had a merkle tree added via
+		 * FS_IOC_ENABLE_VERITY still have the original block count
+		 * (the merkle tree is stored elsewhere, and is guaranteed
+		 * complete.) Thus:
+		 *
+		 * df->df_data_block_count == df->df_total_block_count
+		 *
+		 * (hash_block_count will still be the correct size for a file
+		 * of this size)
+		 *
+		 * If neither condition is true, this is an error
+		 */
 		if (df->df_data_block_count + hash_block_count !=
-		    df->df_total_block_count)
+		    df->df_total_block_count
+		    && df->df_data_block_count != df->df_total_block_count)
 			result = -EINVAL;
 	} else if (df->df_data_block_count != df->df_total_block_count)
 		result = -EINVAL;
