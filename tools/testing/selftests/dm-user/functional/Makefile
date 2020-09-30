@@ -5,7 +5,8 @@ CFLAGS := $(CFLAGS) -g -O2 -Wall -static -D_GNU_SOURCE $(INCLUDES) -pthread
 HEADERS := \
 	../include/logging.h
 TEST_GEN_FILES := \
-	simple-read-all
+	simple-read-all \
+	short-read-all
 
 TEST_PROGS := run.sh
 
