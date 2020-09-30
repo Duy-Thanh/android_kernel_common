@@ -229,7 +229,12 @@ struct incfs_blockmap {
 	__le32 m_block_count;
 } __packed;
 
-/* Metadata record for file signature. Type = INCFS_MD_SIGNATURE */
+/*
+ * Metadata record for file signature. Type = INCFS_MD_SIGNATURE
+ *
+ * When FS_IOC_ENABLE_VERITY is called on a file with no signature, a signature,
+ * hash tree and metadata record are created and then populated.
+ */
 struct incfs_file_signature {
 	struct incfs_md_header sg_header;
 
@@ -358,7 +363,8 @@ int incfs_write_hash_block_to_backing_file(struct backing_file_context *bfc,
 					   loff_t file_size);
 
 int incfs_write_signature_to_backing_file(struct backing_file_context *bfc,
-					  struct mem_range sig, u32 tree_size);
+				struct mem_range sig, u32 tree_size,
+				loff_t *tree_offset, loff_t *sig_offset);
 
 int incfs_write_status_to_backing_file(struct backing_file_context *bfc,
 				       loff_t status_offset,
