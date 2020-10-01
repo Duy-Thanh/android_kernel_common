@@ -225,11 +225,22 @@ struct signal_struct {
 
 	struct mutex cred_guard_mutex;	/* guard against foreign influences on
 					 * credential calculations
+<<<<<<< HEAD   (2a7d52 ANDROID: rpmsg: core: Add signal API support)
 					 * (notably. ptrace) */
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
+=======
+					 * (notably. ptrace)
+					 * Deprecated do not use in new code.
+					 * Use exec_update_mutex instead.
+					 */
+	struct mutex exec_update_mutex;	/* Held while task_struct is being
+					 * updated during exec, and may have
+					 * inconsistent permissions.
+					 */
+>>>>>>> BRANCH (a9518c Linux 5.4.69)
 } __randomize_layout;
 
 /*

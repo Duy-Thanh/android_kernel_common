@@ -1053,8 +1053,13 @@ next_step:
 		 * race condition along with SSR block allocation.
 		 */
 		if ((gc_type == BG_GC && has_not_enough_free_secs(sbi, 0, 0)) ||
+<<<<<<< HEAD   (2a7d52 ANDROID: rpmsg: core: Add signal API support)
 				get_valid_blocks(sbi, segno, true) ==
 							BLKS_PER_SEC(sbi))
+=======
+				get_valid_blocks(sbi, segno, false) ==
+							sbi->blocks_per_seg)
+>>>>>>> BRANCH (a9518c Linux 5.4.69)
 			return submitted;
 
 		if (check_valid_map(sbi, segno, off) == 0)
