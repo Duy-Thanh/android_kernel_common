@@ -1,0 +1,79 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005294787",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1444530?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "ccd6daaa_a7b8bd00",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-10-01T17:57:10Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 334595526 android-build.ayeaye-python-dispatcher_20200930.04_p0",
+      "revId": "1233b99cf1730ff638703ccd78e1faa05c129237",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005294789",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1444530?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "7d5d911a_36e10d19",
+        "filename": "tools/testing/selftests/dm-user/functional/short-read-all.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-10-01T17:57:10Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 124,
+        "startChar": 27,
+        "endLine": 124,
+        "endChar": 28
+      },
+      "revId": "1233b99cf1730ff638703ccd78e1faa05c129237",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005294789",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1444530?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "583e1410_6efc7c09",
+        "filename": "tools/testing/selftests/dm-user/functional/short-read-all.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-10-01T17:57:10Z",
+      "side": 1,
+      "message": "Please remove the trailing whitespace.",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 1
+      },
+      "revId": "1233b99cf1730ff638703ccd78e1faa05c129237",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
