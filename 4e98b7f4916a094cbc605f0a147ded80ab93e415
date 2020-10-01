@@ -16,6 +16,29 @@
       "revId": "4e98b7f4916a094cbc605f0a147ded80ab93e415",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e038e9d6_277ad1aa",
+        "filename": "drivers/soc/qcom/cmd-db.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-01T08:41:29Z",
+      "side": 1,
+      "message": "nit, this needs to be \"2016-2018, 2020\" right?  I suggest reading the documentation on how copyrights are listed to be sure though, your company should have that somewhere...",
+      "range": {
+        "startLine": 2,
+        "startChar": 22,
+        "endLine": 2,
+        "endChar": 26
+      },
+      "revId": "4e98b7f4916a094cbc605f0a147ded80ab93e415",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
