@@ -39,6 +39,30 @@
       "revId": "c220f8ffd29df9a6982dd36b59855596377d42c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c99fdafa_902fd7b9",
+        "filename": "arch/arm64/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-10-01T11:39:11Z",
+      "side": 1,
+      "message": "eg:\nsimilar to how ROCKCHIP_IOMMU, EXYNOS_IOMMU, IPMMU_VMSA perform similar operations wrt ARM_DMA_USE_IOMMU.\n\nTesting complete, change does not break ABI.",
+      "parentUuid": "5f5464e2_2664a77a",
+      "range": {
+        "startLine": 867,
+        "startChar": 0,
+        "endLine": 867,
+        "endChar": 10
+      },
+      "revId": "c220f8ffd29df9a6982dd36b59855596377d42c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
