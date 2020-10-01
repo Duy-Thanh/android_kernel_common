@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "3098e8e3_af28f053",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1674446
+      },
+      "writtenOn": "2020-10-01T14:54:51Z",
+      "side": 1,
+      "message": "Will update the patch upstream with the copyright change as well.",
+      "revId": "4e98b7f4916a094cbc605f0a147ded80ab93e415",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e038e9d6_277ad1aa",
         "filename": "drivers/soc/qcom/cmd-db.c",
         "patchSetId": 3
@@ -39,6 +56,30 @@
       "revId": "4e98b7f4916a094cbc605f0a147ded80ab93e415",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21b5680f_6fe6a466",
+        "filename": "drivers/soc/qcom/cmd-db.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1674446
+      },
+      "writtenOn": "2020-10-01T14:54:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e038e9d6_277ad1aa",
+      "range": {
+        "startLine": 2,
+        "startChar": 22,
+        "endLine": 2,
+        "endChar": 26
+      },
+      "revId": "4e98b7f4916a094cbc605f0a147ded80ab93e415",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
