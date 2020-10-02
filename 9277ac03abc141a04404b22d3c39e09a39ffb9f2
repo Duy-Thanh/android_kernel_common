@@ -33,6 +33,24 @@
       "revId": "9277ac03abc141a04404b22d3c39e09a39ffb9f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f3af93a_fd4feffd",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-10-02T17:25:55Z",
+      "side": 1,
+      "message": "Hi Stephen,\n\nI can\u0027t comment this change, that I don\u0027t know. But there\u0027s no such thing upstream and I don\u0027t see why it would be needed. The workqueue framework should protect calls to cpuset_hotplug_workfn(), there is no need for serializing with a flush.\n\nOn my setup:\n\n1. idle system: max empirical cpu_pause latency of 800 us\n\n2. busy system: max empirical cpu_pause latency of 6ms (before going idle)\n  2.a due to sched_cpu_deactivate() -\u003e synchronize_rcu_expidited()\n  2.b due to the CPU migration (A penalty that CPU isolation has to pay as well anyway.)\n\nI\u0027m currently working on an updated version, using a recent patch-set published on LKML. This patch-set is changing the way tasks are migrated away from a CPU on the HP path. This should allow to mitigate the latency introduced by the synchronize_rcu_expidited()... I\u0027ll try to share numbers to back this new approach soon.\n\nIn any case, I can\u0027t reproduce such high numbers on my end.",
+      "parentUuid": "e81ab750_d850b48e",
+      "revId": "9277ac03abc141a04404b22d3c39e09a39ffb9f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
