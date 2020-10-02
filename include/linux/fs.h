@@ -42,6 +42,7 @@
 
 #include <asm/byteorder.h>
 #include <uapi/linux/fs.h>
+#include <linux/android_vendor.h>
 
 struct backing_dev_info;
 struct bdi_writeback;
@@ -957,6 +958,8 @@ struct file {
 	struct address_space	*f_mapping;
 	errseq_t		f_wb_err;
 	errseq_t		f_sb_err; /* for syncfs */
+
+	ANDROID_VENDOR_DATA(1);
 } __randomize_layout
   __attribute__((aligned(4)));	/* lest something weird decides that 2 is OK */
 
