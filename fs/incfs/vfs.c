@@ -957,6 +957,9 @@ static long ioctl_fsverity_enable(struct file *f, const void __user *arg)
 	if (!df)
 		return -EINVAL;
 
+	if (df->df_header_flags & INCFS_FILE_MAPPED)
+		return -EINVAL;
+
 	error = mutex_lock_interruptible(&df->df_enable_verity);
 	if (error)
 		return error;
