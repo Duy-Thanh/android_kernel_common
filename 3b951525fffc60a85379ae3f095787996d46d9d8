@@ -52,6 +52,24 @@
       "revId": "3b951525fffc60a85379ae3f095787996d46d9d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c0f5dd68_ef017846",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1691940
+      },
+      "writtenOn": "2020-10-02T17:20:27Z",
+      "side": 1,
+      "message": "We\u0027ve removed vendor hooks from attr.c and file_table.c. Please, review the patch.",
+      "parentUuid": "d4cb2a1e_3eff4528",
+      "revId": "3b951525fffc60a85379ae3f095787996d46d9d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
