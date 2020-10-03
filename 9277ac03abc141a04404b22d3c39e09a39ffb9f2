@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "603c69bd_1367f65b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-03T17:18:21Z",
+      "side": 1,
+      "message": "isn\u0027t this the same as the current \"idle\" cpu mode that the cpu hotplug logic supports?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 12
+      },
+      "revId": "9277ac03abc141a04404b22d3c39e09a39ffb9f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "52e26753_15f08b21",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
