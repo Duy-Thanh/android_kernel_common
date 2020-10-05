@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a4b19e9_a205ef95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-10-05T16:25:20Z",
+      "side": 1,
+      "message": "Please fix all \"Lint-1\" issues in this series (eg, add \"Bug: \" tag for this CL).",
+      "revId": "0e4b4ddf42603ca1a919fd227beaaf1b4653287b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
