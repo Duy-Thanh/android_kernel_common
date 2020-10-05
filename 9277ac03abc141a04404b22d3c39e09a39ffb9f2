@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0cfbf393_f75c507d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-10-05T14:00:11Z",
+      "side": 1,
+      "message": "The idea here is to reach and maintain an idle state as quickly as possible, by removing the CPU from the scheduler control.\n\nMaximizing the CPU idle is an important feature for some mobile devices:\n\n1. For thermal mitigation.\n2. To exclude some CPUs from the task placement.\n\nWhile the entire hotplug path takes a few dozens of ms to turn off and on a CPU, this \"feature\" can reach an idle state in a fraction of that time. Once \"paused\", the rq will simply pick the idle task and nothing else will be scheduled. (with the exception of the per-CPU kernel threads)\n\nIt has been created following some discussions around the original patch-set: \nhttps://android-review.googlesource.com/c/kernel/common/+/1365881/",
+      "parentUuid": "603c69bd_1367f65b",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 12
+      },
+      "revId": "9277ac03abc141a04404b22d3c39e09a39ffb9f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "52e26753_15f08b21",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
