@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "08ac276e_def27a86",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1635667
+      },
+      "writtenOn": "2020-10-05T12:13:14Z",
+      "side": 1,
+      "message": "It uses for parse the arguments of module_param_cb in debugging module",
+      "parentUuid": "26882c2d_d86e38e0",
+      "range": {
+        "startLine": 235,
+        "startChar": 2,
+        "endLine": 236,
+        "endChar": 12
+      },
+      "revId": "7373b9e461657a12501518cc087ef0988f5335b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f467bffb_b251f67e",
         "filename": "android/abi_gki_aarch64_galaxy",
         "patchSetId": 1
@@ -62,6 +86,30 @@
       "revId": "7373b9e461657a12501518cc087ef0988f5335b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e3e53d8_7d9f615a",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 1
+      },
+      "lineNbr": 1311,
+      "author": {
+        "id": 1635667
+      },
+      "writtenOn": "2020-10-05T12:13:14Z",
+      "side": 1,
+      "message": "I will remove it",
+      "parentUuid": "f467bffb_b251f67e",
+      "range": {
+        "startLine": 1311,
+        "startChar": 2,
+        "endLine": 1311,
+        "endChar": 23
+      },
+      "revId": "7373b9e461657a12501518cc087ef0988f5335b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
