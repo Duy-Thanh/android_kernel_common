@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "e2c20e5e_a0c52808",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-05T12:25:55Z",
+      "side": 1,
+      "message": "Ick, module options that need to be parsed like this?  Ok, good luck with that!  😊",
+      "parentUuid": "08ac276e_def27a86",
+      "range": {
+        "startLine": 235,
+        "startChar": 2,
+        "endLine": 236,
+        "endChar": 12
+      },
+      "revId": "7373b9e461657a12501518cc087ef0988f5335b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f467bffb_b251f67e",
         "filename": "android/abi_gki_aarch64_galaxy",
         "patchSetId": 1
