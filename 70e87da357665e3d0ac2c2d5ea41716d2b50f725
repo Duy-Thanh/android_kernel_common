@@ -16,6 +16,24 @@
       "revId": "70e87da357665e3d0ac2c2d5ea41716d2b50f725",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "569af0fe_a69a4550",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710531
+      },
+      "writtenOn": "2020-10-06T07:12:00Z",
+      "side": 1,
+      "message": "In linux-next upstream, printk-rework branch is merged.\nBut android-mainline is not merged with print-rework branch. So printk structure is different. So I can\u0027t get this information to different way. I submitted here because I need this information.",
+      "parentUuid": "679210a0_ddde27e4",
+      "revId": "70e87da357665e3d0ac2c2d5ea41716d2b50f725",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
