@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8ac0bd0_f4b1664e",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 4
+      },
+      "lineNbr": 1010,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-06T08:30:21Z",
+      "side": 1,
+      "message": "no driver should be messing with the mm of a file, what driver do you have that needs this symbol?",
+      "range": {
+        "startLine": 1010,
+        "startChar": 0,
+        "endLine": 1010,
+        "endChar": 17
+      },
+      "revId": "ebaebc32e58f3eb63a865ef46aa8a01ce197c9e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
