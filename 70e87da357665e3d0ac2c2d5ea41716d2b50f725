@@ -34,6 +34,24 @@
       "revId": "70e87da357665e3d0ac2c2d5ea41716d2b50f725",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "46a8591a_61b90f22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-06T08:24:01Z",
+      "side": 1,
+      "message": "The printk-rework code will be merged here in a few weeks, so all should be good then, right?\n\nIf not, then backport the needed upstream patches here, don\u0027t fork the code as that will cause massive merge issues on everyone\u0027s part.",
+      "parentUuid": "569af0fe_a69a4550",
+      "revId": "70e87da357665e3d0ac2c2d5ea41716d2b50f725",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
