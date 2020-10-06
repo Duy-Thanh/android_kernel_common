@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "679210a0_ddde27e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-06T07:01:52Z",
+      "side": 1,
+      "message": "This was rejected upstream, and also they showed a different way to get most of this information, so why is this submitted here?",
+      "revId": "70e87da357665e3d0ac2c2d5ea41716d2b50f725",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
