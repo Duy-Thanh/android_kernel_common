@@ -63,6 +63,30 @@
       "revId": "c220f8ffd29df9a6982dd36b59855596377d42c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c6d92061_4413eba5",
+        "filename": "arch/arm64/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1767641
+      },
+      "writtenOn": "2020-10-06T03:05:45Z",
+      "side": 1,
+      "message": "\u003e Please advise, sounds like you have a private tree problem with an alternate\nKconfig for a different IOMMU, and not a common kernel issue?\n\nYes, because 4.19 is not totally for gki only(at least for android TV), non-gki kernel still need to upgrade kernel sublevel and suffer this issue.\n\nAnd also this is a series of fixes:)\nhttps://android-review.googlesource.com/c/kernel/common/+/1433395\nhttps://android-review.googlesource.com/c/kernel/common/+/1433394",
+      "parentUuid": "c99fdafa_902fd7b9",
+      "range": {
+        "startLine": 867,
+        "startChar": 0,
+        "endLine": 867,
+        "endChar": 10
+      },
+      "revId": "c220f8ffd29df9a6982dd36b59855596377d42c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
