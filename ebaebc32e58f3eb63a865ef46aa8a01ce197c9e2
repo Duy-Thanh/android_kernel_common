@@ -46,6 +46,30 @@
       },
       "revId": "ebaebc32e58f3eb63a865ef46aa8a01ce197c9e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "babd4f9e_a85ff7c6",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 4
+      },
+      "lineNbr": 1010,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-07T11:38:37Z",
+      "side": 1,
+      "message": "Ah.  That seems like it can be circumvented, but as \"TrustZone\" is an \"interesting\" idea, I\u0027m not going to comment further 😊\n\nSo this is fine, thanks.",
+      "parentUuid": "1a560687_fcb8c899",
+      "range": {
+        "startLine": 1010,
+        "startChar": 0,
+        "endLine": 1010,
+        "endChar": 17
+      },
+      "revId": "ebaebc32e58f3eb63a865ef46aa8a01ce197c9e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
