@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "c8ac0bd0_f4b1664e",
         "filename": "android/abi_gki_aarch64_galaxy",
@@ -20,8 +21,31 @@
         "endChar": 17
       },
       "revId": "ebaebc32e58f3eb63a865ef46aa8a01ce197c9e2",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a560687_fcb8c899",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 4
+      },
+      "lineNbr": 1010,
+      "author": {
+        "id": 1635667
+      },
+      "writtenOn": "2020-10-07T09:10:19Z",
+      "side": 1,
+      "message": "When the android application has a task that needs to be handled by the TrustZone, it is requested to the Secure OS.\nIt uses the api to check the requesting client application.",
+      "parentUuid": "c8ac0bd0_f4b1664e",
+      "range": {
+        "startLine": 1010,
+        "startChar": 0,
+        "endLine": 1010,
+        "endChar": 17
+      },
+      "revId": "ebaebc32e58f3eb63a865ef46aa8a01ce197c9e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
