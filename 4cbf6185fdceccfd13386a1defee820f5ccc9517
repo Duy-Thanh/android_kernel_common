@@ -91,6 +91,42 @@
       "message": "NB: aosp/1448816 was it applied, or not, in your tree?",
       "revId": "4cbf6185fdceccfd13386a1defee820f5ccc9517",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "100c30d7_d2521f11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2020-10-07T13:04:13Z",
+      "side": 1,
+      "message": "There were following size mismatch warnings on db845c while running \"adb remount\" command.\n\npundiramit@codenameduchess:aosp$ \npundiramit@codenameduchess:aosp$ adb remount\n[liblp]Device size does not match (got 12437225472, expected 10737418240)\n[liblp]Block device super size mismatch (expected10737418240, got 12437225472)\n[libfs_mgr]add partition scratch\nUsing overlayfs for /system\n[liblp]Device size does not match (got 12437225472, expected 10737418240)\n[liblp]Block device super size mismatch (expected10737418240, got 12437225472)\n[libfs_mgr]add partition scratch\nUsing overlayfs for /vendor\n[liblp]Device size does not match (got 12437225472, expected 10737418240)\n[liblp]Block device super size mismatch (expected10737418240, got 12437225472)\n[libfs_mgr]add partition scratch\nUsing overlayfs for /system_ext\n[liblp]Device size does not match (got 12437225472, expected 10737418240)\n[liblp]Block device super size mismatch (expected10737418240, got 12437225472)\n[libfs_mgr]add partition scratch\nUsing overlayfs for /product\nNow reboot your device for settings to take effect\nremount succeeded\npundiramit@codenameduchess:aosp$ \n\n\nI do not see remount failures on reboot after fixing the super partition size in BoardConfig aosp/1452362. Tried reproducing 3-4 times already. Sorry for the noise.",
+      "parentUuid": "0c1738a1_7edac021",
+      "revId": "4cbf6185fdceccfd13386a1defee820f5ccc9517",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dab8f422_d054dc82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2020-10-07T13:04:13Z",
+      "side": 1,
+      "message": "It is there in my tree.",
+      "parentUuid": "ca767b99_32ce2510",
+      "revId": "4cbf6185fdceccfd13386a1defee820f5ccc9517",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
