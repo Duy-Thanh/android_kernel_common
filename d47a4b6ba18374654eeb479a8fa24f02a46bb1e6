@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30b340e4_c4537863",
+        "filename": "fs/overlayfs/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-10-07T12:42:20Z",
+      "side": 0,
+      "message": "Aha! A properly secured exec requires that all credentials are controlled. However, CAP_FOWNER is one of them, and thus this breaks execv.",
+      "range": {
+        "startLine": 56,
+        "startChar": 12,
+        "endLine": 56,
+        "endChar": 46
+      },
+      "revId": "d47a4b6ba18374654eeb479a8fa24f02a46bb1e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
