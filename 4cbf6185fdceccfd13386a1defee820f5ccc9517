@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a32fe91_e28d1d11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-10-07T06:36:50Z",
+      "side": 1,
+      "message": "NOT FOR MERGING, ONLY FOR DEBUG\n\nThis patch seems to resolve the crash Peter and Amit reported in the change here only seen with android-mainline (android12-5.4 works ok):\n  https://android-review.googlesource.com/c/device/linaro/dragonboard/+/1449169\n\nI suspect the andorid-mainline tree need a proper fix around these changes, but reverting this bit seems to get it working again.\n\nMark: Do you have a better sense of what might be needed here?\n",
+      "revId": "4cbf6185fdceccfd13386a1defee820f5ccc9517",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
