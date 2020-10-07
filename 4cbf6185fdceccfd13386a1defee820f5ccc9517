@@ -74,6 +74,23 @@
       "parentUuid": "9d739777_0e30e712",
       "revId": "4cbf6185fdceccfd13386a1defee820f5ccc9517",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca767b99_32ce2510",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-10-07T10:58:04Z",
+      "side": 1,
+      "message": "NB: aosp/1448816 was it applied, or not, in your tree?",
+      "revId": "4cbf6185fdceccfd13386a1defee820f5ccc9517",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
