@@ -16,6 +16,23 @@
       "message": "This looks odd, why not just fix the code so it is correct?  Why is a \"hook\" needed here?",
       "revId": "3518eab65605c87cb487dcb866a630227a72f319",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "251ecada_956ed7c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2020-10-07T13:48:11Z",
+      "side": 1,
+      "message": "+1 to what Greg said. If the kernel has a bug, then it seems like it should be fixed in the kernel instead of adding a vendor hook.\n\nVendor hooks are very expensive to maintain. They are an API surface that needs to be supported for multiple years. Also, they can make it difficult to evolve the code, refactor it, etc. because the engineers maintaining the kernel code cannot see how OEMs are using these hooks.",
+      "revId": "3518eab65605c87cb487dcb866a630227a72f319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
