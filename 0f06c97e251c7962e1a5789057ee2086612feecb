@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75e9d472_d5f9f679",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-07T06:54:06Z",
+      "side": 1,
+      "message": "how can a void function return a value like your code below is asking it to do?",
+      "range": {
+        "startLine": 332,
+        "startChar": 1,
+        "endLine": 332,
+        "endChar": 5
+      },
+      "revId": "0f06c97e251c7962e1a5789057ee2086612feecb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
