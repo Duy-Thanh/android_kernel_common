@@ -16,6 +16,23 @@
       "message": "NOT FOR MERGING, ONLY FOR DEBUG\n\nThis patch seems to resolve the crash Peter and Amit reported in the change here only seen with android-mainline (android12-5.4 works ok):\n  https://android-review.googlesource.com/c/device/linaro/dragonboard/+/1449169\n\nI suspect the andorid-mainline tree need a proper fix around these changes, but reverting this bit seems to get it working again.\n\nMark: Do you have a better sense of what might be needed here?\n",
       "revId": "4cbf6185fdceccfd13386a1defee820f5ccc9517",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d739777_0e30e712",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2020-10-07T07:41:48Z",
+      "side": 1,
+      "message": "This revert fixes some but not all of the issues I ran into with overlayfs (adb remount) on android-mainline.\n\n\"adb root; adb remount; adb sync; adb reboot\" works fine.\n\"adb reboot\" doesn\u0027t crash either, but adb remount/sync doesn\u0027t work again after reboot.\n\nThis sequence:\n\"adb root; adb remount; adb reboot; adb root; adb remount; adb sync;\"\nfails with:\n\n\"\nfailed to remount partition dev:overlay mnt:/vendor: Read-only file system\nConsider providing all the dependencies to enable overlayfs\nremount failed\n\"",
+      "revId": "4cbf6185fdceccfd13386a1defee820f5ccc9517",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
