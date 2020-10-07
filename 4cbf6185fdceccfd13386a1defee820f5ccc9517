@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "29d6aafe_a4f5f790",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-10-07T10:56:02Z",
+      "side": 1,
+      "message": "Current theory: I discovered that in init CapEff goes to 0 from the expected 0x000001ffffffffff (?) trying to confirm (lost one of the disk drives on my desktop, so delayed), and something in overlayfs was borking init\u0027s Capabilities. Not sure if this is the same problem you are experiencing.\n\nAlso, nit, raw (not filtered TH) checkpatch.pl requires Signed-off-by: line ahead of the Change-Id: line. Defacto standard is author\u0027s Signed-off-by: line is first in footer.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 51
+      },
+      "revId": "4cbf6185fdceccfd13386a1defee820f5ccc9517",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1a32fe91_e28d1d11",
@@ -31,6 +54,24 @@
       "writtenOn": "2020-10-07T07:41:48Z",
       "side": 1,
       "message": "This revert fixes some but not all of the issues I ran into with overlayfs (adb remount) on android-mainline.\n\n\"adb root; adb remount; adb sync; adb reboot\" works fine.\n\"adb reboot\" doesn\u0027t crash either, but adb remount/sync doesn\u0027t work again after reboot.\n\nThis sequence:\n\"adb root; adb remount; adb reboot; adb root; adb remount; adb sync;\"\nfails with:\n\n\"\nfailed to remount partition dev:overlay mnt:/vendor: Read-only file system\nConsider providing all the dependencies to enable overlayfs\nremount failed\n\"",
+      "revId": "4cbf6185fdceccfd13386a1defee820f5ccc9517",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c1738a1_7edac021",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-10-07T10:56:02Z",
+      "side": 1,
+      "message": "Amit please provide me the df and cat /proc/mounts results before and after each of the first and second remount, maybe I can spot a clue?",
+      "parentUuid": "9d739777_0e30e712",
       "revId": "4cbf6185fdceccfd13386a1defee820f5ccc9517",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
