@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93dea2ac_13071062",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-10-07T18:29:28Z",
+      "side": 1,
+      "message": "You should be set as the author and I should probably just be moved to a Reported-by: tag, as your patch here is substantially different and much more insightful then my workaround hack.",
+      "revId": "a5657108f59374844349dcc7db45be07eca50c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
