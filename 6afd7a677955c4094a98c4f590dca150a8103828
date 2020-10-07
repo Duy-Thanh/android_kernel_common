@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "9f4c1e81_296d604a",
         "filename": "include/linux/fs.h",
@@ -20,8 +21,31 @@
         "endChar": 33
       },
       "revId": "6afd7a677955c4094a98c4f590dca150a8103828",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6772b913_2759e41a",
+        "filename": "include/linux/fs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1691940
+      },
+      "writtenOn": "2020-10-07T18:11:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f4c1e81_296d604a",
+      "range": {
+        "startLine": 962,
+        "startChar": 0,
+        "endLine": 962,
+        "endChar": 33
+      },
+      "revId": "6afd7a677955c4094a98c4f590dca150a8103828",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
