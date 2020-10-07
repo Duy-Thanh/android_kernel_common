@@ -16,6 +16,23 @@
       "message": "You should be set as the author and I should probably just be moved to a Reported-by: tag, as your patch here is substantially different and much more insightful then my workaround hack.",
       "revId": "a5657108f59374844349dcc7db45be07eca50c5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb953ed7_cf21d423",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-10-07T18:29:38Z",
+      "side": 1,
+      "message": "Verified that this fixes boot after remount on db845c.",
+      "revId": "a5657108f59374844349dcc7db45be07eca50c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
