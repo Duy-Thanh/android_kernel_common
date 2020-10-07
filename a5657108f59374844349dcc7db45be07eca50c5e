@@ -33,6 +33,23 @@
       "message": "Verified that this fixes boot after remount on db845c.",
       "revId": "a5657108f59374844349dcc7db45be07eca50c5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44ed804f_ee28b385",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-10-07T19:02:34Z",
+      "side": 1,
+      "message": "Validated here as well.\n\nMark, Thanks so much for coming up with a proper fix for this so quickly! ",
+      "revId": "a5657108f59374844349dcc7db45be07eca50c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
