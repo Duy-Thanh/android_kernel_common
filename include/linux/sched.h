@@ -1298,7 +1298,7 @@ struct task_struct {
 	unsigned long			prev_lowest_stack;
 #endif
 
-	ANDROID_VENDOR_DATA_ARRAY(1, 2);
+	ANDROID_VENDOR_DATA_ARRAY(1, 3);
 	ANDROID_OEM_DATA_ARRAY(1, 2);
 
 	ANDROID_KABI_RESERVE(1);
