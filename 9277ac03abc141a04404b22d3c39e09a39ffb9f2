@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "603c69bd_1367f65b",
         "filename": "/COMMIT_MSG",
@@ -20,10 +21,10 @@
         "endChar": 12
       },
       "revId": "9277ac03abc141a04404b22d3c39e09a39ffb9f2",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "0cfbf393_f75c507d",
         "filename": "/COMMIT_MSG",
@@ -44,10 +45,34 @@
         "endChar": 12
       },
       "revId": "9277ac03abc141a04404b22d3c39e09a39ffb9f2",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5e8bea9_cb42be7b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-07T18:05:30Z",
+      "side": 1,
+      "message": "Please work with upstream to address these issues, changing kernel/cpu.c should not be done lightly :)",
+      "parentUuid": "0cfbf393_f75c507d",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 12
+      },
+      "revId": "9277ac03abc141a04404b22d3c39e09a39ffb9f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
       "key": {
         "uuid": "52e26753_15f08b21",
         "filename": "/PATCHSET_LEVEL",
@@ -61,10 +86,10 @@
       "side": 1,
       "message": "Hi Vincent-\n\nI just wanted to update you on the delays we were able to reproduce with pause, vs isolation, and where we think those delays are getting introduced.\n\nWhile I have further analysis to complete on the 1000x thermal cases, the below was done with our 100x pause stress test case (100x meaning taking ~100x times as long to pause vs isolate).\n\nAny suggestions you have or proposals to deal with this, are appreciated.\n\nSincerely,\nStephen Dickey\n",
       "revId": "9277ac03abc141a04404b22d3c39e09a39ffb9f2",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "e81ab750_d850b48e",
         "filename": "kernel/cpu.c",
@@ -78,10 +103,10 @@
       "side": 1,
       "message": "Vincent, \n\nIt appears that this call to pause with cpu_down, and the below call to cpu_up, are experiencing significant delays we didn\u0027t see with Isolation.\n\nSpecifically, we\u0027re seeing significant delays inside of do_cpu_down/do_cpu_up because, just before the call to cpu_maps_update_begin() we have a call to cpuset_wait_for_hotplug().\n\n        cpuset_wait_for_hotplug();  \u003c\u003c\u003c\u003c\n        cpu_maps_update_begin();\n\terr \u003d cpu_down_maps_locked(cpu, target);\n        cpu_maps_update_done();\n        return err;\n\nThis had been inserted by our team about 2 years ago.  The reason this was inserted, is that we were experiencing unreliable scheduler domain rebuilding without this.  In essence, the scheduler domains can have garbage values not representing the current state of the system. This obviously affects task placement and I think the correctness of isolation (or pause).  The call to cpuset_wait_for_hotplug() mitigates that issue, by waiting for the hotplug kworker to finish.\n\nWith isolation, we never saw this delay, because, obviously, it didn\u0027t use hotplug.  Instead, there was logic in the path to hotplug out/in the cpu, which ensured that isolation didn\u0027t conflict with hotplug  (basically we made sure that we unisolated when the cpu was going down, and isolated when it came back up again).  \n\nBut the actual act of isolating a CPU was extremely fast.  Our measurements now indicate that isolation happens in less than 2.7mS worst case, where pause can take up to 100 or 150mS to finish.  And I should note, we haven\u0027t yet finished analysis for the thermal issues we\u0027re seeing, where we\u0027re seeing pause take on the order of 1-2 seconds at times.\n\nSincerely,\nStephen Dickey\n\nQuick Definitions (I\u0027m trying to distinguish between the two implementations).\n\nisolation: quicinc\u0027s implementation currently in production\npause: proposed solution from Vincent",
       "revId": "9277ac03abc141a04404b22d3c39e09a39ffb9f2",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "3f3af93a_fd4feffd",
         "filename": "kernel/cpu.c",
@@ -96,8 +121,7 @@
       "message": "Hi Stephen,\n\nI can\u0027t comment this change, that I don\u0027t know. But there\u0027s no such thing upstream and I don\u0027t see why it would be needed. The workqueue framework should protect calls to cpuset_hotplug_workfn(), there is no need for serializing with a flush.\n\nOn my setup:\n\n1. idle system: max empirical cpu_pause latency of 800 us\n\n2. busy system: max empirical cpu_pause latency of 6ms (before going idle)\n  2.a due to sched_cpu_deactivate() -\u003e synchronize_rcu_expidited()\n  2.b due to the CPU migration (A penalty that CPU isolation has to pay as well anyway.)\n\nI\u0027m currently working on an updated version, using a recent patch-set published on LKML. This patch-set is changing the way tasks are migrated away from a CPU on the HP path. This should allow to mitigate the latency introduced by the synchronize_rcu_expidited()... I\u0027ll try to share numbers to back this new approach soon.\n\nIn any case, I can\u0027t reproduce such high numbers on my end.",
       "parentUuid": "e81ab750_d850b48e",
       "revId": "9277ac03abc141a04404b22d3c39e09a39ffb9f2",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
