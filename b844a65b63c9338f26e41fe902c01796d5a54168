@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de8ad7a2_bb05fc53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-10-07T09:51:53Z",
+      "side": 1,
+      "message": "The description of what this is trying to do is nowhere near enough for me to understand why/what this is attempting to accomplish.  Please provide some sort of example of when the current behaviour is incorrect and why.\n\nThese are not tracepoints, since they affect code flow, as such they\u0027re misnamed.\n\nAlso why is this not sent to upstream netdev mailing list?\nI see no reason for an Android only nor even vendor only change.\n\nThere\u0027s presumably a bug somewhere that should simply be fixed...\n\nIt\u0027s also not whether this is solving one bug or three similar but different ones...\n\n(also there\u0027s conflict markers)",
+      "revId": "b844a65b63c9338f26e41fe902c01796d5a54168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5fa0908_9cb35ad2",
+        "filename": "net/ipv6/ip6_output.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-10-07T09:51:53Z",
+      "side": 1,
+      "message": "spaces around ? :",
+      "range": {
+        "startLine": 413,
+        "startChar": 17,
+        "endLine": 413,
+        "endChar": 18
+      },
+      "revId": "b844a65b63c9338f26e41fe902c01796d5a54168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
