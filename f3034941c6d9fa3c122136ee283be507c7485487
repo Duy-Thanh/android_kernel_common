@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9ef514e_e4d3cd76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-10-08T17:57:35Z",
+      "side": 1,
+      "message": "Supposedly this patch works on current hardware (https://b.corp.google.com/issues/166139333#comment20).  Not tested on the future hardware in question yet, but it sounds like this will be needed.  I think we should go ahead and submit this.  Can people take a look?",
+      "revId": "f3034941c6d9fa3c122136ee283be507c7485487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
