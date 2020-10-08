@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8f6f488_f7a531aa",
+        "filename": "security/security.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1564,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-08T09:20:34Z",
+      "side": 1,
+      "message": "this should go _after_ the lsm runs, not before.",
+      "range": {
+        "startLine": 1564,
+        "startChar": 0,
+        "endLine": 1564,
+        "endChar": 62
+      },
+      "revId": "696800f98d066030bb83864d07f8ee06c15d0ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
