@@ -90,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88dd830f_c0aaa9f0",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-10-09T09:42:08Z",
+      "side": 1,
+      "message": "It is in for_each_process_thread macro, we use for_each_process_thread to find task.",
+      "parentUuid": "7bbd7839_1c52d013",
+      "range": {
+        "startLine": 897,
+        "startChar": 2,
+        "endLine": 897,
+        "endChar": 11
+      },
+      "revId": "38babcaf5ab8c7524922c193807eae0f88e5de76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb263a11_3e5b3745",
         "filename": "android/abi_gki_aarch64_vivo",
         "patchSetId": 1
