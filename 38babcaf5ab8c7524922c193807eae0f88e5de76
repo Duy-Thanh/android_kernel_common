@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a11046e_a87e9e16",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-09T09:04:57Z",
+      "side": 1,
+      "message": "what driver needs this?  It shouldn\u0027t be something for anyone to use, other than core mm functionality.",
+      "range": {
+        "startLine": 2,
+        "startChar": 2,
+        "endLine": 2,
+        "endChar": 19
+      },
+      "revId": "38babcaf5ab8c7524922c193807eae0f88e5de76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb263a11_3e5b3745",
         "filename": "android/abi_gki_aarch64_vivo",
         "patchSetId": 1
