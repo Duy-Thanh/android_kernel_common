@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "01dbf851_04b8b436",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "Hridya: Any suggestions for a bug # for this? ",
       "revId": "cc68590aa4824611124ee29bf52af02c7fd1ebfa",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "6f69fcfb_b967c7d6",
         "filename": "/PATCHSET_LEVEL",
@@ -32,10 +33,10 @@
       "message": "Thanks for the CL John! I think this one should work: 155218010",
       "parentUuid": "01dbf851_04b8b436",
       "revId": "cc68590aa4824611124ee29bf52af02c7fd1ebfa",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "8fd533e5_a91fe680",
         "filename": "/PATCHSET_LEVEL",
@@ -50,10 +51,28 @@
       "message": "thanks!",
       "parentUuid": "6f69fcfb_b967c7d6",
       "revId": "cc68590aa4824611124ee29bf52af02c7fd1ebfa",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0a48fdc_4c973ead",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-10-09T05:49:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fd533e5_a91fe680",
+      "revId": "cc68590aa4824611124ee29bf52af02c7fd1ebfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "18966f34_49d14da3",
         "filename": "drivers/dma-buf/heaps/Kconfig",
@@ -73,10 +92,10 @@
         "endChar": 31
       },
       "revId": "cc68590aa4824611124ee29bf52af02c7fd1ebfa",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "6c6a827d_c8b81dd9",
         "filename": "drivers/dma-buf/heaps/Kconfig",
@@ -97,8 +116,31 @@
         "endChar": 31
       },
       "revId": "cc68590aa4824611124ee29bf52af02c7fd1ebfa",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4b61af8_7fd38527",
+        "filename": "drivers/dma-buf/heaps/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-10-09T05:49:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c6a827d_c8b81dd9",
+      "range": {
+        "startLine": 2,
+        "startChar": 1,
+        "endLine": 2,
+        "endChar": 31
+      },
+      "revId": "cc68590aa4824611124ee29bf52af02c7fd1ebfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
