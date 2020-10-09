@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51bfcce5_52262c71",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-10-09T09:35:07Z",
+      "side": 1,
+      "message": "Our driver use it to get_cmdline, because get_cmdline is not exported.",
+      "parentUuid": "5a11046e_a87e9e16",
+      "range": {
+        "startLine": 2,
+        "startChar": 2,
+        "endLine": 2,
+        "endChar": 19
+      },
+      "revId": "38babcaf5ab8c7524922c193807eae0f88e5de76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bbd7839_1c52d013",
         "filename": "android/abi_gki_aarch64_vivo",
         "patchSetId": 1
@@ -77,6 +101,30 @@
       "writtenOn": "2020-10-09T09:03:33Z",
       "side": 1,
       "message": "sorry, but no driver should ever need access to this.  What driver that you have needs this?",
+      "range": {
+        "startLine": 1986,
+        "startChar": 0,
+        "endLine": 1986,
+        "endChar": 12
+      },
+      "revId": "38babcaf5ab8c7524922c193807eae0f88e5de76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df8316aa_c2fc92b2",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 1986,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-10-09T09:35:07Z",
+      "side": 1,
+      "message": "This is our debug driver same as hungtask, we use it to check TAINT_DIE state, to avoid enter die function again.",
+      "parentUuid": "eb263a11_3e5b3745",
       "range": {
         "startLine": 1986,
         "startChar": 0,
