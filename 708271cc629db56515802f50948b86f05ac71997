@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "41449a41_06b12e14",
         "filename": "drivers/trusty/trusty-test.c",
@@ -20,10 +21,10 @@
         "endChar": 62
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "748b0dc0_3eeb2691",
         "filename": "drivers/trusty/trusty-test.c",
@@ -44,10 +45,10 @@
         "endChar": 62
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "8997f445_2ac3449d",
         "filename": "drivers/trusty/trusty-test.c",
@@ -68,10 +69,34 @@
         "endChar": 62
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "faaee32c_b6c76da3",
+        "filename": "drivers/trusty/trusty-test.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-10-09T17:59:01Z",
+      "side": 1,
+      "message": "Filed b/170487714 to track fixing this.",
+      "parentUuid": "8997f445_2ac3449d",
+      "range": {
+        "startLine": 349,
+        "startChar": 0,
+        "endLine": 349,
+        "endChar": 62
+      },
+      "revId": "708271cc629db56515802f50948b86f05ac71997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "0a8dbfb0_e9487681",
         "filename": "drivers/trusty/trusty-test.c",
@@ -91,10 +116,10 @@
         "endChar": 32
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "34f49320_878df3b6",
         "filename": "drivers/trusty/trusty-test.c",
@@ -114,10 +139,10 @@
         "endChar": 14
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "c324eacb_8646137d",
         "filename": "drivers/trusty/trusty-test.c",
@@ -138,10 +163,10 @@
         "endChar": 14
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "3745eede_aa343004",
         "filename": "drivers/trusty/trusty-test.c",
@@ -162,10 +187,10 @@
         "endChar": 14
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "753f91bc_08c59f8b",
         "filename": "drivers/trusty/trusty-test.c",
@@ -185,10 +210,10 @@
         "endChar": 65
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "de618af9_bfd97813",
         "filename": "drivers/trusty/trusty-test.c",
@@ -209,10 +234,10 @@
         "endChar": 65
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "b1407506_1ec030dc",
         "filename": "drivers/trusty/trusty-test.c",
@@ -233,10 +258,10 @@
         "endChar": 65
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "29ff1f06_74731e1d",
         "filename": "drivers/trusty/trusty-test.c",
@@ -256,10 +281,10 @@
         "endChar": 39
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "7317485a_599ef404",
         "filename": "drivers/trusty/trusty-test.c",
@@ -280,10 +305,10 @@
         "endChar": 39
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "1a477906_994f5fba",
         "filename": "drivers/trusty/trusty-test.c",
@@ -304,10 +329,10 @@
         "endChar": 39
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "372c5edc_bd2607c2",
         "filename": "drivers/trusty/trusty-test.c",
@@ -327,10 +352,10 @@
         "endChar": 23
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "ddda5031_baff5215",
         "filename": "drivers/trusty/trusty-test.c",
@@ -351,10 +376,10 @@
         "endChar": 23
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "aad1784e_db227769",
         "filename": "drivers/trusty/trusty-test.c",
@@ -375,10 +400,10 @@
         "endChar": 23
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "6c7a555f_dc9e2549",
         "filename": "drivers/trusty/trusty-test.h",
@@ -398,10 +423,10 @@
         "endChar": 12
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "6ec31c6f_9e150b13",
         "filename": "drivers/trusty/trusty-test.h",
@@ -422,10 +447,10 @@
         "endChar": 12
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "e7f1cfc0_8bdbb3b6",
         "filename": "drivers/trusty/trusty-test.h",
@@ -446,8 +471,7 @@
         "endChar": 12
       },
       "revId": "708271cc629db56515802f50948b86f05ac71997",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
