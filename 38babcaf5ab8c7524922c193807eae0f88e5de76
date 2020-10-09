@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb263a11_3e5b3745",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 1986,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-09T09:03:33Z",
+      "side": 1,
+      "message": "sorry, but no driver should ever need access to this.  What driver that you have needs this?",
+      "range": {
+        "startLine": 1986,
+        "startChar": 0,
+        "endLine": 1986,
+        "endChar": 12
+      },
+      "revId": "38babcaf5ab8c7524922c193807eae0f88e5de76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
