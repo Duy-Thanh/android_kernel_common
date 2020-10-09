@@ -1018,6 +1018,7 @@
   keyslot_manager_destroy
   keyslot_manager_private
   keyslot_manager_reprogram_all_keys
+  keyslot_manager_set_max_dun_bytes
   __kfifo_in
   __kfifo_in_r
   __kfifo_len_r
@@ -1701,6 +1702,7 @@
   scsi_command_size_tbl
   scsi_device_get
   scsi_device_put
+  scsi_device_quiesce
   scsi_dma_map
   scsi_dma_unmap
   scsi_eh_prep_cmnd
@@ -1712,6 +1714,7 @@
   scsi_ioctl
   scsi_ioctl_block_when_processing_errors
   scsi_is_host_device
+  __scsi_iterate_devices
   scsi_normalize_sense
   scsi_print_command
   __scsi_print_sense
