@@ -16,6 +16,24 @@
       "message": "Add __scsi_iterate_devices and scsi_device_quiesce for device driver.",
       "revId": "738391c079d3f5e9786521135d28a28f719cac4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a681114_526ed533",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-10T09:57:13Z",
+      "side": 1,
+      "message": "Drivers should not be calling those functions at all, what driver needs this?  Do you have a pointer to the source code for it so that I can recommend how it be fixed?",
+      "parentUuid": "c5802e8d_3c34084c",
+      "revId": "738391c079d3f5e9786521135d28a28f719cac4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
