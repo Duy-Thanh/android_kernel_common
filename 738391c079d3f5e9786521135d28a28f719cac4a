@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5802e8d_3c34084c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-10-10T09:35:38Z",
+      "side": 1,
+      "message": "Add __scsi_iterate_devices and scsi_device_quiesce for device driver.",
+      "revId": "738391c079d3f5e9786521135d28a28f719cac4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
