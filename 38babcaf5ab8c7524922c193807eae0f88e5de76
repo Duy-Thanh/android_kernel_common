@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5cb95359_208c336f",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-10T10:23:24Z",
+      "side": 1,
+      "message": "Sorry, but that\u0027s not ok, drivers should not be messing with the command line of an application.",
+      "parentUuid": "51bfcce5_52262c71",
+      "range": {
+        "startLine": 2,
+        "startChar": 2,
+        "endLine": 2,
+        "endChar": 19
+      },
+      "revId": "38babcaf5ab8c7524922c193807eae0f88e5de76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bbd7839_1c52d013",
         "filename": "android/abi_gki_aarch64_vivo",
         "patchSetId": 1
@@ -114,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "85137e64_209e2cee",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-10T10:23:24Z",
+      "side": 1,
+      "message": "Why are you looking to find tasks in a driver?",
+      "parentUuid": "88dd830f_c0aaa9f0",
+      "range": {
+        "startLine": 897,
+        "startChar": 2,
+        "endLine": 897,
+        "endChar": 11
+      },
+      "revId": "38babcaf5ab8c7524922c193807eae0f88e5de76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb263a11_3e5b3745",
         "filename": "android/abi_gki_aarch64_vivo",
         "patchSetId": 1
@@ -149,6 +197,30 @@
       "side": 1,
       "message": "This is our debug driver same as hungtask, we use it to check TAINT_DIE state, to avoid enter die function again.",
       "parentUuid": "eb263a11_3e5b3745",
+      "range": {
+        "startLine": 1986,
+        "startChar": 0,
+        "endLine": 1986,
+        "endChar": 12
+      },
+      "revId": "38babcaf5ab8c7524922c193807eae0f88e5de76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7f9fb7c_a8bc4466",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 1986,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-10T10:23:24Z",
+      "side": 1,
+      "message": "There\u0027s no need for debug drivers in GKI 1.\n\nFor GKI 2, please submit your driver upstream so we can take it from there.",
+      "parentUuid": "df8316aa_c2fc92b2",
       "range": {
         "startLine": 1986,
         "startChar": 0,
