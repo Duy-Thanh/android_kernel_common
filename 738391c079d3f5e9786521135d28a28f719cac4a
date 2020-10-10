@@ -52,6 +52,23 @@
       "parentUuid": "0a681114_526ed533",
       "revId": "738391c079d3f5e9786521135d28a28f719cac4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4fc94e0_3072b430",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-10T10:12:33Z",
+      "side": 1,
+      "message": "See https://android-review.googlesource.com/c/kernel/common/+/1456191 for a version of this commit that only adds the already-exported symbols.",
+      "revId": "738391c079d3f5e9786521135d28a28f719cac4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
