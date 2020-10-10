@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0589e5b_57b8e02b",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-10T12:47:51Z",
+      "side": 1,
+      "message": "What driver cares about processes?  Do you have a pointer to the source code for the driver so I can try to figure out what it is needing to do here?",
+      "parentUuid": "d98de2cb_e0bbb003",
+      "range": {
+        "startLine": 2,
+        "startChar": 2,
+        "endLine": 2,
+        "endChar": 19
+      },
+      "revId": "38babcaf5ab8c7524922c193807eae0f88e5de76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bbd7839_1c52d013",
         "filename": "android/abi_gki_aarch64_vivo",
         "patchSetId": 1
@@ -210,6 +234,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "496436ba_be5a4dda",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-10T12:47:51Z",
+      "side": 1,
+      "message": "Again, no driver should be messing with this, drivers do not care about tasks.",
+      "parentUuid": "5f3f2c9c_25487e24",
+      "range": {
+        "startLine": 897,
+        "startChar": 2,
+        "endLine": 897,
+        "endChar": 11
+      },
+      "revId": "38babcaf5ab8c7524922c193807eae0f88e5de76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb263a11_3e5b3745",
         "filename": "android/abi_gki_aarch64_vivo",
         "patchSetId": 1
@@ -293,6 +341,30 @@
       "side": 1,
       "message": "OK, I can only use did_panic to check panic in code, I will remove this symbol.\n\n287 static void check_hung_uninterruptible_tasks(unsigned long timeout)\n288 {\n289     int max_count \u003d sysctl_hung_task_check_count;\n290     unsigned long last_break \u003d jiffies;\n291     struct task_struct *g, *t;\n292\n293     /*\n294      * If the system crashed already then all bets are off,\n295      * do not report extra hung tasks:\n296      */\n297-     if (test_taint(TAINT_DIE) || did_panic)\n297+     if (did_panic)\n298         return;\n299\n300     hung_task_show_lock \u003d false;\n301     rcu_read_lock();\n302     for_each_process_thread(g, t) {\n303         if (!max_count--)\n304             goto unlock;\n305         if (time_after(jiffies, last_break + HUNG_TASK_LOCK_BREAK)) {\n306             if (!rcu_lock_break(g, t))\n307                 goto unlock;\n308             last_break \u003d jiffies;\n309         }\n310         /* use \"\u003d\u003d\" to skip the TASK_KILLABLE tasks waiting on NFS */\n311         if (t-\u003estate \u003d\u003d TASK_UNINTERRUPTIBLE)\n312             check_hung_task(t, timeout);\n313     }\n314  unlock:\n315     rcu_read_unlock();\n316     if (hung_task_show_lock)\n317         debug_show_all_locks();\n318     if (hung_task_call_panic \u0026\u0026 download_mode) {\n319         trigger_all_cpu_backtrace();\n320         if (hung_task_show_lock)\n321             panic(\"hung_task: blocked tasks\");\n322     } else if (hung_task_call_panic_critical) {\n323         trigger_all_cpu_backtrace();\n324         panic(\"hung_task: blocked critical tasks\");\n325     }\n326 }",
       "parentUuid": "df8316aa_c2fc92b2",
+      "range": {
+        "startLine": 1986,
+        "startChar": 0,
+        "endLine": 1986,
+        "endChar": 12
+      },
+      "revId": "38babcaf5ab8c7524922c193807eae0f88e5de76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "755f9cf1_63186dc3",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 1986,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-10T12:47:51Z",
+      "side": 1,
+      "message": "Shouldn\u0027t a normal watchdog driver handle all of this for you?",
+      "parentUuid": "ec7088f8_c248ea25",
       "range": {
         "startLine": 1986,
         "startChar": 0,
