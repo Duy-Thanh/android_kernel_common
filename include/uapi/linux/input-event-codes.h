@@ -809,7 +809,14 @@
 #define SW_MUTE_DEVICE		0x0e  /* set = device disabled */
 #define SW_PEN_INSERTED		0x0f  /* set = pen inserted */
 #define SW_MACHINE_COVER	0x10  /* set = cover closed */
-#define SW_MAX			0x10
+#define SW_PEN_INSERT		0x13  /* set = pen inserted */
+#define SW_FLIP			0x15  /* set = cover cloese */
+#define SW_GLOVE		0x16  /* set = detect glove */ 
+#define SW_WACOM_HALL		0x17  /* set = wacom mode change */
+#define SW_COVER_ATTACH		0x1B  /* set = cover attached */
+#define SW_CAMERA_SLIDE		0x1D  /* set = slide camera on */
+#define SW_KEY_COVER_BACKFOLD	0x1F  /* set = detect keyboard cover backfolded */
+#define SW_MAX			0x20
 #define SW_CNT			(SW_MAX+1)
 
 /*
