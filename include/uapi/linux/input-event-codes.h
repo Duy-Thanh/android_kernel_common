@@ -809,7 +809,9 @@
 #define SW_MUTE_DEVICE		0x0e  /* set = device disabled */
 #define SW_PEN_INSERTED		0x0f  /* set = pen inserted */
 #define SW_MACHINE_COVER	0x10  /* set = cover closed */
-#define SW_MAX			0x10
+#define SW_COVER_ATTACHED	0x11  /* set = cover attached */
+#define SW_EXT_PEN_ATTACHED	0x12  /* set = external pen attached */
+#define SW_MAX			0x12
 #define SW_CNT			(SW_MAX+1)
 
 /*
