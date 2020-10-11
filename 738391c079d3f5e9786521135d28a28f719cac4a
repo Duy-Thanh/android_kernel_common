@@ -69,6 +69,24 @@
       "message": "See https://android-review.googlesource.com/c/kernel/common/+/1456191 for a version of this commit that only adds the already-exported symbols.",
       "revId": "738391c079d3f5e9786521135d28a28f719cac4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5402fa74_57e9e319",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-11T08:48:36Z",
+      "side": 1,
+      "message": "That commit is now merged, so please rebase this on top of the latest tree and we can go from there.",
+      "parentUuid": "b4fc94e0_3072b430",
+      "revId": "738391c079d3f5e9786521135d28a28f719cac4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
