@@ -256,6 +256,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1885f21_f9e91744",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-10-12T03:19:09Z",
+      "side": 1,
+      "message": "Removed it from this change.",
+      "parentUuid": "496436ba_be5a4dda",
+      "range": {
+        "startLine": 897,
+        "startChar": 2,
+        "endLine": 897,
+        "endChar": 11
+      },
+      "revId": "38babcaf5ab8c7524922c193807eae0f88e5de76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb263a11_3e5b3745",
@@ -365,6 +389,30 @@
       "side": 1,
       "message": "Shouldn\u0027t a normal watchdog driver handle all of this for you?",
       "parentUuid": "ec7088f8_c248ea25",
+      "range": {
+        "startLine": 1986,
+        "startChar": 0,
+        "endLine": 1986,
+        "endChar": 12
+      },
+      "revId": "38babcaf5ab8c7524922c193807eae0f88e5de76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "609e86e2_325c4e39",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 1986,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-10-12T03:19:09Z",
+      "side": 1,
+      "message": "This driver is used to monitor task state, I have removed it from code.",
+      "parentUuid": "755f9cf1_63186dc3",
       "range": {
         "startLine": 1986,
         "startChar": 0,

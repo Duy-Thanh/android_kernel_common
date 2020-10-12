@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db5f8c1b_ea5de4ad",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 4
+      },
+      "lineNbr": 1022,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-10-12T03:19:09Z",
+      "side": 1,
+      "message": "1.ufshcd_crypto.c is built into a ko by vivo\n2.For crypto feature, we need config the max DUN size;\n3.However, struct keyslot_manager has been defined in keyslot-manager.c; The best way is to use keyslot-manager.h\u0027s API(keyslot_manager_set_max_dun_bytes);\n\n279  int ufshcd_hba_init_crypto_spec(struct ufs_hba *hba,\n280  \t\t\t\tconst struct keyslot_mgmt_ll_ops *ksm_ops)\n281  {\n282  \tint cap_idx \u003d 0;\n283  \tint err \u003d 0;\n284  \tunsigned int crypto_modes_supported[BLK_ENCRYPTION_MODE_MAX];\n285  \tenum blk_crypto_mode_num blk_mode_num;\n286  \n...\n345  \tkeyslot_manager_set_max_dun_bytes(hba-\u003eksm, sizeof(u64));\n346  \n347  \treturn 0;\n...\n355  }",
+      "revId": "b439c711eea35466d15468db0369b05d88e602d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a18897ae_60b9beeb",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 4
+      },
+      "lineNbr": 1706,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-10-12T03:19:09Z",
+      "side": 1,
+      "message": "For better stability, quiesce the scsi device of UFS Device well known LU by __scsi_iterate_devices and scsi_device_quiesce in shutdown flow;\n\n9101  int ufshcd_shutdown(struct ufs_hba *hba)\n9102  {\n...\n9117  \t/*\n9118  \t * I/O requests could be still submitted to SCSI devices\n9119  \t * when we are here. Quiesce the scsi device of UFS Device\n9120  \t * well known LU but remove all the other scsi devices.\n9121  \t * After the scsi device is quiesced, only PM requests can\n9122  \t * pass through SCSI layer, which well serves the purpose\n9123  \t * of sending the SSU cmd during ufshcd_suspend().\n9124  \t */\n9125  \tshost_for_each_device(sdev, hba-\u003ehost) {\n9126  \t\tif (sdev \u003d\u003d hba-\u003esdev_ufs_device)\n9127  \t\t\tscsi_device_quiesce(sdev);\n9128  \t\telse\n9129  \t\t\tscsi_remove_device(sdev);\n9130  \t}\n...\n9144  \treturn 0;\n9145  }",
+      "revId": "b439c711eea35466d15468db0369b05d88e602d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0222a14e_8617eb61",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 4
+      },
+      "lineNbr": 1718,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-10-12T03:19:09Z",
+      "side": 1,
+      "message": "For better stability, quiesce the scsi device of UFS Device well known LU by __scsi_iterate_devices and scsi_device_quiesce in shutdown flow;\n\n9101  int ufshcd_shutdown(struct ufs_hba *hba)\n9102  {\n...\n9117  \t/*\n9118  \t * I/O requests could be still submitted to SCSI devices\n9119  \t * when we are here. Quiesce the scsi device of UFS Device\n9120  \t * well known LU but remove all the other scsi devices.\n9121  \t * After the scsi device is quiesced, only PM requests can\n9122  \t * pass through SCSI layer, which well serves the purpose\n9123  \t * of sending the SSU cmd during ufshcd_suspend().\n9124  \t */\n9125  \tshost_for_each_device(sdev, hba-\u003ehost) {\n9126  \t\tif (sdev \u003d\u003d hba-\u003esdev_ufs_device)\n9127  \t\t\tscsi_device_quiesce(sdev);\n9128  \t\telse\n9129  \t\t\tscsi_remove_device(sdev);\n9130  \t}\n...\n9144  \treturn 0;\n9145  }\n\n376  #define shost_for_each_device(sdev, shost) \\\n377  \tfor ((sdev) \u003d __scsi_iterate_devices((shost), NULL); \\\n378  \t     (sdev); \\\n379  \t     (sdev) \u003d __scsi_iterate_devices((shost), (sdev)))",
+      "revId": "b439c711eea35466d15468db0369b05d88e602d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
