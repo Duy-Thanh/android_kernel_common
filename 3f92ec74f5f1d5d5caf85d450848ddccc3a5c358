@@ -16,6 +16,24 @@
       "message": "Eric, is this the proper way to handle UFS crypto calls?  It\u0027s odd to me that no other UFS driver seems to need these functions.",
       "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2c4616f_69bdbeaa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-10-12T17:33:29Z",
+      "side": 1,
+      "message": "On android11 kernels, it\u0027s expected that drivers need keyslot_manager_set_max_dun_bytes().  I\u0027m surprised that it wasn\u0027t in the symbol allowlist already...  It\u0027s needed for eMMC crypto support, as well as for nonstandard UFS crypto hardware where vendors need to override ufshcd_hba_init_crypto_spec().\n\nThat being said, if Vivo can share how they\u0027re calling keyslot_manager_set_max_dun_bytes(), I\u0027d be glad to check that it\u0027s being used correctly.  Which SoC are they using?\n\nIf you\u0027re also asking about __scsi_iterate_devices() and scsi_device_quiesce(): I don\u0027t know why those are needed.  They\u0027re not related to crypto support.",
+      "parentUuid": "7d508885_30fe682b",
+      "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
