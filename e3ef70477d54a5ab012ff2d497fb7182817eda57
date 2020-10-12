@@ -16,6 +16,24 @@
       "message": "What about x86 kernels?  Why ignore them?",
       "revId": "e3ef70477d54a5ab012ff2d497fb7182817eda57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55b05fdb_5be06068",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1318371
+      },
+      "writtenOn": "2020-10-12T16:39:32Z",
+      "side": 1,
+      "message": "Thanks for reminding. Upload new patch to add x86 changes.",
+      "parentUuid": "e425817e_940b7b32",
+      "revId": "e3ef70477d54a5ab012ff2d497fb7182817eda57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
