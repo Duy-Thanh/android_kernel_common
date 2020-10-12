@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b337495b_c3251aca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-12T06:48:21Z",
+      "side": 1,
+      "message": "You really should get your i2c bus driver merged upstream 😊",
+      "revId": "42e516f6b23bcef8e7050d064d2c02c1464c201e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
