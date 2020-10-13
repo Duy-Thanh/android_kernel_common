@@ -196,6 +196,24 @@
       "parentUuid": "8c80f80c_d3343075",
       "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecd85cc6_a894621c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-13T11:15:45Z",
+      "side": 1,
+      "message": "If you have not submitted your changes to us, or to upstream, you don\u0027t know if they are acceptable or not, please do so.\n\nAnd you can not build this as a module for GKI 1, we do not support modules for this release, so you have no dependency on these symbols.  I think you might be confused as to how GKI 1 is working, please see the documentation about this.\n\nI\u0027ll close this out now, as this isn\u0027t valid for the android11-5.4 tree.",
+      "parentUuid": "453dd691_8344ab17",
+      "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
