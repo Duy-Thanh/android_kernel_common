@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71a1c4ed_b0eda5e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-13T07:47:43Z",
+      "side": 1,
+      "message": "Why isn\u0027t this upstream?",
+      "revId": "8eee65acdc861854808172b3b08da09a41a80855",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f715b15f_db28ebb1",
+        "filename": "kernel/trace/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-13T07:47:43Z",
+      "side": 1,
+      "message": "That means the machine can not boot without it.\n\nPlease remove.",
+      "range": {
+        "startLine": 879,
+        "startChar": 0,
+        "endLine": 879,
+        "endChar": 10
+      },
+      "revId": "8eee65acdc861854808172b3b08da09a41a80855",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4557e34f_e7930153",
+        "filename": "kernel/trace/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-13T07:47:43Z",
+      "side": 1,
+      "message": "we need better documentation than that 😊",
+      "range": {
+        "startLine": 881,
+        "startChar": 0,
+        "endLine": 881,
+        "endChar": 56
+      },
+      "revId": "8eee65acdc861854808172b3b08da09a41a80855",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
