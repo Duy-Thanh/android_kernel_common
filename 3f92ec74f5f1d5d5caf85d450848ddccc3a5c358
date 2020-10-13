@@ -160,6 +160,24 @@
       "parentUuid": "8c9c47b4_94926ac0",
       "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c80f80c_d3343075",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-13T07:27:51Z",
+      "side": 1,
+      "message": "What is wrong with the in-kernel version of this module?  If you have any out-of-tree patches for it, please post them and we will be glad to review and work with them, but for now, we can\u0027t allow this, sorry.",
+      "parentUuid": "2b5120eb_6d9d00ca",
+      "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
