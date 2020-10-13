@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd64d349_66993c45",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1732415
+      },
+      "writtenOn": "2020-10-13T17:13:52Z",
+      "side": 1,
+      "message": "Fix the commit text. QCOM modifiers are moved to vendor specific UAPI header file.",
+      "range": {
+        "startLine": 10,
+        "startChar": 19,
+        "endLine": 10,
+        "endChar": 20
+      },
+      "revId": "3a11b451ab1975b305aa704bc2b31ff217a729bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
