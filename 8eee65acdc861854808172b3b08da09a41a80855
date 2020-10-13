@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e984cae4_7bc5fbd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1325198
+      },
+      "writtenOn": "2020-10-13T16:07:23Z",
+      "side": 1,
+      "message": "Thanks for the comment.\nI will abandon this commit and upstream to upstream-master.",
+      "parentUuid": "71a1c4ed_b0eda5e9",
+      "revId": "8eee65acdc861854808172b3b08da09a41a80855",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f715b15f_db28ebb1",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91859dcd_19c88b2f",
+        "filename": "kernel/trace/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1325198
+      },
+      "writtenOn": "2020-10-13T16:07:23Z",
+      "side": 1,
+      "message": "Thanks for the comment.\nI will removed it in another commit to upstream line.",
+      "parentUuid": "f715b15f_db28ebb1",
+      "range": {
+        "startLine": 879,
+        "startChar": 0,
+        "endLine": 879,
+        "endChar": 10
+      },
+      "revId": "8eee65acdc861854808172b3b08da09a41a80855",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4557e34f_e7930153",
@@ -54,6 +96,30 @@
       "writtenOn": "2020-10-13T07:47:43Z",
       "side": 1,
       "message": "we need better documentation than that 😊",
+      "range": {
+        "startLine": 881,
+        "startChar": 0,
+        "endLine": 881,
+        "endChar": 56
+      },
+      "revId": "8eee65acdc861854808172b3b08da09a41a80855",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cb31e77_29514259",
+        "filename": "kernel/trace/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 1325198
+      },
+      "writtenOn": "2020-10-13T16:07:23Z",
+      "side": 1,
+      "message": "Thanks for the comment.\nI will provide Documentation file for this commit.",
+      "parentUuid": "4557e34f_e7930153",
       "range": {
         "startLine": 881,
         "startChar": 0,
