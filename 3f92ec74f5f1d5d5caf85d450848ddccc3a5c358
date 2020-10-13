@@ -214,6 +214,24 @@
       "parentUuid": "453dd691_8344ab17",
       "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc942137_6765b32e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-10-13T18:33:57Z",
+      "side": 1,
+      "message": "To clarify, while ufshcd-crypto.c is built-in via ufshcd-core, in GKI 1.0 we do allow platform UFS drivers such as ufs-qcom and ufs-exynos (which are buildable as modules) to override a lot of the crypto logic via ufs_hba_crypto_variant_ops.  This was necessary because some inline encryption hardware is totally different from what the UFS standard specifies, and the SoCs with this nonstandard hardware don\u0027t have any upstream support at all so there hasn\u0027t been any way to try to upstream support for it yet.\n\nSo, at least two SoC vendors are already using ufs_hba_crypto_variant_ops::hba_init_crypto to override the entire \"struct keyslot_manager\".  They *should* be calling keyslot_manager_set_max_dun_bytes() already.  Apparently they aren\u0027t, and things happen to work because neither user of blk-crypto uses DUNs \u003e 8 bytes for AES-XTS, and thus the default of max_dun_bytes\u003d32 doesn\u0027t break anything.  But the call should be there.\n\nNow, I still don\u0027t know what vendor\u0027s UFS controller is being used in this particular case.  But if its crypto support is really so nonstandard that ufs_hba_crypto_variant_ops::hba_init_crypto() is needed (I hope that isn\u0027t the case; Vivo hasn\u0027t given any details that would actually allow us to tell.  But it could be the case), then it\u0027s expected that keyslot_manager_set_max_dun_bytes() needs to be exported for use by the implementation of that method.\n\nNote, in GKI 2.0 this will all work a bit differently, as the upstream version of ufshcd-crypto has been brought in and we\u0027re re-doing the out-of-tree changes.",
+      "parentUuid": "ecd85cc6_a894621c",
+      "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
