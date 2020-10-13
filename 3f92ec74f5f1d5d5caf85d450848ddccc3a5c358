@@ -70,6 +70,24 @@
       "parentUuid": "95c828e5_276fbcf9",
       "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b6791ee_826f0c52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-10-13T02:50:39Z",
+      "side": 1,
+      "message": "Because we have some changes in ufs driver, ufshcd_crypto.c is built into a ko by vivo. We call keyslot_manager_set_max_dun_bytes in module.",
+      "parentUuid": "f6eb179b_fdada6d8",
+      "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
