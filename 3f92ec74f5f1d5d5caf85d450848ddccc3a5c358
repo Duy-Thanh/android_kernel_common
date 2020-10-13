@@ -52,6 +52,24 @@
       "parentUuid": "a2c4616f_69bdbeaa",
       "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6eb179b_fdada6d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-10-13T02:41:52Z",
+      "side": 1,
+      "message": "\u003e keyslot_manager_set_max_dun_bytes:\n\u003e As you said, we use it in ufshcd_hba_init_crypto_spec:\n\nThat can\u0027t be the reason, because ufshcd_hba_init_crypto_spec() is located in ufshcd-crypto.c, which in android11-5.4 gki_defconfig is built-in via CONFIG_SCSI_UFSHCD\u003dy.\n\nIn order to need keyslot_manager_set_max_dun_bytes() from a module, your UFS platform driver (e.g. ufs-qcom, ufs-hisi, ufs-exynos or whatever) would need to install a method ufs_hba_crypto_variant_ops::hba_init_crypto, and that method would need to allocate and initialize the keyslot manager ufs_hba::ksm.\n\nPlease explain what you\u0027re doing.  What exactly are you building as a module, and what type of inline crypto hardware are you trying to support?",
+      "parentUuid": "95c828e5_276fbcf9",
+      "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
