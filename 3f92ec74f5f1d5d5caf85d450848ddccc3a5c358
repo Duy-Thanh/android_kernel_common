@@ -142,6 +142,24 @@
       "parentUuid": "b8e7c7c3_fcebc39b",
       "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b5120eb_6d9d00ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-13T07:26:57Z",
+      "side": 1,
+      "message": "for gki 1, we do not allow building that module, so I don\u0027t know how you are doing this, the in-kernel version will conflict badly.",
+      "parentUuid": "8c9c47b4_94926ac0",
+      "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
