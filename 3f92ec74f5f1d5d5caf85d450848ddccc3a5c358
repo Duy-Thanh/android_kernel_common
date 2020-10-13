@@ -124,6 +124,24 @@
       "parentUuid": "8454c7a9_e0d12abf",
       "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c9c47b4_94926ac0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-10-13T05:26:02Z",
+      "side": 1,
+      "message": "Okay, no objection to exporting keyslot_manager_set_max_dun_bytes() then.\n\nI do hope you\u0027ve properly reviewed your crypto-related code and are running vts_kernel_encryption_test, though --- you really don\u0027t want to get this stuff wrong.  I\u0027m still wondering which vendor\u0027s UFS host controller you\u0027re using and whether it\u0027s one of the ones we\u0027re familiar with...  If it is, we might be able to give some advice.",
+      "parentUuid": "b8e7c7c3_fcebc39b",
+      "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
