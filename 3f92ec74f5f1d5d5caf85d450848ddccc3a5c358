@@ -88,6 +88,24 @@
       "parentUuid": "f6eb179b_fdada6d8",
       "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8454c7a9_e0d12abf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-10-13T02:56:04Z",
+      "side": 1,
+      "message": "That\u0027s interesting.  How do those functions get called?  Are you using ufs_hba_crypto_variant_ops?",
+      "parentUuid": "0b6791ee_826f0c52",
+      "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
