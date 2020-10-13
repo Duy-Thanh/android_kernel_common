@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ff91a4f_b3532598",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 4
+      },
+      "lineNbr": 1706,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-13T07:31:22Z",
+      "side": 1,
+      "message": "This change is not needed, and you can\u0027t over-ride the in-kernel code for this, so you shouldn\u0027t need this exported.\n\nIf you think this should be added to the ufs core, wonderful, please post the patch for that upstream and we will be glad to review it there.",
+      "parentUuid": "a18897ae_60b9beeb",
+      "revId": "b439c711eea35466d15468db0369b05d88e602d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0222a14e_8617eb61",
         "filename": "android/abi_gki_aarch64_vivo",
         "patchSetId": 4
