@@ -62,6 +62,29 @@
       },
       "revId": "8eee65acdc861854808172b3b08da09a41a80855",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22584619_d365313f",
+        "filename": "kernel/trace/debug_list.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-13T07:48:51Z",
+      "side": 1,
+      "message": "Are you sure about your use of rcu here?",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 44
+      },
+      "revId": "8eee65acdc861854808172b3b08da09a41a80855",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
