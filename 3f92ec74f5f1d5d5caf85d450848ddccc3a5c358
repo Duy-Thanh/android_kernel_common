@@ -178,6 +178,24 @@
       "parentUuid": "2b5120eb_6d9d00ca",
       "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "453dd691_8344ab17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-10-13T08:27:36Z",
+      "side": 1,
+      "message": "The in-kernel version cannot meet our requirement, we have some changes in it, but it cannot be uploaded to upstream, so we build it to module.\nTo better cooperate with Google, we build it to module in gki 1. Because the real challenge is gki 2, it will be easier if we do it in advance.\nNow, Google\u0027s GKI boot.img cannot boot successfully in our phone, our driver need these symbols to work.",
+      "parentUuid": "8c80f80c_d3343075",
+      "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
