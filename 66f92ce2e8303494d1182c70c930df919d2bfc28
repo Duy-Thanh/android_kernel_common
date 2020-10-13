@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005509457",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1457540?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f00295cc_a7dd2719",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-10-13T22:44:02Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Alistair Delva \u003cadelva@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 336888541 android-build.ayeaye-python-dispatcher_20201013.05_p0",
+      "revId": "66f92ce2e8303494d1182c70c930df919d2bfc28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005509460",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1457540?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "6c9e5a83_f7761a32",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-10-13T22:44:02Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 10,
+        "startChar": 75,
+        "endLine": 10,
+        "endChar": 81
+      },
+      "revId": "66f92ce2e8303494d1182c70c930df919d2bfc28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
