@@ -13,6 +13,8 @@
 #include <linux/parser.h>
 #include <linux/seq_file.h>
 
+#include <linux/zstd.h>
+
 #include <uapi/linux/incrementalfs.h>
 
 #include "vfs.h"
