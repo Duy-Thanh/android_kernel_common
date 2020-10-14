@@ -143,7 +143,9 @@
 
 enum incfs_compression_alg {
 	COMPRESSION_NONE = 0,
-	COMPRESSION_LZ4 = 1
+	COMPRESSION_LZ4 = 1,
+	COMPRESSION_ZSTD = 2,
+	COMPRESSION_MAX = 7	/* Reserve 3 bits for choice of compression */
 };
 
 enum incfs_block_flags {
