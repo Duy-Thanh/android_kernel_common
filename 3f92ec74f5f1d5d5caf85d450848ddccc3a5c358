@@ -232,6 +232,24 @@
       "parentUuid": "ecd85cc6_a894621c",
       "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdb32cba_efa51127",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-10-14T03:14:39Z",
+      "side": 1,
+      "message": "Hi Eric, we use qcom\u0027s platform and ufs-qcom driver.",
+      "parentUuid": "cc942137_6765b32e",
+      "revId": "3f92ec74f5f1d5d5caf85d450848ddccc3a5c358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
