@@ -22,6 +22,30 @@
       },
       "revId": "192b85966f28b362077eeadcca297186bda2fc54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11070f48_d6082e6c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1674446
+      },
+      "writtenOn": "2020-10-14T02:31:24Z",
+      "side": 1,
+      "message": "Sure. Will update.",
+      "parentUuid": "b0a474d1_759e3b2e",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "192b85966f28b362077eeadcca297186bda2fc54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
