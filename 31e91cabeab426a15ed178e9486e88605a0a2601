@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b594b135_382946ed",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 12
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-10-15T15:21:38Z",
+      "side": 1,
+      "message": "AFAIK this is still implicitly switching on a bunch of other drivers, like clk etc. Those should have been modularized upstream. Can you confirm that this ARCH symbol will not pull in vexpress-specific drivers to the GKI core? Yes, we know about HISI/QCOM, but that tech debt is for test targets we can\u0027t do without - otherwise we are pushing back on ARCH_* that build drivers into GKI.",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 20
+      },
+      "revId": "31e91cabeab426a15ed178e9486e88605a0a2601",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4d57f5c_20a8e1d2",
+        "filename": "build.config.fvp",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-10-15T15:21:38Z",
+      "side": 1,
+      "message": "Please move this file to common-modules/virtual-device/",
+      "revId": "31e91cabeab426a15ed178e9486e88605a0a2601",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0cfaa7d_5c046d0e",
+        "filename": "build.config.fvp",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-10-15T15:21:38Z",
+      "side": 1,
+      "message": "This fragment should only build the dtb and modules. You should use the Image from the GKI ab target. Please remove this, vmlinux and System.map from FILES (look at what the other virtual-device fragments are doing).",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 21
+      },
+      "revId": "31e91cabeab426a15ed178e9486e88605a0a2601",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f6eb047_4069cb71",
+        "filename": "fvp.fragment",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-10-15T15:21:38Z",
+      "side": 1,
+      "message": "Please move this file to common-modules/virtual-device/",
+      "revId": "31e91cabeab426a15ed178e9486e88605a0a2601",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9be2866e_30671894",
+        "filename": "fvp.fragment",
+        "patchSetId": 12
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-10-15T15:21:38Z",
+      "side": 1,
+      "message": "SDCARD_FS has been long removed. Please update the FVP build config to inherit from $(SRC_TARGET_DIR)/product/emulated_storage.mk (if not already done), update the fstab appropriately, and remove this line.",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 18
+      },
+      "revId": "31e91cabeab426a15ed178e9486e88605a0a2601",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
