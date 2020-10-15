@@ -34,6 +34,24 @@
       "parentUuid": "3f1d82b7_5d7ac262",
       "revId": "3fefddc383ceb709c5dcc2d1135c350ad4906821",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c19cdb88_cec2bdcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-10-15T12:48:10Z",
+      "side": 1,
+      "message": "Being in linux-next ... does this mean somebody took it in their tree? (then FROMGIT: would be the right tag). Is this even on the way to linux mainline in the currently open merge window? In that case let\u0027s wait for when it comes with the upstream merges.",
+      "parentUuid": "8e80c23e_c1b22982",
+      "revId": "3fefddc383ceb709c5dcc2d1135c350ad4906821",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
