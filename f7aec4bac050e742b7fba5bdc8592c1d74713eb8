@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fd42e57_d65ab6f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-10-15T01:17:35Z",
+      "side": 1,
+      "message": "adelva: PTAL. I have uploaded a new version that does not enable the FBDEV drivers. This is sufficient for booting the non-GUI fvp_mini target (but not the main fvp target) and should resolve the remaining blocker to getting the initial version of this landed.",
+      "revId": "f7aec4bac050e742b7fba5bdc8592c1d74713eb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
