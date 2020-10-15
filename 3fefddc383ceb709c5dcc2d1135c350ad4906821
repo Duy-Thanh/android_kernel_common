@@ -52,6 +52,24 @@
       "parentUuid": "8e80c23e_c1b22982",
       "revId": "3fefddc383ceb709c5dcc2d1135c350ad4906821",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a53dce7f_ea3c74e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1117108
+      },
+      "writtenOn": "2020-10-15T13:24:02Z",
+      "side": 1,
+      "message": "Yes, that\u0027s in -mm tree [1] and iirc earlier you\u0027ve advised to use \"FROMLIST\" because mm\u0027s git is odd.\n[1] https://lore.kernel.org/lkml/20201007224907.4yuf4m8iI%25akpm@linux-foundation.org/",
+      "parentUuid": "c19cdb88_cec2bdcc",
+      "revId": "3fefddc383ceb709c5dcc2d1135c350ad4906821",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
