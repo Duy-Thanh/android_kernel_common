@@ -116,6 +116,7 @@ DECLARE_RESTRICTED_HOOK(android_rvh_migrate_queued_task,
 		 int *detached),
 	TP_ARGS(rq, rf, p, new_cpu, detached), 1);
 
+<<<<<<< HEAD   (09ad10 ANDROID: GKI: Remove CONFIG_LOCALVERSION="-mainline" on 6.1 )
 DECLARE_RESTRICTED_HOOK(android_rvh_cpu_overutilized,
 	TP_PROTO(int cpu, int *overutilized),
 	TP_ARGS(cpu, overutilized), 1);
@@ -327,6 +328,34 @@ DECLARE_HOOK(android_vh_set_wake_flags,
 
 /* macro versions of hooks are no longer required */
 
+=======
+DECLARE_RESTRICTED_HOOK(android_rvh_find_energy_efficient_cpu,
+	TP_PROTO(struct task_struct *p, int prev_cpu, int sync, int *new_cpu),
+	TP_ARGS(p, prev_cpu, sync, new_cpu), 1);
+#else
+#define trace_android_rvh_select_task_rq_fair(p, prev_cpu, sd_flag, wake_flags, new_cpu)
+#define trace_android_rvh_select_task_rq_rt(p, prev_cpu, sd_flag, wake_flags, new_cpu)
+#define trace_android_rvh_select_fallback_rq(cpu, p, dest_cpu)
+#define trace_android_vh_scheduler_tick(rq)
+#define trace_android_rvh_enqueue_task(rq, p)
+#define trace_android_rvh_dequeue_task(rq, p)
+#define trace_android_rvh_can_migrate_task(p, dst_cpu, can_migrate)
+#define trace_android_rvh_find_lowest_rq(p, local_cpu_mask, ret, lowest_cpu)
+#define trace_android_rvh_prepare_prio_fork(p)
+#define trace_android_rvh_finish_prio_fork(p)
+#define trace_android_rvh_rtmutex_prepare_setprio(p, pi_task)
+#define trace_android_rvh_set_user_nice(p, nice)
+#define trace_android_rvh_setscheduler(p)
+#define trace_android_rvh_find_busiest_group(busiest, dst_rq, out_balance)
+#define trace_android_vh_dump_throttled_rt_tasks(cpu, clock, rt_period, rt_runtime, rt_period_timer_expires)
+#define trace_android_vh_jiffies_update(unused)
+#define trace_android_rvh_sched_newidle_balance(this_rq, rf, pulled_task, done)
+#define trace_android_rvh_sched_nohz_balancer_kick(rq, flags, done)
+#define trace_android_rvh_find_busiest_queue(dst_cpu, group, env_cpus, busiest, done)
+#define trace_android_rvh_migrate_queued_task(rq, rf, p, new_cpu, detached)
+#define trace_android_rvh_find_energy_efficient_cpu(p, prev_cpu, sync, new_cpu)
+#endif
+>>>>>>> CHANGE (147a9b ANDROID: sched: Add vendor hooks for find_energy_efficient_c)
 #endif /* _TRACE_HOOK_SCHED_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>

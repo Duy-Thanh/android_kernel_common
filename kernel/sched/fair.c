@@ -7081,9 +7081,17 @@ static int find_energy_efficient_cpu(struct task_struct *p, int prev_cpu, int sy
 	int cpu, best_energy_cpu, target = -1;
 	struct sched_domain *sd;
 	struct perf_domain *pd;
+<<<<<<< HEAD   (09ad10 ANDROID: GKI: Remove CONFIG_LOCALVERSION="-mainline" on 6.1 )
 	struct energy_env eenv;
 
 	sync_entity_load_avg(&p->se);
+=======
+	int new_cpu = INT_MAX;
+
+	trace_android_rvh_find_energy_efficient_cpu(p, prev_cpu, sync, &new_cpu);
+	if (new_cpu != INT_MAX)
+		return new_cpu;
+>>>>>>> CHANGE (147a9b ANDROID: sched: Add vendor hooks for find_energy_efficient_c)
 
 	rcu_read_lock();
 	pd = rcu_dereference(rd->pd);
