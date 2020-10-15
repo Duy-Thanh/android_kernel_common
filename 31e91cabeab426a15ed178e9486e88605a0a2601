@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "54aa4318_a2ee90cd",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 12
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-10-15T21:38:02Z",
+      "side": 1,
+      "message": "This sounds good. I didn\u0027t see any \"is not set\", which is a bit odd as usually these platform drivers are \"depends on ARCH*\", \"default y\" and so would have to be switched off, but if you confirm that\u0027s not the case, please resolve this comment thread.",
+      "parentUuid": "98094d82_9668f043",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 20
+      },
+      "revId": "31e91cabeab426a15ed178e9486e88605a0a2601",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e4d57f5c_20a8e1d2",
         "filename": "build.config.fvp",
         "patchSetId": 12
@@ -79,6 +103,24 @@
       "side": 1,
       "message": "Is that the right place? AFAICT the other virtual devices live there because they have custom kernel modules (VIRT_WIFI for cuttlefish and goldfish_drivers for goldfish), but FVP doesn\u0027t have anything like that.",
       "parentUuid": "e4d57f5c_20a8e1d2",
+      "revId": "31e91cabeab426a15ed178e9486e88605a0a2601",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31b78f92_eaa6df3f",
+        "filename": "build.config.fvp",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-10-15T21:38:02Z",
+      "side": 1,
+      "message": "Yes it is. This keeps contamination out of the common kernel tree. Long before we added these non-upstream drivers we had this project. And most of the fragments and config files in here are doing the same thing you are trying to do - and aren\u0027t anything to do with these non-upstream drivers.",
+      "parentUuid": "703617d6_9cd4efc5",
       "revId": "31e91cabeab426a15ed178e9486e88605a0a2601",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -120,6 +162,30 @@
       "side": 1,
       "message": "If I do this, it turns out that the device fails to boot due to failure to load the gpio_generic module due to binary incompatibility. I tracked it down to the ifdef in include/linux/gpio/driver.h that enables some struct fields conditional on CONFIG_GPIO_GENERIC. If I remove the ifdef the system boots.\n\nDo you think this would be a reasonable change for upstream? Maybe not since it seems like a GKI-specific binary compatibility issue that they don\u0027t care about. I guess the other thing that we could do is set CONFIG_GPIO_GENERIC\u003dy in gki_defconfig.",
       "parentUuid": "c0cfaa7d_5c046d0e",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 21
+      },
+      "revId": "31e91cabeab426a15ed178e9486e88605a0a2601",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57a630fb_3cfb7593",
+        "filename": "build.config.fvp",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-10-15T21:38:02Z",
+      "side": 1,
+      "message": "That\u0027s exactly what we need to be catching with the Image from the GKI build.\n\nThis means you need to add a hidden symbol to the init/Kconfig.gki file.",
+      "parentUuid": "65ba5618_31bd0b00",
       "range": {
         "startLine": 15,
         "startChar": 0,
