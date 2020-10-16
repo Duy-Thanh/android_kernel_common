@@ -297,6 +297,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bde1b254_3bb5ed0d",
+        "filename": "fvp.fragment",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-10-16T18:30:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "45ed7c2e_0081831b",
+      "revId": "31e91cabeab426a15ed178e9486e88605a0a2601",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9be2866e_30671894",
@@ -334,6 +352,30 @@
       "side": 1,
       "message": "Will do.",
       "parentUuid": "9be2866e_30671894",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 18
+      },
+      "revId": "31e91cabeab426a15ed178e9486e88605a0a2601",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9029c740_e3d023ce",
+        "filename": "fvp.fragment",
+        "patchSetId": 12
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-10-16T18:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5e2123f_eb371118",
       "range": {
         "startLine": 4,
         "startChar": 0,

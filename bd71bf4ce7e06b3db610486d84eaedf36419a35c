@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "6354a247_8d06aa27",
         "filename": "build.config.fvp",
@@ -20,8 +21,31 @@
         "endChar": 19
       },
       "revId": "bd71bf4ce7e06b3db610486d84eaedf36419a35c",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f907068f_078780ce",
+        "filename": "build.config.fvp",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-10-16T18:30:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6354a247_8d06aa27",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 19
+      },
+      "revId": "bd71bf4ce7e06b3db610486d84eaedf36419a35c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

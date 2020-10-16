@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "8ef64ade_f5fb9d04",
         "filename": "build.config.fvp",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "Because of aosp/1223791, we now need to set BUILD_INITRAMFS\u003d1 ourselves.",
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "4266501a_43622ce2",
         "filename": "build.config.fvp",
@@ -32,10 +33,10 @@
       "message": "Actually the same change removed a lot of options we also need for FVP... Adding those seems to be enough:\n\n         -m VIRTIO_MMIO \\\n         -m VIRTIO_BLK \\\n         -m VIRTIO_NET \\",
       "parentUuid": "8ef64ade_f5fb9d04",
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "0a8d8157_69b87314",
         "filename": "build.config.fvp",
@@ -50,10 +51,10 @@
       "message": "Also to avoid the sdcard daemon crashing:\n\n         -m SDCARD_FS \\",
       "parentUuid": "4266501a_43622ce2",
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "dad079ab_371bc569",
         "filename": "build.config.fvp",
@@ -68,10 +69,10 @@
       "message": "Done",
       "parentUuid": "0a8d8157_69b87314",
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "520b763b_068e477b",
         "filename": "build.config.fvp",
@@ -91,10 +92,10 @@
         "endChar": 25
       },
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "e46ae5b3_d5ea1249",
         "filename": "build.config.fvp",
@@ -115,10 +116,10 @@
         "endChar": 25
       },
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "e82bb178_282d855a",
         "filename": "build.config.fvp",
@@ -139,10 +140,10 @@
         "endChar": 25
       },
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "d3b68bd7_3c3eb7ba",
         "filename": "build.config.fvp",
@@ -163,10 +164,34 @@
         "endChar": 25
       },
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2f4430c_a3158baa",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-10-16T18:30:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d3b68bd7_3c3eb7ba",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 25
+      },
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "de66123d_097cfdc0",
         "filename": "build.config.fvp",
@@ -186,10 +211,10 @@
         "endChar": 24
       },
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "afb86c6e_d7962975",
         "filename": "build.config.fvp",
@@ -210,10 +235,10 @@
         "endChar": 24
       },
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "16d40a3c_580f38fa",
         "filename": "build.config.fvp",
@@ -234,10 +259,10 @@
         "endChar": 24
       },
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "169c2beb_acf032ac",
         "filename": "build.config.fvp",
@@ -258,10 +283,10 @@
         "endChar": 24
       },
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "6c188d61_5f7cb709",
         "filename": "build.config.fvp",
@@ -282,10 +307,34 @@
         "endChar": 24
       },
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53be318e_dd9bf9f9",
+        "filename": "build.config.fvp",
+        "patchSetId": 7
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-10-16T18:30:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6c188d61_5f7cb709",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 24
+      },
+      "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "ff11adc8_04605e84",
         "filename": "build.config.fvp",
@@ -305,10 +354,10 @@
         "endChar": 25
       },
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "5a883f17_66e5717a",
         "filename": "build.config.fvp",
@@ -329,10 +378,10 @@
         "endChar": 25
       },
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "6e720475_12a887b0",
         "filename": "build.config.fvp",
@@ -353,10 +402,10 @@
         "endChar": 25
       },
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "790872de_6b7babee",
         "filename": "build.config.fvp",
@@ -376,10 +425,10 @@
         "endChar": 23
       },
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "4e10cf59_dc88ca1e",
         "filename": "build.config.fvp",
@@ -399,10 +448,10 @@
         "endChar": 27
       },
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "038dba9a_693d3087",
         "filename": "build.config.fvp",
@@ -422,10 +471,10 @@
         "endChar": 25
       },
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "015d26e5_224e1124",
         "filename": "build.config.fvp",
@@ -445,10 +494,10 @@
         "endChar": 37
       },
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "4551ea7c_d1ccaaa6",
         "filename": "build.config.fvp",
@@ -469,8 +518,7 @@
         "endChar": 37
       },
       "revId": "c6f80d2046e66715b21183ad3054d55f91e5ea56",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
