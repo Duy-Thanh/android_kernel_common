@@ -6,6 +6,7 @@
  */
 
 #include <linux/gfp.h>
+#include <linux/hardirq.h>
 #include <linux/module.h>
 #include <linux/mutex.h>
 #include <linux/printk.h>
@@ -260,11 +261,18 @@ static inline cfi_check_fn find_module_cfi_check(void *ptr)
 
 static inline cfi_check_fn find_cfi_check(void *ptr)
 {
-#ifdef CONFIG_CFI_CLANG_SHADOW
+	bool rcu;
 	cfi_check_fn f;
 
-	if (!rcu_access_pointer(cfi_shadow))
-		return CFI_CHECK_FN; /* No loaded modules */
+	rcu = rcu_is_watching();
+	if (!rcu)
+		rcu_nmi_enter();
+
+#ifdef CONFIG_CFI_CLANG_SHADOW
+	if (!rcu_access_pointer(cfi_shadow)) {
+		f = CFI_CHECK_FN; /* No loaded modules */
+		goto out;
+	}
 
 	/* Look up the __cfi_check function to use */
 	rcu_read_lock();
@@ -272,7 +280,7 @@ static inline cfi_check_fn find_cfi_check(void *ptr)
 	rcu_read_unlock();
 
 	if (f)
-		return f;
+		goto out;
 
 	/*
 	 * Fall back to find_module_cfi_check, which works also for a larger
@@ -280,7 +288,13 @@ static inline cfi_check_fn find_cfi_check(void *ptr)
 	 */
 #endif /* CONFIG_CFI_CLANG_SHADOW */
 
-	return find_module_cfi_check(ptr);
+	f = find_module_cfi_check(ptr);
+
+out:
+	if (!rcu)
+		rcu_nmi_exit();
+
+	return f;
 }
 
 void cfi_slowpath_handler(uint64_t id, void *ptr, void *diag)
