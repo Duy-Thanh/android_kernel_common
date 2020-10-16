@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f952c2f_4bb45857",
+        "filename": "drivers/iommu/io-pgtable-arm-v7s.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2020-10-16T12:05:47Z",
+      "side": 1,
+      "message": "This looks wrong to me. For a 32-bit architecture, iova is a 32-bit type so you could end up shifting right by more than the width of the type.\n\nWhat is actually wrong with the old code?",
+      "range": {
+        "startLine": 531,
+        "startChar": 1,
+        "endLine": 531,
+        "endChar": 70
+      },
+      "revId": "6314b3ed56c9ce3e5b7b8b609da6498a23af0484",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04f546fb_29706d68",
+        "filename": "drivers/iommu/io-pgtable-arm-v7s.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2020-10-16T12:05:47Z",
+      "side": 1,
+      "message": "Same issue as above. Can we just check against 1ULL \u003c\u003c data-\u003eiop.ias instead?",
+      "range": {
+        "startLine": 721,
+        "startChar": 1,
+        "endLine": 721,
+        "endChar": 40
+      },
+      "revId": "6314b3ed56c9ce3e5b7b8b609da6498a23af0484",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
