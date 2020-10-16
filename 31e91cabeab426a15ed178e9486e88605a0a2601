@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbd6074b_77d1f10e",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 12
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-10-16T01:45:06Z",
+      "side": 1,
+      "message": "Sorry, what I meant was that the modularization becomes possible once we stop setting CONFIG_ARCH_VEXPRESS. The first part of that (no longer setting ARCH_VEXPRESS) has been done in this CL and the second part (actually building the modules) has been done in the virtual-device CL.",
+      "parentUuid": "54aa4318_a2ee90cd",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 20
+      },
+      "revId": "31e91cabeab426a15ed178e9486e88605a0a2601",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4d57f5c_20a8e1d2",
@@ -121,6 +145,24 @@
       "side": 1,
       "message": "Yes it is. This keeps contamination out of the common kernel tree. Long before we added these non-upstream drivers we had this project. And most of the fragments and config files in here are doing the same thing you are trying to do - and aren\u0027t anything to do with these non-upstream drivers.",
       "parentUuid": "703617d6_9cd4efc5",
+      "revId": "31e91cabeab426a15ed178e9486e88605a0a2601",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baef2ade_98b23d7b",
+        "filename": "build.config.fvp",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-10-16T01:45:06Z",
+      "side": 1,
+      "message": "Okay. I\u0027m not really a fan of this code layout, but it\u0027s not my project so I\u0027ve done as you requested.",
+      "parentUuid": "31b78f92_eaa6df3f",
       "revId": "31e91cabeab426a15ed178e9486e88605a0a2601",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -186,6 +228,30 @@
       "side": 1,
       "message": "That\u0027s exactly what we need to be catching with the Image from the GKI build.\n\nThis means you need to add a hidden symbol to the init/Kconfig.gki file.",
       "parentUuid": "65ba5618_31bd0b00",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 21
+      },
+      "revId": "31e91cabeab426a15ed178e9486e88605a0a2601",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43ff223b_9ae0a6ad",
+        "filename": "build.config.fvp",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-10-16T01:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57a630fb_3cfb7593",
       "range": {
         "startLine": 15,
         "startChar": 0,
