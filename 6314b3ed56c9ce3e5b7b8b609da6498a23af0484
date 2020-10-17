@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96c5e1c3_e30ae977",
+        "filename": "drivers/iommu/io-pgtable-arm-v7s.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1769527
+      },
+      "writtenOn": "2020-10-17T02:36:53Z",
+      "side": 1,
+      "message": "aha, No wrong with the old code. I only thought the two format are same.\nand use shift operation looks more simple(like it does in io-pgtable-arm.c).\n\n\"shifting right by more than the width of the type\",\nTake a example, the value of \"0x12345678 \u003e\u003e 32\" is 0. it meets our expectation.\n\nAm I miss something? In which condition, it will fail.",
+      "parentUuid": "2f952c2f_4bb45857",
+      "range": {
+        "startLine": 531,
+        "startChar": 1,
+        "endLine": 531,
+        "endChar": 70
+      },
+      "revId": "6314b3ed56c9ce3e5b7b8b609da6498a23af0484",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04f546fb_29706d68",
         "filename": "drivers/iommu/io-pgtable-arm-v7s.c",
         "patchSetId": 6
