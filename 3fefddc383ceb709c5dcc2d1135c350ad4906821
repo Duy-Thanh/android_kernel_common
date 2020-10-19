@@ -88,6 +88,24 @@
       "parentUuid": "a53dce7f_ea3c74e1",
       "revId": "3fefddc383ceb709c5dcc2d1135c350ad4906821",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32f30ecd_dfbad569",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-19T14:22:32Z",
+      "side": 1,
+      "message": "Don\u0027t worry about it, it will be merged into this branch automatically within a week or two if it is already in Linus\u0027s tree.",
+      "parentUuid": "94db66b3_d2939429",
+      "revId": "3fefddc383ceb709c5dcc2d1135c350ad4906821",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
