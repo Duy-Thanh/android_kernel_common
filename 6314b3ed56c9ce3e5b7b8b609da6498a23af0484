@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a86cb5e_a5d9887b",
+        "filename": "drivers/iommu/io-pgtable-arm-v7s.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2020-10-19T08:12:03Z",
+      "side": 1,
+      "message": "I think that\u0027s undefined behaviour per the C language, and you\u0027re shifting an unsigned int here rather than unsigned long. GCC even warns for me:\n\n$ echo \"int main(void) { return 0x12345678 \u003e\u003e 34; }\" | aarch64-linux-gnu-gcc -x c -Wall -o /dev/null -\n\u003cstdin\u003e: In function ‘main’:\n\u003cstdin\u003e:1:36: warning: right shift count \u003e\u003d width of type [-Wshift-count-overflow]",
+      "parentUuid": "7f0e51e9_599214cd",
+      "range": {
+        "startLine": 531,
+        "startChar": 1,
+        "endLine": 531,
+        "endChar": 70
+      },
+      "revId": "6314b3ed56c9ce3e5b7b8b609da6498a23af0484",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04f546fb_29706d68",
         "filename": "drivers/iommu/io-pgtable-arm-v7s.c",
         "patchSetId": 6
