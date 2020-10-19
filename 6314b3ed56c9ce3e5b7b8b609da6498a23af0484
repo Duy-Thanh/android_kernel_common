@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5bba7cda_8cacda9a",
+        "filename": "drivers/iommu/io-pgtable-arm-v7s.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1769527
+      },
+      "writtenOn": "2020-10-19T12:45:05Z",
+      "side": 1,
+      "message": "Learn this. Thanks.\n\nThen which one do you prefer?\n\nKeep it as it. or change it something like: \n((iova \u003e\u003e 16) \u003e\u003e (data-\u003eiop.cfg.ias - 16))",
+      "parentUuid": "7a86cb5e_a5d9887b",
+      "range": {
+        "startLine": 531,
+        "startChar": 1,
+        "endLine": 531,
+        "endChar": 70
+      },
+      "revId": "6314b3ed56c9ce3e5b7b8b609da6498a23af0484",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04f546fb_29706d68",
         "filename": "drivers/iommu/io-pgtable-arm-v7s.c",
         "patchSetId": 6
