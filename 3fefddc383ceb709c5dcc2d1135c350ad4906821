@@ -70,6 +70,24 @@
       "parentUuid": "c19cdb88_cec2bdcc",
       "revId": "3fefddc383ceb709c5dcc2d1135c350ad4906821",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94db66b3_d2939429",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1117108
+      },
+      "writtenOn": "2020-10-19T10:06:07Z",
+      "side": 1,
+      "message": "Meanwhile, the patch has reached the Linux mainline. Should I bother CPing it at all now? When would it naturally make it to the android-mainline?",
+      "parentUuid": "a53dce7f_ea3c74e1",
+      "revId": "3fefddc383ceb709c5dcc2d1135c350ad4906821",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
