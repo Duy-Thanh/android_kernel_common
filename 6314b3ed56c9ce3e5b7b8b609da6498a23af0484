@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b303e8a_ab96de1f",
+        "filename": "drivers/iommu/io-pgtable-arm-v7s.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2020-10-20T19:06:11Z",
+      "side": 1,
+      "message": "THe current code is fine, so please leave it alone. The only part that needs changing is the upper_32_bits() checks, which you can rewrite in the same style as the existing checks (i.e. by looking at 1ULL \u003c\u003c data-\u003eiop.cfg.ias instead)",
+      "parentUuid": "5bba7cda_8cacda9a",
+      "range": {
+        "startLine": 531,
+        "startChar": 1,
+        "endLine": 531,
+        "endChar": 70
+      },
+      "revId": "6314b3ed56c9ce3e5b7b8b609da6498a23af0484",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04f546fb_29706d68",
         "filename": "drivers/iommu/io-pgtable-arm-v7s.c",
         "patchSetId": 6
