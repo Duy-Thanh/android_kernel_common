@@ -25,6 +25,7 @@
 #include <linux/part_stat.h>
 #include <crypto/hash.h>
 
+#define FSCRYPT_NEED_OPS
 #include <linux/fscrypt.h>
 #include <linux/fsverity.h>
 
