@@ -52,6 +52,7 @@ struct fscrypt_name {
  */
 #define FS_CFLG_OWN_PAGES (1U << 1)
 
+#ifdef FSCRYPT_NEED_OPS
 /*
  * crypto operations for filesystems
  */
@@ -71,6 +72,7 @@ struct fscrypt_operations {
 	void (*get_devices)(struct super_block *sb,
 			    struct request_queue **devs);
 };
+#endif
 
 static inline struct fscrypt_info *fscrypt_get_info(const struct inode *inode)
 {
