@@ -903,7 +903,10 @@ static void do_handle_IPI(int ipinr)
 		break;
 
 	case IPI_CPU_STOP:
+<<<<<<< HEAD   (013498 FROMLIST: clk: versatile: remove dependency on ARCH_*)
 		trace_android_vh_ipi_stop(get_irq_regs());
+=======
+>>>>>>> BRANCH (39a510 Merge branch 'linus' of git://git.kernel.org/pub/scm/linux/k)
 		local_cpu_stop();
 		break;
 
