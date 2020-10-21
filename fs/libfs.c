@@ -1379,6 +1379,7 @@ int generic_ci_d_hash(const struct dentry *dentry, struct qstr *str)
 	return 0;
 }
 EXPORT_SYMBOL(generic_ci_d_hash);
+<<<<<<< HEAD   (754303 ANDROID: sync generic casefolding code with patches going up)
 
 static const struct dentry_operations generic_ci_dentry_ops = {
 	.d_hash = generic_ci_d_hash,
@@ -1430,3 +1431,6 @@ void generic_set_encrypted_ci_d_ops(struct inode *dir, struct dentry *dentry)
 #endif
 }
 EXPORT_SYMBOL(generic_set_encrypted_ci_d_ops);
+=======
+#endif
+>>>>>>> BRANCH (77e343 docs: fs: fscrypt.rst: get rid of :c:type: tags)
