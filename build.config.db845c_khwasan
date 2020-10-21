@@ -1,0 +1,2 @@
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.db845c
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.khwasan
