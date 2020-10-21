@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19c3964f_b9cdce59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-10-21T20:26:33Z",
+      "side": 1,
+      "message": "This is conflicting heavily with the remaining out-of-tree encrypt+casefold patches, and the end state doesn\u0027t look quite right.\n\nCan you cherry-pick https://android-review.googlesource.com/c/kernel/common/+/1433027 from android-mainline first?  I missed cherry-picking that to android12-5.4.  It should make things easier.\n\nAlso, you need to search for DCACHE_ENCRYPTED_NAME and replace it with DCACHE_NOKEY_NAME.",
+      "revId": "5b7a569bdc7003be3b30980290b64a389fdfc237",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
