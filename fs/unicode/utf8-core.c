@@ -138,7 +138,11 @@ int utf8_casefold_hash(const struct unicode_map *um, const void *salt,
 
 	while ((c = utf8byte(&cur))) {
 		if (c < 0)
+<<<<<<< HEAD   (45a5b5 ANDROID: GKI: Enable CONFIG_X86_X2APIC)
 			return c;
+=======
+			return -EINVAL;
+>>>>>>> BRANCH (77e343 docs: fs: fscrypt.rst: get rid of :c:type: tags)
 		hash = partial_name_hash((unsigned char)c, hash);
 	}
 	str->hash = end_name_hash(hash);
