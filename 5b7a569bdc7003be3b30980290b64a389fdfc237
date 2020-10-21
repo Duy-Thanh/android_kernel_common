@@ -34,6 +34,24 @@
       "parentUuid": "19c3964f_b9cdce59",
       "revId": "5b7a569bdc7003be3b30980290b64a389fdfc237",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d8abc14_6dc8c9ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-10-21T22:12:01Z",
+      "side": 1,
+      "message": "Hmm, you moved the call of generic_set_encrypted_ci_d_ops() into __fscrypt_prepare_lookup().  That\u0027s wrong, because __fscrypt_prepare_lookup() (note the two underscores) is only called if the directory is encrypted.  But directories can be casefolded without being encrypted, and generic_set_encrypted_ci_d_ops() has to be called for those too.\n\nSo we need to keep the calls to set the dentry ops in each filesystem (ext4, f2fs, and ubifs), like in current android12-5.4.",
+      "parentUuid": "6ba0aa0a_c9bc1cf8",
+      "revId": "5b7a569bdc7003be3b30980290b64a389fdfc237",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
