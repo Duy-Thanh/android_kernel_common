@@ -903,7 +903,10 @@ static void do_handle_IPI(int ipinr)
 		break;
 
 	case IPI_CPU_STOP:
+<<<<<<< HEAD   (03a2f9 Merge f5f59336a9ae ("Merge tag 'timers-core-2020-10-12' of g)
 		trace_android_vh_ipi_stop(get_irq_regs());
+=======
+>>>>>>> BRANCH (c457cc Merge tag 'irq-core-2020-10-12' of git://git.kernel.org/pub/)
 		local_cpu_stop();
 		break;
 
