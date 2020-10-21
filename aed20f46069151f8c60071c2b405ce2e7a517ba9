@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005653643",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1469304?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "6884dd75_47047ac3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-10-21T12:20:56Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Alessio Balsini \u003cbalsini@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 338070508 android-build.ayeaye-python-dispatcher_20201020.05_p0",
+      "revId": "aed20f46069151f8c60071c2b405ce2e7a517ba9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005653643",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1469304?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "1c2ae410_2f61bbdd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-10-21T12:20:56Z",
+      "side": 1,
+      "message": "Commit does not link to an upstream reference at lore\nPlease add a line like \u0027Link: https://lore.kernel.org/...\u0027\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 338070508 android-build.ayeaye-python-dispatcher_20201020.05_p0",
+      "revId": "aed20f46069151f8c60071c2b405ce2e7a517ba9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
