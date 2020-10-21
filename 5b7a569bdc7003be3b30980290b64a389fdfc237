@@ -88,6 +88,24 @@
       "parentUuid": "d0f105db_8bb038a9",
       "revId": "5b7a569bdc7003be3b30980290b64a389fdfc237",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6864a1cc_a0519c42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-10-21T22:24:30Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s a good place, since generic_set_encrypted_ci_d_ops() is for both casefolding and encryption.  It\u0027s weird to be calling it from any fscrypt_* function, as that makes the encryption feature \"special\".\n\nI tried doing the merge myself -- can you take a look at https://android-review.googlesource.com/c/kernel/common/+/1469924?\n\nThere was also an extra declaration of fscrypt_d_revalidate() that needed to be removed.",
+      "parentUuid": "7f0a5c59_085dce27",
+      "revId": "5b7a569bdc7003be3b30980290b64a389fdfc237",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
