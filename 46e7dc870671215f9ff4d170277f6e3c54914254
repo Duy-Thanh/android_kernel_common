@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f9cb110_541ef1b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-22T11:08:19Z",
+      "side": 1,
+      "message": "Also need this in android12-5.4 and android-4.19-stable, right?",
+      "revId": "46e7dc870671215f9ff4d170277f6e3c54914254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
