@@ -16,6 +16,24 @@
       "message": "As cpu hotplug is controlled by userspace, why not change the logging level in userspace before and after hotplug happens, so you don\u0027t have to worry about this at all?\n\nDoing a flush for when hotplugging happens is crazy, this is totally non-determinisitic and while I appreciate you are trying to make things to be perceived faster, this isn\u0027t really a useful hook.",
       "revId": "afc6e4fa05df338e59002069cda1963f3fe53a12",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58a11c33_edc25407",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2020-10-22T12:34:15Z",
+      "side": 1,
+      "message": "As cpu hotplug is controlled by userspace, why not change the logging level in userspace before and after hotplug happens, so you don\u0027t have to worry about this at all?\n\n\u003cPrasad\u003e I discussed in weekly sync up call with Todd. For Qualcomm use cases, it is hard to put loglevel change in every automation. There are many geo\u0027s working on the various type of test frameworks. \nConsole flush in the hotplug path is not needed and Todd says that other vendor may need that. So I have no option other than adding vendor hooks to skip console flush.\n\nAnother main reason for adding is that, cpuhotplug also initiated by thermal driver from kernel and not user space all the time. \n\nTo address all these concerns added vendor hook.",
+      "parentUuid": "b8e9e054_0f0e5507",
+      "revId": "afc6e4fa05df338e59002069cda1963f3fe53a12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
