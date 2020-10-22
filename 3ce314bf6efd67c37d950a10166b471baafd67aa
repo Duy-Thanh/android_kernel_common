@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30d94f22_5088a189",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-22T13:39:55Z",
+      "side": 1,
+      "message": "There are loads of errors in the build, due to the .xml file not being updated with the new symbols.\n\nBut looking at the list, huge numbers of them just are not even in our kernel tree, are you sure you made this thing correctly?\n\nPlease update your list, and create the .xml file update as well, and provide the proper changelog showing the report of the differences, like other commits that add symbols to the lists have done, and we will be glad to review it.",
+      "revId": "3ce314bf6efd67c37d950a10166b471baafd67aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39db2441_22b0a99b",
