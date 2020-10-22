@@ -521,6 +521,23 @@
       "message": "line break",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31339c4e_42655a04",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1616,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-22T08:52:03Z",
+      "side": 1,
+      "message": "successfully removed",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
