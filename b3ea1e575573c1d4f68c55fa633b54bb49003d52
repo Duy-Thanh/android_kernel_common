@@ -34,6 +34,24 @@
       "parentUuid": "85e858e7_e3da74ca",
       "revId": "b3ea1e575573c1d4f68c55fa633b54bb49003d52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd21fd8b_810c7065",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-10-22T22:03:05Z",
+      "side": 1,
+      "message": "Please backport the whole patch (with dependencies) or mark as ANDROID and indicate in the commit message where it came from (\"partial backport of commit X. Didn\u0027t backport entire patch because ...\")",
+      "parentUuid": "e8dfb2a3_fbe5fd71",
+      "revId": "b3ea1e575573c1d4f68c55fa633b54bb49003d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
