@@ -52,6 +52,24 @@
       "parentUuid": "e8dfb2a3_fbe5fd71",
       "revId": "b3ea1e575573c1d4f68c55fa633b54bb49003d52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f5e4393_2eb061cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2020-10-22T23:31:46Z",
+      "side": 1,
+      "message": "I\u0027d like to drop this whole patchset cherry-pick due to this KMI breakage and too much backport concern. I\u0027ll abandon this set and go back to first approach with your suggestion commit message.",
+      "parentUuid": "dd21fd8b_810c7065",
+      "revId": "b3ea1e575573c1d4f68c55fa633b54bb49003d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
