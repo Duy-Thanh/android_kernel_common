@@ -1647,7 +1647,7 @@ const void *dup_iter(struct iov_iter *new, struct iov_iter *old, gfp_t flags)
 EXPORT_SYMBOL(dup_iter);
 
 static int copy_compat_iovec_from_user(struct iovec *iov,
-		const struct iovec __user *uvec, unsigned long nr_segs)
+		const struct iovec __user *uvec, unsigned nr_segs)
 {
 	const struct compat_iovec __user *uiov =
 		(const struct compat_iovec __user *)uvec;
@@ -1679,7 +1679,7 @@ uaccess_end:
 }
 
 static int copy_iovec_from_user(struct iovec *iov,
-		const struct iovec __user *uvec, unsigned long nr_segs)
+		const struct iovec __user *uvec, unsigned nr_segs)
 {
 	unsigned long seg;
 
@@ -1694,7 +1694,7 @@ static int copy_iovec_from_user(struct iovec *iov,
 }
 
 struct iovec *iovec_from_user(const struct iovec __user *uvec,
-		unsigned long nr_segs, unsigned long fast_segs,
+		unsigned nr_segs, unsigned fast_segs,
 		struct iovec *fast_iov, bool compat)
 {
 	struct iovec *iov = fast_iov;
@@ -1733,7 +1733,7 @@ ssize_t __import_iovec(int type, const struct iovec __user *uvec,
 		 struct iov_iter *i, bool compat)
 {
 	ssize_t total_len = 0;
-	unsigned long seg;
+	unsigned seg;
 	struct iovec *iov;
 
 	iov = iovec_from_user(uvec, nr_segs, fast_segs, *iovp, compat);
