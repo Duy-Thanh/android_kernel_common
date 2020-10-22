@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51ab3e45_ee18d9c2",
+        "filename": "build.config.common",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-10-22T16:19:46Z",
+      "side": 1,
+      "message": "try clang-r383902/\n\nThe available versions are:\nclang-r353983c/   clang-r370808/    clang-r370808b/   clang-r383902/    clang-r383902b/   clang-r383902b1/  clang-r383902c/   clang-r399163/    clang-r399163b/",
+      "range": {
+        "startLine": 7,
+        "startChar": 63,
+        "endLine": 7,
+        "endChar": 71
+      },
+      "revId": "ec6421b481f5e64a7772f957b5047e88d0e9f738",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
