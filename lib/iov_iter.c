@@ -138,7 +138,7 @@
 	}							\
 }
 
-static int copyout(void __user *to, const void *from, size_t n)
+noinline static int copyout(void __user *to, const void *from, size_t n)
 {
 	if (access_ok(to, n)) {
 		instrument_copy_to_user(to, from, n);
@@ -147,7 +147,7 @@ static int copyout(void __user *to, const void *from, size_t n)
 	return n;
 }
 
-static int copyin(void *to, const void __user *from, size_t n)
+noinline static int copyin(void *to, const void __user *from, size_t n)
 {
 	if (access_ok(from, n)) {
 		instrument_copy_from_user(to, from, n);
@@ -156,7 +156,7 @@ static int copyin(void *to, const void __user *from, size_t n)
 	return n;
 }
 
-static size_t copy_page_to_iter_iovec(struct page *page, size_t offset, size_t bytes,
+noinline static size_t copy_page_to_iter_iovec(struct page *page, size_t offset, size_t bytes,
 			 struct iov_iter *i)
 {
 	size_t skip, copy, left, wanted;
@@ -240,7 +240,7 @@ done:
 	return wanted - bytes;
 }
 
-static size_t copy_page_from_iter_iovec(struct page *page, size_t offset, size_t bytes,
+noinline static size_t copy_page_from_iter_iovec(struct page *page, size_t offset, size_t bytes,
 			 struct iov_iter *i)
 {
 	size_t skip, copy, left, wanted;
@@ -325,7 +325,7 @@ done:
 }
 
 #ifdef PIPE_PARANOIA
-static bool sanity(const struct iov_iter *i)
+noinline static bool sanity(const struct iov_iter *i)
 {
 	struct pipe_inode_info *pipe = i->pipe;
 	unsigned int p_head = pipe->head;
@@ -367,7 +367,7 @@ Bad:
 #define sanity(i) true
 #endif
 
-static size_t copy_page_to_iter_pipe(struct page *page, size_t offset, size_t bytes,
+noinline static size_t copy_page_to_iter_pipe(struct page *page, size_t offset, size_t bytes,
 			 struct iov_iter *i)
 {
 	struct pipe_inode_info *pipe = i->pipe;
@@ -461,33 +461,33 @@ void iov_iter_init(struct iov_iter *i, unsigned int direction,
 }
 EXPORT_SYMBOL(iov_iter_init);
 
-static void memcpy_from_page(char *to, struct page *page, size_t offset, size_t len)
+noinline static void memcpy_from_page(char *to, struct page *page, size_t offset, size_t len)
 {
 	char *from = kmap_atomic(page);
 	memcpy(to, from + offset, len);
 	kunmap_atomic(from);
 }
 
-static void memcpy_to_page(struct page *page, size_t offset, const char *from, size_t len)
+noinline static void memcpy_to_page(struct page *page, size_t offset, const char *from, size_t len)
 {
 	char *to = kmap_atomic(page);
 	memcpy(to + offset, from, len);
 	kunmap_atomic(to);
 }
 
-static void memzero_page(struct page *page, size_t offset, size_t len)
+noinline static void memzero_page(struct page *page, size_t offset, size_t len)
 {
 	char *addr = kmap_atomic(page);
 	memset(addr + offset, 0, len);
 	kunmap_atomic(addr);
 }
 
-static inline bool allocated(struct pipe_buffer *buf)
+noinline static bool allocated(struct pipe_buffer *buf)
 {
 	return buf->ops == &default_pipe_buf_ops;
 }
 
-static inline void data_start(const struct iov_iter *i,
+noinline static void data_start(const struct iov_iter *i,
 			      unsigned int *iter_headp, size_t *offp)
 {
 	unsigned int p_mask = i->pipe->ring_size - 1;
@@ -503,7 +503,7 @@ static inline void data_start(const struct iov_iter *i,
 	*offp = off;
 }
 
-static size_t push_pipe(struct iov_iter *i, size_t size,
+noinline static size_t push_pipe(struct iov_iter *i, size_t size,
 			int *iter_headp, size_t *offp)
 {
 	struct pipe_inode_info *pipe = i->pipe;
@@ -551,7 +551,7 @@ static size_t push_pipe(struct iov_iter *i, size_t size,
 	return size - left;
 }
 
-static size_t copy_pipe_to_iter(const void *addr, size_t bytes,
+noinline static size_t copy_pipe_to_iter(const void *addr, size_t bytes,
 				struct iov_iter *i)
 {
 	struct pipe_inode_info *pipe = i->pipe;
@@ -579,14 +579,14 @@ static size_t copy_pipe_to_iter(const void *addr, size_t bytes,
 	return bytes;
 }
 
-static __wsum csum_and_memcpy(void *to, const void *from, size_t len,
+noinline static __wsum csum_and_memcpy(void *to, const void *from, size_t len,
 			      __wsum sum, size_t off)
 {
 	__wsum next = csum_partial_copy_nocheck(from, to, len);
 	return csum_block_add(sum, next, off);
 }
 
-static size_t csum_and_copy_to_pipe_iter(const void *addr, size_t bytes,
+noinline static size_t csum_and_copy_to_pipe_iter(const void *addr, size_t bytes,
 				__wsum *csum, struct iov_iter *i)
 {
 	struct pipe_inode_info *pipe = i->pipe;
@@ -639,7 +639,7 @@ size_t _copy_to_iter(const void *addr, size_t bytes, struct iov_iter *i)
 EXPORT_SYMBOL(_copy_to_iter);
 
 #ifdef CONFIG_ARCH_HAS_COPY_MC
-static int copyout_mc(void __user *to, const void *from, size_t n)
+noinline static int copyout_mc(void __user *to, const void *from, size_t n)
 {
 	if (access_ok(to, n)) {
 		instrument_copy_to_user(to, from, n);
@@ -648,7 +648,7 @@ static int copyout_mc(void __user *to, const void *from, size_t n)
 	return n;
 }
 
-static unsigned long copy_mc_to_page(struct page *page, size_t offset,
+noinline static unsigned long copy_mc_to_page(struct page *page, size_t offset,
 		const char *from, size_t len)
 {
 	unsigned long ret;
@@ -661,7 +661,7 @@ static unsigned long copy_mc_to_page(struct page *page, size_t offset,
 	return ret;
 }
 
-static size_t copy_mc_pipe_to_iter(const void *addr, size_t bytes,
+noinline static size_t copy_mc_pipe_to_iter(const void *addr, size_t bytes,
 				struct iov_iter *i)
 {
 	struct pipe_inode_info *pipe = i->pipe;
@@ -881,7 +881,7 @@ bool _copy_from_iter_full_nocache(void *addr, size_t bytes, struct iov_iter *i)
 }
 EXPORT_SYMBOL(_copy_from_iter_full_nocache);
 
-static inline bool page_copy_sane(struct page *page, size_t offset, size_t n)
+noinline static bool page_copy_sane(struct page *page, size_t offset, size_t n)
 {
 	struct page *head;
 	size_t v = n + offset;
@@ -943,7 +943,7 @@ size_t copy_page_from_iter(struct page *page, size_t offset, size_t bytes,
 }
 EXPORT_SYMBOL(copy_page_from_iter);
 
-static size_t pipe_zero(size_t bytes, struct iov_iter *i)
+noinline static size_t pipe_zero(size_t bytes, struct iov_iter *i)
 {
 	struct pipe_inode_info *pipe = i->pipe;
 	unsigned int p_mask = pipe->ring_size - 1;
@@ -1008,7 +1008,7 @@ size_t iov_iter_copy_from_user_atomic(struct page *page,
 }
 EXPORT_SYMBOL(iov_iter_copy_from_user_atomic);
 
-static inline void pipe_truncate(struct iov_iter *i)
+noinline static void pipe_truncate(struct iov_iter *i)
 {
 	struct pipe_inode_info *pipe = i->pipe;
 	unsigned int p_tail = pipe->tail;
@@ -1034,7 +1034,7 @@ static inline void pipe_truncate(struct iov_iter *i)
 	}
 }
 
-static void pipe_advance(struct iov_iter *i, size_t size)
+noinline static void pipe_advance(struct iov_iter *i, size_t size)
 {
 	struct pipe_inode_info *pipe = i->pipe;
 	if (unlikely(i->count < size))
@@ -1264,7 +1264,7 @@ unsigned long iov_iter_gap_alignment(const struct iov_iter *i)
 }
 EXPORT_SYMBOL(iov_iter_gap_alignment);
 
-static inline ssize_t __pipe_get_pages(struct iov_iter *i,
+noinline static ssize_t __pipe_get_pages(struct iov_iter *i,
 				size_t maxsize,
 				struct page **pages,
 				int iter_head,
@@ -1287,7 +1287,7 @@ static inline ssize_t __pipe_get_pages(struct iov_iter *i,
 	return maxsize;
 }
 
-static ssize_t pipe_get_pages(struct iov_iter *i,
+noinline static ssize_t pipe_get_pages(struct iov_iter *i,
 		   struct page **pages, size_t maxsize, unsigned maxpages,
 		   size_t *start)
 {
@@ -1349,12 +1349,12 @@ ssize_t iov_iter_get_pages(struct iov_iter *i,
 }
 EXPORT_SYMBOL(iov_iter_get_pages);
 
-static struct page **get_pages_array(size_t n)
+noinline static struct page **get_pages_array(size_t n)
 {
 	return kvmalloc_array(n, sizeof(struct page *), GFP_KERNEL);
 }
 
-static ssize_t pipe_get_pages_alloc(struct iov_iter *i,
+noinline static ssize_t pipe_get_pages_alloc(struct iov_iter *i,
 		   struct page ***pages, size_t maxsize,
 		   size_t *start)
 {
