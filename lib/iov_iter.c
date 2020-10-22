@@ -1674,7 +1674,7 @@ EXPORT_SYMBOL(dup_iter);
  * Return: The total number of bytes covered by the iovec array on success
  *   or a negative error code on error.
  */
-ssize_t rw_copy_check_uvector(int type, const struct iovec __user *uvector,
+noinline ssize_t rw_copy_check_uvector(int type, const struct iovec __user *uvector,
 		unsigned long nr_segs, unsigned long fast_segs,
 		struct iovec *fast_pointer, struct iovec **ret_pointer)
 {
