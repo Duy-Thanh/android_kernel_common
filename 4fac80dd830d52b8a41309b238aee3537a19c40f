@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a8cb76b_c29455ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-22T09:01:47Z",
+      "side": 1,
+      "message": "FYI, I will try to get these changes verified after code review is done.",
+      "revId": "4fac80dd830d52b8a41309b238aee3537a19c40f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b514bd00_cdc39ce1",
