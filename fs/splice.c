@@ -342,7 +342,7 @@ const struct pipe_buf_operations nosteal_pipe_buf_ops = {
 EXPORT_SYMBOL(nosteal_pipe_buf_ops);
 
 static ssize_t kernel_readv(struct file *file, const struct kvec *vec,
-			    unsigned long vlen, loff_t offset)
+			    unsigned int vlen, loff_t offset)
 {
 	mm_segment_t old_fs;
 	loff_t pos = offset;
