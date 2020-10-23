@@ -97,6 +97,14 @@ enum flat_binder_object_flags {
 	 * context
 	 */
 	FLAT_BINDER_FLAG_TXN_SECURITY_CTX = 0x1000,
+
+	/**
+	 * @FLAT_BINDER_FLAG_CLEAR_BUFFER: clear buffer after txn
+	 *
+	 * Only when set, causes buffer to be zero'd out when
+	 * transaction is complete
+	 */
+	FLAT_BINDER_FLAG_TXN_CLEAR_BUFFER = 0x2000,
 };
 
 #ifdef BINDER_IPC_32BIT
@@ -296,6 +304,7 @@ enum transaction_flags {
 	TF_ROOT_OBJECT	= 0x04,	/* contents are the component's root object */
 	TF_STATUS_CODE	= 0x08,	/* contents are a 32-bit status code */
 	TF_ACCEPT_FDS	= 0x10,	/* allow replies with file descriptors */
+	TF_CLEAR_BUF	= 0x20,	/* clear buffer on txn complete */
 };
 
 struct binder_transaction_data {
