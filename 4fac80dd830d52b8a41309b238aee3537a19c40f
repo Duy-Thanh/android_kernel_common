@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e57c2131_ca2a504b",
+        "filename": "drivers/scsi/ufs/ufshpb.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "OK,\n/* head of the list is Least Recently Used */",
+      "parentUuid": "b514bd00_cdc39ce1",
+      "revId": "4fac80dd830d52b8a41309b238aee3537a19c40f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "513d98f2_e58ad867",
         "filename": "drivers/scsi/ufs/ufshpb.h",
         "patchSetId": 3
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "20618bad_7dee827b",
+        "filename": "drivers/scsi/ufs/ufshpb.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "It means developer must hold the lock before accessing this data structure.",
+      "parentUuid": "513d98f2_e58ad867",
+      "revId": "4fac80dd830d52b8a41309b238aee3537a19c40f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ae31d46_30e1cae5",
         "filename": "drivers/scsi/ufs/ufshpb.h",
         "patchSetId": 3
@@ -65,6 +101,24 @@
       "writtenOn": "2020-10-22T08:49:39Z",
       "side": 1,
       "message": "What does the comment at the tail mean? Update it or remove it?",
+      "revId": "4fac80dd830d52b8a41309b238aee3537a19c40f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdf7ebba_132986bf",
+        "filename": "drivers/scsi/ufs/ufshpb.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "It means developer must hold the lock before accessing this data structure.",
+      "parentUuid": "3ae31d46_30e1cae5",
       "revId": "4fac80dd830d52b8a41309b238aee3537a19c40f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

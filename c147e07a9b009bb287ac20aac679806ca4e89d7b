@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "155d337b_ffb68640",
+        "filename": "drivers/scsi/ufs/ufs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "I will change its name as hpb_op.",
+      "parentUuid": "e32a6e42_54aa490f",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "427cbfcc_a35d14ba",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -31,6 +49,30 @@
       "writtenOn": "2020-10-22T08:49:39Z",
       "side": 1,
       "message": "I don\u0027t know what is this func doing just by reading its name, not a fan of its name.",
+      "range": {
+        "startLine": 63,
+        "startChar": 53,
+        "endLine": 63,
+        "endChar": 54
+      },
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61c01f78_681860aa",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "How about ufshpb_check_rsp_field?",
+      "parentUuid": "427cbfcc_a35d14ba",
       "range": {
         "startLine": 63,
         "startChar": 53,
@@ -60,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5e3036e_e43ab166",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "Bart said using inline explicitly should be avoid, because compiler will add inline automatically and wisely.\nI will change this function to get \"hpb\" from \"sdev\", not \"cmd\" for use it more widely.",
+      "parentUuid": "ccc98a2a_0bce4674",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5cf6e27f_12a68425",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -71,6 +131,24 @@
       "writtenOn": "2020-10-22T08:49:39Z",
       "side": 1,
       "message": "hpb-\u003epages_per_srgn \u003d hpb-\u003esrgn_mem_size / PAGE_SIZE;\nThen hpb-\u003epages_per_srgn can be 0, if so we won\u0027t be able to add page to this bio.",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15c14899_25b050f2",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "I will add code for checking value of pages_per_srgn. If it is zero, HPB will be disabled.",
+      "parentUuid": "5cf6e27f_12a68425",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -94,6 +172,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a6fd4088_6a019f97",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "I will remove this.",
+      "parentUuid": "905b6e78_9546c0a2",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b09aeb23_a5b9e53b",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -105,6 +201,24 @@
       "writtenOn": "2020-10-22T08:49:39Z",
       "side": 1,
       "message": "why not dev_err()?",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1016c99f_6a95ff73",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "I will change it.",
+      "parentUuid": "b09aeb23_a5b9e53b",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -128,6 +242,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a9c24f4_581c0a2e",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "OK, I will change it.",
+      "parentUuid": "b288a36d_c9321e78",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7646fa5a_e4da3a8d",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -139,6 +271,24 @@
       "writtenOn": "2020-10-22T08:49:39Z",
       "side": 1,
       "message": "ufshpb_check_srgns_issue_state()?",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76232ed9_395a7252",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "OK,",
+      "parentUuid": "7646fa5a_e4da3a8d",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -162,6 +312,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a36d7bba_f27f15a8",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "OK, I will add macro for this.",
+      "parentUuid": "7e2043f5_ef1f813c",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55693421_07e27d4f",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -173,6 +341,24 @@
       "writtenOn": "2020-10-22T08:49:39Z",
       "side": 1,
       "message": "Above WARN_ON means we are not expecting rgn-\u003ergn_state to be HPB_RGN_INACTIVE, then why we need to do this check? I don\u0027t get it.",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b4906f1_b6395bd7",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "WARN_ON will be removed.",
+      "parentUuid": "55693421_07e27d4f",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -196,6 +382,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c282bb92_39f95a90",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "It can be, but why?",
+      "parentUuid": "150434ea_adc5213f",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd6a4463_293ad135",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -207,6 +411,24 @@
       "writtenOn": "2020-10-22T08:49:39Z",
       "side": 1,
       "message": "I don\u0027t find any logic to do the re-send, maybe I misunderstand something or the comments are misleading.",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22505b48_a97018a7",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "re-send is done on ufshpb_run_active_subregion_list by -EAGAIN error.",
+      "parentUuid": "bd6a4463_293ad135",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -230,6 +452,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e2fd6db7_38504459",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "It is already ISSUED but it can be failed due to UFS internal state (GC/wear-leveling). So it should be re-issued by -EAGAIN error code.",
+      "parentUuid": "4b91ee2f_0a2411dd",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "937961f0_f79b8e15",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -241,6 +481,24 @@
       "writtenOn": "2020-10-22T08:49:39Z",
       "side": 1,
       "message": "Why not dev_err()?",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0055afde_02aefeef",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "I will change it.",
+      "parentUuid": "937961f0_f79b8e15",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -264,6 +522,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b553be8_7c54b8b2",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "I think it\u0027s okay now, do I have to change it?\nI am worried about the side effect by changing it.",
+      "parentUuid": "5c203425_ef38fdb4",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c911a18_a1f90ac2",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -275,6 +551,24 @@
       "writtenOn": "2020-10-22T08:49:39Z",
       "side": 1,
       "message": "Why is the check put here? Is it must be here? If no, ufshpb_get_map_req() and ufshcd_execute_map_req() can be merged as one func, right?",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98d2b6a5_247b4170",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "I think ufshpb_get_map_req() and ufshcd_execute_map_req() do different things so they should be separeated as are.",
+      "parentUuid": "3c911a18_a1f90ac2",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -298,6 +592,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b4fb0e5_335e2e35",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "OK,",
+      "parentUuid": "4d25994f_4895097e",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d7475436_797aace3",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -309,6 +621,24 @@
       "writtenOn": "2020-10-22T08:49:39Z",
       "side": 1,
       "message": "How about making 4 a macro?",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53620763_88be66f9",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "I will add the macro on header file.",
+      "parentUuid": "d7475436_797aace3",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -332,6 +662,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd924a7a_362cea48",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "OK,",
+      "parentUuid": "c2554f26_0e5bd8dc",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0107b61d_7ad75b49",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -343,6 +691,24 @@
       "writtenOn": "2020-10-22T08:49:39Z",
       "side": 1,
       "message": "Maybe you can put queue_work() into func ufshpb_is_empty_rsp_lists() and re-name it as ufshpb_kick_map_work(), then you can call it wherever you need it.",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3308e6c_7580a214",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "OK, I will change it.",
+      "parentUuid": "0107b61d_7ad75b49",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -372,6 +738,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "40fcaafe_99fe1873",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "I will add the macro on header file.",
+      "parentUuid": "0ebc26fd_6d54c703",
+      "range": {
+        "startLine": 680,
+        "startChar": 46,
+        "endLine": 680,
+        "endChar": 48
+      },
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "08866576_13b72f37",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -383,6 +773,24 @@
       "writtenOn": "2020-10-22T08:49:39Z",
       "side": 1,
       "message": "Isn\u0027t this print too much considering suspend/resume can happen several millions of times a year. Besides, reg this case, since device has reset HPB, nothing should be done from host side? Shouldn\u0027t the code mark all valid sub-regions as invalid?",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cfad500_2daf86d2",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "It is not a case about just reset but device lost HPB information. In this case (value is 2), host has nothing to do.",
+      "parentUuid": "08866576_13b72f37",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -406,6 +814,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "069cf710_fb453d9c",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "I will add case for NONE value.",
+      "parentUuid": "aeceb7e0_d75ddc7b",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "700cf248_a498b2dc",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -417,6 +843,24 @@
       "writtenOn": "2020-10-22T08:49:39Z",
       "side": 1,
       "message": "line break?",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b95e7a3a_a9fbce62",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "OK,",
+      "parentUuid": "700cf248_a498b2dc",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -440,6 +884,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "150be765_d7e55881",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "In the ufshpb_add_region(), the function holds hpb_state_lock, not rsp_list_lock.",
+      "parentUuid": "9c4110e6_e56b9352",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "91dd18f9_19517e30",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -451,6 +913,24 @@
       "writtenOn": "2020-10-22T08:49:39Z",
       "side": 1,
       "message": "Why not dev_err()?",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38327568_9c753e5a",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "I will be changed.",
+      "parentUuid": "91dd18f9_19517e30",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -474,6 +954,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03b553db_93b26f80",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "I will be changed as \"region %d - subregion %d\".",
+      "parentUuid": "b6f59dd7_ff3dbf24",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68579b08_cad9f551",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -485,6 +983,24 @@
       "writtenOn": "2020-10-22T08:49:39Z",
       "side": 1,
       "message": "line break",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a93b993d_8ba25cb8",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "OK",
+      "parentUuid": "68579b08_cad9f551",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -508,6 +1024,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ce5be4cb_4df6d656",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "Same like above, it uses another lock.",
+      "parentUuid": "11a83849_54007738",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c480fb6_1f68727f",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -525,6 +1059,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "218a3ad0_7f3c68c4",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 820,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "OK,",
+      "parentUuid": "8c480fb6_1f68727f",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31339c4e_42655a04",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -536,6 +1088,24 @@
       "writtenOn": "2020-10-22T08:52:03Z",
       "side": 1,
       "message": "successfully removed",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caccef6c_0c542e3a",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1616,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:20:22Z",
+      "side": 1,
+      "message": "OK,",
+      "parentUuid": "31339c4e_42655a04",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
