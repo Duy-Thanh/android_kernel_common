@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f14b41f2_9797164a",
+        "filename": "drivers/scsi/ufs/ufshpb.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T06:39:56Z",
+      "side": 1,
+      "message": "Then please update the comment to make it clear.",
+      "parentUuid": "20618bad_7dee827b",
+      "revId": "4fac80dd830d52b8a41309b238aee3537a19c40f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ae31d46_30e1cae5",
         "filename": "drivers/scsi/ufs/ufshpb.h",
         "patchSetId": 3

@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1878945d_15654e22",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T06:39:56Z",
+      "side": 1,
+      "message": "maybe ufshpb_is_hpb_rsp_valid()?",
+      "parentUuid": "61c01f78_681860aa",
+      "range": {
+        "startLine": 63,
+        "startChar": 53,
+        "endLine": 63,
+        "endChar": 54
+      },
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ccc98a2a_0bce4674",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -120,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "29fe353c_73dfc44e",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T06:39:56Z",
+      "side": 1,
+      "message": "Make sense.",
+      "parentUuid": "b5e3036e_e43ab166",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5cf6e27f_12a68425",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -149,6 +191,24 @@
       "side": 1,
       "message": "I will add code for checking value of pages_per_srgn. If it is zero, HPB will be disabled.",
       "parentUuid": "5cf6e27f_12a68425",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ed84d3a_b6782fe8",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T06:39:56Z",
+      "side": 1,
+      "message": "Why? hpb-\u003esrgn_mem_size can be less than 4KB, right? It just means HPB entry size (8 bytes) * nr_hpb_entries_per_srgn \u003c 4KB, which is possible and fine. In that case, we should force pages_per_srgn to be 1. So, how about make it hpb-\u003epages_per_srgn \u003d DIV_ROUND_UP(hpb-\u003esrgn_mem_size, PAGE_SIZE);?",
+      "parentUuid": "15c14899_25b050f2",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -400,6 +460,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c3356068_d7c6b0fe",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T06:39:56Z",
+      "side": 1,
+      "message": "It saves some actions if it is meant to be bail from line #497",
+      "parentUuid": "c282bb92_39f95a90",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd6a4463_293ad135",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -464,6 +542,24 @@
       "side": 1,
       "message": "It is already ISSUED but it can be failed due to UFS internal state (GC/wear-leveling). So it should be re-issued by -EAGAIN error code.",
       "parentUuid": "4b91ee2f_0a2411dd",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2ef5652_708a3ddf",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T06:39:56Z",
+      "side": 1,
+      "message": "I don\u0027t get it, due to GC/WL, any HPB READ BUFF CMDs can fail at any time, why do you re-send the HPB READ BUFF CMD which has been sent out, but not re-send it only if it fails?\n\nBy re-send, do you mean the error code -EAGAIN makes the sub-region stay on the hpb-\u003elh_act_srgn list?",
+      "parentUuid": "e2fd6db7_38504459",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -540,6 +636,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5855c617_304543b5",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T06:39:56Z",
+      "side": 1,
+      "message": "No, you don\u0027t have to. But I don\u0027t think changing it has side effect as ufshpb_test_ppn_dirty() always return true so long as sub-region is not in VALID state, meaning we can clear dirty bitmap anywhere between sub-region\u0027s state moves from ISSUED to VALID. Please correct me if I am wrong.",
+      "parentUuid": "4b553be8_7c54b8b2",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c911a18_a1f90ac2",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -569,6 +683,24 @@
       "side": 1,
       "message": "I think ufshpb_get_map_req() and ufshcd_execute_map_req() do different things so they should be separeated as are.",
       "parentUuid": "3c911a18_a1f90ac2",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "832bf71f_d6ecf765",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T06:39:56Z",
+      "side": 1,
+      "message": "What about the hpb\u0027s state check? It has to be here between ufshpb_get_map_req() and ufshcd_execute_map_req()? If no, we can put the state check somewhere near the entrance of func ufshpb_issue_map_req().",
+      "parentUuid": "98d2b6a5_247b4170",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -797,6 +929,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "db460c69_dba177ce",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T06:39:56Z",
+      "side": 1,
+      "message": "If the device is power cycled during suspend/resume, can the device still retain its HPB info?",
+      "parentUuid": "2cfad500_2daf86d2",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aeceb7e0_d75ddc7b",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -902,6 +1052,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e4e1d03_e154d0a5",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T06:39:56Z",
+      "side": 1,
+      "message": "OK",
+      "parentUuid": "150be765_d7e55881",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "91dd18f9_19517e30",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -966,6 +1134,24 @@
       "side": 1,
       "message": "I will be changed as \"region %d - subregion %d\".",
       "parentUuid": "b6f59dd7_ff3dbf24",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52f94bb0_1f83201c",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T06:39:56Z",
+      "side": 1,
+      "message": "I meant something like \"Failed to activate region %d - subregion %d, will retry\\n\"",
+      "parentUuid": "03b553db_93b26f80",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
