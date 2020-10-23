@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7571686_65bce164",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2020-10-23T07:07:24Z",
+      "side": 1,
+      "message": "I think defconfig changed and others are merged just before.\nI\u0027m going to update android/abi_gki_aarch64.xml and rebase.",
+      "revId": "c8feb5128084c318a3aaf2e57d8413e26a853a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
