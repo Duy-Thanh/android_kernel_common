@@ -52,6 +52,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3ad1c8c_1af9fba2",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 1552,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-23T08:37:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "410c348b_c110f1c3",
+      "revId": "ffd6bbb478a7ceb803f8080f9f765394d3f73605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c846b95b_b3db359b",
@@ -65,6 +83,24 @@
       "writtenOn": "2020-10-23T07:17:49Z",
       "side": 1,
       "message": "Our UFS driver updated",
+      "revId": "ffd6bbb478a7ceb803f8080f9f765394d3f73605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7027ead_42ea8d24",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 1602,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-23T08:37:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c846b95b_b3db359b",
       "revId": "ffd6bbb478a7ceb803f8080f9f765394d3f73605",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
