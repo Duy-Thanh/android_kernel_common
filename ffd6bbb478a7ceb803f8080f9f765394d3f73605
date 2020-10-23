@@ -16,6 +16,57 @@
       "message": "I updated android/abi_gki_aarch64.xml file.\n\nIf you want me to \"Do not update android/abi_gki_aarch64.xml file\", then please let me know.\n\nI\u0027ll upload only android/abi_gki_aarch64_exynos or else.\n\nThanks.",
       "revId": "ffd6bbb478a7ceb803f8080f9f765394d3f73605",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfb16b5c_bc60ca36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2020-10-23T07:17:49Z",
+      "side": 1,
+      "message": "add update detail for 2 function.",
+      "revId": "ffd6bbb478a7ceb803f8080f9f765394d3f73605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "410c348b_c110f1c3",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 1552,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2020-10-23T07:17:49Z",
+      "side": 1,
+      "message": "Mali library update - it needs this vendor hook.",
+      "revId": "ffd6bbb478a7ceb803f8080f9f765394d3f73605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c846b95b_b3db359b",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 1602,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2020-10-23T07:17:49Z",
+      "side": 1,
+      "message": "Our UFS driver updated",
+      "revId": "ffd6bbb478a7ceb803f8080f9f765394d3f73605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
