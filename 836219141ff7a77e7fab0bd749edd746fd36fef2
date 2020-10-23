@@ -16,6 +16,24 @@
       "message": "i don\u0027t know how to review this...  what\u0027s bringing this on?\n\nis this the expected fallout from the compat support for xfrm being added?\nif so, could a more targetted revert be landed instead?",
       "revId": "836219141ff7a77e7fab0bd749edd746fd36fef2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d942045_be304de7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-23T08:50:26Z",
+      "side": 1,
+      "message": "There is a compiler bug that is breaking some run-time tests that we are trying to track down upstream, see: https://lore.kernel.org/r/20201021233914.GR3576660@ZenIV.linux.org.uk for the details.\n\nThis is just a stop-gap to revert the offending branch so that we can keep merging the android-mainline tree to get up to sync with 5.10-rc1 and not let the compiler issue stop us.  I\u0027m tracking all of these to make sure they do not get lost and will get merged into 5.10-final.\n\nHope this helps explain things better, and sorry for the gerrit spam here, it\u0027s really noisy doing this work, I know 😞",
+      "parentUuid": "d2a977d0_cb683fb8",
+      "revId": "836219141ff7a77e7fab0bd749edd746fd36fef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
