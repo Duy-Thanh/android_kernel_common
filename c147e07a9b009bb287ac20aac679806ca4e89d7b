@@ -109,6 +109,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "042d9dfc_f0cc6bc2",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T07:11:41Z",
+      "side": 1,
+      "message": "OK,",
+      "parentUuid": "1878945d_15654e22",
+      "range": {
+        "startLine": 63,
+        "startChar": 53,
+        "endLine": 63,
+        "endChar": 54
+      },
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ccc98a2a_0bce4674",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -209,6 +233,24 @@
       "side": 1,
       "message": "Why? hpb-\u003esrgn_mem_size can be less than 4KB, right? It just means HPB entry size (8 bytes) * nr_hpb_entries_per_srgn \u003c 4KB, which is possible and fine. In that case, we should force pages_per_srgn to be 1. So, how about make it hpb-\u003epages_per_srgn \u003d DIV_ROUND_UP(hpb-\u003esrgn_mem_size, PAGE_SIZE);?",
       "parentUuid": "15c14899_25b050f2",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "344ff0ae_694176a8",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T07:11:41Z",
+      "side": 1,
+      "message": "Make sense. Thanks",
+      "parentUuid": "7ed84d3a_b6782fe8",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -566,6 +608,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e68925d_8b559fed",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T07:11:41Z",
+      "side": 1,
+      "message": "I explained it wrong.\nThe scenario is as follows:\nHPB_SRGN_ISSUED-\u003eGC/wear-leveling-\u003ere-activated by response-\u003enow\nSo, driver retries READ BUFFER because it might have old mapping information.",
+      "parentUuid": "b2ef5652_708a3ddf",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "937961f0_f79b8e15",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -654,6 +714,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "01ba6571_02cd6694",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T07:11:41Z",
+      "side": 1,
+      "message": "OK, I will move it.",
+      "parentUuid": "5855c617_304543b5",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c911a18_a1f90ac2",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -701,6 +779,24 @@
       "side": 1,
       "message": "What about the hpb\u0027s state check? It has to be here between ufshpb_get_map_req() and ufshcd_execute_map_req()? If no, we can put the state check somewhere near the entrance of func ufshpb_issue_map_req().",
       "parentUuid": "98d2b6a5_247b4170",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "531afd9b_f2c7de3b",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T07:11:41Z",
+      "side": 1,
+      "message": "OK, I will move it to near the entrance of the function.",
+      "parentUuid": "832bf71f_d6ecf765",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -947,6 +1043,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "41fb0c69_618418d5",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T07:11:41Z",
+      "side": 1,
+      "message": "Mostly, yes. It saves HPB information.",
+      "parentUuid": "db460c69_dba177ce",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aeceb7e0_d75ddc7b",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -1152,6 +1266,24 @@
       "side": 1,
       "message": "I meant something like \"Failed to activate region %d - subregion %d, will retry\\n\"",
       "parentUuid": "03b553db_93b26f80",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49f5afbb_670876fb",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T07:11:41Z",
+      "side": 1,
+      "message": "OK",
+      "parentUuid": "52f94bb0_1f83201c",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
