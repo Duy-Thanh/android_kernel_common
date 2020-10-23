@@ -1881,15 +1881,21 @@ static void transfer_surpluses(struct list_head *surpluses, struct ioc_now *now)
 
 	/*
 	 * Calculate the global donation rate (gamma) - the rate to adjust
-	 * non-donating budgets by. No need to use 64bit multiplication here as
-	 * the first operand is guaranteed to be smaller than WEIGHT_ONE
-	 * (1<<16).
+	 * non-donating budgets by.
+	 *
+	 * No need to use 64bit multiplication here as the first operand is
+	 * guaranteed to be smaller than WEIGHT_ONE (1<<16).
+	 *
+	 * We know that there are beneficiary nodes and the sum of the donating
+	 * hweights can't be whole; however, due to the round-ups during hweight
+	 * calculations, root_iocg->hweight_donating might still end up equal to
+	 * or greater than whole. Limit the range when calculating the divider.
 	 *
 	 * gamma = (1 - t_r') / (1 - t_r)
 	 */
 	gamma = DIV_ROUND_UP(
 		(WEIGHT_ONE - root_iocg->hweight_after_donation) * WEIGHT_ONE,
-		WEIGHT_ONE - root_iocg->hweight_donating);
+		WEIGHT_ONE - min_t(u32, root_iocg->hweight_donating, WEIGHT_ONE - 1));
 
 	/*
 	 * Calculate adjusted hwi, child_adjusted_sum and inuse for the inner
@@ -2317,9 +2323,8 @@ static u64 adjust_inuse_and_calc_cost(struct ioc_gq *iocg, u64 vtime,
 {
 	struct ioc *ioc = iocg->ioc;
 	struct ioc_margins *margins = &ioc->margins;
-	u32 adj_step = DIV_ROUND_UP(iocg->active * INUSE_ADJ_STEP_PCT, 100);
 	u32 __maybe_unused old_inuse = iocg->inuse, __maybe_unused old_hwi;
-	u32 hwi;
+	u32 hwi, adj_step;
 	s64 margin;
 	u64 cost, new_inuse;
 
@@ -2348,8 +2353,15 @@ static u64 adjust_inuse_and_calc_cost(struct ioc_gq *iocg, u64 vtime,
 		return cost;
 	}
 
-	/* bump up inuse till @abs_cost fits in the existing budget */
+	/*
+	 * Bump up inuse till @abs_cost fits in the existing budget.
+	 * adj_step must be determined after acquiring ioc->lock - we might
+	 * have raced and lost to another thread for activation and could
+	 * be reading 0 iocg->active before ioc->lock which will lead to
+	 * infinite loop.
+	 */
 	new_inuse = iocg->inuse;
+	adj_step = DIV_ROUND_UP(iocg->active * INUSE_ADJ_STEP_PCT, 100);
 	do {
 		new_inuse = new_inuse + adj_step;
 		propagate_weights(iocg, iocg->active, new_inuse, true, now);
