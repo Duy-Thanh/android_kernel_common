@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca158501_6784ba4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-10-26T22:20:08Z",
+      "side": 1,
+      "message": "This is already in -next and should hopefully land soon in Linus\u0027 tree, but wanted to provide it here for folks testing android-mainline w/ db845c.",
+      "revId": "2fae5b9344d98d1697bba2c90781fbdf598cb739",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
