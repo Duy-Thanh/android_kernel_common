@@ -1501,6 +1501,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8fa8933f_9714260e",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-26T08:18:58Z",
+      "side": 1,
+      "message": "Maybe I didn\u0027t make myself clear, let me ask it this way - if that two lists are not empty, should we kick map_work again before we return from ufshpb_map_work_handler()?",
+      "parentUuid": "3037f8f1_fcc32858",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c480fb6_1f68727f",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
