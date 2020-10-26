@@ -122,6 +122,24 @@
       "parentUuid": "e81ab750_d850b48e",
       "revId": "9277ac03abc141a04404b22d3c39e09a39ffb9f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35d3f939_eb2580ed",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-10-26T22:27:36Z",
+      "side": 1,
+      "message": "Hi Vincent.  \n\nSorry I didn\u0027t respond to this sooner, I read your note quite some time back.\n\nPause seems to take 20mS to 60mS in general in our tests.  We learned on Thursday that the constraint is actually sub 5mS, with an average time of sub 1mS for completing a pause/unpause operation.\n\nWe don\u0027t actually measure (right now) to the point where the cpu actually goes idle, simply how long the call to pause_cpu() or resume_cpu() took.  That is the metric our thermal team is using to determine how long pause takes to complete.  I respect that this is less precise versus your method; specifically you are measuring exactly what matters (time to idle), and we\u0027re measuring the execution time of a function.  We measure the duration of time it takes to execute pause_cpu() or resume_cpu()\n\nI\u0027ll respond further via email.\n\nSincerely,\nStephen Dickey",
+      "parentUuid": "3f3af93a_fd4feffd",
+      "revId": "9277ac03abc141a04404b22d3c39e09a39ffb9f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
