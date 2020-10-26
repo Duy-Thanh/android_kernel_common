@@ -1555,6 +1555,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "18af2f7f_ff642734",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-26T09:48:34Z",
+      "side": 1,
+      "message": "In most cases, two lists are empty. But they are not empty when it is something wrong or busy. So, we give a minute to the UFS before issue map request.",
+      "parentUuid": "8d79e26a_d37dcac6",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c480fb6_1f68727f",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
