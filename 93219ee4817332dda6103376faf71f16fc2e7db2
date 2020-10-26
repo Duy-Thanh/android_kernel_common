@@ -16,6 +16,24 @@
       "message": "Hi Quentin, \n\nDo you have any use cases of cpu hotplug from SCHED_IDLE, SCHED_BATCH or\nSCHED_DEADLINE tasks? \n\nprovide more details on this. \n\n-Thanks, Prasad",
       "revId": "93219ee4817332dda6103376faf71f16fc2e7db2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f1bacba_dd3fff98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-10-26T19:37:10Z",
+      "side": 1,
+      "message": "Hi Prasad,\n\nYour patch introduced a userspace-visible change, so you need to explain why this change is needed. I\u0027m just reverting things to the status quo in absence of a good explanation for the initial change.\n\nThanks",
+      "parentUuid": "a2233fff_1d4a46c7",
+      "revId": "93219ee4817332dda6103376faf71f16fc2e7db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
