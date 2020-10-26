@@ -78,8 +78,8 @@ enum tcpm_transmit_type {
  *		automatically if a connection is established.
  * @try_role:	Optional; called to set a preferred role
  * @pd_transmit:Called to transmit PD message
- * @mux:	Pointer to multiplexer data
  * @set_bist_data: Turn on/off bist data mode for compliance testing
+<<<<<<< HEAD   (558647 Merge ade7afe3e606 ("Merge tag 'staging-5.10-rc1' of git://g)
  * @check_contaminant:
  *		Optional; The callback is called when CC pins report open status
  *		at the end of the toggling period. Chip level drivers are
@@ -88,6 +88,12 @@ enum tcpm_transmit_type {
  *		restart toggling after checking the connector for contaminant.
  *		This forces the TCPM state machine to tranistion to TOGGLING state
  *		without calling start_toggling callback.
+=======
+ * @enable_frs:
+ *		Optional; Called to enable/disable PD 3.0 fast role swap.
+ *		Enabling frs is accessory dependent as not all PD3.0
+ *		accessories support fast role swap.
+>>>>>>> BRANCH (c6dbef Merge tag 'usb-5.10-rc1' of git://git.kernel.org/pub/scm/lin)
  */
 struct tcpc_dev {
 	struct fwnode_handle *fwnode;
@@ -113,7 +119,11 @@ struct tcpc_dev {
 	int (*pd_transmit)(struct tcpc_dev *dev, enum tcpm_transmit_type type,
 			   const struct pd_message *msg);
 	int (*set_bist_data)(struct tcpc_dev *dev, bool on);
+<<<<<<< HEAD   (558647 Merge ade7afe3e606 ("Merge tag 'staging-5.10-rc1' of git://g)
 	int (*check_contaminant)(struct tcpc_dev *dev);
+=======
+	int (*enable_frs)(struct tcpc_dev *dev, bool enable);
+>>>>>>> BRANCH (c6dbef Merge tag 'usb-5.10-rc1' of git://git.kernel.org/pub/scm/lin)
 };
 
 struct tcpm_port;
@@ -127,6 +137,8 @@ int tcpm_update_sink_capabilities(struct tcpm_port *port, const u32 *pdo,
 
 void tcpm_vbus_change(struct tcpm_port *port);
 void tcpm_cc_change(struct tcpm_port *port);
+void tcpm_sink_frs(struct tcpm_port *port);
+void tcpm_sourcing_vbus(struct tcpm_port *port);
 void tcpm_pd_receive(struct tcpm_port *port,
 		     const struct pd_message *msg);
 void tcpm_pd_transmit_complete(struct tcpm_port *port,
