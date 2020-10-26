@@ -1537,6 +1537,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8d79e26a_d37dcac6",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-26T08:55:39Z",
+      "side": 1,
+      "message": "I know map_work now is kicked mainly from ufshpb_rsp_upiu() and ufshpb_rsp_req_region_update(), but they are initiated only if there are requests transfering. Assume we are handling the last request at this moment (new requests will come but maybe later, say after 1 second), and we are about to return from map_work (ufshpb_run_inactive_region_list() and ufshpb_run_active_subregion_list() have finished their jobs), but hpb-\u003elh_inact_rgn and/or hpb-\u003elh_act_srgn are/is not empty, should we kick map_work again before we return from map_work? If no, the map_work will be called only when new requests are transferred (after 1 second). If yes, we can make use of the 1 second time slot to prepare regions and sub-regions for the incoming new requests to use. Please correct me if I am wrong.",
+      "parentUuid": "ef064ae9_75b1acc9",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c480fb6_1f68727f",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
