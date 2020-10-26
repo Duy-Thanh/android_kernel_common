@@ -3217,8 +3217,11 @@ extern int generic_ci_d_hash(const struct dentry *dentry, struct qstr *str);
 extern int generic_ci_d_compare(const struct dentry *dentry, unsigned int len,
 				const char *str, const struct qstr *name);
 #endif
+<<<<<<< HEAD   (05d2a6 Merge 54a4c789ca80 ("Merge tag 'docs/v5.10-1' of git://git.k)
 extern void generic_set_encrypted_ci_d_ops(struct inode *dir,
 					   struct dentry *dentry);
+=======
+>>>>>>> BRANCH (7a3dad Merge tag 'f2fs-for-5.10-rc1' of git://git.kernel.org/pub/sc)
 
 #ifdef CONFIG_MIGRATION
 extern int buffer_migrate_page(struct address_space *,

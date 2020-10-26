@@ -1449,6 +1449,7 @@ int generic_ci_d_hash(const struct dentry *dentry, struct qstr *str)
 	return 0;
 }
 EXPORT_SYMBOL(generic_ci_d_hash);
+<<<<<<< HEAD   (05d2a6 Merge 54a4c789ca80 ("Merge tag 'docs/v5.10-1' of git://git.k)
 
 static const struct dentry_operations generic_ci_dentry_ops = {
 	.d_hash = generic_ci_d_hash,
@@ -1500,3 +1501,6 @@ void generic_set_encrypted_ci_d_ops(struct inode *dir, struct dentry *dentry)
 #endif
 }
 EXPORT_SYMBOL(generic_set_encrypted_ci_d_ops);
+=======
+#endif
+>>>>>>> BRANCH (7a3dad Merge tag 'f2fs-for-5.10-rc1' of git://git.kernel.org/pub/sc)
