@@ -644,6 +644,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5f0d400_45571592",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-26T01:31:58Z",
+      "side": 1,
+      "message": "Yes, Thanks.",
+      "parentUuid": "33c8f785_ffd76c41",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "937961f0_f79b8e15",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
