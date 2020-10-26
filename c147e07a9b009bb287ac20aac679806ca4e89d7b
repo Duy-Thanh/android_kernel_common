@@ -1519,6 +1519,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef064ae9_75b1acc9",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-26T08:37:12Z",
+      "side": 1,
+      "message": "1. If there are entries remaining in the active list after ufshpb_run_active_subregion_list, they are hold until the next handler call. (we assume the driver cannot handle map request, now)\n2. Map requests for inactive list entries are not needed.\n3. After adding entries to the active list (ufshpb_rsp_req_region_update), the map_work handler is called to issue a map request.",
+      "parentUuid": "8fa8933f_9714260e",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c480fb6_1f68727f",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
