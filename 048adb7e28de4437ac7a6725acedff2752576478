@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005734517",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1469305?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "6850728e_895e1c9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-10-26T13:34:13Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Alessio Balsini \u003cbalsini@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 338487258 android-build.ayeaye-python-dispatcher_20201022.05_p0",
+      "revId": "048adb7e28de4437ac7a6725acedff2752576478",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
