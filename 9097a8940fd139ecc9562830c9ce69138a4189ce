@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "563c7b44_0fa77acc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2020-10-26T11:16:37Z",
+      "side": 1,
+      "message": "No, you\u0027re right, thanks for the explanation. I was comparing with upstream -rc1 and didn\u0027t realise that FROMLIST: patch was removing this stuff.",
+      "revId": "9097a8940fd139ecc9562830c9ce69138a4189ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
