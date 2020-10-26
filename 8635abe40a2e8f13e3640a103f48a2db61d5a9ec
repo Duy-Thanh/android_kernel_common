@@ -22,6 +22,30 @@
       },
       "revId": "8635abe40a2e8f13e3640a103f48a2db61d5a9ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41fcec68_b71c636d",
+        "filename": "arch/arm64/kernel/vdso32/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-26T10:47:23Z",
+      "side": 0,
+      "message": "Hm, really?  let me check again, I thought this was correct...",
+      "parentUuid": "32e73f04_c3790083",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 0
+      },
+      "revId": "8635abe40a2e8f13e3640a103f48a2db61d5a9ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
