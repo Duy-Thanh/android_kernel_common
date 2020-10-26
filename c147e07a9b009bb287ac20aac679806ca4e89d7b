@@ -1255,6 +1255,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e2a2599c_a825b3b3",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-26T01:53:09Z",
+      "side": 1,
+      "message": "Could you please explain a bit about why do we bail from here if one single sub-region fails to be activated but using a pending_list for evicting regions? Can we use pending_list here or vise versa? Because keeping the two logics symmetric can make the code easier to understand.",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b6f59dd7_ff3dbf24",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -1326,6 +1343,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf17af5a_2d2e2141",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-26T01:53:09Z",
+      "side": 1,
+      "message": "Should we call kick map_work here? Since hpb-\u003elh_act_srgn is not empty.",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68579b08_cad9f551",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -1390,6 +1424,23 @@
       "side": 1,
       "message": "Same like above, it uses another lock.",
       "parentUuid": "11a83849_54007738",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ef0b679_6353f701",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-26T01:53:09Z",
+      "side": 1,
+      "message": "Should we call kick map_work here? Since hpb-\u003elh_inact_rgn may not be empty.",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
