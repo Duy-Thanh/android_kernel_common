@@ -1272,6 +1272,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "55f89841_aa4b0c70",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-26T07:49:11Z",
+      "side": 1,
+      "message": "It is not common for the ufshpb_issue_map_req function to fail, and the following map request may also fail. So the HPB driver does not issue a read buffer for the next map request now, and does it the next time the worker runs.",
+      "parentUuid": "e2a2599c_a825b3b3",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b6f59dd7_ff3dbf24",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -1360,6 +1378,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "01530685_6bb0a8b1",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-26T07:49:11Z",
+      "side": 1,
+      "message": "This is not the usual case (maybe some error), so the next map request might fail. The HPB driver handles loading the map on the next worker run.",
+      "parentUuid": "cf17af5a_2d2e2141",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68579b08_cad9f551",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -1441,6 +1477,24 @@
       "writtenOn": "2020-10-26T01:53:09Z",
       "side": 1,
       "message": "Should we call kick map_work here? Since hpb-\u003elh_inact_rgn may not be empty.",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3037f8f1_fcc32858",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-26T07:49:11Z",
+      "side": 1,
+      "message": "After this function (ufshpb_run_inactive_region_list), map requests are executed in the next function (ufshpb_run_active_region_list).",
+      "parentUuid": "3ef0b679_6353f701",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
