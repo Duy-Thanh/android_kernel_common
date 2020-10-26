@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce7fbc1e_cb2c2570",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-10-26T22:17:30Z",
+      "side": 1,
+      "message": "This is already upstream and will land when v5.10-rc1 is merged in, but provided here for context to get db845c booting to UI with the current android-mainline.",
+      "revId": "ed60c7b6e05dd5239751a96155cf8cba0707a13e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
