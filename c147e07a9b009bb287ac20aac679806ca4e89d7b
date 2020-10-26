@@ -626,6 +626,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33c8f785_ffd76c41",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-26T01:27:35Z",
+      "side": 1,
+      "message": "OK, I got it now with your new explanation - the device tells the host that you should update the sub-region, so even the sub-region is already in ISSUED state, we should send one HPB READ BUFFER cmd again, right?",
+      "parentUuid": "2e68925d_8b559fed",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "937961f0_f79b8e15",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
