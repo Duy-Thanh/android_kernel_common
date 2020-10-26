@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5a0c850_5f5cbbfc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2020-10-26T20:24:57Z",
+      "side": 1,
+      "message": "s/whiteist/allowlist",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 10,
+        "endChar": 17
+      },
+      "revId": "9937d691d22e0199a805ab7080824bbf0f553352",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
