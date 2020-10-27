@@ -201,6 +201,7 @@ struct rq *__task_rq_lock(struct task_struct *p, struct rq_flags *rf)
 			cpu_relax();
 	}
 }
+EXPORT_SYMBOL_GPL(__task_rq_lock);
 
 /*
  * task_rq_lock - lock p->pi_lock and lock the rq @p resides on.
@@ -2103,6 +2104,7 @@ unlock:
 
 	return ret;
 }
+EXPORT_SYMBOL_GPL(migrate_swap);
 
 /*
  * Cross migrate two tasks
@@ -2616,6 +2618,7 @@ void sched_ttwu_pending(void *arg)
 
 	rq_unlock_irqrestore(rq, &rf);
 }
+EXPORT_SYMBOL_GPL(sched_ttwu_pending);
 
 void send_call_function_single_ipi(int cpu)
 {
@@ -6736,6 +6739,7 @@ static void calc_load_migrate(struct rq *rq)
 	if (delta)
 		atomic_long_add(delta, &calc_load_tasks);
 }
+EXPORT_SYMBOL_GPL(calc_load_migrate);
 
 static struct task_struct *__pick_migrate_task(struct rq *rq)
 {
@@ -6834,6 +6838,8 @@ static void migrate_tasks(struct rq *dead_rq, struct rq_flags *rf)
 
 	rq->stop = stop;
 }
+EXPORT_SYMBOL_GPL(migrate_tasks);
+
 #endif /* CONFIG_HOTPLUG_CPU */
 
 void set_rq_online(struct rq *rq)
@@ -6850,6 +6856,7 @@ void set_rq_online(struct rq *rq)
 		}
 	}
 }
+EXPORT_SYMBOL_GPL(set_rq_online);
 
 void set_rq_offline(struct rq *rq)
 {
@@ -6865,6 +6872,7 @@ void set_rq_offline(struct rq *rq)
 		rq->online = 0;
 	}
 }
+EXPORT_SYMBOL_GPL(set_rq_offline);
 
 /*
  * used to mark begin/end of suspend/resume:
@@ -7078,7 +7086,9 @@ int in_sched_functions(unsigned long addr)
  * Every task in system belongs to this group at bootup.
  */
 struct task_group root_task_group;
+EXPORT_SYMBOL_GPL(root_task_group);
 LIST_HEAD(task_groups);
+EXPORT_SYMBOL_GPL(task_groups);
 
 /* Cacheline aligned slab cache for task_group */
 static struct kmem_cache *task_group_cache __read_mostly;

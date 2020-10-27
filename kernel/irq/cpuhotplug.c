@@ -171,6 +171,7 @@ void irq_migrate_all_off_this_cpu(void)
 		}
 	}
 }
+EXPORT_SYMBOL_GPL(irq_migrate_all_off_this_cpu);
 
 static bool hk_should_isolate(struct irq_data *data, unsigned int cpu)
 {

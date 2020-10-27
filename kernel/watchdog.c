@@ -465,6 +465,7 @@ static void watchdog_enable(unsigned int cpu)
 	if (watchdog_enabled & NMI_WATCHDOG_ENABLED)
 		watchdog_nmi_enable(cpu);
 }
+EXPORT_SYMBOL_GPL(watchdog_enable);
 
 static void watchdog_disable(unsigned int cpu)
 {
@@ -481,6 +482,7 @@ static void watchdog_disable(unsigned int cpu)
 	hrtimer_cancel(hrtimer);
 	wait_for_completion(this_cpu_ptr(&softlockup_completion));
 }
+EXPORT_SYMBOL_GPL(watchdog_disable);
 
 static int softlockup_stop_fn(void *data)
 {

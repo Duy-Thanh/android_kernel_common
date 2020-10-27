@@ -453,6 +453,7 @@ static int stop_cpus(const struct cpumask *cpumask, cpu_stop_fn_t fn, void *arg)
 	mutex_unlock(&stop_cpus_mutex);
 	return ret;
 }
+EXPORT_SYMBOL_GPL(stop_cpus);
 
 static int cpu_stop_should_run(unsigned int cpu)
 {

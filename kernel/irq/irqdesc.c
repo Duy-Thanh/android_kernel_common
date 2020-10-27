@@ -378,11 +378,13 @@ void irq_lock_sparse(void)
 {
 	mutex_lock(&sparse_irq_lock);
 }
+EXPORT_SYMBOL_GPL(irq_lock_sparse);
 
 void irq_unlock_sparse(void)
 {
 	mutex_unlock(&sparse_irq_lock);
 }
+EXPORT_SYMBOL_GPL(irq_unlock_sparse);
 
 static struct irq_desc *alloc_desc(int irq, int node, unsigned int flags,
 				   const struct cpumask *affinity,
