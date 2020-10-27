@@ -29,6 +29,9 @@
 #include <uapi/linux/dma-buf.h>
 #include <uapi/linux/magic.h>
 
+#define CREATE_TRACE_POINTS
+#include <trace/events/dma_buf.h>
+
 static inline int is_dma_buf_file(struct file *);
 
 struct dma_buf_list {
@@ -75,6 +78,8 @@ static void dma_buf_release(struct dentry *dentry)
 	BUG_ON(dmabuf->cb_shared.active || dmabuf->cb_excl.active);
 
 	dmabuf->ops->release(dmabuf);
+
+	trace_dma_buf_release(dmabuf);
 
 	mutex_lock(&db_list.lock);
 	list_del(&dmabuf->list_node);
@@ -573,6 +578,7 @@ struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
 	list_add(&dmabuf->list_node, &db_list.head);
 	mutex_unlock(&db_list.lock);
 
+	trace_dma_buf_export(dmabuf);
 	return dmabuf;
 
 err_dmabuf:
@@ -904,6 +910,7 @@ struct sg_table *dma_buf_map_attachment(struct dma_buf_attachment *attach,
 		attach->dir = direction;
 	}
 
+	trace_dma_buf_map_attachment(attach);
 	return sg_table;
 }
 EXPORT_SYMBOL_GPL(dma_buf_map_attachment);
@@ -941,6 +948,8 @@ void dma_buf_unmap_attachment(struct dma_buf_attachment *attach,
 	if (dma_buf_is_dynamic(attach->dmabuf) &&
 	    !IS_ENABLED(CONFIG_DMABUF_MOVE_NOTIFY))
 		dma_buf_unpin(attach);
+
+	trace_dma_buf_unmap_attachment(attach);
 }
 EXPORT_SYMBOL_GPL(dma_buf_unmap_attachment);
 
