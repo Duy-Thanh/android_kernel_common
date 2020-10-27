@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44ecbb07_660fea37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-27T18:09:46Z",
+      "side": 1,
+      "message": "Will break abi at this point in time, but is here for testing and for potential acceptance for the next kabi break point.",
+      "revId": "ad62a3e2b8c472004bcb59a2ce44a988f8edbc2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
