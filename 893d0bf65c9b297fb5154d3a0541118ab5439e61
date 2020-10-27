@@ -16,6 +16,24 @@
       "message": "This changes the default behavior of this function. If nothing attaches to the hook, you can\u0027t return here. If this were \"if (flag)\" then it would be fine.",
       "revId": "893d0bf65c9b297fb5154d3a0541118ab5439e61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d56d179f_8993ab1f",
+        "filename": "kernel/printk/printk.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2302,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2020-10-27T19:11:46Z",
+      "side": 1,
+      "message": "Yes. It is mistake from my side. I will fix in the next patchset.",
+      "parentUuid": "0459b958_6c612791",
+      "revId": "893d0bf65c9b297fb5154d3a0541118ab5439e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
