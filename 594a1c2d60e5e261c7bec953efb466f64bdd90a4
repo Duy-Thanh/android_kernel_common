@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b480865_49c46afd",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-27T05:06:34Z",
+      "side": 1,
+      "message": "Can we make the func boolean, return true for valid and false for invalid? If so, we should do below in ufshpb_rsp_upiu(), which looks more reasonable:\nif (!ufshpb_is_hpb_rsp_valid())\n    return;",
+      "revId": "594a1c2d60e5e261c7bec953efb466f64bdd90a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e92c790_2ee17f59",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-27T05:06:34Z",
+      "side": 1,
+      "message": "This line can be removed, block layer gives it 0 by default.",
+      "revId": "594a1c2d60e5e261c7bec953efb466f64bdd90a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6202d82_eed199fd",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1336,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-27T05:06:34Z",
+      "side": 1,
+      "message": "Please put this line after line #1341 - if HPB is not enabled, we don\u0027t need to waste time polling the HPB reset flag, right?",
+      "revId": "594a1c2d60e5e261c7bec953efb466f64bdd90a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8204c248_27aec07e",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1371,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-27T05:06:34Z",
+      "side": 1,
+      "message": "After all, if init_success is false, what are those mctx_pool and page_pool left for? Shouldn\u0027t we call ufshpb_remove()?",
+      "revId": "594a1c2d60e5e261c7bec953efb466f64bdd90a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
