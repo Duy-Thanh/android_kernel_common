@@ -236,6 +236,10 @@ config SERIAL_CLPS711X_CONSOLE
 
 config SERIAL_SAMSUNG
 	tristate "Samsung SoC serial support"
+<<<<<<< HEAD   (c8a1a1 ANDROID: GKI: Drop CONFIG_POWER_AVS from arm64 gki_defconfig)
+=======
+	depends on PLAT_SAMSUNG || ARCH_S5PV210 || ARCH_EXYNOS || COMPILE_TEST
+>>>>>>> BRANCH (e731f3 Merge tag 'armsoc-soc' of git://git.kernel.org/pub/scm/linux)
 	select SERIAL_CORE
 	help
 	  Support for the on-chip UARTs on the Samsung S3C24XX series CPUs,
