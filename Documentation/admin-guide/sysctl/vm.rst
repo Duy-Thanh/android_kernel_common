@@ -27,6 +27,7 @@ Currently, these files are in /proc/sys/vm:
 - admin_reserve_kbytes
 - block_dump
 - compact_memory
+- compaction_proactiveness
 - compact_unevictable_allowed
 - dirty_background_bytes
 - dirty_background_ratio
@@ -37,7 +38,11 @@ Currently, these files are in /proc/sys/vm:
 - dirty_writeback_centisecs
 - drop_caches
 - extfrag_threshold
+<<<<<<< HEAD   (97a0d4 Merge 032c7ed95817 ("Merge tag 'arm64-upstream' of git://git)
 - extra_free_kbytes
+=======
+- highmem_is_dirtyable
+>>>>>>> BRANCH (1f7093 Merge tag 'armsoc-fixes' of git://git.kernel.org/pub/scm/lin)
 - hugetlb_shm_group
 - laptop_mode
 - legacy_va_layout
