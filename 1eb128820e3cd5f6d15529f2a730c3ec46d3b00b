@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d86bea5_ebf4e48c",
+        "filename": "arch/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-27T08:29:51Z",
+      "side": 1,
+      "message": "In the future, please just modify the gki_defconfig for this.\n\ndefault y is only if the machine will not boot without this option.",
+      "range": {
+        "startLine": 552,
+        "startChar": 0,
+        "endLine": 552,
+        "endChar": 10
+      },
+      "revId": "1eb128820e3cd5f6d15529f2a730c3ec46d3b00b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
