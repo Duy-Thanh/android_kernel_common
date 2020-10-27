@@ -189,10 +189,13 @@ static int parse_options(struct mount_options *opts, char *str)
 	if (opts == NULL)
 		return -EFSCORRUPTED;
 
-	opts->read_timeout_ms = 1000; /* Default: 1s */
-	opts->readahead_pages = 10;
-	opts->read_log_pages = 2;
-	opts->read_log_wakeup_count = 10;
+	*opts = (struct mount_options) {
+		.read_timeout_ms = 1000, /* Default: 1s */
+		.readahead_pages = 10,
+		.read_log_pages = 2,
+		.read_log_wakeup_count = 10,
+	};
+
 	if (str == NULL || *str == 0)
 		return 0;
 
