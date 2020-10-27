@@ -3290,6 +3290,7 @@ static inline void cfs_rq_util_change(struct cfs_rq *cfs_rq, int flags)
 		cpufreq_update_util(rq, flags);
 	}
 }
+EXPORT_SYMBOL_GPL(cpufreq_update_util);
 
 #ifdef CONFIG_SMP
 #ifdef CONFIG_FAIR_GROUP_SCHED
@@ -9989,6 +9990,7 @@ out_unlock:
 
 	return 0;
 }
+EXPORT_SYMBOL_GPL(active_load_balance_cpu_stop);
 
 static DEFINE_SPINLOCK(balancing);
 
@@ -10000,6 +10002,7 @@ void update_max_interval(void)
 {
 	max_load_balance_interval = HZ*num_online_cpus()/10;
 }
+EXPORT_SYMBOL_GPL(update_max_interval);
 
 /*
  * It checks each scheduling domain to see if it is due to be balanced,
@@ -11283,6 +11286,7 @@ const struct sched_class fair_sched_class
 	.uclamp_enabled		= 1,
 #endif
 };
+EXPORT_SYMBOL_GPL(fair_sched_class);
 
 #ifdef CONFIG_SCHED_DEBUG
 void print_cfs_stats(struct seq_file *m, int cpu)

@@ -1752,3 +1752,4 @@ __weak void abort(void)
 	panic("Oops failed to kill thread");
 }
 EXPORT_SYMBOL(abort);
+EXPORT_SYMBOL_GPL(tasklist_lock);

@@ -5,7 +5,7 @@
 #include "sched.h"
 
 DEFINE_MUTEX(sched_domains_mutex);
-
+EXPORT_SYMBOL_GPL(sched_domains_mutex);
 /* Protected by sched_domains_mutex: */
 static cpumask_var_t sched_domains_tmpmask;
 static cpumask_var_t sched_domains_tmpmask2;
@@ -724,7 +724,7 @@ int group_balance_cpu(struct sched_group *sg)
 {
 	return cpumask_first(group_balance_mask(sg));
 }
-
+EXPORT_SYMBOL_GPL(group_balance_cpu);
 
 /*
  * NUMA topology (first read the regular topology blurb below)
@@ -1170,6 +1170,7 @@ next:
 
 	update_group_capacity(sd, cpu);
 }
+EXPORT_SYMBOL_GPL(init_sched_groups_capacity);
 
 /*
  * Initializers for schedule domains
