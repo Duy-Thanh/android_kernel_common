@@ -887,6 +887,8 @@ struct root_domain {
 	 * CPUs of the rd. Protected by RCU.
 	 */
 	struct perf_domain __rcu *pd;
+
+	ANDROID_VENDOR_DATA_ARRAY(1, 4);
 };
 
 extern void init_defrootdomain(void);
@@ -1135,6 +1137,7 @@ struct rq {
 	struct cpuidle_state	*idle_state;
 #endif
 
+<<<<<<< HEAD   (09ad10 ANDROID: GKI: Remove CONFIG_LOCALVERSION="-mainline" on 6.1 )
 #ifdef CONFIG_SMP
 	unsigned int		nr_pinned;
 #endif
@@ -1158,6 +1161,8 @@ struct rq {
 	unsigned int		core_forceidle_occupation;
 	u64			core_forceidle_start;
 #endif
+
+	ANDROID_VENDOR_DATA_ARRAY(1, 96);
 };
 
 #ifdef CONFIG_FAIR_GROUP_SCHED
