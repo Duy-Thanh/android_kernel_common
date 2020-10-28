@@ -22,6 +22,23 @@
       },
       "revId": "9937d691d22e0199a805ab7080824bbf0f553352",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec8ba01f_1e59f6f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-28T08:05:13Z",
+      "side": 1,
+      "message": "We need a bug number, and the wording fix as Lint said please.",
+      "revId": "9937d691d22e0199a805ab7080824bbf0f553352",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
