@@ -287,7 +287,6 @@
   get_cpu_device
   get_device
   __get_free_pages
-  get_next_event_cpu
   get_pid_task
   get_random_bytes
   __get_task_comm
@@ -467,6 +466,7 @@
   __ll_sc_atomic64_fetch_or
   __ll_sc_atomic64_or
   __ll_sc_atomic64_sub
+  __ll_sc_atomic64_sub_return
   __ll_sc_atomic_add
   __ll_sc_atomic_add_return
   __ll_sc_atomic_sub
@@ -1315,9 +1315,6 @@
   proc_create
   seq_write
 
-# required by google-battery.ko
-  simple_strtoull
-
 # required by google-bms.ko
   full_name_hash
 
@@ -1433,14 +1430,11 @@
   dma_buf_export
   dma_get_device_base
   dma_get_size
-  __ll_sc_atomic64_sub_return
   mm_event_count
   __next_zones_zonelist
   ptr_to_hashval
   sched_setattr
   split_page
-  vm_map_ram
-  vm_unmap_ram
   zone_watermark_ok_safe
 
 # required by ipa3.ko
@@ -2348,6 +2342,7 @@
   __sock_recv_ts_and_drops
   sock_wake_async
   sock_wfree
+  timer_reduce
   unregister_net_sysctl_table
   __wake_up_sync_key
   __xfrm_policy_check
