@@ -13,11 +13,16 @@
 struct packet_type;
 struct list_head;
 struct sk_buff;
+struct sock;
 DECLARE_HOOK(android_vh_ptype_head,
 	TP_PROTO(const struct packet_type *pt, struct list_head *vendor_pt),
 	TP_ARGS(pt, vendor_pt));
 DECLARE_HOOK(android_vh_kfree_skb,
 	TP_PROTO(struct sk_buff *skb), TP_ARGS(skb));
+DECLARE_HOOK(android_vh_sk_alloc,
+	TP_PROTO(struct sock *sock), TP_ARGS(sock));
+DECLARE_HOOK(android_vh_sk_free,
+	TP_PROTO(struct sock *sock), TP_ARGS(sock));
 #else
 #define trace_android_vh_ptype_head(pt, vendor_pt)
 #define trace_android_vh_kfree_skb(skb)
