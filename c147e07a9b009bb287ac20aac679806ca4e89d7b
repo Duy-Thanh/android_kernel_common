@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df69cf68_43db16f7",
+        "filename": "drivers/scsi/ufs/ufs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "155d337b_ffb68640",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "427cbfcc_a35d14ba",
@@ -131,6 +149,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60b16537_64205c58",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "042d9dfc_f0cc6bc2",
+      "range": {
+        "startLine": 63,
+        "startChar": 53,
+        "endLine": 63,
+        "endChar": 54
+      },
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccc98a2a_0bce4674",
@@ -180,6 +222,24 @@
       "side": 1,
       "message": "Make sense.",
       "parentUuid": "b5e3036e_e43ab166",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1e2fec1_4616a683",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29fe353c_73dfc44e",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -255,6 +315,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa845027_c05b16a1",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "344ff0ae_694176a8",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "905b6e78_9546c0a2",
@@ -286,6 +364,24 @@
       "side": 1,
       "message": "I will remove this.",
       "parentUuid": "905b6e78_9546c0a2",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70c2bd7b_b30ecf82",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6fd4088_6a019f97",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -325,6 +421,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "975cabf1_a25f2f8c",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1016c99f_6a95ff73",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b288a36d_c9321e78",
@@ -356,6 +470,24 @@
       "side": 1,
       "message": "OK, I will change it.",
       "parentUuid": "b288a36d_c9321e78",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71164c1a_2f976f1d",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a9c24f4_581c0a2e",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -395,6 +527,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02abf106_d2110847",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76232ed9_395a7252",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e2043f5_ef1f813c",
@@ -430,6 +580,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73a7c31a_12625ebc",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a36d7bba_f27f15a8",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55693421_07e27d4f",
@@ -461,6 +629,24 @@
       "side": 1,
       "message": "WARN_ON will be removed.",
       "parentUuid": "55693421_07e27d4f",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ebc3ec9_4873b498",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b4906f1_b6395bd7",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -549,6 +735,24 @@
       "side": 1,
       "message": "re-send is done on ufshpb_run_active_subregion_list by -EAGAIN error.",
       "parentUuid": "bd6a4463_293ad135",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c478342_06aaa93f",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22505b48_a97018a7",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -660,6 +864,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d080e162_0cc88464",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5f0d400_45571592",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "937961f0_f79b8e15",
@@ -691,6 +913,24 @@
       "side": 1,
       "message": "I will change it.",
       "parentUuid": "937961f0_f79b8e15",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f6f9afa_0081a575",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0055afde_02aefeef",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -766,6 +1006,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a96381e7_19425988",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01ba6571_02cd6694",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c911a18_a1f90ac2",
@@ -837,6 +1095,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7455ded8_0bf3afbc",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "531afd9b_f2c7de3b",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d25994f_4895097e",
@@ -868,6 +1144,24 @@
       "side": 1,
       "message": "OK,",
       "parentUuid": "4d25994f_4895097e",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bdce19f_61d9cb78",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b4fb0e5_335e2e35",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -907,6 +1201,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb394312_4ae30ed5",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53620763_88be66f9",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2554f26_0e5bd8dc",
@@ -942,6 +1254,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4e3eabe_5f2131e8",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd924a7a_362cea48",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0107b61d_7ad75b49",
@@ -973,6 +1303,24 @@
       "side": 1,
       "message": "OK, I will change it.",
       "parentUuid": "0107b61d_7ad75b49",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac415a69_e33e519c",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3308e6c_7580a214",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -1014,6 +1362,30 @@
       "side": 1,
       "message": "I will add the macro on header file.",
       "parentUuid": "0ebc26fd_6d54c703",
+      "range": {
+        "startLine": 680,
+        "startChar": 46,
+        "endLine": 680,
+        "endChar": 48
+      },
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9258bda6_0ef689a0",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40fcaafe_99fe1873",
       "range": {
         "startLine": 680,
         "startChar": 46,
@@ -1095,6 +1467,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95260cd8_7e4470dc",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41fb0c69_618418d5",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aeceb7e0_d75ddc7b",
@@ -1130,6 +1520,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff9bb983_9317b9de",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "069cf710_fb453d9c",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "700cf248_a498b2dc",
@@ -1161,6 +1569,24 @@
       "side": 1,
       "message": "OK,",
       "parentUuid": "700cf248_a498b2dc",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4320e5bc_f4919bc3",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b95e7a3a_a9fbce62",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -1218,6 +1644,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dc4c3d0_5667ddc8",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e4e1d03_e154d0a5",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91dd18f9_19517e30",
@@ -1253,6 +1697,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31887bc6_0999585d",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38327568_9c753e5a",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2a2599c_a825b3b3",
@@ -1284,6 +1746,24 @@
       "side": 1,
       "message": "It is not common for the ufshpb_issue_map_req function to fail, and the following map request may also fail. So the HPB driver does not issue a read buffer for the next map request now, and does it the next time the worker runs.",
       "parentUuid": "e2a2599c_a825b3b3",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bde64663_c88b0ec7",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55f89841_aa4b0c70",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -1359,6 +1839,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68682a23_56de50ea",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49f5afbb_670876fb",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf17af5a_2d2e2141",
@@ -1390,6 +1888,24 @@
       "side": 1,
       "message": "This is not the usual case (maybe some error), so the next map request might fail. The HPB driver handles loading the map on the next worker run.",
       "parentUuid": "cf17af5a_2d2e2141",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab460851_0c0640d8",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01530685_6bb0a8b1",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -1429,6 +1945,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4feb610a_d3e2d3ff",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a93b993d_8ba25cb8",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11a83849_54007738",
@@ -1460,6 +1994,24 @@
       "side": 1,
       "message": "Same like above, it uses another lock.",
       "parentUuid": "11a83849_54007738",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0d30049_d7c5c4a4",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce5be4cb_4df6d656",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -1589,6 +2141,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9367239f_7b1021df",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b407d07_ee72466c",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e2dad01_aa23b72e",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b407d07_ee72466c",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c480fb6_1f68727f",
@@ -1620,6 +2208,24 @@
       "side": 1,
       "message": "OK,",
       "parentUuid": "8c480fb6_1f68727f",
+      "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7f1724a_a0f2098d",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 820,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "218a3ad0_7f3c68c4",
       "revId": "c147e07a9b009bb287ac20aac679806ca4e89d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5220f8fd_1a7d9d12",
+        "filename": "drivers/scsi/ufs/ufshpb.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e57c2131_ca2a504b",
+      "revId": "4fac80dd830d52b8a41309b238aee3537a19c40f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "513d98f2_e58ad867",
@@ -124,6 +142,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f034c6be_f7db34dd",
+        "filename": "drivers/scsi/ufs/ufshpb.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb1c1a8c_10a58a97",
+      "revId": "4fac80dd830d52b8a41309b238aee3537a19c40f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ae31d46_30e1cae5",
@@ -155,6 +191,24 @@
       "side": 1,
       "message": "It means developer must hold the lock before accessing this data structure.",
       "parentUuid": "3ae31d46_30e1cae5",
+      "revId": "4fac80dd830d52b8a41309b238aee3537a19c40f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "448b448c_0ac2bc03",
+        "filename": "drivers/scsi/ufs/ufshpb.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-29T00:51:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdf7ebba_132986bf",
       "revId": "4fac80dd830d52b8a41309b238aee3537a19c40f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
