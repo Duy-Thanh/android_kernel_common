@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f4ca8a8_04a98708",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2020-10-29T07:04:33Z",
+      "side": 1,
+      "message": "Yes, Kconfig changes are under review internally. Then we will send upstream.",
+      "parentUuid": "9ae3d66a_6442b0cc",
+      "revId": "75f326ea4e09402755e9cf29e8eb80b1ab0c42d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f3dad2d_c1e95b66",
