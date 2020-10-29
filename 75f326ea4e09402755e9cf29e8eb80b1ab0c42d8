@@ -123,6 +123,30 @@
       },
       "revId": "75f326ea4e09402755e9cf29e8eb80b1ab0c42d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8952ac43_be00f90e",
+        "filename": "drivers/clocksource/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2020-10-29T08:04:54Z",
+      "side": 1,
+      "message": "Got it, thanks.\nWe will upstream Kconfig changes firstly.",
+      "parentUuid": "27b7eee5_d9a0f971",
+      "range": {
+        "startLine": 627,
+        "startChar": 0,
+        "endLine": 627,
+        "endChar": 10
+      },
+      "revId": "75f326ea4e09402755e9cf29e8eb80b1ab0c42d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
