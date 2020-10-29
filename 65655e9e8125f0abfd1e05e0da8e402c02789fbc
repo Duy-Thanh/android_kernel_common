@@ -16,6 +16,23 @@
       "message": "Why is this needed on a \"release\" kernel?  Shouldn\u0027t this only be necessary for debug kernels?",
       "revId": "65655e9e8125f0abfd1e05e0da8e402c02789fbc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02c2f462_937b53f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1764178
+      },
+      "writtenOn": "2020-10-29T08:09:55Z",
+      "side": 1,
+      "message": "This feature only takes effect only if \"memtest\u003dxx\" is set in boot cmdline. We use this feature to test memory in \"factory test mode\". In this test mode, our bootimage must be the same with release kernel. And we only set \"memtest\u003dxx\" to enable this feature in \"factory test mode\", not set in normal scene. Thanks!",
+      "revId": "65655e9e8125f0abfd1e05e0da8e402c02789fbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
