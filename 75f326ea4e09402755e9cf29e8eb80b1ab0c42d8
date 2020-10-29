@@ -57,6 +57,30 @@
       },
       "revId": "75f326ea4e09402755e9cf29e8eb80b1ab0c42d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c02c042_56fd72d9",
+        "filename": "drivers/clocksource/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2020-10-29T07:17:51Z",
+      "side": 1,
+      "message": "Thanks for the review. I will check these configs based on this rule.\nBy the way, is is possible that CONFIG_MXC_CLK be enabled by gki_defconfig? It is common clock driver for i.MX device, which is hard to be built as module in current stage.\nThanks.",
+      "parentUuid": "3f3dad2d_c1e95b66",
+      "range": {
+        "startLine": 627,
+        "startChar": 0,
+        "endLine": 627,
+        "endChar": 10
+      },
+      "revId": "75f326ea4e09402755e9cf29e8eb80b1ab0c42d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
