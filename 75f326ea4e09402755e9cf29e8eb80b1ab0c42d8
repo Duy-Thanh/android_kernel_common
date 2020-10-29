@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ae3d66a_6442b0cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-29T06:57:42Z",
+      "side": 1,
+      "message": "Are the Kconfig changes going to be sent upstream first?",
+      "revId": "75f326ea4e09402755e9cf29e8eb80b1ab0c42d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f3dad2d_c1e95b66",
+        "filename": "drivers/clocksource/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-29T06:57:42Z",
+      "side": 1,
+      "message": "default y is only if the machine will not boot, please do not set this to that value, but properly set it in the config file if needed.",
+      "range": {
+        "startLine": 627,
+        "startChar": 0,
+        "endLine": 627,
+        "endChar": 10
+      },
+      "revId": "75f326ea4e09402755e9cf29e8eb80b1ab0c42d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
