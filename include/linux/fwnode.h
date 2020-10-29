@@ -16,6 +16,8 @@
 struct fwnode_operations;
 struct device;
 
+#define FWNODE_FLAG_LINKS_ADDED		BIT(0)
+
 struct fwnode_handle {
 	struct fwnode_handle *secondary;
 	const struct fwnode_operations *ops;
@@ -27,6 +29,7 @@ struct fwnode_handle {
 	ANDROID_KABI_RESERVE(4);
 	struct list_head suppliers;
 	struct list_head consumers;
+	u32 flags;
 };
 
 struct fwnode_dev_link {
