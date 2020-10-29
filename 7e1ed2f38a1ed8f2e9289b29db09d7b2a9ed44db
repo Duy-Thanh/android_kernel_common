@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44be5ac8_8a17030b",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-29T14:05:05Z",
+      "side": 1,
+      "message": "no driver should need this, what driver uses this?",
+      "range": {
+        "startLine": 219,
+        "startChar": 2,
+        "endLine": 219,
+        "endChar": 19
+      },
+      "revId": "7e1ed2f38a1ed8f2e9289b29db09d7b2a9ed44db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "513a4dce_9fda2268",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 1
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-29T14:05:05Z",
+      "side": 1,
+      "message": "this is for the networking core only, what driver needs it?",
+      "range": {
+        "startLine": 1193,
+        "startChar": 2,
+        "endLine": 1193,
+        "endChar": 24
+      },
+      "revId": "7e1ed2f38a1ed8f2e9289b29db09d7b2a9ed44db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
