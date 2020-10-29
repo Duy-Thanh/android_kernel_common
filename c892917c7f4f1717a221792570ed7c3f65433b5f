@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d5210b9_d58f3c86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-29T16:47:37Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common/+/1479958 has the majority of these symbols added, to make this patch much smaller.  Can you rebase on top of that please?",
+      "revId": "c892917c7f4f1717a221792570ed7c3f65433b5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
