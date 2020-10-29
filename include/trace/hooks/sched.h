@@ -443,6 +443,28 @@ DECLARE_HOOK(android_vh_task_cmdline_prio_restore,
 	TP_PROTO(int saved_prio),
 	TP_ARGS(saved_prio));
 
+<<<<<<< HEAD   (9c8fb18c9387eb441d9b34f0d4e1f8c94d801e0b ANDROID: GKI: Update symbols list for exynos)
+||||||| BASE   (3e15db3d1b75a641ca6ab84276e8684ee15c5d66 ANDROID: sched: Add vendor hook for rt util update)
+DECLARE_RESTRICTED_HOOK(android_rvh_update_rt_rq_load_avg,
+	TP_PROTO(u64 now, struct rq *rq, struct task_struct *tsk, int running),
+	TP_ARGS(now, rq, tsk, running), 1);
+
+=======
+DECLARE_RESTRICTED_HOOK(android_rvh_update_rt_rq_load_avg,
+	TP_PROTO(u64 now, struct rq *rq, struct task_struct *tsk, int running),
+	TP_ARGS(now, rq, tsk, running), 1);
+
+struct sched_attr;
+
+DECLARE_HOOK(android_vh_set_sugov_sched_attr,
+	TP_PROTO(struct sched_attr *attr),
+	TP_ARGS(attr));
+
+DECLARE_RESTRICTED_HOOK(android_rvh_set_iowait,
+	TP_PROTO(struct task_struct *p, struct rq *rq, int *should_iowait_boost),
+	TP_ARGS(p, rq, should_iowait_boost), 1);
+
+>>>>>>> CHANGE (390c2b429d090269bbb0bbe316c8032ac8860369 ANDROID: sched: Add vendor hooks for override sugov behavior)
 /* macro versions of hooks are no longer required */
 #endif /* _TRACE_HOOK_SCHED_H */
 /* This part must be outside protection */
