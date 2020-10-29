@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13ce8af8_0a50bdc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-29T07:51:40Z",
+      "side": 1,
+      "message": "Why is this needed on a \"release\" kernel?  Shouldn\u0027t this only be necessary for debug kernels?",
+      "revId": "65655e9e8125f0abfd1e05e0da8e402c02789fbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
