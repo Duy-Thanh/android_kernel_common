@@ -16,6 +16,23 @@
       "message": "Modules should not need to know this.",
       "revId": "576743119f07f45de1b849ba569a22fb5ef2c56c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a5dcc0f_dbc50d6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-29T18:54:41Z",
+      "side": 1,
+      "message": "Note, if this really is needed, please get this, and the user of these symbols, accepted upstream and we will be glad to backport the patches here.\n\nThere is a number of active memory hotplug developers upstream, working on stuff like this, please work with them to come up with something that is acceptable to your platform.",
+      "revId": "576743119f07f45de1b849ba569a22fb5ef2c56c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
