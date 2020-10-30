@@ -1,0 +1,64 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005831710",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1480979?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5a1771a6_6be77610",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-10-30T03:16:05Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Saravana Kannan \u003csaravanak@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 339668884 android-build.ayeaye-python-dispatcher_20201029.05_p0",
+      "revId": "b171e8d649c8bd7efb162e25e2886aff11ef2621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005831710",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1480979?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "af325cf2_ddcb8e6a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-10-30T03:16:05Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 339668884 android-build.ayeaye-python-dispatcher_20201029.05_p0",
+      "revId": "b171e8d649c8bd7efb162e25e2886aff11ef2621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005831710",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1480979?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "299d8e84_e9bc357f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-10-30T03:16:05Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Saravana Kannan \u003csaravanak@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 339668884 android-build.ayeaye-python-dispatcher_20201029.05_p0",
+      "revId": "b171e8d649c8bd7efb162e25e2886aff11ef2621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
