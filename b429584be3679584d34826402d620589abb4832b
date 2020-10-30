@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a4d259c_a434ef5d",
+        "filename": "drivers/base/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1517,
+      "author": {
+        "id": 1577720
+      },
+      "writtenOn": "2020-10-30T19:40:03Z",
+      "side": 1,
+      "message": "I think this is leading to use-after-free because of the kfree(link) above\n\n[    1.119283] Unable to handle kernel paging request at virtual address b5881dd00b7fccee\n[    1.127437] Mem abort info:\n[    1.130350]   ESR \u003d 0x96000004\n[    1.133517]   EC \u003d 0x25: DABT (current EL), IL \u003d 32 bits\n[    1.138998]   SET \u003d 0, FnV \u003d 0\n[    1.142162]   EA \u003d 0, S1PTW \u003d 0\n[    1.145428] Data abort info:\n[    1.148415]   ISV \u003d 0, ISS \u003d 0x00000004\n[    1.152370]   CM \u003d 0, WnR \u003d 0\n[    1.155430] [b5881dd00b7fccee] address between user and kernel address ranges\n[    1.162780] Internal error: Oops: 96000004 [#1] PREEMPT SMP\n[    1.168513] Dumping ftrace buffer:\n[    1.172020]    (ftrace buffer empty)\n[    1.175701] Modules linked in:\n[    1.178854] CPU: 4 PID: 1 Comm: swapper/0 Tainted: G S                5.4.61-qgki-consolidate-18697                                  -ge7f4d7575407-dirty #37\n[    1.190268] Hardware name: Qualcomm Technologies, Inc. Lahaina MTP v2 (DT)\n[    1.197332] pstate: a0800005 (NzCv daif -PAN +UAO)\n[    1.202263] pc : __fw_devlink_link_to_suppliers+0x10c/0x164\n[    1.207995] lr : __fw_devlink_link_to_suppliers+0xf4/0x164\n[    1.213625] sp : ffffffc01005b9f0\n[    1.217036] x29: ffffffc01005ba00 x28: ffffff81b0ded9a0\n[    1.222496] x27: ffffff81b0ded120 x26: dead000000000122\n[    1.227950] x25: 0000000000000000 x24: ffffff81bf10b050\n[    1.233403] x23: 0000000000000000 x22: ffffff81b0ded980\n[    1.238864] x21: ffffff81b0ded9a0 x20: 0000000000000020\n[    1.244319] x19: ffffff81b08aa810 x18: ffffff805ff0c868\n[    1.249775] x17: 0000000000000031 x16: ffffffc01129b2a8\n[    1.255235] x15: ffffffc01185d767 x14: ffffffff00000000\n[    1.260690] x13: 80d9deb081ffffff x12: caae3ce13a5ee521\n[    1.266145] x11: 3551c360854e4ef1 x10: 0000000000000000\n[    1.271604] x9 : 0000000000000000 x8 : b5881dd00b7fccde\n[    1.277060] x7 : 0000000000000000 x6 : 8080808080808080\n[    1.282515] x5 : 0000000000000000 x4 : 0000000000000a20\n[    1.287977] x3 : ffffffc01005b830 x2 : ffffff81b0ded9a0\n[    1.293431] x1 : ffffff81b0ded9a0 x0 : 0000000000000000\n[    1.298886] Call trace:\n[    1.301411]  __fw_devlink_link_to_suppliers+0x10c/0x164\n[    1.306791]  device_add+0x870/0xa50\n[    1.310381]  of_device_add+0x38/0x48\n[    1.314061]  of_platform_device_create_pdata+0xb4/0xfc\n[    1.319342]  of_platform_bus_create+0xe0/0x1ec\n[    1.323915]  of_platform_bus_create+0x1d4/0x1ec\n[    1.328571]  of_platform_populate+0xb8/0x10c\n[    1.332967]  of_platform_default_populate_init+0xac/0xc8\n[    1.338424]  do_one_initcall+0x134/0x2d0\n[    1.342466]  do_initcall_level+0x140/0x16c\n[    1.346681]  do_basic_setup+0x30/0x4c\n[    1.350443]  kernel_init_freeable+0xe8/0x168\n[    1.354832]  kernel_init+0x18/0x294\n[    1.358418]  ret_from_fork+0x10/0x18",
+      "range": {
+        "startLine": 1517,
+        "startChar": 12,
+        "endLine": 1517,
+        "endChar": 31
+      },
+      "revId": "b429584be3679584d34826402d620589abb4832b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
