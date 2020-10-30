@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f735dbc_655c5166",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1757595
+      },
+      "writtenOn": "2020-10-30T02:33:41Z",
+      "side": 1,
+      "message": "We have some requirements to set some flag in the boot time. Our solution, ICD has used get_cmdline() but we should change ICD to LKM (Loadable Kernel Module) so we cannot use get_cmdline() anymore. Because get_cmdline() is not EXPORT_SYMBOL. And so we decided to implement get_cmdline() into our source code internally.\nWe just copied original get_cmdline() from Kernel core source and pasted.\nIt uses access_process_vm() and so we added the symbol into this list.\nWe need get_cmdline() to get argument of system daemon from kernel over task_struct.\n\ncf. If you know to replace using get_cmdline(), please let us know.",
+      "parentUuid": "527bf859_34b0b0f3",
+      "range": {
+        "startLine": 219,
+        "startChar": 2,
+        "endLine": 219,
+        "endChar": 19
+      },
+      "revId": "7e1ed2f38a1ed8f2e9289b29db09d7b2a9ed44db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "513a4dce_9fda2268",
         "filename": "android/abi_gki_aarch64_galaxy",
         "patchSetId": 1
