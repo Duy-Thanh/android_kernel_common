@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57d4a326_54cdb95a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-10-30T12:56:55Z",
+      "side": 1,
+      "message": "boot tested with hikey/hikey960 aosp-master-throttled-copped build#6922500",
+      "revId": "4ce8a97884e854996c2b7e5a5fc388482094051d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
