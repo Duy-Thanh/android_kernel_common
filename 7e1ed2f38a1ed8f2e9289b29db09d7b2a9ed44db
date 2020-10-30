@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "efb19be4_1981e4be",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1707014
+      },
+      "writtenOn": "2020-10-30T09:39:12Z",
+      "side": 1,
+      "message": "deleted this symbol in patchset 4.",
+      "parentUuid": "d0e83adc_b2806b07",
+      "range": {
+        "startLine": 219,
+        "startChar": 2,
+        "endLine": 219,
+        "endChar": 19
+      },
+      "revId": "7e1ed2f38a1ed8f2e9289b29db09d7b2a9ed44db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "513a4dce_9fda2268",
         "filename": "android/abi_gki_aarch64_galaxy",
         "patchSetId": 1

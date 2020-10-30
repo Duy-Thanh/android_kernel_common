@@ -16,6 +16,24 @@
       "message": "This patch needs to be rebased and updated based on changes in the android/abi_gki_aarch64_galaxy file that are in this branch.\n\nPlease do so, thanks!",
       "revId": "81d369db533a30f608d66ebf5de1160cc58ac0bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dc15d98_65d18976",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1707014
+      },
+      "writtenOn": "2020-10-30T09:39:12Z",
+      "side": 1,
+      "message": "rebased android/abi_gki_aarch64_galaxy.",
+      "parentUuid": "0c9226be_54aafb72",
+      "revId": "81d369db533a30f608d66ebf5de1160cc58ac0bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
