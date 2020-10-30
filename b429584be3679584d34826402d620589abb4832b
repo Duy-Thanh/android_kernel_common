@@ -22,6 +22,30 @@
       },
       "revId": "b429584be3679584d34826402d620589abb4832b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7377970d_c6886cb8",
+        "filename": "drivers/base/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1517,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-10-30T20:02:47Z",
+      "side": 1,
+      "message": "Duh, thanks. Can you fix it locally and try? Just store a copy of link-\u003esupplier and then use it here. I\u0027ll fix it up properly later on.",
+      "parentUuid": "9a4d259c_a434ef5d",
+      "range": {
+        "startLine": 1517,
+        "startChar": 12,
+        "endLine": 1517,
+        "endChar": 31
+      },
+      "revId": "b429584be3679584d34826402d620589abb4832b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
