@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4d34fdb_38701b72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-10-30T14:18:32Z",
+      "side": 1,
+      "message": "We are not enabling page_owner by default but vendors will be able to selectively enable this feature from kernel command line.",
+      "revId": "f5ece557d613424b13f1e6bad68e94358680799c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
