@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2658d9d_0535ce08",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 4
+      },
+      "lineNbr": 2057,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-30T11:48:20Z",
+      "side": 1,
+      "message": "what driver needs this?  This is an arch-core symbol only, no driver should care about it.",
+      "range": {
+        "startLine": 2057,
+        "startChar": 2,
+        "endLine": 2057,
+        "endChar": 16
+      },
+      "revId": "842bb404f137ae8ff83c3c63c0cc5877b0d022ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
