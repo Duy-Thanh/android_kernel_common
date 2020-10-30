@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0e83adc_b2806b07",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-30T06:54:34Z",
+      "side": 1,
+      "message": "Your module can get access to the command line like any other module can, just use the built-in interfaces for that, no need to try to copy the core kernel code.",
+      "parentUuid": "2f735dbc_655c5166",
+      "range": {
+        "startLine": 219,
+        "startChar": 2,
+        "endLine": 219,
+        "endChar": 19
+      },
+      "revId": "7e1ed2f38a1ed8f2e9289b29db09d7b2a9ed44db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "513a4dce_9fda2268",
         "filename": "android/abi_gki_aarch64_galaxy",
         "patchSetId": 1
