@@ -16,6 +16,24 @@
       "message": "Matching which kernels? Why is this revert needed?",
       "revId": "bde9c7d24126584280b675828db7a9b95cac5675",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebfe76c2_8ad57364",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1688863
+      },
+      "writtenOn": "2020-11-02T21:20:00Z",
+      "side": 1,
+      "message": "This is a question for qcom - I\u0027ll pose it on the bug thread.",
+      "parentUuid": "f4998633_33ad310e",
+      "revId": "bde9c7d24126584280b675828db7a9b95cac5675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
