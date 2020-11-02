@@ -3600,6 +3600,7 @@ static const struct pid_entry tid_base_stuff[] = {
 #ifdef CONFIG_CPU_FREQ_TIMES
 	ONE("time_in_state", 0444, proc_time_in_state_show),
 #endif
+	REG("dma_buf_fds", 0444, proc_tid_dma_buf_fds_operations),
 };
 
 static int proc_tid_base_readdir(struct file *file, struct dir_context *ctx)

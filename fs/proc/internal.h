@@ -300,6 +300,7 @@ struct mm_struct *proc_mem_open(struct inode *inode, unsigned int mode);
 
 extern const struct file_operations proc_pid_maps_operations;
 extern const struct file_operations proc_pid_dma_buf_maps_operations;
+extern const struct file_operations proc_tid_dma_buf_fds_operations;
 extern const struct file_operations proc_pid_numa_maps_operations;
 extern const struct file_operations proc_pid_smaps_operations;
 extern const struct file_operations proc_pid_smaps_rollup_operations;
