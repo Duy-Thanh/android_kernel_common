@@ -691,3 +691,13 @@ const struct file_operations ext4_dir_operations = {
 	.open		= ext4_dir_open,
 	.release	= ext4_release_dir,
 };
+<<<<<<< HEAD   (3d1dec Merge 23859ae44402 ("Merge tag 'trace-v5.10-rc1' of git://gi)
+=======
+
+#ifdef CONFIG_UNICODE
+const struct dentry_operations ext4_dentry_ops = {
+	.d_hash = generic_ci_d_hash,
+	.d_compare = generic_ci_d_compare,
+};
+#endif
+>>>>>>> BRANCH (58130a Merge tag 'ext4_for_linus_fixes' of git://git.kernel.org/pub)

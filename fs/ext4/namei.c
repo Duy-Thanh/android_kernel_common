@@ -1331,8 +1331,11 @@ static int ext4_ci_compare(const struct inode *parent, const struct qstr *name,
 {
 	const struct super_block *sb = parent->i_sb;
 	const struct unicode_map *um = sb->s_encoding;
+<<<<<<< HEAD   (3d1dec Merge 23859ae44402 ("Merge tag 'trace-v5.10-rc1' of git://gi)
 	struct fscrypt_str decrypted_name = FSTR_INIT(NULL, de_name_len);
 	struct qstr entry = QSTR_INIT(de_name, de_name_len);
+=======
+>>>>>>> BRANCH (58130a Merge tag 'ext4_for_linus_fixes' of git://git.kernel.org/pub)
 	int ret;
 
 	if (IS_ENCRYPTED(parent)) {
@@ -1359,11 +1362,20 @@ static int ext4_ci_compare(const struct inode *parent, const struct qstr *name,
 		 * or as an opaque byte sequence.
 		 */
 		if (sb_has_strict_encoding(sb))
+<<<<<<< HEAD   (3d1dec Merge 23859ae44402 ("Merge tag 'trace-v5.10-rc1' of git://gi)
 			ret = -EINVAL;
 		else if (name->len != entry.len)
 			ret = 1;
 		else
 			ret = !!memcmp(name->name, entry.name, entry.len);
+=======
+			return -EINVAL;
+
+		if (name->len != entry->len)
+			return 1;
+
+		return !!memcmp(name->name, entry->name, name->len);
+>>>>>>> BRANCH (58130a Merge tag 'ext4_for_linus_fixes' of git://git.kernel.org/pub)
 	}
 out:
 	kfree(decrypted_name.name);

@@ -4771,8 +4771,8 @@ static int ext4_fill_super(struct super_block *sb, void *data, int silent)
 	INIT_LIST_HEAD(&sbi->s_fc_dentry_q[FC_Q_MAIN]);
 	INIT_LIST_HEAD(&sbi->s_fc_dentry_q[FC_Q_STAGING]);
 	sbi->s_fc_bytes = 0;
-	sbi->s_mount_state &= ~EXT4_FC_INELIGIBLE;
-	sbi->s_mount_state &= ~EXT4_FC_COMMITTING;
+	sbi->s_mount_flags &= ~EXT4_MF_FC_INELIGIBLE;
+	sbi->s_mount_flags &= ~EXT4_MF_FC_COMMITTING;
 	spin_lock_init(&sbi->s_fc_lock);
 	memset(&sbi->s_fc_stats, 0, sizeof(sbi->s_fc_stats));
 	sbi->s_fc_replay_state.fc_regions = NULL;
@@ -4968,6 +4968,14 @@ no_journal:
 		goto failed_mount4;
 	}
 
+<<<<<<< HEAD   (3d1dec Merge 23859ae44402 ("Merge tag 'trace-v5.10-rc1' of git://gi)
+=======
+#ifdef CONFIG_UNICODE
+	if (sb->s_encoding)
+		sb->s_d_op = &ext4_dentry_ops;
+#endif
+
+>>>>>>> BRANCH (58130a Merge tag 'ext4_for_linus_fixes' of git://git.kernel.org/pub)
 	sb->s_root = d_make_root(root);
 	if (!sb->s_root) {
 		ext4_msg(sb, KERN_ERR, "get root dentry failed");
