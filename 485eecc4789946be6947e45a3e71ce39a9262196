@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1a3e4d9_d8d59611",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-11-03T09:16:30Z",
+      "side": 1,
+      "message": "use for tracing each typec device registered to typec class to do the initialized action.",
+      "revId": "485eecc4789946be6947e45a3e71ce39a9262196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b21d253f_ae45e0df",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-11-03T09:16:30Z",
+      "side": 1,
+      "message": "use for setting of_node of rt1715 to of_node of typec device when registering typec device to typec class.",
+      "revId": "485eecc4789946be6947e45a3e71ce39a9262196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae74bc0a_f9fb3622",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 2
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-11-03T09:16:30Z",
+      "side": 1,
+      "message": "+#CONFIG_LEDS_CLASS_FLASH\u003dm, ./drivers/staging/vibrator/vibrator_drv.c:459: devm_led_classdev_unregister(\u0026pdev-\u003edev, \u0026led_vibr); Consistent with MTK/ Qualcomm platform, devm_LED_classdev_unregister is called in the motor-driven code of Samsung platform, which results in the failure of GKI test. Therefore, we apply to put the devm_led_classdev_unregister function into the Google whitelist",
+      "revId": "485eecc4789946be6947e45a3e71ce39a9262196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "379b9cc4_653b1ca9",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 2
+      },
+      "lineNbr": 1423,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-11-03T09:16:30Z",
+      "side": 1,
+      "message": "For GPIO pins known to the pinctrl subsystem, the subsystem should be informed of its usage",
+      "revId": "485eecc4789946be6947e45a3e71ce39a9262196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e263328d_ef4bd60b",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 2
+      },
+      "lineNbr": 1778,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-11-03T09:16:30Z",
+      "side": 1,
+      "message": "these two functions are used by fuel gauge to verify devices, which is necessary.",
+      "revId": "485eecc4789946be6947e45a3e71ce39a9262196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52f70ff2_058d6508",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 2
+      },
+      "lineNbr": 2025,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2020-11-03T09:16:30Z",
+      "side": 1,
+      "message": "use for setting discover identity ack’s id header, cert state vdo and product vdo which receiving from UFP to kobject of typec port partner dev",
+      "revId": "485eecc4789946be6947e45a3e71ce39a9262196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
