@@ -16,6 +16,24 @@
       "message": "Improper format and no bug id?  😞",
       "revId": "5bea3075134bac22306f56475d361570eaa693a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "144778d0_4666d588",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1712300
+      },
+      "writtenOn": "2020-11-04T20:11:54Z",
+      "side": 1,
+      "message": "Updated ANDROID: in the subject and updated the Bug Id. Do you still want us to push the module code to ACK?",
+      "parentUuid": "badd6358_7727e736",
+      "revId": "5bea3075134bac22306f56475d361570eaa693a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
