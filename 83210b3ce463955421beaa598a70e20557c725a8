@@ -16,6 +16,24 @@
       "message": "I think this is causing failures in my CI:\nhttps://travis-ci.com/github/ClangBuiltLinux/continuous-integration/jobs/427892477\n\narch/arm64/kernel/smp.c:904:3: error: implicit declaration of function \u0027trace_android_vh_ipi_stop_rcuidle\u0027 [-Werror,-Wimplicit-function-declaration]\n                trace_android_vh_ipi_stop_rcuidle(regs);\n                ^\n\nIs there a config that controls this definition that\u0027s maybe not enabled by arm64 defconfig?",
       "revId": "83210b3ce463955421beaa598a70e20557c725a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "049460d7_9f0cec2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-11-04T23:55:58Z",
+      "side": 1,
+      "message": "I\u0027ve already posted a fix for this: aosp/1486118",
+      "parentUuid": "27f2a08e_6c9699b1",
+      "revId": "83210b3ce463955421beaa598a70e20557c725a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
