@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "844e86ce_63bd2eaf",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-11-04T20:31:47Z",
+      "side": 0,
+      "message": "This is during object construction before it\u0027s been shared with anyone, so no one can be reading it.",
+      "parentUuid": "b938ec95_630ddd45",
+      "range": {
+        "startLine": 243,
+        "startChar": 40,
+        "endLine": 243,
+        "endChar": 48
+      },
+      "revId": "fbd9cf7ba74a3c75c37cfe2d296d0f25c1a6206b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96edc053_635aae2c",
@@ -37,6 +61,30 @@
       "writtenOn": "2020-11-04T20:26:20Z",
       "side": 0,
       "message": "will this break older androids if oems decided to pass these parameters when mounting? Make them noops instead?",
+      "range": {
+        "startLine": 167,
+        "startChar": 31,
+        "endLine": 167,
+        "endChar": 42
+      },
+      "revId": "fbd9cf7ba74a3c75c37cfe2d296d0f25c1a6206b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3f293af_667ae71f",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-11-04T20:31:47Z",
+      "side": 0,
+      "message": "You do not use them, they are meaningless for a stacking file system and I\u0027m almost certain no one else is writing user mode code around incfs. I\u0027d rather remove them before they get into the real ecosystem, than support them for the rest of time.",
+      "parentUuid": "96edc053_635aae2c",
       "range": {
         "startLine": 167,
         "startChar": 31,
