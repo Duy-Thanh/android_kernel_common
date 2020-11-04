@@ -52,6 +52,24 @@
       "parentUuid": "ebfe76c2_8ad57364",
       "revId": "bde9c7d24126584280b675828db7a9b95cac5675",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27c194ca_54bad771",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1781415
+      },
+      "writtenOn": "2020-11-04T22:34:45Z",
+      "side": 1,
+      "message": "Will this commit text do?\n\nThis reverts commit 3c53776e29f81719efcf8f7a6e30cdf753bee94d because it makes HI_SOFTIRQ and TASKLET_SOFTIRQ run immediately i.e. not get deferred to ksfotirqd. The commit text calls out that this is a stopgap until a better solution is deviced and that it should have included TIMER_SOFTIRQ too but chose not to.\n\nEarlier patch [Avila please update the commit sha once you merge the previous ones] from Qualcomm is a more comprehensive one which defers long running tasklets to ksfotirqd when a rt task is interrupted.\n\nWe cannot use both these together as they conflict for e.g. one makes TASKLET softirq run immediately while the Qualcomm one defers it if rt gets interrupted. \n\nChoose to use the Qualcomm one.",
+      "parentUuid": "2c4b72e6_63ba7fe3",
+      "revId": "bde9c7d24126584280b675828db7a9b95cac5675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
