@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ec65604_8ec5d15e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-11-05T00:24:58Z",
+      "side": 1,
+      "message": "Let\u0027s revert and I\u0027ll chase the reason for the breakage.",
+      "revId": "e067b296e0e064651e5d9ddb7ec903040bf258e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
