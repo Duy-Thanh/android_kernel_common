@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f2d86ca_34286f1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741939
+      },
+      "writtenOn": "2020-11-05T00:36:15Z",
+      "side": 1,
+      "message": "Sorry, all of our internal projects define CONFIG_TRACEPOINTS \u0026\u0026 CONFIG_ANDROID_VENDOR_HOOKS.\nWe do not check this case.",
+      "revId": "b59d490feb7638c7867e530f73863b9ae9eac0ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
