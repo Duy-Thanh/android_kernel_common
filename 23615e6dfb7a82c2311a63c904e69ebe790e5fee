@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea33ba07_938d063e",
+        "filename": "fs/incfs/internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-11-05T17:55:56Z",
+      "side": 1,
+      "message": "Yes, other filesystems use EUCLEAN and internally call it EFSCORRUPTED.  Try \u0027git grep EFSCORRUPTED\u0027.\n\nIt will be already defined if EFSCORRUPTED ever gets uplifted to errno.h, which has been proposed before.  This doesn\u0027t matter though, because the filesystem-specific definitions of EFSCORRUPTED will be removed if/when that happens.",
+      "parentUuid": "245a3b91_bc50541c",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 28
+      },
+      "revId": "23615e6dfb7a82c2311a63c904e69ebe790e5fee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bcdcb302_9f6d936f",
         "filename": "fs/incfs/pseudo_files.c",
         "patchSetId": 4
