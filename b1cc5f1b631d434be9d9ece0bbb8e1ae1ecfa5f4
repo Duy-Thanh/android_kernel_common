@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "871a1a2a_1f1c0086",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-11-05T17:52:52Z",
+      "side": 0,
+      "message": "same thing: all these codes are in use",
+      "range": {
+        "startLine": 664,
+        "startChar": 10,
+        "endLine": 664,
+        "endChar": 15
+      },
+      "revId": "b1cc5f1b631d434be9d9ece0bbb8e1ae1ecfa5f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
