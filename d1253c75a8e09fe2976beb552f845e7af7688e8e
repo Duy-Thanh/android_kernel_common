@@ -16,6 +16,24 @@
       "message": "The merge resolution between the different fscrypt backports looks fine.",
       "revId": "d1253c75a8e09fe2976beb552f845e7af7688e8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4070afdf_78ee647c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-05T20:45:31Z",
+      "side": 1,
+      "message": "Thank you for verifying, it was \"interesting\" 😊",
+      "parentUuid": "5181ef9d_ee16fae9",
+      "revId": "d1253c75a8e09fe2976beb552f845e7af7688e8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
