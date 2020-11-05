@@ -69,6 +69,30 @@
       },
       "revId": "23615e6dfb7a82c2311a63c904e69ebe790e5fee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47e83335_28b9c5bf",
+        "filename": "fs/incfs/pseudo_files.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-11-05T17:58:22Z",
+      "side": 1,
+      "message": "In the Linux kernel, EFAULT is used almost exclusively for \"memory region not valid\".  Using it for filesystem corruption is unusual; typically EFSCORRUPTED (alias of EUCLEAN) is used for that.",
+      "parentUuid": "bcdcb302_9f6d936f",
+      "range": {
+        "startLine": 542,
+        "startChar": 11,
+        "endLine": 542,
+        "endChar": 23
+      },
+      "revId": "23615e6dfb7a82c2311a63c904e69ebe790e5fee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
