@@ -33,6 +33,24 @@
       "message": "why is this called without alloc-\u003emutex held here and with it held in binder_alloc_deferred_release? Can it be called from binder_free_buf_locked instead?",
       "revId": "c79ad4c24954de9695387867423898526cc61ef7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3a36493_9d42a691",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-11-09T20:59:39Z",
+      "side": 1,
+      "message": "It could be called from binder_free_buf_locked() instead (which would mean we could get rid of this from binder_alloc_deferred_release() below at line 811). I did it outside the mutex since the protection isn\u0027t actually needed here (this buffer is not in use by anyone and can\u0027t go away underneath us) and if this mode starts getting used for many transactions (especially large ones) it won\u0027t increase contention for the mutex. For the existing use-case it probably doesn\u0027t matter.",
+      "parentUuid": "f3bdd6ef_bff8c54b",
+      "revId": "c79ad4c24954de9695387867423898526cc61ef7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
