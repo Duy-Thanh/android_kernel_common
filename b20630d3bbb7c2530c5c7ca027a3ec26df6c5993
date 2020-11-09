@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72c3ad16_323b179e",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 1781415
+      },
+      "writtenOn": "2020-11-09T22:42:44Z",
+      "side": 1,
+      "message": "sched_cpus_deactivate_nosync()-\u003e_sched_cpu_deactivate() will set this to false. Any reason to do set false early in this patch?",
+      "revId": "b20630d3bbb7c2530c5c7ca027a3ec26df6c5993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
