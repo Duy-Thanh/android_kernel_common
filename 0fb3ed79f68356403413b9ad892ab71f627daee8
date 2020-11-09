@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0fa6046_38c4d326",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-11-09T18:53:20Z",
+      "side": 1,
+      "message": "I expect this to fail for the current symlinked names of GNU as, but I will simply rename them to match what we expect upstream, land that, then land this.",
+      "revId": "0fb3ed79f68356403413b9ad892ab71f627daee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
