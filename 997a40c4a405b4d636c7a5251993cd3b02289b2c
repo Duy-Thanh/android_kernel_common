@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0c664b9_28a125fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-11-09T20:17:44Z",
+      "side": 1,
+      "message": "See b/172824175 for the failure on kernel_cf_i686 (KI, unrelated).",
+      "revId": "997a40c4a405b4d636c7a5251993cd3b02289b2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
