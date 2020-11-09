@@ -16,6 +16,24 @@
       "message": "Hi, ALL\n\nIt seems that this change caused the following 2 testcases of vts_ltp_test_arm failed:\n\n    syscalls.rt_sigaction01_32bit.syscalls.rt_sigaction01_32bit — FAIL\n        binary returned non-zero. Exit code: 135, stderr: Bus error \n    syscalls.rt_sigsuspend01_32bit.syscalls.rt_sigsuspend01_32bit — FAIL\n        binary returned non-zero. Exit code: 2, stderr: external/ltp/lib/tst_test.c:1217: INFO: Timeout per run is 0h 05m 00s\n        external/ltp/lib/tst_test.c:1262: BROK: Test killed by SIGBUS!\n\nLike reported here:\nhttps://qa-reports.linaro.org/android-lkft/5.4-gki-aosp-master-hikey960/build/5.4.75-6ee71137b820/testrun/3403190/suite/vts-test$armeabi-v7a.vts_ltp_test_arm/tests/\n\nbut I am not sure why there is no such failures reported by the android-mainline kernel which has this change as well. maybe we need to cherry-pick some other changes from the android-mainline branch as well.\n\nNot sure if anybody here has any idea about the failures reported. \n\nThanks,\nYongqin Liu\n",
       "revId": "ee753b7d136d7ac274743983af33b4e5f799d7b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e97e9df_4fc9351e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-11-09T18:59:33Z",
+      "side": 1,
+      "message": "Thanks for the report, we\u0027re observing the test failure, too.  Will McVicker is chasing; Friday we identified that the corresponding routines were removed from the compat vdso recently.  Stay tuned.  It looks like SIGBUS is triggered by the `svc` instruction, though it\u0027s not clear yet what\u0027s wrong with the alignment of operands or the instruction itself.\n\n(There might also potentially be a linker flag that GCC was passing to the linker that we need to manually specify. Building with `-v` added to the `VDSO_LDFLAGS` and comparing the flags before/after this change would illuminate such differences).",
+      "parentUuid": "32b12aa8_c8aa1c3b",
+      "revId": "ee753b7d136d7ac274743983af33b4e5f799d7b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
