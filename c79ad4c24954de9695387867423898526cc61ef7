@@ -69,6 +69,24 @@
       "parentUuid": "a3a36493_9d42a691",
       "revId": "c79ad4c24954de9695387867423898526cc61ef7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74910c10_789bb89d",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-11-09T23:07:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07018795_51a31fbf",
+      "revId": "c79ad4c24954de9695387867423898526cc61ef7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
