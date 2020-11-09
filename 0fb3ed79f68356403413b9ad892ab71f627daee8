@@ -16,6 +16,23 @@
       "message": "I expect this to fail for the current symlinked names of GNU as, but I will simply rename them to match what we expect upstream, land that, then land this.",
       "revId": "0fb3ed79f68356403413b9ad892ab71f627daee8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe721a6b_92d4eef1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-11-09T19:21:28Z",
+      "side": 1,
+      "message": "ah right, I\u0027ll have to make some changes to build.sh, too.",
+      "revId": "0fb3ed79f68356403413b9ad892ab71f627daee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
