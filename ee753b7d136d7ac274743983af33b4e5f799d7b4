@@ -70,6 +70,24 @@
       "parentUuid": "c440cc6e_b2463f05",
       "revId": "ee753b7d136d7ac274743983af33b4e5f799d7b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f3dd8f4_2cc04e90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-11-10T20:31:16Z",
+      "side": 1,
+      "message": "\u003e Building with `-v` added to the `VDSO_LDFLAGS` and comparing the flags before/after this change would illuminate such differences\n\nI\u0027ve compared the linker flags BEFORE vs AFTER this change. It looks like this patch drops the following flags that are provided to the linker via the compiler driver:\n\n-EL -X --eh-frame-hdr -m armelf_linux_eabi\n\nI suspect these are all irrelevant. `-EL -m armelf_linux_eabi` are implicit for the tools.  I don\u0027t see how `-X --eh-frame-hdr` linker flags could affect this, but maybe adding them back to `VDSO_LDFLAGS` is worth a shot since it\u0027s quick to test.",
+      "parentUuid": "342ce97e_6f99666a",
+      "revId": "ee753b7d136d7ac274743983af33b4e5f799d7b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
