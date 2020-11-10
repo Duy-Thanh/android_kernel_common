@@ -51,6 +51,24 @@
       "message": "Why isn\u0027t this submitted upstream?",
       "revId": "0db7d81e0111ab491448f1db58b55e18ff25a677",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d9d2e02_57df30f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1294339
+      },
+      "writtenOn": "2020-11-10T10:04:18Z",
+      "side": 1,
+      "message": "Hi Greg, this change is based on Jaegeuk\u0027s patch in Android kernel so surely it could be upstreamed followed by the dependent patch.",
+      "parentUuid": "e9a098a2_54a5b5a7",
+      "revId": "0db7d81e0111ab491448f1db58b55e18ff25a677",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
