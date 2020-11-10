@@ -34,6 +34,24 @@
       "parentUuid": "32b12aa8_c8aa1c3b",
       "revId": "ee753b7d136d7ac274743983af33b4e5f799d7b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c440cc6e_b2463f05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2020-11-10T19:17:24Z",
+      "side": 1,
+      "message": "We also merged this patch upstream. Have you observed the failure there too? If so, we should probably revert it for now.",
+      "parentUuid": "3e97e9df_4fc9351e",
+      "revId": "ee753b7d136d7ac274743983af33b4e5f799d7b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
