@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "169f9a95_084526e7",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2876,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-11-10T19:43:38Z",
+      "side": 1,
+      "message": "So you allocate from CMA when cma_alloc \u003d\u003d false? That seems strange or maybe I\u0027m missing something. Could you please add a comment in mmzone.h about how this flag is being used.",
+      "range": {
+        "startLine": 2876,
+        "startChar": 39,
+        "endLine": 2876,
+        "endChar": 55
+      },
+      "revId": "7f6c5592affacf7af734a13ca9611e1bcdebc373",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05ecc247_c4fbf6db",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 8555,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-11-10T19:43:38Z",
+      "side": 1,
+      "message": "IIUC you are using zone simply as a container to pass cma_alloc. This seems wrong since cma_alloc is not really an attribute of the zone but rather describes the context of a particular allocation. IIUC __alloc_pages_*() -\u003e get_page_from_freelist() -\u003e rmqueue() callchain can happen from different places and if concurrent calls are using the same zone then alloc_contig_range() here will affect the other concurrent calls to rmqueue(). Is that not a concern?",
+      "range": {
+        "startLine": 8555,
+        "startChar": 1,
+        "endLine": 8555,
+        "endChar": 19
+      },
+      "revId": "7f6c5592affacf7af734a13ca9611e1bcdebc373",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
