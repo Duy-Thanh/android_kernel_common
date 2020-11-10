@@ -78,6 +78,7 @@
 #include <linux/vmalloc.h>
 #include <linux/sched/sysctl.h>
 #include <linux/set_memory.h>
+#include <trace/hooks/mm.h>
 
 #include <trace/events/kmem.h>
 
@@ -3788,7 +3789,11 @@ vm_fault_t do_swap_page(struct vm_fault *vmf)
 		if (data_race(si->flags & SWP_SYNCHRONOUS_IO) &&
 		    __swap_count(entry) == 1) {
 			/* skip swapcache */
-			folio = vma_alloc_folio(GFP_HIGHUSER_MOVABLE, 0,
+			gfp_t flags = GFP_HIGHUSER_MOVABLE;
+
+			trace_android_rvh_set_skip_swapcache_flags(&flags);
+
+			folio = vma_alloc_folio(flags, 0,
 						vma, vmf->address, false);
 			page = &folio->page;
 			if (folio) {
