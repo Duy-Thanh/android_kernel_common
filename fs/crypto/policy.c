@@ -64,6 +64,9 @@ int fscrypt_ioctl_set_policy(struct file *filp, const void __user *arg)
 	if (copy_from_user(&policy, arg, sizeof(policy)))
 		return -EFAULT;
 
+	if (copy_from_user(&policy, arg, sizeof(policy)))
+		return -EFAULT;
+
 	if (!inode_owner_or_capable(inode))
 		return -EACCES;
 
@@ -87,6 +90,7 @@ int fscrypt_ioctl_set_policy(struct file *filp, const void __user *arg)
 		else
 			ret = create_encryption_context_from_policy(inode,
 								    &policy);
+<<<<<<< HEAD   (cdc410 ANDROID: Temporarily disable XFRM_USER_COMPAT filtering)
 	} else if (ret == sizeof(ctx) &&
 		   is_encryption_context_consistent_with_policy(&ctx,
 								&policy)) {
@@ -94,6 +98,13 @@ int fscrypt_ioctl_set_policy(struct file *filp, const void __user *arg)
 		ret = 0;
 	} else if (ret >= 0 || ret == -ERANGE) {
 		/* The file already uses a different encryption policy. */
+=======
+	} else if (!is_encryption_context_consistent_with_policy(inode,
+								 &policy)) {
+		printk(KERN_WARNING
+		       "%s: Policy inconsistent with encryption context\n",
+		       __func__);
+>>>>>>> BRANCH (206734 Linux 4.9.242)
 		ret = -EEXIST;
 	}
 
@@ -152,8 +163,7 @@ EXPORT_SYMBOL(fscrypt_ioctl_get_policy);
  * malicious offline violations of this constraint, while the link and rename
  * checks are needed to prevent online violations of this constraint.
  *
- * Return: 1 if permitted, 0 if forbidden.  If forbidden, the caller must fail
- * the filesystem operation with EPERM.
+ * Return: 1 if permitted, 0 if forbidden.
  */
 int fscrypt_has_permitted_context(struct inode *parent, struct inode *child)
 {

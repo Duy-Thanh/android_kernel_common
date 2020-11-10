@@ -823,9 +823,12 @@ resizefs_out:
 				 sbi->s_es->s_encrypt_pw_salt, 16))
 			return -EFAULT;
 		return 0;
+<<<<<<< HEAD   (cdc410 ANDROID: Temporarily disable XFRM_USER_COMPAT filtering)
 #else
 		return -EOPNOTSUPP;
 #endif
+=======
+>>>>>>> BRANCH (206734 Linux 4.9.242)
 	}
 	case EXT4_IOC_GET_ENCRYPTION_POLICY:
 		return fscrypt_ioctl_get_policy(filp, (void __user *)arg);

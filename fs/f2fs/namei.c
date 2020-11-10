@@ -313,6 +313,7 @@ static int f2fs_link(struct dentry *old_dentry, struct inode *dir,
 	struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
 	int err;
 
+<<<<<<< HEAD   (cdc410 ANDROID: Temporarily disable XFRM_USER_COMPAT filtering)
 	if (unlikely(f2fs_cp_error(sbi)))
 		return -EIO;
 
@@ -328,6 +329,11 @@ static int f2fs_link(struct dentry *old_dentry, struct inode *dir,
 	err = dquot_initialize(dir);
 	if (err)
 		return err;
+=======
+	if (f2fs_encrypted_inode(dir) &&
+			!fscrypt_has_permitted_context(dir, inode))
+		return -EXDEV;
+>>>>>>> BRANCH (206734 Linux 4.9.242)
 
 	f2fs_balance_fs(sbi, true);
 
@@ -825,6 +831,7 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
 	if (unlikely(f2fs_cp_error(sbi)))
 		return -EIO;
 
+<<<<<<< HEAD   (cdc410 ANDROID: Temporarily disable XFRM_USER_COMPAT filtering)
 	if (is_inode_flag_set(new_dir, FI_PROJ_INHERIT) &&
 			(!projid_eq(F2FS_I(new_dir)->i_projid,
 			F2FS_I(old_dentry->d_inode)->i_projid)))
@@ -832,6 +839,11 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
 
 	err = dquot_initialize(old_dir);
 	if (err)
+=======
+	if ((old_dir != new_dir) && f2fs_encrypted_inode(new_dir) &&
+			!fscrypt_has_permitted_context(new_dir, old_inode)) {
+		err = -EXDEV;
+>>>>>>> BRANCH (206734 Linux 4.9.242)
 		goto out;
 
 	err = dquot_initialize(new_dir);
@@ -1010,6 +1022,7 @@ static int f2fs_cross_rename(struct inode *old_dir, struct dentry *old_dentry,
 	if (unlikely(f2fs_cp_error(sbi)))
 		return -EIO;
 
+<<<<<<< HEAD   (cdc410 ANDROID: Temporarily disable XFRM_USER_COMPAT filtering)
 	if ((is_inode_flag_set(new_dir, FI_PROJ_INHERIT) &&
 			!projid_eq(F2FS_I(new_dir)->i_projid,
 			F2FS_I(old_dentry->d_inode)->i_projid)) ||
@@ -1025,6 +1038,13 @@ static int f2fs_cross_rename(struct inode *old_dir, struct dentry *old_dentry,
 	err = dquot_initialize(new_dir);
 	if (err)
 		goto out;
+=======
+	if ((f2fs_encrypted_inode(old_dir) || f2fs_encrypted_inode(new_dir)) &&
+			(old_dir != new_dir) &&
+			(!fscrypt_has_permitted_context(new_dir, old_inode) ||
+			 !fscrypt_has_permitted_context(old_dir, new_inode)))
+		return -EXDEV;
+>>>>>>> BRANCH (206734 Linux 4.9.242)
 
 	old_entry = f2fs_find_entry(old_dir, &old_dentry->d_name, &old_page);
 	if (!old_entry) {
