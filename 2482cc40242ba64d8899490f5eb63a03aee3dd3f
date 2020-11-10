@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1b93b72_c118c48b",
+        "filename": "mm/mmzone.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-11-10T19:49:31Z",
+      "side": 1,
+      "message": "Are you sure you will never need to remove a bit from the flags? Maybe this instead:\n\ngfp_t local_flags \u003d flags;\ntrace_android_vh_set_gfp_zone_flags(\u0026local_flags);\nbit \u003d (__force int) (local_flags \u0026 GFP_ZONEMASK);",
+      "range": {
+        "startLine": 126,
+        "startChar": 23,
+        "endLine": 126,
+        "endChar": 42
+      },
+      "revId": "2482cc40242ba64d8899490f5eb63a03aee3dd3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
