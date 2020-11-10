@@ -64,6 +64,30 @@
       },
       "revId": "b567f4baf410d62d7ee9e7d9f7fc3266b30aa3f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5bf54a8_801e77ae",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2559,
+      "author": {
+        "id": 1294339
+      },
+      "writtenOn": "2020-11-10T08:59:57Z",
+      "side": 1,
+      "message": "Hi Jaegeuk, Sorry I just got your point. lrb_in_use is alredy gone in mainstream. I will fix this soon.",
+      "parentUuid": "0c05fdec_cb520632",
+      "range": {
+        "startLine": 2557,
+        "startChar": 1,
+        "endLine": 2559,
+        "endChar": 42
+      },
+      "revId": "b567f4baf410d62d7ee9e7d9f7fc3266b30aa3f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
