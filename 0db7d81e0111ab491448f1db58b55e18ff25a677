@@ -16,6 +16,24 @@
       "message": "Could you please add this in android-mainline as well?",
       "revId": "0db7d81e0111ab491448f1db58b55e18ff25a677",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9e7f581_e4b6ceba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1294339
+      },
+      "writtenOn": "2020-11-10T08:45:37Z",
+      "side": 1,
+      "message": "Sure, cherry-picked : )",
+      "parentUuid": "7f389751_16415ea3",
+      "revId": "0db7d81e0111ab491448f1db58b55e18ff25a677",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
