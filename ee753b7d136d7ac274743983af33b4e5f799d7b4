@@ -52,6 +52,24 @@
       "parentUuid": "3e97e9df_4fc9351e",
       "revId": "ee753b7d136d7ac274743983af33b4e5f799d7b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "342ce97e_6f99666a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2020-11-10T19:25:16Z",
+      "side": 1,
+      "message": "Upstream has a bunch of other vdso changes as well. For example, your series here might help fix the issue:\n\nhttps://lore.kernel.org/linux-arm-kernel/20200626132131.GA9750@willie-the-truck/\n\nIn particular this removes the sigreturn: \"arm64: compat: Remove 32-bit sigreturn code from the vDSO\". So I\u0027m backporting these changes into 4.19 to see if it has an impact on the LTP test.",
+      "parentUuid": "c440cc6e_b2463f05",
+      "revId": "ee753b7d136d7ac274743983af33b4e5f799d7b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
