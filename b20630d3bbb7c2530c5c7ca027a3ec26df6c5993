@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "545d19fd_87cc8379",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-10T16:40:24Z",
+      "side": 1,
+      "message": "The idea is to do the best effort. If something wrong happen on a CPU, try to continue and at least pause others from the cpumask.\n\nIf you think this isn\u0027t necessary, we can simplify and say that the function is pausing all CPUs from the input mask or none and return an error.\n\nThoughts ?",
+      "parentUuid": "6e8a524f_de811f9f",
+      "range": {
+        "startLine": 1098,
+        "startChar": 31,
+        "endLine": 1098,
+        "endChar": 35
+      },
+      "revId": "b20630d3bbb7c2530c5c7ca027a3ec26df6c5993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc4c7a26_52d9db5f",
         "filename": "kernel/cpu.c",
         "patchSetId": 3
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ab667cbd_981d138e",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-10T16:40:24Z",
+      "side": 1,
+      "message": "See the comment above. The function is trying to meet as much as possible the requirements from the input cpumask. If anything goes wrong in the process an error will be raised.",
+      "parentUuid": "fc4c7a26_52d9db5f",
+      "range": {
+        "startLine": 1116,
+        "startChar": 3,
+        "endLine": 1116,
+        "endChar": 7
+      },
+      "revId": "b20630d3bbb7c2530c5c7ca027a3ec26df6c5993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5bc6a992_26406f5f",
         "filename": "kernel/cpu.c",
         "patchSetId": 3
@@ -77,6 +125,24 @@
       "writtenOn": "2020-11-10T06:54:45Z",
       "side": 1,
       "message": "how to distinguish this -EBUSY with the above err -EBUSY in which case some cpus are paused. I believe we have to do cpumask_clear(cpus) here so that it  indicates the caller that none of the cpus are paused.",
+      "revId": "b20630d3bbb7c2530c5c7ca027a3ec26df6c5993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56d6a78c_9e6cdf19",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1121,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-10T16:40:24Z",
+      "side": 1,
+      "message": "You can\u0027t sadly. But any error will indicate that at least one CPU didn\u0027t manage made it to the pause state.",
+      "parentUuid": "5bc6a992_26406f5f",
       "revId": "b20630d3bbb7c2530c5c7ca027a3ec26df6c5993",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -118,6 +184,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "add731d0_abfb3cf8",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-10T16:40:24Z",
+      "side": 1,
+      "message": "Indeed. Although, this is a small mistake, this for_each_cpu should be part of the following patch.",
+      "parentUuid": "f78eef20_e8d36523",
+      "revId": "b20630d3bbb7c2530c5c7ca027a3ec26df6c5993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "254d93e6_1340f0a3",
         "filename": "kernel/cpu.c",
         "patchSetId": 3
@@ -141,6 +225,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "256778c1_ff98efaf",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1139,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-10T16:40:24Z",
+      "side": 1,
+      "message": "if a sched_cpu_deactivate() call fails, the corresponding CPU will be put back to active. We can then compare the input cpumask with cpu_active_mask to check which CPU failed to go inactivate.\n\n\n        ret \u003d cpuset_cpu_inactive(cpu);\n        if (ret) {\n                set_cpu_active(cpu, true);\n                return ret;\n        }",
+      "parentUuid": "254d93e6_1340f0a3",
+      "range": {
+        "startLine": 1139,
+        "startChar": 4,
+        "endLine": 1139,
+        "endChar": 5
+      },
+      "revId": "b20630d3bbb7c2530c5c7ca027a3ec26df6c5993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "05d2fa0d_78d02d96",
         "filename": "kernel/cpu.c",
         "patchSetId": 3
@@ -152,6 +260,30 @@
       "writtenOn": "2020-11-10T06:54:45Z",
       "side": 1,
       "message": "st-\u003estate and st-\u003etarget won\u0027t match. not sure if that is problem to anybody.",
+      "range": {
+        "startLine": 1152,
+        "startChar": 2,
+        "endLine": 1152,
+        "endChar": 4
+      },
+      "revId": "b20630d3bbb7c2530c5c7ca027a3ec26df6c5993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7abb15e6_7384002e",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1152,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-10T16:40:24Z",
+      "side": 1,
+      "message": "We could update st-\u003etarget here, that would be reflected in the sysfs.",
+      "parentUuid": "05d2fa0d_78d02d96",
       "range": {
         "startLine": 1152,
         "startChar": 2,
