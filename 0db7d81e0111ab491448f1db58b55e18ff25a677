@@ -69,6 +69,24 @@
       "parentUuid": "e9a098a2_54a5b5a7",
       "revId": "0db7d81e0111ab491448f1db58b55e18ff25a677",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6da4f59_bed34204",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-10T18:52:39Z",
+      "side": 1,
+      "message": "Ok, I\u0027ll wait for Jaegeuk\u0027s review here.",
+      "parentUuid": "3d9d2e02_57df30f3",
+      "revId": "0db7d81e0111ab491448f1db58b55e18ff25a677",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
