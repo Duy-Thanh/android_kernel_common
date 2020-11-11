@@ -22,6 +22,30 @@
       },
       "revId": "1eb128820e3cd5f6d15529f2a730c3ec46d3b00b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84974257_080d1315",
+        "filename": "arch/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2020-11-11T22:47:37Z",
+      "side": 1,
+      "message": "Just noticed this now. Will wanted to change this to \u0027default y\u0027, otherwise I fully agree.",
+      "parentUuid": "5d86bea5_ebf4e48c",
+      "range": {
+        "startLine": 552,
+        "startChar": 0,
+        "endLine": 552,
+        "endChar": 10
+      },
+      "revId": "1eb128820e3cd5f6d15529f2a730c3ec46d3b00b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
