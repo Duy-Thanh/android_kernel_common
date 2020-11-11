@@ -16,6 +16,24 @@
       "message": "Why not just submit the changes needed for this driver instead?",
       "revId": "50cab5ad50c37e4eeedd676fc53f605d5e7d5736",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a7dc5c8_ac790700",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2020-11-11T23:56:07Z",
+      "side": 1,
+      "message": "These vendor hooks are only applicable to vendor and we don\u0027t see the backend implementation in the vendor module useful to kernel.org.",
+      "parentUuid": "ba62c1b3_75e6820c",
+      "revId": "50cab5ad50c37e4eeedd676fc53f605d5e7d5736",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
