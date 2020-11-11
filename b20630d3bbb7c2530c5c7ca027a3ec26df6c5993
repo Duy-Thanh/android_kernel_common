@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f9d25d6c_6e37fafd",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-11T09:07:57Z",
+      "side": 1,
+      "message": "I\u0027ll change the behaviour then in the next version.",
+      "parentUuid": "4e81b909_7b38d402",
+      "range": {
+        "startLine": 1098,
+        "startChar": 31,
+        "endLine": 1098,
+        "endChar": 35
+      },
+      "revId": "b20630d3bbb7c2530c5c7ca027a3ec26df6c5993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc4c7a26_52d9db5f",
         "filename": "kernel/cpu.c",
         "patchSetId": 3
