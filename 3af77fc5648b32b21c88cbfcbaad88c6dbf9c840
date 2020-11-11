@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "922d8ff0_bb78fec6",
+        "filename": "kernel/time/sched_clock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-11-11T00:11:47Z",
+      "side": 1,
+      "message": "can\u0027t you accomplish the same thing from a module by registering your own syscore_ops?",
+      "revId": "3af77fc5648b32b21c88cbfcbaad88c6dbf9c840",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
