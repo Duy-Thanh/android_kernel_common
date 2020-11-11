@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4e81b909_7b38d402",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2020-11-11T03:47:14Z",
+      "side": 1,
+      "message": "Given that pause failure is rare event (the DL case is the legit scenario), prefer the alternative i.e either all or none and not changing the input cpus argument.",
+      "parentUuid": "545d19fd_87cc8379",
+      "range": {
+        "startLine": 1098,
+        "startChar": 31,
+        "endLine": 1098,
+        "endChar": 35
+      },
+      "revId": "b20630d3bbb7c2530c5c7ca027a3ec26df6c5993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc4c7a26_52d9db5f",
         "filename": "kernel/cpu.c",
         "patchSetId": 3
@@ -112,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c47a75a_4cf9f521",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2020-11-11T03:47:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab667cbd_981d138e",
+      "range": {
+        "startLine": 1116,
+        "startChar": 3,
+        "endLine": 1116,
+        "endChar": 7
+      },
+      "revId": "b20630d3bbb7c2530c5c7ca027a3ec26df6c5993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5bc6a992_26406f5f",
@@ -143,6 +191,24 @@
       "side": 1,
       "message": "You can\u0027t sadly. But any error will indicate that at least one CPU didn\u0027t manage made it to the pause state.",
       "parentUuid": "5bc6a992_26406f5f",
+      "revId": "b20630d3bbb7c2530c5c7ca027a3ec26df6c5993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "920427e3_2cc23ac2",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1121,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2020-11-11T03:47:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56d6a78c_9e6cdf19",
       "revId": "b20630d3bbb7c2530c5c7ca027a3ec26df6c5993",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -200,6 +266,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62e25daf_813d9d9a",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2020-11-11T03:47:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "add731d0_abfb3cf8",
+      "revId": "b20630d3bbb7c2530c5c7ca027a3ec26df6c5993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "254d93e6_1340f0a3",
@@ -247,6 +331,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78b44221_799bd899",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1139,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2020-11-11T03:47:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "256778c1_ff98efaf",
+      "range": {
+        "startLine": 1139,
+        "startChar": 4,
+        "endLine": 1139,
+        "endChar": 5
+      },
+      "revId": "b20630d3bbb7c2530c5c7ca027a3ec26df6c5993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05d2fa0d_78d02d96",
@@ -284,6 +392,30 @@
       "side": 1,
       "message": "We could update st-\u003etarget here, that would be reflected in the sysfs.",
       "parentUuid": "05d2fa0d_78d02d96",
+      "range": {
+        "startLine": 1152,
+        "startChar": 2,
+        "endLine": 1152,
+        "endChar": 4
+      },
+      "revId": "b20630d3bbb7c2530c5c7ca027a3ec26df6c5993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d861024a_4ae9ec10",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1152,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2020-11-11T03:47:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7abb15e6_7384002e",
       "range": {
         "startLine": 1152,
         "startChar": 2,
