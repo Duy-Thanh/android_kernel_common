@@ -16,6 +16,24 @@
       "message": "It does not look like you clear enough data there. buffer-\u003edata_size is the size of just one of the chucks allocated in the buffer. extra_buffers could also contain sensitive data that should be cleared.",
       "revId": "35c3a753b9d6039bcfcadda455fdc3455e5be76d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "defeefbe_57d010f7",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-11-11T22:30:16Z",
+      "side": 1,
+      "message": "Yea, I thought the secrets would all naturally be in the normal data section, but you are right. Changed to clear everything.",
+      "parentUuid": "e8192ec8_61a45200",
+      "revId": "35c3a753b9d6039bcfcadda455fdc3455e5be76d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
