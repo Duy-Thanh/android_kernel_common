@@ -106,6 +106,24 @@
       "parentUuid": "8f3dd8f4_2cc04e90",
       "revId": "ee753b7d136d7ac274743983af33b4e5f799d7b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d672a6ff_6db94aac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-11-12T07:34:37Z",
+      "side": 1,
+      "message": "Hi, Will McVicker\n\nThanks for the fix! It helps for the failures reported by the vts_ltp_test_arm test.\n\nBest Regards,\nYongqin Liu",
+      "parentUuid": "ba8f8d0b_8b1603c9",
+      "revId": "ee753b7d136d7ac274743983af33b4e5f799d7b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
