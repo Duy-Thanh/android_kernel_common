@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec6905f8_cc0c0e9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-11-12T01:17:11Z",
+      "side": 1,
+      "message": "Hey Peter!\n\nSo, as we discussed on chat, the issue you are having seems to be tied to using a 4k monitor. \nI\u0027ve reproduced this issue here as well, and will be pulling Vinod in to better understand why the change was made as the driver went upstream, and see if we can get it fixed for 5.10 final.\n",
+      "revId": "5cf76f72a9bf6506fd73b7eb7f85ee058192862f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
