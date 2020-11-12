@@ -88,6 +88,24 @@
       "parentUuid": "342ce97e_6f99666a",
       "revId": "ee753b7d136d7ac274743983af33b4e5f799d7b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba8f8d0b_8b1603c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2020-11-12T00:24:31Z",
+      "side": 1,
+      "message": "Hi YongQin, \nPlease refer to https://lore.kernel.org/linux-arm-kernel/20201112001422.340449-1-willmcvicker@google.com/ for the LTP fix.",
+      "parentUuid": "8f3dd8f4_2cc04e90",
+      "revId": "ee753b7d136d7ac274743983af33b4e5f799d7b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
