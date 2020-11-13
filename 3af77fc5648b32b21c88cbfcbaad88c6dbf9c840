@@ -33,6 +33,24 @@
       "message": "can\u0027t you accomplish the same thing from a module by registering your own syscore_ops?",
       "revId": "3af77fc5648b32b21c88cbfcbaad88c6dbf9c840",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9082b59d_05f1a761",
+        "filename": "kernel/time/sched_clock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1721954
+      },
+      "writtenOn": "2020-11-13T17:32:25Z",
+      "side": 1,
+      "message": "Todd, i gave more explanation in the BUG. Why it can\u0027t be done using syscore_ops.\nhttps://partnerissuetracker.corp.google.com/issues/172945021",
+      "parentUuid": "922d8ff0_bb78fec6",
+      "revId": "3af77fc5648b32b21c88cbfcbaad88c6dbf9c840",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
