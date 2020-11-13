@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1481c5d0_56681b6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2020-11-13T13:46:11Z",
+      "side": 1,
+      "message": "I added each KMI\u0027s usage.\n\nPlease check it and review it.\n\nThanks.",
+      "revId": "c8ec751f483f8d0ab44d51cf64f43606b172b6eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e78584b_2c74d451",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2020-11-13T13:46:11Z",
+      "side": 1,
+      "message": "Our PCIE driver add function to use it.\nIt seems no problem because other vendors are using.",
+      "revId": "c8ec751f483f8d0ab44d51cf64f43606b172b6eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1962bce0_e32a2078",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2020-11-13T13:46:11Z",
+      "side": 1,
+      "message": "Our debug module added this API to show cache values around fault register address.\nThis is kind of google\u0027s old kernel feature.\n\nex : \n\nX16: 0xffffffc010ff15fc:\n15fc : D2C0010B 17FFFFF2 D2C0080B 17FFFFF0 D2C0008B 17FFFFEE B2785D2B F900028B\n161c : 39400148 5100C10C 7100259F 540007A9 7100A91F 540012C1 12801FCB AA0B0129\n163c : 91000548 F9000289 14000098 910043E0 9400083D F9400288 2A0003E9 D3503D2A\n165c : 93403D29 7100013F 9A8AB3EB B340BD0B F900028B F9400BE8 39400109 AA0803EA\n167c : 51013129 7100B93F 2A1F03EC 54000468 5280002D 9AC921A9 D280002D F2A2000D\n\nThis is our vendor\u0027s requirement so We added it, but we have to show *** address for not good kernel address. So we are using this API.\n\nX5: 0xfffffffffffffe00:\nfe00 : ******** ******** ******** ******** ******** ******** ******** ********\nfe20 : ******** ******** ******** ******** ******** ******** ******** ********\nfe40 : ******** ******** ******** ******** ******** ******** ******** ********\nfe60 : ******** ******** ******** ******** ******** ******** ******** ********\nfe80 : ******** ******** ******** ******** ******** ******** ******** ********",
+      "revId": "c8ec751f483f8d0ab44d51cf64f43606b172b6eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
