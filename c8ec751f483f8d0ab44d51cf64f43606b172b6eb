@@ -85,6 +85,24 @@
       "parentUuid": "1962bce0_e32a2078",
       "revId": "c8ec751f483f8d0ab44d51cf64f43606b172b6eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acc26e07_e77567f5",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2020-11-13T17:26:34Z",
+      "side": 1,
+      "message": "Hello, I\u0027ve just checked linus\u0027s latest kernel and \"probe_kernel_read\" was renamed to \"copy_from_kernel_nofault\" function.\nAnd I think it\u0027s functional work is same to before. (Maybe I cannot catch it)\n\nI also think we can use this function with Android11 as it is,\nand for Android12, (with kernel 5.10) we can rename it in symbol list also.\n\nOr, Do you have any other reason to block this function in android11-5.4 ?\nBecause this is some good debug method to check Cache data vs Dram data. (with ramdump raw data) \n\nAnd if this function must be blocked, would you give us good substitue for this api? Please let us know. 😂\n\nThanks.",
+      "parentUuid": "f81be9ff_d3543d4d",
+      "revId": "c8ec751f483f8d0ab44d51cf64f43606b172b6eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
