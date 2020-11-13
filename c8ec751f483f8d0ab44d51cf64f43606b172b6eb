@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48f3fcc4_d27af159",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2020-11-13T16:17:44Z",
+      "side": 1,
+      "message": "OK, I\u0027ll check that what can we do without that API.\n\nI\u0027m going to update our symbol list only for pcie later.\n\nAnd If we can find other api without that \"probe_kernel_modlue\", then try with it again.\n\nThanks.",
+      "revId": "c8ec751f483f8d0ab44d51cf64f43606b172b6eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e78584b_2c74d451",
