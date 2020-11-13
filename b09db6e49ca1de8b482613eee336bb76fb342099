@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3944f257_2a8030ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1294339
+      },
+      "writtenOn": "2020-11-13T07:30:09Z",
+      "side": 1,
+      "message": "Hi Greg, thanks for merging this patch. Could you please also merge the patch cherry-picked to android-mainline as below link?\n\nhttps://android-review.googlesource.com/c/kernel/common/+/1494157\n\nThanks\n",
+      "revId": "b09db6e49ca1de8b482613eee336bb76fb342099",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
