@@ -87,6 +87,42 @@
       "message": "Wait, this broke upstream booting, which is why it was rejected.  What changed here from the upstream submitted patch that fixed the boot problems?  And if they are fixed, why was this not resubmitted?",
       "revId": "69d71672e0248cd325793646d5cae5c723be55e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42f2cee1_05c8f692",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-11-13T17:08:45Z",
+      "side": 1,
+      "message": "Huh, thanks for pointing it out. Allocation failure... Chris, have you looked at it?",
+      "parentUuid": "d037801f_dc23c8cf",
+      "revId": "69d71672e0248cd325793646d5cae5c723be55e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63ac1ef8_0a84810b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-11-13T17:08:45Z",
+      "side": 1,
+      "message": "The thing is that upstream currently does not have an alternative, this patch is already present in previous ACK versions and all partners are already using it.",
+      "parentUuid": "4dbe97fb_183cad17",
+      "revId": "69d71672e0248cd325793646d5cae5c723be55e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
