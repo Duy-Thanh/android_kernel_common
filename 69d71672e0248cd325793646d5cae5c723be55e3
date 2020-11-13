@@ -52,6 +52,24 @@
       "parentUuid": "aa9d8ed7_3b32cf78",
       "revId": "69d71672e0248cd325793646d5cae5c723be55e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dbe97fb_183cad17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-13T07:28:39Z",
+      "side": 1,
+      "message": "And pointing to the upstream thread in the changelog text is good so we can find it later.",
+      "parentUuid": "105edcc6_c7c93c3e",
+      "revId": "69d71672e0248cd325793646d5cae5c723be55e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
