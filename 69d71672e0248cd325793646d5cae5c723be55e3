@@ -123,6 +123,24 @@
       "parentUuid": "4dbe97fb_183cad17",
       "revId": "69d71672e0248cd325793646d5cae5c723be55e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daf62a4c_5f4d5333",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1697971
+      },
+      "writtenOn": "2020-11-13T20:24:53Z",
+      "side": 1,
+      "message": "Hey Greg, the patch was nacked by David Hildenbrand before the report from the kernel test robot came in.  I was able to find the error and resolve it, though I haven\u0027t tested it on the setup being used by the kernel test robot (I didn\u0027t observe the error in the first place with the QEMU setup I was using, which is why I missed it at first).\n\nWhat was happening in the version of the patch sent upstream is as follows:\n\n- Using \u0026\u0026 instead of \u0026 for a check of __GFP_CMA made it such that all allocations went to the CMA area (a separate bug, though this only uncovered the issue)\n- CMA pages were depleted because of this (the bug-reported stated that no CMA pages were free)\n- No fall-back mechanism was in place to used __rmqueue_smallest() or __rmqueue_fallback() if __rmqueue_cma_fallback() failed, which lead to rmqueue() not returning a page, which lead to the eventual panic().  We dealt with this internally with a separate patch that followed this patch, but it was that patch is redundant with changes from upstream, so I didn\u0027t insert the fall-backs: https://android.googlesource.com/kernel/common/+/dd1c26b8535eafdb64836cd63deaaa68962a8d92%5E%21/#F1\n\nI account for this here accordingly: https://android-review.googlesource.com/c/kernel/common/+/1493978/1/mm/page_alloc.c#3405\n\nThe commit message already describes the bug-fix, so I think the only outstanding thing here is to include a link to LKML.",
+      "parentUuid": "42f2cee1_05c8f692",
+      "revId": "69d71672e0248cd325793646d5cae5c723be55e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
