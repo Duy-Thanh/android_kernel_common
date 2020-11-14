@@ -138,6 +138,24 @@
       "parentUuid": "acc26e07_e77567f5",
       "revId": "c8ec751f483f8d0ab44d51cf64f43606b172b6eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f394adca_f83eb714",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2020-11-14T10:51:05Z",
+      "side": 1,
+      "message": "Hello, Thanks for reply.\n\nThis feature is only for checking Cache data with kernel log. We had trouble with not reliable dram system. So, we use this function in die notifier only.\n\nWe want this api in debugging module only.",
+      "parentUuid": "57d464cf_2bf0d0d9",
+      "revId": "c8ec751f483f8d0ab44d51cf64f43606b172b6eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
