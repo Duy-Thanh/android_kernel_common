@@ -1,0 +1,160 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006151839",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1499386?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "89312757_7c5f1eae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-11-14T15:30:14Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027they\u0027, \u0027them\u0027, or \u0027person\u0027; see https://developers.google.com/style/word-list#gender for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 9,
+        "startChar": 39,
+        "endLine": 9,
+        "endChar": 43
+      },
+      "revId": "05f0c99de84cc057d8cf7be1d142de3bd810a796",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006151839",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1499386?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "3e3dda51_9beb2c65",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-11-14T15:30:14Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027they\u0027, \u0027them\u0027, or \u0027person\u0027; see https://developers.google.com/style/word-list#gender for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 10,
+        "startChar": 57,
+        "endLine": 10,
+        "endChar": 61
+      },
+      "revId": "05f0c99de84cc057d8cf7be1d142de3bd810a796",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006151839",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1499386?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "9f04effe_8a1d0ace",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-11-14T15:30:14Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027they\u0027, \u0027them\u0027, or \u0027person\u0027; see https://developers.google.com/style/word-list#gender for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 12,
+        "startChar": 41,
+        "endLine": 12,
+        "endChar": 45
+      },
+      "revId": "05f0c99de84cc057d8cf7be1d142de3bd810a796",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006151839",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1499386?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "7cbcb579_1d535179",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-11-14T15:30:14Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027they\u0027, \u0027them\u0027, or \u0027person\u0027; see https://developers.google.com/style/word-list#gender for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 23,
+        "startChar": 35,
+        "endLine": 23,
+        "endChar": 39
+      },
+      "revId": "05f0c99de84cc057d8cf7be1d142de3bd810a796",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006151839",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1499386?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e537b448_130860e8",
+        "filename": "net/mac80211/mesh.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-11-14T15:30:14Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027they\u0027, \u0027them\u0027, or \u0027person\u0027; see https://developers.google.com/style/word-list#gender for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 602,
+        "startChar": 30,
+        "endLine": 602,
+        "endChar": 34
+      },
+      "revId": "05f0c99de84cc057d8cf7be1d142de3bd810a796",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006151839",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1499386?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "b4f81f9a_c52c40c8",
+        "filename": "net/mac80211/util.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2848,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-11-14T15:30:14Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027they\u0027, \u0027them\u0027, or \u0027person\u0027; see https://developers.google.com/style/word-list#gender for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 2848,
+        "startChar": 20,
+        "endLine": 2848,
+        "endChar": 24
+      },
+      "revId": "05f0c99de84cc057d8cf7be1d142de3bd810a796",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
