@@ -156,6 +156,24 @@
       "parentUuid": "57d464cf_2bf0d0d9",
       "revId": "c8ec751f483f8d0ab44d51cf64f43606b172b6eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c45352b5_3f7f47ab",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-14T12:30:08Z",
+      "side": 1,
+      "message": "There is no \"debug mode\" for GKI1, that\u0027s not needed at all for anything.  So I don\u0027t think this is required for your systems.  Do debugging with your own kernel image and modules, no need for GKI 1 for that.\n\nAnd do you have a link to the source for the code that uses this symbol?  Perhaps it can use something else instead, as this is a very odd symbol to be needed.",
+      "parentUuid": "f394adca_f83eb714",
+      "revId": "c8ec751f483f8d0ab44d51cf64f43606b172b6eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
