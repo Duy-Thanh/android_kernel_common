@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52403224_e73d4e7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1697971
+      },
+      "writtenOn": "2020-11-16T09:54:44Z",
+      "side": 1,
+      "message": "I was able to test this patch using the kernel test robot setup used upstream, and the error described no longer occurs.  However, there are occasional soft-lockups during boot, and I think this is because we\u0027re missing a PCP list for ZONE_MOVABLE (leading to increased allocation times).  Let me create a follow-up patch to add a ZONE_MOVABLE PCP list.",
+      "revId": "9a765b016c3848f59b624da7859eccfec858d482",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
