@@ -16,6 +16,29 @@
       "message": "Holding this patch for now to assess if one of the trace points is sufficient.",
       "revId": "312ee9e120820613959264b446b492a980591496",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "805f4eca_95bc7f22",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-16T19:39:01Z",
+      "side": 1,
+      "message": "shouldn\u0027t all of these be a restricted hook?",
+      "range": {
+        "startLine": 74,
+        "startChar": 37,
+        "endLine": 74,
+        "endChar": 39
+      },
+      "revId": "312ee9e120820613959264b446b492a980591496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
