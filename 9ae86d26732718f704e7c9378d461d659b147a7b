@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7250f751_4354bbbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2020-11-16T07:38:04Z",
+      "side": 1,
+      "message": "Okay. I\u0027ll re-submit this as 2 patches.",
+      "parentUuid": "ad49de6b_adafe85f",
+      "revId": "9ae86d26732718f704e7c9378d461d659b147a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88912e15_75020716",
         "filename": "android/abi_gki_aarch64_exynosauto",
         "patchSetId": 1
