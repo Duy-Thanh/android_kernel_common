@@ -57,6 +57,30 @@
       },
       "revId": "9ae86d26732718f704e7c9378d461d659b147a7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29829094_7cf17cde",
+        "filename": "android/abi_gki_aarch64_exynosauto",
+        "patchSetId": 1
+      },
+      "lineNbr": 1219,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2020-11-16T07:55:21Z",
+      "side": 1,
+      "message": "Camera driver needs to save which apps(PID) request the camera stream. So, the driver stores the pid_nr value by using pid_vnr API.",
+      "parentUuid": "88912e15_75020716",
+      "range": {
+        "startLine": 1219,
+        "startChar": 2,
+        "endLine": 1219,
+        "endChar": 9
+      },
+      "revId": "9ae86d26732718f704e7c9378d461d659b147a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
