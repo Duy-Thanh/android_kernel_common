@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad49de6b_adafe85f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-16T07:16:32Z",
+      "side": 1,
+      "message": "Can you resubmit this as 2 patches, one that just adds symbols that are already in the .xml file, and one that adds the new ones?  That makes it much easier to take the first one, which is the majority of the changes here, and then we can discuss the new symbols easier?",
+      "revId": "9ae86d26732718f704e7c9378d461d659b147a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88912e15_75020716",
+        "filename": "android/abi_gki_aarch64_exynosauto",
+        "patchSetId": 1
+      },
+      "lineNbr": 1219,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-16T07:16:32Z",
+      "side": 1,
+      "message": "drivers should not need to call this, what does this driver do?",
+      "range": {
+        "startLine": 1219,
+        "startChar": 2,
+        "endLine": 1219,
+        "endChar": 9
+      },
+      "revId": "9ae86d26732718f704e7c9378d461d659b147a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
