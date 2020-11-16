@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0e10bc4_39396c54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2020-11-16T08:08:41Z",
+      "side": 1,
+      "message": "I\u0027ve divided this patch below two patches.\nhttps://android-review.googlesource.com/c/kernel/common/+/1499630\nhttps://android-review.googlesource.com/c/kernel/common/+/1499631",
+      "parentUuid": "7250f751_4354bbbf",
+      "revId": "9ae86d26732718f704e7c9378d461d659b147a7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88912e15_75020716",
