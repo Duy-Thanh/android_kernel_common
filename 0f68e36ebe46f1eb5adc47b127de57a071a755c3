@@ -46,6 +46,30 @@
       },
       "revId": "0f68e36ebe46f1eb5adc47b127de57a071a755c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de14fdfd_c3171d25",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2018,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-11-17T18:59:40Z",
+      "side": 0,
+      "message": "The sched side is fine, but yeah, not too sure about the mm stuff. Let\u0027s stick with Pavan\u0027s proposal.",
+      "parentUuid": "5988cf21_50df19e4",
+      "range": {
+        "startLine": 2018,
+        "startChar": 0,
+        "endLine": 2018,
+        "endChar": 28
+      },
+      "revId": "0f68e36ebe46f1eb5adc47b127de57a071a755c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
