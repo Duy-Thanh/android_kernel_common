@@ -22,6 +22,30 @@
       },
       "revId": "4443a706d39cbd3f22d36621cb698194389d6b2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2478f5d1_cd0b8abe",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2020-11-17T10:05:22Z",
+      "side": 1,
+      "message": "do we update policy of a task when it is made RT due to RT mutex? I think not.\n\nWe use rq-\u003ecurr-\u003esched_class \u003d\u003d \u0026fair_sched_class like check and do migrations.",
+      "parentUuid": "ac4bc08b_c7894416",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 36
+      },
+      "revId": "4443a706d39cbd3f22d36621cb698194389d6b2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
