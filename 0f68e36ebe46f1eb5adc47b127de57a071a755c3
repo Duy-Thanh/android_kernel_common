@@ -22,6 +22,30 @@
       },
       "revId": "0f68e36ebe46f1eb5adc47b127de57a071a755c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5988cf21_50df19e4",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2018,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-11-17T16:51:33Z",
+      "side": 0,
+      "message": "Hmm, that turns on a lot of stuff in sched and mm -- do we know that it is harmless?",
+      "parentUuid": "df56a2e6_9f9c6da3",
+      "range": {
+        "startLine": 2018,
+        "startChar": 0,
+        "endLine": 2018,
+        "endChar": 28
+      },
+      "revId": "0f68e36ebe46f1eb5adc47b127de57a071a755c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
