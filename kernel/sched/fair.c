@@ -254,6 +254,7 @@ static u64 __calc_delta(u64 delta_exec, unsigned long weight, struct load_weight
 
 
 const struct sched_class fair_sched_class;
+EXPORT_SYMBOL_GPL(fair_sched_class);
 
 /**************************************************************
  * CFS operations on generic schedulable entities:
