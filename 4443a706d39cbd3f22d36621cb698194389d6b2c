@@ -46,6 +46,30 @@
       },
       "revId": "4443a706d39cbd3f22d36621cb698194389d6b2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68f50072_f493d2d1",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-11-17T10:23:29Z",
+      "side": 1,
+      "message": "Ah, so that\u0027s what you\u0027re worried about. I\u0027m guessing looking at p-\u003eprio should work then? That is a task is fair if p-\u003eprio \u003e\u003d MAX_RT_PRIO I think.",
+      "parentUuid": "2478f5d1_cd0b8abe",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 36
+      },
+      "revId": "4443a706d39cbd3f22d36621cb698194389d6b2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
