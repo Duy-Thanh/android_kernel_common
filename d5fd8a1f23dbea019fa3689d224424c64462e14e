@@ -81,6 +81,30 @@
       },
       "revId": "d5fd8a1f23dbea019fa3689d224424c64462e14e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "542c8cd3_d4bc5543",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-17T08:42:40Z",
+      "side": 1,
+      "message": "Yes, it\u0027s a per-cpu symbol, why wouldn\u0027t you export it properly?  😊\nTo not do so is to only cause problems.",
+      "parentUuid": "50789f8d_9840baa0",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 29
+      },
+      "revId": "d5fd8a1f23dbea019fa3689d224424c64462e14e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
