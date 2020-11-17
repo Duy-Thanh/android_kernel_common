@@ -16,6 +16,24 @@
       "message": "Please always test your patches before submitting them to ensure that they work properly for you :(\n",
       "revId": "d5fd8a1f23dbea019fa3689d224424c64462e14e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8901382b_d7287ab7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2020-11-17T07:19:32Z",
+      "side": 1,
+      "message": "Thanks for the feedback. I have tested this patch our vendor module on a different kernel and uploaded it on android-mainline tip as of today. please let me know if I miss anything here. Thanks.",
+      "parentUuid": "149a8711_6773b42b",
+      "revId": "d5fd8a1f23dbea019fa3689d224424c64462e14e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
