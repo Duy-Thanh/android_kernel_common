@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac4bc08b_c7894416",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-11-17T09:22:49Z",
+      "side": 1,
+      "message": "Would fair_policy() work instead?",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 36
+      },
+      "revId": "4443a706d39cbd3f22d36621cb698194389d6b2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
