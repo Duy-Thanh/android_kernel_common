@@ -1736,13 +1736,8 @@ static int find_lowest_rq(struct task_struct *task)
 	struct sched_domain *sd;
 	struct cpumask *lowest_mask = this_cpu_cpumask_var_ptr(local_cpu_mask);
 	int this_cpu = smp_processor_id();
-	int cpu      = task_cpu(task);
+	int cpu      = -1;
 	int ret;
-	int lowest_cpu = -1;
-
-	trace_android_rvh_find_lowest_rq(task, lowest_mask, &lowest_cpu);
-	if (lowest_cpu >= 0)
-		return lowest_cpu;
 
 	/* Make sure the mask is initialized first */
 	if (unlikely(!lowest_mask))
@@ -1768,6 +1763,10 @@ static int find_lowest_rq(struct task_struct *task)
 
 	if (!ret)
 		return -1; /* No targets found */
+
+	trace_android_rvh_find_lowest_rq(task, lowest_mask, &cpu);
+	if (cpu == -1)
+		cpu = task_cpu(task);
 
 	/*
 	 * At this point we have built a mask of CPUs representing the
