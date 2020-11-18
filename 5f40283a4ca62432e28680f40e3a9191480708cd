@@ -50,6 +50,23 @@
       "message": "Wait, this is already in 5.4.62, why is this needed again?",
       "revId": "5f40283a4ca62432e28680f40e3a9191480708cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ce15d71_929c3993",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-18T13:28:59Z",
+      "side": 1,
+      "message": "Ah, we are \"stuck\" on 5.4.61 right now, that makes sense...\n\nIf you want me to correctly backport this (with the needed UPSTREAM: subject line and correct signed-off-by lines), please let me know and I will be glad to do so.",
+      "revId": "5f40283a4ca62432e28680f40e3a9191480708cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
