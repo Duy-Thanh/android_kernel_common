@@ -52,6 +52,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd65ed34_473ca4bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-18T11:22:04Z",
+      "side": 1,
+      "message": "Please redo this patch to just have the additional pci symbol added, no .xml file change is needed for that, right?",
+      "revId": "c8ec751f483f8d0ab44d51cf64f43606b172b6eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e78584b_2c74d451",
