@@ -16,6 +16,23 @@
       "message": "Our device will trigger BUG when using Google\u0027s boot. We found a Linux mainline patch not in Google\u0027s android11-5.4 kernel.\nSo, we want to backport this patch for GKI. Patch is https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/commit/block/blk-merge.c?h\u003dv5.4.77\u0026id\u003df09dbec9c0c68f354eef157c0fe7aa1c6704ecd2\n\n[    4.668610] ------------[ cut here ]------------\n[    4.668615] kernel BUG at block/bio.c:1900!\n[    4.668621] Internal error: Oops - BUG: 0 [#1] PREEMPT SMP\n[    4.668720] pstate: 60c00005 (nZCv daif +PAN +UAO)\n[    4.668728] pc : bio_split+0xa4/0xac\n[    4.668735] lr : __blk_queue_split+0x374/0x4e8",
       "revId": "5f40283a4ca62432e28680f40e3a9191480708cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc89afe3_19cd2aa6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-18T13:27:27Z",
+      "side": 1,
+      "message": "Please properly use the correct way to backport a patch.\n\nOr better yet, ask for this to be backported to all stable kernels to get automatically included everywhere it is needed.",
+      "revId": "5f40283a4ca62432e28680f40e3a9191480708cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
