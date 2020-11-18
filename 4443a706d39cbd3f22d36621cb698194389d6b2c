@@ -141,6 +141,30 @@
       },
       "revId": "4443a706d39cbd3f22d36621cb698194389d6b2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b01312dd_85ad4629",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2020-11-18T05:49:38Z",
+      "side": 1,
+      "message": "idle task prio is also 120 :-) so I have to guard against that..",
+      "parentUuid": "42f6a6fb_732bad02",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 36
+      },
+      "revId": "4443a706d39cbd3f22d36621cb698194389d6b2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
