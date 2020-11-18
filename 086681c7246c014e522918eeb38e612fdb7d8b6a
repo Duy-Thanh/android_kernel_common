@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc7dcfe3_b8820523",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-11-18T19:20:15Z",
+      "side": 1,
+      "message": "Please add this part to the regular cuttlefish/goldfish/virtual-device fragments:\n\n\u003e CONFIG_BT_HCIBTUSB\u003dm\n\u003e # CONFIG_BT_HCIBTUSB_RTL is not set\n\nOtherwise, LGTM",
+      "revId": "086681c7246c014e522918eeb38e612fdb7d8b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
