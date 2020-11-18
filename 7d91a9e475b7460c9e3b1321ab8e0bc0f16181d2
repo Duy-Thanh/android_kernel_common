@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca7277a2_5249a98d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-11-18T15:57:38Z",
+      "side": 1,
+      "message": "This change is not mentioned in the bug. How does it relate?",
+      "revId": "7d91a9e475b7460c9e3b1321ab8e0bc0f16181d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b729e5c_b399217b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-11-18T15:57:38Z",
+      "side": 1,
+      "message": "jian-min and Bumgyu- please give this a +1 if you are ok with moving this hook\n",
+      "revId": "7d91a9e475b7460c9e3b1321ab8e0bc0f16181d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
