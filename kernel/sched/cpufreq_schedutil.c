@@ -9,6 +9,7 @@
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include "sched.h"
+#include <trace/hooks/sched.h>
 
 #include <linux/sched/cpufreq.h>
 #include <trace/events/power.h>
@@ -283,9 +284,14 @@ static unsigned long sugov_get_util(struct sugov_cpu *sg_cpu)
 	struct rq *rq = cpu_rq(sg_cpu->cpu);
 	unsigned long util = cpu_util_cfs(rq);
 	unsigned long max = arch_scale_cpu_capacity(sg_cpu->cpu);
+	int ret = -1;
 
 	sg_cpu->max = max;
 	sg_cpu->bw_dl = cpu_bw_dl(rq);
+
+	trace_android_rvh_sugov_get_util(&sg_cpu, &util, &ret);
+	if (ret)
+		return util;
 
 	return schedutil_cpu_util(sg_cpu->cpu, util, max, FREQUENCY_UTIL, NULL);
 }

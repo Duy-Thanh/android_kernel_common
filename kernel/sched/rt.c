@@ -1385,6 +1385,8 @@ enqueue_task_rt(struct rq *rq, struct task_struct *p, int flags)
 
 	enqueue_rt_entity(rt_se, flags);
 
+	trace_android_rvh_enqueue_task_rt(rq, p);
+
 	if (!task_current(rq, p) && p->nr_cpus_allowed > 1)
 		enqueue_pushable_task(rq, p);
 }
@@ -1395,6 +1397,8 @@ static void dequeue_task_rt(struct rq *rq, struct task_struct *p, int flags)
 
 	update_curr_rt(rq);
 	dequeue_rt_entity(rt_se, flags);
+
+	trace_android_rvh_dequeue_task_rt(rq, p);
 
 	dequeue_pushable_task(rq, p);
 }
