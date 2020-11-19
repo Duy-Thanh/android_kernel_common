@@ -16,6 +16,24 @@
       "message": "Eric, should drivers be using this function as it is not upstream?",
       "revId": "274fdbe87ff31b3650f9293edba2ce0ac2dc3a11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ab5514a_719194f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-11-19T18:12:19Z",
+      "side": 1,
+      "message": "Yes, drivers need bio_crypt_should_process() in the android11 kernels because the android11 kernels haven\u0027t been updated to the version of the inline encryption patches that got upstreamed.  I have no idea why it wasn\u0027t in the QC symbol list already.",
+      "parentUuid": "d8d8a00d_8221a71e",
+      "revId": "274fdbe87ff31b3650f9293edba2ce0ac2dc3a11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
