@@ -69,6 +69,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c20e19b_8ff7997b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2020-11-19T00:56:10Z",
+      "side": 1,
+      "message": "Yes, I\u0027m going to upload it.\npci_find_ext_capability are used with many other vendors.",
+      "parentUuid": "dd65ed34_473ca4bf",
+      "revId": "c8ec751f483f8d0ab44d51cf64f43606b172b6eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e78584b_2c74d451",
