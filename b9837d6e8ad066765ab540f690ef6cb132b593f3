@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "386b454a_a555f47c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1800120
+      },
+      "writtenOn": "2020-11-19T06:31:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87f20629_7f46723d",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 16
+      },
+      "revId": "b9837d6e8ad066765ab540f690ef6cb132b593f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64c951e3_556933e1",
@@ -37,6 +61,30 @@
       "writtenOn": "2020-11-13T12:34:51Z",
       "side": 1,
       "message": "please make this the same change id across all branches.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 52
+      },
+      "revId": "b9837d6e8ad066765ab540f690ef6cb132b593f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "155d866a_bd930752",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1800120
+      },
+      "writtenOn": "2020-11-19T06:31:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64c951e3_556933e1",
       "range": {
         "startLine": 19,
         "startChar": 0,
