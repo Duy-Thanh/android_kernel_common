@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf66a8be_637e69b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2020-11-19T00:58:43Z",
+      "side": 1,
+      "message": "Remove: probe_kernel_read\nMaintain: pci_find_ext_capability\n\nPlease review it. Thanks.",
+      "revId": "9d01251cef33511f5c6177f23fca73b27e4558e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
