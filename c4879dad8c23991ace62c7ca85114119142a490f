@@ -51,6 +51,24 @@
       "parentUuid": "3b4c7cf3_27a0aeaa",
       "revId": "c4879dad8c23991ace62c7ca85114119142a490f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c458629f_361e1315",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-11-19T16:22:13Z",
+      "side": 1,
+      "message": "Bumgyu, can you explain why moving the hook after the error checks will cause problems for you? If it really does, then we won\u0027t move it, but we need some rationale.",
+      "parentUuid": "f88e4147_850434fa",
+      "revId": "c4879dad8c23991ace62c7ca85114119142a490f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
