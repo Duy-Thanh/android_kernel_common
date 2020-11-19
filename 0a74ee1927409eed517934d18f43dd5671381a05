@@ -22,6 +22,47 @@
       },
       "revId": "0a74ee1927409eed517934d18f43dd5671381a05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8924673_6cf50687",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1800120
+      },
+      "writtenOn": "2020-11-19T06:24:52Z",
+      "side": 1,
+      "message": "done. Please check at https://android-review.googlesource.com/c/kernel/common/+/1504613",
+      "parentUuid": "9bb800f3_d63ccf10",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 50
+      },
+      "revId": "0a74ee1927409eed517934d18f43dd5671381a05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fc2be69_96a4f7f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1800120
+      },
+      "writtenOn": "2020-11-19T06:24:52Z",
+      "side": 1,
+      "message": "done. Please check at https://android-review.googlesource.com/c/kernel/common/+/1504613 ",
+      "revId": "0a74ee1927409eed517934d18f43dd5671381a05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
