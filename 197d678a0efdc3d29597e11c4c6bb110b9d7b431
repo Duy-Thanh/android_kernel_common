@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006266479",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1505284?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "8d00841c_d2ed649d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-11-19T16:03:00Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Paul Lawrence \u003cpaullawrence@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 343082357 android-build.ayeaye-python-dispatcher_20201118.05_p0",
+      "revId": "197d678a0efdc3d29597e11c4c6bb110b9d7b431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006266479",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1505284?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e9cbc875_6d3c9600",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-11-19T16:03:00Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a properly formatted Bug: or Fixes: line\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 343082357 android-build.ayeaye-python-dispatcher_20201118.05_p0",
+      "revId": "197d678a0efdc3d29597e11c4c6bb110b9d7b431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
