@@ -16,6 +16,41 @@
       "message": "The existing vendor hook is for rt scheduling completely by the vendor scheduler. If modified with this patch, there is a possibility that scheduling may be different from the intention of the vendor scheduler.",
       "revId": "c4879dad8c23991ace62c7ca85114119142a490f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5eff730_0fbc337e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006514
+      },
+      "writtenOn": "2020-11-19T03:43:43Z",
+      "side": 1,
+      "message": "Hello Todd/Quentin,\n\nCan you help cross check once as well? If this patch can\u0027t be accepted, we may need to export cpupri_find_fitness() \u0026 cpupri_find() which I would like to avoid.\n\nBest,\nSatya",
+      "revId": "c4879dad8c23991ace62c7ca85114119142a490f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f88e4147_850434fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006514
+      },
+      "writtenOn": "2020-11-19T03:43:43Z",
+      "side": 1,
+      "message": "Hello Bumgyu,\n\nAs mentioned in the commit text, right now vendor hook is called before error checks and most importantly before cpupri_find_fitness()/cpupri_find(). If we don\u0027t move the invocation of hook (don in this patch), vendor hook needs to do error checks and also need to call cpupri_find_fitness()/cpupri_find() which weren\u0027t even exported. I don\u0027t see any reason why we want vendor hooks to deal with such things when we can safely call the hook later which shouldn\u0027t break anything.\n\nPlease let me know if I missed anything. \n\nBest,\nSatya",
+      "parentUuid": "3b4c7cf3_27a0aeaa",
+      "revId": "c4879dad8c23991ace62c7ca85114119142a490f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
