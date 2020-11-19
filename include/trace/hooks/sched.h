@@ -66,6 +66,71 @@ DECLARE_RESTRICTED_HOOK(android_rvh_setscheduler,
 	TP_PROTO(struct task_struct *p),
 	TP_ARGS(p), 1);
 
+DECLARE_RESTRICTED_HOOK(android_rvh_set_task_cpu,
+	TP_PROTO(struct task_struct *p, unsigned int new_cpu),
+	TP_ARGS(p, new_cpu), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_try_to_wake_up,
+	TP_PROTO(struct task_struct *p),
+	TP_ARGS(p), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_try_to_wake_up_out,
+	TP_PROTO(int sucess, int cpu, unsigned long flags),
+	TP_ARGS(sucess, cpu, flags), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_sched_fork,
+	TP_PROTO(struct task_struct *p),
+	TP_ARGS(p), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_wake_up_new_task,
+	TP_PROTO(struct task_struct *p),
+	TP_ARGS(p), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_new_task_stats,
+	TP_PROTO(struct task_struct *p),
+	TP_ARGS(p), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_flush_task,
+	TP_PROTO(struct task_struct *prev),
+	TP_ARGS(prev), 1);
+
+DECLARE_RESTRICTED_HOOK(android_vh_tick_entry,
+	TP_PROTO(struct rq *rq),
+	TP_ARGS(rq), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_schedule,
+	TP_PROTO(struct task_struct *prev, struct task_struct *next, struct rq *rq),
+	TP_ARGS(prev, next, rq), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_migrate_tasks,
+	TP_PROTO(struct task_struct *next, struct rq *rq, unsigned int *vendor, bool *skip),
+	TP_ARGS(next, rq, vendor, skip), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_migrate_tasks_end,
+	TP_PROTO(struct rq *rq, unsigned int vendor),
+	TP_ARGS(rq, vendor), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_rq_cpu_starting,
+	TP_PROTO(struct rq *rq),
+	TP_ARGS(rq), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_clear_request,
+	TP_PROTO(int cpu),
+	TP_ARGS(cpu), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_account_irq,
+	TP_PROTO(struct task_struct *curr, int cpu, s64 delta),
+	TP_ARGS(curr, cpu, delta), 1);
+
+struct sched_entity;
+DECLARE_RESTRICTED_HOOK(android_rvh_place_entity,
+	TP_PROTO(struct sched_entity *se, u64 vruntime),
+	TP_ARGS(se, vruntime), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_update_cpu_capacity,
+	TP_PROTO(unsigned long *capacity),
+	TP_ARGS(capacity), 1);
+
 struct sched_group;
 DECLARE_RESTRICTED_HOOK(android_rvh_find_busiest_group,
 	TP_PROTO(struct sched_group *busiest, struct rq *dst_rq, int *out_balance),
@@ -115,6 +180,22 @@ DECLARE_RESTRICTED_HOOK(android_rvh_migrate_queued_task,
 #define trace_android_rvh_set_user_nice(p, nice)
 #define trace_android_rvh_setscheduler(p)
 #define trace_android_rvh_find_busiest_group(busiest, dst_rq, out_balance)
+#define trace_android_rvh_set_task_cpu(p, new_cpu)
+#define trace_android_rvh_try_to_wake_up(p)
+#define trace_android_rvh_try_to_wake_up_out(sucess, cpu, flags)
+#define trace_android_rvh_sched_fork(p)
+#define trace_android_rvh_wake_up_new_task(p)
+#define trace_android_rvh_new_task_stats(p)
+#define trace_android_rvh_flush_task(prev)
+#define trace_android_vh_tick_entry(rq)
+#define trace_android_rvh_schedule(prev, next, rq)
+#define trace_android_rvh_migrate_tasks(next, rq, vendor, skip)
+#define trace_android_rvh_migrate_tasks_end(rq, vendor)
+#define trace_android_rvh_rq_cpu_starting(rq)
+#define trace_android_rvh_clear_request(cpu)
+#define trace_android_rvh_account_irq(curr, cpu, delta)
+#define trace_android_rvh_place_entity(se, vruntime)
+#define trace_android_rvh_update_cpu_capacity(capacity)
 #define trace_android_vh_dump_throttled_rt_tasks(cpu, clock, rt_period, rt_runtime, rt_period_timer_expires)
 #define trace_android_vh_jiffies_update(unused)
 #define trace_android_rvh_sched_newidle_balance(this_rq, rf, pulled_task, done)

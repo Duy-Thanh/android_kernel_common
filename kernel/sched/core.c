@@ -2023,6 +2023,7 @@ void set_task_cpu(struct task_struct *p, unsigned int new_cpu)
 		p->se.nr_migrations++;
 		rseq_migrate(p);
 		perf_event_task_migrate(p);
+		trace_android_rvh_set_task_cpu(p, new_cpu);
 	}
 
 	__set_task_cpu(p, new_cpu);
@@ -2993,6 +2994,8 @@ try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 	 */
 	smp_cond_load_acquire(&p->on_cpu, !VAL);
 
+	trace_android_rvh_try_to_wake_up(p);
+
 	cpu = select_task_rq(p, p->wake_cpu, SD_BALANCE_WAKE, wake_flags);
 	if (task_cpu(p) != cpu) {
 		if (p->in_iowait) {
@@ -3012,6 +3015,8 @@ try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 unlock:
 	raw_spin_unlock_irqrestore(&p->pi_lock, flags);
 out:
+	trace_android_rvh_try_to_wake_up_out(sucess, cpu, flags);
+
 	if (success)
 		ttwu_stat(p, task_cpu(p), wake_flags);
 	preempt_enable();
@@ -3257,6 +3262,8 @@ int sched_fork(unsigned long clone_flags, struct task_struct *p)
 {
 	unsigned long flags;
 
+	trace_android_rvh_sched_fork(p);
+
 	__sched_fork(clone_flags, p);
 	/*
 	 * We mark the process as NEW here. This guarantees that
@@ -3370,6 +3377,8 @@ void wake_up_new_task(struct task_struct *p)
 	struct rq_flags rf;
 	struct rq *rq;
 
+	trace_android_rvh_wake_up_new_task(p);
+
 	raw_spin_lock_irqsave(&p->pi_lock, rf.flags);
 	p->state = TASK_RUNNING;
 #ifdef CONFIG_SMP
@@ -3388,6 +3397,7 @@ void wake_up_new_task(struct task_struct *p)
 	rq = __task_rq_lock(p, &rf);
 	update_rq_clock(rq);
 	post_init_entity_util_avg(p);
+	trace_android_rvh_new_task_stats(p);
 
 	activate_task(rq, p, ENQUEUE_NOCLOCK);
 	trace_sched_wakeup_new(p);
@@ -3679,6 +3689,7 @@ static struct rq *finish_task_switch(struct task_struct *prev)
 		 * task and put them back on the free list.
 		 */
 		kprobe_flush_task(prev);
+		trace_android_rvh_flush_task(prev);
 
 		/* Task is done with its stack. */
 		put_task_stack(prev);
@@ -4028,6 +4039,7 @@ void scheduler_tick(void)
 
 	rq_lock(rq, &rf);
 
+	trace_android_vh_tick_entry(rq);
 	update_rq_clock(rq);
 	thermal_pressure = arch_scale_thermal_pressure(cpu_of(rq));
 	update_thermal_load_avg(rq_clock_thermal(rq), rq, thermal_pressure);
@@ -4043,7 +4055,6 @@ void scheduler_tick(void)
 	rq->idle_balance = idle_cpu(cpu);
 	trigger_load_balance(rq);
 #endif
-
 	trace_android_vh_scheduler_tick(rq);
 }
 
@@ -4533,6 +4544,7 @@ static void __sched notrace __schedule(bool preempt)
 	clear_tsk_need_resched(prev);
 	clear_preempt_need_resched();
 
+	trace_android_rvh_schedule(prev, next, rq);
 	if (likely(prev != next)) {
 		rq->nr_switches++;
 		/*
@@ -6772,7 +6784,8 @@ static void migrate_tasks(struct rq *dead_rq, struct rq_flags *rf)
 	struct task_struct *next, *stop = rq->stop;
 	struct rq_flags orf = *rf;
 	int dest_cpu;
-
+	unsigned int vendor = 1;
+	bool skip = false;
 	/*
 	 * Fudge the rq selection such that the below task selection loop
 	 * doesn't get stuck on the currently eligible stop task.
@@ -6801,6 +6814,9 @@ static void migrate_tasks(struct rq *dead_rq, struct rq_flags *rf)
 
 		next = __pick_migrate_task(rq);
 
+		trace_android_rvh_migrate_tasks(next, rq, &vendor, &skip);
+		if (skip)
+			continue;
 		/*
 		 * Rules for changing task_struct::cpus_mask are holding
 		 * both pi_lock and rq->lock, such that holding either
@@ -6837,6 +6853,8 @@ static void migrate_tasks(struct rq *dead_rq, struct rq_flags *rf)
 	}
 
 	rq->stop = stop;
+
+	trace_android_rvh_migrate_tasks_end(rq, vendor);
 }
 EXPORT_SYMBOL_GPL(migrate_tasks);
 
@@ -6998,6 +7016,7 @@ static void sched_rq_cpu_starting(unsigned int cpu)
 {
 	struct rq *rq = cpu_rq(cpu);
 
+	trace_android_rvh_rq_cpu_starting(rq);
 	rq->calc_load_update = calc_load_update;
 	update_max_interval();
 }
@@ -7006,6 +7025,7 @@ int sched_cpu_starting(unsigned int cpu)
 {
 	sched_rq_cpu_starting(cpu);
 	sched_tick_start(cpu);
+	trace_android_rvh_clear_request(cpu);
 	return 0;
 }
 
@@ -7026,6 +7046,8 @@ int sched_cpu_dying(unsigned int cpu)
 	migrate_tasks(rq, &rf);
 	BUG_ON(rq->nr_running != 1);
 	rq_unlock_irqrestore(rq, &rf);
+
+	trace_android_rvh_clear_request(cpu);
 
 	calc_load_migrate(rq);
 	update_max_interval();
