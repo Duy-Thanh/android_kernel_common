@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "139edd92_8c2d62f3",
+        "filename": "project.config",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1086523
+      },
+      "writtenOn": "2020-11-20T20:06:50Z",
+      "side": 0,
+      "message": "This was a regular expression but regular expressions needs a ^ prefix, so I\u0027m removing the $ here.",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 55
+      },
+      "revId": "d5c0285f060919e47829b65ffd799aa91bfda05a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
