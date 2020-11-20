@@ -69,6 +69,24 @@
       "parentUuid": "f88e4147_850434fa",
       "revId": "c4879dad8c23991ace62c7ca85114119142a490f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e00e4c7_9771b979",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1640673
+      },
+      "writtenOn": "2020-11-20T02:32:17Z",
+      "side": 1,
+      "message": "- Samsung specific RT scheduler selects rq regardless lowest_mask. So, if cpu is selected by vendor hook, it should return.\n- For common use, declare lowest_mask as parameter of vendor hook, but it is my mistake to pass the lowest mask that has not been updated.\n- How about moving the calling location of the vendor hook and return handling as below?\n\n@@ -1761,6 +1756,10 @@ static int find_lowest_rq(struct task_struct *task)\n                                  task, lowest_mask);\n        }\n\n+       trace_android_rvh_find_lowest_rq(task, lowest_mask, \u0026cpu);\n+       if (cpu \u003e\u003d 0)\n+               return cpu;\n+\n        if (!ret)\n                return -1; /* No targets found */",
+      "parentUuid": "f88e4147_850434fa",
+      "revId": "c4879dad8c23991ace62c7ca85114119142a490f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
