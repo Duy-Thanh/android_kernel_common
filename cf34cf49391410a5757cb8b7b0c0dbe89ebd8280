@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88ba7a9d_344525df",
+        "filename": "project.config",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2020-11-20T19:58:28Z",
+      "side": 1,
+      "message": "should this be exclusive?",
+      "range": {
+        "startLine": 73,
+        "startChar": 1,
+        "endLine": 73,
+        "endChar": 5
+      },
+      "revId": "cf34cf49391410a5757cb8b7b0c0dbe89ebd8280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
