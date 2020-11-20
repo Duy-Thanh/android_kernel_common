@@ -87,6 +87,24 @@
       "parentUuid": "f88e4147_850434fa",
       "revId": "c4879dad8c23991ace62c7ca85114119142a490f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f1bd093_095022a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006514
+      },
+      "writtenOn": "2020-11-20T04:37:35Z",
+      "side": 1,
+      "message": "Thanks Bumgyu. In that case, I would like to propose extending hook\u0027s signature to also accept ret from cpupri_find() above in args. Vendor hook implementation can deal with ret value and lowest_mask as needed. Please let me know your thoughts, I will update the patch accordingly.",
+      "parentUuid": "6e00e4c7_9771b979",
+      "revId": "c4879dad8c23991ace62c7ca85114119142a490f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
