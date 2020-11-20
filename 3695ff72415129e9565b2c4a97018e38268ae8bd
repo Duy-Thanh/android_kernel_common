@@ -17,6 +17,29 @@
       "parentUuid": "2271ae60_58e372dd",
       "revId": "3695ff72415129e9565b2c4a97018e38268ae8bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b09fc62_5a5112b9",
+        "filename": "drivers/android/binder_alloc.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2020-11-20T02:06:23Z",
+      "side": 1,
+      "message": "out of curiosity, why were these bitfields before? We have 32 bits available here, and 4 types before. This could have been 4 byte-long fields. Wouldn\u0027t that have required fewer instructions to update/read values here?",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 22
+      },
+      "revId": "3695ff72415129e9565b2c4a97018e38268ae8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
