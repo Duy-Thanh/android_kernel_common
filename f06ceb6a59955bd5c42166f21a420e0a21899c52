@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a383a076_1733b57b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-11-23T23:03:16Z",
+      "side": 1,
+      "message": "Since this is a cherry-pick from a different branch, override lint",
+      "revId": "f06ceb6a59955bd5c42166f21a420e0a21899c52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
