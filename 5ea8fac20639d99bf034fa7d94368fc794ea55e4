@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58dca77a_c2ec5191",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-11-23T10:58:31Z",
+      "side": 1,
+      "message": "Hi, Greg\n\nThis change only seems caused the hikey/hikey960 builds failed to boot from the uefi boot firmware.\n\nAnother change as following should be cherry picked as well. \n    5ea8fac20639d99b (\"UPSTREAM: arm64: SW PAN: Update saved ttbr0 value on enter_lazy_tlb\")\n\nI submitted another change for review here for the above commit,\nhttps://android-review.googlesource.com/c/kernel/common/+/1507227\nPlease help to check if there is any problem.\n\nThanks,\nYongqin Liu",
+      "revId": "5ea8fac20639d99bf034fa7d94368fc794ea55e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
