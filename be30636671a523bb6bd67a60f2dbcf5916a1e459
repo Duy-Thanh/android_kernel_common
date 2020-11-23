@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baa4979f_ba785db8",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2883,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-11-23T19:01:33Z",
+      "side": 1,
+      "message": "so this used to call __rmqueue_smallest and not it always returns NULL. Not a problem for rmqueue_bulk since it checks is_migrate_cma but __rmqueue_cma is also called from rmqueue. Is that still ok there?",
+      "range": {
+        "startLine": 2883,
+        "startChar": 1,
+        "endLine": 2883,
+        "endChar": 13
+      },
+      "revId": "be30636671a523bb6bd67a60f2dbcf5916a1e459",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

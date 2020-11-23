@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9b725ca_f9d01347",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2893,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-11-23T19:01:33Z",
+      "side": 0,
+      "message": "This flag was introduces in the previous patch and not being removed here. Could we minimize the churn?",
+      "range": {
+        "startLine": 2893,
+        "startChar": 46,
+        "endLine": 2893,
+        "endChar": 54
+      },
+      "revId": "1127eb0d310f5f8adcedd55c827ed5611f7f1de4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
