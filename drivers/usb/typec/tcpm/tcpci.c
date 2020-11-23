@@ -18,7 +18,10 @@
 
 #include "tcpci.h"
 
-#define PD_RETRY_COUNT 3
+#define	PD_RETRY_COUNT				3
+#define	AUTO_DISCHARGE_DEFAULT_THRESHOLD_MV	3500
+#define	AUTO_DISCHARGE_PD_HEADROOM_MV		850
+#define	AUTO_DISCHARGE_PPS_HEADROOM_MV		1250
 
 struct tcpci {
 	struct device *dev;
@@ -28,6 +31,7 @@ struct tcpci {
 	struct regmap *regmap;
 
 	bool controls_vbus;
+	enum typec_port_type port_type;
 
 	struct tcpc_dev tcpc;
 	struct tcpci_data *data;
@@ -114,13 +118,15 @@ static int tcpci_start_toggling(struct tcpc_dev *tcpc,
 	struct tcpci *tcpci = tcpc_to_tcpci(tcpc);
 	unsigned int reg = TCPC_ROLE_CTRL_DRP;
 
+	tcpci->port_type = port_type;
+
 	if (port_type != TYPEC_PORT_DRP)
 		return -EOPNOTSUPP;
 
 	/* Handle vendor drp toggling */
 	if (tcpci->data->start_drp_toggling) {
 		ret = tcpci->data->start_drp_toggling(tcpci, tcpci->data, cc);
-		if (ret < 0)
+		if (ret < 0 || tcpci->data->override_toggling)
 			return ret;
 	}
 
@@ -174,19 +180,37 @@ static int tcpci_get_cc(struct tcpc_dev *tcpc,
 			enum typec_cc_status *cc1, enum typec_cc_status *cc2)
 {
 	struct tcpci *tcpci = tcpc_to_tcpci(tcpc);
-	unsigned int reg;
+	unsigned int reg, role_control;
 	int ret;
+	bool presenting_rd;
 
+	ret = regmap_read(tcpci->regmap, TCPC_ROLE_CTRL, &role_control);
+	if (ret < 0)
+		return ret;
+
+	/* DRP not set and CC1,CC2 = RD */
+	presenting_rd = (role_control == ((TCPC_ROLE_CTRL_CC_RD <<
+					   TCPC_ROLE_CTRL_CC1_SHIFT) |
+					  (TCPC_ROLE_CTRL_CC_RD <<
+					   TCPC_ROLE_CTRL_CC2_SHIFT)));
 	ret = regmap_read(tcpci->regmap, TCPC_CC_STATUS, &reg);
 	if (ret < 0)
 		return ret;
 
+	dev_info(tcpci->dev,
+		 "TCPM_DEBUG TCPC_CC_STATUS port_type:%#x status:%#x\n",
+		 tcpci->port_type, reg);
+
 	*cc1 = tcpci_to_typec_cc((reg >> TCPC_CC_STATUS_CC1_SHIFT) &
 				 TCPC_CC_STATUS_CC1_MASK,
-				 reg & TCPC_CC_STATUS_TERM);
+				 reg & TCPC_CC_STATUS_TERM ||
+				 tcpci->port_type == TYPEC_PORT_SNK ||
+				 presenting_rd);
 	*cc2 = tcpci_to_typec_cc((reg >> TCPC_CC_STATUS_CC2_SHIFT) &
 				 TCPC_CC_STATUS_CC2_MASK,
-				 reg & TCPC_CC_STATUS_TERM);
+				 reg & TCPC_CC_STATUS_TERM ||
+				 tcpci->port_type == TYPEC_PORT_SNK ||
+				 presenting_rd);
 
 	return 0;
 }
@@ -246,9 +270,16 @@ static int tcpci_set_polarity(struct tcpc_dev *tcpc,
 	if (ret < 0)
 		return ret;
 
-	return regmap_write(tcpci->regmap, TCPC_TCPC_CTRL,
+	ret = regmap_write(tcpci->regmap, TCPC_TCPC_CTRL,
 			   (polarity == TYPEC_POLARITY_CC2) ?
 			   TCPC_TCPC_CTRL_ORIENTATION : 0);
+	if (ret < 0)
+		return ret;
+
+	if (tcpci->data->set_cc_polarity)
+		tcpci->data->set_cc_polarity(tcpci, tcpci->data, polarity);
+
+	return ret;
 }
 
 static int tcpci_set_vconn(struct tcpc_dev *tcpc, bool enable)
@@ -268,10 +299,78 @@ static int tcpci_set_vconn(struct tcpc_dev *tcpc, bool enable)
 				enable ? TCPC_POWER_CTRL_VCONN_ENABLE : 0);
 }
 
+static int tcpci_enable_auto_vbus_discharge(struct tcpc_dev *dev, bool enable)
+{
+	struct tcpci *tcpci = tcpc_to_tcpci(dev);
+	int ret;
+
+	ret = regmap_update_bits(tcpci->regmap, TCPC_POWER_CTRL, TCPC_POWER_CTRL_AUTO_DISCHARGE,
+				 enable ? TCPC_POWER_CTRL_AUTO_DISCHARGE : 0);
+	return ret;
+}
+
+static int tcpci_set_auto_vbus_discharge_threshold(struct tcpc_dev *dev, enum typec_pwr_opmode mode,
+						   bool pps_active, u32 requested_vbus_voltage_mv)
+{
+	struct tcpci *tcpci = tcpc_to_tcpci(dev);
+	unsigned int pwr_ctrl, threshold = 0;
+	int ret;
+
+	/*
+	 * Indicates that vbus is going to go away due PR_SWAP, hard reset etc.
+	 * Do not discharge vbus here.
+	 */
+	if (requested_vbus_voltage_mv == 0)
+		goto write_thresh;
+
+	ret = regmap_read(tcpci->regmap, TCPC_POWER_CTRL, &pwr_ctrl);
+	if (ret < 0)
+		return ret;
+
+	if (pwr_ctrl & TCPC_FAST_ROLE_SWAP_EN) {
+		/* To prevent disconnect when the source is fast role swap is capable. */
+		threshold = AUTO_DISCHARGE_DEFAULT_THRESHOLD_MV;
+	} else if (mode == TYPEC_PWR_MODE_PD) {
+		if (pps_active)
+			threshold = (95 * requested_vbus_voltage_mv / 100) -
+				AUTO_DISCHARGE_PD_HEADROOM_MV;
+		else
+			threshold = (95 * requested_vbus_voltage_mv / 100) -
+				AUTO_DISCHARGE_PPS_HEADROOM_MV;
+	} else {
+		/* 3.5V for non-pd sink */
+		threshold = AUTO_DISCHARGE_DEFAULT_THRESHOLD_MV;
+	}
+
+	threshold = threshold / TCPC_VBUS_SINK_DISCONNECT_THRESH_LSB;
+
+	if (threshold > TCPC_VBUS_SINK_DISCONNECT_THRESH_MAX)
+		return -EINVAL;
+
+write_thresh:
+	return tcpci_write16(tcpci, TCPC_VBUS_SINK_DISCONNECT_THRESH, threshold);
+}
+
+static int tcpci_frs_sourcing_vbus(struct tcpc_dev *dev)
+{
+	struct tcpci *tcpci = tcpc_to_tcpci(dev);
+
+	if (tcpci->data->frs_sourcing_vbus)
+		return tcpci->data->frs_sourcing_vbus(tcpci, tcpci->data);
+
+	return 0;
+}
+
 static int tcpci_enable_frs(struct tcpc_dev *dev, bool enable)
 {
 	struct tcpci *tcpci = tcpc_to_tcpci(dev);
 	int ret;
+
+	if (tcpci->data->enable_frs) {
+		ret = tcpci->data->enable_frs(tcpci, tcpci->data, enable);
+		if (ret < 0)
+			return ret;
+	}
 
 	/* To prevent disconnect during FRS, set disconnect threshold to 3.5V */
 	ret = tcpci_write16(tcpci, TCPC_VBUS_SINK_DISCONNECT_THRESH, enable ? 0 : 0x8c);
@@ -293,7 +392,8 @@ static int tcpci_set_bist_data(struct tcpc_dev *tcpc, bool enable)
 }
 
 static int tcpci_set_roles(struct tcpc_dev *tcpc, bool attached,
-			   enum typec_role role, enum typec_data_role data)
+			   enum typec_role role, enum typec_data_role data,
+			   bool usb_comm_capable)
 {
 	struct tcpci *tcpci = tcpc_to_tcpci(tcpc);
 	unsigned int reg;
@@ -307,6 +407,13 @@ static int tcpci_set_roles(struct tcpc_dev *tcpc, bool attached,
 	ret = regmap_write(tcpci->regmap, TCPC_MSG_HDR_INFO, reg);
 	if (ret < 0)
 		return ret;
+
+	if (tcpci->data->set_roles) {
+		ret = tcpci->data->set_roles(tcpci, tcpci->data, attached, role,
+					     data, usb_comm_capable);
+		if (ret < 0)
+			return ret;
+	}
 
 	return 0;
 }
@@ -332,11 +439,44 @@ static int tcpci_get_vbus(struct tcpc_dev *tcpc)
 	unsigned int reg;
 	int ret;
 
+	if (tcpci->data->get_vbus)
+		return tcpci->data->get_vbus(tcpci, tcpci->data);
+
 	ret = regmap_read(tcpci->regmap, TCPC_POWER_STATUS, &reg);
 	if (ret < 0)
 		return ret;
 
 	return !!(reg & TCPC_POWER_STATUS_VBUS_PRES);
+}
+
+static int tcpci_set_current_limit(struct tcpc_dev *tcpc, u32 max_ma, u32 mv)
+{
+	struct tcpci *tcpci = tcpc_to_tcpci(tcpc);
+	int ret = 0;
+
+	if (tcpci->data->set_current_limit)
+		ret = tcpci->data->set_current_limit(tcpci, tcpci->data, max_ma,
+						     mv);
+
+	return ret;
+}
+
+static void tcpci_set_pd_capable(struct tcpc_dev *tcpc, bool capable)
+{
+	struct tcpci *tcpci = tcpc_to_tcpci(tcpc);
+
+	if (tcpci->data->set_pd_capable)
+		tcpci->data->set_pd_capable(tcpci, tcpci->data, capable);
+}
+
+static int tcpci_check_contaminant(struct tcpc_dev *tcpc)
+{
+	struct tcpci *tcpci = tcpc_to_tcpci(tcpc);
+
+	if (tcpci->data->check_contaminant)
+		return tcpci->data->check_contaminant(tcpci, tcpci->data);
+
+	return 0;
 }
 
 static int tcpci_set_vbus(struct tcpc_dev *tcpc, bool source, bool sink)
@@ -601,6 +741,21 @@ static int tcpci_parse_config(struct tcpci *tcpci)
 	return 0;
 }
 
+void tcpci_auto_discharge_update(struct tcpci *tcpci)
+{
+	if (!tcpci || !tcpci->data)
+		return;
+	if (tcpci->data->auto_discharge_disconnect) {
+		tcpci->tcpc.enable_auto_vbus_discharge = tcpci_enable_auto_vbus_discharge;
+		tcpci->tcpc.set_auto_vbus_discharge_threshold =
+			tcpci_set_auto_vbus_discharge_threshold;
+	} else {
+		tcpci->tcpc.enable_auto_vbus_discharge = NULL;
+		tcpci->tcpc.set_auto_vbus_discharge_threshold = NULL;
+	}
+}
+EXPORT_SYMBOL_GPL(tcpci_auto_discharge_update);
+
 struct tcpci *tcpci_register_port(struct device *dev, struct tcpci_data *data)
 {
 	struct tcpci *tcpci;
@@ -627,6 +782,10 @@ struct tcpci *tcpci_register_port(struct device *dev, struct tcpci_data *data)
 	tcpci->tcpc.set_roles = tcpci_set_roles;
 	tcpci->tcpc.pd_transmit = tcpci_pd_transmit;
 	tcpci->tcpc.set_bist_data = tcpci_set_bist_data;
+	tcpci->tcpc.set_current_limit =  tcpci_set_current_limit;
+	tcpci->tcpc.set_pd_capable = tcpci_set_pd_capable;
+	tcpci->tcpc.frs_sourcing_vbus = tcpci_frs_sourcing_vbus;
+	tcpci->tcpc.check_contaminant = tcpci_check_contaminant;
 	tcpci->tcpc.enable_frs = tcpci_enable_frs;
 
 	err = tcpci_parse_config(tcpci);
@@ -640,6 +799,15 @@ struct tcpci *tcpci_register_port(struct device *dev, struct tcpci_data *data)
 	return tcpci;
 }
 EXPORT_SYMBOL_GPL(tcpci_register_port);
+
+bool tcpci_is_debouncing(struct tcpci *tcpci)
+{
+	if (tcpci && tcpci->port)
+		return tcpm_is_debouncing(tcpci->port);
+
+	return false;
+}
+EXPORT_SYMBOL_GPL(tcpci_is_debouncing);
 
 void tcpci_unregister_port(struct tcpci *tcpci)
 {
