@@ -46,6 +46,30 @@
       },
       "revId": "1127eb0d310f5f8adcedd55c827ed5611f7f1de4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b61d0eb_f8074a00",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2893,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-11-24T04:16:08Z",
+      "side": 0,
+      "message": "Sorry, I meant \"This flag was introduced in the previous patch and is being removed here. Could we minimize the churn?\". Looking closer, maybe it\u0027s done to keep these patches functionally independent. In that case it would be reasonable to have them the way they are now.",
+      "parentUuid": "58f1c4ac_4e53c527",
+      "range": {
+        "startLine": 2893,
+        "startChar": 46,
+        "endLine": 2893,
+        "endChar": 54
+      },
+      "revId": "1127eb0d310f5f8adcedd55c827ed5611f7f1de4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
