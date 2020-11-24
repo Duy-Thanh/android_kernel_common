@@ -82,11 +82,11 @@ enum tcpm_transmit_type {
  *		automatically if a connection is established.
  * @try_role:	Optional; called to set a preferred role
  * @pd_transmit:Called to transmit PD message
- * @set_pd_capable:
- *		Optional; Called to notify that pd capable partner has been
- *		detected.
- * @mux:	Pointer to multiplexer data
  * @set_bist_data: Turn on/off bist data mode for compliance testing
+ * @enable_frs:
+ *		Optional; Called to enable/disable PD 3.0 fast role swap.
+ *		Enabling frs is accessory dependent as not all PD3.0
+ *		accessories support fast role swap.
  * @check_contaminant:
  *		Optional; The callback is called when CC pins report open status
  *		at the end of the toggling period. Chip level drivers are
@@ -95,10 +95,9 @@ enum tcpm_transmit_type {
  *		restart toggling after checking the connector for contaminant.
  *		This forces the TCPM state machine to tranistion to TOGGLING state
  *		without calling start_toggling callback.
- * @enable_frs:
- *		Optional; Called to enable/disable PD 3.0 fast role swap.
- *		Enabling frs is accessory dependent as not all PD3.0
- *		accessories support fast role swap.
+ * @set_pd_capable:
+ *		Optional; Called to notify that pd capable partner has been
+ *		detected.
  * @frs_sourcing_vbus:
  *		Optional; Called to notify the low level chip drivers that
  *		sink frs operation is complete. The low level drivers can
@@ -141,9 +140,9 @@ struct tcpc_dev {
 	int (*pd_transmit)(struct tcpc_dev *dev, enum tcpm_transmit_type type,
 			   const struct pd_message *msg);
 	int (*set_bist_data)(struct tcpc_dev *dev, bool on);
+	int (*enable_frs)(struct tcpc_dev *dev, bool enable);
 	int (*check_contaminant)(struct tcpc_dev *dev);
 	void (*set_pd_capable)(struct tcpc_dev *dev, bool capable);
-	int (*enable_frs)(struct tcpc_dev *dev, bool enable);
 	int (*frs_sourcing_vbus)(struct tcpc_dev *dev);
 	int (*enable_auto_vbus_discharge)(struct tcpc_dev *dev, bool enable);
 	int (*set_auto_vbus_discharge_threshold)(struct tcpc_dev *dev, enum typec_pwr_opmode mode,
