@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006361938",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1509849?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5e2a0424_ee41475d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-11-24T16:46:33Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a properly formatted Bug: or Fixes: line\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 343299204 android-build.ayeaye-python-dispatcher_20201119.05_p0",
+      "revId": "707700903a2689dd3a6879e0794093c2fc63e096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006361938",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1509849?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "2fcfd4ab_97ca41d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-11-24T16:46:33Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Alistair Delva \u003cadelva@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 343299204 android-build.ayeaye-python-dispatcher_20201119.05_p0",
+      "revId": "707700903a2689dd3a6879e0794093c2fc63e096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
