@@ -22,6 +22,30 @@
       },
       "revId": "f27fd72564fda12a21a4629877ac9b2309c8d66f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aef8e51b_61467a80",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1697971
+      },
+      "writtenOn": "2020-11-24T01:56:05Z",
+      "side": 1,
+      "message": "I forgot to test that - the end result is that trace_android_rvh_set_gfp_zone_flags and co are treated as object-like macros and not function-like macros since no (...) follows their definition.  So, when CONFIG_ANDROID_VENDOR_HOOKS isn\u0027t defined,\n\ntrace_android_rvh_set_gfp_zone_flags(\u0026local_flags);\n\nBecomes\n\n(\u0026local_flags);\n\nWhich gives:\n\n/ack/common/mm/mmzone.c:124:39: warning: expression result unused [-Wunused-value]\n        trace_android_rvh_set_gfp_zone_flags(\u0026local_flags);\n\nI\u0027ll add arguments accordingly.",
+      "parentUuid": "192ecc7c_b829f74b",
+      "range": {
+        "startLine": 29,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 50
+      },
+      "revId": "f27fd72564fda12a21a4629877ac9b2309c8d66f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
