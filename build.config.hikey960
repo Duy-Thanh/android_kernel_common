@@ -5,6 +5,8 @@ DEFCONFIG=hikey960_gki_defconfig
 PRE_DEFCONFIG_CMDS="cat ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/gki_defconfig ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/hikey960_gki.fragment > ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG};"
 POST_DEFCONFIG_CMDS="rm ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG}"
 
+DIST_CMDS="rm -f \${DIST_DIR}/Image.gz-dtb; cat \${DIST_DIR}/Image.gz \${DIST_DIR}/hi3660-hikey960.dtb >\${DIST_DIR}/Image.gz-dtb"
+
 EXT_MODULES="
 hikey-modules/midgard
 "
