@@ -105,6 +105,11 @@ DECLARE_RESTRICTED_HOOK(android_rvh_update_cpus_allowed,
 	TP_PROTO(struct cpuset *cs, struct task_struct *p,
 		 const struct cpumask *new_mask, int *ret);
 	TP_ARGS(cs, p, new_mask, ret), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_sched_setaffinity,
+	TP_PROTO(struct task_struct *p, const struct cpumask *in_mask,
+		 const struct cpumask *cpu_possible_mask, int *retval);
+	TP_ARGS(p, in_mask, cpu_possible_mask, retval), 1);
 #else
 #define trace_android_rvh_select_task_rq_fair(p, prev_cpu, sd_flag, wake_flags, new_cpu)
 #define trace_android_rvh_select_task_rq_rt(p, prev_cpu, sd_flag, wake_flags, new_cpu)
@@ -127,6 +132,7 @@ DECLARE_RESTRICTED_HOOK(android_rvh_update_cpus_allowed,
 #define trace_android_rvh_find_busiest_queue(dst_cpu, group, busiest, done)
 #define trace_android_rvh_migrate_queued_task(rq, rf, p, new_cpu, detached)
 #define trace_android_rvh_update_cpus_allowed(cs, p, new_mask, ret)
+#define trace_android_rvh_sched_setaffinity(p, in_mask, cpu_possible_mask, retval)
 #endif
 #endif /* _TRACE_HOOK_SCHED_H */
 /* This part must be outside protection */
