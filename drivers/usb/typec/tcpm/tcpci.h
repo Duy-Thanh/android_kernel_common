@@ -18,7 +18,10 @@
 #define TCPC_PD_INT_REV			0xa
 
 #define TCPC_ALERT			0x10
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 #define TCPC_ALERT_VENDOR		BIT(15)
+=======
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 #define TCPC_ALERT_EXTND		BIT(14)
 #define TCPC_ALERT_EXTENDED_STATUS	BIT(13)
 #define TCPC_ALERT_VBUS_DISCNCT		BIT(11)
@@ -34,10 +37,18 @@
 #define TCPC_ALERT_POWER_STATUS		BIT(1)
 #define TCPC_ALERT_CC_STATUS		BIT(0)
 
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 #define TCPC_ALERT_MASK				0x12
 #define TCPC_POWER_STATUS_MASK			0x14
 #define TCPC_FAULT_STATUS_MASK			0x15
 #define	TCPC_EXTENDED_STATUS_MASK		0x16
+=======
+#define TCPC_ALERT_MASK			0x12
+#define TCPC_POWER_STATUS_MASK		0x14
+#define TCPC_FAULT_STATUS_MASK		0x15
+
+#define TCPC_EXTENDED_STATUS_MASK		0x16
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 #define TCPC_EXTENDED_STATUS_MASK_VSAFE0V	BIT(0)
 
 #define TCPC_ALERT_EXTENDED_MASK	0x17
@@ -71,8 +82,11 @@
 
 #define TCPC_POWER_CTRL			0x1c
 #define TCPC_POWER_CTRL_VCONN_ENABLE	BIT(0)
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 #define TCPC_POWER_CTRL_BLEED_DISCHARGE	BIT(3)
 #define TCPC_POWER_CTRL_AUTO_DISCHARGE	BIT(4)
+=======
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 #define TCPC_FAST_ROLE_SWAP_EN		BIT(7)
 
 #define TCPC_CC_STATUS			0x1d
@@ -173,15 +187,19 @@ struct tcpci;
 struct tcpci_data {
 	struct regmap *regmap;
 	unsigned char TX_BUF_BYTE_x_hidden:1;
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 	bool override_toggling;
 	unsigned char auto_discharge_disconnect:1;
 
+=======
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 	int (*init)(struct tcpci *tcpci, struct tcpci_data *data);
 	int (*set_vconn)(struct tcpci *tcpci, struct tcpci_data *data,
 			 bool enable);
 	int (*start_drp_toggling)(struct tcpci *tcpci, struct tcpci_data *data,
 				  enum typec_cc_status cc);
 	int (*set_vbus)(struct tcpci *tcpci, struct tcpci_data *data, bool source, bool sink);
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 	int (*get_vbus)(struct tcpci *tcpci, struct tcpci_data *data);
 	int (*set_roles)(struct tcpci *tcpci, struct tcpci_data *data, bool attached,
 			 enum typec_role role, enum typec_data_role data_role,
@@ -194,6 +212,8 @@ struct tcpci_data {
 	int (*frs_sourcing_vbus)(struct tcpci *tcpci, struct tcpci_data *data);
 	int (*enable_frs)(struct tcpci *tcpci, struct tcpci_data *data, bool enable);
 	int (*check_contaminant)(struct tcpci *tcpci, struct tcpci_data *data);
+=======
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 };
 
 struct tcpci *tcpci_register_port(struct device *dev, struct tcpci_data *data);

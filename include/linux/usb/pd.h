@@ -225,7 +225,10 @@ enum pd_pdo_type {
 #define PDO_FIXED_EXTPOWER		BIT(27) /* Externally powered */
 #define PDO_FIXED_USB_COMM		BIT(26) /* USB communications capable */
 #define PDO_FIXED_DATA_SWAP		BIT(25) /* Data role swap supported */
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 #define PDO_FIXED_UNCHUNK_EXT		BIT(24) /* Unchunked Ext. Msg. supp (Source) */
+=======
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 #define PDO_FIXED_FRS_CURR_MASK		(BIT(24) | BIT(23)) /* FR_Swap Current (Sink) */
 #define PDO_FIXED_FRS_CURR_SHIFT	23
 #define PDO_FIXED_VOLT_SHIFT		10	/* 50mV units */
@@ -456,7 +459,11 @@ static inline unsigned int rdo_max_power(u32 rdo)
 #define PD_T_NO_RESPONSE	5000	/* 4.5 - 5.5 seconds */
 #define PD_T_DB_DETECT		10000	/* 10 - 15 seconds */
 #define PD_T_SEND_SOURCE_CAP	150	/* 100 - 200 ms */
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 #define PD_T_SENDER_RESPONSE	26	/* 24 - 30 ms, relaxed */
+=======
+#define PD_T_SENDER_RESPONSE	60	/* 24 - 30 ms, relaxed */
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 #define PD_T_RECEIVER_RESPONSE	15	/* 15ms max */
 #define PD_T_SOURCE_ACTIVITY	45
 #define PD_T_SINK_ACTIVITY	135
@@ -476,11 +483,18 @@ static inline unsigned int rdo_max_power(u32 rdo)
 #define PD_T_VCONN_SOURCE_ON	100
 #define PD_T_SINK_REQUEST	100	/* 100 ms minimum */
 #define PD_T_ERROR_RECOVERY	100	/* minimum 25 is insufficient */
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 #define PD_T_SRCSWAPSTDBY      625     /* Maximum of 650ms */
 #define PD_T_NEWSRC            250     /* Maximum of 275ms */
 #define PD_T_SINK_TX		16	/* 16 - 20 ms */
 #define PD_T_CHUNK_NOT_SUPP	42	/* 40 - 50 ms */
 #define PD_T_SWAP_SRC_START	20	/* Miniimum of 20ms */
+=======
+#define PD_T_SRCSWAPSTDBY	625	/* Maximum of 650ms */
+#define PD_T_NEWSRC		250	/* Maximum of 275ms */
+#define PD_T_SWAP_SRC_START	20	/* Minimum of 20ms */
+#define PD_T_BIST_CONT_MODE	50	/* 30 - 60 ms */
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 
 #define PD_T_DRP_TRY		100	/* 75 - 150 ms */
 #define PD_T_DRP_TRYWAIT	600	/* 400 - 800 ms */
@@ -492,6 +506,9 @@ static inline unsigned int rdo_max_power(u32 rdo)
 #define PD_N_CAPS_COUNT		(PD_T_NO_RESPONSE / PD_T_SEND_SOURCE_CAP)
 #define PD_N_HARD_RESET_COUNT	2
 
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 #define PD_T_BIST_CONT_MODE	50 /* 30 - 60 ms */
 #define PD_P_SNK_STDBY_5V	500	/* 2500 mw - 500mA @ 5V */
+=======
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 #endif /* __LINUX_USB_PD_H */

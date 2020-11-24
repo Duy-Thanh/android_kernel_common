@@ -43,8 +43,8 @@ DECLARE_RESTRICTED_HOOK(android_rvh_can_migrate_task,
 
 DECLARE_RESTRICTED_HOOK(android_rvh_find_lowest_rq,
 	TP_PROTO(struct task_struct *p, struct cpumask *local_cpu_mask,
-			int *lowest_cpu),
-	TP_ARGS(p, local_cpu_mask, lowest_cpu), 1);
+			int ret, int *lowest_cpu),
+	TP_ARGS(p, local_cpu_mask, ret, lowest_cpu), 1);
 
 DECLARE_RESTRICTED_HOOK(android_rvh_prepare_prio_fork,
 	TP_PROTO(struct task_struct *p),
@@ -71,6 +71,7 @@ DECLARE_RESTRICTED_HOOK(android_rvh_find_busiest_group,
 	TP_PROTO(struct sched_group *busiest, struct rq *dst_rq, int *out_balance),
 		TP_ARGS(busiest, dst_rq, out_balance), 1);
 
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 DECLARE_RESTRICTED_HOOK(android_rvh_find_energy_efficient_cpu,
 	TP_PROTO(struct task_struct *p, int prev_cpu, int sync, int *new_cpu),
 	TP_ARGS(p, prev_cpu, sync, new_cpu), 1);
@@ -85,6 +86,16 @@ struct sugov_policy;
 DECLARE_RESTRICTED_HOOK(android_rvh_set_sugov_update,
 	TP_PROTO(struct sugov_policy *sg_policy, unsigned int next_freq, bool *should_update),
 	TP_ARGS(sg_policy, next_freq, should_update), 1);
+=======
+DECLARE_HOOK(android_vh_dump_throttled_rt_tasks,
+	TP_PROTO(int cpu, u64 clock, ktime_t rt_period, u64 rt_runtime,
+			s64 rt_period_timer_expires),
+	TP_ARGS(cpu, clock, rt_period, rt_runtime, rt_period_timer_expires));
+
+DECLARE_HOOK(android_vh_jiffies_update,
+	TP_PROTO(void *unused),
+	TP_ARGS(unused));
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 #else
 #define trace_android_rvh_select_task_rq_fair(p, prev_cpu, sd_flag, wake_flags, new_cpu)
 #define trace_android_rvh_select_task_rq_rt(p, prev_cpu, sd_flag, wake_flags, new_cpu)
@@ -93,17 +104,22 @@ DECLARE_RESTRICTED_HOOK(android_rvh_set_sugov_update,
 #define trace_android_rvh_enqueue_task(rq, p)
 #define trace_android_rvh_dequeue_task(rq, p)
 #define trace_android_rvh_can_migrate_task(p, dst_cpu, can_migrate)
-#define trace_android_rvh_find_lowest_rq(p, local_cpu_mask, lowest_cpu)
+#define trace_android_rvh_find_lowest_rq(p, local_cpu_mask, ret, lowest_cpu)
 #define trace_android_rvh_prepare_prio_fork(p)
 #define trace_android_rvh_finish_prio_fork(p)
 #define trace_android_rvh_rtmutex_prepare_setprio(p, pi_task)
 #define trace_android_rvh_set_user_nice(p, nice)
 #define trace_android_rvh_setscheduler(p)
 #define trace_android_rvh_find_busiest_group(busiest, dst_rq, out_balance)
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 #define trace_android_rvh_find_energy_efficient_cpu(p, prev_cpu, sync, new_cpu)
 #define trace_android_vh_set_sugov_sched_attr(attr)
 #define trace_android_rvh_set_iowait(p, should_iowait_boost)
 #define trace_android_rvh_set_sugov_update(sg_policy, next_freq, should_update)
+=======
+#define trace_android_vh_dump_throttled_rt_tasks(cpu, clock, rt_period, rt_runtime, rt_period_timer_expires)
+#define trace_android_vh_jiffies_update(unused)
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 #endif
 #endif /* _TRACE_HOOK_SCHED_H */
 /* This part must be outside protection */

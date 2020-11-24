@@ -230,6 +230,18 @@ enum adev_actions {
 	ADEV_ATTENTION,
 };
 
+/*
+ * Initial current capability of the new source when vSafe5V is applied during PD3.0 Fast Role Swap.
+ * Based on "Table 6-14 Fixed Supply PDO - Sink" of "USB Power Delivery Specification Revision 3.0,
+ * Version 1.2"
+ */
+enum frs_typec_current {
+	FRS_NOT_SUPPORTED,
+	FRS_DEFAULT_POWER,
+	FRS_5V_1P5A,
+	FRS_5V_3A,
+};
+
 /* Events from low level driver */
 
 #define TCPM_CC_EVENT		BIT(0)
@@ -405,6 +417,12 @@ struct tcpm_port {
 
 	/* port belongs to a self powered device */
 	bool self_powered;
+
+	/* FRS */
+	enum frs_typec_current frs_current;
+
+	/* Sink caps have been queried */
+	bool sink_cap_done;
 
 	/* Port is still in tCCDebounce */
 	bool debouncing;
@@ -1218,6 +1236,7 @@ static void tcpm_queue_message(struct tcpm_port *port,
 {
 	port->queued_message = message;
 	mod_tcpm_delayed_work(port, 0);
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 }
 
 static bool tcpm_vdm_ams(struct tcpm_port *port)
@@ -1363,6 +1382,8 @@ static int tcpm_ams_start(struct tcpm_port *port, enum tcpm_ams ams)
 	}
 
 	return ret;
+=======
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 }
 
 /*
@@ -1916,6 +1937,30 @@ static void vdm_run_state_machine(struct tcpm_port *port)
 			port->vdm_state = VDM_STATE_BUSY;
 			timeout = vdm_ready_timeout(port->vdo_data[0]);
 			mod_vdm_delayed_work(port, timeout);
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
+=======
+		}
+		break;
+	case VDM_STATE_WAIT_RSP_BUSY:
+		port->vdo_data[0] = port->vdo_retry;
+		port->vdo_count = 1;
+		port->vdm_state = VDM_STATE_READY;
+		break;
+	case VDM_STATE_BUSY:
+		port->vdm_state = VDM_STATE_ERR_TMOUT;
+		break;
+	case VDM_STATE_ERR_SEND:
+		/*
+		 * A partner which does not support USB PD will not reply,
+		 * so this is not a fatal error. At the same time, some
+		 * devices may not return GoodCRC under some circumstances,
+		 * so we need to retry.
+		 */
+		if (port->vdm_retries < 3) {
+			tcpm_log(port, "VDM Tx error, retry");
+			port->vdm_retries++;
+			port->vdm_state = VDM_STATE_READY;
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 		}
 		break;
 	default:
@@ -2098,6 +2143,7 @@ static int tcpm_altmode_vdm(struct typec_altmode *altmode,
 	struct tcpm_port *port = typec_altmode_get_drvdata(altmode);
 
 	tcpm_queue_vdm_unlocked(port, header, data, count - 1);
+
 	return 0;
 }
 
@@ -2359,9 +2405,13 @@ static void tcpm_pd_data_request(struct tcpm_port *port,
 
 		port->nr_sink_caps = cnt;
 		port->sink_cap_done = true;
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 		if (port->ams == GET_SINK_CAPABILITIES)
 			tcpm_pd_handle_state(port, ready_state(port), NONE_AMS,
 					     0);
+=======
+		tcpm_set_state(port, SNK_READY, 0);
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 		break;
 	case PD_DATA_VENDOR_DEF:
 		tcpm_handle_vdm_request(port, msg->payload, cnt);
@@ -2771,9 +2821,16 @@ void tcpm_pd_receive(struct tcpm_port *port, const struct pd_message *msg)
 	if (!event)
 		return;
 
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
+=======
+	kthread_init_work(&event->work, tcpm_pd_rx_handler);
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 	event->port = port;
 	memcpy(&event->msg, msg, sizeof(*msg));
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 	kthread_init_work(&event->work, tcpm_pd_rx_handler);
+=======
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 	kthread_queue_work(port->wq, &event->work);
 }
 EXPORT_SYMBOL_GPL(tcpm_pd_receive);
@@ -3526,6 +3583,9 @@ static void tcpm_reset_port(struct tcpm_port *port)
 
 static void tcpm_detach(struct tcpm_port *port)
 {
+	if (tcpm_port_is_disconnected(port))
+		port->hard_reset_count = 0;
+
 	if (!port->attached)
 		return;
 
@@ -3533,9 +3593,6 @@ static void tcpm_detach(struct tcpm_port *port)
 		tcpm_log(port, "disable BIST MODE TESTDATA");
 		port->tcpc->set_bist_data(port->tcpc, false);
 	}
-
-	if (tcpm_port_is_disconnected(port))
-		port->hard_reset_count = 0;
 
 	tcpm_reset_port(port);
 }
@@ -4149,7 +4206,13 @@ static void run_state_machine(struct tcpm_port *port)
 
 		tcpm_swap_complete(port, 0);
 		tcpm_typec_connect(port);
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
+=======
+		tcpm_check_send_discover(port);
+		mod_enable_frs_delayed_work(port, 0);
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 		tcpm_pps_complete(port, port->pps_status);
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 
 		if (port->ams != NONE_AMS)
 			tcpm_ams_finish(port);
@@ -4170,6 +4233,8 @@ static void run_state_machine(struct tcpm_port *port)
 		}
 		tcpm_check_send_discover(port);
 		mod_enable_frs_delayed_work(port, 0);
+=======
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 		power_supply_changed(port->psy);
 		break;
 
@@ -4530,6 +4595,12 @@ static void run_state_machine(struct tcpm_port *port)
 		tcpm_swap_complete(port, port->swap_status);
 		if (port->data_role == TYPEC_HOST && port->send_discover)
 			port->vdm_sm_running = true;
+		if (port->pwr_role == TYPEC_SOURCE)
+			tcpm_set_state(port, SRC_READY, 0);
+		else
+			tcpm_set_state(port, SNK_READY, 0);
+		break;
+	case FR_SWAP_CANCEL:
 		if (port->pwr_role == TYPEC_SOURCE)
 			tcpm_set_state(port, SRC_READY, 0);
 		else
@@ -4929,6 +5000,7 @@ static void _tcpm_pd_vbus_on(struct tcpm_port *port)
 	case SRC_TRY_DEBOUNCE:
 		/* Do nothing, waiting for sink detection */
 		break;
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 	case FR_SWAP_SEND:
 	case FR_SWAP_SEND_TIMEOUT:
 	case FR_SWAP_SNK_SRC_TRANSITION_TO_OFF:
@@ -4939,6 +5011,9 @@ static void _tcpm_pd_vbus_on(struct tcpm_port *port)
 	case FR_SWAP_SNK_SRC_NEW_SINK_READY:
 		if (port->tcpc->frs_sourcing_vbus)
 			port->tcpc->frs_sourcing_vbus(port->tcpc);
+=======
+	case FR_SWAP_SNK_SRC_NEW_SINK_READY:
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 		tcpm_set_state(port, FR_SWAP_SNK_SRC_SOURCE_VBUS_APPLIED, 0);
 		break;
 
@@ -5088,6 +5163,7 @@ static void tcpm_pd_event_handler(struct kthread_work *work)
 				_tcpm_cc_change(port, cc1, cc2);
 		}
 		if (events & TCPM_FRS_EVENT) {
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 			if (port->state == SNK_READY) {
 				int ret;
 
@@ -5098,6 +5174,12 @@ static void tcpm_pd_event_handler(struct kthread_work *work)
 			} else {
 				tcpm_log(port, "Discarding FRS_SIGNAL! Not in sink ready");
 			}
+=======
+			if (port->state == SNK_READY)
+				tcpm_set_state(port, FR_SWAP_SEND, 0);
+			else
+				tcpm_log(port, "Discarding FRS_SIGNAL! Not in sink ready");
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 		}
 		if (events & TCPM_SOURCING_VBUS) {
 			tcpm_log(port, "sourcing vbus");
@@ -5166,6 +5248,7 @@ EXPORT_SYMBOL_GPL(tcpm_sourcing_vbus);
 static void tcpm_enable_frs_work(struct kthread_work *work)
 {
 	struct tcpm_port *port = container_of(work, struct tcpm_port, enable_frs);
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 	int ret;
 
 	mutex_lock(&port->lock);
@@ -5205,6 +5288,24 @@ static void tcpm_enable_frs_work(struct kthread_work *work)
 		port->sink_cap_done = true;
 		goto unlock;
 	}
+=======
+
+	mutex_lock(&port->lock);
+	/* Not FRS capable */
+	if (!port->connected || port->port_type != TYPEC_PORT_DRP ||
+	    port->pwr_opmode != TYPEC_PWR_MODE_PD ||
+	    !port->tcpc->enable_frs ||
+	    /* Sink caps queried */
+	    port->sink_cap_done || port->negotiated_rev < PD_REV30)
+		goto unlock;
+
+	/* Send when the state machine is idle */
+	if (port->state != SNK_READY || port->vdm_state != VDM_STATE_DONE || port->send_discover)
+		goto resched;
+
+	tcpm_set_state(port, GET_SINK_CAP, 0);
+	port->sink_cap_done = true;
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 
 resched:
 	mod_enable_frs_delayed_work(port, GET_SINK_CAP_RETRY_MS);
@@ -5726,6 +5827,7 @@ sink:
 
 	port->self_powered = fwnode_property_read_bool(fwnode, "self-powered");
 
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 	ret = fwnode_property_read_u32_array(fwnode, "sink-vdos", NULL, 0);
 	if (ret <= 0 && ret != -EINVAL) {
 		return -EINVAL;
@@ -5738,6 +5840,8 @@ sink:
 			return -EINVAL;
 	}
 
+=======
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 	/* FRS can only be supported byb DRP ports */
 	if (port->port_type == TYPEC_PORT_DRP) {
 		ret = fwnode_property_read_u32(fwnode, "frs-typec-current", &frs_current);
@@ -6111,7 +6215,11 @@ struct tcpm_port *tcpm_register_port(struct device *dev, struct tcpc_dev *tcpc)
 	port->wq = kthread_create_worker(0, dev_name(dev));
 	if (IS_ERR(port->wq))
 		return ERR_CAST(port->wq);
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
 	sched_setscheduler(port->wq->task, SCHED_FIFO, &param);
+=======
+	sched_set_fifo(port->wq->task);
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 
 	kthread_init_work(&port->state_machine, tcpm_state_machine_work);
 	kthread_init_work(&port->vdm_state_machine, vdm_state_machine_work);

@@ -82,11 +82,18 @@ enum tcpm_transmit_type {
  *		automatically if a connection is established.
  * @try_role:	Optional; called to set a preferred role
  * @pd_transmit:Called to transmit PD message
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
  * @set_pd_capable:
  *		Optional; Called to notify that pd capable partner has been
  *		detected.
  * @mux:	Pointer to multiplexer data
+=======
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
  * @set_bist_data: Turn on/off bist data mode for compliance testing
+ * @enable_frs:
+ *		Optional; Called to enable/disable PD 3.0 fast role swap.
+ *		Enabling frs is accessory dependent as not all PD3.0
+ *		accessories support fast role swap.
  * @check_contaminant:
  *		Optional; The callback is called when CC pins report open status
  *		at the end of the toggling period. Chip level drivers are
@@ -141,6 +148,7 @@ struct tcpc_dev {
 	int (*pd_transmit)(struct tcpc_dev *dev, enum tcpm_transmit_type type,
 			   const struct pd_message *msg);
 	int (*set_bist_data)(struct tcpc_dev *dev, bool on);
+	int (*enable_frs)(struct tcpc_dev *dev, bool enable);
 	int (*check_contaminant)(struct tcpc_dev *dev);
 	void (*set_pd_capable)(struct tcpc_dev *dev, bool capable);
 	int (*enable_frs)(struct tcpc_dev *dev, bool enable);

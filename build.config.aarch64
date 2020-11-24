@@ -1,5 +1,9 @@
 ARCH=arm64
 
+<<<<<<< HEAD   (99c79b GKI: ABI: Update the ABI xml)
+=======
+LLVM_IAS=1
+>>>>>>> BRANCH (a9c5fc ANDROID: sched/fair: Have sync honor fits_capacity)
 CROSS_COMPILE=aarch64-linux-gnu-
 LINUX_GCC_CROSS_COMPILE_PREBUILTS_BIN=prebuilts/gas/linux-x86
 
