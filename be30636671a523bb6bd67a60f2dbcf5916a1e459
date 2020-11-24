@@ -22,6 +22,30 @@
       },
       "revId": "be30636671a523bb6bd67a60f2dbcf5916a1e459",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0283f7cc_829e7ab3",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2883,
+      "author": {
+        "id": 1697971
+      },
+      "writtenOn": "2020-11-24T03:05:46Z",
+      "side": 1,
+      "message": "Yep, it\u0027ll be fine there - if the return value is NULL, we fallback to using __rmqueue(): https://android-review.googlesource.com/c/kernel/common/+/1504456/2/mm/page_alloc.c#3515",
+      "parentUuid": "baa4979f_ba785db8",
+      "range": {
+        "startLine": 2883,
+        "startChar": 1,
+        "endLine": 2883,
+        "endChar": 13
+      },
+      "revId": "be30636671a523bb6bd67a60f2dbcf5916a1e459",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

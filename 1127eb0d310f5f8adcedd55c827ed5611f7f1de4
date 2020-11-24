@@ -22,6 +22,30 @@
       },
       "revId": "1127eb0d310f5f8adcedd55c827ed5611f7f1de4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58f1c4ac_4e53c527",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2893,
+      "author": {
+        "id": 1697971
+      },
+      "writtenOn": "2020-11-24T03:05:46Z",
+      "side": 0,
+      "message": "Hey Suren, I assume you meant something to the effect of \" and ends up not being removed here.\"  Sure, I\u0027ve updated the patch accordingly.",
+      "parentUuid": "f9b725ca_f9d01347",
+      "range": {
+        "startLine": 2893,
+        "startChar": 46,
+        "endLine": 2893,
+        "endChar": 54
+      },
+      "revId": "1127eb0d310f5f8adcedd55c827ed5611f7f1de4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
