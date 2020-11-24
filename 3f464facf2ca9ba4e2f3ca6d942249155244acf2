@@ -169,6 +169,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51d15698_6f1407c2",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1263,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-24T15:18:54Z",
+      "side": 1,
+      "message": "cpuhp_tasks_frozen needs to be set.",
+      "range": {
+        "startLine": 1263,
+        "startChar": 1,
+        "endLine": 1263,
+        "endChar": 26
+      },
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e87a727_e1b39a02",
         "filename": "kernel/cpu.c",
         "patchSetId": 1
