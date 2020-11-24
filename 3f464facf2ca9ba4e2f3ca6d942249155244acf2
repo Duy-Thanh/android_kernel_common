@@ -1,6 +1,115 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b44918a1_5bcd334e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-24T10:21:07Z",
+      "side": 1,
+      "message": "Probably needs to develop here, why it brings any performance improvement ? Adding some numbers might be good as well.",
+      "range": {
+        "startLine": 11,
+        "startChar": 38,
+        "endLine": 12,
+        "endChar": 48
+      },
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "766d77e6_d50b5b27",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-24T10:21:07Z",
+      "side": 1,
+      "message": "I don\u0027t think this is relevant.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 32
+      },
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83e71db0_3d6b2836",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-24T10:21:07Z",
+      "side": 1,
+      "message": "This isn\u0027t accurate: activation + sched domains + IPI.\n\nAlso, probably worth to mention that a proper activation will be done later on and therefore, the function will take more time to exit.",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 56
+      },
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7e20d54_788c78f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-24T10:21:07Z",
+      "side": 1,
+      "message": "You can add the same Bug reference as the other changes.",
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37fa9070_0dc673ce",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-24T10:21:07Z",
+      "side": 1,
+      "message": "I only suggested some of those changes. Please do not use my signed-off, especially when I discouraged a such change.",
+      "range": {
+        "startLine": 19,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 60
+      },
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5d93ce0d_08199c34",
@@ -14,6 +123,126 @@
       "writtenOn": "2020-11-24T03:02:54Z",
       "side": 1,
       "message": "Hi.  This is the proposed patch based upon Vincent\u0027s comments and some debugging on our part.  RFC.",
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f85fcbb5_c831907d",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-24T10:21:07Z",
+      "side": 1,
+      "message": "Would probably be better to create another interface in linux/sched/hotplug.h",
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dde110c_ba91238e",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1257,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-24T10:21:07Z",
+      "side": 1,
+      "message": "The code is self explanatory.\n\nNit: no brackets as there\u0027s a single line.",
+      "range": {
+        "startLine": 1257,
+        "startChar": 0,
+        "endLine": 1257,
+        "endChar": 2
+      },
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e87a727_e1b39a02",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1265,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-24T10:21:07Z",
+      "side": 1,
+      "message": "The function is self explanatory. However, the reason why we need to wait is probably worth it.",
+      "range": {
+        "startLine": 1265,
+        "startChar": 0,
+        "endLine": 1265,
+        "endChar": 2
+      },
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50993923_734ab591",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1268,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-24T10:21:07Z",
+      "side": 1,
+      "message": "The code is self explanatory , no need for this comment. However, why we need to IPI here might be more interesting.",
+      "range": {
+        "startLine": 1268,
+        "startChar": 0,
+        "endLine": 1268,
+        "endChar": 2
+      },
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d92685a3_2b096491",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1270,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-24T10:21:07Z",
+      "side": 1,
+      "message": "Why is this necessary ?",
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "559f9245_93d3546c",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1271,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-11-24T10:21:07Z",
+      "side": 1,
+      "message": "Probably better to start by waking up the CPUs before rebuilding the sched domains, to try to // it.",
       "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
