@@ -350,21 +350,15 @@ struct drm_display_mode {
 	u8 type;
 
 	/**
-	 * @private:
+	 * @expose_to_userspace:
 	 *
-	 * Pointer for driver private data. This can only be used for mode
-	 * objects passed to drivers in modeset operations. It shouldn't be used
-	 * by atomic drivers since they can store any additional data by
-	 * subclassing state structures.
+	 * Indicates whether the mode is to be exposed to the userspace.
+	 * This is to maintain a set of exposed modes while preparing
+	 * user-mode's list in drm_mode_getconnector ioctl. The purpose of
+	 * this only lies in the ioctl function, and is not to be used
+	 * outside the function.
 	 */
-	int *private;
-
-	/**
-	 * @private_flags:
-	 *
-	 * Similar to @private, but just an integer.
-	 */
-	int private_flags;
+	bool expose_to_userspace;
 
 	/**
 	 * @head:
@@ -372,19 +366,6 @@ struct drm_display_mode {
 	 * struct list_head for mode lists.
 	 */
 	struct list_head head;
-
-	/**
-	 * @export_head:
-	 *
-	 * struct list_head for modes to be exposed to the userspace.
-	 * This is to maintain a list of exposed modes while preparing
-	 * user-mode's list in drm_mode_getconnector ioctl. The purpose of this
-	 * list_head only lies in the ioctl function, and is not expected to be
-	 * used outside the function.
-	 * Once used, the stale pointers are not reset, but left as it is, to
-	 * avoid overhead of protecting it by mode_config.mutex.
-	 */
-	struct list_head export_head;
 
 	/**
 	 * @name:

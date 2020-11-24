@@ -230,6 +230,18 @@ enum adev_actions {
 	ADEV_ATTENTION,
 };
 
+/*
+ * Initial current capability of the new source when vSafe5V is applied during PD3.0 Fast Role Swap.
+ * Based on "Table 6-14 Fixed Supply PDO - Sink" of "USB Power Delivery Specification Revision 3.0,
+ * Version 1.2"
+ */
+enum frs_typec_current {
+	FRS_NOT_SUPPORTED,
+	FRS_DEFAULT_POWER,
+	FRS_5V_1P5A,
+	FRS_5V_3A,
+};
+
 /* Events from low level driver */
 
 #define TCPM_CC_EVENT		BIT(0)
@@ -406,6 +418,12 @@ struct tcpm_port {
 	/* port belongs to a self powered device */
 	bool self_powered;
 
+	/* FRS */
+	enum frs_typec_current frs_current;
+
+	/* Sink caps have been queried */
+	bool sink_cap_done;
+
 	/* Port is still in tCCDebounce */
 	bool debouncing;
 
@@ -429,12 +447,6 @@ struct tcpm_port {
 	 * PD based current limit gets set after RX of PD_CTRL_PSRDY.
 	 */
 	bool psnkstdby_after_accept;
-
-	/* FRS */
-	enum frs_typec_current frs_current;
-
-	/* Sink caps have been queried */
-	bool sink_cap_done;
 
 #ifdef CONFIG_DEBUG_FS
 	struct dentry *dentry;
@@ -2098,6 +2110,7 @@ static int tcpm_altmode_vdm(struct typec_altmode *altmode,
 	struct tcpm_port *port = typec_altmode_get_drvdata(altmode);
 
 	tcpm_queue_vdm_unlocked(port, header, data, count - 1);
+
 	return 0;
 }
 
@@ -2359,9 +2372,7 @@ static void tcpm_pd_data_request(struct tcpm_port *port,
 
 		port->nr_sink_caps = cnt;
 		port->sink_cap_done = true;
-		if (port->ams == GET_SINK_CAPABILITIES)
-			tcpm_pd_handle_state(port, ready_state(port), NONE_AMS,
-					     0);
+		tcpm_set_state(port, SNK_READY, 0);
 		break;
 	case PD_DATA_VENDOR_DEF:
 		tcpm_handle_vdm_request(port, msg->payload, cnt);
@@ -2771,9 +2782,9 @@ void tcpm_pd_receive(struct tcpm_port *port, const struct pd_message *msg)
 	if (!event)
 		return;
 
+	kthread_init_work(&event->work, tcpm_pd_rx_handler);
 	event->port = port;
 	memcpy(&event->msg, msg, sizeof(*msg));
-	kthread_init_work(&event->work, tcpm_pd_rx_handler);
 	kthread_queue_work(port->wq, &event->work);
 }
 EXPORT_SYMBOL_GPL(tcpm_pd_receive);
@@ -3526,6 +3537,9 @@ static void tcpm_reset_port(struct tcpm_port *port)
 
 static void tcpm_detach(struct tcpm_port *port)
 {
+	if (tcpm_port_is_disconnected(port))
+		port->hard_reset_count = 0;
+
 	if (!port->attached)
 		return;
 
@@ -3533,9 +3547,6 @@ static void tcpm_detach(struct tcpm_port *port)
 		tcpm_log(port, "disable BIST MODE TESTDATA");
 		port->tcpc->set_bist_data(port->tcpc, false);
 	}
-
-	if (tcpm_port_is_disconnected(port))
-		port->hard_reset_count = 0;
 
 	tcpm_reset_port(port);
 }
@@ -4149,27 +4160,9 @@ static void run_state_machine(struct tcpm_port *port)
 
 		tcpm_swap_complete(port, 0);
 		tcpm_typec_connect(port);
-		tcpm_pps_complete(port, port->pps_status);
-
-		if (port->ams != NONE_AMS)
-			tcpm_ams_finish(port);
-		if (port->next_ams != NONE_AMS) {
-			port->ams = port->next_ams;
-			port->next_ams = NONE_AMS;
-		}
-
-		/*
-		 * If previous AMS is interrupted, switch to the upcoming
-		 * state.
-		 */
-		upcoming_state = port->upcoming_state;
-		if (port->upcoming_state != INVALID_STATE) {
-			port->upcoming_state = INVALID_STATE;
-			tcpm_set_state(port, upcoming_state, 0);
-			break;
-		}
 		tcpm_check_send_discover(port);
 		mod_enable_frs_delayed_work(port, 0);
+		tcpm_pps_complete(port, port->pps_status);
 		power_supply_changed(port->psy);
 		break;
 
@@ -4541,7 +4534,6 @@ static void run_state_machine(struct tcpm_port *port)
 		else
 			tcpm_set_state(port, SNK_READY, 0);
 		break;
-
 	case BIST_RX:
 		switch (BDO_MODE_MASK(port->bist_request)) {
 		case BDO_MODE_CARRIER2:
@@ -5088,16 +5080,10 @@ static void tcpm_pd_event_handler(struct kthread_work *work)
 				_tcpm_cc_change(port, cc1, cc2);
 		}
 		if (events & TCPM_FRS_EVENT) {
-			if (port->state == SNK_READY) {
-				int ret;
-
-				port->upcoming_state = FR_SWAP_SEND;
-				ret = tcpm_ams_start(port, FAST_ROLE_SWAP);
-				if (ret == -EAGAIN)
-					port->upcoming_state = INVALID_STATE;
-			} else {
+			if (port->state == SNK_READY)
+				tcpm_set_state(port, FR_SWAP_SEND, 0);
+			else
 				tcpm_log(port, "Discarding FRS_SIGNAL! Not in sink ready");
-			}
 		}
 		if (events & TCPM_SOURCING_VBUS) {
 			tcpm_log(port, "sourcing vbus");
@@ -5166,45 +5152,22 @@ EXPORT_SYMBOL_GPL(tcpm_sourcing_vbus);
 static void tcpm_enable_frs_work(struct kthread_work *work)
 {
 	struct tcpm_port *port = container_of(work, struct tcpm_port, enable_frs);
-	int ret;
 
 	mutex_lock(&port->lock);
 	/* Not FRS capable */
-
-	tcpm_log_force(port, "%s: !port->connected:%c port->port_type != TYPEC_PORT_DRP:%c",
-		       __func__, !port->connected ? 'y' : 'n',
-		       port->port_type != TYPEC_PORT_DRP ? 'y' : 'n');
-
-	tcpm_log_force(port, "port->pwr_opmode != TYPEC_PWR_MODE_PD:%c port->sink_cap_done:%c",
-		       port->pwr_opmode != TYPEC_PWR_MODE_PD ? 'y' : 'n',
-		       port->sink_cap_done ? 'y' : 'n');
-
-	tcpm_log_force(port, "!port->tcpc->enable_frs:%c port->negotiated_rev < PD_REV30: %c",
-		       !port->tcpc->enable_frs ? 'y' : 'n',
-		       port->negotiated_rev < PD_REV30 ? 'y' : 'n');
 	if (!port->connected || port->port_type != TYPEC_PORT_DRP ||
 	    port->pwr_opmode != TYPEC_PWR_MODE_PD ||
 	    !port->tcpc->enable_frs ||
 	    /* Sink caps queried */
-	    port->sink_cap_done || port->negotiated_rev < PD_REV30) {
-		tcpm_log_force(port, "Skip sink cap query");
+	    port->sink_cap_done || port->negotiated_rev < PD_REV30)
 		goto unlock;
-	}
 
 	/* Send when the state machine is idle */
-	if (port->state != SNK_READY || port->send_discover) {
-		tcpm_log_force(port, "Resched sink cap query");
+	if (port->state != SNK_READY || port->vdm_state != VDM_STATE_DONE || port->send_discover)
 		goto resched;
-	}
 
-	port->upcoming_state = GET_SINK_CAP;
-	ret = tcpm_ams_start(port, GET_SINK_CAPABILITIES);
-	if (ret == -EAGAIN) {
-		port->upcoming_state = INVALID_STATE;
-	} else {
-		port->sink_cap_done = true;
-		goto unlock;
-	}
+	tcpm_set_state(port, GET_SINK_CAP, 0);
+	port->sink_cap_done = true;
 
 resched:
 	mod_enable_frs_delayed_work(port, GET_SINK_CAP_RETRY_MS);
@@ -5726,18 +5689,6 @@ sink:
 
 	port->self_powered = fwnode_property_read_bool(fwnode, "self-powered");
 
-	ret = fwnode_property_read_u32_array(fwnode, "sink-vdos", NULL, 0);
-	if (ret <= 0 && ret != -EINVAL) {
-		return -EINVAL;
-	} else if (ret > 0) {
-		port->nr_snk_vdo = min(ret, VDO_MAX_OBJECTS);
-		ret = fwnode_property_read_u32_array(fwnode, "sink-vdos",
-						     port->snk_vdo,
-						     port->nr_snk_vdo);
-		if (ret < 0)
-			return -EINVAL;
-	}
-
 	/* FRS can only be supported byb DRP ports */
 	if (port->port_type == TYPEC_PORT_DRP) {
 		ret = fwnode_property_read_u32(fwnode, "frs-typec-current", &frs_current);
@@ -6111,7 +6062,7 @@ struct tcpm_port *tcpm_register_port(struct device *dev, struct tcpc_dev *tcpc)
 	port->wq = kthread_create_worker(0, dev_name(dev));
 	if (IS_ERR(port->wq))
 		return ERR_CAST(port->wq);
-	sched_setscheduler(port->wq->task, SCHED_FIFO, &param);
+	sched_set_fifo(port->wq->task);
 
 	kthread_init_work(&port->state_machine, tcpm_state_machine_work);
 	kthread_init_work(&port->vdm_state_machine, vdm_state_machine_work);
