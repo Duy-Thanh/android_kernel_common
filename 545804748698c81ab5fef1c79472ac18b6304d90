@@ -34,6 +34,24 @@
       "parentUuid": "e3e9c469_f87e0b34",
       "revId": "545804748698c81ab5fef1c79472ac18b6304d90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d312932_9d690d05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-11-25T23:16:43Z",
+      "side": 1,
+      "message": "Hello Chun-Hung, GKI 2.0 is replacing ION with DMA-BUF heaps which is a similar heap-based DMA-BUF exporter framework. Please do take a look b/173570459 which contains documentation regarding the change and feel free to let me know if you have any questions!",
+      "parentUuid": "0400cc83_212a4394",
+      "revId": "545804748698c81ab5fef1c79472ac18b6304d90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
