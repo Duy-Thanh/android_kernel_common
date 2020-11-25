@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cbe8b62_f55cfc4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-11-25T23:10:45Z",
+      "side": 1,
+      "message": "A few are already submitted to android-mainline...",
+      "revId": "6a13c02a735ee0c1640a54863b17675c8f127267",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd0ea2f4_70f65a92",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1127,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-11-25T23:10:45Z",
+      "side": 1,
+      "message": "Already submitted in aosp/1511388",
+      "revId": "6a13c02a735ee0c1640a54863b17675c8f127267",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13a217b3_b9fe7bd9",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5133,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-11-25T23:10:45Z",
+      "side": 1,
+      "message": "Already submitted in aosp/1511388",
+      "revId": "6a13c02a735ee0c1640a54863b17675c8f127267",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
