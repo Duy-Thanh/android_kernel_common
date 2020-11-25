@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "454530aa_45b4df14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-25T19:16:15Z",
+      "side": 1,
+      "message": "This will break working systems, right?  And mess with the abi signatures, removing symbols we were listed as supporting, which is not allowed.\n\nWhy do you want to do this in this branch specifically?",
+      "revId": "cf63e1181786c39fabfba54e88b20faa155aaadb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
