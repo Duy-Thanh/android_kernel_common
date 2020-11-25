@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3e9c469_f87e0b34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-11-25T23:02:27Z",
+      "side": 1,
+      "message": "I am ok with pushing these to android-mainline for now to unblock but please note that we are deprecating ION in GKI 2.0 and CONFIG_ION is scheduled to be turned off in February 2021 on the android12-5.10 branch.",
+      "revId": "545804748698c81ab5fef1c79472ac18b6304d90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
