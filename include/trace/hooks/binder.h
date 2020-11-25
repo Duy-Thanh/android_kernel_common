@@ -14,19 +14,32 @@
 #if defined(CONFIG_TRACEPOINTS) && defined(CONFIG_ANDROID_VENDOR_HOOKS)
 struct binder_transaction;
 struct task_struct;
-DECLARE_HOOK(android_vh_binder_transaction_init,
+DECLARE_RESTRICTED_HOOK(android_rvh_binder_transaction_init,
 	TP_PROTO(struct binder_transaction *t),
-	TP_ARGS(t));
-DECLARE_HOOK(android_vh_binder_set_priority,
+	TP_ARGS(t), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_binder_set_priority,
 	TP_PROTO(struct binder_transaction *t, struct task_struct *task),
-	TP_ARGS(t, task));
-DECLARE_HOOK(android_vh_binder_restore_priority,
+	TP_ARGS(t, task), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_binder_restore_priority,
 	TP_PROTO(struct binder_transaction *t, struct task_struct *task),
-	TP_ARGS(t, task));
+	TP_ARGS(t, task), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_binder_wakeup_poll_threads_ilocked,
+	TP_PROTO(struct task_struct *task),
+	TP_ARGS(task), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_binder_wakeup_thread_ilocked,
+	TP_PROTO(struct task_struct *task),
+	TP_ARGS(task), 1);
 #else
-#define trace_android_vh_binder_transaction_init(t)
-#define trace_android_vh_binder_set_priority(t, task)
-#define trace_android_vh_binder_restore_priority(t, task)
+static inline void
+trace_android_rvh_binder_transaction_init(struct binder_transaction *t) { }
+static inline void
+trace_android_rvh_binder_set_priority(struct binder_transaction *t, struct task_struct *task) { }
+static inline void
+trace_android_rvh_binder_restore_priority(struct binder_transaction *t, struct task_struct *task) { }
+static inline void
+trace_android_rvh_binder_wakeup_poll_threads_ilocked(struct task_struct *task) { }
+static inline void
+trace_android_rvh_binder_wakeup_thread_ilocked(struct task_struct *task) { }
 #endif
 #endif /* _TRACE_HOOK_BINDER_H */
 /* This part must be outside protection */
