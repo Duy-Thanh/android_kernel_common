@@ -33,6 +33,24 @@
       "message": "(cherry picked from commit c0bbbe403d6b743a17e2b99cc7375695edbd2f61)\n\nis also invalid\n",
       "revId": "945ba2bbd635129e684fb2c40baa480ea2cd9cd2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae537089_bfdc88e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-11-26T09:53:12Z",
+      "side": 1,
+      "message": "Sorry, the commit ids _are_ valid. That was just me using git wrong.",
+      "parentUuid": "a286987c_b08849ad",
+      "revId": "945ba2bbd635129e684fb2c40baa480ea2cd9cd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
