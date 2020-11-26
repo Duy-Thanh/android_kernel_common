@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b151b5bc_48fe427d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-11-26T09:51:16Z",
+      "side": 1,
+      "message": "I would rather not revert that. Can we rather address the underlying problem?\n\nIf we decide to go forward, please adjust the commit message to something more readable. In particular, the referenced commit is not in aosp/ and the subject line should just read \n\n  Revert \"ANDROID: ...\"",
+      "revId": "945ba2bbd635129e684fb2c40baa480ea2cd9cd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
