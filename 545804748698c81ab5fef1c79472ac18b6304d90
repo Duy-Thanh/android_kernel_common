@@ -52,6 +52,24 @@
       "parentUuid": "0400cc83_212a4394",
       "revId": "545804748698c81ab5fef1c79472ac18b6304d90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a57828c_a3a1cc58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1769527
+      },
+      "writtenOn": "2020-11-26T08:37:35Z",
+      "side": 1,
+      "message": "Hi Hridya,\n\nSorry for jump in.\n\nOnly a concern about DMA-BUF heaps.\n\nHave you confirmed the alloc performance for the dma-buf heaps?\n\nFrom the code[1], it alloc page one by one. BUT ion has page_pool and its order could be {8, 4, 0}.\n\n[1] https://elixir.bootlin.com/linux/v5.10-rc1/source/drivers/dma-buf/heaps/system_heap.c#L70",
+      "parentUuid": "8d312932_9d690d05",
+      "revId": "545804748698c81ab5fef1c79472ac18b6304d90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
