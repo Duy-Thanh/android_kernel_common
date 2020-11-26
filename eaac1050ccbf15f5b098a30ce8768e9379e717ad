@@ -16,6 +16,24 @@
       "message": "roll into patch that added this?",
       "revId": "eaac1050ccbf15f5b098a30ce8768e9379e717ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a26246d9_b60608f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1345812
+      },
+      "writtenOn": "2020-11-26T17:56:19Z",
+      "side": 1,
+      "message": "Ok. Or maybe even merge all this into one commit?\n\nANDROID: misc: Cast virst to \u0027volatile void *\u0027 for virt_to_phys\nANDROID: misc: debug_kinfo: fix build warning\nANDROID: misc: Change type of all_info_addr to (void *)\nANDROID: misc: debug-kinfo: Correct copyright notice\nANDROID: misc: add debug-kinfo driver",
+      "parentUuid": "8b0302f0_356b0617",
+      "revId": "eaac1050ccbf15f5b098a30ce8768e9379e717ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
