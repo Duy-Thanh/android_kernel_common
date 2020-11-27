@@ -34,6 +34,8 @@
 
 #include "power.h"
 
+#include <trace/hooks/suspend_sync.h>
+
 const char * const pm_labels[] = {
 	[PM_SUSPEND_TO_IDLE] = "freeze",
 	[PM_SUSPEND_STANDBY] = "standby",
@@ -578,11 +580,19 @@ static int enter_state(suspend_state_t state)
 	if (state == PM_SUSPEND_TO_IDLE)
 		s2idle_begin();
 
+	trace_android_vh_suspend_sync_start(!IS_ENABLED(CONFIG_SUSPEND_SKIP_SYNC), &error);
+	if (error)
+		goto Unlock;
+
 	if (sync_on_suspend_enabled) {
 		trace_suspend_resume(TPS("sync_filesystems"), 0, true);
 		ksys_sync_helper();
 		trace_suspend_resume(TPS("sync_filesystems"), 0, false);
 	}
+
+	trace_android_vh_suspend_sync_end(!IS_ENABLED(CONFIG_SUSPEND_SKIP_SYNC), &error);
+	if (error)
+		goto Unlock;
 
 	pm_pr_dbg("Preparing system for sleep (%s)\n", mem_sleep_labels[state]);
 	pm_suspend_clear_flags();
