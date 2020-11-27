@@ -34,6 +34,24 @@
       "parentUuid": "de58b37f_ee5933ab",
       "revId": "c059c172b43ddd357cef2b408194a300dffb8e4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f47dd0bb_e37c165a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-11-27T16:02:15Z",
+      "side": 1,
+      "message": "Yeah so interestingly, this doesn\u0027t seem to just be in the wrong place. CONFIG_DEBUG_KINFO doesn\u0027t seem to be there at all in the savedefconfig output.\n\nI have 0 hits for `git grep DEBUG_KINFO` in my tree, so we\u0027re probably missing a dependency?",
+      "parentUuid": "a0d3756b_f9d2c94f",
+      "revId": "c059c172b43ddd357cef2b408194a300dffb8e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
