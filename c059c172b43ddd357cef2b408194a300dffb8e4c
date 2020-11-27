@@ -52,6 +52,24 @@
       "parentUuid": "a0d3756b_f9d2c94f",
       "revId": "c059c172b43ddd357cef2b408194a300dffb8e4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "004d0d87_aa96b985",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-27T16:07:35Z",
+      "side": 1,
+      "message": "It\u0027s added in this patch later in this same series:  https://android-review.googlesource.com/c/kernel/common/+/1511941/5",
+      "parentUuid": "f47dd0bb_e37c165a",
+      "revId": "c059c172b43ddd357cef2b408194a300dffb8e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
