@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95d5a886_52ab98bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-27T14:13:24Z",
+      "side": 1,
+      "message": "This has been rejected by upstream, we should reject it too and revert it from our trees until a viable solution is provided.",
+      "revId": "c90ad29154f0df23258d25a9ce3901fa9dfafa21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
