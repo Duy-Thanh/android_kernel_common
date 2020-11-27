@@ -16,6 +16,24 @@
       "message": "Build error w/ this one:\n\n@@ -244,7 +244,6 @@\n CONFIG_BLK_DEV_RAM\u003dy\n CONFIG_BLK_DEV_RAM_SIZE\u003d8192\n CONFIG_UID_SYS_STATS\u003dy\n-CONFIG_DEBUG_KINFO\u003dy\n CONFIG_SCSI\u003dy\n # CONFIG_SCSI_PROC_FS is not set\n CONFIG_BLK_DEV_SD\u003dy\n++ RES\u003d1\n++ \u0027[\u0027 1 -ne 0 \u0027]\u0027\n++ echo ERROR: savedefconfig does not match common/arch/arm64/configs/gki_defconfig\nERROR: savedefconfig does not match common/arch/arm64/configs/gki_defconfig",
       "revId": "c059c172b43ddd357cef2b408194a300dffb8e4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0d3756b_f9d2c94f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-27T15:58:33Z",
+      "side": 1,
+      "message": "Yeah, I will put it in the correct place back in the series, after the driver that has this option is in the tree 😊\n\nI\u0027ll do that after the scheduler stuff gets merged as I don\u0027t want to rebase the whole series and mess those up right now.\n\nThanks for pasting the errors here, much appreciated.",
+      "parentUuid": "de58b37f_ee5933ab",
+      "revId": "c059c172b43ddd357cef2b408194a300dffb8e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
