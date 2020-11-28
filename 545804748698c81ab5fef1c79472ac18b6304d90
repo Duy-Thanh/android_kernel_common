@@ -88,6 +88,24 @@
       "parentUuid": "7a57828c_a3a1cc58",
       "revId": "545804748698c81ab5fef1c79472ac18b6304d90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61019bde_237fa1dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1769527
+      },
+      "writtenOn": "2020-11-28T07:18:31Z",
+      "side": 1,
+      "message": "Get it. Thanks for your share.\nPlease help also --cc\u003dlinux-mediatek@lists.infradead.org when send upstream if it is possible. Thanks.",
+      "parentUuid": "a55b5651_dc44ceeb",
+      "revId": "545804748698c81ab5fef1c79472ac18b6304d90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
