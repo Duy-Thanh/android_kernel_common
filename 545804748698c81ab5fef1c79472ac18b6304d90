@@ -70,6 +70,24 @@
       "parentUuid": "8d312932_9d690d05",
       "revId": "545804748698c81ab5fef1c79472ac18b6304d90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a55b5651_dc44ceeb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-11-28T06:12:28Z",
+      "side": 1,
+      "message": "Hi Chun-Hung,\n\nLarge page allocations are already queued for linux-next and page pool for DMA-BUF heaps is WIP. I will let you know once they are sent out for review! Allocation performance seems to be on-par with ION with both the optimizations included. We will add the benchmark measurements when we send out the page pooling patches for review. Please feel free to let me know if you have any other questions!\n\nThanks,\nHridya",
+      "parentUuid": "7a57828c_a3a1cc58",
+      "revId": "545804748698c81ab5fef1c79472ac18b6304d90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
