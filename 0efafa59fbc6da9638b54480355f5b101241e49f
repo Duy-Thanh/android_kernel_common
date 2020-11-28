@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdad5568_a0836baf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-28T09:00:47Z",
+      "side": 1,
+      "message": "Why can\u0027t we just enable CONFIG_NET_PKTGEN\u003dy into the gki kernel configuration?  Wouldn\u0027t that solve this issue without any code changes needed?",
+      "revId": "0efafa59fbc6da9638b54480355f5b101241e49f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
