@@ -16,6 +16,23 @@
       "message": "Hi Greg and John,\n\nCould you please take a look at these patches before I send them out upstream.\n\nThanks,\nKalesh",
       "revId": "8b7f0bb7f3576ef57c7fbacf69d7a86d120445b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a8525b6_b2b48e9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-30T14:53:22Z",
+      "side": 1,
+      "message": "gerrit is horrible for good code review, if you want this before you send it upstream, can we just do it in email like you will have to do so anyway?",
+      "revId": "8b7f0bb7f3576ef57c7fbacf69d7a86d120445b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
