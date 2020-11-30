@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b6c1c61_8fcddfa7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-11-30T21:48:54Z",
+      "side": 1,
+      "message": "b/172506883 for some background about why we had to revert CONFIG_PAGE_OWNER and why it\u0027s ok to re-enable it.",
+      "revId": "a0100748cb460df94fb0ff0284cc33fbb8ef2b45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
