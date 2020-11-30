@@ -16,6 +16,24 @@
       "message": "Chris, please take a look at the allmodconfig errors here: https://android-build.googleplex.com/builds/pending/P18109776/kernel_arm_allmodconfig/latest/view/logs/build_error.log\nMore specifically:\n\nERROR: modpost: \"readahead_gfp_mask\" [fs/afs/kafs.ko] undefined!\nERROR: modpost: \"readahead_gfp_mask\" [fs/ubifs/ubifs.ko] undefined!\nERROR: modpost: \"readahead_gfp_mask\" [fs/cifs/cifs.ko] undefined!\n\nLooks like this function is used by drivers.\n",
       "revId": "9f96228f4204bab94b68338b1852e8362616971a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9077f4c8_afb81bf4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1697971
+      },
+      "writtenOn": "2020-11-30T23:35:56Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "9cfefdce_cb3ef63e",
+      "revId": "9f96228f4204bab94b68338b1852e8362616971a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
