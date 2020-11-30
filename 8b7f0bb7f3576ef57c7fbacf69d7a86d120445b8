@@ -50,6 +50,42 @@
       "message": "Wait, doesn\u0027t this conflict with the patchset to add this type of stats to sysfs for dmabuffers?\n\nAdding stuff to proc is horrible, you almost never want to do it.",
       "revId": "8b7f0bb7f3576ef57c7fbacf69d7a86d120445b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55230a34_598ae7ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2020-11-30T15:01:27Z",
+      "side": 1,
+      "message": "Yeah I can resend by email if that\u0027s better.",
+      "parentUuid": "7a8525b6_b2b48e9a",
+      "revId": "8b7f0bb7f3576ef57c7fbacf69d7a86d120445b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e4a8a0e_c03d2e5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2020-11-30T15:01:27Z",
+      "side": 1,
+      "message": "There is some overlap with the per buffer stats, but the per-buffer stats in the sysfs doesn\u0027t do the per process attribution of the buffers. I don\u0027t know of alternative way to do this (other than iterating over the each process\u0027s files_struct and vmas) since the buffers can be shared as raw FDs.",
+      "parentUuid": "c2cb5230_7a9b3832",
+      "revId": "8b7f0bb7f3576ef57c7fbacf69d7a86d120445b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
