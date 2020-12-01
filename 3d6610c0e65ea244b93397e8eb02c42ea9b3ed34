@@ -34,6 +34,24 @@
       "parentUuid": "50d3a690_b202f2c1",
       "revId": "3d6610c0e65ea244b93397e8eb02c42ea9b3ed34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15565a3a_539e2c66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-01T15:40:36Z",
+      "side": 1,
+      "message": "A driver should not do different things depending on memory, as it should not care about that at all as it can change instantly after reading these values.\n\nPlease use the proper memory apis to ensure that your driver gets the required memory it needs to use.\n\nA debug memory driver is also not needed as the oom logic is now in userspace, not in the kernel.  You wouldn\u0027t put a debugging driver in a device anyway, right?  😊",
+      "parentUuid": "80118317_afc4af61",
+      "revId": "3d6610c0e65ea244b93397e8eb02c42ea9b3ed34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
