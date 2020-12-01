@@ -9,3 +9,5 @@
 
 #define CREATE_TRACE_POINTS
 #include "trace.h"
+#undef CREATE_TRACE_POINTS
+#include <#include <trace/hooks/dwc3.h>

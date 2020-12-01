@@ -12,6 +12,7 @@
 #define __DRIVERS_USB_DWC3_IO_H
 
 #include <linux/io.h>
+#include <trace/hooks/dwc3.h>
 #include "trace.h"
 #include "debug.h"
 #include "core.h"

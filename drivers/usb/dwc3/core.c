@@ -378,6 +378,8 @@ static void dwc3_free_event_buffers(struct dwc3 *dwc)
 	evt = dwc->ev_buf;
 	if (evt)
 		dwc3_free_one_event_buffer(dwc, evt);
+
+	trace_android_vh_dwc3_free_event_buffers(dwc);
 }
 
 /**
@@ -399,6 +401,7 @@ static int dwc3_alloc_event_buffers(struct dwc3 *dwc, unsigned length)
 	}
 	dwc->ev_buf = evt;
 
+	trace_android_vh_dwc3_alloc_event_buffers(dwc);
 	return 0;
 }
 
@@ -422,6 +425,7 @@ int dwc3_event_buffers_setup(struct dwc3 *dwc)
 			DWC3_GEVNTSIZ_SIZE(evt->length));
 	dwc3_writel(dwc->regs, DWC3_GEVNTCOUNT(0), 0);
 
+	trace_android_vh_dwc3_setup_event_buffers(dwc);
 	return 0;
 }
 
@@ -438,6 +442,7 @@ void dwc3_event_buffers_cleanup(struct dwc3 *dwc)
 	dwc3_writel(dwc->regs, DWC3_GEVNTSIZ(0), DWC3_GEVNTSIZ_INTMASK
 			| DWC3_GEVNTSIZ_SIZE(0));
 	dwc3_writel(dwc->regs, DWC3_GEVNTCOUNT(0), 0);
+	trace_android_vh_dwc3_cleanup_event_buffers(dwc);
 }
 
 static int dwc3_alloc_scratch_buffers(struct dwc3 *dwc)
@@ -1082,6 +1087,7 @@ static int dwc3_core_init(struct dwc3 *dwc)
 			dwc3_writel(dwc->regs, DWC3_GTXTHRCFG, reg);
 		}
 	}
+	trace_android_vh_dwc3_post_core_init(dwc);
 
 	return 0;
 

@@ -27,6 +27,7 @@
 #include <trace/hooks/cpufreq.h>
 #include <trace/hooks/mm.h>
 #include <trace/hooks/preemptirq.h>
+#include <trace/hooks/dwc3.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -112,3 +113,17 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_account_irq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_place_entity);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_cpu_capacity);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_misfit_status);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_conndone_interrupt);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_stop_transfers);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_stop_active_transfer);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_controller_halted);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_free_event_buffers);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_alloc_event_buffers);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_setup_event_buffers);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_cleanup_event_buffers);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_post_core_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_pullup);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_erratic_error);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_disconnect_interrupt);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_suspend_interrupt);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_reset_interrupt);

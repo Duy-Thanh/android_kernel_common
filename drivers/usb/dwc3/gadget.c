@@ -2032,6 +2032,7 @@ static void dwc3_stop_active_transfers(struct dwc3 *dwc)
 		if (!dep)
 			continue;
 
+		trace_android_vh_dwc3_stop_transfers(dep);
 		dwc3_remove_requests(dwc, dep);
 	}
 }
@@ -2069,6 +2070,7 @@ static int dwc3_gadget_run_stop(struct dwc3 *dwc, int is_on, int suspend)
 	}
 
 	dwc3_gadget_dctl_write_safe(dwc, reg);
+	trace_android_vh_dwc3_controller_halted(dwc, is_on);
 
 	do {
 		reg = dwc3_readl(dwc->regs, DWC3_DSTS);
@@ -2117,6 +2119,7 @@ static int dwc3_gadget_pullup(struct usb_gadget *g, int is_on)
 	}
 
 	spin_lock_irqsave(&dwc->lock, flags);
+	trace_android_vh_dwc3_pullup(dwc, is_on);
 
 	if (!is_on) {
 		u32 count;
@@ -3149,6 +3152,7 @@ static void dwc3_stop_active_transfer(struct dwc3_ep *dep, bool force,
 	    (dep->flags & DWC3_EP_END_TRANSFER_PENDING))
 		return;
 
+	trace_android_vh_dwc3_stop_active_transfer(dep);
 	/*
 	 * NOTICE: We are violating what the Databook says about the
 	 * EndTransfer command. Ideally we would _always_ wait for the
@@ -3225,6 +3229,7 @@ static void dwc3_gadget_disconnect_interrupt(struct dwc3 *dwc)
 {
 	int			reg;
 
+	trace_android_vh_dwc3_disconnect_interrupt(dwc);
 	dwc3_gadget_set_link_state(dwc, DWC3_LINK_STATE_RX_DET);
 
 	reg = dwc3_readl(dwc->regs, DWC3_DCTL);
@@ -3278,6 +3283,7 @@ static void dwc3_gadget_reset_interrupt(struct dwc3 *dwc)
 			dwc3_gadget_disconnect_interrupt(dwc);
 	}
 
+	trace_android_vh_dwc3_reset_interrupt(dwc);
 	dwc3_reset_gadget(dwc);
 	/*
 	 * In the Synopsis DesignWare Cores USB3 Databook Rev. 3.30a
@@ -3413,6 +3419,7 @@ static void dwc3_gadget_conndone_interrupt(struct dwc3 *dwc)
 		return;
 	}
 
+	trace_android_vh_dwc3_conndone_interrupt(dwc);
 	/*
 	 * Configure PHY via GUSB3PIPECTLn if required.
 	 *
@@ -3539,9 +3546,10 @@ static void dwc3_gadget_suspend_interrupt(struct dwc3 *dwc,
 {
 	enum dwc3_link_state next = evtinfo & DWC3_LINK_STATE_MASK;
 
-	if (dwc->link_state != next && next == DWC3_LINK_STATE_U3)
+	if (dwc->link_state != next && next == DWC3_LINK_STATE_U3) {
 		dwc3_suspend_gadget(dwc);
-
+		trace_android_vh_dwc3_suspend_interrupt(dwc);
+	}
 	dwc->link_state = next;
 }
 
@@ -3609,6 +3617,7 @@ static void dwc3_gadget_interrupt(struct dwc3 *dwc,
 		break;
 	case DWC3_DEVICE_EVENT_SOF:
 	case DWC3_DEVICE_EVENT_ERRATIC_ERROR:
+		trace_android_vh_dwc3_erratic_error(dwc);
 	case DWC3_DEVICE_EVENT_CMD_CMPL:
 	case DWC3_DEVICE_EVENT_OVERFLOW:
 		break;
