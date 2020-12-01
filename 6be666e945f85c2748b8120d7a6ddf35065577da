@@ -16,6 +16,24 @@
       "message": "Hi, this patch has been merged to kernel-mainline, could this patch be back-ported to Android 11 and 12?",
       "revId": "6be666e945f85c2748b8120d7a6ddf35065577da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1a79995_60c74637",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-01T08:15:22Z",
+      "side": 1,
+      "message": "If you want it in those branches, please resubmit to them with a new bug number.",
+      "parentUuid": "b45aa842_0c7bf8b5",
+      "revId": "6be666e945f85c2748b8120d7a6ddf35065577da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
