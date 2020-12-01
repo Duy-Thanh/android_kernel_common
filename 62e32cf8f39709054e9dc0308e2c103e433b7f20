@@ -22,6 +22,30 @@
       },
       "revId": "62e32cf8f39709054e9dc0308e2c103e433b7f20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00d28d0e_593242a1",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-01T19:00:56Z",
+      "side": 1,
+      "message": "For gfp_zone, it is used inside prepare_alloc_pages which can be used from inside interrupt context, so IIUC restricted hook is required there. Not sure about the others.",
+      "parentUuid": "857cd67e_e1b69767",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 0
+      },
+      "revId": "62e32cf8f39709054e9dc0308e2c103e433b7f20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
