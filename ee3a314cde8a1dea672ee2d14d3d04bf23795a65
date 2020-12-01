@@ -52,6 +52,24 @@
       "parentUuid": "fe65deb8_89859d8b",
       "revId": "ee3a314cde8a1dea672ee2d14d3d04bf23795a65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91b68252_a2b64b55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1030767
+      },
+      "writtenOn": "2020-12-01T17:52:25Z",
+      "side": 1,
+      "message": "I don\u0027t disagree with that. I guess I was hoping Google folks would have already re-evaluated the downstream/ACK only changes.\n\nhttps://android.googlesource.com/kernel/common/+/14948a5ac30edaeec017e6280be989b7cf053fdb\n\nIn this parent change @Badhri even added a comment tag \"[badhri: The framework should be moved away from this]\" but he\u0027s mentioned before he\u0027s moved on from Android USB gadget work. Maybe @Albert can provide comments here?\n\nIt looks like Android userspace just wants to be able to get the assigned card/device numbers for the Midi function for which they added a custom device_attribute to do so.",
+      "parentUuid": "d2e41a56_0bda81e8",
+      "revId": "ee3a314cde8a1dea672ee2d14d3d04bf23795a65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
