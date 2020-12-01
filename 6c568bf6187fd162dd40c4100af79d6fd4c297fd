@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c11a9114_5f01bd6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-01T22:34:27Z",
+      "side": 1,
+      "message": "Had to resolve some trivial conflicts in drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c manually.",
+      "revId": "6c568bf6187fd162dd40c4100af79d6fd4c297fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
