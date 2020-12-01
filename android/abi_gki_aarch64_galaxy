@@ -1386,6 +1386,7 @@
   krealloc
   kset_create_and_add
   kset_unregister
+  ksize
   kstat
   kstrdup
   kstrdup_quotable
@@ -2788,7 +2789,9 @@
   vm_iomap_memory
   vm_map_pages
   vm_map_ram
+  vm_node_stat
   vm_unmap_ram
+  vm_zone_stat
   vmalloc
   vmalloc_to_page
   vmalloc_to_pfn
