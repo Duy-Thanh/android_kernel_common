@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b2989e9_60dc01e2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-01T19:31:38Z",
+      "side": 1,
+      "message": "reworded the commit text.",
+      "parentUuid": "b44918a1_5bcd334e",
+      "range": {
+        "startLine": 11,
+        "startChar": 38,
+        "endLine": 12,
+        "endChar": 48
+      },
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "766d77e6_d50b5b27",
@@ -37,6 +61,30 @@
       "writtenOn": "2020-11-24T10:21:07Z",
       "side": 1,
       "message": "I don\u0027t think this is relevant.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 32
+      },
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a67bc6df_6bdfeb8d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-01T19:31:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "766d77e6_d50b5b27",
       "range": {
         "startLine": 14,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbc0ddf5_839615fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-01T19:31:38Z",
+      "side": 1,
+      "message": "reduced functionality of change, and comments updated.",
+      "parentUuid": "83e71db0_3d6b2836",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 56
+      },
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7e20d54_788c78f4",
@@ -87,6 +159,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eafd1f3_38335ad8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-01T19:31:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7e20d54_788c78f4",
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37fa9070_0dc673ce",
@@ -100,6 +190,30 @@
       "writtenOn": "2020-11-24T10:21:07Z",
       "side": 1,
       "message": "I only suggested some of those changes. Please do not use my signed-off, especially when I discouraged a such change.",
+      "range": {
+        "startLine": 19,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 60
+      },
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28e67ade_f19edca5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-01T19:31:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37fa9070_0dc673ce",
       "range": {
         "startLine": 19,
         "startChar": 1,
@@ -144,6 +258,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b054d37c_5b770281",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-01T19:31:38Z",
+      "side": 1,
+      "message": "eliminated in this patch, will try to eliminate in later patches as well.",
+      "parentUuid": "f85fcbb5_c831907d",
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6dde110c_ba91238e",
@@ -157,6 +289,30 @@
       "writtenOn": "2020-11-24T10:21:07Z",
       "side": 1,
       "message": "The code is self explanatory.\n\nNit: no brackets as there\u0027s a single line.",
+      "range": {
+        "startLine": 1257,
+        "startChar": 0,
+        "endLine": 1257,
+        "endChar": 2
+      },
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b48b25a6_b8f98560",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1257,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-01T19:31:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6dde110c_ba91238e",
       "range": {
         "startLine": 1257,
         "startChar": 0,
@@ -190,6 +346,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff334ad7_bcd5a2c1",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1263,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-01T19:31:38Z",
+      "side": 1,
+      "message": "please indicate what to set it to.  just after cpus_write_lock() we currently set cpuhp_tasks_frozen to 0.  are you suggesting moving this up so that it is done before actively rebuilding the domains?\n\nregardless this particular patch has been simplified, and no longer includes rebuilding of the domains (that will be in a subsequent patch).  I\u0027ll close this comment, and open a new one on the new patch.",
+      "parentUuid": "51d15698_6f1407c2",
+      "range": {
+        "startLine": 1263,
+        "startChar": 1,
+        "endLine": 1263,
+        "endChar": 26
+      },
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e87a727_e1b39a02",
@@ -203,6 +383,30 @@
       "writtenOn": "2020-11-24T10:21:07Z",
       "side": 1,
       "message": "The function is self explanatory. However, the reason why we need to wait is probably worth it.",
+      "range": {
+        "startLine": 1265,
+        "startChar": 0,
+        "endLine": 1265,
+        "endChar": 2
+      },
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54b2c57e_91646c59",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1265,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-01T19:31:38Z",
+      "side": 1,
+      "message": "reason why to be added in subsequent patch that will now contain the domain rebuilding.",
+      "parentUuid": "2e87a727_e1b39a02",
       "range": {
         "startLine": 1265,
         "startChar": 0,
@@ -236,6 +440,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdc0c051_6680f824",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1268,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-01T19:31:38Z",
+      "side": 1,
+      "message": "the extra ipi has been eliminated, and any ipi actions will happen in a vendor hook.",
+      "parentUuid": "50993923_734ab591",
+      "range": {
+        "startLine": 1268,
+        "startChar": 0,
+        "endLine": 1268,
+        "endChar": 2
+      },
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d92685a3_2b096491",
@@ -253,6 +481,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb5bc5ec_0d39bff9",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1270,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-01T19:31:38Z",
+      "side": 1,
+      "message": "eliminated from all patches.",
+      "parentUuid": "d92685a3_2b096491",
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "559f9245_93d3546c",
@@ -266,6 +512,24 @@
       "writtenOn": "2020-11-24T10:21:07Z",
       "side": 1,
       "message": "Probably better to start by waking up the CPUs before rebuilding the sched domains, to try to // it.",
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa01b820_83f42dde",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1271,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-01T19:31:38Z",
+      "side": 1,
+      "message": "eliminated.",
+      "parentUuid": "559f9245_93d3546c",
       "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
