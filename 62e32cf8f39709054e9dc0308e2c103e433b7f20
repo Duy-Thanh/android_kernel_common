@@ -70,6 +70,30 @@
       },
       "revId": "62e32cf8f39709054e9dc0308e2c103e433b7f20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa887988_0f8797d2",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-01T19:41:45Z",
+      "side": 1,
+      "message": "Makes sense. I though the possibility of the blocking was the deciding factor but maybe you are right. Then there might have been other reasons Greg asked to change to restricted hooks here?",
+      "parentUuid": "17e0bafa_d72399f1",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 0
+      },
+      "revId": "62e32cf8f39709054e9dc0308e2c103e433b7f20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
