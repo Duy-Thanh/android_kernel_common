@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "857cd67e_e1b69767",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2020-12-01T18:50:11Z",
+      "side": 1,
+      "message": "Why do you need restricted vendor hook instead of normal vendor hook?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 0
+      },
+      "revId": "62e32cf8f39709054e9dc0308e2c103e433b7f20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
