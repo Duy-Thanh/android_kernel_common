@@ -34,6 +34,7 @@
 #include <trace/hooks/sys.h>
 #include <trace/hooks/iommu.h>
 #include <trace/hooks/mm.h>
+<<<<<<< HEAD   (37edfb UPSTREAM: um: Only disable SSE on clang to work around old G)
 #include <trace/hooks/net.h>
 #include <trace/hooks/pm_domain.h>
 #include <trace/hooks/cpuidle_psci.h>
@@ -67,6 +68,9 @@
 #include <trace/hooks/psi.h>
 #include <trace/hooks/bl_hib.h>
 #include <trace/hooks/regmap.h>
+=======
+#include <trace/hooks/preemptirq.h>
+>>>>>>> CHANGE (2e14f0 ANDROID: tracing: Add restricted vendor hooks for preemptirq)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -248,6 +252,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_modify_src_caps);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_log);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_gfp_zone_flags);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_readahead_gfp_mask);
+<<<<<<< HEAD   (37edfb UPSTREAM: um: Only disable SSE on clang to work around old G)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_mutex_list_add);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_unlock_slowpath);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_wake_finish);
@@ -325,3 +330,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_scan_type);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_signal_whether_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freeze_whether_wake);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_preempt_disable);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_preempt_enable);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_irqs_disable);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_irqs_enable);
+>>>>>>> CHANGE (2e14f0 ANDROID: tracing: Add restricted vendor hooks for preemptirq)
