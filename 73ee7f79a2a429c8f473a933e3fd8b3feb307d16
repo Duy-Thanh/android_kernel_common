@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5450572f_98936835",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-01T08:13:28Z",
+      "side": 1,
+      "message": "If you are not adding any new symbols, no need to update the .xml file.  That proves no symbols were added.\n\nPlease remove the .xml update and rebase and resend.\n\nthanks!",
+      "revId": "73ee7f79a2a429c8f473a933e3fd8b3feb307d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
