@@ -16,6 +16,24 @@
       "message": "What driver code needs access to these functions?  These should be core mm symbols only.",
       "revId": "3d6610c0e65ea244b93397e8eb02c42ea9b3ed34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80118317_afc4af61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1809745
+      },
+      "writtenOn": "2020-12-01T13:51:54Z",
+      "side": 1,
+      "message": "We are considering in following two drivers.\nI think just reading vm stat has no harm.\n1. camera driver which may work differently depending on available memory status\n2. memory debug driver which may print memory information in case of low memory status prior to oom",
+      "parentUuid": "50d3a690_b202f2c1",
+      "revId": "3d6610c0e65ea244b93397e8eb02c42ea9b3ed34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
