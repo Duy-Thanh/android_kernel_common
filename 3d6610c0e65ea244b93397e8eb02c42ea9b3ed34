@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50d3a690_b202f2c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-01T12:48:59Z",
+      "side": 1,
+      "message": "What driver code needs access to these functions?  These should be core mm symbols only.",
+      "revId": "3d6610c0e65ea244b93397e8eb02c42ea9b3ed34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
