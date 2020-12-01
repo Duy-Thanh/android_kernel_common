@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25feb3b3_30ca3b4c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-01T18:39:35Z",
+      "side": 1,
+      "message": "drivers/staging/android/ion/ion_dma_buf.c is not part of the original patch. Please add \"Conflicts\" section and describe the diff.",
+      "revId": "ec953b4b9f48b3c8c3f34847c301995adb41eaef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
