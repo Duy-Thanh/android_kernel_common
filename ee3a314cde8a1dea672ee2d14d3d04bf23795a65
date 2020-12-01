@@ -34,6 +34,24 @@
       "parentUuid": "c46bd48f_6a7a5d3a",
       "revId": "ee3a314cde8a1dea672ee2d14d3d04bf23795a65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2e41a56_0bda81e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-01T17:40:48Z",
+      "side": 1,
+      "message": "Why not push that parent change upstream as well?  Anyway, ok, will take this now, but PLEASE work on getting \"fixes\" and new features upstream.",
+      "parentUuid": "fe65deb8_89859d8b",
+      "revId": "ee3a314cde8a1dea672ee2d14d3d04bf23795a65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
