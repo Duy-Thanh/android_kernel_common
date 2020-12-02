@@ -70,6 +70,24 @@
       "parentUuid": "15565a3a_539e2c66",
       "revId": "3d6610c0e65ea244b93397e8eb02c42ea9b3ed34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "484ff63c_6b7e8162",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-02T06:33:38Z",
+      "side": 1,
+      "message": "If all of this is just for debugging information, it\u0027s not needed for GKI 1.\n\nTry using other memory information, and in-kernel debugging information if you really need stuff like this, there should be plenty available already.  If not, please just submit your driver upstream so that it can be merged into the kernel tree for everyone to use.",
+      "parentUuid": "bc734c0e_d06129b2",
+      "revId": "3d6610c0e65ea244b93397e8eb02c42ea9b3ed34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
