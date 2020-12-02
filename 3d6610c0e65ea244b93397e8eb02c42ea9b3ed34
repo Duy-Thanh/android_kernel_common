@@ -52,6 +52,24 @@
       "parentUuid": "80118317_afc4af61",
       "revId": "3d6610c0e65ea244b93397e8eb02c42ea9b3ed34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc734c0e_d06129b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1809745
+      },
+      "writtenOn": "2020-12-02T02:32:41Z",
+      "side": 1,
+      "message": "If you meant LMKD as userspace oom logic, the LMKD does not know the exact time when the file lru size goes under a specific threshold. AFAIK LMKD works depending on kernel PSI event. I\u0027d like to print the memory status at that time even in market end user device.\n\nRegarding debug thing, it is debug but we cannot remove whole debug even in a production device. We need minimum debug information to analyze.",
+      "parentUuid": "15565a3a_539e2c66",
+      "revId": "3d6610c0e65ea244b93397e8eb02c42ea9b3ed34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
