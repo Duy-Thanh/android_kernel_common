@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48a101d5_09300f29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-03T21:51:47Z",
+      "side": 1,
+      "message": "This change will be abandoned in favor of merging it with the subsequent patch, thereby including both the activation of the CPU, and the rebuilding of the domains (prior to taking the lock) in the same patch.",
+      "revId": "890ac465915a945b0962c12d03c3bbfeea7b18eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
