@@ -36,6 +36,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f8e3be3_350df266",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-03T18:44:05Z",
+      "side": 1,
+      "message": "minor issue resolution.",
+      "revId": "f229492e5c2622cef6b60aa5f11304a62e33a82a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f3975f1_27b11b67",
@@ -49,6 +66,24 @@
       "writtenOn": "2020-12-02T14:38:06Z",
       "side": 1,
       "message": "nit: no curly brackets for a single line.",
+      "revId": "f229492e5c2622cef6b60aa5f11304a62e33a82a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76bb892b_f59c428e",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1258,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-03T18:44:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f3975f1_27b11b67",
       "revId": "f229492e5c2622cef6b60aa5f11304a62e33a82a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
