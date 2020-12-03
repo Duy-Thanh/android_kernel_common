@@ -228,7 +228,7 @@ struct usb_ep *usb_ep_autoconfig_by_name(
 
 	list_for_each_entry(ep, &gadget->ep_list, ep_list)
 		if (strncmp(ep->name, ep_name, strlen(ep_name)) == 0 &&
-				!ep->driver_data) {
+				!ep->claimed) {
 			ep_found = true;
 			break;
 		}
@@ -240,6 +240,7 @@ struct usb_ep *usb_ep_autoconfig_by_name(
 		pr_debug("Allocating ep address:%x\n", ep->address);
 		ep->desc = NULL;
 		ep->comp_desc = NULL;
+		ep->claimed = true;
 		return ep;
 	}
 
