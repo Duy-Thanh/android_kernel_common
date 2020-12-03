@@ -388,6 +388,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00a76be4_87cf41e8",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1263,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-03T21:33:09Z",
+      "side": 1,
+      "message": "based upon comments in subsequent patch-sets, this is resolved.",
+      "parentUuid": "ff334ad7_bcd5a2c1",
+      "range": {
+        "startLine": 1263,
+        "startChar": 1,
+        "endLine": 1263,
+        "endChar": 26
+      },
+      "revId": "3f464facf2ca9ba4e2f3ca6d942249155244acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e87a727_e1b39a02",
