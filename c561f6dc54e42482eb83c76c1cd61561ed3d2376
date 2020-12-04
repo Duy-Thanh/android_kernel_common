@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b548c8b7_f109e36d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-12-04T20:58:19Z",
+      "side": 1,
+      "message": "/buildbot/src/android/common-android-mainline/common/drivers/scsi/ufs/ufshcd.c:8389:1: warning: unused label \u0027out\u0027 [-Wunused-label]\nout:\n^~~~\n1 warning generated.\n/buildbot/src/android/common-android-mainline/common/drivers/md/dm-user.c:886:20: error: use of undeclared identifier \u0027dev_ioctl\u0027\n        .unlocked_ioctl \u003d dev_ioctl,\n                          ^\n1 error generated.",
+      "revId": "c561f6dc54e42482eb83c76c1cd61561ed3d2376",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
