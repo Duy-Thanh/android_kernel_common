@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006565512",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1518387?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "23fdf577_729aeb0e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-12-04T23:06:12Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Gurchetan Singh \u003cgurchetansingh@chromium.org\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 345453545 android-build.ayeaye-python-dispatcher_20201203.05_p0",
+      "revId": "7c73697bc1d8d1df476e800b66ff16d2ed71c657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006565512",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1518387?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f4f52cc3_ee0ef253",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-12-04T23:06:12Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 345453545 android-build.ayeaye-python-dispatcher_20201203.05_p0",
+      "revId": "7c73697bc1d8d1df476e800b66ff16d2ed71c657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
