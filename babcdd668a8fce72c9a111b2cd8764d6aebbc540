@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2aa6c0e_6c951af6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-12-05T00:49:34Z",
+      "side": 1,
+      "message": "Looks like kasan and allmodconfig need some cleanup. Will work on that next week.",
+      "revId": "babcdd668a8fce72c9a111b2cd8764d6aebbc540",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
