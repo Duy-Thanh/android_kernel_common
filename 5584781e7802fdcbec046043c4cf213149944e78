@@ -33,6 +33,24 @@
       "message": "Why not send this upstream for review first?",
       "revId": "5584781e7802fdcbec046043c4cf213149944e78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d1d2765_bd79dc36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2020-12-07T17:41:52Z",
+      "side": 1,
+      "message": "Because this function isn\u0027t upstream. Same comment as in aosp/1516829.",
+      "parentUuid": "e502305a_dcaa63e4",
+      "revId": "5584781e7802fdcbec046043c4cf213149944e78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
