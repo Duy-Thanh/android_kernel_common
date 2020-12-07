@@ -34,6 +34,52 @@
       "parentUuid": "87adb1c0_373ef9f7",
       "revId": "73b8625e720c63d403b3f75cd26a8a7c64b4eb16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08dfa884_7e5c1b07",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-07T20:14:20Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this also go into __mark_oom_victim ?\nI think by including this check into __mark_oom_victim() the change in wake_oom_reaper() to move the oom_reaper_lock becomes unnecessary.",
+      "range": {
+        "startLine": 721,
+        "startChar": 0,
+        "endLine": 722,
+        "endChar": 9
+      },
+      "revId": "73b8625e720c63d403b3f75cd26a8a7c64b4eb16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b191fb1_d1ec5fd9",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-07T20:14:20Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this also go into __mark_oom_victim ?",
+      "range": {
+        "startLine": 727,
+        "startChar": 0,
+        "endLine": 733,
+        "endChar": 18
+      },
+      "revId": "73b8625e720c63d403b3f75cd26a8a7c64b4eb16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
