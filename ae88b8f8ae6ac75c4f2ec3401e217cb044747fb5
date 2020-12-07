@@ -16,6 +16,24 @@
       "message": "Why would a driver ever call this function?  This is a core kernel internal function, not anything needed by a driver.  Do you have a link to the code that uses this so that I can propose a better solution?",
       "revId": "ae88b8f8ae6ac75c4f2ec3401e217cb044747fb5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f347093_2c82f0ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1248639
+      },
+      "writtenOn": "2020-12-07T08:15:09Z",
+      "side": 1,
+      "message": "thanks for the comment.\nI will share the information by the bug system. (bug: 174618657)",
+      "parentUuid": "c598867c_4e7e9203",
+      "revId": "ae88b8f8ae6ac75c4f2ec3401e217cb044747fb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
