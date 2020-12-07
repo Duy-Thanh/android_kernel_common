@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21cb4a4a_9d160ab6",
+        "filename": "include/linux/oom.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1790165
+      },
+      "writtenOn": "2020-12-07T14:39:00Z",
+      "side": 1,
+      "message": "just use TASK_COMM_LEN ?",
+      "revId": "812ca92f402ec41a376da7cb9fbfd48dd58555ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b0db62d_07a28fa2",
+        "filename": "kernel/signal.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1790165
+      },
+      "writtenOn": "2020-12-07T14:39:00Z",
+      "side": 1,
+      "message": "reap_task[TASK_COMM_LEN] ?",
+      "revId": "812ca92f402ec41a376da7cb9fbfd48dd58555ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
