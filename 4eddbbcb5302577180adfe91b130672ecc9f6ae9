@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6a2b8fd_900ccd4d",
+        "filename": "kernel/softirq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-12-07T17:40:11Z",
+      "side": 1,
+      "message": "why is this export in softirq.c instead of somewhere it is defined or used (eg, kernel/irq/handle.c)? It seems very random.",
+      "revId": "4eddbbcb5302577180adfe91b130672ecc9f6ae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
