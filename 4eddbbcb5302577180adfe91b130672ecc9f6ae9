@@ -34,6 +34,24 @@
       "parentUuid": "f6a2b8fd_900ccd4d",
       "revId": "4eddbbcb5302577180adfe91b130672ecc9f6ae9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20498df3_cd9d195a",
+        "filename": "kernel/softirq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-12-08T20:48:24Z",
+      "side": 1,
+      "message": "Ok, then please move it up after that inclusion. There is no rationale to putting it right here in the \"active_softirqs\" section",
+      "parentUuid": "17a759d4_543c2586",
+      "revId": "4eddbbcb5302577180adfe91b130672ecc9f6ae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
