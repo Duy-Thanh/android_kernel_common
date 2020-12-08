@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caa57e19_346da8c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-08T06:54:12Z",
+      "side": 1,
+      "message": "same nits as in aosp/1514959 in case John respins another version of these patches.",
+      "revId": "5a27405c3a0487582332728c20040b5ecfab6029",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
