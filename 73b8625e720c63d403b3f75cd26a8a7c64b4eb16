@@ -61,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "433f8f7e_a7c75443",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1810595
+      },
+      "writtenOn": "2020-12-08T08:09:32Z",
+      "side": 1,
+      "message": "Irrespective of this code, I think moving of the oom_reaper_lock is unnecessary as the introduced flag, MMF_OOM_REAP_QUEUED, will now take care of avoiding the queuing same task twice to oom reaper. So, I will discard these changes in next patch.\n\nMy understanding about the TIF_MEMDIE is that it is solely used by the OOM path to indicate that a process is being terminated by the oom killer and accordingly managing the oom killed process. Eg: In the exit_mm()-\u003eexit_oom_victim(), we are decrementing the oom_victims and waking up all processes on oom_victims_wait, which are unnecessary for a ulmk killed processes.\n\nSetting TIF_MEMDIE also makes the process now to access to reserves, which may not be the problem here, but point to note.\n\nLet me know If you have other opinion here?",
+      "parentUuid": "08dfa884_7e5c1b07",
+      "range": {
+        "startLine": 721,
+        "startChar": 0,
+        "endLine": 722,
+        "endChar": 9
+      },
+      "revId": "73b8625e720c63d403b3f75cd26a8a7c64b4eb16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b191fb1_d1ec5fd9",
         "filename": "mm/oom_kill.c",
         "patchSetId": 3
@@ -72,6 +96,30 @@
       "writtenOn": "2020-12-07T20:14:20Z",
       "side": 1,
       "message": "Shouldn\u0027t this also go into __mark_oom_victim ?",
+      "range": {
+        "startLine": 727,
+        "startChar": 0,
+        "endLine": 733,
+        "endChar": 18
+      },
+      "revId": "73b8625e720c63d403b3f75cd26a8a7c64b4eb16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fa9d819_b544889a",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1810595
+      },
+      "writtenOn": "2020-12-08T08:09:32Z",
+      "side": 1,
+      "message": "I see no harm but any use? Because with the reaper we can still reap the feasible memory.\n\nThis change is added in the oom, before adding the oom reaper. With out the reaper it is a problem as mentioned in the description that system can now enter into live lock. But I doubt If the live lock can happen with the ulmk kill on a process and it is frozen.\n\nMoreover, without the TIF_MEMDIE set, the process can still be frozen after thawing it.\n\nLet me know If it is still recommended to move to __mark_oom_victim().",
+      "parentUuid": "3b191fb1_d1ec5fd9",
       "range": {
         "startLine": 727,
         "startChar": 0,
