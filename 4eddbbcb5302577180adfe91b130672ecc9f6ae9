@@ -16,6 +16,24 @@
       "message": "why is this export in softirq.c instead of somewhere it is defined or used (eg, kernel/irq/handle.c)? It seems very random.",
       "revId": "4eddbbcb5302577180adfe91b130672ecc9f6ae9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17a759d4_543c2586",
+        "filename": "kernel/softirq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-08T14:14:56Z",
+      "side": 1,
+      "message": "Hi Todd,\n\nAs per my knowledge export should be in the file where tracepoints included. \n 29 #define CREATE_TRACE_POINTS\n 30 #include \u003ctrace/events/irq.h\u003e\nI see that file have \"kernel/softirq.c\" above lines and included this export in the same file.",
+      "parentUuid": "f6a2b8fd_900ccd4d",
+      "revId": "4eddbbcb5302577180adfe91b130672ecc9f6ae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
