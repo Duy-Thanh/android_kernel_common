@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a23feeab_b8e49157",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-09T03:08:57Z",
+      "side": 1,
+      "message": "Ack. However if you decide to move __thaw_task into __mark_oom_victim then please move this part as well to make it functionally correct.",
+      "parentUuid": "433f8f7e_a7c75443",
+      "range": {
+        "startLine": 721,
+        "startChar": 0,
+        "endLine": 722,
+        "endChar": 9
+      },
+      "revId": "73b8625e720c63d403b3f75cd26a8a7c64b4eb16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b191fb1_d1ec5fd9",
         "filename": "mm/oom_kill.c",
         "patchSetId": 3
@@ -120,6 +144,30 @@
       "side": 1,
       "message": "I see no harm but any use? Because with the reaper we can still reap the feasible memory.\n\nThis change is added in the oom, before adding the oom reaper. With out the reaper it is a problem as mentioned in the description that system can now enter into live lock. But I doubt If the live lock can happen with the ulmk kill on a process and it is frozen.\n\nMoreover, without the TIF_MEMDIE set, the process can still be frozen after thawing it.\n\nLet me know If it is still recommended to move to __mark_oom_victim().",
       "parentUuid": "3b191fb1_d1ec5fd9",
+      "range": {
+        "startLine": 727,
+        "startChar": 0,
+        "endLine": 733,
+        "endChar": 18
+      },
+      "revId": "73b8625e720c63d403b3f75cd26a8a7c64b4eb16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a256496b_b3eaad1c",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-09T03:08:57Z",
+      "side": 1,
+      "message": "Yeah, sounds like the reasons the code was added in oom killer are mitigated by oom-reaper. Still I find it logical to thaw the process being killed to make sure it exists without a delay. Surely if you move this into __mark_oom_victim() then TIF_MEMDIE part should be moved along with it.",
+      "parentUuid": "9fa9d819_b544889a",
       "range": {
         "startLine": 727,
         "startChar": 0,
