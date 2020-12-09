@@ -107,6 +107,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07e390c6_be63e103",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1810595
+      },
+      "writtenOn": "2020-12-09T07:37:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a23feeab_b8e49157",
+      "range": {
+        "startLine": 721,
+        "startChar": 0,
+        "endLine": 722,
+        "endChar": 9
+      },
+      "revId": "73b8625e720c63d403b3f75cd26a8a7c64b4eb16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b191fb1_d1ec5fd9",
@@ -168,6 +192,30 @@
       "side": 1,
       "message": "Yeah, sounds like the reasons the code was added in oom killer are mitigated by oom-reaper. Still I find it logical to thaw the process being killed to make sure it exists without a delay. Surely if you move this into __mark_oom_victim() then TIF_MEMDIE part should be moved along with it.",
       "parentUuid": "9fa9d819_b544889a",
+      "range": {
+        "startLine": 727,
+        "startChar": 0,
+        "endLine": 733,
+        "endChar": 18
+      },
+      "revId": "73b8625e720c63d403b3f75cd26a8a7c64b4eb16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6ef0908_f7a79cf9",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1810595
+      },
+      "writtenOn": "2020-12-09T07:37:02Z",
+      "side": 1,
+      "message": "Agree that it is logical so that a process killed will get exits with out much delay. But I have some reservations w.r.t moving the TIF_MEMDIE to __mark_oom_victim, reasons for which are explained above and you Ack\u0027ed it, thus thinking not to move the __thaw_task to __mark_oom_victim now.\n\nWill remember that in future If it is moved, then TIF_MEMDIE also should be.",
+      "parentUuid": "a256496b_b3eaad1c",
       "range": {
         "startLine": 727,
         "startChar": 0,
