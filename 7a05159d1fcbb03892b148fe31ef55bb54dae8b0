@@ -16,6 +16,23 @@
       "message": "Suggested to bypass due to b/172510680.",
       "revId": "7a05159d1fcbb03892b148fe31ef55bb54dae8b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f4e7f03_bac44729",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-12-09T14:07:49Z",
+      "side": 1,
+      "message": "BloatBuster found for this change:\n\nkernel_x86_64_allmodconfig on aosp_kernel-common-android-4.19-stable: File with significant size growth: vmlinux : 108 MiB -\u003e 134 MiB (+26 MiB)",
+      "revId": "7a05159d1fcbb03892b148fe31ef55bb54dae8b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
