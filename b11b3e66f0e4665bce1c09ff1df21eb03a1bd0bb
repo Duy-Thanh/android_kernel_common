@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd8d6bc2_bcdf1e30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-12-10T08:10:56Z",
+      "side": 1,
+      "message": "Very early pass here and I need to clean some basic things (checkpatch warnings etc).\n\nBut let me know what you think of the general approach here.",
+      "revId": "b11b3e66f0e4665bce1c09ff1df21eb03a1bd0bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
