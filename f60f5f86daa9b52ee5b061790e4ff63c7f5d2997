@@ -22,6 +22,29 @@
       },
       "revId": "f60f5f86daa9b52ee5b061790e4ff63c7f5d2997",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe9212c3_719bb827",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 1667,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-10T08:19:37Z",
+      "side": 1,
+      "message": "careful with this symbol, it can be used incorrectly very easily, I strongly do not recommend using it 😊",
+      "range": {
+        "startLine": 1667,
+        "startChar": 2,
+        "endLine": 1667,
+        "endChar": 17
+      },
+      "revId": "f60f5f86daa9b52ee5b061790e4ff63c7f5d2997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
