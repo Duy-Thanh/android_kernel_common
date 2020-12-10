@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "359c0e21_abc2b786",
+        "filename": "android/abi_gki_aarch64.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1165,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-12-10T16:22:14Z",
+      "side": 0,
+      "message": "that symbol going away looks odd",
+      "range": {
+        "startLine": 1165,
+        "startChar": 24,
+        "endLine": 1165,
+        "endChar": 53
+      },
+      "revId": "86259e61785c89e1c301c1519c635419b5832f3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
