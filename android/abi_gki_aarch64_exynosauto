@@ -1463,9 +1463,12 @@
   kobject_init_and_add
 
 # required by vlx-hyp-module.ko
+  __flush_icache_range
+  ioremap_cache
   irq_create_of_mapping
   irq_dispose_mapping
   irq_find_matching_fwspec
+  kick_all_cpus_sync
   of_irq_find_parent
   proc_mkdir
 
