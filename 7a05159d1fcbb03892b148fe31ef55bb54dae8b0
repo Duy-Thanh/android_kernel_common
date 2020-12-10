@@ -33,6 +33,24 @@
       "message": "BloatBuster found for this change:\n\nkernel_x86_64_allmodconfig on aosp_kernel-common-android-4.19-stable: File with significant size growth: vmlinux : 108 MiB -\u003e 134 MiB (+26 MiB)",
       "revId": "7a05159d1fcbb03892b148fe31ef55bb54dae8b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "907967d4_430b6562",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-12-10T19:05:10Z",
+      "side": 1,
+      "message": "neat find. Want to file a bug to follow up on? Particularly comparing the output of https://github.com/google/bloaty can be pretty useful.  In particular, we\u0027ve seen issues with increases in the .debug_info.",
+      "parentUuid": "7f4e7f03_bac44729",
+      "revId": "7a05159d1fcbb03892b148fe31ef55bb54dae8b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
