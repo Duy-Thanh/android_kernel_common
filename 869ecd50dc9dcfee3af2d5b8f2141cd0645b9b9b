@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "88f016a4_6e087370",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2020-12-10T17:43:01Z",
+      "side": 1,
+      "message": "Done. Thanks!",
+      "parentUuid": "4990c47f_11585137",
+      "range": {
+        "startLine": 14,
+        "startChar": 15,
+        "endLine": 14,
+        "endChar": 23
+      },
+      "revId": "869ecd50dc9dcfee3af2d5b8f2141cd0645b9b9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "710bdc0f_dd3f05ee",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -37,6 +61,24 @@
       "writtenOn": "2020-12-10T06:24:30Z",
       "side": 1,
       "message": "Do you need to update the abi xml as well?",
+      "revId": "869ecd50dc9dcfee3af2d5b8f2141cd0645b9b9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c9f117d_0d79266f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2020-12-10T17:43:01Z",
+      "side": 1,
+      "message": "I confirmed. It will not update xnml file with command. Thanks!\n```\n$ BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build_abi.sh --update\n```",
+      "parentUuid": "710bdc0f_dd3f05ee",
       "revId": "869ecd50dc9dcfee3af2d5b8f2141cd0645b9b9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
