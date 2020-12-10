@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "326505f1_9a6bae93",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-10T20:16:12Z",
+      "side": 1,
+      "message": "This comment should be added before __mark_oom_victim as well. That would explain why you need find_lock_task_mm in add_to_oom_reaper",
+      "range": {
+        "startLine": 705,
+        "startChar": 0,
+        "endLine": 707,
+        "endChar": 0
+      },
+      "revId": "25c4a7f5e9f035d53c37eb2a2da16cef2e6f6f87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
