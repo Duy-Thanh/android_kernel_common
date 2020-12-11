@@ -450,6 +450,7 @@ __mmap_switched:
 
 0:	cmp	x9, x10
 	b.hs	2f
+<<<<<<< HEAD   (4cb652 ANDROID: cuttlefish_defconfig: Disable CONFIG_KSM)
 	ldp	x11, x12, [x9], #24
 	ldr	x13, [x9, #-8]
 	cmp	w12, #R_AARCH64_RELATIVE
@@ -488,6 +489,13 @@ __mmap_switched:
 	msr	sp_el0, x4			// Save thread_info
 #endif
 
+=======
+	str	xzr, [x6], #8			// Clear BSS
+	b	1b
+2:
+	adrp	x4, initial_sp
+	add	sp, x4, :lo12:initial_sp
+>>>>>>> BRANCH (f299fb Linux 4.4.248)
 	str_l	x21, __fdt_pointer, x5		// Save FDT pointer
 
 	ldr_l	x4, kimage_vaddr		// Save the offset between
