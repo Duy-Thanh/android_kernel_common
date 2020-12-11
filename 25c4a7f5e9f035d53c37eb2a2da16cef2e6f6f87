@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "707b8dc8_1da882f2",
+        "filename": "Documentation/admin-guide/kernel-parameters.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 4607,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-11T18:19:20Z",
+      "side": 1,
+      "message": "Thanks for the comment. The patch checks for capable(CAP_KILL), so any unprivileged process would not be able to do this. If some other process with CAP_KILL poses as lmkd then all it gains is quicker mm reaping when killing processes. I\u0027ll check with security team if that would be an issue.",
+      "parentUuid": "12281432_ad83c727",
+      "range": {
+        "startLine": 4607,
+        "startChar": 1,
+        "endLine": 4607,
+        "endChar": 24
+      },
+      "revId": "25c4a7f5e9f035d53c37eb2a2da16cef2e6f6f87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "326505f1_9a6bae93",
         "filename": "mm/oom_kill.c",
         "patchSetId": 5
