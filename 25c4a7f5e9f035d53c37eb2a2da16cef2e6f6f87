@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12281432_ad83c727",
+        "filename": "Documentation/admin-guide/kernel-parameters.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 4607,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-11T10:20:38Z",
+      "side": 1,
+      "message": "specifying a specific program to notify by the name only, what could ever go wrong?  😞\n\nWhat keeps unprivileged userspace from creating a task of the same name?  What if there are duplicate processes with the same name?  This feels like it could go wrong very quickly...",
+      "range": {
+        "startLine": 4607,
+        "startChar": 1,
+        "endLine": 4607,
+        "endChar": 24
+      },
+      "revId": "25c4a7f5e9f035d53c37eb2a2da16cef2e6f6f87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "326505f1_9a6bae93",
         "filename": "mm/oom_kill.c",
         "patchSetId": 5
