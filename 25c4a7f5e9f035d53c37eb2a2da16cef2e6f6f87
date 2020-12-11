@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edc598a1_3872d089",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-11T03:34:38Z",
+      "side": 1,
+      "message": "Greg, is my explanation satisfactory enough for you to remove the -2?",
+      "revId": "25c4a7f5e9f035d53c37eb2a2da16cef2e6f6f87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "326505f1_9a6bae93",
