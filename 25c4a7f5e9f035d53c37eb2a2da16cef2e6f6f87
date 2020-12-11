@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5f4c57b_99f50aa8",
+        "filename": "Documentation/admin-guide/kernel-parameters.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 4607,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-11T20:22:06Z",
+      "side": 1,
+      "message": "The command line here is needed to indicate which kills should be assisted with oom-reaper thread. Using oom-reaper for any kill I think might backfire in terms of oom-reaper bandwidth and power consumption.\n\nCharan, have you ever tried using oom-reaper for all kills without checking for the killer\u0027s identity?",
+      "parentUuid": "a35d4b60_8ebef9c1",
+      "range": {
+        "startLine": 4607,
+        "startChar": 1,
+        "endLine": 4607,
+        "endChar": 24
+      },
+      "revId": "25c4a7f5e9f035d53c37eb2a2da16cef2e6f6f87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "326505f1_9a6bae93",
         "filename": "mm/oom_kill.c",
         "patchSetId": 5
