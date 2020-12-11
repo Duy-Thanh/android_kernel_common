@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e610dd4e_23c1e3f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-11T08:52:31Z",
+      "side": 1,
+      "message": "Please write this as:\na3bf0efb17a1 (\"ANDROID: Add allowed symbols from sctp.ko and qrtr.ko\")",
+      "range": {
+        "startLine": 10,
+        "startChar": 5,
+        "endLine": 10,
+        "endChar": 45
+      },
+      "revId": "b5bbc7b1e4d9691612b00db0b267d6fcfaa33f0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
