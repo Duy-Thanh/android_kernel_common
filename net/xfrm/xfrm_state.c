@@ -2384,8 +2384,15 @@ int xfrm_user_policy(struct sock *sk, int optname, sockptr_t optval, int optlen)
 		if (in_compat_syscall()) {
 			struct xfrm_translator *xtr = xfrm_get_translator();
 
+<<<<<<< HEAD   (83bf34 ANDROID: dm: dm-user: New target that proxies BIOs to usersp)
 			if (!xtr)
 				return -EOPNOTSUPP;
+=======
+		if (!xtr) {
+			kfree(data);
+			return -EOPNOTSUPP;
+		}
+>>>>>>> BRANCH (33dc96 Merge tag 'ktest-v5.10-rc6' of git://git.kernel.org/pub/scm/)
 
 			err = xtr->xlate_user_policy_sockptr(&data, optlen);
 			xfrm_put_translator(xtr);
