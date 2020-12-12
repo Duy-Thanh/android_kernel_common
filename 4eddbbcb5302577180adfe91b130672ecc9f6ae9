@@ -52,6 +52,24 @@
       "parentUuid": "17a759d4_543c2586",
       "revId": "4eddbbcb5302577180adfe91b130672ecc9f6ae9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "739ab0b8_4984b979",
+        "filename": "kernel/softirq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-12T04:30:56Z",
+      "side": 1,
+      "message": "okay. I will push next patchset.",
+      "parentUuid": "20498df3_cd9d195a",
+      "revId": "4eddbbcb5302577180adfe91b130672ecc9f6ae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
