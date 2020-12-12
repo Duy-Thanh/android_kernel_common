@@ -670,7 +670,7 @@ int get_nohz_timer_target(void)
 	struct sched_domain *sd;
 
 	if (housekeeping_cpu(cpu, HK_FLAG_TIMER)) {
-		if (!idle_cpu(cpu))
+		if (!idle_cpu(cpu) && cpu_active(cpu))
 			return cpu;
 		default_cpu = cpu;
 	}
@@ -689,8 +689,23 @@ int get_nohz_timer_target(void)
 		}
 	}
 
-	if (default_cpu == -1)
+	if (default_cpu == -1) {
 		default_cpu = housekeeping_any_cpu(HK_FLAG_TIMER);
+
+		/* ensure that the housekeeping cpu found is active,
+		 * and if not, choose an active cpu.  and if that
+		 * fails choose an online cpu.
+		 */
+		if (!cpu_active(default_cpu)) {
+			default_cpu = cpumask_any(cpu_active_mask);
+			if (unlikely(default_cpu >= nr_cpu_ids)) {
+				default_cpu = cpumask_any(cpu_online_mask);
+				if (unlikely(default_cpu >= nr_cpu_ids))
+					goto unlock;
+			}
+		}
+	}
+
 	cpu = default_cpu;
 unlock:
 	rcu_read_unlock();
