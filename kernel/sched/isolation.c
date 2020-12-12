@@ -30,7 +30,7 @@ int housekeeping_any_cpu(enum hk_flags flags)
 			if (cpu < nr_cpu_ids)
 				return cpu;
 
-			return cpumask_any_and(housekeeping_mask, cpu_online_mask);
+			return cpumask_any_and(housekeeping_mask, cpu_active_mask);
 		}
 	}
 	return smp_processor_id();

@@ -30,7 +30,13 @@ extern void __init housekeeping_init(void);
 
 static inline int housekeeping_any_cpu(enum hk_flags flags)
 {
-	return smp_processor_id();
+	int cpu;
+
+	cpu = cpumask_any(cpu_active_mask);
+	if (cpu >= nr_cpu_ids)
+		cpu = smp_processor_id();
+
+	return cpu;
 }
 
 static inline const struct cpumask *housekeeping_cpumask(enum hk_flags flags)
@@ -54,7 +60,9 @@ static inline bool housekeeping_cpu(int cpu, enum hk_flags flags)
 	if (static_branch_unlikely(&housekeeping_overridden))
 		return housekeeping_test_cpu(cpu, flags);
 #endif
-	return true;
+
+	/* avoid inactive CPUs for housekeeping operations */
+	return cpu_active(cpu);
 }
 
 #endif /* _LINUX_SCHED_ISOLATION_H */
