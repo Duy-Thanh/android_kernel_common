@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6449c355_0c15e357",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-12-14T17:14:09Z",
+      "side": 1,
+      "message": "Apparently these need to go in android12-5.10 now, could you abandon and push again on the right branch?",
+      "revId": "efbe71cc295517cc60ee94dac881664916e63fa6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
