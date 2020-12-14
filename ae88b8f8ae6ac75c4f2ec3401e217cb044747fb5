@@ -34,6 +34,23 @@
       "parentUuid": "c598867c_4e7e9203",
       "revId": "ae88b8f8ae6ac75c4f2ec3401e217cb044747fb5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a3f7b90_da98b244",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1248639
+      },
+      "writtenOn": "2020-12-14T03:53:16Z",
+      "side": 1,
+      "message": "bug:174618657 is updated, please kindly check the information in the bug system.",
+      "revId": "ae88b8f8ae6ac75c4f2ec3401e217cb044747fb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
