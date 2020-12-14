@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98aaeeec_03b0e1b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-12-14T17:32:22Z",
+      "side": 1,
+      "message": "Looks like KASAN and allmodconfig need some backports.",
+      "revId": "6526dfb14fe744153f581a3b3de712ebc118be46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
