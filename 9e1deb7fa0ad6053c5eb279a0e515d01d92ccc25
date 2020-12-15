@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10fc2c14_29492a48",
+        "filename": "android/abi_gki_aarch64_cuttlefish",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-15T14:45:18Z",
+      "side": 1,
+      "message": "I thought we were building this in?  If not, that\u0027s a change from android12-5.4 😞",
+      "range": {
+        "startLine": 267,
+        "startChar": 0,
+        "endLine": 267,
+        "endChar": 26
+      },
+      "revId": "9e1deb7fa0ad6053c5eb279a0e515d01d92ccc25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
