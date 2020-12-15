@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3545004c_e5d46396",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-15T03:38:19Z",
+      "side": 1,
+      "message": "Hi.  In our internal work to bring up pause, it became clear we need to use the active_mask in a few places, per the enclosed.  Please review and let us know your thoughts, we would like ACK to take these changes if at all possible.\n\nSincerely,\nStephen Dickey",
+      "revId": "5ced753d2f18e88cb03b28c1176b0ec292c3416c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
