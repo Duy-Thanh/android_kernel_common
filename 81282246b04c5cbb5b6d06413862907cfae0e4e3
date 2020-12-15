@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fc19336_4e14dc26",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-12-15T09:43:53Z",
+      "side": 1,
+      "message": "\u003e Commit does not link to an upstream reference at lore\n\u003e Please add a line like \u0027Link: https://lore.kernel.org/...\u0027\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nPlease fix.",
+      "parentUuid": "26e5d470_fd44a96c",
+      "revId": "81282246b04c5cbb5b6d06413862907cfae0e4e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
