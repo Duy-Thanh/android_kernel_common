@@ -247,7 +247,14 @@ struct prctl_mm_map {
 #define PR_SET_IO_FLUSHER		57
 #define PR_GET_IO_FLUSHER		58
 
+<<<<<<< HEAD   (bac493 Merge 0ca2ce81eb8e ("Merge tag 'arm64-upstream' of git://git)
 #define PR_SET_VMA		0x53564d41
 # define PR_SET_VMA_ANON_NAME		0
+=======
+/* Dispatch syscalls to a userspace handler */
+#define PR_SET_SYSCALL_USER_DISPATCH	59
+# define PR_SYS_DISPATCH_OFF		0
+# define PR_SYS_DISPATCH_ON		1
+>>>>>>> BRANCH (533369 Merge tag 'timers-core-2020-12-14' of git://git.kernel.org/p)
 
 #endif /* _LINUX_PRCTL_H */
