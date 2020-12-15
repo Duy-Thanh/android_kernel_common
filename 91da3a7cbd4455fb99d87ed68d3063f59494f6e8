@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f2b4275_0cf726a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-15T08:08:11Z",
+      "side": 1,
+      "message": "Why is this needed in the android-mainline branch?  It will sync with 5.11-rc1 in mere days...",
+      "revId": "91da3a7cbd4455fb99d87ed68d3063f59494f6e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
