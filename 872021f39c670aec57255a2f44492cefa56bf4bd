@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23f88d2d_437342ca",
+        "filename": "include/linux/sched/isolation.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-12-15T14:00:45Z",
+      "side": 1,
+      "message": "If you are trying to fix the get_nohz_timer_target() this is not the right approach. Also, you agreed in producing numbers to back the need for a such change.",
+      "range": {
+        "startLine": 31,
+        "startChar": 18,
+        "endLine": 31,
+        "endChar": 38
+      },
+      "revId": "872021f39c670aec57255a2f44492cefa56bf4bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d259d1b6_43a668e8",
+        "filename": "include/linux/sched/isolation.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-12-15T14:00:45Z",
+      "side": 1,
+      "message": "What is this change trying to fix ?\n\nThis function is called in:\n\n- HP callback, too late/early in the HP path to be called by pause\n- idle_balance, should be already covered see e.g :nohz_balance_enter_idle()",
+      "range": {
+        "startLine": 57,
+        "startChar": 19,
+        "endLine": 57,
+        "endChar": 35
+      },
+      "revId": "872021f39c670aec57255a2f44492cefa56bf4bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
