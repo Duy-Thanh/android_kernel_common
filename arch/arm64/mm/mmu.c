@@ -625,12 +625,13 @@ core_initcall(map_entry_trampoline);
 /*
  * Open coded check for BTI, only for use to determine configuration
  * for early mappings for before the cpufeature code has run.
+ * Check runtime disable early_param as it is available by now.
  */
 static bool arm64_early_this_cpu_has_bti(void)
 {
 	u64 pfr1;
 
-	if (!IS_ENABLED(CONFIG_ARM64_BTI_KERNEL))
+	if (!IS_ENABLED(CONFIG_ARM64_BTI_KERNEL) || arm64_bti_kernel_disabled)
 		return false;
 
 	pfr1 = read_sysreg_s(SYS_ID_AA64PFR1_EL1);

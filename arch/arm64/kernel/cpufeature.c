@@ -183,6 +183,18 @@ s64 ptr_auth_ftr_filter(const struct arm64_ftr_bits *ftrp, s64 val)
 }
 #endif
 
+/* Provide a mechanism to disable BTI using kernel cmdline */
+bool arm64_bti_kernel_disabled;
+
+#ifdef CONFIG_ARM64_BTI_KERNEL
+static int __init arm64_bti_kernel_disable(char *buf)
+{
+	return strtobool(buf, &arm64_bti_kernel_disabled);
+}
+early_param("arm64.bti_kernel_disable", arm64_bti_kernel_disable);
+#endif
+
+
 /*
  * NOTE: Any changes to the visibility of features should be kept in
  * sync with the documentation of the CPU feature register ABI.

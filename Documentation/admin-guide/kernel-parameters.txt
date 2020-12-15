@@ -377,6 +377,10 @@
 			[ARM64] Disable Linux support for address
 			authentication (both user and in-kernel).
 
+	arm64.bti_kernel_disable=
+			[ARM64] Disable Linux support for ARMv8.5-BTI
+			 in-kernel only.
+
 	ataflop=	[HW,M68k]
 
 	atarimouse=	[HW,MOUSE] Atari Mouse

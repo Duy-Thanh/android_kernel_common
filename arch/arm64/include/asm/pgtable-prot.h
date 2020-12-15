@@ -44,7 +44,7 @@ extern bool arm64_use_ng_mappings;
  * guarded even if the system does support BTI.
  */
 #ifdef CONFIG_ARM64_BTI_KERNEL
-#define PTE_MAYBE_GP		(system_supports_bti() ? PTE_GP : 0)
+#define PTE_MAYBE_GP		((system_supports_bti() && !arm64_bti_kernel_disabled) ? PTE_GP : 0)
 #else
 #define PTE_MAYBE_GP		0
 #endif

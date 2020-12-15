@@ -356,10 +356,12 @@ struct arm64_cpu_capabilities {
 	const struct arm64_cpu_capabilities *match_list;
 };
 
-/* Flags to check early params PTR_AUTH */
+/* Flags to check early params PTR_AUTH and BTI*/
 #ifdef CONFIG_ARM64_PTR_AUTH
 extern bool arm64_ptr_auth_disabled;
 #endif
+
+extern bool arm64_bti_kernel_disabled;
 
 static inline int cpucap_default_scope(const struct arm64_cpu_capabilities *cap)
 {
