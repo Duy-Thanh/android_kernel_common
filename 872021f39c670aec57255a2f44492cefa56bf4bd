@@ -18,6 +18,41 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0da0d878_6a9ba8c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-15T20:42:33Z",
+      "side": 1,
+      "message": "not sure how to abandon this change, but please considered it abandoned.",
+      "revId": "872021f39c670aec57255a2f44492cefa56bf4bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5c842a0_03a132f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-15T20:42:33Z",
+      "side": 1,
+      "message": "will do.  also, the changes will be split between idle and timers",
+      "parentUuid": "a9ffd441_2ccf5e6a",
+      "revId": "872021f39c670aec57255a2f44492cefa56bf4bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23f88d2d_437342ca",
