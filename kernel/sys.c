@@ -42,8 +42,12 @@
 #include <linux/syscore_ops.h>
 #include <linux/version.h>
 #include <linux/ctype.h>
+<<<<<<< HEAD   (80b1c1 Merge 0ca2ce81eb8e ("Merge tag 'arm64-upstream' of git://git)
 #include <linux/mm.h>
 #include <linux/mempolicy.h>
+=======
+#include <linux/syscall_user_dispatch.h>
+>>>>>>> BRANCH (533369 Merge tag 'timers-core-2020-12-14' of git://git.kernel.org/p)
 
 #include <linux/compat.h>
 #include <linux/syscalls.h>
@@ -2681,6 +2685,10 @@ SYSCALL_DEFINE5(prctl, int, option, unsigned long, arg2, unsigned long, arg3,
 			return -EINVAL;
 
 		error = (current->flags & PR_IO_FLUSHER) == PR_IO_FLUSHER;
+		break;
+	case PR_SET_SYSCALL_USER_DISPATCH:
+		error = set_syscall_user_dispatch(arg2, arg3, arg4,
+						  (char __user *) arg5);
 		break;
 	default:
 		error = -EINVAL;
