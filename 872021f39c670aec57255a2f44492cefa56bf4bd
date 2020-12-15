@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9ffd441_2ccf5e6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-12-15T18:58:54Z",
+      "side": 1,
+      "message": "As discussed earlier, please post against android12-5.10.",
+      "revId": "872021f39c670aec57255a2f44492cefa56bf4bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23f88d2d_437342ca",
