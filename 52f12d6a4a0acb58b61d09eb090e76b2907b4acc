@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bda7df86_04503365",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-15T08:37:48Z",
+      "side": 1,
+      "message": "Note, a few board-specific configs need to be changed along with this at the same time, so that should be done at the same time here too.",
+      "revId": "52f12d6a4a0acb58b61d09eb090e76b2907b4acc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
