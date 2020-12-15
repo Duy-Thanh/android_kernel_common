@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcd2b408_41faf0b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2020-12-15T18:30:34Z",
+      "side": 1,
+      "message": "It looks like the x86 gki_defconfig isn\u0027t happy about the build server missing libelf-dev. I think we need to explicitly disable CONFIG_DYNAMIC_FTRACE there.",
+      "revId": "414b1058af2edce1948373c72cc5d3e93d47bec6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
