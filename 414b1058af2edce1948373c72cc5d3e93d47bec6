@@ -16,6 +16,24 @@
       "message": "It looks like the x86 gki_defconfig isn\u0027t happy about the build server missing libelf-dev. I think we need to explicitly disable CONFIG_DYNAMIC_FTRACE there.",
       "revId": "414b1058af2edce1948373c72cc5d3e93d47bec6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6e5073a_0a9a1d14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2020-12-15T18:47:52Z",
+      "side": 1,
+      "message": "And LLVM IAS doesn\u0027t work with 32-bit ARM...",
+      "parentUuid": "dcd2b408_41faf0b5",
+      "revId": "414b1058af2edce1948373c72cc5d3e93d47bec6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
