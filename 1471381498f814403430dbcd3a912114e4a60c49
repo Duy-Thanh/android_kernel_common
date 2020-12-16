@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdeba897_3ddf6e3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2020-12-16T08:58:38Z",
+      "side": 1,
+      "message": "I can see a couple of issues with this:\n\n- you seem to lose the width of the access as you log it (HW usually *is* width-sensitive)\n\n- there is no way to select the scope of the tracing (it is very unlikely that you want to trace every single MMIO access in the system, and more likely that you\u0027d want a specific subsystem instead)\n\n- this creates a new ABI, which has to be agreed upon upstream first\n\nIf you are trying to track accesses to devices that are not clock, it feels like you should involve the clock subsystem directly, and track the dependency between a device and its clock provider, rather than having a blanket MMIO tracing.",
+      "revId": "1471381498f814403430dbcd3a912114e4a60c49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
