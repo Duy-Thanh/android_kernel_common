@@ -22,6 +22,30 @@
       },
       "revId": "f052562693dc334bfef72bbe14baf6122d7ea014",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "865f1b55_87722ea7",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-16T17:59:59Z",
+      "side": 0,
+      "message": "yes, a CPU could be online but inactive.  I will look in the active mask first, AND look in the online mask second, AND use housekeeping_any_cpu third.",
+      "parentUuid": "787438a9_0ef382fa",
+      "range": {
+        "startLine": 689,
+        "startChar": 16,
+        "endLine": 689,
+        "endChar": 36
+      },
+      "revId": "f052562693dc334bfef72bbe14baf6122d7ea014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

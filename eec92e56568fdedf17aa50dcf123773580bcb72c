@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d86f8599_0fd132dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-16T17:59:59Z",
+      "side": 1,
+      "message": "I will update with this text.",
+      "parentUuid": "04219e29_cf82ac14",
+      "revId": "eec92e56568fdedf17aa50dcf123773580bcb72c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "cba163b3_0b4d5248",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -31,6 +49,23 @@
       "writtenOn": "2020-12-15T22:01:17Z",
       "side": 1,
       "message": "Hi  Could you please review?  Sincerely, Stephen Dickey",
+      "revId": "eec92e56568fdedf17aa50dcf123773580bcb72c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fbffa2c_6346b9dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-16T17:59:59Z",
+      "side": 1,
+      "message": "replies to Pavan\u0027s comments.  updating with new patch.",
       "revId": "eec92e56568fdedf17aa50dcf123773580bcb72c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
