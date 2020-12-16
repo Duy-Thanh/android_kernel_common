@@ -16,6 +16,24 @@
       "message": "remember we also need a change to the vintf requirements to enforce this on launch S devices",
       "revId": "6ce1a9a8dc7624afe19033e75ebf767114f67ccd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35d69b76_c0a317a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1297255
+      },
+      "writtenOn": "2020-12-16T19:35:27Z",
+      "side": 1,
+      "message": "Sure I will do that",
+      "parentUuid": "5c507987_be4e994d",
+      "revId": "6ce1a9a8dc7624afe19033e75ebf767114f67ccd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
