@@ -36,6 +36,7 @@
     __has_builtin(__builtin_sub_overflow)
 #define COMPILER_HAS_GENERIC_BUILTIN_OVERFLOW 1
 #endif
+<<<<<<< HEAD   (a741f2 ANDROID: sched: Export sched_setattr_nocheck)
 
 /* The following are for compatibility with GCC, from compiler-gcc.h,
  * and may be redefined here because they should not be shared with other
@@ -58,3 +59,5 @@
 
 #define __nocfi		__attribute__((__no_sanitize__("cfi")))
 #endif
+=======
+>>>>>>> BRANCH (8a866b Linux 5.4.84)

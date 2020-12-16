@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0
 VERSION = 5
 PATCHLEVEL = 4
-SUBLEVEL = 83
+SUBLEVEL = 84
 EXTRAVERSION =
 NAME = Kleptomaniac Octopus
 
@@ -826,6 +826,10 @@ ifneq ($(LLVM_IAS),1)
 KBUILD_AFLAGS	+= -Wa,-gdwarf-2
 endif
 endif
+<<<<<<< HEAD   (a741f2 ANDROID: sched: Export sched_setattr_nocheck)
+=======
+
+>>>>>>> BRANCH (8a866b Linux 5.4.84)
 ifdef CONFIG_DEBUG_INFO_DWARF4
 DEBUG_CFLAGS	+= -gdwarf-4
 endif
