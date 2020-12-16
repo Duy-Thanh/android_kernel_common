@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f373476_91ac84d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-16T18:04:57Z",
+      "side": 1,
+      "message": "If I remember correctly, this has to be a topic branch, for JUST the single config option (you are mixing them here), for the different repos, and then TH will be happy with them.\n\nThere should only be 2 patches per topic.",
+      "revId": "61056367e41500288439926cd7182b4545163391",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
