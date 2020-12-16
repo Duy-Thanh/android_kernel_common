@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b5364c2_35cdf998",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-16T18:34:41Z",
+      "side": 1,
+      "message": "you seem to lose the width of the access as you log it (HW usually *is* width-sensitive)\n\u003cPrasd\u003e I have not changed HW read/write operation and just logging after read and before write.\n\nIt is the logging I\u0027m referring to. You log a byte access the same as a 32bit access, and yet they are very different operations. If this is supposed to help debugging, that\u0027s not great.\n\u003cPrasad\u003e \n\nPlease take a look into this Gerrit, where I had asked Gregh about the same. \n\nhttps://android-review.googlesource.com/c/kernel/common/+/1519230\n#define __raw_writew __raw_writew\nstatic inline void __raw_writew(u16 val, volatile void __iomem *addr)\n{\n\n\tlog_writew_io(val,addr);\n\tasm volatile(\"strh %w0, [%1]\" : : \"rZ\" (val), \"r\" (addr));\n}\n#define __raw_writel __raw_writel\nstatic __always_inline void __raw_writel(u32 val, volatile void __iomem *addr)\n{\n\n\tlog_writel_io(val,addr);\n\tasm volatile(\"str %w0, [%1]\" : : \"rZ\" (val), \"r\" (addr));\n}\n\nI have to add 4 variants of tracepoints instead of single trace points(log_write_io). \nlog_writeb_io(val,addr);\nlog_writew_io(val,addr);\nlog_writel_io(val,addr);\nlog_writeq_io(val,addr);\n\nPlease let me know if you want me add like above or not. \n\nComing back to read tracpoint:-\nCurrently this patch having log_read_io(addr) only and have to add 4 more post_read tracepoints.\nlog_post_readb_io(val)\nlog_post_readw_io(val)\nlog_post_readl_io(val)\nlog_post_readq_io(val)\n\nIs this what you are suggesting? Please suggest me If I need to follow different method\n\nI would like to avoid duplicate code because, we don\u0027t depend n the Val and only depend on the Address information. \n\n-Thanks, Prasad",
+      "parentUuid": "cfe68e05_f323a781",
+      "revId": "1471381498f814403430dbcd3a912114e4a60c49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "45496819_2b9fe666",
         "filename": "arch/arm64/include/asm/io.h",
         "patchSetId": 1
