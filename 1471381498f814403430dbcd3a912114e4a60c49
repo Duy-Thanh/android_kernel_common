@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99d016c8_4057b1de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-16T20:18:03Z",
+      "side": 1,
+      "message": "\u003cMark\u003e Really? Across the whole system?\n\u003cPrasad\u003e Yes. We need this for whole system and this feature is must for Qualcomm. \n\n\u003cMark\u003e People have been able to debug such issues for a couple of decades without this, by instrumenting the *specific* register accesses instead of a kernel wide \"dump everything\". What changed?\n\u003cPrasad\u003e Mark, there are various stability issues when commercializing SoC.\nQualcomm need this feature on GKI builds(100%) and many debug efforts inside the Qualcomm depends on this. This features was not there in GKI1.0 phase and we were not able to debug many issues on time(informed to Google). In the GKI1.0 Phase, Qualcomm QGKI builds and in that this feature was statically built.  But in the GKI2.0 phase, Qualcomm have to use the GKI image from Google. Without trace points, Qualcomm cannot log register reads/writes.  I have given heads up to both Todd, Sandeep Patil about this feature from the beginning of the GKI program.\n\nQualcomm(test, dev, product level testing and customers) heavily rely on this feature during the testing and commercialization phase.  \nQualcomm is using this downstream changes changes for a decade and we call it as RTB(register trace buffer) feature. This is MUST feature for Qualcomm SOCs commercialization point of view.\n\n\u003cMark\u003e Well, that\u0027s probably a good indication that the way you approach the problem isn\u0027t ideal. And I cannot imagine we want to take a new tracing ABI on our own.\n\u003cPrasad\u003e yes. I agree with you about ABI impact of this feature. ABI impact was already discussed with Todd and Sandeep in the GKI meetings.\n\n\n\u003cMark\u003e That\u0027s not the point. This creates an ABI that deviates from upstream, and I simply question the validity of the proposed use case.\n\u003cPrasad\u003e Upstream and other vendor may not have this use case, but Qualcomm and OEMS, who uses the Qualcomm SoC need this feature.",
+      "parentUuid": "3b5364c2_35cdf998",
+      "revId": "1471381498f814403430dbcd3a912114e4a60c49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "45496819_2b9fe666",
         "filename": "arch/arm64/include/asm/io.h",
         "patchSetId": 1
