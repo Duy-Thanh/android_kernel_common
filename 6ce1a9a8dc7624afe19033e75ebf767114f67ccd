@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c507987_be4e994d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2020-12-16T06:59:39Z",
+      "side": 1,
+      "message": "remember we also need a change to the vintf requirements to enforce this on launch S devices",
+      "revId": "6ce1a9a8dc7624afe19033e75ebf767114f67ccd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
