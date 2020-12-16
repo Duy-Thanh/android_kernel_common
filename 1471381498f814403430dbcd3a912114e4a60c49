@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a315ec5_ae5056ff",
+        "filename": "arch/arm64/include/asm/io.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-16T14:09:24Z",
+      "side": 1,
+      "message": "Sure. I will fix the coding style. I will leave a line after declaration.\n\nAbout before and after logging - \n1) Qualcomm is not interested in the after read logging. After read logging can be used for general debugging. So all other vendors/oems can use the after read logging for their debugging and developer debugging. \n\n\n2) Qualcomm main use case is to identify all the unblocked access problems with this logging. So have before read logging use case only.\n\n3) As you and Todd requested to add after read logging for developers, I thought it might help in some use cases and added it.",
+      "parentUuid": "45496819_2b9fe666",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 19
+      },
+      "revId": "1471381498f814403430dbcd3a912114e4a60c49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a5fed75f_1ecbb756",
         "filename": "arch/arm64/include/asm/io.h",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2020-12-16T09:24:44Z",
       "side": 1,
       "message": "why cast?",
+      "range": {
+        "startLine": 62,
+        "startChar": 19,
+        "endLine": 62,
+        "endChar": 22
+      },
+      "revId": "1471381498f814403430dbcd3a912114e4a60c49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dad15b2_7cfbe227",
+        "filename": "arch/arm64/include/asm/io.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-16T14:09:24Z",
+      "side": 1,
+      "message": "Got it . will remove the cast in the next patchset.",
+      "parentUuid": "a5fed75f_1ecbb756",
       "range": {
         "startLine": 62,
         "startChar": 19,
@@ -110,6 +158,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54561bfe_9fd8c547",
+        "filename": "kernel/trace/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-16T14:09:24Z",
+      "side": 1,
+      "message": "will remove this.",
+      "parentUuid": "4d95107c_10c37a04",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 10
+      },
+      "revId": "1471381498f814403430dbcd3a912114e4a60c49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32bc104a_1b29a2cf",
@@ -135,6 +207,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c3808f2_db9e0d7f",
+        "filename": "kernel/trace/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-16T14:09:24Z",
+      "side": 1,
+      "message": "Hi Greg KH,\n\ntracevents can be used by userspace. once traceevents are created, tracepoint is available for vendor modules registration.\n\nQualcomm have a module and logs them in different format.",
+      "parentUuid": "32bc104a_1b29a2cf",
+      "range": {
+        "startLine": 89,
+        "startChar": 52,
+        "endLine": 90,
+        "endChar": 42
+      },
+      "revId": "1471381498f814403430dbcd3a912114e4a60c49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9698a9ad_d0f00920",
         "filename": "kernel/trace/Kconfig",
         "patchSetId": 1
@@ -146,6 +242,30 @@
       "writtenOn": "2020-12-16T09:26:48Z",
       "side": 1,
       "message": "what do you mean by \"support\"?",
+      "range": {
+        "startLine": 92,
+        "startChar": 3,
+        "endLine": 93,
+        "endChar": 16
+      },
+      "revId": "1471381498f814403430dbcd3a912114e4a60c49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95076209_58c64bc7",
+        "filename": "kernel/trace/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-16T14:09:24Z",
+      "side": 1,
+      "message": "will address in the next patchset.",
+      "parentUuid": "9698a9ad_d0f00920",
       "range": {
         "startLine": 92,
         "startChar": 3,
