@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b74baca7_a3808edd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2020-12-16T00:09:03Z",
+      "side": 1,
+      "message": "Thanks for your review. I\u0027m checking this with our Hypervisor team whether we really need this or not. When I checked the codes(I\u0027m not the author of the codes), it looks like necessary to record hypervisor calls. I\u0027ll get back to you once I check it further.",
+      "parentUuid": "c58565ee_11141d0a",
+      "range": {
+        "startLine": 15,
+        "startChar": 2,
+        "endLine": 15,
+        "endChar": 59
+      },
+      "revId": "7e29117c8616e05d49794019a7c56afdd47ee8a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "fc54f509_e46585ee",
