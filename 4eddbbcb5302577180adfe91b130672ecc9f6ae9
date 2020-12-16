@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49cde27d_d0ce1545",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-16T00:38:55Z",
+      "side": 1,
+      "message": "remote:   https://android-review.googlesource.com/c/kernel/common/+/1530780 ANDROID: sched: Export sched_switch tracepoint symbol [NEW]\nremote:   https://android-review.googlesource.com/c/kernel/common/+/1530781 ANDROID: softirq: Export irq_handler_entry tracepoint [NEW]\nremote:   https://android-review.googlesource.com/c/kernel/common/+/1530782 ANDROID: tracing: Add register read and write tracing support [NEW]\n\nAbove changes are uploaded for android12-5.10 branch. ",
+      "revId": "4eddbbcb5302577180adfe91b130672ecc9f6ae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6a2b8fd_900ccd4d",
