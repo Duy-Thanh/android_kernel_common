@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "04219e29_cf82ac14",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2020-12-16T07:27:18Z",
+      "side": 1,
+      "message": "when timers migration feature is enabled (with sysctl_timer_migration \u003d 1 ) timer/hrtimer can be migrated to the other CPUs than the CPU currently queueing the CPU. for example, a pinned kworker runs on a paused CPU and queued the timer. the other use case is interrupt coming on paused CPU and queueing the time.",
+      "revId": "eec92e56568fdedf17aa50dcf123773580bcb72c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "cba163b3_0b4d5248",

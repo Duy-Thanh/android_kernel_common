@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "787438a9_0ef382fa",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2020-12-16T07:27:18Z",
+      "side": 0,
+      "message": "housekeeping_any_cpu() is using online mask, if we use active mask first then online, this would look better.",
+      "range": {
+        "startLine": 689,
+        "startChar": 16,
+        "endLine": 689,
+        "endChar": 36
+      },
+      "revId": "f052562693dc334bfef72bbe14baf6122d7ea014",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
