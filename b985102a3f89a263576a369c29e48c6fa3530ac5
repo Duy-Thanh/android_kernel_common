@@ -16,6 +16,23 @@
       "message": "BloatBuster says:\n\nkernel_aarch64 on aosp_kernel-common-android12-5.10: \n  File with significant size growth: vmlinux : 300 MiB -\u003e 449 MiB (+149 MiB)\n\nAnd many other kernels seeing an increase of ~50%\n\n\n\n",
       "revId": "b985102a3f89a263576a369c29e48c6fa3530ac5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4646eeee_b402d869",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-12-16T16:53:24Z",
+      "side": 1,
+      "message": "need to investigate bloat, plus we don\u0027t want to land this until next year",
+      "revId": "b985102a3f89a263576a369c29e48c6fa3530ac5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
