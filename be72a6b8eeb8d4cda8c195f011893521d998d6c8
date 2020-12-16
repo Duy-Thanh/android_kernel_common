@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6805370_bd0456c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2020-12-16T09:45:55Z",
+      "side": 1,
+      "message": "I think this is slightly confusing, since ioremap_cache() actually returns a cacheable mapping, wheres the usual ioremap() is the one which effectively \"skips\" the cache. But that\u0027s just a wording nit; I don\u0027t object to exposing this.",
+      "range": {
+        "startLine": 13,
+        "startChar": 2,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "be72a6b8eeb8d4cda8c195f011893521d998d6c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
