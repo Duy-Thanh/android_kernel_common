@@ -46,6 +46,30 @@
       },
       "revId": "9e1deb7fa0ad6053c5eb279a0e515d01d92ccc25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "764532ad_cc304384",
+        "filename": "android/abi_gki_aarch64_cuttlefish",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-12-16T11:37:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbfd6007_1bacf298",
+      "range": {
+        "startLine": 267,
+        "startChar": 0,
+        "endLine": 267,
+        "endChar": 26
+      },
+      "revId": "9e1deb7fa0ad6053c5eb279a0e515d01d92ccc25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
