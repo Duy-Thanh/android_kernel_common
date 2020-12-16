@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ce98c07_810aae4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-12-16T23:42:36Z",
+      "side": 1,
+      "message": "Prasad, Marc has 2 good points. There really is no reason not to include the width in the traces and it might be useful for others. Please add it.\n\nI also agree that this feature would be far more useful if it could be scoped to subsystem/driver.\n\nWith these two features, it seems like it would be generally useful enough that it would land upstream. I don\u0027t see any reason not to implement the first right now since it is trivial to add width to the tracepoints. I understand your schedule may not allow you to work on the scope right now, so we\u0027ll need to limit this feature to android12-5.10 for now. That gives us time to work on an upstream version that can be used for 2022 products shipping with the next LTS.",
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "302c099f_eab9a743",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-12-16T23:42:36Z",
+      "side": 1,
+      "message": "I agree with Mark Z. Even if QC doesn\u0027t care, width might be important for others who use this mechanism. Why throw away the width especially when it is so trivial to keep it. You can add a width arg to these __log_*io() functions and include it in the trace output.",
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0f8fce9_cc26e863",
+        "filename": "kernel/trace/Kconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-12-16T23:42:36Z",
+      "side": 1,
+      "message": "this sentence isn\u0027t necessary since you declare a dependency on ARM64.",
+      "range": {
+        "startLine": 97,
+        "startChar": 3,
+        "endLine": 98,
+        "endChar": 16
+      },
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
