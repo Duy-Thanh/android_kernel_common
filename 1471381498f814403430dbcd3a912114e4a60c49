@@ -16,6 +16,52 @@
       "message": "I can see a couple of issues with this:\n\n- you seem to lose the width of the access as you log it (HW usually *is* width-sensitive)\n\n- there is no way to select the scope of the tracing (it is very unlikely that you want to trace every single MMIO access in the system, and more likely that you\u0027d want a specific subsystem instead)\n\n- this creates a new ABI, which has to be agreed upon upstream first\n\nIf you are trying to track accesses to devices that are not clock, it feels like you should involve the clock subsystem directly, and track the dependency between a device and its clock provider, rather than having a blanket MMIO tracing.",
       "revId": "1471381498f814403430dbcd3a912114e4a60c49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45496819_2b9fe666",
+        "filename": "arch/arm64/include/asm/io.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-16T09:24:44Z",
+      "side": 1,
+      "message": "coding style?\n\nAnd why are you logging before and after the read?  Why not just after the read when we have the value read?",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 19
+      },
+      "revId": "1471381498f814403430dbcd3a912114e4a60c49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5fed75f_1ecbb756",
+        "filename": "arch/arm64/include/asm/io.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-16T09:24:44Z",
+      "side": 1,
+      "message": "why cast?",
+      "range": {
+        "startLine": 62,
+        "startChar": 19,
+        "endLine": 62,
+        "endChar": 22
+      },
+      "revId": "1471381498f814403430dbcd3a912114e4a60c49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
