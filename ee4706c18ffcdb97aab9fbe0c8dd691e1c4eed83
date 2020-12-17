@@ -16,6 +16,24 @@
       "message": "Hi, Will\n\nIt seems that it\u0027s this change that causes the x15 build failed to boot with kernel crash like here:\n    https://pastebin.ubuntu.com/p/tDgmyJnvRQ/\n\nWith this change reverted with the other two commits(e7152730c99ab and f4e1525cde804, which are for revert conflict), then I could boot it to home screen again.\ncould you please help to check if there is any problem or any missed change there?\n\nThank for the help in advance!\n\nBest Regards,\nYongqin Liu",
       "revId": "ee4706c18ffcdb97aab9fbe0c8dd691e1c4eed83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "673a2eba_05d23ed0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2020-12-17T16:34:11Z",
+      "side": 1,
+      "message": "Thanks for the report. It looks like acc_disconnect() calls acc_put_dev() with a NULL pointer. I\u0027ll send a fix shortly and put you on CC.",
+      "parentUuid": "c404332e_56147e91",
+      "revId": "ee4706c18ffcdb97aab9fbe0c8dd691e1c4eed83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
