@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "72453783_a90e6348",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2020-12-17T03:18:46Z",
+      "side": 1,
+      "message": "we could get away with this as well with this. basically we are telling hose keeping subsystem that !active cpu can\u0027t be a house keeping cpu.\n\ndiff --git a/include/linux/sched/isolation.h b/include/linux/sched/isolation.h\nindex cc9f393..81c2487 100644\n--- a/include/linux/sched/isolation.h\n+++ b/include/linux/sched/isolation.h\n@@ -50,6 +50,9 @@ static inline void housekeeping_init(void) { }\n\n static inline bool housekeeping_cpu(int cpu, enum hk_flags flags)\n {\n+       if (!cpu_active)\n+               return false;\n+\n #ifdef CONFIG_CPU_ISOLATION\n        if (static_branch_unlikely(\u0026housekeeping_overridden))\n                return housekeeping_test_cpu(cpu, flags);",
+      "range": {
+        "startLine": 668,
+        "startChar": 4,
+        "endLine": 668,
+        "endChar": 5
+      },
+      "revId": "30184496feb368d9738b86e9e705b9bbf080cadf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "12b9ef24_6c58cfaf",
         "filename": "kernel/sched/core.c",
         "patchSetId": 2
