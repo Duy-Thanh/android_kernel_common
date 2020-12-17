@@ -16,6 +16,46 @@
       "message": "Updates per pavan\u0027s comments.",
       "revId": "30184496feb368d9738b86e9e705b9bbf080cadf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9c3ae54_69608841",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2020-12-17T03:09:10Z",
+      "side": 1,
+      "message": "minor suggestion inline",
+      "revId": "30184496feb368d9738b86e9e705b9bbf080cadf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12b9ef24_6c58cfaf",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2020-12-17T03:09:10Z",
+      "side": 1,
+      "message": "will there be a case where we don\u0027t find an online CPU at all?\n\nWe are giving least priority to isolation/housekeeping here. however that conflicts with housekeeping cpumask check in the for loop above.\n\nSince it is unlikely that we use CPU isolation/house keeping, can we give more priority to it? The best part is you don\u0027t have to make a change here at this line. it will look something like this.\n\ndiff --git a/kernel/sched/isolation.c b/kernel/sched/isolation.c\nindex 5a6ea03..4ae41d4 100644\n--- a/kernel/sched/isolation.c\n+++ b/kernel/sched/isolation.c\n@@ -30,6 +30,10 @@ int housekeeping_any_cpu(enum hk_flags flags)\n                        if (cpu \u003c nr_cpu_ids)\n                                return cpu;\n\n+                       cpu \u003d cpumask_any_and(housekeeping_mask, cpu_active_mask);\n+                       if (cpu \u003c nr_cpu_ids)\n+                               return cpu;\n+\n                        return cpumask_any_and(housekeeping_mask, cpu_online_mask);\n                }\n        }",
+      "range": {
+        "startLine": 694,
+        "startChar": 4,
+        "endLine": 694,
+        "endChar": 5
+      },
+      "revId": "30184496feb368d9738b86e9e705b9bbf080cadf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
