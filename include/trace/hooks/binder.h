@@ -23,14 +23,18 @@ DECLARE_HOOK(android_vh_binder_set_priority,
 DECLARE_HOOK(android_vh_binder_restore_priority,
 	TP_PROTO(struct binder_transaction *t, struct task_struct *task),
 	TP_ARGS(t, task));
-DECLARE_HOOK(android_vh_binder_wakeup_ilocked,
+DECLARE_RESTRICTED_HOOK(android_rvh_binder_wakeup_ilocked,
 	TP_PROTO(struct task_struct *task),
-	TP_ARGS(task));
+	TP_ARGS(task), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_binder_transaction_received,
+	TP_PROTO(struct binder_transaction *t),
+	TP_ARGS(t), 1);
 #else
 #define trace_android_vh_binder_transaction_init(t)
 #define trace_android_vh_binder_set_priority(t, task)
 #define trace_android_vh_binder_restore_priority(t, task)
-#define trace_android_vh_binder_wakeup_ilocked(task)
+#define trace_android_rvh_binder_wakeup_ilocked(task)
+#define trace_android_rvh_binder_transaction_received(t)
 #endif
 #endif /* _TRACE_HOOK_BINDER_H */
 /* This part must be outside protection */
