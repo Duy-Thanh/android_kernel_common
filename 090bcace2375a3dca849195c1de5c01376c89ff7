@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc53aef7_4c661471",
+        "filename": "arch/arm64/kernel/image-vars.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-17T18:49:49Z",
+      "side": 1,
+      "message": "Hi Mark, \n\ndo you mean to try this way ? It looks very hack way. Is this what you are suggesting ? Please share more details. \n\n+++ b/arch/arm64/kvm/hyp/nvhe/Makefile\n@@ -4,7 +4,7 @@\n #\n\n asflags-y :\u003d -D__KVM_NVHE_HYPERVISOR__\n-ccflags-y :\u003d -D__KVM_NVHE_HYPERVISOR__\n+ccflags-y :\u003d -D__KVM_NVHE_HYPERVISOR__ -D__DISABLE_CONFIG_TRACE_RW__\n\n\n\ndiff --git a/include/linux/iorw.h b/include/linux/iorw.h\nindex bab641e..7c2629e 100644\n--- a/include/linux/iorw.h\n+++ b/include/linux/iorw.h\n@@ -9,7 +9,7 @@\n #include \u003clinux/atomic.h\u003e\n #include \u003clinux/tracepoint-defs.h\u003e\n\n-#if IS_ENABLED(CONFIG_TRACE_RW)\n+#if IS_ENABLED(CONFIG_TRACE_RW) \u0026\u0026 !(defined(__DISABLE_CONFIG_TRACE_RW__))",
+      "parentUuid": "62793b6c_49df7dc3",
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4abdd307_e8cba704",
         "filename": "include/linux/iorw.h",
         "patchSetId": 4
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "Reducing the number of helpers would certainly be beneficial.",
       "parentUuid": "64c08d20_b7d74d64",
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fac2df4_c9bc485e",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-17T18:49:49Z",
+      "side": 1,
+      "message": "Sure. I will address in the next patchset.",
+      "parentUuid": "77bead1b_b0b07604",
       "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
