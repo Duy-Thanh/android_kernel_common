@@ -108,6 +108,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "64ce8662_9e047526",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-12-17T22:22:56Z",
+      "side": 1,
+      "message": "Do we really need this indirection? Can\u0027t this just be:\n\n  trace_rwio_write(val, width, addr);\n\nin fact, do we really even need the log_writeb_io() macro?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 0
+      },
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "302c099f_eab9a743",
         "filename": "include/linux/iorw.h",
         "patchSetId": 4
