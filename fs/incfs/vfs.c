@@ -1447,6 +1447,9 @@ static ssize_t incfs_getxattr(struct dentry *d, const char *name,
 	} else if (!strcmp(d->d_iname, INCFS_LOG_FILENAME)) {
 		stored_value = mi->log_xattr;
 		stored_size = mi->log_xattr_size;
+	} else if (!strcmp(d->d_iname, INCFS_BLOCKS_WRITTEN_FILENAME)) {
+		stored_value = mi->blocks_written_xattr;
+		stored_size = mi->blocks_written_xattr_size;
 	} else {
 		return -ENODATA;
 	}
@@ -1487,6 +1490,9 @@ static ssize_t incfs_setxattr(struct dentry *d, const char *name,
 	} else if (!strcmp(d->d_iname, INCFS_LOG_FILENAME)) {
 		stored_value = &mi->log_xattr;
 		stored_size = &mi->log_xattr_size;
+	} else if (!strcmp(d->d_iname, INCFS_BLOCKS_WRITTEN_FILENAME)) {
+		stored_value = &mi->blocks_written_xattr;
+		stored_size = &mi->blocks_written_xattr_size;
 	} else {
 		return -ENODATA;
 	}

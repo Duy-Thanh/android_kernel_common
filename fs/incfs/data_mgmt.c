@@ -138,6 +138,7 @@ void incfs_free_mount_info(struct mount_info *mi)
 	kfree(mi->mi_log.rl_ring_buf);
 	kfree(mi->log_xattr);
 	kfree(mi->pending_read_xattr);
+	kfree(mi->blocks_written_xattr);
 	kfree(mi->mi_per_uid_read_timeouts);
 	kfree(mi);
 }
