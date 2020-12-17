@@ -163,7 +163,7 @@ out:
 	return verity_file_digest;
 }
 
-static inline struct mem_range fsverity_get_file_digest(struct inode *inode)
+static struct mem_range fsverity_get_file_digest(struct inode *inode)
 {
 	struct inode_info *node = get_incfs_node(inode);
 	struct data_file *df;
@@ -379,6 +379,7 @@ static u8 *incfs_get_verity_signature(struct file *filp, size_t *sig_size)
 err_out:
 	kfree(signature);
 	return ERR_PTR(res);
+
 }
 
 /* Ensure data_file->df_verity_file_digest is populated */
@@ -448,4 +449,39 @@ int incfs_fsverity_file_open(struct inode *inode, struct file *filp)
 
 	inode_set_flags(inode, S_VERITY, S_VERITY);
 	return ensure_verity_info(inode, filp);
+}
+
+int incfs_ioctl_verity_measure(struct file *filp, void __user *_uarg)
+{
+	struct inode *inode = file_inode(filp);
+	struct mem_range verity_file_digest = fsverity_get_file_digest(inode);
+	struct fsverity_digest __user *uarg = _uarg;
+	struct fsverity_digest arg;
+
+	if (!verity_file_digest.data || !verity_file_digest.len)
+		return -ENODATA; /* not a verity file */
+
+	/*
+	 * The user specifies the digest_size their buffer has space for; we can
+	 * return the digest if it fits in the available space.  We write back
+	 * the actual size, which may be shorter than the user-specified size.
+	 */
+
+	if (get_user(arg.digest_size, &uarg->digest_size))
+		return -EFAULT;
+	if (arg.digest_size < verity_file_digest.len)
+		return -EOVERFLOW;
+
+	memset(&arg, 0, sizeof(arg));
+	arg.digest_algorithm = 1; /* TODO - don't hard code */
+	arg.digest_size = verity_file_digest.len;
+
+	if (copy_to_user(uarg, &arg, sizeof(arg)))
+		return -EFAULT;
+
+	if (copy_to_user(uarg->digest, verity_file_digest.data,
+			 verity_file_digest.len))
+		return -EFAULT;
+
+	return 0;
 }

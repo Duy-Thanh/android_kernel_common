@@ -776,6 +776,8 @@ static long dispatch_ioctl(struct file *f, unsigned int req, unsigned long arg)
 		return incfs_ioctl_enable_verity(f, (const void __user *)arg);
 	case FS_IOC_GETFLAGS:
 		return incfs_ioctl_get_flags(f, (void __user *) arg);
+	case FS_IOC_MEASURE_VERITY:
+		return incfs_ioctl_verity_measure(f, (void __user *)arg);
 	default:
 		return -ENOTTY;
 	}
@@ -794,6 +796,7 @@ static long incfs_compat_ioctl(struct file *file, unsigned int cmd,
 	case INCFS_IOC_GET_FILLED_BLOCKS:
 	case INCFS_IOC_GET_BLOCK_COUNT:
 	case FS_IOC_ENABLE_VERITY:
+	case FS_IOC_MEASURE_VERITY:
 		break;
 	default:
 		return -ENOIOCTLCMD;

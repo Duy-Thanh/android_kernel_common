@@ -3695,11 +3695,17 @@ static int validate_verity(const char *mount_dir, struct test_file *file)
 	char *filename = concat_file_name(mount_dir, file->name);
 	int fd = -1;
 	uint64_t flags;
+	uint8_t buffer[sizeof(struct fsverity_digest) + INCFS_MAX_HASH_SIZE];
+	struct fsverity_digest *digest = (struct fsverity_digest *) buffer;
 
 	TEST(filename = concat_file_name(mount_dir, file->name), filename);
 	TEST(fd = open(filename, O_RDONLY | O_CLOEXEC), fd != -1);
 	TESTEQUAL(ioctl(fd, FS_IOC_GETFLAGS, &flags), 0);
 	TESTEQUAL(flags & FS_VERITY_FL, FS_VERITY_FL);
+	digest->digest_size = INCFS_MAX_HASH_SIZE;
+	TESTEQUAL(ioctl(fd, FS_IOC_MEASURE_VERITY, digest), 0);
+	TESTEQUAL(digest->digest_algorithm, FS_VERITY_HASH_ALG_SHA256);
+	TESTEQUAL(digest->digest_size, 32);
 
 	result = TEST_SUCCESS;
 out:
