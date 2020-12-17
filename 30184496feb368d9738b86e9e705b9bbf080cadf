@@ -153,6 +153,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce176b91_34a1a778",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-17T22:59:10Z",
+      "side": 1,
+      "message": "this is wrong.  we\u0027re trying to find cpus that are not idle.  we should pick cpus that are not idle and active.  it is possible for a CPU to be inactive but not yet idle, so this would affect CPUs that are marked inactive but not quite inactive yet.",
+      "revId": "30184496feb368d9738b86e9e705b9bbf080cadf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12b9ef24_6c58cfaf",
@@ -190,6 +207,30 @@
       "side": 1,
       "message": "Pavan.  I agree it is probaly not possible that we won\u0027t find any online CPU, so lines 692 through 694 are redundant in the above version.  Thx.\n\nI want to incorporate your idea, but again, we\u0027ve been asked to not touch anything outside of core.c with this change.  I would like to keep it like that, so that ACK is more likely to accept it.  If you don\u0027t mind, I\u0027ll integrate your idea right into this code.  I\u0027ll have another version shortly, and then you can comment further.",
       "parentUuid": "12b9ef24_6c58cfaf",
+      "range": {
+        "startLine": 694,
+        "startChar": 4,
+        "endLine": 694,
+        "endChar": 5
+      },
+      "revId": "30184496feb368d9738b86e9e705b9bbf080cadf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1655470f_18257553",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-17T22:59:10Z",
+      "side": 1,
+      "message": "I want to emulate your code snippit above while confining changes to kernel/sched/core.c.  I think this might be close:\n\nEssentially, housekeeping_any_cpu can possibly return an online but inactive CPU, and your seems to be to change it to not return an inactive cpu if possible.\n\nThis should do the same:\n\n        if (default_cpu \u003d\u003d -1) {\n                default_cpu \u003d housekeeping_any_cpu(HK_FLAG_TIMER);\n                if (!cpu_active(default_cpu)) {\n                        default_cpu \u003d cpumask_any_and(cpu_active_mask);\n                        if (default_cpu \u003e\u003d nr_cpu_ids)\n                                default_cpu \u003d cpumask_any(cpu_online_mask);\n                }\n        }\n\nFirst, we get a housekeeping CPU.  It may bail out of the numa check, and find nothing, in which case it will return an online cpu.  That online cpu might be inactive, so here we\u0027re restarting to take any active cpu.  Which will likely always return a good cpu.  But in the strange event that there is nothing active, we drop back to taking anything that\u0027s online.  And since this processor is running, it should be online.  \n\nTechnically this should probably check the result of cpu_online_mask, since the api allows for the return of no cpu.  I\u0027ll add that check, but it should never happen.\n\nI think that\u0027s basically the idea you had, and it should prevent this from overflowing into isolation.c.\n\nI\u0027ll push this (and the fix I need above) and we can discuss further.",
+      "parentUuid": "1f601ed5_b98b96df",
       "range": {
         "startLine": 694,
         "startChar": 4,
