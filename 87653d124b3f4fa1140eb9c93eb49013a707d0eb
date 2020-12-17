@@ -16,6 +16,23 @@
       "message": "Why is this needed for the android mainline branch?  This is merging with 5.11-rc1 and later and stuff like this will probably cause big merge issues...",
       "revId": "87653d124b3f4fa1140eb9c93eb49013a707d0eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "222e2772_a90dfe02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-12-17T09:00:35Z",
+      "side": 1,
+      "message": "As Greg pointed out, please post against android12-5.10 instead.",
+      "revId": "87653d124b3f4fa1140eb9c93eb49013a707d0eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
