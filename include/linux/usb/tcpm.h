@@ -104,6 +104,7 @@ enum tcpm_transmit_type {
  *		is supported by TCPC, set this callback for TCPM to query
  *		whether vbus is at VSAFE0V when needed.
  *		Returns true when vbus is at VSAFE0V, false otherwise.
+<<<<<<< HEAD   (92262f Merge c367caf1a38b ("Merge tag 'sound-5.11-rc1' of git://git)
  * @check_contaminant:
  *		Optional; The callback is called when CC pins report open status
  *		at the end of the toggling period. Chip level drivers are
@@ -112,6 +113,8 @@ enum tcpm_transmit_type {
  *		restart toggling after checking the connector for contaminant.
  *		This forces the TCPM state machine to tranistion to TOGGLING state
  *		without calling start_toggling callback.
+=======
+>>>>>>> BRANCH (0cee54 Merge tag 'usb-5.11-rc1' of git://git.kernel.org/pub/scm/lin)
  */
 struct tcpc_dev {
 	struct fwnode_handle *fwnode;
@@ -142,7 +145,10 @@ struct tcpc_dev {
 	int (*enable_auto_vbus_discharge)(struct tcpc_dev *dev, bool enable);
 	int (*set_auto_vbus_discharge_threshold)(struct tcpc_dev *dev, enum typec_pwr_opmode mode,
 						 bool pps_active, u32 requested_vbus_voltage);
+<<<<<<< HEAD   (92262f Merge c367caf1a38b ("Merge tag 'sound-5.11-rc1' of git://git)
 	int (*check_contaminant)(struct tcpc_dev *dev);
+=======
+>>>>>>> BRANCH (0cee54 Merge tag 'usb-5.11-rc1' of git://git.kernel.org/pub/scm/lin)
 	bool (*is_vbus_vsafe0v)(struct tcpc_dev *dev);
 };
 

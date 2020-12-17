@@ -1048,6 +1048,10 @@ static int f_midi_bind(struct usb_configuration *c, struct usb_function *f)
 		f->ss_descriptors = usb_copy_descriptors(midi_function);
 		if (!f->ss_descriptors)
 			goto fail_f_midi;
+<<<<<<< HEAD   (92262f Merge c367caf1a38b ("Merge tag 'sound-5.11-rc1' of git://git)
+=======
+
+>>>>>>> BRANCH (0cee54 Merge tag 'usb-5.11-rc1' of git://git.kernel.org/pub/scm/lin)
 		if (gadget_is_superspeed_plus(c->cdev->gadget)) {
 			f->ssp_descriptors = usb_copy_descriptors(midi_function);
 			if (!f->ssp_descriptors)
