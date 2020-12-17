@@ -70,11 +70,9 @@
 
 #include <uapi/linux/sched/types.h>
 #include <uapi/linux/android/binder.h>
-#include <uapi/linux/android/binderfs.h>
 
 #include <asm/cacheflush.h>
 
-#include "binder_alloc.h"
 #include "binder_internal.h"
 #include "binder_trace.h"
 #include <trace/hooks/binder.h>
@@ -163,24 +161,6 @@ module_param_call(stop_on_user_error, binder_set_stop_on_user_error,
 #define to_binder_fd_array_object(hdr) \
 	container_of(hdr, struct binder_fd_array_object, hdr)
 
-enum binder_stat_types {
-	BINDER_STAT_PROC,
-	BINDER_STAT_THREAD,
-	BINDER_STAT_NODE,
-	BINDER_STAT_REF,
-	BINDER_STAT_DEATH,
-	BINDER_STAT_TRANSACTION,
-	BINDER_STAT_TRANSACTION_COMPLETE,
-	BINDER_STAT_COUNT
-};
-
-struct binder_stats {
-	atomic_t br[_IOC_NR(BR_FAILED_REPLY) + 1];
-	atomic_t bc[_IOC_NR(BC_REPLY_SG) + 1];
-	atomic_t obj_created[BINDER_STAT_COUNT];
-	atomic_t obj_deleted[BINDER_STAT_COUNT];
-};
-
 static struct binder_stats binder_stats;
 
 static inline void binder_stats_deleted(enum binder_stat_types type)
@@ -216,6 +196,7 @@ static struct binder_transaction_log_entry *binder_transaction_log_add(
 	return e;
 }
 
+<<<<<<< HEAD   (f98aec Merge 7240153a9bdb ("Merge tag 'driver-core-5.11-rc1' of git)
 /**
  * struct binder_work - work enqueued on a worklist
  * @entry:             node enqueued on list
@@ -405,11 +386,14 @@ struct binder_ref {
 	struct binder_ref_death *death;
 };
 
+=======
+>>>>>>> BRANCH (2911ed Merge tag 'char-misc-5.11-rc1' of git://git.kernel.org/pub/s)
 enum binder_deferred_state {
 	BINDER_DEFERRED_FLUSH        = 0x01,
 	BINDER_DEFERRED_RELEASE      = 0x02,
 };
 
+<<<<<<< HEAD   (f98aec Merge 7240153a9bdb ("Merge tag 'driver-core-5.11-rc1' of git)
 /**
  * struct binder_priority - scheduler policy and priority
  * @sched_policy            scheduler policy
@@ -509,6 +493,8 @@ struct binder_proc {
 	struct dentry *binderfs_entry;
 };
 
+=======
+>>>>>>> BRANCH (2911ed Merge tag 'char-misc-5.11-rc1' of git://git.kernel.org/pub/s)
 enum {
 	BINDER_LOOPER_STATE_REGISTERED  = 0x01,
 	BINDER_LOOPER_STATE_ENTERED     = 0x02,
@@ -519,6 +505,7 @@ enum {
 };
 
 /**
+<<<<<<< HEAD   (f98aec Merge 7240153a9bdb ("Merge tag 'driver-core-5.11-rc1' of git)
  * struct binder_thread - binder thread bookkeeping
  * @proc:                 binder process for this thread
  *                        (invariant after initialization)
@@ -642,6 +629,8 @@ struct binder_object {
 };
 
 /**
+=======
+>>>>>>> BRANCH (2911ed Merge tag 'char-misc-5.11-rc1' of git://git.kernel.org/pub/s)
  * binder_proc_lock() - Acquire outer lock for given binder_proc
  * @proc:         struct binder_proc to acquire
  *
@@ -2051,6 +2040,20 @@ static void binder_free_txn_fixups(struct binder_transaction *t)
 	}
 }
 
+static void binder_txn_latency_free(struct binder_transaction *t)
+{
+	int from_proc, from_thread, to_proc, to_thread;
+
+	spin_lock(&t->lock);
+	from_proc = t->from ? t->from->proc->pid : 0;
+	from_thread = t->from ? t->from->pid : 0;
+	to_proc = t->to_proc ? t->to_proc->pid : 0;
+	to_thread = t->to_thread ? t->to_thread->pid : 0;
+	spin_unlock(&t->lock);
+
+	trace_binder_txn_latency_free(t, from_proc, from_thread, to_proc, to_thread);
+}
+
 static void binder_free_transaction(struct binder_transaction *t)
 {
 	struct binder_proc *target_proc = t->to_proc;
@@ -2061,6 +2064,8 @@ static void binder_free_transaction(struct binder_transaction *t)
 			t->buffer->transaction = NULL;
 		binder_inner_proc_unlock(target_proc);
 	}
+	if (trace_binder_txn_latency_free_enabled())
+		binder_txn_latency_free(t);
 	/*
 	 * If the transaction has no target_proc, then
 	 * t->buffer->transaction has already been cleared.
@@ -3271,7 +3276,7 @@ static void binder_transaction(struct binder_proc *proc,
 		if (extra_buffers_size < added_size) {
 			/* integer overflow of extra_buffers_size */
 			return_error = BR_FAILED_REPLY;
-			return_error_param = EINVAL;
+			return_error_param = -EINVAL;
 			return_error_line = __LINE__;
 			goto err_bad_extra_size;
 		}
@@ -3314,6 +3319,7 @@ static void binder_transaction(struct binder_proc *proc,
 	t->buffer->debug_id = t->debug_id;
 	t->buffer->transaction = t;
 	t->buffer->target_node = target_node;
+	t->buffer->clear_on_free = !!(t->flags & TF_CLEAR_BUF);
 	trace_binder_transaction_alloc_buf(t->buffer);
 
 	if (binder_alloc_copy_user_to_buffer(
@@ -3649,6 +3655,8 @@ err_get_secctx_failed:
 	kfree(tcomplete);
 	binder_stats_deleted(BINDER_STAT_TRANSACTION_COMPLETE);
 err_alloc_tcomplete_failed:
+	if (trace_binder_txn_latency_free_enabled())
+		binder_txn_latency_free(t);
 	kfree(t);
 	binder_stats_deleted(BINDER_STAT_TRANSACTION);
 err_alloc_t_failed:
@@ -3786,6 +3794,7 @@ static int binder_thread_write(struct binder_proc *proc,
 			ret = -1;
 			if (increment && !target) {
 				struct binder_node *ctx_mgr_node;
+
 				mutex_lock(&context->context_mgr_node_lock);
 				ctx_mgr_node = context->binder_context_mgr_node;
 				if (ctx_mgr_node)
