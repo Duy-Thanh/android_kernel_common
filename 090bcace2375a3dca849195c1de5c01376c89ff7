@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a980dde_a86d5371",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-17T00:16:57Z",
+      "side": 1,
+      "message": "Hi Todd and Mark,\n\nWidth part is taken care in the latest patch set. Let me know if I didn\u0027t understand your width comment clearly. \n\nrwio_writel\nrwio_writeq\nrwio_readl\n\n\n\n\n\u003cidle\u003e-0       [000] d.h1   139.925390: rwio_writel: dwc3_check_event_buf+0x334/0x3bc [dwc3] writel val\u003d0x4 in addr\u003dffffffc0125e240c\n   kworker/u17:0-141     [005] d..2   139.925730: rwio_writeq: arm_smmu_tlb_add_page_s1+0xc4/0x174 [arm_smmu] writeq val\u003d0x40000000efe38 in addr\u003dffffffc012c83620\n   kworker/u17:0-141     [005] d..1   139.925732: rwio_read: arm_smmu_power_off_atomic+0x100/0x114 [arm_smmu] read addr\u003dffffffc012c00020\n   kworker/u17:0-141     [005] d..1   139.925770: rwio_post_readl: arm_smmu_power_off_atomic+0x110/0x114 [arm_smmu] readl val\u003d0x7c017e96 from addr\u003dffffffc012c00020\n   kworker/u17:0-141     [005] d..2   139.925776: rwio_writel: __arm_smmu_tlb_sync+0x184/0x21c [arm_smmu] writel val\u003d0xffffffff in addr\u003dffffffc012c837f0\n   kworker/u17:0-141     [005] d..2   139.925780: rwio_read: __arm_smmu_tlb_sync+0xf0/0x21c [arm_smmu] read addr\u003dffffffc012c837f4\n   kworker/u17:0-141     [005] d..2   139.925834: rwio_post_readl: __arm_smmu_tlb_sync+0x108/0x21c [arm_smmu] readl val\u003d0x0 from addr\u003dffffffc012c837f4",
+      "parentUuid": "5ce98c07_810aae4b",
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "302c099f_eab9a743",
