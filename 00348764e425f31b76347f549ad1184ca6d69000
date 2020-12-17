@@ -34,6 +34,24 @@
       "parentUuid": "397e754d_37bb0e6b",
       "revId": "00348764e425f31b76347f549ad1184ca6d69000",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f9dbf7a_0b0450a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-17T14:55:49Z",
+      "side": 1,
+      "message": "I will abaondon it here, then you can just cherry-pick it to that branch like you did for this one.",
+      "parentUuid": "ff1a5aa9_5b159b9d",
+      "revId": "00348764e425f31b76347f549ad1184ca6d69000",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
