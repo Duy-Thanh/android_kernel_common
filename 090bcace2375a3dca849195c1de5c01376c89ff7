@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "64c08d20_b7d74d64",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-12-17T00:34:20Z",
+      "side": 1,
+      "message": "Oops, now I see that you had already changed this to include the \"b\", \"w\", \"l\", \"q\" notations. Interested in why that instead of an arg.",
+      "parentUuid": "302c099f_eab9a743",
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0f8fce9_cc26e863",
         "filename": "kernel/trace/Kconfig",
         "patchSetId": 4
