@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7c1424d_d9d3c132",
+        "filename": "arch/arm64/kernel/image-vars.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2020-12-17T19:13:45Z",
+      "side": 1,
+      "message": "\u003e Hi Mark, \n\ns/k/c/\n\n\u003e do you mean to try this way ? It looks very hack way. Is this what you are suggesting ? Please share more details. \n\u003e \n\u003e +++ b/arch/arm64/kvm/hyp/nvhe/Makefile\n\u003e @@ -4,7 +4,7 @@\n\u003e  #\n\u003e \n\u003e  asflags-y :\u003d -D__KVM_NVHE_HYPERVISOR__\n\u003e -ccflags-y :\u003d -D__KVM_NVHE_HYPERVISOR__\n\u003e +ccflags-y :\u003d -D__KVM_NVHE_HYPERVISOR__ -D__DISABLE_CONFIG_TRACE_RW__\n\u003e \n\u003e \n\u003e \n\u003e diff --git a/include/linux/iorw.h b/include/linux/iorw.h\n\u003e index bab641e..7c2629e 100644\n\u003e --- a/include/linux/iorw.h\n\u003e +++ b/include/linux/iorw.h\n\u003e @@ -9,7 +9,7 @@\n\u003e  #include \u003clinux/atomic.h\u003e\n\u003e  #include \u003clinux/tracepoint-defs.h\u003e\n\u003e \n\u003e -#if IS_ENABLED(CONFIG_TRACE_RW)\n\u003e +#if IS_ENABLED(CONFIG_TRACE_RW) \u0026\u0026 !(defined(__DISABLE_CONFIG_TRACE_RW__))\n\nNo, that looks horrible. We currently disable tracing in the EL2 object by removing CC_FLAGS_FTRACE in the Makefile. Why isn\u0027t that enough in your case? It seems to indicate that you are bypassing some other guards and not obeying the notrace attribute.",
+      "parentUuid": "fc53aef7_4c661471",
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4abdd307_e8cba704",
         "filename": "include/linux/iorw.h",
         "patchSetId": 4
