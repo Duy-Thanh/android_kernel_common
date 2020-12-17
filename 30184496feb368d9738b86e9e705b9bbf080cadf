@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad3ac845_6d0cf8e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-12-17T18:26:23Z",
+      "side": 1,
+      "message": "should be sched/core",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 21
+      },
+      "revId": "30184496feb368d9738b86e9e705b9bbf080cadf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "93a6dadc_7e2e919a",
@@ -72,6 +95,30 @@
       "side": 1,
       "message": "Pavan, we\u0027ve been asked to not extend the solution beyond this file, and only address timers with this change.  The original solution (abandoned) was here: https://android-review.googlesource.com/c/kernel/common/+/1529260/\n\nIf there is a technical reason (like coverage we\u0027re not handling for timers) then I think we can propose an extension.  Thoughts?",
       "parentUuid": "72453783_a90e6348",
+      "range": {
+        "startLine": 668,
+        "startChar": 4,
+        "endLine": 668,
+        "endChar": 5
+      },
+      "revId": "30184496feb368d9738b86e9e705b9bbf080cadf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eace2ca2_5d3cd472",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-12-17T18:26:23Z",
+      "side": 1,
+      "message": "Yes, it would be a shame to pollute housekeeping functions.\n\nAlso. in this case, we bail-out directly here. But if the CPU is inactive it is very unlikely it\u0027ll be found in the sched_domain below. So basically we bypass completely the search for a !idle CPU, which would waste energy.\n\nIf a CPU isn\u0027t active, it\u0027s probably a better approach to look for a !idle CPU in a linear way.",
+      "parentUuid": "30d562c1_2c2bcbfb",
       "range": {
         "startLine": 668,
         "startChar": 4,
