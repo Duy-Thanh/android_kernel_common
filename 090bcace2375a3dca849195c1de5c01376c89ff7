@@ -38,6 +38,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62793b6c_49df7dc3",
+        "filename": "arch/arm64/kernel/image-vars.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2020-12-17T17:29:05Z",
+      "side": 1,
+      "message": "Thanks Todd for pointing this to me.\n\nThis is a problem. None of these symbols should ever be visible at EL2, as there is no way we can execute them. This solves the linking part, but it will explode at the first MMIO access from EL2 (EL1 and EL2 have different memory mappings, and most of the kernel isn\u0027t mapped anyway).\n\nWhy aren\u0027t these symbol eliminated when we disable tracing at EL2 (see how CC_FLAGS_FTRACE gets filtered out in arch/arm64/kvm/hyp/nvhe/Makefile)?",
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4abdd307_e8cba704",
         "filename": "include/linux/iorw.h",
         "patchSetId": 4
@@ -84,6 +101,24 @@
       "side": 1,
       "message": "Oops, now I see that you had already changed this to include the \"b\", \"w\", \"l\", \"q\" notations. Interested in why that instead of an arg.",
       "parentUuid": "302c099f_eab9a743",
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77bead1b_b0b07604",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2020-12-17T17:29:05Z",
+      "side": 1,
+      "message": "Reducing the number of helpers would certainly be beneficial.",
+      "parentUuid": "64c08d20_b7d74d64",
       "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
