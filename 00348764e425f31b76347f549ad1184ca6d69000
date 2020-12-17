@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "397e754d_37bb0e6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-17T09:26:16Z",
+      "side": 1,
+      "message": "why is this needed on the android-mainline branch?  This branch is merging from upstream now, moving toward 5.11-rc1, and I don\u0027t think you need this exported there, right?\n\nDo you need/want this for android12-5.10 instead?",
+      "revId": "00348764e425f31b76347f549ad1184ca6d69000",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
