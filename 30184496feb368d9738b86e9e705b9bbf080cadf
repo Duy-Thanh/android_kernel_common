@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30d562c1_2c2bcbfb",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-17T04:36:40Z",
+      "side": 1,
+      "message": "Pavan, we\u0027ve been asked to not extend the solution beyond this file, and only address timers with this change.  The original solution (abandoned) was here: https://android-review.googlesource.com/c/kernel/common/+/1529260/\n\nIf there is a technical reason (like coverage we\u0027re not handling for timers) then I think we can propose an extension.  Thoughts?",
+      "parentUuid": "72453783_a90e6348",
+      "range": {
+        "startLine": 668,
+        "startChar": 4,
+        "endLine": 668,
+        "endChar": 5
+      },
+      "revId": "30184496feb368d9738b86e9e705b9bbf080cadf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12b9ef24_6c58cfaf",
