@@ -38,6 +38,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4abdd307_e8cba704",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-12-17T00:24:39Z",
+      "side": 1,
+      "message": "Why is this 4 functions instead of just passing the width as an argument?\n\n  __log_writeq_io(u64 val, u8 width, volatile void __iomem *addr);",
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "302c099f_eab9a743",
         "filename": "include/linux/iorw.h",
         "patchSetId": 4
