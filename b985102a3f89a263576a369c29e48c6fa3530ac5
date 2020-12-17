@@ -69,6 +69,24 @@
       "parentUuid": "d0549e46_260066e0",
       "revId": "b985102a3f89a263576a369c29e48c6fa3530ac5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e9c0eb1_40affd50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2020-12-17T19:19:13Z",
+      "side": 1,
+      "message": "So yes, seems to be .debug_* sections primarily.",
+      "parentUuid": "c2433027_dd971c74",
+      "revId": "b985102a3f89a263576a369c29e48c6fa3530ac5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
