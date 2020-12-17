@@ -90,6 +90,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f402e4d4_08e00d6f",
+        "filename": "kernel/trace/Kconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-17T07:04:09Z",
+      "side": 1,
+      "message": "depends on please, \u0027select is evil\u0027 for configuration options.",
+      "range": {
+        "startLine": 91,
+        "startChar": 1,
+        "endLine": 91,
+        "endChar": 7
+      },
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0f8fce9_cc26e863",
         "filename": "kernel/trace/Kconfig",
         "patchSetId": 4
