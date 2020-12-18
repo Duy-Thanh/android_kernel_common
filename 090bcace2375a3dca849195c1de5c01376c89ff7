@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00cee2dc_a93b9d94",
+        "filename": "arch/arm64/kernel/image-vars.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-18T00:27:34Z",
+      "side": 1,
+      "message": "Hi Mark and Todd, \nI am not able to find any other solution for this. This is important feature for Qualcomm bring up build. Please suggest me how to avoid this issue. \n\n-Thanks, Prasad",
+      "parentUuid": "c7c1424d_d9d3c132",
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4abdd307_e8cba704",
         "filename": "include/linux/iorw.h",
         "patchSetId": 4
