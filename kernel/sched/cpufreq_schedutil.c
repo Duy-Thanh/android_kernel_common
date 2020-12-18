@@ -103,13 +103,18 @@ static bool sugov_should_update_freq(struct sugov_policy *sg_policy, u64 time)
 static bool sugov_update_next_freq(struct sugov_policy *sg_policy, u64 time,
 				   unsigned int next_freq)
 {
+<<<<<<< HEAD   (024e0a Merge b109bc722953 ("Merge tag 'thermal-v5.11-rc1' of git://)
 	bool should_update = true;
 	if (!sg_policy->need_freq_update) {
 		if (sg_policy->next_freq == next_freq)
 			return false;
 	} else {
+=======
+	if (sg_policy->need_freq_update)
+>>>>>>> BRANCH (b4ec80 Merge tag 'pm-5.11-rc1' of git://git.kernel.org/pub/scm/linu)
 		sg_policy->need_freq_update = cpufreq_driver_test_flags(CPUFREQ_NEED_UPDATE_LIMITS);
-	}
+	else if (sg_policy->next_freq == next_freq)
+		return false;
 
 	trace_android_rvh_set_sugov_update(sg_policy, next_freq, &should_update);
 	if (!should_update)
