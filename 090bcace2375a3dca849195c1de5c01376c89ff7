@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c4adf02_c2be9703",
+        "filename": "arch/arm64/kernel/image-vars.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-12-18T04:07:00Z",
+      "side": 1,
+      "message": "Marc probably knows a better way to inhibit the trace definitions based on CC_FLAGS_FTRACE, but this will build if you remove all of the changes to this file and make the iorw logging macros contingent on !IS_DEFINED(__KVM_NVHE_HYPERVISOR__) in include/linux/iorw.h:\n\n```\ndiff --git a/include/linux/iorw.h b/include/linux/iorw.h\nindex bab641e91d2b7..15ce9ea846c85 100644\n--- a/include/linux/iorw.h\n+++ b/include/linux/iorw.h\n@@ -9,7 +9,7 @@\n #include \u003clinux/atomic.h\u003e\n #include \u003clinux/tracepoint-defs.h\u003e\n \n-#if IS_ENABLED(CONFIG_TRACE_RW)\n+#if IS_ENABLED(CONFIG_TRACE_RW) \u0026\u0026 !IS_ENABLED(__KVM_NVHE_HYPERVISOR__)\n DECLARE_TRACEPOINT(rwio_writeb);\n DECLARE_TRACEPOINT(rwio_writew);\n DECLARE_TRACEPOINT(rwio_writel);\n```\n\nMarc, suggestions how to do this correctly?",
+      "parentUuid": "00cee2dc_a93b9d94",
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4abdd307_e8cba704",
         "filename": "include/linux/iorw.h",
         "patchSetId": 4
@@ -238,6 +256,29 @@
       "side": 1,
       "message": "Sure. I will address in the next patchset.",
       "parentUuid": "77bead1b_b0b07604",
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "301e77d9_28c5384e",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-12-18T04:07:00Z",
+      "side": 1,
+      "message": "it\u0027s a moot point since you are changing this to pass width as an argument, but this won\u0027t compile due to multiple definitions of \u0027log_post_read_io()\u0027. It was intended to be log_post_readb_io(), log_post_readw_io(), ...",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 0
+      },
       "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
