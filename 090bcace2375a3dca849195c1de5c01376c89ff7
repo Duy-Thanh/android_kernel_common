@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d36eec5_f19150c5",
+        "filename": "arch/arm64/kernel/image-vars.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-18T13:24:04Z",
+      "side": 1,
+      "message": "+#if IS_ENABLED(CONFIG_TRACE_RW) \u0026\u0026 !IS_ENABLED(__KVM_NVHE_HYPERVISOR__)\nif you both are fine, I can go ahead with this path. \n\nIt is not clear to me why CC_FLAGS_FTRACE not working in this case. \n\n-Thanks, Prasad",
+      "parentUuid": "2c4adf02_c2be9703",
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4abdd307_e8cba704",
         "filename": "include/linux/iorw.h",
         "patchSetId": 4
