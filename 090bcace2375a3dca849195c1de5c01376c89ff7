@@ -149,6 +149,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "40954825_67545acd",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-18T00:55:43Z",
+      "side": 1,
+      "message": "Do we really need this indirection? Can\u0027t this just be:\n  trace_rwio_write(val, width, addr);\n\u003cPrasad\u003eThis is upstream recommendation to call to logging all the time. IF trace it is not enabled, that would jump to __log_writeb_io. \n\nin fact, do we really even need the log_writeb_io() macro?\n\u003cPrasad\u003e I will remove the writeb, writew, writel with width parameter.  \n(val, width, addr);",
+      "parentUuid": "64ce8662_9e047526",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 0
+      },
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "302c099f_eab9a743",
         "filename": "include/linux/iorw.h",
         "patchSetId": 4
