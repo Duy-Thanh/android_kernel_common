@@ -16,6 +16,23 @@
       "message": "See comments on aosp/1532971",
       "revId": "c23a5c4bc6914d386b94a9b2ab70ccbc613b1693",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b989bbb0_0f4f278e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-18T22:18:55Z",
+      "side": 1,
+      "message": "These are const structures and can\u0027t be modified, so the should not be exported for anything.",
+      "revId": "c23a5c4bc6914d386b94a9b2ab70ccbc613b1693",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
