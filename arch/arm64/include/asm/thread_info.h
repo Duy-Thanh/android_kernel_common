@@ -64,7 +64,11 @@ void arch_release_task_struct(struct task_struct *tsk);
 #define TIF_FOREIGN_FPSTATE	3	/* CPU's FP state is not current's */
 #define TIF_UPROBE		4	/* uprobe breakpoint or singlestep */
 #define TIF_MTE_ASYNC_FAULT	5	/* MTE Asynchronous Tag Check Fault */
+<<<<<<< HEAD   (f93559 Merge d3eb52113d16 ("Merge tag 'printk-for-5.11' of git://gi)
 #define TIF_CHECK_32BIT_AFFINITY 6	/* Check thread affinity for asymmetric AArch32 */
+=======
+#define TIF_NOTIFY_SIGNAL	7	/* signal notifications exist */
+>>>>>>> BRANCH (69f637 Merge tag 'for-5.11/drivers-2020-12-14' of git://git.kernel.)
 #define TIF_SYSCALL_TRACE	8	/* syscall trace active */
 #define TIF_SYSCALL_AUDIT	9	/* syscall auditing */
 #define TIF_SYSCALL_TRACEPOINT	10	/* syscall tracepoint for ftrace */
@@ -95,11 +99,16 @@ void arch_release_task_struct(struct task_struct *tsk);
 #define _TIF_CHECK_32BIT_AFFINITY (1 << TIF_CHECK_32BIT_AFFINITY)
 #define _TIF_SVE		(1 << TIF_SVE)
 #define _TIF_MTE_ASYNC_FAULT	(1 << TIF_MTE_ASYNC_FAULT)
+#define _TIF_NOTIFY_SIGNAL	(1 << TIF_NOTIFY_SIGNAL)
 
 #define _TIF_WORK_MASK		(_TIF_NEED_RESCHED | _TIF_SIGPENDING | \
 				 _TIF_NOTIFY_RESUME | _TIF_FOREIGN_FPSTATE | \
 				 _TIF_UPROBE | _TIF_MTE_ASYNC_FAULT | \
+<<<<<<< HEAD   (f93559 Merge d3eb52113d16 ("Merge tag 'printk-for-5.11' of git://gi)
 				 _TIF_CHECK_32BIT_AFFINITY)
+=======
+				 _TIF_NOTIFY_SIGNAL)
+>>>>>>> BRANCH (69f637 Merge tag 'for-5.11/drivers-2020-12-14' of git://git.kernel.)
 
 #define _TIF_SYSCALL_WORK	(_TIF_SYSCALL_TRACE | _TIF_SYSCALL_AUDIT | \
 				 _TIF_SYSCALL_TRACEPOINT | _TIF_SECCOMP | \
