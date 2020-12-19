@@ -4795,6 +4795,8 @@ static int ufshcd_slave_configure(struct scsi_device *sdev)
 
 	ufshcd_crypto_setup_rq_keyslot_manager(hba, q);
 
+	ufshcd_vops_slave_configure(hba, sdev);
+
 	return 0;
 }
 

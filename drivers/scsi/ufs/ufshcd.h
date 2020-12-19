@@ -339,6 +339,7 @@ struct ufs_hba_variant_ops {
 	int     (*update_sysfs)(struct ufs_hba *hba);
 	void	(*send_command)(struct ufs_hba *hba, struct ufshcd_lrb *lrbp);
 	void	(*compl_command)(struct ufs_hba *hba, struct ufshcd_lrb *lrbp);
+	void	(*slave_configure)(struct scsi_device *sdev);
 };
 
 /* clock gating state  */
@@ -1298,6 +1299,13 @@ static inline void ufshcd_vops_compl_command(struct ufs_hba *hba,
 {
 	if (hba->vops && hba->vops->compl_command)
 		hba->vops->compl_command(hba, lrbp);
+}
+
+static inline void ufshcd_vops_slave_configure(struct ufs_hba *hba,
+						    struct scsi_device *sdev)
+{
+	if (hba->vops && hba->vops->slave_configure)
+		hba->vops->slave_configure(sdev);
 }
 
 extern struct ufs_pm_lvl_states ufs_pm_lvl_states[];
