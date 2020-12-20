@@ -124,6 +124,23 @@
       "parentUuid": "ba8f8d0b_8b1603c9",
       "revId": "ee753b7d136d7ac274743983af33b4e5f799d7b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61d4a70d_17d96991",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-12-20T15:15:48Z",
+      "side": 1,
+      "message": "Hi, Will McVicker\n\nAny idea when the fix following would be merged into the upstream?\nhttps://lore.kernel.org/linux-arm-kernel/20201112001422.340449-1-willmcvicker@google.com/\n\nOr could we have it in the ACK as FROMLIST first?\n\nThanks,\nYongqin Liu\n\n",
+      "revId": "ee753b7d136d7ac274743983af33b4e5f799d7b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
