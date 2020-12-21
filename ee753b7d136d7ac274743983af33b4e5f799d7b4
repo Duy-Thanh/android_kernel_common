@@ -141,6 +141,24 @@
       "message": "Hi, Will McVicker\n\nAny idea when the fix following would be merged into the upstream?\nhttps://lore.kernel.org/linux-arm-kernel/20201112001422.340449-1-willmcvicker@google.com/\n\nOr could we have it in the ACK as FROMLIST first?\n\nThanks,\nYongqin Liu\n\n",
       "revId": "ee753b7d136d7ac274743983af33b4e5f799d7b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "401067dc_4cab2b39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-12-21T18:47:46Z",
+      "side": 1,
+      "message": "Hi Yongqin, the fix will be to move to the latest release of AOSP LLVM which we hope to have ready shortly after the new year.  The above patch doesn\u0027t make sense for upstream to support a known broken version of LLD.",
+      "parentUuid": "61d4a70d_17d96991",
+      "revId": "ee753b7d136d7ac274743983af33b4e5f799d7b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
