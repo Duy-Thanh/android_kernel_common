@@ -16,6 +16,24 @@
       "message": "Wouldn\u0027t it be better ",
       "revId": "4e372111e27d71438bc9107b92336b003a7e0094",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67478750_6dd7e197",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-21T22:31:56Z",
+      "side": 1,
+      "message": "Ignore this. I decided to comment in-line and forgot to remove this one.",
+      "parentUuid": "7e801b74_1bca9dd3",
+      "revId": "4e372111e27d71438bc9107b92336b003a7e0094",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
