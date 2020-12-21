@@ -16,6 +16,23 @@
       "message": "This issue has been reported before as the following patches.\nhttps://android-review.googlesource.com/q/9.0_r6+is:abandoned+\n\nFor GKI tasks, please help to merge this patch in.\nThanks.",
       "revId": "5aab881b67bfa9c260b77f0bb0875f074f23dc5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e4b7265_512568c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-21T08:25:13Z",
+      "side": 1,
+      "message": "Same comment as on the android12-5.4 submission.",
+      "revId": "5aab881b67bfa9c260b77f0bb0875f074f23dc5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
