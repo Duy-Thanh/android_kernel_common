@@ -1449,6 +1449,11 @@ int msm_pinctrl_remove(struct platform_device *pdev)
 }
 EXPORT_SYMBOL(msm_pinctrl_remove);
 
+<<<<<<< HEAD   (9bd358 Merge a701262c02ce ("Merge tag 'mtd/for-5.11' of git://git.k)
 MODULE_DESCRIPTION("Qualcomm Technologies, Inc. pinctrl-msm driver");
 MODULE_LICENSE("GPL v2");
 
+=======
+MODULE_DESCRIPTION("Qualcomm Technologies, Inc. TLMM driver");
+MODULE_LICENSE("GPL v2");
+>>>>>>> BRANCH (f68e40 Merge tag 'pinctrl-v5.11-1' of git://git.kernel.org/pub/scm/)
