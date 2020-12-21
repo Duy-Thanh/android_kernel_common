@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a4258e0_4d245b9d",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-21T22:24:23Z",
+      "side": 0,
+      "message": "Shouldn\u0027t we require system heap as a module in GKI? IOW why not have\nCONFIG_DMABUF_HEAPS_SYSTEM\u003dm\nright here?",
+      "range": {
+        "startLine": 454,
+        "startChar": 0,
+        "endLine": 454,
+        "endChar": 28
+      },
+      "revId": "91ff8b55a8f681eb1454038d66f573e849d0737d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
