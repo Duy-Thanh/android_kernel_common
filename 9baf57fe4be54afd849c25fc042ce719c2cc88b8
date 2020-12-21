@@ -16,6 +16,24 @@
       "message": "Need a bug for this whole series please.",
       "revId": "9baf57fe4be54afd849c25fc042ce719c2cc88b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fd3052d_eaa6773b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2020-12-21T15:22:34Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "1f17c6c1_3263117e",
+      "revId": "9baf57fe4be54afd849c25fc042ce719c2cc88b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
