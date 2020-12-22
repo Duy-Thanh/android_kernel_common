@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65f8454f_03b58245",
+        "filename": "drivers/base/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3453,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-22T19:57:22Z",
+      "side": 1,
+      "message": "as I said in the android-mainline patch review, this is exported incorrectly, AND is not for use by any scheduler code or anything out-of-tree, sorry.",
+      "range": {
+        "startLine": 3453,
+        "startChar": 0,
+        "endLine": 3453,
+        "endChar": 29
+      },
+      "revId": "8779c772386d5fc7e1daa2cd7885ec83e75793af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
