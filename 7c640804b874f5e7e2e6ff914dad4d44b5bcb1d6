@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "696a5758_6e59dd9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-22T10:24:25Z",
+      "side": 1,
+      "message": "Why are any of these needed for the android-mainline branch?  Any need for these symbols in this series should be submitted upstream as that is what this is tracking.  No need to export anything now, right?",
+      "revId": "7c640804b874f5e7e2e6ff914dad4d44b5bcb1d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
