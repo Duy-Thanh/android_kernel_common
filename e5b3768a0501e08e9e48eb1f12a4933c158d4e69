@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8122d37_ab6f2563",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-22T10:47:04Z",
+      "side": 1,
+      "message": "Why not x86 as well to provide proper build and other testing?",
+      "revId": "e5b3768a0501e08e9e48eb1f12a4933c158d4e69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
