@@ -190,6 +190,22 @@ struct cgroup_taskset;
 DECLARE_RESTRICTED_HOOK(android_rvh_cpu_cgroup_attach,
 	TP_PROTO(struct cgroup_taskset *tset),
 	TP_ARGS(tset), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_sched_fork_init,
+	TP_PROTO(struct task_struct *p),
+	TP_ARGS(p), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_sched_init_smp,
+	TP_PROTO(struct task_struct *p),
+	TP_ARGS(p), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_sched_idle,
+	TP_PROTO(int cpu, bool *idle),
+	TP_ARGS(cpu, idle), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_ttwu_cond,
+	TP_PROTO(bool *cond),
+	TP_ARGS(cond), 1);
 #else
 #define trace_android_rvh_select_task_rq_fair(p, prev_cpu, sd_flag, wake_flags, new_cpu)
 #define trace_android_rvh_select_task_rq_rt(p, prev_cpu, sd_flag, wake_flags, new_cpu)
@@ -233,6 +249,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_cpu_cgroup_attach,
 #define trace_android_rvh_update_cpu_capacity(cpu, capacity)
 #define trace_android_rvh_update_misfit_status(p, rq, need_update)
 #define trace_android_rvh_cpu_cgroup_attach(tset)
+#define trace_android_rvh_sched_fork_init(p)
+#define trace_android_rvh_sched_init_smp(p)
+#define trace_android_rvh_sched_idle(cpu, idle)
+#define trace_android_rvh_ttwu_cond(cond)
 #endif
 #endif /* _TRACE_HOOK_SCHED_H */
 /* This part must be outside protection */

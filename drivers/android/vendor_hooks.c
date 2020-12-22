@@ -113,3 +113,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_place_entity);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_cpu_capacity);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_misfit_status);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_cgroup_attach);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_sched_fork_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_sched_init_smp);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_sched_idle);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ttwu_cond);
