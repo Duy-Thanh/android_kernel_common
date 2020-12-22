@@ -109,6 +109,30 @@
       },
       "revId": "13b04b91cbf773d5333adafb079619acd379d54d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b74a1caf_6f4252cc",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-22T10:54:06Z",
+      "side": 1,
+      "message": "android_get_debug_symbol_because_we_can_not_export_the_world_to_modules()?  :)",
+      "parentUuid": "1b90af01_9c2ffc55",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 44
+      },
+      "revId": "13b04b91cbf773d5333adafb079619acd379d54d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
