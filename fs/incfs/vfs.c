@@ -1511,8 +1511,6 @@ static ssize_t incfs_listxattr(struct dentry *d, char *list, size_t size)
 struct dentry *incfs_mount_fs(struct file_system_type *type, int flags,
 			      const char *dev_name, void *data)
 {
-	static const char index_name[] = ".index";
-	static const char incomplete_name[] = ".incomplete";
 	struct mount_options options = {};
 	struct mount_info *mi = NULL;
 	struct path backing_dir_path = {};
@@ -1571,7 +1569,7 @@ struct dentry *incfs_mount_fs(struct file_system_type *type, int flags,
 	}
 
 	index_dir = open_or_create_special_dir(backing_dir_path.dentry,
-					       index_name);
+					       INCFS_INDEX_NAME);
 	if (IS_ERR_OR_NULL(index_dir)) {
 		error = PTR_ERR(index_dir);
 		pr_err("incfs: Can't find or create .index dir in %s\n",
@@ -1582,7 +1580,7 @@ struct dentry *incfs_mount_fs(struct file_system_type *type, int flags,
 	mi->mi_index_dir = index_dir;
 
 	incomplete_dir = open_or_create_special_dir(backing_dir_path.dentry,
-						    incomplete_name);
+						    INCFS_INCOMPLETE_NAME);
 	if (IS_ERR_OR_NULL(incomplete_dir)) {
 		error = PTR_ERR(incomplete_dir);
 		pr_err("incfs: Can't find or create .incomplete dir in %s\n",

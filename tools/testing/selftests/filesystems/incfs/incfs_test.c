@@ -17,6 +17,7 @@
 #include <unistd.h>
 #include <zstd.h>
 
+#include <sys/inotify.h>
 #include <sys/mount.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -3472,6 +3473,83 @@ out:
 	return result;
 }
 
+#define DIRS 3
+static int inotify_test(const char *mount_dir)
+{
+	struct test_file file = {
+		.name = "file",
+		.size = 16 * INCFS_DATA_FILE_BLOCK_SIZE
+	};
+
+	int result = TEST_FAILURE;
+	char *backing_dir = NULL, *index_dir = NULL, *incomplete_dir = NULL;
+	int cmd_fd = -1;
+	int notify_fd = -1;
+	int wds[DIRS];
+	char buffer[DIRS * (sizeof(struct inotify_event) + NAME_MAX + 1)];
+	char *ptr = buffer;
+	struct inotify_event *events[DIRS] = {};
+	const char *names[DIRS] = {};
+	int res;
+	char id[sizeof(incfs_uuid_t) * 2 + 1];
+
+	TEST(backing_dir = create_backing_dir(mount_dir), backing_dir);
+	TEST(index_dir = concat_file_name(mount_dir, ".index"), index_dir);
+	TEST(incomplete_dir = concat_file_name(mount_dir, ".incomplete"),
+	     incomplete_dir);
+	TESTEQUAL(mount_fs(mount_dir, backing_dir, 50), 0);
+	TEST(cmd_fd = open_commands_file(mount_dir), cmd_fd != -1);
+	TEST(notify_fd = inotify_init1(IN_NONBLOCK | IN_CLOEXEC),
+	     notify_fd != -1);
+	TEST(wds[0] = inotify_add_watch(notify_fd, mount_dir, IN_CREATE),
+	     wds[0] != -1);
+	TEST(wds[1] = inotify_add_watch(notify_fd, index_dir, IN_CREATE),
+	     wds[1] != -1);
+	TEST(wds[2] = inotify_add_watch(notify_fd, incomplete_dir, IN_CREATE),
+	     wds[2] != -1);
+	TESTEQUAL(emit_file(cmd_fd, NULL, file.name, &file.id, file.size,
+			   NULL), 0);
+	TEST(res = read(notify_fd, buffer, sizeof(buffer)), res != -1);
+
+	while(ptr < buffer + res) {
+		struct inotify_event *event = (struct inotify_event*) ptr;
+		int i;
+
+		TESTCOND(ptr + sizeof(*event) <= buffer + res);
+		for (i = 0; i < DIRS; ++i)
+			if (event->wd == wds[i]) {
+				TESTEQUAL(events[i], NULL);
+				events[i] = event;
+				ptr += sizeof(*event);
+				names[i] = ptr;
+				ptr += events[i]->len;
+				TESTCOND(ptr <= buffer + res);
+				break;
+			}
+		TESTCOND(i < DIRS);
+	}
+
+	TESTNE(events[0], NULL);
+	TESTNE(events[1], NULL);
+	TESTNE(events[2], NULL);
+
+	bin2hex(id, file.id.bytes, sizeof(incfs_uuid_t));
+
+	TESTEQUAL(strcmp(names[0], file.name), 0);
+	TESTEQUAL(strcmp(names[1], id), 0);
+	TESTEQUAL(strcmp(names[2], id), 0);
+
+	result = TEST_SUCCESS;
+out:
+	close(notify_fd);
+	close(cmd_fd);
+	umount(mount_dir);
+	free(backing_dir);
+	free(index_dir);
+	free(incomplete_dir);
+	return result;
+}
+
 static char *setup_mount_dir()
 {
 	struct stat st;
@@ -3585,6 +3663,7 @@ int main(int argc, char *argv[])
 		MAKE_TEST(data_block_count_test),
 		MAKE_TEST(hash_block_count_test),
 		MAKE_TEST(per_uid_read_timeouts_test),
+		MAKE_TEST(inotify_test),
 	};
 #undef MAKE_TEST
 
