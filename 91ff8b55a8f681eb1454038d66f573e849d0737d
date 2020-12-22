@@ -22,6 +22,30 @@
       },
       "revId": "91ff8b55a8f681eb1454038d66f573e849d0737d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61bad18a_249b103b",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-12-22T00:21:19Z",
+      "side": 0,
+      "message": "Hi Suren, we currently do not support GKI modules :( We will confirm the existence of the system heap during runtime in VTS instead.",
+      "parentUuid": "1a4258e0_4d245b9d",
+      "range": {
+        "startLine": 454,
+        "startChar": 0,
+        "endLine": 454,
+        "endChar": 28
+      },
+      "revId": "91ff8b55a8f681eb1454038d66f573e849d0737d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
