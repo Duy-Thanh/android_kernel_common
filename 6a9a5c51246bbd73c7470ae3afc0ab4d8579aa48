@@ -16,6 +16,23 @@
       "message": "I resubmitted it.",
       "revId": "6a9a5c51246bbd73c7470ae3afc0ab4d8579aa48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "631403b4_73c4a06c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-22T10:55:37Z",
+      "side": 1,
+      "message": "The reset/watchdog drivers can get access to this through the pstore driver already, right?  Why is an additional hook needed, as this will slow down every normal user?",
+      "revId": "6a9a5c51246bbd73c7470ae3afc0ab4d8579aa48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
