@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9459b6ad_0f0b9688",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-12-23T23:15:44Z",
+      "side": 1,
+      "message": "What is this needed for? Please be more descriptive. If it is just for debugging, should it be added to the debug symbol driver? Why not?",
+      "revId": "c565d7f254deceae313c12a64b2d674f99004647",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
