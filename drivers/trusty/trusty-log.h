@@ -8,6 +8,15 @@
 #define _TRUSTY_LOG_H_
 
 /*
+ * Log metadata
+ */
+struct log_metadata {
+    uint32_t level;
+    uint32_t app_id;
+    uint64_t timestamp;
+} __attribute__((packed));
+
+/*
  * Ring buffer that supports one secure producer thread and one
  * linux side consumer thread.
  */
@@ -21,6 +30,7 @@ struct log_rb {
 #define SMC_SC_SHARED_LOG_VERSION	SMC_STDCALL_NR(SMC_ENTITY_LOGGING, 0)
 #define SMC_SC_SHARED_LOG_ADD		SMC_STDCALL_NR(SMC_ENTITY_LOGGING, 1)
 #define SMC_SC_SHARED_LOG_RM		SMC_STDCALL_NR(SMC_ENTITY_LOGGING, 2)
+#define SMC_SC_SHARED_LOG_GET_TRUSTY_APP_NAME SMC_STDCALL_NR(SMC_ENTITY_LOGGING, 3)
 
 #define TRUSTY_LOG_API_VERSION	1
 
