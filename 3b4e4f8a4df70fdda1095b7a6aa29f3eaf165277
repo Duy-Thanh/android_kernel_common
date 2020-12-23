@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b92308a_34b08a56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-23T20:15:45Z",
+      "side": 1,
+      "message": "as a module?",
+      "range": {
+        "startLine": 11,
+        "startChar": 65,
+        "endLine": 11,
+        "endChar": 69
+      },
+      "revId": "3b4e4f8a4df70fdda1095b7a6aa29f3eaf165277",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd41884e_4b92edad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-23T20:15:45Z",
+      "side": 1,
+      "message": "IIUC this would require all QCOM devices to manually include CONFIG_IOMMU_IO_PGTABLE_LPAE\u003dm into their config fragments. Adding Alistair to check if we detect a case when this config is missing.",
+      "revId": "3b4e4f8a4df70fdda1095b7a6aa29f3eaf165277",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
