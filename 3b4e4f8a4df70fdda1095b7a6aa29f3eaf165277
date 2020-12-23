@@ -63,6 +63,24 @@
       "message": "IIUC this would require all QCOM devices to manually include CONFIG_IOMMU_IO_PGTABLE_LPAE\u003dm into their config fragments. Adding Alistair to check if we detect a case when this config is missing.",
       "revId": "3b4e4f8a4df70fdda1095b7a6aa29f3eaf165277",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c782f6d1_4ecc7fb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1584799
+      },
+      "writtenOn": "2020-12-23T20:46:25Z",
+      "side": 1,
+      "message": "Yes, that is correct. That way, we can add our optimizations and features in the io-pgtable layer, since it\u0027s a module.",
+      "parentUuid": "cd41884e_4b92edad",
+      "revId": "3b4e4f8a4df70fdda1095b7a6aa29f3eaf165277",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
