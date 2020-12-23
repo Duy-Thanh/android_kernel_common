@@ -49,27 +49,72 @@ struct trusty_log_state {
 	char line_buffer[TRUSTY_LINE_BUFFER_SIZE];
 };
 
+static char *trusty_get_app_name(struct trusty_log_state *s, uint32_t trusty_app_id)
+{
+        int ret;
+        int i;
+        int app_name_len;
+        char *app_name = NULL;
+
+        ret = trusty_fast_call32(s->dev, SMC_FC_GET_TRUSTY_APP_NAME, -1, trusty_app_id, 0);
+        if (ret <= 0)
+                goto err_get_size;
+
+        app_name_len = ret;
+
+        app_name = kmalloc(app_name_len + 1, GFP_KERNEL);
+        for (i = 0; i < app_name_len; i++) {
+                ret = trusty_fast_call32(s->dev, SMC_FC_GET_TRUSTY_APP_NAME, i, trusty_app_id, 0);
+                if (ret < 0)
+                        goto err_get_char;
+                app_name[i] = ret;
+        }
+        app_name[i] = '\0';
+
+        return app_name;
+
+err_get_char:
+        kfree(app_name);
+        app_name = NULL;
+err_get_size:
+        return app_name;
+}
+
 static int log_read_line(struct trusty_log_state *s, int put, int get)
 {
-	struct log_rb *log = s->log;
-	int i;
-	char c = '\0';
-	size_t max_to_read =
-		min_t(size_t, put - get, sizeof(s->line_buffer) - 1);
-	size_t mask = log->sz - 1;
+    int i, j;
+    char c = '\0';
+    uint32_t offset, len;
+    uint32_t size_rb = s->log->sz;
 
-	for (i = 0; i < max_to_read && c != '\n';)
-		s->line_buffer[i++] = c = log->data[get++ & mask];
-	s->line_buffer[i] = '\0';
+    i = 0;
+    while (i < sizeof(s->line_buffer) - 1 &&
+           get < put) {
+        offset = get & (size_rb - 1);
+        len = (uint32_t)s->log->data[offset];
+        get = get + sizeof(uint32_t) + len + sizeof(struct log_metadata);
 
-	return i;
+        offset = offset + sizeof(uint32_t);
+        for (j = 0; j < len; j++) {
+            s->line_buffer[i++] = c = s->log->data[offset + j];
+            if ( c == '\n' || i >= sizeof(s->line_buffer) - 1)
+                break;
+        }
+        offset = offset + len;
+        if (c == '\n')
+            break;
+    }
+    s->line_buffer[i] = '\0';
+
+    return get;
 }
 
 static void trusty_dump_logs(struct trusty_log_state *s)
 {
 	struct log_rb *log = s->log;
 	u32 get, put, alloc;
-	int read_chars;
+        uint32_t offset, len;
+        uint32_t size_rb = s->log->sz;
 
 	if (WARN_ON(!is_power_of_2(log->sz)))
 		return;
@@ -86,8 +131,15 @@ static void trusty_dump_logs(struct trusty_log_state *s)
 		/* Make sure that the read of put occurs before the read of log data */
 		rmb();
 
-		/* Read a line from the log */
-		read_chars = log_read_line(s, put, get);
+                offset = get & (size_rb - 1);
+                len = (uint32_t)s->log->data[offset];
+
+                offset = offset + sizeof(uint32_t) + len;
+                volatile struct log_metadata *metadata =
+                    (struct log_metadata *)&s->log->data[offset];
+
+                /* Read a line from the log */
+		get = log_read_line(s, put, get);
 
 		/* Force the loads from log_read_line to complete. */
 		rmb();
@@ -103,10 +155,21 @@ static void trusty_dump_logs(struct trusty_log_state *s)
 			continue;
 		}
 
-		if (__ratelimit(&trusty_log_rate_limit))
-			dev_info(s->dev, "%s", s->line_buffer);
-
-		get += read_chars;
+                if (__ratelimit(&trusty_log_rate_limit)) {
+                    char *app_name = trusty_get_app_name(s, metadata->app_id);
+                    if (app_name != NULL) {
+                        dev_info(s->dev, "%llu: %s: %s",
+                                 metadata->timestamp,
+                                 app_name,
+                                 s->line_buffer);
+                        kfree(app_name);
+                    } else {
+                        dev_info(s->dev, "%llu: %u: %s",
+                                 metadata->timestamp,
+                                 metadata->app_id,
+                                 s->line_buffer);
+                    }
+                }
 	}
 	s->get = get;
 }
