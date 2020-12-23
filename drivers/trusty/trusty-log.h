@@ -8,6 +8,17 @@
 #define _TRUSTY_LOG_H_
 
 /*
+ * Below is the log-data-entry in Ringbuffer
+ * {
+ *    total_size_of_entry +
+ *    log_string + app_name +
+ *    log_metadata +
+ *    app_name_size +
+ *    log_string_size
+ * }
+ */
+
+/*
  * Ring buffer that supports one secure producer thread and one
  * linux side consumer thread.
  */
@@ -22,7 +33,7 @@ struct log_rb {
 #define SMC_SC_SHARED_LOG_ADD		SMC_STDCALL_NR(SMC_ENTITY_LOGGING, 1)
 #define SMC_SC_SHARED_LOG_RM		SMC_STDCALL_NR(SMC_ENTITY_LOGGING, 2)
 
-#define TRUSTY_LOG_API_VERSION	1
+#define TRUSTY_LOG_API_VERSION	2
 
 #endif
 
