@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd5aa4e1_74338ce9",
+        "filename": "drivers/base/core.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3453,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-23T08:00:30Z",
+      "side": 1,
+      "message": "again, no, this symbol is not to be exported at all, and no one should be using it.\n\nPlease point me at the code that is using it so that I can advise you on how to properly fix it.",
+      "range": {
+        "startLine": 3453,
+        "startChar": 0,
+        "endLine": 3453,
+        "endChar": 33
+      },
+      "revId": "73ee6bfe8d7e32b045a88c3555cbbf484e5fb651",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
