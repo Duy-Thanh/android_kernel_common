@@ -8,6 +8,15 @@
 #define _TRUSTY_LOG_H_
 
 /*
+ * Log metadata
+ */
+struct log_metadata {
+    uint32_t level;
+    uint32_t app_id;
+    uint64_t timestamp;
+} __attribute__((packed));
+
+/*
  * Ring buffer that supports one secure producer thread and one
  * linux side consumer thread.
  */
