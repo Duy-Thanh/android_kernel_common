@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "85a99a5a_bedbdb27",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-23T21:06:16Z",
+      "side": 1,
+      "message": "done.",
+      "parentUuid": "7ab499a8_cb968f55",
+      "range": {
+        "startLine": 62,
+        "startChar": 48,
+        "endLine": 63,
+        "endChar": 37
+      },
+      "revId": "f524596a1d62b8ff00117f931a37095da14557af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6696f47_67fbdb0a",
         "filename": "drivers/android/debug_symbols.c",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2020-12-22T10:30:28Z",
       "side": 1,
       "message": "That\u0027s not a normal kernel data type, please use the correct one for kernel symbols...",
+      "range": {
+        "startLine": 14,
+        "startChar": 1,
+        "endLine": 14,
+        "endChar": 10
+      },
+      "revId": "f524596a1d62b8ff00117f931a37095da14557af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7f58a0f_f9cba5c0",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-23T21:06:16Z",
+      "side": 1,
+      "message": "done.",
+      "parentUuid": "f6696f47_67fbdb0a",
       "range": {
         "startLine": 14,
         "startChar": 1,
@@ -95,6 +143,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "60887d9b_40c20b41",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-23T21:06:16Z",
+      "side": 1,
+      "message": "removed. Kept last node as null for index comparison.",
+      "parentUuid": "b639a937_9d67344e",
+      "range": {
+        "startLine": 24,
+        "startChar": 12,
+        "endLine": 24,
+        "endChar": 19
+      },
+      "revId": "f524596a1d62b8ff00117f931a37095da14557af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51843038_8b502af1",
         "filename": "drivers/android/debug_symbols.c",
         "patchSetId": 2
@@ -106,6 +178,30 @@
       "writtenOn": "2020-12-22T10:30:28Z",
       "side": 1,
       "message": "Please use proper kerneldoc format if you are adding global functions and documenting them.",
+      "range": {
+        "startLine": 28,
+        "startChar": 3,
+        "endLine": 28,
+        "endChar": 27
+      },
+      "revId": "f524596a1d62b8ff00117f931a37095da14557af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3df143f8_6208885d",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-23T21:06:16Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "51843038_8b502af1",
       "range": {
         "startLine": 28,
         "startChar": 3,
@@ -141,6 +237,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "732d593c_31741c7d",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-23T21:06:16Z",
+      "side": 1,
+      "message": "Thanks. I have updated the symbol name.",
+      "parentUuid": "7ff9a437_51c352f3",
+      "range": {
+        "startLine": 34,
+        "startChar": 6,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "f524596a1d62b8ff00117f931a37095da14557af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b7a46fa_4950bc14",
         "filename": "drivers/android/debug_symbols.c",
         "patchSetId": 2
@@ -152,6 +272,30 @@
       "writtenOn": "2020-12-22T10:30:28Z",
       "side": 1,
       "message": "why are you casting this again?",
+      "range": {
+        "startLine": 39,
+        "startChar": 9,
+        "endLine": 39,
+        "endChar": 13
+      },
+      "revId": "f524596a1d62b8ff00117f931a37095da14557af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26435fc2_a1d342e9",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-23T21:06:16Z",
+      "side": 1,
+      "message": "removed the casting.",
+      "parentUuid": "6b7a46fa_4950bc14",
       "range": {
         "startLine": 39,
         "startChar": 9,
