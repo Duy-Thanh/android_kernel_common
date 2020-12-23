@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afcce2e0_194b3c82",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-12-23T18:23:04Z",
+      "side": 1,
+      "message": "Please explain why it needs to be a restricted hook",
+      "revId": "bd8e281c61bbc77b69c2c3033fbc680030ccf0cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d49f72ed_5dc932b1",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-12-23T18:23:04Z",
+      "side": 1,
+      "message": "why are these in .../hooks/sched.h when they aren\u0027t used in scheduler code at all?",
+      "revId": "bd8e281c61bbc77b69c2c3033fbc680030ccf0cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "885e34d4_103b4f03",
+        "filename": "kernel/cgroup/cpuset.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3241,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-12-23T18:23:04Z",
+      "side": 1,
+      "message": "this is not mentioned in the commit message",
+      "revId": "bd8e281c61bbc77b69c2c3033fbc680030ccf0cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87fec5b0_787faf68",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-12-23T18:23:04Z",
+      "side": 1,
+      "message": "does your use-case still work if you assumed \"cpu_down\" in the hook implementation but the cpu_down_maps_locked() failed?",
+      "revId": "bd8e281c61bbc77b69c2c3033fbc680030ccf0cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
