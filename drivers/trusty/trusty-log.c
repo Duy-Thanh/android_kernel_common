@@ -51,25 +51,34 @@ struct trusty_log_state {
 
 static int log_read_line(struct trusty_log_state *s, int put, int get)
 {
-	struct log_rb *log = s->log;
-	int i;
+	int i, j;
 	char c = '\0';
-	size_t max_to_read =
-		min_t(size_t, put - get, sizeof(s->line_buffer) - 1);
-	size_t mask = log->sz - 1;
 
-	for (i = 0; i < max_to_read && c != '\n';)
-		s->line_buffer[i++] = c = log->data[get++ & mask];
-	s->line_buffer[i] = '\0';
+        i = 0;
+        while (i < sizeof(s->line_buffer) - 1 &&
+               get < put) {
+            uint32_t offset = get & (s->log->sz/sizeof(struct log_metadata));
+            volatile struct log_metadata metadata = s->log->data[offset];
+            get++;
 
-	return i;
+            for (j = 0; j < metadata.len; j++) {
+                s->line_buffer[i++] = c = metadata.log_data[j];
+                if ( c == '\n' || i >= sizeof(s->line_buffer) - 1)
+                    break;
+            }
+            if (c == '\n')
+                break;
+        }
+        s->line_buffer[i] = '\0';
+
+	return get;
 }
 
 static void trusty_dump_logs(struct trusty_log_state *s)
 {
 	struct log_rb *log = s->log;
 	u32 get, put, alloc;
-	int read_chars;
+        uint32_t offset;
 
 	if (WARN_ON(!is_power_of_2(log->sz)))
 		return;
@@ -86,8 +95,10 @@ static void trusty_dump_logs(struct trusty_log_state *s)
 		/* Make sure that the read of put occurs before the read of log data */
 		rmb();
 
-		/* Read a line from the log */
-		read_chars = log_read_line(s, put, get);
+                offset = get & (s->log->sz/sizeof(struct log_metadata));
+                volatile struct log_metadata metadata = s->log->data[offset];
+                /* Read a line from the log */
+                get = log_read_line(s, put, get);
 
 		/* Force the loads from log_read_line to complete. */
 		rmb();
@@ -97,18 +108,17 @@ static void trusty_dump_logs(struct trusty_log_state *s)
 		 * Discard the line that was just read if the data could
 		 * have been corrupted by the producer.
 		 */
-		if (alloc - get > log->sz) {
-			dev_err(s->dev, "log overflow.");
-			get = alloc - log->sz;
-			continue;
-		}
+                if (alloc - get > (log->sz/sizeof(struct log_metadata))) {
+                    dev_err(s->dev, "log overflow.");
+                    get = alloc - (log->sz/sizeof(struct log_metadata));
+                    continue;
+                }
 
-		if (__ratelimit(&trusty_log_rate_limit))
-			dev_info(s->dev, "%s", s->line_buffer);
-
-		get += read_chars;
+		if (__ratelimit(&trusty_log_rate_limit)) {
+                    dev_info(s->dev, "%s: %s", metadata.app_name, s->line_buffer);
+                }
 	}
-	s->get = get;
+        s->get = get;
 }
 
 static int trusty_log_call_notify(struct notifier_block *nb,
