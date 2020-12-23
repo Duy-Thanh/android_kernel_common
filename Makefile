@@ -1314,16 +1314,15 @@ endif
 
 uts_len := 64
 ifneq (,$(BUILD_NUMBER))
-	UTS_RELEASE=$(KERNELRELEASE)-ab$(BUILD_NUMBER)
+	UTS_RELEASE=$(KERNELRELEASE)-ab$(BUILD_NUMBER)$(if $(BUILD_TARGET),-$(BUILD_TARGET))
 else
 	UTS_RELEASE=$(KERNELRELEASE)
 endif
 define filechk_utsrelease.h
 	if [ `echo -n "$(UTS_RELEASE)" | wc -c ` -gt $(uts_len) ]; then \
-		echo '"$(UTS_RELEASE)" exceeds $(uts_len) characters' >&2;    \
-		exit 1;                                                       \
+		echo 'WARN: "$(UTS_RELEASE)" exceeds $(uts_len) characters' >&2;    \
 	fi;                                                             \
-	echo \#define UTS_RELEASE \"$(UTS_RELEASE)\"
+	echo \#define UTS_RELEASE \"$(shell echo -n $(UTS_RELEASE) | cut -c 1-$(uts_len))\"
 endef
 
 define filechk_version.h
