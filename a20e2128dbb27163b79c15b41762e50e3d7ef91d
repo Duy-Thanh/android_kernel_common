@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58aadea0_497a58d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-23T10:40:20Z",
+      "side": 1,
+      "message": "reverting upstream patches shouldn\u0027t trigger lint 😞",
+      "revId": "a20e2128dbb27163b79c15b41762e50e3d7ef91d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
