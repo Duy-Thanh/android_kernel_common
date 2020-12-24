@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d27e95b_0d2055b2",
+        "filename": "drivers/android/vendor_debug_parser.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1754664
+      },
+      "writtenOn": "2020-12-24T12:06:34Z",
+      "side": 1,
+      "message": "This driver is created to enhance gki kernel debugging, by giving an interface to vendor module, which can help in parsing certain kernel data structures. These data structures parsing require some structure definitions, which are not exposed to vendor modules.\n\nFor start runqueue parsing has been done. The hidden structures required for runqueue parsing are:\nstruct rq\nstruct rt_rq\nstruct cfs_rq\nstruct rt_prio_array",
+      "range": {
+        "startLine": 15,
+        "startChar": 22,
+        "endLine": 15,
+        "endChar": 35
+      },
+      "revId": "519b9a82e989165e45cc2bbe25ae4f1c4532577c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
