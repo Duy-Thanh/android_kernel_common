@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9625dbd0_c2c4aa85",
+        "filename": "drivers/android/vendor_debug_parser.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-27T10:23:54Z",
+      "side": 1,
+      "message": "that is _very_ sketchy 😞",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 37
+      },
+      "revId": "519b9a82e989165e45cc2bbe25ae4f1c4532577c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d27e95b_0d2055b2",
         "filename": "drivers/android/vendor_debug_parser.c",
         "patchSetId": 2
@@ -19,6 +42,29 @@
         "startChar": 22,
         "endLine": 15,
         "endChar": 35
+      },
+      "revId": "519b9a82e989165e45cc2bbe25ae4f1c4532577c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "239eb900_e1f5051f",
+        "filename": "include/linux/android_vendor_debug_parser.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-27T10:23:54Z",
+      "side": 1,
+      "message": "why do you need a .h file for a self-contained driver that has no exports?",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 38
       },
       "revId": "519b9a82e989165e45cc2bbe25ae4f1c4532577c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
