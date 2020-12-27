@@ -16,6 +16,29 @@
       "message": "Please resolve all of the comments in aosp/1479436 (you can actually resolve them by checking the \"resolved\" box when replying to a comment).",
       "revId": "cb867aea250646ec1e07b692460f484fde37c600",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fa078c1_a3c22c9a",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-27T10:32:15Z",
+      "side": 1,
+      "message": "how is this being kept in sync with the enums?  How do you know the enums match the array location?  Please make this explicit and impossible to get wrong, unlike this implementation.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 41
+      },
+      "revId": "cb867aea250646ec1e07b692460f484fde37c600",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
