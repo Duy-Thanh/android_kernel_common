@@ -16,6 +16,24 @@
       "message": "why would you NOT want this enabled?  What problems does it cause?",
       "revId": "3827e5b9b10e12eb125f4b83e8bf099e1b4c3c22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7038aa3b_480ee131",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710531
+      },
+      "writtenOn": "2020-12-28T01:37:14Z",
+      "side": 1,
+      "message": "This is not useful for us. \nI think vendor or customer should be able to choice whether they enable\nor not it.\nWhy does GKI determine the kernel log format? It is just an option.",
+      "parentUuid": "d1b3692a_36d9f083",
+      "revId": "3827e5b9b10e12eb125f4b83e8bf099e1b4c3c22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
