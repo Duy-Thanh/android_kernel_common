@@ -16,6 +16,24 @@
       "message": "Why are any of these needed for the android-mainline branch?  Any need for these symbols in this series should be submitted upstream as that is what this is tracking.  No need to export anything now, right?",
       "revId": "7c640804b874f5e7e2e6ff914dad4d44b5bcb1d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80467fd7_bb0f05c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710531
+      },
+      "writtenOn": "2020-12-28T01:23:45Z",
+      "side": 1,
+      "message": "How did these patches submit into android-mainline?\nhttps://android-review.googlesource.com/c/kernel/common/+/1533601\nhttps://android-review.googlesource.com/c/kernel/common/+/1533600",
+      "parentUuid": "696a5758_6e59dd9e",
+      "revId": "7c640804b874f5e7e2e6ff914dad4d44b5bcb1d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
