@@ -97,6 +97,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0be10aa_ab9d4cf6",
+        "filename": "drivers/android/vendor_debug_parser.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-28T07:57:01Z",
+      "side": 1,
+      "message": "what locks any of this and prevents it from changing while the \"dump\" is happening?",
+      "range": {
+        "startLine": 186,
+        "startChar": 1,
+        "endLine": 187,
+        "endChar": 17
+      },
+      "revId": "519b9a82e989165e45cc2bbe25ae4f1c4532577c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "239eb900_e1f5051f",
         "filename": "include/linux/android_vendor_debug_parser.h",
         "patchSetId": 2
