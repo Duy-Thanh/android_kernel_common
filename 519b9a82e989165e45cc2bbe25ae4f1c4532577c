@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ca5afc9_c07671b4",
+        "filename": "drivers/android/vendor_debug_parser.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-28T07:56:05Z",
+      "side": 1,
+      "message": "Yes, but note that you are now poking around in the internals of scheduler code, something that is going to break often, good luck!",
+      "parentUuid": "83403fa9_68657f04",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 37
+      },
+      "revId": "519b9a82e989165e45cc2bbe25ae4f1c4532577c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d27e95b_0d2055b2",
         "filename": "drivers/android/vendor_debug_parser.c",
         "patchSetId": 2
