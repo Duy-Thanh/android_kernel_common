@@ -33,6 +33,24 @@
       "message": "The reset/watchdog drivers can get access to this through the pstore driver already, right?  Why is an additional hook needed, as this will slow down every normal user?",
       "revId": "6a9a5c51246bbd73c7470ae3afc0ab4d8579aa48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bba01666_28d677cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710531
+      },
+      "writtenOn": "2020-12-28T01:48:10Z",
+      "side": 1,
+      "message": "Some customers want to get the log into other place depending on log level or facility. This only uses in development phase.",
+      "parentUuid": "631403b4_73c4a06c",
+      "revId": "6a9a5c51246bbd73c7470ae3afc0ab4d8579aa48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
