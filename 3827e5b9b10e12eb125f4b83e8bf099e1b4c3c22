@@ -34,6 +34,24 @@
       "parentUuid": "d1b3692a_36d9f083",
       "revId": "3827e5b9b10e12eb125f4b83e8bf099e1b4c3c22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c81f5ea_e7ee5855",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-28T07:34:03Z",
+      "side": 1,
+      "message": "It is useful for others, if you do not need this, just ignore it :)",
+      "parentUuid": "7038aa3b_480ee131",
+      "revId": "3827e5b9b10e12eb125f4b83e8bf099e1b4c3c22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
