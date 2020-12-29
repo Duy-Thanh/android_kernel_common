@@ -168,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0153db9e_5284c1a0",
+        "filename": "drivers/android/vendor_debug_parser.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1754664
+      },
+      "writtenOn": "2020-12-29T07:29:15Z",
+      "side": 1,
+      "message": "On second thought, it might be useful to put a check on oops_in_progress in this function.\n\nif (likely(!oops_in_progress))\n    return;\n\nGreg, please let me know about your thoughts on this.",
+      "parentUuid": "dfebb9e2_a65fe725",
+      "range": {
+        "startLine": 186,
+        "startChar": 1,
+        "endLine": 187,
+        "endChar": 17
+      },
+      "revId": "519b9a82e989165e45cc2bbe25ae4f1c4532577c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "239eb900_e1f5051f",
         "filename": "include/linux/android_vendor_debug_parser.h",
         "patchSetId": 2
