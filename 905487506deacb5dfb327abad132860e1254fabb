@@ -16,6 +16,24 @@
       "message": "Why is this needed?  What out-of-tree code calls this as a module?",
       "revId": "905487506deacb5dfb327abad132860e1254fabb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76583a6d_b05de723",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2020-12-29T09:56:44Z",
+      "side": 1,
+      "message": "Thanks for your quick review.\nThese symbols are used in our local pci-imx6 driver(drivers/pci/controller/dwc/pci-imx6.c) to add the imx8qxp ep support.",
+      "parentUuid": "5b38db7a_97f8a608",
+      "revId": "905487506deacb5dfb327abad132860e1254fabb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
