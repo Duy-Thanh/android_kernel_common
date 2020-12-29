@@ -34,6 +34,24 @@
       "parentUuid": "d06b5dde_1431cad3",
       "revId": "b89e4b61b2f20b19daad877379908c27497fccee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "548c58d1_1d26506e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-29T10:34:24Z",
+      "side": 1,
+      "message": "That\u0027s a totally different question/bug/issue, please open a new bug for this and submit a patch that adds the config option and we can go from there.",
+      "parentUuid": "2d8b7896_d84b7b96",
+      "revId": "b89e4b61b2f20b19daad877379908c27497fccee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
