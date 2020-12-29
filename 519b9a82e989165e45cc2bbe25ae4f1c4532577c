@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bf2604f_affbd6ed",
+        "filename": "drivers/android/vendor_debug_parser.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1754664
+      },
+      "writtenOn": "2020-12-29T06:08:53Z",
+      "side": 1,
+      "message": "Yeah!!",
+      "parentUuid": "3ca5afc9_c07671b4",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 37
+      },
+      "revId": "519b9a82e989165e45cc2bbe25ae4f1c4532577c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d27e95b_0d2055b2",
@@ -108,6 +132,30 @@
       "writtenOn": "2020-12-28T07:57:01Z",
       "side": 1,
       "message": "what locks any of this and prevents it from changing while the \"dump\" is happening?",
+      "range": {
+        "startLine": 186,
+        "startChar": 1,
+        "endLine": 187,
+        "endChar": 17
+      },
+      "revId": "519b9a82e989165e45cc2bbe25ae4f1c4532577c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfebb9e2_a65fe725",
+        "filename": "drivers/android/vendor_debug_parser.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1754664
+      },
+      "writtenOn": "2020-12-29T06:08:53Z",
+      "side": 1,
+      "message": "Generally this dumping of runqueue information can be done from panic notifier which is with all cpu\u0027s stoppped and interrupt disabled on panicing CPU. AFAIU, CFS and RT runqueue should not change.",
+      "parentUuid": "e0be10aa_ab9d4cf6",
       "range": {
         "startLine": 186,
         "startChar": 1,
