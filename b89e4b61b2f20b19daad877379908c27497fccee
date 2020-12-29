@@ -16,6 +16,24 @@
       "message": "No, a driver should not be messing with this call at all, sorry.",
       "revId": "b89e4b61b2f20b19daad877379908c27497fccee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d8b7896_d84b7b96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2020-12-29T10:29:26Z",
+      "side": 1,
+      "message": "Thanks Greg.\nFor these symbol export patches, I will check firstly, then come back here.\nI have one another question that our gpio-mxc driver need CONFIG_GPIO_GENERIC config（bgpio_init function), this config will change struct gpio_chip, then break ABI of android11-5.4 kernel; In android12-5.10, it seems will be enabled by CONFIG_GPIO_GENERIC_PLATFORM. So in android11-5.4, is it possible to add CONFIG_GPIO_GENERIC to gki_defconfig? Thanks.",
+      "parentUuid": "d06b5dde_1431cad3",
+      "revId": "b89e4b61b2f20b19daad877379908c27497fccee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
