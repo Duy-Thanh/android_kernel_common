@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29346b5d_e353761c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-29T19:16:54Z",
+      "side": 1,
+      "message": "Greg, this change is present in android12-5.4 and upstream stable linux-5.4.y but is missing android11-5.4. Linked bug describes the issue caused by this.\nStarting presubmits to make sure ABI is not affected. If that passes I think it should be ok to merge but will let you decide on the right path.",
+      "revId": "a9911f2a9a231c0dff14d3a5a0c98cf35bb279dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
