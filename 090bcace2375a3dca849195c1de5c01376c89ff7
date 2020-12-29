@@ -145,6 +145,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "53684cfb_be035a42",
+        "filename": "arch/arm64/kernel/image-vars.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2020-12-29T11:25:55Z",
+      "side": 1,
+      "message": "I guess this needs to be abstracted one step further, as we need something that isn\u0027t arm64 specific here (these tracepoints are potentially implemented on every architectures, and growing the guard isn\u0027t scalable).\n\nI\u0027d suggest something like this (arm64 only for now, but to be extended to all archs that override CC_FLAGS_FTRACE):\n```\ndiff --git a/Makefile b/Makefile\nindex 3d328b7ab200..902fb62b05d6 100644\n--- a/Makefile\n+++ b/Makefile\n@@ -666,7 +666,7 @@ export CFLAGS_GCOV\n \n # The arch Makefiles can override CC_FLAGS_FTRACE. We may also append it later.\n ifdef CONFIG_FUNCTION_TRACER\n-  CC_FLAGS_FTRACE :\u003d -pg\n+  CC_FLAGS_FTRACE :\u003d -pg -D__FTRACE_ENABLED_HERE\u003d1\n endif\n \n RETPOLINE_CFLAGS_GCC :\u003d -mindirect-branch\u003dthunk-extern -mindirect-branch-register\ndiff --git a/arch/arm64/Makefile b/arch/arm64/Makefile\nindex 6be9b3750250..bb942213c67b 100644\n--- a/arch/arm64/Makefile\n+++ b/arch/arm64/Makefile\n@@ -129,7 +129,7 @@ CHECKFLAGS\t+\u003d -D__aarch64__\n \n ifeq ($(CONFIG_DYNAMIC_FTRACE_WITH_REGS),y)\n   KBUILD_CPPFLAGS +\u003d -DCC_USING_PATCHABLE_FUNCTION_ENTRY\n-  CC_FLAGS_FTRACE :\u003d -fpatchable-function-entry\u003d2\n+  CC_FLAGS_FTRACE :\u003d -fpatchable-function-entry\u003d2 -D__FTRACE_ENABLED_HERE\u003d1\n endif\n \n # Default value\n```\n\nand that you check for the __FTRACE_ENABLED_HERE symbol in iorw.h. Constructs that filter out CC_FLAGS_FTRACE will just work.",
+      "parentUuid": "5d36eec5_f19150c5",
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4abdd307_e8cba704",
         "filename": "include/linux/iorw.h",
         "patchSetId": 4
