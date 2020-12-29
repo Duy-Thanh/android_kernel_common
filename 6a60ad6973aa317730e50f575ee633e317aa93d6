@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "461609ee_45585e9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-29T09:27:40Z",
+      "side": 1,
+      "message": "Why is this needed in this branch?  It is tracking upstream and if you need an export, please submit such a patch upstream.",
+      "revId": "6a60ad6973aa317730e50f575ee633e317aa93d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
