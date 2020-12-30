@@ -130,6 +130,11 @@ static inline bool blkdev_allow_reset_all_zones(struct block_device *bdev,
 	if (!blk_queue_zone_resetall(bdev_get_queue(bdev)))
 		return false;
 
+<<<<<<< HEAD   (b69d75 Merge remote-tracking branch 'aosp/upstream-f2fs-stable-linu)
+=======
+	if (sector || nr_sectors != part_nr_sects_read(bdev->bd_part))
+		return false;
+>>>>>>> BRANCH (dfce80 Linux 5.4.86)
 	/*
 	 * REQ_OP_ZONE_RESET_ALL can be executed only if the number of sectors
 	 * of the applicable zone range is the entire disk.
@@ -192,6 +197,7 @@ int blkdev_zone_mgmt(struct block_device *bdev, enum req_opf op,
 		 * Special case for the zone reset operation that reset all
 		 * zones, this is useful for applications like mkfs.
 		 */
+<<<<<<< HEAD   (b69d75 Merge remote-tracking branch 'aosp/upstream-f2fs-stable-linu)
 		if (op == REQ_OP_ZONE_RESET &&
 		    blkdev_allow_reset_all_zones(bdev, sector, nr_sectors)) {
 			bio->bi_opf = REQ_OP_ZONE_RESET_ALL;
@@ -199,6 +205,14 @@ int blkdev_zone_mgmt(struct block_device *bdev, enum req_opf op,
 		}
 
 		bio->bi_opf = op;
+=======
+		if (blkdev_allow_reset_all_zones(bdev, sector, nr_sectors)) {
+			bio->bi_opf = REQ_OP_ZONE_RESET_ALL;
+			break;
+		}
+
+		bio->bi_opf = REQ_OP_ZONE_RESET;
+>>>>>>> BRANCH (dfce80 Linux 5.4.86)
 		bio->bi_iter.bi_sector = sector;
 		sector += zone_sectors;
 
