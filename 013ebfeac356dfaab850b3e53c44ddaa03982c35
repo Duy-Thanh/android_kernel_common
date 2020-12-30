@@ -16,6 +16,23 @@
       "message": "Does this series break the existing kernel abi for this branch?\n\nAnd if needed here, what about the android12-5.4 branch as well?",
       "revId": "013ebfeac356dfaab850b3e53c44ddaa03982c35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10c5a4b6_ede5ce23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-30T09:09:15Z",
+      "side": 1,
+      "message": "And this is a major core change, to a tree that is, at the moment, closed for major changes (i.e. even the LTS releases are not being merged here.)  Taking this now will be tricky...",
+      "revId": "013ebfeac356dfaab850b3e53c44ddaa03982c35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
