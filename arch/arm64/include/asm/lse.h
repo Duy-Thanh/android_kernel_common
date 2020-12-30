@@ -4,6 +4,8 @@
 
 #if defined(CONFIG_AS_LSE) && defined(CONFIG_ARM64_LSE_ATOMICS)
 
+#define __LSE_PREAMBLE	".arch_extension lse\n"
+
 #include <linux/compiler_types.h>
 #include <linux/export.h>
 #include <linux/stringify.h>
@@ -20,6 +22,7 @@
 
 #else	/* __ASSEMBLER__ */
 
+<<<<<<< HEAD   (39c99d ANDROID: usb: f_accessory: Fix teardown ordering in acc_rele)
 #ifdef CONFIG_LTO_CLANG
 #define __LSE_PREAMBLE	".arch armv8-a+lse\n"
 #else
@@ -27,6 +30,8 @@ __asm__(".arch_extension	lse");
 #define __LSE_PREAMBLE
 #endif
 
+=======
+>>>>>>> BRANCH (320731 Linux 4.19.164)
 /* Move the ll/sc atomics out-of-line */
 #define __LL_SC_INLINE		notrace
 #define __LL_SC_PREFIX(x)	__ll_sc_##x
