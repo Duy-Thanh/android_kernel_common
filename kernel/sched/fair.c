@@ -5533,7 +5533,17 @@ static inline void hrtick_update(struct rq *rq)
 #ifdef CONFIG_SMP
 static inline bool cpu_overutilized(int cpu)
 {
+<<<<<<< HEAD   (d49788 ANDROID: Re-apply vendor hooks for rt_mutex information of b)
 	return !fits_capacity(cpu_util_cfs(cpu), capacity_of(cpu));
+=======
+	int overutilized = -1;
+
+	trace_android_rvh_cpu_overutilized(cpu, &overutilized);
+	if (overutilized != -1)
+		return overutilized;
+
+	return !fits_capacity(cpu_util(cpu), capacity_of(cpu));
+>>>>>>> CHANGE (f5998f ANDROID: sched: Add vendor hook for cpu_overutilized)
 }
 
 static inline void update_overutilized_status(struct rq *rq)
