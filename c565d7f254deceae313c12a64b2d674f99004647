@@ -52,6 +52,24 @@
       "parentUuid": "8e9141f9_54f4d45e",
       "revId": "c565d7f254deceae313c12a64b2d674f99004647",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45fb9708_1c08fe46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-04T17:43:49Z",
+      "side": 1,
+      "message": "Hi Todd, \n\nI would like to understand the guidelines for the debug_module. Here is my understanding --\n1) Functions need to use the EXPORT_SYMBOL_GPL for vendor module usage. \n2) Global symbols can be exported with EXPORT_SYMBOL_GPL.\n3) Global symbols which cannot be exported with EXPORT_SYMBOL_GPL, will be maintained with debug_symbol driver.\n\nIs my understanding correct?\n\nEXPORT_SYMBOL_GPL can be used for global symbols and are there any need to consolidate all the symbols to debug_symbols drivers?  Please provide disadvantages with current approach. \n\n\n-Thanks, Prasad",
+      "parentUuid": "1536eeb1_3e5a0f25",
+      "revId": "c565d7f254deceae313c12a64b2d674f99004647",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
