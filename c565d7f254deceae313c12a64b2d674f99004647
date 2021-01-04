@@ -16,6 +16,24 @@
       "message": "What is this needed for? Please be more descriptive. If it is just for debugging, should it be added to the debug symbol driver? Why not?",
       "revId": "c565d7f254deceae313c12a64b2d674f99004647",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e9141f9_54f4d45e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-04T11:50:50Z",
+      "side": 1,
+      "message": "debug symbol driver would contain symbols, which can not be exported  some reasons. \n\nFor example some of the symbols in this list coming from arch/arm64/kernel/vmlinux.lds.S file, which can not be exported easily. \n+static struct ads_entry ads_entries[] \u003d {\n+       { .name \u003d \"_sdata\", .addr \u003d _sdata },\n+       { .name \u003d \"__bss_stop\", .addr \u003d  __bss_stop },\n+       { .name \u003d \"__per_cpu_start\", .addr \u003d __per_cpu_start },\n+       { .name \u003d \"__per_cpu_end\", .addr \u003d __per_cpu_end },\n+       { .name \u003d \"__start_ro_after_init\", .addr \u003d __start_ro_after_init },\n+       { .name \u003d \"__end_ro_after_init\", .addr \u003d __end_ro_after_init },\n+       { .name \u003d NULL, .addr \u003d NULL }\n+};\n\nIn my view  linux_banner symbol similar to runqueue symbol and which was already exported for vendor modules usage.",
+      "parentUuid": "9459b6ad_0f0b9688",
+      "revId": "c565d7f254deceae313c12a64b2d674f99004647",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
