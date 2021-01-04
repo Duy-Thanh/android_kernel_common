@@ -108,17 +108,30 @@ DECLARE_RESTRICTED_HOOK(android_rvh_migrate_queued_task,
 DECLARE_RESTRICTED_HOOK(android_rvh_find_energy_efficient_cpu,
 	TP_PROTO(struct task_struct *p, int prev_cpu, int sync, int *new_cpu),
 	TP_ARGS(p, prev_cpu, sync, new_cpu), 1);
+
 struct sched_attr;
 DECLARE_HOOK(android_vh_set_sugov_sched_attr,
 	TP_PROTO(struct sched_attr *attr),
 	TP_ARGS(attr));
+
 DECLARE_RESTRICTED_HOOK(android_rvh_set_iowait,
+<<<<<<< HEAD   (d49788 ANDROID: Re-apply vendor hooks for rt_mutex information of b)
 	TP_PROTO(struct task_struct *p, struct rq *rq, int *should_iowait_boost),
 	TP_ARGS(p, rq, should_iowait_boost), 1);
+=======
+	TP_PROTO(struct task_struct *p, int *should_iowait_boost),
+	TP_ARGS(p, should_iowait_boost), 1);
+
+>>>>>>> CHANGE (f5998f ANDROID: sched: Add vendor hook for cpu_overutilized)
 struct sugov_policy;
 DECLARE_RESTRICTED_HOOK(android_rvh_set_sugov_update,
 	TP_PROTO(struct sugov_policy *sg_policy, unsigned int next_freq, bool *should_update),
 	TP_ARGS(sg_policy, next_freq, should_update), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_cpu_overutilized,
+	TP_PROTO(int cpu, int *overutilized),
+	TP_ARGS(cpu, overutilized), 1);
+
 DECLARE_RESTRICTED_HOOK(android_rvh_sched_setaffinity,
 	TP_PROTO(struct task_struct *p, const struct cpumask *in_mask, int *retval),
 	TP_ARGS(p, in_mask, retval), 1);
