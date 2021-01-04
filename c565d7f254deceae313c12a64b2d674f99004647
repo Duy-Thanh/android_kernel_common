@@ -70,6 +70,24 @@
       "parentUuid": "1536eeb1_3e5a0f25",
       "revId": "c565d7f254deceae313c12a64b2d674f99004647",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d64c246_169193e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-04T18:45:18Z",
+      "side": 1,
+      "message": "The debug symbol driver was created to avoid exporting functions that provide access to kallsyms and to avoid exporting lots of symbols that are needed only for dumping state for debugging purposes. So in addition to your list above:\n\n4) symbols that normally should not be used by modules but which are needed for debugging purposes only\n\nWe need justification for all cases of non-upstream exports, so a reason needs to be given for why you need linux_banner. If that reason is minidump or other state dumps for debugging, then a reasonable alternative to the export is to add it to the debug symbols driver.",
+      "parentUuid": "45fb9708_1c08fe46",
+      "revId": "c565d7f254deceae313c12a64b2d674f99004647",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
