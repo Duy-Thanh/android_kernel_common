@@ -39,6 +39,30 @@
       },
       "revId": "cb867aea250646ec1e07b692460f484fde37c600",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c857e258_7cddbbcb",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-04T13:08:17Z",
+      "side": 1,
+      "message": "what about the below implementation? enums are used to assign values to array, there will not be any mismatch between enum and values allocation. \n\n+++ b/drivers/android/debug_symbols.c\n@@ -14,19 +14,25 @@ struct ads_entry {\n        void *addr;\n };\n\n+#define ADS_ENTRY(ads_name, ads_addr)                \\\n+       {                               \\\n+               .name \u003d ads_name,          \\\n+               .addr \u003d ads_addr,          \\\n+       }\n+\n /*\n  * This module maintains static array of symbol and address information.\n  * Add all required core kernel symbols and their addresses into ads_entries[] array,\n  * so that vendor modules can query and to find address of non-exported symbol.\n  */\n static struct ads_entry ads_entries[] \u003d {\n-       { .name \u003d \"_sdata\", .addr \u003d _sdata },\n-       { .name \u003d \"__bss_stop\", .addr \u003d  __bss_stop },\n-       { .name \u003d \"__per_cpu_start\", .addr \u003d __per_cpu_start },\n-       { .name \u003d \"__per_cpu_end\", .addr \u003d __per_cpu_end },\n-       { .name \u003d \"__start_ro_after_init\", .addr \u003d __start_ro_after_init },\n-       { .name \u003d \"__end_ro_after_init\", .addr \u003d __end_ro_after_init },\n-       { .name \u003d NULL, .addr \u003d NULL }\n+       [ADS_SDATA]                     \u003d ADS_ENTRY(\"_sdata\", _sdata),\n+       [ADS_BSS_END]                   \u003d ADS_ENTRY(\"__bss_stop\", __bss_stop),\n+       [ADS_PER_CPU_START]             \u003d ADS_ENTRY(\"__per_cpu_start\", __per_cpu_start),\n+       [ADS_PER_CPU_END]               \u003d ADS_ENTRY(\"__per_cpu_end\", __per_cpu_end),\n+       [ADS_START_RO_AFTER_INIT]       \u003d ADS_ENTRY(\"__start_ro_after_init\", __start_ro_after_init),\n+       [ADS_END_RO_AFTER_INIT]         \u003d ADS_ENTRY(\"__end_ro_after_init\", __end_ro_after_init ),\n+       [ADS_END]                       \u003d ADS_ENTRY(NULL, NULL),\n };",
+      "parentUuid": "2fa078c1_a3c22c9a",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 41
+      },
+      "revId": "cb867aea250646ec1e07b692460f484fde37c600",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
