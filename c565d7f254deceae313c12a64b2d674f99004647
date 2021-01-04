@@ -34,6 +34,24 @@
       "parentUuid": "9459b6ad_0f0b9688",
       "revId": "c565d7f254deceae313c12a64b2d674f99004647",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1536eeb1_3e5a0f25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-04T16:51:50Z",
+      "side": 1,
+      "message": "linux_banner is not at all like runqueue. runqueue is needed for scheduler value add functionality in vendor modules. What is linux_banner needed for? It seems like it is just for debugging (and therefore a good match for the debug symbol driver).",
+      "parentUuid": "8e9141f9_54f4d45e",
+      "revId": "c565d7f254deceae313c12a64b2d674f99004647",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
