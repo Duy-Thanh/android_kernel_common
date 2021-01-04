@@ -63,6 +63,30 @@
       },
       "revId": "cb867aea250646ec1e07b692460f484fde37c600",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "422450c2_596a081d",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-04T13:39:56Z",
+      "side": 1,
+      "message": "When you have to have the same string written twice on the same line, it can be made simpler 😊\n\nBut yes, something like that is much better.",
+      "parentUuid": "c857e258_7cddbbcb",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 41
+      },
+      "revId": "cb867aea250646ec1e07b692460f484fde37c600",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
