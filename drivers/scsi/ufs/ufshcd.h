@@ -297,6 +297,9 @@ struct ufs_pwr_mode_info {
  * @update_sysfs: adds vendor-specific sysfs entries
  * @send_command: adds vendor-specific work when sending a command
  * @compl_command: adds vendor-specific work when completing a command
+ * @send_uic_command: adds vendor-specific work when sending a UIC command
+ * @send_tm_command: adds vendor-specific work when sending a TM command
+ * @check_int_errors: adds vendor-specific work when receiving an interrupt
  */
 struct ufs_hba_variant_ops {
 	const char *name;
@@ -339,6 +342,12 @@ struct ufs_hba_variant_ops {
 	int     (*update_sysfs)(struct ufs_hba *hba);
 	void	(*send_command)(struct ufs_hba *hba, struct ufshcd_lrb *lrbp);
 	void	(*compl_command)(struct ufs_hba *hba, struct ufshcd_lrb *lrbp);
+	void	(*send_uic_command)(struct ufs_hba *hba,
+				    struct uic_command *ucmd,
+				    const char *str);
+	void	(*send_tm_command)(struct ufs_hba *hba, u8 tag,
+				   const char *str);
+	void	(*check_int_errors)(struct ufs_hba *hba, bool queue_eh_work);
 };
 
 /* clock gating state  */
@@ -1311,6 +1320,28 @@ static inline void ufshcd_vops_compl_command(struct ufs_hba *hba,
 {
 	if (hba->vops && hba->vops->compl_command)
 		hba->vops->compl_command(hba, lrbp);
+}
+
+static inline void ufshcd_vops_send_uic_command(struct ufs_hba *hba,
+				struct uic_command *ucmd,
+				const char *str)
+{
+	if (hba->vops && hba->vops->send_uic_command)
+		hba->vops->send_uic_command(hba, ucmd, str);
+}
+
+static inline void ufshcd_vops_send_tm_command(struct ufs_hba *hba,
+				u8 tag, const char *str)
+{
+	if (hba->vops && hba->vops->send_tm_command)
+		hba->vops->send_tm_command(hba, tag, str);
+}
+
+static inline void ufshcd_vops_check_int_errors(struct ufs_hba *hba,
+				bool queue_eh_work)
+{
+	if (hba->vops && hba->vops->check_int_errors)
+		hba->vops->check_int_errors(hba, queue_eh_work);
 }
 
 extern struct ufs_pm_lvl_states ufs_pm_lvl_states[];
