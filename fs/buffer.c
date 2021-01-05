@@ -48,6 +48,7 @@
 #include <linux/sched/mm.h>
 #include <trace/events/block.h>
 #include <linux/fscrypt.h>
+#include <linux/xarray.h>
 
 #include "internal.h"
 
@@ -1434,11 +1435,62 @@ static bool has_bh_in_lru(int cpu, void *dummy)
 	return false;
 }
 
+static void __evict_bhs_lru(void *arg)
+{
+	struct bh_lru *b = &get_cpu_var(bh_lrus);
+	struct busy_bhs_container *busy_bhs = arg;
+	struct buffer_head *bh;
+	int i;
+
+	XA_STATE(xas, &busy_bhs->xarray, 0);
+
+	xas_for_each(&xas, bh, busy_bhs->size) {
+		for (i = 0; i < BH_LRU_SIZE; i++) {
+			if (b->bhs[i] == bh) {
+				brelse(b->bhs[i]);
+				b->bhs[i] = NULL;
+				break;
+			}
+		}
+
+		bh = bh->b_this_page;
+	}
+
+	put_cpu_var(bh_lrus);
+}
+
+static bool page_has_bhs_in_lru(int cpu, void *arg)
+{
+	struct bh_lru *b = per_cpu_ptr(&bh_lrus, cpu);
+	struct busy_bhs_container *busy_bhs = arg;
+	struct buffer_head *bh;
+	int i;
+
+	XA_STATE(xas, &busy_bhs->xarray, 0);
+
+	xas_for_each(&xas, bh, busy_bhs->size) {
+		for (i = 0; i < BH_LRU_SIZE; i++) {
+			if (b->bhs[i] == bh)
+				return true;
+		}
+
+		bh = bh->b_this_page;
+	}
+
+	return false;
+
+}
 void invalidate_bh_lrus(void)
 {
 	on_each_cpu_cond(has_bh_in_lru, invalidate_bh_lru, NULL, 1);
 }
 EXPORT_SYMBOL_GPL(invalidate_bh_lrus);
+
+static void evict_bh_lrus(struct busy_bhs_container *busy_bhs)
+{
+	on_each_cpu_cond(page_has_bhs_in_lru, __evict_bhs_lru,
+			 busy_bhs, 1);
+}
 
 void set_bh_page(struct buffer_head *bh,
 		struct page *page, unsigned long offset)
@@ -3200,14 +3252,36 @@ drop_buffers(struct page *page, struct buffer_head **buffers_to_free)
 {
 	struct buffer_head *head = page_buffers(page);
 	struct buffer_head *bh;
+	struct busy_bhs_container busy_bhs;
+	int xa_ret, ret = 0;
+
+	xa_init(&busy_bhs.xarray);
+	busy_bhs.size = 0;
 
 	bh = head;
 	do {
-		if (buffer_busy(bh))
-			goto failed;
+		if (buffer_busy(bh)) {
+			xa_ret = xa_err(xa_store(&busy_bhs.xarray, busy_bhs.size++,
+						 bh, GFP_ATOMIC));
+			if (xa_ret)
+				goto out;
+		}
 		bh = bh->b_this_page;
 	} while (bh != head);
 
+	if (busy_bhs.size) {
+		/*
+		 * Check if the busy failure was due to an outstanding
+		 * LRU reference
+		 */
+		evict_bh_lrus(&busy_bhs);
+		do {
+			if (buffer_busy(bh))
+				goto out;
+		} while (bh != head);
+	}
+
+	ret = 1;
 	do {
 		struct buffer_head *next = bh->b_this_page;
 
@@ -3217,9 +3291,10 @@ drop_buffers(struct page *page, struct buffer_head **buffers_to_free)
 	} while (bh != head);
 	*buffers_to_free = head;
 	detach_page_private(page);
-	return 1;
-failed:
-	return 0;
+out:
+	xa_destroy(&busy_bhs.xarray);
+
+	return ret;
 }
 
 int try_to_free_buffers(struct page *page)
