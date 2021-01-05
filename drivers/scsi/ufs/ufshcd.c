@@ -323,6 +323,7 @@ static void ufshcd_add_tm_upiu_trace(struct ufs_hba *hba, unsigned int tag,
 	int off = (int)tag - hba->nutrs;
 	struct utp_task_req_desc *descp = &hba->utmrdl_base_addr[off];
 
+	ufshcd_vops_send_tm_command(hba, tag, str);
 	trace_ufshcd_upiu(dev_name(hba->dev), str, &descp->req_header,
 			&descp->input_param1);
 }
@@ -333,6 +334,7 @@ static void ufshcd_add_uic_command_trace(struct ufs_hba *hba,
 {
 	u32 cmd;
 
+	ufshcd_vops_send_uic_command(hba, ucmd, str);
 	if (!trace_ufshcd_uic_command_enabled())
 		return;
 
@@ -5038,6 +5040,7 @@ static void __ufshcd_transfer_req_compl(struct ufs_hba *hba,
 		} else if (lrbp->command_type == UTP_CMD_TYPE_DEV_MANAGE ||
 			lrbp->command_type == UTP_CMD_TYPE_UFS_STORAGE) {
 			if (hba->dev_cmd.complete) {
+				ufshcd_vops_compl_command(hba, lrbp);
 				ufshcd_add_command_trace(hba, index,
 						"dev_complete");
 				complete(hba->dev_cmd.complete);
@@ -6125,6 +6128,8 @@ static irqreturn_t ufshcd_check_errors(struct ufs_hba *hba)
 		ufshcd_set_link_broken(hba);
 		queue_eh_work = true;
 	}
+
+	ufshcd_vops_check_int_errors(hba, queue_eh_work);
 
 	if (queue_eh_work) {
 		/*
