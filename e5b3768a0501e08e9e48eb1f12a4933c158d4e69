@@ -52,6 +52,24 @@
       "parentUuid": "aabd908f_7b5c7ad6",
       "revId": "e5b3768a0501e08e9e48eb1f12a4933c158d4e69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8599de9_24d382cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-01-05T19:28:12Z",
+      "side": 1,
+      "message": "Hmm... what testing you expect there? Just build or I would leave it to automation at the Google side to do the build testing? Definitely we don\u0027t build x86 variants.",
+      "parentUuid": "8dd53af3_9fd7fe52",
+      "revId": "e5b3768a0501e08e9e48eb1f12a4933c158d4e69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
