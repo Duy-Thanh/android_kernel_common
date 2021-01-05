@@ -16,6 +16,24 @@
       "message": "Why not x86 as well to provide proper build and other testing?",
       "revId": "e5b3768a0501e08e9e48eb1f12a4933c158d4e69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aabd908f_7b5c7ad6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-01-05T18:58:55Z",
+      "side": 1,
+      "message": "We don\u0027t submit changes for x86. Google can do that by themselves.",
+      "parentUuid": "a8122d37_ab6f2563",
+      "revId": "e5b3768a0501e08e9e48eb1f12a4933c158d4e69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
