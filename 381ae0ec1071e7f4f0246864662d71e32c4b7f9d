@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "362703b4_4cb7b34c",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-05T18:44:37Z",
+      "side": 1,
+      "message": "why does this need to be exported for a scheduler thing?\n\nThis is a frequency control stuff, what needs this?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 49
+      },
+      "revId": "381ae0ec1071e7f4f0246864662d71e32c4b7f9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
