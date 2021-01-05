@@ -22,6 +22,30 @@
       },
       "revId": "381ae0ec1071e7f4f0246864662d71e32c4b7f9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c66a11c_8c24e242",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-05T18:45:04Z",
+      "side": 1,
+      "message": "And keep exports separate from hook additions please.",
+      "parentUuid": "362703b4_4cb7b34c",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 49
+      },
+      "revId": "381ae0ec1071e7f4f0246864662d71e32c4b7f9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
