@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d148f7c7_80855dea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2021-01-05T22:50:07Z",
+      "side": 1,
+      "message": "Kernel presubmit is broken due to infra errors surrounding the CTS and VTS harness. Bypassing presubmit for this change.",
+      "revId": "5ade8f493f20280672fd5a57c663b3ab3605dff2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
