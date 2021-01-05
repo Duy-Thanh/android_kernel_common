@@ -69,6 +69,8 @@ static unsigned long change_pte_range(struct vm_area_struct *vma, pmd_t *pmd,
 	pte_t *pte, oldpte;
 	spinlock_t *ptl;
 	unsigned long pages = 0;
+	bool anon_writable =
+		vma_is_anonymous(vma) && (vma->vm_flags & VM_WRITE);
 
 	pte = lock_pte_protection(vma, pmd, addr, prot_numa, &ptl);
 	if (!pte)
@@ -108,7 +110,11 @@ static unsigned long change_pte_range(struct vm_area_struct *vma, pmd_t *pmd,
 					(pte_soft_dirty(ptent) ||
 					 !(vma->vm_flags & VM_SOFTDIRTY))) {
 				ptent = pte_mkwrite(ptent);
+			} else if (anon_writable &&
+				   page_mapcount(pte_page(ptent)) == 1) {
+				ptent = pte_mkwrite(ptent);
 			}
+
 			ptep_modify_prot_commit(mm, addr, pte, ptent);
 			pages++;
 		} else if (IS_ENABLED(CONFIG_MIGRATION)) {
