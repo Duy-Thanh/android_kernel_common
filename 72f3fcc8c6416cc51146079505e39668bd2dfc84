@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f672860_527511c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-05T22:17:42Z",
+      "side": 1,
+      "message": "Clarified debug_symbol driver usage limitations, so function exports are fine.\nThese functions seem to be safe.",
+      "revId": "72f3fcc8c6416cc51146079505e39668bd2dfc84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
