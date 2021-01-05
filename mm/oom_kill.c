@@ -339,8 +339,17 @@ static int oom_evaluate_task(struct task_struct *task, void *arg)
 	}
 
 	points = oom_badness(task, oc->totalpages);
-	if (points == LONG_MIN || points < oc->chosen_points)
+
+	if (points == LONG_MIN)
 		goto next;
+
+	if (points < oc->chosen_points) {
+		if (points < oc->chosen_positive_adj_points ||
+		    task->signal->oom_score_adj < 0)
+			goto next;
+
+		goto select_positive;
+	}
 
 select:
 	if (oc->chosen)
@@ -348,6 +357,15 @@ select:
 	get_task_struct(task);
 	oc->chosen = task;
 	oc->chosen_points = points;
+
+	if (points < oc->chosen_positive_adj_points || task->signal->oom_score_adj < 0)
+		goto next;
+select_positive:
+	if (oc->chosen_positive_adj)
+		put_task_struct(oc->chosen_positive_adj);
+	get_task_struct(task);
+	oc->chosen_positive_adj = task;
+	oc->chosen_positive_adj_points = points;
 next:
 	return 0;
 abort:
@@ -364,6 +382,7 @@ abort:
 static void select_bad_process(struct oom_control *oc)
 {
 	oc->chosen_points = LONG_MIN;
+	oc->chosen_positive_adj_points = LONG_MIN;
 
 	if (is_memcg_oom(oc))
 		mem_cgroup_scan_tasks(oc->memcg, oom_evaluate_task, oc);
@@ -376,6 +395,11 @@ static void select_bad_process(struct oom_control *oc)
 				break;
 		rcu_read_unlock();
 	}
+
+	if (oc->chosen && oc->chosen->signal->oom_score_adj < 0 &&
+	    oc->chosen_positive_adj)
+		oc->chosen = oc->chosen_positive_adj;
+		oc->chosen_points = oc->chosen_positive_adj_points;
 }
 
 static int dump_task(struct task_struct *p, void *arg)
