@@ -70,6 +70,24 @@
       "parentUuid": "8dd53af3_9fd7fe52",
       "revId": "e5b3768a0501e08e9e48eb1f12a4933c158d4e69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d13e68f8_813aca72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-05T19:36:03Z",
+      "side": 1,
+      "message": "Just build is fine. It will get basic testing during presubmit.",
+      "parentUuid": "f8599de9_24d382cd",
+      "revId": "e5b3768a0501e08e9e48eb1f12a4933c158d4e69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
