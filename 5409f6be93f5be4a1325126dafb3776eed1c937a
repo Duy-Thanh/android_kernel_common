@@ -52,6 +52,24 @@
       "parentUuid": "d57eac9a_98e2e3fc",
       "revId": "5409f6be93f5be4a1325126dafb3776eed1c937a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e65761d6_01ce6e27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-01-05T16:17:57Z",
+      "side": 1,
+      "message": "I\u0027ve pushed an upstream cherry-pick to take care of 4.4-p, 4.9-p and 4.9-q. I\u0027ve pushed a revised commit to take care of the other issue with those 3 and all later kernels except for 12-5.10 (which was OK).\n\nLee and Greg have taken care of 3.18, 4.4-o and 4.9-o (with the same cherry-pick and similar fix-up commits).",
+      "parentUuid": "84459285_09879888",
+      "revId": "5409f6be93f5be4a1325126dafb3776eed1c937a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
