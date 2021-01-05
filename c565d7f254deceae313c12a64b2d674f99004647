@@ -88,6 +88,24 @@
       "parentUuid": "45fb9708_1c08fe46",
       "revId": "c565d7f254deceae313c12a64b2d674f99004647",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa9eba71_99389d26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-05T00:49:13Z",
+      "side": 1,
+      "message": "Thanks Todd for confirming the debug symbol driver use case. I will abandon this change and add this symbol to debug symbol driver.\n\nCurrently this is needed for dumping memory contents only and there is no runtime use case of this variable. \n\n-Thanks, Prasad",
+      "parentUuid": "7d64c246_169193e0",
+      "revId": "c565d7f254deceae313c12a64b2d674f99004647",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
