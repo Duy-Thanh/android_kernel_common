@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a32a3568_bab65e5a",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1827640
+      },
+      "writtenOn": "2021-01-05T22:29:04Z",
+      "side": 1,
+      "message": "\u003eThis is a frequency control stuff, what needs this?\n\nYes this is for WALT related frequency guidance. \n\n\u003eAnd keep exports separate from hook additions please.\nDone",
+      "parentUuid": "5c66a11c_8c24e242",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 49
+      },
+      "revId": "381ae0ec1071e7f4f0246864662d71e32c4b7f9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1850ce8d_4c011fe5",
@@ -61,6 +85,30 @@
       "writtenOn": "2021-01-05T18:46:58Z",
       "side": 1,
       "message": "keep exports separate from hook changes.",
+      "range": {
+        "startLine": 642,
+        "startChar": 0,
+        "endLine": 642,
+        "endChar": 32
+      },
+      "revId": "381ae0ec1071e7f4f0246864662d71e32c4b7f9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af17490d_0670763e",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1827640
+      },
+      "writtenOn": "2021-01-05T22:29:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1850ce8d_4c011fe5",
       "range": {
         "startLine": 642,
         "startChar": 0,
@@ -94,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73d91575_3ac16a15",
+        "filename": "kernel/sched/idle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1827640
+      },
+      "writtenOn": "2021-01-05T22:29:04Z",
+      "side": 1,
+      "message": "I believe we are using restricted vendor hooks for performance related reasons here.",
+      "parentUuid": "858d9469_5ba72948",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 42
+      },
+      "revId": "381ae0ec1071e7f4f0246864662d71e32c4b7f9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b58d6d68_fe1eb21c",
@@ -107,6 +179,30 @@
       "writtenOn": "2021-01-05T18:46:58Z",
       "side": 1,
       "message": "keep exports separate from hook additions.",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 40
+      },
+      "revId": "381ae0ec1071e7f4f0246864662d71e32c4b7f9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20e042b8_19af5915",
+        "filename": "kernel/sched/topology.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1827640
+      },
+      "writtenOn": "2021-01-05T22:29:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b58d6d68_fe1eb21c",
       "range": {
         "startLine": 210,
         "startChar": 0,
