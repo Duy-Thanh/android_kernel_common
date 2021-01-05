@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7939d66_eec48dcc",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-05T13:09:42Z",
+      "side": 1,
+      "message": "No open-coding of this please.",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 40
+      },
+      "revId": "f7712b1ad4060148c0b0aa1669f063a711f90880",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
