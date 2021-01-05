@@ -16,6 +16,24 @@
       "message": "Hi, Greg\n\nMaybe this change and some others should not be merged into the 4.4 and 4.9 kernels?\nit caused the build error on KREF_INIT like the following:\n\n    18:41:14 /home/buildslave/srv/lkft/workspace/kernel/linaro/hisilicon-4.4-o/drivers/usb/gadget/function/f_accessory.c:210:10: error: implicit declaration of function \u0027KREF_INIT\u0027 [-Werror,-Wimplicit-function-declaration]\n    18:41:14         .kref \u003d KREF_INIT(0),\n\nFor details about the error, you could check the build log here:\n    https://ci.linaro.org/job/lkft-hikey-4.9-o/51/consoleFull\n    https://ci.linaro.org/job/lkft-hikey-4.4-o/50/consoleFull\n\nThanks,\nYongqin Liu",
       "revId": "5409f6be93f5be4a1325126dafb3776eed1c937a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d57eac9a_98e2e3fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-01-05T09:45:08Z",
+      "side": 1,
+      "message": "Hi. Sorry for the late reply. I\u0027ve been on leave.\n\nApologies also for the inconvenience.\n\nI hadn\u0027t realised Greg had merged things past the Lint failures. I have already got a fix for KREF_INIT issue which I was just going to apply to the pending commit. It looks like we need a new commit on top of the stack instead now.\n\nFirst I need to check which of the many kernel branches now have the bad code and work from there.",
+      "parentUuid": "b9525129_a7a83934",
+      "revId": "5409f6be93f5be4a1325126dafb3776eed1c937a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
