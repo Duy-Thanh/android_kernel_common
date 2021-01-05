@@ -34,6 +34,24 @@
       "parentUuid": "a8122d37_ab6f2563",
       "revId": "e5b3768a0501e08e9e48eb1f12a4933c158d4e69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dd53af3_9fd7fe52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-05T19:10:46Z",
+      "side": 1,
+      "message": "Then this won\u0027t go in. Please follow the processes as documented in the partner docs that you\u0027ve had for months: https://docs.partner.android.com/partners/guides/gki/kernel-code#changes-to-gki-defconfig",
+      "parentUuid": "aabd908f_7b5c7ad6",
+      "revId": "e5b3768a0501e08e9e48eb1f12a4933c158d4e69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
