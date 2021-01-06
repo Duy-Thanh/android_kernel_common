@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99fab109_2ff986da",
+        "filename": "kernel/sched/idle.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-06T08:36:15Z",
+      "side": 1,
+      "message": "document why you need 2 hooks here please.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 42
+      },
+      "revId": "63258dab9852cb4c5b0f201395238aa9aac54675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
