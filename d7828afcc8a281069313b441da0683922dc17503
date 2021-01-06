@@ -16,6 +16,24 @@
       "message": "The change seems simple enough. Will, any objections?\nThe callback used to be upstream in 4.14 but was removed since all upstream users used the default implementation. I think the only way to get this upstream would be to also upstream an IOMMU driver that implements a different callback.",
       "revId": "d7828afcc8a281069313b441da0683922dc17503",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03af757a_4a4566ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-01-06T09:44:17Z",
+      "side": 1,
+      "message": "I\u0027d prefer to improve the common iommu_map_sg() implementation if there is scope for doing so. Adding a hook doesn\u0027t benefit drivers that don\u0027t implement it.",
+      "parentUuid": "5fc71621_0c61d2ac",
+      "revId": "d7828afcc8a281069313b441da0683922dc17503",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
