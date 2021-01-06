@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63b7a63d_1433f470",
+        "filename": "arch/arm64/kernel/image-vars.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-06T09:24:43Z",
+      "side": 1,
+      "message": "change not needed 😞",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 0
+      },
+      "revId": "3fb224a431cfe6d027eb95b350befad63aa68c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
