@@ -2304,11 +2304,16 @@ static int ext4_add_entry(handle_t *handle, struct dentry *dentry,
 	if (!dentry->d_name.len)
 		return -EINVAL;
 
+<<<<<<< HEAD   (25670e ANDROID: usb: f_accessory: Don't drop NULL reference in acc_)
 #ifdef CONFIG_UNICODE
 	if (sb_has_enc_strict_mode(sb) && IS_CASEFOLDED(dir) &&
 	    sb->s_encoding && utf8_validate(sb->s_encoding, &dentry->d_name))
 		return -EINVAL;
 #endif
+=======
+	if (fscrypt_is_nokey_name(dentry))
+		return -ENOKEY;
+>>>>>>> BRANCH (4143d7 Linux 4.19.165)
 
 	retval = ext4_fname_setup_filename(dir, &dentry->d_name, 0, &fname);
 	if (retval)
