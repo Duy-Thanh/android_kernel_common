@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19f115b0_b1bb5045",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-01-06T17:48:05Z",
+      "side": 1,
+      "message": "Obsoleted by https://android-review.googlesource.com/c/kernel/common/+/1542004",
+      "revId": "01f6c48654cc2d4b1bf9b4e10ddae8d01fbcf2d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
