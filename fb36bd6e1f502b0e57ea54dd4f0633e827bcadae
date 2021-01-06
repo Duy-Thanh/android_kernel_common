@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "769c9cdc_7d92d934",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-06T08:38:39Z",
+      "side": 1,
+      "message": "why does the scheduler need a cpufreq export like this?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 49
+      },
+      "revId": "fb36bd6e1f502b0e57ea54dd4f0633e827bcadae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4381d5c9_bb9e8e1d",
+        "filename": "kernel/sched/topology.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-06T08:38:39Z",
+      "side": 1,
+      "message": "are you sure you can export something like this that is modified by the system at runtime?  This is not a \"normal\" variable, it gets optimized away into static jump calls and will disappear without you realizing it.\n\nHow have you tested this?",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 40
+      },
+      "revId": "fb36bd6e1f502b0e57ea54dd4f0633e827bcadae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
