@@ -244,6 +244,7 @@ static int system_heap_vmap(struct dma_buf *dmabuf, struct dma_buf_map *map)
 {
 	struct system_heap_buffer *buffer = dmabuf->priv;
 	void *vaddr;
+<<<<<<< HEAD   (5ade8f ANDROID: GKI: enable CONFIG_SRAM)
 
 	mutex_lock(&buffer->lock);
 	if (buffer->vmap_cnt) {
@@ -277,6 +278,43 @@ static void system_heap_vunmap(struct dma_buf *dmabuf, struct dma_buf_map *map)
 		buffer->vaddr = NULL;
 	}
 	mutex_unlock(&buffer->lock);
+=======
+	int ret = 0;
+
+	mutex_lock(&buffer->lock);
+	if (buffer->vmap_cnt) {
+		buffer->vmap_cnt++;
+		dma_buf_map_set_vaddr(map, buffer->vaddr);
+		goto out;
+	}
+
+	vaddr = system_heap_do_vmap(buffer);
+	if (IS_ERR(vaddr)) {
+		ret = PTR_ERR(vaddr);
+		goto out;
+	}
+
+	buffer->vaddr = vaddr;
+	buffer->vmap_cnt++;
+	dma_buf_map_set_vaddr(map, buffer->vaddr);
+out:
+	mutex_unlock(&buffer->lock);
+
+	return ret;
+}
+
+static void system_heap_vunmap(struct dma_buf *dmabuf, struct dma_buf_map *map)
+{
+	struct system_heap_buffer *buffer = dmabuf->priv;
+
+	mutex_lock(&buffer->lock);
+	if (!--buffer->vmap_cnt) {
+		vunmap(buffer->vaddr);
+		buffer->vaddr = NULL;
+	}
+	mutex_unlock(&buffer->lock);
+	dma_buf_map_clear(map);
+>>>>>>> BRANCH (a0b963 Merge tag 'xfs-5.11-merge-4' of git://git.kernel.org/pub/scm)
 }
 
 static void system_heap_dma_buf_release(struct dma_buf *dmabuf)
@@ -311,6 +349,8 @@ static const struct dma_buf_ops system_heap_buf_ops = {
 
 static struct page *alloc_largest_available(unsigned long size,
 					    unsigned int max_order)
+<<<<<<< HEAD   (5ade8f ANDROID: GKI: enable CONFIG_SRAM)
+=======
 {
 	struct page *page;
 	int i;
@@ -321,6 +361,49 @@ static struct page *alloc_largest_available(unsigned long size,
 		if (max_order < orders[i])
 			continue;
 
+		page = alloc_pages(order_flags[i], orders[i]);
+		if (!page)
+			continue;
+		return page;
+	}
+	return NULL;
+}
+
+static int system_heap_allocate(struct dma_heap *heap,
+				unsigned long len,
+				unsigned long fd_flags,
+				unsigned long heap_flags)
+>>>>>>> BRANCH (a0b963 Merge tag 'xfs-5.11-merge-4' of git://git.kernel.org/pub/scm)
+{
+<<<<<<< HEAD   (5ade8f ANDROID: GKI: enable CONFIG_SRAM)
+	struct page *page;
+	int i;
+=======
+	struct system_heap_buffer *buffer;
+	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
+	unsigned long size_remaining = len;
+	unsigned int max_order = orders[0];
+	struct dma_buf *dmabuf;
+	struct sg_table *table;
+	struct scatterlist *sg;
+	struct list_head pages;
+	struct page *page, *tmp_page;
+	int i, ret = -ENOMEM;
+>>>>>>> BRANCH (a0b963 Merge tag 'xfs-5.11-merge-4' of git://git.kernel.org/pub/scm)
+
+<<<<<<< HEAD   (5ade8f ANDROID: GKI: enable CONFIG_SRAM)
+	for (i = 0; i < NUM_ORDERS; i++) {
+		if (size <  (PAGE_SIZE << orders[i]))
+			continue;
+		if (max_order < orders[i])
+			continue;
+=======
+	buffer = kzalloc(sizeof(*buffer), GFP_KERNEL);
+	if (!buffer)
+		return -ENOMEM;
+>>>>>>> BRANCH (a0b963 Merge tag 'xfs-5.11-merge-4' of git://git.kernel.org/pub/scm)
+
+<<<<<<< HEAD   (5ade8f ANDROID: GKI: enable CONFIG_SRAM)
 		page = alloc_pages(order_flags[i], orders[i]);
 		if (!page)
 			continue;
@@ -349,6 +432,8 @@ static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
 	if (!buffer)
 		return ERR_PTR(-ENOMEM);
 
+=======
+>>>>>>> BRANCH (a0b963 Merge tag 'xfs-5.11-merge-4' of git://git.kernel.org/pub/scm)
 	INIT_LIST_HEAD(&buffer->attachments);
 	mutex_init(&buffer->lock);
 	buffer->heap = heap;
@@ -396,7 +481,32 @@ static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
 		goto free_pages;
 	}
 
+<<<<<<< HEAD   (5ade8f ANDROID: GKI: enable CONFIG_SRAM)
 	return dmabuf;
+
+free_pages:
+	for_each_sgtable_sg(table, sg, i) {
+		struct page *p = sg_page(sg);
+
+		__free_pages(p, compound_order(p));
+=======
+	ret = dma_buf_fd(dmabuf, fd_flags);
+	if (ret < 0) {
+		dma_buf_put(dmabuf);
+		/* just return, as put will call release and that will free */
+		return ret;
+>>>>>>> BRANCH (a0b963 Merge tag 'xfs-5.11-merge-4' of git://git.kernel.org/pub/scm)
+	}
+<<<<<<< HEAD   (5ade8f ANDROID: GKI: enable CONFIG_SRAM)
+	sg_free_table(table);
+free_buffer:
+	list_for_each_entry_safe(page, tmp_page, &pages, lru)
+		__free_pages(page, compound_order(page));
+	kfree(buffer);
+
+	return ERR_PTR(ret);
+=======
+	return ret;
 
 free_pages:
 	for_each_sgtable_sg(table, sg, i) {
@@ -410,7 +520,8 @@ free_buffer:
 		__free_pages(page, compound_order(page));
 	kfree(buffer);
 
-	return ERR_PTR(ret);
+	return ret;
+>>>>>>> BRANCH (a0b963 Merge tag 'xfs-5.11-merge-4' of git://git.kernel.org/pub/scm)
 }
 
 static const struct dma_heap_ops system_heap_ops = {
