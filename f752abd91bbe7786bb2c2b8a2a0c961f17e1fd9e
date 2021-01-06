@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0bb7990_cf8363b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2021-01-06T17:55:47Z",
+      "side": 1,
+      "message": "This is the kind of patch series that should really be discussed on the list (and probably merged upstream) before hitting Android.\n\nFrom the commit message, this looks based On Laurent\u0027s v10, while the series went all the way to v12. I\u0027d suggest you sync with the original author of the series to revive it.",
+      "revId": "f752abd91bbe7786bb2c2b8a2a0c961f17e1fd9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
