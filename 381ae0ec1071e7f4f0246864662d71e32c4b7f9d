@@ -168,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f802a449_15433b94",
+        "filename": "kernel/sched/idle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-06T08:35:42Z",
+      "side": 1,
+      "message": "No one has provided any benchmarks showing that this is needed, if so, please do so, otherwise you can\u0027t claim \"performance reasons\" 😊",
+      "parentUuid": "73d91575_3ac16a15",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 42
+      },
+      "revId": "381ae0ec1071e7f4f0246864662d71e32c4b7f9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b58d6d68_fe1eb21c",
         "filename": "kernel/sched/topology.c",
         "patchSetId": 4
