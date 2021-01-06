@@ -105,6 +105,24 @@
       "parentUuid": "6e9c0eb1_40affd50",
       "revId": "b985102a3f89a263576a369c29e48c6fa3530ac5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48541b7c_b01623cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2021-01-06T18:45:19Z",
+      "side": 1,
+      "message": "It\u0027s not ideal, but hasn\u0027t been a big problem so far (we don\u0027t ship vmlinux on devices), and would require non-trivial compiler changes to fix.",
+      "parentUuid": "cca411b3_b66035c5",
+      "revId": "b985102a3f89a263576a369c29e48c6fa3530ac5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
