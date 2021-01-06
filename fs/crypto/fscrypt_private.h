@@ -27,6 +27,9 @@
 #define FSCRYPT_CONTEXT_V1	1
 #define FSCRYPT_CONTEXT_V2	2
 
+/* Keep this in sync with include/uapi/linux/fscrypt.h */
+#define FSCRYPT_MODE_MAX	FSCRYPT_MODE_ADIANTUM
+
 struct fscrypt_context_v1 {
 	u8 version; /* FSCRYPT_CONTEXT_V1 */
 	u8 contents_encryption_mode;
@@ -519,6 +522,7 @@ struct fscrypt_master_key {
 	struct list_head	mk_decrypted_inodes;
 	spinlock_t		mk_decrypted_inodes_lock;
 
+<<<<<<< HEAD   (c9251a  Merge branch 'android11-5.4' into 'android11-5.4-lts')
 	/*
 	 * Per-mode encryption keys for the various types of encryption policies
 	 * that use them.  Allocated and derived on-demand.
@@ -530,6 +534,10 @@ struct fscrypt_master_key {
 	/* Hash key for inode numbers.  Initialized only when needed. */
 	siphash_key_t		mk_ino_hash_key;
 	bool			mk_ino_hash_key_initialized;
+=======
+	/* Per-mode tfms for DIRECT_KEY policies, allocated on-demand */
+	struct crypto_skcipher	*mk_mode_keys[FSCRYPT_MODE_MAX + 1];
+>>>>>>> BRANCH (b3f656 Linux 5.4.87)
 
 } __randomize_layout;
 

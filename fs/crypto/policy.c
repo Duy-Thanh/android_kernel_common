@@ -227,10 +227,64 @@ bool fscrypt_supported_policy(const union fscrypt_policy *policy_u,
 			      const struct inode *inode)
 {
 	switch (policy_u->version) {
+<<<<<<< HEAD   (c9251a  Merge branch 'android11-5.4' into 'android11-5.4-lts')
 	case FSCRYPT_POLICY_V1:
 		return fscrypt_supported_v1_policy(&policy_u->v1, inode);
 	case FSCRYPT_POLICY_V2:
 		return fscrypt_supported_v2_policy(&policy_u->v2, inode);
+=======
+	case FSCRYPT_POLICY_V1: {
+		const struct fscrypt_policy_v1 *policy = &policy_u->v1;
+
+		if (!fscrypt_valid_enc_modes(policy->contents_encryption_mode,
+					     policy->filenames_encryption_mode)) {
+			fscrypt_warn(inode,
+				     "Unsupported encryption modes (contents %d, filenames %d)",
+				     policy->contents_encryption_mode,
+				     policy->filenames_encryption_mode);
+			return false;
+		}
+
+		if (policy->flags & ~(FSCRYPT_POLICY_FLAGS_PAD_MASK |
+				      FSCRYPT_POLICY_FLAG_DIRECT_KEY)) {
+			fscrypt_warn(inode,
+				     "Unsupported encryption flags (0x%02x)",
+				     policy->flags);
+			return false;
+		}
+
+		return true;
+	}
+	case FSCRYPT_POLICY_V2: {
+		const struct fscrypt_policy_v2 *policy = &policy_u->v2;
+
+		if (!fscrypt_valid_enc_modes(policy->contents_encryption_mode,
+					     policy->filenames_encryption_mode)) {
+			fscrypt_warn(inode,
+				     "Unsupported encryption modes (contents %d, filenames %d)",
+				     policy->contents_encryption_mode,
+				     policy->filenames_encryption_mode);
+			return false;
+		}
+
+		if (policy->flags & ~(FSCRYPT_POLICY_FLAGS_PAD_MASK |
+				      FSCRYPT_POLICY_FLAG_DIRECT_KEY)) {
+			fscrypt_warn(inode,
+				     "Unsupported encryption flags (0x%02x)",
+				     policy->flags);
+			return false;
+		}
+
+		if (memchr_inv(policy->__reserved, 0,
+			       sizeof(policy->__reserved))) {
+			fscrypt_warn(inode,
+				     "Reserved bits set in encryption policy");
+			return false;
+		}
+
+		return true;
+	}
+>>>>>>> BRANCH (b3f656 Linux 5.4.87)
 	}
 	return false;
 }
