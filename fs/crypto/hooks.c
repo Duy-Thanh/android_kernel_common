@@ -61,7 +61,11 @@ int __fscrypt_prepare_link(struct inode *inode, struct inode *dir,
 		return err;
 
 	/* ... in case we looked up no-key name before key was added */
+<<<<<<< HEAD   (bfc277 ANDROID: usb: f_accessory: Don't drop NULL reference in acc_)
 	if (dentry->d_flags & DCACHE_NOKEY_NAME)
+=======
+	if (fscrypt_is_nokey_name(dentry))
+>>>>>>> BRANCH (b3f656 Linux 5.4.87)
 		return -ENOKEY;
 
 	if (!fscrypt_has_permitted_context(dir, inode))
@@ -86,7 +90,12 @@ int __fscrypt_prepare_rename(struct inode *old_dir, struct dentry *old_dentry,
 		return err;
 
 	/* ... in case we looked up no-key name(s) before key was added */
+<<<<<<< HEAD   (bfc277 ANDROID: usb: f_accessory: Don't drop NULL reference in acc_)
 	if ((old_dentry->d_flags | new_dentry->d_flags) & DCACHE_NOKEY_NAME)
+=======
+	if (fscrypt_is_nokey_name(old_dentry) ||
+	    fscrypt_is_nokey_name(new_dentry))
+>>>>>>> BRANCH (b3f656 Linux 5.4.87)
 		return -ENOKEY;
 
 	if (old_dir != new_dir) {
