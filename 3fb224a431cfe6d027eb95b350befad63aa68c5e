@@ -22,6 +22,63 @@
       },
       "revId": "3fb224a431cfe6d027eb95b350befad63aa68c5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c7916e4_04e28678",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2021-01-06T09:46:48Z",
+      "side": 1,
+      "message": "This guard doesn\u0027t match the name of the file. Also, I would suggest replacing all instances of \"io\" with \"mmio\", because that\u0027s not the same thing for architectures that implement an IO address space (x86, sparc...).",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 0
+      },
+      "revId": "3fb224a431cfe6d027eb95b350befad63aa68c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd80c436_20370a9a",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2021-01-06T09:46:48Z",
+      "side": 1,
+      "message": "Where is the code that sets __FTRACE_ENABLED_HERE___?",
+      "revId": "3fb224a431cfe6d027eb95b350befad63aa68c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9363e807_ed510acc",
+        "filename": "kernel/trace/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2021-01-06T09:46:48Z",
+      "side": 1,
+      "message": "CONFIC_TRACE_RW is way too generic. Consider something like CONFIG_TRACE_MMIO_ACCESS.",
+      "revId": "3fb224a431cfe6d027eb95b350befad63aa68c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
