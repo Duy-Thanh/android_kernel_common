@@ -1496,6 +1496,53 @@ void arch_remove_memory(int nid, u64 start, u64 size,
 	__remove_pgd_mapping(swapper_pg_dir, __phys_to_virt(start), size);
 }
 
+int check_range_driver_managed(u64 start, u64 size, const char *resource_name)
+{
+	struct mem_section *ms;
+	unsigned long pfn = __phys_to_pfn(start);
+	unsigned long end_pfn = __phys_to_pfn(start + size);
+	struct resource *res;
+	unsigned long flags;
+
+	res = lookup_resource(&iomem_resource, start);
+	flags = res->flags;
+
+	if (!strcmp(resource_name, "System RAM") ||
+	    !(flags & IORESOURCE_SYSRAM_DRIVER_MANAGED) ||
+	    strstr(resource_name, "System RAM (") != resource_name)
+		return -EINVAL;
+
+	for (; pfn < end_pfn; pfn += PAGES_PER_SECTION) {
+		ms = __pfn_to_section(pfn);
+		if (early_section(ms))
+			return -EINVAL;
+	}
+
+	return 0;
+}
+
+void populate_range_driver_managed(int nid, u64 start, u64 size,
+			const char *resource_name)
+{
+	unsigned long virt = (unsigned long)phys_to_virt(start);
+
+	if (check_range_driver_managed(start, size, resource_name))
+		return;
+
+	__create_pgd_mapping(init_mm.pgd, start, virt, size, PAGE_KERNEL, NULL, 0);
+}
+EXPORT_SYMBOL_GPL(populate_range_driver_managed);
+
+void depopulate_range_driver_managed(int nid, u64 start, u64 size,
+			const char *resource_name)
+{
+	if (check_range_driver_managed(start, size, resource_name))
+			return;
+
+	unmap_hotplug_range(start, start + size, false, NULL);
+}
+EXPORT_SYMBOL_GPL(depopulate_range_driver_managed);
+
 /*
  * This memory hotplug notifier helps prevent boot memory from being
  * inadvertently removed as it blocks pfn range offlining process in
