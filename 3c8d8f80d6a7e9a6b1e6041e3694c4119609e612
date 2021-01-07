@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfc091a5_28aac08f",
+        "filename": "include/trace/events/rwmmio.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-07T11:32:27Z",
+      "side": 1,
+      "message": "Hi Greg KH,\n\nIn Qualcomm us e case, we just read address information for read operation.\n\n-Thanks, Prasad",
+      "parentUuid": "698e0344_902a86b5",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 62
+      },
+      "revId": "3c8d8f80d6a7e9a6b1e6041e3694c4119609e612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89c61ea0_70d797ad",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-01-07T10:44:31Z",
       "side": 1,
       "message": "shouldn\u0027t this \"line up\" with the read message with the only difference being the value at the end?\n\nSame for the write message, these should be uniform please.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 62
+      },
+      "revId": "3c8d8f80d6a7e9a6b1e6041e3694c4119609e612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8a417c8_bc1a8f14",
+        "filename": "include/trace/events/rwmmio.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-07T11:32:27Z",
+      "side": 1,
+      "message": "Sure. I will fix it in the next patch set.",
+      "parentUuid": "89c61ea0_70d797ad",
       "range": {
         "startLine": 74,
         "startChar": 0,
