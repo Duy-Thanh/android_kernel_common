@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2df80b8_ed61898d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1697971
+      },
+      "writtenOn": "2021-01-07T20:03:18Z",
+      "side": 1,
+      "message": "Isn\u0027t the tag \u0027mm, oom\u0027?  Based off the tip of android12-5.10:\n\n$ git log --oneline -- mm/oom_kill.c  | grep \u0027mm, oom:\u0027 | wc\n     64     588    3866\n$ git log --oneline -- mm/oom_kill.c  | grep \u0027mm/oom:\u0027 | wc\n      2      20     143",
+      "parentUuid": "1c229634_1acfae84",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 16
+      },
+      "revId": "9fc73789148d709658c10f432e0eee850c44685c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8455c86a_d399721d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2021-01-07T00:55:04Z",
       "side": 1,
       "message": "and highest badness points",
+      "range": {
+        "startLine": 10,
+        "startChar": 56,
+        "endLine": 11,
+        "endChar": 9
+      },
+      "revId": "9fc73789148d709658c10f432e0eee850c44685c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c7c656e_e8160df9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1697971
+      },
+      "writtenOn": "2021-01-07T20:03:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8455c86a_d399721d",
       "range": {
         "startLine": 10,
         "startChar": 56,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "02538615_54a513c4",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1697971
+      },
+      "writtenOn": "2021-01-07T20:03:18Z",
+      "side": 1,
+      "message": "After giving the various paths more though, I think we want scrap the \"select_positive\" label and then do the following:\n\nif (points \u003d\u003d LONG_MIN)\n    goto next;\n\nif (task-\u003esignal-\u003eoom_score_adj \u003e\u003d 0 \u0026\u0026 points \u003e oc-chosen_non_negative_adj_points) {\n    ....\n}\n\nif (points \u003c oc-\u003echosen_points)\n    goto next;\n\n\nLet\u0027s walk through my reasoning:\n\n1. Originally, I had placed the chosen_non_negative_adj tracking code (lines 375 - 380) to account for the case where a task satisfying oom_task_origin(task) is selected - however, that is redundant.  If the task has a positive ADJ, it will be contained in oc-\u003echosen after the iterations over the tasks have finished; if the task has a positive ADJ, there\u0027s no need for us to track it in oc-\u003echosen_non_negative_adj.  So, we can move lines 375 - 380 above the \"select:\" label.\n\n2. Now, the question is, should we move lines 375 - 380 inside of the block below?\n\nif (points \u003c oc-\u003echosen_points)\n    ....\n\nIf we did that, we could end up missing the worst task with a non-negative ADJ.  Let\u0027s say we\u0027re in iteration n of oom_evaluate_task(), and we encounter the task A with the highest badness score seen so far, such that the tasks ADJ score is negative.  On a subsequent iteration, the task B we\u0027re looking at could be the worst task with a non-negative ADJ - let\u0027s assume A\u0027s badness score is greater than B\u0027s.  Then if (points \u003c oc-\u003echosen_points) evaluates to false, and we won\u0027t end up setting oc-\u003echosen_non_negative_adj \u003d B;\n\nI\u0027ll be making the corresponding updates in the next patch.",
+      "parentUuid": "c1aba6f5_5e14d10e",
+      "range": {
+        "startLine": 348,
+        "startChar": 2,
+        "endLine": 358,
+        "endChar": 23
+      },
+      "revId": "9fc73789148d709658c10f432e0eee850c44685c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cdc8384a_11a9d4e0",
         "filename": "mm/oom_kill.c",
         "patchSetId": 4
@@ -83,6 +155,30 @@
       "writtenOn": "2021-01-07T00:55:04Z",
       "side": 1,
       "message": "I think you need put_task_struct(oc-\u003echosen) before overriding it.",
+      "range": {
+        "startLine": 421,
+        "startChar": 2,
+        "endLine": 421,
+        "endChar": 12
+      },
+      "revId": "9fc73789148d709658c10f432e0eee850c44685c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd5c1873_35387d70",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1697971
+      },
+      "writtenOn": "2021-01-07T20:03:18Z",
+      "side": 1,
+      "message": "Good catch - the abort path in oom_evaluate_task() is also missing this.",
+      "parentUuid": "cdc8384a_11a9d4e0",
       "range": {
         "startLine": 421,
         "startChar": 2,
