@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1171d757_2a52f579",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-07T16:56:49Z",
+      "side": 1,
+      "message": "I would like to upload new working patch set for your review. I have addressed all the suggestions and modifications Greg KH suggested(print format, filenames and mmio(replacing io with mmio). So that review of patches can be continued. \n\nPlease review new patch set and Marc can find mistakes in my implementation of his suggestion. \n\n\n-Thanks, Prasad \n",
+      "revId": "3c8d8f80d6a7e9a6b1e6041e3694c4119609e612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "698e0344_902a86b5",
