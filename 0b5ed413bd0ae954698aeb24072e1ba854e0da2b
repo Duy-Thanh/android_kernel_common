@@ -88,6 +88,24 @@
       "parentUuid": "aeea9877_5a4f0856",
       "revId": "0b5ed413bd0ae954698aeb24072e1ba854e0da2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb4150be_d779e81c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006514
+      },
+      "writtenOn": "2021-01-07T16:22:06Z",
+      "side": 1,
+      "message": "Okay, got where are you headed with that question. No, module still depends on lot of core stuff. Don\u0027t think we are in a position to manage all of that in the module. That\u0027s why you get to see these changes 😊",
+      "parentUuid": "deecbf30_399d43b6",
+      "revId": "0b5ed413bd0ae954698aeb24072e1ba854e0da2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
