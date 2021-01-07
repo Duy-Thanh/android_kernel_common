@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a310498_4d586220",
+        "filename": "arch/arm64/kernel/image-vars.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-07T04:46:20Z",
+      "side": 1,
+      "message": "sure. will remove.",
+      "parentUuid": "63b7a63d_1433f470",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 0
+      },
+      "revId": "3fb224a431cfe6d027eb95b350befad63aa68c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c7916e4_04e28678",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-01-06T09:46:48Z",
       "side": 1,
       "message": "This guard doesn\u0027t match the name of the file. Also, I would suggest replacing all instances of \"io\" with \"mmio\", because that\u0027s not the same thing for architectures that implement an IO address space (x86, sparc...).",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 0
+      },
+      "revId": "3fb224a431cfe6d027eb95b350befad63aa68c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1962de7_4e8ef8b6",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-07T04:46:20Z",
+      "side": 1,
+      "message": "Sure.I will update the next patchset. Thanks for your comments",
+      "parentUuid": "4c7916e4_04e28678",
       "range": {
         "startLine": 5,
         "startChar": 0,
@@ -66,6 +114,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb87f6cc_86c27dfa",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-07T04:46:20Z",
+      "side": 1,
+      "message": "Hi Marc, it would be great If you raise Gerrit for that. I am not comfortable with part of the logic and thinking that it would break other arch. It would really good help you merge this change from your side.",
+      "parentUuid": "cd80c436_20370a9a",
+      "revId": "3fb224a431cfe6d027eb95b350befad63aa68c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9363e807_ed510acc",
         "filename": "kernel/trace/Kconfig",
         "patchSetId": 5
@@ -77,6 +143,24 @@
       "writtenOn": "2021-01-06T09:46:48Z",
       "side": 1,
       "message": "CONFIC_TRACE_RW is way too generic. Consider something like CONFIG_TRACE_MMIO_ACCESS.",
+      "revId": "3fb224a431cfe6d027eb95b350befad63aa68c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c18a67c4_d04aaf3b",
+        "filename": "kernel/trace/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-07T04:46:20Z",
+      "side": 1,
+      "message": "Sure. I will move to CONFIG_TRACE_MMIO_ACCESS.",
+      "parentUuid": "9363e807_ed510acc",
       "revId": "3fb224a431cfe6d027eb95b350befad63aa68c5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
