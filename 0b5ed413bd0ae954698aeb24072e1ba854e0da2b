@@ -34,6 +34,24 @@
       "parentUuid": "5b36108d_368c3796",
       "revId": "0b5ed413bd0ae954698aeb24072e1ba854e0da2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02b9b6aa_0fe619a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-01-07T16:05:11Z",
+      "side": 1,
+      "message": "The question is why do you need to call sched_energy_enabled() in the first place?",
+      "parentUuid": "ad2dd479_f56b39f4",
+      "revId": "0b5ed413bd0ae954698aeb24072e1ba854e0da2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
