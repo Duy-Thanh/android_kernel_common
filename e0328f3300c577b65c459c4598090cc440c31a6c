@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3764d730_0423105e",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1827640
+      },
+      "writtenOn": "2021-01-07T23:13:11Z",
+      "side": 1,
+      "message": "Made a note of this. TBD from our side.",
+      "parentUuid": "12c1254e_8c5ee251",
+      "revId": "e0328f3300c577b65c459c4598090cc440c31a6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7107f5a8_93723e6d",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-01-07T18:20:23Z",
       "side": 1,
       "message": "QC to revisit the module side code. This should always be true for walt systems.",
+      "revId": "e0328f3300c577b65c459c4598090cc440c31a6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc8c0d89_67c730e4",
+        "filename": "kernel/sched/topology.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1827640
+      },
+      "writtenOn": "2021-01-07T23:13:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7107f5a8_93723e6d",
       "revId": "e0328f3300c577b65c459c4598090cc440c31a6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
