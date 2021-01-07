@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32580e27_861d4f79",
+        "filename": "arch/arm64/mm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1507,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-07T20:45:47Z",
+      "side": 1,
+      "message": "check res for NULL",
+      "range": {
+        "startLine": 1507,
+        "startChar": 1,
+        "endLine": 1507,
+        "endChar": 4
+      },
+      "revId": "799e2e2e37f554fc2548f9c3abc4041aaae85f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8991a251_d1b00aa2",
+        "filename": "arch/arm64/mm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1511,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-07T20:45:47Z",
+      "side": 1,
+      "message": "I assume this memory was hotplugged earlier using add_memory_driver_managed(). If so, I think one of these checks can be dropped since there conditions are dependent:\nhttps://elixir.bootlin.com/linux/latest/source/mm/memory_hotplug.c#L107",
+      "range": {
+        "startLine": 1510,
+        "startChar": 5,
+        "endLine": 1511,
+        "endChar": 48
+      },
+      "revId": "799e2e2e37f554fc2548f9c3abc4041aaae85f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0216a9ad_d7c7287f",
+        "filename": "arch/arm64/mm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1524,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-07T20:45:47Z",
+      "side": 1,
+      "message": "why do you need nid here?",
+      "range": {
+        "startLine": 1524,
+        "startChar": 35,
+        "endLine": 1524,
+        "endChar": 42
+      },
+      "revId": "799e2e2e37f554fc2548f9c3abc4041aaae85f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac108510_e17c405d",
+        "filename": "arch/arm64/mm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1536,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-07T20:45:47Z",
+      "side": 1,
+      "message": "why do you need nid here?",
+      "range": {
+        "startLine": 1536,
+        "startChar": 37,
+        "endLine": 1536,
+        "endChar": 44
+      },
+      "revId": "799e2e2e37f554fc2548f9c3abc4041aaae85f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfdd0221_1714bd23",
+        "filename": "arch/arm64/mm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1540,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-07T20:45:47Z",
+      "side": 1,
+      "message": "extra",
+      "range": {
+        "startLine": 1540,
+        "startChar": 2,
+        "endLine": 1540,
+        "endChar": 3
+      },
+      "revId": "799e2e2e37f554fc2548f9c3abc4041aaae85f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
