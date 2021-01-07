@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "771f191f_86002997",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 7195,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-01-07T18:00:07Z",
+      "side": 1,
+      "message": "Does that actually work? Isn\u0027t this called before modules are loaded?",
+      "range": {
+        "startLine": 7195,
+        "startChar": 1,
+        "endLine": 7195,
+        "endChar": 43
+      },
+      "revId": "0e5601ea764ee1a65aed1ed6bf346dbcf646c171",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
