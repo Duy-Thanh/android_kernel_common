@@ -16,6 +16,40 @@
       "message": "you rebased and did not address our review comments 😞",
       "revId": "e0328f3300c577b65c459c4598090cc440c31a6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12c1254e_8c5ee251",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1781415
+      },
+      "writtenOn": "2021-01-07T18:20:23Z",
+      "side": 1,
+      "message": "Quentin suggested that this will always be true for arm platform running cpufreq driver. QC to revisit the module side implementation.",
+      "revId": "e0328f3300c577b65c459c4598090cc440c31a6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7107f5a8_93723e6d",
+        "filename": "kernel/sched/topology.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1781415
+      },
+      "writtenOn": "2021-01-07T18:20:23Z",
+      "side": 1,
+      "message": "QC to revisit the module side code. This should always be true for walt systems.",
+      "revId": "e0328f3300c577b65c459c4598090cc440c31a6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
