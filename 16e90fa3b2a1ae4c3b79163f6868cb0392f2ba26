@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a856fee4_bc57ae6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-07T11:23:03Z",
+      "side": 1,
+      "message": "Should this be sent upstream to fix the build problem?  What code uses that macro?",
+      "revId": "16e90fa3b2a1ae4c3b79163f6868cb0392f2ba26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
