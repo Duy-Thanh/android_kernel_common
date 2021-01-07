@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1a225e7_2b41dc81",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1757,
+      "author": {
+        "id": 1769563
+      },
+      "writtenOn": "2021-01-07T23:01:12Z",
+      "side": 1,
+      "message": "mem_hotplug_begin() should begin here",
+      "revId": "072bc71652d307495b59a33144b240eaebfd1e57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9add24a9_acfab7db",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1761,
+      "author": {
+        "id": 1769563
+      },
+      "writtenOn": "2021-01-07T23:01:12Z",
+      "side": 1,
+      "message": "return after mem_hotplug_done()",
+      "revId": "072bc71652d307495b59a33144b240eaebfd1e57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
