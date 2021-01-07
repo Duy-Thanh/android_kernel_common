@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c229634_1acfae84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-07T00:55:04Z",
+      "side": 1,
+      "message": "mm/oom",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 16
+      },
+      "revId": "9fc73789148d709658c10f432e0eee850c44685c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8455c86a_d399721d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-07T00:55:04Z",
+      "side": 1,
+      "message": "and highest badness points",
+      "range": {
+        "startLine": 10,
+        "startChar": 56,
+        "endLine": 11,
+        "endChar": 9
+      },
+      "revId": "9fc73789148d709658c10f432e0eee850c44685c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1aba6f5_5e14d10e",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-07T00:55:04Z",
+      "side": 1,
+      "message": "I think a less invasive way would be set chosen_non_negative_adj right here:\n\nif (points \u003c oc-\u003echosen_points) {\n  if (task-\u003esignal-\u003eoom_score_adj \u003e\u003d 0 \u0026\u0026 points \u003e oc-\u003echosen_non_negative_adj_points) {\n    if (oc-\u003echosen_non_negative_adj)\n      put_task_struct(oc-\u003echosen_non_negative_adj);\n    get_task_struct(task);\n    oc-\u003echosen_non_negative_adj \u003d task;\n    oc-\u003echosen_non_negative_adj_points \u003d points;\n  }\n  goto next;\n}\n\nthen you don\u0027t need the rest of the changes in this function.",
+      "range": {
+        "startLine": 348,
+        "startChar": 2,
+        "endLine": 358,
+        "endChar": 23
+      },
+      "revId": "9fc73789148d709658c10f432e0eee850c44685c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdc8384a_11a9d4e0",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-07T00:55:04Z",
+      "side": 1,
+      "message": "I think you need put_task_struct(oc-\u003echosen) before overriding it.",
+      "range": {
+        "startLine": 421,
+        "startChar": 2,
+        "endLine": 421,
+        "endChar": 12
+      },
+      "revId": "9fc73789148d709658c10f432e0eee850c44685c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
