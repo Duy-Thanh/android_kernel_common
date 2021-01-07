@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "013d5437_40513de9",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-07T21:31:10Z",
+      "side": 1,
+      "message": "Did you mean \u0026\u0026 here?",
+      "range": {
+        "startLine": 350,
+        "startChar": 38,
+        "endLine": 350,
+        "endChar": 40
+      },
+      "revId": "27dbefb705dfba2e133812fc6826bb25fe032ce3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c7923fa_b4df2429",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-07T21:31:10Z",
+      "side": 1,
+      "message": "nit: extra empty line",
+      "revId": "27dbefb705dfba2e133812fc6826bb25fe032ce3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21911be5_b189dd83",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-07T21:31:10Z",
+      "side": 1,
+      "message": "extra",
+      "range": {
+        "startLine": 411,
+        "startChar": 9,
+        "endLine": 411,
+        "endChar": 10
+      },
+      "revId": "27dbefb705dfba2e133812fc6826bb25fe032ce3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
