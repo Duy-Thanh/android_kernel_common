@@ -16,6 +16,23 @@
       "message": "Sorry for inconvinience.\nConfirmed build pass and these symbols are included in abi_symbollist.raw.",
       "revId": "d449d3574e19771cd1c745023beaf704f54facf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63adbcda_2740d9e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-07T11:25:05Z",
+      "side": 1,
+      "message": "Someone forgot to update the .xml file at the same time 😞",
+      "revId": "d449d3574e19771cd1c745023beaf704f54facf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
