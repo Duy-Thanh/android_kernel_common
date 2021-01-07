@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41e2f676_b0713262",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-07T16:51:58Z",
+      "side": 1,
+      "message": "Hi Marc and Todd,\n\nYour last suggestion is working for compilation but functionality is broken. I could not see logs in the trace. I tried multiple times to see if there are any  mistakes from my validation but functionality not working(no traces).\n\nI have pushed last patchset with just compile time testing and that was mistake from my side.  Please check the below code once and suggest if I am doing anything wrong here. \n\n\ndiff --git a/Makefile b/Makefile\nindex 26d8e8d..c3c99ce 100644\n--- a/Makefile\n+++ b/Makefile\n@@ -669,7 +669,7 @@ export CFLAGS_GCOV\n\n # The arch Makefiles can override CC_FLAGS_FTRACE. We may also append it later.\n ifdef CONFIG_FUNCTION_TRACER\n-  CC_FLAGS_FTRACE :\u003d -pg\n+  CC_FLAGS_FTRACE :\u003d -pg -D__FTRACE_ENABLED_HERE__\n endif\n\n RETPOLINE_CFLAGS_GCC :\u003d -mindirect-branch\u003dthunk-extern -mindirect-branch-register\ndiff --git a/arch/arm64/Makefile b/arch/arm64/Makefile\nindex f0c8814..0573cfc 100644\n--- a/arch/arm64/Makefile\n+++ b/arch/arm64/Makefile\n@@ -124,7 +124,7 @@ CHECKFLAGS  +\u003d -D__aarch64__\n\n ifeq ($(CONFIG_DYNAMIC_FTRACE_WITH_REGS),y)\n   KBUILD_CPPFLAGS +\u003d -DCC_USING_PATCHABLE_FUNCTION_ENTRY\n-  CC_FLAGS_FTRACE :\u003d -fpatchable-function-entry\u003d2\n+  CC_FLAGS_FTRACE :\u003d -fpatchable-function-entry\u003d2 -D__FTRACE_ENABLED_HERE__\n endif\n\n\n # Default value\ndiff --git a/include/linux/mmiorw.h b/include/linux/mmiorw.h\nindex 03d6453..23ddadc 100644\n--- a/include/linux/mmiorw.h\n+++ b/include/linux/mmiorw.h\n@@ -9,7 +9,7 @@\n #include \u003clinux/atomic.h\u003e\n #include \u003clinux/tracepoint-defs.h\u003e\n\n-#if IS_ENABLED(CONFIG_TRACE_MMIO_ACCESS)\n+#if IS_ENABLED(CONFIG_TRACE_MMIO_ACCESS) \u0026\u0026 defined(__FTRACE_ENABLED_HERE__)\n DECLARE_TRACEPOINT(rwmmio_write);\n DECLARE_TRACEPOINT(rwmmio_read);\n DECLARE_TRACEPOINT(rwmmio_post_read);\n(END)\n\n\n",
+      "revId": "3c8d8f80d6a7e9a6b1e6041e3694c4119609e612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "698e0344_902a86b5",
