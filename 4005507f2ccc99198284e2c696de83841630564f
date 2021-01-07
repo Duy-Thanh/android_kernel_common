@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61bb324a_a3f9639c",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-07T23:50:01Z",
+      "side": 1,
+      "message": "Should we also set oc-\u003echosen_non_negative_adj \u003d NULL; here not to rely on the caller to reset it?",
+      "range": {
+        "startLine": 386,
+        "startChar": 1,
+        "endLine": 386,
+        "endChar": 47
+      },
+      "revId": "4005507f2ccc99198284e2c696de83841630564f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
