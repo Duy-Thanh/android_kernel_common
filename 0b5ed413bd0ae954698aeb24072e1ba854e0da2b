@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b36108d_368c3796",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-01-07T15:11:19Z",
+      "side": 1,
+      "message": "That brings me back about the question I asked on aosp/1540352 about sched_energy_present. Why do you care? You could easily build your own list of perf domains in your module, and not have to deal with any of this. Is this something you have tried?",
+      "revId": "0b5ed413bd0ae954698aeb24072e1ba854e0da2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
