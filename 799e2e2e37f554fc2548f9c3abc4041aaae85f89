@@ -144,6 +144,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d1c298e_066bd7d5",
+        "filename": "arch/arm64/mm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1534,
+      "author": {
+        "id": 1769563
+      },
+      "writtenOn": "2021-01-07T22:02:25Z",
+      "side": 1,
+      "message": "these function decl. still needs to be placed in some header file. Do you know of any suitable ones we can place this? maybe asm/pgtable.h since its related to mmu?",
+      "revId": "799e2e2e37f554fc2548f9c3abc4041aaae85f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ac108510_e17c405d",
         "filename": "arch/arm64/mm/mmu.c",
         "patchSetId": 5
