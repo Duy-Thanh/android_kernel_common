@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95f4b9ed_0b12fdd6",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-07T22:19:13Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "1b72a47b_6ef16050",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 49
+      },
+      "revId": "fb36bd6e1f502b0e57ea54dd4f0633e827bcadae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4381d5c9_bb9e8e1d",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "I\u0027m not too concerned about the static key, it should work fine in modules, but why do you need this one specifically? Isn\u0027t it pretty much guaranteed to always be \u0027true\u0027 for you?",
       "parentUuid": "4381d5c9_bb9e8e1d",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 40
+      },
+      "revId": "fb36bd6e1f502b0e57ea54dd4f0633e827bcadae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfcef6d6_a1cffca9",
+        "filename": "kernel/sched/topology.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-07T22:19:13Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "a895a879_21665a45",
       "range": {
         "startLine": 210,
         "startChar": 0,
