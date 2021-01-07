@@ -56,7 +56,11 @@ static struct fscrypt_mode *
 select_encryption_mode(const union fscrypt_policy *policy,
 		       const struct inode *inode)
 {
+<<<<<<< HEAD   (4aff7f ANDROID: renamed virtual device symbol list)
 	BUILD_BUG_ON(ARRAY_SIZE(fscrypt_modes) != FSCRYPT_MODE_MAX + 1);
+=======
+	BUILD_BUG_ON(ARRAY_SIZE(available_modes) != FSCRYPT_MODE_MAX + 1);
+>>>>>>> BRANCH (b3f656 Linux 5.4.87)
 
 	if (S_ISREG(inode->i_mode))
 		return &fscrypt_modes[fscrypt_policy_contents_mode(policy)];
