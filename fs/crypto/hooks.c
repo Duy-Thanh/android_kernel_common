@@ -54,6 +54,16 @@ EXPORT_SYMBOL_GPL(fscrypt_file_open);
 int __fscrypt_prepare_link(struct inode *inode, struct inode *dir,
 			   struct dentry *dentry)
 {
+<<<<<<< HEAD   (40124a ANDROID: arm64: fix MCOUNT_ADDR with CFI_CLANG)
+=======
+	int err;
+
+	err = fscrypt_require_key(dir);
+	if (err)
+		return err;
+
+	/* ... in case we looked up no-key name before key was added */
+>>>>>>> BRANCH (b3f656 Linux 5.4.87)
 	if (fscrypt_is_nokey_name(dentry))
 		return -ENOKEY;
 	/*
@@ -72,6 +82,20 @@ int __fscrypt_prepare_rename(struct inode *old_dir, struct dentry *old_dentry,
 			     struct inode *new_dir, struct dentry *new_dentry,
 			     unsigned int flags)
 {
+<<<<<<< HEAD   (40124a ANDROID: arm64: fix MCOUNT_ADDR with CFI_CLANG)
+=======
+	int err;
+
+	err = fscrypt_require_key(old_dir);
+	if (err)
+		return err;
+
+	err = fscrypt_require_key(new_dir);
+	if (err)
+		return err;
+
+	/* ... in case we looked up no-key name(s) before key was added */
+>>>>>>> BRANCH (b3f656 Linux 5.4.87)
 	if (fscrypt_is_nokey_name(old_dentry) ||
 	    fscrypt_is_nokey_name(new_dentry))
 		return -ENOKEY;

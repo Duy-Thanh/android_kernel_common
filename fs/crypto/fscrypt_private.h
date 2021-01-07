@@ -513,6 +513,7 @@ struct fscrypt_master_key {
 	struct list_head	mk_decrypted_inodes;
 	spinlock_t		mk_decrypted_inodes_lock;
 
+<<<<<<< HEAD   (40124a ANDROID: arm64: fix MCOUNT_ADDR with CFI_CLANG)
 	/*
 	 * Per-mode encryption keys for the various types of encryption policies
 	 * that use them.  Allocated and derived on-demand.
@@ -524,6 +525,10 @@ struct fscrypt_master_key {
 	/* Hash key for inode numbers.  Initialized only when needed. */
 	siphash_key_t		mk_ino_hash_key;
 	bool			mk_ino_hash_key_initialized;
+=======
+	/* Per-mode tfms for DIRECT_KEY policies, allocated on-demand */
+	struct crypto_skcipher	*mk_mode_keys[FSCRYPT_MODE_MAX + 1];
+>>>>>>> BRANCH (b3f656 Linux 5.4.87)
 
 } __randomize_layout;
 

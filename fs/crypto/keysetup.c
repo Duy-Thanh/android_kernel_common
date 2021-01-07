@@ -56,7 +56,11 @@ static struct fscrypt_mode *
 select_encryption_mode(const union fscrypt_policy *policy,
 		       const struct inode *inode)
 {
+<<<<<<< HEAD   (40124a ANDROID: arm64: fix MCOUNT_ADDR with CFI_CLANG)
 	BUILD_BUG_ON(ARRAY_SIZE(fscrypt_modes) != FSCRYPT_MODE_MAX + 1);
+=======
+	BUILD_BUG_ON(ARRAY_SIZE(available_modes) != FSCRYPT_MODE_MAX + 1);
+>>>>>>> BRANCH (b3f656 Linux 5.4.87)
 
 	if (S_ISREG(inode->i_mode))
 		return &fscrypt_modes[fscrypt_policy_contents_mode(policy)];
