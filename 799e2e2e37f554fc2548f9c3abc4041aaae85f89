@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "603c3c71_902b847c",
+        "filename": "arch/arm64/mm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1507,
+      "author": {
+        "id": 1769563
+      },
+      "writtenOn": "2021-01-07T22:35:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "605ac174_8d2e6989",
+      "range": {
+        "startLine": 1507,
+        "startChar": 1,
+        "endLine": 1507,
+        "endChar": 4
+      },
+      "revId": "799e2e2e37f554fc2548f9c3abc4041aaae85f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8991a251_d1b00aa2",
@@ -95,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e165b414_75182a05",
+        "filename": "arch/arm64/mm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1511,
+      "author": {
+        "id": 1769563
+      },
+      "writtenOn": "2021-01-07T22:35:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a713e1a_495566ff",
+      "range": {
+        "startLine": 1510,
+        "startChar": 5,
+        "endLine": 1511,
+        "endChar": 48
+      },
+      "revId": "799e2e2e37f554fc2548f9c3abc4041aaae85f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0216a9ad_d7c7287f",
@@ -132,6 +180,30 @@
       "side": 1,
       "message": "Hmmm I guess there wont be anything specific to NUMA based implementation here when removing/creating page-table mappings. nid can be removed.",
       "parentUuid": "0216a9ad_d7c7287f",
+      "range": {
+        "startLine": 1524,
+        "startChar": 35,
+        "endLine": 1524,
+        "endChar": 42
+      },
+      "revId": "799e2e2e37f554fc2548f9c3abc4041aaae85f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03b5ae15_6bac5726",
+        "filename": "arch/arm64/mm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1524,
+      "author": {
+        "id": 1769563
+      },
+      "writtenOn": "2021-01-07T22:35:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f7495b7_39b0177a",
       "range": {
         "startLine": 1524,
         "startChar": 35,
@@ -218,6 +290,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f31874a7_d42c9d4f",
+        "filename": "arch/arm64/mm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1536,
+      "author": {
+        "id": 1769563
+      },
+      "writtenOn": "2021-01-07T22:35:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac108510_e17c405d",
+      "range": {
+        "startLine": 1536,
+        "startChar": 37,
+        "endLine": 1536,
+        "endChar": 44
+      },
+      "revId": "799e2e2e37f554fc2548f9c3abc4041aaae85f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dfdd0221_1714bd23",
@@ -255,6 +351,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "dfdd0221_1714bd23",
+      "range": {
+        "startLine": 1540,
+        "startChar": 2,
+        "endLine": 1540,
+        "endChar": 3
+      },
+      "revId": "799e2e2e37f554fc2548f9c3abc4041aaae85f89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0bf1377_601f5a52",
+        "filename": "arch/arm64/mm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1540,
+      "author": {
+        "id": 1769563
+      },
+      "writtenOn": "2021-01-07T22:35:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9038f17d_75aeeaf6",
       "range": {
         "startLine": 1540,
         "startChar": 2,
