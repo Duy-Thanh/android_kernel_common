@@ -232,14 +232,14 @@ DECLARE_RESTRICTED_HOOK(android_rvh_sched_exec,
 
 DECLARE_HOOK(android_vh_map_util_freq,
 	TP_PROTO(unsigned long util, unsigned long freq,
-		unsigned long cap, unsigned long *next_freq),
+		 unsigned long cap, unsigned long *next_freq),
 	TP_ARGS(util, freq, cap, next_freq));
 
 struct em_perf_domain;
 DECLARE_HOOK(android_vh_em_cpu_energy,
 	TP_PROTO(struct em_perf_domain *pd,
-		unsigned long max_util, unsigned long sum_util,
-		unsigned long *energy),
+		 unsigned long max_util, unsigned long sum_util,
+		 unsigned long *energy),
 	TP_ARGS(pd, max_util, sum_util, energy));
 
 DECLARE_RESTRICTED_HOOK(android_rvh_sched_balance_rt,
@@ -267,6 +267,13 @@ DECLARE_HOOK(android_vh_do_wake_up_sync,
 DECLARE_HOOK(android_vh_set_wake_flags,
 	TP_PROTO(int *wake_flags, unsigned int *mode),
 	TP_ARGS(wake_flags, mode));
+
+enum uclamp_id;
+struct uclamp_se;
+DECLARE_RESTRICTED_HOOK(android_rvh_uclamp_eff_value,
+	TP_PROTO(struct task_struct *p, enum uclamp_id clamp_id,
+		 struct uclamp_se *uclamp_default, unsigned long *ret),
+	TP_ARGS(p, clamp_id, uclamp_default, ret), 1);
 
 /* macro versions of hooks are no longer required */
 
