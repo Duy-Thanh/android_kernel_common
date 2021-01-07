@@ -1710,6 +1710,72 @@ void try_offline_node(int nid)
 }
 EXPORT_SYMBOL(try_offline_node);
 
+int add_memory_subsection(int nid, u64 start, u64 size)
+{
+	unsigned int nid;
+
+	mem_hotplug_begin();
+
+	if (!IS_ALIGNED(start, SUBSECTION_SIZE) ||
+	    !IS_ALIGNED(size, SUBSECTION_SIZE)) {
+		pr_err("%s: start 0x%lx size 0x%lx not aligned to subsection size\n",
+			   __func__, start, size);
+		return -EINVAL;
+	}
+
+	nid = memory_add_physaddr_to_nid(base);
+	memblock_add_node(base, size, nid);
+	ret = arch_add_memory(nid, base, size, &restrictions);
+	if (ret) {
+		pr_err("%s failed to add subsection start 0x%lx size 0x%lx\n"
+			   __func__, start, size);
+		goto err_add_mem;
+	}
+
+	mem_hotplug_done();
+	return 0;
+
+err_add_mem:
+	memblock_remove(start, size);
+	mem_hotplug_done();
+	return ret;
+}
+EXPORT_SYMBOL_GPL(remove_memory_subsection);
+
+int remove_memory_subsection(int nid, u64 start, u64 size)
+{
+	int ret;
+
+	mem_hotplug_begin();
+
+	if (!IS_ALIGNED(start, SUBSECTION_SIZE) ||
+	    !IS_ALIGNED(size, SUBSECTION_SIZE)) {
+		pr_err("%s: start 0x%lx size 0x%lx not aligned to subsection size\n",
+			   __func__, start, size);
+		return -EINVAL;
+	}
+
+	ret = test_pages_isolated(start_pfn, end_pfn, MEMORY_OFFLINE) {
+		pr_err("%s: [%lx, %lx) PFNs are not isolated\n",
+			   __func__, start, end);
+		return -EINVAL;
+	}
+
+	arch_remove_memory(nid, start, size, NULL);
+
+	if (IS_ENABLED(CONFIG_ARCH_KEEP_MEMBLOCK)) {
+		memblock_free(start, size);
+		memblock_remove(start, size);
+	}
+
+	release_mem_region_adjustable(start, size);
+
+	mem_hotplug_done();
+
+	return 0;
+}
+EXPORT_SYMBOL_GPL(remove_memory_subsection);
+
 static int __ref try_remove_memory(int nid, u64 start, u64 size)
 {
 	int rc = 0;
