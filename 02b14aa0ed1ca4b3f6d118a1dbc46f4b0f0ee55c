@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7428c03e_b21a288f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-07T22:18:09Z",
+      "side": 1,
+      "message": "Since this change is down to a single symbol, please explicitly mention it in the title and message",
+      "revId": "02b14aa0ed1ca4b3f6d118a1dbc46f4b0f0ee55c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
