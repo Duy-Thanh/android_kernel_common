@@ -190,6 +190,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29879d53_d1484b22",
+        "filename": "kernel/sched/idle.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-07T22:29:47Z",
+      "side": 1,
+      "message": "removed.",
+      "parentUuid": "f802a449_15433b94",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 42
+      },
+      "revId": "381ae0ec1071e7f4f0246864662d71e32c4b7f9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b58d6d68_fe1eb21c",
