@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06178473_53335d9a",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1720,
+      "author": {
+        "id": 1769563
+      },
+      "writtenOn": "2021-01-07T22:55:37Z",
+      "side": 1,
+      "message": "if size \u003d\u003d memblock_size, then we can call add_memory() itself.",
+      "revId": "06de2847087512a33b56460e6e10b06cc69bf85e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
