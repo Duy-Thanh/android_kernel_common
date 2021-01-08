@@ -16,6 +16,24 @@
       "message": "I didn\u0027t think we were adding symbol lists just yet, give us 6 months or so, right?",
       "revId": "4991e54135f5549af8fc71f6bd8f08ee8ce2f1a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d094e8ae_05afac83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-01-08T09:42:23Z",
+      "side": 1,
+      "message": "Actually, we do accept symbol lists and also enabled symbol trimming (currently disabled due to a bug investigation). Yet, we do not define an ABI representation. This indeed can wait a bit.",
+      "parentUuid": "062fdd97_3acea312",
+      "revId": "4991e54135f5549af8fc71f6bd8f08ee8ce2f1a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
