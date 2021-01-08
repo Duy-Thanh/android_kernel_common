@@ -35,6 +35,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "470cd1df_86a9a625",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-08T02:17:30Z",
+      "side": 1,
+      "message": "Hi Todd, \n\nYou suggestion is working fine. I could see below option working fine for both compile time and functionally. \n\nHere is the code used for testing.\n--- a/include/linux/mmiorw.h\n+++ b/include/linux/mmiorw.h\n@@ -9,7 +9,7 @@\n #include \u003clinux/atomic.h\u003e\n #include \u003clinux/tracepoint-defs.h\u003e\n\n-#if IS_ENABLED(CONFIG_TRACE_MMIO_ACCESS)\n+#if IS_ENABLED(CONFIG_TRACE_MMIO_ACCESS) \u0026\u0026 !(defined(__KVM_NVHE_HYPERVISOR__))\n\n",
+      "revId": "3c8d8f80d6a7e9a6b1e6041e3694c4119609e612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "698e0344_902a86b5",
