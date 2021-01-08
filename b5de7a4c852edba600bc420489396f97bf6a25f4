@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9fbff5a_a9c73038",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-08T20:46:39Z",
+      "side": 1,
+      "message": "Yes. Finally we will follow the Marc Suggestion for android12-5.10 and android-mainline branches. \n\nWe will not close this buganizer till this feature gets landed into both branches in amicable manner.",
+      "parentUuid": "d191e7c9_84ef81a7",
+      "revId": "b5de7a4c852edba600bc420489396f97bf6a25f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36bab459_94f7461c",
@@ -52,6 +70,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63ca6d96_48b2080b",
+        "filename": "arch/arm64/include/asm/io.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-08T20:46:39Z",
+      "side": 1,
+      "message": "Initially is started with log_ only but some other reasons changes the file name. Sure. I can change and upload next patchset.",
+      "parentUuid": "36bab459_94f7461c",
+      "revId": "b5de7a4c852edba600bc420489396f97bf6a25f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fdb1934f_4ae1bbf7",
@@ -65,6 +101,24 @@
       "writtenOn": "2021-01-08T17:55:14Z",
       "side": 1,
       "message": "This file is just logging functions, shouldn\u0027t it be named \"log_mmiorw.h\" instead?",
+      "revId": "b5de7a4c852edba600bc420489396f97bf6a25f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "667c7e14_ca0099b0",
+        "filename": "include/linux/mmiorw.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-08T20:46:39Z",
+      "side": 1,
+      "message": "Done. will include in the next patchset",
+      "parentUuid": "fdb1934f_4ae1bbf7",
       "revId": "b5de7a4c852edba600bc420489396f97bf6a25f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
