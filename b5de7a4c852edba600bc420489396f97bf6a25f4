@@ -16,6 +16,57 @@
       "message": "Hi Todd,\n\nThese change should merge quickly to meet next program milestones. Please do the needful for getting these changes merged as part of 5.10.5 LTS tag.  Thanks Todd, Greg KH and Marc for reviews and helping to improve the patches. \n\n-Thanks, Prasad",
       "revId": "b5de7a4c852edba600bc420489396f97bf6a25f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d191e7c9_84ef81a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-08T17:55:14Z",
+      "side": 1,
+      "message": "Prasad, please rename as suggested. Then we can take this patch to meet your deadline, but let\u0027s continue working on it to use Marc\u0027s suggested change instead of mine. We\u0027ll keep the bug open.",
+      "revId": "b5de7a4c852edba600bc420489396f97bf6a25f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36bab459_94f7461c",
+        "filename": "arch/arm64/include/asm/io.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-08T17:55:14Z",
+      "side": 1,
+      "message": "This inclusion is for logging -- not for access. Shouldn\u0027t it be named log_mmiorw instead?",
+      "revId": "b5de7a4c852edba600bc420489396f97bf6a25f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdb1934f_4ae1bbf7",
+        "filename": "include/linux/mmiorw.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-08T17:55:14Z",
+      "side": 1,
+      "message": "This file is just logging functions, shouldn\u0027t it be named \"log_mmiorw.h\" instead?",
+      "revId": "b5de7a4c852edba600bc420489396f97bf6a25f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
