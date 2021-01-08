@@ -226,6 +226,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f9ce1c87_76e8feb2",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-08T15:38:20Z",
+      "side": 1,
+      "message": "irq_stack_ptr will not work in this case either, as it is not a \"normal\" pointer and you will get a different result depending on what cpu you were on when you saved this.\n\nSo while it seems that this method works, it still does not, please make a static list of pointers, it is better to do this at build time to catch problems like this.",
+      "parentUuid": "94d2ae5a_24a46348",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 34
+      },
+      "revId": "21b1f61d8989cf94b8f7a4a45cfa14cfbbddd76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "daae4fd5_15a6e502",
         "filename": "include/linux/android_debug_symbols.h",
         "patchSetId": 3
