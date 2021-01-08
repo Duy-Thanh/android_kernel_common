@@ -381,6 +381,7 @@ struct dma_buf_ops {
  * @sysfs_entry: for exposing information about this buffer in sysfs.
  * The attachment_uid member of @sysfs_entry is protected by dma_resv lock
  * and is incremented on each attach.
+ * @mmap_count: number of times buffer has been mmapped.
  *
  * This represents a shared buffer, created by calling dma_buf_export(). The
  * userspace representation is a normal file descriptor, which can be created by
@@ -424,6 +425,7 @@ struct dma_buf {
 		unsigned int attachment_uid;
 		struct kset *attach_stats_kset;
 	} *sysfs_entry;
+	int mmap_count;
 #endif
 };
 

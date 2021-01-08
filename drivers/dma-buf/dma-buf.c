@@ -127,6 +127,27 @@ static struct file_system_type dma_buf_fs_type = {
 	.kill_sb = kill_anon_super,
 };
 
+#ifdef CONFIG_DMABUF_SYSFS_STATS
+static void dma_buf_vma_open(struct vm_area_struct *vma)
+{
+	struct dma_buf *dmabuf = vma->vm_file->private_data;
+	dmabuf->mmap_count++;
+}
+
+static void dma_buf_vma_close(struct vm_area_struct *vma)
+{
+	struct dma_buf *dmabuf = vma->vm_file->private_data;
+	if (dmabuf->mmap_count)
+		dmabuf->mmap_count--;
+}
+
+
+static const struct vm_operations_struct dma_buf_vm_ops = {
+	.open = dma_buf_vma_open,
+	.close = dma_buf_vma_close,
+};
+#endif
+
 static int dma_buf_mmap_internal(struct file *file, struct vm_area_struct *vma)
 {
 	struct dma_buf *dmabuf;
@@ -144,6 +165,11 @@ static int dma_buf_mmap_internal(struct file *file, struct vm_area_struct *vma)
 	if (vma->vm_pgoff + vma_pages(vma) >
 	    dmabuf->size >> PAGE_SHIFT)
 		return -EINVAL;
+
+#ifdef CONFIG_DMABUF_SYSFS_STATS
+	vma->vm_ops = &dma_buf_vm_ops;
+	dma_buf_vma_open(vma);
+#endif
 
 	return dmabuf->ops->mmap(dmabuf, vma);
 }
