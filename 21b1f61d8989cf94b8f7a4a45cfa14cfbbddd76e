@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e5f0496_0876ae51",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-08T17:35:38Z",
+      "side": 1,
+      "message": "The failures are that the symbols being stuffed into the table do not exist. So this probably needs to be refactored for x86.",
+      "parentUuid": "4503b45f_5e352277",
+      "revId": "21b1f61d8989cf94b8f7a4a45cfa14cfbbddd76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c69b59e_0f1e64eb",
         "filename": "drivers/android/debug_symbols.c",
         "patchSetId": 3
