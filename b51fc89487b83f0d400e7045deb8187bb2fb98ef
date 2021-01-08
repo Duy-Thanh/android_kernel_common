@@ -34,6 +34,23 @@
       "parentUuid": "91e293bc_0a1fe46b",
       "revId": "b51fc89487b83f0d400e7045deb8187bb2fb98ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "944b5aa8_319d01c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2021-01-08T18:32:53Z",
+      "side": 1,
+      "message": "Need to address the issue Todd posted on the android-mainline branch",
+      "revId": "b51fc89487b83f0d400e7045deb8187bb2fb98ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
