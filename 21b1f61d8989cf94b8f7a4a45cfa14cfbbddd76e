@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81025e6a_904a5340",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-08T01:58:28Z",
+      "side": 1,
+      "message": "Build fails for x86 and arm32 (allmodconfig). This line should probably be:\n\n  depends on KALLSYMS \u0026\u0026 ARM64",
+      "revId": "21b1f61d8989cf94b8f7a4a45cfa14cfbbddd76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
