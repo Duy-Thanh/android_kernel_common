@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9f351cd_f94c19e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-08T19:07:24Z",
+      "side": 1,
+      "message": "One more comment, otherwise LGTM.",
+      "revId": "b66b885ac063c5bc9191395c84f96643b17b1e2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d55f39fb_9d27a42f",
+        "filename": "arch/arm64/mm/mmu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1529,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-08T19:07:24Z",
+      "side": 1,
+      "message": "You might want to return an error when check_range_driver_managed() fails.",
+      "range": {
+        "startLine": 1529,
+        "startChar": 0,
+        "endLine": 1529,
+        "endChar": 4
+      },
+      "revId": "b66b885ac063c5bc9191395c84f96643b17b1e2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ce7bddd_6172433c",
+        "filename": "arch/arm64/mm/mmu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1541,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-08T19:07:24Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 1541,
+        "startChar": 0,
+        "endLine": 1541,
+        "endChar": 4
+      },
+      "revId": "b66b885ac063c5bc9191395c84f96643b17b1e2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
