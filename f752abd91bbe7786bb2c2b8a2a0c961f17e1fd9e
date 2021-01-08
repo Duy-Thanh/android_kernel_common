@@ -34,6 +34,24 @@
       "parentUuid": "e0bb7990_cf8363b8",
       "revId": "f752abd91bbe7786bb2c2b8a2a0c961f17e1fd9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab22eb4f_74eb7155",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1790165
+      },
+      "writtenOn": "2021-01-08T07:51:47Z",
+      "side": 1,
+      "message": "This patchset is actually v10 + fixes from v11 and v12. The reason is that we were using v10 from 4.9 kernel onwards and picked only fixes on top for later kernel versions. But I can move to v12 completely if we agree on having these patches on Android.",
+      "parentUuid": "9e790617_485d3334",
+      "revId": "f752abd91bbe7786bb2c2b8a2a0c961f17e1fd9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
