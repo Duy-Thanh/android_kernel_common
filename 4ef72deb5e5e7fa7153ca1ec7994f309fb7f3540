@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1c6dab1_c56e6e7b",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-01-08T22:45:01Z",
+      "side": 1,
+      "message": "why did you remove _RO support?",
+      "range": {
+        "startLine": 1143,
+        "startChar": 38,
+        "endLine": 1143,
+        "endChar": 49
+      },
+      "revId": "4ef72deb5e5e7fa7153ca1ec7994f309fb7f3540",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
