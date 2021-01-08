@@ -46,6 +46,30 @@
       },
       "revId": "4005507f2ccc99198284e2c696de83841630564f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c98ea639_bbdfbe7d",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-08T00:47:30Z",
+      "side": 1,
+      "message": "Yeah, since it\u0027s an out-of-tree code let\u0027s be extra safe.",
+      "parentUuid": "6762cc93_6d5e8d43",
+      "range": {
+        "startLine": 386,
+        "startChar": 1,
+        "endLine": 386,
+        "endChar": 47
+      },
+      "revId": "4005507f2ccc99198284e2c696de83841630564f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
