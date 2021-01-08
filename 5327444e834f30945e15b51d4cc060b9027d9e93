@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e59938f_1dbf9c4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1244013
+      },
+      "writtenOn": "2021-01-08T01:22:43Z",
+      "side": 1,
+      "message": "Updated abi_gki_aarch64.xml by using \"BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build_abi.sh --update --print-report\".\nBut, somehow we can see huge diff. I confirmed it can be observed without my patch. I\u0027m wondering why.",
+      "revId": "5327444e834f30945e15b51d4cc060b9027d9e93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
