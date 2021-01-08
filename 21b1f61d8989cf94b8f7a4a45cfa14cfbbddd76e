@@ -250,6 +250,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66e73455_d0d2d111",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-08T16:35:35Z",
+      "side": 1,
+      "message": "Sure. let me test irq_stck_ptr value in the T32 and update you. \n\nWhat is the alternative for the PER CPU variables?  \nCan we export per cpu variable ? \n\nThis driver scope is very limited to few types of variables and not sure whether it would serve all the use cases of all vendors or not.",
+      "parentUuid": "f9ce1c87_76e8feb2",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 34
+      },
+      "revId": "21b1f61d8989cf94b8f7a4a45cfa14cfbbddd76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "daae4fd5_15a6e502",
         "filename": "include/linux/android_debug_symbols.h",
         "patchSetId": 3
