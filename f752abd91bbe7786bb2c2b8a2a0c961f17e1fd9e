@@ -70,6 +70,24 @@
       "parentUuid": "ab22eb4f_74eb7155",
       "revId": "f752abd91bbe7786bb2c2b8a2a0c961f17e1fd9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee8717d2_b813e4e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1790165
+      },
+      "writtenOn": "2021-01-08T08:18:45Z",
+      "side": 1,
+      "message": "Ya Will mentioned in buganizer about the discussion here https://lore.kernel.org/r/20210105153727.GK3040@hirez.programming.kicks-ass.net . Waiting for Will\u0027s reply on the details and also if the concern is only with userfaultd (userfaultd faults does not take speculative fault path)",
+      "parentUuid": "1c9b3789_a0e7fc0b",
+      "revId": "f752abd91bbe7786bb2c2b8a2a0c961f17e1fd9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
