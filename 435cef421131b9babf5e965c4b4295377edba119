@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e138e2f4_740047a7",
+        "filename": "arch/arm64/mm/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1547,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-08T21:59:40Z",
+      "side": 1,
+      "message": "return 0; at the end of the function",
+      "range": {
+        "startLine": 1547,
+        "startChar": 0,
+        "endLine": 1547,
+        "endChar": 1
+      },
+      "revId": "435cef421131b9babf5e965c4b4295377edba119",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb571122_9a30a45a",
+        "filename": "arch/arm64/mm/mmu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1557,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-08T21:59:40Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 1557,
+        "startChar": 0,
+        "endLine": 1557,
+        "endChar": 1
+      },
+      "revId": "435cef421131b9babf5e965c4b4295377edba119",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
