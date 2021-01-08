@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27f9be1b_48b2bc14",
+        "filename": "arch/arm64/mm/mmu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1529,
+      "author": {
+        "id": 1769563
+      },
+      "writtenOn": "2021-01-08T21:02:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d55f39fb_9d27a42f",
+      "range": {
+        "startLine": 1529,
+        "startChar": 0,
+        "endLine": 1529,
+        "endChar": 4
+      },
+      "revId": "b66b885ac063c5bc9191395c84f96643b17b1e2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ce7bddd_6172433c",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-01-08T19:07:24Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 1541,
+        "startChar": 0,
+        "endLine": 1541,
+        "endChar": 4
+      },
+      "revId": "b66b885ac063c5bc9191395c84f96643b17b1e2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b7de12c_93527870",
+        "filename": "arch/arm64/mm/mmu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1541,
+      "author": {
+        "id": 1769563
+      },
+      "writtenOn": "2021-01-08T21:02:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ce7bddd_6172433c",
       "range": {
         "startLine": 1541,
         "startChar": 0,
