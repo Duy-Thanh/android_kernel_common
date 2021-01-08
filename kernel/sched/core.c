@@ -63,6 +63,7 @@ const_debug unsigned int sysctl_sched_features =
 #include "features.h"
 	0;
 #undef SCHED_FEAT
+EXPORT_SYMBOL_GPL(sysctl_sched_features);
 #endif
 
 /*
