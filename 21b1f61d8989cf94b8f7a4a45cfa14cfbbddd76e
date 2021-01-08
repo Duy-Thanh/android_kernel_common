@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2f44e9e_2ee05bb5",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-08T15:15:56Z",
+      "side": 1,
+      "message": "Sure. Will update in the new patch set.",
+      "parentUuid": "4c69b59e_0f1e64eb",
+      "range": {
+        "startLine": 4,
+        "startChar": 17,
+        "endLine": 4,
+        "endChar": 21
+      },
+      "revId": "21b1f61d8989cf94b8f7a4a45cfa14cfbbddd76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea1e5aee_e351341d",
@@ -72,6 +96,30 @@
       "writtenOn": "2021-01-08T09:20:50Z",
       "side": 1,
       "message": "where is this defined?",
+      "range": {
+        "startLine": 23,
+        "startChar": 36,
+        "endLine": 23,
+        "endChar": 43
+      },
+      "revId": "21b1f61d8989cf94b8f7a4a45cfa14cfbbddd76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfd38c1f_4f46e27e",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-08T15:15:56Z",
+      "side": 1,
+      "message": "\u003clinux/android_debug_symbols.h\u003e\nDefined in this file.",
+      "parentUuid": "ea1e5aee_e351341d",
       "range": {
         "startLine": 23,
         "startChar": 36,
@@ -118,6 +166,30 @@
       "writtenOn": "2021-01-08T09:20:50Z",
       "side": 1,
       "message": "why is this not just a static, read-only, array defined at build time?  Why does this have to be initialized at runtime?  I thought this was that way to start with, this feels like a waste of ram.",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 34
+      },
+      "revId": "21b1f61d8989cf94b8f7a4a45cfa14cfbbddd76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94d2ae5a_24a46348",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-08T15:15:56Z",
+      "side": 1,
+      "message": "Hi Greg Kh, \n\nRead Only Array didn\u0027t working irq_stack_ptr use case. I observed compile time errors with that approach. \n\nDo you see any issues with this approach? Would it cause any functional issues ? \n\n1) We are trying to avoid kallsyms_lookup_name export as per Google guidelines but I am not 100% sure how Google would monitor the ABI for these symbols. \n2) Let me know if current design approach has any limitations. I can work with you to fix those issues. \n\n-Thanks, Prasad",
+      "parentUuid": "dd7eb2e7_c4be90f5",
       "range": {
         "startLine": 56,
         "startChar": 0,
