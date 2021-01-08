@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4645f40_7e0d90d8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-08T01:52:19Z",
+      "side": 1,
+      "message": "Mention why this needs to be a restricted hook, not a normal one",
+      "revId": "c27c47f06e3377a8f3b5bc363b49222b7341bbce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8ac394c1_10b302f2",
@@ -14,6 +31,40 @@
       "writtenOn": "2021-01-07T23:04:35Z",
       "side": 1,
       "message": "Updating cc list...",
+      "revId": "c27c47f06e3377a8f3b5bc363b49222b7341bbce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de510bca_b726110e",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-08T01:52:19Z",
+      "side": 1,
+      "message": "why is this defined twice?\n\nargument list doesn\u0027t mach declaration above",
+      "revId": "c27c47f06e3377a8f3b5bc363b49222b7341bbce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a0bb6a2_f1b3a27d",
+        "filename": "kernel/cgroup/cpuset.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3241,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-08T01:52:19Z",
+      "side": 1,
+      "message": "Why is this export needed. Nothing about it is mentioned in the commit message",
       "revId": "c27c47f06e3377a8f3b5bc363b49222b7341bbce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
