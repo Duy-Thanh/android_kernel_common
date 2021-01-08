@@ -153,6 +153,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8b57d96_90ed689d",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-08T15:16:48Z",
+      "side": 1,
+      "message": "Sure. I will fix this in next release.",
+      "parentUuid": "004d720e_adc84c13",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 70
+      },
+      "revId": "21b1f61d8989cf94b8f7a4a45cfa14cfbbddd76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd7eb2e7_c4be90f5",
