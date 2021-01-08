@@ -90,6 +90,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_sched_nohz_balancer_kick,
 	TP_PROTO(struct rq *rq, unsigned int *flags, int *done),
 	TP_ARGS(rq, flags, done), 1);
 
+DECLARE_RESTRICTED_HOOK(android_rvh_sched_rebalance_domains,
+        TP_PROTO(struct rq *rq, int *continue_balancing),
+        TP_ARGS(rq, continue_balancing), 1);
+
 DECLARE_RESTRICTED_HOOK(android_rvh_find_busiest_queue,
 	TP_PROTO(int dst_cpu, struct sched_group *group,
 		 struct cpumask *env_cpus, struct rq **busiest,
@@ -237,6 +241,7 @@ DECLARE_RESTRICTED_HOOK(android_rvh_sched_exec,
 #define trace_android_vh_jiffies_update(unused)
 #define trace_android_rvh_sched_newidle_balance(this_rq, rf, pulled_task, done)
 #define trace_android_rvh_sched_nohz_balancer_kick(rq, flags, done)
+#define trace_android_rvh_sched_rebalance_domains(rq, continue_balancing)
 #define trace_android_rvh_find_busiest_queue(dst_cpu, group, env_cpus, busiest, done)
 #define trace_android_rvh_migrate_queued_task(rq, rf, p, new_cpu, detached)
 #define trace_android_rvh_resume_cpus(cpus, err)
