@@ -34,6 +34,24 @@
       "parentUuid": "5fc71621_0c61d2ac",
       "revId": "d7828afcc8a281069313b441da0683922dc17503",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "991ee017_f69dc5e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-01-08T17:53:04Z",
+      "side": 1,
+      "message": "aosp/1543700 gives much more information about what this is for, so I\u0027m happy with this while discussions take place upstream about re-introducing the map_sg hook there.",
+      "parentUuid": "03af757a_4a4566ba",
+      "revId": "d7828afcc8a281069313b441da0683922dc17503",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
