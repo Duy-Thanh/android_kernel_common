@@ -22,6 +22,30 @@
       },
       "revId": "a6d001f5c9047f065d2932de4f7994b9f8d1a32d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3979b0b_6a1c2ffa",
+        "filename": "abi_gki_aarch64_sony",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-01-08T13:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2aeb7d5_c6de439b",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "a6d001f5c9047f065d2932de4f7994b9f8d1a32d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
