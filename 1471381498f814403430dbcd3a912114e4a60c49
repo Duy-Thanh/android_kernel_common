@@ -200,6 +200,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa49639c_c9b28797",
+        "filename": "arch/arm64/include/asm/io.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-08T22:31:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7dad15b2_7cfbe227",
+      "range": {
+        "startLine": 62,
+        "startChar": 19,
+        "endLine": 62,
+        "endChar": 22
+      },
+      "revId": "1471381498f814403430dbcd3a912114e4a60c49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25c48306_46bc42be",
@@ -213,6 +237,30 @@
       "writtenOn": "2020-12-16T09:26:48Z",
       "side": 1,
       "message": "depends on?",
+      "range": {
+        "startLine": 86,
+        "startChar": 1,
+        "endLine": 86,
+        "endChar": 7
+      },
+      "revId": "1471381498f814403430dbcd3a912114e4a60c49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be34f4a7_efe95266",
+        "filename": "kernel/trace/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-08T22:31:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25c48306_46bc42be",
       "range": {
         "startLine": 86,
         "startChar": 1,
@@ -307,6 +355,30 @@
       "side": 1,
       "message": "Hi Greg KH,\n\ntracevents can be used by userspace. once traceevents are created, tracepoint is available for vendor modules registration.\n\nQualcomm have a module and logs them in different format.",
       "parentUuid": "32bc104a_1b29a2cf",
+      "range": {
+        "startLine": 89,
+        "startChar": 52,
+        "endLine": 90,
+        "endChar": 42
+      },
+      "revId": "1471381498f814403430dbcd3a912114e4a60c49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf480a0f_a46446c4",
+        "filename": "kernel/trace/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-08T22:31:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c3808f2_db9e0d7f",
       "range": {
         "startLine": 89,
         "startChar": 52,

@@ -178,6 +178,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d64df65_796734e7",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-08T22:31:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4abdd307_e8cba704",
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64ce8662_9e047526",
@@ -215,6 +233,30 @@
       "side": 1,
       "message": "Do we really need this indirection? Can\u0027t this just be:\n  trace_rwio_write(val, width, addr);\n\u003cPrasad\u003eThis is upstream recommendation to call to logging all the time. IF trace it is not enabled, that would jump to __log_writeb_io. \n\nin fact, do we really even need the log_writeb_io() macro?\n\u003cPrasad\u003e I will remove the writeb, writew, writel with width parameter.  \n(val, width, addr);",
       "parentUuid": "64ce8662_9e047526",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 0
+      },
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2079fa8f_7559d83f",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-08T22:31:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40954825_67545acd",
       "range": {
         "startLine": 35,
         "startChar": 0,
@@ -296,6 +338,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ab396f0_32fc1b35",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-08T22:31:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fac2df4_c9bc485e",
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "301e77d9_28c5384e",
@@ -309,6 +369,30 @@
       "writtenOn": "2020-12-18T04:07:00Z",
       "side": 1,
       "message": "it\u0027s a moot point since you are changing this to pass width as an argument, but this won\u0027t compile due to multiple definitions of \u0027log_post_read_io()\u0027. It was intended to be log_post_readb_io(), log_post_readw_io(), ...",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 0
+      },
+      "revId": "090bcace2375a3dca849195c1de5c01376c89ff7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a2e059f_ae063ed3",
+        "filename": "include/linux/iorw.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-08T22:31:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "301e77d9_28c5384e",
       "range": {
         "startLine": 98,
         "startChar": 0,
