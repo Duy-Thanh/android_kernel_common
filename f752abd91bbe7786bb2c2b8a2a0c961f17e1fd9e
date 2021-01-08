@@ -52,6 +52,24 @@
       "parentUuid": "9e790617_485d3334",
       "revId": "f752abd91bbe7786bb2c2b8a2a0c961f17e1fd9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c9b3789_a0e7fc0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2021-01-08T08:12:26Z",
+      "side": 1,
+      "message": "There are also some known TLB invalidation issues with these patches, specially with deferred TLB invalidation (the speculative PF code assumes that the PT state reflects the state of the TLBs, whilst the non-speculative path defers TLB invalidation as far as possible to batch them).\n\n+Will for the gory details.",
+      "parentUuid": "ab22eb4f_74eb7155",
+      "revId": "f752abd91bbe7786bb2c2b8a2a0c961f17e1fd9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
