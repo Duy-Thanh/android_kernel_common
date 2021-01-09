@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12a46c71_506c2f43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-09T00:22:28Z",
+      "side": 1,
+      "message": "Hi Greg KH and Todd, \n\nYour observations are right. It is giving corresponding cpu variable address. \nADS_ADD_PER_CPU_ENTRY(ADS_IRQ_STACK_PTR, irq_stack_ptr);\n\nShall I export this variable for vendor Module usage? \n\n",
+      "revId": "21b1f61d8989cf94b8f7a4a45cfa14cfbbddd76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81025e6a_904a5340",
