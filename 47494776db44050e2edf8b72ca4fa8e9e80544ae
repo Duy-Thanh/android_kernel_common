@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9ce3e6b_d59a79de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-01-09T02:34:18Z",
+      "side": 1,
+      "message": "Validated on HiKey960 using a follow-on patch to enable the modules and update the hikey960 symbol list",
+      "revId": "47494776db44050e2edf8b72ca4fa8e9e80544ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
