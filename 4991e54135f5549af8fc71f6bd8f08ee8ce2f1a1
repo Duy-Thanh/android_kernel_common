@@ -34,6 +34,24 @@
       "parentUuid": "062fdd97_3acea312",
       "revId": "4991e54135f5549af8fc71f6bd8f08ee8ce2f1a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f3fa515_e2194f60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1579699
+      },
+      "writtenOn": "2021-01-09T02:37:45Z",
+      "side": 1,
+      "message": "If this Gerrit won\u0027t be merged soon, we would appreciate review of the symbol list that would be added. If there are symbols which shouldn\u0027t be added, we can know right away and make the changes in our drivers.",
+      "parentUuid": "d094e8ae_05afac83",
+      "revId": "4991e54135f5549af8fc71f6bd8f08ee8ce2f1a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
