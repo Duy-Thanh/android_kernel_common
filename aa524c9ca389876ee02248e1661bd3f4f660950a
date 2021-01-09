@@ -132,6 +132,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a8063a8_c26976eb",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1171,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-09T01:01:14Z",
+      "side": 1,
+      "message": "Ah, you are right. How about this then:\n\n\tret \u003d arch_add_memory(nid, start, size, \u0026params);\n\tif (ret) {\n\t\tmemblock_remove(start, size);\n\t\tpr_err(\"%s failed to add subsection start 0x%lx size 0x%lx\\n\",\n\t\t\t   __func__, start, size);\n\t}\n\tmem_hotplug_done();\n\treturn ret;",
+      "parentUuid": "a492be6c_41b40d88",
+      "range": {
+        "startLine": 1158,
+        "startChar": 0,
+        "endLine": 1171,
+        "endChar": 12
+      },
+      "revId": "aa524c9ca389876ee02248e1661bd3f4f660950a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ced16fb6_28771395",
         "filename": "mm/memory_hotplug.c",
         "patchSetId": 4
