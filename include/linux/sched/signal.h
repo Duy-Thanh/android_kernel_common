@@ -227,8 +227,9 @@ struct signal_struct {
 					 * credential calculations
 					 * (notably. ptrace)
 					 * Deprecated do not use in new code.
-					 * Use exec_update_mutex instead.
+					 * Use exec_update_lock instead.
 					 */
+<<<<<<< HEAD   (474947 ANDROID: defconfig: Enable DMA-BUF system heap as a module)
 	struct mutex exec_update_mutex;	/* Held while task_struct is being
 					 * updated during exec, and may have
 					 * inconsistent permissions.
@@ -237,6 +238,13 @@ struct signal_struct {
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
+=======
+	struct rw_semaphore exec_update_lock;	/* Held while task_struct is
+						 * being updated during exec,
+						 * and may have inconsistent
+						 * permissions.
+						 */
+>>>>>>> BRANCH (f3a4c8 Linux 5.4.88)
 } __randomize_layout;
 
 /*
