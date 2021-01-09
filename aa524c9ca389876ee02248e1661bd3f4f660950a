@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a236b032_458b8cf9",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1157,
+      "author": {
+        "id": 1769563
+      },
+      "writtenOn": "2021-01-09T00:47:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08b8f8fe_ad385d86",
+      "range": {
+        "startLine": 1157,
+        "startChar": 1,
+        "endLine": 1157,
+        "endChar": 37
+      },
+      "revId": "aa524c9ca389876ee02248e1661bd3f4f660950a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d615784_7b174b55",
@@ -84,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a492be6c_41b40d88",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1171,
+      "author": {
+        "id": 1769563
+      },
+      "writtenOn": "2021-01-09T00:47:40Z",
+      "side": 1,
+      "message": "don\u0027t we need mem_hotplug_lock for memblock_remove()? On failure path, we\u0027d be doing memblock_remove without the lock",
+      "parentUuid": "5d615784_7b174b55",
+      "range": {
+        "startLine": 1158,
+        "startChar": 0,
+        "endLine": 1171,
+        "endChar": 12
+      },
+      "revId": "aa524c9ca389876ee02248e1661bd3f4f660950a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ced16fb6_28771395",
         "filename": "mm/memory_hotplug.c",
         "patchSetId": 4
@@ -95,6 +143,30 @@
       "writtenOn": "2021-01-09T00:30:32Z",
       "side": 1,
       "message": "I don\u0027t think you need memblock_free() here. memblock_add_node() adds range to memblock.memory and to remove that range you need only memblock_remove(). memblock_free() would be trying to remove the range from memblock.reserved.",
+      "range": {
+        "startLine": 1858,
+        "startChar": 2,
+        "endLine": 1858,
+        "endChar": 29
+      },
+      "revId": "aa524c9ca389876ee02248e1661bd3f4f660950a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e5c0f7f_f5d25566",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1858,
+      "author": {
+        "id": 1769563
+      },
+      "writtenOn": "2021-01-09T00:47:40Z",
+      "side": 1,
+      "message": "I see.. yes, memblock_free isn\u0027t needed here",
+      "parentUuid": "ced16fb6_28771395",
       "range": {
         "startLine": 1858,
         "startChar": 2,
