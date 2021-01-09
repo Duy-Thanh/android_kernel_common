@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a88b62c3_9779963c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1769563
+      },
+      "writtenOn": "2021-01-09T00:42:03Z",
+      "side": 1,
+      "message": "this is because we are not operating on any memblock device nodes. Online/Offline operation on nodes elsewhere would anyway take the mem_hotplug_* locks.",
+      "parentUuid": "978a6114_aa365698",
+      "revId": "aa524c9ca389876ee02248e1661bd3f4f660950a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08b8f8fe_ad385d86",
