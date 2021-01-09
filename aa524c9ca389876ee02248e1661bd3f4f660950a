@@ -156,6 +156,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23c3da7a_207d281e",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1171,
+      "author": {
+        "id": 1769563
+      },
+      "writtenOn": "2021-01-09T02:30:36Z",
+      "side": 1,
+      "message": "yes this is more cleaner - can avoid multiple return statements too. will change..",
+      "parentUuid": "3a8063a8_c26976eb",
+      "range": {
+        "startLine": 1158,
+        "startChar": 0,
+        "endLine": 1171,
+        "endChar": 12
+      },
+      "revId": "aa524c9ca389876ee02248e1661bd3f4f660950a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ced16fb6_28771395",
         "filename": "mm/memory_hotplug.c",
         "patchSetId": 4
