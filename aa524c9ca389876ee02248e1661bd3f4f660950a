@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "978a6114_aa365698",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-09T00:30:32Z",
+      "side": 1,
+      "message": "I guess you are skipping lock_device_hotplug/unlock_device_hotplug because you do not perform online/offline operations here?",
+      "revId": "aa524c9ca389876ee02248e1661bd3f4f660950a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08b8f8fe_ad385d86",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1157,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-09T00:30:32Z",
+      "side": 1,
+      "message": "if (IS_ENABLED(CONFIG_ARCH_KEEP_MEMBLOCK))\n    memblock_add_node(start, size, nid);",
+      "range": {
+        "startLine": 1157,
+        "startChar": 1,
+        "endLine": 1157,
+        "endChar": 37
+      },
+      "revId": "aa524c9ca389876ee02248e1661bd3f4f660950a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d615784_7b174b55",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1171,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-09T00:30:32Z",
+      "side": 1,
+      "message": "You can simplify this block:\n\n\tret \u003d arch_add_memory(nid, start, size, \u0026params);\n\tmem_hotplug_done();\n\n\tif (ret) {\n\t\tmemblock_remove(start, size);\n\t\tpr_err(\"%s failed to add subsection start 0x%lx size 0x%lx\\n\",\n\t\t\t   __func__, start, size);\n\t}\n\n\treturn ret;",
+      "range": {
+        "startLine": 1158,
+        "startChar": 0,
+        "endLine": 1171,
+        "endChar": 12
+      },
+      "revId": "aa524c9ca389876ee02248e1661bd3f4f660950a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ced16fb6_28771395",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1858,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-09T00:30:32Z",
+      "side": 1,
+      "message": "I don\u0027t think you need memblock_free() here. memblock_add_node() adds range to memblock.memory and to remove that range you need only memblock_remove(). memblock_free() would be trying to remove the range from memblock.reserved.",
+      "range": {
+        "startLine": 1858,
+        "startChar": 2,
+        "endLine": 1858,
+        "endChar": 29
+      },
+      "revId": "aa524c9ca389876ee02248e1661bd3f4f660950a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
