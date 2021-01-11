@@ -22,6 +22,30 @@
       },
       "revId": "06ecc482888ef68deb0880a705e64c079ca9f8c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a757f31_a643b5ac",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 1769563
+      },
+      "writtenOn": "2021-01-11T21:34:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97ede7cc_d802dae1",
+      "range": {
+        "startLine": 1163,
+        "startChar": 2,
+        "endLine": 1163,
+        "endChar": 31
+      },
+      "revId": "06ecc482888ef68deb0880a705e64c079ca9f8c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
