@@ -52,6 +52,24 @@
       "parentUuid": "76583a6d_b05de723",
       "revId": "905487506deacb5dfb327abad132860e1254fabb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11258a35_34c1a8c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-11T10:09:36Z",
+      "side": 1,
+      "message": "Ok, great, please provide this kind of information in the changelog text when you rebase it.  Thanks!",
+      "parentUuid": "40488acf_ee5d032c",
+      "revId": "905487506deacb5dfb327abad132860e1254fabb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
