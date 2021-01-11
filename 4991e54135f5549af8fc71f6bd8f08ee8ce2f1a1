@@ -88,6 +88,24 @@
       "parentUuid": "8d0a8cfd_8e7fd44a",
       "revId": "4991e54135f5549af8fc71f6bd8f08ee8ce2f1a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a0b945b_99af6c2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1579699
+      },
+      "writtenOn": "2021-01-11T16:56:39Z",
+      "side": 1,
+      "message": "I have provided the delta from android11-5.4\u0027s abi_gki_aarch64_qcom in buganizer. Let me know if there is alternate way you\u0027d prefer to see delta. Thanks!",
+      "parentUuid": "68381941_41cd690a",
+      "revId": "4991e54135f5549af8fc71f6bd8f08ee8ce2f1a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
