@@ -53,6 +53,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0871c3c_0dd67531",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-11T13:16:56Z",
+      "side": 1,
+      "message": "Sure. I will address in the next patch set. I will keep all these details in buganizer for  your reference.",
+      "parentUuid": "81b8e118_6dc356a2",
+      "revId": "21b1f61d8989cf94b8f7a4a45cfa14cfbbddd76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd269790_b2fa027f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-11T13:16:56Z",
+      "side": 1,
+      "message": "Hi Greg KH, \n\nQualcomm have a feature related to ram dumps , which need to dump IRQ stack of each CPU. For this driver to dump memory contents during the device reset need logical and physical address of irq_stack_ptr variable. \n\nWe can not simply drop this support and need solution. As per my knowledge exporting is one option and let me know how vendor driver can get this symbol address.",
+      "parentUuid": "27a99f3e_d7512cf0",
+      "revId": "21b1f61d8989cf94b8f7a4a45cfa14cfbbddd76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81025e6a_904a5340",
