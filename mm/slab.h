@@ -217,9 +217,16 @@ DECLARE_STATIC_KEY_TRUE(slub_debug_enabled);
 DECLARE_STATIC_KEY_FALSE(slub_debug_enabled);
 #endif
 extern void print_tracking(struct kmem_cache *s, void *object);
+extern unsigned long get_track_alloc(struct kmem_cache *s, void *object,
+	unsigned long *addrs, unsigned int *nr_entries);
 #else
 static inline void print_tracking(struct kmem_cache *s, void *object)
 {
+}
+static inline unsigned long get_track_alloc(struct kmem_cache *s, void *object,
+	unsigned long *addrs, unsigned int *nr_entries)
+{
+	return 0;
 }
 #endif
 

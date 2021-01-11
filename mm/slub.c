@@ -573,6 +573,35 @@ static struct track *get_track(struct kmem_cache *s, void *object,
 	return p + alloc;
 }
 
+unsigned long get_track_alloc(struct kmem_cache *s, void *object,
+	unsigned long *addrs, unsigned int *nr_entries)
+{
+	struct track *p;
+	int i;
+
+	if (!slub_debug)
+		return 0;
+
+	p = get_track(s, object, TRACK_ALLOC);
+	if (!p->addr)
+		return 0;
+
+#ifdef CONFIG_STACKTRACE
+	if (*nr_entries > TRACK_ADDRS_COUNT)
+		*nr_entries = TRACK_ADDRS_COUNT;
+
+	for (i = 0; i < *nr_entries; i++) {
+		if (!p-addrs[i]) {
+			*nr_entries = i;
+			break;
+		}
+		addrs[i] = p->addrs[i];
+	}
+#endif
+	return p->addr;
+}
+EXPORT_SYMBOL_GPL(get_track_alloc);
+
 static void set_track(struct kmem_cache *s, void *object,
 			enum track_item alloc, unsigned long addr)
 {
