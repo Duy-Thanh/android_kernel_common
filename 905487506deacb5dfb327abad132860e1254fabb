@@ -34,6 +34,24 @@
       "parentUuid": "5b38db7a_97f8a608",
       "revId": "905487506deacb5dfb327abad132860e1254fabb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40488acf_ee5d032c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2021-01-11T08:17:10Z",
+      "side": 1,
+      "message": "Hi Greg, our pci-imx6 driver need these symbols to implement ep mode, these code has not been upstreamed yet. But from current upstream code, many other driver in drivers/pci/controller/dwc also use these symbols.",
+      "parentUuid": "76583a6d_b05de723",
+      "revId": "905487506deacb5dfb327abad132860e1254fabb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
