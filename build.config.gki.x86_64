@@ -2,3 +2,10 @@
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.x86_64
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.gki
 
+ABI_DEFINITION=android/abi_gki_x86_64.xml
+KMI_SYMBOL_LIST=android/abi_gki_x86_64
+ADDITIONAL_KMI_SYMBOL_LISTS="
+android/abi_gki_x86_64_virtual_device
+"
+TRIM_NONLISTED_KMI=1
+KMI_SYMBOL_LIST_STRICT_MODE=1
