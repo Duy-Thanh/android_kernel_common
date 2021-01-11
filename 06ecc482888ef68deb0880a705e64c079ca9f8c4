@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97ede7cc_d802dae1",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-11T21:10:39Z",
+      "side": 1,
+      "message": "if (IS_ENABLED(CONFIG_ARCH_KEEP_MEMBLOCK)) has to be added here as well.",
+      "range": {
+        "startLine": 1163,
+        "startChar": 2,
+        "endLine": 1163,
+        "endChar": 31
+      },
+      "revId": "06ecc482888ef68deb0880a705e64c079ca9f8c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
