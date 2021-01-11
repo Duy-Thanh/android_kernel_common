@@ -22,6 +22,30 @@
       },
       "revId": "4ef72deb5e5e7fa7153ca1ec7994f309fb7f3540",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46bd69dc_ffd2cda7",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2021-01-11T19:23:07Z",
+      "side": 1,
+      "message": "As far as I can tell, the dma_buf heap allocation mechanism doesn\u0027t support creating read-only files. However now that you point it out, if some driver produces them by directly calling `dma_buf_fd`, you\u0027re right that they could set read-only flags on it.\n\nOn the other hand, such permissions (or the lack of a read permission) might also be placed on secure memory which needs to be donated. I\u0027ll handle that in a separate path though when it\u0027s added.\n\nI\u0027ve restored _RO functionality.",
+      "parentUuid": "f1c6dab1_c56e6e7b",
+      "range": {
+        "startLine": 1143,
+        "startChar": 38,
+        "endLine": 1143,
+        "endChar": 49
+      },
+      "revId": "4ef72deb5e5e7fa7153ca1ec7994f309fb7f3540",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
