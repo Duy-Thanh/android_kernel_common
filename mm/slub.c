@@ -200,22 +200,6 @@ static inline bool kmem_cache_has_cpu_partial(struct kmem_cache *s)
 /* Use cmpxchg_double */
 #define __CMPXCHG_DOUBLE	((slab_flags_t __force)0x40000000U)
 
-/*
- * Tracking user of a slab.
- */
-#define TRACK_ADDRS_COUNT 16
-struct track {
-	unsigned long addr;	/* Called from address */
-#ifdef CONFIG_STACKTRACE
-	unsigned long addrs[TRACK_ADDRS_COUNT];	/* Called from address */
-#endif
-	int cpu;		/* Was running on cpu */
-	int pid;		/* Pid context */
-	unsigned long when;	/* When did the operation occur */
-};
-
-enum track_item { TRACK_ALLOC, TRACK_FREE };
-
 #ifdef CONFIG_SYSFS
 static int sysfs_slab_add(struct kmem_cache *);
 static int sysfs_slab_alias(struct kmem_cache *, const char *);
@@ -575,6 +559,41 @@ static struct track *get_track(struct kmem_cache *s, void *object,
 
 	return kasan_reset_tag(p + alloc);
 }
+
+/*
+ * This function will be used to loop through all the slab objects in
+ * a page to give track structure for each object, the function fn
+ * will be used to write this data to buffer, the return value will
+ * be the size that is writeen to the buffer or SIZE_MAX in case buffer
+ * is exhausted.
+ */
+size_t get_each_object_track(struct kmem_cache *s,
+		struct page *page, enum track_item alloc,
+		ssize_t (*fn)(char *, size_t, size_t, struct kmem_cache *,
+		void *, struct track *), char *buf, size_t size)
+{
+	void *p;
+	struct track *t;
+	int ret;
+	ssize_t offset = 0;
+
+	if (!slub_debug || !(s->flags & SLAB_STORE_USER))
+		return 0;
+
+	slab_lock(page);
+	for_each_object(p, s, page_address(page), page->objects) {
+		t = get_track(s, p, alloc);
+		ret = fn(buf, size, offset, s, p, t);
+		if (ret == size - 1) {
+			slab_unlock(page);
+			return SIZE_MAX;
+		}
+		offset += ret;
+	}
+	slab_unlock(page);
+	return offset;
+}
+EXPORT_SYMBOL_GPL(get_each_object_track);
 
 static void set_track(struct kmem_cache *s, void *object,
 			enum track_item alloc, unsigned long addr)
