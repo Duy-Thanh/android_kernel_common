@@ -5,7 +5,6 @@
   __arch_copy_from_user
   __arch_copy_to_user
   arm64_const_caps_ready
-  bcmp
   blocking_notifier_call_chain
   blocking_notifier_chain_register
   blocking_notifier_chain_unregister
@@ -87,6 +86,7 @@
   devm_of_platform_populate
   devm_phy_create
   devm_pinctrl_register
+  devm_platform_ioremap_resource
   __devm_regmap_init_mmio_clk
   devm_regulator_bulk_get
   devm_regulator_get
@@ -108,6 +108,7 @@
   divider_recalc_rate
   divider_round_rate_parent
   dma_alloc_attrs
+  dma_buf_export
   dma_direct_map_page
   dma_direct_map_sg
   dma_direct_sync_single_for_device
@@ -137,21 +138,15 @@
   drm_mode_vrefresh
   enable_irq
   eth_validate_addr
-  fd_install
   find_next_bit
   find_next_zero_bit
   finish_wait
   flush_workqueue
-  fput
   free_irq
-  free_pages
-  generic_file_llseek
   generic_handle_irq
   generic_mii_ioctl
   get_device
   get_random_bytes
-  get_unused_fd_flags
-  get_zeroed_page
   gpiochip_add_data_with_key
   gpiochip_add_pin_range
   gpiochip_generic_free
@@ -228,9 +223,7 @@
   msm_pinctrl_probe
   msm_pinctrl_remove
   __mutex_init
-  mutex_is_locked
   mutex_lock
-  mutex_lock_interruptible
   mutex_unlock
   napi_complete_done
   napi_disable
@@ -341,6 +334,7 @@
   regulator_set_load
   regulator_set_voltage
   release_firmware
+  remap_pfn_range
   request_firmware
   request_firmware_into_buf
   request_threaded_irq
@@ -407,6 +401,7 @@
   uart_unregister_driver
   uart_update_timeout
   uart_write_wakeup
+  __ubsan_handle_cfi_check_fail_abort
   __udelay
   unregister_reboot_notifier
   unregister_rpmsg_driver
@@ -435,6 +430,9 @@
   usbnet_write_cmd_nopm
   usb_register_driver
   usleep_range
+  vmap
+  vmemmap
+  vunmap
   wait_for_completion_timeout
   __wake_up
   __warn_printk
@@ -508,6 +506,7 @@
   wiphy_apply_custom_regulatory
 
 # required by ath10k_core.ko
+  bcmp
   cancel_delayed_work
   cfg80211_calculate_bitrate
   cfg80211_find_elem_match
@@ -650,7 +649,6 @@
 # required by fastrpc.ko
   dma_buf_attach
   dma_buf_detach
-  dma_buf_export
   dma_buf_fd
   dma_buf_get
   dma_buf_map_attachment
@@ -668,76 +666,6 @@
 
 # required by i2c-qup.ko
   __usecs_to_jiffies
-
-# required by incrementalfs.ko
-  bin2hex
-  __break_lease
-  clear_inode
-  __close_fd
-  crypto_alloc_shash
-  crypto_destroy_tfm
-  crypto_shash_digest
-  d_add
-  d_drop
-  deactivate_locked_super
-  dentry_open
-  dget_parent
-  d_instantiate
-  d_make_root
-  down_write
-  dput
-  fget
-  flush_dcache_page
-  flush_delayed_work
-  fs_kobj
-  fsstack_copy_attr_all
-  generic_file_mmap
-  generic_file_read_iter
-  generic_file_splice_read
-  generic_read_dir
-  generic_shutdown_super
-  __get_free_pages
-  iget5_locked
-  ihold
-  inode_init_once
-  inode_init_owner
-  iput
-  iterate_dir
-  kern_path
-  kobject_create_and_add
-  kobject_put
-  lockref_get
-  lock_rename
-  lookup_one_len
-  LZ4_decompress_safe
-  match_int
-  match_token
-  noop_llseek
-  notify_change
-  pagecache_get_page
-  path_get
-  path_put
-  preempt_schedule
-  __put_cred
-  __put_page
-  register_filesystem
-  set_anon_super
-  sget
-  simple_getattr
-  simple_setattr
-  simple_statfs
-  strndup_user
-  strsep
-  sync_filesystem
-  sysfs_create_group
-  sysfs_remove_group
-  truncate_inode_pages
-  unlock_new_inode
-  unlock_page
-  unlock_rename
-  unregister_filesystem
-  up_write
-  user_path_at_empty
 
 # required by lt9611.ko
   __devm_regmap_init_i2c
@@ -976,7 +904,11 @@
   drm_universal_plane_init
   drm_vblank_init
   event_triggers_call
+  fd_install
+  fput
+  generic_file_llseek
   get_pid_task
+  get_unused_fd_flags
   gpiod_direction_input
   gpiod_direction_output
   gpiod_get_value
@@ -1017,6 +949,8 @@
   mipi_dsi_host_register
   mipi_dsi_host_unregister
   mipi_dsi_packet_format_is_long
+  mutex_is_locked
+  mutex_lock_interruptible
   mutex_trylock_recursive
   no_llseek
   nsecs_to_jiffies
@@ -1079,13 +1013,10 @@
   unmap_mapping_range
   unregister_shrinker
   unregister_vmap_purge_notifier
-  vmap
-  vmemmap
   vmf_insert_mixed
   vm_get_page_prot
   vscnprintf
   vsnprintf
-  vunmap
   wake_up_process
   ww_mutex_lock_interruptible
   ww_mutex_unlock
@@ -1107,9 +1038,11 @@
   dma_pool_destroy
   dma_pool_free
   flush_work
+  free_pages
   gen_pool_dma_alloc_align
   gen_pool_dma_zalloc_align
   gen_pool_free_owner
+  get_zeroed_page
   _raw_spin_lock_irq
   _raw_spin_unlock_irq
   sb800_prefetch
@@ -1241,7 +1174,6 @@
 # required by qcom_geni_serial.ko
   console_stop
   device_create_file
-  devm_platform_ioremap_resource
   handle_sysrq
   kstrtoint
   oops_in_progress
@@ -1385,7 +1317,6 @@
   __class_register
   class_unregister
   device_initialize
-  remap_pfn_range
   unregister_chrdev_region
 
 # required by rtc-pm8xxx.ko
@@ -1444,6 +1375,19 @@
   spmi_controller_add
   spmi_controller_alloc
   spmi_controller_remove
+
+# required by system_heap.ko
+  __alloc_pages_nodemask
+  dma_direct_sync_sg_for_cpu
+  dma_direct_sync_sg_for_device
+  dma_heap_add
+  dma_heap_get_dev
+  __free_pages
+  sg_alloc_table
+  __sg_page_iter_next
+  __sg_page_iter_start
+  vfree
+  vmalloc
 
 # required by ufs_qcom.ko
   devm_phy_get
