@@ -70,6 +70,10 @@ struct sched_group;
 DECLARE_RESTRICTED_HOOK(android_rvh_find_busiest_group,
 	TP_PROTO(struct sched_group *busiest, struct rq *dst_rq, int *out_balance),
 		TP_ARGS(busiest, dst_rq, out_balance), 1);
+
+DECLARE_RESTRICTED_HOOK(android_vh_nice_check,
+	TP_PROTO(long *nice, bool *allowed),
+		TP_ARGS(nice, allowed), 1);
 #else
 #define trace_android_rvh_select_task_rq_fair(p, prev_cpu, sd_flag, wake_flags, new_cpu)
 #define trace_android_rvh_select_task_rq_rt(p, prev_cpu, sd_flag, wake_flags, new_cpu)
