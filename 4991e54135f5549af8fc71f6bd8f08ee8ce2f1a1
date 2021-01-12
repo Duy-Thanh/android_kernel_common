@@ -123,6 +123,24 @@
       "message": "List of new symbols seems sane to me, no objections here.",
       "revId": "4991e54135f5549af8fc71f6bd8f08ee8ce2f1a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36c8210b_22e03590",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-01-12T10:58:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a0b945b_99af6c2e",
+      "revId": "4991e54135f5549af8fc71f6bd8f08ee8ce2f1a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
