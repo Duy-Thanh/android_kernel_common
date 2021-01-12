@@ -5743,12 +5743,18 @@ static inline int rt_effective_prio(struct task_struct *p, int prio)
 
 void set_user_nice(struct task_struct *p, long nice)
 {
+<<<<<<< HEAD   (17254a ANDROID: block: keyslot-manager: move function declaration)
 	bool queued, running;
 	int old_prio;
+=======
+	bool queued, running, allowed = false;
+	int old_prio, delta;
+>>>>>>> CHANGE (5cf5bc ANDROID: sched: move vendor hook to check scheduling nice va)
 	struct rq_flags rf;
 	struct rq *rq;
 
-	if (task_nice(p) == nice || nice < MIN_NICE || nice > MAX_NICE)
+	trace_android_rvh_set_user_nice(p, &nice, &allowed);
+	if ((task_nice(p) == nice || nice < MIN_NICE || nice > MAX_NICE) && !allowed)
 		return;
 	/*
 	 * We have to be careful, if called from sys_setpriority(),
@@ -5756,7 +5762,6 @@ void set_user_nice(struct task_struct *p, long nice)
 	 */
 	rq = task_rq_lock(p, &rf);
 	update_rq_clock(rq);
-	trace_android_rvh_set_user_nice(p, &nice);
 
 	/*
 	 * The RT priorities are set via sched_setscheduler(), but we still
