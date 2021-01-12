@@ -75,6 +75,10 @@ DECLARE_HOOK(android_vh_map_util_freq,
 		unsigned long cap, unsigned long *next_freq),
 	TP_ARGS(util, freq, cap, next_freq));
 
+DECLARE_RESTRICTED_HOOK(android_vh_nice_check,
+	TP_PROTO(long *nice, bool *allowed),
+		TP_ARGS(nice, allowed), 1);
+
 struct em_perf_domain;
 DECLARE_HOOK(android_vh_em_pd_energy,
 	TP_PROTO(struct em_perf_domain *pd,
