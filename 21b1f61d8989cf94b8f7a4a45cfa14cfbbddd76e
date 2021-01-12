@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dcaccfb7_731c7d63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-12T13:23:36Z",
+      "side": 1,
+      "message": "If you need access to a per-cpu variable, then you need to access it in a per-cpu manner.",
+      "parentUuid": "7be9d364_452c6a25",
+      "revId": "21b1f61d8989cf94b8f7a4a45cfa14cfbbddd76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81025e6a_904a5340",
         "filename": "drivers/android/Kconfig",
         "patchSetId": 3
