@@ -16,6 +16,24 @@
       "message": "Needs the following upstream fixes (see Fixes: 4426e945df58 tags):\n\nae46d2aa6a7fbe8ca0946f24b061b6ccdc6c3f25\nba841078cd0557b43b59c63f5c048b12168f0db2\n475f4dfc021c5fde69f3b7d3287bde0a50477b05",
       "revId": "df537d45f84028151ffb149d4dd72b2c6bf9aae2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8822eabf_a5187776",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-01-12T20:19:22Z",
+      "side": 1,
+      "message": "These are in the dependent changes in the series:\nae46d2aa6a7fbe8ca0946f24b061b6ccdc6c3f25\n475f4dfc021c5fde69f3b7d3287bde0a50477b05\n\nAdded the missing patch:\nba841078cd0557b43b59c63f5c048b12168f0db2",
+      "parentUuid": "6dff4dfe_9c7339a3",
+      "revId": "df537d45f84028151ffb149d4dd72b2c6bf9aae2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
