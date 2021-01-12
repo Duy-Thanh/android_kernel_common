@@ -235,6 +235,9 @@ struct usb_ep {
 	unsigned		mult:2;
 	unsigned		maxburst:5;
 	u8			address;
+#ifdef CONFIG_USB_PAM
+	bool			uether;
+#endif
 	const struct usb_endpoint_descriptor	*desc;
 	const struct usb_ss_ep_comp_descriptor	*comp_desc;
 };
