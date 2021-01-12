@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30af9d23_1c58d4df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-12T09:38:15Z",
+      "side": 1,
+      "message": "not a valid commit id in Linus\u0027s tree 😞",
+      "range": {
+        "startLine": 14,
+        "startChar": 27,
+        "endLine": 14,
+        "endChar": 67
+      },
+      "revId": "4e8b4d3ea0eb0a7e7312f79eeff760d5adfbe253",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "578b65e7_e8f321da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-12T09:38:15Z",
+      "side": 1,
+      "message": "real name please, odds are you don\u0027t have a \".\" in your name, right?  😊",
+      "range": {
+        "startLine": 15,
+        "startChar": 15,
+        "endLine": 15,
+        "endChar": 24
+      },
+      "revId": "4e8b4d3ea0eb0a7e7312f79eeff760d5adfbe253",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
