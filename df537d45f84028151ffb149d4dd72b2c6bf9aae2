@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dff4dfe_9c7339a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-12T03:45:54Z",
+      "side": 1,
+      "message": "Needs the following upstream fixes (see Fixes: 4426e945df58 tags):\n\nae46d2aa6a7fbe8ca0946f24b061b6ccdc6c3f25\nba841078cd0557b43b59c63f5c048b12168f0db2\n475f4dfc021c5fde69f3b7d3287bde0a50477b05",
+      "revId": "df537d45f84028151ffb149d4dd72b2c6bf9aae2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
