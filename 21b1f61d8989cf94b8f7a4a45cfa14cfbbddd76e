@@ -107,6 +107,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7be9d364_452c6a25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-12T12:53:21Z",
+      "side": 1,
+      "message": "I mean to say using EXPORT_PER_CPU_SYMBOL_GPL(irq_stack_ptr) for exporting this symbol.\n\nAre you asking me fix this per cpu variable issue with debug symbol driver?",
+      "parentUuid": "0d0e4963_e0bd8b76",
+      "revId": "21b1f61d8989cf94b8f7a4a45cfa14cfbbddd76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81025e6a_904a5340",
