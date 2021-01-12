@@ -16,6 +16,24 @@
       "message": "Do we care about architectures other than ARM and x86?",
       "revId": "b6dd783039e11d1649af01c6d9f1f9ba84a8b8c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80304358_2bfa714e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-12T09:05:23Z",
+      "side": 1,
+      "message": "It\u0027s good/best to take an upstream series like this in its entirety, to make backports and LTS updates easier, so yes, we care for things like that, thanks!",
+      "parentUuid": "dc174c79_3faeb0f4",
+      "revId": "b6dd783039e11d1649af01c6d9f1f9ba84a8b8c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
