@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f03b4b7_65871d16",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1847,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-12T05:10:05Z",
+      "side": 1,
+      "message": "Presubmits complain about these undefined variables. Please test the build before uploading.",
+      "range": {
+        "startLine": 1847,
+        "startChar": 27,
+        "endLine": 1847,
+        "endChar": 45
+      },
+      "revId": "5099b9a47b18540123445ea6ebdf5af413da335f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
