@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc174c79_3faeb0f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-12T03:57:09Z",
+      "side": 1,
+      "message": "Do we care about architectures other than ARM and x86?",
+      "revId": "b6dd783039e11d1649af01c6d9f1f9ba84a8b8c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
