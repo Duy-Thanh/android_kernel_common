@@ -92,9 +92,13 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dup_task_struct);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_task_comm);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_find_new_ilb);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_pelt_multiplier);
+<<<<<<< HEAD   (137033 ANDROID: GKI: Update oplus symbol list)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_find_energy_efficient_cpu);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_util_cfs_boost);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_account_process_tick_gran);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_irqtime_account_process_tick);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_cpus_allowed_comm);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_setaffinity_early);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_map_util_freq);
+>>>>>>> CHANGE (b77eee ANDROID: schedutil: add vendor hook for adjusting util to fr)
