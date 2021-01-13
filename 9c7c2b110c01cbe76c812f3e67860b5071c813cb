@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4205a274_5dff7835",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-13T02:49:09Z",
+      "side": 1,
+      "message": "Fails checkpatch, please fix and resubmit (and please run checkpatch before submitting):\n\nERROR:CODE_INDENT: code indent should use tabs where possible\n#40: FILE: include/trace/hooks/sched.h:94:\n+        TP_PROTO(struct rq *rq, int *continue_balancing),$\n\nERROR:CODE_INDENT: code indent should use tabs where possible\n#41: FILE: include/trace/hooks/sched.h:95:\n+        TP_ARGS(rq, continue_balancing), 1);$\n\ntotal: 2 errors, 0 warnings, 34 lines checked\n\nNOTE: For some of the reported defects, checkpatch may be able to\n      mechanically convert to the typical style using --fix or --fix-inplace.\n\nNOTE: Whitespace errors detected.\n      You may wish to use scripts/cleanpatch or scripts/cleanfile\n",
+      "revId": "9c7c2b110c01cbe76c812f3e67860b5071c813cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
