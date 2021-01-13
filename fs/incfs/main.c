@@ -22,17 +22,11 @@ static struct file_system_type incfs_fs_type = {
 
 static struct kobject *sysfs_root, *featurefs_root;
 
-static ssize_t supported(struct kobject *kobj,
-			 struct kobj_attribute *attr, char *buff)
-{
-	return snprintf(buff, PAGE_SIZE, "supported\n");
-}
-
-typedef ssize_t (*const attr_show)(struct kobject *kobj,
-				   struct kobj_attribute *attr, char *buff);
-
 #define _DECLARE_FEATURE_FLAG(name)					\
-	static attr_show name##_show = supported;			\
+	static ssize_t name##_show(struct kobject *kobj,		\
+				   struct kobj_attribute *attr,		\
+				   char *buff)				\
+	{ return snprintf(buff, PAGE_SIZE, "supported\n"); }		\
 	static struct kobj_attribute name##_attr = __ATTR_RO(name)
 
 #define DECLARE_FEATURE_FLAG(name) _DECLARE_FEATURE_FLAG(name)
