@@ -71,6 +71,7 @@ DECLARE_RESTRICTED_HOOK(android_rvh_find_busiest_group,
 	TP_PROTO(struct sched_group *busiest, struct rq *dst_rq, int *out_balance),
 		TP_ARGS(busiest, dst_rq, out_balance), 1);
 
+<<<<<<< HEAD   (c89c14 ANDROID: dm-user: fix typo in channel_free)
 DECLARE_HOOK(android_vh_dump_throttled_rt_tasks,
 	TP_PROTO(int cpu, u64 clock, ktime_t rt_period, u64 rt_runtime,
 			s64 rt_period_timer_expires),
@@ -190,6 +191,12 @@ struct cgroup_taskset;
 DECLARE_RESTRICTED_HOOK(android_rvh_cpu_cgroup_attach,
 	TP_PROTO(struct cgroup_taskset *tset),
 	TP_ARGS(tset), 1);
+=======
+DECLARE_HOOK(android_vh_map_util_freq,
+	TP_PROTO(unsigned long util, unsigned long freq,
+		unsigned long cap, unsigned long *next_freq),
+	TP_ARGS(util, freq, cap, next_freq));
+>>>>>>> CHANGE (3122e3 ANDROID: schedutil: add vendor hook for adjusting util to fr)
 #else
 #define trace_android_rvh_select_task_rq_fair(p, prev_cpu, sd_flag, wake_flags, new_cpu)
 #define trace_android_rvh_select_task_rq_rt(p, prev_cpu, sd_flag, wake_flags, new_cpu)
@@ -205,6 +212,7 @@ DECLARE_RESTRICTED_HOOK(android_rvh_cpu_cgroup_attach,
 #define trace_android_rvh_set_user_nice(p, nice)
 #define trace_android_rvh_setscheduler(p)
 #define trace_android_rvh_find_busiest_group(busiest, dst_rq, out_balance)
+<<<<<<< HEAD   (c89c14 ANDROID: dm-user: fix typo in channel_free)
 #define trace_android_vh_dump_throttled_rt_tasks(cpu, clock, rt_period, rt_runtime, rt_period_timer_expires)
 #define trace_android_vh_jiffies_update(unused)
 #define trace_android_rvh_sched_newidle_balance(this_rq, rf, pulled_task, done)
@@ -233,6 +241,9 @@ DECLARE_RESTRICTED_HOOK(android_rvh_cpu_cgroup_attach,
 #define trace_android_rvh_update_cpu_capacity(cpu, capacity)
 #define trace_android_rvh_update_misfit_status(p, rq, need_update)
 #define trace_android_rvh_cpu_cgroup_attach(tset)
+=======
+#define trace_android_vh_map_util_freq(util, freq, cap, next_freq)
+>>>>>>> CHANGE (3122e3 ANDROID: schedutil: add vendor hook for adjusting util to fr)
 #endif
 #endif /* _TRACE_HOOK_SCHED_H */
 /* This part must be outside protection */

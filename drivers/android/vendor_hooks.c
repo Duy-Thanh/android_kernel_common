@@ -72,6 +72,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gic_resume);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_lockup_pool);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ipi_stop);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sysrq_crash);
+<<<<<<< HEAD   (c89c14 ANDROID: dm-user: fix typo in channel_free)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dump_throttled_rt_tasks);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_printk_hotplug);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_jiffies_update);
@@ -114,3 +115,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_place_entity);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_cpu_capacity);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_misfit_status);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_cgroup_attach);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_map_util_freq);
+>>>>>>> CHANGE (3122e3 ANDROID: schedutil: add vendor hook for adjusting util to fr)
