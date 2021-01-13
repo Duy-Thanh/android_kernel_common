@@ -28,12 +28,8 @@ static ssize_t supported(struct kobject *kobj,
 	return snprintf(buff, PAGE_SIZE, "supported\n");
 }
 
-typedef ssize_t (*const attr_show)(struct kobject *kobj,
-				   struct kobj_attribute *attr, char *buff);
-
 #define _DECLARE_FEATURE_FLAG(name)					\
-	static attr_show name##_show = supported;			\
-	static struct kobj_attribute name##_attr = __ATTR_RO(name)
+	static struct kobj_attribute name##_attr = __ATTR_RO_SHOW(name, supported)
 
 #define DECLARE_FEATURE_FLAG(name) _DECLARE_FEATURE_FLAG(name)
 

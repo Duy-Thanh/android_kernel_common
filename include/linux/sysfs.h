@@ -123,6 +123,11 @@ struct attribute_group {
 	.show	= _name##_show,						\
 }
 
+#define __ATTR_RO_SHOW(_name, _show) {					\
+	.attr	= { .name = __stringify(_name), .mode = 0444 },		\
+	.show	= _show,						\
+}
+
 #define __ATTR_WO(_name) {						\
 	.attr	= { .name = __stringify(_name), .mode = 0200 },		\
 	.store	= _name##_store,					\
