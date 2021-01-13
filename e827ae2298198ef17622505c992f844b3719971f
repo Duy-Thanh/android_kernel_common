@@ -33,6 +33,29 @@
       "message": "Build and boot tested on our internal 5.10 branch, build tested on android12-5.10.  Sincerely, Stephen Dickey",
       "revId": "e827ae2298198ef17622505c992f844b3719971f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8f3889d_d95bc9c1",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2021-01-13T08:45:46Z",
+      "side": 1,
+      "message": "It means though here, that you aren\u0027t looking for a !idle CPU, which is the primary feature of this function. Once paused, the CPU being very likely to be out of any domain, maybe it could be interesting to just iterate over all active CPUs to find one which is not idle.",
+      "range": {
+        "startLine": 696,
+        "startChar": 0,
+        "endLine": 696,
+        "endChar": 4
+      },
+      "revId": "e827ae2298198ef17622505c992f844b3719971f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
