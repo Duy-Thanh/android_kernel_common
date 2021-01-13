@@ -308,11 +308,15 @@
   kstrdup_const
   kstrtoint
   kstrtouint
+  kthread_create_on_node
   ktime_get
   ktime_get_mono_fast_ns
   ktime_get_real_ts64
   __list_add_valid
   __list_del_entry_valid
+  __log_post_read_mmio
+  __log_read_mmio
+  __log_write_mmio
   mbox_client_txdone
   mbox_free_channel
   mbox_request_channel
@@ -479,6 +483,7 @@
   regcache_sync
   register_reboot_notifier
   __register_rpmsg_driver
+  register_shrinker
   regmap_bulk_read
   regmap_bulk_write
   __regmap_init
@@ -600,6 +605,9 @@
   trace_event_raw_init
   trace_event_reg
   trace_handle_return
+  __tracepoint_rwmmio_post_read
+  __tracepoint_rwmmio_read
+  __tracepoint_rwmmio_write
   trace_raw_output_prep
   trace_seq_printf
   tty_flip_buffer_push
@@ -675,6 +683,7 @@
   vunmap
   wait_for_completion_timeout
   __wake_up
+  wake_up_process
   __warn_printk
   watchdog_init_timeout
 
@@ -884,6 +893,12 @@
 # required by cqhci.ko
   dmam_free_coherent
   mmc_cqe_request_done
+
+# required by deferred-free-helper.ko
+  freezing_slow_path
+  __refrigerator
+  sched_set_normal
+  system_freezing_cnt
 
 # required by dwc3-qcom.ko
   devm_extcon_register_notifier
@@ -1254,7 +1269,6 @@
   irq_domain_xlate_onecell
   kstrdup_quotable_cmdline
   kstrtouint_from_user
-  kthread_create_on_node
   kthread_create_worker
   kthread_destroy_worker
   kthread_queue_work
@@ -1292,7 +1306,6 @@
   _raw_read_unlock
   _raw_write_lock
   _raw_write_unlock
-  register_shrinker
   register_vmap_purge_notifier
   regulator_get
   regulator_put
@@ -1316,7 +1329,6 @@
   vmf_insert_mixed
   vm_get_page_prot
   vscnprintf
-  wake_up_process
   ww_mutex_lock_interruptible
   ww_mutex_unlock
 
@@ -1695,12 +1707,15 @@
   spmi_controller_remove
 
 # required by system_heap.ko
-  __alloc_pages_nodemask
   dma_heap_add
   dma_heap_get_dev
   dma_sync_sg_for_cpu
   dma_sync_sg_for_device
   __free_pages
+  page_pool_alloc_pages
+  page_pool_create
+  page_pool_destroy
+  page_pool_put_page
   __sg_page_iter_next
 
 # required by ufs_qcom.ko
