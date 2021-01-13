@@ -343,6 +343,7 @@ DECLARE_HOOK(android_vh_sched_pelt_multiplier,
 	TP_PROTO(unsigned int old, unsigned int cur, int *ret),
 	TP_ARGS(old, cur, ret));
 
+<<<<<<< HEAD   (fc99bc UPSTREAM: mfd: cros_ec: Don't load charger with UCSI)
 DECLARE_RESTRICTED_HOOK(android_rvh_post_init_entity_util_avg,
 	TP_PROTO(struct sched_entity *se),
 	TP_ARGS(se), 1);
@@ -400,6 +401,14 @@ DECLARE_RESTRICTED_HOOK(android_rvh_update_load_avg_cfs_rq,
 DECLARE_RESTRICTED_HOOK(android_rvh_update_rt_rq_load_avg_internal,
 	TP_PROTO(u64 now, struct rq *rq, int running, int *ret),
 	TP_ARGS(now, rq, running, ret), 1);
+||||||| BASE
+=======
+DECLARE_HOOK(android_vh_map_util_freq,
+	TP_PROTO(unsigned long util, unsigned long freq,
+		unsigned long cap, unsigned long *next_freq),
+	TP_ARGS(util, freq, cap, next_freq));
+
+>>>>>>> CHANGE (6f0f17 ANDROID: schedutil: add vendor hook for adjusting util to fr)
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_SCHED_H */

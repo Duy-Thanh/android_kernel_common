@@ -174,10 +174,31 @@ static unsigned int get_next_freq(struct sugov_policy *sg_policy,
 				  unsigned long util, unsigned long max)
 {
 	struct cpufreq_policy *policy = sg_policy->policy;
+<<<<<<< HEAD   (fc99bc UPSTREAM: mfd: cros_ec: Don't load charger with UCSI)
 	unsigned int freq;
+||||||| BASE
+	unsigned int freq = arch_scale_freq_invariant() ?
+				policy->cpuinfo.max_freq : policy->cur;
+=======
+	unsigned int freq = arch_scale_freq_invariant() ?
+				policy->cpuinfo.max_freq : policy->cur;
+	unsigned long next_freq = 0;
+>>>>>>> CHANGE (6f0f17 ANDROID: schedutil: add vendor hook for adjusting util to fr)
 
+<<<<<<< HEAD   (fc99bc UPSTREAM: mfd: cros_ec: Don't load charger with UCSI)
 	freq = get_capacity_ref_freq(policy);
 	freq = map_util_freq(util, freq, max);
+||||||| BASE
+	util = map_util_perf(util);
+	freq = map_util_freq(util, freq, max);
+=======
+	util = map_util_perf(util);
+	trace_android_vh_map_util_freq(util, freq, max, &next_freq);
+	if (next_freq)
+		freq = next_freq;
+	else
+		freq = map_util_freq(util, freq, max);
+>>>>>>> CHANGE (6f0f17 ANDROID: schedutil: add vendor hook for adjusting util to fr)
 
 	if (freq == sg_policy->cached_raw_freq && !sg_policy->need_freq_update)
 		return sg_policy->next_freq;
