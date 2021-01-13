@@ -71,6 +71,7 @@ DECLARE_RESTRICTED_HOOK(android_rvh_find_busiest_group,
 	TP_PROTO(struct sched_group *busiest, struct rq *dst_rq, int *out_balance),
 		TP_ARGS(busiest, dst_rq, out_balance), 1);
 
+<<<<<<< HEAD   (43edfc FROMLIST: fs/buffer.c: Revoke LRU when trying to drop buffer)
 DECLARE_HOOK(android_vh_dump_throttled_rt_tasks,
 	TP_PROTO(int cpu, u64 clock, ktime_t rt_period, u64 rt_runtime,
 			s64 rt_period_timer_expires),
@@ -218,6 +219,12 @@ DECLARE_RESTRICTED_HOOK(android_rvh_schedule_bug,
 DECLARE_RESTRICTED_HOOK(android_rvh_sched_exec,
 	TP_PROTO(bool *cond),
 	TP_ARGS(cond), 1);
+=======
+DECLARE_HOOK(android_vh_map_util_freq,
+	TP_PROTO(unsigned long util, unsigned long freq,
+		unsigned long cap, unsigned long *next_freq),
+	TP_ARGS(util, freq, cap, next_freq));
+>>>>>>> CHANGE (3122e3 ANDROID: schedutil: add vendor hook for adjusting util to fr)
 #else
 #define trace_android_rvh_select_task_rq_fair(p, prev_cpu, sd_flag, wake_flags, new_cpu)
 #define trace_android_rvh_select_task_rq_fair_enabled() 0
@@ -234,6 +241,7 @@ DECLARE_RESTRICTED_HOOK(android_rvh_sched_exec,
 #define trace_android_rvh_set_user_nice(p, nice)
 #define trace_android_rvh_setscheduler(p)
 #define trace_android_rvh_find_busiest_group(busiest, dst_rq, out_balance)
+<<<<<<< HEAD   (43edfc FROMLIST: fs/buffer.c: Revoke LRU when trying to drop buffer)
 #define trace_android_vh_dump_throttled_rt_tasks(cpu, clock, rt_period, rt_runtime, rt_period_timer_expires)
 #define trace_android_vh_jiffies_update(unused)
 #define trace_android_rvh_sched_newidle_balance(this_rq, rf, pulled_task, done)
@@ -269,6 +277,9 @@ DECLARE_RESTRICTED_HOOK(android_rvh_sched_exec,
 #define trace_android_rvh_ttwu_cond(cond)
 #define trace_android_rvh_schedule_bug(unused)
 #define trace_android_rvh_sched_exec(cond)
+=======
+#define trace_android_vh_map_util_freq(util, freq, cap, next_freq)
+>>>>>>> CHANGE (3122e3 ANDROID: schedutil: add vendor hook for adjusting util to fr)
 #endif
 #endif /* _TRACE_HOOK_SCHED_H */
 /* This part must be outside protection */
