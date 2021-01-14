@@ -74,6 +74,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ede1532e_f3d3fe00",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2021-01-14T21:33:53Z",
+      "side": 1,
+      "message": "Bah, I\u0027ll have to put the shas back to satisfy the lint bot.",
+      "parentUuid": "3e6b5ccb_04eeb4cd",
+      "range": {
+        "startLine": 133,
+        "startChar": 27,
+        "endLine": 133,
+        "endChar": 67
+      },
+      "revId": "f7ffe5991d9aa0470021bfd8e7776aa71fbf0803",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e9b14120_f32c1ec6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
