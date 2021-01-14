@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b45351c_88f1a705",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-14T21:20:29Z",
+      "side": 1,
+      "message": "nit: I think it\u0027s actually 1dd901280af597eb3e270365fa2ad7632f2a6790\n\nsee: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/commit/?h\u003dnext-20210114\u0026id\u003d1dd901280af597eb3e270365fa2ad7632f2a6790",
+      "range": {
+        "startLine": 133,
+        "startChar": 27,
+        "endLine": 133,
+        "endChar": 67
+      },
+      "revId": "f7ffe5991d9aa0470021bfd8e7776aa71fbf0803",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9b14120_f32c1ec6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-14T21:20:29Z",
+      "side": 1,
+      "message": "Please fix the SHA, otherwise LGTM",
+      "revId": "f7ffe5991d9aa0470021bfd8e7776aa71fbf0803",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
