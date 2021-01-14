@@ -14,3 +14,14 @@ arch/arm64/boot/Image
 vmlinux
 System.map
 "
+
+ABI_DEFINITION=android/abi_gki_aarch64.xml
+KMI_SYMBOL_LIST=android/abi_gki_aarch64
+ADDITIONAL_KMI_SYMBOL_LISTS="
+android/abi_gki_aarch64_cuttlefish
+android/abi_gki_aarch64_virtual_device
+"
+
+#TRIM_NONLISTED_KMI=1
+#KMI_SYMBOL_LIST_ADD_ONLY=1
+#KMI_SYMBOL_LIST_STRICT_MODE=1
