@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "302ae2c7_c255442f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-14T21:04:18Z",
+      "side": 1,
+      "message": "no Acked-by?",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 0
+      },
+      "revId": "3991d486702ab99cb12f0a14a74e00132d67609f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec9b3095_80274cda",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-14T21:04:18Z",
+      "side": 1,
+      "message": "Needs a \"Bug: \u003cbug number\u003e\"",
+      "revId": "3991d486702ab99cb12f0a14a74e00132d67609f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
