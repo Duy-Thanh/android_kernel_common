@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04ab18b4_c2cafca7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-14T09:30:18Z",
+      "side": 1,
+      "message": "Will this work with the crazy hook that needed a \"0\" as a define?  Or should those types of hooks be rewritten to not require that?",
+      "revId": "d578e051147d894a70997d33830bbb567cb5abf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8d38e79_585e7825",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-14T09:30:18Z",
+      "side": 1,
+      "message": "no need to keep comments like this, there\u0027s no #else, so no one can put anything here 😊",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 52
+      },
+      "revId": "d578e051147d894a70997d33830bbb567cb5abf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
