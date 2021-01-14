@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "058de858_35fe5c24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-14T21:53:19Z",
+      "side": 1,
+      "message": "Per Todd\u0027s request I\u0027ll merge this into android12-5.10 but not the other branches until he clarifies which branches need this patch.",
+      "revId": "b8e7114ab7cc7b8a395381bf05bb94ff4193e3dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
