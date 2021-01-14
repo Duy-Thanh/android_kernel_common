@@ -22,6 +22,30 @@
       },
       "revId": "fc005b3ced1be6d3a9ea3b57aa47796cf91fa102",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73dfa696_d6a8d0da",
+        "filename": "kernel/smp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 958,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-14T19:55:50Z",
+      "side": 1,
+      "message": "Yes, it is correct. That whole conditional is part of the cpu pause feature for QC. Upstream this is unconditional (which will now be the !CONFIG_SUSPEND behavior)",
+      "parentUuid": "51f08d95_3faa41a6",
+      "range": {
+        "startLine": 958,
+        "startChar": 44,
+        "endLine": 958,
+        "endChar": 54
+      },
+      "revId": "fc005b3ced1be6d3a9ea3b57aa47796cf91fa102",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
