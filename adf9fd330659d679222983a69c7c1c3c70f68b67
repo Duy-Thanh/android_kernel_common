@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c1b4843_8d9120d3",
+        "filename": "fs/incfs/pseudo_files.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-01-14T20:53:03Z",
+      "side": 1,
+      "message": "zero-out the |file|? dput() only checks for NULL as I see\nsame for the other places, and |dir|\nor, better, check !IS_ERR() before calling dput() in the \"out\" section",
+      "range": {
+        "startLine": 422,
+        "startChar": 2,
+        "endLine": 422,
+        "endChar": 11
+      },
+      "revId": "adf9fd330659d679222983a69c7c1c3c70f68b67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84f9cca5_df5f1130",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-01-14T20:53:03Z",
+      "side": 1,
+      "message": "1. do you have to call it before unlinking?\n2. what if unlink returns error? inotify waiters will have already processed the notification. I doubt it\u0027s common to make sure the notification isn\u0027t lying to you in the code...",
+      "range": {
+        "startLine": 1027,
+        "startChar": 0,
+        "endLine": 1027,
+        "endChar": 55
+      },
+      "revId": "adf9fd330659d679222983a69c7c1c3c70f68b67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
