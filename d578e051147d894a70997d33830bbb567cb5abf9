@@ -57,6 +57,30 @@
       },
       "revId": "d578e051147d894a70997d33830bbb567cb5abf9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08a16769_9d53b786",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-14T16:05:37Z",
+      "side": 1,
+      "message": "I think it is useful in this case since partners are used to the pattern and it was in the partner documentation. I\u0027m thinking we keep this comment in android11-5.4 and android12-5.4 since we are changing this mid/post release, but drop this comment in android-mainline.",
+      "parentUuid": "a8d38e79_585e7825",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 52
+      },
+      "revId": "d578e051147d894a70997d33830bbb567cb5abf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
