@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9a4ece2_2ceaf784",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-01-14T09:41:15Z",
+      "side": 1,
+      "message": "FWIW this was not really a crazy hook -- the xxx_enabled() accessors are standard for tracepoints and should return whether the corresponding tracepoint is enabled. My bad for forgetting to add the stub macro, though. But at least that motivated this CL which is a much nicer approach in general :)",
+      "parentUuid": "04ab18b4_c2cafca7",
+      "revId": "d578e051147d894a70997d33830bbb567cb5abf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8d38e79_585e7825",
