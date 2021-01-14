@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5475a97_58fb5e80",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2021-01-14T21:07:58Z",
+      "side": 1,
+      "message": "I looked through the history of the akpm tree and it looks like he doesn\u0027t normally give Acked-by.",
+      "parentUuid": "302ae2c7_c255442f",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 0
+      },
+      "revId": "3991d486702ab99cb12f0a14a74e00132d67609f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec9b3095_80274cda",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -37,6 +61,24 @@
       "writtenOn": "2021-01-14T21:04:18Z",
       "side": 1,
       "message": "Needs a \"Bug: \u003cbug number\u003e\"",
+      "revId": "3991d486702ab99cb12f0a14a74e00132d67609f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2ccc99b_e7a43459",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2021-01-14T21:07:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec9b3095_80274cda",
       "revId": "3991d486702ab99cb12f0a14a74e00132d67609f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
