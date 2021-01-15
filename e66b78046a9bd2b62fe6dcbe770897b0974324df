@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "93816ff6_fda38ef2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1810596
+      },
+      "writtenOn": "2021-01-15T08:25:40Z",
+      "side": 1,
+      "message": "I\u0027m very sorry, I haven\u0027t implemented upstream yet, because the owner on my side thinks that this modification can\u0027t be implemented upstream.So how to deal with this situation",
+      "parentUuid": "86d4753f_cfb03141",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "e66b78046a9bd2b62fe6dcbe770897b0974324df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0fa46cc7_b34ba98e",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
