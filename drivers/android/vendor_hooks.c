@@ -29,6 +29,13 @@
 #include <trace/hooks/preemptirq.h>
 #include <trace/hooks/ftrace_dump.h>
 #include <trace/hooks/pm_domain.h>
+#include <trace/hooks/bug.h>
+#include <trace/hooks/power.h>
+#include <trace/hooks/rcu.h>
+#include <trace/hooks/softlockup.h>
+#include <trace/hooks/fault.h>
+#include <trace/hooks/traps.h>
+#include <trace/hooks/list_debug.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -128,3 +135,14 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_size_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_format_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_dump_buffer);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_allow_domain_state);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dequeue_task_idle);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_watchdog_timer_softlockup);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_die_kernel_fault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_sea);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_mem_abort);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_sp_pc_abort);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_undefinstr);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_bad_mode);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_arm64_serror_panic);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_list_add_corruption);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_list_del_entry_corruption);

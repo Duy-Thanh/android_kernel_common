@@ -11,6 +11,8 @@
 #include <linux/kernel.h>
 #include <linux/rculist.h>
 
+#include <trace/hooks/list_debug.h>
+
 /*
  * Check that the data structures for the list manipulations are reasonably
  * valid. Failures here indicate memory corruption (and possibly an exploit
@@ -28,8 +30,10 @@ bool __list_add_valid(struct list_head *new, struct list_head *prev,
 			next, prev->next, prev) ||
 	    CHECK_DATA_CORRUPTION(new == prev || new == next,
 			"list_add double add: new=%px, prev=%px, next=%px.\n",
-			new, prev, next))
+			new, prev, next)) {
+		trace_android_rvh_list_add_corruption(new, prev, next);
 		return false;
+	}
 
 	return true;
 }
@@ -53,8 +57,10 @@ bool __list_del_entry_valid(struct list_head *entry)
 			entry, prev->next) ||
 	    CHECK_DATA_CORRUPTION(next->prev != entry,
 			"list_del corruption. next->prev should be %px, but was %px\n",
-			entry, next->prev))
+			entry, next->prev)) {
+		trace_android_rvh_list_del_entry_corruption(entry);
 		return false;
+	}
 
 	return true;
 

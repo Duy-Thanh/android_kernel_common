@@ -9,6 +9,8 @@
 
 #include <linux/lockdep.h>
 
+#include <trace/hooks/rcu.h>
+
 static void rcu_exp_handler(void *unused);
 static int rcu_print_task_exp_stall(struct rcu_node *rnp);
 
@@ -566,6 +568,8 @@ static void synchronize_rcu_expedited_wait(void)
 				dump_cpu_task(cpu);
 			}
 		}
+
+		trace_android_rvh_sync_rcu_expedited_wait(rcu_state.name);
 		jiffies_stall = 3 * rcu_jiffies_till_stall_check() + 3;
 	}
 }
