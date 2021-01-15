@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb304e74_55174d07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-01-15T11:14:37Z",
+      "side": 1,
+      "message": "This matches the upstream code, but I can\u0027t help thinking that:\n\n#if defined(CONFIG_KASAN) \u0026\u0026 CONFIG_KASAN_STACK\n\nwould be better off written as:\n\n#if defined(CONFIG_KASAN) \u0026\u0026 CONFIG_KASAN_STACK \u003e 0\n\nto make it clear that the latter is an \u0027int\u0027.",
+      "revId": "8cb1930a8e05ad8d4f0ae4784c441d5b1f65d822",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
