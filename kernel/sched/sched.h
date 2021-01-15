@@ -2684,3 +2684,7 @@ static inline bool task_may_not_preempt(struct task_struct *task, int cpu)
 	return false;
 }
 #endif /* CONFIG_RT_SOFTINT_OPTIMIZATION */
+
+extern int pelt_load_avg_period;
+extern int pelt_load_avg_max;
+extern u32 pelt_runnable_avg_yN_inv[];
