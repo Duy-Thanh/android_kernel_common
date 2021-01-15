@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "082287c4_7211b1dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1781415
+      },
+      "writtenOn": "2021-01-15T21:54:54Z",
+      "side": 1,
+      "message": "When the walt module is insmoded, we stop_machine() and do a bunch of initializations, including this one. Yes so we quiesce the scheduler",
+      "parentUuid": "7bbf8c3f_f32b7152",
+      "revId": "fde0690cfea9b6ccc3a67b6d78e25033b699c432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c9c2a306_a40983d3",
         "filename": "kernel/sched/sched.h",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2021-01-15T20:36:34Z",
       "side": 1,
       "message": "Have you measured the performance impact from these parameters becoming globals instead of constants?",
+      "revId": "fde0690cfea9b6ccc3a67b6d78e25033b699c432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b2c1e59_3de92955",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2690,
+      "author": {
+        "id": 1781415
+      },
+      "writtenOn": "2021-01-15T21:54:54Z",
+      "side": 1,
+      "message": "We only ran our unit test cases. No benchmarks were run.\n\nPatrick Bellasi had a similar looking one in Android baselines \nhttps://lore.kernel.org/lkml/20180409165134.707-1-patrick.bellasi@arm.com/t/\n\nSo I am not too concerned about the the regressions here. Overall pelt8 will shadow these regressions (if any.)",
+      "parentUuid": "c9c2a306_a40983d3",
       "revId": "fde0690cfea9b6ccc3a67b6d78e25033b699c432",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
