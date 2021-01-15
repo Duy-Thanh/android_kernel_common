@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "79a26628_d0b0ef1c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-15T16:02:14Z",
+      "side": 1,
+      "message": "please provide a more descriptive and detailed changelog text here.  This is very vague.\n\nDocumentation/SubmittingPatches has lots of text on how to do this well, perhaps read that again?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 54
+      },
+      "revId": "b7ec9d0adb3f2d92127c65712d485ad8bc121866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ad1edb22_009e4e0d",
@@ -31,6 +54,46 @@
       "writtenOn": "2021-01-15T02:34:21Z",
       "side": 1,
       "message": "Why don\u0027t you just make it a kernel command line instead of exporting it?",
+      "revId": "b7ec9d0adb3f2d92127c65712d485ad8bc121866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abf3b988_fca5e065",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-15T16:02:14Z",
+      "side": 1,
+      "message": "global symbol namespaces is rough, consider using a prefix please.",
+      "revId": "b7ec9d0adb3f2d92127c65712d485ad8bc121866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "486e6a9b_bbfbfad6",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2690,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-15T16:02:14Z",
+      "side": 1,
+      "message": "global symbols with no prefix?  brave...",
+      "range": {
+        "startLine": 2688,
+        "startChar": 0,
+        "endLine": 2690,
+        "endChar": 31
+      },
       "revId": "b7ec9d0adb3f2d92127c65712d485ad8bc121866",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
