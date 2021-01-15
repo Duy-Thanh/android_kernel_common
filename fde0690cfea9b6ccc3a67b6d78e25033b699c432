@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af228c4d_d9e7d382",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-15T21:59:55Z",
+      "side": 1,
+      "message": "Ok, please add this information to the commit message",
+      "parentUuid": "082287c4_7211b1dd",
+      "revId": "fde0690cfea9b6ccc3a67b6d78e25033b699c432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c9c2a306_a40983d3",
         "filename": "kernel/sched/sched.h",
         "patchSetId": 2
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "We only ran our unit test cases. No benchmarks were run.\n\nPatrick Bellasi had a similar looking one in Android baselines \nhttps://lore.kernel.org/lkml/20180409165134.707-1-patrick.bellasi@arm.com/t/\n\nSo I am not too concerned about the the regressions here. Overall pelt8 will shadow these regressions (if any.)",
       "parentUuid": "c9c2a306_a40983d3",
+      "revId": "fde0690cfea9b6ccc3a67b6d78e25033b699c432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1048aad_afcefcb2",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2690,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-15T21:59:55Z",
+      "side": 1,
+      "message": "Patrick\u0027s implementation was compile-time, not runtime. I\u0027m not worried about QC\u0027s performance (since I\u0027m assuming you cover that)...I\u0027m wondering about the performance observed by everyone else who stays with PELT32 but now instead of constants we have global variable lookups. Have you tested just the cost of moving from constants to globals?",
+      "parentUuid": "5b2c1e59_3de92955",
       "revId": "fde0690cfea9b6ccc3a67b6d78e25033b699c432",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
