@@ -55,8 +55,15 @@ struct tp_probes {
 
 static inline void *allocate_probes(int count)
 {
-	struct tp_probes *p  = kmalloc(struct_size(p, probes, count),
-				       GFP_KERNEL);
+	struct tp_probes *p;
+	int flags;
+
+	if (irqs_disabled())
+		flags = GFP_ATOMIC;
+	else
+		flags = GFP_KERNEL;
+
+	p = kmalloc(struct_size(p, probes, count), flags);
 	return p == NULL ? NULL : p->probes;
 }
 
@@ -275,7 +282,11 @@ static int tracepoint_add_func(struct tracepoint *tp,
 	 */
 	rcu_assign_pointer(tp->funcs, tp_funcs);
 	tracepoint_update_call(tp, tp_funcs, false);
-	static_key_enable(&tp->key);
+
+	if (irqs_disabled())
+		static_key_enable_cpuslocked(&tp->key);
+	else
+		static_key_enable(&tp->key);
 
 	release_probes(old);
 	return 0;
