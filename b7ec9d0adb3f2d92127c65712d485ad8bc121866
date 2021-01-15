@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "bfe09bb1_e6c0df75",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1827640
+      },
+      "writtenOn": "2021-01-15T17:26:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79a26628_d0b0ef1c",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 54
+      },
+      "revId": "b7ec9d0adb3f2d92127c65712d485ad8bc121866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ad1edb22_009e4e0d",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -105,6 +129,30 @@
       "writtenOn": "2021-01-15T16:02:14Z",
       "side": 1,
       "message": "global symbols with no prefix?  brave...",
+      "range": {
+        "startLine": 2688,
+        "startChar": 0,
+        "endLine": 2690,
+        "endChar": 31
+      },
+      "revId": "b7ec9d0adb3f2d92127c65712d485ad8bc121866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1300c58_234e32b8",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2690,
+      "author": {
+        "id": 1827640
+      },
+      "writtenOn": "2021-01-15T17:26:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "486e6a9b_bbfbfad6",
       "range": {
         "startLine": 2688,
         "startChar": 0,
