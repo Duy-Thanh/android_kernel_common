@@ -19,6 +19,26 @@
       "message": "Commit does not have a valid tag, such as ANDROID:\n\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 351810736 android-build.ayeaye-python-dispatcher_20210114.05_p0",
       "revId": "1ebce938154b50f68248232408097f92db07f2d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007332822",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1552175?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "492df684_ea559fbb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-15T14:33:54Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 351810736 android-build.ayeaye-python-dispatcher_20210114.05_p0",
+      "revId": "1ebce938154b50f68248232408097f92db07f2d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
