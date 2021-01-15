@@ -39,7 +39,7 @@ update_irq_load_avg(struct rq *rq, u64 running)
 
 static inline u32 get_pelt_divider(struct sched_avg *avg)
 {
-	return LOAD_AVG_MAX - 1024 + avg->period_contrib;
+	return pelt_load_avg_max - 1024 + avg->period_contrib;
 }
 
 /*
@@ -114,14 +114,14 @@ static inline void update_rq_clock_pelt(struct rq *rq, s64 delta)
  * When rq becomes idle, we have to check if it has lost idle time
  * because it was fully busy. A rq is fully used when the /Sum util_sum
  * is greater or equal to:
- * (LOAD_AVG_MAX - 1024 + rq->cfs.avg.period_contrib) << SCHED_CAPACITY_SHIFT;
+ * (pelt_load_avg_max - 1024 + rq->cfs.avg.period_contrib) << SCHED_CAPACITY_SHIFT;
  * For optimization and computing rounding purpose, we don't take into account
  * the position in the current window (period_contrib) and we use the higher
  * bound of util_sum to decide.
  */
 static inline void update_idle_rq_clock_pelt(struct rq *rq)
 {
-	u32 divider = ((LOAD_AVG_MAX - 1024) << SCHED_CAPACITY_SHIFT) - LOAD_AVG_MAX;
+	u32 divider = ((pelt_load_avg_max - 1024) << SCHED_CAPACITY_SHIFT) - pelt_load_avg_max;
 	u32 util_sum = rq->cfs.avg.util_sum;
 	util_sum += rq->avg_rt.util_sum;
 	util_sum += rq->avg_dl.util_sum;

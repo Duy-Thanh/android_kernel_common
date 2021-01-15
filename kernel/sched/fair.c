@@ -2259,7 +2259,7 @@ static u64 numa_get_avg_runtime(struct task_struct *p, u64 *period)
 			*period = 0;
 	} else {
 		delta = p->se.avg.load_sum;
-		*period = LOAD_AVG_MAX;
+		*period = pelt_load_avg_max;
 	}
 
 	p->last_sum_exec_runtime = runtime;
@@ -3429,7 +3429,7 @@ void set_task_rq_fair(struct sched_entity *se,
  *
  * Given the constraint:
  *
- *   ge->avg.running_sum <= ge->avg.runnable_sum <= LOAD_AVG_MAX
+ *   ge->avg.running_sum <= ge->avg.runnable_sum <= pelt_load_avg_max
  *
  * We can construct a rule that adds runnable to a rq by assuming minimal
  * overlap.
@@ -3514,7 +3514,7 @@ update_tg_cfs_load(struct cfs_rq *cfs_rq, struct sched_entity *se, struct cfs_rq
 
 	if (runnable_sum >= 0) {
 		/*
-		 * Add runnable; clip at LOAD_AVG_MAX. Reflects that until
+		 * Add runnable; clip at pelt_load_avg_max. Reflects that until
 		 * the CPU is saturated running == runnable.
 		 */
 		runnable_sum += se->avg.load_sum;
@@ -3536,8 +3536,8 @@ update_tg_cfs_load(struct cfs_rq *cfs_rq, struct sched_entity *se, struct cfs_rq
 	/*
 	 * runnable_sum can't be lower than running_sum
 	 * Rescale running sum to be in the same range as runnable sum
-	 * running_sum is in [0 : LOAD_AVG_MAX <<  SCHED_CAPACITY_SHIFT]
-	 * runnable_sum is in [0 : LOAD_AVG_MAX]
+	 * running_sum is in [0 : pelt_load_avg_max <<  SCHED_CAPACITY_SHIFT]
+	 * runnable_sum is in [0 : pelt_load_avg_max]
 	 */
 	running_sum = se->avg.util_sum >> SCHED_CAPACITY_SHIFT;
 	runnable_sum = max(runnable_sum, running_sum);
@@ -9057,7 +9057,7 @@ next_group:
 	    cpumask_subset(nohz.idle_cpus_mask, sched_domain_span(env->sd))) {
 
 		WRITE_ONCE(nohz.next_blocked,
-			   jiffies + msecs_to_jiffies(LOAD_AVG_PERIOD));
+			   jiffies + msecs_to_jiffies(pelt_load_avg_period));
 	}
 #endif
 
@@ -10539,7 +10539,7 @@ static bool _nohz_idle_balance(struct rq *this_rq, unsigned int flags,
 		rebalance_domains(this_rq, CPU_IDLE);
 
 	WRITE_ONCE(nohz.next_blocked,
-		now + msecs_to_jiffies(LOAD_AVG_PERIOD));
+		now + msecs_to_jiffies(pelt_load_avg_period));
 
 	/* The full idle balance loop has been done */
 	ret = true;
