@@ -16,6 +16,40 @@
       "message": "Why not a commandline arg?",
       "revId": "fde0690cfea9b6ccc3a67b6d78e25033b699c432",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bbf8c3f_f32b7152",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-15T20:36:34Z",
+      "side": 1,
+      "message": "How do the dynamic aspects of this work? There is no locking -- do you quiesce the scheduler? If not, the globals might be in an inconsistent state. Please add a description of how the transition works in the commit message.",
+      "revId": "fde0690cfea9b6ccc3a67b6d78e25033b699c432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9c2a306_a40983d3",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2690,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-15T20:36:34Z",
+      "side": 1,
+      "message": "Have you measured the performance impact from these parameters becoming globals instead of constants?",
+      "revId": "fde0690cfea9b6ccc3a67b6d78e25033b699c432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
