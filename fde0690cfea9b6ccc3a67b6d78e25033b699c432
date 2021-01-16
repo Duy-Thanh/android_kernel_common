@@ -140,6 +140,24 @@
       "parentUuid": "b1048aad_afcefcb2",
       "revId": "fde0690cfea9b6ccc3a67b6d78e25033b699c432",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18aba43c_6c97a754",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2690,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-16T00:16:32Z",
+      "side": 1,
+      "message": "It would help if you ran some a/b tests with and without this change (using PELT32) to just measure the difference due to constant-\u003eglobal and add those numbers to the commit message (could be on an already-released device on an older kernel so the numbers don\u0027t reveal any secrets).\n\nIf this cost is too high, we\u0027ll help investigate alternatives (I have a hunch it will not be too high). Depending on the results we\u0027ll let other partners weigh-in on it -- I suspect there might be interest by others in making this run-time configurable.",
+      "parentUuid": "ce8ffa09_e307b9d5",
+      "revId": "fde0690cfea9b6ccc3a67b6d78e25033b699c432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
