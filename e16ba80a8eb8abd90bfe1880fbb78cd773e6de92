@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03ce5928_632c18b0",
+        "filename": "kernel/sched/pelt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-17T12:41:39Z",
+      "side": 1,
+      "message": "why did you loose the const?",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 28
+      },
+      "revId": "e16ba80a8eb8abd90bfe1880fbb78cd773e6de92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c8fc72e_e453ab44",
+        "filename": "kernel/sched/pelt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-17T12:41:39Z",
+      "side": 1,
+      "message": "no longer needed as you are exporting it.",
+      "range": {
+        "startLine": 31,
+        "startChar": 31,
+        "endLine": 31,
+        "endChar": 45
+      },
+      "revId": "e16ba80a8eb8abd90bfe1880fbb78cd773e6de92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64704fcd_23a2b42a",
+        "filename": "kernel/sched/pelt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-17T12:41:39Z",
+      "side": 1,
+      "message": "what keeps you from running off the end of the array now?",
+      "range": {
+        "startLine": 72,
+        "startChar": 53,
+        "endLine": 72,
+        "endChar": 60
+      },
+      "revId": "e16ba80a8eb8abd90bfe1880fbb78cd773e6de92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
