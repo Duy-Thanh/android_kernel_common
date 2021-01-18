@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5fa4b4e3_b89344c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1810596
+      },
+      "writtenOn": "2021-01-18T06:18:08Z",
+      "side": 1,
+      "message": "There are features related to our chip in the code, and we have made some optimization of the code. This part cannot be upstream.",
+      "parentUuid": "04ed593b_59d334a7",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "e66b78046a9bd2b62fe6dcbe770897b0974324df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0fa46cc7_b34ba98e",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
