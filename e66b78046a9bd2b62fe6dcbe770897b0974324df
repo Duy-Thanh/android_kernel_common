@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "753f5ba8_2e72af46",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-18T09:34:04Z",
+      "side": 1,
+      "message": "All kernel code can go upstream, if someone needs it, and it is valid code, it will be merged as long as it doesn\u0027t break any other existing user.  No need to keep any kernel code out-of-tree, that just costs time and money.\n\nPlease submit it upstream and we will be glad to review it there.",
+      "parentUuid": "5fa4b4e3_b89344c9",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "e66b78046a9bd2b62fe6dcbe770897b0974324df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0fa46cc7_b34ba98e",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
