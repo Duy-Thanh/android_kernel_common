@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27e44300_5431404a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-18T09:51:50Z",
+      "side": 1,
+      "message": "No need to update the .xml file if there is no changes in it.  Please remove from this commit and resubmit, thanks!",
+      "revId": "e1155e25acaab47733d623c3bab1bcd19b098d76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
