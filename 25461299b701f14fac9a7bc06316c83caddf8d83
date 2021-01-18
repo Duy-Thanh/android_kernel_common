@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "207baf85_4117d38d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-01-18T15:31:02Z",
+      "side": 1,
+      "message": "Looks like CTS was skipped during presubmit when this got merged, so this is just a test to see if reverting solves our CTS issues ...",
+      "revId": "25461299b701f14fac9a7bc06316c83caddf8d83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
