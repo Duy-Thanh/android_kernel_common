@@ -35,6 +35,7 @@
 #include <trace/hooks/softlockup.h>
 #include <trace/hooks/fault.h>
 #include <trace/hooks/traps.h>
+#include <trace/hooks/list_debug.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -151,3 +152,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_sp_pc_abort);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_undefinstr);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_bad_mode);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_arm64_serror_panic);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_list_add_corruption);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_list_del_entry_corruption);
