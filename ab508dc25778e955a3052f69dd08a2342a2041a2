@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2daf9af0_db927a12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-01-19T03:53:09Z",
+      "side": 1,
+      "message": "This will need to be fixed differently. GKI can be used for virtual machines under Android, so we need CONFIG_KVM.",
+      "revId": "ab508dc25778e955a3052f69dd08a2342a2041a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
