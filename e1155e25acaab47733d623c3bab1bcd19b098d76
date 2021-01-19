@@ -52,6 +52,24 @@
       "parentUuid": "d8a84e90_0dc76272",
       "revId": "e1155e25acaab47733d623c3bab1bcd19b098d76",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55223f1b_483240d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-01-19T09:56:40Z",
+      "side": 1,
+      "message": "Well, the output is deterministic based on the input. Just almost every change to the code leads to a change in the binary (DWARF) and that leads to a slightly different representation (XML). libabigail is a bit too sensitive on this, but we are working on making this better over time.",
+      "parentUuid": "b6b4c7c4_59840d03",
+      "revId": "e1155e25acaab47733d623c3bab1bcd19b098d76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
