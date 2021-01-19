@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03bcf8d4_40dabeef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-19T16:35:38Z",
+      "side": 1,
+      "message": "The debug symbols driver can retrieve static symbols. Talk to Prasad.",
+      "parentUuid": "cd86ca4d_87be4133",
+      "revId": "2fb927a1f00fa237ac2913495c6091f687932bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19226e8f_aa2ac524",
         "filename": "arch/arm64/kernel/smp.c",
         "patchSetId": 2
