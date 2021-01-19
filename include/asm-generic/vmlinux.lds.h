@@ -525,8 +525,15 @@
  */
 #define TEXT_TEXT							\
 		ALIGN_FUNCTION();					\
+<<<<<<< HEAD   (417245 Revert "BACKPORT: FROMGIT: mm: improve mprotect(R|W) efficie)
 		*(.text.hot TEXT_MAIN .text.fixup .text.unlikely)	\
 		*(TEXT_CFI_MAIN)					\
+=======
+		*(.text.hot .text.hot.*)				\
+		*(TEXT_MAIN .text.fixup)				\
+		*(.text.unlikely .text.unlikely.*)			\
+		*(.text.unknown .text.unknown.*)			\
+>>>>>>> BRANCH (ceed81 Linux 5.4.90)
 		*(.text..refcount)					\
 		*(.text..ftrace)					\
 		*(.ref.text)						\
