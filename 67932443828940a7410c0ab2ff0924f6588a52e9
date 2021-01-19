@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007409989",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1552175?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "d473dec8_876b753b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-19T20:59:05Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a properly formatted Bug: or Fixes: line\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 351810736 android-build.ayeaye-python-dispatcher_20210114.05_p0",
+      "revId": "67932443828940a7410c0ab2ff0924f6588a52e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007409989",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1552175?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "8c7e2a77_7bb069d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-19T20:59:05Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Suren Baghdasaryan \u003csurenb@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 351810736 android-build.ayeaye-python-dispatcher_20210114.05_p0",
+      "revId": "67932443828940a7410c0ab2ff0924f6588a52e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
