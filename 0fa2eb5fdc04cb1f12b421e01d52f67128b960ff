@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9578bff0_55de31c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-01-19T09:03:41Z",
+      "side": 1,
+      "message": "You could link this to whatever bug tracked the patch that made CRC changes be considered harmful or the bug adding CRC monitoring in the first place.",
+      "revId": "0fa2eb5fdc04cb1f12b421e01d52f67128b960ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
