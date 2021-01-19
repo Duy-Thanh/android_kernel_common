@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d99757bd_b9b0b965",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-01-19T17:06:05Z",
+      "side": 1,
+      "message": "Since it\u0027s a revert, and lint doesn\u0027t like it, bypassing presubmit",
+      "revId": "2579665e488af1ae21f6834a0c3e6b5f8c2c57bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
