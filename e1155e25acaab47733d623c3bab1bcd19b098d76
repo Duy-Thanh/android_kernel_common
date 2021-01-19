@@ -16,6 +16,24 @@
       "message": "No need to update the .xml file if there is no changes in it.  Please remove from this commit and resubmit, thanks!",
       "revId": "e1155e25acaab47733d623c3bab1bcd19b098d76",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8a84e90_0dc76272",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1810596
+      },
+      "writtenOn": "2021-01-19T08:13:31Z",
+      "side": 1,
+      "message": "OK。\nWhy does the XML file change after I update the Abigail tool and execute the \nBUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build_abi.sh --update command",
+      "parentUuid": "27e44300_5431404a",
+      "revId": "e1155e25acaab47733d623c3bab1bcd19b098d76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
