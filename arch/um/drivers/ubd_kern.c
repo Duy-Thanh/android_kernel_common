@@ -370,16 +370,17 @@ static int ubd_setup_common(char *str, int *index_out, char **error_out)
 	goto out;
 
 break_loop:
+
 	file = strsep(&str, ",:");
-	if (*file == '\0')
+	if (!file || *file == '\0')
 		file = NULL;
 
 	backing_file = strsep(&str, ",:");
-	if (*backing_file == '\0')
+	if (!backing_file || *backing_file == '\0')
 		backing_file = NULL;
 
 	serial = strsep(&str, ",:");
-	if (*serial == '\0')
+	if (!serial || *serial == '\0')
 		serial = NULL;
 
 	if (backing_file && ubd_dev->no_cow) {
