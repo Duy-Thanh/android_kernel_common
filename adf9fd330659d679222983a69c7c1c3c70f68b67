@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ea28d6f_82c2576f",
+        "filename": "fs/incfs/pseudo_files.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-01-20T19:50:46Z",
+      "side": 1,
+      "message": "Oops. Done, and in all the other places as well.\n\nDecided to go for nulling them out, as that doesn\u0027t add an extra two checks to the normal path. Not sure if that matters, but that\u0027s why I did it.",
+      "parentUuid": "3c1b4843_8d9120d3",
+      "range": {
+        "startLine": 422,
+        "startChar": 2,
+        "endLine": 422,
+        "endChar": 11
+      },
+      "revId": "adf9fd330659d679222983a69c7c1c3c70f68b67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84f9cca5_df5f1130",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-01-14T20:53:03Z",
       "side": 1,
       "message": "1. do you have to call it before unlinking?\n2. what if unlink returns error? inotify waiters will have already processed the notification. I doubt it\u0027s common to make sure the notification isn\u0027t lying to you in the code...",
+      "range": {
+        "startLine": 1027,
+        "startChar": 0,
+        "endLine": 1027,
+        "endChar": 55
+      },
+      "revId": "adf9fd330659d679222983a69c7c1c3c70f68b67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ec1a084_d077797a",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-01-20T19:50:46Z",
+      "side": 1,
+      "message": "Done, and in the other two places as well",
+      "parentUuid": "84f9cca5_df5f1130",
       "range": {
         "startLine": 1027,
         "startChar": 0,
