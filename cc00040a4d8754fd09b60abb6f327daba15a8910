@@ -1,0 +1,64 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007484331",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1556799?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "a34346ad_9cf2c7c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-21T20:29:04Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a properly formatted Bug: or Fixes: line\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 352582441 android-build.ayeaye-python-dispatcher_20210119.05_p0",
+      "revId": "cc00040a4d8754fd09b60abb6f327daba15a8910",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007484331",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1556799?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "bd8ca316_cd6ad295",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-21T20:29:04Z",
+      "side": 1,
+      "message": "Commit does not link to an upstream reference at lore\nPlease add a line like \u0027Link: https://lore.kernel.org/...\u0027\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 352582441 android-build.ayeaye-python-dispatcher_20210119.05_p0",
+      "revId": "cc00040a4d8754fd09b60abb6f327daba15a8910",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007484331",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1556799?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "1a9b562c_38b9fbd4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-21T20:29:04Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Minchan Kim \u003cminchan@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 352582441 android-build.ayeaye-python-dispatcher_20210119.05_p0",
+      "revId": "cc00040a4d8754fd09b60abb6f327daba15a8910",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
