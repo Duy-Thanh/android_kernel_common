@@ -47,6 +47,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a437b92_2c5f2ebb",
+        "filename": "kernel/sched/pelt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1827640
+      },
+      "writtenOn": "2021-01-21T19:04:30Z",
+      "side": 1,
+      "message": "Because we need to modify the array at runtime.",
+      "parentUuid": "03ce5928_632c18b0",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 28
+      },
+      "revId": "e16ba80a8eb8abd90bfe1880fbb78cd773e6de92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb349640_14a50fc5",
+        "filename": "kernel/sched/pelt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1827640
+      },
+      "writtenOn": "2021-01-21T19:04:30Z",
+      "side": 1,
+      "message": "will update.",
+      "parentUuid": "3c8fc72e_e453ab44",
+      "range": {
+        "startLine": 31,
+        "startChar": 31,
+        "endLine": 31,
+        "endChar": 45
+      },
+      "revId": "e16ba80a8eb8abd90bfe1880fbb78cd773e6de92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64704fcd_23a2b42a",

@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9634bb6_c27dd2ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1827640
+      },
+      "writtenOn": "2021-01-21T19:04:30Z",
+      "side": 1,
+      "message": "Saravana, we need to adjust PELT half-life at runtime once the vendor module is loaded.",
+      "parentUuid": "9189b0e5_9df07500",
+      "revId": "fde0690cfea9b6ccc3a67b6d78e25033b699c432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9c2a306_a40983d3",
