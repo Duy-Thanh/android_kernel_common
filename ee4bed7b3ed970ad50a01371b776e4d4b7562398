@@ -16,6 +16,24 @@
       "message": "Hridya,\n\nAs you know, dmabuf API interface is changed from upstream recently so we need to make backport build successful.\n\nDo we need to backport recent changes on dmabuf(from 5.10 to next-today) to catch it up on 5.10?\nOr just tweak this patchset to work on 5.10?\n",
       "revId": "ee4bed7b3ed970ad50a01371b776e4d4b7562398",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f629617_c0cad205",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-01-21T21:43:37Z",
+      "side": 1,
+      "message": "Yes, we would just tweak this patchset to backport it to 5.10 since we do not have a reason to pull-in those DMA API changes to 5.10. The backporting changes are pretty straightforward though, please use system_heap.c as a reference for the same. Thank you!",
+      "parentUuid": "b2f1ce78_d3d0abc5",
+      "revId": "ee4bed7b3ed970ad50a01371b776e4d4b7562398",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
