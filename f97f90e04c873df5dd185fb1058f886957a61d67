@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a633440_68ff5936",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1385395
+      },
+      "writtenOn": "2021-01-21T21:48:06Z",
+      "side": 1,
+      "message": "Reached out and awaiting feedback on the effect of this on ramdump debuggability, holding this patch for now until clarified",
+      "revId": "f97f90e04c873df5dd185fb1058f886957a61d67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
