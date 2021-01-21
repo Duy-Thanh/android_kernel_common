@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d2e06de_bd9a0681",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-21T09:15:18Z",
+      "side": 1,
+      "message": "RCU already has a lot of trace information, please work with upstream to add any extra\nstuff that you feel is missing, but for now, these just seem like they are required by\nanything at all.\n\nSo please, work with upstream on this, touching rcu code for anything is tricky and can\naffect everyone in odd ways without lots and lots and lots of testing.",
+      "revId": "b0a16a591962016eb7da5ac10528ac10ae2f7467",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92f0a2cd_f39e793d",
+        "filename": "kernel/rcu/tree_stall.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-21T09:15:18Z",
+      "side": 1,
+      "message": "why do you need this if you already got the full dump from above in rcu_dump_cpu_stacks()?",
+      "range": {
+        "startLine": 575,
+        "startChar": 0,
+        "endLine": 575,
+        "endChar": 55
+      },
+      "revId": "b0a16a591962016eb7da5ac10528ac10ae2f7467",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
