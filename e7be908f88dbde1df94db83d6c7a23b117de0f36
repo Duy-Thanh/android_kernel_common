@@ -22,6 +22,30 @@
       },
       "revId": "e7be908f88dbde1df94db83d6c7a23b117de0f36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e03128c_32c1bbd4",
+        "filename": "drivers/staging/android/debug_kinfo.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2021-01-21T23:45:06Z",
+      "side": 1,
+      "message": "Thanks for catching that! I\u0027ve updated it on android-mainline and will cherry-pick it to androd12-5.10 after it merges there.\n\nhttps://android-review.googlesource.com/c/kernel/common/+/1556519",
+      "parentUuid": "7140254b_d2fe8245",
+      "range": {
+        "startLine": 113,
+        "startChar": 1,
+        "endLine": 117,
+        "endChar": 0
+      },
+      "revId": "e7be908f88dbde1df94db83d6c7a23b117de0f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
