@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "732770da_e3a53979",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-01-21T23:18:52Z",
+      "side": 1,
+      "message": "making normal and updating comment.",
+      "parentUuid": "e4645f40_7e0d90d8",
+      "revId": "c27c47f06e3377a8f3b5bc363b49222b7341bbce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8ac394c1_10b302f2",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -31,6 +49,23 @@
       "writtenOn": "2021-01-07T23:04:35Z",
       "side": 1,
       "message": "Updating cc list...",
+      "revId": "c27c47f06e3377a8f3b5bc363b49222b7341bbce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "679291c5_0f0d8137",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-01-21T23:18:52Z",
+      "side": 1,
+      "message": "comments below, I\u0027ll make the updates, rebase, and upload.  many thanks.  Stephen",
       "revId": "c27c47f06e3377a8f3b5bc363b49222b7341bbce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +87,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e73151da_98ca3c0c",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-01-21T23:18:52Z",
+      "side": 1,
+      "message": "updating.",
+      "parentUuid": "de510bca_b726110e",
+      "revId": "c27c47f06e3377a8f3b5bc363b49222b7341bbce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a0bb6a2_f1b3a27d",
@@ -65,6 +118,24 @@
       "writtenOn": "2021-01-08T01:52:19Z",
       "side": 1,
       "message": "Why is this export needed. Nothing about it is mentioned in the commit message",
+      "revId": "c27c47f06e3377a8f3b5bc363b49222b7341bbce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31a275d9_f01b83aa",
+        "filename": "kernel/cgroup/cpuset.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3241,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-01-21T23:18:52Z",
+      "side": 1,
+      "message": "It is needed for the same reason the hooks have been inserted.  This is the functionality to be called from the hook that is needed by Qualcomm.",
+      "parentUuid": "0a0bb6a2_f1b3a27d",
       "revId": "c27c47f06e3377a8f3b5bc363b49222b7341bbce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
