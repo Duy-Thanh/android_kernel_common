@@ -16,6 +16,24 @@
       "message": "Why are these not needed upstream as well?",
       "revId": "2eb852b6b7e90a1076e8e3548025a4d27af71038",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cafb9b8_8cea4c15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2021-01-21T06:15:07Z",
+      "side": 1,
+      "message": "Thanks Greg. We will check internally whether do need export these symbols.",
+      "parentUuid": "5e2cfa9a_6d20ce7a",
+      "revId": "2eb852b6b7e90a1076e8e3548025a4d27af71038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
