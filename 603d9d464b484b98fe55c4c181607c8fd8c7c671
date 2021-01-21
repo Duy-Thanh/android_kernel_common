@@ -16,6 +16,24 @@
       "message": "Sent a request to stable: https://lore.kernel.org/stable/CAKwvOdk_U6SEwOC-ykaVTMu1ZmEjWC8cCiTetvU2k2dQ6WPCoQ@mail.gmail.com/T/#u",
       "revId": "603d9d464b484b98fe55c4c181607c8fd8c7c671",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d0cacbf_73065334",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-21T12:52:49Z",
+      "side": 1,
+      "message": "Now queued up for the next 4.19.y release.",
+      "parentUuid": "c10264c1_d5801473",
+      "revId": "603d9d464b484b98fe55c4c181607c8fd8c7c671",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
