@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7140254b_d2fe8245",
+        "filename": "drivers/staging/android/debug_kinfo.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1710531
+      },
+      "writtenOn": "2021-01-21T02:23:11Z",
+      "side": 1,
+      "message": "Hello. Will.\n\nThis is written for debug-snapshot only for kernel 5.4.\nI think this part needs to be removed because it was used differently from the original usage of rmem-\u003epriv.",
+      "range": {
+        "startLine": 113,
+        "startChar": 1,
+        "endLine": 117,
+        "endChar": 0
+      },
+      "revId": "e7be908f88dbde1df94db83d6c7a23b117de0f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
