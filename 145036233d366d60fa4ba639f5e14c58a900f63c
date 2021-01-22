@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "265a4c09_c9e68019",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2021-01-22T13:09:46Z",
+      "side": 1,
+      "message": "This really should be discussed upstream first. I also wonder why this isn\u0027t directly a hook on panic(), which would cover two of the three hooks.\n\nFinally, I\u0027m worried about the safety of the NMI context, as you can\u0027t use much of the kernel constructs there.",
+      "revId": "145036233d366d60fa4ba639f5e14c58a900f63c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92ee1a49_18de7f48",
+        "filename": "arch/arm64/kernel/traps.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2021-01-22T13:09:46Z",
+      "side": 1,
+      "message": "The second parameter is totally superfluous, since being in usermode can be deducted from the register file itself.",
+      "revId": "145036233d366d60fa4ba639f5e14c58a900f63c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55247ccd_fde1bdb3",
+        "filename": "arch/arm64/kernel/traps.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2021-01-22T13:09:46Z",
+      "side": 1,
+      "message": "How safe is it to call a random hook in NMI context? I don\u0027t think this can be made to work in the general case.",
+      "revId": "145036233d366d60fa4ba639f5e14c58a900f63c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afe95591_d9310740",
+        "filename": "arch/arm64/kernel/traps.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2021-01-22T13:09:46Z",
+      "side": 1,
+      "message": "Same thing here.",
+      "revId": "145036233d366d60fa4ba639f5e14c58a900f63c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
