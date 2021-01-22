@@ -80,6 +80,30 @@
       },
       "revId": "e827ae2298198ef17622505c992f844b3719971f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b15840cf_f3274c72",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2021-01-22T10:58:52Z",
+      "side": 1,
+      "message": "I meant that the purpose of this function is to give a !idle CPU.\n\nWith the current patch, when a paused CPU is calling get_nohz_timer_target() it\u0027ll always skip looking for a !idle CPU.\n\nThis IMO a problem as it bypass the key feature of this function.\n\nMy suggestion is to try to looking for a !idle CPU even when the CPU is paused.",
+      "parentUuid": "862929c4_fc7a145a",
+      "range": {
+        "startLine": 696,
+        "startChar": 0,
+        "endLine": 696,
+        "endChar": 4
+      },
+      "revId": "e827ae2298198ef17622505c992f844b3719971f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
