@@ -88,6 +88,24 @@
       "parentUuid": "1c9b3789_a0e7fc0b",
       "revId": "f752abd91bbe7786bb2c2b8a2a0c961f17e1fd9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b86dcda1_e325bf23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-22T00:11:00Z",
+      "side": 1,
+      "message": "The potential issues were clarified and discussed upstream: https://lore.kernel.org/linux-mm/X%2F3VE64nr91WCtuM@hirez.programming.kicks-ass.net/\nNo real problems needing fixes were noted so far.",
+      "parentUuid": "ee8717d2_b813e4e5",
+      "revId": "f752abd91bbe7786bb2c2b8a2a0c961f17e1fd9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
