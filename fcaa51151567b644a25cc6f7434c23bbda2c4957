@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72ebd112_4a450b5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-22T10:37:59Z",
+      "side": 1,
+      "message": "UPSTREAM: means that this is merged into Linus\u0027s tree, and it needs a git commit id.  Please provide that here, as the lint bot is asking for.",
+      "revId": "fcaa51151567b644a25cc6f7434c23bbda2c4957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
