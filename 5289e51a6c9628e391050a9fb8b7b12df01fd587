@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89b9161d_f60f264f",
+        "filename": "drivers/dma-buf/heaps/chunk_heap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-01-22T16:01:41Z",
+      "side": 1,
+      "message": "Ack. I will also update this part in upstreaming patch so we keep close to upstreamed patch later.\n\nThanks!",
+      "parentUuid": "9264f7e0_57d44533",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 30
+      },
+      "revId": "5289e51a6c9628e391050a9fb8b7b12df01fd587",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f1f5592_86973e60",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-01-22T11:45:17Z",
       "side": 1,
       "message": "I just found that this is redundant.",
+      "range": {
+        "startLine": 256,
+        "startChar": 1,
+        "endLine": 256,
+        "endChar": 23
+      },
+      "revId": "5289e51a6c9628e391050a9fb8b7b12df01fd587",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34db9a72_7b071d5c",
+        "filename": "drivers/dma-buf/heaps/chunk_heap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-01-22T16:01:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8f1f5592_86973e60",
       "range": {
         "startLine": 256,
         "startChar": 1,
