@@ -56,6 +56,30 @@
       },
       "revId": "e827ae2298198ef17622505c992f844b3719971f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "862929c4_fc7a145a",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-01-22T01:18:28Z",
+      "side": 1,
+      "message": "vincent, I thought the purpose of line 690 was also to find any CPU, regardless of whether it is idle or not.  This is the backup case, with the primary exit point being lines 682 through 685.  would you mind explaining a little further?",
+      "parentUuid": "c8f3889d_d95bc9c1",
+      "range": {
+        "startLine": 696,
+        "startChar": 0,
+        "endLine": 696,
+        "endChar": 4
+      },
+      "revId": "e827ae2298198ef17622505c992f844b3719971f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
