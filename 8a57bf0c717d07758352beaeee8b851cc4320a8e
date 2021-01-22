@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a3eedeb_f84900c3",
+        "filename": "kernel/sched/sched-pelt.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-22T10:41:54Z",
+      "side": 1,
+      "message": "this comment needs to be added back where you moved these values to, right?  Otherwise it does not make any sense here 😊",
+      "range": {
+        "startLine": 2,
+        "startChar": 3,
+        "endLine": 2,
+        "endChar": 66
+      },
+      "revId": "8a57bf0c717d07758352beaeee8b851cc4320a8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "064ff811_8470191b",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 2691,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-22T10:41:54Z",
+      "side": 1,
+      "message": "move this to sched-pelt.h instead?",
+      "range": {
+        "startLine": 2688,
+        "startChar": 0,
+        "endLine": 2691,
+        "endChar": 0
+      },
+      "revId": "8a57bf0c717d07758352beaeee8b851cc4320a8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
