@@ -16,6 +16,52 @@
       "message": "Hridya,\n\nI backported this patch against on 5.10. Please review what I made mistake during the backport.\nThank you.",
       "revId": "5289e51a6c9628e391050a9fb8b7b12df01fd587",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9264f7e0_57d44533",
+        "filename": "drivers/dma-buf/heaps/chunk_heap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1646687
+      },
+      "writtenOn": "2021-01-22T11:45:17Z",
+      "side": 1,
+      "message": "These can be static and __initdata because these variables are referenced only here in __init functions.",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 30
+      },
+      "revId": "5289e51a6c9628e391050a9fb8b7b12df01fd587",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f1f5592_86973e60",
+        "filename": "drivers/dma-buf/heaps/chunk_heap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1646687
+      },
+      "writtenOn": "2021-01-22T11:45:17Z",
+      "side": 1,
+      "message": "I just found that this is redundant.",
+      "range": {
+        "startLine": 256,
+        "startChar": 1,
+        "endLine": 256,
+        "endChar": 23
+      },
+      "revId": "5289e51a6c9628e391050a9fb8b7b12df01fd587",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
