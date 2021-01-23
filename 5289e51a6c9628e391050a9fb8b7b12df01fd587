@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66b1b8db_2d835de3",
+        "filename": "drivers/dma-buf/heaps/chunk_heap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1646687
+      },
+      "writtenOn": "2021-01-23T05:33:27Z",
+      "side": 1,
+      "message": "Thank you for the update.",
+      "parentUuid": "89b9161d_f60f264f",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 30
+      },
+      "revId": "5289e51a6c9628e391050a9fb8b7b12df01fd587",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f1f5592_86973e60",
