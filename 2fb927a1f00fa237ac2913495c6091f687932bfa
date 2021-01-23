@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e40b07f_73f2c5f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-23T02:50:42Z",
+      "side": 1,
+      "message": "Hi Todd, \n\nThis static and our debug symbol driver would not be able provide address information. \n\n1) exporting API \n2) Removing static definition. \n\n\n-Thanks, Prasad",
+      "parentUuid": "03bcf8d4_40dabeef",
+      "revId": "2fb927a1f00fa237ac2913495c6091f687932bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19226e8f_aa2ac524",
