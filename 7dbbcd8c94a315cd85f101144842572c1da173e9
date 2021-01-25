@@ -93,6 +93,30 @@
       },
       "revId": "7dbbcd8c94a315cd85f101144842572c1da173e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcecc4c7_01b84a20",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-25T15:08:14Z",
+      "side": 1,
+      "message": "[    8.293674] \u003cSP\u003e: cpu7::::ffffffcadcffb000\n\nAbove address match with  values printed with raw_cpu_ptr(irq_stack_ptr), this_cpu_ptr(irq_stack_ptr). \n\n[    8.251810] \u003cSP\u003e raw_cpu_ptr(irq_stack_ptr)\u003d0xffffffcadcffb000::this_cpu_ptr\u003dffffffcadcffb000",
+      "parentUuid": "0cdca77d_8252a2b7",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 33
+      },
+      "revId": "7dbbcd8c94a315cd85f101144842572c1da173e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
