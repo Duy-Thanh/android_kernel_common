@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "789eea3a_57183701",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-25T17:29:21Z",
+      "side": 1,
+      "message": "Since this is built into the kernel, can\u0027t you use kallsyms to get static symbols from the debug symbol driver?",
+      "parentUuid": "5e40b07f_73f2c5f3",
+      "revId": "2fb927a1f00fa237ac2913495c6091f687932bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19226e8f_aa2ac524",
