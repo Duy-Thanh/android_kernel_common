@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce8d1cc5_13e92c3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1743420
+      },
+      "writtenOn": "2021-01-25T11:55:37Z",
+      "side": 1,
+      "message": "\u003e This really should be discussed upstream first. I also wonder why this isn\u0027t directly a hook on panic(), which would cover two of the three hooks.\n\nbad_mode()/arm64_serror_panic() will call panic().\nBut panic_notifier cannot get other information like \u0027regs\u0027 and \u0027esr\u0027.\nBecause we can see PC/LR from \u0027regs\u0027 and a exception class and ISS data from \u0027esr\u0027, these information is useful for our Auto Comment and Market issue monitoring features mentioned in Bug: 177483057.\n\n\u003e Finally, I\u0027m worried about the safety of the NMI context, as you can\u0027t use much of the kernel constructs there.\n\nOur hooks are performing a simple procedure that it stores information into pre-allocated buffer without interacting with kernel constructs.\n\nEx)\na_hook(regs, esr)\n{\n   buf \u003d Auto Comment buffer\n   str \u003d make human readable string with \u0027regs\u0027 and \u0027esr\u0027\n   store \u0027str\u0027 into \u0027buf\u0027\n\n   arr \u003d Issue monitoring buffer\n   store regs-\u003epc into arr[PC]\n   store regs-\u003elr into arr[LR]\n   store regs-\u003eesr into arr[ESR]\n}",
+      "parentUuid": "265a4c09_c9e68019",
+      "revId": "145036233d366d60fa4ba639f5e14c58a900f63c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92ee1a49_18de7f48",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-01-22T13:09:46Z",
       "side": 1,
       "message": "The second parameter is totally superfluous, since being in usermode can be deducted from the register file itself.",
+      "revId": "145036233d366d60fa4ba639f5e14c58a900f63c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d28ff5b7_a72eb493",
+        "filename": "arch/arm64/kernel/traps.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1743420
+      },
+      "writtenOn": "2021-01-25T11:55:37Z",
+      "side": 1,
+      "message": "The second parameter is used only for TP_CONDITION.\nOtherwise, Checking user_mode() can be done before calling a hook or can be done in a hook.\n\nex1)\nvoid do_undefinstr(struct pt_regs *regs)\n{\n   ...\n   if (!user_mode(regs))\n      trace_android_rvh_do_undefinstr(...);\n   ...\n}\n\nex2)\nvoid a_hook(...)\n{\n   if (user_mode(regs))\n      return;\n   ...\n}\n\nBut, I think checking it in TP_CONDITION is better than other manners.",
+      "parentUuid": "92ee1a49_18de7f48",
       "revId": "145036233d366d60fa4ba639f5e14c58a900f63c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfe5f79e_4764b612",
+        "filename": "arch/arm64/kernel/traps.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1743420
+      },
+      "writtenOn": "2021-01-25T11:55:37Z",
+      "side": 1,
+      "message": "I understand worrying about some behaviors within NMI context.\nFor two reasons, I don\u0027t think our hook is so dangerous and I think it is similar with other panic_notifiers.\n\n(1) Fortunately, it never escape from the NMI context hear and does not return to the normal kernel context, because it will fall into panic().\n(2) When panic() is called, other panic_notifiers are also performed in the same NMI context.",
+      "parentUuid": "55247ccd_fde1bdb3",
+      "revId": "145036233d366d60fa4ba639f5e14c58a900f63c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afe95591_d9310740",
@@ -65,6 +119,24 @@
       "writtenOn": "2021-01-22T13:09:46Z",
       "side": 1,
       "message": "Same thing here.",
+      "revId": "145036233d366d60fa4ba639f5e14c58a900f63c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a397db1e_86e1bab4",
+        "filename": "arch/arm64/kernel/traps.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1743420
+      },
+      "writtenOn": "2021-01-25T11:55:37Z",
+      "side": 1,
+      "message": "Please refer to the above answer.",
+      "parentUuid": "afe95591_d9310740",
       "revId": "145036233d366d60fa4ba639f5e14c58a900f63c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
