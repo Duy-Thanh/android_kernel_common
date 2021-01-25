@@ -16,6 +16,23 @@
       "message": "Please also enable for x86",
       "revId": "1538816dde22c3d6ab4da359d2134a7732fd1e5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a19c9082_44ef7fab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-01-25T21:15:47Z",
+      "side": 1,
+      "message": "Same comment like android-mainline patch. Why enabling debug features which has memory impact? This memory impact becomes big concern for low-memory targets. ",
+      "revId": "1538816dde22c3d6ab4da359d2134a7732fd1e5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
