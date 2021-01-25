@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd668114_ae60c401",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-25T15:06:23Z",
+      "side": 1,
+      "message": "Will update in the next patchset.",
+      "parentUuid": "b4c2ab56_7698cb21",
+      "range": {
+        "startLine": 4,
+        "startChar": 17,
+        "endLine": 4,
+        "endChar": 21
+      },
+      "revId": "7dbbcd8c94a315cd85f101144842572c1da173e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a195dab_67e765b2",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-01-25T09:19:14Z",
       "side": 1,
       "message": "still will not work with per-cpu variables, how are you testing this?",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 33
+      },
+      "revId": "7dbbcd8c94a315cd85f101144842572c1da173e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cdca77d_8252a2b7",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-25T15:06:23Z",
+      "side": 1,
+      "message": "Here is the test code used for testing --- \nfrom address of per cpu variable, we have used per_cpu_ptr() to find the proper address.  \n\n\nunsigned long *ptr \u003d (unsigned long *)\u0026irq_stack_ptr;\n\npr_err(\"\u003cSP\u003e raw_cpu_ptr(irq_stack_ptr)\u003d0x%llx:: this_cpu_ptr\u003d%llx::*ptr\u003d%llx::\u0026irq_stack_ptr\u003d%llx\\n\", raw_cpu_ptr(irq_stack_ptr), this_cpu_ptr(irq_stack_ptr), ptr, \u0026irq_stack_ptr);\n\npr_err(\"\u003cSP\u003e: cpu%d::::%llx\\n\", cpu, per_cpu_ptr(((void *)*ptr), cpu));\n\nAnd corresponding logs for your reference. \n\n[    8.251810] \u003cSP\u003e raw_cpu_ptr(irq_stack_ptr)\u003d0xffffffcadcffb000::this_cpu_ptr\u003dffffffcadcffb000::*ptr\u003dffffffc0117e5060::\u0026irq_stack_ptr\u003dffffffc0117e5060\n\n[    8.260152] \u003cSP\u003e: cpu0::::ffffffcadcf1b000\n[    8.265004] \u003cSP\u003e: cpu1::::ffffffcadcf3b000\n[    8.269780] \u003cSP\u003e: cpu2::::ffffffcadcf5b000\n[    8.274556] \u003cSP\u003e: cpu3::::ffffffcadcf7b000\n[    8.279262] \u003cSP\u003e: cpu4::::ffffffcadcf9b000\n[    8.283960] \u003cSP\u003e: cpu5::::ffffffcadcfbb000\n[    8.288878] \u003cSP\u003e: cpu6::::ffffffcadcfdb000\n[    8.293674] \u003cSP\u003e: cpu7::::ffffffcadcffb000",
+      "parentUuid": "0a195dab_67e765b2",
       "range": {
         "startLine": 55,
         "startChar": 0,
