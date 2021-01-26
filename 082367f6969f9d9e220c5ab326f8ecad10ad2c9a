@@ -16,6 +16,23 @@
       "message": "I don\u0027t know about this patch, but IMHO upstream should do something about this.\n\nudp gro fraglist seems hopelessly unfinished in 5.10 and should probably just be entirely disabled.",
       "revId": "082367f6969f9d9e220c5ab326f8ecad10ad2c9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f5a105d_42a26cf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-01-26T02:48:40Z",
+      "side": 1,
+      "message": "What about just changing the header file to make\n\nNETIF_F_GRO_FRAGLIST \u003d\u003d\u003d 0\n\nWould that fix things?",
+      "revId": "082367f6969f9d9e220c5ab326f8ecad10ad2c9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
