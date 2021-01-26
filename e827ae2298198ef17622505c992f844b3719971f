@@ -104,6 +104,30 @@
       },
       "revId": "e827ae2298198ef17622505c992f844b3719971f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f914370_7565a903",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-01-26T21:37:40Z",
+      "side": 1,
+      "message": "sounds good, I\u0027ll update shortly.",
+      "parentUuid": "b15840cf_f3274c72",
+      "range": {
+        "startLine": 696,
+        "startChar": 0,
+        "endLine": 696,
+        "endChar": 4
+      },
+      "revId": "e827ae2298198ef17622505c992f844b3719971f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
