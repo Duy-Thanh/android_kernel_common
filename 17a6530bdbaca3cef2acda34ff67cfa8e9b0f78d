@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e25677cd_dd3ef460",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1084624
+      },
+      "writtenOn": "2021-01-26T07:21:08Z",
+      "side": 1,
+      "message": "Wonder why lint is unhappy with my \"cherry picked from\" comments, should they be on a single line?",
+      "revId": "17a6530bdbaca3cef2acda34ff67cfa8e9b0f78d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
