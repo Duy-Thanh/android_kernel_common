@@ -56,6 +56,30 @@
       },
       "revId": "b0a16a591962016eb7da5ac10528ac10ae2f7467",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2625c468_d5d907bb",
+        "filename": "kernel/rcu/tree_stall.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1743420
+      },
+      "writtenOn": "2021-01-26T12:07:10Z",
+      "side": 1,
+      "message": "I think also there is a lot of information in the kernel log.\nHowever, the purpose of this hook is to know that RCU stall occurred even if we only see Auto Comment without the kernel log.\n\nIn addition, if the sysctl_panic_on_rcu_stall is turned on, panic() might be called and might notify us.\nBut, we still need vendor hooks because we don\u0027t plan on calling the panic() for the rcu stall.",
+      "parentUuid": "92f0a2cd_f39e793d",
+      "range": {
+        "startLine": 575,
+        "startChar": 0,
+        "endLine": 575,
+        "endChar": 55
+      },
+      "revId": "b0a16a591962016eb7da5ac10528ac10ae2f7467",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
