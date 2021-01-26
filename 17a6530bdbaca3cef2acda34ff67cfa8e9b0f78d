@@ -16,6 +16,24 @@
       "message": "Wonder why lint is unhappy with my \"cherry picked from\" comments, should they be on a single line?",
       "revId": "17a6530bdbaca3cef2acda34ff67cfa8e9b0f78d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92b2bb83_6270d0e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-26T08:33:29Z",
+      "side": 1,
+      "message": "Need a full git id, not a shortened one please.",
+      "parentUuid": "e25677cd_dd3ef460",
+      "revId": "17a6530bdbaca3cef2acda34ff67cfa8e9b0f78d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
