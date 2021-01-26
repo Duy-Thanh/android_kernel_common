@@ -86,6 +86,24 @@
       "message": "Why is this not submitted upstream first?",
       "revId": "082367f6969f9d9e220c5ab326f8ecad10ad2c9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47e9204d_17b9992f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1759937
+      },
+      "writtenOn": "2021-01-26T09:21:55Z",
+      "side": 1,
+      "message": "CLAT is Android specific feature.\n\nIn the initial version, clatd daemon read and translate packets.\nCurrently, it uses eBPF but there is no clue that bpf_skb_proto_6_to_4 should support UDP GRO fraglist.\nIt is a new feature and needs many line changes.\n\nFor upstream, Steffen Klassert (UDP GRO fraglist writer) said\nin https://lore.kernel.org/patchwork/patch/1362257/\n\"The initial idea when I implemented this was to have a fast\nforwarding path for UDP. So forwarding is a usecase, but NAT\nis a problem, indeed.\"\n\nWe might cannot disable UDP GRO forwarding in upstream.\nSo I suggested Android specific workaround until UDP GRO get stable.",
+      "parentUuid": "099f237f_fec97bfb",
+      "revId": "082367f6969f9d9e220c5ab326f8ecad10ad2c9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
