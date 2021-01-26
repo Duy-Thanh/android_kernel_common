@@ -63,6 +63,30 @@
       },
       "revId": "230f4e0ad7378ccae5710016806bb88dbb0d1a4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45d7a29c_c845ea7a",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-26T08:29:57Z",
+      "side": 1,
+      "message": "Given the numerous revisions in this patchset, I kind of think that\u0027s not true 😊\n\nJust make two different functions and lists, that way it is obvious and no one will be surprised when accessing the pointers.  The kernel treats these as different types of things, let\u0027s not ignore that classification here please.",
+      "parentUuid": "62233e3c_a8e3fb86",
+      "range": {
+        "startLine": 39,
+        "startChar": 1,
+        "endLine": 39,
+        "endChar": 18
+      },
+      "revId": "230f4e0ad7378ccae5710016806bb88dbb0d1a4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
