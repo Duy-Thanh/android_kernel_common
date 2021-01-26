@@ -104,6 +104,24 @@
       "parentUuid": "099f237f_fec97bfb",
       "revId": "082367f6969f9d9e220c5ab326f8ecad10ad2c9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0622275e_31e0bdfb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-26T09:44:59Z",
+      "side": 1,
+      "message": "I\u0027ll defer to @maze here...",
+      "parentUuid": "47e9204d_17b9992f",
+      "revId": "082367f6969f9d9e220c5ab326f8ecad10ad2c9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
