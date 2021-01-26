@@ -63,6 +63,30 @@
       },
       "revId": "b05d10f3518819dd91a5fc641a8db2216c0230f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8156cf3_98e562ad",
+        "filename": "android/abi_gki_aarch64_sony",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-26T13:58:21Z",
+      "side": 1,
+      "message": "What filesystem driver are you wanting to support here that the base-kernel does not already support?",
+      "parentUuid": "50e92880_3938cac9",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 19
+      },
+      "revId": "b05d10f3518819dd91a5fc641a8db2216c0230f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
