@@ -214,6 +214,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32e50be2_319277f3",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-26T23:14:56Z",
+      "side": 1,
+      "message": "I have added ARM64 dependency.",
+      "parentUuid": "0e5f0496_0876ae51",
+      "revId": "21b1f61d8989cf94b8f7a4a45cfa14cfbbddd76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c69b59e_0f1e64eb",
@@ -450,6 +468,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32485e71_fe69f992",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-26T23:14:56Z",
+      "side": 1,
+      "message": "New approach should work",
+      "parentUuid": "66e73455_d0d2d111",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 34
+      },
+      "revId": "21b1f61d8989cf94b8f7a4a45cfa14cfbbddd76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "daae4fd5_15a6e502",
@@ -463,6 +505,30 @@
       "writtenOn": "2021-01-08T09:20:50Z",
       "side": 1,
       "message": "wrong year, add 2021 please.",
+      "range": {
+        "startLine": 3,
+        "startChar": 17,
+        "endLine": 3,
+        "endChar": 21
+      },
+      "revId": "21b1f61d8989cf94b8f7a4a45cfa14cfbbddd76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8212525_275d436d",
+        "filename": "include/linux/android_debug_symbols.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-26T23:14:56Z",
+      "side": 1,
+      "message": "done.",
+      "parentUuid": "daae4fd5_15a6e502",
       "range": {
         "startLine": 3,
         "startChar": 17,

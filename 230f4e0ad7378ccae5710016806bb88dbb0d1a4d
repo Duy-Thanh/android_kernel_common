@@ -87,6 +87,30 @@
       },
       "revId": "230f4e0ad7378ccae5710016806bb88dbb0d1a4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b9fc5da_3691115e",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-26T23:14:56Z",
+      "side": 1,
+      "message": "Sure. I will add new list for per_cpu variable in the next patchset.",
+      "parentUuid": "45d7a29c_c845ea7a",
+      "range": {
+        "startLine": 39,
+        "startChar": 1,
+        "endLine": 39,
+        "endChar": 18
+      },
+      "revId": "230f4e0ad7378ccae5710016806bb88dbb0d1a4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
