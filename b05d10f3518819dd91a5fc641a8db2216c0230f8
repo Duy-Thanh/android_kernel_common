@@ -39,6 +39,30 @@
       },
       "revId": "b05d10f3518819dd91a5fc641a8db2216c0230f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50e92880_3938cac9",
+        "filename": "android/abi_gki_aarch64_sony",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1839421
+      },
+      "writtenOn": "2021-01-26T13:04:24Z",
+      "side": 1,
+      "message": "A file system driver needs to call generic_file_open() in its struct file_operations-\u003eopen method.  How should we do that if this is not allowed?  Same for all the other file functions...  How are we meant to implement file system drivers as loadable kernel modules if we are not allowed any file APIs?  If there is a different way please could you explain?",
+      "parentUuid": "e059c7e2_a8de1547",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 19
+      },
+      "revId": "b05d10f3518819dd91a5fc641a8db2216c0230f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
