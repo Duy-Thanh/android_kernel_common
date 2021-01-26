@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3eadb29d_d8197259",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-01-26T18:58:31Z",
+      "side": 1,
+      "message": "no longer a restricted hook.",
+      "parentUuid": "afcce2e0_194b3c82",
+      "revId": "bd8e281c61bbc77b69c2c3033fbc680030ccf0cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d49f72ed_5dc932b1",
@@ -31,6 +49,24 @@
       "writtenOn": "2020-12-23T18:23:04Z",
       "side": 1,
       "message": "why are these in .../hooks/sched.h when they aren\u0027t used in scheduler code at all?",
+      "revId": "bd8e281c61bbc77b69c2c3033fbc680030ccf0cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76639f84_5ce01813",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-01-26T18:58:31Z",
+      "side": 1,
+      "message": "I will create a cpu.h and put these two in there.  if we want trace_android_rvh_resume_cpus() to be in trace/hooks/cpu.h as well, since this is not related to this particular change, we should probably have a different gerrit for that.",
+      "parentUuid": "d49f72ed_5dc932b1",
       "revId": "bd8e281c61bbc77b69c2c3033fbc680030ccf0cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06b3822d_f7b1e391",
+        "filename": "kernel/cgroup/cpuset.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3241,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-01-26T18:58:31Z",
+      "side": 1,
+      "message": "updated in later patch.",
+      "parentUuid": "885e34d4_103b4f03",
+      "revId": "bd8e281c61bbc77b69c2c3033fbc680030ccf0cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87fec5b0_787faf68",
@@ -65,6 +119,24 @@
       "writtenOn": "2020-12-23T18:23:04Z",
       "side": 1,
       "message": "does your use-case still work if you assumed \"cpu_down\" in the hook implementation but the cpu_down_maps_locked() failed?",
+      "revId": "bd8e281c61bbc77b69c2c3033fbc680030ccf0cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b88642f5_24c5a538",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-01-26T18:58:31Z",
+      "side": 1,
+      "message": "the usage of trace_android_rvh_cpu_down is independent of cpu_maps_update_begin().  So it should be ok.  It\u0027s been tested and released in this position in the code for several years now in our work.",
+      "parentUuid": "87fec5b0_787faf68",
       "revId": "bd8e281c61bbc77b69c2c3033fbc680030ccf0cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
