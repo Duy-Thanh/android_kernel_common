@@ -16,6 +16,24 @@
       "message": "update this to  \n if (housekeeping_cpu(cpu, HK_FLAG_TIMER) \u0026\u0026 cpu_active(cpu)) {\n      if (!idle_cpu(cpu)\n                 return cpu;\n      default_cpu \u003d cpu;\n }\n\nThis ensures that we are picking up a active cpu at line 677 (be it idle or not)",
       "revId": "bcf3ccfc39b4766c9576d5885e7a2fb7709efdc6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af151193_45020976",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-01-26T23:03:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f839ef60_e5d010d7",
+      "revId": "bcf3ccfc39b4766c9576d5885e7a2fb7709efdc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
