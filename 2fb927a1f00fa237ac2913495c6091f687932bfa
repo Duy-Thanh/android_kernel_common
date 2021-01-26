@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa7f2a82_6a1fbe68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-26T13:59:52Z",
+      "side": 1,
+      "message": "what needs to get external symbols so quickly on a fast-path that a normal lookup is not sufficient?  How does this affect any boot time?",
+      "parentUuid": "86af01cc_33d6ba25",
+      "revId": "2fb927a1f00fa237ac2913495c6091f687932bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19226e8f_aa2ac524",
         "filename": "arch/arm64/kernel/smp.c",
         "patchSetId": 2
