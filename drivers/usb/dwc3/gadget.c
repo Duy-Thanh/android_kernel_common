@@ -2034,6 +2034,7 @@ static void dwc3_stop_active_transfers(struct dwc3 *dwc)
 		if (!dep)
 			continue;
 
+		trace_android_vh_dwc3_stop_transfers(dep);
 		dwc3_remove_requests(dwc, dep);
 	}
 }
@@ -2132,6 +2133,8 @@ static int dwc3_gadget_run_stop(struct dwc3 *dwc, int is_on, int suspend)
 		reg = dwc3_readl(dwc->regs, DWC3_DSTS);
 		reg &= DWC3_DSTS_DEVCTRLHLT;
 	} while (--timeout && !(!is_on ^ !reg));
+
+	trace_android_vh_dwc3_controller_halted(dwc, is_on);
 
 	if (!timeout)
 		return -ETIMEDOUT;
@@ -3619,6 +3622,7 @@ static void dwc3_gadget_interrupt(struct dwc3 *dwc,
 		break;
 	case DWC3_DEVICE_EVENT_SOF:
 	case DWC3_DEVICE_EVENT_ERRATIC_ERROR:
+		trace_android_vh_dwc3_erratic_error(dwc);
 	case DWC3_DEVICE_EVENT_CMD_CMPL:
 	case DWC3_DEVICE_EVENT_OVERFLOW:
 		break;
