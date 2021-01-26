@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e059c7e2_a8de1547",
+        "filename": "android/abi_gki_aarch64_sony",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-26T10:56:38Z",
+      "side": 1,
+      "message": "all of these file access functions are not allowed to be called by drivers, please remove.",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 19
+      },
+      "revId": "b05d10f3518819dd91a5fc641a8db2216c0230f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
