@@ -59,6 +59,66 @@
       "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Paul Lawrence \u003cpaullawrence@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 353644159 android-build.ayeaye-python-dispatcher_20210125.04_p0",
       "revId": "07733d95377299051f43e4a05619a2092a575130",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007619025",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1560943?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "770bc92a_f5918890",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-26T20:27:06Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Paul Lawrence \u003cpaullawrence@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 353644159 android-build.ayeaye-python-dispatcher_20210125.04_p0",
+      "revId": "07733d95377299051f43e4a05619a2092a575130",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007619025",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1560943?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "a3ed3ae9_c48cdca6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-26T20:27:06Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Paul Lawrence \u003cpaullawrence@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 353644159 android-build.ayeaye-python-dispatcher_20210125.04_p0",
+      "revId": "07733d95377299051f43e4a05619a2092a575130",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007619025",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1560943?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f73b21b7_6c1583d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-26T20:27:06Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 353644159 android-build.ayeaye-python-dispatcher_20210125.04_p0",
+      "revId": "07733d95377299051f43e4a05619a2092a575130",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
