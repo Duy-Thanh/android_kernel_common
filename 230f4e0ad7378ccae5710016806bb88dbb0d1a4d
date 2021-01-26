@@ -39,6 +39,30 @@
       },
       "revId": "230f4e0ad7378ccae5710016806bb88dbb0d1a4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62233e3c_a8e3fb86",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2021-01-26T05:24:49Z",
+      "side": 1,
+      "message": "We are giving void pointer to caller and  caller should know the variable type  to dereference.",
+      "parentUuid": "ecb254ca_351da6d0",
+      "range": {
+        "startLine": 39,
+        "startChar": 1,
+        "endLine": 39,
+        "endChar": 18
+      },
+      "revId": "230f4e0ad7378ccae5710016806bb88dbb0d1a4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
