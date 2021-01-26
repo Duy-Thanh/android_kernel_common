@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57a6bfbb_397a5e2d",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4715,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-01-26T09:42:01Z",
+      "side": 1,
+      "message": "Could you keep this after the rq clock update? This is a change in behavior otherwise.",
+      "range": {
+        "startLine": 4715,
+        "startChar": 1,
+        "endLine": 4715,
+        "endChar": 53
+      },
+      "revId": "f2a9407803e135cb38a4b241c2666e214cd79e22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
