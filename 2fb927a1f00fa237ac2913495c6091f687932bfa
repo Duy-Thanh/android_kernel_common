@@ -90,6 +90,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86af01cc_33d6ba25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1754664
+      },
+      "writtenOn": "2021-01-26T12:38:09Z",
+      "side": 1,
+      "message": "Kallsyms lookup takes a lot of time on each call (~80ms), which can impact boot KPI\u0027s. To get static symbols helper functions seems to resolve the problem.",
+      "parentUuid": "789eea3a_57183701",
+      "revId": "2fb927a1f00fa237ac2913495c6091f687932bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19226e8f_aa2ac524",
