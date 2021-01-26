@@ -34,6 +34,24 @@
       "parentUuid": "6ad54b14_9622556c",
       "revId": "b7f31af2f1edce51324cf18859ca2163c2f1d919",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7623be5e_75d9809f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741939
+      },
+      "writtenOn": "2021-01-26T02:44:26Z",
+      "side": 1,
+      "message": "Sorry, the platform is not mt6779(Lafite).\nWe got some platforms using android11-5.4 to develop GKI.",
+      "parentUuid": "841a30ae_79d67bf7",
+      "revId": "b7f31af2f1edce51324cf18859ca2163c2f1d919",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
