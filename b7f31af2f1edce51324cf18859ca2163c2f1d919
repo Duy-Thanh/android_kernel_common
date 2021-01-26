@@ -16,6 +16,24 @@
       "message": "Is this really needed in android11 ?",
       "revId": "b7f31af2f1edce51324cf18859ca2163c2f1d919",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "841a30ae_79d67bf7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741939
+      },
+      "writtenOn": "2021-01-26T02:38:06Z",
+      "side": 1,
+      "message": "We are developing our mt6779(Lafite) platform for GKI using android11-5.4.\nAs far as we\u0027re concerned, add vendor hook symbol is not a abi break and should be able to apply it to android11-5.4 right?",
+      "parentUuid": "6ad54b14_9622556c",
+      "revId": "b7f31af2f1edce51324cf18859ca2163c2f1d919",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
