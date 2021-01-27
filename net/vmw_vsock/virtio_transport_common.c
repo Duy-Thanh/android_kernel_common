@@ -27,6 +27,16 @@
 /* How long to wait for graceful shutdown of a connection */
 #define VSOCK_CLOSE_TIMEOUT (8 * HZ)
 
+<<<<<<< HEAD   (c9b553 ANDROID: GKI: fix up abi issues with 4.19.172)
+=======
+/* Threshold for detecting small packets to copy */
+#define GOOD_COPY_LEN  128
+
+uint virtio_transport_max_vsock_pkt_buf_size = 64 * 1024;
+module_param(virtio_transport_max_vsock_pkt_buf_size, uint, 0444);
+EXPORT_SYMBOL_GPL(virtio_transport_max_vsock_pkt_buf_size);
+
+>>>>>>> CHANGE (035ccd ANDROID: Make vsock virtio packet buff size configurable)
 static const struct virtio_transport *virtio_transport_get_ops(void)
 {
 	const struct vsock_transport *t = vsock_core_get_transport();
