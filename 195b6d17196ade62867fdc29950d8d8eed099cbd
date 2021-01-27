@@ -123,6 +123,24 @@
       "parentUuid": "ed60eaa0_8f029ff0",
       "revId": "195b6d17196ade62867fdc29950d8d8eed099cbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22c7944e_6db5ec78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1248639
+      },
+      "writtenOn": "2021-01-27T09:10:50Z",
+      "side": 1,
+      "message": "Could you do the cherry-pick for me, please?",
+      "parentUuid": "18929c65_8293ca8b",
+      "revId": "195b6d17196ade62867fdc29950d8d8eed099cbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
