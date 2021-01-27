@@ -128,6 +128,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e4115f3_478829f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1677579
+      },
+      "writtenOn": "2021-01-27T15:56:07Z",
+      "side": 1,
+      "message": "if we are thinking of getting this static symbol via debug symbol driver, then we might have to look up each static symbol once during debug symbol driver probe and this could affect boot time, if each call takes ~80ms.",
+      "parentUuid": "aa7f2a82_6a1fbe68",
+      "revId": "2fb927a1f00fa237ac2913495c6091f687932bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19226e8f_aa2ac524",
         "filename": "arch/arm64/kernel/smp.c",
         "patchSetId": 2
