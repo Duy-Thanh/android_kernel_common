@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "378c8865_e02d3b0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-27T21:21:19Z",
+      "side": 1,
+      "message": "Again, no.\n\nIf we let this go through then allmodconfig builds are broken in kernelci and other test systems. We rely on x86 builds for testing so they cannot be broken under any circumstances and any patch that breaks them will be rejected. This has been the policy since day one. We are not asking for testing on x86 -- to resolve this, it just needs to build for an x86_64 allmodconfig build. That is a pretty low bar that won\u0027t be lowered further.\n\n\u003e Since I don\u0027t see any need for anyone from QC to work on x86 here\n\nHow about \"get the patch merged\" as a reason?",
+      "parentUuid": "691fbe09_c459f0d4",
+      "revId": "230f4e0ad7378ccae5710016806bb88dbb0d1a4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecb254ca_351da6d0",
         "filename": "drivers/android/debug_symbols.c",
         "patchSetId": 5
