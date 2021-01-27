@@ -87,6 +87,30 @@
       },
       "revId": "b05d10f3518819dd91a5fc641a8db2216c0230f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42c7cdd8_caa98cff",
+        "filename": "android/abi_gki_aarch64_sony",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1839421
+      },
+      "writtenOn": "2021-01-27T15:07:17Z",
+      "side": 1,
+      "message": "Hi Greg, we sent you a private email with subject \"1560389: ANDROID: GKI: update Sony symbol list\" because we unfortunately can\u0027t discuss this matter here due to NDA. Could you please check? Thank you very much in advance!",
+      "parentUuid": "e8156cf3_98e562ad",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 19
+      },
+      "revId": "b05d10f3518819dd91a5fc641a8db2216c0230f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
