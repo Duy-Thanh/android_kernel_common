@@ -30,6 +30,7 @@ static DEFINE_IDA(iommu_group_ida);
 
 static unsigned int iommu_def_domain_type __read_mostly;
 static bool iommu_dma_strict __read_mostly = true;
+static bool iommu_tlb_flush_on_unmap __read_mostly = true;
 static u32 iommu_cmd_line __read_mostly;
 
 struct iommu_group {
@@ -328,6 +329,12 @@ static int __init iommu_dma_setup(char *str)
 	return kstrtobool(str, &iommu_dma_strict);
 }
 early_param("iommu.strict", iommu_dma_setup);
+
+static int __init iommu_tlb_flush_on_unmap_setup(char *str)
+{
+	return kstrtobool(str, &iommu_tlb_flush_on_unmap);
+}
+early_param("iommu.tlb_flush_on_unmap", iommu_tlb_flush_on_unmap_setup);
 
 static ssize_t iommu_group_attr_show(struct kobject *kobj,
 				     struct attribute *__attr, char *buf)
@@ -1924,10 +1931,14 @@ EXPORT_SYMBOL_GPL(iommu_domain_free);
 static int __iommu_attach_device(struct iommu_domain *domain,
 				 struct device *dev)
 {
-	int ret;
+	int ret, attr = 1;
 
 	if (unlikely(domain->ops->attach_dev == NULL))
 		return -ENODEV;
+
+	if (iommu_tlb_flush_on_unmap && !iommu_domain_set_attr(domain,
+					DOMAIN_ATTR_TLB_FLUSH_ON_UNMAP, &attr))
+		domain->tlb_flush_on_unmap = true;
 
 	ret = domain->ops->attach_dev(domain, dev);
 	if (!ret)
@@ -2469,21 +2480,30 @@ static size_t __iommu_unmap(struct iommu_domain *domain,
 	pr_debug("unmap this: iova 0x%lx size 0x%zx\n", iova, size);
 
 	/*
-	 * Keep iterating until we either unmap 'size' bytes (or more)
-	 * or we hit an area that isn't mapped.
+	 * Pass the whole buffer size to the IOMMU driver's unmap call
+	 * so that it can know when it has completely unmapped the
+	 * buffer, and can flush the TLB.
 	 */
-	while (unmapped < size) {
-		size_t pgsize = iommu_pgsize(domain, iova, size - unmapped);
+	if (domain->tlb_flush_on_unmap) {
+		unmapped = ops->unmap(domain, iova, size, iotlb_gather);
+	} else {
+		/*
+		 * Keep iterating until we either unmap 'size' bytes (or more)
+		 * or we hit an area that isn't mapped.
+		 */
+		while (unmapped < size) {
+			size_t pgsize = iommu_pgsize(domain, iova, size - unmapped);
 
-		unmapped_page = ops->unmap(domain, iova, pgsize, iotlb_gather);
-		if (!unmapped_page)
-			break;
+			unmapped_page = ops->unmap(domain, iova, pgsize, iotlb_gather);
+			if (!unmapped_page)
+				break;
 
-		pr_debug("unmapped: iova 0x%lx size 0x%zx\n",
-			 iova, unmapped_page);
+			pr_debug("unmapped: iova 0x%lx size 0x%zx\n",
+				 iova, unmapped_page);
 
-		iova += unmapped_page;
-		unmapped += unmapped_page;
+			iova += unmapped_page;
+			unmapped += unmapped_page;
+		}
 	}
 
 	trace_unmap(orig_iova, size, unmapped);
@@ -2498,7 +2518,8 @@ size_t iommu_unmap(struct iommu_domain *domain,
 
 	iommu_iotlb_gather_init(&iotlb_gather);
 	ret = __iommu_unmap(domain, iova, size, &iotlb_gather);
-	iommu_iotlb_sync(domain, &iotlb_gather);
+	if (!domain->tlb_flush_on_unmap)
+		iommu_iotlb_sync(domain, &iotlb_gather);
 
 	return ret;
 }

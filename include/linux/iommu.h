@@ -100,6 +100,7 @@ struct iommu_domain {
 	void *handler_token;
 	struct iommu_domain_geometry geometry;
 	void *iova_cookie;
+	bool tlb_flush_on_unmap;
 };
 
 enum iommu_cap {
