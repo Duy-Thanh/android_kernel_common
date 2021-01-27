@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "142b706e_93706066",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-27T19:15:29Z",
+      "side": 1,
+      "message": "Prasad, this still breaks x86 allmodconfig builds. I know you don\u0027t like to work on x86, but we simply will not accept any patch that breaks builds. Period. No exceptions.\n\nPlease fix this for x86. It will not go in until that is fixed. Also make sure all comments are resolved.",
+      "parentUuid": "bd9913bc_6e85a0cb",
+      "revId": "230f4e0ad7378ccae5710016806bb88dbb0d1a4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecb254ca_351da6d0",
         "filename": "drivers/android/debug_symbols.c",
         "patchSetId": 5
