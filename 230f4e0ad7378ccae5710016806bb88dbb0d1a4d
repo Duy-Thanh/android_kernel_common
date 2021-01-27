@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "691fbe09_c459f0d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-01-27T21:14:45Z",
+      "side": 1,
+      "message": "again.. can Google fix this? Since I don\u0027t see any need for anyone from QC to work on x86 here. This is the requirement we can\u0027t sign up.",
+      "parentUuid": "142b706e_93706066",
+      "revId": "230f4e0ad7378ccae5710016806bb88dbb0d1a4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecb254ca_351da6d0",
         "filename": "drivers/android/debug_symbols.c",
         "patchSetId": 5
