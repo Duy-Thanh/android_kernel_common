@@ -33,6 +33,23 @@
       "message": "Same comment like android-mainline patch. Why enabling debug features which has memory impact? This memory impact becomes big concern for low-memory targets. ",
       "revId": "1538816dde22c3d6ab4da359d2134a7732fd1e5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "049e506d_e2979f03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2021-01-27T16:53:08Z",
+      "side": 1,
+      "message": "Chun-Hung,\n\nPRINTK_CALLER seems like a generally useful thing for all partners. So maybe split this up into two patches so that we can get the easy ones out of the way?\n",
+      "revId": "1538816dde22c3d6ab4da359d2134a7732fd1e5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
