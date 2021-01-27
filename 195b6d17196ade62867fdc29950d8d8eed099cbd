@@ -16,6 +16,23 @@
       "message": "Thanks Miles!",
       "revId": "195b6d17196ade62867fdc29950d8d8eed099cbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c60d8b75_e03bc480",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-01-27T08:45:35Z",
+      "side": 1,
+      "message": "Now that it is autoselected, I believe you need to drop \n\n  CONFIG_DMADEVICES\u003dy\n\nfrom arch/arm64/configs/gki_defconfig to pass the consistency check at build time.\n\nCan be reproduced locally with\n\n  BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build.sh ",
+      "revId": "195b6d17196ade62867fdc29950d8d8eed099cbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
