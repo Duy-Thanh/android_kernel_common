@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e47cd84b_e1b89c81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-01-27T19:30:52Z",
+      "side": 1,
+      "message": "I\u0027m against this on:\n(a) principle of kernel ABI just being an outright broken idea,\nand\n(b) because I don\u0027t know if TCP_USER_TIMEOUT is used by apps, and thus what this actually affects.  It is certainly not a privileged API, and I\u0027ve used it in my own (non Android) apps.  This looks to be fixing a regression introduced around the 5.0 timeframe.  Based on a cursory reading of commit 9d9b1ee0b2d1c9e02b2338c4a4b0a062d2d3edac message, it presumably causes the timeout to not trigger when it should when the receiver is no longer reading data from their side of the connection.  That seems important.",
+      "revId": "4f22232f3462fcc15d8515c44b77c6e81a007343",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
