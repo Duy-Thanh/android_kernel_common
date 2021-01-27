@@ -139,6 +139,23 @@
       "message": "\u003e Patch Set 2:\n\u003e \n\u003e udp gro fraglist breaks tc ebpf, which is an upstream linux feature on\n\u003e top of which clat is implemented.\n\u003e \n\u003e There\u0027s nothing Android specific about it.\n\u003e \n\u003e On Tue, Jan 26, 2021 at 1:22 AM Dongseok Yi (Gerrit)\n\u003e \u003cnoreply-gerritcodereview-qn7fumsDYbD_i1Qlv-lSIQ\u003d\u003d@google.com\u003e wrote:\n\nI understand that Android clat uses kernel bpf funcs.\nsystem/netd/bpf_progs/clatd.c calls bpf_skb_change_proto.\n\nEven if bpf_skb_change_proto does not support UDP GRO,\nclatd will cover the packet when get error from the func.\n\nBut as you know, if eBPF is not working the overall performance is significantly degraded.\nEven further, clatd might not support both TCP and UDP GROed packet.\n\nI believe it is an Android specific issue.",
       "revId": "082367f6969f9d9e220c5ab326f8ecad10ad2c9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d5913a4_106d9163",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1759937
+      },
+      "writtenOn": "2021-01-27T03:13:49Z",
+      "side": 1,
+      "message": "\u003e Patch Set 2:\n\u003e \n\u003e bpf not working is an upstream linux problem\n\u003e \n\u003e On Tue, Jan 26, 2021 at 2:26 AM Dongseok Yi (Gerrit)\n\u003e \u003cnoreply-gerritcodereview-qn7fumsDYbD_i1Qlv-lSIQ\u003d\u003d@google.com\u003e wrote:\n\nNot supported UDP GRO on bpf_skb_change_proto is acceptable.\nThe concept of UDP GRO fraglist is very different from TCP GRO.\nThere might no reason that the BPF func should support UDP GRO fraglist.\n\nI don\u0027t know why every kernel patches for Android also should be on upstream.\nCan you please kindly review the patch on a Android specific point of view?",
+      "revId": "082367f6969f9d9e220c5ab326f8ecad10ad2c9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
