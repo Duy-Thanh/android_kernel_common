@@ -1,0 +1,41 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007646921",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1560415?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "45eb5990_482d68f5",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 10,
+                "startChar": 1,
+                "endLine": 10,
+                "endChar": 1
+              },
+              "replacement": "Signed-off-by: orson zhai \u003corson.zhai@unisoc.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "c5ebbf67_97cf8d07",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-27T09:54:59Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: orson zhai \u003corson.zhai@unisoc.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 353876296 android-build.ayeaye-python-dispatcher_20210126.05_p0",
+      "revId": "9aadeb4c6cc524b67761999a91e2914998a22af7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
