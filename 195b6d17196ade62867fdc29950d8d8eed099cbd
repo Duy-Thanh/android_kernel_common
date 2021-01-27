@@ -141,6 +141,24 @@
       "parentUuid": "18929c65_8293ca8b",
       "revId": "195b6d17196ade62867fdc29950d8d8eed099cbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9d37e24_72ca8efa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-01-27T09:40:04Z",
+      "side": 1,
+      "message": "Ah, you are not the owner of that other change. ok. Done",
+      "parentUuid": "22c7944e_6db5ec78",
+      "revId": "195b6d17196ade62867fdc29950d8d8eed099cbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
