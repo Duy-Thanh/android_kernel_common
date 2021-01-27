@@ -156,6 +156,24 @@
       "message": "\u003e Patch Set 2:\n\u003e \n\u003e bpf not working is an upstream linux problem\n\u003e \n\u003e On Tue, Jan 26, 2021 at 2:26 AM Dongseok Yi (Gerrit)\n\u003e \u003cnoreply-gerritcodereview-qn7fumsDYbD_i1Qlv-lSIQ\u003d\u003d@google.com\u003e wrote:\n\nNot supported UDP GRO on bpf_skb_change_proto is acceptable.\nThe concept of UDP GRO fraglist is very different from TCP GRO.\nThere might no reason that the BPF func should support UDP GRO fraglist.\n\nI don\u0027t know why every kernel patches for Android also should be on upstream.\nCan you please kindly review the patch on a Android specific point of view?",
       "revId": "082367f6969f9d9e220c5ab326f8ecad10ad2c9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95c7d43a_75fe4dd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-27T10:14:43Z",
+      "side": 1,
+      "message": "All patches should be upstream first, it is well documented why this is so, please see the Android kernel patch requirement documents.\n\nPlease submit this upstream first.",
+      "parentUuid": "2d5913a4_106d9163",
+      "revId": "082367f6969f9d9e220c5ab326f8ecad10ad2c9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
