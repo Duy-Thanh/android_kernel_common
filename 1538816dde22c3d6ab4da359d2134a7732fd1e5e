@@ -50,6 +50,23 @@
       "message": "Chun-Hung,\n\nPRINTK_CALLER seems like a generally useful thing for all partners. So maybe split this up into two patches so that we can get the easy ones out of the way?\n",
       "revId": "1538816dde22c3d6ab4da359d2134a7732fd1e5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eec7ecb3_095096e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2021-01-27T17:16:11Z",
+      "side": 1,
+      "message": "Also, Chun-Hung, have you tried CONFIG_DYNAMIC_DEBUG_CORE? From the config help text:\n\n\n          Enable core functional support of dynamic debug. It is useful\n          when you want to tie dynamic debug to your kernel modules with\n          DYNAMIC_DEBUG_MODULE defined for each of them, especially for\n          the case of embedded system where the kernel image size is\n          sensitive for people.",
+      "revId": "1538816dde22c3d6ab4da359d2134a7732fd1e5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
