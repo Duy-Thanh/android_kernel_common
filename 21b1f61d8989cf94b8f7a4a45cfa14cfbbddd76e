@@ -270,6 +270,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9aadb30_83f6f43d",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-27T18:36:43Z",
+      "side": 1,
+      "message": "All new config options need to work on both arches, that\u0027s been a prerequisite for a while for Android kernels to ensure we get proper testing.",
+      "parentUuid": "086a32e4_db33888f",
+      "revId": "21b1f61d8989cf94b8f7a4a45cfa14cfbbddd76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c69b59e_0f1e64eb",
         "filename": "drivers/android/debug_symbols.c",
         "patchSetId": 3
