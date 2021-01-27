@@ -354,7 +354,7 @@ vhost_vsock_alloc_pkt(struct vhost_virtqueue *vq,
 		return pkt;
 
 	/* The pkt is too big */
-	if (pkt->len > VIRTIO_VSOCK_MAX_PKT_BUF_SIZE) {
+	if (pkt->len > virtio_transport_max_vsock_pkt_buf_size()) {
 		kfree(pkt);
 		return NULL;
 	}

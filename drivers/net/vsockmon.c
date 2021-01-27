@@ -9,7 +9,7 @@
 #include <linux/virtio_vsock.h>
 
 /* Virtio transport max packet size plus header */
-#define DEFAULT_MTU (VIRTIO_VSOCK_MAX_PKT_BUF_SIZE + \
+#define DEFAULT_MTU (virtio_transport_max_vsock_pkt_buf_size() + \
 		     sizeof(struct af_vsockmon_hdr))
 
 static int vsockmon_dev_init(struct net_device *dev)
