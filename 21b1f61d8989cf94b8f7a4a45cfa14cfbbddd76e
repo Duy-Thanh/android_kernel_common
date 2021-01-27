@@ -234,6 +234,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "20a5a3d3_660ed9f9",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-27T09:49:08Z",
+      "side": 1,
+      "message": "Please make this work on both arches to get proper testing and debugging ability.",
+      "parentUuid": "32e50be2_319277f3",
+      "revId": "21b1f61d8989cf94b8f7a4a45cfa14cfbbddd76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c69b59e_0f1e64eb",
         "filename": "drivers/android/debug_symbols.c",
         "patchSetId": 3
