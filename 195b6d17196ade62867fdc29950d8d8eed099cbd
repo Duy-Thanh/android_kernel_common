@@ -105,6 +105,24 @@
       "parentUuid": "65f365c9_0e51ec6d",
       "revId": "195b6d17196ade62867fdc29950d8d8eed099cbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18929c65_8293ca8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1248639
+      },
+      "writtenOn": "2021-01-27T09:06:12Z",
+      "side": 1,
+      "message": "I tried but failed:\n\nCould not perform action: add patch set not permitted",
+      "parentUuid": "ed60eaa0_8f029ff0",
+      "revId": "195b6d17196ade62867fdc29950d8d8eed099cbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
