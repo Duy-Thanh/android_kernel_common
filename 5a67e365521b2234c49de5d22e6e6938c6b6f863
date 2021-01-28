@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66f2e867_32ed253e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-01-28T00:39:12Z",
+      "side": 1,
+      "message": "Two lint errors are ABI but I heard we don\u0027t care about ABI atm so no need to update ABI.xml.\nLast testing error from vts says \"Already broken\" so I don\u0027t have anything to do further.\n\nLooking for owner to give code review so that merge it.",
+      "revId": "5a67e365521b2234c49de5d22e6e6938c6b6f863",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
