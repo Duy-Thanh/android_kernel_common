@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71114d8f_8ab5a642",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-01-28T22:12:39Z",
+      "side": 1,
+      "message": "Conceptually okay with me and as this is a generic networking feature, seems right to be in GKI.",
+      "revId": "ba1de1cae1604e5516acbe1d61dea4394e9e04be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
