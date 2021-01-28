@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1f1d744_2640135a",
+        "filename": "kernel/sched/pelt.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-28T19:22:23Z",
+      "side": 1,
+      "message": "To Greg\u0027s point below, how do you guarantee that this array has enough space for any halflife that might be needed? I think the answer is that pelt16 and pelt8 use fewer entries than pelt32 so they will fit -- but what if someone wanted to use this for pelt64? Is there any way for them to tell that there isn\u0027t enough room in this array?\n\nHow about if we at least export the size of the array so users of this mechanism know where the end of the array is so they can avoid overrunning it. \n\n  size_t pelt_runnable_avg_yN_inv_size \u003d sizeof(pelt_runnable_avg_yN_inv);\n  EXPORT_SYMBOL_GPL(pelt_runnable_avg_yN_inv_size);\n\nAlternately, we could use a pointer instead of an array so the table can be reallocated when changing the halflife (this would probably require re-running the perf data)",
+      "revId": "0b9e6e9e384114de3623038bc7d445e1dd8df08d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
