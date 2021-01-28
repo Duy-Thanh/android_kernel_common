@@ -16,6 +16,23 @@
       "message": "libabigail people, is this to be expected?",
       "revId": "1bfd7e2fdd0f7fd7cc4ae3d5a0bed17d2f679d5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83e3e593_76a5dd6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-01-28T16:22:23Z",
+      "side": 1,
+      "message": "I think we can merge this. Though we need to look at what happened. I believe we used the new libabigail version here for the first time.",
+      "revId": "1bfd7e2fdd0f7fd7cc4ae3d5a0bed17d2f679d5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
