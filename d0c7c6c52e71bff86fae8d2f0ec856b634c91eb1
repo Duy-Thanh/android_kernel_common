@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f52212d2_bffb6a9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-28T23:49:24Z",
+      "side": 1,
+      "message": "Why are these being enabled? The bug doesn\u0027t seem to have anything to do with these networking configs and the commit message doesn\u0027t have any rationale.",
+      "revId": "d0c7c6c52e71bff86fae8d2f0ec856b634c91eb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
