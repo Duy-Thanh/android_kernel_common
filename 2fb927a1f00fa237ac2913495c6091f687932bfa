@@ -164,6 +164,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08c2597e_dc4dd161",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1754664
+      },
+      "writtenOn": "2021-01-28T03:18:38Z",
+      "side": 1,
+      "message": "Probe or first access, in all cases ~80ms hit is huge. If number of static symbols grow in debug symbol driver, it would be a problem. Kallsyms approach itself is not scalable given the perf issue associated with it.",
+      "parentUuid": "e4be378c_b8621d3a",
+      "revId": "2fb927a1f00fa237ac2913495c6091f687932bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19226e8f_aa2ac524",
         "filename": "arch/arm64/kernel/smp.c",
         "patchSetId": 2
