@@ -16,6 +16,23 @@
       "message": "I\u0027m against this on:\n(a) principle of kernel ABI just being an outright broken idea,\nand\n(b) because I don\u0027t know if TCP_USER_TIMEOUT is used by apps, and thus what this actually affects.  It is certainly not a privileged API, and I\u0027ve used it in my own (non Android) apps.  This looks to be fixing a regression introduced around the 5.0 timeframe.  Based on a cursory reading of commit 9d9b1ee0b2d1c9e02b2338c4a4b0a062d2d3edac message, it presumably causes the timeout to not trigger when it should when the receiver is no longer reading data from their side of the connection.  That seems important.",
       "revId": "4f22232f3462fcc15d8515c44b77c6e81a007343",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b9ad374_ce8e747b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-28T09:43:53Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1:\n\u003e \n\u003e Also note that Neal Cardwell should send soon a patch  getting space from inet_connection_sock\n\u003e \n\u003e something like :\n\u003e \n\u003e diff --git a/include/net/inet_connection_sock.h b/include/net/inet_connection_sock.h index 111d7771b208150d4e6f445b2675648b4de0eb7d..b12b7e7239323e9a5842743bde770f46e564b814 100644 --- a/include/net/inet_connection_sock.h +++ b/include/net/inet_connection_sock.h @@ -120,14 +120,13 @@ struct inet_connection_sock {                 __u16             rcv_mss;       /* MSS used for delayed ACK decisions     */         } icsk_ack;         struct { -               int               enabled; -                 /* Range of MTUs to search */                 int               search_high;                 int               search_low;                   /* Information on the current probe. */ -               int               probe_size; +               unsigned int enabled:1 +               unsigned int probe_size:31;                   u32               probe_timestamp;         } icsk_mtup;\n\n\nLet me try something like this now and see how that goes...\n",
+      "revId": "4f22232f3462fcc15d8515c44b77c6e81a007343",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
