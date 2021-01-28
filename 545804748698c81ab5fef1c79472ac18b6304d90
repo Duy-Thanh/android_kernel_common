@@ -106,6 +106,24 @@
       "parentUuid": "a55b5651_dc44ceeb",
       "revId": "545804748698c81ab5fef1c79472ac18b6304d90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb7e8bb3_a79960f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-01-28T05:44:47Z",
+      "side": 1,
+      "message": "Hi Chun-Hung and Yong, the page-pool patches are under review both upstream as well as as android12-5.10 now. You can see the series here: https://android-review.googlesource.com/c/kernel/common/+/1550555/2 We have verified that the performance of the ACK DMA-BUF system heap is on-par with that of the ION system heap. I will send out the numbers as part of the GKI newsletter once they are merged. Please note that the DMA-BUF system heap is also a vendor module for GKI 2.0 so MTK is free to create their own version of system heap with Soc/device-specific optimizations.",
+      "parentUuid": "61019bde_237fa1dc",
+      "revId": "545804748698c81ab5fef1c79472ac18b6304d90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
