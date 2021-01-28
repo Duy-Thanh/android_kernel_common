@@ -111,6 +111,30 @@
       },
       "revId": "b05d10f3518819dd91a5fc641a8db2216c0230f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55131f17_3abd5245",
+        "filename": "android/abi_gki_aarch64_sony",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1244013
+      },
+      "writtenOn": "2021-01-28T09:55:03Z",
+      "side": 1,
+      "message": "Let me discuss this topic on b/178455529. I\u0027ll update it after some internal confirmation.",
+      "parentUuid": "42c7cdd8_caa98cff",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 19
+      },
+      "revId": "b05d10f3518819dd91a5fc641a8db2216c0230f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
