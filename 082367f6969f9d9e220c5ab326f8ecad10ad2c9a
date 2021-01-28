@@ -174,6 +174,23 @@
       "parentUuid": "2d5913a4_106d9163",
       "revId": "082367f6969f9d9e220c5ab326f8ecad10ad2c9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67e8b1da_e2bddfc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-01-28T04:43:10Z",
+      "side": 1,
+      "message": "We\u0027re not going to support devices with udp gro fraglist enabled.",
+      "revId": "082367f6969f9d9e220c5ab326f8ecad10ad2c9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
