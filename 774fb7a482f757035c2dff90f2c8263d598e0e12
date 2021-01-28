@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aac86cdf_dbae7aea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-01-28T12:44:13Z",
+      "side": 1,
+      "message": "I think I would put the full ABI report in this case to see the affected interfaces and some more details.\n\nGiven that nobody (hopefully) is depending on this data structure layout, the change looks good to me. The abi.xml needs an update to pass the checks.",
+      "revId": "774fb7a482f757035c2dff90f2c8263d598e0e12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
