@@ -56,6 +56,24 @@
       "message": "Also, this patch does not match the ",
       "revId": "9e64cdeb83cfb9d5362363a096a379a21cb1c01f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c321c2f4_8eec562e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741939
+      },
+      "writtenOn": "2021-01-28T06:23:59Z",
+      "side": 1,
+      "message": "After discussion, mtk will use arch_set_freq_scale() from our driver for android11-5.4 and android12-5.4.",
+      "parentUuid": "504a6467_62b949ca",
+      "revId": "9e64cdeb83cfb9d5362363a096a379a21cb1c01f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
