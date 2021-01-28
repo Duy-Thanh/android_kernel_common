@@ -16,6 +16,24 @@
       "message": "Could you please add the bug number b/168742043 John for this patch and all the others in the series as well John? Thank you!",
       "revId": "77371305f2f308b1ff8343c02649168361bbd223",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f09c9133_22a932cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-01-28T06:35:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c1eab79_3e041077",
+      "revId": "77371305f2f308b1ff8343c02649168361bbd223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
