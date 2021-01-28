@@ -16,6 +16,24 @@
       "message": "Shouldn\u0027t we swap the order of this patch and the one it is based on John?",
       "revId": "40c5c45e98bbe8f31f10366653b47399f4b06235",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36476d6c_73307d92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-01-28T04:28:40Z",
+      "side": 1,
+      "message": "Sure, I actually intend to fold this change into the next revision of what I submit upstream. The dependencies can\u0027t be modules yet upstream so functionally its the same, but allowing it to be module friendly can\u0027t hurt.",
+      "parentUuid": "16af3631_a4916f67",
+      "revId": "40c5c45e98bbe8f31f10366653b47399f4b06235",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
