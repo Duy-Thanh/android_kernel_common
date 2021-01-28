@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd05f9d3_d0033d03",
+        "filename": "kernel/sched/sched-pelt.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1827640
+      },
+      "writtenOn": "2021-01-28T18:38:27Z",
+      "side": 1,
+      "message": "Also generated are the #defines.. let me know if I should take those out the comment here too.",
+      "parentUuid": "3a3eedeb_f84900c3",
+      "range": {
+        "startLine": 2,
+        "startChar": 3,
+        "endLine": 2,
+        "endChar": 66
+      },
+      "revId": "8a57bf0c717d07758352beaeee8b851cc4320a8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "064ff811_8470191b",
         "filename": "kernel/sched/sched.h",
         "patchSetId": 5
@@ -37,6 +61,30 @@
       "writtenOn": "2021-01-22T10:41:54Z",
       "side": 1,
       "message": "move this to sched-pelt.h instead?",
+      "range": {
+        "startLine": 2688,
+        "startChar": 0,
+        "endLine": 2691,
+        "endChar": 0
+      },
+      "revId": "8a57bf0c717d07758352beaeee8b851cc4320a8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb6f6942_16bb35ab",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 2691,
+      "author": {
+        "id": 1827640
+      },
+      "writtenOn": "2021-01-28T18:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "064ff811_8470191b",
       "range": {
         "startLine": 2688,
         "startChar": 0,
