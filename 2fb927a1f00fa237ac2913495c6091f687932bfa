@@ -182,6 +182,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a0dfef01_ca5ed1fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-28T16:15:21Z",
+      "side": 1,
+      "message": "Ok, so the retrieval of nr_ipi and ipi_desc is in an important performance path. Can you update the commit message to explain that? As written it sounds like an infrequent telemetry use-case that wouldn\u0027t have performance constraints that would be affected by a one-time 80ms delay.",
+      "parentUuid": "08c2597e_dc4dd161",
+      "revId": "2fb927a1f00fa237ac2913495c6091f687932bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19226e8f_aa2ac524",
         "filename": "arch/arm64/kernel/smp.c",
         "patchSetId": 2
