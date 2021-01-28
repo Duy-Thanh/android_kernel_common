@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "463205e9_a8660f5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-28T00:56:59Z",
+      "side": 1,
+      "message": "This has build warnings/errors:\n\n```\nWARNING: unmet direct dependencies detected for QCOM_RPMHPD\n  Depends on [n]: QCOM_RPMH [\u003dn] \u0026\u0026 QCOM_COMMAND_DB [\u003dy]\n  Selected by [y]:\n  - GKI_QCOM_CLKS_CONFIGS [\u003dy] \u0026\u0026 ARCH_QCOM [\u003dy]\n\nWARNING: unmet direct dependencies detected for QCOM_RPMHPD\n  Depends on [n]: QCOM_RPMH [\u003dn] \u0026\u0026 QCOM_COMMAND_DB [\u003dy]\n  Selected by [y]:\n  - GKI_QCOM_CLKS_CONFIGS [\u003dy] \u0026\u0026 ARCH_QCOM [\u003dy]\n\nWARNING: unmet direct dependencies detected for QCOM_RPMHPD\n  Depends on [n]: QCOM_RPMH [\u003dn] \u0026\u0026 QCOM_COMMAND_DB [\u003dy]\n  Selected by [y]:\n  - GKI_QCOM_CLKS_CONFIGS [\u003dy] \u0026\u0026 ARCH_QCOM [\u003dy]\n\n```\nand\n```\n Comparing the KMI and the symbol lists:\n+ /mnt/ssd2/krepo/android12-5.4/build/abi/compare_to_symbol_list /mnt/ssd2/krepo/android12-5.4/out/android12-5.4/common/Module.symvers /mnt/ssd2/krepo/android12-5.4/out/android12-5.4/common/abi_symbollist.raw\nERROR: Differences between ksymtab and symbol list detected!\nSymbols missing from ksymtab:\n - rpmh_flush\n - rpmh_invalidate\n - rpmh_write\n - rpmh_write_async\n - rpmh_write_batch\nSymbols missing from symbol list:\n```",
+      "revId": "8a66b69d48b5cbd3925db25e475b96d1ea6ca3cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
