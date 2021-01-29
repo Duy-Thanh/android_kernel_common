@@ -16,6 +16,24 @@
       "message": "Again, why not submit this upstream?",
       "revId": "866bd1e0e1eda25937740d7654cc2e7809746a2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d188ee99_37e2ede4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1743420
+      },
+      "writtenOn": "2021-01-29T08:19:58Z",
+      "side": 1,
+      "message": "I missed something.\nIn case of list corruption, CHECK_DATA_CORRUPTION macro calls BUG().\nSo, this vendor hook never be called.\n\nI don\u0027t know how to trace them.\n\nAnyway, I will abandon this patch.\n\nThanks for reviewing this.",
+      "parentUuid": "d49a0258_2e299892",
+      "revId": "866bd1e0e1eda25937740d7654cc2e7809746a2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
