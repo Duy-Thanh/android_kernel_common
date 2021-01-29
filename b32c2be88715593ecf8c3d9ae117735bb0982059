@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62167f4e_fc4b2537",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-29T09:43:47Z",
+      "side": 1,
+      "message": "ABI file is now also update to reflect this internal structure change, along with the full report being added to the changelog text.",
+      "revId": "b32c2be88715593ecf8c3d9ae117735bb0982059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
