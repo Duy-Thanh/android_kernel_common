@@ -16,6 +16,24 @@
       "message": "I am not a shrinker expert, but it appears as if this returns the number of bytes as opposed to the number of items, and I want to confirm that this is intended. The description of struct shrinker reads \"should return the number of freeable items in the cache.\"",
       "revId": "3c52b373862453cc1780a743ec7e8fb71ebbba54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d35e3e7f_9d5f893c",
+        "filename": "drivers/dma-buf/heaps/deferred-free-helper.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-01-29T06:18:27Z",
+      "side": 1,
+      "message": "Hrm. I guess I was considering bytes as item type here. :) I\u0027ll have to look at this in more detail. Thanks for bringing up that nuance!",
+      "parentUuid": "497a6b34_ced22fb5",
+      "revId": "3c52b373862453cc1780a743ec7e8fb71ebbba54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
