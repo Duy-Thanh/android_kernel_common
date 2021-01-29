@@ -28,8 +28,31 @@
 #include "sched.h"
 #include "pelt.h"
 
-int pelt_load_avg_period = LOAD_AVG_PERIOD;
-int pelt_load_avg_max = LOAD_AVG_MAX;
+int pelt_load_avg_period = PELT32_LOAD_AVG_PERIOD;
+int pelt_load_avg_max = PELT32_LOAD_AVG_MAX;
+
+static int __init set_pelt(char *str)
+{
+	int rc, num, i;
+
+	rc = kstrtoint(str, 0, &num);
+
+	switch(num)
+	{
+	case PELT8_LOAD_AVG_PERIOD:
+		pelt_load_avg_period = PELT8_LOAD_AVG_PERIOD;
+		pelt_load_avg_max = PELT8_LOAD_AVG_MAX;
+		for (i = 0; i < pelt_load_avg_period; i++)
+			pelt_runnable_avg_yN_inv[i] = pelt8_runnable_avg_yN_inv[i];
+		break;
+	default:
+		pr_err("Unsupported half life %d\n", num);
+	}
+
+	return 0;
+}
+
+early_param("pelt", set_pelt);
 
 /*
  * Approximate:
