@@ -51,6 +51,24 @@
       "parentUuid": "83e3e593_76a5dd6b",
       "revId": "1bfd7e2fdd0f7fd7cc4ae3d5a0bed17d2f679d5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df8ba4f4_07130763",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-01-29T13:24:06Z",
+      "side": 1,
+      "message": "I took a brief look.\n\nThis is libabigail XML from before some significant changes to current XML.\nThe actual (harmless) change in ABI that liabigail detects is that\n\n`dev_pm_info`\u0027s `timer_expires` has changed from `unsigned long int` to `u64`.\n\nThe leaf report is correct to omit this. The change is visible with `--leaf-changes-only` and `--harmless`. The change isn\u0027t completely invisible with plain `abidiff` a.k.a. `--full-mode` and this could be a bug.\n\nHowever, it\u0027s hard to say without separating the two things. If I can go back to before `timer_expires` was changed and generate \"new\" XML, then either the problem will vanish or we\u0027ll have something reproducible and worth tracking either here or upstream.\n\nSo, I\u0027ll do that then.",
+      "parentUuid": "108bd799_4d2557ac",
+      "revId": "1bfd7e2fdd0f7fd7cc4ae3d5a0bed17d2f679d5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
