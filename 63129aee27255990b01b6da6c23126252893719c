@@ -16,6 +16,24 @@
       "message": "Why not submit this upstream so that everyone can benefit? ",
       "revId": "63129aee27255990b01b6da6c23126252893719c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9efb136f_3f97b90d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1743420
+      },
+      "writtenOn": "2021-01-29T07:51:12Z",
+      "side": 1,
+      "message": "I think you meant kernel normal tracepoint because there is Vendor Hook only in the aosp kernel.\n\nAs for as I know, typically the purpose of the tracepoint is to trace events using /sys/kernel/debug/tracing and etc.\nEven if a trace event is generated, any user tasks cannot take a chance to perform because these codes will fall directly into die() or panic().\n\n  do_undefinstr()\n    -\u003e BUG()\n      ...\n      -\u003e bug_handler\n        -\u003e die()\n \n  bad_mode()\n    -\u003e panic()\n \n  arm64_serror_panic()\n    -\u003e nmi_panic()\n      -\u003e panic()\n\nThus, these locations are not suitable for general traces and are not very helpful to everyone.\n\nTherefore, I think it is better to insert restricted vendor hooks than to submit normal tracepoints upstream.",
+      "parentUuid": "75c3b571_0b445714",
+      "revId": "63129aee27255990b01b6da6c23126252893719c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
