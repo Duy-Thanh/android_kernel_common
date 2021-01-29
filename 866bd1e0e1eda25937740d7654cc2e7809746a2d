@@ -34,6 +34,23 @@
       "parentUuid": "d49a0258_2e299892",
       "revId": "866bd1e0e1eda25937740d7654cc2e7809746a2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73d75f2d_9826bb7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-29T10:17:13Z",
+      "side": 1,
+      "message": "Again, please submit these tracepoints upstream, as it seems like they would also be interested in these.",
+      "revId": "866bd1e0e1eda25937740d7654cc2e7809746a2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
