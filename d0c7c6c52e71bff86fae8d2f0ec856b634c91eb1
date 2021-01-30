@@ -85,6 +85,23 @@
       "message": "wait for our review. May take 2+ weeks. ",
       "revId": "d0c7c6c52e71bff86fae8d2f0ec856b634c91eb1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00db3e61_b952188d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-01-30T00:59:26Z",
+      "side": 1,
+      "message": "-1 until review.",
+      "revId": "d0c7c6c52e71bff86fae8d2f0ec856b634c91eb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
