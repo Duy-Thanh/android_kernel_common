@@ -229,13 +229,15 @@ static void trusty_dump_logs(struct trusty_log_state *s)
 				char *app_name =
 					&s->header.data[s->footer.log_len];
 
-				dev_info(s->dev, "%llu: %s: %s",
+				dev_info(s->dev, "%llu: %u: %s: %s",
 					s->footer.timestamp,
+					s->footer.log_level,
 					app_name,
 					s->line_buffer);
 			} else {
 				dev_info(s->dev, "%llu: %s",
 					s->footer.timestamp,
+					s->footer.log_level,
 					s->line_buffer);
 			}
 		}
