@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8f1fc01_c68b60e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-30T12:24:15Z",
+      "side": 1,
+      "message": "please be specific as to what you are doing here in the changelog (i.e. you need to have some text in the body of the changelog.)\n\nAlso explain why these should be enabled.  A good reason would be that \"all android devices require these today and they are being built as a module, so build them in to save everyone else the bother\" as an example 😊",
+      "range": {
+        "startLine": 7,
+        "startChar": 21,
+        "endLine": 7,
+        "endChar": 25
+      },
+      "revId": "d0c7c6c52e71bff86fae8d2f0ec856b634c91eb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f52212d2_bffb6a9b",
