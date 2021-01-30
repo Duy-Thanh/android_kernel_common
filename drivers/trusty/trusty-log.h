@@ -14,6 +14,7 @@
  *    total_size_of_entry +
  *    log_string + app_name +
  *    ------footer part -----
+ *    log-level +
  *    app-id +
  *    timestamp +
  *    app_name_size +
@@ -27,6 +28,7 @@ struct log_data_header {
 } __attribute__((packed));
 
 struct log_data_footer {
+	uint32_t log_level;
 	int32_t app_id;
 	uint64_t timestamp;
 	uint32_t app_name_len;
