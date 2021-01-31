@@ -16,6 +16,23 @@
       "message": "Todd, what happened here? I thought we were going to wait two weeks, isn\u0027t it? Can you please revert these patches? The GKI newsletter had clearly mentioned it. Why we are not following it? \n\nGreg, are you aware of two weeks window? ",
       "revId": "adef4d1d97d512a038aacfb8c5b4711e25158cee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b04f5f18_a4023341",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-01-31T22:53:25Z",
+      "side": 1,
+      "message": "The revert of this was submitted in aosp/1566349 and the reland is in aosp/1566350 (please do not submit).",
+      "revId": "adef4d1d97d512a038aacfb8c5b4711e25158cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
