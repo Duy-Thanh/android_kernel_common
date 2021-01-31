@@ -117,6 +117,8 @@ enum track_item { TRACK_ALLOC, TRACK_FREE };
 struct track *get_track(struct kmem_cache *s, void *object,
 		enum track_item alloc);
 void *fixup_red_left(struct kmem_cache *s, void *p);
+void slab_lock(struct page *page);
+void slab_unlock(struct page *page);
 #endif
 
 /* Functions provided by the slab allocators */
