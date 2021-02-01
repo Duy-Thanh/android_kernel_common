@@ -16,6 +16,24 @@
       "message": "Will, Ard, any objections here?",
       "revId": "d1be02c2515f60574c5b693f639c59e7b1497c8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "112676ad_c26fe18f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-02-01T12:44:29Z",
+      "side": 1,
+      "message": "Sure, but in that case, we will need another fix to ensure that memstart_addr and physvirt_offset are properly kept in sync.",
+      "parentUuid": "d224a784_952026be",
+      "revId": "d1be02c2515f60574c5b693f639c59e7b1497c8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
