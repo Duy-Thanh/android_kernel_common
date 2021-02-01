@@ -82,6 +82,14 @@ static DEFINE_PER_CPU(struct cpuhp_cpu_state, cpuhp_state) = {
 	.fail = CPUHP_INVALID,
 };
 
+#ifdef CONFIG_HOTPLUG_CPU
+struct pause_cpu_state {
+	int ref_count;
+};
+
+static DEFINE_PER_CPU(struct pause_cpu_state, pause_state);
+#endif
+
 #ifdef CONFIG_SMP
 cpumask_t cpus_booted_once_mask;
 #endif
@@ -1134,6 +1142,38 @@ void __wait_drain_rq(struct cpumask *cpus)
 		sched_cpu_drain_rq_wait(cpu);
 }
 
+/* remove previously paused CPUs */
+static void inc_ref_counts(struct cpumask *cpus)
+{
+	int cpu;
+	struct pause_cpu_state *pause_cpu_state;
+
+	for_each_cpu(cpu, cpus) {
+		pause_cpu_state = per_cpu_ptr(&pause_state, cpu);
+		if (pause_cpu_state->ref_count)
+			cpumask_clear_cpu(cpu, cpus);
+		pause_cpu_state->ref_count++;
+	}
+
+	return;
+}
+
+/* remove CPUs not ready for resume */
+static void dec_test_ref_counts(struct cpumask *cpus)
+{
+	int cpu;
+	struct pause_cpu_state *pause_cpu_state;
+
+	for_each_cpu(cpu, cpus) {
+		pause_cpu_state = per_cpu_ptr(&pause_state, cpu);
+		pause_cpu_state->ref_count--;
+		if (pause_cpu_state->ref_count)
+			cpumask_clear_cpu(cpu, cpus);
+	}
+
+	return;
+}
+
 int pause_cpus(struct cpumask *cpus)
 {
 	int err = 0;
@@ -1143,6 +1183,8 @@ int pause_cpus(struct cpumask *cpus)
 	start_time = sched_clock();
 
 	cpu_maps_update_begin();
+
+	inc_ref_counts(cpus);
 
 	if (cpu_hotplug_disabled) {
 		err = -EBUSY;
@@ -1253,6 +1295,8 @@ int resume_cpus(struct cpumask *cpus)
 	start_time = sched_clock();
 
 	cpu_maps_update_begin();
+
+	dec_test_ref_counts(cpus);
 
 	if (cpu_hotplug_disabled) {
 		err = -EBUSY;
