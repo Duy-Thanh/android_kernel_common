@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99949fc2_ce17fe87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2021-02-01T08:38:22Z",
+      "side": 1,
+      "message": "Hi Google Friends,\nI just want to talk about it\u0027s probability to enable CONFIG_OF_DYNAMIC in GKI image.\nMaybe selecting it init/Kconfig.gki is better.",
+      "revId": "5f27d5e5ebd4c366f3f021878df58e78da1b588f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
