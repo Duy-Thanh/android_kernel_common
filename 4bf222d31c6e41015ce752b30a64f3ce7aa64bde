@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f082684_19994cbf",
+        "filename": "include/trace/hooks/timer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-02-01T16:28:43Z",
+      "side": 1,
+      "message": "remove this line (see comment on lines 19-23)",
+      "revId": "4bf222d31c6e41015ce752b30a64f3ce7aa64bde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0a58a7c_e73006a9",
+        "filename": "include/trace/hooks/timer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-02-01T16:28:43Z",
+      "side": 1,
+      "message": "This is no longer required (see the other files under include/trace/hooks)",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 6
+      },
+      "revId": "4bf222d31c6e41015ce752b30a64f3ce7aa64bde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
