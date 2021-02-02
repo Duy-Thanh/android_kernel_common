@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83363ae1_c0b1889a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1339259
+      },
+      "writtenOn": "2021-02-02T05:35:18Z",
+      "side": 1,
+      "message": "Hmmm, for 4.19, the ABI xml already has the tracepoint because I\u0027ve done this before for QC 4.19 kernel here: https://android-review.googlesource.com/c/kernel/common/+/1406187\n\nThen do we still need this change for gki cuttlefish?",
+      "revId": "840ad9ec2658515330af99514a8f4272f20e2de8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
