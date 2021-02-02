@@ -33,6 +33,24 @@
       "message": "Are we planning on upstreaming this API?",
       "revId": "be9b0f3d29db97545a52631fad1c29e029fb9dab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e044558a_fd64e06d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-02-02T01:29:06Z",
+      "side": 1,
+      "message": "Yes, I plan on sending it upstream after the DMA-BUF system heap page-pooling patches get merged upstreamed. We cannot send it now since none of the heaps upstream support page-pooling.",
+      "parentUuid": "79860a4b_247e5dc0",
+      "revId": "be9b0f3d29db97545a52631fad1c29e029fb9dab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
