@@ -46,6 +46,30 @@
       },
       "revId": "f2a9407803e135cb38a4b241c2666e214cd79e22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5825c61a_c42daae6",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4715,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-02-02T08:46:10Z",
+      "side": 1,
+      "message": "It seems that the original vendor hook was introduced by MTK as well. I added the author to this CL to confirm it is fine to move the hook before the clock update. If that is fine we can merge this patch as-is.",
+      "parentUuid": "485c8076_7315e9af",
+      "range": {
+        "startLine": 4715,
+        "startChar": 1,
+        "endLine": 4715,
+        "endChar": 53
+      },
+      "revId": "f2a9407803e135cb38a4b241c2666e214cd79e22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
