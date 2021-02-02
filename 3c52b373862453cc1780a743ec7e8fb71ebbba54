@@ -34,6 +34,24 @@
       "parentUuid": "497a6b34_ced22fb5",
       "revId": "3c52b373862453cc1780a743ec7e8fb71ebbba54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47308d04_c35db00d",
+        "filename": "drivers/dma-buf/heaps/deferred-free-helper.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-02T20:24:35Z",
+      "side": 1,
+      "message": "Shrinker\u0027s count_objects (freelist_shrink_count) and scan_objects (free_one_item) return the number of pages. So looks like you consider pages as freeable items of your cache. However the way cache size (list_size_pages) is calculated is via incrementing/decrementing by (size \u003e\u003e PAGE_SHIFT). If \"size\" is less that PAGE_SIZE then the accounting will be broken. You can end up with multi-page aggregate cache which reports 0 shrinkable items. If expectation is that \"size\" is always a multiple of PAGE_SIZE then IMHO it\u0027s better to use number of pages instead of number of bytes for deferred_freelist_item.size.",
+      "parentUuid": "d35e3e7f_9d5f893c",
+      "revId": "3c52b373862453cc1780a743ec7e8fb71ebbba54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
