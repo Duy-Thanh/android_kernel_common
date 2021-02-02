@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "709ca22d_7fa42b5b",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-02T15:30:22Z",
+      "side": 1,
+      "message": "this should be built in, configs got out of sync somehow, I\u0027ll go fix it up 😞",
+      "range": {
+        "startLine": 396,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 26
+      },
+      "revId": "c0b981811acc9c79457fe260bf3c193b45808942",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
