@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58d9a12d_f964df03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-02-02T19:58:51Z",
+      "side": 1,
+      "message": "What\u0027s the point of adding new config if it\u0027s always problem in Android?\nCouldn\u0027t we simply hack the iterate_groups function?\n\nAnd please file a bug to keep tracking upstream solution.",
+      "revId": "82eb02c5f86fe7d28784ea5df9c84566fce4b87f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59fdb3d6_d043da78",
+        "filename": "kernel/sched/psi.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-02-02T19:58:51Z",
+      "side": 1,
+      "message": "Couldn\u0027t we remove this part?\nI don\u0027t understand why we need to introduce additional android new config instead of removing unnecessary code.",
+      "range": {
+        "startLine": 749,
+        "startChar": 0,
+        "endLine": 759,
+        "endChar": 2
+      },
+      "revId": "82eb02c5f86fe7d28784ea5df9c84566fce4b87f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
