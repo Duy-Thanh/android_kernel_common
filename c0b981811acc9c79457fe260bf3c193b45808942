@@ -22,6 +22,30 @@
       },
       "revId": "c0b981811acc9c79457fe260bf3c193b45808942",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "273c7a5e_33959980",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1339259
+      },
+      "writtenOn": "2021-02-02T22:05:35Z",
+      "side": 1,
+      "message": "if this change accidentally messed things up, plz let me know. Otherwise i\u0027ll just have this resolved.",
+      "parentUuid": "709ca22d_7fa42b5b",
+      "range": {
+        "startLine": 396,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 26
+      },
+      "revId": "c0b981811acc9c79457fe260bf3c193b45808942",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
