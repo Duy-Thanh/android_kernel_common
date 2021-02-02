@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "febc1708_c0712736",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-02T20:06:12Z",
+      "side": 1,
+      "message": "See my reply on your other comment.\nI\u0027m planning to work on upstream solution under b/178872719. I don\u0027t think we need another bug for this issue.",
+      "parentUuid": "58d9a12d_f964df03",
+      "revId": "82eb02c5f86fe7d28784ea5df9c84566fce4b87f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59fdb3d6_d043da78",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-02-02T19:58:51Z",
       "side": 1,
       "message": "Couldn\u0027t we remove this part?\nI don\u0027t understand why we need to introduce additional android new config instead of removing unnecessary code.",
+      "range": {
+        "startLine": 749,
+        "startChar": 0,
+        "endLine": 759,
+        "endChar": 2
+      },
+      "revId": "82eb02c5f86fe7d28784ea5df9c84566fce4b87f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a2b641f_a11723d7",
+        "filename": "kernel/sched/psi.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-02T20:06:12Z",
+      "side": 1,
+      "message": "I think it is cleaner instead of just removing a valid upstream code which is unused in Android. I\u0027m also planning on proposing this change upstream with explanation that we see regressions in Android when increasing the number of cgroups.",
+      "parentUuid": "59fdb3d6_d043da78",
       "range": {
         "startLine": 749,
         "startChar": 0,
