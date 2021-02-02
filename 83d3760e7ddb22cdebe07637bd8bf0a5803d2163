@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5488f1fd_bdf048fa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-02-02T10:45:56Z",
+      "side": 1,
+      "message": "\u003e ANDROID: commits need to contain a properly formatted Bug: or Fixes: line\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nPlease fix.",
+      "parentUuid": "61c78224_eec59169",
+      "revId": "83d3760e7ddb22cdebe07637bd8bf0a5803d2163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
