@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cea19f80_e0fe523a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-02-02T16:46:28Z",
+      "side": 1,
+      "message": "Please split the hooks and cache mode changes into separate patches.\n\nAlso, I\u0027m not convinced by the need for these hooks. The pstore RAM region is specified by the bootloader. Can\u0027t whatever driver is using this just use that known address to access this information?",
+      "revId": "ddaf879e6322fd716325b2773e6d717e7cdb9305",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
