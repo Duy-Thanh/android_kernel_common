@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f5af5b5_87a99279",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-02-02T06:00:22Z",
+      "side": 1,
+      "message": "Hi Greg,\n\nA DMA-BUF maitainer requested for tests to be created in the igt-gpu-tools test-suites before it can be accepted upstream. I am planning to do it but in the meanwhile, is it ok if we take it into ACK for now to unblock features pending on the it? Thank you!\n\nRegards,\nHridya\n\n",
+      "revId": "41ca67e4948ee571e75d18749c23dbeae85cb39f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
