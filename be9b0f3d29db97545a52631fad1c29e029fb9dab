@@ -16,6 +16,23 @@
       "message": "Hello John and Suren,\n\nUploading this patch to ACK since upstream DMA-BUF heaps do not support page-pools yet. I will send it out for upstream review once they do. Please do take a look when you get a chance. Thank you!\n\nRegards,\nHridya",
       "revId": "be9b0f3d29db97545a52631fad1c29e029fb9dab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79860a4b_247e5dc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-02T01:26:33Z",
+      "side": 1,
+      "message": "Are we planning on upstreaming this API?",
+      "revId": "be9b0f3d29db97545a52631fad1c29e029fb9dab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
