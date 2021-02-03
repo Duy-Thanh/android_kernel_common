@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5400691d_587e6c84",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1141,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-02-03T02:20:24Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this function do nothing if assym cpus aren\u0027t enabled on the command-line via \u0027allow_mismatched_32bit_el0\u0027? If that feature isn\u0027t enabled, then pausing the last 32-bit cpu is not an issue. (see aosp/1559772)",
+      "revId": "370a9b3d052644d776ae850eb5a1b19a7e976ad0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
