@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10cabcd6_befac5cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-03T01:51:34Z",
+      "side": 1,
+      "message": "needs defining",
+      "range": {
+        "startLine": 15,
+        "startChar": 5,
+        "endLine": 15,
+        "endChar": 8
+      },
+      "revId": "9f94a7e1dede2e47abc55b9b6b5ef6f1eab6df02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49d0ac4b_3241b454",
+        "filename": "fs/open.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1162,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-03T01:51:34Z",
+      "side": 1,
+      "message": "I thought for GKI we wanted EXPORT_SYMBOL_GPL ?",
+      "range": {
+        "startLine": 1162,
+        "startChar": 0,
+        "endLine": 1162,
+        "endChar": 13
+      },
+      "revId": "9f94a7e1dede2e47abc55b9b6b5ef6f1eab6df02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
