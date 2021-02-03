@@ -2768,7 +2768,12 @@ extern long do_sys_open(int dfd, const char __user *filename, int flags,
 			umode_t mode);
 extern struct file *file_open_name(struct filename *, int, umode_t);
 extern struct file *filp_open(const char *, int, umode_t);
+<<<<<<< HEAD   (ca55c6 ANDROID: gki_defconfig: set DEFAULT_MMAP_MIN_ADDR=32768)
 extern struct file *file_open_root(const struct path *,
+=======
+extern struct file *filp_open_block(const char *, int, umode_t);
+extern struct file *file_open_root(struct dentry *, struct vfsmount *,
+>>>>>>> CHANGE (cf8f79 ANDROID: Add filp_open_block() for zram)
 				   const char *, int, umode_t);
 static inline struct file *file_open_root_mnt(struct vfsmount *mnt,
 				   const char *name, int flags, umode_t mode)
