@@ -70,6 +70,30 @@
       },
       "revId": "f2a9407803e135cb38a4b241c2666e214cd79e22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cee5a954_2e8e0185",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4715,
+      "author": {
+        "id": 1745261
+      },
+      "writtenOn": "2021-02-03T04:06:49Z",
+      "side": 1,
+      "message": "https://partnerissuetracker.corp.google.com/u/1/issues/163431711\nAs confirmed by Jian-Min, thanks",
+      "parentUuid": "5825c61a_c42daae6",
+      "range": {
+        "startLine": 4715,
+        "startChar": 1,
+        "endLine": 4715,
+        "endChar": 53
+      },
+      "revId": "f2a9407803e135cb38a4b241c2666e214cd79e22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
