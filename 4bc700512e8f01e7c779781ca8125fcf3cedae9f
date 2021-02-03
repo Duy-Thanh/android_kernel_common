@@ -16,6 +16,24 @@
       "message": "I need to confirm downstream users of this driver in QC. Please hold for a day or two and my response. ",
       "revId": "4bc700512e8f01e7c779781ca8125fcf3cedae9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a1b6332_7ac70f3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1030767
+      },
+      "writtenOn": "2021-02-03T22:15:24Z",
+      "side": 1,
+      "message": "This change is already there on android11-5.4. We don\u0027t use this driver but are fine with it enabled.",
+      "parentUuid": "b3935dc8_f40d883e",
+      "revId": "4bc700512e8f01e7c779781ca8125fcf3cedae9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
