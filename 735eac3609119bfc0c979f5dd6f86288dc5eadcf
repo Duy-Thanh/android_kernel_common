@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfdd6a6e_a87219d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-03T07:38:50Z",
+      "side": 1,
+      "message": "While a fun hack, why don\u0027t we just build this driver into the gki image?  It\u0027s really tiny.\nNote, even if you change this, we still need to export filp_close() and file_path() which is needed by this driver.",
+      "revId": "735eac3609119bfc0c979f5dd6f86288dc5eadcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
