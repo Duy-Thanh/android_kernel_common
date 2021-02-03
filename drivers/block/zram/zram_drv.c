@@ -495,7 +495,13 @@ static ssize_t backing_dev_store(struct device *dev,
 	if (sz > 0 && file_name[sz - 1] == '\n')
 		file_name[sz - 1] = 0x00;
 
+<<<<<<< HEAD   (fa2c8f ANDROID: vendor_hooks: add vendor hook in current_alloc_flag)
 	backing_dev = filp_open(file_name, O_RDWR | O_LARGEFILE | O_EXCL, 0);
+||||||| BASE
+	backing_dev = filp_open(file_name, O_RDWR|O_LARGEFILE, 0);
+=======
+	backing_dev = filp_open_block(file_name, O_RDWR|O_LARGEFILE, 0);
+>>>>>>> CHANGE (d7595b ANDROID: Add filp_open_block() for zram)
 	if (IS_ERR(backing_dev)) {
 		err = PTR_ERR(backing_dev);
 		backing_dev = NULL;
