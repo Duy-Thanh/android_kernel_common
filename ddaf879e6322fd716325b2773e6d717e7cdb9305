@@ -34,6 +34,24 @@
       "parentUuid": "cea19f80_e0fe523a",
       "revId": "ddaf879e6322fd716325b2773e6d717e7cdb9305",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2046d6a4_45ca1e35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1677579
+      },
+      "writtenOn": "2021-02-03T06:13:38Z",
+      "side": 1,
+      "message": "@alistair/Greg: We are specifying normal ram region as pstore ram region in device tree and carveout them.\n\nWe have a feature in which we register ram region with bootloader, and during warm reset, bootloader dump all those register ram region. We need this pstore ram region to dump logcat, dmesg, ftrace during oops.\n\nfirst hook: We need a hook to change this memory region to treat this region as normal cacheable one and our firmware will take care of cache-flush.\n\nsecond hook: during warm reset ram content is not retained as we are not using persistent ram here and buffer start could point to anywhere as it is used to locate write position.\n\nI will separate hook and cache mode change into separate patches.",
+      "parentUuid": "bfcef13a_b8961afa",
+      "revId": "ddaf879e6322fd716325b2773e6d717e7cdb9305",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
