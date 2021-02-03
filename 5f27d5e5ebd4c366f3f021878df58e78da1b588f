@@ -16,6 +16,23 @@
       "message": "Hi Google Friends,\nI just want to talk about it\u0027s probability to enable CONFIG_OF_DYNAMIC in GKI image.\nMaybe selecting it init/Kconfig.gki is better.",
       "revId": "5f27d5e5ebd4c366f3f021878df58e78da1b588f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fb1069f_6cdc7cc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-02-03T22:02:07Z",
+      "side": 1,
+      "message": "Isn\u0027t that modifying the devicetree at runtime after kernel boot will be a security problem? Please explain in detail the usecase here.",
+      "revId": "5f27d5e5ebd4c366f3f021878df58e78da1b588f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
