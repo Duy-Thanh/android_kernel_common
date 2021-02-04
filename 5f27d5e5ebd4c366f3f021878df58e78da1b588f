@@ -69,6 +69,24 @@
       "parentUuid": "d99647af_180da927",
       "revId": "5f27d5e5ebd4c366f3f021878df58e78da1b588f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "045a9865_6cbb32d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2021-02-04T05:54:44Z",
+      "side": 1,
+      "message": "Hi Soni,\nWhat\u0027s the potential security issue do you mean?\nIf can\u0027t use dynamic change the dts, we can\u0027t deprobe the binder driver in our devices.",
+      "parentUuid": "c83b4c29_e1b54524",
+      "revId": "5f27d5e5ebd4c366f3f021878df58e78da1b588f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
