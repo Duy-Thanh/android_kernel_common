@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65c77e49_3b2d0d9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-02-04T20:35:00Z",
+      "side": 1,
+      "message": "Hi Kevin. Isn\u0027t GENERIC_PHY_MIPI_DPHY for display/camera and APHY is for ethernet? Can you confirm it was need for an ethernet driver?",
+      "revId": "f2fe5ac9ef3e5a4ae4e573b31997ba6a3acd75dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
