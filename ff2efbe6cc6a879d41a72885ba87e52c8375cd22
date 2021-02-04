@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f0b8295_b7ecb839",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2021-02-04T07:32:46Z",
+      "side": 1,
+      "message": "Define as unsigned long to match signature of dma_map_sgtable. Same on line 157",
+      "range": {
+        "startLine": 138,
+        "startChar": 1,
+        "endLine": 138,
+        "endChar": 4
+      },
+      "revId": "ff2efbe6cc6a879d41a72885ba87e52c8375cd22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "081c1985_96f5c856",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2021-02-04T07:32:46Z",
+      "side": 1,
+      "message": "Consider |\u003d to allow for more attributes in the future.",
+      "range": {
+        "startLine": 142,
+        "startChar": 7,
+        "endLine": 142,
+        "endChar": 8
+      },
+      "revId": "ff2efbe6cc6a879d41a72885ba87e52c8375cd22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
