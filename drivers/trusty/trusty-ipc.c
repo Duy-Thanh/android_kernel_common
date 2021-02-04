@@ -28,6 +28,8 @@
 
 #include <uapi/linux/trusty/ipc.h>
 
+#include "trusty-ipc-trace.h"
+
 #define MAX_DEVICES			4
 
 #define REPLY_TIMEOUT			5000
@@ -714,6 +716,8 @@ int tipc_chan_queue_msg(struct tipc_chan *chan, struct tipc_msg_buf *mb)
 	mutex_lock(&chan->lock);
 	switch (chan->state) {
 	case TIPC_CONNECTED:
+		trace_trusty_ipc_tx(chan->local, mb->buf_id, mb->wpos,
+				    mb->shm_cnt);
 		fill_msg_hdr(mb, chan->local, chan->remote);
 		err = vds_queue_txbuf(chan->vds, mb);
 		if (err) {
@@ -748,6 +752,8 @@ int tipc_chan_connect(struct tipc_chan *chan, const char *name)
 	struct tipc_ctrl_msg *msg;
 	struct tipc_conn_req_body *body;
 	struct tipc_msg_buf *txbuf;
+
+	trace_trusty_ipc_connect(chan->local, name);
 
 	txbuf = vds_get_txbuf(chan->vds, TXBUF_TIMEOUT);
 	if (IS_ERR(txbuf))
@@ -915,6 +921,9 @@ static struct tipc_msg_buf *dn_handle_msg(void *data,
 
 	mutex_lock(&dn->lock);
 	if (dn->state == TIPC_CONNECTED) {
+		trace_trusty_ipc_rx(dn->chan ? dn->chan->local : ~0U,
+				    rxbuf->buf_id, rxbuf->wpos,
+				    rxbuf->shm_cnt);
 		/* get new buffer */
 		newbuf = tipc_chan_get_rxbuf(dn->chan);
 		if (newbuf) {
@@ -941,6 +950,8 @@ static void dn_connected(struct tipc_dn_chan *dn)
 	mutex_lock(&dn->lock);
 	dn->state = TIPC_CONNECTED;
 
+	trace_trusty_ipc_connected(dn->chan ? dn->chan->local : ~0U);
+
 	/* complete all pending  */
 	complete(&dn->reply_comp);
 
@@ -951,6 +962,8 @@ static void dn_disconnected(struct tipc_dn_chan *dn)
 {
 	mutex_lock(&dn->lock);
 	dn->state = TIPC_DISCONNECTED;
+
+	trace_trusty_ipc_disconnected(dn->chan ? dn->chan->local : ~0U);
 
 	/* complete all pending  */
 	complete(&dn->reply_comp);
@@ -967,6 +980,8 @@ static void dn_shutdown(struct tipc_dn_chan *dn)
 
 	/* set state to STALE */
 	dn->state = TIPC_STALE;
+
+	trace_trusty_ipc_shutdown(dn->chan ? dn->chan->local : ~0U);
 
 	/* complete all pending  */
 	complete(&dn->reply_comp);
@@ -1983,6 +1998,7 @@ static void _txvq_cb(struct virtqueue *txvq)
 		if ((int)len < 0)
 			handle_dropped_mb(vds, mb);
 		need_wakeup |= _put_txbuf_locked(vds, mb);
+		trace_trusty_ipc_tx_buf_done(mb->buf_id, vds->free_msg_buf_cnt);
 	}
 	mutex_unlock(&vds->lock);
 
@@ -2160,6 +2176,9 @@ static void __exit tipc_exit(void)
 /* We need to init this early */
 subsys_initcall(tipc_init);
 module_exit(tipc_exit);
+
+#define CREATE_TRACE_POINTS
+#include "trusty-ipc-trace.h"
 
 MODULE_DEVICE_TABLE(tipc, tipc_virtio_id_table);
 MODULE_DESCRIPTION("Trusty IPC driver");
