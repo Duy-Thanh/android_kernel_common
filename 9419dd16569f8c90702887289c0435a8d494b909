@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0704ad3a_0aebfab8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-02-04T19:23:48Z",
+      "side": 1,
+      "message": "Bypassing presubmit since the checkpatch failure is on the ABI XML report: https://android-build.googleplex.com/builds/pending/P19460138/checkpatch/latest/view/checkpatch.log",
+      "revId": "9419dd16569f8c90702887289c0435a8d494b909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
