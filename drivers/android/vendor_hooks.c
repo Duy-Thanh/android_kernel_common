@@ -32,6 +32,7 @@
 #include <trace/hooks/pm_domain.h>
 #include <trace/hooks/bug.h>
 #include <trace/hooks/timer.h>
+#include <trace/hooks/pstore.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -139,3 +140,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_up);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_down);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_sched_balance_rt);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_timer_calc_index);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pstore_mem_type);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pstore_buf_check);

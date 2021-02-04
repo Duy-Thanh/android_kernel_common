@@ -19,6 +19,7 @@
 #include <linux/uaccess.h>
 #include <linux/vmalloc.h>
 #include <asm/page.h>
+#include <trace/hooks/pstore.h>
 
 /**
  * struct persistent_ram_buffer - persistent circular RAM buffer
@@ -414,6 +415,7 @@ static void *persistent_ram_vmap(phys_addr_t start, size_t size,
 	else
 		prot = pgprot_writecombine(PAGE_KERNEL);
 
+	trace_android_vh_pstore_mem_type(memtype, &prot);
 	pages = kmalloc_array(page_count, sizeof(struct page *), GFP_KERNEL);
 	if (!pages) {
 		pr_err("%s: Failed to allocate array for %u pages\n",
@@ -489,6 +491,8 @@ static int persistent_ram_post_init(struct persistent_ram_zone *prz, u32 sig,
 				    struct persistent_ram_ecc_info *ecc_info)
 {
 	int ret;
+	size_t start;
+	bool check = false;
 	bool zap = !!(prz->flags & PRZ_FLAG_ZAP_OLD);
 
 	ret = persistent_ram_init_ecc(prz, ecc_info);
@@ -500,7 +504,9 @@ static int persistent_ram_post_init(struct persistent_ram_zone *prz, u32 sig,
 	sig ^= PERSISTENT_RAM_SIG;
 
 	if (prz->buffer->sig == sig) {
-		if (buffer_size(prz) == 0) {
+		start = buffer_start(prz);
+		trace_android_vh_pstore_buf_check(start, &check);
+		if (buffer_size(prz) == 0 && check) {
 			pr_debug("found existing empty buffer\n");
 			return 0;
 		}
