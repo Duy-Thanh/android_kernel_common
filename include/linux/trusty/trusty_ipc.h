@@ -9,6 +9,7 @@
 #include <linux/scatterlist.h>
 #include <linux/trusty/trusty.h>
 #include <linux/types.h>
+#include <uapi/linux/trusty/ipc.h>
 
 struct tipc_chan;
 
@@ -28,6 +29,21 @@ enum tipc_chan_event {
 	TIPC_CHANNEL_DISCONNECTED,
 	TIPC_CHANNEL_SHUTDOWN,
 };
+
+#define TIPC_CHAN_EVENT_NAME_MAXLEN 32
+
+static inline const char* tipc_chan_event_name(u32 event) {
+    switch (event) {
+    case TIPC_CHANNEL_CONNECTED:
+        return "TIPC_CHANNEL_CONNECTED";
+    case TIPC_CHANNEL_DISCONNECTED:
+        return "TIPC_CHANNEL_DISCONNECTED";
+    case TIPC_CHANNEL_SHUTDOWN:
+        return "TIPC_CHANNEL_SHUTDOWN";
+    default:
+        return "TIPC_CHANNEL_UNKNOWN_EVENT";
+    }
+}
 
 struct tipc_chan_ops {
 	void (*handle_event)(void *cb_arg, int event);
