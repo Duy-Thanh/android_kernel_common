@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d9e4aab_6537f1cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-04T13:42:47Z",
+      "side": 1,
+      "message": "I don\u0027t understand why these hooks need to be here.  pstore is used to store this information, no extra hook is needed at the same time.\n\nIf you really need the data to go somewhere else, just provide a pstore backend and it will be written to that device/driver/whatever.  Why doesn\u0027t the existing pstore api work properly for you?",
+      "revId": "571afa29afa472e360897762e623b18c987a1135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
