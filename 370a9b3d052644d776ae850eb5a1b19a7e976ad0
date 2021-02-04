@@ -16,6 +16,24 @@
       "message": "Shouldn\u0027t this function do nothing if assym cpus aren\u0027t enabled on the command-line via \u0027allow_mismatched_32bit_el0\u0027? If that feature isn\u0027t enabled, then pausing the last 32-bit cpu is not an issue. (see aosp/1559772)",
       "revId": "370a9b3d052644d776ae850eb5a1b19a7e976ad0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1acef085_df689fcb",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1141,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-02-04T23:16:54Z",
+      "side": 1,
+      "message": "system_32bit_el0_cpumask() will return an empty mask if there are no 32 bit cpus supported.  however, the current code doesn\u0027t handle this gracefully, and will produce an undesireable result if the mask is empty.\n\nI\u0027m going to correct that, but still will be using system_32bit_el0_cpumask().",
+      "parentUuid": "5400691d_587e6c84",
+      "revId": "370a9b3d052644d776ae850eb5a1b19a7e976ad0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
