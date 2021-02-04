@@ -20,6 +20,7 @@
 #include <linux/dma-mapping.h>
 
 #include "trusty-smc.h"
+#include "trusty-trace.h"
 
 struct trusty_state;
 static struct platform_driver trusty_driver;
@@ -56,7 +57,12 @@ struct trusty_state {
 static inline unsigned long smc(unsigned long r0, unsigned long r1,
 				unsigned long r2, unsigned long r3)
 {
-	return trusty_smc8(r0, r1, r2, r3, 0, 0, 0, 0).r0;
+	unsigned long ret;
+
+	trace_trusty_smc(r0, r1, r2, r3);
+	ret = trusty_smc8(r0, r1, r2, r3, 0, 0, 0, 0).r0;
+	trace_trusty_smc_done(ret);
+	return ret;
 }
 
 s32 trusty_fast_call32(struct device *dev, u32 smcnr, u32 a0, u32 a1, u32 a2)
@@ -204,6 +210,8 @@ s32 trusty_std_call32(struct device *dev, u32 smcnr, u32 a0, u32 a1, u32 a2)
 		return SM_ERR_PANIC;
 	}
 
+	trace_trusty_std_call32(smcnr, a0, a1, a2);
+
 	if (smcnr != SMC_SC_NOP) {
 		mutex_lock(&s->smc_lock);
 		reinit_completion(&s->cpu_idle_completion);
@@ -227,6 +235,8 @@ s32 trusty_std_call32(struct device *dev, u32 smcnr, u32 a0, u32 a1, u32 a2)
 		complete(&s->cpu_idle_completion);
 	else
 		mutex_unlock(&s->smc_lock);
+
+	trace_trusty_std_call32_done(ret);
 
 	return ret;
 }
@@ -299,6 +309,8 @@ int trusty_transfer_memory(struct device *dev, u64 *id,
 	len = 0;
 	for_each_sg(sglist, sg, nents, i)
 		len += sg_dma_len(sg);
+
+	trace_trusty_share_memory(len, nents);
 
 	mutex_lock(&s->share_memory_msg_lock);
 
@@ -399,6 +411,7 @@ int trusty_transfer_memory(struct device *dev, u64 *id,
 
 	if (!ret) {
 		*id = ffa_handle;
+		trace_trusty_share_memory_done(len, nents, ffa_handle);
 		dev_dbg(s->dev, "%s: done\n", __func__);
 		return 0;
 	}
@@ -458,6 +471,7 @@ int trusty_reclaim_memory(struct device *dev, u64 id,
 		return 0;
 	}
 
+	trace_trusty_reclaim_memory(id);
 	mutex_lock(&s->share_memory_msg_lock);
 
 	smc_ret = trusty_smc8(SMC_FC_FFA_MEM_RECLAIM, (u32)id, id >> 32, 0, 0,
@@ -477,6 +491,7 @@ int trusty_reclaim_memory(struct device *dev, u64 id,
 	if (ret != 0)
 		return ret;
 
+	trace_trusty_reclaim_memory_done(id);
 	dma_unmap_sg(dev, sglist, nents, DMA_BIDIRECTIONAL);
 
 	dev_dbg(s->dev, "%s: done\n", __func__);
@@ -1015,6 +1030,9 @@ static void __exit trusty_driver_exit(void)
 
 subsys_initcall(trusty_driver_init);
 module_exit(trusty_driver_exit);
+
+#define CREATE_TRACE_POINTS
+#include "trusty-trace.h"
 
 MODULE_LICENSE("GPL v2");
 MODULE_DESCRIPTION("Trusty core driver");
