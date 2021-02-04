@@ -27,9 +27,10 @@
  * Trusty. Options may be valid only for certain kinds of fds.
  */
 enum transfer_kind {
-	TRUSTY_SHARE = 0,
-	TRUSTY_LEND = 1,
-	TRUSTY_SEND_SECURE = 2,
+       TRUSTY_SHARE = 0,
+       TRUSTY_LEND = 1,
+       TRUSTY_SEND_SECURE = 2,
+       TRUSTY_NO_SHM = 3,
 };
 
 /**
@@ -62,4 +63,5 @@ struct tipc_send_msg_req {
 #define TIPC_IOC_SEND_MSG		_IOW(TIPC_IOC_MAGIC, 0x81, \
 					     struct tipc_send_msg_req)
 
+#define TIPC_TRANSFER_KIND_NAME_MAXLEN 24
 #endif
