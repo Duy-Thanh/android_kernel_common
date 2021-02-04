@@ -51,6 +51,24 @@
       "parentUuid": "3fb1069f_6cdc7cc3",
       "revId": "5f27d5e5ebd4c366f3f021878df58e78da1b588f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c83b4c29_e1b54524",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-02-04T01:22:24Z",
+      "side": 1,
+      "message": "I am not against the usecase. I am considering the product where allowing to change the devicetree on fly can bring the security issue and it is not proven (in my view) that modifying the device tree on runtime works well for the product. \n\nSome thoughts from Frank here: https://elinux.org/Frank%27s_Evolving_Overlay_Thoughts",
+      "parentUuid": "d99647af_180da927",
+      "revId": "5f27d5e5ebd4c366f3f021878df58e78da1b588f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
