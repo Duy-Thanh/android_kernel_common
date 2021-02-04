@@ -33,6 +33,24 @@
       "message": "Isn\u0027t that modifying the devicetree at runtime after kernel boot will be a security problem? Please explain in detail the usecase here.",
       "revId": "5f27d5e5ebd4c366f3f021878df58e78da1b588f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d99647af_180da927",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2021-02-04T00:49:06Z",
+      "side": 1,
+      "message": "if two driver need binded, one driver probe failed, need find the remote end driver, than runtime disbale it in dts. take below case for example:\nthere are many of components need to binded sucessfully in drm driver.\nif drm/bridge(adv7511) probe failed, the remote endpoint of drm/bridge is a DRM encoder\nIf a DRM encoder fails to bind, the DRM master device will also fail to bind.",
+      "parentUuid": "3fb1069f_6cdc7cc3",
+      "revId": "5f27d5e5ebd4c366f3f021878df58e78da1b588f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
