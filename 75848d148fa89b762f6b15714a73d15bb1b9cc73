@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e883c96_5f3b780e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-02-04T22:54:48Z",
+      "side": 1,
+      "message": "These commits aren\u0027t actually upstream yet; they\u0027re currently queued in the SELinux tree for 5.12.  Can these backports wait a few weeks until the commits reach upstream, or are they needed right now (in which case they\u0027d need to be marked as FROMGIT, not UPSTREAM)?",
+      "revId": "75848d148fa89b762f6b15714a73d15bb1b9cc73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
