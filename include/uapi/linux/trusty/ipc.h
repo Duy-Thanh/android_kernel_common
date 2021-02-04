@@ -62,4 +62,16 @@ struct tipc_send_msg_req {
 #define TIPC_IOC_SEND_MSG		_IOW(TIPC_IOC_MAGIC, 0x81, \
 					     struct tipc_send_msg_req)
 
+#define TIPC_TRANSFER_KIND_NAME_MAXLEN 24
+static inline const char* tipc_transfer_kind_name(enum transfer_kind kind) {
+    switch (kind) {
+    case TRUSTY_SHARE:
+        return "TRUSTY_SHARE";
+    case TRUSTY_LEND:
+        return "TRUSTY_LEND";
+    case TRUSTY_SEND_SECURE:
+        return "TRUSTY_SEND_SECURE";
+    }
+}
+
 #endif
