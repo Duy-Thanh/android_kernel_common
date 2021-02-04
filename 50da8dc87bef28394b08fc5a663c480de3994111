@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "564067a1_51242e9e",
+        "filename": "arch/arm64/kernel/traps.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-02-04T16:41:33Z",
+      "side": 1,
+      "message": "Is it safe to add this in a \"notrace\" function?",
+      "revId": "50da8dc87bef28394b08fc5a663c480de3994111",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
