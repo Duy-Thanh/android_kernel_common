@@ -52,6 +52,23 @@
       "parentUuid": "d15042ab_48c59cde",
       "revId": "f8fed8e0754a9476d7b114271b15fcab022943b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2baa65e0_0a7e8619",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2021-02-04T13:59:04Z",
+      "side": 1,
+      "message": "Hi Chanho,\n\nThis has been discussed on the kernel mailing list already:\nhttps://lore.kernel.org/r/20210112013140.35979-1-chanho61.park@samsung.com\n\nThere shouldn\u0027t be any reason to export this if the firmware does its job, which is to populate CNTFRQ_EL0 on all CPUs. I strongly suggest that you fix it there, rather than creating a new in-kernel ABI.\n\nThanks,\n\nMarc.",
+      "revId": "f8fed8e0754a9476d7b114271b15fcab022943b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
