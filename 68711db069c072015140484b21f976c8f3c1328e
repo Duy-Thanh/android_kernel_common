@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "700c69f8_e3917d8a",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-02-04T23:15:49Z",
+      "side": 0,
+      "message": "Can you make this change in arch/x86/configs/gki_defconfig as well?",
+      "range": {
+        "startLine": 272,
+        "startChar": 0,
+        "endLine": 272,
+        "endChar": 28
+      },
+      "revId": "68711db069c072015140484b21f976c8f3c1328e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
