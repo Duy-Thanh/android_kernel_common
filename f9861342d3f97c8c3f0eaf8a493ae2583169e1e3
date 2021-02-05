@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0bad2b8_cd2c5d05",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-05T22:50:54Z",
+      "side": 1,
+      "message": "Please add:\n\nBug: 179223738",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 14
+      },
+      "revId": "f9861342d3f97c8c3f0eaf8a493ae2583169e1e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "369af14b_539b3b5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-05T22:50:54Z",
+      "side": 1,
+      "message": "Please make the same config changes in x86 gki_defconfig",
+      "revId": "f9861342d3f97c8c3f0eaf8a493ae2583169e1e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93b6ca73_4b50341d",
+        "filename": "arch/arm64/configs/defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-05T22:50:54Z",
+      "side": 1,
+      "message": "I\u0027m not sure if we are using this file in GKI.",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 36
+      },
+      "revId": "f9861342d3f97c8c3f0eaf8a493ae2583169e1e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "574c2cac_3d7cb244",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-05T22:50:54Z",
+      "side": 1,
+      "message": "we also need CONFIG_TRANSPARENT_HUGEPAGE_ALWAYS\u003dn here.",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 29
+      },
+      "revId": "f9861342d3f97c8c3f0eaf8a493ae2583169e1e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
