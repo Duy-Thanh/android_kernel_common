@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f58d2d2_fddfa228",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-02-05T18:37:36Z",
+      "side": 1,
+      "message": "Greg, did you intentionally submit these without these actually being upstream yet?  See my previous comment.\n\nIt is *probably* fine in this case because these are queued in a maintainer tree.  But Lokesh will need to verify that what gets upstreamed actually matches what got submitted here.\n\nBTW, this isn\u0027t the first time I\u0027ve seen a change marked as UPSTREAM that isn\u0027t actually upstream; e.g. see https://android-review.googlesource.com/c/kernel/common/+/1547415.  I hope that you\u0027re being careful to check...",
+      "revId": "dbc935c62b5e607d334d4293ddd6cd661263c0a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
