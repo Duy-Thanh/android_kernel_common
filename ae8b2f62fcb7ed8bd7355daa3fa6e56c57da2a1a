@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "486d9bb4_60fef03b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2021-02-05T07:05:16Z",
+      "side": 1,
+      "message": "This patch matches upstream, no objections from me. But someone from the kernel team needs to approve.",
+      "revId": "ae8b2f62fcb7ed8bd7355daa3fa6e56c57da2a1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
