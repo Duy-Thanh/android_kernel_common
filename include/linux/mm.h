@@ -3281,5 +3281,9 @@ unsigned long wp_shared_mapping_range(struct address_space *mapping,
 
 extern int sysctl_nr_trim_pages;
 
+#ifndef CONFIG_MULTIPLE_KSWAPD
+static inline int multi_kswapd_run(int nid) { return 0; }
+static inline void multi_kswapd_stop(int nid) {}
+#endif /* CONFIG_MULTIPLE_KSWAPD */
 #endif /* __KERNEL__ */
 #endif /* _LINUX_MM_H */
