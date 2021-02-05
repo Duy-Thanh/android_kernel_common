@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2758f66_beba9f0f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-05T23:29:19Z",
+      "side": 1,
+      "message": "please add:\n\nFixes: 417ac617ea5e (\"ANDROID: mm/memory_hotplug: implement {add/remove}_memory_subsection\")",
+      "revId": "337aebaafb191791522d31c7915600e2a282df65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1ee6cce_c1a8a350",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1843,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-05T23:29:19Z",
+      "side": 1,
+      "message": "You print two errors for the same issue, one here and one at L1867. I would suggest to do that in one place.",
+      "range": {
+        "startLine": 1842,
+        "startChar": 3,
+        "endLine": 1843,
+        "endChar": 32
+      },
+      "revId": "337aebaafb191791522d31c7915600e2a282df65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
