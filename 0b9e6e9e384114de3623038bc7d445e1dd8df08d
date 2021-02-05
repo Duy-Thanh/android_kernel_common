@@ -34,6 +34,24 @@
       "parentUuid": "f1f1d744_2640135a",
       "revId": "0b9e6e9e384114de3623038bc7d445e1dd8df08d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8ed5314_54967e1c",
+        "filename": "kernel/sched/pelt.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-02-05T21:55:45Z",
+      "side": 1,
+      "message": "Qais, a command-line version of this has been merged. Take a look at it. Feel free to propose your version if you think it is more useful (current version only supports 8ms and 32ms)",
+      "parentUuid": "6eb31113_a3216528",
+      "revId": "0b9e6e9e384114de3623038bc7d445e1dd8df08d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
