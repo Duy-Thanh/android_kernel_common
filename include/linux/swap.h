@@ -36,6 +36,9 @@ struct pagevec;
 
 int kswapd (void *p);
 
+#define DEF_KSWAPD_THREADS_PER_NODE 1
+extern int kswapd_threads;
+
 static inline int current_is_kswapd(void)
 {
 	return current->flags & PF_KSWAPD;

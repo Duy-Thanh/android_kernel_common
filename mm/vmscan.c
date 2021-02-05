@@ -178,6 +178,8 @@ struct scan_control {
  * From 0 .. 200.  Higher means more swappy.
  */
 int vm_swappiness = 60;
+int kswapd_threads = DEF_KSWAPD_THREADS_PER_NODE;
+EXPORT_SYMBOL_GPL(kswapd_threads);
 
 static void set_task_reclaim_state(struct task_struct *task,
 				   struct reclaim_state *rs)
@@ -4477,6 +4479,9 @@ void kswapd_run(int nid)
 	if (pgdat->kswapd)
 		return;
 
+	trace_android_vh_kswapd_per_node(nid, true);
+	if (kswapd_threads > 1)
+		return 0;
 	pgdat->kswapd = kthread_run(kswapd, pgdat, "kswapd%d", nid);
 	if (IS_ERR(pgdat->kswapd)) {
 		/* failure at boot is fatal */
@@ -4494,6 +4499,9 @@ void kswapd_stop(int nid)
 {
 	struct task_struct *kswapd = NODE_DATA(nid)->kswapd;
 
+	trace_android_vh_kswapd_per_node(nid, false);
+	if (kswapd_threads > 1)
+		return;
 	if (kswapd) {
 		kthread_stop(kswapd);
 		NODE_DATA(nid)->kswapd = NULL;
