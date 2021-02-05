@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b39e8a74_d85c844c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-05T03:34:21Z",
+      "side": 1,
+      "message": "couple nits",
+      "revId": "03f85fff3a9914e2afb637fdfa700bfdd84f1340",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ae516d8_977b2da6",
+        "filename": "drivers/dma-buf/heaps/page_pool.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-05T03:34:21Z",
+      "side": 1,
+      "message": "this can be:\n\nif (WARN_ON(pool-\u003eorder !\u003d compound_order(page))\n    return;",
+      "range": {
+        "startLine": 102,
+        "startChar": 1,
+        "endLine": 103,
+        "endChar": 47
+      },
+      "revId": "03f85fff3a9914e2afb637fdfa700bfdd84f1340",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "413a6643_4f5d315b",
+        "filename": "drivers/dma-buf/heaps/page_pool.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-05T03:34:21Z",
+      "side": 1,
+      "message": "out of curiosity, why do you call this function dmabuf_page_pool_add_clean and not dmabuf_page_pool_add? I don\u0027t see it cleaning the page. Do you assume the page will be clean?",
+      "range": {
+        "startLine": 107,
+        "startChar": 1,
+        "endLine": 107,
+        "endChar": 27
+      },
+      "revId": "03f85fff3a9914e2afb637fdfa700bfdd84f1340",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57baad03_cee7608b",
+        "filename": "drivers/dma-buf/heaps/page_pool.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-05T03:34:21Z",
+      "side": 1,
+      "message": "why not use nr_to_scan directly?",
+      "range": {
+        "startLine": 209,
+        "startChar": 5,
+        "endLine": 209,
+        "endChar": 14
+      },
+      "revId": "03f85fff3a9914e2afb637fdfa700bfdd84f1340",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
