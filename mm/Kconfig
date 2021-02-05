@@ -881,4 +881,16 @@ config ARCH_HAS_HUGEPD
 config MAPPING_DIRTY_HELPERS
         bool
 
+config MULTIPLE_KSWAPD
+	bool "Spawn multiple kswapd threads"
+	default y
+	help
+	 kswapd_threads allows you to control the number of kswapd threads
+	 per node running on the system. The default value is 1 and the
+	 range of acceptible values are 1-16. The number of threads can
+	 be controlled by passing a value to 'multi_kswapd=' in kernel
+	 command line params.
+
+	 Values not in the range of 1..16 are ignored.
+
 endmenu
