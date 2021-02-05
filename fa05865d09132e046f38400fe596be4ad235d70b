@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1126e5ee_728a7e0f",
+        "filename": "drivers/dma-buf/heaps/deferred-free-helper.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-05T03:13:49Z",
+      "side": 1,
+      "message": "Just to clarify. So these items are allocated using a page allocator, correct? IOW, if size is say 96 bytes then a whole page is allocated and the rest 4000 is unused? And if size is 4097 then two pages are allocated?\n\nIf so the logic seems right. I wonder though in that case if instead of \"size\" it would be clearer to store \"nr_pages\"? Or maybe you need the exact \"size\" for some other reasons?",
+      "range": {
+        "startLine": 40,
+        "startChar": 7,
+        "endLine": 40,
+        "endChar": 11
+      },
+      "revId": "fa05865d09132e046f38400fe596be4ad235d70b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
