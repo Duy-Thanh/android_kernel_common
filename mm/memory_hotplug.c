@@ -1828,6 +1828,26 @@ int remove_memory(int nid, u64 start, u64 size)
 }
 EXPORT_SYMBOL_GPL(remove_memory);
 
+static bool __check_sections_offline(unsigned long start_pfn,
+		unsigned long nr_pages)
+{
+	const unsigned long end_pfn = start_pfn + nr_pages;
+	unsigned long pfn;
+
+	for (pfn = start_pfn; pfn < end_pfn; pfn += PAGES_PER_SECTION) {
+		unsigned long section_nr = pfn_to_section_nr(pfn);
+
+		if (!valid_section_nr(section_nr) ||
+		    online_section_nr(section_nr)) {
+			pr_err("%s: section 0x%lx is not valid or is online\n",
+			       __func__, section_nr);
+			return false;
+		}
+	}
+
+	return true;
+}
+
 int remove_memory_subsection(int nid, u64 start, u64 size)
 {
 	if (size ==  memory_block_size_bytes())
@@ -1842,8 +1862,9 @@ int remove_memory_subsection(int nid, u64 start, u64 size)
 
 	mem_hotplug_begin();
 
-	if (test_pages_isolated(start, start + size, MEMORY_OFFLINE)) {
-		pr_err("%s: [%lx, %lx) PFNs are not isolated\n",
+	/* we cannot remove subsections that are invalid or online */
+	if(!__check_sections_offline(__phys_to_pfn(start), size >> PAGE_SHIFT)) {
+		pr_err("%s: [%lx, %lx) sections are not offlined\n",
 			   __func__, start, start + size);
 		mem_hotplug_done();
 		return -EBUSY;
