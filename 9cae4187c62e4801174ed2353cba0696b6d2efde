@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a743b63_2dbb4c0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-02-05T00:13:32Z",
+      "side": 1,
+      "message": "Hi.  After some validation and verification (both negative and positive cases), this next revision is an improvement.  Please let me know your candid thoughts.  Sincerely, Stephen Dickey",
+      "revId": "9cae4187c62e4801174ed2353cba0696b6d2efde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6f53e7f_32c9a556",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1142,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-02-05T00:13:32Z",
+      "side": 1,
+      "message": "this will handle system_32bit_el0_cpumask() returning an empty mask, and behave gracefully.",
+      "revId": "9cae4187c62e4801174ed2353cba0696b6d2efde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "206ee9ac_37aa6915",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-02-05T00:13:32Z",
+      "side": 1,
+      "message": "this will keep one 32 bit CPU around (any CPU that is currently active and is a 32bit CPU).",
+      "revId": "9cae4187c62e4801174ed2353cba0696b6d2efde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
