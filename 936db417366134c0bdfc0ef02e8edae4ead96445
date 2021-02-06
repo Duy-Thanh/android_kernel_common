@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0b323b6_8596caa2",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-06T00:17:21Z",
+      "side": 1,
+      "message": "I\u0027m not sure you can simply override vma-\u003evm_ops and assume it was unused before. I think you would have to store previous vma-\u003evm_ops as part of struct dma_buf and call its members (if non-NULL) from inside dma_buf_vma_open/dma_buf_vma_close in addition to modifying mmap_count. I suspect the rest of vm_operations_struct operations would have to be called the same way since we can\u0027t override only part of the vma-\u003evm_ops.",
+      "range": {
+        "startLine": 170,
+        "startChar": 1,
+        "endLine": 170,
+        "endChar": 12
+      },
+      "revId": "936db417366134c0bdfc0ef02e8edae4ead96445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
