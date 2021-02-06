@@ -22,6 +22,30 @@
       },
       "revId": "fa05865d09132e046f38400fe596be4ad235d70b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58a610b2_fadebaaa",
+        "filename": "drivers/dma-buf/heaps/deferred-free-helper.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-02-06T00:04:44Z",
+      "side": 1,
+      "message": "Yea. So initially I wanted to be agnostic to it all, letting it just track the byte size of items added so we had something to return to the shrinker. But in switching to reporting pages to the shrinker, we probably should make it all consistent. I\u0027ll rework everything to nr_pages as you suggest.",
+      "parentUuid": "1126e5ee_728a7e0f",
+      "range": {
+        "startLine": 40,
+        "startChar": 7,
+        "endLine": 40,
+        "endChar": 11
+      },
+      "revId": "fa05865d09132e046f38400fe596be4ad235d70b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
