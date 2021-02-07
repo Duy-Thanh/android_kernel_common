@@ -41,6 +41,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01d24f18_445d6680",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-02-07T21:47:12Z",
+      "side": 1,
+      "message": "Please enable on x86 as well.",
+      "revId": "f9861342d3f97c8c3f0eaf8a493ae2583169e1e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93b6ca73_4b50341d",
