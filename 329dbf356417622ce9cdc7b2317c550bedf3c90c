@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecf1d6a6_09e8a56c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1244013
+      },
+      "writtenOn": "2021-02-08T08:48:12Z",
+      "side": 1,
+      "message": "Yes, it is for our 3rd party\u0027s exfat driver(texfat.ko), not Linux exfat in the tree.",
+      "parentUuid": "2cb15db9_839acc9f",
+      "revId": "329dbf356417622ce9cdc7b2317c550bedf3c90c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebef75fb_48b216a3",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-02-08T08:01:36Z",
       "side": 1,
       "message": "\"t\"?",
+      "range": {
+        "startLine": 42,
+        "startChar": 14,
+        "endLine": 42,
+        "endChar": 20
+      },
+      "revId": "329dbf356417622ce9cdc7b2317c550bedf3c90c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "506690f7_6ee07e80",
+        "filename": "android/abi_gki_aarch64_sony",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1244013
+      },
+      "writtenOn": "2021-02-08T08:48:12Z",
+      "side": 1,
+      "message": "Correct, it\u0027s T company\u0027s exfat driver.",
+      "parentUuid": "ebef75fb_48b216a3",
       "range": {
         "startLine": 42,
         "startChar": 14,
