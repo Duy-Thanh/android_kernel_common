@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "62cbbbb9_ee3457e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1558410
+      },
+      "writtenOn": "2021-02-08T16:18:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0bad2b8_cd2c5d05",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 14
+      },
+      "revId": "f9861342d3f97c8c3f0eaf8a493ae2583169e1e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "369af14b_539b3b5b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -81,6 +105,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b43f3ee_1e80edb6",
+        "filename": "arch/arm64/configs/defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1558410
+      },
+      "writtenOn": "2021-02-08T16:18:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93b6ca73_4b50341d",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 36
+      },
+      "revId": "f9861342d3f97c8c3f0eaf8a493ae2583169e1e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "574c2cac_3d7cb244",
@@ -94,6 +142,30 @@
       "writtenOn": "2021-02-05T22:50:54Z",
       "side": 1,
       "message": "we also need CONFIG_TRANSPARENT_HUGEPAGE_ALWAYS\u003dn here.",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 29
+      },
+      "revId": "f9861342d3f97c8c3f0eaf8a493ae2583169e1e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5eadf4ab_1910faf0",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1558410
+      },
+      "writtenOn": "2021-02-08T16:18:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "574c2cac_3d7cb244",
       "range": {
         "startLine": 105,
         "startChar": 0,
