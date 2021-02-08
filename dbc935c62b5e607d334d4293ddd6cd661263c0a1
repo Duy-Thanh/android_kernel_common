@@ -34,6 +34,24 @@
       "parentUuid": "9f58d2d2_fddfa228",
       "revId": "dbc935c62b5e607d334d4293ddd6cd661263c0a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66e0e255_43fc1d78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2021-02-08T17:13:32Z",
+      "side": 1,
+      "message": "Really apologize for this mistake. It\u0027s my first time backporting to android kernel so messed up.\n\nPlease let me know what is the best way to take care of this. I\u0027ll do as told.",
+      "parentUuid": "2a80a43f_2421c78b",
+      "revId": "dbc935c62b5e607d334d4293ddd6cd661263c0a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
