@@ -52,6 +52,24 @@
       "parentUuid": "2a80a43f_2421c78b",
       "revId": "dbc935c62b5e607d334d4293ddd6cd661263c0a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e58b5bb_ee95dc61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-02-08T17:53:24Z",
+      "side": 1,
+      "message": "These are still queued in the SELinux tree and seem to be on track for 5.12, so I don\u0027t think we should bother reverting.  Please just follow up in 1-2 weeks (during the 5.12 merge window) whether these commits really made it upstream and whether they are any differences from what got submitted here.",
+      "parentUuid": "66e0e255_43fc1d78",
+      "revId": "dbc935c62b5e607d334d4293ddd6cd661263c0a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
