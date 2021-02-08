@@ -16,6 +16,23 @@
       "message": "Why not submit this upstream first?",
       "revId": "9492482a4c3837451aec951c0f0343a3114181db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f68c02bb_9aa871a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-02-08T19:33:03Z",
+      "side": 1,
+      "message": "This needs to be developed upstream, but a few preliminary comments to get things on the right track:\n\nIs there anything else that QC needs in android12-{5.4,5.10} for wrapped key support in GKI 2.0, or is the existing out-of-tree support enough to implement your drivers and the only remaining work is upstreaming?\n\nFor upstreaming, first please note that the patches need to be on top of upstream, not android-mainline.  Upstream doesn\u0027t have the block and fscrypt changes for wrapped key support yet, so you\u0027ll need to include those too -- not just these UFS driver changes.  You also should update sdhci-msm to use this new ICE library (sdhci-msm will support ICE in 5.12), to show that it will work, as that\u0027s the whole point of making this code a library rather than just part of the UFS driver.\n\nPlease split up your changes into logically separate changes.  Refactoring existing functionality should be separate patches from adding new features.  There are also multiple new things here (wrapped key support, printing the ICE registers on register dumps, and something with ICE interrupts just to name a few), so please put these separate things in separate patches so that they can be reviewed.\n\nI.e., please put together a well-formed patchset on top of upstream that includes all required changes, is easily reviewable, and tells a clear story of why this feature should be added to Linux (and how it was tested).  ",
+      "revId": "9492482a4c3837451aec951c0f0343a3114181db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
