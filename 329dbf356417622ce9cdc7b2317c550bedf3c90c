@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cb15db9_839acc9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-08T08:01:36Z",
+      "side": 1,
+      "message": "This symbol list does not match the symbol list for the exfat kernel driver in the tree, are you sure it is correct?",
+      "revId": "329dbf356417622ce9cdc7b2317c550bedf3c90c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebef75fb_48b216a3",
+        "filename": "android/abi_gki_aarch64_sony",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-08T08:01:36Z",
+      "side": 1,
+      "message": "\"t\"?",
+      "range": {
+        "startLine": 42,
+        "startChar": 14,
+        "endLine": 42,
+        "endChar": 20
+      },
+      "revId": "329dbf356417622ce9cdc7b2317c550bedf3c90c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
