@@ -33,6 +33,29 @@
       "message": "This feels like a lot of \"churn\", why take this patch here?  It\u0027s going to cause merge issues with LTS releases for the next 6 years 😞",
       "revId": "4645815e9385be81d25c479af1b93e93198c4c84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c317a688_27c83bc9",
+        "filename": "include/uapi/linux/v4l2-controls.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-09T09:21:03Z",
+      "side": 1,
+      "message": "this is changing userspace visible values and names.  Are you _SURE_ this is ok?",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 61
+      },
+      "revId": "4645815e9385be81d25c479af1b93e93198c4c84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
