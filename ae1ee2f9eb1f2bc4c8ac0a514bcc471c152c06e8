@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9f086f4_74cc5205",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-09T20:48:36Z",
+      "side": 1,
+      "message": "why not just store vma-\u003evm_ops itself?\n\ndmabuf-\u003evma_orig_ops \u003d vma-\u003evm_ops;",
+      "range": {
+        "startLine": 179,
+        "startChar": 1,
+        "endLine": 180,
+        "endChar": 40
+      },
+      "revId": "ae1ee2f9eb1f2bc4c8ac0a514bcc471c152c06e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfe6116e_1831e70d",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-09T20:48:36Z",
+      "side": 1,
+      "message": "you don\u0027t get a warning on the type mismatch? vma-\u003evm_ops is supposed to point to a \"const struct vm_operations_struct\" and not to a \"struct vm_operations_struct\".",
+      "range": {
+        "startLine": 184,
+        "startChar": 1,
+        "endLine": 184,
+        "endChar": 31
+      },
+      "revId": "ae1ee2f9eb1f2bc4c8ac0a514bcc471c152c06e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
