@@ -16,6 +16,23 @@
       "message": "No bug number?",
       "revId": "4645815e9385be81d25c479af1b93e93198c4c84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a7865dd_e9594d3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-09T09:09:01Z",
+      "side": 1,
+      "message": "This feels like a lot of \"churn\", why take this patch here?  It\u0027s going to cause merge issues with LTS releases for the next 6 years 😞",
+      "revId": "4645815e9385be81d25c479af1b93e93198c4c84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
