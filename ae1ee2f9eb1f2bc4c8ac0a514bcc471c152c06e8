@@ -93,6 +93,30 @@
       },
       "revId": "ae1ee2f9eb1f2bc4c8ac0a514bcc471c152c06e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dfe1802_a588a065",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-02-09T22:01:07Z",
+      "side": 1,
+      "message": "Instead of modifying the open/close ops directly, can we have a global const vm_operations_struct with all ops defined Kalesh? It would kind of be like a shim layer that would just call the exporter_defined vm_ops directly. The dummy ops could all be static inline functions in dma_buf_sysfs_stats.c/h to avoid clutter here and the exporter defined vm_ops struct would be stashed in struct dma_buf. Do you think that could work?",
+      "parentUuid": "4a442bd1_7b2954e7",
+      "range": {
+        "startLine": 184,
+        "startChar": 1,
+        "endLine": 184,
+        "endChar": 31
+      },
+      "revId": "ae1ee2f9eb1f2bc4c8ac0a514bcc471c152c06e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
