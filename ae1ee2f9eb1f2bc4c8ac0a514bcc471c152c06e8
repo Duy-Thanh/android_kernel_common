@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3181210f_05ea78db",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-02-09T21:01:17Z",
+      "side": 1,
+      "message": "I copy the vma-\u003evm_ops in dmabuf-\u003evm_ops on L176. This is the struct I use to reassign the vma\u0027s vm ops.",
+      "parentUuid": "e9f086f4_74cc5205",
+      "range": {
+        "startLine": 179,
+        "startChar": 1,
+        "endLine": 180,
+        "endChar": 40
+      },
+      "revId": "ae1ee2f9eb1f2bc4c8ac0a514bcc471c152c06e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cfe6116e_1831e70d",
         "filename": "drivers/dma-buf/dma-buf.c",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2021-02-09T20:48:36Z",
       "side": 1,
       "message": "you don\u0027t get a warning on the type mismatch? vma-\u003evm_ops is supposed to point to a \"const struct vm_operations_struct\" and not to a \"struct vm_operations_struct\".",
+      "range": {
+        "startLine": 184,
+        "startChar": 1,
+        "endLine": 184,
+        "endChar": 31
+      },
+      "revId": "ae1ee2f9eb1f2bc4c8ac0a514bcc471c152c06e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a442bd1_7b2954e7",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-02-09T21:01:17Z",
+      "side": 1,
+      "message": "There is that warning from checkpatch \"struct vm_operations_struct should normally be const\"\n\nBut since we are modifying the open and close individually I didn\u0027t make const here.",
+      "parentUuid": "cfe6116e_1831e70d",
       "range": {
         "startLine": 184,
         "startChar": 1,
