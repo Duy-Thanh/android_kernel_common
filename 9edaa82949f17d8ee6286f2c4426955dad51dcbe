@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dccb29eb_46b40534",
+        "filename": "drivers/dma-buf/heaps/page_pool.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-02-09T06:21:41Z",
+      "side": 1,
+      "message": "Good point. I\u0027ll actually rework the locking to be closer to what Christian suggested for the generic bits in my ttm_pool series, which made it cleaner.",
+      "parentUuid": "8696ad33_677cc993",
+      "range": {
+        "startLine": 52,
+        "startChar": 20,
+        "endLine": 52,
+        "endChar": 43
+      },
+      "revId": "9edaa82949f17d8ee6286f2c4426955dad51dcbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2af6174d_2b530d8a",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-02-09T02:20:54Z",
       "side": 1,
       "message": "if (WARN_ON(!pool-\u003ecount[index])) ...",
+      "range": {
+        "startLine": 56,
+        "startChar": 1,
+        "endLine": 57,
+        "endChar": 31
+      },
+      "revId": "9edaa82949f17d8ee6286f2c4426955dad51dcbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "398c4f40_c406ed7b",
+        "filename": "drivers/dma-buf/heaps/page_pool.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-02-09T06:21:41Z",
+      "side": 1,
+      "message": "Ack. This will actually get dropped.",
+      "parentUuid": "2af6174d_2b530d8a",
       "range": {
         "startLine": 56,
         "startChar": 1,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fa2f4d8_0fdac715",
+        "filename": "drivers/dma-buf/heaps/page_pool.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-02-09T06:21:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "09cb4389_e5683186",
+      "range": {
+        "startLine": 87,
+        "startChar": 1,
+        "endLine": 88,
+        "endChar": 17
+      },
+      "revId": "9edaa82949f17d8ee6286f2c4426955dad51dcbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2b1a0c3_ab1d7a80",
@@ -100,6 +172,30 @@
       "writtenOn": "2021-02-09T02:20:54Z",
       "side": 1,
       "message": "return sc-\u003enr_to_scan ? dmabuf_page_pool_shrink(sc-\u003egfp_mask, sc-\u003enr_to_scan) : 0;",
+      "range": {
+        "startLine": 242,
+        "startChar": 1,
+        "endLine": 247,
+        "endChar": 55
+      },
+      "revId": "9edaa82949f17d8ee6286f2c4426955dad51dcbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2bd1aa2_8c88ef26",
+        "filename": "drivers/dma-buf/heaps/page_pool.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-02-09T06:21:41Z",
+      "side": 1,
+      "message": "I avoid ternaries as it takes just a touch more attention for folks to read.\nBut its easy enough to drop the to_scan intermediate value that isn\u0027t doing anything and tighten this up a touch.",
+      "parentUuid": "c2b1a0c3_ab1d7a80",
       "range": {
         "startLine": 242,
         "startChar": 1,
