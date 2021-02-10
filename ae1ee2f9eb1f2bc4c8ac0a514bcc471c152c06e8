@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ff6f8a8_a8c899b8",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-10T00:01:18Z",
+      "side": 1,
+      "message": "What I meant is that you can store vma-\u003evm_ops instead of vma-\u003evm_ops-\u003eopen and vma-\u003evm_ops-\u003eclose separately.\n\nOn L176 you copy the content of the vma-\u003evm_ops and then later you override some of the callbacks. By doing dmabuf-\u003evma_orig_ops \u003d vma-\u003evm_ops; you save the pointer to the original ops, so dmabuf-\u003evma_orig_ops-\u003eopen() and dmabuf-\u003evma_orig_ops-\u003eclose() will be pointing to the original callbacks. This way instead of having two pointers in the struct dmabuf (dmabuf-\u003evma_open and dmabuf-\u003evma_close) you can have only one (dmabuf-\u003evma_orig_ops).",
+      "parentUuid": "3181210f_05ea78db",
+      "range": {
+        "startLine": 179,
+        "startChar": 1,
+        "endLine": 180,
+        "endChar": 40
+      },
+      "revId": "ae1ee2f9eb1f2bc4c8ac0a514bcc471c152c06e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cfe6116e_1831e70d",
         "filename": "drivers/dma-buf/dma-buf.c",
         "patchSetId": 3
@@ -109,6 +133,30 @@
       "side": 1,
       "message": "Instead of modifying the open/close ops directly, can we have a global const vm_operations_struct with all ops defined Kalesh? It would kind of be like a shim layer that would just call the exporter_defined vm_ops directly. The dummy ops could all be static inline functions in dma_buf_sysfs_stats.c/h to avoid clutter here and the exporter defined vm_ops struct would be stashed in struct dma_buf. Do you think that could work?",
       "parentUuid": "4a442bd1_7b2954e7",
+      "range": {
+        "startLine": 184,
+        "startChar": 1,
+        "endLine": 184,
+        "endChar": 31
+      },
+      "revId": "ae1ee2f9eb1f2bc4c8ac0a514bcc471c152c06e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65ebf83c_a6c17502",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-10T00:01:18Z",
+      "side": 1,
+      "message": "This would be cleaner but would introduce more out-of-tree changes. If this could ever be upstreamed then I would agree with Hridya that we better do it in a cleaner way with the final goal of upstreaming. However we do know that is will not be upstreamable and I don\u0027t mind having the current approach to minimize out-of-tree code.",
+      "parentUuid": "9dfe1802_a588a065",
       "range": {
         "startLine": 184,
         "startChar": 1,
