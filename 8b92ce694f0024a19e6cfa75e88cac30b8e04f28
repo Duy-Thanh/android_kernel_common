@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87e49a30_3b893b52",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-02-10T17:13:33Z",
+      "side": 1,
+      "message": "This can be BACKPORT: FROMGIT: based on the arm64 tree:\n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git/log/?h\u003dfor-next/faultaround\n\nYou should then add an appropriate \"cherry-picked from \" line, a line to identify what you had to do for the backport and then a Bug: tag with the number of the buganizer ticket.\n\nYou can see an example here:\n\nhttps://android.googlesource.com/kernel/common/+/6044f4cd8ee79f8118abf54e76e4ab47629df0c2",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "8b92ce694f0024a19e6cfa75e88cac30b8e04f28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
