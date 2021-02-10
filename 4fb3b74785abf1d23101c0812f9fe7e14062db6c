@@ -34,6 +34,24 @@
       "parentUuid": "e4256090_bc4aa95f",
       "revId": "4fb3b74785abf1d23101c0812f9fe7e14062db6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e51c312_901707e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2021-02-10T17:06:47Z",
+      "side": 1,
+      "message": "Actually, I won\u0027t abandon this particular patch, since it\u0027ll be necessary no matter which option we pick.",
+      "parentUuid": "0459d8f9_24081e22",
+      "revId": "4fb3b74785abf1d23101c0812f9fe7e14062db6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
