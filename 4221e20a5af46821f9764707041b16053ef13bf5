@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8f2cc0c_ca13c06a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1437603
+      },
+      "writtenOn": "2021-02-10T17:58:21Z",
+      "side": 1,
+      "message": "Inspired by similar patch for db845c: https://android-review.googlesource.com/c/kernel/common/+/1582712",
+      "revId": "4221e20a5af46821f9764707041b16053ef13bf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
