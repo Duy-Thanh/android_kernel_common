@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b73ffeca_2096c4c8",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-02-10T21:22:24Z",
+      "side": 1,
+      "message": "nit: if not too much trouble, might be a good idea to move as much code as possible to dma-buf-sysfs.c/h so that future merges into dma-buf.c have a lesser chance of running into conflicts.",
+      "range": {
+        "startLine": 174,
+        "startChar": 1,
+        "endLine": 174,
+        "endChar": 6
+      },
+      "revId": "715dcaf90d8962e076686a83c8c74e7cfcc7c2d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2048ae9b_9ecca960",
+        "filename": "include/linux/dma-buf.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-02-10T21:22:24Z",
+      "side": 1,
+      "message": "I think it would be better to name is exp_vm_ops or exporter_vm_ops since it will also come into effect for other DMA-BUF exporters too.",
+      "range": {
+        "startLine": 429,
+        "startChar": 36,
+        "endLine": 429,
+        "endChar": 41
+      },
+      "revId": "715dcaf90d8962e076686a83c8c74e7cfcc7c2d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03d107ce_39fed27c",
+        "filename": "include/linux/dma-buf.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-02-10T21:22:24Z",
+      "side": 1,
+      "message": "Please also add documentation for the vm_ops fields. I think we also need to update Documentation/ABI right?",
+      "range": {
+        "startLine": 430,
+        "startChar": 29,
+        "endLine": 430,
+        "endChar": 35
+      },
+      "revId": "715dcaf90d8962e076686a83c8c74e7cfcc7c2d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
