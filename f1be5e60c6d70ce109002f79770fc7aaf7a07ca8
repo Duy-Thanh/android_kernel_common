@@ -1,0 +1,41 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008070432",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1582945?revision\u003d4",
+      "fixSuggestions": [
+        {
+          "fixId": "fd665d34_e11981c8",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 37,
+                "startChar": 1,
+                "endLine": 37,
+                "endChar": 1
+              },
+              "replacement": "Signed-off-by: Quentin Perret \u003cqperret@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "c1a104ca_21de71a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-02-10T10:48:34Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Quentin Perret \u003cqperret@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 356514003 android-build.ayeaye-python-dispatcher_20210209.05_p0",
+      "revId": "f1be5e60c6d70ce109002f79770fc7aaf7a07ca8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
