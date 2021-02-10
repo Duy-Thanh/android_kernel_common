@@ -16,6 +16,24 @@
       "message": "What is the status of this series?  Should we just abandon it?",
       "revId": "4fb3b74785abf1d23101c0812f9fe7e14062db6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0459d8f9_24081e22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2021-02-10T17:02:46Z",
+      "side": 1,
+      "message": "Yeah I\u0027ll abandon these changes. There were some comments that needed addressing on v7 of this series upstream. I split this patch series into 2 for v8, with the first patch series addressing the block splitting fix, and the second addressing the direct I/O changes. We need both patch series because the direct I/O changes make the block splitting bug much more likely to happen. I\u0027m trying to send out v2 of the block splitting series before putting it all up here. Alternatively, we could un-abandon and merge v6 of the patch series for now, and I could update them when I send out v2 of the block splitting fixes, if that\u0027s what people prefer.",
+      "parentUuid": "e4256090_bc4aa95f",
+      "revId": "4fb3b74785abf1d23101c0812f9fe7e14062db6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
