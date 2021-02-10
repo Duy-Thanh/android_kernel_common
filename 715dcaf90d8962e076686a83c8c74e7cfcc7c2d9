@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5051c8aa_8b66c19c",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-02-10T22:02:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "75d36acc_88c1aa77",
+      "range": {
+        "startLine": 174,
+        "startChar": 1,
+        "endLine": 174,
+        "endChar": 6
+      },
+      "revId": "715dcaf90d8962e076686a83c8c74e7cfcc7c2d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7bfb3f3_38e9eb1f",
@@ -61,6 +85,30 @@
       "writtenOn": "2021-02-10T21:57:32Z",
       "side": 1,
       "message": "Hmm. Wouldn\u0027t this generate an extra call to dmabuf-\u003eheap_vm_ops-\u003eopen(vma);? I assume dmabuf-\u003eops-\u003emmap(dmabuf, vma) that we called because already executed that op. I think you should only increment dmabuf-\u003emmap_count here.",
+      "range": {
+        "startLine": 182,
+        "startChar": 1,
+        "endLine": 182,
+        "endChar": 23
+      },
+      "revId": "715dcaf90d8962e076686a83c8c74e7cfcc7c2d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6577a19_bada2b48",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-02-10T22:02:28Z",
+      "side": 1,
+      "message": "Ahh you\u0027re right. It will call the saved open() twice if one was provided.",
+      "parentUuid": "d7bfb3f3_38e9eb1f",
       "range": {
         "startLine": 182,
         "startChar": 1,
@@ -96,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8f431b6_d104f348",
+        "filename": "include/linux/dma-buf.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-02-10T22:02:28Z",
+      "side": 1,
+      "message": "Makes sense. I\u0027ll rename this.",
+      "parentUuid": "2048ae9b_9ecca960",
+      "range": {
+        "startLine": 429,
+        "startChar": 36,
+        "endLine": 429,
+        "endChar": 41
+      },
+      "revId": "715dcaf90d8962e076686a83c8c74e7cfcc7c2d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03d107ce_39fed27c",
         "filename": "include/linux/dma-buf.h",
         "patchSetId": 5
@@ -107,6 +179,30 @@
       "writtenOn": "2021-02-10T21:22:24Z",
       "side": 1,
       "message": "Please also add documentation for the vm_ops fields. I think we also need to update Documentation/ABI right?",
+      "range": {
+        "startLine": 430,
+        "startChar": 29,
+        "endLine": 430,
+        "endChar": 35
+      },
+      "revId": "715dcaf90d8962e076686a83c8c74e7cfcc7c2d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b51084f_ddb2cfcc",
+        "filename": "include/linux/dma-buf.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-02-10T22:02:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "03d107ce_39fed27c",
       "range": {
         "startLine": 430,
         "startChar": 29,
