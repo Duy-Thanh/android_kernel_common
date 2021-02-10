@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f7403e4_6eea052d",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-02-10T20:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ff6f8a8_a8c899b8",
+      "range": {
+        "startLine": 179,
+        "startChar": 1,
+        "endLine": 180,
+        "endChar": 40
+      },
+      "revId": "ae1ee2f9eb1f2bc4c8ac0a514bcc471c152c06e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfe6116e_1831e70d",
@@ -157,6 +181,30 @@
       "side": 1,
       "message": "This would be cleaner but would introduce more out-of-tree changes. If this could ever be upstreamed then I would agree with Hridya that we better do it in a cleaner way with the final goal of upstreaming. However we do know that is will not be upstreamable and I don\u0027t mind having the current approach to minimize out-of-tree code.",
       "parentUuid": "9dfe1802_a588a065",
+      "range": {
+        "startLine": 184,
+        "startChar": 1,
+        "endLine": 184,
+        "endChar": 31
+      },
+      "revId": "ae1ee2f9eb1f2bc4c8ac0a514bcc471c152c06e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4793a3b_c6e3cfae",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-02-10T20:50:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "65ebf83c_a6c17502",
       "range": {
         "startLine": 184,
         "startChar": 1,
