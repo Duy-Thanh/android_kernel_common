@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f699e577_bba523b5",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-10T23:05:39Z",
+      "side": 1,
+      "message": "nit: extra empty line",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 0
+      },
+      "revId": "e546cd380be80201da8c8a6f7b0d43a54b3bb8d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
