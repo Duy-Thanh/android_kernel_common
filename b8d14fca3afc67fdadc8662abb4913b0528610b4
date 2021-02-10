@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e792217_860cd261",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-02-10T19:10:54Z",
+      "side": 1,
+      "message": "Please make sure that this patch doesn\u0027t get merged without the discussion w/ Qualcomm. UBSAN will impact the performance and kernel binary size. We can\u0027t have it enabled for the product kernel. ",
+      "revId": "b8d14fca3afc67fdadc8662abb4913b0528610b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
