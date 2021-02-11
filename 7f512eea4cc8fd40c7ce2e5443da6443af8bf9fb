@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c334e3b_e56215b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-02-11T05:41:04Z",
+      "side": 1,
+      "message": "Did we figure out the root-cause of the issue we ran into earlier with the local testing of the patch Kalesh?",
+      "revId": "7f512eea4cc8fd40c7ce2e5443da6443af8bf9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4728f73e_07060624",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-02-11T05:41:04Z",
+      "side": 1,
+      "message": "nit: should we check ret here and return early in case of an error?",
+      "range": {
+        "startLine": 155,
+        "startChar": 5,
+        "endLine": 155,
+        "endChar": 8
+      },
+      "revId": "7f512eea4cc8fd40c7ce2e5443da6443af8bf9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
