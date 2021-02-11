@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "859822fc_11605dda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-11T01:40:03Z",
+      "side": 1,
+      "message": "Yeah, we will have to keep this out-of-tree until I\u0027m able to upstream it.\nb/178872719 is kept open for me to finish upstreaming.",
+      "revId": "9f19c535ec57c6bcdfc9852db573d2a6bc24dc60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
