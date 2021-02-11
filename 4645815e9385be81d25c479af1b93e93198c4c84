@@ -35,6 +35,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b135482_0b32dfef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1850065
+      },
+      "writtenOn": "2021-02-11T02:57:05Z",
+      "side": 1,
+      "message": "this is required in order to pull in following changes:\n\n\nQP - min/max QP for hevc - \n\nhttps://partnerissuetracker.corp.google.com/u/1/issues/175376073\n\nhttps://android-review.googlesource.com/c/kernel/common/+/1581203\n\nLayers wise bitrate - \n\nhttps://partnerissuetracker.corp.google.com/u/1/issues/175370800\n\nhttps://android-review.googlesource.com/c/kernel/common/+/1581204\n\nBase layer priority - \n\nhttps://partnerissuetracker.corp.google.com/u/1/issues/175370801\n\nhttps://android-review.googlesource.com/c/kernel/common/+/1581184",
+      "parentUuid": "c827e1f4_38aedab7",
+      "revId": "4645815e9385be81d25c479af1b93e93198c4c84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "956a2a8c_a427faba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1850065
+      },
+      "writtenOn": "2021-02-11T02:57:05Z",
+      "side": 1,
+      "message": "Pls suggest how to pull in uapi changes which are done on top of this change.\n\nDo you want to pick up modified uapi changes w/o macro renaming to avoid this change?\n\nfollowing changes are dependent on this change:\nQP - min/max QP for hevc - \n\nhttps://partnerissuetracker.corp.google.com/u/1/issues/175376073\n\nhttps://android-review.googlesource.com/c/kernel/common/+/1581203\n\nLayers wise bitrate - \n\nhttps://partnerissuetracker.corp.google.com/u/1/issues/175370800\n\nhttps://android-review.googlesource.com/c/kernel/common/+/1581204\n\nBase layer priority - \n\nhttps://partnerissuetracker.corp.google.com/u/1/issues/175370801\n\nhttps://android-review.googlesource.com/c/kernel/common/+/1581184",
+      "parentUuid": "3a7865dd_e9594d3f",
+      "revId": "4645815e9385be81d25c479af1b93e93198c4c84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c317a688_27c83bc9",
