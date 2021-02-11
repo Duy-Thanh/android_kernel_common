@@ -196,6 +196,28 @@ unlock:
 	return ret;
 }
 
+int __pkvm_host_unmap(phys_addr_t start, phys_addr_t end)
+{
+	struct kvm_mem_range r1, r2;
+	int ret;
+
+	/*
+	 * host_stage2_unmap_dev_all() currently relies on MMIO mappings being
+	 * non-persistent, so don't allow PROT_NONE in MMIO range.
+	 */
+	if (!find_mem_range(start, &r1) || !find_mem_range(end, &r2))
+		return -EINVAL;
+	if (r1.start != r2.start)
+		return -EINVAL;
+
+	hyp_spin_lock(&host_kvm.lock);
+	ret = kvm_pgtable_stage2_map(&host_kvm.pgt, start, end - start, start,
+				     KVM_PGTABLE_PROT_NONE, &host_s2_mem);
+	hyp_spin_unlock(&host_kvm.lock);
+
+	return ret;
+}
+
 void handle_host_mem_abort(struct kvm_cpu_context *host_ctxt)
 {
 	struct kvm_vcpu_fault_info fault;
