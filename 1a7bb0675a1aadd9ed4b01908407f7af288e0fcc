@@ -22,6 +22,30 @@
       },
       "revId": "1a7bb0675a1aadd9ed4b01908407f7af288e0fcc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b311c0a0_516a0597",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-02-11T23:06:34Z",
+      "side": 1,
+      "message": "Not sure where these got introduced, might be related to recent usb changes?\n\nf808da6bc6e4 usb: xhci-mtk: break loop when find the endpoint to drop\n85f0409e9ce3 usb: xhci-mtk: skip dropping bandwidth of unchecked endpoints\n5139bf6a3455 usb: xhci-mtk: fix unreleased bandwidth data\nb6609c0a537b usb: dwc3: fix clock issue during resume in OTG mode\n750829e1931a usb: dwc2: Fix endpoint direction check in ep_from_windex\n039656997da3 usb: renesas_usbhs: Clear pipe running flag in usbhs_pkt_pop()\n75582ceb723e USB: usblp: don\u0027t call usb_set_interface if there\u0027s a single alt\n4025244544b8 usb: gadget: aspeed: add missing of_node_put\nd56e0ac9a1fc usb: host: xhci: mvebu: make USB 3.0 PHY optional for Armada 3720\n\nI\u0027ll defer updating xml, since seems the usb functions shouldn\u0027t have been added",
+      "parentUuid": "ec600420_273bacc1",
+      "range": {
+        "startLine": 16,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 45
+      },
+      "revId": "1a7bb0675a1aadd9ed4b01908407f7af288e0fcc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
