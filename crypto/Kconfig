@@ -1850,6 +1850,17 @@ config CRYPTO_DRBG
 	select CRYPTO_RNG
 	select CRYPTO_JITTERENTROPY
 
+config CRYPTO_DRBG_FIPS_PASSIVE_ENTROPY
+	bool "DRBG passive entropy for FIPS compliance"
+	help
+	  Seed all SP800-90A DRBG instances passively rather than actively,
+	  for CMVP / FIPS 140 compliance.
+
+	  This doesn't have any "real" effect, but this may be useful for
+	  certification purposes if a "FIPS module" boundary is defined which
+	  includes the SP800-90A DRBG but not the Linux RNG, and if the Linux
+	  RNG isn't considered to be a SP800-90B compliant entropy source.
+
 endif	# if CRYPTO_DRBG_MENU
 
 config CRYPTO_JITTERENTROPY

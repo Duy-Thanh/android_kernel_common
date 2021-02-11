@@ -2327,3 +2327,51 @@ void add_bootloader_randomness(const void *buf, unsigned int size)
 		add_device_randomness(buf, size);
 }
 EXPORT_SYMBOL_GPL(add_bootloader_randomness);
+
+#ifdef CONFIG_CRYPTO_DRBG_FIPS_PASSIVE_ENTROPY
+static void (*drbg_load_entropy)(const void *buf, size_t size);
+
+/**
+ * register_drbg_entropy_func() - register a function to provide the
+ *				  SP800-90A DRBG module with entropy
+ * @cb: the function in the module which will accept the entropy
+ */
+void register_drbg_entropy_func(void (*cb)(const void *buf, size_t size))
+{
+	WARN_ON(drbg_load_entropy != NULL);
+	drbg_load_entropy = cb;
+}
+EXPORT_SYMBOL_GPL(register_drbg_entropy_func);
+
+/**
+ * unregister_drbg_entropy_func() - undo register_drbg_entropy_func()
+ */
+void unregister_drbg_entropy_func(void)
+{
+	drbg_load_entropy = NULL;
+}
+EXPORT_SYMBOL_GPL(unregister_drbg_entropy_func);
+
+/**
+ * drbg_need_entropy() - request that the SP800-90A DRBG module be provided with
+ *			 entropy
+ * @size: number of bytes of entropy the module wants
+ *
+ * Request that the callback function which was registered by
+ * register_drbg_entropy_func() be called to provide some entropy.  @size is a
+ * hint of how much is needed now, but more or less might be provided; the
+ * caller will have to try again if it still doesn't have enough.
+ */
+void drbg_need_entropy(size_t size)
+{
+	u8 buf[128];
+
+	size = min(size, sizeof(buf));
+
+	get_random_bytes(buf, size);
+	(*drbg_load_entropy)(buf, size);
+
+	memzero_explicit(buf, size);
+}
+EXPORT_SYMBOL_GPL(drbg_need_entropy);
+#endif /* CONFIG_CRYPTO_DRBG_FIPS_PASSIVE_ENTROPY */

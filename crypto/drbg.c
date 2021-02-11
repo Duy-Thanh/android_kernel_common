@@ -1049,6 +1049,61 @@ static inline int __drbg_seed(struct drbg_state *drbg, struct list_head *seed,
 	return ret;
 }
 
+/*
+ * In FIPS passive entropy mode, we have to go through an extra dance to meet
+ * the requirement of the "FIPS module" not dictating the use of
+ * get_random_bytes(), which isn't considered to be a SP800-90B compliant
+ * entropy source.  Otherwise we can just call get_random_bytes() directly.
+ */
+#ifdef CONFIG_CRYPTO_DRBG_FIPS_PASSIVE_ENTROPY
+static DEFINE_MUTEX(drbg_entropy_mutex);
+static u8 drbg_entropy_buffer[128];
+static size_t drbg_entropy_avail; /* bytes available in drbg_entropy_buffer */
+
+static void drbg_load_entropy(const void *buf, size_t size)
+{
+	mutex_lock(&drbg_entropy_mutex);
+
+	size = min(size, sizeof(drbg_entropy_buffer) - drbg_entropy_avail);
+	memcpy(&drbg_entropy_buffer[drbg_entropy_avail], buf, size);
+	drbg_entropy_avail += size;
+
+	mutex_unlock(&drbg_entropy_mutex);
+}
+
+static void __drbg_get_random_bytes(void *buf, size_t size)
+{
+	mutex_lock(&drbg_entropy_mutex);
+	while (size) {
+		size_t n;
+
+		if (drbg_entropy_avail == 0) {
+			mutex_unlock(&drbg_entropy_mutex);
+			drbg_need_entropy(sizeof(drbg_entropy_buffer));
+			mutex_lock(&drbg_entropy_mutex);
+		}
+		n = min(size, drbg_entropy_avail);
+		WARN_ON(n == 0);
+		memcpy(buf, drbg_entropy_buffer, n);
+		buf += n;
+		size -= n;
+		drbg_entropy_avail -= n;
+		memmove(drbg_entropy_buffer, &drbg_entropy_buffer[n],
+			drbg_entropy_avail);
+		memzero_explicit(&drbg_entropy_buffer[drbg_entropy_avail], n);
+	}
+	mutex_unlock(&drbg_entropy_mutex);
+}
+#else
+static void drbg_load_entropy(const void *buf, size_t size)
+{
+}
+static void __drbg_get_random_bytes(void *buf, size_t size)
+{
+	get_random_bytes(buf, size);
+}
+#endif
+
 static inline int drbg_get_random_bytes(struct drbg_state *drbg,
 					unsigned char *entropy,
 					unsigned int entropylen)
@@ -1056,7 +1111,7 @@ static inline int drbg_get_random_bytes(struct drbg_state *drbg,
 	int ret;
 
 	do {
-		get_random_bytes(entropy, entropylen);
+		__drbg_get_random_bytes(entropy, entropylen);
 		ret = drbg_fips_continuous_test(drbg, entropy);
 		if (ret && ret != -EAGAIN)
 			return ret;
@@ -2110,15 +2165,18 @@ static int __init drbg_init(void)
 	unsigned int j = 0; /* pointer to drbg_cores */
 	int ret;
 
+	register_drbg_entropy_func(drbg_load_entropy);
+
 	ret = drbg_healthcheck_sanity();
 	if (ret)
-		return ret;
+		goto out_unregister_entropy_func;
 
 	if (ARRAY_SIZE(drbg_cores) * 2 > ARRAY_SIZE(drbg_algs)) {
 		pr_info("DRBG: Cannot register all DRBG types"
 			"(slots needed: %zu, slots available: %zu)\n",
 			ARRAY_SIZE(drbg_cores) * 2, ARRAY_SIZE(drbg_algs));
-		return -EFAULT;
+		ret = -EFAULT;
+		goto out_unregister_entropy_func;
 	}
 
 	/*
@@ -2134,12 +2192,20 @@ static int __init drbg_init(void)
 		drbg_fill_array(&drbg_algs[i], &drbg_cores[j], 1);
 	for (j = 0; ARRAY_SIZE(drbg_cores) > j; j++, i++)
 		drbg_fill_array(&drbg_algs[i], &drbg_cores[j], 0);
-	return crypto_register_rngs(drbg_algs, (ARRAY_SIZE(drbg_cores) * 2));
+	ret = crypto_register_rngs(drbg_algs, (ARRAY_SIZE(drbg_cores) * 2));
+	if (ret)
+		goto out_unregister_entropy_func;
+	return 0;
+
+out_unregister_entropy_func:
+	unregister_drbg_entropy_func();
+	return ret;
 }
 
 static void __exit drbg_exit(void)
 {
 	crypto_unregister_rngs(drbg_algs, (ARRAY_SIZE(drbg_cores) * 2));
+	unregister_drbg_entropy_func();
 }
 
 subsys_initcall(drbg_init);
