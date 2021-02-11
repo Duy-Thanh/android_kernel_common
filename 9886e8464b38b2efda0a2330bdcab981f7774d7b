@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008089105",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1584199?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "d0d20cfd_4b453fe4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-02-11T00:51:27Z",
+      "side": 1,
+      "message": "Commit does not refer to the upstream commit\nPlease add a line like \u0027(cherry picked from commit \u003csha1\u003e \u003crepo\u003e \u003cbranch\u003e)\u0027\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 356744737 android-build.ayeaye-python-dispatcher_20210210.04_p0",
+      "revId": "9886e8464b38b2efda0a2330bdcab981f7774d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008089105",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1584199?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "be57e6e7_79547485",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 13,
+                "startChar": 1,
+                "endLine": 13,
+                "endChar": 1
+              },
+              "replacement": "Signed-off-by: Kevin Hilman \u003ckhilman@baylibre.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "2e611315_51e9684a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-02-11T00:51:27Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Kevin Hilman \u003ckhilman@baylibre.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 356744737 android-build.ayeaye-python-dispatcher_20210210.04_p0",
+      "revId": "9886e8464b38b2efda0a2330bdcab981f7774d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
