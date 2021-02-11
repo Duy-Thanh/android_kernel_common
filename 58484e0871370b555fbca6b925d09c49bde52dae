@@ -33,6 +33,24 @@
       "message": "This seems to be superfluous now that we have proper support for asymmetric AArch32 support, which AFAIR keep one AArch32-capable CPU alive at all times.\n\nAdding @willdeacon for info/comment.",
       "revId": "58484e0871370b555fbca6b925d09c49bde52dae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f863a810_eae38de8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-02-11T09:35:30Z",
+      "side": 1,
+      "message": "I think this is to do with the (out-of-tree) \"pause\" functionality, where a CPU can be online but not active, so some additional work to ensure that we always have an active 32-bit CPU is probably required.\n\nHowever, given that active implies online, I agree with you that it would be better if this fitted in with the existing code so that the same CPU which we\u0027re keeping online is also the one which is prevented from pausing.\n\nStephen -- does that sound do-able?",
+      "parentUuid": "5fb97d30_a3654568",
+      "revId": "58484e0871370b555fbca6b925d09c49bde52dae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
