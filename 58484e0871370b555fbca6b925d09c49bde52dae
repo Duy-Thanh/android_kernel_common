@@ -16,6 +16,23 @@
       "message": "Hi.  We revisited this internally to make it cleaner and more correct.  Please review when you have the opportunity.",
       "revId": "58484e0871370b555fbca6b925d09c49bde52dae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fb97d30_a3654568",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2021-02-11T09:29:10Z",
+      "side": 1,
+      "message": "This seems to be superfluous now that we have proper support for asymmetric AArch32 support, which AFAIR keep one AArch32-capable CPU alive at all times.\n\nAdding @willdeacon for info/comment.",
+      "revId": "58484e0871370b555fbca6b925d09c49bde52dae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
