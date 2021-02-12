@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d39a794_8511047e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-02-12T18:27:43Z",
+      "side": 1,
+      "message": "You can use lore if you like (it\u0027s much better):\n\nhttps://lore.kernel.org/lkml/20201125010541.309848-2-willmcvicker@google.com",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 43
+      },
+      "revId": "7a1a7c10297a8a26eaa2109860187d15361c90aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
