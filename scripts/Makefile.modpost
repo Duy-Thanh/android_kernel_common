@@ -67,7 +67,7 @@ else
 
 ifeq ($(KBUILD_EXTMOD),)
 
-input-symdump := vmlinux.symvers
+input-symdump := $(KBUILD_MIXED_TREE)vmlinux.symvers
 output-symdump := Module.symvers
 module_srcpath := $(srctree)
 
