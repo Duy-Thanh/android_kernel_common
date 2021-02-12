@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008134970",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1581204?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "d91799b7_ee3f0005",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 15,
+                "startChar": 1,
+                "endLine": 15,
+                "endChar": 1
+              },
+              "replacement": "Signed-off-by: Alistair Delva \u003cadelva@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "dd3efdef_f8f5c562",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-02-12T16:50:33Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Alistair Delva \u003cadelva@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 356972488 android-build.ayeaye-python-dispatcher_20210211.04_p0",
+      "revId": "0d5c1ed261ddc9b2575eefb72c40e4e88d9de33c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008134970",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1581204?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "4ffeec7a_2cce46d3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-02-12T16:50:33Z",
+      "side": 1,
+      "message": "Commit does not refer to the upstream commit\nPlease add a line like \u0027(cherry picked from commit \u003csha1\u003e \u003crepo\u003e \u003cbranch\u003e)\u0027\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 356972488 android-build.ayeaye-python-dispatcher_20210211.04_p0",
+      "revId": "0d5c1ed261ddc9b2575eefb72c40e4e88d9de33c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
