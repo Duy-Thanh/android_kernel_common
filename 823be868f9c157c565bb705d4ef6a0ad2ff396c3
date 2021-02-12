@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfbd2f8f_d4bd8268",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2021-02-12T02:31:31Z",
+      "side": 1,
+      "message": "Kinda weird to include an email as is. Drop it and maybe just link to it using a lore link?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 73
+      },
+      "revId": "823be868f9c157c565bb705d4ef6a0ad2ff396c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
