@@ -22,6 +22,23 @@
       },
       "revId": "823be868f9c157c565bb705d4ef6a0ad2ff396c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "813dff94_e6327e7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-12T07:54:10Z",
+      "side": 1,
+      "message": "Yeah, changelog cleanup would be nice, as Saravana says 😊",
+      "revId": "823be868f9c157c565bb705d4ef6a0ad2ff396c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
