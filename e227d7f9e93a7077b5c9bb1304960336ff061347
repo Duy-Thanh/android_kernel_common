@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be0cb8c7_3c8fd04b",
+        "filename": "mm/madvise.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-12T19:48:45Z",
+      "side": 1,
+      "message": "This part was dropped in the original. I don\u0027t remember the exact history, so will defer to Minchan whether this is still needed.",
+      "range": {
+        "startLine": 1111,
+        "startChar": 2,
+        "endLine": 1112,
+        "endChar": 27
+      },
+      "revId": "e227d7f9e93a7077b5c9bb1304960336ff061347",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
