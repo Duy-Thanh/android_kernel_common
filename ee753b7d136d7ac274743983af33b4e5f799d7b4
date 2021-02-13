@@ -177,6 +177,24 @@
       "parentUuid": "401067dc_4cab2b39",
       "revId": "ee753b7d136d7ac274743983af33b4e5f799d7b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02f232eb_20acadb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2021-02-13T15:58:49Z",
+      "side": 1,
+      "message": "Sorry for the late update, with the LLVM updated to 12.0.1 version, the failures went away now.",
+      "parentUuid": "e2eeba53_0ff6d7b8",
+      "revId": "ee753b7d136d7ac274743983af33b4e5f799d7b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
