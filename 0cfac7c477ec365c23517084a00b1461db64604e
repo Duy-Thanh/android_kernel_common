@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dad9d35_b6250f9e",
+        "filename": "arch/arm64/include/asm/unistd.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1562839
+      },
+      "writtenOn": "2021-02-13T02:39:29Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "90e83d7e_efa18a74",
+      "range": {
+        "startLine": 41,
+        "startChar": 28,
+        "endLine": 41,
+        "endChar": 29
+      },
+      "revId": "0cfac7c477ec365c23517084a00b1461db64604e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a1f2a7e_c88ac82c",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53a88674_fc7abe73",
+        "filename": "include/linux/syscalls.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1562839
+      },
+      "writtenOn": "2021-02-13T02:39:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a1f2a7e_c88ac82c",
+      "range": {
+        "startLine": 878,
+        "startChar": 0,
+        "endLine": 879,
+        "endChar": 28
+      },
+      "revId": "0cfac7c477ec365c23517084a00b1461db64604e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15a83d91_6ee4a98a",
@@ -84,6 +132,30 @@
       "writtenOn": "2021-02-12T19:53:53Z",
       "side": 1,
       "message": "Original formatting please",
+      "range": {
+        "startLine": 997,
+        "startChar": 0,
+        "endLine": 998,
+        "endChar": 1
+      },
+      "revId": "0cfac7c477ec365c23517084a00b1461db64604e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fbd274b_062cfc8e",
+        "filename": "mm/madvise.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 1562839
+      },
+      "writtenOn": "2021-02-13T02:39:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15a83d91_6ee4a98a",
       "range": {
         "startLine": 997,
         "startChar": 0,
