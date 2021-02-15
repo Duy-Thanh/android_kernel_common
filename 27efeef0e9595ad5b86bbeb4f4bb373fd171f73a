@@ -16,6 +16,24 @@
       "message": "Why is this needed in this branch?",
       "revId": "27efeef0e9595ad5b86bbeb4f4bb373fd171f73a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d632afe_c72d021a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1767592
+      },
+      "writtenOn": "2021-02-15T10:33:36Z",
+      "side": 1,
+      "message": "It is needed for next chip bring up",
+      "parentUuid": "4c55aae0_64a7ed30",
+      "revId": "27efeef0e9595ad5b86bbeb4f4bb373fd171f73a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
