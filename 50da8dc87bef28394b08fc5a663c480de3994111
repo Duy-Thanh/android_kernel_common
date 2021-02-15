@@ -16,6 +16,24 @@
       "message": "Is it safe to add this in a \"notrace\" function?",
       "revId": "50da8dc87bef28394b08fc5a663c480de3994111",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2abade7_4c4ba7ca",
+        "filename": "arch/arm64/kernel/traps.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1743420
+      },
+      "writtenOn": "2021-02-15T01:18:10Z",
+      "side": 1,
+      "message": "Yes. I don\u0027t think there is a safety problem. According to the kernel documentation, \u0027notrace\u0027 seems to prevent a ftrace for the function.\nThe __schedule() is also \u0027notrace\u0027 type, but it calls trace_sched_switch().",
+      "parentUuid": "564067a1_51242e9e",
+      "revId": "50da8dc87bef28394b08fc5a663c480de3994111",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
