@@ -16,6 +16,24 @@
       "message": "Did you shorten this report or whye are there no actual changes listed.\n\nstruct ... changed: ???",
       "revId": "c528c67db9c8a2841dc8edc759084744ec997f5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd602768_d08e29e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-02-16T13:33:35Z",
+      "side": 1,
+      "message": "I assumed Will didn\u0027t like the 3 variables with CRC-only changes and the line saying 47 changes in total.\n\nI was pondering whether it would worth giving the CRC-only matcher the ability to summarise across multiple sections. However, it would make it bit more fragile and we\u0027d definitely need to recognise the two distinct section headings and make sure we output the summarised changes below the two sections and handle cases where only one of the two sections is there.\n\nThis would be better done in libabigail. However, the (unnecessary) function/variable distinction runs deep through the code and it would be low benefit, low chance of success attempt.\n\nIf, on the other hand, the post-processing script actually generated the above output, do let us know!\n\nLast thought: How do people feel about a post-processing pass that merges function/variable things together? This would be more general and more useful than trying to special-case this for CRC-only change processing.",
+      "parentUuid": "a054f8d8_13723840",
+      "revId": "c528c67db9c8a2841dc8edc759084744ec997f5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
