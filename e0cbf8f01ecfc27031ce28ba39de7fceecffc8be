@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6e886cf_df6ae658",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-02-16T22:43:28Z",
+      "side": 1,
+      "message": "This must be fixed in upstream linux since it was not introduced by an Android specific patch.",
+      "revId": "e0cbf8f01ecfc27031ce28ba39de7fceecffc8be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
