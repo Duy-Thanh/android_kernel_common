@@ -4775,12 +4775,15 @@ static inline void mm_account_fault(struct pt_regs *regs,
  * This is needed as the returned vma is kept in memory until the call to
  * can_reuse_spf_vma() is made.
  */
-vm_fault_t __handle_speculative_fault(struct mm_struct *mm,
-			       unsigned long address, unsigned int flags,
-			       struct vm_area_struct **vma)
+static vm_fault_t ___handle_speculative_fault(struct mm_struct *mm,
+				unsigned long address, unsigned int flags,
+				struct vm_area_struct **vma)
 {
 	struct vm_fault vmf = {
 		.address = address,
+		.pgoff = linear_page_index(*vma, address),
+		.vma = *vma,
+		.gfp_mask = __get_fault_gfp_mask(*vma),
 	};
 	pgd_t *pgd, pgdval;
 	p4d_t *p4d, p4dval;
@@ -4791,13 +4794,6 @@ vm_fault_t __handle_speculative_fault(struct mm_struct *mm,
 	/* Clear flags that may lead to release the mmap_sem to retry */
 	flags &= ~(FAULT_FLAG_ALLOW_RETRY|FAULT_FLAG_KILLABLE);
 	flags |= FAULT_FLAG_SPECULATIVE;
-
-	check_sync_rss_stat(current);
-
-	*vma = get_vma(mm, address);
-	if (!*vma)
-		return VM_FAULT_RETRY;
-	vmf.vma = *vma;
 
 	/* rmb <-> seqlock,vma_rb_erase() */
 	seq = raw_read_seqcount(&vmf.vma->vm_sequence);
@@ -4939,8 +4935,6 @@ vm_fault_t __handle_speculative_fault(struct mm_struct *mm,
 		vmf.pte = NULL;
 	}
 
-	vmf.pgoff = linear_page_index(vmf.vma, address);
-	vmf.gfp_mask = __get_fault_gfp_mask(vmf.vma);
 	vmf.sequence = seq;
 	vmf.flags = flags;
 
@@ -4992,6 +4986,19 @@ out_segv:
 	put_vma(vmf.vma);
 	*vma = NULL;
 	return VM_FAULT_SIGSEGV;
+}
+
+vm_fault_t __handle_speculative_fault(struct mm_struct *mm,
+				unsigned long address, unsigned int flags,
+				struct vm_area_struct **vma)
+{
+	check_sync_rss_stat(current);
+
+	*vma = get_vma(mm, address);
+	if (!*vma)
+		return VM_FAULT_RETRY;
+
+	return ___handle_speculative_fault(mm, address, flags, vma);
 }
 
 /*
