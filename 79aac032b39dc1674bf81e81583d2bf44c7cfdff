@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "410e6f87_ef7cc4f3",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4782,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-02-17T13:02:03Z",
+      "side": 1,
+      "message": "Why not just take a \u0027struct vm_fault *\u0027 as a parameter, and declare this on the caller\u0027s stack?",
+      "range": {
+        "startLine": 4782,
+        "startChar": 7,
+        "endLine": 4782,
+        "endChar": 21
+      },
+      "revId": "79aac032b39dc1674bf81e81583d2bf44c7cfdff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e56ecf8_584a9268",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4987,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-02-17T13:02:03Z",
+      "side": 1,
+      "message": "Now that the get_vma() call is in the caller, I think the put_vma() calls (and NULLifying of the VMA) should be there too).",
+      "range": {
+        "startLine": 4986,
+        "startChar": 1,
+        "endLine": 4987,
+        "endChar": 13
+      },
+      "revId": "79aac032b39dc1674bf81e81583d2bf44c7cfdff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
