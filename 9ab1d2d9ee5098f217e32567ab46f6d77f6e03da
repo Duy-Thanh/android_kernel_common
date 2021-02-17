@@ -34,6 +34,24 @@
       "parentUuid": "1746ce9e_1cd3d0bf",
       "revId": "9ab1d2d9ee5098f217e32567ab46f6d77f6e03da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "925a1abb_01d0ef5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-17T14:47:27Z",
+      "side": 1,
+      "message": "Sure, or do something to make this easy to review, can you verify that you really are only adding 1 new symbol in this large diffstat easily?  If not, how do you expect us to do so?  😊",
+      "parentUuid": "997513da_c5677753",
+      "revId": "9ab1d2d9ee5098f217e32567ab46f6d77f6e03da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
