@@ -16,6 +16,24 @@
       "message": "Lots of odd churn in the symbol file, how about just adding the one new one you need, and then doing a \"cleanup\" as an add-on patch so we can properly see what is really happening here?",
       "revId": "9ab1d2d9ee5098f217e32567ab46f6d77f6e03da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "997513da_c5677753",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2021-02-17T14:41:41Z",
+      "side": 1,
+      "message": "you mean to edit the file manually?",
+      "parentUuid": "1746ce9e_1cd3d0bf",
+      "revId": "9ab1d2d9ee5098f217e32567ab46f6d77f6e03da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
