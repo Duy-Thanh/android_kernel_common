@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca180ea1_421442cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-02-17T21:52:02Z",
+      "side": 1,
+      "message": "this was verified on a recent mixed-architecture device.  far simpler approach, based upon Will\u0027s feedback, please comment.",
+      "revId": "815d7d95bbdefcd185be913a8542b457eb1edbeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
