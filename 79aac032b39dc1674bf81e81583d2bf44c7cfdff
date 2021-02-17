@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e41576e6_a2649563",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4782,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-02-17T13:57:21Z",
+      "side": 1,
+      "message": "Ah yes, I see what you mean. You could probably solve that using something like:\n\n\nvm_fault_t __handle_speculative_fault(...)\n{\n    struct vm_fault vmf \u003d {\n        .vma \u003d get_vma(mm, address),\n        .pgoff \u003d vmf.vma ? linear_page_index(vmf.vma, address) : 0,\n        ...\n    };\n}\n\nbut it\u0027s really horrible. So please just keep this like you had it, and let\u0027s just move the put_vma() calls out.\n\nOne other thing though: could ___handle_speculative_fault() just take *vma instead of **vma now?",
+      "parentUuid": "18e7ddbb_87fbcca3",
+      "range": {
+        "startLine": 4782,
+        "startChar": 7,
+        "endLine": 4782,
+        "endChar": 21
+      },
+      "revId": "79aac032b39dc1674bf81e81583d2bf44c7cfdff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e56ecf8_584a9268",
         "filename": "mm/memory.c",
         "patchSetId": 1
