@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5b5459e_6f410b08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2021-02-17T14:08:08Z",
+      "side": 1,
+      "message": "depends on change here: https://android-review.googlesource.com/c/kernel/common/+/1586786,\nif that change is not merged, then this change is not necessary.\n",
+      "revId": "f7ba2fc4ee2d5790b2d235bd1370c593b9f6ae86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
