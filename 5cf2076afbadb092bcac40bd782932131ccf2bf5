@@ -1,0 +1,41 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008269478",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1593791?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "31bc55af_155be6da",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 10,
+                "startChar": 1,
+                "endLine": 10,
+                "endChar": 1
+              },
+              "replacement": "Signed-off-by: Suren Baghdasaryan \u003csurenb@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "e637e743_69df8990",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-02-18T19:26:44Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Suren Baghdasaryan \u003csurenb@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 357951783 android-build.ayeaye-python-dispatcher_20210217.04_p0",
+      "revId": "5cf2076afbadb092bcac40bd782932131ccf2bf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
