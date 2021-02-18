@@ -16,6 +16,24 @@
       "message": "The checkpatch failure is bogus and amusing. I\u0027ll take a quick look and see if we can get \"it\" to ignore XML diffs.",
       "revId": "33e1c7791081157c856d0a59433e0f40a1d3513c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "656c2ec4_a7ae3801",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-02-18T08:19:17Z",
+      "side": 1,
+      "message": "So \"it\" would be `checkpatch.pl` itself. This has very limited recognition of file types within a unified diff and only appears to specifically recognise `Documentation/admin-guide/kernel-parameters.txt`. Everything else is pretty much assumed to be source code. It would be a little bit of work to make the script skip XML and perhaps other files.\n\nThe other way to proceed would be to make linter not raise actionable findings, ever. We could also then reenable a lot of the many checks that are disabled (in `checkpatch_blacklist`).\n\nI\u0027m not sure of the usefulness of either course of action.\n\nThe actual diffs are due to changes in the XML `filepath`s (from `common12-5.10` to plain `common`). I thought these were supposed to be normalised to be relative to the kernel tree. We may have a `build_abi.sh` bug.\n\n```\u003cenum-decl name\u003d\u0027dl_dev_state\u0027 filepath\u003d\u0027common/include/linux/device.h\u0027 line\u003d\u0027343\u0027 column\u003d\u00271\u0027 id\u003d\u0027070abca2\u0027\u003e```",
+      "parentUuid": "e2e3e9f3_cf42b124",
+      "revId": "33e1c7791081157c856d0a59433e0f40a1d3513c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
