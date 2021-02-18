@@ -89,6 +89,9 @@ DECLARE_RESTRICTED_HOOK(android_rvh_set_gfp_zone_flags,
 DECLARE_RESTRICTED_HOOK(android_rvh_set_readahead_gfp_mask,
 			TP_PROTO(unsigned int *flags),	/* gfp_t *flags */
 			TP_ARGS(flags), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_mapping_shrinkable,
+			TP_PROTO(bool *shrinkable),
+			TP_ARGS(shrinkable), 1);
 
 struct mem_cgroup;
 DECLARE_HOOK(android_vh_mem_cgroup_alloc,
@@ -400,6 +403,12 @@ DECLARE_HOOK(android_vh_shrink_try_release_folio,
 DECLARE_HOOK(android_vh_unreserve_highatomic_bypass,
 	TP_PROTO(bool force, struct zone *zone, bool *skip_unreserve_highatomic),
 	TP_ARGS(force, zone, skip_unreserve_highatomic));
+DECLARE_HOOK(android_vh_rmqueue,
+	TP_PROTO(struct zone *preferred_zone, struct zone *zone,
+		unsigned int order, gfp_t gfp_flags,
+		unsigned int alloc_flags, int migratetype),
+	TP_ARGS(preferred_zone, zone, order,
+		gfp_flags, alloc_flags, migratetype));
 DECLARE_HOOK(android_vh_rmqueue_bulk_bypass,
 	TP_PROTO(unsigned int order, struct per_cpu_pages *pcp, int migratetype,
 		struct list_head *list),
