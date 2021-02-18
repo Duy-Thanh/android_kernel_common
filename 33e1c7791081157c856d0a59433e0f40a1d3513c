@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2e3e9f3_cf42b124",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-02-18T07:42:32Z",
+      "side": 1,
+      "message": "The checkpatch failure is bogus and amusing. I\u0027ll take a quick look and see if we can get \"it\" to ignore XML diffs.",
+      "revId": "33e1c7791081157c856d0a59433e0f40a1d3513c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
