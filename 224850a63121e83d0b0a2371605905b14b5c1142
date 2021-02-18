@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7163e01e_43c988ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-02-18T18:19:15Z",
+      "side": 1,
+      "message": "Please can you do something like\n\nsed -i \";filepath\u003d\u0027common/;filepath\u003d\u0027;g\"\n\non the XML and re-push.",
+      "revId": "224850a63121e83d0b0a2371605905b14b5c1142",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
