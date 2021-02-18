@@ -16,6 +16,29 @@
       "message": "this was verified on a recent mixed-architecture device.  far simpler approach, based upon Will\u0027s feedback, please comment.",
       "revId": "815d7d95bbdefcd185be913a8542b457eb1edbeb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bd6d729_2e8cc6f9",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1157,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-02-18T10:57:10Z",
+      "side": 1,
+      "message": "You could probably get rid of that, but oh well.",
+      "range": {
+        "startLine": 1157,
+        "startChar": 40,
+        "endLine": 1157,
+        "endChar": 48
+      },
+      "revId": "815d7d95bbdefcd185be913a8542b457eb1edbeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
