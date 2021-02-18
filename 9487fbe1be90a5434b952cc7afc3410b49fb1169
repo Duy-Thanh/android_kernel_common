@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6dc7a33_08360adf",
+        "filename": "Documentation/ABI/stable/sysfs-module",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2021-02-18T19:21:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6f1a61b_28139097",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 19
+      },
+      "revId": "9487fbe1be90a5434b952cc7afc3410b49fb1169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76e1ad16_c8c355cd",
