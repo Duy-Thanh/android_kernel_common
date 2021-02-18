@@ -154,3 +154,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_mem_abort);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_sp_pc_abort);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_iommu_setup_dma_ops);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pagecache_get_page);
