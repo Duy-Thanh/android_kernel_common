@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6f1a61b_28139097",
+        "filename": "Documentation/ABI/stable/sysfs-module",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2021-02-18T18:46:50Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "62eda34d_ea0fd452",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 19
+      },
+      "revId": "9487fbe1be90a5434b952cc7afc3410b49fb1169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76e1ad16_c8c355cd",
         "filename": "scripts/Makefile.modpost",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2021-02-16T11:27:31Z",
       "side": 1,
       "message": "`sed`",
+      "range": {
+        "startLine": 94,
+        "startChar": 37,
+        "endLine": 94,
+        "endChar": 40
+      },
+      "revId": "9487fbe1be90a5434b952cc7afc3410b49fb1169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe6bf7b9_8ef7a681",
+        "filename": "scripts/Makefile.modpost",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2021-02-18T18:46:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76e1ad16_c8c355cd",
       "range": {
         "startLine": 94,
         "startChar": 37,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b32d8ff5_6e0090b1",
+        "filename": "scripts/Makefile.modpost",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2021-02-18T18:46:50Z",
+      "side": 1,
+      "message": "Ah yes, I added this based on the upstream reviews. Basically upstream doesn\u0027t support relative M\u003d paths, but we do use them. See [1] for more details.\n\n[1] https://lore.kernel.org/patchwork/patch/1368277/",
+      "parentUuid": "e18a19fa_e205020e",
+      "range": {
+        "startLine": 96,
+        "startChar": 8,
+        "endLine": 96,
+        "endChar": 43
+      },
+      "revId": "9487fbe1be90a5434b952cc7afc3410b49fb1169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13e8f193_faea9c47",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-02-16T11:27:31Z",
       "side": 1,
       "message": "this might end up not terminated?",
+      "range": {
+        "startLine": 2601,
+        "startChar": 3,
+        "endLine": 2601,
+        "endChar": 69
+      },
+      "revId": "9487fbe1be90a5434b952cc7afc3410b49fb1169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54bdc3ac_46d2409f",
+        "filename": "scripts/mod/modpost.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2601,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2021-02-18T18:46:50Z",
+      "side": 1,
+      "message": "The passed in value will always be 12 characters based on the setlocalversion script. Even if that changes in the future, it\u0027s not going to be longer than a git sha1 which is 40 characters.",
+      "parentUuid": "13e8f193_faea9c47",
       "range": {
         "startLine": 2601,
         "startChar": 3,
