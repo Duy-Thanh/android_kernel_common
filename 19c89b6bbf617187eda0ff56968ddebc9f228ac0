@@ -34,6 +34,24 @@
       "parentUuid": "661074e2_06f90f44",
       "revId": "19c89b6bbf617187eda0ff56968ddebc9f228ac0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b75b0a5f_94b74e2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-18T08:29:24Z",
+      "side": 1,
+      "message": "libabigail which is part of the kernel repo and build process.  The GKI kernel documentation should show you how to do this...",
+      "parentUuid": "7889efe3_b62132d3",
+      "revId": "19c89b6bbf617187eda0ff56968ddebc9f228ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
