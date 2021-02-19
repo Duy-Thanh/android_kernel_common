@@ -33,6 +33,24 @@
       "message": "Hi Google Friend,\nI known this patch should push to commuity firstly(actually\n we have push it at before https://patchwork.kernel.org/project/linux-pm/patch/1551878926-8455-2-git-send-email-aisheng.dong@nxp.com/)\nBut the review process is long and it\u0027s not within our vendor control. So I pushed this patch here.\n\nThis patch fix case that soc support multi status in runtime pm.\nIt will break the ABI check so that it will can\u0027t boot up if use google GKI image.",
       "revId": "f68dcb73d08b7ebfe5d98ea2b9c00471ebaaffe6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62712f2c_c4bf097f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-02-19T23:36:38Z",
+      "side": 1,
+      "message": "It looks like it wasn\u0027t rejected upstream. The conversation just ended in 3/2019.\n\nCan you revive the upstream conversation? Now you have an additional 2 years of data to convince the maintainers.\n\nHow urgent is this patch for you in android12-5.10? It seems like we can afford to wait for some period of time to work on the upstream version of the patch.\n\nhttps://lore.kernel.org/linux-arm-kernel/1551878926-8455-1-git-send-email-aisheng.dong@nxp.com/\n\nIf accepted upstream, we will take it into android12-5.10.\n\nIf not accepted upstream, see if you can re-work this as a vendor hook. Perhaps something like:\n\n  static void genpd_sync_power_off(...)\n  {\n\tstruct gpd_link *link;\n\tbool return_early \u003d false;\n\n\ttrace_android_vh_genpd_sync_poff(genpd, \u0026return_early);\n\tif (!genpd_status_on(genpd) || genpd_is_always_on(genpd) ||\n\t    return_early)\n\t\treturn;\n\t...\n\nThen you implement the handler for trace_android_vh_genpd_sync_poff() in a vendor module and there is no changes to other vendors.",
+      "parentUuid": "b2fbae2e_3357646c",
+      "revId": "f68dcb73d08b7ebfe5d98ea2b9c00471ebaaffe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
