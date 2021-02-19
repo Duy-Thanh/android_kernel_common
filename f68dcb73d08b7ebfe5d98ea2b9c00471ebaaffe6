@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2fbae2e_3357646c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2021-02-19T05:57:44Z",
+      "side": 1,
+      "message": "Hi Google Friend,\nI known this patch should push to commuity firstly(actually\n we have push it at before https://patchwork.kernel.org/project/linux-pm/patch/1551878926-8455-2-git-send-email-aisheng.dong@nxp.com/)\nBut the review process is long and it\u0027s not within our vendor control. So I pushed this patch here.\n\nThis patch fix case that soc support multi status in runtime pm.\nIt will break the ABI check so that it will can\u0027t boot up if use google GKI image.",
+      "revId": "f68dcb73d08b7ebfe5d98ea2b9c00471ebaaffe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
