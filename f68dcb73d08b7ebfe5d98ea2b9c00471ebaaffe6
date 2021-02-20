@@ -51,6 +51,41 @@
       "parentUuid": "b2fbae2e_3357646c",
       "revId": "f68dcb73d08b7ebfe5d98ea2b9c00471ebaaffe6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2755817_c48275db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2021-02-20T01:28:36Z",
+      "side": 1,
+      "message": "Hi Todd,\nThis patch is not urgent, But it\u0027s critical for those soc which enable multible state. When the kernel5.10 frozen for GKI compatibility？ I hope we can fix this issue before that time.\n\nYes. we may add one api to pass the RETENTION state from vendor driver to fix this issue. I will make the patch later if you are ok for that in case community do not accespt this patch.",
+      "parentUuid": "62712f2c_c4bf097f",
+      "revId": "f68dcb73d08b7ebfe5d98ea2b9c00471ebaaffe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85409a3e_2dcc65f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2021-02-20T01:28:36Z",
+      "side": 1,
+      "message": "Hi Google Friend,\nI known this patch should push to commuity firstly(actually\n we have push it at before https://patchwork.kernel.org/project/linux-pm/patch/1551878926-8455-2-git-send-email-aisheng.dong@nxp.com/)\nBut the review process is long and it\u0027s not within our vendor control. So I pushed this patch here.\n\nThis patch fix case that soc support multi status in runtime pm.\nIt will break the ABI check so that it will can\u0027t boot up if use google GKI image.",
+      "revId": "f68dcb73d08b7ebfe5d98ea2b9c00471ebaaffe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
