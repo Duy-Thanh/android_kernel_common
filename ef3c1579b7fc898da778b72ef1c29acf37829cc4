@@ -16,6 +16,24 @@
       "message": "Let me put my note here as well:\nI think it might be better to avoid changing core with exported symbols as much as possible, if vendor module is able to implement any with the existing ones.",
       "revId": "ef3c1579b7fc898da778b72ef1c29acf37829cc4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d853bab4_5cd1de56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-02-20T01:57:33Z",
+      "side": 1,
+      "message": "Cloning the needed functions (ufshcd_clock_scaling_prepare(), ufshcd_clock_scaling_unprepare(), ufshcd_scsi_block_requests(), ufshcd_scsi_unblock_requests(), and ufshcd_wait_for_doorbell_clr()) doesn\u0027t work because ufshcd_wait_for_doorbell_clr() uses the enum value UFSHCD_STATE_OPERATIONAL, which is defined in ufshcd.c, not in a header file.\n\nWe could hack around that by duplicating the enum definition too, but I think that would be going too far, especially when we\u0027d be talking about duplicating a substantial bit of code that is messing with things in `struct ufs_hba` that modules shouldn\u0027t be.",
+      "parentUuid": "58368a03_a4ee28a7",
+      "revId": "ef3c1579b7fc898da778b72ef1c29acf37829cc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
