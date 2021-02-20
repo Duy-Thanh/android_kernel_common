@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58368a03_a4ee28a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-02-20T01:52:37Z",
+      "side": 1,
+      "message": "Let me put my note here as well:\nI think it might be better to avoid changing core with exported symbols as much as possible, if vendor module is able to implement any with the existing ones.",
+      "revId": "ef3c1579b7fc898da778b72ef1c29acf37829cc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
