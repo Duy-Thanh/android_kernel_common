@@ -34,6 +34,24 @@
       "parentUuid": "58368a03_a4ee28a7",
       "revId": "ef3c1579b7fc898da778b72ef1c29acf37829cc4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f1e9a1f_c2781e10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-02-20T02:13:23Z",
+      "side": 1,
+      "message": "FWIW, do we need to use UFSHCD_STATE_OPERATIONAL and timeout?\n\n// scsi block\nif (atomic_inc_return(\u0026hba-\u003escsi_block_reqs_cnt) \u003d\u003d 1)\n     scsi_block_requests(hba-\u003ehost);\n\n// wait doorbell\nufshcd_hold(hba, false);\nspin_lock_irqsave(hba-\u003ehost-\u003ehost_lock, flags);\ndo {\n    tm_doorbell \u003d ufshcd_readl(hba, REG_UTP_TASK_REQ_DOOR_BELL);\n    tr_doorbell \u003d ufshcd_readl(hba, REG_UTP_TRANSFER_REQ_DOOR_BELL);\n    if (!tm_doorbell \u0026\u0026 !tr_doorbell)\n         break;\n    spin_unlock_irqrestore(hba-\u003ehost-\u003ehost_lock, flags);\n    schedule();\n    spin_lock_irqsave(hba-\u003ehost-\u003ehost_lock, flags);\n} while (tm_doorbell || tr_doorbell);\nspin_unlock_irqrestore(hba-\u003ehost-\u003ehost_lock, flags);\nufshcd_release(hba);",
+      "parentUuid": "d853bab4_5cd1de56",
+      "revId": "ef3c1579b7fc898da778b72ef1c29acf37829cc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
