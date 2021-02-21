@@ -16,6 +16,24 @@
       "message": "Hello.Do we need merge this change to other branches?",
       "revId": "17dfa24e000ac16615cf8560bd2e3b9d7c196a3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "572bbe66_0711e405",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2021-02-21T13:02:30Z",
+      "side": 1,
+      "message": "Hi, this change has been already merged in android-mainline and android12-5.10.",
+      "parentUuid": "2234e8ec_0ca70975",
+      "revId": "17dfa24e000ac16615cf8560bd2e3b9d7c196a3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
