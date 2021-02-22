@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a954dce_36ea4beb",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 1140,
+      "author": {
+        "id": 1579699
+      },
+      "writtenOn": "2021-02-22T18:30:19Z",
+      "side": 1,
+      "message": "This symbol was present in android11-5.4. If this symbol should no longer be used, can buganizer be raised and I can raise this request within our team.",
+      "parentUuid": "c6bd18b7_4eaeaf62",
+      "range": {
+        "startLine": 1140,
+        "startChar": 2,
+        "endLine": 1140,
+        "endChar": 12
+      },
+      "revId": "b0b73d79f618a95940a9dad597cef4ddec6412a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d22e4b79_6c7b6cbe",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 1

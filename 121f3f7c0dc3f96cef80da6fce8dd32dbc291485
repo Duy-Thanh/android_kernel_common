@@ -56,6 +56,30 @@
       },
       "revId": "121f3f7c0dc3f96cef80da6fce8dd32dbc291485",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "930d24f3_8c41bb8f",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 1579699
+      },
+      "writtenOn": "2021-02-22T18:30:19Z",
+      "side": 1,
+      "message": "This is used by zsmalloc. I found mention of zsmalloc in b/158645321",
+      "parentUuid": "291c2859_ba52218b",
+      "range": {
+        "startLine": 1190,
+        "startChar": 0,
+        "endLine": 1190,
+        "endChar": 12
+      },
+      "revId": "121f3f7c0dc3f96cef80da6fce8dd32dbc291485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
