@@ -16,6 +16,24 @@
       "message": "Please also include _what_ changed in the commit message.",
       "revId": "b4c649e810f4b6ab6e9d360817e413e87086388a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d16f7463_294d0570",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1558410
+      },
+      "writtenOn": "2021-02-22T23:53:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a86db146_f57b7980",
+      "revId": "b4c649e810f4b6ab6e9d360817e413e87086388a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
