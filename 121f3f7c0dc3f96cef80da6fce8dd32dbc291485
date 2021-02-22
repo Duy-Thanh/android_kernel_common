@@ -16,6 +16,46 @@
       "message": "There are a couple more new symbols added in PS#2 since I initially opened this gerrit. @Greg, can you check on the delta between 1 and 2?\n\nhttps://android-review.googlesource.com/c/kernel/common/+/1595211/1..2/android/abi_gki_aarch64_qcom",
       "revId": "121f3f7c0dc3f96cef80da6fce8dd32dbc291485",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce235bf8_e6a7785f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-22T18:19:36Z",
+      "side": 1,
+      "message": "What block device driver are you needing?  Can\u0027t we just enable it for you in the default config?",
+      "revId": "121f3f7c0dc3f96cef80da6fce8dd32dbc291485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "291c2859_ba52218b",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-22T18:19:36Z",
+      "side": 1,
+      "message": "what is this, and the other block symbols for?  If you need compressed storage, we can enable the needed filesystem driver for you.",
+      "range": {
+        "startLine": 1190,
+        "startChar": 0,
+        "endLine": 1190,
+        "endChar": 12
+      },
+      "revId": "121f3f7c0dc3f96cef80da6fce8dd32dbc291485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
