@@ -64,6 +64,7 @@
 #include <trace/events/module.h>
 
 #undef CREATE_TRACE_POINTS
+#include <trace/hooks/module.h>
 #include <trace/hooks/memory.h>
 
 #ifndef ARCH_SHF_SMALL
@@ -3689,6 +3690,7 @@ static noinline int do_init_module(struct module *mod)
 	rcu_assign_pointer(mod->kallsyms, &mod->core_kallsyms);
 #endif
 	module_enable_ro(mod, true);
+	trace_android_vh_set_module_permission(mod, true, rodata_enabled);
 	mod_tree_remove_init(mod);
 	module_arch_freeing_init(mod);
 	trace_android_vh_set_memory_nxrw((unsigned long)mod->init_layout.base,
@@ -3797,6 +3799,7 @@ static int complete_formation(struct module *mod, struct load_info *info)
 	module_bug_finalize(info->hdr, info->sechdrs, mod);
 
 	module_enable_ro(mod, false);
+	trace_android_vh_set_module_permission(mod, false, rodata_enabled);
 	module_enable_nx(mod);
 	module_enable_x(mod);
 
