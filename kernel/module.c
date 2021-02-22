@@ -63,6 +63,9 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/module.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/memory.h>
+
 #ifndef ARCH_SHF_SMALL
 #define ARCH_SHF_SMALL 0
 #endif
@@ -2258,6 +2261,8 @@ static void free_module(struct module *mod)
 	/* This may be empty, but that's OK */
 	module_arch_freeing_init(mod);
 	module_memfree(mod->init_layout.base);
+	trace_android_vh_set_memory_nxrw((unsigned long)mod->init_layout.base,
+		(mod->init_layout.size)>>PAGE_SHIFT, true);
 	kfree(mod->args);
 	percpu_modfree(mod);
 
@@ -2266,6 +2271,8 @@ static void free_module(struct module *mod)
 
 	/* Finally, free the core (containing the module structure) */
 	module_memfree(mod->core_layout.base);
+	trace_android_vh_set_memory_nxrw((unsigned long)mod->core_layout.base,
+		(mod->core_layout.size)>>PAGE_SHIFT, true);
 }
 
 void *__symbol_get(const char *symbol)
@@ -3521,7 +3528,11 @@ static void module_deallocate(struct module *mod, struct load_info *info)
 	percpu_modfree(mod);
 	module_arch_freeing_init(mod);
 	module_memfree(mod->init_layout.base);
+	trace_android_vh_set_memory_nxrw((unsigned long)mod->init_layout.base,
+		(mod->init_layout.size)>>PAGE_SHIFT, true);
 	module_memfree(mod->core_layout.base);
+	trace_android_vh_set_memory_nxrw((unsigned long)mod->core_layout.base,
+		(mod->core_layout.size)>>PAGE_SHIFT, true);
 }
 
 int __weak module_finalize(const Elf_Ehdr *hdr,
@@ -3680,6 +3691,8 @@ static noinline int do_init_module(struct module *mod)
 	module_enable_ro(mod, true);
 	mod_tree_remove_init(mod);
 	module_arch_freeing_init(mod);
+	trace_android_vh_set_memory_nxrw((unsigned long)mod->init_layout.base,
+		(mod->init_layout.size)>>PAGE_SHIFT, true);
 	mod->init_layout.base = NULL;
 	mod->init_layout.size = 0;
 	mod->init_layout.ro_size = 0;

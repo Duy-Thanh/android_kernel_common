@@ -11,6 +11,7 @@
 #include <asm/cacheflush.h>
 #include <asm/set_memory.h>
 #include <asm/tlbflush.h>
+#include <trace/hooks/memory.h>
 
 struct page_change_data {
 	pgprot_t set_mask;
@@ -131,9 +132,14 @@ int set_memory_nx(unsigned long addr, int numpages)
 
 int set_memory_x(unsigned long addr, int numpages)
 {
-	return change_memory_common(addr, numpages,
+	int ret;
+
+	ret = change_memory_common(addr, numpages,
 					__pgprot(PTE_MAYBE_GP),
 					__pgprot(PTE_PXN));
+	if (ret == 0)
+		trace_android_vh_set_memory_x(addr, numpages);
+	return ret;
 }
 
 int set_memory_valid(unsigned long addr, int numpages, int enable)

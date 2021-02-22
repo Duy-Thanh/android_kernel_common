@@ -9,6 +9,7 @@
 #include <linux/btf.h>
 #include <linux/rcupdate_trace.h>
 #include <linux/rcupdate_wait.h>
+#include <trace/hooks/memory.h>
 
 /* dummy _ops. The verifier will operate on target program's ops. */
 const struct bpf_verifier_ops bpf_extension_verifier_ops = {
@@ -375,6 +376,7 @@ void bpf_trampoline_put(struct bpf_trampoline *tr)
 	 */
 	synchronize_rcu_tasks();
 	bpf_jit_free_exec(tr->image);
+	trace_android_vh_set_memory_nxrw((unsigned long)tr->image, 1, false);
 	hlist_del(&tr->hlist);
 	kfree(tr);
 out:

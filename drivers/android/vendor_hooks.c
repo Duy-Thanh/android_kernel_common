@@ -40,6 +40,7 @@
 #include <trace/hooks/ufshcd.h>
 #include <trace/hooks/avc.h>
 #include <trace/hooks/creds.h>
+#include <trace/hooks/memory.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -174,3 +175,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_commit_creds);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_creds);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_override_creds);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_revert_creds);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_memory_x);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_memory_nxrw);
