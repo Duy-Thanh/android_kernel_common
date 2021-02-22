@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6468d660_0babdf90",
+        "filename": "android/abi_gki_aarch64_unisoc",
+        "patchSetId": 3
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-22T07:14:40Z",
+      "side": 1,
+      "message": "trailing whitespace 😞",
+      "range": {
+        "startLine": 332,
+        "startChar": 25,
+        "endLine": 332,
+        "endChar": 27
+      },
+      "revId": "8dbafe2848515246781f1a5be3294cf07f29821f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
