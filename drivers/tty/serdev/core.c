@@ -756,8 +756,8 @@ static int platform_serdev_register_devices(struct serdev_controller *ctrl)
 	struct serdev_device *serdev;
 	int err;
 
-	if (ctrl->dev.parent->bus != &platform_bus_type)
-		return -ENODEV;
+	//if (ctrl->dev.parent->bus != &platform_bus_type)
+//		return -ENODEV;
 
 	serdev = serdev_device_alloc(ctrl);
 	if (!serdev) {
@@ -814,7 +814,7 @@ int serdev_controller_add_platform(struct serdev_controller *ctrl, bool platform
 		goto err_rpm_disable;
 	}
 
-	dev_dbg(&ctrl->dev, "serdev%d registered: dev:%p\n",
+	dev_info(&ctrl->dev, "serdev%d registered: dev:%p\n",
 		ctrl->nr, &ctrl->dev);
 	return 0;
 

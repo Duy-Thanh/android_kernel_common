@@ -337,6 +337,12 @@ static int hvc_install(struct tty_driver *driver, struct tty_struct *tty)
 	rc = tty_port_install(&hp->port, driver, tty);
 	if (rc)
 		tty_port_put(&hp->port);
+
+    // now call serdev register
+    if (hp->dev) {
+        tty_port_register_device_serdev(&(hp->port),
+                driver, tty->index, hp->dev);
+    }
 	return rc;
 }
 
@@ -929,6 +935,7 @@ struct hvc_struct *hvc_alloc(uint32_t vtermno, int data,
 
 	hp->vtermno = vtermno;
 	hp->data = data;
+	hp->dev= NULL;
 	hp->ops = ops;
 	hp->outbuf_size = outbuf_size;
 	hp->outbuf = &((char *)hp)[ALIGN(sizeof(*hp), sizeof(long))];

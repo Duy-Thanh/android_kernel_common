@@ -1253,6 +1253,8 @@ static int init_port_console(struct port *port)
 		port->cons.hvc = NULL;
 		return ret;
 	}
+	port->cons.hvc->dev = port->dev;
+
 	spin_lock_irq(&pdrvdata_lock);
 	pdrvdata.next_vtermno++;
 	list_add_tail(&port->cons.list, &pdrvdata.consoles);
