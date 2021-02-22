@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "593b69a4_c9ebb624",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 1140,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-22T07:13:01Z",
+      "side": 1,
+      "message": "no driver should be messing with this, what needs this call?",
+      "range": {
+        "startLine": 1140,
+        "startChar": 2,
+        "endLine": 1140,
+        "endChar": 12
+      },
+      "revId": "b0b73d79f618a95940a9dad597cef4ddec6412a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d22e4b79_6c7b6cbe",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 1754,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-22T07:13:01Z",
+      "side": 1,
+      "message": "drivers should not call this directly, why is this needed?",
+      "range": {
+        "startLine": 1754,
+        "startChar": 2,
+        "endLine": 1754,
+        "endChar": 16
+      },
+      "revId": "b0b73d79f618a95940a9dad597cef4ddec6412a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
