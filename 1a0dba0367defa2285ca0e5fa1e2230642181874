@@ -16,6 +16,24 @@
       "message": "This can be dropped as an alternate version of this has been merged upstream. https://patchwork.kernel.org/project/linux-usb/list/?series\u003d425705\u0026state\u003d*",
       "revId": "1a0dba0367defa2285ca0e5fa1e2230642181874",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "744908f3_e5b612bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-23T15:24:33Z",
+      "side": 1,
+      "message": "Thanks, will drop this, and the other ones you marked as obsolete.",
+      "parentUuid": "a41aa7be_f9da3b8a",
+      "revId": "1a0dba0367defa2285ca0e5fa1e2230642181874",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
