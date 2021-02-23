@@ -46,6 +46,30 @@
       },
       "revId": "f0b7366d52c578bbf03cba1174e0b467e023f57b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1699d25_8cc4b9b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-23T12:29:28Z",
+      "side": 1,
+      "message": "I do not think the coresight git tree is stable...",
+      "parentUuid": "cc572dd8_7b3db24b",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 67
+      },
+      "revId": "f0b7366d52c578bbf03cba1174e0b467e023f57b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
