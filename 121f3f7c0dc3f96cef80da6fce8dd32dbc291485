@@ -128,6 +128,30 @@
       },
       "revId": "121f3f7c0dc3f96cef80da6fce8dd32dbc291485",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f747f19d_c489130f",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-23T17:18:29Z",
+      "side": 1,
+      "message": "We build ZRAM and ZSMALLOC as modules because some partners need to be able to customize them (see: b/150917000). I discussed this with Minchan and for GKI 2.0 it was infeasible to upstream all these features. When these drivers include the needed features we will be able to build them as part of GKI but currently we have to keep them as modules.",
+      "parentUuid": "136205a7_2e95c012",
+      "range": {
+        "startLine": 1190,
+        "startChar": 0,
+        "endLine": 1190,
+        "endChar": 12
+      },
+      "revId": "121f3f7c0dc3f96cef80da6fce8dd32dbc291485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
