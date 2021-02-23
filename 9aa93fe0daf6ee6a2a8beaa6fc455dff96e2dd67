@@ -16,6 +16,24 @@
       "message": "Why do these need to be in here anyway?  Can\u0027t they now be modules?",
       "revId": "9aa93fe0daf6ee6a2a8beaa6fc455dff96e2dd67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6924493_ad4b5b85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2021-02-23T19:02:21Z",
+      "side": 1,
+      "message": "These patches are pre-requisite for a new coresight feature that is currently being discussed on the list and need to be part of android12-5.10 (not part of this series and will be bakcported as soon as new version is posted). I don\u0027t think there\u0027s a desire for this to be a out of tree module if it can be part of android12-5.10.\n\nThere\u0027s ongoing discussion with Will and Todd on how to handle all of this still. So the approach could change. Posting to gerrit for visibility and to help with speed up adoption if it is required to press the merge button sooner than later.",
+      "parentUuid": "67275f33_af1979b0",
+      "revId": "9aa93fe0daf6ee6a2a8beaa6fc455dff96e2dd67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
