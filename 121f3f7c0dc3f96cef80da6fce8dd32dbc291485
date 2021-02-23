@@ -80,6 +80,30 @@
       },
       "revId": "121f3f7c0dc3f96cef80da6fce8dd32dbc291485",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e84b606f_a75fd88f",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-23T07:25:59Z",
+      "side": 1,
+      "message": "Yes, if you want zsmalloc enabled, we can do that, it will be much easier than all of these extra symbols so please create a bug for that and we can discuss it there.",
+      "parentUuid": "930d24f3_8c41bb8f",
+      "range": {
+        "startLine": 1190,
+        "startChar": 0,
+        "endLine": 1190,
+        "endChar": 12
+      },
+      "revId": "121f3f7c0dc3f96cef80da6fce8dd32dbc291485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

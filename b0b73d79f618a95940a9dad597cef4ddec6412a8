@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "46e28e41_64078936",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 1140,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-23T07:25:59Z",
+      "side": 1,
+      "message": "We are being a bit more strict on symbols for 12 than 11 due to deadlines and things we have learned over the past year 😊",
+      "parentUuid": "7a954dce_36ea4beb",
+      "range": {
+        "startLine": 1140,
+        "startChar": 2,
+        "endLine": 1140,
+        "endChar": 12
+      },
+      "revId": "b0b73d79f618a95940a9dad597cef4ddec6412a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d22e4b79_6c7b6cbe",
         "filename": "android/abi_gki_aarch64_qcom",
         "patchSetId": 1
