@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0c08869_80893526",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2021-02-23T09:05:13Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 13,
+        "startChar": 48,
+        "endLine": 13,
+        "endChar": 62
+      },
+      "revId": "f9fee840c264fd90179f650676e86648172c848a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0d2f259f_6fab580c",
@@ -14,6 +37,40 @@
       "writtenOn": "2021-02-22T23:25:37Z",
       "side": 1,
       "message": "adding reviewers...",
+      "revId": "f9fee840c264fd90179f650676e86648172c848a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41cbcca6_9b74e000",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2021-02-23T09:05:13Z",
+      "side": 1,
+      "message": "Minor comments. Otherwise, it sounds alright.",
+      "revId": "f9fee840c264fd90179f650676e86648172c848a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db586bdf_79b928fa",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6944,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2021-02-23T09:05:13Z",
+      "side": 1,
+      "message": "Probably worth to add that we can\u0027t use DEQUEUE_SAVE here because of RT.",
       "revId": "f9fee840c264fd90179f650676e86648172c848a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
