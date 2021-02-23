@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce2df55e_e573a711",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-23T19:38:01Z",
+      "side": 1,
+      "message": "This forward declaration should be removed, otherwise it generates a build error. Please test the patch before submitting for review.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 49
+      },
+      "revId": "e5cec498976d207ac1f0356a3dfe75ee9119b60e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
