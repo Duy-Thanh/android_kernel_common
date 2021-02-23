@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (600066 ANDROID: modpost: update nits from late review)
 // SPDX-License-Identifier: GPL-2.0-or-later
 /*
  * reset controller for CSR SiRFprimaII
@@ -112,3 +113,5 @@ static int __init sirfsoc_rstc_init(void)
 	return platform_driver_register(&sirfsoc_rstc_driver);
 }
 subsys_initcall(sirfsoc_rstc_init);
+=======
+>>>>>>> BRANCH (e767b3 Merge tag 'arm-drivers-v5.12' of git://git.kernel.org/pub/sc)
