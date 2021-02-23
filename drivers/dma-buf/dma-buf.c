@@ -33,11 +33,25 @@
 
 #include "dma-buf-sysfs-stats.h"
 
+<<<<<<< HEAD   (8e42eb ANDROID: microdroid: Enable AES and POLYVAL acceleration)
 static inline int is_dma_buf_file(struct file *);
 
 #if IS_ENABLED(CONFIG_DEBUG_FS)
 static DEFINE_MUTEX(debugfs_list_mutex);
 static LIST_HEAD(debugfs_list);
+||||||| BASE
+static inline int is_dma_buf_file(struct file *);
+
+struct dma_buf_list {
+	struct list_head head;
+	struct mutex lock;
+};
+=======
+struct dma_buf_list {
+	struct list_head head;
+	struct mutex lock;
+};
+>>>>>>> CHANGE (274b5b ANDROID: dma-buf: Export is_dma_buf_file)
 
 static void __dma_buf_debugfs_list_add(struct dma_buf *dmabuf)
 {
@@ -552,10 +566,11 @@ static const struct file_operations dma_buf_fops = {
 /*
  * is_dma_buf_file - Check if struct file* is associated with dma_buf
  */
-static inline int is_dma_buf_file(struct file *file)
+int is_dma_buf_file(struct file *file)
 {
 	return file->f_op == &dma_buf_fops;
 }
+EXPORT_SYMBOL_NS_GPL(is_dma_buf_file, DMA_BUF);
 
 static struct file *dma_buf_getfile(size_t size, int flags)
 {
