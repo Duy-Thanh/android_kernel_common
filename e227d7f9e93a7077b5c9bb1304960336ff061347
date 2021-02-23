@@ -22,6 +22,30 @@
       },
       "revId": "e227d7f9e93a7077b5c9bb1304960336ff061347",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c55c91dd_aecfe07d",
+        "filename": "mm/madvise.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-02-23T00:31:41Z",
+      "side": 1,
+      "message": "In v5.10, Jann fixed core_dump part so it didn\u0027t need it.\n(4d45e75a9955, mm: remove the now-unnecessary mmget_still_valid() hack)\nHowever, 5.4 would need it since it didn\u0027t have Jann\u0027s series.\nI am not sure we need to carry on Jann\u0027s patch together for this.",
+      "parentUuid": "be0cb8c7_3c8fd04b",
+      "range": {
+        "startLine": 1111,
+        "startChar": 2,
+        "endLine": 1112,
+        "endChar": 27
+      },
+      "revId": "e227d7f9e93a7077b5c9bb1304960336ff061347",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
