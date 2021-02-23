@@ -52,6 +52,24 @@
       "parentUuid": "d853bab4_5cd1de56",
       "revId": "ef3c1579b7fc898da778b72ef1c29acf37829cc4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3a9035e_0226187a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-02-23T22:54:28Z",
+      "side": 1,
+      "message": "The check for UFSHCD_STATE_OPERATIONAL is nice to have, but I suppose it\u0027s not strictly necessary.",
+      "parentUuid": "0f1e9a1f_c2781e10",
+      "revId": "ef3c1579b7fc898da778b72ef1c29acf37829cc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
