@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a6ed21f_f27b4545",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1697971
+      },
+      "writtenOn": "2021-02-24T22:26:28Z",
+      "side": 1,
+      "message": "Doing this makes sense, given that oc is being killed anyway (such that we shouldn\u0027t take any further action in select_bad_process()).  Thanks for the fix.",
+      "revId": "b9b45822927d41df139d787635d5355c01aaa32a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
