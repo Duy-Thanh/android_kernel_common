@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f88fbce_3d358880",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-24T00:34:35Z",
+      "side": 1,
+      "message": "Yes, it\u0027s used at https://android-review.googlesource.com/c/kernel/common/+/1603495/2/mm/oom_kill.c#1159",
+      "parentUuid": "34c98300_b46186cf",
+      "range": {
+        "startLine": 376,
+        "startChar": 1,
+        "endLine": 376,
+        "endChar": 27
+      },
+      "revId": "1f19c4e1f39e298f95422cdc7a58c46288a291ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ee914b7_109fbc7f",
         "filename": "mm/oom_kill.c",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2021-02-24T00:13:40Z",
       "side": 1,
       "message": "oc-\u003echosen_non_negative_adj is set to NULL?",
+      "range": {
+        "startLine": 382,
+        "startChar": 39,
+        "endLine": 382,
+        "endChar": 63
+      },
+      "revId": "1f19c4e1f39e298f95422cdc7a58c46288a291ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad15b6c7_72f692cc",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-02-24T00:34:35Z",
+      "side": 1,
+      "message": "Yeah but oc-\u003echosen_non_negative_adj is not expected to be used by the caller, so it should not be considered part of function\u0027s API. Besides, oc-\u003echosen_non_negative_adj is an out-of-tree change, so I don\u0027t want to generate extra diffs if possible.",
+      "parentUuid": "2ee914b7_109fbc7f",
       "range": {
         "startLine": 382,
         "startChar": 39,
