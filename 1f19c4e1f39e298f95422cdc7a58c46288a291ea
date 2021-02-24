@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dfe9767_9e18cc93",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-02-24T01:29:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5f88fbce_3d358880",
+      "range": {
+        "startLine": 376,
+        "startChar": 1,
+        "endLine": 376,
+        "endChar": 27
+      },
+      "revId": "1f19c4e1f39e298f95422cdc7a58c46288a291ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ee914b7_109fbc7f",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Yeah but oc-\u003echosen_non_negative_adj is not expected to be used by the caller, so it should not be considered part of function\u0027s API. Besides, oc-\u003echosen_non_negative_adj is an out-of-tree change, so I don\u0027t want to generate extra diffs if possible.",
       "parentUuid": "2ee914b7_109fbc7f",
+      "range": {
+        "startLine": 382,
+        "startChar": 39,
+        "endLine": 382,
+        "endChar": 63
+      },
+      "revId": "1f19c4e1f39e298f95422cdc7a58c46288a291ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8586219e_05fae35f",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-02-24T01:29:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ad15b6c7_72f692cc",
       "range": {
         "startLine": 382,
         "startChar": 39,
