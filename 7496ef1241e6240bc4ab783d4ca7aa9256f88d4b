@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "805cc239_779b166e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-02-24T11:48:59Z",
+      "side": 1,
+      "message": "The abi.xml is currently not enforced, hence your diff contains a lot of unrelated changes. How about we do the abi.xml in a separate change that does not have a relation to the THP enablement.",
+      "revId": "7496ef1241e6240bc4ab783d4ca7aa9256f88d4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
