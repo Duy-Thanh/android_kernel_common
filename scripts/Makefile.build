@@ -445,10 +445,7 @@ cmd_link_multi-m =						\
 	rm -f $@.in
 else
 quiet_cmd_link_multi-m = LD [M]  $@
-cmd_link_multi-m =						\
-	$(file >$@.in,$(filter %.o,$^))				\
-	$(LD) $(ld_flags) -r -o $@ @$@.in;			\
-	rm -f $@.in
+cmd_link_multi-m = $(LD) $(ld_flags) -r -o $@ $(filter %.o,$^)
 endif
 
 $(multi-used-m): FORCE
