@@ -127,6 +127,7 @@ void pci_update_resource(struct pci_dev *dev, int resno)
 		pci_iov_update_resource(dev, resno);
 #endif
 }
+EXPORT_SYMBOL_GPL(pci_update_resource);
 
 int pci_claim_resource(struct pci_dev *dev, int resource)
 {
