@@ -31,12 +31,13 @@
 
 #include "dma-buf-sysfs-stats.h"
 
-struct dma_buf_list {
-	struct list_head head;
-	struct mutex lock;
-};
-
 static struct dma_buf_list db_list;
+
+struct dma_buf_list *get_db_list(void)
+{
+	return &db_list;
+}
+EXPORT_SYMBOL_GPL(get_db_list);
 
 static char *dmabuffs_dname(struct dentry *dentry, char *buffer, int buflen)
 {
