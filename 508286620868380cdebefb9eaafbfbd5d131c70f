@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecea1018_95c48330",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-02-26T16:50:07Z",
+      "side": 1,
+      "message": "The actual merge looks fine, but there are actually no conflicts in fs/iomap/ anymore because the conflicting code got removed by https://android-review.googlesource.com/q/topic:fscrypt-dio-fix.",
+      "revId": "508286620868380cdebefb9eaafbfbd5d131c70f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
