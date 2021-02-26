@@ -1,0 +1,41 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008487978",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1606818?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "e148ac4e_6e7e1aab",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 9,
+                "startChar": 1,
+                "endLine": 9,
+                "endChar": 1
+              },
+              "replacement": "Signed-off-by: Greg Kroah-Hartman \u003cgregkh@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "4ded3699_61b1ac76",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-02-26T08:05:45Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Greg Kroah-Hartman \u003cgregkh@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 359526141 android-build.ayeaye-python-dispatcher_20210225.05_p0",
+      "revId": "8267138b310be8318e43b17ca497205b15233d9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
