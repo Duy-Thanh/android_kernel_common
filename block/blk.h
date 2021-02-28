@@ -202,8 +202,6 @@ static inline void elevator_exit(struct request_queue *q,
 	__elevator_exit(q, e);
 }
 
-struct block_device *__disk_get_part(struct gendisk *disk, int partno);
-
 ssize_t part_size_show(struct device *dev, struct device_attribute *attr,
 		char *buf);
 ssize_t part_stat_show(struct device *dev, struct device_attribute *attr,
@@ -334,8 +332,6 @@ void blk_queue_free_zone_bitmaps(struct request_queue *q);
 #else
 static inline void blk_queue_free_zone_bitmaps(struct request_queue *q) {}
 #endif
-
-struct block_device *disk_map_sector_rcu(struct gendisk *disk, sector_t sector);
 
 int blk_alloc_devt(struct block_device *part, dev_t *devt);
 void blk_free_devt(dev_t devt);
