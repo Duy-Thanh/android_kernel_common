@@ -16,6 +16,23 @@
       "message": "LGTM, leaving my +2.",
       "revId": "f6946bae8a178f1c5cda2b2dfafd2a1635ff2ad9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b44cfb1_b31fba08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-02-28T07:42:56Z",
+      "side": 1,
+      "message": "Needs a .xml file update at the same time.",
+      "revId": "f6946bae8a178f1c5cda2b2dfafd2a1635ff2ad9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
