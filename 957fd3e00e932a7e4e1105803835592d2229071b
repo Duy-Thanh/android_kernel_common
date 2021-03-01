@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b68dfdb3_486a9e6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-03-01T23:19:11Z",
+      "side": 1,
+      "message": "Just a patch to drop a workaround needed for 5.11 (fix landed in 5.12)",
+      "revId": "957fd3e00e932a7e4e1105803835592d2229071b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
