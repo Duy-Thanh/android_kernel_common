@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cdbc9b9_5afe1c97",
+        "filename": "include/uapi/linux/v4l2-controls.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-01T19:27:20Z",
+      "side": 1,
+      "message": "are these the same numbers as in Linus\u0027s tree?",
+      "range": {
+        "startLine": 581,
+        "startChar": 0,
+        "endLine": 581,
+        "endChar": 72
+      },
+      "revId": "4fabcfb0b2d00463f3f20a676fdd115ea8d446fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "857df68b_b4d8cd52",
+        "filename": "include/uapi/linux/v4l2-controls.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-01T19:27:20Z",
+      "side": 1,
+      "message": "same values here too?",
+      "range": {
+        "startLine": 773,
+        "startChar": 0,
+        "endLine": 773,
+        "endChar": 75
+      },
+      "revId": "4fabcfb0b2d00463f3f20a676fdd115ea8d446fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
