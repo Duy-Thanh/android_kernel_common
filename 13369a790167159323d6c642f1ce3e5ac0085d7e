@@ -16,6 +16,23 @@
       "message": "diff --git a/fs/verity/enable.c b/fs/verity/enable.c\nindex f7e997a01ad0..835c3399fee5 100644\n--- a/fs/verity/enable.c\n+++ b/fs/verity/enable.c\n@@ -356,7 +356,7 @@ int fsverity_ioctl_enable(struct file *filp, const void __user *uarg)\n        if (arg.block_size !\u003d PAGE_SIZE)\n                return -EINVAL;\n \n-       if (arg.salt_size \u003e sizeof_field(struct fsverity_descriptor, salt))\n+       if (arg.salt_size \u003e FIELD_SIZEOF(struct fsverity_descriptor, salt))\n                return -EMSGSIZE;\n \n        if (arg.sig_size \u003e FS_VERITY_MAX_SIGNATURE_SIZE)\ndiff --git a/fs/verity/fsverity_private.h b/fs/verity/fsverity_private.h\nindex a7920434bae5..a275cad1548a 100644\n--- a/fs/verity/fsverity_private.h\n+++ b/fs/verity/fsverity_private.h\n@@ -14,7 +14,7 @@\n \n #define pr_fmt(fmt) \"fs-verity: \" fmt\n \n-#include \u003ccrypto/sha2.h\u003e\n+#include \u003ccrypto/sha.h\u003e\n #include \u003clinux/fsverity.h\u003e\n #include \u003clinux/mempool.h\u003e",
       "revId": "13369a790167159323d6c642f1ce3e5ac0085d7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c1cb389_6492af8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-03-01T23:36:20Z",
+      "side": 1,
+      "message": "Merge of verity with\n\nANDROID: fs-verity: Export function to check signatures\n\nis good - incfs still compiles and passes tests, and the change looks identical to ToT android-mainline",
+      "revId": "13369a790167159323d6c642f1ce3e5ac0085d7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
