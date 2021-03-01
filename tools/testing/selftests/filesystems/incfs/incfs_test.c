@@ -3709,6 +3709,96 @@ static X509 *get_cert(EVP_PKEY *key)
 	return x509;
 }
 
+#ifdef OPENSSL_IS_BORINGSSL
+static int sign(EVP_PKEY *pkey, X509 *cert, const char *data, size_t len,
+		unsigned char **sig, size_t *sig_len)
+{
+	int result = TEST_FAILURE;
+
+	EVP_MD_CTX md_ctx;
+	BIGNUM *serial;
+	uint8_t *name_der = NULL;
+	int name_der_len;
+	uint8_t *raw_sig = NULL, *pkcs7_data = NULL;
+	size_t raw_sig_len, pkcs7_data_len;
+	int sig_nid;
+	CBB out, outer_seq, wrapped_seq, seq, digest_algos_set, digest_algo,
+	    null, content_info, signer_infos, signer_info, issuer_and_serial,
+	    sign_algo, signature;
+	const EVP_MD *md = EVP_sha256();
+
+	EVP_MD_CTX_init(&md_ctx);
+	serial = ASN1_INTEGER_to_BN(X509_get_serialNumber(cert), NULL);
+
+	TESTNE(CBB_init(&out, 1024), 0);
+
+	TEST(name_der_len = i2d_X509_NAME(X509_get_subject_name(cert), &name_der),
+	     name_der_len >= 0);
+	TESTNE(EVP_DigestSignInit(&md_ctx, NULL, md, NULL, pkey), 0);
+
+	raw_sig_len = EVP_PKEY_size(pkey);
+	TEST(raw_sig = calloc(raw_sig_len, 1), raw_sig);
+	TESTNE(EVP_DigestSign(&md_ctx, raw_sig, &raw_sig_len,
+			      (const uint8_t *)data, len),
+	       0);
+
+	sig_nid = EVP_PKEY_id(pkey);
+	/*
+	 * To mirror OpenSSL behaviour, always use |NID_rsaEncryption| with RSA
+	 * rather than the combined hash+pkey NID.
+	 */
+	if (sig_nid != NID_rsaEncryption) {
+		OBJ_find_sigid_by_algs(&sig_nid, EVP_MD_type(md),
+				       EVP_PKEY_id(pkey));
+	}
+
+	/* See https://tools.ietf.org/html/rfc2315#section-7 */
+	TESTNE(CBB_add_asn1(&out, &outer_seq, CBS_ASN1_SEQUENCE), 0);
+	TESTNE(OBJ_nid2cbb(&outer_seq, NID_pkcs7_signed), 0);
+	TESTNE(CBB_add_asn1(&outer_seq, &wrapped_seq, CBS_ASN1_CONTEXT_SPECIFIC |
+		  CBS_ASN1_CONSTRUCTED | 0), 0);
+	/* See https://tools.ietf.org/html/rfc2315#section-9.1 */
+	TESTNE(CBB_add_asn1(&wrapped_seq, &seq, CBS_ASN1_SEQUENCE), 0);
+	TESTNE(CBB_add_asn1_uint64(&seq, 1 /* version */), 0);
+	TESTNE(CBB_add_asn1(&seq, &digest_algos_set, CBS_ASN1_SET), 0);
+	TESTNE(CBB_add_asn1(&digest_algos_set, &digest_algo, CBS_ASN1_SEQUENCE), 0);
+	TESTNE(OBJ_nid2cbb(&digest_algo, EVP_MD_type(md)), 0);
+	TESTNE(CBB_add_asn1(&digest_algo, &null, CBS_ASN1_NULL), 0);
+	TESTNE(CBB_add_asn1(&seq, &content_info, CBS_ASN1_SEQUENCE), 0);
+	TESTNE(OBJ_nid2cbb(&content_info, NID_pkcs7_data), 0);
+	TESTNE(CBB_add_asn1(&seq, &signer_infos, CBS_ASN1_SET), 0);
+	TESTNE(CBB_add_asn1(&signer_infos, &signer_info, CBS_ASN1_SEQUENCE), 0);
+	TESTNE(CBB_add_asn1_uint64(&signer_info, 1 /* version */), 0);
+	TESTNE(CBB_add_asn1(&signer_info, &issuer_and_serial,
+		  CBS_ASN1_SEQUENCE), 0);
+	TESTNE(CBB_add_bytes(&issuer_and_serial, name_der, name_der_len), 0);
+	TESTNE(BN_marshal_asn1(&issuer_and_serial, serial), 0);
+	TESTNE(CBB_add_asn1(&signer_info, &digest_algo, CBS_ASN1_SEQUENCE), 0);
+	TESTNE(OBJ_nid2cbb(&digest_algo, EVP_MD_type(md)), 0);
+	TESTNE(CBB_add_asn1(&digest_algo, &null, CBS_ASN1_NULL), 0);
+	TESTNE(CBB_add_asn1(&signer_info, &sign_algo, CBS_ASN1_SEQUENCE), 0);
+	TESTNE(OBJ_nid2cbb(&sign_algo, sig_nid), 0);
+	TESTNE(CBB_add_asn1(&sign_algo, &null, CBS_ASN1_NULL), 0);
+	TESTNE(CBB_add_asn1(&signer_info, &signature, CBS_ASN1_OCTETSTRING), 0);
+	TESTNE(CBB_add_bytes(&signature, raw_sig, raw_sig_len), 0);
+	TESTNE(CBB_finish(&out, &pkcs7_data, &pkcs7_data_len), 0);
+
+	TEST(*sig = malloc(pkcs7_data_len), *sig);
+	memcpy(*sig, pkcs7_data, pkcs7_data_len);
+	*sig_len = pkcs7_data_len;
+
+	result = TEST_SUCCESS;
+out:
+	OPENSSL_free(pkcs7_data);
+	OPENSSL_free(name_der);
+	free(raw_sig);
+	BN_free(serial);
+	EVP_MD_CTX_cleanup(&md_ctx);
+	return result;
+}
+
+#else /* OPENSSL_IS_BORINGSSL */
+
 static int sign(EVP_PKEY *key, X509 *cert, const char *data, size_t len,
 		unsigned char **sig, size_t *sig_len)
 {
@@ -3739,6 +3829,7 @@ out:
 	BIO_free(bio);
 	return result;
 }
+#endif /* OPENSSL_IS_BORINGSSL */
 
 static int verity_installed(const char *mount_dir, int cmd_fd, bool *installed)
 {
@@ -3896,7 +3987,7 @@ static int verity_test_optional_sigs(const char *mount_dir, bool use_signatures)
 	X509 *cert = NULL;
 	BIO *mem = NULL;
 	long len;
-	void *ptr;
+	char *ptr;
 	FILE *proc_key_fd = NULL;
 	char *line = NULL;
 	size_t read = 0;
@@ -3914,7 +4005,7 @@ static int verity_test_optional_sigs(const char *mount_dir, bool use_signatures)
 	TEST(key = create_key(), key);
 	TEST(cert = get_cert(key), cert);
 
-	TEST(proc_key_fd = fopen("/proc/keys", "r"), proc_key_fd != NULL);
+	TEST(proc_key_fd = fopen("/proc/keys", "re"), proc_key_fd != NULL);
 	while (getline(&line, &read, proc_key_fd) != -1)
 		if (strstr(line, ".fs-verity"))
 			key_id = strtol(line, NULL, 16);
