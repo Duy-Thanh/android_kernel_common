@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "939078bb_eca0856c",
+        "filename": "drivers/scsi/ufs/ufs-sysfs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 884,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2021-03-01T20:13:17Z",
+      "side": 1,
+      "message": "Is this upstream code? If not, just move this inside the hook since you aren\u0027t really doing anything with the return value?",
+      "range": {
+        "startLine": 881,
+        "startChar": 0,
+        "endLine": 884,
+        "endChar": 18
+      },
+      "revId": "922b65df32ae057ecd39b0a3bc1fc35225972f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36bdefad_7f30f6f2",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2601,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2021-03-01T20:13:17Z",
+      "side": 1,
+      "message": "Since you actually have to change the flow on error, this code is fine.",
+      "range": {
+        "startLine": 2597,
+        "startChar": 0,
+        "endLine": 2601,
+        "endChar": 2
+      },
+      "revId": "922b65df32ae057ecd39b0a3bc1fc35225972f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "506747e6_f3093400",
+        "filename": "include/trace/hooks/ufshcd.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2021-03-01T20:13:17Z",
+      "side": 1,
+      "message": "AFAIR, don\u0027t use restricted hook unless it definitely need to be restricted hook. Todd can add more about this.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 23
+      },
+      "revId": "922b65df32ae057ecd39b0a3bc1fc35225972f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
