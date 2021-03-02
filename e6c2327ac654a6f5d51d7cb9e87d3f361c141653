@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b98e696e_26e2b4b4",
+        "filename": "kernel/cgroup/cpuset.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3354,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-03-02T09:41:55Z",
+      "side": 1,
+      "message": "Given that we retake the RCU read lock here, I think it\u0027s better to have one critical section and a \u0027goto unlock;\u0027 instead of the early return. Please can you rework along those lines?",
+      "range": {
+        "startLine": 3354,
+        "startChar": 1,
+        "endLine": 3354,
+        "endChar": 17
+      },
+      "revId": "e6c2327ac654a6f5d51d7cb9e87d3f361c141653",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
