@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e7259e1_902f1c68",
+        "filename": "include/linux/lsm_hooks.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1564,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-03-02T23:22:23Z",
+      "side": 1,
+      "message": "Tabs, not spaces please :-)",
+      "revId": "f5d24d2fb49180ba9e56221b636bb7f4a132a09a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5b8db88_d57e984a",
+        "filename": "include/linux/lsm_hooks.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1899,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-03-02T23:22:23Z",
+      "side": 1,
+      "message": "Likewise here.",
+      "revId": "f5d24d2fb49180ba9e56221b636bb7f4a132a09a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
