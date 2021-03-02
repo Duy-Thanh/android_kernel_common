@@ -45,6 +45,53 @@
       },
       "revId": "808c099294930c01848abc0832b2457acb306b9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77a02e48_1e488c8a",
+        "filename": "arch/arm64/mm/pageattr.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-02T19:04:03Z",
+      "side": 1,
+      "message": "...though it can be used for bpf like any other tracepoint",
+      "parentUuid": "3061504d_15dc50b5",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 48
+      },
+      "revId": "808c099294930c01848abc0832b2457acb306b9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50edaf84_5b1b0b0c",
+        "filename": "include/trace/hooks/memory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-02T19:04:03Z",
+      "side": 1,
+      "message": "Please remove along with line 14",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 6
+      },
+      "revId": "808c099294930c01848abc0832b2457acb306b9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
