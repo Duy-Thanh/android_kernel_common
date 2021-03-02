@@ -16,6 +16,24 @@
       "message": "Why 4.14-only?  Shouldn\u0027t this go to everything between 5.11 and 4.14?\n\nHow about usptream in an LTS release instead?",
       "revId": "a3d15ae273a72d77596c48783e569e276f62f526",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c19a794_c3fd2478",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-03-02T17:35:39Z",
+      "side": 1,
+      "message": "The virtual devices only use virtio_gpu from upstream on 4.14 and mainline, otherwise we have a fork with a backported version of 5.4/5.10\u0027s to other kernels (for various reasons..)\n\nAnyway, I commented that this patch should go through -stable but it wouldn\u0027t address our need for the patch, as the code from ACK isn\u0027t being used. So, we do need to do both.",
+      "parentUuid": "edf06790_37af95a6",
+      "revId": "a3d15ae273a72d77596c48783e569e276f62f526",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
