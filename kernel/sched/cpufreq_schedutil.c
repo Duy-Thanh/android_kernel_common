@@ -183,6 +183,7 @@ static unsigned int get_next_freq(struct sugov_policy *sg_policy,
 	return cpufreq_driver_resolve_freq(policy, freq);
 }
 
+<<<<<<< HEAD   (2de9bf Merge b5183bc94b6d ("Merge tag 'irq-core-2021-02-15' of git:)
 /*
  * This function computes an effective utilization for the given CPU, to be
  * used for frequency selection given the linear relation: f = u * f_max.
@@ -290,6 +291,8 @@ unsigned long schedutil_cpu_util(int cpu, unsigned long util_cfs,
 }
 EXPORT_SYMBOL_GPL(schedutil_cpu_util);
 
+=======
+>>>>>>> BRANCH (657bd9 Merge tag 'sched-core-2021-02-17' of git://git.kernel.org/pu)
 static void sugov_get_util(struct sugov_cpu *sg_cpu)
 {
 	struct rq *rq = cpu_rq(sg_cpu->cpu);
@@ -297,7 +300,7 @@ static void sugov_get_util(struct sugov_cpu *sg_cpu)
 
 	sg_cpu->max = max;
 	sg_cpu->bw_dl = cpu_bw_dl(rq);
-	sg_cpu->util = schedutil_cpu_util(sg_cpu->cpu, cpu_util_cfs(rq), max,
+	sg_cpu->util = effective_cpu_util(sg_cpu->cpu, cpu_util_cfs(rq), max,
 					  FREQUENCY_UTIL, NULL);
 }
 
