@@ -114,3 +114,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_prepare_command);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_update_sysfs);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_command);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_compl_command);
+<<<<<<< HEAD   (aa21ac Merge 7b7028edf939 ("Merge tag 'memblock-v5.12-rc1' of git:/)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_uic_command);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_tm_command);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_check_int_errors);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_wake_up_sync);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_wake_flags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_uclamp_eff_value);
+>>>>>>> CHANGE (35c139 ANDROID: scsi: ufs: add hooks to track ufs commands)
