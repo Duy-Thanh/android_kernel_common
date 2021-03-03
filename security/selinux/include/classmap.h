@@ -247,6 +247,13 @@ struct security_class_mapping secclass_map[] = {
 	  { COMMON_SOCK_PERMS, NULL } },
 	{ "perf_event",
 	  {"open", "cpu", "kernel", "tracepoint", "read", "write"} },
+<<<<<<< HEAD   (d65182 Merge d99676af540c ("Merge tag 'drm-next-2021-02-19' of git:)
+=======
+	{ "lockdown",
+	  { "integrity", "confidentiality", NULL } },
+	{ "anon_inode",
+	  { COMMON_FILE_PERMS, NULL } },
+>>>>>>> BRANCH (d1fec2 Merge tag 'selinux-pr-20210215' of git://git.kernel.org/pub/)
 	{ NULL }
   };
 
