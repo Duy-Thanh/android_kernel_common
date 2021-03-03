@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cce1ea8_68a2b4d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2021-03-03T01:05:59Z",
+      "side": 1,
+      "message": "I had missed replacing selinux_initialized() with selinux_state.initialized, which led to treehugger failures. Fixed in latest patchset.",
+      "revId": "0d61311c12831b30414698532b8c748e1e32d8b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
