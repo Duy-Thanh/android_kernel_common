@@ -596,7 +596,7 @@ int power_supply_get_by_phandle_array(struct device_node *np,
 
 	of_node_put(power_supply_np);
 
-	return param.psy_count;
+	return ret < 0 ? ret : param.psy_count;
 }
 EXPORT_SYMBOL_GPL(power_supply_get_by_phandle_array);
 
