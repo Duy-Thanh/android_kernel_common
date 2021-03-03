@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e25871f_e3d8cadc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1301696
+      },
+      "writtenOn": "2021-03-03T08:48:10Z",
+      "side": 1,
+      "message": "Hi Greg,\n\nwould you replace this with the version on the list?\n\nhttps://patchwork.kernel.org/project/linux-usb/patch/20210214111730.1436506-1-kyletso@google.com/\n\nthe oot bug is here: http://b/181629276 [Out of Tree] usb: typec: tcpm: Export partner Source Capabilities",
+      "revId": "5b4960dde77a1848f4bf66952c323380439e11d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
