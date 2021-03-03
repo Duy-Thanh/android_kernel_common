@@ -16,6 +16,24 @@
       "message": "Are there logs anywhere you can link to?\n\nAlso, I don\u0027t suppose that swap files are being used anywhere?  This pull request totally broke swap files, fixed by upstream commit caf6912f3f4...",
       "revId": "47c1260ea822d44117cb091ded290719c1ea05e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78c15343_874bdcfb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-03T18:03:35Z",
+      "side": 1,
+      "message": "loads of logs, look at the previous trys for them.\n\nAnd no, I don\u0027t think we have swap files.",
+      "parentUuid": "2a3f4265_1c0e0861",
+      "revId": "47c1260ea822d44117cb091ded290719c1ea05e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
