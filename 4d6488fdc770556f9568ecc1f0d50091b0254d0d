@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f86da09b_cfda542d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-03-04T21:42:38Z",
+      "side": 1,
+      "message": "Oleksiy - this looks good to me. Please sign it off yourself (see the lint error message) and I will commit it next week.",
+      "revId": "4d6488fdc770556f9568ecc1f0d50091b0254d0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
