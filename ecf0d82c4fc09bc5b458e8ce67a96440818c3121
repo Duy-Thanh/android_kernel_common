@@ -16,6 +16,24 @@
       "message": "These security features needs to have proper perf. dashboard done before enabling them. Including memory overhead and power regressions if this is by default enabled. Please share your numbers with full performance and memory overhead numbers through buganizer. Please don\u0027t just give two weeks notice for these kind of big features. ",
       "revId": "ecf0d82c4fc09bc5b458e8ce67a96440818c3121",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66857705_f2a55280",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1084624
+      },
+      "writtenOn": "2021-03-04T13:45:59Z",
+      "side": 1,
+      "message": "Right now KFENCE is compiled into GKI kernels, but disabled at runtime, because CONFIG_KFENCE_SAMPLE_INTERVAL is set to 0.\nThis does not add any extra overhead to the kernels yet (no memory allocated, no runtime penalty), except for a few Kb of extra code (when I looked, there was no increase in code size - probably we got lucky to fill some existing gaps).\n\nAs for performance, Binder benchmarks show nearly zero slowdown:\n - between 0.5% speedup and 1% slowdown for the sampling value of 500ms (the recommended one);\n - between 1% and 0% speedup for the sampling value of 1000ms (which pretty much characterizes the noise level).",
+      "parentUuid": "0494a02c_9868dd1a",
+      "revId": "ecf0d82c4fc09bc5b458e8ce67a96440818c3121",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
