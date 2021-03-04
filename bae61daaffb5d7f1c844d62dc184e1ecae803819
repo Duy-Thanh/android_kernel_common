@@ -1,0 +1,41 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008677172",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1620019?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "1705d288_0d448ad0",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 34,
+                "startChar": 1,
+                "endLine": 34,
+                "endChar": 1
+              },
+              "replacement": "Signed-off-by: Minchan Kim \u003cminchan@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "467adc42_f9803db8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-03-04T20:10:27Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Minchan Kim \u003cminchan@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 360684116 android-build.ayeaye-python-dispatcher_20210303.05_p0",
+      "revId": "bae61daaffb5d7f1c844d62dc184e1ecae803819",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
