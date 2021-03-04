@@ -16,6 +16,24 @@
       "message": "Matthias: Is there a suggested bug # for this?",
       "revId": "3e54b488a184de389c4029e777b0b2958f149996",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b600af7_68dad66c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-03-04T16:12:22Z",
+      "side": 1,
+      "message": "Please use b/181865549, also for anything related to this particular topic.",
+      "parentUuid": "c5865326_7219d09d",
+      "revId": "3e54b488a184de389c4029e777b0b2958f149996",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
