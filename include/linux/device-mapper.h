@@ -319,10 +319,16 @@ struct dm_target {
 	bool discards_supported:1;
 
 	/*
+<<<<<<< HEAD   (196613 Merge 5.4.101 into android11-5.4-lts)
 	 * Set if inline crypto capabilities from this target's underlying
 	 * device(s) can be exposed via the device-mapper device.
 	 */
 	bool may_passthrough_inline_crypto:1;
+=======
+	 * Set if we need to limit the number of in-flight bios when swapping.
+	 */
+	bool limit_swap_bios:1;
+>>>>>>> BRANCH (7f324e Linux 5.4.102)
 };
 
 /* Each target can link one of these into the table */
