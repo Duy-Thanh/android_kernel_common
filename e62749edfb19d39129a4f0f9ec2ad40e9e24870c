@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b835b89e_3cffc62a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-03-04T03:48:33Z",
+      "side": 1,
+      "message": "Is it already enabled for arm64? If not should it be?",
+      "revId": "e62749edfb19d39129a4f0f9ec2ad40e9e24870c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
