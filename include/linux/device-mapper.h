@@ -317,10 +317,16 @@ struct dm_target {
 	bool split_discard_bios:1;
 
 	/*
+<<<<<<< HEAD   (9f2be5 ANDROID: Adding kprobes build configs for Cuttlefish)
 	 * Set if inline crypto capabilities from this target's underlying
 	 * device(s) can be exposed via the device-mapper device.
 	 */
 	bool may_passthrough_inline_crypto:1;
+=======
+	 * Set if we need to limit the number of in-flight bios when swapping.
+	 */
+	bool limit_swap_bios:1;
+>>>>>>> BRANCH (dfb571 Linux 4.19.178)
 };
 
 /* Each target can link one of these into the table */
