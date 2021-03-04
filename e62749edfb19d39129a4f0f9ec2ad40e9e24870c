@@ -16,6 +16,24 @@
       "message": "Is it already enabled for arm64? If not should it be?",
       "revId": "e62749edfb19d39129a4f0f9ec2ad40e9e24870c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16acca1c_0a57a590",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2021-03-04T04:00:44Z",
+      "side": 1,
+      "message": "Sorry for forgetting that. I\u0027ll upload another patch to cover that. I don\u0027t need to add one for arm right?",
+      "parentUuid": "b835b89e_3cffc62a",
+      "revId": "e62749edfb19d39129a4f0f9ec2ad40e9e24870c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
