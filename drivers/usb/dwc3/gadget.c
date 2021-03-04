@@ -21,6 +21,7 @@
 
 #include <linux/usb/ch9.h>
 #include <linux/usb/gadget.h>
+#include <trace/hooks/usb.h>
 
 #include "debug.h"
 #include "core.h"
@@ -1691,6 +1692,7 @@ static int dwc3_gadget_ep_queue(struct usb_ep *ep, struct usb_request *request,
 
 	spin_lock_irqsave(&dwc->lock, flags);
 	ret = __dwc3_gadget_ep_queue(dep, req);
+	trace_android_rvh_usb_tpmon_check_tp(request->length);
 	spin_unlock_irqrestore(&dwc->lock, flags);
 
 	return ret;
