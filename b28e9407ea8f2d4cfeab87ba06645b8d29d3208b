@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b7a9894_f9c73471",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1823900
+      },
+      "writtenOn": "2021-03-05T09:51:06Z",
+      "side": 1,
+      "message": "this is a bug fix. Is it really need a vendor hook for a bug fix which can benefit all the users?",
+      "revId": "b28e9407ea8f2d4cfeab87ba06645b8d29d3208b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
