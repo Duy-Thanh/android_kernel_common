@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74f064db_8ad3fac9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-05T09:40:04Z",
+      "side": 1,
+      "message": "need reworking to catch everything and be more obvious what is happening.",
+      "revId": "6a8158734088d45af90300b34afc3133f567a06d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1cfc5cf_1426c6c2",
+        "filename": "arch/arm64/net/bpf_jit_comp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-05T09:40:04Z",
+      "side": 1,
+      "message": "why isn\u0027t this in the bpf_jit_binary_lock_ro() function instead?",
+      "range": {
+        "startLine": 1102,
+        "startChar": 2,
+        "endLine": 1102,
+        "endChar": 34
+      },
+      "revId": "6a8158734088d45af90300b34afc3133f567a06d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64302f52_f27514a0",
+        "filename": "include/trace/hooks/memory.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-05T09:40:04Z",
+      "side": 1,
+      "message": "\"bool\" variables like this mean that no one can look at the function and determine what it does when it is in code.\n\nPlease make it explicit, this should be 2 different functions, one for ro being \"true\" and one for it being \"false\".\n\nYou can then resolve to a single function to do the real work if you want, but that way the use of the function is obvious and easy to review and understand.",
+      "range": {
+        "startLine": 14,
+        "startChar": 84,
+        "endLine": 14,
+        "endChar": 88
+      },
+      "revId": "6a8158734088d45af90300b34afc3133f567a06d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9b36f77_84375665",
+        "filename": "kernel/bpf/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2300,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-05T09:40:04Z",
+      "side": 1,
+      "message": "odd, why?  Because of the above trace hook include?",
+      "range": {
+        "startLine": 2300,
+        "startChar": 0,
+        "endLine": 2300,
+        "endChar": 25
+      },
+      "revId": "6a8158734088d45af90300b34afc3133f567a06d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6896c95d_48e189bd",
+        "filename": "kernel/bpf/trampoline.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-05T09:40:04Z",
+      "side": 1,
+      "message": "why not just hook in here?",
+      "range": {
+        "startLine": 41,
+        "startChar": 1,
+        "endLine": 41,
+        "endChar": 13
+      },
+      "revId": "6a8158734088d45af90300b34afc3133f567a06d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
