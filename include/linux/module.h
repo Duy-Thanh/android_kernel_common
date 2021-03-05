@@ -393,6 +393,7 @@ struct module {
 	const s32 *gpl_crcs;
 	bool using_gplonly_symbols;
 
+<<<<<<< HEAD   (3a3866 Merge e6ff6f86bc4d0 ("Merge tag 'for-linus' of git://git.arm)
 #ifdef CONFIG_UNUSED_SYMBOLS
 	/* unused exported symbols. */
 	const struct kernel_symbol *unused_syms;
@@ -410,14 +411,13 @@ struct module {
 	 * preserve ABI compatibility between kernels without module
 	 * signing enabled and signed modules.
 	 */
+=======
+#ifdef CONFIG_MODULE_SIG
+	/* Signature was verified. */
+>>>>>>> BRANCH (21a6ab Merge tag 'modules-for-v5.12' of git://git.kernel.org/pub/sc)
 	bool sig_ok;
 
 	bool async_probe_requested;
-
-	/* symbols that will be GPL-only in the near future. */
-	const struct kernel_symbol *gpl_future_syms;
-	const s32 *gpl_future_crcs;
-	unsigned int num_gpl_future_syms;
 
 	/* Exception table */
 	unsigned int num_exentries;
@@ -553,8 +553,6 @@ static inline unsigned long kallsyms_symbol_value(const Elf_Sym *sym)
 }
 #endif
 
-extern struct mutex module_mutex;
-
 /* FIXME: It'd be nice to isolate modules during init, too, so they
    aren't used before they (may) fail.  But presently too much code
    (IDE & SCSI) require entry into the module during init.*/
@@ -589,19 +587,8 @@ static inline bool within_module(unsigned long addr, const struct module *mod)
 	return within_module_init(addr, mod) || within_module_core(addr, mod);
 }
 
-/* Search for module by name: must hold module_mutex. */
+/* Search for module by name: must be in a RCU-sched critical section. */
 struct module *find_module(const char *name);
-
-struct symsearch {
-	const struct kernel_symbol *start, *stop;
-	const s32 *crcs;
-	enum mod_license {
-		NOT_GPL_ONLY,
-		GPL_ONLY,
-		WILL_BE_GPL_ONLY,
-	} license;
-	bool unused;
-};
 
 /* Returns 0 and fills in value, defined and namebuf, or -ERANGE if
    symnum out of range. */
@@ -610,10 +597,6 @@ int module_get_kallsym(unsigned int symnum, unsigned long *value, char *type,
 
 /* Look for this name: can be of form module:name. */
 unsigned long module_kallsyms_lookup_name(const char *name);
-
-int module_kallsyms_on_each_symbol(int (*fn)(void *, const char *,
-					     struct module *, unsigned long),
-				   void *data);
 
 extern void __noreturn __module_put_and_exit(struct module *mod,
 			long code);
@@ -798,14 +781,6 @@ static inline unsigned long module_kallsyms_lookup_name(const char *name)
 	return 0;
 }
 
-static inline int module_kallsyms_on_each_symbol(int (*fn)(void *, const char *,
-							   struct module *,
-							   unsigned long),
-						 void *data)
-{
-	return 0;
-}
-
 static inline int register_module_notifier(struct notifier_block *nb)
 {
 	/* no events will happen anyway, so this can always succeed */
@@ -893,5 +868,9 @@ static inline bool module_sig_ok(struct module *module)
 	return true;
 }
 #endif	/* CONFIG_MODULE_SIG */
+
+int module_kallsyms_on_each_symbol(int (*fn)(void *, const char *,
+					     struct module *, unsigned long),
+				   void *data);
 
 #endif /* _LINUX_MODULE_H */
