@@ -20,9 +20,9 @@
 #include <linux/scatterlist.h>
 #include <linux/slab.h>
 #include <linux/vmalloc.h>
+#include <linux/deferred-free-helper.h>
 
 #include "page_pool.h"
-#include "deferred-free-helper.h"
 
 static struct dma_heap *sys_heap;
 static struct dma_heap *sys_uncached_heap;

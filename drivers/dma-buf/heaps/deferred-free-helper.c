@@ -13,8 +13,7 @@
 #include <linux/slab.h>
 #include <linux/swap.h>
 #include <linux/sched/signal.h>
-
-#include "deferred-free-helper.h"
+#include <linux/deferred-free-helper.h>
 
 static LIST_HEAD(free_list);
 static size_t list_nr_pages;
