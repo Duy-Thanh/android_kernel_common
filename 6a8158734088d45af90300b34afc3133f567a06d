@@ -108,6 +108,52 @@
       },
       "revId": "6a8158734088d45af90300b34afc3133f567a06d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baafe202_965550ae",
+        "filename": "kernel/bpf/trampoline.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-03-05T10:40:32Z",
+      "side": 1,
+      "message": "note that func name says \u0027ro\u0027 but argument says \u0027ro\u003dfalse\u0027\n\nshould this function be called\n\ntrace_android_vh_set_memory_rw_x() ?",
+      "range": {
+        "startLine": 42,
+        "startChar": 1,
+        "endLine": 42,
+        "endChar": 33
+      },
+      "revId": "6a8158734088d45af90300b34afc3133f567a06d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e86e1e30_88a8f747",
+        "filename": "kernel/bpf/trampoline.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-03-05T10:40:32Z",
+      "side": 1,
+      "message": "is this actually trace_android_vh_set_memory_ro_nx\n\nalso should this not be inside bpf_jit_free_exec() ?",
+      "range": {
+        "startLine": 380,
+        "startChar": 1,
+        "endLine": 380,
+        "endChar": 34
+      },
+      "revId": "6a8158734088d45af90300b34afc3133f567a06d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
