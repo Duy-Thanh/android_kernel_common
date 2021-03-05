@@ -46,7 +46,15 @@ static inline void icmp_send(struct sk_buff *skb_in, int type, int code, __be32 
 #if IS_ENABLED(CONFIG_NF_NAT)
 void icmp_ndo_send(struct sk_buff *skb_in, int type, int code, __be32 info);
 #else
+<<<<<<< HEAD   (5cf5bc ANDROID: sched: move vendor hook to check scheduling nice va)
 #define icmp_ndo_send icmp_send
+=======
+static inline void icmp_ndo_send(struct sk_buff *skb_in, int type, int code, __be32 info)
+{
+	struct ip_options opts = { 0 };
+	__icmp_send(skb_in, type, code, info, &opts);
+}
+>>>>>>> BRANCH (7f324e Linux 5.4.102)
 #endif
 
 int icmp_rcv(struct sk_buff *skb);
