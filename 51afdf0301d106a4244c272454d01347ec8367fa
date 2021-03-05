@@ -16,6 +16,24 @@
       "message": "similar change needs for the android11-5.4-lts branch too.",
       "revId": "51afdf0301d106a4244c272454d01347ec8367fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3842cc1_fd43147c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-05T09:32:21Z",
+      "side": 1,
+      "message": "I will do that when this branch is merged into the android11-5.4-lts branch.",
+      "parentUuid": "f3f91875_96f084ca",
+      "revId": "51afdf0301d106a4244c272454d01347ec8367fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
