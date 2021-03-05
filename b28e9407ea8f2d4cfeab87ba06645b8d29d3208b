@@ -16,6 +16,24 @@
       "message": "this is a bug fix. Is it really need a vendor hook for a bug fix which can benefit all the users?",
       "revId": "b28e9407ea8f2d4cfeab87ba06645b8d29d3208b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d442445_3bb1732d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-05T09:52:21Z",
+      "side": 1,
+      "message": "What vendor hook?  This is a upstream-submitted patch.",
+      "parentUuid": "7b7a9894_f9c73471",
+      "revId": "b28e9407ea8f2d4cfeab87ba06645b8d29d3208b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
