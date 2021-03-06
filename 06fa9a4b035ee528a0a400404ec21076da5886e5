@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8f49181_72131732",
+        "filename": "drivers/power/supply/power_supply_core.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2021-03-06T08:11:22Z",
+      "side": 1,
+      "message": "You are also not undoing the use cnt on overflow.",
+      "range": {
+        "startLine": 548,
+        "startChar": 0,
+        "endLine": 548,
+        "endChar": 35
+      },
+      "revId": "06fa9a4b035ee528a0a400404ec21076da5886e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
