@@ -16,8 +16,10 @@ ccflags-vdso := \
 	$(filter -march=%,$(KBUILD_CFLAGS)) \
 	$(filter -m%-float,$(KBUILD_CFLAGS)) \
 	$(filter -mno-loongson-%,$(KBUILD_CFLAGS)) \
+	$(CLANG_FLAGS) \
 	-D__VDSO__
 
+<<<<<<< HEAD   (b020a9 ANDROID: GKI: update .xml file due to new symbol additions.)
 ifndef CONFIG_64BIT
 ccflags-vdso += -DBUILD_VDSO32
 endif
@@ -26,6 +28,8 @@ ifdef CONFIG_CC_IS_CLANG
 ccflags-vdso += $(filter --target=%,$(KBUILD_CFLAGS))
 endif
 
+=======
+>>>>>>> BRANCH (c4ca46 Linux 5.4.103)
 #
 # The -fno-jump-tables flag only prevents the compiler from generating
 # jump tables but does not prevent the compiler from emitting absolute
