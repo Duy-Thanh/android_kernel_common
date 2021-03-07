@@ -570,6 +570,7 @@ enum ufshcd_quirks {
 	/*
 	 * This quirk allows only sg entries aligned with page size.
 	 */
+<<<<<<< HEAD   (252479 Merge 03dc748bf110 ("Merge tag 'xfs-5.12-merge-6' of git://g)
 	UFSHCD_QUIRK_ALIGN_SG_WITH_PAGE_SIZE		= 1 << 13,
 
 	/*
@@ -594,6 +595,9 @@ enum ufshcd_quirks {
 	 * keys were stored in it.
 	 */
 	UFSHCD_QUIRK_KEYS_IN_PRDT			= 1 << 22,
+=======
+	UFSHCD_QUIRK_ALIGN_SG_WITH_PAGE_SIZE		= 1 << 14,
+>>>>>>> BRANCH (0b311e Merge tag 'scsi-misc' of git://git.kernel.org/pub/scm/linux/)
 };
 
 enum ufshcd_caps {
