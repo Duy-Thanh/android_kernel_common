@@ -1046,7 +1046,11 @@ int virtio_gpu_object_attach(struct virtio_gpu_device *vgdev,
 	}
 
 	/* gets freed when the ring has consumed it */
+<<<<<<< HEAD   (d75055 BACKPORT: drm/virtio: use kvmalloc for large allocations)
 	ents = kvmalloc_array(nents,
+=======
+	ents = kvmalloc_array(obj->pages->nents,
+>>>>>>> BRANCH (1d177c Linux 4.14.224)
 			      sizeof(struct virtio_gpu_mem_entry),
 			      GFP_KERNEL);
 	if (!ents) {

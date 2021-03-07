@@ -1080,8 +1080,12 @@ static ssize_t mm_stat_show(struct device *dev,
 			zram->limit_pages << PAGE_SHIFT,
 			max_used << PAGE_SHIFT,
 			(u64)atomic64_read(&zram->stats.same_pages),
+<<<<<<< HEAD   (d75055 BACKPORT: drm/virtio: use kvmalloc for large allocations)
 			pool_stats.pages_compacted,
 			(u64)atomic64_read(&zram->stats.huge_pages));
+=======
+			atomic_long_read(&pool_stats.pages_compacted));
+>>>>>>> BRANCH (1d177c Linux 4.14.224)
 	up_read(&zram->init_lock);
 
 	return ret;
