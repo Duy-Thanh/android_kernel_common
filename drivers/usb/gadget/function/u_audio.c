@@ -318,6 +318,7 @@ static inline void free_ep(struct uac_rtd_params *prm, struct usb_ep *ep)
 	params = &audio_dev->params;
 
 	for (i = 0; i < params->req_number; i++) {
+<<<<<<< HEAD   (5f8562 ANDROID: GKI: Enable bounds sanitizer)
 		if (prm->reqs[i]) {
 			if (usb_ep_dequeue(ep, prm->reqs[i]))
 				usb_ep_free_request(ep, prm->reqs[i]);
@@ -328,6 +329,18 @@ static inline void free_ep(struct uac_rtd_params *prm, struct usb_ep *ep)
 			 */
 
 			prm->reqs[i] = NULL;
+=======
+		if (prm->ureq[i].req) {
+			if (usb_ep_dequeue(ep, prm->ureq[i].req))
+				usb_ep_free_request(ep, prm->ureq[i].req);
+			/*
+			 * If usb_ep_dequeue() cannot successfully dequeue the
+			 * request, the request will be freed by the completion
+			 * callback.
+			 */
+
+			prm->ureq[i].req = NULL;
+>>>>>>> BRANCH (83be32 Linux 5.10.20)
 		}
 	}
 

@@ -365,6 +365,7 @@ static int etm4_enable_hw(struct etmv4_drvdata *drvdata)
 		etm4x_relaxed_write32(csa, config->pe_sel, TRCPROCSELR);
 	etm4x_relaxed_write32(csa, config->cfg, TRCCONFIGR);
 	/* nothing specific implemented */
+<<<<<<< HEAD   (5f8562 ANDROID: GKI: Enable bounds sanitizer)
 	etm4x_relaxed_write32(csa, 0x0, TRCAUXCTLR);
 	etm4x_relaxed_write32(csa, config->eventctrl0, TRCEVENTCTL0R);
 	etm4x_relaxed_write32(csa, config->eventctrl1, TRCEVENTCTL1R);
@@ -378,6 +379,22 @@ static int etm4_enable_hw(struct etmv4_drvdata *drvdata)
 	etm4x_relaxed_write32(csa, config->vinst_ctrl, TRCVICTLR);
 	etm4x_relaxed_write32(csa, config->viiectlr, TRCVIIECTLR);
 	etm4x_relaxed_write32(csa, config->vissctlr, TRCVISSCTLR);
+=======
+	writel_relaxed(0x0, drvdata->base + TRCAUXCTLR);
+	writel_relaxed(config->eventctrl0, drvdata->base + TRCEVENTCTL0R);
+	writel_relaxed(config->eventctrl1, drvdata->base + TRCEVENTCTL1R);
+	if (drvdata->stallctl)
+		writel_relaxed(config->stall_ctrl, drvdata->base + TRCSTALLCTLR);
+	writel_relaxed(config->ts_ctrl, drvdata->base + TRCTSCTLR);
+	writel_relaxed(config->syncfreq, drvdata->base + TRCSYNCPR);
+	writel_relaxed(config->ccctlr, drvdata->base + TRCCCCTLR);
+	writel_relaxed(config->bb_ctrl, drvdata->base + TRCBBCTLR);
+	writel_relaxed(drvdata->trcid, drvdata->base + TRCTRACEIDR);
+	writel_relaxed(config->vinst_ctrl, drvdata->base + TRCVICTLR);
+	writel_relaxed(config->viiectlr, drvdata->base + TRCVIIECTLR);
+	writel_relaxed(config->vissctlr,
+		       drvdata->base + TRCVISSCTLR);
+>>>>>>> BRANCH (83be32 Linux 5.10.20)
 	if (drvdata->nr_pe_cmp)
 		etm4x_relaxed_write32(csa, config->vipcssctlr, TRCVIPCSSCTLR);
 	for (i = 0; i < drvdata->nrseqstate - 1; i++)
@@ -1566,6 +1583,7 @@ static int etm4_cpu_save(struct etmv4_drvdata *drvdata)
 
 	state->trcprgctlr = etm4x_read32(csa, TRCPRGCTLR);
 	if (drvdata->nr_pe)
+<<<<<<< HEAD   (5f8562 ANDROID: GKI: Enable bounds sanitizer)
 		state->trcprocselr = etm4x_read32(csa, TRCPROCSELR);
 	state->trcconfigr = etm4x_read32(csa, TRCCONFIGR);
 	state->trcauxctlr = etm4x_read32(csa, TRCAUXCTLR);
@@ -1579,6 +1597,21 @@ static int etm4_cpu_save(struct etmv4_drvdata *drvdata)
 	state->trcbbctlr = etm4x_read32(csa, TRCBBCTLR);
 	state->trctraceidr = etm4x_read32(csa, TRCTRACEIDR);
 	state->trcqctlr = etm4x_read32(csa, TRCQCTLR);
+=======
+		state->trcprocselr = readl(drvdata->base + TRCPROCSELR);
+	state->trcconfigr = readl(drvdata->base + TRCCONFIGR);
+	state->trcauxctlr = readl(drvdata->base + TRCAUXCTLR);
+	state->trceventctl0r = readl(drvdata->base + TRCEVENTCTL0R);
+	state->trceventctl1r = readl(drvdata->base + TRCEVENTCTL1R);
+	if (drvdata->stallctl)
+		state->trcstallctlr = readl(drvdata->base + TRCSTALLCTLR);
+	state->trctsctlr = readl(drvdata->base + TRCTSCTLR);
+	state->trcsyncpr = readl(drvdata->base + TRCSYNCPR);
+	state->trcccctlr = readl(drvdata->base + TRCCCCTLR);
+	state->trcbbctlr = readl(drvdata->base + TRCBBCTLR);
+	state->trctraceidr = readl(drvdata->base + TRCTRACEIDR);
+	state->trcqctlr = readl(drvdata->base + TRCQCTLR);
+>>>>>>> BRANCH (83be32 Linux 5.10.20)
 
 	state->trcvictlr = etm4x_read32(csa, TRCVICTLR);
 	state->trcviiectlr = etm4x_read32(csa, TRCVIIECTLR);
@@ -1641,7 +1674,11 @@ static int etm4_cpu_save(struct etmv4_drvdata *drvdata)
 	state->trcclaimset = etm4x_read32(csa, TRCCLAIMCLR);
 
 	if (!drvdata->skip_power_up)
+<<<<<<< HEAD   (5f8562 ANDROID: GKI: Enable bounds sanitizer)
 		state->trcpdcr = etm4x_read32(csa, TRCPDCR);
+=======
+		state->trcpdcr = readl(drvdata->base + TRCPDCR);
+>>>>>>> BRANCH (83be32 Linux 5.10.20)
 
 	/* wait for TRCSTATR.IDLE to go up */
 	if (coresight_timeout(csa, TRCSTATR, TRCSTATR_IDLE_BIT, 1)) {
@@ -1660,8 +1697,13 @@ static int etm4_cpu_save(struct etmv4_drvdata *drvdata)
 	 * despite requesting software to save/restore state.
 	 */
 	if (!drvdata->skip_power_up)
+<<<<<<< HEAD   (5f8562 ANDROID: GKI: Enable bounds sanitizer)
 		etm4x_relaxed_write32(csa, (state->trcpdcr & ~TRCPDCR_PU),
 				      TRCPDCR);
+=======
+		writel_relaxed((state->trcpdcr & ~TRCPDCR_PU),
+				drvdata->base + TRCPDCR);
+>>>>>>> BRANCH (83be32 Linux 5.10.20)
 out:
 	etm4_cs_lock(drvdata, csa);
 	return ret;
@@ -1679,6 +1721,7 @@ static void etm4_cpu_restore(struct etmv4_drvdata *drvdata)
 
 	etm4x_relaxed_write32(csa, state->trcprgctlr, TRCPRGCTLR);
 	if (drvdata->nr_pe)
+<<<<<<< HEAD   (5f8562 ANDROID: GKI: Enable bounds sanitizer)
 		etm4x_relaxed_write32(csa, state->trcprocselr, TRCPROCSELR);
 	etm4x_relaxed_write32(csa, state->trcconfigr, TRCCONFIGR);
 	etm4x_relaxed_write32(csa, state->trcauxctlr, TRCAUXCTLR);
@@ -1692,6 +1735,21 @@ static void etm4_cpu_restore(struct etmv4_drvdata *drvdata)
 	etm4x_relaxed_write32(csa, state->trcbbctlr, TRCBBCTLR);
 	etm4x_relaxed_write32(csa, state->trctraceidr, TRCTRACEIDR);
 	etm4x_relaxed_write32(csa, state->trcqctlr, TRCQCTLR);
+=======
+		writel_relaxed(state->trcprocselr, drvdata->base + TRCPROCSELR);
+	writel_relaxed(state->trcconfigr, drvdata->base + TRCCONFIGR);
+	writel_relaxed(state->trcauxctlr, drvdata->base + TRCAUXCTLR);
+	writel_relaxed(state->trceventctl0r, drvdata->base + TRCEVENTCTL0R);
+	writel_relaxed(state->trceventctl1r, drvdata->base + TRCEVENTCTL1R);
+	if (drvdata->stallctl)
+		writel_relaxed(state->trcstallctlr, drvdata->base + TRCSTALLCTLR);
+	writel_relaxed(state->trctsctlr, drvdata->base + TRCTSCTLR);
+	writel_relaxed(state->trcsyncpr, drvdata->base + TRCSYNCPR);
+	writel_relaxed(state->trcccctlr, drvdata->base + TRCCCCTLR);
+	writel_relaxed(state->trcbbctlr, drvdata->base + TRCBBCTLR);
+	writel_relaxed(state->trctraceidr, drvdata->base + TRCTRACEIDR);
+	writel_relaxed(state->trcqctlr, drvdata->base + TRCQCTLR);
+>>>>>>> BRANCH (83be32 Linux 5.10.20)
 
 	etm4x_relaxed_write32(csa, state->trcvictlr, TRCVICTLR);
 	etm4x_relaxed_write32(csa, state->trcviiectlr, TRCVIIECTLR);
@@ -1747,7 +1805,11 @@ static void etm4_cpu_restore(struct etmv4_drvdata *drvdata)
 	etm4x_relaxed_write32(csa, state->trcclaimset, TRCCLAIMSET);
 
 	if (!drvdata->skip_power_up)
+<<<<<<< HEAD   (5f8562 ANDROID: GKI: Enable bounds sanitizer)
 		etm4x_relaxed_write32(csa, state->trcpdcr, TRCPDCR);
+=======
+		writel_relaxed(state->trcpdcr, drvdata->base + TRCPDCR);
+>>>>>>> BRANCH (83be32 Linux 5.10.20)
 
 	drvdata->state_needs_restore = false;
 
