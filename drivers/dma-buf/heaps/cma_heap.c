@@ -348,7 +348,10 @@ static struct dma_buf *cma_heap_allocate(struct dma_heap *heap,
 		ret = PTR_ERR(dmabuf);
 		goto free_pages;
 	}
+<<<<<<< HEAD   (3db2a7 Merge 5b47b10e8fb9 ("Merge tag 'pci-v5.12-changes' of git://)
 
+=======
+>>>>>>> BRANCH (fecfd0 Merge tag 'leds-5.12-rc1' of git://git.kernel.org/pub/scm/li)
 	return dmabuf;
 
 free_pages:

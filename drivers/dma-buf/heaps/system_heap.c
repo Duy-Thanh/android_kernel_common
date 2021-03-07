@@ -354,11 +354,18 @@ static struct page *alloc_largest_available(unsigned long size,
 	return NULL;
 }
 
+<<<<<<< HEAD   (3db2a7 Merge 5b47b10e8fb9 ("Merge tag 'pci-v5.12-changes' of git://)
 static struct dma_buf *system_heap_do_allocate(struct dma_heap *heap,
 					       unsigned long len,
 					       unsigned long fd_flags,
 					       unsigned long heap_flags,
 					       bool uncached)
+=======
+static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
+					    unsigned long len,
+					    unsigned long fd_flags,
+					    unsigned long heap_flags)
+>>>>>>> BRANCH (fecfd0 Merge tag 'leds-5.12-rc1' of git://git.kernel.org/pub/scm/li)
 {
 	struct system_heap_buffer *buffer;
 	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
@@ -388,8 +395,10 @@ static struct dma_buf *system_heap_do_allocate(struct dma_heap *heap,
 		 * Avoid trying to allocate memory if the process
 		 * has been killed by SIGKILL
 		 */
-		if (fatal_signal_pending(current))
+		if (fatal_signal_pending(current)) {
+			ret = -EINTR;
 			goto free_buffer;
+		}
 
 		page = alloc_largest_available(size_remaining, max_order);
 		if (!page)
@@ -422,6 +431,7 @@ static struct dma_buf *system_heap_do_allocate(struct dma_heap *heap,
 		ret = PTR_ERR(dmabuf);
 		goto free_pages;
 	}
+<<<<<<< HEAD   (3db2a7 Merge 5b47b10e8fb9 ("Merge tag 'pci-v5.12-changes' of git://)
 
 	/*
 	 * For uncached buffers, we need to initially flush cpu cache, since
@@ -434,6 +444,8 @@ static struct dma_buf *system_heap_do_allocate(struct dma_heap *heap,
 		dma_unmap_sgtable(dma_heap_get_dev(heap), table, DMA_BIDIRECTIONAL, 0);
 	}
 
+=======
+>>>>>>> BRANCH (fecfd0 Merge tag 'leds-5.12-rc1' of git://git.kernel.org/pub/scm/li)
 	return dmabuf;
 
 free_pages:
@@ -449,6 +461,7 @@ free_buffer:
 	kfree(buffer);
 
 	return ERR_PTR(ret);
+<<<<<<< HEAD   (3db2a7 Merge 5b47b10e8fb9 ("Merge tag 'pci-v5.12-changes' of git://)
 }
 
 static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
@@ -457,6 +470,8 @@ static struct dma_buf *system_heap_allocate(struct dma_heap *heap,
 					    unsigned long heap_flags)
 {
 	return system_heap_do_allocate(heap, len, fd_flags, heap_flags, false);
+=======
+>>>>>>> BRANCH (fecfd0 Merge tag 'leds-5.12-rc1' of git://git.kernel.org/pub/scm/li)
 }
 
 static const struct dma_heap_ops system_heap_ops = {
