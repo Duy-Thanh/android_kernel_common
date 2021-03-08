@@ -112,6 +112,7 @@ enum {
 	BINDER_DEBUG_INTERNAL_REFS          = 1U << 12,
 	BINDER_DEBUG_PRIORITY_CAP           = 1U << 13,
 	BINDER_DEBUG_SPINLOCKS              = 1U << 14,
+	BINDER_DEBUG_DUMP_BACKTRACE         = 1U << 15,
 };
 static uint32_t binder_debug_mask = BINDER_DEBUG_USER_ERROR |
 	BINDER_DEBUG_FAILED_TRANSACTION | BINDER_DEBUG_DEAD_TRANSACTION;
@@ -2866,7 +2867,8 @@ static void binder_transaction(struct binder_proc *proc,
 
 	t->buffer = binder_alloc_new_buf(&target_proc->alloc, tr->data_size,
 		tr->offsets_size, extra_buffers_size,
-		!reply && (t->flags & TF_ONE_WAY), current->tgid);
+		!reply && (t->flags & TF_ONE_WAY), current->tgid,
+		target_node ? target_node->debug_id : 0);
 	if (IS_ERR(t->buffer)) {
 		/*
 		 * -ESRCH indicates VMA cleared. The target is dying.
@@ -2900,7 +2902,22 @@ static void binder_transaction(struct binder_proc *proc,
 	t->buffer->transaction = t;
 	t->buffer->target_node = target_node;
 	t->buffer->clear_on_free = !!(t->flags & TF_CLEAR_BUF);
+	t->buffer->node_debug_id = target_node ? target_node->debug_id : 0;
 	trace_binder_transaction_alloc_buf(t->buffer);
+	if (t->buffer->oneway_spam_suspect) {
+		struct binder_work *dump_backtrace;
+
+		dump_backtrace = kzalloc(sizeof(*dump_backtrace), GFP_KERNEL);
+		if (dump_backtrace == NULL) {
+			return_error = BR_FAILED_REPLY;
+			return_error_param = -ENOMEM;
+			return_error_line = __LINE__;
+			goto err_alloc_dump_backtrace_failed;
+		}
+		binder_stats_created(BINDER_STAT_DUMP_BACKTRACE);
+		dump_backtrace->type = BINDER_WORK_DUMP_BACKTRACE;
+		binder_enqueue_thread_work(thread, dump_backtrace);
+	}
 
 	if (binder_alloc_copy_user_to_buffer(
 				&target_proc->alloc,
@@ -3218,6 +3235,7 @@ err_bad_object_type:
 err_bad_offset:
 err_bad_parent:
 err_copy_data_failed:
+err_alloc_dump_backtrace_failed:
 	binder_free_txn_fixups(t);
 	trace_binder_transaction_failed_buffer_release(t->buffer);
 	binder_transaction_buffer_release(target_proc, t->buffer,
@@ -4157,6 +4175,20 @@ retry:
 			binder_stat_br(proc, thread, cmd);
 			if (cmd == BR_DEAD_BINDER)
 				goto done; /* DEAD_BINDER notifications can cause transactions */
+		} break;
+		case BINDER_WORK_DUMP_BACKTRACE: {
+			binder_inner_proc_unlock(proc);
+			cmd = BR_DUMP_BACKTRACE;
+			kfree(w);
+			binder_stats_deleted(BINDER_STAT_DUMP_BACKTRACE);
+			if (put_user(cmd, (uint32_t __user *)ptr))
+				return -EFAULT;
+			ptr += sizeof(uint32_t);
+
+			binder_stat_br(proc, thread, cmd);
+			binder_debug(BINDER_DEBUG_DUMP_BACKTRACE,
+				     "%d:%d BR_DUMP_BACKTRACE\n",
+				     proc->pid, thread->pid);
 		} break;
 		default:
 			binder_inner_proc_unlock(proc);

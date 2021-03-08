@@ -452,6 +452,8 @@ enum binder_driver_return_protocol {
 	 */
 
 	BR_FAILED_REPLY = _IO('r', 17),
+
+	BR_DUMP_BACKTRACE = _IO('r', 18),
 	/*
 	 * The last transaction (either a bcTRANSACTION or
 	 * a bcATTEMPT_ACQUIRE) failed (e.g. out of memory).  No parameters.

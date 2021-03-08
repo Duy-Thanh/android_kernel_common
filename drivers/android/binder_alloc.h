@@ -34,6 +34,10 @@ struct binder_transaction;
  * @extra_buffers_size: size of space for other objects (like sg lists)
  * @user_data:          user pointer to base of buffer space
  * @pid:                pid to attribute the buffer to (caller)
+ * @node_debug_id:      debug id of target_node in use for oneway spamming
+ *                      debug
+ * @oneway_spam_suspect:%true if total allocate size of target_node exceed
+ *                      spamming detect threshold
  *
  * Bookkeeping structure for binder transaction buffers
  */
@@ -55,6 +59,8 @@ struct binder_buffer {
 	size_t extra_buffers_size;
 	void __user *user_data;
 	int    pid;
+	int    node_debug_id;
+	bool   oneway_spam_suspect;
 };
 
 /**
@@ -71,22 +77,24 @@ struct binder_lru_page {
 
 /**
  * struct binder_alloc - per-binder proc state for binder allocator
- * @vma:                vm_area_struct passed to mmap_handler
- *                      (invarient after mmap)
- * @tsk:                tid for task that called init for this proc
- *                      (invariant after init)
- * @vma_vm_mm:          copy of vma->vm_mm (invarient after mmap)
- * @buffer:             base of per-proc address space mapped via mmap
- * @buffers:            list of all buffers for this proc
- * @free_buffers:       rb tree of buffers available for allocation
- *                      sorted by size
- * @allocated_buffers:  rb tree of allocated buffers sorted by address
- * @free_async_space:   VA space available for async buffers. This is
- *                      initialized at mmap time to 1/2 the full VA space
- * @pages:              array of binder_lru_page
- * @buffer_size:        size of address space specified via mmap
- * @pid:                pid for associated binder_proc (invariant after init)
- * @pages_high:         high watermark of offset in @pages
+ * @vma:                  vm_area_struct passed to mmap_handler
+ *                        (invarient after mmap)
+ * @tsk:                  tid for task that called init for this proc
+ *                        (invariant after init)
+ * @vma_vm_mm:            copy of vma->vm_mm (invarient after mmap)
+ * @buffer:               base of per-proc address space mapped via mmap
+ * @buffers:              list of all buffers for this proc
+ * @free_buffers:         rb tree of buffers available for allocation
+ *                        sorted by size
+ * @allocated_buffers:    rb tree of allocated buffers sorted by address
+ * @free_async_space:     VA space available for async buffers. This is
+ *                        initialized at mmap time to 1/2 the full VA space
+ * @pages:                array of binder_lru_page
+ * @buffer_size:          size of address space specified via mmap
+ * @pid:                  pid for associated binder_proc (invariant after init)
+ * @pages_high:           high watermark of offset in @pages
+ * @allow_dump_backtrace: %true if current process can dump backtrace when oneway
+ *                        spamming detected
  *
  * Bookkeeping structure for per-proc address space management for binder
  * buffers. It is normally initialized during binder_init() and binder_mmap()
@@ -107,6 +115,7 @@ struct binder_alloc {
 	uint32_t buffer_free;
 	int pid;
 	size_t pages_high;
+	bool allow_dump_backtrace;
 };
 
 #ifdef CONFIG_ANDROID_BINDER_IPC_SELFTEST
@@ -122,7 +131,8 @@ extern struct binder_buffer *binder_alloc_new_buf(struct binder_alloc *alloc,
 						  size_t offsets_size,
 						  size_t extra_buffers_size,
 						  int is_async,
-						  int pid);
+						  int pid,
+						  int node_id);
 extern void binder_alloc_init(struct binder_alloc *alloc);
 extern int binder_alloc_shrinker_init(void);
 extern void binder_alloc_vma_close(struct binder_alloc *alloc);
