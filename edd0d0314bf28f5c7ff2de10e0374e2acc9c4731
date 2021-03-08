@@ -16,6 +16,24 @@
       "message": "Checking out if it\u0027s OK to use this code copied from:\n\nhttps://android.googlesource.com/platform/external/fsverity-utils/+/refs/heads/master/lib/sign_digest.c#105\n\nin GPL-2.0 code",
       "revId": "edd0d0314bf28f5c7ff2de10e0374e2acc9c4731",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf55ab9e_13304534",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-03-08T16:14:37Z",
+      "side": 1,
+      "message": "https://www.gnu.org/licenses/license-list.en.html#Expat\nLooks like it is compatible",
+      "parentUuid": "69d55bef_690a008d",
+      "revId": "edd0d0314bf28f5c7ff2de10e0374e2acc9c4731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
