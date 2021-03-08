@@ -858,6 +858,7 @@
   __fdget
   fd_install
   fget
+  file_path
   find_get_pid
   find_last_bit
   find_next_bit
@@ -924,6 +925,7 @@
   get_device
   __get_free_pages
   get_governor_parent_kobj
+  get_mm_exe_file
   get_option
   get_pid_task
   get_random_bytes
