@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82eedc9a_0db9da44",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1790165
+      },
+      "writtenOn": "2021-03-08T03:47:27Z",
+      "side": 1,
+      "message": "This would cause context switch latencies ?",
+      "range": {
+        "startLine": 638,
+        "startChar": 0,
+        "endLine": 638,
+        "endChar": 24
+      },
+      "revId": "d858e8c80fa5000d4c82f6be1eb472c8e6f7f911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
