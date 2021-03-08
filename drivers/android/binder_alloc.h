@@ -34,6 +34,8 @@ struct binder_transaction;
  * @extra_buffers_size: size of space for other objects (like sg lists)
  * @user_data:          user pointer to base of buffer space
  * @pid:                pid to attribute the buffer to (caller)
+ * @oneway_spam_suspect: %true if total allocate size of target_node exceed
+ *                      spamming detect threshold
  *
  * Bookkeeping structure for binder transaction buffers
  */
@@ -55,6 +57,7 @@ struct binder_buffer {
 	size_t extra_buffers_size;
 	void __user *user_data;
 	int    pid;
+	bool   oneway_spam_suspect;
 };
 
 /**
@@ -122,7 +125,8 @@ extern struct binder_buffer *binder_alloc_new_buf(struct binder_alloc *alloc,
 						  size_t offsets_size,
 						  size_t extra_buffers_size,
 						  int is_async,
-						  int pid);
+						  int pid,
+						  int node_id);
 extern void binder_alloc_init(struct binder_alloc *alloc);
 extern int binder_alloc_shrinker_init(void);
 extern void binder_alloc_vma_close(struct binder_alloc *alloc);

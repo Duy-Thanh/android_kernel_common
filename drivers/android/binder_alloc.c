@@ -25,6 +25,7 @@
 #include <linux/sizes.h>
 #include "binder_alloc.h"
 #include "binder_trace.h"
+#include "binder_internal.h"
 
 struct list_lru binder_alloc_lru;
 
@@ -338,14 +339,16 @@ static inline struct vm_area_struct *binder_alloc_get_vma(
 	return vma;
 }
 
-static void debug_low_async_space_locked(struct binder_alloc *alloc, int pid)
+static bool debug_low_async_space_locked(struct binder_alloc *alloc, int pid, int node_id)
 {
 	/*
-	 * Find the amount and size of buffers allocated by the current caller;
-	 * The idea is that once we cross the threshold, whoever is responsible
-	 * for the low async space is likely to try to send another async txn,
-	 * and at some point we'll catch them in the act. This is more efficient
-	 * than keeping a map per pid.
+	 * Find the amount and size of async buffers allocated by the current
+	 * caller and associated with current node.If the majority buffers
+	 * allocated by current caller goes to this node, it's a strong evidence
+	 * that the call into this node are responsible for overflowing the buffer.
+	 * Otherwise it's just the last straw that overwhelms the camel, but not
+	 * the culprit. For the buffer just applied for, target_node is NULL, so
+	 * it should also be counted.
 	 */
 	struct rb_node *n;
 	struct binder_buffer *buffer;
@@ -358,6 +361,8 @@ static void debug_low_async_space_locked(struct binder_alloc *alloc, int pid)
 		if (buffer->pid != pid)
 			continue;
 		if (!buffer->async_transaction)
+			continue;
+		if (buffer->target_node && buffer->target_node->debug_id != node_id)
 			continue;
 		total_alloc_size += binder_alloc_buffer_size(alloc, buffer)
 			+ sizeof(struct binder_buffer);
@@ -372,7 +377,9 @@ static void debug_low_async_space_locked(struct binder_alloc *alloc, int pid)
 		binder_alloc_debug(BINDER_DEBUG_USER_ERROR,
 			     "%d: pid %d spamming oneway? %zd buffers allocated for a total size of %zd\n",
 			      alloc->pid, pid, num_buffers, total_alloc_size);
+		return true;
 	}
+	return false;
 }
 
 static struct binder_buffer *binder_alloc_new_buf_locked(
@@ -381,7 +388,8 @@ static struct binder_buffer *binder_alloc_new_buf_locked(
 				size_t offsets_size,
 				size_t extra_buffers_size,
 				int is_async,
-				int pid)
+				int pid,
+				int node_id)
 {
 	struct rb_node *n = alloc->free_buffers.rb_node;
 	struct binder_buffer *buffer;
@@ -525,6 +533,7 @@ static struct binder_buffer *binder_alloc_new_buf_locked(
 	buffer->async_transaction = is_async;
 	buffer->extra_buffers_size = extra_buffers_size;
 	buffer->pid = pid;
+	buffer->oneway_spam_suspect = false;
 	if (is_async) {
 		alloc->free_async_space -= size + sizeof(struct binder_buffer);
 		binder_alloc_debug(BINDER_DEBUG_BUFFER_ALLOC_ASYNC,
@@ -536,7 +545,8 @@ static struct binder_buffer *binder_alloc_new_buf_locked(
 			 * of async space left (which is less than 10% of total
 			 * buffer size).
 			 */
-			debug_low_async_space_locked(alloc, pid);
+			buffer->oneway_spam_suspect = debug_low_async_space_locked(alloc,
+									pid, node_id);
 		}
 	}
 	return buffer;
@@ -556,6 +566,7 @@ err_alloc_buf_struct_failed:
  * @extra_buffers_size: size of extra space for meta-data (eg, security context)
  * @is_async:           buffer for async transaction
  * @pid:				pid to attribute allocation to (used for debugging)
+ * @node_id:            debug id of the node that associated with this buffer
  *
  * Allocate a new buffer given the requested sizes. Returns
  * the kernel version of the buffer pointer. The size allocated
@@ -569,13 +580,14 @@ struct binder_buffer *binder_alloc_new_buf(struct binder_alloc *alloc,
 					   size_t offsets_size,
 					   size_t extra_buffers_size,
 					   int is_async,
-					   int pid)
+					   int pid,
+					   int node_id)
 {
 	struct binder_buffer *buffer;
 
 	mutex_lock(&alloc->mutex);
 	buffer = binder_alloc_new_buf_locked(alloc, data_size, offsets_size,
-					     extra_buffers_size, is_async, pid);
+					     extra_buffers_size, is_async, pid, node_id);
 	mutex_unlock(&alloc->mutex);
 	return buffer;
 }
