@@ -174,6 +174,7 @@ struct binder_work {
 	enum binder_work_type {
 		BINDER_WORK_TRANSACTION = 1,
 		BINDER_WORK_TRANSACTION_COMPLETE,
+		BINDER_WORK_TRANSACTION_SPAM_SUSPECT,
 		BINDER_WORK_RETURN_ERROR,
 		BINDER_WORK_NODE,
 		BINDER_WORK_DEAD_BINDER,
@@ -247,6 +248,10 @@ struct binder_error {
  *                        (invariant after initialized)
  * @async_todo:           list of async work items
  *                        (protected by @proc->inner_lock)
+ * @oneway_spam_suspect:  oneway transactions related to this node suspected
+ *                        as spamming, %true also means sent BR_SPAM_SUSPECT
+ *                        to user-space once, reset when related oneway
+ *                        transactions not suspected as spamming
  *
  * Bookkeeping structure for binder nodes.
  */
@@ -288,6 +293,7 @@ struct binder_node {
 	};
 	bool has_async_transaction;
 	struct list_head async_todo;
+	bool oneway_spam_suspect;
 };
 
 struct binder_ref_death {
