@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69d55bef_690a008d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-03-08T15:43:29Z",
+      "side": 1,
+      "message": "Checking out if it\u0027s OK to use this code copied from:\n\nhttps://android.googlesource.com/platform/external/fsverity-utils/+/refs/heads/master/lib/sign_digest.c#105\n\nin GPL-2.0 code",
+      "revId": "edd0d0314bf28f5c7ff2de10e0374e2acc9c4731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
