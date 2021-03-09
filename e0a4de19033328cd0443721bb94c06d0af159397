@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd81c25e_372f5938",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-09T09:30:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ecf7e32_813038e2",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1be489f4_0b70700a",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c3b908a_1bbe067e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-09T09:30:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1be489f4_0b70700a",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4643f504_9a070b06",
@@ -48,6 +84,30 @@
       "writtenOn": "2021-03-08T07:01:20Z",
       "side": 1,
       "message": "real name here please.",
+      "range": {
+        "startLine": 17,
+        "startChar": 15,
+        "endLine": 17,
+        "endChar": 20
+      },
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9c80a6b_c7bc755b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-09T09:30:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4643f504_9a070b06",
       "range": {
         "startLine": 17,
         "startChar": 15,
@@ -111,6 +171,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f59a54f_210cd492",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2905,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-09T09:30:31Z",
+      "side": 1,
+      "message": "As we will use the node_debug_id in binder_alloc.c, but binder_node previously defined in binder.c, so we couldn\u0027t directly access buffer-\u003etarget_node-\u003edebug_id in binder_alloc.c. Now I add \u0027#include \"binder_internal.h\"\u0027 in binder_alloc.c to allow directly access.",
+      "parentUuid": "029b044b_dcb8d3a6",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa391867_4a5fa285",
         "filename": "drivers/android/binder.c",
         "patchSetId": 2
@@ -122,6 +200,24 @@
       "writtenOn": "2021-03-08T19:53:30Z",
       "side": 1,
       "message": "Do we really want to fail this case? It is a spam suspect, not confirmed spam, so it seems like logging a message and continuing w/o a backtrace would be fine.",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bdcc3bd_ec9e0aad",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2915,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-09T09:30:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa391867_4a5fa285",
       "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -143,6 +239,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9e65635_7c34a863",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2917,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-09T09:30:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed059c4c_80606b3a",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1e23c1b_52334e43",
@@ -156,6 +270,24 @@
       "writtenOn": "2021-03-08T19:53:30Z",
       "side": 1,
       "message": "I would prefer that the driver doesn\u0027t assume the user-space implementation. What the driver is doing here is notifying user-space of a spam suspect.",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "426aff51_af6e877e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4179,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-09T09:30:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1e23c1b_52334e43",
       "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -177,6 +309,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "342b5326_e248336a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4189,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-09T09:30:31Z",
+      "side": 1,
+      "message": "Seems no one, will delete it.",
+      "parentUuid": "53584ee9_0b6c8551",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70ba0cac_58e37f5d",
@@ -190,6 +340,24 @@
       "writtenOn": "2021-03-08T19:53:30Z",
       "side": 1,
       "message": "Do we need this? Is there any way to get here for !async? Don\u0027t async always have a node?",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38a868ac_2eafe845",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-09T09:30:31Z",
+      "side": 1,
+      "message": "Delete it",
+      "parentUuid": "70ba0cac_58e37f5d",
       "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -213,6 +381,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "01c8e11a_1ea4774c",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-09T09:30:31Z",
+      "side": 1,
+      "message": "node_id filtering is used to find out the real culprit. We couldn\u0027t rely solely on pid as current transaction is not necessarily the method call that is responsible for overflowing the transaction buffer, it may be the normal async transaction but happens to reach the detection threshold. In the new design, I\u0027ll return back 5 BR_SPAM_SUSPECT if the 5 different nodes related buffers all seems like spamming (number \u003e 50 or alloc size \u003e 256K). But if the node related buffers not like spamming, then no need to dump their backtrace.",
+      "parentUuid": "ba941b2f_417f574a",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57d41ef6_b9a48069",
         "filename": "drivers/android/binder_alloc.c",
         "patchSetId": 2
@@ -224,6 +410,24 @@
       "writtenOn": "2021-03-08T19:53:30Z",
       "side": 1,
       "message": "Does this ever get set to true again? We detect 1 spam event per proc?",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c2491f0_b0ea344b",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-09T09:30:31Z",
+      "side": 1,
+      "message": "In the new design, we\u0027ll detect 1 spam event per node, and the state will reset when node associated buffers count/size drop below detection threshold.",
+      "parentUuid": "57d41ef6_b9a48069",
       "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -247,6 +451,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c75def7_4eb7ed5a",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-09T09:30:31Z",
+      "side": 1,
+      "message": "Sorry I don\u0027t think it will reduce the effectiveness, reason respond above.",
+      "parentUuid": "ab6e4458_2d094e29",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20416dcf_3876b233",
         "filename": "drivers/android/binder_alloc.c",
         "patchSetId": 2
@@ -258,6 +480,24 @@
       "writtenOn": "2021-03-08T19:53:30Z",
       "side": 1,
       "message": "I\u0027m wondering if there needs to be some way to re-enable this.",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d7ab3ac_479ec1c6",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1090,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-09T09:30:31Z",
+      "side": 1,
+      "message": "In the new design, I reset the state when node associated buffers count/size drop below detection threshold, but not this field.",
+      "parentUuid": "20416dcf_3876b233",
       "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -281,6 +521,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76e0d2dd_b6626590",
+        "filename": "drivers/android/binder_alloc.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-09T09:30:31Z",
+      "side": 1,
+      "message": "Replied above.",
+      "parentUuid": "715d8943_bfd74c1e",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c27b4f69_370ac288",
         "filename": "drivers/android/binder_alloc.h",
         "patchSetId": 2
@@ -292,6 +550,24 @@
       "writtenOn": "2021-03-08T19:53:30Z",
       "side": 1,
       "message": "Is there a statement anywhere about when it is allowed and when it isn\u0027t?",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bce0724_9cf01020",
+        "filename": "drivers/android/binder_alloc.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-09T09:30:31Z",
+      "side": 1,
+      "message": "Delete this as not assume user-space implementation.",
+      "parentUuid": "c27b4f69_370ac288",
       "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
