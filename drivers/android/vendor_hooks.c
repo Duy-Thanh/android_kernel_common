@@ -176,3 +176,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_uclamp_eff_value);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpufreq_transition);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cgroup_set_task);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_syscall_prctl_finished);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_stats_enqueue_sleeper);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_stats_wait_end);
