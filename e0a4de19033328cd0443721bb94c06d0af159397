@@ -399,6 +399,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21262ef7_ae9beeb4",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-09T19:57:37Z",
+      "side": 1,
+      "message": "\"nodes related buffers\" I don\u0027t understand what you mean by this. There is 1 buffer per proc which is shared by all the nodes associated with that proc. So if the bad client sends a 100K transaction to each of 5 nodes, that will exhaust the buffer space, but won\u0027t be detected (since the per-node threshold is buffer_size/8 \u003d 1M/8 \u003d 128k).\n\nI don\u0027t understand how the node_id filtering reveals the \"real culprit\" -- isn\u0027t the culprit a thread or proc (not a node)? Isn\u0027t it sufficient to identify that the pid is the source of the spam?",
+      "parentUuid": "01c8e11a_1ea4774c",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57d41ef6_b9a48069",
         "filename": "drivers/android/binder_alloc.c",
         "patchSetId": 2
