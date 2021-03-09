@@ -206,6 +206,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be0b8f69_6fef263a",
+        "filename": "kernel/bpf/trampoline.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-09T07:41:31Z",
+      "side": 1,
+      "message": "but what you want to do is trace all instances where memory settings change, so put the hook where those memory settings change, do not worry about splitting this up into bpf/module/whatever sections, otherwise it is hard to determine you really got this all correct.",
+      "parentUuid": "4724bb36_6b399398",
+      "range": {
+        "startLine": 41,
+        "startChar": 1,
+        "endLine": 41,
+        "endChar": 13
+      },
+      "revId": "6a8158734088d45af90300b34afc3133f567a06d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baafe202_965550ae",
