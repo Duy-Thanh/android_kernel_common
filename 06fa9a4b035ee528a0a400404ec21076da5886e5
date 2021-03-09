@@ -22,6 +22,30 @@
       },
       "revId": "06fa9a4b035ee528a0a400404ec21076da5886e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e9ba0e5_a6912811",
+        "filename": "drivers/power/supply/power_supply_core.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2021-03-09T21:05:32Z",
+      "side": 1,
+      "message": "Good catch ! Wondering should I fix this in this CL itself or upload a new one.",
+      "parentUuid": "b8f49181_72131732",
+      "range": {
+        "startLine": 548,
+        "startChar": 0,
+        "endLine": 548,
+        "endChar": 35
+      },
+      "revId": "06fa9a4b035ee528a0a400404ec21076da5886e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
