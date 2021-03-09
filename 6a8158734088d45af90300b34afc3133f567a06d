@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21f93b72_47940ade",
+        "filename": "arch/arm64/net/bpf_jit_comp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 1858441
+      },
+      "writtenOn": "2021-03-09T07:08:08Z",
+      "side": 1,
+      "message": "Because bpf_jit_binary_lock_ro() function is in include/linux/filter.h.\nIf we add vendor hook in the bpf_jit_binary_lock_ro() function, we will encounter some build errors.\n\nAnd we think vendor hook has better be put in the .c file which really need this hook instead of being put in .h file.",
+      "parentUuid": "c1cfc5cf_1426c6c2",
+      "range": {
+        "startLine": 1102,
+        "startChar": 2,
+        "endLine": 1102,
+        "endChar": 34
+      },
+      "revId": "6a8158734088d45af90300b34afc3133f567a06d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64302f52_f27514a0",
         "filename": "include/trace/hooks/memory.h",
         "patchSetId": 2
@@ -54,6 +78,30 @@
       "writtenOn": "2021-03-05T09:40:04Z",
       "side": 1,
       "message": "\"bool\" variables like this mean that no one can look at the function and determine what it does when it is in code.\n\nPlease make it explicit, this should be 2 different functions, one for ro being \"true\" and one for it being \"false\".\n\nYou can then resolve to a single function to do the real work if you want, but that way the use of the function is obvious and easy to review and understand.",
+      "range": {
+        "startLine": 14,
+        "startChar": 84,
+        "endLine": 14,
+        "endChar": 88
+      },
+      "revId": "6a8158734088d45af90300b34afc3133f567a06d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b395d49_eefc4191",
+        "filename": "include/trace/hooks/memory.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1858441
+      },
+      "writtenOn": "2021-03-09T07:08:08Z",
+      "side": 1,
+      "message": "Thanks for the suggestions. I separated the function into 4 parts.",
+      "parentUuid": "64302f52_f27514a0",
       "range": {
         "startLine": 14,
         "startChar": 84,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af4ccdab_542f31a8",
+        "filename": "kernel/bpf/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2300,
+      "author": {
+        "id": 1858441
+      },
+      "writtenOn": "2021-03-09T07:08:08Z",
+      "side": 1,
+      "message": "Yes, it is because the above trace hook include. If we do not undef here, it will cause build error.",
+      "parentUuid": "b9b36f77_84375665",
+      "range": {
+        "startLine": 2300,
+        "startChar": 0,
+        "endLine": 2300,
+        "endChar": 25
+      },
+      "revId": "6a8158734088d45af90300b34afc3133f567a06d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6896c95d_48e189bd",
@@ -100,6 +172,30 @@
       "writtenOn": "2021-03-05T09:40:04Z",
       "side": 1,
       "message": "why not just hook in here?",
+      "range": {
+        "startLine": 41,
+        "startChar": 1,
+        "endLine": 41,
+        "endChar": 13
+      },
+      "revId": "6a8158734088d45af90300b34afc3133f567a06d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4724bb36_6b399398",
+        "filename": "kernel/bpf/trampoline.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1858441
+      },
+      "writtenOn": "2021-03-09T07:08:08Z",
+      "side": 1,
+      "message": "It is because this patch is about bpf.\nset_memory_x() is not only used by bpf but also used by module.\nWe think it\u0027s better be put here.",
+      "parentUuid": "6896c95d_48e189bd",
       "range": {
         "startLine": 41,
         "startChar": 1,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd9cd699_d0e7f58c",
+        "filename": "kernel/bpf/trampoline.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1858441
+      },
+      "writtenOn": "2021-03-09T07:08:08Z",
+      "side": 1,
+      "message": "Thanks for the suggestions. I separated the function into 4 parts.",
+      "parentUuid": "baafe202_965550ae",
+      "range": {
+        "startLine": 42,
+        "startChar": 1,
+        "endLine": 42,
+        "endChar": 33
+      },
+      "revId": "6a8158734088d45af90300b34afc3133f567a06d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e86e1e30_88a8f747",
@@ -146,6 +266,30 @@
       "writtenOn": "2021-03-05T10:40:32Z",
       "side": 1,
       "message": "is this actually trace_android_vh_set_memory_ro_nx\n\nalso should this not be inside bpf_jit_free_exec() ?",
+      "range": {
+        "startLine": 380,
+        "startChar": 1,
+        "endLine": 380,
+        "endChar": 34
+      },
+      "revId": "6a8158734088d45af90300b34afc3133f567a06d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6e32747_a16ca29f",
+        "filename": "kernel/bpf/trampoline.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1858441
+      },
+      "writtenOn": "2021-03-09T07:08:08Z",
+      "side": 1,
+      "message": "In the bpf_jit_free_exec(), we don\u0027t know how many pages we need, it\u0027s better to put this hook outside the bpf_jit_free_exec().",
+      "parentUuid": "e86e1e30_88a8f747",
       "range": {
         "startLine": 380,
         "startChar": 1,
