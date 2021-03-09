@@ -13,6 +13,10 @@
  */
 struct binder_transaction;
 struct task_struct;
+struct binder_alloc;
+struct binder_proc;
+struct binder_thread;
+struct binder_transaction_data;
 DECLARE_HOOK(android_vh_binder_transaction_init,
 	TP_PROTO(struct binder_transaction *t),
 	TP_ARGS(t));
@@ -25,6 +29,23 @@ DECLARE_HOOK(android_vh_binder_restore_priority,
 DECLARE_HOOK(android_vh_binder_wakeup_ilocked,
 	TP_PROTO(struct task_struct *task),
 	TP_ARGS(task));
+DECLARE_HOOK(android_vh_binder_alloc_new_buf_locked,
+	TP_PROTO(size_t size, struct binder_alloc *alloc, int is_async),
+	TP_ARGS(size, alloc, is_async));
+DECLARE_HOOK(android_vh_binder_reply,
+	TP_PROTO(struct binder_proc *target_proc, struct binder_proc *proc,
+		struct binder_thread *thread, struct binder_transaction_data *tr),
+	TP_ARGS(target_proc, proc, thread, tr));
+DECLARE_HOOK(android_vh_binder_trans,
+	TP_PROTO(struct binder_proc *target_proc, struct binder_proc *proc,
+		struct binder_thread *thread, struct binder_transaction_data *tr),
+	TP_ARGS(target_proc, proc, thread, tr));
+DECLARE_HOOK(android_vh_binder_wait_for_work,
+	TP_PROTO(struct binder_thread *thread, struct binder_proc *proc),
+	TP_ARGS(thread, proc));
+DECLARE_HOOK(android_vh_binder_open_get_hhead_and_lock,
+	TP_PROTO(struct hlist_head *hhead, struct mutex *lock),
+	TP_ARGS(hhead, lock));
 
 /* macro versions of hooks are no longer required */
 
