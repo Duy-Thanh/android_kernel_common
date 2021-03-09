@@ -281,6 +281,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_freeze_todo);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_freeze_todo_unfrozen);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_die_kernel_fault);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_sp_pc_abort);
+<<<<<<< HEAD   (5f63d0 ANDROID: mm: add vendor hooks in madvise for swap entry)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dma_buf_stats_teardown);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dpm_wait_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dpm_wait_finish);
@@ -351,3 +352,25 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_heap_buffer_alloc_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_heap_buffer_alloc_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_adjust);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_bypass);
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_el1_undef);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_el1_bti);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_el1_fpac);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_panic_unhandled);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gzvm_vcpu_exit_reason);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_mutex_list_add);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_unlock_slowpath);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_alloc_new_buf_locked);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_el1_undef);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_el1_bti);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_el1_fpac);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_panic_unhandled);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gzvm_vcpu_exit_reason);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_mutex_list_add);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_unlock_slowpath);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_alloc_new_buf_locked);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_preset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_reply);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_trans);
+>>>>>>> CHANGE (69fe17 ANDROID: Add vendor hooks for binder perf tuning)
