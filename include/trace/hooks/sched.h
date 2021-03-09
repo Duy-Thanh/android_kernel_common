@@ -275,6 +275,13 @@ DECLARE_RESTRICTED_HOOK(android_rvh_uclamp_eff_value,
 		 struct uclamp_se *uclamp_default, unsigned long *ret),
 	TP_ARGS(p, clamp_id, uclamp_default, ret), 1);
 
+DECLARE_HOOK(android_vh_update_stats_wait_end,
+	TP_PROTO(struct task_struct *task, unsigned long delta),
+	TP_ARGS(task, delta));
+
+DECLARE_HOOK(android_vh_update_stats_enqueue_sleeper,
+	TP_PROTO(struct task_struct *tsk, u64 delta),
+	TP_ARGS(tsk, delta));
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_SCHED_H */

@@ -923,6 +923,7 @@ update_stats_wait_end(struct cfs_rq *cfs_rq, struct sched_entity *se)
 			return;
 		}
 		trace_sched_stat_wait(p, delta);
+		trace_android_vh_update_stats_wait_end(p, delta);
 	}
 
 	__schedstat_set(se->statistics.wait_max,
@@ -981,6 +982,7 @@ update_stats_enqueue_sleeper(struct cfs_rq *cfs_rq, struct sched_entity *se)
 				__schedstat_add(se->statistics.iowait_sum, delta);
 				__schedstat_inc(se->statistics.iowait_count);
 				trace_sched_stat_iowait(tsk, delta);
+				trace_android_vh_update_stats_enqueue_sleeper(tsk, delta);
 			}
 
 			trace_sched_stat_blocked(tsk, delta);
