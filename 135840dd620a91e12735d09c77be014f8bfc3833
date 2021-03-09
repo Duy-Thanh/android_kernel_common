@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0772ba95_37ac1b57",
+        "filename": "drivers/android/binder_alloc.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-09T09:41:45Z",
+      "side": 1,
+      "message": "put into the bit field above?",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 28
+      },
+      "revId": "135840dd620a91e12735d09c77be014f8bfc3833",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "719d265f_5ad926e9",
+        "filename": "drivers/android/binder_alloc_selftest.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-09T09:41:45Z",
+      "side": 1,
+      "message": "why even have a \"node_id\" if you only ever set it to 0?",
+      "range": {
+        "startLine": 122,
+        "startChar": 65,
+        "endLine": 122,
+        "endChar": 66
+      },
+      "revId": "135840dd620a91e12735d09c77be014f8bfc3833",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
