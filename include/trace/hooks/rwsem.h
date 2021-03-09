@@ -26,12 +26,21 @@ DECLARE_HOOK(android_vh_alter_rwsem_list_add,
 		 struct rw_semaphore *sem,
 		 bool *already_on_list),
 	TP_ARGS(waiter, sem, already_on_list));
+<<<<<<< HEAD   (276a5e ANDROID: uapi: icmp: Bionic compat with __unused)
 #else
 #define trace_android_vh_rwsem_init(sem)
 #define trace_android_vh_rwsem_wake(sem)
 #define trace_android_vh_rwsem_write_finished(sem)
 #define trace_android_vh_alter_rwsem_list_add(waiter, sem, already_on_list)
 #endif
+=======
+DECLARE_HOOK(android_vh_rwsem_wake_finish,
+	TP_PROTO(struct rw_semaphore *sem),
+	TP_ARGS(sem));
+
+/* macro versions of hooks are no longer required */
+
+>>>>>>> CHANGE (80b434 ANDROID: vendor_hooks: Add hooks for rwsem and mutex)
 #endif /* _TRACE_HOOK_RWSEM_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
