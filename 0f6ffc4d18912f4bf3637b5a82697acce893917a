@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e885d68e_137ea0b5",
+        "filename": "include/linux/mutex.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-09T14:48:18Z",
+      "side": 1,
+      "message": "Given the huge numbers of these structures in the kernel, why does it need to be increased?\n\nWhat are you doing in a lock that can not be submitted upsteam?",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 21
+      },
+      "revId": "0f6ffc4d18912f4bf3637b5a82697acce893917a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6616919_21032903",
+        "filename": "kernel/locking/mutex.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-09T14:48:18Z",
+      "side": 1,
+      "message": "how can this ever be true?  You only add the mutex to the list if it is not present on the list already.  Walking the whole list is going to be expensive, right?",
+      "range": {
+        "startLine": 218,
+        "startChar": 6,
+        "endLine": 218,
+        "endChar": 21
+      },
+      "revId": "0f6ffc4d18912f4bf3637b5a82697acce893917a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
