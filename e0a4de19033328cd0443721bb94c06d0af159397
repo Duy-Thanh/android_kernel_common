@@ -187,6 +187,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dd33425_bda2ab78",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2905,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-10T07:04:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f59a54f_210cd492",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa391867_4a5fa285",
@@ -417,6 +435,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f750536_e161a7c1",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-10T07:04:27Z",
+      "side": 1,
+      "message": "In practice, most spam comes from same API(called many times). For debugging purpose, getting culprit pid/tid is not enough, knowing which API this thread is calling is valuable. And this is why we want to dump the backtrace of current thread.\n\nIf the spam API continuously called，the spam warning log will continue to be output, but we can\u0027t continue to dump the backtrace (otherwise there will be too many backtrace logs, kernel warning won\u0027t as it has ratelimit). So I choice to dump the backtrace when the spam buffers size/count first time exceed the threshold. But if the bad client called 49 times spam API and at the 50th time, it called a normal API. Then we will dump the backtrace of normal API if not filtering by node.\n\nStrictly speaking, We must locate the API through node and code combination, maybe pass node and code together is a better choice? \n\nIn order to prevent the situation you said cannot be detected, so I keep the warning log output for the process, though it couldn\u0027t output the backtrace. For the situation that everyone\u0027s average occupancy async buffer, seems lower the threshold is never guarantee the success of all tests...",
+      "parentUuid": "21262ef7_ae9beeb4",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57d41ef6_b9a48069",
         "filename": "drivers/android/binder_alloc.c",
         "patchSetId": 2
@@ -446,6 +482,24 @@
       "side": 1,
       "message": "In the new design, we\u0027ll detect 1 spam event per node, and the state will reset when node associated buffers count/size drop below detection threshold.",
       "parentUuid": "57d41ef6_b9a48069",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9fa55c0_15c886f9",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-10T07:04:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c2491f0_b0ea344b",
       "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -485,6 +539,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "080b62b4_51089547",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-10T07:04:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c75def7_4eb7ed5a",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20416dcf_3876b233",
@@ -520,6 +592,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3fa9eb2_8857deae",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1090,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-10T07:04:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d7ab3ac_479ec1c6",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "715d8943_bfd74c1e",
@@ -551,6 +641,24 @@
       "side": 1,
       "message": "Replied above.",
       "parentUuid": "715d8943_bfd74c1e",
+      "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa888b26_2ac477ce",
+        "filename": "drivers/android/binder_alloc.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-10T07:04:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76e0d2dd_b6626590",
       "revId": "e0a4de19033328cd0443721bb94c06d0af159397",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

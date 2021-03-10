@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "718d3056_2fb82922",
+        "filename": "drivers/android/binder_alloc.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-10T07:04:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0772ba95_37ac1b57",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 28
+      },
+      "revId": "135840dd620a91e12735d09c77be014f8bfc3833",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "719d265f_5ad926e9",
