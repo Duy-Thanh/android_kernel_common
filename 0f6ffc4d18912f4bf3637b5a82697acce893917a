@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e683ca8b_b45f7d59",
+        "filename": "include/linux/mutex.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-10T21:18:42Z",
+      "side": 1,
+      "message": "This was removed in PS3.",
+      "parentUuid": "e885d68e_137ea0b5",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 21
+      },
+      "revId": "0f6ffc4d18912f4bf3637b5a82697acce893917a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6616919_21032903",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-03-09T14:48:18Z",
       "side": 1,
       "message": "how can this ever be true?  You only add the mutex to the list if it is not present on the list already.  Walking the whole list is going to be expensive, right?",
+      "range": {
+        "startLine": 218,
+        "startChar": 6,
+        "endLine": 218,
+        "endChar": 21
+      },
+      "revId": "0f6ffc4d18912f4bf3637b5a82697acce893917a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4ff6e1c_9377337b",
+        "filename": "kernel/locking/mutex.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-10T21:18:42Z",
+      "side": 1,
+      "message": "This fits a pattern we see regularly where the waiter is queued (possibly on another list) as part of the hook implementation. So this would be true if the hook needs to inhibit re-queueing the water.",
+      "parentUuid": "a6616919_21032903",
       "range": {
         "startLine": 218,
         "startChar": 6,
