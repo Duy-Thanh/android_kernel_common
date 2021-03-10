@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8d9b4ee_89670abb",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2905,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-10T20:35:12Z",
+      "side": 1,
+      "message": "I don\u0027t understand how target_node-\u003eoneway_spam_suspect works. I think it is supposed to suppress SPAM detection until we\u0027ve crossed back under the threshold, but this statement suggests that it resets if any non-spammer sends a transaction to the node. Is that the intended behavior?",
+      "revId": "333762bd02db7f6a5426a7efcb0ae9f1c6583f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d76d4529_1fd5dbe1",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3157,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-10T20:35:12Z",
+      "side": 1,
+      "message": "do we care about the race condition on target_node-\u003eoneway_spam_suspect here?",
+      "revId": "333762bd02db7f6a5426a7efcb0ae9f1c6583f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69e2b9c6_61f15273",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 4034,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-10T20:35:12Z",
+      "side": 1,
+      "message": "obviously, this can\u0027t be sent to a userspace that hasn\u0027t been updated to understand it. That either means waiting to submit this until that all lands in android T, or having a way to make sure userspace supports it in advance.",
+      "revId": "333762bd02db7f6a5426a7efcb0ae9f1c6583f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "340a336d_76d92009",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-10T20:35:12Z",
+      "side": 1,
+      "message": "Why does it make sense to update the node stats if !buffer-\u003etarget_node?",
+      "revId": "333762bd02db7f6a5426a7efcb0ae9f1c6583f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b361748_a25b2310",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-10T20:35:12Z",
+      "side": 1,
+      "message": "I still don\u0027t see the benefit of the node filter here. It seems like if process_num_buffers \u003e 50 and a quarter of buffer space is consumed, then we\u0027ve found our culprit.\n\nYou are concerned about a potentially useless stack if this happens to be another thread of the same process accessing a different node? Do you really think that is a significant risk? I think it would be extremely rare (if ever). If there are \u003e50 spammy txns, the probability that the same process is sending interleaved legitimate async txns to the same target proc is very low.\n\nI\u0027d prefer to simplify and drop the node filter.",
+      "revId": "333762bd02db7f6a5426a7efcb0ae9f1c6583f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d1c3069_9d067082",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-10T20:35:12Z",
+      "side": 1,
+      "message": "FYI- by the time you send this upstream, there will already be a 18 (BR_FROZEN_REPLY), so this will be 19.",
+      "revId": "333762bd02db7f6a5426a7efcb0ae9f1c6583f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
