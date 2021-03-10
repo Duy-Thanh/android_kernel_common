@@ -57,12 +57,46 @@
 #include <trace/hooks/regmap.h>
 #include <trace/hooks/softlockup.h>
 #include <trace/hooks/power.h>
+<<<<<<< HEAD   (a5c7e5 ANDROID: mm: add vendor hook for async psi)
 #include <trace/hooks/dmabuf.h>
+||||||| BASE
+#include <trace/hooks/gzvm.h>
+=======
+#include <trace/hooks/gzvm.h>
+#include <trace/hooks/signal.h>
+>>>>>>> CHANGE (265184 ANDROID: Add vendor hooks to signal.)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
  * associated with them) to allow external modules to probe them.
  */
+<<<<<<< HEAD   (a5c7e5 ANDROID: mm: add vendor hook for async psi)
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rtmutex_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rtmutex_wait_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_opt_spin_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_opt_spin_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_can_spin_on_owner);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_wait_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_wait_finish);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_send_sig_info);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rtmutex_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rtmutex_wait_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_opt_spin_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_opt_spin_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_can_spin_on_owner);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_wait_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_wait_finish);
+>>>>>>> CHANGE (265184 ANDROID: Add vendor hooks to signal.)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_arch_set_freq_scale);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_set_priority);
