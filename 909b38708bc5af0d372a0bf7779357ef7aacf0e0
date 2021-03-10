@@ -16,6 +16,23 @@
       "message": "no bug id 😞",
       "revId": "909b38708bc5af0d372a0bf7779357ef7aacf0e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26d183bf_8ae675c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-10T11:07:05Z",
+      "side": 1,
+      "message": "This feels like a \"fix a broken driver\" issue, why not just address it properly in the driver that has this problem instead of in the gpio core?",
+      "revId": "909b38708bc5af0d372a0bf7779357ef7aacf0e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
