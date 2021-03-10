@@ -254,6 +254,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "304dd346_1ce81f2c",
+        "filename": "kernel/bpf/trampoline.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1858441
+      },
+      "writtenOn": "2021-03-10T07:29:36Z",
+      "side": 1,
+      "message": "Thanks for your advices.\nBut for now, we only care about module and bpf and we expect no huge change will be applied to this position in android12-5.10. Thus, we think we add tracepoint here is fine for us and our tracepoint is for EL1 s2 page table setting.\n\nBesides, if we want to move this tracepoint into set_memory_*(), we need  EL1 s1 page table calling set_memory_* during memory free. But android12-5.10 has no such procedure during memory free.",
+      "parentUuid": "6d040d16_8bb1641d",
+      "range": {
+        "startLine": 41,
+        "startChar": 1,
+        "endLine": 41,
+        "endChar": 13
+      },
+      "revId": "6a8158734088d45af90300b34afc3133f567a06d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baafe202_965550ae",
