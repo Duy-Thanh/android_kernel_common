@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94ab99c9_5057c6dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-03-10T07:39:32Z",
+      "side": 1,
+      "message": "(not sure if we know whether ro/rw in all cases, so perhaps my comment should be outright ignored)\n\nIt would be nice to get a 2-3 paragraph explanation in the commit message of what this will be used for.  In particular how bpf executable memory is different from for example module executable memory.  Why we care... in case we add any other similar usecases in the future...",
+      "revId": "1723c327cf0f35b2aeab7ddb523b8f29b512d154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7fc714f_28986994",
+        "filename": "arch/arm64/net/bpf_jit_comp.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1103,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-03-10T07:39:32Z",
+      "side": 1,
+      "message": "I think a single trace_android_vh_set_memory_ro_x() would be better\nit\u0027s still 4 trace functions (ro_x, ro_nx, rw_x, rw_nx) vs (ro, rw, x, nx), but ends up being a single call instead of two.\n\nThat said, I don\u0027t think any of this is in critical code paths so it probably doesn\u0027t matter.  But it may also be easier on the user?  Your call...",
+      "range": {
+        "startLine": 1102,
+        "startChar": 2,
+        "endLine": 1103,
+        "endChar": 70
+      },
+      "revId": "1723c327cf0f35b2aeab7ddb523b8f29b512d154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
