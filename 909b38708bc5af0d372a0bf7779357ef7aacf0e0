@@ -33,6 +33,24 @@
       "message": "This feels like a \"fix a broken driver\" issue, why not just address it properly in the driver that has this problem instead of in the gpio core?",
       "revId": "909b38708bc5af0d372a0bf7779357ef7aacf0e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26337a3e_f45e73f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1721954
+      },
+      "writtenOn": "2021-03-11T04:15:17Z",
+      "side": 1,
+      "message": "Greg, we need this for our internal hyp solution where we do not want to read GPIOs from VM while GPIO driver is probing.",
+      "parentUuid": "26d183bf_8ae675c1",
+      "revId": "909b38708bc5af0d372a0bf7779357ef7aacf0e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
