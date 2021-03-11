@@ -68,6 +68,52 @@
       "message": "No bug id?",
       "revId": "909b38708bc5af0d372a0bf7779357ef7aacf0e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bd7c2e0_d1e6328b",
+        "filename": "drivers/gpio/gpiolib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-11T07:25:50Z",
+      "side": 1,
+      "message": "better name?  You are trying to \"block\" all reads, make it obvious please.",
+      "range": {
+        "startLine": 581,
+        "startChar": 6,
+        "endLine": 581,
+        "endChar": 16
+      },
+      "revId": "909b38708bc5af0d372a0bf7779357ef7aacf0e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9146224_60f8ef39",
+        "filename": "drivers/gpio/gpiolib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-11T07:25:50Z",
+      "side": 1,
+      "message": "no need to pass in the gpio device?",
+      "range": {
+        "startLine": 710,
+        "startChar": 30,
+        "endLine": 710,
+        "endChar": 40
+      },
+      "revId": "909b38708bc5af0d372a0bf7779357ef7aacf0e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
