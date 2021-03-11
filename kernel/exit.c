@@ -75,6 +75,7 @@
 #include <asm/mmu_context.h>
 #include <trace/hooks/mm.h>
 #include <trace/hooks/dtask.h>
+#include <trace/hooks/mm.h>
 
 /*
  * The default value should be high enough to not crash a system that randomly
