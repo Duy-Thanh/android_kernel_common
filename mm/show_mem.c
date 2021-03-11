@@ -423,6 +423,7 @@ void __show_mem(unsigned int filter, nodemask_t *nodemask, int max_zone_idx)
 #ifdef CONFIG_MEMORY_FAILURE
 	printk("%lu pages hwpoisoned\n", atomic_long_read(&num_poisoned_pages));
 #endif
+<<<<<<< HEAD   (0fc7ac ANDROID: microdroid: disable unneeded networking options)
 #ifdef CONFIG_MEM_ALLOC_PROFILING
 	{
 		struct codetag_bytes tags[10];
@@ -452,5 +453,9 @@ void __show_mem(unsigned int filter, nodemask_t *nodemask, int max_zone_idx)
 		}
 	}
 #endif
+||||||| BASE
+=======
+	trace_android_vh_show_mem(filter, nodemask);
+>>>>>>> CHANGE (dccd72 ANDROID: vendor_hooks: Add hooks for memory when debug)
 }
 EXPORT_SYMBOL_GPL(__show_mem);

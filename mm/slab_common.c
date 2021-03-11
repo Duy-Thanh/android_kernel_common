@@ -1076,6 +1076,19 @@ static void print_slabinfo_header(struct seq_file *m)
 	seq_puts(m, "# name            <active_objs> <num_objs> <objsize> <objperslab> <pagesperslab>");
 	seq_puts(m, " : tunables <limit> <batchcount> <sharedfactor>");
 	seq_puts(m, " : slabdata <active_slabs> <num_slabs> <sharedavail>");
+<<<<<<< HEAD   (0fc7ac ANDROID: microdroid: disable unneeded networking options)
+||||||| BASE
+#ifdef CONFIG_DEBUG_SLAB
+	seq_puts(m, " : globalstat <listallocs> <maxobjs> <grown> <reaped> <error> <maxfreeable> <nodeallocs> <remotefrees> <alienoverflow>");
+	seq_puts(m, " : cpustat <allochit> <allocmiss> <freehit> <freemiss>");
+#endif
+=======
+#ifdef CONFIG_DEBUG_SLAB
+	seq_puts(m, " : globalstat <listallocs> <maxobjs> <grown> <reaped> <error> <maxfreeable> <nodeallocs> <remotefrees> <alienoverflow>");
+	seq_puts(m, " : cpustat <allochit> <allocmiss> <freehit> <freemiss>");
+#endif
+	trace_android_vh_print_slabinfo_header(m);
+>>>>>>> CHANGE (dccd72 ANDROID: vendor_hooks: Add hooks for memory when debug)
 	seq_putc(m, '\n');
 }
 
@@ -1110,6 +1123,13 @@ static void cache_show(struct kmem_cache *s, struct seq_file *m)
 		   sinfo.limit, sinfo.batchcount, sinfo.shared);
 	seq_printf(m, " : slabdata %6lu %6lu %6lu",
 		   sinfo.active_slabs, sinfo.num_slabs, sinfo.shared_avail);
+<<<<<<< HEAD   (0fc7ac ANDROID: microdroid: disable unneeded networking options)
+||||||| BASE
+	slabinfo_show_stats(m, s);
+=======
+	slabinfo_show_stats(m, s);
+	trace_android_vh_cache_show(m, &sinfo, s);
+>>>>>>> CHANGE (dccd72 ANDROID: vendor_hooks: Add hooks for memory when debug)
 	seq_putc(m, '\n');
 }
 

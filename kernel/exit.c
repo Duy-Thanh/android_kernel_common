@@ -75,8 +75,15 @@
 
 #include <asm/unistd.h>
 #include <asm/mmu_context.h>
+<<<<<<< HEAD   (0fc7ac ANDROID: microdroid: disable unneeded networking options)
 
 #include "exit.h"
+||||||| BASE
+#include <trace/hooks/dtask.h>
+=======
+#include <trace/hooks/mm.h>
+#include <trace/hooks/dtask.h>
+>>>>>>> CHANGE (dccd72 ANDROID: vendor_hooks: Add hooks for memory when debug)
 
 /*
  * The default value should be high enough to not crash a system that randomly
@@ -568,6 +575,7 @@ static void exit_mm(void)
 	task_unlock(current);
 	mmap_read_unlock(mm);
 	mm_update_next_owner(mm);
+	trace_android_vh_exit_mm(mm);
 	mmput(mm);
 	if (test_thread_flag(TIF_MEMDIE))
 		exit_oom_victim();
