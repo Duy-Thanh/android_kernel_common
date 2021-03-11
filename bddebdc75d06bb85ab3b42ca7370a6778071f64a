@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12e10a82_438f8981",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 925,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-11T10:56:59Z",
+      "side": 1,
+      "message": "why can you not just use this tracepoint right here instead of adding another one?",
+      "range": {
+        "startLine": 925,
+        "startChar": 0,
+        "endLine": 925,
+        "endChar": 34
+      },
+      "revId": "bddebdc75d06bb85ab3b42ca7370a6778071f64a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15ff2866_cf7b34ab",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-11T10:56:59Z",
+      "side": 1,
+      "message": "same here, why can you not just use this tracepoint?",
+      "range": {
+        "startLine": 984,
+        "startChar": 0,
+        "endLine": 984,
+        "endChar": 40
+      },
+      "revId": "bddebdc75d06bb85ab3b42ca7370a6778071f64a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
