@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b98e627_fca66736",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2905,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-11T06:58:13Z",
+      "side": 1,
+      "message": "No, this is not the intended behavior, sorry that I made a mistake here. But there is a problem I still haven\u0027t found a solution: how to suppress SPAM detection and backtrace dump? Each process could spam several different processes, and one process could also be spammed by several processes. I didn\u0027t found a good place to reset the suppress😂, could you give me some advice? Thanks!",
+      "parentUuid": "f8d9b4ee_89670abb",
+      "revId": "333762bd02db7f6a5426a7efcb0ae9f1c6583f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d76d4529_1fd5dbe1",
         "filename": "drivers/android/binder.c",
         "patchSetId": 7
@@ -31,6 +49,24 @@
       "writtenOn": "2021-03-10T20:35:12Z",
       "side": 1,
       "message": "do we care about the race condition on target_node-\u003eoneway_spam_suspect here?",
+      "revId": "333762bd02db7f6a5426a7efcb0ae9f1c6583f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54290575_716bf373",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3157,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-11T06:58:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d76d4529_1fd5dbe1",
       "revId": "333762bd02db7f6a5426a7efcb0ae9f1c6583f24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab19f4fe_5c82f681",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 4034,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-11T06:58:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "69e2b9c6_61f15273",
+      "revId": "333762bd02db7f6a5426a7efcb0ae9f1c6583f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "340a336d_76d92009",
@@ -65,6 +119,24 @@
       "writtenOn": "2021-03-10T20:35:12Z",
       "side": 1,
       "message": "Why does it make sense to update the node stats if !buffer-\u003etarget_node?",
+      "revId": "333762bd02db7f6a5426a7efcb0ae9f1c6583f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "949a9bfc_11637f10",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-11T06:58:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "340a336d_76d92009",
       "revId": "333762bd02db7f6a5426a7efcb0ae9f1c6583f24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -88,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2df729ed_c2d8a536",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-11T06:58:13Z",
+      "side": 1,
+      "message": "OK, agree that the probability is very low. So let me drop the node filter.\n\nBelow is what Martijn said previous:\nOne other consideration is that the current transaction is not necessarily the method call that is responsible for overflowing the transaction buffer, though there is a decent chance that it is. One thing we could do is count the size of the outstanding transactions to the node that the current caller is targeting, and if indeed the majority also goes to this node, that is strong evidence that it is calls into this node that are responsible for overflowing the buffer. Then, together with the backtrace, that gives us interface + method name of the transaction, which should make this even easier to debug when it happens.\n\nAnyway, seems node filter take much cost but little effect(the situation probability is very low). Though it can deliever 5 BR_SPAM_SUSPECT to user-space if a bad client sends spam(10 more times) to each of 5 nodes. \n\nLet\u0027s deal with the main situation and simplify the design.",
+      "parentUuid": "0b361748_a25b2310",
+      "revId": "333762bd02db7f6a5426a7efcb0ae9f1c6583f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d1c3069_9d067082",
         "filename": "include/uapi/linux/android/binder.h",
         "patchSetId": 7
@@ -99,6 +189,24 @@
       "writtenOn": "2021-03-10T20:35:12Z",
       "side": 1,
       "message": "FYI- by the time you send this upstream, there will already be a 18 (BR_FROZEN_REPLY), so this will be 19.",
+      "revId": "333762bd02db7f6a5426a7efcb0ae9f1c6583f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a551ced6_889f756e",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-11T06:58:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4d1c3069_9d067082",
       "revId": "333762bd02db7f6a5426a7efcb0ae9f1c6583f24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
