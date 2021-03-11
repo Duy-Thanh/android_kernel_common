@@ -275,6 +275,25 @@ DECLARE_RESTRICTED_HOOK(android_rvh_uclamp_eff_value,
 		 struct uclamp_se *uclamp_default, unsigned long *ret),
 	TP_ARGS(p, clamp_id, uclamp_default, ret), 1);
 
+DECLARE_HOOK(android_vh_build_sched_domains,
+	TP_PROTO(bool has_asym),
+	TP_ARGS(has_asym));
+DECLARE_HOOK(android_vh_trigger_load_balance,
+	TP_PROTO(struct rq *rq, int *skip),
+	TP_ARGS(rq, skip));
+DECLARE_HOOK(android_vh_place_entity_force_update,
+	TP_PROTO(struct cfs_rq *cfs_rq, struct sched_entity *se, int initial),
+	TP_ARGS(cfs_rq, se, initial));
+DECLARE_RESTRICTED_HOOK(android_rvh_check_preempt_tick,
+	TP_PROTO(struct task_struct *p, unsigned long *ideal_runtime, bool *skip_preempt),
+	TP_ARGS(p, ideal_runtime, skip_preempt), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_check_preempt_wakeup_ignore,
+	TP_PROTO(struct task_struct *p, bool *ignore),
+	TP_ARGS(p, ignore), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_replace_next_task_fair,
+	TP_PROTO(struct rq *rq, struct task_struct **p, struct sched_entity **se, bool *repick, bool simple),
+	TP_ARGS(rq, p, se, repick, simple), 1);
+
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_SCHED_H */
