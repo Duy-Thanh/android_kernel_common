@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e092dc94_e683b458",
+        "filename": "drivers/char/random.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2314,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-03-12T18:37:49Z",
+      "side": 1,
+      "message": "We could obviously just pass the function pointer to drbg_need_entropy(), but that would tie the call to supply the \"FIPS module\" with entropy more directly to specific requests for randomness, which might make the FIPS paperwork harder.  Again, there is no guarantee that the FIPS requirements actually make sense, we just have to take them as-is :-(",
+      "parentUuid": "e0c5f923_10d0e165",
+      "revId": "7783b95ceef72ab9ddcef5dc20751648a9ba0acc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63b2c5e3_653e9c33",
         "filename": "drivers/char/random.c",
         "patchSetId": 1
