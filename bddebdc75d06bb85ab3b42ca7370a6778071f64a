@@ -93,6 +93,30 @@
       },
       "revId": "bddebdc75d06bb85ab3b42ca7370a6778071f64a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7da4a6c0_681fab84",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-12T11:38:51Z",
+      "side": 1,
+      "message": "You can do that all in the same hook function, putting two tracepoints in a row does not make much sense to me. \n\nWhat is preventing you from using the existing one?",
+      "parentUuid": "6f2033ea_8dc61069",
+      "range": {
+        "startLine": 984,
+        "startChar": 0,
+        "endLine": 984,
+        "endChar": 40
+      },
+      "revId": "bddebdc75d06bb85ab3b42ca7370a6778071f64a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
