@@ -213,6 +213,30 @@
       },
       "revId": "bddebdc75d06bb85ab3b42ca7370a6778071f64a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf9e6add_67a5b7c0",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-03-12T16:40:14Z",
+      "side": 1,
+      "message": "What do you mean by redefine? CONFIG_SCHEDSTATS is enabled in gki_defconfig IIRC, so I _think_ this should work like any other tracepoint in that you can freely attach to it. Could you please try?",
+      "parentUuid": "f34804a8_f381c556",
+      "range": {
+        "startLine": 984,
+        "startChar": 0,
+        "endLine": 984,
+        "endChar": 40
+      },
+      "revId": "bddebdc75d06bb85ab3b42ca7370a6778071f64a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
