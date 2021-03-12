@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bb21771_082d469a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-03-12T17:27:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46abf8ed_108628ad",
+      "revId": "3672a804a13557f602ce76db48e780099d972b85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3a9bb9f_a0529536",
@@ -79,6 +97,30 @@
       "side": 1,
       "message": "Please try to document it here so that we have a clue when doing upstream merges...",
       "parentUuid": "4656e236_a3941849",
+      "range": {
+        "startLine": 911,
+        "startChar": 0,
+        "endLine": 911,
+        "endChar": 38
+      },
+      "revId": "3672a804a13557f602ce76db48e780099d972b85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a7eb9af_bcace2cd",
+        "filename": "Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-03-12T17:27:08Z",
+      "side": 1,
+      "message": "I\u0027d rather not put in anything that might turn out to be untrue. :-(\n\nAt least this change links to the bug which should eventually have all the information. :-)",
+      "parentUuid": "7c45a07a_eee9200c",
       "range": {
         "startLine": 911,
         "startChar": 0,
