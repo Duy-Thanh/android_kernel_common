@@ -16,6 +16,23 @@
       "message": "Which version is this?  You sent 3...",
       "revId": "f2cb64228a31355d68f6e08dcfc820e5d3780ae4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b7874c9_6c9c9639",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-12T06:40:12Z",
+      "side": 1,
+      "message": "Ah, this looks to be v3, right?",
+      "revId": "f2cb64228a31355d68f6e08dcfc820e5d3780ae4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
