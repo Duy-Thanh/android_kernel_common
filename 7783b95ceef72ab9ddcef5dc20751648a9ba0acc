@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "590f4c1c_8dc8c80b",
+        "filename": "crypto/drbg.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-03-12T08:42:01Z",
+      "side": 1,
+      "message": "Why do we need the complexity with the buffer and the mutex etc? Couldn\u0027t we make __drbg_get_random_bytes the function pointer that points to get_random_bytes by default, but can be updated to point somewhere else if needed?",
+      "revId": "7783b95ceef72ab9ddcef5dc20751648a9ba0acc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "573aa773_bf2a15ed",
+        "filename": "drivers/char/random.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2314,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-03-12T08:42:01Z",
+      "side": 1,
+      "message": "Should we take some reference here to ensure that cb does not disappear?",
+      "revId": "7783b95ceef72ab9ddcef5dc20751648a9ba0acc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63b2c5e3_653e9c33",
+        "filename": "drivers/char/random.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2321,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-03-12T08:42:01Z",
+      "side": 1,
+      "message": "(see previous comment re function pointer first) Instead of setting drbg_load_entropy to NULL here, and potentially crashing on a NULL pointer in drbg_need_entropy(), should we perhaps make this point to get_random_bytes() by default, and again after unregistering the callback?\n\nOr is the crash intentional, to avoid violating FIPS by not using the right entropy source?",
+      "revId": "7783b95ceef72ab9ddcef5dc20751648a9ba0acc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
