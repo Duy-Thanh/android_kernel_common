@@ -325,6 +325,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06424854_899a8ea7",
+        "filename": "kernel/bpf/trampoline.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1858441
+      },
+      "writtenOn": "2021-03-12T07:11:07Z",
+      "side": 1,
+      "message": "should this function be called\ntrace_android_vh_set_memory_rw_x() ?\n\u003d\u003e Not really.\n\"ro\u003dfalse\" means that keep the original rw/ro memory type.\nThis parameter is confusing so I separate functions into 4 parts.",
+      "parentUuid": "dd9cd699_d0e7f58c",
+      "range": {
+        "startLine": 42,
+        "startChar": 1,
+        "endLine": 42,
+        "endChar": 33
+      },
+      "revId": "6a8158734088d45af90300b34afc3133f567a06d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e86e1e30_88a8f747",
@@ -362,6 +386,30 @@
       "side": 1,
       "message": "In the bpf_jit_free_exec(), we don\u0027t know how many pages we need, it\u0027s better to put this hook outside the bpf_jit_free_exec().",
       "parentUuid": "e86e1e30_88a8f747",
+      "range": {
+        "startLine": 380,
+        "startChar": 1,
+        "endLine": 380,
+        "endChar": 34
+      },
+      "revId": "6a8158734088d45af90300b34afc3133f567a06d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42ec878f_c4f48564",
+        "filename": "kernel/bpf/trampoline.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1858441
+      },
+      "writtenOn": "2021-03-12T07:11:07Z",
+      "side": 1,
+      "message": "is this actually trace_android_vh_set_memory_ro_nx?\n\u003d\u003e Not really.\n\"false\" means that keep the original rw/ro memory type.\nThis parameter is confusing so I separate functions into 4 parts.",
+      "parentUuid": "a6e32747_a16ca29f",
       "range": {
         "startLine": 380,
         "startChar": 1,

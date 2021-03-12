@@ -39,6 +39,30 @@
       },
       "revId": "1723c327cf0f35b2aeab7ddb523b8f29b512d154",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e40a5ee7_d195d17b",
+        "filename": "arch/arm64/net/bpf_jit_comp.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1103,
+      "author": {
+        "id": 1858441
+      },
+      "writtenOn": "2021-03-12T07:11:07Z",
+      "side": 1,
+      "message": "Thanks for your suggestion.\nWe think we will still use (ro, rw, x, nx). Because in some situation, we only want to change from x to nx and keep the rw or ro. That\u0027s why we use trace_android_vh_set_memory_x() instead of rw_x, ro_x.\n\nSorry for my mistake that I add some confusing parameters in pachset2.\nI add some explanation in pachset2 for your patchset2 question.",
+      "parentUuid": "e7fc714f_28986994",
+      "range": {
+        "startLine": 1102,
+        "startChar": 2,
+        "endLine": 1103,
+        "endChar": 70
+      },
+      "revId": "1723c327cf0f35b2aeab7ddb523b8f29b512d154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
