@@ -189,6 +189,30 @@
       },
       "revId": "bddebdc75d06bb85ab3b42ca7370a6778071f64a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f34804a8_f381c556",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-03-12T16:30:10Z",
+      "side": 1,
+      "message": "trace_sched_stat_iowait is a tracepoint which defined by sched_stat_template.\nCan we redefine it in our oem?",
+      "parentUuid": "e050774a_e37c2116",
+      "range": {
+        "startLine": 984,
+        "startChar": 0,
+        "endLine": 984,
+        "endChar": 40
+      },
+      "revId": "bddebdc75d06bb85ab3b42ca7370a6778071f64a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
