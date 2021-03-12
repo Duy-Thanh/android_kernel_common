@@ -141,6 +141,30 @@
       },
       "revId": "bddebdc75d06bb85ab3b42ca7370a6778071f64a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fd22517_66076f89",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-03-12T15:53:13Z",
+      "side": 1,
+      "message": "\u003e We define types of task in system,like foreground task, background task, top-app task ,and some important tasks in some smart phone scene. Using trace_sched_stat_iowait which can not identify these,so we need to add a hook to identify these task in order to optimize system performance.",
+      "parentUuid": "3900f358_b89e3645",
+      "range": {
+        "startLine": 984,
+        "startChar": 0,
+        "endLine": 984,
+        "endChar": 40
+      },
+      "revId": "bddebdc75d06bb85ab3b42ca7370a6778071f64a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
