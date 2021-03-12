@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "46abf8ed_108628ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-03-12T10:35:43Z",
+      "side": 1,
+      "message": "This commit is mainly to see what pops out with this LTO flag change for ARM. It may not be the right course to take.",
+      "revId": "3672a804a13557f602ce76db48e780099d972b85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d3a9bb9f_a0529536",
         "filename": "Makefile",
         "patchSetId": 4
@@ -14,6 +31,30 @@
       "writtenOn": "2021-03-12T10:16:37Z",
       "side": 1,
       "message": "what type of \"bug\"?  Any pointers is always nice to have when having to maintain this and handle merges.",
+      "range": {
+        "startLine": 911,
+        "startChar": 0,
+        "endLine": 911,
+        "endChar": 38
+      },
+      "revId": "3672a804a13557f602ce76db48e780099d972b85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4656e236_a3941849",
+        "filename": "Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-03-12T10:35:43Z",
+      "side": 1,
+      "message": "I actually don\u0027t know. Either Sami or somewhere else will pop up here and tell me or I\u0027ll find it by looking at git log and chasing references.\n\nb/182194803#comment9\n\nMore context is in the bug.",
+      "parentUuid": "d3a9bb9f_a0529536",
       "range": {
         "startLine": 911,
         "startChar": 0,
