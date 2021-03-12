@@ -334,6 +334,9 @@ static void ufshcd_add_tm_upiu_trace(struct ufs_hba *hba, unsigned int tag,
 	int off = (int)tag - hba->nutrs;
 	struct utp_task_req_desc *descp = &hba->utmrdl_base_addr[off];
 
+	trace_android_vh_ufs_send_tm_command(hba, tag,
+			str_t == UFS_TM_SEND ? "tm_send" : "tm_complete");
+
 	if (!trace_ufshcd_upiu_enabled())
 		return;
 
@@ -343,8 +346,6 @@ static void ufshcd_add_tm_upiu_trace(struct ufs_hba *hba, unsigned int tag,
 	else
 		trace_ufshcd_upiu(dev_name(hba->dev), str_t, &descp->rsp_header,
 				  &descp->output_param1, UFS_TSF_TM_OUTPUT);
-	trace_android_vh_ufs_send_tm_command(hba, tag,
-			str_t == UFS_TM_SEND ? "tm_send" : "tm_complete");
 }
 
 static void ufshcd_add_uic_command_trace(struct ufs_hba *hba,
