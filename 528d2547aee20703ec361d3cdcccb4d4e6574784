@@ -16,6 +16,24 @@
       "message": "Why is the Change-Id not the same as the other branches so they can be tracked properly?\n\nAlso, is there a Bug-id for this feature?",
       "revId": "528d2547aee20703ec361d3cdcccb4d4e6574784",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00d754f7_9dbc2264",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1797860
+      },
+      "writtenOn": "2021-03-13T00:23:28Z",
+      "side": 1,
+      "message": "I have rebased to fix these problems. Unfortunately it seems to have created a whole new chain. You can find that here: https://android-review.googlesource.com/c/kernel/common/+/1634822/1",
+      "parentUuid": "e661dbe1_ab3ac232",
+      "revId": "528d2547aee20703ec361d3cdcccb4d4e6574784",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
