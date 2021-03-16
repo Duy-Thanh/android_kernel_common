@@ -127,6 +127,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_set_sugov_update,
 	TP_PROTO(struct sugov_policy *sg_policy, unsigned int next_freq, bool *should_update),
 	TP_ARGS(sg_policy, next_freq, should_update), 1);
 
+DECLARE_RESTRICTED_HOOK(android_rvh_sugov_should_update_freq,
+	TP_PROTO(struct sugov_policy *sg_policy, bool *should_update),
+	TP_ARGS(sg_policy, should_update), 1);
+
 DECLARE_RESTRICTED_HOOK(android_rvh_cpu_overutilized,
 	TP_PROTO(int cpu, int *overutilized),
 	TP_ARGS(cpu, overutilized), 1);
@@ -231,9 +235,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_sched_exec,
 	TP_ARGS(cond), 1);
 
 DECLARE_HOOK(android_vh_map_util_freq,
-	TP_PROTO(unsigned long util, unsigned long freq,
+	TP_PROTO(struct sugov_policy *sg_policy,
+		unsigned long util,unsigned long freq,
 		unsigned long cap, unsigned long *next_freq),
-	TP_ARGS(util, freq, cap, next_freq));
+	TP_ARGS(sg_policy, util, freq, cap, next_freq));
 
 struct em_perf_domain;
 DECLARE_HOOK(android_vh_em_cpu_energy,

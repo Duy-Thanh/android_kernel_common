@@ -70,6 +70,7 @@ static DEFINE_PER_CPU(struct sugov_cpu, sugov_cpu);
 static bool sugov_should_update_freq(struct sugov_policy *sg_policy, u64 time)
 {
 	s64 delta_ns;
+	bool should_update = true;
 
 	/*
 	 * Since cpufreq_update_util() is called with rq->lock held for
@@ -87,6 +88,10 @@ static bool sugov_should_update_freq(struct sugov_policy *sg_policy, u64 time)
 	 * going offline from leaving stale IRQ work items behind.
 	 */
 	if (!cpufreq_this_cpu_can_update(sg_policy->policy))
+		return false;
+
+	trace_android_rvh_sugov_should_update_freq(sg_policy, &should_update);
+	if (!should_update)
 		return false;
 
 	if (unlikely(sg_policy->limits_changed)) {
@@ -170,7 +175,7 @@ static unsigned int get_next_freq(struct sugov_policy *sg_policy,
 				policy->cpuinfo.max_freq : policy->cur;
 	unsigned long next_freq = 0;
 
-	trace_android_vh_map_util_freq(util, freq, max, &next_freq);
+	trace_android_vh_map_util_freq(sg_policy, util, freq, max, &next_freq);
 	if (next_freq)
 		freq = next_freq;
 	else
