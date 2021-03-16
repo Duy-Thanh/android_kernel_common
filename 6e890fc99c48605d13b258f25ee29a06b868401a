@@ -52,6 +52,24 @@
       "parentUuid": "f651e42f_e5c91936",
       "revId": "6e890fc99c48605d13b258f25ee29a06b868401a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6da2828e_ddb79a9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-16T00:22:13Z",
+      "side": 1,
+      "message": "Our branch rules are documented in https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md and https://docs.partner.android.com/partners/guides/gki\n\nBasically, upstream fixes for errors or warnings are welcome as long as it doesn\u0027t break a frozen KMI (in which case we\u0027d look at whether the fix can be refactored to resolve the issue w/o breaking KMI).",
+      "parentUuid": "da3753ca_686759df",
+      "revId": "6e890fc99c48605d13b258f25ee29a06b868401a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
