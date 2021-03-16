@@ -23,7 +23,18 @@
 #include <trace/hooks/printk.h>
 #include <trace/hooks/epoch.h>
 #include <trace/hooks/cpufreq.h>
+<<<<<<< HEAD   (fbc642 ANDROID: Add IFTTT analyzer markers for GKI modules)
 #include <trace/hooks/fips140.h>
+||||||| BASE
+#include <trace/hooks/mm.h>
+#include <trace/hooks/preemptirq.h>
+#include <trace/hooks/ftrace_dump.h>
+=======
+#include <trace/hooks/fs.h>
+#include <trace/hooks/mm.h>
+#include <trace/hooks/preemptirq.h>
+#include <trace/hooks/ftrace_dump.h>
+>>>>>>> CHANGE (719fc8 ANDROID: fs: Add vendor hooks for ep_create_wakeup_source & )
 #include <trace/hooks/ufshcd.h>
 #include <trace/hooks/mmc.h>
 #include <trace/hooks/ogki_honor.h>
@@ -307,6 +318,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_report_bug);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_watchdog_timer_softlockup);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_freeze_todo);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_freeze_todo_unfrozen);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ep_create_wakeup_source);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_timerfd_create);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_die_kernel_fault);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_sp_pc_abort);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_el1_undef);
