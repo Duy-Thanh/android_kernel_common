@@ -40,6 +40,7 @@
 #include <trace/hooks/ufshcd.h>
 #include <trace/hooks/cgroup.h>
 #include <trace/hooks/sys.h>
+#include <trace/hooks/exec.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -176,6 +177,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_uclamp_eff_value);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpufreq_transition);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cgroup_set_task);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_syscall_prctl_finished);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_task_comm);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_setup_new_exec);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_proc_transaction);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_reply);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_wait_for_work);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_binder_thread);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_check_preempt_tick);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_check_preempt_wakeup_ignore);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_replace_next_task_fair);

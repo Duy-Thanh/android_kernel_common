@@ -73,6 +73,7 @@
 #include "internal.h"
 
 #include <trace/events/sched.h>
+#include <trace/hooks/exec.h>
 
 static int bprm_creds_from_file(struct linux_binprm *bprm);
 
@@ -1225,6 +1226,7 @@ void __set_task_comm(struct task_struct *tsk, const char *buf, bool exec)
 	task_lock(tsk);
 	trace_task_rename(tsk, buf);
 	strlcpy(tsk->comm, buf, sizeof(tsk->comm));
+	trace_android_vh_set_task_comm(tsk, exec);
 	task_unlock(tsk);
 	perf_event_comm(tsk, exec);
 }
@@ -1340,6 +1342,7 @@ int begin_new_exec(struct linux_binprm * bprm)
 		set_dumpable(current->mm, SUID_DUMP_USER);
 
 	perf_event_exec();
+	trace_android_vh_setup_new_exec(current, bprm);
 	__set_task_comm(me, kbasename(bprm->filename), true);
 
 	/* An exec changes our domain. We are no longer part of the thread
