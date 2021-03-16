@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53a952c0_0966b106",
+        "filename": "include/trace/hooks/gpiolib.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-16T09:15:26Z",
+      "side": 1,
+      "message": "android_vh_gpio_block_read perhaps?  That makes it more obvious what is going on.",
+      "range": {
+        "startLine": 15,
+        "startChar": 13,
+        "endLine": 15,
+        "endChar": 33
+      },
+      "revId": "b1189c8e3ad51f35664afa833190d782906fc5ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
