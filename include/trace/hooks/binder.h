@@ -41,6 +41,7 @@ DECLARE_HOOK(android_vh_binder_wait_for_work,
 DECLARE_HOOK(android_vh_sync_txn_recvd,
 	TP_PROTO(struct task_struct *tsk, struct task_struct *from),
 	TP_ARGS(tsk, from));
+<<<<<<< HEAD   (d70e14 FROMGIT: USB: gadget: bRequestType is a bitfield, not a enum)
 DECLARE_HOOK(android_vh_binder_alloc_new_buf_locked,
 	TP_PROTO(size_t size, struct binder_alloc *alloc, int is_async),
 	TP_ARGS(size, alloc, is_async));
@@ -73,6 +74,8 @@ DECLARE_HOOK(android_vh_binder_print_transaction_info,
 
 /* macro versions of hooks are no longer required */
 
+=======
+>>>>>>> CHANGE (5ec033 ANDROID: vendor_hooks: Add hooks for improving binder trans)
 #endif /* _TRACE_HOOK_BINDER_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
