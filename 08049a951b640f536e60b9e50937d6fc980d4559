@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f409591_f8766d87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-16T18:16:36Z",
+      "side": 1,
+      "message": "Looking good now. Once the user-space part is ready, you can work on getting this upstream. Be aware that there is another patch submitted upstream that will land before this, so you\u0027ll want to rebase your change on top of that before submitting: https://lore.kernel.org/lkml/20210316011630.1121213-2-dualli@chromium.org/",
+      "revId": "08049a951b640f536e60b9e50937d6fc980d4559",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f69f42a9_bde62a90",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-16T18:16:36Z",
+      "side": 1,
+      "message": "This will need to be 19, see https://lore.kernel.org/lkml/20210316011630.1121213-2-dualli@chromium.org/",
+      "revId": "08049a951b640f536e60b9e50937d6fc980d4559",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
