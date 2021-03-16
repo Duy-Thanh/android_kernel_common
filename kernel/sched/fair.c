@@ -3940,6 +3940,11 @@ static inline void util_est_dequeue(struct cfs_rq *cfs_rq,
 				    struct task_struct *p)
 {
 	unsigned int enqueued;
+	int ret = 0;
+
+	trace_android_rvh_util_est_dequeue(cfs_rq, p, &ret);
+	if (ret)
+		return;
 
 	if (!sched_feat(UTIL_EST))
 		return;
@@ -3971,6 +3976,11 @@ static inline void util_est_update(struct cfs_rq *cfs_rq,
 {
 	long last_ewma_diff;
 	struct util_est ue;
+	int ret = 0;
+	
+	trace_android_rvh_util_est_update(cfs_rq, p, task_sleep, &ret);
+	if (ret)
+		return;
 
 	if (!sched_feat(UTIL_EST))
 		return;
