@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "354abeab_2ef96c4c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2905,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-16T03:33:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b98e627_fca66736",
+      "revId": "333762bd02db7f6a5426a7efcb0ae9f1c6583f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d76d4529_1fd5dbe1",
@@ -172,6 +190,24 @@
       "side": 1,
       "message": "OK, agree that the probability is very low. So let me drop the node filter.\n\nBelow is what Martijn said previous:\nOne other consideration is that the current transaction is not necessarily the method call that is responsible for overflowing the transaction buffer, though there is a decent chance that it is. One thing we could do is count the size of the outstanding transactions to the node that the current caller is targeting, and if indeed the majority also goes to this node, that is strong evidence that it is calls into this node that are responsible for overflowing the buffer. Then, together with the backtrace, that gives us interface + method name of the transaction, which should make this even easier to debug when it happens.\n\nAnyway, seems node filter take much cost but little effect(the situation probability is very low). Though it can deliever 5 BR_SPAM_SUSPECT to user-space if a bad client sends spam(10 more times) to each of 5 nodes. \n\nLet\u0027s deal with the main situation and simplify the design.",
       "parentUuid": "0b361748_a25b2310",
+      "revId": "333762bd02db7f6a5426a7efcb0ae9f1c6583f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d9e3778_9a20870e",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-16T03:33:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2df729ed_c2d8a536",
       "revId": "333762bd02db7f6a5426a7efcb0ae9f1c6583f24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
