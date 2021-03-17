@@ -3278,8 +3278,20 @@ static vm_fault_t do_wp_page(struct vm_fault *vmf)
 		return handle_userfault(vmf, VM_UFFD_WP);
 	}
 
+<<<<<<< HEAD   (3c8179 Merge 5.10.23 into android12-5.10)
 	vmf->page = _vm_normal_page(vma, vmf->address, vmf->orig_pte,
 					vmf->vma_flags);
+=======
+	/*
+	 * Userfaultfd write-protect can defer flushes. Ensure the TLB
+	 * is flushed in this case before copying.
+	 */
+	if (unlikely(userfaultfd_wp(vmf->vma) &&
+		     mm_tlb_flush_pending(vmf->vma->vm_mm)))
+		flush_tlb_page(vmf->vma, vmf->address);
+
+	vmf->page = vm_normal_page(vma, vmf->address, vmf->orig_pte);
+>>>>>>> BRANCH (05d125 Linux 5.10.24)
 	if (!vmf->page) {
 		/*
 		 * VM_MIXEDMAP !pfn_valid() case, or VM_SOFTDIRTY clear on a

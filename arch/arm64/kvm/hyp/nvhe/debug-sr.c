@@ -58,6 +58,7 @@ static void __debug_restore_spe(u64 pmscr_el1)
 	write_sysreg_s(pmscr_el1, SYS_PMSCR_EL1);
 }
 
+<<<<<<< HEAD   (3c8179 Merge 5.10.23 into android12-5.10)
 static void __debug_save_trace(u64 *trfcr_el1)
 {
 
@@ -97,12 +98,17 @@ static void __debug_restore_trace(u64 trfcr_el1)
 	write_sysreg_s(trfcr_el1, SYS_TRFCR_EL1);
 }
 
+=======
+>>>>>>> BRANCH (05d125 Linux 5.10.24)
 void __debug_save_host_buffers_nvhe(struct kvm_vcpu *vcpu)
 {
 	/* Disable and flush SPE data generation */
 	__debug_save_spe(&vcpu->arch.host_debug_state.pmscr_el1);
+<<<<<<< HEAD   (3c8179 Merge 5.10.23 into android12-5.10)
 	/* Disable and flush Self-Hosted Trace generation */
 	__debug_save_trace(&vcpu->arch.host_debug_state.trfcr_el1);
+=======
+>>>>>>> BRANCH (05d125 Linux 5.10.24)
 }
 
 void __debug_switch_to_guest(struct kvm_vcpu *vcpu)
@@ -113,7 +119,10 @@ void __debug_switch_to_guest(struct kvm_vcpu *vcpu)
 void __debug_restore_host_buffers_nvhe(struct kvm_vcpu *vcpu)
 {
 	__debug_restore_spe(vcpu->arch.host_debug_state.pmscr_el1);
+<<<<<<< HEAD   (3c8179 Merge 5.10.23 into android12-5.10)
 	__debug_restore_trace(vcpu->arch.host_debug_state.trfcr_el1);
+=======
+>>>>>>> BRANCH (05d125 Linux 5.10.24)
 }
 
 void __debug_switch_to_host(struct kvm_vcpu *vcpu)

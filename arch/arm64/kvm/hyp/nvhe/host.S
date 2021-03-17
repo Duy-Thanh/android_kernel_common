@@ -63,6 +63,7 @@ __host_enter_without_restoring:
 SYM_FUNC_END(__host_exit)
 
 /*
+<<<<<<< HEAD   (3c8179 Merge 5.10.23 into android12-5.10)
  * void __noreturn __host_enter(struct kvm_cpu_context *host_ctxt);
  */
 SYM_FUNC_START(__host_enter)
@@ -71,10 +72,27 @@ SYM_FUNC_START(__host_enter)
 SYM_FUNC_END(__host_enter)
 
 /*
+=======
+>>>>>>> BRANCH (05d125 Linux 5.10.24)
  * void __noreturn __hyp_do_panic(struct kvm_cpu_context *host_ctxt, u64 spsr,
  * 				  u64 elr, u64 par);
  */
 SYM_FUNC_START(__hyp_do_panic)
+<<<<<<< HEAD   (3c8179 Merge 5.10.23 into android12-5.10)
+=======
+	mov	x29, x0
+
+	/* Load the format string into x0 and arguments into x1-7 */
+	ldr	x0, =__hyp_panic_string
+
+	mov	x6, x3
+	get_vcpu_ptr x7, x3
+
+	mrs	x3, esr_el2
+	mrs	x4, far_el2
+	mrs	x5, hpfar_el2
+
+>>>>>>> BRANCH (05d125 Linux 5.10.24)
 	/* Prepare and exit to the host's panic funciton. */
 	mov	lr, #(PSR_F_BIT | PSR_I_BIT | PSR_A_BIT | PSR_D_BIT |\
 		      PSR_MODE_EL1h)
@@ -83,6 +101,7 @@ SYM_FUNC_START(__hyp_do_panic)
 	hyp_kimg_va lr, x6
 	msr	elr_el2, lr
 
+<<<<<<< HEAD   (3c8179 Merge 5.10.23 into android12-5.10)
 	mov	x29, x0
 
 	/* Load the format string into x0 and arguments into x1-7 */
@@ -96,6 +115,8 @@ SYM_FUNC_START(__hyp_do_panic)
 	mrs	x4, far_el2
 	mrs	x5, hpfar_el2
 
+=======
+>>>>>>> BRANCH (05d125 Linux 5.10.24)
 	/* Enter the host, conditionally restoring the host context. */
 	cbz	x29, __host_enter_without_restoring
 	b	__host_enter_for_panic
@@ -152,7 +173,7 @@ SYM_FUNC_END(__hyp_do_panic)
 
 .macro invalid_host_el1_vect
 	.align 7
-	mov	x0, xzr		/* restore_host = false */
+	mov	x0, xzr		/* host_ctxt = NULL */
 	mrs	x1, spsr_el2
 	mrs	x2, elr_el2
 	mrs	x3, par_el1

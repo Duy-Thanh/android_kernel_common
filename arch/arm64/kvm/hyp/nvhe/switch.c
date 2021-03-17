@@ -194,6 +194,7 @@ int __kvm_vcpu_run(struct kvm_vcpu *vcpu)
 
 	__sysreg_save_state_nvhe(host_ctxt);
 	/*
+<<<<<<< HEAD   (3c8179 Merge 5.10.23 into android12-5.10)
 	 * For nVHE, we must save and disable any SPE
 	 * buffers, as the translation regime is going
 	 * to be loaded with that of the guest. And we must
@@ -204,6 +205,15 @@ int __kvm_vcpu_run(struct kvm_vcpu *vcpu)
 	__debug_save_host_buffers_nvhe(vcpu);
 
 	__adjust_pc(vcpu);
+=======
+	 * We must flush and disable the SPE buffer for nVHE, as
+	 * the translation regime(EL1&0) is going to be loaded with
+	 * that of the guest. And we must do this before we change the
+	 * translation regime to EL2 (via MDCR_EL2_E2PB == 0) and
+	 * before we load guest Stage1.
+	 */
+	__debug_save_host_buffers_nvhe(vcpu);
+>>>>>>> BRANCH (05d125 Linux 5.10.24)
 
 	/*
 	 * We must restore the 32-bit state before the sysregs, thanks
