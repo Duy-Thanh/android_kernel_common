@@ -22,6 +22,30 @@
       },
       "revId": "6aa67066fa765797c48d21b6b0417dbc71818e35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43ae92c6_11509da6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/switch.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-17T19:45:29Z",
+      "side": 1,
+      "message": "I had to take all of the side of the merge that happened here instead of the stuff that came in the LTS release, otherwise it is a mess to try to figure out which is \"correct\" 😊\n\nANyway, this is just a \"staging\" merge to get TH coverage at the moment, it will not be merged at this point in time, the android12-5.10-lts branch will be the \"real\" merge location.",
+      "parentUuid": "0f664fbc_d5812ce1",
+      "range": {
+        "startLine": 197,
+        "startChar": 1,
+        "endLine": 203,
+        "endChar": 4
+      },
+      "revId": "6aa67066fa765797c48d21b6b0417dbc71818e35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
