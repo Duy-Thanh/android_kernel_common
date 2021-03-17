@@ -22,6 +22,30 @@
       },
       "revId": "f217700da459cde3d11962e5fcb3e0fdb19ade3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "580adb40_698eba7f",
+        "filename": "drivers/gpio/gpiolib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1868510
+      },
+      "writtenOn": "2021-03-17T15:10:23Z",
+      "side": 1,
+      "message": "Yes, we are bypassing the initial read for all the GPIOs.",
+      "parentUuid": "d1ce62eb_244579df",
+      "range": {
+        "startLine": 709,
+        "startChar": 0,
+        "endLine": 709,
+        "endChar": 59
+      },
+      "revId": "f217700da459cde3d11962e5fcb3e0fdb19ade3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
