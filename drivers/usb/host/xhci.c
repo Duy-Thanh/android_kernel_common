@@ -664,6 +664,8 @@ int xhci_run(struct usb_hcd *hcd)
 	temp |= (xhci->imod_interval / 250) & ER_IRQ_INTERVAL_MASK;
 	writel(temp, &xhci->ir_set->irq_control);
 
+	xhci_vendor_usb_offload_enable_event_ring(xhci);
+
 	/* Set the HCD state before we enable the irqs */
 	temp = readl(&xhci->op_regs->command);
 	temp |= (CMD_EIE);
@@ -1313,6 +1315,7 @@ unsigned int xhci_get_endpoint_address(unsigned int ep_index)
 	unsigned int direction = ep_index % 2 ? USB_DIR_OUT : USB_DIR_IN;
 	return direction | number;
 }
+EXPORT_SYMBOL_GPL(xhci_get_endpoint_address);
 
 /* Find the flag for this endpoint (for use in the control context).  Use the
  * endpoint index to create a bitmask.  The slot context is bit 0, endpoint 0 is
@@ -4193,6 +4196,8 @@ static int xhci_setup_device(struct usb_hcd *hcd, struct usb_device *udev,
 	xhci_dbg_trace(xhci, trace_xhci_dbg_address,
 		       "Internal device address = %d",
 		       le32_to_cpu(slot_ctx->dev_state) & DEV_ADDR_MASK);
+
+	xhci_vendor_usb_offload_store_hw_info(xhci, hcd, udev);
 out:
 	mutex_unlock(&xhci->mutex);
 	if (command) {
@@ -4295,6 +4300,22 @@ static int __maybe_unused xhci_change_max_exit_latency(struct xhci_hcd *xhci,
 		spin_unlock_irqrestore(&xhci->lock, flags);
 	}
 	return ret;
+}
+
+void xhci_vendor_usb_offload_enable_event_ring(struct xhci_hcd *xhci)
+{
+	struct xhci_vendor_ops *ops = xhci_vendor_get_ops(xhci);
+
+	if (ops && ops->usb_offload_enable_event_ring)
+		ops->usb_offload_enable_event_ring(xhci);
+}
+
+void xhci_vendor_usb_offload_store_hw_info(struct xhci_hcd *xhci, struct usb_hcd *hcd, struct usb_device *udev)
+{
+	struct xhci_vendor_ops *ops = xhci_vendor_get_ops(xhci);
+
+	if (ops && ops->usb_offload_store_hw_info)
+		ops->usb_offload_store_hw_info(xhci, hcd, udev);
 }
 
 struct xhci_vendor_ops *xhci_vendor_get_ops(struct xhci_hcd *xhci)

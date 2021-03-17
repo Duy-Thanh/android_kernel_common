@@ -2219,12 +2219,23 @@ struct xhci_vendor_ops {
 	void (*free_dcbaa)(struct xhci_hcd *xhci);
 
 	struct xhci_ring *(*alloc_transfer_ring)(struct xhci_hcd *xhci,
-			u32 endpoint_type, enum xhci_ring_type ring_type,
+			u32 endpoint_type, enum xhci_ring_type ring_type, unsigned int max_packet,
 			gfp_t mem_flags);
 	void (*free_transfer_ring)(struct xhci_hcd *xhci,
 			struct xhci_virt_device *virt_dev, unsigned int ep_index);
 	int (*sync_dev_ctx)(struct xhci_hcd *xhci, unsigned int slot_id);
 	bool (*usb_offload_skip_urb)(struct xhci_hcd *xhci, struct urb *urb);
+
+	void (*usb_offload_store_hw_info)(struct xhci_hcd *xhci, struct usb_hcd *hcd, struct usb_device *udev);
+	void (*usb_offload_enable_event_ring)(struct xhci_hcd *xhci);
+
+	void (*segment_free)(struct xhci_hcd *xhci, struct xhci_segment *seg);
+	void (*alloc_container_ctx)(struct xhci_hcd *xhci, struct xhci_container_ctx *ctx, int type, gfp_t flags);
+	void (*free_container_ctx)(struct xhci_hcd *xhci, struct xhci_container_ctx *ctx);
+	int (*alloc_event_ring)(struct xhci_hcd *xhci, gfp_t flags);
+	void (*free_event_ring)(struct xhci_hcd *xhci);
+	void (*parse_endpoint)(struct xhci_hcd *xhci, struct usb_device *udev,
+			struct usb_endpoint_descriptor *desc, struct xhci_container_ctx *ctx);
 };
 
 struct xhci_vendor_ops *xhci_vendor_get_ops(struct xhci_hcd *xhci);
@@ -2232,6 +2243,8 @@ struct xhci_vendor_ops *xhci_vendor_get_ops(struct xhci_hcd *xhci);
 int xhci_vendor_sync_dev_ctx(struct xhci_hcd *xhci, unsigned int slot_id);
 bool xhci_vendor_usb_offload_skip_urb(struct xhci_hcd *xhci, struct urb *urb);
 
+void xhci_vendor_usb_offload_store_hw_info(struct xhci_hcd *xhci, struct usb_hcd *hcd, struct usb_device *udev);
+void xhci_vendor_usb_offload_enable_event_ring(struct xhci_hcd *xhci);
 /*
  * TODO: As per spec Isochronous IDT transmissions are supported. We bypass
  * them anyways as we where unable to find a device that matches the
