@@ -107,6 +107,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "352faac8_062bd9bf",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1457,
+      "author": {
+        "id": 1071633
+      },
+      "writtenOn": "2021-03-17T21:03:29Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ad78fab7_2416eafa",
+      "range": {
+        "startLine": 1457,
+        "startChar": 14,
+        "endLine": 1457,
+        "endChar": 16
+      },
+      "revId": "b99233820efed3ffa4eb8197e1a075146ae97a36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e76a1dfa_4e6a1821",
@@ -144,6 +168,30 @@
       "side": 1,
       "message": "\u003csame explanation as for the other comment\u003e\n\nIt\u0027s a reasonable estimation based on the original change submitted for upstream.\n\nIn the worst case we might see part of the \"file_name_buf\" trimmed, but it will still give us much more information than what we get currently (which currently is just \"[timerfd]\"). I thought of allocating memory dynamically but I feel it might overkill.\n\nAlso, I could not find relevant #define, but I can certainly define a new one if you think as more appropriate.",
       "parentUuid": "e76a1dfa_4e6a1821",
+      "range": {
+        "startLine": 396,
+        "startChar": 20,
+        "endLine": 396,
+        "endChar": 22
+      },
+      "revId": "b99233820efed3ffa4eb8197e1a075146ae97a36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5b9fec2_9dd7ec16",
+        "filename": "fs/timerfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1071633
+      },
+      "writtenOn": "2021-03-17T21:03:29Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7460864a_0ff418cc",
       "range": {
         "startLine": 396,
         "startChar": 20,
