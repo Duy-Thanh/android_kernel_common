@@ -46,6 +46,30 @@
       },
       "revId": "f217700da459cde3d11962e5fcb3e0fdb19ade3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9428a52b_0fa642fc",
+        "filename": "drivers/gpio/gpiolib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-17T15:25:55Z",
+      "side": 1,
+      "message": "Yes you do want to check this for every item in the loop, or yes you do not want to check this for every item in the loop?\n\n/me is confused...",
+      "parentUuid": "580adb40_698eba7f",
+      "range": {
+        "startLine": 709,
+        "startChar": 0,
+        "endLine": 709,
+        "endChar": 59
+      },
+      "revId": "f217700da459cde3d11962e5fcb3e0fdb19ade3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
