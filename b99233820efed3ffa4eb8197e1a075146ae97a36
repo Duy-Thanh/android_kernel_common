@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ea3b413_6969c338",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1457,
+      "author": {
+        "id": 1855559
+      },
+      "writtenOn": "2021-03-17T19:25:15Z",
+      "side": 1,
+      "message": "It\u0027s a reasonable estimation based on the original change submitted for upstream.\n\nIn the worst case we might see part of the \"ws_name\" trimmed, but it will still give us much more information than what we get currently (which currently is just \"eventpoll\" or \"[timerfd]\"). I thought of allocating memory dynamically but I feel it might overkill.\n\nAlso, I could not find relevant #define, but I can certainly define a new one if you think as more appropriate.",
+      "parentUuid": "a858e78d_b1a42d41",
+      "range": {
+        "startLine": 1457,
+        "startChar": 14,
+        "endLine": 1457,
+        "endChar": 16
+      },
+      "revId": "b99233820efed3ffa4eb8197e1a075146ae97a36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e76a1dfa_4e6a1821",
         "filename": "fs/timerfd.c",
         "patchSetId": 5
@@ -37,6 +61,30 @@
       "writtenOn": "2021-03-17T18:21:30Z",
       "side": 1,
       "message": "any reasons for that size ? is there a #define somewhere that could be a better choice ?",
+      "range": {
+        "startLine": 396,
+        "startChar": 20,
+        "endLine": 396,
+        "endChar": 22
+      },
+      "revId": "b99233820efed3ffa4eb8197e1a075146ae97a36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7460864a_0ff418cc",
+        "filename": "fs/timerfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1855559
+      },
+      "writtenOn": "2021-03-17T19:25:15Z",
+      "side": 1,
+      "message": "\u003csame explanation as for the other comment\u003e\n\nIt\u0027s a reasonable estimation based on the original change submitted for upstream.\n\nIn the worst case we might see part of the \"file_name_buf\" trimmed, but it will still give us much more information than what we get currently (which currently is just \"[timerfd]\"). I thought of allocating memory dynamically but I feel it might overkill.\n\nAlso, I could not find relevant #define, but I can certainly define a new one if you think as more appropriate.",
+      "parentUuid": "e76a1dfa_4e6a1821",
       "range": {
         "startLine": 396,
         "startChar": 20,
