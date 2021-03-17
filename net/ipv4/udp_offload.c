@@ -462,8 +462,13 @@ struct sk_buff *udp_gro_receive(struct list_head *head, struct sk_buff *skb,
 		return pp;
 	}
 
+<<<<<<< HEAD   (160cae ANDROID: mmc: support hardware that takes key directly)
 	if (!sk || NAPI_GRO_CB(skb)->encap_mark ||
 	    (skb->ip_summed != CHECKSUM_PARTIAL &&
+=======
+	if (NAPI_GRO_CB(skb)->encap_mark ||
+	    (uh->check && skb->ip_summed != CHECKSUM_PARTIAL &&
+>>>>>>> BRANCH (0437de Linux 5.4.106)
 	     NAPI_GRO_CB(skb)->csum_cnt == 0 &&
 	     !NAPI_GRO_CB(skb)->csum_valid) ||
 	    !udp_sk(sk)->gro_receive)
