@@ -18,6 +18,7 @@
 #include <linux/sched.h>
 #include <linux/serdev.h>
 #include <linux/slab.h>
+#include <linux/virtio.h>
 #include <linux/platform_data/x86/apple.h>
 
 static bool is_registered;
@@ -43,6 +44,12 @@ static ssize_t modalias_show(struct device *dev,
 		len = snprintf(buf, PAGE_SIZE, "platform:%s\n", pdev->name);
 	}
 
+	if (is_virtio_device(dev->parent->parent)) {
+		struct device *vdev = dev->parent->parent;
+		struct virtio_device *dev = dev_to_virtio(vdev);
+		len = snprintf(buf, PAGE_SIZE, "virtio:d%08Xv%08X\n", dev->id.device, dev->id.vendor);
+	}
+
 	return len;
 }
 static DEVICE_ATTR_RO(modalias);
@@ -66,6 +73,12 @@ static int serdev_device_uevent(struct device *dev, struct kobj_uevent_env *env)
 		return rc;
 
 	if (dev->parent->parent->bus == &platform_bus_type)
+		rc = dev->parent->parent->bus->uevent(dev->parent->parent, env);
+
+    if (rc != -ENODEV)
+		return rc;
+
+    if (is_virtio_device(dev->parent->parent))
 		rc = dev->parent->parent->bus->uevent(dev->parent->parent, env);
 
 	return rc;
@@ -756,8 +769,10 @@ static int platform_serdev_register_devices(struct serdev_controller *ctrl)
 	struct serdev_device *serdev;
 	int err;
 
-	if (ctrl->dev.parent->bus != &platform_bus_type)
+	if (ctrl->dev.parent->bus != &platform_bus_type &&
+	    !is_virtio_device(ctrl->dev.parent)) {
 		return -ENODEV;
+    }
 
 	serdev = serdev_device_alloc(ctrl);
 	if (!serdev) {

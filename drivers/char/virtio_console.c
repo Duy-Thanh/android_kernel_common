@@ -11,21 +11,31 @@
 #include <linux/err.h>
 #include <linux/freezer.h>
 #include <linux/fs.h>
+#include <linux/gnss.h>
 #include <linux/splice.h>
 #include <linux/pagemap.h>
 #include <linux/init.h>
 #include <linux/list.h>
 #include <linux/poll.h>
+#include <linux/serdev.h>
 #include <linux/sched.h>
 #include <linux/slab.h>
 #include <linux/spinlock.h>
 #include <linux/virtio.h>
+#include <linux/tty.h>
+#include <linux/tty_driver.h>
 #include <linux/virtio_console.h>
 #include <linux/wait.h>
 #include <linux/workqueue.h>
 #include <linux/module.h>
 #include <linux/dma-mapping.h>
+
+#include "../gnss/serial.h"
 #include "../tty/hvc/hvc_console.h"
+
+static int gnss_console_port = -1;
+module_param(gnss_console_port, int, 0644);
+MODULE_PARM_DESC(gnss_console_port, "convert console port to gnss serial device");
 
 #define is_rproc_enabled IS_ENABLED(CONFIG_REMOTEPROC)
 
@@ -360,6 +370,7 @@ static void free_buf(struct port_buffer *buf, bool can_sleep)
 
 	for (i = 0; i < buf->sgpages; i++) {
 		struct page *page = sg_page(&buf->sg[i]);
+
 		if (!page)
 			break;
 		put_page(page);
@@ -1225,6 +1236,9 @@ int __init virtio_cons_early_init(int (*put_chars)(u32, const char *, int))
 static int init_port_console(struct port *port)
 {
 	int ret;
+	struct hvc_struct *hp;
+	struct device *ctrldev;
+	struct serdev_controller *ctrl;
 
 	/*
 	 * The Host's telling us this port is a console port.  Hook it
@@ -1253,6 +1267,17 @@ static int init_port_console(struct port *port)
 		port->cons.hvc = NULL;
 		return ret;
 	}
+	port->cons.hvc->dev = &(port->portdev->vdev->dev);
+	hp = port->cons.hvc;
+	if (hp && gnss_console_port >= 0 && gnss_console_port == hp->index) {
+		ctrldev = serdev_tty_port_register(&(hp->port), hp->dev, hp->driver, hp->index);
+		if (PTR_ERR(ctrldev) != -ENODEV) {
+			ctrl = container_of(ctrldev, struct serdev_controller, dev);
+			gnss_serial_register(gnss_serial_allocate(ctrl->serdev, 0));
+			tty_unregister_device(hp->driver, hp->index);
+		}
+	}
+
 	spin_lock_irq(&pdrvdata_lock);
 	pdrvdata.next_vtermno++;
 	list_add_tail(&port->cons.list, &pdrvdata.consoles);
@@ -2283,4 +2308,5 @@ module_init(init);
 module_exit(fini);
 
 MODULE_DESCRIPTION("Virtio console driver");
+MODULE_SOFTDEP("pre: gnss_serial");
 MODULE_LICENSE("GPL");
