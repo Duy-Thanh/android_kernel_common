@@ -26,6 +26,12 @@
 #include <trace/hooks/printk.h>
 #include <trace/hooks/epoch.h>
 #include <trace/hooks/cpufreq.h>
+<<<<<<< HEAD   (d8d2b9 ANDROID: ABI: update symbol list for galaxy)
+=======
+#include <trace/hooks/fs.h>
+#include <trace/hooks/i2c.h>
+#include <trace/hooks/mm.h>
+>>>>>>> CHANGE (f9d86a ANDROID: i2c: Add vendor hook to allow assign dev_name to I2)
 #include <trace/hooks/preemptirq.h>
 #include <trace/hooks/ftrace_dump.h>
 #include <trace/hooks/ufshcd.h>
@@ -336,6 +342,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around_migrate_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_test_clear_look_around_ref);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_scan_type);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_swappiness);
+<<<<<<< HEAD   (d8d2b9 ANDROID: ABI: update symbol list for galaxy)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_signal_whether_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freeze_whether_wake);
@@ -365,3 +372,25 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sd_update_bus_speed_mode);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_slab_folio_alloced);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kmalloc_large_alloced);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_netlink_poll);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_slab_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_event);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_group);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpuset_fork);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_cpus_allowed_comm);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_setaffinity_early);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_after_enqueue_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_after_dequeue_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_enqueue_entity);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dequeue_entity);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_entity_tick);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_enqueue_task_fair);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dequeue_task_fair);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_prepare_update_load_avg_se);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_finish_update_load_avg_se);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_selinux_is_initialized);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_inactive_ratio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_topology_flags_workfn);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_of_i2c_get_board_info);
+>>>>>>> CHANGE (f9d86a ANDROID: i2c: Add vendor hook to allow assign dev_name to I2)
