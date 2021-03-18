@@ -16,6 +16,24 @@
       "message": "What happened to the clarification I asked for (and you provided) for the upstream version of this patch, regarding why it is OK for UNPREDICTABLE opcodes to be emitted in the first place?",
       "revId": "b42621d93435bcb0f0e41a3112b33c1020c9b7d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "120c430e_a61dc5f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-03-18T17:33:05Z",
+      "side": 1,
+      "message": "Good catch. PTAL",
+      "parentUuid": "6c4ae963_f5c2f6d7",
+      "revId": "b42621d93435bcb0f0e41a3112b33c1020c9b7d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
