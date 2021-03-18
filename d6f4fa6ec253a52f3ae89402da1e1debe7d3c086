@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c374c00e_8882d1cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-18T09:04:10Z",
+      "side": 1,
+      "message": "In looking at this change some more, I still really do not understand what it is doing.\n\nI do not think the changelog text is correct, as no \"read\" is being bypassed.\n\nTo me, it looks like all it is doing is preventing a specific device from having the initial gpio direction bits to be set \"properly\".  Where is this later fixed up so that the device can be accessed correctly?  With this change, the device seems to never be able to be configured correctly.\n\nBut, all of this is under control of the driver that calls this function, the kernel does not call this function on its own from what I can see.  So as you have control over the driver itself, why not just call the setup function with the correct data?  You can control this much easier in the driver than you can in a hook like this.\n\nOr am I missing the point of all of this?  A pointer to the offending driver that is causing all of this problem would be greatly appreciated.",
+      "revId": "d6f4fa6ec253a52f3ae89402da1e1debe7d3c086",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
