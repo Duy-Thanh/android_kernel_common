@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d7bc95f_dbe4a4cd",
+        "filename": "fs/timerfd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2021-03-18T22:43:07Z",
+      "side": 1,
+      "message": "This is actually a good change, is there a reason why we would let it be differnt for variety of devices. \n\nIOW, could we not just add a generic scheme in the kernel that creates helpful names (vs creating a vendor hook where everyone comes up with their own scheme).\n\nIf we come up with a generic scheme, it will also help us add helpful debugging / post-processing tools in Android userspace that will work for everyone.",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 434,
+        "endChar": 71
+      },
+      "revId": "c96887ce97c98d6d164a80d423023e96049279ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
