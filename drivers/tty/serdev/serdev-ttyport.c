@@ -16,6 +16,10 @@ static char *pdev_tty_port;
 module_param(pdev_tty_port, charp, 0644);
 MODULE_PARM_DESC(pdev_tty_port, "platform device tty port to claim");
 
+static char *hvc_tty_port;
+module_param(hvc_tty_port, charp, 0644);
+MODULE_PARM_DESC(hvc_tty_port, "hvc device tty port to claim");
+
 struct serport {
 	struct tty_port *port;
 	struct tty_struct *tty;
@@ -314,6 +318,18 @@ struct device *serdev_tty_port_register(struct tty_port *port,
 		}
 	}
 
+	if (hvc_tty_port && !strncmp(hvc_tty_port, drv->name, strlen(drv->name))) {
+		//this is hvc device, treat it as platform device
+		unsigned long hvc_idx;
+		int tty_len = strlen(drv->name);
+		if (!strncmp(hvc_tty_port, drv->name, tty_len)) {
+			if (!kstrtoul(hvc_tty_port + tty_len, 10,
+					&hvc_idx) && hvc_idx == idx) {
+					platform = true;
+			}
+		}
+	}
+
 	ret = serdev_controller_add_platform(ctrl, platform);
 	if (ret)
 		goto err_reset_data;
@@ -328,6 +344,8 @@ err_reset_data:
 
 	return ERR_PTR(ret);
 }
+
+EXPORT_SYMBOL_GPL(serdev_tty_port_register);
 
 int serdev_tty_port_unregister(struct tty_port *port)
 {
