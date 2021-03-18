@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "041c9733_b0f9696a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-03-18T08:43:31Z",
+      "side": 1,
+      "message": "I\u0027m guessing e9c6deee00e9 (\"arm64: Make CPU_BIG_ENDIAN depend on ld.bfd or ld.lld 13.0.0+\") is not going in -stable?",
+      "revId": "47c54ea7943ee1fb8e7861a6f14caa0f3a2f572f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
