@@ -22,6 +22,30 @@
       },
       "revId": "d858e8c80fa5000d4c82f6be1eb472c8e6f7f911",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "384ac302_85ddb5b2",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1856970
+      },
+      "writtenOn": "2021-03-18T08:20:37Z",
+      "side": 1,
+      "message": "Hi Vinayak,\n\nThere is latency to write CONTEXTIDR register. But it is very small.",
+      "parentUuid": "82eedc9a_0db9da44",
+      "range": {
+        "startLine": 638,
+        "startChar": 0,
+        "endLine": 638,
+        "endChar": 24
+      },
+      "revId": "d858e8c80fa5000d4c82f6be1eb472c8e6f7f911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
