@@ -34,6 +34,24 @@
       "parentUuid": "c374c00e_8882d1cc",
       "revId": "d6f4fa6ec253a52f3ae89402da1e1debe7d3c086",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bd473fb_529352e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-18T13:08:51Z",
+      "side": 1,
+      "message": "But this hook is only changing the values that the gpio has registered as valid pins, it does not change any read.  What resets these settings later on?\n\nAnd again, why not just fix up the pinctrl driver?  Why isn\u0027t this an issue upstream?",
+      "parentUuid": "cc3901c7_49312d92",
+      "revId": "d6f4fa6ec253a52f3ae89402da1e1debe7d3c086",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
