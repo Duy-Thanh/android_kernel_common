@@ -550,6 +550,7 @@ enum ufshcd_quirks {
 	 * This quirk needs to disable unipro timeout values
 	 * before power mode change
 	 */
+<<<<<<< HEAD   (01f388 Merge 5.10.22 into android12-5.10)
 	UFSHCD_QUIRK_SKIP_DEF_UNIPRO_TIMEOUT_SETTING	= 1 << 13,
 
 	/*
@@ -579,6 +580,14 @@ enum ufshcd_quirks {
 	 * keys were stored in it.
 	 */
 	UFSHCD_QUIRK_KEYS_IN_PRDT			= 1 << 22,
+=======
+	UFSHCD_QUIRK_SKIP_DEF_UNIPRO_TIMEOUT_SETTING = 1 << 13,
+
+	/*
+	 * This quirk allows only sg entries aligned with page size.
+	 */
+	UFSHCD_QUIRK_ALIGN_SG_WITH_PAGE_SIZE		= 1 << 14,
+>>>>>>> BRANCH (dfbf34 Linux 5.10.23)
 };
 
 enum ufshcd_caps {
