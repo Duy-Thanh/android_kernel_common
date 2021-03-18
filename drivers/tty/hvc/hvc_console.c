@@ -929,6 +929,7 @@ struct hvc_struct *hvc_alloc(uint32_t vtermno, int data,
 
 	hp->vtermno = vtermno;
 	hp->data = data;
+	hp->dev = NULL;
 	hp->ops = ops;
 	hp->outbuf_size = outbuf_size;
 	hp->outbuf = &((char *)hp)[ALIGN(sizeof(*hp), sizeof(long))];
@@ -939,6 +940,8 @@ struct hvc_struct *hvc_alloc(uint32_t vtermno, int data,
 	INIT_WORK(&hp->tty_resize, hvc_set_winsz);
 	spin_lock_init(&hp->lock);
 	mutex_lock(&hvc_structs_mutex);
+
+	hp->driver = hvc_driver;
 
 	/*
 	 * find index to use:

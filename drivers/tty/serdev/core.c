@@ -8,6 +8,7 @@
 
 #include <linux/acpi.h>
 #include <linux/errno.h>
+#include <linux/gnss.h>
 #include <linux/idr.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
@@ -22,6 +23,9 @@
 
 static bool is_registered;
 static DEFINE_IDA(ctrl_ida);
+
+extern struct gnss_serial *gnss_serial_allocate(struct serdev_device *gserial, size_t data_size);
+extern int gnss_serial_register(struct gnss_serial *gserial);
 
 static ssize_t modalias_show(struct device *dev,
 			     struct device_attribute *attr, char *buf)
@@ -754,10 +758,11 @@ static inline int acpi_serdev_register_devices(struct serdev_controller *ctrl)
 static int platform_serdev_register_devices(struct serdev_controller *ctrl)
 {
 	struct serdev_device *serdev;
+	struct gnss_serial *gserial;
 	int err;
 
-	if (ctrl->dev.parent->bus != &platform_bus_type)
-		return -ENODEV;
+	//if (ctrl->dev.parent->bus != &platform_bus_type)
+	//	return -ENODEV;
 
 	serdev = serdev_device_alloc(ctrl);
 	if (!serdev) {
@@ -773,6 +778,10 @@ static int platform_serdev_register_devices(struct serdev_controller *ctrl)
 		dev_err(&serdev->dev,
 			"failure adding device. status %d\n", err);
 		serdev_device_put(serdev);
+	} else {
+		// register to gnss
+		gserial = gnss_serial_allocate(serdev, 0);
+		gnss_serial_register(gserial);
 	}
 
 	return err;
