@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43d7a46e_c3f0abef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-18T06:45:58Z",
+      "side": 1,
+      "message": "Always use checkpach.pl before submitting patches.\n\nPlease read the patch checklist that is documented in the kernel Documentation/ folder and always follow it before sending out patches.",
+      "revId": "b2782139fcc190691ad2a63fdc10049421d4e056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
