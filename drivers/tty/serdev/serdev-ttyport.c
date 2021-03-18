@@ -7,6 +7,7 @@
 #include <linux/tty.h>
 #include <linux/tty_driver.h>
 #include <linux/poll.h>
+#include <linux/virtio.h>
 #include <linux/platform_device.h>
 #include <linux/module.h>
 
@@ -314,6 +315,12 @@ struct device *serdev_tty_port_register(struct tty_port *port,
 		}
 	}
 
+    if (is_virtio_device(parent)) {
+		//this is virtio-console device, register it similar to platform device
+	    dev_info(&ctrl->dev, "virtio-console device %s%d registered\n", drv->name, idx);
+        platform = true;
+    }
+
 	ret = serdev_controller_add_platform(ctrl, platform);
 	if (ret)
 		goto err_reset_data;
@@ -328,6 +335,8 @@ err_reset_data:
 
 	return ERR_PTR(ret);
 }
+
+EXPORT_SYMBOL_GPL(serdev_tty_port_register);
 
 int serdev_tty_port_unregister(struct tty_port *port)
 {
