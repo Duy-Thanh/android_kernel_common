@@ -16,6 +16,24 @@
       "message": "I\u0027m guessing e9c6deee00e9 (\"arm64: Make CPU_BIG_ENDIAN depend on ld.bfd or ld.lld 13.0.0+\") is not going in -stable?",
       "revId": "47c54ea7943ee1fb8e7861a6f14caa0f3a2f572f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1791740_c2c68414",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-03-18T19:57:35Z",
+      "side": 1,
+      "message": "It looks like e9c6deee00e9 and 28187dc8ebd9 already exist in linux-5.10.y, so I should be able to do this today for android12-5.10, I think (and will test).\n\nI think it\u0027s worthwhile to backport both to linux-5.4.y and linux-4.19.y, though I need to triple check that we can do allmodconfig builds with LLVM\u003d1 for ARCH\u003darm and ARCH\u003darm64.",
+      "parentUuid": "041c9733_b0f9696a",
+      "revId": "47c54ea7943ee1fb8e7861a6f14caa0f3a2f572f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
