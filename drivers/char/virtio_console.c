@@ -16,6 +16,7 @@
 #include <linux/init.h>
 #include <linux/list.h>
 #include <linux/poll.h>
+#include <linux/serdev.h>
 #include <linux/sched.h>
 #include <linux/slab.h>
 #include <linux/spinlock.h>
@@ -26,6 +27,13 @@
 #include <linux/module.h>
 #include <linux/dma-mapping.h>
 #include "../tty/hvc/hvc_console.h"
+
+static char *hvc_tty_port;
+module_param(hvc_tty_port, charp, 0644);
+MODULE_PARM_DESC(hvc_tty_port, "hvc device tty port to claim");
+
+extern struct gnss_serial *gnss_serial_allocate(struct serdev_device *gserial, size_t data_size);
+extern int gnss_serial_register(struct gnss_serial *gserial);
 
 #define is_rproc_enabled IS_ENABLED(CONFIG_REMOTEPROC)
 
@@ -1253,6 +1261,28 @@ static int init_port_console(struct port *port)
 		port->cons.hvc = NULL;
 		return ret;
 	}
+	//port->cons.hvc->dev = port->portdev->vdev; //port->dev;
+	//port->cons.hvc->dev = port->dev;
+	port->cons.hvc->dev = &(port->portdev->vdev->dev); // this is virt device
+	struct hvc_struct *hp = port->cons.hvc;
+	if (hp && hvc_tty_port) {
+        if (!is_virtio_device(hp->dev)) {
+		    dev_err(port->dev, "hubo: error port is not virt device %px\n", port->dev);
+        }
+		unsigned long hvc_idx;
+		if (!kstrtoul(hvc_tty_port, 10, &hvc_idx) && hvc_idx == hp->index) {
+			//tty_port_register_device_serdev(&(hp->port), hp->driver, hp->index, hp->dev);
+            struct device* mydev = serdev_tty_port_register(&(hp->port), hp->dev, hp->driver, hp->index);
+            if (PTR_ERR(mydev) != -ENODEV) {
+                // good
+	            struct serdev_controller* myserctrl = container_of(mydev, struct serdev_controller, dev);
+                // register to gnss
+                gnss_serial_register(gnss_serial_allocate(myserctrl->serdev, 0));
+
+            }
+		}
+	}
+
 	spin_lock_irq(&pdrvdata_lock);
 	pdrvdata.next_vtermno++;
 	list_add_tail(&port->cons.list, &pdrvdata.consoles);
@@ -2283,4 +2313,5 @@ module_init(init);
 module_exit(fini);
 
 MODULE_DESCRIPTION("Virtio console driver");
+MODULE_SOFTDEP("pre: gnss_serial");
 MODULE_LICENSE("GPL");
