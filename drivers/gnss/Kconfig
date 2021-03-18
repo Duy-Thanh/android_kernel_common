@@ -15,6 +15,7 @@ if GNSS
 
 config GNSS_SERIAL
 	tristate
+	default y
 
 config GNSS_MTK_SERIAL
 	tristate "Mediatek GNSS receiver support"

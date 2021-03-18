@@ -27,6 +27,10 @@
 #include <linux/dma-mapping.h>
 #include "../tty/hvc/hvc_console.h"
 
+static char *hvc_tty_port;
+module_param(hvc_tty_port, charp, 0644);
+MODULE_PARM_DESC(hvc_tty_port, "hvc device tty port to claim");
+
 #define is_rproc_enabled IS_ENABLED(CONFIG_REMOTEPROC)
 
 /*
@@ -1253,6 +1257,13 @@ static int init_port_console(struct port *port)
 		port->cons.hvc = NULL;
 		return ret;
 	}
+	port->cons.hvc->dev = port->dev;
+	struct hvc_struct *hp = port->cons.hvc;
+	if (hp && hp->index == 2) {
+		tty_port_register_device_serdev(&(hp->port),
+			hp->driver, hp->index, hp->dev);
+	}
+
 	spin_lock_irq(&pdrvdata_lock);
 	pdrvdata.next_vtermno++;
 	list_add_tail(&port->cons.list, &pdrvdata.consoles);
