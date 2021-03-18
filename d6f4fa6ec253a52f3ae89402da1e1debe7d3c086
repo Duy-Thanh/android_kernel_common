@@ -52,6 +52,24 @@
       "parentUuid": "cc3901c7_49312d92",
       "revId": "d6f4fa6ec253a52f3ae89402da1e1debe7d3c086",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc97d818_cca37f0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1721954
+      },
+      "writtenOn": "2021-03-18T16:50:18Z",
+      "side": 1,
+      "message": "Basic idea of change is this,\n\nThere are certain GPIO pins we want to share with VM.\n\nInitially these shared pins are under the control of Primary VM i.e. android here\n\nLater when secondary VM boots, we want to probe the pin control driver on VM. As part of this probe sequence it try to read the GPIO pin directions (like you mention). But at this stage of VM boot, VM do not have an access to these shared pins and probe might fail/crash.\n\nAs part of this change, we are avoiding reading these shared pins on vm boot.\n\nLater in the usecase boundary, android give an access to vm for these pins. Then VM clients can use gpio apis to operate on pins without issue.",
+      "parentUuid": "1bd473fb_529352e5",
+      "revId": "d6f4fa6ec253a52f3ae89402da1e1debe7d3c086",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
