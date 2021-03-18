@@ -285,6 +285,30 @@
       },
       "revId": "bddebdc75d06bb85ab3b42ca7370a6778071f64a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d67dd7fa_eafcae05",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-03-18T01:51:06Z",
+      "side": 1,
+      "message": "ok,this issue has been abondaned",
+      "parentUuid": "23644b29_adc796c1",
+      "range": {
+        "startLine": 984,
+        "startChar": 0,
+        "endLine": 984,
+        "endChar": 40
+      },
+      "revId": "bddebdc75d06bb85ab3b42ca7370a6778071f64a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
