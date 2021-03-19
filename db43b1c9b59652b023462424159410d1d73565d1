@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f356077_a28e08db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-03-19T18:55:25Z",
+      "side": 1,
+      "message": "Revert uploaded in aosp/1645932. Gerrit bug filed requesting dropping autosubmit on rebase: https://bugs.chromium.org/p/gerrit/issues/detail?id\u003d14266.",
+      "revId": "db43b1c9b59652b023462424159410d1d73565d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
