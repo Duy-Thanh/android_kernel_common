@@ -70,6 +70,24 @@
       "parentUuid": "1bd473fb_529352e5",
       "revId": "d6f4fa6ec253a52f3ae89402da1e1debe7d3c086",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61733eff_8c7a3638",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-19T08:12:48Z",
+      "side": 1,
+      "message": "Thanks for the explanation.  But what \"later on\" changes the gpio settings for this device to correctly set up the direction mask?\n\nAnd this feels like a bug in your VM you are trying to fix in the client 😊",
+      "parentUuid": "dc97d818_cca37f0b",
+      "revId": "d6f4fa6ec253a52f3ae89402da1e1debe7d3c086",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
