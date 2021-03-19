@@ -1,0 +1,41 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000009157346",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1539504?revision\u003d5",
+      "fixSuggestions": [
+        {
+          "fixId": "36a13d31_b4bd5414",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 35,
+                "startChar": 1,
+                "endLine": 35,
+                "endChar": 1
+              },
+              "replacement": "Signed-off-by: Marc Zyngier \u003cmzyngier@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "5099e481_233f2869",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-03-19T09:35:41Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Marc Zyngier \u003cmzyngier@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 363664650 android-build.ayeaye-python-dispatcher_20210318.05_p0",
+      "revId": "088b19064ac5f000615f1283eb67687357d1fbfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
