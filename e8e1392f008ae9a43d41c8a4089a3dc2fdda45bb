@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1886cadc_5102ca29",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-19T15:59:25Z",
+      "side": 1,
+      "message": "should be __u32 (the API uses types with well-defined size)",
+      "revId": "e8e1392f008ae9a43d41c8a4089a3dc2fdda45bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
