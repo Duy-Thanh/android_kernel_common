@@ -17,6 +17,24 @@
       "parentUuid": "ed8cc3f1_cd40facb",
       "revId": "8f69618fcaaa6d254d5e92b2d756b1a4da3568aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a66b810_efdbe3db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-19T08:39:40Z",
+      "side": 1,
+      "message": "rebase causes that in gerrit, not an issue as you can see.",
+      "parentUuid": "48e93af7_09d2bc5d",
+      "revId": "8f69618fcaaa6d254d5e92b2d756b1a4da3568aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
