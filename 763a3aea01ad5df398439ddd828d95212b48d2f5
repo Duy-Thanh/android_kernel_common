@@ -46,6 +46,30 @@
       },
       "revId": "763a3aea01ad5df398439ddd828d95212b48d2f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6c6075f_975a1275",
+        "filename": "drivers/usb/typec/tcpm/tcpci.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2021-03-19T08:45:31Z",
+      "side": 1,
+      "message": "If I just use one variable i.e. ret, I can only notify vbus present. I want the hook to be able to pass vbus not present as well(atleast till I gain confidence in the workaround) which is indicated by tcpci_get_vbus returning 0.\nSo would still need two variables right ?\n\nbypass lets me know if the tcpc chip level driver actually installed the callback \n for the hook. I dont want to bypass otherwise. If there is a better way to know if the hook callback has been installed, let me know. \n\n\u003e\u003e Also note you do not need the -\u003edata as you already have the pointer in the hook.\n\nstruct tcpci is internal to this file. So, tcpci-\u003edata still has to be passed down separately. You might wonder why pass tcpci then ! The answer to that would be retrieve the port instance through tcpci_get_tcpm_port. Passing both tcpci and tcpci-\u003edata similar to how all the callbacks are structured in struct tcpci_data.",
+      "parentUuid": "90c2fd9f_cbaa8e88",
+      "range": {
+        "startLine": 409,
+        "startChar": 10,
+        "endLine": 409,
+        "endChar": 27
+      },
+      "revId": "763a3aea01ad5df398439ddd828d95212b48d2f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
