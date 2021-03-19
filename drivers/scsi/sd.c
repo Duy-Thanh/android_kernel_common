@@ -69,6 +69,8 @@
 #include <scsi/scsi_ioctl.h>
 #include <scsi/scsicam.h>
 
+#include <trace/hooks/scsi_sd.h>
+
 #include "sd.h"
 #include "scsi_priv.h"
 #include "scsi_logging.h"
@@ -3484,6 +3486,8 @@ static int sd_probe(struct device *dev)
 		if (sdkp->opal_dev)
 			sd_printk(KERN_NOTICE, sdkp, "supports TCG Opal\n");
 	}
+
+	trace_android_vh_sd_send_cmd(sdp);
 
 	sd_printk(KERN_NOTICE, sdkp, "Attached SCSI %sdisk\n",
 		  sdp->removable ? "removable " : "");
