@@ -176,6 +176,31 @@ config GKI_HIDDEN_HYPERVISOR_CONFIGS
 	  config, required by various SoC platforms. This is usually
 	  selected by XEN or S390.
 
+<<<<<<< HEAD   (8c688c ANDROID: clang: update to 12.0.4)
+=======
+config GKI_HIDDEN_NET_CONFIGS
+	bool "Hidden networking configuration needed for GKI"
+	select PAGE_POOL
+	select NET_PTP_CLASSIFY
+	help
+	  Dummy config option used to enable the networking hidden
+	  config, required by various SoC platforms.
+
+config GKI_HIDDEN_PHY_CONFIGS
+	bool "Hidden PHY configuration needed for GKI"
+	select GENERIC_PHY_MIPI_DPHY
+	help
+	  Dummy config option used to enable the hidden PHY configs,
+	  required by various SoC platforms.
+
+config GKI_HIDDEN_MM_CONFIGS
+	bool "Hidden MM configuration needed for GKI"
+	select MEMORY_BALLOON
+	help
+	  Dummy config option used to enable hidden MM configs,
+	  currently required for VIRTIO_BALLOON
+
+>>>>>>> CHANGE (221fe1 ANDROID: Add GKI_HIDDEN_MM_CONFIGS to support ballooning.)
 # Atrocities needed for
 # a) building GKI modules in separate tree, or
 # b) building drivers that are not modularizable
@@ -202,6 +227,12 @@ config GKI_HACKS_TO_FIX
 	select GKI_HIDDEN_GPU_CONFIGS
 	select GKI_HIDDEN_IRQ_CONFIGS
 	select GKI_HIDDEN_HYPERVISOR_CONFIGS
+<<<<<<< HEAD   (8c688c ANDROID: clang: update to 12.0.4)
+=======
+	select GKI_HIDDEN_NET_CONFIGS
+	select GKI_HIDDEN_PHY_CONFIGS
+	select GKI_HIDDEN_MM_CONFIGS
+>>>>>>> CHANGE (221fe1 ANDROID: Add GKI_HIDDEN_MM_CONFIGS to support ballooning.)
 	help
 	  Dummy config option used to enable core functionality used by
 	  modules that may not be selectable in this config.
