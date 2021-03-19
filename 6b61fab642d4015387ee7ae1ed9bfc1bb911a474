@@ -63,6 +63,30 @@
       },
       "revId": "6b61fab642d4015387ee7ae1ed9bfc1bb911a474",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "677cca05_8301b6d8",
+        "filename": "drivers/usb/typec/tcpm/tcpci.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-19T07:58:55Z",
+      "side": 1,
+      "message": "Ah, ok, that wasn\u0027t obvious at all, sorry, my fault, thanks for the explaination.",
+      "parentUuid": "2db9faa9_2082614a",
+      "range": {
+        "startLine": 745,
+        "startChar": 0,
+        "endLine": 745,
+        "endChar": 57
+      },
+      "revId": "6b61fab642d4015387ee7ae1ed9bfc1bb911a474",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
