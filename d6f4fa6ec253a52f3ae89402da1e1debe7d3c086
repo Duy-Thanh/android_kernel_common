@@ -88,6 +88,24 @@
       "parentUuid": "dc97d818_cca37f0b",
       "revId": "d6f4fa6ec253a52f3ae89402da1e1debe7d3c086",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9c04389_34cda2b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1721954
+      },
+      "writtenOn": "2021-03-19T17:16:59Z",
+      "side": 1,
+      "message": "\u003cBut what \"later on\" changes the gpio settings for this device to correctly set up the direction mask?\u003e\nClients on VM will take care of setting the pins with the settings whatever they need to using pinctrl api\u0027s\n\n\n\u003cAnd this feels like a bug in your VM you are trying to fix in the client 😊\u003e\nNot really, right now it is how our hyp is interpreting. I agree, there is a scope which we can improve in hyp to avoid this change. But right now this is the solution we are perusing.",
+      "parentUuid": "61733eff_8c7a3638",
+      "revId": "d6f4fa6ec253a52f3ae89402da1e1debe7d3c086",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
