@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d383560_b29fb60c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-19T19:43:37Z",
+      "side": 1,
+      "message": "The series has an arm32 \u0027allmodconfig\u0027 build break. Please fix:\n\nBuildbot Version: androidbuild_buildbot_20210315.00_RC02\nMachine: prod23-g09h\nDIST_DIR\u003d/buildbot/dist_dirs/aosp_kernel-common-android12-5.10-linux-kernel_arm_allmodconfig/P20899455 BUILD_CONFIG\u003dcommon/build.config.allmodconfig.arm build/build.sh -j80\n+ cd common\n+ make LLVM\u003d1 DEPMOD\u003ddepmod DTC\u003ddtc O\u003d/usr/local/google/buildbot/src/android/common-android12-5.10/out/android12-5.10/common -j80 mrproper\n+ set +x\n+ cd common\n+ make LLVM\u003d1 DEPMOD\u003ddepmod DTC\u003ddtc O\u003d/usr/local/google/buildbot/src/android/common-android12-5.10/out/android12-5.10/common -j80 allmodconfig\n+ set +x\n+ eval update_config\n++ update_config\n++ common/scripts/config --file /usr/local/google/buildbot/src/android/common-android12-5.10/out/android12-5.10/common/.config -d TEST_KMOD -d CPU_BIG_ENDIAN -d DYNAMIC_FTRACE -e UNWINDER_FRAME_POINTER\n++ cd /usr/local/google/buildbot/src/android/common-android12-5.10/out/android12-5.10/common\n++ make O\u003d/usr/local/google/buildbot/src/android/common-android12-5.10/out/android12-5.10/common CROSS_COMPILE\u003darm-linux-gnueabi- LLVM\u003d1 DEPMOD\u003ddepmod DTC\u003ddtc -j80 olddefconfig\n.config:14204:warning: override: UNWINDER_ARM changes choice state\n+ set +x\n+ cd /usr/local/google/buildbot/src/android/common-android12-5.10/out/android12-5.10/common\n+ make O\u003d/usr/local/google/buildbot/src/android/common-android12-5.10/out/android12-5.10/common LLVM\u003d1 DEPMOD\u003ddepmod DTC\u003ddtc -j80 zImage modules\n/usr/local/google/buildbot/src/android/common-android12-5.10/common/arch/arm/lib/xor-neon.c:30:2: warning: This code requires at least version 4.6 of GCC [-W#warnings]\n#warning This code requires at least version 4.6 of GCC\n ^\n1 warning generated.\n/usr/local/google/buildbot/src/android/common-android12-5.10/common/arch/arm/lib/xor-neon.c:30:2: warning: This code requires at least version 4.6 of GCC [-W#warnings]\n#warning This code requires at least version 4.6 of GCC\n ^\n1 warning generated.\n/usr/local/google/buildbot/src/android/common-android12-5.10/common/security/integrity/ima/ima_crypto.c:582:12: warning: stack frame size of 1152 bytes in function \u0027ima_calc_field_array_hash_tfm\u0027 [-Wframe-larger-than\u003d]\nstatic int ima_calc_field_array_hash_tfm(struct ima_field_data *field_data,\n           ^\n1 warning generated.\n/usr/local/google/buildbot/src/android/common-android12-5.10/common/drivers/iommu/msm_iommu.c:346:13: error: use of undeclared identifier \u0027IO_PGTABLE_QUIRK_TLBI_ON_MAP\u0027\n                .quirks \u003d IO_PGTABLE_QUIRK_TLBI_ON_MAP,\n                          ^\n1 error generated.\nmake[3]: *** [/usr/local/google/buildbot/src/android/common-android12-5.10/common/scripts/Makefile.build:272: drivers/iommu/msm_iommu.o] Error 1\nmake[3]: *** Waiting for unfinished jobs....\nmake[2]: *** [/usr/local/google/buildbot/src/android/common-android12-5.10/common/scripts/Makefile.build:515: drivers/iommu] Error 2\nmake[2]: *** Waiting for unfinished jobs....\nmake[1]: *** [/usr/local/google/buildbot/src/android/common-android12-5.10/common/Makefile:1867: drivers] Error 2\nmake[1]: *** Waiting for unfinished jobs....\nmake: *** [/usr/local/google/buildbot/src/android/common-android12-5.10/common/Makefile:185: __sub-make] Error 2",
+      "revId": "a8ee04c235a3fc6b247b88c712346bb7c23cd603",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
