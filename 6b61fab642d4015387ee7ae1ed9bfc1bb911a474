@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe32b4f4_78c53d0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-19T10:58:46Z",
+      "side": 1,
+      "message": "wait, wrong branch!  This should be on android12-5.10, not android-mainline.",
+      "revId": "6b61fab642d4015387ee7ae1ed9bfc1bb911a474",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3155a255_3bb65595",
