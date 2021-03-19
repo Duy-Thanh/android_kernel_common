@@ -22,6 +22,30 @@
       },
       "revId": "c96887ce97c98d6d164a80d423023e96049279ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3460ffd_44c24525",
+        "filename": "fs/timerfd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1855559
+      },
+      "writtenOn": "2021-03-19T00:06:56Z",
+      "side": 1,
+      "message": "Thanks for your inputs. The original goal here was to disambiguate multiple wakelocks created by eventpoll, and hence we are using instance count vs same common file descriptor name [timerfd], so that\u0027s where it has its own scheme. This is also to align with the upstream patch:\nhttps://lore.kernel.org/linux-fsdevel/20210302034928.3761098-1-varmam@google.com/T/#u",
+      "parentUuid": "2d7bc95f_dbe4a4cd",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 434,
+        "endChar": 71
+      },
+      "revId": "c96887ce97c98d6d164a80d423023e96049279ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
