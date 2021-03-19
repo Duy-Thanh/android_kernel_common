@@ -22,6 +22,30 @@
       },
       "revId": "763a3aea01ad5df398439ddd828d95212b48d2f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90c2fd9f_cbaa8e88",
+        "filename": "drivers/usb/typec/tcpm/tcpci.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-19T08:23:24Z",
+      "side": 1,
+      "message": "Also note you do not need the -\u003edata as you already have the pointer in the hook.",
+      "parentUuid": "354d0b38_a9f1c631",
+      "range": {
+        "startLine": 409,
+        "startChar": 10,
+        "endLine": 409,
+        "endChar": 27
+      },
+      "revId": "763a3aea01ad5df398439ddd828d95212b48d2f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
