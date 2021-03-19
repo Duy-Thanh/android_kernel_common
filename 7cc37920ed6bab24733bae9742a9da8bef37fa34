@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f6eef19_afc217d8",
+        "filename": "drivers/usb/typec/tcpm/tcpci.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2021-03-19T08:16:49Z",
+      "side": 1,
+      "message": "Done !",
+      "parentUuid": "84c09eb9_a84e0aff",
+      "range": {
+        "startLine": 409,
+        "startChar": 18,
+        "endLine": 409,
+        "endChar": 28
+      },
+      "revId": "7cc37920ed6bab24733bae9742a9da8bef37fa34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74f5e37c_ca0a1546",
@@ -78,6 +102,30 @@
       "side": 1,
       "message": "no, restricted means only 1 hook is allowed, and not chaining.",
       "parentUuid": "74f5e37c_ca0a1546",
+      "range": {
+        "startLine": 411,
+        "startChar": 1,
+        "endLine": 411,
+        "endChar": 38
+      },
+      "revId": "7cc37920ed6bab24733bae9742a9da8bef37fa34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7bd380d_6b79a0b1",
+        "filename": "drivers/usb/typec/tcpm/tcpci.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2021-03-19T08:16:49Z",
+      "side": 1,
+      "message": "Thanks Greg!",
+      "parentUuid": "0cd680b8_e58617aa",
       "range": {
         "startLine": 411,
         "startChar": 1,
