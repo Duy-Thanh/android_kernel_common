@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "84c09eb9_a84e0aff",
+        "filename": "drivers/usb/typec/tcpm/tcpci.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-19T06:26:27Z",
+      "side": 1,
+      "message": "switch this around and make this 0 and then set an error in the hook and test for that?  This logic as-is is complex to read and understand, try to keep it simple 😊",
+      "range": {
+        "startLine": 409,
+        "startChar": 18,
+        "endLine": 409,
+        "endChar": 28
+      },
+      "revId": "7cc37920ed6bab24733bae9742a9da8bef37fa34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74f5e37c_ca0a1546",
         "filename": "drivers/usb/typec/tcpm/tcpci.c",
         "patchSetId": 1
@@ -31,6 +54,30 @@
       "writtenOn": "2021-03-19T01:46:18Z",
       "side": 1,
       "message": "Always called from nonatomic context. However, the callback can potentially execute i2c transactions. Does it have to be a restricted vendor hook instead ?",
+      "range": {
+        "startLine": 411,
+        "startChar": 1,
+        "endLine": 411,
+        "endChar": 38
+      },
+      "revId": "7cc37920ed6bab24733bae9742a9da8bef37fa34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cd680b8_e58617aa",
+        "filename": "drivers/usb/typec/tcpm/tcpci.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-19T06:26:27Z",
+      "side": 1,
+      "message": "no, restricted means only 1 hook is allowed, and not chaining.",
+      "parentUuid": "74f5e37c_ca0a1546",
       "range": {
         "startLine": 411,
         "startChar": 1,
