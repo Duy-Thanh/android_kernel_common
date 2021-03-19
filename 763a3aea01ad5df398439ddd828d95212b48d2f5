@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "354d0b38_a9f1c631",
+        "filename": "drivers/usb/typec/tcpm/tcpci.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-19T08:22:30Z",
+      "side": 1,
+      "message": "hm, no, you don\u0027t need two variables here, let\u0027s make this simpler, no new variables needed at all:\n\ntrace_android_vh_typec_tcpci_get_vbuf(tcpci, \u0026ret);\nif (ret)\n        return ret;",
+      "range": {
+        "startLine": 409,
+        "startChar": 10,
+        "endLine": 409,
+        "endChar": 27
+      },
+      "revId": "763a3aea01ad5df398439ddd828d95212b48d2f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
