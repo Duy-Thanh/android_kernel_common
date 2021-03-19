@@ -36,6 +36,8 @@
 
 #include <trace/events/scsi.h>
 
+#include <trace/hooks/scsi.h>
+
 #include "scsi_debugfs.h"
 #include "scsi_priv.h"
 #include "scsi_logging.h"
@@ -260,6 +262,7 @@ int __scsi_execute(struct scsi_device *sdev, const unsigned char *cmd,
 		goto out;
 
 	rq->cmd_len = COMMAND_SIZE(cmd[0]);
+	trace_android_vh_scsi_set_request(cmd[0], rq);
 	memcpy(rq->cmd, cmd, rq->cmd_len);
 	rq->retries = retries;
 	req->timeout = timeout;
