@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4d82065_d5de77c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-03-19T18:54:50Z",
+      "side": 1,
+      "message": "I filed a bug against Gerrit here to drop autosubmit when rebasing: https://bugs.chromium.org/p/gerrit/issues/detail?id\u003d14266.",
+      "revId": "bf26739cc65580371373bfa57a20dade0c1cc173",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
