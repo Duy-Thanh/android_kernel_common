@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41a3e940_6f2bb316",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2021-03-19T01:51:25Z",
+      "side": 1,
+      "message": "Uploaded an equivalent change based on vendor hook: \nhttps://android-review.googlesource.com/c/kernel/common/+/1646886\nThis can be abandoned once that is merged.",
+      "revId": "914e2ad7d5d764fe053561668f304d3f328058b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
