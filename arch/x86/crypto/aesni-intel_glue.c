@@ -97,6 +97,12 @@ asmlinkage void aesni_cbc_dec(struct crypto_aes_ctx *ctx, u8 *out,
 #define AVX_GEN2_OPTSIZE 640
 #define AVX_GEN4_OPTSIZE 4096
 
+asmlinkage void aesni_xts_encrypt(const struct crypto_aes_ctx *ctx, u8 *out,
+				  const u8 *in, unsigned int len, u8 *iv);
+
+asmlinkage void aesni_xts_decrypt(const struct crypto_aes_ctx *ctx, u8 *out,
+				  const u8 *in, unsigned int len, u8 *iv);
+
 #ifdef CONFIG_X86_64
 
 static void (*aesni_ctr_enc_tfm)(struct crypto_aes_ctx *ctx, u8 *out,
@@ -104,9 +110,12 @@ static void (*aesni_ctr_enc_tfm)(struct crypto_aes_ctx *ctx, u8 *out,
 asmlinkage void aesni_ctr_enc(struct crypto_aes_ctx *ctx, u8 *out,
 			      const u8 *in, unsigned int len, u8 *iv);
 
+<<<<<<< HEAD   (c2f379 UPSTREAM: crypto: drbg - always try to free Jitter RNG insta)
 asmlinkage void aesni_xts_crypt8(const struct crypto_aes_ctx *ctx, u8 *out,
 				 const u8 *in, bool enc, le128 *iv);
 
+=======
+>>>>>>> BRANCH (a65e78 Linux 5.4.107)
 /* asmlinkage void aesni_gcm_enc()
  * void *ctx,  AES Key schedule. Starts on a 16 byte boundary.
  * struct gcm_context_data.  May be uninitialized.
@@ -558,14 +567,30 @@ static void aesni_xts_dec(const void *ctx, u8 *dst, const u8 *src, le128 *iv)
 	glue_xts_crypt_128bit_one(ctx, dst, src, iv, aesni_dec);
 }
 
+<<<<<<< HEAD   (c2f379 UPSTREAM: crypto: drbg - always try to free Jitter RNG insta)
 static void aesni_xts_enc8(const void *ctx, u8 *dst, const u8 *src, le128 *iv)
+=======
+static void aesni_xts_enc32(const void *ctx, u8 *dst, const u8 *src, le128 *iv)
+>>>>>>> BRANCH (a65e78 Linux 5.4.107)
 {
+<<<<<<< HEAD   (c2f379 UPSTREAM: crypto: drbg - always try to free Jitter RNG insta)
 	aesni_xts_crypt8(ctx, dst, src, true, iv);
+=======
+	aesni_xts_encrypt(ctx, dst, src, 32 * AES_BLOCK_SIZE, (u8 *)iv);
+>>>>>>> BRANCH (a65e78 Linux 5.4.107)
 }
 
+<<<<<<< HEAD   (c2f379 UPSTREAM: crypto: drbg - always try to free Jitter RNG insta)
 static void aesni_xts_dec8(const void *ctx, u8 *dst, const u8 *src, le128 *iv)
+=======
+static void aesni_xts_dec32(const void *ctx, u8 *dst, const u8 *src, le128 *iv)
+>>>>>>> BRANCH (a65e78 Linux 5.4.107)
 {
+<<<<<<< HEAD   (c2f379 UPSTREAM: crypto: drbg - always try to free Jitter RNG insta)
 	aesni_xts_crypt8(ctx, dst, src, false, iv);
+=======
+	aesni_xts_decrypt(ctx, dst, src, 32 * AES_BLOCK_SIZE, (u8 *)iv);
+>>>>>>> BRANCH (a65e78 Linux 5.4.107)
 }
 
 static const struct common_glue_ctx aesni_enc_xts = {
@@ -573,8 +598,13 @@ static const struct common_glue_ctx aesni_enc_xts = {
 	.fpu_blocks_limit = 1,
 
 	.funcs = { {
+<<<<<<< HEAD   (c2f379 UPSTREAM: crypto: drbg - always try to free Jitter RNG insta)
 		.num_blocks = 8,
 		.fn_u = { .xts = aesni_xts_enc8 }
+=======
+		.num_blocks = 32,
+		.fn_u = { .xts = aesni_xts_enc32 }
+>>>>>>> BRANCH (a65e78 Linux 5.4.107)
 	}, {
 		.num_blocks = 1,
 		.fn_u = { .xts = aesni_xts_enc }
@@ -586,8 +616,13 @@ static const struct common_glue_ctx aesni_dec_xts = {
 	.fpu_blocks_limit = 1,
 
 	.funcs = { {
+<<<<<<< HEAD   (c2f379 UPSTREAM: crypto: drbg - always try to free Jitter RNG insta)
 		.num_blocks = 8,
 		.fn_u = { .xts = aesni_xts_dec8 }
+=======
+		.num_blocks = 32,
+		.fn_u = { .xts = aesni_xts_dec32 }
+>>>>>>> BRANCH (a65e78 Linux 5.4.107)
 	}, {
 		.num_blocks = 1,
 		.fn_u = { .xts = aesni_xts_dec }
