@@ -124,6 +124,23 @@
       "parentUuid": "e9c04389_34cda2b7",
       "revId": "d6f4fa6ec253a52f3ae89402da1e1debe7d3c086",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8726989_4f5fab8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-20T09:30:15Z",
+      "side": 1,
+      "message": "Wait, why is this in the android-mainline branch and not in the android12-5.10 branch?\n\nNo new hooks are needed in the mainline branch as it is constantly moving with the upstream release.\n\nPlease submit this to the specific branch you want this applied to for a specific release.",
+      "revId": "d6f4fa6ec253a52f3ae89402da1e1debe7d3c086",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
