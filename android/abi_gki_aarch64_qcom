@@ -827,6 +827,14 @@
   drm_universal_plane_init
   drm_vblank_init
   drm_wait_one_vblank
+  dtpm_create
+  dtpm_destroy
+  dtpm_get
+  dtpm_init
+  dtpm_put
+  dtpm_register
+  dtpm_unregister
+  dtpm_update_power
   dump_stack
   __dynamic_dev_dbg
   __dynamic_pr_debug
