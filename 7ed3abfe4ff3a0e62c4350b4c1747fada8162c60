@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d162075_a82da650",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6777,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-03-22T09:09:59Z",
+      "side": 1,
+      "message": "Please make this !(sd_flag \u0026 SD_BALANCE_FORK) instead for consistency with find_idlest_cpu() -- we should keep the util sync on exec.",
+      "range": {
+        "startLine": 6777,
+        "startChar": 5,
+        "endLine": 6777,
+        "endChar": 32
+      },
+      "revId": "7ed3abfe4ff3a0e62c4350b4c1747fada8162c60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
