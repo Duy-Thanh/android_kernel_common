@@ -16,6 +16,24 @@
       "message": "There are conflicting versions of this series, please use the same change-id when updating patch series so we know what to do here...",
       "revId": "b573a148534f67712d4c300c315dad6bb2cd624e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69078cf3_17aac211",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1195398
+      },
+      "writtenOn": "2021-03-22T10:48:50Z",
+      "side": 1,
+      "message": "gerrit does not allow 2 identical change-ids on the same branch.\nThe first 4 patches are Samsung\u0027s device mode patches that I needed to upload mine.\nin My previous patchset I squashed all 4 of them together and explained all that in the commit log - I thought it is clearer that way.\n\nYou asked me to use the patches as it is without squashing them, but then they must come with a different change id.\n\nThanks, Avri",
+      "parentUuid": "26ec3550_aa7d760a",
+      "revId": "b573a148534f67712d4c300c315dad6bb2cd624e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
