@@ -260,6 +260,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_mem);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_print_slabinfo_header);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cache_show);
+<<<<<<< HEAD   (d1b6bd ANDROID: vendor_hooks: Add hook in shrink_node_memcgs)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_setscheduler_uclamp);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_wake_up_sync);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_wake_flags);
@@ -314,3 +315,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_rq_ctx_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmap_region);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_unmap_one);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_node_memcgs);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpci_override_toggling);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_typec_tcpci_chk_contaminant);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_typec_tcpci_get_vbus);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_account_task_time);
+>>>>>>> CHANGE (63399b ANDROID: vendor_hooks: Add hooks for account process tick)
