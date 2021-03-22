@@ -34,6 +34,24 @@
       "parentUuid": "26ec3550_aa7d760a",
       "revId": "b573a148534f67712d4c300c315dad6bb2cd624e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71ecddab_4707b087",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-22T11:05:02Z",
+      "side": 1,
+      "message": "If the patch is the same, it should have the same change-id.  If it is not, then it gets a unique one.\n\nSo you don\u0027t want the same patch on the same branch without the same change-id, gerrit is correct here, perhaps you are not setting this up correctly?\n\nIf you want to drop a patch series, mark it \"abandoned\", or ask us to do that, but as this stands right now, there\u0027s lots of confusion...",
+      "parentUuid": "69078cf3_17aac211",
+      "revId": "b573a148534f67712d4c300c315dad6bb2cd624e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
