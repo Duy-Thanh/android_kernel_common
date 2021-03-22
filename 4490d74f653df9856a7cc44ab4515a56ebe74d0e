@@ -1,0 +1,41 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000009213844",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1648130?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "fccf82f9_1fcd3c5e",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 25,
+                "startChar": 1,
+                "endLine": 25,
+                "endChar": 1
+              },
+              "replacement": "Signed-off-by: Avri Altman \u003cavri.altman@wdc.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "fc955d7a_aca74fad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-03-22T09:44:27Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Avri Altman \u003cavri.altman@wdc.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 363664650 android-build.ayeaye-python-dispatcher_20210318.05_p0",
+      "revId": "4490d74f653df9856a7cc44ab4515a56ebe74d0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
