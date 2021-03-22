@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3893cf0c_27c1a249",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-22T07:06:09Z",
+      "side": 1,
+      "message": "These are filesystem symbols, what filesystem is needing these?",
+      "revId": "3e5dd28edec59f1359876f52f9d35d5d6573c3dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c899597_ecf7da3d",
+        "filename": "android/abi_gki_aarch64_unisoc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-22T07:06:09Z",
+      "side": 1,
+      "message": "this is a filesystem symbol, not a driver symbol.  What code is needing this symbol?",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 49,
+        "endChar": 13
+      },
+      "revId": "3e5dd28edec59f1359876f52f9d35d5d6573c3dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
