@@ -52,6 +52,24 @@
       "parentUuid": "69078cf3_17aac211",
       "revId": "b573a148534f67712d4c300c315dad6bb2cd624e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d10066e_32ed7803",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1195398
+      },
+      "writtenOn": "2021-03-22T11:40:59Z",
+      "side": 1,
+      "message": "OK.\nThe source of the confusion is because of this awkward situation, in which both Samsung \u0026 WDC are racing toward the 24th with our HPB code.\nAnd I am forced to upload a series that is rebased on an unmerged one.\n\nThis is very much like it is in mainline - \nI am sending the host control mode based on the device mode patches, while Martin didn\u0027t picked them up yet.\nThis is, as you may recall, per your directions.\n\nThe host-control-mode patches (WDC) are based on the device-control-mode patches (Samsung).\nI just fetched Samsung\u0027s patches and changed the change-id, otherwise Gerrit won’t allow me to push.\nConcretely, what should I do here?\n\nThanks,\nAvri",
+      "parentUuid": "71ecddab_4707b087",
+      "revId": "b573a148534f67712d4c300c315dad6bb2cd624e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
