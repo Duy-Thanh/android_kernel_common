@@ -87,6 +87,30 @@
       },
       "revId": "38760dc7db9de9ed5bbac699065e02d2f27c29e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb2329df_eb653c05",
+        "filename": "drivers/char/virtio_console.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 1270,
+      "author": {
+        "id": 1046320
+      },
+      "writtenOn": "2021-03-22T16:37:49Z",
+      "side": 1,
+      "message": "Trilok and Greg,\n   I was trying to reclaim virtio-console as gnss device, the reason I want to\nput it for review is to get some feedback on how to achieve that the right way.\nany suggestions are welcomed.",
+      "parentUuid": "5615a4a4_108881fd",
+      "range": {
+        "startLine": 1270,
+        "startChar": 6,
+        "endLine": 1270,
+        "endChar": 7
+      },
+      "revId": "38760dc7db9de9ed5bbac699065e02d2f27c29e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
