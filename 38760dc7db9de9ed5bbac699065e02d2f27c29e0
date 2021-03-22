@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6611ef4_bf25a1a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1860540
+      },
+      "writtenOn": "2021-03-22T05:30:17Z",
+      "side": 1,
+      "message": "I don\u0027t like this patch at all. ",
+      "revId": "38760dc7db9de9ed5bbac699065e02d2f27c29e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cbc524c_1da392e2",
+        "filename": "drivers/char/virtio_console.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 1270,
+      "author": {
+        "id": 1860540
+      },
+      "writtenOn": "2021-03-22T05:30:17Z",
+      "side": 1,
+      "message": "This is surgery of perfectly fine virtio-console driver. Google, please talk to me before you merge these changes. I really prefer these changes doesn\u0027t go in as-is.",
+      "range": {
+        "startLine": 1270,
+        "startChar": 6,
+        "endLine": 1270,
+        "endChar": 7
+      },
+      "revId": "38760dc7db9de9ed5bbac699065e02d2f27c29e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
