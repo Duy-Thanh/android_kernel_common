@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5e2cd22_b5f291b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-03-22T16:33:43Z",
+      "side": 1,
+      "message": "This patch is an experiment to allow the GNSS subsystem to claim an hvc class device, so we can remove some other hacks that previously enabled GNSS to claim platform serial devices. Right now GNSS can only claim via serdev, and serdev only works with DT or ACPI and only for specific kinds of device.\n\nThis won\u0027t be merged until we have cleaned it up and at least tried to upstream. In the meantime please go easy on the gerrit labels? :)",
+      "revId": "d2fef5cb052db230c3a61787c1d784ea3b026809",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
