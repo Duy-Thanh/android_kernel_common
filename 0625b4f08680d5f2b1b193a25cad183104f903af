@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19525c41_06495fd9",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 4879,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-22T05:57:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66933943_f09d07b3",
+      "revId": "0625b4f08680d5f2b1b193a25cad183104f903af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5d585b8_0256befc",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-03-18T17:42:49Z",
       "side": 1,
       "message": "This is a layering violation. Any changes to proc-\u003ealloc should be in binder_alloc.c... but it could be proc-\u003eoneway_spam_detect_enabled instead and used at line 4025 above.\n\nDo we think there is actually any benefit to this being per-proc? Would it ever be enabled for proc A and disabled for proc B? If not, should it be a global setting for the driver? (I think the possible benefit is to have a way to shut it off if it is getting too noisy for a particular client -- but even then we\u0027d be fine shutting it off globally).",
+      "revId": "0625b4f08680d5f2b1b193a25cad183104f903af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c766869d_4a94e73e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 4880,
+      "author": {
+        "id": 1862735
+      },
+      "writtenOn": "2021-03-22T05:57:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5d585b8_0256befc",
       "revId": "0625b4f08680d5f2b1b193a25cad183104f903af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
