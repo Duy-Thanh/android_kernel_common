@@ -19,9 +19,16 @@ DECLARE_HOOK(android_vh_cgroup_attach,
 	TP_PROTO(struct cgroup_subsys *ss, struct cgroup_taskset *tset),
 	TP_ARGS(ss, tset));
 
+<<<<<<< HEAD   (8a8f03bbf6af81611e147ffc3cc62e2a912e7fa3 FROMGIT: drivers/base/memory: set mem->altmap after successf)
 DECLARE_RESTRICTED_HOOK(android_rvh_cgroup_force_kthread_migration,
 	TP_PROTO(struct task_struct *tsk, struct cgroup *dst_cgrp, bool *force_migration),
 	TP_ARGS(tsk, dst_cgrp, force_migration), 1);
+||||||| BASE   (478166f75c8da44ffea53989a4e4797aac2364c9 ANDROID: GKI: Update symbol list for vivo)
+=======
+DECLARE_RESTRICTED_HOOK(android_rvh_cpuset_fork,
+	TP_PROTO(struct task_struct *p, bool *inherit_cpus),
+	TP_ARGS(p, inherit_cpus), 1);
+>>>>>>> CHANGE (5111c399168c03b0792226cf56b0176ff1c9a0ab ANDROID: cgroup: Add vendor hook for cpuset.)
 
 DECLARE_RESTRICTED_HOOK(android_rvh_cpu_cgroup_attach,
 	TP_PROTO(struct cgroup_taskset *tset),
