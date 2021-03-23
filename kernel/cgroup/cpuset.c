@@ -67,6 +67,8 @@
 #include <linux/cgroup.h>
 #include <linux/wait.h>
 
+#include <trace/hooks/cgroup.h>
+
 DEFINE_STATIC_KEY_FALSE(cpusets_pre_enable_key);
 DEFINE_STATIC_KEY_FALSE(cpusets_enabled_key);
 
@@ -3225,10 +3227,14 @@ static void cpuset_bind(struct cgroup_subsys_state *root_css)
  */
 static void cpuset_fork(struct task_struct *task)
 {
+	bool inherit_cpus = false;
+
 	if (task_css_is_root(task, cpuset_cgrp_id))
 		return;
 
-	set_cpus_allowed_ptr(task, current->cpus_ptr);
+	trace_android_rvh_cpuset_fork(task, &inherit_cpus);
+	if (!inherit_cpus)
+		set_cpus_allowed_ptr(task, current->cpus_ptr);
 	task->mems_allowed = current->mems_allowed;
 }
 
