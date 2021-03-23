@@ -2,3 +2,5 @@
 # commonly used symbols
   module_layout
   __put_task_struct
+  init_user_ns
+  ns_capable_noaudit
