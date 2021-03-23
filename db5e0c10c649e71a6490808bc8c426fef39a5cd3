@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f34c9c75_05696873",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-03-23T17:52:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "35bdd1f0_ac5efe40",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 18
+      },
+      "revId": "db5e0c10c649e71a6490808bc8c426fef39a5cd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b87c23f8_0bbe4c2e",
@@ -61,6 +85,30 @@
       "writtenOn": "2021-03-23T01:29:27Z",
       "side": 1,
       "message": "Only the patch used as the origin should be listed here. This one should be removed.",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 80
+      },
+      "revId": "db5e0c10c649e71a6490808bc8c426fef39a5cd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd2ce2e1_8aa693af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-03-23T17:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b87c23f8_0bbe4c2e",
       "range": {
         "startLine": 137,
         "startChar": 0,
