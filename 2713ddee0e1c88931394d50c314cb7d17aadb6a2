@@ -112,6 +112,98 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4786273f_8b21aac9",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1611,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-23T08:52:21Z",
+      "side": 1,
+      "message": "why can you not just use the hook above?  And make it not a \"restricted\" hook?",
+      "range": {
+        "startLine": 1611,
+        "startChar": 8,
+        "endLine": 1611,
+        "endChar": 42
+      },
+      "revId": "2713ddee0e1c88931394d50c314cb7d17aadb6a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de1587f5_fcd47644",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1628,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-23T08:52:21Z",
+      "side": 1,
+      "message": "why can\u0027t you just use the hook above this?",
+      "range": {
+        "startLine": 1628,
+        "startChar": 8,
+        "endLine": 1628,
+        "endChar": 42
+      },
+      "revId": "2713ddee0e1c88931394d50c314cb7d17aadb6a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1181f04d_a41f231a",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4181,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-23T08:52:21Z",
+      "side": 1,
+      "message": "you can use the hook above this line.",
+      "range": {
+        "startLine": 4181,
+        "startChar": 1,
+        "endLine": 4181,
+        "endChar": 36
+      },
+      "revId": "2713ddee0e1c88931394d50c314cb7d17aadb6a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4779083_43eaa443",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-23T08:52:21Z",
+      "side": 1,
+      "message": "why not use the hook above this one?",
+      "range": {
+        "startLine": 173,
+        "startChar": 1,
+        "endLine": 173,
+        "endChar": 36
+      },
+      "revId": "2713ddee0e1c88931394d50c314cb7d17aadb6a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b823944_d3af17a5",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 1
