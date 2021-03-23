@@ -67,6 +67,7 @@
 #include <linux/wait.h>
 
 #include <trace/hooks/sched.h>
+#include <trace/hooks/cgroup.h>
 
 DEFINE_STATIC_KEY_FALSE(cpusets_pre_enable_key);
 DEFINE_STATIC_KEY_FALSE(cpusets_enabled_key);
@@ -2905,6 +2906,7 @@ static void cpuset_fork(struct task_struct *task)
 	if (task_css_is_root(task, cpuset_cgrp_id))
 		return;
 
+	trace_android_rvh_oem_cpuset_fork(task);
 	set_cpus_allowed_ptr(task, current->cpus_ptr);
 	task->mems_allowed = current->mems_allowed;
 }
