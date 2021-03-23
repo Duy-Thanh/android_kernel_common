@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84efb3d6_04769362",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1288,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-03-23T22:44:51Z",
+      "side": 1,
+      "message": "why 0? isn\u0027t this an error? or maybe function should read till the end of the sig-\u003ehash_size instead of returning the error right away?",
+      "range": {
+        "startLine": 1288,
+        "startChar": 9,
+        "endLine": 1288,
+        "endChar": 10
+      },
+      "revId": "5e77d84b7e5cb2308d67309c335310c92882bc36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85e39350_9c35e484",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-03-23T22:44:51Z",
+      "side": 1,
+      "message": "where is the limit against reading past the user buffer size?",
+      "range": {
+        "startLine": 765,
+        "startChar": 8,
+        "endLine": 765,
+        "endChar": 58
+      },
+      "revId": "5e77d84b7e5cb2308d67309c335310c92882bc36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdd615b0_aa4700cc",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 833,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-03-23T22:44:51Z",
+      "side": 1,
+      "message": "making sure this won\u0027t trigger any UB that will break the whole function, signed overflow is undefined I believe",
+      "range": {
+        "startLine": 833,
+        "startChar": 1,
+        "endLine": 833,
+        "endChar": 42
+      },
+      "revId": "5e77d84b7e5cb2308d67309c335310c92882bc36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "281aeebe_eaedc321",
+        "filename": "fs/incfs/verity.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-03-23T22:44:51Z",
+      "side": 1,
+      "message": "nit: looks unaligned",
+      "range": {
+        "startLine": 42,
+        "startChar": 5,
+        "endLine": 42,
+        "endChar": 12
+      },
+      "revId": "5e77d84b7e5cb2308d67309c335310c92882bc36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
