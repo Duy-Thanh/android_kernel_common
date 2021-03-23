@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dc324f7_611ffe31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-23T11:32:46Z",
+      "side": 1,
+      "message": "This also does not update the .xml file to add the needed symbol for the root problem here 😞",
+      "revId": "7f934587e68f3696662580c78b0e62da0750e06f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c7b6689_e59dff3f",
