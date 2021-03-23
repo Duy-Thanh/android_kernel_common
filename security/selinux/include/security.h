@@ -220,21 +220,30 @@ static inline bool selinux_policycap_genfs_seclabel_symlinks(void)
 	return READ_ONCE(state->policycap[POLICYDB_CAPABILITY_GENFS_SECLABEL_SYMLINKS]);
 }
 
+<<<<<<< HEAD   (19a3b3 ANDROID: sched/fair: Do not sync task util with SD_BALANCE_F)
 static inline bool selinux_android_nlroute_getlink(void)
 {
 	struct selinux_state *state = &selinux_state;
 
 	return state->android_netlink_route;
 }
+=======
+struct selinux_policy_convert_data;
+
+struct selinux_load_state {
+	struct selinux_policy *policy;
+	struct selinux_policy_convert_data *convert_data;
+};
+>>>>>>> BRANCH (841963 Merge tag 'selinux-pr-20210322' of git://git.kernel.org/pub/)
 
 int security_mls_enabled(struct selinux_state *state);
 int security_load_policy(struct selinux_state *state,
-			void *data, size_t len,
-			struct selinux_policy **newpolicyp);
+			 void *data, size_t len,
+			 struct selinux_load_state *load_state);
 void selinux_policy_commit(struct selinux_state *state,
-			struct selinux_policy *newpolicy);
+			   struct selinux_load_state *load_state);
 void selinux_policy_cancel(struct selinux_state *state,
-			struct selinux_policy *policy);
+			   struct selinux_load_state *load_state);
 int security_read_policy(struct selinux_state *state,
 			 void **data, size_t *len);
 int security_read_state_kernel(struct selinux_state *state,
