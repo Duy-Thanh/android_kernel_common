@@ -9,6 +9,7 @@
  */
 
 #define SCHED_CPUFREQ_IOWAIT	(1U << 0)
+#define SCHED_CPUFREQ_OEM_RESERVE (1U << 30)
 
 #ifdef CONFIG_CPU_FREQ
 struct cpufreq_policy;

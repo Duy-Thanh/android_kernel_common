@@ -1608,6 +1608,7 @@ static inline void enqueue_task(struct rq *rq, struct task_struct *p, int flags)
 	p->sched_class->enqueue_task(rq, p, flags);
 
 	trace_android_rvh_enqueue_task(rq, p, flags);
+        trace_android_rvh_oem_enqueue_task(rq, p);
 }
 
 static inline void dequeue_task(struct rq *rq, struct task_struct *p, int flags)
@@ -1624,6 +1625,7 @@ static inline void dequeue_task(struct rq *rq, struct task_struct *p, int flags)
 	p->sched_class->dequeue_task(rq, p, flags);
 
 	trace_android_rvh_dequeue_task(rq, p, flags);
+        trace_android_rvh_oem_dequeue_task(rq, p);
 }
 
 void activate_task(struct rq *rq, struct task_struct *p, int flags)
@@ -1886,6 +1888,7 @@ void set_cpus_allowed_common(struct task_struct *p, const struct cpumask *new_ma
 {
 	cpumask_copy(&p->cpus_mask, new_mask);
 	p->nr_cpus_allowed = cpumask_weight(new_mask);
+	trace_android_rvh_oem_set_cpus_allowed_comm(p, new_mask);
 }
 
 void do_set_cpus_allowed(struct task_struct *p, const struct cpumask *new_mask)
@@ -3220,7 +3223,7 @@ static void __sched_fork(unsigned long clone_flags, struct task_struct *p)
 	p->se.nr_migrations		= 0;
 	p->se.vruntime			= 0;
 	INIT_LIST_HEAD(&p->se.group_node);
-
+	trace_android_rvh_oem_sched_fork(p);
 #ifdef CONFIG_FAIR_GROUP_SCHED
 	p->se.cfs_rq			= NULL;
 #endif
@@ -4175,6 +4178,7 @@ void scheduler_tick(void)
 #endif
 
 	trace_android_vh_scheduler_tick(rq);
+	trace_android_vh_oem_scheduler_tick(rq);
 }
 
 #ifdef CONFIG_NO_HZ_FULL
@@ -6098,6 +6102,7 @@ long sched_setaffinity(pid_t pid, const struct cpumask *in_mask)
 		rcu_read_unlock();
 	}
 
+	trace_android_vh_oem_sched_setaffinity(p, in_mask);
 	retval = security_task_setscheduler(p);
 	if (retval)
 		goto out_free_new_mask;
