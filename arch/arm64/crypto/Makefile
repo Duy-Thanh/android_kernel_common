@@ -84,3 +84,35 @@ $(src)/sha512-core.S_shipped: $(src)/sha512-armv8.pl
 endif
 
 clean-files += poly1305-core.S sha256-core.S sha512-core.S
+
+ifneq ($(CONFIG_CRYPTO_FIPS140_INTEGRITY_CHECK),)
+#
+# Create a separate FIPS archive that duplicates the modules that are relevant
+# for FIPS 140-2 certification as builtin objects
+#
+crypto-arm64-fips-modules := sha1-ce.o sha2-ce.o sha512-ce.o ghash-ce.o \
+			     aes-ce-cipher.o aes-ce-blk.o aes-neon-blk.o \
+			     sha256-arm64.o sha512-arm64.o aes-arm64.o \
+			     aes-neon-bs.o
+
+crypto-arm64-fips-objs := $(foreach o,$(crypto-arm64-fips-modules),$($(o:.o=-y):.o=-fips.o))
+extra-$(CONFIG_CRYPTO_FIPS140_INTEGRITY_CHECK) += crypto-arm64-fips.a
+
+CFLAGS_aes-glue-ce-fips.o	:= -DUSE_V8_CRYPTO_EXTENSIONS
+
+FIPS140_CFLAGS := -D__DISABLE_EXPORTS -DBUILD_FIPS140_KO
+
+$(obj)/aes-glue-%-fips.o: KBUILD_CFLAGS += $(FIPS140_CFLAGS)
+$(obj)/aes-glue-%-fips.o: $(src)/aes-glue.c FORCE
+	$(call if_changed_rule,cc_o_c)
+
+$(obj)/%-fips.o: KBUILD_CFLAGS += $(FIPS140_CFLAGS)
+$(obj)/%-fips.o: $(src)/%.c FORCE
+	$(call if_changed_rule,cc_o_c)
+
+$(obj)/%-fips.o: $(src)/%.S FORCE
+	$(call if_changed_rule,as_o_S)
+
+$(obj)/crypto-arm64-fips.a: $(addprefix $(obj)/,$(crypto-arm64-fips-objs)) FORCE
+	$(call if_changed,ar_and_symver)
+endif

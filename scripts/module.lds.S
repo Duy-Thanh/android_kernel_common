@@ -49,8 +49,10 @@ SECTIONS {
 	}
 
 	.rodata : {
+		*(.rodata.._start)
 		*(.rodata .rodata.[0-9a-zA-Z_]*)
 		*(.rodata..L*)
+		*(.rodata.._end)
 	}
 
 #ifdef CONFIG_CFI_CLANG
@@ -59,8 +61,10 @@ SECTIONS {
 	 * .text section, and that the section is aligned to page size.
 	 */
 	.text : ALIGN(PAGE_SIZE) {
+		*(.text.._start)
 		*(.text.__cfi_check)
 		*(.text .text.[0-9a-zA-Z_]* .text..L.cfi*)
+		*(.text.._end)
 	}
 #endif
 }
