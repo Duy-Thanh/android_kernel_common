@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "35bdd1f0_ac5efe40",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2021-03-23T01:43:31Z",
+      "side": 1,
+      "message": "I CP\u0027ed the patches from linux-next and after resolving the conflicts, added my sign and Conflicts info at the end of the commit message. Ihe patch is merged into linux-next this way with description containing the cover-letter.",
+      "parentUuid": "96a9d53e_512b450c",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 18
+      },
+      "revId": "db5e0c10c649e71a6490808bc8c426fef39a5cd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b87c23f8_0bbe4c2e",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
