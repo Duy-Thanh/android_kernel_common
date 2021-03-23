@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd0d7341_1ebddf15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-23T11:19:04Z",
+      "side": 1,
+      "message": "Also you need some text for a changelog 😊",
+      "revId": "7f934587e68f3696662580c78b0e62da0750e06f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c7b6689_e59dff3f",
+        "filename": "android/abi_gki_aarch64",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-23T11:19:04Z",
+      "side": 1,
+      "message": "put these in the abi list for the specific config that asks for this, as the \"default\" list does not have anything as a module.",
+      "range": {
+        "startLine": 5,
+        "startChar": 2,
+        "endLine": 6,
+        "endChar": 20
+      },
+      "revId": "7f934587e68f3696662580c78b0e62da0750e06f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
