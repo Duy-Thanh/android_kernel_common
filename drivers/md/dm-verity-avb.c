@@ -221,9 +221,25 @@ MODULE_AUTHOR("David Zeuthen <zeuthen@google.com>");
 MODULE_DESCRIPTION("AVB-specific error handler for dm-verity");
 MODULE_LICENSE("GPL");
 
-/* Declare parameter with no module prefix */
-#undef MODULE_PARAM_PREFIX
-#define MODULE_PARAM_PREFIX	"androidboot.vbmeta."
+/* Declare parameters with default module prefix of dm_verity */
 module_param_string(device, avb_vbmeta_device, sizeof(avb_vbmeta_device), 0);
 module_param_string(invalidate_on_error, avb_invalidate_on_error,
 		    sizeof(avb_invalidate_on_error), 0);
+
+static int __init device_setup(char *str)
+{
+	strlcpy(avb_vbmeta_device, str, sizeof(avb_vbmeta_device));
+	DMWARN("Please use dm_verity.device instead the deprecated androidboot.vbmeta.device");
+	return 1;
+}
+
+static int __init invalidate_on_error_setup(char *str)
+{
+	strlcpy(avb_invalidate_on_error, str, sizeof(avb_invalidate_on_error));
+	DMWARN("Please use dm_verity.invalidate_on_error instead of the deprecated "
+		"androidboot.vbmeta.invalidate_on_error");
+	return 1;
+}
+
+__setup("androidboot.vbmeta.device=", device_setup);
+__setup("androidboot.vbmeta.invalidate_on_error=", invalidate_on_error_setup);
