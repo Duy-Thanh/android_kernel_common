@@ -16,6 +16,24 @@
       "message": "Can we wait till it lands in char-misc-next please? And maybe update the git details after that?",
       "revId": "4c0712110413115509999487ca84876967cf4a88",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2c4bd90_dbb6c415",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741425
+      },
+      "writtenOn": "2021-03-23T19:47:58Z",
+      "side": 1,
+      "message": "Is there any hard deadline for the kernel patches to enter ACK for the coming Android release? I will rebase again from char-misc-next as long as we don\u0027t miss the deadline.",
+      "parentUuid": "3b0c97f3_07189f39",
+      "revId": "4c0712110413115509999487ca84876967cf4a88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
