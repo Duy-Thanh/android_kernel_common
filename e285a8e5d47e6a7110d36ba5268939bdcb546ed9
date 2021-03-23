@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2f10c83_0315e4f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1471648
+      },
+      "writtenOn": "2021-03-23T18:34:04Z",
+      "side": 1,
+      "message": "I think it makes sense to squash this fix one into the previous commit. Otherwise, reverting this commit in the future (if there\u0027s a need) would be a hassle. Also, this would keep the history cleaner.",
+      "revId": "e285a8e5d47e6a7110d36ba5268939bdcb546ed9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
