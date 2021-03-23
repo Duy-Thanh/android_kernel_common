@@ -553,6 +553,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_wp_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_anonymous_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uprobes_replace_page);
+<<<<<<< HEAD   (6c1c18 ANDROID: GKI: net: add vendor hooks net qos for gki purpose)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_writepage);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_node_memcgs);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmap_region);
@@ -566,3 +567,31 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_pr_set_vma_name_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_charge);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_add_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_node);
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_list_add_work);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_has_proc_work_ilocked);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_release_special_work);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_gfp_zone_flags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_readahead_gfp_mask);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_down_read);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_up_write);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_percpu_rwsem_wait_complete);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_trylock_failed);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sd_init_unmap_multi_segment);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sd_setup_unmap_multi_segment);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_scan_type);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_list_add_work);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_has_proc_work_ilocked);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_release_special_work);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_gfp_zone_flags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_readahead_gfp_mask);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_down_read);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_up_write);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_percpu_rwsem_wait_complete);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_trylock_failed);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sd_init_unmap_multi_segment);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sd_setup_unmap_multi_segment);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_scan_type);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpuset_fork);
+>>>>>>> CHANGE (02992f ANDROID: cgroup: Add vendor hook for cpuset.)
