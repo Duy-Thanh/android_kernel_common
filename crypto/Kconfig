@@ -32,6 +32,10 @@ config CRYPTO_FIPS
 	  certification.  You should say no unless you know what
 	  this is.
 
+config CRYPTO_FIPS140_INTEGRITY_CHECK
+	bool "Enable FIPS140-2 integrity self-checked loadable module"
+	depends on LTO_CLANG && MODULES && ARM64 && ARM64_MODULE_PLTS
+
 config CRYPTO_ALGAPI
 	tristate
 	select CRYPTO_ALGAPI2
