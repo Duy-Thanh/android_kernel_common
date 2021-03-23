@@ -76,6 +76,83 @@
       "message": "Commit does not link to an upstream reference at lore\nPlease add a line like \u0027Link: https://lore.kernel.org/...\u0027\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 364568635 android-build.ayeaye-python-dispatcher_20210323.05_p0",
       "revId": "e3afe8904d5dea77a95e799ab871698fd3c71c31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000009287470",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1651669?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "3d4973c7_1f8705dd",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 20,
+                "startChar": 1,
+                "endLine": 20,
+                "endChar": 1
+              },
+              "replacement": "Signed-off-by: Kaiyi Li \u003ckaiyili@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "8ce8699e_b11c4237",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-03-23T22:41:53Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Kaiyi Li \u003ckaiyili@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 364568635 android-build.ayeaye-python-dispatcher_20210323.05_p0",
+      "revId": "e3afe8904d5dea77a95e799ab871698fd3c71c31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000009287470",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1651669?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e38f8482_dec41c7a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-03-23T22:41:53Z",
+      "side": 1,
+      "message": "Commit does not link to an upstream reference at lore\nPlease add a line like \u0027Link: https://lore.kernel.org/...\u0027\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 364568635 android-build.ayeaye-python-dispatcher_20210323.05_p0",
+      "revId": "e3afe8904d5dea77a95e799ab871698fd3c71c31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000009287470",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1651669?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "0514eefc_1fcad7f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-03-23T22:41:53Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a properly formatted Bug: or Fixes: line\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 364568635 android-build.ayeaye-python-dispatcher_20210323.05_p0",
+      "revId": "e3afe8904d5dea77a95e799ab871698fd3c71c31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
