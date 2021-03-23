@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e2903da_ed569dea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-23T10:59:23Z",
+      "side": 1,
+      "message": "Drivers should not be having direct read/write access to the filesystem.  I\u0027ve highlighted 2 symbols that show this in the list, but there are others...",
+      "revId": "a742408924266622140867033a61b105d7dfb692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b102f4a6_54d99f57",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-23T10:59:23Z",
+      "side": 1,
+      "message": "these should not be needed by any driver, please fix up.",
+      "range": {
+        "startLine": 406,
+        "startChar": 2,
+        "endLine": 407,
+        "endChar": 11
+      },
+      "revId": "a742408924266622140867033a61b105d7dfb692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
