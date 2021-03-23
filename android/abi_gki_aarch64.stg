@@ -276885,6 +276885,12 @@ function {
   parameter_id: 0x1e9705eb
 }
 function {
+  id: 0x173dd32d
+  return_type_id: 0x48b5725f
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x38fa32ef
+}
+function {
   id: 0x1744a638
   return_type_id: 0x48b5725f
   parameter_id: 0x1f73dead
@@ -300998,6 +301004,13 @@ function {
   parameter_id: 0x11cfee5a
 }
 function {
+  id: 0x9bd79f74
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x310ec01d
+}
+function {
   id: 0x9bd7cd8d
   return_type_id: 0x6720d32f
   parameter_id: 0x165dc292
@@ -301010,6 +301023,14 @@ function {
   parameter_id: 0x1d19a9d5
   parameter_id: 0x310ec01d
   parameter_id: 0x13580d6c
+}
+function {
+  id: 0x9bd7d84b
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x310ec01d
+  parameter_id: 0x11cfee5a
 }
 function {
   id: 0x9bd7dc4e
@@ -314365,6 +314386,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_cpufreq_transition"
 }
 elf_symbol {
+  id: 0x1a7f4cf6
+  name: "__traceiter_android_rvh_cpuset_fork"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd59a4464
+  type_id: 0x9bdfaf3f
+  full_name: "__traceiter_android_rvh_cpuset_fork"
+}
+elf_symbol {
   id: 0x8f1b1c1e
   name: "__traceiter_android_rvh_dequeue_entity"
   is_defined: true
@@ -314939,6 +314969,15 @@ elf_symbol {
   crc: 0xe0c3c979
   type_id: 0x9b67b049
   full_name: "__traceiter_android_rvh_set_cpus_allowed_by_task"
+}
+elf_symbol {
+  id: 0xaf658447
+  name: "__traceiter_android_rvh_set_cpus_allowed_comm"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa2866938
+  type_id: 0x9bd79f74
+  full_name: "__traceiter_android_rvh_set_cpus_allowed_comm"
 }
 elf_symbol {
   id: 0xe56edb7a
@@ -315967,6 +316006,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_sched_pelt_multiplier"
 }
 elf_symbol {
+  id: 0x237634b3
+  name: "__traceiter_android_vh_sched_setaffinity_early"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x19187cac
+  type_id: 0x9bd7d84b
+  full_name: "__traceiter_android_vh_sched_setaffinity_early"
+}
+elf_symbol {
   id: 0xb5ed74f6
   name: "__traceiter_android_vh_sched_show_task"
   is_defined: true
@@ -316642,6 +316690,15 @@ elf_symbol {
   full_name: "__tracepoint_android_rvh_cpufreq_transition"
 }
 elf_symbol {
+  id: 0xc53e6388
+  name: "__tracepoint_android_rvh_cpuset_fork"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xa0966112
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_cpuset_fork"
+}
+elf_symbol {
   id: 0x3eb0f084
   name: "__tracepoint_android_rvh_dequeue_entity"
   is_defined: true
@@ -317216,6 +317273,15 @@ elf_symbol {
   crc: 0xb9f0b1bc
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_set_cpus_allowed_by_task"
+}
+elf_symbol {
+  id: 0x93751239
+  name: "__tracepoint_android_rvh_set_cpus_allowed_comm"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xb2badd4a
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_set_cpus_allowed_comm"
 }
 elf_symbol {
   id: 0x70131d40
@@ -318242,6 +318308,15 @@ elf_symbol {
   crc: 0x8363715e
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_sched_pelt_multiplier"
+}
+elf_symbol {
+  id: 0x40d6a8c5
+  name: "__tracepoint_android_vh_sched_setaffinity_early"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xcec91b82
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_sched_setaffinity_early"
 }
 elf_symbol {
   id: 0x931fa088
@@ -324174,6 +324249,15 @@ elf_symbol {
   crc: 0x18fb2caf
   type_id: 0x10985193
   full_name: "cpus_read_unlock"
+}
+elf_symbol {
+  id: 0x7d95ddab
+  name: "cpuset_cpus_allowed"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9c483316
+  type_id: 0x173dd32d
+  full_name: "cpuset_cpus_allowed"
 }
 elf_symbol {
   id: 0xa49d0aea
@@ -368978,6 +369062,10 @@ symbols {
     value: 0x1baec33d
   }
   symbol {
+    key: "__traceiter_android_rvh_cpuset_fork"
+    value: 0x1a7f4cf6
+  }
+  symbol {
     key: "__traceiter_android_rvh_dequeue_entity"
     value: 0x8f1b1c1e
   }
@@ -369232,6 +369320,10 @@ symbols {
   symbol {
     key: "__traceiter_android_rvh_set_cpus_allowed_by_task"
     value: 0xbe8d73f2
+  }
+  symbol {
+    key: "__traceiter_android_rvh_set_cpus_allowed_comm"
+    value: 0xaf658447
   }
   symbol {
     key: "__traceiter_android_rvh_set_gfp_zone_flags"
@@ -369690,6 +369782,10 @@ symbols {
     value: 0x3a4e20d6
   }
   symbol {
+    key: "__traceiter_android_vh_sched_setaffinity_early"
+    value: 0x237634b3
+  }
+  symbol {
     key: "__traceiter_android_vh_sched_show_task"
     value: 0xb5ed74f6
   }
@@ -369990,6 +370086,10 @@ symbols {
     value: 0x9f779ef7
   }
   symbol {
+    key: "__tracepoint_android_rvh_cpuset_fork"
+    value: 0xc53e6388
+  }
+  symbol {
     key: "__tracepoint_android_rvh_dequeue_entity"
     value: 0x3eb0f084
   }
@@ -370244,6 +370344,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_rvh_set_cpus_allowed_by_task"
     value: 0x4bc6b114
+  }
+  symbol {
+    key: "__tracepoint_android_rvh_set_cpus_allowed_comm"
+    value: 0x93751239
   }
   symbol {
     key: "__tracepoint_android_rvh_set_gfp_zone_flags"
@@ -370700,6 +370804,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_sched_pelt_multiplier"
     value: 0xb3b18fc4
+  }
+  symbol {
+    key: "__tracepoint_android_vh_sched_setaffinity_early"
+    value: 0x40d6a8c5
   }
   symbol {
     key: "__tracepoint_android_vh_sched_show_task"
@@ -373340,6 +373448,10 @@ symbols {
   symbol {
     key: "cpus_read_unlock"
     value: 0x0e19b467
+  }
+  symbol {
+    key: "cpuset_cpus_allowed"
+    value: 0x7d95ddab
   }
   symbol {
     key: "crc16"
