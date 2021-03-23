@@ -22,6 +22,92 @@
       },
       "revId": "2713ddee0e1c88931394d50c314cb7d17aadb6a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7abdde07_2b9c5219",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-23T08:50:26Z",
+      "side": 1,
+      "message": "Please break this up into a patch series, only doing \"one logical thing\" per patch.  You have lumped all of the different hooks and changes into one patch here, which makes it hard to review and accept.\n\nThis is the same process that the upstream kernel development process has, nothing new here 😊",
+      "revId": "2713ddee0e1c88931394d50c314cb7d17aadb6a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac456a4d_9b6e3e10",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-23T08:50:26Z",
+      "side": 1,
+      "message": "no need for \"OEM\" in all of these, right?",
+      "range": {
+        "startLine": 67,
+        "startChar": 40,
+        "endLine": 67,
+        "endChar": 44
+      },
+      "revId": "2713ddee0e1c88931394d50c314cb7d17aadb6a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fd57184_69b3349f",
+        "filename": "include/linux/sched/cpufreq.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-23T08:50:26Z",
+      "side": 1,
+      "message": "what is this value here for?  And why is it needed?\n\nPlease make this a separate patch adding only this functionality.",
+      "range": {
+        "startLine": 12,
+        "startChar": 8,
+        "endLine": 12,
+        "endChar": 33
+      },
+      "revId": "2713ddee0e1c88931394d50c314cb7d17aadb6a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acc7f506_af43195b",
+        "filename": "include/linux/sched/user.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-23T08:50:26Z",
+      "side": 1,
+      "message": "this should be a separate patch from a \"add hooks patch\".",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 30
+      },
+      "revId": "2713ddee0e1c88931394d50c314cb7d17aadb6a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
