@@ -39,6 +39,24 @@
       "message": "Other than unstable SHA, LGTM.",
       "revId": "edeb86a6a2736339d164ba928f3d89fbad4fa594",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba5fb818_3b6a108b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2021-03-23T01:46:55Z",
+      "side": 1,
+      "message": "Thanks for the review. I\u0027ll update the commit messages of all the CLs in this topic with link.",
+      "parentUuid": "f1f029c1_1aa2f622",
+      "revId": "edeb86a6a2736339d164ba928f3d89fbad4fa594",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
