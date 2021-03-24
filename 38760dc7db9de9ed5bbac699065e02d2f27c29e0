@@ -135,6 +135,30 @@
       },
       "revId": "38760dc7db9de9ed5bbac699065e02d2f27c29e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3155c64_9bc86339",
+        "filename": "drivers/char/virtio_console.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 1270,
+      "author": {
+        "id": 1046320
+      },
+      "writtenOn": "2021-03-24T23:40:57Z",
+      "side": 1,
+      "message": "Thanks Greg,\n    do you have some guidelines how to do it in upstream ?\nI have never done that before. kernel community probably have some\nwell established rules to follow.\n\n   in addition, what are the alternatives to model parameters ?\nas far as I know, only virtual devices such as cuttlefish etc\nwant to convert virtio-console to gnss device, and it does not apply\nto real devices.",
+      "parentUuid": "ffa4cf40_112088c0",
+      "range": {
+        "startLine": 1270,
+        "startChar": 6,
+        "endLine": 1270,
+        "endChar": 7
+      },
+      "revId": "38760dc7db9de9ed5bbac699065e02d2f27c29e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
