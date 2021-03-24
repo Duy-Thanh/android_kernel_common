@@ -275,8 +275,9 @@ DECLARE_RESTRICTED_HOOK(android_rvh_check_preempt_wakeup_ignore,
 	TP_PROTO(struct task_struct *p, bool *ignore),
 	TP_ARGS(p, ignore), 1);
 DECLARE_RESTRICTED_HOOK(android_rvh_replace_next_task_fair,
-	TP_PROTO(struct rq *rq, struct task_struct **p, struct sched_entity **se, bool *repick, bool simple),
-	TP_ARGS(rq, p, se, repick, simple), 1);
+	TP_PROTO(struct rq *rq, struct task_struct **p, struct sched_entity **se, bool *repick,
+			bool simple, struct task_struct *prev, bool *find),
+	TP_ARGS(rq, p, se, repick, simple, prev, find), 1);
 
 DECLARE_RESTRICTED_HOOK(android_rvh_util_est_update,
 	TP_PROTO(struct cfs_rq *cfs_rq, struct task_struct *p, bool task_sleep, int *ret),
@@ -285,6 +286,51 @@ DECLARE_RESTRICTED_HOOK(android_rvh_util_est_update,
 DECLARE_HOOK(android_vh_account_task_time,
 	TP_PROTO(struct task_struct *p, struct rq *rq, int user_tick),
 	TP_ARGS(p, rq, user_tick));
+
+DECLARE_RESTRICTED_HOOK(android_rvh_free_task,
+	TP_PROTO(struct task_struct *p),
+	TP_ARGS(p), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_after_enqueue_task,
+	TP_PROTO(struct rq *rq, struct task_struct *p),
+	TP_ARGS(rq, p), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_after_dequeue_task,
+	TP_PROTO(struct rq *rq, struct task_struct *p),
+	TP_ARGS(rq, p), 1);
+
+struct cfs_rq;
+struct sched_entity;
+struct rq_flags;
+DECLARE_RESTRICTED_HOOK(android_rvh_RB_enqueue_entity,
+	TP_PROTO(struct cfs_rq *cfs, struct sched_entity *se),
+	TP_ARGS(cfs, se), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_RB_dequeue_entity,
+	TP_PROTO(struct cfs_rq *cfs, struct sched_entity *se),
+	TP_ARGS(cfs, se), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_entity_tick,
+	TP_PROTO(struct cfs_rq *cfs_rq, struct sched_entity *se),
+	TP_ARGS(cfs_rq, se), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_enqueue_task_fair,
+	TP_PROTO(struct rq *rq, struct task_struct *p, int flags),
+	TP_ARGS(rq, p, flags), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_dequeue_task_fair,
+	TP_PROTO(struct rq *rq, struct task_struct *p, int flags),
+	TP_ARGS(rq, p, flags), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_check_preempt_tick_two,
+	TP_PROTO(struct cfs_rq *cfs, struct sched_entity *se, bool *resched),
+	TP_ARGS(cfs, se, resched), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_check_preempt_wakeup_two,
+	TP_PROTO(struct rq *rq, struct task_struct *p, int flag, bool *resched),
+	TP_ARGS(rq, p, flag, resched), 1);
+
+
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_SCHED_H */
