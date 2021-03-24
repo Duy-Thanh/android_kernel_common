@@ -582,6 +582,7 @@ static void __enqueue_entity(struct cfs_rq *cfs_rq, struct sched_entity *se)
 	struct sched_entity *entry;
 	bool leftmost = true;
 
+	trace_android_rvh_RB_enqueue_entity(cfs_rq, se);
 	/*
 	 * Find the right place in the rbtree:
 	 */
@@ -607,6 +608,7 @@ static void __enqueue_entity(struct cfs_rq *cfs_rq, struct sched_entity *se)
 
 static void __dequeue_entity(struct cfs_rq *cfs_rq, struct sched_entity *se)
 {
+	trace_android_rvh_RB_dequeue_entity(cfs_rq, se);
 	rb_erase_cached(&se->run_node, &cfs_rq->tasks_timeline);
 }
 
@@ -4382,6 +4384,8 @@ check_preempt_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr)
 	struct sched_entity *se;
 	s64 delta;
 	bool skip_preempt = false;
+	bool resched = false;
+
 
 	ideal_runtime = sched_slice(cfs_rq, curr);
 	delta_exec = curr->sum_exec_runtime - curr->prev_sum_exec_runtime;
@@ -4404,6 +4408,10 @@ check_preempt_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr)
 	 * This also mitigates buddy induced latencies under load.
 	 */
 	if (delta_exec < sysctl_sched_min_granularity)
+		return;
+
+	trace_android_rvh_check_preempt_tick_two(cfs_rq, curr, &resched);
+	if (resched)
 		return;
 
 	se = __pick_first_entity(cfs_rq);
@@ -4574,6 +4582,7 @@ entity_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr, int queued)
 
 	if (cfs_rq->nr_running > 1)
 		check_preempt_tick(cfs_rq, curr);
+	trace_android_rvh_entity_tick(cfs_rq, curr);
 }
 
 
@@ -5553,6 +5562,7 @@ enqueue_task_fair(struct rq *rq, struct task_struct *p, int flags)
 		flags = ENQUEUE_WAKEUP;
 	}
 
+	trace_android_rvh_enqueue_task_fair(rq, p, flags);
 	for_each_sched_entity(se) {
 		cfs_rq = cfs_rq_of(se);
 
@@ -5659,6 +5669,7 @@ static void dequeue_task_fair(struct rq *rq, struct task_struct *p, int flags)
 		flags |= DEQUEUE_SLEEP;
 	}
 
+	trace_android_rvh_dequeue_task_fair(rq, p, flags);
 	for_each_sched_entity(se) {
 		cfs_rq = cfs_rq_of(se);
 
@@ -7029,6 +7040,7 @@ static void check_preempt_wakeup(struct rq *rq, struct task_struct *p, int wake_
 	int next_buddy_marked = 0;
 	bool preempt = false;
 	bool ignore = false;
+	bool resched = false;
 
 	if (unlikely(se == pse))
 		return;
@@ -7091,6 +7103,10 @@ static void check_preempt_wakeup(struct rq *rq, struct task_struct *p, int wake_
 		goto preempt;
 	}
 
+	trace_android_rvh_check_preempt_wakeup_two(rq, p, wake_flags, &resched);
+	if (resched)
+		goto preempt;
+
 	return;
 
 preempt:
@@ -7119,6 +7135,7 @@ pick_next_task_fair(struct rq *rq, struct task_struct *prev, struct rq_flags *rf
 	struct task_struct *p;
 	int new_tasks;
 	bool repick = false;
+	bool find = false;
 
 again:
 	if (!sched_fair_runnable(rq))
@@ -7172,8 +7189,7 @@ again:
 	} while (cfs_rq);
 
 	p = task_of(se);
-	trace_android_rvh_replace_next_task_fair(rq, &p, &se, &repick, false);
-
+	trace_android_rvh_replace_next_task_fair(rq, &p, &se, &repick, false, prev, &find);
 	/*
 	 * Since we haven't yet done put_prev_entity and if the selected task
 	 * is a different task than we started out with, try and touch the
@@ -7206,9 +7222,14 @@ simple:
 	if (prev)
 		put_prev_task(rq, prev);
 
-	trace_android_rvh_replace_next_task_fair(rq, &p, &se, &repick, true);
+	trace_android_rvh_replace_next_task_fair(rq, &p, &se, &repick, true, prev, &find);
 	if (repick)
 		goto done;
+	if (find) {
+		cfs_rq = cfs_rq_of(se);
+		set_next_entity(cfs_rq, se);
+		goto done;
+	}
 
 	do {
 		se = pick_next_entity(cfs_rq, NULL);
