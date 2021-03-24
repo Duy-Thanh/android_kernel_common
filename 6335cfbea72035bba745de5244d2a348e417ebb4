@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f671e1c5_54436d18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-24T05:48:42Z",
+      "side": 1,
+      "message": "but cuttlefish does not need these symbols, why did you add them there?",
+      "revId": "6335cfbea72035bba745de5244d2a348e417ebb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
