@@ -52,6 +52,24 @@
       "parentUuid": "e30ad54c_3ca41bab",
       "revId": "e8fe434d4a65fb23c48cc26f9432a0bcbe181db4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ad18d2a_aeb55d3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1475437
+      },
+      "writtenOn": "2021-03-24T08:35:39Z",
+      "side": 1,
+      "message": "As I wrote commit message, we map not only DCBAA but also device context to SRAM not DRAM. That\u0027s why we need to hook alloc/free container_ctx. I found out alloc/free_dcbaa were already included in hooks.",
+      "parentUuid": "341d944f_3ad4ed32",
+      "revId": "e8fe434d4a65fb23c48cc26f9432a0bcbe181db4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
