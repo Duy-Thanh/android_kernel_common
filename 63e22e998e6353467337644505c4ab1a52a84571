@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbdcf2e5_7971889f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-03-24T12:10:53Z",
+      "side": 1,
+      "message": "There are review comments on aosp/1649309 which don\u0027t seem to be addressed here. Please explain why you are not re-using the existing hooks, thanks.",
+      "revId": "63e22e998e6353467337644505c4ab1a52a84571",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
