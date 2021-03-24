@@ -9,7 +9,14 @@
 
 #include <linux/types.h>
 #include <linux/bug.h>
+<<<<<<< HEAD   (7a6828 Merge 4.9.262 into android-4.9-p)
 #include <linux/restart_block.h>
+=======
+#include <linux/errno.h>
+
+struct timespec;
+struct compat_timespec;
+>>>>>>> BRANCH (5023fe Linux 4.9.263)
 
 #ifdef CONFIG_THREAD_INFO_IN_TASK
 /*
@@ -25,6 +32,18 @@
 #include <asm/thread_info.h>
 
 #ifdef __KERNEL__
+
+#ifndef arch_set_restart_data
+#define arch_set_restart_data(restart) do { } while (0)
+#endif
+
+static inline long set_restart_fn(struct restart_block *restart,
+					long (*fn)(struct restart_block *))
+{
+	restart->fn = fn;
+	arch_set_restart_data(restart);
+	return -ERESTART_RESTARTBLOCK;
+}
 
 #define THREADINFO_GFP	(GFP_KERNEL_ACCOUNT | __GFP_NOTRACK | __GFP_ZERO)
 
