@@ -1190,6 +1190,7 @@ static void ufshcd_clock_scaling_unprepare(struct ufs_hba *hba)
 static int ufshcd_devfreq_scale(struct ufs_hba *hba, bool scale_up)
 {
 	int ret = 0;
+	int wb_always_on = 0;
 
 	/* let's not get into low power until clock scaling is completed */
 	ufshcd_hold(hba, false);
@@ -1221,10 +1222,13 @@ static int ufshcd_devfreq_scale(struct ufs_hba *hba, bool scale_up)
 		}
 	}
 
-	/* Enable Write Booster if we have scaled up else disable it */
-	up_write(&hba->clk_scaling_lock);
-	ufshcd_wb_ctrl(hba, scale_up);
-	down_write(&hba->clk_scaling_lock);
+	trace_android_vh_ufs_wb_always_on(&wb_always_on);
+	if (!wb_always_on) {
+		/* Enable Write Booster if we have scaled up else disable it */
+		up_write(&hba->clk_scaling_lock);
+		ufshcd_wb_ctrl(hba, scale_up);
+		down_write(&hba->clk_scaling_lock);
+	}	
 
 out_unprepare:
 	ufshcd_clock_scaling_unprepare(hba);

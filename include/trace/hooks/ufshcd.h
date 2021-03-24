@@ -55,6 +55,10 @@ DECLARE_HOOK(android_vh_ufs_update_sdev,
 	TP_PROTO(struct scsi_device *sdev),
 	TP_ARGS(sdev));
 
+DECLARE_HOOK(android_vh_ufs_wb_always_on,
+	TP_PROTO(int *wb_always_on),
+	TP_ARGS(wb_always_on));
+
 #endif /* _TRACE_HOOK_UFSHCD_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
