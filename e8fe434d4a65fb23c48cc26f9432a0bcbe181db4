@@ -16,6 +16,24 @@
       "message": "Again, this should not be needed as-is, please use the xhci offload hooks that are already merged.",
       "revId": "e8fe434d4a65fb23c48cc26f9432a0bcbe181db4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e30ad54c_3ca41bab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1475437
+      },
+      "writtenOn": "2021-03-24T08:24:15Z",
+      "side": 1,
+      "message": "We already checked xhci offload hooks but still need 2 more hooks and it needs to modify alloc_transfer_ring.\n\n8 more symbols are also needed to export for ring management",
+      "parentUuid": "a161e79f_447084ed",
+      "revId": "e8fe434d4a65fb23c48cc26f9432a0bcbe181db4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
