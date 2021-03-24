@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0953be17_28096927",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1288,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-03-24T21:10:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84efb3d6_04769362",
+      "range": {
+        "startLine": 1288,
+        "startChar": 9,
+        "endLine": 1288,
+        "endChar": 10
+      },
+      "revId": "5e77d84b7e5cb2308d67309c335310c92882bc36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85e39350_9c35e484",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-03-23T22:44:51Z",
       "side": 1,
       "message": "where is the limit against reading past the user buffer size?",
+      "range": {
+        "startLine": 765,
+        "startChar": 8,
+        "endLine": 765,
+        "endChar": 58
+      },
+      "revId": "5e77d84b7e5cb2308d67309c335310c92882bc36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7df1859d_065cd63d",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-03-24T21:10:48Z",
+      "side": 1,
+      "message": "This is reading into the tmp_buf of size a page\n\ncopy_to_user validates the copy to user space.\n\nI believe this is good.",
+      "parentUuid": "85e39350_9c35e484",
       "range": {
         "startLine": 765,
         "startChar": 8,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "299f1c80_dbd75195",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 833,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-03-24T21:10:48Z",
+      "side": 1,
+      "message": "I copied this from https://elixir.bootlin.com/linux/v5.12-rc4/source/fs/verity/read_metadata.c#L175\n\nAgree that this seems potentially wrong, but actually always correct and there is, I believe, no way of doing this portably without a lot of conditions.",
+      "parentUuid": "bdd615b0_aa4700cc",
+      "range": {
+        "startLine": 833,
+        "startChar": 1,
+        "endLine": 833,
+        "endChar": 42
+      },
+      "revId": "5e77d84b7e5cb2308d67309c335310c92882bc36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "281aeebe_eaedc321",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-03-23T22:44:51Z",
       "side": 1,
       "message": "nit: looks unaligned",
+      "range": {
+        "startLine": 42,
+        "startChar": 5,
+        "endLine": 42,
+        "endChar": 12
+      },
+      "revId": "5e77d84b7e5cb2308d67309c335310c92882bc36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a0c1ee2_aef4cc54",
+        "filename": "fs/incfs/verity.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-03-24T21:10:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "281aeebe_eaedc321",
       "range": {
         "startLine": 42,
         "startChar": 5,
