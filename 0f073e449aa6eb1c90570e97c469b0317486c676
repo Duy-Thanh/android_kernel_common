@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49b7f0a2_d622ad17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-03-24T10:55:21Z",
+      "side": 1,
+      "message": "Other partners use these hooks. CR-2 temporarily until we have heard from them that the change is OK for their use-case. If it is, we\u0027ll submit this patch as-is. If not, we will need another hook.",
+      "revId": "0f073e449aa6eb1c90570e97c469b0317486c676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
