@@ -34,6 +34,23 @@
       "parentUuid": "f671e1c5_54436d18",
       "revId": "6335cfbea72035bba745de5244d2a348e417ebb4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b40a870_33b99b47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-24T07:50:06Z",
+      "side": 1,
+      "message": "Ah, I thought the problem was for a different board, not cuttlefish...\n\nLet\u0027s see what TH says, I think you need to update the .xml file too...",
+      "revId": "6335cfbea72035bba745de5244d2a348e417ebb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
