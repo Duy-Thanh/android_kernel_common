@@ -16,6 +16,24 @@
       "message": "Why is this needed for this banch?",
       "revId": "1fd418cf566ece03216416d7e03cef38dd893595",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ace1bdee_80ffdc25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-03-24T16:35:48Z",
+      "side": 1,
+      "message": "Looks like\n\ncommit 552546366a30d88bd1d6f5efe848b2ab50fd57e5 upstream.\n\nwhich first landed in v5.5-rc1.  Since it\u0027s a warning fix, I\u0027ll send it to stable@.",
+      "parentUuid": "4045f7ca_93c09c3b",
+      "revId": "1fd418cf566ece03216416d7e03cef38dd893595",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
