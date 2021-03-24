@@ -1608,6 +1608,7 @@ static inline void enqueue_task(struct rq *rq, struct task_struct *p, int flags)
 	p->sched_class->enqueue_task(rq, p, flags);
 
 	trace_android_rvh_enqueue_task(rq, p, flags);
+	trace_android_rvh_oem_enqueue_task(rq, p);
 }
 
 static inline void dequeue_task(struct rq *rq, struct task_struct *p, int flags)
@@ -1624,6 +1625,7 @@ static inline void dequeue_task(struct rq *rq, struct task_struct *p, int flags)
 	p->sched_class->dequeue_task(rq, p, flags);
 
 	trace_android_rvh_dequeue_task(rq, p, flags);
+	trace_android_rvh_oem_dequeue_task(rq, p);
 }
 
 void activate_task(struct rq *rq, struct task_struct *p, int flags)
@@ -3220,7 +3222,7 @@ static void __sched_fork(unsigned long clone_flags, struct task_struct *p)
 	p->se.nr_migrations		= 0;
 	p->se.vruntime			= 0;
 	INIT_LIST_HEAD(&p->se.group_node);
-
+	trace_android_rvh_oem_sched_fork(p);
 #ifdef CONFIG_FAIR_GROUP_SCHED
 	p->se.cfs_rq			= NULL;
 #endif
@@ -4175,6 +4177,7 @@ void scheduler_tick(void)
 #endif
 
 	trace_android_vh_scheduler_tick(rq);
+	trace_android_vh_oem_scheduler_tick(rq);
 }
 
 #ifdef CONFIG_NO_HZ_FULL
