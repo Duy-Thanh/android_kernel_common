@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e8e9170_5e198ba9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1539471
+      },
+      "writtenOn": "2021-03-24T02:34:12Z",
+      "side": 1,
+      "message": "\u003e Patch Set 2: Code-Review+1\n\u003e \n\u003e By voting Code-Review+1 the following files are now code-owner approved by Greg Kroah-Hartman:\n\u003e * drivers/android/vendor_hooks.c\n\u003e * include/trace/hooks/signal.h\n\u003e * kernel/signal.c\n\u003e \n\n",
+      "revId": "048bc1ed7d817cf7b2874e839f4b84c1243a0060",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
