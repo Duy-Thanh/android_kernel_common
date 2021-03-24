@@ -170,7 +170,8 @@ static unsigned int get_next_freq(struct sugov_policy *sg_policy,
 		freq = next_freq;
 	else
 		freq = map_util_freq(util, freq, max);
-
+	trace_android_rvh_oem_get_next_freq(policy,
+			&freq, &sg_policy->need_freq_update);
 	if (freq == sg_policy->cached_raw_freq && !sg_policy->need_freq_update)
 		return sg_policy->next_freq;
 

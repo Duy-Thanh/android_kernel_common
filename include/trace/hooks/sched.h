@@ -285,6 +285,11 @@ DECLARE_RESTRICTED_HOOK(android_rvh_util_est_update,
 DECLARE_HOOK(android_vh_account_task_time,
 	TP_PROTO(struct task_struct *p, struct rq *rq, int user_tick),
 	TP_ARGS(p, rq, user_tick));
+
+struct cpufreq_policy;
+DECLARE_RESTRICTED_HOOK(android_rvh_oem_get_next_freq,
+	TP_PROTO(struct cpufreq_policy *policy, unsigned int *freq, bool *force),
+	TP_ARGS(policy, freq, force), 1);
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_SCHED_H */
