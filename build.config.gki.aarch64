@@ -13,3 +13,5 @@ android/abi_gki_aarch64_hikey960
 
 MODULES_ORDER=android/gki_aarch64_modules
 KMI_ENFORCED=1
+TRIM_NONLISTED_KMI=1
+KMI_SYMBOL_LIST_STRICT_MODE=1
