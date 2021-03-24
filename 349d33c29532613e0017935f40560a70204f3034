@@ -22,6 +22,30 @@
       },
       "revId": "349d33c29532613e0017935f40560a70204f3034",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c34cb66_da6ed457",
+        "filename": "fs/eventpoll.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 1855559
+      },
+      "writtenOn": "2021-03-24T02:56:58Z",
+      "side": 1,
+      "message": "Right! but it will trimmed if it\u0027s longer than 64 bytes and still leave enough information to identify the wakeup source. At-least this is what we have been setting the limit previously (on P20 and older Pixel devices) without getting it trimmed.",
+      "parentUuid": "eb7aa4ef_abae8603",
+      "range": {
+        "startLine": 1456,
+        "startChar": 1,
+        "endLine": 1456,
+        "endChar": 18
+      },
+      "revId": "349d33c29532613e0017935f40560a70204f3034",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
