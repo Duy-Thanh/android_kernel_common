@@ -16,6 +16,29 @@
       "message": "Other partners use these hooks. CR-2 temporarily until we have heard from them that the change is OK for their use-case. If it is, we\u0027ll submit this patch as-is. If not, we will need another hook.",
       "revId": "0f073e449aa6eb1c90570e97c469b0317486c676",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab47de29_a3d18feb",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1623,
+      "author": {
+        "id": 1851199
+      },
+      "writtenOn": "2021-03-24T11:15:16Z",
+      "side": 1,
+      "message": "we have vendor side code that assumes that this task is removed the respective scheduling class managed list. so we have to fix the code on our side before merging this. \n\nPlease hold off this change until Abhijeet gives +1",
+      "range": {
+        "startLine": 1623,
+        "startChar": 0,
+        "endLine": 1623,
+        "endChar": 1
+      },
+      "revId": "0f073e449aa6eb1c90570e97c469b0317486c676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
