@@ -34,6 +34,24 @@
       "parentUuid": "fbdcf2e5_7971889f",
       "revId": "63e22e998e6353467337644505c4ab1a52a84571",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef3a020c_f09f7717",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-03-25T09:46:22Z",
+      "side": 1,
+      "message": "We can talk with the other partners to modify the existing hook to fit your use-case. The parameters to each hook should be the union of all the parameters needed by everybody.\n\nThe only issue I see here is that these are _restricted_ vendor hooks, which currently only allow a single attachment. So, it has to be you _or_ your vendor using them. Is this an issue?",
+      "parentUuid": "50649e0f_17e56a43",
+      "revId": "63e22e998e6353467337644505c4ab1a52a84571",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
