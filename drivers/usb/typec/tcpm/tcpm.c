@@ -6061,7 +6061,10 @@ static int tcpm_psy_set_prop(struct power_supply *psy,
 		break;
 	}
 	power_supply_changed(port->psy);
+<<<<<<< HEAD   (932398 ANDROID: refresh ABI XML to new version)
 
+=======
+>>>>>>> BRANCH (856cd0 Linux 5.10.26)
 	return ret;
 }
 
