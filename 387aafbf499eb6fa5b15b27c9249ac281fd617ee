@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df19a134_a81ef0c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-03-25T20:51:32Z",
+      "side": 1,
+      "message": "This one should be rolled into the previous patch \"BACKPORT: FROMGIT: userfaultfd: support minor fault handling for shmem\" and the fix should be mentioned in the \"Conflicts\" section.",
+      "revId": "387aafbf499eb6fa5b15b27c9249ac281fd617ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
