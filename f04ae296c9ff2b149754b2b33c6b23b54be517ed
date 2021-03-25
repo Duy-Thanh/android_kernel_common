@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89d12106_6d5d393f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-03-25T20:29:29Z",
+      "side": 1,
+      "message": "Please also mention differences in vma_can_userfault() parameters which caused some more churn.",
+      "range": {
+        "startLine": 188,
+        "startChar": 17,
+        "endLine": 188,
+        "endChar": 18
+      },
+      "revId": "f04ae296c9ff2b149754b2b33c6b23b54be517ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
