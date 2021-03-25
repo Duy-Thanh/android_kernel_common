@@ -52,6 +52,24 @@
       "parentUuid": "50649e0f_17e56a43",
       "revId": "63e22e998e6353467337644505c4ab1a52a84571",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15f245f2_0db3b41d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-03-25T12:21:03Z",
+      "side": 1,
+      "message": "yes, if the existing vendor hook is from qualcomm/mtk, then we can\u0027t reuse it, because it should be silicon solution for oem\u0027s production(xiaomi,oppo,.. etc.), so we have to create a new hook to support our oem feature.",
+      "parentUuid": "ef3a020c_f09f7717",
+      "revId": "63e22e998e6353467337644505c4ab1a52a84571",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
