@@ -70,6 +70,24 @@
       "parentUuid": "ef3a020c_f09f7717",
       "revId": "63e22e998e6353467337644505c4ab1a52a84571",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd52ce63_d71c9b2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-03-25T16:37:36Z",
+      "side": 1,
+      "message": "OK. We are currently investigating an alternative solution to this by allowing multiple attachments to restricted vendor hooks, and I\u0027ll share our conclusions with you as soon as possible, thanks.",
+      "parentUuid": "15f245f2_0db3b41d",
+      "revId": "63e22e998e6353467337644505c4ab1a52a84571",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
