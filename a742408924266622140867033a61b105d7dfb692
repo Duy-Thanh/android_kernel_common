@@ -110,6 +110,30 @@
       },
       "revId": "a742408924266622140867033a61b105d7dfb692",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4592d784_6f8a7b4b",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 1057,
+      "author": {
+        "id": 1475437
+      },
+      "writtenOn": "2021-03-25T04:11:56Z",
+      "side": 1,
+      "message": "We use XHCI and need usb_add_hcd even though xhci driver is buit in.\nThere\u0027re also some points calling usb_add_hcd xhci-plat.c.",
+      "parentUuid": "4f99e589_fbfe375c",
+      "range": {
+        "startLine": 1057,
+        "startChar": 2,
+        "endLine": 1057,
+        "endChar": 13
+      },
+      "revId": "a742408924266622140867033a61b105d7dfb692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
