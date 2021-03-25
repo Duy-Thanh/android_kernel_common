@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4622584_dd2e5912",
+        "filename": "fs/incfs/data_mgmt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-03-25T14:29:52Z",
+      "side": 1,
+      "message": "the reason I put the kobject in the mount_info was because I could find no other way of passing the mount_info pointer to the incfs_get_##name function, and this seems to match what ext4 does (https://elixir.bootlin.com/linux/v5.12-rc4/source/fs/ext4/ext4.h#L1490)\nHowever, I notice ext uses a struct completion s_kobj_unregister which perhaps fixes lifespan issues?",
+      "parentUuid": "f8085e6d_1bc9c6ae",
+      "range": {
+        "startLine": 196,
+        "startChar": 16,
+        "endLine": 196,
+        "endChar": 29
+      },
+      "revId": "df2dd3d027f6ba792540fb9be26b414b4ef93cd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0dc6eca2_2ce70f9c",
         "filename": "fs/incfs/data_mgmt.h",
         "patchSetId": 2
