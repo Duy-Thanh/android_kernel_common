@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f0ef1a9_d10e01e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-25T01:31:27Z",
+      "side": 1,
+      "message": "I just posted an ABI update as part of turning on enforcement. Are they the same? aosp/1652957",
+      "revId": "6b85825014858616ca9c49482ac09b7dcfe5d7b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
