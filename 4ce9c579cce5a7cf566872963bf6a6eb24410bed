@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000009364724",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1633924?revision\u003d8",
+      "fixSuggestions": [
+        {
+          "fixId": "f460695b_b121cf35",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 9,
+                "startChar": 1,
+                "endLine": 9,
+                "endChar": 1
+              },
+              "replacement": "Signed-off-by: Jaegeuk Kim \u003cjaegeuk@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "4d66958b_b24517d8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-03-25T15:30:05Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Jaegeuk Kim \u003cjaegeuk@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 364824835 android-build.ayeaye-python-dispatcher_20210324.05_p0",
+      "revId": "4ce9c579cce5a7cf566872963bf6a6eb24410bed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000009364724",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1633924?revision\u003d8",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "b9d09841_7bc6a5fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-03-25T15:30:05Z",
+      "side": 1,
+      "message": "ANDROID: commits need to contain a properly formatted Bug: or Fixes: line\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 364824835 android-build.ayeaye-python-dispatcher_20210324.05_p0",
+      "revId": "4ce9c579cce5a7cf566872963bf6a6eb24410bed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
