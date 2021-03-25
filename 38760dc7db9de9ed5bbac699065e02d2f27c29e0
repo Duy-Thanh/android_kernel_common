@@ -159,6 +159,30 @@
       },
       "revId": "38760dc7db9de9ed5bbac699065e02d2f27c29e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "440a1f20_16a38731",
+        "filename": "drivers/char/virtio_console.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 1270,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-25T08:20:35Z",
+      "side": 1,
+      "message": "For how to work with the kernel community, please read Documentation/process/ in the kernel source tree.  If you have specific questions after that, please let me know.\n\nAs for module parameters, please make your options per-device.  Options belong to a data, not to code, right?  Remember your code is used by lots of different things all at once, you can not remove functionality of working systems.",
+      "parentUuid": "c3155c64_9bc86339",
+      "range": {
+        "startLine": 1270,
+        "startChar": 6,
+        "endLine": 1270,
+        "endChar": 7
+      },
+      "revId": "38760dc7db9de9ed5bbac699065e02d2f27c29e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
