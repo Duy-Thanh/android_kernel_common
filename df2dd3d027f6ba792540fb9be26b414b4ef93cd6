@@ -90,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79598aea_0ea0c598",
+        "filename": "fs/incfs/data_mgmt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-25T14:41:47Z",
+      "side": 1,
+      "message": "\"fixes\" is a kind term for that hack, but yes, that does help out here by making the kobject removal synchronous so that you \"know\" it is cleaned up.\n\nBut I really don\u0027t like that if at all possible.  Why not just put the kobject and statistics in a separate object with a separate lifecycle and have a pointer to that structure here?  That would clean up the lifetime rules a lot and make it more obvious what they are.",
+      "parentUuid": "f4622584_dd2e5912",
+      "range": {
+        "startLine": 196,
+        "startChar": 16,
+        "endLine": 196,
+        "endChar": 29
+      },
+      "revId": "df2dd3d027f6ba792540fb9be26b414b4ef93cd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0dc6eca2_2ce70f9c",
         "filename": "fs/incfs/data_mgmt.h",
         "patchSetId": 2
