@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ec81674_d4c309d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-03-25T17:50:43Z",
+      "side": 1,
+      "message": "You need to use devm_blk_ksm_init() instead, as ufshcd-core no longer explicitly calls blk_ksm_destroy().  See https://android-review.googlesource.com/c/kernel/common/+/1560652.",
+      "revId": "e63dfb5a4e254611a4dfd0e9e8689e7560ccb4ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
