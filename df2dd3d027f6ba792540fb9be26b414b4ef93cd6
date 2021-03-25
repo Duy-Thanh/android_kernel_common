@@ -39,6 +39,121 @@
       "message": "sysfs files need Documentation/ABI/ updates as well so that we can review the sysfs files properly...",
       "revId": "df2dd3d027f6ba792540fb9be26b414b4ef93cd6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8085e6d_1bc9c6ae",
+        "filename": "fs/incfs/data_mgmt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-25T08:17:09Z",
+      "side": 1,
+      "message": "careful, you now have a object with a lifespan that differs from the lifespace of this larger object.  That\u0027s going to cause major problems, why do this?",
+      "range": {
+        "startLine": 196,
+        "startChar": 16,
+        "endLine": 196,
+        "endChar": 29
+      },
+      "revId": "df2dd3d027f6ba792540fb9be26b414b4ef93cd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dc6eca2_2ce70f9c",
+        "filename": "fs/incfs/data_mgmt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-25T08:17:09Z",
+      "side": 1,
+      "message": "why atomic_t for all of these?  Do you really want the cpu hit for this?  Why not just a u64?  What is it being \"atomic\" protecting you from?",
+      "range": {
+        "startLine": 198,
+        "startChar": 1,
+        "endLine": 198,
+        "endChar": 9
+      },
+      "revId": "df2dd3d027f6ba792540fb9be26b414b4ef93cd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3c861ad_95764a7b",
+        "filename": "fs/incfs/sysfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-25T08:17:09Z",
+      "side": 1,
+      "message": "sysfs_emit() please.",
+      "range": {
+        "startLine": 97,
+        "startChar": 8,
+        "endLine": 97,
+        "endChar": 16
+      },
+      "revId": "df2dd3d027f6ba792540fb9be26b414b4ef93cd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df0ba1a5_32c6ee48",
+        "filename": "fs/incfs/sysfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-25T08:17:09Z",
+      "side": 1,
+      "message": "sysfs_emit() please.",
+      "range": {
+        "startLine": 111,
+        "startChar": 8,
+        "endLine": 111,
+        "endChar": 16
+      },
+      "revId": "df2dd3d027f6ba792540fb9be26b414b4ef93cd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a9efc7f_ad0230f8",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-25T08:17:09Z",
+      "side": 1,
+      "message": "I think your function arguments might want to be revisited, this is crazy 😊",
+      "range": {
+        "startLine": 326,
+        "startChar": 26,
+        "endLine": 326,
+        "endChar": 31
+      },
+      "revId": "df2dd3d027f6ba792540fb9be26b414b4ef93cd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
