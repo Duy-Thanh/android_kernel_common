@@ -207,6 +207,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f5b5323_91291aea",
+        "filename": "fs/incfs/data_mgmt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-26T08:55:48Z",
+      "side": 1,
+      "message": "you don\u0027t need \"atomic\" for anything that is not \"critical\", especially for statistics 😊",
+      "parentUuid": "38f2f994_5a001eb9",
+      "range": {
+        "startLine": 198,
+        "startChar": 1,
+        "endLine": 198,
+        "endChar": 9
+      },
+      "revId": "df2dd3d027f6ba792540fb9be26b414b4ef93cd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3c861ad_95764a7b",
