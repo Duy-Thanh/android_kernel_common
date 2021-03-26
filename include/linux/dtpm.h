@@ -24,6 +24,12 @@ struct dtpm {
 	u64 power_max;
 	u64 power_min;
 	int weight;
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_RESERVE(3);
+	ANDROID_KABI_RESERVE(4);
+	ANDROID_KABI_RESERVE(5);
 };
 
 struct dtpm_ops {
@@ -31,6 +37,12 @@ struct dtpm_ops {
 	u64 (*get_power_uw)(struct dtpm *);
 	int (*update_power_uw)(struct dtpm *);
 	void (*release)(struct dtpm *);
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_RESERVE(3);
+	ANDROID_KABI_RESERVE(4);
+	ANDROID_KABI_RESERVE(5);
 };
 
 typedef int (*dtpm_init_t)(void);
