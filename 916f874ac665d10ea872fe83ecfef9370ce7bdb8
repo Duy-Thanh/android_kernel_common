@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de4a96fa_3d1fb093",
+        "filename": "fs/incfs/sysfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-03-26T04:24:58Z",
+      "side": 1,
+      "message": "I had an impression that the delays for uid timeouts and for pending reads are separate. Mixing those together doesn\u0027t help with the streaming optimization - pending reads are something we can deal with, while uid timeouts aren\u0027t. Is it hard to split them out?",
+      "range": {
+        "startLine": 123,
+        "startChar": 24,
+        "endLine": 123,
+        "endChar": 44
+      },
+      "revId": "916f874ac665d10ea872fe83ecfef9370ce7bdb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
