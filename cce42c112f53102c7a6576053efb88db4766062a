@@ -22,6 +22,30 @@
       },
       "revId": "cce42c112f53102c7a6576053efb88db4766062a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30b64f35_8d6cb7c0",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-03-26T06:01:25Z",
+      "side": 1,
+      "message": "dear sir,\n\nThe hook is from mediatek, it should be silicon solution to our oem production,\nas oem , we must accept it, so we have to create a new hook to \nimplement our feature.",
+      "parentUuid": "bdd53087_c8004233",
+      "range": {
+        "startLine": 168,
+        "startChar": 31,
+        "endLine": 168,
+        "endChar": 32
+      },
+      "revId": "cce42c112f53102c7a6576053efb88db4766062a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
