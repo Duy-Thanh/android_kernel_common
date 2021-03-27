@@ -70,6 +70,30 @@
       },
       "revId": "f63f9bfb7076294649c7a1965de48680f13c887c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d46a0aa3_8f8af6a7",
+        "filename": "include/linux/dtpm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1867382
+      },
+      "writtenOn": "2021-03-27T19:36:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b35755af_4c92add3",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 32
+      },
+      "revId": "f63f9bfb7076294649c7a1965de48680f13c887c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
