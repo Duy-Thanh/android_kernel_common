@@ -22,6 +22,30 @@
       },
       "revId": "f63f9bfb7076294649c7a1965de48680f13c887c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc4fab8f_c8c9a0d4",
+        "filename": "include/linux/dtpm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1867382
+      },
+      "writtenOn": "2021-03-27T15:49:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7288964_69ef720f",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 32
+      },
+      "revId": "f63f9bfb7076294649c7a1965de48680f13c887c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
