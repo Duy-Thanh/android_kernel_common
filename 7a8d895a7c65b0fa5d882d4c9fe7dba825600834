@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca792c5d_4469d65e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-03-29T05:35:33Z",
+      "side": 1,
+      "message": "Since we now enforce the ABI representation to be accurate, please update it (the XML) to incorporate your symbol additions.",
+      "revId": "7a8d895a7c65b0fa5d882d4c9fe7dba825600834",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
