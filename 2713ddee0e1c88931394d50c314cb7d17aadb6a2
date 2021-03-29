@@ -41,6 +41,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e31e689_e1e9441c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-03-29T01:51:36Z",
+      "side": 1,
+      "message": "ok, i will break it as several patch, thanks!, and will abandon the change.",
+      "parentUuid": "7abdde07_2b9c5219",
+      "revId": "2713ddee0e1c88931394d50c314cb7d17aadb6a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac456a4d_9b6e3e10",
