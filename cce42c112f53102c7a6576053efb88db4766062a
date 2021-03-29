@@ -46,6 +46,30 @@
       },
       "revId": "cce42c112f53102c7a6576053efb88db4766062a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a159320d_789f6a07",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-29T15:54:49Z",
+      "side": 1,
+      "message": "Hooks can have multiple attachements unless they are restricted hooks (rvh). You can use this hook even if the vendor is using it too. There is no reason for an additional \"oem\" hook.\n\nRegarding restricted hooks, we are looking into allowing mutiple attachments for them as well to avoid duplication -- but that isn\u0027t needed for this case.",
+      "parentUuid": "30b64f35_8d6cb7c0",
+      "range": {
+        "startLine": 168,
+        "startChar": 31,
+        "endLine": 168,
+        "endChar": 32
+      },
+      "revId": "cce42c112f53102c7a6576053efb88db4766062a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
