@@ -5,6 +5,7 @@
 #if !defined(_TRACE_HOOK_TYPEC_H) || defined(TRACE_HEADER_MULTI_READ)
 #define _TRACE_HOOK_TYPEC_H
 #include <trace/hooks/vendor_hooks.h>
+struct tcpm_port;
 
 #ifndef TYPEC_TIMER
 #define TYPEC_TIMER
@@ -19,6 +20,10 @@ enum typec_timer {
 DECLARE_HOOK(android_vh_typec_tcpm_get_timer,
 	     TP_PROTO(const char *state, enum typec_timer timer, unsigned int *msecs),
 	     TP_ARGS(state, timer, msecs));
+
+DECLARE_HOOK(android_vh_typec_store_partner_src_caps,
+	     TP_PROTO(unsigned int *nr_source_caps, u32 (*source_caps)[]),
+	     TP_ARGS(nr_source_caps, source_caps));
 
 #endif /* _TRACE_HOOK_TYPEC_H */
 /* This part must be outside protection */
