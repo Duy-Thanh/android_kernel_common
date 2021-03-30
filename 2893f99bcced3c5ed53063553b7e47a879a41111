@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bf659a7_ace95fd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-03-30T15:24:16Z",
+      "side": 1,
+      "message": "OK, this seems to boot on my test device. I tried attaching 2 callbacks to a single hook, and both seem to be called when they should. I tried a 3rd attachment and got -EBUSY as expected.",
+      "revId": "2893f99bcced3c5ed53063553b7e47a879a41111",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
