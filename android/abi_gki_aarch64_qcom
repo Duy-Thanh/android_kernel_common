@@ -605,8 +605,10 @@
   d_path
   dput
   drain_workqueue
+  driver_create_file
   driver_find_device
   driver_register
+  driver_remove_file
   driver_unregister
   drm_add_edid_modes
   drm_add_modes_noedid
