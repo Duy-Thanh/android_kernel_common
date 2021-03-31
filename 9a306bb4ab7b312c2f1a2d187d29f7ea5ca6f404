@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000009504729",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1660915?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "44e75140_5742db51",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-03-31T21:13:09Z",
+      "side": 1,
+      "message": "Commit does not refer to the upstream commit\nPlease add a line like \u0027(cherry picked from commit \u003csha1\u003e \u003crepo\u003e \u003cbranch\u003e)\u0027\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 366039994 android-build.ayeaye-python-dispatcher_20210331.05_p0",
+      "revId": "9a306bb4ab7b312c2f1a2d187d29f7ea5ca6f404",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000009504729",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1660915?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "4c9b1c37_392fa4d3",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 14,
+                "startChar": 1,
+                "endLine": 14,
+                "endChar": 1
+              },
+              "replacement": "Signed-off-by: Michel Lespinasse \u003cmichel@lespinasse.org\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "3a1ec075_9f601507",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-03-31T21:13:09Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Michel Lespinasse \u003cmichel@lespinasse.org\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 366039994 android-build.ayeaye-python-dispatcher_20210331.05_p0",
+      "revId": "9a306bb4ab7b312c2f1a2d187d29f7ea5ca6f404",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
