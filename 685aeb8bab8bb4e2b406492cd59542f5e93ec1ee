@@ -22,6 +22,30 @@
       },
       "revId": "685aeb8bab8bb4e2b406492cd59542f5e93ec1ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52a6f2f2_147f4814",
+        "filename": "drivers/dma-buf/heaps/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-03-31T20:14:15Z",
+      "side": 1,
+      "message": "Hi Suren, yes, their usage is non-optional for the DMA-BUF system heap since they are needed for it to function equivalently to the ION system heap.",
+      "parentUuid": "76075199_28d0f30a",
+      "range": {
+        "startLine": 13,
+        "startChar": 25,
+        "endLine": 13,
+        "endChar": 80
+      },
+      "revId": "685aeb8bab8bb4e2b406492cd59542f5e93ec1ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
