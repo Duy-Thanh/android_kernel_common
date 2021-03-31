@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32376a01_aa478f24",
+        "filename": "Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 1323,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-03-31T13:04:04Z",
+      "side": 1,
+      "message": "this is _bad_ as it will overflow a statically sized array. It should still error out. Also, you can\u0027t relax this here as this also affects builds that do not specify a BUILD_TARGET and for those we absolutely need to catch this as an error. Nobody will read the warning, unfortunately.",
+      "range": {
+        "startLine": 1323,
+        "startChar": 8,
+        "endLine": 1323,
+        "endChar": 12
+      },
+      "revId": "c18b16722e0e2fc8505e5fdf1e94935b61616784",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
