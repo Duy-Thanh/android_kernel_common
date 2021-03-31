@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76075199_28d0f30a",
+        "filename": "drivers/dma-buf/heaps/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-03-31T20:05:25Z",
+      "side": 1,
+      "message": "Does DMABUF_HEAPS_SYSTEM really depend on these configs? It can\u0027t function without them?",
+      "range": {
+        "startLine": 13,
+        "startChar": 25,
+        "endLine": 13,
+        "endChar": 80
+      },
+      "revId": "685aeb8bab8bb4e2b406492cd59542f5e93ec1ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
