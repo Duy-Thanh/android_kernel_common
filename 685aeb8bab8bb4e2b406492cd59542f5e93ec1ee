@@ -46,6 +46,30 @@
       },
       "revId": "685aeb8bab8bb4e2b406492cd59542f5e93ec1ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7768c507_4880997f",
+        "filename": "drivers/dma-buf/heaps/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-03-31T23:47:03Z",
+      "side": 1,
+      "message": "Parity with ION aside, can DMABUF_HEAPS_SYSTEM operate without DMABUF_HEAPS_DEFERRED_FREE \u0026\u0026 DMABUF_HEAPS_PAGE_POOL ? If so then we should not say it depends on these configs. If you want to mandate them, that\u0027s fine and you are doing that inside gki_defconfig, but saying that DMABUF_HEAPS_SYSTEM depends on other configs means if could not operate without them AFAIU. Is that the case here?",
+      "parentUuid": "52a6f2f2_147f4814",
+      "range": {
+        "startLine": 13,
+        "startChar": 25,
+        "endLine": 13,
+        "endChar": 80
+      },
+      "revId": "685aeb8bab8bb4e2b406492cd59542f5e93ec1ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
