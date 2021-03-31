@@ -178,6 +178,24 @@
       "parentUuid": "b06d1801_c59f4fa2",
       "revId": "63e22e998e6353467337644505c4ab1a52a84571",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b47868b_58e7e412",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-03-31T12:30:39Z",
+      "side": 1,
+      "message": "\u003e but there are still 2 cases in which the existing hook can\u0027t be re-used.\n\u003e 1. two hooks with same name but different parameters(one hook had been merged).\n\nPlease add the parameters you need to the existing hook.\n\n\u003e 2. two hooks were placed at different positions in a function, they have different logic.\n\nWe will deal with this case by case. Let\u0027s try to move the hooks where you need them -- I\u0027ll loop the other partners in the discussion to make sure the change works for them. If we cannot agree on the change, we\u0027ll add new hooks for you.\n\nThanks",
+      "parentUuid": "dae9af35_15767402",
+      "revId": "63e22e998e6353467337644505c4ab1a52a84571",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
