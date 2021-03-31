@@ -94,6 +94,30 @@
       },
       "revId": "cce42c112f53102c7a6576053efb88db4766062a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3862e44b_46a6c4ae",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1688863
+      },
+      "writtenOn": "2021-03-31T14:23:34Z",
+      "side": 1,
+      "message": "Hello,\n\nI don\u0027t think this resolves the prior point about being able to use the existing hook; could you not attach whatever behavior you need to the existing non-rvh trace_android_vh_map_util_freq?",
+      "parentUuid": "bf2f0413_84f77798",
+      "range": {
+        "startLine": 168,
+        "startChar": 31,
+        "endLine": 168,
+        "endChar": 32
+      },
+      "revId": "cce42c112f53102c7a6576053efb88db4766062a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
