@@ -16,6 +16,24 @@
       "message": "did this series ever get resubmitted with the needed fixes as reported upstream?",
       "revId": "90a2ee5ef42d74e8d890cb083acd837049fc5cd3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c43ecec9_c3072f33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1867382
+      },
+      "writtenOn": "2021-03-31T17:32:08Z",
+      "side": 1,
+      "message": "Daniel submitted a new patch series today morning and he added you as reviewer.\nIf you are ok with the series, I can pull the patch series and post it here.",
+      "parentUuid": "f4e4a8fa_b4bc5672",
+      "revId": "90a2ee5ef42d74e8d890cb083acd837049fc5cd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
