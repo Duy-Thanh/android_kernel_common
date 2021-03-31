@@ -1340,7 +1340,7 @@ void do_user_addr_fault(struct pt_regs *regs,
 	if (!mmap_seq_read_check(mm, seq, SPF_ABORT_VMA_COPY))
 		goto spf_abort;
 	vma = &pvma;
-	if (unlikely(access_error(error_code, vma))) {
+	if (unlikely(access_error(hw_error_code, vma))) {
 		count_vm_spf_event(SPF_ABORT_ACCESS_ERROR);
 		goto spf_abort;
 	}
@@ -1350,7 +1350,7 @@ void do_user_addr_fault(struct pt_regs *regs,
 	/* Quick path to respond to signals */
 	if (fault_signal_pending(fault, regs)) {
 		if (!user_mode(regs))
-			kernelmode_fixup_or_oops(regs, error_code, address,
+			no_context(regs, hw_error_code, address,
 						 SIGBUS, BUS_ADRERR);
 		return;
 	}
