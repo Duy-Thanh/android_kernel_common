@@ -142,6 +142,24 @@
       "parentUuid": "7a088263_e26e730e",
       "revId": "63e22e998e6353467337644505c4ab1a52a84571",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b06d1801_c59f4fa2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-03-31T09:09:43Z",
+      "side": 1,
+      "message": "Ok, we\u0027ve now merged the patch allowing multiple attachments to restricted hooks: https://android-review.googlesource.com/c/kernel/common/+/1655919\n\nSo please try and re-use the existing hooks for your use-case, thanks.",
+      "parentUuid": "7995f7b8_8070ede0",
+      "revId": "63e22e998e6353467337644505c4ab1a52a84571",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
