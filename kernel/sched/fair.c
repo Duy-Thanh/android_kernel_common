@@ -856,6 +856,7 @@ void post_init_entity_util_avg(struct task_struct *p)
 		return;
 	}
 
+<<<<<<< HEAD   (07efa9 ANDROID: Disable BTI_KERNEL, enable UNWIND_PATCH_PAC_INTO_SC)
 	if (cap > 0) {
 		if (cfs_rq->avg.util_avg != 0) {
 			sa->util_avg  = cfs_rq->avg.util_avg * se->load.weight;
@@ -869,6 +870,11 @@ void post_init_entity_util_avg(struct task_struct *p)
 	}
 
 	sa->runnable_avg = sa->util_avg;
+=======
+	/* Hook before this se's util is attached to cfs_rq's util */
+	trace_android_rvh_post_init_entity_util_avg(se);
+	attach_entity_cfs_rq(se);
+>>>>>>> CHANGE (1eea1c ANDROID: GKI: sched: add rvh for new cfs task util)
 }
 
 #else /* !CONFIG_SMP */

@@ -300,6 +300,7 @@ DECLARE_RESTRICTED_HOOK(android_rvh_dequeue_task_fair,
 	TP_PROTO(struct rq *rq, struct task_struct *p, int flags),
 	TP_ARGS(rq, p, flags), 1);
 
+<<<<<<< HEAD   (07efa9 ANDROID: Disable BTI_KERNEL, enable UNWIND_PATCH_PAC_INTO_SC)
 DECLARE_HOOK(android_vh_sched_stat_runtime_rt,
 	TP_PROTO(struct task_struct *tsk, u64 delta),
 	TP_ARGS(tsk, delta));
@@ -368,6 +369,11 @@ DECLARE_HOOK(android_vh_dup_task_struct,
 	TP_ARGS(tsk, orig));
 
 /* macro versions of hooks are no longer required */
+=======
+DECLARE_RESTRICTED_HOOK(android_rvh_post_init_entity_util_avg,
+	TP_PROTO(struct sched_entity *se),
+	TP_ARGS(se), 1);
+>>>>>>> CHANGE (1eea1c ANDROID: GKI: sched: add rvh for new cfs task util)
 
 #endif /* _TRACE_HOOK_SCHED_H */
 /* This part must be outside protection */
