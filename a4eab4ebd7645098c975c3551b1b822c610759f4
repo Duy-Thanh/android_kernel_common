@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c59c60f2_60ece5d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-01T08:50:02Z",
+      "side": 1,
+      "message": "Starting to look much better now, a few more comments.",
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d38f7fde_84912589",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4415,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-01T08:50:02Z",
+      "side": 1,
+      "message": "Please move this to vendor module and export the function instead.\n\nWith that, can you use the hook at the top of the function?",
+      "range": {
+        "startLine": 4415,
+        "startChar": 2,
+        "endLine": 4415,
+        "endChar": 14
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd39a9e2_6b73d3c9",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5567,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-01T08:50:02Z",
+      "side": 1,
+      "message": "We have a hook before and after enqueue_task(), do we _really_ need a 3rd one in here :( ?",
+      "range": {
+        "startLine": 5567,
+        "startChar": 1,
+        "endLine": 5567,
+        "endChar": 50
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07eb668d_c7a7e565",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5674,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-01T08:50:02Z",
+      "side": 1,
+      "message": "Same comment as above.",
+      "range": {
+        "startLine": 5674,
+        "startChar": 1,
+        "endLine": 5674,
+        "endChar": 51
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4457c760_ae6b57c8",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 7108,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-01T08:50:02Z",
+      "side": 1,
+      "message": "There is another discussion around this right now that suggests moving the existing check_preempt_wakeup() hook further down, see https://android-review.googlesource.com/c/kernel/common/+/1660678\n\nWould that work for you?",
+      "range": {
+        "startLine": 7108,
+        "startChar": 1,
+        "endLine": 7108,
+        "endChar": 73
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fb0fd62_88472159",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 7232,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-01T08:50:02Z",
+      "side": 1,
+      "message": "Please move this to your module -- we can export set_next_entity() if needed.\nAnd with that maybe you could use the existing \u0027repick\u0027 parameter?",
+      "range": {
+        "startLine": 7231,
+        "startChar": 2,
+        "endLine": 7232,
+        "endChar": 30
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

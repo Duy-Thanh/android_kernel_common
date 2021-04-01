@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "551e5b09_5d7ccebe",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3222,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-01T08:50:02Z",
+      "side": 0,
+      "message": "Please avoid this whitespace change.",
+      "range": {
+        "startLine": 3220,
+        "startChar": 1,
+        "endLine": 3222,
+        "endChar": 30
+      },
+      "revId": "19cf4b1bb0327aa1e6fa686e4df097b9dcda0dd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
