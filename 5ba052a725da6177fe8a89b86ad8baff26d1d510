@@ -16,6 +16,24 @@
       "message": "Boot tests errors are due to either pre-existing failures or due to hardware capacity issues. Feel free to submit once the lint errors in presubmit are resolved.",
       "revId": "5ba052a725da6177fe8a89b86ad8baff26d1d510",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ce94043_2162cb33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2021-04-01T16:35:43Z",
+      "side": 1,
+      "message": "I still can\u0027t see the submit button in some of CLs with presubmit-verified +2 and your +2. Do I still need at least one +2 in the \"Code Owner\" iteam? If so, I am wondering if you know who I should ping or mail? Thanks!",
+      "parentUuid": "83262363_87d61326",
+      "revId": "5ba052a725da6177fe8a89b86ad8baff26d1d510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
