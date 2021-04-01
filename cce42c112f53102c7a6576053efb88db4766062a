@@ -142,6 +142,30 @@
       },
       "revId": "cce42c112f53102c7a6576053efb88db4766062a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df8bca2b_1d2e2ca4",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-04-01T16:55:17Z",
+      "side": 1,
+      "message": "Since the previous hook controls \"next_freq\" why do you need anything after? If you don\u0027t attach to the previous hook, then \"next_freq\" is guaranteed to be 0 and this becomes:\n\n  trace_android_vh_map_util_freq(...); //does nothing\n  freq \u003d map_util_freq(util, freq, max);\n  trace_android_rvh_get_next_freq(policy,\u0026freq,...);\n\nIf you instead use the 1st:\n\n  trace_android_rvh_get_next_freq(..., \u0026next_freq);\n  freq \u003d next_freq;\n\nEither way, you set the freq for line 175. The only difference is that the first one gets as input the version of freq prior to map_util_freq(). Since map_util_freq() is a static inline that is available to your module, there is nothing you can do with this extra hook that you can\u0027t do with the original one.\n\nIf you need it, we could add \"policy\" to the first one, but let\u0027s not add another hook.",
+      "parentUuid": "066f2fc1_6e4a23ad",
+      "range": {
+        "startLine": 168,
+        "startChar": 31,
+        "endLine": 168,
+        "endChar": 32
+      },
+      "revId": "cce42c112f53102c7a6576053efb88db4766062a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
