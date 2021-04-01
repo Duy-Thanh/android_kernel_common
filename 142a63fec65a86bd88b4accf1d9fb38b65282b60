@@ -16,6 +16,24 @@
       "message": "We can\u0027t take this series until the \"kabi break\" point.  We will probably just update the whole abi at once, no need for this, but it\u0027s a good test that you actually changed what you thought you changed 😊",
       "revId": "142a63fec65a86bd88b4accf1d9fb38b65282b60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35b92675_32c18a92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-04-01T15:32:37Z",
+      "side": 1,
+      "message": "Ok, it\u0027s good practice to me. :) Let me drop this after checking presubmit results.",
+      "parentUuid": "019ac78d_9f92073d",
+      "revId": "142a63fec65a86bd88b4accf1d9fb38b65282b60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
