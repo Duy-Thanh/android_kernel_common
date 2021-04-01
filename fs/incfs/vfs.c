@@ -1628,21 +1628,34 @@ static int incfs_getattr(struct user_namespace *ns, const struct path *path,
 			 unsigned int query_flags)
 {
 	struct inode *inode = d_inode(path->dentry);
+	struct dentry_info *di = get_incfs_dentry(path->dentry);
+	struct path *backing_path;
+	struct kstat *backing_kstat;
+	int error = 0;
 
+	if (!di)
+		return -EFSCORRUPTED;
+	backing_path = &di->backing_path;
+	backing_kstat = kzalloc(sizeof(*backing_kstat), GFP_NOFS);
+	if (!backing_kstat)
+		return -ENOMEM;
+	error = vfs_getattr(backing_path, backing_kstat, STATX_BLOCKS,
+			    AT_STATX_SYNC_AS_STAT);
+	if (error)
+		goto out;
+
+	generic_fillattr(ns, inode, stat);
+
+	stat->attributes &= ~STATX_ATTR_VERITY;
 	if (IS_VERITY(inode))
 		stat->attributes |= STATX_ATTR_VERITY;
 	stat->attributes_mask |= STATX_ATTR_VERITY;
-	generic_fillattr(ns, inode, stat);
 
-	/*
-	 * TODO: stat->blocks is wrong at this point. It should be number of
-	 * blocks in the backing file. But that information is not (necessarily)
-	 * available yet - incfs_open_dir_file may not have been called.
-	 * Solution is probably to store the backing file block count in an
-	 * xattr whenever it's changed.
-	 */
+	stat->blocks = backing_kstat->blocks;
 
-	return 0;
+out:
+	kfree(backing_kstat);
+	return error;
 }
 
 static ssize_t incfs_getxattr(struct dentry *d, const char *name,
