@@ -142,6 +142,8 @@ enum {
 	Opt_checkpoint_disable_cap,
 	Opt_checkpoint_disable_cap_perc,
 	Opt_checkpoint_enable,
+	Opt_checkpoint_merge,
+	Opt_nocheckpoint_merge,
 	Opt_compress_algorithm,
 	Opt_compress_log_size,
 	Opt_compress_extension,
@@ -209,6 +211,8 @@ static match_table_t f2fs_tokens = {
 	{Opt_checkpoint_disable_cap, "checkpoint=disable:%u"},
 	{Opt_checkpoint_disable_cap_perc, "checkpoint=disable:%u%%"},
 	{Opt_checkpoint_enable, "checkpoint=enable"},
+	{Opt_checkpoint_merge, "checkpoint_merge"},
+	{Opt_nocheckpoint_merge, "nocheckpoint_merge"},
 	{Opt_compress_algorithm, "compress_algorithm=%s"},
 	{Opt_compress_log_size, "compress_log_size=%u"},
 	{Opt_compress_extension, "compress_extension=%s"},
@@ -922,6 +926,11 @@ static int parse_options(struct super_block *sb, char *options, bool is_remount)
 			strcpy(ext[ext_cnt], name);
 			F2FS_OPTION(sbi).compress_ext_cnt++;
 			kfree(name);
+			break;
+		case Opt_checkpoint_merge: /* fall-through */
+		case Opt_nocheckpoint_merge:
+			/* Warn when these are used but don't fail */
+			f2fs_warn(sbi, "Warning: checkpoint_merge is not supported!");
 			break;
 		default:
 			f2fs_err(sbi, "Unrecognized mount option \"%s\" or missing value",
