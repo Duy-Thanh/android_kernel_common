@@ -263,3 +263,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_signal);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_node_memcgs);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_thermal_request_freq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_thermal_target_freq);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_post_init_entity_util_avg);
