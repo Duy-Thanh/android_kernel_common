@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83262363_87d61326",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2021-04-01T01:08:39Z",
+      "side": 1,
+      "message": "Boot tests errors are due to either pre-existing failures or due to hardware capacity issues. Feel free to submit once the lint errors in presubmit are resolved.",
+      "revId": "5ba052a725da6177fe8a89b86ad8baff26d1d510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
