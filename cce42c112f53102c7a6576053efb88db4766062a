@@ -118,6 +118,30 @@
       },
       "revId": "cce42c112f53102c7a6576053efb88db4766062a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "066f2fc1_6e4a23ad",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-01T12:21:16Z",
+      "side": 1,
+      "message": "hello,\n\nOur hook must be placed after below code, otherwise the calculate freq will\nbe overwrote.\n\nif (next_freq)\n    freq \u003d next_freq;\nelse\n    freq \u003d map_util_freq(util, freq, max);",
+      "parentUuid": "3862e44b_46a6c4ae",
+      "range": {
+        "startLine": 168,
+        "startChar": 31,
+        "endLine": 168,
+        "endChar": 32
+      },
+      "revId": "cce42c112f53102c7a6576053efb88db4766062a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
