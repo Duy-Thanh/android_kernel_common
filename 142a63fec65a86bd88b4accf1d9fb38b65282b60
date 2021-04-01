@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "019ac78d_9f92073d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-01T15:19:57Z",
+      "side": 1,
+      "message": "We can\u0027t take this series until the \"kabi break\" point.  We will probably just update the whole abi at once, no need for this, but it\u0027s a good test that you actually changed what you thought you changed 😊",
+      "revId": "142a63fec65a86bd88b4accf1d9fb38b65282b60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
