@@ -16,6 +16,24 @@
       "message": "I thought CAN was used by auto?",
       "revId": "53e31cb3b19fb4dea027bf4d209f9b1f22721037",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff30b9b3_c78b7680",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-01T15:23:04Z",
+      "side": 1,
+      "message": "For some things, yes.  But not by android auto from what I can tell, also Android auto does not use GKI kernels yet 😊",
+      "parentUuid": "0f0e1073_56aecc5e",
+      "revId": "53e31cb3b19fb4dea027bf4d209f9b1f22721037",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
