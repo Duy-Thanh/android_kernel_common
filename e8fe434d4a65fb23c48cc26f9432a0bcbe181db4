@@ -87,6 +87,24 @@
       "message": "Please break this up into a patch  series, this is doing a lot of different things all at once.  Each patch should only \"do one thing\" so it is easier to understand and review.",
       "revId": "e8fe434d4a65fb23c48cc26f9432a0bcbe181db4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7908005d_dd745114",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1475437
+      },
+      "writtenOn": "2021-04-01T07:11:55Z",
+      "side": 1,
+      "message": "remote:   https://android-review.googlesource.com/c/kernel/common/+/1661800 ANDROID: usb: host: export xhci symbols for ring management [NEW]\nremote:   https://android-review.googlesource.com/c/kernel/common/+/1661801 ANDROID: usb: host: add xhci override functions [NEW]\nremote:   https://android-review.googlesource.com/c/kernel/common/+/1661802 ANDROID: usb: host: add xhci hooks for device contexts [NEW]\nremote:   https://android-review.googlesource.com/c/kernel/common/+/1661803 ANDROID: usb: host: add max packet parameter on alloc_transfer_ring hook [NEW]\n\nI\u0027ve broken into seires. Could you review it?",
+      "parentUuid": "102f2683_a852c716",
+      "revId": "e8fe434d4a65fb23c48cc26f9432a0bcbe181db4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
