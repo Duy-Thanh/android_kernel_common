@@ -561,5 +561,72 @@ enum binder_driver_command_protocol {
 	 */
 };
 
+/**
+ * struct binder_work - work enqueued on a worklist
+ * @entry:             node enqueued on list
+ * @type:              type of work to be performed
+ *
+ * There are separate work lists for proc, thread, and node (async).
+ */
+struct binder_work {
+	struct list_head entry;
+
+	enum binder_work_type {
+		BINDER_WORK_TRANSACTION = 1,
+		BINDER_WORK_TRANSACTION_COMPLETE,
+		BINDER_WORK_RETURN_ERROR,
+		BINDER_WORK_NODE,
+		BINDER_WORK_DEAD_BINDER,
+		BINDER_WORK_DEAD_BINDER_AND_CLEAR,
+		BINDER_WORK_CLEAR_DEATH_NOTIFICATION,
+	} type;
+};
+
+/**
+ * struct binder_priority - scheduler policy and priority
+ * @sched_policy            scheduler policy
+ * @prio                    [100..139] for SCHED_NORMAL, [0..99] for FIFO/RT
+ *
+ * The binder driver supports inheriting the following scheduler policies:
+ * SCHED_NORMAL
+ * SCHED_BATCH
+ * SCHED_FIFO
+ * SCHED_RR
+ */
+struct binder_priority {
+	unsigned int sched_policy;
+	int prio;
+};
+
+struct binder_transaction {
+	int debug_id;
+	struct binder_work work;
+	struct binder_thread *from;
+	struct binder_transaction *from_parent;
+	struct binder_proc *to_proc;
+	struct binder_thread *to_thread;
+	struct binder_transaction *to_parent;
+	unsigned need_reply:1;
+	/* unsigned is_dead:1; */	/* not used at the moment */
+
+	struct binder_buffer *buffer;
+	unsigned int	code;
+	unsigned int	flags;
+	struct binder_priority	priority;
+	struct binder_priority	saved_priority;
+	bool    set_priority_called;
+	kuid_t	sender_euid;
+	struct list_head fd_fixups;
+	binder_uintptr_t security_ctx;
+	/**
+	 * @lock:  protects @from, @to_proc, and @to_thread
+	 *
+	 * @from, @to_proc, and @to_thread can be set to NULL
+	 * during thread teardown
+	 */
+	spinlock_t lock;
+	ANDROID_VENDOR_DATA(1);
+};
+
 #endif /* _UAPI_LINUX_BINDER_H */
 
