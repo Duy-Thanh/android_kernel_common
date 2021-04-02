@@ -16,6 +16,24 @@
       "message": "Hello,\n\nGKI 2.0 is replacing ION with the DMA-BUF heaps interface. Please find the transition user-guide here: https://source.android.com/preview/devices/architecture/kernel/dma-buf-heaps You will need to sign in since the document is in partner preview. Please feel free to let me know if you have any questions!\n\nThanks,\nHridya",
       "revId": "ad4d21eb9f79e8719dbb53eb5fef452d95ab8a5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6437dd99_a6044d0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2021-04-02T02:04:20Z",
+      "side": 1,
+      "message": "Hi Hridya,\nPlease see my comments in below which explain why we add this change.\nhttps://android-review.googlesource.com/c/kernel/common/+/1661807",
+      "parentUuid": "20930d53_09658e53",
+      "revId": "ad4d21eb9f79e8719dbb53eb5fef452d95ab8a5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
