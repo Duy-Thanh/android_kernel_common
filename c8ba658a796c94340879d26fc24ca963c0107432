@@ -22,6 +22,30 @@
       },
       "revId": "c8ba658a796c94340879d26fc24ca963c0107432",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0051e56_5f10425e",
+        "filename": "build.config.khwasan",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2021-04-02T19:57:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39719827_8ab50087",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 19
+      },
+      "revId": "c8ba658a796c94340879d26fc24ca963c0107432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
