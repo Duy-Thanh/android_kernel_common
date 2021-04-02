@@ -166,6 +166,30 @@
       },
       "revId": "cce42c112f53102c7a6576053efb88db4766062a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20fbb9a0_0858f73a",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-02T11:10:39Z",
+      "side": 1,
+      "message": "the trace_android_vh_map_util_freq() was added by MTK(vendor), if I re-use it,\nthere are 2 attachments(MTK \u0026 xiaomi)， but i don\u0027t know the running sequence， if\nmy hook run first, the final freq is get from MTK(vendor), it is no use for us.\nby the way,is there any way to set the run sequence ?",
+      "parentUuid": "df8bca2b_1d2e2ca4",
+      "range": {
+        "startLine": 168,
+        "startChar": 31,
+        "endLine": 168,
+        "endChar": 32
+      },
+      "revId": "cce42c112f53102c7a6576053efb88db4766062a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
