@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b03381d_6a8371e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1475437
+      },
+      "writtenOn": "2021-04-02T08:26:17Z",
+      "side": 1,
+      "message": "I\u0027ve added in commit.",
+      "parentUuid": "95aa84c6_cf189629",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 40
+      },
+      "revId": "3ec6dbfdba4da8f4114583120873b5d487348f54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c63e6a9e_1a376da7",
         "filename": "drivers/usb/host/xhci.h",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2021-04-02T07:22:55Z",
       "side": 1,
       "message": "this is not needed in this commit, why is it here?",
+      "range": {
+        "startLine": 2110,
+        "startChar": 0,
+        "endLine": 2110,
+        "endChar": 70
+      },
+      "revId": "3ec6dbfdba4da8f4114583120873b5d487348f54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d57f6a0_747da5df",
+        "filename": "drivers/usb/host/xhci.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2110,
+      "author": {
+        "id": 1475437
+      },
+      "writtenOn": "2021-04-02T08:26:17Z",
+      "side": 1,
+      "message": "It\u0027s needed and I\u0027ve added in commit.\nI\u0027ve broken previous override patch into 2 patches because It has 2 purposes.\n\n1. address_device\n2. bus_suspend / bus_resume\n\nPlease re-check it. Thanks for your review.",
+      "parentUuid": "c63e6a9e_1a376da7",
       "range": {
         "startLine": 2110,
         "startChar": 0,
