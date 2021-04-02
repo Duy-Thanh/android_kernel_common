@@ -22,6 +22,30 @@
       },
       "revId": "d76ae2aa462bfde8036e139ccf1cf68f1264ebcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5da2f902_892d7781",
+        "filename": "kernel/cgroup/cpuset.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2909,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-02T06:25:40Z",
+      "side": 1,
+      "message": "sorry, there is a update, the hook is to replace set_cpus_allowed_ptr \nin some scene.",
+      "parentUuid": "c42a8930_22ada4c1",
+      "range": {
+        "startLine": 2909,
+        "startChar": 1,
+        "endLine": 2909,
+        "endChar": 40
+      },
+      "revId": "d76ae2aa462bfde8036e139ccf1cf68f1264ebcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
