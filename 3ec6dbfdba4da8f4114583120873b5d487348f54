@@ -93,6 +93,30 @@
       },
       "revId": "3ec6dbfdba4da8f4114583120873b5d487348f54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97f828b7_22d18b67",
+        "filename": "drivers/usb/host/xhci.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2110,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-02T11:00:17Z",
+      "side": 1,
+      "message": "But adding this function prototype to the .h file does nothing, please only add it here when it is needed.",
+      "parentUuid": "4d57f6a0_747da5df",
+      "range": {
+        "startLine": 2110,
+        "startChar": 0,
+        "endLine": 2110,
+        "endChar": 70
+      },
+      "revId": "3ec6dbfdba4da8f4114583120873b5d487348f54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
