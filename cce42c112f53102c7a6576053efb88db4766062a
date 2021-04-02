@@ -190,6 +190,30 @@
       },
       "revId": "cce42c112f53102c7a6576053efb88db4766062a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50ad7af1_bce4f735",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-04-02T17:14:10Z",
+      "side": 1,
+      "message": "\u003e is there any way to set the run sequence?\n\nYes, you can register with \"register_prio_android_vh_map_util_freq(...)\" which lets you specify a \"prio\". The normal register w/o prio uses TRACEPOINT_DEFAULT_PRIO (\u003d10), so you can cause your handler to be run before or after the default (higher priority runs first). So if you want to ensure the MTK hook runs first, use a prio lower than 10.",
+      "parentUuid": "20fbb9a0_0858f73a",
+      "range": {
+        "startLine": 168,
+        "startChar": 31,
+        "endLine": 168,
+        "endChar": 32
+      },
+      "revId": "cce42c112f53102c7a6576053efb88db4766062a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
