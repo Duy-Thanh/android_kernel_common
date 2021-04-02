@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "494bf063_8f2c6067",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-04-02T15:22:08Z",
+      "side": 1,
+      "message": "The names should be based on the function/state in the kernel -- not based on the implementation behind it. If another partner uses this hook, they might not use an RB tree.\n\nI\u0027d go ahead with android_rvh_enqueue_entity() since this the implementation of the enqueue.",
+      "parentUuid": "1971a1e8_c0fa979b",
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d38f7fde_84912589",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 5
