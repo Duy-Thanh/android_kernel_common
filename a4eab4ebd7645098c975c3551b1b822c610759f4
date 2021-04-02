@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98f3aeb7_5adb6c0b",
+        "filename": "kernel/fork.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-02T08:33:15Z",
+      "side": 1,
+      "message": "normal hook should be ok, i will change it, thanks!",
+      "parentUuid": "31c862a4_4402a279",
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33510870_897d86e5",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 5
@@ -95,6 +113,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80de5189_798265f8",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4415,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-02T08:33:15Z",
+      "side": 1,
+      "message": "Please move this to vendor module and export the function instead.\n jianzhong: ok!\n\nWith that, can you use the hook at the top of the function?\n\njianzhong:\nno, we can\u0027t use, because our hook is depend on line 4395 \u0026 4410 condition code.\n\nLine:4395 :if (delta_exec \u003e ideal_runtime) {\nLine 4410 : if (delta_exec \u003c sysctl_sched_min_granularity)",
+      "parentUuid": "d38f7fde_84912589",
+      "range": {
+        "startLine": 4415,
+        "startChar": 2,
+        "endLine": 4415,
+        "endChar": 14
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd39a9e2_6b73d3c9",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 5
@@ -106,6 +148,30 @@
       "writtenOn": "2021-04-01T08:50:02Z",
       "side": 1,
       "message": "We have a hook before and after enqueue_task(), do we _really_ need a 3rd one in here :( ?",
+      "range": {
+        "startLine": 5567,
+        "startChar": 1,
+        "endLine": 5567,
+        "endChar": 50
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a11b6756_b239c111",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5567,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-02T08:33:15Z",
+      "side": 1,
+      "message": "the logic flow are different between enqueue_task() and this function.\nThe hook depend on the logic flow of this function.",
+      "parentUuid": "bd39a9e2_6b73d3c9",
       "range": {
         "startLine": 5567,
         "startChar": 1,
@@ -141,6 +207,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "055e7ad5_faaacb43",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5674,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-02T08:33:15Z",
+      "side": 1,
+      "message": "Same as above.",
+      "parentUuid": "07eb668d_c7a7e565",
+      "range": {
+        "startLine": 5674,
+        "startChar": 1,
+        "endLine": 5674,
+        "endChar": 51
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4457c760_ae6b57c8",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 5
@@ -164,6 +254,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9561ccb8_613099a4",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 7108,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-02T08:33:15Z",
+      "side": 1,
+      "message": "if move trace_android_rvh_check_preempt_wakeup() to the place of our hook, it should be ok except some parameters.",
+      "parentUuid": "4457c760_ae6b57c8",
+      "range": {
+        "startLine": 7108,
+        "startChar": 1,
+        "endLine": 7108,
+        "endChar": 73
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5fb0fd62_88472159",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 5
@@ -175,6 +289,30 @@
       "writtenOn": "2021-04-01T08:50:02Z",
       "side": 1,
       "message": "Please move this to your module -- we can export set_next_entity() if needed.\nAnd with that maybe you could use the existing \u0027repick\u0027 parameter?",
+      "range": {
+        "startLine": 7231,
+        "startChar": 2,
+        "endLine": 7232,
+        "endChar": 30
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ff1034f_58b51709",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 7232,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-02T08:33:15Z",
+      "side": 1,
+      "message": "if you can export set_next_entity(), then i think it is ok for me.",
+      "parentUuid": "5fb0fd62_88472159",
       "range": {
         "startLine": 7231,
         "startChar": 2,
