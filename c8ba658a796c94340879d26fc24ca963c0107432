@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39719827_8ab50087",
+        "filename": "build.config.khwasan",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-04-02T14:47:20Z",
+      "side": 1,
+      "message": "there is append_cmd\n\nhttps://android.googlesource.com/kernel/build/+/refs/heads/master/_setup_env.sh#30",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 19
+      },
+      "revId": "c8ba658a796c94340879d26fc24ca963c0107432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
