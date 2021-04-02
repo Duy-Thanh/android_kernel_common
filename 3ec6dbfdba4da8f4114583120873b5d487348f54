@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95aa84c6_cf189629",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-02T07:22:55Z",
+      "side": 1,
+      "message": "please provide a more detailed changlog description of what this commit does and why it is needed.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 40
+      },
+      "revId": "3ec6dbfdba4da8f4114583120873b5d487348f54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c63e6a9e_1a376da7",
+        "filename": "drivers/usb/host/xhci.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2110,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-02T07:22:55Z",
+      "side": 1,
+      "message": "this is not needed in this commit, why is it here?",
+      "range": {
+        "startLine": 2110,
+        "startChar": 0,
+        "endLine": 2110,
+        "endChar": 70
+      },
+      "revId": "3ec6dbfdba4da8f4114583120873b5d487348f54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
