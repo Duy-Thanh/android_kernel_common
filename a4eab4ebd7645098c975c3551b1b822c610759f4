@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1971a1e8_c0fa979b",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-02T06:47:19Z",
+      "side": 1,
+      "message": "RB means there is a red tree in our hook, and if named as  trace_android_rvh___enqueue_entity , is it acceptable ?  can\u0027t named trace_android_rvh_enqueue_entity because enqueue_entity() is another function.",
+      "parentUuid": "33510870_897d86e5",
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d38f7fde_84912589",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 5
