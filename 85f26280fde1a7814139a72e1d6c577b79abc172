@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "636e84e0_3bfd089d",
+        "filename": "mm/compaction.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-04-05T19:39:53Z",
+      "side": 1,
+      "message": "what if this page is !PageBuddy() ? If this is an exported API function then you can\u0027t assume that the caller checks for that before calling it.",
+      "range": {
+        "startLine": 772,
+        "startChar": 1,
+        "endLine": 772,
+        "endChar": 27
+      },
+      "revId": "85f26280fde1a7814139a72e1d6c577b79abc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a21a9a6_e2564ef4",
+        "filename": "mm/compaction.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-04-05T19:39:53Z",
+      "side": 1,
+      "message": "I assume you will be calling isolate_and_split_free_page() in a loop providing the same list. A call to split_map_pages here would result in the same list being traversed on each such call to isolate_and_split_free_page() even though only one page was added.\nIf you are planning to use isolate_and_split_free_page() that way I would suggest removing a call to split_map_pages() here and use already exported split_page() function to split the added page instead.",
+      "range": {
+        "startLine": 780,
+        "startChar": 1,
+        "endLine": 780,
+        "endChar": 16
+      },
+      "revId": "85f26280fde1a7814139a72e1d6c577b79abc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acefc32c_5d2582c3",
+        "filename": "mm/compaction.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-04-05T19:39:53Z",
+      "side": 1,
+      "message": "which header file declares this new function?",
+      "range": {
+        "startLine": 784,
+        "startChar": 18,
+        "endLine": 784,
+        "endChar": 45
+      },
+      "revId": "85f26280fde1a7814139a72e1d6c577b79abc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82f8ad57_0511a18b",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1681,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-04-05T19:39:53Z",
+      "side": 1,
+      "message": "This makes migrate_list_pages() a very specialized function. Why not simply export migrate_pages() and putback_movable_pages() instead?",
+      "range": {
+        "startLine": 1681,
+        "startChar": 3,
+        "endLine": 1681,
+        "endChar": 35
+      },
+      "revId": "85f26280fde1a7814139a72e1d6c577b79abc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8337120e_644e9789",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-04-05T19:39:53Z",
+      "side": 1,
+      "message": "I suggest adding put_page(page) at the end of this function to balance the get_page_unless_zero() call:\n\n\nif (!get_page_unless_zero(page))\n    return -EINVAL;\nret \u003d isolate_lru_page(page);\nput_page(page);\nreturn ret;",
+      "range": {
+        "startLine": 553,
+        "startChar": 1,
+        "endLine": 553,
+        "endChar": 31
+      },
+      "revId": "85f26280fde1a7814139a72e1d6c577b79abc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5f40677_f1488461",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-04-05T19:39:53Z",
+      "side": 1,
+      "message": "How is this function used? I don\u0027t see any calls to get_pageblock_migratetype in https://lore.kernel.org/patchwork/patch/1382102/",
+      "range": {
+        "startLine": 557,
+        "startChar": 5,
+        "endLine": 557,
+        "endChar": 34
+      },
+      "revId": "85f26280fde1a7814139a72e1d6c577b79abc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "310dc52c_67f2e9a3",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-04-05T19:39:53Z",
+      "side": 1,
+      "message": "which header file declares these new functions?",
+      "range": {
+        "startLine": 565,
+        "startChar": 18,
+        "endLine": 565,
+        "endChar": 47
+      },
+      "revId": "85f26280fde1a7814139a72e1d6c577b79abc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
