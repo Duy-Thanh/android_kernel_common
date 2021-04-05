@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "118ced39_1500aa5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-05T16:34:27Z",
+      "side": 1,
+      "message": "This should be 1 patch, not 2.  Please add the hook and use it in the same commit.",
+      "revId": "e43e905567f7f2a19ae856d4c6e8e5eaf0384767",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "848ebc69_23c6055c",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-05T16:34:27Z",
+      "side": 1,
+      "message": "not needed.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 0
+      },
+      "revId": "e43e905567f7f2a19ae856d4c6e8e5eaf0384767",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
