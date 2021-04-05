@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0826dd77_59c7770f",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1639,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-04-05T20:42:31Z",
+      "side": 1,
+      "message": "this struct is ~120 bytes, can we allocate it on a stack?",
+      "range": {
+        "startLine": 1639,
+        "startChar": 33,
+        "endLine": 1639,
+        "endChar": 46
+      },
+      "revId": "d54708bef7fd345d20e8f1829137ee30e5c25634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13f0bb6f_903a7fc3",
+        "filename": "tools/testing/selftests/filesystems/incfs/incfs_test.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4474,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-04-05T20:42:31Z",
+      "side": 1,
+      "message": "\u003e\u003d ?",
+      "range": {
+        "startLine": 4474,
+        "startChar": 23,
+        "endLine": 4474,
+        "endChar": 24
+      },
+      "revId": "d54708bef7fd345d20e8f1829137ee30e5c25634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
