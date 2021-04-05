@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19eb0896_df9b70d0",
+        "filename": "fs/incfs/sysfs.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-04-05T20:56:31Z",
+      "side": 1,
+      "message": "can we put these nodes under some directory, e.g. metrics/... or at least instances/... ? This way there are simpler ways (1) to create different SELinux policies for them, and (2) to later add nodes with names that won\u0027t clash with user-specified strings",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 0
+      },
+      "revId": "9228a34f02fbd62024f5ab9ed7e5c53086d86d01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53d7f1e3_dbcbe535",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1860,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-04-05T20:56:31Z",
+      "side": 1,
+      "message": "nit: check if it\u0027s different?",
+      "range": {
+        "startLine": 1859,
+        "startChar": 1,
+        "endLine": 1860,
+        "endChar": 69
+      },
+      "revId": "9228a34f02fbd62024f5ab9ed7e5c53086d86d01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
