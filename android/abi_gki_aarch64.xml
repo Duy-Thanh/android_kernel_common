@@ -689,6 +689,7 @@
       <elf-symbol name='dev_driver_string' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3b8677e9'/>
       <elf-symbol name='dev_err_probe' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd8de7047'/>
       <elf-symbol name='dev_fwnode' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xda8e9667'/>
+      <elf-symbol name='dev_get_by_index' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa78c1b83'/>
       <elf-symbol name='dev_get_by_name' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7e8b22da'/>
       <elf-symbol name='dev_get_regmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x54e4e51c'/>
       <elf-symbol name='dev_get_stats' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2c7d2626'/>
@@ -1648,6 +1649,7 @@
       <elf-symbol name='in6_pton' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x609bcd98'/>
       <elf-symbol name='in_egroup_p' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x39461d6a'/>
       <elf-symbol name='inc_zone_page_state' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2dd5ea25'/>
+      <elf-symbol name='inet_proto_csum_replace4' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8adfe66d'/>
       <elf-symbol name='init_dummy_netdev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc518435c'/>
       <elf-symbol name='init_iova_domain' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf2246c08'/>
       <elf-symbol name='init_pseudo' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd3aa3400'/>
@@ -2804,6 +2806,7 @@
       <elf-symbol name='skb_copy_expand' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7e1a9d3d'/>
       <elf-symbol name='skb_dequeue' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4baac25c'/>
       <elf-symbol name='skb_dequeue_tail' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf0d62f36'/>
+      <elf-symbol name='skb_ensure_writable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x38920f38'/>
       <elf-symbol name='skb_free_datagram' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x816beb9b'/>
       <elf-symbol name='skb_page_frag_refill' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x27b8484e'/>
       <elf-symbol name='skb_partial_csum_set' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2776b4f8'/>
@@ -106079,36 +106082,36 @@
         <parameter type-id='52a50596' name='ring' filepath='drivers/usb/host/xhci-mem.c' line='282' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='xhci_ring_alloc' mangled-name='xhci_ring_alloc' filepath='drivers/usb/host/xhci-mem.c' line='406' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='xhci_ring_alloc'>
-        <parameter type-id='0c65b409' name='xhci' filepath='drivers/usb/host/xhci-mem.c' line='406' column='1'/>
-        <parameter type-id='f0981eeb' name='num_segs' filepath='drivers/usb/host/xhci-mem.c' line='407' column='1'/>
-        <parameter type-id='f0981eeb' name='cycle_state' filepath='drivers/usb/host/xhci-mem.c' line='407' column='1'/>
-        <parameter type-id='b61681fc' name='type' filepath='drivers/usb/host/xhci-mem.c' line='408' column='1'/>
-        <parameter type-id='f0981eeb' name='max_packet' filepath='drivers/usb/host/xhci-mem.c' line='408' column='1'/>
-        <parameter type-id='3eb7c31c' name='flags' filepath='drivers/usb/host/xhci-mem.c' line='408' column='1'/>
+      <function-decl name='xhci_ring_alloc' mangled-name='xhci_ring_alloc' filepath='drivers/usb/host/xhci-mem.c' line='423' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='xhci_ring_alloc'>
+        <parameter type-id='0c65b409' name='xhci' filepath='drivers/usb/host/xhci-mem.c' line='423' column='1'/>
+        <parameter type-id='f0981eeb' name='num_segs' filepath='drivers/usb/host/xhci-mem.c' line='424' column='1'/>
+        <parameter type-id='f0981eeb' name='cycle_state' filepath='drivers/usb/host/xhci-mem.c' line='424' column='1'/>
+        <parameter type-id='b61681fc' name='type' filepath='drivers/usb/host/xhci-mem.c' line='425' column='1'/>
+        <parameter type-id='f0981eeb' name='max_packet' filepath='drivers/usb/host/xhci-mem.c' line='425' column='1'/>
+        <parameter type-id='3eb7c31c' name='flags' filepath='drivers/usb/host/xhci-mem.c' line='425' column='1'/>
         <return type-id='52a50596'/>
       </function-decl>
-      <function-decl name='xhci_free_erst' mangled-name='xhci_free_erst' filepath='drivers/usb/host/xhci-mem.c' line='1875' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='xhci_free_erst'>
-        <parameter type-id='0c65b409' name='xhci' filepath='drivers/usb/host/xhci-mem.c' line='1875' column='1'/>
-        <parameter type-id='d7409d08' name='erst' filepath='drivers/usb/host/xhci-mem.c' line='1875' column='1'/>
+      <function-decl name='xhci_free_erst' mangled-name='xhci_free_erst' filepath='drivers/usb/host/xhci-mem.c' line='1901' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='xhci_free_erst'>
+        <parameter type-id='0c65b409' name='xhci' filepath='drivers/usb/host/xhci-mem.c' line='1901' column='1'/>
+        <parameter type-id='d7409d08' name='erst' filepath='drivers/usb/host/xhci-mem.c' line='1901' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='xhci_free_command' mangled-name='xhci_free_command' filepath='drivers/usb/host/xhci-mem.c' line='1834' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='xhci_free_command'>
-        <parameter type-id='0c65b409' name='xhci' filepath='drivers/usb/host/xhci-mem.c' line='1834' column='1'/>
-        <parameter type-id='5a32bd4b' name='command' filepath='drivers/usb/host/xhci-mem.c' line='1835' column='1'/>
+      <function-decl name='xhci_free_command' mangled-name='xhci_free_command' filepath='drivers/usb/host/xhci-mem.c' line='1860' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='xhci_free_command'>
+        <parameter type-id='0c65b409' name='xhci' filepath='drivers/usb/host/xhci-mem.c' line='1860' column='1'/>
+        <parameter type-id='5a32bd4b' name='command' filepath='drivers/usb/host/xhci-mem.c' line='1861' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='xhci_alloc_erst' mangled-name='xhci_alloc_erst' filepath='drivers/usb/host/xhci-mem.c' line='1844' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='xhci_alloc_erst'>
-        <parameter type-id='0c65b409' name='xhci' filepath='drivers/usb/host/xhci-mem.c' line='1844' column='1'/>
-        <parameter type-id='52a50596' name='evt_ring' filepath='drivers/usb/host/xhci-mem.c' line='1845' column='1'/>
-        <parameter type-id='d7409d08' name='erst' filepath='drivers/usb/host/xhci-mem.c' line='1846' column='1'/>
-        <parameter type-id='3eb7c31c' name='flags' filepath='drivers/usb/host/xhci-mem.c' line='1847' column='1'/>
+      <function-decl name='xhci_alloc_erst' mangled-name='xhci_alloc_erst' filepath='drivers/usb/host/xhci-mem.c' line='1870' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='xhci_alloc_erst'>
+        <parameter type-id='0c65b409' name='xhci' filepath='drivers/usb/host/xhci-mem.c' line='1870' column='1'/>
+        <parameter type-id='52a50596' name='evt_ring' filepath='drivers/usb/host/xhci-mem.c' line='1871' column='1'/>
+        <parameter type-id='d7409d08' name='erst' filepath='drivers/usb/host/xhci-mem.c' line='1872' column='1'/>
+        <parameter type-id='3eb7c31c' name='flags' filepath='drivers/usb/host/xhci-mem.c' line='1873' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='xhci_alloc_command' mangled-name='xhci_alloc_command' filepath='drivers/usb/host/xhci-mem.c' line='1783' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='xhci_alloc_command'>
-        <parameter type-id='0c65b409' name='xhci' filepath='drivers/usb/host/xhci-mem.c' line='1783' column='1'/>
-        <parameter type-id='b50a4934' name='allocate_completion' filepath='drivers/usb/host/xhci-mem.c' line='1784' column='1'/>
-        <parameter type-id='3eb7c31c' name='mem_flags' filepath='drivers/usb/host/xhci-mem.c' line='1784' column='1'/>
+      <function-decl name='xhci_alloc_command' mangled-name='xhci_alloc_command' filepath='drivers/usb/host/xhci-mem.c' line='1809' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='xhci_alloc_command'>
+        <parameter type-id='0c65b409' name='xhci' filepath='drivers/usb/host/xhci-mem.c' line='1809' column='1'/>
+        <parameter type-id='b50a4934' name='allocate_completion' filepath='drivers/usb/host/xhci-mem.c' line='1810' column='1'/>
+        <parameter type-id='3eb7c31c' name='mem_flags' filepath='drivers/usb/host/xhci-mem.c' line='1810' column='1'/>
         <return type-id='5a32bd4b'/>
       </function-decl>
       <pointer-type-def type-id='d39738ac' size-in-bits='64' id='60075f2a'/>
@@ -147047,6 +147050,11 @@
         <parameter type-id='d504f73d' name='nb' filepath='net/core/dev.c' line='1822' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='dev_get_by_index' mangled-name='dev_get_by_index' filepath='net/core/dev.c' line='977' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dev_get_by_index'>
+        <parameter type-id='a2bff676' name='net' filepath='net/core/dev.c' line='977' column='1'/>
+        <parameter type-id='95e97e5e' name='ifindex' filepath='net/core/dev.c' line='977' column='1'/>
+        <return type-id='68a2d05b'/>
+      </function-decl>
       <function-decl name='netdev_warn' mangled-name='netdev_warn' filepath='net/core/dev.c' line='11075' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='netdev_warn'>
         <parameter type-id='2ce52478' name='dev' filepath='net/core/dev.c' line='11075' column='1'/>
         <parameter type-id='80f4b756' name='fmt' filepath='net/core/dev.c' line='11075' column='1'/>
@@ -148570,6 +148578,11 @@
         <parameter type-id='1dc6a898' name='off' filepath='net/core/skbuff.c' line='4807' column='1'/>
         <return type-id='b50a4934'/>
       </function-decl>
+      <function-decl name='skb_ensure_writable' mangled-name='skb_ensure_writable' filepath='net/core/skbuff.c' line='5489' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='skb_ensure_writable'>
+        <parameter type-id='0fbf3cfd' name='skb' filepath='net/core/skbuff.c' line='5489' column='1'/>
+        <parameter type-id='95e97e5e' name='write_len' filepath='net/core/skbuff.c' line='5489' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='skb_dequeue_tail' mangled-name='skb_dequeue_tail' filepath='net/core/skbuff.c' line='3064' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='skb_dequeue_tail'>
         <parameter type-id='03c386c6' name='list' filepath='net/core/skbuff.c' line='3064' column='1'/>
         <return type-id='0fbf3cfd'/>
@@ -149721,8 +149734,17 @@
       </function-type>
     </abi-instr>
     <abi-instr address-size='64' path='net/core/utils.c' language='LANG_C89'>
+      <pointer-type-def type-id='7dac1e36' size-in-bits='64' id='91b10e59'/>
       <function-decl name='net_ratelimit' mangled-name='net_ratelimit' filepath='net/core/utils.c' line='38' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='net_ratelimit'>
         <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='inet_proto_csum_replace4' mangled-name='inet_proto_csum_replace4' filepath='net/core/utils.c' line='425' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='inet_proto_csum_replace4'>
+        <parameter type-id='91b10e59' name='sum' filepath='net/core/utils.c' line='425' column='1'/>
+        <parameter type-id='0fbf3cfd' name='skb' filepath='net/core/utils.c' line='425' column='1'/>
+        <parameter type-id='78a133c2' name='from' filepath='net/core/utils.c' line='426' column='1'/>
+        <parameter type-id='78a133c2' name='to' filepath='net/core/utils.c' line='426' column='1'/>
+        <parameter type-id='b50a4934' name='pseudohdr' filepath='net/core/utils.c' line='426' column='1'/>
+        <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='in6_pton' mangled-name='in6_pton' filepath='net/core/utils.c' line='184' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='in6_pton'>
         <parameter type-id='80f4b756' name='src' filepath='net/core/utils.c' line='184' column='1'/>
