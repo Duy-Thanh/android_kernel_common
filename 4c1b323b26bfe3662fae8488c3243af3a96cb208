@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee9473fe_a4fdf629",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2021-04-06T20:52:07Z",
+      "side": 1,
+      "message": "ERROR: modpost: too long symbol \"__SCT__tp_func_android_vh_typec_tcpm_adjust_current_limit\" [drivers/usb/typec/tcpm/tcpm.ko] :/ will shorten it.",
+      "revId": "4c1b323b26bfe3662fae8488c3243af3a96cb208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
