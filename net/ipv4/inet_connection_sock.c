@@ -1105,6 +1105,9 @@ struct dst_entry *inet_csk_update_pmtu(struct sock *sk, u32 mtu)
 	}
 	dst->ops->update_pmtu(dst, sk, NULL, mtu, true);
 
+	if (dst->dev->mtu > mtu && mtu > IPV6_MIN_MTU)
+		dst->dev->mtu = mtu;
+
 	dst = __sk_dst_check(sk, 0);
 	if (!dst)
 		dst = inet_csk_rebuild_route(sk, &inet->cork.fl);
