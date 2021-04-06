@@ -16,6 +16,29 @@
       "message": "As per Matthias\u0027 remark in the meeting, please apply this to android-mainline instead. I\u0027ll continue reviewing here, for now.",
       "revId": "aec99cbb9e9ed8e6eac03479a00c3ba07b556f7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "037c9670_c0217175",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-04-06T16:11:40Z",
+      "side": 1,
+      "message": "This variable is being used both as a boolean and as a path fragment.\n\nIt might be nicer to do something like the extmod-prefix definition below. It would at least be consistent with that one other thing.\n\nThere is also hdr-prefix, but that\u0027s defined unconditionally.",
+      "range": {
+        "startLine": 224,
+        "startChar": 37,
+        "endLine": 224,
+        "endChar": 54
+      },
+      "revId": "aec99cbb9e9ed8e6eac03479a00c3ba07b556f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
