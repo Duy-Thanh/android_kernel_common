@@ -6040,6 +6040,15 @@ static int tcp_rcv_synsent_state_process(struct sock *sk, struct sk_buff *skb,
 	int saved_clamp = tp->rx_opt.mss_clamp;
 	bool fastopen_fail;
 
+	/* when TCP SYN-ACK timestamp value error, just do not use it */
+	static int ts_error_count;
+	int ts_error_threshold = sysctl_tcp_ts_control[0];
+
+	if (sysctl_tcp_ts_control[1] == 1) {
+		ts_error_count = 0;
+		sysctl_tcp_ts_control[1] = 0;
+	}
+
 	tcp_parse_options(sock_net(sk), skb, &tp->rx_opt, 0, &foc);
 	if (tp->rx_opt.saw_tstamp && tp->rx_opt.rcv_tsecr)
 		tp->rx_opt.rcv_tsecr -= tp->tsoffset;
@@ -6068,8 +6077,20 @@ static int tcp_rcv_synsent_state_process(struct sock *sk, struct sk_buff *skb,
 			     tcp_time_stamp(tp))) {
 			NET_INC_STATS(sock_net(sk),
 					LINUX_MIB_PAWSACTIVEREJECTED);
+			if (ts_error_threshold > 0) {
+				ts_error_count++;
+				if (ts_error_count >= ts_error_threshold) {
+					sock_net(sk)->ipv4.sysctl_tcp_timestamps = 0;
+					ts_error_count = 0;
+				}
+			}
 			goto reset_and_undo;
 		}
+
+		/* if otjer connections's timestmp is  ok, the environment may be ok*/
+		if (tp->rx_opt.saw_tstamp && tp->rx_opt.rcv_tsecr &&
+		    ts_error_threshold > 0 && ts_error_count > 0)
+			ts_error_count--;
 
 		/* Now ACK is acceptable.
 		 *

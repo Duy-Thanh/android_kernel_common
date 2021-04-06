@@ -588,6 +588,13 @@ static struct ctl_table ipv4_table[] = {
 		.mode		= 0644,
 		.proc_handler	= proc_do_static_key,
 	},
+	{
+		.procname	= "tcp_timestamps_control",
+		.data		= &sysctl_tcp_ts_control,
+		.maxlen		= sizeof(sysctl_tcp_ts_control),
+		.mode		= 0664,
+		.proc_handler	= proc_dointvec
+	},
 	{ }
 };
 

@@ -294,6 +294,9 @@ DEFINE_STATIC_KEY_FALSE(tcp_have_smc);
 EXPORT_SYMBOL(tcp_have_smc);
 #endif
 
+int sysctl_tcp_ts_control[2] __read_mostly = {0, 0};
+EXPORT_SYMBOL(sysctl_tcp_ts_control);
+
 /*
  * Current number of TCP sockets.
  */
