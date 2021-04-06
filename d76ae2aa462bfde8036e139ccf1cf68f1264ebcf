@@ -46,6 +46,30 @@
       },
       "revId": "d76ae2aa462bfde8036e139ccf1cf68f1264ebcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2c2852b_c4c8eb49",
+        "filename": "kernel/cgroup/cpuset.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2909,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-06T08:30:56Z",
+      "side": 1,
+      "message": "Understood, but __sched_fork() should be called early enough to do this no?",
+      "parentUuid": "5da2f902_892d7781",
+      "range": {
+        "startLine": 2909,
+        "startChar": 1,
+        "endLine": 2909,
+        "endChar": 40
+      },
+      "revId": "d76ae2aa462bfde8036e139ccf1cf68f1264ebcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
