@@ -16,6 +16,23 @@
       "message": "Please send this to netdev.",
       "revId": "710a5abd7913db3a900c40d3fa4006e624140fd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13e45aff_4b7caba1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-06T07:27:13Z",
+      "side": 1,
+      "message": "Why is this a GKI-only thing?  Please see the kernel submission rules for the proper way to label patches.",
+      "revId": "710a5abd7913db3a900c40d3fa4006e624140fd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
