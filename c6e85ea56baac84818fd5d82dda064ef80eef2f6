@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63a7722e_0588a980",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-04-06T23:16:50Z",
+      "side": 1,
+      "message": "presubmit has broken. Skip it.\n\nhttps://android-build.googleplex.com/builds/tests/view?invocationId\u003dI65200008279677203\u0026testResultId\u003dTR67320187170114166\n\n",
+      "revId": "c6e85ea56baac84818fd5d82dda064ef80eef2f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
