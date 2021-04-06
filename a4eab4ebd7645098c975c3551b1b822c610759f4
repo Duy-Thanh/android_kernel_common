@@ -191,6 +191,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "89d09830_0a151897",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4415,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-06T08:55:21Z",
+      "side": 1,
+      "message": "\u003e Please move this to vendor module and export the function instead.\n\u003e  jianzhong: ok!\n\nWhere is this export? Could you please upload a patch to add it\u003e\n\n\u003e With that, can you use the hook at the top of the function?\n\u003e \n\u003e jianzhong:\n\u003e no, we can\u0027t use, because our hook is depend on line 4395 \u0026 4410 condition code.\n\u003e \n\u003e Line:4395 :if (delta_exec \u003e ideal_runtime) {\n\u003e Line 4410 : if (delta_exec \u003c sysctl_sched_min_granularity)\n\nSo if we pass delta_exec and sysctl_sched_min_granularity to the hook you could implement this in your module?",
+      "parentUuid": "80de5189_798265f8",
+      "range": {
+        "startLine": 4415,
+        "startChar": 2,
+        "endLine": 4415,
+        "endChar": 14
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd39a9e2_6b73d3c9",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 5
@@ -332,6 +356,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8965cd9_1792da49",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 7108,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-06T08:55:21Z",
+      "side": 1,
+      "message": "OK, so we\u0027ll merge https://android-review.googlesource.com/c/kernel/common/+/1663962 while we finish the review here, and then please rebase on top to add the parameters you need.",
+      "parentUuid": "9561ccb8_613099a4",
+      "range": {
+        "startLine": 7108,
+        "startChar": 1,
+        "endLine": 7108,
+        "endChar": 73
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5fb0fd62_88472159",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 5
@@ -367,6 +415,30 @@
       "side": 1,
       "message": "if you can export set_next_entity(), then i think it is ok for me.",
       "parentUuid": "5fb0fd62_88472159",
+      "range": {
+        "startLine": 7231,
+        "startChar": 2,
+        "endLine": 7232,
+        "endChar": 30
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16ac279c_e84ca471",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 7232,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-06T08:55:21Z",
+      "side": 1,
+      "message": "Yes we can, please upload the patch that adds the export.",
+      "parentUuid": "6ff1034f_58b51709",
       "range": {
         "startLine": 7231,
         "startChar": 2,
