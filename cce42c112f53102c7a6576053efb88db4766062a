@@ -214,6 +214,30 @@
       },
       "revId": "cce42c112f53102c7a6576053efb88db4766062a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d8b64cc_9f0bb9dd",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-06T03:26:11Z",
+      "side": 1,
+      "message": "ok, thanks, it seems ok for us to re-resue the existing hook.\nabout the different parameter with existing hook, do i add our new parameters to it with a patch?",
+      "parentUuid": "50ad7af1_bce4f735",
+      "range": {
+        "startLine": 168,
+        "startChar": 31,
+        "endLine": 168,
+        "endChar": 32
+      },
+      "revId": "cce42c112f53102c7a6576053efb88db4766062a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
