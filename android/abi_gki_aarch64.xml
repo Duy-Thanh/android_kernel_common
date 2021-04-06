@@ -3624,6 +3624,7 @@
       <elf-symbol name='__tracepoint_android_vh_ftrace_oops_enter' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa485475e'/>
       <elf-symbol name='__tracepoint_android_vh_ftrace_oops_exit' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xecd968c8'/>
       <elf-symbol name='__tracepoint_android_vh_ftrace_size_check' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcbc20ca'/>
+      <elf-symbol name='__tracepoint_android_vh_gpio_block_read' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4842b6e5'/>
       <elf-symbol name='__tracepoint_android_vh_iommu_setup_dma_ops' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x95f68a6b'/>
       <elf-symbol name='__tracepoint_android_vh_ipi_stop' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8064d573'/>
       <elf-symbol name='__tracepoint_android_vh_jiffies_update' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5415675e'/>
@@ -42312,6 +42313,7 @@
       <var-decl name='__tracepoint_android_vh_allow_domain_state' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_allow_domain_state' visibility='default' filepath='include/trace/hooks/pm_domain.h' line='15' column='1' elf-symbol-id='__tracepoint_android_vh_allow_domain_state'/>
       <var-decl name='__tracepoint_android_vh_timer_calc_index' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_timer_calc_index' visibility='default' filepath='include/trace/hooks/timer.h' line='13' column='1' elf-symbol-id='__tracepoint_android_vh_timer_calc_index'/>
       <var-decl name='__tracepoint_android_vh_iommu_setup_dma_ops' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_iommu_setup_dma_ops' visibility='default' filepath='include/trace/hooks/iommu.h' line='17' column='1' elf-symbol-id='__tracepoint_android_vh_iommu_setup_dma_ops'/>
+      <var-decl name='__tracepoint_android_vh_gpio_block_read' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_gpio_block_read' visibility='default' filepath='include/trace/hooks/gpiolib.h' line='15' column='1' elf-symbol-id='__tracepoint_android_vh_gpio_block_read'/>
     </abi-instr>
     <abi-instr address-size='64' path='drivers/base/arch_topology.c' language='LANG_C89'>
       <var-decl name='freq_scale' type-id='7359adad' mangled-name='freq_scale' visibility='default' filepath='drivers/base/arch_topology.c' line='35' column='1' elf-symbol-id='freq_scale'/>
@@ -152564,8 +152566,8 @@
         <parameter type-id='80f4b756' name='requested_name' filepath='net/mac80211/main.c' line='529' column='1'/>
         <return type-id='1905517d'/>
       </function-decl>
-      <function-decl name='ieee80211_unregister_hw' mangled-name='ieee80211_unregister_hw' filepath='net/mac80211/main.c' line='1345' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_unregister_hw'>
-        <parameter type-id='1905517d' name='hw' filepath='net/mac80211/main.c' line='1345' column='1'/>
+      <function-decl name='ieee80211_unregister_hw' mangled-name='ieee80211_unregister_hw' filepath='net/mac80211/main.c' line='1356' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_unregister_hw'>
+        <parameter type-id='1905517d' name='hw' filepath='net/mac80211/main.c' line='1356' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='ieee80211_restart_hw' mangled-name='ieee80211_restart_hw' filepath='net/mac80211/main.c' line='299' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_restart_hw'>
@@ -152576,8 +152578,8 @@
         <parameter type-id='1905517d' name='hw' filepath='net/mac80211/main.c' line='894' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='ieee80211_free_hw' mangled-name='ieee80211_free_hw' filepath='net/mac80211/main.c' line='1401' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_free_hw'>
-        <parameter type-id='1905517d' name='hw' filepath='net/mac80211/main.c' line='1401' column='1'/>
+      <function-decl name='ieee80211_free_hw' mangled-name='ieee80211_free_hw' filepath='net/mac80211/main.c' line='1412' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ieee80211_free_hw'>
+        <parameter type-id='1905517d' name='hw' filepath='net/mac80211/main.c' line='1412' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <pointer-type-def type-id='e07d69c8' size-in-bits='64' id='0953fbfe'/>
