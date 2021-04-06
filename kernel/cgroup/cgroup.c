@@ -2790,18 +2790,23 @@ struct task_struct *cgroup_procs_write_start(char *buf, bool threadgroup,
 		tsk = tsk->group_leader;
 
 	/*
-	 * kthreads may acquire PF_NO_SETAFFINITY during initialization.
-	 * If userland migrates such a kthread to a non-root cgroup, it can
-	 * become trapped in a cpuset, or RT kthread may be born in a
-	 * cgroup with no rt_runtime allocated.  Just say no.
+	 * A RT kthread may be born in a cgroup with no rt_runtime allocated.
+	 * Just say no.
 	 */
-	if (tsk->no_cgroup_migration) {
+#ifdef CONFIG_RT_GROUP_SCHED
+	if (tsk == kthreadd_task) {
 		tsk = ERR_PTR(-EINVAL);
 		goto out_unlock_threadgroup;
 	}
+#endif
 
+	/*
+	 * kthreads may acquire PF_NO_SETAFFINITY during initialization.
+	 * If userland migrates such a kthread to a non-root cgroup, it can
+	 * become trapped in a cpuset. Just say no.
+	 */
 #ifdef CONFIG_CPUSETS
-	if ((tsk->flags & PF_NO_SETAFFINITY) &&
+	if ((tsk->no_cgroup_migration || (tsk->flags & PF_NO_SETAFFINITY)) &&
 			(dst_cgrp->root->subsys_mask & (1U << cpuset_cgrp_id))) {
 		tsk = ERR_PTR(-EINVAL);
 		goto out_unlock_threadgroup;
