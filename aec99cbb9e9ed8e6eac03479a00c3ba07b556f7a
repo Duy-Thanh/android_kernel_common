@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa866d84_52deb10d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-04-06T16:06:49Z",
+      "side": 1,
+      "message": "As per Matthias\u0027 remark in the meeting, please apply this to android-mainline instead. I\u0027ll continue reviewing here, for now.",
+      "revId": "aec99cbb9e9ed8e6eac03479a00c3ba07b556f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
