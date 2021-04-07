@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0b11044_a9830836",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1301696
+      },
+      "writtenOn": "2021-04-07T02:10:42Z",
+      "side": 1,
+      "message": "it seems that this can be abandoned since https://android-review.googlesource.com/c/kernel/common/+/1662041 has been merged.",
+      "revId": "da8f4c85699d46306342c4cbffe80ea77f3838df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
