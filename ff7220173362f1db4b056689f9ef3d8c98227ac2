@@ -16,6 +16,23 @@
       "message": "Please do not do this, as it is going to cause merge issues with upstream fixes over time.  The structure definitions should be there for you for the hook if needed already, otherwise how is anything building properly for you when you added the hook and tested it?",
       "revId": "ff7220173362f1db4b056689f9ef3d8c98227ac2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f88d9a47_7ba7ca72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-04-07T14:25:07Z",
+      "side": 1,
+      "message": "The binder driver is maintained upstream. Changes like this must be submitted and accepted there.",
+      "revId": "ff7220173362f1db4b056689f9ef3d8c98227ac2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
