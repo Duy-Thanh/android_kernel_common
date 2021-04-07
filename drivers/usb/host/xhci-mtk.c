@@ -388,8 +388,11 @@ static void xhci_mtk_quirks(struct device *dev, struct xhci_hcd *xhci)
 	xhci->quirks |= XHCI_SPURIOUS_SUCCESS;
 	if (mtk->lpm_support)
 		xhci->quirks |= XHCI_LPM_SUPPORT;
+<<<<<<< HEAD   (c18ab1 ANDROID: sched: Initialize arguments of android_rvh_replace_)
 	if (mtk->u2_lpm_disable)
 		xhci->quirks |= XHCI_HW_LPM_DISABLE;
+=======
+>>>>>>> BRANCH (ecdfb9 Linux 5.10.28)
 
 	/*
 	 * MTK xHCI 0.96: PSA is 1 by default even if doesn't support stream,
