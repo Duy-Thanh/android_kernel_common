@@ -238,6 +238,30 @@
       },
       "revId": "cce42c112f53102c7a6576053efb88db4766062a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a10b9c5f_35d42903",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1688863
+      },
+      "writtenOn": "2021-04-07T16:08:09Z",
+      "side": 1,
+      "message": "Hello,\n\nYes - for an example of this, see aosp/1542705",
+      "parentUuid": "9d8b64cc_9f0bb9dd",
+      "range": {
+        "startLine": 168,
+        "startChar": 31,
+        "endLine": 168,
+        "endChar": 32
+      },
+      "revId": "cce42c112f53102c7a6576053efb88db4766062a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
