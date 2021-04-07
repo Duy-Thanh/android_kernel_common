@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d73c5258_ca78eb63",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1579699
+      },
+      "writtenOn": "2021-04-07T15:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b37ccfc2_d19bb55a",
+      "range": {
+        "startLine": 11,
+        "startChar": 13,
+        "endLine": 11,
+        "endChar": 19
+      },
+      "revId": "aec99cbb9e9ed8e6eac03479a00c3ba07b556f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "fa866d84_52deb10d",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1e7d518_d43346f6",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1579699
+      },
+      "writtenOn": "2021-04-07T15:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "037c9670_c0217175",
+      "range": {
+        "startLine": 224,
+        "startChar": 37,
+        "endLine": 224,
+        "endChar": 54
+      },
+      "revId": "aec99cbb9e9ed8e6eac03479a00c3ba07b556f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd60358f_3c046746",
@@ -77,6 +125,30 @@
       "writtenOn": "2021-04-06T16:17:49Z",
       "side": 1,
       "message": "I think you can just use ifdef.",
+      "range": {
+        "startLine": 1246,
+        "startChar": 0,
+        "endLine": 1246,
+        "endChar": 4
+      },
+      "revId": "aec99cbb9e9ed8e6eac03479a00c3ba07b556f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da04d173_7ff230c9",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 1246,
+      "author": {
+        "id": 1579699
+      },
+      "writtenOn": "2021-04-07T15:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd60358f_3c046746",
       "range": {
         "startLine": 1246,
         "startChar": 0,
