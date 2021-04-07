@@ -70,6 +70,30 @@
       },
       "revId": "d76ae2aa462bfde8036e139ccf1cf68f1264ebcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a59f491e_d27f22a5",
+        "filename": "kernel/cgroup/cpuset.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2909,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-07T02:39:25Z",
+      "side": 1,
+      "message": "My hook is not related with early, it is  related with cpuset status, because we maintain cpuset logic in our hook individually, and don\u0027t want to run original cpuset flow:\nset_cpus_allowed_ptr(task, current-\u003ecpus_ptr)",
+      "parentUuid": "b2c2852b_c4c8eb49",
+      "range": {
+        "startLine": 2909,
+        "startChar": 1,
+        "endLine": 2909,
+        "endChar": 40
+      },
+      "revId": "d76ae2aa462bfde8036e139ccf1cf68f1264ebcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
