@@ -33,6 +33,40 @@
       "message": "The binder driver is maintained upstream. Changes like this must be submitted and accepted there.",
       "revId": "ff7220173362f1db4b056689f9ef3d8c98227ac2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "317e6e1c_701c1395",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-04-07T14:52:47Z",
+      "side": 1,
+      "message": "I can tell you now that this will not be accepted upstream either. These internal structures cannot be part of the UAPI.\n\nWhy is this needed? It can\u0027t be for a hook since kernel code can include the existing binder_internal.h if the struct definitions are needed.",
+      "revId": "ff7220173362f1db4b056689f9ef3d8c98227ac2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15f449d5_06d5a17a",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-04-07T14:52:47Z",
+      "side": 1,
+      "message": "The internal binder transaction structure cannot be part of the UAPI.",
+      "revId": "ff7220173362f1db4b056689f9ef3d8c98227ac2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
