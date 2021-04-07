@@ -7,6 +7,7 @@
 #include <linux/ftrace.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
+#include <linux/slab.h>
 #include <linux/sort.h>
 
 static struct plt_entry __get_adrp_add_pair(u64 dst, u64 pc,
@@ -290,6 +291,7 @@ static int partition_branch_plt_relas(Elf64_Sym *syms, Elf64_Rela *rela,
 int module_frob_arch_sections(Elf_Ehdr *ehdr, Elf_Shdr *sechdrs,
 			      char *secstrings, struct module *mod)
 {
+	bool copy_rela_for_fips140 = false;
 	unsigned long core_plts = 0;
 	unsigned long init_plts = 0;
 	Elf64_Sym *syms = NULL;
@@ -321,17 +323,46 @@ int module_frob_arch_sections(Elf_Ehdr *ehdr, Elf_Shdr *sechdrs,
 		return -ENOEXEC;
 	}
 
+	if (IS_ENABLED(CONFIG_CRYPTO_FIPS140_INTEGRITY_CHECK) &&
+	    !strcmp(mod->name, "fips140"))
+		copy_rela_for_fips140 = true;
+
 	for (i = 0; i < ehdr->e_shnum; i++) {
 		Elf64_Rela *rels = (void *)ehdr + sechdrs[i].sh_offset;
 		int nents, numrels = sechdrs[i].sh_size / sizeof(Elf64_Rela);
 		Elf64_Shdr *dstsec = sechdrs + sechdrs[i].sh_info;
+		void *p;
 
 		if (sechdrs[i].sh_type != SHT_RELA)
 			continue;
 
+		if (copy_rela_for_fips140 &&
+		    !strcmp(secstrings + dstsec->sh_name, ".rodata")) {
+			p = kcalloc(numrels, sizeof(Elf64_Rela), GFP_KERNEL);
+			if (!p) {
+				pr_err("%s: failed to allocate .rodata RELA buffer\n");
+				return -ENOMEM;
+			}
+			memcpy(p, rels, numrels * sizeof(Elf64_Rela));
+			mod->arch.rodata_relocations = p;
+			mod->arch.num_rodata_relocations = numrels;
+		}
+
 		/* ignore relocations that operate on non-exec sections */
 		if (!(dstsec->sh_flags & SHF_EXECINSTR))
 			continue;
+
+		if (copy_rela_for_fips140 &&
+		    !strcmp(secstrings + dstsec->sh_name, ".text")) {
+			p = kcalloc(numrels, sizeof(Elf64_Rela), GFP_KERNEL);
+			if (!p) {
+				pr_err("%s: failed to allocate .text RELA buffer\n");
+				return -ENOMEM;
+			}
+			memcpy(p, rels, numrels * sizeof(Elf64_Rela));
+			mod->arch.text_relocations = p;
+			mod->arch.num_text_relocations = numrels;
+		}
 
 		/*
 		 * sort branch relocations requiring a PLT by type, symbol index
