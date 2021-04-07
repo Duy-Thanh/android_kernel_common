@@ -22,6 +22,30 @@
       },
       "revId": "b66ab6371c6cdf0dfc7804658e4f456bf8569d93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f09dbb40_883a5bbc",
+        "filename": "kernel/cgroup/cpuset.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2912,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-07T08:35:42Z",
+      "side": 1,
+      "message": "Taking this back -- I just discovered aosp/1651834 which hooks into the same area. Please try and consolidate all these. I understand this can require refactoring of the code on your end, but this is necessary in order to guarantee long-term stability of these hooks. Thanks!",
+      "parentUuid": "7a214b1a_5c613908",
+      "range": {
+        "startLine": 2910,
+        "startChar": 1,
+        "endLine": 2912,
+        "endChar": 48
+      },
+      "revId": "b66ab6371c6cdf0dfc7804658e4f456bf8569d93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
