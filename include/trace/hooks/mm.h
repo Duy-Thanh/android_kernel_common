@@ -9,6 +9,7 @@
 
 #include <linux/types.h>
 
+#include <linux/cma.h>
 #include <linux/mm.h>
 #include <linux/tracepoint.h>
 #include <trace/hooks/vendor_hooks.h>
