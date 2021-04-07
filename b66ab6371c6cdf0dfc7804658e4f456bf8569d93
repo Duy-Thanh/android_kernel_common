@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a214b1a_5c613908",
+        "filename": "kernel/cgroup/cpuset.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2912,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-07T08:24:27Z",
+      "side": 1,
+      "message": "Aha, this has changed now, I missed that new condition, my apologies.\nOne last nit and this is good to go: please rename \u0027should_forbidden\u0027 to something a little more descriptive. Maybe \u0027inherit_cpus\u0027 and invert the condition?\n\nThanks",
+      "range": {
+        "startLine": 2910,
+        "startChar": 1,
+        "endLine": 2912,
+        "endChar": 48
+      },
+      "revId": "b66ab6371c6cdf0dfc7804658e4f456bf8569d93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
