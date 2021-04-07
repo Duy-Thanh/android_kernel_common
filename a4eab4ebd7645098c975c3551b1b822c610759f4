@@ -215,6 +215,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f48cb43a_1423c8b1",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4415,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-07T02:02:06Z",
+      "side": 1,
+      "message": "yes, and need to export clear_buddies(), do i export it to this change ?",
+      "parentUuid": "89d09830_0a151897",
+      "range": {
+        "startLine": 4415,
+        "startChar": 2,
+        "endLine": 4415,
+        "endChar": 14
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd39a9e2_6b73d3c9",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 5
@@ -368,6 +392,30 @@
       "side": 1,
       "message": "OK, so we\u0027ll merge https://android-review.googlesource.com/c/kernel/common/+/1663962 while we finish the review here, and then please rebase on top to add the parameters you need.",
       "parentUuid": "9561ccb8_613099a4",
+      "range": {
+        "startLine": 7108,
+        "startChar": 1,
+        "endLine": 7108,
+        "endChar": 73
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9a08056_5b57a4fc",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 7108,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-07T02:02:06Z",
+      "side": 1,
+      "message": "hello, my means is that if move trace_android_rvh_check_preempt_wakeup() to the place of our hook, it is line 7106, not the place of https://android-review.googlesource.com/c/kernel/common/+/1663962 ,\n\ncan the hook move down more ?",
+      "parentUuid": "d8965cd9_1792da49",
       "range": {
         "startLine": 7108,
         "startChar": 1,

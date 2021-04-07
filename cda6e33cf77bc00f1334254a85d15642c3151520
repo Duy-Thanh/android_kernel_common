@@ -68,6 +68,30 @@
       },
       "revId": "cda6e33cf77bc00f1334254a85d15642c3151520",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fcbb84e_470b1ab3",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 4585,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-07T02:02:06Z",
+      "side": 1,
+      "message": "the 3\u0027th hook have different flow with 1 \u0026 2, it have if branch.\n1 \u0026 2 can consolidate as one , it should be ok.",
+      "parentUuid": "815158b8_37ec321a",
+      "range": {
+        "startLine": 4585,
+        "startChar": 1,
+        "endLine": 4585,
+        "endChar": 45
+      },
+      "revId": "cda6e33cf77bc00f1334254a85d15642c3151520",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
