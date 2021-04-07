@@ -7894,9 +7894,17 @@ simple:
 	if (prev)
 		put_prev_task(rq, prev);
 
+<<<<<<< HEAD   (3a8999 ANDROID: GKI: Update pixel symbol list for thermal)
 	trace_android_rvh_replace_next_task_fair(rq, &p, &se, &repick, true, prev);
 	if (repick)
+=======
+	trace_android_rvh_replace_next_task_fair(rq, &p, &se, &repick, true);
+	if (repick) {
+		for_each_sched_entity(se)
+			set_next_entity(cfs_rq_of(se), se);
+>>>>>>> CHANGE (73ae4b ANDROID: sched/fair: call set_next_entity() on the replaced )
 		goto done;
+	}
 
 	do {
 		se = pick_next_entity(cfs_rq, NULL);
