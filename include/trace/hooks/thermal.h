@@ -14,6 +14,10 @@ DECLARE_HOOK(android_vh_enable_thermal_genl_check,
 	TP_PROTO(int event, int tz_id, int *enable_thermal_genl),
 	TP_ARGS(event, tz_id, enable_thermal_genl));
 
+DECLARE_HOOK(android_vh_is_wakeable_tz_check,
+	     TP_PROTO(char *tz_type, int *irq_wakeable),
+	     TP_ARGS(tz_type, irq_wakeable));
+
 #endif /* _TRACE_HOOK_THERMAL_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
