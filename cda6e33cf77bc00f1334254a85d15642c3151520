@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49142ee6_9f72f54e",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 4392,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-08T08:44:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e6b2a58_006a6362",
+      "range": {
+        "startLine": 4392,
+        "startChar": 1,
+        "endLine": 4392,
+        "endChar": 78
+      },
+      "revId": "cda6e33cf77bc00f1334254a85d15642c3151520",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c6834bf_0fb8b183",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-04-06T08:55:21Z",
       "side": 1,
       "message": "That\u0027s 2 ...",
+      "range": {
+        "startLine": 4413,
+        "startChar": 1,
+        "endLine": 4413,
+        "endChar": 66
+      },
+      "revId": "cda6e33cf77bc00f1334254a85d15642c3151520",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c28a0016_b0358eef",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 4413,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-08T08:44:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c6834bf_0fb8b183",
       "range": {
         "startLine": 4413,
         "startChar": 1,
@@ -84,6 +132,30 @@
       "side": 1,
       "message": "the 3\u0027th hook have different flow with 1 \u0026 2, it have if branch.\n1 \u0026 2 can consolidate as one , it should be ok.",
       "parentUuid": "815158b8_37ec321a",
+      "range": {
+        "startLine": 4585,
+        "startChar": 1,
+        "endLine": 4585,
+        "endChar": 45
+      },
+      "revId": "cda6e33cf77bc00f1334254a85d15642c3151520",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6597a132_26a04465",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 4585,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-08T08:44:26Z",
+      "side": 1,
+      "message": "Ok, please do for 1 \u0026 2, thanks!",
+      "parentUuid": "8fcbb84e_470b1ab3",
       "range": {
         "startLine": 4585,
         "startChar": 1,

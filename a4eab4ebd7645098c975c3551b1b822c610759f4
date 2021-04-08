@@ -239,6 +239,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "973ff8d6_a5080a57",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4415,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-08T08:44:26Z",
+      "side": 1,
+      "message": "clear_buddies() is really small, you could easily have a copy of it in your module.",
+      "parentUuid": "f48cb43a_1423c8b1",
+      "range": {
+        "startLine": 4415,
+        "startChar": 2,
+        "endLine": 4415,
+        "endChar": 14
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd39a9e2_6b73d3c9",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 5
@@ -274,6 +298,30 @@
       "side": 1,
       "message": "the logic flow are different between enqueue_task() and this function.\nThe hook depend on the logic flow of this function.",
       "parentUuid": "bd39a9e2_6b73d3c9",
+      "range": {
+        "startLine": 5567,
+        "startChar": 1,
+        "endLine": 5567,
+        "endChar": 50
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "669872a2_c398439d",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5567,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-08T08:44:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a11b6756_b239c111",
       "range": {
         "startLine": 5567,
         "startChar": 1,
@@ -321,6 +369,30 @@
       "side": 1,
       "message": "Same as above.",
       "parentUuid": "07eb668d_c7a7e565",
+      "range": {
+        "startLine": 5674,
+        "startChar": 1,
+        "endLine": 5674,
+        "endChar": 51
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1fd9818_a6a9d726",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5674,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-08T08:44:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "055e7ad5_faaacb43",
       "range": {
         "startLine": 5674,
         "startChar": 1,
@@ -416,6 +488,30 @@
       "side": 1,
       "message": "hello, my means is that if move trace_android_rvh_check_preempt_wakeup() to the place of our hook, it is line 7106, not the place of https://android-review.googlesource.com/c/kernel/common/+/1663962 ,\n\ncan the hook move down more ?",
       "parentUuid": "d8965cd9_1792da49",
+      "range": {
+        "startLine": 7108,
+        "startChar": 1,
+        "endLine": 7108,
+        "endChar": 73
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fc37675_010a1e90",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 7108,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-08T08:44:26Z",
+      "side": 1,
+      "message": "Is there really no way you can make your module use it where it is?",
+      "parentUuid": "a9a08056_5b57a4fc",
       "range": {
         "startLine": 7108,
         "startChar": 1,
