@@ -18,5 +18,8 @@ gnss-sirf-y := sirf.o
 obj-$(CONFIG_GNSS_UBX_SERIAL)		+= gnss-ubx.o
 gnss-ubx-y := ubx.o
 
+obj-$(CONFIG_GNSS_VIRTIO_SERIAL)	+= gnss-virtio.o
+gnss-virtio-y := virtio-char-gnss.o
+
 obj-$(CONFIG_GNSS_CMDLINE_SERIAL)	+= gnss-cmdline.o
 gnss-cmdline-y := cmdline.o
