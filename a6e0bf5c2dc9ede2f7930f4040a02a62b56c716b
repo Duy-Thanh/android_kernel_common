@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cd6564a9_da11947f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-04-08T12:08:17Z",
+      "side": 1,
+      "message": "Please paste in here the ABI diff short report you get with build_abi.sh. Make sure you restore the XML first.\n\nDue to b/155036031 the removal of memdup_user will not be reported.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 41
+      },
+      "revId": "a6e0bf5c2dc9ede2f7930f4040a02a62b56c716b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb72df78_2ac02f83",
         "filename": "android/abi_gki_aarch64_virtual_device",
         "patchSetId": 3
