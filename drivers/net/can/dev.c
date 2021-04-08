@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (88e19e FROMLIST: gcov: re-fix clang-11+ support)
 // SPDX-License-Identifier: GPL-2.0-only
 /* Copyright (C) 2005 Marc Kleine-Budde, Pengutronix
  * Copyright (C) 2006 Andrey Volkov, Varma Electronics
@@ -1307,3 +1308,5 @@ static __exit void can_dev_exit(void)
 module_exit(can_dev_exit);
 
 MODULE_ALIAS_RTNL_LINK("can");
+=======
+>>>>>>> BRANCH (59c8e3 Linux 5.4.110)

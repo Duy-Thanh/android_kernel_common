@@ -709,9 +709,13 @@ static struct sock *__vsock_create(struct net *net,
 		vsk->trusted = psk->trusted;
 		vsk->owner = get_cred(psk->owner);
 		vsk->connect_timeout = psk->connect_timeout;
+<<<<<<< HEAD   (88e19e FROMLIST: gcov: re-fix clang-11+ support)
 		vsk->buffer_size = psk->buffer_size;
 		vsk->buffer_min_size = psk->buffer_min_size;
 		vsk->buffer_max_size = psk->buffer_max_size;
+=======
+		security_sk_clone(parent, sk);
+>>>>>>> BRANCH (59c8e3 Linux 5.4.110)
 	} else {
 		vsk->trusted = ns_capable_noaudit(&init_user_ns, CAP_NET_ADMIN);
 		vsk->owner = get_current_cred();
