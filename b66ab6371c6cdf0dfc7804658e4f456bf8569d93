@@ -46,6 +46,30 @@
       },
       "revId": "b66ab6371c6cdf0dfc7804658e4f456bf8569d93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a61fd338_87e584f5",
+        "filename": "kernel/cgroup/cpuset.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2912,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-08T08:35:29Z",
+      "side": 1,
+      "message": "hello,\n\nshould_forbidden rename as inherit_cpus.\nas talked in aosp/1651834, we have to add vendor hook here for our feature, thanks!",
+      "parentUuid": "f09dbb40_883a5bbc",
+      "range": {
+        "startLine": 2910,
+        "startChar": 1,
+        "endLine": 2912,
+        "endChar": 48
+      },
+      "revId": "b66ab6371c6cdf0dfc7804658e4f456bf8569d93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
