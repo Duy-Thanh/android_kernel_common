@@ -297,7 +297,7 @@ static int virtio_dev_remove(struct device *_d)
 	return 0;
 }
 
-static struct bus_type virtio_bus = {
+struct bus_type virtio_bus = {
 	.name  = "virtio",
 	.match = virtio_dev_match,
 	.dev_groups = virtio_dev_groups,
@@ -313,6 +313,7 @@ int register_virtio_driver(struct virtio_driver *driver)
 	driver->driver.bus = &virtio_bus;
 	return driver_register(&driver->driver);
 }
+EXPORT_SYMBOL_GPL(virtio_bus);
 EXPORT_SYMBOL_GPL(register_virtio_driver);
 
 void unregister_virtio_driver(struct virtio_driver *driver)

@@ -1414,6 +1414,8 @@ static int add_port(struct ports_device *portdev, u32 id)
 		goto free_cdev;
 	}
 
+    dev_err(port->dev, "get some name here");
+    dev_err(&port->portdev->vdev->dev, "get some name here 3");
 	spin_lock_init(&port->inbuf_lock);
 	spin_lock_init(&port->outvq_lock);
 	init_waitqueue_head(&port->waitqueue);
