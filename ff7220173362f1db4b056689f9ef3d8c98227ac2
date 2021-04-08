@@ -85,6 +85,24 @@
       "parentUuid": "15f449d5_06d5a17a",
       "revId": "ff7220173362f1db4b056689f9ef3d8c98227ac2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c295671_24863d65",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-04-08T04:18:21Z",
+      "side": 1,
+      "message": "You can include it as:\n\n  #include \"../../android/binder_internal.h\"\n\nor you can add a statement in drivers/soc/qcom/Makefile\n\n  ccflags-y +\u003d -I$(srctree)/drivers/android/binder\n\n(the 1st one is probably preferred)",
+      "parentUuid": "3200a66e_d94a488e",
+      "revId": "ff7220173362f1db4b056689f9ef3d8c98227ac2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
