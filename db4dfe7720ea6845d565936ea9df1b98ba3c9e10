@@ -22,6 +22,30 @@
       },
       "revId": "db4dfe7720ea6845d565936ea9df1b98ba3c9e10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6d627d9_8db190ac",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1872681
+      },
+      "writtenOn": "2021-04-08T04:50:58Z",
+      "side": 1,
+      "message": "I see SLUB_DEBUG is enabled by default, and this will be needed by minidump module for getting slab owner info.",
+      "parentUuid": "ccfbc7f2_5e621e00",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 24
+      },
+      "revId": "db4dfe7720ea6845d565936ea9df1b98ba3c9e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
