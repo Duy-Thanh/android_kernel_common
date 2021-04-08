@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6dc4de6_78f750ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-04-08T10:46:03Z",
+      "side": 1,
+      "message": "\u003e ANDROID: commits need to contain a properly formatted Bug: or Fixes: line\n\nPlease fix.",
+      "parentUuid": "535e9c6e_baef1ed9",
+      "revId": "a33eadc1dc1929c521058e488419eaa743edb812",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2211ec6_d014b9a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-04-08T10:46:03Z",
+      "side": 1,
+      "message": "This needs to go to android-mainline first",
+      "revId": "a33eadc1dc1929c521058e488419eaa743edb812",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
