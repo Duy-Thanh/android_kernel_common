@@ -67,6 +67,24 @@
       "message": "The internal binder transaction structure cannot be part of the UAPI.",
       "revId": "ff7220173362f1db4b056689f9ef3d8c98227ac2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3200a66e_d94a488e",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1869026
+      },
+      "writtenOn": "2021-04-08T02:53:25Z",
+      "side": 1,
+      "message": "Could we include header file between driver module?\nbinder_internal.h is in \"drivers/android\"\nbut we need include it in \"drivers/soc/qcom\".\n\nWe need get access to the member ANDROID_VENDOR_DATA for vendor hook to set/get value, so we need inldue the struct, or else it will have compile error.",
+      "parentUuid": "15f449d5_06d5a17a",
+      "revId": "ff7220173362f1db4b056689f9ef3d8c98227ac2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
