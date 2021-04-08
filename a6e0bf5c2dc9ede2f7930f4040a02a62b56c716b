@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb72df78_2ac02f83",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 3
+      },
+      "lineNbr": 940,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-04-08T10:28:54Z",
+      "side": 1,
+      "message": "This is an additional symbol and you need to regenerate the ABI representation.",
+      "revId": "a6e0bf5c2dc9ede2f7930f4040a02a62b56c716b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
