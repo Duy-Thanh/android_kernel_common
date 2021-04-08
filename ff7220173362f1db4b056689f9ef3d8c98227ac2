@@ -103,6 +103,24 @@
       "parentUuid": "3200a66e_d94a488e",
       "revId": "ff7220173362f1db4b056689f9ef3d8c98227ac2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb0ca626_665189a7",
+        "filename": "include/uapi/linux/android/binder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1869026
+      },
+      "writtenOn": "2021-04-08T09:45:12Z",
+      "side": 1,
+      "message": "Thanks for reply, will take solution 1 and withdraw this upstream.",
+      "parentUuid": "8c295671_24863d65",
+      "revId": "ff7220173362f1db4b056689f9ef3d8c98227ac2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
