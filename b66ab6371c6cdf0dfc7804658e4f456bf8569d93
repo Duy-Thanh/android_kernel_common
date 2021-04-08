@@ -70,6 +70,30 @@
       },
       "revId": "b66ab6371c6cdf0dfc7804658e4f456bf8569d93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b87ab30a_9e9a88f7",
+        "filename": "kernel/cgroup/cpuset.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2912,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-08T08:37:39Z",
+      "side": 1,
+      "message": "OK, thanks for confirming. This seems to have a conflict in vendor_hooks.c, please rebase and this should be good to go.",
+      "parentUuid": "a61fd338_87e584f5",
+      "range": {
+        "startLine": 2910,
+        "startChar": 1,
+        "endLine": 2912,
+        "endChar": 48
+      },
+      "revId": "b66ab6371c6cdf0dfc7804658e4f456bf8569d93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
