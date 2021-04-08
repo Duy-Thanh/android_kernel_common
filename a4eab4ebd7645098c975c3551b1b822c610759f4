@@ -263,6 +263,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25ba6bfc_4d264183",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4415,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-08T12:40:26Z",
+      "side": 1,
+      "message": "ok, i will do it.",
+      "parentUuid": "973ff8d6_a5080a57",
+      "range": {
+        "startLine": 4415,
+        "startChar": 2,
+        "endLine": 4415,
+        "endChar": 14
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd39a9e2_6b73d3c9",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 5
@@ -512,6 +536,30 @@
       "side": 1,
       "message": "Is there really no way you can make your module use it where it is?",
       "parentUuid": "a9a08056_5b57a4fc",
+      "range": {
+        "startLine": 7108,
+        "startChar": 1,
+        "endLine": 7108,
+        "endChar": 73
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58d84f3c_1c69ee4b",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 7108,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-08T12:40:26Z",
+      "side": 1,
+      "message": "i can add below code to ko, but need to export wakeup_preempt_entity().\n\n\tBUG_ON(!pse);\n\tif (wakeup_preempt_entity(se, pse) \u003d\u003d 1) {\n\t\t/*\n\t\t * Bias pick_next to pick the sched entity that is\n\t\t * triggering this preemption.\n\t\t */\n\t\tif (!next_buddy_marked)\n\t\t\tset_next_buddy(pse);\n\t\tgoto preempt;\n\t}",
+      "parentUuid": "3fc37675_010a1e90",
       "range": {
         "startLine": 7108,
         "startChar": 1,
