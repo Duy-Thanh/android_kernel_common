@@ -243,3 +243,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_adj_current_limit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_logbuf);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_scan_type);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_swappiness);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_vmalloc_stack);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_stack_hash);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_track_hash);
