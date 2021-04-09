@@ -46,6 +46,30 @@
       },
       "revId": "db4dfe7720ea6845d565936ea9df1b98ba3c9e10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2f19426_f804ea36",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-04-09T23:11:01Z",
+      "side": 1,
+      "message": "Hmm. That is correct. GKI is build with CONFIG_SLUB_DEBUG\u003dy and CONFIG_SLUB_DEBUG_ON\u003dn, so debugging is not enabled but is available.",
+      "parentUuid": "e6d627d9_8db190ac",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 24
+      },
+      "revId": "db4dfe7720ea6845d565936ea9df1b98ba3c9e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
