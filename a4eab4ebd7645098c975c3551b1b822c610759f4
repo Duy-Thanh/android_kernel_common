@@ -285,6 +285,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0186ee2_c46ca663",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4415,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-09T03:33:08Z",
+      "side": 1,
+      "message": "done.",
+      "parentUuid": "25ba6bfc_4d264183",
+      "range": {
+        "startLine": 4415,
+        "startChar": 2,
+        "endLine": 4415,
+        "endChar": 14
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd39a9e2_6b73d3c9",
@@ -631,6 +655,30 @@
       "side": 1,
       "message": "Yes we can, please upload the patch that adds the export.",
       "parentUuid": "6ff1034f_58b51709",
+      "range": {
+        "startLine": 7231,
+        "startChar": 2,
+        "endLine": 7232,
+        "endChar": 30
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "386a2bdc_90886a93",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 7232,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-09T03:33:08Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "16ac279c_e84ca471",
       "range": {
         "startLine": 7231,
         "startChar": 2,
