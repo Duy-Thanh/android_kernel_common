@@ -594,6 +594,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f53e306d_fac01bda",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 7108,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-09T06:24:36Z",
+      "side": 1,
+      "message": "hello,\n\nit seems don\u0027t need to export wakeup_preempt_entity(),\njust to export sysctl_sched_wakeup_granularity only, do you think it ok ?",
+      "parentUuid": "58d84f3c_1c69ee4b",
+      "range": {
+        "startLine": 7108,
+        "startChar": 1,
+        "endLine": 7108,
+        "endChar": 73
+      },
+      "revId": "a4eab4ebd7645098c975c3551b1b822c610759f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5fb0fd62_88472159",
