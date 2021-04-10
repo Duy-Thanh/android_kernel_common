@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a120a4e_9e28ae86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-10T07:49:36Z",
+      "side": 1,
+      "message": "This branch is only for upstream LTS merges.  It should be receiving regular merges from the android11-5.4 branch, so if you have bugfixes that need to be done in the android11-5.4 branch, please merge them there instead of here.",
+      "revId": "1bfcb9adcfc0516d65d2cb3dd67287e400e8ed34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
