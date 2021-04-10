@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d28d8a89_de5f458a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-04-10T12:39:20Z",
+      "side": 1,
+      "message": "aosp_kernel-common-android11-5.4-lts: File with significant size growth: vmlinux : 55 MiB -\u003e 83 MiB (+28 MiB)\n\nis that a concern?",
+      "revId": "438fd4297c724ff67abbe4c8981c32fc7759b8a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
