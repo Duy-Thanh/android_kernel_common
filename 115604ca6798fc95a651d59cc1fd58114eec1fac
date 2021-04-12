@@ -1,0 +1,41 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000009811005",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1527947?revision\u003d16",
+      "fixSuggestions": [
+        {
+          "fixId": "ac2a8084_35edc2ed",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 19,
+                "startChar": 0,
+                "endLine": 19,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Badhri Jagan Sridharan \u003cbadhri@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "2e636577_e02a1ab2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-04-12T15:13:52Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Badhri Jagan Sridharan \u003cbadhri@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 367432802 android-build.ayeaye-python-dispatcher_20210408.05_p0",
+      "revId": "115604ca6798fc95a651d59cc1fd58114eec1fac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
