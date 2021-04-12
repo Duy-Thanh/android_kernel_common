@@ -15,6 +15,8 @@
 #include <linux/mmc/mmc.h>
 #include <linux/mmc/sd.h>
 
+#include <trace/hooks/mmc_core.h>
+
 #include "core.h"
 #include "sd_ops.h"
 
@@ -154,6 +156,8 @@ int mmc_send_app_op_cond(struct mmc_host *host, u32 ocr, u32 *rocr)
 
 	if (rocr && !mmc_host_is_spi(host))
 		*rocr = cmd.resp[0];
+
+	trace_android_vh_mmc_send_app_op_cond(host, ocr, *rocr, err);
 
 	return err;
 }

@@ -35,6 +35,9 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/mmc.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/mmc_core.h>
+
 #include "core.h"
 #include "card.h"
 #include "crypto.h"
@@ -2131,6 +2134,8 @@ static int mmc_rescan_try_freq(struct mmc_host *host, unsigned freq)
 	pr_debug("%s: %s: trying to init card at %u Hz\n",
 		mmc_hostname(host), __func__, host->f_init);
 
+	trace_android_vh_mmc_rescan_try_freq(host);
+
 	mmc_power_up(host, host->ocr_avail);
 
 	/*
@@ -2316,6 +2321,8 @@ void mmc_start_host(struct mmc_host *host)
 {
 	host->f_init = max(min(freqs[0], host->f_max), host->f_min);
 	host->rescan_disable = 0;
+
+	trace_android_vh_mmc_start_host(host);
 
 	if (!(host->caps2 & MMC_CAP2_NO_PRESCAN_POWERUP)) {
 		mmc_claim_host(host);

@@ -24,6 +24,8 @@
 #include <linux/mmc/card.h>
 #include <linux/mmc/slot-gpio.h>
 
+#include <trace/hooks/mmc_core.h>
+
 #include "core.h"
 #include "crypto.h"
 #include "host.h"
@@ -442,6 +444,8 @@ struct mmc_host *mmc_alloc_host(int extra, struct device *dev)
 		return NULL;
 	}
 
+	trace_android_vh_mmc_alloc_host(host);
+
 	spin_lock_init(&host->lock);
 	init_waitqueue_head(&host->wq);
 	INIT_DELAYED_WORK(&host->detect, mmc_rescan);
@@ -493,6 +497,8 @@ int mmc_add_host(struct mmc_host *host)
 	mmc_add_host_debugfs(host);
 #endif
 
+	trace_android_vh_mmc_add_host(host);
+
 	mmc_start_host(host);
 	if (!(host->pm_flags & MMC_PM_IGNORE_PM_NOTIFY))
 		mmc_register_pm_notifier(host);
@@ -515,6 +521,8 @@ void mmc_remove_host(struct mmc_host *host)
 	if (!(host->pm_flags & MMC_PM_IGNORE_PM_NOTIFY))
 		mmc_unregister_pm_notifier(host);
 	mmc_stop_host(host);
+
+	trace_android_vh_mmc_remove_host(host);
 
 #ifdef CONFIG_DEBUG_FS
 	mmc_remove_host_debugfs(host);

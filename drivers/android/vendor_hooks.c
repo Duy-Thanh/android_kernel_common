@@ -50,6 +50,7 @@
 #include <trace/hooks/typec.h>
 #include <trace/hooks/gpiolib.h>
 #include <trace/hooks/signal.h>
+#include <trace/hooks/mmc_core.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -238,3 +239,16 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_preset);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_post_init_entity_util_avg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_get_timer);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_adj_current_limit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sdhci_get_cd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sdhci_card_event);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sd_update_bus_speed_mode);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_send_app_op_cond);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_attach_sd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_reset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_mq_rw_recovery);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_rescan_try_freq);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_alloc_host);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_add_host);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_remove_host);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_start_host);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_gpio_cd_irqt);
