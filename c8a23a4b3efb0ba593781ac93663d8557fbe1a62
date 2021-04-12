@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbdb3082_56728b9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-04-12T13:08:48Z",
+      "side": 1,
+      "message": "FTR: this ABI update was done with an outdated libabigail version rolling back the xml version from 2.0 to 1.0. That is why this one failed.",
+      "revId": "c8a23a4b3efb0ba593781ac93663d8557fbe1a62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
