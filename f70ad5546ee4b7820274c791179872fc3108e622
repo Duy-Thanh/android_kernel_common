@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57cf2682_89cf2495",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-04-12T21:31:03Z",
+      "side": 1,
+      "message": "Could you send this upstream?  Preferably as separate patches for fscrypt and fsverity.\n\nAlso, this change does have the disadvantage that the user could totally disable these algorithms, which would be a misconfiguration because these are supposed to be defaults that are always available.  So I think at least the help text for FS_ENCRYPTION and FS_VERITY should be updated to explain that the user needs to make sure they still have implementations of these algorithms enabled (or link to an explanation in Documentation/filesystems/{fscrypt,fsverity}.rst if it\u0027s too long for the kconfig help text).",
+      "revId": "f70ad5546ee4b7820274c791179872fc3108e622",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
