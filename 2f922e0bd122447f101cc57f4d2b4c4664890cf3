@@ -39,6 +39,30 @@
       },
       "revId": "2f922e0bd122447f101cc57f4d2b4c4664890cf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17dc7171_84269011",
+        "filename": "scripts/depmod.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1539256
+      },
+      "writtenOn": "2021-04-12T21:41:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1d61f63_dd1892ce",
+      "range": {
+        "startLine": 7,
+        "startChar": 1,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "2f922e0bd122447f101cc57f4d2b4c4664890cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
