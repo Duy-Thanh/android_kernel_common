@@ -1088,11 +1088,11 @@
   input_unregister_device
   input_unregister_handle
   input_unregister_handler
-  int_sqrt
   interval_tree_insert
   interval_tree_iter_first
   interval_tree_iter_next
   interval_tree_remove
+  int_sqrt
   invalidate_mapping_pages
   iomem_resource
   iommu_alloc_resv_region
@@ -1579,8 +1579,8 @@
   pci_bus_type
   pci_clear_master
   pci_d3cold_disable
-  pci_dev_present
   pci_device_group
+  pci_dev_present
   pci_disable_device
   pci_disable_msi
   pcie_capability_read_word
@@ -2181,6 +2181,7 @@
   sock_queue_rcv_skb
   sock_register
   sock_release
+  sock_setsockopt
   sock_unregister
   softnet_data
   sort
