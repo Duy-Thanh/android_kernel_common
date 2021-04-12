@@ -16,6 +16,23 @@
       "message": "No .xml update should be needed here.",
       "revId": "4f542ee2afda5c3527e186034b6ccca4b2f154f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5957e8bd_6937c667",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-12T11:49:53Z",
+      "side": 1,
+      "message": "Please break this up into individual patches, one per type of hook.\n\nBut why were none of your changes sent upstream first?  These things should be easy to get merged properly for your needed changes.",
+      "revId": "4f542ee2afda5c3527e186034b6ccca4b2f154f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
