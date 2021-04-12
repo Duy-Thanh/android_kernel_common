@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c145f66e_947e5287",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-04-12T15:25:41Z",
+      "side": 1,
+      "message": "/usr/local/google/buildbot/src/android/common-android12-5.10/common/drivers/media/v4l2-core/v4l2-ctrls.c:2010:7: error: duplicate case value: \u0027272\u0027 and \u0027V4L2_CTRL_TYPE_HDR10_CLL_INFO\u0027 both equal \u0027272\u0027\n        case V4L2_CTRL_TYPE_HDR10_CLL_INFO:\n             ^\n/usr/local/google/buildbot/src/android/common-android12-5.10/common/drivers/media/v4l2-core/v4l2-ctrls.c:1904:7: note: previous case defined here\n        case V4L2_CTRL_TYPE_H264_SPS:",
+      "revId": "b312a6655012846ba4a84f93bac4cbf9efcaaf4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
