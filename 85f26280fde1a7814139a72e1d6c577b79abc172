@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37357c79_66dd9412",
+        "filename": "mm/compaction.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1810595
+      },
+      "writtenOn": "2021-04-12T09:48:37Z",
+      "side": 1,
+      "message": "True.. Will fix this in the next version.",
+      "parentUuid": "636e84e0_3bfd089d",
+      "range": {
+        "startLine": 772,
+        "startChar": 1,
+        "endLine": 772,
+        "endChar": 27
+      },
+      "revId": "85f26280fde1a7814139a72e1d6c577b79abc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8a21a9a6_e2564ef4",
         "filename": "mm/compaction.c",
         "patchSetId": 1
@@ -96,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "54949b64_7d9bff12",
+        "filename": "mm/compaction.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1810595
+      },
+      "writtenOn": "2021-04-12T09:48:37Z",
+      "side": 1,
+      "message": "Will add this in the next version.",
+      "parentUuid": "acefc32c_5d2582c3",
+      "range": {
+        "startLine": 784,
+        "startChar": 18,
+        "endLine": 784,
+        "endChar": 45
+      },
+      "revId": "85f26280fde1a7814139a72e1d6c577b79abc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82f8ad57_0511a18b",
         "filename": "mm/memory_hotplug.c",
         "patchSetId": 1
@@ -143,6 +191,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fdf46a47_af2b56fd",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1681,
+      "author": {
+        "id": 1810595
+      },
+      "writtenOn": "2021-04-12T09:48:37Z",
+      "side": 1,
+      "message": "I can export migrate_pages and putback_movable_pages() here, as per your comment in the buganizer.",
+      "parentUuid": "dda40287_c5753370",
+      "range": {
+        "startLine": 1681,
+        "startChar": 3,
+        "endLine": 1681,
+        "endChar": 35
+      },
+      "revId": "85f26280fde1a7814139a72e1d6c577b79abc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8337120e_644e9789",
         "filename": "mm/page_alloc.c",
         "patchSetId": 1
@@ -154,6 +226,30 @@
       "writtenOn": "2021-04-05T19:39:53Z",
       "side": 1,
       "message": "I suggest adding put_page(page) at the end of this function to balance the get_page_unless_zero() call:\n\n\nif (!get_page_unless_zero(page))\n    return -EINVAL;\nret \u003d isolate_lru_page(page);\nput_page(page);\nreturn ret;",
+      "range": {
+        "startLine": 553,
+        "startChar": 1,
+        "endLine": 553,
+        "endChar": 31
+      },
+      "revId": "85f26280fde1a7814139a72e1d6c577b79abc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6bfed89_078384e8",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1810595
+      },
+      "writtenOn": "2021-04-12T09:48:37Z",
+      "side": 1,
+      "message": "Let me change it..",
+      "parentUuid": "8337120e_644e9789",
       "range": {
         "startLine": 553,
         "startChar": 1,
@@ -213,6 +309,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca15536c_6189770f",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1810595
+      },
+      "writtenOn": "2021-04-12T09:48:37Z",
+      "side": 1,
+      "message": "get_pageblock_migratetype is #define and instead we can export the get_pfnblock_flags_mask.",
+      "parentUuid": "2542ece1_8506b942",
+      "range": {
+        "startLine": 557,
+        "startChar": 5,
+        "endLine": 557,
+        "endChar": 34
+      },
+      "revId": "85f26280fde1a7814139a72e1d6c577b79abc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "310dc52c_67f2e9a3",
         "filename": "mm/page_alloc.c",
         "patchSetId": 1
@@ -224,6 +344,30 @@
       "writtenOn": "2021-04-05T19:39:53Z",
       "side": 1,
       "message": "which header file declares these new functions?",
+      "range": {
+        "startLine": 565,
+        "startChar": 18,
+        "endLine": 565,
+        "endChar": 47
+      },
+      "revId": "85f26280fde1a7814139a72e1d6c577b79abc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5556219f_947a97cb",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1810595
+      },
+      "writtenOn": "2021-04-12T09:48:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "310dc52c_67f2e9a3",
       "range": {
         "startLine": 565,
         "startChar": 18,
