@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0673d44_fda05fb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-04-12T10:40:16Z",
+      "side": 1,
+      "message": "But needs to go to android-mainline as noted.",
+      "revId": "2f922e0bd122447f101cc57f4d2b4c4664890cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1d61f63_dd1892ce",
+        "filename": "scripts/depmod.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-04-12T10:40:16Z",
+      "side": 1,
+      "message": "You should document the extra optional argument.",
+      "range": {
+        "startLine": 7,
+        "startChar": 1,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "2f922e0bd122447f101cc57f4d2b4c4664890cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
