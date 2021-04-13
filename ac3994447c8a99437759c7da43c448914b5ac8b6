@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95e4edd6_fcdd6016",
+        "filename": "drivers/iommu/io-pgtable-arm.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-04-13T00:03:56Z",
+      "side": 1,
+      "message": "Sorry if this is a daft question, but looking through the patch this seems a little odd. Is passing NULL here instead of mapped intentional?",
+      "range": {
+        "startLine": 500,
+        "startChar": 19,
+        "endLine": 500,
+        "endChar": 23
+      },
+      "revId": "ac3994447c8a99437759c7da43c448914b5ac8b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
