@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d672084_2e872af6",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 5
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-04-13T06:06:35Z",
+      "side": 0,
+      "message": "symbols should not be removed anymore at this stage ...",
+      "revId": "88e19efa1dad56c2f53223766141a22806cb15f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
