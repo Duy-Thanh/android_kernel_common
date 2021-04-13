@@ -47,6 +47,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9abb400_e9494f77",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1539256
+      },
+      "writtenOn": "2021-04-13T16:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "689d53c9_be0855ad",
+      "range": {
+        "startLine": 134,
+        "startChar": 58,
+        "endLine": 134,
+        "endChar": 60
+      },
+      "revId": "81b039a2be6bb54ab6319d1bf1f3221a8115aec9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa269eb0_75da4a49",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1539256
+      },
+      "writtenOn": "2021-04-13T16:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af04d5f7_d21d4828",
+      "range": {
+        "startLine": 134,
+        "startChar": 11,
+        "endLine": 134,
+        "endChar": 17
+      },
+      "revId": "81b039a2be6bb54ab6319d1bf1f3221a8115aec9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d7226b4_57146370",
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29f4af3a_2205c750",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1539256
+      },
+      "writtenOn": "2021-04-13T16:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d7226b4_57146370",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 5
+      },
+      "revId": "81b039a2be6bb54ab6319d1bf1f3221a8115aec9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78393994_d02ad772",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-04-13T07:49:49Z",
       "side": 1,
       "message": "Place the optional second argument in [ ... ] instead of \u003c ... \u003e.",
+      "range": {
+        "startLine": 7,
+        "startChar": 46,
+        "endLine": 7,
+        "endChar": 65
+      },
+      "revId": "81b039a2be6bb54ab6319d1bf1f3221a8115aec9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29d130d6_e97fb547",
+        "filename": "scripts/depmod.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1539256
+      },
+      "writtenOn": "2021-04-13T16:32:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78393994_d02ad772",
       "range": {
         "startLine": 7,
         "startChar": 46,
