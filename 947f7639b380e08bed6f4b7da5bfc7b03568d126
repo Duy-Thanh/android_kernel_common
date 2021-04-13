@@ -16,6 +16,23 @@
       "message": "Excellent! I just got finished testing the same change locally and it does resolve the issue I was seeing!\n\nThanks so much for the quick fix!",
       "revId": "947f7639b380e08bed6f4b7da5bfc7b03568d126",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaa0ab8b_34da6031",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-04-13T08:39:59Z",
+      "side": 1,
+      "message": "It\u0027s a bit worrying that this wasn\u0027t caught in earlier testing. Isaac -- how come you didn\u0027t see the same failure as John on your platform?",
+      "revId": "947f7639b380e08bed6f4b7da5bfc7b03568d126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
