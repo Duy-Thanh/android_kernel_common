@@ -56,6 +56,7 @@
 #include <trace/events/printk.h>
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/printk.h>
+#include <trace/hooks/logbuf.h>
 
 #include "printk_ringbuffer.h"
 #include "console_cmdline.h"
@@ -574,6 +575,57 @@ static void truncate_msg(u16 *text_len, u16 *trunc_msg_len)
 		*trunc_msg_len = 0;
 }
 
+<<<<<<< HEAD   (c4ad4a ANDROID: ABI: Update oplus symbol list)
+=======
+/* insert record into the buffer, discard old ones, update heads */
+static int log_store(u32 caller_id, int facility, int level,
+		     enum log_flags flags, u64 ts_nsec,
+		     const struct dev_printk_info *dev_info,
+		     const char *text, u16 text_len)
+{
+	struct prb_reserved_entry e;
+	struct printk_record r;
+	u16 trunc_msg_len = 0;
+
+	prb_rec_init_wr(&r, text_len);
+
+	if (!prb_reserve(&e, prb, &r)) {
+		/* truncate the message if it is too long for empty buffer */
+		truncate_msg(&text_len, &trunc_msg_len);
+		prb_rec_init_wr(&r, text_len + trunc_msg_len);
+		/* survive when the log buffer is too small for trunc_msg */
+		if (!prb_reserve(&e, prb, &r))
+			return 0;
+	}
+
+	/* fill message */
+	memcpy(&r.text_buf[0], text, text_len);
+	if (trunc_msg_len)
+		memcpy(&r.text_buf[text_len], trunc_msg, trunc_msg_len);
+	r.info->text_len = text_len + trunc_msg_len;
+	r.info->facility = facility;
+	r.info->level = level & 7;
+	r.info->flags = flags & 0x1f;
+	if (ts_nsec > 0)
+		r.info->ts_nsec = ts_nsec;
+	else
+		r.info->ts_nsec = local_clock();
+	r.info->caller_id = caller_id;
+	if (dev_info)
+		memcpy(&r.info->dev_info, dev_info, sizeof(r.info->dev_info));
+
+	/* A message without a trailing newline can be continued. */
+	if (!(flags & LOG_NEWLINE))
+		prb_commit(&e);
+	else
+		prb_final_commit(&e);
+
+	trace_android_vh_logbuf(prb, &r);
+
+	return (text_len + trunc_msg_len);
+}
+
+>>>>>>> CHANGE (34fde6 ANDROID: logbuf: vendor hook for logbuf dump on oops)
 int dmesg_restrict = IS_ENABLED(CONFIG_SECURITY_DMESG_RESTRICT);
 
 static int syslog_action_restricted(int type)
