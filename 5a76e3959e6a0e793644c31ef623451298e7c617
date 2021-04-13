@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6e02e5a_204f8cc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1670210
+      },
+      "writtenOn": "2021-04-13T10:57:05Z",
+      "side": 1,
+      "message": "I upload this patch to resolve broken ABI due to SND_SOC_TOPOLOGY\nIt is cherry-picked from 5.4.\n- Original patch: https://android-review.googlesource.com/c/kernel/common/+/1283923\n- Issue Tracker: https://partnerissuetracker.corp.google.com/u/1/issues/185209723",
+      "revId": "5a76e3959e6a0e793644c31ef623451298e7c617",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
