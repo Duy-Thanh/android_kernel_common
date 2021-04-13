@@ -16,6 +16,23 @@
       "message": "THis should be discussed upstream...",
       "revId": "404a00d8aff64c879169db684e9916a181e278f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abaa82fa_fb14ba81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-13T13:05:35Z",
+      "side": 1,
+      "message": "Please talk about this upstream as this is slotted to show up in 5.12-final and if it causes problems we need to know it.",
+      "revId": "404a00d8aff64c879169db684e9916a181e278f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
