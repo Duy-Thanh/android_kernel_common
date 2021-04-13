@@ -33,6 +33,24 @@
       "message": "It\u0027s a bit worrying that this wasn\u0027t caught in earlier testing. Isaac -- how come you didn\u0027t see the same failure as John on your platform?",
       "revId": "947f7639b380e08bed6f4b7da5bfc7b03568d126",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82aa48ab_89bd97ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1584799
+      },
+      "writtenOn": "2021-04-13T15:55:00Z",
+      "side": 1,
+      "message": "I think it\u0027s because we\u0027re using our variant of io-pgtable-arm, and I must\u0027ve forgotten to switch to this version of io-pgtable-arm in the last few iterations of testing the patch.",
+      "parentUuid": "aaa0ab8b_34da6031",
+      "revId": "947f7639b380e08bed6f4b7da5bfc7b03568d126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
