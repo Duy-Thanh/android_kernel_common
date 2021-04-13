@@ -16,6 +16,23 @@
       "message": "I upload this patch to resolve broken ABI due to SND_SOC_TOPOLOGY\nIt is cherry-picked from 5.4.\n- Original patch: https://android-review.googlesource.com/c/kernel/common/+/1283923\n- Issue Tracker: https://partnerissuetracker.corp.google.com/u/1/issues/185209723",
       "revId": "5a76e3959e6a0e793644c31ef623451298e7c617",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71b66de5_501bfb1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-04-13T15:15:12Z",
+      "side": 1,
+      "message": "If we cherry-pick to mainline we won\u0027t need to remember to cherry-pick again :) aosp/1673558",
+      "revId": "5a76e3959e6a0e793644c31ef623451298e7c617",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
