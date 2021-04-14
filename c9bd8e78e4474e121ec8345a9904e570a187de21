@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a7e9384_4bfcf3a8",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2021-04-14T22:54:01Z",
+      "side": 1,
+      "message": "do we need this for resume time optimization? given you have override thermal_pm_notify? any other path is calling thermal_zone_device_update?",
+      "range": {
+        "startLine": 552,
+        "startChar": 0,
+        "endLine": 558,
+        "endChar": 18
+      },
+      "revId": "c9bd8e78e4474e121ec8345a9904e570a187de21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87e4e821_12832acd",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1638,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2021-04-14T22:54:01Z",
+      "side": 1,
+      "message": "why not just pass struct thermal_zone_device *tz\n\nalso do you need this given you have the check thermal_zone_device_update?",
+      "range": {
+        "startLine": 1638,
+        "startChar": 41,
+        "endLine": 1638,
+        "endChar": 49
+      },
+      "revId": "c9bd8e78e4474e121ec8345a9904e570a187de21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eab956bf_d20b5a1b",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1639,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2021-04-14T22:54:01Z",
+      "side": 1,
+      "message": "atomic_read(\u0026in_suspend) \u0026\u0026 irq_wakeable",
+      "range": {
+        "startLine": 1639,
+        "startChar": 7,
+        "endLine": 1639,
+        "endChar": 19
+      },
+      "revId": "c9bd8e78e4474e121ec8345a9904e570a187de21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
