@@ -1782,10 +1782,18 @@ static void __ufshcd_release(struct ufs_hba *hba)
 
 	hba->clk_gating.active_reqs--;
 
+<<<<<<< HEAD   (486309 UPSTREAM: scsi: ufs: core: Fix wrong Task Tag used in task m)
 	if (hba->clk_gating.active_reqs || hba->clk_gating.is_suspended ||
 	    hba->ufshcd_state != UFSHCD_STATE_OPERATIONAL ||
 	    ufshcd_any_tag_in_use(hba) || hba->outstanding_tasks ||
 	    hba->active_uic_cmd || hba->uic_async_done)
+=======
+	if (hba->clk_gating.active_reqs || hba->clk_gating.is_suspended
+		|| hba->ufshcd_state != UFSHCD_STATE_OPERATIONAL
+		|| ufshcd_any_tag_in_use(hba) || hba->outstanding_tasks
+		|| hba->active_uic_cmd || hba->uic_async_done
+		|| ufshcd_eh_in_progress(hba))
+>>>>>>> BRANCH (8f55ad Linux 5.4.112)
 		return;
 
 	hba->clk_gating.state = REQ_CLKS_OFF;
@@ -5025,10 +5033,13 @@ static irqreturn_t ufshcd_uic_cmd_compl(struct ufs_hba *hba, u32 intr_status)
 		complete(hba->uic_async_done);
 		retval = IRQ_HANDLED;
 	}
+<<<<<<< HEAD   (486309 UPSTREAM: scsi: ufs: core: Fix wrong Task Tag used in task m)
 
 	if (retval == IRQ_HANDLED)
 		ufshcd_add_uic_command_trace(hba, hba->active_uic_cmd,
 					     "complete");
+=======
+>>>>>>> BRANCH (8f55ad Linux 5.4.112)
 	return retval;
 }
 
@@ -5057,7 +5068,10 @@ static void __ufshcd_transfer_req_compl(struct ufs_hba *hba,
 			ufshcd_complete_lrbp_crypto(hba, cmd, lrbp);
 			/* Mark completed command as NULL in LRB */
 			lrbp->cmd = NULL;
+<<<<<<< HEAD   (486309 UPSTREAM: scsi: ufs: core: Fix wrong Task Tag used in task m)
 			lrbp->compl_time_stamp = ktime_get();
+=======
+>>>>>>> BRANCH (8f55ad Linux 5.4.112)
 			/* Do not touch lrbp after scsi done */
 			cmd->scsi_done(cmd);
 			__ufshcd_release(hba);
@@ -6091,7 +6105,10 @@ static irqreturn_t ufshcd_check_errors(struct ufs_hba *hba)
 					 "host_regs: ");
 			ufshcd_print_pwr_info(hba);
 		}
+<<<<<<< HEAD   (486309 UPSTREAM: scsi: ufs: core: Fix wrong Task Tag used in task m)
 		ufshcd_schedule_eh_work(hba);
+=======
+>>>>>>> BRANCH (8f55ad Linux 5.4.112)
 		retval |= IRQ_HANDLED;
 	}
 	/*
@@ -6215,7 +6232,11 @@ static irqreturn_t ufshcd_intr(int irq, void *__hba)
 		intr_status = ufshcd_readl(hba, REG_INTERRUPT_STATUS);
 	}
 
+<<<<<<< HEAD   (486309 UPSTREAM: scsi: ufs: core: Fix wrong Task Tag used in task m)
 	if (enabled_intr_status && retval == IRQ_NONE) {
+=======
+	if (retval == IRQ_NONE) {
+>>>>>>> BRANCH (8f55ad Linux 5.4.112)
 		dev_err(hba->dev, "%s: Unhandled interrupt 0x%08x\n",
 					__func__, intr_status);
 		ufshcd_dump_regs(hba, 0, UFSHCI_REG_SPACE_SIZE, "host_regs: ");
