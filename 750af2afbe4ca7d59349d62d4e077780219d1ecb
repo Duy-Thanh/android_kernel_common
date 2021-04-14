@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "734a43e5_4bca935d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-04-14T21:04:25Z",
+      "side": 1,
+      "message": "What is the need of these generic symbols? Can you please explain next time little bit more on how Google intends to use this feature? \n\nI don\u0027t see any detailed description on the first commit from Saravana. It just says \"oh, it is useful, let\u0027s add it\". ",
+      "revId": "750af2afbe4ca7d59349d62d4e077780219d1ecb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
