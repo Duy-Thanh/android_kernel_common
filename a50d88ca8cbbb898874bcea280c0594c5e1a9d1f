@@ -16,6 +16,24 @@
       "message": "This needs to go into the KMI update bucket.",
       "revId": "a50d88ca8cbbb898874bcea280c0594c5e1a9d1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "320e39cd_24ab7ae7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2021-04-14T02:05:04Z",
+      "side": 1,
+      "message": "Thanks for the info. I suppose there will be a aggregated ABI change then, so my ABI change for this one is not needed.",
+      "parentUuid": "c84a7e9e_42fdba91",
+      "revId": "a50d88ca8cbbb898874bcea280c0594c5e1a9d1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
