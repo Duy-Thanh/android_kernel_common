@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "114dce42_f22a89c6",
+        "filename": "fs/incfs/sysfs.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-04-14T17:49:15Z",
+      "side": 1,
+      "message": "Actually I was asking for a separate node to lift any restrictions on the sysfs_name parameter passed when mounting. If we ever add anything to the root incremental-fs node, there\u0027s a chance existing code could break. That\u0027s why I expected it to become something like \u003csysfs\u003e/incremental-fs/instances/\u003cinstance node\u003e/\u003cmetric files\u003e",
+      "range": {
+        "startLine": 187,
+        "startChar": 21,
+        "endLine": 187,
+        "endChar": 37
+      },
+      "revId": "c81fc19318ea29b23f40499c9627c1e327e62120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
