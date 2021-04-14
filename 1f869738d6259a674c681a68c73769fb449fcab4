@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdef62c0_005c162c",
+        "filename": "fs/incfs/sysfs.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-04-14T21:51:50Z",
+      "side": 1,
+      "message": "nit: not sure if this is very valuable",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 23
+      },
+      "revId": "1f869738d6259a674c681a68c73769fb449fcab4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
