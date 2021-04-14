@@ -33,6 +33,23 @@
       "message": "Please talk about this upstream as this is slotted to show up in 5.12-final and if it causes problems we need to know it.",
       "revId": "404a00d8aff64c879169db684e9916a181e278f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3df990b_327dbc3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-04-14T02:05:29Z",
+      "side": 1,
+      "message": "Reported upstream: https://lore.kernel.org/lkml/CAHo-OowM2jRNuvyDf-T8rzr6ZgUztXqY7m_JhuFvQ+uB8N3ZrQ@mail.gmail.com/\n\nI don\u0027t think you can block the revert, since you\u0027re breaking an OEM.",
+      "revId": "404a00d8aff64c879169db684e9916a181e278f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
