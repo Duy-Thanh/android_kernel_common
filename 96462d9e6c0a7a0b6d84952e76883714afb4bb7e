@@ -16,6 +16,24 @@
       "message": "I see some error reported from treehugger but I can\u0027t connect to pages which has error details in my location.\nCould I get some guide about what I should do next?",
       "revId": "96462d9e6c0a7a0b6d84952e76883714afb4bb7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d61f1e0c_15751ea3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-04-14T15:41:34Z",
+      "side": 1,
+      "message": "Nothing. Your change alters the kernel ABI, so you have to wait until our next ABI update (April 23). The change is good and has been approved.",
+      "parentUuid": "7a81dc75_d57d409b",
+      "revId": "96462d9e6c0a7a0b6d84952e76883714afb4bb7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
