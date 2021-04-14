@@ -76,6 +76,17 @@ config TRUSTY_VIRTIO_IPC
 
 	  If you build this as a module, it will be called trusty-ipc.
 
+config TRUSTY_DMA_BUF_FFA_TAG
+	bool "Availability of trusty_dma_buf_get_ffa_tag"
+	default n
+	depends on TRUSTY_VIRTIO_IPC
+	help
+	  Whether to trusty_dma_buf_get_ffa_tag on dma_bufs being shared to
+	  get the implementation's tag.
+
+	  If your platform does not use the tag value, leave this as n to use
+	  a tag of 0.
+
 endif # TRUSTY
 
 endmenu
