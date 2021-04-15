@@ -16,6 +16,24 @@
       "message": "please add the output of the short ABI report to the commit message to document the symbol additions.",
       "revId": "3447277b402155007fe70de0b45e0e56582ee32b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4fba070_942640d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-04-15T10:26:57Z",
+      "side": 1,
+      "message": ".",
+      "parentUuid": "b42b3bad_7045c6b6",
+      "revId": "3447277b402155007fe70de0b45e0e56582ee32b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
