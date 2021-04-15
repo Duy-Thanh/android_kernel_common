@@ -1,0 +1,41 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000009923321",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1675554?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "05dd3c61_b2f524ed",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 12,
+                "startChar": 0,
+                "endLine": 12,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Jindong Yue \u003cjindong.yue@nxp.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "60577a24_861010da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-04-15T10:24:20Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Jindong Yue \u003cjindong.yue@nxp.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 368450711 android-build.ayeaye-python-dispatcher_20210414.05_p0",
+      "revId": "cd6bda2063ed357e0b83c11e3bb47fb207b32d7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
