@@ -58,6 +58,13 @@
 #include <trace/hooks/thermal.h>
 #include <trace/hooks/audio_usboffload.h>
 #include <trace/hooks/typec.h>
+<<<<<<< HEAD   (d5d687 ANDROID: GKI: update symbol list file for xiaomi)
+=======
+#include <trace/hooks/gpiolib.h>
+#include <trace/hooks/signal.h>
+#include <trace/hooks/logbuf.h>
+#include <trace/hooks/vmscan.h>
+>>>>>>> CHANGE (35dafe ANDROID: vendor_hooks: tune reclaim swappiness or scan type)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -213,3 +220,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_thread_release);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_has_work_ilocked);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_read_done);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_preset);
+<<<<<<< HEAD   (d5d687 ANDROID: GKI: update symbol list file for xiaomi)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_post_init_entity_util_avg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_get_timer);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_adj_current_limit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_logbuf);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_scan_type);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_swappiness);
+>>>>>>> CHANGE (35dafe ANDROID: vendor_hooks: tune reclaim swappiness or scan type)
