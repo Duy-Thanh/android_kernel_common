@@ -15,6 +15,13 @@ DECLARE_RESTRICTED_HOOK(android_rvh_set_balance_anon_file_reclaim,
 DECLARE_HOOK(android_vh_kswapd_per_node,
 	TP_PROTO(int nid, bool *skip, bool run),
 	TP_ARGS(nid, skip, run));
+DECLARE_HOOK(android_vh_tune_scan_type,
+	TP_PROTO(char *scan_type),
+	TP_ARGS(scan_type));
+DECLARE_HOOK(android_vh_tune_swappiness,
+	TP_PROTO(int *swappiness),
+	TP_ARGS(swappiness));
 #endif /* _TRACE_HOOK_VMSCAN_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
+
