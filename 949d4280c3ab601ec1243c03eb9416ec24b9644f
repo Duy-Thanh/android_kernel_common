@@ -16,6 +16,41 @@
       "message": "Can this go upstream or is this a backport already (in which case it should be UPSTREAM: or BACKPORT:)?",
       "revId": "949d4280c3ab601ec1243c03eb9416ec24b9644f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21393803_ccfb4c57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2021-04-15T15:53:12Z",
+      "side": 1,
+      "message": "Assuming this doesn\u0027t break incremental builds, LGTM.",
+      "revId": "949d4280c3ab601ec1243c03eb9416ec24b9644f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab814543_69d385de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2021-04-15T15:53:12Z",
+      "side": 1,
+      "message": "Upstream version is slightly different, it never used FORCE.",
+      "parentUuid": "eaeac286_fbe17d34",
+      "revId": "949d4280c3ab601ec1243c03eb9416ec24b9644f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
