@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4540ca30_833f8128",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-04-15T20:41:43Z",
+      "side": 1,
+      "message": "This patch causes a build-break. Are you missing a patch from upstream?\n\n/mnt/ssd2/krepo/android12-5.10/common/drivers/media/v4l2-core/v4l2-ctrls.c:2010:7: error: duplicate case value: \u0027272\u0027 and \u0027V4L2_CTRL_TYPE_HDR10_CLL_INFO\u0027 both equal \u0027272\u0027\n        case V4L2_CTRL_TYPE_HDR10_CLL_INFO:\n             ^\n/mnt/ssd2/krepo/android12-5.10/common/drivers/media/v4l2-core/v4l2-ctrls.c:1904:7: note: previous case defined here\n        case V4L2_CTRL_TYPE_H264_SPS:\n             ^\n/mnt/ssd2/krepo/android12-5.10/common/include/media/h264-ctrls.h:42:35: note: expanded from macro \u0027V4L2_CTRL_TYPE_H264_SPS\u0027\n#define V4L2_CTRL_TYPE_H264_SPS                 0x0110\n                                                ^\n/mnt/ssd2/krepo/android12-5.10/common/drivers/media/v4l2-core/v4l2-ctrls.c:2013:7: error: duplicate case value: \u0027273\u0027 and \u0027V4L2_CTRL_TYPE_HDR10_MASTERING_DISPLAY\u0027 both equal \u0027273\u0027\n        case V4L2_CTRL_TYPE_HDR10_MASTERING_DISPLAY:\n             ^\n/mnt/ssd2/krepo/android12-5.10/common/drivers/media/v4l2-core/v4l2-ctrls.c:1905:7: note: previous case defined here\n        case V4L2_CTRL_TYPE_H264_PPS:\n             ^\n/mnt/ssd2/krepo/android12-5.10/common/include/media/h264-ctrls.h:43:35: note: expanded from macro \u0027V4L2_CTRL_TYPE_H264_PPS\u0027\n#define V4L2_CTRL_TYPE_H264_PPS                 0x0111\n                                                ^\n/mnt/ssd2/krepo/android12-5.10/common/drivers/media/v4l2-core/v4l2-ctrls.c:2749:7: error: duplicate case value: \u0027272\u0027 and \u0027V4L2_CTRL_TYPE_HDR10_CLL_INFO\u0027 both equal \u0027272\u0027\n        case V4L2_CTRL_TYPE_HDR10_CLL_INFO:\n             ^\n/mnt/ssd2/krepo/android12-5.10/common/drivers/media/v4l2-core/v4l2-ctrls.c:2719:7: note: previous case defined here\n        case V4L2_CTRL_TYPE_H264_SPS:\n             ^\n/mnt/ssd2/krepo/android12-5.10/common/include/media/h264-ctrls.h:42:35: note: expanded from macro \u0027V4L2_CTRL_TYPE_H264_SPS\u0027\n#define V4L2_CTRL_TYPE_H264_SPS                 0x0110\n                                                ^\n/mnt/ssd2/krepo/android12-5.10/common/drivers/media/v4l2-core/v4l2-ctrls.c:2752:7: error: duplicate case value: \u0027273\u0027 and \u0027V4L2_CTRL_TYPE_HDR10_MASTERING_DISPLAY\u0027 both equal \u0027273\u0027\n        case V4L2_CTRL_TYPE_HDR10_MASTERING_DISPLAY:\n             ^\n/mnt/ssd2/krepo/android12-5.10/common/drivers/media/v4l2-core/v4l2-ctrls.c:2722:7: note: previous case defined here\n        case V4L2_CTRL_TYPE_H264_PPS:\n             ^\n/mnt/ssd2/krepo/android12-5.10/common/include/media/h264-ctrls.h:43:35: note: expanded from macro \u0027V4L2_CTRL_TYPE_H264_PPS\u0027\n#define V4L2_CTRL_TYPE_H264_PPS                 0x0111\n                                                ^\n4 errors generated.\n",
+      "revId": "e191cc4a6e048131bfaa46b822a90ee7ca6343b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
