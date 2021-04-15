@@ -261,6 +261,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "021cf326_7d0fea2f",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1681,
+      "author": {
+        "id": 1810595
+      },
+      "writtenOn": "2021-04-15T03:13:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdf46a47_af2b56fd",
+      "range": {
+        "startLine": 1681,
+        "startChar": 3,
+        "endLine": 1681,
+        "endChar": 35
+      },
+      "revId": "85f26280fde1a7814139a72e1d6c577b79abc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8337120e_644e9789",
@@ -393,6 +417,30 @@
       "side": 1,
       "message": "get_pageblock_migratetype is #define and instead we can export the get_pfnblock_flags_mask.",
       "parentUuid": "2542ece1_8506b942",
+      "range": {
+        "startLine": 557,
+        "startChar": 5,
+        "endLine": 557,
+        "endChar": 34
+      },
+      "revId": "85f26280fde1a7814139a72e1d6c577b79abc172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1557c355_b77089c7",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1810595
+      },
+      "writtenOn": "2021-04-15T03:13:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca15536c_6189770f",
       "range": {
         "startLine": 557,
         "startChar": 5,
