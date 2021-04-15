@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f153153_22e14a35",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1638,
+      "author": {
+        "id": 1517284
+      },
+      "writtenOn": "2021-04-15T09:39:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87e4e821_12832acd",
+      "range": {
+        "startLine": 1638,
+        "startChar": 41,
+        "endLine": 1638,
+        "endChar": 49
+      },
+      "revId": "c9bd8e78e4474e121ec8345a9904e570a187de21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eab956bf_d20b5a1b",
@@ -60,6 +84,30 @@
       "writtenOn": "2021-04-14T22:54:01Z",
       "side": 1,
       "message": "atomic_read(\u0026in_suspend) \u0026\u0026 irq_wakeable",
+      "range": {
+        "startLine": 1639,
+        "startChar": 7,
+        "endLine": 1639,
+        "endChar": 19
+      },
+      "revId": "c9bd8e78e4474e121ec8345a9904e570a187de21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "263e8f02_9e389170",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1639,
+      "author": {
+        "id": 1517284
+      },
+      "writtenOn": "2021-04-15T09:39:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eab956bf_d20b5a1b",
       "range": {
         "startLine": 1639,
         "startChar": 7,
