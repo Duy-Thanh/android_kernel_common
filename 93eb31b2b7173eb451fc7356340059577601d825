@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42cdff21_224d5228",
+        "filename": "Documentation/filesystems/incfs.rst",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-04-16T07:25:27Z",
+      "side": 1,
+      "message": "Android has to run with the previous kernel, and should run with the one from the next release. We can\u0027t update R anymore, not this kind of updates at least. This basically locks the API in its current shape for several releases",
+      "parentUuid": "67164947_603006ca",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 36
+      },
+      "revId": "93eb31b2b7173eb451fc7356340059577601d825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d981a28_833aedc9",
         "filename": "Documentation/filesystems/incfs.rst",
         "patchSetId": 12
@@ -252,6 +276,30 @@
       "side": 1,
       "message": "\"last error\" is crazy to be relying on sysfs for.\n\nJust use a proper kernel trace for something like this if you really rely on it, this is not what sysfs is for and you will end up missing events.",
       "parentUuid": "70a62225_ce8dba2f",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 17
+      },
+      "revId": "93eb31b2b7173eb451fc7356340059577601d825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b4d44fe_8f63ddea",
+        "filename": "Documentation/filesystems/incfs.rst",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-04-16T07:25:27Z",
+      "side": 1,
+      "message": "What is that proper trace we could use? Is it as lightweight as sysfs?\n\nBTW, it\u0027s totally fine to lose events here, all it needs is to return a consistent \"last error\" event that happened at the moment of polling. This gets joined later with the app crash / lag / ANR metrics to determine if we can connect it to the app being streamed",
+      "parentUuid": "2a15a288_a038fddf",
       "range": {
         "startLine": 37,
         "startChar": 0,
