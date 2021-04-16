@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8bfb89ac_afcd5b54",
+        "filename": "Documentation/filesystems/incfs.rst",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-04-16T07:10:32Z",
+      "side": 1,
+      "message": "Well, yes, it is, but while developing it we had the filesystem present, but not really supporting most of the planned features. \u0027corefs\u0027 one did. It is unfortunate to have the devices with this code built in out there, but it is the way Android works",
+      "parentUuid": "624a85dc_0dfdd887",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 36
+      },
+      "revId": "93eb31b2b7173eb451fc7356340059577601d825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d981a28_833aedc9",
         "filename": "Documentation/filesystems/incfs.rst",
         "patchSetId": 12
@@ -156,6 +180,30 @@
       "side": 1,
       "message": "why do you need to know this on a userbuild?\n\nAnd this is not \"one value\" is it something that you have to parse.  It feels like this is a debugging thing.",
       "parentUuid": "63db9192_578ef7da",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 17
+      },
+      "revId": "93eb31b2b7173eb451fc7356340059577601d825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70a62225_ce8dba2f",
+        "filename": "Documentation/filesystems/incfs.rst",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-04-16T07:10:32Z",
+      "side": 1,
+      "message": "This isn\u0027t actually a debugging feature, but a part of the metrics Play needs to collect for the streaming installation monitoring and optimization. It is currently already collecting the read logs from files installed on IncFS, but read logs aren\u0027t produced in case of read error, and they don\u0027t carry the error code. This value would let Play monitor the quality of the streaming nuggets they produce, and optimize them on the fly",
+      "parentUuid": "222f6c3d_61517b78",
       "range": {
         "startLine": 37,
         "startChar": 0,
