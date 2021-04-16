@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f72da72_f87af34b",
+        "filename": "Documentation/filesystems/incfs.rst",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-04-16T06:56:47Z",
+      "side": 1,
+      "message": "because that\u0027s how IncFS v1 got released - we used it as a marker of a completely implemented filesystem, and now R and S devices rely on it being present",
+      "parentUuid": "3f2b28e7_417f8265",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 36
+      },
+      "revId": "93eb31b2b7173eb451fc7356340059577601d825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d981a28_833aedc9",
         "filename": "Documentation/filesystems/incfs.rst",
         "patchSetId": 12
@@ -60,6 +84,30 @@
       "writtenOn": "2021-04-16T05:50:16Z",
       "side": 1,
       "message": "sysfs is \"one value per file\", which is not this 😞\n\nIf you want multiple values, use debugfs.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 17
+      },
+      "revId": "93eb31b2b7173eb451fc7356340059577601d825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63db9192_578ef7da",
+        "filename": "Documentation/filesystems/incfs.rst",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-04-16T06:56:47Z",
+      "side": 1,
+      "message": "Android doesn\u0027t mount debugfs in user builds anymore. Also, this is one value - a value of the last error that happened on the filesystem. It can\u0027t be split into separate files as reading them isn\u0027t atomic and will produce bogus results when the error changes",
+      "parentUuid": "6d981a28_833aedc9",
       "range": {
         "startLine": 37,
         "startChar": 0,
