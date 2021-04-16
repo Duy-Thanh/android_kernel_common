@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf9d9ab7_409219d5",
+        "filename": "Documentation/filesystems/incfs.rst",
+        "patchSetId": 12
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-16T05:50:16Z",
+      "side": 1,
+      "message": "the sysfs file information needs to go into Documentation/ABI/ not in this file alone.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 35
+      },
+      "revId": "93eb31b2b7173eb451fc7356340059577601d825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f2b28e7_417f8265",
+        "filename": "Documentation/filesystems/incfs.rst",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-16T05:50:16Z",
+      "side": 1,
+      "message": "if it\u0027s always there, why have it at all?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 36
+      },
+      "revId": "93eb31b2b7173eb451fc7356340059577601d825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d981a28_833aedc9",
+        "filename": "Documentation/filesystems/incfs.rst",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-16T05:50:16Z",
+      "side": 1,
+      "message": "sysfs is \"one value per file\", which is not this 😞\n\nIf you want multiple values, use debugfs.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 17
+      },
+      "revId": "93eb31b2b7173eb451fc7356340059577601d825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
