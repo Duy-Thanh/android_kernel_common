@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c75c98cc_96ac0c73",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3801,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-16T14:29:05Z",
+      "side": 1,
+      "message": "Why not a single hook in __update_load_avg_se() ?",
+      "range": {
+        "startLine": 3801,
+        "startChar": 1,
+        "endLine": 3801,
+        "endChar": 55
+      },
+      "revId": "8154c12f5871b7d457d689797e2a6a8603b66d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
