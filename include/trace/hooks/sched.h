@@ -294,6 +294,15 @@ DECLARE_HOOK(android_vh_account_task_time,
 DECLARE_RESTRICTED_HOOK(android_rvh_post_init_entity_util_avg,
 	TP_PROTO(struct sched_entity *se),
 	TP_ARGS(se), 1);
+
+DECLARE_HOOK(android_vh_prepare_update_load_avg_se,
+	TP_PROTO(struct sched_entity *se, int flags),
+	TP_ARGS(se, flags));
+
+DECLARE_HOOK(android_vh_finish_update_load_avg_se,
+	TP_PROTO(struct sched_entity *se, int flags),
+	TP_ARGS(se, flags));
+
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_SCHED_H */
