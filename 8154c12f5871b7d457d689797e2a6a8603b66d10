@@ -46,6 +46,30 @@
       },
       "revId": "8154c12f5871b7d457d689797e2a6a8603b66d10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc628e4c_45be7081",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3801,
+      "author": {
+        "id": 1445936
+      },
+      "writtenOn": "2021-04-18T12:07:45Z",
+      "side": 1,
+      "message": "Hi Quentin, \n\n1. The different works for our modules before and after this functions,\n   so the single vh trace is not enough.\n\n2. Two reasons why trace_pelt_se_tp is not suitable:\n    a. We needs the \"flags\" for different conditions, \n       trace_pelt_se_tp() does not include this parameter.\n    b. The trace_pelt_se_tp() is inject into three functions,\n       but our logic only needs to be in the __update_load_avg_se().",
+      "parentUuid": "fa823e86_4fa4622e",
+      "range": {
+        "startLine": 3801,
+        "startChar": 1,
+        "endLine": 3801,
+        "endChar": 55
+      },
+      "revId": "8154c12f5871b7d457d689797e2a6a8603b66d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
