@@ -166,3 +166,9 @@
   __tracepoint_android_vh_freq_qos_add_request
   __tracepoint_android_rvh_dequeue_task_fair
   __tracepoint_android_rvh_entity_tick
+
+#required by io_limit.ko
+  __traceiter_android_vh_psi_event
+  __traceiter_android_vh_psi_group
+  __tracepoint_android_vh_psi_event
+  __tracepoint_android_vh_psi_group
