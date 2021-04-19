@@ -62,6 +62,7 @@
 #include <trace/hooks/usb.h>
 #include <trace/hooks/regmap.h>
 #include <trace/hooks/dmabuf.h>
+#include <trace/hooks/mmc_core.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -292,3 +293,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_force_compatible_pre);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_force_compatible_post);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_regmap_update);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_buf_release);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_reset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_mq_rw_recovery);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sd_update_bus_speed_mode);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_attach_sd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sdhci_get_cd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_gpio_cd_irqt);
