@@ -51,6 +51,7 @@
 #include <trace/hooks/power.h>
 #include <trace/hooks/fault.h>
 #include <trace/hooks/traps.h>
+<<<<<<< HEAD   (71e7a0 ANDROID: Suppress build.sh deprecation warnings.)
 #include <trace/hooks/fips140.h>
 #include <trace/hooks/thermal.h>
 #include <trace/hooks/rwsem.h>
@@ -62,6 +63,21 @@
 #include <trace/hooks/usb.h>
 #include <trace/hooks/regmap.h>
 #include <trace/hooks/dmabuf.h>
+=======
+#include <trace/hooks/avc.h>
+#include <trace/hooks/creds.h>
+#include <trace/hooks/module.h>
+#include <trace/hooks/memory.h>
+#include <trace/hooks/typec.h>
+#include <trace/hooks/gpiolib.h>
+#include <trace/hooks/signal.h>
+#include <trace/hooks/logbuf.h>
+#include <trace/hooks/vmscan.h>
+#include <trace/hooks/psi.h>
+#include <trace/hooks/selinux.h>
+#include <trace/hooks/hung_task.h>
+#include <trace/hooks/mmc_core.h>
+>>>>>>> CHANGE (e80bcd ANDROID: mmc: Add vendor hooks)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -242,6 +258,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_find_new_ilb);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_uninterruptible_tasks);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_uninterruptible_tasks_dn);
+<<<<<<< HEAD   (71e7a0 ANDROID: Suppress build.sh deprecation warnings.)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_uclamp_eff_get);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_util_est_update);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_setscheduler_uclamp);
@@ -292,3 +309,11 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_force_compatible_pre);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_force_compatible_post);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_regmap_update);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_buf_release);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_reset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_mq_rw_recovery);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sd_update_bus_speed_mode);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_attach_sd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sdhci_get_cd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_gpio_cd_irqt);
+>>>>>>> CHANGE (e80bcd ANDROID: mmc: Add vendor hooks)
