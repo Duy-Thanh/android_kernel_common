@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fe1945e_9472d3f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-19T08:32:04Z",
+      "side": 1,
+      "message": "Why isn\u0027t this an upstream fix instead of a vendor hook?",
+      "revId": "48c8ddcd1f793263bd5bafaa4f6b938fce5bb8ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9416ef5d_2fd34c83",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1635,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-19T08:32:04Z",
+      "side": 1,
+      "message": "why is this check needed?  What happens if it changes right after reading?",
+      "range": {
+        "startLine": 1635,
+        "startChar": 7,
+        "endLine": 1635,
+        "endChar": 31
+      },
+      "revId": "48c8ddcd1f793263bd5bafaa4f6b938fce5bb8ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
