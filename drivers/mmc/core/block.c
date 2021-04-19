@@ -50,6 +50,8 @@
 
 #include <linux/uaccess.h>
 
+#include <trace/hooks/mmc_core.h>
+
 #include "queue.h"
 #include "block.h"
 #include "core.h"
@@ -1044,6 +1046,7 @@ static int mmc_blk_reset(struct mmc_blk_data *md, struct mmc_host *host,
 	if (err)
 		return err;
 	/* Ensure we switch back to the correct partition */
+<<<<<<< HEAD   (48246c ANDROID: Update the ABI symbol list)
 	if (mmc_blk_part_switch(host->card, md->part_type))
 		/*
 		 * We have failed to get back into the correct
@@ -1051,6 +1054,29 @@ static int mmc_blk_reset(struct mmc_blk_data *md, struct mmc_host *host,
 		 */
 		return -ENODEV;
 	return 0;
+=======
+	if (err != -EOPNOTSUPP) {
+		struct mmc_blk_data *main_md =
+			dev_get_drvdata(&host->card->dev);
+		int part_err;
+		bool allow = true;
+
+		trace_android_vh_mmc_blk_reset(host, err, &allow);
+		if (!allow)
+			return -ENODEV;
+
+		main_md->part_curr = main_md->part_type;
+		part_err = mmc_blk_part_switch(host->card, md->part_type);
+		if (part_err) {
+			/*
+			 * We have failed to get back into the correct
+			 * partition, so we need to abort the whole request.
+			 */
+			return -ENODEV;
+		}
+	}
+	return err;
+>>>>>>> CHANGE (e80bcd ANDROID: mmc: Add vendor hooks)
 }
 
 static inline void mmc_blk_reset_success(struct mmc_blk_data *md, int type)
@@ -1916,6 +1942,7 @@ static void mmc_blk_mq_rw_recovery(struct mmc_queue *mq, struct request *req)
 	    err && mmc_blk_reset(md, card->host, type)) {
 		pr_err("%s: recovery failed!\n", req->q->disk->disk_name);
 		mqrq->retries = MMC_NO_RETRIES;
+		trace_android_vh_mmc_blk_mq_rw_recovery(card);
 		return;
 	}
 
