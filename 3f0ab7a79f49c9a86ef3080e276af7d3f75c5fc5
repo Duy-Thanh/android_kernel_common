@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e32bf37_b482f3a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-04-20T08:11:12Z",
+      "side": 1,
+      "message": "No objection from me to exporting these symbols. My only question would be whether or not they belong in the QCOM bucket, given that these are generic symbols that are used by all crypto h/w accelerators, as well as some software implementations that are in scope for FIPS 140-2 certification.",
+      "revId": "3f0ab7a79f49c9a86ef3080e276af7d3f75c5fc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
