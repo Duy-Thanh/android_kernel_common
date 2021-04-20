@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8099df1_23c29b97",
+        "filename": "include/linux/trusty/trusty.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-04-20T01:00:11Z",
+      "side": 1,
+      "message": "I would add:\n```\n#else\nstatic inline u64 trusty_dma_buf_get_ffa_tag(struct dma_buf *dma_buf) {\n        return 0;\n}\n```\nLinux does not like using #ifdef inside functions but adding empty functions like this is common",
+      "revId": "b7248ee1c21ceddd51d7d6f4289d5a88c9a8366f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
