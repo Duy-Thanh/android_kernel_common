@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e7647b0_d64d5a62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-20T07:04:33Z",
+      "side": 1,
+      "message": "Looking better!  😊\n",
+      "revId": "0404e3c2cc63ae7158b9a965b58639f8829417f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed74e0da_3ec1bab2",
+        "filename": "Documentation/ABI/testing/sysfs-fs-incfs",
+        "patchSetId": 14
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-20T07:04:33Z",
+      "side": 1,
+      "message": "\"Description:\" and put the description on the same line.\n\nWe have tools that parse this, please don\u0027t break them unnecessarily.\n\nThe README file in Documentation/ABI/ should describe the correct format here.",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 11
+      },
+      "revId": "0404e3c2cc63ae7158b9a965b58639f8829417f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7971f752_302d481a",
+        "filename": "Documentation/ABI/testing/sysfs-fs-incfs",
+        "patchSetId": 14
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-20T07:04:33Z",
+      "side": 1,
+      "message": "you don\u0027t document what [name] is here, should there be a new entry above this one that does that?",
+      "range": {
+        "startLine": 21,
+        "startChar": 40,
+        "endLine": 21,
+        "endChar": 46
+      },
+      "revId": "0404e3c2cc63ae7158b9a965b58639f8829417f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fe57b6e_ebb46067",
+        "filename": "Documentation/filesystems/incfs.rst",
+        "patchSetId": 14
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-20T07:04:33Z",
+      "side": 1,
+      "message": "any reference to what that actually means?",
+      "range": {
+        "startLine": 22,
+        "startChar": 31,
+        "endLine": 22,
+        "endChar": 56
+      },
+      "revId": "0404e3c2cc63ae7158b9a965b58639f8829417f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43ed5aff_8a589900",
+        "filename": "fs/incfs/sysfs.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-20T07:04:33Z",
+      "side": 1,
+      "message": "sysfs_emit() please.",
+      "range": {
+        "startLine": 28,
+        "startChar": 8,
+        "endLine": 28,
+        "endChar": 16
+      },
+      "revId": "0404e3c2cc63ae7158b9a965b58639f8829417f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8ddf76c_4b24aeab",
+        "filename": "fs/incfs/sysfs.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-20T07:04:33Z",
+      "side": 1,
+      "message": "no need to check for NULL before calling kobject_put(), I thought checkpatch would have caught that.",
+      "range": {
+        "startLine": 94,
+        "startChar": 5,
+        "endLine": 94,
+        "endChar": 19
+      },
+      "revId": "0404e3c2cc63ae7158b9a965b58639f8829417f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2093df75_f9c1a17e",
+        "filename": "fs/incfs/sysfs.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-20T07:04:33Z",
+      "side": 1,
+      "message": "why is this needed?",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 24
+      },
+      "revId": "0404e3c2cc63ae7158b9a965b58639f8829417f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad2cb6f9_6f0ad708",
+        "filename": "fs/incfs/sysfs.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-20T07:04:33Z",
+      "side": 1,
+      "message": "as long as you know you can stall for a long time here, and that\u0027s ok, this is fine.  But it feels odd to me.  Just grumbling, no need to change it...",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 49
+      },
+      "revId": "0404e3c2cc63ae7158b9a965b58639f8829417f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9121269b_4cfcef76",
+        "filename": "fs/incfs/sysfs.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-20T07:04:33Z",
+      "side": 1,
+      "message": "u32 or u64 might be better to define this unambiguously.  Same for others below.",
+      "range": {
+        "startLine": 13,
+        "startChar": 1,
+        "endLine": 13,
+        "endChar": 4
+      },
+      "revId": "0404e3c2cc63ae7158b9a965b58639f8829417f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
