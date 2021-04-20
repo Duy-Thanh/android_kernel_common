@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60a39e7c_5cf892d4",
+        "filename": "include/linux/mmc/host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-04-20T16:16:01Z",
+      "side": 1,
+      "message": "This should probably be ANDROID_OEM_DATA() or you risk an SoC vendor using these. Why not `ANDROID_OEM_DATA_ARRAY(1, 2)`?",
+      "revId": "f2c632258e1c633b471da3e15958dcd0b36212d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1afe9429_e6487b42",
+        "filename": "include/trace/hooks/mmc_core.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-04-20T16:16:01Z",
+      "side": 1,
+      "message": "These are not required anymore, please remove along with line 12.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 6
+      },
+      "revId": "f2c632258e1c633b471da3e15958dcd0b36212d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
