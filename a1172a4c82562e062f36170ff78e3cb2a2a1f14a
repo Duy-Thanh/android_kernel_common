@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1acf245c_0f5467de",
+        "filename": "drivers/trusty/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-04-20T18:37:40Z",
+      "side": 1,
+      "message": "I\u0027m not sure you need this line. TRUSTY_VIRTIO_IPC is currently the only client of the api you added, but that does not mean the api can\u0027t be provided without TRUSTY_VIRTIO_IPC.",
+      "revId": "a1172a4c82562e062f36170ff78e3cb2a2a1f14a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
