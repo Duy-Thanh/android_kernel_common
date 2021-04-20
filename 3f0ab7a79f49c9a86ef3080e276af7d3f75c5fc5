@@ -16,6 +16,24 @@
       "message": "No objection from me to exporting these symbols. My only question would be whether or not they belong in the QCOM bucket, given that these are generic symbols that are used by all crypto h/w accelerators, as well as some software implementations that are in scope for FIPS 140-2 certification.",
       "revId": "3f0ab7a79f49c9a86ef3080e276af7d3f75c5fc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b2ac0db_d6e3547d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-04-20T08:53:09Z",
+      "side": 1,
+      "message": "Yes, every vendor is supposed to provide the _full_ list of symbols that they would need for their modules. That is also what our tooling is generating for downstream trees. There is naturally overlap. The union of the lists is what we take into consideration in the build for trimming as well as for ABI analysis. It also helps us to identify the users of a symbol in case we absolutely have to break ABI (for example for security fixes).\nSo, this looks correct then.",
+      "parentUuid": "5e32bf37_b482f3a1",
+      "revId": "3f0ab7a79f49c9a86ef3080e276af7d3f75c5fc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
