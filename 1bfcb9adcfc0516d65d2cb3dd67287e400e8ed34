@@ -16,6 +16,24 @@
       "message": "This branch is only for upstream LTS merges.  It should be receiving regular merges from the android11-5.4 branch, so if you have bugfixes that need to be done in the android11-5.4 branch, please merge them there instead of here.",
       "revId": "1bfcb9adcfc0516d65d2cb3dd67287e400e8ed34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24408b89_fe5a3ba8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-04-20T15:28:27Z",
+      "side": 1,
+      "message": "Greg, these patches from Connor are backporting \"Fixes:\" from upstream to patch previously cherry-picked UPSTREAM/BACKPORT patches (based on that script that discovers upstream fixes). I told him that -lts is the right place for those -- do you disagree?",
+      "parentUuid": "6a120a4e_9e28ae86",
+      "revId": "1bfcb9adcfc0516d65d2cb3dd67287e400e8ed34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
