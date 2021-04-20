@@ -70,6 +70,30 @@
       },
       "revId": "db4dfe7720ea6845d565936ea9df1b98ba3c9e10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b514ee1_c7f76912",
+        "filename": "drivers/android/debug_symbols.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-20T16:24:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a2f19426_f804ea36",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 24
+      },
+      "revId": "db4dfe7720ea6845d565936ea9df1b98ba3c9e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
