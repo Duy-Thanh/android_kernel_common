@@ -16,6 +16,24 @@
       "message": "\u003e Patch Set 15:\n\u003e \n\u003e Reviewer source(s):\n\u003e gregkh is from context\n\nHi Greg, naina is not able to succeed to merge this change.\nWhenever she raise a new patchset, she observes a merge conflict.\nIs there any solution this get picked without conflicts? Can google help us on this merge.\n\nIf QC need to rebase sure we can upload new patchset.\n",
       "revId": "a7239509f3267755ed718d56686ee24d47d4300f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6470ef48_99c3a3f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-20T11:49:00Z",
+      "side": 1,
+      "message": "You have to rebase and regenerate the .xml file locally, gerrit can not do this for you on its own at this point in time, sorry.",
+      "parentUuid": "f03c9d5f_906887f7",
+      "revId": "a7239509f3267755ed718d56686ee24d47d4300f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
