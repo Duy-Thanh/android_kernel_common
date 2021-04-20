@@ -349,6 +349,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fdf5588a_26bfaa70",
+        "filename": "fs/incfs/sysfs.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-04-20T20:40:01Z",
+      "side": 1,
+      "message": "I have uploaded version 16 of the patchset which removes the completion and frees the node in the release function. *If* this is correct, it\u0027s simpler so let\u0027s go with it.\n\nEqually, I was unable to find a situation where release wasn\u0027t called immediately on umount (I played with opening a sysfs file and holding it open - that didn\u0027t do it) so I\u0027m unsure what we\u0027re worrying about here. We need umount to return reasonably quickly, as in not to wait for some userland change. Under what circumstances can it wait for a long period?",
+      "parentUuid": "54160a20_cdebd6e7",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 49
+      },
+      "revId": "0404e3c2cc63ae7158b9a965b58639f8829417f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9121269b_4cfcef76",
         "filename": "fs/incfs/sysfs.h",
         "patchSetId": 14
