@@ -34,6 +34,24 @@
       "parentUuid": "1acf245c_0f5467de",
       "revId": "a1172a4c82562e062f36170ff78e3cb2a2a1f14a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4758e81_4929627b",
+        "filename": "drivers/trusty/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-04-20T21:47:35Z",
+      "side": 1,
+      "message": "This is already filtered by \"if TRUSTY\". You can leave it in though if you think TRUSTY_VIRTIO_IPC is the only place we will use it.",
+      "parentUuid": "8c4b70f7_3e0f7782",
+      "revId": "a1172a4c82562e062f36170ff78e3cb2a2a1f14a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
