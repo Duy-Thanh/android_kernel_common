@@ -1,0 +1,41 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000010140527",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1683906?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "c5bffbfd_8b493cc0",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 6,
+                "startChar": 0,
+                "endLine": 6,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Saravana Kannan \u003csaravanak@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "6d6c6968_7b0404c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-04-21T21:45:31Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Saravana Kannan \u003csaravanak@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 369443802 android-build.ayeaye-python-dispatcher_20210420.05_p0",
+      "revId": "0784d37b251d1076f52cc561f77dd4fe95ac4b8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
