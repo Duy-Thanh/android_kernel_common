@@ -70,6 +70,24 @@
       "parentUuid": "0d0166d1_7176c5c7",
       "revId": "a7239509f3267755ed718d56686ee24d47d4300f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a06f73ae_8e56f13c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-21T11:24:54Z",
+      "side": 1,
+      "message": "THanks, can you do it again, another QCOM symbol just got added and your commit conflicted with that one.",
+      "parentUuid": "47b9e807_719724d8",
+      "revId": "a7239509f3267755ed718d56686ee24d47d4300f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
