@@ -371,6 +371,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c7f05d0_7775edc5",
+        "filename": "fs/incfs/sysfs.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-21T08:01:13Z",
+      "side": 1,
+      "message": "I think what you have here is fine, this might _ONLY_ be an issue if you were to try to unload the incfs module from the system at the same time as holding a kobject open.  And even then, sysfs tries really really hard to disconnect kobjects from sysfs so that this might not even be an issue anymore.\n\nNot to mention that we do not support removing kernel modules at all, so this should not be an issue 😊",
+      "parentUuid": "fdf5588a_26bfaa70",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 49
+      },
+      "revId": "0404e3c2cc63ae7158b9a965b58639f8829417f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9121269b_4cfcef76",
