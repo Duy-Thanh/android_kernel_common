@@ -34,6 +34,24 @@
       "parentUuid": "6a120a4e_9e28ae86",
       "revId": "1bfcb9adcfc0516d65d2cb3dd67287e400e8ed34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8521ced_7cb787e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-21T07:56:01Z",
+      "side": 1,
+      "message": "I disagree, they should go into `android11-5.4` branch first, and then they will automagically show up in here when I do the weekly merges from that branch into `android11-5.4-lts`.  No need to have to submit them twice to both branches.",
+      "parentUuid": "24408b89_fe5a3ba8",
+      "revId": "1bfcb9adcfc0516d65d2cb3dd67287e400e8ed34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
