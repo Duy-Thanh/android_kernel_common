@@ -52,6 +52,24 @@
       "parentUuid": "6470ef48_99c3a3f2",
       "revId": "a7239509f3267755ed718d56686ee24d47d4300f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47b9e807_719724d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1864156
+      },
+      "writtenOn": "2021-04-21T11:03:00Z",
+      "side": 1,
+      "message": "just to be clear here, I rebased this change and regenerated the XML again.",
+      "parentUuid": "0d0166d1_7176c5c7",
+      "revId": "a7239509f3267755ed718d56686ee24d47d4300f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
