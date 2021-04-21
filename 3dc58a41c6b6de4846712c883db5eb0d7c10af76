@@ -16,6 +16,24 @@
       "message": "This doesn\u0027t build:\n\n/usr/local/google/buildbot/src/android/common-android12-5.10/common/drivers/remoteproc/remoteproc_core.c:221:26: error: no member named \u0027is_iomem\u0027 in \u0027struct rproc_mem_entry\u0027\n                        *is_iomem \u003d carveout-\u003eis_iomem;\n\n\nPlease test your patches before submitting!",
       "revId": "3dc58a41c6b6de4846712c883db5eb0d7c10af76",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f18cb70e_4cf951b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2021-04-21T01:12:23Z",
+      "side": 1,
+      "message": "Hi Todd,\nThanks for your review. This patch must apply after another one, which introduces \"is_iomem\":\nhttps://android-review.googlesource.com/c/kernel/common/+/1675555\nCould you please review that patch firstly?\nThanks",
+      "parentUuid": "66e1e565_489b7b74",
+      "revId": "3dc58a41c6b6de4846712c883db5eb0d7c10af76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
