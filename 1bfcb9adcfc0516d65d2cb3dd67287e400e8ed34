@@ -52,6 +52,24 @@
       "parentUuid": "24408b89_fe5a3ba8",
       "revId": "1bfcb9adcfc0516d65d2cb3dd67287e400e8ed34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4328588c_20a98bd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-04-21T16:31:45Z",
+      "side": 1,
+      "message": "I wasn\u0027t proposing to \"submit them twice\". My proposal is to submit once to android11-5.4-lts so they are handled just like LTS patches (since that\u0027s essentially what they are for the UPSTREAM/BACKPORT patches). Then these patches merge into android11-5.4 along with the rest of the LTS patches.\n\nStill disagree?",
+      "parentUuid": "c8521ced_7cb787e6",
+      "revId": "1bfcb9adcfc0516d65d2cb3dd67287e400e8ed34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
