@@ -16,6 +16,24 @@
       "message": "Hi,\n\nThere is a rebase conflict, could you please resolve? This will be merged with with the KMI update at the end of the week.",
       "revId": "6f2dbb2b13cc14a426e3fa3a73435f5a89dfcaa1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "749976a6_3f872d34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-21T01:50:17Z",
+      "side": 1,
+      "message": "it is ok now,thanks.",
+      "parentUuid": "6b643868_33e43b28",
+      "revId": "6f2dbb2b13cc14a426e3fa3a73435f5a89dfcaa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
