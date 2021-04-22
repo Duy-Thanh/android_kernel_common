@@ -16,6 +16,23 @@
       "message": "This is to fix failure in aosp/1682887",
       "revId": "ccdcd307cf7e5809dad02e7b5fd926681c3f8313",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1a61f0c_a4fdbd16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135739
+      },
+      "writtenOn": "2021-04-22T15:32:17Z",
+      "side": 1,
+      "message": "I don\u0027t have the gerrit permission to submit this. Can anyone do it please?",
+      "revId": "ccdcd307cf7e5809dad02e7b5fd926681c3f8313",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
