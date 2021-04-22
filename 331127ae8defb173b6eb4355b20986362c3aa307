@@ -16,6 +16,24 @@
       "message": "Todd: Kamal and Deepak will upload new patchset with ABI changes.",
       "revId": "331127ae8defb173b6eb4355b20986362c3aa307",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74a0adc7_d9fd58e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-04-22T17:46:46Z",
+      "side": 1,
+      "message": "Don\u0027t bother. I\u0027ll consolidate this with some other symbol updates today and generate an ABI description for the set of them.",
+      "parentUuid": "dac87ecc_b2383e9c",
+      "revId": "331127ae8defb173b6eb4355b20986362c3aa307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
