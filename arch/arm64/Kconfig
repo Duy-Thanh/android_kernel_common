@@ -1398,13 +1398,18 @@ config ARM64_PAN
 	 The feature is detected at runtime, and will remain as a 'nop'
 	 instruction if the cpu does not implement the feature.
 
+<<<<<<< HEAD   (624254 ANDROID: clang: update to 12.0.5)
 config AS_HAS_LDAPR
 	def_bool $(as-instr,.arch_extension rcpc)
+=======
+config AS_HAS_LSE_ATOMICS
+	def_bool $(as-instr,.arch_extension lse)
+>>>>>>> BRANCH (aea70b Linux 5.10.32)
 
 config ARM64_LSE_ATOMICS
 	bool
 	default ARM64_USE_LSE_ATOMICS
-	depends on $(as-instr,.arch_extension lse)
+	depends on AS_HAS_LSE_ATOMICS
 
 config ARM64_USE_LSE_ATOMICS
 	bool "Atomic instructions"
@@ -1683,9 +1688,13 @@ config ARM64_MTE
 	bool "Memory Tagging Extension support"
 	default y
 	depends on ARM64_AS_HAS_MTE && ARM64_TAGGED_ADDR_ABI
+<<<<<<< HEAD   (624254 ANDROID: clang: update to 12.0.5)
 	depends on AS_HAS_ARMV8_5
 	# Required for tag checking in the uaccess routines
 	depends on ARM64_PAN
+=======
+	depends on AS_HAS_LSE_ATOMICS
+>>>>>>> BRANCH (aea70b Linux 5.10.32)
 	select ARCH_USES_HIGH_VMA_FLAGS
 	help
 	  Memory Tagging (part of the ARMv8.5 Extensions) provides
