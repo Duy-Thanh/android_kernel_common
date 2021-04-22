@@ -119,9 +119,14 @@ static inline void apply_alternatives_module(void *start, size_t length) { }
 	.popsection
 	.pushsection .altinstr_replacement, "ax"
 663:	\insn2
+<<<<<<< HEAD   (a5631d ANDROID: gki_defconfig: temporarily disable KFENCE in GKI)
 664:	.popsection
 	.org	. - (664b-663b) + (662b-661b)
+=======
+664:	.org	. - (664b-663b) + (662b-661b)
+>>>>>>> BRANCH (a7eb81 Linux 5.4.114)
 	.org	. - (662b-661b) + (664b-663b)
+	.previous
 	.endif
 .endm
 
@@ -191,11 +196,11 @@ static inline void apply_alternatives_module(void *start, size_t length) { }
  */
 .macro alternative_endif
 664:
+	.org	. - (664b-663b) + (662b-661b)
+	.org	. - (662b-661b) + (664b-663b)
 	.if .Lasm_alt_mode==0
 	.popsection
 	.endif
-	.org	. - (664b-663b) + (662b-661b)
-	.org	. - (662b-661b) + (664b-663b)
 .endm
 
 /*
