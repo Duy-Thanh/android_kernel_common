@@ -70,6 +70,24 @@
       "parentUuid": "c8521ced_7cb787e6",
       "revId": "1bfcb9adcfc0516d65d2cb3dd67287e400e8ed34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af061d34_487d51f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-22T07:23:07Z",
+      "side": 1,
+      "message": "Yes, I would recommend that these go to android11-5.4 instead as they are \"known fixes\" for commits there.  You don\u0027t want those to sit outside of that branch for any longer than is ever possible as that could be very risky.",
+      "parentUuid": "4328588c_20a98bd2",
+      "revId": "1bfcb9adcfc0516d65d2cb3dd67287e400e8ed34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
