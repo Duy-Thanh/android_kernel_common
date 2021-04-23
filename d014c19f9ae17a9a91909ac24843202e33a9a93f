@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fd49be3_d7463316",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-04-23T19:01:28Z",
+      "side": 1,
+      "message": "I hit a kernel crash with this patch applied. Will post a fix upstream soon.",
+      "revId": "d014c19f9ae17a9a91909ac24843202e33a9a93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
