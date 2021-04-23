@@ -53,6 +53,7 @@
 #include <trace/hooks/logbuf.h>
 #include <trace/hooks/vmscan.h>
 #include <trace/hooks/psi.h>
+#include <trace/hooks/selinux.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -249,3 +250,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_group);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpuset_fork);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_cpus_allowed_comm);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_setaffinity_early);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_init_denied_proc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_avc_audit_enable);
