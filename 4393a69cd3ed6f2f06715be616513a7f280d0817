@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e59ca12_cfa5ff79",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-23T10:39:12Z",
+      "side": 1,
+      "message": "In the commit message, please show the \"short report\" of what is being added to the abi here, that way it is much easier to review.",
+      "revId": "4393a69cd3ed6f2f06715be616513a7f280d0817",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea2fa7f4_6c240a97",
+        "filename": "android/abi_gki_aarch64",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-23T10:39:12Z",
+      "side": 1,
+      "message": "some of these should be moved to the \"common\" section above.\n\nprintk() is one example, the lock calls are others :)",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 24
+      },
+      "revId": "4393a69cd3ed6f2f06715be616513a7f280d0817",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
