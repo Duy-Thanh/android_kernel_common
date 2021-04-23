@@ -1,9 +1,16 @@
 # SPDX-License-Identifier: GPL-2.0
 VERSION = 5
+<<<<<<< HEAD   (0ade8c ANDROID: ABI: update allowed list for QCOM)
 PATCHLEVEL = 4
 SUBLEVEL = 86
 EXTRAVERSION =
 NAME = Kleptomaniac Octopus
+=======
+PATCHLEVEL = 10
+SUBLEVEL = 32
+EXTRAVERSION = canary
+NAME = Dare mighty things
+>>>>>>> CHANGE (3ba69e CANARY for kernelmonitor)
 
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
