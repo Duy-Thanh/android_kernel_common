@@ -36,8 +36,6 @@
 # include "mutex.h"
 #endif
 
-#include <trace/hooks/dtask.h>
-
 void
 __mutex_init(struct mutex *lock, const char *name, struct lock_class_key *key)
 {
@@ -1016,7 +1014,6 @@ __mutex_lock_common(struct mutex *lock, long state, unsigned int subclass,
 
 	waiter.task = current;
 
-	trace_android_vh_mutex_wait_start(lock);
 	set_current_state(state);
 	for (;;) {
 		bool first;
@@ -1068,7 +1065,6 @@ __mutex_lock_common(struct mutex *lock, long state, unsigned int subclass,
 	spin_lock(&lock->wait_lock);
 acquired:
 	__set_current_state(TASK_RUNNING);
-	trace_android_vh_mutex_wait_finish(lock);
 
 	if (ww_ctx) {
 		/*
@@ -1097,7 +1093,6 @@ skip_wait:
 
 err:
 	__set_current_state(TASK_RUNNING);
-	trace_android_vh_mutex_wait_finish(lock);
 	__mutex_remove_waiter(lock, &waiter);
 err_early_kill:
 	spin_unlock(&lock->wait_lock);
