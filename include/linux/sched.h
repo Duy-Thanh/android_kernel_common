@@ -32,7 +32,6 @@
 #include <linux/posix-timers.h>
 #include <linux/rseq.h>
 #include <linux/android_kabi.h>
-#include <linux/android_vendor.h>
 
 /* task_struct member predeclarations (sorted alphabetically): */
 struct audit_context;

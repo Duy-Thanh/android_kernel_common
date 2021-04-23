@@ -8,7 +8,6 @@
 
 #define CREATE_TRACE_POINTS
 #include <trace/hooks/vendor_hooks.h>
-#include <trace/hooks/dtask.h>
 #include <trace/hooks/net.h>
 #include <trace/hooks/fpsimd.h>
 #include <trace/hooks/debug.h>
@@ -23,10 +22,3 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ipi_stop);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_lockup_pool);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ptype_head);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kfree_skb);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_start);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_finish);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_wait_start);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_wait_finish);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_wait_start);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_wait_finish);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_show_task);
