@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "767e2d3a_fee559bc",
+        "filename": "include/trace/hooks/selinux.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-04-23T17:35:20Z",
+      "side": 1,
+      "message": "This is no longer required. Please remove along with line 14",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 6
+      },
+      "revId": "870ba3494c3945dab5740a4bf88661f621af3292",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3045d1a6_0cbf144f",
+        "filename": "security/selinux/avc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-04-23T17:35:20Z",
+      "side": 1,
+      "message": "Please conform to the Linux style guide. There should be spaces around operators and no \u0027{\u0027 if it is a single-line:\n\n  if (audit_flag \u003d\u003d 1)\n      return 0;\n\nThis should have been caught by checkpatch... did you run checkpatch before submitting?",
+      "revId": "870ba3494c3945dab5740a4bf88661f621af3292",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "519c31b5_f5e8ab44",
+        "filename": "security/selinux/avc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-04-23T17:35:20Z",
+      "side": 1,
+      "message": "This looks like it is circumventing the security check. Can you say a little in the commit message about what the hook is doing to ensure appropriate security is enforced?",
+      "revId": "870ba3494c3945dab5740a4bf88661f621af3292",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a982df8_63be1534",
+        "filename": "security/selinux/selinuxfs.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2244,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-04-23T17:35:20Z",
+      "side": 1,
+      "message": "Same comment. Please run checkpatch before submitting.",
+      "revId": "870ba3494c3945dab5740a4bf88661f621af3292",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
