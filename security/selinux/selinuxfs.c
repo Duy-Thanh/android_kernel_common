@@ -31,6 +31,7 @@
 #include <linux/uaccess.h>
 #include <linux/kobject.h>
 #include <linux/ctype.h>
+#include <trace/hooks/selinux.h>
 
 /* selinuxfs pseudo filesystem for exporting the security policy API.
    Based on the proc code and the fs/nfsd/nfsctl.c code. */
@@ -2211,6 +2212,7 @@ static int __init init_sel_fs(void)
 	struct qstr null_name = QSTR_INIT(NULL_FILE_NAME,
 					  sizeof(NULL_FILE_NAME)-1);
 	int err;
+	int trace_ret = 0;
 
 	if (!selinux_enabled_boot)
 		return 0;
@@ -2239,6 +2241,10 @@ static int __init init_sel_fs(void)
 		selinux_null.dentry = NULL;
 	}
 
+	/* Add hook for init denied proc for oem */
+	trace_android_vh_init_denied_proc(&trace_ret);
+	if (trace_ret == 1)
+		pr_err("selinuxfs: denied proc init failed!\n");
 	return err;
 }
 
