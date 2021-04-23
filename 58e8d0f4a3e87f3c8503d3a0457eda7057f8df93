@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46f47207_0e887fa0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-04-23T11:49:50Z",
+      "side": 1,
+      "message": "Received positive confirmation on the bug.",
+      "parentUuid": "d3be3611_c00b1179",
+      "revId": "58e8d0f4a3e87f3c8503d3a0457eda7057f8df93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "361c8950_921c7beb",
