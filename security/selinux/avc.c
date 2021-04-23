@@ -33,6 +33,7 @@
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/avc.h>
+#include <trace/hooks/selinux.h>
 
 #define AVC_CACHE_SLOTS			512
 #define AVC_DEF_CACHE_THRESHOLD		512
@@ -774,6 +775,11 @@ noinline int slow_avc_audit(struct selinux_state *state,
 {
 	struct common_audit_data stack_data;
 	struct selinux_audit_data sad;
+	int audit_flag = 0;
+	trace_android_vh_is_avc_audit_enable(&audit_flag);
+	if (audit_flag==1) {
+		return 0;
+	}
 
 	if (WARN_ON(!tclass || tclass >= ARRAY_SIZE(secclass_map)))
 		return -EINVAL;
