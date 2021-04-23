@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1722fda9_4298a26d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2021-04-23T18:08:49Z",
+      "side": 1,
+      "message": "This is not an area that should have customization\n. \nIf you\u0027re looking to add tracepoints to make debugging selinux denials easier, that\u0027s already been done in aosp/1488556. I can send you some documentation on how to use that feature if you\u0027d like.\n\nOtherwise, please send this patch upstream for review. Once it\u0027s merged there, we can backport it into Android kernels.",
+      "revId": "870ba3494c3945dab5740a4bf88661f621af3292",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "767e2d3a_fee559bc",
