@@ -16,6 +16,24 @@
       "message": "Please order symbols as the script would.",
       "revId": "2cb9da70ffe457408277f4b4a559bd33dae69a63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b43362f7_239bbae7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-23T10:10:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59689df4_3885c721",
+      "revId": "2cb9da70ffe457408277f4b4a559bd33dae69a63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
