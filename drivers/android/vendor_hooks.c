@@ -249,3 +249,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_group);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpuset_fork);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_cpus_allowed_comm);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_setaffinity_early);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_prepare_update_load_avg_se);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_finish_update_load_avg_se);
