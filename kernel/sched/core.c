@@ -6909,7 +6909,7 @@ static void migrate_tasks(struct rq *dead_rq, struct rq_flags *rf, bool force)
 	struct rq *rq = dead_rq;
 	struct task_struct *next, *tmp, *stop = rq->stop;
 	LIST_HEAD(percpu_kthreads);
-	struct rq_flags orf = *rf;
+	struct rq_flags orf;
 	int dest_cpu;
 
 	/*
@@ -6929,6 +6929,12 @@ static void migrate_tasks(struct rq *dead_rq, struct rq_flags *rf, bool force)
 	 * value of rq->clock[_task]
 	 */
 	update_rq_clock(rq);
+
+	/*
+	 * get a recent copy of the rq clock flags which
+	 * includes the RQCF_UPDATED bit set
+	 */
+	orf = *rf;
 
 	for (;;) {
 		/*
