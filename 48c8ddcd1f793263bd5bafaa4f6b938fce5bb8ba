@@ -38,6 +38,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95904ffc_93a1b5cb",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1634,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-25T11:06:44Z",
+      "side": 1,
+      "message": "hook name does not give us a good idea where this is, perhaps:\n  trace_android_vh_thermal_pm_notify_suspend()\n\nis a better name?",
+      "range": {
+        "startLine": 1634,
+        "startChar": 3,
+        "endLine": 1634,
+        "endChar": 40
+      },
+      "revId": "48c8ddcd1f793263bd5bafaa4f6b938fce5bb8ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9416ef5d_2fd34c83",
         "filename": "drivers/thermal/thermal_core.c",
         "patchSetId": 8
