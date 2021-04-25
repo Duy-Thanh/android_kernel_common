@@ -81,6 +81,30 @@
       },
       "revId": "48c8ddcd1f793263bd5bafaa4f6b938fce5bb8ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "421c8c72_8d67ca6d",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1635,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-25T11:05:39Z",
+      "side": 1,
+      "message": "What happens if that value changes right after reading this?  Is this the correct and safe way to check this?  Why not just check this in your hook instead?",
+      "parentUuid": "51098e5e_bd638354",
+      "range": {
+        "startLine": 1635,
+        "startChar": 7,
+        "endLine": 1635,
+        "endChar": 31
+      },
+      "revId": "48c8ddcd1f793263bd5bafaa4f6b938fce5bb8ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
