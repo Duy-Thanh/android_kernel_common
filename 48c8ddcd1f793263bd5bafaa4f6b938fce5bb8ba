@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a5f5db3_2c3f0c6c",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1634,
+      "author": {
+        "id": 1517284
+      },
+      "writtenOn": "2021-04-25T13:50:58Z",
+      "side": 1,
+      "message": "Yes, it is! Thanks for advising me!",
+      "parentUuid": "95904ffc_93a1b5cb",
+      "range": {
+        "startLine": 1634,
+        "startChar": 3,
+        "endLine": 1634,
+        "endChar": 40
+      },
+      "revId": "48c8ddcd1f793263bd5bafaa4f6b938fce5bb8ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9416ef5d_2fd34c83",
@@ -120,6 +144,30 @@
       "side": 1,
       "message": "What happens if that value changes right after reading this?  Is this the correct and safe way to check this?  Why not just check this in your hook instead?",
       "parentUuid": "51098e5e_bd638354",
+      "range": {
+        "startLine": 1635,
+        "startChar": 7,
+        "endLine": 1635,
+        "endChar": 31
+      },
+      "revId": "48c8ddcd1f793263bd5bafaa4f6b938fce5bb8ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca62e8fc_733a94f1",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1635,
+      "author": {
+        "id": 1517284
+      },
+      "writtenOn": "2021-04-25T13:50:58Z",
+      "side": 1,
+      "message": "I think it is a good idea to check this in the vh. Thanks for advising me.",
+      "parentUuid": "421c8c72_8d67ca6d",
       "range": {
         "startLine": 1635,
         "startChar": 7,
