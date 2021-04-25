@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25804652_cda4058e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876462
+      },
+      "writtenOn": "2021-04-25T18:40:13Z",
+      "side": 1,
+      "message": "adb shell sh /storage/emulated/0/Android/data/moe.shizuku.privileged.api/start.sh",
+      "revId": "f47de37f1f95beebc5e8a17d5de7be1a41eefbce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
