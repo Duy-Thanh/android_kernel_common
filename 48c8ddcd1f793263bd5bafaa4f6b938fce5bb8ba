@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01585571_8d5058f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1517284
+      },
+      "writtenOn": "2021-04-25T10:43:24Z",
+      "side": 1,
+      "message": "Due to time constraints I would like to use a vendor hook for the short term.",
+      "parentUuid": "8fe1945e_9472d3f0",
+      "revId": "48c8ddcd1f793263bd5bafaa4f6b938fce5bb8ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9416ef5d_2fd34c83",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-04-19T08:32:04Z",
       "side": 1,
       "message": "why is this check needed?  What happens if it changes right after reading?",
+      "range": {
+        "startLine": 1635,
+        "startChar": 7,
+        "endLine": 1635,
+        "endChar": 31
+      },
+      "revId": "48c8ddcd1f793263bd5bafaa4f6b938fce5bb8ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51098e5e_bd638354",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1635,
+      "author": {
+        "id": 1517284
+      },
+      "writtenOn": "2021-04-25T10:43:24Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand your question. We just want to ensure that the TZ update only be skipped if we have the new flag and it is in suspend.",
+      "parentUuid": "9416ef5d_2fd34c83",
       "range": {
         "startLine": 1635,
         "startChar": 7,
