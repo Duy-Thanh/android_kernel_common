@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000010240533",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1673983?revision\u003d8",
+      "fixSuggestions": [
+        {
+          "fixId": "3579c8f4_74afb599",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 13,
+                "startChar": 0,
+                "endLine": 13,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Ard Biesheuvel \u003cardb@kernel.org\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "2686a975_897d0ab2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-04-26T15:16:00Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Ard Biesheuvel \u003cardb@kernel.org\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 369861534 android-build.ayeaye-python-dispatcher_20210422.04_p0",
+      "revId": "0b80e07239050e7b3c855ee764ba916c6cdfe34a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000010240533",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1673983?revision\u003d8",
+      "fixSuggestions": [
+        {
+          "fixId": "ddf9060f_5221ed16",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 13,
+                "startChar": 0,
+                "endLine": 13,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Matthias Maennich \u003cmaennich@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "4ab7773b_c3a0329d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-04-26T15:16:00Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Matthias Maennich \u003cmaennich@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 369861534 android-build.ayeaye-python-dispatcher_20210422.04_p0",
+      "revId": "0b80e07239050e7b3c855ee764ba916c6cdfe34a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
