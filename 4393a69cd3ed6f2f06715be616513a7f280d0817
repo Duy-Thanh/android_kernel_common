@@ -39,6 +39,30 @@
       },
       "revId": "4393a69cd3ed6f2f06715be616513a7f280d0817",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0eaab791_6e60b5e8",
+        "filename": "android/abi_gki_aarch64",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-04-26T13:09:55Z",
+      "side": 1,
+      "message": "There is no real common section as there is now exactly _one_ module: fips140.ko. The above common section is only a list of artificial symbols that we force-add. It would otherwise be empty as there were no modules (so far).",
+      "parentUuid": "ea2fa7f4_6c240a97",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 24
+      },
+      "revId": "4393a69cd3ed6f2f06715be616513a7f280d0817",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
