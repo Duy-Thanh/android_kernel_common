@@ -22,6 +22,30 @@
       },
       "revId": "c10285582189619289f765d52fc00dd2ff7865ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c967e781_e4390c28",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1634,
+      "author": {
+        "id": 1517284
+      },
+      "writtenOn": "2021-04-26T14:38:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "91413352_2a4ca34e",
+      "range": {
+        "startLine": 1634,
+        "startChar": 51,
+        "endLine": 1634,
+        "endChar": 61
+      },
+      "revId": "c10285582189619289f765d52fc00dd2ff7865ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
