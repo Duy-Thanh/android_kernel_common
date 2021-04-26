@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5329b59a_2415af92",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-04-26T15:41:52Z",
+      "side": 1,
+      "message": "is this name every changing? \"fips140-2\", maybe? In which case this should maybe be a constant somewhere.",
+      "range": {
+        "startLine": 327,
+        "startChar": 25,
+        "endLine": 327,
+        "endChar": 32
+      },
+      "revId": "f0b487ac135ecac56d6860a537ca72bbc0249581",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ca5784e_33153750",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-04-26T15:41:52Z",
+      "side": 1,
+      "message": "could technically be under ifdef as well, but I would not insist (but might increase readability for what all belongs to FIPS140 (the name \u0027p\u0027 alone makes it hard to guess).",
+      "revId": "f0b487ac135ecac56d6860a537ca72bbc0249581",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
