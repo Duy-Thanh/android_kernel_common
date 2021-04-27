@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66f9b5e4_dd68c31f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-04-27T19:44:36Z",
+      "side": 1,
+      "message": "So, what\u0027s the plan here. Will this whole patchset be sent upstream and then updated as FROMLIST/FROMGIT before merging into ACK? Or do you want to merge it as ANDROID into ACK and then upstream?",
+      "revId": "3632de60bf89dc894460bccbb6b73728dcfd4be6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
