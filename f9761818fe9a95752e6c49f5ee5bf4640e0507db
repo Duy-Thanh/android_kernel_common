@@ -22,6 +22,30 @@
       },
       "revId": "f9761818fe9a95752e6c49f5ee5bf4640e0507db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b99c024_4ce11f90",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-04-27T06:58:56Z",
+      "side": 1,
+      "message": "Sure. I\u0027ll leave this unresolved until that date and then re-push. I\u0027ll have to manually revert part of the change to make GKI debug builds ABI builds.\n\nHowever:\n\nGreg has commented though that we aren\u0027t using this branch at present\nand in particular, no merges are happening here.\n\nThere is also no mention of this branch in the GKI newsletter, or in https://source.android.com/devices/architecture/kernel/android-common.",
+      "parentUuid": "26ee3af3_f8124d69",
+      "range": {
+        "startLine": 14,
+        "startChar": 52,
+        "endLine": 14,
+        "endChar": 61
+      },
+      "revId": "f9761818fe9a95752e6c49f5ee5bf4640e0507db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
