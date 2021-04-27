@@ -745,21 +745,36 @@ static void binder_transaction_priority(struct binder_thread *thread,
 					struct binder_transaction *t,
 					struct binder_node *node)
 {
+<<<<<<< HEAD   (43c339 ANDROID: GKI: update module list for fips140 build)
 	struct task_struct *task = thread->task;
 	struct binder_priority desired = t->priority;
 	const struct binder_priority node_prio = {
 		.sched_policy = node->sched_policy,
 		.prio = node->min_priority,
 	};
+=======
+	struct binder_priority desired_prio = t->priority;
+	bool skip = false;
+>>>>>>> CHANGE (2337b9 ANDROID: vendor_hooks: Add hook for binder)
 
 	if (t->set_priority_called)
 		return;
 
 	t->set_priority_called = true;
 
+<<<<<<< HEAD   (43c339 ANDROID: GKI: update module list for fips140 build)
 	if (!node->inherit_rt && is_rt_policy(desired.sched_policy)) {
 		desired.prio = NICE_TO_PRIO(0);
 		desired.sched_policy = SCHED_NORMAL;
+=======
+	trace_android_vh_binder_transaction_priority_skip(task, &skip);
+	if (skip)
+		return;
+
+	if (!inherit_rt && is_rt_policy(desired_prio.sched_policy)) {
+		desired_prio.prio = NICE_TO_PRIO(0);
+		desired_prio.sched_policy = SCHED_NORMAL;
+>>>>>>> CHANGE (2337b9 ANDROID: vendor_hooks: Add hook for binder)
 	}
 
 	if (node_prio.prio < t->priority.prio ||
