@@ -16,6 +16,24 @@
       "message": "Let\u0027s let upstream properly review this.\n\nIs there a rush to accept this now for some reason?",
       "revId": "140667820deef9ec199e04dca4dd5d94fa662633",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "894acdfb_47c6a08f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1030767
+      },
+      "writtenOn": "2021-04-27T15:25:17Z",
+      "side": 1,
+      "message": "\u003e Let\u0027s let upstream properly review this.\n\nAgreed.\n\n\u003e Is there a rush to accept this now for some reason?\n\nIt\u0027s known to cause our devices to crash when certain types of USB PD compliant chargers are plugged in, particularly with UBSAN bounds checking now enabled. So it\u0027s not an immediate impact for most users who plug in USB to a \"normal\" PC port but will be of more concern to those testing battery charging.\n\nSo hoping at least it could land upstream during the current 5.13-rc cycle so that this could make its way to android12-5.10 soon either via this Gerrit or through stable.",
+      "parentUuid": "c77e0510_620020c7",
+      "revId": "140667820deef9ec199e04dca4dd5d94fa662633",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
