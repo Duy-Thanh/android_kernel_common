@@ -16,6 +16,24 @@
       "message": "Although this solves the immediate problem, it introduces a new issue in that we may end up setting capabilities that are not supported by all CPUs.\n\nI\u0027ll try to come up with an alternative solution for you to try.",
       "revId": "482fc88fe6a58e2d09b469f75de83dc1e1f22628",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73d7ca65_69e8ad5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-04-27T12:19:28Z",
+      "side": 1,
+      "message": "aosp/1688205",
+      "parentUuid": "e8076e00_dabcc739",
+      "revId": "482fc88fe6a58e2d09b469f75de83dc1e1f22628",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
