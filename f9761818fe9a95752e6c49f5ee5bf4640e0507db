@@ -46,6 +46,30 @@
       },
       "revId": "f9761818fe9a95752e6c49f5ee5bf4640e0507db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "941d93bb_aa5864f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-04-27T07:49:54Z",
+      "side": 1,
+      "message": "Given that this is the LTS branch and we are not really doing ABI safeguarding here yet, I would go ahead even before that date to keep the branches consistent in TH. I would even argue that this is a bug fix as we simply forgot to pay the fix to -lts as well.",
+      "parentUuid": "6b99c024_4ce11f90",
+      "range": {
+        "startLine": 14,
+        "startChar": 52,
+        "endLine": 14,
+        "endChar": 61
+      },
+      "revId": "f9761818fe9a95752e6c49f5ee5bf4640e0507db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
