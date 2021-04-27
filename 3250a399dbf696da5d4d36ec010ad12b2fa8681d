@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4776e1f3_f4c0489b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-04-27T03:56:50Z",
+      "side": 1,
+      "message": "\nhttps://android-build.googleplex.com/builds/pending/P22190126/kernel_virt_aarch64/latest/view/logs/build.log\n\n\nI have no idea why it happened on only \"kernel_virt_aarch64\", not ARM64 and x86_64.\n\n\nI tried this since it might be related to GKI symbol but nothing happened.\n\nBUILD_CONFIG\u003dcommon-modules/virtual-device/build.config.virtual_device.aarch64 build/build_abi.sh -j128 --update\n\nCould you give me some hints please?\n\n```\n Creating initramfs\ndepmod: WARNING: /usr/local/google/buildbot/src/android/common-android12-5.10/out/android12-5.10/staging/initramfs_staging/./lib/modules/5.10.32-android12-2-00709-g0a67b184f4fb/kernel/mm/zsmalloc.ko needs unknown symbol __page_pinner_migration_failed\ndepmod: WARNING: /usr/local/google/buildbot/src/android/common-android12-5.10/out/android12-5.10/staging/initramfs_staging/./lib/modules/5.10.32-android12-2-00709-g0a67b184f4fb/kernel/mm/zsmalloc.ko needs unknown symbol failure_tracking\ndepmod: WARNING: /usr/local/google/buildbot/src/android/common-android12-5.10/out/android12-5.10/staging/initramfs_staging/./lib/modules/5.10.32-android12-2-00709-g0a67b184f4fb/kernel/drivers/virtio/virtio_balloon.ko needs unknown symbol __page_pinner_migration_failed\ndepmod: WARNING: /usr/local/google/buildbot/src/android/common-android12-5.10/out/android12-5.10/staging/initramfs_staging/./lib/modules/5.10.32-android12-2-00709-g0a67b184f4fb/kernel/drivers/virtio/virtio_balloon.ko needs unknown symbol failure_tracking\n```",
+      "revId": "3250a399dbf696da5d4d36ec010ad12b2fa8681d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
