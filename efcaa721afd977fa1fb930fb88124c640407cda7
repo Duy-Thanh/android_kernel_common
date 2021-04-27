@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ace90925_90d8a5f8",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-04-27T21:59:04Z",
+      "side": 1,
+      "message": "This is wrong because this code passes an uninitialized variable to spin_unlock_irqrestore(). The caller must pass \u0027flags\u0027 as an argument for this code to work as intended.",
+      "range": {
+        "startLine": 1132,
+        "startChar": 2,
+        "endLine": 1132,
+        "endChar": 54
+      },
+      "revId": "efcaa721afd977fa1fb930fb88124c640407cda7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
