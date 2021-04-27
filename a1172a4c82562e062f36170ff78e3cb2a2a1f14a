@@ -52,6 +52,24 @@
       "parentUuid": "8c4b70f7_3e0f7782",
       "revId": "a1172a4c82562e062f36170ff78e3cb2a2a1f14a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73726a28_f568f624",
+        "filename": "drivers/trusty/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2021-04-27T21:20:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4758e81_4929627b",
+      "revId": "a1172a4c82562e062f36170ff78e3cb2a2a1f14a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
