@@ -43,6 +43,9 @@ DECLARE_HOOK(android_vh_do_shrink_slab,
 DECLARE_HOOK(android_vh_rebalance_anon_lru_bypass,
 	TP_PROTO(bool *bypass),
 	TP_ARGS(bypass));
+DECLARE_HOOK(android_vh_shrink_slab_bypass,
+	TP_PROTO(gfp_t gfp_mask, int nid, struct mem_cgroup *memcg, int priority, bool *bypass),
+	TP_ARGS(gfp_mask, nid, memcg, priority, bypass));
 #endif /* _TRACE_HOOK_VMSCAN_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
