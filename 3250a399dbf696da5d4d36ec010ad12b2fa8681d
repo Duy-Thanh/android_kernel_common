@@ -34,6 +34,24 @@
       "parentUuid": "4776e1f3_f4c0489b",
       "revId": "3250a399dbf696da5d4d36ec010ad12b2fa8681d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c1cae4d_22647395",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-04-28T16:34:41Z",
+      "side": 1,
+      "message": "Thanks for the hint, Matthias.\n\nI have tried following commands but didn\u0027t see any update from common/android/ files.\n\n\nBUILD_CONFIG\u003dcommon-modules/virtual-device/build.config.virtual_device.aarch64 build/build_abi.sh -j 128 --update-symbol-list\n\n\nBUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build_abi.sh -j128 --update-symbol-list\n\nWhat specfic command do I need to run? and what specific file should I expect to be updated?",
+      "parentUuid": "1c00486d_606cd4a6",
+      "revId": "3250a399dbf696da5d4d36ec010ad12b2fa8681d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
