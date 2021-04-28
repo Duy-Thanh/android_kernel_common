@@ -114,9 +114,14 @@ void apply_alternatives(void *start, size_t length);
 	.popsection
 	.pushsection .altinstr_replacement, "ax"
 663:	\insn2
+<<<<<<< HEAD   (1bfca1 UPSTREAM: kbuild: test --build-id linker flag by ld-option i)
 664:	.popsection
 	.org	. - (664b-663b) + (662b-661b)
+=======
+664:	.org	. - (664b-663b) + (662b-661b)
+>>>>>>> BRANCH (7d7d1c Linux 4.14.232)
 	.org	. - (662b-661b) + (664b-663b)
+	.previous
 	.endif
 .endm
 
@@ -186,11 +191,11 @@ void apply_alternatives(void *start, size_t length);
  */
 .macro alternative_endif
 664:
+	.org	. - (664b-663b) + (662b-661b)
+	.org	. - (662b-661b) + (664b-663b)
 	.if .Lasm_alt_mode==0
 	.popsection
 	.endif
-	.org	. - (664b-663b) + (662b-661b)
-	.org	. - (662b-661b) + (664b-663b)
 .endm
 
 /*
