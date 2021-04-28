@@ -967,7 +967,11 @@ EXPORT_SYMBOL_GPL(sched_uclamp_used);
 
 static inline unsigned int uclamp_bucket_id(unsigned int clamp_value)
 {
-	return clamp_value / UCLAMP_BUCKET_DELTA;
+	unsigned int val = clamp_value / UCLAMP_BUCKET_DELTA;
+
+	BUG_ON(val >= UCLAMP_BUCKETS);
+
+	return val;
 }
 
 static inline unsigned int uclamp_none(enum uclamp_id clamp_id)
