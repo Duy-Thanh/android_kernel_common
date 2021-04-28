@@ -23,6 +23,8 @@
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/thermal.h>
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/thermal.h>
 
 #include "thermal_core.h"
 #include "thermal_hwmon.h"
@@ -1143,6 +1145,8 @@ __thermal_cooling_device_register(struct device_node *np,
 			thermal_zone_device_update(pos,
 						   THERMAL_EVENT_UNSPECIFIED);
 	mutex_unlock(&thermal_list_lock);
+
+	trace_android_vh_get_thermal_class(&thermal_class);
 
 	return cdev;
 }
