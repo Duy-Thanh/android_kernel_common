@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49c838fd_0b04efea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-04-28T22:23:19Z",
+      "side": 1,
+      "message": "in this case it would be \"BACKPORT: FROMGIT:\", but I would not insist.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 53
+      },
+      "revId": "489c556f2b73a373b1c742d0a93d68cfe88a231b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
