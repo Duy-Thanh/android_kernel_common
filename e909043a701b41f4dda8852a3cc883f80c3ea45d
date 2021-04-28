@@ -21,6 +21,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8b01812b_02a4712a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-04-28T16:07:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d71b2ca_be8f7c66",
+      "revId": "e909043a701b41f4dda8852a3cc883f80c3ea45d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "038a2de9_412431ec",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -32,6 +50,24 @@
       "writtenOn": "2021-03-04T20:57:00Z",
       "side": 1,
       "message": "MM maintainer doesn\u0027t use the use git to manage patch.\noverriding the l",
+      "revId": "e909043a701b41f4dda8852a3cc883f80c3ea45d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37d921e7_1519e4a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-04-28T16:07:40Z",
+      "side": 1,
+      "message": "resolved",
+      "parentUuid": "038a2de9_412431ec",
       "revId": "e909043a701b41f4dda8852a3cc883f80c3ea45d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
