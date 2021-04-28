@@ -180,3 +180,7 @@
   __tracepoint_android_vh_mmput
   __tracepoint_android_vh_alloc_pages_reclaim_bypass
   __tracepoint_android_vh_alloc_pages_failure_bypass
+
+#required by mi_log.ko
+  __traceiter_android_vh_binder_proc_transaction
+  __tracepoint_android_vh_binder_proc_transaction
