@@ -2515,6 +2515,9 @@
   __tracepoint_android_vh_binder_set_priority
   __tracepoint_android_vh_binder_transaction_init
   __tracepoint_android_vh_binder_wakeup_ilocked
+  __tracepoint_android_vh_binder_proc_transaction
+  __tracepoint_android_vh_binder_new_ref
+  __tracepoint_android_vh_binder_del_ref
   __tracepoint_android_vh_cpu_idle_enter
   __tracepoint_android_vh_cpu_idle_exit
   __tracepoint_android_vh_dump_throttled_rt_tasks
