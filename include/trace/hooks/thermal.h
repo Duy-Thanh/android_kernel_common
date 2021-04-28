@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: GPL-2.0 */
 #undef TRACE_SYSTEM
 #define TRACE_SYSTEM thermal
-
+#undef TRACE_INCLUDE_PATH
 #define TRACE_INCLUDE_PATH trace/hooks
 
 #if !defined(_TRACE_HOOK_THERMAL_H) || defined(TRACE_HEADER_MULTI_READ)
@@ -18,6 +18,10 @@ struct thermal_zone_device;
 DECLARE_HOOK(android_vh_thermal_pm_notify_suspend,
 	     TP_PROTO(struct thermal_zone_device *tz, int *irq_wakeable),
 	     TP_ARGS(tz, irq_wakeable));
+struct class;
+DECLARE_HOOK(android_vh_get_thermal_class,
+	TP_PROTO(struct class *p),
+	TP_ARGS(p));
 
 #endif /* _TRACE_HOOK_THERMAL_H */
 /* This part must be outside protection */

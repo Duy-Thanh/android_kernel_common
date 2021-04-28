@@ -1146,6 +1146,8 @@ __thermal_cooling_device_register(struct device_node *np,
 						   THERMAL_EVENT_UNSPECIFIED);
 	mutex_unlock(&thermal_list_lock);
 
+	trace_android_vh_get_thermal_class(&thermal_class);
+
 	return cdev;
 }
 
