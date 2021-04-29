@@ -34,6 +34,15 @@ DECLARE_HOOK(android_vh_shrink_slab_bypass,
 DECLARE_HOOK(android_vh_do_shrink_slab,
 	TP_PROTO(struct shrinker *shrinker, struct shrink_control *shrinkctl, int priority),
 	TP_ARGS(shrinker, shrinkctl, priority));
+<<<<<<< HEAD   (4d002f FROMGIT: arm64: fix oops in concurrently setting insn_emulat)
+=======
+DECLARE_HOOK(android_vh_tune_memcg_scan_type,
+	TP_PROTO(struct mem_cgroup *memcg, char *scan_type),
+	TP_ARGS(memcg, scan_type));
+DECLARE_HOOK(android_vh_tune_inactive_ratio,
+	TP_PROTO(unsigned long *inactive_ratio, int file),
+	TP_ARGS(inactive_ratio, file))
+>>>>>>> CHANGE (0226fc ANDROID: vendor_hooks: tune reclaim inactive ratio)
 #endif /* _TRACE_HOOK_VMSCAN_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
