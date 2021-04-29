@@ -16,6 +16,23 @@
       "message": "A parent change has a merge conflict, please rebase and also take over this change as part of your series.",
       "revId": "4be9de6859c2353d33dd6485138e37b26df990e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91199f19_d3c86678",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-04-29T15:15:41Z",
+      "side": 1,
+      "message": "Thanks for fixing this problem.\n\nA question is why the symbols should be on only android/abi_gki_aarch64_virtual_device, not android/abi_gki_aarch64_generic?\n\n",
+      "revId": "4be9de6859c2353d33dd6485138e37b26df990e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
