@@ -2,11 +2,15 @@
 CFLAGS_KASAN_NOSANITIZE := -fno-builtin
 KASAN_SHADOW_OFFSET ?= $(CONFIG_KASAN_SHADOW_OFFSET)
 
+<<<<<<< HEAD   (9dd11f FROMGIT: kbuild: update config_data.gz only when the content)
 ifdef CONFIG_KASAN_STACK
 	stack_enable := 1
 else
 	stack_enable := 0
 endif
+=======
+cc-param = $(call cc-option, -mllvm -$(1), $(call cc-option, --param $(1)))
+>>>>>>> BRANCH (8bd830 Linux 5.10.33)
 
 ifdef CONFIG_KASAN_GENERIC
 
@@ -17,8 +21,6 @@ else
 endif
 
 CFLAGS_KASAN_MINIMAL := -fsanitize=kernel-address
-
-cc-param = $(call cc-option, -mllvm -$(1), $(call cc-option, --param $(1)))
 
 # -fasan-shadow-offset fails without -fsanitize
 CFLAGS_KASAN_SHADOW := $(call cc-option, -fsanitize=kernel-address \
@@ -42,14 +44,19 @@ endif # CONFIG_KASAN_GENERIC
 ifdef CONFIG_KASAN_SW_TAGS
 
 ifdef CONFIG_KASAN_INLINE
-    instrumentation_flags := -mllvm -hwasan-mapping-offset=$(KASAN_SHADOW_OFFSET)
+    instrumentation_flags := $(call cc-param,hwasan-mapping-offset=$(KASAN_SHADOW_OFFSET))
 else
-    instrumentation_flags := -mllvm -hwasan-instrument-with-calls=1
+    instrumentation_flags := $(call cc-param,hwasan-instrument-with-calls=1)
 endif
 
 CFLAGS_KASAN := -fsanitize=kernel-hwaddress \
+<<<<<<< HEAD   (9dd11f FROMGIT: kbuild: update config_data.gz only when the content)
 		-mllvm -hwasan-instrument-stack=$(stack_enable) \
 		-mllvm -hwasan-use-short-granules=0 \
+=======
+		$(call cc-param,hwasan-instrument-stack=$(CONFIG_KASAN_STACK)) \
+		$(call cc-param,hwasan-use-short-granules=0) \
+>>>>>>> BRANCH (8bd830 Linux 5.10.33)
 		$(instrumentation_flags)
 
 endif # CONFIG_KASAN_SW_TAGS
