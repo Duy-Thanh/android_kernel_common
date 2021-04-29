@@ -119,9 +119,14 @@ static inline void apply_alternatives_module(void *start, size_t length) { }
 	.popsection
 	.pushsection .altinstr_replacement, "ax"
 663:	\insn2
+<<<<<<< HEAD   (098011 Merge 4.19.188 into android-4.19-q)
 664:	.popsection
 	.org	. - (664b-663b) + (662b-661b)
+=======
+664:	.org	. - (664b-663b) + (662b-661b)
+>>>>>>> BRANCH (97a865 Linux 4.19.189)
 	.org	. - (662b-661b) + (664b-663b)
+	.previous
 	.endif
 .endm
 
@@ -191,11 +196,11 @@ static inline void apply_alternatives_module(void *start, size_t length) { }
  */
 .macro alternative_endif
 664:
+	.org	. - (664b-663b) + (662b-661b)
+	.org	. - (662b-661b) + (664b-663b)
 	.if .Lasm_alt_mode==0
 	.popsection
 	.endif
-	.org	. - (664b-663b) + (662b-661b)
-	.org	. - (662b-661b) + (664b-663b)
 .endm
 
 /*
