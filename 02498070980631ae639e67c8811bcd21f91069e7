@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8adda928_5c1c954c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-04-29T19:35:25Z",
+      "side": 1,
+      "message": "it seems regular expressions are supported now. so perhaps ^refs/heads/android*.-trusty-.* would be better",
+      "revId": "02498070980631ae639e67c8811bcd21f91069e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
