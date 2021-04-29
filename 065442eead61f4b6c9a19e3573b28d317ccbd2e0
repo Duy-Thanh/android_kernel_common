@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fb8ac9d_cff9e58a",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2592,
+      "author": {
+        "id": 1301696
+      },
+      "writtenOn": "2021-04-29T18:03:49Z",
+      "side": 1,
+      "message": "maybe not a good place to clear the flag.\n\nthinking about removing this line and making below modification:\n\n1994 -\tif (port-\u003evdm_state \u003d\u003d VDM_STATE_ERR_TMOUT)\n     +\tif (port-\u003evdm_state \u003d\u003d VDM_STATE_ERR_TMOUT || port-\u003evdm_state \u003d\u003d VDM_STATE_DONE)\n1995\t\tport-\u003evdm_sm_running \u003d false;",
+      "range": {
+        "startLine": 2592,
+        "startChar": 4,
+        "endLine": 2592,
+        "endChar": 33
+      },
+      "revId": "065442eead61f4b6c9a19e3573b28d317ccbd2e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
