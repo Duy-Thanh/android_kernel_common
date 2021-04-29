@@ -17,6 +17,24 @@
       "parentUuid": "02eaaa3e_0cfee5ac",
       "revId": "07bdb1dce0eea6503f414b5ee395349dd543bea6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd76f673_fe08a2ea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-04-29T15:56:07Z",
+      "side": 1,
+      "message": "Seems this is a false positive from the linter.",
+      "parentUuid": "b954abc8_3af23cae",
+      "revId": "07bdb1dce0eea6503f414b5ee395349dd543bea6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
