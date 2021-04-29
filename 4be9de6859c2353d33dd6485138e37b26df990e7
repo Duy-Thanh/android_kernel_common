@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0a9b69b_ee32395d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-04-29T13:36:17Z",
+      "side": 1,
+      "message": "A parent change has a merge conflict, please rebase and also take over this change as part of your series.",
+      "revId": "4be9de6859c2353d33dd6485138e37b26df990e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
