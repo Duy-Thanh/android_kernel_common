@@ -52,6 +52,24 @@
       "parentUuid": "1c00486d_606cd4a6",
       "revId": "3250a399dbf696da5d4d36ec010ad12b2fa8681d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ce5e2fc_5320f1b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-04-29T13:35:20Z",
+      "side": 1,
+      "message": "See aosp/1690825, it does the update and has the instructions. Sorry for the trouble.",
+      "parentUuid": "2c1cae4d_22647395",
+      "revId": "3250a399dbf696da5d4d36ec010ad12b2fa8681d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
