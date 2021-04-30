@@ -104,6 +104,9 @@ struct track {
 	int cpu;		/* Was running on cpu */
 	int pid;		/* Pid context */
 	unsigned long when;	/* When did the operation occur */
+#ifdef CONFIG_STACKTRACE
+	ANDROID_OEM_DATA(1);
+#endif
 };
 
 enum track_item { TRACK_ALLOC, TRACK_FREE };
