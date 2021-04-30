@@ -101,11 +101,122 @@ extern int selinux_policycap_nnp_nosuid_transition;
 
 int security_mls_enabled(void);
 
+<<<<<<< HEAD   (b0428f Merge 4.14.240 into android-4.14-q)
 int security_load_policy(void *data, size_t len);
 int security_read_policy(void **data, size_t *len);
 size_t security_policydb_len(void);
+=======
+struct selinux_state {
+	bool disabled;
+#ifdef CONFIG_SECURITY_SELINUX_DEVELOP
+	bool enforcing;
+#endif
+	bool checkreqprot;
+	bool initialized;
+	bool policycap[__POLICYDB_CAPABILITY_MAX];
+	bool android_netlink_route;
+	bool android_netlink_getneigh;
 
+	struct selinux_avc *avc;
+	struct selinux_ss *ss;
+};
+>>>>>>> CHANGE (32d7af ANDROID: selinux: modify RTM_GETNEIGH{TBL})
+
+<<<<<<< HEAD   (b0428f Merge 4.14.240 into android-4.14-q)
 int security_policycap_supported(unsigned int req_cap);
+=======
+void selinux_ss_init(struct selinux_ss **ss);
+void selinux_avc_init(struct selinux_avc **avc);
+
+extern struct selinux_state selinux_state;
+
+#ifdef CONFIG_SECURITY_SELINUX_DEVELOP
+static inline bool enforcing_enabled(struct selinux_state *state)
+{
+	return state->enforcing;
+}
+
+static inline void enforcing_set(struct selinux_state *state, bool value)
+{
+	state->enforcing = value;
+}
+#else
+static inline bool enforcing_enabled(struct selinux_state *state)
+{
+	return true;
+}
+
+static inline void enforcing_set(struct selinux_state *state, bool value)
+{
+}
+#endif
+
+static inline bool selinux_policycap_netpeer(void)
+{
+	struct selinux_state *state = &selinux_state;
+
+	return state->policycap[POLICYDB_CAPABILITY_NETPEER];
+}
+
+static inline bool selinux_policycap_openperm(void)
+{
+	struct selinux_state *state = &selinux_state;
+
+	return state->policycap[POLICYDB_CAPABILITY_OPENPERM];
+}
+
+static inline bool selinux_policycap_extsockclass(void)
+{
+	struct selinux_state *state = &selinux_state;
+
+	return state->policycap[POLICYDB_CAPABILITY_EXTSOCKCLASS];
+}
+
+static inline bool selinux_policycap_alwaysnetwork(void)
+{
+	struct selinux_state *state = &selinux_state;
+
+	return state->policycap[POLICYDB_CAPABILITY_ALWAYSNETWORK];
+}
+
+static inline bool selinux_policycap_cgroupseclabel(void)
+{
+	struct selinux_state *state = &selinux_state;
+
+	return state->policycap[POLICYDB_CAPABILITY_CGROUPSECLABEL];
+}
+
+static inline bool selinux_policycap_nnp_nosuid_transition(void)
+{
+	struct selinux_state *state = &selinux_state;
+
+	return state->policycap[POLICYDB_CAPABILITY_NNP_NOSUID_TRANSITION];
+}
+
+static inline bool selinux_android_nlroute_getlink(void)
+{
+	struct selinux_state *state = &selinux_state;
+
+	return state->android_netlink_route;
+}
+
+static inline bool selinux_android_nlroute_getneigh(void)
+{
+	struct selinux_state *state = &selinux_state;
+
+	return state->android_netlink_getneigh;
+}
+
+int security_mls_enabled(struct selinux_state *state);
+int security_load_policy(struct selinux_state *state,
+			 void *data, size_t len);
+int security_read_policy(struct selinux_state *state,
+			 void **data, size_t *len);
+size_t security_policydb_len(struct selinux_state *state);
+
+int security_policycap_supported(struct selinux_state *state,
+				 unsigned int req_cap);
+>>>>>>> CHANGE (32d7af ANDROID: selinux: modify RTM_GETNEIGH{TBL})
 
 #define SEL_VEC_MAX 32
 struct av_decision {

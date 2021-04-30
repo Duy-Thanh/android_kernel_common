@@ -2028,7 +2028,12 @@ static void security_load_policycaps(void)
 				i);
 	}
 
+<<<<<<< HEAD   (b0428f Merge 4.14.240 into android-4.14-q)
 	selinux_android_netlink_route = policydb.android_netlink_route;
+=======
+	state->android_netlink_route = p->android_netlink_route;
+	state->android_netlink_getneigh = p->android_netlink_getneigh;
+>>>>>>> CHANGE (32d7af ANDROID: selinux: modify RTM_GETNEIGH{TBL})
 	selinux_nlmsg_init();
 }
 
