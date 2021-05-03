@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5003487b_727f9713",
+        "filename": "drivers/trusty/Kconfig",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2021-05-03T18:27:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "408c8288_26eb5749",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 32
+      },
+      "revId": "d1bae00585a64dbf046995614f3a1820ffa72140",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3df98761_ba3b5d14",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-05-03T18:02:10Z",
       "side": 1,
       "message": "Upper-case \"N\" appears to be more common in Kconfig files. Also, on line 34, the answer is put in quotes (\"\u0027y\u0027 or \u0027m\u0027\")",
+      "range": {
+        "startLine": 86,
+        "startChar": 62,
+        "endLine": 86,
+        "endChar": 63
+      },
+      "revId": "d1bae00585a64dbf046995614f3a1820ffa72140",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0300499c_df9e28dc",
+        "filename": "drivers/trusty/Kconfig",
+        "patchSetId": 7
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2021-05-03T18:27:41Z",
+      "side": 1,
+      "message": "Switched to \u0027N\u0027.",
+      "parentUuid": "3df98761_ba3b5d14",
       "range": {
         "startLine": 86,
         "startChar": 62,
