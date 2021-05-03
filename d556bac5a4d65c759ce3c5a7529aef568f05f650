@@ -16,6 +16,24 @@
       "message": "You don\u0027t need this line. See https://android-review.googlesource.com/c/kernel/common/+/1432994",
       "revId": "d556bac5a4d65c759ce3c5a7529aef568f05f650",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b58f757b_5ee92b94",
+        "filename": "drivers/trusty/Kconfig",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2021-05-03T19:50:29Z",
+      "side": 1,
+      "message": "Ack, but I don\u0027t want to get the other one re-approved and re-wait for the build. If I want the prebuilt updates to happen today I don\u0027t think I have time for another build cycle.",
+      "parentUuid": "c4381fb0_9d92e489",
+      "revId": "d556bac5a4d65c759ce3c5a7529aef568f05f650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
