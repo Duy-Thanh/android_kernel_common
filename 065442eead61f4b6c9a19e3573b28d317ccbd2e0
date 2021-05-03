@@ -22,6 +22,30 @@
       },
       "revId": "065442eead61f4b6c9a19e3573b28d317ccbd2e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b818a321_6ab9aea3",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2592,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2021-05-03T03:02:20Z",
+      "side": 1,
+      "message": "Yeah given that you are scheduling work at 2593.",
+      "parentUuid": "7fb8ac9d_cff9e58a",
+      "range": {
+        "startLine": 2592,
+        "startChar": 4,
+        "endLine": 2592,
+        "endChar": 33
+      },
+      "revId": "065442eead61f4b6c9a19e3573b28d317ccbd2e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
