@@ -82,6 +82,12 @@ struct mount_info *incfs_alloc_mount_info(struct super_block *sb,
 	}
 	mi->mi_sysfs_node = node;
 
+	mi->mi_log.rl_log_inode = get_log_inode(sb);
+	if (!mi->mi_log.rl_log_inode) {
+		error = -EFSCORRUPTED;
+		goto err;
+	}
+
 	error = incfs_realloc_mount_info(mi, options);
 	if (error)
 		goto err;
@@ -476,11 +482,25 @@ static ssize_t decompress(struct mount_info *mi,
 	}
 }
 
-static void log_read_one_record(struct read_log *rl, struct read_log_state *rs)
+static bool log_read_one_record(struct read_log *rl, struct read_log_state *rs)
 {
-	union log_record *record =
-		(union log_record *)((u8 *)rl->rl_ring_buf + rs->next_offset);
+	union log_record *record;
 	size_t record_size;
+	struct page *page;
+	u8 *addr;
+
+	if (rl->rl_ring_buf) {
+		record = (union log_record *)((u8 *)rl->rl_ring_buf +
+					      rs->next_offset);
+	} else {
+		page = find_lock_page(rl->rl_log_inode->i_mapping,
+				      rs->cache_index);
+		if (!page)
+			return false;
+
+		addr = kmap_atomic(page);
+		record = (union log_record *)(addr + rs->cache_offset);
+	}
 
 	switch (record->full_record.type) {
 	case FULL:
@@ -528,12 +548,26 @@ static void log_read_one_record(struct read_log *rl, struct read_log_state *rs)
 		break;
 	}
 
-	rs->next_offset += record_size;
-	if (rs->next_offset > rl->rl_size - sizeof(*record)) {
-		rs->next_offset = 0;
-		++rs->current_pass_no;
+
+	if (rl->rl_ring_buf) {
+		rs->next_offset += record_size;
+		if (rs->next_offset > rl->rl_size - sizeof(*record)) {
+			rs->next_offset = 0;
+			++rs->current_pass_no;
+		}
+	} else {
+		rs->cache_offset += record_size;
+		if (rs->cache_offset > PAGE_SIZE - sizeof(*record)) {
+			rs->cache_offset = 0;
+			++rs->cache_index;
+		}
+
+		kunmap_atomic(addr);
+		unlock_page(page);
+		put_page(page);
 	}
 	++rs->current_record_no;
+	return true;
 }
 
 static void log_block_read(struct mount_info *mi, incfs_uuid_t *id,
@@ -555,13 +589,13 @@ static void log_block_read(struct mount_info *mi, incfs_uuid_t *id,
 	 * This may read the old value, but it's OK to delay the logging start
 	 * right after the configuration update.
 	 */
-	if (READ_ONCE(log->rl_size) == 0)
+	if (!mi->mi_options.read_log_cache && READ_ONCE(log->rl_size) == 0)
 		return;
 
 	now_us = ktime_to_us(ktime_get());
 
 	spin_lock(&log->rl_lock);
-	if (log->rl_size == 0) {
+	if (!mi->mi_options.read_log_cache && log->rl_size == 0) {
 		spin_unlock(&log->rl_lock);
 		return;
 	}
@@ -635,17 +669,55 @@ static void log_block_read(struct mount_info *mi, incfs_uuid_t *id,
 	head->base_record.block_index = block_index;
 	head->base_record.absolute_ts_us = now_us;
 
-	/* Advance tail beyond area we are going to overwrite */
-	while (tail->current_pass_no < head->current_pass_no &&
-	       tail->next_offset < head->next_offset + record_size)
-		log_read_one_record(log, tail);
+	if (mi->mi_options.read_log_cache) {
+		struct page *page;
 
-	memcpy(((u8 *)log->rl_ring_buf) + head->next_offset, &record,
-	       record_size);
-	head->next_offset += record_size;
-	if (head->next_offset > log->rl_size - sizeof(record)) {
-		head->next_offset = 0;
-		++head->current_pass_no;
+		if (head->cache_offset + sizeof(record) > PAGE_SIZE) {
+			head->cache_index++;
+			head->cache_offset = 0;
+		}
+
+		if (head->cache_offset) {
+			page = find_lock_page(
+					mi->mi_log.rl_log_inode->i_mapping,
+					head->cache_index);
+		} else {
+			record.full_record = (struct full_record){
+				.type = FULL,
+				.block_index = block_index,
+				.file_id = *id,
+				.absolute_ts_us = now_us,
+				.uid = uid,
+			};
+			head->base_record.file_id = *id;
+			record_size = sizeof(struct full_record);
+			page = grab_cache_page(
+					mi->mi_log.rl_log_inode->i_mapping,
+					head->cache_index);
+		}
+
+		if (page) {
+			u8 *addr = kmap_atomic(page);
+
+			memcpy(addr + head->cache_offset, &record, record_size);
+			kunmap_atomic(addr);
+			unlock_page(page);
+			put_page(page);
+		}
+		head->cache_offset += record_size;
+	} else {
+		/* Advance tail beyond area we are going to overwrite */
+		while (tail->current_pass_no < head->current_pass_no &&
+		       tail->next_offset < head->next_offset + record_size)
+			log_read_one_record(log, tail);
+
+		memcpy(((u8 *)log->rl_ring_buf) + head->next_offset, &record,
+		       record_size);
+		head->next_offset += record_size;
+		if (head->next_offset > log->rl_size - sizeof(record)) {
+			head->next_offset = 0;
+			++head->current_pass_no;
+		}
 	}
 	++head->current_record_no;
 
@@ -1830,6 +1902,9 @@ int incfs_collect_logged_reads(struct mount_info *mi,
 	head = &log->rl_head;
 	tail = &log->rl_tail;
 
+	if (mi->mi_options.read_log_cache)
+		spin_unlock(&log->rl_lock);
+
 	if (state->generation_id != head->generation_id) {
 		pr_debug("read ptr is wrong generation: %u/%u",
 			 state->generation_id, head->generation_id);
@@ -1852,7 +1927,20 @@ int incfs_collect_logged_reads(struct mount_info *mi,
 		if (state->current_record_no == head->current_record_no)
 			break;
 
-		log_read_one_record(log, state);
+		if (!log_read_one_record(log, state)) {
+			bool found_one = false;
+
+			while (state->cache_index <= head->cache_index) {
+				state->cache_offset = 0;
+				if (log_read_one_record(log, state)) {
+					found_one = true;
+					break;
+				}
+			}
+
+			if (!found_one)
+				break;
+		}
 
 		if (reads)
 			reads[dst_idx] = (struct incfs_pending_read_info) {
@@ -1874,7 +1962,8 @@ int incfs_collect_logged_reads(struct mount_info *mi,
 			};
 	}
 
-	spin_unlock(&log->rl_lock);
+	if (!mi->mi_options.read_log_cache)
+		spin_unlock(&log->rl_lock);
 	return dst_idx;
 }
 

@@ -89,6 +89,12 @@ struct read_log_state {
 	/* Current number of writer passes over rl_ring_buf */
 	u32 current_pass_no;
 
+	/* In cache mode, index of page to write into. */
+	u32 cache_index;
+
+	/* In cache mode, offset in page */
+	u32 cache_offset;
+
 	/* Current full_record to diff against */
 	struct full_record base_record;
 
@@ -114,11 +120,15 @@ struct read_log {
 
 	/* A work item to wake up those waiters without slowing down readers */
 	struct delayed_work ml_wakeup_work;
+
+	/* The log inode for cache mode */
+	struct inode *rl_log_inode;
 };
 
 struct mount_options {
 	unsigned int read_timeout_ms;
 	unsigned int readahead_pages;
+	bool read_log_cache;
 	unsigned int read_log_pages;
 	unsigned int read_log_wakeup_count;
 	bool report_uid;

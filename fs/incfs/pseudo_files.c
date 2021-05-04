@@ -1065,7 +1065,6 @@ static ssize_t log_read(struct file *f, char __user *buf, size_t len,
 	struct log_file_state *log_state = f->private_data;
 	struct mount_info *mi = get_mount_info(file_superblock(f));
 	int total_reads_collected = 0;
-	int rl_size;
 	ssize_t result = 0;
 	bool report_uid;
 	unsigned long page = 0;
@@ -1083,10 +1082,6 @@ static ssize_t log_read(struct file *f, char __user *buf, size_t len,
 	reads_to_collect = len / record_size;
 	reads_per_page = PAGE_SIZE / record_size;
 
-	rl_size = READ_ONCE(mi->mi_log.rl_size);
-	if (rl_size == 0)
-		return 0;
-
 	page = __get_free_page(GFP_NOFS);
 	if (!page)
 		return -ENOMEM;
@@ -1096,7 +1091,6 @@ static ssize_t log_read(struct file *f, char __user *buf, size_t len,
 	else
 		reads_buf = (struct incfs_pending_read_info *)page;
 
-	reads_to_collect = min_t(ssize_t, rl_size, reads_to_collect);
 	while (reads_to_collect > 0) {
 		struct read_log_state next_state;
 		int reads_collected;
@@ -1385,4 +1379,9 @@ int emit_pseudo_files(struct dir_context *ctx)
 		ctx->pos++;
 	}
 	return 0;
+}
+
+struct inode *get_log_inode(struct super_block *sb)
+{
+	return fetch_inode(sb, INCFS_LOG_INODE);
 }
