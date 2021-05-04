@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "668410c4_50d5c091",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-05-04T09:42:42Z",
+      "side": 1,
+      "message": "This will break the ABI, so CR-2 for now.",
+      "revId": "d9789c6b6e02a93fe836e6c34ff0c33aea53c7b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
