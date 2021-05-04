@@ -16,5 +16,6 @@ extern const unsigned long incfs_pseudo_file_inodes[PSEUDO_FILE_COUNT];
 
 int dir_lookup_pseudo_files(struct super_block *sb, struct dentry *dentry);
 int emit_pseudo_files(struct dir_context *ctx);
+struct inode *get_log_inode(struct super_block *sb);
 
 #endif
