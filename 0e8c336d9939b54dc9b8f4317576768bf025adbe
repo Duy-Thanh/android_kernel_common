@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8c98bd0_d33a63a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-05-04T15:21:47Z",
+      "side": 1,
+      "message": "Hmm, I do not see a symbol list update (as per commit message). Also, this branch is semi-frozen with scheduled ABI breakages scheduled every two weeks. It is too late to put this for this Friday though.\n\nBlocking for now.\n\nTodd, if this is still relevant, the parent change needs to go on the KMI list then.",
+      "revId": "0e8c336d9939b54dc9b8f4317576768bf025adbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
