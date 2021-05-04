@@ -206,7 +206,7 @@ enum parse_parameter {
 static const match_table_t option_tokens = {
 	{ Opt_read_timeout, "read_timeout_ms=%u" },
 	{ Opt_readahead_pages, "readahead=%u" },
-	{ Opt_rlog_pages, "rlog_pages=%u" },
+	{ Opt_rlog_pages, "rlog_pages=%s" },
 	{ Opt_rlog_wakeup_cnt, "rlog_wakeup_cnt=%u" },
 	{ Opt_report_uid, "report_uid" },
 	{ Opt_sysfs_name, "sysfs_name=%s" },
@@ -219,6 +219,7 @@ static void free_options(struct mount_options *opts)
 	opts->sysfs_name = NULL;
 }
 
+#define CACHE "cache"
 static int parse_options(struct mount_options *opts, char *str)
 {
 	substring_t args[MAX_OPT_ARGS];
@@ -260,9 +261,15 @@ static int parse_options(struct mount_options *opts, char *str)
 			opts->readahead_pages = value;
 			break;
 		case Opt_rlog_pages:
-			if (match_int(&args[0], &value))
-				return -EINVAL;
-			opts->read_log_pages = value;
+			if (args[0].to - args[0].from == strlen(CACHE) &&
+			    !strncmp(args[0].from, CACHE, strlen(CACHE))) {
+				opts->read_log_cache = true;
+				opts->read_log_pages = 0;
+			} else {
+				if (match_int(&args[0], &value))
+					return -EINVAL;
+				opts->read_log_pages = value;
+			}
 			break;
 		case Opt_rlog_wakeup_cnt:
 			if (match_int(&args[0], &value))
@@ -1879,6 +1886,15 @@ void incfs_kill_sb(struct super_block *sb)
 	struct mount_info *mi = sb->s_fs_info;
 
 	pr_debug("incfs: unmount\n");
+	if (mi) {
+		if (mi->mi_log.rl_cache_page) {
+			kunmap_atomic(mi->mi_log.rl_cache_address);
+			unlock_page(mi->mi_log.rl_cache_page);
+			put_page(mi->mi_log.rl_cache_page);
+		}
+		iput(mi->mi_log.rl_log_inode);
+	}
+
 	generic_shutdown_super(sb);
 	incfs_free_mount_info(mi);
 }
@@ -1889,11 +1905,13 @@ static int show_options(struct seq_file *m, struct dentry *root)
 
 	seq_printf(m, ",read_timeout_ms=%u", mi->mi_options.read_timeout_ms);
 	seq_printf(m, ",readahead=%u", mi->mi_options.readahead_pages);
-	if (mi->mi_options.read_log_pages != 0) {
+	if (mi->mi_options.read_log_cache)
+		seq_printf(m, ",rlog_pages=" CACHE);
+	if (mi->mi_options.read_log_pages)
 		seq_printf(m, ",rlog_pages=%u", mi->mi_options.read_log_pages);
+	if (mi->mi_options.read_log_cache || mi->mi_options.read_log_pages)
 		seq_printf(m, ",rlog_wakeup_cnt=%u",
 			   mi->mi_options.read_log_wakeup_count);
-	}
 	if (mi->mi_options.report_uid)
 		seq_puts(m, ",report_uid");
 
