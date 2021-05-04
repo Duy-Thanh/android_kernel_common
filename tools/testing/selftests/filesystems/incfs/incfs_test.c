@@ -2166,11 +2166,14 @@ failure:
 }
 
 enum expected_log { FULL_LOG, NO_LOG, PARTIAL_LOG };
+enum report_uid { DONT_REPORT_UID, REPORT_UID };
+enum expect_data {DONT_EXPECT_DATA, EXPECT_DATA };
 
 static int validate_logs(const char *mount_dir, int log_fd,
 			 struct test_file *file,
 			 enum expected_log expected_log,
-			 bool report_uid, bool expect_data)
+			 enum report_uid report_uid,
+			 enum expect_data expect_data)
 {
 	int result = TEST_FAILURE;
 	uint8_t data[INCFS_DATA_FILE_BLOCK_SIZE];
@@ -2201,34 +2204,49 @@ static int validate_logs(const char *mount_dir, int log_fd,
 		/* Skip some blocks to make logs of type SAME_FILE */
 		if (block_index % 10 == 5) {
 			++block_index;
-			--expected_read_count;
+			if (block_index < block_count)
+				--expected_read_count;
 		}
 
-		if (expect_data)
+		switch (expect_data) {
+		case EXPECT_DATA:
 			TESTCOND(result > 0);
+			break;
 
-		if (!expect_data)
+		case DONT_EXPECT_DATA:
 			TESTEQUAL(result, -1);
+			break;
+		}
 	}
 
-	if (report_uid)
+	switch (report_uid) {
+	case REPORT_UID:
 		read_count = wait_for_pending_reads2(log_fd,
 				expected_log == NO_LOG ? 10 : 0,
 				prs2, prs_size);
-	else
+		break;
+
+	case DONT_REPORT_UID:
 		read_count = wait_for_pending_reads(log_fd,
 				expected_log == NO_LOG ? 10 : 0,
 				prs, prs_size);
+		break;
+	}
 
-	if (expected_log == NO_LOG)
+	switch (expected_log) {
+	case NO_LOG:
 		TESTEQUAL(read_count, 0);
+		break;
 
-	if (expected_log == PARTIAL_LOG)
+	case PARTIAL_LOG:
 		TESTCOND(read_count > 0 &&
 			 read_count <= expected_read_count);
+		break;
 
-	if (expected_log == FULL_LOG)
+	case FULL_LOG:
 		TESTEQUAL(read_count, expected_read_count);
+		break;
+	}
 
 	/* If read less than expected, advance block_index appropriately */
 	for (block_index = 0, read_index = 0;
@@ -2237,11 +2255,21 @@ static int validate_logs(const char *mount_dir, int log_fd,
 		if (block_index % 10 == 5)
 			++block_index;
 
+	block_index = 0;
 	for (read_index = 0; read_index < read_count;
 	     block_index++, read_index++) {
-		struct incfs_pending_read_info *record = report_uid ?
-			(struct incfs_pending_read_info *) &prs2[read_index] :
-			&prs[read_index];
+		struct incfs_pending_read_info *record;
+
+		switch (report_uid) {
+		case REPORT_UID:
+			record = (struct incfs_pending_read_info *)
+							&prs2[read_index];
+			break;
+
+		case DONT_REPORT_UID:
+			record = &prs[read_index];
+			break;
+		}
 
 		TESTCOND(same_id(&record->file_id, &file->id));
 		TESTEQUAL(record->block_index, block_index);
@@ -2290,7 +2318,7 @@ static int read_log_test(const char *mount_dir)
 	TEST(log_fd = open_log_file(mount_dir), log_fd != -1);
 	for (i = 0; i < file_num; i++)
 		TESTEQUAL(validate_logs(mount_dir, log_fd, &test.files[i],
-					FULL_LOG, true, false), 0);
+			FULL_LOG, REPORT_UID, DONT_EXPECT_DATA), 0);
 
 	/* Unmount and mount again without report_uid */
 	close(log_fd);
@@ -2302,7 +2330,7 @@ static int read_log_test(const char *mount_dir)
 	TEST(log_fd = open_log_file(mount_dir), log_fd != -1);
 	for (i = 0; i < file_num; i++)
 		TESTEQUAL(validate_logs(mount_dir, log_fd, &test.files[i],
-					FULL_LOG, false, false), 0);
+			FULL_LOG, DONT_REPORT_UID, DONT_EXPECT_DATA), 0);
 
 	/* No read log to make sure poll doesn't crash */
 	close(log_fd);
@@ -2315,7 +2343,7 @@ static int read_log_test(const char *mount_dir)
 	TEST(log_fd = open_log_file(mount_dir), log_fd != -1);
 	for (i = 0; i < file_num; i++)
 		TESTEQUAL(validate_logs(mount_dir, log_fd, &test.files[i],
-					NO_LOG, false, false), 0);
+			NO_LOG, DONT_REPORT_UID, DONT_EXPECT_DATA), 0);
 
 	/* Remount and check that logs start working again */
 	TESTEQUAL(mount_fs_opt(mount_dir, backing_dir,
@@ -2323,7 +2351,7 @@ static int read_log_test(const char *mount_dir)
 			       true), 0);
 	for (i = 0; i < file_num; i++)
 		TESTEQUAL(validate_logs(mount_dir, log_fd, &test.files[i],
-					PARTIAL_LOG, false, false), 0);
+			PARTIAL_LOG, DONT_REPORT_UID, DONT_EXPECT_DATA), 0);
 
 	/* Remount and check that logs continue working */
 	TESTEQUAL(mount_fs_opt(mount_dir, backing_dir,
@@ -2331,13 +2359,13 @@ static int read_log_test(const char *mount_dir)
 			       true), 0);
 	for (i = 0; i < file_num; i++)
 		TESTEQUAL(validate_logs(mount_dir, log_fd, &test.files[i],
-					FULL_LOG, false, false), 0);
+			FULL_LOG, DONT_REPORT_UID, DONT_EXPECT_DATA), 0);
 
 	/* Check logs work with data */
 	for (i = 0; i < file_num; i++) {
 		TESTEQUAL(emit_test_file_data(mount_dir, &test.files[i]), 0);
 		TESTEQUAL(validate_logs(mount_dir, log_fd, &test.files[i],
-					FULL_LOG, false, true), 0);
+			FULL_LOG, DONT_REPORT_UID, EXPECT_DATA), 0);
 	}
 
 	/* Final unmount */
@@ -4609,6 +4637,43 @@ out:
 	return result;
 }
 
+static int read_log_cache_test(const char *mount_dir)
+{
+	int result = TEST_FAILURE;
+	struct test_files_set test = get_test_files_set();
+	const int file_num = test.files_count;
+	int i = 0;
+	int cmd_fd = -1, log_fd = -1;
+	char *backing_dir = NULL;
+
+	/* Create files */
+	TEST(backing_dir = create_backing_dir(mount_dir), backing_dir);
+	TESTEQUAL(mount_fs_opt(mount_dir, backing_dir,
+			       "readahead=0,rlog_pages=cache,read_timeout_ms=0",
+				 false), 0);
+	TEST(cmd_fd = open_commands_file(mount_dir), cmd_fd != -1);
+	for (i = 0; i < file_num; i++) {
+		struct test_file *file = &test.files[i];
+
+		TESTEQUAL(emit_file(cmd_fd, NULL, file->name, &file->id,
+				    file->size, NULL), 0);
+	}
+
+	/* Validate logs */
+	TEST(log_fd = open_log_file(mount_dir), log_fd != -1);
+	for (i = 0; i < file_num; i++)
+		TESTEQUAL(validate_logs(mount_dir, log_fd, &test.files[i],
+			FULL_LOG, DONT_REPORT_UID, DONT_EXPECT_DATA), 0);
+
+	result = TEST_SUCCESS;
+out:
+	close(cmd_fd);
+	close(log_fd);
+	free(backing_dir);
+	umount(mount_dir);
+	return result;
+}
+
 static char *setup_mount_dir()
 {
 	struct stat st;
@@ -4730,6 +4795,7 @@ int main(int argc, char *argv[])
 		MAKE_TEST(stat_test),
 		MAKE_TEST(sysfs_test),
 		MAKE_TEST(sysfs_rename_test),
+		MAKE_TEST(read_log_cache_test),
 	};
 #undef MAKE_TEST
 

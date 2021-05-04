@@ -83,11 +83,26 @@ struct read_log_state {
 	/* Log buffer generation id, incremented on configuration changes */
 	u32 generation_id;
 
-	/* Offset in rl_ring_buf to write into. */
-	u32 next_offset;
+	/* Is this state for a ring or a cache buffer */
+	enum {RL_RING = 0, RL_CACHE} mode;
 
-	/* Current number of writer passes over rl_ring_buf */
-	u32 current_pass_no;
+	union {
+		struct {
+			/* Offset in rl_ring_buf to write into. */
+			u32 next_offset;
+
+			/* Current number of writer passes over rl_ring_buf */
+			u32 current_pass_no;
+		};
+
+		struct {
+			/* In cache mode, index of page to write into. */
+			u32 cache_index;
+
+			/* In cache mode, offset in page */
+			u32 cache_offset;
+		};
+	};
 
 	/* Current full_record to diff against */
 	struct full_record base_record;
@@ -114,11 +129,21 @@ struct read_log {
 
 	/* A work item to wake up those waiters without slowing down readers */
 	struct delayed_work ml_wakeup_work;
+
+	/* The log inode for cache mode */
+	struct inode *rl_log_inode;
+
+	/* The current locked, mapped cache page for logging */
+	struct page *rl_cache_page;
+
+	/* The address of that page */
+	u8 *rl_cache_address;
 };
 
 struct mount_options {
 	unsigned int read_timeout_ms;
 	unsigned int readahead_pages;
+	bool read_log_cache;
 	unsigned int read_log_pages;
 	unsigned int read_log_wakeup_count;
 	bool report_uid;
