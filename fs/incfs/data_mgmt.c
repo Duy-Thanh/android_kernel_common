@@ -82,6 +82,12 @@ struct mount_info *incfs_alloc_mount_info(struct super_block *sb,
 	}
 	mi->mi_sysfs_node = node;
 
+	mi->mi_log.rl_log_inode = get_log_inode(sb);
+	if (!mi->mi_log.rl_log_inode) {
+		error = -EFSCORRUPTED;
+		goto err;
+	}
+
 	error = incfs_realloc_mount_info(mi, options);
 	if (error)
 		goto err;
@@ -100,7 +106,8 @@ int incfs_realloc_mount_info(struct mount_info *mi,
 	void *old_buffer;
 	size_t new_buffer_size = 0;
 
-	if (options->read_log_pages != mi->mi_options.read_log_pages) {
+	if (options->read_log_pages != mi->mi_options.read_log_pages ||
+	    options->read_log_cache != mi->mi_options.read_log_cache) {
 		struct read_log_state log_state;
 		/*
 		 * Even though having two buffers allocated at once isn't
@@ -122,6 +129,7 @@ int incfs_realloc_mount_info(struct mount_info *mi,
 		mi->mi_log.rl_size = new_buffer_size;
 		log_state = (struct read_log_state){
 			.generation_id = mi->mi_log.rl_head.generation_id + 1,
+			.mode = options->read_log_cache ? RL_CACHE : RL_RING,
 		};
 		mi->mi_log.rl_head = log_state;
 		mi->mi_log.rl_tail = log_state;
@@ -154,6 +162,7 @@ int incfs_realloc_mount_info(struct mount_info *mi,
 void incfs_free_mount_info(struct mount_info *mi)
 {
 	int i;
+
 	if (!mi)
 		return;
 
@@ -484,17 +493,13 @@ static ssize_t decompress(struct mount_info *mi,
 	}
 }
 
-static void log_read_one_record(struct read_log *rl, struct read_log_state *rs)
+static size_t log_unpack_one_record(union log_record *record,
+				    struct read_log_state *rs)
 {
-	union log_record *record =
-		(union log_record *)((u8 *)rl->rl_ring_buf + rs->next_offset);
-	size_t record_size;
-
 	switch (record->full_record.type) {
 	case FULL:
 		rs->base_record = record->full_record;
-		record_size = sizeof(record->full_record);
-		break;
+		return sizeof(record->full_record);
 
 	case SAME_FILE:
 		rs->base_record.block_index =
@@ -502,56 +507,94 @@ static void log_read_one_record(struct read_log *rl, struct read_log_state *rs)
 		rs->base_record.absolute_ts_us +=
 			record->same_file.relative_ts_us;
 		rs->base_record.uid = record->same_file.uid;
-		record_size = sizeof(record->same_file);
-		break;
+		return sizeof(record->same_file);
 
 	case SAME_FILE_CLOSE_BLOCK:
 		rs->base_record.block_index +=
 			record->same_file_close_block.block_index_delta;
 		rs->base_record.absolute_ts_us +=
 			record->same_file_close_block.relative_ts_us;
-		record_size = sizeof(record->same_file_close_block);
-		break;
+		return sizeof(record->same_file_close_block);
 
 	case SAME_FILE_CLOSE_BLOCK_SHORT:
 		rs->base_record.block_index +=
 			record->same_file_close_block_short.block_index_delta;
 		rs->base_record.absolute_ts_us +=
 		   record->same_file_close_block_short.relative_ts_tens_us * 10;
-		record_size = sizeof(record->same_file_close_block_short);
-		break;
+		return sizeof(record->same_file_close_block_short);
 
 	case SAME_FILE_NEXT_BLOCK:
 		++rs->base_record.block_index;
 		rs->base_record.absolute_ts_us +=
 			record->same_file_next_block.relative_ts_us;
-		record_size = sizeof(record->same_file_next_block);
-		break;
+		return sizeof(record->same_file_next_block);
 
 	case SAME_FILE_NEXT_BLOCK_SHORT:
 		++rs->base_record.block_index;
 		rs->base_record.absolute_ts_us +=
 		    record->same_file_next_block_short.relative_ts_tens_us * 10;
-		record_size = sizeof(record->same_file_next_block_short);
-		break;
-	}
+		return sizeof(record->same_file_next_block_short);
 
-	rs->next_offset += record_size;
-	if (rs->next_offset > rl->rl_size - sizeof(*record)) {
-		rs->next_offset = 0;
-		++rs->current_pass_no;
+	default:
+		pr_err("incfs: bad record type");
+		return 0;
 	}
-	++rs->current_record_no;
 }
 
-static void log_block_read(struct mount_info *mi, incfs_uuid_t *id,
-			   int block_index)
+static bool log_read_one_record(struct read_log *rl, struct read_log_state *rs)
 {
-	struct read_log *log = &mi->mi_log;
-	struct read_log_state *head, *tail;
+	union log_record *record;
+
+	if (rs->mode == RL_RING) {
+		record = (union log_record *)((u8 *)rl->rl_ring_buf +
+					      rs->next_offset);
+		rs->next_offset += log_unpack_one_record(record, rs);
+		++rs->current_record_no;
+		if (rs->next_offset > rl->rl_size - sizeof(*record)) {
+			rs->next_offset = 0;
+			++rs->current_pass_no;
+		}
+	} else { /* RL_CACHE */
+		struct page *page = NULL;
+		u8 *addr;
+
+		spin_lock(&rl->rl_lock);
+		if (rs->cache_index == rl->rl_head.cache_index)
+			addr = rl->rl_cache_address;
+		else {
+			spin_unlock(&rl->rl_lock);
+			page = find_lock_page(rl->rl_log_inode->i_mapping,
+				      rs->cache_index);
+			if (!page)
+				return false;
+
+			addr = kmap_atomic(page);
+			spin_lock(&rl->rl_lock);
+		}
+		record = (union log_record *)(addr + rs->cache_offset);
+		rs->cache_offset += log_unpack_one_record(record, rs);
+		if (rs->cache_offset > PAGE_SIZE - sizeof(*record)) {
+			rs->cache_offset = 0;
+			++rs->cache_index;
+		}
+		++rs->current_record_no;
+		spin_unlock(&rl->rl_lock);
+
+		if (page) {
+			kunmap_atomic(addr);
+			unlock_page(page);
+			put_page(page);
+		}
+	}
+
+	return true;
+}
+
+static size_t log_get_delta(struct read_log_state *head, incfs_uuid_t *id,
+			    int block_index, union log_record *record)
+{
 	s64 now_us;
 	s64 relative_us;
-	union log_record record;
 	size_t record_size;
 	uid_t uid = current_uid().val;
 	int block_delta;
@@ -559,23 +602,7 @@ static void log_block_read(struct mount_info *mi, incfs_uuid_t *id,
 	bool next_block, close_block, very_close_block;
 	bool close_time, very_close_time, very_very_close_time;
 
-	/*
-	 * This may read the old value, but it's OK to delay the logging start
-	 * right after the configuration update.
-	 */
-	if (READ_ONCE(log->rl_size) == 0)
-		return;
-
 	now_us = ktime_to_us(ktime_get());
-
-	spin_lock(&log->rl_lock);
-	if (log->rl_size == 0) {
-		spin_unlock(&log->rl_lock);
-		return;
-	}
-
-	head = &log->rl_head;
-	tail = &log->rl_tail;
 	relative_us = now_us - head->base_record.absolute_ts_us;
 
 	same_file = !memcmp(id, &head->base_record.file_id,
@@ -592,21 +619,21 @@ static void log_block_read(struct mount_info *mi, incfs_uuid_t *id,
 	close_time = relative_us < (1 << 16);
 
 	if (same_file && same_uid && next_block && very_very_close_time) {
-		record.same_file_next_block_short =
+		record->same_file_next_block_short =
 			(struct same_file_next_block_short){
 				.type = SAME_FILE_NEXT_BLOCK_SHORT,
 				.relative_ts_tens_us = div_s64(relative_us, 10),
 			};
 		record_size = sizeof(struct same_file_next_block_short);
 	} else if (same_file && same_uid && next_block && very_close_time) {
-		record.same_file_next_block = (struct same_file_next_block){
+		record->same_file_next_block = (struct same_file_next_block){
 			.type = SAME_FILE_NEXT_BLOCK,
 			.relative_ts_us = relative_us,
 		};
 		record_size = sizeof(struct same_file_next_block);
 	} else if (same_file && same_uid && very_close_block &&
 		   very_very_close_time) {
-		record.same_file_close_block_short =
+		record->same_file_close_block_short =
 			(struct same_file_close_block_short){
 				.type = SAME_FILE_CLOSE_BLOCK_SHORT,
 				.relative_ts_tens_us = div_s64(relative_us, 10),
@@ -614,14 +641,14 @@ static void log_block_read(struct mount_info *mi, incfs_uuid_t *id,
 			};
 		record_size = sizeof(struct same_file_close_block_short);
 	} else if (same_file && same_uid && close_block && very_close_time) {
-		record.same_file_close_block = (struct same_file_close_block){
+		record->same_file_close_block = (struct same_file_close_block){
 				.type = SAME_FILE_CLOSE_BLOCK,
 				.relative_ts_us = relative_us,
 				.block_index_delta = block_delta,
 			};
 		record_size = sizeof(struct same_file_close_block);
 	} else if (same_file && close_time) {
-		record.same_file = (struct same_file){
+		record->same_file = (struct same_file){
 			.type = SAME_FILE,
 			.block_index = block_index,
 			.relative_ts_us = relative_us,
@@ -629,7 +656,7 @@ static void log_block_read(struct mount_info *mi, incfs_uuid_t *id,
 		};
 		record_size = sizeof(struct same_file);
 	} else {
-		record.full_record = (struct full_record){
+		record->full_record = (struct full_record){
 			.type = FULL,
 			.block_index = block_index,
 			.file_id = *id,
@@ -643,21 +670,121 @@ static void log_block_read(struct mount_info *mi, incfs_uuid_t *id,
 	head->base_record.block_index = block_index;
 	head->base_record.absolute_ts_us = now_us;
 
-	/* Advance tail beyond area we are going to overwrite */
-	while (tail->current_pass_no < head->current_pass_no &&
-	       tail->next_offset < head->next_offset + record_size)
-		log_read_one_record(log, tail);
+	return record_size;
+}
 
-	memcpy(((u8 *)log->rl_ring_buf) + head->next_offset, &record,
-	       record_size);
-	head->next_offset += record_size;
-	if (head->next_offset > log->rl_size - sizeof(record)) {
-		head->next_offset = 0;
-		++head->current_pass_no;
+static void log_block_read(struct mount_info *mi, incfs_uuid_t *id,
+			   int block_index)
+{
+	struct read_log *log = &mi->mi_log;
+	union log_record record;
+	size_t record_size;
+
+	/*
+	 * This may read the old value, but it's OK to delay the logging start
+	 * right after the configuration update.
+	 */
+	if (READ_ONCE(log->rl_head.mode) == RL_RING &&
+	    READ_ONCE(log->rl_size) == 0)
+		return;
+
+	spin_lock(&log->rl_lock);
+	if (log->rl_head.mode == RL_RING && log->rl_size == 0) {
+		spin_unlock(&log->rl_lock);
+		return;
 	}
-	++head->current_record_no;
 
-	spin_unlock(&log->rl_lock);
+	if (log->rl_head.mode == RL_CACHE) {
+		struct read_log_state *head;
+		struct page *page = NULL;
+		u8 *addr = NULL;
+
+		do {
+			struct read_log_state head;
+
+			if (log->rl_head.cache_offset)
+				break;
+
+			memcpy(&head, &log->rl_head, sizeof(head));
+			spin_unlock(&log->rl_lock);
+			page = find_or_create_page(log->rl_log_inode->i_mapping,
+					       head.cache_index, GFP_NOFS);
+			if (page)
+				addr = kmap_atomic(page);
+
+			spin_lock(&log->rl_lock);
+			if (memcmp(&head, &log->rl_head, sizeof(head))) {
+				if (page) {
+					spin_unlock(&log->rl_lock);
+					kunmap_atomic(addr);
+					unlock_page(page);
+					put_page(page);
+					spin_lock(&log->rl_lock);
+				}
+				continue;
+			}
+
+			swap(log->rl_cache_page, page);
+			swap(log->rl_cache_address, addr);
+
+		} while (false);
+
+		head = &log->rl_head;
+		if (head->cache_offset)
+			record_size = log_get_delta(head, id, block_index,
+						    &record);
+		else {
+			record.full_record = (struct full_record){
+				.type = FULL,
+				.block_index = block_index,
+				.file_id = *id,
+				.absolute_ts_us = ktime_to_us(ktime_get()),
+				.uid = current_uid().val,
+			};
+			head->base_record = record.full_record;
+			record_size = sizeof(struct full_record);
+		}
+
+		if (log->rl_cache_address)
+			memcpy(log->rl_cache_address + head->cache_offset,
+			       &record, record_size);
+		head->cache_offset += record_size;
+		if (head->cache_offset + sizeof(record) > PAGE_SIZE) {
+			head->cache_index++;
+			head->cache_offset = 0;
+		}
+
+		++head->current_record_no;
+		spin_unlock(&log->rl_lock);
+
+		if (page) {
+			kunmap_atomic(addr);
+			unlock_page(page);
+			put_page(page);
+		}
+
+	} else { /* RL_RING */
+		struct read_log_state *head = &log->rl_head;
+		struct read_log_state *tail = &log->rl_tail;
+
+		record_size = log_get_delta(head, id, block_index, &record);
+
+		/* Advance tail beyond area we are going to overwrite */
+		while (tail->current_pass_no < head->current_pass_no &&
+		       tail->next_offset < head->next_offset + record_size)
+			log_read_one_record(log, tail);
+
+		memcpy(((u8 *)log->rl_ring_buf) + head->next_offset, &record,
+		       record_size);
+		head->next_offset += record_size;
+		if (head->next_offset > log->rl_size - sizeof(record)) {
+			head->next_offset = 0;
+			++head->current_pass_no;
+		}
+		++head->current_record_no;
+
+		spin_unlock(&log->rl_lock);
+	}
 	schedule_delayed_work(&log->ml_wakeup_work, msecs_to_jiffies(16));
 }
 
@@ -1821,19 +1948,16 @@ int incfs_get_uncollected_logs_count(struct mount_info *mi,
 		return head_no - max_t(u64, tail_no, state->current_record_no);
 }
 
-int incfs_collect_logged_reads(struct mount_info *mi,
-			       struct read_log_state *state,
-			       struct incfs_pending_read_info *reads,
-			       struct incfs_pending_read_info2 *reads2,
-			       int reads_size)
+static int incfs_collect_logged_reads_maybe_locked(
+			struct read_log *log,
+			struct read_log_state *state,
+			struct read_log_state *head,
+			struct read_log_state *tail,
+			struct incfs_pending_read_info *reads,
+			struct incfs_pending_read_info2 *reads2,
+			int reads_size)
 {
 	int dst_idx;
-	struct read_log *log = &mi->mi_log;
-	struct read_log_state *head, *tail;
-
-	spin_lock(&log->rl_lock);
-	head = &log->rl_head;
-	tail = &log->rl_tail;
 
 	if (state->generation_id != head->generation_id) {
 		pr_debug("read ptr is wrong generation: %u/%u",
@@ -1841,6 +1965,7 @@ int incfs_collect_logged_reads(struct mount_info *mi,
 
 		*state = (struct read_log_state){
 			.generation_id = head->generation_id,
+			.mode = head->mode,
 		};
 	}
 
@@ -1857,7 +1982,20 @@ int incfs_collect_logged_reads(struct mount_info *mi,
 		if (state->current_record_no == head->current_record_no)
 			break;
 
-		log_read_one_record(log, state);
+		if (!log_read_one_record(log, state)) {
+			bool found_one = false;
+
+			while (state->cache_index <= head->cache_index) {
+				state->cache_offset = 0;
+				if (log_read_one_record(log, state)) {
+					found_one = true;
+					break;
+				}
+			}
+
+			if (!found_one)
+				break;
+		}
 
 		if (reads)
 			reads[dst_idx] = (struct incfs_pending_read_info) {
@@ -1879,7 +2017,33 @@ int incfs_collect_logged_reads(struct mount_info *mi,
 			};
 	}
 
-	spin_unlock(&log->rl_lock);
+	return dst_idx;
+}
+
+int incfs_collect_logged_reads(struct mount_info *mi,
+			       struct read_log_state *state,
+			       struct incfs_pending_read_info *reads,
+			       struct incfs_pending_read_info2 *reads2,
+			       int reads_size)
+{
+	int dst_idx;
+	struct read_log *log = &mi->mi_log;
+	struct read_log_state *head, *tail;
+
+	spin_lock(&log->rl_lock);
+	head = &log->rl_head;
+	tail = &log->rl_tail;
+	if (mi->mi_options.read_log_cache) {
+		spin_unlock(&log->rl_lock);
+
+		dst_idx = incfs_collect_logged_reads_maybe_locked(
+			log, state, head, tail,	reads, reads2, reads_size);
+	} else {
+		dst_idx = incfs_collect_logged_reads_maybe_locked(
+			log, state, head, tail,	reads, reads2, reads_size);
+
+		spin_unlock(&log->rl_lock);
+	}
 	return dst_idx;
 }
 
