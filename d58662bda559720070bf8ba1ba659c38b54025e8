@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6cbfebd_36765f4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-05-05T12:29:50Z",
+      "side": 1,
+      "message": "Only ABI tests are failing, this should be good to go with the next KMI update.",
+      "revId": "d58662bda559720070bf8ba1ba659c38b54025e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
