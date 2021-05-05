@@ -711,16 +711,6 @@ struct address_space *page_mapping(struct page *page)
 }
 EXPORT_SYMBOL(page_mapping);
 
-/*
- * For file cache pages, return the address_space, otherwise return NULL
- */
-struct address_space *page_mapping_file(struct page *page)
-{
-	if (unlikely(PageSwapCache(page)))
-		return NULL;
-	return page_mapping(page);
-}
-
 /* Slow path of page_mapcount() for compound pages */
 int __page_mapcount(struct page *page)
 {
@@ -983,6 +973,7 @@ int __weak memcmp_pages(struct page *page1, struct page *page2)
 	return ret;
 }
 
+#ifdef CONFIG_PRINTK
 /**
  * mem_dump_obj - Print available provenance information
  * @object: object for which to find provenance information.
@@ -1013,3 +1004,5 @@ void mem_dump_obj(void *object)
 	}
 	pr_cont(" non-slab/vmalloc memory.\n");
 }
+EXPORT_SYMBOL_GPL(mem_dump_obj);
+#endif
