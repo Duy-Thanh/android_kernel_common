@@ -65,8 +65,8 @@
       <elf-symbol name='__devm_regmap_init_spi' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb6a3babc'/>
       <elf-symbol name='__devm_request_region' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5e9fa48b'/>
       <elf-symbol name='__devm_reset_control_get' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6346e706'/>
-      <elf-symbol name='__devm_spi_alloc_controller' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x13032747'/>
-      <elf-symbol name='__dma_request_channel' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5938f71e'/>
+      <elf-symbol name='__devm_spi_alloc_controller' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x139be01d'/>
+      <elf-symbol name='__dma_request_channel' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd9e2e632'/>
       <elf-symbol name='__do_once_done' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4198ca95'/>
       <elf-symbol name='__do_once_start' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x18e60984'/>
       <elf-symbol name='__drm_atomic_helper_connector_destroy_state' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc1651bd1'/>
@@ -199,8 +199,8 @@
       <elf-symbol name='__skb_get_hash' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6428529b'/>
       <elf-symbol name='__skb_gso_segment' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb454e67d'/>
       <elf-symbol name='__skb_pad' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc1c63b4e'/>
-      <elf-symbol name='__spi_alloc_controller' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfa18e24f'/>
-      <elf-symbol name='__spi_register_driver' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfdb727f'/>
+      <elf-symbol name='__spi_alloc_controller' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x77ffb28f'/>
+      <elf-symbol name='__spi_register_driver' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf332ade3'/>
       <elf-symbol name='__splice_from_pipe' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xac15031d'/>
       <elf-symbol name='__spmi_driver_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3f00e57e'/>
       <elf-symbol name='__srcu_read_lock' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x94efa0a5'/>
@@ -1134,10 +1134,10 @@
       <elf-symbol name='devm_reset_controller_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x14f7580'/>
       <elf-symbol name='devm_rtc_allocate_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5a641f1f'/>
       <elf-symbol name='devm_rtc_device_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4eb40dee'/>
-      <elf-symbol name='devm_snd_dmaengine_pcm_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe0cbaf55'/>
+      <elf-symbol name='devm_snd_dmaengine_pcm_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfce63ac4'/>
       <elf-symbol name='devm_snd_soc_register_card' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x114a5956'/>
       <elf-symbol name='devm_snd_soc_register_component' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x72b0c7ce'/>
-      <elf-symbol name='devm_spi_register_controller' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4728a624'/>
+      <elf-symbol name='devm_spi_register_controller' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb681afe9'/>
       <elf-symbol name='devm_thermal_of_cooling_device_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf59ef621'/>
       <elf-symbol name='devm_thermal_zone_of_sensor_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x41a16a6b'/>
       <elf-symbol name='devm_thermal_zone_of_sensor_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc84315c3'/>
@@ -1159,9 +1159,9 @@
       <elf-symbol name='divider_ro_round_rate_parent' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdd8d333a'/>
       <elf-symbol name='divider_round_rate_parent' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5874ae05'/>
       <elf-symbol name='dma_alloc_attrs' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x925d4c2b'/>
-      <elf-symbol name='dma_async_device_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x99ef44d5'/>
-      <elf-symbol name='dma_async_device_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd65c31c3'/>
-      <elf-symbol name='dma_async_tx_descriptor_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x86fe566b'/>
+      <elf-symbol name='dma_async_device_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5161aaf8'/>
+      <elf-symbol name='dma_async_device_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7a02d757'/>
+      <elf-symbol name='dma_async_tx_descriptor_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc2de453b'/>
       <elf-symbol name='dma_buf_attach' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa264bf7f'/>
       <elf-symbol name='dma_buf_begin_cpu_access' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5ab38691'/>
       <elf-symbol name='dma_buf_begin_cpu_access_partial' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf8397f88'/>
@@ -1202,8 +1202,8 @@
       <elf-symbol name='dma_get_merge_boundary' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x75c62c08'/>
       <elf-symbol name='dma_get_required_mask' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc4301a5e'/>
       <elf-symbol name='dma_get_sgtable_attrs' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x680e5e96'/>
-      <elf-symbol name='dma_get_slave_caps' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xadcd84bc'/>
-      <elf-symbol name='dma_get_slave_channel' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2ffac801'/>
+      <elf-symbol name='dma_get_slave_caps' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2bd696ec'/>
+      <elf-symbol name='dma_get_slave_channel' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcd5431be'/>
       <elf-symbol name='dma_heap_add' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3a15fe99'/>
       <elf-symbol name='dma_heap_buffer_alloc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x17119a18'/>
       <elf-symbol name='dma_heap_buffer_free' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcba48363'/>
@@ -1221,8 +1221,8 @@
       <elf-symbol name='dma_pool_create' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x92e8acb6'/>
       <elf-symbol name='dma_pool_destroy' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb5aa7165'/>
       <elf-symbol name='dma_pool_free' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2f7754a8'/>
-      <elf-symbol name='dma_release_channel' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x299bf71d'/>
-      <elf-symbol name='dma_request_chan' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9782af66'/>
+      <elf-symbol name='dma_release_channel' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd84b5f1d'/>
+      <elf-symbol name='dma_request_chan' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x18b0f046'/>
       <elf-symbol name='dma_resv_add_excl_fence' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbe6b4293'/>
       <elf-symbol name='dma_resv_add_shared_fence' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x57711a42'/>
       <elf-symbol name='dma_resv_fini' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x33a63266'/>
@@ -2574,7 +2574,7 @@
       <elf-symbol name='of_device_uevent_modalias' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4ec5989c'/>
       <elf-symbol name='of_dma_configure_id' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7281212a'/>
       <elf-symbol name='of_dma_controller_free' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x40ab3646'/>
-      <elf-symbol name='of_dma_controller_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x526d29cc'/>
+      <elf-symbol name='of_dma_controller_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x769ba728'/>
       <elf-symbol name='of_dma_is_coherent' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x19078537'/>
       <elf-symbol name='of_drm_find_bridge' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf85f2937'/>
       <elf-symbol name='of_drm_find_panel' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x518bfd57'/>
@@ -3563,19 +3563,19 @@
       <elf-symbol name='sock_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x62737e1d'/>
       <elf-symbol name='sock_wfree' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb7959f80'/>
       <elf-symbol name='sort' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb7c0f443'/>
-      <elf-symbol name='spi_bus_lock' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x681b9c57'/>
-      <elf-symbol name='spi_bus_unlock' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5cd5c08f'/>
-      <elf-symbol name='spi_controller_resume' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x55524562'/>
-      <elf-symbol name='spi_controller_suspend' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x11833194'/>
+      <elf-symbol name='spi_bus_lock' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdd5474ba'/>
+      <elf-symbol name='spi_bus_unlock' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8431006b'/>
+      <elf-symbol name='spi_controller_resume' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1ce73f24'/>
+      <elf-symbol name='spi_controller_suspend' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xeb1bc79'/>
       <elf-symbol name='spi_delay_exec' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x802d067d'/>
-      <elf-symbol name='spi_finalize_current_message' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x66647d01'/>
-      <elf-symbol name='spi_finalize_current_transfer' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdb8b5a23'/>
-      <elf-symbol name='spi_get_next_queued_message' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcc297502'/>
-      <elf-symbol name='spi_register_controller' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf9224be6'/>
-      <elf-symbol name='spi_setup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x657e3497'/>
-      <elf-symbol name='spi_sync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa1083c9d'/>
-      <elf-symbol name='spi_sync_locked' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x22e77af'/>
-      <elf-symbol name='spi_unregister_controller' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x48d121bc'/>
+      <elf-symbol name='spi_finalize_current_message' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4865a937'/>
+      <elf-symbol name='spi_finalize_current_transfer' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3040b0f1'/>
+      <elf-symbol name='spi_get_next_queued_message' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6a2c23a8'/>
+      <elf-symbol name='spi_register_controller' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xafa82ce6'/>
+      <elf-symbol name='spi_setup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x70ad90c5'/>
+      <elf-symbol name='spi_sync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xda9d08ad'/>
+      <elf-symbol name='spi_sync_locked' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe258743e'/>
+      <elf-symbol name='spi_unregister_controller' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcbfecc2'/>
       <elf-symbol name='split_page' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x29de921b'/>
       <elf-symbol name='spmi_controller_add' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3addacee'/>
       <elf-symbol name='spmi_controller_alloc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x72d75a08'/>
@@ -4123,11 +4123,11 @@
       <elf-symbol name='vb2_streamoff' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe9316499'/>
       <elf-symbol name='vb2_streamon' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc1792527'/>
       <elf-symbol name='vb2_wait_for_all_buffers' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x19803ebe'/>
-      <elf-symbol name='vchan_dma_desc_free_list' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xac828764'/>
-      <elf-symbol name='vchan_find_desc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa81e7c54'/>
-      <elf-symbol name='vchan_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x385be561'/>
-      <elf-symbol name='vchan_tx_desc_free' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8964219a'/>
-      <elf-symbol name='vchan_tx_submit' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1e3704ab'/>
+      <elf-symbol name='vchan_dma_desc_free_list' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3af3fbe3'/>
+      <elf-symbol name='vchan_find_desc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xab348e14'/>
+      <elf-symbol name='vchan_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc5af1adf'/>
+      <elf-symbol name='vchan_tx_desc_free' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf44def74'/>
+      <elf-symbol name='vchan_tx_submit' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe2ac4cd4'/>
       <elf-symbol name='vfree' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x999e8297'/>
       <elf-symbol name='vfs_fallocate' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb025e67d'/>
       <elf-symbol name='vfs_fsync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xedc93763'/>
@@ -58091,7 +58091,7 @@
         <enumerator name='DMA_RESIDUE_GRANULARITY_SEGMENT' value='1'/>
         <enumerator name='DMA_RESIDUE_GRANULARITY_BURST' value='2'/>
       </enum-decl>
-      <class-decl name='dma_async_tx_descriptor' size-in-bits='704' is-struct='yes' visibility='default' filepath='include/linux/dmaengine.h' line='603' column='1' id='b50ce591'>
+      <class-decl name='dma_async_tx_descriptor' size-in-bits='896' is-struct='yes' visibility='default' filepath='include/linux/dmaengine.h' line='603' column='1' id='b50ce591'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='cookie' type-id='6478ea0a' visibility='default' filepath='include/linux/dmaengine.h' line='604' column='1'/>
         </data-member>
@@ -58127,6 +58127,15 @@
         </data-member>
         <data-member access='public' layout-offset-in-bits='640'>
           <var-decl name='metadata_ops' type-id='924ae97c' visibility='default' filepath='include/linux/dmaengine.h' line='615' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='704'>
+          <var-decl name='next' type-id='0e3f80d9' visibility='default' filepath='include/linux/dmaengine.h' line='617' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='768'>
+          <var-decl name='parent' type-id='0e3f80d9' visibility='default' filepath='include/linux/dmaengine.h' line='618' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='832'>
+          <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='include/linux/dmaengine.h' line='619' column='1'/>
         </data-member>
       </class-decl>
       <typedef-decl name='dma_cookie_t' type-id='a7832498' filepath='include/linux/dmaengine.h' line='22' column='1' id='6478ea0a'/>
@@ -58733,14 +58742,14 @@
           <var-decl name='cyclic' type-id='5264cf1d' visibility='default' filepath='drivers/dma/virt-dma.h' line='36' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='virt_dma_desc' size-in-bits='896' is-struct='yes' visibility='default' filepath='drivers/dma/virt-dma.h' line='15' column='1' id='a8adbe3d'>
+      <class-decl name='virt_dma_desc' size-in-bits='1088' is-struct='yes' visibility='default' filepath='drivers/dma/virt-dma.h' line='15' column='1' id='a8adbe3d'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='tx' type-id='b50ce591' visibility='default' filepath='drivers/dma/virt-dma.h' line='16' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='704'>
+        <data-member access='public' layout-offset-in-bits='896'>
           <var-decl name='tx_result' type-id='931aa361' visibility='default' filepath='drivers/dma/virt-dma.h' line='17' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='768'>
+        <data-member access='public' layout-offset-in-bits='960'>
           <var-decl name='node' type-id='72f469ec' visibility='default' filepath='drivers/dma/virt-dma.h' line='19' column='1'/>
         </data-member>
       </class-decl>
