@@ -5316,8 +5316,6 @@ static int binder_node_release(struct binder_node *node, int refs)
 	}
 
 	node->proc = NULL;
-	node->local_strong_refs = 0;
-	node->local_weak_refs = 0;
 	binder_inner_proc_unlock(proc);
 
 	spin_lock(&binder_dead_nodes_lock);
