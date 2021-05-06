@@ -85,10 +85,10 @@
   blocking_notifier_call_chain
   blocking_notifier_chain_register
   blocking_notifier_chain_unregister
+  bpf_trace_run1
   bpf_trace_run10
   bpf_trace_run11
   bpf_trace_run12
-  bpf_trace_run1
   bpf_trace_run2
   bpf_trace_run3
   bpf_trace_run4
@@ -1379,8 +1379,8 @@
   mempool_free
   mempool_free_slab
   memremap
-  memset64
   memset
+  memset64
   __memset_io
   memstart_addr
   memunmap
@@ -1448,10 +1448,10 @@
   nla_find
   nla_memcpy
   __nla_parse
-  nla_put_64bit
   nla_put
-  nla_reserve_64bit
+  nla_put_64bit
   nla_reserve
+  nla_reserve_64bit
   __nla_validate
   __nlmsg_put
   no_llseek
@@ -1613,6 +1613,7 @@
   pci_disable_msi
   pcie_capability_read_word
   pci_enable_device
+  pci_enable_msi
   pci_find_ext_capability
   pci_free_irq_vectors
   pci_get_device
@@ -1633,6 +1634,7 @@
   pci_release_region
   pci_request_region
   pci_restore_state
+  pci_root_buses
   pci_save_state
   pci_set_master
   pci_set_mwi
@@ -1766,6 +1768,7 @@
   proc_douintvec_minmax
   proc_mkdir
   proc_remove
+  proc_set_size
   proc_set_user
   proto_register
   proto_unregister
@@ -2108,6 +2111,7 @@
   simple_attr_write
   simple_open
   simple_read_from_buffer
+  simple_strtol
   simple_write_to_buffer
   single_open
   single_release

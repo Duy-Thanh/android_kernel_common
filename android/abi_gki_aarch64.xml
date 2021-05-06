@@ -4543,6 +4543,7 @@
       <elf-symbol name='param_ops_ulong' size='32' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x89bcf693'/>
       <elf-symbol name='param_ops_ushort' size='32' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbcc543bd'/>
       <elf-symbol name='pci_bus_type' size='176' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8d6a1b7'/>
+      <elf-symbol name='pci_root_buses' size='16' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x82c3213'/>
       <elf-symbol name='platform_bus_type' size='176' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x691f37fd'/>
       <elf-symbol name='pm_power_off' size='8' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x60a32ea9'/>
       <elf-symbol name='pm_suspend_global_flags' size='4' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x42635d55'/>
@@ -103821,6 +103822,7 @@
       <pointer-type-def type-id='ff18d40f' size-in-bits='64' id='af56cb43'/>
       <pointer-type-def type-id='deb48314' size-in-bits='64' id='694b6f36'/>
       <pointer-type-def type-id='1d8506ad' size-in-bits='64' id='53955211'/>
+      <var-decl name='pci_root_buses' type-id='72f469ec' mangled-name='pci_root_buses' visibility='default' filepath='drivers/pci/probe.c' line='35' column='1' elf-symbol-id='pci_root_buses'/>
       <function-decl name='pci_rescan_bus' mangled-name='pci_rescan_bus' filepath='drivers/pci/probe.c' line='3225' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pci_rescan_bus'>
         <parameter type-id='d1feb554' name='bus' filepath='drivers/pci/probe.c' line='3225' column='1'/>
         <return type-id='f0981eeb'/>
@@ -166817,7 +166819,7 @@
           <var-decl name='drv_priv' type-id='29c3368c' visibility='default' filepath='include/net/mac80211.h' line='2162' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__5' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='694' column='1' id='0f94ff8c'>
+      <class-decl name='__anonymous_struct__2' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='694' column='1' id='0f94ff8c'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='params' type-id='19c2251e' visibility='default' filepath='include/net/mac80211.h' line='695' column='1'/>
         </data-member>
@@ -167029,7 +167031,7 @@
       <array-type-def dimensions='1' type-id='53a31c26' size-in-bits='192' id='b7cdf388'>
         <subrange length='4' type-id='7ff19f0f' id='16fe7105'/>
       </array-type-def>
-      <class-decl name='__anonymous_struct__4' size-in-bits='48' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1995' column='1' id='53a31c26'>
+      <class-decl name='__anonymous_struct__1' size-in-bits='48' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1995' column='1' id='53a31c26'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='idx' type-id='fdbf7a0f' visibility='default' filepath='include/net/mac80211.h' line='1996' column='1'/>
         </data-member>
@@ -167209,7 +167211,7 @@
           <var-decl name='smps_mode' type-id='5e2794d2' visibility='default' filepath='include/net/mac80211.h' line='1585' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__3' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='2596' column='1' id='cbf4d865'>
+      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='2596' column='1' id='cbf4d865'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='units_pos' type-id='95e97e5e' visibility='default' filepath='include/net/mac80211.h' line='2597' column='1'/>
         </data-member>
@@ -167409,7 +167411,7 @@
         <enumerator name='IEEE80211_SMPS_DYNAMIC' value='3'/>
         <enumerator name='IEEE80211_SMPS_NUM_MODES' value='4'/>
       </enum-decl>
-      <class-decl name='__anonymous_struct__3' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='2596' column='1' id='cbf4d865'>
+      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='2596' column='1' id='cbf4d865'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='units_pos' type-id='95e97e5e' visibility='default' filepath='include/net/mac80211.h' line='2597' column='1'/>
         </data-member>
@@ -167863,7 +167865,7 @@
           <var-decl name='rate' type-id='b7cdf388' visibility='default' filepath='include/net/mac80211.h' line='2001' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__4' size-in-bits='48' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1995' column='1' id='53a31c26'>
+      <class-decl name='__anonymous_struct__1' size-in-bits='48' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1995' column='1' id='53a31c26'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='idx' type-id='fdbf7a0f' visibility='default' filepath='include/net/mac80211.h' line='1996' column='1'/>
         </data-member>
@@ -168196,7 +168198,7 @@
           <var-decl name='civicloc_len' type-id='b59d7dce' visibility='default' filepath='include/net/mac80211.h' line='495' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__5' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='694' column='1' id='0f94ff8c'>
+      <class-decl name='__anonymous_struct__2' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='694' column='1' id='0f94ff8c'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='params' type-id='19c2251e' visibility='default' filepath='include/net/mac80211.h' line='695' column='1'/>
         </data-member>
@@ -168307,7 +168309,7 @@
           <var-decl name='' type-id='eb542e10' visibility='default' filepath='include/net/mac80211.h' line='1882' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__17' size-in-bits='160' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1882' column='1' id='eb542e10'>
+      <union-decl name='__anonymous_union__7' size-in-bits='160' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1882' column='1' id='eb542e10'>
         <data-member access='public'>
           <var-decl name='tkip' type-id='5a0ae575' visibility='default' filepath='include/net/mac80211.h' line='1886' column='1'/>
         </data-member>
@@ -168327,7 +168329,7 @@
           <var-decl name='hw' type-id='ea135534' visibility='default' filepath='include/net/mac80211.h' line='1902' column='1'/>
         </data-member>
       </union-decl>
-      <class-decl name='__anonymous_struct__6' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1883' column='1' id='5a0ae575'>
+      <class-decl name='__anonymous_struct__3' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1883' column='1' id='5a0ae575'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='iv32' type-id='19c2251e' visibility='default' filepath='include/net/mac80211.h' line='1884' column='1'/>
         </data-member>
@@ -168335,12 +168337,12 @@
           <var-decl name='iv16' type-id='1dc6a898' visibility='default' filepath='include/net/mac80211.h' line='1885' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__7' size-in-bits='48' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1887' column='1' id='71c656e5'>
+      <class-decl name='__anonymous_struct__4' size-in-bits='48' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1887' column='1' id='71c656e5'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='pn' type-id='cf1a4160' visibility='default' filepath='include/net/mac80211.h' line='1888' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__11' size-in-bits='136' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1899' column='1' id='ea135534'>
+      <class-decl name='__anonymous_struct__8' size-in-bits='136' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1899' column='1' id='ea135534'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='seq' type-id='0d8415b5' visibility='default' filepath='include/net/mac80211.h' line='1900' column='1'/>
         </data-member>
@@ -168471,7 +168473,7 @@
         <enumerator name='BAR_RX_EVENT' value='2'/>
         <enumerator name='BA_FRAME_TIMEOUT' value='3'/>
       </enum-decl>
-      <union-decl name='__anonymous_union__18' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='463' column='1' id='2a1a3e21'>
+      <union-decl name='__anonymous_union__8' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='463' column='1' id='2a1a3e21'>
         <data-member access='public'>
           <var-decl name='rssi' type-id='1569e170' visibility='default' filepath='include/net/mac80211.h' line='464' column='1'/>
         </data-member>
