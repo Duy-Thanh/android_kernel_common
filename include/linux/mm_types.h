@@ -585,6 +585,7 @@ struct mm_struct {
 #ifdef CONFIG_IOMMU_SUPPORT
 		u32 pasid;
 #endif
+		ANDROID_VENDOR_DATA_ARRAY(1, 3);
 	} __randomize_layout;
 
 	/*
