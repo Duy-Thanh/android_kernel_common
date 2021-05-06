@@ -4213,6 +4213,7 @@
       <elf-symbol name='vmf_insert_pfn' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3453228d'/>
       <elf-symbol name='vmf_insert_pfn_prot' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xae0a4826'/>
       <elf-symbol name='vprintk' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x715a5ed0'/>
+      <elf-symbol name='vprintk_emit' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xee8c02e9'/>
       <elf-symbol name='vring_create_virtqueue' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1f5e8e2b'/>
       <elf-symbol name='vring_del_virtqueue' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1bf59ab0'/>
       <elf-symbol name='vring_interrupt' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xff05fa13'/>
@@ -73615,18 +73616,27 @@
       <array-type-def dimensions='1' type-id='28271da3' size-in-bits='infinite' id='f5432a6f'>
         <subrange length='infinite' type-id='7ff19f0f' id='031f2035'/>
       </array-type-def>
-      <class-decl name='drm_vma_offset_node' size-in-bits='1536' is-struct='yes' visibility='default' filepath='include/drm/drm_vma_manager.h' line='52' column='1' id='743d7e52'>
+      <class-decl name='drm_mm' size-in-bits='1920' is-struct='yes' visibility='default' filepath='include/drm/drm_mm.h' line='188' column='1' id='0b8ea949'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='vm_lock' type-id='ac16795b' visibility='default' filepath='include/drm/drm_vma_manager.h' line='53' column='1'/>
+          <var-decl name='color_adjust' type-id='4bcdfb80' visibility='default' filepath='include/drm/drm_mm.h' line='198' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='vm_node' type-id='60498a7e' visibility='default' filepath='include/drm/drm_vma_manager.h' line='54' column='1'/>
+          <var-decl name='hole_stack' type-id='72f469ec' visibility='default' filepath='include/drm/drm_mm.h' line='204' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='1408'>
-          <var-decl name='vm_files' type-id='dec44472' visibility='default' filepath='include/drm/drm_vma_manager.h' line='55' column='1'/>
+        <data-member access='public' layout-offset-in-bits='192'>
+          <var-decl name='head_node' type-id='60498a7e' visibility='default' filepath='include/drm/drm_mm.h' line='207' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='readonly' type-id='b50a4934' visibility='default' filepath='include/drm/drm_vma_manager.h' line='56' column='1'/>
+        <data-member access='public' layout-offset-in-bits='1536'>
+          <var-decl name='interval_tree' type-id='6fe1603d' visibility='default' filepath='include/drm/drm_mm.h' line='209' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1664'>
+          <var-decl name='holes_size' type-id='6fe1603d' visibility='default' filepath='include/drm/drm_mm.h' line='210' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1792'>
+          <var-decl name='holes_addr' type-id='dec44472' visibility='default' filepath='include/drm/drm_mm.h' line='211' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1856'>
+          <var-decl name='scan_active' type-id='7359adad' visibility='default' filepath='include/drm/drm_mm.h' line='213' column='1'/>
         </data-member>
       </class-decl>
       <class-decl name='drm_mm_node' size-in-bits='1344' is-struct='yes' visibility='default' filepath='include/drm/drm_mm.h' line='155' column='1' id='60498a7e'>
@@ -73670,27 +73680,18 @@
           <var-decl name='flags' type-id='7359adad' visibility='default' filepath='include/drm/drm_mm.h' line='172' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='drm_mm' size-in-bits='1920' is-struct='yes' visibility='default' filepath='include/drm/drm_mm.h' line='188' column='1' id='0b8ea949'>
+      <class-decl name='drm_vma_offset_node' size-in-bits='1536' is-struct='yes' visibility='default' filepath='include/drm/drm_vma_manager.h' line='52' column='1' id='743d7e52'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='color_adjust' type-id='4bcdfb80' visibility='default' filepath='include/drm/drm_mm.h' line='198' column='1'/>
+          <var-decl name='vm_lock' type-id='ac16795b' visibility='default' filepath='include/drm/drm_vma_manager.h' line='53' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='hole_stack' type-id='72f469ec' visibility='default' filepath='include/drm/drm_mm.h' line='204' column='1'/>
+          <var-decl name='vm_node' type-id='60498a7e' visibility='default' filepath='include/drm/drm_vma_manager.h' line='54' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='192'>
-          <var-decl name='head_node' type-id='60498a7e' visibility='default' filepath='include/drm/drm_mm.h' line='207' column='1'/>
+        <data-member access='public' layout-offset-in-bits='1408'>
+          <var-decl name='vm_files' type-id='dec44472' visibility='default' filepath='include/drm/drm_vma_manager.h' line='55' column='1'/>
         </data-member>
-        <data-member access='public' layout-offset-in-bits='1536'>
-          <var-decl name='interval_tree' type-id='6fe1603d' visibility='default' filepath='include/drm/drm_mm.h' line='209' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='1664'>
-          <var-decl name='holes_size' type-id='6fe1603d' visibility='default' filepath='include/drm/drm_mm.h' line='210' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='1792'>
-          <var-decl name='holes_addr' type-id='dec44472' visibility='default' filepath='include/drm/drm_mm.h' line='211' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='1856'>
-          <var-decl name='scan_active' type-id='7359adad' visibility='default' filepath='include/drm/drm_mm.h' line='213' column='1'/>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='readonly' type-id='b50a4934' visibility='default' filepath='include/drm/drm_vma_manager.h' line='56' column='1'/>
         </data-member>
       </class-decl>
       <class-decl name='dma_buf_ops' size-in-bits='1088' is-struct='yes' visibility='default' filepath='include/linux/dma-buf.h' line='35' column='1' id='3f8b3d98'>
@@ -140002,6 +140003,11 @@
         </data-member>
       </class-decl>
       <typedef-decl name='arch_spinlock_t' type-id='c167abfb' filepath='include/asm-generic/qspinlock_types.h' line='44' column='1' id='641c41d1'/>
+      <class-decl name='qspinlock' size-in-bits='32' is-struct='yes' visibility='default' filepath='include/asm-generic/qspinlock_types.h' line='14' column='1' id='c167abfb'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='' type-id='16e927d3' visibility='default' filepath='include/asm-generic/qspinlock_types.h' line='15' column='1'/>
+        </data-member>
+      </class-decl>
       <union-decl name='rcu_special' size-in-bits='32' visibility='default' filepath='include/linux/sched.h' line='631' column='1' id='a324790e'>
         <data-member access='public'>
           <var-decl name='b' type-id='30665d3b' visibility='default' filepath='include/linux/sched.h' line='637' column='1'/>
@@ -140010,11 +140016,6 @@
           <var-decl name='s' type-id='19c2251e' visibility='default' filepath='include/linux/sched.h' line='638' column='1'/>
         </data-member>
       </union-decl>
-      <class-decl name='qspinlock' size-in-bits='32' is-struct='yes' visibility='default' filepath='include/asm-generic/qspinlock_types.h' line='14' column='1' id='c167abfb'>
-        <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='' type-id='16e927d3' visibility='default' filepath='include/asm-generic/qspinlock_types.h' line='15' column='1'/>
-        </data-member>
-      </class-decl>
       <union-decl name='__anonymous_union__2' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/asm-generic/qspinlock_types.h' line='15' column='1' id='16e927d3'>
         <data-member access='public'>
           <var-decl name='val' type-id='49178f86' visibility='default' filepath='include/asm-generic/qspinlock_types.h' line='16' column='1'/>
@@ -146010,9 +146011,19 @@
           <var-decl name='next' type-id='b9aa0100' visibility='default' filepath='include/linux/console.h' line='154' column='1'/>
         </data-member>
       </class-decl>
+      <class-decl name='dev_printk_info' size-in-bits='512' is-struct='yes' visibility='default' filepath='include/linux/dev_printk.h' line='27' column='1' id='9a61119e'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='subsystem' type-id='ac1fa8c0' visibility='default' filepath='include/linux/dev_printk.h' line='28' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='device' type-id='36d7f119' visibility='default' filepath='include/linux/dev_printk.h' line='29' column='1'/>
+        </data-member>
+      </class-decl>
       <typedef-decl name='va_list' type-id='7f896fb4' filepath='prebuilts-master/clang/host/linux-x86/clang-r416183b/lib64/clang/12.0.5/include/stdarg.h' line='14' column='1' id='2aee9912'/>
       <typedef-decl name='__builtin_va_list' type-id='5f919c1f' filepath='kernel/printk/printk.c' line='1732' column='1' id='7f896fb4'/>
       <pointer-type-def type-id='d8b78162' size-in-bits='64' id='b9aa0100'/>
+      <qualified-type-def type-id='9a61119e' const='yes' id='41426935'/>
+      <pointer-type-def type-id='41426935' size-in-bits='64' id='da8b7bcd'/>
       <pointer-type-def type-id='471695ce' size-in-bits='64' id='ac1ad098'/>
       <pointer-type-def type-id='0da72d62' size-in-bits='64' id='304a6cc4'/>
       <pointer-type-def type-id='1b343ea9' size-in-bits='64' id='c859c465'/>
@@ -146036,6 +146047,14 @@
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='console_trylock' mangled-name='console_trylock' filepath='kernel/printk/printk.c' line='2369' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='console_trylock'>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='vprintk_emit' mangled-name='vprintk_emit' filepath='kernel/printk/printk.c' line='2020' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='vprintk_emit'>
+        <parameter type-id='95e97e5e' name='facility' filepath='kernel/printk/printk.c' line='2020' column='1'/>
+        <parameter type-id='95e97e5e' name='level' filepath='kernel/printk/printk.c' line='2020' column='1'/>
+        <parameter type-id='da8b7bcd' name='dev_info' filepath='kernel/printk/printk.c' line='2021' column='1'/>
+        <parameter type-id='80f4b756' name='fmt' filepath='kernel/printk/printk.c' line='2022' column='1'/>
+        <parameter type-id='2aee9912' name='args' filepath='kernel/printk/printk.c' line='2022' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='vprintk' mangled-name='vprintk' filepath='kernel/printk/printk.c' line='2068' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='vprintk'>
