@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8e9c7bd_0e1ae158",
+        "filename": "fs/ext4/ialloc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-05-06T19:20:50Z",
+      "side": 1,
+      "message": "This is indented differently from the upstream code.\n\nHow did you generate this patch?  I think the easiest way to generate the correct diff would be revert the Android version of the ext4 encrypt+casefold support and then cherry-pick the upstream version.  This would most easily be done in android-mainline before cherry-picking to older branches.",
+      "revId": "3b17c56fbf13bffa7ab7d56267338eca95f953c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
