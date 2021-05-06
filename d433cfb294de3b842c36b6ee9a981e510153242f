@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e78a8f3b_520ec332",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 1637,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-06T13:34:25Z",
+      "side": 1,
+      "message": "no driver should ever need this.  No idea why it\u0027s even still exported, ah, legacy ALPHA drm drivers only need this.\n\nI doubt you all have alpha processors here 😊",
+      "range": {
+        "startLine": 1637,
+        "startChar": 2,
+        "endLine": 1637,
+        "endChar": 16
+      },
+      "revId": "d433cfb294de3b842c36b6ee9a981e510153242f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
