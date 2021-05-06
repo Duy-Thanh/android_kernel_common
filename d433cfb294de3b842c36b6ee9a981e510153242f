@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58d5b314_7b1d0216",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-06T13:35:27Z",
+      "side": 1,
+      "message": "Note, the \"correct\" way to use this symbol is to use the pci_find_next_bus() function.\n\nBut even then, ugh, you really should never need this for a driver, use the \"modern\" PCI apis please, they have been present in the kernel for 20 years now 😊\n",
+      "revId": "d433cfb294de3b842c36b6ee9a981e510153242f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e78a8f3b_520ec332",
