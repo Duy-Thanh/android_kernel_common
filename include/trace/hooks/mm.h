@@ -29,6 +29,7 @@
 struct oom_control;
 struct slabinfo;
 struct track;
+struct vm_unmapped_area_info;
 
 DECLARE_RESTRICTED_HOOK(android_rvh_set_skip_swapcache_flags,
 			TP_PROTO(gfp_t *flags),
@@ -45,6 +46,17 @@ DECLARE_HOOK(android_vh_meminfo_proc_show,
 DECLARE_HOOK(android_vh_exit_mm,
 	TP_PROTO(struct mm_struct *mm),
 	TP_ARGS(mm));
+DECLARE_HOOK(android_vh_get_from_fragment_pool,
+	TP_PROTO(struct mm_struct *mm, struct vm_unmapped_area_info *info,
+		unsigned long *addr),
+	TP_ARGS(mm, info, addr));
+DECLARE_HOOK(android_vh_exclude_reserved_zone,
+	TP_PROTO(struct mm_struct *mm, struct vm_unmapped_area_info *info),
+	TP_ARGS(mm, info));
+DECLARE_HOOK(android_vh_include_reserved_zone,
+	TP_PROTO(struct mm_struct *mm, struct vm_unmapped_area_info *info,
+		unsigned long *addr),
+	TP_ARGS(mm, info, addr));
 DECLARE_HOOK(android_vh_show_mem,
 	TP_PROTO(unsigned int filter, nodemask_t *nodemask),
 	TP_ARGS(filter, nodemask));
