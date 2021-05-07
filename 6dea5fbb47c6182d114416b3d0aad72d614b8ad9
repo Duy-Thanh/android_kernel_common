@@ -70,6 +70,24 @@
       "parentUuid": "54166563_20414536",
       "revId": "6dea5fbb47c6182d114416b3d0aad72d614b8ad9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c17dd591_bf3ab424",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1305,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2021-05-07T22:02:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "375b6a2c_456e35b2",
+      "revId": "6dea5fbb47c6182d114416b3d0aad72d614b8ad9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
