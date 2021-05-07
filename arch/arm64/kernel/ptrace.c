@@ -44,6 +44,9 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/syscalls.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/syscalls.h>
+
 struct pt_regs_offset {
 	const char *name;
 	int offset;
@@ -1794,6 +1797,7 @@ int syscall_trace_enter(struct pt_regs *regs)
 {
 	unsigned long flags = READ_ONCE(current_thread_info()->flags);
 
+	trace_android_vh_syscall_trace_enter(regs);
 	if (flags & (_TIF_SYSCALL_EMU | _TIF_SYSCALL_TRACE)) {
 		tracehook_report_syscall(regs, PTRACE_SYSCALL_ENTER);
 		if (flags & _TIF_SYSCALL_EMU)
@@ -1817,6 +1821,7 @@ void syscall_trace_exit(struct pt_regs *regs)
 {
 	unsigned long flags = READ_ONCE(current_thread_info()->flags);
 
+	trace_android_vh_syscall_trace_exit(regs);
 	audit_syscall_exit(regs);
 
 	if (flags & _TIF_SYSCALL_TRACEPOINT)
