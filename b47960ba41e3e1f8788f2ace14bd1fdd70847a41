@@ -1,0 +1,41 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000010583625",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1699705?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "f4816df4_788cd4d6",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 17,
+                "startChar": 0,
+                "endLine": 17,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Lee Jones \u003clee.jones@linaro.org\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "356c2e17_ad6c565c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-05-07T08:20:41Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Lee Jones \u003clee.jones@linaro.org\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 372350482 android-build.ayeaye-python-dispatcher_20210506.05_p0",
+      "revId": "b47960ba41e3e1f8788f2ace14bd1fdd70847a41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
