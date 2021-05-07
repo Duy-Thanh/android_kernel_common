@@ -22,6 +22,23 @@
       },
       "revId": "da8357de96d18197f2edfc566561722bc3ef76b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "920f8497_c7583090",
+        "filename": "android/abi_gki_aarch64_unisoc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2569,
+      "author": {
+        "id": 1612695
+      },
+      "writtenOn": "2021-05-07T09:00:55Z",
+      "side": 1,
+      "message": "Hi Jian,\n\nGreg has modified it for us already, but pending to be merged.\n\nhttps://android-review.googlesource.com/c/kernel/common/+/1686188/3/android/abi_gki_aarch64_unisoc",
+      "revId": "da8357de96d18197f2edfc566561722bc3ef76b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
