@@ -1441,6 +1441,7 @@
       <elf-symbol name='filemap_fdatawrite_range' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbd76fbf8'/>
       <elf-symbol name='filp_close' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x83508767'/>
       <elf-symbol name='filp_open' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7eee7b8e'/>
+      <elf-symbol name='filp_open_block' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x23e682ba'/>
       <elf-symbol name='find_last_bit' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb6a68816'/>
       <elf-symbol name='find_next_bit' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc0a3d105'/>
       <elf-symbol name='find_next_zero_bit' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x479c3c86'/>
@@ -119525,6 +119526,12 @@
         <parameter type-id='77e79a4b' name='filp' filepath='fs/open.c' line='1240' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='filp_open_block' mangled-name='filp_open_block' filepath='fs/open.c' line='1068' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='filp_open_block'>
+        <parameter type-id='80f4b756' name='filename' filepath='fs/open.c' line='1068' column='1'/>
+        <parameter type-id='95e97e5e' name='flags' filepath='fs/open.c' line='1068' column='1'/>
+        <parameter type-id='2594b00f' name='mode' filepath='fs/open.c' line='1068' column='1'/>
+        <return type-id='77e79a4b'/>
+      </function-decl>
       <function-decl name='filp_open' mangled-name='filp_open' filepath='fs/open.c' line='1054' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='filp_open'>
         <parameter type-id='80f4b756' name='filename' filepath='fs/open.c' line='1054' column='1'/>
         <parameter type-id='95e97e5e' name='flags' filepath='fs/open.c' line='1054' column='1'/>
@@ -174953,17 +174960,6 @@
           <var-decl name='accuracy' type-id='19c2251e' visibility='default' filepath='include/sound/pcm.h' line='322' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='snd_pcm_sync_id' size-in-bits='128' visibility='default' filepath='include/uapi/sound/asound.h' line='324' column='1' id='85b4e5de'>
-        <data-member access='public'>
-          <var-decl name='id' type-id='92a46553' visibility='default' filepath='include/uapi/sound/asound.h' line='325' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='id16' type-id='ff13edc1' visibility='default' filepath='include/uapi/sound/asound.h' line='326' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='id32' type-id='49580a63' visibility='default' filepath='include/uapi/sound/asound.h' line='327' column='1'/>
-        </data-member>
-      </union-decl>
       <class-decl name='snd_pcm_runtime' size-in-bits='6080' is-struct='yes' visibility='default' filepath='include/sound/pcm.h' line='342' column='1' id='bc78c060'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='trigger_master' type-id='06b2cd14' visibility='default' filepath='include/sound/pcm.h' line='344' column='1'/>
@@ -175134,6 +175130,17 @@
           <var-decl name='driver_tstamp' type-id='a9c79a1f' visibility='default' filepath='include/sound/pcm.h' line='421' column='1'/>
         </data-member>
       </class-decl>
+      <union-decl name='snd_pcm_sync_id' size-in-bits='128' visibility='default' filepath='include/uapi/sound/asound.h' line='324' column='1' id='85b4e5de'>
+        <data-member access='public'>
+          <var-decl name='id' type-id='92a46553' visibility='default' filepath='include/uapi/sound/asound.h' line='325' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='id16' type-id='ff13edc1' visibility='default' filepath='include/uapi/sound/asound.h' line='326' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='id32' type-id='49580a63' visibility='default' filepath='include/uapi/sound/asound.h' line='327' column='1'/>
+        </data-member>
+      </union-decl>
       <typedef-decl name='snd_pcm_sframes_t' type-id='bd54fe1a' filepath='include/uapi/sound/asound.h' line='160' column='1' id='721b74e7'/>
       <typedef-decl name='snd_pcm_access_t' type-id='95e97e5e' filepath='include/uapi/sound/asound.h' line='184' column='1' id='6459083c'/>
       <typedef-decl name='snd_pcm_format_t' type-id='95e97e5e' filepath='include/uapi/sound/asound.h' line='192' column='1' id='67fa9bd5'/>
