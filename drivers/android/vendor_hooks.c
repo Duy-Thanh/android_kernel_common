@@ -78,6 +78,43 @@
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
  * associated with them) to allow external modules to probe them.
  */
+<<<<<<< HEAD   (a25c0f ANDROID: Align x86-64 microdroid cgroup support with aarch64)
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_sk_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_sk_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_nf_conn_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_nf_conn_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tcp_sendmsg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tcp_recvmsg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_udp_sendmsg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_udp_recvmsg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_udpv6_sendmsg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_udpv6_recvmsg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tcp_select_window);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_inet_sock_create);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_inet_sock_release);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_rtt_estimator);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_udp_enqueue_schedule_skb);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_build_skb_around);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_sk_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_sk_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_nf_conn_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_nf_conn_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tcp_sendmsg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tcp_recvmsg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_udp_sendmsg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_udp_recvmsg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_udpv6_sendmsg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_udpv6_recvmsg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tcp_select_window);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_inet_sock_create);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_inet_sock_release);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_rtt_estimator);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_udp_enqueue_schedule_skb);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_build_skb_around);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_refrigerator);
+>>>>>>> CHANGE (37c02e ANDROID: freezer: Add vendor hook to freezer for GKI purpose)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_send_sig_info);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_killed_process);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_arch_set_freq_scale);
