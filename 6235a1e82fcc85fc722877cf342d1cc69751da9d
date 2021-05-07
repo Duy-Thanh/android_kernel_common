@@ -34,6 +34,24 @@
       "parentUuid": "e443e22e_048b9a1e",
       "revId": "6235a1e82fcc85fc722877cf342d1cc69751da9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2efe86d0_259e2670",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-07T21:00:45Z",
+      "side": 1,
+      "message": "If by \"each Android kernel branch\" you mean android12-5.4 and android12-5.10...then yes. This will reach all devices based on new SoCs launching in S.\n\nNew features shouldn\u0027t be going into older ACK branches (LTS and bug-fixes only). If you need it in current pixel devices, you need to merge it into the pixel device kernels.",
+      "parentUuid": "c98c8519_661f1fe8",
+      "revId": "6235a1e82fcc85fc722877cf342d1cc69751da9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
