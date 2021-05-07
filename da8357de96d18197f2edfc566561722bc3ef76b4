@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0accfdc_020017c2",
+        "filename": "android/abi_gki_aarch64_unisoc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2568,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-07T08:59:36Z",
+      "side": 1,
+      "message": "this should now be dropped, it is not needed.",
+      "range": {
+        "startLine": 2568,
+        "startChar": 2,
+        "endLine": 2568,
+        "endChar": 11
+      },
+      "revId": "da8357de96d18197f2edfc566561722bc3ef76b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
