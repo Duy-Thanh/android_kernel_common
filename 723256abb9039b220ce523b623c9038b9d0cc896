@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d426243_a1f257fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-07T20:51:09Z",
+      "side": 1,
+      "message": "Please fix the checkpatch issues:\n```\nERROR:EXECUTE_PERMISSIONS: do not set execute permissions for source files\n#52: FILE: drivers/mmc/core/block.c\n\nERROR:EXECUTE_PERMISSIONS: do not set execute permissions for source files\n#87: FILE: drivers/mmc/core/sd.c\n\nERROR:EXECUTE_PERMISSIONS: do not set execute permissions for source files\n#119: FILE: drivers/mmc/core/slot-gpio.c\n\nERROR:EXECUTE_PERMISSIONS: do not set execute permissions for source files\n#146: FILE: drivers/mmc/host/sdhci.c\n\nERROR:EXECUTE_PERMISSIONS: do not set execute permissions for source files\n#180: FILE: include/linux/mmc/host.h\n\ntotal: 5 errors, 0 warnings, 172 lines checked\n```",
+      "revId": "723256abb9039b220ce523b623c9038b9d0cc896",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
