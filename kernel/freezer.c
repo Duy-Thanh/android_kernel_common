@@ -13,6 +13,9 @@
 #include <linux/kthread.h>
 #include <linux/mmu_context.h>
 
+#undef CREATE_TRACE_POINT
+#include <trace/hooks/cgroup.h>
+
 /* total number of freezing conditions in effect */
 atomic_t system_freezing_cnt = ATOMIC_INIT(0);
 EXPORT_SYMBOL(system_freezing_cnt);
@@ -67,10 +70,15 @@ bool __refrigerator(bool check_kthr_stop)
 		set_current_state(TASK_UNINTERRUPTIBLE);
 
 		spin_lock_irq(&freezer_lock);
+<<<<<<< HEAD   (913110 FROMLIST: binder: fix UAF caused by faulty buffer cleanup)
 		current->flags |= PF_FROZEN;
 		if (!freezing(current) ||
 		    (check_kthr_stop && kthread_should_stop()))
 			current->flags &= ~PF_FROZEN;
+=======
+		freeze = freezing(current) && !(check_kthr_stop && kthread_should_stop());
+		trace_android_rvh_refrigerator(pm_nosig_freezing);
+>>>>>>> CHANGE (75c15f ANDROID: freezer: Add vendor hook to freezer for GKI purpose)
 		spin_unlock_irq(&freezer_lock);
 
 		if (!(current->flags & PF_FROZEN))
