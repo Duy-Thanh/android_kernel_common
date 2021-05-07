@@ -33,6 +33,24 @@
       "message": "I think we should be safe to reland this now.",
       "revId": "d58662bda559720070bf8ba1ba659c38b54025e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b2fa457_74ab1639",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-07T21:08:07Z",
+      "side": 1,
+      "message": "Queued for 05/21 KMI update: https://android-review.googlesource.com/q/hashtag:KMI-changes-for-2021-05-21",
+      "parentUuid": "2f7e8189_f19d843e",
+      "revId": "d58662bda559720070bf8ba1ba659c38b54025e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
