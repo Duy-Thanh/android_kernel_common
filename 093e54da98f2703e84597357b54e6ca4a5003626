@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11b8c33f_6642493e",
+        "filename": "include/trace/hooks/thermal.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-07T23:28:07Z",
+      "side": 1,
+      "message": "This include causes a KMI break by changing the visibility of cpufreq_policy when this header is included by vendor_hooks.c.\n\nYou can avoid the KMI break by removing this inclusion and adding the following at line 17:\n\n```struct thermal_zone_device;```",
+      "revId": "093e54da98f2703e84597357b54e6ca4a5003626",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
