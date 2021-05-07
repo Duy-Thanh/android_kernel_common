@@ -16,6 +16,24 @@
       "message": "Why do we need to cherry pick this if it is in mainline? We\u0027ll get it in the next merge from upstream.",
       "revId": "6235a1e82fcc85fc722877cf342d1cc69751da9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c98c8519_661f1fe8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1541033
+      },
+      "writtenOn": "2021-05-07T20:51:46Z",
+      "side": 1,
+      "message": "That makes sense. I\u0027m trying to get this patch into each Android kernel branch. Should I cherry-pick this separately for each branch?",
+      "parentUuid": "e443e22e_048b9a1e",
+      "revId": "6235a1e82fcc85fc722877cf342d1cc69751da9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
