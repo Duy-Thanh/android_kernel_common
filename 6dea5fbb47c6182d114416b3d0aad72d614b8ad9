@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9607251_a347044a",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1305,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-07T20:01:07Z",
+      "side": 1,
+      "message": "Don\u0027t we have to worry about sk\u003d\u003dNULL here like we did at line 1074 of the original code?",
+      "revId": "6dea5fbb47c6182d114416b3d0aad72d614b8ad9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
