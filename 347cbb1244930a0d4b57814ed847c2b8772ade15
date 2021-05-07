@@ -34,6 +34,23 @@
       "message": "FROMGIT: or UPSTREAM:?",
       "revId": "347cbb1244930a0d4b57814ed847c2b8772ade15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff4c971b_21748020",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-07T11:40:51Z",
+      "side": 1,
+      "message": "Why is this needed for the android-mainline branch now?  It should show up here automatically if upstream has already taken it.",
+      "revId": "347cbb1244930a0d4b57814ed847c2b8772ade15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
