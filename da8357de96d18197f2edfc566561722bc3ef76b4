@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6a80f36_9ac056f3",
+        "filename": "android/abi_gki_aarch64_unisoc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2568,
+      "author": {
+        "id": 1810596
+      },
+      "writtenOn": "2021-05-07T09:11:41Z",
+      "side": 1,
+      "message": "okay, thanks",
+      "parentUuid": "a0accfdc_020017c2",
+      "range": {
+        "startLine": 2568,
+        "startChar": 2,
+        "endLine": 2568,
+        "endChar": 11
+      },
+      "revId": "da8357de96d18197f2edfc566561722bc3ef76b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "920f8497_c7583090",
         "filename": "android/abi_gki_aarch64_unisoc",
         "patchSetId": 3
@@ -37,6 +61,24 @@
       "writtenOn": "2021-05-07T09:00:55Z",
       "side": 1,
       "message": "Hi Jian,\n\nGreg has modified it for us already, but pending to be merged.\n\nhttps://android-review.googlesource.com/c/kernel/common/+/1686188/3/android/abi_gki_aarch64_unisoc",
+      "revId": "da8357de96d18197f2edfc566561722bc3ef76b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "790b40ad_42cf4383",
+        "filename": "android/abi_gki_aarch64_unisoc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2569,
+      "author": {
+        "id": 1810596
+      },
+      "writtenOn": "2021-05-07T09:11:41Z",
+      "side": 1,
+      "message": "Ok, I got it.",
+      "parentUuid": "920f8497_c7583090",
       "revId": "da8357de96d18197f2edfc566561722bc3ef76b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
