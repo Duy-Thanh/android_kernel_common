@@ -9,7 +9,6 @@ config SELECT_MEMORY_MODEL
 choice
 	prompt "Memory model"
 	depends on SELECT_MEMORY_MODEL
-	default DISCONTIGMEM_MANUAL if ARCH_DISCONTIGMEM_DEFAULT
 	default SPARSEMEM_MANUAL if ARCH_SPARSEMEM_DEFAULT
 	default FLATMEM_MANUAL
 	help
@@ -283,12 +282,11 @@ config PHYS_ADDR_T_64BIT
 config BOUNCE
 	bool "Enable bounce buffers"
 	default y
-	depends on BLOCK && MMU && (ZONE_DMA || HIGHMEM)
+	depends on BLOCK && MMU && HIGHMEM
 	help
-	  Enable bounce buffers for devices that cannot access
-	  the full range of memory available to the CPU. Enabled
-	  by default when ZONE_DMA or HIGHMEM is selected, but you
-	  may say n to override this.
+	  Enable bounce buffers for devices that cannot access the full range of
+	  memory available to the CPU. Enabled by default when HIGHMEM is
+	  selected, but you may say n to override this.
 
 config VIRT_TO_BUS
 	bool
@@ -872,4 +870,7 @@ config MAPPING_DIRTY_HELPERS
 config KMAP_LOCAL
 	bool
 
+# struct io_mapping based helper.  Selected by drivers that need them
+config IO_MAPPING
+	bool
 endmenu
