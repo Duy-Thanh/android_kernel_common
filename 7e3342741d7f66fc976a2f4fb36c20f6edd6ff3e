@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69f1dc98_ce4a5c78",
+        "filename": "security/selinux/include/classmap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2021-05-07T11:47:07Z",
+      "side": 1,
+      "message": "Spaces to align?",
+      "range": {
+        "startLine": 121,
+        "startChar": 1,
+        "endLine": 121,
+        "endChar": 2
+      },
+      "revId": "7e3342741d7f66fc976a2f4fb36c20f6edd6ff3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
