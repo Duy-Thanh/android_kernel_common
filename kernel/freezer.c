@@ -12,6 +12,9 @@
 #include <linux/freezer.h>
 #include <linux/kthread.h>
 
+#undef CREATE_TRACE_POINT
+#include <trace/hooks/cgroup.h>
+
 /* total number of freezing conditions in effect */
 DEFINE_STATIC_KEY_FALSE(freezer_active);
 EXPORT_SYMBOL(freezer_active);
@@ -74,7 +77,15 @@ bool __refrigerator(bool check_kthr_stop)
 		set_current_state(TASK_FROZEN);
 
 		spin_lock_irq(&freezer_lock);
+<<<<<<< HEAD   (ef8b5c BACKPORT: KVM: arm64: Make vcpu flag updates non-preemptible)
 		freeze = freezing(current) && !(check_kthr_stop && kthread_should_stop());
+=======
+		current->flags |= PF_FROZEN;
+		if (!freezing(current) ||
+		    (check_kthr_stop && kthread_should_stop()))
+			current->flags &= ~PF_FROZEN;
+		trace_android_rvh_refrigerator(pm_nosig_freezing);
+>>>>>>> CHANGE (a15803 ANDROID: freezer: Add vendor hook to freezer for GKI purpose)
 		spin_unlock_irq(&freezer_lock);
 
 		if (!freeze)
