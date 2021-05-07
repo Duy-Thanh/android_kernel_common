@@ -34,6 +34,24 @@
       "parentUuid": "e9607251_a347044a",
       "revId": "6dea5fbb47c6182d114416b3d0aad72d614b8ad9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dac21d98_77343ce0",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1305,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2021-05-07T21:59:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54166563_20414536",
+      "revId": "6dea5fbb47c6182d114416b3d0aad72d614b8ad9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
