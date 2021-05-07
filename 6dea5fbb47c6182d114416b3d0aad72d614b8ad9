@@ -16,6 +16,24 @@
       "message": "Don\u0027t we have to worry about sk\u003d\u003dNULL here like we did at line 1074 of the original code?",
       "revId": "6dea5fbb47c6182d114416b3d0aad72d614b8ad9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54166563_20414536",
+        "filename": "net/netfilter/xt_qtaguid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1305,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2021-05-07T21:49:40Z",
+      "side": 1,
+      "message": "Technically no since sock_tag_tree_search() doesn\u0027t dereference sk, but I think that\u0027s a good idea to include the check for extra stability.",
+      "parentUuid": "e9607251_a347044a",
+      "revId": "6dea5fbb47c6182d114416b3d0aad72d614b8ad9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
