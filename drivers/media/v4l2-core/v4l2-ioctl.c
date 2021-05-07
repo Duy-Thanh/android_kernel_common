@@ -28,6 +28,8 @@
 #include <media/v4l2-mem2mem.h>
 
 #include <trace/events/v4l2.h>
+#include <trace/hooks/v4l2core.h>
+
 
 /* Zero out the end of the struct pointed to by p.  Everything after, but
  * not including, the specified field is cleared. */
@@ -75,6 +77,15 @@ static const struct std_descr standards[] = {
 	{ V4L2_STD_SECAM_LC,	"SECAM-Lc"  },
 	{ 0,			"Unknown"   }
 };
+
+static void clear_reserved(struct v4l2_format *p)
+{
+	int ret = 0;
+
+	trace_android_vh_clear_reserved_fmt_fields(p, &ret);
+	if (!ret)
+		CLEAR_AFTER_FIELD(p, fmt.pix_mp.xfer_func);
+}
 
 /* video4linux standard ID conversion to standard name
  */
@@ -1817,7 +1828,7 @@ static int v4l_s_fmt(const struct v4l2_ioctl_ops *ops,
 	case V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE:
 		if (unlikely(!ops->vidioc_s_fmt_vid_cap_mplane))
 			break;
-		CLEAR_AFTER_FIELD(p, fmt.pix_mp.xfer_func);
+		clear_reserved(p);
 		for (i = 0; i < p->fmt.pix_mp.num_planes; i++)
 			CLEAR_AFTER_FIELD(&p->fmt.pix_mp.plane_fmt[i],
 					  bytesperline);
@@ -1848,7 +1859,7 @@ static int v4l_s_fmt(const struct v4l2_ioctl_ops *ops,
 	case V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE:
 		if (unlikely(!ops->vidioc_s_fmt_vid_out_mplane))
 			break;
-		CLEAR_AFTER_FIELD(p, fmt.pix_mp.xfer_func);
+		clear_reserved(p);
 		for (i = 0; i < p->fmt.pix_mp.num_planes; i++)
 			CLEAR_AFTER_FIELD(&p->fmt.pix_mp.plane_fmt[i],
 					  bytesperline);
@@ -1919,7 +1930,7 @@ static int v4l_try_fmt(const struct v4l2_ioctl_ops *ops,
 	case V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE:
 		if (unlikely(!ops->vidioc_try_fmt_vid_cap_mplane))
 			break;
-		CLEAR_AFTER_FIELD(p, fmt.pix_mp.xfer_func);
+		clear_reserved(p);
 		for (i = 0; i < p->fmt.pix_mp.num_planes; i++)
 			CLEAR_AFTER_FIELD(&p->fmt.pix_mp.plane_fmt[i],
 					  bytesperline);
@@ -1950,7 +1961,7 @@ static int v4l_try_fmt(const struct v4l2_ioctl_ops *ops,
 	case V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE:
 		if (unlikely(!ops->vidioc_try_fmt_vid_out_mplane))
 			break;
-		CLEAR_AFTER_FIELD(p, fmt.pix_mp.xfer_func);
+		clear_reserved(p);
 		for (i = 0; i < p->fmt.pix_mp.num_planes; i++)
 			CLEAR_AFTER_FIELD(&p->fmt.pix_mp.plane_fmt[i],
 					  bytesperline);

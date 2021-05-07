@@ -54,6 +54,8 @@
 #include <trace/hooks/vmscan.h>
 #include <trace/hooks/psi.h>
 #include <trace/hooks/selinux.h>
+#include <trace/hooks/v4l2core.h>
+#include <trace/hooks/v4l2mc.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -262,3 +264,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dequeue_task_fair);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_prepare_update_load_avg_se);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_finish_update_load_avg_se);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_selinux_is_initialized);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_media_device_setup_link);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_reserved_fmt_fields);
