@@ -51,6 +51,7 @@ struct dma_heap_export_info {
 void *dma_heap_get_drvdata(struct dma_heap *heap);
 
 /**
+<<<<<<< HEAD   (0c3ec1 Revert "ANDROID: Improve OWNERS file definitions")
  * dma_heap_get_dev() - get device struct for the heap
  * @heap: DMA-Heap to retrieve device struct from
  *
@@ -60,6 +61,8 @@ void *dma_heap_get_drvdata(struct dma_heap *heap);
 struct device *dma_heap_get_dev(struct dma_heap *heap);
 
 /**
+=======
+>>>>>>> BRANCH (16b3d0 Merge tag 'sched-core-2021-04-28' of git://git.kernel.org/pu)
  * dma_heap_get_name() - get heap name
  * @heap: DMA-Heap to retrieve private data for
  *
