@@ -4527,6 +4527,64 @@ out:
 	return result;
 }
 
+static int sysfs_test_directories(bool one_present, bool two_present)
+{
+	int result = TEST_FAILURE;
+	struct stat st;
+
+	TESTEQUAL(stat("/sys/fs/incremental-fs/instances/1", &st),
+		  one_present ? 0 : -1);
+	if (one_present)
+		TESTCOND(S_ISDIR(st.st_mode));
+	else
+		TESTEQUAL(errno, ENOENT);
+	TESTEQUAL(stat("/sys/fs/incremental-fs/instances/2", &st),
+		  two_present ? 0 : -1);
+	if (two_present)
+		TESTCOND(S_ISDIR(st.st_mode));
+	else
+		TESTEQUAL(errno, ENOENT);
+
+	result = TEST_SUCCESS;
+out:
+	return result;
+}
+
+static int sysfs_rename_test(const char *mount_dir)
+{
+	int result = TEST_FAILURE;
+	char *backing_dir = NULL;
+	int fd = -1;
+	char c;
+
+	TEST(backing_dir = create_backing_dir(mount_dir), backing_dir);
+	TESTEQUAL(mount_fs(mount_dir, backing_dir, 0), 0);
+	TESTEQUAL(sysfs_test_directories(false, false), 0);
+	TESTEQUAL(mount_fs_opt(mount_dir, backing_dir, "sysfs_name=1", true),
+		  0);
+	TESTEQUAL(sysfs_test_directories(true, false), 0);
+	TEST(fd = open("/sys/fs/incremental-fs/instances/1/reads_delayed_min",
+		       O_RDONLY | O_CLOEXEC), fd != -1);
+	TESTEQUAL(pread(fd, &c, 1, 0), 1);
+	TESTEQUAL(c, '0');
+	TESTEQUAL(pread(fd, &c, 1, 0), 1);
+	TESTEQUAL(c, '0');
+	TESTEQUAL(mount_fs_opt(mount_dir, backing_dir, "sysfs_name=2", true),
+		  0);
+	TESTEQUAL(sysfs_test_directories(false, true), 0);
+	TESTEQUAL(pread(fd, &c, 1, 0), -1);
+	TESTEQUAL(mount_fs_opt(mount_dir, backing_dir, "", true),
+		  0);
+	TESTEQUAL(sysfs_test_directories(false, false), 0);
+
+	result = TEST_SUCCESS;
+out:
+	close(fd);
+	umount(mount_dir);
+	free(backing_dir);
+	return result;
+}
+
 static char *setup_mount_dir()
 {
 	struct stat st;
@@ -4647,6 +4705,7 @@ int main(int argc, char *argv[])
 		MAKE_TEST(truncate_test),
 		MAKE_TEST(stat_test),
 		MAKE_TEST(sysfs_test),
+		MAKE_TEST(sysfs_rename_test),
 	};
 #undef MAKE_TEST
 
