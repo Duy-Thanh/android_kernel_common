@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21c8d6b0_40813ccc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-05-11T05:32:04Z",
+      "side": 1,
+      "message": "We need to reapply after getting the merge commit. (in order to avoid abi breakages first).",
+      "revId": "6674f4f4675d4c71ca2770d760a954dd573b06d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
