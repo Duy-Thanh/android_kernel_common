@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "706cfa91_e86342ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-11T22:24:43Z",
+      "side": 1,
+      "message": "This breaks KMI so it will be merged with the KMI update on 5/21.",
+      "revId": "2b721b3cb4f2e2cbb42bea8e5f1f672ac8a43d87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
