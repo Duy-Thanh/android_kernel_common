@@ -2243,11 +2243,16 @@ static long fuse_dev_ioctl(struct file *file, unsigned int cmd,
 	struct fuse_dev *fud = NULL;
 	struct fuse_passthrough_out pto;
 
+<<<<<<< HEAD   (20ef7b Merge d72cd4ad4174c Merge tag 'scsi-misc' of git://git.kerne)
 	if (_IOC_TYPE(cmd) != FUSE_DEV_IOC_MAGIC)
 		return -EINVAL;
 
 	switch (_IOC_NR(cmd)) {
 	case _IOC_NR(FUSE_DEV_IOC_CLONE):
+=======
+	switch (cmd) {
+	case FUSE_DEV_IOC_CLONE:
+>>>>>>> BRANCH (6efb94 Linux 5.13-rc1)
 		res = -EFAULT;
 		if (!get_user(oldfd, (__u32 __user *)arg)) {
 			struct file *old = fget(oldfd);

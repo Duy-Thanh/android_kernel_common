@@ -1,5 +1,10 @@
 # SPDX-License-Identifier: GPL-2.0-only
+<<<<<<< HEAD   (20ef7b Merge d72cd4ad4174c Merge tag 'scsi-misc' of git://git.kerne)
 config_data
 kheaders.md5
 timeconst.h
 hz.bc
+=======
+/config_data
+/kheaders.md5
+>>>>>>> BRANCH (6efb94 Linux 5.13-rc1)
