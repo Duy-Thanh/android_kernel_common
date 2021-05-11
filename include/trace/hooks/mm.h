@@ -124,6 +124,12 @@ DECLARE_HOOK(android_vh_page_add_new_anon_rmap,
 DECLARE_HOOK(android_vh_customize_alloc_gfp,
 	TP_PROTO(gfp_t *alloc_gfp, unsigned int order),
 	TP_ARGS(alloc_gfp, order));
+DECLARE_HOOK(android_vh_save_vmalloc_stack,
+	TP_PROTO(unsigned long flags, struct vm_struct *vm),
+	TP_ARGS(flags, vm));
+DECLARE_HOOK(android_vh_show_stack_hash,
+	TP_PROTO(struct seq_file *m, struct vm_struct *v),
+	TP_ARGS(m, v));
 
 #endif /* _TRACE_HOOK_MM_H */
 
