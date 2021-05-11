@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fa66596_0595f359",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-11T23:00:10Z",
+      "side": 1,
+      "message": "John, this results in a KMI break due to some of the removed symbols. Should I queue it for the 5/21 KMI update?",
+      "revId": "17b4eb36b7fafe30e1b04897e23c55671f70856e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
