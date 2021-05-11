@@ -1,5 +1,10 @@
 # SPDX-License-Identifier: GPL-2.0-only
+<<<<<<< HEAD   (48937c ANDROID: Incremental fs: Explicitly include <linux/pagemap.h)
 config_data
 kheaders.md5
 timeconst.h
 hz.bc
+=======
+/config_data
+/kheaders.md5
+>>>>>>> BRANCH (6efb94 Linux 5.13-rc1)
