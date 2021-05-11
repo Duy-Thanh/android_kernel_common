@@ -16,6 +16,23 @@
       "message": "Also for android12-5.10?",
       "revId": "07301a0eecb24bf1eae10968d2f6fe772e85292e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8ce5f10_27cbf2c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-05-11T22:18:46Z",
+      "side": 1,
+      "message": "There are still some differences from upstream.\n\nPlease try creating a fixed version of this change for android-mainline in the way I suggested (reverting the quilt series patches, then cherry-picking the corresponding upstream commits), then cherry-picking the resulting commit to the other branches.",
+      "revId": "07301a0eecb24bf1eae10968d2f6fe772e85292e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
