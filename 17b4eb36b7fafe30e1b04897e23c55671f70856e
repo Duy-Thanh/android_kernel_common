@@ -16,6 +16,24 @@
       "message": "John, this results in a KMI break due to some of the removed symbols. Should I queue it for the 5/21 KMI update?",
       "revId": "17b4eb36b7fafe30e1b04897e23c55671f70856e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7459f8f_783f45f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-05-11T23:22:39Z",
+      "side": 1,
+      "message": "? Hrm. I don\u0027t see any removed symbols. The tooling does move a few symbols around in the list but the net change is just adding:\n  devm_thermal_zone_of_sensor_register\n  thermal_zone_get_slope\n\nAm I missing something?\n\nBut if those two additions do cause a KMI break, then yes, probably best to wait till the 5/21 update.",
+      "parentUuid": "1fa66596_0595f359",
+      "revId": "17b4eb36b7fafe30e1b04897e23c55671f70856e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
