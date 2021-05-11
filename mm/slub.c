@@ -817,6 +817,7 @@ static void set_track_update(struct kmem_cache *s, void *object,
 
 #ifdef CONFIG_STACKDEPOT
 	p->handle = handle;
+	trace_android_vh_save_track_hash((unsigned long)p);
 #endif
 	p->addr = addr;
 	p->cpu = smp_processor_id();
