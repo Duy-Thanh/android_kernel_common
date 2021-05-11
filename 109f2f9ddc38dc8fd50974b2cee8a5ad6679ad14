@@ -34,6 +34,24 @@
       "parentUuid": "a5044d8f_d474cd6c",
       "revId": "109f2f9ddc38dc8fd50974b2cee8a5ad6679ad14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c1946d3_9bea10d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-11T15:32:10Z",
+      "side": 1,
+      "message": "Usually a good idea to put your own -2 on the patch with a comment when it is uploaded just for review but shouldn\u0027t be merged.",
+      "parentUuid": "4789682b_e24985f1",
+      "revId": "109f2f9ddc38dc8fd50974b2cee8a5ad6679ad14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

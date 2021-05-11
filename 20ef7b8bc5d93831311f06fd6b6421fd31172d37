@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd16b6ec_205ffe9b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5320,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-11T15:32:10Z",
+      "side": 0,
+      "message": "It seems to me that there was a dependency on these being cleared -- Martijn do you remember why these are needed?",
+      "revId": "20ef7b8bc5d93831311f06fd6b6421fd31172d37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
