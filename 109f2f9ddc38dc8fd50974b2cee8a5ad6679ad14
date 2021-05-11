@@ -16,6 +16,24 @@
       "message": "Why not sent upstream first?",
       "revId": "109f2f9ddc38dc8fd50974b2cee8a5ad6679ad14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4789682b_e24985f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2021-05-11T13:40:09Z",
+      "side": 1,
+      "message": "The intention is to abandon this change and then send the patch upstream after initial review.",
+      "parentUuid": "a5044d8f_d474cd6c",
+      "revId": "109f2f9ddc38dc8fd50974b2cee8a5ad6679ad14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
