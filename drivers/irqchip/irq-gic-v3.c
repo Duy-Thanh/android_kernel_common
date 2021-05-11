@@ -639,6 +639,10 @@ static asmlinkage void __exception_irq_entry gic_handle_irq(struct pt_regs *regs
 
 	irqnr = gic_read_iar();
 
+	/* Check for special IDs first */
+	if ((irqnr >= 1020 && irqnr <= 1023))
+		return;
+
 	if (gic_supports_nmi() &&
 	    unlikely(gic_read_rpr() == GICD_INT_NMI_PRI)) {
 		gic_handle_nmi(irqnr, regs);
@@ -650,11 +654,31 @@ static asmlinkage void __exception_irq_entry gic_handle_irq(struct pt_regs *regs
 		gic_arch_enable_irqs();
 	}
 
+<<<<<<< HEAD   (a89975 UPSTREAM: crypto: arm/curve25519 - Move '.fpu' after '.arch')
 	/* Check for special IDs first */
 	if ((irqnr >= 1020 && irqnr <= 1023))
 		return;
 
 	if (static_branch_likely(&supports_deactivate_key))
+=======
+	/* Treat anything but SGIs in a uniform way */
+	if (likely(irqnr > 15)) {
+		int err;
+
+		if (static_branch_likely(&supports_deactivate_key))
+			gic_write_eoir(irqnr);
+		else
+			isb();
+
+		err = handle_domain_irq(gic_data.domain, irqnr, regs);
+		if (err) {
+			WARN_ONCE(true, "Unexpected interrupt received!\n");
+			gic_deactivate_unhandled(irqnr);
+		}
+		return;
+	}
+	if (irqnr < 16) {
+>>>>>>> BRANCH (160221 Linux 5.4.118)
 		gic_write_eoir(irqnr);
 	else
 		isb();
