@@ -243,6 +243,7 @@ static inline size_t slab_size(const struct slab *slab)
 #include <linux/random.h>
 #include <linux/sched/mm.h>
 #include <linux/list_lru.h>
+#include <linux/android_vendor.h>
 
 /*
  * State of the slab allocator.
@@ -304,6 +305,9 @@ struct track {
 	int cpu;		/* Was running on cpu */
 	int pid;		/* Pid context */
 	unsigned long when;	/* When did the operation occur */
+#ifdef CONFIG_STACKTRACE
+	ANDROID_OEM_DATA(1);
+#endif
 };
 
 enum track_item { TRACK_ALLOC, TRACK_FREE };
