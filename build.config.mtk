@@ -1,0 +1,27 @@
+ARCH=arm64
+CROSS_COMPILE=aarch64-linux-gnu-
+LLVM=1
+LLVM_IAS=1
+# DEFCONFIG=defconfig
+KERNEL_DIR=kernel-5.10
+CLANG_PREBUILT_BIN=prebuilts/clang/host/linux-x86/clang-r416183b/bin
+BUILDTOOLS_PREBUILT_BIN=prebuilts/build-tools/linux-x86/bin
+# for check scripts
+CC="${CC_WRAPPER} clang"
+LD=ld.lld
+AR=llvm-ar
+NM=llvm-nm
+OBJCOPY=llvm-objcopy
+OBJDUMP=llvm-objdump
+READELF=llvm-readelf
+OBJSIZE=llvm-size
+STRIP=llvm-strip
+PATH=${ROOT_DIR}/prebuilts/perl/linux-x86/bin:/usr/bin:/bin:${ROOT_DIR}/prebuilts/kernel-build-tools/linux-x86/bin:$PATH
+DEFCONFIG="gki_defconfig ../../../../${OUT_DIR}/mgk_64_k510.config"
+PRE_DEFCONFIG_CMDS="cp -p ${KERNEL_DIR}/arch/arm64/configs/mgk_64_k510_defconfig ${OUT_DIR}/mgk_64_k510.config"
+EXT_MODULES=""
+DIST_CMDS='cp -p ${OUT_DIR}/.config ${DIST_DIR}'
+FILES="vmlinux"
+KMI_SYMBOL_LIST=android/abi_gki_aarch64_mtk
+GKI_MODULES_LIST=android/gki_aarch64_modules
+ABI_DEFINITION=android/abi_gki_aarch64.xml
