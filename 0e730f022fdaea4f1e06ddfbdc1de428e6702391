@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "769046a3_ec76758f",
+        "filename": "android/abi_gki_aarch64_unisoc",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-12T07:30:45Z",
+      "side": 1,
+      "message": "these functions are not allowed in drivers, sorry.",
+      "range": {
+        "startLine": 407,
+        "startChar": 3,
+        "endLine": 408,
+        "endChar": 14
+      },
+      "revId": "0e730f022fdaea4f1e06ddfbdc1de428e6702391",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
