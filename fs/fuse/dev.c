@@ -2243,11 +2243,16 @@ static long fuse_dev_ioctl(struct file *file, unsigned int cmd,
 	struct fuse_dev *fud = NULL;
 	struct fuse_passthrough_out pto;
 
+<<<<<<< HEAD   (97ea2b FROMLIST: f2fs: support iflag change given the mask)
 	if (_IOC_TYPE(cmd) != FUSE_DEV_IOC_MAGIC)
 		return -EINVAL;
 
 	switch (_IOC_NR(cmd)) {
 	case _IOC_NR(FUSE_DEV_IOC_CLONE):
+=======
+	switch (cmd) {
+	case FUSE_DEV_IOC_CLONE:
+>>>>>>> BRANCH (7af81c Merge tag 'for-5.13/dm-changes' of git://git.kernel.org/pub/)
 		res = -EFAULT;
 		if (!get_user(oldfd, (__u32 __user *)arg)) {
 			struct file *old = fget(oldfd);
