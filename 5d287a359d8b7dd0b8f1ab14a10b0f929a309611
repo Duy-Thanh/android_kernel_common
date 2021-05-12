@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84a7682f_6711e97c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-05-12T22:10:35Z",
+      "side": 1,
+      "message": "How can I avoid checkpatch error?\n\nWARNING:EMBEDDED_FILENAME: It\u0027s generally not useful to have the filename in the file\n#24: FILE: Documentation/ABI/testing/OWNERS:2:",
+      "revId": "5d287a359d8b7dd0b8f1ab14a10b0f929a309611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
