@@ -44,6 +44,9 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/syscalls.h>
 
+EXPORT_TRACEPOINT_SYMBOL_GPL(sys_exit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(sys_enter);
+
 struct pt_regs_offset {
 	const char *name;
 	int offset;
