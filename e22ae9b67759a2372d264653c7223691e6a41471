@@ -17,6 +17,24 @@
       "parentUuid": "a599c08e_2a530d8a",
       "revId": "e22ae9b67759a2372d264653c7223691e6a41471",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c078ca1_95ae6fa7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2021-05-12T19:50:53Z",
+      "side": 1,
+      "message": "These are debug (bisecting) patches. :)",
+      "parentUuid": "cc13fc95_470a18b0",
+      "revId": "e22ae9b67759a2372d264653c7223691e6a41471",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
