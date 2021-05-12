@@ -70,6 +70,24 @@
       "parentUuid": "5729e65a_a50bf901",
       "revId": "20ef7b8bc5d93831311f06fd6b6421fd31172d37",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99bae974_bb7dc646",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5320,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-12T22:15:01Z",
+      "side": 0,
+      "message": "Yea, it looks like there is a hazard of decrementing the local ref any time a new transaction is being processed while the target process dies. The txn will most likely fail before it is queued and end up calling binder_transaction_buffer_release() which decrements the local ref on the node.\n\nI think we can\u0027t do this fix because in some cases it will never decrement, but we can\u0027t really tell if a decrement is coming so we don\u0027t know when it is safe to clean up the node. We can\u0027t assume that 0 -\u003e -1 transition is safe because another dec might come so the node has to survive until we know none are coming.\n\nNeeds some more thought.",
+      "parentUuid": "4c253f7c_b0b3624b",
+      "revId": "20ef7b8bc5d93831311f06fd6b6421fd31172d37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
