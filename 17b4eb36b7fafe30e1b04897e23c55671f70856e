@@ -34,6 +34,24 @@
       "parentUuid": "1fa66596_0595f359",
       "revId": "17b4eb36b7fafe30e1b04897e23c55671f70856e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adebd201_413cb163",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-12T00:06:41Z",
+      "side": 1,
+      "message": "Sorry, I didn\u0027t look very closely -- you are right, all of the \"removed\" symbols are just rearranged. I\u0027ll try a local build.",
+      "parentUuid": "b7459f8f_783f45f1",
+      "revId": "17b4eb36b7fafe30e1b04897e23c55671f70856e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
