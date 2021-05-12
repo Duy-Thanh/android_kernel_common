@@ -34,6 +34,24 @@
       "parentUuid": "fd16b6ec_205ffe9b",
       "revId": "20ef7b8bc5d93831311f06fd6b6421fd31172d37",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5729e65a_a50bf901",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5320,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-12T20:22:50Z",
+      "side": 0,
+      "message": "can we be sure these will ever be zeroed if we don\u0027t clear them here? Since binder_node_release() is only called from binder_deferred_release() the local process is dying and no local threads will enter the driver again to decr these refs. I think we end up wit the same symptom -- nodes permanently on the dead nodes list.\n\nCarlos, I know you figured out a way to reproduce this by adding a delay somewhere. Can you share the code you used to help us understand the case where the local decr is processed after this (must also be part of binder_deferred_release()).",
+      "parentUuid": "bc491e53_7fdf05c4",
+      "revId": "20ef7b8bc5d93831311f06fd6b6421fd31172d37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
