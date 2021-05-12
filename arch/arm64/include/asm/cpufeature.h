@@ -624,6 +624,13 @@ static inline bool system_supports_32bit_el0(void)
 	       id_aa64pfr0_32bit_el0(pfr0);
 }
 
+static inline bool cpu_supports_32bit_el0(void)
+{
+        u64 pfr0 = read_cpuid(ID_AA64PFR0_EL1);
+
+        return id_aa64pfr0_32bit_el0(pfr0);
+}
+
 static inline bool system_supports_4kb_granule(void)
 {
 	u64 mmfr0;
