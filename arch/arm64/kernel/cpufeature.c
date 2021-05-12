@@ -2763,7 +2763,8 @@ static void verify_local_cpu_capabilities(void)
 
 	verify_local_elf_hwcaps(arm64_elf_hwcaps);
 
-	if (system_supports_32bit_el0())
+	if ((!allow_mismatched_32bit_el0 && system_supports_32bit_el0()) ||
+	    (allow_mismatched_32bit_el0 && cpu_supports_32bit_el0()))
 		verify_local_elf_hwcaps(compat_elf_hwcaps);
 
 	if (system_supports_sve())
