@@ -16,6 +16,24 @@
       "message": "It seems to me that there was a dependency on these being cleared -- Martijn do you remember why these are needed?",
       "revId": "20ef7b8bc5d93831311f06fd6b6421fd31172d37",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc491e53_7fdf05c4",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5320,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2021-05-12T12:15:40Z",
+      "side": 0,
+      "message": "mmm I don\u0027t recall, I spent some time looking at the code but couldn\u0027t figure it out. I\u0027m off tomorrow/Fri, but could spend some more time on this Mon if you\u0027re not sure this is safe.",
+      "parentUuid": "fd16b6ec_205ffe9b",
+      "revId": "20ef7b8bc5d93831311f06fd6b6421fd31172d37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
