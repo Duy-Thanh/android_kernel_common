@@ -52,6 +52,24 @@
       "parentUuid": "bc491e53_7fdf05c4",
       "revId": "20ef7b8bc5d93831311f06fd6b6421fd31172d37",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c253f7c_b0b3624b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5320,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2021-05-12T20:40:29Z",
+      "side": 0,
+      "message": "I was able to reproduce by killing the parent process (procB) of nodeB from the context of an procA transaction. I made a kernel patch and a little user-space program to reproduce consistently:\n/google/data/rw/users/cm/cmllamas/shared/binder/",
+      "parentUuid": "5729e65a_a50bf901",
+      "revId": "20ef7b8bc5d93831311f06fd6b6421fd31172d37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
