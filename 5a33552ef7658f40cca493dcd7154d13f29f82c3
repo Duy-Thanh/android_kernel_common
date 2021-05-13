@@ -39,6 +39,30 @@
       },
       "revId": "5a33552ef7658f40cca493dcd7154d13f29f82c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35fa02fc_bcdf865d",
+        "filename": "arch/arm64/kernel/cpufeature.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2767,
+      "author": {
+        "id": 1823900
+      },
+      "writtenOn": "2021-05-13T08:57:11Z",
+      "side": 1,
+      "message": "when not allow_mismatched_32bit_el0, here is to prevent the non-supported cpu to online. So the check is necessary In my opinion.",
+      "parentUuid": "d0b8bf7a_2eca9978",
+      "range": {
+        "startLine": 2766,
+        "startChar": 6,
+        "endLine": 2767,
+        "endChar": 36
+      },
+      "revId": "5a33552ef7658f40cca493dcd7154d13f29f82c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
