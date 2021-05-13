@@ -22,6 +22,30 @@
       },
       "revId": "a2f6546240da46b927615069a6b22c689566e944",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56c06b58_f004b560",
+        "filename": "kernel/sched/cputime.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2021-05-13T08:22:35Z",
+      "side": 1,
+      "message": "Do you mean to remove this parameter from this hook? It\u0027s ok for me to do this.\nI use this arguement here just for consistency with the previous hook.\n\n trace_android_vh_account_task_time(p, this_rq(), user_tick);",
+      "parentUuid": "ea100a88_dd33ae4b",
+      "range": {
+        "startLine": 402,
+        "startChar": 50,
+        "endLine": 402,
+        "endChar": 60
+      },
+      "revId": "a2f6546240da46b927615069a6b22c689566e944",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
