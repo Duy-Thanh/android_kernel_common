@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea100a88_dd33ae4b",
+        "filename": "kernel/sched/cputime.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-05-13T08:02:16Z",
+      "side": 1,
+      "message": "Could you please move this to your module? `runqueues` should be exported so it should be able to access it already.",
+      "range": {
+        "startLine": 402,
+        "startChar": 50,
+        "endLine": 402,
+        "endChar": 60
+      },
+      "revId": "a2f6546240da46b927615069a6b22c689566e944",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
