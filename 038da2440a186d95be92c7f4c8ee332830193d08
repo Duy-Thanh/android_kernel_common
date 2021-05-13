@@ -52,6 +52,24 @@
       "parentUuid": "372923e5_246577ad",
       "revId": "038da2440a186d95be92c7f4c8ee332830193d08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9bf5c2f_886e722a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1590325
+      },
+      "writtenOn": "2021-05-13T12:27:53Z",
+      "side": 1,
+      "message": "Sorry, it\u0027s my fault. I already sync to \u0027android12-5.10\u0027. Did I need to sync to android-mainline and android12-5.4?",
+      "parentUuid": "7f5d5c07_5c6e247d",
+      "revId": "038da2440a186d95be92c7f4c8ee332830193d08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
