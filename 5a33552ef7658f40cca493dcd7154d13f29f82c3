@@ -63,6 +63,30 @@
       },
       "revId": "5a33552ef7658f40cca493dcd7154d13f29f82c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "654e37de_ba3c19a0",
+        "filename": "arch/arm64/kernel/cpufeature.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2767,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-05-13T09:23:48Z",
+      "side": 1,
+      "message": "Sorry, but I don\u0027t see what you mean. For a system where `allow_mismatched_32bit_el0` is false, we will detect conflicts on the CPU capability (i.e. ARM64_HAS_32BIT_EL0) and not rely on the hwcaps for this.\n\nDo you have a concrete failure case in mind?",
+      "parentUuid": "35fa02fc_bcdf865d",
+      "range": {
+        "startLine": 2766,
+        "startChar": 6,
+        "endLine": 2767,
+        "endChar": 36
+      },
+      "revId": "5a33552ef7658f40cca493dcd7154d13f29f82c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
