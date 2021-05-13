@@ -34,6 +34,24 @@
       "parentUuid": "c62f7449_89d54b22",
       "revId": "038da2440a186d95be92c7f4c8ee332830193d08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f5d5c07_5c6e247d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-13T10:01:41Z",
+      "side": 1,
+      "message": "I mean why not also \u0027android-mainline\u0027, \u0027android12-5.10\u0027, \u0027android12-5.4\u0027 and so on...",
+      "parentUuid": "372923e5_246577ad",
+      "revId": "038da2440a186d95be92c7f4c8ee332830193d08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
