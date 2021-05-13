@@ -46,6 +46,30 @@
       },
       "revId": "655281cdc42ef149f5181ba0c05e995a32c77907",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32af06d9_9c64d007",
+        "filename": "arch/arm64/include/asm/cpufeature.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1769166
+      },
+      "writtenOn": "2021-05-13T06:27:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0a92d1a_2aa82495",
+      "range": {
+        "startLine": 629,
+        "startChar": 19,
+        "endLine": 629,
+        "endChar": 41
+      },
+      "revId": "655281cdc42ef149f5181ba0c05e995a32c77907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
