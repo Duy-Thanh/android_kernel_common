@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000010756496",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1706532?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "8342b76e_b77de37e",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 9,
+                "startChar": 0,
+                "endLine": 9,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Jing-Ting Wu \u003cjing-ting.wu@mediatek.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "22b281b9_f402e142",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-05-13T09:27:26Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Jing-Ting Wu \u003cjing-ting.wu@mediatek.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 373373225 android-build.ayeaye-python-dispatcher_20210512.05_p0",
+      "revId": "a503b8801089198a9237402572a96a780d2b3561",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000010756496",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1706532?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "4bcafeea_5eb2a1a7",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 9,
+                "startChar": 0,
+                "endLine": 9,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Jing-Ting Wu \u003cjing-ting.wu@mediatek.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "d8ec4280_36c97b92",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-05-13T09:27:26Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Jing-Ting Wu \u003cjing-ting.wu@mediatek.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 373373225 android-build.ayeaye-python-dispatcher_20210512.05_p0",
+      "revId": "a503b8801089198a9237402572a96a780d2b3561",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
