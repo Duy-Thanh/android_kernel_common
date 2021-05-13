@@ -22,6 +22,30 @@
       },
       "revId": "655281cdc42ef149f5181ba0c05e995a32c77907",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0a92d1a_2aa82495",
+        "filename": "arch/arm64/include/asm/cpufeature.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1823900
+      },
+      "writtenOn": "2021-05-13T01:28:20Z",
+      "side": 1,
+      "message": "good catch.\nLike changed to:\n\nid_aa64pfr0_32bit_el0(boot-\u003ereg_id_aa64pfr0)",
+      "parentUuid": "aed6b4f5_6beb4745",
+      "range": {
+        "startLine": 629,
+        "startChar": 19,
+        "endLine": 629,
+        "endChar": 41
+      },
+      "revId": "655281cdc42ef149f5181ba0c05e995a32c77907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
