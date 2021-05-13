@@ -16,6 +16,29 @@
       "message": "since per_cpu cpu_data is updated after this in cpuinfo_store_cpu, So it is only possible to read from the reg here.",
       "revId": "5a33552ef7658f40cca493dcd7154d13f29f82c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0b8bf7a_2eca9978",
+        "filename": "arch/arm64/kernel/cpufeature.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2767,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-05-13T08:48:34Z",
+      "side": 1,
+      "message": "Why do you need such a complicated check here? I think it\u0027s sufficient just to call cpu_supports_32bit_el0().\n\nThat\u0027s then identical to the diff I posted in the bug already. Did you have a chance to test that, please?",
+      "range": {
+        "startLine": 2766,
+        "startChar": 6,
+        "endLine": 2767,
+        "endChar": 36
+      },
+      "revId": "5a33552ef7658f40cca493dcd7154d13f29f82c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
