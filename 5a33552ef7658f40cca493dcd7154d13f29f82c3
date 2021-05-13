@@ -87,6 +87,30 @@
       },
       "revId": "5a33552ef7658f40cca493dcd7154d13f29f82c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a317bb5_e0d66aa8",
+        "filename": "arch/arm64/kernel/cpufeature.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2767,
+      "author": {
+        "id": 1823900
+      },
+      "writtenOn": "2021-05-13T10:16:28Z",
+      "side": 1,
+      "message": "Here is the concrete failure case:\n    hardware: 8cpus, boot cpu0 support 32bit el0, secondary cpu4 not support 32bit el0.\n    a. if `allow_mismatched_32bit_el0` is false. current cpu4 is reject to online since it will fail the verify.\n    b. if `allow_mismatched_32bit_el01 is true, secondary cpu4 is allowed to online and not do any verify_local_elf_hwcaps.\n\nif we only check the per cpu reg id to decide verify_local_elf_hwcaps, the software control flag of allow_mismatched_32bit_el0 will not working as it is now.\n\nfor ARM64_HAS_32BIT_EL0, are you talking about ARM64_HAS_32BIT_EL0_DO_NOT_USE (sysreg SYS_ID_AA64PFR0_EL1 )? Will it prevent the cpu4 online in the example above?",
+      "parentUuid": "654e37de_ba3c19a0",
+      "range": {
+        "startLine": 2766,
+        "startChar": 6,
+        "endLine": 2767,
+        "endChar": 36
+      },
+      "revId": "5a33552ef7658f40cca493dcd7154d13f29f82c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
