@@ -88,6 +88,24 @@
       "parentUuid": "4c253f7c_b0b3624b",
       "revId": "20ef7b8bc5d93831311f06fd6b6421fd31172d37",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e3ba9cc_04a3296a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5320,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2021-05-13T22:15:33Z",
+      "side": 0,
+      "message": "```\nin some cases it will never decrement\n```\nI was particularly worried about these cases. My initial response was to treat those as leaks? But I haven\u0027t found an example of this within binder, so I don\u0027t know if that is fair. I\u0027ll have a closer look.",
+      "parentUuid": "99bae974_bb7dc646",
+      "revId": "20ef7b8bc5d93831311f06fd6b6421fd31172d37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
