@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b68d475_557d2e14",
+        "filename": "arch/arm64/include/asm/cpufeature.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1823900
+      },
+      "writtenOn": "2021-05-13T08:38:48Z",
+      "side": 1,
+      "message": "since per_cpu cpu_data is updated after this in cpuinfo_store_cpu, So it is only possible to read from the reg here.",
+      "revId": "5a33552ef7658f40cca493dcd7154d13f29f82c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
