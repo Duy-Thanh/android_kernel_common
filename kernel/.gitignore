@@ -1,5 +1,9 @@
 # SPDX-License-Identifier: GPL-2.0-only
+<<<<<<< HEAD   (bc6ca7 ANDROID: add OWNERS for sysfs-fs-f2fs)
 config_data
+=======
+/config_data
+>>>>>>> BRANCH (72bb63 Linux 5.10.36)
 kheaders.md5
 timeconst.h
 hz.bc
