@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d7fd8b6_67d523c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-05-13T18:40:58Z",
+      "side": 1,
+      "message": "Let\u0027s expand this a bit. I suuggest smth like this:\n\nANDROID: mm, oom: add vendor hook to prevent oom panic\n\nIn some cases we would like to bypass oom panic and give the\nsystem more time to cleanup memory. Add vendor hook to allow skipping the oom panic.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 66
+      },
+      "revId": "5c1a3b00b6a58c8fa2b6f92f93cf4f9e5d5ab0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23846342_649988a6",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1154,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-05-13T18:40:58Z",
+      "side": 1,
+      "message": "Let\u0027s move this block down into \"if (!oc-\u003echosen) {\" block at the line 1157 to make it clear we are trying to bypass panic and not further kills.\nAlso let\u0027s call this hook something like trace_android_vh_oom_about_to_panic() or something like this.",
+      "range": {
+        "startLine": 1152,
+        "startChar": 1,
+        "endLine": 1154,
+        "endChar": 14
+      },
+      "revId": "5c1a3b00b6a58c8fa2b6f92f93cf4f9e5d5ab0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
