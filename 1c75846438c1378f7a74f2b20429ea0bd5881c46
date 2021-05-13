@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0942091e_8cd6ba42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-05-13T02:44:16Z",
+      "side": 1,
+      "message": "Minor update to refresh the xml as well, per Todd\u0027s matching change for the android12-5.4 version of this patch.",
+      "revId": "1c75846438c1378f7a74f2b20429ea0bd5881c46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
