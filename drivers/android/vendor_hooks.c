@@ -146,6 +146,23 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freq_qos_update_request);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freq_qos_remove_request);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_balance_anon_file_reclaim);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_show_max_freq);
+<<<<<<< HEAD   (b75992 UPSTREAM: usb: dwc3: debugfs: Resume dwc3 before accessing r)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_referenced_check_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_drain_all_pages_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_drain_all_pages_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pcplist_add_cma_pages_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_irqtime_account_process_tick);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dup_task_struct);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_after_enqueue_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_after_dequeue_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_enqueue_entity);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dequeue_entity);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_entity_tick);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_enqueue_task_fair);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dequeue_task_fair);
+>>>>>>> CHANGE (bafafe ANDROID: vendor_hooks: Add hooks to dup_task_struct)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_avc_insert);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_avc_node_delete);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_avc_node_replace);

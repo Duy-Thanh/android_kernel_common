@@ -1060,10 +1060,14 @@ static struct task_struct *dup_task_struct(struct task_struct *orig, int node)
 #ifdef CONFIG_CPU_SUP_INTEL
 	tsk->reported_split_lock = 0;
 #endif
+<<<<<<< HEAD   (b75992 UPSTREAM: usb: dwc3: debugfs: Resume dwc3 before accessing r)
 
 	android_init_vendor_data(tsk, 1);
 	android_init_oem_data(tsk, 1);
 
+=======
+	trace_android_vh_dup_task_struct(tsk, orig);
+>>>>>>> CHANGE (bafafe ANDROID: vendor_hooks: Add hooks to dup_task_struct)
 	return tsk;
 
 free_stack:
