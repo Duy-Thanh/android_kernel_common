@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82d0cb70_6b1ce0c4",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-05-14T18:25:50Z",
+      "side": 1,
+      "message": "Minchan, are you ok with this change? You were the one who added this hook in https://android-review.googlesource.com/c/kernel/common/+/1664062 and additional parameters would require you to recompile your module I think.",
+      "range": {
+        "startLine": 31,
+        "startChar": 1,
+        "endLine": 34,
+        "endChar": 59
+      },
+      "revId": "277b151ad0e4e7b8b11862590c1cca776bcbee36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
