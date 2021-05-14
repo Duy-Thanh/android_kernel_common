@@ -34,6 +34,24 @@
       "parentUuid": "9b82734c_9d2fb3ff",
       "revId": "e5b2c100cda3f270ccce031228019c1ce2bafcae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3258688c_80cf882b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1642820
+      },
+      "writtenOn": "2021-05-14T07:38:35Z",
+      "side": 1,
+      "message": "I checked and found that I picked a wrong branch.\nSo I\u0027ll post again to another branch.\nThe xml file contains ufshcd_config_pwr_mode, so it\u0027s not necessary to be added.",
+      "parentUuid": "d30204fa_c9544cf7",
+      "revId": "e5b2c100cda3f270ccce031228019c1ce2bafcae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
