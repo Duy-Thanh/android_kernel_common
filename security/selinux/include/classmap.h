@@ -242,13 +242,20 @@ struct security_class_mapping secclass_map[] = {
 	{ "infiniband_endport",
 	  { "manage_subnet", NULL } },
 	{ "bpf",
-	  {"map_create", "map_read", "map_write", "prog_load", "prog_run"} },
+	  { "map_create", "map_read", "map_write", "prog_load", "prog_run",
+	    NULL } },
 	{ "xdp_socket",
 	  { COMMON_SOCK_PERMS, NULL } },
 	{ "perf_event",
+<<<<<<< HEAD   (3b80f9 BACKPORT: scsi: ufs: Refactor ufshcd_setup_clocks() to remov)
 	  {"open", "cpu", "kernel", "tracepoint", "read", "write"} },
 	{ "anon_inode",
 	  { COMMON_FILE_PERMS, NULL } },
+=======
+	  { "open", "cpu", "kernel", "tracepoint", "read", "write", NULL } },
+	{ "lockdown",
+	  { "integrity", "confidentiality", NULL } },
+>>>>>>> BRANCH (e97bd1 Linux 5.10.37)
 	{ NULL }
   };
 

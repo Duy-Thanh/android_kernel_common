@@ -3168,10 +3168,17 @@ static unsigned int tcpm_pd_select_pps_apdo(struct tcpm_port *port)
 		port->pps_data.req_max_volt = min(pdo_pps_apdo_max_voltage(src),
 						  pdo_pps_apdo_max_voltage(snk));
 		port->pps_data.req_max_curr = min_pps_apdo_current(src, snk);
+<<<<<<< HEAD   (3b80f9 BACKPORT: scsi: ufs: Refactor ufshcd_setup_clocks() to remov)
 		port->pps_data.req_out_volt = min(port->pps_data.req_max_volt,
 						  max(port->pps_data.req_min_volt,
 						      port->pps_data.req_out_volt));
 		port->pps_data.req_op_curr = min(port->pps_data.req_max_curr,
+=======
+		port->pps_data.req_out_volt = min(port->pps_data.max_volt,
+						  max(port->pps_data.min_volt,
+						      port->pps_data.req_out_volt));
+		port->pps_data.req_op_curr = min(port->pps_data.max_curr,
+>>>>>>> BRANCH (e97bd1 Linux 5.10.37)
 						 port->pps_data.req_op_curr);
 	}
 
@@ -5759,6 +5766,12 @@ static int tcpm_pps_activate(struct tcpm_port *port, bool activate)
 	if (activate) {
 		port->pps_data.req_out_volt = port->supply_voltage;
 		port->pps_data.req_op_curr = port->current_limit;
+<<<<<<< HEAD   (3b80f9 BACKPORT: scsi: ufs: Refactor ufshcd_setup_clocks() to remov)
+=======
+		tcpm_set_state(port, SNK_NEGOTIATE_PPS_CAPABILITIES, 0);
+	} else {
+		tcpm_set_state(port, SNK_NEGOTIATE_CAPABILITIES, 0);
+>>>>>>> BRANCH (e97bd1 Linux 5.10.37)
 	}
 	mutex_unlock(&port->lock);
 

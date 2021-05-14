@@ -461,6 +461,7 @@ static int check_fs_bus_bw(struct mu3h_sch_ep_info *sch_ep, int offset)
 		for (j = 0; j < sch_ep->cs_count; j++) {
 			tmp = tt->fs_bus_bw[base + j] + sch_ep->bw_cost_per_microframe;
 			if (tmp > FS_PAYLOAD_MAX)
+<<<<<<< HEAD   (3b80f9 BACKPORT: scsi: ufs: Refactor ufshcd_setup_clocks() to remov)
 				return -ESCH_BW_OVERFLOW;
 		}
 	}
@@ -469,6 +470,17 @@ static int check_fs_bus_bw(struct mu3h_sch_ep_info *sch_ep, int offset)
 }
 
 static int check_sch_tt(struct mu3h_sch_ep_info *sch_ep, u32 offset)
+=======
+				return -ERANGE;
+		}
+	}
+
+	return 0;
+}
+
+static int check_sch_tt(struct usb_device *udev,
+	struct mu3h_sch_ep_info *sch_ep, u32 offset)
+>>>>>>> BRANCH (e97bd1 Linux 5.10.37)
 {
 	struct mu3h_sch_tt *tt = sch_ep->sch_tt;
 	u32 extra_cs_count;
@@ -490,7 +502,11 @@ static int check_sch_tt(struct mu3h_sch_ep_info *sch_ep, u32 offset)
 
 		for (i = 0; i < sch_ep->cs_count; i++)
 			if (test_bit(offset + i, tt->ss_bit_map))
+<<<<<<< HEAD   (3b80f9 BACKPORT: scsi: ufs: Refactor ufshcd_setup_clocks() to remov)
 				return -ESCH_SS_OVERLAP;
+=======
+				return -ERANGE;
+>>>>>>> BRANCH (e97bd1 Linux 5.10.37)
 
 	} else {
 		u32 cs_count = DIV_ROUND_UP(sch_ep->maxpkt, FS_PAYLOAD_MAX);
@@ -518,8 +534,15 @@ static int check_sch_tt(struct mu3h_sch_ep_info *sch_ep, u32 offset)
 		if (cs_count > 7)
 			cs_count = 7; /* HW limit */
 
+<<<<<<< HEAD   (3b80f9 BACKPORT: scsi: ufs: Refactor ufshcd_setup_clocks() to remov)
 		if (test_bit(offset, tt->ss_bit_map))
 			return -ESCH_SS_OVERLAP;
+=======
+		for (i = 0; i < cs_count + 2; i++) {
+			if (test_bit(offset + i, tt->ss_bit_map))
+				return -ERANGE;
+		}
+>>>>>>> BRANCH (e97bd1 Linux 5.10.37)
 
 		sch_ep->cs_count = cs_count;
 		/* one for ss, the other for idle */
@@ -536,7 +559,12 @@ static int check_sch_tt(struct mu3h_sch_ep_info *sch_ep, u32 offset)
 	return check_fs_bus_bw(sch_ep, offset);
 }
 
+<<<<<<< HEAD   (3b80f9 BACKPORT: scsi: ufs: Refactor ufshcd_setup_clocks() to remov)
 static void update_sch_tt(struct mu3h_sch_ep_info *sch_ep, bool used)
+=======
+static void update_sch_tt(struct usb_device *udev,
+	struct mu3h_sch_ep_info *sch_ep, bool used)
+>>>>>>> BRANCH (e97bd1 Linux 5.10.37)
 {
 	struct mu3h_sch_tt *tt = sch_ep->sch_tt;
 	u32 base, num_esit;
@@ -652,15 +680,38 @@ static int check_sch_bw(struct mu3h_sch_bw_info *sch_bw,
 	sch_ep->cs_count = min_cs_count;
 	sch_ep->num_budget_microframes = min_num_budget;
 
+<<<<<<< HEAD   (3b80f9 BACKPORT: scsi: ufs: Refactor ufshcd_setup_clocks() to remov)
 	return load_ep_bw(sch_bw, sch_ep, true);
+=======
+	if (is_fs_or_ls(udev->speed)) {
+		/* all offset for tt is not ok*/
+		if (!tt_offset_ok)
+			return -ERANGE;
+
+		update_sch_tt(udev, sch_ep, 1);
+	}
+
+	/* update bus bandwidth info */
+	update_bus_bw(sch_bw, sch_ep, 1);
+
+	return 0;
+>>>>>>> BRANCH (e97bd1 Linux 5.10.37)
 }
 
 static void destroy_sch_ep(struct usb_device *udev,
 	struct mu3h_sch_bw_info *sch_bw, struct mu3h_sch_ep_info *sch_ep)
 {
 	/* only release ep bw check passed by check_sch_bw() */
+<<<<<<< HEAD   (3b80f9 BACKPORT: scsi: ufs: Refactor ufshcd_setup_clocks() to remov)
 	if (sch_ep->allocated)
 		load_ep_bw(sch_bw, sch_ep, false);
+=======
+	if (sch_ep->allocated) {
+		update_bus_bw(sch_bw, sch_ep, 0);
+		if (sch_ep->sch_tt)
+			update_sch_tt(udev, sch_ep, 0);
+	}
+>>>>>>> BRANCH (e97bd1 Linux 5.10.37)
 
 	if (sch_ep->sch_tt)
 		drop_tt(udev);
