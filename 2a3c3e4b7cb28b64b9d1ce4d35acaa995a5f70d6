@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0678631d_b36340eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-14T08:47:26Z",
+      "side": 1,
+      "message": "What driver needs access to this?",
+      "revId": "2a3c3e4b7cb28b64b9d1ce4d35acaa995a5f70d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42a9c7c4_256836ce",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-14T08:47:26Z",
+      "side": 1,
+      "message": "this should not be needed by any driver.\n\nAnd if it really is, then it has to be EXPORT_SYMBOL_GPL as this is a core structure.",
+      "range": {
+        "startLine": 999,
+        "startChar": 0,
+        "endLine": 999,
+        "endChar": 13
+      },
+      "revId": "2a3c3e4b7cb28b64b9d1ce4d35acaa995a5f70d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
