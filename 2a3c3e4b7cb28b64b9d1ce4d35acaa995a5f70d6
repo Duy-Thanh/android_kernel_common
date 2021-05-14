@@ -146,6 +146,30 @@
       },
       "revId": "2a3c3e4b7cb28b64b9d1ce4d35acaa995a5f70d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c5e5f4b_9e2968a1",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-14T13:35:56Z",
+      "side": 1,
+      "message": "No, that is not how to use the thermal class code at all.\n\nAlso, this export will not work like this anyway, I do not think you have tested this change 😞",
+      "parentUuid": "02d3bed8_069d956c",
+      "range": {
+        "startLine": 999,
+        "startChar": 0,
+        "endLine": 999,
+        "endChar": 13
+      },
+      "revId": "2a3c3e4b7cb28b64b9d1ce4d35acaa995a5f70d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
