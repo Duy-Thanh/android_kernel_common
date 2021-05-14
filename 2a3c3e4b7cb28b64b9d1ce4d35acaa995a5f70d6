@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "73d27464_ca3b5c03",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1876668
+      },
+      "writtenOn": "2021-05-14T12:46:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6375a08_b9d655e6",
+      "range": {
+        "startLine": 13,
+        "startChar": 15,
+        "endLine": 13,
+        "endChar": 25
+      },
+      "revId": "2a3c3e4b7cb28b64b9d1ce4d35acaa995a5f70d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0678631d_b36340eb",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -59,6 +83,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb4e5224_acb68606",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876668
+      },
+      "writtenOn": "2021-05-14T12:46:07Z",
+      "side": 1,
+      "message": "mi_thermal_interface.o",
+      "parentUuid": "0678631d_b36340eb",
+      "revId": "2a3c3e4b7cb28b64b9d1ce4d35acaa995a5f70d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42a9c7c4_256836ce",
@@ -72,6 +114,30 @@
       "writtenOn": "2021-05-14T08:47:26Z",
       "side": 1,
       "message": "this should not be needed by any driver.\n\nAnd if it really is, then it has to be EXPORT_SYMBOL_GPL as this is a core structure.",
+      "range": {
+        "startLine": 999,
+        "startChar": 0,
+        "endLine": 999,
+        "endChar": 13
+      },
+      "revId": "2a3c3e4b7cb28b64b9d1ce4d35acaa995a5f70d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02d3bed8_069d956c",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 1876668
+      },
+      "writtenOn": "2021-05-14T12:46:07Z",
+      "side": 1,
+      "message": "To separate mi_thermal\u0027s logic(for example：create node,limit cpu fre) related to thermal, we separate our own modules from thermal_core.c,this module needs thermal_class to create its own node, so I want to export　the variable of thermal_class.",
+      "parentUuid": "42a9c7c4_256836ce",
       "range": {
         "startLine": 999,
         "startChar": 0,
