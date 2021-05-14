@@ -16,6 +16,29 @@
       "message": "fixed the commit message tag typo error",
       "revId": "32c993710b6d0aa9a7b91e291c3bed477476eed9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbbf34f1_0ab83726",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-14T10:46:13Z",
+      "side": 1,
+      "message": "does not need to be so big, use a single pointer to point to other data if you really need more than 6 here.",
+      "range": {
+        "startLine": 1372,
+        "startChar": 27,
+        "endLine": 1372,
+        "endChar": 29
+      },
+      "revId": "32c993710b6d0aa9a7b91e291c3bed477476eed9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
