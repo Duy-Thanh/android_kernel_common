@@ -39,6 +39,30 @@
       },
       "revId": "32c993710b6d0aa9a7b91e291c3bed477476eed9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e76335a9_24a60ff7",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-05-14T17:04:08Z",
+      "side": 1,
+      "message": "I suggested the same in the bug but sounds like the fields are used in the hot path and cache misses could affect performance: https://b.corp.google.com/issues/188018141#comment4",
+      "parentUuid": "cbbf34f1_0ab83726",
+      "range": {
+        "startLine": 1372,
+        "startChar": 27,
+        "endLine": 1372,
+        "endChar": 29
+      },
+      "revId": "32c993710b6d0aa9a7b91e291c3bed477476eed9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
