@@ -135,6 +135,30 @@
       },
       "revId": "5a33552ef7658f40cca493dcd7154d13f29f82c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05a429d8_360f5cee",
+        "filename": "arch/arm64/kernel/cpufeature.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2767,
+      "author": {
+        "id": 1823900
+      },
+      "writtenOn": "2021-05-14T10:20:42Z",
+      "side": 1,
+      "message": "agree to only have cpu_supports_32bit_el0() check it can meet our situation.",
+      "parentUuid": "c81677bf_28c2dcf3",
+      "range": {
+        "startLine": 2766,
+        "startChar": 6,
+        "endLine": 2767,
+        "endChar": 36
+      },
+      "revId": "5a33552ef7658f40cca493dcd7154d13f29f82c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
