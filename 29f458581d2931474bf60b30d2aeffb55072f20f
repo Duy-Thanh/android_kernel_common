@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b752fc2e_fcbc1cd3",
+        "filename": "arch/arm/include/asm/pgtable-2level.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-05-14T09:28:08Z",
+      "side": 1,
+      "message": "Although this looks like it\u0027s unused, this changes the memory type for DEV_NONSHARED with TEX remapping enabled.",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 49
+      },
+      "revId": "29f458581d2931474bf60b30d2aeffb55072f20f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c430e99_d46f5b1d",
+        "filename": "arch/arm/include/asm/pgtable-2level.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-05-14T09:28:08Z",
+      "side": 1,
+      "message": "Same thing here -- I think this used to map to WRITEALLOC but now it doesn\u0027t.",
+      "range": {
+        "startLine": 174,
+        "startChar": 8,
+        "endLine": 174,
+        "endChar": 51
+      },
+      "revId": "29f458581d2931474bf60b30d2aeffb55072f20f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
