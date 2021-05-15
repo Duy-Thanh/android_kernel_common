@@ -16,6 +16,24 @@
       "message": "Can you also share how calling blk_mq_start_request is fixing the depth?\n\nThanks,\nAvri",
       "revId": "8d62ad957b0ec559240af5e08685553de3a34e68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00bd722e_8962d2bb",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2841,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-05-15T19:56:04Z",
+      "side": 1,
+      "message": "blk_mq_start_request() starts the timer from inside which blk_mq_tag_idle() is called. blk_mq_tag_idle() is responsible for decreasing the number of active queues. If the timer is not started blk_mq_tag_idle() is never called. Does that answer your question?",
+      "parentUuid": "4e53d837_5d0a069d",
+      "revId": "8d62ad957b0ec559240af5e08685553de3a34e68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
