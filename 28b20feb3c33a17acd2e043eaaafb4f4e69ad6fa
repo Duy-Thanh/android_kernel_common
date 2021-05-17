@@ -124,6 +124,24 @@
       "parentUuid": "81297436_36a13d58",
       "revId": "28b20feb3c33a17acd2e043eaaafb4f4e69ad6fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80ff5b96_b133db25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-17T12:30:23Z",
+      "side": 1,
+      "message": "Do not create random sysfs files, that is allowing a new user/kernel abi that you will have to maintain for the next 20+ years on your own.\n\nUse the in-kernel functions and api instead.  If you need additional files/control, please submit those changes upstream and we will be glad to take backports here if they are accepted.\n\nBut again, creating new kernel/user apis is not allowed for common class functionality.",
+      "parentUuid": "fc6b5c1b_9abcbffb",
+      "revId": "28b20feb3c33a17acd2e043eaaafb4f4e69ad6fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
