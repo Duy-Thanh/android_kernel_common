@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a58351f_9805c211",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-17T18:10:46Z",
+      "side": 1,
+      "message": "For android-mainline, why not just wait until it lands upstream and get it via merge?",
+      "revId": "e1244f9ae8b24d76ad5d91d5e609726d0bf9490f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
