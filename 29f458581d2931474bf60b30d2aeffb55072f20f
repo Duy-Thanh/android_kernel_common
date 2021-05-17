@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cdfd1993_18aa6eed",
+        "filename": "arch/arm/include/asm/pgtable-2level.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1656502
+      },
+      "writtenOn": "2021-05-17T01:37:54Z",
+      "side": 1,
+      "message": "Thanks for your review:)\n\nThe way to make it support pte_special is to define a new bit. The possible available space is between L_PTE_YOUNG and L_PTE_DIRTY,\n\n#define L_PTE_YOUNG\t\t(_AT(pteval_t, 1) \u003c\u003c 1)    //      10b\n#define L_PTE_DIRTY\t\t(_AT(pteval_t, 1) \u003c\u003c 6)    // 1000000b\n                                  //Range for L_PTE_MT_ooo // -oooo--b\n\n\nTo add a newly defined bit into the range, the possible solution is to \"compact\" xxx_mt_table. This table is used to translate Linux version\u0027s PTE to HW PTE.\n\nThe way to compact the table is done by the following 2 methods,\n1. Find out the same HW PTE setting.\n\na. \"PTE_EXT_TEX(1)\"\n.long\tPTE_EXT_TEX(1)\t\t\t\t\t@ L_PTE_MT_BUFFERABLE\n.long\tPTE_EXT_TEX(1)\t\t\t\t\t@ L_PTE_MT_DEV_WC\n\nThey can be merged into one .long field, which means L_PTE_MT_DEV_WC can be defined as L_PTE_MT_BUFFERABLE.\n\nb. \"PTE_CACHEABLE | PTE_BUFFERABLE\"\n.long\tPTE_CACHEABLE | PTE_BUFFERABLE\t\t\t@ L_PTE_MT_WRITEBACK\n.long\tPTE_CACHEABLE | PTE_BUFFERABLE\t\t\t@ L_PTE_MT_DEV_CACHED\n\nAlso, they can be merged.\n\n\n2. Find out \"unused.\"\n\nThere are 2 unused .long fields before the 7th entry (The index to xxx_mt_table is 111b)\n\n.long\t0x00\t\t\t\t\t\t@ unused\n.long\t0x00\t\t\t\t\t\t@ L_PTE_MT_MINICACHE (not present)\n\nSo they can be reserved for L_PTE_MT_VECTORS and L_PTE_MT_DEV_NONSHARED respectively.\n\n\nNow, the number of bits to mention L_PTE_MT_XXX needs 3 bits only.\n\n#define L_PTE_YOUNG\t\t(_AT(pteval_t, 1) \u003c\u003c 1)    //      10b\n#define L_PTE_DIRTY\t\t(_AT(pteval_t, 1) \u003c\u003c 6)    // 1000000b\n                                  //Range for L_PTE_MT_ooo // -xooo--b\n\nSo we can define L_PTE_SPECIAL as\n\n#define L_PTE_SPECIAL\t\t(_AT(pteval_t, 1) \u003c\u003c 5)    //  100000b",
+      "parentUuid": "b752fc2e_fcbc1cd3",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 49
+      },
+      "revId": "29f458581d2931474bf60b30d2aeffb55072f20f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c430e99_d46f5b1d",
         "filename": "arch/arm/include/asm/pgtable-2level.h",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2021-05-14T09:28:08Z",
       "side": 1,
       "message": "Same thing here -- I think this used to map to WRITEALLOC but now it doesn\u0027t.",
+      "range": {
+        "startLine": 174,
+        "startChar": 8,
+        "endLine": 174,
+        "endChar": 51
+      },
+      "revId": "29f458581d2931474bf60b30d2aeffb55072f20f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97d3b20e_db1b51e5",
+        "filename": "arch/arm/include/asm/pgtable-2level.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1656502
+      },
+      "writtenOn": "2021-05-17T01:37:54Z",
+      "side": 1,
+      "message": "Hi, I explained it in the reply to the previous comment. Thanks.",
+      "parentUuid": "9c430e99_d46f5b1d",
       "range": {
         "startLine": 174,
         "startChar": 8,
