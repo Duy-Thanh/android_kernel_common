@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84f9b86e_158dd9a2",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-17T18:15:04Z",
+      "side": 1,
+      "message": "don\u0027t reformat the file. The old code was mostly compliant with the linux kernel code style, but your changes are not.",
+      "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cc81819_4084d0e0",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-17T18:15:04Z",
+      "side": 1,
+      "message": "Why not allocate a power of 2 plus one page for the header and let the kernel allocator decide if if should round it up and waste memory or not?",
+      "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9af9dfe_ab8094c2",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-17T18:15:04Z",
+      "side": 1,
+      "message": "Don\u0027t change the ratelimit in the same patch in case it causes problems and need to be reverted.",
+      "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbbf5160_4c3eb450",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-17T18:15:04Z",
+      "side": 1,
+      "message": "Did you try to use the iterator interface instead of trying to dump the entire log into a single buffer? Since the log size you have configured does not fir in a page, I think this will be called repeatedly with larger and larger allocations until it succeeds. Since the log data only grows at the end, this is wasted work.",
+      "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45259cc9_771d5e0a",
+        "filename": "drivers/trusty/trusty-log.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-17T18:15:04Z",
+      "side": 1,
+      "message": "why did this file change? Also run checkpatch on linux kernel code to check that you are following their rules",
+      "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
