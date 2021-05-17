@@ -16,6 +16,23 @@
       "message": "Hey all, this change is breaking db845c booting.\n\nWe get lots of warnings:\nWARNING: CPU: 0 PID: 0 at drivers/iommu/io-pgtable-arm.c:643 __arm_lpae_unmap+0x710/0x744\nWARNING: CPU: 0 PID: 0 at drivers/iommu/io-pgtable-arm.c:633 __arm_lpae_unmap+0x728/0x744\nWARNING: CPU: 0 PID: 0 at drivers/iommu/dma-iommu.c:523 __iommu_dma_unmap+0x14c/0x160\n\nAnd the board shortly reboots into bootloader mode.\n",
       "revId": "3c75179a31c6f06df8d4018b171e825d2adc0276",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99ed7b82_57f6eeef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-05-17T22:58:35Z",
+      "side": 1,
+      "message": "Just to confirm: Reverting this on top of android12-5.10 gets db845c back to booting.",
+      "revId": "3c75179a31c6f06df8d4018b171e825d2adc0276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
