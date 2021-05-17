@@ -70,6 +70,24 @@
       "parentUuid": "148e2f0a_58ebdf81",
       "revId": "28b20feb3c33a17acd2e043eaaafb4f4e69ad6fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f2ef4ce_2d483404",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879565
+      },
+      "writtenOn": "2021-05-17T11:10:44Z",
+      "side": 1,
+      "message": "my thermal driver is ko,the ko needs  using themal_class to create some nodes　of used to control temp．\n\nso I use the method to use thermal_class.\n\nor you have another method to let me use the thermal_class?",
+      "parentUuid": "85f7ae28_c65ba8b7",
+      "revId": "28b20feb3c33a17acd2e043eaaafb4f4e69ad6fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
