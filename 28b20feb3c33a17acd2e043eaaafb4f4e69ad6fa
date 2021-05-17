@@ -88,6 +88,24 @@
       "parentUuid": "85f7ae28_c65ba8b7",
       "revId": "28b20feb3c33a17acd2e043eaaafb4f4e69ad6fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81297436_36a13d58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879565
+      },
+      "writtenOn": "2021-05-17T11:53:59Z",
+      "side": 1,
+      "message": "static int __init mi_thermal_interface_init(void){\n   register_trace_android_vh_get_thermal_class(create_thermal_message_node, NULL);\n}\n\nstatic void create_thermal_message_node(void * data, struct class * thermal_class)--------\u003ethis method to use some node",
+      "parentUuid": "1f2ef4ce_2d483404",
+      "revId": "28b20feb3c33a17acd2e043eaaafb4f4e69ad6fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
