@@ -16,6 +16,24 @@
       "message": "Use the same Change-Id please.",
       "revId": "777e862b401ca471754b5c50f045c3d9f6bb8398",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0025753_d875b30f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878106
+      },
+      "writtenOn": "2021-05-17T05:40:44Z",
+      "side": 1,
+      "message": "Sorry, this commit is meet the error of \"not signed off by author/committer\".\nI re-upstream to 1708126 and fixed the above error already.\nI will abandon this commit and upstream the patch at 1708126.",
+      "parentUuid": "d31314b0_c059fa8d",
+      "revId": "777e862b401ca471754b5c50f045c3d9f6bb8398",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
