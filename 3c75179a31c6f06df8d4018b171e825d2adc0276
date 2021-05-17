@@ -33,6 +33,24 @@
       "message": "Just to confirm: Reverting this on top of android12-5.10 gets db845c back to booting.",
       "revId": "3c75179a31c6f06df8d4018b171e825d2adc0276",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75367663_f35c0dee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1584799
+      },
+      "writtenOn": "2021-05-17T23:49:03Z",
+      "side": 1,
+      "message": "Hey John,\n\nCan you please try out this change to see if it helps: https://android-review.googlesource.com/c/kernel/common/+/1710109?",
+      "parentUuid": "99ed7b82_57f6eeef",
+      "revId": "3c75179a31c6f06df8d4018b171e825d2adc0276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
