@@ -2,6 +2,7 @@
 /*
  * Copyright (C) 2015 Google, Inc.
  */
+#include <linux/compiler.h>
 #include <linux/platform_device.h>
 #include <linux/trusty/smcall.h>
 #include <linux/trusty/trusty.h>
@@ -14,8 +15,37 @@
 #include <linux/log2.h>
 #include <asm/page.h>
 #include "trusty-log.h"
+#include "trusty-logbuffer.h"
 
-#define TRUSTY_LOG_SIZE (PAGE_SIZE * 2)
+/*
+ * Shared memory allocation must be page-aligned
+ * trusty log shared memory holds both the ring buffer metadata (struct log_rb)
+ * as well as the ring buffer data which size must be a power-of-two in order
+ * to use the performant wraparound logic with mask(idx) = idx & (sz-1)
+ * (this approach only works in case of unsigned int overflow
+ * when sz is a power-of-two)
+ *
+ * This wraparound logic constraint combined with the page-aligned constraint
+ * lead to specifying the shared-memory size as:
+ * - log buffer size: power of two and multiple of page size
+ * - plus metadata: one page size due to page alignment constraint
+ */
+
+/*
+ * Rationale for the chosen shared memory size
+ *  - /dev/logbuffer shall contain unthrottled trusty crash dump.
+ *    Testing identifies that the logbuffer size shall be ~(96Bytes * 100)
+ *    which is ~ PAGE_SIZE * 2
+ *  - specifying twice as much as the crash dump minimum allows to have
+ *    ~100 lines of context prior to the crash.
+ *  - conclusion: logbuffer = PAGE_SIZE * 4 is comfortable, half is minimal.
+ *  - shared memory size shall be logbuffer size + one page size due to the
+ *    constraints described above.
+ */
+
+#define TRUSTY_LOG_SHAREDMEM_SIZE                                              \
+	(PAGE_SIZE * 4 + PAGE_SIZE) /* logbuffer + one page for metadata*/
+
 #define TRUSTY_LINE_BUFFER_SIZE 256
 
 /*
@@ -31,7 +61,7 @@ static struct ratelimit_state trusty_log_rate_limit =
 struct trusty_log_state {
 	struct device *dev;
 	struct device *trusty_dev;
-
+	struct trusty_logbuffer *logbuffer;
 	/*
 	 * This lock is here to ensure only one consumer will read
 	 * from the log ring buffer at a time.
@@ -65,7 +95,17 @@ static int log_read_line(struct trusty_log_state *s, int put, int get)
 	return i;
 }
 
-static void trusty_dump_logs(struct trusty_log_state *s)
+/**
+ * trusty_dump_logs() - dump logs either to kernel log or to secondary logbuffer
+ * @s:         Current log state.
+ * @sfile:     seq_file pointer for dumping to secondary logbuffer.
+ *             When NULL, logs are dumped to kernel logs via dev_info.
+ *
+ * Dumping to the kernel consists in dumping only the delta log from previous
+ * dump, while dumping to the secondary logbuffer (/dev/logbuffer_trusty)
+ * consists in dumping the whole ring buffer.
+ */
+static void trusty_dump_logs(struct trusty_log_state *s, struct seq_file *sfile)
 {
 	struct log_rb *log = s->log;
 	u32 get, put, alloc;
@@ -81,7 +121,12 @@ static void trusty_dump_logs(struct trusty_log_state *s)
 	 * that the above condition is maintained. A read barrier is needed
 	 * to make sure the hardware and compiler keep the reads ordered.
 	 */
-	get = s->get;
+	/*
+	 * sfile dump requires to dump the whole buffer
+	 * i.e. to start from the oldest entry in the ring buffer
+	 * which is located at (log->alloc - log->sz) % log->sz.
+	 */
+	get = sfile ? log->alloc - log->sz : s->get;
 	while ((put = log->put) != get) {
 		/* Make sure that the read of put occurs before the read of log data */
 		rmb();
@@ -98,17 +143,40 @@ static void trusty_dump_logs(struct trusty_log_state *s)
 		 * have been corrupted by the producer.
 		 */
 		if (alloc - get > log->sz) {
-			dev_err(s->dev, "log overflow.");
+			/*
+			 * this condition is acceptable in the case of the sfile dump
+			 * it simply means a new entry is written in the log while
+			 * we start dumping from the oldest entry
+			 */
+			if (!sfile) {
+				dev_err(s->dev, "log overflow.");
+			}
 			get = alloc - log->sz;
 			continue;
 		}
-
-		if (__ratelimit(&trusty_log_rate_limit))
-			dev_info(s->dev, "%s", s->line_buffer);
-
+		if (sfile) {
+			seq_printf(sfile, "%s", s->line_buffer);
+		} else {
+			if (__ratelimit(&trusty_log_rate_limit)) {
+				dev_info(s->dev, "%s", s->line_buffer);
+			}
+		}
 		get += read_chars;
 	}
-	s->get = get;
+	if (!sfile) {
+		s->get = get;
+	}
+}
+
+static int trusty_logbuffer_seq_show(void *ctx, struct seq_file *sfile, void *v)
+{
+	struct trusty_log_state *s;
+	(void)v;
+	s = ctx;
+	spin_lock(&s->lock);
+	trusty_dump_logs(s, sfile);
+	spin_unlock(&s->lock);
+	return 0;
 }
 
 static int trusty_log_call_notify(struct notifier_block *nb,
@@ -122,7 +190,7 @@ static int trusty_log_call_notify(struct notifier_block *nb,
 
 	s = container_of(nb, struct trusty_log_state, call_notifier);
 	spin_lock_irqsave(&s->lock, flags);
-	trusty_dump_logs(s);
+	trusty_dump_logs(s, NULL /* sfile = NULL */);
 	spin_unlock_irqrestore(&s->lock, flags);
 	return NOTIFY_OK;
 }
@@ -139,7 +207,7 @@ static int trusty_log_panic_notify(struct notifier_block *nb,
 	s = container_of(nb, struct trusty_log_state, panic_notifier);
 	dev_info(s->dev, "panic notifier - trusty version %s",
 		 trusty_version_str_get(s->trusty_dev));
-	trusty_dump_logs(s);
+	trusty_dump_logs(s, NULL /* sfile = NULL */);
 	return NOTIFY_OK;
 }
 
@@ -172,7 +240,9 @@ static int trusty_log_probe(struct platform_device *pdev)
 	struct trusty_log_state *s;
 	int result;
 	trusty_shared_mem_id_t mem_id;
-
+	struct trusty_logbuffer *logbuffer;
+	compiletime_assert(((TRUSTY_LOG_SHAREDMEM_SIZE % PAGE_SIZE) == 0),
+			   "trusty log sharedmem shall be 64bits aligned");
 	if (!trusty_supports_logging(pdev->dev.parent))
 		return -ENXIO;
 
@@ -187,14 +257,14 @@ static int trusty_log_probe(struct platform_device *pdev)
 	s->trusty_dev = s->dev->parent;
 	s->get = 0;
 	s->log_pages = alloc_pages(GFP_KERNEL | __GFP_ZERO,
-				   get_order(TRUSTY_LOG_SIZE));
+				   get_order(TRUSTY_LOG_SHAREDMEM_SIZE));
 	if (!s->log_pages) {
 		result = -ENOMEM;
 		goto error_alloc_log;
 	}
 	s->log = page_address(s->log_pages);
 
-	sg_init_one(&s->sg, s->log, TRUSTY_LOG_SIZE);
+	sg_init_one(&s->sg, s->log, TRUSTY_LOG_SHAREDMEM_SIZE);
 	result = trusty_share_memory_compat(s->trusty_dev, &mem_id, &s->sg, 1,
 					    PAGE_KERNEL);
 	if (result) {
@@ -203,10 +273,9 @@ static int trusty_log_probe(struct platform_device *pdev)
 	}
 	s->log_pages_shared_mem_id = mem_id;
 
-	result = trusty_std_call32(s->trusty_dev,
-				   SMC_SC_SHARED_LOG_ADD,
+	result = trusty_std_call32(s->trusty_dev, SMC_SC_SHARED_LOG_ADD,
 				   (u32)(mem_id), (u32)(mem_id >> 32),
-				   TRUSTY_LOG_SIZE);
+				   TRUSTY_LOG_SHAREDMEM_SIZE);
 	if (result < 0) {
 		dev_err(s->dev,
 			"trusty std call (SMC_SC_SHARED_LOG_ADD) failed: %d 0x%llx\n",
@@ -215,8 +284,8 @@ static int trusty_log_probe(struct platform_device *pdev)
 	}
 
 	s->call_notifier.notifier_call = trusty_log_call_notify;
-	result = trusty_call_notifier_register(s->trusty_dev,
-					       &s->call_notifier);
+	result =
+		trusty_call_notifier_register(s->trusty_dev, &s->call_notifier);
 	if (result < 0) {
 		dev_err(&pdev->dev,
 			"failed to register trusty call notifier\n");
@@ -227,19 +296,25 @@ static int trusty_log_probe(struct platform_device *pdev)
 	result = atomic_notifier_chain_register(&panic_notifier_list,
 						&s->panic_notifier);
 	if (result < 0) {
-		dev_err(&pdev->dev,
-			"failed to register panic notifier\n");
+		dev_err(&pdev->dev, "failed to register panic notifier\n");
 		goto error_panic_notifier;
 	}
 	platform_set_drvdata(pdev, s);
-
+	logbuffer = trusty_logbuffer_register("trusty", s->dev, s,
+					      trusty_logbuffer_seq_show);
+	if (IS_ERR(logbuffer)) {
+		dev_err(&pdev->dev,
+			"failed to register /dev/logbuffer_trusty\n");
+		goto error_logbuffer;
+	}
+	s->logbuffer = logbuffer;
 	return 0;
-
+error_logbuffer:
 error_panic_notifier:
 	trusty_call_notifier_unregister(s->trusty_dev, &s->call_notifier);
 error_call_notifier:
-	trusty_std_call32(s->trusty_dev, SMC_SC_SHARED_LOG_RM,
-			  (u32)mem_id, (u32)(mem_id >> 32), 0);
+	trusty_std_call32(s->trusty_dev, SMC_SC_SHARED_LOG_RM, (u32)mem_id,
+			  (u32)(mem_id >> 32), 0);
 error_std_call:
 	if (WARN_ON(trusty_reclaim_memory(s->trusty_dev, mem_id, &s->sg, 1))) {
 		dev_err(&pdev->dev, "trusty_revoke_memory failed: %d 0x%llx\n",
@@ -249,8 +324,9 @@ error_std_call:
 		 * fails. Leak it in that case.
 		 */
 	} else {
-err_share_memory:
-		__free_pages(s->log_pages, get_order(TRUSTY_LOG_SIZE));
+	err_share_memory:
+		__free_pages(s->log_pages,
+			     get_order(TRUSTY_LOG_SHAREDMEM_SIZE));
 	}
 error_alloc_log:
 	kfree(s);
@@ -284,7 +360,11 @@ static int trusty_log_remove(struct platform_device *pdev)
 		 * It is not safe to free this memory if trusty_revoke_memory
 		 * fails. Leak it in that case.
 		 */
-		__free_pages(s->log_pages, get_order(TRUSTY_LOG_SIZE));
+		__free_pages(s->log_pages,
+			     get_order(TRUSTY_LOG_SHAREDMEM_SIZE));
+	}
+	if (s->logbuffer) {
+		trusty_logbuffer_unregister(s->logbuffer);
 	}
 	kfree(s);
 
@@ -292,7 +372,9 @@ static int trusty_log_remove(struct platform_device *pdev)
 }
 
 static const struct of_device_id trusty_test_of_match[] = {
-	{ .compatible = "android,trusty-log-v1", },
+	{
+		.compatible = "android,trusty-log-v1",
+	},
 	{},
 };
 
