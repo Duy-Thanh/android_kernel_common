@@ -63,6 +63,30 @@
       },
       "revId": "c31c85cfdef7a08e9ba49c37bdf484bb72f961c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b418d1d_04b5ff8a",
+        "filename": "android/abi_gki_aarch64_unisoc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2574,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-17T12:28:08Z",
+      "side": 1,
+      "message": "That is odd to hear, we can pump gigabit speeds out of the in-kernel driver just fine, so I would strongly recommend that the developers work to get this code upstream so they do not have to maintain it on their own.",
+      "parentUuid": "29262c54_b071d2d3",
+      "range": {
+        "startLine": 2574,
+        "startChar": 14,
+        "endLine": 2574,
+        "endChar": 30
+      },
+      "revId": "c31c85cfdef7a08e9ba49c37bdf484bb72f961c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
