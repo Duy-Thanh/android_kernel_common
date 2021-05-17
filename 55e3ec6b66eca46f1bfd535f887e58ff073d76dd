@@ -1,0 +1,175 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea485a03_77a8b093",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-17T23:37:37Z",
+      "side": 1,
+      "message": "why do do you rename this?",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 33
+      },
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32537f6d_e51b4397",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-17T23:37:37Z",
+      "side": 1,
+      "message": "\"0\". log-\u003ealloc - log-\u003esz is only correct if the log had wrapped. If you use an iterator, you should get the value from there though, not start from the beginning each time. That might also allow the client to stream data (try \"tail -f\").",
+      "range": {
+        "startLine": 129,
+        "startChar": 15,
+        "endLine": 129,
+        "endChar": 35
+      },
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73f3194b_2d6d117c",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-17T23:37:37Z",
+      "side": 1,
+      "message": "we should print this to the seq_file if it happens anytime other than the first line.",
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4ea4855_6f87a973",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-17T23:37:37Z",
+      "side": 1,
+      "message": "this is not a new bug, but updating s-\u003eget here past the value you got the last time __ratelimit succeeded means the panic notifier also does not dump the buffer.",
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dcf17d2_fc6c522a",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-17T23:37:37Z",
+      "side": 1,
+      "message": "you can reduce the need to modify existing code if you rename the full trusty_dump_logs function and keep a wrapper with the old name and signature that calls your new function with the NULL argument.",
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c6c5055_ba5efeee",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-17T23:37:37Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 245,
+        "startChar": 37,
+        "endLine": 245,
+        "endChar": 43
+      },
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "544abc78_9dc9ed22",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-17T23:37:37Z",
+      "side": 1,
+      "message": "don\u0027t modify unrelated code",
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca199238_cff97fe2",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-17T23:37:37Z",
+      "side": 1,
+      "message": "you need to unregister the panic notifier here",
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b18a2b9e_085ff447",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-17T23:37:37Z",
+      "side": 1,
+      "message": "why do you do this this late? What happens of someone tries to read the file after you freed the buffer?",
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
