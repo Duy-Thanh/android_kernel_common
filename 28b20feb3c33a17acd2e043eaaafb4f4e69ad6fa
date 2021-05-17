@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78fb10b9_695f9e4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-17T07:19:07Z",
+      "side": 1,
+      "message": "Again, this is not the proper way to access the thermal core code.\n\nAlso, you can not export a static variable, and there is no declaration of this in a .h file so there\u0027s no way the abi can ever be assured to be stable.",
+      "revId": "28b20feb3c33a17acd2e043eaaafb4f4e69ad6fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
