@@ -194,6 +194,30 @@
       },
       "revId": "2a3c3e4b7cb28b64b9d1ce4d35acaa995a5f70d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ef91600_b0a5ce32",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 1879565
+      },
+      "writtenOn": "2021-05-17T06:28:04Z",
+      "side": 1,
+      "message": "hi,Gregkh:\n\nI test this method on 8350 platform,it\u0027s ok.\n\nI can call the thermal_class from my ko\u0027s module.",
+      "parentUuid": "cb4c1360_e95e12cc",
+      "range": {
+        "startLine": 999,
+        "startChar": 0,
+        "endLine": 999,
+        "endChar": 13
+      },
+      "revId": "2a3c3e4b7cb28b64b9d1ce4d35acaa995a5f70d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
