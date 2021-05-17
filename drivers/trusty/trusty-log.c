@@ -19,14 +19,21 @@
 #define TRUSTY_LINE_BUFFER_SIZE 256
 
 /*
- * If we log too much and a UART or other slow source is connected, we can stall
+ * If we log too much to kernel (dev_info)
+ * and a UART or other slow source is connected, we can stall
  * out another thread which is doing printk.
  *
- * Trusty crash logs are currently ~16 lines, so 100 should include context and
- * the crash most of the time.
+ * The rate limit should be defined so that Trusty crash dump
+ * (currently little less than 100 lines) is stored unhrottled
+ * in dmesg. Of course this cannot be guaranted when the rate limit is reached
+ * by the TA prior to the crash. However under normal conditions, the crash dump
+ * should appear unthrottled. Testing identifies that the minimum rate limit
+ * should be 150.
+ *
  */
 static struct ratelimit_state trusty_log_rate_limit =
-	RATELIMIT_STATE_INIT("trusty_log", 1 * HZ, 100);
+        RATELIMIT_STATE_INIT("trusty_log", 1 * HZ, 150);
+
 
 struct trusty_log_state {
 	struct device *dev;
