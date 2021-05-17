@@ -643,11 +643,11 @@ static size_t __arm_lpae_unmap(struct arm_lpae_io_pgtable *data,
 			if (WARN_ON(!pte))
 				break;
 
-			__arm_lpae_set_pte(ptep, 0, num_entries, &iop->cfg);
+			__arm_lpae_set_pte(ptep, 0, 1, &iop->cfg);
 
 			if (!iopte_leaf(pte, lvl, iop->fmt)) {
 				/* Also flush any partial walks */
-				io_pgtable_tlb_flush_walk(iop, iova, num_entries * size,
+				io_pgtable_tlb_flush_walk(iop, iova, size,
 							  ARM_LPAE_GRANULE(data));
 				__arm_lpae_free_pgtable(data, lvl + 1, iopte_deref(pte, data));
 			} else if (iop->cfg.quirks & IO_PGTABLE_QUIRK_NON_STRICT) {
