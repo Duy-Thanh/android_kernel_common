@@ -16,6 +16,24 @@
       "message": "use the same Change-Id please.",
       "revId": "5b853ee547a03f0ed539565879e335d748adf8e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4e4b80e_8993db30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878106
+      },
+      "writtenOn": "2021-05-17T05:50:58Z",
+      "side": 1,
+      "message": "Patch is different at android12-5.10 and android-mainline.\nAt android-mainline we should add #include \u003ctrace/hooks/cgroup.h\u003e and #undef CREATE_TRACE_POINTS to include header file and avoid build error. \nCan I use same change-Id for android12-5.10 and android-mainline?",
+      "parentUuid": "dd3a85f0_f8137446",
+      "revId": "5b853ee547a03f0ed539565879e335d748adf8e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
