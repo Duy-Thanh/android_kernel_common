@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36858e7b_cfb5cf17",
+        "filename": "arch/arm64/include/asm/simd.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-05-18T23:35:47Z",
+      "side": 1,
+      "message": "Should this be conditional on building the FIPS module?",
+      "revId": "98839bd8b7f153571931d6ca0b95d40317d8ab8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
