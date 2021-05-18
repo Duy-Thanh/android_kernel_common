@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95e8d69a_dda6ffc4",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-18T20:56:50Z",
+      "side": 1,
+      "message": "to make it clear that the size allocated is both the log buffer and its metadata",
+      "parentUuid": "ea485a03_77a8b093",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 33
+      },
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32537f6d_e51b4397",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 7
@@ -66,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f90518c8_cd653f8c",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-18T20:56:50Z",
+      "side": 1,
+      "message": "Ack - working on it",
+      "parentUuid": "73f3194b_2d6d117c",
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4ea4855_6f87a973",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 7
@@ -77,6 +119,24 @@
       "writtenOn": "2021-05-17T23:37:37Z",
       "side": 1,
       "message": "this is not a new bug, but updating s-\u003eget here past the value you got the last time __ratelimit succeeded means the panic notifier also does not dump the buffer.",
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eb19883_33e9c5c1",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-18T20:56:50Z",
+      "side": 1,
+      "message": "ack - working on it",
+      "parentUuid": "c4ea4855_6f87a973",
       "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -100,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a50608d_83056f6f",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-18T20:56:50Z",
+      "side": 1,
+      "message": "Ack - working on it",
+      "parentUuid": "2dcf17d2_fc6c522a",
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c6c5055_ba5efeee",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 7
@@ -111,6 +189,30 @@
       "writtenOn": "2021-05-17T23:37:37Z",
       "side": 1,
       "message": "?",
+      "range": {
+        "startLine": 245,
+        "startChar": 37,
+        "endLine": 245,
+        "endChar": 43
+      },
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e120781_e55b17f4",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-18T20:56:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7c6c5055_ba5efeee",
       "range": {
         "startLine": 245,
         "startChar": 37,
@@ -140,6 +242,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "83ad65f5_41ec07a1",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-18T20:56:50Z",
+      "side": 1,
+      "message": "clang-format change...thought we agreed to run clang-format with the linux kernel\u0027s .clang-format?",
+      "parentUuid": "544abc78_9dc9ed22",
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca199238_cff97fe2",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 7
@@ -157,6 +277,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff0c32b0_b50c6ece",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-18T20:56:50Z",
+      "side": 1,
+      "message": "done below...or do you mean you don\u0027t want two labels for same PC?",
+      "parentUuid": "ca199238_cff97fe2",
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b18a2b9e_085ff447",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 7
@@ -168,6 +306,24 @@
       "writtenOn": "2021-05-17T23:37:37Z",
       "side": 1,
       "message": "why do you do this this late? What happens of someone tries to read the file after you freed the buffer?",
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3861423_9a75a7d8",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-18T20:56:50Z",
+      "side": 1,
+      "message": "thank you.",
+      "parentUuid": "b18a2b9e_085ff447",
       "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

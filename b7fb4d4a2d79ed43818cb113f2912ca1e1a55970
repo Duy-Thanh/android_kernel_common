@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2002be6e_467c95fd",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-18T20:56:50Z",
+      "side": 1,
+      "message": "I reformatted with the .clang-format from linux kernel, changes are minimal now. Sorry about that!",
+      "parentUuid": "84f9b86e_158dd9a2",
+      "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cc81819_4084d0e0",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa2831af_4795bdef",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-18T20:56:50Z",
+      "side": 1,
+      "message": "of course, makes sense indeed!",
+      "parentUuid": "0cc81819_4084d0e0",
+      "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9af9dfe_ab8094c2",
@@ -48,6 +84,24 @@
       "writtenOn": "2021-05-17T18:15:04Z",
       "side": 1,
       "message": "Don\u0027t change the ratelimit in the same patch in case it causes problems and need to be reverted.",
+      "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef9c2f22_b22664bd",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-18T20:56:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f9af9dfe_ab8094c2",
       "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -71,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d508b120_3e836491",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-18T20:56:50Z",
+      "side": 1,
+      "message": "working on it",
+      "parentUuid": "dbbf5160_4c3eb450",
+      "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0204691a_920aadb9",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 3
@@ -82,6 +154,24 @@
       "writtenOn": "2021-05-17T18:24:16Z",
       "side": 1,
       "message": "we need to have an id somewhere in this name so multiple trusty instances will not collide.",
+      "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "450b6aa2_003cc090",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-18T20:56:50Z",
+      "side": 1,
+      "message": "since I pass the struct device, I could use dev.name and remove the name entry in the register. but since we may use the register function for application-specific logbuffer files, we probably need to add a postfix argument so that secondary buffer name would be: /dev/logbuffer_\u003cdev.name\u003e_\u003cpostfix\u003e.\nwhat do you think?",
+      "parentUuid": "0204691a_920aadb9",
       "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -116,6 +206,24 @@
       "writtenOn": "2021-05-17T18:24:16Z",
       "side": 1,
       "message": "why is this in a separate allocation and not part of trusty_log_state?",
+      "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d56c3836_732d531d",
+        "filename": "drivers/trusty/trusty-logbuffer.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-18T20:56:50Z",
+      "side": 1,
+      "message": "I chose to keep trusty_logbuffer registration/alloaction decoupled from trusty_state in order to allow creating application-specific /dev/logbuffer files when we support stuctured-data logging. Do you want to make this more coupled?",
+      "parentUuid": "c6e56962_78d42e34",
       "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
