@@ -22,6 +22,30 @@
       },
       "revId": "f0f168cf2e28a5583de1e247a69fbd29ca7e4570",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c2606e3_77a46e0e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-05-18T23:21:28Z",
+      "side": 1,
+      "message": "Also, I don\u0027t think this change prevents built-in code from calling  these functions (e.g. sha256_update()).\n\nGiven that we\u0027d have to watch for that anyway, is this change really worthwhile?",
+      "parentUuid": "5f74bcf5_1d6d802f",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 6
+      },
+      "revId": "f0f168cf2e28a5583de1e247a69fbd29ca7e4570",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
