@@ -33,6 +33,9 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/alarmtimer.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/mi_power.h>
+
 /**
  * struct alarm_base - Alarm timer bases
  * @lock:		Lock for syncrhonized access to the base
@@ -162,6 +165,7 @@ static void alarmtimer_enqueue(struct alarm_base *base, struct alarm *alarm)
 	if (alarm->state & ALARMTIMER_STATE_ENQUEUED)
 		timerqueue_del(&base->timerqueue, &alarm->node);
 
+    trace_android_vh_alarmtimer_enqueue(alarm);
 	timerqueue_add(&base->timerqueue, &alarm->node);
 	alarm->state |= ALARMTIMER_STATE_ENQUEUED;
 }
@@ -205,6 +209,8 @@ static enum hrtimer_restart alarmtimer_fired(struct hrtimer *timer)
 	spin_lock_irqsave(&base->lock, flags);
 	alarmtimer_dequeue(base, alarm);
 	spin_unlock_irqrestore(&base->lock, flags);
+
+    trace_android_vh_alarmtimer_fired(alarm);
 
 	if (alarm->function)
 		restart = alarm->function(alarm, base->get_ktime());
@@ -275,10 +281,14 @@ static int alarmtimer_suspend(struct device *dev)
 			expires = next->expires;
 			min = delta;
 			type = i;
+
+			trace_android_vh_alarmtimer_suspend_a(next);
 		}
 	}
 	if (min == 0)
 		return 0;
+
+       trace_android_vh_alarmtimer_suspend_b(type);
 
 	if (ktime_to_ns(min) < 2 * NSEC_PER_SEC) {
 		pm_wakeup_event(dev, 2 * MSEC_PER_SEC);

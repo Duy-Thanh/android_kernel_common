@@ -55,7 +55,7 @@
 #include <trace/hooks/vmscan.h>
 #include <trace/hooks/psi.h>
 #include <trace/hooks/selinux.h>
-
+#include <trace/hooks/mi_power.h>
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
  * associated with them) to allow external modules to probe them.
@@ -274,3 +274,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_selinux_is_initialized);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_inactive_ratio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_topology_flags_workfn);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_of_i2c_get_board_info);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clk_debug_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gicv3_resume_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alarmtimer_enqueue);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alarmtimer_fired);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alarmtimer_suspend_a);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alarmtimer_suspend_b);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_timerfd_poll);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wakeup_reason_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_regulator_info_init);

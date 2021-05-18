@@ -27,7 +27,7 @@
 #include <linux/notifier.h>
 #include <linux/suspend.h>
 #include <linux/slab.h>
-
+#include <trace/hooks/mi_power.h>
 /*
  * struct wakeup_irq_node - stores data and relationships for IRQs logged as
  * either base or nested wakeup reasons during suspend/resume flow.
@@ -259,6 +259,8 @@ EXPORT_SYMBOL_GPL(log_abnormal_wakeup_reason);
 void clear_wakeup_reasons(void)
 {
 	unsigned long flags;
+
+    trace_android_vh_wakeup_reason_init(&wakeup_reason_lock,&parent_irqs,&leaf_irqs, &wakeup_reason, &capture_reasons, wakeup_irq_nodes_cache);
 
 	spin_lock_irqsave(&wakeup_reason_lock, flags);
 
