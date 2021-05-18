@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "477967e6_b4a72782",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-18T21:48:53Z",
+      "side": 1,
+      "message": "OK. Make that a separate patch though, it is not related to adding the /dev/ entry.",
+      "parentUuid": "95e8d69a_dda6ffc4",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 33
+      },
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32537f6d_e51b4397",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 7
@@ -260,6 +284,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea58c512_5918ea4b",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-18T21:48:53Z",
+      "side": 1,
+      "message": "Only if it works well. If the end result is not worse than what you started with, then you should upload a separate reformat patch. You should not make functional changes and reformatting changes in a single patch.",
+      "parentUuid": "83ad65f5_41ec07a1",
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca199238_cff97fe2",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 7
@@ -289,6 +331,24 @@
       "side": 1,
       "message": "done below...or do you mean you don\u0027t want two labels for same PC?",
       "parentUuid": "ca199238_cff97fe2",
+      "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c194ece_122ef625",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-18T21:48:53Z",
+      "side": 1,
+      "message": "The next label unregisters the call_notifier not the panic_notifier.",
+      "parentUuid": "ff0c32b0_b50c6ece",
       "revId": "55e3ec6b66eca46f1bfd535f887e58ff073d76dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

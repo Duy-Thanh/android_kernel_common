@@ -178,6 +178,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5887e62_c3081f28",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-18T21:48:53Z",
+      "side": 1,
+      "message": "What does dev.name contain? It is unique? I if the end result is similar to the existing /dev/trusty-ipc-dev0 (the 0 here does not actually specify a trusty instance as you could have more than one, but the current plan is to have one per trusty instance) device, (e.g. /dev/logbuffer_trusty0 for the global log and later /dev/logbuffer_trusty0_app for app logs) then that would be good. If .name has a random id appended, that would be too confusing.",
+      "parentUuid": "450b6aa2_003cc090",
+      "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "45259cc9_771d5e0a",
         "filename": "drivers/trusty/trusty-log.h",
         "patchSetId": 3

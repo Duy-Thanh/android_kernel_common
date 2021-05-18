@@ -16,6 +16,23 @@
       "message": "Hi Arve,\n\nplease review my answers...I need your feedback on some of them before fixing.\n\nThanks,\nArmelle",
       "revId": "8978f32985612489a8ac97d38c8ae760349c25d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4195a393_0bd9b7e6",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-18T21:48:53Z",
+      "side": 1,
+      "message": "I prefer to reverse match the init order. While these 3 entry points are independent and can be added and removed in any order, it is easier to read if you remove the last entrypoint added first and so on.",
+      "revId": "8978f32985612489a8ac97d38c8ae760349c25d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
