@@ -34,6 +34,29 @@
       "parentUuid": "d3fdcc95_7bc413ec",
       "revId": "ac9df97a6e8af39a5ab6f1171188ede5d1dde1a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9a478ca_3a374d2a",
+        "filename": "drivers/iommu/io-pgtable-arm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-05-18T10:19:29Z",
+      "side": 1,
+      "message": "Given that this is the only caller, let\u0027s change it to be:\n\nstatic void __arm_lpae_clear_pte(arm_lpae_iopte *ptep, struct io_pgtable_cfg *cfg);",
+      "range": {
+        "startLine": 646,
+        "startChar": 3,
+        "endLine": 646,
+        "endChar": 21
+      },
+      "revId": "ac9df97a6e8af39a5ab6f1171188ede5d1dde1a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
