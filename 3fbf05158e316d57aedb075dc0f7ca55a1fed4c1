@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37af5ae4_01bf7a07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-18T09:42:23Z",
+      "side": 1,
+      "message": "This is a bootloader/kernel ABI break, I do not think we can do this without upstream also agreeing to this.\n\nWhy are you putting lots of stuff in the command line, shouldn\u0027t the new method of passing command line arguments work instead?",
+      "revId": "3fbf05158e316d57aedb075dc0f7ca55a1fed4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
