@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f6b50c3_a82c94e7",
+        "filename": "include/trace/hooks/libsha256.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-05-18T23:14:22Z",
+      "side": 1,
+      "message": "Can you add a comment here that makes it very clear that this hook exists only for the FIPS module?\n\nWe don\u0027t want to deal with people trying to hook into this for debug purposes.",
+      "revId": "0c724efd92a101496c31bb6ae5614099cf75aa66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "369a2359_ee00e898",
+        "filename": "lib/crypto/sha256.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-05-18T23:14:22Z",
+      "side": 1,
+      "message": "The convention for indicating whether this hook is in-use or not (it must set \u0027len\u0027 to UINT_MAX) differs from that which the AES hooks use (they must set \u0027ret\u0027 to a nonzero value).\n\nIt might be more logical to use the same convention for all the hooks, like having \u0027int *hook_inuse\u0027 and requiring that it be set to 1.",
+      "range": {
+        "startLine": 289,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 9
+      },
+      "revId": "0c724efd92a101496c31bb6ae5614099cf75aa66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
