@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f60c61c9_6d40c47a",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-18T09:43:16Z",
+      "side": 1,
+      "message": "these should be broken up into \"one tracehook per patch\" please, so we can properly review them individually.",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 285,
+        "endChar": 60
+      },
+      "revId": "cfba69333a3f4d10232fe83c7227ae03ab026d0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
