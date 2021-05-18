@@ -87,6 +87,30 @@
       },
       "revId": "32c993710b6d0aa9a7b91e291c3bed477476eed9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d1190dd_a450e263",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-05-18T01:28:57Z",
+      "side": 1,
+      "message": "Comparing /proc/slabinfo before and after the change:\n\nbefore:\n# name            \u003cactive_objs\u003e \u003cnum_objs\u003e \u003cobjsize\u003e \u003cobjperslab\u003e \u003cpagesperslab\u003e : tunables \u003climit\u003e \u003cbatchcount\u003e \u003csharedfactor\u003e : slabdata \u003cactive_slabs\u003e \u003cnum_slabs\u003e \u003csharedavail\u003e\ntask_struct         3300   3591   4480    7    8 : tunables    0    0    0 : slabdata    521    521      0\n\nafter:\n# name            \u003cactive_objs\u003e \u003cnum_objs\u003e \u003cobjsize\u003e \u003cobjperslab\u003e \u003cpagesperslab\u003e : tunables \u003climit\u003e \u003cbatchcount\u003e \u003csharedfactor\u003e : slabdata \u003cactive_slabs\u003e \u003cnum_slabs\u003e \u003csharedavail\u003e\ntask_struct         3419   3647   4672    7    8 : tunables    0    0    0 : slabdata    521    521      0\n\nSo even though objsize increased from 4480 to 4672, the objperslab and pagesperslab are unchanged. So, effective memory consumption is unchanged.",
+      "parentUuid": "03c11c21_88784f74",
+      "range": {
+        "startLine": 1372,
+        "startChar": 27,
+        "endLine": 1372,
+        "endChar": 29
+      },
+      "revId": "32c993710b6d0aa9a7b91e291c3bed477476eed9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
