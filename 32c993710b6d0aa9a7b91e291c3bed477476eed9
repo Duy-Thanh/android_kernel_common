@@ -111,6 +111,30 @@
       },
       "revId": "32c993710b6d0aa9a7b91e291c3bed477476eed9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36b686cd_48349da0",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-05-18T01:42:26Z",
+      "side": 1,
+      "message": "Of course, if we decide to enable some debug features like slub redzone things would likely to change and these additional fields might result in increased memory consumption.",
+      "parentUuid": "9d1190dd_a450e263",
+      "range": {
+        "startLine": 1372,
+        "startChar": 27,
+        "endLine": 1372,
+        "endChar": 29
+      },
+      "revId": "32c993710b6d0aa9a7b91e291c3bed477476eed9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
