@@ -30,6 +30,9 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/regulator.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/mi_power.h>
+
 #include "dummy.h"
 #include "internal.h"
 
@@ -5922,6 +5925,9 @@ static void regulator_init_complete_work_function(struct work_struct *work)
 	 */
 	class_for_each_device(&regulator_class, NULL, NULL,
 			      regulator_late_cleanup);
+
+	trace_android_vh_regulator_info_init(&regulator_class);
+
 }
 
 static DECLARE_DELAYED_WORK(regulator_init_complete_work,

@@ -30,6 +30,8 @@
 
 #include <trace/hooks/fs.h>
 
+#include <trace/hooks/mi_power.h>
+
 struct timerfd_ctx {
 	union {
 		struct hrtimer tmr;
@@ -244,6 +246,8 @@ static __poll_t timerfd_poll(struct file *file, poll_table *wait)
 	if (ctx->ticks)
 		events |= EPOLLIN;
 	spin_unlock_irqrestore(&ctx->wqh.lock, flags);
+
+    trace_android_vh_timerfd_poll(ctx);
 
 	return events;
 }
