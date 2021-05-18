@@ -70,6 +70,30 @@
       },
       "revId": "f07f2398adfb6508e4b47f24345f7b315f21bc21",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07c6bdc3_f271e225",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-05-18T18:29:27Z",
+      "side": 1,
+      "message": "Sounds like partner wants more control over when OOM gives up. See https://b.corp.google.com/issues/186875166#comment1 for more details on their usecase.",
+      "parentUuid": "e0ea59f5_e4f2f02d",
+      "range": {
+        "startLine": 1153,
+        "startChar": 0,
+        "endLine": 1153,
+        "endChar": 45
+      },
+      "revId": "f07f2398adfb6508e4b47f24345f7b315f21bc21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
