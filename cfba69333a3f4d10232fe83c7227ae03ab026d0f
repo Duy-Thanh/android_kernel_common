@@ -22,6 +22,29 @@
       },
       "revId": "cfba69333a3f4d10232fe83c7227ae03ab026d0f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f9897e3_32be4b5b",
+        "filename": "drivers/clk/clk.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3416,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-18T09:43:42Z",
+      "side": 1,
+      "message": "coding style issues, always use scripts/checkpatch.pl",
+      "range": {
+        "startLine": 3416,
+        "startChar": 0,
+        "endLine": 3416,
+        "endChar": 4
+      },
+      "revId": "cfba69333a3f4d10232fe83c7227ae03ab026d0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
