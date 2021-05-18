@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f74bcf5_1d6d802f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-05-18T23:09:04Z",
+      "side": 1,
+      "message": "sha256_update() is used by arch/x86/purgatory/purgatory.c.\n\nI think you mean \"modular callers\"?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 6
+      },
+      "revId": "f0f168cf2e28a5583de1e247a69fbd29ca7e4570",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
