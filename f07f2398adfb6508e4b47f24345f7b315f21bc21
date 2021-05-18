@@ -22,6 +22,30 @@
       },
       "revId": "f07f2398adfb6508e4b47f24345f7b315f21bc21",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2404f81f_10ca51b6",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-05-18T18:17:15Z",
+      "side": 1,
+      "message": "OOM killer is not replaced by userspace lowmemorykiller. There are still cases when we rely on kernel OOM killer to handle memory pressure when lmkd fails to do so.",
+      "parentUuid": "a9d44fca_3dfcbce4",
+      "range": {
+        "startLine": 1153,
+        "startChar": 0,
+        "endLine": 1153,
+        "endChar": 45
+      },
+      "revId": "f07f2398adfb6508e4b47f24345f7b315f21bc21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
