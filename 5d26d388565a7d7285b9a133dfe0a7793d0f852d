@@ -16,6 +16,24 @@
       "message": "This sort of improves things, as its not crashing right away, but I\u0027m getting odd artifacts like only half of the display working (with lots of flickering) with lots of the following messages\n\n[   45.497778][    C0] arm-smmu 15000000.iommu: Unhandled context fault: fsr\u003d0x402, iova\u003d0x00400000, fsynr\u003d0x50023, cbfrsynra\u003d0x880, cb\u003d11\n[   45.513933][    C0] arm-smmu 15000000.iommu: Unhandled context fault: fsr\u003d0x402, iova\u003d0x00400000, fsynr\u003d0x50023, cbfrsynra\u003d0x880, cb\u003d11\n[   45.530609][    C0] arm-smmu 15000000.iommu: Unhandled context fault: fsr\u003d0x402, iova\u003d0x00c00000, fsynr\u003d0x50023, cbfrsynra\u003d0x880, cb\u003d11\n\n",
       "revId": "5d26d388565a7d7285b9a133dfe0a7793d0f852d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "756fe329_659baa09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1584799
+      },
+      "writtenOn": "2021-05-18T00:14:07Z",
+      "side": 1,
+      "message": "Ah, I think I see what\u0027s wrong. Can you please try PS2?",
+      "parentUuid": "75d5c176_324fd089",
+      "revId": "5d26d388565a7d7285b9a133dfe0a7793d0f852d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
