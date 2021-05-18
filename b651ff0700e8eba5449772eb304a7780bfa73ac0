@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82d4cdcb_4aaf1ece",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-18T07:31:52Z",
+      "side": 1,
+      "message": "Drivers should not need this symbol.",
+      "revId": "b651ff0700e8eba5449772eb304a7780bfa73ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
