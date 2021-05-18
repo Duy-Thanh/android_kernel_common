@@ -96,6 +96,9 @@ struct clk_core {
 #define CREATE_TRACE_POINTS
 #include <trace/events/clk.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/mi_power.h>
+
 struct clk {
 	struct clk_core	*core;
 	struct device *dev;
@@ -3410,6 +3413,7 @@ static int __init clk_debug_init(void)
 
 	inited = 1;
 	mutex_unlock(&clk_debug_lock);
+    trace_android_vh_clk_debug_init(&clk_debug_list);
 
 	return 0;
 }

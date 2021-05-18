@@ -37,6 +37,8 @@
 
 #include "irq-gic-common.h"
 
+#include <trace/hooks/mi_power.h>
+
 #define GICD_INT_NMI_PRI	(GICD_INT_DEF_PRI & ~0x80)
 
 #define FLAGS_WORKAROUND_GICR_WAKER_MSM8996	(1ULL << 0)
@@ -1270,6 +1272,7 @@ static inline void gic_cpu_pm_init(void) { }
 static void gic_resume(void)
 {
 	trace_android_vh_gic_resume(gic_data.domain, gic_data.dist_base);
+	trace_android_vh_gicv3_resume_init(&gic_data);
 }
 
 static struct syscore_ops gic_syscore_ops = {
