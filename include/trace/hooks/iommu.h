@@ -18,9 +18,22 @@ DECLARE_HOOK(android_vh_iommu_setup_dma_ops,
 	TP_PROTO(struct device *dev, u64 dma_base, u64 dma_limit),
 	TP_ARGS(dev, dma_base, dma_limit));
 
+DECLARE_HOOK(android_vh_iommu_alloc_iova,
+	TP_PROTO(struct device *dev, dma_addr_t iova, size_t size),
+	TP_ARGS(dev, iova, size));
+
+DECLARE_HOOK(android_vh_iommu_free_iova,
+	TP_PROTO(dma_addr_t iova, size_t size),
+	TP_ARGS(iova, size));
 #else
 
+<<<<<<< HEAD   (d6c38d Revert "ANDROID: modularize BLK_MQ_VIRTIO")
 #define trace_android_vh_iommu_setup_dma_ops(dev, dma_base, dma_limit)
+=======
+#define trace_android_vh_iommu_setup_dma_ops(dev, dma_base, size)
+#define trace_android_vh_iommu_alloc_iova(dev, iova, size)
+#define trace_android_vh_iommu_free_iova(iova, size)
+>>>>>>> CHANGE (15acc8 ANDROID: iommu: Add vendor hook for iova allocation and free)
 
 #endif
 
