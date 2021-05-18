@@ -52,6 +52,24 @@
       "parentUuid": "c4e4b80e_8993db30",
       "revId": "5b853ee547a03f0ed539565879e335d748adf8e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eed982fd_9fa2f7b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878106
+      },
+      "writtenOn": "2021-05-18T03:09:10Z",
+      "side": 1,
+      "message": "OK, I apply the same Change-ID to android12-5.10 at 1710308.\nPlease use 1710308 to follow up on the patch of android12-5.10.\nThank you.",
+      "parentUuid": "abcab455_c3c90429",
+      "revId": "5b853ee547a03f0ed539565879e335d748adf8e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
