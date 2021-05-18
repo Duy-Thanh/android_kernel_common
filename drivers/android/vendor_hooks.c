@@ -55,6 +55,7 @@
 #include <trace/hooks/vmscan.h>
 #include <trace/hooks/psi.h>
 #include <trace/hooks/selinux.h>
+#include <trace/hooks/remoteproc.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -276,3 +277,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_selinux_is_initialized);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_inactive_ratio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_topology_flags_workfn);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_of_i2c_get_board_info);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery);
