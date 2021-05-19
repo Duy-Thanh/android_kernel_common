@@ -16,6 +16,23 @@
       "message": "needs .xml file update as well.",
       "revId": "7c29835a68ef972d70c2fd1066349b58facd86c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0bed8cc_2a94d39c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-19T07:13:32Z",
+      "side": 1,
+      "message": "ah, abi update happens in next patch, usually these are merged into one commit, can you do that here too?",
+      "revId": "7c29835a68ef972d70c2fd1066349b58facd86c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
