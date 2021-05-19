@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7820964_8c67b7a4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-05-19T22:21:04Z",
+      "side": 1,
+      "message": "Looks like you also removed wp_total portion. Needs a comment here.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 15
+      },
+      "revId": "680ebac9947cdadfedc6ea6a5af8f75a0919b450",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
