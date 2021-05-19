@@ -34,6 +34,24 @@
       "parentUuid": "9cec7fc5_e2362b48",
       "revId": "44829f5b837188d479e7f26f6653f2ad24737205",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f33df156_70fbd177",
+        "filename": "OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-05-19T18:04:33Z",
+      "side": 1,
+      "message": "kernel/common defines the android-kernel-team as owners for all branches in the refs/meta/config branch. \nunless \"set noparent\" is set, ownership is inherited. So, this adds on top of that to make Lee the prioritized owner (prio for suggestions). \n\nwe rather would not drag in the owners from android-mainline here.\n\nlong story short: I think this change is the best solution here.",
+      "parentUuid": "e06a3da7_b73d59d9",
+      "revId": "44829f5b837188d479e7f26f6653f2ad24737205",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
