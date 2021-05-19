@@ -16,6 +16,24 @@
       "message": "Does this override the default or add to the default? Do we need this?\n```\ninclude kernel/common:android-mainline:/OWNERS\n```",
       "revId": "44829f5b837188d479e7f26f6653f2ad24737205",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e06a3da7_b73d59d9",
+        "filename": "OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2021-05-19T17:14:58Z",
+      "side": 1,
+      "message": "This is probably a question my maennich@.\n\nMy assumption would be that they are concatenated.",
+      "parentUuid": "9cec7fc5_e2362b48",
+      "revId": "44829f5b837188d479e7f26f6653f2ad24737205",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
