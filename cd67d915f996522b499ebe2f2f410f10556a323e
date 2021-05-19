@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f88d46ad_6873ee27",
+        "filename": "arch/arm64/Makefile.postlink",
+        "patchSetId": 9
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-05-19T03:46:32Z",
+      "side": 1,
+      "message": "A comment explaining the purpose of this file would be helpful.",
+      "revId": "cd67d915f996522b499ebe2f2f410f10556a323e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df54f6cc_59559387",
+        "filename": "arch/arm64/Makefile.postlink",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-05-19T03:46:32Z",
+      "side": 1,
+      "message": "Should there be a dependency on fips140_gen_hmac rather than adding it to hostprogs-always-y?",
+      "range": {
+        "startLine": 18,
+        "startChar": 29,
+        "endLine": 18,
+        "endChar": 35
+      },
+      "revId": "cd67d915f996522b499ebe2f2f410f10556a323e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
