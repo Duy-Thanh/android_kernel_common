@@ -74,6 +74,7 @@
 #include <trace/hooks/ufshcd.h>
 #include <trace/hooks/vmscan.h>
 #include <trace/hooks/wqlockup.h>
+#include <trace/hooks/user.h>
 /* keep-sorted end */
 
 /*
@@ -693,4 +694,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wp_page_reuse);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_lockup_pool);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_adjust);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_uid);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_user);
 /* keep-sorted end */
