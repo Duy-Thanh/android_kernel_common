@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "943f24da_f92c276a",
+        "filename": "arch/arm64/Makefile.postlink",
+        "patchSetId": 9
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-05-19T16:39:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f88d46ad_6873ee27",
+      "revId": "cd67d915f996522b499ebe2f2f410f10556a323e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df54f6cc_59559387",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-05-19T03:46:32Z",
       "side": 1,
       "message": "Should there be a dependency on fips140_gen_hmac rather than adding it to hostprogs-always-y?",
+      "range": {
+        "startLine": 18,
+        "startChar": 29,
+        "endLine": 18,
+        "endChar": 35
+      },
+      "revId": "cd67d915f996522b499ebe2f2f410f10556a323e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8255340_e830fc19",
+        "filename": "arch/arm64/Makefile.postlink",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-05-19T16:39:57Z",
+      "side": 1,
+      "message": "\u003e Should there be a dependency on fips140_gen_hmac rather than adding it to hostprogs-always-y?\n\nhostprogs-always-y is only set if CONFIG_CRYPTO_FIPS140_INTEGRITY_CHECK\u003dy, and I don\u0027t know how the build system would figure out by itself that fips140_gen_hmac is a host tool in the first place if we only refer to it as a dependency.",
+      "parentUuid": "df54f6cc_59559387",
       "range": {
         "startLine": 18,
         "startChar": 29,
