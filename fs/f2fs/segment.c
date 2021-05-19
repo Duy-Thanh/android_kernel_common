@@ -510,6 +510,7 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
 	 * dir/node pages without enough free segments.
 	 */
 	if (has_not_enough_free_secs(sbi, 0, 0)) {
+<<<<<<< HEAD   (560fdb FROMGIT: scsi: ufs: ufs-mediatek: Fix power down spec violat)
 		if (test_opt(sbi, GC_MERGE) && sbi->gc_thread &&
 					sbi->gc_thread->f2fs_gc_task) {
 			DEFINE_WAIT(wait);
@@ -523,6 +524,10 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
 			down_write(&sbi->gc_lock);
 			f2fs_gc(sbi, false, false, false, NULL_SEGNO);
 		}
+=======
+		down_write(&sbi->gc_lock);
+		f2fs_gc(sbi, false, false, false, NULL_SEGNO);
+>>>>>>> BRANCH (689e89 Linux 5.10.38)
 	}
 }
 
@@ -2672,7 +2677,23 @@ static void __refresh_next_blkoff(struct f2fs_sb_info *sbi,
 
 bool f2fs_segment_has_free_slot(struct f2fs_sb_info *sbi, int segno)
 {
+<<<<<<< HEAD   (560fdb FROMGIT: scsi: ufs: ufs-mediatek: Fix power down spec violat)
 	return __next_free_blkoff(sbi, segno, 0) < sbi->blocks_per_seg;
+=======
+	struct seg_entry *se = get_seg_entry(sbi, segno);
+	int entries = SIT_VBLOCK_MAP_SIZE / sizeof(unsigned long);
+	unsigned long *target_map = SIT_I(sbi)->tmp_map;
+	unsigned long *ckpt_map = (unsigned long *)se->ckpt_valid_map;
+	unsigned long *cur_map = (unsigned long *)se->cur_valid_map;
+	int i, pos;
+
+	for (i = 0; i < entries; i++)
+		target_map[i] = ckpt_map[i] | cur_map[i];
+
+	pos = __find_rev_next_zero_bit(target_map, sbi->blocks_per_seg, 0);
+
+	return pos < sbi->blocks_per_seg;
+>>>>>>> BRANCH (689e89 Linux 5.10.38)
 }
 
 /*
@@ -2933,7 +2954,11 @@ unlock:
 }
 
 static void __allocate_new_segment(struct f2fs_sb_info *sbi, int type,
+<<<<<<< HEAD   (560fdb FROMGIT: scsi: ufs: ufs-mediatek: Fix power down spec violat)
 						bool new_sec, bool force)
+=======
+								bool new_sec)
+>>>>>>> BRANCH (689e89 Linux 5.10.38)
 {
 	struct curseg_info *curseg = CURSEG_I(sbi, type);
 	unsigned int old_segno;
@@ -2941,7 +2966,11 @@ static void __allocate_new_segment(struct f2fs_sb_info *sbi, int type,
 	if (!curseg->inited)
 		goto alloc;
 
+<<<<<<< HEAD   (560fdb FROMGIT: scsi: ufs: ufs-mediatek: Fix power down spec violat)
 	if (force || curseg->next_blkoff ||
+=======
+	if (curseg->next_blkoff ||
+>>>>>>> BRANCH (689e89 Linux 5.10.38)
 		get_valid_blocks(sbi, curseg->segno, new_sec))
 		goto alloc;
 
@@ -2953,17 +2982,32 @@ alloc:
 	locate_dirty_segment(sbi, old_segno);
 }
 
+<<<<<<< HEAD   (560fdb FROMGIT: scsi: ufs: ufs-mediatek: Fix power down spec violat)
 static void __allocate_new_section(struct f2fs_sb_info *sbi,
 						int type, bool force)
+=======
+static void __allocate_new_section(struct f2fs_sb_info *sbi, int type)
+>>>>>>> BRANCH (689e89 Linux 5.10.38)
 {
+<<<<<<< HEAD   (560fdb FROMGIT: scsi: ufs: ufs-mediatek: Fix power down spec violat)
 	__allocate_new_segment(sbi, type, true, force);
 }
 
 void f2fs_allocate_new_section(struct f2fs_sb_info *sbi, int type, bool force)
+=======
+	__allocate_new_segment(sbi, type, true);
+}
+
+void f2fs_allocate_new_section(struct f2fs_sb_info *sbi, int type)
+>>>>>>> BRANCH (689e89 Linux 5.10.38)
 {
 	down_read(&SM_I(sbi)->curseg_lock);
 	down_write(&SIT_I(sbi)->sentry_lock);
+<<<<<<< HEAD   (560fdb FROMGIT: scsi: ufs: ufs-mediatek: Fix power down spec violat)
 	__allocate_new_section(sbi, type, force);
+=======
+	__allocate_new_section(sbi, type);
+>>>>>>> BRANCH (689e89 Linux 5.10.38)
 	up_write(&SIT_I(sbi)->sentry_lock);
 	up_read(&SM_I(sbi)->curseg_lock);
 }
@@ -2975,7 +3019,11 @@ void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi)
 	down_read(&SM_I(sbi)->curseg_lock);
 	down_write(&SIT_I(sbi)->sentry_lock);
 	for (i = CURSEG_HOT_DATA; i <= CURSEG_COLD_DATA; i++)
+<<<<<<< HEAD   (560fdb FROMGIT: scsi: ufs: ufs-mediatek: Fix power down spec violat)
 		__allocate_new_segment(sbi, i, false, false);
+=======
+		__allocate_new_segment(sbi, i, false);
+>>>>>>> BRANCH (689e89 Linux 5.10.38)
 	up_write(&SIT_I(sbi)->sentry_lock);
 	up_read(&SM_I(sbi)->curseg_lock);
 }

@@ -449,8 +449,14 @@ phys_addr_t swiotlb_tbl_map_single(struct device *hwdev, phys_addr_t orig_addr,
 		size_t mapping_size, size_t alloc_size,
 		enum dma_data_direction dir, unsigned long attrs)
 {
+<<<<<<< HEAD   (560fdb FROMGIT: scsi: ufs: ufs-mediatek: Fix power down spec violat)
 	dma_addr_t tbl_dma_addr = phys_to_dma_unencrypted(hwdev, io_tlb_start);
 	unsigned long flags;
+=======
+	unsigned int offset = swiotlb_align_offset(dev, orig_addr);
+	unsigned int i;
+	int index;
+>>>>>>> BRANCH (689e89 Linux 5.10.38)
 	phys_addr_t tlb_addr;
 	unsigned int nslots, stride, index, wrap;
 	int i;

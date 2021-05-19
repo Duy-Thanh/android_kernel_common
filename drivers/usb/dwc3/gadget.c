@@ -2328,7 +2328,11 @@ static void dwc3_gadget_enable_irq(struct dwc3 *dwc)
 
 	/* On 2.30a and above this bit enables U3/L2-L1 Suspend Events */
 	if (!DWC3_VER_IS_PRIOR(DWC3, 230A))
+<<<<<<< HEAD   (560fdb FROMGIT: scsi: ufs: ufs-mediatek: Fix power down spec violat)
 		reg |= DWC3_DEVTEN_U3L2L1SUSPEN;
+=======
+		reg |= DWC3_DEVTEN_EOPFEN;
+>>>>>>> BRANCH (689e89 Linux 5.10.38)
 
 	dwc3_writel(dwc->regs, DWC3_DEVTEN, reg);
 }

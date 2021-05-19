@@ -125,7 +125,11 @@ do_gc:
 			sync_mode = false;
 
 		/* if return value is not zero, no victim was selected */
+<<<<<<< HEAD   (560fdb FROMGIT: scsi: ufs: ufs-mediatek: Fix power down spec violat)
 		if (f2fs_gc(sbi, sync_mode, !foreground, false, NULL_SEGNO))
+=======
+		if (f2fs_gc(sbi, sync_mode, true, false, NULL_SEGNO))
+>>>>>>> BRANCH (689e89 Linux 5.10.38)
 			wait_ms = gc_th->no_gc_sleep_time;
 
 		if (foreground)
