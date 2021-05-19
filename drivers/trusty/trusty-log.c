@@ -2,6 +2,7 @@
 /*
  * Copyright (C) 2015 Google, Inc.
  */
+#include <linux/compiler.h>
 #include <linux/platform_device.h>
 #include <linux/trusty/smcall.h>
 #include <linux/trusty/trusty.h>
@@ -14,6 +15,7 @@
 #include <linux/log2.h>
 #include <asm/page.h>
 #include "trusty-log.h"
+#include "trusty-logbuffer.h"
 
 /*
  * Shared memory allocation must be page-aligned
@@ -64,7 +66,7 @@ static struct ratelimit_state trusty_log_rate_limit =
 struct trusty_log_state {
 	struct device *dev;
 	struct device *trusty_dev;
-
+	struct trusty_logbuffer *logbuffer;
 	/*
 	 * This lock is here to ensure only one consumer will read
 	 * from the log ring buffer at a time.
@@ -98,7 +100,17 @@ static int log_read_line(struct trusty_log_state *s, int put, int get)
 	return i;
 }
 
-static void trusty_dump_logs(struct trusty_log_state *s)
+/**
+ * trusty_sink() - sink logs either to kernel log or to secondary logbuffer
+ * @s:         Current log state.
+ * @sfile:     seq_file pointer for dumping to secondary logbuffer.
+ *             When NULL, logs are dumped to kernel logs via dev_info.
+ *
+ * Dumping to the kernel consists in dumping only the delta log from previous
+ * dump, while dumping to the secondary logbuffer (/dev/logbuffer_trusty)
+ * consists in dumping the whole ring buffer.
+ */
+static void trusty_sink(struct trusty_log_state *s, struct seq_file *sfile)
 {
 	struct log_rb *log = s->log;
 	u32 get, put, alloc;
@@ -114,7 +126,17 @@ static void trusty_dump_logs(struct trusty_log_state *s)
 	 * that the above condition is maintained. A read barrier is needed
 	 * to make sure the hardware and compiler keep the reads ordered.
 	 */
-	get = s->get;
+	/*
+	 * sfile dump requires to dump the whole buffer
+	 * i.e. to start from the oldest entry in the ring buffer
+	 * which is located at (log->alloc - log->sz) % log->sz.
+	 */
+	alloc = log->alloc;
+	if (sfile) {
+		get = alloc < log->sz ? 0 : alloc - log->sz;
+	} else {
+		get = s->get;
+	}
 	while ((put = log->put) != get) {
 		/* Make sure that the read of put occurs before the read of log data */
 		rmb();
@@ -131,17 +153,45 @@ static void trusty_dump_logs(struct trusty_log_state *s)
 		 * have been corrupted by the producer.
 		 */
 		if (alloc - get > log->sz) {
-			dev_err(s->dev, "log overflow.");
+			/*
+			 * this condition is acceptable in the case of the sfile dump
+			 * it simply means a new entry is written in the log while
+			 * we start dumping from the oldest entry
+			 */
+			if (!sfile) {
+				dev_err(s->dev, "log overflow.");
+			}
 			get = alloc - log->sz;
 			continue;
 		}
-
-		if (__ratelimit(&trusty_log_rate_limit))
-			dev_info(s->dev, "%s", s->line_buffer);
-
+		if (sfile) {
+			seq_printf(sfile, "%s", s->line_buffer);
+		} else {
+			if (__ratelimit(&trusty_log_rate_limit)) {
+				dev_info(s->dev, "%s", s->line_buffer);
+			}
+		}
 		get += read_chars;
 	}
-	s->get = get;
+	if (!sfile) {
+		s->get = get;
+	}
+}
+
+static inline void trusty_dump_logs(struct trusty_log_state *s)
+{
+	trusty_sink(s, NULL);
+}
+
+static int trusty_logbuffer_seq_show(void *ctx, struct seq_file *sfile, void *v)
+{
+	struct trusty_log_state *s;
+	(void)v;
+	s = ctx;
+	spin_lock(&s->lock);
+	trusty_sink(s, sfile);
+	spin_unlock(&s->lock);
+	return 0;
 }
 
 static int trusty_log_call_notify(struct notifier_block *nb,
@@ -205,7 +255,7 @@ static int trusty_log_probe(struct platform_device *pdev)
 	struct trusty_log_state *s;
 	int result;
 	trusty_shared_mem_id_t mem_id;
-
+	struct trusty_logbuffer *logbuffer;
 	compiletime_assert(((TRUSTY_LOG_SHAREDMEM_SIZE % PAGE_SIZE) == 0),
 			   "trusty log sharedmem shall be page aligned");
 	if (!trusty_supports_logging(pdev->dev.parent))
@@ -266,10 +316,22 @@ static int trusty_log_probe(struct platform_device *pdev)
 			"failed to register panic notifier\n");
 		goto error_panic_notifier;
 	}
-	platform_set_drvdata(pdev, s);
 
+	logbuffer = trusty_logbuffer_register("trusty", s->dev, s,
+					      trusty_logbuffer_seq_show);
+	if (IS_ERR(logbuffer)) {
+		dev_err(&pdev->dev,
+			"failed to register /dev/logbuffer_trusty\n");
+		goto error_logbuffer;
+	}
+	s->logbuffer = logbuffer;
+
+	platform_set_drvdata(pdev, s);
 	return 0;
 
+error_logbuffer:
+	atomic_notifier_chain_unregister(&panic_notifier_list,
+					 &s->panic_notifier);
 error_panic_notifier:
 	trusty_call_notifier_unregister(s->trusty_dev, &s->call_notifier);
 error_call_notifier:
@@ -299,10 +361,12 @@ static int trusty_log_remove(struct platform_device *pdev)
 	struct trusty_log_state *s = platform_get_drvdata(pdev);
 	trusty_shared_mem_id_t mem_id = s->log_pages_shared_mem_id;
 
+	if (s->logbuffer) {
+		trusty_logbuffer_unregister(s->logbuffer);
+	}
 	atomic_notifier_chain_unregister(&panic_notifier_list,
 					 &s->panic_notifier);
 	trusty_call_notifier_unregister(s->trusty_dev, &s->call_notifier);
-
 	result = trusty_std_call32(s->trusty_dev, SMC_SC_SHARED_LOG_RM,
 				   (u32)mem_id, (u32)(mem_id >> 32), 0);
 	if (result) {
