@@ -16,6 +16,24 @@
       "message": "Should this be conditional on building the FIPS module?",
       "revId": "98839bd8b7f153571931d6ca0b95d40317d8ab8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9a7e090_0c6d2231",
+        "filename": "arch/arm64/include/asm/simd.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-05-19T16:42:36Z",
+      "side": 1,
+      "message": "I don\u0027t think so. I think it is reasonable to expect SIMD users to ensure that the ASIMD CPU feature is supported to begin with before trying to determine whether it can be used at this particular moment.",
+      "parentUuid": "36858e7b_cfb5cf17",
+      "revId": "98839bd8b7f153571931d6ca0b95d40317d8ab8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
