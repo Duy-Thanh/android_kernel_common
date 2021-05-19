@@ -58,6 +58,7 @@
 #include <trace/hooks/thermal.h>
 #include <trace/hooks/audio_usboffload.h>
 #include <trace/hooks/typec.h>
+#include <trace/hooks/user.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -189,3 +190,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_modify_src_caps);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_log);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_gfp_zone_flags);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_readahead_gfp_mask);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_uid);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_user);
+
