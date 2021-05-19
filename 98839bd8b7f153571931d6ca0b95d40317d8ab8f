@@ -34,6 +34,24 @@
       "parentUuid": "36858e7b_cfb5cf17",
       "revId": "98839bd8b7f153571931d6ca0b95d40317d8ab8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71152a5d_20ad56bf",
+        "filename": "arch/arm64/include/asm/simd.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-05-19T16:44:41Z",
+      "side": 1,
+      "message": "Should this change be upstreamed then?\n\nWe should aim to diverge from upstream as little as possible.  This seems like the type of thing that should be restricted to the FIPS module if it isn\u0027t upstreamed, so that we avoid yet another divergence of behavior in the kernel itself.",
+      "parentUuid": "e9a7e090_0c6d2231",
+      "revId": "98839bd8b7f153571931d6ca0b95d40317d8ab8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
