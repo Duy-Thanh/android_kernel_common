@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52d3d0f5_1785214f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-05-20T16:26:59Z",
+      "side": 1,
+      "message": "Enlarging struct bio and struct request negatively affects performance, hence the -2. Please explain in https://b.corp.google.com/issues/188749221 what features you would like to add to the block layer and SCSI core such that we can evaluate which features can be sent upstream.",
+      "revId": "dd3eec9c7ee47b6040ce094fc1ef450f2ece87bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "711a6f2d_e50c13a3",
