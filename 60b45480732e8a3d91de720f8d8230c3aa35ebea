@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a73281c9_892d9054",
+        "filename": "drivers/staging/android/debug_kinfo.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1880091
+      },
+      "writtenOn": "2021-05-20T09:18:41Z",
+      "side": 1,
+      "message": "All the virt_to_phys in this file have the same problem",
+      "range": {
+        "startLine": 154,
+        "startChar": 26,
+        "endLine": 154,
+        "endChar": 38
+      },
+      "revId": "60b45480732e8a3d91de720f8d8230c3aa35ebea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
