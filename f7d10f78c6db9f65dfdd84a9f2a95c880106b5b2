@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "164bb4c8_0068f8cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1688863
+      },
+      "writtenOn": "2021-05-20T21:07:52Z",
+      "side": 1,
+      "message": "Note: this will need to be cherry-picked to android12-5.4 and mainline as well, I believe.",
+      "revId": "f7d10f78c6db9f65dfdd84a9f2a95c880106b5b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
