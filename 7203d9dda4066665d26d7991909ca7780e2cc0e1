@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fc53efc_b592853e",
+        "filename": "drivers/remoteproc/remoteproc_core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1729,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2021-05-20T23:00:23Z",
+      "side": 1,
+      "message": "Why do you need this? If there\u0027s a genuine need, I\u0027d think this is easily upstreamable? Have you at least sent a proper implementation to the upstream lists?",
+      "range": {
+        "startLine": 1729,
+        "startChar": 1,
+        "endLine": 1729,
+        "endChar": 32
+      },
+      "revId": "7203d9dda4066665d26d7991909ca7780e2cc0e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
