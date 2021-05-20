@@ -16,6 +16,24 @@
       "message": "Drivers should not need this symbol.",
       "revId": "b651ff0700e8eba5449772eb304a7780bfa73ac0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d99dcce5_841cf9a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878106
+      },
+      "writtenOn": "2021-05-20T06:43:35Z",
+      "side": 1,
+      "message": "It is needed for our vendor module, that is the reason:\n1. We want to notify the tasks do some works, that works will update per-task and per-cpu information for performance tuning at our vendor module.\n2. This patch can export the task_work_add(), and we can use it to add our works for the tasks.\n\nI will update the commit message later.",
+      "parentUuid": "82d4cdcb_4aaf1ece",
+      "revId": "b651ff0700e8eba5449772eb304a7780bfa73ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
