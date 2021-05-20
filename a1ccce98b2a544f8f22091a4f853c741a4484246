@@ -16,6 +16,24 @@
       "message": "The commit message should rather be containing:\n\nLeaf changes summary: 1 artifact changed\nChanged leaf types summary: 0 leaf type changed\nRemoved/Changed/Added functions summary: 0 Removed, 0 Changed, 1 Added function\nRemoved/Changed/Added variables summary: 0 Removed, 0 Changed, 0 Added variable\n\n1 Added function:\n\n  [A] \u0027function int dma_fence_signal_timestamp_locked(dma_fence*, ktime_t)\u0027\n\n\nThis actually adds a new symbol to this branch and therefore the abi.xml needs an update as well.",
       "revId": "a1ccce98b2a544f8f22091a4f853c741a4484246",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac5bfc82_0bd40634",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-05-20T10:35:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bcd33e4_a29e6690",
+      "revId": "a1ccce98b2a544f8f22091a4f853c741a4484246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
