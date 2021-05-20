@@ -94,6 +94,30 @@
       },
       "revId": "f07f2398adfb6508e4b47f24345f7b315f21bc21",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87bf5935_e4f62b81",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 1855126
+      },
+      "writtenOn": "2021-05-20T11:04:59Z",
+      "side": 1,
+      "message": "As explained in https://partnerissuetracker.corp.google.com/u/1/issues/186875166#comment3 \n\nIn case there is no further task to kill, deferring the panic for a time period avoids false positive issues, which may be reported due to time taken with reclaim of ion memory. As we know the ion memory is reclaimed once fds are closed and oom reaper isn\u0027t able to do that.\n\nThe vendor hook allows this flexibility.",
+      "parentUuid": "07c6bdc3_f271e225",
+      "range": {
+        "startLine": 1153,
+        "startChar": 0,
+        "endLine": 1153,
+        "endChar": 45
+      },
+      "revId": "f07f2398adfb6508e4b47f24345f7b315f21bc21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
