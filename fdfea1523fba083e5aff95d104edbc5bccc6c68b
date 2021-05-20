@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2135195b_3e81b8e2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-05-20T19:13:43Z",
+      "side": 1,
+      "message": "Since you modified the original patch during the backporting, you need Conflicts: section here.",
+      "revId": "fdfea1523fba083e5aff95d104edbc5bccc6c68b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
