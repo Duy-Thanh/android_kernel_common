@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "711a6f2d_e50c13a3",
+        "filename": "include/linux/blk_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-20T12:57:23Z",
+      "side": 1,
+      "message": "why so much and not just a single pointer?",
+      "range": {
+        "startLine": 253,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 31
+      },
+      "revId": "dd3eec9c7ee47b6040ce094fc1ef450f2ece87bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34082cac_bd49d279",
+        "filename": "include/linux/blkdev.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-20T12:57:23Z",
+      "side": 1,
+      "message": "why not just a single pointer?",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 31
+      },
+      "revId": "dd3eec9c7ee47b6040ce094fc1ef450f2ece87bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
