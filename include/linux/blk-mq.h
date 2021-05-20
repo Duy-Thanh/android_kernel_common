@@ -174,6 +174,8 @@ struct blk_mq_hw_ctx {
 	 */
 	struct list_head	hctx_list;
 
+	ANDROID_OEM_DATA_ARRAY(1, 2);
+
 	/**
 	 * @srcu: Sleepable RCU. Use as lock when type of the hardware queue is
 	 * blocking (BLK_MQ_F_BLOCKING). Must be the last member - see also
@@ -539,6 +541,11 @@ static inline bool blk_should_fake_timeout(struct request_queue *q)
 	    test_bit(QUEUE_FLAG_FAIL_IO, &q->queue_flags))
 		return __blk_should_fake_timeout(q);
 	return false;
+}
+
+static inline void *blk_mq_rq_to_oem(struct request *rq)
+{
+	return (void *)(rq + 1) + ALIGN(rq->q->tag_set->cmd_size, 8);
 }
 
 /**

@@ -2388,6 +2388,11 @@ int blk_mq_alloc_rqs(struct blk_mq_tag_set *set, struct blk_mq_tags *tags,
 	 */
 	rq_size = round_up(sizeof(struct request) + set->cmd_size,
 				cache_line_size());
+	if (oem_vivo)
+		rq_size = round_up(sizeof(struct request) +
+					ALIGN(set->cmd_size, 8) +
+					OEM_REQUEST_DATA,
+					cache_line_size());
 	left = rq_size * depth;
 
 	for (i = 0; i < depth; ) {
@@ -3926,3 +3931,15 @@ static int __init blk_mq_init(void)
 	return 0;
 }
 subsys_initcall(blk_mq_init);
+
+int oem_vivo = 0;
+
+static int __init oem_setup(char *str)
+{
+	if (!strncmp(line, "VIVO", 4)) {
+		oem_vivo = 1;
+	}
+
+	return 1;
+}
+__setup("oem=", oem_setup);

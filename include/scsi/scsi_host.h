@@ -486,6 +486,8 @@ struct scsi_host_template {
 
 	/* Delay for runtime autosuspend */
 	int rpm_autosuspend_delay;
+
+	ANDROID_OEM_DATA(1);
 };
 
 /*

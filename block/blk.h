@@ -14,6 +14,11 @@
 /* Max future timer expiry for timeouts */
 #define BLK_MAX_TIMEOUT		(5 * HZ)
 
+#define OEM_REQUEST_DATA	(sizeof(u64) * 8)
+#define OEM_BIO_DATA	(sizeof(u64) * 12)
+
+extern int oem_vivo;
+
 extern struct dentry *blk_debugfs_root;
 
 struct blk_flush_queue {
