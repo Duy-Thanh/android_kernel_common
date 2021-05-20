@@ -174,6 +174,8 @@ struct blk_mq_hw_ctx {
 	 */
 	struct list_head	hctx_list;
 
+	ANDROID_OEM_DATA_ARRAY(1, 2);
+
 	/**
 	 * @srcu: Sleepable RCU. Use as lock when type of the hardware queue is
 	 * blocking (BLK_MQ_F_BLOCKING). Must be the last member - see also

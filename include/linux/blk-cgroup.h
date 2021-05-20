@@ -58,6 +58,8 @@ struct blkcg {
 #ifdef CONFIG_CGROUP_WRITEBACK
 	struct list_head		cgwb_list;
 #endif
+
+	ANDROID_OEM_DATA(1);
 };
 
 struct blkg_iostat {
