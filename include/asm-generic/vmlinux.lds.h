@@ -426,6 +426,15 @@
 #endif
 
 /*
+ * Keep .eh_frame with CFI.
+ */
+#ifdef CONFIG_CFI_CLANG
+#define EH_FRAME *(.eh_frame)
+#else
+#define EH_FRAME
+#endif
+
+/*
  * Read only Data
  */
 #define RO_DATA(align)							\
@@ -579,6 +588,7 @@
 		__stop___modver = .;					\
 	}								\
 									\
+	EH_FRAME							\
 	RO_EXCEPTION_TABLE						\
 	NOTES								\
 	BTF								\
