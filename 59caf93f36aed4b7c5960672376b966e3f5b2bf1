@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9878cd5a_b4284aad",
+        "filename": "mm/hugetlb.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5458,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-05-21T16:04:38Z",
+      "side": 1,
+      "message": "Looks like a missing pointer.",
+      "range": {
+        "startLine": 5458,
+        "startChar": 65,
+        "endLine": 5458,
+        "endChar": 66
+      },
+      "revId": "59caf93f36aed4b7c5960672376b966e3f5b2bf1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
