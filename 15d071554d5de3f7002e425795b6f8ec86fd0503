@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a84a230_4e246276",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-05-21T16:50:03Z",
+      "side": 1,
+      "message": "Wont we wind up with orphan section placement warnings unless we explicitly place these somewhere? Do you have a follow up patch after the revert that does this?",
+      "revId": "15d071554d5de3f7002e425795b6f8ec86fd0503",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
