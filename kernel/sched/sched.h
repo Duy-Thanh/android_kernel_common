@@ -1161,7 +1161,12 @@ struct rq {
 	u64			core_forceidle_start;
 #endif
 
+<<<<<<< HEAD   (07efa9 ANDROID: Disable BTI_KERNEL, enable UNWIND_PATCH_PAC_INTO_SC)
 	ANDROID_VENDOR_DATA_ARRAY(1, 1);
+=======
+	ANDROID_VENDOR_DATA_ARRAY(1, 96);
+	ANDROID_OEM_DATA_ARRAY(1, 16);
+>>>>>>> CHANGE (8fdd8e ANDROID: sched: Add oem data in struct rq)
 };
 
 #ifdef CONFIG_FAIR_GROUP_SCHED
