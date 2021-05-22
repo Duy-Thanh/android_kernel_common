@@ -1099,11 +1099,16 @@ struct rq {
 	struct cpuidle_state	*idle_state;
 #endif
 
+<<<<<<< HEAD   (825d99 ANDROID: abi_gki_aarch64_qcom: Update qcom abi symbol list)
 #ifdef CONFIG_SMP
 	unsigned int		nr_pinned;
 #endif
 	unsigned int		push_busy;
 	struct cpu_stop_work	push_work;
+=======
+	ANDROID_VENDOR_DATA_ARRAY(1, 96);
+	ANDROID_OEM_DATA_ARRAY(1, 16);
+>>>>>>> CHANGE (0b76ef ANDROID: sched: Add oem data in struct rq)
 
 #ifdef CONFIG_SCHED_CORE
 	/* per rq */
