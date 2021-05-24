@@ -1,0 +1,94 @@
+// SPDX-License-Identifier: GPL-2.0
+/*
+ * Copyright 2021 Google LLC
+ */
+
+#include <linux/module.h>
+#include <linux/mutex.h>
+#include <linux/rtc.h>
+#include <linux/sched/clock.h>
+#include <linux/slab.h>
+#include <linux/suspend.h>
+#include <linux/syscore_ops.h>
+#include <linux/vmalloc.h>
+#include "trusty-logbuffer.h"
+
+static int trusty_logbuffer_dev_open(struct inode *inode, struct file *file)
+{
+	struct trusty_logbuffer *instance;
+	struct seq_file *sfile;
+	int rc;
+
+	if (WARN_ON(!file->private_data))
+		return -EINVAL;
+	instance =
+		container_of(file->private_data, struct trusty_logbuffer, misc);
+
+	file->private_data = NULL;
+	rc = seq_open(file, instance->cfg.seq_ops);
+	if (rc < 0)
+		return rc;
+
+	sfile = file->private_data;
+	if (WARN_ON(!sfile))
+		return -EINVAL;
+	sfile->private = instance;
+	return 0;
+}
+
+static const struct file_operations logbuffer_dev_operations = {
+	.owner = THIS_MODULE,
+	.open = trusty_logbuffer_dev_open,
+	.read = seq_read,
+	.release = seq_release,
+};
+
+int trusty_logbuffer_register(struct trusty_logbuffer *instance)
+{
+	int ret;
+
+	if (WARN_ON(!instance))
+		return -EINVAL;
+	if (WARN_ON(!instance->cfg.dev))
+		return -EINVAL;
+	if (WARN_ON(!instance->cfg.seq_ops->start))
+		return -EINVAL;
+	if (WARN_ON(!instance->cfg.seq_ops->next))
+		return -EINVAL;
+	if (WARN_ON(!instance->cfg.seq_ops->show))
+		return -EINVAL;
+	if (WARN_ON(!instance->cfg.seq_ops->stop))
+		return -EINVAL;
+	snprintf(instance->device_name, sizeof(instance->device_name),
+		 "logbuffer_%s%d", instance->cfg.name, instance->cfg.id);
+	instance->misc.minor = MISC_DYNAMIC_MINOR;
+	instance->misc.name = instance->device_name;
+	instance->misc.fops = &logbuffer_dev_operations;
+
+	ret = misc_register(&instance->misc);
+	if (ret) {
+		dev_err(instance->cfg.dev,
+			"Logbuffer error while doing misc_register ret=%d\n",
+			ret);
+		return ret;
+	}
+	dev_info(instance->cfg.dev, "/dev/%s registered\n",
+		 instance->device_name);
+	return 0;
+}
+EXPORT_SYMBOL(trusty_logbuffer_register);
+
+void trusty_logbuffer_unregister(struct trusty_logbuffer *instance)
+{
+	if (!instance)
+		return;
+	misc_deregister(&instance->misc);
+	if (instance->cfg.dev) {
+		dev_info(instance->cfg.dev, "/dev/%s unregistered\n",
+			 instance->misc.name);
+	}
+}
+EXPORT_SYMBOL(trusty_logbuffer_unregister);
+
+MODULE_LICENSE("GPL v2");
+MODULE_DESCRIPTION("Trusty logging driver secondary sink");
