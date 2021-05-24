@@ -16,6 +16,24 @@
       "message": "Thsi impacts KMI, I\u0027ll queue it for the next merge.",
       "revId": "49193422de5b0eca7da95e17f24670fd340229c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e511a10_26be50b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2021-05-24T11:44:16Z",
+      "side": 1,
+      "message": "Ok, thank you.",
+      "parentUuid": "e9c41d57_82c65eac",
+      "revId": "49193422de5b0eca7da95e17f24670fd340229c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
