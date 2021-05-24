@@ -2,6 +2,7 @@
 /*
  * Copyright (C) 2015 Google, Inc.
  */
+#include <linux/compiler.h>
 #include <linux/platform_device.h>
 #include <linux/trusty/smcall.h>
 #include <linux/trusty/trusty.h>
@@ -14,6 +15,7 @@
 #include <linux/log2.h>
 #include <asm/page.h>
 #include "trusty-log.h"
+#include "trusty-logbuffer.h"
 
 /*
  * Rationale for the chosen log buffer size:
@@ -28,6 +30,18 @@
 #define TRUSTY_LINE_BUFFER_SIZE 256
 
 /*
+ * On a read operation, the secondary logbuffer (virtual file)
+ * receives the Trusty log's ring buffer data starting from
+ * the oldest data (alloc index - log size) to the newest data (alloc).
+ * While the read iteration takes place, the newest data keeps coming in,
+ * so the secondary buffer read operation may loop infinitely and require
+ * unacceptable amount of memory.
+ * The below constant allows to cap the maximum secondary logbuffer memory
+ * by specifying a maximum multiple of the ring buffer size
+ */
+#define TRUSTY_LOGBUFFER_RING_MULTIPLE 8
+
+/*
  * If we log too much and a UART or other slow source is connected, we can stall
  * out another thread which is doing printk.
  *
@@ -37,20 +51,40 @@
 static struct ratelimit_state trusty_log_rate_limit =
 	RATELIMIT_STATE_INIT("trusty_log", 1 * HZ, 100);
 
+struct trusty_log_sink_state {
+	struct seq_file *sfile;
+	/* number of bytes sunk since the beginning of the read iteration
+	 * the read is aborted when:
+	 * read_size >= TRUSTY_LOGBUFFER_RING_MULTIPLE * log_size:
+	 */
+	u32 read_size;
+
+	/* current read unwrapped index */
+	u32 get;
+
+	/* index for the next line after the last successful get */
+	u32 last_successful_next;
+
+	/* distance of get from alloc - allows to handle u32 overflow case */
+	s32 dist_alloc;
+
+	/* distance of get from put - allows to handle u32 overflow case */
+	s32 dist_put;
+
+	bool trusty_panicked;
+};
+
 struct trusty_log_state {
 	struct device *dev;
 	struct device *trusty_dev;
-
+	struct trusty_logbuffer logbuffer;
+	struct log_rb *log;
+	struct trusty_log_sink_state klog_sink;
 	/*
 	 * This lock is here to ensure only one consumer will read
 	 * from the log ring buffer at a time.
 	 */
 	spinlock_t lock;
-	struct log_rb *log;
-	u32 get;
-	/* index for the next line after the last successful get */
-	u32 last_successful_next;
-
 	struct page *log_pages;
 	struct scatterlist sg;
 	trusty_shared_mem_id_t log_pages_shared_mem_id;
@@ -60,31 +94,168 @@ struct trusty_log_state {
 	char line_buffer[TRUSTY_LINE_BUFFER_SIZE];
 };
 
-static int log_read_line(struct trusty_log_state *s, int put, int get)
+static int log_read_line(struct trusty_log_state *s, struct trusty_log_sink_state* sink)
 {
 	struct log_rb *log = s->log;
-	int i;
+	u32 get = sink->get;
+	int zeros, i, char_cnt;
 	char c = '\0';
-	size_t max_to_read =
-		min_t(size_t, put - get, sizeof(s->line_buffer) - 1);
+	size_t max_to_read;
 	size_t mask = log->sz - 1;
+	char_cnt = 0;
+	zeros = 0;
+	max_to_read = sink->dist_put;
 
-	for (i = 0; i < max_to_read && c != '\n';)
-		s->line_buffer[i++] = c = log->data[get++ & mask];
-	s->line_buffer[i] = '\0';
-
-	return i;
+	/*
+	 * The alloc index may be initialized to a large value
+	 * in order to reach the u32 wraparound state early after boot
+	 * and debug any potential issue.
+	 * So the very first log line may be anywhere between
+	 * alloc and alloc-size.
+	 * In order to find the very first log line, we keep
+	 * advancing the get index as long as the log memory is null.
+	 */
+	do {
+		c = log->data[get++ & mask];
+		if (c != '\0'){
+			s->line_buffer[char_cnt++] = c;
+			break;
+		}
+		++zeros;
+	} while (--max_to_read);
+	max_to_read = min_t(size_t,
+			    max_to_read,
+			    sizeof(s->line_buffer) - 1 - char_cnt);
+	for (i = 0; i < max_to_read && c != '\n'; i++)
+		s->line_buffer[char_cnt++] = c = log->data[get++ & mask];
+	s->line_buffer[char_cnt] = '\0';
+	return char_cnt+zeros;
 }
 
-static void trusty_dump_logs(struct trusty_log_state *s)
+/**
+ * trusty_log_distance() - return the read index (get) distance
+ * from the write indices (alloc and put), taking into account possible u32
+ * overflow
+ * @s:         Current log state.
+ * @sink:      trusty_log_sink_state holding the get index on a given sink
+ *
+ */
+static inline int trusty_log_distance(struct trusty_log_state *s,
+				      struct trusty_log_sink_state *sink){
+	struct log_rb *log;
+	u32 size, get, put, alloc;
+	int cnt = 2;
+	log = s->log;
+	size = log->sz;
+	get = sink->get;
+	put = log->put;
+	alloc = log->alloc;
+	if (get > alloc) {
+		/* u32 overflow case */
+		dev_dbg(s->dev,
+			"u32 overflow alloc=%u put=%u get=%u", alloc, put, get);
+		while (alloc < get && cnt--) {
+			alloc += size;
+			get += size;
+			put += size;
+		}
+		if (get > alloc){
+			/*
+			 * get index shall not be further away than log->sz
+			 * with an error margin due to the oldest lines overrun
+			 * so after two rounds (cnt=2) of above loop,
+			 * we should have gotten back to a state
+			 * where get <= alloc
+			 */
+			dev_err(s->dev, "get too far from alloc\n");
+			return -EINVAL;
+		}
+		dev_dbg(s->dev,
+			"u32 overflow dist_alloc=%d dist_put=%d ",
+			alloc - get, put - get);
+	}
+	sink->dist_alloc = alloc - get;
+	sink->dist_put = put - get;
+	if (sink->dist_put < 0) {
+		dev_err(s->dev, "get greater than put\n");
+		return -EINVAL;
+	}
+	return 0;
+}
+
+/**
+ * trusty_log_next() - iteration next function
+ * or to secondary logbuffer
+ * @s:         Current log state.
+ * @sink:      trusty_log_sink_state holding the get index on a given sink
+ *
+ * Return: the next index pointer or ENOMEM if iteration is complete
+ */
+static inline void *trusty_log_next(struct trusty_log_state *s,
+				    struct trusty_log_sink_state *sink)
 {
 	struct log_rb *log = s->log;
-	u32 get, put, alloc;
-	int read_chars;
-	bool trusty_panicked = trusty_get_panic_status(s->trusty_dev);
 
+	/**
+	 * note: trusty_log_distance is expected to be called by the start
+	 * or the next function, right when a new set of write indices
+	 * shall be read (in the show function after the read barriers)
+	 * so the next function merely checks the already up to date distances
+	 * to either stop the iteration or skip lines when an overrun is detected
+	 */
+
+	if (sink->dist_put == 0)
+		return NULL;
+
+	if (log->sz < sink->dist_alloc){
+		/* skipping lines in case of overrun */
+		sink->get = log->alloc - log->sz;
+	}
+	return &sink->get;
+}
+
+/**
+ * trusty_log_start() - initialize the sink iteration either to kernel log
+ * or to secondary logbuffer
+ * @s:         Current log state.
+ * @sink:      trusty_log_sink_state holding the get index on a given sink
+ * @index:     Unwrapped ring buffer index from where iteration shall start
+ *
+ * Return: the start index pointer
+ */
+static void *trusty_log_start(struct trusty_log_state *s,
+			      struct trusty_log_sink_state *sink, u32 index)
+{
+	struct log_rb *log;
+	int rc;
+	if (WARN_ON(!s))
+		return ERR_PTR(-EINVAL);
+	log = s->log;
 	if (WARN_ON(!is_power_of_2(log->sz)))
-		return;
+		return ERR_PTR(-EINVAL);
+	sink->get = index;
+	rc = trusty_log_distance(s, sink);
+	if (rc < 0)
+		return ERR_PTR(rc);
+	return trusty_log_next(s, sink);
+}
+
+/**
+ * trusty_log_show() - sink log entry at current iteration
+ * @s:         Current log state.
+ * @sink:      trusty_log_sink_state holding the get index on a given sink
+ *
+ * Return: 0 is successful, negative error code otherwise
+ */
+static int trusty_log_show(struct trusty_log_state *s,
+			   struct trusty_log_sink_state *sink)
+{
+	struct log_rb *log = s->log;
+	u32 alloc, get;
+	bool oldest_line;
+	int read_chars;
+	int rc;
+	size_t mask = log->sz - 1;
 
 	/*
 	 * For this ring buffer, at any given point, alloc >= put >= get.
@@ -93,36 +264,301 @@ static void trusty_dump_logs(struct trusty_log_state *s)
 	 * that the above condition is maintained. A read barrier is needed
 	 * to make sure the hardware and compiler keep the reads ordered.
 	 */
-	get = trusty_panicked ? s->last_successful_next : s->get;
-	while ((put = log->put) != get) {
-		/* Make sure that the read of put occurs before the read of log data */
-		rmb();
+	get = sink->get;
+	alloc = log->alloc;
 
-		/* Read a line from the log */
-		read_chars = log_read_line(s, put, get);
+	/*
+	 * oldest_line is computed using the ring-buffer index in order
+	 * not to get impacted by any potential u32 overflow
+	 */
+	oldest_line = ((get & mask) == (alloc & mask)) ? true : false;
 
-		/* Force the loads from log_read_line to complete. */
-		rmb();
-		alloc = log->alloc;
+	/* Make sure that the read of put occurs before the read of log data */
+	rmb();
 
+	/* Read a line from the log */
+	read_chars = log_read_line(s, sink);
+	sink->get += read_chars;
+	sink->read_size += read_chars;
+	/* Force the loads from log_read_line to complete. */
+	rmb();
+
+	/* read latest write indices and update distances with get index */
+	rc = trusty_log_distance(s, sink);
+	if (rc < 0)
+		return rc;
+
+	/*
+	 * Discard the line that was just read if the data could
+	 * have been corrupted by the producer.
+	 */
+	if (log->sz < sink->dist_alloc) {
 		/*
-		 * Discard the line that was just read if the data could
-		 * have been corrupted by the producer.
-		 */
-		if (alloc - get > log->sz) {
-			dev_err(s->dev, "log overflow.");
-			get = alloc - log->sz;
-			continue;
+		* this condition is acceptable in the case of the sfile sink
+		* when attempting to read the oldest entry (at alloc-log->sz)
+		* which may be overrun by a new one when ring buffer write index
+		* wraps around. So the overrun is not reported in case the oldest line
+		* was being read.
+		*/
+		if (sink->sfile && !oldest_line) {
+			seq_printf(sink->sfile, "log overflow.\n",
+				   s->line_buffer);
 		}
-		/* compute next line index */
-		get += read_chars;
-		if (trusty_panicked || __ratelimit(&trusty_log_rate_limit)) {
+		if (!sink->sfile)
+			dev_err(s->dev, "log overflow.\n");
+		return 0;
+	}
+	if (s->line_buffer[0]=='\0'){
+		if (sink->sfile){
+			seq_printf(sink->sfile, "log data null get=%u put=%u\n",
+				   sink->get, log->put);
+		}
+		dev_err(s->dev, "log data null get=%u put=%u\n",
+			sink->get, log->put);
+		return 0;
+	}
+	if (sink->sfile) {
+		seq_printf(sink->sfile, "%s", s->line_buffer);
+		sink->last_successful_next = sink->get;
+	} else {
+		if (sink->trusty_panicked ||
+		    __ratelimit(&trusty_log_rate_limit)) {
 			dev_info(s->dev, "%s", s->line_buffer);
 			/* next line after last successful get */
-			s->last_successful_next = get;
+			sink->last_successful_next = sink->get;
 		}
 	}
-	s->get = get;
+	return 0;
+}
+
+static void *trusty_log_seq_start(struct seq_file *sfile, loff_t *pos)
+{
+	struct trusty_logbuffer *lb;
+	struct trusty_log_state *s;
+	struct log_rb *log;
+	struct trusty_log_sink_state *logbuffer_sink;
+	void *get;
+	u32 index;
+
+	if (WARN_ON(!pos))
+		return ERR_PTR(-EINVAL);
+
+	lb = sfile->private;
+	if (WARN_ON(!lb))
+		return ERR_PTR(-EINVAL);
+
+	logbuffer_sink = kzalloc(sizeof(*logbuffer_sink), GFP_KERNEL);
+	if (!logbuffer_sink)
+		return ERR_PTR(-ENOMEM);
+
+	s = container_of(lb, struct trusty_log_state, logbuffer);
+	logbuffer_sink->sfile = sfile;
+	log = s->log;
+	if (*pos == 0) {
+		/*
+		* if *pos=0: logbuffer_sink->read_size = 0,
+		* no need to initialize to zero here,
+		* as it's already done by kzalloc
+		*/
+
+		/* start at the oldest line */
+		index = log->alloc - log->sz;
+	} else {
+		/* *pos>0, pos hold a 64bits (loff_t) value composed of:
+		 * LSW:
+		 *   the 32bits unwrapped index from where to start iterating
+		 * MSW:
+		 *   the number of bytes sink to the virtual file since
+		 *   the begining of the read operation.
+		 */
+		loff_t iteration_state = *pos;
+		index = (u32)iteration_state;
+		logbuffer_sink->read_size = (iteration_state >> 32);
+	}
+	dev_dbg(s->dev, "%s start=%u read_size=%u", __func__, index,
+		logbuffer_sink->read_size);
+	get = trusty_log_start(s, logbuffer_sink, index);
+	if (IS_ERR_OR_NULL(get))
+		goto free_sink;
+
+	return get;
+free_sink:
+	dev_dbg(s->dev, "%s kfree", __func__);
+	kfree(logbuffer_sink);
+	return get;
+}
+
+static void *trusty_log_seq_next(struct seq_file *sfile, void *v, loff_t *pos)
+{
+	struct trusty_logbuffer *lb;
+	struct trusty_log_state *s;
+	struct trusty_log_sink_state *logbuffer_sink;
+	void *res;
+
+	if (WARN_ON(!v))
+		return ERR_PTR(-EINVAL);
+	logbuffer_sink = container_of(v, struct trusty_log_sink_state, get);
+
+	lb = sfile->private;
+	if (WARN_ON(!lb)) {
+		res = ERR_PTR(-EINVAL);
+		goto end_of_iter_no_log;
+	}
+	s = container_of(lb, struct trusty_log_state, logbuffer);
+
+	res = trusty_log_next(s, logbuffer_sink);
+	if (!IS_ERR(res)) {
+		if (WARN_ON(!pos)) {
+			res = ERR_PTR(-EINVAL);
+			goto end_of_iter;
+		}
+		*pos = (((loff_t)logbuffer_sink->read_size) << 32) +
+		       logbuffer_sink->get;
+	}
+	if (logbuffer_sink->read_size >
+	    TRUSTY_LOGBUFFER_RING_MULTIPLE * s->log->sz) {
+		/* cannot catch-up with heavy logging on trusty side */
+		if (WARN_ON(!s->logbuffer.misc.name)) {
+			res = ERR_PTR(-EINVAL);
+			goto end_of_iter;
+		}
+		dev_err(s->dev,
+			"/dev/%s sink aborted due to heavy trusty logging",
+			s->logbuffer.misc.name);
+		res = NULL;
+		goto end_of_iter;
+	}
+	if (IS_ERR_OR_NULL(res)) {
+		// iteration is complete
+		goto end_of_iter;
+	}
+	return res;
+end_of_iter:
+	dev_dbg(s->dev, "%s kfree", __func__);
+end_of_iter_no_log:
+	kfree(logbuffer_sink);
+	return res;
+}
+
+static void trusty_log_seq_stop(struct seq_file *sfile, void *v)
+{
+	/*
+	 * When iteration completes or on error, the next callback frees
+	 * the sink structure and returns NULL/error-code.
+	 * In that case stop (being invoked with void* v set to the last next
+	 * return value) would be invoked with v == NULL or error code.
+	 * When user space stops the iteration earlier than the end
+	 * (in case of user-space memory allocation limit for example)
+	 * then the stop function receives a non NULL get pointer
+	 * and is in charge or freeing the sink structure.
+	 */
+	struct trusty_logbuffer *lb;
+	struct trusty_log_state *s;
+	struct trusty_log_sink_state *logbuffer_sink;
+
+	/* nothing to do - sink structure already freed */
+	if (IS_ERR_OR_NULL(v))
+		return;
+
+	logbuffer_sink = container_of(v, struct trusty_log_sink_state, get);
+	kfree(logbuffer_sink);
+
+	lb = sfile->private;
+	if (WARN_ON(!lb))
+		return;
+	s = container_of(lb, struct trusty_log_state, logbuffer);
+	dev_dbg(s->dev, "%s kfree", __func__);
+}
+
+static int trusty_log_seq_show(struct seq_file *sfile, void *v)
+{
+	struct trusty_logbuffer *lb;
+	struct trusty_log_state *s;
+	struct trusty_log_sink_state *logbuffer_sink;
+
+	if (WARN_ON(!v))
+		return -EINVAL;
+	logbuffer_sink = container_of(v, struct trusty_log_sink_state, get);
+
+	lb = sfile->private;
+	if (WARN_ON(!lb))
+		return -EINVAL;
+
+	s = container_of(lb, struct trusty_log_state, logbuffer);
+
+	return trusty_log_show(s, logbuffer_sink);
+}
+
+const struct seq_operations trusty_log_seq_ops = {
+	.start = trusty_log_seq_start,
+	.stop = trusty_log_seq_stop,
+	.next = trusty_log_seq_next,
+	.show = trusty_log_seq_show,
+};
+
+static inline void trusty_log_logbuffer_init_config(struct trusty_log_state *s)
+{
+	s->logbuffer.cfg.dev = s->dev;
+	s->logbuffer.cfg.id = s->dev->id;
+	s->logbuffer.cfg.seq_ops = &trusty_log_seq_ops;
+}
+
+static inline int trusty_log_logbuffer_try_register(struct trusty_log_state *s)
+{
+	int rc;
+	const char *name;
+
+	name = dev_name(s->dev->parent);
+	if (!name) {
+		dev_err(s->dev,
+			"/dev/logbuffer registration aborted due to unknown device name");
+		return -ENAVAIL;
+	}
+	if (strlen(name) > 0) {
+		strlcpy(s->logbuffer.cfg.name, name,
+			sizeof(s->logbuffer.cfg.name));
+	}
+	if (*s->logbuffer.cfg.name == '\0') {
+		dev_err(s->dev,
+			"/dev/logbuffer registration aborted due to unknown device name");
+		return -ENAVAIL;
+	}
+	trusty_log_logbuffer_init_config(s);
+	rc = trusty_logbuffer_register(&s->logbuffer);
+	if (rc < 0) {
+		dev_err(s->dev, "/dev/logbuffer_%s registration failed\n",
+			s->logbuffer.cfg.name);
+		return rc;
+	}
+	return 0;
+}
+
+static void trusty_dump_logs(struct trusty_log_state *s)
+{
+	void *get;
+	u32 start, alloc;
+	struct log_rb *log = s->log;
+
+	/*
+	 * init klog_sink when read_size == 0
+	 * we don't assume that alloc index starts at zero
+	 */
+	if (s->klog_sink.read_size==0){
+		log = s->log;
+		alloc = log->alloc;
+		s->klog_sink.get = alloc - log->sz;
+		s->klog_sink.last_successful_next = s->klog_sink.get;
+	}
+	s->klog_sink.trusty_panicked = trusty_get_panic_status(s->trusty_dev);
+
+	start = s->klog_sink.trusty_panicked ?
+			s->klog_sink.last_successful_next :
+			      s->klog_sink.get;
+	get = trusty_log_start(s, &s->klog_sink, start);
+	while (!IS_ERR_OR_NULL(get)) {
+		trusty_log_show(s, &s->klog_sink);
+		get = trusty_log_next(s, &s->klog_sink);
+	}
 }
 
 static int trusty_log_call_notify(struct notifier_block *nb,
@@ -199,7 +635,6 @@ static int trusty_log_probe(struct platform_device *pdev)
 	spin_lock_init(&s->lock);
 	s->dev = &pdev->dev;
 	s->trusty_dev = s->dev->parent;
-	s->get = 0;
 	s->log_pages = alloc_pages(GFP_KERNEL | __GFP_ZERO,
 				   get_order(TRUSTY_LOG_SIZE));
 	if (!s->log_pages) {
@@ -217,8 +652,7 @@ static int trusty_log_probe(struct platform_device *pdev)
 	}
 	s->log_pages_shared_mem_id = mem_id;
 
-	result = trusty_std_call32(s->trusty_dev,
-				   SMC_SC_SHARED_LOG_ADD,
+	result = trusty_std_call32(s->trusty_dev, SMC_SC_SHARED_LOG_ADD,
 				   (u32)(mem_id), (u32)(mem_id >> 32),
 				   TRUSTY_LOG_SIZE);
 	if (result < 0) {
@@ -229,8 +663,8 @@ static int trusty_log_probe(struct platform_device *pdev)
 	}
 
 	s->call_notifier.notifier_call = trusty_log_call_notify;
-	result = trusty_call_notifier_register(s->trusty_dev,
-					       &s->call_notifier);
+	result =
+		trusty_call_notifier_register(s->trusty_dev, &s->call_notifier);
 	if (result < 0) {
 		dev_err(&pdev->dev,
 			"failed to register trusty call notifier\n");
@@ -241,19 +675,26 @@ static int trusty_log_probe(struct platform_device *pdev)
 	result = atomic_notifier_chain_register(&panic_notifier_list,
 						&s->panic_notifier);
 	if (result < 0) {
-		dev_err(&pdev->dev,
-			"failed to register panic notifier\n");
+		dev_err(&pdev->dev, "failed to register panic notifier\n");
 		goto error_panic_notifier;
+	}
+	result = trusty_log_logbuffer_try_register(s);
+	if (result < 0) {
+		dev_err(&pdev->dev, "failed to register logbuffer\n");
+		goto error_logbuffer;
 	}
 	platform_set_drvdata(pdev, s);
 
 	return 0;
 
+error_logbuffer:
+	atomic_notifier_chain_unregister(&panic_notifier_list,
+					 &s->panic_notifier);
 error_panic_notifier:
 	trusty_call_notifier_unregister(s->trusty_dev, &s->call_notifier);
 error_call_notifier:
-	trusty_std_call32(s->trusty_dev, SMC_SC_SHARED_LOG_RM,
-			  (u32)mem_id, (u32)(mem_id >> 32), 0);
+	trusty_std_call32(s->trusty_dev, SMC_SC_SHARED_LOG_RM, (u32)mem_id,
+			  (u32)(mem_id >> 32), 0);
 error_std_call:
 	if (WARN_ON(trusty_reclaim_memory(s->trusty_dev, mem_id, &s->sg, 1))) {
 		dev_err(&pdev->dev, "trusty_revoke_memory failed: %d 0x%llx\n",
@@ -263,7 +704,7 @@ error_std_call:
 		 * fails. Leak it in that case.
 		 */
 	} else {
-err_share_memory:
+	err_share_memory:
 		__free_pages(s->log_pages, get_order(TRUSTY_LOG_SIZE));
 	}
 error_alloc_log:
@@ -278,6 +719,7 @@ static int trusty_log_remove(struct platform_device *pdev)
 	struct trusty_log_state *s = platform_get_drvdata(pdev);
 	trusty_shared_mem_id_t mem_id = s->log_pages_shared_mem_id;
 
+	trusty_logbuffer_unregister(&s->logbuffer);
 	atomic_notifier_chain_unregister(&panic_notifier_list,
 					 &s->panic_notifier);
 	trusty_call_notifier_unregister(s->trusty_dev, &s->call_notifier);
@@ -306,7 +748,9 @@ static int trusty_log_remove(struct platform_device *pdev)
 }
 
 static const struct of_device_id trusty_test_of_match[] = {
-	{ .compatible = "android,trusty-log-v1", },
+	{
+		.compatible = "android,trusty-log-v1",
+	},
 	{},
 };
 
