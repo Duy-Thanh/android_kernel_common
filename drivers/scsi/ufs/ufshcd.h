@@ -651,6 +651,8 @@ struct ufs_hba_variant_params {
  * @srgn_size: device reported HPB sub-region size
  * @slave_conf_cnt: counter to check all lu finished initialization
  * @hpb_disabled: flag to check if HPB is disabled
+ * @max_hpb_single_cmd: maximum size of single HPB command
+ * @is_legacy: flag to check HPB 1.0
  */
 struct ufshpb_dev_info {
 	int num_lu;
@@ -658,6 +660,8 @@ struct ufshpb_dev_info {
 	int srgn_size;
 	atomic_t slave_conf_cnt;
 	bool hpb_disabled;
+	int max_hpb_single_cmd;
+	bool is_legacy;
 };
 #endif
 
