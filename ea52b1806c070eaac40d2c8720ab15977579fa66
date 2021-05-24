@@ -16,6 +16,24 @@
       "message": "There\u0027s no need for code to be \"sparse clean\" here, does this fix a real bug/issue?\n\n",
       "revId": "ea52b1806c070eaac40d2c8720ab15977579fa66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a000dd9b_63448a04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869056
+      },
+      "writtenOn": "2021-05-24T13:00:09Z",
+      "side": 1,
+      "message": "This is one of a series of commits to fix the issue 185452553(GKI: Enhanced pstore feature)",
+      "parentUuid": "2138ff16_64c3284d",
+      "revId": "ea52b1806c070eaac40d2c8720ab15977579fa66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
