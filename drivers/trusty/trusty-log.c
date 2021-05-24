@@ -16,6 +16,21 @@
 #include "trusty-log.h"
 
 /*
+ * Shared memory allocation must be page-aligned
+ * trusty-log shared memory holds both the ring buffer metadata (struct log_rb)
+ * as well as the ring buffer data which size must be a power-of-two in order
+ * to use the performant wraparound logic with mask(idx) = idx & (sz-1)
+ * (this approach requires sz to be a power-of-two for indices to
+ * correctly wraparound in case of unsigned int overflow)
+ *
+ * This wraparound logic constraint combined with the page-aligned constraint
+ * lead to specifying the shared-memory size as the sum of:
+ * - log buffer size: power of two
+ * - metadata size: sizeof(struct log_rb)
+ * with a page alignment constraint
+ */
+
+/*
  * Rationale for the chosen log buffer size:
  *  - the log buffer shall contain unthrottled trusty crash dump.
  *    Testing identifies that the logbuffer size shall be
@@ -24,7 +39,16 @@
  *    ~100 lines of context prior to the crash.
  *  - conclusion: logbuffer = 2^14 is comfortable, half is minimal.
  */
-#define TRUSTY_LOG_SIZE (PAGE_SIZE * 5)
+
+#define PAGE_ALIGN_ALLOC(s) (DIV_ROUND_UP(s, PAGE_SIZE) * PAGE_SIZE)
+
+#define TRUSTY_LOG_BUFFER_SIZE (1 << 14)
+
+#define TRUSTY_LOG_METADATA_SIZE (sizeof(struct log_rb))
+
+#define TRUSTY_LOG_SHAREDMEM_SIZE                                              \
+	(PAGE_ALIGN_ALLOC(TRUSTY_LOG_BUFFER_SIZE + TRUSTY_LOG_METADATA_SIZE))
+
 #define TRUSTY_LINE_BUFFER_SIZE 256
 
 /*
@@ -187,6 +211,8 @@ static int trusty_log_probe(struct platform_device *pdev)
 	int result;
 	trusty_shared_mem_id_t mem_id;
 
+	compiletime_assert(((TRUSTY_LOG_SHAREDMEM_SIZE % PAGE_SIZE) == 0),
+			   "trusty log sharedmem shall be page aligned");
 	if (!trusty_supports_logging(pdev->dev.parent))
 		return -ENXIO;
 
@@ -201,14 +227,14 @@ static int trusty_log_probe(struct platform_device *pdev)
 	s->trusty_dev = s->dev->parent;
 	s->get = 0;
 	s->log_pages = alloc_pages(GFP_KERNEL | __GFP_ZERO,
-				   get_order(TRUSTY_LOG_SIZE));
+				   get_order(TRUSTY_LOG_SHAREDMEM_SIZE));
 	if (!s->log_pages) {
 		result = -ENOMEM;
 		goto error_alloc_log;
 	}
 	s->log = page_address(s->log_pages);
 
-	sg_init_one(&s->sg, s->log, TRUSTY_LOG_SIZE);
+	sg_init_one(&s->sg, s->log, TRUSTY_LOG_SHAREDMEM_SIZE);
 	result = trusty_share_memory_compat(s->trusty_dev, &mem_id, &s->sg, 1,
 					    PAGE_KERNEL);
 	if (result) {
@@ -220,7 +246,7 @@ static int trusty_log_probe(struct platform_device *pdev)
 	result = trusty_std_call32(s->trusty_dev,
 				   SMC_SC_SHARED_LOG_ADD,
 				   (u32)(mem_id), (u32)(mem_id >> 32),
-				   TRUSTY_LOG_SIZE);
+				   TRUSTY_LOG_SHAREDMEM_SIZE);
 	if (result < 0) {
 		dev_err(s->dev,
 			"trusty std call (SMC_SC_SHARED_LOG_ADD) failed: %d 0x%llx\n",
@@ -264,7 +290,7 @@ error_std_call:
 		 */
 	} else {
 err_share_memory:
-		__free_pages(s->log_pages, get_order(TRUSTY_LOG_SIZE));
+		__free_pages(s->log_pages, get_order(TRUSTY_LOG_SHAREDMEM_SIZE));
 	}
 error_alloc_log:
 	kfree(s);
@@ -298,7 +324,7 @@ static int trusty_log_remove(struct platform_device *pdev)
 		 * It is not safe to free this memory if trusty_revoke_memory
 		 * fails. Leak it in that case.
 		 */
-		__free_pages(s->log_pages, get_order(TRUSTY_LOG_SIZE));
+		__free_pages(s->log_pages, get_order(TRUSTY_LOG_SHAREDMEM_SIZE));
 	}
 	kfree(s);
 
