@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2138ff16_64c3284d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-24T10:00:45Z",
+      "side": 1,
+      "message": "There\u0027s no need for code to be \"sparse clean\" here, does this fix a real bug/issue?\n\n",
+      "revId": "ea52b1806c070eaac40d2c8720ab15977579fa66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
