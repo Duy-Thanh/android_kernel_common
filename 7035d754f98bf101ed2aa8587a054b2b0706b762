@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07d808f3_7f87b1d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2021-05-24T19:20:47Z",
+      "side": 1,
+      "message": "Unnecessary blank line.",
+      "revId": "7035d754f98bf101ed2aa8587a054b2b0706b762",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1db2540e_689f4e88",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2021-05-24T19:20:47Z",
+      "side": 1,
+      "message": "Can you please point to the maintainer\u0027s git repo please? And not linux-next.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 74
+      },
+      "revId": "7035d754f98bf101ed2aa8587a054b2b0706b762",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0edd4f17_0069f5c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2021-05-24T19:20:47Z",
+      "side": 1,
+      "message": "Unnecessary blank line.",
+      "revId": "7035d754f98bf101ed2aa8587a054b2b0706b762",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
