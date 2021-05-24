@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cffc62d7_aabc98b3",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2291,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-05-24T17:41:41Z",
+      "side": 1,
+      "message": "Please implement as a vendor hook since this is not upstream.",
+      "range": {
+        "startLine": 2291,
+        "startChar": 5,
+        "endLine": 2291,
+        "endChar": 54
+      },
+      "revId": "2b4b8c9b9f995644ce3cad038680427fafcaf837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
