@@ -175,6 +175,7 @@ atomic_long_t _totalram_pages __read_mostly;
 EXPORT_SYMBOL(_totalram_pages);
 unsigned long totalreserve_pages __read_mostly;
 unsigned long totalcma_pages __read_mostly;
+EXPORT_SYMBOL_GPL(totalcma_pages);
 
 int percpu_pagelist_fraction;
 gfp_t gfp_allowed_mask __read_mostly = GFP_BOOT_MASK;
@@ -5763,6 +5764,7 @@ void show_free_areas(unsigned int filter, nodemask_t *nodemask)
 
 	show_swap_cache_info();
 }
+EXPORT_SYMBOL_GPL(show_free_areas);
 
 static void zoneref_set_zone(struct zone *zone, struct zoneref *zoneref)
 {
