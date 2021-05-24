@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98fb05e8_9cbb2553",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-05-24T17:21:43Z",
+      "side": 1,
+      "message": "Let\u0027s move this definition into \"if (!oc-\u003echosen) {\" block where it is used and initialize it with \"false\" so that it\u0027s obvious that by default the panic will not be blocked.",
+      "range": {
+        "startLine": 1098,
+        "startChar": 1,
+        "endLine": 1098,
+        "endChar": 9
+      },
+      "revId": "f07f2398adfb6508e4b47f24345f7b315f21bc21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9d44fca_3dfcbce4",
         "filename": "mm/oom_kill.c",
         "patchSetId": 5
