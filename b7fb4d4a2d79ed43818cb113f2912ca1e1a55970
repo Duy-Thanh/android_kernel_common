@@ -141,6 +141,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53190170_ba8106a8",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-24T22:46:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d508b120_3e836491",
+      "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0204691a_920aadb9",
@@ -190,6 +208,24 @@
       "side": 1,
       "message": "What does dev.name contain? It is unique? I if the end result is similar to the existing /dev/trusty-ipc-dev0 (the 0 here does not actually specify a trusty instance as you could have more than one, but the current plan is to have one per trusty instance) device, (e.g. /dev/logbuffer_trusty0 for the global log and later /dev/logbuffer_trusty0_app for app logs) then that would be good. If .name has a random id appended, that would be too confusing.",
       "parentUuid": "450b6aa2_003cc090",
+      "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d3085c4_08a4f722",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-24T22:46:08Z",
+      "side": 1,
+      "message": "I ended up using the trusty platform driver\u0027s name and id, which leads to /dev/logbuffer_trusty0.\nis that ok?",
+      "parentUuid": "c5887e62_c3081f28",
       "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

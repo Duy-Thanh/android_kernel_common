@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edaf8825_a42dd7e3",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-24T22:46:08Z",
+      "side": 1,
+      "message": "can this logbuffer CL depend on the log_at_panic CL?",
+      "revId": "527881803b7a5f9728fe3e41dd187f2adf56b961",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83b13242_08b212c6",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-24T22:46:08Z",
+      "side": 1,
+      "message": "just to double-check: we should not use spin_lock_irqsave here:\nwe don\u0027t want to disable interrupts while the user space pulls the data from the kernel. Do we agree?",
+      "revId": "527881803b7a5f9728fe3e41dd187f2adf56b961",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
