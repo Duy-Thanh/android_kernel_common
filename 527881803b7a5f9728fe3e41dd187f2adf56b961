@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34daf884_51938e3f",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-25T01:05:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "99b8f9c1_59f35b82",
+      "revId": "527881803b7a5f9728fe3e41dd187f2adf56b961",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83b13242_08b212c6",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "You can\u0027t normally mix and match how you access a spinlock. If any context needs to get this lock from interrupt context you should disable interrupts from all codepaths that get the lock, otherwise an interrupt could interrupt you while holding the lock and deadlock as it tries to get the lock.\n\nIf this is a dedicated lock for the seqfile it could be a mutex. Spinlocks disable preemption even if you use the variant that don\u0027t disable interrupts, so you can\u0027t hold them while waiting for anything.\n\nI\u0027m not sure you need a lock here at all though. Trusty may write to the log while you are writing anyway, so the only thing you are protecting with the lock is your read position. You may as well allocate a separate struct for each reader that calls trusty_log_seq_start instead of serializing them with a lock. I would look into what you need to do to support poll before making any locking changes though.",
       "parentUuid": "83b13242_08b212c6",
+      "revId": "527881803b7a5f9728fe3e41dd187f2adf56b961",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7940c019_b6070346",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-25T01:05:05Z",
+      "side": 1,
+      "message": "got it...like the idea of parallelizing for each reader. working on it, but I\u0027ll look into the poll first.",
+      "parentUuid": "7cf5961a_4ecdc30b",
       "revId": "527881803b7a5f9728fe3e41dd187f2adf56b961",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

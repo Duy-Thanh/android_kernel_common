@@ -247,6 +247,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "866a444c_0901ff73",
+        "filename": "drivers/trusty/trusty-log.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-25T01:05:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "45259cc9_771d5e0a",
+      "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6e56962_78d42e34",
@@ -296,6 +314,24 @@
       "side": 1,
       "message": "Not necessarily, but I think you would want a list in that case, not return an opaque pointer that can\u0027t be stored in any of the standard linux data containers. Until you support more than one trusty_logbuffer per trusty_log_state it is probably easier define struct trusty_logbuffer in a place where it can be embedded in trusty_log_state",
       "parentUuid": "d56c3836_732d531d",
+      "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d588179c_5378b84d",
+        "filename": "drivers/trusty/trusty-logbuffer.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-25T01:05:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1f3de7ab_3ddbeba2",
       "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

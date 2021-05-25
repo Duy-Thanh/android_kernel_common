@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19726dcc_ee67a322",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-25T01:05:05Z",
+      "side": 1,
+      "message": "Arve,\ngot it, working on the spin lock and poll.\nThanks!\nArmelle",
+      "revId": "03eaf8eb9f1059e7f2fda14b26ca962bf99a32cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b7e7060_e456828a",
@@ -31,6 +48,24 @@
       "writtenOn": "2021-05-25T00:35:37Z",
       "side": 1,
       "message": "add .poll? see e.g. mm/swapfile.c for an example that supports poll on a seq_file (can be a separate patch though as you would need to also signal it)",
+      "revId": "03eaf8eb9f1059e7f2fda14b26ca962bf99a32cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8ab445c_cb47b479",
+        "filename": "drivers/trusty/trusty-logbuffer.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-25T01:05:05Z",
+      "side": 1,
+      "message": "ack, working on it.",
+      "parentUuid": "6b7e7060_e456828a",
       "revId": "03eaf8eb9f1059e7f2fda14b26ca962bf99a32cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
