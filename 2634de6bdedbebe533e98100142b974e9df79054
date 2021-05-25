@@ -16,6 +16,24 @@
       "message": "This has now landed in Linus\u0027 kernel. Please change this to UPSTREAM (and verify that it exactly matches the upstream version)",
       "revId": "2634de6bdedbebe533e98100142b974e9df79054",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fdbf075_9025fd74",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-25T15:37:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6305c381_bade8334",
+      "revId": "2634de6bdedbebe533e98100142b974e9df79054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
