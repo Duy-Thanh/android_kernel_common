@@ -22,6 +22,30 @@
       },
       "revId": "53b947f1224eb3c33393325b10041a928974ea67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0365af1f_04f31607",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1876972
+      },
+      "writtenOn": "2021-05-25T09:39:02Z",
+      "side": 1,
+      "message": "Dear sir, commit message has updated.",
+      "parentUuid": "3b8b59a0_5345df93",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 9,
+        "endChar": 274
+      },
+      "revId": "53b947f1224eb3c33393325b10041a928974ea67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
