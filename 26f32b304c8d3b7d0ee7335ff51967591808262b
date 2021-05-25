@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6bdb9e2_b6339d06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-25T17:16:11Z",
+      "side": 1,
+      "message": "Since this changes the KMI, it will be queued for the 06/04 KMI update.",
+      "revId": "26f32b304c8d3b7d0ee7335ff51967591808262b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
