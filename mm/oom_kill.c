@@ -53,6 +53,7 @@
 
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/mm.h>
+#include <trace/hooks/dmabuf.h>
 
 int sysctl_panic_on_oom;
 int sysctl_oom_kill_allocating_task;
@@ -509,6 +510,8 @@ static void dump_header(struct oom_control *oc, struct task_struct *p)
 		dump_tasks(oc);
 	if (p)
 		dump_oom_summary(oc, p);
+
+	trace_android_vh_dmabuf_oom_show(NULL);
 }
 
 /*

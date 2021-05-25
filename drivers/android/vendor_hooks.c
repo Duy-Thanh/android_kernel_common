@@ -48,6 +48,7 @@
 #include <trace/hooks/creds.h>
 #include <trace/hooks/module.h>
 #include <trace/hooks/memory.h>
+#include <trace/hooks/dmabuf.h>
 #include <trace/hooks/typec.h>
 #include <trace/hooks/gpiolib.h>
 #include <trace/hooks/signal.h>
@@ -286,6 +287,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_of_i2c_get_board_info);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cgroup_attach);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_dirty_limits);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_check_panic);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dmabuf_oom_show);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_uninterruptible_tasks);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_uninterruptible_tasks_dn);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_reset);
