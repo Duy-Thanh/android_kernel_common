@@ -22,6 +22,30 @@
       },
       "revId": "83aa0320cfa8dfdba4f011f9c4d9040e1cc1f65a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d1583f6_9d42f822",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1323232
+      },
+      "writtenOn": "2021-05-25T02:12:16Z",
+      "side": 1,
+      "message": "Oops, wrong cc. It seems no one is using that. Thanks for the reminder.",
+      "parentUuid": "bd51ecff_8d9bb502",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 79
+      },
+      "revId": "83aa0320cfa8dfdba4f011f9c4d9040e1cc1f65a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
