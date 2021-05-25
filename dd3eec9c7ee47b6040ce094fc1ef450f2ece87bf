@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe770b68_efd4f1d2",
+        "filename": "include/linux/blk_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1879222
+      },
+      "writtenOn": "2021-05-25T13:47:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "711a6f2d_e50c13a3",
+      "range": {
+        "startLine": 253,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 31
+      },
+      "revId": "dd3eec9c7ee47b6040ce094fc1ef450f2ece87bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34082cac_bd49d279",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-05-20T12:57:23Z",
       "side": 1,
       "message": "why not just a single pointer?",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 31
+      },
+      "revId": "dd3eec9c7ee47b6040ce094fc1ef450f2ece87bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3edf20e_5e304293",
+        "filename": "include/linux/blkdev.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1879222
+      },
+      "writtenOn": "2021-05-25T13:47:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34082cac_bd49d279",
       "range": {
         "startLine": 246,
         "startChar": 0,
