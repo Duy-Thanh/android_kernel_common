@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "792f4bfc_656aa83d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-25T08:26:33Z",
+      "side": 1,
+      "message": "Too many hooks all at once.\n\nPlease break this up in to a patch series, one patch per-hook, with good descriptions about why you need them and what they are going to be used for.  Also be aware that there are many in-kernel USB tracehooks already that you can use today, no need to add any new ones, I think you might be duplicating some things here.\n",
+      "revId": "2fb7049951c2f72995746e043a8f8cdc2aa0e155",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
