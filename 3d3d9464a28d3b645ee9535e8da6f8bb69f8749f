@@ -16,6 +16,23 @@
       "message": "This is already in 5.4.9, why do we need it here again?",
       "revId": "3d3d9464a28d3b645ee9535e8da6f8bb69f8749f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a93a0bcf_b4a77757",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-25T15:42:57Z",
+      "side": 1,
+      "message": "This was fixed again \"properly\" with e163fdb3f7f8 (\"pstore/ram: Regularize prz label allocation lifetime\"), which came in in 5.4.12, please do not add this bug back into the tree.",
+      "revId": "3d3d9464a28d3b645ee9535e8da6f8bb69f8749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
