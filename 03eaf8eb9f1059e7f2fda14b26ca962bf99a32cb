@@ -16,6 +16,23 @@
       "message": "Arve,\n\nPlease take a look at the logbuffer changes.\nI added two questions in comments also for your to check/answer.\n\nThanks!\nArmelle",
       "revId": "03eaf8eb9f1059e7f2fda14b26ca962bf99a32cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b7e7060_e456828a",
+        "filename": "drivers/trusty/trusty-logbuffer.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-25T00:35:37Z",
+      "side": 1,
+      "message": "add .poll? see e.g. mm/swapfile.c for an example that supports poll on a seq_file (can be a separate patch though as you would need to also signal it)",
+      "revId": "03eaf8eb9f1059e7f2fda14b26ca962bf99a32cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
