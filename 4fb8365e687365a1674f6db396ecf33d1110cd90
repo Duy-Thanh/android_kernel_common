@@ -85,6 +85,52 @@
       },
       "revId": "4fb8365e687365a1674f6db396ecf33d1110cd90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25262fc0_b24da307",
+        "filename": "include/linux/blk-mq.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-05-25T15:46:38Z",
+      "side": 1,
+      "message": "What will happen if a kernel is booted without \"VIVO\" on the command line and this function is called? Will that result in silent data corruption? Consider adding BUG_ON(!oem_vivo) in this function.",
+      "range": {
+        "startLine": 548,
+        "startChar": 1,
+        "endLine": 548,
+        "endChar": 62
+      },
+      "revId": "4fb8365e687365a1674f6db396ecf33d1110cd90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e44ca00f_beda5468",
+        "filename": "include/linux/blk_types.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-05-25T15:46:38Z",
+      "side": 1,
+      "message": "This patch adds two mechanisms for extending struct bio: front-padding OEM_BIO_DATA bytes and inserting OEM data in the structure itself. I assume that the above change can be left out?",
+      "range": {
+        "startLine": 253,
+        "startChar": 1,
+        "endLine": 253,
+        "endChar": 30
+      },
+      "revId": "4fb8365e687365a1674f6db396ecf33d1110cd90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
