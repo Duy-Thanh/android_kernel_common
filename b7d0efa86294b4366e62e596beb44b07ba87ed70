@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "849995ed_9ab64b39",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-26T12:52:28Z",
+      "side": 1,
+      "message": "this pointer might now be \"stale\", you can not access it anymore 😞",
+      "range": {
+        "startLine": 76,
+        "startChar": 39,
+        "endLine": 76,
+        "endChar": 45
+      },
+      "revId": "b7d0efa86294b4366e62e596beb44b07ba87ed70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
