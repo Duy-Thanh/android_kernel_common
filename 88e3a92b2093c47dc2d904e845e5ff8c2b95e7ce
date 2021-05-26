@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8196c4c_ff533ed2",
+        "filename": "drivers/md/dm-user.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2021-05-26T18:15:29Z",
+      "side": 1,
+      "message": "sector_t is a fixed u64, I don\u0027t think there is need for an explicit cast. What is quite strange though is https://www.kernel.org/doc/Documentation/printk-formats.txt uses sector_t type for explicit cast suggestion. Perhaps this has been refactored?",
+      "range": {
+        "startLine": 223,
+        "startChar": 8,
+        "endLine": 223,
+        "endChar": 28
+      },
+      "revId": "88e3a92b2093c47dc2d904e845e5ff8c2b95e7ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
