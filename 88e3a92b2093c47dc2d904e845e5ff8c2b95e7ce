@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "59bde02f_0ae081f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-26T18:21:00Z",
+      "side": 1,
+      "message": "Please add a \"Fixes:\" tag that cites the patch that introduced the issue.",
+      "revId": "88e3a92b2093c47dc2d904e845e5ff8c2b95e7ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75d7a03a_befacf10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-26T18:21:00Z",
+      "side": 1,
+      "message": "with this patch, how many warnings do you see for an arm64 allmodconfig build?",
+      "revId": "88e3a92b2093c47dc2d904e845e5ff8c2b95e7ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f8196c4c_ff533ed2",
