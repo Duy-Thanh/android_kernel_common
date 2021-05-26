@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cace7e7a_051d62b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-26T02:47:54Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "01ca62de252fda0fe1390d56c4b9e3fbf014059c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b99ccc12_06164d97",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-26T02:47:54Z",
+      "side": 1,
+      "message": "Please add a \"Fixes:\" tag that cites the patch that introduced the issue. See https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md if you need an example.",
+      "revId": "01ca62de252fda0fe1390d56c4b9e3fbf014059c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
