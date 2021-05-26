@@ -91,6 +91,15 @@ DECLARE_HOOK(android_vh_show_stack_hash,
 DECLARE_HOOK(android_vh_save_track_hash,
 	TP_PROTO(unsigned long p),
 	TP_ARGS(p));
+struct dma_heap;
+DECLARE_HOOK(android_vh_dma_heap_buffer_alloc,
+	TP_PROTO(struct dma_heap *heap, size_t len,
+		unsigned int fd_flags, unsigned int heap_flags),
+	TP_ARGS(heap, len, fd_flags, heap_flags));
+struct dma_buf;
+DECLARE_HOOK(android_vh_dma_heap_buffer_free,
+	TP_PROTO(struct dma_buf *dmabuf),
+	TP_ARGS(dmabuf));
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_MM_H */

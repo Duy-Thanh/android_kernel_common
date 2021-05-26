@@ -18,6 +18,7 @@
 #include <linux/syscalls.h>
 #include <linux/dma-heap.h>
 #include <uapi/linux/dma-heap.h>
+#include <trace/hooks/mm.h>
 
 #define DEVNAME "dma_heap"
 
@@ -72,6 +73,7 @@ EXPORT_SYMBOL_GPL(dma_heap_find);
 void dma_heap_buffer_free(struct dma_buf *dmabuf)
 {
 	dma_buf_put(dmabuf);
+	trace_android_vh_dma_heap_buffer_free(dmabuf);
 }
 EXPORT_SYMBOL_GPL(dma_heap_buffer_free);
 
@@ -91,7 +93,7 @@ struct dma_buf *dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
 	len = PAGE_ALIGN(len);
 	if (!len)
 		return ERR_PTR(-EINVAL);
-
+	trace_android_vh_dma_heap_buffer_alloc(heap, len, fd_flags, heap_flags);
 	return heap->ops->allocate(heap, len, fd_flags, heap_flags);
 }
 EXPORT_SYMBOL_GPL(dma_heap_buffer_alloc);
