@@ -30,6 +30,7 @@
 #include <uapi/linux/magic.h>
 
 #include "dma-buf-sysfs-stats.h"
+#include <trace/hooks/mm.h>
 
 struct dma_buf_list {
 	struct list_head head;
@@ -746,7 +747,7 @@ void dma_buf_put(struct dma_buf *dmabuf)
 {
 	if (WARN_ON(!dmabuf || !dmabuf->file))
 		return;
-
+	trace_android_vh_dma_buf_put(dmabuf);
 	fput(dmabuf->file);
 }
 EXPORT_SYMBOL_GPL(dma_buf_put);
