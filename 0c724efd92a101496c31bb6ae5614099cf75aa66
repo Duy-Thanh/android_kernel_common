@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50221a96_25e4664c",
+        "filename": "include/trace/hooks/libsha256.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-05-26T18:25:29Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3f6b50c3_a82c94e7",
+      "revId": "0c724efd92a101496c31bb6ae5614099cf75aa66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "369a2359_ee00e898",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-05-18T23:14:22Z",
       "side": 1,
       "message": "The convention for indicating whether this hook is in-use or not (it must set \u0027len\u0027 to UINT_MAX) differs from that which the AES hooks use (they must set \u0027ret\u0027 to a nonzero value).\n\nIt might be more logical to use the same convention for all the hooks, like having \u0027int *hook_inuse\u0027 and requiring that it be set to 1.",
+      "range": {
+        "startLine": 289,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 9
+      },
+      "revId": "0c724efd92a101496c31bb6ae5614099cf75aa66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc0674fb_0cc72f9f",
+        "filename": "lib/crypto/sha256.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-05-26T18:25:29Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "369a2359_ee00e898",
       "range": {
         "startLine": 289,
         "startChar": 0,
