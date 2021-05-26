@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6acfd37b_309aeb37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-05-26T17:59:00Z",
+      "side": 1,
+      "message": "The addr in this vendor hook is used as a output parameter, but there is no harm in initializing it I guess...",
+      "revId": "30c03ed429b08eefeb06bfc9e2ae51f0e501f988",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
