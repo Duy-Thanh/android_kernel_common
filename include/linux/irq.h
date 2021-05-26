@@ -606,6 +606,8 @@ extern void irq_cpu_online(void);
 extern void irq_cpu_offline(void);
 extern int irq_set_affinity_locked(struct irq_data *data,
 				   const struct cpumask *cpumask, bool force);
+extern int irq_do_set_affinity(struct irq_data *data,
+			       const struct cpumask *dest, bool force);
 extern int irq_set_vcpu_affinity(unsigned int irq, void *vcpu_info);
 
 #if defined(CONFIG_SMP) && defined(CONFIG_GENERIC_IRQ_MIGRATION)

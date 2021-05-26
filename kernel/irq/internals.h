@@ -130,9 +130,6 @@ extern bool irq_can_set_affinity_usr(unsigned int irq);
 
 extern void irq_set_thread_affinity(struct irq_desc *desc);
 
-extern int irq_do_set_affinity(struct irq_data *data,
-			       const struct cpumask *dest, bool force);
-
 #ifdef CONFIG_SMP
 extern int irq_setup_affinity(struct irq_desc *desc);
 #else
