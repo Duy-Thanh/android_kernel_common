@@ -16,6 +16,29 @@
       "message": "Hi Suren and Kalesh,\n\nLooks like I missed to upload this change after we merged the page-pool implementation. Sorry about that, could you please take a look when you get a chance? Thanks again.\n\nRegards,\nHridya",
       "revId": "bb956b363390c34028731be99854861feda196f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3012bb8_017bc6c2",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-05-26T00:21:36Z",
+      "side": 1,
+      "message": "pool \u003d pools;\nfor (i \u003d 0; i \u003c NUM_ORDERS; i++, pool++)\n    num_pages +\u003d (pool-\u003ecount[POOL_LOWPAGE] + pool-\u003ecount[POOL_HIGHPAGE]) \u003c\u003c pool-\u003eorder;\n\nmight be slightly more readable.",
+      "range": {
+        "startLine": 509,
+        "startChar": 0,
+        "endLine": 510,
+        "endChar": 67
+      },
+      "revId": "bb956b363390c34028731be99854861feda196f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
