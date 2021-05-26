@@ -2386,8 +2386,8 @@ int blk_mq_alloc_rqs(struct blk_mq_tag_set *set, struct blk_mq_tags *tags,
 	 * rq_size is the size of the request plus driver payload, rounded
 	 * to the cacheline size
 	 */
-	rq_size = round_up(sizeof(struct request) + set->cmd_size,
-				cache_line_size());
+	rq_size = round_up(sizeof(struct request) + ALIGN(set->cmd_size, 8) +
+				oem_request_data, cache_line_size());
 	left = rq_size * depth;
 
 	for (i = 0; i < depth; ) {
@@ -3926,3 +3926,20 @@ static int __init blk_mq_init(void)
 	return 0;
 }
 subsys_initcall(blk_mq_init);
+
+u8 oem_request_data = 0;
+
+static int __init oem_setup(char *str)
+{
+	u8 tmp;
+
+	if (kstrtou8(str, 0, &tmp))
+		return -EINVAL;
+
+	BUG_ON(tmp > 16);
+
+	oem_request_data = sizeof(u64) * tmp;
+
+	return 1;
+}
+__setup("req_extra=", oem_setup);

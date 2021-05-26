@@ -14,6 +14,8 @@
 /* Max future timer expiry for timeouts */
 #define BLK_MAX_TIMEOUT		(5 * HZ)
 
+extern u8 oem_request_data;
+
 extern struct dentry *blk_debugfs_root;
 
 struct blk_flush_queue {
