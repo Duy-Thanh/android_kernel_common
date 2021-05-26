@@ -56,6 +56,30 @@
       },
       "revId": "88e3a92b2093c47dc2d904e845e5ff8c2b95e7ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ecfd466_f6110b22",
+        "filename": "drivers/md/dm-user.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2021-05-26T19:31:01Z",
+      "side": 1,
+      "message": "Yeah, it seems printk documentation needs an update, sector_t size isn\u0027t CONFIG dependent anymore: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/diff/include/linux/types.h?id\u003d72deb455b5ec",
+      "parentUuid": "f8196c4c_ff533ed2",
+      "range": {
+        "startLine": 223,
+        "startChar": 8,
+        "endLine": 223,
+        "endChar": 28
+      },
+      "revId": "88e3a92b2093c47dc2d904e845e5ff8c2b95e7ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
