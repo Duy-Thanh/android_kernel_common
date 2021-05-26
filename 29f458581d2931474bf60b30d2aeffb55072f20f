@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b638e2ea_902e94c0",
+        "filename": "arch/arm/include/asm/pgtable-2level.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1656502
+      },
+      "writtenOn": "2021-05-26T07:26:03Z",
+      "side": 1,
+      "message": "Hi Will,\n\nI have one more question, if we apply this patch ONLY for armv7, is it a suitable way to make L_PTE_SPECIAL possible? Thank you.",
+      "parentUuid": "cdfd1993_18aa6eed",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 49
+      },
+      "revId": "29f458581d2931474bf60b30d2aeffb55072f20f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c430e99_d46f5b1d",
         "filename": "arch/arm/include/asm/pgtable-2level.h",
         "patchSetId": 3
