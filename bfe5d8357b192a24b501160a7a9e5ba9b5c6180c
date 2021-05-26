@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bb80904_15adf5a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-26T22:27:13Z",
+      "side": 1,
+      "message": "This fix is also needed in:\nandroid-mainline\nandroid12-5.4\nandroid13-5.10\n",
+      "revId": "bfe5d8357b192a24b501160a7a9e5ba9b5c6180c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
