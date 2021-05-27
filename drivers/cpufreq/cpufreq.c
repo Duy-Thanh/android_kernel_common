@@ -543,6 +543,7 @@ EXPORT_SYMBOL_GPL(cpufreq_disable_fast_switch);
 unsigned int cpufreq_driver_resolve_freq(struct cpufreq_policy *policy,
 					 unsigned int target_freq)
 {
+	trace_android_vh_cpufreq_clamp(policy, &target_freq);
 	target_freq = clamp_val(target_freq, policy->min, policy->max);
 	policy->cached_target_freq = target_freq;
 
@@ -2086,6 +2087,7 @@ unsigned int cpufreq_driver_fast_switch(struct cpufreq_policy *policy,
 	unsigned int freq;
 	int cpu;
 
+	trace_android_vh_cpufreq_clamp(policy, &target_freq);
 	target_freq = clamp_val(target_freq, policy->min, policy->max);
 	freq = cpufreq_driver->fast_switch(policy, target_freq);
 
@@ -2201,6 +2203,7 @@ int __cpufreq_driver_target(struct cpufreq_policy *policy,
 		return -ENODEV;
 
 	/* Make sure that target_freq is within supported range */
+	trace_android_vh_cpufreq_clamp(policy, &target_freq);
 	target_freq = clamp_val(target_freq, policy->min, policy->max);
 
 	pr_debug("target for CPU %u: %u kHz, relation %u, requested %u kHz\n",
