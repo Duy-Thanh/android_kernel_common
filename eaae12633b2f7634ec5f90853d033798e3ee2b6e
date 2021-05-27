@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d1ce89c_0d11c52d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-05-27T09:47:19Z",
+      "side": 1,
+      "message": "Is this the correct bug number?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 14
+      },
+      "revId": "eaae12633b2f7634ec5f90853d033798e3ee2b6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be12466e_6ee8d49a",
+        "filename": "drivers/cpufreq/cpufreq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-05-27T09:47:19Z",
+      "side": 1,
+      "message": "Couldn\u0027t you achieve the same feature by using this existing policy notifier instead?",
+      "range": {
+        "startLine": 1437,
+        "startChar": 2,
+        "endLine": 1438,
+        "endChar": 35
+      },
+      "revId": "eaae12633b2f7634ec5f90853d033798e3ee2b6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
