@@ -34,6 +34,24 @@
       "parentUuid": "a5385315_cee1c4b8",
       "revId": "caa9458aa666c1aab05f2ecc149ebe9c502a4a42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a65d19f0_5c9436f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879222
+      },
+      "writtenOn": "2021-05-27T11:22:53Z",
+      "side": 1,
+      "message": "Sorry, maybe I don\u0027t get it right, do you mean to change from ANDROID_OEM_DATA_ARRAY(1, 2) to ANDROID_OEM_DATA(1)?",
+      "parentUuid": "406ff2c4_613d73ea",
+      "revId": "caa9458aa666c1aab05f2ecc149ebe9c502a4a42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
