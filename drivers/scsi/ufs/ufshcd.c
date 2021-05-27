@@ -6733,6 +6733,9 @@ static int ufshcd_eh_device_reset_handler(struct scsi_cmnd *cmd)
 	host = cmd->device->host;
 	hba = shost_priv(host);
 
+	if (hba->quirks & UFSHCD_QUIRK_BROKEN_RESET_HANDLER)
+		return ufshcd_eh_host_reset_handler(cmd);
+
 	lun = ufshcd_scsi_to_upiu_lun(cmd->device->lun);
 	err = ufshcd_issue_tm_cmd(hba, lun, 0, UFS_LOGICAL_RESET, &resp);
 	if (err || resp != UPIU_TASK_MANAGEMENT_FUNC_COMPL) {
@@ -6875,6 +6878,10 @@ static int ufshcd_abort(struct scsi_cmnd *cmd)
 	host = cmd->device->host;
 	hba = shost_priv(host);
 	tag = cmd->request->tag;
+
+	if (hba->quirks & UFSHCD_QUIRK_BROKEN_RESET_HANDLER)
+		return ufshcd_eh_host_reset_handler(cmd);
+
 	lrbp = &hba->lrb[tag];
 	if (!ufshcd_valid_tag(hba, tag)) {
 		dev_err(hba->dev,
