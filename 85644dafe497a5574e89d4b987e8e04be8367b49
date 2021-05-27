@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "18f158ae_342b623a",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1878921
+      },
+      "writtenOn": "2021-05-27T08:15:18Z",
+      "side": 1,
+      "message": "If you want to use this to catch all dmabuf real(not just put reference) free flow, I think this is not a best entry.\ntrace_android_vh_dma_heap_buffer_alloc can catch alloc from both kernel \u0026 userspace, and this can\u0027t catch for \"close(buffer_fd)\" from userspace, and also can\u0027t catch \"dma_buf_put(dmabuf)\" from kernel space.",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 38
+      },
+      "revId": "85644dafe497a5574e89d4b987e8e04be8367b49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60b035ee_f8e99039",
         "filename": "drivers/dma-buf/dma-heap.c",
         "patchSetId": 7
