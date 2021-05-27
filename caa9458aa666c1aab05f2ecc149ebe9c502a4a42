@@ -16,6 +16,24 @@
       "message": "Should not be needed, just use the vendor data pointer, right?",
       "revId": "caa9458aa666c1aab05f2ecc149ebe9c502a4a42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "406ff2c4_613d73ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879222
+      },
+      "writtenOn": "2021-05-27T07:23:22Z",
+      "side": 1,
+      "message": "OK, got it. thanks",
+      "parentUuid": "a5385315_cee1c4b8",
+      "revId": "caa9458aa666c1aab05f2ecc149ebe9c502a4a42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
