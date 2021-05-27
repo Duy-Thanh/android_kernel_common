@@ -34,6 +34,24 @@
       "parentUuid": "bce3edc5_6aee1089",
       "revId": "0baee745c0a9e7c4ddde0060d1aa1afbaff566f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e00bab89_14f97a16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2021-05-27T09:52:53Z",
+      "side": 1,
+      "message": "My understanding is that they\u0027re always required.\n\nI guess that is also why Lint is complaining.\n\nExecute this on `aosp/android-mainline` and see for yourself:\n\n`git log --oneline $(git merge-base HEAD mainline/master).. --no-merges`",
+      "parentUuid": "7e68d95f_f352f44c",
+      "revId": "0baee745c0a9e7c4ddde0060d1aa1afbaff566f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
