@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c100e45b_69c211e6",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1878921
+      },
+      "writtenOn": "2021-05-28T11:35:55Z",
+      "side": 1,
+      "message": "Yes, you can achieve it by your method.\nBut I mean, dma_heap_buffer_free(dmabuf) will not always falls into free dmabuf memory, for many conditions, it will just put reference of dmabuf, and dmabuf can have a reference count bigger than 1.\nIf you want to monitor memory free for dmabuf, this is not the best entry.",
+      "parentUuid": "8a436c03_dab9bb79",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 38
+      },
+      "revId": "85644dafe497a5574e89d4b987e8e04be8367b49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60b035ee_f8e99039",
         "filename": "drivers/dma-buf/dma-heap.c",
         "patchSetId": 7
