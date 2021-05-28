@@ -105,6 +105,24 @@
       "parentUuid": "7cf5961a_4ecdc30b",
       "revId": "527881803b7a5f9728fe3e41dd187f2adf56b961",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31744c56_a4f875a2",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-28T00:37:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7940c019_b6070346",
+      "revId": "527881803b7a5f9728fe3e41dd187f2adf56b961",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
