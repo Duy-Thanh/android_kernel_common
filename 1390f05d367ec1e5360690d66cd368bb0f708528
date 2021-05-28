@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a2cb469_89978f60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-28T00:37:02Z",
+      "side": 1,
+      "message": "Hey Arve,\n\nuploaded version that support concurrent reads on the secondary logbuffer.\ncheckpatch also passing.\n\n-Armelle",
+      "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
