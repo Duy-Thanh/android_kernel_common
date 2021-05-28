@@ -245,6 +245,8 @@ static __poll_t timerfd_poll(struct file *file, poll_table *wait)
 		events |= EPOLLIN;
 	spin_unlock_irqrestore(&ctx->wqh.lock, flags);
 
+       trace_android_vh_timerfd_poll(ctx);
+
 	return events;
 }
 
