@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "317071cc_4fa9ba7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-05-28T08:47:51Z",
+      "side": 1,
+      "message": "Needs to wait for the next ABI break, and should also be added to the android13-5.10 branch",
+      "revId": "9c6d0ac94f168b7fabaa8c15197763e8df5ee845",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
