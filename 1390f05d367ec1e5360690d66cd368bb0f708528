@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37a51e30_dac0bc84",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-28T02:11:36Z",
+      "side": 1,
+      "message": "I see that you started at last_successful_next when linux panics, but if trusty panics first, you would overwrite that before we got to that call. You have narrowed the problem in PS18, but there is still a race where trusty could panic after you set the start position but before call trusty_get_panic_status here.",
+      "parentUuid": "c7460888_6bc1709d",
+      "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "766b8e96_4dae3d9c",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 17
@@ -154,6 +172,24 @@
       "side": 1,
       "message": "updating start here (in the start callback) is necessary to dump at least one full log buffer to the virtual file. \nnow in the show function: what do you mean \"when skipping line\" ? is it when trusty side over-runs the get pointer?",
       "parentUuid": "766b8e96_4dae3d9c",
+      "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ef037b5_57158aea",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-28T02:11:36Z",
+      "side": 1,
+      "message": "yes when trusty overruns the get pointer we have to skip lines. This is the same condition you handle here, except this one only handles lines that were overwritten before this start function was called.",
+      "parentUuid": "3710fb02_750cc8dd",
       "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
