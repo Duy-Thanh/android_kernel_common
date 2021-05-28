@@ -6,6 +6,9 @@
 #include <linux/nls.h>
 #include <linux/usb/composite.h>
 #include <linux/usb/gadget_configfs.h>
+
+#include <trace/hooks/usb.h>
+
 #include "configfs.h"
 #include "u_f.h"
 #include "u_os_desc.h"
@@ -487,6 +490,7 @@ static int config_usb_cfg_link(
 	list_add_tail(&f->list, &cfg->func_list);
 	ret = 0;
 out:
+	trace_android_vh_config_usb_cfg_link(fi, ret);
 	mutex_unlock(&gi->lock);
 	return ret;
 }
