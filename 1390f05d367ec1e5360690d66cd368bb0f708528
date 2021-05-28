@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca71b6d3_a0b2ef56",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-28T02:00:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "aaeb82ff_a24d819c",
+      "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e0d0677_12784344",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-05-28T01:08:03Z",
       "side": 1,
       "message": "I\u0027m not sure I understand this description.",
+      "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ea89b0f_ac4bc510",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-28T02:00:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0e0d0677_12784344",
       "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7460888_6bc1709d",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-28T02:00:18Z",
+      "side": 1,
+      "message": "what may be confusing is that the log_show function matches the iteration pattern. It does not hold an inner loop but is called after each next.\nthe next and start functions are the one checking the end conditions.\nso we cannot force change the initial get pointer in the show functions.\nsee trusty_dump_logs on line 406.\nthe start function is given the initial offset which is set to last_successful_next in case of a panic.\nThis being said the way I did it in the trusty_dump_logs with the retry argument is not on-par with what we had because the retry will happen only once the linux kernel panics. I just fixed.\nDoes that make sense?",
+      "parentUuid": "912e1851_565360ab",
+      "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "766b8e96_4dae3d9c",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 17
@@ -82,6 +136,24 @@
       "writtenOn": "2021-05-28T01:08:03Z",
       "side": 1,
       "message": "I\u0027m not sure this is useful. I think you need to update start whenever trusty_log_show skips outputting a line so any update there would be redundant. If you don\u0027t update start when skipping lines, then you might output the same line twice as far as I can tell.",
+      "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3710fb02_750cc8dd",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-28T02:00:18Z",
+      "side": 1,
+      "message": "updating start here (in the start callback) is necessary to dump at least one full log buffer to the virtual file. \nnow in the show function: what do you mean \"when skipping line\" ? is it when trusty side over-runs the get pointer?",
+      "parentUuid": "766b8e96_4dae3d9c",
       "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
