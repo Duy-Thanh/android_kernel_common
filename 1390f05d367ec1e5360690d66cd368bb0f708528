@@ -16,6 +16,74 @@
       "message": "Hey Arve,\n\nuploaded version that support concurrent reads on the secondary logbuffer.\ncheckpatch also passing.\n\n-Armelle",
       "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaeb82ff_a24d819c",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-28T01:08:03Z",
+      "side": 1,
+      "message": "usually these ops are defined right after the functions listed",
+      "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e0d0677_12784344",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-28T01:08:03Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand this description.",
+      "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "912e1851_565360ab",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-28T01:08:03Z",
+      "side": 1,
+      "message": "this seems to be broken now (at least compared to the old behavior). You update last_successful_next if this is true, but you don\u0027t read it, so any log lines already skipped are lost.",
+      "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "766b8e96_4dae3d9c",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-05-28T01:08:03Z",
+      "side": 1,
+      "message": "I\u0027m not sure this is useful. I think you need to update start whenever trusty_log_show skips outputting a line so any update there would be redundant. If you don\u0027t update start when skipping lines, then you might output the same line twice as far as I can tell.",
+      "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
