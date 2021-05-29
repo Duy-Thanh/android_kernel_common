@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f625709_d5f2cd3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-05-29T16:08:54Z",
+      "side": 1,
+      "message": "Hi Arve,\n\nYou may take a look at PS19 and my answer.\nBut I identified a bug (see comment #256) that I am fixing and will upload PS20.\n\n-Armelle",
+      "revId": "0d936b321f833b5c441e2fc0c149efed929027a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
