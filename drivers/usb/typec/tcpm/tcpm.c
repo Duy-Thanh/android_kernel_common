@@ -479,6 +479,8 @@ struct tcpm_port {
 	int logbuffer_tail;
 	u8 *logbuffer[LOG_BUFFER_ENTRIES];
 #endif
+
+	ANDROID_VENDOR_DATA(1);
 };
 
 struct pd_rx_event {
@@ -598,6 +600,7 @@ static void _tcpm_log(struct tcpm_port *port, const char *fmt, va_list args)
 	}
 
 	vsnprintf(tmpbuffer, sizeof(tmpbuffer), fmt, args);
+	trace_android_vh_typec_tcpm_log(tmpbuffer);
 
 	if (tcpm_log_full(port)) {
 		port->logbuffer_head = max(port->logbuffer_head - 1, 0);
@@ -738,6 +741,7 @@ static void tcpm_debugfs_init(struct tcpm_port *port)
 {
 	char name[NAME_MAX];
 
+	trace_android_vh_typec_tcpm_enable_log(&port->android_vendor_data1);
 	mutex_init(&port->logbuffer_lock);
 	snprintf(name, NAME_MAX, "tcpm-%s", dev_name(port->dev));
 	port->dentry = debugfs_create_file(name, S_IFREG | 0444, usb_debug_root,
@@ -761,11 +765,36 @@ static void tcpm_debugfs_exit(struct tcpm_port *port)
 #else
 
 __printf(2, 3)
-static void tcpm_log(const struct tcpm_port *port, const char *fmt, ...) { }
+static void tcpm_log(const struct tcpm_port *port, const char *fmt, ...)
+{
+	if (port->android_vendor_data1) {
+		char tmpbuffer[LOG_BUFFER_ENTRY_SIZE];
+		va_list args;
+
+		va_start(args, fmt);
+		vsnprintf(tmpbuffer, sizeof(tmpbuffer), fmt, args);
+		trace_android_vh_typec_tcpm_log(tmpbuffer);
+		va_end(args);
+	}
+}
 __printf(2, 3)
-static void tcpm_log_force(struct tcpm_port *port, const char *fmt, ...) { }
+static void tcpm_log_force(struct tcpm_port *port, const char *fmt, ...)
+{
+	if (port->android_vendor_data1) {
+		char tmpbuffer[LOG_BUFFER_ENTRY_SIZE];
+		va_list args;
+
+		va_start(args, fmt);
+		vsnprintf(tmpbuffer, sizeof(tmpbuffer), fmt, args);
+		trace_android_vh_typec_tcpm_log(tmpbuffer);
+		va_end(args);
+	}
+}
 static void tcpm_log_source_caps(struct tcpm_port *port) { }
-static void tcpm_debugfs_init(const struct tcpm_port *port) { }
+static void tcpm_debugfs_init(const struct tcpm_port *port)
+{
+	trace_android_vh_typec_tcpm_enable_log(&port->android_vendor_data1);
+}
 static void tcpm_debugfs_exit(const struct tcpm_port *port) { }
 
 #endif
