@@ -22,6 +22,7 @@
 #include <linux/module.h>
 #include <linux/gfp.h>
 #include <net/tcp.h>
+#include <trace/hooks/tcp_timeout.h>
 
 static u32 tcp_clamp_rto_to_user_timeout(const struct sock *sk)
 {
@@ -273,6 +274,7 @@ static int tcp_write_timeout(struct sock *sk)
 
 	if (expired) {
 		/* Has it gone just too far? */
+		trace_android_vh_tcp_timeout(sk);
 		tcp_write_err(sk);
 		return 1;
 	}
