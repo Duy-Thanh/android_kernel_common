@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf1b4149_7f861de8",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-06-01T17:53:15Z",
+      "side": 1,
+      "message": "This %s doesn\u0027t have a corresponding argument.",
+      "range": {
+        "startLine": 344,
+        "startChar": 12,
+        "endLine": 344,
+        "endChar": 14
+      },
+      "revId": "5278d34b9ccae339f02817f508b0c5f41d991c1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "108c3052_b7647e8d",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-06-01T17:53:15Z",
+      "side": 1,
+      "message": "This %s doesn\u0027t have a corresponding argument.",
+      "range": {
+        "startLine": 362,
+        "startChar": 12,
+        "endLine": 362,
+        "endChar": 14
+      },
+      "revId": "5278d34b9ccae339f02817f508b0c5f41d991c1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
