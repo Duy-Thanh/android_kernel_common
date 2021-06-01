@@ -345,9 +345,13 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_log);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sound_usb_support_cpu_suspend);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_usb_dev_suspend);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_dev_resume);
+<<<<<<< PATCH SET (074217 ANDROID: vendor_hooks: Add hooks for cpufreq_acct_update_pow)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpufreq_acct_update_power);
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_alloc_new_buf_locked);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_reply);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_trans);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpuset_fork);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_uid);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_user);
+>>>>>>> BASE      (d3197e UPSTREAM: regmap: Don't warn about cache only mode for devic)
