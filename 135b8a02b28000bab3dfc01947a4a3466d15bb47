@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dea39cfc_40e7dbbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-01T01:02:57Z",
+      "side": 1,
+      "message": "Arve,\n\nPlease review PS25 (checkpatch-ed).\nThis patch is tested along 1723030 to verify correct behavior when reaching the ring buffer indices reach the u32 limit.\n\n-Armelle",
+      "revId": "135b8a02b28000bab3dfc01947a4a3466d15bb47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
