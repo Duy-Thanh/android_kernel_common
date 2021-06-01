@@ -402,6 +402,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sd_update_bus_speed_mode);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_attach_sd);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sdhci_get_cd);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_gpio_cd_irqt);
+<<<<<<< HEAD   (eb6c8e BACKPORT: fuse: send security context of inode on file)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_update_partition_status);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_sd_update_cmdline_timing);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_sd_update_dataline_timing);
@@ -453,3 +454,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_thermal_cpu_get_power);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_cache_forced_ra);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_reclaim_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_failure_bypass);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_vmalloc_stack);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_stack_hash);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_track_hash);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_task_comm);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpufreq_acct_update_power);
+>>>>>>> CHANGE (398375 ANDROID: vendor_hooks: Add hooks for cpufreq_acct_update_pow)
