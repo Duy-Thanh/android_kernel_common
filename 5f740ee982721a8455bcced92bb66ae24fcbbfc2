@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e8b936f_1f3dedf4",
+        "filename": "include/trace/hooks/libsha256.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-06-01T17:55:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3a5b0748_12e4834e",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 36
+      },
+      "revId": "5f740ee982721a8455bcced92bb66ae24fcbbfc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48b8f381_f2be2ad7",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-06-01T17:34:02Z",
       "side": 1,
       "message": "len should be passed by value.",
+      "range": {
+        "startLine": 291,
+        "startChar": 31,
+        "endLine": 291,
+        "endChar": 35
+      },
+      "revId": "5f740ee982721a8455bcced92bb66ae24fcbbfc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6be1dac1_0d3e82b6",
+        "filename": "lib/crypto/sha256.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-06-01T17:55:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "48b8f381_f2be2ad7",
       "range": {
         "startLine": 291,
         "startChar": 31,
