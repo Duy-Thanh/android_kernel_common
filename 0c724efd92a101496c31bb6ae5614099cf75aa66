@@ -81,6 +81,30 @@
       },
       "revId": "0c724efd92a101496c31bb6ae5614099cf75aa66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f96c4758_527238a3",
+        "filename": "lib/crypto/sha256.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-06-01T17:34:02Z",
+      "side": 1,
+      "message": "Any reason for using the name \u0027ret\u0027 over something like \u0027hook_inuse\u0027?  \u0027ret\u0027 sounds like an error code, which is confusing.",
+      "parentUuid": "cc0674fb_0cc72f9f",
+      "range": {
+        "startLine": 289,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 9
+      },
+      "revId": "0c724efd92a101496c31bb6ae5614099cf75aa66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
