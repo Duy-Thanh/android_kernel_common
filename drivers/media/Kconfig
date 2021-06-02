@@ -119,7 +119,7 @@ source "drivers/media/v4l2-core/Kconfig"
 #
 
 config DVB_CORE
-	tristate
+	tristate "Support DVB core"
 	depends on MEDIA_SUPPORT
 	depends on MEDIA_DIGITAL_TV_SUPPORT
 	depends on (I2C || I2C=n)
