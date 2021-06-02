@@ -69,6 +69,24 @@
       "parentUuid": "d06b0073_f26e6059",
       "revId": "8cf53000dc44fcb19e257c6fbba1e3f4f445bd10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ff1d107_178c6257",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-06-02T00:32:48Z",
+      "side": 1,
+      "message": "oh, it seems that `strip` might not remove .eh_frame...hmm...",
+      "parentUuid": "66798fe7_d981f518",
+      "revId": "8cf53000dc44fcb19e257c6fbba1e3f4f445bd10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
