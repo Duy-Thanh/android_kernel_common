@@ -60,17 +60,46 @@ struct trusty_log_state {
 	char line_buffer[TRUSTY_LINE_BUFFER_SIZE];
 };
 
-static int log_read_line(struct trusty_log_state *s, int put, int get)
+static inline void add_overflow(u32 a, u32 b, u32 *d)
+{
+	if (check_add_overflow(a, b, d)) {
+		/*
+		 * silence the overflow,
+		 * what matters in the log buffer context
+		 * is the casted addition
+		 */
+	}
+}
+
+static inline void sub_overflow(u32 a, u32 b, u32 *d)
+{
+	if (check_sub_overflow(a, b, d)) {
+		/*
+		 * silence the overflow,
+		 * what matters in the log buffer context
+		 * is the casted substraction
+		 */
+	}
+}
+
+static int log_read_line(struct trusty_log_state *s, u32 put, u32 get)
 {
 	struct log_rb *log = s->log;
 	int i;
 	char c = '\0';
-	size_t max_to_read =
-		min_t(size_t, put - get, sizeof(s->line_buffer) - 1);
+	u32 dist;
+	size_t max_to_read;
 	size_t mask = log->sz - 1;
 
-	for (i = 0; i < max_to_read && c != '\n';)
-		s->line_buffer[i++] = c = log->data[get++ & mask];
+	sub_overflow(put, get, &dist);
+	max_to_read =
+		min_t(size_t, dist, sizeof(s->line_buffer) - 1);
+
+	for (i = 0; i < max_to_read && c != '\n';) {
+		c = log->data[get & mask];
+		s->line_buffer[i++] = c;
+		add_overflow(get, 1, &get);
+	}
 	s->line_buffer[i] = '\0';
 
 	return i;
@@ -81,6 +110,7 @@ static void trusty_dump_logs(struct trusty_log_state *s)
 	struct log_rb *log = s->log;
 	u32 get, put, alloc;
 	int read_chars;
+	u32 dist;
 	bool trusty_panicked = trusty_get_panic_status(s->trusty_dev);
 
 	if (WARN_ON(!is_power_of_2(log->sz)))
@@ -109,13 +139,15 @@ static void trusty_dump_logs(struct trusty_log_state *s)
 		 * Discard the line that was just read if the data could
 		 * have been corrupted by the producer.
 		 */
-		if (alloc - get > log->sz) {
+		sub_overflow(alloc, get, &dist);
+		if (dist > log->sz) {
+			/* skipping lines in case of overrun */
 			dev_err(s->dev, "log overflow.");
-			get = alloc - log->sz;
+			sub_overflow(alloc, log->sz, &get);
 			continue;
 		}
 		/* compute next line index */
-		get += read_chars;
+		add_overflow(get, read_chars, &get);
 		if (trusty_panicked || __ratelimit(&trusty_log_rate_limit)) {
 			dev_info(s->dev, "%s", s->line_buffer);
 			/* next line after last successful get */
