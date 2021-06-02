@@ -48,8 +48,15 @@ struct trusty_log_state {
 	spinlock_t lock;
 	struct log_rb *log;
 	u32 get;
+
 	/* index for the next line after the last successful get */
 	u32 last_successful_next;
+
+	/* distance of get from alloc - allows to handle u32 overflow case */
+	s32 dist_alloc;
+
+	/* distance of get from put - allows to handle u32 overflow case */
+	s32 dist_put;
 
 	struct page *log_pages;
 	struct scatterlist sg;
@@ -65,21 +72,81 @@ static int log_read_line(struct trusty_log_state *s, int put, int get)
 	struct log_rb *log = s->log;
 	int i;
 	char c = '\0';
-	size_t max_to_read =
-		min_t(size_t, put - get, sizeof(s->line_buffer) - 1);
+	size_t max_to_read;
 	size_t mask = log->sz - 1;
+	u32 dist;
 
-	for (i = 0; i < max_to_read && c != '\n';)
-		s->line_buffer[i++] = c = log->data[get++ & mask];
+	__builtin_usub_overflow(put, get, &dist);
+	max_to_read =
+		min_t(size_t, dist, sizeof(s->line_buffer) - 1);
+
+	for (i = 0; i < max_to_read && c != '\n';) {
+		c = log->data[get & mask];
+		s->line_buffer[i++] = c;
+		__builtin_uadd_overflow(get, 1, &get);
+	}
 	s->line_buffer[i] = '\0';
 
 	return i;
 }
 
+/**
+ * trusty_log_distance() - return the read index (get) distance
+ * from the write indices (alloc and put), taking into account possible u32
+ * overflow
+ * @s:         Current log state.
+ * @sink:      trusty_log_sink_state holding the get index on a given sink
+ *
+ */
+static inline int trusty_log_distance(struct trusty_log_state *s)
+{
+	struct log_rb *log;
+	u32 size, get, put, alloc;
+	int cnt = 2;
+
+	log = s->log;
+	size = log->sz;
+	get = s->get;
+	put = log->put;
+	alloc = log->alloc;
+	if (alloc < get || put < get) {
+		/* u32 overflow case */
+		dev_dbg(s->dev,
+			"u32 overflow alloc=%u put=%u get=%u\n", alloc, put, get);
+		while ((alloc < get || put < get) && cnt--) {
+			__builtin_uadd_overflow(alloc, size, &alloc);
+			__builtin_uadd_overflow(get, size, &get);
+			__builtin_uadd_overflow(put, size, &put);
+		}
+		if (alloc < get || put < get) {
+			/*
+			 * get index at least twice as far as the log size
+			 * from the write indices.
+			 * cap the distance to this minimum value as
+			 * this will anyway trigger a 'get' index reset
+			 */
+			dev_dbg(s->dev, "get too far from alloc\n");
+			s->dist_alloc = 2 * size;
+			s->dist_put = 2 * size;
+			return 0;
+		}
+		dev_dbg(s->dev,
+			"u32 overflow dist_alloc=%d dist_put=%d\n",
+			alloc - get, put - get);
+	}
+	s->dist_alloc = alloc - get;
+	s->dist_put = put - get;
+	if (s->dist_put < 0) {
+		dev_err(s->dev, "get greater than put get=%u put=%u dist_put=%d\n",
+			s->get, put, s->dist_put);
+		return -EINVAL;
+	}
+	return 0;
+}
+
 static void trusty_dump_logs(struct trusty_log_state *s)
 {
 	struct log_rb *log = s->log;
-	u32 get, put, alloc;
 	int read_chars;
 	bool trusty_panicked = trusty_get_panic_status(s->trusty_dev);
 
@@ -93,36 +160,43 @@ static void trusty_dump_logs(struct trusty_log_state *s)
 	 * that the above condition is maintained. A read barrier is needed
 	 * to make sure the hardware and compiler keep the reads ordered.
 	 */
-	get = trusty_panicked ? s->last_successful_next : s->get;
-	while ((put = log->put) != get) {
+	if (trusty_panicked)
+		s->get = s->last_successful_next;
+	trusty_log_distance(s);
+	if (log->sz < s->dist_alloc) {
+		/* skipping lines in case of overrun */
+		dev_err(s->dev, "log overflow.");
+		__builtin_usub_overflow(log->alloc, log->sz, &s->get);
+	}
+	while (s->dist_put != 0) {
 		/* Make sure that the read of put occurs before the read of log data */
 		rmb();
 
 		/* Read a line from the log */
-		read_chars = log_read_line(s, put, get);
+		read_chars = log_read_line(s, log->put, s->get);
+		s->get += read_chars;
 
 		/* Force the loads from log_read_line to complete. */
 		rmb();
-		alloc = log->alloc;
 
+		trusty_log_distance(s);
 		/*
 		 * Discard the line that was just read if the data could
 		 * have been corrupted by the producer.
 		 */
-		if (alloc - get > log->sz) {
+		if (log->sz < s->dist_alloc) {
+			/* skipping lines in case of overrun */
 			dev_err(s->dev, "log overflow.");
-			get = alloc - log->sz;
+			__builtin_usub_overflow(log->alloc, log->sz, &s->get);
 			continue;
 		}
 		/* compute next line index */
-		get += read_chars;
 		if (trusty_panicked || __ratelimit(&trusty_log_rate_limit)) {
 			dev_info(s->dev, "%s", s->line_buffer);
 			/* next line after last successful get */
-			s->last_successful_next = get;
+			s->last_successful_next = s->get;
 		}
 	}
-	s->get = get;
 }
 
 static int trusty_log_call_notify(struct notifier_block *nb,
