@@ -268,6 +268,10 @@ DECLARE_HOOK(android_vh_set_wake_flags,
 	TP_PROTO(int *wake_flags, unsigned int *mode),
 	TP_ARGS(wake_flags, mode));
 
+DECLARE_HOOK(android_vh_check_custom_flags,
+	TP_PROTO(int *wake_flags, bool *is_custom_flag),
+	TP_ARGS(wake_flags, is_custom_flag));
+
 enum uclamp_id;
 struct uclamp_se;
 DECLARE_RESTRICTED_HOOK(android_rvh_uclamp_eff_get,
