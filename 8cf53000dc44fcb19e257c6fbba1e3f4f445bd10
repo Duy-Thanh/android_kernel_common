@@ -16,6 +16,24 @@
       "message": "Does this need to be reconciled with SANITIZER_DISCARDS, which discards .eh_frame when CONFIG_CFI_CLANG is defined?",
       "revId": "8cf53000dc44fcb19e257c6fbba1e3f4f445bd10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "324abab2_04557102",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-06-02T00:24:15Z",
+      "side": 1,
+      "message": "sorry, I missed the revert parent.",
+      "parentUuid": "ababa48a_f85a863f",
+      "revId": "8cf53000dc44fcb19e257c6fbba1e3f4f445bd10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
