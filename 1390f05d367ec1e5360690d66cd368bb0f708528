@@ -161,6 +161,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d0f80f9_4423e079",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-02T01:35:22Z",
+      "side": 1,
+      "message": "Yes, the flag that trusty_get_panic_status returns can change while dumping the logs as it is not protected by the log lock.",
+      "parentUuid": "a5fe30c9_75119893",
+      "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "766b8e96_4dae3d9c",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 17

@@ -16,6 +16,154 @@
       "message": "Arve,\n\nPlease review PS25 (checkpatch-ed).\nThis patch is tested along 1723030 to verify correct behavior when reaching the ring buffer indices reach the u32 limit.\n\n-Armelle",
       "revId": "135b8a02b28000bab3dfc01947a4a3466d15bb47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c52b3623_70222f3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-02T01:35:22Z",
+      "side": 1,
+      "message": "I don\u0027t think this version is correct when trusty is writing to the log buffer at the same time that we read. It is hard to follow though as reads that the barriers protect, are now far removed for the barriers. I have not looked at all the changes here yet but I\u0027m posting what I have so far.",
+      "revId": "135b8a02b28000bab3dfc01947a4a3466d15bb47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6080757_2ce963e3",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-02T01:35:22Z",
+      "side": 1,
+      "message": "Why is this needed? Once the 4k buffer is full does it should stop calling trusty_log_seq_next.",
+      "revId": "135b8a02b28000bab3dfc01947a4a3466d15bb47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82f7d867_89232e3a",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-02T01:35:22Z",
+      "side": 1,
+      "message": "Does this work? If the buffer has already wrapped and trusty is writing to the log this loop can terminate early. The next loop may then fill the line_buffer. You then update the sink get and read_size state even though the line will be discarded.",
+      "revId": "135b8a02b28000bab3dfc01947a4a3466d15bb47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e54f428_2ffc96c3",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-02T01:35:22Z",
+      "side": 1,
+      "message": "this seems more complicated than it needs to be. The put and alloc are always newer than get. The old code should have produced the correct result in with ubsan disabled as put - get is the same as 0x100000000 + put - get for a uint32_t value.\n\nIf the log buffer size is not a power of two, wrapping when a uint32 wraps will loose information anyway.\n\nWe can fix the overflow cases by using ubsan safe functions like check_add_overflow for the current power-of-2 only buffer sizes",
+      "revId": "135b8a02b28000bab3dfc01947a4a3466d15bb47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e65c823_4b9a3ba5",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-02T01:35:22Z",
+      "side": 1,
+      "message": "Is this an allowed kerneldoc comment?",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 4
+      },
+      "revId": "135b8a02b28000bab3dfc01947a4a3466d15bb47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4391b4cd_d0d5f5ee",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-02T01:35:22Z",
+      "side": 1,
+      "message": "read_chars is not accurate in the case where trusty is writing to the buffer while you read from it. Also, the check to make sure the data was not corrupted while we read from the buffer needs the index we started reading from, not the index we stopped at.",
+      "revId": "135b8a02b28000bab3dfc01947a4a3466d15bb47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "609670ad_2c95b100",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-02T01:35:22Z",
+      "side": 1,
+      "message": "ok, but if ... else if might be simpler.",
+      "range": {
+        "startLine": 323,
+        "startChar": 0,
+        "endLine": 327,
+        "endChar": 0
+      },
+      "revId": "135b8a02b28000bab3dfc01947a4a3466d15bb47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc57c82c_b8ddb030",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-02T01:35:22Z",
+      "side": 1,
+      "message": "what happened to the code that computed the new start offset",
+      "revId": "135b8a02b28000bab3dfc01947a4a3466d15bb47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
