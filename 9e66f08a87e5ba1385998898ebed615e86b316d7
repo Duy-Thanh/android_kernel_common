@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0634dad_28b9a541",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-02T06:13:30Z",
+      "side": 1,
+      "message": "Please just submit your driver changes upstream, no need for a special hook for this tiny change.",
+      "revId": "9e66f08a87e5ba1385998898ebed615e86b316d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
