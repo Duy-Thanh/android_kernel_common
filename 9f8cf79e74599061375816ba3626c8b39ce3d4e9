@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "035835f1_5af7a9d2",
+        "filename": "drivers/dma-buf/dma-heap.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-06-02T00:15:16Z",
+      "side": 0,
+      "message": "Wouldn\u0027t it be cleaner to add your custom accounting inside the heaps\u0027 allocate()/release() handlers? Since all DMA-BUF heap drivers are vendor-owned, you should be able to implement it without the vendor hooks right?",
+      "range": {
+        "startLine": 95,
+        "startChar": 19,
+        "endLine": 95,
+        "endChar": 27
+      },
+      "revId": "9f8cf79e74599061375816ba3626c8b39ce3d4e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
