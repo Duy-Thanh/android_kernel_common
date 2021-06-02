@@ -87,6 +87,24 @@
       "parentUuid": "66798fe7_d981f518",
       "revId": "8cf53000dc44fcb19e257c6fbba1e3f4f445bd10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "791667b3_6e542623",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2021-06-02T16:23:50Z",
+      "side": 1,
+      "message": "No, strip doesn\u0027t remove .eh_frame, but keeping it as a separate section so tools can actually find it is obviously a good idea. I moved it into the DWARF_DEBUG macro. PTAL.",
+      "parentUuid": "6ff1d107_178c6257",
+      "revId": "8cf53000dc44fcb19e257c6fbba1e3f4f445bd10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
