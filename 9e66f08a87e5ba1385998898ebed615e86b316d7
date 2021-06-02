@@ -16,6 +16,29 @@
       "message": "Please just submit your driver changes upstream, no need for a special hook for this tiny change.",
       "revId": "9e66f08a87e5ba1385998898ebed615e86b316d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ffd114f_a4c6ce05",
+        "filename": "drivers/firmware/arm_scmi/driver.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-02T16:48:54Z",
+      "side": 1,
+      "message": "Why can\u0027t desc-\u003emax_rx_timeout_ms be changed for your driver instead of changing it here for all drivers?",
+      "range": {
+        "startLine": 465,
+        "startChar": 41,
+        "endLine": 465,
+        "endChar": 58
+      },
+      "revId": "9e66f08a87e5ba1385998898ebed615e86b316d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
