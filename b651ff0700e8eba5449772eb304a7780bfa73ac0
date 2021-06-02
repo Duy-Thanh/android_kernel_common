@@ -34,6 +34,24 @@
       "parentUuid": "82d4cdcb_4aaf1ece",
       "revId": "b651ff0700e8eba5449772eb304a7780bfa73ac0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "685f0431_8462de53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878106
+      },
+      "writtenOn": "2021-06-02T09:08:29Z",
+      "side": 1,
+      "message": "We ongoing to discuss this patch with ARM, if we have any result of the discussion, we will update this patch.\nThank you.",
+      "parentUuid": "d99dcce5_841cf9a6",
+      "revId": "b651ff0700e8eba5449772eb304a7780bfa73ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
