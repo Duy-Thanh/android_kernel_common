@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e0dacbd_c37604e8",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-03T20:29:16Z",
+      "side": 1,
+      "message": "that does not sound correct. Only the line printed at file offset 0 in the sink should suppress the overflow message, not every line after that where the log buffer happens to be exactly full to the point of the get offset.",
+      "revId": "dd9e1bdf6337aec9849794564b73db1d5a8f73bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52c7aa10_66be161b",
         "filename": "drivers/trusty/trusty-logbuffer.c",
         "patchSetId": 29
