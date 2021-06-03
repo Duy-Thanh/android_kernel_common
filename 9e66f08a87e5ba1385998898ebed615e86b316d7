@@ -39,6 +39,30 @@
       },
       "revId": "9e66f08a87e5ba1385998898ebed615e86b316d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d41f1afb_bbc5a5d1",
+        "filename": "drivers/firmware/arm_scmi/driver.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1881453
+      },
+      "writtenOn": "2021-06-03T03:27:34Z",
+      "side": 1,
+      "message": "The max_rx_timeout_ms is constant, which assigned as 30ms in \u0027const struct scmi_desc scmi_mailbox_desc\u0027 of drivers/firmware/arm_scmi/mailbox.c",
+      "parentUuid": "9ffd114f_a4c6ce05",
+      "range": {
+        "startLine": 465,
+        "startChar": 41,
+        "endLine": 465,
+        "endChar": 58
+      },
+      "revId": "9e66f08a87e5ba1385998898ebed615e86b316d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
