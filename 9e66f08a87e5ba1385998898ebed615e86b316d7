@@ -63,6 +63,30 @@
       },
       "revId": "9e66f08a87e5ba1385998898ebed615e86b316d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fe9a6ba_abfe7666",
+        "filename": "drivers/firmware/arm_scmi/driver.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-03T17:14:52Z",
+      "side": 1,
+      "message": "Ok, if we do it here, is \u0026timeout enough information? Are you sure you will never want \"info\" or at least \"info-\u003edesc\" to make a finer-grained adjustment to the timeout?",
+      "parentUuid": "d41f1afb_bbc5a5d1",
+      "range": {
+        "startLine": 465,
+        "startChar": 41,
+        "endLine": 465,
+        "endChar": 58
+      },
+      "revId": "9e66f08a87e5ba1385998898ebed615e86b316d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
