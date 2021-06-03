@@ -29,6 +29,7 @@
 
 #include <trace/hooks/sched.h>
 #include <trace/hooks/dtask.h>
+#include <trace/events/task.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -50,6 +51,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_wait);
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_iowait);
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_blocked);
 #endif
+EXPORT_TRACEPOINT_SYMBOL_GPL(task_rename);
 
 DEFINE_PER_CPU_SHARED_ALIGNED(struct rq, runqueues);
 EXPORT_SYMBOL_GPL(runqueues);
