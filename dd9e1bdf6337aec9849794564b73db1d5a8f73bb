@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "856e490c_dce366d0",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-03T19:22:07Z",
+      "side": 1,
+      "message": "remove reference to dead code",
+      "revId": "dd9e1bdf6337aec9849794564b73db1d5a8f73bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80def754_b5a2c702",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-03T19:22:07Z",
+      "side": 1,
+      "message": "why did this move?",
+      "revId": "dd9e1bdf6337aec9849794564b73db1d5a8f73bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d029220a_c33cbe37",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-03T19:22:07Z",
+      "side": 1,
+      "message": "why are you moving the get pointer and ignoring the result here? We should print \"log overflow\" every time we lose data, and this seems just hide any data that was overwritten while user-space processed the last buffer returned.",
+      "revId": "dd9e1bdf6337aec9849794564b73db1d5a8f73bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52c7aa10_66be161b",
+        "filename": "drivers/trusty/trusty-logbuffer.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-03T19:22:07Z",
+      "side": 1,
+      "message": "what is the point of adding all these checks here? Why is this even in a separate file? I don\u0027t think it is common to separate the code that points the file operations to seq_file functions from the seq ops that those function calls.",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 0
+      },
+      "revId": "dd9e1bdf6337aec9849794564b73db1d5a8f73bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
