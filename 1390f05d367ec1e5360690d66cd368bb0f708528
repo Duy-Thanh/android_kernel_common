@@ -177,6 +177,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e28cf41_5f511efb",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-03T17:31:16Z",
+      "side": 1,
+      "message": "thanks. PS28 checks the status before the dump, stores it locally and uses the local state all along.",
+      "parentUuid": "7d0f80f9_4423e079",
+      "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "766b8e96_4dae3d9c",
@@ -262,6 +280,24 @@
       "side": 1,
       "message": "oh and there is an u32 overflow issue that makes the get/alloc comparison logic wrong. may be hitting hit after 24h of running... trying to fix that too.",
       "parentUuid": "522302bb_0545a71a",
+      "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35b1e03d_c801010b",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-03T17:31:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a15a494e_d2797020",
       "revId": "1390f05d367ec1e5360690d66cd368bb0f708528",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

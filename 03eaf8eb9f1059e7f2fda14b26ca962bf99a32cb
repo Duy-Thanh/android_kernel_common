@@ -86,6 +86,24 @@
       "parentUuid": "b8ab445c_cb47b479",
       "revId": "03eaf8eb9f1059e7f2fda14b26ca962bf99a32cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "deacad60_0016b050",
+        "filename": "drivers/trusty/trusty-logbuffer.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-03T17:31:16Z",
+      "side": 1,
+      "message": "poll bug: b/190050919",
+      "parentUuid": "00c05344_79c106d4",
+      "revId": "03eaf8eb9f1059e7f2fda14b26ca962bf99a32cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

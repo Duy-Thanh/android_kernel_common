@@ -232,6 +232,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16e0326e_e2299d89",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-03T17:31:16Z",
+      "side": 1,
+      "message": "as discussed, the approach to automate an TEE instance-specific name/id not being available, we decided to go for a temporary simple solution \"trusty\" as the namespace, \"log\" as the driver, \"dev.id\" as the instance id. This leads to a virtual file name /dev/trusty-log-0.\nworks?",
+      "parentUuid": "0d3085c4_08a4f722",
+      "revId": "b7fb4d4a2d79ed43818cb113f2912ca1e1a55970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "45259cc9_771d5e0a",
         "filename": "drivers/trusty/trusty-log.h",
         "patchSetId": 3
