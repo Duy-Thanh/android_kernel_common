@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89283dee_12239a47",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-03T23:01:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "856e490c_dce366d0",
+      "revId": "dd9e1bdf6337aec9849794564b73db1d5a8f73bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80def754_b5a2c702",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "330d475b_96b167f0",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-03T23:01:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "80def754_b5a2c702",
+      "revId": "dd9e1bdf6337aec9849794564b73db1d5a8f73bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d029220a_c33cbe37",
@@ -48,6 +84,24 @@
       "writtenOn": "2021-06-03T19:22:07Z",
       "side": 1,
       "message": "why are you moving the get pointer and ignoring the result here? We should print \"log overflow\" every time we lose data, and this seems just hide any data that was overwritten while user-space processed the last buffer returned.",
+      "revId": "dd9e1bdf6337aec9849794564b73db1d5a8f73bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20aeb3a7_f33e0336",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-03T23:01:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d029220a_c33cbe37",
       "revId": "dd9e1bdf6337aec9849794564b73db1d5a8f73bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -71,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3d415639_04807e36",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-03T23:01:05Z",
+      "side": 1,
+      "message": "This oldest_line condition applies to the sfile sink, not the kernel log\u0027s.\nfor sfile, we want to capture as much data as possible. so we start exactly where alloc is.\nthere are two cases:\n- overrun when sinking the very first line reported in the virtual file - which by nature is of high risk of overrun - and does not constitute an overflow case where log continuity is lost.\n- overrun while sinking next lines and breaking log continuity.\nwe want to report a log overflow message when we break log continuity from the previous log line.\nNow the question should the \"log overflow\" messages coalesce?\nif we agree to coalesce, then the proposed solution works as we would report the overflow each time we have a continuity break, but coalesce the error messages until we can catch up at least one line.\nFor the first line, we don\u0027t report until we can catch up one line too.\nlet\u0027s talk.",
+      "parentUuid": "3e0dacbd_c37604e8",
+      "revId": "dd9e1bdf6337aec9849794564b73db1d5a8f73bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52c7aa10_66be161b",
         "filename": "drivers/trusty/trusty-logbuffer.c",
         "patchSetId": 29
@@ -82,6 +154,30 @@
       "writtenOn": "2021-06-03T19:22:07Z",
       "side": 1,
       "message": "what is the point of adding all these checks here? Why is this even in a separate file? I don\u0027t think it is common to separate the code that points the file operations to seq_file functions from the seq ops that those function calls.",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 0
+      },
+      "revId": "dd9e1bdf6337aec9849794564b73db1d5a8f73bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c599e65_17cf3d5b",
+        "filename": "drivers/trusty/trusty-logbuffer.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-03T23:01:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "52c7aa10_66be161b",
       "range": {
         "startLine": 50,
         "startChar": 0,
