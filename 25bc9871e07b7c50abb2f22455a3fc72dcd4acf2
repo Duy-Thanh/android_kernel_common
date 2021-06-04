@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7cdaa606_9941e633",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 39
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T04:09:54Z",
+      "side": 1,
+      "message": "can you add a kerneldoc comment for this as well (instead of normal comments on some of the fields)? Is sfile NULL for klog_sink?",
+      "revId": "25bc9871e07b7c50abb2f22455a3fc72dcd4acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4bc310a_c7549fa3",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 39
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T04:09:54Z",
+      "side": 1,
+      "message": "can this move the the caller? The klog case seems simpler without it.",
+      "revId": "25bc9871e07b7c50abb2f22455a3fc72dcd4acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30740c4d_c6b18e28",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 39
