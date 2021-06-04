@@ -18,6 +18,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79f4569c_8596452d",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T03:29:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "48fa4090_c82e8e37",
+      "revId": "487ec6ab0a6ffd49d06e6f5c0ed0eb516a23c3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a1b027d_1ad2ab29",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T03:29:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "48fa4090_c82e8e37",
+      "revId": "487ec6ab0a6ffd49d06e6f5c0ed0eb516a23c3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "492c0ae2_7ff0ab0b",
@@ -31,6 +67,24 @@
       "writtenOn": "2021-06-04T02:02:29Z",
       "side": 1,
       "message": "keep the blank line?",
+      "revId": "487ec6ab0a6ffd49d06e6f5c0ed0eb516a23c3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "102d9f7c_ad9b38fc",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T03:29:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "492c0ae2_7ff0ab0b",
       "revId": "487ec6ab0a6ffd49d06e6f5c0ed0eb516a23c3af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

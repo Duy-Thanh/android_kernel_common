@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae0e055f_054e886b",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 29
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T03:29:21Z",
+      "side": 1,
+      "message": "as discussed, we use the state variable ignore_overflow",
+      "parentUuid": "3d415639_04807e36",
+      "revId": "dd9e1bdf6337aec9849794564b73db1d5a8f73bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52c7aa10_66be161b",
         "filename": "drivers/trusty/trusty-logbuffer.c",
         "patchSetId": 29

@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fa8905b_ed3ac77f",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T03:29:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e29e1a63_c07a2add",
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be6bfbf5_795e39f1",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ffc9ad55_79bc3e4c",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T03:29:21Z",
+      "side": 1,
+      "message": "thought using a common `struct trusty_log_sink_state` for all the sink types would be a good way to make the code dry and with less particular cases. but totally open to suggestions. we can talk",
+      "parentUuid": "be6bfbf5_795e39f1",
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "116bbc74_d5717bfe",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 33
@@ -48,6 +84,24 @@
       "writtenOn": "2021-06-04T02:02:29Z",
       "side": 1,
       "message": "what errors are you expecting? One of the callers don\u0027t check the result",
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8075be60_86eaffc3",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T03:29:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "116bbc74_d5717bfe",
       "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -75,6 +129,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f642d83_260412b9",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T03:29:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3b78441c_6e65c2f6",
+      "range": {
+        "startLine": 235,
+        "startChar": 3,
+        "endLine": 235,
+        "endChar": 5
+      },
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "507912cc_85de423b",
@@ -88,6 +166,24 @@
       "writtenOn": "2021-06-04T02:02:29Z",
       "side": 1,
       "message": "this does not seem to match the documentation (https://www.kernel.org/doc/html/latest/filesystems/seq_file.html#the-iterator-interface) which states that you must update *pos, even at end.",
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2934584f_f5138669",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T03:29:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "507912cc_85de423b",
       "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -109,6 +205,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "435c3f78_2acc847f",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T03:29:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ec541bce_475f2a8c",
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b8c92fc_901ec4ec",
@@ -126,6 +240,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48752cff_03e577d2",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T03:29:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9b8c92fc_901ec4ec",
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db331e77_3f7949cc",
@@ -139,6 +271,24 @@
       "writtenOn": "2021-06-04T02:02:29Z",
       "side": 1,
       "message": "does not checkpatch not complain about this?",
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ceeb04a_12d9cf74",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T03:29:21Z",
+      "side": 1,
+      "message": "no it does not, but how would you like to see this done?",
+      "parentUuid": "db331e77_3f7949cc",
       "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
