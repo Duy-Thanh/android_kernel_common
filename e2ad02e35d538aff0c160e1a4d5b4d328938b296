@@ -16,6 +16,24 @@
       "message": "What driver needs this?  It\u0027s a very odd function.",
       "revId": "e2ad02e35d538aff0c160e1a4d5b4d328938b296",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd9602d0_535ee7ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-06-04T10:22:44Z",
+      "side": 1,
+      "message": "fs/proc/meminfo.c:\nstatic void show_val_kb(struct seq_file *m, const char *s, unsigned long num)\n{\n\tseq_put_decimal_ull_width(m, s, num \u003c\u003c (PAGE_SHIFT - 10), 8);\n\tseq_write(m, \" kB\\n\", 4);\n}\n\nModule will probe the hook \"trace_android_vh_meminfo_proc_show\", the function meminfo_proc_show has used \"show_val_kb\" a lot, so we want to use show_val_kb, but it is a static function. so export seq_put_decimal_ull_width is the most convenient way that We find.",
+      "parentUuid": "06829488_ebe15802",
+      "revId": "e2ad02e35d538aff0c160e1a4d5b4d328938b296",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
