@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8efaf80f_6ba83b9f",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T03:48:03Z",
+      "side": 1,
+      "message": "what is weird is returning a pointer to indicate that there are more iterations, not having a common sink struct.",
+      "parentUuid": "ffc9ad55_79bc3e4c",
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "116bbc74_d5717bfe",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 33
@@ -289,6 +307,24 @@
       "side": 1,
       "message": "no it does not, but how would you like to see this done?",
       "parentUuid": "db331e77_3f7949cc",
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee84e389_3da6039d",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T03:48:03Z",
+      "side": 1,
+      "message": "I would look for other examples. I think the kernel code style does not want #ifdef statements inside functions at all only around the whole function.",
+      "parentUuid": "2ceeb04a_12d9cf74",
       "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
