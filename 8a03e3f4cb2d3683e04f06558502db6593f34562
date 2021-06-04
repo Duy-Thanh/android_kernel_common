@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80d34ac0_a8b5514d",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T06:14:44Z",
+      "side": 1,
+      "message": "add blank line after early return path",
+      "revId": "8a03e3f4cb2d3683e04f06558502db6593f34562",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19b01a1f_72e9dc05",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T06:14:44Z",
+      "side": 1,
+      "message": "...",
+      "revId": "8a03e3f4cb2d3683e04f06558502db6593f34562",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eec04210_9ba51e41",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T06:14:44Z",
+      "side": 1,
+      "message": "this value is not used",
+      "revId": "8a03e3f4cb2d3683e04f06558502db6593f34562",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8db2150_6ecf2ec6",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T06:14:44Z",
+      "side": 1,
+      "message": "add blank line after return",
+      "revId": "8a03e3f4cb2d3683e04f06558502db6593f34562",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
