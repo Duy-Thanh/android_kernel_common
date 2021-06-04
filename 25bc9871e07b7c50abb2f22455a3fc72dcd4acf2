@@ -124,6 +124,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce7fd399_8ee5e63c",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 39
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T06:15:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "62112896_2d9200c9",
+      "revId": "25bc9871e07b7c50abb2f22455a3fc72dcd4acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30740c4d_c6b18e28",
