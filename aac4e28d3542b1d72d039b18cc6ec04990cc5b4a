@@ -16,6 +16,24 @@
       "message": "Adding traceiter, sort, will update in next patch",
       "revId": "aac4e28d3542b1d72d039b18cc6ec04990cc5b4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60b3cb85_a888157b",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 2893,
+      "author": {
+        "id": 1827640
+      },
+      "writtenOn": "2021-06-04T02:32:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "058fc699_c7ebc059",
+      "revId": "aac4e28d3542b1d72d039b18cc6ec04990cc5b4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
