@@ -111,6 +111,30 @@
       },
       "revId": "9e66f08a87e5ba1385998898ebed615e86b316d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eed06ed_b51e6481",
+        "filename": "drivers/firmware/arm_scmi/driver.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-04T19:06:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a4cf947_7d6ae763",
+      "range": {
+        "startLine": 465,
+        "startChar": 41,
+        "endLine": 465,
+        "endChar": 58
+      },
+      "revId": "9e66f08a87e5ba1385998898ebed615e86b316d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
