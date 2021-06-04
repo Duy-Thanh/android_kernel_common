@@ -711,6 +711,7 @@ void seq_put_decimal_ull_width(struct seq_file *m, const char *delimiter,
 overflow:
 	seq_set_overflow(m);
 }
+EXPORT_SYMBOL_GPL(seq_put_decimal_ull_width);
 
 void seq_put_decimal_ull(struct seq_file *m, const char *delimiter,
 			 unsigned long long num)
