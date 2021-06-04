@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39933dc3_bd613fc9",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 40
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T05:27:19Z",
+      "side": 1,
+      "message": "omg indeed..",
+      "parentUuid": "5e146190_835f17f6",
+      "revId": "53846d93af4057b544ec9b0c02e70ca5750ea4d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d87706d4_e8bbc58b",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-06-04T05:15:35Z",
       "side": 1,
       "message": "don\u0027t change the control flow inside a ifdef DEBUG. You could add a helper function to get a dev pointer from trusty_log_sink_state instead an call that directly in dev_dbg",
+      "revId": "53846d93af4057b544ec9b0c02e70ca5750ea4d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72ca42e5_92a1484b",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 40
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T05:27:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d87706d4_e8bbc58b",
       "revId": "53846d93af4057b544ec9b0c02e70ca5750ea4d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

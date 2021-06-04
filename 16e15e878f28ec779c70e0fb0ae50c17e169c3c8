@@ -381,6 +381,24 @@
       "parentUuid": "ee84e389_3da6039d",
       "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dffaa96a_d89600f5",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T05:27:19Z",
+      "side": 1,
+      "message": "I have used pr_debug in the end and thanks for digging that doc up!!",
+      "parentUuid": "20a620fb_f883acba",
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
