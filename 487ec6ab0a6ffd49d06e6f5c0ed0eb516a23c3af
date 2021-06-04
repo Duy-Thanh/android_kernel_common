@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48fa4090_c82e8e37",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T02:02:29Z",
+      "side": 1,
+      "message": "run the kerneldoc script (-v) to make sure your field names are in sync with the struct. Also this description looks wrong",
+      "revId": "487ec6ab0a6ffd49d06e6f5c0ed0eb516a23c3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "492c0ae2_7ff0ab0b",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T02:02:29Z",
+      "side": 1,
+      "message": "keep the blank line?",
+      "revId": "487ec6ab0a6ffd49d06e6f5c0ed0eb516a23c3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

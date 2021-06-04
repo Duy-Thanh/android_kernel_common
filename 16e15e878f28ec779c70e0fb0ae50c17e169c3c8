@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e29e1a63_c07a2add",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T02:02:29Z",
+      "side": 1,
+      "message": "what does this mean?",
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be6bfbf5_795e39f1",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T02:02:29Z",
+      "side": 1,
+      "message": "this is a strange interface to use for dumping to the kernel log.",
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "116bbc74_d5717bfe",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T02:02:29Z",
+      "side": 1,
+      "message": "what errors are you expecting? One of the callers don\u0027t check the result",
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b78441c_6e65c2f6",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T02:02:29Z",
+      "side": 1,
+      "message": "don\u0027t use c++ style comments",
+      "range": {
+        "startLine": 235,
+        "startChar": 3,
+        "endLine": 235,
+        "endChar": 5
+      },
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "507912cc_85de423b",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T02:02:29Z",
+      "side": 1,
+      "message": "this does not seem to match the documentation (https://www.kernel.org/doc/html/latest/filesystems/seq_file.html#the-iterator-interface) which states that you must update *pos, even at end.",
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec541bce_475f2a8c",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T02:02:29Z",
+      "side": 1,
+      "message": "why are you using a pointer in the middle of your struct as the iterator instead of the struct itself?",
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b8c92fc_901ec4ec",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T02:02:29Z",
+      "side": 1,
+      "message": "I don\u0027t think this is correct. 0 means the start of the file. The 32 bit log_sfile_sink-\u003eget value can end up being 0 in the middle of the file. If this value is then passed back to start you could repeat log lines.",
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db331e77_3f7949cc",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T02:02:29Z",
+      "side": 1,
+      "message": "does not checkpatch not complain about this?",
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
