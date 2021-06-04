@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d7db3bd_f68169fe",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-06-04T08:32:58Z",
+      "side": 1,
+      "message": "Oops",
+      "parentUuid": "bf1b4149_7f861de8",
+      "range": {
+        "startLine": 344,
+        "startChar": 12,
+        "endLine": 344,
+        "endChar": 14
+      },
+      "revId": "5278d34b9ccae339f02817f508b0c5f41d991c1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "108c3052_b7647e8d",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-06-01T17:53:15Z",
       "side": 1,
       "message": "This %s doesn\u0027t have a corresponding argument.",
+      "range": {
+        "startLine": 362,
+        "startChar": 12,
+        "endLine": 362,
+        "endChar": 14
+      },
+      "revId": "5278d34b9ccae339f02817f508b0c5f41d991c1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "920ab72d_5cf615fa",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-06-04T08:32:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "108c3052_b7647e8d",
       "range": {
         "startLine": 362,
         "startChar": 12,
