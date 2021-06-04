@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40f41b7c_3a4c9cd6",
+        "filename": "include/trace/hooks/libsha256.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-06-04T18:23:05Z",
+      "side": 1,
+      "message": "Noted.",
+      "parentUuid": "4228ca1c_7ab99bf7",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 36
+      },
+      "revId": "5f740ee982721a8455bcced92bb66ae24fcbbfc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48b8f381_f2be2ad7",
