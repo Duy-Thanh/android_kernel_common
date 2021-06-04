@@ -87,6 +87,30 @@
       },
       "revId": "9e66f08a87e5ba1385998898ebed615e86b316d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a4cf947_7d6ae763",
+        "filename": "drivers/firmware/arm_scmi/driver.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1881453
+      },
+      "writtenOn": "2021-06-04T05:37:33Z",
+      "side": 1,
+      "message": "Yes, \u0026timeout is enough. The other members\u0027 value of \"info-\u003edesc\" are suitable for MTK usage requirement.",
+      "parentUuid": "3fe9a6ba_abfe7666",
+      "range": {
+        "startLine": 465,
+        "startChar": 41,
+        "endLine": 465,
+        "endChar": 58
+      },
+      "revId": "9e66f08a87e5ba1385998898ebed615e86b316d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
