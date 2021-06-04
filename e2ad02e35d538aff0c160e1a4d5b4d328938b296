@@ -52,6 +52,24 @@
       "parentUuid": "bd9602d0_535ee7ad",
       "revId": "e2ad02e35d538aff0c160e1a4d5b4d328938b296",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4949aebb_55eb0c76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-06-04T16:26:39Z",
+      "side": 1,
+      "message": "Why not use simple sprintf ?",
+      "parentUuid": "f049f214_9e198e26",
+      "revId": "e2ad02e35d538aff0c160e1a4d5b4d328938b296",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
