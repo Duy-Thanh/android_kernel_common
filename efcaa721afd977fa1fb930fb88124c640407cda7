@@ -46,6 +46,30 @@
       },
       "revId": "efcaa721afd977fa1fb930fb88124c640407cda7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8f00487_1f8273ec",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-06-04T16:28:50Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "4f3bdf12_9c979bd0",
+      "range": {
+        "startLine": 1132,
+        "startChar": 2,
+        "endLine": 1132,
+        "endChar": 54
+      },
+      "revId": "efcaa721afd977fa1fb930fb88124c640407cda7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
