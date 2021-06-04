@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f36d292b_8b32c7b0",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 43
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T06:34:32Z",
+      "side": 1,
+      "message": "these comments are on PS#43. Gerrit shows them on the wrong line in PS#44 for me.",
+      "parentUuid": "76017ece_27d9617c",
+      "revId": "a1f02a603f227c7ac5f4178183157dc86b1102f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d7d61bd2_4144dc6e",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 43
