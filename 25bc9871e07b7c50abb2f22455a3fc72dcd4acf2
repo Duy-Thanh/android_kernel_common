@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bddfdac8_b261e538",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 39
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T05:05:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7cdaa606_9941e633",
+      "revId": "25bc9871e07b7c50abb2f22455a3fc72dcd4acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4bc310a_c7549fa3",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfce5e54_46285bf2",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 39
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T05:05:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d4bc310a_c7549fa3",
+      "revId": "25bc9871e07b7c50abb2f22455a3fc72dcd4acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30740c4d_c6b18e28",
@@ -48,6 +84,24 @@
       "writtenOn": "2021-06-04T03:48:03Z",
       "side": 1,
       "message": "this could use a comment",
+      "revId": "25bc9871e07b7c50abb2f22455a3fc72dcd4acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcf6025e_73984812",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 39
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T05:05:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "30740c4d_c6b18e28",
       "revId": "25bc9871e07b7c50abb2f22455a3fc72dcd4acf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
