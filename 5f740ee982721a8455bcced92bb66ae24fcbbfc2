@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4228ca1c_7ab99bf7",
+        "filename": "include/trace/hooks/libsha256.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-06-04T18:17:34Z",
+      "side": 1,
+      "message": "For future reference, please use \"Done\" instead of \"Ack\" if you\u0027re taking the suggestion.  \"Ack\" usually means the suggestion isn\u0027t being taken.  Thanks!",
+      "parentUuid": "1e8b936f_1f3dedf4",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 36
+      },
+      "revId": "5f740ee982721a8455bcced92bb66ae24fcbbfc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48b8f381_f2be2ad7",
