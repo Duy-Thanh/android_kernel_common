@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "981940a4_4c5c57f2",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 47
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T06:57:07Z",
+      "side": 1,
+      "message": "dev_dbg we don\u0027t print every device created to the kernel log by default as that would be very noisy",
+      "range": {
+        "startLine": 520,
+        "startChar": 1,
+        "endLine": 520,
+        "endChar": 9
+      },
+      "revId": "bf9d994a65a2941d96b58769d79c256f7d8862c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b61ad71c_198d0eaa",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 47
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T06:57:07Z",
+      "side": 1,
+      "message": "unneeded if",
+      "revId": "bf9d994a65a2941d96b58769d79c256f7d8862c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bacd26a_c27f0649",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 47
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T06:57:07Z",
+      "side": 1,
+      "message": "dev_dbg",
+      "revId": "bf9d994a65a2941d96b58769d79c256f7d8862c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
