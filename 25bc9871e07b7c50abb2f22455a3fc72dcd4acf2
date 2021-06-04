@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aaf849d_090200a1",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 39
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T05:06:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7cdaa606_9941e633",
+      "revId": "25bc9871e07b7c50abb2f22455a3fc72dcd4acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4bc310a_c7549fa3",
@@ -64,6 +82,24 @@
         "id": 1856745
       },
       "writtenOn": "2021-06-04T05:05:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d4bc310a_c7549fa3",
+      "revId": "25bc9871e07b7c50abb2f22455a3fc72dcd4acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eee77b6a_90cb0ae3",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 39
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2021-06-04T05:06:18Z",
       "side": 1,
       "message": "Ack",
       "parentUuid": "d4bc310a_c7549fa3",
