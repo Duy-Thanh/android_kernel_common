@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e146190_835f17f6",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 40
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T05:15:35Z",
+      "side": 1,
+      "message": "\"return log-\u003eput !\u003d sink-\u003eget;\" would be simpler",
+      "revId": "53846d93af4057b544ec9b0c02e70ca5750ea4d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d87706d4_e8bbc58b",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 40
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T05:15:35Z",
+      "side": 1,
+      "message": "don\u0027t change the control flow inside a ifdef DEBUG. You could add a helper function to get a dev pointer from trusty_log_sink_state instead an call that directly in dev_dbg",
+      "revId": "53846d93af4057b544ec9b0c02e70ca5750ea4d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -363,6 +363,24 @@
       "parentUuid": "2ceeb04a_12d9cf74",
       "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20a620fb_f883acba",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T05:15:35Z",
+      "side": 1,
+      "message": "It looks like you can use __maybe_unused here:\nhttps://www.kernel.org/doc/html/latest/process/coding-style.html#conditional-compilation",
+      "parentUuid": "ee84e389_3da6039d",
+      "revId": "16e15e878f28ec779c70e0fb0ae50c17e169c3c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

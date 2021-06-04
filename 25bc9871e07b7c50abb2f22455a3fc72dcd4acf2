@@ -109,6 +109,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62112896_2d9200c9",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 39
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-04T05:15:35Z",
+      "side": 1,
+      "message": "I think the diff would be cleaner here of you split the patch in two. The first patch would add trusty_log_sink_state (and all the refactoring) without sfile. The second patch could then add the log file support. If you do this, keep the current change id on the second patch so we can diff the end result.",
+      "revId": "25bc9871e07b7c50abb2f22455a3fc72dcd4acf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30740c4d_c6b18e28",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 39
