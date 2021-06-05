@@ -517,7 +517,7 @@ static int trusty_log_sfile_register(struct trusty_log_state *s)
 			ret);
 		return ret;
 	}
-	dev_info(s->dev, "/dev/%s registered\n",
+	dev_dbg(s->dev, "/dev/%s registered\n",
 		 ls->device_name);
 	return 0;
 }
@@ -527,10 +527,8 @@ static void trusty_log_sfile_unregister(struct trusty_log_state *s)
 	struct trusty_log_sfile *ls = &s->log_sfile;
 
 	misc_deregister(&ls->misc);
-	if (s->dev) {
-		dev_info(s->dev, "/dev/%s unregistered\n",
-			 ls->misc.name);
-	}
+	dev_dbg(s->dev, "/dev/%s unregistered\n",
+			ls->misc.name);
 }
 
 static bool trusty_supports_logging(struct device *device)
