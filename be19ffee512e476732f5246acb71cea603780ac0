@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68b78e55_aa64a684",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10263,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-07T06:41:35Z",
+      "side": 1,
+      "message": "Then please document this all somewhere as it is NOT the normal return value logic for kernel functions.",
+      "parentUuid": "8ba67e69_7eadfb62",
+      "range": {
+        "startLine": 10263,
+        "startChar": 11,
+        "endLine": 10263,
+        "endChar": 14
+      },
+      "revId": "be19ffee512e476732f5246acb71cea603780ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "205bdc1f_2b2af7e6",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 1
