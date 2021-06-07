@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d9eeefe_d5bfc7a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-07T11:32:10Z",
+      "side": 1,
+      "message": "What exactly is this hook supposed to do?  Can\u0027t you handle this type of issue in your function driver properly?\n\nIf you have a device that needs something else done here, why not submit a patch for that upstream?\n\nAnd why only hook this in one place and not everywhere?",
+      "revId": "950ebf975065dc8b8e187672719dfffc5fc42db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
