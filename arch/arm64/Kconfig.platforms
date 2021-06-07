@@ -165,6 +165,11 @@ config ARCH_MEDIATEK
 
 config ARCH_MESON
 	bool "Amlogic Platforms"
+<<<<<<< HEAD   (1d0fb1 Revert "ANDROID: ARM: Bump command line size")
+=======
+	select COMMON_CLK
+	select MESON_IRQ_GPIO
+>>>>>>> BRANCH (614124 Linux 5.13-rc5)
 	help
 	  This enables support for the arm64 based Amlogic SoCs
 	  such as the s905, S905X/D, S912, A113X/D or S905X/D2
