@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ba67e69_7eadfb62",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10263,
+      "author": {
+        "id": 1700326
+      },
+      "writtenOn": "2021-06-07T06:34:57Z",
+      "side": 1,
+      "message": "cpu number -1 means that no ilb is selected in the hook.",
+      "parentUuid": "e8af75d8_075bba63",
+      "range": {
+        "startLine": 10263,
+        "startChar": 11,
+        "endLine": 10263,
+        "endChar": 14
+      },
+      "revId": "be19ffee512e476732f5246acb71cea603780ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "205bdc1f_2b2af7e6",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2021-06-07T06:31:30Z",
       "side": 1,
       "message": "0 is a valid value?",
+      "range": {
+        "startLine": 10266,
+        "startChar": 10,
+        "endLine": 10266,
+        "endChar": 11
+      },
+      "revId": "be19ffee512e476732f5246acb71cea603780ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78057bef_9cb799b7",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10266,
+      "author": {
+        "id": 1700326
+      },
+      "writtenOn": "2021-06-07T06:34:57Z",
+      "side": 1,
+      "message": "You right.",
+      "parentUuid": "205bdc1f_2b2af7e6",
       "range": {
         "startLine": 10266,
         "startChar": 10,
