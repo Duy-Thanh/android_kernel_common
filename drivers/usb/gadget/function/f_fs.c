@@ -36,6 +36,8 @@
 #include <linux/poll.h>
 #include <linux/eventfd.h>
 
+#include <trace/hooks/usb.h>
+
 #include "u_fs.h"
 #include "u_f.h"
 #include "u_os_desc.h"
@@ -3376,6 +3378,8 @@ static bool ffs_func_req_match(struct usb_function *f,
 			       bool config0)
 {
 	struct ffs_function *func = ffs_func_from_usb(f);
+	bool allow = true;
+	bool ret;
 
 	if (config0 && !(func->ffs->user_flags & FUNCTIONFS_CONFIG0_SETUP))
 		return false;
@@ -3385,6 +3389,10 @@ static bool ffs_func_req_match(struct usb_function *f,
 		return (ffs_func_revmap_intf(func,
 					     le16_to_cpu(creq->wIndex)) >= 0);
 	case USB_RECIP_ENDPOINT:
+		trace_android_vh_ffs_func_req_match(func, creq,
+						    &allow, &ret);
+		if (!allow)
+			return ret;
 		return (ffs_func_revmap_ep(func,
 					   le16_to_cpu(creq->wIndex)) >= 0);
 	default:
