@@ -144,6 +144,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15c389e9_64647a63",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10263,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-06-07T10:15:14Z",
+      "side": 1,
+      "message": "There are a few places in the scheduler where we use -1 like this, so I guess this should be fine.",
+      "parentUuid": "d1b3b104_68ef03d6",
+      "range": {
+        "startLine": 10263,
+        "startChar": 11,
+        "endLine": 10263,
+        "endChar": 14
+      },
+      "revId": "be19ffee512e476732f5246acb71cea603780ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "205bdc1f_2b2af7e6",
@@ -181,6 +205,30 @@
       "side": 1,
       "message": "You right.",
       "parentUuid": "205bdc1f_2b2af7e6",
+      "range": {
+        "startLine": 10266,
+        "startChar": 10,
+        "endLine": 10266,
+        "endChar": 11
+      },
+      "revId": "be19ffee512e476732f5246acb71cea603780ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0261d16_1182a905",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10266,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-06-07T10:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78057bef_9cb799b7",
       "range": {
         "startLine": 10266,
         "startChar": 10,
