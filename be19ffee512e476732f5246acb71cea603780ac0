@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49f891da_92dcef7f",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10263,
+      "author": {
+        "id": 1700326
+      },
+      "writtenOn": "2021-06-07T08:50:53Z",
+      "side": 1,
+      "message": "Right, this function already returns nr_cpu_ids in case of failure.\n\nIf ilb is initialized with nr_cpu_ids, then a condition to check whether ilb is set by the hook should be modified like,\n\n```\n\ttrace_android_rvh_find_new_ilb(nohz.idle_cpus_mask, \u0026ilb);\n-\tif (ilb \u003e\u003d 0)\n+\tif (ilb !\u003d nr_cpu_ids)\n```\n\nFor the consistency with the failure case of this function, I will modify the condition as above.",
+      "parentUuid": "64bc191b_641d506b",
+      "range": {
+        "startLine": 10263,
+        "startChar": 11,
+        "endLine": 10263,
+        "endChar": 14
+      },
+      "revId": "be19ffee512e476732f5246acb71cea603780ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "205bdc1f_2b2af7e6",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 1
