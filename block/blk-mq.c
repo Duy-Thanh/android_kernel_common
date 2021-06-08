@@ -41,6 +41,9 @@
 #include "blk-mq-sched.h"
 #include "blk-rq-qos.h"
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/block.h>
+
 static DEFINE_PER_CPU(struct list_head, blk_cpu_done);
 
 static void blk_mq_poll_stats_start(struct request_queue *q);
@@ -2470,6 +2473,7 @@ int blk_mq_alloc_rqs(struct blk_mq_tag_set *set, struct blk_mq_tags *tags,
 	unsigned int i, j, entries_per_page, max_order = 4;
 	size_t rq_size, left;
 	int node;
+	int bypass = 1;
 
 	node = blk_mq_hw_queue_to_node(&set->map[HCTX_TYPE_DEFAULT], hctx_idx);
 	if (node == NUMA_NO_NODE)
@@ -2481,8 +2485,11 @@ int blk_mq_alloc_rqs(struct blk_mq_tag_set *set, struct blk_mq_tags *tags,
 	 * rq_size is the size of the request plus driver payload, rounded
 	 * to the cacheline size
 	 */
-	rq_size = round_up(sizeof(struct request) + set->cmd_size,
-				cache_line_size());
+	trace_android_vh_blk_alloc_rqs(&bypass, &rq_size, set->cmd_size, set, tags);
+
+	if (bypass)
+		rq_size = round_up(sizeof(struct request) + set->cmd_size,
+					cache_line_size());
 	left = rq_size * depth;
 
 	for (i = 0; i < depth; ) {
