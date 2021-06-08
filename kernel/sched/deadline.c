@@ -17,6 +17,7 @@
  */
 #include "sched.h"
 #include "pelt.h"
+#include <trace/hooks/sched.h>
 
 struct dl_bandwidth def_dl_bandwidth;
 
@@ -1265,6 +1266,8 @@ static void update_curr_dl(struct rq *rq)
 
 	schedstat_set(curr->se.statistics.exec_max,
 		      max(curr->se.statistics.exec_max, delta_exec));
+
+	trace_android_vh_account_deadline_normalize_runtime(curr, delta_exec, rq);
 
 	curr->se.sum_exec_runtime += delta_exec;
 	account_group_exec_runtime(curr, delta_exec);

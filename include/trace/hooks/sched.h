@@ -378,6 +378,18 @@ DECLARE_HOOK(android_vh_force_compatible_post,
 	TP_PROTO(void *unused),
 	TP_ARGS(unused));
 
+DECLARE_HOOK(android_vh_account_rt_normalize_runtime,
+	TP_PROTO(struct task_struct *p, u64 delta, struct rq *rq),
+	TP_ARGS(p, delta, rq));
+
+DECLARE_HOOK(android_vh_account_stop_task_normalize_runtime,
+	TP_PROTO(struct task_struct *p, u64 delta, struct rq *rq),
+	TP_ARGS(p, delta, rq));
+
+DECLARE_HOOK(android_vh_account_deadline_normalize_runtime,
+	TP_PROTO(struct task_struct *p, u64 delta, struct rq *rq),
+	TP_ARGS(p, delta, rq));
+
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_SCHED_H */

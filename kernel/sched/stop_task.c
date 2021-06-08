@@ -8,6 +8,7 @@
  * See kernel/stop_machine.c
  */
 #include "sched.h"
+#include <trace/hooks/sched.h>
 
 #ifdef CONFIG_SMP
 static int
@@ -71,6 +72,8 @@ static void put_prev_task_stop(struct rq *rq, struct task_struct *prev)
 
 	schedstat_set(curr->se.statistics.exec_max,
 			max(curr->se.statistics.exec_max, delta_exec));
+
+	trace_android_vh_account_stop_task_normalize_runtime(curr, delta_exec, rq);
 
 	curr->se.sum_exec_runtime += delta_exec;
 	account_group_exec_runtime(curr, delta_exec);
