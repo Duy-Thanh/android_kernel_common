@@ -22,6 +22,12 @@ DECLARE_RESTRICTED_HOOK(android_rvh_set_gfp_zone_flags,
 DECLARE_RESTRICTED_HOOK(android_rvh_set_readahead_gfp_mask,
 			TP_PROTO(gfp_t *flags),
 			TP_ARGS(flags), 1);
+DECLARE_HOOK(android_vh_filemap_fault_get_page,
+	TP_PROTO(struct vm_fault *vmf, struct page **page, bool *retry),
+	TP_ARGS(vmf, page, retry));
+DECLARE_HOOK(android_vh_filemap_fault_cache_page,
+	TP_PROTO(struct vm_fault *vmf, struct page *page),
+	TP_ARGS(vmf, page));
 DECLARE_HOOK(android_vh_meminfo_proc_show,
 	TP_PROTO(struct seq_file *m),
 	TP_ARGS(m));

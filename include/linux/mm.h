@@ -580,6 +580,7 @@ struct vm_fault {
 					 * page table to avoid allocation from
 					 * atomic context.
 					 */
+	ANDROID_OEM_DATA_ARRAY(1, 2);
 };
 
 /* page entry size for vm->huge_fault() */
