@@ -6,6 +6,7 @@
 #define _TRACE_HOOK_UFSHCD_H
 #include <linux/tracepoint.h>
 #include <trace/hooks/vendor_hooks.h>
+#include "../drivers/scsi/ufs/ufs.h"
 /*
  * Following tracepoints are not exported in tracefs and provide a
  * mechanism for vendor modules to hook and extend functionality
@@ -13,6 +14,7 @@
 struct ufs_hba;
 struct request;
 struct ufshcd_lrb;
+enum ufs_dev_pwr_mode;
 
 DECLARE_HOOK(android_vh_ufs_fill_prdt,
 	TP_PROTO(struct ufs_hba *hba, struct ufshcd_lrb *lrbp,
@@ -54,6 +56,14 @@ struct scsi_device;
 DECLARE_HOOK(android_vh_ufs_update_sdev,
 	TP_PROTO(struct scsi_device *sdev),
 	TP_ARGS(sdev));
+
+DECLARE_HOOK(android_vh_ufs_gen_devinfo,
+	TP_PROTO(struct ufs_hba *hba),
+	TP_ARGS(hba));
+
+DECLARE_HOOK(android_vh_ufs_pwr_mode,
+        TP_PROTO(struct ufs_hba *hba, enum ufs_dev_pwr_mode pwr_mode),
+        TP_ARGS(hba, pwr_mode));
 
 #endif /* _TRACE_HOOK_UFSHCD_H */
 /* This part must be outside protection */
