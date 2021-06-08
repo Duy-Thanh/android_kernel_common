@@ -675,6 +675,8 @@ void gic_v3_dist_init(void);
 void gic_v3_cpu_init(void);
 void gic_v3_dist_wait_for_rwp(void);
 
+void gic_v3_resume(void);
+
 #endif
 
 #endif

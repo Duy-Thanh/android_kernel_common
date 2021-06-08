@@ -1548,14 +1548,15 @@ static int gic_v3_suspend(void)
 	return 0;
 }
 
-static void gic_resume(void)
+void gic_v3_resume(void)
 {
 	trace_android_vh_gic_resume(&gic_data);
 }
+EXPORT_SYMBOL_GPL(gic_v3_resume);
 
 static struct syscore_ops gic_syscore_ops = {
 	.suspend = gic_v3_suspend,
-	.resume = gic_resume,
+	.resume = gic_v3_resume,
 };
 
 static void gic_syscore_init(void)
