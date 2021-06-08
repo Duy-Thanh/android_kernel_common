@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2e68cfc_bc579b76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2021-06-08T04:10:54Z",
+      "side": 1,
+      "message": "It seems the ABI symbol list will only update when some function is really in use, even it is exported already. Is this expected behavior?",
+      "revId": "5b98d53868db9a984678c6afe7aba5d24ab845b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
