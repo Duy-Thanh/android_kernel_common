@@ -33,6 +33,24 @@
       "message": "Do you also need a hook when the user is removed so that you can free your memory you allocated in this hook?",
       "revId": "ad35c71bc801b89aa5e13d81b04758ec5c9ddc8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4698944b_1a33c86f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876972
+      },
+      "writtenOn": "2021-06-08T08:18:34Z",
+      "side": 1,
+      "message": "Thank you for your advice, i have update the change, add the hook to free memory allocated by vendor,please help review my change.",
+      "parentUuid": "c2f20ca8_ca20e823",
+      "revId": "ad35c71bc801b89aa5e13d81b04758ec5c9ddc8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
