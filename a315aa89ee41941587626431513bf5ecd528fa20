@@ -22,6 +22,30 @@
       },
       "revId": "a315aa89ee41941587626431513bf5ecd528fa20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b2c318b_cf821c71",
+        "filename": "drivers/cpuidle/cpuidle-psci.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1582959
+      },
+      "writtenOn": "2021-06-08T18:14:35Z",
+      "side": 1,
+      "message": "Updated in next revision.",
+      "parentUuid": "22a7ad79_ff95b7e2",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 42
+      },
+      "revId": "a315aa89ee41941587626431513bf5ecd528fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
