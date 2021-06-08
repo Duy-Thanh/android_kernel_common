@@ -40,6 +40,9 @@
 #include "scsi_priv.h"
 #include "scsi_logging.h"
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/block.h>
+
 /*
  * Size of integrity metadata is usually small, 1 inline sg should
  * cover normal cases.
@@ -1886,6 +1889,7 @@ struct request_queue *scsi_mq_alloc_queue(struct scsi_device *sdev)
 	sdev->request_queue->queuedata = sdev;
 	__scsi_init_queue(sdev->host, sdev->request_queue);
 	blk_queue_flag_set(QUEUE_FLAG_SCSI_PASSTHROUGH, sdev->request_queue);
+	trace_android_vh_scsi_alloc_queue(sdev, sdev->request_queue);
 	return sdev->request_queue;
 }
 
@@ -1917,6 +1921,7 @@ int scsi_mq_setup_tags(struct Scsi_Host *shost)
 	if (shost->host_tagset)
 		tag_set->flags |= BLK_MQ_F_TAG_HCTX_SHARED;
 
+	trace_android_vh_scsi_setup_tags(shost, tag_set);
 	return blk_mq_alloc_tag_set(tag_set);
 }
 
