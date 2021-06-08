@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2859abc5_f49d01d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-08T07:19:56Z",
+      "side": 1,
+      "message": "Please provide a bit more information in the changelog text as to why this is needed.",
+      "revId": "141264663fb46518718ab392cefe893455e748c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25441af4_80f1a68f",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-08T07:19:56Z",
+      "side": 1,
+      "message": "passing a spinlock into a trace function is really odd, why not do your work above when the lock is held?\n\nAnd did you run checkpatch.pl on this change?  Your line is really long here...",
+      "range": {
+        "startLine": 274,
+        "startChar": 37,
+        "endLine": 274,
+        "endChar": 56
+      },
+      "revId": "141264663fb46518718ab392cefe893455e748c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
