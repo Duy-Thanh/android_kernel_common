@@ -77,6 +77,8 @@
 #include "binder_trace.h"
 #include <trace/hooks/binder.h>
 
+#include "linux/trace_clock.h"
+
 static HLIST_HEAD(binder_deferred_list);
 static DEFINE_MUTEX(binder_deferred_lock);
 
@@ -3175,6 +3177,7 @@ static void binder_transaction(struct binder_proc *proc,
 			goto err_dead_proc_or_thread;
 		}
 		BUG_ON(t->buffer->async_transaction != 0);
+		t->timestamp = in_reply_to->timestamp;
 		binder_pop_transaction_ilocked(target_thread, in_reply_to);
 		binder_enqueue_thread_work_ilocked(target_thread, &t->work);
 		target_proc->outstanding_txns++;
@@ -3197,6 +3200,7 @@ static void binder_transaction(struct binder_proc *proc,
 		t->need_reply = 1;
 		t->from_parent = thread->transaction_stack;
 		thread->transaction_stack = t;
+		t->timestamp = trace_clock_local();
 		binder_inner_proc_unlock(proc);
 		return_error = binder_proc_transaction(t,
 				target_proc, target_thread);
@@ -3210,6 +3214,7 @@ static void binder_transaction(struct binder_proc *proc,
 		BUG_ON(target_node == NULL);
 		BUG_ON(t->buffer->async_transaction != 1);
 		binder_enqueue_thread_work(thread, tcomplete);
+		t->timestamp = trace_clock_local();
 		return_error = binder_proc_transaction(t, target_proc, NULL);
 		if (return_error)
 			goto err_dead_proc_or_thread;
@@ -5479,18 +5484,26 @@ static void print_binder_transaction_ilocked(struct seq_file *m,
 {
 	struct binder_proc *to_proc;
 	struct binder_buffer *buffer = t->buffer;
+	u64 now;
+	u64 duration = 0;
 
 	spin_lock(&t->lock);
 	to_proc = t->to_proc;
+	now = trace_clock_local();
+	if (t->timestamp > 0)
+		duration = now > t->timestamp ? (now - t->timestamp) : 0;
 	seq_printf(m,
-		   "%s %d: %pK from %d:%d to %d:%d code %x flags %x pri %d:%d r%d",
+		   "%s %d: %pK from %d:%d to %d:%d code %x flags %x pri %d:%d r%d"
+		   " duration:%lld.%02lld s",
 		   prefix, t->debug_id, t,
 		   t->from ? t->from->proc->pid : 0,
 		   t->from ? t->from->pid : 0,
 		   to_proc ? to_proc->pid : 0,
 		   t->to_thread ? t->to_thread->pid : 0,
 		   t->code, t->flags, t->priority.sched_policy,
-		   t->priority.prio, t->need_reply);
+		   t->priority.prio, t->need_reply,
+		   duration / 1000000000,
+		   duration % 1000000000 / 10000000);
 	spin_unlock(&t->lock);
 
 	if (proc != to_proc) {
