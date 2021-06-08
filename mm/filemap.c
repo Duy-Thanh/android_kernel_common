@@ -3049,9 +3049,10 @@ vm_fault_t filemap_fault(struct vm_fault *vmf)
 	struct inode *inode = mapping->host;
 	pgoff_t offset = vmf->pgoff;
 	pgoff_t max_off;
-	struct page *page;
+	struct page *page = NULL;
 	vm_fault_t ret = 0;
 	bool mapping_locked = false;
+	bool retry = false;
 
 	if (vmf->flags & FAULT_FLAG_SPECULATIVE) {
 		page = find_get_page(mapping, offset);
@@ -3097,6 +3098,12 @@ page_unlock:
 	max_off = DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE);
 	if (unlikely(offset >= max_off))
 		return VM_FAULT_SIGBUS;
+
+	trace_android_vh_filemap_fault_get_page(vmf, &page, &retry);
+	if (unlikely(retry))
+		goto out_retry;
+	if (unlikely(page))
+		goto page_ok;
 
 	/*
 	 * Do we have something in the page cache already?
@@ -3181,6 +3188,7 @@ retry_find:
 	if (mapping_locked)
 		filemap_invalidate_unlock_shared(mapping);
 
+page_ok:
 	/*
 	 * Found the page and have a reference on it.
 	 * We must recheck i_size under page lock.
@@ -3220,8 +3228,10 @@ out_retry:
 	 * re-find the vma and come back and find our hopefully still populated
 	 * page.
 	 */
-	if (page)
+	if (page) {
+		trace_android_vh_filemap_fault_cache_page(vmf, page);
 		put_page(page);
+        }
 	if (mapping_locked)
 		filemap_invalidate_unlock_shared(mapping);
 	if (fpin)
