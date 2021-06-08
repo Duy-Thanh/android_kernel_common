@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22a7ad79_ff95b7e2",
+        "filename": "drivers/cpuidle/cpuidle-psci.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-08T11:49:20Z",
+      "side": 1,
+      "message": "shouldn\u0027t you just rewrite this to be:\n  trace_vh_s2idle_enter(dev, s2idle)\n\nand then you have full access to the whole device (making it easier to change things in the future) as well as the s2idle variable so you can determine why your hook is not being called?\n\n\nSame for the \"exit\" call below.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 42
+      },
+      "revId": "a315aa89ee41941587626431513bf5ecd528fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
