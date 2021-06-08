@@ -16,6 +16,24 @@
       "message": "For generic \"how long does this take\", why not just use ftrace or perf?",
       "revId": "bbc2514506cbed0be9a64097218a979de614fa68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c3941fd_d756a301",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-06-08T07:50:36Z",
+      "side": 1,
+      "message": "Enable ftrace or perf maybe decrease performance, we can\u0027t enable it by default.\nOn the other hand, we want to get some info from current when doing do_fsync. And trigger some stategy in out module.",
+      "parentUuid": "7140427d_5dee9100",
+      "revId": "bbc2514506cbed0be9a64097218a979de614fa68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
