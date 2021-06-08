@@ -16,6 +16,23 @@
       "message": "I\u0027ll wait for Jaegeuk to +1 this before I +2 this change.",
       "revId": "cb5bec8d165a58d60dc7ff77f543e7cb2f8dbe80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca7cef67_458d4d4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-06-08T22:47:07Z",
+      "side": 1,
+      "message": "Let\u0027s wait for upstream discussion a bit.",
+      "revId": "cb5bec8d165a58d60dc7ff77f543e7cb2f8dbe80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
