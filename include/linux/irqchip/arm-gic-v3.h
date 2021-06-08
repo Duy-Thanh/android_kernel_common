@@ -679,6 +679,8 @@ static inline bool gic_enable_sre(void)
 }
 #endif
 
+void gic_resume(void);
+
 #endif
 
 #endif
