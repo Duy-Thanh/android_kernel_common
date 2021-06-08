@@ -2477,6 +2477,8 @@
   __traceiter_android_vh_jiffies_update
   __traceiter_android_vh_logbuf
   __traceiter_android_vh_printk_hotplug
+  __traceiter_android_vh_s2idle_enter
+  __traceiter_android_vh_s2idle_exit
   __traceiter_android_vh_scheduler_tick
   __traceiter_android_vh_show_max_freq
   __traceiter_android_vh_show_resume_epoch_val
@@ -2573,6 +2575,8 @@
   __tracepoint_android_vh_process_killed
   __tracepoint_android_vh_psi_event
   __tracepoint_android_vh_psi_group
+  __tracepoint_android_vh_s2idle_enter
+  __tracepoint_android_vh_s2idle_exit
   __tracepoint_android_vh_scheduler_tick
   __tracepoint_android_vh_show_max_freq
   __tracepoint_android_vh_show_resume_epoch_val
