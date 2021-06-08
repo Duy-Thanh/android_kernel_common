@@ -985,6 +985,7 @@
   get_zeroed_page
   gfp_zone
   gic_nonsecure_priorities
+  gic_resume
   gov_attr_set_init
   gov_attr_set_put
   governor_sysfs_ops
