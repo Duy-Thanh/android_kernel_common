@@ -22,7 +22,6 @@
 #include <linux/wakeup_reason.h>
 #include <trace/hooks/gic_v3.h>
 
-
 #include <linux/irqchip.h>
 #include <linux/irqchip/arm-gic-common.h>
 #include <linux/irqchip/arm-gic-v3.h>
@@ -1267,10 +1266,11 @@ static inline void gic_cpu_pm_init(void) { }
 #endif /* CONFIG_CPU_PM */
 
 #ifdef CONFIG_PM
-static void gic_resume(void)
+void gic_resume(void)
 {
 	trace_android_vh_gic_resume(gic_data.domain, gic_data.dist_base);
 }
+EXPORT_SYMBOL(gic_resume);
 
 static struct syscore_ops gic_syscore_ops = {
 	.resume = gic_resume,
@@ -1283,6 +1283,7 @@ static void gic_syscore_init(void)
 
 #else
 static inline void gic_syscore_init(void) { }
+void gic_resume(void) { }
 #endif
 
 
