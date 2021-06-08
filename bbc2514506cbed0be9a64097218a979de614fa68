@@ -52,6 +52,24 @@
       "parentUuid": "8c3941fd_d756a301",
       "revId": "bbc2514506cbed0be9a64097218a979de614fa68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0af0586_88885138",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-06-08T11:22:26Z",
+      "side": 1,
+      "message": "You can not do anything about sync times from within the kernel, this should be userspace driven\n----------------------\nstatic int do_fsync(unsigned int fd, int datasync)\n{\n\tstruct fd f \u003d fdget(fd);\n\tint ret \u003d -EBADF;\n\tunsigned long fsync_start \u003d jiffies;\n\n\tif (f.file) {\n\t\tret \u003d vfs_fsync(f.file, datasync);\n\t\tfdput(f);\n\t\tinc_syscfs(current);\n\t}\n\ttrace_android_vh_do_fsync(fsync_start);   \u003c---- add here \n\treturn ret;\n}\nThis hook is added when sync data finished.so could you please\ntell us why we can\u0027t do anything within the kernel. our purpose is saveing current task info and calculating how many and how much times it take, we can mark it as \"fsync taskes\" , trigger our optimization actions, and observe them if it occurs exception",
+      "parentUuid": "2b5f99a8_38c17ec8",
+      "revId": "bbc2514506cbed0be9a64097218a979de614fa68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
