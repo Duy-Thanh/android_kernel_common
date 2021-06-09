@@ -22,6 +22,8 @@ typedef struct raw_spinlock {
 #ifdef CONFIG_DEBUG_SPINLOCK
 	unsigned int magic, owner_cpu;
 	void *owner;
+#define RECURSION_STACK_DEBUG_DEPTH    8
+	unsigned long backtrace[RECURSION_STACK_DEBUG_DEPTH];
 #endif
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
 	struct lockdep_map dep_map;

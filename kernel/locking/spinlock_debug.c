@@ -12,6 +12,7 @@
 #include <linux/debug_locks.h>
 #include <linux/delay.h>
 #include <linux/export.h>
+#include <linux/stacktrace.h>
 
 void __raw_spin_lock_init(raw_spinlock_t *lock, const char *name,
 			  struct lock_class_key *key, short inner)
@@ -88,6 +89,8 @@ debug_spin_lock_before(raw_spinlock_t *lock)
 
 static inline void debug_spin_lock_after(raw_spinlock_t *lock)
 {
+	stack_trace_save(lock->backtrace, ARRAY_SIZE(lock->backtrace), 1);
+
 	WRITE_ONCE(lock->owner_cpu, raw_smp_processor_id());
 	WRITE_ONCE(lock->owner, current);
 }
