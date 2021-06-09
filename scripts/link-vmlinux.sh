@@ -289,6 +289,8 @@ if is_enabled CONFIG_KALLSYMS; then
 	if ! cmp -s System.map "${kallsyms_sysmap}"; then
 		echo >&2 Inconsistent kallsyms data
 		echo >&2 'Try "make KALLSYMS_EXTRA_PASS=1" as a workaround'
+		echo >&2 System.map differences:
+		diff -u System.map "${kallsyms_sysmap}" >&2
 		exit 1
 	fi
 fi
