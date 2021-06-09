@@ -4129,12 +4129,14 @@
       <elf-symbol name='__num_online_cpus' size='4' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc60d0620'/>
       <elf-symbol name='__per_cpu_offset' size='256' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x280f9f14'/>
       <elf-symbol name='__stack_chk_guard' size='8' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8f678b07'/>
+      <elf-symbol name='__tracepoint_clock_set_rate' size='48' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe86cdf49'/>
       <elf-symbol name='__tracepoint_dma_fence_emit' size='48' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x349ac524'/>
       <elf-symbol name='__tracepoint_gpu_mem_total' size='48' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfbeb6f2f'/>
       <elf-symbol name='__tracepoint_xdp_exception' size='48' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x666b755a'/>
       <elf-symbol name='_ctype' size='256' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x11089ac7'/>
       <elf-symbol name='_totalram_pages' size='8' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x944375db'/>
       <elf-symbol name='amba_bustype' size='208' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x21206f97'/>
+      <elf-symbol name='arch_timer_read_counter' size='8' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x75fb9062'/>
       <elf-symbol name='arm64_const_caps_ready' size='16' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x14b89635'/>
       <elf-symbol name='arp_tbl' size='552' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x65bb6642'/>
       <elf-symbol name='balloon_aops' size='200' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd5345125'/>
@@ -23362,7 +23364,7 @@
           <var-decl name='' type-id='7a56104f' visibility='default' filepath='include/linux/perf_event.h' line='160' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__1' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/net/netns/generic.h' line='29' column='1' id='1a99b3b8'>
+      <union-decl name='__anonymous_union__18' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/net/netns/generic.h' line='29' column='1' id='1a99b3b8'>
         <data-member access='public'>
           <var-decl name='s' type-id='88d8a388' visibility='default' filepath='include/net/netns/generic.h' line='33' column='1'/>
         </data-member>
@@ -23430,7 +23432,7 @@
           <var-decl name='_addr_pkey' type-id='8a41173c' visibility='default' filepath='include/uapi/asm-generic/siginfo.h' line='93' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__18' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/net/sock.h' line='412' column='1' id='fc714247'>
+      <union-decl name='__anonymous_union__17' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/net/sock.h' line='412' column='1' id='fc714247'>
         <data-member access='public'>
           <var-decl name='sk_send_head' type-id='0fbf3cfd' visibility='default' filepath='include/net/sock.h' line='413' column='1'/>
         </data-member>
@@ -23438,7 +23440,7 @@
           <var-decl name='tcp_rtx_queue' type-id='dec44472' visibility='default' filepath='include/net/sock.h' line='414' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__17' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/net/sock.h' line='396' column='1' id='a29f8367'>
+      <union-decl name='__anonymous_union__16' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/net/sock.h' line='396' column='1' id='a29f8367'>
         <data-member access='public'>
           <var-decl name='sk_wq' type-id='99f34ac1' visibility='default' filepath='include/net/sock.h' line='397' column='1'/>
         </data-member>
@@ -26074,7 +26076,7 @@
           <var-decl name='skc_portaddr_node' type-id='03a4a074' visibility='default' filepath='include/net/sock.h' line='181' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__14' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/net/sock.h' line='210' column='1' id='38f5bda8'>
+      <union-decl name='__anonymous_union__5' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/net/sock.h' line='210' column='1' id='38f5bda8'>
         <data-member access='public'>
           <var-decl name='skc_node' type-id='03a4a074' visibility='default' filepath='include/net/sock.h' line='211' column='1'/>
         </data-member>
@@ -26082,7 +26084,7 @@
           <var-decl name='skc_nulls_node' type-id='5bd248e7' visibility='default' filepath='include/net/sock.h' line='212' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__15' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/net/sock.h' line='218' column='1' id='9e121764'>
+      <union-decl name='__anonymous_union__6' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/net/sock.h' line='218' column='1' id='9e121764'>
         <data-member access='public'>
           <var-decl name='skc_incoming_cpu' type-id='95e97e5e' visibility='default' filepath='include/net/sock.h' line='219' column='1'/>
         </data-member>
@@ -26117,7 +26119,7 @@
           <var-decl name='ip_defrag_offset' type-id='95e97e5e' visibility='default' filepath='include/linux/skbuff.h' line='710' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__16' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/net/sock.h' line='227' column='1' id='5547e6b1'>
+      <union-decl name='__anonymous_union__7' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/net/sock.h' line='227' column='1' id='5547e6b1'>
         <data-member access='public'>
           <var-decl name='skc_rxhash' type-id='19c2251e' visibility='default' filepath='include/net/sock.h' line='228' column='1'/>
         </data-member>
@@ -26144,7 +26146,7 @@
           <var-decl name='skc_u16hashes' type-id='810b4a17' visibility='default' filepath='include/net/sock.h' line='161' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__13' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/net/sock.h' line='198' column='1' id='56935795'>
+      <union-decl name='__anonymous_union__4' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/net/sock.h' line='198' column='1' id='56935795'>
         <data-member access='public'>
           <var-decl name='skc_flags' type-id='7359adad' visibility='default' filepath='include/net/sock.h' line='199' column='1'/>
         </data-member>
@@ -28580,7 +28582,7 @@
           <var-decl name='destroy_next' type-id='994d9d61' visibility='default' filepath='include/linux/fsnotify_backend.h' line='302' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__12' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/net/sock.h' line='1185' column='1' id='adf5bf47'>
+      <union-decl name='__anonymous_union__16' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/net/sock.h' line='1185' column='1' id='adf5bf47'>
         <data-member access='public'>
           <var-decl name='hashinfo' type-id='d7a1e3c2' visibility='default' filepath='include/net/sock.h' line='1186' column='1'/>
         </data-member>
@@ -31890,7 +31892,7 @@
           <var-decl name='in6' type-id='f6ed712a' visibility='default' filepath='include/uapi/linux/xfrm.h' line='18' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__1' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='2488' column='1' id='0532d6f6'>
+      <union-decl name='__anonymous_union__10' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='2488' column='1' id='0532d6f6'>
         <data-member access='public'>
           <var-decl name='band_pref' type-id='3eaa0294' visibility='default' filepath='include/net/cfg80211.h' line='2489' column='1'/>
         </data-member>
@@ -51616,10 +51618,6 @@
         <parameter type-id='7d0bc0eb' name='clk' filepath='drivers/clk/clk.c' line='863' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='clk_get_rate' mangled-name='clk_get_rate' filepath='drivers/clk/clk.c' line='1671' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='clk_get_rate'>
-        <parameter type-id='7d0bc0eb' name='clk' filepath='drivers/clk/clk.c' line='1671' column='1'/>
-        <return type-id='7359adad'/>
-      </function-decl>
       <function-decl name='clk_set_rate' mangled-name='clk_set_rate' filepath='drivers/clk/clk.c' line='2283' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='clk_set_rate'>
         <parameter type-id='7d0bc0eb' name='clk' filepath='drivers/clk/clk.c' line='2283' column='1'/>
         <parameter type-id='7359adad' name='rate' filepath='drivers/clk/clk.c' line='2283' column='1'/>
@@ -51784,6 +51782,10 @@
       </function-decl>
       <function-decl name='clk_hw_get_flags' mangled-name='clk_hw_get_flags' filepath='drivers/clk/clk.c' line='511' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='clk_hw_get_flags'>
         <parameter type-id='9e6d4b4e' name='hw' filepath='drivers/clk/clk.c' line='511' column='1'/>
+        <return type-id='7359adad'/>
+      </function-decl>
+      <function-decl name='clk_get_rate' mangled-name='clk_get_rate' filepath='drivers/clk/clk.c' line='1671' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='clk_get_rate'>
+        <parameter type-id='7d0bc0eb' name='clk' filepath='drivers/clk/clk.c' line='1671' column='1'/>
         <return type-id='7359adad'/>
       </function-decl>
       <function-decl name='clk_get_parent' mangled-name='clk_get_parent' filepath='drivers/clk/clk.c' line='2463' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='clk_get_parent'>
@@ -51961,6 +51963,7 @@
       <qualified-type-def type-id='a3e4c395' const='yes' id='8bd3aaa6'/>
       <pointer-type-def type-id='8bd3aaa6' size-in-bits='64' id='aa357a64'/>
       <pointer-type-def type-id='428b7011' size-in-bits='64' id='d91eb3a5'/>
+      <var-decl name='arch_timer_read_counter' type-id='0e70db3e' mangled-name='arch_timer_read_counter' visibility='default' filepath='drivers/clocksource/arm_arch_timer.c' line='175' column='1' elf-symbol-id='arch_timer_read_counter'/>
       <var-decl name='timer_unstable_counter_workaround' type-id='aa357a64' mangled-name='timer_unstable_counter_workaround' visibility='default' filepath='drivers/clocksource/arm_arch_timer.c' line='379' column='1' elf-symbol-id='timer_unstable_counter_workaround'/>
       <function-type size-in-bits='64' id='428b7011'>
         <return type-id='19c2251e'/>
@@ -92944,7 +92947,7 @@
     </abi-instr>
     <abi-instr address-size='64' path='drivers/net/ppp/ppp_generic.c' language='LANG_C89'>
       <type-decl name='double' size-in-bits='64' id='a0eb0f08'/>
-      <union-decl name='__anonymous_union__1' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/net/netns/generic.h' line='29' column='1' id='1a99b3b8'>
+      <union-decl name='__anonymous_union__18' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/net/netns/generic.h' line='29' column='1' id='1a99b3b8'>
         <data-member access='public'>
           <var-decl name='s' type-id='88d8a388' visibility='default' filepath='include/net/netns/generic.h' line='33' column='1'/>
         </data-member>
@@ -147540,6 +147543,9 @@
         <return type-id='48b5725f'/>
       </function-decl>
     </abi-instr>
+    <abi-instr address-size='64' path='kernel/trace/power-traces.c' language='LANG_C89'>
+      <var-decl name='__tracepoint_clock_set_rate' type-id='4ca0c298' mangled-name='__tracepoint_clock_set_rate' visibility='default' filepath='include/trace/events/power.h' line='322' column='1' elf-symbol-id='__tracepoint_clock_set_rate'/>
+    </abi-instr>
     <abi-instr address-size='64' path='kernel/trace/trace.c' language='LANG_C89'>
       <class-decl name='prog_entry' is-struct='yes' visibility='default' is-declaration-only='yes' id='da952956'/>
       <array-type-def dimensions='1' type-id='19c2251e' size-in-bits='infinite' id='c165e8b9'>
@@ -153083,22 +153089,22 @@
       </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='mm/shmem.c' language='LANG_C89'>
-      <function-decl name='shmem_read_mapping_page_gfp' mangled-name='shmem_read_mapping_page_gfp' filepath='mm/shmem.c' line='4211' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='shmem_read_mapping_page_gfp'>
-        <parameter type-id='f57039f0' name='mapping' filepath='mm/shmem.c' line='4211' column='1'/>
-        <parameter type-id='7359adad' name='index' filepath='mm/shmem.c' line='4212' column='1'/>
-        <parameter type-id='3eb7c31c' name='gfp' filepath='mm/shmem.c' line='4212' column='1'/>
+      <function-decl name='shmem_read_mapping_page_gfp' mangled-name='shmem_read_mapping_page_gfp' filepath='mm/shmem.c' line='4170' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='shmem_read_mapping_page_gfp'>
+        <parameter type-id='f57039f0' name='mapping' filepath='mm/shmem.c' line='4170' column='1'/>
+        <parameter type-id='7359adad' name='index' filepath='mm/shmem.c' line='4171' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='mm/shmem.c' line='4171' column='1'/>
         <return type-id='02f11ed4'/>
       </function-decl>
-      <function-decl name='shmem_truncate_range' mangled-name='shmem_truncate_range' filepath='mm/shmem.c' line='989' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='shmem_truncate_range'>
-        <parameter type-id='7e666abe' name='inode' filepath='mm/shmem.c' line='989' column='1'/>
-        <parameter type-id='69bf7bee' name='lstart' filepath='mm/shmem.c' line='989' column='1'/>
-        <parameter type-id='69bf7bee' name='lend' filepath='mm/shmem.c' line='989' column='1'/>
+      <function-decl name='shmem_truncate_range' mangled-name='shmem_truncate_range' filepath='mm/shmem.c' line='990' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='shmem_truncate_range'>
+        <parameter type-id='7e666abe' name='inode' filepath='mm/shmem.c' line='990' column='1'/>
+        <parameter type-id='69bf7bee' name='lstart' filepath='mm/shmem.c' line='990' column='1'/>
+        <parameter type-id='69bf7bee' name='lend' filepath='mm/shmem.c' line='990' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='shmem_file_setup' mangled-name='shmem_file_setup' filepath='mm/shmem.c' line='4143' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='shmem_file_setup'>
-        <parameter type-id='80f4b756' name='name' filepath='mm/shmem.c' line='4143' column='1'/>
-        <parameter type-id='69bf7bee' name='size' filepath='mm/shmem.c' line='4143' column='1'/>
-        <parameter type-id='7359adad' name='flags' filepath='mm/shmem.c' line='4143' column='1'/>
+      <function-decl name='shmem_file_setup' mangled-name='shmem_file_setup' filepath='mm/shmem.c' line='4102' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='shmem_file_setup'>
+        <parameter type-id='80f4b756' name='name' filepath='mm/shmem.c' line='4102' column='1'/>
+        <parameter type-id='69bf7bee' name='size' filepath='mm/shmem.c' line='4102' column='1'/>
+        <parameter type-id='7359adad' name='flags' filepath='mm/shmem.c' line='4102' column='1'/>
         <return type-id='77e79a4b'/>
       </function-decl>
     </abi-instr>
@@ -169169,7 +169175,7 @@
         <enumerator name='__NL80211_BSS_SELECT_ATTR_AFTER_LAST' value='4'/>
         <enumerator name='NL80211_BSS_SELECT_ATTR_MAX' value='3'/>
       </enum-decl>
-      <union-decl name='__anonymous_union__1' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='2488' column='1' id='0532d6f6'>
+      <union-decl name='__anonymous_union__10' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='2488' column='1' id='0532d6f6'>
         <data-member access='public'>
           <var-decl name='band_pref' type-id='3eaa0294' visibility='default' filepath='include/net/cfg80211.h' line='2489' column='1'/>
         </data-member>
