@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12145cc6_42d714bb",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 3
+      },
+      "lineNbr": 2480,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-09T06:18:20Z",
+      "side": 1,
+      "message": "modify the symbol list in a separate patch at the end of the series please do not mix it in.",
+      "range": {
+        "startLine": 2480,
+        "startChar": 0,
+        "endLine": 2480,
+        "endChar": 37
+      },
+      "revId": "2dc5f1e21a760cb86e20c628e2d11e880818b765",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3b0b802_0d5acf1f",
+        "filename": "drivers/cpuidle/cpuidle-psci.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-09T06:18:20Z",
+      "side": 1,
+      "message": "this is only for one specific driver, please name it as such, or move the hook to the core where this is called so it works for all cpu idle drivers.",
+      "range": {
+        "startLine": 71,
+        "startChar": 1,
+        "endLine": 71,
+        "endChar": 30
+      },
+      "revId": "2dc5f1e21a760cb86e20c628e2d11e880818b765",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
