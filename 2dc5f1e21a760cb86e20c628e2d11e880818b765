@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff33af6a_b638a459",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 3
+      },
+      "lineNbr": 2480,
+      "author": {
+        "id": 1582959
+      },
+      "writtenOn": "2021-06-09T12:27:39Z",
+      "side": 1,
+      "message": "ok moved to separate patch at the end.",
+      "parentUuid": "12145cc6_42d714bb",
+      "range": {
+        "startLine": 2480,
+        "startChar": 0,
+        "endLine": 2480,
+        "endChar": 37
+      },
+      "revId": "2dc5f1e21a760cb86e20c628e2d11e880818b765",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3b0b802_0d5acf1f",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-06-09T06:18:20Z",
       "side": 1,
       "message": "this is only for one specific driver, please name it as such, or move the hook to the core where this is called so it works for all cpu idle drivers.",
+      "range": {
+        "startLine": 71,
+        "startChar": 1,
+        "endLine": 71,
+        "endChar": 30
+      },
+      "revId": "2dc5f1e21a760cb86e20c628e2d11e880818b765",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dafc1ea6_88f1f5bb",
+        "filename": "drivers/cpuidle/cpuidle-psci.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1582959
+      },
+      "writtenOn": "2021-06-09T12:27:39Z",
+      "side": 1,
+      "message": "Renamed to trace_android_vh_cpuidle_psci_enter()/exit()",
+      "parentUuid": "a3b0b802_0d5acf1f",
       "range": {
         "startLine": 71,
         "startChar": 1,
