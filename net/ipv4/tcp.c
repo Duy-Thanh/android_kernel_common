@@ -281,6 +281,7 @@
 #include <asm/ioctls.h>
 #include <net/busy_poll.h>
 
+<<<<<<< HEAD   (53df1b ANDROID: vendor_hooks: Add hooks for account irqtime process)
 /* Track pending CMSGs. */
 enum {
 	TCP_CMSG_INQ = 1,
@@ -289,6 +290,11 @@ enum {
 
 DEFINE_PER_CPU(unsigned int, tcp_orphan_count);
 EXPORT_PER_CPU_SYMBOL_GPL(tcp_orphan_count);
+=======
+#include <trace/hooks/ipv4.h>
+struct percpu_counter tcp_orphan_count;
+EXPORT_SYMBOL_GPL(tcp_orphan_count);
+>>>>>>> CHANGE (81c816 ANDROID: vendor_hooks: Add hooks to tcp/udp send/recv msg fu)
 
 long sysctl_tcp_mem[3] __read_mostly;
 EXPORT_SYMBOL(sysctl_tcp_mem);
@@ -1209,6 +1215,7 @@ int tcp_sendmsg_locked(struct sock *sk, struct msghdr *msg, size_t size)
 	bool zc = false;
 	long timeo;
 
+	trace_android_rvh_tcp_sendmsg_locked(sk, size);
 	flags = msg->msg_flags;
 
 	if (flags & MSG_ZEROCOPY && size && sock_flag(sk, SOCK_ZEROCOPY)) {
@@ -2309,6 +2316,21 @@ static int tcp_recvmsg_locked(struct sock *sk, struct msghdr *msg, size_t len,
 	long timeo;
 	struct sk_buff *skb, *last;
 	u32 urg_hole = 0;
+<<<<<<< HEAD   (53df1b ANDROID: vendor_hooks: Add hooks for account irqtime process)
+=======
+	struct scm_timestamping_internal tss;
+	int cmsg_flags;
+
+	if (unlikely(flags & MSG_ERRQUEUE))
+		return inet_recv_error(sk, msg, len, addr_len);
+	trace_android_rvh_tcp_recvmsg(sk);
+
+	if (sk_can_busy_loop(sk) && skb_queue_empty_lockless(&sk->sk_receive_queue) &&
+	    (sk->sk_state == TCP_ESTABLISHED))
+		sk_busy_loop(sk, nonblock);
+
+	lock_sock(sk);
+>>>>>>> CHANGE (81c816 ANDROID: vendor_hooks: Add hooks to tcp/udp send/recv msg fu)
 
 	err = -ENOTCONN;
 	if (sk->sk_state == TCP_LISTEN)
@@ -2516,6 +2538,7 @@ found_fin_ok:
 		break;
 	} while (len > 0);
 
+	trace_android_rvh_tcp_recvmsg_stat(sk, copied);
 	/* According to UNIX98, msg_name/msg_namelen are ignored
 	 * on connected socket. I was just happy when found this 8) --ANK
 	 */
