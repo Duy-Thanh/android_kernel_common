@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29c02b85_85aa42ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882484
+      },
+      "writtenOn": "2021-06-09T07:21:56Z",
+      "side": 1,
+      "message": "Hi\nI\u0027m adding ABI symbol list to support chip ST54H (STMicroelectronics )\nThe spi drvier of chip ST54H need call spi_set_cs_timing to set Ese-SPI CSN_CLK delay\n\nBelow is driver code:\n\nst54spi.c\n----------------\n1028 static int st54spi_probe(struct spi_device *spi)\n1029 {\n     ......\n1088 // this method exists since kernel 5.3\n1089 // it uses u8 parameter in kernel 5.4 (clk count) and spi_delay parameter in kernel 5.5 (clk_count fobidden)\n1090 // target 10us delay \u003d\u003d\u003e use CLK\u003d4MHz and value 31 (even if u8 data, some platforms limit to 0-31)\n1091 spi_set_cs_timing(spi, 31, 0, 0);\n     ......\n1132 }\n",
+      "revId": "6b6b8dc6fb2b09331565363b65e0b744f3188d25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
