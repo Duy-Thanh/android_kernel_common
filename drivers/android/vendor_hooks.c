@@ -48,6 +48,7 @@
 #include <trace/hooks/timer.h>
 #include <trace/hooks/topology.h>
 #include <trace/hooks/hung_task.h>
+#include <trace/hooks/ipv4.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -143,3 +144,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gic_set_affinity);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gic_v3_affinity_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_uninterrupt_tasks);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_uninterrupt_tasks_done);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tcp_sendmsg_locked);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tcp_recvmsg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_udp_sendmsg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_udp_recvmsg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tcp_recvmsg_stat);
