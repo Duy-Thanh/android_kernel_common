@@ -16,6 +16,23 @@
       "message": "Not 100% sure of this one, but assuming it\u0027s needed not only in mainline and 13-5.10",
       "revId": "36ab8cea47b0d4a3c5067577430c147a903b5261",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9403a9cc_8f00aab9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-06-09T18:07:01Z",
+      "side": 1,
+      "message": "ah sorry, this one is obvious, it\u0027s https://android-review.googlesource.com/c/kernel/common/+/1730209 which is for 12-5.10 and hasn\u0027t been merged yet.",
+      "revId": "36ab8cea47b0d4a3c5067577430c147a903b5261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
