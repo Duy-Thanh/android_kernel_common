@@ -22,6 +22,30 @@
       },
       "revId": "9ca1fae83df3f61e10041a37397be330d7ef4183",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "549d0af8_248d2858",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-09T07:25:27Z",
+      "side": 1,
+      "message": "Ok, that\u0027s fine, but watch out, it might be removed in newer kernel versions in the future.",
+      "parentUuid": "99dde2f9_cba6b5da",
+      "range": {
+        "startLine": 206,
+        "startChar": 2,
+        "endLine": 206,
+        "endChar": 19
+      },
+      "revId": "9ca1fae83df3f61e10041a37397be330d7ef4183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
