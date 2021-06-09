@@ -16,12 +16,14 @@
 #endif
 
 #include <linux/lockdep_types.h>
+#include <linux/stackdepot.h>
 
 typedef struct raw_spinlock {
 	arch_spinlock_t raw_lock;
 #ifdef CONFIG_DEBUG_SPINLOCK
 	unsigned int magic, owner_cpu;
 	void *owner;
+	depot_stack_handle_t backtrace;
 #endif
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
 	struct lockdep_map dep_map;

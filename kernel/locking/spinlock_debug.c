@@ -12,6 +12,8 @@
 #include <linux/debug_locks.h>
 #include <linux/delay.h>
 #include <linux/export.h>
+#include <linux/stacktrace.h>
+#include <linux/gfp.h>
 
 void __raw_spin_lock_init(raw_spinlock_t *lock, const char *name,
 			  struct lock_class_key *key, short inner)
@@ -52,6 +54,8 @@ EXPORT_SYMBOL(__rwlock_init);
 static void spin_dump(raw_spinlock_t *lock, const char *msg)
 {
 	struct task_struct *owner = READ_ONCE(lock->owner);
+	unsigned long *stack_entries;
+	unsigned int nr_entries;
 
 	if (owner == SPINLOCK_OWNER_INIT)
 		owner = NULL;
@@ -65,6 +69,11 @@ static void spin_dump(raw_spinlock_t *lock, const char *msg)
 		owner ? task_pid_nr(owner) : -1,
 		READ_ONCE(lock->owner_cpu));
 	dump_stack();
+	if (strncmp(msg, "recursion", 9)) {
+		printk(KERN_EMERG "Stack at lock acquisition: \n");
+		nr_entries = stack_depot_fetch(lock->backtrace, &stack_entries);
+		stack_trace_print(stack_entries, nr_entries, 0);
+	}
 }
 
 static void spin_bug(raw_spinlock_t *lock, const char *msg)
@@ -77,6 +86,7 @@ static void spin_bug(raw_spinlock_t *lock, const char *msg)
 
 #define SPIN_BUG_ON(cond, lock, msg) if (unlikely(cond)) spin_bug(lock, msg)
 
+#define RECURSION_STACK_DEBUG_DEPTH	8
 static inline void
 debug_spin_lock_before(raw_spinlock_t *lock)
 {
@@ -88,6 +98,12 @@ debug_spin_lock_before(raw_spinlock_t *lock)
 
 static inline void debug_spin_lock_after(raw_spinlock_t *lock)
 {
+	unsigned long stack_entries[RECURSION_STACK_DEBUG_DEPTH];
+	unsigned int n;
+
+	n = stack_trace_save(stack_entries, RECURSION_STACK_DEBUG_DEPTH, 0);
+	lock->backtrace = stack_depot_save(stack_entries, n, GFP_KERNEL);
+
 	WRITE_ONCE(lock->owner_cpu, raw_smp_processor_id());
 	WRITE_ONCE(lock->owner, current);
 }
@@ -101,6 +117,7 @@ static inline void debug_spin_unlock(raw_spinlock_t *lock)
 							lock, "wrong CPU");
 	WRITE_ONCE(lock->owner, SPINLOCK_OWNER_INIT);
 	WRITE_ONCE(lock->owner_cpu, -1);
+	WRITE_ONCE(lock->backtrace, 0);
 }
 
 /*
