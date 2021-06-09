@@ -34,6 +34,8 @@
 #define MAX_IDLETIMER_LABEL_SIZE 28
 #define XT_IDLETIMER_ALARM 0x01
 
+#define NLMSG_MAX_SIZE 64
+
 struct idletimer_tg_info {
 	__u32 timeout;
 
