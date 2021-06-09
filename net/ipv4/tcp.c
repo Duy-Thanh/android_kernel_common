@@ -279,6 +279,7 @@
 #include <linux/uaccess.h>
 #include <asm/ioctls.h>
 #include <net/busy_poll.h>
+#include <trace/hooks/net.h>
 
 /* Track pending CMSGs. */
 enum {
@@ -1047,6 +1048,7 @@ int tcp_sendmsg_locked(struct sock *sk, struct msghdr *msg, size_t size)
 	int zc = 0;
 	long timeo;
 
+	trace_android_rvh_tcp_sendmsg_locked(sk, size);
 	flags = msg->msg_flags;
 
 	if ((flags & MSG_ZEROCOPY) && size) {
@@ -1337,6 +1339,7 @@ int tcp_sendmsg(struct sock *sk, struct msghdr *msg, size_t size)
 {
 	int ret;
 
+	trace_android_rvh_tcp_sendmsg(sk, msg, size);
 	lock_sock(sk);
 	ret = tcp_sendmsg_locked(sk, msg, size);
 	release_sock(sk);
@@ -2541,6 +2544,7 @@ found_fin_ok:
 		break;
 	} while (len > 0);
 
+	trace_android_rvh_tcp_recvmsg_stat(sk, copied);
 	/* According to UNIX98, msg_name/msg_namelen are ignored
 	 * on connected socket. I was just happy when found this 8) --ANK
 	 */
@@ -2589,6 +2593,9 @@ int tcp_recvmsg(struct sock *sk, struct msghdr *msg, size_t len, int flags,
 					 sizeof(msg->msg_inq), &msg->msg_inq);
 		}
 	}
+
+	trace_android_rvh_tcp_recvmsg(sk, msg, len, flags, addr_len);
+
 	return ret;
 }
 EXPORT_SYMBOL(tcp_recvmsg);
