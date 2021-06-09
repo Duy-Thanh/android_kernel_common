@@ -46,6 +46,30 @@
       },
       "revId": "250c161d0758f4b288d166cf180d82d5c374caa2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a49e2dcc_93fd28cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1746283
+      },
+      "writtenOn": "2021-06-09T11:16:45Z",
+      "side": 1,
+      "message": "Thanks for the reivew, next time I will create the issue first and then upload it to gerrit.",
+      "parentUuid": "e01ef33e_fbf7202d",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 6
+      },
+      "revId": "250c161d0758f4b288d166cf180d82d5c374caa2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
