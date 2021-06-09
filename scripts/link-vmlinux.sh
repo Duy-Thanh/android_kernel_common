@@ -126,7 +126,21 @@ kallsyms()
 	${CC} ${NOSTDINC_FLAGS} ${LINUXINCLUDE} ${KBUILD_CPPFLAGS} \
 	      ${KBUILD_AFLAGS} ${KBUILD_AFLAGS_KERNEL} -c -o "${2}.o" "${2}.S"
 
+	kallsymso_prev=${kallsymso:-}
 	kallsymso=${2}.o
+}
+
+kallsyms_diff()
+{
+	if [ "${quiet}" != "silent_" ]; then
+		local ksym_prev="${kallsymso_prev}.sym"
+		local ksym="${kallsymso}.sym"
+
+		echo "Symbol file differences:"
+		objdump --syms "${kallsymso_prev}" > "${ksym_prev}"
+		objdump --syms "${kallsymso}" > "${ksym}"
+		diff -I ".tmp_vmlinux.kallsyms" -u "${ksym_prev}" "${ksym}"
+	fi
 }
 
 # Perform kallsyms for the given temporary vmlinux.
@@ -258,6 +272,14 @@ if is_enabled CONFIG_KALLSYMS; then
 	if [ $size1 -ne $size2 ] || [ -n "${KALLSYMS_EXTRA_PASS}" ]; then
 		vmlinux_link .tmp_vmlinux3
 		sysmap_and_kallsyms .tmp_vmlinux3
+		size3=$(${CONFIG_SHELL} \
+			"${srctree}/scripts/file-size.sh" ${kallsymso})
+
+		# Display symbol file differences if they will result in a build
+		# failure
+		if [ $size2 -ne $size3 ]; then
+			kallsyms_diff
+		fi
 	fi
 fi
 
@@ -289,6 +311,8 @@ if is_enabled CONFIG_KALLSYMS; then
 	if ! cmp -s System.map "${kallsyms_sysmap}"; then
 		echo >&2 Inconsistent kallsyms data
 		echo >&2 'Try "make KALLSYMS_EXTRA_PASS=1" as a workaround'
+		echo >&2 "${kallsyms_sysmap} / System.map differences:"
+		diff -u "${kallsyms_sysmap}" System.map >&2
 		exit 1
 	fi
 fi
