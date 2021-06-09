@@ -93,6 +93,30 @@
       },
       "revId": "2dc5f1e21a760cb86e20c628e2d11e880818b765",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63cc2384_81d1f742",
+        "filename": "drivers/cpuidle/cpuidle-psci.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1582959
+      },
+      "writtenOn": "2021-06-09T13:46:40Z",
+      "side": 1,
+      "message": "Marking it resolved as latest patch-set addresses.",
+      "parentUuid": "dafc1ea6_88f1f5bb",
+      "range": {
+        "startLine": 71,
+        "startChar": 1,
+        "endLine": 71,
+        "endChar": 30
+      },
+      "revId": "2dc5f1e21a760cb86e20c628e2d11e880818b765",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
