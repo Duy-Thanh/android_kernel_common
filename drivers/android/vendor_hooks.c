@@ -43,9 +43,15 @@
 #include <trace/hooks/futex.h>
 #include <trace/hooks/fips140.h>
 #include <trace/hooks/dmabuf.h>
+<<<<<<< HEAD   (91d8cc ANDROID: vendor_hooks: Add parameter to android_vh_wake_up_s)
 #include <trace/hooks/timer.h>
 #include <trace/hooks/topology.h>
 #include <trace/hooks/hung_task.h>
+=======
+#include <trace/hooks/mmc.h>
+#include <trace/hooks/evdev.h>
+#include <trace/hooks/ipv4.h>
+>>>>>>> CHANGE (47fc7f ANDROID: vendor_hooks: Add hooks to tcp/udp send/recv msg fu)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -130,6 +136,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_finished);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_rwsem_list_add);
+<<<<<<< HEAD   (91d8cc ANDROID: vendor_hooks: Add parameter to android_vh_wake_up_s)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_futex_plist_add);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sha256);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_aes_expandkey);
@@ -138,3 +145,39 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_aes_decrypt);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_timer_calc_index);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_uninterrupt_tasks);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_uninterrupt_tasks_done);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_power_cap);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tk_based_time_sync);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kswapd_per_node);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_audio_usb_offload_vendor_set);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_audio_usb_offload_ep_action);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_audio_usb_offload_synctype);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_audio_usb_offload_connect);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_audio_usb_offload_disconnect);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_atomic_remove_fb);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_drm_atomic_check_modeset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_get_thermal_zone_device);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psci_tos_resident_on);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psci_cpu_suspend);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_new_device_added);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_force_compatible_pre);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_force_compatible_post);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_regmap_update);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_mutex_list_add);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_unlock_slowpath);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_buf_release);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pass_input_event);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_check_status);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_alloc_rqs);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_rq_ctx_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmap_region);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_unmap_one);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_node_memcgs);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_sdio_pm_flag_set);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_account_task_time);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tcp_sendmsg_locked);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tcp_recvmsg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_udp_sendmsg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_udp_recvmsg);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tcp_recvmsg_stat);
+>>>>>>> CHANGE (47fc7f ANDROID: vendor_hooks: Add hooks to tcp/udp send/recv msg fu)
