@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99dde2f9_cba6b5da",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-09T07:13:46Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be in sorted order?\n\nAnd what driver uses this?  It\u0027s not used by anything else in the kernel that I can see.",
+      "range": {
+        "startLine": 206,
+        "startChar": 2,
+        "endLine": 206,
+        "endChar": 19
+      },
+      "revId": "9ca1fae83df3f61e10041a37397be330d7ef4183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
