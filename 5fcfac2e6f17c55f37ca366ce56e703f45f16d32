@@ -52,6 +52,24 @@
       "parentUuid": "9fb90f34_c766a698",
       "revId": "5fcfac2e6f17c55f37ca366ce56e703f45f16d32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73a96459_64a84235",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879700
+      },
+      "writtenOn": "2021-06-10T08:32:26Z",
+      "side": 1,
+      "message": "our power debug system, needs record timer owners in runtime. and then make a  deep analysis",
+      "parentUuid": "d030753a_9fa85089",
+      "revId": "5fcfac2e6f17c55f37ca366ce56e703f45f16d32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
