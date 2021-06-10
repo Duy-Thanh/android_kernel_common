@@ -318,3 +318,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_force_compatible_post);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_uid);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_user);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_balance_anon_file_reclaim);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_down);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_finished);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_wake_task);
