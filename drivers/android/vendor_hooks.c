@@ -61,6 +61,7 @@
 #include <trace/hooks/v4l2mc.h>
 #include <trace/hooks/scmi.h>
 #include <trace/hooks/user.h>
+#include <trace/hooks/power.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -317,4 +318,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_force_compatible_pre);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_force_compatible_post);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_uid);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_user);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freq_qos_add_request);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freq_qos_update_request);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freq_qos_remove_request);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_balance_anon_file_reclaim);
