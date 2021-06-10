@@ -16,6 +16,23 @@
       "message": "give me a chance to catch up with submissions upstream and I will merge it there, and then here as well...",
       "revId": "da2b7214083a129b8ba35b34691dc1f15f5a4ef0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01cb735b_a0be235f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-10T18:07:13Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common/+/1733662/1 replaces this now that the commit is upstream.",
+      "revId": "da2b7214083a129b8ba35b34691dc1f15f5a4ef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
