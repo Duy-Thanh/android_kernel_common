@@ -16,6 +16,24 @@
       "message": "Shouldn\u0027t the ufs-specific driver for this device handle this type of interaction (i.e. reaching out to the host OS)?\n\nThis feels odd, the UFS core shouldn\u0027t care about this, it\u0027s a device-specific thing.",
       "revId": "fa0198c410d70ada681747ddca029407033b559a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b84848a8_b8577ba5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2021-06-10T13:46:43Z",
+      "side": 1,
+      "message": "The interrupt of the ufs is registered by ufshcd.c and there is no room to handle it from vender ufs driver. As you probably know, all the calls will be started from ufshcd core driver and it will be delivered to vendor ufs driver through ops callbacks. \nI also felt it\u0027s odd but ufs vendor drivers are tightly coupled with the ufshcd driver. So, I should add these vendor hooks which can\u0027t be handled via the ops callbacks.",
+      "parentUuid": "0e383235_ecbc7126",
+      "revId": "fa0198c410d70ada681747ddca029407033b559a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
