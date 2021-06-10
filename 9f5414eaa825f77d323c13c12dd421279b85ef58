@@ -16,6 +16,24 @@
       "message": "It would be good to add another reminder here that the HMAC is done with a public key stored in the module itself, as required by FIPS 140-2, and thus only provides integrity-only protection.\n\nOtherwise this doesn\u0027t make sense to anyone who understands what HMAC is supposed to be used for.",
       "revId": "9f5414eaa825f77d323c13c12dd421279b85ef58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b55ba6ac_4e80ba41",
+        "filename": "crypto/fips140_gen_hmac.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-06-10T20:06:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "930bcd5e_9d617c32",
+      "revId": "9f5414eaa825f77d323c13c12dd421279b85ef58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
