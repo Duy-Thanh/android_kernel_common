@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e383235_ecbc7126",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-10T10:28:01Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the ufs-specific driver for this device handle this type of interaction (i.e. reaching out to the host OS)?\n\nThis feels odd, the UFS core shouldn\u0027t care about this, it\u0027s a device-specific thing.",
+      "revId": "fa0198c410d70ada681747ddca029407033b559a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
