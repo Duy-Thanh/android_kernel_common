@@ -51,6 +51,24 @@
       "message": "How is the guest provided access to the controller in the host? The problem mentioned in the patch description should not occur when using PCI-passthrough.",
       "revId": "fa0198c410d70ada681747ddca029407033b559a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41270bb0_90e954f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-10T16:30:23Z",
+      "side": 1,
+      "message": "Like Bart said, this is very odd, PCI passthrough should handle all of this automatically for you, no need to poke into each and every individual Linux driver on your own.  Otherwise that\u0027s a horrible hypervisor you have there that really is NOT a hypervisor at all...",
+      "parentUuid": "b84848a8_b8577ba5",
+      "revId": "fa0198c410d70ada681747ddca029407033b559a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
