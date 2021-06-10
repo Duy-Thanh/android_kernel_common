@@ -70,6 +70,24 @@
       "parentUuid": "d030753a_9fa85089",
       "revId": "5fcfac2e6f17c55f37ca366ce56e703f45f16d32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91fcd80a_89609bb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-10T10:30:51Z",
+      "side": 1,
+      "message": "Why not do that in your power control driver?  That is the place for this type of logic, not in the core timer code.",
+      "parentUuid": "73a96459_64a84235",
+      "revId": "5fcfac2e6f17c55f37ca366ce56e703f45f16d32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
