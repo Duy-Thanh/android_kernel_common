@@ -4738,6 +4738,7 @@ int hugetlb_mcopy_atomic_pte(struct mm_struct *dst_mm,
 	struct page *page;
 	int writable;
 
+<<<<<<< HEAD   (12be94 ANDROID: GKI: Update abi_gki_aarch64_qcom list for shmem rec)
 	mapping = dst_vma->vm_file->f_mapping;
 	idx = vma_hugecache_offset(h, dst_vma, dst_addr);
 
@@ -4750,7 +4751,23 @@ int hugetlb_mcopy_atomic_pte(struct mm_struct *dst_mm,
 		ret = -ENOMEM;
 		page = alloc_huge_page(dst_vma, dst_addr, 0);
 		if (IS_ERR(page))
+=======
+	if (!*pagep) {
+		/* If a page already exists, then it's UFFDIO_COPY for
+		 * a non-missing case. Return -EEXIST.
+		 */
+		if (vm_shared &&
+		    hugetlbfs_pagecache_present(h, dst_vma, dst_addr)) {
+			ret = -EEXIST;
+>>>>>>> BRANCH (951358 Linux 5.10.43)
 			goto out;
+		}
+
+		page = alloc_huge_page(dst_vma, dst_addr, 0);
+		if (IS_ERR(page)) {
+			ret = -ENOMEM;
+			goto out;
+		}
 
 		ret = copy_huge_page_from_user(page,
 						(const void __user *) src_addr,
