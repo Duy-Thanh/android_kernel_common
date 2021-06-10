@@ -85,11 +85,16 @@ struct usbnet {
 #		define EVENT_LINK_CHANGE	11
 #		define EVENT_SET_RX_MODE	12
 #		define EVENT_NO_IP_ALIGN	13
+<<<<<<< HEAD   (e5f6b8 ANDROID: ABI: update symbols to unisoc whitelist for the nin)
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
+=======
+	u32			rx_speed;	/* in bps - NOT Mbps */
+	u32			tx_speed;	/* in bps - NOT Mbps */
+>>>>>>> BRANCH (3909e2 Linux 5.4.125)
 };
 
 static inline struct usb_driver *driver_of(struct usb_interface *intf)
