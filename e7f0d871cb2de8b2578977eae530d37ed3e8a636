@@ -22,6 +22,30 @@
       },
       "revId": "e7f0d871cb2de8b2578977eae530d37ed3e8a636",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "397cd171_b4dccc28",
+        "filename": "include/trace/hooks/cpuidle_psci.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1582959
+      },
+      "writtenOn": "2021-06-10T05:37:02Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "5047cd6f_ecfe01bc",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 29
+      },
+      "revId": "e7f0d871cb2de8b2578977eae530d37ed3e8a636",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
