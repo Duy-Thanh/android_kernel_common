@@ -239,6 +239,12 @@ static int neigh_forced_gc(struct neigh_table *tbl)
 
 			write_lock(&n->lock);
 			if ((n->nud_state == NUD_FAILED) ||
+<<<<<<< HEAD   (a0b0dc ANDROID: GKI: Preserve abi change in ieee80211_data_to_8023_)
+=======
+			    (n->nud_state == NUD_NOARP) ||
+			    (tbl->is_multicast &&
+			     tbl->is_multicast(n->primary_key)) ||
+>>>>>>> BRANCH (3909e2 Linux 5.4.125)
 			    time_after(tref, n->updated))
 				remove = true;
 			write_unlock(&n->lock);
