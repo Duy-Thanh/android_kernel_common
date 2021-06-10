@@ -29,6 +29,15 @@ DECLARE_HOOK(android_vh_alter_rwsem_list_add,
 DECLARE_HOOK(android_vh_rwsem_wake_finish,
 	TP_PROTO(struct rw_semaphore *sem),
 	TP_ARGS(sem));
+DECLARE_HOOK(android_vh_rwsem_down,
+	TP_PROTO(struct rw_semaphore *sem),
+	TP_ARGS(sem));
+DECLARE_HOOK(android_vh_rwsem_read_finished,
+	TP_PROTO(struct rw_semaphore *sem),
+	TP_ARGS(sem));
+DECLARE_HOOK(android_vh_rwsem_wake_task,
+	TP_PROTO(struct task_struct *tsk, struct rw_semaphore *sem),
+	TP_ARGS(tsk, sem));
 
 /* macro versions of hooks are no longer required */
 
