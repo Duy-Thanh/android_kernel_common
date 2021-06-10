@@ -406,6 +406,7 @@ static void rwsem_mark_wake(struct rw_semaphore *sem,
 
 	if (waiter->type == RWSEM_WAITING_FOR_WRITE) {
 		if (wake_type == RWSEM_WAKE_ANY) {
+			trace_android_vh_rwsem_wake_task(waiter->task, sem);
 			/*
 			 * Mark writer at the front of the queue for wakeup.
 			 * Until the task is actually later awoken later by
@@ -534,6 +535,7 @@ static void rwsem_mark_wake(struct rw_semaphore *sem,
 		 * to the task to wakeup.
 		 */
 		smp_store_release(&waiter->task, NULL);
+		trace_android_vh_rwsem_wake_task(tsk, sem);
 		/*
 		 * Ensure issuing the wakeup (either by us or someone else)
 		 * after setting the reader waiter to nil.
@@ -1514,6 +1516,7 @@ void __sched down_read(struct rw_semaphore *sem)
 	rwsem_acquire_read(&sem->dep_map, 0, 0, _RET_IP_);
 
 	LOCK_CONTENDED(sem, __down_read_trylock, __down_read);
+	trace_android_vh_rwsem_down(sem);
 }
 EXPORT_SYMBOL(down_read);
 
@@ -1540,6 +1543,7 @@ int __sched down_read_killable(struct rw_semaphore *sem)
 		rwsem_release(&sem->dep_map, _RET_IP_);
 		return -EINTR;
 	}
+	trace_android_vh_rwsem_down(sem);
 
 	return 0;
 }
@@ -1566,6 +1570,7 @@ void __sched down_write(struct rw_semaphore *sem)
 	might_sleep();
 	rwsem_acquire(&sem->dep_map, 0, 0, _RET_IP_);
 	LOCK_CONTENDED(sem, __down_write_trylock, __down_write);
+	trace_android_vh_rwsem_down(sem);
 }
 EXPORT_SYMBOL(down_write);
 
@@ -1582,6 +1587,7 @@ int __sched down_write_killable(struct rw_semaphore *sem)
 		rwsem_release(&sem->dep_map, _RET_IP_);
 		return -EINTR;
 	}
+	trace_android_vh_rwsem_down(sem);
 
 	return 0;
 }
@@ -1607,6 +1613,7 @@ EXPORT_SYMBOL(down_write_trylock);
 void up_read(struct rw_semaphore *sem)
 {
 	rwsem_release(&sem->dep_map, _RET_IP_);
+	trace_android_vh_rwsem_read_finished(sem);
 	__up_read(sem);
 }
 EXPORT_SYMBOL(up_read);
