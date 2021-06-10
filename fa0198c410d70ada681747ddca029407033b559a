@@ -34,6 +34,23 @@
       "parentUuid": "0e383235_ecbc7126",
       "revId": "fa0198c410d70ada681747ddca029407033b559a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f8e56fb_ca6acd42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-06-10T15:52:10Z",
+      "side": 1,
+      "message": "How is the guest provided access to the controller in the host? The problem mentioned in the patch description should not occur when using PCI-passthrough.",
+      "revId": "fa0198c410d70ada681747ddca029407033b559a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
