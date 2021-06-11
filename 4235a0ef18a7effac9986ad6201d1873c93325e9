@@ -124,6 +124,24 @@
       "parentUuid": "1f27fe1c_eb4ab526",
       "revId": "4235a0ef18a7effac9986ad6201d1873c93325e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5e00fac_55c8d0ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879700
+      },
+      "writtenOn": "2021-06-11T11:26:56Z",
+      "side": 1,
+      "message": "below is the old diff patch:\npls help check\n\ndiff --git a/fs/timerfd.c b/fs/timerfd.c\nindex 2dfd7105d2c8..770116592f3e 100644\n--- a/fs/timerfd.c\n+++ b/fs/timerfd.c\n@@ -239,12 +239,7 @@ static __poll_t timerfd_poll(struct file *file, poll_table *wait)\n \tif (ctx-\u003eticks)\n \t\tevents |\u003d EPOLLIN;\n \n-#ifdef CONFIG_POWER_MI\n-\tif (ctx-\u003eexpired \u0026\u0026 isalarm(ctx))\n-\tpower_info_record(\"[oem]%s: comm:%s pid:%d exp:%llu\\n\", __func__,\n-\t\tcurrent-\u003ecomm, current-\u003epid,\n-\t\tktime_to_ms(ctx-\u003et.alarm.node.expires));\n-#endif\n+\n \n \tspin_unlock_irqrestore(\u0026ctx-\u003ewqh.lock, flags);",
+      "parentUuid": "2c4d38ad_9fe631d0",
+      "revId": "4235a0ef18a7effac9986ad6201d1873c93325e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
