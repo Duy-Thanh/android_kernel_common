@@ -69,6 +69,24 @@
       "parentUuid": "b84848a8_b8577ba5",
       "revId": "fa0198c410d70ada681747ddca029407033b559a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fbcf4af_c5910b53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2021-06-11T09:00:44Z",
+      "side": 1,
+      "message": "Hi Bart,\nIn general, PV(Para-virtualized) concept will be used when each VMs are required to access a h/w resource simultaneously. Thus, we can use virtio-blk or virtio-scsi for storage access on guest VM. However, it makes overhead to Dom0 which will serve real h/w access. To overcome this limitation, our ufs host controller provides same concept as H/W implementation. See the simple layer of our H/W from https://lore.kernel.org/linux-scsi/20210527030901.88403-1-jjmin.jeong@samsung.com/.\nWith our H/W support, we can access a UFS device from multiple VMs like paththrough but some commands can\u0027t be handled such as reset.\n\nAs you probably know, UFS device is not connected via PCI so we cannot use such PCI IOV way.",
+      "parentUuid": "8f8e56fb_ca6acd42",
+      "revId": "fa0198c410d70ada681747ddca029407033b559a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
