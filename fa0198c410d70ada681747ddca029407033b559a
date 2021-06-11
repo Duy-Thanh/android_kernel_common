@@ -105,6 +105,24 @@
       "parentUuid": "41270bb0_90e954f3",
       "revId": "fa0198c410d70ada681747ddca029407033b559a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0df18e6d_b9b12082",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-11T09:41:25Z",
+      "side": 1,
+      "message": "If you need PV support, please use the existing in-kernel interface to support a PV system.  That should not require random hooks in individual drivers like this, but it should be either specific drivers for your platform (which you can do with a UFS driver here), or core kernel changes that happen at boot time based on your hardware platform.  Linux already supports both of these, no need for random UFS core hooks.",
+      "parentUuid": "1e1a91b6_b1295a68",
+      "revId": "fa0198c410d70ada681747ddca029407033b559a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
