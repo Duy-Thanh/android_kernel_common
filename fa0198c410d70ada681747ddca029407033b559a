@@ -123,6 +123,24 @@
       "parentUuid": "1e1a91b6_b1295a68",
       "revId": "fa0198c410d70ada681747ddca029407033b559a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0101b6c_22d4ce39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2021-06-11T10:11:12Z",
+      "side": 1,
+      "message": "Hi, We\u0027re considering to use PV driver but this makes we should drop the advantage of our chip. Unfortunately, we tried to decouple it from ufshcd driver but can\u0027t. We\u0027re also considering ufshcd.c codes into vendor driver but we\u0027ll do this  horrible things if we can\u0027t do anything. Anyway, thanks for the comment.",
+      "parentUuid": "0df18e6d_b9b12082",
+      "revId": "fa0198c410d70ada681747ddca029407033b559a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
