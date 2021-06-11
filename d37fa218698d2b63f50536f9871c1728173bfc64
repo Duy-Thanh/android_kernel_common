@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0477c2bb_01a8466c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-11T13:23:20Z",
+      "side": 1,
+      "message": "As discussed in chat, hooks that do nothing but \"look at how long a function took and print out a message\" are not ok.\n\nWe have perf tools and the correct hardware support and drivers in place for this to all work correctly from userspace, no kernel changes should be needed.",
+      "revId": "d37fa218698d2b63f50536f9871c1728173bfc64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4dce6f28_aa51ae5f",
