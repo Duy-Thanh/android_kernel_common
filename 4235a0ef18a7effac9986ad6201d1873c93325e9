@@ -142,6 +142,24 @@
       "parentUuid": "2c4d38ad_9fe631d0",
       "revId": "4235a0ef18a7effac9986ad6201d1873c93325e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42e705fd_127c6099",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-11T13:00:22Z",
+      "side": 1,
+      "message": "I do not see any \"power_info_record\" in the kernel tree, so I do not know what\nthis does.\n\nLooks like all you want to do is log a message?  If so, why?  What is this for\nand what tool consumes it?",
+      "parentUuid": "c5e00fac_55c8d0ca",
+      "revId": "4235a0ef18a7effac9986ad6201d1873c93325e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
