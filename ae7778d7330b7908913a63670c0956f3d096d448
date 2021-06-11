@@ -16,6 +16,24 @@
       "message": "Why not backport all of the proper changes correctly, instead of putting it all into one commit?\n\nThat way we can track this better over time.",
       "revId": "ae7778d7330b7908913a63670c0956f3d096d448",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b6c4799_578e4b70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2021-06-11T09:33:37Z",
+      "side": 1,
+      "message": "v4 was merged into android12-5.10 FROMLIST. v6 was ultimately merged upstream and now it is in Linus tree. This patch brings the difference between v6 that got merged upstream and v4 that was merged into android12-5.10.\n\nIt adds a bunch of static to some variables/functions, improves the returned error in 2 code paths and mainly fixes handling marking the buffer as truncated in the irq.\n\nSo this brings android12-5.10 inline with the merged upstream code. Any future changes should be fixes pushed upstream and will be cherry-picked individually properly.\n\nNote the first three patches in the series are cherry-picked properly as they were new patches. But this one just sums misc changes that addressed review comments on v4 and v5 on LKML discussions.\n\nHappy to split this; but not sure there\u0027s value in that IMO.",
+      "parentUuid": "402842a8_8b509145",
+      "revId": "ae7778d7330b7908913a63670c0956f3d096d448",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
