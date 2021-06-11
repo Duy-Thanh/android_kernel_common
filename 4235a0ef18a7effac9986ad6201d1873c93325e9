@@ -88,6 +88,24 @@
       "parentUuid": "071938e0_8cd61a5a",
       "revId": "4235a0ef18a7effac9986ad6201d1873c93325e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f27fe1c_eb4ab526",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879700
+      },
+      "writtenOn": "2021-06-11T09:54:33Z",
+      "side": 1,
+      "message": "maybe there is a mistake, power debug sys  is not power management drives, it gets more system infos to deep analisys problem inruntime , like bugreport.",
+      "parentUuid": "6443dcd8_f8554e57",
+      "revId": "4235a0ef18a7effac9986ad6201d1873c93325e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
