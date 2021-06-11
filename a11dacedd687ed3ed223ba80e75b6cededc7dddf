@@ -142,6 +142,30 @@
       },
       "revId": "a11dacedd687ed3ed223ba80e75b6cededc7dddf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c0eee78_d5fd1a6c",
+        "filename": "android/abi_gki_aarch64",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-06-11T13:48:26Z",
+      "side": 0,
+      "message": "I just identified that as actually not a problem introduced by you. aosp/1734755 addresses it and you should wait until it is landed.",
+      "parentUuid": "fcbc4257_353ae14b",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 24
+      },
+      "revId": "a11dacedd687ed3ed223ba80e75b6cededc7dddf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
