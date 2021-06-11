@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06ff817f_d7b91204",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-06-11T09:58:39Z",
+      "side": 1,
+      "message": "CHECK:PREFER_KERNEL_TYPES: Prefer kernel type \u0027u64\u0027 over \u0027uint64_t\u0027\n#105: FILE: net/netfilter/xt_IDLETIMER.c:109:\n+\tuint64_t time_ns;\n\nCHECK:PARENTHESIS_ALIGNMENT: Alignment should match open parenthesis\n#361: FILE: net/netfilter/xt_IDLETIMER.c:463:\n+\t\t\tinfo_timer-\u003euid \u003d from_kuid_munged(current_user_ns(),\n+\t\t\t\t\t  sock_i_uid(skb_to_full_sk(skb)));\n\ntotal: 0 errors, 0 warnings, 2 checks, 434 lines checked",
+      "revId": "bb739f4c75fe608dbcd7188e222550c5406d7182",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
