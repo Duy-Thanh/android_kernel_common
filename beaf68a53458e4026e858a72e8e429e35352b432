@@ -16,6 +16,24 @@
       "message": "Please put the short report output in the changelog when doing this, so we can see what symbols are being added / changed.",
       "revId": "beaf68a53458e4026e858a72e8e429e35352b432",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9ab0448_1cfcb8df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2021-06-11T12:44:47Z",
+      "side": 1,
+      "message": "Done. Thanks.",
+      "parentUuid": "9c28c205_d6a3d054",
+      "revId": "beaf68a53458e4026e858a72e8e429e35352b432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
