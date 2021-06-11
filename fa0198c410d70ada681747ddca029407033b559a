@@ -141,6 +141,24 @@
       "parentUuid": "0df18e6d_b9b12082",
       "revId": "fa0198c410d70ada681747ddca029407033b559a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb275da6_3da01c6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-06-11T19:31:18Z",
+      "side": 1,
+      "message": "Thanks for the link to the diagram, that really helps. In that diagram I see a \"Function Arbitor\". Has that mechanism been standardized? If not, will we have to support one virtualization mechanism per UFS controller vendor? I\u0027m concerned that this could make the UFS driver much harder to maintain than necessary.",
+      "parentUuid": "1fbcf4af_c5910b53",
+      "revId": "fa0198c410d70ada681747ddca029407033b559a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
