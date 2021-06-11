@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dce6f28_aa51ae5f",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3282,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-11T13:09:04Z",
+      "side": 1,
+      "message": "please use a real type here, what does \"ts\" mean?",
+      "range": {
+        "startLine": 3282,
+        "startChar": 0,
+        "endLine": 3282,
+        "endChar": 18
+      },
+      "revId": "d37fa218698d2b63f50536f9871c1728173bfc64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
