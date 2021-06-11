@@ -34,6 +34,24 @@
       "parentUuid": "7526172e_2dc48cb5",
       "revId": "4235a0ef18a7effac9986ad6201d1873c93325e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24a73cbd_84190613",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879700
+      },
+      "writtenOn": "2021-06-11T07:45:55Z",
+      "side": 1,
+      "message": "we only need get the info as follow in timerfd poll run, before add hooks \n\nso can you tell us how to modify?\n\nstatic void timerfd_poll_hook(void* data, struct timerfd_ctx* c) {\n  struct timerfd_ctx* ctx \u003d c;\n  if (ctx-\u003eexpired \u0026\u0026 isalarm(ctx))\n    pr_info(\"%s: comm:%s pid:%d exp:%llu\\n\", __func__,\n        current-\u003ecomm, current-\u003epid,\n        ktime_to_ms(ctx-\u003et.alarm.node.expires));\n  return;\n}",
+      "parentUuid": "d2c856bd_f13a10a9",
+      "revId": "4235a0ef18a7effac9986ad6201d1873c93325e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
