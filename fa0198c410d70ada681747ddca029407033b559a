@@ -87,6 +87,24 @@
       "parentUuid": "8f8e56fb_ca6acd42",
       "revId": "fa0198c410d70ada681747ddca029407033b559a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e1a91b6_b1295a68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2021-06-11T09:07:50Z",
+      "side": 1,
+      "message": "Please see my comment where I wrote Bart\u0027s comment. We normally use PV(Para-virtualized) drivers to access a H/W resource from multiple VMs. It\u0027s flexible because fully supported by S/W way but it has some overhead as I mentioned. So, our ufs controller provides same concept on H/W level.\n\n+ UFS is not connected via PCI so we can\u0027t use PCI SR-IOV but it\u0027s very similar concept.",
+      "parentUuid": "41270bb0_90e954f3",
+      "revId": "fa0198c410d70ada681747ddca029407033b559a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
