@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2a5e5a7_cf0c6970",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-06-11T10:38:23Z",
+      "side": 1,
+      "message": "Bypassing presubmit as the previous run failed spuriously:\n\nandroid.uirendering.cts.testclasses.TextureViewTests#testReuseSurfaceTexture\n\nfailed on\n\nkernel/cuttlefish/cts/presubmit_mixed_with_git_master on kernel_virt_x86_64 on aosp_kernel-common-android12-5.10\n\nwhich has nothing to do with FIPS 140, which is not even implemented for x86 in the first place.\n",
+      "revId": "a11dacedd687ed3ed223ba80e75b6cededc7dddf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
