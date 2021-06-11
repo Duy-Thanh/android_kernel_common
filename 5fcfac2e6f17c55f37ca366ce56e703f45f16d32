@@ -88,6 +88,24 @@
       "parentUuid": "73a96459_64a84235",
       "revId": "5fcfac2e6f17c55f37ca366ce56e703f45f16d32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01e87574_66f63899",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879700
+      },
+      "writtenOn": "2021-06-11T02:18:37Z",
+      "side": 1,
+      "message": "we need get info in timer_poll func, so need a hook",
+      "parentUuid": "91fcd80a_89609bb2",
+      "revId": "5fcfac2e6f17c55f37ca366ce56e703f45f16d32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
