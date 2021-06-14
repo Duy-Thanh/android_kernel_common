@@ -159,6 +159,24 @@
       "parentUuid": "1fbcf4af_c5910b53",
       "revId": "fa0198c410d70ada681747ddca029407033b559a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d4efddd_03938d9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2021-06-14T06:53:58Z",
+      "side": 1,
+      "message": "Hi Bart,\nNo. It was designed only for the ufs controller of Samsung ExynosAuto SoC. Unfortunately, it is not published as JEDEC standard yet.\nBasically, there is no such case like us because most of the virtualization features are supported from higher level like block layer. Like other W/A on ufshcd, we can support this as QUIRKs and vops callbacks. I think this will not make big deal(or pressure) of maintainence of the code. The quirks were already posted and we\u0027re working v2 version with full driver support but it will take a time.",
+      "parentUuid": "eb275da6_3da01c6b",
+      "revId": "fa0198c410d70ada681747ddca029407033b559a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
