@@ -88,6 +88,24 @@
       "parentUuid": "02cb0c87_990ea290",
       "revId": "ccfe23cac1f146adbc64fbbd3d4e9df907822e3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac8b24f6_c7275f63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2021-06-14T07:18:29Z",
+      "side": 1,
+      "message": "Ah, I just saw \"Presubmit-Verified -1\" and I couldn\u0027t see the detail because I don\u0027t have a googleplex account. I was thinking it was failed due to KMI.\nThanks for the respin.",
+      "parentUuid": "61e6183c_cca30513",
+      "revId": "ccfe23cac1f146adbc64fbbd3d4e9df907822e3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
