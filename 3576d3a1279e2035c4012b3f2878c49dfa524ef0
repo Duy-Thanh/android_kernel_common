@@ -16,6 +16,23 @@
       "message": "This introduces new modules to be built along with the GKI kernel:\n\n Checking the list of modules:\n --- common/android/gki_aarch64_modules\t2021-06-14 07:15:13.124185594 +0000\n +++ /usr/local/google/buildbot/src/android/common-android12-5.10/out/android12-5.10/common/modules.order\t2021-06-14 07:19:46.066901061 +0000\n @@ -0,0 +1,3 @@\n +net/ipv4/tcp_bic.ko\n +net/ipv4/tcp_westwood.ko\n +net/ipv4/tcp_htcp.ko\n \nGKI kernels currently do not have any modules. \n",
       "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fb536f1_0bfd07c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-06-14T17:24:27Z",
+      "side": 1,
+      "message": "Subash, is it possible to compile the modules mentioned by Matthias as static since these modules doesn\u0027t look specific to vendors. May be we need to tweak their \"build as modules\" only Kconfig? It is just my guess but better to make them as module if they don\u0027t have must-have requirement to be as modules. ",
+      "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
