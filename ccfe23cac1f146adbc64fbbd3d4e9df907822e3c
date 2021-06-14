@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6c27a6c_2403fc46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2021-06-14T05:33:11Z",
+      "side": 1,
+      "message": "Dear all,\nIt seems there is an KMI break like below patch.\nhttps://android-review.googlesource.com/c/kernel/common/+/1730197\n\nGreg set the patch ",
+      "revId": "ccfe23cac1f146adbc64fbbd3d4e9df907822e3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
