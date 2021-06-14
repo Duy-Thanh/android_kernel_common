@@ -16,6 +16,24 @@
       "message": "needs a upstream git commit id 😞\n",
       "revId": "b41ac3ce9ea0c9e0abebd5e5e9c8ee7c73c55e8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef8a8f4c_5858a253",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2021-06-14T15:29:57Z",
+      "side": 1,
+      "message": "What\u0027s the format for that?\n\n(cherry-picked from commit foo)?",
+      "parentUuid": "71925ed1_a02bdcce",
+      "revId": "b41ac3ce9ea0c9e0abebd5e5e9c8ee7c73c55e8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
