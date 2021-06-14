@@ -34,6 +34,24 @@
       "parentUuid": "d6c27a6c_2403fc46",
       "revId": "ccfe23cac1f146adbc64fbbd3d4e9df907822e3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeacab8d_f81d694f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-14T06:27:11Z",
+      "side": 1,
+      "message": "Yes, patches with that tag will be merged on the date in that tag.",
+      "parentUuid": "8e91d4ce_714f5156",
+      "revId": "ccfe23cac1f146adbc64fbbd3d4e9df907822e3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
