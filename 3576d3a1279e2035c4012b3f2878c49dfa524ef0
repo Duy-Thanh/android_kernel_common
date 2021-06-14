@@ -33,6 +33,23 @@
       "message": "Subash, is it possible to compile the modules mentioned by Matthias as static since these modules doesn\u0027t look specific to vendors. May be we need to tweak their \"build as modules\" only Kconfig? It is just my guess but better to make them as module if they don\u0027t have must-have requirement to be as modules. ",
       "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a0c2353_58831799",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-06-14T17:35:48Z",
+      "side": 1,
+      "message": "Hmm, I\u0027m not against enabling BBR, but it should be noted that the version 1 present in 5.10 is - by my understanding - not really ready for mobile prime time.  I\u0027ll send out a query.\n\n[I\u0027m also not certain how net_prio cgroup will interact with the other cgroup stuff]",
+      "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
