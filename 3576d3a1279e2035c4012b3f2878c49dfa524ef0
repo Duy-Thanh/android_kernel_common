@@ -68,6 +68,24 @@
       "parentUuid": "4a0c2353_58831799",
       "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bff96a33_e55b7cee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-06-14T21:28:10Z",
+      "side": 1,
+      "message": "Neal and Maciej, how about the other two configs?\n\nCONFIG_CGROUP_NET_PRIO\u003dy\nCONFIG_TCP_CONG_ADVANCED\u003dy",
+      "parentUuid": "106180ad_49f85da3",
+      "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
