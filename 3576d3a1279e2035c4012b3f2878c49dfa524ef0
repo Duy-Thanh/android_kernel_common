@@ -50,6 +50,24 @@
       "message": "Hmm, I\u0027m not against enabling BBR, but it should be noted that the version 1 present in 5.10 is - by my understanding - not really ready for mobile prime time.  I\u0027ll send out a query.\n\n[I\u0027m also not certain how net_prio cgroup will interact with the other cgroup stuff]",
       "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "106180ad_49f85da3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1883427
+      },
+      "writtenOn": "2021-06-14T18:15:04Z",
+      "side": 1,
+      "message": "As one of the co-authors of BBR, some thoughts:\n\nCurrently mainline Linux only has BBRv1. BBR is a work in progress, and BBRv1 is not at the level of performance where we would like to see it deployed at wide scale on Android phones. In some circumstances BBRv1 can cause high and frequent packet loss, and thus also poor latency for request/response (web, RPC, SSH) traffic, and low throughput for coexisting Reno and CUBIC flows. This could cause poor user experiences in households, schools, or enterprises where there are constrained uplinks into the Internet. I would recommend against making BBRv1 available on Android phones, and I would urge that BBR not be made available on Android phones until BBRv2 is upstream.",
+      "parentUuid": "4a0c2353_58831799",
+      "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
