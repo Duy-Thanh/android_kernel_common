@@ -22,6 +22,30 @@
       },
       "revId": "7203d9dda4066665d26d7991909ca7780e2cc0e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e2b17ac_aa392c49",
+        "filename": "drivers/remoteproc/remoteproc_core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1729,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2021-06-14T21:46:13Z",
+      "side": 1,
+      "message": "Hi Saravana, \nIIUC, we induce panic for various use cases. We want to control device crash differently for Debug build and perf builds, so upstream might not like it.",
+      "parentUuid": "6fc53efc_b592853e",
+      "range": {
+        "startLine": 1729,
+        "startChar": 1,
+        "endLine": 1729,
+        "endChar": 32
+      },
+      "revId": "7203d9dda4066665d26d7991909ca7780e2cc0e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
