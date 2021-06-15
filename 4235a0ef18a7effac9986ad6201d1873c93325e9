@@ -196,6 +196,24 @@
       "parentUuid": "65389af6_cc072a4c",
       "revId": "4235a0ef18a7effac9986ad6201d1873c93325e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0b8a679_2d5d4be4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879700
+      },
+      "writtenOn": "2021-06-15T07:09:38Z",
+      "side": 1,
+      "message": "we need get info in kernel first . so can you have any other method get timer_fd poll infos in runtime ? \n\n  and add hook here have any problems? \n  \nlt\u0027s too long time ,  if this can\u0027t pass , our system can\u0027t work well.",
+      "parentUuid": "678d6a70_5f84a7bd",
+      "revId": "4235a0ef18a7effac9986ad6201d1873c93325e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
