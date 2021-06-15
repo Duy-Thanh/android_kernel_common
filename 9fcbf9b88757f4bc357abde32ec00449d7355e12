@@ -105,6 +105,24 @@
       "parentUuid": "765fe709_b3f1ad2f",
       "revId": "9fcbf9b88757f4bc357abde32ec00449d7355e12",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b871af10_74f669ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-15T13:12:39Z",
+      "side": 1,
+      "message": "So you removed the proc files, are you sure that no one was using them in this release?",
+      "parentUuid": "1eefb584_b68abeee",
+      "revId": "9fcbf9b88757f4bc357abde32ec00449d7355e12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
