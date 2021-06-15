@@ -160,6 +160,24 @@
       "parentUuid": "c5e00fac_55c8d0ca",
       "revId": "4235a0ef18a7effac9986ad6201d1873c93325e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65389af6_cc072a4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879700
+      },
+      "writtenOn": "2021-06-15T03:09:26Z",
+      "side": 1,
+      "message": "yes, power_info_record is our analysis system infos function,  if there have any problems or abnormal , we gather all infos and report to cloud services.",
+      "parentUuid": "42e705fd_127c6099",
+      "revId": "4235a0ef18a7effac9986ad6201d1873c93325e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
