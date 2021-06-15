@@ -214,6 +214,24 @@
       "parentUuid": "678d6a70_5f84a7bd",
       "revId": "4235a0ef18a7effac9986ad6201d1873c93325e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f87bafa_c29ce3f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-15T11:16:47Z",
+      "side": 1,
+      "message": "What specifically are you trying to track and monitor here?  Random hooks in the timerfd logic seem very odd, as it has nothing to do with power usage.\n\nWhat is wrong with the existing hardware-provided power monitoring logic?  Why are you not using the hwtrace drivers that are provided for you for this type of thing?",
+      "parentUuid": "e0b8a679_2d5d4be4",
+      "revId": "4235a0ef18a7effac9986ad6201d1873c93325e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
