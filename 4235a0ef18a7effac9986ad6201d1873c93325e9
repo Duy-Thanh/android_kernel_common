@@ -178,6 +178,24 @@
       "parentUuid": "42e705fd_127c6099",
       "revId": "4235a0ef18a7effac9986ad6201d1873c93325e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "678d6a70_5f84a7bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-15T05:56:48Z",
+      "side": 1,
+      "message": "That should all be done in userspace, not in the kernel.",
+      "parentUuid": "65389af6_cc072a4c",
+      "revId": "4235a0ef18a7effac9986ad6201d1873c93325e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
