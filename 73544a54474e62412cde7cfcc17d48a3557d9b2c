@@ -69,6 +69,24 @@
       "parentUuid": "f49ba686_1a251955",
       "revId": "73544a54474e62412cde7cfcc17d48a3557d9b2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf818d43_a81e41d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876972
+      },
+      "writtenOn": "2021-06-15T11:37:36Z",
+      "side": 1,
+      "message": "We discussed with xiaomi/vivo/oppo, because the current program has not been determined, and there may still be changes in the future, we cannot submit the patch that does this work, we hope to add some USB control information through the vendor hook method Protocol field.\nI think this vendor hook can help many OEMs who need to add custom USB control transfer protocol fields. It will make the kernel\u0027s USB Gadget more extensible.\nHope you can add it in the way of vendor hook.",
+      "parentUuid": "80aa6070_8b5bb90c",
+      "revId": "73544a54474e62412cde7cfcc17d48a3557d9b2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
