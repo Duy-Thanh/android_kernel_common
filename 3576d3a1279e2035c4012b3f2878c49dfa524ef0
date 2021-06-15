@@ -103,6 +103,24 @@
       "message": "I *think* the only purpose of TCP_CONG_ADVANCED is to allow enabling the BBR config option.\n\nI\u0027m seeking guidance from Lorenzo on the net_prio cgroup one.\nI\u0027m not at all sure what the cgroup story is atm.",
       "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9e2c00e_d753f295",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2021-06-15T09:05:42Z",
+      "side": 1,
+      "message": "Subash, can you explain why you would like CONFIG_CGROUP_NET_PRIO enabled?",
+      "parentUuid": "24b606e8_1c588639",
+      "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
