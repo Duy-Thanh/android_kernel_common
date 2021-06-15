@@ -121,6 +121,24 @@
       "parentUuid": "24b606e8_1c588639",
       "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4707d92d_958b0e85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1053408
+      },
+      "writtenOn": "2021-06-15T18:38:51Z",
+      "side": 1,
+      "message": "We do not need TCP_CONG_ADVANCED since we cant use BBR",
+      "parentUuid": "e9e2c00e_d753f295",
+      "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
