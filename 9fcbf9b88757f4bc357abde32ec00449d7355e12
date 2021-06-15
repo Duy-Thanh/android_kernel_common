@@ -51,6 +51,24 @@
       "message": "It can help to account slab memory and track owners. Our internal memory accounting tools are using it.",
       "revId": "9fcbf9b88757f4bc357abde32ec00449d7355e12",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bd55346_a911d6b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-15T11:15:09Z",
+      "side": 1,
+      "message": "how are your tools using it if debugfs is not enabled?",
+      "parentUuid": "c6a548d5_babf9354",
+      "revId": "9fcbf9b88757f4bc357abde32ec00449d7355e12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
