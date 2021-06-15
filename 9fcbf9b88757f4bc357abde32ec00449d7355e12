@@ -123,6 +123,23 @@
       "parentUuid": "1eefb584_b68abeee",
       "revId": "9fcbf9b88757f4bc357abde32ec00449d7355e12",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30752a3e_1d60801b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-15T13:14:27Z",
+      "side": 1,
+      "message": "Ok, read the bug, this is fine, but please fix the issues that Lint is telling you about.",
+      "revId": "9fcbf9b88757f4bc357abde32ec00449d7355e12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
