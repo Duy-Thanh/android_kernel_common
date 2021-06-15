@@ -156,6 +156,24 @@
       "message": "Net cgroups concerns me a bit, because Android doesn\u0027t use it right now so it\u0027s implicitly vendor controlled. But if we later decide to use it, it\u0027ll need to transition back to non-vendor controlled.",
       "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2edeaf89_5417436a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1053408
+      },
+      "writtenOn": "2021-06-15T21:34:21Z",
+      "side": 1,
+      "message": "We are trying to adjust the application priority. If Google is planning to use this in the future, we can then discuss an option to have a common framework to configure. Do you have any concerns if we turn these configs into vendor modules (assuming these aren\u0027t enabled as static by Google for now).",
+      "parentUuid": "a9c00916_5e1b5da7",
+      "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
