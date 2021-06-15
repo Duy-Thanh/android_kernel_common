@@ -87,6 +87,24 @@
       "parentUuid": "80aa6070_8b5bb90c",
       "revId": "73544a54474e62412cde7cfcc17d48a3557d9b2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "677e57d6_d6bb1b21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-15T14:07:20Z",
+      "side": 1,
+      "message": "I do not understand, what are you trying to add that is \"custom\" here?  What vendor addition are you adding that the host will recognize?\n\nDo you have an example of what you are trying to do here?",
+      "parentUuid": "bf818d43_a81e41d0",
+      "revId": "73544a54474e62412cde7cfcc17d48a3557d9b2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
