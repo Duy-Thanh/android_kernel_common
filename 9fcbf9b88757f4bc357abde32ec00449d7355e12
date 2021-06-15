@@ -69,6 +69,24 @@
       "parentUuid": "c6a548d5_babf9354",
       "revId": "9fcbf9b88757f4bc357abde32ec00449d7355e12",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "765fe709_b3f1ad2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1883467
+      },
+      "writtenOn": "2021-06-15T11:18:23Z",
+      "side": 1,
+      "message": "It is for internal use (on engineering build) not for end customer.",
+      "parentUuid": "3bd55346_a911d6b3",
+      "revId": "9fcbf9b88757f4bc357abde32ec00449d7355e12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
