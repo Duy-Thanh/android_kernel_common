@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30e84dc3_958571c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-16T08:41:57Z",
+      "side": 1,
+      "message": "We are passed the deadline for new features.  Why isn\u0027t this sent upstream first?  You are adding a new user/kernal api that you now have to support for 10+ years on your own.",
+      "revId": "94db4570c0a2a0b78a6cf49824ab0022c3babe83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
