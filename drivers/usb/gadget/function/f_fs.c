@@ -35,6 +35,7 @@
 #include <linux/kthread.h>
 #include <linux/poll.h>
 #include <linux/eventfd.h>
+#include <trace/hooks/usb.h>
 
 #include "u_fs.h"
 #include "u_f.h"
@@ -1023,6 +1024,8 @@ static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
 			goto error_mutex;
 		}
 	}
+
+	trace_android_vh_usb_profile(epfile->ffs->dev_name);
 
 	spin_lock_irq(&epfile->ffs->eps_lock);
 
