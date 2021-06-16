@@ -65,6 +65,14 @@ DECLARE_HOOK(android_vh_binder_new_ref,
 DECLARE_HOOK(android_vh_binder_del_ref,
 	TP_PROTO(struct task_struct *proc, uint32_t ref_desc),
 	TP_ARGS(proc, ref_desc));
+struct seq_file;
+DECLARE_HOOK(android_vh_binder_transaction_async,
+	TP_PROTO(struct binder_transaction *t, struct binder_thread *thread),
+	TP_ARGS(t, thread));
+DECLARE_HOOK(android_vh_binder_pritf_transaction_info,
+	TP_PROTO(struct seq_file *m, struct binder_proc *proc,
+		 const char *prefix, struct binder_transaction *t),
+	TP_ARGS(m, proc, prefix, t));
 
 /* macro versions of hooks are no longer required */
 

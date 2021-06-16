@@ -572,6 +572,9 @@ struct binder_transaction {
 	 */
 	spinlock_t lock;
 	ANDROID_VENDOR_DATA(1);
+	ANDROID_VENDOR_DATA(2);
+	ANDROID_VENDOR_DATA(3);
+	ANDROID_VENDOR_DATA(4);
 };
 
 /**
