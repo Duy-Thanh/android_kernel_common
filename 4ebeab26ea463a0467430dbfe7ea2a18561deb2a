@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4609b0a0_4f7aa14d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-16T13:06:45Z",
+      "side": 1,
+      "message": "This needs to be broken up into 2 patches, one per hook, and explain why these are both needed and why the existing hooks do not work properly for you for this information.",
+      "revId": "4ebeab26ea463a0467430dbfe7ea2a18561deb2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcd82932_83062b43",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5485,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-16T13:06:45Z",
+      "side": 1,
+      "message": "are you sure you can call this without the lock?  This function is printing things, why do you need to hook into here, isn\u0027t the data sent to userspace sufficient?",
+      "range": {
+        "startLine": 5485,
+        "startChar": 0,
+        "endLine": 5485,
+        "endChar": 68
+      },
+      "revId": "4ebeab26ea463a0467430dbfe7ea2a18561deb2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cf75c61_9edeb5c5",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-16T13:06:45Z",
+      "side": 1,
+      "message": "why can you not just use the single pointer to create any structure you need to add onto this from there?",
+      "range": {
+        "startLine": 575,
+        "startChar": 1,
+        "endLine": 577,
+        "endChar": 24
+      },
+      "revId": "4ebeab26ea463a0467430dbfe7ea2a18561deb2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
