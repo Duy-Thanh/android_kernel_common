@@ -227,6 +227,24 @@
       "parentUuid": "cee411c2_d1a69b52",
       "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "701d63ea_3aeaacb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-06-16T05:08:55Z",
+      "side": 1,
+      "message": "Subash, we should also update android-mainline too for CONFIG_CGROUP_NET_PRIO\u003dy",
+      "parentUuid": "f849a330_4f866755",
+      "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
