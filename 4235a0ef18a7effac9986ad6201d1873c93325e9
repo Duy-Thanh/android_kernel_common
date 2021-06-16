@@ -232,6 +232,24 @@
       "parentUuid": "e0b8a679_2d5d4be4",
       "revId": "4235a0ef18a7effac9986ad6201d1873c93325e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd83184e_864d880e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879700
+      },
+      "writtenOn": "2021-06-16T02:02:57Z",
+      "side": 1,
+      "message": "this is not power domain, maybe you get a mistake by the name. \n\ncan you show me a sample how to use hwtrace get timerfd poll?",
+      "parentUuid": "1f87bafa_c29ce3f1",
+      "revId": "4235a0ef18a7effac9986ad6201d1873c93325e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
