@@ -41,6 +41,7 @@
 #include <linux/dma-mapping.h>
 #include <asm/byteorder.h>
 #include <linux/moduleparam.h>
+#include <trace/hooks/usb.h>
 
 #include "usb.h"
 
@@ -1228,6 +1229,7 @@ static int do_proc_bulk(struct usb_dev_state *ps,
 		ret = -ENOMEM;
 		goto done;
 	}
+	trace_android_vh_usb_profile("mass_storage");
 	tmo = bulk->timeout;
 	if (bulk->ep & 0x80) {
 		snoop_urb(dev, NULL, pipe, len1, tmo, SUBMIT, NULL, 0);
