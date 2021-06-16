@@ -94,6 +94,30 @@
       },
       "revId": "7203d9dda4066665d26d7991909ca7780e2cc0e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7932edae_58803aab",
+        "filename": "drivers/remoteproc/remoteproc_core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1729,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2021-06-16T18:18:33Z",
+      "side": 1,
+      "message": "Could this just be a kernel commandline? I\u0027d think that should be easy to push upstream? If not, maybe explain why?",
+      "parentUuid": "6cadb419_af12a5f4",
+      "range": {
+        "startLine": 1729,
+        "startChar": 1,
+        "endLine": 1729,
+        "endChar": 32
+      },
+      "revId": "7203d9dda4066665d26d7991909ca7780e2cc0e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
