@@ -195,6 +195,24 @@
       "parentUuid": "5d4efddd_03938d9c",
       "revId": "fa0198c410d70ada681747ddca029407033b559a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7316b5e_6b95a7e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2021-06-16T01:00:29Z",
+      "side": 1,
+      "message": "Hi Bart,\nYes, I also think it\u0027s the right way. We\u0027ll go to mainline.\nI was concerning the GKI timeline so vendor_hook is the fastest way I thought.\nLet\u0027s discuss it on mainline. Thanks.",
+      "parentUuid": "45fb249b_954a81a7",
+      "revId": "fa0198c410d70ada681747ddca029407033b559a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
