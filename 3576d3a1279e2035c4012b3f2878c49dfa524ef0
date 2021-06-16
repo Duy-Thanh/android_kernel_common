@@ -191,6 +191,24 @@
       "message": "I don\u0027t think cgroups can be modular, and it wouldn\u0027t solve the core compatibility problem that would potentially face us in the future.\n\nIMHO, if such functionality should be allowed it should simply be enabled in gki.\n\nI\u0027m tending to lean towards that it should be.  With the understanding that using it may make porting to later versions of Android (ie. T+) difficult - since they may use it for their own purpose.\n\n(I assume we\u0027re all in agreement that BBRv1 is simply a bad idea, and we\u0027re all hoping for BBRv2 to be finished and mobile friendly, and the remaining discussion is purely about the net_prio cgroup)",
       "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cee411c2_d1a69b52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1053408
+      },
+      "writtenOn": "2021-06-16T01:27:08Z",
+      "side": 1,
+      "message": "ok, can we enable net_prio on android12-5.10 only",
+      "parentUuid": "5e790abf_78175b5c",
+      "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
