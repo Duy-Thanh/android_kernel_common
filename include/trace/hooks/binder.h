@@ -12,6 +12,7 @@
  */
 struct binder_transaction;
 struct task_struct;
+struct seq_file;
 DECLARE_HOOK(android_vh_binder_transaction_init,
 	TP_PROTO(struct binder_transaction *t),
 	TP_ARGS(t));
@@ -32,6 +33,11 @@ DECLARE_HOOK(android_vh_binder_wait_for_work,
 DECLARE_HOOK(android_vh_sync_txn_recvd,
 	TP_PROTO(struct task_struct *tsk, struct task_struct *from),
 	TP_ARGS(tsk, from));
+DECLARE_HOOK(android_vh_binder_print_transaction_info,
+	TP_PROTO(struct seq_file *m, struct binder_proc *proc,
+		 const char *prefix, struct binder_transaction *t),
+	TP_ARGS(m, proc, prefix, t));
+
 #endif /* _TRACE_HOOK_BINDER_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
