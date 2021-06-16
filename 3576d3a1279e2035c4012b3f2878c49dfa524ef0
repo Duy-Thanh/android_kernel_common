@@ -209,6 +209,24 @@
       "parentUuid": "5e790abf_78175b5c",
       "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f849a330_4f866755",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1883427
+      },
+      "writtenOn": "2021-06-16T01:52:48Z",
+      "side": 1,
+      "message": "Agreed, let\u0027s not build BBR (since it is currently v1). And thus we don\u0027t need TCP_CONG_ADVANCED.",
+      "parentUuid": "cee411c2_d1a69b52",
+      "revId": "3576d3a1279e2035c4012b3f2878c49dfa524ef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
