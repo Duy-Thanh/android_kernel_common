@@ -13,12 +13,13 @@
 #include <linux/sched/cpufreq.h>
 #include <trace/events/power.h>
 #include <trace/hooks/sched.h>
-
+#include <trace/hooks/cpufreq.h>
 #define IOWAIT_BOOST_MIN	(SCHED_CAPACITY_SCALE / 8)
 
 struct sugov_tunables {
 	struct gov_attr_set	attr_set;
 	unsigned int		rate_limit_us;
+	ANDROID_OEM_DATA_ARRAY(1, 3);
 };
 
 struct sugov_policy {
@@ -171,6 +172,8 @@ static unsigned int get_next_freq(struct sugov_policy *sg_policy,
 		freq = next_freq;
 	else
 		freq = map_util_freq(util, freq, max);
+
+	trace_android_vh_cpufreq_target_load(&freq, sg_policy, util, max);
 
 	if (freq == sg_policy->cached_raw_freq && !sg_policy->need_freq_update)
 		return sg_policy->next_freq;
