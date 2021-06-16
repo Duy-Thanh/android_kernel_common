@@ -8,6 +8,10 @@
 #include <linux/power_supply.h>
 #include <linux/types.h>
 #include <linux/usb/typec.h>
+<<<<<<< HEAD   (a34f0a Merge 5.10.44 into android13-5.10)
+=======
+#include <linux/usb/pd.h>
+>>>>>>> BRANCH (fbf19a gki_config: Disable CONFIG_DEBUG_STACK_USAGE)
 #include <linux/usb/role.h>
 #include <linux/usb/pd.h>
 

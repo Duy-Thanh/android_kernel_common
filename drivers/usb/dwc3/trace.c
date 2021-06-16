@@ -13,3 +13,9 @@
 EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_ep_queue);
 EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_readl);
 EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_writel);
+<<<<<<< HEAD   (a34f0a Merge 5.10.44 into android13-5.10)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_event);
+EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_ctrl_req);
+EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_complete_trb);
+>>>>>>> BRANCH (fbf19a gki_config: Disable CONFIG_DEBUG_STACK_USAGE)

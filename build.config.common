@@ -1,5 +1,10 @@
+<<<<<<< HEAD   (a34f0a Merge 5.10.44 into android13-5.10)
 BRANCH=android13-5.10
 KMI_GENERATION=0
+=======
+BRANCH=android12-5.10
+KMI_GENERATION=6
+>>>>>>> BRANCH (fbf19a gki_config: Disable CONFIG_DEBUG_STACK_USAGE)
 
 LLVM=1
 DEPMOD=depmod

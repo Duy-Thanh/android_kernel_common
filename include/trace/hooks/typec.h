@@ -58,6 +58,13 @@ DECLARE_HOOK(android_vh_typec_tcpm_adj_current_limit,
 		  u32 *current_limit, bool *adjust),
 	TP_ARGS(state, port_current_limit, port_voltage, pd_capable, current_limit, adjust));
 
+<<<<<<< HEAD   (a34f0a Merge 5.10.44 into android13-5.10)
+=======
+DECLARE_HOOK(android_vh_typec_tcpm_log,
+	TP_PROTO(const char *log, bool *bypass),
+	TP_ARGS(log, bypass));
+
+>>>>>>> BRANCH (fbf19a gki_config: Disable CONFIG_DEBUG_STACK_USAGE)
 #endif /* _TRACE_HOOK_UFSHCD_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
