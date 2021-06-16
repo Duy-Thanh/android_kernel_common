@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "246b7598_fd2c3a69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2021-06-16T04:12:30Z",
+      "side": 1,
+      "message": "Sigh... I rebased it and Gerrit doesn\u0027t like that. So please rebase and reupload. Also, please do an ABI update too because this is adding to the ABI.",
+      "revId": "fe64c23dcb9433b63f2ec9a6abf147cc4b39b048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
