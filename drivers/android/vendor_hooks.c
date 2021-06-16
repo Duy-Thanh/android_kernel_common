@@ -63,6 +63,7 @@
 #include <trace/hooks/user.h>
 #include <trace/hooks/cpuidle_psci.h>
 #include <trace/hooks/fips140.h>
+#include <trace/hooks/usb.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -206,6 +207,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_uic_command);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_tm_command);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_check_int_errors);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_update_sdev);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_profile);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_wake_up_sync);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_wake_flags);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_uclamp_eff_get);

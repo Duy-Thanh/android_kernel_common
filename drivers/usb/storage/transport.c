@@ -47,6 +47,7 @@
 
 #include <linux/blkdev.h>
 #include "../../scsi/sd.h"
+#include <trace/hooks/usb.h>
 
 
 /***********************************************************************
@@ -1162,6 +1163,7 @@ int usb_stor_Bulk_transport(struct scsi_cmnd *srb, struct us_data *us)
 	if (unlikely(us->fflags & US_FL_GO_SLOW))
 		usleep_range(125, 150);
 
+	trace_android_vh_usb_profile("mass_storage");
 	if (transfer_length) {
 		unsigned int pipe = srb->sc_data_direction == DMA_FROM_DEVICE ? 
 				us->recv_bulk_pipe : us->send_bulk_pipe;
