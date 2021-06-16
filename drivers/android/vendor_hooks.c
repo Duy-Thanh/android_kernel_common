@@ -286,6 +286,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sha256);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_aes_expandkey);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_aes_encrypt);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_aes_decrypt);
+<<<<<<< HEAD   (854f84 ANDROID: mutex: Add vendor hook to init mutex oem data.)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_thermal_request_freq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_thermal_target_freq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_register);
@@ -333,3 +334,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_udp_recvmsg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tcp_recvmsg_stat);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_scan_type);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_swappiness);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_force_compatible_pre);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_force_compatible_post);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_print_transaction_info);
+>>>>>>> CHANGE (eabe97 ANDROID: Add hook to show vendor info for transactions)
