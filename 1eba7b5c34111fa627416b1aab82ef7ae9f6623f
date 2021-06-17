@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e509561_49d241e0",
+        "filename": "include/linux/spinlock_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2021-06-17T17:35:13Z",
+      "side": 1,
+      "message": "unsigned long stack_entries[RECURSION_STACK_DEBUG_DEPTH]; \nPlease use the stack_entries directly here . From JTAG we can not get backtrace with depot_stack_handle_t handle for debugging.  If we save the stack backtrace, we can dump the back trace.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 32
+      },
+      "revId": "1eba7b5c34111fa627416b1aab82ef7ae9f6623f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ccfdffee_f12c7c58",
         "filename": "kernel/locking/spinlock_debug.c",
         "patchSetId": 1
