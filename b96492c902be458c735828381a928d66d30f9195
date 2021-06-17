@@ -34,6 +34,24 @@
       "parentUuid": "76dd3c64_265e1bb1",
       "revId": "b96492c902be458c735828381a928d66d30f9195",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f806992c_e47588f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-17T16:09:23Z",
+      "side": 1,
+      "message": "This describes _what_ you are doing, not _why_.\n\nWhat is the _problem_ that you need to solve that resulted in this logging message being determined as the proper solution?",
+      "parentUuid": "45543e5f_938fae9f",
+      "revId": "b96492c902be458c735828381a928d66d30f9195",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
