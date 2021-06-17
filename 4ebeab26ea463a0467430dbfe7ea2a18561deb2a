@@ -83,6 +83,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84c58f84_5419fa96",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5485,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2021-06-17T08:40:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12581b95_57755f5e",
+      "range": {
+        "startLine": 5485,
+        "startChar": 0,
+        "endLine": 5485,
+        "endChar": 68
+      },
+      "revId": "4ebeab26ea463a0467430dbfe7ea2a18561deb2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cf75c61_9edeb5c5",
@@ -120,6 +144,30 @@
       "side": 1,
       "message": "Because if i use the single pointer to create any structure, i need to free it.\nSo I need to add a new instrumentation in binder_free_transaction to free it.\nSo in order to reduce instrumentation, I directly increased the required variables.\nThey mainly save the transaction timestamp, from pid and tid of asynchronous transaction .",
       "parentUuid": "7cf75c61_9edeb5c5",
+      "range": {
+        "startLine": 575,
+        "startChar": 1,
+        "endLine": 577,
+        "endChar": 24
+      },
+      "revId": "4ebeab26ea463a0467430dbfe7ea2a18561deb2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb83e62c_b3f387ce",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2021-06-17T08:40:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "342995b9_d95d37fe",
       "range": {
         "startLine": 575,
         "startChar": 1,
