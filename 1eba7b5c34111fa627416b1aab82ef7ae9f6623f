@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccfdffee_f12c7c58",
+        "filename": "kernel/locking/spinlock_debug.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1597696
+      },
+      "writtenOn": "2021-06-17T17:34:13Z",
+      "side": 1,
+      "message": "Will remove backtrace and store just the stack entries in raw_spinlock_t.",
+      "range": {
+        "startLine": 98,
+        "startChar": 7,
+        "endLine": 98,
+        "endChar": 17
+      },
+      "revId": "1eba7b5c34111fa627416b1aab82ef7ae9f6623f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
