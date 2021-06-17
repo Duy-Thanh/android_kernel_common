@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcc60130_f5afd6e8",
+        "filename": "include/linux/spinlock_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1597696
+      },
+      "writtenOn": "2021-06-17T18:19:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e509561_49d241e0",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 32
+      },
+      "revId": "1eba7b5c34111fa627416b1aab82ef7ae9f6623f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccfdffee_f12c7c58",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-06-17T17:34:13Z",
       "side": 1,
       "message": "Will remove backtrace and store just the stack entries in raw_spinlock_t.",
+      "range": {
+        "startLine": 98,
+        "startChar": 7,
+        "endLine": 98,
+        "endChar": 17
+      },
+      "revId": "1eba7b5c34111fa627416b1aab82ef7ae9f6623f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c82b9a2a_12d0b976",
+        "filename": "kernel/locking/spinlock_debug.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1597696
+      },
+      "writtenOn": "2021-06-17T18:19:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccfdffee_f12c7c58",
       "range": {
         "startLine": 98,
         "startChar": 7,
