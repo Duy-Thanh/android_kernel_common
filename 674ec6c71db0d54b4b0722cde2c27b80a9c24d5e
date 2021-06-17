@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "778d48a4_6bd4512f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2021-06-17T21:37:20Z",
+      "side": 1,
+      "message": "This one failed with following build error so I am fixing it up, removing your +2 greg for now. Please +2 before we merge this.\n\n-----\nIn file included from /kernel/aosp/common/drivers/net/usb/rtl8150.c:13:\n/kernel/aosp/common/include/linux/usb.h:1624:35  CC      net/mac802154/iface.o\n: error: flexible array member \u0027iso_frame_desc\u0027 with type \u0027struct usb_iso_packet_descriptor []\u0027 is not at the end of struct\n        struct usb_iso_packet_descriptor iso_frame_desc[];\n                                         ^\n/kernel/aosp/common/include/linux/usb.h:1626:2: note: next field declaration is here\n        ANDROID_KABI_RESERVE(1);\n        ^\n/kernel/aosp/common/include/linux/android_kabi.h:86:38: note: expanded from macro \u0027ANDROID_KABI_RESERVE\u0027\n#define ANDROID_KABI_RESERVE(number)    _ANDROID_KABI_RESERVE(number)\n                                        ^\n/kernel/aosp/common/include/linux/android_kabi.h:72:39: note: expanded from macro \u0027_ANDROID_KABI_RESERVE\u0027\n#define _ANDROID_KABI_RESERVE(n)                u64 android_kabi_reserved##n\n                                                    ^\n\u003cscratch space\u003e:118:1: note: expanded from here\nandroid_kabi_reserved1\n----------------------",
+      "revId": "674ec6c71db0d54b4b0722cde2c27b80a9c24d5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
