@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b78bec4_2709774d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2021-06-17T03:37:15Z",
+      "side": 1,
+      "message": "OK , i will do",
+      "parentUuid": "4609b0a0_4f7aa14d",
+      "revId": "4ebeab26ea463a0467430dbfe7ea2a18561deb2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcd82932_83062b43",
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12581b95_57755f5e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5485,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2021-06-17T03:37:15Z",
+      "side": 1,
+      "message": "1. I will get the lock inside the trace_android_vh_binder_pritf_transaction_info function, but trace_android_vh_binder_pritf_transaction_info can be moved inside the lock\n2. Increase the time-consuming printing of Binder transaction\n3. For asynchronous transactions, print from pid and from tid\n4. Customize the print format",
+      "parentUuid": "dcd82932_83062b43",
+      "range": {
+        "startLine": 5485,
+        "startChar": 0,
+        "endLine": 5485,
+        "endChar": 68
+      },
+      "revId": "4ebeab26ea463a0467430dbfe7ea2a18561deb2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf75c61_9edeb5c5",
         "filename": "drivers/android/binder_internal.h",
         "patchSetId": 2
@@ -54,6 +96,30 @@
       "writtenOn": "2021-06-16T13:06:45Z",
       "side": 1,
       "message": "why can you not just use the single pointer to create any structure you need to add onto this from there?",
+      "range": {
+        "startLine": 575,
+        "startChar": 1,
+        "endLine": 577,
+        "endChar": 24
+      },
+      "revId": "4ebeab26ea463a0467430dbfe7ea2a18561deb2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "342995b9_d95d37fe",
+        "filename": "drivers/android/binder_internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2021-06-17T03:37:15Z",
+      "side": 1,
+      "message": "Because if i use the single pointer to create any structure, i need to free it.\nSo I need to add a new instrumentation in binder_free_transaction to free it.\nSo in order to reduce instrumentation, I directly increased the required variables.\nThey mainly save the transaction timestamp, from pid and tid of asynchronous transaction .",
+      "parentUuid": "7cf75c61_9edeb5c5",
       "range": {
         "startLine": 575,
         "startChar": 1,
