@@ -16,6 +16,24 @@
       "message": "I am sorry if this is confusing, but I do not understand what problem you are trying to solve here.\n\nYou showed an example here that looks like it is doing power managment or tracking, but yet\nthat is not what is needed?\n\nWhat is the problem that you have with the existing kernel, that you feel is solved by putting \nthis hook into the generic timerfd core code?",
       "revId": "b96492c902be458c735828381a928d66d30f9195",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45543e5f_938fae9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879700
+      },
+      "writtenOn": "2021-06-17T07:40:10Z",
+      "side": 1,
+      "message": "as the below code  shows: we only record the owner of the timer, current-\u003ecomm ,\nto help check the timer is it reasonable when there have power problems\n\nif (ctx-\u003eexpired \u0026\u0026 isalarm(ctx))\n-\tpower_info_record(\"[oem]%s: comm:%s pid:%d exp:%llu\\n\", __func__,\n-\t\tcurrent-\u003ecomm, current-\u003epid,\n-\t\tktime_to_ms(ctx-\u003et.alarm.node.expires));",
+      "parentUuid": "76dd3c64_265e1bb1",
+      "revId": "b96492c902be458c735828381a928d66d30f9195",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
