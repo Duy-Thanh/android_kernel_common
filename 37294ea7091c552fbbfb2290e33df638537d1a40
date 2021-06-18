@@ -33,6 +33,24 @@
       "message": "We need to put this on hold for a moment prioritize the KMI breaking update.",
       "revId": "37294ea7091c552fbbfb2290e33df638537d1a40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "983a9cab_d39cacfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1872722
+      },
+      "writtenOn": "2021-06-18T09:17:15Z",
+      "side": 1,
+      "message": "Hi Matthias,\n\nMay we know when will  KMI breaking update, please? \nWhen KMI update, will this patch be updated at the same time, please?\n\nThanks~\nLopy",
+      "parentUuid": "83a87230_65f4f2af",
+      "revId": "37294ea7091c552fbbfb2290e33df638537d1a40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
