@@ -118,6 +118,30 @@
       },
       "revId": "7203d9dda4066665d26d7991909ca7780e2cc0e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e481d1e8_d93a308a",
+        "filename": "drivers/remoteproc/remoteproc_core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1729,
+      "author": {
+        "id": 1611171
+      },
+      "writtenOn": "2021-06-18T21:58:04Z",
+      "side": 1,
+      "message": "When a remoteproc is undergoing recovery there is no way for the platform driver to know when the recovery finishes, and when it does - if it even was successful. This change allows us to add a callback to our platform driver.",
+      "parentUuid": "7932edae_58803aab",
+      "range": {
+        "startLine": 1729,
+        "startChar": 1,
+        "endLine": 1729,
+        "endChar": 32
+      },
+      "revId": "7203d9dda4066665d26d7991909ca7780e2cc0e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
