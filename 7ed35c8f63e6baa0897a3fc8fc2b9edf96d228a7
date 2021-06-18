@@ -22,6 +22,30 @@
       },
       "revId": "7ed35c8f63e6baa0897a3fc8fc2b9edf96d228a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec2e880d_4c374fef",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5484,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2021-06-18T05:03:10Z",
+      "side": 1,
+      "message": "Hi sir，\n1. Increase the time-consuming printing of Binder transaction\n2. For asynchronous transactions, print from pid and from tid\n3. Customize the print format\n\nthinks",
+      "parentUuid": "ab157d2f_e4182b63",
+      "range": {
+        "startLine": 5484,
+        "startChar": 0,
+        "endLine": 5484,
+        "endChar": 68
+      },
+      "revId": "7ed35c8f63e6baa0897a3fc8fc2b9edf96d228a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
