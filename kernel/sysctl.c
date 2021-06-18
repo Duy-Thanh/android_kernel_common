@@ -185,6 +185,7 @@ static enum sysctl_writes_mode sysctl_writes_strict = SYSCTL_WRITES_STRICT;
 #if defined(HAVE_ARCH_PICK_MMAP_LAYOUT) || \
     defined(CONFIG_ARCH_WANT_DEFAULT_TOPDOWN_MMAP_LAYOUT)
 int sysctl_legacy_va_layout;
+EXPORT_SYMBOL(sysctl_legacy_va_layout);
 #endif
 
 #ifdef CONFIG_SCHED_DEBUG
