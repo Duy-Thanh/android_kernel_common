@@ -52,6 +52,24 @@
       "parentUuid": "b1cdb386_1e1f9458",
       "revId": "43da3f669b0d1780c5d97cec275df5139329c054",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d671d7d_6b77796e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-18T07:23:14Z",
+      "side": 1,
+      "message": "Ok, if this is already in the symbol list for someone else, no need to update the .xml file, sorry, I was not aware of that.  Please remove it and we can try this again.",
+      "parentUuid": "b6e49e28_7c9455f0",
+      "revId": "43da3f669b0d1780c5d97cec275df5139329c054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
