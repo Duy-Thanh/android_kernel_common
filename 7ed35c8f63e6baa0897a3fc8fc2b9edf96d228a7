@@ -46,6 +46,30 @@
       },
       "revId": "7ed35c8f63e6baa0897a3fc8fc2b9edf96d228a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc607e71_0c952212",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5484,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2021-06-18T05:06:17Z",
+      "side": 1,
+      "message": "I refer to Todd Kjos’s suggestion in change 1730194",
+      "parentUuid": "ec2e880d_4c374fef",
+      "range": {
+        "startLine": 5484,
+        "startChar": 0,
+        "endLine": 5484,
+        "endChar": 68
+      },
+      "revId": "7ed35c8f63e6baa0897a3fc8fc2b9edf96d228a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
