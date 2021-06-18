@@ -51,6 +51,23 @@
       "parentUuid": "83a87230_65f4f2af",
       "revId": "37294ea7091c552fbbfb2290e33df638537d1a40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b981ab89_313b8997",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1872722
+      },
+      "writtenOn": "2021-06-18T09:22:20Z",
+      "side": 1,
+      "message": "We want to fix it in priority, because our kernel meets the ABI issue and always get the pre-submit verify -1. Therefore, we want to fix it and not block the TH build.",
+      "revId": "37294ea7091c552fbbfb2290e33df638537d1a40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
