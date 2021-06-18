@@ -16,6 +16,24 @@
       "message": ".xml file update should show the \"short report\" that was created when it generated it.\n\nOtherwise, this is fine, no objection to the symbol addition.",
       "revId": "285c12a86856c6626a9033af5ad2cf14e55fe974",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2926c9f5_316e4667",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1642820
+      },
+      "writtenOn": "2021-06-18T03:14:11Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "d1f21982_16c21614",
+      "revId": "285c12a86856c6626a9033af5ad2cf14e55fe974",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
