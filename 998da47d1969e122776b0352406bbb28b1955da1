@@ -16,6 +16,23 @@
       "message": "-2 while we try to get the other abi changes in first...",
       "revId": "998da47d1969e122776b0352406bbb28b1955da1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c143f430_7f6b550b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-06-18T15:26:18Z",
+      "side": 1,
+      "message": "please rebase",
+      "revId": "998da47d1969e122776b0352406bbb28b1955da1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
