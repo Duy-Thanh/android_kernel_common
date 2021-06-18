@@ -419,6 +419,8 @@
   devm_thermal_zone_of_sensor_unregister
   devm_usb_get_phy_by_phandle
   _dev_notice
+  dev_pm_domain_attach_by_name
+  dev_pm_domain_detach
   dev_pm_opp_add
   dev_pm_opp_disable
   dev_pm_opp_find_freq_ceil
@@ -552,6 +554,7 @@
   __drm_atomic_helper_crtc_destroy_state
   __drm_atomic_helper_crtc_duplicate_state
   __drm_atomic_helper_crtc_reset
+  drm_atomic_helper_disable_all
   drm_atomic_helper_disable_plane
   drm_atomic_helper_duplicate_state
   drm_atomic_helper_fake_vblank
@@ -574,6 +577,7 @@
   drm_atomic_private_obj_init
   drm_atomic_set_crtc_for_plane
   drm_atomic_set_fb_for_plane
+  drm_atomic_set_mode_for_crtc
   drm_atomic_state_alloc
   drm_atomic_state_clear
   __drm_atomic_state_free
@@ -641,6 +645,7 @@
   drmm_mode_config_init
   drm_mode_config_reset
   drm_mode_convert_to_umode
+  drm_mode_copy
   drm_mode_duplicate
   drm_mode_equal
   drm_mode_equal_no_clocks
