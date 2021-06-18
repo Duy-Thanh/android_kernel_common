@@ -34,6 +34,24 @@
       "parentUuid": "fa668e01_9b3fba14",
       "revId": "43da3f669b0d1780c5d97cec275df5139329c054",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6e49e28_7c9455f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1642820
+      },
+      "writtenOn": "2021-06-18T04:05:13Z",
+      "side": 1,
+      "message": "What I wand to add in android/abi_gki_aarch64_exynos is \u0027ufshcd_config_pwr_mode\u0027.\nBut the current xml (android/abi_gki_aarch64.xml) has already had it because a person who submitted android/abi_gki_aarch64_exynosauto contained it in his list.\n\nSo, when I run abi reporting with my change, the report has nothing.\n\nIn this situation, could you tell me if there is anything to add into the changelog?\nNow, I just want to add \u0027ufshcd_config_pwr_mode\u0027 into android/abi_gki_aarch64_exynos. Because if the module changes to call the function w/o the change of android/abi_gki_aarch64_exynos, I was told that booting fails.\n\nOr don\u0027t I understand correctly?",
+      "parentUuid": "b1cdb386_1e1f9458",
+      "revId": "43da3f669b0d1780c5d97cec275df5139329c054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
