@@ -68,6 +68,24 @@
       "message": "We want to fix it in priority, because our kernel meets the ABI issue and always get the pre-submit verify -1. Therefore, we want to fix it and not block the TH build.",
       "revId": "37294ea7091c552fbbfb2290e33df638537d1a40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28fccb54_4529535c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-06-18T09:46:47Z",
+      "side": 1,
+      "message": "I understand. Everyone\u0027s change is priority. Nevertheless, we have a race here.\n\nThese are the KMI breaking changes for this break window:\nhttps://android-review.googlesource.com/q/hashtag:kmi-changes-for-2021-06-18\n\nThey are in progress. If we now disturb this process, then it will cause a delay for every one.",
+      "parentUuid": "b981ab89_313b8997",
+      "revId": "37294ea7091c552fbbfb2290e33df638537d1a40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
