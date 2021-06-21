@@ -1,0 +1,41 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000012001120",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1742573?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "789dd46d_1227db19",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 16,
+                "startChar": 0,
+                "endLine": 16,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Elliot Berman \u003ceberman@codeaurora.org\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "1995b89b_b4775cdc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-06-21T19:00:37Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Elliot Berman \u003ceberman@codeaurora.org\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 379980971 android-build.ayeaye-python-dispatcher_20210617.05_p0",
+      "revId": "7e293a1ed396aed3eefa65714688c7a93c2c9f6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
