@@ -123,6 +123,24 @@
       "parentUuid": "677e57d6_d6bb1b21",
       "revId": "73544a54474e62412cde7cfcc17d48a3557d9b2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd0ce6fc_5c16d91b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-21T08:28:41Z",
+      "side": 1,
+      "message": "I am sorry, but I still do not understand.\n\nYou should not be modifying standard USB commands like this, as that is a change in the protocol.  If you have an additional command that you wish to use, please use the vendor protocol type, that is what it is there for as per the USB standard.\n\nWe can take this to email if you still have questions.",
+      "parentUuid": "2b326c71_6eb4f776",
+      "revId": "73544a54474e62412cde7cfcc17d48a3557d9b2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
