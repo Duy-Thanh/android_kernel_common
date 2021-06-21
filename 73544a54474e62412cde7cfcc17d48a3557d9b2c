@@ -105,6 +105,24 @@
       "parentUuid": "bf818d43_a81e41d0",
       "revId": "73544a54474e62412cde7cfcc17d48a3557d9b2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b326c71_6eb4f776",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876972
+      },
+      "writtenOn": "2021-06-21T01:51:02Z",
+      "side": 1,
+      "message": "#### I do not understand, what are you trying to add that is \"custom\" here?  \nAnswer1：\nDuring USB Control Transaction, the usb_ctrlrequest-\u003ebmRequest that it processes normally has standard bmRequestType fields such as GET_DESCRIPTOR and GET_CONFIGURATION.\nWhen we want to perform additional processing in USB Control Transaction. The standard bmRequestType field cannot meet our needs.\n\n#### What vendor addition are you adding that the host will recognize?\nAnswer2：\nSo we want to add a Vendor Hook to handle some of our ctrl-\u003ebRequest. For example: ctrl-\u003ebRequest \u003d\u003d UCAR_SEND_STRING, ctrl-\u003ebRequest \u003d\u003d UCAR_GET_VERSION, etc.\nIt is our custom ctrl-\u003ebRequest field.\n\n#### Do you have an example of what you are trying to do here?\nAnswer3：\nE.g:\nstatic int ucar_ctrlreq (struct usb_composite_dev *cdev,\n                     const struct usb_ctrlrequest *ctrl)\n{\n    if (ctrl-\u003ebRequestType \u003d\u003d (USB_DIR_OUT | USB_TYPE_VENDOR)) {\n        if (ctrl-\u003ebRequest \u003d\u003d UCAR_SEND_STRING) {\n            printk(\"ucar_ctrlreq: UCAR_SEND_STRING:  ctrl-\u003ebRequest \u003d %d, wIndex(ID) \u003d %d, wValue \u003d %d, wLength \u003d %d\\n\",\n                    ctrl-\u003ebRequest, ctrl-\u003ewIndex, ctrl-\u003ewValue, ctrl-\u003ewLength);\n            value \u003d 0;\n        } else if (ctrl-\u003ebRequest \u003d\u003d UCAR_SWITCH_NCM) {\n            printk(\"ucar_ctrlreq: UCAR_SWITCH_NCM: ctrl-\u003ebRequest \u003d %d, wIndex \u003d %d, wValue \u003d %d, wLength \u003d %d\\n\",\n            ctrl-\u003ebRequest, ctrl-\u003ewIndex, ctrl-\u003ewValue, ctrl-\u003ewLength);\n            _ucar_setup_desc-\u003eflag \u003d 1;\n            value \u003d 0;\n            schedule_work(\u0026_ucar_setup_desc-\u003ework);\n        }\n\n    } else if (ctrl-\u003ebRequestType \u003d\u003d (USB_DIR_IN | USB_TYPE_VENDOR)) {\n        if (ctrl-\u003ebRequest \u003d\u003d UCAR_GET_VERSION) {\n            printk(\"ucar_ctrlreq: UCAR_GET_VERSION:  ctrl-\u003ebRequest \u003d %d, wIndex \u003d %d, wValue \u003d %d, wLength \u003d %d\\n\",\n                    ctrl-\u003ebRequest, ctrl-\u003ewIndex, ctrl-\u003ewValue, ctrl-\u003ewLength);\n            _ucar_setup_desc-\u003eflag \u003d 2;\n            _ucar_setup_desc-\u003eversion \u003d UCAR_REPLY_VERSION;\n            schedule_work(\u0026_ucar_setup_desc-\u003ework);\n            value \u003d 0;\n        }\n    }\n}\n\nstatic void ucar_usb_ctrlrequest(void *data, struct usb_composite_dev *cdev,\n                const struct usb_ctrlrequest *ctrl, int *value)\n{\n    *value \u003d ucar_ctrlreq(cdev, ctrl);\n}\n\nstatic int ucar_probe() {\n    register_trace_android_vh_ucar_ncm_ctrlrequest(ucar_usb_ctrlrequest, NULL);\n    return 0;\n}",
+      "parentUuid": "677e57d6_d6bb1b21",
+      "revId": "73544a54474e62412cde7cfcc17d48a3557d9b2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
