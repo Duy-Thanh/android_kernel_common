@@ -16,6 +16,23 @@
       "message": "Looks good to me. +1. ",
       "revId": "128ec9a79b78d69d500489ea9380839c48c43f97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ff04ebe_1d72e870",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-21T13:24:47Z",
+      "side": 1,
+      "message": "what is wrong with just using lockdep for this?",
+      "revId": "128ec9a79b78d69d500489ea9380839c48c43f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
