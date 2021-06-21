@@ -33,6 +33,24 @@
       "message": "what is wrong with just using lockdep for this?",
       "revId": "128ec9a79b78d69d500489ea9380839c48c43f97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66516416_119025df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1597696
+      },
+      "writtenOn": "2021-06-21T19:34:59Z",
+      "side": 1,
+      "message": "Lockdep doesn\u0027t seem to be catching bugs in spin_bug cases [1].\n\n[1] https://partnerissuetracker.corp.google.com/issues/191245939#comment4",
+      "parentUuid": "3ff04ebe_1d72e870",
+      "revId": "128ec9a79b78d69d500489ea9380839c48c43f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
