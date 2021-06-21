@@ -61,6 +61,10 @@ DECLARE_HOOK(android_vh_mmap_region,
 DECLARE_HOOK(android_vh_try_to_unmap_one,
 	TP_PROTO(struct vm_area_struct *vma, struct page *page, unsigned long addr, bool ret),
 	TP_ARGS(vma, page, addr, ret));
+struct mem_cgroup;
+DECLARE_HOOK(android_vh_vmpressure,
+	TP_PROTO(struct mem_cgroup *memcg, bool *bypass),
+	TP_ARGS(memcg, bypass));
 
 #endif /* _TRACE_HOOK_MM_H */
 
