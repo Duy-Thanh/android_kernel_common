@@ -105,6 +105,23 @@
       "parentUuid": "df4f6abe_0fa10754",
       "revId": "18b60fcad1783e812c758fa2acd90c8934bfaeda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef5f8fbd_44a2325e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-06-21T17:56:25Z",
+      "side": 1,
+      "message": "Greg: It sounds like part-time support from the auto team will be okay. I think this is not much worse than other parts of the kernel we have enabled in GKI. If you agree, please remove -2.",
+      "revId": "18b60fcad1783e812c758fa2acd90c8934bfaeda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
