@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "082ca911_62b2d44c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-21T08:15:09Z",
+      "side": 1,
+      "message": "Why did you update the .xml file?  If that is needed, then you need to add the shortlog of the abi changes to the commit message.\n\nPlease break this up into 2 changes, one for the config option change, and one for the .xml change.  If this new option breaks the abi, we will have to wait until the next ABI break chance before we can accept it, and then the .xml update will not be needed.",
+      "revId": "18b60fcad1783e812c758fa2acd90c8934bfaeda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
