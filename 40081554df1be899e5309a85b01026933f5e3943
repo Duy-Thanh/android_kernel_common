@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60b9643e_98e0544f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1883825
+      },
+      "writtenOn": "2021-06-21T18:53:57Z",
+      "side": 1,
+      "message": "I have split this gerrit into two. \n\nttps://android-review.googlesource.com/c/kernel/common/+/1742573 for RCUTORTURE hidden config.",
+      "revId": "40081554df1be899e5309a85b01026933f5e3943",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
