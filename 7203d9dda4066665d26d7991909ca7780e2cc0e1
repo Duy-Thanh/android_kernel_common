@@ -142,6 +142,30 @@
       },
       "revId": "7203d9dda4066665d26d7991909ca7780e2cc0e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "333df14b_988779fc",
+        "filename": "drivers/remoteproc/remoteproc_core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1729,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2021-06-22T22:10:35Z",
+      "side": 1,
+      "message": "Hi Saravana,\nQualcomm wuold like to use vendor module to change the behavior of the remote proc recovery. \n\nperf builds -\u003e\u003eWe dont want to crash on the perf builds, so vendor module would not even register with this hook.\n\ndebug builds --\u003e With debug builds vendor module can register and provide more options to vendor.",
+      "parentUuid": "e481d1e8_d93a308a",
+      "range": {
+        "startLine": 1729,
+        "startChar": 1,
+        "endLine": 1729,
+        "endChar": 32
+      },
+      "revId": "7203d9dda4066665d26d7991909ca7780e2cc0e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
