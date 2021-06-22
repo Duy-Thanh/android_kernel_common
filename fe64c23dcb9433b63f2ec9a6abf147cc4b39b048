@@ -33,6 +33,52 @@
       "message": "Always try to submit changes upstream first before considering that they will not accept it.  If you have a valid use-case, that\u0027s a good reason for upstream to take your change.",
       "revId": "fe64c23dcb9433b63f2ec9a6abf147cc4b39b048",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dd90849_4aeb0a9b",
+        "filename": "include/trace/hooks/remoteproc.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-22T22:09:13Z",
+      "side": 1,
+      "message": "This is no longer needed. Please remove.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 71
+      },
+      "revId": "fe64c23dcb9433b63f2ec9a6abf147cc4b39b048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "036d158a_6ead70b2",
+        "filename": "include/trace/hooks/remoteproc.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-22T22:09:13Z",
+      "side": 1,
+      "message": "No longer needed. Please remove.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 6
+      },
+      "revId": "fe64c23dcb9433b63f2ec9a6abf147cc4b39b048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
