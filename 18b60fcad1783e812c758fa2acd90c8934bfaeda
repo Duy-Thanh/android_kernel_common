@@ -140,6 +140,24 @@
       "parentUuid": "082ca911_62b2d44c",
       "revId": "18b60fcad1783e812c758fa2acd90c8934bfaeda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "467abf9a_8e388ad5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2021-06-22T22:52:36Z",
+      "side": 1,
+      "message": "How do I merge this change? Do I wait until the next ABI window or do I merge my two changes as a topic this week?",
+      "parentUuid": "a80dc589_6d266e79",
+      "revId": "18b60fcad1783e812c758fa2acd90c8934bfaeda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
