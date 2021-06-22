@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08556a1f_cb3246f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-22T15:46:46Z",
+      "side": 1,
+      "message": "Please be more descriptive in the title (and there is only 1 hook introduced). Maybe \"ANDROID: Add hook to show vendor info for transactions\"",
+      "revId": "7ed35c8f63e6baa0897a3fc8fc2b9edf96d228a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dceef225_092c657b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-22T15:46:46Z",
+      "side": 1,
+      "message": "fix typo",
+      "range": {
+        "startLine": 12,
+        "startChar": 49,
+        "endLine": 12,
+        "endChar": 55
+      },
+      "revId": "7ed35c8f63e6baa0897a3fc8fc2b9edf96d228a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b8cc085e_463c474f",
         "filename": "/COMMIT_MSG",
         "patchSetId": 7
@@ -163,6 +203,30 @@
       "side": 1,
       "message": "When (proc !\u003d to_proc) or (buffer \u003d\u003d NULL) are true, it will return early, resulting in the inability to execute the end of the function, so prepending",
       "parentUuid": "d36d0ea0_937705f2",
+      "range": {
+        "startLine": 5484,
+        "startChar": 0,
+        "endLine": 5484,
+        "endChar": 68
+      },
+      "revId": "7ed35c8f63e6baa0897a3fc8fc2b9edf96d228a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68264284_c10b3dfa",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5484,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-22T15:46:46Z",
+      "side": 1,
+      "message": "Please fix the typo: \"pritf\" should be \"print\"",
+      "parentUuid": "9ccf57c6_0e1e627e",
       "range": {
         "startLine": 5484,
         "startChar": 0,
