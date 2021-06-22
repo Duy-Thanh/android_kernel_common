@@ -69,6 +69,29 @@
       "parentUuid": "66516416_119025df",
       "revId": "128ec9a79b78d69d500489ea9380839c48c43f97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e40aaaf2_4f52a123",
+        "filename": "kernel/locking/spinlock_debug.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-22T15:55:42Z",
+      "side": 1,
+      "message": "this is written to, but never read from?",
+      "range": {
+        "startLine": 92,
+        "startChar": 52,
+        "endLine": 92,
+        "endChar": 61
+      },
+      "revId": "128ec9a79b78d69d500489ea9380839c48c43f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
