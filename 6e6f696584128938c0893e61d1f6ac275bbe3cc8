@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34a2439a_04e6243f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-22T10:46:59Z",
+      "side": 1,
+      "message": "Always point to lore.kernel.org please, lkml is untrustworthy. ",
+      "revId": "6e6f696584128938c0893e61d1f6ac275bbe3cc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
