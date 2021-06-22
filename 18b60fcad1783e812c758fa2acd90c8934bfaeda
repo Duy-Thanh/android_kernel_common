@@ -122,6 +122,24 @@
       "message": "Greg: It sounds like part-time support from the auto team will be okay. I think this is not much worse than other parts of the kernel we have enabled in GKI. If you agree, please remove -2.",
       "revId": "18b60fcad1783e812c758fa2acd90c8934bfaeda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a80dc589_6d266e79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2021-06-22T02:46:28Z",
+      "side": 1,
+      "message": "I moved the ABI xml changes into a separate cl.",
+      "parentUuid": "082ca911_62b2d44c",
+      "revId": "18b60fcad1783e812c758fa2acd90c8934bfaeda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
