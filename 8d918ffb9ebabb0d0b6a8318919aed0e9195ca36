@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fe165c5_fc519238",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-22T10:45:19Z",
+      "side": 1,
+      "message": "Note, in the past we have been ignoring CAN security issues, if this is now a supported option, we will need a contact to be able to help with testing, especially given the number of CAN issues being found lately, it is a subsystem with a lot of security work currently happening in upstream.",
+      "revId": "8d918ffb9ebabb0d0b6a8318919aed0e9195ca36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
