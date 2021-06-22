@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c31b440_5f23701d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-06-22T19:20:17Z",
+      "side": 1,
+      "message": "Please clarify what you mean by \"real iova\". AFAIU the previous version was reporting iova-\u003epfn_lo and now you want to see an address instead? If so then please just state that.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 22
+      },
+      "revId": "57de10666c3d3dc3287e68710621ecfc8b12d2df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
