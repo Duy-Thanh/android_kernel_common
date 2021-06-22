@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f808e34_2bfc825e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1597696
+      },
+      "writtenOn": "2021-06-22T19:46:09Z",
+      "side": 1,
+      "message": "Ack; will send upstream.",
+      "parentUuid": "fe227f36_8d4f33ed",
+      "revId": "128ec9a79b78d69d500489ea9380839c48c43f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e40aaaf2_4f52a123",
         "filename": "kernel/locking/spinlock_debug.c",
         "patchSetId": 5
@@ -84,6 +102,30 @@
       "writtenOn": "2021-06-22T15:55:42Z",
       "side": 1,
       "message": "this is written to, but never read from?",
+      "range": {
+        "startLine": 92,
+        "startChar": 52,
+        "endLine": 92,
+        "endChar": 61
+      },
+      "revId": "128ec9a79b78d69d500489ea9380839c48c43f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaf7b98d_0a30cba7",
+        "filename": "kernel/locking/spinlock_debug.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1597696
+      },
+      "writtenOn": "2021-06-22T19:46:09Z",
+      "side": 1,
+      "message": "Yes, the intention is that the backtrace will be read from dumps when the kernel goes down due to the BUG() when a recursion is detected.",
+      "parentUuid": "e40aaaf2_4f52a123",
       "range": {
         "startLine": 92,
         "startChar": 52,
