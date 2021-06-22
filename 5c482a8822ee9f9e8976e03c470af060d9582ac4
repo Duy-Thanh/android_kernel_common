@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000012066678",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1742582?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5bbfe0e0_71e27882",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-06-22T22:48:36Z",
+      "side": 1,
+      "message": "Commit does not link to an upstream reference at lore\nPlease add a line like \u0027Link: https://lore.kernel.org/...\u0027\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 380822050 android-build.ayeaye-python-dispatcher_20210622.05_p0",
+      "revId": "5c482a8822ee9f9e8976e03c470af060d9582ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000012066678",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1742582?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "ed850694_0f444576",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 16,
+                "startChar": 0,
+                "endLine": 16,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Stephen Dickey \u003cdickey@codeaurora.org\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "e5d0405b_2d0f1cf3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-06-22T22:48:36Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Stephen Dickey \u003cdickey@codeaurora.org\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 380822050 android-build.ayeaye-python-dispatcher_20210622.05_p0",
+      "revId": "5c482a8822ee9f9e8976e03c470af060d9582ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
