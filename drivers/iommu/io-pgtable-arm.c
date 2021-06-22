@@ -119,11 +119,13 @@
 #define ARM_LPAE_MAIR_ATTR_INC_OWBRANWA	0xe4ULL
 #define ARM_LPAE_MAIR_ATTR_INC_OWBRWA	0xf4ULL
 #define ARM_LPAE_MAIR_ATTR_WBRWA	0xffULL
+#define ARM_LPAE_MAIR_ATTR_IWBRWA_OWBRA	0xefULL
 #define ARM_LPAE_MAIR_ATTR_IDX_NC	0
 #define ARM_LPAE_MAIR_ATTR_IDX_CACHE	1
 #define ARM_LPAE_MAIR_ATTR_IDX_DEV	2
 #define ARM_LPAE_MAIR_ATTR_IDX_INC_OCACHE	3
 #define ARM_LPAE_MAIR_ATTR_IDX_INC_OCACHE_NWA	4
+#define ARM_LPAE_MAIR_ATTR_IDX_IWBRWA_OWBRA	5
 
 #define ARM_MALI_LPAE_TTBR_ADRMODE_TABLE (3u << 0)
 #define ARM_MALI_LPAE_TTBR_READ_INNER	BIT(2)
@@ -444,6 +446,9 @@ static arm_lpae_iopte arm_lpae_prot_to_pte(struct arm_lpae_io_pgtable *data,
 		else if (prot & IOMMU_SYS_CACHE_ONLY_NWA)
 			pte |= (ARM_LPAE_MAIR_ATTR_IDX_INC_OCACHE_NWA
 				<< ARM_LPAE_PTE_ATTRINDX_SHIFT);
+		else if (prot & IOMMU_CACHE_IWBRWA_OWBRA)
+			pte |= (ARM_LPAE_MAIR_ATTR_IDX_IWBRWA_OWBRA
+				<< ARM_LPAE_PTE_ATTRINDX_SHIFT);
 	}
 
 	/*
@@ -452,7 +457,8 @@ static arm_lpae_iopte arm_lpae_prot_to_pte(struct arm_lpae_io_pgtable *data,
 	 * "outside the GPU" (i.e. either the Inner or System domain in CPU
 	 * terms, depending on coherency).
 	 */
-	if (prot & IOMMU_CACHE && data->iop.fmt != ARM_MALI_LPAE)
+	if ((prot & IOMMU_CACHE || prot & IOMMU_CACHE_IWBRWA_OWBRA) &&
+			data->iop.fmt != ARM_MALI_LPAE)
 		pte |= ARM_LPAE_PTE_SH_IS;
 	else
 		pte |= ARM_LPAE_PTE_SH_OS;
@@ -904,7 +910,9 @@ arm_64_lpae_alloc_pgtable_s1(struct io_pgtable_cfg *cfg, void *cookie)
 	      (ARM_LPAE_MAIR_ATTR_INC_OWBRWA
 	       << ARM_LPAE_MAIR_ATTR_SHIFT(ARM_LPAE_MAIR_ATTR_IDX_INC_OCACHE)) |
 	      (ARM_LPAE_MAIR_ATTR_INC_OWBRANWA
-	       << ARM_LPAE_MAIR_ATTR_SHIFT(ARM_LPAE_MAIR_ATTR_IDX_INC_OCACHE_NWA));
+	       << ARM_LPAE_MAIR_ATTR_SHIFT(ARM_LPAE_MAIR_ATTR_IDX_INC_OCACHE_NWA)) |
+	      (ARM_LPAE_MAIR_ATTR_IWBRWA_OWBRA
+	       << ARM_LPAE_MAIR_ATTR_SHIFT(ARM_LPAE_MAIR_ATTR_IDX_IWBRWA_OWBRA));
 
 	cfg->arm_lpae_s1_cfg.mair = reg;
 

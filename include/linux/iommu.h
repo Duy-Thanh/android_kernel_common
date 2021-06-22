@@ -44,6 +44,14 @@
  * cache.
  */
 #define IOMMU_SYS_CACHE_ONLY_NWA (1 << 7)
+/*
+ * Io-coherent masters can use this page protection flag to set a no write
+ * allocation cache policy for a transparent outer level of cache, also
+ * known as the last-level or system cache. Inner levels of cache continue to
+ * have a write-allocate policy.
+ */
+#define IOMMU_CACHE_IWBRWA_OWBRA (1 << 8)
+
 
 struct iommu_ops;
 struct iommu_group;
