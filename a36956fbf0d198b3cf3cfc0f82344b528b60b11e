@@ -16,6 +16,24 @@
       "message": "Please add KMI topic tag here? ",
       "revId": "a36956fbf0d198b3cf3cfc0f82344b528b60b11e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e26bcc0f_197d4a44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-23T22:37:36Z",
+      "side": 1,
+      "message": "I add that once it passes all tests other than the ABI ones. It turns out this causes a test failure in\n```\ncontrollers.cgroup_fj_function_net_prio_64bit#controllers.cgroup_fj_function_net_prio_64bit\n\nbinary returned non-zero. Exit code: 3, stderr: /data/local/tmp/ltp/DATA/nativetest64/ltp/testcases/bin/cgroup_fj_function.sh[207]: can\u0027t create /dev/cgroup/ltp/ltp_1/notify_on_release: No such file or directory\nbinary returned non-zero. Exit code: 3, stderr: /data/local/tmp/ltp/DATA/nativetest64/ltp/testcases/bin/cgroup_fj_function.sh[207]: can\u0027t create /dev/cgroup/ltp/ltp_1/notify_on_release: No such file or directory\n/data/local/tmp/ltp/DATA/nativetest64/ltp/testcases/bin/cgroup_fj_function.sh[207]: can\u0027t create /dev/cgroup/ltp/ltp_1/notify_on_release: No such file or directory\ncat: /dev/cgroup/ltp/ltp_1/notify_on_release: No such file or directory\n/data/local/tmp/ltp/DATA/nativetest64/ltp/testcases/bin/cgroup_fj_function.sh[208]: cgroup_fj_function2_net_prio 9 TBROK: cat /dev/cgroup/ltp/ltp_1/notify_on_release failed\ncgroup_fj_function2_net_prio 9 TINFO: Removing all ltp subgroups...: unexpected \u00279\u0027\n/data/local/tmp/ltp/DATA/nativetest64/ltp/testcases/bin/cgroup_fj_function.sh[208]: can\u0027t create /dev/cgroup/ltp/ltp_1/notify_on_release: No such file or directory\n/data/local/tmp/ltp/DATA/nativetest64/ltp/testcases/bin/cgroup_fj_function.sh[210]: kill: 2510: No such process\nrm: /data/local/tmp/ltp/DATA/nativetest64/ltp/tmp/tmpdir/cgroup_fj_function2_net_prio.uAwvBSVQA7: No such file or directory\nfind: \u0027/dev/cgroup/ltp/\u0027: No such file or directory\n, stdout: cgroup_fj_function2_net_prio 1 TINFO: Subsystem net_prio is not mounted, mounting it at /dev/cgroup\ncgroup_fj_function2_net_prio 1 TINFO: Attaching task 2510 to /dev/cgroup/ltp/ltp_1\ncgroup_fj_function2_net_prio 1 TINFO: Attaching task 2510 to /dev/cgroup/ltp\ncgroup_fj_function2_net_prio 1 TPASS: Task attached succesfully\ncgroup_fj_function2_net_prio 2 TPASS: Successfully moved /dev/cgroup/ltp/ltp_2 to /dev/cgroup/ltp/ltp_3\ncgroup_fj_function2_net_prio 3 TPASS: Failed to move /dev/cgroup/ltp/ltp_2 over existing /dev/cgroup/ltp/ltp_1\ncgroup_fj_function2_net_prio 4 TINFO: Attaching task 2510 to /dev/cgroup/ltp/ltp_1\ncgroup_fj_function2_net_prio 4 TPASS: Group /dev/cgroup/ltp/ltp_1 with task 2510 cannot be removed\ncgroup_fj_function2_net_prio 5 TPASS: Dir /dev/cgroup/ltp/ltp_1 with subdir \u0027a\u0027 cannot be removed\ncgroup_fj_function2_net_prio 6 TPASS: Subgroup /dev/cgroup/ltp/ltp_1 cannot be moved to /data/local/tmp/ltp/DATA/nativetest64/ltp/tmp/tmpdir/cgroup_fj_function2_net_prio.uAwvBSVQA7/ltp\ncgroup_fj_function2_net_prio 7 TPASS: Tasks file /dev/cgroup/ltp/ltp_1/tasks cannot be removed\ncgroup_fj_function2_net_prio 8 TPASS: Cannot write invalid values to /dev/cgroup/ltp/ltp_1/notify_on_release\ncgroup_fj_function2_net_prio 9 TFAIL: Failed to set /dev/cgroup/ltp/ltp_1/notify_on_release to 0\ncgroup_fj_function2_net_prio 10 TBROK: kill -9 2510 failed\ncgroup_fj_function2_net_prio 10 TINFO: Removing all ltp subgroups...\n```",
+      "parentUuid": "67ee2f28_a8b5824e",
+      "revId": "a36956fbf0d198b3cf3cfc0f82344b528b60b11e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
