@@ -182,6 +182,30 @@
       },
       "revId": "128ec9a79b78d69d500489ea9380839c48c43f97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e567acee_45b99463",
+        "filename": "kernel/locking/spinlock_debug.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-23T12:27:50Z",
+      "side": 1,
+      "message": "What \"ramdump\" information?  Where will it show up?  Just writing to random structures feels really wrong, combined with the fact that this just massively increased the size of all of the places in the kernel that use this lock.",
+      "parentUuid": "26660465_eaeacce4",
+      "range": {
+        "startLine": 92,
+        "startChar": 52,
+        "endLine": 92,
+        "endChar": 61
+      },
+      "revId": "128ec9a79b78d69d500489ea9380839c48c43f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
