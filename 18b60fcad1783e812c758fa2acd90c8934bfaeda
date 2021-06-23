@@ -158,6 +158,24 @@
       "parentUuid": "a80dc589_6d266e79",
       "revId": "18b60fcad1783e812c758fa2acd90c8934bfaeda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41abd54e_8e58f63b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-23T12:55:29Z",
+      "side": 1,
+      "message": "This has to wait until the next kabi break.",
+      "parentUuid": "467abf9a_8e388ad5",
+      "revId": "18b60fcad1783e812c758fa2acd90c8934bfaeda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
