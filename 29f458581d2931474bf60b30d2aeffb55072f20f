@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d64772a_95342767",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-06-23T20:50:18Z",
+      "side": 1,
+      "message": "-2 until pte_special upstream solution is finilized.",
+      "revId": "29f458581d2931474bf60b30d2aeffb55072f20f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b752fc2e_fcbc1cd3",
