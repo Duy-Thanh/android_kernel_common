@@ -16,6 +16,24 @@
       "message": "Commit message change only? Should this be abandoned?",
       "revId": "4220e6e4f47ad7614e261842a1a6bbfaf72c95cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6361901c_2b1234d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2021-06-23T20:17:24Z",
+      "side": 1,
+      "message": "When I originally uploaded this, it was not picked up yet by upstream and by ACK as well (please take a look at patchset 1). Eventually, it was backported, so it became a nop. Same goes for 12-5.10 CP as well.\n\nI think it\u0027s safe to abandon it.",
+      "parentUuid": "f8d5cd71_40f0bcc5",
+      "revId": "4220e6e4f47ad7614e261842a1a6bbfaf72c95cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
