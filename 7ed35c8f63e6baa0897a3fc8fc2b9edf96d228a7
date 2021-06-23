@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "223606b5_49edf6e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2021-06-23T02:29:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08556a1f_cb3246f4",
+      "revId": "7ed35c8f63e6baa0897a3fc8fc2b9edf96d228a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dceef225_092c657b",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-06-22T15:46:46Z",
       "side": 1,
       "message": "fix typo",
+      "range": {
+        "startLine": 12,
+        "startChar": 49,
+        "endLine": 12,
+        "endChar": 55
+      },
+      "revId": "7ed35c8f63e6baa0897a3fc8fc2b9edf96d228a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1149a9f2_896887da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2021-06-23T02:29:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dceef225_092c657b",
       "range": {
         "startLine": 12,
         "startChar": 49,
@@ -227,6 +269,30 @@
       "side": 1,
       "message": "Please fix the typo: \"pritf\" should be \"print\"",
       "parentUuid": "9ccf57c6_0e1e627e",
+      "range": {
+        "startLine": 5484,
+        "startChar": 0,
+        "endLine": 5484,
+        "endChar": 68
+      },
+      "revId": "7ed35c8f63e6baa0897a3fc8fc2b9edf96d228a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce6b4a95_873aecb5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5484,
+      "author": {
+        "id": 1720452
+      },
+      "writtenOn": "2021-06-23T02:29:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68264284_c10b3dfa",
       "range": {
         "startLine": 5484,
         "startChar": 0,
