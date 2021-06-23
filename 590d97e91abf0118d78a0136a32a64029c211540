@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e53bf671_e1019f1f",
+        "filename": "block/blk-mq-tag.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-23T20:33:25Z",
+      "side": 1,
+      "message": "where are the users of this lock? If it is needed to protect rqs, then it should be sent upstream. If this is just needed for vendor-specific code, then use OEM data for it.",
+      "revId": "590d97e91abf0118d78a0136a32a64029c211540",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
