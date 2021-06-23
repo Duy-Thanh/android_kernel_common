@@ -206,6 +206,30 @@
       },
       "revId": "128ec9a79b78d69d500489ea9380839c48c43f97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "479cf222_d0895949",
+        "filename": "kernel/locking/spinlock_debug.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1716199
+      },
+      "writtenOn": "2021-06-23T17:36:09Z",
+      "side": 1,
+      "message": "Hi Greg, \n\nFor production kernel, this feature is not enabled.  So we are not increasing the kernel size. \n\nFrom mass testing point of view, we nee this type of features. If upstream dont like this change that is fine and dont post to upstream. But we need to instrument like this to debug issues easily. \n\n\nWhat \"ramdump\" information?  Where will it show up?\n\u003cPrasad\u003e Ramdumps - We take snapshot of whole DDR to debug from offline analysis point of view. So we use the GDB or T32 simulator for debugging the Linux kernel issues. When load whole DDR snapshot and loaded vmlinux into T32, we  can find which function or stack took this spinlock last.  \n\nIf you want us dump call stack, we can dump that information in \"recursion\" case using the  stack_trace_print API. \n\n-Thanks, Prasad",
+      "parentUuid": "e567acee_45b99463",
+      "range": {
+        "startLine": 92,
+        "startChar": 52,
+        "endLine": 92,
+        "endChar": 61
+      },
+      "revId": "128ec9a79b78d69d500489ea9380839c48c43f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
