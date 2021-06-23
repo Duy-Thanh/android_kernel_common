@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dccc6f73_9c4d3ab8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-06-23T18:04:47Z",
+      "side": 1,
+      "message": "What is \"mobitor\"? If this is some internal name then please do not use it, has no value here. I suggest changing the description this way:\n\nIova is identified in the alloc vendor hook by its pfn (iova-\u003epfn_lo) and in free vendor hook by its address (iova-\u003epfn_lo \u003c\u003c iova_shift(iovad)). Change alloc vendor hook to use address as well for consistency.",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 10
+      },
+      "revId": "5075852d9843d9ce2fb977bd87109f441b9b2cd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
