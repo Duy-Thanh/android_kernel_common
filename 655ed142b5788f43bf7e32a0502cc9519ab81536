@@ -16,6 +16,24 @@
       "message": "Only a commit message -- no code changes? Should this be abandoned?",
       "revId": "655ed142b5788f43bf7e32a0502cc9519ab81536",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d537ed3b_d5148d9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1258954
+      },
+      "writtenOn": "2021-06-23T22:31:46Z",
+      "side": 1,
+      "message": "Same as the 12-5.4 CL. This change was already backported so became nop. Please abandon.",
+      "parentUuid": "cff62da9_973014e9",
+      "revId": "655ed142b5788f43bf7e32a0502cc9519ab81536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
