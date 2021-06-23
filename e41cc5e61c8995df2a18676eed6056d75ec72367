@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64be3d30_c04d6bee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-06-23T16:53:37Z",
+      "side": 1,
+      "message": "Since this is FROMGIT: patch it should have a \"cherry picked from\". Example of this line for a patch in mm tree:\n\n(cherry picked from commit 9d817f08e60f8763472f389b70c4ad9dac1af8a6 https://github.com/hnaz/linux-mm tags/v5.11-rc2-mmots-2021-01-04-17-00)",
+      "revId": "e41cc5e61c8995df2a18676eed6056d75ec72367",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
