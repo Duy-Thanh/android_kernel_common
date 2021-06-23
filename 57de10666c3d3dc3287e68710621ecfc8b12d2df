@@ -22,6 +22,30 @@
       },
       "revId": "57de10666c3d3dc3287e68710621ecfc8b12d2df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31b55f3e_a45b5de6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1878921
+      },
+      "writtenOn": "2021-06-23T03:04:44Z",
+      "side": 1,
+      "message": "Thanks for your suggestion, I updated commit message, is it ok?",
+      "parentUuid": "4c31b440_5f23701d",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 22
+      },
+      "revId": "57de10666c3d3dc3287e68710621ecfc8b12d2df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
