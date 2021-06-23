@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99de30e6_8ff28793",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-23T23:21:39Z",
+      "side": 1,
+      "message": "Please drop the changes to the ABI description in this patch since a new ABI description will be built for all the patches in the July 2 KMI change.",
+      "revId": "51200b161b08a3a18138be6d160a4e376dc9b78d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
