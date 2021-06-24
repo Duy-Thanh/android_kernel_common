@@ -729,6 +729,11 @@ static void set_track(struct kmem_cache *s, void *object,
 
 		if (nr_entries < TRACK_ADDRS_COUNT)
 			p->addrs[nr_entries] = 0;
+<<<<<<< HEAD   (a75431 ANDROID: kleaf: Explicit list of ABI files.)
+=======
+		trace_android_vh_save_track_hash(alloc == TRACK_ALLOC,
+						(unsigned long)p);
+>>>>>>> CHANGE (7d216e ANDROID: Fix lost track action type in save_track_hash)
 #endif
 		p->addr = addr;
 		p->cpu = smp_processor_id();

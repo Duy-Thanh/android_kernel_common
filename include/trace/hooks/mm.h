@@ -59,6 +59,7 @@ DECLARE_HOOK(android_vh_cache_show,
 DECLARE_HOOK(android_vh_oom_check_panic,
 	TP_PROTO(struct oom_control *oc, int *ret),
 	TP_ARGS(oc, ret));
+<<<<<<< HEAD   (a75431 ANDROID: kleaf: Explicit list of ABI files.)
 DECLARE_HOOK(android_vh_drain_all_pages_bypass,
 	TP_PROTO(gfp_t gfp_mask, unsigned int order, unsigned long alloc_flags,
 		int migratetype, unsigned long did_some_progress,
@@ -139,6 +140,19 @@ DECLARE_HOOK(android_vh_rmqueue,
 		unsigned int alloc_flags, int migratetype),
 	TP_ARGS(preferred_zone, zone, order,
 		gfp_flags, alloc_flags, migratetype));
+=======
+DECLARE_HOOK(android_vh_save_vmalloc_stack,
+	TP_PROTO(unsigned long flags, struct vm_struct *vm),
+	TP_ARGS(flags, vm));
+DECLARE_HOOK(android_vh_show_stack_hash,
+	TP_PROTO(struct seq_file *m, struct vm_struct *v),
+	TP_ARGS(m, v));
+DECLARE_HOOK(android_vh_save_track_hash,
+	TP_PROTO(bool alloc, unsigned long p),
+	TP_ARGS(alloc, p));
+/* macro versions of hooks are no longer required */
+
+>>>>>>> CHANGE (7d216e ANDROID: Fix lost track action type in save_track_hash)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
