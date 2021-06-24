@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a208b8e3_f7bafd94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-06-24T14:13:15Z",
+      "side": 1,
+      "message": "Please drop the ABI.xml update from this patch -- the previous CL needs to be merged during the next KMI update, so we\u0027ll take care of updating the xml then.",
+      "revId": "2b4b45617b6d34b6bffa873a62760f053273d0cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
