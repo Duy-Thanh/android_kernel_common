@@ -16,6 +16,24 @@
       "message": "where are the users of this lock? If it is needed to protect rqs, then it should be sent upstream. If this is just needed for vendor-specific code, then use OEM data for it.",
       "revId": "590d97e91abf0118d78a0136a32a64029c211540",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "248167b3_cdcd19fe",
+        "filename": "block/blk-mq-tag.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1879222
+      },
+      "writtenOn": "2021-06-24T02:46:30Z",
+      "side": 1,
+      "message": "I just add ANDROID_OEM_DATA(1), the lock was introduced by this commit:\nhttps://android-review.googlesource.com/c/kernel/common/+/1708907",
+      "parentUuid": "e53bf671_e1019f1f",
+      "revId": "590d97e91abf0118d78a0136a32a64029c211540",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
