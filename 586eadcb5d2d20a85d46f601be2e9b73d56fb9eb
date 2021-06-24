@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5dbdc91_fe39ef76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2021-06-24T20:03:59Z",
+      "side": 1,
+      "message": "Why not put up a patch that adds a \"none\" option to pstore.compress commandline option? At a glance, it looks easy enough to do.",
+      "revId": "586eadcb5d2d20a85d46f601be2e9b73d56fb9eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
