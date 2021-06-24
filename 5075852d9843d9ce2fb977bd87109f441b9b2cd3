@@ -22,6 +22,30 @@
       },
       "revId": "5075852d9843d9ce2fb977bd87109f441b9b2cd3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60152190_df760952",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1878921
+      },
+      "writtenOn": "2021-06-24T01:18:46Z",
+      "side": 1,
+      "message": "Thanks a lot! It has been modified as suggested.",
+      "parentUuid": "dccc6f73_9c4d3ab8",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 10
+      },
+      "revId": "5075852d9843d9ce2fb977bd87109f441b9b2cd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
