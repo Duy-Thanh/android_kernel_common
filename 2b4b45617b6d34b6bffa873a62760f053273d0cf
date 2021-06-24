@@ -33,6 +33,24 @@
       "message": "You can keep the symbol list update though.",
       "revId": "2b4b45617b6d34b6bffa873a62760f053273d0cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11b04983_87655126",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2021-06-24T14:20:38Z",
+      "side": 1,
+      "message": "It\u0027s ok, I suppose I didn\u0027t introduce new symbol here. Also I know my teammate is doing symbol list update, too. I\u0027ll leave it to him. Thanks :)",
+      "parentUuid": "e2fb1f05_d3ac15f1",
+      "revId": "2b4b45617b6d34b6bffa873a62760f053273d0cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
