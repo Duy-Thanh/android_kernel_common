@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d933d1f_28d6087f",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2021-06-24T07:12:21Z",
+      "side": 1,
+      "message": "hpb - Scheme that uses the memory resources of phones to improve reading performance in UFS(device)\nmap - logical address to physical address information in UFS(device)\n\n- Used to add a page to the bio of map request and pre request used in hpb.\n- Used in the ufshpb_pre_req_add_bio_page() and ufshpb_map_req_add_bio_page() functions of the ufshpb.c file",
+      "revId": "241b18fff307819df6f6d21abd46d325f000a058",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42cc4607_b1b0c9af",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2021-06-24T07:12:21Z",
+      "side": 1,
+      "message": "- Used to initialize map request bio before configuring it in hpb\n- Used in ufshpb_map_req_add_bio_page() function of ufshpb.c file",
+      "revId": "241b18fff307819df6f6d21abd46d325f000a058",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06047543_0fe66552",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2021-06-24T07:12:21Z",
+      "side": 1,
+      "message": "- Block layer code is mimic and used to dispatch pre request in hpb\n- Used in the ufshpb_blk_mq_sched_sharing_sharing() function of the ufshpb.c file",
+      "revId": "241b18fff307819df6f6d21abd46d325f000a058",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78dcc28a_0e662084",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2021-06-24T07:12:21Z",
+      "side": 1,
+      "message": "- Used for map request and pre request setup in hpb\n- Used in the ufshpb_map_map_req_wait(), ufshpb_map_map_req(), ufshpb_map_req() function of ufshpb.c file.",
+      "revId": "241b18fff307819df6f6d21abd46d325f000a058",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b765e80b_7db6df2e",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 1406,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2021-06-24T07:12:21Z",
+      "side": 1,
+      "message": "- Used when receiving a tag during pre request dispatch in hpb\n- Used in the ufsfeature-mimic.c file ufsf__blk_mq_get_tag() function",
+      "revId": "241b18fff307819df6f6d21abd46d325f000a058",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cf25860_8ee6d28f",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 1709,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2021-06-24T07:12:21Z",
+      "side": 1,
+      "message": "- for vendor_hook about https://android-review.googlesource.com/c/kernel/common/+/1645147\n- Utilize for init state in UFS feature",
+      "revId": "241b18fff307819df6f6d21abd46d325f000a058",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dac21a8a_6b10731c",
+        "filename": "android/abi_gki_aarch64_vivo",
+        "patchSetId": 1
+      },
+      "lineNbr": 1780,
+      "author": {
+        "id": 1740115
+      },
+      "writtenOn": "2021-06-24T07:12:21Z",
+      "side": 1,
+      "message": "- for vendor_hook about https://android-review.googlesource.com/c/kernel/common/+/1645147\n- Utilize for init state in UFS feature",
+      "revId": "241b18fff307819df6f6d21abd46d325f000a058",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
