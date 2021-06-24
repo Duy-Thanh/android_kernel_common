@@ -34,6 +34,24 @@
       "parentUuid": "e53bf671_e1019f1f",
       "revId": "590d97e91abf0118d78a0136a32a64029c211540",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "881c91f7_0b926927",
+        "filename": "block/blk-mq-tag.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-24T15:08:22Z",
+      "side": 1,
+      "message": "So it was -- sorry about the noise. I must have been looking at a diff that included a rebase.",
+      "parentUuid": "248167b3_cdcd19fe",
+      "revId": "590d97e91abf0118d78a0136a32a64029c211540",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
