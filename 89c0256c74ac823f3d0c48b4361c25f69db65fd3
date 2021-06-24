@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbaac7fe_d9efeb62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-24T15:01:56Z",
+      "side": 1,
+      "message": "Shaleen, please add the symbol update to aosp/1742588. The ABI description will be updated as part of the July 2 KMI update. This patch is not needed.",
+      "revId": "89c0256c74ac823f3d0c48b4361c25f69db65fd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
