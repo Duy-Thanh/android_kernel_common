@@ -16,6 +16,23 @@
       "message": "Please drop the ABI.xml update from this patch -- the previous CL needs to be merged during the next KMI update, so we\u0027ll take care of updating the xml then.",
       "revId": "2b4b45617b6d34b6bffa873a62760f053273d0cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2fb1f05_d3ac15f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-06-24T14:14:53Z",
+      "side": 1,
+      "message": "You can keep the symbol list update though.",
+      "revId": "2b4b45617b6d34b6bffa873a62760f053273d0cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
