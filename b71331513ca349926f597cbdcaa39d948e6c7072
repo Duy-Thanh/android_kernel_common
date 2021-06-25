@@ -16,6 +16,24 @@
       "message": "We discussed this internally and decided not to take this on android12-5.10 for now. If a device ends up needing this, then we can always add it later and update the ABI definitions for that device, but we don\u0027t want to pollute the generic ABI definition with a symbol that appears to be unused.\n\nRather than abandon these patches altogether, please submit the other patch for android13-5.10, and we\u0027ll be glad to include it there (where no ABI update is necessary).",
       "revId": "b71331513ca349926f597cbdcaa39d948e6c7072",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05363441_96feb878",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2021-06-25T14:41:36Z",
+      "side": 1,
+      "message": "Thanks Will. Makes sense. I pushed the other patch to android13-5.10. Cheers.",
+      "parentUuid": "a45b2135_c2ff0388",
+      "revId": "b71331513ca349926f597cbdcaa39d948e6c7072",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
