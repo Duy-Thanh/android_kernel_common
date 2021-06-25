@@ -353,6 +353,7 @@ unsigned long lruvec_lru_size(struct lruvec *lruvec, enum lru_list lru, int zone
 	}
 	return size;
 }
+EXPORT_SYMBOL_GPL(lruvec_lru_size);
 
 /*
  * Add a shrinker callback to be called from the vm.
@@ -3389,6 +3390,8 @@ unsigned long try_to_free_mem_cgroup_pages(struct mem_cgroup *memcg,
 
 	return nr_reclaimed;
 }
+EXPORT_SYMBOL_GPL(try_to_free_mem_cgroup_pages);
+
 #endif
 
 static void age_active_anon(struct pglist_data *pgdat,

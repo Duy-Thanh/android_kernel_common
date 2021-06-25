@@ -36,6 +36,7 @@
 #include <linux/memblock.h>
 #include <linux/compaction.h>
 #include <linux/rmap.h>
+#include <trace/hooks/mm.h>
 
 #include <asm/tlbflush.h>
 
@@ -850,6 +851,7 @@ int __ref online_pages(unsigned long pfn, unsigned long nr_pages,
 
 	kswapd_run(nid);
 	kcompactd_run(nid);
+	trace_android_vh_run_kmemd(nid);
 
 	writeback_set_ratelimit();
 
@@ -1646,6 +1648,7 @@ int __ref offline_pages(unsigned long start_pfn, unsigned long nr_pages)
 	if (arg.status_change_nid >= 0) {
 		kswapd_stop(node);
 		kcompactd_stop(node);
+		trace_android_vh_stop_kmemd(node);
 	}
 
 	writeback_set_ratelimit();

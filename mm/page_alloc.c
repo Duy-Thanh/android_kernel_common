@@ -5044,6 +5044,7 @@ static inline bool prepare_alloc_pages(gfp_t gfp_mask, unsigned int order,
 	fs_reclaim_release(gfp_mask);
 
 	might_sleep_if(gfp_mask & __GFP_DIRECT_RECLAIM);
+	trace_android_vh_wakeup_kmemd(gfp_mask);
 
 	if (should_fail_alloc_page(gfp_mask, order))
 		return false;
