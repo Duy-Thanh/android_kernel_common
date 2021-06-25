@@ -166,6 +166,30 @@
       },
       "revId": "7203d9dda4066665d26d7991909ca7780e2cc0e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df0462c4_febd4558",
+        "filename": "drivers/remoteproc/remoteproc_core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1729,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-25T19:09:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "333df14b_988779fc",
+      "range": {
+        "startLine": 1729,
+        "startChar": 1,
+        "endLine": 1729,
+        "endChar": 32
+      },
+      "revId": "7203d9dda4066665d26d7991909ca7780e2cc0e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
