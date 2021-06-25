@@ -16,6 +16,24 @@
       "message": "the hook addition, and the symbol list update should be two separate commits.",
       "revId": "75e5623d488069adba72843c96d995e929d78bf7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ae7b5c6_9e99478e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-25T16:25:26Z",
+      "side": 1,
+      "message": "Since this causes CRC changes in the ABI (not sure why), it needs to be in the KMI change on July 2. Please drop the change to android/abi_gki_aarch64.xml since the ABI definition will be generated for all the patches in the KMI change.",
+      "parentUuid": "7ff509ce_65b9a7a5",
+      "revId": "75e5623d488069adba72843c96d995e929d78bf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
