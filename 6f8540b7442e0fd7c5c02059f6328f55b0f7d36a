@@ -16,6 +16,24 @@
       "message": "Was this tested on an R device to make sure this change for T is safe on R/S?",
       "revId": "6f8540b7442e0fd7c5c02059f6328f55b0f7d36a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28c66e64_ad0879ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1363994
+      },
+      "writtenOn": "2021-06-25T12:14:34Z",
+      "side": 1,
+      "message": "This specific cherry-pick was tested on a Cuttlefish device running R. A full list of combinations I tested is available at b/171572148#comment44, but please let me know if you\u0027d like to see any additional tests :-)",
+      "parentUuid": "d82031a1_9aaaed4d",
+      "revId": "6f8540b7442e0fd7c5c02059f6328f55b0f7d36a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
