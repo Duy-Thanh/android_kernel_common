@@ -51,6 +51,24 @@
       "message": "Please split the commit into two (or even 3) patches.\n\n1. Your vendor hook\n2. Your symbol list update\n3. The XML update.\n\nThe commit text in this patch as-is is not acceptable. It will also be a pain to cherry pick across branches because the XML will have conflicts. ",
       "revId": "75e5623d488069adba72843c96d995e929d78bf7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59fb8ad6_8edfe85b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-25T18:18:30Z",
+      "side": 1,
+      "message": "Please omit the XML update since it changes KMI so the XML will be updated for the whole set of patches associated with that KMI change. So 2 patches.",
+      "parentUuid": "d4630150_fe0759b5",
+      "revId": "75e5623d488069adba72843c96d995e929d78bf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
