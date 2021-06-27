@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d9b1c2f_abe957db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-27T14:07:40Z",
+      "side": 1,
+      "message": "this is the QCOM symbol list, please be specific as this looks\nlike it is for all devices.\n\nAlso this is for tracepoints, not normal UFS symbols.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 23
+      },
+      "revId": "8344e4a9ee22e76af67960866ef6fc7cb9a149b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c0e51eb3_520f2e76",
