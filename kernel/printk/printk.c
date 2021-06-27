@@ -2051,6 +2051,7 @@ u16 printk_parse_prefix(const char *text, int *level,
 		if (!kern_level)
 			break;
 
+<<<<<<< HEAD   (6a8789 ANDROID: sched: move blocked reason trace point to cover all)
 		switch (kern_level) {
 		case '0' ... '7':
 			if (level && *level == LOGLEVEL_DEFAULT)
@@ -2090,6 +2091,21 @@ static u16 printk_sprint(char *text, u16 size, int facility,
 		if (prefix_len) {
 			text_len -= prefix_len;
 			memmove(text, text + prefix_len, text_len);
+=======
+		prb_rec_init_wr(&r, text_len);
+		if (prb_reserve_in_last(&e, prb, &r, caller_id, LOG_LINE_MAX)) {
+			memcpy(&r.text_buf[r.info->text_len], text, text_len);
+			r.info->text_len += text_len;
+			if (lflags & LOG_NEWLINE) {
+				r.info->flags |= LOG_NEWLINE;
+				prb_final_commit(&e);
+			} else {
+				prb_commit(&e);
+			}
+
+			trace_android_vh_logbuf_pr_cont(&r, text_len);
+			return text_len;
+>>>>>>> CHANGE (01f239 ANDROID: logbuf: Add new logbuf vendor hook to support pr_co)
 		}
 	}
 
