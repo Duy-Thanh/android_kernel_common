@@ -17,8 +17,13 @@ struct printk_record;
 DECLARE_HOOK(android_vh_logbuf,
 	TP_PROTO(struct printk_ringbuffer *rb, struct printk_record *r),
 	TP_ARGS(rb, r))
+
+DECLARE_HOOK(android_vh_logbuf_pr_cont,
+	TP_PROTO(struct printk_record *r, size_t text_len),
+	TP_ARGS(r, text_len))
 #else
 #define trace_android_vh_logbuf(rb, r)
+#define trace_android_vh_logbuf_cont(r, text_len)
 #endif
 
 #endif /* _TRACE_HOOK_LOGBUF_H */
