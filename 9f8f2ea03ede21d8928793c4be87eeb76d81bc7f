@@ -22,6 +22,30 @@
       },
       "revId": "9f8f2ea03ede21d8928793c4be87eeb76d81bc7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6816baf3_713a33de",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1172,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-06-27T01:55:48Z",
+      "side": 0,
+      "message": "If so, we\u0027ll get a conflict when reverting the following \"BACKPORT: FROMGIT: scsi: ufs: Optimize host lock on transfer requests send/compl paths\". I think we need to post a quirk patch in mainline asap?",
+      "parentUuid": "b3795c5a_4a8731e4",
+      "range": {
+        "startLine": 1169,
+        "startChar": 0,
+        "endLine": 1172,
+        "endChar": 1
+      },
+      "revId": "9f8f2ea03ede21d8928793c4be87eeb76d81bc7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
