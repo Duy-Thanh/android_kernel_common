@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e268812_d7eaed24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-06-28T21:06:37Z",
+      "side": 1,
+      "message": "I imagine we\u0027d automatically pick this up via LTS at some point (by virtue of Fixes tag).\nBut for that to happen things will have to propagate out, and that might take a while,\nsince currently I\u0027m still only seeing it in bpf-next.",
+      "revId": "ea53c24cb060b6aae8c7c60ba46f9cd7530419aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
