@@ -4860,6 +4860,22 @@ static int binder_ioctl_get_freezer_info(
 	return 0;
 }
 
+static int binder_ioctl_capabilities(void __user *ubuf)
+{
+	static const __u64 kcaps = BINDER_CAP_SPAM_DETECTION;
+	static __u64 ucaps;
+
+	/* store userspace binder capabilities */
+	if (copy_from_user(&ucaps, ubuf, sizeof(ucaps)))
+		return -EFAULT;
+
+	/* populate kernel binder capabilities */
+	if (copy_to_user(ubuf, &kcaps, sizeof(kcaps)))
+		return -EFAULT;
+
+	return 0;
+}
+
 static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
 	int ret;
@@ -5068,6 +5084,11 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		binder_inner_proc_unlock(proc);
 		break;
 	}
+	case BINDER_CAPABILITIES:
+		ret = binder_ioctl_capabilities(ubuf);
+		if (ret < 0)
+			goto err;
+		break;
 	default:
 		ret = -EINVAL;
 		goto err;
