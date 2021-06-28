@@ -48,7 +48,7 @@ struct kernel_info {
 	__u64 swapper_pg_dir_pa;
 
 	/* For linux banner */
-	__u8 last_uts_release[__NEW_UTS_LEN];
+	__u8 uts_release[__NEW_UTS_LEN];
 
 	/* Info of running build */
 	__u8 build_info[BUILD_INFO_LEN];
@@ -64,6 +64,17 @@ struct kernel_all_info {
 	__u32 magic_number;
 	__u32 combined_checksum;
 	struct kernel_info info;
+} __packed;
+
+struct vendor_kernel_info {
+	/* For linux banner */
+	__u8 uts_release[__NEW_UTS_LEN];
+} __packed;
+
+struct vendor_kernel_all_info {
+	__u32 magic_number;
+	__u32 combined_checksum;
+	struct vendor_kernel_info info;
 } __packed;
 
 #endif // DEBUG_KINFO_H
