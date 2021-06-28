@@ -46,6 +46,30 @@
       },
       "revId": "9f8f2ea03ede21d8928793c4be87eeb76d81bc7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc1a138b_66ea3846",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1172,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-06-28T04:26:54Z",
+      "side": 0,
+      "message": "I can work on sending a quirk patch upstream.",
+      "parentUuid": "6816baf3_713a33de",
+      "range": {
+        "startLine": 1169,
+        "startChar": 0,
+        "endLine": 1172,
+        "endChar": 1
+      },
+      "revId": "9f8f2ea03ede21d8928793c4be87eeb76d81bc7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
