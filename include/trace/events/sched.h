@@ -677,6 +677,10 @@ DECLARE_TRACE(sched_update_nr_running_tp,
 	TP_PROTO(struct rq *rq, int change),
 	TP_ARGS(rq, change));
 
+DECLARE_TRACE(sched_setscheduler_uclamp_tp,
+	TP_PROTO(struct task_struct *tsk, int clamp_id, unsigned int value),
+	TP_ARGS(tsk, clamp_id, value));
+
 #endif /* _TRACE_SCHED_H */
 
 /* This part must be outside protection */
