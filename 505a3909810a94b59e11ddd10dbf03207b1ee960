@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8279803d_b5a12b70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-28T14:25:00Z",
+      "side": 1,
+      "message": "Do not update the .xml file when you modify something like this, we can do it for you when the \"kabi break\" happens.\n\nBut no need to change the existing hook, just add a new one.",
+      "revId": "505a3909810a94b59e11ddd10dbf03207b1ee960",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63569f6c_4bb6145e",
+        "filename": "kernel/printk/printk.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-28T14:25:00Z",
+      "side": 1,
+      "message": "random flags in parameters are a sure way to go crazy.\n\nJust make this two different hooks please.",
+      "range": {
+        "startLine": 542,
+        "startChar": 34,
+        "endLine": 542,
+        "endChar": 39
+      },
+      "revId": "505a3909810a94b59e11ddd10dbf03207b1ee960",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
