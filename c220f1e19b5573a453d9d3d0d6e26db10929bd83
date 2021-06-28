@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8be0d424_28e4b71a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2021-06-28T10:42:34Z",
+      "side": 1,
+      "message": "adb remount is broken in android-mainline kernel\nhttps://www.irccloud.com/pastebin/BvVGnKs1/\nand I narrowed it down to\n\"[ WARNING ] overlay module does not support override_creds\"\nwhich is due to missing override_creds\u003doff patch which got\nreverted in android-mainline during v5.11-rc1 merge\nhttps://android-review.googlesource.com/c/1534399\n\nThis is an attempt to rebase the override_creds functionality\nand adb remount working again. Tested by running:\nsystem/core/fs_mgr/tests/adb-remount-test.sh\n\nLet me know if this looks sane to you and I did not overlook\nanything while trying to get \"adb remount\" working.",
+      "revId": "c220f1e19b5573a453d9d3d0d6e26db10929bd83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
