@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39082e2f_0513c841",
+        "filename": "drivers/staging/android/debug_kinfo.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-28T13:34:47Z",
+      "side": 1,
+      "message": "why add these if you do not use them?",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 11
+      },
+      "revId": "8013b7d8735cb87c9c436b96027ccddc424c8511",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
