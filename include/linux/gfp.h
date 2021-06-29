@@ -642,6 +642,18 @@ static inline bool pm_suspended_storage(void)
 #endif /* CONFIG_PM_SLEEP */
 
 #ifdef CONFIG_CONTIG_ALLOC
+static inline unsigned long pfn_max_align_down(unsigned long pfn)
+{
+	return pfn & ~(max_t(unsigned long, MAX_ORDER_NR_PAGES,
+			     pageblock_nr_pages) - 1);
+}
+
+static inline unsigned long pfn_max_align_up(unsigned long pfn)
+{
+	return ALIGN(pfn, max_t(unsigned long, MAX_ORDER_NR_PAGES,
+				pageblock_nr_pages));
+}
+
 enum acr_failure {
 	ACR_FAIL_ISOLATE,
 	ACR_FAIL_MIGRATE,
@@ -654,6 +666,7 @@ struct acr_info {
 	unsigned long nr_reclaimed;
 	enum acr_failure fail;
 	bool lru_cache_disabled;
+	unsigned long failed_pfn;
 };
 
 /* The below functions must be run on a range from a single zone. */

@@ -535,8 +535,16 @@ struct page *cma_alloc(struct cma *cma, size_t count, unsigned int align,
 
 		trace_cma_alloc_busy_retry(cma->name, pfn, pfn_to_page(pfn),
 					   count, align);
-		/* try again with a bit different memory target */
-		start = bitmap_no + mask + 1;
+
+		if (info.failed_pfn) {
+			/* try again from following failed page */
+			start = (pfn_max_align_up(info.failed_pfn + 1) - cma->base_pfn) >>
+				 cma->order_per_bit;
+
+		} else {
+			/* try again with a bit different memory target */
+			start = bitmap_no + mask + 1;
+		}
 	}
 	lru_cache_enable();
 
