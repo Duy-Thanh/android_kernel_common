@@ -9387,6 +9387,12 @@ int __alloc_contig_migrate_range(struct compact_control *cc,
 				page_pinner_failure_detect(page);
 			}
 		}
+
+		if (!list_empty(&cc->migratepages)) {
+			page = list_first_entry(&cc->migratepages, struct page , lru);
+			info->failed_pfn = page_to_pfn(page);
+		}
+
 		putback_movable_pages(&cc->migratepages);
 		info->err |= ACR_ERR_MIGRATE;
 		return ret;
@@ -9456,7 +9462,8 @@ int alloc_contig_range(unsigned long start, unsigned long end,
 	 * put back to page allocator so that buddy can use them.
 	 */
 
-	ret = start_isolate_page_range(start, end, migratetype, 0, gfp_mask);
+	ret = start_isolate_page_range(start, end, migratetype, 0, gfp_mask,
+				       &info->failed_pfn);
 	if (ret) {
 		info->err |= ACR_ERR_ISOLATE;
 		goto done;
@@ -9520,7 +9527,7 @@ int alloc_contig_range(unsigned long start, unsigned long end,
 	}
 
 	/* Make sure the range is really isolated. */
-	if (test_pages_isolated(outer_start, end, 0)) {
+	if (test_pages_isolated(outer_start, end, 0, &info->failed_pfn)) {
 		ret = -EBUSY;
 		info->err |= ACR_ERR_TEST;
 		goto done;

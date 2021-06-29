@@ -529,7 +529,8 @@ failed:
  * Return: 0 on success and -EBUSY if any part of range cannot be isolated.
  */
 int start_isolate_page_range(unsigned long start_pfn, unsigned long end_pfn,
-			     int migratetype, int flags, gfp_t gfp_flags)
+			     int migratetype, int flags, gfp_t gfp_flags,
+			     unsigned long *failed_pfn)
 {
 	unsigned long pfn;
 	struct page *page;
@@ -567,6 +568,8 @@ int start_isolate_page_range(unsigned long start_pfn, unsigned long end_pfn,
 			unset_migratetype_isolate(
 				pfn_to_page(isolate_end - pageblock_nr_pages),
 				migratetype);
+			if (failed_pfn)
+				*failed_pfn = page_to_pfn(page);
 			return -EBUSY;
 		}
 	}
@@ -635,7 +638,7 @@ __test_page_isolated_in_pageblock(unsigned long pfn, unsigned long end_pfn,
 
 /* Caller should ensure that requested range is in a single zone */
 int test_pages_isolated(unsigned long start_pfn, unsigned long end_pfn,
-			int isol_flags)
+			int isol_flags, unsigned long *failed_pfn)
 {
 	unsigned long pfn, flags;
 	struct page *page;
@@ -654,6 +657,8 @@ int test_pages_isolated(unsigned long start_pfn, unsigned long end_pfn,
 	}
 	page = __first_valid_page(start_pfn, end_pfn - start_pfn);
 	if ((pfn < end_pfn) || !page) {
+		if (failed_pfn)
+			*failed_pfn = pfn;
 		ret = -EBUSY;
 		goto out;
 	}
