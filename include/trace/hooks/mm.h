@@ -97,6 +97,9 @@ DECLARE_HOOK(android_vh_show_stack_hash,
 DECLARE_HOOK(android_vh_save_track_hash,
 	TP_PROTO(unsigned long p),
 	TP_ARGS(p));
+DECLARE_HOOK(android_vh_wakeup_kmemd,
+	TP_PROTO(unsigned long mask),
+	TP_ARGS(mask));
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_MM_H */
