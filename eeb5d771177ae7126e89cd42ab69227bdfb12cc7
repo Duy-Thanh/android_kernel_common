@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5da18096_adb26209",
+        "filename": "include/trace/hooks/logbuf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-29T12:32:35Z",
+      "side": 1,
+      "message": "don\u0027t you also need the printk_ringbuffer?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 52
+      },
+      "revId": "eeb5d771177ae7126e89cd42ab69227bdfb12cc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8a34741_dd59b692",
+        "filename": "include/trace/hooks/logbuf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-29T12:32:35Z",
+      "side": 1,
+      "message": "this should not be needed.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 6
+      },
+      "revId": "eeb5d771177ae7126e89cd42ab69227bdfb12cc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
