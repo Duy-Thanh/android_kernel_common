@@ -16,6 +16,24 @@
       "message": "If this is a \"update\", then why is there a new symbol file (`android/abi_gki_aarch64_mtk_sort`) instead of an update to the existing `android/abi_gki_aarch64_mtk`?\n\nIf it was intentional to add the new file, then please include the rationale in the commit message and add this new file to `build.config.gki.aarch64` so it is used for ABI checking.",
       "revId": "74a6b773dab3185112deed65d5a43c700dfa00f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e03183ba_8d119281",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1741939
+      },
+      "writtenOn": "2021-06-29T01:37:28Z",
+      "side": 1,
+      "message": "This is unintentional test file, I have changed to update `android/abi_gki_aarch64_mtk, thanks for reminder.",
+      "parentUuid": "6e1e6f8a_377278a6",
+      "revId": "74a6b773dab3185112deed65d5a43c700dfa00f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
