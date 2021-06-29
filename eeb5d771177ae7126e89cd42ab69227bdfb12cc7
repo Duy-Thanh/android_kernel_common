@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7df09201_df5e090d",
+        "filename": "include/trace/hooks/logbuf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1864156
+      },
+      "writtenOn": "2021-06-29T12:45:44Z",
+      "side": 1,
+      "message": "printk_ringbuffer is already coming through other hook and it is not needed in our case for pr_cont.",
+      "parentUuid": "5da18096_adb26209",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 52
+      },
+      "revId": "eeb5d771177ae7126e89cd42ab69227bdfb12cc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8a34741_dd59b692",
         "filename": "include/trace/hooks/logbuf.h",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2021-06-29T12:32:35Z",
       "side": 1,
       "message": "this should not be needed.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 6
+      },
+      "revId": "eeb5d771177ae7126e89cd42ab69227bdfb12cc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1745146_ef1a9ea3",
+        "filename": "include/trace/hooks/logbuf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1864156
+      },
+      "writtenOn": "2021-06-29T12:45:44Z",
+      "side": 1,
+      "message": "Shall i remove it completely ?",
+      "parentUuid": "c8a34741_dd59b692",
       "range": {
         "startLine": 24,
         "startChar": 0,
