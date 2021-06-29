@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28c88696_0b278390",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:57:41Z",
+      "side": 1,
+      "message": "All that is required now is the addition of ANDROID_VENDOR_DATA(1, 1). The rest could be either\n(a) implemented in a vendor module to support vendor hooks, OR\n(b) added later and refactored to use the vendor data fields.",
+      "revId": "b170aa6681a69e50429e804c6b81f11046a0d223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9dc37ff_570d9134",
+        "filename": "drivers/mmc/core/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:57:41Z",
+      "side": 1,
+      "message": "Move all of this to vendor module",
+      "revId": "b170aa6681a69e50429e804c6b81f11046a0d223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f13eb15_3f8e21c8",
+        "filename": "drivers/mmc/core/core.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:57:41Z",
+      "side": 1,
+      "message": "Replace with ANDROID_VENDOR_DATA(1, 1);",
+      "revId": "b170aa6681a69e50429e804c6b81f11046a0d223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ce2685c_d08b650c",
+        "filename": "drivers/mmc/core/core.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:57:41Z",
+      "side": 1,
+      "message": "move to vendor header",
+      "revId": "b170aa6681a69e50429e804c6b81f11046a0d223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59820dc3_f641463a",
+        "filename": "drivers/mmc/core/core.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:57:41Z",
+      "side": 1,
+      "message": "move to vendor header",
+      "revId": "b170aa6681a69e50429e804c6b81f11046a0d223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ea2e3ca_21bec895",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1745,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:57:41Z",
+      "side": 1,
+      "message": "move all of this to vendor module",
+      "revId": "b170aa6681a69e50429e804c6b81f11046a0d223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f38f1e2b_bf1cb8b7",
+        "filename": "drivers/mmc/core/sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:57:41Z",
+      "side": 1,
+      "message": "move to vendor module",
+      "revId": "b170aa6681a69e50429e804c6b81f11046a0d223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
