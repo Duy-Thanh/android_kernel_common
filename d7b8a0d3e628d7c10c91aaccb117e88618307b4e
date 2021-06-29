@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75266b93_2b0494ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:59:03Z",
+      "side": 1,
+      "message": "All that is required now is the addition of ANDROID_VENDOR_DATA() fields as indicated. The rest could be either be\n(a) implemented in a vendor module to support vendor hooks, OR\n(b) added later and refactored to use the vendor data fields.",
+      "revId": "d7b8a0d3e628d7c10c91aaccb117e88618307b4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e12c9b12_015bb796",
+        "filename": "drivers/mmc/core/host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:59:03Z",
+      "side": 1,
+      "message": "move to vendor module",
+      "revId": "d7b8a0d3e628d7c10c91aaccb117e88618307b4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbcdedd5_2e65b99a",
+        "filename": "drivers/mmc/core/host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:59:03Z",
+      "side": 1,
+      "message": "replace with a single hook.",
+      "revId": "d7b8a0d3e628d7c10c91aaccb117e88618307b4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcfe3380_6439387a",
+        "filename": "include/linux/mmc/card.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:59:03Z",
+      "side": 1,
+      "message": "replace with ANDROID_VENDOR_DATA(1, 3) (includes part_curr @ line 319)",
+      "revId": "d7b8a0d3e628d7c10c91aaccb117e88618307b4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c1b6445_f4c2eb00",
+        "filename": "include/linux/mmc/host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:59:03Z",
+      "side": 1,
+      "message": "move to vendor header (private to vendor module)",
+      "revId": "d7b8a0d3e628d7c10c91aaccb117e88618307b4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1e1b94a_c53e32a7",
+        "filename": "include/linux/mmc/host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:59:03Z",
+      "side": 1,
+      "message": "replace with ANDROID_VENDOR_DATA(1, 2) -- includes active_reqs (or a pointer to a vendor struct that contains active_reqs)",
+      "revId": "d7b8a0d3e628d7c10c91aaccb117e88618307b4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
