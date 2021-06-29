@@ -308,6 +308,8 @@ int test_pages_isolated(unsigned long start_pfn, unsigned long end_pfn,
 	spin_unlock_irqrestore(&zone->lock, flags);
 
 	trace_test_pages_isolated(start_pfn, end_pfn, pfn);
+	if (pfn < end_pfn)
+		page_pinner_record(pfn_to_page(pfn));
 
 	return pfn < end_pfn ? -EBUSY : 0;
 }
