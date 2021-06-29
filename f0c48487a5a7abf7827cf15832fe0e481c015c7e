@@ -22,6 +22,30 @@
       },
       "revId": "f0c48487a5a7abf7827cf15832fe0e481c015c7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a66a5bc_d96962a8",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-06-29T10:58:33Z",
+      "side": 0,
+      "message": "build_configs are now deduced from the sources glob(). Hence we do not need them anymore. We might need to re-introduce them in the future as optional parameter, but for now this simplifies the interface. \nSince we are calling a macro, the location prefix is implicit as it is expanded in-place.\n\nI think everything is as intended.",
+      "parentUuid": "9b6a1719_11a4d2b4",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 45
+      },
+      "revId": "f0c48487a5a7abf7827cf15832fe0e481c015c7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
