@@ -39,6 +39,30 @@
       },
       "revId": "50c907bd2636c02f7fd860a02f2a1f4313b8cf9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebafc7ce_5f72f524",
+        "filename": "android/abi_gki_aarch64_exynosauto",
+        "patchSetId": 2
+      },
+      "lineNbr": 1296,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2021-06-29T13:39:43Z",
+      "side": 1,
+      "message": "It might be calling from debug code. Need to check it with my colleague but let me respin this without the symbol at the moment.",
+      "parentUuid": "106f2d36_bbd0cebe",
+      "range": {
+        "startLine": 1296,
+        "startChar": 2,
+        "endLine": 1296,
+        "endChar": 12
+      },
+      "revId": "50c907bd2636c02f7fd860a02f2a1f4313b8cf9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
