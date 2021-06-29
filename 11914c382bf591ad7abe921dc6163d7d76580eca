@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b91a789_6ff93e54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-06-29T16:24:15Z",
+      "side": 1,
+      "message": "Bypassing presubmits because the failure is caused by a known test breakage: b/192048179",
+      "revId": "11914c382bf591ad7abe921dc6163d7d76580eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
