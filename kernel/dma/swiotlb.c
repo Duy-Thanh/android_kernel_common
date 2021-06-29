@@ -36,9 +36,7 @@
 #include <linux/scatterlist.h>
 #include <linux/mem_encrypt.h>
 #include <linux/set_memory.h>
-#ifdef CONFIG_DEBUG_FS
 #include <linux/debugfs.h>
-#endif
 #ifdef CONFIG_DMA_RESTRICTED_POOL
 #include <linux/io.h>
 #include <linux/of.h>
@@ -686,10 +684,9 @@ bool is_swiotlb_active(struct device *dev)
 }
 EXPORT_SYMBOL_GPL(is_swiotlb_active);
 
-#ifdef CONFIG_DEBUG_FS
-static struct dentry *debugfs_dir;
+__maybe_unused static struct dentry *debugfs_dir;
 
-static void swiotlb_create_debugfs_files(struct io_tlb_mem *mem)
+__maybe_unused static void swiotlb_create_debugfs_files(struct io_tlb_mem *mem)
 {
 	debugfs_create_ulong("io_tlb_nslabs", 0400, mem->debugfs, &mem->nslabs);
 	debugfs_create_ulong("io_tlb_used", 0400, mem->debugfs, &mem->used);
@@ -708,8 +705,6 @@ static int __init swiotlb_create_default_debugfs(void)
 }
 
 late_initcall(swiotlb_create_default_debugfs);
-
-#endif
 
 #ifdef CONFIG_DMA_RESTRICTED_POOL
 struct page *swiotlb_alloc(struct device *dev, size_t size)
