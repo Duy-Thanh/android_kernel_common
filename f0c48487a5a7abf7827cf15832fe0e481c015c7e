@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b6a1719_11a4d2b4",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-06-29T10:41:51Z",
+      "side": 0,
+      "message": "This has gone altogether. Also... the previous thing didn\u0027t have the common/ prefix. All as intended?",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 45
+      },
+      "revId": "f0c48487a5a7abf7827cf15832fe0e481c015c7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
