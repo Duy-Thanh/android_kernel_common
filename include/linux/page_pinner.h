@@ -54,6 +54,14 @@ static inline void page_pinner_put_page(struct page *page)
 	__page_pinner_record(page, PP_FAILURE_PUT);
 }
 
+static inline void page_pinner_record(struct page *page)
+{
+	if (!static_branch_unlikely(&failure_tracking))
+		return;
+
+	__page_pinner_record(page, PP_FAILURE_DETECT);
+}
+
 static inline void page_pinner_mark_migration_failed_pages(struct list_head *page_list)
 {
 	if (!static_branch_unlikely(&failure_tracking))
@@ -75,6 +83,9 @@ static inline void dump_page_pinner(struct page *page)
 {
 }
 static inline void page_pinner_put_page(struct page *page)
+{
+}
+static inline void page_pinner_record(struct page *page)
 {
 }
 static inline void page_pinner_mark_migration_failed_pages(struct list_head *page_list)
