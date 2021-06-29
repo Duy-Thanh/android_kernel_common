@@ -1,0 +1,41 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000012440044",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1747960?revision\u003d10",
+      "fixSuggestions": [
+        {
+          "fixId": "f8f3d2a5_532d4b94",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 33,
+                "startChar": 0,
+                "endLine": 33,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Will Deacon \u003cwilldeacon@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "038f90b0_e787a0eb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-06-29T07:59:45Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Will Deacon \u003cwilldeacon@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 381882009 android-build.ayeaye-python-dispatcher_20210628.05_p0",
+      "revId": "0fd72d9677d9dfe40dc56bb798d3357a9d61b27f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
