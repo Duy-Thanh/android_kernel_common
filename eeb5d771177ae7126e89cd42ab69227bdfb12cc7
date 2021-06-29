@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eaf336b8_eddfb4e7",
+        "filename": "include/trace/hooks/logbuf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-29T13:28:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7df09201_df5e090d",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 52
+      },
+      "revId": "eeb5d771177ae7126e89cd42ab69227bdfb12cc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8a34741_dd59b692",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Shall i remove it completely ?",
       "parentUuid": "c8a34741_dd59b692",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 6
+      },
+      "revId": "eeb5d771177ae7126e89cd42ab69227bdfb12cc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a335a011_ef7ccfea",
+        "filename": "include/trace/hooks/logbuf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-29T13:28:14Z",
+      "side": 1,
+      "message": "Do not add the new one at the least 😊",
+      "parentUuid": "d1745146_ef1a9ea3",
       "range": {
         "startLine": 24,
         "startChar": 0,
