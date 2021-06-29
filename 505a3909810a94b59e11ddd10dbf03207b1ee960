@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "954af7c2_44005812",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1864156
+      },
+      "writtenOn": "2021-06-29T11:02:10Z",
+      "side": 1,
+      "message": "sure.",
+      "parentUuid": "8279803d_b5a12b70",
+      "revId": "505a3909810a94b59e11ddd10dbf03207b1ee960",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63569f6c_4bb6145e",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-06-28T14:25:00Z",
       "side": 1,
       "message": "random flags in parameters are a sure way to go crazy.\n\nJust make this two different hooks please.",
+      "range": {
+        "startLine": 542,
+        "startChar": 34,
+        "endLine": 542,
+        "endChar": 39
+      },
+      "revId": "505a3909810a94b59e11ddd10dbf03207b1ee960",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b13c1b2_03bacfef",
+        "filename": "kernel/printk/printk.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1864156
+      },
+      "writtenOn": "2021-06-29T11:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63569f6c_4bb6145e",
       "range": {
         "startLine": 542,
         "startChar": 34,
