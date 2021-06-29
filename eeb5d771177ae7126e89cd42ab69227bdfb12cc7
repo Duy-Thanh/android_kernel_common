@@ -189,6 +189,30 @@
       },
       "revId": "eeb5d771177ae7126e89cd42ab69227bdfb12cc7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7dd6f9c_18595a8c",
+        "filename": "include/trace/hooks/logbuf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1864156
+      },
+      "writtenOn": "2021-06-29T13:52:48Z",
+      "side": 1,
+      "message": "Do i need to submit a change to add this symbol into android/abi_gki_aarch64_qcom ?",
+      "parentUuid": "41eb616a_d67072fa",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 6
+      },
+      "revId": "eeb5d771177ae7126e89cd42ab69227bdfb12cc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
