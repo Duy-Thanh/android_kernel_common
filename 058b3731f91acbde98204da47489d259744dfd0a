@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8834b35_fa7e8801",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1118753
+      },
+      "writtenOn": "2021-06-30T04:41:02Z",
+      "side": 1,
+      "message": "Thanks for pointing that out Todd, commit has been updated accordingly, cheers!",
+      "parentUuid": "f90c43d5_c5e68216",
+      "revId": "058b3731f91acbde98204da47489d259744dfd0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8f0c048_ae36a25b",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9872691_1555f018",
+        "filename": "include/trace/hooks/logbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1118753
+      },
+      "writtenOn": "2021-06-30T04:41:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8f0c048_ae36a25b",
+      "revId": "058b3731f91acbde98204da47489d259744dfd0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad9c33f3_4b8c0642",
@@ -48,6 +84,30 @@
       "writtenOn": "2021-06-30T04:34:42Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 6
+      },
+      "revId": "058b3731f91acbde98204da47489d259744dfd0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f6cdcea_8723cbc5",
+        "filename": "include/trace/hooks/logbuf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1118753
+      },
+      "writtenOn": "2021-06-30T04:41:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad9c33f3_4b8c0642",
       "range": {
         "startLine": 24,
         "startChar": 0,
