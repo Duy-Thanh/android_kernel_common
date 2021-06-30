@@ -4,6 +4,7 @@
  */
 
 #include <linux/bitops.h>
+#include <linux/cpu.h>
 #include <linux/kernel.h>
 #include <linux/mm.h>
 #include <linux/prctl.h>
@@ -25,6 +26,8 @@
 u64 gcr_kernel_excl __ro_after_init;
 
 static bool report_fault_once = true;
+
+static DEFINE_PER_CPU_READ_MOSTLY(u64, mte_tcf_preferred);
 
 #ifdef CONFIG_KASAN_HW_TAGS
 /* Whether the MTE asynchronous mode is enabled. */
@@ -199,17 +202,24 @@ static void update_gcr_el1_excl(u64 excl)
 
 static void mte_update_sctlr_user(struct task_struct *task)
 {
+	/*
+	 * This can only be called on the current or next task since the CPU
+	 * must match where the thread is going to run.
+	 */
 	unsigned long sctlr = task->thread.sctlr_user;
-	unsigned long pref = MTE_CTRL_TCF_ASYNC;
 	unsigned long mte_ctrl = task->thread.mte_ctrl;
-	unsigned long resolved_mte_tcf = (mte_ctrl & pref) ? pref : mte_ctrl;
+	unsigned long pref, resolved_mte_tcf;
 
+	preempt_disable();
+	pref = __this_cpu_read(mte_tcf_preferred);
+	resolved_mte_tcf = (mte_ctrl & pref) ? pref : mte_ctrl;
 	sctlr &= ~SCTLR_EL1_TCF0_MASK;
 	if (resolved_mte_tcf & MTE_CTRL_TCF_ASYNC)
 		sctlr |= SCTLR_EL1_TCF0_ASYNC;
 	else if (resolved_mte_tcf & MTE_CTRL_TCF_SYNC)
 		sctlr |= SCTLR_EL1_TCF0_SYNC;
 	task->thread.sctlr_user = sctlr;
+	preempt_enable();
 }
 
 void flush_mte_state(void)
@@ -441,3 +451,66 @@ int mte_ptrace_copy_tags(struct task_struct *child, long request,
 
 	return ret;
 }
+
+static ssize_t mte_tcf_preferred_show(struct device *dev,
+				      struct device_attribute *attr, char *buf)
+{
+	switch (per_cpu(mte_tcf_preferred, dev->id)) {
+	case MTE_CTRL_TCF_ASYNC:
+		return sysfs_emit(buf, "async\n");
+	case MTE_CTRL_TCF_SYNC:
+		return sysfs_emit(buf, "sync\n");
+	default:
+		return sysfs_emit(buf, "???\n");
+	}
+}
+
+static void sync_sctlr(void *arg)
+{
+	mte_update_sctlr_user(current);
+	set_task_sctlr_el1(current->thread.sctlr_user);
+}
+
+static ssize_t mte_tcf_preferred_store(struct device *dev,
+				       struct device_attribute *attr,
+				       const char *buf, size_t count)
+{
+	ssize_t ret = 0;
+	u64 tcf;
+
+	if (sysfs_streq(buf, "async"))
+		tcf = MTE_CTRL_TCF_ASYNC;
+	else if (sysfs_streq(buf, "sync"))
+		tcf = MTE_CTRL_TCF_SYNC;
+	else
+		return -EINVAL;
+
+	device_lock(dev);
+	per_cpu(mte_tcf_preferred, dev->id) = tcf;
+
+	if (cpu_online(dev->id))
+		ret = smp_call_function_single(dev->id, sync_sctlr, NULL, 0);
+	if (ret == 0)
+		ret = count;
+	device_unlock(dev);
+
+	return ret;
+}
+static DEVICE_ATTR_RW(mte_tcf_preferred);
+
+static int register_mte_tcf_preferred_sysctl(void)
+{
+	unsigned int cpu;
+
+	if (!system_supports_mte())
+		return 0;
+
+	for_each_possible_cpu(cpu) {
+		per_cpu(mte_tcf_preferred, cpu) = MTE_CTRL_TCF_ASYNC;
+		device_create_file(get_cpu_device(cpu),
+				   &dev_attr_mte_tcf_preferred);
+	}
+
+	return 0;
+}
+subsys_initcall(register_mte_tcf_preferred_sysctl);
