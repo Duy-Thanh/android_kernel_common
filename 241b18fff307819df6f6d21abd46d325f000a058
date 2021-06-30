@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "39bcefa5_63467464",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-30T22:37:02Z",
+      "side": 1,
+      "message": "Greg, are you ok with the symbol additions here?",
+      "revId": "241b18fff307819df6f6d21abd46d325f000a058",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8d933d1f_28d6087f",
         "filename": "android/abi_gki_aarch64_vivo",
         "patchSetId": 1
