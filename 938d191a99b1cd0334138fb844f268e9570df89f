@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da2b642a_dd9d05f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-30T21:28:39Z",
+      "side": 1,
+      "message": "Why does this need to be part of July 2 KMI update? (adding new interfaces doesn\u0027t break the KMI so additions can go in immediately)",
+      "revId": "938d191a99b1cd0334138fb844f268e9570df89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
