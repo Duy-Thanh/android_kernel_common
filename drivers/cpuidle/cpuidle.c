@@ -206,12 +206,19 @@ int cpuidle_enter_state(struct cpuidle_device *dev, struct cpuidle_driver *drv,
 	struct cpuidle_state *target_state;
 	bool broadcast;
 	ktime_t time_start, time_end;
+	int saved_index = index;
 
 	/*
 	 * The vendor hook may modify index, which means target_state and
 	 * broadcast must be assigned after the vendor hook.
 	 */
 	trace_android_vh_cpu_idle_enter(&index, dev);
+	if (index < 0) {
+		if (!cpuidle_state_is_coupled(drv, saved_index))
+			local_irq_enable();
+		return index;
+	}
+
 	target_state = &drv->states[index];
 	broadcast = !!(target_state->flags & CPUIDLE_FLAG_TIMER_STOP);
 
