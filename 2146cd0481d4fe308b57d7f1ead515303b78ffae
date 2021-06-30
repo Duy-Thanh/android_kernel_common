@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ecf6c5c_c58e8b85",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1292,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-06-30T16:18:05Z",
+      "side": 1,
+      "message": "Should this perhaps be changed into the following?\n\nbool force_out \u003d false;\nbool force_scaling \u003d false;",
+      "range": {
+        "startLine": 1290,
+        "startChar": 1,
+        "endLine": 1292,
+        "endChar": 0
+      },
+      "revId": "2146cd0481d4fe308b57d7f1ead515303b78ffae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
