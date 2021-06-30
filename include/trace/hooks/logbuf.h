@@ -23,6 +23,7 @@ DECLARE_HOOK(android_vh_logbuf_pr_cont,
 	TP_ARGS(r, text_len))
 #else
 #define trace_android_vh_logbuf(rb, r)
+#define trace_android_vh_logbuf_pr_cont(r, text_len)
 #endif
 
 #endif /* _TRACE_HOOK_LOGBUF_H */
