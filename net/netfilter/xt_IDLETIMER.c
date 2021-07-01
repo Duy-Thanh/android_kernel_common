@@ -277,8 +277,12 @@ static enum alarmtimer_restart idletimer_tg_alarmproc(struct alarm *alarm,
 {
 	struct idletimer_tg *timer = alarm->data;
 
+	spin_lock_bh(&timestamp_lock);
+	timer->active = false;
 	pr_debug("alarm %s expired\n", timer->attr.attr.name);
 	schedule_work(&timer->work);
+	spin_unlock_bh(&timestamp_lock);
+
 	return ALARMTIMER_NORESTART;
 }
 
@@ -471,9 +475,15 @@ static void reset_timer(struct idletimer_tg * const info_timer,
 			schedule_work(&info_timer->work);
 		}
 	}
+	if (info_timer->timer_type & XT_IDLETIMER_ALARM) {
+		ktime_t tout = ktime_set(info_timeout, 0);
 
-	info_timer->last_modified_timer = ktime_to_timespec64(ktime_get_boottime());
-	mod_timer(&info_timer->timer, msecs_to_jiffies(info_timeout * 1000) + now);
+		alarm_start_relative(&info_timer->alarm, tout);
+	} else {
+
+		info_timer->last_modified_timer = ktime_to_timespec64(ktime_get_boottime());
+		mod_timer(&info_timer->timer, msecs_to_jiffies(info_timeout * 1000) + now);
+	}
 	spin_unlock_bh(&timestamp_lock);
 }
 
@@ -484,20 +494,10 @@ static unsigned int idletimer_tg_target(struct sk_buff *skb,
 					 const struct xt_action_param *par)
 {
 	const struct idletimer_tg_info *info = par->targinfo;
-	unsigned long now = jiffies;
 
 	pr_debug("resetting timer %s, timeout period %u\n",
 		 info->label, info->timeout);
 
-	info->timer->active = true;
-
-	if (time_before(info->timer->timer.expires, now)) {
-		schedule_work(&info->timer->work);
-		pr_debug("Starting timer %s (Expired, Jiffies): %lu, %lu\n",
-			 info->label, info->timer->timer.expires, now);
-	}
-
-	/* TODO: Avoid modifying timers on each packet */
 	reset_timer(info->timer, info->timeout, skb);
 
 	return XT_CONTINUE;
@@ -510,26 +510,11 @@ static unsigned int idletimer_tg_target_v1(struct sk_buff *skb,
 					 const struct xt_action_param *par)
 {
 	const struct idletimer_tg_info_v1 *info = par->targinfo;
-	unsigned long now = jiffies;
 
 	pr_debug("resetting timer %s, timeout period %u\n",
 		 info->label, info->timeout);
 
-	if (info->timer->timer_type & XT_IDLETIMER_ALARM) {
-		ktime_t tout = ktime_set(info->timeout, 0);
-		alarm_start_relative(&info->timer->alarm, tout);
-	} else {
-		info->timer->active = true;
-
-		if (time_before(info->timer->timer.expires, now)) {
-			schedule_work(&info->timer->work);
-			pr_debug("Starting timer %s (Expired, Jiffies): %lu, %lu\n",
-				 info->label, info->timer->timer.expires, now);
-		}
-
-		/* TODO: Avoid modifying timers on each packet */
-		reset_timer(info->timer, info->timeout, skb);
-	}
+	reset_timer(info->timer, info->timeout, skb);
 
 	return XT_CONTINUE;
 }
@@ -572,7 +557,6 @@ static int idletimer_tg_checkentry(const struct xt_tgchk_param *par)
 	info->timer = __idletimer_tg_find_by_label(info->label);
 	if (info->timer) {
 		info->timer->refcnt++;
-		reset_timer(info->timer, info->timeout, NULL);
 		pr_debug("increased refcnt of timer %s to %u\n",
 			 info->label, info->timer->refcnt);
 	} else {
@@ -623,19 +607,6 @@ static int idletimer_tg_checkentry_v1(const struct xt_tgchk_param *par)
 		}
 
 		info->timer->refcnt++;
-		if (info->timer_type & XT_IDLETIMER_ALARM) {
-			/* calculate remaining expiry time */
-			ktime_t tout = alarm_expires_remaining(&info->timer->alarm);
-			struct timespec64 ktimespec = ktime_to_timespec64(tout);
-
-			if (ktimespec.tv_sec > 0) {
-				pr_debug("time_expiry_remaining %lld\n",
-					 ktimespec.tv_sec);
-				alarm_start_relative(&info->timer->alarm, tout);
-			}
-		} else {
-			reset_timer(info->timer, info->timeout, NULL);
-		}
 		pr_debug("increased refcnt of timer %s to %u\n",
 			 info->label, info->timer->refcnt);
 	} else {
