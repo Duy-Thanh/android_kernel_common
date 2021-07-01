@@ -16,6 +16,24 @@
       "message": "I really don\u0027t prefer copying wake_up_all_idle_cpus() here. Please do one of the following:\n\n1) use a vendor hook\n\n  trace_android_vh_uninstall_idle_handler(\u0026done);\n  if (!done)\n    wake_up_all_idle_cpus();\n    \n2) create a new helper in smp.c that does this version. Maybe call it `wake_up_all_online_idle_cpus()`.",
       "revId": "56230d72d4704ed26f8b62913281a0eee2d1ca5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acf2c594_0bf07118",
+        "filename": "drivers/cpuidle/cpuidle.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1582959
+      },
+      "writtenOn": "2021-07-01T05:32:11Z",
+      "side": 1,
+      "message": "Updated in next patch-set.",
+      "parentUuid": "aa5f4ea9_a6ac4190",
+      "revId": "56230d72d4704ed26f8b62913281a0eee2d1ca5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
