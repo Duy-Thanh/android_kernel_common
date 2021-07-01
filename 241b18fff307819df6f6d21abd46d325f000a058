@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a3642788_3bdbc18a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1885655
+      },
+      "writtenOn": "2021-07-01T06:26:34Z",
+      "side": 1,
+      "message": "When does merge complete HPB code? hook point(android_vh_ufs_update_sdev) is not only used for HPB function, but also for Samsung or micron NAND smart report;We hope to merge as soon as possible",
+      "parentUuid": "a8df8d7f_38973094",
+      "revId": "241b18fff307819df6f6d21abd46d325f000a058",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8d933d1f_28d6087f",
         "filename": "android/abi_gki_aarch64_vivo",
         "patchSetId": 1
