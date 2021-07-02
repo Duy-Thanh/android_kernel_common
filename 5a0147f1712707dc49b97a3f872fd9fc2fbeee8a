@@ -121,6 +121,24 @@
       "parentUuid": "7afa9ef8_d47f71e1",
       "revId": "5a0147f1712707dc49b97a3f872fd9fc2fbeee8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c556b977_2d15cb4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-02T07:15:16Z",
+      "side": 1,
+      "message": "If a vendor wants to add new fields, then yes, they should just use ANDROID_VENDOR_DATA() for this, that is what it is explicitly for.\n\nPlease let us use that here instead.",
+      "parentUuid": "a735696c_a98fd25b",
+      "revId": "5a0147f1712707dc49b97a3f872fd9fc2fbeee8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
