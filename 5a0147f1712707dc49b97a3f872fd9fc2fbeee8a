@@ -103,6 +103,24 @@
       "message": "who is changing this structure in ways that breaks the KMI?  We can we just not keep it \"stable\"?\n\nIf you wish to properly hide this structure\u0027s contents, please do so in a patch that upstream can accept, otherwise this is going to make it hard to maintain over time.",
       "revId": "5a0147f1712707dc49b97a3f872fd9fc2fbeee8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a735696c_a98fd25b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-07-02T05:43:51Z",
+      "side": 1,
+      "message": "Samsung is adding members to this struct in their changes for SDP and DualDAR.\n\nThere are a few possible ways to solve the KMI mismatch (which occurs in the CRCs of functions in files that include \u003clinux/fscrypt.h\u003e and export KMI functions that have a struct dentry/inode/file parameter, e.g. fs/dcache.c):\n\n1. Add some ANDROID_VENDOR_DATA() members to struct fscrypt_operations\n2. Use #ifdefs to hide the definition of fscrypt_operations from the problematic files\n3. Same as (2) but put the fscrypt_operations in a separate header\n\nWe already went through this last year, and people preferred (2), which was submitted to android11-5.4.  It could be done one of the other ways, but as far as I know nothing has changed about the problem itself.\n\nI don\u0027t see a way to upstream any of these workarounds.  Putting struct fscrypt_operations in a separate header would come closest, but I just don\u0027t see a convincing reason for it...  It would still fundamentally just be a workaround to keep the CRCs of certain symbols from changing.  I\u0027m happy to consider any ideas you have though...",
+      "parentUuid": "7afa9ef8_d47f71e1",
+      "revId": "5a0147f1712707dc49b97a3f872fd9fc2fbeee8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
