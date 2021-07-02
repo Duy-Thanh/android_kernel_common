@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43992baa_bd7f4162",
+        "filename": "arch/arm64/kernel/mte.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-02T14:20:06Z",
+      "side": 1,
+      "message": "where is the Documentation/ABI/ entry for this new sysfs file?",
+      "range": {
+        "startLine": 455,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 57
+      },
+      "revId": "c4ef2619080152fbfb99fdd605d4d3db8551970f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cecb8b5_6e9996f8",
+        "filename": "arch/arm64/kernel/mte.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-02T14:20:06Z",
+      "side": 1,
+      "message": "what happens when the CPU is removed?  Or added later on?\n\nWhen is this file removed?",
+      "range": {
+        "startLine": 510,
+        "startChar": 0,
+        "endLine": 510,
+        "endChar": 41
+      },
+      "revId": "c4ef2619080152fbfb99fdd605d4d3db8551970f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
