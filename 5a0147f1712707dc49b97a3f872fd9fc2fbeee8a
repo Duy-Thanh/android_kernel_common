@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c863ebd7_ea8f70ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-07-02T00:08:33Z",
+      "side": 1,
+      "message": "How did you test this change?",
+      "revId": "5a0147f1712707dc49b97a3f872fd9fc2fbeee8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9dda9b36_91a1a617",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -49,6 +66,24 @@
       "writtenOn": "2021-07-02T00:00:53Z",
       "side": 1,
       "message": "I just deleted the old one, so please review this.\nThank you.",
+      "revId": "5a0147f1712707dc49b97a3f872fd9fc2fbeee8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f671c49_8d2d7cbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-07-02T00:08:33Z",
+      "side": 1,
+      "message": "I\u0027m not sure how you are able to keep deleting your changes rather than abandoning them, but please don\u0027t do this; it\u0027s very confusing and loses all code review history.  In the future please just upload new revisions of the same change.",
+      "parentUuid": "87539133_23215e7f",
       "revId": "5a0147f1712707dc49b97a3f872fd9fc2fbeee8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
