@@ -157,6 +157,24 @@
       "parentUuid": "c556b977_2d15cb4e",
       "revId": "5a0147f1712707dc49b97a3f872fd9fc2fbeee8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9879eb84_f8e7369b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-07-02T17:34:03Z",
+      "side": 1,
+      "message": "Please consider https://android-review.googlesource.com/c/kernel/common/+/1754704 and https://android-review.googlesource.com/c/kernel/common/+/1754705.",
+      "parentUuid": "ddab3c43_b42b009b",
+      "revId": "5a0147f1712707dc49b97a3f872fd9fc2fbeee8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
