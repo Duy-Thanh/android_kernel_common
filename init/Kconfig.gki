@@ -226,6 +226,13 @@ config GKI_HIDDEN_ETHERNET_CONFIGS
 	  Dummy config option used to enable the hidden Ethernet PHYLINK
 	  configs, required by various ethernet devices.
 
+config GKI_HIDDEN_TIMER_CONFIGS
+	bool "Hidden TIMER configuration needed for GKI"
+	select CLOCKSOURCE_VALIDATE_LAST_CYCLE
+	help
+	  Dummy config option used to enable the hidden timer configs,
+	  required by various SoC platforms.
+
 # Atrocities needed for
 # a) building GKI modules in separate tree, or
 # b) building drivers that are not modularizable
@@ -257,6 +264,7 @@ config GKI_HACKS_TO_FIX
 	select GKI_HIDDEN_MM_CONFIGS
 	select GKI_HIDDEN_DMA_CONFIGS
 	select GKI_HIDDEN_ETHERNET_CONFIGS
+	select GKI_HIDDEN_TIMER_CONFIGS
 	help
 	  Dummy config option used to enable core functionality used by
 	  modules that may not be selectable in this config.
