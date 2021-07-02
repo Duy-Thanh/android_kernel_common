@@ -86,6 +86,23 @@
       "parentUuid": "87539133_23215e7f",
       "revId": "5a0147f1712707dc49b97a3f872fd9fc2fbeee8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7afa9ef8_d47f71e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-02T05:09:39Z",
+      "side": 1,
+      "message": "who is changing this structure in ways that breaks the KMI?  We can we just not keep it \"stable\"?\n\nIf you wish to properly hide this structure\u0027s contents, please do so in a patch that upstream can accept, otherwise this is going to make it hard to maintain over time.",
+      "revId": "5a0147f1712707dc49b97a3f872fd9fc2fbeee8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
