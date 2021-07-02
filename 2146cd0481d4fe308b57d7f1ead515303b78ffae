@@ -22,6 +22,30 @@
       },
       "revId": "2146cd0481d4fe308b57d7f1ead515303b78ffae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1cc98e4_1e181c27",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1292,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-07-02T19:31:11Z",
+      "side": 1,
+      "message": "Looks like this comment is no longer valid. Moving to Resolved, I see Bart has given +1 already.",
+      "parentUuid": "2ecf6c5c_c58e8b85",
+      "range": {
+        "startLine": 1290,
+        "startChar": 1,
+        "endLine": 1292,
+        "endChar": 0
+      },
+      "revId": "2146cd0481d4fe308b57d7f1ead515303b78ffae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
