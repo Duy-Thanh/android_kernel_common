@@ -139,6 +139,24 @@
       "parentUuid": "a735696c_a98fd25b",
       "revId": "5a0147f1712707dc49b97a3f872fd9fc2fbeee8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddab3c43_b42b009b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-07-02T17:16:35Z",
+      "side": 1,
+      "message": "I don\u0027t really care, but a nice benefit of option (2) is that it prevents any LTS updates to fscrypt_operations from breaking the KMI.  That struct really shouldn\u0027t be in the KMI at all -- it\u0027s *not* used by loadable modules.  So if we go with (1),  we should probably add some ANDROID_KABI_RESERVE() fields too.  Otherwise I don\u0027t really care.  Just be sure what you want, since you did approve option (2) the last time around...\n\nBTW, it should be ANDROID_OEM_DATA_ARRAY() rather than ANDROID_VENDOR_DATA(), right?",
+      "parentUuid": "c556b977_2d15cb4e",
+      "revId": "5a0147f1712707dc49b97a3f872fd9fc2fbeee8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
