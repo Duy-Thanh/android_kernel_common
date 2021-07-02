@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14823658_f0398345",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-07-02T11:56:41Z",
+      "side": 0,
+      "message": "note: this check is missing in checkentry v0 which is a bug if replacing a v1 entry with a v0 entry, additionally we don\u0027t check timeout matches, but info-\u003etimer-\u003etimeout isn\u0027t updated to match info-\u003etimeout",
+      "range": {
+        "startLine": 619,
+        "startChar": 0,
+        "endLine": 619,
+        "endChar": 52
+      },
+      "revId": "71759356aacbe3a965b593477ff8c27e210eebba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
