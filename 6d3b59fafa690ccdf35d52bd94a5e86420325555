@@ -33,6 +33,24 @@
       "message": "Please see my comment in the bug",
       "revId": "6d3b59fafa690ccdf35d52bd94a5e86420325555",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29b94325_3e25160d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-02T18:48:18Z",
+      "side": 1,
+      "message": "After more discussions, the situation is that partner is still developing an upstream solution and needs some more time (see: https://b.corp.google.com/issues/187798288#comment25). Meanwhile due to KMI freeze they want a temporary solution to be merged to ensure the feature is usable.\n\nI think the patch implements a reasonable short-term solution. Any concerns about merging it now and developing an upstream solution for the future use?",
+      "parentUuid": "007d1a1c_bf6d5f1b",
+      "revId": "6d3b59fafa690ccdf35d52bd94a5e86420325555",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
