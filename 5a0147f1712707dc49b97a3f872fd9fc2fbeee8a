@@ -16,6 +16,24 @@
       "message": "You\u0027ve already uploaded another copy of this change (https://android-review.googlesource.com/c/kernel/common/+/1753119); which one am I supposed to be reviewing?",
       "revId": "5a0147f1712707dc49b97a3f872fd9fc2fbeee8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29bb0acb_365fb101",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1885635
+      },
+      "writtenOn": "2021-07-02T00:00:18Z",
+      "side": 1,
+      "message": "I just deleted the old one, so please review this.\nThank you.",
+      "parentUuid": "9dda9b36_91a1a617",
+      "revId": "5a0147f1712707dc49b97a3f872fd9fc2fbeee8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
