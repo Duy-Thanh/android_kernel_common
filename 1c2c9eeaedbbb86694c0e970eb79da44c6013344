@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1491a09_e913e09b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-02T17:45:03Z",
+      "side": 1,
+      "message": "I suspect vendor hook changes result in ABI change, which can\u0027t be done until the next ABI merge window on 7/14, but otherwise the change LGTM.",
+      "revId": "1c2c9eeaedbbb86694c0e970eb79da44c6013344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
