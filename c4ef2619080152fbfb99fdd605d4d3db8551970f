@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "708bc202_bc7b1a31",
+        "filename": "arch/arm64/kernel/mte.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2021-07-02T20:11:28Z",
+      "side": 1,
+      "message": "Done (in the next patch).",
+      "parentUuid": "c04cbb03_35a94c83",
+      "range": {
+        "startLine": 455,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 57
+      },
+      "revId": "c4ef2619080152fbfb99fdd605d4d3db8551970f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cecb8b5_6e9996f8",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "This loops over the set of \"possible\" CPUs, which AFAIK can never change after boot time discovery. From Documentation/core-api/cpu_hotplug.rst:\n\n``cpu_possible_mask``\n  Bitmap of possible CPUs that can ever be available in the\n  system. This is used to allocate some boot time memory for per_cpu variables\n  that aren\u0027t designed to grow/shrink as CPUs are made available or removed.\n  Once set during boot time discovery phase, the map is static, i.e no bits\n  are added or removed anytime. Trimming it accurately for your system needs\n  upfront can save some boot time memory.\n\nAFAICT the sysfs nodes correspond to \"possible\" CPUs so they are never removed. We do something similar in drivers/base/arch_topology.c already.",
       "parentUuid": "4cecb8b5_6e9996f8",
+      "range": {
+        "startLine": 510,
+        "startChar": 0,
+        "endLine": 510,
+        "endChar": 41
+      },
+      "revId": "c4ef2619080152fbfb99fdd605d4d3db8551970f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d127412a_b8998216",
+        "filename": "arch/arm64/kernel/mte.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2021-07-02T20:11:28Z",
+      "side": 1,
+      "message": "Resolving",
+      "parentUuid": "b50181f4_703ec075",
       "range": {
         "startLine": 510,
         "startChar": 0,
