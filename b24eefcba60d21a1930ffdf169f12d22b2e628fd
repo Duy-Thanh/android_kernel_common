@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d49b1348_70b92b52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-07-02T11:52:36Z",
+      "side": 1,
+      "message": "(somewhat derived from https://android-review.googlesource.com/c/kernel/common/+/1645148\nsome notes on how to test at https://android-review.googlesource.com/c/kernel/common/+/1734120 but need to also test hard idle timer mode)",
+      "revId": "b24eefcba60d21a1930ffdf169f12d22b2e628fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
