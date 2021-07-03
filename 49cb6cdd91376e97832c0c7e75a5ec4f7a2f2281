@@ -22,6 +22,30 @@
       },
       "revId": "49cb6cdd91376e97832c0c7e75a5ec4f7a2f2281",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34b7ca3a_80d095cf",
+        "filename": "mm/vmpressure.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2021-07-03T02:50:09Z",
+      "side": 1,
+      "message": "Since CONFIG_MEMCG will be re-enabled in GKI, we will need this hook to work together with memory cgroup and our module.",
+      "parentUuid": "8b7888de_a9b80f80",
+      "range": {
+        "startLine": 242,
+        "startChar": 5,
+        "endLine": 242,
+        "endChar": 15
+      },
+      "revId": "49cb6cdd91376e97832c0c7e75a5ec4f7a2f2281",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
