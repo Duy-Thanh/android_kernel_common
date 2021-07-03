@@ -40,7 +40,12 @@
 #include <trace/hooks/topology.h>
 #include <trace/hooks/mm.h>
 #include <trace/hooks/ftrace_dump.h>
+<<<<<<< HEAD   (b68cddb455684dd92a6f86a1dc93f9395fc1adc0 ANDROID: sched: Export cpu_busy_with_softirqs)
 #include <trace/hooks/dtask.h>
+||||||| BASE   (27028ca7816ee99c8ddc70835c733a49a266ab71 FROMLIST: of: of_reserved_mem: Increase limit for reserved_m)
+=======
+#include <trace/hooks/mm.h>
+>>>>>>> CHANGE (4911e30d7ba80af7f28caa8c28053f80c70f922c ANDROID: vendor_hooks: add hooks in mem_cgroup subsystem)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -103,8 +108,14 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_fpsimd_save);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_shmem_get_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_write_timeout_estab_retrans);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_format_check);
+<<<<<<< HEAD   (b68cddb455684dd92a6f86a1dc93f9395fc1adc0 ANDROID: sched: Export cpu_busy_with_softirqs)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_uninterruptible_tasks);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_uninterruptible_tasks_dn);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_mutex_list_add);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_unlock_slowpath);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_capacity_show);
+||||||| BASE   (27028ca7816ee99c8ddc70835c733a49a266ab71 FROMLIST: of: of_reserved_mem: Increase limit for reserved_m)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_free);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_alloc);
+>>>>>>> CHANGE (4911e30d7ba80af7f28caa8c28053f80c70f922c ANDROID: vendor_hooks: add hooks in mem_cgroup subsystem)
