@@ -51,6 +51,24 @@
       "parentUuid": "007d1a1c_bf6d5f1b",
       "revId": "6d3b59fafa690ccdf35d52bd94a5e86420325555",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5677b300_7848e301",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-03T05:09:40Z",
+      "side": 1,
+      "message": "If you think this is ok, and are willing to maintain and support it, that\u0027s good enough for me!",
+      "parentUuid": "29b94325_3e25160d",
+      "revId": "6d3b59fafa690ccdf35d52bd94a5e86420325555",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
