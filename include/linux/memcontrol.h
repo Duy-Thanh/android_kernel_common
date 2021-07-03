@@ -333,6 +333,13 @@ struct mem_cgroup {
 	struct lru_gen_mm_list mm_list;
 #endif
 
+<<<<<<< HEAD   (c49895 UPSTREAM: PCI: dwc: Strengthen the MSI address allocation lo)
+=======
+	/* for dynamic low */
+	ANDROID_VENDOR_DATA(1);
+	ANDROID_OEM_DATA_ARRAY(1, 2);
+
+>>>>>>> CHANGE (45fabb ANDROID: vendor_hooks: add a field in mem_cgroup)
 	struct mem_cgroup_per_node *nodeinfo[];
 };
 
