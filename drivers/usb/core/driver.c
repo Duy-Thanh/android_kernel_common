@@ -216,6 +216,32 @@ static void usb_remove_newid_files(struct usb_driver *usb_drv)
 	}
 }
 
+static struct usb_dev_driver_overwrite usb_dev_drv_vendor_overwrite;
+
+int usb_dev_driver_register_vendor_ops(struct usb_dev_driver_vendor_ops *ops)
+{
+
+	if (!ops || !ops->suspend_both || !ops->resume_both)
+		return -EINVAL;
+
+	usb_dev_drv_vendor_overwrite.vendor_ops = ops;
+
+	return 0;
+}
+EXPORT_SYMBOL_GPL(usb_dev_driver_register_vendor_ops);
+
+struct usb_dev_driver_vendor_ops *usb_vendor_get_ops(struct usb_device *udev)
+{
+	struct usb_device_driver *udriver;
+
+	if (!udev->dev.driver)
+		return NULL;
+
+	udriver = to_usb_device_driver(udev->dev.driver);
+
+	return udriver->vendor_ops;
+}
+
 static void usb_free_dynids(struct usb_driver *usb_drv)
 {
 	struct usb_dynid *dynid, *n;
@@ -269,6 +295,9 @@ static int usb_probe_device(struct device *dev)
 	if (error)
 		return error;
 
+	if (usb_dev_drv_vendor_overwrite.vendor_ops)
+		udriver->vendor_ops = usb_dev_drv_vendor_overwrite.vendor_ops;
+
 	/* Probe the USB device with the driver in hand, but only
 	 * defer to a generic driver in case the current USB
 	 * device driver has an id_table or a match function; i.e.,
@@ -311,6 +340,8 @@ static int usb_unbind_device(struct device *dev)
 		usb_generic_driver_disconnect(udev);
 	if (!udriver->supports_autosuspend)
 		usb_autosuspend_device(udev);
+	if (udriver->vendor_ops)
+		udriver->vendor_ops = NULL;
 	return 0;
 }
 
@@ -1403,10 +1434,22 @@ static int usb_suspend_both(struct usb_device *udev, pm_message_t msg)
 	int			status = 0;
 	int			i = 0, n = 0;
 	struct usb_interface	*intf;
+	bool			vendor_handled;
+	struct usb_dev_driver_vendor_ops *vendor_ops = usb_vendor_get_ops(udev);
 
 	if (udev->state == USB_STATE_NOTATTACHED ||
 			udev->state == USB_STATE_SUSPENDED)
 		goto done;
+
+	if (vendor_ops) {
+		/*
+		 * Vendor can design its specific suspend method, return true if
+		 * the vendor callback finished the task and then go to done.
+		 */
+		vendor_handled = vendor_ops->suspend_both(udev, msg);
+		if (vendor_handled)
+			goto done;
+	}
 
 	/* Suspend all the interfaces and then udev itself */
 	if (udev->actconfig) {
@@ -1504,11 +1547,24 @@ static int usb_resume_both(struct usb_device *udev, pm_message_t msg)
 	int			status = 0;
 	int			i;
 	struct usb_interface	*intf;
+	bool			vendor_handled;
+	struct usb_dev_driver_vendor_ops *vendor_ops = usb_vendor_get_ops(udev);
 
 	if (udev->state == USB_STATE_NOTATTACHED) {
 		status = -ENODEV;
 		goto done;
 	}
+
+	if (vendor_ops) {
+		/*
+		 * Vendor can design its specific resume method, return true if
+		 * the vendor callback finished the task and then go to done.
+		 */
+		vendor_handled = vendor_ops->resume_both(udev, msg);
+		if (vendor_handled)
+			goto done;
+	}
+
 	udev->can_submit = 1;
 
 	/* Resume the device */

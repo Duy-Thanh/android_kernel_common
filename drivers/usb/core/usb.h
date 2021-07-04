@@ -220,3 +220,14 @@ extern acpi_handle usb_get_hub_port_acpi_handle(struct usb_device *hdev,
 static inline int usb_acpi_register(void) { return 0; };
 static inline void usb_acpi_unregister(void) { };
 #endif
+
+struct usb_dev_driver_vendor_ops {
+	bool (*suspend_both)(struct usb_device *udev, pm_message_t msg);
+	bool (*resume_both)(struct usb_device *udev, pm_message_t msg);
+};
+
+struct usb_dev_driver_overwrite {
+	struct usb_dev_driver_vendor_ops *vendor_ops;
+};
+
+int usb_dev_driver_register_vendor_ops(struct usb_dev_driver_vendor_ops *ops);

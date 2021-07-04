@@ -1281,6 +1281,8 @@ struct usb_device_driver {
 	const struct usb_device_id *id_table;
 	unsigned int supports_autosuspend:1;
 	unsigned int generic_subclass:1;
+
+	struct usb_dev_driver_vendor_ops *vendor_ops;
 };
 #define	to_usb_device_driver(d) container_of(d, struct usb_device_driver, \
 		drvwrap.driver)
