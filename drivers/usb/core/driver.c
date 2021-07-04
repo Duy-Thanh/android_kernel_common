@@ -216,6 +216,24 @@ static void usb_remove_newid_files(struct usb_driver *usb_drv)
 	}
 }
 
+static struct usb_driver_vendor_ops *usb_drv_vendor_ops;
+
+int usb_vendor_set_ops(struct usb_driver_vendor_ops *ops)
+{
+	if ((!ops->suspend_both) ||
+	    (!ops->resume_both))
+		return -EINVAL;
+
+	usb_drv_vendor_ops = ops;
+	return 0;
+}
+EXPORT_SYMBOL_GPL(usb_vendor_set_ops);
+
+struct usb_driver_vendor_ops *usb_vendor_get_ops(void)
+{
+	return usb_drv_vendor_ops;
+}
+
 static void usb_free_dynids(struct usb_driver *usb_drv)
 {
 	struct usb_dynid *dynid, *n;
@@ -1403,10 +1421,22 @@ static int usb_suspend_both(struct usb_device *udev, pm_message_t msg)
 	int			status = 0;
 	int			i = 0, n = 0;
 	struct usb_interface	*intf;
+	bool			vendor_handled = false;
+	struct usb_driver_vendor_ops *vendor_ops = usb_vendor_get_ops();
 
 	if (udev->state == USB_STATE_NOTATTACHED ||
 			udev->state == USB_STATE_SUSPENDED)
 		goto done;
+
+	if (vendor_ops) {
+		/*
+		 * Vendor can design its specific suspend method, return true if
+		 * the vendor callback finished the task and then go to done.
+		 */
+		vendor_handled = vendor_ops->suspend_both(udev, msg);
+		if (vendor_handled)
+			goto done;
+	}
 
 	/* Suspend all the interfaces and then udev itself */
 	if (udev->actconfig) {
@@ -1504,11 +1534,24 @@ static int usb_resume_both(struct usb_device *udev, pm_message_t msg)
 	int			status = 0;
 	int			i;
 	struct usb_interface	*intf;
+	bool			vendor_handled = false;
+	struct usb_driver_vendor_ops *vendor_ops = usb_vendor_get_ops();
 
 	if (udev->state == USB_STATE_NOTATTACHED) {
 		status = -ENODEV;
 		goto done;
 	}
+
+	if (vendor_ops) {
+		/*
+		 * Vendor can design its specific resume method, return true if
+		 * the vendor callback finished the task and then go to done.
+		 */
+		vendor_handled = vendor_ops->resume_both(udev, msg);
+		if (vendor_handled)
+			goto done;
+	}
+
 	udev->can_submit = 1;
 
 	/* Resume the device */
