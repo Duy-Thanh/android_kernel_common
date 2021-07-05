@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "309e4956_7a757917",
+        "filename": "android/abi_gki_aarch64_exynosauto",
+        "patchSetId": 1
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-05T07:57:27Z",
+      "side": 1,
+      "message": "should not be needed, and can be a security hole.",
+      "range": {
+        "startLine": 689,
+        "startChar": 2,
+        "endLine": 689,
+        "endChar": 15
+      },
+      "revId": "10cc125293c2365fedd952b755096cb3e374b11e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
