@@ -34,6 +34,23 @@
 
 #include "usb.h"
 
+static struct usb_driver_vendor_ops *usb_drv_vendor_ops;
+
+int usb_vendor_set_ops(struct usb_driver_vendor_ops *ops)
+{
+	if ((!ops->vendor_skip_suspend) ||
+	    (!ops->vendor_skip_resume))
+		return -EINVAL;
+
+	usb_drv_vendor_ops = ops;
+	return 0;
+}
+EXPORT_SYMBOL_GPL(usb_vendor_set_ops);
+
+struct usb_driver_vendor_ops *usb_vendor_get_ops(void)
+{
+	return usb_drv_vendor_ops;
+}
 
 /*
  * Adds a new dynamic USBdevice ID to this driver,
@@ -1403,10 +1420,24 @@ static int usb_suspend_both(struct usb_device *udev, pm_message_t msg)
 	int			status = 0;
 	int			i = 0, n = 0;
 	struct usb_interface	*intf;
+	bool			vendor_skip_suspend = false;
+	struct usb_driver_vendor_ops	*vendor_ops = usb_vendor_get_ops();
 
 	if (udev->state == USB_STATE_NOTATTACHED ||
 			udev->state == USB_STATE_SUSPENDED)
 		goto done;
+
+	if (vendor_ops) {
+		/*
+		 * In order to support CPU sleep with USB still awake, let
+		 * vendors can drop the suspend task.
+		 */
+		vendor_skip_suspend = vendor_ops->vendor_skip_suspend(udev, msg);
+		if (vendor_skip_suspend) {
+			status = 0;
+			goto done;
+		}
+	}
 
 	/* Suspend all the interfaces and then udev itself */
 	if (udev->actconfig) {
@@ -1504,12 +1535,22 @@ static int usb_resume_both(struct usb_device *udev, pm_message_t msg)
 	int			status = 0;
 	int			i;
 	struct usb_interface	*intf;
+	bool			vendor_skip_resume = false;
+	struct usb_driver_vendor_ops *vendor_ops = usb_vendor_get_ops();
 
 	if (udev->state == USB_STATE_NOTATTACHED) {
 		status = -ENODEV;
 		goto done;
 	}
 	udev->can_submit = 1;
+
+	if (vendor_ops) {
+		vendor_skip_resume = vendor_ops->vendor_skip_resume(udev, msg);
+		if (vendor_skip_resume) {
+			status = 0;
+			goto done;
+		}
+	}
 
 	/* Resume the device */
 	if (udev->state == USB_STATE_SUSPENDED || udev->reset_resume)
