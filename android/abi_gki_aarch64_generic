@@ -390,6 +390,8 @@
   devm_thermal_zone_of_sensor_unregister
   devm_usb_get_phy_by_phandle
   _dev_notice
+  dev_pm_domain_attach_by_name
+  dev_pm_domain_detach
   dev_pm_opp_add
   dev_pm_opp_disable
   dev_pm_opp_find_freq_ceil
@@ -544,9 +546,11 @@
   drm_atomic_normalize_zpos
   drm_atomic_private_obj_fini
   drm_atomic_private_obj_init
+  drm_atomic_set_crtc_for_connector
   drm_atomic_set_crtc_for_plane
   drm_atomic_set_fb_for_plane
   drm_atomic_set_mode_for_crtc
+  drm_atomic_set_mode_prop_for_crtc
   drm_atomic_state_alloc
   drm_atomic_state_clear
   __drm_atomic_state_free
@@ -858,6 +862,9 @@
   idr_for_each
   idr_preload
   idr_remove
+  ieee80211_channel_to_freq_khz
+  ieee80211_freq_khz_to_channel
+  ieee80211_get_channel_khz
   iio_device_unregister
   import_iovec
   in6_pton
@@ -1007,6 +1014,7 @@
   kstrtouint
   kstrtouint_from_user
   kstrtoull
+  kstrtoull_from_user
   kthread_bind
   kthread_bind_mask
   kthread_cancel_delayed_work_sync
@@ -1471,6 +1479,7 @@
   regulator_set_voltage
   regulator_set_voltage_sel_regmap
   regulator_unregister
+  regulatory_hint
   release_firmware
   __release_region
   remap_pfn_range
@@ -2162,6 +2171,11 @@
   watchdog_register_device
   watchdog_set_restart_priority
   watchdog_unregister_device
+  wiphy_apply_custom_regulatory
+  wiphy_free
+  wiphy_new_nm
+  wiphy_register
+  wiphy_unregister
   woken_wake_function
   work_busy
   __xfrm_state_destroy
