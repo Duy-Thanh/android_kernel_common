@@ -176,6 +176,7 @@ struct snd_usb_audio_vendor_ops {
 				 struct audioformat *found,
 				 int *cur_attr, int *attr);
 	int (*usb_add_ctls)(struct snd_usb_audio *chip);
+	int (*support_cpu_suspend)(struct usb_device *udev, int direction);
 };
 
 #endif /* __USBAUDIO_H */

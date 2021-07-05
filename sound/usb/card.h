@@ -209,5 +209,6 @@ int snd_vendor_set_pcm_connection(struct usb_device *udev,
 int snd_vendor_set_pcm_binterval(struct audioformat *fp,
 				 struct audioformat *found,
 				 int *cur_attr, int *attr);
+bool snd_vendor_support_cpu_suspend(struct usb_device *udev, int direction);
 
 #endif /* __USBAUDIO_CARD_H */

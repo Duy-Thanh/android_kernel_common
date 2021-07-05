@@ -225,6 +225,15 @@ static int snd_vendor_usb_add_ctls(struct snd_usb_audio *chip)
 	return 0;
 }
 
+bool snd_vendor_support_cpu_suspend(struct usb_device *udev, int direction)
+{
+	struct snd_usb_audio_vendor_ops *ops = snd_vendor_get_ops();
+
+	if (ops && ops->support_cpu_suspend)
+		return ops->support_cpu_suspend(udev, direction);
+	return false;
+}
+
 struct snd_usb_substream *find_snd_usb_substream(unsigned int card_num,
 	unsigned int pcm_idx, unsigned int direction, struct snd_usb_audio
 	**uchip, void (*disconnect_cb)(struct snd_usb_audio *chip))
