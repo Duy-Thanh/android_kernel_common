@@ -41,6 +41,7 @@
 #include <sound/pcm_params.h>
 #include <sound/initval.h>
 
+#include <trace/hooks/sound.h>
 #include "usbaudio.h"
 #include "card.h"
 #include "midi.h"
@@ -223,6 +224,15 @@ static int snd_vendor_usb_add_ctls(struct snd_usb_audio *chip)
 	if (ops)
 		return ops->usb_add_ctls(chip);
 	return 0;
+}
+
+bool snd_vendor_support_cpu_suspend(struct usb_device *udev, int direction)
+{
+	bool is_support = false;
+	trace_android_vh_sound_usb_support_cpu_suspend(udev,
+							direction,
+							&is_support);
+	return is_support;
 }
 
 struct snd_usb_substream *find_snd_usb_substream(unsigned int card_num,

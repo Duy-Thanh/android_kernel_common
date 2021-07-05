@@ -692,6 +692,9 @@ int snd_usb_enable_audio_stream(struct snd_usb_substream *subs,
 	int ret;
 
 	if (!enable) {
+		if (snd_vendor_support_cpu_suspend(subs->dev, subs->direction))
+			snd_usb_autoresume(subs->stream->chip);
+
 		if (subs->interface >= 0) {
 			usb_set_interface(subs->dev, subs->interface, 0);
 			subs->altset_idx = 0;
@@ -707,7 +710,7 @@ int snd_usb_enable_audio_stream(struct snd_usb_substream *subs,
 
 	ret = snd_usb_pcm_change_state(subs, UAC3_PD_STATE_D0);
 	if (ret < 0)
-		return ret;
+		goto out;
 
 	if (datainterval != -EINVAL)
 		fmt = find_format_and_si(subs, datainterval);
@@ -717,7 +720,8 @@ int snd_usb_enable_audio_stream(struct snd_usb_substream *subs,
 		dev_err(&subs->dev->dev,
 		"cannot set format: format = %#x, rate = %d, channels = %d\n",
 			   subs->pcm_format, subs->cur_rate, subs->channels);
-		return -EINVAL;
+		ret = -EINVAL;
+		goto out;
 	}
 
 	subs->altset_idx = 0;
@@ -727,13 +731,14 @@ int snd_usb_enable_audio_stream(struct snd_usb_substream *subs,
 	} else {
 		ret = set_format(subs, fmt);
 		if (ret < 0)
-			return ret;
+			goto out;
 
 		iface = usb_ifnum_to_if(subs->dev, subs->cur_audiofmt->iface);
 		if (!iface) {
 			dev_err(&subs->dev->dev, "Could not get iface %d\n",
 				subs->cur_audiofmt->iface);
-			return -ENODEV;
+			ret = -ENODEV;
+			goto out;
 		}
 
 		alts = &iface->altsetting[subs->cur_audiofmt->altset_idx];
@@ -745,14 +750,20 @@ int snd_usb_enable_audio_stream(struct snd_usb_substream *subs,
 		if (ret < 0) {
 			dev_err(&subs->dev->dev, "failed to set rate %d\n",
 				subs->cur_rate);
-			return ret;
+			goto out;
 		}
 	}
 
 	subs->interface = fmt->iface;
 	subs->altset_idx = fmt->altset_idx;
 
-	return 0;
+	ret = 0;
+
+out:
+	if (snd_vendor_support_cpu_suspend(subs->dev, subs->direction))
+		snd_usb_autosuspend(subs->stream->chip);
+
+	return ret;
 }
 EXPORT_SYMBOL_GPL(snd_usb_enable_audio_stream);
 
@@ -1532,6 +1543,10 @@ static int snd_usb_pcm_open(struct snd_pcm_substream *substream)
 		if (ret)
 			snd_usb_autosuspend(subs->stream->chip);
 	}
+
+	if (!ret && snd_vendor_support_cpu_suspend(subs->dev, subs->direction))
+		snd_usb_autosuspend(subs->stream->chip);
+
 	return ret;
 }
 
@@ -1546,6 +1561,9 @@ static int snd_usb_pcm_close(struct snd_pcm_substream *substream)
 					    direction);
 	if (ret)
 		return ret;
+
+	if (snd_vendor_support_cpu_suspend(subs->dev, subs->direction))
+		snd_usb_autoresume(subs->stream->chip);
 
 	snd_media_stop_pipeline(subs);
 
@@ -1925,8 +1943,11 @@ static void retire_playback_urb(struct snd_usb_substream *subs,
 static int snd_usb_substream_playback_trigger(struct snd_pcm_substream *substream,
 					      int cmd)
 {
+	int err = 0;
 	struct snd_usb_substream *subs = substream->runtime->private_data;
 
+	if (snd_vendor_support_cpu_suspend(subs->dev, subs->direction))
+		snd_usb_autoresume(subs->stream->chip);
 	switch (cmd) {
 	case SNDRV_PCM_TRIGGER_START:
 		subs->trigger_tstamp_pending_update = true;
@@ -1935,67 +1956,79 @@ static int snd_usb_substream_playback_trigger(struct snd_pcm_substream *substrea
 		subs->data_endpoint->prepare_data_urb = prepare_playback_urb;
 		subs->data_endpoint->retire_data_urb = retire_playback_urb;
 		subs->running = 1;
-		return 0;
+		goto out;
 	case SNDRV_PCM_TRIGGER_STOP:
 		stop_endpoints(subs);
 		subs->running = 0;
-		return 0;
+		goto out;
 	case SNDRV_PCM_TRIGGER_PAUSE_PUSH:
 		subs->data_endpoint->prepare_data_urb = NULL;
 		/* keep retire_data_urb for delay calculation */
 		subs->data_endpoint->retire_data_urb = retire_playback_urb;
 		subs->running = 0;
-		return 0;
+		goto out;
 	case SNDRV_PCM_TRIGGER_SUSPEND:
 		if (subs->stream->chip->setup_fmt_after_resume_quirk) {
 			stop_endpoints(subs);
 			subs->need_setup_fmt = true;
-			return 0;
+			goto out;
 		}
 		break;
 	}
 
-	return -EINVAL;
+	err = -EINVAL;
+
+out:
+	if (snd_vendor_support_cpu_suspend(subs->dev, subs->direction))
+		snd_usb_autosuspend(subs->stream->chip);
+
+	return err;
 }
 
 static int snd_usb_substream_capture_trigger(struct snd_pcm_substream *substream,
 					     int cmd)
 {
-	int err;
+	int err = 0;
 	struct snd_usb_substream *subs = substream->runtime->private_data;
 
+	if (snd_vendor_support_cpu_suspend(subs->dev, subs->direction))
+		snd_usb_autoresume(subs->stream->chip);
 	switch (cmd) {
 	case SNDRV_PCM_TRIGGER_START:
 		err = start_endpoints(subs);
 		if (err < 0)
-			return err;
+			goto out;
 
 		subs->data_endpoint->retire_data_urb = retire_capture_urb;
 		subs->running = 1;
-		return 0;
+		goto out;
 	case SNDRV_PCM_TRIGGER_STOP:
 		stop_endpoints(subs);
 		subs->data_endpoint->retire_data_urb = NULL;
 		subs->running = 0;
-		return 0;
+		goto out;
 	case SNDRV_PCM_TRIGGER_PAUSE_PUSH:
 		subs->data_endpoint->retire_data_urb = NULL;
 		subs->running = 0;
-		return 0;
+		goto out;
 	case SNDRV_PCM_TRIGGER_PAUSE_RELEASE:
 		subs->data_endpoint->retire_data_urb = retire_capture_urb;
 		subs->running = 1;
-		return 0;
+		goto out;
 	case SNDRV_PCM_TRIGGER_SUSPEND:
 		if (subs->stream->chip->setup_fmt_after_resume_quirk) {
 			stop_endpoints(subs);
 			subs->need_setup_fmt = true;
-			return 0;
+			goto out;
 		}
 		break;
 	}
 
-	return -EINVAL;
+	err = -EINVAL;
+out:
+	if (snd_vendor_support_cpu_suspend(subs->dev, subs->direction))
+		snd_usb_autosuspend(subs->stream->chip);
+	return err;
 }
 
 static const struct snd_pcm_ops snd_usb_playback_ops = {
