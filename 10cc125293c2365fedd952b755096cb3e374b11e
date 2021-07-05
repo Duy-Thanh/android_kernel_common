@@ -70,6 +70,30 @@
       },
       "revId": "10cc125293c2365fedd952b755096cb3e374b11e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b17272b_98a1504c",
+        "filename": "android/abi_gki_aarch64_exynosauto",
+        "patchSetId": 1
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-05T08:41:01Z",
+      "side": 1,
+      "message": "Ok, but be VERY aware that this is a security hole and if a user can abuse it, they will.",
+      "parentUuid": "050c0576_01733e14",
+      "range": {
+        "startLine": 689,
+        "startChar": 2,
+        "endLine": 689,
+        "endChar": 15
+      },
+      "revId": "10cc125293c2365fedd952b755096cb3e374b11e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
