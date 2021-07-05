@@ -33,6 +33,42 @@
       "message": "user of this hook?",
       "revId": "cab0e8f0a01c377150c1ff41bd576d421ea265c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f88d3d75_ab375803",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1547213
+      },
+      "writtenOn": "2021-07-05T15:20:56Z",
+      "side": 1,
+      "message": "Example code as below, I will leave the implementation to the USB team:\nhttps://partner-android-review.googlesource.com/c/kernel/private/google-modules/aoc/+/1958335/",
+      "parentUuid": "addfaa15_ba2fff77",
+      "revId": "cab0e8f0a01c377150c1ff41bd576d421ea265c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1849b639_da36a878",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1547213
+      },
+      "writtenOn": "2021-07-05T15:20:56Z",
+      "side": 1,
+      "message": "still working on the patch, will do it when the patch is completed.",
+      "parentUuid": "cc127399_7997236d",
+      "revId": "cab0e8f0a01c377150c1ff41bd576d421ea265c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
