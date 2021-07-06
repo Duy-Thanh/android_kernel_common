@@ -6,6 +6,7 @@
 #include <linux/init.h>
 #include <linux/slab.h>
 #include <linux/usb.h>
+#include <linux/usb/hcd.h>
 #include <linux/usb/audio.h>
 #include <linux/usb/audio-v2.h>
 #include <linux/usb/audio-v3.h>
@@ -68,6 +69,8 @@ static void snd_usb_audio_pcm_free(struct snd_pcm *pcm)
 {
 	struct snd_usb_stream *stream = pcm->private_data;
 	struct snd_usb_audio *chip;
+	struct usb_hcd *hcd = bus_to_hcd(stream->chip->dev->bus);
+
 	if (stream) {
 		mutex_lock(&stream->chip->dev_lock);
 		chip = stream->chip;
@@ -75,6 +78,7 @@ static void snd_usb_audio_pcm_free(struct snd_pcm *pcm)
 		snd_usb_audio_stream_free(stream);
 		mutex_unlock(&chip->dev_lock);
 	}
+	usb_put_hcd(hcd);
 }
 
 /*
@@ -487,6 +491,7 @@ static int __snd_usb_add_audio_stream(struct snd_usb_audio *chip,
 	struct snd_usb_stream *as;
 	struct snd_usb_substream *subs;
 	struct snd_pcm *pcm;
+	struct usb_hcd *hcd;
 	int err;
 
 	list_for_each_entry(as, &chip->pcm_list, list) {
@@ -542,6 +547,8 @@ static int __snd_usb_add_audio_stream(struct snd_usb_audio *chip,
 		strcpy(pcm->name, "USB Audio");
 
 	snd_usb_init_substream(as, stream, fp, pd);
+	hcd = bus_to_hcd(as->chip->dev->bus);
+	hcd = usb_get_hcd(hcd);
 
 	/*
 	 * Keep using head insertion for M-Audio Audiophile USB (tm) which has a
