@@ -938,6 +938,7 @@
       <elf-symbol name='crypto_alloc_sync_skcipher' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6adbbe42'/>
       <elf-symbol name='crypto_attr_alg_name' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9a11a0fc'/>
       <elf-symbol name='crypto_check_attr_type' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4934bdd0'/>
+      <elf-symbol name='crypto_cipher_decrypt_one' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa122da44'/>
       <elf-symbol name='crypto_cipher_encrypt_one' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb06c0638'/>
       <elf-symbol name='crypto_cipher_setkey' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3f7520ac'/>
       <elf-symbol name='crypto_comp_compress' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5428a43c'/>
@@ -968,9 +969,9 @@
       <elf-symbol name='crypto_register_skciphers' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf1b15e62'/>
       <elf-symbol name='crypto_register_template' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3fc659c9'/>
       <elf-symbol name='crypto_register_templates' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4be3e473'/>
-      <elf-symbol name='crypto_remove_final' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3de9cae1'/>
       <elf-symbol name='crypto_remove_spawns' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4d5d3af8'/>
       <elf-symbol name='crypto_req_done' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfd8d285b'/>
+      <elf-symbol name='crypto_rng_reset' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x28702c1a'/>
       <elf-symbol name='crypto_sha1_finup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x133d4800'/>
       <elf-symbol name='crypto_sha1_update' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x37c900ce'/>
       <elf-symbol name='crypto_shash_alg_has_setkey' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x65845d3a'/>
@@ -25028,7 +25029,7 @@
           <var-decl name='' type-id='0c30e35e' visibility='default' filepath='include/linux/perf_event.h' line='230' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__9' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/net/netns/generic.h' line='29' column='1' id='1a99b3b8'>
+      <union-decl name='__anonymous_union__10' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/net/netns/generic.h' line='29' column='1' id='1a99b3b8'>
         <data-member access='public'>
           <var-decl name='s' type-id='88d8a388' visibility='default' filepath='include/net/netns/generic.h' line='33' column='1'/>
         </data-member>
@@ -32545,7 +32546,7 @@
           <var-decl name='nulls_head' type-id='af86905d' visibility='default' filepath='include/net/inet_hashtables.h' line='117' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__7' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/net/xfrm.h' line='151' column='1' id='fc320d58'>
+      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/net/xfrm.h' line='151' column='1' id='fc320d58'>
         <data-member access='public'>
           <var-decl name='gclist' type-id='03a4a074' visibility='default' filepath='include/net/xfrm.h' line='152' column='1'/>
         </data-member>
@@ -43513,10 +43514,6 @@
         <parameter type-id='67f526b5' name='nalg' filepath='crypto/algapi.c' line='140' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='crypto_remove_final' mangled-name='crypto_remove_final' filepath='crypto/algapi.c' line='380' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='crypto_remove_final'>
-        <parameter type-id='e84b031a' name='list' filepath='crypto/algapi.c' line='380' column='1'/>
-        <return type-id='48b5725f'/>
-      </function-decl>
       <function-decl name='crypto_unregister_algs' mangled-name='crypto_unregister_algs' filepath='crypto/algapi.c' line='487' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='crypto_unregister_algs'>
         <parameter type-id='67f526b5' name='algs' filepath='crypto/algapi.c' line='487' column='1'/>
         <parameter type-id='95e97e5e' name='count' filepath='crypto/algapi.c' line='487' column='1'/>
@@ -43971,6 +43968,12 @@
         <parameter type-id='bbaf3419' name='src' filepath='crypto/cipher.c' line='81' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='crypto_cipher_decrypt_one' mangled-name='crypto_cipher_decrypt_one' filepath='crypto/cipher.c' line='87' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='crypto_cipher_decrypt_one'>
+        <parameter type-id='75f72758' name='tfm' filepath='crypto/cipher.c' line='87' column='1'/>
+        <parameter type-id='8bff8096' name='dst' filepath='crypto/cipher.c' line='88' column='1'/>
+        <parameter type-id='bbaf3419' name='src' filepath='crypto/cipher.c' line='88' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='crypto/compress.c' language='LANG_C89'>
       <class-decl name='crypto_comp' size-in-bits='1024' is-struct='yes' visibility='default' filepath='include/linux/crypto.h' line='642' column='1' id='50982b2a'>
@@ -44092,6 +44095,12 @@
         <parameter type-id='090a6ee7' name='algs' filepath='crypto/rng.c' line='218' column='1'/>
         <parameter type-id='95e97e5e' name='count' filepath='crypto/rng.c' line='218' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='crypto_rng_reset' mangled-name='crypto_rng_reset' filepath='crypto/rng.c' line='31' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='crypto_rng_reset'>
+        <parameter type-id='5474f420' name='tfm' filepath='crypto/rng.c' line='31' column='1'/>
+        <parameter type-id='bbaf3419' name='seed' filepath='crypto/rng.c' line='31' column='1'/>
+        <parameter type-id='f0981eeb' name='slen' filepath='crypto/rng.c' line='31' column='1'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='crypto_register_rngs' mangled-name='crypto_register_rngs' filepath='crypto/rng.c' line='198' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='crypto_register_rngs'>
         <parameter type-id='090a6ee7' name='algs' filepath='crypto/rng.c' line='198' column='1'/>
@@ -63088,7 +63097,7 @@
         <parameter type-id='94411a61'/>
         <return type-id='48b5725f'/>
       </function-type>
-      <union-decl name='__anonymous_union__5' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/linux/kfifo.h' line='83' column='1' id='df24571d'>
+      <union-decl name='__anonymous_union__7' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/linux/kfifo.h' line='83' column='1' id='df24571d'>
         <data-member access='public'>
           <var-decl name='kfifo' type-id='bbbc6c1e' visibility='default' filepath='include/linux/kfifo.h' line='83' column='1'/>
         </data-member>
@@ -85239,8 +85248,8 @@
       </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='drivers/irqchip/irq-gic-v3.c' language='LANG_C89'>
-      <var-decl name='gic_nonsecure_priorities' type-id='237c0d27' mangled-name='gic_nonsecure_priorities' visibility='default' filepath='drivers/irqchip/irq-gic-v3.c' line='106' column='1' elf-symbol-id='gic_nonsecure_priorities'/>
-      <function-decl name='gic_resume' mangled-name='gic_resume' filepath='drivers/irqchip/irq-gic-v3.c' line='1270' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='gic_resume'>
+      <var-decl name='gic_nonsecure_priorities' type-id='237c0d27' mangled-name='gic_nonsecure_priorities' visibility='default' filepath='drivers/irqchip/irq-gic-v3.c' line='92' column='1' elf-symbol-id='gic_nonsecure_priorities'/>
+      <function-decl name='gic_resume' mangled-name='gic_resume' filepath='drivers/irqchip/irq-gic-v3.c' line='1256' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='gic_resume'>
         <return type-id='48b5725f'/>
       </function-decl>
     </abi-instr>
@@ -125679,7 +125688,7 @@
           <var-decl name='buf' type-id='5e6516ee' visibility='default' filepath='include/linux/kfifo.h' line='83' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__5' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/linux/kfifo.h' line='83' column='1' id='df24571d'>
+      <union-decl name='__anonymous_union__7' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/linux/kfifo.h' line='83' column='1' id='df24571d'>
         <data-member access='public'>
           <var-decl name='kfifo' type-id='bbbc6c1e' visibility='default' filepath='include/linux/kfifo.h' line='83' column='1'/>
         </data-member>
@@ -152571,25 +152580,25 @@
       <pointer-type-def type-id='1ee46c97' size-in-bits='64' id='b615a053'/>
       <pointer-type-def type-id='2572f485' size-in-bits='64' id='40f624e9'/>
       <pointer-type-def type-id='07c93537' size-in-bits='64' id='e46f66f3'/>
-      <var-decl name='tasklist_lock' type-id='ac16795b' mangled-name='tasklist_lock' visibility='default' filepath='kernel/fork.c' line='143' column='1' elf-symbol-id='tasklist_lock'/>
-      <function-decl name='get_task_mm' mangled-name='get_task_mm' filepath='kernel/fork.c' line='1247' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_task_mm'>
-        <parameter type-id='f23e2572' name='task' filepath='kernel/fork.c' line='1247' column='1'/>
+      <var-decl name='tasklist_lock' type-id='ac16795b' mangled-name='tasklist_lock' visibility='default' filepath='kernel/fork.c' line='145' column='1' elf-symbol-id='tasklist_lock'/>
+      <function-decl name='get_task_mm' mangled-name='get_task_mm' filepath='kernel/fork.c' line='1249' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_task_mm'>
+        <parameter type-id='f23e2572' name='task' filepath='kernel/fork.c' line='1249' column='1'/>
         <return type-id='df4b7819'/>
       </function-decl>
-      <function-decl name='__mmdrop' mangled-name='__mmdrop' filepath='kernel/fork.c' line='709' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__mmdrop'>
-        <parameter type-id='df4b7819' name='mm' filepath='kernel/fork.c' line='709' column='1'/>
+      <function-decl name='__mmdrop' mangled-name='__mmdrop' filepath='kernel/fork.c' line='711' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__mmdrop'>
+        <parameter type-id='df4b7819' name='mm' filepath='kernel/fork.c' line='711' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='__put_task_struct' mangled-name='__put_task_struct' filepath='kernel/fork.c' line='758' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__put_task_struct'>
-        <parameter type-id='f23e2572' name='tsk' filepath='kernel/fork.c' line='758' column='1'/>
+      <function-decl name='__put_task_struct' mangled-name='__put_task_struct' filepath='kernel/fork.c' line='760' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__put_task_struct'>
+        <parameter type-id='f23e2572' name='tsk' filepath='kernel/fork.c' line='760' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='mmput' mangled-name='mmput' filepath='kernel/fork.c' line='1140' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='mmput'>
-        <parameter type-id='df4b7819' name='mm' filepath='kernel/fork.c' line='1140' column='1'/>
+      <function-decl name='mmput' mangled-name='mmput' filepath='kernel/fork.c' line='1142' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='mmput'>
+        <parameter type-id='df4b7819' name='mm' filepath='kernel/fork.c' line='1142' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='get_task_exe_file' mangled-name='get_task_exe_file' filepath='kernel/fork.c' line='1222' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_task_exe_file'>
-        <parameter type-id='f23e2572' name='task' filepath='kernel/fork.c' line='1222' column='1'/>
+      <function-decl name='get_task_exe_file' mangled-name='get_task_exe_file' filepath='kernel/fork.c' line='1224' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_task_exe_file'>
+        <parameter type-id='f23e2572' name='task' filepath='kernel/fork.c' line='1224' column='1'/>
         <return type-id='77e79a4b'/>
       </function-decl>
       <function-type size-in-bits='64' id='24c24978'>
@@ -174025,7 +174034,7 @@
       <var-decl name='net_ns_type_operations' type-id='a4a37730' mangled-name='net_ns_type_operations' visibility='default' filepath='net/core/net-sysfs.c' line='1784' column='1' elf-symbol-id='net_ns_type_operations'/>
     </abi-instr>
     <abi-instr address-size='64' path='net/core/net_namespace.c' language='LANG_C89'>
-      <union-decl name='__anonymous_union__9' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/net/netns/generic.h' line='29' column='1' id='1a99b3b8'>
+      <union-decl name='__anonymous_union__10' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/net/netns/generic.h' line='29' column='1' id='1a99b3b8'>
         <data-member access='public'>
           <var-decl name='s' type-id='88d8a388' visibility='default' filepath='include/net/netns/generic.h' line='33' column='1'/>
         </data-member>
