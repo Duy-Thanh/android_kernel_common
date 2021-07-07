@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "778f5209_fe6fe971",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-07T14:59:49Z",
+      "side": 1,
+      "message": "Why can\u0027t you use the hook at line 168?",
+      "revId": "1701fdcd08ae9dc201467090188af2ccec098124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
