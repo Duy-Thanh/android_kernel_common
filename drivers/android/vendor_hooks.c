@@ -342,3 +342,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_print_transaction_info);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_setscheduler_uclamp);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh___dwc3_gadget_ep_enable);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_ep0_set_config);

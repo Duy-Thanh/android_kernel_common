@@ -27,6 +27,8 @@
 #include "gadget.h"
 #include "io.h"
 
+#include <trace/hooks/dwc3.h>
+
 static void __dwc3_ep0_do_control_status(struct dwc3 *dwc, struct dwc3_ep *dep);
 static void __dwc3_ep0_do_control_data(struct dwc3 *dwc,
 		struct dwc3_ep *dep, struct dwc3_request *req);
@@ -608,6 +610,8 @@ static int dwc3_ep0_set_config(struct dwc3 *dwc, struct usb_ctrlrequest *ctrl)
 	u32 cfg;
 	int ret;
 	u32 reg;
+
+	trace_android_vh_dwc3_ep0_set_config(dwc, state);
 
 	cfg = le16_to_cpu(ctrl->wValue);
 
