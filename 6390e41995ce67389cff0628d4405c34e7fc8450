@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c9e06c7_500732a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-07-07T18:30:02Z",
+      "side": 1,
+      "message": "upstream first is not a requirement here, we are time constrained and we will not do it this week. So don\u0027t expect this to happen before 7/14. Talk w/ Sandeep Patil if you have any questions.",
+      "parentUuid": "6093035b_3241bd23",
+      "revId": "6390e41995ce67389cff0628d4405c34e7fc8450",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b920d95_a19d2544",
