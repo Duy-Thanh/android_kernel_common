@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a930afa0_996a3934",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1871253
+      },
+      "writtenOn": "2021-07-07T21:24:05Z",
+      "side": 1,
+      "message": "I\u0027ll change this to a regular spinlock.",
+      "parentUuid": "5757bef4_97811b2a",
+      "revId": "6390e41995ce67389cff0628d4405c34e7fc8450",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b920d95_a19d2544",
@@ -66,6 +84,30 @@
       "writtenOn": "2021-07-07T15:23:28Z",
       "side": 1,
       "message": "this is not a proper \"flag\" to determine if this is a valid entry or not.  Where is the lock that protects it?",
+      "range": {
+        "startLine": 165,
+        "startChar": 19,
+        "endLine": 165,
+        "endChar": 27
+      },
+      "revId": "6390e41995ce67389cff0628d4405c34e7fc8450",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02e8c198_2b21dc65",
+        "filename": "drivers/dma-buf/dma-buf-sysfs-stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1871253
+      },
+      "writtenOn": "2021-07-07T21:24:05Z",
+      "side": 1,
+      "message": "There currently isn\u0027t one.  This function is being called indirectly from dma_buf_detach(), through a call to dma_buf_attach_stats_teardown() (https://android.googlesource.com/kernel/common/+/refs/heads/android12-5.10/drivers/dma-buf/dma-buf.c#862), which queues this to be called.  On the android12-5.10 today, the work being done asyncrhonously in dma_buf_attach_stats_do_teardown_work() is just done synchronously in dma_buf_attach_stats_teardown() .\n\nIf we consider the android12-5.10 as it is, such that two parties call dma_buf_attach() on the same attachment concurrently, I think there would still be a race in dma_buf_attach_stats_teardown(): https://android.googlesource.com/kernel/common/+/refs/heads/android12-5.10/drivers/dma-buf/dma-buf-sysfs-stats.c#146\n\nThat is, the checks on lines 150-152 on the LHS and lines 165-166 on the RHS should be just as good as one another.",
+      "parentUuid": "0b920d95_a19d2544",
       "range": {
         "startLine": 165,
         "startChar": 19,
