@@ -1,0 +1,41 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000012882356",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1757310?revision\u003d5",
+      "fixSuggestions": [
+        {
+          "fixId": "766f6397_8b0984e4",
+          "description": "Add committer\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 62,
+                "startChar": 0,
+                "endLine": 62,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Vignesh Saravanaperumal \u003cVignesh1.s@samsung.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "1afe6c78_6bb1a5b8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-07-07T18:54:59Z",
+      "side": 1,
+      "message": "Commit is not signed off by the committer!\n\nMissing tag: Signed-off-by: Vignesh Saravanaperumal \u003cVignesh1.s@samsung.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 382542074 android-build.ayeaye-python-dispatcher_20210701.05_p0",
+      "revId": "626f6781230a3dd31d60a80bb73fcd7a1a878405",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
