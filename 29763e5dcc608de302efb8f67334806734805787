@@ -34,6 +34,24 @@
       "parentUuid": "23e986c7_bc046ac7",
       "revId": "29763e5dcc608de302efb8f67334806734805787",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "857f4e10_0aaf2021",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-07T07:28:28Z",
+      "side": 1,
+      "message": "Where did it come from?\n\nAnd you need some changelog text explaining where this came from and why we are removing it.  As-is, I have no idea what is going on :)",
+      "parentUuid": "4d33119e_ff41fb54",
+      "revId": "29763e5dcc608de302efb8f67334806734805787",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
