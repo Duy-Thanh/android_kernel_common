@@ -16,6 +16,24 @@
       "message": "Can you wait for this until it merges to Linus\u0027s tree?",
       "revId": "317ed7e9925a54f6c2bf1732ec6b59e1b9eaa44a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eab91bbd_945f3488",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1030767
+      },
+      "writtenOn": "2021-07-07T17:24:24Z",
+      "side": 1,
+      "message": "\u003e Can you wait for this until it merges to Linus\u0027s tree?\n\nYeah we can wait for this branch. So then it will be an \"UPSTREAM\" change instead of \"FROMLIST\"?",
+      "parentUuid": "d68bbe34_79a0259b",
+      "revId": "317ed7e9925a54f6c2bf1732ec6b59e1b9eaa44a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
