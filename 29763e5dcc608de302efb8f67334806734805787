@@ -16,6 +16,24 @@
       "message": "Why is this needed?",
       "revId": "29763e5dcc608de302efb8f67334806734805787",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d33119e_ff41fb54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2021-07-07T07:09:21Z",
+      "side": 1,
+      "message": "It\u0027s unused delta.  Why would we maintain it unnecessarily?",
+      "parentUuid": "23e986c7_bc046ac7",
+      "revId": "29763e5dcc608de302efb8f67334806734805787",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
