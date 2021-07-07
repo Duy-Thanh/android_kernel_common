@@ -5,6 +5,13 @@
 #include <linux/jump_label.h>
 
 #ifdef CONFIG_PAGE_PINNER
+
+enum pp_failure_state {
+	PP_FAILURE_DETECT,
+	PP_FAILURE_PUT,
+	PP_FAILURE_FREE,
+};
+
 extern struct static_key_false page_pinner_inited;
 extern struct static_key_true failure_tracking;
 extern struct page_ext_operations page_pinner_ops;
@@ -12,7 +19,7 @@ extern struct page_ext_operations page_pinner_ops;
 extern void __reset_page_pinner(struct page *page, unsigned int order, bool free);
 extern void __set_page_pinner(struct page *page, unsigned int order);
 extern void __dump_page_pinner(struct page *page);
-void __page_pinner_record(struct page *page);
+void __page_pinner_record(struct page *page, enum pp_failure_state state);
 void __page_pinner_mark_migration_failed_pages(struct list_head *page_list);
 
 static inline void reset_page_pinner(struct page *page, unsigned int order)
@@ -44,7 +51,7 @@ static inline void page_pinner_put_page(struct page *page)
 	if (!static_branch_unlikely(&failure_tracking))
 		return;
 
-	__page_pinner_record(page);
+	__page_pinner_record(page, PP_FAILURE_PUT);
 }
 
 static inline void page_pinner_free_page(struct page *page)
@@ -52,7 +59,7 @@ static inline void page_pinner_free_page(struct page *page)
 	if (!static_branch_unlikely(&failure_tracking))
 		return;
 
-	__page_pinner_record(page);
+	__page_pinner_record(page, PP_FAILURE_FREE);
 }
 
 static inline void page_pinner_mark_migration_failed_pages(struct list_head *page_list)
