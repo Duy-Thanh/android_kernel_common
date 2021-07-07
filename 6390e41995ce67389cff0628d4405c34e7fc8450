@@ -16,6 +16,46 @@
       "message": "please submit upstream first.",
       "revId": "6390e41995ce67389cff0628d4405c34e7fc8450",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5757bef4_97811b2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-07T15:23:28Z",
+      "side": 1,
+      "message": "why irqsave on the list lock?  Can you really create dma bufs from irq context?",
+      "revId": "6390e41995ce67389cff0628d4405c34e7fc8450",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b920d95_a19d2544",
+        "filename": "drivers/dma-buf/dma-buf-sysfs-stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-07T15:23:28Z",
+      "side": 1,
+      "message": "this is not a proper \"flag\" to determine if this is a valid entry or not.  Where is the lock that protects it?",
+      "range": {
+        "startLine": 165,
+        "startChar": 19,
+        "endLine": 165,
+        "endChar": 27
+      },
+      "revId": "6390e41995ce67389cff0628d4405c34e7fc8450",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
