@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81b30f5b_dea6f8a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-08T08:16:12Z",
+      "side": 1,
+      "message": "ANDROID_VENDOR_DATA() should be used here instead, right as you are the platform vendor, not OEM.",
+      "revId": "5bb58f40a7e2a84efcb985040b6a049c78e3cbb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
