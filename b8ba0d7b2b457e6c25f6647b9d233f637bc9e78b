@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d996170_25283a35",
+        "filename": "drivers/trusty/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-07-08T03:18:32Z",
+      "side": 1,
+      "message": "please remove this line. The existing behavior is not not panic. I would like to add support for this without changing the default behavior at this point. We change the default later if we want to.",
+      "revId": "b8ba0d7b2b457e6c25f6647b9d233f637bc9e78b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "456ca1e4_ea4523e1",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-07-08T03:18:32Z",
+      "side": 1,
+      "message": "\"1\" this condition has already been checked. \"WARN_ONCE(1, ...\" seems to be a common way to do this.",
+      "range": {
+        "startLine": 134,
+        "startChar": 14,
+        "endLine": 134,
+        "endChar": 33
+      },
+      "revId": "b8ba0d7b2b457e6c25f6647b9d233f637bc9e78b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
