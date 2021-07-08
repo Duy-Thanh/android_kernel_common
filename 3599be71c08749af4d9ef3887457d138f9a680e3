@@ -52,6 +52,24 @@
       "parentUuid": "4b8a9980_e0789b68",
       "revId": "3599be71c08749af4d9ef3887457d138f9a680e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77b3a4db_10c0b679",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-07-08T19:41:53Z",
+      "side": 1,
+      "message": "It was discussed with Saravana and Suren before the posting.\n\nI am just posting this CL to get confirm if it\u0027s right.\nPlease review this CL is okay.",
+      "parentUuid": "ac3f37a5_22dc14be",
+      "revId": "3599be71c08749af4d9ef3887457d138f9a680e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
