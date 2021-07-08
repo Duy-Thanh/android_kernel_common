@@ -159,11 +159,16 @@ static unsigned int get_next_freq(struct sugov_policy *sg_policy,
 				policy->cpuinfo.max_freq : policy->cur;
 	unsigned long next_freq = 0;
 
+<<<<<<< HEAD   (50be2c ANDROID: misc: uid_sys_stats: Select TASKSTATS)
 	trace_android_vh_map_util_freq(util, freq, max, &next_freq);
 	if (next_freq)
 		freq = next_freq;
 	else
 		freq = map_util_freq(util, freq, max);
+=======
+	util = map_util_perf(util);
+	freq = map_util_freq(util, freq, max);
+>>>>>>> BRANCH (54a728 Merge tag 'sched-core-2021-06-28' of git://git.kernel.org/pu)
 
 	if (freq == sg_policy->cached_raw_freq && !sg_policy->need_freq_update)
 		return sg_policy->next_freq;
