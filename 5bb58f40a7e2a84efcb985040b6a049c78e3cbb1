@@ -16,6 +16,24 @@
       "message": "ANDROID_VENDOR_DATA() should be used here instead, right as you are the platform vendor, not OEM.",
       "revId": "5bb58f40a7e2a84efcb985040b6a049c78e3cbb1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8443d566_8c503220",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1809745
+      },
+      "writtenOn": "2021-07-08T08:49:19Z",
+      "side": 1,
+      "message": "I followed what Sandeep said. Do you think Samsung Wireless Division is vendor? I can change though.\n\nSandeep Patil\u003csspatil@google.com\u003e\nLike Greg said actually, use ANDROID_OEM_DATA() - the VENDOR_DATA is reserved for SoCs",
+      "parentUuid": "81b30f5b_dea6f8a3",
+      "revId": "5bb58f40a7e2a84efcb985040b6a049c78e3cbb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
