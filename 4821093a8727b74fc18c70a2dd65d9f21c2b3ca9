@@ -51,6 +51,23 @@
       "parentUuid": "900ceaa9_ad266d2b",
       "revId": "4821093a8727b74fc18c70a2dd65d9f21c2b3ca9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25709f4b_13851e34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2021-07-08T16:37:43Z",
+      "side": 1,
+      "message": "You can\u0027t rename this because then you will be breaking other OEM drivers who use this function. For example,\n\n```\nandroid/abi_gki_aarch64_vivo:  __page_pinner_migration_failed\nandroid/abi_gki_aarch64_virtual_device:  __page_pinner_migration_failed\nandroid/abi_gki_aarch64_qcom:  __page_pinner_migration_failed\nandroid/abi_gki_aarch64_mtk:  __page_pinner_migration_failed\n```",
+      "revId": "4821093a8727b74fc18c70a2dd65d9f21c2b3ca9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
