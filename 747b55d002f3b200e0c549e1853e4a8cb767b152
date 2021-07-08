@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "411dabea_0fd9d415",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-08T19:43:35Z",
+      "side": 1,
+      "message": "Breaks the build. See aosp/1740687",
+      "revId": "747b55d002f3b200e0c549e1853e4a8cb767b152",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
