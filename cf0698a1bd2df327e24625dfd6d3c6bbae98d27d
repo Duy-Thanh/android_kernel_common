@@ -34,6 +34,24 @@
       "parentUuid": "70331450_7c7f69aa",
       "revId": "cf0698a1bd2df327e24625dfd6d3c6bbae98d27d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "908ad986_92f371aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-07-08T17:19:39Z",
+      "side": 1,
+      "message": "I\u0027ll just drop the part of this change that removes crypto_remove_final from the symbol list, so that we aren\u0027t in a rush to get this submitted.",
+      "parentUuid": "39112556_97758b2e",
+      "revId": "cf0698a1bd2df327e24625dfd6d3c6bbae98d27d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
