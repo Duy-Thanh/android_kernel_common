@@ -33,6 +33,24 @@
       "message": "has any of this been posted to the developer lists yet?  Renaming functions is going to cause \"fun\" problems when dealing with LTS merges over time 😞",
       "revId": "4821093a8727b74fc18c70a2dd65d9f21c2b3ca9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cc0725b_f781bcc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-07-08T07:31:15Z",
+      "side": 1,
+      "message": "This effectively breaks the ABI as the existing function name is part of the exposed ABI. If you _really_ want to change this, you need update _all_ symbol lists that have an occurrence of this name and eventually you need to update the abi.xml to reflect this. I am not sure it is worth this effort?",
+      "parentUuid": "900ceaa9_ad266d2b",
+      "revId": "4821093a8727b74fc18c70a2dd65d9f21c2b3ca9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
