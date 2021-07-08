@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7591b5bb_f2fe4400",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-08T16:43:59Z",
+      "side": 1,
+      "message": "hooks should not be used for debugging use a debug kernel image for this.\n\nAlso, this hook changes the logic, that is not a debug functionality.",
+      "revId": "8be75dd74f9a77911d86d34f5d6110afe9414721",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
