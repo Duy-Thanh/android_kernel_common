@@ -1238,6 +1238,7 @@
   param_ops_uint
   param_ops_ulong
   pause_cpus
+  pause_in_draining
   pci_alloc_irq_vectors_affinity
   pci_assign_resource
   pci_clear_master
