@@ -33,6 +33,7 @@
 #include <linux/vmalloc.h>
 #include <linux/mutex.h>
 #include <linux/mm.h>
+#include <trace/hooks/mm.h>
 
 static DEFINE_PER_CPU(struct swap_slots_cache, swp_slots);
 static bool	swap_slot_cache_active;
@@ -307,6 +308,7 @@ swp_entry_t get_swap_page(struct page *page)
 {
 	swp_entry_t entry;
 	struct swap_slots_cache *cache;
+	bool skip = false;
 
 	entry.val = 0;
 
@@ -315,6 +317,10 @@ swp_entry_t get_swap_page(struct page *page)
 			get_swap_pages(1, &entry, HPAGE_PMD_NR);
 		goto out;
 	}
+
+	trace_android_vh_skip_swap_slots_cache(&skip);
+	if (skip)
+		goto skip;
 
 	/*
 	 * Preemption is allowed here, because we may sleep
@@ -344,6 +350,7 @@ repeat:
 			goto out;
 	}
 
+skip:
 	get_swap_pages(1, &entry, 1);
 out:
 	if (mem_cgroup_try_charge_swap(page, entry)) {

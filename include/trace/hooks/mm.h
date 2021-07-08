@@ -101,6 +101,13 @@ struct mem_cgroup;
 DECLARE_HOOK(android_vh_vmpressure,
 	TP_PROTO(struct mem_cgroup *memcg, bool *bypass),
 	TP_ARGS(memcg, bypass));
+DECLARE_HOOK(android_vh_skip_swap_slots_cache,
+	TP_PROTO(bool *skip),
+	TP_ARGS(skip));
+struct swap_info_struct;
+DECLARE_HOOK(android_vh_skip_swap_area,
+	TP_PROTO(struct swap_info_struct *si, bool *skip),
+	TP_ARGS(si, skip));
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_MM_H */
