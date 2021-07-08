@@ -4650,6 +4650,26 @@ static int socket_sockcreate_sid(const struct task_security_struct *tsec,
 				       secclass, NULL, socksid);
 }
 
+static int nlmsg_sock_has_extended_perms(struct sock *sk, u32 perms, u16 nlmsg_type)
+{
+	struct sk_security_struct *sksec = sk->sk_security;
+	struct common_audit_data ad;
+	struct lsm_network_audit net = {0,};
+
+	u8 xperm = nlmsg_type & 0xff;
+
+	if (sksec->sid == SECINITSID_KERNEL)
+		return 0;
+
+	ad.type = LSM_AUDIT_DATA_NET;
+	ad.u.net = &net;
+	ad.u.net->sk = sk;
+
+	return avc_has_extended_perms(&selinux_state,
+			    current_sid(), sksec->sid, sksec->sclass, perms, 0, xperm,
+			    &ad);
+}
+
 static int sock_has_perm(struct sock *sk, u32 perms)
 {
 	struct sk_security_struct *sksec = sk->sk_security;
@@ -6043,7 +6063,7 @@ static int selinux_netlink_send(struct sock *sk, struct sk_buff *skb)
 
 		rc = selinux_nlmsg_lookup(sclass, nlh->nlmsg_type, &perm);
 		if (rc == 0) {
-			rc = sock_has_perm(sk, perm);
+			rc = nlmsg_sock_has_extended_perms(sk, perm, nlh->nlmsg_type);
 			if (rc)
 				return rc;
 		} else if (rc == -EINVAL) {
