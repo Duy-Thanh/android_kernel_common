@@ -22,6 +22,30 @@
       },
       "revId": "1f4e467085c6d5d63aeb3f32d047a97a4ef3b1b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e6ede33_5964b155",
+        "filename": "crypto/fips140-module.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-07-08T18:08:37Z",
+      "side": 1,
+      "message": "I think I\u0027ll just change it to an array of const char *, so that we don\u0027t have to worry about counting the characters...",
+      "parentUuid": "eeea3511_4a4daa7b",
+      "range": {
+        "startLine": 55,
+        "startChar": 39,
+        "endLine": 55,
+        "endChar": 41
+      },
+      "revId": "1f4e467085c6d5d63aeb3f32d047a97a4ef3b1b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
