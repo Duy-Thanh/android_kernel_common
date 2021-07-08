@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70331450_7c7f69aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-07-08T15:23:43Z",
+      "side": 1,
+      "message": "This reported\n\n 1 Removed function:\n\n  [D] \u0027function void crypto_remove_final(list_head*)\u0027\n\n 2 Added functions:\n\n  [A] \u0027function void crypto_cipher_decrypt_one(crypto_cipher*, u8*, const u8*)\u0027\n  [A] \u0027function int crypto_rng_reset(crypto_rng*, const u8*, unsigned int)\u0027\n  \n  \nIs this expected?",
+      "revId": "cf0698a1bd2df327e24625dfd6d3c6bbae98d27d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
