@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "900ceaa9_ad266d2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-07-08T05:01:06Z",
+      "side": 1,
+      "message": "How can I fix the ABI symbol issue?\n\nTo generate symbol update, I ran BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build_abi.sh -u -s -r from android-kernel repo. It still failed to build. \n\n\n",
+      "revId": "4821093a8727b74fc18c70a2dd65d9f21c2b3ca9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
