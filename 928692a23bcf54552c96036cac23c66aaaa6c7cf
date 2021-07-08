@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b1e37bc_e23664be",
+        "filename": "include/net/netfilter/nf_conntrack.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-08T23:36:53Z",
+      "side": 1,
+      "message": "extra whitespace? Please remove.",
+      "revId": "928692a23bcf54552c96036cac23c66aaaa6c7cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
