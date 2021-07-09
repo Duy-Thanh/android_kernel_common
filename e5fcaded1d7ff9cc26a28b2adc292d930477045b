@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b3f2a1b_f007f952",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2021-07-09T08:50:08Z",
+      "side": 1,
+      "message": "lgtm\n\nBut AI on me to fix them so they become consistent with the previous changes (i.e., start,end instead of address and size)",
+      "revId": "e5fcaded1d7ff9cc26a28b2adc292d930477045b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
