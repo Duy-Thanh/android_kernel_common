@@ -70,6 +70,23 @@
       "parentUuid": "ac3f37a5_22dc14be",
       "revId": "3599be71c08749af4d9ef3887457d138f9a680e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0bc405b_8a55a786",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-09T02:33:54Z",
+      "side": 1,
+      "message": "On technical level this looks ok as long as affected vendors are fine with changing their drivers.",
+      "revId": "3599be71c08749af4d9ef3887457d138f9a680e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
