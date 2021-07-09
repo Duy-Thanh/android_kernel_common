@@ -1793,6 +1793,20 @@ static bool has_generic_auth(const struct arm64_cpu_capabilities *entry,
 }
 #endif /* CONFIG_ARM64_PTR_AUTH */
 
+static bool has_address_auth_or_mte(const struct arm64_cpu_capabilities *entry,
+				    int scope)
+{
+#ifdef CONFIG_ARM64_PTR_AUTH
+	if (has_address_auth_metacap(entry, scope))
+		return true;
+#endif
+#ifdef CONFIG_ARM64_MTE
+	if (__system_matches_cap(ARM64_MTE))
+		return true;
+#endif
+	return false;
+}
+
 #ifdef CONFIG_ARM64_E0PD
 static void cpu_enable_e0pd(struct arm64_cpu_capabilities const *cap)
 {
@@ -2304,6 +2318,11 @@ static const struct arm64_cpu_capabilities arm64_features[] = {
 		.field_pos = ID_AA64ISAR1_LRCPC_SHIFT,
 		.matches = has_cpuid_feature,
 		.min_field_value = 1,
+	},
+	{
+		.capability = ARM64_HAS_ADDRESS_AUTH_OR_MTE,
+		.type = ARM64_CPUCAP_BOOT_CPU_FEATURE,
+		.matches = has_address_auth_or_mte,
 	},
 	{},
 };

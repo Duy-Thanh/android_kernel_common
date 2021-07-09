@@ -183,15 +183,11 @@ alternative_else_nop_endif
 #endif
 	.endm
 
-	.macro mte_set_gcr, tmp, tmp2
+	.macro mte_set_gcr, mte_ctrl, tmp
 #ifdef CONFIG_ARM64_MTE
-	/*
-	 * Calculate and set the exclude mask preserving
-	 * the RRND (bit[16]) setting.
-	 */
-	mrs_s	\tmp2, SYS_GCR_EL1
-	bfi	\tmp2, \tmp, #0, #16
-	msr_s	SYS_GCR_EL1, \tmp2
+	ubfx	\tmp, \mte_ctrl, #0, #16
+	orr	\tmp, \tmp, #SYS_GCR_EL1_RRND
+	msr_s	SYS_GCR_EL1, \tmp
 #endif
 	.endm
 
@@ -203,7 +199,6 @@ alternative_else_nop_endif
 	ldr_l	\tmp, gcr_kernel_excl
 
 	mte_set_gcr \tmp, \tmp2
-	isb
 1:
 #endif
 	.endm
@@ -284,6 +279,15 @@ alternative_else_nop_endif
 	apply_ssbd 1, x22, x23
 
 	mte_set_kernel_gcr x22, x23
+
+alternative_if ARM64_HAS_ADDRESS_AUTH_OR_MTE
+	/*
+	 * Any non-self-synchronizing system register updates required for
+	 * kernel entry should be placed before this point. If necessary,
+	 * the alternative condition should be adjusted.
+	 */
+	isb
+alternative_else_nop_endif
 
 	scs_load tsk, x20
 	.else
