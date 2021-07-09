@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e15adac1_33b4278d",
+        "filename": "include/uapi/linux/kvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1065,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2021-07-09T09:08:59Z",
+      "side": 1,
+      "message": "Just checking that it\u0027s fine to change the capability number. I think it is 198 upstream as well.",
+      "revId": "da5143195002d2e1de96dd2fc835ac566b1de204",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
