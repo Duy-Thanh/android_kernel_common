@@ -16,6 +16,24 @@
       "message": "upstream status?",
       "revId": "a09db448ecadebea190d173d1355eadcb3462ebc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20a0ff1e_6ddf4655",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1791520
+      },
+      "writtenOn": "2021-07-09T01:48:50Z",
+      "side": 1,
+      "message": "upstream is ongoing, but not sure when is ready.\nhttps://patchwork.kernel.org/project/alsa-devel/patch/20210708020815.3489365-1-lerobert@google.com/",
+      "parentUuid": "43392cbd_dda0a760",
+      "revId": "a09db448ecadebea190d173d1355eadcb3462ebc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
