@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fc3d4d5_7458de67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-09T00:28:34Z",
+      "side": 1,
+      "message": "can we abandon this patch since you\u0027ve started down the vendor hook path?",
+      "parentUuid": "28c88696_0b278390",
+      "revId": "b170aa6681a69e50429e804c6b81f11046a0d223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9dc37ff_570d9134",
