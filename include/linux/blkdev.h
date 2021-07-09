@@ -26,6 +26,7 @@
 #include <linux/scatterlist.h>
 #include <linux/blkzoned.h>
 #include <linux/pm.h>
+#include <linux/android_vendor.h>
 
 struct module;
 struct scsi_ioctl_command;
@@ -1870,6 +1871,7 @@ struct block_device_operations {
 	char *(*devnode)(struct gendisk *disk, umode_t *mode);
 	struct module *owner;
 	const struct pr_ops *pr_ops;
+	ANDROID_VENDOR_DATA(1);
 };
 
 #ifdef CONFIG_COMPAT
