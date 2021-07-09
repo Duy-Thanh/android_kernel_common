@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d7bcc51_48e4c277",
+        "filename": "crypto/Kconfig",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-07-09T10:11:10Z",
+      "side": 1,
+      "message": "Wouldn\u0027t this need to be enabled on the module build that is submitted for certification?",
+      "revId": "c902322bb1f3294f10e47e4ad6cff212fa9d8cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e4cc841_67aa4b46",
+        "filename": "crypto/fips140-selftests.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-07-09T10:11:10Z",
+      "side": 1,
+      "message": "gcm-aes-ce does not use ctr-aes-ce internally, so I don\u0027t think this is accurate.",
+      "revId": "c902322bb1f3294f10e47e4ad6cff212fa9d8cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
