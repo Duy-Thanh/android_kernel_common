@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3221f3a3_28b7a646",
+        "filename": "android/abi_gki_aarch64_fips140",
+        "patchSetId": 11
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-07-09T15:43:44Z",
+      "side": 1,
+      "message": "those are somewhat here by accident. It is safe to remove them.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 19
+      },
+      "revId": "f4cd0840c1d714b52f056ae0d3f21c746446a7bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
