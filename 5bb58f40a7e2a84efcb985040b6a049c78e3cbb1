@@ -52,6 +52,24 @@
       "parentUuid": "8443d566_8c503220",
       "revId": "5bb58f40a7e2a84efcb985040b6a049c78e3cbb1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d269c78_3e3f1dda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-09T16:39:38Z",
+      "side": 1,
+      "message": "Are you sure? I think Samsung mobile would normally be OEM and the vendor fields would be used by either Qualcomm or Exynos (SLSI).\n\nPlease verify and correct if necessary (I\u0027m pretty sure you would want the OEM variant here).",
+      "parentUuid": "fbd12265_16587b89",
+      "revId": "5bb58f40a7e2a84efcb985040b6a049c78e3cbb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
