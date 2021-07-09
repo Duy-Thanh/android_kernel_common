@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b6946b1_d214bd73",
+        "filename": "mm/page_pinner.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-09T02:15:53Z",
+      "side": 1,
+      "message": "After seeing https://android-review.googlesource.com/c/kernel/common/+/1758997 I understand why this might be useful. So for readability this might be indeed better. Plus, this way you perform only memcpy under lock, so this might be indeed better.",
+      "parentUuid": "3f8913c8_5a368cfe",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 32
+      },
+      "revId": "bc82faf3f9ea9fc786020bb9e299e5077bbb5fe7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1bf82c83_af0393b9",
         "filename": "mm/page_pinner.c",
         "patchSetId": 3
