@@ -16,6 +16,24 @@
       "message": "hooks should not be used for debugging use a debug kernel image for this.\n\nAlso, this hook changes the logic, that is not a debug functionality.",
       "revId": "8be75dd74f9a77911d86d34f5d6110afe9414721",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e79b6a36_0667691f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879222
+      },
+      "writtenOn": "2021-07-09T07:35:24Z",
+      "side": 1,
+      "message": "We try to use this vendor hook to attach oem data as payload to struct request. In fact we just want to add some OEM DATA to struct request. This vendor hook and the below code have the same purpose. \n\ndiff --git a/include/linux/blkdev.h b/include/linux/blkdev.h\nindex dcb7b342f0d3..44f37e8ef75d 100644\n--- a/include/linux/blkdev.h\n+++ b/include/linux/blkdev.h\n@@ -242,6 +242,8 @@ struct request {\n         */\n        rq_end_io_fn *end_io;\n        void *end_io_data;\n+\n+       ANDROID_OEM_DATA(1);\n };\n \n static inline bool blk_op_is_scsi(unsigned int op)",
+      "parentUuid": "7591b5bb_f2fe4400",
+      "revId": "8be75dd74f9a77911d86d34f5d6110afe9414721",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
