@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "022dcf19_6dcc24af",
+        "filename": "mm/swap_slots.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-09T21:42:27Z",
+      "side": 1,
+      "message": "How do you decide to skip or not here? I would expect \"page\" and maybe more parameters to be passed to make this decision based on some condition... How do you make this decision?",
+      "range": {
+        "startLine": 321,
+        "startChar": 40,
+        "endLine": 321,
+        "endChar": 45
+      },
+      "revId": "b55ad91a05dcc5738a97bf50515cc1bc7f5d68d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ae83327_abf85191",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-09T21:42:27Z",
+      "side": 1,
+      "message": "Ah, just noticed an issue here. Before jumping to nextsi you need to do:\n\nspin_lock(\u0026swap_avail_lock);\nspin_unlock(\u0026si-\u003elock);\n\notherwise the lock sequence will be broken.",
+      "range": {
+        "startLine": 1084,
+        "startChar": 3,
+        "endLine": 1084,
+        "endChar": 15
+      },
+      "revId": "b55ad91a05dcc5738a97bf50515cc1bc7f5d68d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
