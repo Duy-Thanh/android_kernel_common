@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bd5dfbb_2212b86d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-09T00:28:45Z",
+      "side": 1,
+      "message": "Since you\u0027ve started down this patch with the addition of the ANDROID_VENDOR_DATA() fields, can we abandon this patch?",
+      "parentUuid": "75266b93_2b0494ab",
+      "revId": "d7b8a0d3e628d7c10c91aaccb117e88618307b4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e12c9b12_015bb796",
