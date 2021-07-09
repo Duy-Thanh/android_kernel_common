@@ -69,6 +69,24 @@
       "parentUuid": "cc127399_7997236d",
       "revId": "cab0e8f0a01c377150c1ff41bd576d421ea265c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bfc2148_f68ea652",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-09T17:01:51Z",
+      "side": 1,
+      "message": "Be aware that July 14 is the KMI freeze, so any patch that changes the KMI must be submitted by then. This patch does appear to change the KMI.",
+      "parentUuid": "1849b639_da36a878",
+      "revId": "cab0e8f0a01c377150c1ff41bd576d421ea265c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
