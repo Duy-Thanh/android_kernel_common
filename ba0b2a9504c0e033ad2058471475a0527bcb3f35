@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42cbb9d2_29cdaf93",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-09T02:11:52Z",
+      "side": 1,
+      "message": "adding ?",
+      "range": {
+        "startLine": 9,
+        "startChar": 50,
+        "endLine": 9,
+        "endChar": 57
+      },
+      "revId": "ba0b2a9504c0e033ad2058471475a0527bcb3f35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9a99f87_abadec4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-09T02:11:52Z",
+      "side": 1,
+      "message": "ever ?\n\nit sounds like useful information but I\u0027ll let you decide.",
+      "range": {
+        "startLine": 19,
+        "startChar": 51,
+        "endLine": 19,
+        "endChar": 56
+      },
+      "revId": "ba0b2a9504c0e033ad2058471475a0527bcb3f35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
