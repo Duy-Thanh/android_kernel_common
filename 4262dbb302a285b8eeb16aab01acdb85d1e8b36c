@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f30bd5c2_0b5ccdcf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-07-09T21:40:19Z",
+      "side": 1,
+      "message": "The patch LGTM! Could you please change the tag to \"BACKPORT: FROMLIST:\" if possible since the patch is a little bit different compared to what was sent upstream?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "4262dbb302a285b8eeb16aab01acdb85d1e8b36c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
