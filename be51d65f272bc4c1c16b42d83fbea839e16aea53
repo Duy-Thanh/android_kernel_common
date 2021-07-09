@@ -34,6 +34,24 @@
       "parentUuid": "131e3956_32d3ed91",
       "revId": "be51d65f272bc4c1c16b42d83fbea839e16aea53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b1aaa56_ccf47010",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-09T14:07:42Z",
+      "side": 1,
+      "message": "If you need something out of tree like this, and you have not sent this upstream, please just use a tracepoint hook instead.",
+      "parentUuid": "5d73a2c8_1c5cad17",
+      "revId": "be51d65f272bc4c1c16b42d83fbea839e16aea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
