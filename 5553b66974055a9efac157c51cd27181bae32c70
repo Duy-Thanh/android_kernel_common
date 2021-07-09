@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3eaaa01_e4b2762e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2021-07-09T08:47:32Z",
+      "side": 1,
+      "message": "lgtm\n\nFixed conflicts and dropped asm/efi.h changes are fine.\n\nNote that android/abi_gki_aarch64.xml and android/abi_gki_aarch64_qcom references to __flush_icache_range, which has been renamed to caches_clean_inval_pou.\n\nAs discussed, that should be ok for android13-5.10, but not for android12-5.10.\n",
+      "revId": "5553b66974055a9efac157c51cd27181bae32c70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
