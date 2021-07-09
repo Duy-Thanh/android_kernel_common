@@ -16,6 +16,24 @@
       "message": "Is this overhead in PFT as well?",
       "revId": "23ec4f094ba87e43f93770f9a5ff8b2cba3924b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8e721a0_50ba8bc7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-09T22:44:20Z",
+      "side": 1,
+      "message": "I didn\u0027t check if it affects PFT specifically but it\u0027s a feature which is unused in Android, so we don\u0027t want to enable more than we need.",
+      "parentUuid": "1d2eed44_12683489",
+      "revId": "23ec4f094ba87e43f93770f9a5ff8b2cba3924b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
