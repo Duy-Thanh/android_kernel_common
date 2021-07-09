@@ -16,6 +16,24 @@
       "message": "You are adding a field that you check, but nothing ever sets, so how does this work at all?",
       "revId": "be51d65f272bc4c1c16b42d83fbea839e16aea53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d73a2c8_1c5cad17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1791520
+      },
+      "writtenOn": "2021-07-09T11:13:39Z",
+      "side": 1,
+      "message": "Yes, we still need pa/1960988 to enable it.",
+      "parentUuid": "131e3956_32d3ed91",
+      "revId": "be51d65f272bc4c1c16b42d83fbea839e16aea53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
