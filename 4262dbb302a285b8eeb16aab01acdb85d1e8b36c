@@ -22,6 +22,30 @@
       },
       "revId": "4262dbb302a285b8eeb16aab01acdb85d1e8b36c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8edc0628_6c9928e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1878921
+      },
+      "writtenOn": "2021-07-10T09:36:25Z",
+      "side": 1,
+      "message": "Thanks for reminding, updated",
+      "parentUuid": "f30bd5c2_0b5ccdcf",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "4262dbb302a285b8eeb16aab01acdb85d1e8b36c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
