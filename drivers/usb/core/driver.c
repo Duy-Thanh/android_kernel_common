@@ -34,6 +34,7 @@
 
 #include "usb.h"
 
+#include <trace/hooks/usb.h>
 
 /*
  * Adds a new dynamic USBdevice ID to this driver,
@@ -1415,17 +1416,29 @@ static int usb_suspend_both(struct usb_device *udev, pm_message_t msg)
 	int			status = 0;
 	int			i = 0, n = 0;
 	struct usb_interface	*intf;
+<<<<<<< HEAD   (403760a58ef72b72f3aec57113b4f1c12f3787a2 ANDROID: GKI: update symbol list for exynos)
 	bool			offload_active = false;
+||||||| BASE   (da662aecc830a9e56509b2d5bb99a9ccc683c24f FROMLIST: KVM: Avoid synchronize_srcu() in kvm_io_bus_regist)
+=======
+	bool			bypass = false;
+>>>>>>> CHANGE (8760b6e4f5cc7c0468c3b64f1ae760ab9de3c83b ANDROID: usb: Add vendor hook for usb suspend and resume)
 
 	if (udev->state == USB_STATE_NOTATTACHED ||
 			udev->state == USB_STATE_SUSPENDED)
 		goto done;
 
+<<<<<<< HEAD   (403760a58ef72b72f3aec57113b4f1c12f3787a2 ANDROID: GKI: update symbol list for exynos)
 	usb_offload_set_pm_locked(udev, true);
 	if (msg.event == PM_EVENT_SUSPEND && usb_offload_check(udev)) {
 		dev_dbg(&udev->dev, "device offloaded, skip suspend.\n");
 		offload_active = true;
 	}
+||||||| BASE   (da662aecc830a9e56509b2d5bb99a9ccc683c24f FROMLIST: KVM: Avoid synchronize_srcu() in kvm_io_bus_regist)
+=======
+	trace_android_rvh_usb_dev_suspend(udev, msg, &bypass);
+	if (bypass)
+		goto done;
+>>>>>>> CHANGE (8760b6e4f5cc7c0468c3b64f1ae760ab9de3c83b ANDROID: usb: Add vendor hook for usb suspend and resume)
 
 	/* Suspend all the interfaces and then udev itself */
 	if (udev->actconfig) {
@@ -1539,12 +1552,22 @@ static int usb_resume_both(struct usb_device *udev, pm_message_t msg)
 	int			status = 0;
 	int			i;
 	struct usb_interface	*intf;
+<<<<<<< HEAD   (403760a58ef72b72f3aec57113b4f1c12f3787a2 ANDROID: GKI: update symbol list for exynos)
 	bool			offload_active = false;
+||||||| BASE   (da662aecc830a9e56509b2d5bb99a9ccc683c24f FROMLIST: KVM: Avoid synchronize_srcu() in kvm_io_bus_regist)
+=======
+	bool			bypass = false;
+>>>>>>> CHANGE (8760b6e4f5cc7c0468c3b64f1ae760ab9de3c83b ANDROID: usb: Add vendor hook for usb suspend and resume)
 
 	if (udev->state == USB_STATE_NOTATTACHED) {
 		status = -ENODEV;
 		goto done;
 	}
+
+	trace_android_vh_usb_dev_resume(udev, msg, &bypass);
+	if (bypass)
+		goto done;
+
 	udev->can_submit = 1;
 	if (msg.event == PM_EVENT_RESUME)
 		offload_active = usb_offload_check(udev);
