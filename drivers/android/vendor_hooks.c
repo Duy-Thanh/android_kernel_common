@@ -52,6 +52,7 @@
 #include <trace/hooks/fault.h>
 #include <trace/hooks/traps.h>
 #include <trace/hooks/fips140.h>
+<<<<<<< HEAD   (455b1a ANDROID: abi_gki_aarch64_qcom: Update qcom abi symbol list)
 #include <trace/hooks/thermal.h>
 #include <trace/hooks/rwsem.h>
 #include <trace/hooks/timekeeping.h>
@@ -63,6 +64,13 @@
 #include <trace/hooks/regmap.h>
 #include <trace/hooks/dmabuf.h>
 #include <trace/hooks/mmc.h>
+=======
+#include <trace/hooks/remoteproc.h>
+#include <trace/hooks/shmem_fs.h>
+#include <trace/hooks/net.h>
+#include <trace/hooks/syscall_check.h>
+#include <trace/hooks/usb.h>
+>>>>>>> CHANGE (98085b ANDROID: usb: Add vendor hook for usb suspend and resume)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -265,6 +273,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sha256);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_aes_expandkey);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_aes_encrypt);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_aes_decrypt);
+<<<<<<< HEAD   (455b1a ANDROID: abi_gki_aarch64_qcom: Update qcom abi symbol list)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_thermal_request_freq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_thermal_target_freq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_register);
@@ -294,3 +303,17 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_force_compatible_post);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_regmap_update);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_buf_release);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_check_status);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_force_compatible_pre);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_force_compatible_post);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_print_transaction_info);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_setscheduler_uclamp);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ptype_head);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kfree_skb);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_mmap_file);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_file_open);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_bpf_syscall);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_dev_suspend);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_dev_resume);
+>>>>>>> CHANGE (98085b ANDROID: usb: Add vendor hook for usb suspend and resume)
