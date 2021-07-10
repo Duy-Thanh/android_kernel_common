@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "572c6c93_b179270d",
+        "filename": "include/trace/hooks/usb.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1350392
+      },
+      "writtenOn": "2021-07-10T08:58:37Z",
+      "side": 1,
+      "message": "You might not need this.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 18
+      },
+      "revId": "5205472dda120e83594b85f0bf9f2536c335cd28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
