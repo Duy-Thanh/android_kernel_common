@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37f4a9d7_e0abfe8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-11T19:23:50Z",
+      "side": 1,
+      "message": "Are you sure you don\u0027t want the interface?",
+      "revId": "d8cd810257dec73b7ed51adc60f16fbc0afb072c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "509d8f9a_972369ec",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1413,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-11T19:23:50Z",
+      "side": 1,
+      "message": "why do you not also need the msg?",
+      "range": {
+        "startLine": 1413,
+        "startChar": 0,
+        "endLine": 1413,
+        "endChar": 49
+      },
+      "revId": "d8cd810257dec73b7ed51adc60f16fbc0afb072c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e57d861_7a49c560",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1520,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-11T19:23:50Z",
+      "side": 1,
+      "message": "msg?",
+      "range": {
+        "startLine": 1520,
+        "startChar": 0,
+        "endLine": 1520,
+        "endChar": 48
+      },
+      "revId": "d8cd810257dec73b7ed51adc60f16fbc0afb072c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
