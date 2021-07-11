@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36e70e4b_ab96dd5f",
+        "filename": "mm/page_pinner.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-07-11T19:56:45Z",
+      "side": 1,
+      "message": "True, that\u0027s why I titled it as \"refactoring\"",
+      "parentUuid": "4b6946b1_d214bd73",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 32
+      },
+      "revId": "bc82faf3f9ea9fc786020bb9e299e5077bbb5fe7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bf82c83_af0393b9",
@@ -61,6 +85,30 @@
       "writtenOn": "2021-07-09T01:57:06Z",
       "side": 1,
       "message": "same here.",
+      "range": {
+        "startLine": 320,
+        "startChar": 1,
+        "endLine": 327,
+        "endChar": 33
+      },
+      "revId": "bc82faf3f9ea9fc786020bb9e299e5077bbb5fe7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d11b41c2_29782e9d",
+        "filename": "mm/page_pinner.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-07-11T19:56:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bf82c83_af0393b9",
       "range": {
         "startLine": 320,
         "startChar": 1,
