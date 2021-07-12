@@ -22,6 +22,30 @@
       },
       "revId": "bb9ee94cedba503e2fac9e78a04064ba054af67b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6a79088_b539c40d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-07-12T22:44:02Z",
+      "side": 1,
+      "message": "It would be really case by case. In my experiment with real workload, I never have seen such short-term pinning so test_pages_isolated would be helpful. In the opposite case, I easily see test_pages_isolated constantly failed.\nActually, I don\u0027t think that kinds of hope(i.e. migrate_pages failed but the very next test_pages isolated will be succeeded since someone drop the page reference count during the window) does make sense.\nIf you concerned the way, we could hide it under only GFP_NORETRY.\nI have no problem. Just transition from existing cma alloc user to the GFP_NORETRY users.",
+      "parentUuid": "37349bbe_009a8da9",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 11
+      },
+      "revId": "bb9ee94cedba503e2fac9e78a04064ba054af67b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
