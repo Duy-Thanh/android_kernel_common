@@ -140,6 +140,24 @@
       "parentUuid": "8bfc2148_f68ea652",
       "revId": "cab0e8f0a01c377150c1ff41bd576d421ea265c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7292cb12_f9476225",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1547213
+      },
+      "writtenOn": "2021-07-12T07:26:02Z",
+      "side": 1,
+      "message": "Correct the link of the parent patch: aosp/1345451",
+      "parentUuid": "78ac0d79_f6afcd31",
+      "revId": "cab0e8f0a01c377150c1ff41bd576d421ea265c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
