@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53b54386_ee33ce6b",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1413,
+      "author": {
+        "id": 1427064
+      },
+      "writtenOn": "2021-07-12T04:02:23Z",
+      "side": 1,
+      "message": "I didn\u0027t input msg because I wanted to let this hook can be used in other driver who may not have pm msg. But yes, I can add this back and use a fake msg in other driver if it wants to call this hook.",
+      "parentUuid": "509d8f9a_972369ec",
+      "range": {
+        "startLine": 1413,
+        "startChar": 0,
+        "endLine": 1413,
+        "endChar": 49
+      },
+      "revId": "d8cd810257dec73b7ed51adc60f16fbc0afb072c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e57d861_7a49c560",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-07-11T19:23:50Z",
       "side": 1,
       "message": "msg?",
+      "range": {
+        "startLine": 1520,
+        "startChar": 0,
+        "endLine": 1520,
+        "endChar": 48
+      },
+      "revId": "d8cd810257dec73b7ed51adc60f16fbc0afb072c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa88627f_d7897028",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1520,
+      "author": {
+        "id": 1427064
+      },
+      "writtenOn": "2021-07-12T04:02:23Z",
+      "side": 1,
+      "message": "The same. I didn\u0027t input msg because I wanted to let this hook can be used in other driver who may not have pm msg. But yes, I can add this back and use a fake msg in other driver if it wants to call this hook.",
+      "parentUuid": "7e57d861_7a49c560",
       "range": {
         "startLine": 1520,
         "startChar": 0,
