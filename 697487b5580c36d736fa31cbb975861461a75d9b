@@ -16,6 +16,24 @@
       "message": "What new block operations are needed?",
       "revId": "697487b5580c36d736fa31cbb975861461a75d9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9a4fa3b_9e05e6c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1809745
+      },
+      "writtenOn": "2021-07-12T04:46:33Z",
+      "side": 1,
+      "message": "We\u0027d like to let kernel core send some hints of specific swap page to zram.",
+      "parentUuid": "f575672c_d3c0eaa7",
+      "revId": "697487b5580c36d736fa31cbb975861461a75d9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
