@@ -104,6 +104,42 @@
       "message": "I do not think this is going to make the deadline, there is no proposed user, and it has not been sent upstream for review from anyone.\n\nPlease look into using a tracepoint instead, that way will not have to deal with the ABI and you can merge it at any time later.",
       "revId": "cab0e8f0a01c377150c1ff41bd576d421ea265c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78ac0d79_f6afcd31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1547213
+      },
+      "writtenOn": "2021-07-12T07:24:03Z",
+      "side": 1,
+      "message": "Thanks for the suggestion.\nSince the parent change of patchset #1 (aosp/1533304) is tagged sa ANDROID and it was not upstreamed, now moving to use tracepoint instead.",
+      "parentUuid": "838cba30_e7f3db3f",
+      "revId": "cab0e8f0a01c377150c1ff41bd576d421ea265c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd259d90_e4dbb454",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1547213
+      },
+      "writtenOn": "2021-07-12T07:24:03Z",
+      "side": 1,
+      "message": "To use tracepoint instead.",
+      "parentUuid": "8bfc2148_f68ea652",
+      "revId": "cab0e8f0a01c377150c1ff41bd576d421ea265c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
