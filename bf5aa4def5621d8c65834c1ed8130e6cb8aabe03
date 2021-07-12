@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e8364d9_995c337f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2021-07-12T23:02:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50b0a052_65ff31a1",
+      "revId": "bf5aa4def5621d8c65834c1ed8130e6cb8aabe03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ada87a7_6501b32a",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b71f6284_67052a36",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2021-07-12T23:02:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ada87a7_6501b32a",
+      "revId": "bf5aa4def5621d8c65834c1ed8130e6cb8aabe03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "233a584a_9372394a",
@@ -48,6 +84,24 @@
       "writtenOn": "2021-07-12T20:30:10Z",
       "side": 1,
       "message": "Remove this line.",
+      "revId": "bf5aa4def5621d8c65834c1ed8130e6cb8aabe03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1cfd11c_73c08438",
+        "filename": "arch/arm64/kernel/entry.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2021-07-12T23:02:27Z",
+      "side": 1,
+      "message": "Oops, thanks. Bad rebase",
+      "parentUuid": "233a584a_9372394a",
       "revId": "bf5aa4def5621d8c65834c1ed8130e6cb8aabe03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
