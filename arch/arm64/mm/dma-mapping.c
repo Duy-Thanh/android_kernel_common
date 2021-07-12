@@ -50,10 +50,15 @@ void arch_setup_dma_ops(struct device *dev, u64 dma_base, u64 size,
 		   ARCH_DMA_MINALIGN, cls);
 
 	dev->dma_coherent = coherent;
+<<<<<<< HEAD   (8e6586 Merge commit c288d9cd71043 ("Merge tag 'for-5.14/io_uring-20)
 	if (iommu) {
 		iommu_setup_dma_ops(dev, dma_base, size);
 		trace_android_vh_iommu_setup_dma_ops(dev, dma_base, size);
 	}
+=======
+	if (iommu)
+		iommu_setup_dma_ops(dev, dma_base, dma_base + size - 1);
+>>>>>>> BRANCH (df8ba5 Merge tag 'kgdb-5.14-rc1' of git://git.kernel.org/pub/scm/li)
 
 #ifdef CONFIG_XEN
 	if (xen_swiotlb_detect())

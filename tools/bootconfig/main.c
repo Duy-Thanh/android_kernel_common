@@ -111,11 +111,14 @@ static void xbc_show_list(void)
 	char key[XBC_KEYLEN_MAX];
 	struct xbc_node *leaf;
 	const char *val;
-	int ret = 0;
 
 	xbc_for_each_key_value(leaf, val) {
+<<<<<<< HEAD   (8e6586 Merge commit c288d9cd71043 ("Merge tag 'for-5.14/io_uring-20)
 		ret = xbc_node_compose_key(leaf, key, XBC_KEYLEN_MAX);
 		if (ret < 0) {
+=======
+		if (xbc_node_compose_key(leaf, key, XBC_KEYLEN_MAX) < 0) {
+>>>>>>> BRANCH (df8ba5 Merge tag 'kgdb-5.14-rc1' of git://git.kernel.org/pub/scm/li)
 			fprintf(stderr, "Failed to compose key %d\n", ret);
 			break;
 		}
