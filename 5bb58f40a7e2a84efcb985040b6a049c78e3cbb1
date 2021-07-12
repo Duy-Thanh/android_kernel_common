@@ -70,6 +70,24 @@
       "parentUuid": "fbd12265_16587b89",
       "revId": "5bb58f40a7e2a84efcb985040b6a049c78e3cbb1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "041c8f1c_fe659e9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1809745
+      },
+      "writtenOn": "2021-07-12T05:34:33Z",
+      "side": 1,
+      "message": "I resubmitted with OEM DATA",
+      "parentUuid": "6d269c78_3e3f1dda",
+      "revId": "5bb58f40a7e2a84efcb985040b6a049c78e3cbb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
