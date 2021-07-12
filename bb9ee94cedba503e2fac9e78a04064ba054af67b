@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37349bbe_009a8da9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-12T22:03:53Z",
+      "side": 1,
+      "message": "Would this increase cma allocation failure rate? IIUC current logic assumes that isolation failure is caused by a short-term pinning and that retry has a high chance of succeeding. I assume there was a compelling usecase when this assumption was true and the retry really helped. Are you sure this change would not regress such usecases?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 11
+      },
+      "revId": "bb9ee94cedba503e2fac9e78a04064ba054af67b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
