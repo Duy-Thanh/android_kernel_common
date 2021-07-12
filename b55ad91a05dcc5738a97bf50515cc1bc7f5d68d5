@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "673e8440_78febf5d",
+        "filename": "mm/swap_slots.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1746283
+      },
+      "writtenOn": "2021-07-12T01:32:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd5707b8_10ca599a",
+      "range": {
+        "startLine": 321,
+        "startChar": 40,
+        "endLine": 321,
+        "endChar": 45
+      },
+      "revId": "b55ad91a05dcc5738a97bf50515cc1bc7f5d68d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ae83327_abf85191",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Thanks for reminding us of this !",
       "parentUuid": "7ae83327_abf85191",
+      "range": {
+        "startLine": 1084,
+        "startChar": 3,
+        "endLine": 1084,
+        "endChar": 15
+      },
+      "revId": "b55ad91a05dcc5738a97bf50515cc1bc7f5d68d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12164a57_e94d1620",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1746283
+      },
+      "writtenOn": "2021-07-12T01:32:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ec99fbd_7bdbcb0b",
       "range": {
         "startLine": 1084,
         "startChar": 3,
