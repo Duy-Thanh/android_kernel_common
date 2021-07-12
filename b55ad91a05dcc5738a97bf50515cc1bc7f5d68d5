@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cd5707b8_10ca599a",
+        "filename": "mm/swap_slots.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1746283
+      },
+      "writtenOn": "2021-07-12T01:31:48Z",
+      "side": 1,
+      "message": "We use a separate thread to recycle the memory of a single process. The swap device based on nand flash is also configured for this. So we will check the current process in the hook to decide which swap device to use.",
+      "parentUuid": "022dcf19_6dcc24af",
+      "range": {
+        "startLine": 321,
+        "startChar": 40,
+        "endLine": 321,
+        "endChar": 45
+      },
+      "revId": "b55ad91a05dcc5738a97bf50515cc1bc7f5d68d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ae83327_abf85191",
         "filename": "mm/swapfile.c",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2021-07-09T21:42:27Z",
       "side": 1,
       "message": "Ah, just noticed an issue here. Before jumping to nextsi you need to do:\n\nspin_lock(\u0026swap_avail_lock);\nspin_unlock(\u0026si-\u003elock);\n\notherwise the lock sequence will be broken.",
+      "range": {
+        "startLine": 1084,
+        "startChar": 3,
+        "endLine": 1084,
+        "endChar": 15
+      },
+      "revId": "b55ad91a05dcc5738a97bf50515cc1bc7f5d68d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ec99fbd_7bdbcb0b",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1746283
+      },
+      "writtenOn": "2021-07-12T01:31:48Z",
+      "side": 1,
+      "message": "Thanks for reminding us of this !",
+      "parentUuid": "7ae83327_abf85191",
       "range": {
         "startLine": 1084,
         "startChar": 3,
