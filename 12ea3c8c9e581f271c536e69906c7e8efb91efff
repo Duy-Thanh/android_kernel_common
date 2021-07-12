@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3af277fc_8a6a00c0",
+        "filename": "mm/swapfile.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1085,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-12T16:10:26Z",
+      "side": 1,
+      "message": "The locking order was:\n\t\tspin_unlock(\u0026swap_avail_lock);\n\t\tspin_lock(\u0026si-\u003elock);\n\nTherefore the unlocking order here should be the mirror opposite:\n\t\tspin_unlock(\u0026si-\u003elock);\n\t\tspin_lock(\u0026swap_avail_lock);\n\t\nPlease fix.",
+      "range": {
+        "startLine": 1084,
+        "startChar": 3,
+        "endLine": 1085,
+        "endChar": 26
+      },
+      "revId": "12ea3c8c9e581f271c536e69906c7e8efb91efff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
