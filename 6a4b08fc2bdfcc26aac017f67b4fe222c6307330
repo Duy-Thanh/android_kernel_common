@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff5ccff4_ca3e31e7",
+        "filename": "block/blk-mq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-07-12T16:57:25Z",
+      "side": 1,
+      "message": "I don\u0027t think that this #undef is necessary. Please remove it.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 26
+      },
+      "revId": "6a4b08fc2bdfcc26aac017f67b4fe222c6307330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dfe4042_2f9186c6",
+        "filename": "block/blk-mq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2489,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-07-12T16:57:25Z",
+      "side": 1,
+      "message": "Passing both \u0027set-\u003ecmd_size\u0027 and \u0027set\u0027 is redundant. Consider passing \u0027set\u0027 only.",
+      "range": {
+        "startLine": 2489,
+        "startChar": 42,
+        "endLine": 2489,
+        "endChar": 60
+      },
+      "revId": "6a4b08fc2bdfcc26aac017f67b4fe222c6307330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ca97f59_7416cd84",
+        "filename": "include/trace/hooks/block.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-07-12T16:57:25Z",
+      "side": 1,
+      "message": "I don\u0027t think that this #undef is necessary. Please remove it.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 19
+      },
+      "revId": "6a4b08fc2bdfcc26aac017f67b4fe222c6307330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24a06af5_2414d3bd",
+        "filename": "include/trace/hooks/block.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-07-12T16:57:25Z",
+      "side": 1,
+      "message": "I don\u0027t think that this #undef is necessary. Please remove it.",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 25
+      },
+      "revId": "6a4b08fc2bdfcc26aac017f67b4fe222c6307330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
