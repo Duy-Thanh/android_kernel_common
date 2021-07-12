@@ -12,6 +12,8 @@
 #define FORMAT(fmt) "%s: %d: " fmt, __func__, __LINE__
 #define pr_fmt(fmt) KBUILD_MODNAME ": " FORMAT(fmt)
 
+#include <trace/hooks/snd_compr.h>
+
 #include <linux/file.h>
 #include <linux/fs.h>
 #include <linux/list.h>
@@ -708,7 +710,6 @@ snd_compr_tstamp(struct snd_compr_stream *stream, unsigned long arg)
 static int snd_compr_pause(struct snd_compr_stream *stream)
 {
 	int retval;
-
 	if (stream->runtime->state != SNDRV_PCM_STATE_RUNNING)
 		return -EPERM;
 	retval = stream->ops->trigger(stream, SNDRV_PCM_TRIGGER_PAUSE_PUSH);
@@ -720,7 +721,6 @@ static int snd_compr_pause(struct snd_compr_stream *stream)
 static int snd_compr_resume(struct snd_compr_stream *stream)
 {
 	int retval;
-
 	if (stream->runtime->state != SNDRV_PCM_STATE_PAUSED)
 		return -EPERM;
 	retval = stream->ops->trigger(stream, SNDRV_PCM_TRIGGER_PAUSE_RELEASE);
