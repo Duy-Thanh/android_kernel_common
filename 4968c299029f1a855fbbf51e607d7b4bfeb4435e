@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c12a7fc0_a0349ae0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2021-07-12T20:17:51Z",
+      "side": 1,
+      "message": "Should be tagged BACKPORT since this is a backported version of an upstream change.",
+      "revId": "4968c299029f1a855fbbf51e607d7b4bfeb4435e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88d3f8d7_18aa8e5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2021-07-12T20:17:51Z",
+      "side": 1,
+      "message": "Thanks, this is the same as the backport that I made locally.",
+      "revId": "4968c299029f1a855fbbf51e607d7b4bfeb4435e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
