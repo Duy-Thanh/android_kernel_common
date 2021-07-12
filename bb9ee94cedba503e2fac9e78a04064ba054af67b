@@ -46,6 +46,30 @@
       },
       "revId": "bb9ee94cedba503e2fac9e78a04064ba054af67b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de963707_3eb6662e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-12T22:46:28Z",
+      "side": 1,
+      "message": "I don\u0027t really have that much experience debugging CMA allocation failures to judge which case is more likely but GFP_NORETRY approach indeed sounds like a safer option.",
+      "parentUuid": "b6a79088_b539c40d",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 11
+      },
+      "revId": "bb9ee94cedba503e2fac9e78a04064ba054af67b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
