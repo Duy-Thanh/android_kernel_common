@@ -33,6 +33,8 @@
 #include <sound/compress_offload.h>
 #include <sound/compress_driver.h>
 
+//#include <trace/hooks/snd_compr.h>
+
 /* struct snd_compr_codec_caps overflows the ioctl bit size for some
  * architectures, so we need to disable the relevant ioctls.
  */
@@ -708,7 +710,6 @@ snd_compr_tstamp(struct snd_compr_stream *stream, unsigned long arg)
 static int snd_compr_pause(struct snd_compr_stream *stream)
 {
 	int retval;
-
 	if (stream->runtime->state != SNDRV_PCM_STATE_RUNNING)
 		return -EPERM;
 	retval = stream->ops->trigger(stream, SNDRV_PCM_TRIGGER_PAUSE_PUSH);
@@ -720,7 +721,6 @@ static int snd_compr_pause(struct snd_compr_stream *stream)
 static int snd_compr_resume(struct snd_compr_stream *stream)
 {
 	int retval;
-
 	if (stream->runtime->state != SNDRV_PCM_STATE_PAUSED)
 		return -EPERM;
 	retval = stream->ops->trigger(stream, SNDRV_PCM_TRIGGER_PAUSE_RELEASE);
