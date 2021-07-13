@@ -425,6 +425,7 @@ struct dma_buf {
 		struct kset *attach_stats_kset;
 	} *sysfs_entry;
 #endif
+	ANDROID_KABI_RESERVE(1);
 };
 
 /**
