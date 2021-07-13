@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9787aadf_10f2723d",
+        "filename": "sound/usb/pcm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1950,
+      "author": {
+        "id": 1547213
+      },
+      "writtenOn": "2021-07-13T00:28:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "721ba079_863c85d6",
+      "range": {
+        "startLine": 1950,
+        "startChar": 0,
+        "endLine": 1950,
+        "endChar": 41
+      },
+      "revId": "def007b690a1b05c593d5169284f552f0bcf4636",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5891a6bd_b6be8625",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-07-12T17:19:52Z",
       "side": 1,
       "message": "blank line after this please.",
+      "range": {
+        "startLine": 1995,
+        "startChar": 0,
+        "endLine": 1995,
+        "endChar": 41
+      },
+      "revId": "def007b690a1b05c593d5169284f552f0bcf4636",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ebe1e87_86757812",
+        "filename": "sound/usb/pcm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1995,
+      "author": {
+        "id": 1547213
+      },
+      "writtenOn": "2021-07-13T00:28:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5891a6bd_b6be8625",
       "range": {
         "startLine": 1995,
         "startChar": 0,
