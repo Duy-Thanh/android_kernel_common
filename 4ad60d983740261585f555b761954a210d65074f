@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7eba4a35_86bb922c",
+        "filename": "sound/usb/card.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-13T11:18:02Z",
+      "side": 1,
+      "message": "new hooks should not be adding new functions.",
+      "range": {
+        "startLine": 212,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 76
+      },
+      "revId": "4ad60d983740261585f555b761954a210d65074f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
