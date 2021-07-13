@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cf2dcbf_61c638a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2021-07-13T21:27:02Z",
+      "side": 1,
+      "message": "lets not change anything for android11-5.4 right now. Even if we know that this is probably safe. ",
+      "revId": "97f45119aa2d6f1d8a36f50051654c0dc0f31fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
