@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49e2a2a2_a67624e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-07-13T01:46:05Z",
+      "side": 1,
+      "message": "So what\u0027s the final overhead increasement with \"group_disable\u003dmemory\" for vendors who don\u0027t use memcg solution?",
+      "revId": "b536afb0b9e27b188d9d266873b3aa341c277aad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
