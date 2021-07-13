@@ -22,6 +22,30 @@
       },
       "revId": "4ad60d983740261585f555b761954a210d65074f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f1b28f2_7ff6d9ba",
+        "filename": "sound/usb/card.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1547213
+      },
+      "writtenOn": "2021-07-13T15:08:02Z",
+      "side": 1,
+      "message": "Hi Greg, thanks for revewing the change. I will remove snd_vendor_support_cpu_suspend() in card.h and card.c, and only keep the changes in vendor_hooks.c and include/trace/hooks/sound.h. However trace_android_vh_sound_usb_support_cpu_suspend() will not get called in this patch. Is it acceptable?",
+      "parentUuid": "7eba4a35_86bb922c",
+      "range": {
+        "startLine": 212,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 76
+      },
+      "revId": "4ad60d983740261585f555b761954a210d65074f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
