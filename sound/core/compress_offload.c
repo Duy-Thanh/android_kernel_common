@@ -708,6 +708,7 @@ snd_compr_tstamp(struct snd_compr_stream *stream, unsigned long arg)
 static int snd_compr_pause(struct snd_compr_stream *stream)
 {
 	int retval;
+	retval = 0;
 
 	if (stream->runtime->state != SNDRV_PCM_STATE_RUNNING)
 		return -EPERM;
