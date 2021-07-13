@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "371d8994_5cf27c87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2021-07-13T21:21:15Z",
+      "side": 1,
+      "message": "I don\u0027t think we have a way to ensure these hooks are needed or not. I dont want to do this so close to KMI freeze without some ack from vendors that they aren\u0027t using it. \n\nI know that since its not in the symbol list it should be enough, but its still too close to do this IMO. We should have removed it in the 2nd to last window.",
+      "revId": "4037ed5f442be7a0b29288e94b413fdaf7a7de43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
