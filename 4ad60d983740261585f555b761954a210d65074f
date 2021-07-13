@@ -70,6 +70,30 @@
       },
       "revId": "4ad60d983740261585f555b761954a210d65074f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "926b776f_0d01bf50",
+        "filename": "sound/usb/card.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1547213
+      },
+      "writtenOn": "2021-07-13T18:14:35Z",
+      "side": 1,
+      "message": "Thank you. Updated the patch.",
+      "parentUuid": "75a0046e_b8ed5f5e",
+      "range": {
+        "startLine": 212,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 76
+      },
+      "revId": "4ad60d983740261585f555b761954a210d65074f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
