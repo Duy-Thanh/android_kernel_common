@@ -16,6 +16,24 @@
       "message": "So what\u0027s the final overhead increasement with \"group_disable\u003dmemory\" for vendors who don\u0027t use memcg solution?",
       "revId": "b536afb0b9e27b188d9d266873b3aa341c277aad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c61b3f_62d9703b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-13T01:49:25Z",
+      "side": 1,
+      "message": "~2.5%. From my cover-letter:\n\n6.01% with vanilla cgroup_disable vs CONFIG_MEMCG\u003dn\n3.87% after patch #1 adding mem_cgroup_disabled checks vs CONFIG_MEMCG\u003dn\n3.49% after patch #2 inlining mem_cgroup_{charge/uncharge} vs CONFIG_MEMCG\u003dn\n2.48% After patch #3 inlining swap-related functions vs CONFIG_MEMCG\u003dn",
+      "parentUuid": "49e2a2a2_a67624e1",
+      "revId": "b536afb0b9e27b188d9d266873b3aa341c277aad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
