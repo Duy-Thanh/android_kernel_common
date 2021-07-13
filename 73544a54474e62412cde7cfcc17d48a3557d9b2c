@@ -159,6 +159,24 @@
       "parentUuid": "cd0ce6fc_5c16d91b",
       "revId": "73544a54474e62412cde7cfcc17d48a3557d9b2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f13fd93c_40724c81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-13T11:24:31Z",
+      "side": 1,
+      "message": "I still do not understand how this implements a new protocol, or what that protocol even is or does.\n\nCan you point me at the documentation for this?  Why not just submit the kernel changes needed, those should be much simpler and make more sense than trying to bury it all behind a single tracehook.",
+      "parentUuid": "78b331a0_11259071",
+      "revId": "73544a54474e62412cde7cfcc17d48a3557d9b2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
