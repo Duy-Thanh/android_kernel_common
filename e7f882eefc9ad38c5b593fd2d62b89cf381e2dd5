@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0454734_34065a4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-13T18:45:11Z",
+      "side": 1,
+      "message": "Please, can you consolidate all of these different patches and submissions into one series so we can determine what needs to be worked on and reviewed?\n\nTHis should all be done before the KMI freeze as well please.  That will make dealing with the crc issue easier if needed.",
+      "revId": "e7f882eefc9ad38c5b593fd2d62b89cf381e2dd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
