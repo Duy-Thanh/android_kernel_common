@@ -16,6 +16,24 @@
       "message": "this whole patch seems way too big for a simple hook being added. Can you look into putting the needed logic into the vendor module that uses the hook, instead of all of these changes?",
       "revId": "edbfa9578802894019bf979ca22cd4af50ee2cf6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24a10bc3_5319ac4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1547213
+      },
+      "writtenOn": "2021-07-13T15:22:08Z",
+      "side": 1,
+      "message": "Hi Greg, thank you for reviewing the patch. Let me check if there is a better way to do it. However this might take some time. Is it allowed to change pcm.c without changing the symbols after GKI KMI freeze if I can add the tracepoint hook now (before GKI KMI freeze)?",
+      "parentUuid": "4d00dbb5_2abf6f06",
+      "revId": "edbfa9578802894019bf979ca22cd4af50ee2cf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
