@@ -39,6 +39,30 @@
       },
       "revId": "a9b2ce68209e6dc438e6acaab32bc31a40bd8b69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d11096d4_f2acfb93",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-13T02:03:42Z",
+      "side": 1,
+      "message": "To minimize the exported surface?\nHowever I can argue both ways :) I\u0027ll leave the final decision up to Greg.",
+      "parentUuid": "81f95799_55a3ec6a",
+      "range": {
+        "startLine": 923,
+        "startChar": 23,
+        "endLine": 923,
+        "endChar": 34
+      },
+      "revId": "a9b2ce68209e6dc438e6acaab32bc31a40bd8b69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
