@@ -46,6 +46,30 @@
       },
       "revId": "4ad60d983740261585f555b761954a210d65074f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75a0046e_b8ed5f5e",
+        "filename": "sound/usb/card.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-13T15:21:48Z",
+      "side": 1,
+      "message": "I think you need to make this just one commit, do not spread it across multiple commits as it is hard to follow, and as you say, no one will be calling the function here so it does not matter.",
+      "parentUuid": "7f1b28f2_7ff6d9ba",
+      "range": {
+        "startLine": 212,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 76
+      },
+      "revId": "4ad60d983740261585f555b761954a210d65074f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
