@@ -22,6 +22,30 @@
       },
       "revId": "352e8154e8bf8fe7cc4c73fe7a14ef6452580e04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbe1d48d_be337b50",
+        "filename": "sound/usb/card.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1547213
+      },
+      "writtenOn": "2021-07-13T00:27:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "511cb30a_a43b3e0d",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 25
+      },
+      "revId": "352e8154e8bf8fe7cc4c73fe7a14ef6452580e04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
