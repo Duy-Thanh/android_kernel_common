@@ -141,6 +141,24 @@
       "parentUuid": "2b326c71_6eb4f776",
       "revId": "73544a54474e62412cde7cfcc17d48a3557d9b2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78b331a0_11259071",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1886326
+      },
+      "writtenOn": "2021-07-13T09:55:27Z",
+      "side": 1,
+      "message": "Dear Greg:\nI am Kris Feng from OPPO. As heshuai1 mentioned above, this is a feature designed by Xiaomi/OPPO/vivo, the three companies will use same vendor hook and same implementation. Heshuai1 from xiaomi is leading this action on behalf of OPPO/vivo. \nOPPO has discussed with Xiaomi/vivo about \"the vendor protocol type\" solution, and we think it can not meet our requirement.\nIs that possible to use the vendor_hook solution?\nThanks a lot.",
+      "parentUuid": "cd0ce6fc_5c16d91b",
+      "revId": "73544a54474e62412cde7cfcc17d48a3557d9b2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
