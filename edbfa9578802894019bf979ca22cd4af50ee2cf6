@@ -34,6 +34,24 @@
       "parentUuid": "4d00dbb5_2abf6f06",
       "revId": "edbfa9578802894019bf979ca22cd4af50ee2cf6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5af6dc1d_15b563d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-13T15:26:10Z",
+      "side": 1,
+      "message": "You can add tracepoints after the GKI freeze.  Nothing you are doing here should be changing the ABI at all, so you do not have to rush.",
+      "parentUuid": "24a10bc3_5319ac4d",
+      "revId": "edbfa9578802894019bf979ca22cd4af50ee2cf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
