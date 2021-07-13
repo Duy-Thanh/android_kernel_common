@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "337ddda1_9f32066e",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 950,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2021-07-13T11:17:01Z",
+      "side": 1,
+      "message": "This is a perfect backport of a bug *I* introduced in the original code (it really should be `VM_VMSHARED`).\n\nI\u0027ll post a patch that can be cherry-picked on top of this.",
+      "revId": "da5143195002d2e1de96dd2fc835ac566b1de204",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e15adac1_33b4278d",
         "filename": "include/uapi/linux/kvm.h",
         "patchSetId": 1
