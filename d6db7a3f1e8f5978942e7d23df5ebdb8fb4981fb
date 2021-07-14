@@ -16,6 +16,23 @@
       "message": "I do not see that symbol in our tree, are you sure it is present?",
       "revId": "d6db7a3f1e8f5978942e7d23df5ebdb8fb4981fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1bfe9fb_2683ae6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-14T12:22:40Z",
+      "side": 1,
+      "message": "Ah, it\u0027s from the previous patch, my fault...",
+      "revId": "d6db7a3f1e8f5978942e7d23df5ebdb8fb4981fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
