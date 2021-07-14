@@ -3260,6 +3260,13 @@ static int bpf_skb_proto_4_to_6(struct sk_buff *skb)
 			shinfo->gso_type &= ~SKB_GSO_TCPV4;
 			shinfo->gso_type |=  SKB_GSO_TCPV6;
 		}
+<<<<<<< HEAD   (663bbf UPSTREAM: KVM: arm64: Set the MTE tag bit before releasing t)
+=======
+
+		/* Header must be checked, and gso_segs recomputed. */
+		shinfo->gso_type |= SKB_GSO_DODGY;
+		shinfo->gso_segs = 0;
+>>>>>>> BRANCH (43b074 Linux 5.10.50)
 	}
 
 	skb->protocol = htons(ETH_P_IPV6);
@@ -3290,6 +3297,13 @@ static int bpf_skb_proto_6_to_4(struct sk_buff *skb)
 			shinfo->gso_type &= ~SKB_GSO_TCPV6;
 			shinfo->gso_type |=  SKB_GSO_TCPV4;
 		}
+<<<<<<< HEAD   (663bbf UPSTREAM: KVM: arm64: Set the MTE tag bit before releasing t)
+=======
+
+		/* Header must be checked, and gso_segs recomputed. */
+		shinfo->gso_type |= SKB_GSO_DODGY;
+		shinfo->gso_segs = 0;
+>>>>>>> BRANCH (43b074 Linux 5.10.50)
 	}
 
 	skb->protocol = htons(ETH_P_IP);
