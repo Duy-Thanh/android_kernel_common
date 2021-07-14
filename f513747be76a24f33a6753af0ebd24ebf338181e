@@ -16,6 +16,24 @@
       "message": "Hi Guangming,\n\nAndroid framework uses the exp_name field to derive per-exporter statistics for bugreport. Using the field to store additional debug info would break the use-case :( \nCan you please use the structure you store in the DMA-BUF\u0027s priv field to store the additional metadata? Another option is to use the DMA-BUF set_name IOCTL to store the additional debug info. Please do let me know if you have any questions.\n\nRegards,\nHridya",
       "revId": "f513747be76a24f33a6753af0ebd24ebf338181e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c45ce06_09d5bccc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878921
+      },
+      "writtenOn": "2021-07-14T06:31:59Z",
+      "side": 1,
+      "message": "Could you use dma_buf.owner to record exporter in dmabuf_dump tool? Seems can fix this question.",
+      "parentUuid": "11015db8_2720bb9d",
+      "revId": "f513747be76a24f33a6753af0ebd24ebf338181e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
