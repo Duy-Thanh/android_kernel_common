@@ -16,6 +16,24 @@
       "message": "Can you consolidate these all to one updated patch series, it\u0027s hard to determine what is needed to be reviewed here or not.",
       "revId": "7a32790837d69240ed237f4f6e102a02106047ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b49341b_929b2524",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1547213
+      },
+      "writtenOn": "2021-07-14T03:10:50Z",
+      "side": 1,
+      "message": "Sorry for confusing. I just abandoned other patches in the relation chain and updated this one.",
+      "parentUuid": "8be285e0_9f814164",
+      "revId": "7a32790837d69240ed237f4f6e102a02106047ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
