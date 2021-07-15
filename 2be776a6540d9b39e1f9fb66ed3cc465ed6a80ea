@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c911cf4_31caf5a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2021-07-15T18:16:46Z",
+      "side": 1,
+      "message": "Removing auto-added reviewers. Should be fixed upstream.",
+      "revId": "2be776a6540d9b39e1f9fb66ed3cc465ed6a80ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
