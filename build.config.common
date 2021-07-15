@@ -1,5 +1,10 @@
+<<<<<<< HEAD   (ec50cb Merge 5.10.50 into android13-5.10)
 BRANCH=android13-5.10
 KMI_GENERATION=0
+=======
+BRANCH=android12-5.10
+KMI_GENERATION=9
+>>>>>>> BRANCH (870488 ANDROID: GKI: 7/14/2021 KMI update)
 
 LLVM=1
 DEPMOD=depmod
