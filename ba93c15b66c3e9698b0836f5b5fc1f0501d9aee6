@@ -16,6 +16,24 @@
       "message": "Hi Greg, do we wait for this to be picked up from 5.10 stable, or can we merge it here?",
       "revId": "ba93c15b66c3e9698b0836f5b5fc1f0501d9aee6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6982e50a_6b214fcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-07-15T17:38:44Z",
+      "side": 1,
+      "message": "Spoke offline. We also need to take this into 5.10",
+      "parentUuid": "f8aa48e1_cd76bf50",
+      "revId": "ba93c15b66c3e9698b0836f5b5fc1f0501d9aee6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
