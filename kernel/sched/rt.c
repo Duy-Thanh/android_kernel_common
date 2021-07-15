@@ -1497,6 +1497,12 @@ select_task_rq_rt(struct task_struct *p, int cpu, int sd_flag, int flags)
 	if (target_cpu >= 0)
 		return target_cpu;
 
+	trace_android_rvh_select_task_rq_rt2(p, cpu, &sd_flag,
+					&flags, &target_cpu);
+
+	if (target_cpu >= 0)
+		return target_cpu;
+
 	/* For anything but wake ups, just return the task_cpu */
 	if (sd_flag != SD_BALANCE_WAKE && sd_flag != SD_BALANCE_FORK)
 		goto out;
