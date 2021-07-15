@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b0c6db3_97352df6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2021-07-15T18:14:12Z",
+      "side": 1,
+      "message": "Re-opened as this is necessary for QEMU boot. Bug should be fixed in the upstream kernel.",
+      "revId": "c5a4b814aded8886d6c58fdc8eff989c5b8d5c9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
