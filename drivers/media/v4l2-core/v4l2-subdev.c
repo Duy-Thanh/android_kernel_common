@@ -519,12 +519,9 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 		if (format->which != V4L2_SUBDEV_FORMAT_TRY && ro_subdev)
 			return -EPERM;
 
-		trace_android_vh_v4l2subdev_set_fmt(sd, subdev_fh->pad,
-					format, &ret);
-		if (ret)
-			return ret;
-
-		memset(format->reserved, 0, sizeof(format->reserved));
+		trace_android_vh_v4l2subdev_bypass_code(&ret);
+		if (!ret)
+			memset(format->reserved, 0, sizeof(format->reserved));
 		memset(format->format.reserved, 0, sizeof(format->format.reserved));
 		return v4l2_subdev_call(sd, pad, set_fmt, subdev_fh->pad, format);
 	}
@@ -599,11 +596,9 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 		if (ro_subdev)
 			return -EPERM;
 
-		trace_android_vh_v4l2subdev_set_frame_interval(sd, fi, &ret);
-		if (ret)
-			return ret;
-
-		memset(fi->reserved, 0, sizeof(fi->reserved));
+		trace_android_vh_v4l2subdev_bypass_code(&ret);
+		if (!ret)
+			memset(fi->reserved, 0, sizeof(fi->reserved));
 		return v4l2_subdev_call(sd, video, s_frame_interval, arg);
 	}
 
@@ -630,12 +625,9 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 		if (sel->which != V4L2_SUBDEV_FORMAT_TRY && ro_subdev)
 			return -EPERM;
 
-		trace_android_vh_v4l2subdev_set_selection(sd, subdev_fh->pad,
-					sel, &ret);
-		if (ret)
-			return ret;
-
-		memset(sel->reserved, 0, sizeof(sel->reserved));
+		trace_android_vh_v4l2subdev_bypass_code(&ret);
+		if (!ret)
+			memset(sel->reserved, 0, sizeof(sel->reserved));
 		return v4l2_subdev_call(
 			sd, pad, set_selection, subdev_fh->pad, sel);
 	}
