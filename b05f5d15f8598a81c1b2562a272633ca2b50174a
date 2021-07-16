@@ -51,6 +51,24 @@
       "parentUuid": "c220e442_6bb2177d",
       "revId": "b05f5d15f8598a81c1b2562a272633ca2b50174a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82b4c676_cbb959b0",
+        "filename": "kernel/sched/rt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1688863
+      },
+      "writtenOn": "2021-07-16T22:43:17Z",
+      "side": 1,
+      "message": "\u003eI think you are suggesting the tracehook to unset the WF_SYNC flag if its not honoring.\n\nYes, correct. Sorry for the ambiguity.\n\n\u003eThat is not possible, wake_flags is not passed in.\n\nMay I ask which trace hook is being used here? Both trace_android_rvh_enqueue_task and trace_android_rvh_select_task_rq_rt seem to pass in flags; I presume a different one is being used for this evaluation? I\u0027m just trying to better understand where this decision is being made.",
+      "parentUuid": "63aa17a6_a4b96987",
+      "revId": "b05f5d15f8598a81c1b2562a272633ca2b50174a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
