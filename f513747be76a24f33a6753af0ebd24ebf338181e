@@ -70,6 +70,23 @@
       "parentUuid": "456d29ae_024fd20b",
       "revId": "f513747be76a24f33a6753af0ebd24ebf338181e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b711d5f_3b3809cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-07-16T22:06:44Z",
+      "side": 1,
+      "message": "LGTM, please do send upstream first. Also, please do elaborate on the commit message about how the UAF could happen.",
+      "revId": "f513747be76a24f33a6753af0ebd24ebf338181e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
