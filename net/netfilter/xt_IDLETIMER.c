@@ -47,16 +47,17 @@ struct idletimer_tg {
 	struct timespec64 last_modified_timer;
 	struct timespec64 last_suspend_time;
 	struct notifier_block pm_nb;
+	uid_t uid;
+	bool suspend_time_valid;
+	bool work_pending;
 
 	int timeout;
 	unsigned int refcnt;
 	u8 timer_type;
 
-	bool work_pending;
 	bool send_nl_msg;
 	bool active;
-	uid_t uid;
-	bool suspend_time_valid;
+
 };
 
 static LIST_HEAD(idletimer_tg_list);
@@ -115,9 +116,12 @@ static void notify_netlink_uevent(const char *iface, struct idletimer_tg *timer)
 		pr_err("message too long (%d)\n", res);
 		return;
 	}
-
-	ts = ktime_to_timespec64(ktime_get_boottime());
-	state = check_for_delayed_trigger(timer, &ts);
+	if (timer->timer_type & XT_IDLETIMER_ALARM) {
+		state =  timer->active;
+	} else {
+		ts = ktime_to_timespec64(ktime_get_boottime());
+		state = check_for_delayed_trigger(timer, &ts);
+	}
 	res = snprintf(state_msg, NLMSG_MAX_SIZE, "STATE=%s",
 		       state ? "active" : "inactive");
 
@@ -126,25 +130,30 @@ static void notify_netlink_uevent(const char *iface, struct idletimer_tg *timer)
 		return;
 	}
 
-	if (state) {
-		res = snprintf(uid_msg, NLMSG_MAX_SIZE, "UID=%u", timer->uid);
-		if (NLMSG_MAX_SIZE <= res)
-			pr_err("message too long (%d)\n", res);
+	if (timer->timer_type & XT_IDLETIMER_ALARM) {
+		pr_debug("putting nlmsg: <%s> <%s>\n", iface_msg, state_msg);
 	} else {
-		res = snprintf(uid_msg, NLMSG_MAX_SIZE, "UID=");
-		if (NLMSG_MAX_SIZE <= res)
+		if (state) {
+			res = snprintf(uid_msg, NLMSG_MAX_SIZE, "UID=%u", timer->uid);
+			if (NLMSG_MAX_SIZE <= res)
+				pr_err("message too long (%d)\n", res);
+		} else {
+			res = snprintf(uid_msg, NLMSG_MAX_SIZE, "UID=");
+			if (NLMSG_MAX_SIZE <= res)
+				pr_err("message too long (%d)\n", res);
+		}
+
+		time_ns = timespec64_to_ns(&ts);
+		res = snprintf(timestamp_msg, NLMSG_MAX_SIZE, "TIME_NS=%llu", time_ns);
+		if (NLMSG_MAX_SIZE <= res) {
+			timestamp_msg[0] = '\0';
 			pr_err("message too long (%d)\n", res);
+		}
+
+		pr_debug("putting nlmsg: <%s> <%s> <%s> <%s>\n", iface_msg, state_msg,
+				 timestamp_msg, uid_msg);
 	}
 
-	time_ns = timespec64_to_ns(&ts);
-	res = snprintf(timestamp_msg, NLMSG_MAX_SIZE, "TIME_NS=%llu", time_ns);
-	if (NLMSG_MAX_SIZE <= res) {
-		timestamp_msg[0] = '\0';
-		pr_err("message too long (%d)\n", res);
-	}
-
-	pr_debug("putting nlmsg: <%s> <%s> <%s> <%s>\n", iface_msg, state_msg,
-		 timestamp_msg, uid_msg);
 	kobject_uevent_env(idletimer_tg_kobj, KOBJ_CHANGE, envp);
 	return;
 }
@@ -277,8 +286,11 @@ static enum alarmtimer_restart idletimer_tg_alarmproc(struct alarm *alarm,
 {
 	struct idletimer_tg *timer = alarm->data;
 
+	spin_lock_bh(&timestamp_lock);
+	timer->active = false;
 	pr_debug("alarm %s expired\n", timer->attr.attr.name);
 	schedule_work(&timer->work);
+	spin_unlock_bh(&timestamp_lock);
 	return ALARMTIMER_NORESTART;
 }
 
@@ -404,19 +416,6 @@ static int idletimer_tg_create_v1(struct idletimer_tg_info_v1 *info)
 	info->timer->active = true;
 	info->timer->timeout = info->timeout;
 
-	info->timer->delayed_timer_trigger.tv_sec = 0;
-	info->timer->delayed_timer_trigger.tv_nsec = 0;
-	info->timer->work_pending = false;
-	info->timer->uid = 0;
-	info->timer->last_modified_timer =
-		ktime_to_timespec64(ktime_get_boottime());
-
-	info->timer->pm_nb.notifier_call = idletimer_resume;
-	ret = register_pm_notifier(&info->timer->pm_nb);
-	if (ret)
-		printk(KERN_WARNING "[%s] Failed to register pm notifier %d\n",
-		       __func__, ret);
-
 	INIT_WORK(&info->timer->work, idletimer_tg_work);
 
 	if (info->timer->timer_type & XT_IDLETIMER_ALARM) {
@@ -427,6 +426,19 @@ static int idletimer_tg_create_v1(struct idletimer_tg_info_v1 *info)
 		tout = ktime_set(info->timeout, 0);
 		alarm_start_relative(&info->timer->alarm, tout);
 	} else {
+		info->timer->delayed_timer_trigger.tv_sec = 0;
+		info->timer->delayed_timer_trigger.tv_nsec = 0;
+		info->timer->work_pending = false;
+		info->timer->uid = 0;
+		info->timer->last_modified_timer =
+			ktime_to_timespec64(ktime_get_boottime());
+
+		info->timer->pm_nb.notifier_call = idletimer_resume;
+		ret = register_pm_notifier(&info->timer->pm_nb);
+		if (ret)
+			printk(KERN_WARNING "[%s] Failed to register pm notifier %d\n",
+		           __func__, ret);
+
 		timer_setup(&info->timer->timer, idletimer_tg_expired, 0);
 		mod_timer(&info->timer->timer,
 			  msecs_to_jiffies(info->timeout * 1000) + jiffies);
@@ -516,10 +528,15 @@ static unsigned int idletimer_tg_target_v1(struct sk_buff *skb,
 		 info->label, info->timeout);
 
 	if (info->timer->timer_type & XT_IDLETIMER_ALARM) {
+		if (!info->timer->active) {
+			schedule_work(&info->timer->work);
+			pr_debug("Starting timer %s\n", info->label);
+		}
+		info->timer->active = true;
 		ktime_t tout = ktime_set(info->timeout, 0);
 		alarm_start_relative(&info->timer->alarm, tout);
 	} else {
-		info->timer->active = true;
+ 		info->timer->active = true;
 
 		if (time_before(info->timer->timer.expires, now)) {
 			schedule_work(&info->timer->work);
@@ -693,9 +710,9 @@ static void idletimer_tg_destroy_v1(const struct xt_tgdtor_param *par)
 			alarm_cancel(&info->timer->alarm);
 		} else {
 			del_timer_sync(&info->timer->timer);
+			unregister_pm_notifier(&info->timer->pm_nb);
 		}
 		sysfs_remove_file(idletimer_tg_kobj, &info->timer->attr.attr);
-		unregister_pm_notifier(&info->timer->pm_nb);
 		cancel_work_sync(&info->timer->work);
 		kfree(info->timer->attr.attr.name);
 		kfree(info->timer);
