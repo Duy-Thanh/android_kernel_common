@@ -104,6 +104,24 @@
       "parentUuid": "82b4c676_cbb959b0",
       "revId": "b05f5d15f8598a81c1b2562a272633ca2b50174a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09caf36b_7e1acb2e",
+        "filename": "kernel/sched/rt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-19T19:44:40Z",
+      "side": 1,
+      "message": "I agree with Avila that changing the flag value is a much cleaner solution. It\u0027s not obvious what the side-effects of the proposed change might be and as Avila points out it is a very \"roundabout\" (hacky) solution. At minimum, we\u0027d need some comments here about why this was necessary.\n\nIt is true that the flag is not changeable by the hook with the current definition. And since we are past KMI freeze, we can\u0027t change the definition.\n\nCan you have the hook set some state in p to indicate sync-flag override?\n\nYou\u0027d also need a new hook in should_honor_rt_sync() to consume that state and return whether the sync flag is being honored.",
+      "parentUuid": "0f9a4d0c_c4a6395f",
+      "revId": "b05f5d15f8598a81c1b2562a272633ca2b50174a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
