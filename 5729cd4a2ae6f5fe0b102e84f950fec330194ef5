@@ -16,6 +16,29 @@
       "message": "Hi, this is a new patchset which will hopefully be acceptable.  It handles the goal of keeping WF_SYNC flag operations behind a vendor hook.",
       "revId": "5729cd4a2ae6f5fe0b102e84f950fec330194ef5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6501099b_bcc2add2",
+        "filename": "kernel/sched/rt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-20T14:13:06Z",
+      "side": 1,
+      "message": "this is redundant. Since vendor controls both of these hooks (and probably only attaches to one of them), the early return at line 1503 is all that is needed.",
+      "range": {
+        "startLine": 1497,
+        "startChar": 0,
+        "endLine": 1498,
+        "endChar": 20
+      },
+      "revId": "5729cd4a2ae6f5fe0b102e84f950fec330194ef5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
