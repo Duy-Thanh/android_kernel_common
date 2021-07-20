@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "630eb2ba_3811971a",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1664259
+      },
+      "writtenOn": "2021-07-20T09:44:08Z",
+      "side": 1,
+      "message": "line number : 46 - 52  are specific to idletimers",
+      "range": {
+        "startLine": 52,
+        "startChar": 5,
+        "endLine": 52,
+        "endChar": 6
+      },
+      "revId": "53a49fba7339701de387fd9998d675eeb5952054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eca683d2_42f65dd9",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1664259
+      },
+      "writtenOn": "2021-07-20T09:44:08Z",
+      "side": 1,
+      "message": "Check_for_delayed_trigger is specific to idle timers",
+      "range": {
+        "startLine": 123,
+        "startChar": 10,
+        "endLine": 123,
+        "endChar": 35
+      },
+      "revId": "53a49fba7339701de387fd9998d675eeb5952054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d836ccd_e9357db8",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1664259
+      },
+      "writtenOn": "2021-07-20T09:44:08Z",
+      "side": 1,
+      "message": "Added spin locks to alarm timers",
+      "range": {
+        "startLine": 290,
+        "startChar": 1,
+        "endLine": 290,
+        "endChar": 6
+      },
+      "revId": "53a49fba7339701de387fd9998d675eeb5952054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27718496_1638360d",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1664259
+      },
+      "writtenOn": "2021-07-20T09:44:08Z",
+      "side": 1,
+      "message": "As it is specific to idletimers moved under else block",
+      "range": {
+        "startLine": 429,
+        "startChar": 1,
+        "endLine": 429,
+        "endChar": 2
+      },
+      "revId": "53a49fba7339701de387fd9998d675eeb5952054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e98c0260_d95b52ea",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1664259
+      },
+      "writtenOn": "2021-07-20T09:44:08Z",
+      "side": 1,
+      "message": "pm_notifier is specific to idltetimers",
+      "range": {
+        "startLine": 713,
+        "startChar": 3,
+        "endLine": 713,
+        "endChar": 25
+      },
+      "revId": "53a49fba7339701de387fd9998d675eeb5952054",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
