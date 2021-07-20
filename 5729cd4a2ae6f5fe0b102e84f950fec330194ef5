@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b69189d_0ac72a34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2021-07-20T02:48:24Z",
+      "side": 1,
+      "message": "Hi, this is a new patchset which will hopefully be acceptable.  It handles the goal of keeping WF_SYNC flag operations behind a vendor hook.",
+      "revId": "5729cd4a2ae6f5fe0b102e84f950fec330194ef5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
