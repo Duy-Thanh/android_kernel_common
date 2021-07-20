@@ -212,6 +212,24 @@
       "parentUuid": "bee698a8_62acf549",
       "revId": "b05f5d15f8598a81c1b2562a272633ca2b50174a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26ad5572_1cdfb975",
+        "filename": "kernel/sched/rt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-20T18:24:29Z",
+      "side": 1,
+      "message": "Instead of testing cpu in the conditional, could it be:\n```\n\tbool do_enqueue_pushable \u003d true;\n\t...\n\ttrace_android_rt_enqueue(rq, \u0026do_enqueue_pushable);\n\t\n\tif (do_enqueue \u0026\u0026 !task_current(rq, p) \u0026\u0026 p-\u003enr_cpus_allowed \u003e 1 \u0026\u0026\n\t    (rq-\u003ecpu \u003d\u003d raw_smp_processor_id()) \u0026\u0026\n\t    !should_honor_rt_sync(rq, p, sync))\n\t\tenqueue_pushable_task(rq, p);\n\n```\nThis has the advantage of not changing the code for everyone else and being clearer about what is happening (vendor is inhibiting enqueue).",
+      "parentUuid": "82edee6e_f2817d0e",
+      "revId": "b05f5d15f8598a81c1b2562a272633ca2b50174a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
