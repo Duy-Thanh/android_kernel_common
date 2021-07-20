@@ -194,6 +194,24 @@
       "parentUuid": "49b963b7_5ee9961a",
       "revId": "b05f5d15f8598a81c1b2562a272633ca2b50174a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82edee6e_f2817d0e",
+        "filename": "kernel/sched/rt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-20T18:18:25Z",
+      "side": 1,
+      "message": "Ok, please resubmit PS1 -- but add code comments about that added conditional and why it is needed.",
+      "parentUuid": "bee698a8_62acf549",
+      "revId": "b05f5d15f8598a81c1b2562a272633ca2b50174a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
