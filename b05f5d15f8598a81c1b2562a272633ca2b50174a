@@ -122,6 +122,24 @@
       "parentUuid": "0f9a4d0c_c4a6395f",
       "revId": "b05f5d15f8598a81c1b2562a272633ca2b50174a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d104663_0e1e1522",
+        "filename": "kernel/sched/rt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2021-07-20T02:47:13Z",
+      "side": 1,
+      "message": "We\u0027re actually going to take a slightly different approach, as the above would be quite complex.  A new hook will be required however  Please let us know what you think.",
+      "parentUuid": "09caf36b_7e1acb2e",
+      "revId": "b05f5d15f8598a81c1b2562a272633ca2b50174a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
