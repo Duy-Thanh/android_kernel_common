@@ -105,6 +105,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19b94849_0db7ab22",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3397,
+      "author": {
+        "id": 1195398
+      },
+      "writtenOn": "2021-07-21T07:16:40Z",
+      "side": 1,
+      "message": "Also, silently not copying anything is confusing.\nShouldn\u0027t we give user space some error indication?",
+      "revId": "ccb39fe50310ca3f8d43695ac11b4bc54e2e3c0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c543f602_93469063",
         "filename": "drivers/scsi/ufs/ufshcd.c",
         "patchSetId": 7
