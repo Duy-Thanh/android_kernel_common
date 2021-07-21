@@ -31,11 +31,16 @@
 #include <trace/hooks/ufshcd.h>
 #include <trace/hooks/cgroup.h>
 #include <trace/hooks/sys.h>
+<<<<<<< HEAD   (81bf23 Revert "ANDROID: disable BLK_DEV_NBD for allmodconfig")
 #include <trace/hooks/iommu.h>
 #include <trace/hooks/net.h>
 #include <trace/hooks/timer.h>
 #include <trace/hooks/pm_domain.h>
 #include <trace/hooks/cpuidle_psci.h>
+=======
+#include <trace/hooks/ufshcd.h>
+#include <trace/hooks/usb.h>
+>>>>>>> CHANGE (95a38d ANDROID: GKI: usb: Add vendor hook for skipping USB-persist)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -144,6 +149,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_syscall_prctl_finished);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_uic_command);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_tm_command);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_check_int_errors);
+<<<<<<< HEAD   (81bf23 Revert "ANDROID: disable BLK_DEV_NBD for allmodconfig")
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cgroup_attach);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_iommu_setup_dma_ops);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ptype_head);
@@ -157,3 +163,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_check_preempt_wakeup_ignore);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_replace_next_task_fair);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_build_sched_domains);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_topology_flags_workfn);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_persist_overwrite);
+>>>>>>> CHANGE (95a38d ANDROID: GKI: usb: Add vendor hook for skipping USB-persist)
