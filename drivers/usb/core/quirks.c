@@ -12,6 +12,8 @@
 #include <linux/usb/hcd.h>
 #include "usb.h"
 
+#include <trace/hooks/usb.h>
+
 struct quirk_entry {
 	u16 vid;
 	u16 pid;
@@ -654,6 +656,9 @@ static u32 usb_detect_dynamic_quirks(struct usb_device *udev)
  */
 void usb_detect_quirks(struct usb_device *udev)
 {
+#ifdef CONFIG_USB_DEFAULT_PERSIST
+	int is_skip = 0;
+#endif
 	udev->quirks = usb_detect_static_quirks(udev, usb_quirk_list);
 
 	/*
@@ -671,7 +676,8 @@ void usb_detect_quirks(struct usb_device *udev)
 			udev->quirks);
 
 #ifdef CONFIG_USB_DEFAULT_PERSIST
-	if (!(udev->quirks & USB_QUIRK_RESET))
+	trace_android_vh_usb_skip_persist(udev, &is_skip);
+	if (!(udev->quirks & USB_QUIRK_RESET) && !is_skip)
 		udev->persist_enabled = 1;
 #else
 	/* Hubs are automatically enabled for USB-PERSIST */
