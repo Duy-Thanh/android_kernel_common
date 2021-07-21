@@ -397,6 +397,7 @@ int ufshcd_pltfrm_init(struct platform_device *pdev,
 
 	pm_runtime_set_active(&pdev->dev);
 	pm_runtime_enable(&pdev->dev);
+	device_enable_async_suspend(dev);
 
 	return 0;
 
