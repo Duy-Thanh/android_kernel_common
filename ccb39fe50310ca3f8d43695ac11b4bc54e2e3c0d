@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71421d42_6e49fe5d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-07-21T17:02:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6f78a2cb_011a4f8b",
+      "revId": "ccb39fe50310ca3f8d43695ac11b4bc54e2e3c0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e028117a_adf42092",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-07-21T07:10:10Z",
       "side": 1,
       "message": "I failed to follow-up on the scenario in your commit log:\n - parm_offset is 37\n - param_read_buf points to an 8 bytes array\n - param_size is 2",
+      "revId": "ccb39fe50310ca3f8d43695ac11b4bc54e2e3c0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75c86ae6_a8960288",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3343,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-07-21T17:02:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e028117a_adf42092",
       "revId": "ccb39fe50310ca3f8d43695ac11b4bc54e2e3c0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cba5122b_ca52e507",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3349,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-07-21T17:02:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1e1ff7f9_d59e004e",
+      "revId": "ccb39fe50310ca3f8d43695ac11b4bc54e2e3c0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "469d9a4e_88911e29",
@@ -65,6 +119,24 @@
       "writtenOn": "2021-07-21T07:10:10Z",
       "side": 1,
       "message": "desc_buf is alloced to the full descriptor size",
+      "revId": "ccb39fe50310ca3f8d43695ac11b4bc54e2e3c0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a4735bf_643105c9",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3363,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-07-21T17:02:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "469d9a4e_88911e29",
       "revId": "ccb39fe50310ca3f8d43695ac11b4bc54e2e3c0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -86,6 +158,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b12eac11_3bf834e7",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3374,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-07-21T17:02:50Z",
+      "side": 1,
+      "message": "I\u0027m not sure of the above ...",
+      "parentUuid": "9bee15b9_b304c771",
+      "revId": "ccb39fe50310ca3f8d43695ac11b4bc54e2e3c0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55bf6453_4333bcd7",
@@ -99,6 +189,24 @@
       "writtenOn": "2021-07-21T07:10:10Z",
       "side": 1,
       "message": "buff_len is updated again to 45",
+      "revId": "ccb39fe50310ca3f8d43695ac11b4bc54e2e3c0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bd4847e_7d8acd22",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3391,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-07-21T17:02:50Z",
+      "side": 1,
+      "message": "On my test setup this assignment changes buff_len into 35.",
+      "parentUuid": "55bf6453_4333bcd7",
       "revId": "ccb39fe50310ca3f8d43695ac11b4bc54e2e3c0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -120,6 +228,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac5680ec_4bf6f2cf",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3397,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-07-21T17:02:50Z",
+      "side": 1,
+      "message": "This has been fixed in the new version of this patch that has been uploaded.",
+      "parentUuid": "19b94849_0db7ab22",
+      "revId": "ccb39fe50310ca3f8d43695ac11b4bc54e2e3c0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c543f602_93469063",
@@ -137,6 +263,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21425ac2_d64b295c",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3398,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-07-21T17:02:50Z",
+      "side": 1,
+      "message": "Not correct - see above.",
+      "parentUuid": "c543f602_93469063",
+      "revId": "ccb39fe50310ca3f8d43695ac11b4bc54e2e3c0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d530a04_8dcad84c",
@@ -150,6 +294,24 @@
       "writtenOn": "2021-07-21T07:10:10Z",
       "side": 1,
       "message": "2 bytes are being copied from offset 37 to the 8 bytes array.",
+      "revId": "ccb39fe50310ca3f8d43695ac11b4bc54e2e3c0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "444b0517_56dcdf57",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3400,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-07-21T17:02:50Z",
+      "side": 1,
+      "message": "Not correct - see above.",
+      "parentUuid": "0d530a04_8dcad84c",
       "revId": "ccb39fe50310ca3f8d43695ac11b4bc54e2e3c0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
