@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13e1e74a_494b774a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1612695
+      },
+      "writtenOn": "2021-07-22T15:00:41Z",
+      "side": 1,
+      "message": "I just paste what our engineer sent to me:\n\nshow_minidump_info(): exception_panic_reason:   CFI failure (target: prepare_outbound_urb+0x130/0x138)\n \n我debug了一下，定位在如下的调用：\nprepare_outbound_urb()\nprepare_silent_urb()\nurb-\u003eiso_frame_desc[i].offset \u003d offset;\nurb-\u003eiso_frame_desc[i].length \u003d length + extra;",
+      "parentUuid": "8ed7a60d_3b9c5a1f",
+      "revId": "cd36ed1471e026ae2c4ac358e7495d22da8e8a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9cc59373_5f7f428d",
         "filename": "include/linux/usb.h",
         "patchSetId": 1
@@ -202,6 +220,30 @@
       "side": 1,
       "message": "Argh, sorry if that wasn\u0027t clear. I was trying to say that now that the ABI is frozen, we have to assume that there are users out there who are using struct urb as it is today, before your patch. And that means those potential users are (sadly) overwriting the reserved KABI fields unknowingly. We can\u0027t expect them to rebuild their drivers to pick-up your fix -- that is the point of ABI stability, so this is sad but it means we cannot use the reserved field any more as that would risk breaking those existing users. So I was basically suggesting to mark the fields \u0027used\u0027 or something along those lines to make it clear we can\u0027t use them.",
       "parentUuid": "eef55476_6bec5c23",
+      "range": {
+        "startLine": 1612,
+        "startChar": 1,
+        "endLine": 1615,
+        "endChar": 25
+      },
+      "revId": "cd36ed1471e026ae2c4ac358e7495d22da8e8a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1f2d7f2_1aac4e12",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1615,
+      "author": {
+        "id": 1612695
+      },
+      "writtenOn": "2021-07-22T15:00:41Z",
+      "side": 1,
+      "message": "Got it very clearly. Thanks 😊",
+      "parentUuid": "b7c1a9fd_22187ba9",
       "range": {
         "startLine": 1612,
         "startChar": 1,
