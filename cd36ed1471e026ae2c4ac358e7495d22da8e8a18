@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51ff449d_f0a6e423",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1612695
+      },
+      "writtenOn": "2021-07-22T14:28:08Z",
+      "side": 1,
+      "message": "If we don\u0027t apply this fix, the reserved part will be not safe any more. Did Quentin mean this? OK, I got it.",
+      "parentUuid": "cc3a68c5_d0936314",
+      "revId": "cd36ed1471e026ae2c4ac358e7495d22da8e8a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9cc59373_5f7f428d",
         "filename": "include/linux/usb.h",
         "patchSetId": 1
