@@ -108,6 +108,30 @@
       },
       "revId": "cd36ed1471e026ae2c4ac358e7495d22da8e8a18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eef55476_6bec5c23",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1615,
+      "author": {
+        "id": 1612695
+      },
+      "writtenOn": "2021-07-22T14:20:01Z",
+      "side": 1,
+      "message": "Sorry, I did not get it clearly. Do you mean it was not safe before I moved them up ? And we need to add a comment to warn any people who might make the same mistake?",
+      "parentUuid": "6a2490cc_ffff1d50",
+      "range": {
+        "startLine": 1612,
+        "startChar": 1,
+        "endLine": 1615,
+        "endChar": 25
+      },
+      "revId": "cd36ed1471e026ae2c4ac358e7495d22da8e8a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
