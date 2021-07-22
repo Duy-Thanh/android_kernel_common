@@ -46,6 +46,30 @@
       },
       "revId": "cccbf8cb6dadd355d1fe28477794f11b84b9347c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96c25a49_318b9c12",
+        "filename": "drivers/usb/core/quirks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-22T11:54:21Z",
+      "side": 1,
+      "message": "But are you really doing the opposite of this config option?  How are you treating hubs now?  Shouldn\u0027t they always have `persist_enabled \u003d 1` now?",
+      "parentUuid": "69c4ff7a_ac65eb97",
+      "range": {
+        "startLine": 679,
+        "startChar": 0,
+        "endLine": 679,
+        "endChar": 51
+      },
+      "revId": "cccbf8cb6dadd355d1fe28477794f11b84b9347c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
