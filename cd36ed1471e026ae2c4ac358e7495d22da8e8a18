@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ed7a60d_3b9c5a1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-07-22T14:39:07Z",
+      "side": 1,
+      "message": "Oh that\u0027s interesting, could you please share more details? Why would CFI complain about this?",
+      "parentUuid": "8058c85b_bb9e870e",
+      "revId": "cd36ed1471e026ae2c4ac358e7495d22da8e8a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9cc59373_5f7f428d",
         "filename": "include/linux/usb.h",
         "patchSetId": 1
@@ -160,6 +178,30 @@
       "side": 1,
       "message": "Sorry, I did not get it clearly. Do you mean it was not safe before I moved them up ? And we need to add a comment to warn any people who might make the same mistake?",
       "parentUuid": "6a2490cc_ffff1d50",
+      "range": {
+        "startLine": 1612,
+        "startChar": 1,
+        "endLine": 1615,
+        "endChar": 25
+      },
+      "revId": "cd36ed1471e026ae2c4ac358e7495d22da8e8a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7c1a9fd_22187ba9",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1615,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-07-22T14:39:07Z",
+      "side": 1,
+      "message": "Argh, sorry if that wasn\u0027t clear. I was trying to say that now that the ABI is frozen, we have to assume that there are users out there who are using struct urb as it is today, before your patch. And that means those potential users are (sadly) overwriting the reserved KABI fields unknowingly. We can\u0027t expect them to rebuild their drivers to pick-up your fix -- that is the point of ABI stability, so this is sad but it means we cannot use the reserved field any more as that would risk breaking those existing users. So I was basically suggesting to mark the fields \u0027used\u0027 or something along those lines to make it clear we can\u0027t use them.",
+      "parentUuid": "eef55476_6bec5c23",
       "range": {
         "startLine": 1612,
         "startChar": 1,
