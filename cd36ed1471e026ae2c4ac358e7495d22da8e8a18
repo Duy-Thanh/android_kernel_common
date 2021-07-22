@@ -85,6 +85,29 @@
       "message": "This blank line might get to be removed.",
       "revId": "cd36ed1471e026ae2c4ac358e7495d22da8e8a18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a2490cc_ffff1d50",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1615,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-07-22T13:24:06Z",
+      "side": 1,
+      "message": "These are no longer safe to use sadly, so it feels like we should mark them as \u0027used\u0027, or at least add a comment above to explain the situation. Otherwise we risk corrupting memory if we ever start to use one in the future ...",
+      "range": {
+        "startLine": 1612,
+        "startChar": 1,
+        "endLine": 1615,
+        "endChar": 25
+      },
+      "revId": "cd36ed1471e026ae2c4ac358e7495d22da8e8a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
