@@ -33,6 +33,23 @@
       "message": "yes, already fixed in 5.10, my fault 😞\n",
       "revId": "cd36ed1471e026ae2c4ac358e7495d22da8e8a18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cc59373_5f7f428d",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1611,
+      "author": {
+        "id": 1612695
+      },
+      "writtenOn": "2021-07-22T12:39:41Z",
+      "side": 1,
+      "message": "This blank line might get to be removed.",
+      "revId": "cd36ed1471e026ae2c4ac358e7495d22da8e8a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
