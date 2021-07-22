@@ -22,6 +22,30 @@
       },
       "revId": "cccbf8cb6dadd355d1fe28477794f11b84b9347c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69c4ff7a_ac65eb97",
+        "filename": "drivers/usb/core/quirks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1767641
+      },
+      "writtenOn": "2021-07-22T10:19:15Z",
+      "side": 1,
+      "message": "For our SOC, what we want to do is degrading GKI kernel to CONFIG_USB_DEFAULT_PERSIST disabled case.\n\nIn the case, only hub class is persist enabled. \n\nTo achieve that, most devices need to be skipped but not hub devices.\nThe reason why not using the quirk table is:\n\nThe quirk table is an inclusion list of quirk devices.\nIt\u0027s hard to only exclude hub class with the table.\nAn exclusion list is much better for our case.\nThis patch can potentially create an exclusion list mechanism.",
+      "parentUuid": "f356af2c_78da0192",
+      "range": {
+        "startLine": 679,
+        "startChar": 0,
+        "endLine": 679,
+        "endChar": 51
+      },
+      "revId": "cccbf8cb6dadd355d1fe28477794f11b84b9347c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
