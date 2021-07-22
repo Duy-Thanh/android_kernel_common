@@ -234,14 +234,22 @@ DECLARE_STATIC_KEY_FALSE(slub_debug_enabled);
 #endif
 extern void print_tracking(struct kmem_cache *s, void *object);
 long validate_slab_cache(struct kmem_cache *s);
+<<<<<<< HEAD   (680e58 ANDROID: block: grant IOPRIO_CLASS_RT to CAP_SYS_NICE)
 extern unsigned long get_each_object_track(struct kmem_cache *s,
 		struct page *page, enum track_item alloc,
 		int (*fn)(const struct kmem_cache *, const void *,
 		const struct track *, void *), void *private);
+=======
+static inline bool __slub_debug_enabled(void)
+{
+	return static_branch_unlikely(&slub_debug_enabled);
+}
+>>>>>>> BRANCH (2734d6 Linux 5.14-rc2)
 #else
 static inline void print_tracking(struct kmem_cache *s, void *object)
 {
 }
+<<<<<<< HEAD   (680e58 ANDROID: block: grant IOPRIO_CLASS_RT to CAP_SYS_NICE)
 #ifdef CONFIG_SLUB
 static inline unsigned long get_each_object_track(struct kmem_cache *s,
 		struct page *page, enum track_item alloc,
@@ -251,6 +259,12 @@ static inline unsigned long get_each_object_track(struct kmem_cache *s,
 	return 0;
 }
 #endif
+=======
+static inline bool __slub_debug_enabled(void)
+{
+	return false;
+}
+>>>>>>> BRANCH (2734d6 Linux 5.14-rc2)
 #endif
 
 /*
@@ -260,11 +274,10 @@ static inline unsigned long get_each_object_track(struct kmem_cache *s,
  */
 static inline bool kmem_cache_debug_flags(struct kmem_cache *s, slab_flags_t flags)
 {
-#ifdef CONFIG_SLUB_DEBUG
-	VM_WARN_ON_ONCE(!(flags & SLAB_DEBUG_FLAGS));
-	if (static_branch_unlikely(&slub_debug_enabled))
+	if (IS_ENABLED(CONFIG_SLUB_DEBUG))
+		VM_WARN_ON_ONCE(!(flags & SLAB_DEBUG_FLAGS));
+	if (__slub_debug_enabled())
 		return s->flags & flags;
-#endif
 	return false;
 }
 
