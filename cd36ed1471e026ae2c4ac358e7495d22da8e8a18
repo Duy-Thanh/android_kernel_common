@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc3a68c5_d0936314",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-07-22T12:54:08Z",
+      "side": 1,
+      "message": "To speak it out: this is an ABI breaking change on a ABI stable branch:\n\n \u0027struct urb at usb.h:1576:1\u0027 changed (indirectly):\n   type size hasn\u0027t changed\n   there are data member changes:\n     \u0027usb_iso_packet_descriptor iso_frame_desc[]\u0027 offset changed (by +256 bits)\n   44 impacted interfaces\n\n\nI wonder whether this break is acceptable as the data member that is changing offset can not reasonably be used at the moment?",
+      "revId": "cd36ed1471e026ae2c4ac358e7495d22da8e8a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9cc59373_5f7f428d",
         "filename": "include/linux/usb.h",
         "patchSetId": 1
