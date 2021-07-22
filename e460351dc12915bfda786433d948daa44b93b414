@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27c2ff11_68f82059",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-07-22T12:56:10Z",
+      "side": 1,
+      "message": "checkpatch is complaining about the mention of OWNERS in OWNERS (which is a false positive). In any case, this is not tested by TH.",
+      "revId": "e460351dc12915bfda786433d948daa44b93b414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
