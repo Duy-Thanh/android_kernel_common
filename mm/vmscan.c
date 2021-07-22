@@ -3709,6 +3709,7 @@ restart:
 		 */
 		sc.may_writepage = !laptop_mode && !nr_boost_reclaim;
 		sc.may_swap = !nr_boost_reclaim;
+		trace_android_vh_balance_pgdat((void *)&sc, &nr_boost_reclaim);
 
 		/*
 		 * Do some background aging of the anon list, to give

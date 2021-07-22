@@ -28,6 +28,9 @@ DECLARE_HOOK(android_vh_do_shrink_slab,
 DECLARE_RESTRICTED_HOOK(android_rvh_set_balance_anon_file_reclaim,
 			TP_PROTO(bool *balance_anon_file_reclaim),
 			TP_ARGS(balance_anon_file_reclaim), 1);
+DECLARE_HOOK(android_vh_balance_pgdat,
+	TP_PROTO(void *sc, unsigned long *boost_reclaim),
+	TP_ARGS(sc, boost_reclaim));
 #endif /* _TRACE_HOOK_VMSCAN_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
