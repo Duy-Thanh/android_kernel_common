@@ -1928,10 +1928,11 @@ struct xhci_hcd {
 
 	void			*dbc;
 
+	struct xhci_vendor_ops	*vendor_ops;
+
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
-	ANDROID_KABI_RESERVE(4);
 
 	/* platform-specific data -- must come last */
 	unsigned long		priv[] __aligned(sizeof(s64));
