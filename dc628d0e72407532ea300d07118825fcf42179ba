@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ee52144_af28e0ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-07-23T23:32:42Z",
+      "side": 1,
+      "message": "Need to modify CL to do kmap in ion_dma_buf_kmap().",
+      "revId": "dc628d0e72407532ea300d07118825fcf42179ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
