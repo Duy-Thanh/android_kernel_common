@@ -339,17 +339,7 @@ static int ion_dma_buf_begin_cpu_access(struct dma_buf *dmabuf,
 					enum dma_data_direction direction)
 {
 	struct ion_buffer *buffer = dmabuf->priv;
-	void *vaddr;
 	struct ion_dma_buf_attachment *a;
-
-	/*
-	 * TODO: Move this elsewhere because we don't always need a vaddr
-	 */
-	if (buffer->heap->ops->map_kernel) {
-		mutex_lock(&buffer->lock);
-		vaddr = ion_buffer_kmap_get(buffer);
-		mutex_unlock(&buffer->lock);
-	}
 
 	mutex_lock(&buffer->lock);
 	list_for_each_entry(a, &buffer->attachments, list) {
@@ -357,7 +347,6 @@ static int ion_dma_buf_begin_cpu_access(struct dma_buf *dmabuf,
 				    direction);
 	}
 	mutex_unlock(&buffer->lock);
-
 	return 0;
 }
 
@@ -366,12 +355,6 @@ static int ion_dma_buf_end_cpu_access(struct dma_buf *dmabuf,
 {
 	struct ion_buffer *buffer = dmabuf->priv;
 	struct ion_dma_buf_attachment *a;
-
-	if (buffer->heap->ops->map_kernel) {
-		mutex_lock(&buffer->lock);
-		ion_buffer_kmap_put(buffer);
-		mutex_unlock(&buffer->lock);
-	}
 
 	mutex_lock(&buffer->lock);
 	list_for_each_entry(a, &buffer->attachments, list) {
