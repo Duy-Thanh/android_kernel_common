@@ -94,6 +94,30 @@
       },
       "revId": "cccbf8cb6dadd355d1fe28477794f11b84b9347c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a9e0b4a_a047bc3d",
+        "filename": "drivers/usb/core/quirks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1888973
+      },
+      "writtenOn": "2021-07-23T14:36:35Z",
+      "side": 1,
+      "message": "Sorry for that I deleted the original user account.\n\nHub will be treated as usual (persist_enabled \u003d 1).\nHub is rarely used in our application scenario.\nActually, CONFIG_USB_DEFAULT_PERSIST is never enabled in our projects.\nWe did\u0027t get this resume time issue on the projects so far. \nHence, degrading to CONFIG_USB_DEFAULT_PERSIST disabled case is our first priority.\nBTW, if necessary in the future, we could also set hub to \u0027persist_enabled \u003d 0\u0027 with the vendor hook easily.",
+      "parentUuid": "8740f07a_4c8e27fb",
+      "range": {
+        "startLine": 679,
+        "startChar": 0,
+        "endLine": 679,
+        "endChar": 51
+      },
+      "revId": "cccbf8cb6dadd355d1fe28477794f11b84b9347c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
