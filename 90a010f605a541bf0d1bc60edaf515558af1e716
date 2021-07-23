@@ -16,6 +16,24 @@
       "message": "Just that you know: hereafter, this branch is also subject to Dr. No enforcement ...",
       "revId": "90a010f605a541bf0d1bc60edaf515558af1e716",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6d43a34_a80651cb",
+        "filename": "OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-23T16:38:32Z",
+      "side": 1,
+      "message": "Do we want that?  I can drop this part of the merge, but given that we want to be merging properly, carving this out might be a pain.",
+      "parentUuid": "81b864ae_ef8ae144",
+      "revId": "90a010f605a541bf0d1bc60edaf515558af1e716",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
