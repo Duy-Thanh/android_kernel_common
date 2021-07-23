@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "39b88260_fdf516c3",
         "filename": "/PATCHSET_LEVEL",
@@ -14,8 +15,24 @@
       "side": 1,
       "message": "In my phone os now os 10 but one app not working in os to 10 I want os9 how install os9 in my phone please guide",
       "revId": "f73aa0eab7d955d782cf623b8d358af4dbaf5b71",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b89eca44_b8a15367",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761264
+      },
+      "writtenOn": "2021-07-23T11:21:26Z",
+      "side": 1,
+      "message": "Motorola moto g7 power",
+      "revId": "f73aa0eab7d955d782cf623b8d358af4dbaf5b71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
