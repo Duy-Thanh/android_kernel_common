@@ -34,6 +34,24 @@
       "parentUuid": "81b864ae_ef8ae144",
       "revId": "90a010f605a541bf0d1bc60edaf515558af1e716",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dc816cd_94031760",
+        "filename": "OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-07-23T16:47:42Z",
+      "side": 1,
+      "message": "well, it is already enforced by now since the last merge brought it in. this one cleans it up only. I suggest we keep it and if it bothers we can drop the enforcement in the -lts branch. Just we should not merge it back.",
+      "parentUuid": "f6d43a34_a80651cb",
+      "revId": "90a010f605a541bf0d1bc60edaf515558af1e716",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
