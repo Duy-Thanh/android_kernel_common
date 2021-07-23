@@ -407,6 +407,7 @@ pipe_write(struct kiocb *iocb, struct iov_iter *from)
 	size_t total_len = iov_iter_count(from);
 	ssize_t chars;
 	bool was_empty = false;
+	bool force_wakeup = false;
 	bool wake_next_writer = false;
 
 	/* Null write succeeds. */
@@ -459,6 +460,20 @@ pipe_write(struct kiocb *iocb, struct iov_iter *from)
 				goto out;
 			}
 
+			/* Restore the old behavior to wake up readers even in case of small
+			 * writes being merged. This behaviour is more important for threads waiting
+			 * on new data being available in the pipe using epoll_wait() with
+			 * EPOLLIN | EPOLLET
+			 *
+			 * Note that, application that expected epoll to be notified even when
+			 * pipe isn't empty are buggy and need to be fixed. This only restores
+			 * the behavior for small writes (single byte) on fifos because they are
+			 * currently used by soome application libraries to serve serve
+			 * notification / looper threads
+			 *
+			 * FIXME: Revert this when applications are fixed.
+			 */
+			force_wakeup = true;
 			buf->len += ret;
 			if (!iov_iter_count(from))
 				goto out;
@@ -576,7 +591,7 @@ out:
 	 * how (for example) the GNU make jobserver uses small writes to
 	 * wake up pending jobs
 	 */
-	if (was_empty) {
+	if (was_empty || force_wakeup) {
 		wake_up_interruptible_sync_poll(&pipe->rd_wait, EPOLLIN | EPOLLRDNORM);
 		kill_fasync(&pipe->fasync_readers, SIGIO, POLL_IN);
 	}
