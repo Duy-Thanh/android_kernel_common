@@ -4315,9 +4315,12 @@ static int __maybe_unused xhci_change_max_exit_latency(struct xhci_hcd *xhci,
 	return ret;
 }
 
+static const struct hc_driver xhci_hc_driver;
 struct xhci_vendor_ops *xhci_vendor_get_ops(struct xhci_hcd *xhci)
 {
-	return xhci_to_priv(xhci)->vendor_ops;
+	if (xhci_hc_driver.hcd_priv_size > sizeof(struct xhci_hcd))
+		return xhci_to_priv(xhci)->vendor_ops;
+	return NULL;
 }
 EXPORT_SYMBOL_GPL(xhci_vendor_get_ops);
 
