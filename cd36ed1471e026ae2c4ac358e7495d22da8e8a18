@@ -21,6 +21,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f46c3af1_834464f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-23T21:22:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4556664c_f899d442",
+      "revId": "cd36ed1471e026ae2c4ac358e7495d22da8e8a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5700b827_e4e68478",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -142,6 +160,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bef52858_1ee2b773",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-23T21:22:53Z",
+      "side": 1,
+      "message": "with no users of the KABI fields (yet), it doesn\u0027t make sense that this would fix it. Maybe it just suppresses the issue somehow. It sounds like this has been observed on android12-5.10 where this KABI issue doesn\u0027t exist.\n\nWe did decide to go ahead with this patch and updating the KMI since these KABI fields are likely to be needed.",
+      "parentUuid": "13e1e74a_494b774a",
+      "revId": "cd36ed1471e026ae2c4ac358e7495d22da8e8a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9cc59373_5f7f428d",
@@ -155,6 +191,24 @@
       "writtenOn": "2021-07-22T12:39:41Z",
       "side": 1,
       "message": "This blank line might get to be removed.",
+      "revId": "cd36ed1471e026ae2c4ac358e7495d22da8e8a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e006b1f3_783878d8",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1611,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-23T21:22:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cc59373_5f7f428d",
       "revId": "cd36ed1471e026ae2c4ac358e7495d22da8e8a18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -244,6 +298,30 @@
       "side": 1,
       "message": "Got it very clearly. Thanks 😊",
       "parentUuid": "b7c1a9fd_22187ba9",
+      "range": {
+        "startLine": 1612,
+        "startChar": 1,
+        "endLine": 1615,
+        "endChar": 25
+      },
+      "revId": "cd36ed1471e026ae2c4ac358e7495d22da8e8a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83a13af7_4d68e40a",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1615,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-23T21:22:53Z",
+      "side": 1,
+      "message": "We\u0027re going ahead with this so the fields can be used.",
+      "parentUuid": "e1f2d7f2_1aac4e12",
       "range": {
         "startLine": 1612,
         "startChar": 1,
