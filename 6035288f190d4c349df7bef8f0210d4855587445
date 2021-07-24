@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df75bab9_03f7ed85",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2021-07-24T17:04:39Z",
+      "side": 1,
+      "message": "We can\u0027t remove __cfi_slowpath. You need to make sure these are built with LLVM\u003d1 LLVM_IAS\u003d1, or LTO/CFI end up being disabled in the config.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 60
+      },
+      "revId": "6035288f190d4c349df7bef8f0210d4855587445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
