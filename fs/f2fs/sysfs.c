@@ -596,9 +596,13 @@ F2FS_FEATURE_RO_ATTR(lost_found, FEAT_LOST_FOUND);
 F2FS_FEATURE_RO_ATTR(verity, FEAT_VERITY);
 #endif
 F2FS_FEATURE_RO_ATTR(sb_checksum, FEAT_SB_CHECKSUM);
+#ifdef CONFIG_UNICODE
 F2FS_FEATURE_RO_ATTR(casefold, FEAT_CASEFOLD);
+<<<<<<< HEAD   (2a9f50 Merge branch 'android11-5.4' into 'android11-5.4-lts')
 #ifdef CONFIG_F2FS_FS_COMPRESSION
 F2FS_FEATURE_RO_ATTR(compression, FEAT_COMPRESSION);
+=======
+>>>>>>> BRANCH (0a0beb Linux 5.4.135)
 #endif
 
 #define ATTR_LIST(name) (&f2fs_attr_##name.attr)
@@ -684,9 +688,13 @@ static struct attribute *f2fs_feat_attrs[] = {
 	ATTR_LIST(verity),
 #endif
 	ATTR_LIST(sb_checksum),
+#ifdef CONFIG_UNICODE
 	ATTR_LIST(casefold),
+<<<<<<< HEAD   (2a9f50 Merge branch 'android11-5.4' into 'android11-5.4-lts')
 #ifdef CONFIG_F2FS_FS_COMPRESSION
 	ATTR_LIST(compression),
+=======
+>>>>>>> BRANCH (0a0beb Linux 5.4.135)
 #endif
 	NULL,
 };
