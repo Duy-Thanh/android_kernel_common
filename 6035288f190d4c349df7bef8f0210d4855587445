@@ -22,6 +22,23 @@
       },
       "revId": "6035288f190d4c349df7bef8f0210d4855587445",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78468bde_0cac3588",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-25T07:28:03Z",
+      "side": 1,
+      "message": "Something went wrong when you created this, you have a lot of symbols in the log here that are already in the .xml file.  Please regenerate this again.",
+      "revId": "6035288f190d4c349df7bef8f0210d4855587445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
