@@ -211,6 +211,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e3875a7_d04e92b7",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3391,
+      "author": {
+        "id": 1195398
+      },
+      "writtenOn": "2021-07-25T09:47:41Z",
+      "side": 1,
+      "message": "Aha - I see.  This is the descriptor length of the rpmb.\n\nI think the problem is in ufshcd_map_desc_id_to_length which doesn\u0027t accept index as argument, and returned 0x2d in the first place.\n\nThanks,\nAvri",
+      "parentUuid": "6bd4847e_7d8acd22",
+      "revId": "ccb39fe50310ca3f8d43695ac11b4bc54e2e3c0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19b94849_0db7ab22",
