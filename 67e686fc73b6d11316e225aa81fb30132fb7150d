@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63617f7b_6afc9815",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-26T10:02:21Z",
+      "side": 1,
+      "message": "@maze, does this look ok to keep reverted based on the known bpf programs for Android12 at this point in time?",
+      "revId": "67e686fc73b6d11316e225aa81fb30132fb7150d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
