@@ -73,9 +73,9 @@
   blocking_notifier_call_chain
   blocking_notifier_chain_register
   blocking_notifier_chain_unregister
+  bpf_trace_run1
   bpf_trace_run10
   bpf_trace_run12
-  bpf_trace_run1
   bpf_trace_run2
   bpf_trace_run3
   bpf_trace_run4
@@ -757,6 +757,7 @@
   event_triggers_call
   extcon_get_state
   extcon_set_state_sync
+  failure_tracking
   fb_mode_option
   __fdget
   fd_install
@@ -827,6 +828,7 @@
   gpiochip_remove
   gpiochip_unlock_as_irq
   gpiod_direction_input
+  gpiod_direction_output
   gpiod_direction_output_raw
   gpiod_get_raw_value
   gpiod_get_raw_value_cansleep
@@ -881,6 +883,21 @@
   i2c_transfer_buffer_flags
   i2c_unregister_device
   i2c_verify_client
+  i3c_generic_ibi_alloc_pool
+  i3c_generic_ibi_free_pool
+  i3c_generic_ibi_get_free_slot
+  i3c_generic_ibi_recycle_slot
+  i3c_master_add_i3c_dev_locked
+  i3c_master_defslvs_locked
+  i3c_master_disec_locked
+  i3c_master_do_daa
+  i3c_master_enec_locked
+  i3c_master_entdaa_locked
+  i3c_master_get_free_addr
+  i3c_master_queue_ibi
+  i3c_master_register
+  i3c_master_set_info
+  i3c_master_unregister
   ida_alloc_range
   ida_destroy
   ida_free
@@ -988,9 +1005,9 @@
   is_dma_buf_file
   is_vmalloc_addr
   iterate_fd
+  jiffies
   jiffies_64_to_clock_t
   jiffies64_to_msecs
-  jiffies
   jiffies_to_msecs
   jiffies_to_usecs
   kasan_flag_enabled
@@ -1267,6 +1284,7 @@
   orderly_poweroff
   page_endio
   page_mapping
+  __page_pinner_migration_failed
   panic
   panic_notifier_list
   param_array_ops
@@ -1293,6 +1311,7 @@
   pcie_get_speed_cap
   pci_enable_atomic_ops_to_root
   pci_enable_device
+  pci_enable_pcie_error_reporting
   pci_enable_wake
   pci_find_bus
   pci_find_capability
@@ -1845,7 +1864,10 @@
   __traceiter_android_rvh_enqueue_task
   __traceiter_android_rvh_find_lowest_rq
   __traceiter_android_rvh_find_new_ilb
+  __traceiter_android_rvh_gic_v3_set_affinity
   __traceiter_android_rvh_post_init_entity_util_avg
+  __traceiter_android_rvh_replace_next_task_fair
+  __traceiter_android_rvh_sched_fork_init
   __traceiter_android_rvh_sched_newidle_balance
   __traceiter_android_rvh_sched_nohz_balancer_kick
   __traceiter_android_rvh_sched_rebalance_domains
@@ -1854,7 +1876,6 @@
   __traceiter_android_rvh_select_task_rq_rt
   __traceiter_android_vh_cpu_idle_enter
   __traceiter_android_vh_cpu_idle_exit
-  __traceiter_android_rvh_gic_v3_set_affinity
   __traceiter_android_vh_ipi_stop
   __traceiter_android_vh_scheduler_tick
   __traceiter_android_vh_show_mem
@@ -1893,7 +1914,10 @@
   __tracepoint_android_rvh_enqueue_task
   __tracepoint_android_rvh_find_lowest_rq
   __tracepoint_android_rvh_find_new_ilb
+  __tracepoint_android_rvh_gic_v3_set_affinity
   __tracepoint_android_rvh_post_init_entity_util_avg
+  __tracepoint_android_rvh_replace_next_task_fair
+  __tracepoint_android_rvh_sched_fork_init
   __tracepoint_android_rvh_sched_newidle_balance
   __tracepoint_android_rvh_sched_nohz_balancer_kick
   __tracepoint_android_rvh_sched_rebalance_domains
@@ -1902,7 +1926,6 @@
   __tracepoint_android_rvh_select_task_rq_rt
   __tracepoint_android_vh_cpu_idle_enter
   __tracepoint_android_vh_cpu_idle_exit
-  __tracepoint_android_rvh_gic_v3_set_affinity
   __tracepoint_android_vh_ipi_stop
   __tracepoint_android_vh_scheduler_tick
   __tracepoint_android_vh_show_mem
@@ -1985,6 +2008,7 @@
   tty_insert_flip_string_fixed_flag
   tty_kref_put
   tty_port_tty_get
+  typec_get_drvdata
   typec_register_partner
   typec_register_port
   typec_set_data_role
