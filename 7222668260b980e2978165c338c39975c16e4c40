@@ -16,6 +16,24 @@
       "message": "I think this is a correct change no matter what.  You are restoring the behavior where pipe buffers could be merged, and when that happened, the older kernel WOULD always do a wakeup.  That is what you are restoring here, as merging buffers still needs to notify userspace.\n\nOr I\u0027m reading the documentation really wrong.\n\nEither way I think this is a real fix to go upstream anyway.  Perhaps not with the huge comment saying this is buggy 😊",
       "revId": "7222668260b980e2978165c338c39975c16e4c40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a1be9fa_6a2e9985",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2021-07-26T17:29:09Z",
+      "side": 1,
+      "message": "Where did you read the documention about pipe buffer merging? I read \u0027man 2 epoll\u0027 and it says the userspace is expected to empty the pipe before doing epoll_wait, especially when the its doing so with EPOLLET + O_NONBLOCK.\n\nSee the FAQ #9 at - https://man7.org/linux/man-pages/man7/epoll.7.html",
+      "parentUuid": "2b735483_08542c85",
+      "revId": "7222668260b980e2978165c338c39975c16e4c40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
