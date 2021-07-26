@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "521e8e65_cf56cf6f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2021-07-26T02:05:32Z",
+      "side": 1,
+      "message": "\u003e We can\u0027t remove __cfi_slowpath. You need to make sure these are built with LLVM\u003d1 LLVM_IAS\u003d1, or LTO/CFI end up being disabled in the config.\n\nI\u0027m using the build script from android kernel: BUILD_CONFIG\u003dcommon/build.config.gki.aarch64.rockchip build/build_abi.sh\nand the build command is:\nmake O\u003d/home/kever/src/android/out_abi/android12-5.10/common LLVM\u003d1 LLVM_IAS\u003d1 DEPMOD\u003ddepmod DTC\u003ddtc Image modules Image.lz4 vmlinux\n\nSince the LTO is very very slow, I may add LTO\u003dthin or LTO\u003dnone sometimes, does this affect this config?",
+      "parentUuid": "df75bab9_03f7ed85",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 60
+      },
+      "revId": "6035288f190d4c349df7bef8f0210d4855587445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "78468bde_0cac3588",
@@ -37,6 +61,24 @@
       "writtenOn": "2021-07-25T07:28:03Z",
       "side": 1,
       "message": "Something went wrong when you created this, you have a lot of symbols in the log here that are already in the .xml file.  Please regenerate this again.",
+      "revId": "6035288f190d4c349df7bef8f0210d4855587445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a48121ec_ed03ad08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2021-07-26T02:05:32Z",
+      "side": 1,
+      "message": "Hi Greg,\nI\u0027m using build script from Android kernel:\nBUILD_CONFIG\u003dcommon/build.config.gki.aarch64.rockchip build/build_abi.sh -s\n\nThe build.config.gki.aarch64.rockchip is base on build.config.gki.aarch64 which add rockchip module fragment base on gki_defconfig.\n\nI may add LTO\u003dthin/none for this is too slow for me, so NOT sure why the .xml is not correct, am I using the wrong command?",
+      "parentUuid": "78468bde_0cac3588",
       "revId": "6035288f190d4c349df7bef8f0210d4855587445",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
