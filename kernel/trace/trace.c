@@ -310,7 +310,7 @@ static inline void ftrace_exports_disable(struct trace_export *export)
 		static_branch_dec(&trace_marker_exports_enabled);
 }
 
-static void ftrace_exports(struct ring_buffer_event *event, int flag)
+static void __nocfi ftrace_exports(struct ring_buffer_event *event, int flag)
 {
 	struct trace_export *export;
 
