@@ -81,6 +81,23 @@
       "parentUuid": "78468bde_0cac3588",
       "revId": "6035288f190d4c349df7bef8f0210d4855587445",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81b47b97_5535d94e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-26T06:32:47Z",
+      "side": 1,
+      "message": "You can not do LTO\u003dnone, that will change things as you see here, which is why the __cfi_slowpath symbol was removed.\n\nTry LTO\u003dthin, it should be much faster than the other method.",
+      "revId": "6035288f190d4c349df7bef8f0210d4855587445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
