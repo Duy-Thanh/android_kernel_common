@@ -51,6 +51,46 @@
       "parentUuid": "db45d120_4b3fd1dc",
       "revId": "67e686fc73b6d11316e225aa81fb30132fb7150d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a87912b_12924d96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-07-26T10:29:38Z",
+      "side": 1,
+      "message": "(that said, AFAIK we do not use bpf subprograms, so it probably doesn\u0027t matter either way)",
+      "revId": "67e686fc73b6d11316e225aa81fb30132fb7150d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70e2eeda_b03ce7ec",
+        "filename": "include/linux/bpf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-07-26T10:29:38Z",
+      "side": 1,
+      "message": "afaik this struct should not be covered by kabi??",
+      "range": {
+        "startLine": 759,
+        "startChar": 7,
+        "endLine": 759,
+        "endChar": 30
+      },
+      "revId": "67e686fc73b6d11316e225aa81fb30132fb7150d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
