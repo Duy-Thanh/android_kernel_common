@@ -33,6 +33,24 @@
       "message": "I honestly don\u0027t know... but AFAIK nothing bpf related should matter for KABI purposes, since there shouldn\u0027t be any out-of-core-kernel bpf stuff - at least there is none that I\u0027m aware of.\n\nHow does this patch break KABI?",
       "revId": "67e686fc73b6d11316e225aa81fb30132fb7150d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17ef4a97_50a3f81e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-07-26T10:29:04Z",
+      "side": 1,
+      "message": "I left a comment where it happens. See the parent change in the stack.",
+      "parentUuid": "db45d120_4b3fd1dc",
+      "revId": "67e686fc73b6d11316e225aa81fb30132fb7150d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
