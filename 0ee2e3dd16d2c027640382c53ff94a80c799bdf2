@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52c2974b_b0f7ff96",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-26T06:30:48Z",
+      "side": 1,
+      "message": "needs the \"real name\" here, not the email address alias.",
+      "range": {
+        "startLine": 14,
+        "startChar": 15,
+        "endLine": 14,
+        "endChar": 25
+      },
+      "revId": "0ee2e3dd16d2c027640382c53ff94a80c799bdf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09f09c88_8c501be3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-26T06:30:48Z",
+      "side": 1,
+      "message": "Why not send this upstream first?\n\nAnd always run scripts/checkpatch.pl so you do not add coding style problems.",
+      "revId": "0ee2e3dd16d2c027640382c53ff94a80c799bdf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
