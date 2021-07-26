@@ -16,6 +16,24 @@
       "message": "https://android-review.googlesource.com/c/kernel/common/+/1777705/1",
       "revId": "0fd3faaa41cd7eeb872f7c68e4d7a530ca5c918d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2d7eaf2_0d5787a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2021-07-26T10:31:04Z",
+      "side": 1,
+      "message": "Oops. Clicked unintentionally.\n\nhttps://android-review.googlesource.com/c/kernel/common/+/1777705/1\nseems to be ready. Could you please review this as well?",
+      "parentUuid": "34e8be53_46e6210f",
+      "revId": "0fd3faaa41cd7eeb872f7c68e4d7a530ca5c918d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
