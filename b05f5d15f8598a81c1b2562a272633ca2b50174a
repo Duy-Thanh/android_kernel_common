@@ -248,6 +248,24 @@
       "parentUuid": "bee698a8_62acf549",
       "revId": "b05f5d15f8598a81c1b2562a272633ca2b50174a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae7b2aad_bde54e69",
+        "filename": "kernel/sched/rt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1781415
+      },
+      "writtenOn": "2021-07-26T22:54:43Z",
+      "side": 1,
+      "message": "\u003e\u003etrace_android_rt_enqueue(rq, \u0026do_enqueue_pushable);\n\nI think you mean WALT should implement the rq-\u003ecpu \u003d\u003d raw_smp_processor_id() check in the tracehook, instead of in the enqueue path here.\n\nThat will subject the rq enqueue path to hook overheads. Instead of that we are updating WALT code to honor sync wakeups in RT - so we should be fine in the short term.\n\nI presume your concern is that other vendors/OEMs might see issues with this change. It is best to circle back with them. We are only adding a check at the enqueue side too see if the sync was honored and if so this task shouldnt (or should) be marked as migratable.\n\nAdditionally, I would like to revisit the reason for ignoring sync from CFS tasks. A CFS task waking up an RT will cause RT to immediately run. The concern was that a CFS task will run after the RT task and will simply sleep. In practice however, there is some data exchanged between RT and CFS, and when CFS is about to sleep it realizes that RT is done and resumes execution. IOW it doesn\u0027t sleep thereby avoiding costly dequeue and the subsequent enqueue operations.",
+      "parentUuid": "0a69a178_0d720403",
+      "revId": "b05f5d15f8598a81c1b2562a272633ca2b50174a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
