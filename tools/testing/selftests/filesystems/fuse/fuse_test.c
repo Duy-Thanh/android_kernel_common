@@ -58,7 +58,7 @@ static int bpf_test_trace(const char *substr)
 {
 	int result = TEST_FAILURE;
 	int tp = -1;
-	char trace_buffer[256] = {};
+	char trace_buffer[4096] = {};
 	ssize_t bytes_read;
 	TEST(tp = open("/sys/kernel/debug/tracing/trace_pipe",
 		       O_RDONLY | O_CLOEXEC), tp != -1);
@@ -280,6 +280,77 @@ out:
 	return result;
 }
 
+static int bpf_test_readdir(const char *mount_dir)
+{
+	const char *names[] = {"real", "partial", "fake", ".", ".."};
+	int result = TEST_FAILURE;
+	int bpf_fd = -1;
+	int src_fd = -1;
+	int fuse_dev = -1;
+	int pid = -1;
+	int status;
+	DIR *dir = NULL;
+	struct dirent *dirent;
+
+	TEST(src_fd = open(ft_src, O_DIRECTORY | O_RDONLY | O_CLOEXEC),
+	     src_fd != -1);
+	TESTEQUAL(create_file(src_fd, names[0], 1, 2), 0);
+	TESTEQUAL(create_file(src_fd, names[1], 1, 2), 0);
+	TESTEQUAL(install_bpf("test_trace.raw", &bpf_fd), 0);
+	TESTEQUAL(mount_fuse(mount_dir, bpf_fd, src_fd, &fuse_dev), 0);
+
+	FUSE_ACTION
+		int i, j;
+
+		TEST(dir = opendir(mount_dir), dir);
+		for (i = 0; i < ARRAY_SIZE(names); ++i) {
+			TEST(dirent = readdir(dir), dirent);
+
+			for (j = 0; j < ARRAY_SIZE(names); ++j)
+				if (names[j] &&
+				    strcmp(names[j], dirent->d_name) == 0) {
+					names[j] = NULL;
+					break;
+				}
+			TESTNE(j, ARRAY_SIZE(names));
+		}
+		TEST(dirent = readdir(dir), dirent == NULL);
+		TESTSYSCALL(closedir(dir));
+		dir = NULL;
+		TESTEQUAL(bpf_test_trace("readdir"), 0);
+	FUSE_DAEMON
+		uint8_t bytes_in[FUSE_MIN_READ_BUFFER];
+		uint8_t bytes_out[FUSE_MIN_READ_BUFFER];
+		struct fuse_in_header *in_header =
+			(struct fuse_in_header *)bytes_in;
+		ssize_t res = read(fuse_dev, bytes_in, sizeof(bytes_in));
+		struct fuse_dirent *fuse_dirent =
+			(struct fuse_dirent *) (bytes_in + res);
+
+		TESTGE(res, sizeof(*in_header));
+		TESTEQUAL(in_header->opcode, FUSE_READDIR | FUSE_POSTFILTER);
+		*fuse_dirent = (struct fuse_dirent) {
+			.ino = 100,
+			.off = 5,
+			.namelen = strlen("fake"),
+			.type = DT_REG,
+		};
+		strcpy((char*)(bytes_in + res + sizeof(*fuse_dirent)), "fake");
+		res += FUSE_DIRENT_ALIGN(sizeof(*fuse_dirent) + strlen("fake") + 1);
+		TESTFUSEOUTREAD(bytes_in + sizeof(struct fuse_in_header),
+				res - sizeof(struct fuse_in_header));
+	FUSE_DONE
+
+	result = TEST_SUCCESS;
+out:
+	closedir(dir);
+	close(fuse_dev);
+	umount(mount_dir);
+	close(src_fd);
+	close(bpf_fd);
+	return result;
+}
+
 static int parse_options(int argc, char *const *argv)
 {
 	signed char c;
@@ -358,6 +429,7 @@ int main(int argc, char *argv[])
 		MAKE_TEST(bpf_test_real),
 		MAKE_TEST(bpf_test_partial),
 		MAKE_TEST(bpf_test_attrs),
+		MAKE_TEST(bpf_test_readdir),
 	};
 #undef MAKE_TEST
 
@@ -375,8 +447,6 @@ int main(int argc, char *argv[])
 	}
 
 	umount2(mount_dir, MNT_FORCE);
-	rmdir(mount_dir);
-	rmdir(src_dir);
 	delete_dir_tree(mount_dir);
 	delete_dir_tree(src_dir);
 	return !ksft_get_fail_cnt() ? ksft_exit_pass() : ksft_exit_fail();

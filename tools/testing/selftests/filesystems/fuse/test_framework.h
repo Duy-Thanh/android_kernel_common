@@ -70,11 +70,13 @@ extern struct _test_options test_options;
 enum _operator {
 	_eq,
 	_ne,
+	_ge,
 };
 
 const char *_operator_name[] = {
 	"==",
 	"!=",
+	">=",
 };
 
 #define _TEST_OPERATOR(name, _type, format_specifier)			\
@@ -85,6 +87,7 @@ static inline int _test_operator_##name(const char *func, int line,	\
 	switch(o) {							\
 	case _eq: pass = a == b; break;					\
 	case _ne: pass = a != b; break;					\
+	case _ge: pass = a >= b; break;					\
 	}								\
 									\
 	if (!pass)							\
@@ -110,8 +113,8 @@ _TEST_OPERATOR(cp, char *, "%px")
 
 #define _CALL_TO(_type, name, a, b, o)					\
 	_type:_test_operator_##name(__func__, __LINE__,			\
-				  (_type) (long long int) a,		\
-				  (_type) (long long int) b, o)
+				  (_type) (long long int) (a),		\
+				  (_type) (long long int) (b), o)
 
 #define TESTOPERATOR(a, b, o)						\
 	do{								\
@@ -128,6 +131,7 @@ _TEST_OPERATOR(cp, char *, "%px")
 
 #define TESTEQUAL(a, b) TESTOPERATOR(a, b, _eq)
 #define TESTNE(a, b) TESTOPERATOR(a, b, _ne)
+#define TESTGE(a, b) TESTOPERATOR(a, b, _ge)
 
 /* For testing a syscall that returns 0 on success and sets errno otherwise */
 #define TESTSYSCALL(statement) TESTCONDERR((statement) == 0)
@@ -142,7 +146,7 @@ static inline void print_bytes(const void *data, size_t size)
 	for (i = 0; i < size; ++i) {
 		if (i % 0x10 == 0)
 			printf("%08x:", i);
-		printf("%02x ", (unsigned int) bytes[i]);
+		printf("%02x ", (unsigned int) (unsigned char) bytes[i]);
 		if (i % 0x10 == 0x0f)
 			printf("\n");
 	}

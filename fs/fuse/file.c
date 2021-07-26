@@ -349,6 +349,7 @@ static int fuse_release(struct inode *inode, struct file *file)
 {
 	struct fuse_conn *fc = get_fuse_conn(inode);
 
+	pr_debug("Paul\n");
 	if (fuse_release_use_backing(file))
 		fuse_release_backing(inode, file);
 

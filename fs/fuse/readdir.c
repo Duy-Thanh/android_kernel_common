@@ -8,6 +8,8 @@
 
 
 #include "fuse_i.h"
+
+#include <linux/bpf_fuse.h>
 #include <linux/iversion.h>
 #include <linux/posix_acl.h>
 #include <linux/pagemap.h>
@@ -121,7 +123,7 @@ static bool fuse_emit(struct file *file, struct dir_context *ctx,
 			dirent->type);
 }
 
-static int parse_dirfile(char *buf, size_t nbytes, struct file *file,
+int fuse_parse_dirfile(char *buf, size_t nbytes, struct file *file,
 			 struct dir_context *ctx)
 {
 	while (nbytes >= FUSE_NAME_OFFSET) {
@@ -357,7 +359,7 @@ static int fuse_readdir_uncached(struct file *file, struct dir_context *ctx)
 			res = parse_dirplusfile(page_address(page), res,
 						file, ctx, attr_version);
 		} else {
-			res = parse_dirfile(page_address(page), res, file,
+			res = fuse_parse_dirfile(page_address(page), res, file,
 					    ctx);
 		}
 	}
@@ -567,9 +569,13 @@ int fuse_readdir(struct file *file, struct dir_context *ctx)
 	struct fuse_file *ff = file->private_data;
 	struct inode *inode = file_inode(file);
 	int err;
+	int ext_flags = fuse_readdir_use_backing(file);
 
-	if (fuse_readdir_use_backing(file))
-		return fuse_readdir_backing(file, ctx);
+	if (ext_flags & FUSE_BPF_USER_FILTER)
+		/* TODO: user prefilter */;
+
+	if (ext_flags & FUSE_BPF_BACKING)
+		return fuse_readdir_backing(file, ctx, ext_flags);
 
 	if (fuse_is_bad(inode))
 		return -EIO;

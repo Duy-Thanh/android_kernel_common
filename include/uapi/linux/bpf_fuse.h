@@ -3,6 +3,13 @@
 
 #include <uapi/linux/limits.h>
 
+#define FUSE_BPF_USER_FILTER	1
+#define FUSE_BPF_BACKING	2
+#define FUSE_BPF_POST_FILTER	4
+#define FUSE_BPF_ERROR		8
+
+#define FUSE_POSTFILTER		0x20000
+
 struct bpf_fuse_data {
 	int fuse_opcode;
 

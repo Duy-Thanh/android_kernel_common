@@ -35,6 +35,7 @@
 #include <include/uapi/linux/bpf.h>
 
 #define PAGE_SIZE 4096
+#define FUSE_POSTFILTER 0x20000
 
 struct _test_options test_options;
 
@@ -272,9 +273,9 @@ static inline int install_bpf(const char *name, int *fd)
 		.insn_cnt = st.st_size / 8,
 		.insns = ptr_to_u64(filter),
 		.license = ptr_to_u64("GPL"),
-		.log_buf = ptr_to_u64(log),
-		.log_size = sizeof(log),
-		.log_level = 2,
+		.log_buf = test_options.verbose ? ptr_to_u64(log) : 0,
+		.log_size = test_options.verbose ? sizeof(log) : 0,
+		.log_level = test_options.verbose ? 2 : 0,
 	};
 	*fd = syscall(__NR_bpf, BPF_PROG_LOAD, &bpf_attr, sizeof(bpf_attr));
 	if (test_options.verbose)
