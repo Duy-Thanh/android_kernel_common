@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e609f055_e3484133",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 7893,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-07-27T16:13:29Z",
+      "side": 1,
+      "message": "do we need to wait for this being done before issuing another rpmb operation?",
+      "range": {
+        "startLine": 7893,
+        "startChar": 12,
+        "endLine": 7893,
+        "endChar": 37
+      },
+      "revId": "b62cb2648b200de9f781d4a0260d83a0217c6e27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
