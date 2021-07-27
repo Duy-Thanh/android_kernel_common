@@ -51,6 +51,24 @@
       "message": "Ok, but note that the original patch this fixes _was_ sent upstream already, so it would be good to verify that it was correct.",
       "revId": "1325ae0700360daffe44c1467c537cab1271a945",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6eb7291_c0b948aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1612695
+      },
+      "writtenOn": "2021-07-27T13:29:04Z",
+      "side": 1,
+      "message": "After my quick search, the status is like this:\n\n- Upstream patch [1] is totally basing on different code. dma_buf_attach() has been substituted by dma_buf_dynamic_attach. So no need to apply my fix there.\n\n- 5.4.y [2] is not applied with target patch which I am going to fix. So just be careful when applying in future. Or I need to cc. 5.4_stable?\n\n- android12-5.4-lts [3] has been applied with targe patch. But you might meet conflicts \nif my fix first in when you merge lts back into android12-5.4. Please beware of not revert my fix.\n\n[1] https://lore.kernel.org/lkml/20210713040742.2680135-1-hridya@google.com/#Z30drivers:dma-buf:dma-buf.c\n[2] https://kernel.googlesource.com/pub/scm/linux/kernel/git/stable/linux.git/+/refs/heads/linux-5.4.y/drivers/dma-buf/dma-buf.c#681\n[3] https://android-review.googlesource.com/c/kernel/common/+/1776151/-1..1/drivers/dma-buf/dma-buf.c#b723",
+      "parentUuid": "cb9b8b29_d65f28d4",
+      "revId": "1325ae0700360daffe44c1467c537cab1271a945",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
