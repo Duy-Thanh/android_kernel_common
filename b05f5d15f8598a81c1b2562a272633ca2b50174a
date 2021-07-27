@@ -302,6 +302,24 @@
       "parentUuid": "577ac9dc_5fbbcc54",
       "revId": "b05f5d15f8598a81c1b2562a272633ca2b50174a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "146f6995_5513770f",
+        "filename": "kernel/sched/rt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-27T20:03:22Z",
+      "side": 1,
+      "message": "\u003e We are able to add sync awareness for rt in walt. With that we arent critically dependent on this patch (for now).\n\nCan we abandon this patch and close the bug then?\n\n\u003e should_honor_rt_sync()  is not upstream AFAICT.\n\nYes, you are right. This is a perf optimization for cases where 2 RT threads are communicating.\n\n\u003e Drop the  task_has_rt_policy(rq-\u003ecurr)  in  should_honor_rt_sync()  we  should  honor a  rt sync even if a CFS task wakes up RT task.\n\nCan you file a bug with your rationale for this? I think your claim is that immediately preempting the CFS waker doesn\u0027t actually result in an extra wake for the tail of the CFS task since the RT task will have provided more for the CFS task to do. To me, that sounds very workload dependent, but we can discuss in the bug.",
+      "parentUuid": "6f110d57_2368b3ea",
+      "revId": "b05f5d15f8598a81c1b2562a272633ca2b50174a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
