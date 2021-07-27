@@ -34,6 +34,24 @@
       "parentUuid": "2b735483_08542c85",
       "revId": "7222668260b980e2978165c338c39975c16e4c40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96a7932f_1a7d01e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-27T06:29:50Z",
+      "side": 1,
+      "message": "I read the code, not the FAQ 😊\n\nThe \"problem\" with reading all of the data in the pipe is that a consumer can not always keep up with reading all of the data in the pipe, if the data is being sent to it at the same time.  So \"forcing\" userspace to read it all is kind of impossible.  I found this documentation somewhere, let me dig for the source...",
+      "parentUuid": "8a1be9fa_6a2e9985",
+      "revId": "7222668260b980e2978165c338c39975c16e4c40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
