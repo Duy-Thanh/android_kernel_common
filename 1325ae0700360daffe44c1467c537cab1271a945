@@ -86,6 +86,41 @@
       "message": "Hridya, I don\u0027t think the upstream version has this issue but please double-check.",
       "revId": "1325ae0700360daffe44c1467c537cab1271a945",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0563f8d_d425c168",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-07-27T20:45:04Z",
+      "side": 1,
+      "message": "Thanks for the catching the bug Orson. Like you said, the patch need not be sent upstream since this bug was introduced during backport.",
+      "revId": "1325ae0700360daffe44c1467c537cab1271a945",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "997e2120_fe2aaf62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-07-27T20:45:04Z",
+      "side": 1,
+      "message": "Yes, this is unfortunately a bug that was introduced in the backport to 5.4.",
+      "parentUuid": "9175d45e_d8caf7ac",
+      "revId": "1325ae0700360daffe44c1467c537cab1271a945",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
