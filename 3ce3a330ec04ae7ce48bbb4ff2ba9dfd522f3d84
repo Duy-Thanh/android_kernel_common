@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "339d7447_4ea6bfb9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-27T19:02:08Z",
+      "side": 1,
+      "message": "4.14-p will be deprecated before Android T ships. No need for this patch.",
+      "revId": "3ce3a330ec04ae7ce48bbb4ff2ba9dfd522f3d84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
