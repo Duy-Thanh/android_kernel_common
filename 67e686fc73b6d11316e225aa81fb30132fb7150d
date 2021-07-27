@@ -91,6 +91,30 @@
       },
       "revId": "67e686fc73b6d11316e225aa81fb30132fb7150d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6927b9d4_dedcc0c3",
+        "filename": "include/linux/bpf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-27T06:45:18Z",
+      "side": 1,
+      "message": "It is a deep call chain, and in the end all we care about is a pointer, but for now, I\u0027ll just recommend keeping the revert instead of having to respin the .xml update.",
+      "parentUuid": "70e2eeda_b03ce7ec",
+      "range": {
+        "startLine": 759,
+        "startChar": 7,
+        "endLine": 759,
+        "endChar": 30
+      },
+      "revId": "67e686fc73b6d11316e225aa81fb30132fb7150d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
