@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6b816dc_3200ab5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2021-07-27T18:11:15Z",
+      "side": 1,
+      "message": "This is a forward port of the overlayfs patch aosp/1534399, which got dropped during v5.11-rc1 merge cycle due to non-trivial merge conflicts. We need this and the subsequent fix for \"adb remount\" to work again on android-mainline kernels.",
+      "revId": "10a6fa0e067ee607e7207d8f49a91a73aebf3dae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
