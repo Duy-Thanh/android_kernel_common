@@ -52,6 +52,24 @@
       "parentUuid": "8a1be9fa_6a2e9985",
       "revId": "7222668260b980e2978165c338c39975c16e4c40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68994de8_69a8a5af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-27T06:34:30Z",
+      "side": 1,
+      "message": "If you have the book, \"The Linux Programming Interface\", look at section 63.4.6 which talks about Edge-Triggered Notification and a complex scheme for how to deal with file-descriptor starvation.\n\nBut also, the original code here before 5.5 did do this notification if the pipe data was being merged, so userspace was notified.  The rewrite dropped this, and your change adds it back, so I think that is correct.  But we should send this upstream to get more opinions on this to be sure.",
+      "parentUuid": "96a7932f_1a7d01e8",
+      "revId": "7222668260b980e2978165c338c39975c16e4c40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
