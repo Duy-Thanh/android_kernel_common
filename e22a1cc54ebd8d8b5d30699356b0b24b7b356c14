@@ -16,6 +16,24 @@
       "message": "Patching just 4.9 on P doesn\u0027t make sense; since P is out of support soon I propose we skip this one",
       "revId": "e22a1cc54ebd8d8b5d30699356b0b24b7b356c14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bd8a9d9_02e05597",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-27T18:49:18Z",
+      "side": 1,
+      "message": "I agree. 4.9-p will be deprecated before Andoroid T.",
+      "parentUuid": "3cb8caa2_febae045",
+      "revId": "e22a1cc54ebd8d8b5d30699356b0b24b7b356c14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
