@@ -16,6 +16,24 @@
       "message": "Why is this not sent upstream first?",
       "revId": "1325ae0700360daffe44c1467c537cab1271a945",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaf66700_b083c491",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1612695
+      },
+      "writtenOn": "2021-07-27T10:45:38Z",
+      "side": 1,
+      "message": "Upstream code is too different from here and has no similar problem like this.\nI believe this is a \"typo\" bug when do such specific changes to android12-5.4.\nYou can find the sibling patch [1] in android12-5.10 is good while [2] in android12-5.4 missing to release his lock. So I committed the fix to 5.4 only.\n\n[1] https://android-review.googlesource.com/c/kernel/common/+/1759004\n[2] https://android-review.googlesource.com/c/kernel/common/+/1760776",
+      "parentUuid": "b1f2992f_ea21845f",
+      "revId": "1325ae0700360daffe44c1467c537cab1271a945",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
