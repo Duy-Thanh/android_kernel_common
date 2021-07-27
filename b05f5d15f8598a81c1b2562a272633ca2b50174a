@@ -284,6 +284,24 @@
       "parentUuid": "ae7b2aad_bde54e69",
       "revId": "b05f5d15f8598a81c1b2562a272633ca2b50174a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f110d57_2368b3ea",
+        "filename": "kernel/sched/rt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1781415
+      },
+      "writtenOn": "2021-07-27T19:49:37Z",
+      "side": 1,
+      "message": "\u003e\u003eDoes that mean this patch isn\u0027t needed for now?\n\nWe are able to add sync awareness for rt in walt. With that we arent critically dependent on this patch (for now).\n\n\u003e\u003eYes, but even more generally, we prefer code that has been vetted upstream. If we are going to diverge from that, we prefer to isolate the divergent behavior into vendor code.\n\nshould_honor_rt_sync()  is not upstream AFAICT. This was a google addition perhaps requested by some OEM. I dont have access to BUG 157906395 which attempts to limit what rt tasks are migrateable\n\n\"\n ANDROID: sched/rt: Add support for rt sync wakeups\n\n    Some rt tasks undergo sync wakeup. Currently, these tasks will be placed\n    on other, often sleeping or otherwise idle CPUs, which can lead to\n    unnecessary power hits.\n\n    Bug: 157906395  \n \"\n\n\n\n\u003e\u003eWhat are you proposing?\n\n\nDrop the  task_has_rt_policy(rq-\u003ecurr)  in  should_honor_rt_sync()  we  should  honor a  rt sync even if a CFS task wakes up RT task.",
+      "parentUuid": "577ac9dc_5fbbcc54",
+      "revId": "b05f5d15f8598a81c1b2562a272633ca2b50174a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
