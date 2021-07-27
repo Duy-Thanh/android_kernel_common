@@ -34,6 +34,23 @@
       "parentUuid": "b1f2992f_ea21845f",
       "revId": "1325ae0700360daffe44c1467c537cab1271a945",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb9b8b29_d65f28d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-27T11:56:19Z",
+      "side": 1,
+      "message": "Ok, but note that the original patch this fixes _was_ sent upstream already, so it would be good to verify that it was correct.",
+      "revId": "1325ae0700360daffe44c1467c537cab1271a945",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
