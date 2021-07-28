@@ -118,6 +118,30 @@
       },
       "revId": "cccbf8cb6dadd355d1fe28477794f11b84b9347c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "272c5cb8_a5eccc00",
+        "filename": "drivers/usb/core/quirks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1767641
+      },
+      "writtenOn": "2021-07-28T03:06:17Z",
+      "side": 1,
+      "message": "hi Greg\nCould you review Yun-Chien\u0027s comment, please?\nhe is the real owner of this commit\n\nthanks a lot",
+      "parentUuid": "6a9e0b4a_a047bc3d",
+      "range": {
+        "startLine": 679,
+        "startChar": 0,
+        "endLine": 679,
+        "endChar": 51
+      },
+      "revId": "cccbf8cb6dadd355d1fe28477794f11b84b9347c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
