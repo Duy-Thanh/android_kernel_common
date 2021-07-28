@@ -33,6 +33,24 @@
       "message": "This commit breaks the build, how did you generate the file?\n\nI get the following errors:\n\nERROR: Differences between ksymtab and symbol list detected!\nSymbols missing from ksymtab:\n - dw8250_setup_port\n - rockchip_pcie_cfg_configuration_accesses\n - rockchip_pcie_deinit_phys\n - rockchip_pcie_disable_clocks\n - rockchip_pcie_enable_clocks\n - rockchip_pcie_init_port\n - rockchip_pcie_parse_dt\n\n\nPlease generate this again.",
       "revId": "049e275821e3d09ae45892e45a8bc7fef1397d8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abde369f_d1af223f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2021-07-28T00:34:42Z",
+      "side": 1,
+      "message": "I use cmd below:\nKMI_SYMBOL_LIST_MODULE_GROUPING\u003d0 BUILD_CONFIG\u003dcommon/build.config.gki.aarch64.rockchip build/build_abi.sh -u\nI only add defconfig fragment and build config for symbol list in this version, but actually the source code for module drivers are different and for sure more symbols to come because there are many drivers not upstreamed and will be modular later.\nI will check the dw8250 and rockchip pcie first.",
+      "parentUuid": "ea59f588_3e80c8ff",
+      "revId": "049e275821e3d09ae45892e45a8bc7fef1397d8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
