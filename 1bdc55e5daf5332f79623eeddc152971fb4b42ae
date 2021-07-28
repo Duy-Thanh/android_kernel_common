@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb31fd41_1e4d07d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2021-07-28T07:28:09Z",
+      "side": 1,
+      "message": "I have remove 8250 dwlib and rockchip pcie, and rebase to TOT.",
+      "revId": "1bdc55e5daf5332f79623eeddc152971fb4b42ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
