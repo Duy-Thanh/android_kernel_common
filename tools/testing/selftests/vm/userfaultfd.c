@@ -196,8 +196,17 @@ static void anon_release_pages(char *rel_area)
 
 static void anon_allocate_area(void **alloc_area)
 {
+<<<<<<< HEAD   (dc62f1 Merge branch 'android12-5.4' into 'android12-5.4-lts')
 	if (posix_memalign(alloc_area, page_size, nr_pages * page_size))
 		err("posix_memalign() failed");
+=======
+	*alloc_area = mmap(NULL, nr_pages * page_size, PROT_READ | PROT_WRITE,
+			   MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
+	if (*alloc_area == MAP_FAILED)
+		fprintf(stderr, "mmap of anonymous memory failed");
+		*alloc_area = NULL;
+	}
+>>>>>>> BRANCH (253dcc Linux 5.4.136)
 }
 
 static void noop_alias_mapping(__u64 *start, size_t len, unsigned long offset)
