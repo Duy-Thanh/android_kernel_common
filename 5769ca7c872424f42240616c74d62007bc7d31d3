@@ -52,6 +52,24 @@
       "parentUuid": "d004ff1e_28975657",
       "revId": "5769ca7c872424f42240616c74d62007bc7d31d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca8d9e43_d41791a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1632680
+      },
+      "writtenOn": "2021-07-28T12:25:52Z",
+      "side": 1,
+      "message": "vfs functions are enabled to read/write block device in a loadable modules like \u0027fs/pstore/blk.c\u0027\n\n\u0027kprobe\u0027 is used for debugging purpose. If it\u0027s not allowed, I will remove it from the internal driver.",
+      "parentUuid": "33b16ff5_7daeaab0",
+      "revId": "5769ca7c872424f42240616c74d62007bc7d31d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
