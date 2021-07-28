@@ -51,6 +51,24 @@
       "parentUuid": "ea59f588_3e80c8ff",
       "revId": "049e275821e3d09ae45892e45a8bc7fef1397d8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb03e1a4_f0779ad7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2021-07-28T01:24:06Z",
+      "side": 1,
+      "message": "dw8250_setup_port is inside the drivers/tty/serial/8250/8250_dwlib.c, which is enabled by the macro CONFIG_SERIAL_8250_DWLIB, and not able to modular, so I will need to update the gki_defconfig and add CONFIG_SERIAL_8250_DWLIB?\n\nrockchip pcie functions at drivers/pci/controller/pcie-rockchip.c are similar to dwlib, it\u0027s common functions instead of a standalone module, also need to update the gki_defconfig before I update these symbols?",
+      "parentUuid": "abde369f_d1af223f",
+      "revId": "049e275821e3d09ae45892e45a8bc7fef1397d8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
