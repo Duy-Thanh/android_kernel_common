@@ -33,6 +33,24 @@
       "message": "Why can you not just enable this in your device configuration?",
       "revId": "67606c9368e65e87a0917e6ad0d47274cf130c3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "116f9921_13704734",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2021-07-28T08:50:27Z",
+      "side": 1,
+      "message": "I enable this option just in case there is any code may depends on ARCH_ROCKCHIP which may affect the function or symbol. After check the source code again, we think we can enable this in our device configurartion instead of in common kernel.",
+      "parentUuid": "3913955a_8d193be7",
+      "revId": "67606c9368e65e87a0917e6ad0d47274cf130c3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
