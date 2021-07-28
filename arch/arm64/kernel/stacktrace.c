@@ -150,6 +150,7 @@ void notrace walk_stackframe(struct task_struct *tsk, struct stackframe *frame,
 	}
 }
 NOKPROBE_SYMBOL(walk_stackframe);
+EXPORT_SYMBOL_GPL(walk_stackframe);
 
 static void dump_backtrace_entry(unsigned long where, const char *loglvl)
 {
