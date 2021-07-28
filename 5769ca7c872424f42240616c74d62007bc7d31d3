@@ -106,6 +106,24 @@
       "parentUuid": "de515217_2428ec0a",
       "revId": "5769ca7c872424f42240616c74d62007bc7d31d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29f14806_c3c15635",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889770
+      },
+      "writtenOn": "2021-07-28T13:00:31Z",
+      "side": 1,
+      "message": "In \u0027fs/pstore/blk.c\u0027 \u0027generic_file_read_iter\u0027 is used for writing data into the block device.\n\nstatic ssize_t psblk_generic_blk_read(char *buf, size_t bytes, loff_t pos)\n{\n\t/* snip */\n\n\treturn generic_file_read_iter(\u0026kiocb, \u0026iter);\n}\n\nDo you mean than, I don\u0027t have a way to use this driver as a pstore back-end?",
+      "parentUuid": "76434422_a4723c77",
+      "revId": "5769ca7c872424f42240616c74d62007bc7d31d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
