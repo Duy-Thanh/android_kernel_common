@@ -6410,6 +6410,10 @@ static irqreturn_t ufshcd_tmc_handler(struct ufs_hba *hba)
 static irqreturn_t ufshcd_sl_intr(struct ufs_hba *hba, u32 intr_status)
 {
 	irqreturn_t retval = IRQ_NONE;
+	int info = 0;
+
+	trace_android_vh_ufs_sl_intr(hba, &info);
+	retval = (info) ? IRQ_HANDLED : IRQ_NONE;
 
 	if (intr_status & UFSHCD_UIC_MASK)
 		retval |= ufshcd_uic_cmd_compl(hba, intr_status);
