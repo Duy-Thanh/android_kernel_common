@@ -2336,6 +2336,7 @@ int ufshcd_send_uic_cmd(struct ufs_hba *hba, struct uic_command *uic_cmd)
 	if (!ret)
 		ret = ufshcd_wait_for_uic_cmd(hba, uic_cmd);
 
+	trace_android_vh_ufs_compl_uic_command(hba);
 	mutex_unlock(&hba->uic_cmd_mutex);
 
 	ufshcd_release(hba);
