@@ -16,6 +16,23 @@
       "message": "I have remove 8250 dwlib and rockchip pcie, and rebase to TOT.",
       "revId": "1bdc55e5daf5332f79623eeddc152971fb4b42ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a0fb01e_d93723e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-28T07:38:14Z",
+      "side": 1,
+      "message": "let me fix this up so that it is an initial commit that does not add any new symbols, and the symbol list is inserted in sorted order in the build list.  That will not touch the .xml file, making this easier to update and rebase with the other changes happening in this area.\n\nThen you can submit small changes that just add the new symbols that your devices need, and we can review them easier.\n\nGive me a few hours...",
+      "revId": "1bdc55e5daf5332f79623eeddc152971fb4b42ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
