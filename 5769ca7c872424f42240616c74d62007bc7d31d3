@@ -124,6 +124,24 @@
       "parentUuid": "76434422_a4723c77",
       "revId": "5769ca7c872424f42240616c74d62007bc7d31d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af7bd4ad_0cb9ae96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-28T13:05:22Z",
+      "side": 1,
+      "message": "Ah, missed that one, sorry.  Yes, that is fine, which is why I asked here 😊\n\nAnd if you rely on this, adding CONFIG_PSTORE_BLK to the build is a nice way around from having to maintain this on your own, that would make more sense as it is generic kernel code.",
+      "parentUuid": "29f14806_c3c15635",
+      "revId": "5769ca7c872424f42240616c74d62007bc7d31d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
