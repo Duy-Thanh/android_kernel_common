@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3adf97d0_a7c0cf28",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-07-29T08:44:12Z",
+      "side": 1,
+      "message": "This bug is quite sparse on details. Please could you explain how exporting this symbol helps with the sysrq console spam?",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 11,
+        "endChar": 14
+      },
+      "revId": "95409664c1376f7862bd7a43c44da135d6e222d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b309dbc3_3d1c69fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-07-29T08:44:12Z",
+      "side": 1,
+      "message": "This patch has been submitted against android-mainline rather than one of the GKI branches (e.g. android12-5.10). Is that intentional?",
+      "revId": "95409664c1376f7862bd7a43c44da135d6e222d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
