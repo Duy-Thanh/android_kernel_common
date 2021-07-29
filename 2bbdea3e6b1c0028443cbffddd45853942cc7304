@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82d7b42c_56292a8a",
+        "filename": "drivers/usb/core/quirks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-29T12:21:11Z",
+      "side": 1,
+      "message": "The naming for this is confusing.\n\nYou want to \"skip\" setting persist_enable if this value is 0 or 1?  It is not obvious at all.\n\nHow about no need for this at all, just do what you want in the trace point (enabling or disabling the persist_enable flag) and put the tracepoint _AFTER_ the check below where you have done it.  That way there is no need for a temp variable and changing any other logic at all.",
+      "range": {
+        "startLine": 660,
+        "startChar": 5,
+        "endLine": 660,
+        "endChar": 12
+      },
+      "revId": "2bbdea3e6b1c0028443cbffddd45853942cc7304",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
