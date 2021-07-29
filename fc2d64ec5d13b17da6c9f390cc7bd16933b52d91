@@ -16,6 +16,24 @@
       "message": "I would like to have a non-author review before approving this.\n\n\"Approvers use CR +1 to indicate OWNER approval only after CR+2 from the maintainer of the underlying code in the CL.\" -- go/gki-dr-no",
       "revId": "fc2d64ec5d13b17da6c9f390cc7bd16933b52d91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6a5f7d2_5b328bfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-07-29T11:27:39Z",
+      "side": 1,
+      "message": "unresolving",
+      "parentUuid": "4fd821ef_00705ac5",
+      "revId": "fc2d64ec5d13b17da6c9f390cc7bd16933b52d91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
