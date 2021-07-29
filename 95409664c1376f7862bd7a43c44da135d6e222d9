@@ -81,6 +81,23 @@
       "parentUuid": "b309dbc3_3d1c69fd",
       "revId": "95409664c1376f7862bd7a43c44da135d6e222d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd517a04_f4174fa5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-29T11:49:56Z",
+      "side": 1,
+      "message": "Please work to get your needed changes upstream so you do not need this exported symbol.",
+      "revId": "95409664c1376f7862bd7a43c44da135d6e222d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
