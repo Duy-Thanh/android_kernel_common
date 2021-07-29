@@ -213,6 +213,7 @@
       <elf-symbol name='__request_percpu_irq' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6d9ee2a0'/>
       <elf-symbol name='__request_region' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xca39ba0'/>
       <elf-symbol name='__rht_bucket_nested' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd0d156e9'/>
+      <elf-symbol name='__rt_mutex_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc368a979'/>
       <elf-symbol name='__rtc_register_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5077d52f'/>
       <elf-symbol name='__sb_end_write' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4c607649'/>
       <elf-symbol name='__sb_start_write' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc33f2aaa'/>
@@ -2320,6 +2321,7 @@
       <elf-symbol name='kernel_param_unlock' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x43a3b2a8'/>
       <elf-symbol name='kernel_power_off' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf184d189'/>
       <elf-symbol name='kernel_read' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2e40484b'/>
+      <elf-symbol name='kernel_read_file' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6cc08694'/>
       <elf-symbol name='kernel_recvmsg' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8a209aa3'/>
       <elf-symbol name='kernel_restart' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1e7bbcb3'/>
       <elf-symbol name='kernel_sendmsg' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6cd8d6b1'/>
@@ -2668,6 +2670,7 @@
       <elf-symbol name='mutex_trylock_recursive' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xae7e3a35'/>
       <elf-symbol name='mutex_unlock' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x409bcb62'/>
       <elf-symbol name='n_tty_ioctl_helper' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa2670f61'/>
+      <elf-symbol name='name_to_dev_t' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc10fddb8'/>
       <elf-symbol name='napi_complete_done' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2bfbcb94'/>
       <elf-symbol name='napi_consume_skb' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9016c94d'/>
       <elf-symbol name='napi_disable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4d4161ac'/>
@@ -28582,7 +28585,7 @@
           <var-decl name='work' type-id='ef9025d0' visibility='default' filepath='mm/slab.h' line='91' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__4' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/fsnotify_backend.h' line='298' column='1' id='9114ebb7'>
+      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/fsnotify_backend.h' line='298' column='1' id='9114ebb7'>
         <data-member access='public'>
           <var-decl name='obj' type-id='c66f5ec5' visibility='default' filepath='include/linux/fsnotify_backend.h' line='300' column='1'/>
         </data-member>
@@ -30265,7 +30268,7 @@
           <var-decl name='dev_scratch' type-id='7359adad' visibility='default' filepath='include/linux/skbuff.h' line='704' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__9' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/net/nexthop.h' line='96' column='1' id='21fca59c'>
+      <union-decl name='__anonymous_union__1' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/net/nexthop.h' line='96' column='1' id='21fca59c'>
         <data-member access='public'>
           <var-decl name='nh_info' type-id='e55edb2e' visibility='default' filepath='include/net/nexthop.h' line='97' column='1'/>
         </data-member>
@@ -32538,7 +32541,7 @@
           <var-decl name='rt_gw6' type-id='f6ed712a' visibility='default' filepath='include/net/route.h' line='64' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__10' size-in-bits='832' is-anonymous='yes' visibility='default' filepath='include/net/nexthop.h' line='56' column='1' id='757a0dbc'>
+      <union-decl name='__anonymous_union__2' size-in-bits='832' is-anonymous='yes' visibility='default' filepath='include/net/nexthop.h' line='56' column='1' id='757a0dbc'>
         <data-member access='public'>
           <var-decl name='fib_nhc' type-id='e1f89457' visibility='default' filepath='include/net/nexthop.h' line='57' column='1'/>
         </data-member>
@@ -95846,7 +95849,7 @@
           <var-decl name='userbits' type-id='c213d3d4' visibility='default' filepath='include/uapi/linux/videodev2.h' line='858' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__9' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1009' column='1' id='e0a2553c'>
+      <union-decl name='__anonymous_union__8' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1009' column='1' id='e0a2553c'>
         <data-member access='public'>
           <var-decl name='request_fd' type-id='3158a266' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1010' column='1'/>
         </data-member>
@@ -95854,7 +95857,7 @@
           <var-decl name='reserved' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1011' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__7' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1001' column='1' id='09960b26'>
+      <union-decl name='__anonymous_union__6' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1001' column='1' id='09960b26'>
         <data-member access='public'>
           <var-decl name='offset' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1002' column='1'/>
         </data-member>
@@ -95870,7 +95873,7 @@
       </union-decl>
       <typedef-decl name='__kernel_suseconds_t' type-id='6a11bd61' filepath='include/uapi/asm-generic/posix_types.h' line='41' column='1' id='55c6233e'/>
       <typedef-decl name='__kernel_time_t' type-id='6a11bd61' filepath='include/uapi/asm-generic/posix_types.h' line='89' column='1' id='f7d92306'/>
-      <union-decl name='__anonymous_union__4' size-in-bits='1600' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2234' column='1' id='08bd2345'>
+      <union-decl name='__anonymous_union__3' size-in-bits='1600' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2234' column='1' id='08bd2345'>
         <data-member access='public'>
           <var-decl name='pix' type-id='e8f6102b' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2235' column='1'/>
         </data-member>
@@ -96102,7 +96105,7 @@
           <var-decl name='height' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/videodev2.h' line='416' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__8' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='948' column='1' id='9942b293'>
+      <union-decl name='__anonymous_union__7' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='948' column='1' id='9942b293'>
         <data-member access='public'>
           <var-decl name='mem_offset' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/videodev2.h' line='949' column='1'/>
         </data-member>
@@ -96113,7 +96116,7 @@
           <var-decl name='fd' type-id='3158a266' visibility='default' filepath='include/uapi/linux/videodev2.h' line='951' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__5' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='499' column='1' id='930baada'>
+      <union-decl name='__anonymous_union__4' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='499' column='1' id='930baada'>
         <data-member access='public'>
           <var-decl name='ycbcr_enc' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/videodev2.h' line='501' column='1'/>
         </data-member>
@@ -96121,7 +96124,7 @@
           <var-decl name='hsv_enc' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/videodev2.h' line='503' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__6' size-in-bits='8' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2192' column='1' id='29c254d4'>
+      <union-decl name='__anonymous_union__5' size-in-bits='8' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2192' column='1' id='29c254d4'>
         <data-member access='public'>
           <var-decl name='ycbcr_enc' type-id='8f048e17' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2193' column='1'/>
         </data-member>
@@ -96956,7 +96959,7 @@
         <enumerator name='V4L2_ASYNC_MATCH_I2C' value='2'/>
         <enumerator name='V4L2_ASYNC_MATCH_FWNODE' value='3'/>
       </enum-decl>
-      <union-decl name='__anonymous_union__3' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/media/v4l2-async.h' line='81' column='1' id='5c61413a'>
+      <union-decl name='__anonymous_union__2' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/media/v4l2-async.h' line='81' column='1' id='5c61413a'>
         <data-member access='public'>
           <var-decl name='fwnode' type-id='4a935625' visibility='default' filepath='include/media/v4l2-async.h' line='82' column='1'/>
         </data-member>
@@ -98928,7 +98931,7 @@
           <var-decl name='parm' type-id='1ccea1b5' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2254' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__15' size-in-bits='1600' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2250' column='1' id='1ccea1b5'>
+      <union-decl name='__anonymous_union__14' size-in-bits='1600' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2250' column='1' id='1ccea1b5'>
         <data-member access='public'>
           <var-decl name='capture' type-id='f88a5c22' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2251' column='1'/>
         </data-member>
@@ -100269,7 +100272,7 @@
           <var-decl name='' type-id='d749ec6e' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1512' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__1' size-in-bits='1024' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1512' column='1' id='d749ec6e'>
+      <union-decl name='__anonymous_union__' size-in-bits='1024' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1512' column='1' id='d749ec6e'>
         <data-member access='public'>
           <var-decl name='bt' type-id='ecc13ba0' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1513' column='1'/>
         </data-member>
@@ -100782,7 +100785,7 @@
           <var-decl name='' type-id='7bbb3c88' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1578' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__2' size-in-bits='1024' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1578' column='1' id='7bbb3c88'>
+      <union-decl name='__anonymous_union__1' size-in-bits='1024' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1578' column='1' id='7bbb3c88'>
         <data-member access='public'>
           <var-decl name='bt' type-id='e5bfe593' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1579' column='1'/>
         </data-member>
@@ -100906,7 +100909,7 @@
         <enumerator name='V4L2_ASYNC_MATCH_I2C' value='2'/>
         <enumerator name='V4L2_ASYNC_MATCH_FWNODE' value='3'/>
       </enum-decl>
-      <union-decl name='__anonymous_union__3' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/media/v4l2-async.h' line='81' column='1' id='5c61413a'>
+      <union-decl name='__anonymous_union__2' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/media/v4l2-async.h' line='81' column='1' id='5c61413a'>
         <data-member access='public'>
           <var-decl name='fwnode' type-id='4a935625' visibility='default' filepath='include/media/v4l2-async.h' line='82' column='1'/>
         </data-member>
@@ -101415,7 +101418,7 @@
           <var-decl name='fmt' type-id='08bd2345' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2243' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__4' size-in-bits='1600' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2234' column='1' id='08bd2345'>
+      <union-decl name='__anonymous_union__3' size-in-bits='1600' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2234' column='1' id='08bd2345'>
         <data-member access='public'>
           <var-decl name='pix' type-id='e8f6102b' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2235' column='1'/>
         </data-member>
@@ -101479,7 +101482,7 @@
           <var-decl name='xfer_func' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/videodev2.h' line='506' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__5' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='499' column='1' id='930baada'>
+      <union-decl name='__anonymous_union__4' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='499' column='1' id='930baada'>
         <data-member access='public'>
           <var-decl name='ycbcr_enc' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/videodev2.h' line='501' column='1'/>
         </data-member>
@@ -101536,7 +101539,7 @@
           <var-decl name='reserved' type-id='81144473' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2165' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__6' size-in-bits='8' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2192' column='1' id='29c254d4'>
+      <union-decl name='__anonymous_union__5' size-in-bits='8' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2192' column='1' id='29c254d4'>
         <data-member access='public'>
           <var-decl name='ycbcr_enc' type-id='8f048e17' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2193' column='1'/>
         </data-member>
@@ -101675,7 +101678,7 @@
           <var-decl name='userbits' type-id='c213d3d4' visibility='default' filepath='include/uapi/linux/videodev2.h' line='858' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__7' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1001' column='1' id='09960b26'>
+      <union-decl name='__anonymous_union__6' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1001' column='1' id='09960b26'>
         <data-member access='public'>
           <var-decl name='offset' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1002' column='1'/>
         </data-member>
@@ -101706,7 +101709,7 @@
           <var-decl name='reserved' type-id='9d263779' visibility='default' filepath='include/uapi/linux/videodev2.h' line='955' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__8' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='948' column='1' id='9942b293'>
+      <union-decl name='__anonymous_union__7' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='948' column='1' id='9942b293'>
         <data-member access='public'>
           <var-decl name='mem_offset' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/videodev2.h' line='949' column='1'/>
         </data-member>
@@ -101717,7 +101720,7 @@
           <var-decl name='fd' type-id='3158a266' visibility='default' filepath='include/uapi/linux/videodev2.h' line='951' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__9' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1009' column='1' id='e0a2553c'>
+      <union-decl name='__anonymous_union__8' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1009' column='1' id='e0a2553c'>
         <data-member access='public'>
           <var-decl name='request_fd' type-id='3158a266' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1010' column='1'/>
         </data-member>
@@ -101976,7 +101979,7 @@
           <var-decl name='controls' type-id='264baaf7' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1695' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__10' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1685' column='1' id='3e79fede'>
+      <union-decl name='__anonymous_union__9' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1685' column='1' id='3e79fede'>
         <data-member access='public'>
           <var-decl name='which' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1689' column='1'/>
         </data-member>
@@ -101995,7 +101998,7 @@
           <var-decl name='' type-id='319b4f74' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1673' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__11' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1673' column='1' id='319b4f74'>
+      <union-decl name='__anonymous_union__10' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1673' column='1' id='319b4f74'>
         <data-member access='public'>
           <var-decl name='value' type-id='3158a266' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1674' column='1'/>
         </data-member>
@@ -102032,7 +102035,7 @@
           <var-decl name='reserved' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1765' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__12' size-in-bits='256' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1761' column='1' id='3cef873b'>
+      <union-decl name='__anonymous_union__11' size-in-bits='256' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1761' column='1' id='3cef873b'>
         <data-member access='public'>
           <var-decl name='name' type-id='7e67d89d' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1762' column='1'/>
         </data-member>
@@ -102156,7 +102159,7 @@
           <var-decl name='' type-id='96b0dd6a' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1968' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__13' size-in-bits='256' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1968' column='1' id='96b0dd6a'>
+      <union-decl name='__anonymous_union__12' size-in-bits='256' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1968' column='1' id='96b0dd6a'>
         <data-member access='public'>
           <var-decl name='raw' type-id='f1fdc4dc' visibility='default' filepath='include/uapi/linux/videodev2.h' line='1971' column='1'/>
         </data-member>
@@ -102177,7 +102180,7 @@
           <var-decl name='' type-id='ddc566bc' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2003' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__14' size-in-bits='512' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2003' column='1' id='ddc566bc'>
+      <union-decl name='__anonymous_union__13' size-in-bits='512' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2003' column='1' id='ddc566bc'>
         <data-member access='public'>
           <var-decl name='stop' type-id='e0122dec' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2006' column='1'/>
         </data-member>
@@ -102214,7 +102217,7 @@
           <var-decl name='parm' type-id='1ccea1b5' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2254' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__15' size-in-bits='1600' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2250' column='1' id='1ccea1b5'>
+      <union-decl name='__anonymous_union__14' size-in-bits='1600' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2250' column='1' id='1ccea1b5'>
         <data-member access='public'>
           <var-decl name='capture' type-id='f88a5c22' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2251' column='1'/>
         </data-member>
@@ -102308,7 +102311,7 @@
           <var-decl name='reserved' type-id='839e8989' visibility='default' filepath='include/uapi/linux/videodev2.h' line='815' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__16' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='810' column='1' id='8e6aae74'>
+      <union-decl name='__anonymous_union__15' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='810' column='1' id='8e6aae74'>
         <data-member access='public'>
           <var-decl name='discrete' type-id='10186cf6' visibility='default' filepath='include/uapi/linux/videodev2.h' line='811' column='1'/>
         </data-member>
@@ -102367,7 +102370,7 @@
           <var-decl name='reserved' type-id='839e8989' visibility='default' filepath='include/uapi/linux/videodev2.h' line='845' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__17' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='840' column='1' id='cfd72743'>
+      <union-decl name='__anonymous_union__16' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='840' column='1' id='cfd72743'>
         <data-member access='public'>
           <var-decl name='discrete' type-id='5f37256e' visibility='default' filepath='include/uapi/linux/videodev2.h' line='841' column='1'/>
         </data-member>
@@ -144601,10 +144604,30 @@
       </function-type>
     </abi-instr>
     <abi-instr address-size='64' path='fs/exec.c' language='LANG_C89'>
+      <enum-decl name='kernel_read_file_id' filepath='include/linux/fs.h' line='3058' column='1' id='e0a13163'>
+        <underlying-type type-id='9cac1fee'/>
+        <enumerator name='READING_UNKNOWN' value='0'/>
+        <enumerator name='READING_FIRMWARE' value='1'/>
+        <enumerator name='READING_FIRMWARE_PREALLOC_BUFFER' value='2'/>
+        <enumerator name='READING_MODULE' value='3'/>
+        <enumerator name='READING_KEXEC_IMAGE' value='4'/>
+        <enumerator name='READING_KEXEC_INITRAMFS' value='5'/>
+        <enumerator name='READING_POLICY' value='6'/>
+        <enumerator name='READING_X509_CERTIFICATE' value='7'/>
+        <enumerator name='READING_MAX_ID' value='8'/>
+      </enum-decl>
       <function-decl name='__register_binfmt' mangled-name='__register_binfmt' filepath='fs/exec.c' line='81' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__register_binfmt'>
         <parameter type-id='7cc59444' name='fmt' filepath='fs/exec.c' line='81' column='1'/>
         <parameter type-id='95e97e5e' name='insert' filepath='fs/exec.c' line='81' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='kernel_read_file' mangled-name='kernel_read_file' filepath='fs/exec.c' line='896' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kernel_read_file'>
+        <parameter type-id='77e79a4b' name='file' filepath='fs/exec.c' line='896' column='1'/>
+        <parameter type-id='63e171df' name='buf' filepath='fs/exec.c' line='896' column='1'/>
+        <parameter type-id='b53e8dbb' name='size' filepath='fs/exec.c' line='896' column='1'/>
+        <parameter type-id='69bf7bee' name='max_size' filepath='fs/exec.c' line='897' column='1'/>
+        <parameter type-id='e0a13163' name='id' filepath='fs/exec.c' line='897' column='1'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='__get_task_comm' mangled-name='__get_task_comm' filepath='fs/exec.c' line='1242' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__get_task_comm'>
         <parameter type-id='26a90f95' name='buf' filepath='fs/exec.c' line='1242' column='1'/>
@@ -146499,6 +146522,10 @@
       </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='init/do_mounts.c' language='LANG_C89'>
+      <function-decl name='name_to_dev_t' mangled-name='name_to_dev_t' filepath='init/do_mounts.c' line='222' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='name_to_dev_t'>
+        <parameter type-id='80f4b756' name='name' filepath='init/do_mounts.c' line='222' column='1'/>
+        <return type-id='8504f260'/>
+      </function-decl>
       <function-decl name='class_find_device' mangled-name='class_find_device' filepath='include/linux/device.h' line='668' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='class_find_device'>
         <parameter type-id='67aca04f'/>
         <parameter type-id='fa0b179b'/>
@@ -149331,6 +149358,12 @@
       </function-decl>
       <function-decl name='rt_mutex_unlock' mangled-name='rt_mutex_unlock' filepath='kernel/locking/rtmutex.c' line='1601' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rt_mutex_unlock'>
         <parameter type-id='3992a90f' name='lock' filepath='kernel/locking/rtmutex.c' line='1601' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='__rt_mutex_init' mangled-name='__rt_mutex_init' filepath='kernel/locking/rtmutex.c' line='1675' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__rt_mutex_init'>
+        <parameter type-id='3992a90f' name='lock' filepath='kernel/locking/rtmutex.c' line='1675' column='1'/>
+        <parameter type-id='80f4b756' name='name' filepath='kernel/locking/rtmutex.c' line='1675' column='1'/>
+        <parameter type-id='a57283f9' name='key' filepath='kernel/locking/rtmutex.c' line='1676' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
     </abi-instr>
@@ -191185,6 +191218,6 @@
 </abi-corpus-group>
 
 <!--
-     libabigail: abidw: 2.0.0-6bca1bdb-soong
+     libabigail: abidw: 2.0.0SOONG BUILD NUMBER PLACEHOLDER
      built with: clang: Android (7284624, based on r416183b) clang version 12.0.5 (https://android.googlesource.com/toolchain/llvm-project c935d99d7cf2016289302412d708641d52d2f7ee)
 -->
