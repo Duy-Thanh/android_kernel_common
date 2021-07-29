@@ -16,6 +16,24 @@
       "message": "Hi Greg,\nCould you share the script changes for generate this commit? many update the script in build directory? I can understand there should be a \u0027sort\u0027 for symbollist, but not sure about the update for the .xml file.",
       "revId": "198e728044cb776d3a64b6989e4a6254a2901329",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96151d5b_d64940d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-29T12:12:35Z",
+      "side": 1,
+      "message": "No script was used, other than the in-tree build_abi.sh one.\n\nI just ran that script, looked at the output showing what symbols were attempting to be added, and then removed them from the symbol list.\n\nAnd yes, I sorted the symbol list as it was out-of-order and made searching for the needed symbols harder.  It should be easy to keep them in sorted order now, but there is no requirement.",
+      "parentUuid": "2508f48d_277d363c",
+      "revId": "198e728044cb776d3a64b6989e4a6254a2901329",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
