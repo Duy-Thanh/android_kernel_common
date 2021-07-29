@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e50dbbbd_78915ad6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-29T11:50:41Z",
+      "side": 1,
+      "message": "If you need this symbol only for debugging, please add it to the android debugging module which is there for this reason!",
+      "parentUuid": "aa91ad84_312fdbbe",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 11,
+        "endChar": 14
+      },
+      "revId": "95409664c1376f7862bd7a43c44da135d6e222d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b309dbc3_3d1c69fd",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
