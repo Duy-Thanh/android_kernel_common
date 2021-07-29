@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2508f48d_277d363c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2021-07-29T01:02:00Z",
+      "side": 1,
+      "message": "Hi Greg,\nCould you share the script changes for generate this commit? many update the script in build directory? I can understand there should be a \u0027sort\u0027 for symbollist, but not sure about the update for the .xml file.",
+      "revId": "198e728044cb776d3a64b6989e4a6254a2901329",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
