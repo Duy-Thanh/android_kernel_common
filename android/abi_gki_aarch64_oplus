@@ -187,6 +187,7 @@
   cpufreq_driver_fast_switch
   cpufreq_driver_resolve_freq
   __cpufreq_driver_target
+  cpufreq_driver_test_flags
   cpufreq_enable_fast_switch
   cpufreq_freq_attr_scaling_available_freqs
   cpufreq_freq_attr_scaling_boost_freqs
@@ -1666,6 +1667,7 @@
   thermal_zone_of_sensor_unregister
   tick_nohz_get_sleep_length
   time64_to_tm
+  topology_scale_freq_invariant
   topology_set_thermal_pressure
   topology_update_done
   total_swapcache_pages
@@ -1735,6 +1737,7 @@
   __traceiter_android_vh_ipi_stop
   __traceiter_android_vh_jiffies_update
   __traceiter_android_vh_logbuf
+  __traceiter_android_vh_map_util_freq
   __traceiter_android_vh_printk_hotplug
   __traceiter_android_vh_scheduler_tick
   __traceiter_android_vh_show_max_freq
@@ -1813,6 +1816,7 @@
   __tracepoint_android_vh_ipi_stop
   __tracepoint_android_vh_jiffies_update
   __tracepoint_android_vh_logbuf
+  __tracepoint_android_vh_map_util_freq
   __tracepoint_android_vh_printk_hotplug
   __tracepoint_android_vh_scheduler_tick
   __tracepoint_android_vh_show_max_freq
