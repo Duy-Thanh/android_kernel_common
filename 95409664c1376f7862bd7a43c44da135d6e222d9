@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa91ad84_312fdbbe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1345812
+      },
+      "writtenOn": "2021-07-29T11:02:44Z",
+      "side": 1,
+      "message": "Thanks for catching this. Here is how we are going to use it (I also pasted this on b/194967894#comment2):\n\nTo identify call trace and determine whether they are duplicated, we leverage kernel function \"walk_stackframe\" to access return addresses of each call frame in a call trace, and use these (e.g.: hashing them) to compare call traces. With these information we can print a duplicated call trace only once in the log, and specify tasks that share this call trace, to save log buffer space.\n\nA rough example:\n\n\u003d Before \u003d\nTask A\n  schedule+0x60\n  wait_for_event+0x40\n  sys_wait++0x90  \nTask B\n  busy+0x8\n  fs_read_file+0x240\n  sys_read++0x8\nTask C\n  schedule+0x60\n  wait_for_event+0x40\n  sys_wait++0x90\n\n\u003d After \u003d\nTask A / Task C\n  schedule+0x60\n  wait_for_event+0x40\n  sys_wait++0x90  \nTask B\n  busy+0x8\n  fs_read_file+0x240\n  sys_read++0x8",
+      "parentUuid": "3adf97d0_a7c0cf28",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 11,
+        "endChar": 14
+      },
+      "revId": "95409664c1376f7862bd7a43c44da135d6e222d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b309dbc3_3d1c69fd",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -37,6 +61,24 @@
       "writtenOn": "2021-07-29T08:44:12Z",
       "side": 1,
       "message": "This patch has been submitted against android-mainline rather than one of the GKI branches (e.g. android12-5.10). Is that intentional?",
+      "revId": "95409664c1376f7862bd7a43c44da135d6e222d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7dfb8a4_5e00a980",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1345812
+      },
+      "writtenOn": "2021-07-29T11:02:44Z",
+      "side": 1,
+      "message": "I have also uploaded the same patch to android12-5.10 (pa/1779651), and it\u0027s because I thought I should upload it to both android-mainline and GKI branch. Please correct me if any of these branches isn\u0027t suitable for this patch.",
+      "parentUuid": "b309dbc3_3d1c69fd",
       "revId": "95409664c1376f7862bd7a43c44da135d6e222d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
