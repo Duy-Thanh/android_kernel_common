@@ -3,6 +3,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "41ea15ab_24345020",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-07-29T09:07:54Z",
+      "side": 1,
+      "message": "\u003e Commit needs to contain a properly formatted Bug: or Fixes: line\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nPlease fix.",
+      "parentUuid": "af5d76eb_f16ad819",
+      "revId": "cd1e85d97b6e0738e035728a636fa218dc3699d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "824f6602_43bd9af6",
         "filename": "android/abi_gki_aarch64_fcnt",
         "patchSetId": 1
