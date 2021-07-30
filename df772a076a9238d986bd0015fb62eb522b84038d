@@ -73,6 +73,29 @@
       "message": "Fixed by patch set 2.",
       "revId": "df772a076a9238d986bd0015fb62eb522b84038d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0251f028_0ad8252f",
+        "filename": "android/abi_gki_aarch64_fcnt",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-30T10:10:24Z",
+      "side": 1,
+      "message": "no module name for these?",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 16
+      },
+      "revId": "df772a076a9238d986bd0015fb62eb522b84038d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
