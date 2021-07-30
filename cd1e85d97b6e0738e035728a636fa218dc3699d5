@@ -207,6 +207,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b7ae3b2_121ea8ba",
+        "filename": "android/abi_gki_aarch64_fcnt",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1889794
+      },
+      "writtenOn": "2021-07-30T09:19:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9f35924_21925a03",
+      "range": {
+        "startLine": 49,
+        "startChar": 14,
+        "endLine": 49,
+        "endChar": 16
+      },
+      "revId": "cd1e85d97b6e0738e035728a636fa218dc3699d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fd685af_9b753b23",
@@ -220,6 +244,30 @@
       "writtenOn": "2021-07-29T09:52:43Z",
       "side": 1,
       "message": "again, drivers should not open/close files.",
+      "range": {
+        "startLine": 56,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 12
+      },
+      "revId": "cd1e85d97b6e0738e035728a636fa218dc3699d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e1a5061_d727692f",
+        "filename": "android/abi_gki_aarch64_fcnt",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1889794
+      },
+      "writtenOn": "2021-07-30T09:19:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fd685af_9b753b23",
       "range": {
         "startLine": 56,
         "startChar": 2,
