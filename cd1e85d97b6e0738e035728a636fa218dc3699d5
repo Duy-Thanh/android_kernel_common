@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11ca7aa0_444a9238",
+        "filename": "android/abi_gki_aarch64_fcnt",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1889794
+      },
+      "writtenOn": "2021-07-30T09:18:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "824f6602_43bd9af6",
+      "range": {
+        "startLine": 8,
+        "startChar": 2,
+        "endLine": 8,
+        "endChar": 15
+      },
+      "revId": "cd1e85d97b6e0738e035728a636fa218dc3699d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db2a1b2d_5780884e",
