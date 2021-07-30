@@ -89,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f355bcb8_b4bb021a",
+        "filename": "android/abi_gki_aarch64_fcnt",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1889794
+      },
+      "writtenOn": "2021-07-30T09:19:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db2a1b2d_5780884e",
+      "range": {
+        "startLine": 14,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 11
+      },
+      "revId": "cd1e85d97b6e0738e035728a636fa218dc3699d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2052d31e_6bb43d79",
@@ -102,6 +126,30 @@
       "writtenOn": "2021-07-29T09:07:30Z",
       "side": 1,
       "message": "same here, this is not allowed by drivers.",
+      "range": {
+        "startLine": 15,
+        "startChar": 2,
+        "endLine": 15,
+        "endChar": 18
+      },
+      "revId": "cd1e85d97b6e0738e035728a636fa218dc3699d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c86e996f_ac600143",
+        "filename": "android/abi_gki_aarch64_fcnt",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1889794
+      },
+      "writtenOn": "2021-07-30T09:19:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2052d31e_6bb43d79",
       "range": {
         "startLine": 15,
         "startChar": 2,
