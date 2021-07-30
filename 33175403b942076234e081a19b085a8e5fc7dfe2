@@ -16,6 +16,24 @@
       "message": "Just as a heads up, we\u0027ve bisected this patch down as the cause of some odd early boot crashes (usually in xhci) on db845c:\n  https://bugs.96boards.org/show_bug.cgi?id\u003d886#c3\n  \nIts not making much sense yet, but wanted to share in case others are seeing similar.",
       "revId": "33175403b942076234e081a19b085a8e5fc7dfe2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa2ae8c7_c395cde6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-30T07:03:14Z",
+      "side": 1,
+      "message": "There is a real xhci bug happening due to padding being added to the xhci driver, perhaps you are hitting that?",
+      "parentUuid": "53111979_3655aca6",
+      "revId": "33175403b942076234e081a19b085a8e5fc7dfe2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
