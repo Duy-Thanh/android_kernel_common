@@ -1049,6 +1049,11 @@
   hex2bin
   hex_dump_to_buffer
   hex_to_bin
+  hid_add_device
+  hid_allocate_device
+  hid_destroy_device
+  hid_input_report
+  hid_parse_report
   hrtimer_active
   hrtimer_cancel
   hrtimer_forward
@@ -2333,6 +2338,7 @@
   spi_register_controller
   __spi_register_driver
   spi_setup
+  spi_async
   spi_sync
   spi_unregister_controller
   __splice_from_pipe
