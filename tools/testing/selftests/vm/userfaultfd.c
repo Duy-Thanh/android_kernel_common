@@ -198,8 +198,15 @@ static void anon_allocate_area(void **alloc_area)
 {
 	*alloc_area = mmap(NULL, nr_pages * page_size, PROT_READ | PROT_WRITE,
 			   MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
+<<<<<<< HEAD   (4bef4f Merge branch 'android12-5.4' into 'android12-5.4-lts')
 	if (*alloc_area == MAP_FAILED)
 		err("posix_memalign() failed");
+=======
+	if (*alloc_area == MAP_FAILED) {
+		fprintf(stderr, "mmap of anonymous memory failed");
+		*alloc_area = NULL;
+	}
+>>>>>>> BRANCH (5b1de8 Linux 5.4.137)
 }
 
 static void noop_alias_mapping(__u64 *start, size_t len, unsigned long offset)
