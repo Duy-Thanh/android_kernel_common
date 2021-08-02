@@ -79,6 +79,30 @@
       },
       "revId": "c3a51b2f34ceb014844081187fcbe3a03aac851b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfa7299a_583a6fd5",
+        "filename": "build.config.gki.aarch64",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1889794
+      },
+      "writtenOn": "2021-08-02T09:30:03Z",
+      "side": 1,
+      "message": "sorry.\n\nI will be careful.",
+      "parentUuid": "7dc3567b_eca5605c",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 28
+      },
+      "revId": "c3a51b2f34ceb014844081187fcbe3a03aac851b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
