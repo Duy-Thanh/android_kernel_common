@@ -39,6 +39,23 @@
       "message": "OK. It has been fixed",
       "revId": "c3a51b2f34ceb014844081187fcbe3a03aac851b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aff990cf_090834b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-02T06:52:59Z",
+      "side": 1,
+      "message": "Let me do the first \"initial\" file for you, as it seems the tools are a bit complex for your build systems.  Then you can add any missing symbols that I did not add, give me a few hours...",
+      "revId": "c3a51b2f34ceb014844081187fcbe3a03aac851b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
