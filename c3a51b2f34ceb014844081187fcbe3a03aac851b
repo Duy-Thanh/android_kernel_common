@@ -60,6 +60,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2cb1e5ae_74e80cc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889794
+      },
+      "writtenOn": "2021-08-02T09:32:48Z",
+      "side": 1,
+      "message": "Thank you for fixing it.\nI\u0027ll wait.\n\nCurrently there are no new symbols added.\nAfter this, if you need my work, please give me instructions.",
+      "parentUuid": "aff990cf_090834b3",
+      "revId": "c3a51b2f34ceb014844081187fcbe3a03aac851b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7dc3567b_eca5605c",
         "filename": "build.config.gki.aarch64",
         "patchSetId": 3
