@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "802aeb43_ad810fa9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2021-08-02T23:38:18Z",
+      "side": 1,
+      "message": "If ABI is not good for GKI, please comment it.\nThanks.",
+      "revId": "ca80b64019f2a8f708d81c9751f97e83967e5895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "831c5b2a_62b5232f",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2021-08-02T23:38:18Z",
+      "side": 1,
+      "message": "DRM DP module driver use it.",
+      "revId": "ca80b64019f2a8f708d81c9751f97e83967e5895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4509815e_00fd7865",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 862,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2021-08-02T23:38:18Z",
+      "side": 1,
+      "message": "DRM DP module driver.",
+      "revId": "ca80b64019f2a8f708d81c9751f97e83967e5895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a76fe9e_8170c275",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 1343,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2021-08-02T23:38:18Z",
+      "side": 1,
+      "message": "PCIe module driver use it. Other vendor (QCOM) Alaredy include it.",
+      "revId": "ca80b64019f2a8f708d81c9751f97e83967e5895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
