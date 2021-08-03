@@ -51,6 +51,24 @@
       "parentUuid": "f41f38af_c3041526",
       "revId": "ac9716bef39717be0e42d8f9655755b14eb1d2e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2794b0df_31a49354",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-03T10:39:05Z",
+      "side": 1,
+      "message": "Odd, I will check the tools sort function, it seems like the LANG is set differently here.\n\nAnd why have you turned off grouping?  That would make things much easier to review here.\n\nGiven that you are adding just over 600 new symbols, this is going to take some review, so grouping it by module name might make things much easier.\n\nHow about doing this one subsystem/driver type at a time?  Like do the serial driver support first, then USB, and so on.  That would make it easier to review and merge instead of having to redo the whole thing over one symbol that we do not agree on in the middle of the whole list.\n\nthanks!",
+      "parentUuid": "5fc8183f_4f08e62a",
+      "revId": "ac9716bef39717be0e42d8f9655755b14eb1d2e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
