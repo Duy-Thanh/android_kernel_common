@@ -16,6 +16,24 @@
       "message": "FROMLIST: needs a pointer to the message on lore.kernel.org.",
       "revId": "6aa9f27afe08e6940776e67b85b637770bc609d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f36fa39_83876c73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-08-03T17:36:01Z",
+      "side": 1,
+      "message": "Is this the link that should be integrated in the patch description?\n\nhttps://lore.kernel.org/lkml/1627313074-436260-1-git-send-email-psodagud@codeaurora.org/",
+      "parentUuid": "89420e6d_f41d410b",
+      "revId": "6aa9f27afe08e6940776e67b85b637770bc609d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
