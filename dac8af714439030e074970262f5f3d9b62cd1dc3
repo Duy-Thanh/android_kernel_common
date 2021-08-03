@@ -16,6 +16,24 @@
       "message": "let\u0027s see if this breaks the abi, sorry for not including it earlier...",
       "revId": "dac8af714439030e074970262f5f3d9b62cd1dc3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce49f45f_6eac6011",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2021-08-03T01:29:11Z",
+      "side": 1,
+      "message": "Never mind, I just found usb device function on IMX8M can\u0027t work without this config, so submit this patch.",
+      "parentUuid": "8962b3e3_7a18548e",
+      "revId": "dac8af714439030e074970262f5f3d9b62cd1dc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
