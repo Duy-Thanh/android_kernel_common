@@ -16,6 +16,24 @@
       "message": "upstream?",
       "revId": "df537d2ceae6802b64a2f312a92fe849d21562aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2475266_b345b470",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-08-03T18:31:20Z",
+      "side": 1,
+      "message": "This patch has been posted on the linux-block mailing list and the FROMLIST: and Link: tags have been added.",
+      "parentUuid": "8de1ade3_9dea0887",
+      "revId": "df537d2ceae6802b64a2f312a92fe849d21562aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
