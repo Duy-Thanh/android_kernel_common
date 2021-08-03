@@ -33,6 +33,24 @@
       "message": "You resorted the list, why?",
       "revId": "ac9716bef39717be0e42d8f9655755b14eb1d2e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fc8183f_4f08e62a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2021-08-03T08:42:40Z",
+      "side": 1,
+      "message": "I generate this with command below without any change:\nKMI_SYMBOL_LIST_MODULE_GROUPING\u003d0 BUILD_CONFIG\u003dcommon/build.config.rockchip build/build_abi.sh -u\n\nWhat script or option should I modify to sync with the output you get?",
+      "parentUuid": "f41f38af_c3041526",
+      "revId": "ac9716bef39717be0e42d8f9655755b14eb1d2e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
