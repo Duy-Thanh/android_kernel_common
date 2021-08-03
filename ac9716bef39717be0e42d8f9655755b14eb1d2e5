@@ -16,6 +16,23 @@
       "message": "Please list the change in symbols that the tool provides when you update the .xml file so that we can see what changed.",
       "revId": "ac9716bef39717be0e42d8f9655755b14eb1d2e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f41f38af_c3041526",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-03T08:31:28Z",
+      "side": 1,
+      "message": "You resorted the list, why?",
+      "revId": "ac9716bef39717be0e42d8f9655755b14eb1d2e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
