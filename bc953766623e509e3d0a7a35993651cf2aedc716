@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25198cf8_0f286129",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 2
+      },
+      "lineNbr": 1799,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-08-03T14:40:02Z",
+      "side": 1,
+      "message": "Where is the __traceiter_* variant of all those tracepoints? build_abi.sh should add them for you automatically. We need both to guarantee ABI stability of tracepoints.",
+      "range": {
+        "startLine": 1799,
+        "startChar": 2,
+        "endLine": 1799,
+        "endChar": 46
+      },
+      "revId": "bc953766623e509e3d0a7a35993651cf2aedc716",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
