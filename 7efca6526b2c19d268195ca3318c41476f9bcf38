@@ -34,6 +34,24 @@
       "parentUuid": "b05f5aa7_1eb66e6f",
       "revId": "7efca6526b2c19d268195ca3318c41476f9bcf38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35675d06_29983257",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-03T07:20:24Z",
+      "side": 1,
+      "message": "Please resubmit them, they must have gotten lost somewhere.  You all do have the drivers that use these properties submitted as well, right?",
+      "parentUuid": "ca52ab05_7fd5bb04",
+      "revId": "7efca6526b2c19d268195ca3318c41476f9bcf38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
