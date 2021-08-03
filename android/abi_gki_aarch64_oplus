@@ -1796,9 +1796,12 @@
   __tracepoint_android_rvh_update_misfit_status
   __tracepoint_android_rvh_wake_up_new_task
   __tracepoint_android_vh_allow_domain_state
+  __tracepoint_android_vh_alter_mutex_list_add
   __tracepoint_android_vh_binder_restore_priority
   __tracepoint_android_vh_binder_set_priority
+  __tracepoint_android_vh_binder_wait_for_work
   __tracepoint_android_vh_binder_wakeup_ilocked
+  __tracepoint_android_vh_build_sched_domains
   __tracepoint_android_vh_check_uninterruptible_tasks
   __tracepoint_android_vh_check_uninterruptible_tasks_dn
   __tracepoint_android_vh_cpu_idle_enter
@@ -1813,11 +1816,16 @@
   __tracepoint_android_vh_ipi_stop
   __tracepoint_android_vh_jiffies_update
   __tracepoint_android_vh_logbuf
+  __tracepoint_android_vh_mutex_unlock_slowpath
+  __tracepoint_android_vh_mutex_wait_finish
+  __tracepoint_android_vh_mutex_wait_start
   __tracepoint_android_vh_printk_hotplug
+  __tracepoint_android_vh_rwsem_wake_finish
   __tracepoint_android_vh_scheduler_tick
   __tracepoint_android_vh_show_max_freq
   __tracepoint_android_vh_show_resume_epoch_val
   __tracepoint_android_vh_show_suspend_epoch_val
+  __tracepoint_android_vh_sync_txn_recvd
   __tracepoint_android_vh_timer_calc_index
   __tracepoint_android_vh_update_topology_flags_workfn
   __tracepoint_binder_transaction_received
