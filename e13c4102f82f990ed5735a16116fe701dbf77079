@@ -16,6 +16,40 @@
       "message": "OK, I uploaded 2nd patch set. Please review.\nIf I find more, then I\u0027m going to upload it later.\n\nThanks.",
       "revId": "e13c4102f82f990ed5735a16116fe701dbf77079",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d25d5679_92aa7add",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2021-08-03T05:05:02Z",
+      "side": 1,
+      "message": "Resolve draft comments.",
+      "revId": "e13c4102f82f990ed5735a16116fe701dbf77079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d3ddc48_29e55c36",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 2
+      },
+      "lineNbr": 1712,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2021-08-03T05:05:02Z",
+      "side": 1,
+      "message": "Sound Codec use it.",
+      "revId": "e13c4102f82f990ed5735a16116fe701dbf77079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

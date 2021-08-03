@@ -52,6 +52,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d369d56_9a1fbbf1",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2021-08-03T05:05:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "831c5b2a_62b5232f",
+      "revId": "ca80b64019f2a8f708d81c9751f97e83967e5895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4509815e_00fd7865",
@@ -69,6 +87,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f38ded8_5cccc7d0",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 862,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2021-08-03T05:05:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4509815e_00fd7865",
+      "revId": "ca80b64019f2a8f708d81c9751f97e83967e5895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a76fe9e_8170c275",
@@ -82,6 +118,24 @@
       "writtenOn": "2021-08-02T23:38:18Z",
       "side": 1,
       "message": "PCIe module driver use it. Other vendor (QCOM) Alaredy include it.",
+      "revId": "ca80b64019f2a8f708d81c9751f97e83967e5895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1ec48d4_15beff03",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 1
+      },
+      "lineNbr": 1343,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2021-08-03T05:05:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a76fe9e_8170c275",
       "revId": "ca80b64019f2a8f708d81c9751f97e83967e5895",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
