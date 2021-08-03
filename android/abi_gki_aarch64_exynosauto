@@ -1433,6 +1433,7 @@
 
 # required by vbufq-be-module.ko
   drain_workqueue
+  filp_open
 
 # required by vdriver-lib-module.ko
   kset_create_and_add
