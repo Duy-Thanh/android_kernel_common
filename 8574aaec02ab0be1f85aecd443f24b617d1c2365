@@ -33,6 +33,23 @@
       "message": "kick off tree-hugger only...",
       "revId": "8574aaec02ab0be1f85aecd443f24b617d1c2365",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5718ea34_c0ec93d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-03T11:54:39Z",
+      "side": 1,
+      "message": "This breaks the build:\n\nERROR: Differences between ksymtab and symbol list detected!\nSymbols missing from ksymtab:\n - this_card\n",
+      "revId": "8574aaec02ab0be1f85aecd443f24b617d1c2365",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
