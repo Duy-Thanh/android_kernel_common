@@ -16,6 +16,24 @@
       "message": "what happened to this series?  Why was it never accepted upstream?  When will it be resubmitted and accepted there?",
       "revId": "7efca6526b2c19d268195ca3318c41476f9bcf38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca52ab05_7fd5bb04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1770429
+      },
+      "writtenOn": "2021-08-03T07:00:21Z",
+      "side": 1,
+      "message": "We upstream these patches last year. But in the final V10, no one reviewed these patches, and no one raised any questions.",
+      "parentUuid": "b05f5aa7_1eb66e6f",
+      "revId": "7efca6526b2c19d268195ca3318c41476f9bcf38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
