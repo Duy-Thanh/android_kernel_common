@@ -16,6 +16,52 @@
       "message": "(somewhat derived from https://android-review.googlesource.com/c/kernel/common/+/1645148\nsome notes on how to test at https://android-review.googlesource.com/c/kernel/common/+/1734120 but need to also test hard idle timer mode)",
       "revId": "b24eefcba60d21a1930ffdf169f12d22b2e628fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcd4d7ca_c144b6c9",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1678010
+      },
+      "writtenOn": "2021-08-03T13:39:11Z",
+      "side": 1,
+      "message": "i have take care with https://android-review.googlesource.com/c/kernel/common/+/1771126",
+      "range": {
+        "startLine": 284,
+        "startChar": 1,
+        "endLine": 284,
+        "endChar": 33
+      },
+      "revId": "b24eefcba60d21a1930ffdf169f12d22b2e628fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62e7ec23_21066f18",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1678010
+      },
+      "writtenOn": "2021-08-03T13:39:11Z",
+      "side": 1,
+      "message": "reset_timer is using some of the variables like  last_modified_timer, work_pending, delayed_timer_triger which are specific to idle timers .We can retain the earlier code and avoid these for alarm timers , Please check https://android-review.googlesource.com/c/kernel/common/+/1771126",
+      "range": {
+        "startLine": 478,
+        "startChar": 1,
+        "endLine": 486,
+        "endChar": 2
+      },
+      "revId": "b24eefcba60d21a1930ffdf169f12d22b2e628fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9efe2fcf_a1f3d5aa",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1678010
+      },
+      "writtenOn": "2021-08-03T13:39:11Z",
+      "side": 0,
+      "message": "Please check the initial xt_IDLETIMER commit\n\nnetfilter: xtables: idletimer target implementation\n\nThis patch implements an idletimer Xtables target that can be used to\nidentify when interfaces have been idle for a certain period of time.\n\nTimers are identified by labels and are created when a rule is set with a new\nlabel. The rules also take a timeout value (in seconds) as an option. If\nmore than one rule uses the same timer label, the timer will be restarted\nwhenever any of the rules get a hit.\n\nOne entry for each timer is created in sysfs. This attribute contains the\ntimer remaining for the timer to expire. The attributes are located under\nthe xt_idletimer class:\n\n/sys/class/xt_idletimer/timers/\u003clabel\u003e\n\nWhen the timer expires, the target module sends a sysfs notification to the\nuserspace, which can then decide what to do (eg. disconnect to save power).\n\nCc: Timo Teras \u003ctimo.teras@iki.fi\u003e\nSigned-off-by: Luciano Coelho \u003cluciano.coelho@nokia.com\u003e\nSigned-off-by: Patrick McHardy \u003ckaber@trash.net\u003e",
+      "range": {
+        "startLine": 575,
+        "startChar": 2,
+        "endLine": 575,
+        "endChar": 48
+      },
+      "revId": "71759356aacbe3a965b593477ff8c27e210eebba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcbe762b_e8d78435",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1678010
+      },
+      "writtenOn": "2021-08-03T13:39:11Z",
+      "side": 0,
+      "message": "If more than one rule uses the same timer label, the timer will be restarted\nwhenever any of the rules get a hit. This is from initial commit.",
+      "revId": "71759356aacbe3a965b593477ff8c27e210eebba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14823658_f0398345",
         "filename": "net/netfilter/xt_IDLETIMER.c",
         "patchSetId": 2
@@ -38,6 +78,30 @@
       "side": 0,
       "message": "(and I think that also applies for send_nl_msg)",
       "parentUuid": "14823658_f0398345",
+      "range": {
+        "startLine": 619,
+        "startChar": 0,
+        "endLine": 619,
+        "endChar": 52
+      },
+      "revId": "71759356aacbe3a965b593477ff8c27e210eebba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32899854_a3c1296a",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1678010
+      },
+      "writtenOn": "2021-08-03T13:39:11Z",
+      "side": 0,
+      "message": "timeout checks are taken care in idletimer_tg_helper function . Can you please check .  Regarding timer_type and  send_nl_msg  can you please give more details .",
+      "parentUuid": "8ad23b8e_86646ccd",
       "range": {
         "startLine": 619,
         "startChar": 0,
