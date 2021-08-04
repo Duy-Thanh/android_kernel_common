@@ -52,6 +52,24 @@
       "parentUuid": "ca52ab05_7fd5bb04",
       "revId": "7efca6526b2c19d268195ca3318c41476f9bcf38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd58fa28_20989ada",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1770429
+      },
+      "writtenOn": "2021-08-04T02:44:59Z",
+      "side": 1,
+      "message": "Hi sir,\n\nI will resubmit these patches.\n \nBut the driver is ko, do I need submit them?",
+      "parentUuid": "35675d06_29983257",
+      "revId": "7efca6526b2c19d268195ca3318c41476f9bcf38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
