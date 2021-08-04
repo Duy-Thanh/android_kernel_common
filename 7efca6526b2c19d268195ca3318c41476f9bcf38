@@ -106,6 +106,24 @@
       "parentUuid": "cf9786ac_763e11af",
       "revId": "7efca6526b2c19d268195ca3318c41476f9bcf38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42536597_bfdefa20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-04T12:54:31Z",
+      "side": 1,
+      "message": "Great, please also submit those upstream for inclusion in the kernel tree there.  I thought that was going to happen last time, what prevented this from happening then?",
+      "parentUuid": "9535b3a6_0b5a2312",
+      "revId": "7efca6526b2c19d268195ca3318c41476f9bcf38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
