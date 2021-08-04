@@ -37,6 +37,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "829eebc3_250cd26b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2021-08-04T22:27:46Z",
+      "side": 1,
+      "message": "Hello,\n\nWould somebody check this \"floating\" commit?\nThis was \"Active\" state when I start review, but now, state was changed to \"Merge Conflict\" and cannot be merged until now. (for 1 day, no action)\n\nPlease do some action.\nIf I must rebase commit manually, I\u0027ll do it.\nIn that case, I think I have to update \"abi_gki_aarch64.xml\" also, and start review again.\n\nThanks.",
+      "revId": "e13c4102f82f990ed5735a16116fe701dbf77079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9d3ddc48_29e55c36",
         "filename": "android/abi_gki_aarch64_exynos",
         "patchSetId": 2
