@@ -68,6 +68,24 @@
       "parentUuid": "5718ea34_c0ec93d8",
       "revId": "8574aaec02ab0be1f85aecd443f24b617d1c2365",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2f14829_18757053",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-04T06:45:46Z",
+      "side": 1,
+      "message": "A \"normal\" build of the kernel will generate this report.  use the build.sh script for that, or the build_api.sh script will also generate this.\n\nYou seem to be using a modified kernel tree here, please run this against a \"clean\" GKI kernel.",
+      "parentUuid": "4043d4b5_3fc6b66f",
+      "revId": "8574aaec02ab0be1f85aecd443f24b617d1c2365",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
