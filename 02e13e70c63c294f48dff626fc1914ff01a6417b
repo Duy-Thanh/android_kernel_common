@@ -22,6 +22,30 @@
       },
       "revId": "02e13e70c63c294f48dff626fc1914ff01a6417b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4af94fac_433f6ddd",
+        "filename": "android/abi_gki_aarch64_galaxy",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1632680
+      },
+      "writtenOn": "2021-08-04T09:50:45Z",
+      "side": 1,
+      "message": "We added __traceiter_* symbols to abi_gki_aarch64_galaxy file. \nPlease check it again.",
+      "parentUuid": "dbee8cd7_c5243151",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 41
+      },
+      "revId": "02e13e70c63c294f48dff626fc1914ff01a6417b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
