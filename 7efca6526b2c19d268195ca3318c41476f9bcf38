@@ -70,6 +70,24 @@
       "parentUuid": "35675d06_29983257",
       "revId": "7efca6526b2c19d268195ca3318c41476f9bcf38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf9786ac_763e11af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-04T06:49:03Z",
+      "side": 1,
+      "message": "Yes, of course, you have to submit users of new symbols and apis to the kernel, otherwise the new symbols will not be added.  Why has the driver not been submitted since last year when this first came up?\n\nDo you have a link to the source code for the driver so that we can provide help doing this if needed?",
+      "parentUuid": "fd58fa28_20989ada",
+      "revId": "7efca6526b2c19d268195ca3318c41476f9bcf38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
