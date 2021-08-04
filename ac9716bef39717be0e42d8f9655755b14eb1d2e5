@@ -69,6 +69,24 @@
       "parentUuid": "5fc8183f_4f08e62a",
       "revId": "ac9716bef39717be0e42d8f9655755b14eb1d2e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9882fe1_bb83ef6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2021-08-04T00:54:35Z",
+      "side": 1,
+      "message": "I turn off the group by module because it seems like other vendor like qcom, mtk do it in this way.\nI can send a version with sort by module, but it\u0027s not able to send one by one, because it\u0027s too slow for the LTO build. and there is something wrong in the script because it need build with LTO twice if I use the \u0027-u\u0027 option.",
+      "parentUuid": "2794b0df_31a49354",
+      "revId": "ac9716bef39717be0e42d8f9655755b14eb1d2e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

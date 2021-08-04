@@ -50,6 +50,24 @@
       "message": "This breaks the build:\n\nERROR: Differences between ksymtab and symbol list detected!\nSymbols missing from ksymtab:\n - this_card\n",
       "revId": "8574aaec02ab0be1f85aecd443f24b617d1c2365",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4043d4b5_3fc6b66f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2021-08-04T00:54:35Z",
+      "side": 1,
+      "message": "Hi Greg,\nWhat command can get this report? I can check this before I send the patch if I can do it.",
+      "parentUuid": "5718ea34_c0ec93d8",
+      "revId": "8574aaec02ab0be1f85aecd443f24b617d1c2365",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
