@@ -87,6 +87,24 @@
       "parentUuid": "2794b0df_31a49354",
       "revId": "ac9716bef39717be0e42d8f9655755b14eb1d2e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ed9175c_e02b73d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-04T06:04:09Z",
+      "side": 1,
+      "message": "Some vendors do this, some do not, it is up to you.  But trying to approve/review such a huge list all at once is very difficult.\n\nBuild with the thin-lto option, it is much faster and should be completed in 10 minutes or so.",
+      "parentUuid": "e9882fe1_bb83ef6e",
+      "revId": "ac9716bef39717be0e42d8f9655755b14eb1d2e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
