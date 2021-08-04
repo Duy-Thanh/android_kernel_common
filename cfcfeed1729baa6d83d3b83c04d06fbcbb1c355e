@@ -16,6 +16,24 @@
       "message": "OEMs should add their own symbol lists, please do not modify lists from other vendors/companies.\n\nJust add a new file here please.",
       "revId": "cfcfeed1729baa6d83d3b83c04d06fbcbb1c355e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02d7bb32_a8b08073",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-08-04T08:34:09Z",
+      "side": 1,
+      "message": "And add the file to build.config.gki.aarch64 as well.",
+      "parentUuid": "f7e7eb80_0d3b222c",
+      "revId": "cfcfeed1729baa6d83d3b83c04d06fbcbb1c355e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
