@@ -210,8 +210,15 @@ static void anon_allocate_area(void **alloc_area)
 {
 	*alloc_area = mmap(NULL, nr_pages * page_size, PROT_READ | PROT_WRITE,
 			   MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
+<<<<<<< HEAD   (1fbeac UPSTREAM: pipe: make pipe writes always wake up readers)
 	if (*alloc_area == MAP_FAILED)
 		err("posix_memalign() failed");
+=======
+	if (*alloc_area == MAP_FAILED) {
+		fprintf(stderr, "mmap of anonymous memory failed");
+		*alloc_area = NULL;
+	}
+>>>>>>> BRANCH (9746c2 Linux 5.10.56)
 }
 
 static void noop_alias_mapping(__u64 *start, size_t len, unsigned long offset)
