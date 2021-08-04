@@ -22,6 +22,30 @@
       },
       "revId": "bc953766623e509e3d0a7a35993651cf2aedc716",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9455703_7827995a",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 2
+      },
+      "lineNbr": 1799,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-08-04T09:57:49Z",
+      "side": 1,
+      "message": "Hi, I add __tracepoint_* and run this command: \"BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build_abi.sh --update\",\nbut only android/abi_gki_aarch64.xml changed, can I add __traceiter_* by myself?",
+      "parentUuid": "25198cf8_0f286129",
+      "range": {
+        "startLine": 1799,
+        "startChar": 2,
+        "endLine": 1799,
+        "endChar": 46
+      },
+      "revId": "bc953766623e509e3d0a7a35993651cf2aedc716",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
