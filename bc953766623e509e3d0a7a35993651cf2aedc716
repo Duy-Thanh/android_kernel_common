@@ -46,6 +46,30 @@
       },
       "revId": "bc953766623e509e3d0a7a35993651cf2aedc716",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "932c3cda_32567722",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 2
+      },
+      "lineNbr": 1799,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-08-04T10:11:42Z",
+      "side": 1,
+      "message": "I don\u0027t think this is the correct way to do this, BUILD_CONFIG should point at your own config file, not the GKI one.\n\nThe commit that introduced the oplus symbol list looks correct: https://android.googlesource.com/kernel/common/+/c68e5ca9f8edd23aa425c45b147d0cc5607c47a6\n\nCould you please contact the author and ask them how they created the symbol list? You should follow the same steps. Thanks.",
+      "parentUuid": "d9455703_7827995a",
+      "range": {
+        "startLine": 1799,
+        "startChar": 2,
+        "endLine": 1799,
+        "endChar": 46
+      },
+      "revId": "bc953766623e509e3d0a7a35993651cf2aedc716",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
