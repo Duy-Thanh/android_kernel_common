@@ -88,6 +88,24 @@
       "parentUuid": "fd58fa28_20989ada",
       "revId": "7efca6526b2c19d268195ca3318c41476f9bcf38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9535b3a6_0b5a2312",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1770429
+      },
+      "writtenOn": "2021-08-04T09:20:26Z",
+      "side": 1,
+      "message": "Hi Greg,\n\nA demo of “The usage of quick charge type property” is uploaded in drivers/power/supply/qcom_smbb.c.\n\nThe usage of the other three property is about wireless charging, and there is no related driver in ack. The code of our driver can refer to the link below.\n\nPOWER_SUPPLY_PROP_QUICK_CHARGE_TYPE：\nhttps://github.com/MiCode/Xiaomi_Kernel_OpenSource/blob/umi-q-oss/drivers/power/supply/qcom/qpnp-smb5.c#L1434\n\n\nPOWER_SUPPLY_PROP_REVERSE_CHG_MODE：\nhttps://github.com/MiCode/Xiaomi_Kernel_OpenSource/blob/umi-q-oss/drivers/power/supply/qcom/qpnp-smb5.c#L2572\n\n\nPOWER_SUPPLY_PROP_TX_ADAPTER：\nhttps://github.com/MiCode/Xiaomi_Kernel_OpenSource/blob/umi-q-oss/drivers/power/supply/qcom/qpnp-smb5.c#L2633\n\n\nPOWER_SUPPLY_PROP_SIGNAL_STRENGTH：\nhttps://github.com/MiCode/Xiaomi_Kernel_OpenSource/blob/umi-q-oss/drivers/power/supply/qcom/qpnp-smb5.c#L2609",
+      "parentUuid": "cf9786ac_763e11af",
+      "revId": "7efca6526b2c19d268195ca3318c41476f9bcf38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
