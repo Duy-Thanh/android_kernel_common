@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7e7eb80_0d3b222c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-04T06:01:49Z",
+      "side": 1,
+      "message": "OEMs should add their own symbol lists, please do not modify lists from other vendors/companies.\n\nJust add a new file here please.",
+      "revId": "cfcfeed1729baa6d83d3b83c04d06fbcbb1c355e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
