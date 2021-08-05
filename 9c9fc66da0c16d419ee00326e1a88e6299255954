@@ -70,6 +70,24 @@
       "parentUuid": "41072c3a_ed26621e",
       "revId": "9c9fc66da0c16d419ee00326e1a88e6299255954",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92317bba_ac38fded",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-08-05T18:01:10Z",
+      "side": 1,
+      "message": "Because you said we can wait only two days for feedback, and contradicted that this was only important as an optimization, and that it somehow related to fixing the issue in b/194450129. In fact, it seems like this is an optimization of a userspace fix which is already landed, and although it slows boot by 0.5s it resolves the issue mentioned in the bug. Right?",
+      "parentUuid": "182ca4e3_11475682",
+      "revId": "9c9fc66da0c16d419ee00326e1a88e6299255954",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
