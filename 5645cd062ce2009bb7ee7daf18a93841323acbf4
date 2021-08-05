@@ -39,6 +39,23 @@
       "message": "Greg, Giuliano, I have created a Microsoft-specific file and added it to build.config.gki.aarch64 as requested. Marking this comment as resolved.",
       "revId": "5645cd062ce2009bb7ee7daf18a93841323acbf4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00a5f4ec_1ea8db80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-05T06:48:32Z",
+      "side": 1,
+      "message": "before accepting this, we need to add some padding to the hid device to handle any future abi changes as this is the first time we are adding support for this structure to the android11-5.4 tree.",
+      "revId": "5645cd062ce2009bb7ee7daf18a93841323acbf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
