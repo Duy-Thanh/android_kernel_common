@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8588f949_936ba3b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-08-05T16:12:41Z",
+      "side": 1,
+      "message": "Bart: I assume we are ok waiting for the upstream process as this is just a boot time optimization, correct?",
+      "revId": "9c9fc66da0c16d419ee00326e1a88e6299255954",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
