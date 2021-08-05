@@ -36,6 +36,7 @@
 #include <linux/sched.h>
 #include <linux/jiffies.h>
 #include <trace/events/cma.h>
+#include <linux/of_fdt.h>
 
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/mm.h>
@@ -131,7 +132,16 @@ static void __init cma_activate_area(struct cma *cma)
 	INIT_HLIST_HEAD(&cma->mem_head);
 	spin_lock_init(&cma->mem_head_lock);
 #endif
-
+	if(cma->preallocated_cma) {
+		struct acr_info info = {0};
+		pfn = base_pfn;
+		if(!alloc_contig_range(pfn, pfn + cma->count, MIGRATE_CMA, GFP_KERNEL, &info)) {
+			pr_info("CMA area %s be pre-allocated successfully\n", cma->name);
+		} else {
+			cma->preallocated_cma = false;
+			pr_err("CMA area %s be pre-allocated failure\n", cma->name);
+		}
+	}
 	return;
 
 not_in_zone:
@@ -166,13 +176,15 @@ core_initcall(cma_init_reserved_areas);
  *        the area will be set to "cmaN", where N is a running counter of
  *        used areas.
  * @res_cma: Pointer to store the created cma region.
+ * @node: CMA memory dtsi node.
  *
  * This function creates custom contiguous area from already reserved memory.
  */
 int __init cma_init_reserved_mem(phys_addr_t base, phys_addr_t size,
 				 unsigned int order_per_bit,
 				 const char *name,
-				 struct cma **res_cma)
+				 struct cma **res_cma,
+				 unsigned long node)
 {
 	struct cma *cma;
 	phys_addr_t alignment;
@@ -211,6 +223,9 @@ int __init cma_init_reserved_mem(phys_addr_t base, phys_addr_t size,
 	cma->base_pfn = PFN_DOWN(base);
 	cma->count = size >> PAGE_SHIFT;
 	cma->order_per_bit = order_per_bit;
+	if(node) {
+		cma->preallocated_cma = of_get_flat_dt_prop(node, "linux,preallocated-cma", NULL);
+	}
 	*res_cma = cma;
 	cma_area_count++;
 	totalcma_pages += (size / PAGE_SIZE);
@@ -376,7 +391,7 @@ int __init cma_declare_contiguous_nid(phys_addr_t base,
 		base = addr;
 	}
 
-	ret = cma_init_reserved_mem(base, size, order_per_bit, name, res_cma);
+	ret = cma_init_reserved_mem(base, size, order_per_bit, name, res_cma, 0);
 	if (ret)
 		goto free_mem;
 
@@ -505,6 +520,17 @@ struct page *cma_alloc(struct cma *cma, size_t count, unsigned int align,
 		 * lock again and unmark it.
 		 */
 		mutex_unlock(&cma->lock);
+		/*
+		 * cma bitmap should ensure that pfn is in the cma.
+		 */
+		if(cma->preallocated_cma) {
+			pfn = cma->base_pfn + (bitmap_no << cma->order_per_bit);
+
+			BUG_ON(pfn + count > cma->base_pfn + cma->count);
+			page = pfn_to_page(pfn);
+			ret = 0;
+			break;
+		}
 
 		pfn = cma->base_pfn + (bitmap_no << cma->order_per_bit);
 		ret = alloc_contig_range(pfn, pfn + count, MIGRATE_CMA, gfp_mask, &info);
@@ -606,7 +632,9 @@ bool cma_release(struct cma *cma, const struct page *pages, unsigned int count)
 
 	VM_BUG_ON(pfn + count > cma->base_pfn + cma->count);
 
-	free_contig_range(pfn, count);
+	if(!cma->preallocated_cma) {
+		free_contig_range(pfn, count);
+	}
 	cma_clear_bitmap(cma, pfn, count);
 	trace_cma_release(cma->name, pfn, pages, count);
 
