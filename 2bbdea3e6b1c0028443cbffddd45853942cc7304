@@ -22,6 +22,30 @@
       },
       "revId": "2bbdea3e6b1c0028443cbffddd45853942cc7304",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d4c6997_9a586441",
+        "filename": "drivers/usb/core/quirks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1888973
+      },
+      "writtenOn": "2021-08-05T07:37:06Z",
+      "side": 1,
+      "message": "hi Greg\n\nThanks for your comment.\n\nCould you please help to review the new hook?\nThe hook is used to overwrites persist_enable flag.\n\nthanks a lot",
+      "parentUuid": "82d7b42c_56292a8a",
+      "range": {
+        "startLine": 660,
+        "startChar": 5,
+        "endLine": 660,
+        "endChar": 12
+      },
+      "revId": "2bbdea3e6b1c0028443cbffddd45853942cc7304",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
