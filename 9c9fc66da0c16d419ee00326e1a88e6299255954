@@ -16,6 +16,24 @@
       "message": "Bart: I assume we are ok waiting for the upstream process as this is just a boot time optimization, correct?",
       "revId": "9c9fc66da0c16d419ee00326e1a88e6299255954",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f800c51a_ab8f0a6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-08-05T16:16:58Z",
+      "side": 1,
+      "message": "I think we can wait one or two days for feedback from the block layer maintainer.\n\nBut please note that the primary issue addressed by this patch is a more important issue than optimizing boot time, namely https://b.corp.google.com/issues/194450129.",
+      "parentUuid": "8588f949_936ba3b2",
+      "revId": "9c9fc66da0c16d419ee00326e1a88e6299255954",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
