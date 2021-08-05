@@ -2470,6 +2470,8 @@
   __traceiter_android_vh_v4l2subdev_set_selection
   __traceiter_gpu_mem_total
   __traceiter_task_newtask
+  __traceiter_ufshcd_command
+  __traceiter_ufshcd_upiu
   __traceiter_xhci_urb_giveback
   trace_output_call
   __tracepoint_android_rvh_after_enqueue_task
@@ -2488,6 +2490,8 @@
   __tracepoint_android_vh_v4l2subdev_set_selection
   __tracepoint_gpu_mem_total
   __tracepoint_task_newtask
+  __tracepoint_ufshcd_command
+  __tracepoint_ufshcd_upiu
   __tracepoint_xhci_urb_giveback
   trace_print_flags_seq
   try_module_get
