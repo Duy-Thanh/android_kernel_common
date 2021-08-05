@@ -34,6 +34,24 @@
       "parentUuid": "8588f949_936ba3b2",
       "revId": "9c9fc66da0c16d419ee00326e1a88e6299255954",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41072c3a_ed26621e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-08-05T17:08:48Z",
+      "side": 1,
+      "message": "If that\u0027s true, please update your commit message. The bug suggests that this has been worked around in userspace, and this CL is only:\n\n\"This patch reduces the Android boot time on my test setup with 0.5 seconds\ncompared to configuring the loop I/O scheduler from user space.\"",
+      "parentUuid": "f800c51a_ab8f0a6e",
+      "revId": "9c9fc66da0c16d419ee00326e1a88e6299255954",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
