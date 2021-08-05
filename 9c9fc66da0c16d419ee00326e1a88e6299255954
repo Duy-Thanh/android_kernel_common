@@ -88,6 +88,24 @@
       "parentUuid": "182ca4e3_11475682",
       "revId": "9c9fc66da0c16d419ee00326e1a88e6299255954",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07c77797_3228998c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-08-05T18:13:29Z",
+      "side": 1,
+      "message": "The loop driver is used as follows in Android:\n(1) As the block driver that supports the request queue under the zram driver.\n(2) As the block driver between APEX files and the filesystem used to mount these filesystem images.\n\nThe comment about the 0.5s boot time reduction refers to use case (2). b/194450129 is addressed via modifying the I/O scheduler for use case (1).\n\nI will insert the word \"additionally\" at the start of the second paragraph of the patch description to make the description more clear.",
+      "parentUuid": "92317bba_ac38fded",
+      "revId": "9c9fc66da0c16d419ee00326e1a88e6299255954",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
