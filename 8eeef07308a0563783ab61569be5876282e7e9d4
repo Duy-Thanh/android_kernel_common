@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67a461f5_43428cc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-05T11:36:51Z",
+      "side": 1,
+      "message": "Much better, thanks!  Only one small comment, see below...",
+      "revId": "8eeef07308a0563783ab61569be5876282e7e9d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40b683e5_e0620954",
+        "filename": "drivers/usb/core/quirks.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-05T11:36:51Z",
+      "side": 1,
+      "message": "Can you move this down below the #ifdef/#else/#endif to catch this for all build configurations please?",
+      "range": {
+        "startLine": 678,
+        "startChar": 0,
+        "endLine": 678,
+        "endChar": 46
+      },
+      "revId": "8eeef07308a0563783ab61569be5876282e7e9d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
