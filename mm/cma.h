@@ -31,6 +31,7 @@ struct cma {
 	/* kobject requires dynamic object */
 	struct cma_kobject *cma_kobj;
 #endif
+	bool preallocated_cma;
 	ANDROID_OEM_DATA_ARRAY(1, 4);
 };
 
