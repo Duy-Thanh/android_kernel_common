@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeda50cf_83b231f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-08-05T07:28:36Z",
+      "side": 1,
+      "message": "The XML file should not be executable. Please undo the mode change.",
+      "revId": "7b062ed3f7625312c99e8166e7b8575ee709c1a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
