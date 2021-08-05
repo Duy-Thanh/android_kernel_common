@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43e54419_00e59571",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1890119
+      },
+      "writtenOn": "2021-08-05T05:05:39Z",
+      "side": 1,
+      "message": "Greg, Giuliano, I have created a Microsoft-specific file and added it to build.config.gki.aarch64 as requested. Marking this comment as resolved.",
+      "revId": "5645cd062ce2009bb7ee7daf18a93841323acbf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
