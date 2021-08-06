@@ -120,6 +120,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be841d8a_24f347f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889794
+      },
+      "writtenOn": "2021-08-06T00:54:53Z",
+      "side": 1,
+      "message": "It hasn\u0027t been merged yet, should I resolve the conflict and submit the file again?\nThe file to be submitted is\n・ Android / abi_gki_aarch64_fcnt\n・ Build.config.gki.aarch64\n・ Android / abi_gki_aarch64.xml\nIs it these three?",
+      "parentUuid": "4340d8f5_6d688f81",
+      "revId": "c3a51b2f34ceb014844081187fcbe3a03aac851b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7dc3567b_eca5605c",
         "filename": "build.config.gki.aarch64",
         "patchSetId": 3
