@@ -46,6 +46,30 @@
       },
       "revId": "b2c9f6ecd627eab1b31034605656b941b74e3bd7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e29d60df_d4772b80",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-08-06T14:17:54Z",
+      "side": 1,
+      "message": "We usually use the full url for the remote, but if the linter is happy with that I\u0027m happy too :)",
+      "parentUuid": "cc545830_6a7631f2",
+      "range": {
+        "startLine": 35,
+        "startChar": 40,
+        "endLine": 35,
+        "endChar": 68
+      },
+      "revId": "b2c9f6ecd627eab1b31034605656b941b74e3bd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
