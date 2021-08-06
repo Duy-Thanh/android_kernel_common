@@ -33,6 +33,24 @@
       "message": "Note that I built with below command on android12-5.10 of common kernel, which do not have any of rockchip local config or source code:\nLTO\u003dthin BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build_abi.sh\n\nFor the last commit, I send with xml, but you think there is no real update in xml file, how do you decide which xml to use ? If I use the \u0027build_abi.sh -u\u0027 command, the xml file is definitely been update.",
       "revId": "ebb5e5ffdafa829dc7a89a9b9bf9c2c2b4352418",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30b08583_d3b1fbc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-06T06:05:54Z",
+      "side": 1,
+      "message": "You should add `--update` as an option to the build_abi.sh file, that will update the .xml file in place.  Otherwise you need to copy the generated .xml file to overwrite the existing file, the output file will be listed by the script when it completes.",
+      "parentUuid": "ff6f0136_c178e93a",
+      "revId": "ebb5e5ffdafa829dc7a89a9b9bf9c2c2b4352418",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
