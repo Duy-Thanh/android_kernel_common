@@ -63,6 +63,30 @@
       },
       "revId": "8eeef07308a0563783ab61569be5876282e7e9d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "779a776c_e6490853",
+        "filename": "drivers/usb/core/quirks.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-06T09:37:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "748d4bf6_df05b44b",
+      "range": {
+        "startLine": 678,
+        "startChar": 0,
+        "endLine": 678,
+        "endChar": 46
+      },
+      "revId": "8eeef07308a0563783ab61569be5876282e7e9d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
