@@ -22,6 +22,30 @@
       },
       "revId": "b2c9f6ecd627eab1b31034605656b941b74e3bd7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc545830_6a7631f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-08-06T14:04:31Z",
+      "side": 1,
+      "message": "The remote is swiotlb and the branch is devel/for-linus-5.15",
+      "parentUuid": "16119091_fa07c1ce",
+      "range": {
+        "startLine": 35,
+        "startChar": 40,
+        "endLine": 35,
+        "endChar": 68
+      },
+      "revId": "b2c9f6ecd627eab1b31034605656b941b74e3bd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
