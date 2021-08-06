@@ -16,6 +16,23 @@
       "message": "Could you please check it again? We updated the xml file during conflict resolve after the rebase the patch. ",
       "revId": "60313c466206771bea8c5949fe88c04fe0e005ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89c6740b_bbb18433",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1353982
+      },
+      "writtenOn": "2021-08-06T12:04:32Z",
+      "side": 1,
+      "message": "presubmiit tool issue - Error reported by harness. See trace\ncom.android.tradefed.build.BuildRetrievalError[ARTIFACT_NOT_FOUND|500001|DEPENDENCY_ISSUE]: No files \u0027aosp_kernel-common-android12-5.10-linux-kernel_virt_x86_64/P25132916/BUILD_INFO,aosp_kernel-common-android12-5.10-linux-kernel_virt_x86_64/P25132916/COPIED,",
+      "revId": "60313c466206771bea8c5949fe88c04fe0e005ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
