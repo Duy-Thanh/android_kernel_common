@@ -105,6 +105,24 @@
       "parentUuid": "e9882fe1_bb83ef6e",
       "revId": "ac9716bef39717be0e42d8f9655755b14eb1d2e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23fcb3d7_99d216f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2021-08-06T00:48:57Z",
+      "side": 1,
+      "message": "LTO\u003dthin does not affect the symbollist, but it affects the xml output?",
+      "parentUuid": "0ed9175c_e02b73d0",
+      "revId": "ac9716bef39717be0e42d8f9655755b14eb1d2e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
