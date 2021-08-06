@@ -16,6 +16,24 @@
       "message": "Please add the people from the original patch.",
       "revId": "1e5ec34b76a4a36abf18eab4d41138e0a7b21afb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57a8d57a_cec396e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2021-08-06T07:49:52Z",
+      "side": 1,
+      "message": "I am the people from the original patch.\n\nThis was diff left-over from a patch that went upstream.\n\nI tried to submit it for completeness, but Ted NACKed it as a \u0027checkpatch\u0027 patch!\n\nI will also Cc Daniel though.",
+      "parentUuid": "30c81fa2_540f9022",
+      "revId": "1e5ec34b76a4a36abf18eab4d41138e0a7b21afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
