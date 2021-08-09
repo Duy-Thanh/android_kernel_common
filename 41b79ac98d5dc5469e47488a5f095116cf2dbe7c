@@ -34,6 +34,24 @@
       "parentUuid": "e96e9260_ff1e1506",
       "revId": "41b79ac98d5dc5469e47488a5f095116cf2dbe7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "748b4dd7_f9ed5542",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1224979
+      },
+      "writtenOn": "2021-08-09T22:09:17Z",
+      "side": 1,
+      "message": "I\u0027m also seeing USB data transfer problem with this CL on a Pixel platform.\nfastbootd does not receive any data to flash required partitions.\nReverting this CL fixes the problem.",
+      "parentUuid": "340b43ed_8eacb4be",
+      "revId": "41b79ac98d5dc5469e47488a5f095116cf2dbe7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
