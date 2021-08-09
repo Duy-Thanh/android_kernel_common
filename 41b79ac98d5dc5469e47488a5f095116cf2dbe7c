@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e96e9260_ff1e1506",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-08-09T20:57:10Z",
+      "side": 1,
+      "message": "Just as a heads up, this patch is causing a regression on db845c, where after bootup \"adb devices\" shows:\n  List of devices attached\n  c4e1189c        offline\n\n\nWhere it sees the device serialno, but cannot connect. Reverting this gets back to being able to connect to the device over adb.\n\nI\u0027ll be bringing this up on lkml as the regression has hit upstream as well.",
+      "revId": "41b79ac98d5dc5469e47488a5f095116cf2dbe7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
