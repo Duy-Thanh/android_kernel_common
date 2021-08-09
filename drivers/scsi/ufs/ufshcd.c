@@ -9303,6 +9303,7 @@ int ufshcd_alloc_host(struct device *dev, struct ufs_hba **hba_handle)
 {
 	struct Scsi_Host *host;
 	struct ufs_hba *hba;
+	size_t shost_priv_size;
 	int err = 0;
 
 	if (!dev) {
@@ -9312,8 +9313,12 @@ int ufshcd_alloc_host(struct device *dev, struct ufs_hba **hba_handle)
 		goto out_error;
 	}
 
-	host = scsi_host_alloc(&ufshcd_driver_template,
-				sizeof(struct ufs_hba));
+#ifdef CONFIG_SCSI_UFS_HPB
+	shost_priv_size = struct_size(hba, ufshpb_dev_array, 1);
+#else
+	shost_priv_size = sizeof(*hba);
+#endif
+	host = scsi_host_alloc(&ufshcd_driver_template, shost_priv_size);
 	if (!host) {
 		dev_err(dev, "scsi_host_alloc failed\n");
 		err = -ENOMEM;

@@ -912,10 +912,6 @@ struct ufs_hba {
 	bool wb_enabled;
 	struct delayed_work rpm_dev_flush_recheck_work;
 
-#ifdef CONFIG_SCSI_UFS_HPB
-	struct ufshpb_dev_info ufshpb_dev;
-#endif
-
 	struct ufs_hba_monitor	monitor;
 
 #ifdef CONFIG_SCSI_UFS_CRYPTO
@@ -932,6 +928,10 @@ struct ufs_hba {
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
+
+#ifdef CONFIG_SCSI_UFS_HPB
+	struct ufshpb_dev_info ufshpb_dev_array[];
+#endif
 };
 
 /* Returns true if clocks can be gated. Otherwise false */
