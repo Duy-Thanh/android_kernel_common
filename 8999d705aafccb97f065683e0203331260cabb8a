@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecb21c9a_f79f048b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-09T06:18:50Z",
+      "side": 1,
+      "message": "still shows up here, please update the commit message with the real list of symbols that are added.",
+      "range": {
+        "startLine": 19,
+        "startChar": 21,
+        "endLine": 19,
+        "endChar": 33
+      },
+      "revId": "8999d705aafccb97f065683e0203331260cabb8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf5e54a9_6e65e3d4",
+        "filename": "android/abi_gki_aarch64_unisoc",
+        "patchSetId": 2
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-09T06:18:50Z",
+      "side": 1,
+      "message": "I thought Android used the other oom notification system from userspace, why is this needed?",
+      "range": {
+        "startLine": 677,
+        "startChar": 2,
+        "endLine": 677,
+        "endChar": 23
+      },
+      "revId": "8999d705aafccb97f065683e0203331260cabb8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
