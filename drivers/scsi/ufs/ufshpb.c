@@ -22,6 +22,8 @@
 #define POLLING_INTERVAL_MS 200
 #define THROTTLE_MAP_REQ_DEFAULT 1
 
+#define ufshpb_dev ufshpb_dev_array[0]
+
 /* memory management */
 static struct kmem_cache *ufshpb_mctx_cache;
 static mempool_t *ufshpb_mctx_pool;
