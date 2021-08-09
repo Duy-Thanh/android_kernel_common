@@ -1,0 +1,28 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b92de5e5_cd6e0369",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-08-09T12:13:03Z",
+      "side": 1,
+      "message": "\u003e Commit is not signed off by the author!\n\u003e \n\u003e Missing tag: Signed-off-by: Roman Kiryanov \u003crkir@google.com\u003e\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 388945554 android-build.ayeaye-python-dispatcher_20210805.05_p0\n\nPlease fix. The author information of this commit is wrong. You claim that this is authored by Roman.",
+      "parentUuid": "7a88c445_8cdce3ee",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 0
+      },
+      "revId": "8d8868035f5964e9131a36f45e7fe6e70d9a2a8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
