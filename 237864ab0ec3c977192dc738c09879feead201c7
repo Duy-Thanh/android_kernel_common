@@ -16,6 +16,23 @@
       "message": "known abi break right now, will fix it up in a follow-on patch series later today...",
       "revId": "237864ab0ec3c977192dc738c09879feead201c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22c3f17f_86946658",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-08-10T16:58:57Z",
+      "side": 1,
+      "message": "needs the abi analyzer to be happy",
+      "revId": "237864ab0ec3c977192dc738c09879feead201c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
