@@ -34,6 +34,24 @@
       "parentUuid": "93d238f1_907d3b70",
       "revId": "b19601e0217ce6b1aa7106f44a133d0d77280018",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac8928be_07164d1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-08-10T19:04:05Z",
+      "side": 1,
+      "message": "A patch that enables HPB in the GKI configuration has been submitted.",
+      "parentUuid": "ecb962c8_f399be3e",
+      "revId": "b19601e0217ce6b1aa7106f44a133d0d77280018",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
