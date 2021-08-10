@@ -52,6 +52,24 @@
       "parentUuid": "340b43ed_8eacb4be",
       "revId": "41b79ac98d5dc5469e47488a5f095116cf2dbe7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60abaf0f_96464bfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-10T06:20:19Z",
+      "side": 1,
+      "message": "Upstream is about to revert this, give me a few hours and I will add the revert to our tree too...",
+      "parentUuid": "748b4dd7_f9ed5542",
+      "revId": "41b79ac98d5dc5469e47488a5f095116cf2dbe7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
