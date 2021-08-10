@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "faf431e5_6ab82019",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-10T06:39:53Z",
+      "side": 1,
+      "message": "known abi break right now, will fix it up in a follow-on patch series later today...",
+      "revId": "237864ab0ec3c977192dc738c09879feead201c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
