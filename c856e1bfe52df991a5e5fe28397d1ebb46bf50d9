@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b310a3f2_7e024ead",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2021-08-11T05:46:55Z",
+      "side": 1,
+      "message": "suggest: Add a comment on when this is supposed to set, cleared and and what it indicates now ?",
+      "range": {
+        "startLine": 345,
+        "startChar": 6,
+        "endLine": 345,
+        "endChar": 19
+      },
+      "revId": "c856e1bfe52df991a5e5fe28397d1ebb46bf50d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e56aa0eb_54f7dba8",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2021-08-11T05:46:55Z",
+      "side": 1,
+      "message": "suggest: Add a comment on when this is supposed to set, cleared and and what it indicates now ?",
+      "range": {
+        "startLine": 374,
+        "startChar": 6,
+        "endLine": 374,
+        "endChar": 20
+      },
+      "revId": "c856e1bfe52df991a5e5fe28397d1ebb46bf50d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf338634_03973a85",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1705,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2021-08-11T05:46:55Z",
+      "side": 1,
+      "message": "shouldnt we be setting port-\u003evdm_sm_running \u003d false; here as well ?",
+      "range": {
+        "startLine": 1704,
+        "startChar": 57,
+        "endLine": 1705,
+        "endChar": 4
+      },
+      "revId": "c856e1bfe52df991a5e5fe28397d1ebb46bf50d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39a725f0_585709c0",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2466,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2021-08-11T05:46:55Z",
+      "side": 1,
+      "message": "why though ? It makes sense to have this right ?",
+      "range": {
+        "startLine": 2466,
+        "startChar": 17,
+        "endLine": 2466,
+        "endChar": 29
+      },
+      "revId": "c856e1bfe52df991a5e5fe28397d1ebb46bf50d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
