@@ -46,6 +46,30 @@
       },
       "revId": "a1a3544a4cecda54b01267af939607e081db075c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "485d7e37_434d71c6",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-11T16:42:36Z",
+      "side": 0,
+      "message": "Ah, that was not obvious at all :)",
+      "parentUuid": "ac1833cb_5c2d1faf",
+      "range": {
+        "startLine": 915,
+        "startChar": 0,
+        "endLine": 917,
+        "endChar": 6
+      },
+      "revId": "a1a3544a4cecda54b01267af939607e081db075c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
