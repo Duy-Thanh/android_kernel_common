@@ -70,6 +70,30 @@
       },
       "revId": "a1a3544a4cecda54b01267af939607e081db075c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7de89c87_6e40d767",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-08-11T18:57:30Z",
+      "side": 0,
+      "message": "Yes, I think this does resolve the KMI break. Running presub now (on the child patch)",
+      "parentUuid": "ac1833cb_5c2d1faf",
+      "range": {
+        "startLine": 915,
+        "startChar": 0,
+        "endLine": 917,
+        "endChar": 6
+      },
+      "revId": "a1a3544a4cecda54b01267af939607e081db075c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
