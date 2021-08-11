@@ -22,6 +22,30 @@
       },
       "revId": "a1a3544a4cecda54b01267af939607e081db075c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac1833cb_5c2d1faf",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-08-11T16:19:45Z",
+      "side": 0,
+      "message": "I do not agree. Before this patch, CONFIG_SCSI_UFS_HPB was disabled and hence this struct member was totally ignored by the compiler. This means that this struct member does not appear at all in the kernel ABI file.",
+      "parentUuid": "832438ca_ba9c5225",
+      "range": {
+        "startLine": 915,
+        "startChar": 0,
+        "endLine": 917,
+        "endChar": 6
+      },
+      "revId": "a1a3544a4cecda54b01267af939607e081db075c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
