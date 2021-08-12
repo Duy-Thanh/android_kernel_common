@@ -34,6 +34,24 @@
       "parentUuid": "2f9cd61b_f628ff58",
       "revId": "299ecc4fc1378bb1fbc31c80cbf4e063c34abe57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd815d3e_448b1039",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-12T11:17:40Z",
+      "side": 1,
+      "message": "Get it merged into the LTS releases first, and then if you have to have it here now, feel free to apply it here as well.  This way you get all of the branches eventually, and the ones you care about quicker, covering everything properly over time.",
+      "parentUuid": "c69550a3_3a6a54e2",
+      "revId": "299ecc4fc1378bb1fbc31c80cbf4e063c34abe57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
