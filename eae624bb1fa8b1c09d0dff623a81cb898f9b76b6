@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "617e49e0_01d22011",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-08-12T20:57:52Z",
+      "side": 1,
+      "message": "Is this the same as aosp/1566958 in android12-5.10? If so, it must have the same Change-Id\n```\nChange-Id: Ie0e6493ae7ad53b0cc57eb1bbcf8a0a11f652828\n```",
+      "revId": "eae624bb1fa8b1c09d0dff623a81cb898f9b76b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
