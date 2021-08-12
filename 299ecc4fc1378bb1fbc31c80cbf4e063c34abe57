@@ -52,6 +52,24 @@
       "parentUuid": "c69550a3_3a6a54e2",
       "revId": "299ecc4fc1378bb1fbc31c80cbf4e063c34abe57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c252bc2_02a3c3ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1767641
+      },
+      "writtenOn": "2021-08-12T12:02:40Z",
+      "side": 1,
+      "message": "Thread:\nhttps://lore.kernel.org/stable/20210812115822.5411-1-lecopzer.chen@mediatek.com/T/#u\n\nI\u0027ve sent a request to -stable follow the instruction\nhttps://www.kernel.org/doc/html/latest/process/stable-kernel-rules.html#option-2\n\nThis is my first time to send to -stable, please correct me if anything goes wrong.\n\nthanks.",
+      "parentUuid": "dd815d3e_448b1039",
+      "revId": "299ecc4fc1378bb1fbc31c80cbf4e063c34abe57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
