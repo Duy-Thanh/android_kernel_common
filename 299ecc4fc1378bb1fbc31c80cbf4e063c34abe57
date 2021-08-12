@@ -16,6 +16,24 @@
       "message": "Why not submit this to the stable tree to get included automatically everywhere?",
       "revId": "299ecc4fc1378bb1fbc31c80cbf4e063c34abe57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c69550a3_3a6a54e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1767641
+      },
+      "writtenOn": "2021-08-12T11:03:21Z",
+      "side": 1,
+      "message": "HI Greg\n\nOkay, I\u0027ll try to push to stable tree and provide the mail thread link here.\n\nBut a question is, GKI merge LTS every two months, in this case, we have to wait\nat most 2 months to have the commit in GKI.\nIf we need to have this commit as fast as possible (at least every month certified GKI release), is this possible?\n\nthanks",
+      "parentUuid": "2f9cd61b_f628ff58",
+      "revId": "299ecc4fc1378bb1fbc31c80cbf4e063c34abe57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
