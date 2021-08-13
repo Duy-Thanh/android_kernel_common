@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6194a1dc_01348930",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-08-13T16:44:50Z",
+      "side": 1,
+      "message": "We don\u0027t have CPU pause in android-mainline yet -- shouldn\u0027t this wait for pause to be implemented?",
+      "revId": "a91c157757c78728f1e79fa32f1a41ca3bcd59d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
