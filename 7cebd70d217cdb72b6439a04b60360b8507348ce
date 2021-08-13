@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b00fb1f_5759d8a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-08-13T19:13:21Z",
+      "side": 1,
+      "message": "UFS command and UPIU submission should happen from inside the UFS core and not from inside a vendor module. I do not understand the need to export these tracepoints.",
+      "revId": "7cebd70d217cdb72b6439a04b60360b8507348ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
