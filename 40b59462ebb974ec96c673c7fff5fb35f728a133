@@ -16,6 +16,24 @@
       "message": "UFS command and UPIU submission should happen from inside the UFS core and not from inside a vendor module. I do not understand the need to export these tracepoints.",
       "revId": "40b59462ebb974ec96c673c7fff5fb35f728a133",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbcb9512_150a9705",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1294339
+      },
+      "writtenOn": "2021-08-14T14:33:17Z",
+      "side": 1,
+      "message": "Hi Bart, because of limitation of GKI, some vendors need to send commands from vendor kernel modules for some downstream features, and would like to invoke these tracepoints in their KOs.",
+      "parentUuid": "44418caa_953adc34",
+      "revId": "40b59462ebb974ec96c673c7fff5fb35f728a133",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
