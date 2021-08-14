@@ -16,6 +16,24 @@
       "message": "We don\u0027t have CPU pause in android-mainline yet -- shouldn\u0027t this wait for pause to be implemented?",
       "revId": "a91c157757c78728f1e79fa32f1a41ca3bcd59d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "618d794a_c8326600",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1582959
+      },
+      "writtenOn": "2021-08-14T11:37:37Z",
+      "side": 1,
+      "message": "ok I have rebased other changes, removing dependency for this gerrit.",
+      "parentUuid": "6194a1dc_01348930",
+      "revId": "a91c157757c78728f1e79fa32f1a41ca3bcd59d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
