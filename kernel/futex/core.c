@@ -2097,13 +2097,9 @@ futex_proxy_trylock_atomic(u32 __user *pifutex, struct futex_hash_bucket *hb1,
 	ret = futex_lock_pi_atomic(pifutex, hb2, key2, ps, top_waiter->task,
 				   exiting, set_waiters);
 	if (ret == 1) {
-		/*
-		 * Lock was acquired in user space and PI state was
-		 * attached to @top_waiter->task. That means state is fully
-		 * consistent and the waiter can return to user space
-		 * immediately after the wakeup.
-		 */
+		/* Dequeue, wake up and update top_waiter::requeue_state */
 		requeue_pi_wake_futex(top_waiter, key2, hb2);
+		return 1;
 	} else if (ret < 0) {
 		/* Rewind top_waiter::requeue_state */
 		futex_requeue_pi_complete(top_waiter, ret);
@@ -2265,25 +2261,18 @@ retry_private:
 						 &exiting, nr_requeue);
 
 		/*
-		 * At this point the top_waiter has either taken uaddr2 or
-		 * is waiting on it. In both cases pi_state has been
-		 * established and an initial refcount on it. In case of an
-		 * error there's nothing.
+		 * At this point the top_waiter has either taken uaddr2 or is
+		 * waiting on it.  If the former, then the pi_state will not
+		 * exist yet, look it up one more time to ensure we have a
+		 * reference to it. If the lock was taken, @ret contains the
+		 * VPID of the top waiter task.
+		 * If the lock was not taken, we have pi_state and an initial
+		 * refcount on it. In case of an error we have nothing.
 		 *
 		 * The top waiter's requeue_state is up to date:
 		 *
-		 *  - If the lock was acquired atomically (ret == 1), then
+		 *  - If the lock was acquired atomically (ret > 0), then
 		 *    the state is Q_REQUEUE_PI_LOCKED.
-		 *
-		 *    The top waiter has been dequeued and woken up and can
-		 *    return to user space immediately. The kernel/user
-		 *    space state is consistent. In case that there must be
-		 *    more waiters requeued the WAITERS bit in the user
-		 *    space futex is set so the top waiter task has to go
-		 *    into the syscall slowpath to unlock the futex. This
-		 *    will block until this requeue operation has been
-		 *    completed and the hash bucket locks have been
-		 *    dropped.
 		 *
 		 *  - If the trylock failed with an error (ret < 0) then
 		 *    the state is either Q_REQUEUE_PI_NONE, i.e. "nothing
@@ -2303,14 +2292,6 @@ retry_private:
 			/* We hold a reference on the pi state. */
 			break;
 
-		case 1:
-			/*
-			 * futex_proxy_trylock_atomic() acquired the user space
-			 * futex. Adjust task_count.
-			 */
-			task_count++;
-			ret = 0;
-			break;
 
 		/*
 		 * If the above failed, then pi_state is NULL and
