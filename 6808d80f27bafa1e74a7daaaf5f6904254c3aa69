@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbac9554_6402b28d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-16T14:55:32Z",
+      "side": 1,
+      "message": "something went wrong, can you rebuild the .xml update, it seems to be removing the symbols not adding them.",
+      "revId": "6808d80f27bafa1e74a7daaaf5f6904254c3aa69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
