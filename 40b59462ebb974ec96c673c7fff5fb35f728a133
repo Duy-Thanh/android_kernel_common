@@ -34,6 +34,24 @@
       "parentUuid": "44418caa_953adc34",
       "revId": "40b59462ebb974ec96c673c7fff5fb35f728a133",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9de48021_8c8da34d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-08-16T16:29:20Z",
+      "side": 1,
+      "message": "Thanks Stanley for having provided this additional information.\n\nCan scsi_execute() be used to submit SCSI commands? \n\nHow about exporting ufshcd_query_flag(), ufshcd_query_attr() and/or ufshcd_query_descriptor_retry() to allow vendor kernel modules to submit SCSI and UPIU commands?",
+      "parentUuid": "bbcb9512_150a9705",
+      "revId": "40b59462ebb974ec96c673c7fff5fb35f728a133",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
