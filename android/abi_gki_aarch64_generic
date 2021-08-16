@@ -41,6 +41,7 @@
   atomic_notifier_chain_unregister
   autoremove_wake_function
   available_idle_cpu
+  backlight_device_set_brightness
   bcmp
   bdget_disk
   bdput
@@ -967,6 +968,7 @@
   __ioremap
   io_schedule_timeout
   iounmap
+  iov_iter_bvec
   ip_send_check
   iput
   __irq_alloc_descs
@@ -1224,6 +1226,7 @@
   of_dma_controller_register
   of_drm_find_bridge
   of_drm_find_panel
+  of_find_backlight_by_node
   of_find_compatible_node
   of_find_device_by_node
   of_find_i2c_adapter_by_node
@@ -1246,6 +1249,7 @@
   of_get_regulator_init_data
   of_iomap
   of_irq_find_parent
+  of_irq_get
   of_irq_get_byname
   of_irq_parse_one
   of_machine_is_compatible
@@ -1355,6 +1359,7 @@
   pinctrl_remove_gpio_range
   pinctrl_select_state
   pin_get_name
+  pin_user_pages
   pin_user_pages_fast
   pin_user_pages_remote
   pktgen_xfrm_outer_mode_output
