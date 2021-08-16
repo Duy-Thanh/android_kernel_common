@@ -4015,6 +4015,9 @@ out:
 	if (reenable_intr)
 		ufshcd_enable_intr(hba, UIC_COMMAND_COMPL);
 	if (ret) {
+		dev_info(hba->dev,
+			 "%s: Changing link power status failed (%d). Scheduling error handler\n",
+			 __func__, ret);
 		ufshcd_set_link_broken(hba);
 		ufshcd_schedule_eh_work(hba);
 	}
@@ -6021,6 +6024,8 @@ static void ufshcd_err_handler(struct work_struct *work)
 
 	hba = container_of(work, struct ufs_hba, eh_work);
 
+	dev_info(hba->dev, "%s", __func__);
+
 	down(&hba->host_sem);
 	spin_lock_irqsave(hba->host->host_lock, flags);
 	if (ufshcd_err_handling_should_stop(hba)) {
@@ -6300,8 +6305,11 @@ static irqreturn_t ufshcd_check_errors(struct ufs_hba *hba, u32 intr_status)
 	if (hba->errors & UIC_ERROR) {
 		hba->uic_error = 0;
 		retval = ufshcd_update_uic_error(hba);
-		if (hba->uic_error)
+		if (hba->uic_error) {
+			dev_info(hba->dev,
+			  "Scheduling error handler because of an UIC error\n");
 			queue_eh_work = true;
+		}
 	}
 
 	if (hba->errors & UFSHCD_UIC_HIBERN8_MASK) {
