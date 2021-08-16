@@ -1602,42 +1602,71 @@ static char *expr_str(struct hist_field *field, unsigned int level)
 	return expr;
 }
 
-static int contains_operator(char *str)
+/*
+ * If field_op != FIELD_OP_NONE, *sep points to the root operator
+ * of the parse tree for the expression to be evaluated.
+ */
+static int contains_operator(char *str, char **sep)
 {
 	enum field_op_id field_op = FIELD_OP_NONE;
-	char *op;
+	char *op = NULL;
 
-	op = strpbrk(str, "+-/*");
-	if (!op)
-		return FIELD_OP_NONE;
+	/*
+	 * Report the last occurrence of the operators first, so that the
+	 * expression is evaluated left to right. This is important since
+	 * subtraction and division are not associative.
+	 *
+	 *	e.g
+	 *		8/4/2 is 1, not 4. i.e 8/4/2 = (8/4)/2
+	 *		7-5-2 is 0, not 4. i.e 7-5-2 = (7-5)-2
+	 */
 
-	switch (*op) {
-	case '-':
-		/*
-		 * Unfortunately, the modifier ".sym-offset"
-		 * can confuse things.
-		 */
+	/*
+	 * First, find lower precedence addition and subtraction
+	 * since the expression will be evaluated recursively.
+	 */
+	op = strrchr(str, '-');
+	if (op) {
+		/* Unfortunately, the modifier ".sym-offset" can confuse things. */
 		if (op - str >= 4 && !strncmp(op - 4, ".sym-offset", 11))
-			return FIELD_OP_NONE;
+			goto out;
 
-		if (*str == '-')
-			field_op = FIELD_OP_UNARY_MINUS;
-		else
+		/* If not unary minus */
+		if (op != str) {
 			field_op = FIELD_OP_MINUS;
-		break;
-	case '+':
-		field_op = FIELD_OP_PLUS;
-		break;
-	case '/':
-		field_op = FIELD_OP_DIV;
-		break;
-	case '*':
-		field_op = FIELD_OP_MULT;
-		break;
-	default:
-		break;
+			goto out;
+		}
 	}
 
+	op = strrchr(str, '+');
+	if (op) {
+		field_op = FIELD_OP_PLUS;
+		goto out;
+	}
+
+	/*
+	 * Multiplication and division have higher precedence than addition and
+	 * subtraction.
+	 */
+	op = strrchr(str, '/');
+	if (op) {
+		field_op = FIELD_OP_DIV;
+		goto out;
+	}
+
+	op = strrchr(str, '*');
+	if (op) {
+		field_op = FIELD_OP_MULT;
+		goto out;
+	}
+
+	/* Unary minus has higher precedence than multiplication and division */
+	if (*str == '-')
+		field_op = FIELD_OP_UNARY_MINUS;
+
+out:
+	if (sep)
+		*sep = op;
 	return field_op;
 }
 
@@ -1964,7 +1993,7 @@ static char *field_name_from_var(struct hist_trigger_data *hist_data,
 
 		if (strcmp(var_name, name) == 0) {
 			field = hist_data->attrs->var_defs.expr[i];
-			if (contains_operator(field) || is_var_ref(field))
+			if (contains_operator(field, NULL) || is_var_ref(field))
 				continue;
 			return field;
 		}
@@ -2348,55 +2377,38 @@ static struct hist_field *parse_expr(struct hist_trigger_data *hist_data,
 	struct hist_field *operand1 = NULL, *operand2 = NULL, *expr = NULL;
 	unsigned long operand_flags;
 	int field_op, ret = -EINVAL;
-	char *sep, *operand1_str;
+	char *sep = NULL;
+	char *operand1_str;
 
 	if (level > 3) {
 		hist_err(file->tr, HIST_ERR_TOO_MANY_SUBEXPR, errpos(str));
 		return ERR_PTR(-EINVAL);
 	}
 
-	field_op = contains_operator(str);
+	level++;
+
+	field_op = contains_operator(str, &sep);
 
 	if (field_op == FIELD_OP_NONE)
 		return parse_atom(hist_data, file, str, &flags, var_name);
 
 	if (field_op == FIELD_OP_UNARY_MINUS)
-		return parse_unary(hist_data, file, str, flags, var_name, ++level);
+		return parse_unary(hist_data, file, str, flags, var_name, level);
 
-	switch (field_op) {
-	case FIELD_OP_MINUS:
-		sep = "-";
-		break;
-	case FIELD_OP_PLUS:
-		sep = "+";
-		break;
-	case FIELD_OP_DIV:
-		sep = "/";
-		break;
-	case FIELD_OP_MULT:
-		sep = "*";
-		break;
-	default:
+	/* Split the expression string at the root operator */
+	if (!sep)
 		goto free;
-	}
+	*sep = '\0';
+	operand1_str = str;
+	str = sep+1;
 
-	/*
-	 * Multiplication and division are only supported is single operator
-	 * expressions, since the expression is always evaluated from right
-	 * to left`
-	 */
-	if ((field_op == FIELD_OP_DIV || field_op == FIELD_OP_MULT) && level > 0) {
-		hist_err(file->tr, HIST_ERR_TOO_MANY_SUBEXPR, errpos(str));
-		return ERR_PTR(-EINVAL);
-	}
-
-	operand1_str = strsep(&str, sep);
 	if (!operand1_str || !str)
 		goto free;
 
 	operand_flags = 0;
-	operand1 = parse_atom(hist_data, file, operand1_str,
-			      &operand_flags, NULL);
+
+	/* lhs of string is an expression e.g. a+b in a+b+c */
+	operand1 = parse_expr(hist_data, file, operand1_str, operand_flags, NULL, level);
 	if (IS_ERR(operand1)) {
 		ret = PTR_ERR(operand1);
 		operand1 = NULL;
@@ -2408,9 +2420,9 @@ static struct hist_field *parse_expr(struct hist_trigger_data *hist_data,
 		goto free;
 	}
 
-	/* rest of string could be another expression e.g. b+c in a+b+c */
+	/* rhs of string is another expression e.g. c in a+b+c */
 	operand_flags = 0;
-	operand2 = parse_expr(hist_data, file, str, operand_flags, NULL, ++level);
+	operand2 = parse_expr(hist_data, file, str, operand_flags, NULL, level);
 	if (IS_ERR(operand2)) {
 		ret = PTR_ERR(operand2);
 		operand2 = NULL;
