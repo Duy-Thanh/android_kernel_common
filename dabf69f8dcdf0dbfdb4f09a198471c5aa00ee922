@@ -16,6 +16,24 @@
       "message": "Bart: I know this is just a logging change, but can you cherry-pick it to android12-5.10 as well? We don\u0027t allow singleton patches on the GKI release branches.",
       "revId": "dabf69f8dcdf0dbfdb4f09a198471c5aa00ee922",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dff5368_14302723",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-08-17T21:32:19Z",
+      "side": 1,
+      "message": "Done :-)",
+      "parentUuid": "3fd7bdbd_6e052c49",
+      "revId": "dabf69f8dcdf0dbfdb4f09a198471c5aa00ee922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
