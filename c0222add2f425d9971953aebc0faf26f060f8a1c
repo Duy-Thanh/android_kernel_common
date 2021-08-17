@@ -34,6 +34,24 @@
       "parentUuid": "bcde90b0_9385dbdf",
       "revId": "c0222add2f425d9971953aebc0faf26f060f8a1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cce421c_d1c0ba1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-08-17T19:34:34Z",
+      "side": 1,
+      "message": "correct. The errors are all ABI change related.",
+      "parentUuid": "016f7d32_c05285ce",
+      "revId": "c0222add2f425d9971953aebc0faf26f060f8a1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
