@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "212e00a4_a942d14a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-17T16:51:39Z",
+      "side": 1,
+      "message": "Please start off first with a list of symbols that does NOT include any new ones.\n\nWe can easily take that, and then we can start reviewing new symbols for different modules as needed.\n\nBut to review over 250 symbols as new is a bit hard to do all at once.",
+      "revId": "d57aec8c47f6bfed6bfaa34438cd6e80d0253953",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
