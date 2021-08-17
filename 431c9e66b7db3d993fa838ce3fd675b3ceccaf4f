@@ -34,6 +34,24 @@
       "parentUuid": "55651b8e_1fee3bd8",
       "revId": "431c9e66b7db3d993fa838ce3fd675b3ceccaf4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9f62732_36c1a378",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-17T16:57:13Z",
+      "side": 1,
+      "message": "Drivers should never need to register a kprobe.  It would give them access to things that they are not allowed to, and are not guaranteed stable by the GKI interface.",
+      "parentUuid": "bb6f1a21_acfc647c",
+      "revId": "431c9e66b7db3d993fa838ce3fd675b3ceccaf4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
