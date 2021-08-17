@@ -16,6 +16,24 @@
       "message": "No driver should be accessing these functions, sorry.",
       "revId": "431c9e66b7db3d993fa838ce3fd675b3ceccaf4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb6f1a21_acfc647c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1891984
+      },
+      "writtenOn": "2021-08-17T01:40:08Z",
+      "side": 1,
+      "message": "May we know the reason why these two functions are not allowed? They are defined and still exported even in the latest 5.14 upstream kernel. If there is an problem, why kernel community did not remove these two interfaces from exporting list?",
+      "parentUuid": "55651b8e_1fee3bd8",
+      "revId": "431c9e66b7db3d993fa838ce3fd675b3ceccaf4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
