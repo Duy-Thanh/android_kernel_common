@@ -16,6 +16,24 @@
       "message": "Needs to be rebased/redone unfortunately. Also are the kernel build tools up to date in the repo used to generate the XML update? I would have expected it to be much smaller.",
       "revId": "2f2f7fcd6c4e4f1de3d00b9c49d8decc834e30be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "282b6e80_b45eddd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2021-08-18T16:34:23Z",
+      "side": 1,
+      "message": "Hmmm... I\u0027m not sure. I\u0027ve been doing fresh repo sync of aosp-android12-5.10 branch. My kernel/build sha is at 8c0966a and kernel-build-tools is at a5fcf02 (both are master-kernel-build-2021)",
+      "parentUuid": "641ed1be_986b5d07",
+      "revId": "2f2f7fcd6c4e4f1de3d00b9c49d8decc834e30be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
