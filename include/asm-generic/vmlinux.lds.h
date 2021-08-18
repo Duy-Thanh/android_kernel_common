@@ -628,7 +628,11 @@
 		NOINSTR_TEXT						\
 		*(.text..refcount)					\
 		*(.ref.text)						\
+<<<<<<< HEAD   (46f161 Merge 5.10.59 into android12-5.10-lts)
 		TEXT_CFI_JT						\
+=======
+		*(.text.asan.* .text.tsan.*)				\
+>>>>>>> BRANCH (2c5bd9 Linux 5.10.60)
 	MEM_KEEP(init.text*)						\
 	MEM_KEEP(exit.text*)						\
 
