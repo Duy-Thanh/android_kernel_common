@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "641ed1be_986b5d07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2021-08-18T16:10:00Z",
+      "side": 1,
+      "message": "Needs to be rebased/redone unfortunately. Also are the kernel build tools up to date in the repo used to generate the XML update? I would have expected it to be much smaller.",
+      "revId": "2f2f7fcd6c4e4f1de3d00b9c49d8decc834e30be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
