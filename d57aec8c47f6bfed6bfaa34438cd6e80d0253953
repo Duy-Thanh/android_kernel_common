@@ -90,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c33da325_9056c407",
+        "filename": "android/abi_gki_aarch64_imx",
+        "patchSetId": 1
+      },
+      "lineNbr": 2143,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-18T09:48:22Z",
+      "side": 1,
+      "message": "Again, no driver should ever call this function, it should not be needed.  Use the normal kernel apis instead (firmware loading, module auto-loading, etc.)",
+      "parentUuid": "59d2b555_50a37b97",
+      "range": {
+        "startLine": 2143,
+        "startChar": 2,
+        "endLine": 2143,
+        "endChar": 21
+      },
+      "revId": "d57aec8c47f6bfed6bfaa34438cd6e80d0253953",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7151c8b7_e9702174",
         "filename": "build.config.gki.aarch64",
         "patchSetId": 1
