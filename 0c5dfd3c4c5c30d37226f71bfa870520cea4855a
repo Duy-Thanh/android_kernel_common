@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21a8618d_638ecdda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-08-18T21:51:35Z",
+      "side": 1,
+      "message": "Hi Greg,\n\nI had cherry-picked aosp/1371272 to this branch(and 4.9-q) a while ago. I looked at the corresponding bug again today and noticed that there was another commit which has a \"Fixes\" tag for the upstream Linux commit of aosp/1371272. I have uploaded the same here and to the 4.9-q branch. If you don\u0027t mind, could you please take a look when you get a chance? Thanks in advance!\n\nRegards,\nHridya",
+      "revId": "0c5dfd3c4c5c30d37226f71bfa870520cea4855a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
