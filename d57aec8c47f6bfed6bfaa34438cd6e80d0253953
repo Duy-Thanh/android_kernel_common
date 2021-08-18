@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0aba3e8_c9087589",
+        "filename": "android/abi_gki_aarch64_imx",
+        "patchSetId": 1
+      },
+      "lineNbr": 2143,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2021-08-18T09:58:56Z",
+      "side": 1,
+      "message": "Yes. You may consider it may bring security issue.\nOur backup ways is that write one user space daemon which monitor kernel uevent, than start the user space process when monitor detail event.\ndo you know any another better ways to trigger one user space process according kernel space event?",
+      "parentUuid": "c33da325_9056c407",
+      "range": {
+        "startLine": 2143,
+        "startChar": 2,
+        "endLine": 2143,
+        "endChar": 21
+      },
+      "revId": "d57aec8c47f6bfed6bfaa34438cd6e80d0253953",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7151c8b7_e9702174",
         "filename": "build.config.gki.aarch64",
         "patchSetId": 1
