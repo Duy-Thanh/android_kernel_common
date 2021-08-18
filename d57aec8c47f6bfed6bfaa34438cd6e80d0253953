@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59d2b555_50a37b97",
+        "filename": "android/abi_gki_aarch64_imx",
+        "patchSetId": 1
+      },
+      "lineNbr": 2143,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2021-08-18T08:45:17Z",
+      "side": 1,
+      "message": "Hi Greg,\nBut I still can see CONFIG_STATIC_USERMODEHELPER in GKI configure.\nAnd also define CONFIG_STATIC_USERMODEHELPER_PATH as null. It means we can\u0027t specify one our binary to start with gki image.",
+      "parentUuid": "87d63825_cf77aea7",
+      "range": {
+        "startLine": 2143,
+        "startChar": 2,
+        "endLine": 2143,
+        "endChar": 21
+      },
+      "revId": "d57aec8c47f6bfed6bfaa34438cd6e80d0253953",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7151c8b7_e9702174",
         "filename": "build.config.gki.aarch64",
         "patchSetId": 1
