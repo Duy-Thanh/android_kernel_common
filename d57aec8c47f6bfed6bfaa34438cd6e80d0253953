@@ -138,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2bd83b8f_3519b65c",
+        "filename": "android/abi_gki_aarch64_imx",
+        "patchSetId": 1
+      },
+      "lineNbr": 2143,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-18T10:14:26Z",
+      "side": 1,
+      "message": "You should not need to do such a thing by a normal driver, especially a v4l2 driver.\n\nIf a driver needs to do this, then the driver framework for that bus/subsystem should already be doing this, please do not try to create a new user/kernel api interaction like this that is not accepted by upstream.",
+      "parentUuid": "e0aba3e8_c9087589",
+      "range": {
+        "startLine": 2143,
+        "startChar": 2,
+        "endLine": 2143,
+        "endChar": 21
+      },
+      "revId": "d57aec8c47f6bfed6bfaa34438cd6e80d0253953",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7151c8b7_e9702174",
         "filename": "build.config.gki.aarch64",
         "patchSetId": 1
