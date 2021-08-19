@@ -16,6 +16,23 @@
       "message": "temporally halt the submit, wait for Kyle\u0027s confirmation on BC-triage.\n",
       "revId": "4fb696975cddeee6a7a4975a68fdb85320b68d11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27c91c7a_fa0d9e7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2021-08-19T01:38:29Z",
+      "side": 1,
+      "message": "-2 for reasons mentioned in bug",
+      "revId": "4fb696975cddeee6a7a4975a68fdb85320b68d11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
