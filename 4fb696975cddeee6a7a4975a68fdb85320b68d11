@@ -33,6 +33,23 @@
       "message": "-2 for reasons mentioned in bug",
       "revId": "4fb696975cddeee6a7a4975a68fdb85320b68d11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1333b46_66eb719e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1156728
+      },
+      "writtenOn": "2021-08-19T18:45:19Z",
+      "side": 1,
+      "message": "BC-Triaged",
+      "revId": "4fb696975cddeee6a7a4975a68fdb85320b68d11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
