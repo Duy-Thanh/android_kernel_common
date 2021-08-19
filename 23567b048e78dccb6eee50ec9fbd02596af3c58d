@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b54099e1_1576b050",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-08-19T11:38:22Z",
+      "side": 1,
+      "message": "The commit message needs to call out the added symbols. You can do that by quoting the abi.report.short created during the abi.xml update.",
+      "revId": "23567b048e78dccb6eee50ec9fbd02596af3c58d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
