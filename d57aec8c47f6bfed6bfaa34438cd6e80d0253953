@@ -298,6 +298,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f77183e0_e25e5aa4",
+        "filename": "android/abi_gki_aarch64_imx",
+        "patchSetId": 1
+      },
+      "lineNbr": 2143,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-19T05:52:51Z",
+      "side": 1,
+      "message": "No, that is used by the kernel core for module loading and firmware.",
+      "parentUuid": "184ec3bd_7c58c208",
+      "range": {
+        "startLine": 2143,
+        "startChar": 2,
+        "endLine": 2143,
+        "endChar": 21
+      },
+      "revId": "d57aec8c47f6bfed6bfaa34438cd6e80d0253953",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7151c8b7_e9702174",
