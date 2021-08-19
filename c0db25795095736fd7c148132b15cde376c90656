@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94a92c7a_c956200e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-19T17:11:50Z",
+      "side": 1,
+      "message": "Please break this up into reviewable chunks.  Like one patch per type of symbols/drivers being added (drm, usb, etc.)  Reviewing 200+ symbols all at once is quite difficult.",
+      "revId": "c0db25795095736fd7c148132b15cde376c90656",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01329493_4e7bc920",
+        "filename": "android/abi_gki_aarch64_imx",
+        "patchSetId": 2
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-19T17:11:50Z",
+      "side": 1,
+      "message": "please do not open files and access them from drivers, this is not allowed.",
+      "range": {
+        "startLine": 341,
+        "startChar": 2,
+        "endLine": 341,
+        "endChar": 11
+      },
+      "revId": "c0db25795095736fd7c148132b15cde376c90656",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
