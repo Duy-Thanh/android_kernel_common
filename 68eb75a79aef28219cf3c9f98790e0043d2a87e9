@@ -33,6 +33,23 @@
       "message": "I like that change, though!",
       "revId": "68eb75a79aef28219cf3c9f98790e0043d2a87e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe70da47_e2ebd4de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2021-08-20T16:31:05Z",
+      "side": 1,
+      "message": "Needs GKI newsletter announcement.",
+      "revId": "68eb75a79aef28219cf3c9f98790e0043d2a87e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
