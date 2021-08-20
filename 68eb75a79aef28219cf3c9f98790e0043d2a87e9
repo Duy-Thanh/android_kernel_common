@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37be01b2_c77e88ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-08-20T09:28:00Z",
+      "side": 1,
+      "message": "For that to succeed, you need to put the virtual device/ hikey and db845c symbol lists into place.",
+      "revId": "68eb75a79aef28219cf3c9f98790e0043d2a87e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
