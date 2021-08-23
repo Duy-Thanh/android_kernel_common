@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cd6c308_fde334d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2021-08-23T03:03:41Z",
+      "side": 1,
+      "message": "Thanks Greg. I will break this into several patches, and now this patch only contains display related symbols. Please help review again.",
+      "parentUuid": "94a92c7a_c956200e",
+      "revId": "c0db25795095736fd7c148132b15cde376c90656",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01329493_4e7bc920",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-08-19T17:11:50Z",
       "side": 1,
       "message": "please do not open files and access them from drivers, this is not allowed.",
+      "range": {
+        "startLine": 341,
+        "startChar": 2,
+        "endLine": 341,
+        "endChar": 11
+      },
+      "revId": "c0db25795095736fd7c148132b15cde376c90656",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c47fd63_2ab161b9",
+        "filename": "android/abi_gki_aarch64_imx",
+        "patchSetId": 2
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2021-08-23T03:03:41Z",
+      "side": 1,
+      "message": "Thanks for your review, will remove it in the list.",
+      "parentUuid": "01329493_4e7bc920",
       "range": {
         "startLine": 341,
         "startChar": 2,
