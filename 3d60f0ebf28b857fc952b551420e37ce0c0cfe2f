@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c4e2a72_c003ac5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-24T16:39:51Z",
+      "side": 1,
+      "message": "upstream first?",
+      "revId": "3d60f0ebf28b857fc952b551420e37ce0c0cfe2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91f650e4_921c364f",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-24T16:39:51Z",
+      "side": 1,
+      "message": "fix hook name to follow the standard please.",
+      "range": {
+        "startLine": 384,
+        "startChar": 29,
+        "endLine": 384,
+        "endChar": 56
+      },
+      "revId": "3d60f0ebf28b857fc952b551420e37ce0c0cfe2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
