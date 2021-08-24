@@ -16,6 +16,24 @@
       "message": "Do we care about the CRC change?",
       "revId": "cb81411151e55c6db7515db3e86528c4e0061c4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37ba1f6e_78a041c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-24T16:33:29Z",
+      "side": 1,
+      "message": "We can do nothing about the CRC change, it is a side affect of the abi macros.",
+      "parentUuid": "185e1f79_eb804513",
+      "revId": "cb81411151e55c6db7515db3e86528c4e0061c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
