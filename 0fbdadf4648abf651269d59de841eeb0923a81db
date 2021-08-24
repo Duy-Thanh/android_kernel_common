@@ -16,6 +16,24 @@
       "message": ".xml file comes directly from the android11-5.4-lts branch, no changes.",
       "revId": "0fbdadf4648abf651269d59de841eeb0923a81db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "194d5545_bceabd5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-08-24T21:53:46Z",
+      "side": 1,
+      "message": "\u003e ❌ The following files have actionable findings:\n\u003e         \"abi.report\"\n\u003e \n\nThe AbiAnalyzer indicates that the .xml file is lacking 17 symbols that the kernel build in this branch produces now. Are the branches in sync in regards to symbol lists?",
+      "parentUuid": "70f919e8_71498b41",
+      "revId": "0fbdadf4648abf651269d59de841eeb0923a81db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
