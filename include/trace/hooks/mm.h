@@ -93,6 +93,7 @@ DECLARE_HOOK(android_vh_mem_cgroup_css_online,
 DECLARE_HOOK(android_vh_mem_cgroup_css_offline,
 	TP_PROTO(struct cgroup_subsys_state *css, struct mem_cgroup *memcg),
 	TP_ARGS(css, memcg));
+<<<<<<< HEAD   (a75431 ANDROID: kleaf: Explicit list of ABI files.)
 DECLARE_HOOK(android_vh_vmpressure,
 	TP_PROTO(struct mem_cgroup *memcg, bool *bypass),
 	TP_ARGS(memcg, bypass));
@@ -139,6 +140,13 @@ DECLARE_HOOK(android_vh_rmqueue,
 		unsigned int alloc_flags, int migratetype),
 	TP_ARGS(preferred_zone, zone, order,
 		gfp_flags, alloc_flags, migratetype));
+=======
+DECLARE_HOOK(android_vh_kmalloc_slab,
+	TP_PROTO(unsigned int index, gfp_t flags, struct kmem_cache **s),
+	TP_ARGS(index, flags, s));
+/* macro versions of hooks are no longer required */
+
+>>>>>>> CHANGE (94fbab ANDROID: vendor_hooks: Add hook in kmalloc_slab())
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
