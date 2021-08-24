@@ -67,7 +67,9 @@ DECLARE_HOOK(android_vh_mem_cgroup_css_online,
 DECLARE_HOOK(android_vh_mem_cgroup_css_offline,
 	TP_PROTO(struct cgroup_subsys_state *css, struct mem_cgroup *memcg),
 	TP_ARGS(css, memcg));
-
+DECLARE_HOOK(android_vh_kmalloc_slab,
+	TP_PROTO(unsigned int index, gfp_t flags, struct kmem_cache **s),
+	TP_ARGS(index, flags, s));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
