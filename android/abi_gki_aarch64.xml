@@ -2521,6 +2521,7 @@
       <elf-symbol name='of_property_read_string_helper' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x88748a82'/>
       <elf-symbol name='of_property_read_u32_index' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5e216618'/>
       <elf-symbol name='of_property_read_u64' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe8455312'/>
+      <elf-symbol name='of_property_read_u64_index' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xca3dfd9a'/>
       <elf-symbol name='of_property_read_variable_u16_array' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2a878399'/>
       <elf-symbol name='of_property_read_variable_u32_array' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x88219e72'/>
       <elf-symbol name='of_property_read_variable_u64_array' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8afdd2d3'/>
@@ -36031,6 +36032,7 @@
       </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='arch/arm64/mm/mmu.c' language='LANG_C89'>
+      <var-decl name='vabits_actual' type-id='91ce1af9' mangled-name='vabits_actual' visibility='default' filepath='arch/arm64/mm/mmu.c' line='44' column='1' elf-symbol-id='vabits_actual'/>
       <var-decl name='kimage_voffset' type-id='91ce1af9' mangled-name='kimage_voffset' visibility='default' filepath='arch/arm64/mm/mmu.c' line='47' column='1' elf-symbol-id='kimage_voffset'/>
     </abi-instr>
     <abi-instr address-size='64' path='arch/arm64/net/bpf_jit_comp.c' language='LANG_C89'>
@@ -97207,6 +97209,13 @@
         <parameter type-id='b59d7dce' name='sz_max' filepath='drivers/of/property.c' line='234' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='of_property_read_u64_index' mangled-name='of_property_read_u64_index' filepath='drivers/of/property.c' line='146' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='of_property_read_u64_index'>
+        <parameter type-id='0afa6ea3' name='np' filepath='drivers/of/property.c' line='146' column='1'/>
+        <parameter type-id='80f4b756' name='propname' filepath='drivers/of/property.c' line='147' column='1'/>
+        <parameter type-id='19c2251e' name='index' filepath='drivers/of/property.c' line='148' column='1'/>
+        <parameter type-id='3df9fd28' name='out_value' filepath='drivers/of/property.c' line='148' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='of_property_read_string_helper' mangled-name='of_property_read_string_helper' filepath='drivers/of/property.c' line='457' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='of_property_read_string_helper'>
         <parameter type-id='0afa6ea3' name='np' filepath='drivers/of/property.c' line='457' column='1'/>
         <parameter type-id='80f4b756' name='propname' filepath='drivers/of/property.c' line='458' column='1'/>
@@ -157217,6 +157226,26 @@
           <var-decl name='offset' type-id='b48ea880' visibility='default' filepath='include/net/flow_dissector.h' line='271' column='1'/>
         </data-member>
       </class-decl>
+      <union-decl name='nf_conntrack_proto' size-in-bits='512' visibility='default' filepath='include/net/netfilter/nf_conntrack.h' line='34' column='1' id='1f42e327'>
+        <data-member access='public'>
+          <var-decl name='dccp' type-id='f0e59128' visibility='default' filepath='include/net/netfilter/nf_conntrack.h' line='36' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='sctp' type-id='6bb7a9ad' visibility='default' filepath='include/net/netfilter/nf_conntrack.h' line='37' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='tcp' type-id='3ffb049e' visibility='default' filepath='include/net/netfilter/nf_conntrack.h' line='38' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='udp' type-id='21861431' visibility='default' filepath='include/net/netfilter/nf_conntrack.h' line='39' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='gre' type-id='0b2cc27e' visibility='default' filepath='include/net/netfilter/nf_conntrack.h' line='40' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='tmpl_padto' type-id='f0981eeb' visibility='default' filepath='include/net/netfilter/nf_conntrack.h' line='41' column='1'/>
+        </data-member>
+      </union-decl>
       <class-decl name='xt_table_info' size-in-bits='512' is-struct='yes' visibility='default' filepath='include/linux/netfilter/x_tables.h' line='248' column='1' id='68a72cd7'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='size' type-id='f0981eeb' visibility='default' filepath='include/linux/netfilter/x_tables.h' line='250' column='1'/>
@@ -157613,26 +157642,6 @@
           <var-decl name='data' type-id='e84913bd' visibility='default' filepath='include/net/netfilter/nf_conntrack_extend.h' line='49' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='nf_conntrack_proto' size-in-bits='512' visibility='default' filepath='include/net/netfilter/nf_conntrack.h' line='34' column='1' id='1f42e327'>
-        <data-member access='public'>
-          <var-decl name='dccp' type-id='f0e59128' visibility='default' filepath='include/net/netfilter/nf_conntrack.h' line='36' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='sctp' type-id='6bb7a9ad' visibility='default' filepath='include/net/netfilter/nf_conntrack.h' line='37' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='tcp' type-id='3ffb049e' visibility='default' filepath='include/net/netfilter/nf_conntrack.h' line='38' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='udp' type-id='21861431' visibility='default' filepath='include/net/netfilter/nf_conntrack.h' line='39' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='gre' type-id='0b2cc27e' visibility='default' filepath='include/net/netfilter/nf_conntrack.h' line='40' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='tmpl_padto' type-id='f0981eeb' visibility='default' filepath='include/net/netfilter/nf_conntrack.h' line='41' column='1'/>
-        </data-member>
-      </union-decl>
       <class-decl name='nf_ct_dccp' size-in-bits='128' is-struct='yes' visibility='default' filepath='include/linux/netfilter/nf_conntrack_dccp.h' line='30' column='1' id='f0e59128'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='role' type-id='a212abfb' visibility='default' filepath='include/linux/netfilter/nf_conntrack_dccp.h' line='31' column='1'/>
