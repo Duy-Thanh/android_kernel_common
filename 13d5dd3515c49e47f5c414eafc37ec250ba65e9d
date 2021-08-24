@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ead24b27_79773b09",
+        "filename": "mm/slab_common.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-24T18:35:12Z",
+      "side": 1,
+      "message": "that is not handling leaks, that is changing this function works in major ways.\n\nWhy is this needed?  What does the current kmalloc code not do that you need here?",
+      "range": {
+        "startLine": 658,
+        "startChar": 1,
+        "endLine": 659,
+        "endChar": 11
+      },
+      "revId": "13d5dd3515c49e47f5c414eafc37ec250ba65e9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
