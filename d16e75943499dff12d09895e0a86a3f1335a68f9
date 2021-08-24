@@ -16,6 +16,24 @@
       "message": "need a better subject line...",
       "revId": "d16e75943499dff12d09895e0a86a3f1335a68f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c1a2de9_b42eb33a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1570698
+      },
+      "writtenOn": "2021-08-24T17:45:48Z",
+      "side": 1,
+      "message": "subject updated.",
+      "parentUuid": "0cba45a3_fdec8d5a",
+      "revId": "d16e75943499dff12d09895e0a86a3f1335a68f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
