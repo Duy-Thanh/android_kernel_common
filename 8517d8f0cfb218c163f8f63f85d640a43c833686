@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "622133b3_278e2a17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-24T16:28:20Z",
+      "side": 1,
+      "message": "You can not have two different commits with identical subject and changelog text.\n\nPlease make these unique and say what they are doing.",
+      "revId": "8517d8f0cfb218c163f8f63f85d640a43c833686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
