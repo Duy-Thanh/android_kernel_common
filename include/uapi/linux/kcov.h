@@ -16,12 +16,19 @@ struct kcov_remote_arg {
 	__aligned_u64	handles[0];
 };
 
+#define PC_RANGE_MASK ((__u32)(~((u32) 0)))
+struct kcov_pc_range {
+	__u32		start;		/* start pc & 0xFFFFFFFF */
+	__u32		end;		/* end pc & 0xFFFFFFFF */
+};
+
 #define KCOV_REMOTE_MAX_HANDLES		0x100
 
 #define KCOV_INIT_TRACE			_IOR('c', 1, unsigned long)
 #define KCOV_ENABLE			_IO('c', 100)
 #define KCOV_DISABLE			_IO('c', 101)
 #define KCOV_REMOTE_ENABLE		_IOW('c', 102, struct kcov_remote_arg)
+#define KCOV_PC_RANGE			_IOW('c', 103, struct kcov_pc_range)
 
 enum {
 	/*

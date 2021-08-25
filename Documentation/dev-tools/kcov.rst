@@ -51,9 +51,15 @@ program using kcov:
     #include <unistd.h>
     #include <fcntl.h>
 
+    struct kcov_pc_range {
+      uint32 start;
+      uint32 end;
+    };
+
     #define KCOV_INIT_TRACE			_IOR('c', 1, unsigned long)
     #define KCOV_ENABLE			_IO('c', 100)
     #define KCOV_DISABLE			_IO('c', 101)
+    #define KCOV_TRACE_RANGE			_IOW('c', 103, struct kcov_pc_range)
     #define COVER_SIZE			(64<<10)
 
     #define KCOV_TRACE_PC  0
@@ -63,6 +69,8 @@ program using kcov:
     {
 	int fd;
 	unsigned long *cover, n, i;
+        /* Change start and/or end to your interested pc range. */
+        struct kcov_pc_range pc_range = {.start = 0, .end = (uint32)(~((uint32)0))};
 
 	/* A single fd descriptor allows coverage collection on a single
 	 * thread.
@@ -78,6 +86,8 @@ program using kcov:
 				     PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
 	if ((void*)cover == MAP_FAILED)
 		perror("mmap"), exit(1);
+        if (ioctl(fd, KCOV_PC_RANGE, pc_range))
+		dprintf(2, "ignore KCOV_PC_RANGE error.\n");
 	/* Enable coverage collection on the current thread. */
 	if (ioctl(fd, KCOV_ENABLE, KCOV_TRACE_PC))
 		perror("ioctl"), exit(1);

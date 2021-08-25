@@ -36,6 +36,7 @@
  *  - initial state after open()
  *  - then there must be a single ioctl(KCOV_INIT_TRACE) call
  *  - then, mmap() call (several calls are allowed but not useful)
+ *  - then, optional to set trace pc range
  *  - then, ioctl(KCOV_ENABLE, arg), where arg is
  *	KCOV_TRACE_PC - to trace only the PCs
  *	or
@@ -69,6 +70,8 @@ struct kcov {
 	 * kcov_remote_stop(), see the comment there.
 	 */
 	int			sequence;
+	/* u32 Trace PC range from start to end. */
+	struct kcov_pc_range 	pc_range;
 };
 
 struct kcov_remote_area {
@@ -189,12 +192,18 @@ static notrace unsigned long canonicalize_ip(unsigned long ip)
 void notrace __sanitizer_cov_trace_pc(void)
 {
 	struct task_struct *t;
+	struct kcov_pc_range pc_range;
 	unsigned long *area;
 	unsigned long ip = canonicalize_ip(_RET_IP_);
 	unsigned long pos;
 
 	t = current;
 	if (!check_kcov_mode(KCOV_MODE_TRACE_PC, t))
+		return;
+	pc_range = t->kcov->pc_range;
+	if (pc_range.start < pc_range.end &&
+		((ip & PC_RANGE_MASK) < pc_range.start ||
+		(ip & PC_RANGE_MASK) > pc_range.end))
 		return;
 
 	area = t->kcov_area;
@@ -565,6 +574,7 @@ static int kcov_ioctl_locked(struct kcov *kcov, unsigned int cmd,
 	int mode, i;
 	struct kcov_remote_arg *remote_arg;
 	struct kcov_remote *remote;
+	struct kcov_pc_range *pc_range;
 	unsigned long flags;
 
 	switch (cmd) {
@@ -585,6 +595,14 @@ static int kcov_ioctl_locked(struct kcov *kcov, unsigned int cmd,
 			return -EINVAL;
 		kcov->size = size;
 		kcov->mode = KCOV_MODE_INIT;
+		return 0;
+       case KCOV_PC_RANGE:
+		/* Limit trace pc range. */
+		pc_range = (struct kcov_pc_range *)arg;
+		if (copy_from_user(&kcov->pc_range, pc_range, sizeof(kcov->pc_range)))
+			return -EINVAL;
+		if (kcov->pc_range.start >= kcov->pc_range.end)
+			return -EINVAL;
 		return 0;
 	case KCOV_ENABLE:
 		/*
