@@ -16,6 +16,24 @@
       "message": "Hi Guangming, could you please resend the patch upstream? We are currently not taking FROMLIST patches to android-mainline branch so we would need this patch upstreamed for the next kernel versions to have it. Also, could you please send it along with https://android-review.googlesource.com/c/kernel/common/+/1014419? It introduces the \u0027dma_map_attr\u0027 of struct dma_buf_attachment that is used by this patch so it would make sense to send them together. Thanks!",
       "revId": "956db89e711f9ab3d608f3b2bafc6cefef9cc347",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8725764_a027c159",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878921
+      },
+      "writtenOn": "2021-08-26T03:34:52Z",
+      "side": 1,
+      "message": "Got it, I will send them together, thanks!",
+      "parentUuid": "352664d1_c4f2b804",
+      "revId": "956db89e711f9ab3d608f3b2bafc6cefef9cc347",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
