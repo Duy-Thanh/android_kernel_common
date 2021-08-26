@@ -52,6 +52,24 @@
       "parentUuid": "194d5545_bceabd5f",
       "revId": "0fbdadf4648abf651269d59de841eeb0923a81db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18c6a6da_4ef4225f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-26T12:58:51Z",
+      "side": 1,
+      "message": "Now done in https://android-review.googlesource.com/c/kernel/common/+/1810336",
+      "parentUuid": "23dfd6ae_cc719883",
+      "revId": "0fbdadf4648abf651269d59de841eeb0923a81db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
