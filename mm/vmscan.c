@@ -1522,6 +1522,7 @@ keep:
 
 	return nr_reclaimed;
 }
+EXPORT_SYMBOL_GPL(shrink_page_list);
 
 unsigned int reclaim_clean_pages_from_list(struct zone *zone,
 					    struct list_head *page_list)
@@ -4134,6 +4135,7 @@ unsigned long shrink_all_memory(unsigned long nr_to_reclaim)
 
 	return nr_reclaimed;
 }
+EXPORT_SYMBOL_GPL(shrink_all_memory);
 #endif /* CONFIG_HIBERNATION */
 
 /*
