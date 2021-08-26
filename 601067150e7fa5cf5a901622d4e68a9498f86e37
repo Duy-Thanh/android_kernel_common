@@ -16,6 +16,24 @@
       "message": "Do we need this on android13-5.10 as well?",
       "revId": "601067150e7fa5cf5a901622d4e68a9498f86e37",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "682f3885_aed62b45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2021-08-26T15:10:07Z",
+      "side": 1,
+      "message": "Yes. I\u0027ll cherry-pick it there.",
+      "parentUuid": "f7aee46a_26859de0",
+      "revId": "601067150e7fa5cf5a901622d4e68a9498f86e37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
