@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fb5e6ff_06967078",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-08-26T10:04:49Z",
+      "side": 1,
+      "message": "I\u0027m not convinced that this is worth picking up -- the hex doesn\u0027t seem like the end of the world, and on the off-chance that somebody has tools which rely on that then we\u0027d break them by changing it.",
+      "revId": "b8201b53b423c86afa6ff56f0cf4f263f5e22ca8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
