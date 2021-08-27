@@ -51,6 +51,23 @@
       "message": "from the build failures:\n\ninclude/linux/device.h:1342: raw_spinlock_t msi_lock is larger than u64 android_kabi_reserved1",
       "revId": "cb81411151e55c6db7515db3e86528c4e0061c4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce6550b4_579da3eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-27T12:50:19Z",
+      "side": 1,
+      "message": "This isn\u0027t going to work like this.\n\nWill just revert the offending patches, they are for hardware that is not targeted for android devices on this branch...",
+      "revId": "cb81411151e55c6db7515db3e86528c4e0061c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
