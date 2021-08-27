@@ -16,6 +16,24 @@
       "message": "Is CONFIG_SCHED_STACK_END_CHECK already set somewhere?",
       "revId": "6ad70e17e0bd6e2156db36804a9b3758a2af70e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83daed43_1569e370",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-08-27T19:10:18Z",
+      "side": 1,
+      "message": "We decided to wait on it since it is a \u0027good to have\u0027 and not a \u0027must\u0027. We\u0027d like to run it past other partners before merging (it looks totally benign, but it is late for making changes like this). If we still want it, we\u0027d list it in the gki newsletter for 2 weeks to let partners comment.",
+      "parentUuid": "120ca99c_d9d5ddc2",
+      "revId": "6ad70e17e0bd6e2156db36804a9b3758a2af70e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
