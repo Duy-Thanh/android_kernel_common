@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f89ab69_8e82ec06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-08-27T21:58:47Z",
+      "side": 1,
+      "message": "Refactored to avoid changing KMI",
+      "revId": "f1e1938dbd5fc6eaa73190a02dac1aec66d4e1ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
