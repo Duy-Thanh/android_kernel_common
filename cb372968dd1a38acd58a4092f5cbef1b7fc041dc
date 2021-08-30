@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f414d775_df4e8a74",
+        "filename": "block/blk-mq.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1988,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-08-30T17:14:33Z",
+      "side": 1,
+      "message": "What is \"struct ext_blk_mq_tags\"? That structure does not exist in the upstream code. Please explain in the commit message how this patch differs commit bd63141d585bef14f4caf111f6d0e27fe2300ec6.",
+      "range": {
+        "startLine": 1988,
+        "startChar": 1,
+        "endLine": 1988,
+        "endChar": 35
+      },
+      "revId": "cb372968dd1a38acd58a4092f5cbef1b7fc041dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
