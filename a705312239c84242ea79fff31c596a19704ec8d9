@@ -22,6 +22,30 @@
       },
       "revId": "a705312239c84242ea79fff31c596a19704ec8d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b2eacae_e7379768",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1770429
+      },
+      "writtenOn": "2021-08-30T01:44:07Z",
+      "side": 1,
+      "message": "sorry for that, it has been fixed now.",
+      "parentUuid": "37d984b7_eca61ea7",
+      "range": {
+        "startLine": 38,
+        "startChar": 15,
+        "endLine": 38,
+        "endChar": 25
+      },
+      "revId": "a705312239c84242ea79fff31c596a19704ec8d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
