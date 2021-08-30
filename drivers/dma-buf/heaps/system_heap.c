@@ -180,9 +180,10 @@ static int system_heap_dma_buf_begin_cpu_access(struct dma_buf *dmabuf,
 
 	if (!buffer->uncached) {
 		list_for_each_entry(a, &buffer->attachments, list) {
-			if (!a->mapped)
-				continue;
-			dma_sync_sgtable_for_cpu(a->dev, a->table, direction);
+			if (a->mapped) {
+				dma_sync_sgtable_for_cpu(a->dev, a->table, direction);
+				break;
+			}
 		}
 	}
 	mutex_unlock(&buffer->lock);
@@ -203,9 +204,10 @@ static int system_heap_dma_buf_end_cpu_access(struct dma_buf *dmabuf,
 
 	if (!buffer->uncached) {
 		list_for_each_entry(a, &buffer->attachments, list) {
-			if (!a->mapped)
-				continue;
-			dma_sync_sgtable_for_device(a->dev, a->table, direction);
+			if (a->mapped) {
+				dma_sync_sgtable_for_device(a->dev, a->table, direction);
+				break;
+			}
 		}
 	}
 	mutex_unlock(&buffer->lock);
