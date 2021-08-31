@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c6fffa8_c864a2f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-08-31T15:54:26Z",
+      "side": 1,
+      "message": "should be \"Bug: \". Since this is a bug fix, please also use a \"Fixes:\" tag to cite the patch that introduced the issue if possible.",
+      "revId": "c653812c11826c7a7ce7d4f68e09f95ffd1e0733",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ae53aa4c_037ea9f4",
