@@ -33,6 +33,24 @@
       "message": "If you have specific problems with the current rndis driver, please let us know what they are and we will be glad to help work on solving them, upstream.",
       "revId": "543584e2126a9b4ea2f79af3dde5c2fc184994a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa7e4b40_2d50321a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1079098
+      },
+      "writtenOn": "2021-09-01T23:46:57Z",
+      "side": 1,
+      "message": "1. Mediatek checked those patches in the latest kernel tree had been merged into ACK-5.10 in couple of months ago. May we know which patches are missing?\n\n2. I know it is technical debt to maintain out of tree module, but I don\u0027t understand why can\u0027t those symbols be used on GKI.",
+      "parentUuid": "861de338_96279c99",
+      "revId": "543584e2126a9b4ea2f79af3dde5c2fc184994a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
