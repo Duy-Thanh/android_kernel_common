@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afa1c233_8f4cf30e",
+        "filename": "kernel/trace/trace_events_hist.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1621,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-09-01T20:40:00Z",
+      "side": 1,
+      "message": "Maximum number of sub-expression restored to 3. The shape of the parse tree has no effect on this as was the behavior before.\n\nFixed the associativity issue. Operators of same precedence are always evaluated left to right.",
+      "parentUuid": "819aa808_25087306",
+      "revId": "61326371d90adfc1a2193bae56af2b09450af6be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac1e69fd_ab614da2",
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Good catch. This should fall hit the unary minus case but currently doesn\u0027t. Will update in the next version.",
       "parentUuid": "23993e85_c767014c",
+      "revId": "61326371d90adfc1a2193bae56af2b09450af6be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ade8e1e2_41434f74",
+        "filename": "kernel/trace/trace_events_hist.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-09-01T20:40:00Z",
+      "side": 1,
+      "message": "Unary minus now works for the above.\n\nNote that unary minus was never supported as a part of a larger expression. e.g.\n\nx\u003d-(1*3)+4 is not valid expression and is truncated to x\u003d-(1*3) when the trigger is created. This is consistent with the previous behavior.",
+      "parentUuid": "2c60a2b0_1f97f5e6",
       "revId": "61326371d90adfc1a2193bae56af2b09450af6be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
