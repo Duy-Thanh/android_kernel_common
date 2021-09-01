@@ -16,6 +16,23 @@
       "message": "note, the rndis driver has been worked on a lot to go much faster recently, so I would prefer to take the needed fixes to that driver instead of forcing you to try to have an out-of-tree driver that you have to maintain and support on your own.",
       "revId": "543584e2126a9b4ea2f79af3dde5c2fc184994a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "203a754c_be9b5b2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-01T07:42:59Z",
+      "side": 1,
+      "message": "If you have specific problems with the current rndis driver, please let us know what they are and we will be glad to help work on solving them, upstream.",
+      "revId": "543584e2126a9b4ea2f79af3dde5c2fc184994a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
