@@ -1337,6 +1337,7 @@
   proc_dostring
   proc_douintvec_minmax
   proc_mkdir
+  proc_remove
   __pskb_pull_tail
   put_device
   put_disk
@@ -1423,6 +1424,7 @@
   regmap_write
   regulator_bulk_disable
   regulator_bulk_enable
+  regulator_count_voltages
   regulator_disable
   regulator_disable_regmap
   regulator_enable
