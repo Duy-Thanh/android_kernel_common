@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4405d93f_1f7df3bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-09-01T15:20:38Z",
+      "side": 1,
+      "message": "It looks like this update was done with an outdate libabigail toolchain (massive xml diff). Can you please repo sync and redo the update?",
+      "revId": "3887d7ee106cb80619263e688e56e613d8f73c0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
