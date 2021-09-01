@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4b44cb1_7e8e45bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-09-01T20:33:27Z",
+      "side": 1,
+      "message": "Greg/Todd, we will need this driver for our internal work based on android-mainline. OR are you referring that we can have this driver once we create the android13-5.xx branch? ",
+      "revId": "49dc1beb4d2847d9025b0876cff0a3519b9ec057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
