@@ -76,6 +76,7 @@
 #include <asm/tlbflush.h>
 
 #include <trace/events/tlb.h>
+#include <trace/hooks/mm.h>
 
 #include "internal.h"
 
@@ -1706,6 +1707,7 @@ discard:
 	}
 
 	mmu_notifier_invalidate_range_end(&range);
+	trace_android_vh_applink_rmap(vma, page);
 
 	return ret;
 }

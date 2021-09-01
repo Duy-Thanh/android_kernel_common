@@ -117,6 +117,15 @@ DECLARE_HOOK(android_vh_mem_cgroup_css_online,
 DECLARE_HOOK(android_vh_mem_cgroup_css_offline,
 	TP_PROTO(struct cgroup_subsys_state *css, struct mem_cgroup *memcg),
 	TP_ARGS(css, memcg));
+DECLARE_HOOK(android_vh_applink_mmap,
+	TP_PROTO(struct vm_area_struct *vma, struct task_struct *tsk),
+	TP_ARGS(vma, tsk));
+DECLARE_HOOK(android_vh_applink_rmap,
+	TP_PROTO(struct vm_area_struct *vma, struct page *page),
+	TP_ARGS(vma, page));
+DECLARE_HOOK(android_vh_applink_exit,
+	TP_PROTO(struct task_struct *tsk),
+	TP_ARGS(tsk));
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_MM_H */

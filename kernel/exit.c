@@ -764,6 +764,7 @@ void __noreturn do_exit(long code)
 		set_current_state(TASK_UNINTERRUPTIBLE);
 		schedule();
 	}
+	trace_android_vh_applink_exit(tsk);
 
 	io_uring_files_cancel(tsk->files);
 	exit_signals(tsk);  /* sets PF_EXITING */
