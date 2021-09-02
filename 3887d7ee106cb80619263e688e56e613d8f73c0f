@@ -16,6 +16,24 @@
       "message": "It looks like this update was done with an outdate libabigail toolchain (massive xml diff). Can you please repo sync and redo the update?",
       "revId": "3887d7ee106cb80619263e688e56e613d8f73c0f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c557374d_af2e948d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1770429
+      },
+      "writtenOn": "2021-09-02T07:17:17Z",
+      "side": 1,
+      "message": "Hi sir,\nI sync toolchain and rebulid, pls help review.",
+      "parentUuid": "4405d93f_1f7df3bd",
+      "revId": "3887d7ee106cb80619263e688e56e613d8f73c0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
