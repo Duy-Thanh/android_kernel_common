@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae61e80c_0d345bcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894700
+      },
+      "writtenOn": "2021-09-02T12:39:28Z",
+      "side": 1,
+      "message": "I delete the hooks in syscall. But I still need to know the vma/page information of the process to do some data statistics and feature optimization. Please review it. Thanks",
+      "parentUuid": "9104188f_d1b10720",
+      "revId": "7d7ae6ed91cccf4c651ec63b60d758c94857184a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9810a585_79017bce",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-09-01T11:58:05Z",
       "side": 1,
       "message": "why can you not use the ptrace event above instead?",
+      "range": {
+        "startLine": 767,
+        "startChar": 0,
+        "endLine": 767,
+        "endChar": 36
+      },
+      "revId": "7d7ae6ed91cccf4c651ec63b60d758c94857184a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54ece37e_52891d7e",
+        "filename": "kernel/exit.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1894700
+      },
+      "writtenOn": "2021-09-02T12:39:28Z",
+      "side": 1,
+      "message": "I try to use the existing trace and it works. I delete the hook in do_exit and update the patch. Please review it.Thanks",
+      "parentUuid": "9810a585_79017bce",
       "range": {
         "startLine": 767,
         "startChar": 0,
