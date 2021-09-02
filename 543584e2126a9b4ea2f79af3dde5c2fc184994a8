@@ -51,6 +51,24 @@
       "parentUuid": "861de338_96279c99",
       "revId": "543584e2126a9b4ea2f79af3dde5c2fc184994a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04c64f06_0142582f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-02T06:57:20Z",
+      "side": 1,
+      "message": "I do not know what patches are missing, what problems do you have with the existing in-tree driver and where have you reported them?\n\nWe fixed a number of throughput issues recently, some of which ended up being caused by arm64 core and platform problems with timers and were exposed due to how the USB driver used them.  If you have these same issues, we would like to know.\n\nSo please, let us know what is wrong with the in-kernel code so that we can improve it for all users.",
+      "parentUuid": "fa7e4b40_2d50321a",
+      "revId": "543584e2126a9b4ea2f79af3dde5c2fc184994a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
