@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ae0064f_4793874e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-02T12:42:49Z",
+      "side": 1,
+      "message": "need a much better changelog explaining what these hooks are for and how to use them.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 39
+      },
+      "revId": "3461c808bbab33bdc56a0efdea26a8b9ac97ef10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7fe5cd1_744d0819",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-02T12:42:49Z",
+      "side": 1,
+      "message": "Please split this up into one-patch-per-hook and provide a lot of documentation and information on what they are and what they are for and how to use them.",
+      "revId": "3461c808bbab33bdc56a0efdea26a8b9ac97ef10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
