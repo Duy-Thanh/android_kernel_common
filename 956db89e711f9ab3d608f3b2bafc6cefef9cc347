@@ -70,6 +70,24 @@
       "parentUuid": "f299d7bb_45e4afe8",
       "revId": "956db89e711f9ab3d608f3b2bafc6cefef9cc347",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99c3bb54_6304c1e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-09-02T18:59:47Z",
+      "side": 1,
+      "message": "Unfortunately not :( Would you perhaps be open to upstreaming your kernel driver who uses the same? Thank you!",
+      "parentUuid": "897872a8_a9362ba8",
+      "revId": "956db89e711f9ab3d608f3b2bafc6cefef9cc347",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
