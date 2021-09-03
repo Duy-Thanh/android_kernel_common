@@ -33,6 +33,24 @@
       "message": "We can take this driver into android-mainline since it is the agreed upon way to access these internal symbols for mini-dump functionality.\n\nPlease squash the set of patches for this driver in android12-5.10 so we have 1 clean patch adding this (add annotations in the commit message indicating the patches that were combined).\n\nPlease fix the \"Owner: Deleted User\" -- the owner should be a person (probably Prasad)",
       "revId": "49dc1beb4d2847d9025b0876cff0a3519b9ec057",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47052926_19f1b880",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2021-09-03T16:25:51Z",
+      "side": 1,
+      "message": "Hi Todd, I think this is due to some account re-arrangement on my end when my email aliases were consolidated into one account. I\u0027m not sure how/if it is possible to update.",
+      "parentUuid": "e90aa9a1_d8a849b9",
+      "revId": "49dc1beb4d2847d9025b0876cff0a3519b9ec057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
