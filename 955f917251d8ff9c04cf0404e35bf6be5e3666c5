@@ -16,6 +16,24 @@
       "message": "For memory issues, why not just use the normal tools we already have?  Why do you need another hook for this?",
       "revId": "955f917251d8ff9c04cf0404e35bf6be5e3666c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a335c2db_3e8e8d07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894700
+      },
+      "writtenOn": "2021-09-06T12:54:51Z",
+      "side": 1,
+      "message": "We open zram as a swap partition. There is only pages information in zram and no process and vma information.\nThrough /proc/pid/smaps can know the swap information about the process and vma. But when the page in zram is abnormal, it\u0027s not easy to trace the error page which process it is.\nWe hope to know the relationship between the swap out pages and the process information to help debug swap related issues.",
+      "parentUuid": "0577c801_dc29b4cd",
+      "revId": "955f917251d8ff9c04cf0404e35bf6be5e3666c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
