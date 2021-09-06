@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000015101787",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1818181?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "8faca15d_c19df329",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 25,
+                "startChar": 0,
+                "endLine": 25,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Bicycle Tsai \u003cbicycle.tsai@mediatek.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "e9fd5219_821e1784",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-09-06T04:13:02Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Bicycle Tsai \u003cbicycle.tsai@mediatek.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 394468765 android-build.ayeaye-python-dispatcher_20210902.05_p0",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 0
+      },
+      "revId": "67432fadee135770e6c458dd354840d130889511",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
