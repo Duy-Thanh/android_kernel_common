@@ -58,4 +58,8 @@ obj-$(CONFIG_HABANA_AI)		+= habanalabs/
 obj-$(CONFIG_UACCE)		+= uacce/
 obj-$(CONFIG_XILINX_SDFEC)	+= xilinx_sdfec.o
 obj-$(CONFIG_HISI_HIKEY_USB)	+= hisi_hikey_usb.o
+<<<<<<< HEAD   (b5c77f Merge c6c3c5704ba7 ("Merge tag 'driver-core-5.15-rc1' of git)
 obj-$(CONFIG_UID_SYS_STATS)	+= uid_sys_stats.o
+=======
+obj-$(CONFIG_HI6421V600_IRQ)	+= hi6421v600-irq.o
+>>>>>>> BRANCH (07281a Merge tag 'usb-5.15-rc1' of git://git.kernel.org/pub/scm/lin)
