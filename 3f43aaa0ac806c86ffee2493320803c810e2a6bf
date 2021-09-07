@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d89bc42d_091b2afb",
+        "filename": "kernel/trace/trace_events_hist.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2299,
+      "author": {
+        "id": 1613258
+      },
+      "writtenOn": "2021-09-07T20:18:54Z",
+      "side": 1,
+      "message": "Could you please add a comment why you changed it to a pointer?",
+      "revId": "3f43aaa0ac806c86ffee2493320803c810e2a6bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "787761b3_7f678370",
+        "filename": "kernel/trace/trace_events_hist.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1631,
+      "author": {
+        "id": 1613258
+      },
+      "writtenOn": "2021-09-07T20:18:54Z",
+      "side": 1,
+      "message": "I wouldn\u0027t say it\u0027s valid.  Maybe we should detect if sym-offset is used in an expression and show a warning.",
+      "parentUuid": "d5d1b219_3f237bff",
+      "revId": "61326371d90adfc1a2193bae56af2b09450af6be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23993e85_c767014c",
         "filename": "kernel/trace/trace_events_hist.c",
         "patchSetId": 2
