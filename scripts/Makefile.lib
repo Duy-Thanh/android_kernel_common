@@ -313,6 +313,7 @@ DTC_FLAGS += $(call dtc-option,-Wno-interrupt_provider)
 
 # Disable noisy checks by default
 ifeq ($(findstring 1,$(KBUILD_EXTRA_WARN)),)
+<<<<<<< HEAD   (0ea822 Merge 4cdc4cc2ad35 ("Merge tag 'asm-generic-5.15' of git://g)
 DTC_FLAGS += $(call dtc-option,-Wno-unit_address_vs_reg) \
 	$(call dtc-option,-Wno-unit_address_format) \
 	$(call dtc-option,-Wno-avoid_unnecessary_addr_size) \
@@ -321,6 +322,15 @@ DTC_FLAGS += $(call dtc-option,-Wno-unit_address_vs_reg) \
 	$(call dtc-option,-Wno-simple_bus_reg) \
 	$(call dtc-option,-Wno-unique_unit_address) \
 	$(call dtc-option,-Wno-pci_device_reg)
+=======
+DTC_FLAGS += -Wno-unit_address_vs_reg \
+	-Wno-unit_address_format \
+	-Wno-avoid_unnecessary_addr_size \
+	-Wno-alias_paths \
+	-Wno-graph_child_address \
+	-Wno-simple_bus_reg \
+	-Wno-unique_unit_address
+>>>>>>> BRANCH (4ac6d9 Merge tag 'docs-5.15' of git://git.lwn.net/linux)
 endif
 
 ifneq ($(findstring 2,$(KBUILD_EXTRA_WARN)),)
