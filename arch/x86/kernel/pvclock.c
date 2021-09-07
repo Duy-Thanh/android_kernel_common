@@ -153,4 +153,7 @@ struct pvclock_vsyscall_time_info *pvclock_get_pvti_cpu0_va(void)
 {
 	return pvti_cpu0_va;
 }
+
+EXPORT_SYMBOL_GPL(pvclock_clocksource_read);
+EXPORT_SYMBOL_GPL(pvclock_set_pvti_cpu0_va);
 EXPORT_SYMBOL_GPL(pvclock_get_pvti_cpu0_va);
