@@ -16,6 +16,24 @@
       "message": "Could you please add a comment why you changed it to a pointer?",
       "revId": "3f43aaa0ac806c86ffee2493320803c810e2a6bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea87ce66_11c4694c",
+        "filename": "kernel/trace/trace_events_hist.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2299,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-09-07T20:55:19Z",
+      "side": 1,
+      "message": "Before it was passed by value as the recursion always went left to right and would generate a degenerate expression tree (linked list) as it didn\u0027t take into account the order of operators.\n\nWhen accounting for the order of operators the expression tree is more like a binary tree, so we need to save the number of levels (sub-expressions) parsed in the left sub-tree to continue counting in the right sub-tree, in order to determine whether the limit of of 3 sub-expressions has been exceeded. So it was changed to pointer for that reason.\n\nI think \"level\" may be the incorrect and confusing term to use now. I\u0027ll rename to something more appropriate.",
+      "parentUuid": "d89bc42d_091b2afb",
+      "revId": "3f43aaa0ac806c86ffee2493320803c810e2a6bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

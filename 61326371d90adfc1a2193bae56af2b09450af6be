@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d342e8a3_7130b06f",
+        "filename": "kernel/trace/trace_events_hist.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1631,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-09-07T20:55:19Z",
+      "side": 1,
+      "message": "Ack. We can return error if used like this and log it in tracing/error_log. Will update.",
+      "parentUuid": "787761b3_7f678370",
+      "revId": "61326371d90adfc1a2193bae56af2b09450af6be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23993e85_c767014c",
         "filename": "kernel/trace/trace_events_hist.c",
         "patchSetId": 2
