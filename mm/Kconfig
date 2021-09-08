@@ -907,4 +907,6 @@ config ANON_VMA_NAME
 	  area from being merged with adjacent virtual memory areas due to the
 	  difference in their name.
 
+source "mm/damon/Kconfig"
+
 endmenu
