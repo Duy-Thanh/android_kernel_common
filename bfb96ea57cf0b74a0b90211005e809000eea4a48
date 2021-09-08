@@ -16,6 +16,24 @@
       "message": "Please make sure this patch also lands in -stable, so it gets consolidated eventually.",
       "revId": "bfb96ea57cf0b74a0b90211005e809000eea4a48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e2982f6_a0bcbee8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-09-08T21:45:12Z",
+      "side": 1,
+      "message": "Yeah, let me do that.",
+      "parentUuid": "79210814_9990dabf",
+      "revId": "bfb96ea57cf0b74a0b90211005e809000eea4a48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
