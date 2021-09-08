@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79210814_9990dabf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2021-09-08T21:44:31Z",
+      "side": 1,
+      "message": "Please make sure this patch also lands in -stable, so it gets consolidated eventually.",
+      "revId": "bfb96ea57cf0b74a0b90211005e809000eea4a48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
