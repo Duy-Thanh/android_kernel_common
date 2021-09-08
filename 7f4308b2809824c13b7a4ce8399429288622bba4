@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d49457e8_8a6428af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-08T05:59:09Z",
+      "side": 1,
+      "message": "this should be \"FROMLIST\", and point to the upstream discussion, right?\n\nUnless this has diverged from upstream?\n\nAnd when is this going to be resubmitted for inclusion upstream?  What is preventing that from happening today?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "7f4308b2809824c13b7a4ce8399429288622bba4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
