@@ -19,6 +19,12 @@ static void fuse_copyattr(struct file *dst_file, struct file *src_file)
 	struct inode *dst = file_inode(dst_file);
 	struct inode *src = file_inode(src_file);
 
+	dst->i_uid = src->i_uid;
+	dst->i_gid = src->i_gid;
+	dst->i_mode = src->i_mode;
+	dst->i_atime = src->i_atime;
+	dst->i_mtime = src->i_mtime;
+	dst->i_ctime = src->i_ctime;
 	i_size_write(dst, i_size_read(src));
 }
 
@@ -102,6 +108,8 @@ ssize_t fuse_passthrough_write_iter(struct kiocb *iocb_fuse,
 		return 0;
 
 	inode_lock(fuse_inode);
+
+	fuse_copyattr(fuse_filp, passthrough_filp)
 
 	old_cred = override_creds(ff->passthrough.cred);
 	if (is_sync_kiocb(iocb_fuse)) {
