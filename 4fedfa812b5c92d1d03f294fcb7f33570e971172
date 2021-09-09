@@ -52,6 +52,24 @@
       "parentUuid": "4707422e_dbbfac22",
       "revId": "4fedfa812b5c92d1d03f294fcb7f33570e971172",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e0a8a75_d53d0449",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-09-09T16:16:50Z",
+      "side": 1,
+      "message": "I don\u0027t agree. I don\u0027t want to push any minor bug fix into -stable which will affect the in-market devices. See the document.",
+      "parentUuid": "52126b07_4b28036f",
+      "revId": "4fedfa812b5c92d1d03f294fcb7f33570e971172",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
