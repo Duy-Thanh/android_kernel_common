@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70431e3f_c6e1be4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-09-09T14:25:24Z",
+      "side": 1,
+      "message": "The UPSTREAM commit isn\u0027t marked for -stable so cherry-picking it explicitly to the android13-5.10 branch.",
+      "revId": "954c05854553f2bf7070f84f3cdb66e898b7e353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
