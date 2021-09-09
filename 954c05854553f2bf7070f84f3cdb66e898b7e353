@@ -16,6 +16,23 @@
       "message": "The UPSTREAM commit isn\u0027t marked for -stable so cherry-picking it explicitly to the android13-5.10 branch.",
       "revId": "954c05854553f2bf7070f84f3cdb66e898b7e353",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f473d54_70cd412d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-09-09T14:30:50Z",
+      "side": 1,
+      "message": "I was going to post full f2fs updates to catch 5.15-rc1 which includes this patch tho. Should be okay to cherrypick this first.",
+      "revId": "954c05854553f2bf7070f84f3cdb66e898b7e353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
