@@ -16,6 +16,24 @@
       "message": "Are these configs needed in android13-5.10 too?",
       "revId": "c30036e2ecdf8181319c1bfbfabae683177bd9c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82593d49_9c00ed5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-09-09T21:35:25Z",
+      "side": 1,
+      "message": "I checked and they are all ok on android13-5.10",
+      "parentUuid": "4dd05e54_229b28ce",
+      "revId": "c30036e2ecdf8181319c1bfbfabae683177bd9c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
