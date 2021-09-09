@@ -16,6 +16,29 @@
       "message": "@Alessio does this need to be sent upstream first?",
       "revId": "80544fd1d004092a3517061e177f0232c9187a32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47500d6c_8df64361",
+        "filename": "fs/fuse/passthrough.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2021-09-09T15:10:48Z",
+      "side": 1,
+      "message": "WDYT about following the overlayfs example and:\n\n1. call fuse_copyattr() here,\n2. change fuse_copyattr() as such:\n\n```\nstatic void fuse_copyattr(struct file *dst_file, struct file *src_file)\n{\n\tstruct inode *from \u003d file_inode(dst_file);\n\tstruct inode *to \u003d file_inode(src_file);\n\t\n        to-\u003ei_uid \u003d from-\u003ei_uid;\n        to-\u003ei_gid \u003d from-\u003ei_gid;\n        to-\u003ei_mode \u003d from-\u003ei_mode;\n        to-\u003ei_atime \u003d from-\u003ei_atime;\n        to-\u003ei_mtime \u003d from-\u003ei_mtime;\n        to-\u003ei_ctime \u003d from-\u003ei_ctime;\n        i_size_write(to, i_size_read(from));\n}\n```",
+      "range": {
+        "startLine": 108,
+        "startChar": 1,
+        "endLine": 110,
+        "endChar": 11
+      },
+      "revId": "80544fd1d004092a3517061e177f0232c9187a32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
