@@ -22,6 +22,30 @@
       },
       "revId": "7f4308b2809824c13b7a4ce8399429288622bba4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19841c0e_6aa76866",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1890119
+      },
+      "writtenOn": "2021-09-09T15:36:40Z",
+      "side": 1,
+      "message": "Sorry, yes, changed to \"FROMLIST\". The code changes are the same as were submitted in the linked patch.\n\nShould this be \"BACKPORT: FROMLIST:\" since the HID maintainer requested to make changes before resubmitting?\n\nThe reworked patch is going to be resubmitted for inclusion upstream in the coming months. We committed to finishing this by the end of the year.\n\nBefore we can resubmit it, we need to break up our current monolithic driver into a transport and a device driver, and also update the transport driver to support the publicly-released HID over SPI spec. I am planning to work on this later this month and once ready to submit a new patch.",
+      "parentUuid": "d49457e8_8a6428af",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "7f4308b2809824c13b7a4ce8399429288622bba4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
