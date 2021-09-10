@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4301fb7_28ee3a47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2021-09-10T20:26:33Z",
+      "side": 1,
+      "message": "Confirmed LTP passes with this revert.",
+      "revId": "df34bcf719882710c3776345bd4a2291fc9f16a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
