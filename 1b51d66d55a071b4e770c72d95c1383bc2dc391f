@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27550c32_0b93dd07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2021-09-10T18:02:34Z",
+      "side": 1,
+      "message": "Testing to confirm whether this is the root cause of the recent LTP failures.",
+      "revId": "1b51d66d55a071b4e770c72d95c1383bc2dc391f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
