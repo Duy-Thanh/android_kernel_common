@@ -34,6 +34,42 @@
       "parentUuid": "d89bc42d_091b2afb",
       "revId": "3f43aaa0ac806c86ffee2493320803c810e2a6bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "684fbe78_43bf0eb5",
+        "filename": "kernel/trace/trace_events_hist.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2299,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-09-10T00:51:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea87ce66_11c4694c",
+      "revId": "3f43aaa0ac806c86ffee2493320803c810e2a6bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ab9d5d3_0ef8db81",
+        "filename": "kernel/trace/trace_events_hist.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2299,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-09-10T00:51:38Z",
+      "side": 1,
+      "message": "Renamed to n_subexprs",
+      "parentUuid": "ea87ce66_11c4694c",
+      "revId": "3f43aaa0ac806c86ffee2493320803c810e2a6bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
