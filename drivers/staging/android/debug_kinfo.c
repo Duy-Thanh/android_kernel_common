@@ -38,6 +38,10 @@ extern const u16 kallsyms_token_index[] __weak;
 
 extern const unsigned int kallsyms_markers[] __weak;
 
+#if defined(CONFIG_RANDOMIZE_BASE)
+extern u64 module_alloc_base;
+#endif
+
 static void *all_info_addr;
 static u32 all_info_size;
 
@@ -163,13 +167,17 @@ static int debug_kinfo_probe(struct platform_device *pdev)
 	info->mod_core_layout_offset = offsetof(struct module, core_layout);
 	info->mod_init_layout_offset = offsetof(struct module, init_layout);
 	info->mod_kallsyms_offset = offsetof(struct module, kallsyms);
-#if defined(CONFIG_MODULES) && defined(MODULES_VADDR)
+#if defined(CONFIG_RANDOMIZE_BASE) && defined(MODULES_VSIZE)
+	info->module_start_va = module_alloc_base;
+	info->module_end_va = info->module_start_va + MODULES_VSIZE;
+#elif defined(CONFIG_MODULES) && defined(MODULES_VADDR)
 	info->module_start_va = MODULES_VADDR;
 	info->module_end_va = MODULES_END;
 #else
 	info->module_start_va = VMALLOC_START;
 	info->module_end_va = VMALLOC_END;
 #endif
+
 	update_kernel_all_info(all_info);
 
 	return 0;
