@@ -291,6 +291,7 @@
       <elf-symbol name='add_to_page_cache_lru' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4ce66200'/>
       <elf-symbol name='add_uevent_var' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x719e0e44'/>
       <elf-symbol name='add_wait_queue' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4afb2238'/>
+      <elf-symbol name='addrconf_prefix_rcv_add_addr' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x10f3701c'/>
       <elf-symbol name='adjust_managed_page_count' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4790683b'/>
       <elf-symbol name='aes_encrypt' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x77e9eb37'/>
       <elf-symbol name='aes_expandkey' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x558b281d'/>
@@ -150337,7 +150338,38 @@
           <var-decl name='data' type-id='167619f6' visibility='default' filepath='include/net/lwtunnel.h' line='33' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='prefix_info' is-struct='yes' visibility='default' is-declaration-only='yes' id='a7502152'/>
+      <class-decl name='prefix_info' size-in-bits='256' is-struct='yes' visibility='default' filepath='include/net/addrconf.h' line='29' column='1' id='a7502152'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='type' type-id='8f048e17' visibility='default' filepath='include/net/addrconf.h' line='30' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='8'>
+          <var-decl name='length' type-id='8f048e17' visibility='default' filepath='include/net/addrconf.h' line='31' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='16'>
+          <var-decl name='prefix_len' type-id='8f048e17' visibility='default' filepath='include/net/addrconf.h' line='32' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='reserved' type-id='8f048e17' visibility='default' filepath='include/net/addrconf.h' line='39' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='6'>
+          <var-decl name='autoconf' type-id='8f048e17' visibility='default' filepath='include/net/addrconf.h' line='40' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='7'>
+          <var-decl name='onlink' type-id='8f048e17' visibility='default' filepath='include/net/addrconf.h' line='41' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='32'>
+          <var-decl name='valid' type-id='78a133c2' visibility='default' filepath='include/net/addrconf.h' line='45' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='prefered' type-id='78a133c2' visibility='default' filepath='include/net/addrconf.h' line='46' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='96'>
+          <var-decl name='reserved2' type-id='78a133c2' visibility='default' filepath='include/net/addrconf.h' line='47' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='prefix' type-id='f6ed712a' visibility='default' filepath='include/net/addrconf.h' line='49' column='1'/>
+        </data-member>
+      </class-decl>
       <class-decl name='raw_hashinfo' size-in-bits='16448' is-struct='yes' visibility='default' filepath='include/net/raw.h' line='35' column='1' id='51ee3086'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='lock' type-id='ac16795b' visibility='default' filepath='include/net/raw.h' line='36' column='1'/>
@@ -161182,6 +161214,20 @@
         <parameter type-id='fea9c20b' name='addr' filepath='net/ipv6/addrconf.c' line='1890' column='1'/>
         <parameter type-id='2ce52478' name='dev' filepath='net/ipv6/addrconf.c' line='1891' column='1'/>
         <parameter type-id='95e97e5e' name='strict' filepath='net/ipv6/addrconf.c' line='1891' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='addrconf_prefix_rcv_add_addr' mangled-name='addrconf_prefix_rcv_add_addr' filepath='net/ipv6/addrconf.c' line='2580' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='addrconf_prefix_rcv_add_addr'>
+        <parameter type-id='a2bff676' name='net' filepath='net/ipv6/addrconf.c' line='2580' column='1'/>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/ipv6/addrconf.c' line='2580' column='1'/>
+        <parameter type-id='d070dbfd' name='pinfo' filepath='net/ipv6/addrconf.c' line='2581' column='1'/>
+        <parameter type-id='f026b16b' name='in6_dev' filepath='net/ipv6/addrconf.c' line='2582' column='1'/>
+        <parameter type-id='fea9c20b' name='addr' filepath='net/ipv6/addrconf.c' line='2583' column='1'/>
+        <parameter type-id='95e97e5e' name='addr_type' filepath='net/ipv6/addrconf.c' line='2583' column='1'/>
+        <parameter type-id='19c2251e' name='addr_flags' filepath='net/ipv6/addrconf.c' line='2584' column='1'/>
+        <parameter type-id='b50a4934' name='sllao' filepath='net/ipv6/addrconf.c' line='2584' column='1'/>
+        <parameter type-id='b50a4934' name='tokenized' filepath='net/ipv6/addrconf.c' line='2584' column='1'/>
+        <parameter type-id='3f1a6b60' name='valid_lft' filepath='net/ipv6/addrconf.c' line='2585' column='1'/>
+        <parameter type-id='19c2251e' name='prefered_lft' filepath='net/ipv6/addrconf.c' line='2585' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-type size-in-bits='64' id='bb1a67f7'>
