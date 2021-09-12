@@ -1311,9 +1311,23 @@ static const char *f2fs_encrypted_get_link(struct dentry *dentry,
 	return target;
 }
 
+static int f2fs_encrypted_symlink_getattr(const struct path *path,
+					  struct kstat *stat, u32 request_mask,
+					  unsigned int query_flags)
+{
+	f2fs_getattr(path, stat, request_mask, query_flags);
+
+	return fscrypt_symlink_getattr(path, stat);
+}
+
 const struct inode_operations f2fs_encrypted_symlink_inode_operations = {
+<<<<<<< HEAD   (406180 ANDROID: GKI: db845c: Update symbols list and ABI for lts v5)
 	.get_link	= f2fs_encrypted_get_link,
 	.getattr	= f2fs_getattr,
+=======
+	.get_link       = f2fs_encrypted_get_link,
+	.getattr	= f2fs_encrypted_symlink_getattr,
+>>>>>>> BRANCH (a0f68f Linux 5.4.145)
 	.setattr	= f2fs_setattr,
 	.listxattr	= f2fs_listxattr,
 };

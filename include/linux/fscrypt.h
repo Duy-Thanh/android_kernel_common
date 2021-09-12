@@ -240,6 +240,7 @@ int fscrypt_zeroout_range(const struct inode *inode, pgoff_t lblk,
 			  sector_t pblk, unsigned int len);
 
 /* hooks.c */
+<<<<<<< HEAD   (406180 ANDROID: GKI: db845c: Update symbols list and ABI for lts v5)
 int fscrypt_file_open(struct inode *inode, struct file *filp);
 int __fscrypt_prepare_link(struct inode *inode, struct inode *dir,
 			   struct dentry *dentry);
@@ -260,6 +261,28 @@ int __fscrypt_encrypt_symlink(struct inode *inode, const char *target,
 const char *fscrypt_get_symlink(struct inode *inode, const void *caddr,
 				unsigned int max_size,
 				struct delayed_call *done);
+=======
+extern int fscrypt_file_open(struct inode *inode, struct file *filp);
+extern int __fscrypt_prepare_link(struct inode *inode, struct inode *dir,
+				  struct dentry *dentry);
+extern int __fscrypt_prepare_rename(struct inode *old_dir,
+				    struct dentry *old_dentry,
+				    struct inode *new_dir,
+				    struct dentry *new_dentry,
+				    unsigned int flags);
+extern int __fscrypt_prepare_lookup(struct inode *dir, struct dentry *dentry,
+				    struct fscrypt_name *fname);
+extern int __fscrypt_prepare_symlink(struct inode *dir, unsigned int len,
+				     unsigned int max_len,
+				     struct fscrypt_str *disk_link);
+extern int __fscrypt_encrypt_symlink(struct inode *inode, const char *target,
+				     unsigned int len,
+				     struct fscrypt_str *disk_link);
+extern const char *fscrypt_get_symlink(struct inode *inode, const void *caddr,
+				       unsigned int max_size,
+				       struct delayed_call *done);
+int fscrypt_symlink_getattr(const struct path *path, struct kstat *stat);
+>>>>>>> BRANCH (a0f68f Linux 5.4.145)
 static inline void fscrypt_set_ops(struct super_block *sb,
 				   const struct fscrypt_operations *s_cop)
 {
@@ -588,6 +611,12 @@ static inline const char *fscrypt_get_symlink(struct inode *inode,
 					      struct delayed_call *done)
 {
 	return ERR_PTR(-EOPNOTSUPP);
+}
+
+static inline int fscrypt_symlink_getattr(const struct path *path,
+					  struct kstat *stat)
+{
+	return -EOPNOTSUPP;
 }
 
 static inline void fscrypt_set_ops(struct super_block *sb,
