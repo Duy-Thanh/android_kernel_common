@@ -69,6 +69,24 @@
       "parentUuid": "98a56c80_3229f8f0",
       "revId": "55187eee3d75094813e9f9d265e0db3be95eb3d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6db6e73_f73ae5dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-13T15:17:24Z",
+      "side": 1,
+      "message": "Then please fix it there, this is an upstream LTS patch and should not be reverted unless it is a problem here in the AOSP tree.\n\nOdds are you have a .h include problem, this structure should not be used anywhere.",
+      "parentUuid": "e5c96cac_52672e30",
+      "revId": "55187eee3d75094813e9f9d265e0db3be95eb3d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
