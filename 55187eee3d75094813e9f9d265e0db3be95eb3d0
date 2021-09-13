@@ -105,6 +105,24 @@
       "parentUuid": "d6db6e73_f73ae5dd",
       "revId": "55187eee3d75094813e9f9d265e0db3be95eb3d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2c0f58e_81ae5f90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-13T15:22:45Z",
+      "side": 1,
+      "message": "Ah, there\u0027s an \"abi preserve\" patch in the tree that needs to be dropped.  Odd that TH isn\u0027t hitting this.\n\nLet me fix that up, then this revert will not be needed...",
+      "parentUuid": "c311d7fa_d3f496e6",
+      "revId": "55187eee3d75094813e9f9d265e0db3be95eb3d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
