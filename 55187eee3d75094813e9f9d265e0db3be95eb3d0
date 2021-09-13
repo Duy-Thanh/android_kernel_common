@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d2855fd_b4a4d1c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1570698
+      },
+      "writtenOn": "2021-09-13T13:32:43Z",
+      "side": 1,
+      "message": "This patch added to fix the following build breakage\n\n./Kernel/aosp/include/linux/tty_driver.h:283:52: error: declaration of \u0027struct termiox\u0027 will not be visible outside of this function [-Werror,-Wvisibility]\n        int (*set_termiox)(struct tty_struct *tty, struct termiox *tnew);\n                                                          ^\n  CC      kernel/sched/cpuacct.o\n1 error generated.\nmake[3]: *** [./Kernel/aosp/scripts/Makefile.build:273: fs/proc/proc_tty.o] Error 1\n",
+      "revId": "55187eee3d75094813e9f9d265e0db3be95eb3d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
