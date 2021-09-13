@@ -87,6 +87,24 @@
       "parentUuid": "e5c96cac_52672e30",
       "revId": "55187eee3d75094813e9f9d265e0db3be95eb3d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c311d7fa_d3f496e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1570698
+      },
+      "writtenOn": "2021-09-13T15:21:04Z",
+      "side": 1,
+      "message": "+ Saravana.\nThe kernel we are using now was built from the AOSP directly.",
+      "parentUuid": "d6db6e73_f73ae5dd",
+      "revId": "55187eee3d75094813e9f9d265e0db3be95eb3d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
