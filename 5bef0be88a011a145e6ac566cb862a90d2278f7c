@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c18ab1b_cefdbebc",
+        "filename": "drivers/usb/gadget/function/f_rndis.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-13T07:15:05Z",
+      "side": 1,
+      "message": "why are these not per-device?  Why make them \"global\" to the driver?  Shouldn\u0027t they be part of the rndis_params structure?",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 51
+      },
+      "revId": "5bef0be88a011a145e6ac566cb862a90d2278f7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56f9df16_1869c330",
+        "filename": "drivers/usb/gadget/function/f_rndis.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-13T07:15:05Z",
+      "side": 1,
+      "message": "where does this number come from?",
+      "range": {
+        "startLine": 472,
+        "startChar": 29,
+        "endLine": 472,
+        "endChar": 33
+      },
+      "revId": "5bef0be88a011a145e6ac566cb862a90d2278f7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ce810dc_6981b0f4",
+        "filename": "drivers/usb/gadget/function/f_rndis.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-13T07:15:05Z",
+      "side": 1,
+      "message": "you are a driver, use dev_dbg() please.",
+      "range": {
+        "startLine": 476,
+        "startChar": 2,
+        "endLine": 476,
+        "endChar": 10
+      },
+      "revId": "5bef0be88a011a145e6ac566cb862a90d2278f7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2412d296_6af38539",
+        "filename": "drivers/usb/gadget/function/rndis.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-13T07:15:05Z",
+      "side": 1,
+      "message": "ftrace is your friend if you want to debug stuff like this.",
+      "range": {
+        "startLine": 1005,
+        "startChar": 0,
+        "endLine": 1005,
+        "endChar": 29
+      },
+      "revId": "5bef0be88a011a145e6ac566cb862a90d2278f7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce1bf6c3_b841a46c",
+        "filename": "drivers/usb/gadget/function/rndis.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-13T07:15:05Z",
+      "side": 1,
+      "message": "dev_err() please.",
+      "range": {
+        "startLine": 1093,
+        "startChar": 3,
+        "endLine": 1093,
+        "endChar": 9
+      },
+      "revId": "5bef0be88a011a145e6ac566cb862a90d2278f7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "849ba067_8ef35698",
+        "filename": "drivers/usb/gadget/function/u_ether.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-13T07:15:05Z",
+      "side": 1,
+      "message": "what does this mean?",
+      "range": {
+        "startLine": 72,
+        "startChar": 37,
+        "endLine": 72,
+        "endChar": 47
+      },
+      "revId": "5bef0be88a011a145e6ac566cb862a90d2278f7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27c8d381_d23494c1",
+        "filename": "drivers/usb/gadget/function/u_ether.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-13T07:15:05Z",
+      "side": 1,
+      "message": "lost the formatting?",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 15
+      },
+      "revId": "5bef0be88a011a145e6ac566cb862a90d2278f7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cc736b3_ab9a3052",
+        "filename": "drivers/usb/gadget/function/u_ether.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-13T07:15:05Z",
+      "side": 1,
+      "message": "why change this?",
+      "range": {
+        "startLine": 19,
+        "startChar": 22,
+        "endLine": 19,
+        "endChar": 24
+      },
+      "revId": "5bef0be88a011a145e6ac566cb862a90d2278f7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "801b160d_6013b61d",
+        "filename": "drivers/usb/gadget/function/u_ether.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-13T07:15:05Z",
+      "side": 1,
+      "message": "why not u32?",
+      "range": {
+        "startLine": 72,
+        "startChar": 1,
+        "endLine": 72,
+        "endChar": 13
+      },
+      "revId": "5bef0be88a011a145e6ac566cb862a90d2278f7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
