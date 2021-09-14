@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "860419a7_c7d7cf51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-09-14T15:21:24Z",
+      "side": 1,
+      "message": "Please revert the two patches instead of overwriting them.",
+      "revId": "99e569404c0314cec1fbdb2be9bb86d8b15a5e24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
