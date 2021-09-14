@@ -1,0 +1,40 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5f30298_48680ab9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-09-14T03:41:21Z",
+      "side": 1,
+      "message": "\u003e Commit does not link to an upstream reference at lore\n\u003e Please add a line like \u0027Link: https://lore.kernel.org/...\u0027\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 396359793 android-build.ayeaye-python-dispatcher_20210913.05_p0\n\nPlease fix.",
+      "parentUuid": "0c4291e5_89917397",
+      "revId": "2b2ff1a8811ece623f07f3bb9afdd9bba9431b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "effb258c_341e6e18",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-09-14T03:41:21Z",
+      "side": 1,
+      "message": "\u003e Commit does not link to an upstream reference at lore\n\u003e Please add a line like \u0027Link: https://lore.kernel.org/...\u0027\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 396359793 android-build.ayeaye-python-dispatcher_20210913.05_p0\n\nPlease fix.",
+      "parentUuid": "0c4291e5_89917397",
+      "revId": "2b2ff1a8811ece623f07f3bb9afdd9bba9431b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
