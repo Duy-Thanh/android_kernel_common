@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5761fc6_8c0048cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-15T10:17:57Z",
+      "side": 1,
+      "message": "Please just do this from userspace, no need for any kernel changes at all.",
+      "revId": "2d9605789e5be3a40064d22f4cdf60a963581136",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
