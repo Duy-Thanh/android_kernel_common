@@ -16,6 +16,24 @@
       "message": "Please just do this from userspace, no need for any kernel changes at all.",
       "revId": "2d9605789e5be3a40064d22f4cdf60a963581136",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67c76cbb_aa0931f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1345812
+      },
+      "writtenOn": "2021-09-15T10:22:56Z",
+      "side": 1,
+      "message": "It\u0027s for patching message \"sysrq triggered crash\" to something else. But I just found that there is the vendor hook in sysrq_handle_crash already. I can use that one so I\u0027m abandoning this change.",
+      "parentUuid": "a5761fc6_8c0048cd",
+      "revId": "2d9605789e5be3a40064d22f4cdf60a963581136",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
