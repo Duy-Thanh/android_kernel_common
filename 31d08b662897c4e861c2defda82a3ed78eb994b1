@@ -70,6 +70,24 @@
       "parentUuid": "62ab2e28_a867b2b5",
       "revId": "31d08b662897c4e861c2defda82a3ed78eb994b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b423be7_472708cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-09-15T09:46:10Z",
+      "side": 1,
+      "message": "Thanks, this is looking better! However, it\u0027s missing the original SoB chain and authorship information.\n\nThe easiest thing to do is run:\n\n`$ git cherry-pick -xse 1f0723a4c0df`\n\nand then add the UPSTREAM: and Bug: lines. That way, you preserve the original patch which you are cherry-picking.\n\nApologies for not mentioning this before.",
+      "parentUuid": "b9b3296a_6eecf4be",
+      "revId": "31d08b662897c4e861c2defda82a3ed78eb994b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
