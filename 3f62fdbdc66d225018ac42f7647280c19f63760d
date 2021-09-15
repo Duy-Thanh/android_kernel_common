@@ -39,6 +39,24 @@
       "message": "please submit the main part of this patch upstream first.",
       "revId": "3f62fdbdc66d225018ac42f7647280c19f63760d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07a127c5_36ca7bb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576409
+      },
+      "writtenOn": "2021-09-15T15:15:04Z",
+      "side": 1,
+      "message": "Hi Greg,\nThis patch was cherry picked from aosp/1785067;\nI created b/200029268 to discuss with owner first to ensure we plan to submit this change.\nThanks!",
+      "parentUuid": "ae9631b5_cbfe643e",
+      "revId": "3f62fdbdc66d225018ac42f7647280c19f63760d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
