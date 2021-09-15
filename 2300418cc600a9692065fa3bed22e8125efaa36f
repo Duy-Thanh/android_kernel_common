@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d27fcef_aedd3a52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-09-15T15:15:08Z",
+      "side": 1,
+      "message": "virtual device symbol list needs an update as the modules built with this new version of the module code require additional symbols.",
+      "revId": "2300418cc600a9692065fa3bed22e8125efaa36f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb3c4054_6edc062f",
+        "filename": "drivers/leds/trigger/ledtrig-audio.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-09-15T15:15:08Z",
+      "side": 1,
+      "message": "This seems to introduce new requirements from \n\nledtrig-audio.ko -\u003e vmlinux (requiring new symbol led_set_brightness_nosleep)",
+      "revId": "2300418cc600a9692065fa3bed22e8125efaa36f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30585bb9_5c260b3c",
+        "filename": "drivers/leds/trigger/ledtrig-audio.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-09-15T15:15:08Z",
+      "side": 1,
+      "message": "This seems to introduce new requirements from \n\nledtrig-audio.ko -\u003e vmlinux (requiring new symbol led_trigger_register)",
+      "revId": "2300418cc600a9692065fa3bed22e8125efaa36f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bb36c97_f3913636",
+        "filename": "drivers/leds/trigger/ledtrig-audio.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-09-15T15:15:08Z",
+      "side": 1,
+      "message": "This seems to introduce new requirements from \n\nledtrig-audio.ko -\u003e vmlinux (requiring new symbol led_trigger_unregister)",
+      "revId": "2300418cc600a9692065fa3bed22e8125efaa36f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
