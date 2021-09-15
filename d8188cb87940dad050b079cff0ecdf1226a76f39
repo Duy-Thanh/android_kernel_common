@@ -51,6 +51,24 @@
       "message": "Hridya: Is there a good bug # for me to use for this? (Or should I create an issue tracker for it?)",
       "revId": "d8188cb87940dad050b079cff0ecdf1226a76f39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57223cc6_78574347",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-09-15T23:22:06Z",
+      "side": 1,
+      "message": "Hi John,\n\nThank you for uploading the patch! You can use the bug number 177702259 for the patch 😊\n\nRegards,\nHridya",
+      "parentUuid": "de3bec75_9c040fa5",
+      "revId": "d8188cb87940dad050b079cff0ecdf1226a76f39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
