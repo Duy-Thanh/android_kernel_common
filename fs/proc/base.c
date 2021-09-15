@@ -95,7 +95,11 @@
 #include <linux/posix-timers.h>
 #include <linux/time_namespace.h>
 #include <linux/resctrl.h>
+<<<<<<< HEAD   (1a0297 Merge cc09ee80c3b1 ("Merge tag 'mm-slub-5.15-rc1' of git://g)
 #include <linux/cpufreq_times.h>
+=======
+#include <linux/cn_proc.h>
+>>>>>>> BRANCH (2d3382 Merge branch 'akpm' (patches from Andrew))
 #include <trace/events/oom.h>
 #include "internal.h"
 #include "fd.h"
@@ -1675,8 +1679,10 @@ static ssize_t comm_write(struct file *file, const char __user *buf,
 	if (!p)
 		return -ESRCH;
 
-	if (same_thread_group(current, p))
+	if (same_thread_group(current, p)) {
 		set_task_comm(p, buffer);
+		proc_comm_connector(p);
+	}
 	else
 		count = -EINVAL;
 
