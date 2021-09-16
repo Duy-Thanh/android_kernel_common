@@ -16,6 +16,24 @@
       "message": "DTC should still be the prebuilt from kernel/manifest environment",
       "revId": "00b39196ba3d3a8454b4a2d17c67774ebaa12c51",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e44e4f70_2e62ec2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1539256
+      },
+      "writtenOn": "2021-09-16T21:52:18Z",
+      "side": 1,
+      "message": "Sorry -- nevermind, I misinterpreted the change.",
+      "parentUuid": "ff983843_361e9eb0",
+      "revId": "00b39196ba3d3a8454b4a2d17c67774ebaa12c51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
