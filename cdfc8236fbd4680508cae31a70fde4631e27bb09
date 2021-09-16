@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1db7dee_0fe7aec6",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-16T07:54:09Z",
+      "side": 1,
+      "message": "should no longer be needed, please use the in-kernel sync functionality instead.",
+      "range": {
+        "startLine": 513,
+        "startChar": 0,
+        "endLine": 513,
+        "endChar": 12
+      },
+      "revId": "cdfc8236fbd4680508cae31a70fde4631e27bb09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
