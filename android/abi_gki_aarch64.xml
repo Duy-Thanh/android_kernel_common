@@ -1522,6 +1522,7 @@
       <elf-symbol name='gen_pool_destroy' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6c224cda'/>
       <elf-symbol name='gen_pool_dma_alloc_align' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xada31e57'/>
       <elf-symbol name='gen_pool_dma_zalloc_align' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3d210724'/>
+      <elf-symbol name='gen_pool_fixed_alloc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x57900416'/>
       <elf-symbol name='gen_pool_free_owner' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x60ba97c'/>
       <elf-symbol name='gen_pool_set_algo' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x96e5d30f'/>
       <elf-symbol name='gen_pool_size' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2464da17'/>
@@ -152705,6 +152706,16 @@
       <function-decl name='gen_pool_size' mangled-name='gen_pool_size' filepath='lib/genalloc.c' line='597' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='gen_pool_size'>
         <parameter type-id='75b9415a' name='pool' filepath='lib/genalloc.c' line='597' column='1'/>
         <return type-id='b59d7dce'/>
+      </function-decl>
+      <function-decl name='gen_pool_fixed_alloc' mangled-name='gen_pool_fixed_alloc' filepath='lib/genalloc.c' line='689' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='gen_pool_fixed_alloc'>
+        <parameter type-id='1d2c2b85' name='map' filepath='lib/genalloc.c' line='689' column='1'/>
+        <parameter type-id='7359adad' name='size' filepath='lib/genalloc.c' line='689' column='1'/>
+        <parameter type-id='7359adad' name='start' filepath='lib/genalloc.c' line='690' column='1'/>
+        <parameter type-id='f0981eeb' name='nr' filepath='lib/genalloc.c' line='690' column='1'/>
+        <parameter type-id='eaa32e2f' name='data' filepath='lib/genalloc.c' line='690' column='1'/>
+        <parameter type-id='75b9415a' name='pool' filepath='lib/genalloc.c' line='691' column='1'/>
+        <parameter type-id='7359adad' name='start_addr' filepath='lib/genalloc.c' line='691' column='1'/>
+        <return type-id='7359adad'/>
       </function-decl>
       <function-decl name='gen_pool_dma_zalloc_align' mangled-name='gen_pool_dma_zalloc_align' filepath='lib/genalloc.c' line='465' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='gen_pool_dma_zalloc_align'>
         <parameter type-id='75b9415a' name='pool' filepath='lib/genalloc.c' line='465' column='1'/>
