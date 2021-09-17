@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79400de5_26888354",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1350392
+      },
+      "writtenOn": "2021-09-17T09:23:22Z",
+      "side": 1,
+      "message": "This patch was already in android12-5.10\nhttps://android-review.googlesource.com/c/kernel/common/+/1785638/",
+      "revId": "72b2edd1b5d25f1b4e583511eddc3ec1bbcd7363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
