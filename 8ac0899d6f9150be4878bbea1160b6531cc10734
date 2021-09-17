@@ -16,6 +16,23 @@
       "message": "I\u0027m not sure if there\u0027s a reason why these are here...\nBut annoyed by having to constantly trim them back out of any updates to the gki configs I make...",
       "revId": "8ac0899d6f9150be4878bbea1160b6531cc10734",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b349b8e5_c08ad2e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-09-17T18:10:27Z",
+      "side": 1,
+      "message": "Hmm I\u0027m guessing this is probably somehow related to the compiler being used for:\n\nmake ARCH\u003dx86_64 gki_defconfig\nmake ARCH\u003dx86_64 savedefconfig\nmv defconfig arch/x86/configs/gki_defconfig\n\nmake ARCH\u003darm64 gki_defconfig\nmake ARCH\u003darm64 savedefconfig\nmv defconfig arch/arm64/configs/gki_defconfig\n\nand I guess the above defaults to gcc...",
+      "revId": "8ac0899d6f9150be4878bbea1160b6531cc10734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
