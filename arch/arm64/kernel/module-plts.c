@@ -324,7 +324,8 @@ int module_frob_arch_sections(Elf_Ehdr *ehdr, Elf_Shdr *sechdrs,
 	}
 
 	if (IS_ENABLED(CONFIG_CRYPTO_FIPS140) &&
-	    !strcmp(mod->name, "fips140"))
+	    strlen(mod->name) >= strlen("fips140") &&
+	    !strcmp(mod->name + strlen(mod->name) - strlen("fips140"), "fips140"))
 		copy_rela_for_fips140 = true;
 
 	for (i = 0; i < ehdr->e_shnum; i++) {
@@ -338,6 +339,11 @@ int module_frob_arch_sections(Elf_Ehdr *ehdr, Elf_Shdr *sechdrs,
 #ifdef CONFIG_CRYPTO_FIPS140
 		if (copy_rela_for_fips140 &&
 		    !strcmp(secstrings + dstsec->sh_name, ".rodata")) {
+			/*
+			 * Allocate a temporary buffer to store .rodata RELA section.
+			 * The individual module must free the buffer after it is no
+			 * longer needed.
+			 */
 			void *p = kmemdup(rels, numrels * sizeof(Elf64_Rela),
 					  GFP_KERNEL);
 			if (!p) {
@@ -356,6 +362,11 @@ int module_frob_arch_sections(Elf_Ehdr *ehdr, Elf_Shdr *sechdrs,
 #ifdef CONFIG_CRYPTO_FIPS140
 		if (copy_rela_for_fips140 &&
 		    !strcmp(secstrings + dstsec->sh_name, ".text")) {
+			/*
+			 * Allocate a temporary buffer to store .text RELA section.
+			 * The individual module must free the buffer after it is no
+			 * longer needed.
+			 */
 			void *p = kmemdup(rels, numrels * sizeof(Elf64_Rela),
 					  GFP_KERNEL);
 			if (!p) {
