@@ -16,6 +16,23 @@
       "message": "Appropriate for the branch?",
       "revId": "beddab41ae4b080cc51b63daa60c08cfe483f8ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55c6380e_aad254fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-17T14:19:04Z",
+      "side": 1,
+      "message": "needs to go into the weekly gki newsletter first before this can be accepted.",
+      "revId": "beddab41ae4b080cc51b63daa60c08cfe483f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
