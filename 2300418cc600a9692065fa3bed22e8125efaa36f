@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a9945bc_8c83713e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-17T07:22:26Z",
+      "side": 1,
+      "message": "Resolved all of these (hopefully) in https://android-review.googlesource.com/c/kernel/common/+/1829634",
+      "parentUuid": "2d27fcef_aedd3a52",
+      "revId": "2300418cc600a9692065fa3bed22e8125efaa36f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb3c4054_6edc062f",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-09-15T15:15:08Z",
       "side": 1,
       "message": "This seems to introduce new requirements from \n\nledtrig-audio.ko -\u003e vmlinux (requiring new symbol led_set_brightness_nosleep)",
+      "revId": "2300418cc600a9692065fa3bed22e8125efaa36f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d16283cf_46e7bbca",
+        "filename": "drivers/leds/trigger/ledtrig-audio.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-17T07:22:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "eb3c4054_6edc062f",
       "revId": "2300418cc600a9692065fa3bed22e8125efaa36f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fa81673_8af2d987",
+        "filename": "drivers/leds/trigger/ledtrig-audio.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-17T07:22:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "30585bb9_5c260b3c",
+      "revId": "2300418cc600a9692065fa3bed22e8125efaa36f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3bb36c97_f3913636",
@@ -65,6 +119,24 @@
       "writtenOn": "2021-09-15T15:15:08Z",
       "side": 1,
       "message": "This seems to introduce new requirements from \n\nledtrig-audio.ko -\u003e vmlinux (requiring new symbol led_trigger_unregister)",
+      "revId": "2300418cc600a9692065fa3bed22e8125efaa36f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b1d9642_adc5fb9a",
+        "filename": "drivers/leds/trigger/ledtrig-audio.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-17T07:22:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3bb36c97_f3913636",
       "revId": "2300418cc600a9692065fa3bed22e8125efaa36f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
