@@ -323,8 +323,8 @@ int module_frob_arch_sections(Elf_Ehdr *ehdr, Elf_Shdr *sechdrs,
 		return -ENOEXEC;
 	}
 
-	if (IS_ENABLED(CONFIG_CRYPTO_FIPS140) &&
-	    !strcmp(mod->name, "fips140"))
+	if (strlen(mod->name) >= strlen("fips140") &&
+		!strcmp(mod->name + strlen(mod->name) - strlen("fips140"), "fips140"))
 		copy_rela_for_fips140 = true;
 
 	for (i = 0; i < ehdr->e_shnum; i++) {
@@ -335,7 +335,6 @@ int module_frob_arch_sections(Elf_Ehdr *ehdr, Elf_Shdr *sechdrs,
 		if (sechdrs[i].sh_type != SHT_RELA)
 			continue;
 
-#ifdef CONFIG_CRYPTO_FIPS140
 		if (copy_rela_for_fips140 &&
 		    !strcmp(secstrings + dstsec->sh_name, ".rodata")) {
 			void *p = kmemdup(rels, numrels * sizeof(Elf64_Rela),
@@ -347,13 +346,11 @@ int module_frob_arch_sections(Elf_Ehdr *ehdr, Elf_Shdr *sechdrs,
 			mod->arch.rodata_relocations = p;
 			mod->arch.num_rodata_relocations = numrels;
 		}
-#endif
 
 		/* ignore relocations that operate on non-exec sections */
 		if (!(dstsec->sh_flags & SHF_EXECINSTR))
 			continue;
 
-#ifdef CONFIG_CRYPTO_FIPS140
 		if (copy_rela_for_fips140 &&
 		    !strcmp(secstrings + dstsec->sh_name, ".text")) {
 			void *p = kmemdup(rels, numrels * sizeof(Elf64_Rela),
@@ -365,7 +362,6 @@ int module_frob_arch_sections(Elf_Ehdr *ehdr, Elf_Shdr *sechdrs,
 			mod->arch.text_relocations = p;
 			mod->arch.num_text_relocations = numrels;
 		}
-#endif
 
 		/*
 		 * sort branch relocations requiring a PLT by type, symbol index
