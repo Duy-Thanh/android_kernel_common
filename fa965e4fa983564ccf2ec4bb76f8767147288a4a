@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dee382ff_d82bf025",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-09-20T18:11:17Z",
+      "side": 1,
+      "message": "How about instead checking whether the name of the module ends in \"fips140\"?  There should not be any mention of \"pixel\" specifically here.\n\nAlternatively, would it be possible for the module to declare that it wants this behavior somehow -- maybe by having a special section or a special symbol?",
+      "revId": "fa965e4fa983564ccf2ec4bb76f8767147288a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
