@@ -22,6 +22,30 @@
       },
       "revId": "b86d196b92c6704536c2eef379a81f225ba2dd84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "528e09c0_dda78f56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1590141
+      },
+      "writtenOn": "2021-09-20T21:19:53Z",
+      "side": 1,
+      "message": "Moved the hook to a single location within ufshcd_probe_hba(). This will trigger during ufshcd_init(), ufshcd_resume(), ufshcd_err_handler()",
+      "parentUuid": "546c2117_aeaf5b25",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 66
+      },
+      "revId": "b86d196b92c6704536c2eef379a81f225ba2dd84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
