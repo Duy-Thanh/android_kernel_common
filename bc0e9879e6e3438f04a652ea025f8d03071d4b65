@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6a0f2aa_4aa2615a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-09-20T20:21:20Z",
+      "side": 1,
+      "message": "why is a sleep needed in these paths?",
+      "revId": "bc0e9879e6e3438f04a652ea025f8d03071d4b65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
