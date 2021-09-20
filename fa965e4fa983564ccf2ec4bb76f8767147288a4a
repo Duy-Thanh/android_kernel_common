@@ -16,6 +16,24 @@
       "message": "How about instead checking whether the name of the module ends in \"fips140\"?  There should not be any mention of \"pixel\" specifically here.\n\nAlternatively, would it be possible for the module to declare that it wants this behavior somehow -- maybe by having a special section or a special symbol?",
       "revId": "fa965e4fa983564ccf2ec4bb76f8767147288a4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f0049e5_b7630dbc",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1590141
+      },
+      "writtenOn": "2021-09-20T21:21:12Z",
+      "side": 1,
+      "message": "I added a \".enable_copy_rela\" section to the module which can be caught in existing loop",
+      "parentUuid": "dee382ff_d82bf025",
+      "revId": "fa965e4fa983564ccf2ec4bb76f8767147288a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
