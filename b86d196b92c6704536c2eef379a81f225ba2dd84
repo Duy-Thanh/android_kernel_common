@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "546c2117_aeaf5b25",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-09-20T18:15:36Z",
+      "side": 1,
+      "message": "This says that the self-test is needed after every reset, but the hook is not being called in all cases after a reset.  For example, the UFS controller can be reset due to an error occurring; see ufshcd_err_handler().",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 66
+      },
+      "revId": "b86d196b92c6704536c2eef379a81f225ba2dd84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
