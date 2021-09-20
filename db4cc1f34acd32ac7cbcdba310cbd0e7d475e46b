@@ -16,6 +16,24 @@
       "message": "Are you just reading this? Can\u0027t you use page_owner_ops.need_page_owner() to get it?\n\nSince there is already a dedicated built-in driver to support minidump (debug_symbols), can we use that driver to call this page_owner_ops.need_page_owner() and return the data (along with the rest of the debug info)? There are 2 benefits:\n1) This patch is not needed\n2) It is obvious how page_owner_enabled is being used (for minidump)",
       "revId": "db4cc1f34acd32ac7cbcdba310cbd0e7d475e46b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59f5ace7_d50109da",
+        "filename": "mm/page_owner.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1709452
+      },
+      "writtenOn": "2021-09-20T02:48:19Z",
+      "side": 1,
+      "message": "Right, I\u0027m just reading this. Sure, will see if debug_symbols driver can be used to get this info.",
+      "parentUuid": "0046080b_babd5c28",
+      "revId": "db4cc1f34acd32ac7cbcdba310cbd0e7d475e46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
