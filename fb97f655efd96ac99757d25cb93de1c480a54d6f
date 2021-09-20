@@ -34,6 +34,24 @@
       "parentUuid": "02cc409e_080f532a",
       "revId": "fb97f655efd96ac99757d25cb93de1c480a54d6f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "873feff8_54e63a24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1590141
+      },
+      "writtenOn": "2021-09-20T18:01:39Z",
+      "side": 1,
+      "message": "./update_symbol_list.sh --prepare-aosp-abi generated the .xml changes",
+      "parentUuid": "b316e30b_9600d7df",
+      "revId": "fb97f655efd96ac99757d25cb93de1c480a54d6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
