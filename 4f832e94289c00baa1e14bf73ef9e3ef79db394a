@@ -16,6 +16,24 @@
       "message": "Please explain in the commit log *why* this change is needed - the other patches in this series don\u0027t seem to rely on it.\n\nIf this is for an out of tree module that relies on its RELA section to be preserved, I\u0027d rather introduce a proper method/API for this rather than rely on obscure symbol name or section name matching.\n",
       "revId": "4f832e94289c00baa1e14bf73ef9e3ef79db394a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f53f0c2_ce71c756",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1590141
+      },
+      "writtenOn": "2021-09-21T16:39:35Z",
+      "side": 1,
+      "message": "It is for a vendor module for P21 which requires FIPS certification. Are you ok with matching module ending in \"fips140\" to preserve RELA sections for now?",
+      "parentUuid": "93f9da4f_ac7cce0f",
+      "revId": "4f832e94289c00baa1e14bf73ef9e3ef79db394a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
