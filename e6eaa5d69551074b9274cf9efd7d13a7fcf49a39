@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e3c6420_1073e2a6",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-22T08:17:50Z",
+      "side": 1,
+      "message": "why is this line changed?",
+      "range": {
+        "startLine": 926,
+        "startChar": 0,
+        "endLine": 926,
+        "endChar": 12
+      },
+      "revId": "e6eaa5d69551074b9274cf9efd7d13a7fcf49a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8548f5f1_a60ec481",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 2422,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-22T08:17:50Z",
+      "side": 1,
+      "message": "no real objection, but what changed to suddenly require this symbol?",
+      "range": {
+        "startLine": 2422,
+        "startChar": 2,
+        "endLine": 2422,
+        "endChar": 13
+      },
+      "revId": "e6eaa5d69551074b9274cf9efd7d13a7fcf49a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
