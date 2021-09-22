@@ -16,6 +16,24 @@
       "message": "Should be \"FROMGIT\" or if you wait a few days, \"UPSTREAM\"",
       "revId": "238f5bed03e2d3a4c3c28d6202e4aa4c4baf5c31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15d94be2_b0388e68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1030767
+      },
+      "writtenOn": "2021-09-22T15:54:59Z",
+      "side": 1,
+      "message": "Will do, this can wait a few days for Linus to pick up.",
+      "parentUuid": "b52c4735_666e098d",
+      "revId": "238f5bed03e2d3a4c3c28d6202e4aa4c4baf5c31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
