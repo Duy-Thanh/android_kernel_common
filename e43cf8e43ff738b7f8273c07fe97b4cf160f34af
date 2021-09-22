@@ -22,6 +22,30 @@
       },
       "revId": "e43cf8e43ff738b7f8273c07fe97b4cf160f34af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c83641c2_d64d815b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1764430
+      },
+      "writtenOn": "2021-09-22T08:40:59Z",
+      "side": 1,
+      "message": "Hi Greg,\n\nYes...this was something I wasn\u0027t sure about.  Would it be FROMGIT: BACKPORT variant?  Since there were Android specific changes(avoiding KMI breakage) I thought the Android label was appropriate.  If not, I will fix it asap.",
+      "parentUuid": "20bb70a8_3c81f1a8",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "e43cf8e43ff738b7f8273c07fe97b4cf160f34af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
