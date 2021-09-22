@@ -22,6 +22,30 @@
       },
       "revId": "edaa083e4aa9d7ed289a3200b9cec923d303171a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c577bc23_8192c65a",
+        "filename": "android/abi_gki_aarch64_hikey960",
+        "patchSetId": 3
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-09-22T20:33:05Z",
+      "side": 1,
+      "message": "Is this documented anywhere? (I\u0027m asking as the build checks complained about open_filp, before I reworked things, but not this)\n\nI will see what can be done w/ the mali code base. Though as it is tightly tied with the blob/gralloc/drm_hwcomposer, we can\u0027t easily move to the newer mali tree. So this may take quite an effort.",
+      "parentUuid": "006994d6_72da3cb0",
+      "range": {
+        "startLine": 725,
+        "startChar": 0,
+        "endLine": 725,
+        "endChar": 12
+      },
+      "revId": "edaa083e4aa9d7ed289a3200b9cec923d303171a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
