@@ -1319,6 +1319,11 @@ struct dwc3 {
 	ANDROID_KABI_RESERVE(4);
 };
 
+struct dwc3_vendor {
+	struct dwc3	dwc;
+	unsigned	softconnect:1;
+};
+
 #define INCRX_BURST_MODE 0
 #define INCRX_UNDEF_LENGTH_BURST_MODE 1
 
