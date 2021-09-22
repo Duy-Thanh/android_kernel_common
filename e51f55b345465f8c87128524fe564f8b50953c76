@@ -16,6 +16,24 @@
       "message": "Is the checkpatch check new? I don\u0027t recall seeing it before.\n\nI\u0027ve always thought of the checkpatch results as something that required manual judgement, so I wouldn\u0027t have made it a presubmit blocker. In this case, BUG_ON is appropriate because the alternative is that we potentially crash the kernel anyway due to invalid instructions.",
       "revId": "e51f55b345465f8c87128524fe564f8b50953c76",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d01cff7f_3fa233ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-09-22T08:22:10Z",
+      "side": 1,
+      "message": "I\u0027ve seen checkpatch run before, but I thought it was part of lint. Anyway, I agree that BUG_ON() is the right thing here so don\u0027t worry about that.\n\nCatalin had some nits on this patch, so please can you send a v4 and update this? The parent patch can also become FROMGIT I think.",
+      "parentUuid": "0e815241_e589f9b0",
+      "revId": "e51f55b345465f8c87128524fe564f8b50953c76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
