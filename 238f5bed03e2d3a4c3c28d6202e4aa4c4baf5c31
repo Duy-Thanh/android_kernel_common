@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b52c4735_666e098d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-22T06:55:35Z",
+      "side": 1,
+      "message": "Should be \"FROMGIT\" or if you wait a few days, \"UPSTREAM\"",
+      "revId": "238f5bed03e2d3a4c3c28d6202e4aa4c4baf5c31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
