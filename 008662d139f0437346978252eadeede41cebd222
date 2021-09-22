@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "883da65d_7d39792a",
+        "filename": "drivers/usb/dwc3/core.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1322,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-22T09:14:57Z",
+      "side": 1,
+      "message": "comment the heck out of this structure please.  You are building in some implicit requirements for the location of the fields in this structure, and you need to explain them, and why this is needed at all.",
+      "range": {
+        "startLine": 1322,
+        "startChar": 0,
+        "endLine": 1322,
+        "endChar": 20
+      },
+      "revId": "008662d139f0437346978252eadeede41cebd222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
