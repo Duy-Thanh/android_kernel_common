@@ -69,6 +69,30 @@
       },
       "revId": "e6eaa5d69551074b9274cf9efd7d13a7fcf49a39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7f79866_97c5ce04",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 2422,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-22T08:37:46Z",
+      "side": 1,
+      "message": "Now commented on the bug...",
+      "parentUuid": "5c4d403f_93e0c344",
+      "range": {
+        "startLine": 2422,
+        "startChar": 2,
+        "endLine": 2422,
+        "endChar": 13
+      },
+      "revId": "e6eaa5d69551074b9274cf9efd7d13a7fcf49a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
