@@ -45,6 +45,30 @@
       },
       "revId": "e6eaa5d69551074b9274cf9efd7d13a7fcf49a39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c4d403f_93e0c344",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 2422,
+      "author": {
+        "id": 1423395
+      },
+      "writtenOn": "2021-09-22T08:23:06Z",
+      "side": 1,
+      "message": "http://pa/2015926 CL for b/194499021, then cherry-pick the changes from http://pa/2015519.",
+      "parentUuid": "8548f5f1_a60ec481",
+      "range": {
+        "startLine": 2422,
+        "startChar": 2,
+        "endLine": 2422,
+        "endChar": 13
+      },
+      "revId": "e6eaa5d69551074b9274cf9efd7d13a7fcf49a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
