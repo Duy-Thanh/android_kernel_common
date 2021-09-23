@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11e07cc3_86a674fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-09-23T17:38:54Z",
+      "side": 1,
+      "message": "Please use the experimental range for your new device if you haven\u0027t gone to OASIS to reserve it. I see that 32 was reserved a long time ago for virtio-scmi: https://github.com/oasis-tcs/virtio-spec/commit/5d9444d699e5a9275eb8b360a0f815eaa47645c2",
+      "revId": "602f939d2723c8fcf7383fd7c1059bfd971db197",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
