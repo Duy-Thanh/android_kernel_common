@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02fd877d_910c3da9",
+        "filename": "drivers/tty/serial/8250/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-23T14:18:41Z",
+      "side": 1,
+      "message": "is this option needed to now be enabled in gki_defconfig?",
+      "range": {
+        "startLine": 515,
+        "startChar": 28,
+        "endLine": 515,
+        "endChar": 40
+      },
+      "revId": "76d7c66791937ae8c925eec3ba053e1ec729fda8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
