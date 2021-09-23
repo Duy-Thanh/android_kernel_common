@@ -10279,7 +10279,7 @@ static inline int find_new_ilb(void)
  * Kick a CPU to do the nohz balancing, if it is time for it. We pick any
  * idle CPU in the HK_FLAG_MISC housekeeping set (if there is one).
  */
-static void kick_ilb(unsigned int flags)
+void kick_ilb(unsigned int flags)
 {
 	int ilb_cpu;
 
@@ -10310,6 +10310,7 @@ static void kick_ilb(unsigned int flags)
 	 */
 	smp_call_function_single_async(ilb_cpu, &cpu_rq(ilb_cpu)->nohz_csd);
 }
+EXPORT_SYMBOL_GPL(kick_ilb);
 
 /*
  * Current decision point for kicking the idle load balancer in the presence
