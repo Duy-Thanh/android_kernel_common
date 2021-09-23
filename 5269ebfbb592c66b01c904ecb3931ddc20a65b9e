@@ -16,6 +16,24 @@
       "message": "this should go after the config option is added, in the series, right?",
       "revId": "5269ebfbb592c66b01c904ecb3931ddc20a65b9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb479d9b_45db1b37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1896910
+      },
+      "writtenOn": "2021-09-23T16:28:34Z",
+      "side": 1,
+      "message": "Not necessarily, this is actually better done that way to help with bisections, otherwise we would have had to squash this change with the patch that introduces CONFIG_SERIAL_8250_BCM7271 but we did not.\n\nIdeally the order that is being used here would have been the same upstream, but it was submitted after. If you prefer that the same ordering than upstream has be followed here, no objections from me, that will work too.",
+      "parentUuid": "f2e04940_4a5e0a0e",
+      "revId": "5269ebfbb592c66b01c904ecb3931ddc20a65b9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
