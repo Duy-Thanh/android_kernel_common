@@ -70,6 +70,30 @@
       },
       "revId": "76d7c66791937ae8c925eec3ba053e1ec729fda8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9bf715d_584634a6",
+        "filename": "drivers/tty/serial/8250/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1099639
+      },
+      "writtenOn": "2021-09-23T17:36:47Z",
+      "side": 1,
+      "message": "for the arch platform.\n\nwill do, thanks, sorry about the trouble.",
+      "parentUuid": "1d191237_d3245146",
+      "range": {
+        "startLine": 515,
+        "startChar": 28,
+        "endLine": 515,
+        "endChar": 40
+      },
+      "revId": "76d7c66791937ae8c925eec3ba053e1ec729fda8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
