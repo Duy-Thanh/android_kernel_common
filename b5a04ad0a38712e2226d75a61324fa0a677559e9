@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4829c266_ddbbb10a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2021-09-23T13:03:01Z",
+      "side": 1,
+      "message": "Hi Fengnan,\n\nI\u0027m continuing the development of the fix here: https://android-review.googlesource.com/c/kernel/common/+/1834458\nPlease let me know if you have any feedback on the change.\n\nThanks,\nAlessio",
+      "revId": "b5a04ad0a38712e2226d75a61324fa0a677559e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
