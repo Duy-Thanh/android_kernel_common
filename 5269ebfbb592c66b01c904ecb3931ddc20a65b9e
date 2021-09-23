@@ -52,6 +52,24 @@
       "parentUuid": "cb479d9b_45db1b37",
       "revId": "5269ebfbb592c66b01c904ecb3931ddc20a65b9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40c110e6_e919f7fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1896910
+      },
+      "writtenOn": "2021-09-23T17:38:18Z",
+      "side": 1,
+      "message": "There is nothing fundamentally wrong with following what is upstream, it would have been preferable to have the ordering here, rather than the one upstream such that *before* the bcm7271_8250 driver is enabled, we already have code in of_serial.c that is able to deal with the driver being enabled in the subsequent commits, and not as an afterthought.\n\nAnyway, either way is fine. Pierre, please re-submit in the same order that the patches landed upstream, which is that this patch will come last in the patch series.",
+      "parentUuid": "974d2939_16d1fc05",
+      "revId": "5269ebfbb592c66b01c904ecb3931ddc20a65b9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
