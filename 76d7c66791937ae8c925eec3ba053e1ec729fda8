@@ -22,6 +22,30 @@
       },
       "revId": "76d7c66791937ae8c925eec3ba053e1ec729fda8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f955e35_b7e69401",
+        "filename": "drivers/tty/serial/8250/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1099639
+      },
+      "writtenOn": "2021-09-23T14:21:12Z",
+      "side": 1,
+      "message": "yes, so we do have about 25 patches all together, and i was asked to not overwhelm the review by splitting the submissions.  the intention was to enable the configs once all the patches are in.  but it can be done the other way around, let me know what is preferable.  thanks",
+      "parentUuid": "02fd877d_910c3da9",
+      "range": {
+        "startLine": 515,
+        "startChar": 28,
+        "endLine": 515,
+        "endChar": 40
+      },
+      "revId": "76d7c66791937ae8c925eec3ba053e1ec729fda8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
