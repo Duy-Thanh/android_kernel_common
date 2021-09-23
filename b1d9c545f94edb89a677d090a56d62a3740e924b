@@ -16,6 +16,23 @@
       "message": "@Alessio, any comments for the new patch set?\n",
       "revId": "b1d9c545f94edb89a677d090a56d62a3740e924b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33ef47dc_12a52b06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2021-09-23T12:49:47Z",
+      "side": 1,
+      "message": "Hi Ed,\n\nI\u0027m continuing the development here (with all the portings): https://android-review.googlesource.com/c/kernel/common/+/1834457\nWould really appreciate your feedback and further testing.\n\nThanks,\nAlessio",
+      "revId": "b1d9c545f94edb89a677d090a56d62a3740e924b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
