@@ -46,6 +46,30 @@
       },
       "revId": "76d7c66791937ae8c925eec3ba053e1ec729fda8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d191237_d3245146",
+        "filename": "drivers/tty/serial/8250/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-23T17:33:13Z",
+      "side": 1,
+      "message": "25 patches just for the serial driver?\n\nOr for the arch platform?\n\nSubmit them all together so we know what we are working with here please.  25 patches shouldn\u0027t be a problem.",
+      "parentUuid": "9f955e35_b7e69401",
+      "range": {
+        "startLine": 515,
+        "startChar": 28,
+        "endLine": 515,
+        "endChar": 40
+      },
+      "revId": "76d7c66791937ae8c925eec3ba053e1ec729fda8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
