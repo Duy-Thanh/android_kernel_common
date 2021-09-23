@@ -34,6 +34,24 @@
       "parentUuid": "f2e04940_4a5e0a0e",
       "revId": "5269ebfbb592c66b01c904ecb3931ddc20a65b9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "974d2939_16d1fc05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-23T17:34:03Z",
+      "side": 1,
+      "message": "what is wrong with following what went upstream?  Why deviate from that?",
+      "parentUuid": "cb479d9b_45db1b37",
+      "revId": "5269ebfbb592c66b01c904ecb3931ddc20a65b9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
