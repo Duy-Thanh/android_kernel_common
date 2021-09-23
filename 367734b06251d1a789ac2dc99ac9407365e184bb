@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64200532_d73f1114",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 3
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-23T07:34:17Z",
+      "side": 1,
+      "message": "doesn\u0027t have much to do with the virtio sound driver 😞",
+      "range": {
+        "startLine": 565,
+        "startChar": 0,
+        "endLine": 565,
+        "endChar": 25
+      },
+      "revId": "367734b06251d1a789ac2dc99ac9407365e184bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
