@@ -1285,6 +1285,7 @@
   kfree_skb
   kfree_skb_list
   kick_all_cpus_sync
+  kick_ilb
   kill_anon_super
   kill_fasync
   kimage_vaddr
