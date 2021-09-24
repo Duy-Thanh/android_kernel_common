@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58784e22_efae134c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-09-24T16:50:02Z",
+      "side": 1,
+      "message": "Aren\u0027t \"restricted vendor hooks\" (trace_android_rvh instead of trace_android_vh) allowed to sleep?  I thought that\u0027s the point of them.\n\nPreviously, the kernel team has discouraged adding Android-specific functions to struct ufs_hba_variant_ops and instead recommended using vendor hooks (or restricted vendor hooks).",
+      "parentUuid": "8a78d34b_6d5e6066",
+      "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "928df450_8a7347e7",
         "filename": "drivers/scsi/ufs/ufshcd.c",
         "patchSetId": 1
