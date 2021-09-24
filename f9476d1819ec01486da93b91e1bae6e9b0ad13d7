@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2326bd4_6f9633b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1590141
+      },
+      "writtenOn": "2021-09-24T19:51:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5442ce64_e4146af1",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 55
+      },
+      "revId": "f9476d1819ec01486da93b91e1bae6e9b0ad13d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3324f987_e57e7083",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-09-24T18:10:19Z",
       "side": 1,
       "message": "Why is this part needed?  CONFIG_CRYPTO_FIPS140 is enabled in gki_defconfig, so there shouldn\u0027t be any problem with making the \"preserve relocations\" logic conditional on it.",
+      "range": {
+        "startLine": 14,
+        "startChar": 17,
+        "endLine": 15,
+        "endChar": 14
+      },
+      "revId": "f9476d1819ec01486da93b91e1bae6e9b0ad13d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2c8208d_9353b216",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1590141
+      },
+      "writtenOn": "2021-09-24T19:51:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3324f987_e57e7083",
       "range": {
         "startLine": 14,
         "startChar": 17,
