@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5589d70f_486cd252",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-09-24T14:15:28Z",
+      "side": 1,
+      "message": "Could you please remove my private email address from this review?\n\n",
+      "revId": "f610b2c875e64ab50f906f025a825c0a9d19c7cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e84d5290_29353878",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-09-24T14:15:28Z",
+      "side": 1,
+      "message": "Please keep the indentation as before.",
+      "revId": "f610b2c875e64ab50f906f025a825c0a9d19c7cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "083e5f60_d48c6638",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-09-24T14:15:28Z",
+      "side": 1,
+      "message": "Does your module free this memory like the fips140.ko module does? We might need to put a comment here but it could be a separate patch.",
+      "revId": "f610b2c875e64ab50f906f025a825c0a9d19c7cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
