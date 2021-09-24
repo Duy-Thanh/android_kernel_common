@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a78d34b_6d5e6066",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-09-24T16:44:50Z",
+      "side": 1,
+      "message": "It is not allowed to sleep from inside an Android hook. The FIPS self-test is too big too disallow sleeping for the entire duration of the FIPS self-test. Consider introducing a new \u0027vop\u0027 instead of using an Android hook.",
+      "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "928df450_8a7347e7",
         "filename": "drivers/scsi/ufs/ufshcd.c",
         "patchSetId": 1
