@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a9452db_be555469",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-24T12:54:14Z",
+      "side": 1,
+      "message": "there should not need to be any additions if all you are doing is sorting by module name now.\n\nPlease do the sorting first, and then add the new symbols you need to track, as a patch series.  That will make it much easier to accept the first change (no .xml file changes are needed), and we can review the symbol additions much easier.",
+      "range": {
+        "startLine": 9,
+        "startChar": 16,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "53b5884a74135e6743fc7d5327b95ec7418ae076",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
