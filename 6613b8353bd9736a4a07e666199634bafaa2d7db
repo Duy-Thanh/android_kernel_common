@@ -144,6 +144,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51ad410a_c8f95ebc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-09-24T21:28:02Z",
+      "side": 1,
+      "message": "Thanks for the reminder about how to add Android-specific functionality to upstream code.",
+      "parentUuid": "73b734a7_71d0191d",
+      "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "928df450_8a7347e7",
