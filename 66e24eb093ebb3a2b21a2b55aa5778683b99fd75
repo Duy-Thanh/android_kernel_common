@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7afafd1a_d298ea05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-09-24T03:55:33Z",
+      "side": 1,
+      "message": "This is very interesting. Can you please provide the non-GPL example here, since your commit text is missing it. I would have given -1 just to document the non-GPL user. ",
+      "revId": "66e24eb093ebb3a2b21a2b55aa5778683b99fd75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
