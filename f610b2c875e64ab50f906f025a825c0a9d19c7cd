@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a986a6c6_4afc79ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1590141
+      },
+      "writtenOn": "2021-09-24T18:01:47Z",
+      "side": 1,
+      "message": "Which one is your private email btw?",
+      "parentUuid": "5589d70f_486cd252",
+      "revId": "f610b2c875e64ab50f906f025a825c0a9d19c7cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e84d5290_29353878",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ca8e827_d3ea4f8a",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1590141
+      },
+      "writtenOn": "2021-09-24T18:01:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e84d5290_29353878",
+      "revId": "f610b2c875e64ab50f906f025a825c0a9d19c7cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "083e5f60_d48c6638",
@@ -48,6 +84,24 @@
       "writtenOn": "2021-09-24T14:15:28Z",
       "side": 1,
       "message": "Does your module free this memory like the fips140.ko module does? We might need to put a comment here but it could be a separate patch.",
+      "revId": "f610b2c875e64ab50f906f025a825c0a9d19c7cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2a8d5cc_b32340ba",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1590141
+      },
+      "writtenOn": "2021-09-24T18:01:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "083e5f60_d48c6638",
       "revId": "f610b2c875e64ab50f906f025a825c0a9d19c7cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
