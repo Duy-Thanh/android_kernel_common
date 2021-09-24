@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a128fd5_cf587db7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1590141
+      },
+      "writtenOn": "2021-09-24T19:13:15Z",
+      "side": 1,
+      "message": "The registration for the hook is done within the core UFS driver. There already exists registration for a restricted vendor hook within it.",
+      "parentUuid": "7536a929_57b5fa8e",
+      "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "928df450_8a7347e7",
         "filename": "drivers/scsi/ufs/ufshcd.c",
         "patchSetId": 1
