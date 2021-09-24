@@ -46,6 +46,30 @@
       },
       "revId": "edaa083e4aa9d7ed289a3200b9cec923d303171a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69af5626_0c1332db",
+        "filename": "android/abi_gki_aarch64_hikey960",
+        "patchSetId": 3
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-09-24T21:57:46Z",
+      "side": 1,
+      "message": "Mali devs don\u0027t have a \"fix\" for this yet, but suggested the method done here:\nhttps://android-review.googlesource.com/c/kernel/hikey-modules/+/1836582\n\nI\u0027ll respin this patch once that one has been sorted.",
+      "parentUuid": "c577bc23_8192c65a",
+      "range": {
+        "startLine": 725,
+        "startChar": 0,
+        "endLine": 725,
+        "endChar": 12
+      },
+      "revId": "edaa083e4aa9d7ed289a3200b9cec923d303171a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
