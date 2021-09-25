@@ -2461,6 +2461,29 @@ static inline void *f2fs_kmem_cache_alloc(struct kmem_cache *cachep,
 	return entry;
 }
 
+<<<<<<< HEAD   (4076dc Merge branch 'android11-5.4' into 'android11-5.4-lts')
+=======
+static inline struct bio *f2fs_bio_alloc(struct f2fs_sb_info *sbi,
+						int npages, bool no_fail)
+{
+	struct bio *bio;
+
+	if (no_fail) {
+		/* No failure on bio allocation */
+		bio = bio_alloc(GFP_NOIO, npages);
+		if (!bio)
+			bio = bio_alloc(GFP_NOIO | __GFP_NOFAIL, npages);
+		return bio;
+	}
+	if (time_to_inject(sbi, FAULT_ALLOC_BIO)) {
+		f2fs_show_injection_info(sbi, FAULT_ALLOC_BIO);
+		return NULL;
+	}
+
+	return bio_alloc(GFP_KERNEL, npages);
+}
+
+>>>>>>> BRANCH (07e5f2 Linux 5.4.148)
 static inline bool is_idle(struct f2fs_sb_info *sbi, int type)
 {
 	if (sbi->gc_mode == GC_URGENT)
