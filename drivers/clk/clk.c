@@ -50,6 +50,7 @@ static struct hlist_head *all_lists[] = {
 	NULL,
 };
 
+<<<<<<< HEAD   (a6850b Merge 4.19.206 into android-4.19-stable)
 static struct hlist_head *orphan_list[] = {
 	&clk_orphan_list,
 	NULL,
@@ -65,6 +66,8 @@ static struct hlist_head *orphan_list[] = {
  */
 static LIST_HEAD(clk_rate_change_list);
 
+=======
+>>>>>>> BRANCH (2950c9 Linux 4.19.207)
 /***    private data structures    ***/
 
 struct clk_core {
@@ -3183,6 +3186,11 @@ static struct dentry *rootdir;
 static int inited = 0;
 static DEFINE_MUTEX(clk_debug_lock);
 static HLIST_HEAD(clk_debug_list);
+
+static struct hlist_head *orphan_list[] = {
+	&clk_orphan_list,
+	NULL,
+};
 
 static void clk_summary_show_one(struct seq_file *s, struct clk_core *c,
 				 int level)
