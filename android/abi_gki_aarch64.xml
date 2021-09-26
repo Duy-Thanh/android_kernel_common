@@ -571,6 +571,8 @@
       <elf-symbol name='__xfrm_decode_session' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x41b76380'/>
       <elf-symbol name='__xfrm_state_destroy' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9c30e2e1'/>
       <elf-symbol name='_atomic_dec_and_lock' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcf4fdd4d'/>
+      <elf-symbol name='_bcd2bin' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb6936ffe'/>
+      <elf-symbol name='_bin2bcd' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x80ca5026'/>
       <elf-symbol name='_copy_from_iter' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x39448fe2'/>
       <elf-symbol name='_copy_from_iter_full' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x96ccf3d6'/>
       <elf-symbol name='_copy_to_iter' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe0fb5dfb'/>
@@ -114326,6 +114328,14 @@
         <parameter type-id='8567d8b2'/>
         <parameter type-id='34e69a54'/>
         <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='_bcd2bin' mangled-name='_bcd2bin' filepath='lib/bcd.c' line='5' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='_bcd2bin'>
+        <parameter type-id='002ac4a6' name='val' filepath='lib/bcd.c' line='5' column='1'/>
+        <return type-id='f0981eeb'/>
+      </function-decl>
+      <function-decl name='_bin2bcd' mangled-name='_bin2bcd' filepath='lib/bcd.c' line='11' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='_bin2bcd'>
+        <parameter type-id='f0981eeb' name='val' filepath='lib/bcd.c' line='11' column='1'/>
+        <return type-id='002ac4a6'/>
       </function-decl>
       <function-decl name='_copy_from_iter' mangled-name='_copy_from_iter' filepath='include/linux/uio.h' line='126' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='_copy_from_iter'>
         <parameter type-id='eaa32e2f'/>
