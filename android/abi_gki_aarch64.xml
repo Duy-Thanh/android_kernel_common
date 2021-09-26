@@ -1295,6 +1295,7 @@
       <elf-symbol name='dev_set_mac_address' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbb4c2efa'/>
       <elf-symbol name='dev_set_mtu' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9f5163d'/>
       <elf-symbol name='dev_set_name' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb02b15cb'/>
+      <elf-symbol name='dev_trans_start' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8ac31d64'/>
       <elf-symbol name='dev_uc_sync_multiple' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbc751942'/>
       <elf-symbol name='dev_uc_unsync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbd09cd07'/>
       <elf-symbol name='dev_vprintk_emit' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x773c76ec'/>
@@ -4298,6 +4299,11 @@
       <elf-symbol name='skcipher_walk_done' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xac438b11'/>
       <elf-symbol name='skcipher_walk_virt' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd35c3d4d'/>
       <elf-symbol name='skip_spaces' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd0a91bab'/>
+      <elf-symbol name='slhc_compress' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6c8f2de'/>
+      <elf-symbol name='slhc_free' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe5bc9a53'/>
+      <elf-symbol name='slhc_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x215a8ec8'/>
+      <elf-symbol name='slhc_remember' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf102033e'/>
+      <elf-symbol name='slhc_uncompress' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x85fbc931'/>
       <elf-symbol name='smp_call_function' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa0eae826'/>
       <elf-symbol name='smp_call_function_any' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8efd59ac'/>
       <elf-symbol name='smp_call_function_many' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe2df8e9a'/>
@@ -4760,6 +4766,7 @@
       <elf-symbol name='ttm_tt_populate' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x69b40311'/>
       <elf-symbol name='ttm_tt_set_placement_caching' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa48e052c'/>
       <elf-symbol name='ttm_unmap_and_unpopulate_pages' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2d35252c'/>
+      <elf-symbol name='tty_chars_in_buffer' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x62364753'/>
       <elf-symbol name='tty_driver_flush_buffer' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2f2814e2'/>
       <elf-symbol name='tty_flip_buffer_push' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6c7685af'/>
       <elf-symbol name='tty_hangup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4bf61645'/>
@@ -118135,6 +118142,10 @@
         <parameter is-variadic='yes'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='dev_trans_start' mangled-name='dev_trans_start' filepath='net/sched/sch_generic.c' line='418' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dev_trans_start'>
+        <parameter type-id='68a2d05b' name='dev' filepath='net/sched/sch_generic.c' line='418' column='1'/>
+        <return type-id='7359adad'/>
+      </function-decl>
       <function-decl name='dev_uc_sync_multiple' mangled-name='dev_uc_sync_multiple' filepath='net/core/dev_addr_lists.c' line='663' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dev_uc_sync_multiple'>
         <parameter type-id='68a2d05b' name='to' filepath='net/core/dev_addr_lists.c' line='663' column='1'/>
         <parameter type-id='68a2d05b' name='from' filepath='net/core/dev_addr_lists.c' line='663' column='1'/>
@@ -133625,6 +133636,36 @@
         <parameter type-id='80f4b756'/>
         <return type-id='26a90f95'/>
       </function-decl>
+      <function-decl name='slhc_compress' mangled-name='slhc_compress' filepath='include/net/slhc_vj.h' line='178' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='slhc_compress'>
+        <parameter type-id='b87ee0a0'/>
+        <parameter type-id='cf536864'/>
+        <parameter type-id='95e97e5e'/>
+        <parameter type-id='cf536864'/>
+        <parameter type-id='ae4d32ca'/>
+        <parameter type-id='95e97e5e'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='slhc_free' mangled-name='slhc_free' filepath='include/net/slhc_vj.h' line='176' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='slhc_free'>
+        <parameter type-id='b87ee0a0'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='slhc_init' mangled-name='slhc_init' filepath='include/net/slhc_vj.h' line='175' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='slhc_init'>
+        <parameter type-id='95e97e5e'/>
+        <parameter type-id='95e97e5e'/>
+        <return type-id='b87ee0a0'/>
+      </function-decl>
+      <function-decl name='slhc_remember' mangled-name='slhc_remember' filepath='include/net/slhc_vj.h' line='181' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='slhc_remember'>
+        <parameter type-id='b87ee0a0'/>
+        <parameter type-id='cf536864'/>
+        <parameter type-id='95e97e5e'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='slhc_uncompress' mangled-name='slhc_uncompress' filepath='include/net/slhc_vj.h' line='180' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='slhc_uncompress'>
+        <parameter type-id='b87ee0a0'/>
+        <parameter type-id='cf536864'/>
+        <parameter type-id='95e97e5e'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='smp_call_function' mangled-name='smp_call_function' filepath='kernel/smp.c' line='735' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='smp_call_function'>
         <parameter type-id='89714567' name='func' filepath='kernel/smp.c' line='735' column='1'/>
         <parameter type-id='eaa32e2f' name='info' filepath='kernel/smp.c' line='735' column='1'/>
@@ -136074,6 +136115,10 @@
         <parameter type-id='fa0b179b' name='dev' filepath='drivers/gpu/drm/ttm/ttm_page_alloc.c' line='1140' column='1'/>
         <parameter type-id='6621f500' name='tt' filepath='drivers/gpu/drm/ttm/ttm_page_alloc.c' line='1140' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='tty_chars_in_buffer' mangled-name='tty_chars_in_buffer' filepath='include/linux/tty.h' line='507' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='tty_chars_in_buffer'>
+        <parameter type-id='572fbdca'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='tty_driver_flush_buffer' mangled-name='tty_driver_flush_buffer' filepath='include/linux/tty.h' line='509' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='tty_driver_flush_buffer'>
         <parameter type-id='572fbdca'/>

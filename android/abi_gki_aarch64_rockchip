@@ -1115,6 +1115,7 @@
   alloc_netdev_mqs
   consume_skb
   dev_close
+  dev_trans_start
   free_netdev
   __netdev_alloc_skb
   netif_rx_ni
@@ -1125,6 +1126,12 @@
   rtnl_lock
   rtnl_unlock
   skb_put
+  slhc_compress
+  slhc_free
+  slhc_init
+  slhc_remember
+  slhc_uncompress
+  tty_chars_in_buffer
   tty_hangup
   tty_mode_ioctl
   tty_register_ldisc
