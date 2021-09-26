@@ -3250,6 +3250,7 @@
       <elf-symbol name='of_get_display_timing' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x61773766'/>
       <elf-symbol name='of_get_display_timings' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x880c06c0'/>
       <elf-symbol name='of_get_dma_window' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x55639ff8'/>
+      <elf-symbol name='of_get_drm_display_mode' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4b20035e'/>
       <elf-symbol name='of_get_i2c_adapter_by_node' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xeb353145'/>
       <elf-symbol name='of_get_mac_address' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x723b1daa'/>
       <elf-symbol name='of_get_named_gpio_flags' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x982b7d12'/>
@@ -128276,6 +128277,13 @@
         <parameter type-id='1d2c2b85' name='busno' filepath='drivers/iommu/of_iommu.c' line='37' column='1'/>
         <parameter type-id='e835b5d8' name='addr' filepath='drivers/iommu/of_iommu.c' line='37' column='1'/>
         <parameter type-id='78c01427' name='size' filepath='drivers/iommu/of_iommu.c' line='37' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='of_get_drm_display_mode' mangled-name='of_get_drm_display_mode' filepath='drivers/gpu/drm/drm_modes.c' line='708' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='of_get_drm_display_mode'>
+        <parameter type-id='9a537bbe' name='np' filepath='drivers/gpu/drm/drm_modes.c' line='708' column='1'/>
+        <parameter type-id='11e02f83' name='dmode' filepath='drivers/gpu/drm/drm_modes.c' line='709' column='1'/>
+        <parameter type-id='f9409001' name='bus_flags' filepath='drivers/gpu/drm/drm_modes.c' line='709' column='1'/>
+        <parameter type-id='95e97e5e' name='index' filepath='drivers/gpu/drm/drm_modes.c' line='710' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='of_get_i2c_adapter_by_node' mangled-name='of_get_i2c_adapter_by_node' filepath='drivers/i2c/i2c-core-of.c' line='168' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='of_get_i2c_adapter_by_node'>
