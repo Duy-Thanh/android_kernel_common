@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000015712619",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1816359?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "ee0cd7d1_2c67191f",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 26,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Lennart Poettering \u003cmzxreary@0pointer.de\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "387df758_b72afda6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-09-27T18:23:16Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Lennart Poettering \u003cmzxreary@0pointer.de\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 398500621 android-build.ayeaye-python-dispatcher_20210923.05_p0",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 0
+      },
+      "revId": "066bfa35119cc3d6ba4c3793337b63ad21ad1c83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
