@@ -1393,6 +1393,9 @@ mtk_cam_video_register_device(struct mtk_cam_dev *cam,
 	else
 		vbq->io_modes = VB2_MMAP | VB2_DMABUF;
 
+	if (node->desc.cached_mmap)
+		vbq->allow_cache_hints = 1;
+
 	if (node->desc.smem_alloc) {
 		vbq->bidirectional = 1;
 		vbq->dev = cam->smem_dev;
@@ -2065,6 +2068,7 @@ mtk_cam_dev_node_desc capture_queues[] = {
 		.default_fmt_idx = 1,
 		.max_buf_count = 5,
 		.ioctl_ops = &mtk_cam_v4l2_meta_cap_ioctl_ops,
+		.cached_mmap = true,
 	},
 	{
 		.id = MTK_CAM_P1_META_OUT_1,
@@ -2079,6 +2083,7 @@ mtk_cam_dev_node_desc capture_queues[] = {
 		.default_fmt_idx = 2,
 		.max_buf_count = 5,
 		.ioctl_ops = &mtk_cam_v4l2_meta_cap_ioctl_ops,
+		.cached_mmap = true,
 	},
 	{
 		.id = MTK_CAM_P1_META_OUT_2,
@@ -2093,6 +2098,7 @@ mtk_cam_dev_node_desc capture_queues[] = {
 		.default_fmt_idx = 3,
 		.max_buf_count = 10,
 		.ioctl_ops = &mtk_cam_v4l2_meta_cap_ioctl_ops,
+		.cached_mmap = true,
 	},
 	{
 		.id = MTK_CAM_P1_META_OUT_3,
@@ -2107,6 +2113,7 @@ mtk_cam_dev_node_desc capture_queues[] = {
 		.default_fmt_idx = 4,
 		.max_buf_count = 10,
 		.ioctl_ops = &mtk_cam_v4l2_meta_cap_ioctl_ops,
+		.cached_mmap = true,
 	},
 };
 
