@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f006d2f_8f78c1da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-27T09:41:54Z",
+      "side": 1,
+      "message": "module names should not be hard-coded like this.  If you HAVE to do things with fips140 module symbols, then put them into a proper \"fips140\" memory segment.  The kernel lets you create new memory segments very easily, why are you not doing that here?",
+      "revId": "1327b7d251106329f704d4ba1d8078f0ae1f2139",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcfd93a5_ff0fe8bc",
+        "filename": "arch/arm64/kernel/module-plts.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-27T09:41:54Z",
+      "side": 1,
+      "message": "huh?  If you really need to do crazy things like this, put the symbols into a \"fips140\" segment and do them there.  Do NOT depend on a module name for this type of logic.",
+      "range": {
+        "startLine": 328,
+        "startChar": 53,
+        "endLine": 328,
+        "endChar": 60
+      },
+      "revId": "1327b7d251106329f704d4ba1d8078f0ae1f2139",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
