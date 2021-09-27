@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36a89caf_2379df19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-09-27T15:14:05Z",
+      "side": 1,
+      "message": "It was merged into Linus\u0027s tree so let\u0027s use UPSTREAM tag with new sha instead of BACKPORT. Other than that, looks good to me.\n\nThanks Chris.",
+      "revId": "68e11d695a26c228a4ddaa5e29d2e9baebb9b99a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
