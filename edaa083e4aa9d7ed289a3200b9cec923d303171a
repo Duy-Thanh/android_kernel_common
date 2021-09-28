@@ -70,6 +70,30 @@
       },
       "revId": "edaa083e4aa9d7ed289a3200b9cec923d303171a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad30221c_20c50024",
+        "filename": "android/abi_gki_aarch64_hikey960",
+        "patchSetId": 3
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-09-28T19:24:41Z",
+      "side": 1,
+      "message": "Ok. Respun this now the mali __close_fd fix above has landed.\n\nLet me know if you have further objections.",
+      "parentUuid": "69af5626_0c1332db",
+      "range": {
+        "startLine": 725,
+        "startChar": 0,
+        "endLine": 725,
+        "endChar": 12
+      },
+      "revId": "edaa083e4aa9d7ed289a3200b9cec923d303171a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
