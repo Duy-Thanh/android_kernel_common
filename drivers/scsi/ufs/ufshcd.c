@@ -1157,7 +1157,7 @@ static int ufshcd_scale_gear(struct ufs_hba *hba, bool scale_up)
 	return ret;
 }
 
-static int ufshcd_clock_scaling_prepare(struct ufs_hba *hba)
+int ufshcd_clock_scaling_prepare(struct ufs_hba *hba)
 {
 	#define DOORBELL_CLR_TOUT_US		(1000 * 1000) /* 1 sec */
 	int ret = 0;
@@ -1182,8 +1182,9 @@ static int ufshcd_clock_scaling_prepare(struct ufs_hba *hba)
 out:
 	return ret;
 }
+EXPORT_SYMBOL_GPL(ufshcd_clock_scaling_prepare);
 
-static void ufshcd_clock_scaling_unprepare(struct ufs_hba *hba, bool writelock)
+void ufshcd_clock_scaling_unprepare(struct ufs_hba *hba, bool writelock)
 {
 	if (writelock)
 		up_write(&hba->clk_scaling_lock);
@@ -1192,6 +1193,7 @@ static void ufshcd_clock_scaling_unprepare(struct ufs_hba *hba, bool writelock)
 	ufshcd_scsi_unblock_requests(hba);
 	ufshcd_release(hba);
 }
+EXPORT_SYMBOL_GPL(ufshcd_clock_scaling_unprepare);
 
 /**
  * ufshcd_devfreq_scale - scale up/down UFS clocks and gear
