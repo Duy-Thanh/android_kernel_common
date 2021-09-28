@@ -327,6 +327,30 @@
       },
       "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7968e2ea_a566134c",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8046,
+      "author": {
+        "id": 1590141
+      },
+      "writtenOn": "2021-09-28T14:31:27Z",
+      "side": 1,
+      "message": "I apologize, I must be missing/misunderstanding something...\nThe process Documentation/trace/ftrace-uses.rst describes is not enabled, otherwise from my understanding the trace_ufshcd_init() call records information into the trace buffer.\nI\u0027m not sure how to have my own function called when trace_ufshcd_init() is called below",
+      "parentUuid": "b9d8daa4_7cadf8ff",
+      "range": {
+        "startLine": 8046,
+        "startChar": 1,
+        "endLine": 8046,
+        "endChar": 36
+      },
+      "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
