@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e95f0ef2_87176c28",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2021-09-28T22:19:13Z",
+      "side": 1,
+      "message": "this line looks wrong (shouldn\u0027t be here)",
+      "revId": "9495213c8bf4a5d3d30749caa2749a5eb667a595",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8ab7801_e608a1d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2021-09-28T22:19:13Z",
+      "side": 1,
+      "message": "The commit text seems wrong, ",
+      "revId": "9495213c8bf4a5d3d30749caa2749a5eb667a595",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
