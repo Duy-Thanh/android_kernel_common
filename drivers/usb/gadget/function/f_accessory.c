@@ -743,7 +743,11 @@ requeue_req:
 	ret = wait_event_interruptible(dev->read_wq, dev->rx_done);
 	if (ret < 0) {
 		r = ret;
-		ret = usb_ep_dequeue(dev->ep_out, req);
+		if(req)
+			ret = usb_ep_dequeue(dev->ep_out, req);
+		else
+			pr_debug("acc_read: rx request is empty!");
+
 		if (ret != 0) {
 			// cancel failed. There can be a data already received.
 			// it will be retrieved in the next read.
