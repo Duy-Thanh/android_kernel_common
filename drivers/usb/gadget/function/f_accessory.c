@@ -742,6 +742,12 @@ requeue_req:
 	/* wait for a request to complete */
 	ret = wait_event_interruptible(dev->read_wq, dev->rx_done);
 	if (ret < 0) {
+		if (!req) {
+			pr_err("%s: rx request is empty!", __func__);
+			r = -EIO;
+			goto done;
+		}
+
 		r = ret;
 		ret = usb_ep_dequeue(dev->ep_out, req);
 		if (ret != 0) {
