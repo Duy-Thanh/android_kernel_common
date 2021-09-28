@@ -303,6 +303,30 @@
       },
       "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9d8daa4_7cadf8ff",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8046,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-28T14:14:15Z",
+      "side": 1,
+      "message": "This is not a normal function, it\u0027s the trace_ufshcd_init() call below, which is there for tracing just like this trace function you are asking to add here.",
+      "parentUuid": "b2a90bc1_41e1821b",
+      "range": {
+        "startLine": 8046,
+        "startChar": 1,
+        "endLine": 8046,
+        "endChar": 36
+      },
+      "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
