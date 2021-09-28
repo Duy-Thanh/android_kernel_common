@@ -16,6 +16,24 @@
       "message": "Can you make the subject line and commit text more descriptive, something like\n\nANDROID: add pin_user_pages_remote to ABI symbol list\n\nThe pin_user_pages_remote symbol is needed in the KMI because ...",
       "revId": "268547326908323f800858235a2548f3d8764777",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef7dd75b_357daa64",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1010672
+      },
+      "writtenOn": "2021-09-28T21:41:07Z",
+      "side": 1,
+      "message": "Done. Maybe the update_symbol_list.sh scrips should be updated to generate some of that extra detail?\n\nI don\u0027t think this belongs in the commit message, but (Google-internal, sorry) context is that this is needed by pa/1947187, which I\u0027m merging from a android12-5.10 driver branch to a android13-5.10 driver branch.",
+      "parentUuid": "bc51b067_8f07f197",
+      "revId": "268547326908323f800858235a2548f3d8764777",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
