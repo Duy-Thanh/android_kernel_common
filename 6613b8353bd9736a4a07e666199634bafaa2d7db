@@ -351,6 +351,30 @@
       },
       "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b505483_804a27e2",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8046,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-28T14:36:05Z",
+      "side": 1,
+      "message": "The same way your code would have called the trace function you are trying to add to this file, it\u0027s just a different name.",
+      "parentUuid": "7968e2ea_a566134c",
+      "range": {
+        "startLine": 8046,
+        "startChar": 1,
+        "endLine": 8046,
+        "endChar": 36
+      },
+      "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
