@@ -104,6 +104,24 @@
       "message": "Can you also upload this fix to the following kernels:\n\nandroid11-5.4\nandroid12-5.4\nandroid12-5.10\nandroid13-5.10\nandroid-mainline\n\n..and I will rubber stamp it, so this problem is gone for S and T.",
       "revId": "a59aa797bac85b1860b731179a0d0674e63d195d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2afc7a23_95cf3cde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2021-09-29T23:33:30Z",
+      "side": 1,
+      "message": "All 5.10 kernels should have reverted the original change that introduces the limit: https://r.android.com/1457389. It seems that we only need to increase the limit for android11-5.4 and android12-5.4.",
+      "parentUuid": "093017a2_441fb127",
+      "revId": "a59aa797bac85b1860b731179a0d0674e63d195d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
