@@ -69,6 +69,24 @@
       "parentUuid": "f7b11a85_a9bbca1b",
       "revId": "a59aa797bac85b1860b731179a0d0674e63d195d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28a67f87_20f344a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2021-09-29T21:59:52Z",
+      "side": 1,
+      "message": "Thanks for the reply, 4096 should be enough for the app in problem. I will update this change to only change MAX_DRM_OPEN_COUNT to 4096.\n\nWe can revisit the limit if 4096 is not enough for another app in the future.",
+      "parentUuid": "33092c38_a2023c23",
+      "revId": "a59aa797bac85b1860b731179a0d0674e63d195d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
