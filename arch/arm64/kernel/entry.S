@@ -294,6 +294,7 @@ alternative_else_nop_endif
 	.else
 	add	x21, sp, #S_FRAME_SIZE
 	get_current_task tsk
+	ldr	x0, [tsk, THREAD_SCTLR_USER]
 	/* Save the task's original addr_limit and set USER_DS */
 	ldr	x20, [tsk, #TSK_TI_ADDR_LIMIT]
 	str	x20, [sp, #S_ORIG_ADDR_LIMIT]
@@ -301,6 +302,26 @@ alternative_else_nop_endif
 	str	x20, [tsk, #TSK_TI_ADDR_LIMIT]
 	/* No need to reset PSTATE.UAO, hardware's already set it to 0 for us */
 	.endif /* \el == 0 */
+
+	/*
+	 * Re-enable tag checking (TCO set on exception entry). This is only
+	 * necessary if MTE is enabled in either the kernel or the userspace
+	 * task in synchronous mode. With MTE disabled in the kernel and
+	 * disabled or asynchronous in userspace, tag check faults (including in
+	 * uaccesses) are not reported, therefore there is no need to re-enable
+	 * checking. This is beneficial on microarchitectures where re-enabling
+	 * TCO is expensive.
+	 */
+#ifdef CONFIG_ARM64_MTE
+alternative_cb	kasan_hw_tags_enable
+	tbz	x0, #SCTLR_EL1_TCF0_SHIFT, 1f
+alternative_cb_end
+alternative_if ARM64_MTE
+	SET_PSTATE_TCO(0)
+alternative_else_nop_endif
+1:
+#endif
+
 	mrs	x22, elr_el1
 	mrs	x23, spsr_el1
 	stp	lr, x21, [sp, #S_LR]
@@ -338,13 +359,6 @@ alternative_if ARM64_HAS_IRQ_PRIO_MASKING
 	mov	x20, #GIC_PRIO_IRQON | GIC_PRIO_PSR_I_SET
 	msr_s	SYS_ICC_PMR_EL1, x20
 alternative_else_nop_endif
-
-	/* Re-enable tag checking (TCO set on exception entry) */
-#ifdef CONFIG_ARM64_MTE
-alternative_if ARM64_MTE
-	SET_PSTATE_TCO(0)
-alternative_else_nop_endif
-#endif
 
 	/*
 	 * Registers that may be useful after this macro is invoked:
