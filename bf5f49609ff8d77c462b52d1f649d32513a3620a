@@ -16,6 +16,24 @@
       "message": "Good point, but it reminded me that crosvm has some experimental devices already. Let\u0027s avoid using those:\n\ndevices/src/virtio/mod.rs\n// Additional types invented by crosvm\nconst MAX_VIRTIO_DEVICE_ID: u32 \u003d 63;\nconst TYPE_WL: u32 \u003d MAX_VIRTIO_DEVICE_ID;\nconst TYPE_TPM: u32 \u003d MAX_VIRTIO_DEVICE_ID - 1;",
       "revId": "bf5f49609ff8d77c462b52d1f649d32513a3620a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1c077d4_498560bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2021-09-29T22:04:05Z",
+      "side": 1,
+      "message": "Ah great, updated to 61.",
+      "parentUuid": "6edcab7d_e107a881",
+      "revId": "bf5f49609ff8d77c462b52d1f649d32513a3620a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
