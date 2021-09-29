@@ -51,6 +51,24 @@
       "parentUuid": "ffbf3be9_e2b6f55e",
       "revId": "a59aa797bac85b1860b731179a0d0674e63d195d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33092c38_a2023c23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-09-29T21:55:00Z",
+      "side": 1,
+      "message": "There\u0027s a per-process fd limit anyway, so this is just deciding on a subset of a pre-existing limit. Also, fds are shared with other activities of the process, so there\u0027s no way to know how many Vulkan will get for any given app.\n\nI think the fuzzing problem was that fuzzers could create so many opens that the system ran out of memory before the fd limit was reached, and then became unstable. Could we not just set this to something more reasonable, like 4096, and call it a day? 128 certainly seems way too low.",
+      "parentUuid": "f7b11a85_a9bbca1b",
+      "revId": "a59aa797bac85b1860b731179a0d0674e63d195d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
