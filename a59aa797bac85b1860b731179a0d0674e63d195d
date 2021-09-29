@@ -16,6 +16,23 @@
       "message": "Hey Noah, who needs to +2 changes here?",
       "revId": "a59aa797bac85b1860b731179a0d0674e63d195d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffbf3be9_e2b6f55e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-09-29T21:20:15Z",
+      "side": 1,
+      "message": "1) Do you need to revert the whole patch? It seems like only the drm_file.c parts are relevant to your use case\n\n2) Should we just bump the max fds instead? The original justification was fuzzing and the lack of checks in the kernel. Those seem like valid concerns. Do you want to drop that?",
+      "revId": "a59aa797bac85b1860b731179a0d0674e63d195d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
