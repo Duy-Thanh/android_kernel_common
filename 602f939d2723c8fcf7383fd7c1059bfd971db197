@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fec44916_cc896447",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2021-09-29T21:26:15Z",
+      "side": 1,
+      "message": "The experimental range theoretically starts at 65535 and works down, but virtio_pci_modern_probe essentially limits the ids that can be recognized to \u003c\u003d63. So I\u0027ve updated the ID to be 63. Let me know if you think there\u0027s a better option for now.",
+      "parentUuid": "11e07cc3_86a674fd",
+      "revId": "602f939d2723c8fcf7383fd7c1059bfd971db197",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e103ab52_d4b1afd0",
@@ -48,6 +66,30 @@
       "writtenOn": "2021-09-25T01:26:43Z",
       "side": 1,
       "message": "If injected_suspend_ns is an accumulator, should this be +\u003d suspend_time_delta? It also seems like the conditional might need adjustment too?",
+      "range": {
+        "startLine": 63,
+        "startChar": 26,
+        "endLine": 63,
+        "endChar": 38
+      },
+      "revId": "602f939d2723c8fcf7383fd7c1059bfd971db197",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b48d91f0_8ce8120a",
+        "filename": "drivers/virtio/virtio_pvclock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2021-09-29T21:26:15Z",
+      "side": 1,
+      "message": "Doing +\u003d suspend_time_delta would be the same, since suspend_time_delta \u003d suspend_ns - vp-\u003einjected_suspend_ns; from the line before. \n\nEssentially suspend_ns and injected_suspend_ns are both accumulating over time, and when a config change occurs this function updates injected_suspend_ns to match suspend_ns and injects the change via timekeeping_inject_sleeptime64.",
+      "parentUuid": "e103ab52_d4b1afd0",
       "range": {
         "startLine": 63,
         "startChar": 26,
