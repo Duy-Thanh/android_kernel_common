@@ -87,6 +87,23 @@
       "parentUuid": "33092c38_a2023c23",
       "revId": "a59aa797bac85b1860b731179a0d0674e63d195d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "093017a2_441fb127",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-09-29T22:10:35Z",
+      "side": 1,
+      "message": "Can you also upload this fix to the following kernels:\n\nandroid11-5.4\nandroid12-5.4\nandroid12-5.10\nandroid13-5.10\nandroid-mainline\n\n..and I will rubber stamp it, so this problem is gone for S and T.",
+      "revId": "a59aa797bac85b1860b731179a0d0674e63d195d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
