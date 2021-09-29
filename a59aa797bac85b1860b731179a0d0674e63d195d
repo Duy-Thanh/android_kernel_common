@@ -33,6 +33,24 @@
       "message": "1) Do you need to revert the whole patch? It seems like only the drm_file.c parts are relevant to your use case\n\n2) Should we just bump the max fds instead? The original justification was fuzzing and the lack of checks in the kernel. Those seem like valid concerns. Do you want to drop that?",
       "revId": "a59aa797bac85b1860b731179a0d0674e63d195d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7b11a85_a9bbca1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2021-09-29T21:40:29Z",
+      "side": 1,
+      "message": "1) Sure, I can change to only revert the MAX_DRM_OPEN_COUNT part in drm_file.c.\n\n2) In gfxstream Vulkan driver, we will open one fd for every host visible vkAllocateMemory(and we will try to reuse opened fd if that memory is vkFreeMemory\u0027ed), I am not sure if we could decide a reasonable limit for that. We can use a different way to manage the mapped memory: use the drm gem object instead of a rendernode fd to manage the underlying resources(see https://r.android.com/1836503), but the AEMU team thinks that removing the limit in the kernel is an easier fix. WDYT?",
+      "parentUuid": "ffbf3be9_e2b6f55e",
+      "revId": "a59aa797bac85b1860b731179a0d0674e63d195d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
