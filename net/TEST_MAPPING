@@ -1,12 +1,10 @@
 {
-  "presubmit": [
-    {
-      "name": "CtsNetTestCases",
-      "options": [
-        {
-          "exclude-annotation": "com.android.testutils.SkipPresubmit"
-        }
-      ]
-    }
+  "imports": [
+     {
+       "path": "packages/modules/Connectivity"
+     },
+     {
+       "path": "system/netd"
+     }
   ]
 }
