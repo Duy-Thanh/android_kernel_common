@@ -140,6 +140,24 @@
       "parentUuid": "2afc7a23_95cf3cde",
       "revId": "a59aa797bac85b1860b731179a0d0674e63d195d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fee6f6f1_c74f0c48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1583282
+      },
+      "writtenOn": "2021-09-30T00:05:47Z",
+      "side": 1,
+      "message": "It looks like someone from the kernel team (e.g. Alistair) has to +2. This is probably an artifact of basing the branch config on the main Android branch.\n\nWe should relax this ACL (unless there are objections) to include the KiwiVM team. I\u0027ll file a bug on this with the build team.",
+      "parentUuid": "86c8f79a_acb6c884",
+      "revId": "a59aa797bac85b1860b731179a0d0674e63d195d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
