@@ -7,6 +7,11 @@
           "exclude-annotation": "com.android.testutils.SkipPresubmit"
         }
       ]
-    }
+    },
+    { "name": "libnetdbpf_test" },
+    { "name": "netd_integration_test" },
+    { "name": "netd_unit_test" },
+    { "name": "netdclient_test" },
+    { "name": "netdutils_test" },
   ]
 }
