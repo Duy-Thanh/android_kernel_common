@@ -16,6 +16,23 @@
       "message": "This should be ready to go now. Looks like the only remaining presubmit error is from checkpatch.",
       "revId": "9d5f7c8d1daca429f8ff0f2747c4e1b4b868117c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c6a9b21_44aae9ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2021-09-30T20:27:25Z",
+      "side": 1,
+      "message": "Could someone with permission submit for me please?",
+      "revId": "9d5f7c8d1daca429f8ff0f2747c4e1b4b868117c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
