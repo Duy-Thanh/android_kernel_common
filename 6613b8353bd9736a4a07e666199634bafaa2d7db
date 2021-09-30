@@ -423,6 +423,30 @@
       },
       "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a6d2c46_814d34e0",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8046,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-09-30T22:49:55Z",
+      "side": 1,
+      "message": "I made a quick test after adding a hook in trace_ufshcd_init() with WARN_ON(is_atomic()). It seems we need to use an android hook that supports to sleep. Is there alternative way to do it?\n\n[    9.130495] Call trace:\n[    9.133657] vh_ufshcd_init+0x3c/0x48\n[    9.139527] ufshcd_probe_hba+0x184c/0x18cc\n[    9.144393] ufshcd_async_scan+0x38/0x2c0\n[    9.149091] async_run_entry_fn+0x64/0x180\n[    9.153858] process_one_work+0x218/0x634\n[    9.158546] worker_thread+0x290/0x588\n[    9.162977] kthread+0x158/0x1b0\n[    9.166888] ret_from_fork+0x10/0x30",
+      "parentUuid": "d839a85f_34c3a7fa",
+      "range": {
+        "startLine": 8046,
+        "startChar": 1,
+        "endLine": 8046,
+        "endChar": 36
+      },
+      "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
