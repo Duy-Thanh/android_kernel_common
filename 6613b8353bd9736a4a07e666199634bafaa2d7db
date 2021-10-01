@@ -471,6 +471,30 @@
       },
       "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec980b53_ebd6d874",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8046,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-10-01T15:31:41Z",
+      "side": 1,
+      "message": "You can try this change that I made for the test. https://paste.googleplex.com/5719191274389504\n\nAnd Namhyung gave me a link saying \"Tracepoints disable preemption around the entire callback invocation,\".\nhttps://linuxplumbersconf.org/event/11/contributions/1084/attachments/849/1615/lpc2021-tracing-mc-faultable-tracepoints.pdf\n\nI think there\u0027s a doc to describe vendor hooks. Todd?",
+      "parentUuid": "5a0f2f5a_e7c467d7",
+      "range": {
+        "startLine": 8046,
+        "startChar": 1,
+        "endLine": 8046,
+        "endChar": 36
+      },
+      "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
