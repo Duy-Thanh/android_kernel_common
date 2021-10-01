@@ -495,6 +495,30 @@
       },
       "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d746d83_d4274b18",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8046,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2021-10-01T19:46:31Z",
+      "side": 1,
+      "message": "Greg,\n\nI don\u0027t have an opinion on whether the hook needs to make sleeping calls or not. It looked like Konstantin wanted to and I was just pointing out trace points don\u0027t allow sleeps in them. As for documentation for different types of vendor hooks, read the two bullet points in this link:\nhttps://docs.partner.android.com/partners/guides/gki/kernel-code#vendor-hooks",
+      "parentUuid": "ec980b53_ebd6d874",
+      "range": {
+        "startLine": 8046,
+        "startChar": 1,
+        "endLine": 8046,
+        "endChar": 36
+      },
+      "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
