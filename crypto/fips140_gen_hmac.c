@@ -28,7 +28,7 @@
 static Elf64_Ehdr *ehdr;
 static Elf64_Shdr *shdr;
 static int num_shdr;
-static const char *strtab;
+static const char *strtab, *shstrtab;
 static Elf64_Sym *syms;
 static int num_syms;
 
@@ -42,15 +42,71 @@ static Elf64_Shdr *find_symtab_section(void)
 	return NULL;
 }
 
-static void *get_sym_addr(const char *sym_name)
+static get_rela_section_idx(const char *name)
+{
+	int i;
+
+	for (i = 0; i < num_shdr; i++)
+		if (shdr[i].sh_type == SHT_RELA &&
+		    !strcmp(shstrtab + shdr[shdr[i].sh_info].sh_name, name))
+			return i;
+	return -1;
+}
+
+static int get_sym_idx(const char *sym_name)
 {
 	int i;
 
 	for (i = 0; i < num_syms; i++)
 		if (!strcmp(strtab + syms[i].st_name, sym_name))
-			return (void *)ehdr + shdr[syms[i].st_shndx].sh_offset +
-			       syms[i].st_value;
+			return i;
+	return -1;
+}
+
+static void *get_sym_addr(const char *sym_name)
+{
+	int i = get_sym_idx(sym_name);
+
+	if (i >= 0)
+		return (void *)ehdr + shdr[syms[i].st_shndx].sh_offset +
+		       syms[i].st_value;
 	return NULL;
+}
+
+static int update_rela_section(const char *name, const char *var_name)
+{
+	/*
+	 * We need to do a couple of things to ensure that the RELA data is
+	 * preserved and accessible to the module itself at module init time:
+	 * - the RELA section needs to have the SHF_ALLOC attribute so that the
+	 *   module loader will preserve it automatically,
+	 * - the associated entry in the symbol table needs to refer to the
+	 *   correct section index, and have SECTION type and GLOBAL linkage.
+	 * - some global variables in the module need to be set to the right
+	 *   values based on the sizes of the RELA sections.
+	 */
+	int sec_idx = get_rela_section_idx(name);
+	unsigned int *size_var = get_sym_addr(var_name);
+	char sym_name[32];
+	int sym_idx;
+
+	sprintf(sym_name, ".rela%s", name);
+	sym_idx = get_sym_idx(sym_name);
+
+	if (sec_idx < 0 || sym_idx < 0 || !size_var) {
+		fprintf(stderr, "failed to locate metadata for section '%s' in binary\n",
+			name);
+		return 0;
+	}
+
+	shdr[sec_idx].sh_flags |= SHF_ALLOC;
+
+	syms[sym_idx].st_shndx = sec_idx;
+	syms[sym_idx].st_info = (STB_GLOBAL << 4) | STT_SECTION;
+
+	size_var[1] = shdr[sec_idx].sh_size / sizeof(Elf64_Rela);
+
+	return 1;
 }
 
 static void hmac_section(HMAC_CTX *hmac, const char *start, const char *end)
@@ -103,6 +159,10 @@ int main(int argc, char **argv)
 	num_syms = symtab_shdr->sh_size / sizeof(Elf64_Sym);
 
 	strtab = (void *)ehdr + shdr[symtab_shdr->sh_link].sh_offset;
+	shstrtab = (void *)ehdr + shdr[ehdr->e_shstrndx].sh_offset;
+
+	update_rela_section(".text", "fips140_rela_text");
+	update_rela_section(".rodata", "fips140_rela_rodata");
 
 	hmac_key = get_sym_addr("fips140_integ_hmac_key");
 	if (!hmac_key) {
