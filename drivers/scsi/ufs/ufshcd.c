@@ -17,6 +17,7 @@
 #include <linux/blk-pm.h>
 #include <linux/blkdev.h>
 #include "ufshcd.h"
+#include "ufshcd-add-info.h"
 #include "ufs_quirks.h"
 #include "unipro.h"
 #include "ufs-sysfs.h"
@@ -9323,7 +9324,7 @@ int ufshcd_alloc_host(struct device *dev, struct ufs_hba **hba_handle)
 	}
 
 	host = scsi_host_alloc(&ufshcd_driver_template,
-			       sizeof(struct ufs_hba_with_hpb));
+			       sizeof(struct ufs_hba_add_info));
 	if (!host) {
 		dev_err(dev, "scsi_host_alloc failed\n");
 		err = -ENOMEM;
