@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbb2504d_39b78c94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-10-01T20:34:54Z",
+      "side": 1,
+      "message": "Generally looks good; thanks for doing this!  Has this been tested?  I read through some of the module loader logic and it looks like this will work in principle, but we need to make sure it actually works.",
+      "revId": "adc65f2e5153825701923ade551127ac86ca27e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5b25e51_6520adb9",
+        "filename": "crypto/fips140-refs.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-10-01T20:34:54Z",
+      "side": 1,
+      "message": "A comment in this file would help.",
+      "revId": "adc65f2e5153825701923ade551127ac86ca27e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aac960f3_e3117c06",
+        "filename": "crypto/fips140_gen_hmac.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-10-01T20:34:54Z",
+      "side": 1,
+      "message": "Check the return value of these functions?",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 55
+      },
+      "revId": "adc65f2e5153825701923ade551127ac86ca27e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "751fca20_0312bd48",
+        "filename": "scripts/module.lds.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-10-01T20:34:54Z",
+      "side": 1,
+      "message": "Why is this part needed?",
+      "revId": "adc65f2e5153825701923ade551127ac86ca27e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
