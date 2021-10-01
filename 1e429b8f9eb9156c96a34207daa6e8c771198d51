@@ -16,6 +16,24 @@
       "message": "Any chance this will get sent upstream?",
       "revId": "1e429b8f9eb9156c96a34207daa6e8c771198d51",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96808d85_9d11eeb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2021-10-01T14:57:51Z",
+      "side": 1,
+      "message": "Not likely:\n\n- The upstream doesn\u0027t have the original CL that adds the MAX_DRM_OPEN_COUNT limit(https://r.android.com/1158163).\n- For Android kernels, we revert the original CL that adds the MAX_DRM_OPEN_COUNT limit for all 5.10 kernel: https://r.android.com/1457389\n\nHence, the MAX_DRM_OPEN_COUNT limit will only exist in Android 5.4 kernels, which won\u0027t be used since Android S.",
+      "parentUuid": "045fd87b_5882af9e",
+      "revId": "1e429b8f9eb9156c96a34207daa6e8c771198d51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
