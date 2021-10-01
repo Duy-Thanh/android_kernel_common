@@ -447,6 +447,30 @@
       },
       "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a0f2f5a_e7c467d7",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8046,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-01T06:53:00Z",
+      "side": 1,
+      "message": "Are you sure that this is not just because this function is called in that way (look at the spinlock_irq() elsewhere in this function).\n\nWhere is the documentation that says the difference between the types of android hooks is that one you can sleep and one you can not?",
+      "parentUuid": "2a6d2c46_814d34e0",
+      "range": {
+        "startLine": 8046,
+        "startChar": 1,
+        "endLine": 8046,
+        "endChar": 36
+      },
+      "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
