@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96e1e679_b94d8503",
+        "filename": "crypto/fips140-refs.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-02T09:36:11Z",
+      "side": 1,
+      "message": "Copyright and SPDX lines are required for new files.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 0
+      },
+      "revId": "adc65f2e5153825701923ade551127ac86ca27e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b5b25e51_6520adb9",
         "filename": "crypto/fips140-refs.S",
         "patchSetId": 1
