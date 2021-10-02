@@ -543,6 +543,30 @@
       },
       "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dffe7a7_acd58c72",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8046,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-02T09:33:51Z",
+      "side": 1,
+      "message": "Ah, the documentation was not very explicit about \"use this type if you have to sleep\", but I see the \"requires nonatomic context\" now, thanks!\n\nAnd I\u0027m with Todd, this needs to be documented really well in the changelog text as to why you need this and what you are doing in this hook.",
+      "parentUuid": "ab56b037_dbae2f81",
+      "range": {
+        "startLine": 8046,
+        "startChar": 1,
+        "endLine": 8046,
+        "endChar": 36
+      },
+      "revId": "6613b8353bd9736a4a07e666199634bafaa2d7db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
