@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62fc045b_cc9e215d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-10-04T08:31:24Z",
+      "side": 1,
+      "message": "Looks like this is causing a CFI failure and therefore a panic() during early boot.",
+      "revId": "eaec1d06abe576e4d8a541e7201fe2a70d54527c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
