@@ -39,6 +39,30 @@
       },
       "revId": "e266a8a8fdd0a2dbbb66224511894b8323c8dd17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9abfb7b0_1e4b906e",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-04T09:50:01Z",
+      "side": 1,
+      "message": "Also this if call is inverted, always check for error first and handle it, then proceed normally.  Makes the code much simpler and easier to follow (no else portion of the if statement is needed.)",
+      "parentUuid": "c4ca2b17_7b6e1cdf",
+      "range": {
+        "startLine": 746,
+        "startChar": 0,
+        "endLine": 746,
+        "endChar": 9
+      },
+      "revId": "e266a8a8fdd0a2dbbb66224511894b8323c8dd17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
