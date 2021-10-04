@@ -16,6 +16,24 @@
       "message": "Config options have to be enabled for both arches (x86 and arm64).\n\nPlease enable it there as well.\n\nAlso, does this change the ABI any?  Have you tested that yet?",
       "revId": "d0b79f2f7a30c979c883da7f38c91789aba2d205",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6721671_ad2594eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015397
+      },
+      "writtenOn": "2021-10-04T19:30:33Z",
+      "side": 1,
+      "message": "I\u0027ll add this to x86 config. Initially I figured to keep it absent since UAC2 wasn\u0027t there.\n\nAs for the ABI changes, running \n\n BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build_abi.sh\n\nI didn\u0027t see any negative outputs and the out_abi/android12-5.10/dist/abi.report.short is empty.",
+      "parentUuid": "219b429f_86fef664",
+      "revId": "d0b79f2f7a30c979c883da7f38c91789aba2d205",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
