@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49bf3aa1_03031fcd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-10-04T22:08:23Z",
+      "side": 1,
+      "message": "I\u0027m trying to test it, and I got the following build error:\n\n    llvm-strip: error: Link field value 48 in section .rela.text is not a symbol table\n    make[2]: *** [p21-kernel/private/gs-google/scripts/Makefile.modinst:33: crypto/fips140.ko] Error 1\n\nAny idea what the problem is?",
+      "parentUuid": "438e5801_c6a90d1c",
+      "revId": "adc65f2e5153825701923ade551127ac86ca27e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96e1e679_b94d8503",
         "filename": "crypto/fips140-refs.S",
         "patchSetId": 1
