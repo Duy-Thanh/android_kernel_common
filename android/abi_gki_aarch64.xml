@@ -19490,24 +19490,24 @@
         <return type-id='48b5725f'/>
       </function-type>
       <pointer-type-def type-id='9f5ca0a3' size-in-bits='64' id='1ee0b597'/>
-      <class-decl name='usb_udc' size-in-bits='7616' is-struct='yes' visibility='default' filepath='drivers/usb/gadget/udc/core.c' line='37' column='1' id='1ee0d0f0'>
+      <class-decl name='usb_udc' size-in-bits='7616' is-struct='yes' visibility='default' filepath='drivers/usb/gadget/udc/core.c' line='39' column='1' id='1ee0d0f0'>
         <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='driver' type-id='9762ede1' visibility='default' filepath='drivers/usb/gadget/udc/core.c' line='38' column='1'/>
+          <var-decl name='driver' type-id='9762ede1' visibility='default' filepath='drivers/usb/gadget/udc/core.c' line='40' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='gadget' type-id='49a58c0c' visibility='default' filepath='drivers/usb/gadget/udc/core.c' line='39' column='1'/>
+          <var-decl name='gadget' type-id='49a58c0c' visibility='default' filepath='drivers/usb/gadget/udc/core.c' line='41' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='dev' type-id='66e487eb' visibility='default' filepath='drivers/usb/gadget/udc/core.c' line='40' column='1'/>
+          <var-decl name='dev' type-id='66e487eb' visibility='default' filepath='drivers/usb/gadget/udc/core.c' line='42' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7424'>
-          <var-decl name='list' type-id='72f469ec' visibility='default' filepath='drivers/usb/gadget/udc/core.c' line='41' column='1'/>
+          <var-decl name='list' type-id='72f469ec' visibility='default' filepath='drivers/usb/gadget/udc/core.c' line='43' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7552'>
-          <var-decl name='vbus' type-id='b50a4934' visibility='default' filepath='drivers/usb/gadget/udc/core.c' line='42' column='1'/>
+          <var-decl name='vbus' type-id='b50a4934' visibility='default' filepath='drivers/usb/gadget/udc/core.c' line='44' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='7560'>
-          <var-decl name='started' type-id='b50a4934' visibility='default' filepath='drivers/usb/gadget/udc/core.c' line='43' column='1'/>
+          <var-decl name='started' type-id='b50a4934' visibility='default' filepath='drivers/usb/gadget/udc/core.c' line='45' column='1'/>
         </data-member>
       </class-decl>
       <pointer-type-def type-id='8e3bf7d2' size-in-bits='64' id='1ee1b664'/>
@@ -159528,13 +159528,13 @@
         <parameter type-id='e5411c2c' name='function' filepath='drivers/usb/gadget/composite.c' line='315' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_add_gadget' mangled-name='usb_add_gadget' filepath='drivers/usb/gadget/udc/core.c' line='1290' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_add_gadget'>
-        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='1290' column='1'/>
+      <function-decl name='usb_add_gadget' mangled-name='usb_add_gadget' filepath='drivers/usb/gadget/udc/core.c' line='1292' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_add_gadget'>
+        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='1292' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_add_gadget_udc' mangled-name='usb_add_gadget_udc' filepath='drivers/usb/gadget/udc/core.c' line='1416' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_add_gadget_udc'>
-        <parameter type-id='fa0b179b' name='parent' filepath='drivers/usb/gadget/udc/core.c' line='1416' column='1'/>
-        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='1416' column='1'/>
+      <function-decl name='usb_add_gadget_udc' mangled-name='usb_add_gadget_udc' filepath='drivers/usb/gadget/udc/core.c' line='1418' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_add_gadget_udc'>
+        <parameter type-id='fa0b179b' name='parent' filepath='drivers/usb/gadget/udc/core.c' line='1418' column='1'/>
+        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='1418' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='usb_add_hcd' mangled-name='usb_add_hcd' filepath='drivers/usb/core/hcd.c' line='2814' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_add_hcd'>
@@ -159731,12 +159731,12 @@
         <parameter type-id='4e532009' name='speed' filepath='drivers/usb/common/common.c' line='232' column='1'/>
         <return type-id='f0981eeb'/>
       </function-decl>
-      <function-decl name='usb_del_gadget' mangled-name='usb_del_gadget' filepath='drivers/usb/gadget/udc/core.c' line='1448' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_del_gadget'>
-        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='1448' column='1'/>
+      <function-decl name='usb_del_gadget' mangled-name='usb_del_gadget' filepath='drivers/usb/gadget/udc/core.c' line='1450' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_del_gadget'>
+        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='1450' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='usb_del_gadget_udc' mangled-name='usb_del_gadget_udc' filepath='drivers/usb/gadget/udc/core.c' line='1481' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_del_gadget_udc'>
-        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='1481' column='1'/>
+      <function-decl name='usb_del_gadget_udc' mangled-name='usb_del_gadget_udc' filepath='drivers/usb/gadget/udc/core.c' line='1483' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_del_gadget_udc'>
+        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='1483' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='usb_deregister' mangled-name='usb_deregister' filepath='drivers/usb/core/driver.c' line='1095' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_deregister'>
@@ -159775,9 +159775,9 @@
         <parameter type-id='25e60cb2' name='udev' filepath='drivers/usb/core/driver.c' line='1633' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='usb_ep_alloc_request' mangled-name='usb_ep_alloc_request' filepath='drivers/usb/gadget/udc/core.c' line='175' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_alloc_request'>
-        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='175' column='1'/>
-        <parameter type-id='3eb7c31c' name='gfp_flags' filepath='drivers/usb/gadget/udc/core.c' line='176' column='1'/>
+      <function-decl name='usb_ep_alloc_request' mangled-name='usb_ep_alloc_request' filepath='drivers/usb/gadget/udc/core.c' line='177' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_alloc_request'>
+        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='177' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp_flags' filepath='drivers/usb/gadget/udc/core.c' line='178' column='1'/>
         <return type-id='1a494567'/>
       </function-decl>
       <function-decl name='usb_ep_autoconfig' mangled-name='usb_ep_autoconfig' filepath='drivers/usb/gadget/epautoconf.c' line='149' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_autoconfig'>
@@ -159785,45 +159785,45 @@
         <parameter type-id='a07d0491' name='desc' filepath='drivers/usb/gadget/epautoconf.c' line='151' column='1'/>
         <return type-id='63a08bf7'/>
       </function-decl>
-      <function-decl name='usb_ep_clear_halt' mangled-name='usb_ep_clear_halt' filepath='drivers/usb/gadget/udc/core.c' line='369' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_clear_halt'>
-        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='369' column='1'/>
+      <function-decl name='usb_ep_clear_halt' mangled-name='usb_ep_clear_halt' filepath='drivers/usb/gadget/udc/core.c' line='371' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_clear_halt'>
+        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='371' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_ep_dequeue' mangled-name='usb_ep_dequeue' filepath='drivers/usb/gadget/udc/core.c' line='309' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_dequeue'>
-        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='309' column='1'/>
-        <parameter type-id='1a494567' name='req' filepath='drivers/usb/gadget/udc/core.c' line='309' column='1'/>
+      <function-decl name='usb_ep_dequeue' mangled-name='usb_ep_dequeue' filepath='drivers/usb/gadget/udc/core.c' line='311' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_dequeue'>
+        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='311' column='1'/>
+        <parameter type-id='1a494567' name='req' filepath='drivers/usb/gadget/udc/core.c' line='311' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_ep_disable' mangled-name='usb_ep_disable' filepath='drivers/usb/gadget/udc/core.c' line='141' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_disable'>
-        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='141' column='1'/>
+      <function-decl name='usb_ep_disable' mangled-name='usb_ep_disable' filepath='drivers/usb/gadget/udc/core.c' line='143' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_disable'>
+        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='143' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_ep_enable' mangled-name='usb_ep_enable' filepath='drivers/usb/gadget/udc/core.c' line='96' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_enable'>
-        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='96' column='1'/>
+      <function-decl name='usb_ep_enable' mangled-name='usb_ep_enable' filepath='drivers/usb/gadget/udc/core.c' line='98' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_enable'>
+        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='98' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_ep_fifo_flush' mangled-name='usb_ep_fifo_flush' filepath='drivers/usb/gadget/udc/core.c' line='450' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_fifo_flush'>
-        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='450' column='1'/>
+      <function-decl name='usb_ep_fifo_flush' mangled-name='usb_ep_fifo_flush' filepath='drivers/usb/gadget/udc/core.c' line='452' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_fifo_flush'>
+        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='452' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='usb_ep_free_request' mangled-name='usb_ep_free_request' filepath='drivers/usb/gadget/udc/core.c' line='197' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_free_request'>
-        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='197' column='1'/>
-        <parameter type-id='1a494567' name='req' filepath='drivers/usb/gadget/udc/core.c' line='198' column='1'/>
+      <function-decl name='usb_ep_free_request' mangled-name='usb_ep_free_request' filepath='drivers/usb/gadget/udc/core.c' line='199' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_free_request'>
+        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='199' column='1'/>
+        <parameter type-id='1a494567' name='req' filepath='drivers/usb/gadget/udc/core.c' line='200' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='usb_ep_queue' mangled-name='usb_ep_queue' filepath='drivers/usb/gadget/udc/core.c' line='273' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_queue'>
-        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='273' column='1'/>
-        <parameter type-id='1a494567' name='req' filepath='drivers/usb/gadget/udc/core.c' line='274' column='1'/>
-        <parameter type-id='3eb7c31c' name='gfp_flags' filepath='drivers/usb/gadget/udc/core.c' line='274' column='1'/>
+      <function-decl name='usb_ep_queue' mangled-name='usb_ep_queue' filepath='drivers/usb/gadget/udc/core.c' line='275' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_queue'>
+        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='275' column='1'/>
+        <parameter type-id='1a494567' name='req' filepath='drivers/usb/gadget/udc/core.c' line='276' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp_flags' filepath='drivers/usb/gadget/udc/core.c' line='276' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_ep_set_halt' mangled-name='usb_ep_set_halt' filepath='drivers/usb/gadget/udc/core.c' line='343' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_set_halt'>
-        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='343' column='1'/>
+      <function-decl name='usb_ep_set_halt' mangled-name='usb_ep_set_halt' filepath='drivers/usb/gadget/udc/core.c' line='345' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_set_halt'>
+        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='345' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_ep_set_maxpacket_limit' mangled-name='usb_ep_set_maxpacket_limit' filepath='drivers/usb/gadget/udc/core.c' line='64' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_set_maxpacket_limit'>
-        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='64' column='1'/>
-        <parameter type-id='f0981eeb' name='maxpacket_limit' filepath='drivers/usb/gadget/udc/core.c' line='65' column='1'/>
+      <function-decl name='usb_ep_set_maxpacket_limit' mangled-name='usb_ep_set_maxpacket_limit' filepath='drivers/usb/gadget/udc/core.c' line='66' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_set_maxpacket_limit'>
+        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='66' column='1'/>
+        <parameter type-id='f0981eeb' name='maxpacket_limit' filepath='drivers/usb/gadget/udc/core.c' line='67' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='usb_ep_type_string' mangled-name='usb_ep_type_string' filepath='drivers/usb/common/common.c' line='34' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_type_string'>
@@ -159866,83 +159866,83 @@
         <parameter type-id='f666bcc1' name='fd' filepath='drivers/usb/gadget/functions.c' line='111' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='usb_gadget_activate' mangled-name='usb_gadget_activate' filepath='drivers/usb/gadget/udc/core.c' line='791' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_activate'>
-        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='791' column='1'/>
+      <function-decl name='usb_gadget_activate' mangled-name='usb_gadget_activate' filepath='drivers/usb/gadget/udc/core.c' line='793' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_activate'>
+        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='793' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_gadget_connect' mangled-name='usb_gadget_connect' filepath='drivers/usb/gadget/udc/core.c' line='668' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_connect'>
-        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='668' column='1'/>
+      <function-decl name='usb_gadget_connect' mangled-name='usb_gadget_connect' filepath='drivers/usb/gadget/udc/core.c' line='670' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_connect'>
+        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='670' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_gadget_deactivate' mangled-name='usb_gadget_deactivate' filepath='drivers/usb/gadget/udc/core.c' line='755' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_deactivate'>
-        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='755' column='1'/>
+      <function-decl name='usb_gadget_deactivate' mangled-name='usb_gadget_deactivate' filepath='drivers/usb/gadget/udc/core.c' line='757' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_deactivate'>
+        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='757' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_gadget_disconnect' mangled-name='usb_gadget_disconnect' filepath='drivers/usb/gadget/udc/core.c' line='710' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_disconnect'>
-        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='710' column='1'/>
+      <function-decl name='usb_gadget_disconnect' mangled-name='usb_gadget_disconnect' filepath='drivers/usb/gadget/udc/core.c' line='712' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_disconnect'>
+        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='712' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_gadget_giveback_request' mangled-name='usb_gadget_giveback_request' filepath='drivers/usb/gadget/udc/core.c' line='904' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_giveback_request'>
-        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='904' column='1'/>
-        <parameter type-id='1a494567' name='req' filepath='drivers/usb/gadget/udc/core.c' line='905' column='1'/>
+      <function-decl name='usb_gadget_giveback_request' mangled-name='usb_gadget_giveback_request' filepath='drivers/usb/gadget/udc/core.c' line='906' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_giveback_request'>
+        <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='906' column='1'/>
+        <parameter type-id='1a494567' name='req' filepath='drivers/usb/gadget/udc/core.c' line='907' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='usb_gadget_map_request' mangled-name='usb_gadget_map_request' filepath='drivers/usb/gadget/udc/core.c' line='859' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_map_request'>
-        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='859' column='1'/>
-        <parameter type-id='1a494567' name='req' filepath='drivers/usb/gadget/udc/core.c' line='860' column='1'/>
-        <parameter type-id='95e97e5e' name='is_in' filepath='drivers/usb/gadget/udc/core.c' line='860' column='1'/>
+      <function-decl name='usb_gadget_map_request' mangled-name='usb_gadget_map_request' filepath='drivers/usb/gadget/udc/core.c' line='861' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_map_request'>
+        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='861' column='1'/>
+        <parameter type-id='1a494567' name='req' filepath='drivers/usb/gadget/udc/core.c' line='862' column='1'/>
+        <parameter type-id='95e97e5e' name='is_in' filepath='drivers/usb/gadget/udc/core.c' line='862' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_gadget_map_request_by_dev' mangled-name='usb_gadget_map_request_by_dev' filepath='drivers/usb/gadget/udc/core.c' line='818' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_map_request_by_dev'>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/usb/gadget/udc/core.c' line='818' column='1'/>
-        <parameter type-id='1a494567' name='req' filepath='drivers/usb/gadget/udc/core.c' line='819' column='1'/>
-        <parameter type-id='95e97e5e' name='is_in' filepath='drivers/usb/gadget/udc/core.c' line='819' column='1'/>
+      <function-decl name='usb_gadget_map_request_by_dev' mangled-name='usb_gadget_map_request_by_dev' filepath='drivers/usb/gadget/udc/core.c' line='820' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_map_request_by_dev'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/usb/gadget/udc/core.c' line='820' column='1'/>
+        <parameter type-id='1a494567' name='req' filepath='drivers/usb/gadget/udc/core.c' line='821' column='1'/>
+        <parameter type-id='95e97e5e' name='is_in' filepath='drivers/usb/gadget/udc/core.c' line='821' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_gadget_probe_driver' mangled-name='usb_gadget_probe_driver' filepath='drivers/usb/gadget/udc/core.c' line='1524' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_probe_driver'>
-        <parameter type-id='9762ede1' name='driver' filepath='drivers/usb/gadget/udc/core.c' line='1524' column='1'/>
+      <function-decl name='usb_gadget_probe_driver' mangled-name='usb_gadget_probe_driver' filepath='drivers/usb/gadget/udc/core.c' line='1526' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_probe_driver'>
+        <parameter type-id='9762ede1' name='driver' filepath='drivers/usb/gadget/udc/core.c' line='1526' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_gadget_set_selfpowered' mangled-name='usb_gadget_set_selfpowered' filepath='drivers/usb/gadget/udc/core.c' line='520' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_set_selfpowered'>
-        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='520' column='1'/>
+      <function-decl name='usb_gadget_set_selfpowered' mangled-name='usb_gadget_set_selfpowered' filepath='drivers/usb/gadget/udc/core.c' line='522' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_set_selfpowered'>
+        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='522' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_gadget_set_state' mangled-name='usb_gadget_set_state' filepath='drivers/usb/gadget/udc/core.c' line='1036' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_set_state'>
-        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='1036' column='1'/>
-        <parameter type-id='901a91cb' name='state' filepath='drivers/usb/gadget/udc/core.c' line='1037' column='1'/>
+      <function-decl name='usb_gadget_set_state' mangled-name='usb_gadget_set_state' filepath='drivers/usb/gadget/udc/core.c' line='1038' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_set_state'>
+        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='1038' column='1'/>
+        <parameter type-id='901a91cb' name='state' filepath='drivers/usb/gadget/udc/core.c' line='1039' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='usb_gadget_udc_reset' mangled-name='usb_gadget_udc_reset' filepath='drivers/usb/gadget/udc/core.c' line='1083' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_udc_reset'>
-        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='1083' column='1'/>
-        <parameter type-id='9762ede1' name='driver' filepath='drivers/usb/gadget/udc/core.c' line='1084' column='1'/>
+      <function-decl name='usb_gadget_udc_reset' mangled-name='usb_gadget_udc_reset' filepath='drivers/usb/gadget/udc/core.c' line='1085' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_udc_reset'>
+        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='1085' column='1'/>
+        <parameter type-id='9762ede1' name='driver' filepath='drivers/usb/gadget/udc/core.c' line='1086' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='usb_gadget_unmap_request' mangled-name='usb_gadget_unmap_request' filepath='drivers/usb/gadget/udc/core.c' line='885' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_unmap_request'>
-        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='885' column='1'/>
-        <parameter type-id='1a494567' name='req' filepath='drivers/usb/gadget/udc/core.c' line='886' column='1'/>
-        <parameter type-id='95e97e5e' name='is_in' filepath='drivers/usb/gadget/udc/core.c' line='886' column='1'/>
+      <function-decl name='usb_gadget_unmap_request' mangled-name='usb_gadget_unmap_request' filepath='drivers/usb/gadget/udc/core.c' line='887' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_unmap_request'>
+        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='887' column='1'/>
+        <parameter type-id='1a494567' name='req' filepath='drivers/usb/gadget/udc/core.c' line='888' column='1'/>
+        <parameter type-id='95e97e5e' name='is_in' filepath='drivers/usb/gadget/udc/core.c' line='888' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='usb_gadget_unmap_request_by_dev' mangled-name='usb_gadget_unmap_request_by_dev' filepath='drivers/usb/gadget/udc/core.c' line='866' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_unmap_request_by_dev'>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/usb/gadget/udc/core.c' line='866' column='1'/>
-        <parameter type-id='1a494567' name='req' filepath='drivers/usb/gadget/udc/core.c' line='867' column='1'/>
-        <parameter type-id='95e97e5e' name='is_in' filepath='drivers/usb/gadget/udc/core.c' line='867' column='1'/>
+      <function-decl name='usb_gadget_unmap_request_by_dev' mangled-name='usb_gadget_unmap_request_by_dev' filepath='drivers/usb/gadget/udc/core.c' line='868' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_unmap_request_by_dev'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/usb/gadget/udc/core.c' line='868' column='1'/>
+        <parameter type-id='1a494567' name='req' filepath='drivers/usb/gadget/udc/core.c' line='869' column='1'/>
+        <parameter type-id='95e97e5e' name='is_in' filepath='drivers/usb/gadget/udc/core.c' line='869' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='usb_gadget_unregister_driver' mangled-name='usb_gadget_unregister_driver' filepath='drivers/usb/gadget/udc/core.c' line='1571' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_unregister_driver'>
-        <parameter type-id='9762ede1' name='driver' filepath='drivers/usb/gadget/udc/core.c' line='1571' column='1'/>
+      <function-decl name='usb_gadget_unregister_driver' mangled-name='usb_gadget_unregister_driver' filepath='drivers/usb/gadget/udc/core.c' line='1573' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_unregister_driver'>
+        <parameter type-id='9762ede1' name='driver' filepath='drivers/usb/gadget/udc/core.c' line='1573' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_gadget_vbus_connect' mangled-name='usb_gadget_vbus_connect' filepath='drivers/usb/gadget/udc/core.c' line='579' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_vbus_connect'>
-        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='579' column='1'/>
+      <function-decl name='usb_gadget_vbus_connect' mangled-name='usb_gadget_vbus_connect' filepath='drivers/usb/gadget/udc/core.c' line='581' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_vbus_connect'>
+        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='581' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_gadget_vbus_disconnect' mangled-name='usb_gadget_vbus_disconnect' filepath='drivers/usb/gadget/udc/core.c' line='640' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_vbus_disconnect'>
-        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='640' column='1'/>
+      <function-decl name='usb_gadget_vbus_disconnect' mangled-name='usb_gadget_vbus_disconnect' filepath='drivers/usb/gadget/udc/core.c' line='642' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_vbus_disconnect'>
+        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='642' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_gadget_wakeup' mangled-name='usb_gadget_wakeup' filepath='drivers/usb/gadget/udc/core.c' line='493' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_wakeup'>
-        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='493' column='1'/>
+      <function-decl name='usb_gadget_wakeup' mangled-name='usb_gadget_wakeup' filepath='drivers/usb/gadget/udc/core.c' line='495' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_gadget_wakeup'>
+        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='495' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='usb_get_dev' mangled-name='usb_get_dev' filepath='drivers/usb/core/usb.c' line='740' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_get_dev'>
@@ -160090,10 +160090,10 @@
         <parameter type-id='ab85b8f2' name='urb' filepath='drivers/usb/core/urb.c' line='43' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='usb_initialize_gadget' mangled-name='usb_initialize_gadget' filepath='drivers/usb/gadget/udc/core.c' line='1267' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_initialize_gadget'>
-        <parameter type-id='fa0b179b' name='parent' filepath='drivers/usb/gadget/udc/core.c' line='1267' column='1'/>
-        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='1267' column='1'/>
-        <parameter type-id='dd787f72' name='release' filepath='drivers/usb/gadget/udc/core.c' line='1268' column='1'/>
+      <function-decl name='usb_initialize_gadget' mangled-name='usb_initialize_gadget' filepath='drivers/usb/gadget/udc/core.c' line='1269' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_initialize_gadget'>
+        <parameter type-id='fa0b179b' name='parent' filepath='drivers/usb/gadget/udc/core.c' line='1269' column='1'/>
+        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='1269' column='1'/>
+        <parameter type-id='dd787f72' name='release' filepath='drivers/usb/gadget/udc/core.c' line='1270' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='usb_interface_id' mangled-name='usb_interface_id' filepath='drivers/usb/gadget/composite.c' line='479' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_interface_id'>
@@ -160352,9 +160352,9 @@
         <parameter type-id='3eb7c31c' name='mem_flags' filepath='drivers/usb/core/urb.c' line='367' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='usb_udc_vbus_handler' mangled-name='usb_udc_vbus_handler' filepath='drivers/usb/gadget/udc/core.c' line='1063' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_udc_vbus_handler'>
-        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='1063' column='1'/>
-        <parameter type-id='b50a4934' name='status' filepath='drivers/usb/gadget/udc/core.c' line='1063' column='1'/>
+      <function-decl name='usb_udc_vbus_handler' mangled-name='usb_udc_vbus_handler' filepath='drivers/usb/gadget/udc/core.c' line='1065' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_udc_vbus_handler'>
+        <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='1065' column='1'/>
+        <parameter type-id='b50a4934' name='status' filepath='drivers/usb/gadget/udc/core.c' line='1065' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='usb_unanchor_urb' mangled-name='usb_unanchor_urb' filepath='drivers/usb/core/urb.c' line='164' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_unanchor_urb'>
