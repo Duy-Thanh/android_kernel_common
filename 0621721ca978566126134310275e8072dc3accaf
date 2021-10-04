@@ -16,6 +16,24 @@
       "message": "Why are there four functions but it says two above",
       "revId": "0621721ca978566126134310275e8072dc3accaf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8421d2d0_4d1461e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-04T16:21:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49fca7f8_c27f6ad6",
+      "revId": "0621721ca978566126134310275e8072dc3accaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
