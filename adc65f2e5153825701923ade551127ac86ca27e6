@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "438e5801_c6a90d1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-10-04T13:38:11Z",
+      "side": 1,
+      "message": "Yes, I have tested it.",
+      "parentUuid": "bbb2504d_39b78c94",
+      "revId": "adc65f2e5153825701923ade551127ac86ca27e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96e1e679_b94d8503",
@@ -65,6 +83,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9cf07ad_50fe9a04",
+        "filename": "crypto/fips140-refs.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-10-04T13:38:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96e1e679_b94d8503",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 0
+      },
+      "revId": "adc65f2e5153825701923ade551127ac86ca27e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5b25e51_6520adb9",
@@ -78,6 +120,24 @@
       "writtenOn": "2021-10-01T20:34:54Z",
       "side": 1,
       "message": "A comment in this file would help.",
+      "revId": "adc65f2e5153825701923ade551127ac86ca27e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b42e0ee_ef60b333",
+        "filename": "crypto/fips140-refs.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-10-04T13:38:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5b25e51_6520adb9",
       "revId": "adc65f2e5153825701923ade551127ac86ca27e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -105,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a20f31a_960b44f7",
+        "filename": "crypto/fips140_gen_hmac.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-10-04T13:38:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aac960f3_e3117c06",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 55
+      },
+      "revId": "adc65f2e5153825701923ade551127ac86ca27e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "751fca20_0312bd48",
@@ -118,6 +202,24 @@
       "writtenOn": "2021-10-01T20:34:54Z",
       "side": 1,
       "message": "Why is this part needed?",
+      "revId": "adc65f2e5153825701923ade551127ac86ca27e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ad7ed59_b1f27175",
+        "filename": "scripts/module.lds.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-10-04T13:38:11Z",
+      "side": 1,
+      "message": "I will pull this into a separate patch. Without this change, the text start and end symbols are only guaranteed to be emitted in the right place if CFI is enabled.",
+      "parentUuid": "751fca20_0312bd48",
       "revId": "adc65f2e5153825701923ade551127ac86ca27e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
