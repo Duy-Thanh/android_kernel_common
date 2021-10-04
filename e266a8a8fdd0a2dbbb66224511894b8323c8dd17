@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fdf7035_40ce4cb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-04T09:48:38Z",
+      "side": 1,
+      "message": "always run checkpatch.pl on your changes please.",
+      "revId": "e266a8a8fdd0a2dbbb66224511894b8323c8dd17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4ca2b17_7b6e1cdf",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-04T09:48:38Z",
+      "side": 1,
+      "message": "coding style 😞",
+      "range": {
+        "startLine": 746,
+        "startChar": 0,
+        "endLine": 746,
+        "endChar": 9
+      },
+      "revId": "e266a8a8fdd0a2dbbb66224511894b8323c8dd17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
