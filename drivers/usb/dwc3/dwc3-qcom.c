@@ -565,6 +565,7 @@ static int dwc3_qcom_probe(struct platform_device *pdev)
 	int			ret, i;
 	bool			ignore_pipe_clk;
 
+	pr_info("Hello dwc3 qcom probe!\n");
 	qcom = devm_kzalloc(&pdev->dev, sizeof(*qcom), GFP_KERNEL);
 	if (!qcom)
 		return -ENOMEM;
