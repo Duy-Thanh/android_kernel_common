@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "610d4a02_666bcc8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-10-05T17:14:26Z",
+      "side": 1,
+      "message": "For some reason, build.sh didn\u0027t trigger this for me, but I can reproduce it when running llvm-strip by hand.\n\nThe fundamental issue appears to be that llvm-objcopy (of which llvm-strip is just an alias) assumes that a RELA section with SHF_ALLOC set is guaranteed to be a dynamic reloc section, which uses different types of symtab and strtab sections. This is not the right check, though: it should base this on the file type in the ELF header.\n\nThe following change to LLVM makes it work for me:\n```\n--- llvm/tools/llvm-objcopy/ELF/Object.cpp.orig\t2021-10-05 19:09:25.401554832 +0200\n+++ llvm/tools/llvm-objcopy/ELF/Object.cpp\t2021-10-05 19:09:38.262978775 +0200\n@@ -1475,7 +1475,7 @@\n   switch (Shdr.sh_type) {\n   case SHT_REL:\n   case SHT_RELA:\n-    if (Shdr.sh_flags \u0026 SHF_ALLOC) {\n+    if (0){//Shdr.sh_flags \u0026 SHF_ALLOC) {\n       Data \u003d unwrapOrError(ElfFile.getSectionContents(\u0026Shdr));\n       return Obj.addSection\u003cDynamicRelocationSection\u003e(Data);\n     }\n```\n\n(but obviously breaks dynamic executables)\n\nIn the mean time, we could build the fips140.ko module with -g0 so that stripping is not needed, and omit it from the modules being stripped. This is a bit messy, though, as there appear to be multiple places where llvm-strip or llvm-objcopy are invoked with --strip-debug.",
+      "parentUuid": "49bf3aa1_03031fcd",
+      "revId": "adc65f2e5153825701923ade551127ac86ca27e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96e1e679_b94d8503",
         "filename": "crypto/fips140-refs.S",
         "patchSetId": 1
