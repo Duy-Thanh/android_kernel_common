@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3ef09c3_4eff1cdd",
+        "filename": "crypto/fips140_gen_hmac.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1590141
+      },
+      "writtenOn": "2021-10-05T18:58:43Z",
+      "side": 1,
+      "message": "missing return type",
+      "revId": "27135820c8509a2caa1b2f6146514a7a49acdd3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
