@@ -63,6 +63,30 @@
       },
       "revId": "e266a8a8fdd0a2dbbb66224511894b8323c8dd17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd6fb76b_463a5833",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1373349
+      },
+      "writtenOn": "2021-10-06T06:15:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9abfb7b0_1e4b906e",
+      "range": {
+        "startLine": 746,
+        "startChar": 0,
+        "endLine": 746,
+        "endChar": 9
+      },
+      "revId": "e266a8a8fdd0a2dbbb66224511894b8323c8dd17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
