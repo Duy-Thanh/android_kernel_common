@@ -8772,6 +8772,10 @@ static int ufshcd_suspend(struct ufs_hba *hba, enum ufs_pm_op pm_op)
 
 	flush_work(&hba->eeh_work);
 
+	ret = ufshcd_vops_suspend(hba, pm_op, PRE_CHANGE);
+	if (ret)
+		goto enable_scaling;
+
 	if (req_dev_pwr_mode != hba->curr_dev_pwr_mode) {
 		if ((ufshcd_is_runtime_pm(pm_op) && !hba->auto_bkops_enabled) ||
 		    !ufshcd_is_runtime_pm(pm_op)) {
@@ -8796,7 +8800,7 @@ disable_clks:
 	 * vendor specific host controller register space call them before the
 	 * host clocks are ON.
 	 */
-	ret = ufshcd_vops_suspend(hba, pm_op);
+	ret = ufshcd_vops_suspend(hba, pm_op, POST_CHANGE);
 	if (ret)
 		goto set_link_active;
 	/*
@@ -8950,6 +8954,7 @@ static int ufshcd_resume(struct ufs_hba *hba, enum ufs_pm_op pm_op)
 set_old_link_state:
 	ufshcd_link_state_transition(hba, old_link_state, 0);
 vendor_suspend:
+<<<<<<< HEAD   (593309 BACKPORT: scsi: ufs: Improve SCSI abort handling further)
 	ufshcd_vops_suspend(hba, pm_op);
 disable_irq_and_vops_clks:
 	ufshcd_disable_irq(hba);
@@ -8961,6 +8966,10 @@ disable_irq_and_vops_clks:
 	}
 disable_vreg:
 	ufshcd_vreg_set_lpm(hba);
+=======
+	ufshcd_vops_suspend(hba, pm_op, PRE_CHANGE);
+	ufshcd_vops_suspend(hba, pm_op, POST_CHANGE);
+>>>>>>> CHANGE (37d7b9 UPSTREAM: scsi: ufs: mediatek: Support vops pre suspend to d)
 out:
 	hba->pm_op_in_progress = 0;
 	if (ret)

@@ -407,11 +407,19 @@ out:
 	return ret;
 }
 
-static int ufs_hisi_suspend(struct ufs_hba *hba, enum ufs_pm_op pm_op)
+static int ufs_hisi_suspend(struct ufs_hba *hba, enum ufs_pm_op pm_op,
+	enum ufs_notify_change_status status)
 {
 	struct ufs_hisi_host *host = ufshcd_get_variant(hba);
 
+<<<<<<< HEAD   (593309 BACKPORT: scsi: ufs: Improve SCSI abort handling further)
 	if (ufshcd_is_runtime_pm(pm_op))
+=======
+	if (status == PRE_CHANGE)
+		return 0;
+
+	if (pm_op == UFS_RUNTIME_PM)
+>>>>>>> CHANGE (37d7b9 UPSTREAM: scsi: ufs: mediatek: Support vops pre suspend to d)
 		return 0;
 
 	if (host->in_suspend) {
