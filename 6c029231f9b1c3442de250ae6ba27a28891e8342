@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46da18b6_6c4e407a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-06T06:16:30Z",
+      "side": 1,
+      "message": "No changelog text at all?  You HAVE to have that.",
+      "revId": "6c029231f9b1c3442de250ae6ba27a28891e8342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89bd7809_c6290c69",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-06T06:16:30Z",
+      "side": 1,
+      "message": "again, you forgot to run scripts/checkpatch.pl on your change before submitting it 😞",
+      "range": {
+        "startLine": 745,
+        "startChar": 0,
+        "endLine": 745,
+        "endChar": 12
+      },
+      "revId": "6c029231f9b1c3442de250ae6ba27a28891e8342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
