@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e25e36aa_a7af6c32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-07T06:35:49Z",
+      "side": 1,
+      "message": "Why is this series needed now in the android-mainline branch and not in a device-specific branch?\n\nAnd what happened to getting any of these exports upstream along with the changes you have that need these exports?  Just blindly applying them again here with no justification as to where upstream rejected the proposal is not good.",
+      "revId": "01233139fb946ca53043e91deb8fdfdc0a072b1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
