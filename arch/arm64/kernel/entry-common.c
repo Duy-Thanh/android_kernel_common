@@ -17,6 +17,8 @@
 #include <asm/mmu.h>
 #include <asm/sysreg.h>
 
+#include <trace/hooks/dss_dpm.h>
+
 /*
  * This is intended to match the logic in irqentry_enter(), handling the kernel
  * mode transitions only.
@@ -415,6 +417,11 @@ asmlinkage void noinstr el0_sync_handler(struct pt_regs *regs)
 	default:
 		el0_inv(regs, esr);
 	}
+}
+
+asmlinkage void noinstr dbg_snapshot_do_dpm(struct pt_regs *regs)
+{
+	trace_android_vh_dss_do_dpm(regs);
 }
 
 #ifdef CONFIG_COMPAT

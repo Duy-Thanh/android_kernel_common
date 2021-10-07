@@ -700,10 +700,19 @@ __bad_stack:
 #endif /* CONFIG_VMAP_STACK */
 
 /*
+ * DPM handlers
+ */
+	.macro dpm_entry, el
+	mov	x0, sp
+	bl	dbg_snapshot_do_dpm
+	.endm
+
+/*
  * Invalid mode handlers
  */
 	.macro	inv_entry, el, reason, regsize = 64
 	kernel_entry \el, \regsize
+	dpm_entry
 	mov	x0, sp
 	mov	x1, #\reason
 	mrs	x2, esr_el1
@@ -755,6 +764,7 @@ SYM_CODE_END(el1_error_invalid)
 	.align	6
 SYM_CODE_START_LOCAL_NOALIGN(el1_sync)
 	kernel_entry 1
+	dpm_entry
 	mov	x0, sp
 	bl	el1_sync_handler
 	kernel_exit 1
