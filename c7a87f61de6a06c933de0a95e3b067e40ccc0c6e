@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be31b175_0de073b9",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-07T10:29:56Z",
+      "side": 1,
+      "message": "wait, how can this ever happen?  req was a valid pointer just above this, how can a local variable suddenly get set to NULL?\n\nHave you tested this?  What does this \"fix\"?",
+      "range": {
+        "startLine": 745,
+        "startChar": 0,
+        "endLine": 745,
+        "endChar": 13
+      },
+      "revId": "c7a87f61de6a06c933de0a95e3b067e40ccc0c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
