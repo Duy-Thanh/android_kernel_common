@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37e6c2e4_8d09ea4b",
+        "filename": "arch/arm64/kernel/entry-common.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-07T16:23:35Z",
+      "side": 1,
+      "message": "always use checkpatch.pl...",
+      "range": {
+        "startLine": 422,
+        "startChar": 0,
+        "endLine": 422,
+        "endChar": 67
+      },
+      "revId": "edaec1ceee31bf5bbf3e20eee40e76d6ea0bc9c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
