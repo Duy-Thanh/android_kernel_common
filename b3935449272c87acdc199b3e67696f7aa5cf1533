@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b59459b9_deb120bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2021-10-07T17:38:18Z",
+      "side": 1,
+      "message": "What is DPM? What is this used for?",
+      "revId": "b3935449272c87acdc199b3e67696f7aa5cf1533",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb0cf868_33bddda9",
+        "filename": "arch/arm64/kernel/entry.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2021-10-07T17:38:18Z",
+      "side": 1,
+      "message": "Why does this need to be here so early? Why isn\u0027t this hook in bad_mode() instead?\nWhat are the reasons for this to happen?",
+      "revId": "b3935449272c87acdc199b3e67696f7aa5cf1533",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
