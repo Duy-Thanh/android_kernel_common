@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5620287_2f52d229",
+        "filename": "arch/arm64/Makefile.postlink",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-10-07T21:40:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1adca071_0c5b3d6d",
+      "range": {
+        "startLine": 22,
+        "startChar": 52,
+        "endLine": 22,
+        "endChar": 58
+      },
+      "revId": "04f8b949d678597be111995466aaf69dd1f52088",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2594ab70_69ea82d5",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b980fc8_aa269e95",
+        "filename": "arch/arm64/Makefile.postlink",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-10-07T21:40:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2594ab70_69ea82d5",
+      "range": {
+        "startLine": 23,
+        "startChar": 70,
+        "endLine": 23,
+        "endChar": 84
+      },
+      "revId": "04f8b949d678597be111995466aaf69dd1f52088",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0120e42_ee969b78",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-10-07T18:35:56Z",
       "side": 1,
       "message": "printf to stdout, since this case might be expected?",
+      "range": {
+        "startLine": 92,
+        "startChar": 2,
+        "endLine": 92,
+        "endChar": 18
+      },
+      "revId": "04f8b949d678597be111995466aaf69dd1f52088",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6b32ef6_84b8a755",
+        "filename": "crypto/fips140_gen_hmac.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-10-07T21:40:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0120e42_ee969b78",
       "range": {
         "startLine": 92,
         "startChar": 2,
