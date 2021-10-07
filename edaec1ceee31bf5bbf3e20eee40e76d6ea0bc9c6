@@ -22,6 +22,30 @@
       },
       "revId": "edaec1ceee31bf5bbf3e20eee40e76d6ea0bc9c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ed5e6f3_8ce671d0",
+        "filename": "arch/arm64/kernel/entry-common.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1334815
+      },
+      "writtenOn": "2021-10-07T16:26:15Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "37e6c2e4_8d09ea4b",
+      "range": {
+        "startLine": 422,
+        "startChar": 0,
+        "endLine": 422,
+        "endChar": 67
+      },
+      "revId": "edaec1ceee31bf5bbf3e20eee40e76d6ea0bc9c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
