@@ -72,6 +72,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "263fc486_f2677633",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-10-07T00:23:44Z",
+      "side": 1,
+      "message": "PS4 switched to a new approach where copies of the relocation sections are made, which avoids the llvm-strip bug.  The module is successfully building and loading for me now.",
+      "parentUuid": "610d4a02_666bcc8b",
+      "revId": "adc65f2e5153825701923ade551127ac86ca27e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "765642ba_1582133c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-10-07T00:23:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "610d4a02_666bcc8b",
+      "revId": "adc65f2e5153825701923ade551127ac86ca27e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96e1e679_b94d8503",

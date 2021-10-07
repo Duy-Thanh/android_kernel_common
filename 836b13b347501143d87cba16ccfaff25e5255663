@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "438bb4c5_f1660036",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-10-07T00:23:44Z",
+      "side": 1,
+      "message": "section index",
+      "range": {
+        "startLine": 28,
+        "startChar": 10,
+        "endLine": 28,
+        "endChar": 22
+      },
+      "revId": "836b13b347501143d87cba16ccfaff25e5255663",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b478d94_b8b8f550",
+        "filename": "arch/arm64/Makefile.postlink",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-10-07T00:23:44Z",
+      "side": 1,
+      "message": "This explanation should be updated.  Maybe something like:\n\n\"In this case, we only need it for fips140.ko, which needs some postprocessing for the integrity check mandated by FIPS.  This involves making copies of the relocation sections so that the module will have access to them at initialization time, and calculating and injecting a HMAC digest into the module.\"",
+      "range": {
+        "startLine": 6,
+        "startChar": 2,
+        "endLine": 7,
+        "endChar": 19
+      },
+      "revId": "836b13b347501143d87cba16ccfaff25e5255663",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1518210c_b268103c",
+        "filename": "arch/arm64/Makefile.postlink",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-10-07T00:23:44Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be in quotes so that the shell doesn\u0027t treat it as a filename glob?  Likewise below.\n\nNote: if fixing this, one of the backslashes will need to be removed.",
+      "range": {
+        "startLine": 19,
+        "startChar": 51,
+        "endLine": 19,
+        "endChar": 65
+      },
+      "revId": "836b13b347501143d87cba16ccfaff25e5255663",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "210e374c_308611f7",
+        "filename": "crypto/fips140_gen_hmac.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-10-07T00:23:44Z",
+      "side": 1,
+      "message": "How about making the section\u0027s symbol have the same name as the section?  Then this function could just be update_rela_ref(sec_name, var_name) where the sec_name is \"init.rela.text\" and \"init.rela.rodata\".",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 37
+      },
+      "revId": "836b13b347501143d87cba16ccfaff25e5255663",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
