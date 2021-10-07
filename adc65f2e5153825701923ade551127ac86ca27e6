@@ -214,6 +214,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f13ef0d_0c7172fc",
+        "filename": "crypto/fips140_gen_hmac.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-10-07T07:01:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3ef09c3_4eff1cdd",
+      "revId": "adc65f2e5153825701923ade551127ac86ca27e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aac960f3_e3117c06",
