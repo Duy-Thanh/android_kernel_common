@@ -34,6 +34,24 @@
       "parentUuid": "d13a60d5_852e9e0b",
       "revId": "944eeaf769bdfaa27c1018bc4957e3b10b85b0c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f073da7d_e47c0a40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-08T06:59:28Z",
+      "side": 1,
+      "message": "Ok, can you submit the new symbol addition as a new commit?",
+      "parentUuid": "1dfc07a2_048f4801",
+      "revId": "944eeaf769bdfaa27c1018bc4957e3b10b85b0c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
