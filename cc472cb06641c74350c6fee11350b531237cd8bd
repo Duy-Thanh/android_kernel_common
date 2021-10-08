@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9bdbca5_33d58071",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-08T16:48:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8c5e73e5_1f511a1e",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 10
+      },
+      "revId": "cc472cb06641c74350c6fee11350b531237cd8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6cee3be9_fc9b0561",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a65a302c_efbf639f",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-08T16:48:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6cee3be9_fc9b0561",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 24
+      },
+      "revId": "cc472cb06641c74350c6fee11350b531237cd8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69cac401_b5c52b0e",
@@ -77,6 +125,30 @@
       "writtenOn": "2021-10-08T07:06:54Z",
       "side": 1,
       "message": "pr_err()?\n\nAnd you should define pr_fmt() at the top of this file.",
+      "range": {
+        "startLine": 33,
+        "startChar": 1,
+        "endLine": 33,
+        "endChar": 8
+      },
+      "revId": "cc472cb06641c74350c6fee11350b531237cd8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75836093_bc54ce28",
+        "filename": "drivers/android/lmkd_mon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-08T16:48:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "69cac401_b5c52b0e",
       "range": {
         "startLine": 33,
         "startChar": 1,
@@ -123,6 +195,30 @@
       "writtenOn": "2021-10-08T16:26:33Z",
       "side": 1,
       "message": "We should not hold wd_lock while calling del_timer_sync as this could cause deadlock (From the API description: The caller must not hold locks which would prevent completion of the timer\u0027s handler.).\n\n * del_timer_sync - deactivate a timer and wait for the handler to finish.\n * @timer: the timer to be deactivated\n *\n * This function only differs from del_timer() on SMP: besides deactivating\n * the timer it also makes sure the handler has finished executing on other\n * CPUs.\n *\n * Synchronization rules: Callers must prevent restarting of the timer,\n * otherwise this function is meaningless. It must not be called from\n * interrupt contexts unless the timer is an irqsafe one. The caller must\n * not hold locks which would prevent completion of the timer\u0027s\n * handler. The timer\u0027s handler must not call add_timer_on(). Upon exit the\n * timer is not queued and the handler is not running on any CPU.",
+      "range": {
+        "startLine": 55,
+        "startChar": 3,
+        "endLine": 55,
+        "endChar": 17
+      },
+      "revId": "cc472cb06641c74350c6fee11350b531237cd8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "608f0476_7cb1b1d3",
+        "filename": "drivers/android/lmkd_mon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-08T16:48:56Z",
+      "side": 1,
+      "message": "Ah, you are right. I think del_timer() would be ok here.",
+      "parentUuid": "7d89716b_4a014dd1",
       "range": {
         "startLine": 55,
         "startChar": 3,
@@ -182,6 +278,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a154c921_6a6a82d2",
+        "filename": "drivers/android/lmkd_mon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-08T16:48:56Z",
+      "side": 1,
+      "message": "Correct. param_set_int will to the assignment. Maybe I can skip that and simply assign already parsed value?",
+      "parentUuid": "f89fbd54_233beed7",
+      "range": {
+        "startLine": 102,
+        "startChar": 17,
+        "endLine": 102,
+        "endChar": 20
+      },
+      "revId": "cc472cb06641c74350c6fee11350b531237cd8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e5208dd_1d3f3455",
         "filename": "drivers/android/lmkd_mon.c",
         "patchSetId": 1
@@ -193,6 +313,30 @@
       "writtenOn": "2021-10-08T07:06:54Z",
       "side": 1,
       "message": "how can this be true?",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 10
+      },
+      "revId": "cc472cb06641c74350c6fee11350b531237cd8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df6eab07_80a5c5c5",
+        "filename": "drivers/android/lmkd_mon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-08T16:48:56Z",
+      "side": 1,
+      "message": "Copied from another driver. I need to check but maybe if an empty string is written into the sysfs node the val is passed as NULL?",
+      "parentUuid": "8e5208dd_1d3f3455",
       "range": {
         "startLine": 119,
         "startChar": 0,
@@ -228,6 +372,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3cd19deb_f3743a82",
+        "filename": "drivers/android/lmkd_mon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-08T16:48:56Z",
+      "side": 1,
+      "message": "Hmm. I thought as long as the process is alive it\u0027s PID is unique, no?",
+      "parentUuid": "cbf9d21c_e35fdf9b",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 49
+      },
+      "revId": "cc472cb06641c74350c6fee11350b531237cd8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "299f56dd_45275f31",
         "filename": "drivers/android/lmkd_mon.c",
         "patchSetId": 1
@@ -239,6 +407,30 @@
       "writtenOn": "2021-10-08T16:36:59Z",
       "side": 1,
       "message": "Watchdog",
+      "range": {
+        "startLine": 145,
+        "startChar": 26,
+        "endLine": 145,
+        "endChar": 34
+      },
+      "revId": "cc472cb06641c74350c6fee11350b531237cd8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1728799e_911eaab6",
+        "filename": "drivers/android/lmkd_mon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-08T16:48:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "299f56dd_45275f31",
       "range": {
         "startLine": 145,
         "startChar": 26,
@@ -274,6 +466,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea148413_608f0b4f",
+        "filename": "drivers/android/lmkd_mon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-08T16:48:56Z",
+      "side": 1,
+      "message": "Ah, I missed that the traces must be unregistered. Thanks!",
+      "parentUuid": "06f5d50d_56535d0f",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 13
+      },
+      "revId": "cc472cb06641c74350c6fee11350b531237cd8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77ac939a_3a08f732",
+        "filename": "drivers/android/lmkd_mon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-08T16:48:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "06f5d50d_56535d0f",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 13
+      },
+      "revId": "cc472cb06641c74350c6fee11350b531237cd8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c746ed5_f045aa39",
         "filename": "drivers/android/lmkd_mon.c",
         "patchSetId": 1
@@ -285,6 +525,30 @@
       "writtenOn": "2021-10-08T07:06:54Z",
       "side": 1,
       "message": "no removing of the traces?",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 29
+      },
+      "revId": "cc472cb06641c74350c6fee11350b531237cd8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07101ec6_58f25197",
+        "filename": "drivers/android/lmkd_mon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-08T16:48:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2c746ed5_f045aa39",
       "range": {
         "startLine": 169,
         "startChar": 0,
