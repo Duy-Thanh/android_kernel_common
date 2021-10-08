@@ -16,6 +16,24 @@
       "message": "config needs to also be on x86.",
       "revId": "4725f0d29ac75784a7e2f3bbd4699a48d80a5a90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecd06087_147727ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-08T16:49:49Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "922f64ea_43e8e624",
+      "revId": "4725f0d29ac75784a7e2f3bbd4699a48d80a5a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
