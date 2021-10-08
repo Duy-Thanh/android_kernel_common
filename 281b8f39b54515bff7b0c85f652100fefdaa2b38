@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4cf8b18_ebf04762",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876910
+      },
+      "writtenOn": "2021-10-08T16:20:47Z",
+      "side": 1,
+      "message": "A presubmit test is blocked due to an infra issue tracked in b/202401255.\nLet\u0027s bypass presubmit for now.",
+      "revId": "281b8f39b54515bff7b0c85f652100fefdaa2b38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
