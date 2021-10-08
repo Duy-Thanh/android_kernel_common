@@ -46,6 +46,30 @@
       },
       "revId": "4659036941cbb5966726113bc3fcef08bb82f494",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03dab5f6_2722421c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-10-08T12:38:10Z",
+      "side": 1,
+      "message": "I will not insist, just telling why the presubmit failed.",
+      "parentUuid": "3ce34931_b5e6ba18",
+      "range": {
+        "startLine": 9,
+        "startChar": 7,
+        "endLine": 9,
+        "endChar": 19
+      },
+      "revId": "4659036941cbb5966726113bc3fcef08bb82f494",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
