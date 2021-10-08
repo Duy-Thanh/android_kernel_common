@@ -16,6 +16,24 @@
       "message": "This isn\u0027t right, the pci symbols got added in the previous commit in this series.\n\nThis one only adds the dummy_irq_chip variable, which I don\u0027t think you need for pcie, do you?",
       "revId": "944eeaf769bdfaa27c1018bc4957e3b10b85b0c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dfc07a2_048f4801",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2021-10-08T00:56:24Z",
+      "side": 1,
+      "message": "Hi Greg,\nThe dummy_irq_chip function is the one we need, we add this to support legacy intx interrupt for those device do not support MSI/MSI-X.",
+      "parentUuid": "d13a60d5_852e9e0b",
+      "revId": "944eeaf769bdfaa27c1018bc4957e3b10b85b0c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
