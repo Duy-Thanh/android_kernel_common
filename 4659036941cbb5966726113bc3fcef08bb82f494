@@ -70,6 +70,30 @@
       },
       "revId": "4659036941cbb5966726113bc3fcef08bb82f494",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9db221b_ff637185",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-08T14:24:35Z",
+      "side": 1,
+      "message": "Yeah, checkpatch is being over-eager here 😊",
+      "parentUuid": "03dab5f6_2722421c",
+      "range": {
+        "startLine": 9,
+        "startChar": 7,
+        "endLine": 9,
+        "endChar": 19
+      },
+      "revId": "4659036941cbb5966726113bc3fcef08bb82f494",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
