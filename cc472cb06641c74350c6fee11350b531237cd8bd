@@ -89,6 +89,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a939264e_3dc5695d",
+        "filename": "drivers/android/lmkd_mon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1323232
+      },
+      "writtenOn": "2021-10-08T16:17:07Z",
+      "side": 1,
+      "message": "Do we want to use bool ?",
+      "range": {
+        "startLine": 47,
+        "startChar": 22,
+        "endLine": 47,
+        "endChar": 25
+      },
+      "revId": "cc472cb06641c74350c6fee11350b531237cd8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b9fa4dfe_40af1607",
         "filename": "drivers/android/lmkd_mon.c",
         "patchSetId": 1
@@ -100,6 +123,30 @@
       "writtenOn": "2021-10-08T07:06:54Z",
       "side": 1,
       "message": "you throw pid away after parsing it?",
+      "range": {
+        "startLine": 102,
+        "startChar": 17,
+        "endLine": 102,
+        "endChar": 20
+      },
+      "revId": "cc472cb06641c74350c6fee11350b531237cd8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f89fbd54_233beed7",
+        "filename": "drivers/android/lmkd_mon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1323232
+      },
+      "writtenOn": "2021-10-08T16:17:07Z",
+      "side": 1,
+      "message": "IIUC, the pid is set at line 105?",
+      "parentUuid": "b9fa4dfe_40af1607",
       "range": {
         "startLine": 102,
         "startChar": 17,
