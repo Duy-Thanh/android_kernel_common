@@ -43,7 +43,7 @@ static struct dma_buf_list db_list;
  * callback function which can extract required info out of each
  * dmabuf.
  */
-int get_each_dmabuf(int (*callback)(const struct dma_buf *dmabuf,
+int get_each_dmabuf(int (*callback)(struct dma_buf *dmabuf,
 		    void *private), void *private)
 {
 	struct dma_buf *buf;
