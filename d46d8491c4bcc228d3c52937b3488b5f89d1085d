@@ -16,6 +16,24 @@
       "message": "you should probably also do android13-5.10 as well",
       "revId": "d46d8491c4bcc228d3c52937b3488b5f89d1085d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "009248cb_6437ab52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2021-10-11T14:37:39Z",
+      "side": 1,
+      "message": "was pulled up to android13-5.10 in aosp/1736566 :)",
+      "parentUuid": "6606ea00_75edf754",
+      "revId": "d46d8491c4bcc228d3c52937b3488b5f89d1085d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
