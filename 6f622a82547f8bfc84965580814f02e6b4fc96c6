@@ -34,6 +34,24 @@
       "parentUuid": "25853192_e494d665",
       "revId": "6f622a82547f8bfc84965580814f02e6b4fc96c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a106e633_6e74fa1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-10-11T18:17:04Z",
+      "side": 1,
+      "message": "```\nIf you can define what thrashing means without adding policy into the kernel then sure we can do that.\n```\n\nI don\u0027t understand the claim. Then, how can userspace define it? I guess it has a logic. Then, why can we pass the logic into the kernel and handle it automatically?\n\nI don\u0027t care either 1 or 2 or both ways. Why couldn\u0027t we do 2 if we can achieve the policy by 1 since anyway the patch goes to AOSP, not upstream at this point?",
+      "parentUuid": "7190b5b8_a7bc5164",
+      "revId": "6f622a82547f8bfc84965580814f02e6b4fc96c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
