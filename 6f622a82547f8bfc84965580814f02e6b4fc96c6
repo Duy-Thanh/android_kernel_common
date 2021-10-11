@@ -52,6 +52,24 @@
       "parentUuid": "7190b5b8_a7bc5164",
       "revId": "6f622a82547f8bfc84965580814f02e6b4fc96c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6b41aeb_f7dec5e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-11T18:23:47Z",
+      "side": 1,
+      "message": "re: I don\u0027t understand the claim. Then, how can userspace define it? I guess it has a logic. Then, why can we pass the logic into the kernel and handle it automatically?\n\nThis patch does not define thrashing at all. It simply detects that lmkd is stuck and acts upon it.\n\nre: Why couldn\u0027t we do 2 if we can achieve the policy by 1 since anyway the patch goes to AOSP, not upstream at this point?\n\n2 would require changes in the kernel core code, while this one is a driver and can be implemented with minimal changes to the kernel code (needs only one vendor hook). So 1 is easy to maintain out-of-tree but 2 is not. Besides, IMHO 2 will require more time to implement and test even as an out-of-tree patch. I want to get this into QPR and I\u0027m not sure we will have enough time to implement and test solution 2.",
+      "parentUuid": "a106e633_6e74fa1c",
+      "revId": "6f622a82547f8bfc84965580814f02e6b4fc96c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
