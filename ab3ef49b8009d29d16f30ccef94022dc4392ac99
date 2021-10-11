@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17d0d406_791d1c1b",
+        "filename": "arch/x86/kernel/pvclock.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2021-10-11T22:50:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70b5602a_b7918997",
+      "range": {
+        "startLine": 157,
+        "startChar": 18,
+        "endLine": 157,
+        "endChar": 42
+      },
+      "revId": "ab3ef49b8009d29d16f30ccef94022dc4392ac99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f7a66ec_b475e416",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-10-11T16:27:38Z",
       "side": 1,
       "message": "C-style comments are preferred. Here and in other parts of the patch.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 2
+      },
+      "revId": "ab3ef49b8009d29d16f30ccef94022dc4392ac99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69173a3c_c6a95ac6",
+        "filename": "drivers/virtio/virtio_pvclock.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2021-10-11T22:50:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f7a66ec_b475e416",
       "range": {
         "startLine": 40,
         "startChar": 0,
@@ -81,6 +129,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8e5a1d6_e96c3c3b",
+        "filename": "drivers/virtio/virtio_pvclock.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2021-10-11T22:50:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bb0148e_bf8d1edf",
+      "revId": "ab3ef49b8009d29d16f30ccef94022dc4392ac99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11b13e41_d89c6183",
@@ -94,6 +160,30 @@
       "writtenOn": "2021-10-11T16:27:38Z",
       "side": 1,
       "message": "missing empty line between after declarations. (checkpatch.pl warning)",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 1
+      },
+      "revId": "ab3ef49b8009d29d16f30ccef94022dc4392ac99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e033e2d9_06bead44",
+        "filename": "drivers/virtio/virtio_pvclock.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2021-10-11T22:50:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11b13e41_d89c6183",
       "range": {
         "startLine": 119,
         "startChar": 0,
@@ -127,6 +217,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc8c26cb_0243308d",
+        "filename": "drivers/virtio/virtio_pvclock.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2021-10-11T22:50:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3180bd38_4c0497b4",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 1
+      },
+      "revId": "ab3ef49b8009d29d16f30ccef94022dc4392ac99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af86f3e2_51d7dfa1",
@@ -150,6 +264,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "121f7769_9ade78cd",
+        "filename": "drivers/virtio/virtio_pvclock.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2021-10-11T22:50:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af86f3e2_51d7dfa1",
+      "range": {
+        "startLine": 259,
+        "startChar": 5,
+        "endLine": 259,
+        "endChar": 6
+      },
+      "revId": "ab3ef49b8009d29d16f30ccef94022dc4392ac99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36f37332_6766d632",
@@ -163,6 +301,30 @@
       "writtenOn": "2021-10-11T16:27:38Z",
       "side": 1,
       "message": "nit: maybe inverse this branch into an early exit to reduce nesting.",
+      "range": {
+        "startLine": 284,
+        "startChar": 1,
+        "endLine": 284,
+        "endChar": 3
+      },
+      "revId": "ab3ef49b8009d29d16f30ccef94022dc4392ac99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3956d38_0cd7bcd7",
+        "filename": "drivers/virtio/virtio_pvclock.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2021-10-11T22:50:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36f37332_6766d632",
       "range": {
         "startLine": 284,
         "startChar": 1,
@@ -198,6 +360,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0e47ab2_761346dd",
+        "filename": "drivers/virtio/virtio_pvclock.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2021-10-11T22:50:35Z",
+      "side": 1,
+      "message": "I think this needs to return an int because it\u0027s used below as the .validate field of virtio_pvclock_driver?",
+      "parentUuid": "93852ad4_b5a82099",
+      "range": {
+        "startLine": 303,
+        "startChar": 8,
+        "endLine": 303,
+        "endChar": 9
+      },
+      "revId": "ab3ef49b8009d29d16f30ccef94022dc4392ac99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ab1c6aa_64e23761",
         "filename": "include/uapi/linux/virtio_pvclock.h",
         "patchSetId": 6
@@ -209,6 +395,30 @@
       "writtenOn": "2021-10-11T16:27:38Z",
       "side": 1,
       "message": "checkpatch complains about separate line here.",
+      "range": {
+        "startLine": 27,
+        "startChar": 16,
+        "endLine": 27,
+        "endChar": 18
+      },
+      "revId": "ab3ef49b8009d29d16f30ccef94022dc4392ac99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efe166b1_685cf3d2",
+        "filename": "include/uapi/linux/virtio_pvclock.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2021-10-11T22:50:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ab1c6aa_64e23761",
       "range": {
         "startLine": 27,
         "startChar": 16,
