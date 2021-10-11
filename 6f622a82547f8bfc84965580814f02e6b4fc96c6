@@ -88,6 +88,24 @@
       "parentUuid": "f6b41aeb_f7dec5e3",
       "revId": "6f622a82547f8bfc84965580814f02e6b4fc96c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8940992d_c7d82b85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-11T18:53:11Z",
+      "side": 1,
+      "message": "We could make this into a more generic watchdog driver where we could define more than one PID to track and userspace processes would have to notify the driver when they arm and pet the watchdog. However this would make the code more complex and I don\u0027t think we have a need for such a generic mechanism. Do we?\n\nVendor hook is simply a convenient mechanism to notify the driver about PSI event being armed. As Greg mentioned, this can be a direct call into the driver. However I do prefer a vendor hook because it might be used by other vendors for other purposes as well without adding more hooks.",
+      "parentUuid": "e9464f8d_37537e2e",
+      "revId": "6f622a82547f8bfc84965580814f02e6b4fc96c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
