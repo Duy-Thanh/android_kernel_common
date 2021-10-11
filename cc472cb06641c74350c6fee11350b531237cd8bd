@@ -255,6 +255,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f268e56c_d4397157",
+        "filename": "drivers/android/lmkd_mon.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1323232
+      },
+      "writtenOn": "2021-10-11T15:40:43Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "608f0476_7cb1b1d3",
+      "range": {
+        "startLine": 55,
+        "startChar": 3,
+        "endLine": 55,
+        "endChar": 17
+      },
+      "revId": "cc472cb06641c74350c6fee11350b531237cd8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b9fa4dfe_40af1607",
         "filename": "drivers/android/lmkd_mon.c",
         "patchSetId": 1
