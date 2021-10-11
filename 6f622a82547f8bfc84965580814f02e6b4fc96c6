@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25853192_e494d665",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-10-11T15:57:41Z",
+      "side": 1,
+      "message": "tldr - Why do you want to make this depending on the userspace?\n\nWe don\u0027t need to make the feature tightly coupled with lmkd. It could be any process, not only for lmkd.\n\nAnyway, fundamental question is \"can\u0027t we avoid the userspace dependency??\nI meant something like this.\n\necho 5 \u003e /somewhere/thrashing_max_sec\n\nThat\u0027s all set up. Once kernel see 5sec thrashing(using PSI polling or whatever), it generates out of memory kill automatically because it mean userspace failed to sweep the memory pressure in the end.",
+      "revId": "6f622a82547f8bfc84965580814f02e6b4fc96c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
