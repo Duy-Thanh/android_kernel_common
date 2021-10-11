@@ -70,6 +70,24 @@
       "parentUuid": "a106e633_6e74fa1c",
       "revId": "6f622a82547f8bfc84965580814f02e6b4fc96c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9464f8d_37537e2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-10-11T18:36:07Z",
+      "side": 1,
+      "message": "```\nThis patch does not define thrashing at all. It simply detects that lmkd is stuck and acts upon it.\n```\n\nSo you are defining policy now. \"LMKD\" and \"stuck\". So my question is why should we make the policy to the specific only LMKD? Can\u0027t we trigger out of memory kill whenever random process was stuck on certain of seconds and kernel can know the stall caused by memory pressure(using PSI)?\n\nI guess this feature will be enabled for every vendor. No? They why do we need vendor hook?",
+      "parentUuid": "f6b41aeb_f7dec5e3",
+      "revId": "6f622a82547f8bfc84965580814f02e6b4fc96c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
