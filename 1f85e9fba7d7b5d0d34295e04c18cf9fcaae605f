@@ -16,6 +16,24 @@
       "message": "Why did this never get merged upstream?  Where was it submitted and rejected?",
       "revId": "1f85e9fba7d7b5d0d34295e04c18cf9fcaae605f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8bf4519_bb3baa6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-10-11T15:20:09Z",
+      "side": 1,
+      "message": "Shaleen, in aosp/1538702 (this patch for android12-5.10) this same suggestion was made. Please send it upstream now. That\u0027s how it should land in android-mainline.",
+      "parentUuid": "6cb522bc_519ad0c4",
+      "revId": "1f85e9fba7d7b5d0d34295e04c18cf9fcaae605f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
