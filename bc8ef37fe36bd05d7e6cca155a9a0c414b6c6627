@@ -16,6 +16,24 @@
       "message": "Why was this never submitted upstream?",
       "revId": "bc8ef37fe36bd05d7e6cca155a9a0c414b6c6627",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9eaff4a0_9ca1e3c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-10-11T16:17:04Z",
+      "side": 1,
+      "message": "because it is needed for the implementation of WALT in a vendor module which cannot be sent upstream.",
+      "parentUuid": "63941ccc_d91ae661",
+      "revId": "bc8ef37fe36bd05d7e6cca155a9a0c414b6c6627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
