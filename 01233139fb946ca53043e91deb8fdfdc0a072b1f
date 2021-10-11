@@ -16,6 +16,24 @@
       "message": "Why is this series needed now in the android-mainline branch and not in a device-specific branch?\n\nAnd what happened to getting any of these exports upstream along with the changes you have that need these exports?  Just blindly applying them again here with no justification as to where upstream rejected the proposal is not good.",
       "revId": "01233139fb946ca53043e91deb8fdfdc0a072b1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ede7c77_a5c94ed5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-10-11T15:30:16Z",
+      "side": 1,
+      "message": "The patches in this series are needed to implement sched-related vendor hooks that really can\u0027t be submitted upstream. They will be needed until WALT can be deprecated in favor of PELT which is a long-standing project that has not yet crossed the finish line.",
+      "parentUuid": "e25e36aa_a7af6c32",
+      "revId": "01233139fb946ca53043e91deb8fdfdc0a072b1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
