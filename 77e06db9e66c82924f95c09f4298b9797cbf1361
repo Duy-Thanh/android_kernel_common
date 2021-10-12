@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae6bc752_be3706ce",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 7446,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-10-12T23:37:02Z",
+      "side": 1,
+      "message": "This patch doesn\u0027t do anything anymore. Please abandon.",
+      "revId": "77e06db9e66c82924f95c09f4298b9797cbf1361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
