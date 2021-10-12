@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75248204_c9fcce39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-12T19:26:52Z",
+      "side": 1,
+      "message": "We implemented this as a vendor hook in https://android-review.googlesource.com/c/kernel/common/+/1723210 in a much more maintainable way. Why do you need a different solution in android-mainline?",
+      "revId": "2b4b8c9b9f995644ce3cad038680427fafcaf837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cffc62d7_aabc98b3",
