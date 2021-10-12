@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da020f03_6ed7d862",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-10-12T21:44:16Z",
+      "side": 1,
+      "message": "Why are we taking FROMGIT patches into android-mainline? Can\u0027t we wait for them to be merged from upstream?",
+      "revId": "acc7cf8fc5b23d816ca296e72ae5fed47daaf2d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
