@@ -46,6 +46,30 @@
       },
       "revId": "79f3d20a4562575bff54266ddbc174cfab596eb2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee59494e_8c9b3eec",
+        "filename": "build.config.allmodconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-12T13:40:14Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "3fd2a254_ba541a97",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 28
+      },
+      "revId": "79f3d20a4562575bff54266ddbc174cfab596eb2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
