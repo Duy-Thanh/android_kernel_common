@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a30027a_46620a21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1584799
+      },
+      "writtenOn": "2021-10-12T20:15:55Z",
+      "side": 1,
+      "message": "I reopened PS1 so I could resubmit PS2 with the vendor-hook approach.",
+      "parentUuid": "75248204_c9fcce39",
+      "revId": "2b4b8c9b9f995644ce3cad038680427fafcaf837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cffc62d7_aabc98b3",
