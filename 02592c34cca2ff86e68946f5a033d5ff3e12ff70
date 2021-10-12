@@ -22,6 +22,30 @@
       },
       "revId": "02592c34cca2ff86e68946f5a033d5ff3e12ff70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de561afe_a22d4334",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7448,
+      "author": {
+        "id": 1897551
+      },
+      "writtenOn": "2021-10-12T22:53:53Z",
+      "side": 1,
+      "message": "yes",
+      "parentUuid": "eeb8daa7_13fd78f5",
+      "range": {
+        "startLine": 7447,
+        "startChar": 2,
+        "endLine": 7448,
+        "endChar": 38
+      },
+      "revId": "02592c34cca2ff86e68946f5a033d5ff3e12ff70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
