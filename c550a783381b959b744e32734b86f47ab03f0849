@@ -16,6 +16,24 @@
       "message": "Hi.\n\nThe XML file in this change is ill-formed. It contains a dangling reference to type id 35f5fc88.\n\nYou cannot (in general) hand edit the XML and expect it to be valid. This could also have been caused by git rebase / conflict resolution.\n\nPlease do the following:\n\n1. Remove all changes to the XML in each uncommitted change in this series.\n2. Add an extra change at the end of the series based on a run of `build_abi.sh --update`.\n\nThank you.\n",
       "revId": "c550a783381b959b744e32734b86f47ab03f0849",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5d32d0d_a33f08a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-10-12T13:00:59Z",
+      "side": 1,
+      "message": "Also:\n\nUpdate the commit messages to reflect each changes\u0027 purpose. There should only be one ABI report at the end.",
+      "parentUuid": "d4bf7f72_28ec1b88",
+      "revId": "c550a783381b959b744e32734b86f47ab03f0849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
