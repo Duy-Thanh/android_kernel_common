@@ -366,6 +366,7 @@ struct klp_modinfo {
 
 struct module {
 	enum module_state state;
+	enum module_state state2;
 
 	/* Member of list of modules */
 	struct list_head list;
