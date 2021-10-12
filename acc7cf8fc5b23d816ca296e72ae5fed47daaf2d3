@@ -52,6 +52,24 @@
       "parentUuid": "cd1f51ef_38c0aa76",
       "revId": "acc7cf8fc5b23d816ca296e72ae5fed47daaf2d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0024e9e_3721d587",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1248639
+      },
+      "writtenOn": "2021-10-12T22:04:49Z",
+      "side": 1,
+      "message": "\"FROMGIT: clk: composite: export clk_register_composite\" is needed by Mediatek clk driver. I am doing this for linux-5.15 or I should wait for linux-5.15 LTS is out and push these patches to androidxx-5.15 instead of android-mainline?\n\nshout history:\n\nmainline merged the \"FROMLIST: clk: Export clk_register_composite\", \ncommit 6adbbe3093e9b150f606b61cad3f90b2b314c557\n\nthe patch is reverted\n\"Revert \"FROMLIST: clk: Export clk_register_composite\"\", commit fc215147620578b78374127b2d5807bc82303225 because Mediatek\u0027s upstream clk driver is still builtin.\n\nnow the patch is in the clk-next tree, but it looks like the patch is not merged in 5.15-rc1 merge window, that\u0027s why I push the patch (FROMGIT:) to android-mainline and expect we will have this patch in androidxx-5.15 LTS kernel.",
+      "parentUuid": "95a72259_598ec8b2",
+      "revId": "acc7cf8fc5b23d816ca296e72ae5fed47daaf2d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
