@@ -34,6 +34,24 @@
       "parentUuid": "da020f03_6ed7d862",
       "revId": "acc7cf8fc5b23d816ca296e72ae5fed47daaf2d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95a72259_598ec8b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-10-12T21:57:19Z",
+      "side": 1,
+      "message": "It\u0027s ok if there is a good reason, but it is preferred to take them after they\u0027ve landed via the normal merge. In the past we\u0027ve accepted FROMGIT in android-mainline because of some looming milestone (this is the main reason we take them into GKI branches too).\n\nI\u0027m not aware of any cases right now where there are schedule-pressure reasons why we need to take any FROMGIT patches into android-mainline, so it is preferred to wait until patches land.",
+      "parentUuid": "cd1f51ef_38c0aa76",
+      "revId": "acc7cf8fc5b23d816ca296e72ae5fed47daaf2d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
