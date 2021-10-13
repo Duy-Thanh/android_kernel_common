@@ -34,6 +34,24 @@
       "parentUuid": "d4bf7f72_28ec1b88",
       "revId": "c550a783381b959b744e32734b86f47ab03f0849",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc17bcd3_f8f31ef9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2021-10-13T03:39:31Z",
+      "side": 1,
+      "message": "I don\u0027t want to hand edit the XMLfile, but there are too many changes which is not related modify, eg. some line number may be modified in my vendor branch, and some other case described in https://partnerissuetracker.corp.google.com/u/1/issues/201358574\n\ncan I just add type id 35f5fc88 back for this patch?",
+      "parentUuid": "d5d32d0d_a33f08a7",
+      "revId": "c550a783381b959b744e32734b86f47ab03f0849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
