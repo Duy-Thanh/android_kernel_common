@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1112a02_d8894c0a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-10-13T08:37:45Z",
+      "side": 1,
+      "message": "I agree that it makes sense to be consistent here, and export everything that is fundamentally part of the crypto API\u0027s support for modularized crypto.",
+      "parentUuid": "dd9afe61_33c37c2b",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 55
+      },
+      "revId": "ac89282865c7984221d8a44910f3a1370af4d5c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96dd3c1f_feb8fa30",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
