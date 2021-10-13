@@ -16,6 +16,24 @@
       "message": "Looks like vendor_hooks has changed and needs a manual rebase. Issac, could you please update the patch?",
       "revId": "9626152269a279b4945e175de5c8aafef33fe685",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24fe7ea4_0f6ef8c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1584799
+      },
+      "writtenOn": "2021-10-13T17:11:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a32e00d5_da3d5949",
+      "revId": "9626152269a279b4945e175de5c8aafef33fe685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
