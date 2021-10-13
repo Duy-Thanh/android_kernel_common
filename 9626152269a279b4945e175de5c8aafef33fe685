@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a32e00d5_da3d5949",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-13T02:10:01Z",
+      "side": 1,
+      "message": "Looks like vendor_hooks has changed and needs a manual rebase. Issac, could you please update the patch?",
+      "revId": "9626152269a279b4945e175de5c8aafef33fe685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
