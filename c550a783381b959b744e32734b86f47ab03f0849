@@ -52,6 +52,24 @@
       "parentUuid": "d5d32d0d_a33f08a7",
       "revId": "c550a783381b959b744e32734b86f47ab03f0849",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d75a4c85_2a920f9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-10-13T08:54:31Z",
+      "side": 1,
+      "message": "for consistency, please always generate the xml files using the provided tooling and do not hand edit it.",
+      "parentUuid": "fc17bcd3_f8f31ef9",
+      "revId": "c550a783381b959b744e32734b86f47ab03f0849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
