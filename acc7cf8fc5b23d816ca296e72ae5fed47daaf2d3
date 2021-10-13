@@ -106,6 +106,24 @@
       "parentUuid": "9ab12317_83e360ba",
       "revId": "acc7cf8fc5b23d816ca296e72ae5fed47daaf2d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfac3711_0ed086ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1248639
+      },
+      "writtenOn": "2021-10-13T08:17:41Z",
+      "side": 1,
+      "message": "thanks for your answering.\n\nIt looks like that I should wait for\n1) the patch merged into android-mainline after v5.16-rc1\n2) 5.15 LTS is ready and push these patches to 5.15 LTS.",
+      "parentUuid": "2ab246a7_2a50d6d1",
+      "revId": "acc7cf8fc5b23d816ca296e72ae5fed47daaf2d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
