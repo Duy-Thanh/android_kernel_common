@@ -88,6 +88,24 @@
       "parentUuid": "c0024e9e_3721d587",
       "revId": "acc7cf8fc5b23d816ca296e72ae5fed47daaf2d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ab246a7_2a50d6d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2021-10-13T07:32:04Z",
+      "side": 1,
+      "message": "That is to be expected.  Your patches were applied to the clk tree on the 14th Sept, 2 days after the merge-window closed.  I would expect patches to be merged at least a week or so before the merge window opens (3 weeks before your patches were actually applied) for consideration for inclusion into an -rc1.\n\nYour patches should be included in the v5.16 merge-window, which should open in either 2.5 weeks (if there is only an -rc7) or 3.5 weeks (if the release candidates reach -rc8).\n\nSo if there are no pressing time constraints, it sounds much like the preferred approach is to wait a few weeks and have them merge organically into android-mainline.",
+      "parentUuid": "9ab12317_83e360ba",
+      "revId": "acc7cf8fc5b23d816ca296e72ae5fed47daaf2d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
