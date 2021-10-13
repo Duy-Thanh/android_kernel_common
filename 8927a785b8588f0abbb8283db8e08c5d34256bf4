@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e251058f_4eab7c8a",
+        "filename": "drivers/virtio/virtio_pvclock.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2021-10-13T00:30:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a0ae6b5_e1848d50",
+      "revId": "8927a785b8588f0abbb8283db8e08c5d34256bf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e81309f_44d75a6b",
@@ -48,6 +66,30 @@
       "writtenOn": "2021-10-12T17:17:19Z",
       "side": 1,
       "message": "Is this protected by the PARAVIRT_CLOCK select? What happens on architectures without a PARAVIRT_CLOCK implementation? Are the new symbols you exported needed to be exported by other archs (I didn\u0027t check) ?",
+      "range": {
+        "startLine": 87,
+        "startChar": 7,
+        "endLine": 87,
+        "endChar": 31
+      },
+      "revId": "8927a785b8588f0abbb8283db8e08c5d34256bf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "080e7527_94602b0f",
+        "filename": "drivers/virtio/virtio_pvclock.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2021-10-13T00:30:41Z",
+      "side": 1,
+      "message": "This whole virtio device is x86-specific because pvclock is x86-specific. So maybe I also need to add something like this to the VIRTIO_PVCLOCK kconfig?\n\ndepends on X86_64 || (X86_32 \u0026\u0026 X86_PAE)\ndepends on X86_TSC",
+      "parentUuid": "9e81309f_44d75a6b",
       "range": {
         "startLine": 87,
         "startChar": 7,
@@ -81,6 +123,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "992ba279_4895ded7",
+        "filename": "drivers/virtio/virtio_pvclock.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2021-10-13T00:30:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6435d330_db85f589",
+      "range": {
+        "startLine": 169,
+        "startChar": 1,
+        "endLine": 171,
+        "endChar": 49
+      },
+      "revId": "8927a785b8588f0abbb8283db8e08c5d34256bf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83bda8da_0b9269a9",
@@ -94,6 +160,30 @@
       "writtenOn": "2021-10-12T17:17:19Z",
       "side": 1,
       "message": "Prefer vp \u003d kzalloc(...\n(then later on down, maybe when you set vp-\u003evdev)\nvdev-\u003epriv \u003d vp ?",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 199,
+        "endChar": 52
+      },
+      "revId": "8927a785b8588f0abbb8283db8e08c5d34256bf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09041813_4515e49a",
+        "filename": "drivers/virtio/virtio_pvclock.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2021-10-13T00:30:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83bda8da_0b9269a9",
       "range": {
         "startLine": 199,
         "startChar": 0,
@@ -127,6 +217,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df38fa4d_70f12fe8",
+        "filename": "include/uapi/linux/virtio_pvclock.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2021-10-13T00:30:41Z",
+      "side": 1,
+      "message": "Ok, hopefully I did this right. Not sure if this boilerplate conflicts with the spdx now, maybe I should just remove the boilerplate?",
+      "parentUuid": "4ff5b7b1_2d29cbfb",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 30
+      },
+      "revId": "8927a785b8588f0abbb8283db8e08c5d34256bf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db99f13c_c308004e",
@@ -140,6 +254,30 @@
       "writtenOn": "2021-10-12T17:17:19Z",
       "side": 1,
       "message": "EXPORT_SYMBOL_GPL ?",
+      "range": {
+        "startLine": 1670,
+        "startChar": 0,
+        "endLine": 1670,
+        "endChar": 13
+      },
+      "revId": "8927a785b8588f0abbb8283db8e08c5d34256bf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76f2bbfc_927b7515",
+        "filename": "kernel/time/timekeeping.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1670,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2021-10-13T00:30:41Z",
+      "side": 1,
+      "message": "Yeah, I wasn\u0027t sure what to do here, other functions in this file don\u0027t use the _GPL version. But I\u0027ve updated to use _GPL, let me know if I should put it back.",
+      "parentUuid": "db99f13c_c308004e",
       "range": {
         "startLine": 1670,
         "startChar": 0,
