@@ -16,6 +16,23 @@
       "message": "this should have been pulled from android12-5.10-lts, not directly from upstream.",
       "revId": "2e2a635c5f62c1eb0b4ce6e2dc6a94fefa49190d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a96f80c_dddf1e13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-10-13T20:58:56Z",
+      "side": 1,
+      "message": "this should have been pulled from android12-5.10-lts, not directly from upstream.",
+      "revId": "2e2a635c5f62c1eb0b4ce6e2dc6a94fefa49190d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
