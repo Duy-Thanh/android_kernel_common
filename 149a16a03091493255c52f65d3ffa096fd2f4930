@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ea0b6f0_7eb51482",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-14T13:19:11Z",
+      "side": 1,
+      "message": "A much smaller .xml diff here, that should contain only the needed new symbols, and not the removal of all of the other ones that were in the original commit for some reason.",
+      "revId": "149a16a03091493255c52f65d3ffa096fd2f4930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
