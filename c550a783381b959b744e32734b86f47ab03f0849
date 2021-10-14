@@ -70,6 +70,24 @@
       "parentUuid": "fc17bcd3_f8f31ef9",
       "revId": "c550a783381b959b744e32734b86f47ab03f0849",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31aef63f_c5a22304",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2021-10-14T08:44:48Z",
+      "side": 1,
+      "message": "I can understand your requirement, but I have to say that is impossible.\nI have already explain the reason like line number different, and .c/.h for unknown reasaon and so on.\nCould you please check if the new patchset is OK to merge?",
+      "parentUuid": "d75a4c85_2a920f9a",
+      "revId": "c550a783381b959b744e32734b86f47ab03f0849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
