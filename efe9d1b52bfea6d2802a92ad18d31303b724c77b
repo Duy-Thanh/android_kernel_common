@@ -16,6 +16,24 @@
       "message": "This doesn\u0027t belong in this patch. Please move to \"ANDROID: sched: Export set_next_entity\"",
       "revId": "efe9d1b52bfea6d2802a92ad18d31303b724c77b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c1c8d88_4997ee68",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 4492,
+      "author": {
+        "id": 1897551
+      },
+      "writtenOn": "2021-10-14T22:25:09Z",
+      "side": 1,
+      "message": "Good catch.",
+      "parentUuid": "7cc80de7_e4d50f2f",
+      "revId": "efe9d1b52bfea6d2802a92ad18d31303b724c77b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
