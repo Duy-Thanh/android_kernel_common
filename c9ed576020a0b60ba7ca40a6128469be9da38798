@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b4a3bbd_100e1e84",
+        "filename": "android/abi_gki_aarch64_rockchip",
+        "patchSetId": 2
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-14T13:19:35Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "a4867de9_f0cb0c4f",
+      "range": {
+        "startLine": 1047,
+        "startChar": 0,
+        "endLine": 1047,
+        "endChar": 35
+      },
+      "revId": "c9ed576020a0b60ba7ca40a6128469be9da38798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f94c8ae5_bd589b88",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-10-14T09:01:37Z",
       "side": 0,
       "message": "why remove this module?",
+      "range": {
+        "startLine": 1644,
+        "startChar": 0,
+        "endLine": 1644,
+        "endChar": 21
+      },
+      "revId": "c9ed576020a0b60ba7ca40a6128469be9da38798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "796c3339_ec4a71e8",
+        "filename": "android/abi_gki_aarch64_rockchip",
+        "patchSetId": 2
+      },
+      "lineNbr": 1644,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-14T13:19:35Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "f94c8ae5_bd589b88",
       "range": {
         "startLine": 1644,
         "startChar": 0,

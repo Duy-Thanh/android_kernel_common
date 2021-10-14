@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d204664_30e2ed04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-14T13:19:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9c8aadc_f874a49e",
+      "revId": "c67981cf55896961cfc9bcbecc2a67189f78d360",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72d69131_69b82e6e",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-10-14T09:01:37Z",
       "side": 1,
       "message": "ideally, this would be the only change needed here, right?",
+      "range": {
+        "startLine": 1775,
+        "startChar": 0,
+        "endLine": 1775,
+        "endChar": 28
+      },
+      "revId": "c67981cf55896961cfc9bcbecc2a67189f78d360",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74c18445_bd0ea63c",
+        "filename": "android/abi_gki_aarch64_rockchip",
+        "patchSetId": 2
+      },
+      "lineNbr": 1775,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-14T13:19:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72d69131_69b82e6e",
       "range": {
         "startLine": 1775,
         "startChar": 0,
