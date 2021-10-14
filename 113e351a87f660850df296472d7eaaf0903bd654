@@ -51,6 +51,24 @@
       "parentUuid": "2839dd02_82a87cc3",
       "revId": "113e351a87f660850df296472d7eaaf0903bd654",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abbccb93_6652f4c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1584799
+      },
+      "writtenOn": "2021-10-14T22:59:24Z",
+      "side": 1,
+      "message": "Yes, I think it\u0027s still applicable.",
+      "parentUuid": "5d3426b2_020f1c66",
+      "revId": "113e351a87f660850df296472d7eaaf0903bd654",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
