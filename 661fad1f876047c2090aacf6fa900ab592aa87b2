@@ -34,6 +34,24 @@
       "parentUuid": "bdbcf926_0a576a1a",
       "revId": "661fad1f876047c2090aacf6fa900ab592aa87b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab2cabbc_c929ce62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-10-14T09:47:28Z",
+      "side": 1,
+      "message": "It\u0027s about 13k lines. A quick check with stgdiff shows a lot of incomplete types on one side or the other and the KABI padding / spinlock field as well. And only one side has a type for drm_debug.\n\nAbout average.",
+      "parentUuid": "ac8d0af5_53948f9e",
+      "revId": "661fad1f876047c2090aacf6fa900ab592aa87b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
