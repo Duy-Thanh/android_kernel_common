@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9967025_1a81b58c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-10-14T00:32:43Z",
+      "side": 1,
+      "message": "Please abandon this patch and upload a version that matches the android12-5.10 patch (Change-Id should match)",
+      "revId": "7d9e76fb5cceec56a691c85b7d3317bd05f9a1ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
