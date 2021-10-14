@@ -16,6 +16,41 @@
       "message": "This was rightly rejected by upstream for the reported reasons in the link in the patch.  Why should they be accepted here instead?",
       "revId": "113e351a87f660850df296472d7eaaf0903bd654",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d3426b2_020f1c66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-14T21:47:19Z",
+      "side": 1,
+      "message": "Chris, I think there was one later fix for this patch: https://android-review.googlesource.com/c/kernel/common/+/1555552. Is it not relevant anymore?",
+      "revId": "113e351a87f660850df296472d7eaaf0903bd654",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "253d3c52_f29b2c4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-14T21:47:19Z",
+      "side": 1,
+      "message": "The issue still exists, fixing it upstream is not trivial (requires to re-evaluate all allocators of movable memory and even them some movable allocations can be pinned even long-term) and no fix exists currently. I agree we should pursue this but I don\u0027t think it will be fixed soon, therefore I do think we will have to carry these patches for now.",
+      "parentUuid": "2839dd02_82a87cc3",
+      "revId": "113e351a87f660850df296472d7eaaf0903bd654",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
