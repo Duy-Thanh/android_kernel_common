@@ -87,6 +87,24 @@
       "parentUuid": "abbccb93_6652f4c5",
       "revId": "113e351a87f660850df296472d7eaaf0903bd654",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ace4dd83_c3e666f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1584799
+      },
+      "writtenOn": "2021-10-14T23:27:56Z",
+      "side": 1,
+      "message": "Right. Ultimately, we\u0027d like to get rid of these patches as well, as they introduce some nuances on our system that are a bit annoying. I was planning on spending some time this year to see if we can find users on our platforms who end up pinning memory that is allocated as movable, and having them change. However, it\u0027s not a small task/nor is it something that can be done quickly.",
+      "parentUuid": "253d3c52_f29b2c4f",
+      "revId": "113e351a87f660850df296472d7eaaf0903bd654",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
