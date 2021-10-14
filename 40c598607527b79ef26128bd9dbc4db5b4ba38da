@@ -16,6 +16,24 @@
       "message": "s/Sched/sched/",
       "revId": "40c598607527b79ef26128bd9dbc4db5b4ba38da",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3518e92e_2795cc1f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1897551
+      },
+      "writtenOn": "2021-10-14T18:15:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdc97cc9_f68b349d",
+      "revId": "40c598607527b79ef26128bd9dbc4db5b4ba38da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
