@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbfd5553_c485111b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897551
+      },
+      "writtenOn": "2021-10-15T17:17:21Z",
+      "side": 1,
+      "message": "checkpatch didn\u0027t show this to me for some reason, it only showed \" Remove Gerrit Change-Id\u0027s before submitting upstream\". Maybe I\u0027m not using it correctly, I\u0027ll look into it.",
+      "parentUuid": "853140e5_e38729be",
+      "revId": "4856bc38827141b34df335effcb59ae6b3b099fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cdb41d86_dc14e273",
