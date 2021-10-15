@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "853140e5_e38729be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-10-15T16:37:26Z",
+      "side": 1,
+      "message": "This causes a build-break. You should always run checkpatch and do a build before submitting.",
+      "revId": "4856bc38827141b34df335effcb59ae6b3b099fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdb41d86_dc14e273",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-10-15T16:37:26Z",
+      "side": 1,
+      "message": "This is already defined at line 256 -- break-break. Please test your patches before submitting!",
+      "revId": "4856bc38827141b34df335effcb59ae6b3b099fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
