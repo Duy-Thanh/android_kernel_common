@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6575db9_0f34f119",
+        "filename": "android/abi_gki_aarch64_rockchip",
+        "patchSetId": 2
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2021-10-15T02:57:56Z",
+      "side": 0,
+      "message": "This module is not removed, but the symbol \"__bitmap_set\" has become commonly used.",
+      "parentUuid": "5b4a3bbd_100e1e84",
+      "range": {
+        "startLine": 1047,
+        "startChar": 0,
+        "endLine": 1047,
+        "endChar": 35
+      },
+      "revId": "c9ed576020a0b60ba7ca40a6128469be9da38798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f94c8ae5_bd589b88",
@@ -85,6 +109,30 @@
       "side": 0,
       "message": "Done",
       "parentUuid": "f94c8ae5_bd589b88",
+      "range": {
+        "startLine": 1644,
+        "startChar": 0,
+        "endLine": 1644,
+        "endChar": 21
+      },
+      "revId": "c9ed576020a0b60ba7ca40a6128469be9da38798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61b98f31_c9256725",
+        "filename": "android/abi_gki_aarch64_rockchip",
+        "patchSetId": 2
+      },
+      "lineNbr": 1644,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2021-10-15T02:57:56Z",
+      "side": 0,
+      "message": "I think you ask why we need slip module in another patch, after check internally, this module is no use in our GKI based system now, so I remove it.",
+      "parentUuid": "796c3339_ec4a71e8",
       "range": {
         "startLine": 1644,
         "startChar": 0,
