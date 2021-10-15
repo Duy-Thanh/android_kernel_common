@@ -105,6 +105,24 @@
       "parentUuid": "253d3c52_f29b2c4f",
       "revId": "113e351a87f660850df296472d7eaaf0903bd654",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cc6bc93_4eee1149",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-15T06:44:40Z",
+      "side": 1,
+      "message": "Again, this should not be in the android-mainline branch as drivers will start to depend on these values.  Please put them ONLY in a release-specific branch if they are required at this point in time.",
+      "parentUuid": "ace4dd83_c3e666f8",
+      "revId": "113e351a87f660850df296472d7eaaf0903bd654",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
