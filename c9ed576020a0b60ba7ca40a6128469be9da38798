@@ -141,6 +141,30 @@
       },
       "revId": "c9ed576020a0b60ba7ca40a6128469be9da38798",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "571d1973_9a13277f",
+        "filename": "android/abi_gki_aarch64_rockchip",
+        "patchSetId": 2
+      },
+      "lineNbr": 1644,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-15T06:47:08Z",
+      "side": 0,
+      "message": "That\u0027s great to remove it, but you did not say that in the changelog at all.  That should be a separate patch.",
+      "parentUuid": "61b98f31_c9256725",
+      "range": {
+        "startLine": 1644,
+        "startChar": 0,
+        "endLine": 1644,
+        "endChar": 21
+      },
+      "revId": "c9ed576020a0b60ba7ca40a6128469be9da38798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
