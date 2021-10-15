@@ -16,6 +16,24 @@
       "message": "I can\u0027t see why the presubmit failed, but the entire series built fine for me locally. ",
       "revId": "cc77aaa721379bc3d91edfc0133b96a8399f2d74",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5fa7fa7_b4a79b5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-10-15T22:45:59Z",
+      "side": 1,
+      "message": "I think there\u0027s an infra issue right now. Your series didn\u0027t cause this failure.",
+      "parentUuid": "c3808e22_19f42671",
+      "revId": "cc77aaa721379bc3d91edfc0133b96a8399f2d74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
