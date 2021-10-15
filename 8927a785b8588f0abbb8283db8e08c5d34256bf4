@@ -126,6 +126,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ef2f92e_1b119457",
+        "filename": "drivers/virtio/virtio_pvclock.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-10-15T16:54:09Z",
+      "side": 1,
+      "message": "Whoops, \"depends on X86 \u0026\u0026 HYPERVISOR_GUEST\"",
+      "parentUuid": "54f46061_10e01bcd",
+      "range": {
+        "startLine": 87,
+        "startChar": 7,
+        "endLine": 87,
+        "endChar": 31
+      },
+      "revId": "8927a785b8588f0abbb8283db8e08c5d34256bf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6435d330_db85f589",
         "filename": "drivers/virtio/virtio_pvclock.c",
         "patchSetId": 7
