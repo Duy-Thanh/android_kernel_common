@@ -34,6 +34,24 @@
       "parentUuid": "2ea0b6f0_7eb51482",
       "revId": "149a16a03091493255c52f65d3ffa096fd2f4930",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f134f54a_30e16a88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-15T12:00:33Z",
+      "side": 1,
+      "message": "Yes, that seems to be correct if you end up with the same result that I did here.",
+      "parentUuid": "2cc8e3ae_21cde972",
+      "revId": "149a16a03091493255c52f65d3ffa096fd2f4930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
