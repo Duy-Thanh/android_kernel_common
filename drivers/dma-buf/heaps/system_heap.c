@@ -548,6 +548,10 @@ static int system_heap_create(void)
 	int i;
 
 	for (i = 0; i < NUM_ORDERS; i++) {
+		/* Just warning on 0-order allocations to avaid to much warning message */
+		if (orders[i] > 0)
+			order_flags[i] |= __GFP_NOWARN;
+
 		pools[i] = dmabuf_page_pool_create(order_flags[i], orders[i]);
 
 		if (!pools[i]) {
