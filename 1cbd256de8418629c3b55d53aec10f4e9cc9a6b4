@@ -1,0 +1,274 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeb26582_40d8cb4b",
+        "filename": "drivers/android/Makefile",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-10-18T17:25:23Z",
+      "side": 1,
+      "message": "watchdog is not that long. Can we use the full name\" psi_watchdog.o?",
+      "range": {
+        "startLine": 9,
+        "startChar": 42,
+        "endLine": 9,
+        "endChar": 44
+      },
+      "revId": "1cbd256de8418629c3b55d53aec10f4e9cc9a6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e19897d5_a1fac2fe",
+        "filename": "drivers/android/psi_wd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-10-18T17:25:23Z",
+      "side": 1,
+      "message": "nit:\nI\u0027m comfortable with shorthand for variable naming to be prefix/postfix but prefer the full name for logging since it\u0027s not that long. But up to you.",
+      "range": {
+        "startLine": 6,
+        "startChar": 25,
+        "endLine": 6,
+        "endChar": 27
+      },
+      "revId": "1cbd256de8418629c3b55d53aec10f4e9cc9a6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc5ef849_d1dc3d6b",
+        "filename": "drivers/android/psi_wd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-10-18T17:25:23Z",
+      "side": 1,
+      "message": "We don\u0027t need it.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 28
+      },
+      "revId": "1cbd256de8418629c3b55d53aec10f4e9cc9a6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4339264f_4c06bb06",
+        "filename": "drivers/android/psi_wd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-10-18T17:25:23Z",
+      "side": 1,
+      "message": "How about using \"timer?",
+      "range": {
+        "startLine": 24,
+        "startChar": 21,
+        "endLine": 24,
+        "endChar": 23
+      },
+      "revId": "1cbd256de8418629c3b55d53aec10f4e9cc9a6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05e86bf8_4d0212c8",
+        "filename": "drivers/android/psi_wd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-10-18T17:25:23Z",
+      "side": 1,
+      "message": "watchdog is not that long. For interface API, I prefer the full name.",
+      "range": {
+        "startLine": 63,
+        "startChar": 9,
+        "endLine": 63,
+        "endChar": 11
+      },
+      "revId": "1cbd256de8418629c3b55d53aec10f4e9cc9a6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6421cb5f_69389184",
+        "filename": "drivers/android/psi_wd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-10-18T17:25:23Z",
+      "side": 1,
+      "message": "Can we have some comment when this function is triggered?",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 40
+      },
+      "revId": "1cbd256de8418629c3b55d53aec10f4e9cc9a6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b66652ea_c77b6537",
+        "filename": "drivers/android/psi_wd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-10-18T17:25:23Z",
+      "side": 1,
+      "message": "better to factor out what function is doing. \n\nIf you want to use validate_target, you can pass the wd_target_pid as an argument and just validate the pid. Once it fails, the cleanup should be caller\u0027s role, not this function. You could create the cleanup function and use several places.",
+      "range": {
+        "startLine": 80,
+        "startChar": 12,
+        "endLine": 80,
+        "endChar": 33
+      },
+      "revId": "1cbd256de8418629c3b55d53aec10f4e9cc9a6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60e11bde_85495d6a",
+        "filename": "drivers/android/psi_wd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-10-18T17:25:23Z",
+      "side": 1,
+      "message": "Can we have some comment when this function is triggered?\n\nAnd what\u0027s @task in this context?\n\nI know we could remove it since it\u0027s only \"current\" but I guess you have in mind to expand it to multiple tasks later. If so, let\u0027s make it clear what @task means in this context. Or we can simply use current until it would be expanded.",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 65
+      },
+      "revId": "1cbd256de8418629c3b55d53aec10f4e9cc9a6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f156561f_45de3c3f",
+        "filename": "drivers/android/psi_wd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-10-18T17:25:23Z",
+      "side": 1,
+      "message": "What lock protects the race against multiple setting/getting at the same time?",
+      "revId": "1cbd256de8418629c3b55d53aec10f4e9cc9a6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ffa7fda_46f9d329",
+        "filename": "drivers/android/psi_wd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-10-18T17:25:23Z",
+      "side": 1,
+      "message": "The pid or pidfd(?) would be more meaningful to show.",
+      "range": {
+        "startLine": 151,
+        "startChar": 9,
+        "endLine": 151,
+        "endChar": 14
+      },
+      "revId": "1cbd256de8418629c3b55d53aec10f4e9cc9a6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aac3c6d8_6220aec4",
+        "filename": "drivers/android/psi_wd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-10-18T17:25:23Z",
+      "side": 1,
+      "message": "Do we need this interface? If we go multiple task registration later, the interface would be all or nothing interface or just disable a task?\nIf we don\u0027t want to make thing complicated at this moment, we could just make the interface start working once user write pidfd.",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 0
+      },
+      "revId": "1cbd256de8418629c3b55d53aec10f4e9cc9a6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4f626ff_9e2fc5a4",
+        "filename": "drivers/android/psi_wd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-10-18T17:25:23Z",
+      "side": 1,
+      "message": "Just wonder: I am not sure pidfd is better for module param rather than pid.",
+      "range": {
+        "startLine": 186,
+        "startChar": 17,
+        "endLine": 186,
+        "endChar": 22
+      },
+      "revId": "1cbd256de8418629c3b55d53aec10f4e9cc9a6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
