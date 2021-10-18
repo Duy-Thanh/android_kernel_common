@@ -46,6 +46,30 @@
       },
       "revId": "d1949ee6f97a49b4bcd7f22f419b7231f3ab9f5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09a97023_a5afb566",
+        "filename": "mm/cma.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-18T18:14:31Z",
+      "side": 1,
+      "message": "Sounds reasonable. If this helps with the issue please consider upstreaming this fix.",
+      "parentUuid": "738afbd4_3a162c60",
+      "range": {
+        "startLine": 470,
+        "startChar": 1,
+        "endLine": 470,
+        "endChar": 18
+      },
+      "revId": "d1949ee6f97a49b4bcd7f22f419b7231f3ab9f5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
