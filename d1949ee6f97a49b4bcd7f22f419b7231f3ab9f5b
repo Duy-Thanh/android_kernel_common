@@ -94,6 +94,30 @@
       },
       "revId": "d1949ee6f97a49b4bcd7f22f419b7231f3ab9f5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "141a10d4_cb934aa9",
+        "filename": "mm/cma.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-18T18:52:00Z",
+      "side": 1,
+      "message": "Hmm. I see these errors:\n\n4 functions with some sub-type change:\n\n  [C] \u0027function page* cma_alloc(cma*, size_t, unsigned int, gfp_t)\u0027 at cma.c:434:1 has some sub-type changes:\n    CRC (modversions) changed from 0x6e17861c to 0x6e93f9ab\n\n  [C] \u0027function int cma_for_each_area(int (cma*, void*)*, void*)\u0027 at cma.c:620:1 has some sub-type changes:\n    CRC (modversions) changed from 0x86d07c22 to 0x54921b8b\n\n  [C] \u0027function const char* cma_get_name(const cma*)\u0027 at cma.c:59:1 has some sub-type changes:\n    CRC (modversions) changed from 0x507151bb to 0xaba71c4b\n\n  ... 1 omitted; 4 symbols have only CRC changes\n  \nBut I don\u0027t see why your change affects the CRC of these functions...\nAdding maennich@ to clarify.",
+      "parentUuid": "e685dcac_9db197fa",
+      "range": {
+        "startLine": 470,
+        "startChar": 1,
+        "endLine": 470,
+        "endChar": 18
+      },
+      "revId": "d1949ee6f97a49b4bcd7f22f419b7231f3ab9f5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
