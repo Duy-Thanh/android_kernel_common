@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1493886_69095728",
+        "filename": "mm/cma.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-18T17:00:03Z",
+      "side": 1,
+      "message": "Usually we disable LRU cache when we isolate pages for migration. So, here IIUC you do that because alloc_contig_range() might require migration? Could that regress performance in cases when alloc_contig_range() did not require migration?\n\nAlthough looking at the code, it seems __alloc_contig_migrate_range() always calls lru_cache_disable(), so maybe this is not an issue?",
+      "range": {
+        "startLine": 470,
+        "startChar": 1,
+        "endLine": 470,
+        "endChar": 18
+      },
+      "revId": "d1949ee6f97a49b4bcd7f22f419b7231f3ab9f5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
