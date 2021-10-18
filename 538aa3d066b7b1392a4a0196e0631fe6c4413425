@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6aa684ac_b7de41f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-10-18T18:39:40Z",
+      "side": 1,
+      "message": "A better version of this (which matches what will land upstream) is here:\nhttps://android-review.googlesource.com/c/kernel/common/+/1828134\n\nI\u0027d prefer it so we stay in sync w/ upstream.",
+      "revId": "538aa3d066b7b1392a4a0196e0631fe6c4413425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
