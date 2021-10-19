@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba8a3e70_4e4d0281",
+        "filename": "android/abi_gki_aarch64_sunxi",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-19T12:20:54Z",
+      "side": 1,
+      "message": "This is a filesystem symbol, not one for a wifi driver at all.\n\nWhy is this needed?  Do you have a link to the kernel code that uses this so I can verify that it is actually doing the correct thing?",
+      "range": {
+        "startLine": 295,
+        "startChar": 2,
+        "endLine": 295,
+        "endChar": 14
+      },
+      "revId": "0b8410d4ffd6027a3f36282577927590237c77ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
