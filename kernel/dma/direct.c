@@ -45,6 +45,13 @@ u64 dma_direct_get_required_mask(struct device *dev)
 }
 EXPORT_SYMBOL_GPL(dma_direct_get_required_mask);
 
+static inline bool zone_dma32_is_empty(int node)
+{
+	pg_data_t *pgdat = NODE_DATA(node);
+
+	return zone_is_empty(&pgdat->node_zones[ZONE_DMA32]);
+}
+
 static gfp_t dma_direct_optimal_gfp_mask(struct device *dev, u64 dma_mask,
 				  u64 *phys_limit)
 {
@@ -61,7 +68,8 @@ static gfp_t dma_direct_optimal_gfp_mask(struct device *dev, u64 dma_mask,
 	*phys_limit = dma_to_phys(dev, dma_limit);
 	if (*phys_limit <= DMA_BIT_MASK(zone_dma_bits))
 		return GFP_DMA;
-	if (*phys_limit <= DMA_BIT_MASK(32))
+	if (*phys_limit <= DMA_BIT_MASK(32) &&
+		!zone_dma32_is_empty(dev_to_node(dev)))
 		return GFP_DMA32;
 	return 0;
 }
@@ -101,7 +109,8 @@ again:
 
 		if (IS_ENABLED(CONFIG_ZONE_DMA32) &&
 		    phys_limit < DMA_BIT_MASK(64) &&
-		    !(gfp & (GFP_DMA32 | GFP_DMA))) {
+		    !(gfp & (GFP_DMA32 | GFP_DMA)) &&
+		    !zone_dma32_is_empty(node)) {
 			gfp |= GFP_DMA32;
 			goto again;
 		}
