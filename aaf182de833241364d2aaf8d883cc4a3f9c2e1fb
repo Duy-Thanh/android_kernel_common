@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19e69acd_b1a20969",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-10-19T19:57:58Z",
+      "side": 1,
+      "message": "Need a \"Bug:\". Was this in android12-5.10? If so, please use the same Change-Id.",
+      "revId": "aaf182de833241364d2aaf8d883cc4a3f9c2e1fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
