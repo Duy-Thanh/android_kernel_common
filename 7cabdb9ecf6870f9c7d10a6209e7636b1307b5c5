@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa95eb18_20af1206",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-19T11:38:52Z",
+      "side": 1,
+      "message": "These are not all needed by a wifi driver 😞",
+      "revId": "7cabdb9ecf6870f9c7d10a6209e7636b1307b5c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8222a4f1_d68fc46d",
+        "filename": "android/abi_gki_aarch64_sunxi",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-19T11:38:52Z",
+      "side": 1,
+      "message": "these are for your video driver, not for your wifi driver 😞",
+      "range": {
+        "startLine": 152,
+        "startChar": 1,
+        "endLine": 154,
+        "endChar": 23
+      },
+      "revId": "7cabdb9ecf6870f9c7d10a6209e7636b1307b5c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
