@@ -118,6 +118,30 @@
       },
       "revId": "d1949ee6f97a49b4bcd7f22f419b7231f3ab9f5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1bc3ac2_b5659926",
+        "filename": "mm/cma.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-10-19T08:48:15Z",
+      "side": 1,
+      "message": "Likely the include of linux/swap.h changes the visibility of a data type (indirectly) used in a KMI interface. It appears that only the CRC is sensitive to this change, but the abi tooling otherwise does not see a difference.\n\nSee https://source.android.com/devices/architecture/kernel/abi-monitor#differences-data-type-visibility for details.",
+      "parentUuid": "141a10d4_cb934aa9",
+      "range": {
+        "startLine": 470,
+        "startChar": 1,
+        "endLine": 470,
+        "endChar": 18
+      },
+      "revId": "d1949ee6f97a49b4bcd7f22f419b7231f3ab9f5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
