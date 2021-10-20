@@ -22,6 +22,30 @@
       },
       "revId": "0b8410d4ffd6027a3f36282577927590237c77ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "435e4a86_d63a49cc",
+        "filename": "android/abi_gki_aarch64_sunxi",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1703811
+      },
+      "writtenOn": "2021-10-20T02:22:34Z",
+      "side": 1,
+      "message": "It is a mistake, we actually do not need this symbol. I will upload it later and I will split and submit the patches according to different modules",
+      "parentUuid": "ba8a3e70_4e4d0281",
+      "range": {
+        "startLine": 295,
+        "startChar": 2,
+        "endLine": 295,
+        "endChar": 14
+      },
+      "revId": "0b8410d4ffd6027a3f36282577927590237c77ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
