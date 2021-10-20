@@ -36,6 +36,7 @@
 #include <linux/part_stat.h>
 
 #include "zram_drv.h"
+#include <trace/hooks/mm.h>
 
 static DEFINE_IDR(zram_index_idr);
 /* idr index must be protected */
@@ -639,6 +640,7 @@ static ssize_t writeback_store(struct device *dev,
 	ssize_t ret = len;
 	int mode, err;
 	unsigned long blk_idx = 0;
+	bool is_writeback = false;
 
 	if (sysfs_streq(buf, "idle"))
 		mode = IDLE_WRITEBACK;
@@ -675,6 +677,12 @@ static ssize_t writeback_store(struct device *dev,
 
 	for (; nr_pages != 0; index++, nr_pages--) {
 		struct bio_vec bvec;
+
+		trace_android_zram_writeback_signal_terminate(current, &is_writeback);
+		if (is_writeback) {
+			ret = -EINTR;
+			break;
+		}
 
 		bvec.bv_page = page;
 		bvec.bv_len = PAGE_SIZE;
