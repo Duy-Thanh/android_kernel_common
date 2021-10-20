@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffcc54f4_3097ceca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-20T12:05:33Z",
+      "side": 1,
+      "message": "The abi should not be \"broken\" here, how did you generate the .xml file update?",
+      "revId": "12587e0227cee97fca70ffd505274636884be868",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
