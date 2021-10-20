@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2d178fc_28688a97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-10-20T16:13:23Z",
+      "side": 1,
+      "message": "Why is this needed so urgently? If it is a maintainer tree it will merge into android-mainline in a few weeks.",
+      "revId": "d06059c7bbfbdaa25c8776678380d30086f5411b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
