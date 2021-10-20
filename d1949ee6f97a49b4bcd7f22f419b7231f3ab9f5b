@@ -190,6 +190,30 @@
       },
       "revId": "d1949ee6f97a49b4bcd7f22f419b7231f3ab9f5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39a625eb_5bc3f3c1",
+        "filename": "mm/cma.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-10-20T17:34:45Z",
+      "side": 1,
+      "message": "I think forward declaration would work.\nLet me run the presubmit to see the failure, again.\nThanks for the clarification and tip, Matthias.",
+      "parentUuid": "c74f6595_b63a1ae3",
+      "range": {
+        "startLine": 470,
+        "startChar": 1,
+        "endLine": 470,
+        "endChar": 18
+      },
+      "revId": "d1949ee6f97a49b4bcd7f22f419b7231f3ab9f5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
