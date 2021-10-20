@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dc0e2e7_d6d295f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-10-20T20:54:09Z",
+      "side": 1,
+      "message": "Just cherry picking this over to android12-5.10 as well.",
+      "revId": "2ea7c24ef600a25bcd7f355a6b26c81c91a78688",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
