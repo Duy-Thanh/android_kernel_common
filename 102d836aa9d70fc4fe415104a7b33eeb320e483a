@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daad752f_60e5c7fa",
+        "filename": "android/abi_gki_aarch64_sunxi",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-20T06:54:29Z",
+      "side": 1,
+      "message": "this is a static function in newer kernels, and should not be used by any drivers ta all.  It should be marked static in this kernel as well...",
+      "range": {
+        "startLine": 275,
+        "startChar": 2,
+        "endLine": 275,
+        "endChar": 11
+      },
+      "revId": "102d836aa9d70fc4fe415104a7b33eeb320e483a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
