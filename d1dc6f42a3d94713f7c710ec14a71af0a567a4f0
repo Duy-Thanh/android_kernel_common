@@ -16,6 +16,24 @@
       "message": "These locks should not be exported, they are internal to the scheduler 😞",
       "revId": "d1dc6f42a3d94713f7c710ec14a71af0a567a4f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc533c34_d46ba1a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-10-20T15:22:15Z",
+      "side": 1,
+      "message": "They are internal to the scheduler, but needed by scheduler module that implements the handler for the vendor hooks.",
+      "parentUuid": "10cedcb3_04679e89",
+      "revId": "d1dc6f42a3d94713f7c710ec14a71af0a567a4f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
