@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "73eb52fe_cf6c1f15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-20T14:15:52Z",
+      "side": 1,
+      "message": "this is odd, the file was not created properly, and this looks to be hand-edited 😞",
+      "range": {
+        "startLine": 9,
+        "startChar": 22,
+        "endLine": 9,
+        "endChar": 25
+      },
+      "revId": "12587e0227cee97fca70ffd505274636884be868",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ffcc54f4_3097ceca",
