@@ -166,6 +166,30 @@
       },
       "revId": "d1949ee6f97a49b4bcd7f22f419b7231f3ab9f5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c74f6595_b63a1ae3",
+        "filename": "mm/cma.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-10-20T10:18:29Z",
+      "side": 1,
+      "message": "We can\u0027t merge this as the CRC is part of the ABI and modules will fail loading when they detect the CRC mismatch. The best option is to not include that header at all. Are you able to forward declare the function calls or do you require/expect this to be inlined? Or are you able to include a more specific header?\n\nOtherwise, if you are able to guarantee stability otherwise, you might be able to go around modversions by using a \"#ifdef __GENKSYMS__\" block. But this is only a last resort option.",
+      "parentUuid": "41811c54_69799815",
+      "range": {
+        "startLine": 470,
+        "startChar": 1,
+        "endLine": 470,
+        "endChar": 18
+      },
+      "revId": "d1949ee6f97a49b4bcd7f22f419b7231f3ab9f5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
