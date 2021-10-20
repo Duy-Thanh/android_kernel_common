@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd336a6c_363cd35f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-20T18:02:21Z",
+      "side": 1,
+      "message": "Approving this patch since it\u0027s fixing a critical performance issue, is needed urgently and upstreaming it requires additional ANDROID patches to be upstreamed. The bug is to be kept open until upstreaming work is complete and these patches are replaced with upstream version.",
+      "revId": "74f247e31bdc94469e44e55837dfb59c3bdda1de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
