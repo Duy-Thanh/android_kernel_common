@@ -372,4 +372,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_oem_binder_struct);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_special_task);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_free_buf);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_isolate_freepages);
+<<<<<<< HEAD   (ec8ba8 ANDROID: mm: Fix VMA ref count after fast-mremap)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ptep_clear_flush_young);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_thermal_stats);
+>>>>>>> CHANGE (8ab43e ANDROID: arch_topology: Add android_rvh_update_thermal_stats)
