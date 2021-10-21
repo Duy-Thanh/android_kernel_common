@@ -16,6 +16,24 @@
       "message": "\u0027struct spi_controller at spi.h\u0027 changed ...",
       "revId": "66379c1ee513f07c6f0d299b71c5ae0ddbaba2b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b46e31ce_ee050498",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2021-10-21T09:33:39Z",
+      "side": 1,
+      "message": "Yes, from unsigned to signed.\n\nDoes this represent a problem?",
+      "parentUuid": "699b15b5_79c76d72",
+      "revId": "66379c1ee513f07c6f0d299b71c5ae0ddbaba2b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
