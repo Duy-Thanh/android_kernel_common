@@ -33,6 +33,24 @@
       "message": "Agree with John, please stay in sync with upstream.",
       "revId": "538aa3d066b7b1392a4a0196e0631fe6c4413425",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad9fd95b_7082388c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1703811
+      },
+      "writtenOn": "2021-10-21T07:08:53Z",
+      "side": 1,
+      "message": "Ok, thanks.",
+      "parentUuid": "6aa684ac_b7de41f1",
+      "revId": "538aa3d066b7b1392a4a0196e0631fe6c4413425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
