@@ -123,6 +123,24 @@
       "parentUuid": "ace4dd83_c3e666f8",
       "revId": "113e351a87f660850df296472d7eaaf0903bd654",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e6f819c_3d6e56f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1584799
+      },
+      "writtenOn": "2021-10-21T21:40:36Z",
+      "side": 1,
+      "message": "It\u0027s not a must at the moment, but we do need at least GFP_CMA on the next kernel that will use android13 (android13-5.next) whenever it branches out. Can we add those changes there to keep them out of android-mainline?",
+      "parentUuid": "6cc6bc93_4eee1149",
+      "revId": "113e351a87f660850df296472d7eaaf0903bd654",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
