@@ -1232,6 +1232,9 @@ SYSCALL_DEFINE2(process_mrelease, int, pidfd, unsigned int, flags)
 
 	if (mmget_not_zero(p->mm)) {
 		mm = p->mm;
+		set_bit(MMF_OOM_VICTIM, &mm->flags);
+		mmgrab(mm);
+		mmput(mm);
 		if (task_will_free_mem(p))
 			reap = true;
 		else {
@@ -1255,7 +1258,7 @@ SYSCALL_DEFINE2(process_mrelease, int, pidfd, unsigned int, flags)
 
 drop_mm:
 	if (mm)
-		mmput(mm);
+		mmdrop(mm);
 put_task:
 	put_task_struct(task);
 put_pid:
