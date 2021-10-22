@@ -141,6 +141,24 @@
       "parentUuid": "6cc6bc93_4eee1149",
       "revId": "113e351a87f660850df296472d7eaaf0903bd654",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30ff6cfb_7b4a3d53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-22T08:18:09Z",
+      "side": 1,
+      "message": "We will be glad to review this patch for the android13-5.15 branch when it is created, but such a major API change should not be added to the android-mainline branch unless it is accepted upstream as it just causes merge and maintenance issues.",
+      "parentUuid": "7e6f819c_3d6e56f6",
+      "revId": "113e351a87f660850df296472d7eaaf0903bd654",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
