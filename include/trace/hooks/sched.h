@@ -382,6 +382,10 @@ DECLARE_HOOK(android_vh_setscheduler_uclamp,
 	TP_PROTO(struct task_struct *tsk, int clamp_id, unsigned int value),
 	TP_ARGS(tsk, clamp_id, value));
 
+DECLARE_RESTRICTED_HOOK(android_rvh_save_max_freq,
+	TP_PROTO(unsigned long *to, unsigned long val),
+	TP_ARGS(to, val), 1);
+
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_SCHED_H */
