@@ -63,13 +63,6 @@ DECLARE_HOOK(android_vh_show_mem,
 	TP_PROTO(unsigned int filter, nodemask_t *nodemask),
 	TP_ARGS(filter, nodemask));
 struct slabinfo;
-struct dirty_throttle_control;
-DECLARE_HOOK(android_vh_mm_dirty_limits,
-	TP_PROTO(struct dirty_throttle_control *const gdtc, bool strictlimit,
-		unsigned long dirty, unsigned long bg_thresh,
-		unsigned long nr_reclaimable, unsigned long pages_dirtied),
-	TP_ARGS(gdtc, strictlimit, dirty, bg_thresh,
-		nr_reclaimable, pages_dirtied));
 DECLARE_HOOK(android_vh_oom_check_panic,
 	TP_PROTO(struct oom_control *oc, int *ret),
 	TP_ARGS(oc, ret));
