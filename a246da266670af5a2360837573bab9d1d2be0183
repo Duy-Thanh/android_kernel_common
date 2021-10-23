@@ -34,6 +34,24 @@
       "parentUuid": "db0d3dad_bf3f9baf",
       "revId": "a246da266670af5a2360837573bab9d1d2be0183",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fdbc212_88d610b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2021-10-23T10:36:06Z",
+      "side": 1,
+      "message": "With regards to OWNERS - I thought that was automatic?\n\nI\u0027ll do it manually now.",
+      "parentUuid": "81030c55_1fb910ee",
+      "revId": "a246da266670af5a2360837573bab9d1d2be0183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
