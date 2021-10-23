@@ -16,6 +16,24 @@
       "message": "What about older kernels?  And cc:ing the incfs developer/maintainer?",
       "revId": "a246da266670af5a2360837573bab9d1d2be0183",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81030c55_1fb910ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2021-10-23T10:33:25Z",
+      "side": 1,
+      "message": "Yes, this needs to be back-ported/cherry-picked to all Android kernels.\n\nI was going to ask you about that on Monday.",
+      "parentUuid": "db0d3dad_bf3f9baf",
+      "revId": "a246da266670af5a2360837573bab9d1d2be0183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
