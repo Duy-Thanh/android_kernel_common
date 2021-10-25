@@ -15,26 +15,6 @@ DECLARE_RESTRICTED_HOOK(android_rvh_select_task_rq_fair,
 	TP_PROTO(struct task_struct *p, int prev_cpu, int sd_flag, int wake_flags, int *new_cpu),
 	TP_ARGS(p, prev_cpu, sd_flag, wake_flags, new_cpu), 1);
 
-DECLARE_RESTRICTED_HOOK(android_rvh_prepare_prio_fork,
-	TP_PROTO(struct task_struct *p),
-	TP_ARGS(p), 1);
-
-DECLARE_RESTRICTED_HOOK(android_rvh_finish_prio_fork,
-	TP_PROTO(struct task_struct *p),
-	TP_ARGS(p), 1);
-
-DECLARE_RESTRICTED_HOOK(android_rvh_rtmutex_prepare_setprio,
-	TP_PROTO(struct task_struct *p, struct task_struct *pi_task),
-	TP_ARGS(p, pi_task), 1);
-
-DECLARE_RESTRICTED_HOOK(android_rvh_set_user_nice,
-	TP_PROTO(struct task_struct *p, long *nice, bool *allowed),
-	TP_ARGS(p, nice, allowed), 1);
-
-DECLARE_RESTRICTED_HOOK(android_rvh_setscheduler,
-	TP_PROTO(struct task_struct *p),
-	TP_ARGS(p), 1);
-
 struct rq;
 struct sched_group;
 DECLARE_RESTRICTED_HOOK(android_rvh_find_busiest_group,
