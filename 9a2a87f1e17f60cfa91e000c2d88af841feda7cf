@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b4bef33_1081b617",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-10-25T20:23:20Z",
+      "side": 1,
+      "message": "AFAIKT this hook is not used. Please add the user and explain why you need it (what issue you are trying to fix with it).",
+      "revId": "9a2a87f1e17f60cfa91e000c2d88af841feda7cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
