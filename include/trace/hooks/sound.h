@@ -8,12 +8,17 @@
 #include <linux/tracepoint.h>
 #include <trace/hooks/vendor_hooks.h>
 #include <linux/usb.h>
+#include <sound/soc.h>
 
 DECLARE_HOOK(android_vh_sound_usb_support_cpu_suspend,
 	TP_PROTO(struct usb_device *udev,
 		int direction,
 		bool *is_support),
 	TP_ARGS(udev, direction, is_support));
+
+DECLARE_HOOK(android_vh_snd_soc_card_get_component_chaining,
+	TP_PROTO(bool *component_chaining),
+	TP_ARGS(component_chaining));
 
 #endif /* _TRACE_HOOK_SOUND_H */
 /* This part must be outside protection */
