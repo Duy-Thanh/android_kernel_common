@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf00968e_8cd91841",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-26T06:59:22Z",
+      "side": 1,
+      "message": "Drivers can not directly access the filesystem, please fix the code.",
+      "revId": "20b8fceee051df5cdabe068ab8333b7d2d714318",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55236c03_a10cd379",
+        "filename": "android/abi_gki_aarch64_rockchip",
+        "patchSetId": 1
+      },
+      "lineNbr": 1162,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-26T06:59:22Z",
+      "side": 1,
+      "message": "these are not allowed to be called by drivers, please fix the code to not directly access the filesystem.",
+      "range": {
+        "startLine": 1160,
+        "startChar": 1,
+        "endLine": 1162,
+        "endChar": 0
+      },
+      "revId": "20b8fceee051df5cdabe068ab8333b7d2d714318",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
