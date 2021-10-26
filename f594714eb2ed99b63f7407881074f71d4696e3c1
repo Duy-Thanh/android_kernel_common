@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b12a4c64_cca29deb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1539256
+      },
+      "writtenOn": "2021-10-26T20:43:56Z",
+      "side": 1,
+      "message": "Found same fix in android13-5.10: https://android-review.googlesource.com/c/kernel/common/+/1788108",
+      "revId": "f594714eb2ed99b63f7407881074f71d4696e3c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
