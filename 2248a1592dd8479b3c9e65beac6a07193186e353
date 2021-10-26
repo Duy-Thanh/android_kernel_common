@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "328dcdc5_46d9cd2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1079098
+      },
+      "writtenOn": "2021-10-26T07:47:56Z",
+      "side": 1,
+      "message": "Mediatek still need this vendor hook, and  ABI.xml will be updated.",
+      "revId": "2248a1592dd8479b3c9e65beac6a07193186e353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
