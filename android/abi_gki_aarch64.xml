@@ -481,6 +481,7 @@
       <elf-symbol name='__traceiter_android_vh_show_suspend_epoch_val' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1c84167'/>
       <elf-symbol name='__traceiter_android_vh_shrink_slab_bypass' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa0334e59'/>
       <elf-symbol name='__traceiter_android_vh_snd_compr_use_pause_in_drain' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb6ab1ad2'/>
+      <elf-symbol name='__traceiter_android_vh_snd_soc_card_get_component_chaining' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x14c49397'/>
       <elf-symbol name='__traceiter_android_vh_sound_usb_support_cpu_suspend' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4e022349'/>
       <elf-symbol name='__traceiter_android_vh_sync_txn_recvd' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x584627e2'/>
       <elf-symbol name='__traceiter_android_vh_syscall_prctl_finished' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x15e37672'/>
@@ -5833,6 +5834,7 @@
       <elf-symbol name='__tracepoint_android_vh_show_suspend_epoch_val' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x64718122'/>
       <elf-symbol name='__tracepoint_android_vh_shrink_slab_bypass' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xecea3e92'/>
       <elf-symbol name='__tracepoint_android_vh_snd_compr_use_pause_in_drain' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9b89d106'/>
+      <elf-symbol name='__tracepoint_android_vh_snd_soc_card_get_component_chaining' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf386e4a8'/>
       <elf-symbol name='__tracepoint_android_vh_sound_usb_support_cpu_suspend' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdc96142a'/>
       <elf-symbol name='__tracepoint_android_vh_sync_txn_recvd' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaa651215'/>
       <elf-symbol name='__tracepoint_android_vh_syscall_prctl_finished' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf9fc82b5'/>
@@ -115921,6 +115923,11 @@
         <parameter type-id='d8e6b335' name='leave_draining' filepath='include/trace/hooks/snd_compr.h' line='18' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='__traceiter_android_vh_snd_soc_card_get_component_chaining' mangled-name='__traceiter_android_vh_snd_soc_card_get_component_chaining' filepath='include/trace/hooks/sound.h' line='18' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_snd_soc_card_get_component_chaining'>
+        <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/sound.h' line='18' column='1'/>
+        <parameter type-id='d8e6b335' name='component_chaining' filepath='include/trace/hooks/sound.h' line='18' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='__traceiter_android_vh_sound_usb_support_cpu_suspend' mangled-name='__traceiter_android_vh_sound_usb_support_cpu_suspend' filepath='include/trace/hooks/sound.h' line='12' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_sound_usb_support_cpu_suspend'>
         <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/sound.h' line='12' column='1'/>
         <parameter type-id='25e60cb2' name='udev' filepath='include/trace/hooks/sound.h' line='12' column='1'/>
@@ -116669,6 +116676,7 @@
       <var-decl name='__tracepoint_android_vh_show_suspend_epoch_val' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_show_suspend_epoch_val' visibility='default' filepath='include/trace/hooks/epoch.h' line='13' column='1' elf-symbol-id='__tracepoint_android_vh_show_suspend_epoch_val'/>
       <var-decl name='__tracepoint_android_vh_shrink_slab_bypass' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_shrink_slab_bypass' visibility='default' filepath='include/trace/hooks/vmscan.h' line='19' column='1' elf-symbol-id='__tracepoint_android_vh_shrink_slab_bypass'/>
       <var-decl name='__tracepoint_android_vh_snd_compr_use_pause_in_drain' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_snd_compr_use_pause_in_drain' visibility='default' filepath='include/trace/hooks/snd_compr.h' line='18' column='1' elf-symbol-id='__tracepoint_android_vh_snd_compr_use_pause_in_drain'/>
+      <var-decl name='__tracepoint_android_vh_snd_soc_card_get_component_chaining' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_snd_soc_card_get_component_chaining' visibility='default' filepath='include/trace/hooks/sound.h' line='18' column='1' elf-symbol-id='__tracepoint_android_vh_snd_soc_card_get_component_chaining'/>
       <var-decl name='__tracepoint_android_vh_sound_usb_support_cpu_suspend' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_sound_usb_support_cpu_suspend' visibility='default' filepath='include/trace/hooks/sound.h' line='12' column='1' elf-symbol-id='__tracepoint_android_vh_sound_usb_support_cpu_suspend'/>
       <var-decl name='__tracepoint_android_vh_sync_txn_recvd' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_sync_txn_recvd' visibility='default' filepath='include/trace/hooks/binder.h' line='41' column='1' elf-symbol-id='__tracepoint_android_vh_sync_txn_recvd'/>
       <var-decl name='__tracepoint_android_vh_syscall_prctl_finished' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_syscall_prctl_finished' visibility='default' filepath='include/trace/hooks/sys.h' line='12' column='1' elf-symbol-id='__tracepoint_android_vh_syscall_prctl_finished'/>
@@ -137543,9 +137551,9 @@
         <parameter type-id='95e97e5e' name='num' filepath='sound/soc/soc-dapm.c' line='3177' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_dpcm_get_substream' mangled-name='snd_soc_dpcm_get_substream' filepath='sound/soc/soc-pcm.c' line='2908' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dpcm_get_substream'>
-        <parameter type-id='95316552' name='be' filepath='sound/soc/soc-pcm.c' line='2908' column='1'/>
-        <parameter type-id='95e97e5e' name='stream' filepath='sound/soc/soc-pcm.c' line='2908' column='1'/>
+      <function-decl name='snd_soc_dpcm_get_substream' mangled-name='snd_soc_dpcm_get_substream' filepath='sound/soc/soc-pcm.c' line='2912' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_dpcm_get_substream'>
+        <parameter type-id='95316552' name='be' filepath='sound/soc/soc-pcm.c' line='2912' column='1'/>
+        <parameter type-id='95e97e5e' name='stream' filepath='sound/soc/soc-pcm.c' line='2912' column='1'/>
         <return type-id='06b2cd14'/>
       </function-decl>
       <function-decl name='snd_soc_find_dai' mangled-name='snd_soc_find_dai' filepath='sound/soc/soc-core.c' line='810' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_find_dai'>
@@ -137764,10 +137772,10 @@
         <parameter type-id='80f4b756' name='driver_name' filepath='sound/soc/soc-core.c' line='281' column='1'/>
         <return type-id='807b7702'/>
       </function-decl>
-      <function-decl name='snd_soc_runtime_calc_hw' mangled-name='snd_soc_runtime_calc_hw' filepath='sound/soc/soc-pcm.c' line='501' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_runtime_calc_hw'>
-        <parameter type-id='95316552' name='rtd' filepath='sound/soc/soc-pcm.c' line='501' column='1'/>
-        <parameter type-id='17e4a02a' name='hw' filepath='sound/soc/soc-pcm.c' line='502' column='1'/>
-        <parameter type-id='95e97e5e' name='stream' filepath='sound/soc/soc-pcm.c' line='502' column='1'/>
+      <function-decl name='snd_soc_runtime_calc_hw' mangled-name='snd_soc_runtime_calc_hw' filepath='sound/soc/soc-pcm.c' line='502' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_runtime_calc_hw'>
+        <parameter type-id='95316552' name='rtd' filepath='sound/soc/soc-pcm.c' line='502' column='1'/>
+        <parameter type-id='17e4a02a' name='hw' filepath='sound/soc/soc-pcm.c' line='503' column='1'/>
+        <parameter type-id='95e97e5e' name='stream' filepath='sound/soc/soc-pcm.c' line='503' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='snd_soc_runtime_set_dai_fmt' mangled-name='snd_soc_runtime_set_dai_fmt' filepath='sound/soc/soc-core.c' line='1422' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_runtime_set_dai_fmt'>
@@ -137775,9 +137783,9 @@
         <parameter type-id='f0981eeb' name='dai_fmt' filepath='sound/soc/soc-core.c' line='1423' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='snd_soc_set_runtime_hwparams' mangled-name='snd_soc_set_runtime_hwparams' filepath='sound/soc/soc-pcm.c' line='263' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_set_runtime_hwparams'>
-        <parameter type-id='06b2cd14' name='substream' filepath='sound/soc/soc-pcm.c' line='263' column='1'/>
-        <parameter type-id='d661a615' name='hw' filepath='sound/soc/soc-pcm.c' line='264' column='1'/>
+      <function-decl name='snd_soc_set_runtime_hwparams' mangled-name='snd_soc_set_runtime_hwparams' filepath='sound/soc/soc-pcm.c' line='264' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_set_runtime_hwparams'>
+        <parameter type-id='06b2cd14' name='substream' filepath='sound/soc/soc-pcm.c' line='264' column='1'/>
+        <parameter type-id='d661a615' name='hw' filepath='sound/soc/soc-pcm.c' line='265' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='snd_soc_tplg_component_load' mangled-name='snd_soc_tplg_component_load' filepath='sound/soc/soc-topology.c' line='2807' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_soc_tplg_component_load'>
