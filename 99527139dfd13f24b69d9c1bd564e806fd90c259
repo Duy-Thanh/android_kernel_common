@@ -16,6 +16,24 @@
       "message": "Shouldn\u0027t there also be 2 functions added here as well?",
       "revId": "99527139dfd13f24b69d9c1bd564e806fd90c259",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4a73163_075877e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2021-10-27T07:08:40Z",
+      "side": 1,
+      "message": "I have added these 2 functions, the patch is updated, please help to review",
+      "parentUuid": "045c6a15_1255864e",
+      "revId": "99527139dfd13f24b69d9c1bd564e806fd90c259",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
