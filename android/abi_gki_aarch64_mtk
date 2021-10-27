@@ -1766,6 +1766,7 @@
   snd_soc_rtdcom_lookup
   snd_soc_set_runtime_hwparams
   snd_soc_unregister_component
+  snd_usb_enable_audio_stream
   snprintf
   soc_device_register
   soc_device_unregister
@@ -1952,6 +1953,7 @@
   __traceiter_android_vh_set_module_permit_after_init
   __traceiter_android_vh_set_module_permit_before_init
   __traceiter_android_vh_set_wake_flags
+  __traceiter_android_vh_snd_soc_card_get_component_chaining
   __traceiter_android_vh_syscall_prctl_finished
   __traceiter_android_vh_ufs_send_command
   __traceiter_android_vh_ufs_send_tm_command
@@ -2030,6 +2032,7 @@
   __tracepoint_android_vh_set_module_permit_after_init
   __tracepoint_android_vh_set_module_permit_before_init
   __tracepoint_android_vh_set_wake_flags
+  __tracepoint_android_vh_snd_soc_card_get_component_chaining
   __tracepoint_android_vh_syscall_prctl_finished
   __tracepoint_android_vh_ufs_send_command
   __tracepoint_android_vh_ufs_send_tm_command
