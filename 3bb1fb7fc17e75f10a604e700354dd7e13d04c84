@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9156da21_ec5f7c27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894700
+      },
+      "writtenOn": "2021-10-27T09:46:37Z",
+      "side": 1,
+      "message": "Dear Greg:\nThis vendor hook tracepoints is also used by our oem kernel module.\nI add the symbol to the abi list already.Please help keep this patches and review the new one.Thanks.\nhttps://android-review.googlesource.com/c/kernel/common/+/1871337",
+      "revId": "3bb1fb7fc17e75f10a604e700354dd7e13d04c84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
