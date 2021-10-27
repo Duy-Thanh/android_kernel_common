@@ -16,6 +16,24 @@
       "message": "Dear Greg:\nThese vendor hook tracepoints are used by our oem kernel module.\nI add the symbol to the abi list already.Please help keep this patches.Thanks.\nhttps://android-review.googlesource.com/c/kernel/common/+/1870200\n",
       "revId": "08708b7b2171b496a5fbf1e4c05e36059db3e60b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa621a04_dbec9a02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-27T06:36:48Z",
+      "side": 1,
+      "message": "Yes, thank you for that symbol list update, I will drop this.",
+      "parentUuid": "66403e1f_ecd036d4",
+      "revId": "08708b7b2171b496a5fbf1e4c05e36059db3e60b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
