@@ -16,6 +16,24 @@
       "message": "This needs to wait until October 22 before we can merge it.  See the weekly GKI newsletter this week for details.",
       "revId": "e07be6c9086cf9abca9eb49337a69c0813e265eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b68e4fbd_2a6da9d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-27T07:39:05Z",
+      "side": 1,
+      "message": "Oct 22 has passed with no objections!",
+      "parentUuid": "6b8124e4_6e836b78",
+      "revId": "e07be6c9086cf9abca9eb49337a69c0813e265eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
