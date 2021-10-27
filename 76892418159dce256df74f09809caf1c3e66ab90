@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ccd3875_e8c120cd",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 1
+      },
+      "lineNbr": 1432,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-27T06:33:33Z",
+      "side": 1,
+      "message": "what driver needs this?  No driver should be messing with the memory cgroup directly.",
+      "range": {
+        "startLine": 1432,
+        "startChar": 2,
+        "endLine": 1432,
+        "endChar": 20
+      },
+      "revId": "76892418159dce256df74f09809caf1c3e66ab90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
