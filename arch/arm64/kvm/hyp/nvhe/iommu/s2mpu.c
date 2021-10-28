@@ -271,8 +271,8 @@ static void s2mpu_host_stage2_set_owner(phys_addr_t addr, size_t size, u8 owner_
 	hyp_spin_unlock(&s2mpu_lock);
 }
 
-static int s2mpu_host_stage2_adjust_mmio_range(phys_addr_t addr, phys_addr_t *start,
-					       phys_addr_t *end);
+static int s2mpu_host_stage2_adjust_mmio_range(phys_addr_t addr,
+					       struct kvm_mem_range *range)
 {
 	struct s2mpu *dev;
 	phys_addr_t dev_start, dev_end, int_start, int_end;
@@ -294,8 +294,8 @@ static int s2mpu_host_stage2_adjust_mmio_range(phys_addr_t addr, phys_addr_t *st
 		int_end = PA_MAX;
 	}
 
-	*start = max(*start, int_start);
-	*end = min(*end, int_end);
+	range->start = max(range->start, int_start);
+	range->end = min(range->end, int_end);
 	return 0;
 }
 
