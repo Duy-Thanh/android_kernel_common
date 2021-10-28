@@ -108,6 +108,8 @@
       <elf-symbol name='__get_task_comm' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc2a656d9'/>
       <elf-symbol name='__get_vm_area_caller' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x87eb7b44'/>
       <elf-symbol name='__getblk_gfp' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4c9af7f2'/>
+      <elf-symbol name='__hci_cmd_sync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6c0aa14'/>
+      <elf-symbol name='__hci_cmd_sync_ev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x83964547'/>
       <elf-symbol name='__hid_register_driver' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbe362106'/>
       <elf-symbol name='__hid_request' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x62d87780'/>
       <elf-symbol name='__hrtimer_get_remaining' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xed269ad2'/>
@@ -739,6 +741,7 @@
       <elf-symbol name='bio_reset' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x92c823b1'/>
       <elf-symbol name='bioset_exit' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x679e9dab'/>
       <elf-symbol name='bioset_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xed64a00'/>
+      <elf-symbol name='bit_wait_timeout' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x44bae227'/>
       <elf-symbol name='bitmap_alloc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x20dbf27'/>
       <elf-symbol name='bitmap_allocate_region' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdac4913a'/>
       <elf-symbol name='bitmap_find_free_region' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x63a7c28c'/>
@@ -883,6 +886,11 @@
       <elf-symbol name='bsg_setup_queue' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x909fc1a'/>
       <elf-symbol name='bt_err' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7b8c32f1'/>
       <elf-symbol name='bt_info' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x718b8b7'/>
+      <elf-symbol name='bt_to_errno' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7aad008b'/>
+      <elf-symbol name='bt_warn' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x214e4265'/>
+      <elf-symbol name='btbcm_set_bdaddr' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8e866ecf'/>
+      <elf-symbol name='btbcm_setup_apple' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd8bcf77c'/>
+      <elf-symbol name='btbcm_setup_patchram' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1f6fd9f6'/>
       <elf-symbol name='build_skb' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8ceb5594'/>
       <elf-symbol name='bus_find_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb228e90d'/>
       <elf-symbol name='bus_for_each_dev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7eedf2be'/>
@@ -2431,6 +2439,7 @@
       <elf-symbol name='gpiod_get_value' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6606192c'/>
       <elf-symbol name='gpiod_get_value_cansleep' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x421f2ad'/>
       <elf-symbol name='gpiod_is_active_low' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb5606728'/>
+      <elf-symbol name='gpiod_put' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x19e6a6a1'/>
       <elf-symbol name='gpiod_set_array_value_cansleep' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe92664b6'/>
       <elf-symbol name='gpiod_set_consumer_name' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe1aa88cb'/>
       <elf-symbol name='gpiod_set_debounce' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7221e927'/>
@@ -2458,7 +2467,9 @@
       <elf-symbol name='hashlen_string' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x162893fd'/>
       <elf-symbol name='have_governor_per_policy' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x47aad3b9'/>
       <elf-symbol name='hci_alloc_dev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf3337e12'/>
+      <elf-symbol name='hci_cmd_sync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x97bcc765'/>
       <elf-symbol name='hci_free_dev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x846b90ca'/>
+      <elf-symbol name='hci_recv_diag' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x94e3b54f'/>
       <elf-symbol name='hci_recv_frame' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6e71db56'/>
       <elf-symbol name='hci_register_dev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7018963b'/>
       <elf-symbol name='hci_unregister_dev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x26300e3d'/>
@@ -3433,6 +3444,7 @@
       <elf-symbol name='on_each_cpu_cond' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb1a5ab8c'/>
       <elf-symbol name='open_candev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc49d1d3c'/>
       <elf-symbol name='orderly_poweroff' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x56256e8a'/>
+      <elf-symbol name='out_of_line_wait_on_bit_timeout' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4071b517'/>
       <elf-symbol name='page_endio' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd65281f0'/>
       <elf-symbol name='page_mapping' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5000845d'/>
       <elf-symbol name='page_reporting_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7a216f9'/>
@@ -5095,6 +5107,8 @@
       <elf-symbol name='usb_deregister_dev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe822527'/>
       <elf-symbol name='usb_disable_xhci_ports' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x545c40a'/>
       <elf-symbol name='usb_disabled' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x19a304ba'/>
+      <elf-symbol name='usb_driver_claim_interface' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe26688dd'/>
+      <elf-symbol name='usb_driver_release_interface' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x361c5d2f'/>
       <elf-symbol name='usb_enable_autosuspend' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc6c961cb'/>
       <elf-symbol name='usb_enable_intel_xhci_ports' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x39bab8b7'/>
       <elf-symbol name='usb_ep_alloc_request' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x880d48e4'/>
@@ -5134,6 +5148,7 @@
       <elf-symbol name='usb_gadget_wakeup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcedd2b6e'/>
       <elf-symbol name='usb_get_dev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb999b45f'/>
       <elf-symbol name='usb_get_dr_mode' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2e336678'/>
+      <elf-symbol name='usb_get_from_anchor' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x626f77cb'/>
       <elf-symbol name='usb_get_function' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd463183c'/>
       <elf-symbol name='usb_get_function_instance' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4092778a'/>
       <elf-symbol name='usb_get_gadget_udc_name' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x50b88f41'/>
@@ -5180,6 +5195,7 @@
       <elf-symbol name='usb_put_function_instance' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x15993252'/>
       <elf-symbol name='usb_put_hcd' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5279e353'/>
       <elf-symbol name='usb_put_intf' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xef5d3e52'/>
+      <elf-symbol name='usb_queue_reset_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc3543bdc'/>
       <elf-symbol name='usb_register_dev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfc426e57'/>
       <elf-symbol name='usb_register_driver' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8ef88460'/>
       <elf-symbol name='usb_register_notify' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x89bbafc6'/>
@@ -5194,6 +5210,7 @@
       <elf-symbol name='usb_role_switch_set_role' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd5474690'/>
       <elf-symbol name='usb_role_switch_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2882d40e'/>
       <elf-symbol name='usb_root_hub_lost_power' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1ca66e75'/>
+      <elf-symbol name='usb_scuttle_anchored_urbs' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x807766ea'/>
       <elf-symbol name='usb_set_device_state' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc405a128'/>
       <elf-symbol name='usb_set_interface' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc5eb1739'/>
       <elf-symbol name='usb_show_dynids' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc17e9946'/>
@@ -5501,6 +5518,7 @@
       <elf-symbol name='wait_for_completion_timeout' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4a3ad70e'/>
       <elf-symbol name='wait_for_device_probe' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4484a5a4'/>
       <elf-symbol name='wait_woken' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb308c97d'/>
+      <elf-symbol name='wake_up_bit' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa0fbac79'/>
       <elf-symbol name='wake_up_if_idle' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf6abaae1'/>
       <elf-symbol name='wake_up_process' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa4304a36'/>
       <elf-symbol name='wakeup_source_add' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x51e13065'/>
@@ -22531,6 +22549,17 @@
           <var-decl name='pending_link' type-id='72f469ec' visibility='default' filepath='include/drm/drm_file.h' line='151' column='1'/>
         </data-member>
       </class-decl>
+      <class-decl name='wait_bit_key' size-in-bits='192' is-struct='yes' visibility='default' filepath='include/linux/wait_bit.h' line='10' column='1' id='2aa6fa74'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='flags' type-id='eaa32e2f' visibility='default' filepath='include/linux/wait_bit.h' line='11' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='bit_nr' type-id='95e97e5e' visibility='default' filepath='include/linux/wait_bit.h' line='12' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='timeout' type-id='7359adad' visibility='default' filepath='include/linux/wait_bit.h' line='13' column='1'/>
+        </data-member>
+      </class-decl>
       <typedef-decl name='ino_t' type-id='4e22818f' filepath='include/linux/types.h' line='17' column='1' id='2aa75eef'/>
       <function-type size-in-bits='64' id='2aa99da6'>
         <parameter type-id='11777d05'/>
@@ -24378,6 +24407,7 @@
       <array-type-def dimensions='1' type-id='7359adad' size-in-bits='576' id='307ac9b4'>
         <subrange length='9' type-id='7ff19f0f' id='12e4273c'/>
       </array-type-def>
+      <pointer-type-def type-id='2aa6fa74' size-in-bits='64' id='307d4a12'/>
       <class-decl name='uclamp_rq' size-in-bits='1344' is-struct='yes' visibility='default' filepath='kernel/sched/sched.h' line='903' column='1' id='30847fcd'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='value' type-id='f0981eeb' visibility='default' filepath='kernel/sched/sched.h' line='904' column='1'/>
@@ -36286,6 +36316,7 @@
         <return type-id='79a0948f'/>
       </function-type>
       <typedef-decl name='efi_get_wakeup_time_t' type-id='39e463ea' filepath='include/linux/efi.h' line='236' column='1' id='50c6d8a2'/>
+      <pointer-type-def type-id='d04e3bd9' size-in-bits='64' id='50c74428'/>
       <class-decl name='ehci_qtd' size-in-bits='768' is-struct='yes' visibility='default' filepath='drivers/usb/host/ehci.h' line='287' column='1' id='50db3e2c'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='hw_next' type-id='2f162548' visibility='default' filepath='drivers/usb/host/ehci.h' line='289' column='1'/>
@@ -55765,6 +55796,11 @@
       </function-type>
       <pointer-type-def type-id='9b634486' size-in-bits='64' id='7f416e10'/>
       <class-decl name='xsk_queue' is-struct='yes' visibility='default' is-declaration-only='yes' id='7f424251'/>
+      <function-type size-in-bits='64' id='7f43b3fb'>
+        <parameter type-id='307d4a12'/>
+        <parameter type-id='95e97e5e'/>
+        <return type-id='95e97e5e'/>
+      </function-type>
       <array-type-def dimensions='1' type-id='f9b06939' size-in-bits='1024' id='7f475abd'>
         <subrange length='128' type-id='7ff19f0f' id='1eb1687a'/>
       </array-type-def>
@@ -91846,6 +91882,7 @@
       <pointer-type-def type-id='2bd73e91' size-in-bits='64' id='d03b0979'/>
       <pointer-type-def type-id='45ae30ea' size-in-bits='64' id='d04132fc'/>
       <pointer-type-def type-id='d002899d' size-in-bits='64' id='d042cfad'/>
+      <typedef-decl name='wait_bit_action_f' type-id='7f43b3fb' filepath='include/linux/wait_bit.h' line='24' column='1' id='d04e3bd9'/>
       <class-decl name='master' size-in-bits='448' is-struct='yes' visibility='default' filepath='drivers/base/component.c' line='61' column='1' id='d050fd8b'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='node' type-id='72f469ec' visibility='default' filepath='drivers/base/component.c' line='62' column='1'/>
@@ -113813,6 +113850,23 @@
         <parameter type-id='3eb7c31c' name='gfp' filepath='fs/buffer.c' line='1357' column='1'/>
         <return type-id='c485c22c'/>
       </function-decl>
+      <function-decl name='__hci_cmd_sync' mangled-name='__hci_cmd_sync' filepath='net/bluetooth/hci_request.c' line='184' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__hci_cmd_sync'>
+        <parameter type-id='9ad862e7' name='hdev' filepath='net/bluetooth/hci_request.c' line='184' column='1'/>
+        <parameter type-id='1dc6a898' name='opcode' filepath='net/bluetooth/hci_request.c' line='184' column='1'/>
+        <parameter type-id='19c2251e' name='plen' filepath='net/bluetooth/hci_request.c' line='184' column='1'/>
+        <parameter type-id='eaa32e2f' name='param' filepath='net/bluetooth/hci_request.c' line='185' column='1'/>
+        <parameter type-id='19c2251e' name='timeout' filepath='net/bluetooth/hci_request.c' line='185' column='1'/>
+        <return type-id='0fbf3cfd'/>
+      </function-decl>
+      <function-decl name='__hci_cmd_sync_ev' mangled-name='__hci_cmd_sync_ev' filepath='net/bluetooth/hci_request.c' line='127' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__hci_cmd_sync_ev'>
+        <parameter type-id='9ad862e7' name='hdev' filepath='net/bluetooth/hci_request.c' line='127' column='1'/>
+        <parameter type-id='1dc6a898' name='opcode' filepath='net/bluetooth/hci_request.c' line='127' column='1'/>
+        <parameter type-id='19c2251e' name='plen' filepath='net/bluetooth/hci_request.c' line='127' column='1'/>
+        <parameter type-id='eaa32e2f' name='param' filepath='net/bluetooth/hci_request.c' line='128' column='1'/>
+        <parameter type-id='f9b06939' name='event' filepath='net/bluetooth/hci_request.c' line='128' column='1'/>
+        <parameter type-id='19c2251e' name='timeout' filepath='net/bluetooth/hci_request.c' line='128' column='1'/>
+        <return type-id='0fbf3cfd'/>
+      </function-decl>
       <function-decl name='__hid_register_driver' mangled-name='__hid_register_driver' filepath='drivers/hid/hid-core.c' line='2542' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__hid_register_driver'>
         <parameter type-id='cbd2074d' name='hdrv' filepath='drivers/hid/hid-core.c' line='2542' column='1'/>
         <parameter type-id='2730d015' name='owner' filepath='drivers/hid/hid-core.c' line='2542' column='1'/>
@@ -117886,6 +117940,11 @@
         <parameter type-id='95e97e5e'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='bit_wait_timeout' mangled-name='bit_wait_timeout' filepath='kernel/sched/wait_bit.c' line='217' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bit_wait_timeout'>
+        <parameter type-id='307d4a12' name='word' filepath='kernel/sched/wait_bit.c' line='217' column='1'/>
+        <parameter type-id='95e97e5e' name='mode' filepath='kernel/sched/wait_bit.c' line='217' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='bitmap_alloc' mangled-name='bitmap_alloc' filepath='include/linux/bitmap.h' line='121' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bitmap_alloc'>
         <parameter type-id='f0981eeb'/>
         <parameter type-id='f0981eeb'/>
@@ -118695,6 +118754,28 @@
         <parameter type-id='80f4b756'/>
         <parameter is-variadic='yes'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='bt_to_errno' mangled-name='bt_to_errno' filepath='include/net/bluetooth/bluetooth.h' line='423' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bt_to_errno'>
+        <parameter type-id='8efea9e5'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='bt_warn' mangled-name='bt_warn' filepath='include/net/bluetooth/bluetooth.h' line='159' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bt_warn'>
+        <parameter type-id='80f4b756'/>
+        <parameter is-variadic='yes'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='btbcm_set_bdaddr' mangled-name='btbcm_set_bdaddr' filepath='drivers/bluetooth/btbcm.c' line='99' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='btbcm_set_bdaddr'>
+        <parameter type-id='9ad862e7' name='hdev' filepath='drivers/bluetooth/btbcm.c' line='99' column='1'/>
+        <parameter type-id='c3e18af8' name='bdaddr' filepath='drivers/bluetooth/btbcm.c' line='99' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='btbcm_setup_apple' mangled-name='btbcm_setup_apple' filepath='drivers/bluetooth/btbcm.c' line='569' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='btbcm_setup_apple'>
+        <parameter type-id='9ad862e7' name='hdev' filepath='drivers/bluetooth/btbcm.c' line='569' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='btbcm_setup_patchram' mangled-name='btbcm_setup_patchram' filepath='drivers/bluetooth/btbcm.c' line='554' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='btbcm_setup_patchram'>
+        <parameter type-id='9ad862e7' name='hdev' filepath='drivers/bluetooth/btbcm.c' line='554' column='1'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='build_skb' mangled-name='build_skb' filepath='include/linux/skbuff.h' line='1087' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='build_skb'>
         <parameter type-id='eaa32e2f'/>
@@ -126844,6 +126925,10 @@
         <parameter type-id='5bed570d' name='desc' filepath='drivers/gpio/gpiolib.c' line='2584' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='gpiod_put' mangled-name='gpiod_put' filepath='drivers/gpio/gpiolib.c' line='4331' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='gpiod_put'>
+        <parameter type-id='26760480' name='desc' filepath='drivers/gpio/gpiolib.c' line='4331' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='gpiod_set_array_value_cansleep' mangled-name='gpiod_set_array_value_cansleep' filepath='drivers/gpio/gpiolib.c' line='3575' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='gpiod_set_array_value_cansleep'>
         <parameter type-id='f0981eeb' name='array_size' filepath='drivers/gpio/gpiolib.c' line='3575' column='1'/>
         <parameter type-id='35c9579e' name='desc_array' filepath='drivers/gpio/gpiolib.c' line='3576' column='1'/>
@@ -126964,9 +127049,22 @@
       <function-decl name='hci_alloc_dev' mangled-name='hci_alloc_dev' filepath='include/net/bluetooth/hci_core.h' line='1203' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='hci_alloc_dev'>
         <return type-id='9ad862e7'/>
       </function-decl>
+      <function-decl name='hci_cmd_sync' mangled-name='hci_cmd_sync' filepath='net/bluetooth/hci_core.c' line='4134' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='hci_cmd_sync'>
+        <parameter type-id='9ad862e7' name='hdev' filepath='net/bluetooth/hci_core.c' line='4134' column='1'/>
+        <parameter type-id='1dc6a898' name='opcode' filepath='net/bluetooth/hci_core.c' line='4134' column='1'/>
+        <parameter type-id='19c2251e' name='plen' filepath='net/bluetooth/hci_core.c' line='4134' column='1'/>
+        <parameter type-id='eaa32e2f' name='param' filepath='net/bluetooth/hci_core.c' line='4135' column='1'/>
+        <parameter type-id='19c2251e' name='timeout' filepath='net/bluetooth/hci_core.c' line='4135' column='1'/>
+        <return type-id='0fbf3cfd'/>
+      </function-decl>
       <function-decl name='hci_free_dev' mangled-name='hci_free_dev' filepath='net/bluetooth/hci_core.c' line='3701' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='hci_free_dev'>
         <parameter type-id='9ad862e7' name='hdev' filepath='net/bluetooth/hci_core.c' line='3701' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='hci_recv_diag' mangled-name='hci_recv_diag' filepath='include/net/bluetooth/hci_core.h' line='1212' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='hci_recv_diag'>
+        <parameter type-id='9ad862e7'/>
+        <parameter type-id='0fbf3cfd'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='hci_recv_frame' mangled-name='hci_recv_frame' filepath='include/net/bluetooth/hci_core.h' line='1211' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='hci_recv_frame'>
         <parameter type-id='9ad862e7'/>
@@ -131938,6 +132036,14 @@
       <function-decl name='orderly_poweroff' mangled-name='orderly_poweroff' filepath='kernel/reboot.c' line='496' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='orderly_poweroff'>
         <parameter type-id='b50a4934' name='force' filepath='kernel/reboot.c' line='496' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='out_of_line_wait_on_bit_timeout' mangled-name='out_of_line_wait_on_bit_timeout' filepath='kernel/sched/wait_bit.c' line='68' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='out_of_line_wait_on_bit_timeout'>
+        <parameter type-id='eaa32e2f' name='word' filepath='kernel/sched/wait_bit.c' line='69' column='1'/>
+        <parameter type-id='95e97e5e' name='bit' filepath='kernel/sched/wait_bit.c' line='69' column='1'/>
+        <parameter type-id='50c74428' name='action' filepath='kernel/sched/wait_bit.c' line='69' column='1'/>
+        <parameter type-id='f0981eeb' name='mode' filepath='kernel/sched/wait_bit.c' line='70' column='1'/>
+        <parameter type-id='7359adad' name='timeout' filepath='kernel/sched/wait_bit.c' line='70' column='1'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
       <var-decl name='overflowuid' type-id='95e97e5e' mangled-name='overflowuid' visibility='default' filepath='kernel/sys.c' line='144' column='1' elf-symbol-id='overflowuid'/>
       <function-decl name='page_endio' mangled-name='page_endio' filepath='mm/filemap.c' line='1516' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='page_endio'>
@@ -140442,6 +140548,17 @@
       <function-decl name='usb_disabled' mangled-name='usb_disabled' filepath='drivers/usb/core/usb.c' line='59' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_disabled'>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='usb_driver_claim_interface' mangled-name='usb_driver_claim_interface' filepath='include/linux/usb.h' line='864' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_driver_claim_interface'>
+        <parameter type-id='46ae908a'/>
+        <parameter type-id='8bf48c31'/>
+        <parameter type-id='eaa32e2f'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='usb_driver_release_interface' mangled-name='usb_driver_release_interface' filepath='include/linux/usb.h' line='885' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_driver_release_interface'>
+        <parameter type-id='46ae908a'/>
+        <parameter type-id='8bf48c31'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='usb_enable_autosuspend' mangled-name='usb_enable_autosuspend' filepath='drivers/usb/core/driver.c' line='1649' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_enable_autosuspend'>
         <parameter type-id='25e60cb2' name='udev' filepath='drivers/usb/core/driver.c' line='1649' column='1'/>
         <return type-id='48b5725f'/>
@@ -140624,6 +140741,10 @@
       <function-decl name='usb_get_dr_mode' mangled-name='usb_get_dr_mode' filepath='drivers/usb/common/common.c' line='190' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_get_dr_mode'>
         <parameter type-id='fa0b179b' name='dev' filepath='drivers/usb/common/common.c' line='190' column='1'/>
         <return type-id='d291aaf1'/>
+      </function-decl>
+      <function-decl name='usb_get_from_anchor' mangled-name='usb_get_from_anchor' filepath='include/linux/usb.h' line='1771' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_get_from_anchor'>
+        <parameter type-id='bd300bf3'/>
+        <return type-id='ab85b8f2'/>
       </function-decl>
       <function-decl name='usb_get_function' mangled-name='usb_get_function' filepath='drivers/usb/gadget/functions.c' line='57' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_get_function'>
         <parameter type-id='6614aa5e' name='fi' filepath='drivers/usb/gadget/functions.c' line='57' column='1'/>
@@ -140842,6 +140963,10 @@
         <parameter type-id='8bf48c31' name='intf' filepath='drivers/usb/core/usb.c' line='744' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='usb_queue_reset_device' mangled-name='usb_queue_reset_device' filepath='include/linux/usb.h' line='768' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_queue_reset_device'>
+        <parameter type-id='8bf48c31'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='usb_register_dev' mangled-name='usb_register_dev' filepath='drivers/usb/core/file.c' line='156' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_register_dev'>
         <parameter type-id='8bf48c31' name='intf' filepath='drivers/usb/core/file.c' line='156' column='1'/>
         <parameter type-id='63cfef1d' name='class_driver' filepath='drivers/usb/core/file.c' line='157' column='1'/>
@@ -140902,6 +141027,10 @@
       </function-decl>
       <function-decl name='usb_root_hub_lost_power' mangled-name='usb_root_hub_lost_power' filepath='drivers/usb/core/hub.c' line='3845' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_root_hub_lost_power'>
         <parameter type-id='25e60cb2' name='rhdev' filepath='drivers/usb/core/hub.c' line='3845' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='usb_scuttle_anchored_urbs' mangled-name='usb_scuttle_anchored_urbs' filepath='include/linux/usb.h' line='1772' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_scuttle_anchored_urbs'>
+        <parameter type-id='bd300bf3'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='usb_set_device_state' mangled-name='usb_set_device_state' filepath='drivers/usb/core/hub.c' line='2042' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_set_device_state'>
@@ -142536,6 +142665,11 @@
         <parameter type-id='f0981eeb' name='mode' filepath='kernel/sched/wait.c' line='433' column='1'/>
         <parameter type-id='bd54fe1a' name='timeout' filepath='kernel/sched/wait.c' line='433' column='1'/>
         <return type-id='bd54fe1a'/>
+      </function-decl>
+      <function-decl name='wake_up_bit' mangled-name='wake_up_bit' filepath='include/linux/wait_bit.h' line='29' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='wake_up_bit'>
+        <parameter type-id='eaa32e2f'/>
+        <parameter type-id='95e97e5e'/>
+        <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='wake_up_if_idle' mangled-name='wake_up_if_idle' filepath='kernel/sched/core.c' line='2819' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='wake_up_if_idle'>
         <parameter type-id='95e97e5e' name='cpu' filepath='kernel/sched/core.c' line='2819' column='1'/>
