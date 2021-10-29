@@ -46,6 +46,30 @@
       },
       "revId": "76892418159dce256df74f09809caf1c3e66ab90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23ba2fc1_95f37ac8",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 1
+      },
+      "lineNbr": 1432,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-10-29T07:54:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "15eb341a_27ebbbf3",
+      "range": {
+        "startLine": 1432,
+        "startChar": 2,
+        "endLine": 1432,
+        "endChar": 20
+      },
+      "revId": "76892418159dce256df74f09809caf1c3e66ab90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
