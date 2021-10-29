@@ -14,6 +14,8 @@
  * don't need to meet these requirements.
  */
 
+#undef __DISABLE_EXPORTS
+
 #include <linux/ctype.h>
 #include <linux/module.h>
 #include <crypto/aead.h>
@@ -86,34 +88,37 @@ const u8 *__rodata_start = &__fips140_rodata_start;
  * When adding a new algorithm here, make sure to consider whether it needs a
  * self-test added to fips140_selftests[] as well.
  */
-static const char * const fips140_algorithms[] __initconst = {
-	"aes",
+static const struct {
+	const char *name;
+	bool approved;
+} fips140_algs_to_replace[] = {
+	{"aes", true},
 
-	"cmac(aes)",
-	"ecb(aes)",
+	{"cmac(aes)", true},
+	{"ecb(aes)", true},
 
-	"cbc(aes)",
-	"cts(cbc(aes))",
-	"ctr(aes)",
-	"xts(aes)",
-	"gcm(aes)",
+	{"cbc(aes)", true},
+	{"cts(cbc(aes))", true},
+	{"ctr(aes)", true},
+	{"xts(aes)", true},
+	{"gcm(aes)", false},
 
-	"hmac(sha1)",
-	"hmac(sha224)",
-	"hmac(sha256)",
-	"hmac(sha384)",
-	"hmac(sha512)",
-	"sha1",
-	"sha224",
-	"sha256",
-	"sha384",
-	"sha512",
+	{"hmac(sha1)", true},
+	{"hmac(sha224)", true},
+	{"hmac(sha256)", true},
+	{"hmac(sha384)", true},
+	{"hmac(sha512)", true},
+	{"sha1", true},
+	{"sha224", true},
+	{"sha256", true},
+	{"sha384", true},
+	{"sha512", true},
 
-	"stdrng",
-	"jitterentropy_rng",
+	{"stdrng", true},
+	{"jitterentropy_rng", false},
 };
 
-static bool __init is_fips140_algo(struct crypto_alg *alg)
+static bool __init fips140_should_unregister_alg(struct crypto_alg *alg)
 {
 	int i;
 
@@ -124,11 +129,36 @@ static bool __init is_fips140_algo(struct crypto_alg *alg)
 	if (alg->cra_flags & CRYPTO_ALG_ASYNC)
 		return false;
 
-	for (i = 0; i < ARRAY_SIZE(fips140_algorithms); i++)
-		if (!strcmp(alg->cra_name, fips140_algorithms[i]))
+	for (i = 0; i < ARRAY_SIZE(fips140_algs_to_replace); i++) {
+		if (!strcmp(alg->cra_name, fips140_algs_to_replace[i].name))
 			return true;
+	}
 	return false;
 }
+
+/*
+ * FIPS 140-3 service indicators.  This function can be called to check whether
+ * an algorithm (which may include a mode of operation) is "approved".  This
+ * function is required by FIPS 140-3, and the certification lab is required to
+ * test this function, so it must not be removed even if it has no real users.
+ */
+bool fips140_is_approved_service(const char *name)
+{
+	size_t i;
+
+	/*
+	 * Note: this function can't be called until the module has successfully
+	 * loaded, so we don't need to check whether the module has finished
+	 * loading yet or not (we'd have to return false if it hasn't).
+	 */
+
+	for (i = 0; i < ARRAY_SIZE(fips140_algs_to_replace); i++) {
+		if (!strcmp(name, fips140_algs_to_replace[i].name))
+			return fips140_algs_to_replace[i].approved;
+	}
+	return false;
+}
+EXPORT_SYMBOL_GPL(fips140_is_approved_service);
 
 static LIST_HEAD(existing_live_algos);
 
@@ -180,7 +210,7 @@ static void __init unregister_existing_fips140_algos(void)
 	 * that new users won't use them.
 	 */
 	list_for_each_entry_safe(alg, tmp, &crypto_alg_list, cra_list) {
-		if (!is_fips140_algo(alg))
+		if (!fips140_should_unregister_alg(alg))
 			continue;
 		if (refcount_read(&alg->cra_refcnt) == 1) {
 			/*
