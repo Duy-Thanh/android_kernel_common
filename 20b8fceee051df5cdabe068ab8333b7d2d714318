@@ -39,6 +39,30 @@
       },
       "revId": "20b8fceee051df5cdabe068ab8333b7d2d714318",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76af2144_cbe587b1",
+        "filename": "android/abi_gki_aarch64_rockchip",
+        "patchSetId": 1
+      },
+      "lineNbr": 1162,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2021-10-29T06:22:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55236c03_a10cd379",
+      "range": {
+        "startLine": 1160,
+        "startChar": 1,
+        "endLine": 1162,
+        "endChar": 0
+      },
+      "revId": "20b8fceee051df5cdabe068ab8333b7d2d714318",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
