@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee506fc5_66855756",
+        "filename": "android/abi_gki_aarch64_rockchip",
+        "patchSetId": 2
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-10-30T09:08:58Z",
+      "side": 1,
+      "message": "again, please remove your direct filesystem code from the driver, it is not needed at all.",
+      "range": {
+        "startLine": 1162,
+        "startChar": 2,
+        "endLine": 1163,
+        "endChar": 10
+      },
+      "revId": "a9fe96cf1331ed60f169bb8b7da907bb1d8b895b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
