@@ -70,6 +70,30 @@
       },
       "revId": "81416de2c233a2bbef91c38b6aacace2597b17fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94020987_d4997564",
+        "filename": "android/abi_gki_aarch64_generic",
+        "patchSetId": 2
+      },
+      "lineNbr": 1652,
+      "author": {
+        "id": 1345812
+      },
+      "writtenOn": "2021-11-01T07:39:58Z",
+      "side": 1,
+      "message": "WDT: watchdog timeout.\n\nYes it\u0027s for debugging stuff. Could you share an example of \"put it in the debugging symbol module\" please? Thanks.",
+      "parentUuid": "9014eaca_dcb0d7b8",
+      "range": {
+        "startLine": 1652,
+        "startChar": 2,
+        "endLine": 1652,
+        "endChar": 10
+      },
+      "revId": "81416de2c233a2bbef91c38b6aacace2597b17fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
