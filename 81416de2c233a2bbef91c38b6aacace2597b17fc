@@ -46,6 +46,30 @@
       },
       "revId": "81416de2c233a2bbef91c38b6aacace2597b17fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9014eaca_dcb0d7b8",
+        "filename": "android/abi_gki_aarch64_generic",
+        "patchSetId": 2
+      },
+      "lineNbr": 1652,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-01T06:46:18Z",
+      "side": 1,
+      "message": "What is \"WDT\"?\n\nAnd if this is for debugging stuff, put it in the debugging symbol module, do not expose it like this.",
+      "parentUuid": "e21b18b1_fcbdfb79",
+      "range": {
+        "startLine": 1652,
+        "startChar": 2,
+        "endLine": 1652,
+        "endChar": 10
+      },
+      "revId": "81416de2c233a2bbef91c38b6aacace2597b17fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
