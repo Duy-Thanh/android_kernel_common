@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90c53a02_3ab3576f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-01T06:44:32Z",
+      "side": 1,
+      "message": "you should be adding the tracepoint symbols in pairs, not just a single one like this, in order to have them work properly.  Are you sure this is correct?",
+      "revId": "0260a714280c7c6c5eecadb264f2834e866fee59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
