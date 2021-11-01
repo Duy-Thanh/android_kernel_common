@@ -22,6 +22,30 @@
       },
       "revId": "81416de2c233a2bbef91c38b6aacace2597b17fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e21b18b1_fcbdfb79",
+        "filename": "android/abi_gki_aarch64_generic",
+        "patchSetId": 2
+      },
+      "lineNbr": 1652,
+      "author": {
+        "id": 1345812
+      },
+      "writtenOn": "2021-11-01T06:43:51Z",
+      "side": 1,
+      "message": "This will be used by https://partner-android-review.googlesource.com/c/kernel/private/gs-google/+/2075857 - Print Mem-Info when WDT",
+      "parentUuid": "2e7ef243_3775c381",
+      "range": {
+        "startLine": 1652,
+        "startChar": 2,
+        "endLine": 1652,
+        "endChar": 10
+      },
+      "revId": "81416de2c233a2bbef91c38b6aacace2597b17fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
