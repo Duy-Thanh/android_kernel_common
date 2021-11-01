@@ -33,6 +33,42 @@
       "message": ".xml file update looks very large just to add 1 symbol, are you sure that is correct?",
       "revId": "0260a714280c7c6c5eecadb264f2834e866fee59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a90f34cb_97789e1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1902436
+      },
+      "writtenOn": "2021-11-01T07:31:53Z",
+      "side": 1,
+      "message": "Yes, it\u0027s generated with: BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build_abi.sh --update",
+      "parentUuid": "c6e12036_1c65e6d9",
+      "revId": "0260a714280c7c6c5eecadb264f2834e866fee59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a82bc413_40a24153",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1902436
+      },
+      "writtenOn": "2021-11-01T07:31:53Z",
+      "side": 1,
+      "message": "the symbol is here: https://android-review.googlesource.com/c/kernel/common/+/1723140",
+      "parentUuid": "90c53a02_3ab3576f",
+      "revId": "0260a714280c7c6c5eecadb264f2834e866fee59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
