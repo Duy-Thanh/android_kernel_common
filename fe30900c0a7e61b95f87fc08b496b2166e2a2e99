@@ -22,6 +22,30 @@
       },
       "revId": "fe30900c0a7e61b95f87fc08b496b2166e2a2e99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62634ba8_d4c668cc",
+        "filename": "Documentation/devicetree/bindings/arm/google,s2mpu.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-11-02T14:37:10Z",
+      "side": 1,
+      "message": "Looking at the next patch, looks like this is done differently, n/m.",
+      "parentUuid": "f18dc15e_29fdbb83",
+      "range": {
+        "startLine": 18,
+        "startChar": 20,
+        "endLine": 18,
+        "endChar": 25
+      },
+      "revId": "fe30900c0a7e61b95f87fc08b496b2166e2a2e99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
