@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03ac31fd_4ac59d9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-11-02T16:48:53Z",
+      "side": 1,
+      "message": "locally built due to absence of presubmit",
+      "revId": "eff25c4b7f9dfaa8b45316eac26f7f94aaae818f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
