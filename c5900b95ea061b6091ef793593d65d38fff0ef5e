@@ -52,6 +52,24 @@
       "parentUuid": "a4e39fcf_499d9e62",
       "revId": "c5900b95ea061b6091ef793593d65d38fff0ef5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9dd2e9c_b2fc3fde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1445936
+      },
+      "writtenOn": "2021-11-02T14:49:22Z",
+      "side": 1,
+      "message": "sorry for typo, \"even through\" -\u003e \"even though\".",
+      "parentUuid": "4b4b44a3_e79cf184",
+      "revId": "c5900b95ea061b6091ef793593d65d38fff0ef5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
