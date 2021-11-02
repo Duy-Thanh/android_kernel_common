@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "530f8d98_3f337876",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-11-02T14:31:27Z",
+      "side": 1,
+      "message": "Hmm, it would be a bit nicer to have a kind of special \u0027memblock\u0027 type for these as the existing machinery would just work, but I guess this should be good enough for now.",
+      "revId": "71f8a805935bc2c55996b54013ecd3bee57bc7c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ee7bcf0_84ceb771",
+        "filename": "arch/arm64/include/asm/kvm_hyp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-11-02T14:31:27Z",
+      "side": 1,
+      "message": "Please just forward declare that struct here instead of moving it to avoid merge conflicts in mem_protect.c as much as possible.",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 2
+      },
+      "revId": "71f8a805935bc2c55996b54013ecd3bee57bc7c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
