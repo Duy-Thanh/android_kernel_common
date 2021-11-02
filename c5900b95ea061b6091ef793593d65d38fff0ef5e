@@ -16,6 +16,24 @@
       "message": "Why not using the existing trace_pelt_se_tp() tracepoint in __update_load_avg_blocked_se()?",
       "revId": "c5900b95ea061b6091ef793593d65d38fff0ef5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4e39fcf_499d9e62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1445936
+      },
+      "writtenOn": "2021-11-02T14:44:39Z",
+      "side": 1,
+      "message": "The trace_pelt_se_tp is not suitable, since our module\u0027s logic need to do something work when knowing if change of load-avg value on-runqueue tasks or not even through it\u0027s not pass __update_load_sum condition.",
+      "parentUuid": "143b3126_28538c56",
+      "revId": "c5900b95ea061b6091ef793593d65d38fff0ef5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
