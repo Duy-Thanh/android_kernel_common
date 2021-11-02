@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f18dc15e_29fdbb83",
+        "filename": "Documentation/devicetree/bindings/arm/google,s2mpu.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-11-02T14:36:01Z",
+      "side": 1,
+      "message": "Is there a version number we should specify?",
+      "range": {
+        "startLine": 18,
+        "startChar": 20,
+        "endLine": 18,
+        "endChar": 25
+      },
+      "revId": "fe30900c0a7e61b95f87fc08b496b2166e2a2e99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
