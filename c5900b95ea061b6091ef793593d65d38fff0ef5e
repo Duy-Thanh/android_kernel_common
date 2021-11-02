@@ -70,6 +70,24 @@
       "parentUuid": "4b4b44a3_e79cf184",
       "revId": "c5900b95ea061b6091ef793593d65d38fff0ef5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e22de687_ad6017c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-11-02T15:19:01Z",
+      "side": 1,
+      "message": "Could you please explain why it is insufficient? This tracepoint has been added upstream precisely to allow modules to monitor load-tracking changes, so it\u0027d be interesting to see if we\u0027re missing something there, thanks.",
+      "parentUuid": "f9dd2e9c_b2fc3fde",
+      "revId": "c5900b95ea061b6091ef793593d65d38fff0ef5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
