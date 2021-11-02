@@ -39,6 +39,30 @@
       },
       "revId": "71f8a805935bc2c55996b54013ecd3bee57bc7c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8434440f_8aafb0c0",
+        "filename": "arch/arm64/include/asm/kvm_hyp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-11-02T17:26:11Z",
+      "side": 1,
+      "message": "How will the driver get the declaration?",
+      "parentUuid": "4ee7bcf0_84ceb771",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 2
+      },
+      "revId": "71f8a805935bc2c55996b54013ecd3bee57bc7c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
