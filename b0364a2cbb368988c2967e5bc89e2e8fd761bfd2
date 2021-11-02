@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5cf6a6d_5299bdf9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-02T14:41:18Z",
+      "side": 1,
+      "message": "this all should not be part of the commit message 😞",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 0
+      },
+      "revId": "b0364a2cbb368988c2967e5bc89e2e8fd761bfd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
