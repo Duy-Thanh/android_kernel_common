@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "143b3126_28538c56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-11-02T13:50:45Z",
+      "side": 1,
+      "message": "Why not using the existing trace_pelt_se_tp() tracepoint in __update_load_avg_blocked_se()?",
+      "revId": "c5900b95ea061b6091ef793593d65d38fff0ef5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
