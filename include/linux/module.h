@@ -65,6 +65,7 @@ struct module_version_attribute {
 	struct module_attribute mattr;
 	const char *module_name;
 	const char *version;
+	const char *version2;
 };
 
 extern ssize_t __modver_version_show(struct module_attribute *,
