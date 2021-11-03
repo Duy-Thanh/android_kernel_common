@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "264606df_4af5cff9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-11-03T10:51:00Z",
+      "side": 1,
+      "message": "Nits...\n\nIf it\u0027s a regex why not escape the \u0027.\u0027 and end with a \u0027$\u0027?\nA tracking bug would be nice. Or a TODO comment to say to revert.\n\nBut I appreciate that this is a quick stop-gap measure.\n\nI cannot CR+N in any case.",
+      "revId": "ba739c05ff7a5db43b1f4db47dc1daa182439eb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
