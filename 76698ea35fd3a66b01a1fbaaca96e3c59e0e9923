@@ -51,6 +51,24 @@
       "parentUuid": "5d6dccac_784b2873",
       "revId": "76698ea35fd3a66b01a1fbaaca96e3c59e0e9923",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a68dbc1a_3b53a4cb",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5314,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-11-03T12:02:34Z",
+      "side": 1,
+      "message": "I would argue that it is worth it to acknowledge the change with an abi.xml update if the actual effect on the ABI is harmless, we should rather override the tooling in this case instead of adding dead code that might accidentally get used.\n\nI want one more pair of eyes on this though.",
+      "parentUuid": "622de82e_10cde99a",
+      "revId": "76698ea35fd3a66b01a1fbaaca96e3c59e0e9923",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
