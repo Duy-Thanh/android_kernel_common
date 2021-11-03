@@ -87,6 +87,23 @@
       "parentUuid": "66a94cb5_2349f183",
       "revId": "75411a8db711313c2684a13cee2ead1e66804799",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9afeb356_ef3c9888",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-03T08:58:07Z",
+      "side": 1,
+      "message": "let me replace this with an \"abi clean\" version later today...",
+      "revId": "75411a8db711313c2684a13cee2ead1e66804799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
