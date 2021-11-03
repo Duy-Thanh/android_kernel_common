@@ -87,6 +87,30 @@
       },
       "revId": "71f8a805935bc2c55996b54013ecd3bee57bc7c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cc856ae_275a9458",
+        "filename": "arch/arm64/include/asm/kvm_hyp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-11-03T13:44:18Z",
+      "side": 1,
+      "message": "I\u0027ve gone and changed this to pass two pointers. I think you\u0027re right, it will save us rebasing time.",
+      "parentUuid": "2bec987e_08761fd8",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 2
+      },
+      "revId": "71f8a805935bc2c55996b54013ecd3bee57bc7c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
