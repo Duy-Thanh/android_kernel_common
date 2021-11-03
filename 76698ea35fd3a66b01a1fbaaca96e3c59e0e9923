@@ -16,6 +16,23 @@
       "message": "checkpatch warning can be ignored as referenced commit is in the `android-mainline` branch.",
       "revId": "76698ea35fd3a66b01a1fbaaca96e3c59e0e9923",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d6dccac_784b2873",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5314,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-11-03T10:34:09Z",
+      "side": 1,
+      "message": "can we give this an artificial name to avoid accidental use? All we care about is that the struct is the same, renaming should be ok.\n\nDO_NOT_USE_mgmt_registration_lock ?",
+      "revId": "76698ea35fd3a66b01a1fbaaca96e3c59e0e9923",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
