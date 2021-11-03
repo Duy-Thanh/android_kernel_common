@@ -87,6 +87,24 @@
       "parentUuid": "a68dbc1a_3b53a4cb",
       "revId": "76698ea35fd3a66b01a1fbaaca96e3c59e0e9923",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "132afd98_34ee8db4",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5314,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-03T14:46:48Z",
+      "side": 1,
+      "message": "This lock is only touched by the wifi core, no module should ever be touching it.  no in-tree driver touches it, so we should be very safe.\n\nNote that this fix is being proposed also for 5.10 as it has been seen by vendors and they want the fix, and they have external wifi modules 😊\n\nSee https://android-review.googlesource.com/c/kernel/common/+/1873114 for details on the backport.",
+      "parentUuid": "9059ac7a_caafbc38",
+      "revId": "76698ea35fd3a66b01a1fbaaca96e3c59e0e9923",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
