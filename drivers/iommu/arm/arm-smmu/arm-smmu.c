@@ -1207,7 +1207,7 @@ static int arm_smmu_map_pages(struct iommu_domain *domain, unsigned long iova,
 	if (!ops)
 		return -ENODEV;
 
-	arm_smmu_rpm_get(smmu);
+	arm_smmu_rpm_get(smmu);;
 	ret = ops->map_pages(ops, iova, paddr, pgsize, pgcount, prot, gfp, mapped);
 	arm_smmu_rpm_put(smmu);
 
