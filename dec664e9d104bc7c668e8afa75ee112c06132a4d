@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2372367c_f87d4a86",
+        "filename": "crypto/fips140-module.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-11-03T11:51:27Z",
+      "side": 1,
+      "message": "that applies now everywhere, should we make this more scoped?",
+      "revId": "dec664e9d104bc7c668e8afa75ee112c06132a4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
