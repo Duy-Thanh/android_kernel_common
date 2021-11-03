@@ -16,6 +16,24 @@
       "message": "that applies now everywhere, should we make this more scoped?",
       "revId": "dec664e9d104bc7c668e8afa75ee112c06132a4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4071ea3_12542636",
+        "filename": "crypto/fips140-module.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-11-03T16:21:19Z",
+      "side": 1,
+      "message": "It only applies to this specific .c source file, which is what we want.  The reason we define __DISABLE_EXPORTS when building the module is because we\u0027re using some unmodified upstream source files, and we don\u0027t want any symbols exported from them even when EXPORT_SYMBOL* is present in the upstream code.  This file is different because it\u0027s manually written just for this module, so we can simply just not use EXPORT_SYMBOL* where it isn\u0027t wanted.",
+      "parentUuid": "2372367c_f87d4a86",
+      "revId": "dec664e9d104bc7c668e8afa75ee112c06132a4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
