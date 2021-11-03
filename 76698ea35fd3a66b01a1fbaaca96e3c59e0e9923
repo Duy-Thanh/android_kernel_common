@@ -105,6 +105,24 @@
       "parentUuid": "9059ac7a_caafbc38",
       "revId": "76698ea35fd3a66b01a1fbaaca96e3c59e0e9923",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa6dacff_2912efce",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5314,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-03T16:59:31Z",
+      "side": 1,
+      "message": "Makes me nervous, but ok, it *should* be safe. I guess we\u0027ll hear about it if there are issues.",
+      "parentUuid": "132afd98_34ee8db4",
+      "revId": "76698ea35fd3a66b01a1fbaaca96e3c59e0e9923",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
