@@ -33,6 +33,24 @@
       "message": "can we give this an artificial name to avoid accidental use? All we care about is that the struct is the same, renaming should be ok.\n\nDO_NOT_USE_mgmt_registration_lock ?",
       "revId": "76698ea35fd3a66b01a1fbaaca96e3c59e0e9923",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "622de82e_10cde99a",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5314,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-03T11:49:22Z",
+      "side": 1,
+      "message": "renaming will also require a .xml update, like the genksyms change listed in the changelog.  If we are ok with that, I will do the genksyms change as that will just remove the field entirely which will make it obvious it can not be used as it will not be present in the normal builds 😊",
+      "parentUuid": "5d6dccac_784b2873",
+      "revId": "76698ea35fd3a66b01a1fbaaca96e3c59e0e9923",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
