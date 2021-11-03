@@ -33,6 +33,42 @@
       "message": "why not have this come in through the stable kernel merges instead?",
       "revId": "75411a8db711313c2684a13cee2ead1e66804799",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66a94cb5_2349f183",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1302614
+      },
+      "writtenOn": "2021-11-03T06:56:46Z",
+      "side": 1,
+      "message": "Thanks Greg, Can you please provide schedule for this change to come into android12-5.10 through stable kernel merge process",
+      "parentUuid": "11ae763d_d093ccf0",
+      "revId": "75411a8db711313c2684a13cee2ead1e66804799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "450d577a_ac5371e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1302614
+      },
+      "writtenOn": "2021-11-03T06:56:46Z",
+      "side": 1,
+      "message": "Thanks Todd Kjos for reviewing the changes.\n\nWith https://android-review.googlesource.com/c/kernel/common/+/1743474\n\ncfg80211 changes shouldn\u0027t cause GKI errors right since they are made as modules. Sorry if I am missing something.",
+      "parentUuid": "367ef714_627a89ea",
+      "revId": "75411a8db711313c2684a13cee2ead1e66804799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
