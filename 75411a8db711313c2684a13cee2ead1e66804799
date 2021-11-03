@@ -104,6 +104,42 @@
       "message": "let me replace this with an \"abi clean\" version later today...",
       "revId": "75411a8db711313c2684a13cee2ead1e66804799",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a5444ec_36262717",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-03T10:15:15Z",
+      "side": 1,
+      "message": "abi fixed in follow-on patch.",
+      "parentUuid": "450d577a_ac5371e5",
+      "revId": "75411a8db711313c2684a13cee2ead1e66804799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4f13b2c_44459843",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-03T10:15:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7030f25a_eb7c8b19",
+      "revId": "75411a8db711313c2684a13cee2ead1e66804799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
