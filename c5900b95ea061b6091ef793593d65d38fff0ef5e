@@ -88,6 +88,24 @@
       "parentUuid": "f9dd2e9c_b2fc3fde",
       "revId": "c5900b95ea061b6091ef793593d65d38fff0ef5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79bc2d2d_ed1ea79b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1445936
+      },
+      "writtenOn": "2021-11-03T03:05:36Z",
+      "side": 1,
+      "message": "Hi,\n\nIn our case, the reason why trace_pelt_se_tp is insufficient is that\nit doesn\u0027t not record old value(e.g. util_avg) to know what delta before\nand after change.",
+      "parentUuid": "e22de687_ad6017c0",
+      "revId": "c5900b95ea061b6091ef793593d65d38fff0ef5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
