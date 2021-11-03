@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49f7e4c8_c46b7b7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-11-03T16:18:18Z",
+      "side": 1,
+      "message": "This fixes the previous wrong backport. Bart, please check -stable as well.",
+      "revId": "4b72b2280120b3556f2edafd169987607c442a1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
