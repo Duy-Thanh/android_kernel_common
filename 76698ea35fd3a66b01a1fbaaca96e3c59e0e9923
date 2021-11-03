@@ -69,6 +69,24 @@
       "parentUuid": "622de82e_10cde99a",
       "revId": "76698ea35fd3a66b01a1fbaaca96e3c59e0e9923",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9059ac7a_caafbc38",
+        "filename": "include/net/cfg80211.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5314,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-03T14:38:26Z",
+      "side": 1,
+      "message": "Since this is part of the KMI, isn\u0027t there a risk that a module might try to lock it (we can\u0027t expect everyone to go back and change their vendor code for this). Do we need to add code to initialize it properly so lockers won\u0027t get unexpected behavior?",
+      "parentUuid": "a68dbc1a_3b53a4cb",
+      "revId": "76698ea35fd3a66b01a1fbaaca96e3c59e0e9923",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
