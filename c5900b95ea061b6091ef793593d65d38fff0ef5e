@@ -160,6 +160,24 @@
       "parentUuid": "bbecb044_7e56c11f",
       "revId": "c5900b95ea061b6091ef793593d65d38fff0ef5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50b26810_229a871e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1445936
+      },
+      "writtenOn": "2021-11-04T09:55:42Z",
+      "side": 1,
+      "message": "Thanks for your suggestion. However\n,another reason is needed to use flags(second arg. in vendor hook)\nfor difference logic flow.\ne.g. caller is from select_task_rq or update_load_avg function.",
+      "parentUuid": "d88dd132_d1cbe667",
+      "revId": "c5900b95ea061b6091ef793593d65d38fff0ef5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
