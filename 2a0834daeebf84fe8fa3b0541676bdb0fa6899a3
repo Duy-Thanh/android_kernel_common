@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "197a8441_98b8efcc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-04T07:32:44Z",
+      "side": 1,
+      "message": "commit messages need text, and should never be blank.\n\nPlease read the upstream kernel documentation for how to write a good changelog text.",
+      "revId": "2a0834daeebf84fe8fa3b0541676bdb0fa6899a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
