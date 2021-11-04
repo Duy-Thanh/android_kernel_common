@@ -661,9 +661,13 @@ int __mmu_notifier_register(struct mmu_notifier *subscription,
 		INIT_HLIST_HEAD(&subscriptions->deferred_list);
 	}
 
+	percpu_down_write(mm->mmu_notifier_lock);
+
 	ret = mm_take_all_locks(mm);
-	if (unlikely(ret))
+	if (unlikely(ret)) {
+		percpu_up_write(mm->mmu_notifier_lock);
 		goto out_clean;
+	}
 
 	/*
 	 * Serialize the update against mmu_notifier_unregister. A
@@ -698,6 +702,7 @@ int __mmu_notifier_register(struct mmu_notifier *subscription,
 		mm->notifier_subscriptions->has_itree = true;
 
 	mm_drop_all_locks(mm);
+	percpu_up_write(mm->mmu_notifier_lock);
 	BUG_ON(atomic_read(&mm->mm_users) <= 0);
 	return 0;
 
