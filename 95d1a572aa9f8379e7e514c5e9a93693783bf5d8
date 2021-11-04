@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b307ca42_e2b88e9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-11-04T17:15:21Z",
+      "side": 1,
+      "message": "Upstreaming conversation has moved to bug, if this needs to be applied to 5.15 or mainline we need to close that out. Permitting for a13-5.10 given landing in a12-5.10.",
+      "revId": "95d1a572aa9f8379e7e514c5e9a93693783bf5d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
