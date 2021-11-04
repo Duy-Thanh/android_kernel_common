@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9091bab0_57873d3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-11-04T01:23:44Z",
+      "side": 1,
+      "message": "Hi Suren, I would like to take these patches to android13-5.15 to unblock Qualcomm. In case we are successful in upstreaming a newer version, I will revert these and work with partners to integrate the newer version. Please do let me know if there are any objections or concerns. Thank you!\n\nRegards,\nHridya",
+      "revId": "17e70ffd740c26697463729b41b4301ef0f37c9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
