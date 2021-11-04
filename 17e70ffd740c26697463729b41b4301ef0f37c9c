@@ -34,6 +34,24 @@
       "parentUuid": "9091bab0_57873d3b",
       "revId": "17e70ffd740c26697463729b41b4301ef0f37c9c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9fc2d48_cd57d202",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-11-04T11:06:09Z",
+      "side": 1,
+      "message": "yes, all good, TH setup is done",
+      "parentUuid": "ab7b73a1_46aa6b3d",
+      "revId": "17e70ffd740c26697463729b41b4301ef0f37c9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
