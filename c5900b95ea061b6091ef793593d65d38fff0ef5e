@@ -142,6 +142,24 @@
       "parentUuid": "79bc2d2d_ed1ea79b",
       "revId": "c5900b95ea061b6091ef793593d65d38fff0ef5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d88dd132_d1cbe667",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-11-04T09:12:43Z",
+      "side": 1,
+      "message": "\u003e In our case, the reason why trace_pelt_se_tp is insufficient is that\nit doesn\u0027t not record old value(e.g. util_avg) to know what delta before\nand after change.\n\nRight, I see. I seem to remember having this discussion in the past, and one solution was to have the vendor module attached to trace_pelt_se_tp() use one the VENDOR fields in task_struct to save a copy of the util_avg. That way every time trace_pelt_se_tp is called on a task with an updated util_avg, the module can lookup the old value in the VENDOR field. Any reason why that wouldn\u0027t work here? Thanks",
+      "parentUuid": "bbecb044_7e56c11f",
+      "revId": "c5900b95ea061b6091ef793593d65d38fff0ef5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
