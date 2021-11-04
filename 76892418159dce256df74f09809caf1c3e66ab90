@@ -70,6 +70,30 @@
       },
       "revId": "76892418159dce256df74f09809caf1c3e66ab90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fe50b25_560990cf",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 1
+      },
+      "lineNbr": 1432,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-11-04T16:48:05Z",
+      "side": 1,
+      "message": "I don\u0027t see b/192052083 talking about needing memory_cgrp_subsys. Maybe your requirements changed? If so, could you add some explanation into b/204860045 ?",
+      "parentUuid": "23ba2fc1_95f37ac8",
+      "range": {
+        "startLine": 1432,
+        "startChar": 2,
+        "endLine": 1432,
+        "endChar": 20
+      },
+      "revId": "76892418159dce256df74f09809caf1c3e66ab90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
