@@ -142,6 +142,30 @@
       },
       "revId": "81416de2c233a2bbef91c38b6aacace2597b17fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e8f4134_7066d6ff",
+        "filename": "android/abi_gki_aarch64_generic",
+        "patchSetId": 2
+      },
+      "lineNbr": 1652,
+      "author": {
+        "id": 1345812
+      },
+      "writtenOn": "2021-11-04T06:26:52Z",
+      "side": 1,
+      "message": "And reuse this CL to add \u0027android_debug_symbol\u0027 to ABI.",
+      "parentUuid": "bc8985e6_cfbd088f",
+      "range": {
+        "startLine": 1652,
+        "startChar": 2,
+        "endLine": 1652,
+        "endChar": 10
+      },
+      "revId": "81416de2c233a2bbef91c38b6aacace2597b17fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
