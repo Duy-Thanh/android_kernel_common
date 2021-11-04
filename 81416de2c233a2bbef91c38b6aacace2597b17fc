@@ -118,6 +118,30 @@
       },
       "revId": "81416de2c233a2bbef91c38b6aacace2597b17fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc8985e6_cfbd088f",
+        "filename": "android/abi_gki_aarch64_generic",
+        "patchSetId": 2
+      },
+      "lineNbr": 1652,
+      "author": {
+        "id": 1345812
+      },
+      "writtenOn": "2021-11-04T06:26:11Z",
+      "side": 1,
+      "message": "Got it, thanks. Added \"show_mem\" to debugging symbol module at aosp/1881168.",
+      "parentUuid": "434fb702_770a0300",
+      "range": {
+        "startLine": 1652,
+        "startChar": 2,
+        "endLine": 1652,
+        "endChar": 10
+      },
+      "revId": "81416de2c233a2bbef91c38b6aacace2597b17fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
