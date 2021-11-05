@@ -240,8 +240,8 @@ struct mmu_notifier {
 	struct mm_struct *mm;
 	struct rcu_head rcu;
 	unsigned int users;
+	unsigned long seq_no;
 
-	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
 };
 
@@ -279,6 +279,7 @@ struct mmu_notifier_range {
 	unsigned flags;
 	enum mmu_notifier_event event;
 	void *migrate_pgmap_owner;
+	unsigned long max_seq_no;
 };
 
 static inline int mm_has_notifiers(struct mm_struct *mm)
@@ -528,6 +529,7 @@ static inline void mmu_notifier_range_init(struct mmu_notifier_range *range,
 	range->start = start;
 	range->end = end;
 	range->flags = flags;
+	range->max_seq_no = 0;
 }
 
 static inline void mmu_notifier_range_init_migrate(

@@ -45,6 +45,7 @@ struct mmu_notifier_subscriptions {
 	struct rb_root_cached itree;
 	wait_queue_head_t wq;
 	struct hlist_head deferred_list;
+	unsigned long next_seq_no;
 };
 
 /*
@@ -477,6 +478,7 @@ static int mn_hlist_invalidate_range_start(
 	struct mmu_notifier_range *range)
 {
 	struct mmu_notifier *subscription;
+	unsigned long max_seq_no = 0;
 	int ret = 0;
 	int id;
 
@@ -485,6 +487,8 @@ static int mn_hlist_invalidate_range_start(
 				 srcu_read_lock_held(&srcu)) {
 		const struct mmu_notifier_ops *ops = subscription->ops;
 
+		if (max_seq_no < subscription->seq_no)
+			max_seq_no = subscription->seq_no;
 		if (ops->invalidate_range_start) {
 			int _ret;
 
@@ -529,6 +533,7 @@ static int mn_hlist_invalidate_range_start(
 		}
 	}
 	srcu_read_unlock(&srcu, id);
+	range->max_seq_no = max_seq_no;
 
 	return ret;
 }
@@ -559,6 +564,13 @@ mn_hlist_invalidate_end(struct mmu_notifier_subscriptions *subscriptions,
 	id = srcu_read_lock(&srcu);
 	hlist_for_each_entry_rcu(subscription, &subscriptions->list, hlist,
 				 srcu_read_lock_held(&srcu)) {
+		/*
+		 * Skip subscriptions which were created after
+		 * mmu_notifier_invalidate_range_start had been called.
+		 */
+		if (subscription->seq_no > range->max_seq_no)
+			continue;
+
 		/*
 		 * Call invalidate_range here too to avoid the need for the
 		 * subsystem of having to register an invalidate_range_end
@@ -659,6 +671,11 @@ int __mmu_notifier_register(struct mmu_notifier *subscription,
 		subscriptions->itree = RB_ROOT_CACHED;
 		init_waitqueue_head(&subscriptions->wq);
 		INIT_HLIST_HEAD(&subscriptions->deferred_list);
+		/*
+		 * Empty subscriptions produce max_seq_no=0, therefore start
+		 * from 1.
+		 */
+		subscriptions->next_seq_no = 1;
 	}
 
 	ret = mm_take_all_locks(mm);
@@ -691,6 +708,8 @@ int __mmu_notifier_register(struct mmu_notifier *subscription,
 		subscription->users = 1;
 
 		spin_lock(&mm->notifier_subscriptions->lock);
+		subscription->seq_no = mm->notifier_subscriptions->next_seq_no;
+		mm->notifier_subscriptions->next_seq_no++;
 		hlist_add_head_rcu(&subscription->hlist,
 				   &mm->notifier_subscriptions->list);
 		spin_unlock(&mm->notifier_subscriptions->lock);
