@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a34576a1_e05e35ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-11-06T20:31:15Z",
+      "side": 1,
+      "message": "Actually, this approach does not work for the unregister case.",
+      "revId": "c49c572a325c40feb20e7b66954fc08d1b5f8bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
