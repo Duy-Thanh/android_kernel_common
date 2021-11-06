@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0ea00ed_c1394597",
+        "filename": "include/linux/mmu_notifier.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-06T11:58:39Z",
+      "side": 0,
+      "message": "this is reserved for future LTS merge issues for the next 5 years, please do not use it for anything else at this point in time.",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 25
+      },
+      "revId": "ea440234c7273fa5030791b6d5a7a4d59c8a81c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
