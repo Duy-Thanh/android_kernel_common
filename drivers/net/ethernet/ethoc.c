@@ -802,8 +802,8 @@ static int ethoc_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 
 static void ethoc_do_set_mac_address(struct net_device *dev)
 {
+	const unsigned char *mac = dev->dev_addr;
 	struct ethoc *priv = netdev_priv(dev);
-	unsigned char *mac = dev->dev_addr;
 
 	ethoc_write(priv, MAC_ADDR0, (mac[2] << 24) | (mac[3] << 16) |
 				     (mac[4] <<  8) | (mac[5] <<  0));
@@ -816,7 +816,7 @@ static int ethoc_set_mac_address(struct net_device *dev, void *p)
 
 	if (!is_valid_ether_addr(addr->sa_data))
 		return -EADDRNOTAVAIL;
-	memcpy(dev->dev_addr, addr->sa_data, ETH_ALEN);
+	eth_hw_addr_set(dev, addr->sa_data);
 	ethoc_do_set_mac_address(dev);
 	return 0;
 }
@@ -1144,18 +1144,22 @@ static int ethoc_probe(struct platform_device *pdev)
 
 	/* Allow the platform setup code to pass in a MAC address. */
 	if (pdata) {
-		ether_addr_copy(netdev->dev_addr, pdata->hwaddr);
+		eth_hw_addr_set(netdev, pdata->hwaddr);
 		priv->phy_id = pdata->phy_id;
 	} else {
-		of_get_mac_address(pdev->dev.of_node, netdev->dev_addr);
+		of_get_ethdev_address(pdev->dev.of_node, netdev);
 		priv->phy_id = -1;
 	}
 
 	/* Check that the given MAC address is valid. If it isn't, read the
 	 * current MAC from the controller.
 	 */
-	if (!is_valid_ether_addr(netdev->dev_addr))
-		ethoc_get_mac_address(netdev, netdev->dev_addr);
+	if (!is_valid_ether_addr(netdev->dev_addr)) {
+		u8 addr[ETH_ALEN];
+
+		ethoc_get_mac_address(netdev, addr);
+		eth_hw_addr_set(netdev, addr);
+	}
 
 	/* Check the MAC again for validity, if it still isn't choose and
 	 * program a random one.

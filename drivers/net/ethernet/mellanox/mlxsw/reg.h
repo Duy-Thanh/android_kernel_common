@@ -4951,7 +4951,7 @@ enum mlxsw_reg_ppcnt_grp {
 	MLXSW_REG_PPCNT_DISCARD_CNT = 0x6,
 	MLXSW_REG_PPCNT_PRIO_CNT = 0x10,
 	MLXSW_REG_PPCNT_TC_CNT = 0x11,
-	MLXSW_REG_PPCNT_TC_CONG_TC = 0x13,
+	MLXSW_REG_PPCNT_TC_CONG_CNT = 0x13,
 };
 
 /* reg_ppcnt_grp
@@ -5371,7 +5371,7 @@ MLXSW_ITEM64(reg, ppcnt, tx_pause_duration,
 MLXSW_ITEM64(reg, ppcnt, tx_pause_transition,
 	     MLXSW_REG_PPCNT_COUNTERS_OFFSET + 0x70, 0, 64);
 
-/* Ethernet Per Traffic Group Counters */
+/* Ethernet Per Traffic Class Counters */
 
 /* reg_ppcnt_tc_transmit_queue
  * Contains the transmit queue depth in cells of traffic class
@@ -5397,6 +5397,12 @@ MLXSW_ITEM64(reg, ppcnt, tc_no_buffer_discard_uc,
  */
 MLXSW_ITEM64(reg, ppcnt, wred_discard,
 	     MLXSW_REG_PPCNT_COUNTERS_OFFSET + 0x00, 0, 64);
+
+/* reg_ppcnt_ecn_marked_tc
+ * Access: RO
+ */
+MLXSW_ITEM64(reg, ppcnt, ecn_marked_tc,
+	     MLXSW_REG_PPCNT_COUNTERS_OFFSET + 0x08, 0, 64);
 
 static inline void mlxsw_reg_ppcnt_pack(char *payload, u8 local_port,
 					enum mlxsw_reg_ppcnt_grp grp,
@@ -5946,6 +5952,55 @@ static inline void mlxsw_reg_pddr_pack(char *payload, u8 local_port,
 	mlxsw_reg_pddr_page_select_set(payload, page_select);
 }
 
+/* PMMP - Port Module Memory Map Properties Register
+ * -------------------------------------------------
+ * The PMMP register allows to override the module memory map advertisement.
+ * The register can only be set when the module is disabled by PMAOS register.
+ */
+#define MLXSW_REG_PMMP_ID 0x5044
+#define MLXSW_REG_PMMP_LEN 0x2C
+
+MLXSW_REG_DEFINE(pmmp, MLXSW_REG_PMMP_ID, MLXSW_REG_PMMP_LEN);
+
+/* reg_pmmp_module
+ * Module number.
+ * Access: Index
+ */
+MLXSW_ITEM32(reg, pmmp, module, 0x00, 16, 8);
+
+/* reg_pmmp_sticky
+ * When set, will keep eeprom_override values after plug-out event.
+ * Access: OP
+ */
+MLXSW_ITEM32(reg, pmmp, sticky, 0x00, 0, 1);
+
+/* reg_pmmp_eeprom_override_mask
+ * Write mask bit (negative polarity).
+ * 0 - Allow write
+ * 1 - Ignore write
+ * On write, indicates which of the bits from eeprom_override field are
+ * updated.
+ * Access: WO
+ */
+MLXSW_ITEM32(reg, pmmp, eeprom_override_mask, 0x04, 16, 16);
+
+enum {
+	/* Set module to low power mode */
+	MLXSW_REG_PMMP_EEPROM_OVERRIDE_LOW_POWER_MASK = BIT(8),
+};
+
+/* reg_pmmp_eeprom_override
+ * Override / ignore EEPROM advertisement properties bitmask
+ * Access: RW
+ */
+MLXSW_ITEM32(reg, pmmp, eeprom_override, 0x04, 0, 16);
+
+static inline void mlxsw_reg_pmmp_pack(char *payload, u8 module)
+{
+	MLXSW_REG_ZERO(pmmp, payload);
+	mlxsw_reg_pmmp_module_set(payload, module);
+}
+
 /* PLLP - Port Local port to Label Port mapping Register
  * -----------------------------------------------------
  * The PLLP register returns the mapping from Local Port into Label Port.
@@ -6471,6 +6526,12 @@ MLXSW_ITEM32(reg, ritr, mtu, 0x34, 0, 16);
  */
 MLXSW_ITEM32(reg, ritr, if_swid, 0x08, 24, 8);
 
+/* reg_ritr_if_mac_profile_id
+ * MAC msb profile ID.
+ * Access: RW
+ */
+MLXSW_ITEM32(reg, ritr, if_mac_profile_id, 0x10, 16, 4);
+
 /* reg_ritr_if_mac
  * Router interface MAC address.
  * In Spectrum, all MAC addresses must have the same 38 MSBits.
@@ -6732,6 +6793,23 @@ mlxsw_reg_ritr_loopback_ipip4_pack(char *payload,
 	mlxsw_reg_ritr_loopback_ipip_common_pack(payload, ipip_type, options,
 						 uvr_id, underlay_rif, gre_key);
 	mlxsw_reg_ritr_loopback_ipip_usip4_set(payload, usip);
+}
+
+static inline void
+mlxsw_reg_ritr_loopback_ipip6_pack(char *payload,
+				   enum mlxsw_reg_ritr_loopback_ipip_type ipip_type,
+				   enum mlxsw_reg_ritr_loopback_ipip_options options,
+				   u16 uvr_id, u16 underlay_rif,
+				   const struct in6_addr *usip, u32 gre_key)
+{
+	enum mlxsw_reg_ritr_loopback_protocol protocol =
+		MLXSW_REG_RITR_LOOPBACK_PROTOCOL_IPIP_IPV6;
+
+	mlxsw_reg_ritr_loopback_protocol_set(payload, protocol);
+	mlxsw_reg_ritr_loopback_ipip_common_pack(payload, ipip_type, options,
+						 uvr_id, underlay_rif, gre_key);
+	mlxsw_reg_ritr_loopback_ipip_usip6_memcpy_to(payload,
+						     (const char *)usip);
 }
 
 /* RTAR - Router TCAM Allocation Register
@@ -7000,6 +7078,12 @@ static inline void mlxsw_reg_ratr_ipip4_entry_pack(char *payload, u32 ipv4_udip)
 {
 	mlxsw_reg_ratr_ipip_type_set(payload, MLXSW_REG_RATR_IPIP_TYPE_IPV4);
 	mlxsw_reg_ratr_ipip_ipv4_udip_set(payload, ipv4_udip);
+}
+
+static inline void mlxsw_reg_ratr_ipip6_entry_pack(char *payload, u32 ipv6_ptr)
+{
+	mlxsw_reg_ratr_ipip_type_set(payload, MLXSW_REG_RATR_IPIP_TYPE_IPV6);
+	mlxsw_reg_ratr_ipip_ipv6_ptr_set(payload, ipv6_ptr);
 }
 
 static inline void mlxsw_reg_ratr_counter_pack(char *payload, u64 counter_index,
@@ -8187,17 +8271,69 @@ static inline void mlxsw_reg_rtdp_pack(char *payload,
 }
 
 static inline void
-mlxsw_reg_rtdp_ipip4_pack(char *payload, u16 irif,
-			  enum mlxsw_reg_rtdp_ipip_sip_check sip_check,
-			  unsigned int type_check, bool gre_key_check,
-			  u32 ipv4_usip, u32 expected_gre_key)
+mlxsw_reg_rtdp_ipip_pack(char *payload, u16 irif,
+			 enum mlxsw_reg_rtdp_ipip_sip_check sip_check,
+			 unsigned int type_check, bool gre_key_check,
+			 u32 expected_gre_key)
 {
 	mlxsw_reg_rtdp_ipip_irif_set(payload, irif);
 	mlxsw_reg_rtdp_ipip_sip_check_set(payload, sip_check);
 	mlxsw_reg_rtdp_ipip_type_check_set(payload, type_check);
 	mlxsw_reg_rtdp_ipip_gre_key_check_set(payload, gre_key_check);
-	mlxsw_reg_rtdp_ipip_ipv4_usip_set(payload, ipv4_usip);
 	mlxsw_reg_rtdp_ipip_expected_gre_key_set(payload, expected_gre_key);
+}
+
+static inline void
+mlxsw_reg_rtdp_ipip4_pack(char *payload, u16 irif,
+			  enum mlxsw_reg_rtdp_ipip_sip_check sip_check,
+			  unsigned int type_check, bool gre_key_check,
+			  u32 ipv4_usip, u32 expected_gre_key)
+{
+	mlxsw_reg_rtdp_ipip_pack(payload, irif, sip_check, type_check,
+				 gre_key_check, expected_gre_key);
+	mlxsw_reg_rtdp_ipip_ipv4_usip_set(payload, ipv4_usip);
+}
+
+static inline void
+mlxsw_reg_rtdp_ipip6_pack(char *payload, u16 irif,
+			  enum mlxsw_reg_rtdp_ipip_sip_check sip_check,
+			  unsigned int type_check, bool gre_key_check,
+			  u32 ipv6_usip_ptr, u32 expected_gre_key)
+{
+	mlxsw_reg_rtdp_ipip_pack(payload, irif, sip_check, type_check,
+				 gre_key_check, expected_gre_key);
+	mlxsw_reg_rtdp_ipip_ipv6_usip_ptr_set(payload, ipv6_usip_ptr);
+}
+
+/* RIPS - Router IP version Six Register
+ * -------------------------------------
+ * The RIPS register is used to store IPv6 addresses for use by the NVE and
+ * IPinIP
+ */
+#define MLXSW_REG_RIPS_ID 0x8021
+#define MLXSW_REG_RIPS_LEN 0x14
+
+MLXSW_REG_DEFINE(rips, MLXSW_REG_RIPS_ID, MLXSW_REG_RIPS_LEN);
+
+/* reg_rips_index
+ * Index to IPv6 address.
+ * For Spectrum, the index is to the KVD linear.
+ * Access: Index
+ */
+MLXSW_ITEM32(reg, rips, index, 0x00, 0, 24);
+
+/* reg_rips_ipv6
+ * IPv6 address
+ * Access: RW
+ */
+MLXSW_ITEM_BUF(reg, rips, ipv6, 0x04, 16);
+
+static inline void mlxsw_reg_rips_pack(char *payload, u32 index,
+				       const struct in6_addr *ipv6)
+{
+	MLXSW_REG_ZERO(rips, payload);
+	mlxsw_reg_rips_index_set(payload, index);
+	mlxsw_reg_rips_ipv6_memcpy_to(payload, (const char *)ipv6);
 }
 
 /* RATRAD - Router Adjacency Table Activity Dump Register
@@ -10278,6 +10414,39 @@ static inline void mlxsw_reg_mlcr_pack(char *payload, u8 local_port,
 					   MLXSW_REG_MLCR_DURATION_MAX : 0);
 }
 
+/* MCION - Management Cable IO and Notifications Register
+ * ------------------------------------------------------
+ * The MCION register is used to query transceiver modules' IO pins and other
+ * notifications.
+ */
+#define MLXSW_REG_MCION_ID 0x9052
+#define MLXSW_REG_MCION_LEN 0x18
+
+MLXSW_REG_DEFINE(mcion, MLXSW_REG_MCION_ID, MLXSW_REG_MCION_LEN);
+
+/* reg_mcion_module
+ * Module number.
+ * Access: Index
+ */
+MLXSW_ITEM32(reg, mcion, module, 0x00, 16, 8);
+
+enum {
+	MLXSW_REG_MCION_MODULE_STATUS_BITS_PRESENT_MASK = BIT(0),
+	MLXSW_REG_MCION_MODULE_STATUS_BITS_LOW_POWER_MASK = BIT(8),
+};
+
+/* reg_mcion_module_status_bits
+ * Module IO status as defined by SFF.
+ * Access: RO
+ */
+MLXSW_ITEM32(reg, mcion, module_status_bits, 0x04, 0, 16);
+
+static inline void mlxsw_reg_mcion_pack(char *payload, u8 module)
+{
+	MLXSW_REG_ZERO(mcion, payload);
+	mlxsw_reg_mcion_module_set(payload, module);
+}
+
 /* MTPPS - Management Pulse Per Second Register
  * --------------------------------------------
  * This register provides the device PPS capabilities, configure the PPS in and
@@ -12273,6 +12442,7 @@ static const struct mlxsw_reg_info *mlxsw_reg_infos[] = {
 	MLXSW_REG(pmtdb),
 	MLXSW_REG(pmpe),
 	MLXSW_REG(pddr),
+	MLXSW_REG(pmmp),
 	MLXSW_REG(pllp),
 	MLXSW_REG(htgt),
 	MLXSW_REG(hpkt),
@@ -12281,6 +12451,7 @@ static const struct mlxsw_reg_info *mlxsw_reg_infos[] = {
 	MLXSW_REG(rtar),
 	MLXSW_REG(ratr),
 	MLXSW_REG(rtdp),
+	MLXSW_REG(rips),
 	MLXSW_REG(ratrad),
 	MLXSW_REG(rdpm),
 	MLXSW_REG(ricnt),
@@ -12320,6 +12491,7 @@ static const struct mlxsw_reg_info *mlxsw_reg_infos[] = {
 	MLXSW_REG(mgir),
 	MLXSW_REG(mrsr),
 	MLXSW_REG(mlcr),
+	MLXSW_REG(mcion),
 	MLXSW_REG(mtpps),
 	MLXSW_REG(mtutc),
 	MLXSW_REG(mpsc),
