@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f17f7323_7b1943e1",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-11-08T20:57:36Z",
+      "side": 1,
+      "message": "wait, why is it added in 2 places?",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 26
+      },
+      "revId": "ec0137d2f1754e57b34ac2650ecfee46b2b8c798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
