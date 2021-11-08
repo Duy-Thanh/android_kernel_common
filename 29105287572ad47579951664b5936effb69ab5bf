@@ -22,6 +22,30 @@
       },
       "revId": "29105287572ad47579951664b5936effb69ab5bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc3f888f_9bf4d195",
+        "filename": "arch/arm64/configs/defconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-11-08T23:21:59Z",
+      "side": 1,
+      "message": "Treehugger cares about this change. Without this change Treehugger complains that the \"savedefconfig\" output differs from this file.",
+      "parentUuid": "b0c019d3_d34907df",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 24
+      },
+      "revId": "29105287572ad47579951664b5936effb69ab5bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
