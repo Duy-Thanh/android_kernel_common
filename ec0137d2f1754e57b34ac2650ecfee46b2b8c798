@@ -22,6 +22,30 @@
       },
       "revId": "ec0137d2f1754e57b34ac2650ecfee46b2b8c798",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dbbd025_1301fa6d",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-11-08T22:31:42Z",
+      "side": 1,
+      "message": "This has been fixed. Please take another look.",
+      "parentUuid": "f17f7323_7b1943e1",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 26
+      },
+      "revId": "ec0137d2f1754e57b34ac2650ecfee46b2b8c798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
