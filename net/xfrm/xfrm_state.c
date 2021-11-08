@@ -1654,6 +1654,17 @@ struct xfrm_state *xfrm_migrate_state_find(struct xfrm_migrate *m, struct net *n
 }
 EXPORT_SYMBOL(xfrm_migrate_state_find);
 
+
+static inline int get_iphdr_len(u16 family)
+{
+	if (family == AF_INET)
+		return sizeof(struct iphdr);
+
+	return sizeof(struct ipv6hdr);
+}
+
+static int xfrm_set_inner_mode(struct xfrm_state *x);
+
 struct xfrm_state *xfrm_state_migrate(struct xfrm_state *x,
 				      struct xfrm_migrate *m,
 				      struct xfrm_encap_tmpl *encap)
@@ -1666,6 +1677,17 @@ struct xfrm_state *xfrm_state_migrate(struct xfrm_state *x,
 
 	memcpy(&xc->id.daddr, &m->new_daddr, sizeof(xc->id.daddr));
 	memcpy(&xc->props.saddr, &m->new_saddr, sizeof(xc->props.saddr));
+
+	xc->props.family = m->new_family;
+
+	xc->type = xfrm_get_type(xc->id.proto, m->new_family);
+	if (xc->type->init_state(xc))
+		goto error;
+
+	xc->outer_mode.family = m->new_family;
+
+	if (xfrm_set_inner_mode(xc))
+		goto error;
 
 	/* add state */
 	if (xfrm_addr_equal(&x->id.daddr, &m->new_daddr, m->new_family)) {
@@ -2601,18 +2623,10 @@ u32 xfrm_state_mtu(struct xfrm_state *x, int mtu)
 	return mtu;
 }
 
-int __xfrm_init_state(struct xfrm_state *x, bool init_replay, bool offload)
+static int xfrm_set_inner_mode(struct xfrm_state *x)
 {
 	const struct xfrm_mode *inner_mode;
-	const struct xfrm_mode *outer_mode;
 	int family = x->props.family;
-	int err;
-
-	if (family == AF_INET &&
-	    xs_net(x)->ipv4.sysctl_ip_no_pmtu_disc)
-		x->props.flags |= XFRM_STATE_NOPMTUDISC;
-
-	err = -EPROTONOSUPPORT;
 
 	if (x->sel.family != AF_UNSPEC) {
 		inner_mode = xfrm_get_mode(x->props.mode, x->sel.family);
@@ -2646,6 +2660,25 @@ int __xfrm_init_state(struct xfrm_state *x, bool init_replay, bool offload)
 				x->inner_mode_iaf = *inner_mode_iaf;
 		}
 	}
+
+	return 0;
+
+error:
+	return -EPROTONOSUPPORT;
+}
+
+int __xfrm_init_state(struct xfrm_state *x, bool init_replay, bool offload)
+{
+	const struct xfrm_mode *outer_mode;
+	int family = x->props.family;
+	int err;
+
+	if (family == AF_INET &&
+	    xs_net(x)->ipv4.sysctl_ip_no_pmtu_disc)
+		x->props.flags |= XFRM_STATE_NOPMTUDISC;
+
+	if (err = xfrm_set_inner_mode(x))
+		goto error;
 
 	x->type = xfrm_get_type(x->id.proto, family);
 	if (x->type == NULL)
