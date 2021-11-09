@@ -13,6 +13,8 @@
 #include <limits.h>
 #include <errno.h>
 #include <linux/err.h>
+#include <fcntl.h>
+#include <unistd.h>
 #include "libbpf_legacy.h"
 #include "relo_core.h"
 
@@ -193,8 +195,9 @@ enum map_def_parts {
 	MAP_DEF_NUMA_NODE	= 0x080,
 	MAP_DEF_PINNING		= 0x100,
 	MAP_DEF_INNER_MAP	= 0x200,
+	MAP_DEF_MAP_EXTRA	= 0x400,
 
-	MAP_DEF_ALL		= 0x3ff, /* combination of all above */
+	MAP_DEF_ALL		= 0x7ff, /* combination of all above */
 };
 
 struct btf_map_def {
@@ -208,6 +211,7 @@ struct btf_map_def {
 	__u32 map_flags;
 	__u32 numa_node;
 	__u32 pinning;
+	__u64 map_extra;
 };
 
 int parse_btf_map_def(const char *map_name, struct btf *btf,
@@ -302,6 +306,27 @@ struct bpf_prog_load_params {
 };
 
 int libbpf__bpf_prog_load(const struct bpf_prog_load_params *load_attr);
+
+struct bpf_create_map_params {
+	const char *name;
+	enum bpf_map_type map_type;
+	__u32 map_flags;
+	__u32 key_size;
+	__u32 value_size;
+	__u32 max_entries;
+	__u32 numa_node;
+	__u32 btf_fd;
+	__u32 btf_key_type_id;
+	__u32 btf_value_type_id;
+	__u32 map_ifindex;
+	union {
+		__u32 inner_map_fd;
+		__u32 btf_vmlinux_value_type_id;
+	};
+	__u64 map_extra;
+};
+
+int libbpf__bpf_create_map_xattr(const struct bpf_create_map_params *create_attr);
 
 struct btf *btf_get_from_fd(int btf_fd, struct btf *base_btf);
 void btf_get_kernel_prefix_kind(enum bpf_attach_type attach_type,
@@ -466,6 +491,28 @@ static inline bool str_is_empty(const char *s)
 static inline bool is_ldimm64_insn(struct bpf_insn *insn)
 {
 	return insn->code == (BPF_LD | BPF_IMM | BPF_DW);
+}
+
+/* if fd is stdin, stdout, or stderr, dup to a fd greater than 2
+ * Takes ownership of the fd passed in, and closes it if calling
+ * fcntl(fd, F_DUPFD_CLOEXEC, 3).
+ */
+static inline int ensure_good_fd(int fd)
+{
+	int old_fd = fd, saved_errno;
+
+	if (fd < 0)
+		return fd;
+	if (fd < 3) {
+		fd = fcntl(fd, F_DUPFD_CLOEXEC, 3);
+		saved_errno = errno;
+		close(old_fd);
+		if (fd < 0) {
+			pr_warn("failed to dup FD %d to FD > 2: %d\n", old_fd, -saved_errno);
+			errno = saved_errno;
+		}
+	}
+	return fd;
 }
 
 #endif /* __LIBBPF_LIBBPF_INTERNAL_H */
