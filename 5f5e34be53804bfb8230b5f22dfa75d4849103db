@@ -16,6 +16,23 @@
       "message": "cherry pick for GKI Oct respin, would you please review?",
       "revId": "5f5e34be53804bfb8230b5f22dfa75d4849103db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "505a2800_5e90d279",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-11-09T10:42:20Z",
+      "side": 1,
+      "message": "Please add a bug number",
+      "revId": "5f5e34be53804bfb8230b5f22dfa75d4849103db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
