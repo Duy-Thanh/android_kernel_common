@@ -114,8 +114,8 @@ DECLARE_RESTRICTED_HOOK(android_rvh_find_energy_efficient_cpu,
 	TP_ARGS(p, prev_cpu, sync, new_cpu), 1);
 
 DECLARE_RESTRICTED_HOOK(android_rvh_set_iowait,
-	TP_PROTO(struct task_struct *p, int *should_iowait_boost),
-	TP_ARGS(p, should_iowait_boost), 1);
+	TP_PROTO(struct task_struct *p, struct rq *rq, int *should_iowait_boost),
+	TP_ARGS(p, rq, should_iowait_boost), 1);
 
 DECLARE_RESTRICTED_HOOK(android_rvh_cpu_overutilized,
 	TP_PROTO(int cpu, int *overutilized),
