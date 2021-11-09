@@ -16,6 +16,23 @@
       "message": "Please not yet, we need to add padding for these structures if we are going to guarantee stability.\n\nI will work on that next week.",
       "revId": "1a44397c031ef5b6abc393a747ee81fd66fc9412",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f259129a_bf4bca7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-09T07:15:00Z",
+      "side": 1,
+      "message": "sorry for the delay.  All looks good, the structures have the needed padding to be able to support these over time.",
+      "revId": "1a44397c031ef5b6abc393a747ee81fd66fc9412",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
