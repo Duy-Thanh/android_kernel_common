@@ -1235,7 +1235,7 @@ struct proto {
 	unsigned int		useroffset;	/* Usercopy region offset */
 	unsigned int		usersize;	/* Usercopy region size */
 
-	struct percpu_counter	*orphan_count;
+	unsigned int __percpu	*orphan_count;
 
 	struct request_sock_ops	*rsk_prot;
 	struct timewait_sock_ops *twsk_prot;
@@ -2836,10 +2836,17 @@ void sock_set_sndtimeo(struct sock *sk, s64 secs);
 
 int sock_bind_add(struct sock *sk, struct sockaddr *addr, int addr_len);
 
+<<<<<<< HEAD   (fad509 Merge faeb8e7a0aac ("Merge branch '100GbE' of git://git.kern)
 static inline bool sk_is_readable(struct sock *sk)
 {
 	if (sk->sk_prot->sock_is_readable)
 		return sk->sk_prot->sock_is_readable(sk);
 	return false;
 }
+=======
+int sock_get_timeout(long timeo, void *optval, bool old_timeval);
+int sock_copy_user_timeval(struct __kernel_sock_timeval *tv,
+			   sockptr_t optval, int optlen, bool old_timeval);
+
+>>>>>>> BRANCH (24f7cf Merge tag 'mac80211-next-for-net-next-2021-10-21' of git://g)
 #endif	/* _SOCK_H */
