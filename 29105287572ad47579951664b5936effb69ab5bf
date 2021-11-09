@@ -46,6 +46,30 @@
       },
       "revId": "29105287572ad47579951664b5936effb69ab5bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e24eb6d_d2d00d94",
+        "filename": "arch/arm64/configs/defconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-11-09T00:38:14Z",
+      "side": 1,
+      "message": "Treehugger was complaining about the place where CONFIG_BLK_CGROUP_IOPRIO\u003dy was added, not related to arch/arm64/configs/defconfig. See: \n\nhttps://android-build.googleplex.com/builds/pending/P27410942/kernel_x86_64/latest/view/logs/build_error.log\n\nIt basically says that you need to add it after CONFIG_BLK_CGROUP_IOCOST\u003dy instead of after CONFIG_BLK_CGROUP\u003dy.\n\narch/arm64/configs/defconfig should not be changed since we don\u0027t use it.",
+      "parentUuid": "cc3f888f_9bf4d195",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 24
+      },
+      "revId": "29105287572ad47579951664b5936effb69ab5bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
