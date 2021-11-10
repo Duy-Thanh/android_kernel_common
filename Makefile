@@ -149,6 +149,7 @@ endif
 
 mixed-build-prefix = $(if $(KBUILD_MIXED_TREE),$(KBUILD_MIXED_TREE)/)
 export KBUILD_MIXED_TREE
+export mixed-build-prefix
 
 # Kbuild will save output files in the current working directory.
 # This does not need to match to the root of the kernel source tree.
