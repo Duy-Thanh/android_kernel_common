@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db17a366_daa2e991",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-10T07:55:03Z",
+      "side": 1,
+      "message": "why is this needed now?\n\nAnd no bug id?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "07b29021d7dfe59bcbdd6f4d29ec9cf44e4b9852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c15ec662_552bd788",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-10T07:55:03Z",
+      "side": 1,
+      "message": "why 4?  Why not just 1?",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 30
+      },
+      "revId": "07b29021d7dfe59bcbdd6f4d29ec9cf44e4b9852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
