@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000017122981",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1887221?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "6ae45869_1575f297",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 65,
+                "startChar": 0,
+                "endLine": 65,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Anton Yakovlev \u003cAnton.Yakovlev@opensynergy.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "265fdf84_d49b19e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-11-10T19:30:13Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Anton Yakovlev \u003cAnton.Yakovlev@opensynergy.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 408630937 android-build.ayeaye-python-dispatcher_20211109.05_p0",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 0
+      },
+      "revId": "dde4cb2ba930d18575042cb4b6f5fa50b0be547a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
