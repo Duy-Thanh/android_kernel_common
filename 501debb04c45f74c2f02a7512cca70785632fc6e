@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32ae3396_52aa36e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-11-10T17:29:00Z",
+      "side": 1,
+      "message": "CF uses f2fs userdata by default now, so if this is still broken, it won\u0027t be able to pass presubmit.",
+      "revId": "501debb04c45f74c2f02a7512cca70785632fc6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
