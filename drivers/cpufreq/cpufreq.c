@@ -534,6 +534,8 @@ static unsigned int __resolve_freq(struct cpufreq_policy *policy,
 	unsigned int idx;
 
 	target_freq = clamp_val(target_freq, policy->min, policy->max);
+	trace_android_vh_cpufreq_resolve_freq(policy, &target_freq, old_target_freq);
+	policy->cached_target_freq = target_freq;
 
 	if (!cpufreq_driver->target_index)
 		return target_freq;
@@ -2099,9 +2101,11 @@ unsigned int cpufreq_driver_fast_switch(struct cpufreq_policy *policy,
 					unsigned int target_freq)
 {
 	unsigned int freq;
+	unsigned int old_target_freq = target_freq;
 	int cpu;
 
 	target_freq = clamp_val(target_freq, policy->min, policy->max);
+	trace_android_vh_cpufreq_fast_switch(policy, &target_freq, old_target_freq);
 	freq = cpufreq_driver->fast_switch(policy, target_freq);
 
 	if (!freq)
@@ -2257,7 +2261,13 @@ int __cpufreq_driver_target(struct cpufreq_policy *policy,
 	if (cpufreq_disabled())
 		return -ENODEV;
 
+<<<<<<< HEAD   (c22d8a BACKPORT: vsock: each transport cycles only on its own socke)
 	target_freq = __resolve_freq(policy, target_freq, relation);
+=======
+	/* Make sure that target_freq is within supported range */
+	target_freq = clamp_val(target_freq, policy->min, policy->max);
+	trace_android_vh_cpufreq_target(policy, &target_freq, old_target_freq);
+>>>>>>> CHANGE (cf551f ANDROID: vendor_hooks: Add hooks for frequency optimization)
 
 	pr_debug("target for CPU %u: %u kHz, relation %u, requested %u kHz\n",
 		 policy->cpu, target_freq, relation, old_target_freq);
