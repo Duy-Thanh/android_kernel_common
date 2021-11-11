@@ -1011,6 +1011,8 @@ static void update_curr_rt(struct rq *rq)
 #ifdef CONFIG_RT_GROUP_SCHED
 	struct sched_rt_entity *rt_se = &donor->rt;
 
+	trace_android_vh_sched_stat_runtime_rt(curr, delta_exec);
+
 	if (!rt_bandwidth_enabled())
 		return;
 
