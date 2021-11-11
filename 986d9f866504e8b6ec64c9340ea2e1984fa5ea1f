@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b6d1979_a006f6ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-11T08:07:10Z",
+      "side": 1,
+      "message": "Is this a forward port of an android12-5.10 patch?  If so, please use the same Change-Id so it can be tracked properly.",
+      "revId": "986d9f866504e8b6ec64c9340ea2e1984fa5ea1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
