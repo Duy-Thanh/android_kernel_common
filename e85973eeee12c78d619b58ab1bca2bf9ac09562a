@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27e001d8_6cc2d9ca",
+        "filename": "drivers/android/android_debug_symbols.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-11T11:35:13Z",
+      "side": 1,
+      "message": "`static` for this and the other variables in this file please.",
+      "range": {
+        "startLine": 27,
+        "startChar": 5,
+        "endLine": 27,
+        "endChar": 19
+      },
+      "revId": "e85973eeee12c78d619b58ab1bca2bf9ac09562a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29c4b02e_42c3727e",
+        "filename": "kernel/module.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 4792,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-11T11:35:13Z",
+      "side": 1,
+      "message": "blank line after this please.",
+      "range": {
+        "startLine": 4792,
+        "startChar": 0,
+        "endLine": 4792,
+        "endChar": 23
+      },
+      "revId": "e85973eeee12c78d619b58ab1bca2bf9ac09562a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40f44ba1_13bd954b",
+        "filename": "kernel/module.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 4793,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-11T11:35:13Z",
+      "side": 1,
+      "message": "comment why this needs to be disabled please.",
+      "range": {
+        "startLine": 4793,
+        "startChar": 0,
+        "endLine": 4793,
+        "endChar": 19
+      },
+      "revId": "e85973eeee12c78d619b58ab1bca2bf9ac09562a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
