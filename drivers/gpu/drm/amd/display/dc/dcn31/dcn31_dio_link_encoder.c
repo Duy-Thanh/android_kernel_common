@@ -221,7 +221,11 @@ static const struct link_encoder_funcs dcn31_link_enc_funcs = {
 	.get_dig_frontend = dcn10_get_dig_frontend,
 	.get_dig_mode = dcn10_get_dig_mode,
 	.is_in_alt_mode = dcn31_link_encoder_is_in_alt_mode,
+<<<<<<< HEAD   (c8096b Merge f602a96e0252 ("Merge tag 'drm-misc-next-2021-09-23' of)
 	.get_max_link_cap = dcn31_link_encoder_get_max_link_cap,
+=======
+	.get_max_link_cap = dcn20_link_encoder_get_max_link_cap,
+>>>>>>> BRANCH (1e3944 Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.f)
 	.set_dio_phy_mux = dcn31_link_encoder_set_dio_phy_mux,
 };
 
@@ -325,6 +329,10 @@ void dcn31_link_encoder_construct(
 		enc10->base.features.flags.bits.IS_HBR3_CAPABLE =
 				bp_cap_info.DP_HBR3_EN;
 		enc10->base.features.flags.bits.HDMI_6GB_EN = bp_cap_info.HDMI_6GB_EN;
+		enc10->base.features.flags.bits.IS_DP2_CAPABLE = bp_cap_info.IS_DP2_CAPABLE;
+		enc10->base.features.flags.bits.IS_UHBR10_CAPABLE = bp_cap_info.DP_UHBR10_EN;
+		enc10->base.features.flags.bits.IS_UHBR13_5_CAPABLE = bp_cap_info.DP_UHBR13_5_EN;
+		enc10->base.features.flags.bits.IS_UHBR20_CAPABLE = bp_cap_info.DP_UHBR20_EN;
 		enc10->base.features.flags.bits.DP_IS_USB_C =
 				bp_cap_info.DP_IS_USB_C;
 	} else {
@@ -368,7 +376,7 @@ void dcn31_link_encoder_enable_dp_output(
 	enum clock_source_id clock_source)
 {
 	/* Enable transmitter and encoder. */
-	if (!link_enc_cfg_is_transmitter_mappable(enc->ctx->dc->current_state, enc)) {
+	if (!link_enc_cfg_is_transmitter_mappable(enc->ctx->dc, enc)) {
 
 		dcn20_link_encoder_enable_dp_output(enc, link_settings, clock_source);
 
@@ -384,7 +392,7 @@ void dcn31_link_encoder_enable_dp_mst_output(
 	enum clock_source_id clock_source)
 {
 	/* Enable transmitter and encoder. */
-	if (!link_enc_cfg_is_transmitter_mappable(enc->ctx->dc->current_state, enc)) {
+	if (!link_enc_cfg_is_transmitter_mappable(enc->ctx->dc, enc)) {
 
 		dcn10_link_encoder_enable_dp_mst_output(enc, link_settings, clock_source);
 
@@ -399,7 +407,7 @@ void dcn31_link_encoder_disable_output(
 	enum signal_type signal)
 {
 	/* Disable transmitter and encoder. */
-	if (!link_enc_cfg_is_transmitter_mappable(enc->ctx->dc->current_state, enc)) {
+	if (!link_enc_cfg_is_transmitter_mappable(enc->ctx->dc, enc)) {
 
 		dcn10_link_encoder_disable_output(enc, signal);
 
@@ -439,6 +447,7 @@ bool dcn31_link_encoder_is_in_alt_mode(struct link_encoder *enc)
 
 	return is_usb_c_alt_mode;
 }
+<<<<<<< HEAD   (c8096b Merge f602a96e0252 ("Merge tag 'drm-misc-next-2021-09-23' of)
 
 void dcn31_link_encoder_get_max_link_cap(struct link_encoder *enc,
 										 struct dc_link_settings *link_settings)
@@ -466,3 +475,5 @@ void dcn31_link_encoder_get_max_link_cap(struct link_encoder *enc,
 			link_settings->lane_count = MIN(LANE_COUNT_TWO, link_settings->lane_count);
 	}
 }
+=======
+>>>>>>> BRANCH (1e3944 Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.f)

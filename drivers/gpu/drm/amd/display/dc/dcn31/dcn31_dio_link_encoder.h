@@ -252,7 +252,10 @@ void dcn31_link_encoder_disable_output(
 bool dcn31_link_encoder_is_in_alt_mode(
 	struct link_encoder *enc);
 
+<<<<<<< HEAD   (c8096b Merge f602a96e0252 ("Merge tag 'drm-misc-next-2021-09-23' of)
 void dcn31_link_encoder_get_max_link_cap(struct link_encoder *enc,
 	struct dc_link_settings *link_settings);
 
+=======
+>>>>>>> BRANCH (1e3944 Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.f)
 #endif /* __DC_LINK_ENCODER__DCN31_H__ */
