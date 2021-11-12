@@ -52,6 +52,24 @@
       "parentUuid": "a6ce9758_c8b928f6",
       "revId": "b925981cd64ff5f49a10ff042e61bee6cc574d0e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28e825f6_c8f86c74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-12T10:58:19Z",
+      "side": 1,
+      "message": "Ok, now squashed into the parent commit, will abandon this one.",
+      "parentUuid": "c425beb8_767c5633",
+      "revId": "b925981cd64ff5f49a10ff042e61bee6cc574d0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
