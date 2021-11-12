@@ -101,7 +101,14 @@ void ttm_move_memcpy(bool clear,
 		return;
 
 	/* Don't move nonexistent data. Clear destination instead. */
+<<<<<<< HEAD   (b576d7 Merge b1f8166640e0 ("Merge tag 'amd-drm-next-5.16-2021-10-08)
 	if (clear) {
+=======
+	if (src_ops->maps_tt && (!ttm || !ttm_tt_is_populated(ttm))) {
+		if (ttm && !(ttm->page_flags & TTM_TT_FLAG_ZERO_ALLOC))
+			return;
+
+>>>>>>> BRANCH (797d72 Merge tag 'drm-misc-next-2021-10-06' of git://anongit.freede)
 		for (i = 0; i < num_pages; ++i) {
 			dst_ops->map_local(dst_iter, &dst_map, i);
 			if (dst_map.is_iomem)
@@ -147,7 +154,7 @@ int ttm_bo_move_memcpy(struct ttm_buffer_object *bo,
 	bool clear;
 	int ret = 0;
 
-	if (ttm && ((ttm->page_flags & TTM_PAGE_FLAG_SWAPPED) ||
+	if (ttm && ((ttm->page_flags & TTM_TT_FLAG_SWAPPED) ||
 		    dst_man->use_tt)) {
 		ret = ttm_tt_populate(bdev, ttm, ctx);
 		if (ret)

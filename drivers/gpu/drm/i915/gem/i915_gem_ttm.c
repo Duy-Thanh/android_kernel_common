@@ -182,7 +182,7 @@ static struct ttm_tt *i915_ttm_tt_create(struct ttm_buffer_object *bo,
 
 	if (obj->flags & I915_BO_ALLOC_CPU_CLEAR &&
 	    man->use_tt)
-		page_flags |= TTM_PAGE_FLAG_ZERO_ALLOC;
+		page_flags |= TTM_TT_FLAG_ZERO_ALLOC;
 
 	ret = ttm_tt_init(&i915_tt->ttm, bo, page_flags,
 			  i915_ttm_select_tt_caching(obj));
@@ -449,6 +449,12 @@ static int i915_ttm_accel_move(struct ttm_buffer_object *bo,
 		if (bo->type == ttm_bo_type_kernel)
 			return -EINVAL;
 
+<<<<<<< HEAD   (b576d7 Merge b1f8166640e0 ("Merge tag 'amd-drm-next-5.16-2021-10-08)
+=======
+		if (ttm && !(ttm->page_flags & TTM_TT_FLAG_ZERO_ALLOC))
+			return 0;
+
+>>>>>>> BRANCH (797d72 Merge tag 'drm-misc-next-2021-10-06' of git://anongit.freede)
 		intel_engine_pm_get(i915->gt.migrate.context->engine);
 		ret = intel_context_migrate_clear(i915->gt.migrate.context, NULL,
 						  dst_st->sgl, dst_level,
@@ -546,8 +552,14 @@ static int i915_ttm_move(struct ttm_buffer_object *bo, bool evict,
 	}
 
 	/* Populate ttm with pages if needed. Typically system memory. */
+<<<<<<< HEAD   (b576d7 Merge b1f8166640e0 ("Merge tag 'amd-drm-next-5.16-2021-10-08)
 	if (ttm && (dst_man->use_tt || (ttm->page_flags & TTM_PAGE_FLAG_SWAPPED))) {
 		ret = ttm_tt_populate(bo->bdev, ttm, ctx);
+=======
+	if (bo->ttm && (dst_man->use_tt ||
+			(bo->ttm->page_flags & TTM_TT_FLAG_SWAPPED))) {
+		ret = ttm_tt_populate(bo->bdev, bo->ttm, ctx);
+>>>>>>> BRANCH (797d72 Merge tag 'drm-misc-next-2021-10-06' of git://anongit.freede)
 		if (ret)
 			return ret;
 	}
