@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb15a883_7ea1fcf8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-11-12T10:26:48Z",
+      "side": 1,
+      "message": "Why not squash those two together for easier porting to later branches?",
+      "revId": "b925981cd64ff5f49a10ff042e61bee6cc574d0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
