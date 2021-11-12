@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cc77af7_dc360e05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-12T08:30:26Z",
+      "side": 1,
+      "message": "Always test-build your patches first 😞\n\nthe android kabi macro is not yet in this branch.  I\u0027ll go add it now...",
+      "revId": "edc3bef073517723695f82a8438558afdb7917d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
