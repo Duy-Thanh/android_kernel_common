@@ -33,6 +33,24 @@
       "message": "Hi greg\nnice to see you.\nthe better solution is solved in driver. but I thought this case happens on the mobile but for server with large ram, hmm.\nso I add hook here, which handles any case more easily.\n\nI thought the more resonable way is change the kvmalloc_node function and add config to cover this scene. But For GKI 2.0，we can\u0027t add any kernel config.",
       "revId": "f217bd4588324bcac0bf146c045a8bc2271756a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecaad3e3_5c94dc7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-11-13T19:14:02Z",
+      "side": 1,
+      "message": "Hi greg\nnice to see you.\nthe better solution is solved in driver. but I thought this case happens on the mobile but for server with large ram, hmm.\nso I add hook here, which handles any case more easily.\n\nI thought the more resonable way is change the kvmalloc_node function and add config to cover this scene. But For GKI 2.0，we can\u0027t add any kernel config.",
+      "parentUuid": "da4886e3_7b4830e2",
+      "revId": "f217bd4588324bcac0bf146c045a8bc2271756a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
