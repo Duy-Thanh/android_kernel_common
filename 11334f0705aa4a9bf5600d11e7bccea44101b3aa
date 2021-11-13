@@ -16,6 +16,29 @@
       "message": "Why is the needed functionality for this not done upstream first?  Why is a hook needed now when you still have the chance to get features implemented upstream and backported properly?",
       "revId": "11334f0705aa4a9bf5600d11e7bccea44101b3aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d5c50c6_37b1b9eb",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5458,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-13T09:51:45Z",
+      "side": 1,
+      "message": "looks like you want a \"real\" callback to your driver, just get that done upstream properly first please.",
+      "range": {
+        "startLine": 5458,
+        "startChar": 0,
+        "endLine": 5458,
+        "endChar": 18
+      },
+      "revId": "11334f0705aa4a9bf5600d11e7bccea44101b3aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
