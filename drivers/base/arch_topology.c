@@ -12,16 +12,17 @@
 #include <linux/device.h>
 #include <linux/of.h>
 #include <linux/slab.h>
-#include <linux/string.h>
 #include <linux/sched/topology.h>
 #include <linux/cpuset.h>
 #include <linux/cpumask.h>
 #include <linux/init.h>
-#include <linux/percpu.h>
 #include <linux/rcupdate.h>
 #include <linux/sched.h>
+<<<<<<< HEAD   (14a857 Merge 5c904c66ed4e ("Merge tag 'char-misc-5.16-rc1' of git:/)
 #include <linux/smp.h>
 #include <trace/hooks/topology.h>
+=======
+>>>>>>> BRANCH (95faf6 Merge tag 'driver-core-5.16-rc1' of git://git.kernel.org/pub)
 
 static DEFINE_PER_CPU(struct scale_freq_data __rcu *, sft_data);
 static struct cpumask scale_freq_counters_mask;
