@@ -69,6 +69,24 @@
       "parentUuid": "ecaad3e3_5c94dc7f",
       "revId": "f217bd4588324bcac0bf146c045a8bc2271756a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f4def4e_9b14165d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-11-14T13:29:09Z",
+      "side": 1,
+      "message": "this will change \nnet/netfilter/x_tables.c\nstruct xt_table_info *xt_alloc_table_info(unsigned int size)\n{\n        struct xt_table_info *info \u003d NULL;\n        size_t sz \u003d sizeof(*info) + size;\n\n        if (sz \u003c sizeof(*info) || sz \u003e\u003d XT_MAX_TABLE_SIZE)\n                return NULL;\n\n        info \u003d kvmalloc(sz, GFP_KERNEL_ACCOUNT); \u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003e info \u003d vmalloc(sz, GFP_KERNEL_ACCOUNT)\n        if (!info)\n                return NULL;\n\n        memset(info, 0, sizeof(*info));\n        info-\u003esize \u003d size;\n        return info;\n}\n\nI thought this may change the behavior of the owner. is that ok ?",
+      "parentUuid": "6777a877_240465c4",
+      "revId": "f217bd4588324bcac0bf146c045a8bc2271756a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
