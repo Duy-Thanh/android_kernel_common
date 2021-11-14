@@ -87,6 +87,24 @@
       "parentUuid": "6777a877_240465c4",
       "revId": "f217bd4588324bcac0bf146c045a8bc2271756a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15c475f7_292e26f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-11-14T13:36:15Z",
+      "side": 1,
+      "message": "But if I just add hook here, we can add code like this \nif (get_order(size) \u003e\u003d 4)\n        kmalloc_flags \u003d kmalloc_flags \u0026 ~__GFP_RECLAIM;",
+      "parentUuid": "9f4def4e_9b14165d",
+      "revId": "f217bd4588324bcac0bf146c045a8bc2271756a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
