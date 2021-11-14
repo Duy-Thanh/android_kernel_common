@@ -51,6 +51,24 @@
       "parentUuid": "da4886e3_7b4830e2",
       "revId": "f217bd4588324bcac0bf146c045a8bc2271756a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6777a877_240465c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-14T11:50:25Z",
+      "side": 1,
+      "message": "No, this should be handled in the driver, not by working around broken code in the kernel core, that is not the Linux way.  Please just fix it up in the driver, then no hook or additional changes would be needed to the GKI core at all.",
+      "parentUuid": "ecaad3e3_5c94dc7f",
+      "revId": "f217bd4588324bcac0bf146c045a8bc2271756a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
