@@ -164,6 +164,30 @@
       },
       "revId": "e85973eeee12c78d619b58ab1bca2bf9ac09562a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eed53a3_3930c4d8",
+        "filename": "kernel/module.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 4793,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-15T18:04:09Z",
+      "side": 1,
+      "message": "Exactly, it needs to be in the code please.",
+      "parentUuid": "90137f6a_4926d0c4",
+      "range": {
+        "startLine": 4793,
+        "startChar": 0,
+        "endLine": 4793,
+        "endChar": 19
+      },
+      "revId": "e85973eeee12c78d619b58ab1bca2bf9ac09562a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
