@@ -159,6 +159,24 @@
       "parentUuid": "e498e646_f9a930b4",
       "revId": "f217bd4588324bcac0bf146c045a8bc2271756a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b96ba6f_95b8bb5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-11-15T16:09:47Z",
+      "side": 1,
+      "message": "you are right. but i it\u0027s not a bug.\nIt\u0027s just for mobile. Waking kswapd and kcompactd frequently will consume lots of power and cputime.\nLet me think it over， thanks for your reply.",
+      "parentUuid": "e2a79130_20fb20da",
+      "revId": "f217bd4588324bcac0bf146c045a8bc2271756a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
