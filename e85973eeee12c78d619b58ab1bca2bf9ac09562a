@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc8b18c4_14a83c1d",
+        "filename": "drivers/android/android_debug_symbols.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1873752
+      },
+      "writtenOn": "2021-11-15T12:35:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27e001d8_6cc2d9ca",
+      "range": {
+        "startLine": 27,
+        "startChar": 5,
+        "endLine": 27,
+        "endChar": 19
+      },
+      "revId": "e85973eeee12c78d619b58ab1bca2bf9ac09562a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29c4b02e_42c3727e",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c389e7c_20a1d64f",
+        "filename": "kernel/module.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 4792,
+      "author": {
+        "id": 1873752
+      },
+      "writtenOn": "2021-11-15T12:35:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29c4b02e_42c3727e",
+      "range": {
+        "startLine": 4792,
+        "startChar": 0,
+        "endLine": 4792,
+        "endChar": 23
+      },
+      "revId": "e85973eeee12c78d619b58ab1bca2bf9ac09562a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40f44ba1_13bd954b",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-11-11T11:35:13Z",
       "side": 1,
       "message": "comment why this needs to be disabled please.",
+      "range": {
+        "startLine": 4793,
+        "startChar": 0,
+        "endLine": 4793,
+        "endChar": 19
+      },
+      "revId": "e85973eeee12c78d619b58ab1bca2bf9ac09562a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3806648d_6312cdf1",
+        "filename": "kernel/module.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 4793,
+      "author": {
+        "id": 1873752
+      },
+      "writtenOn": "2021-11-15T12:35:40Z",
+      "side": 1,
+      "message": "Want to avoid lock same as following:\n\n/* Don\u0027t grab lock, we\u0027re oopsing. */\nvoid print_modules(void)\n{\n\tstruct module *mod;\n\tchar buf[MODULE_FLAGS_BUF_SIZE];\n\tprintk(KERN_DEFAULT \"Modules linked in:\");\n\t/* Most callers should already have preempt disabled, but make sure */\n\tpreempt_disable();",
+      "parentUuid": "40f44ba1_13bd954b",
       "range": {
         "startLine": 4793,
         "startChar": 0,
