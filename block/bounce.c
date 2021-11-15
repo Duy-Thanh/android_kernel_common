@@ -268,6 +268,12 @@ static struct bio *bounce_clone_bio(struct bio *bio_src, gfp_t gfp_mask,
 	}
 
 	bio_crypt_clone(bio, bio_src, gfp_mask);
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
+=======
+
+	if (bio_integrity(bio_src)) {
+		int ret;
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 
 	if (bio_integrity(bio_src) &&
 	    bio_integrity_clone(bio, bio_src, gfp_mask) < 0) {

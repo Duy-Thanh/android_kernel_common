@@ -55,8 +55,12 @@
 #include <linux/clk.h>
 #include <linux/completion.h>
 #include <linux/regulator/consumer.h>
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
 #include <linux/bitfield.h>
 #include <linux/devfreq.h>
+=======
+#include <linux/keyslot-manager.h>
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 #include "unipro.h"
 
 #include <asm/irq.h>
@@ -189,8 +193,12 @@ struct ufs_pm_lvl_states {
  * @intr_cmd: Interrupt command (doesn't participate in interrupt aggregation)
  * @issue_time_stamp: time stamp for debug purposes
  * @compl_time_stamp: time stamp for statistics
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
  * @crypto_enable: whether or not the request needs inline crypto operations
  * @crypto_key_slot: the key slot to use for inline crypto
+=======
+ * @crypto_key_slot: the key slot to use for inline crypto (-1 if none)
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
  * @data_unit_num: the data unit number for the first block for inline crypto
  * @req_abort_skip: skip request abort task flag
  */
@@ -216,11 +224,18 @@ struct ufshcd_lrb {
 	bool intr_cmd;
 	ktime_t issue_time_stamp;
 	ktime_t compl_time_stamp;
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
 #if IS_ENABLED(CONFIG_SCSI_UFS_CRYPTO)
 	bool crypto_enable;
 	u8 crypto_key_slot;
 	u64 data_unit_num;
 #endif /* CONFIG_SCSI_UFS_CRYPTO */
+=======
+#ifdef CONFIG_SCSI_UFS_CRYPTO
+	int crypto_key_slot;
+	u64 data_unit_num;
+#endif
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 
 	bool req_abort_skip;
 };
@@ -331,7 +346,11 @@ union ufs_crypto_cfg_entry;
  * @dbg_register_dump: used to dump controller debug information
  * @phy_initialization: used to initialize phys
  * @device_reset: called to issue a reset pulse on the UFS device
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
  * @program_key: program an inline encryption key into a keyslot
+=======
+ * @program_key: program or evict an inline encryption key
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
  */
 struct ufs_hba_variant_ops {
 	const char *name;
@@ -365,6 +384,7 @@ struct ufs_hba_variant_ops {
 	void	(*device_reset)(struct ufs_hba *hba);
 	int	(*program_key)(struct ufs_hba *hba,
 			       const union ufs_crypto_cfg_entry *cfg, int slot);
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
 	void	(*config_scaling_param)(struct ufs_hba *hba,
 					struct devfreq_dev_profile *profile,
 					void *data);
@@ -402,6 +422,8 @@ struct ufs_hba_crypto_variant_ops {
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
+=======
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 };
 
 /* clock gating state  */
@@ -822,6 +844,7 @@ struct ufs_hba {
 	 */
 #define UFSHCD_CAP_KEEP_AUTO_BKOPS_ENABLED_EXCEPT_SUSPEND (1 << 5)
 	/*
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
 	 * This capability allows host controller driver to automatically
 	 * enable runtime power management by itself instead of waiting
 	 * for userspace to control the power management.
@@ -838,6 +861,12 @@ struct ufs_hba {
 	 * provisioned to be used. This would increase the write performance.
 	 */
 #define	UFSHCD_CAP_WB_EN (1 << 8)
+=======
+	 * This capability allows the host controller driver to use the
+	 * inline crypto engine, if it is present
+	 */
+#define UFSHCD_CAP_CRYPTO (1 << 8)
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 
 	struct devfreq *devfreq;
 	struct ufs_clk_scaling clk_scaling;
@@ -854,6 +883,7 @@ struct ufs_hba {
 	struct request_queue	*bsg_queue;
 
 #ifdef CONFIG_SCSI_UFS_CRYPTO
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
 	/* crypto */
 	union ufs_crypto_capabilities crypto_capabilities;
 	union ufs_crypto_cap_entry *crypto_cap_array;
@@ -869,6 +899,13 @@ struct ufs_hba {
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
+=======
+	union ufs_crypto_capabilities crypto_capabilities;
+	union ufs_crypto_cap_entry *crypto_cap_array;
+	u32 crypto_cfg_register;
+	struct blk_keyslot_manager ksm;
+#endif
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 };
 
 /* Returns true if clocks can be gated. Otherwise false */

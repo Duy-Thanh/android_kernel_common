@@ -924,10 +924,15 @@ static inline void ufshcd_hba_start(struct ufs_hba *hba)
 {
 	u32 val = CONTROLLER_ENABLE;
 
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
 	if (ufshcd_hba_is_crypto_supported(hba)) {
 		ufshcd_crypto_enable(hba);
 		val |= CRYPTO_GENERAL_ENABLE;
 	}
+=======
+	if (ufshcd_crypto_enable(hba))
+		val |= CRYPTO_GENERAL_ENABLE;
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 
 	ufshcd_writel(hba, val, REG_CONTROLLER_ENABLE);
 }
@@ -2082,15 +2087,26 @@ int ufshcd_copy_query_response(struct ufs_hba *hba, struct ufshcd_lrb *lrbp)
 /**
  * ufshcd_hba_capabilities - Read controller capabilities
  * @hba: per adapter instance
+ *
+ * Return: 0 on success, negative on error.
  */
-static inline void ufshcd_hba_capabilities(struct ufs_hba *hba)
+static inline int ufshcd_hba_capabilities(struct ufs_hba *hba)
 {
+	int err;
+
 	hba->capabilities = ufshcd_readl(hba, REG_CONTROLLER_CAPABILITIES);
 
 	/* nutrs and nutmrs are 0 based values */
 	hba->nutrs = (hba->capabilities & MASK_TRANSFER_REQUESTS_SLOTS) + 1;
 	hba->nutmrs =
 	((hba->capabilities & MASK_TASK_MANAGEMENT_REQUEST_SLOTS) >> 16) + 1;
+
+	/* Read crypto capabilities */
+	err = ufshcd_hba_init_crypto_capabilities(hba);
+	if (err)
+		dev_err(hba->dev, "crypto setup failed\n");
+
+	return err;
 }
 
 /**
@@ -2331,6 +2347,8 @@ static void ufshcd_prepare_req_desc_hdr(struct ufshcd_lrb *lrbp,
 	struct utp_transfer_req_desc *req_desc = lrbp->utr_descriptor_ptr;
 	u32 data_direction;
 	u32 dword_0;
+	u32 dword_1 = 0;
+	u32 dword_3 = 0;
 
 	if (cmd_dir == DMA_FROM_DEVICE) {
 		data_direction = UTP_DEVICE_TO_HOST;
@@ -2347,6 +2365,9 @@ static void ufshcd_prepare_req_desc_hdr(struct ufshcd_lrb *lrbp,
 				<< UPIU_COMMAND_TYPE_OFFSET);
 	if (lrbp->intr_cmd)
 		dword_0 |= UTP_REQ_DESC_INT_CMD;
+
+	/* Prepare crypto related dwords */
+	ufshcd_prepare_req_desc_hdr_crypto(lrbp, &dword_0, &dword_1, &dword_3);
 
 	/* Transfer request descriptor header fields */
 	if (ufshcd_lrbp_crypto_enabled(lrbp)) {
@@ -2365,7 +2386,11 @@ static void ufshcd_prepare_req_desc_hdr(struct ufshcd_lrb *lrbp,
 	}
 
 	req_desc->header.dword_0 = cpu_to_le32(dword_0);
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
 
+=======
+	req_desc->header.dword_1 = cpu_to_le32(dword_1);
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 	/*
 	 * assigning invalid value for command status. Controller
 	 * updates OCS on command completion, with the command
@@ -2373,6 +2398,10 @@ static void ufshcd_prepare_req_desc_hdr(struct ufshcd_lrb *lrbp,
 	 */
 	req_desc->header.dword_2 =
 		cpu_to_le32(OCS_INVALID_COMMAND_STATUS);
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
+=======
+	req_desc->header.dword_3 = cpu_to_le32(dword_3);
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 
 	req_desc->prd_table_length = 0;
 }
@@ -2593,6 +2622,7 @@ static int ufshcd_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *cmd)
 	lrbp->lun = ufshcd_scsi_to_upiu_lun(cmd->device->lun);
 	lrbp->intr_cmd = !ufshcd_is_intr_aggr_allowed(hba) ? true : false;
 
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
 	err = ufshcd_prepare_lrbp_crypto(hba, cmd, lrbp);
 	if (err) {
 		ufshcd_release(hba);
@@ -2600,6 +2630,10 @@ static int ufshcd_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *cmd)
 		clear_bit_unlock(tag, &hba->lrb_in_use);
 		goto out;
 	}
+=======
+	ufshcd_prepare_lrbp_crypto(cmd->request, lrbp);
+
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 	lrbp->req_abort_skip = false;
 
 	ufshcd_comp_scsi_upiu(hba, lrbp);
@@ -2674,9 +2708,13 @@ static int ufshcd_compose_dev_cmd(struct ufs_hba *hba,
 	lrbp->task_tag = tag;
 	lrbp->lun = 0; /* device management cmd is not specific to any LUN */
 	lrbp->intr_cmd = true; /* No interrupt aggregation */
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
 #if IS_ENABLED(CONFIG_SCSI_UFS_CRYPTO)
 	lrbp->crypto_enable = false; /* No crypto operations */
 #endif
+=======
+	ufshcd_prepare_lrbp_crypto(NULL, lrbp);
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 	hba->dev_cmd.type = cmd_type;
 
 	return ufshcd_comp_devman_upiu(hba, lrbp);
@@ -4886,6 +4924,7 @@ static int ufshcd_change_queue_depth(struct scsi_device *sdev, int depth)
  */
 static int ufshcd_slave_configure(struct scsi_device *sdev)
 {
+	struct ufs_hba *hba = shost_priv(sdev->host);
 	struct request_queue *q = sdev->request_queue;
 	struct ufs_hba *hba = shost_priv(sdev->host);
 
@@ -4893,9 +4932,12 @@ static int ufshcd_slave_configure(struct scsi_device *sdev)
 
 	ufshcd_crypto_setup_rq_keyslot_manager(hba, q);
 
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
 	if (ufshcd_is_rpm_autosuspend_allowed(hba))
 		sdev->rpm_autosuspend = 1;
 
+=======
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 	return 0;
 }
 
@@ -5047,6 +5089,10 @@ ufshcd_transfer_rsp_status(struct ufs_hba *hba, struct ufshcd_lrb *lrbp)
 	case OCS_MISMATCH_RESP_UPIU_SIZE:
 	case OCS_PEER_COMM_FAILURE:
 	case OCS_FATAL_ERROR:
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
+=======
+	case OCS_DEVICE_FATAL_ERROR:
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 	case OCS_INVALID_CRYPTO_CONFIG:
 	case OCS_GENERAL_CRYPTO_ERROR:
 	default:
@@ -6455,6 +6501,7 @@ static int ufshcd_issue_devman_upiu_cmd(struct ufs_hba *hba,
 	lrbp->task_tag = tag;
 	lrbp->lun = 0;
 	lrbp->intr_cmd = true;
+	ufshcd_prepare_lrbp_crypto(NULL, lrbp);
 	hba->dev_cmd.type = cmd_type;
 
 	switch (hba->ufs_version) {
@@ -9043,6 +9090,7 @@ EXPORT_SYMBOL_GPL(ufshcd_remove);
  */
 void ufshcd_dealloc_host(struct ufs_hba *hba)
 {
+	ufshcd_crypto_destroy_keyslot_manager(hba);
 	scsi_host_put(hba->host);
 }
 EXPORT_SYMBOL_GPL(ufshcd_dealloc_host);
@@ -9133,7 +9181,9 @@ int ufshcd_init(struct ufs_hba *hba, void __iomem *mmio_base, unsigned int irq)
 		goto out_error;
 
 	/* Read capabilities registers */
-	ufshcd_hba_capabilities(hba);
+	err = ufshcd_hba_capabilities(hba);
+	if (err)
+		goto out_disable;
 
 	/* Get UFS version supported by the controller */
 	hba->ufs_version = ufshcd_get_ufs_version(hba);
@@ -9238,12 +9288,16 @@ int ufshcd_init(struct ufs_hba *hba, void __iomem *mmio_base, unsigned int irq)
 	/* Reset the attached device */
 	ufshcd_vops_device_reset(hba);
 
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
 	/* Init crypto */
 	err = ufshcd_hba_init_crypto(hba);
 	if (err) {
 		dev_err(hba->dev, "crypto setup failed\n");
 		goto out_remove_scsi_host;
 	}
+=======
+	ufshcd_init_crypto(hba);
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 
 	/* Host controller enable */
 	err = ufshcd_hba_enable(hba);
