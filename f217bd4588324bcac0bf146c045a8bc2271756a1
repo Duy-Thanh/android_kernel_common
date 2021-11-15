@@ -105,6 +105,24 @@
       "parentUuid": "9f4def4e_9b14165d",
       "revId": "f217bd4588324bcac0bf146c045a8bc2271756a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cdfd31c_04821e25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-15T09:11:38Z",
+      "side": 1,
+      "message": "Again, please fix this in the offending driver, as you have full control over that.",
+      "parentUuid": "15c475f7_292e26f0",
+      "revId": "f217bd4588324bcac0bf146c045a8bc2271756a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
