@@ -123,6 +123,24 @@
       "parentUuid": "15c475f7_292e26f0",
       "revId": "f217bd4588324bcac0bf146c045a8bc2271756a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e498e646_f9a930b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-11-15T10:20:22Z",
+      "side": 1,
+      "message": "1|OP520F:/ # zcat /proc/config.gz | grep CONFIG_NETFILTER_XTABLES\nCONFIG_NETFILTER_XTABLES\u003dy\n\nwe don\u0027t have control of this config. can I change this driver ?",
+      "parentUuid": "2cdfd31c_04821e25",
+      "revId": "f217bd4588324bcac0bf146c045a8bc2271756a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
