@@ -37,6 +37,13 @@ char *fips140_broken_alg;
 module_param_named(broken_alg, fips140_broken_alg, charp, 0);
 
 /*
+ * This option allows deliberately failing the integrity check.  This is for
+ * FIPS lab testing only.
+ */
+static bool fips140_fail_integrity_check;
+module_param_named(fail_integrity_check, fips140_fail_integrity_check, bool, 0);
+
+/*
  * FIPS 140-2 prefers the use of HMAC with a public key over a plain hash.
  */
 u8 __initdata fips140_integ_hmac_key[] = "The quick brown fox jumps over the lazy dog";
@@ -394,6 +401,10 @@ static bool __init check_fips140_module_hmac(void)
 	unapply_rodata_relocations(rodatacopy, rodatasize,
 				  offset_to_ptr(&fips140_rela_rodata.offset),
 				  fips140_rela_rodata.count);
+
+	/* Inject a failure (via corrupting the text) if requested. */
+	if (fips140_fail_integrity_check)
+		*(u8 *)textcopy ^= 0xff;
 
 	tfm = crypto_alloc_shash("hmac(sha256)", 0, 0);
 	if (IS_ERR(tfm)) {
