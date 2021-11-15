@@ -27,7 +27,10 @@
 #include <linux/pr.h>
 #include <linux/refcount.h>
 #include <linux/blk-crypto.h>
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
 #include <linux/keyslot-manager.h>
+=======
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 
 #define DM_MSG_PREFIX "core"
 

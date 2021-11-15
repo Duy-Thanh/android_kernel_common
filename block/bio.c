@@ -236,9 +236,12 @@ void bio_uninit(struct bio *bio)
 	bio_disassociate_blkg(bio);
 
 	bio_crypt_free_ctx(bio);
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
 
 	if (bio_integrity(bio))
 		bio_integrity_free(bio);
+=======
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 }
 EXPORT_SYMBOL(bio_uninit);
 
@@ -668,6 +671,12 @@ struct bio *bio_clone_fast(struct bio *bio, gfp_t gfp_mask, struct bio_set *bs)
 	__bio_clone_fast(b, bio);
 
 	bio_crypt_clone(b, bio, gfp_mask);
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
+=======
+
+	if (bio_integrity(bio)) {
+		int ret;
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 
 	if (bio_integrity(bio) &&
 	    bio_integrity_clone(b, bio, gfp_mask) < 0) {

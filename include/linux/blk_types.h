@@ -178,9 +178,12 @@ struct bio {
 
 #ifdef CONFIG_BLK_INLINE_ENCRYPTION
 	struct bio_crypt_ctx	*bi_crypt_context;
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
 #if IS_ENABLED(CONFIG_DM_DEFAULT_KEY)
 	bool			bi_skip_dm_default_key;
 #endif
+=======
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 #endif
 
 	union {
