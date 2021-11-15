@@ -43,7 +43,11 @@ struct pr_ops;
 struct rq_qos;
 struct blk_queue_stats;
 struct blk_stat_callback;
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
 struct keyslot_manager;
+=======
+struct blk_keyslot_manager;
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 
 #define BLKDEV_MIN_RQ	4
 #define BLKDEV_MAX_RQ	128	/* Default maximum */
@@ -222,6 +226,11 @@ struct request {
 
 #if defined(CONFIG_BLK_DEV_INTEGRITY)
 	unsigned short nr_integrity_segments;
+#endif
+
+#ifdef CONFIG_BLK_INLINE_ENCRYPTION
+	struct bio_crypt_ctx *crypt_ctx;
+	struct blk_ksm_keyslot *crypt_keyslot;
 #endif
 
 	unsigned short write_hint;
@@ -478,7 +487,11 @@ struct request_queue {
 
 #ifdef CONFIG_BLK_INLINE_ENCRYPTION
 	/* Inline crypto capabilities */
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
 	struct keyslot_manager *ksm;
+=======
+	struct blk_keyslot_manager *ksm;
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 #endif
 
 	unsigned int		rq_timeout;
@@ -1565,6 +1578,12 @@ struct blk_integrity *bdev_get_integrity(struct block_device *bdev)
 	return blk_get_integrity(bdev->bd_disk);
 }
 
+static inline bool
+blk_integrity_queue_supports_integrity(struct request_queue *q)
+{
+	return q->integrity.profile;
+}
+
 static inline bool blk_integrity_rq(struct request *rq)
 {
 	return rq->cmd_flags & REQ_INTEGRITY;
@@ -1645,6 +1664,11 @@ static inline struct blk_integrity *blk_get_integrity(struct gendisk *disk)
 {
 	return NULL;
 }
+static inline bool
+blk_integrity_queue_supports_integrity(struct request_queue *q)
+{
+	return false;
+}
 static inline int blk_integrity_compare(struct gendisk *a, struct gendisk *b)
 {
 	return 0;
@@ -1695,6 +1719,25 @@ static inline struct bio_vec *rq_integrity_vec(struct request *rq)
 }
 
 #endif /* CONFIG_BLK_DEV_INTEGRITY */
+
+#ifdef CONFIG_BLK_INLINE_ENCRYPTION
+
+bool blk_ksm_register(struct blk_keyslot_manager *ksm, struct request_queue *q);
+
+void blk_ksm_unregister(struct request_queue *q);
+
+#else /* CONFIG_BLK_INLINE_ENCRYPTION */
+
+static inline bool blk_ksm_register(struct blk_keyslot_manager *ksm,
+				    struct request_queue *q)
+{
+	return true;
+}
+
+static inline void blk_ksm_unregister(struct request_queue *q) { }
+
+#endif /* CONFIG_BLK_INLINE_ENCRYPTION */
+
 
 struct block_device_operations {
 	int (*open) (struct block_device *, fmode_t);

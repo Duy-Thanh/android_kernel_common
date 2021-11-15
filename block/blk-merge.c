@@ -588,6 +588,8 @@ int ll_back_merge_fn(struct request *req, struct bio *bio, unsigned int nr_segs)
 	if (blk_integrity_rq(req) &&
 	    integrity_req_gap_back_merge(req, bio))
 		return 0;
+	if (!bio_crypt_ctx_back_mergeable(req, bio))
+		return 0;
 	if (blk_rq_sectors(req) + bio_sectors(bio) >
 	    blk_rq_get_max_sectors(req, blk_rq_pos(req))) {
 		req_set_nomerge(req->q, req);
@@ -605,6 +607,8 @@ int ll_front_merge_fn(struct request *req, struct bio *bio, unsigned int nr_segs
 		return 0;
 	if (blk_integrity_rq(req) &&
 	    integrity_req_gap_front_merge(req, bio))
+		return 0;
+	if (!bio_crypt_ctx_front_mergeable(req, bio))
 		return 0;
 	if (blk_rq_sectors(req) + bio_sectors(bio) >
 	    blk_rq_get_max_sectors(req, bio->bi_iter.bi_sector)) {
@@ -657,7 +661,11 @@ static int ll_merge_requests_fn(struct request_queue *q, struct request *req,
 	if (blk_integrity_merge_rq(q, req, next) == false)
 		return 0;
 
+<<<<<<< HEAD   (04f660 ANDROID: virtio: virtio_pvclock: initial driver impl)
 	if (!bio_crypt_ctx_mergeable(req->bio, blk_rq_bytes(req), next->bio))
+=======
+	if (!bio_crypt_ctx_merge_rq(req, next))
+>>>>>>> BRANCH (d1b648 f2fs: should put a page beyond EOF when preparing a write)
 		return 0;
 
 	/* Merge is OK... */
@@ -882,6 +890,10 @@ bool blk_rq_merge_ok(struct request *rq, struct bio *bio)
 
 	/* only merge integrity protected bio into ditto rq */
 	if (blk_integrity_merge_bio(rq->q, rq, bio) == false)
+		return false;
+
+	/* Only merge if the crypt contexts are compatible */
+	if (!bio_crypt_rq_ctx_compatible(rq, bio))
 		return false;
 
 	/* must be using the same buffer */
