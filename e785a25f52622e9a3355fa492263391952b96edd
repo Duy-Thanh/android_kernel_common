@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a79c442_2f3f554f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-11-15T22:29:17Z",
+      "side": 1,
+      "message": "I don\u0027t think we should do this.\nIsn\u0027t one the explicit goals of GKI to be able to improve security?",
+      "revId": "e785a25f52622e9a3355fa492263391952b96edd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
