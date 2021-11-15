@@ -141,6 +141,24 @@
       "parentUuid": "2cdfd31c_04821e25",
       "revId": "f217bd4588324bcac0bf146c045a8bc2271756a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2a79130_20fb20da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-15T12:52:39Z",
+      "side": 1,
+      "message": "If this is a bug in the existing kernel, yes, submit a patch to fix that up.  Also send it upstream as obviously other people need this change as well.",
+      "parentUuid": "e498e646_f9a930b4",
+      "revId": "f217bd4588324bcac0bf146c045a8bc2271756a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
