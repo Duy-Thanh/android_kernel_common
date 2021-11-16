@@ -16,6 +16,23 @@
       "message": "Always test-build your patches first 😞\n\nthe android kabi macro is not yet in this branch.  I\u0027ll go add it now...",
       "revId": "edc3bef073517723695f82a8438558afdb7917d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15306a06_efec9573",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-16T00:19:49Z",
+      "side": 1,
+      "message": "This caused a build-break. Did you forget to add a `#include`? Please build and test your code before uploading.\n\n```\nGenerating ABI symbol list definition in /usr/local/google/buildbot/dist_dirs/aosp_kernel-common-android13-5.15-linux-kernel_aarch64/P27555118/abi_symbollist\nGenerating ABI symbol report /usr/local/google/buildbot/dist_dirs/aosp_kernel-common-android13-5.15-linux-kernel_aarch64/P27555118/abi_symbollist.report\n+ cd /usr/local/google/buildbot/src/android/common-android13-5.15/out/android13-5.15/common\n+ make O\u003d/usr/local/google/buildbot/src/android/common-android13-5.15/out/android13-5.15/common LLVM\u003d1 LLVM_IAS\u003d1 DEPMOD\u003ddepmod DTC\u003d/usr/local/google/buildbot/src/android/common-android13-5.15/build/build-tools/path/linux-x86/dtc -j40 Image modules Image.lz4\nIn file included from /usr/local/google/buildbot/src/android/common-android13-5.15/common/fs/crypto/crypto.c:29:\nIn file included from /usr/local/google/buildbot/src/android/common-android13-5.15/common/fs/crypto/fscrypt_private.h:14:\n/usr/local/google/buildbot/src/android/common-android13-5.15/common/include/linux/fscrypt.h:175:2: error: type name requires a specifier or qualifier\n        ANDROID_KABI_RESERVE(1);\n        ^\n/usr/local/google/buildbot/src/android/common-android13-5.15/common/include/linux/fscrypt.h:175:23: error: expected parameter declarator\n        ANDROID_KABI_RESERVE(1);\n                             ^\n/usr/local/google/buildbot/src/android/common-android13-5.15/common/include/linux/fscrypt.h:175:23: error: expected \u0027)\u0027\n/usr/local/google/buildbot/src/android/common-android13-5.15/common/include/linux/fscrypt.h:175:22: note: to match this \u0027(\u0027\n        ANDROID_KABI_RESERVE(1);\n                            ^\n/usr/local/google/buildbot/src/android/common-android13-5.15/common/include/linux/fscrypt.h:175:22: error: this function declaration is not a prototype [-Werror,-Wstrict-prototypes]\n        ANDROID_KABI_RESERVE(1);\n                            ^\n                              void\n/usr/local/google/buildbot/src/android/common-android13-5.15/common/include/linux/fscrypt.h:176:2: error: type name requires a specifier or qualifier\n        ANDROID_KABI_RESERVE(2);\n        ^\n/usr/local/google/buildbot/src/android/common-android13-5.15/common/include/linux/fscrypt.h:176:23: error: expected parameter declarator\n        ANDROID_KABI_RESERVE(2);\n                             ^\n/usr/local/google/buildbot/src/android/common-android13-5.15/common/include/linux/fscrypt.h:176:23: error: expected \u0027)\u0027\n/usr/local/google/buildbot/src/android/common-android13-5.15/common/include/linux/fscrypt.h:176:22: note: to match this \u0027(\u0027\n        ANDROID_KABI_RESERVE(2);\n                            ^\n/usr/local/google/buildbot/src/android/common-android13-5.15/common/include/linux/fscrypt.h:176:22: error: this function declaration is not a prototype [-Werror,-Wstrict-prototypes]\n        ANDROID_KABI_RESERVE(2);\n                            ^\n```",
+      "revId": "edc3bef073517723695f82a8438558afdb7917d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
