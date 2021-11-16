@@ -16,6 +16,24 @@
       "message": "also valid for upstream stable backport.",
       "revId": "4ceac0e1e77589f952c752b5190fe2e76d0c09de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f43c7947_186afeb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2021-11-16T15:36:12Z",
+      "side": 1,
+      "message": "Same as previous patch.\n\u003d\u003d\nThis is the part of Exynos Auto v9 SoC\u0027s UFS driver and it\u0027s newly introduced with the driver. So, I thought it is not enough to go to the stable tree.\n\nhttps://lore.kernel.org/linux-scsi/20211018124216.153072-1-chanho61.park@samsung.com/",
+      "parentUuid": "10a72a30_da993ee6",
+      "revId": "4ceac0e1e77589f952c752b5190fe2e76d0c09de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
