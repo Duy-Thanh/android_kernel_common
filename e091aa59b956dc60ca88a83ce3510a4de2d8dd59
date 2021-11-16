@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e52e8e8_bf5c4515",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-16T00:32:27Z",
+      "side": 1,
+      "message": "What happened to the upstream submit https://lore.kernel.org/lkml/1601253290-400618-1-git-send-email-psodagud@codeaurora.org/T/#u?\n\nIt wasn\u0027t rejected, the conversation just ended. Please pick that thread up again so we can take these patches as cherry-picks from upstream.",
+      "revId": "e091aa59b956dc60ca88a83ce3510a4de2d8dd59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
