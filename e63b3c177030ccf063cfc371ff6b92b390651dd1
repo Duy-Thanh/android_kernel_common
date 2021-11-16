@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75b6eea7_9e2ec530",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-11-16T01:05:41Z",
+      "side": 1,
+      "message": "Already present in driver copy in common-modules/virtual-device/virtio_snd/. Since this driver should be built as a module, we don\u0027t need to make this change in ACK.",
+      "revId": "e63b3c177030ccf063cfc371ff6b92b390651dd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
