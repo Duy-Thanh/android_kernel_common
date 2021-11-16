@@ -33,6 +33,23 @@
       "message": "Maciej: this is being discussed in b/204402327. It is critically important that GKI 1.0 in AOSP remains only the feature set of R, so we do not accidentally allow upgraded system images to use features that were not part of the R kernel. This does not mean partners cannot enable this features in their kernels. For later versions of GKI we will try to add a test for the \"initial release\" vs \"latest release\" so we can still ensure no feature creep in the \"initial release\", whilst allowing the feature into the latest release. Since our GKI 1.0 kernel configuration is for compliance only, it is not for product, there is no need to this for GKI 1.0 in AOSP.",
       "revId": "e785a25f52622e9a3355fa492263391952b96edd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb74fd14_08f0ce96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2021-11-16T03:26:56Z",
+      "side": 1,
+      "message": "I agree that it\u0027s disappointing to have GKI be permanently stuck on a minimum-common-denominator configuration. It sets a bad example to SOC vendors and OEMs who are actually doing the right thing by upgrading their kernels to make users more secure. Is this really the best option?",
+      "revId": "e785a25f52622e9a3355fa492263391952b96edd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
