@@ -26,6 +26,7 @@
 #include <trace/hooks/epoch.h>
 #include <trace/hooks/cpufreq.h>
 #include <trace/hooks/fs.h>
+#include <trace/hooks/f2fs.h>
 #include <trace/hooks/i2c.h>
 #include <trace/hooks/mm.h>
 #include <trace/hooks/preemptirq.h>
@@ -397,3 +398,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_css_offline);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_css_online);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_free);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_issue_discard_terminate);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_fstrim_need_wait);

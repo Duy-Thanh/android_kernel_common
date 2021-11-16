@@ -21,6 +21,7 @@
 #include "node.h"
 #include "gc.h"
 #include <trace/events/f2fs.h>
+#include <trace/hooks/f2fs.h>
 
 #define __reverse_ffz(x) __reverse_ffs(~(x))
 
@@ -3016,6 +3017,7 @@ static unsigned int __issue_discard_cmd_range(struct f2fs_sb_info *sbi,
 	struct blk_plug plug;
 	int issued;
 	unsigned int trimmed = 0;
+	bool stop = false;
 
 next:
 	issued = 0;
@@ -3069,6 +3071,10 @@ skip:
 
 		if (fatal_signal_pending(current))
 			break;
+
+		trace_android_vh_f2fs_issue_discard_terminate(current, &stop);
+		if (stop)
+			break;
 	}
 
 	blk_finish_plug(&plug);
@@ -3088,6 +3094,7 @@ int f2fs_trim_fs(struct f2fs_sb_info *sbi, struct fstrim_range *range)
 	unsigned long long trimmed = 0;
 	int err = 0;
 	bool need_align = f2fs_lfs_mode(sbi) && __is_large_section(sbi);
+	bool wait = false;
 
 	if (start >= MAX_BLKADDR(sbi) || range->len < sbi->blocksize)
 		return -EINVAL;
@@ -3129,7 +3136,8 @@ int f2fs_trim_fs(struct f2fs_sb_info *sbi, struct fstrim_range *range)
 	 * discard option. User configuration looks like using runtime discard
 	 * or periodic fstrim instead of it.
 	 */
-	if (f2fs_realtime_discard_enable(sbi))
+	trace_android_vh_f2fs_fstrim_need_wait(&wait);
+	if (!wait && f2fs_realtime_discard_enable(sbi))
 		goto out;
 
 	start_block = START_BLOCK(sbi, start_segno);
