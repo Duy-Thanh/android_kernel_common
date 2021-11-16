@@ -177,6 +177,24 @@
       "parentUuid": "e2a79130_20fb20da",
       "revId": "f217bd4588324bcac0bf146c045a8bc2271756a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d047e8b7_ead2cfb9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-11-16T20:24:33Z",
+      "side": 1,
+      "message": "Upstream Linux should work for mobile as well as for servers, so if you have a valid concern here then it is very much relevant for the upstream community and it should be discussed there. They might suggest an even better solution, so please work with upstream experts on fixing this.",
+      "parentUuid": "8b96ba6f_95b8bb5e",
+      "revId": "f217bd4588324bcac0bf146c045a8bc2271756a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
