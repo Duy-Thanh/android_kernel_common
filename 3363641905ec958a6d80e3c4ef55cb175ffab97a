@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d56cd082_b4d0d44e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-17T01:08:18Z",
+      "side": 1,
+      "message": "I assume aosp/1894152 replaces this patch. Can you abandon this one?",
+      "revId": "3363641905ec958a6d80e3c4ef55cb175ffab97a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
