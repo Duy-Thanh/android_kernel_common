@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57576558_da5a4b12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-17T09:18:36Z",
+      "side": 1,
+      "message": "Todd, I have backed out the 3 binder changes in this merge point as they conflicted. ",
+      "revId": "3462a8ca5b71d9090638e6865ea3e9ec45a2f706",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
