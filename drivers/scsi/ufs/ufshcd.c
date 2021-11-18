@@ -228,7 +228,11 @@ static int ufshcd_reset_and_restore(struct ufs_hba *hba);
 static int ufshcd_eh_host_reset_handler(struct scsi_cmnd *cmd);
 static int ufshcd_clear_tm_cmd(struct ufs_hba *hba, int tag);
 static void ufshcd_hba_exit(struct ufs_hba *hba);
+<<<<<<< HEAD   (830a9a BACKPORT: of: property: fw_devlink: Add support for "leds" a)
 static int ufshcd_probe_hba(struct ufs_hba *hba, bool init_dev_params);
+=======
+static int ufshcd_probe_hba(struct ufs_hba *hba, bool async);
+>>>>>>> BRANCH (f884bb Linux 5.10.80)
 static int ufshcd_setup_clocks(struct ufs_hba *hba, bool on);
 static inline void ufshcd_add_delay_before_dme_cmd(struct ufs_hba *hba);
 static int ufshcd_host_reset_and_restore(struct ufs_hba *hba);
@@ -8907,6 +8911,25 @@ vops_suspend:
 	ret = ufshcd_vops_suspend(hba, pm_op);
 	if (ret)
 		goto set_link_active;
+<<<<<<< HEAD   (830a9a BACKPORT: of: property: fw_devlink: Add support for "leds" a)
+=======
+	/*
+	 * Disable the host irq as host controller as there won't be any
+	 * host controller transaction expected till resume.
+	 */
+	ufshcd_disable_irq(hba);
+
+	ufshcd_setup_clocks(hba, false);
+
+	if (ufshcd_is_clkgating_allowed(hba)) {
+		hba->clk_gating.state = CLKS_OFF;
+		trace_ufshcd_clk_gating(dev_name(hba->dev),
+					hba->clk_gating.state);
+	}
+
+	/* Put the host controller in low power mode if possible */
+	ufshcd_hba_vreg_set_lpm(hba);
+>>>>>>> BRANCH (f884bb Linux 5.10.80)
 	goto out;
 
 set_link_active:

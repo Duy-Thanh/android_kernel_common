@@ -110,6 +110,7 @@ SYM_FUNC_START(__hyp_do_panic)
 	b	__host_enter_for_panic
 SYM_FUNC_END(__hyp_do_panic)
 
+<<<<<<< HEAD   (830a9a BACKPORT: of: property: fw_devlink: Add support for "leds" a)
 SYM_FUNC_START(__host_hvc)
 	ldp	x0, x1, [sp]		// Don't fixup the stack yet
 
@@ -117,6 +118,17 @@ SYM_FUNC_START(__host_hvc)
 alternative_if ARM64_KVM_PROTECTED_MODE
 	b	__host_exit
 alternative_else_nop_endif
+=======
+.macro host_el1_sync_vect
+	.align 7
+.L__vect_start\@:
+	stp	x0, x1, [sp, #-16]!
+	mrs	x0, esr_el2
+	ubfx	x0, x0, #ESR_ELx_EC_SHIFT, #ESR_ELx_EC_WIDTH
+	cmp	x0, #ESR_ELx_EC_HVC64
+	ldp	x0, x1, [sp], #16
+	b.ne	__host_exit
+>>>>>>> BRANCH (f884bb Linux 5.10.80)
 
 	/* Check for a stub HVC call */
 	cmp	x0, #HVC_STUB_HCALL_NR
