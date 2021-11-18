@@ -734,6 +734,7 @@ config HID_MULTITOUCH
 config HID_NINTENDO
 	tristate "Nintendo Joy-Con and Pro Controller support"
 	depends on HID
+<<<<<<< HEAD   (30d20d ANDROID: setlocalversion: make KMI_GENERATION optional)
 	help
 	Adds support for the Nintendo Switch Joy-Cons and Pro Controller.
 	All controllers support bluetooth, and the Pro Controller also supports
@@ -741,6 +742,28 @@ config HID_NINTENDO
 
 	To compile this driver as a module, choose M here: the
 	module will be called hid-nintendo.
+=======
+	depends on NEW_LEDS
+	depends on LEDS_CLASS
+	select POWER_SUPPLY
+	help
+	Adds support for the Nintendo Switch Joy-Cons and Pro Controller.
+	All controllers support bluetooth, and the Pro Controller also supports
+	its USB mode.
+
+	To compile this driver as a module, choose M here: the
+	module will be called hid-nintendo.
+
+config NINTENDO_FF
+	bool "Nintendo Switch controller force feedback support"
+	depends on HID_NINTENDO
+	select INPUT_FF_MEMLESS
+	help
+	Say Y here if you have a Nintendo Switch controller and want to enable
+	force feedback support for it. This works for both joy-cons and the pro
+	controller. For the pro controller, both rumble motors can be controlled
+	individually.
+>>>>>>> BRANCH (0cc82d Merge branch 'for-5.16/nintendo' into for-linus)
 
 config HID_NTI
 	tristate "NTI keyboard adapters"

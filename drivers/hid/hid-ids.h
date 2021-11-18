@@ -921,6 +921,10 @@
 #define USB_DEVICE_ID_NINTENDO_JOYCONL	0x2006
 #define USB_DEVICE_ID_NINTENDO_JOYCONR	0x2007
 #define USB_DEVICE_ID_NINTENDO_PROCON	0x2009
+<<<<<<< HEAD   (30d20d ANDROID: setlocalversion: make KMI_GENERATION optional)
+=======
+#define USB_DEVICE_ID_NINTENDO_CHRGGRIP	0x200E
+>>>>>>> BRANCH (0cc82d Merge branch 'for-5.16/nintendo' into for-linus)
 
 #define USB_VENDOR_ID_NOVATEK		0x0603
 #define USB_DEVICE_ID_NOVATEK_PCT	0x0600
