@@ -16,6 +16,24 @@
       "message": "Need a \"Bug:\" or \"Fixes:\"",
       "revId": "25a2b4b7b14b923abaae87eb5fd72789248f429d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98e6606b_39f4ffde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-11-18T18:32:50Z",
+      "side": 1,
+      "message": "Opened https://issuetracker.google.com/issues/206864392\n\nhowever, I realized this is tied to LTO\u003dnone, which has trouble with older kernels as well, so I\u0027m going to abandon this change for now.",
+      "parentUuid": "e2b5c381_1d1f4433",
+      "revId": "25a2b4b7b14b923abaae87eb5fd72789248f429d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
