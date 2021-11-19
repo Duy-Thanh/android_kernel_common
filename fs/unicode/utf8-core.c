@@ -138,7 +138,11 @@ int utf8_casefold_hash(const struct unicode_map *um, const void *salt,
 
 	while ((c = utf8byte(&cur))) {
 		if (c < 0)
+<<<<<<< HEAD   (4b0d5f ANDROID: setlocalversion: make KMI_GENERATION optional)
 			return c;
+=======
+			return -EINVAL;
+>>>>>>> BRANCH (c79c48 f2fs: fix UAF in f2fs_available_free_memory)
 		hash = partial_name_hash((unsigned char)c, hash);
 	}
 	str->hash = end_name_hash(hash);
