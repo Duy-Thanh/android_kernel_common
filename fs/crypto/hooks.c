@@ -60,7 +60,11 @@ int __fscrypt_prepare_link(struct inode *inode, struct inode *dir,
 		return err;
 
 	/* ... in case we looked up no-key name before key was added */
+<<<<<<< HEAD   (4b0d5f ANDROID: setlocalversion: make KMI_GENERATION optional)
 	if (fscrypt_is_nokey_name(dentry))
+=======
+	if (dentry->d_flags & DCACHE_NOKEY_NAME)
+>>>>>>> BRANCH (c79c48 f2fs: fix UAF in f2fs_available_free_memory)
 		return -ENOKEY;
 
 	if (!fscrypt_has_permitted_context(dir, inode))
@@ -85,8 +89,12 @@ int __fscrypt_prepare_rename(struct inode *old_dir, struct dentry *old_dentry,
 		return err;
 
 	/* ... in case we looked up no-key name(s) before key was added */
+<<<<<<< HEAD   (4b0d5f ANDROID: setlocalversion: make KMI_GENERATION optional)
 	if (fscrypt_is_nokey_name(old_dentry) ||
 	    fscrypt_is_nokey_name(new_dentry))
+=======
+	if ((old_dentry->d_flags | new_dentry->d_flags) & DCACHE_NOKEY_NAME)
+>>>>>>> BRANCH (c79c48 f2fs: fix UAF in f2fs_available_free_memory)
 		return -ENOKEY;
 
 	if (old_dir != new_dir) {
@@ -113,9 +121,9 @@ int __fscrypt_prepare_lookup(struct inode *dir, struct dentry *dentry,
 	if (err && err != -ENOENT)
 		return err;
 
-	if (fname->is_ciphertext_name) {
+	if (fname->is_nokey_name) {
 		spin_lock(&dentry->d_lock);
-		dentry->d_flags |= DCACHE_ENCRYPTED_NAME;
+		dentry->d_flags |= DCACHE_NOKEY_NAME;
 		spin_unlock(&dentry->d_lock);
 	}
 	return err;
