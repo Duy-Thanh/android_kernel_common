@@ -47,6 +47,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c056105c_46edf96a",
+        "filename": "include/linux/android_debug_symbols.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1873752
+      },
+      "writtenOn": "2021-11-19T09:40:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c475323_05afe780",
+      "range": {
+        "startLine": 55,
+        "startChar": 5,
+        "endLine": 55,
+        "endChar": 34
+      },
+      "revId": "6ebd20ae8ecb7682159828f8449899a73c3c292f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "013772e8_baeb4d5d",
+        "filename": "include/linux/android_debug_symbols.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1873752
+      },
+      "writtenOn": "2021-11-19T09:40:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41ffa417_f3ede011",
+      "range": {
+        "startLine": 55,
+        "startChar": 36,
+        "endLine": 55,
+        "endChar": 93
+      },
+      "revId": "6ebd20ae8ecb7682159828f8449899a73c3c292f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8a5e564_ca7d1128",
@@ -64,6 +112,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4944edc_cbf59831",
+        "filename": "kernel/module.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 4793,
+      "author": {
+        "id": 1873752
+      },
+      "writtenOn": "2021-11-19T09:40:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8a5e564_ca7d1128",
+      "revId": "6ebd20ae8ecb7682159828f8449899a73c3c292f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecabf940_d36f02be",
@@ -77,6 +143,30 @@
       "writtenOn": "2021-11-16T07:59:20Z",
       "side": 1,
       "message": "what lock can you grab instead?  This description is not very descriptive, please document why it is ok to disable preemption here in very specific terms so you can understand it in 5 years when it needs to be debugged 😊",
+      "range": {
+        "startLine": 4794,
+        "startChar": 23,
+        "endLine": 4794,
+        "endChar": 27
+      },
+      "revId": "6ebd20ae8ecb7682159828f8449899a73c3c292f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b2d396c_937add07",
+        "filename": "kernel/module.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 4794,
+      "author": {
+        "id": 1873752
+      },
+      "writtenOn": "2021-11-19T09:40:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecabf940_d36f02be",
       "range": {
         "startLine": 4794,
         "startChar": 23,
