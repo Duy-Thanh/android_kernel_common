@@ -34,6 +34,24 @@
       "parentUuid": "c857cf0a_82e06010",
       "revId": "79a1bf00431cbcbfcabd55a3508a26fd163cbdf4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0796d0b9_79d54357",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-19T12:16:59Z",
+      "side": 1,
+      "message": "If it\u0027s not required to be restricted, then please don\u0027t make it one.",
+      "parentUuid": "2307de59_022cb21e",
+      "revId": "79a1bf00431cbcbfcabd55a3508a26fd163cbdf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
