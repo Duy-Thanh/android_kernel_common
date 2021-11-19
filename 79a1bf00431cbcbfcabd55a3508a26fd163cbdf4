@@ -16,6 +16,24 @@
       "message": "why does this have to be a restricted hook?",
       "revId": "79a1bf00431cbcbfcabd55a3508a26fd163cbdf4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2307de59_022cb21e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1468082
+      },
+      "writtenOn": "2021-11-19T12:14:34Z",
+      "side": 1,
+      "message": "Hi, Using restricted hook is to avoid the hooks being detached together with \u0027rmmod/modprobe\u0027, although current GCK doesn\u0027t do this.",
+      "parentUuid": "c857cf0a_82e06010",
+      "revId": "79a1bf00431cbcbfcabd55a3508a26fd163cbdf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
