@@ -1690,7 +1690,11 @@ static struct buffer_head *ext4_lookup_entry(struct inode *dir,
 	struct buffer_head *bh;
 
 	err = ext4_fname_prepare_lookup(dir, dentry, &fname);
+<<<<<<< HEAD   (4b0d5f ANDROID: setlocalversion: make KMI_GENERATION optional)
 	generic_set_encrypted_ci_d_ops(dir, dentry);
+=======
+	generic_set_encrypted_ci_d_ops(dentry);
+>>>>>>> BRANCH (c79c48 f2fs: fix UAF in f2fs_available_free_memory)
 	if (err == -ENOENT)
 		return NULL;
 	if (err)
