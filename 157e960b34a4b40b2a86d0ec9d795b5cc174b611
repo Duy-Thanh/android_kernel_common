@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dac9d97_8b6086b0",
+        "filename": "drivers/android/android_debug_symbols.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-19T09:45:26Z",
+      "side": 1,
+      "message": "you are writing this in kerneldoc, so put the proper kernedoc format here \"/**\"",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 2
+      },
+      "revId": "157e960b34a4b40b2a86d0ec9d795b5cc174b611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19e7d378_6cb22e55",
+        "filename": "drivers/android/android_debug_symbols.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-19T09:45:26Z",
+      "side": 1,
+      "message": "same here.",
+      "revId": "157e960b34a4b40b2a86d0ec9d795b5cc174b611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
