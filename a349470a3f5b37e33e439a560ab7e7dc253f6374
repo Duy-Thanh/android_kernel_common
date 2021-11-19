@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62acb745_5b124b8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-11-19T19:02:46Z",
+      "side": 1,
+      "message": "This patch will break ABI. Will consult Greg and Todd how to work around that.",
+      "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
