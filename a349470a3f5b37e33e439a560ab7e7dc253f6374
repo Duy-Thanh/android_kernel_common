@@ -16,6 +16,142 @@
       "message": "This patch will break ABI. Will consult Greg and Todd how to work around that.",
       "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f36a6766_43cce9d8",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-19T21:07:00Z",
+      "side": 1,
+      "message": "remove this and instead create a new structure:\n```\n#ifdef CONFIG_SPECULATIVE_PAGE_FAULT\nstruct mm_struct_ext {\n  struct mm_struct;\n  struct percpu_rw_semaphore;\n};\n#endif\n```",
+      "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "890f8237_9038b5a8",
+        "filename": "include/linux/mmu_notifier.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-19T21:07:00Z",
+      "side": 1,
+      "message": "```\n  struct mm_struct_ext *emm;\n  \n  emm \u003d container_of(mm, ...);\n  emm-\u003emmu_notifier_lock \u003d kmalloc(...);\n  percpu_init_rwsem(emm-\u003emmu_notifier_lock);\n```",
+      "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14495c46_a11ad3ea",
+        "filename": "include/linux/mmu_notifier.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-19T21:07:00Z",
+      "side": 1,
+      "message": "get emm as in comment at line 512.",
+      "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6dd3386_dd7362fb",
+        "filename": "include/linux/mmu_notifier.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-19T21:07:00Z",
+      "side": 1,
+      "message": "these lock/unlock functions still take mm_struct, and get emmu as in the comment at line 512.",
+      "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f087d745_35faa65e",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3155,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-19T21:07:00Z",
+      "side": 1,
+      "message": "no change needed here since mmu_notifier_lock converts mm to emm.",
+      "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99d793e1_8cfd1f43",
+        "filename": "mm/mmu_notifier.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-19T21:07:00Z",
+      "side": 1,
+      "message": "There should probably be a helper function used instead of calling percpu_down_write() directly:\n\ndown_write_mmu_notifier(mm) {\n  mm_struct_ext *emm \u003d container_of(mm, ...);\n  \n  percpu_down_write(emm-\u003emmu_notifier_lock);\n}",
+      "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f48b61f8_c3aab84f",
+        "filename": "mm/mmu_notifier.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-19T21:07:00Z",
+      "side": 1,
+      "message": "see line 664",
+      "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85f8a1f1_63587935",
+        "filename": "mm/mmu_notifier.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-19T21:07:00Z",
+      "side": 1,
+      "message": "see line 664",
+      "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
