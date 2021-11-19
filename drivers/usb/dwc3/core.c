@@ -32,6 +32,8 @@
 #include <linux/usb/of.h>
 #include <linux/usb/otg.h>
 
+#include <trace/hooks/usb.h>
+
 #include "core.h"
 #include "gadget.h"
 #include "io.h"
@@ -1080,6 +1082,7 @@ static int dwc3_core_init(struct dwc3 *dwc)
 		 * packet with Retry=1 & Nump != 0)
 		 */
 		reg |= DWC3_GUCTL_HSTINAUTORETRY;
+		trace_android_vh_dwc3_core_init(&reg);
 
 		dwc3_writel(dwc->regs, DWC3_GUCTL, reg);
 	}

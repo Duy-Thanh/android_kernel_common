@@ -8,6 +8,10 @@
 #include <linux/tracepoint.h>
 #include <linux/usb.h>
 #include <trace/hooks/vendor_hooks.h>
+
+DECLARE_HOOK(android_vh_dwc3_core_init,
+	TP_PROTO(u32 *reg),
+	TP_ARGS(reg));
 /*
  * Following tracepoints are not exported in tracefs and provide a
  * mechanism for vendor modules to hook and extend functionality
