@@ -16,6 +16,24 @@
       "message": "Was this meant to be CONFIG_QCOM_SPMI_ADC_TM5?",
       "revId": "02dbd8a73fa9105f675bc3d0b56676268685d5d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ef55e4c_4b2644cf",
+        "filename": "arch/arm64/configs/db845c_gki.fragment",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-11-20T02:53:51Z",
+      "side": 1,
+      "message": "Oh! looks like you\u0027re right! I\u0027ll fix that up!\nGood eye!",
+      "parentUuid": "b3970463_4c5f7e9f",
+      "revId": "02dbd8a73fa9105f675bc3d0b56676268685d5d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
