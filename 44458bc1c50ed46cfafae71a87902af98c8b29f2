@@ -16,6 +16,24 @@
       "message": "Something went wrong when you updated your .xml file, there should not be all of these other changes.  Please be sure you are using the latest version of the tools in the repo and try again.\n\nWhat exactly was the command line that you used to generate this output?  It should just be:\n  BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 ./build/build_abi.sh --update",
       "revId": "44458bc1c50ed46cfafae71a87902af98c8b29f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2cb10ed_ac1b5be0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2021-11-22T12:27:36Z",
+      "side": 1,
+      "message": "Gerrit rebase also fails. I\u0027m going to try to reproduce at current head, in case there is some libabigail issue.",
+      "parentUuid": "84652b36_ed60e6ff",
+      "revId": "44458bc1c50ed46cfafae71a87902af98c8b29f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
