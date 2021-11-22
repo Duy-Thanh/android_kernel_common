@@ -70,6 +70,24 @@
       "parentUuid": "02b0ce44_c30958bd",
       "revId": "44458bc1c50ed46cfafae71a87902af98c8b29f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18f6b7b9_15471f9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2021-11-22T13:37:21Z",
+      "side": 1,
+      "message": "Since Mr. Giuliano has uploaded a new patch here, I will abandon the other patch.",
+      "parentUuid": "b6aed9b3_bbc10954",
+      "revId": "44458bc1c50ed46cfafae71a87902af98c8b29f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
