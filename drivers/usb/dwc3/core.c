@@ -31,6 +31,7 @@
 #include <linux/usb/gadget.h>
 #include <linux/usb/of.h>
 #include <linux/usb/otg.h>
+#include <trace/hooks/usb.h>
 
 #include "core.h"
 #include "gadget.h"
@@ -1121,6 +1122,7 @@ static int dwc3_core_init(struct dwc3 *dwc)
 		}
 	}
 
+	trace_android_vh_dwc3_core_init(dwc);
 	return 0;
 
 err4:

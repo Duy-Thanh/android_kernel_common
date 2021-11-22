@@ -8,6 +8,9 @@
 #include <linux/tracepoint.h>
 #include <linux/usb.h>
 #include <trace/hooks/vendor_hooks.h>
+
+struct dwc3;
+
 /*
  * Following tracepoints are not exported in tracefs and provide a
  * mechanism for vendor modules to hook and extend functionality
@@ -21,6 +24,9 @@ DECLARE_HOOK(android_vh_usb_dev_resume,
 	TP_PROTO(struct usb_device *udev, pm_message_t msg, int *bypass),
 	TP_ARGS(udev, msg, bypass));
 
+DECLARE_HOOK(android_vh_dwc3_core_init,
+	TP_PROTO(struct dwc3* dwc),
+	TP_ARGS(dwc));
 #endif /* _TRACE_HOOK_USB_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
