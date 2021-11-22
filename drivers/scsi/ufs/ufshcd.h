@@ -591,6 +591,7 @@ enum ufshcd_quirks {
 	UFSHCD_QUIRK_ALIGN_SG_WITH_PAGE_SIZE		= 1 << 14,
 
 	/*
+<<<<<<< HEAD   (34a7d7 Merge 030c28a02113 ("Merge tag 'pwm/for-5.16-rc1' of git://g)
 	 * This quirk needs to be enabled if the host controller supports inline
 	 * encryption, but it needs to initialize the crypto capabilities in a
 	 * nonstandard way and/or it needs to override blk_crypto_ll_ops.  If
@@ -612,6 +613,18 @@ enum ufshcd_quirks {
 	 * keys were stored in it.
 	 */
 	UFSHCD_QUIRK_KEYS_IN_PRDT			= 1 << 22,
+=======
+	 * This quirk needs to be enabled if the host controller does not
+	 * support UIC command
+	 */
+	UFSHCD_QUIRK_BROKEN_UIC_CMD			= 1 << 15,
+
+	/*
+	 * This quirk needs to be enabled if the host controller cannot
+	 * support physical host configuration.
+	 */
+	UFSHCD_QUIRK_SKIP_PH_CONFIGURATION		= 1 << 16,
+>>>>>>> BRANCH (6cbcc7 Merge tag 'scsi-misc' of git://git.kernel.org/pub/scm/linux/)
 };
 
 enum ufshcd_caps {
@@ -1048,6 +1061,7 @@ int ufshcd_wait_for_register(struct ufs_hba *hba, u32 reg, u32 mask,
 void ufshcd_parse_dev_ref_clk_freq(struct ufs_hba *hba, struct clk *refclk);
 void ufshcd_update_evt_hist(struct ufs_hba *hba, u32 id, u32 val);
 void ufshcd_hba_stop(struct ufs_hba *hba);
+void ufshcd_schedule_eh_work(struct ufs_hba *hba);
 
 static inline void check_upiu_size(void)
 {
