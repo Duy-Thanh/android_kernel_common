@@ -52,6 +52,24 @@
       "parentUuid": "a2cb10ed_ac1b5be0",
       "revId": "44458bc1c50ed46cfafae71a87902af98c8b29f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6aed9b3_bbc10954",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2021-11-22T13:32:53Z",
+      "side": 1,
+      "message": "The rebase seems produced a new commit, but the abi rebort becomes normal, see:\nhttps://android-review.googlesource.com/c/kernel/common/+/1899150",
+      "parentUuid": "02b0ce44_c30958bd",
+      "revId": "44458bc1c50ed46cfafae71a87902af98c8b29f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
