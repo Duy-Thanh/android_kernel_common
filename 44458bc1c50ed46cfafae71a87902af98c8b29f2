@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84652b36_ed60e6ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-22T07:12:28Z",
+      "side": 1,
+      "message": "Something went wrong when you updated your .xml file, there should not be all of these other changes.  Please be sure you are using the latest version of the tools in the repo and try again.\n\nWhat exactly was the command line that you used to generate this output?  It should just be:\n  BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 ./build/build_abi.sh --update",
+      "revId": "44458bc1c50ed46cfafae71a87902af98c8b29f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
