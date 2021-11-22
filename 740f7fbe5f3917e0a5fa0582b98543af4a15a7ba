@@ -16,6 +16,24 @@
       "message": "please cherry-pick from a merged change in android12-5.10 to retain the Change-Id",
       "revId": "740f7fbe5f3917e0a5fa0582b98543af4a15a7ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0404c2b4_de7bfbe9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1570698
+      },
+      "writtenOn": "2021-11-22T14:54:58Z",
+      "side": 1,
+      "message": "Change phased in android12-5.10 along with LTS 5.10.63, no additional AOSP Change-Id.\n\nhttps://android.googlesource.com/kernel/common/+/09a379549620f122de3aa4e65df9329976e4cdf5\n\n| * | | 77b971b479ba1 Merge 5.10.63 into android12-5.10-lts\n| |\\| | \n| | * | e07f317d5a289 Linux 5.10.63\n| | * | 09a379549620f ext4: fix race writing to an inline_data file while its xattrs are changing",
+      "parentUuid": "feb7688e_2bbba7c6",
+      "revId": "740f7fbe5f3917e0a5fa0582b98543af4a15a7ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
