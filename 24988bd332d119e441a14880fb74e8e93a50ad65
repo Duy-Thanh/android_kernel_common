@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36c41a34_bb10dd96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-22T18:08:30Z",
+      "side": 1,
+      "message": "The existing dwc3 platform driver init should work for your vendor additions, right?  Why is this also needed?",
+      "revId": "24988bd332d119e441a14880fb74e8e93a50ad65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
