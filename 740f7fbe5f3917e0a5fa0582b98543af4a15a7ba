@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feb7688e_2bbba7c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-11-22T14:00:45Z",
+      "side": 1,
+      "message": "please cherry-pick from a merged change in android12-5.10 to retain the Change-Id",
+      "revId": "740f7fbe5f3917e0a5fa0582b98543af4a15a7ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
