@@ -29,25 +29,6 @@ struct lockdep_map __mmu_notifier_invalidate_range_start_map = {
 #endif
 
 /*
- * The mmu_notifier_subscriptions structure is allocated and installed in
- * mm->notifier_subscriptions inside the mm_take_all_locks() protected
- * critical section and it's released only when mm_count reaches zero
- * in mmdrop().
- */
-struct mmu_notifier_subscriptions {
-	/* all mmu notifiers registered in this mm are queued in this list */
-	struct hlist_head list;
-	bool has_itree;
-	/* to serialize the list modifications and hlist_unhashed */
-	spinlock_t lock;
-	unsigned long invalidate_seq;
-	unsigned long active_invalidate_ranges;
-	struct rb_root_cached itree;
-	wait_queue_head_t wq;
-	struct hlist_head deferred_list;
-};
-
-/*
  * This is a collision-retry read-side/write-side 'lock', a lot like a
  * seqcount, however this allows multiple write-sides to hold it at
  * once. Conceptually the write side is protecting the values of the PTEs in
@@ -621,6 +602,16 @@ void __mmu_notifier_invalidate_range(struct mm_struct *mm,
 	srcu_read_unlock(&srcu, id);
 }
 
+static void init_subscriptions(struct mmu_notifier_subscriptions *subscriptions)
+{
+	INIT_HLIST_HEAD(&subscriptions->list);
+	spin_lock_init(&subscriptions->lock);
+	subscriptions->invalidate_seq = 2;
+	subscriptions->itree = RB_ROOT_CACHED;
+	init_waitqueue_head(&subscriptions->wq);
+	INIT_HLIST_HEAD(&subscriptions->deferred_list);
+}
+
 /*
  * Same as mmu_notifier_register but here the caller must hold the mmap_lock in
  * write mode. A NULL mn signals the notifier is being registered for itree
@@ -653,19 +644,14 @@ int __mmu_notifier_register(struct mmu_notifier *subscription,
 		if (!subscriptions)
 			return -ENOMEM;
 
-		INIT_HLIST_HEAD(&subscriptions->list);
-		spin_lock_init(&subscriptions->lock);
-		subscriptions->invalidate_seq = 2;
-		subscriptions->itree = RB_ROOT_CACHED;
-		init_waitqueue_head(&subscriptions->wq);
-		INIT_HLIST_HEAD(&subscriptions->deferred_list);
+		init_subscriptions(subscriptions);
 	}
 
-	percpu_down_write(mm->mmu_notifier_lock);
+	percpu_down_write(&mm->notifier_subscriptions->mmu_notifier_lock);
 
 	ret = mm_take_all_locks(mm);
 	if (unlikely(ret)) {
-		percpu_up_write(mm->mmu_notifier_lock);
+		percpu_up_write(&mm->notifier_subscriptions->mmu_notifier_lock);
 		goto out_clean;
 	}
 
@@ -702,7 +688,7 @@ int __mmu_notifier_register(struct mmu_notifier *subscription,
 		mm->notifier_subscriptions->has_itree = true;
 
 	mm_drop_all_locks(mm);
-	percpu_up_write(mm->mmu_notifier_lock);
+	percpu_up_write(&mm->notifier_subscriptions->mmu_notifier_lock);
 	BUG_ON(atomic_read(&mm->mm_users) <= 0);
 	return 0;
 
@@ -1130,3 +1116,39 @@ mmu_notifier_range_update_to_read_only(const struct mmu_notifier_range *range)
 	return range->vma->vm_flags & VM_READ;
 }
 EXPORT_SYMBOL_GPL(mmu_notifier_range_update_to_read_only);
+
+#ifdef CONFIG_SPECULATIVE_PAGE_FAULT
+
+bool mmu_notifier_subscriptions_init(struct mm_struct *mm)
+{
+	struct mmu_notifier_subscriptions *subscriptions;
+
+	subscriptions = kzalloc(
+		sizeof(struct mmu_notifier_subscriptions), GFP_KERNEL);
+	if (!subscriptions)
+		return false;
+
+	init_subscriptions(subscriptions);
+	subscriptions->has_itree = true;
+	percpu_init_rwsem(&subscriptions->mmu_notifier_lock);
+
+	mm->notifier_subscriptions = subscriptions;
+
+	return true;
+}
+
+static void free_notifier_subscriptions(struct percpu_rw_semaphore *sem)
+{
+	struct mmu_notifier_subscriptions *subscriptions = container_of(sem,
+			struct mmu_notifier_subscriptions, mmu_notifier_lock);
+	kfree(subscriptions);
+}
+
+void mmu_notifier_subscriptions_destroy(struct mm_struct *mm)
+{
+	percpu_rwsem_destroy(&mm->notifier_subscriptions->mmu_notifier_lock,
+			     free_notifier_subscriptions);
+	mm->notifier_subscriptions = NULL;
+}
+
+#endif /* CONFIG_SPECULATIVE_PAGE_FAULT */
