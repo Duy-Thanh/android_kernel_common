@@ -51,6 +51,24 @@
       "message": "Do we also need this in android12-5.10-2021-10 ?\n\nThe LTS merge did not bring it to -10",
       "revId": "740f7fbe5f3917e0a5fa0582b98543af4a15a7ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30cc8240_f83a3e23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1570698
+      },
+      "writtenOn": "2021-11-23T09:48:12Z",
+      "side": 1,
+      "message": "Pixel QPR2 will move to upcoming android12-5.10-2021-12 directly. Should be no impacts if we only cherry-pick this to android12-5.10-2021-09 for Jan MPR release.",
+      "parentUuid": "8a9fb206_62b815d2",
+      "revId": "740f7fbe5f3917e0a5fa0582b98543af4a15a7ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
