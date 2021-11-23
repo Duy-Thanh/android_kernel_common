@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2d28578_b3981119",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-11-23T08:59:14Z",
+      "side": 1,
+      "message": "I implemented this patch with additional mm-\u003emmu_notifier_lock field, which breaks ABI and the breakage is fixed in the next patch by moving mmu_notifier_lock into mmu_notifier_subscriptions.\nBy splitting the patch this way we can merge only this one into android13-5.xx since in there the ABI is not frozen and having a separate mm-\u003emmu_notifier_lock is more efficient and keeps our code closer to upstream.\n\nFixing the ABI this was was much cleaner than what Todd was suggesting (implementing the new field in mm_struct_ext). This is because several places, including drivers, create mm_struct by themselves, so the changes would be more dispersed and vendor drivers would have a problem if they create their own mm_struct.\n",
+      "revId": "d3cb6d552eb9924cb204c7f319045325bc3e0059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
