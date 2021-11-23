@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33e47fb0_46ff23e9",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-11-23T09:20:33Z",
+      "side": 1,
+      "message": "This forward-declaration generates compilation error. Please fix and ensure no compilation errors.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 49
+      },
+      "revId": "0d58d718f43c295306ba2e2fa6243b5c75baeca8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
