@@ -472,13 +472,9 @@ struct usb_bus {
 
 	unsigned resuming_ports;	/* bit array: resuming root-hub ports */
 
-#if defined(CONFIG_USB_MON) || defined(CONFIG_USB_MON_MODULE)
-	struct mon_bus *mon_bus;	/* non-null when associated */
-	int monitored;			/* non-zero when monitored */
-#endif
+	ANDROID_KABI_USE(1, struct mon_bus *mon_bus); /* non-null when associated */
+	ANDROID_KABI_USE(2, int monitored); /* non-zero when monitored */
 
-	ANDROID_KABI_RESERVE(1);
-	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
 };
