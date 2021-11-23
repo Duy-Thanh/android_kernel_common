@@ -86,6 +86,24 @@
       "message": "Hi Aaron,\n\nWould you like to file a bug for this respin request? This is how it gets started according to current process. ",
       "revId": "740f7fbe5f3917e0a5fa0582b98543af4a15a7ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0923e63e_4b512a1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1570698
+      },
+      "writtenOn": "2021-11-23T10:15:57Z",
+      "side": 1,
+      "message": "Sure thing. Will follow b/206572230 for respin request after the merges for Jan MPR. Thanks Howard.",
+      "parentUuid": "4d39d3b2_fbe1909d",
+      "revId": "740f7fbe5f3917e0a5fa0582b98543af4a15a7ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
