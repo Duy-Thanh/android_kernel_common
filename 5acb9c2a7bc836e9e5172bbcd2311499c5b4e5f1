@@ -34,6 +34,24 @@
       "parentUuid": "d4b2fad3_fa6da7f5",
       "revId": "5acb9c2a7bc836e9e5172bbcd2311499c5b4e5f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32695834_ff24e4b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2021-11-23T23:01:53Z",
+      "side": 1,
+      "message": "I guess they don\u0027t bother me too much as long as I have a local workaround. I\u0027ve now applied that patch locally, hopefully my Tested-by will help move things along.",
+      "parentUuid": "3c242fc0_f7c59eee",
+      "revId": "5acb9c2a7bc836e9e5172bbcd2311499c5b4e5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
