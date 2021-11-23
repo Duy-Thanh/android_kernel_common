@@ -34,6 +34,24 @@
       "parentUuid": "36c41a34_bb10dd96",
       "revId": "24988bd332d119e441a14880fb74e8e93a50ad65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ad52115_87fe375c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-23T14:26:30Z",
+      "side": 1,
+      "message": "No, please use the existing platform driver hooks and interface for this type of thing, that is exactly what it is there for, no additional hook should be needed.\n\nThis is currently how all other dwc3 driver users who need vendor-specific things added do this.  If that does not work for you, please explain in detail why.\n\nthanks!",
+      "parentUuid": "bf4ed075_2330a3fe",
+      "revId": "24988bd332d119e441a14880fb74e8e93a50ad65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
