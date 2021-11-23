@@ -2063,7 +2063,7 @@ int vb2_core_streamon(struct vb2_queue *q, unsigned int type)
 	 * are available.
 	 */
 	if (q->queued_count >= q->min_buffers_needed) {
-		ret = v4l_vb2q_enable_media_source(q);
+		//ret = v4l_vb2q_enable_media_source(q);
 		if (ret)
 			return ret;
 		ret = vb2_start_streaming(q);
