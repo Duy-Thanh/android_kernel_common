@@ -104,6 +104,24 @@
       "parentUuid": "4d39d3b2_fbe1909d",
       "revId": "740f7fbe5f3917e0a5fa0582b98543af4a15a7ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bd573e6_78fe92d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1570698
+      },
+      "writtenOn": "2021-11-23T15:33:27Z",
+      "side": 1,
+      "message": "Thanks Matthias for the info.\n\nSupposedly, it should be but not impact to Pixel as Pixel will use 2021-09 for Dec QPR / Jan MPR / Feb MPR, and move to 2021-12 for Mar QPR releases.\n\nI uploaded another one to aosp/1900570 separately for 2021-10.",
+      "parentUuid": "30cc8240_f83a3e23",
+      "revId": "740f7fbe5f3917e0a5fa0582b98543af4a15a7ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
