@@ -499,15 +499,17 @@ struct usb_bus {
 
 	unsigned resuming_ports;	/* bit array: resuming root-hub ports */
 
-#if defined(CONFIG_USB_MON) || defined(CONFIG_USB_MON_MODULE)
 	struct mon_bus *mon_bus;	/* non-null when associated */
 	int monitored;			/* non-zero when monitored */
+<<<<<<< HEAD   (64018a ANDROID: rust_binder: don't pr_warn on benign errors)
 #endif
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
+=======
+>>>>>>> CHANGE (0180d9 ANDROID: GKI: USB: Allow usbmon as a vendor module)
 };
 
 struct usb_dev_state;
