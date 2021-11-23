@@ -16,6 +16,24 @@
       "message": "Should we also disable it on android-mainline? I\u0027m seeing relatively frequent crashes on bootup involving this driver.",
       "revId": "5acb9c2a7bc836e9e5172bbcd2311499c5b4e5f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c242fc0_f7c59eee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-11-23T04:32:48Z",
+      "side": 1,
+      "message": "I\u0027m hoping the fix here:\n  https://lore.kernel.org/all/20211029214833.2615274-1-tadeusz.struk@linaro.org/\n  \nlands upstream soon.\n\nBut if the crashes are bothering you on android-mainline (I know Amit has reported it often as well, but for some reason it doesn\u0027t hit my board that often), I\u0027m ok with disabling it for a bit.",
+      "parentUuid": "d4b2fad3_fa6da7f5",
+      "revId": "5acb9c2a7bc836e9e5172bbcd2311499c5b4e5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
