@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4b2fad3_fa6da7f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2021-11-23T03:11:12Z",
+      "side": 1,
+      "message": "Should we also disable it on android-mainline? I\u0027m seeing relatively frequent crashes on bootup involving this driver.",
+      "revId": "5acb9c2a7bc836e9e5172bbcd2311499c5b4e5f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
