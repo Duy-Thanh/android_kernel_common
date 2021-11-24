@@ -22,6 +22,30 @@
       },
       "revId": "109f31ac23f5fc4fa3517bfc1cd005eccf93193b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be456157_02bf49e0",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1851199
+      },
+      "writtenOn": "2021-11-24T13:18:58Z",
+      "side": 0,
+      "message": "Thanks Greg for the review. Got the message.",
+      "parentUuid": "f7a89115_21699088",
+      "range": {
+        "startLine": 480,
+        "startChar": 0,
+        "endLine": 480,
+        "endChar": 25
+      },
+      "revId": "109f31ac23f5fc4fa3517bfc1cd005eccf93193b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
