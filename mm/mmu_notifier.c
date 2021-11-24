@@ -35,6 +35,11 @@ struct lockdep_map __mmu_notifier_invalidate_range_start_map = {
  * in mmdrop().
  */
 struct mmu_notifier_subscriptions {
+	/*
+	 * hdr should be at the beginning of the mmu_notifier_subscriptions
+	 * so that if can be typecasted into mmu_notifier_subscriptions_hdr
+	 */
+	struct mmu_notifier_subscriptions_hdr hdr;
 	/* all mmu notifiers registered in this mm are queued in this list */
 	struct hlist_head list;
 	bool has_itree;
@@ -625,12 +630,14 @@ void __mmu_notifier_invalidate_range(struct mm_struct *mm,
 
 static inline void mmu_notifier_write_lock(struct mm_struct *mm)
 {
-	percpu_down_write(&mm->mmu_notifier_lock->rw_sem);
+	percpu_down_write(
+		&mm->notifier_subscriptions->hdr.mmu_notifier_lock.rw_sem);
 }
 
 static inline void mmu_notifier_write_unlock(struct mm_struct *mm)
 {
-	percpu_up_write(&mm->mmu_notifier_lock->rw_sem);
+	percpu_up_write(
+		&mm->notifier_subscriptions->hdr.mmu_notifier_lock.rw_sem);
 }
 
 #else /* CONFIG_SPECULATIVE_PAGE_FAULT */
@@ -639,6 +646,16 @@ static inline void mmu_notifier_write_lock(struct mm_struct *mm) {}
 static inline void mmu_notifier_write_unlock(struct mm_struct *mm) {}
 
 #endif /* CONFIG_SPECULATIVE_PAGE_FAULT */
+
+static void init_subscriptions(struct mmu_notifier_subscriptions *subscriptions)
+{
+	INIT_HLIST_HEAD(&subscriptions->list);
+	spin_lock_init(&subscriptions->lock);
+	subscriptions->invalidate_seq = 2;
+	subscriptions->itree = RB_ROOT_CACHED;
+	init_waitqueue_head(&subscriptions->wq);
+	INIT_HLIST_HEAD(&subscriptions->deferred_list);
+}
 
 /*
  * Same as mmu_notifier_register but here the caller must hold the mmap_lock in
@@ -672,12 +689,7 @@ int __mmu_notifier_register(struct mmu_notifier *subscription,
 		if (!subscriptions)
 			return -ENOMEM;
 
-		INIT_HLIST_HEAD(&subscriptions->list);
-		spin_lock_init(&subscriptions->lock);
-		subscriptions->invalidate_seq = 2;
-		subscriptions->itree = RB_ROOT_CACHED;
-		init_waitqueue_head(&subscriptions->wq);
-		INIT_HLIST_HEAD(&subscriptions->deferred_list);
+		init_subscriptions(subscriptions);
 	}
 
 	mmu_notifier_write_lock(mm);
@@ -706,6 +718,7 @@ int __mmu_notifier_register(struct mmu_notifier *subscription,
 	 */
 	if (subscriptions)
 		smp_store_release(&mm->notifier_subscriptions, subscriptions);
+	mm->notifier_subscriptions->hdr.valid = true;
 
 	if (subscription) {
 		/* Pairs with the mmdrop in mmu_notifier_unregister_* */
@@ -1149,3 +1162,40 @@ mmu_notifier_range_update_to_read_only(const struct mmu_notifier_range *range)
 	return range->vma->vm_flags & VM_READ;
 }
 EXPORT_SYMBOL_GPL(mmu_notifier_range_update_to_read_only);
+
+#ifdef CONFIG_SPECULATIVE_PAGE_FAULT
+
+bool mmu_notifier_subscriptions_init(struct mm_struct *mm)
+{
+	struct mmu_notifier_subscriptions *subscriptions;
+
+	subscriptions = kzalloc(
+		sizeof(struct mmu_notifier_subscriptions), GFP_KERNEL);
+	if (!subscriptions)
+		return false;
+
+	init_subscriptions(subscriptions);
+	subscriptions->has_itree = true;
+	subscriptions->hdr.valid = false;
+	percpu_init_rwsem(&subscriptions->hdr.mmu_notifier_lock.rw_sem);
+
+	mm->notifier_subscriptions = subscriptions;
+
+	return true;
+}
+
+static void free_notifier_subscriptions(struct percpu_rw_semaphore_atomic *sem)
+{
+	struct mmu_notifier_subscriptions *subscriptions = container_of(sem,
+			struct mmu_notifier_subscriptions, hdr.mmu_notifier_lock);
+	kfree(subscriptions);
+}
+
+void mmu_notifier_subscriptions_destroy(struct mm_struct *mm)
+{
+	percpu_rwsem_destroy(&mm->notifier_subscriptions->hdr.mmu_notifier_lock,
+			     free_notifier_subscriptions);
+	mm->notifier_subscriptions = NULL;
+}
+
+#endif /* CONFIG_SPECULATIVE_PAGE_FAULT */
