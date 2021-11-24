@@ -20,6 +20,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f147240_89e4633b",
+        "filename": "include/linux/mmu_notifier.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-11-24T21:13:35Z",
+      "side": 1,
+      "message": "Will add a comment.\nThe reason I can\u0027t use container_of() here is because mmu_notifier_subscriptions struct should be kept invisible to mm_struct, otherwise its CRC will change. Therefore the callers don\u0027t know what members struct mmu_notifier_subscriptions contains and can\u0027t call container_of() which requires a member name.",
+      "parentUuid": "a4a7d8b1_a6b6a361",
+      "revId": "b8055174605fd90826960683e9e69b0b12e3c3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2763a21_3409cd8d",
+        "filename": "mm/mmu_notifier.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-11-24T21:13:35Z",
+      "side": 1,
+      "message": "s/if/it",
+      "range": {
+        "startLine": 40,
+        "startChar": 12,
+        "endLine": 40,
+        "endChar": 14
+      },
+      "revId": "b8055174605fd90826960683e9e69b0b12e3c3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a00fa603_1b8e33a0",
         "filename": "mm/mmu_notifier.c",
         "patchSetId": 8
@@ -31,6 +72,24 @@
       "writtenOn": "2021-11-24T19:59:01Z",
       "side": 1,
       "message": "make clear that this is needed to avoid the KMI CRC issues.",
+      "revId": "b8055174605fd90826960683e9e69b0b12e3c3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d7bcaa7_c09b67dd",
+        "filename": "mm/mmu_notifier.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-11-24T21:13:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a00fa603_1b8e33a0",
       "revId": "b8055174605fd90826960683e9e69b0b12e3c3f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
