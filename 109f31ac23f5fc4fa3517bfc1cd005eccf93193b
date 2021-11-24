@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7a89115_21699088",
+        "filename": "include/linux/usb.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-24T12:27:22Z",
+      "side": 0,
+      "message": "reserved fields are for merges with upstream LTS releases to ensure the stable API for the next 5 years.  They are NOT for adding new features to the kernel with, sorry.",
+      "range": {
+        "startLine": 480,
+        "startChar": 0,
+        "endLine": 480,
+        "endChar": 25
+      },
+      "revId": "109f31ac23f5fc4fa3517bfc1cd005eccf93193b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
