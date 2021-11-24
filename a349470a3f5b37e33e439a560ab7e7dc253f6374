@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd824e87_9d435f62",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-24T17:30:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f36a6766_43cce9d8",
+      "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "890f8237_9038b5a8",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-11-19T21:07:00Z",
       "side": 1,
       "message": "```\n  struct mm_struct_ext *emm;\n  \n  emm \u003d container_of(mm, ...);\n  emm-\u003emmu_notifier_lock \u003d kmalloc(...);\n  percpu_init_rwsem(emm-\u003emmu_notifier_lock);\n```",
+      "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bec50fbb_22a0c336",
+        "filename": "include/linux/mmu_notifier.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-24T17:30:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "890f8237_9038b5a8",
       "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -69,6 +105,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c8dc30e_f7bffcdd",
+        "filename": "include/linux/mmu_notifier.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-24T17:30:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "14495c46_a11ad3ea",
+      "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6dd3386_dd7362fb",
@@ -82,6 +136,24 @@
       "writtenOn": "2021-11-19T21:07:00Z",
       "side": 1,
       "message": "these lock/unlock functions still take mm_struct, and get emmu as in the comment at line 512.",
+      "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e770285_05eae2c7",
+        "filename": "include/linux/mmu_notifier.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-24T17:30:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6dd3386_dd7362fb",
       "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -103,6 +175,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bf235e0_928aa6d8",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3155,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-24T17:30:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f087d745_35faa65e",
+      "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99d793e1_8cfd1f43",
@@ -116,6 +206,24 @@
       "writtenOn": "2021-11-19T21:07:00Z",
       "side": 1,
       "message": "There should probably be a helper function used instead of calling percpu_down_write() directly:\n\ndown_write_mmu_notifier(mm) {\n  mm_struct_ext *emm \u003d container_of(mm, ...);\n  \n  percpu_down_write(emm-\u003emmu_notifier_lock);\n}",
+      "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c069e8d_4b9114ce",
+        "filename": "mm/mmu_notifier.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-24T17:30:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99d793e1_8cfd1f43",
       "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -137,6 +245,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14ad4a87_d219b889",
+        "filename": "mm/mmu_notifier.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-24T17:30:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f48b61f8_c3aab84f",
+      "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85f8a1f1_63587935",
@@ -150,6 +276,24 @@
       "writtenOn": "2021-11-19T21:07:00Z",
       "side": 1,
       "message": "see line 664",
+      "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f646910a_7316a982",
+        "filename": "mm/mmu_notifier.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-24T17:30:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85f8a1f1_63587935",
       "revId": "a349470a3f5b37e33e439a560ab7e7dc253f6374",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
