@@ -12,22 +12,18 @@
 struct percpu_rw_semaphore {
 	struct rcu_sync		rss;
 	unsigned int __percpu	*read_count;
-	/*
-	 * dtor and dtor_list are used during object destruction when
-	 * writer and waiters can't be used, therefore reusing the same space.
-	 */
-	union {
-		struct rcuwait		writer;
-		void (*dtor)(struct percpu_rw_semaphore *sem);
-	};
-	union {
-		wait_queue_head_t	waiters;
-		struct list_head	dtor_list;
-	};
+	struct rcuwait		writer;
+	wait_queue_head_t	waiters;
 	atomic_t		block;
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
 	struct lockdep_map	dep_map;
 #endif
+};
+
+struct percpu_rw_semaphore_atomic {
+	struct percpu_rw_semaphore rw_sem;
+	void (*dtor)(struct percpu_rw_semaphore_atomic *sem);
+	struct list_head dtor_list;
 };
 
 #ifdef CONFIG_DEBUG_LOCK_ALLOC
@@ -146,8 +142,8 @@ extern void percpu_free_rwsem(struct percpu_rw_semaphore *);
  * using kfree. If called in atomic context, the destruction is performed
  * asynchronously from a worker thread.
  */
-extern void percpu_rwsem_destroy(struct percpu_rw_semaphore *sem,
-				 void (*dtor)(struct percpu_rw_semaphore *));
+extern void percpu_rwsem_destroy(struct percpu_rw_semaphore_atomic *sem,
+				 void (*dtor)(struct percpu_rw_semaphore_atomic *));
 
 #define percpu_init_rwsem(sem)					\
 ({								\
