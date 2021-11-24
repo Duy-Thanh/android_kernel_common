@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4a7d8b1_a6b6a361",
+        "filename": "include/linux/mmu_notifier.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-24T19:59:01Z",
+      "side": 1,
+      "message": "This obviously makes the assumption that the \"notifier_subscriptions\" field is the first field in the \"_hdr\" struct. Please add a comment here and in the struct definition calling out this assumption. The obvious question is why do we need to make this assumption instead of using something like container_of() -- the issue is that the visibility causes CRC issues, so explain that.",
+      "revId": "b8055174605fd90826960683e9e69b0b12e3c3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a00fa603_1b8e33a0",
+        "filename": "mm/mmu_notifier.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-24T19:59:01Z",
+      "side": 1,
+      "message": "make clear that this is needed to avoid the KMI CRC issues.",
+      "revId": "b8055174605fd90826960683e9e69b0b12e3c3f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
