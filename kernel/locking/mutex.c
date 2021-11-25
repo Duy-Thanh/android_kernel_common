@@ -170,8 +170,10 @@ static __always_inline bool __mutex_trylock_fast(struct mutex *lock)
 	unsigned long curr = (unsigned long)current;
 	unsigned long zero = 0UL;
 
-	if (atomic_long_try_cmpxchg_acquire(&lock->owner, &zero, curr))
+	if (atomic_long_try_cmpxchg_acquire(&lock->owner, &zero, curr)) {
+		trace_android_vh_mutex_acquire(lock);
 		return true;
+	}
 
 	return false;
 }
@@ -180,8 +182,10 @@ static __always_inline bool __mutex_unlock_fast(struct mutex *lock)
 {
 	unsigned long curr = (unsigned long)current;
 
-	if (atomic_long_cmpxchg_release(&lock->owner, curr, 0UL) == curr)
+	if (atomic_long_cmpxchg_release(&lock->owner, curr, 0UL) == curr) {
+		trace_android_vh_mutex_release(lock);
 		return true;
+	}
 
 	return false;
 }
@@ -976,6 +980,7 @@ __mutex_lock_common(struct mutex *lock, long state, unsigned int subclass,
 	    mutex_optimistic_spin(lock, ww_ctx, NULL)) {
 		/* got the lock, yay! */
 		lock_acquired(&lock->dep_map, ip);
+		trace_android_vh_mutex_acquire(lock);
 		if (ww_ctx)
 			ww_mutex_set_context_fastpath(ww, ww_ctx);
 		preempt_enable();
@@ -1090,6 +1095,7 @@ acquired:
 skip_wait:
 	/* got the lock - cleanup and rejoice! */
 	lock_acquired(&lock->dep_map, ip);
+	trace_android_vh_mutex_acquire(lock);
 
 	if (ww_ctx)
 		ww_mutex_lock_acquired(ww, ww_ctx);
@@ -1240,6 +1246,7 @@ static noinline void __sched __mutex_unlock_slowpath(struct mutex *lock, unsigne
 	unsigned long owner;
 
 	mutex_release(&lock->dep_map, ip);
+	trace_android_vh_mutex_release(lock);
 
 	/*
 	 * Release the lock before (potentially) taking the spinlock such that
@@ -1431,8 +1438,10 @@ int __sched mutex_trylock(struct mutex *lock)
 #endif
 
 	locked = __mutex_trylock(lock);
-	if (locked)
+	if (locked) {
 		mutex_acquire(&lock->dep_map, 0, 1, _RET_IP_);
+		trace_android_vh_mutex_acquire(lock);
+	}
 
 	return locked;
 }
