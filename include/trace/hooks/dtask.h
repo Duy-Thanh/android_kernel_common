@@ -49,6 +49,22 @@ DECLARE_HOOK(android_vh_rwsem_write_wait_finish,
 	TP_PROTO(struct rw_semaphore *sem),
 	TP_ARGS(sem));
 
+DECLARE_HOOK(android_vh_rwsem_read_acquire,
+	TP_PROTO(struct rw_semaphore *sem),
+	TP_ARGS(sem));
+
+DECLARE_HOOK(android_vh_rwsem_read_release,
+	TP_PROTO(struct rw_semaphore *sem),
+	TP_ARGS(sem));
+
+DECLARE_HOOK(android_vh_rwsem_write_acquire,
+	TP_PROTO(struct rw_semaphore *sem),
+	TP_ARGS(sem));
+
+DECLARE_HOOK(android_vh_rwsem_downgrade_write,
+	TP_PROTO(struct rw_semaphore *sem),
+	TP_ARGS(sem));
+
 struct task_struct;
 DECLARE_HOOK(android_vh_sched_show_task,
 	TP_PROTO(struct task_struct *task),

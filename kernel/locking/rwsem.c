@@ -1514,6 +1514,7 @@ void __sched down_read(struct rw_semaphore *sem)
 	rwsem_acquire_read(&sem->dep_map, 0, 0, _RET_IP_);
 
 	LOCK_CONTENDED(sem, __down_read_trylock, __down_read);
+	trace_android_vh_rwsem_read_acquire(sem);
 }
 EXPORT_SYMBOL(down_read);
 
@@ -1527,6 +1528,7 @@ int __sched down_read_interruptible(struct rw_semaphore *sem)
 		return -EINTR;
 	}
 
+	trace_android_vh_rwsem_read_acquire(sem);
 	return 0;
 }
 EXPORT_SYMBOL(down_read_interruptible);
@@ -1541,6 +1543,7 @@ int __sched down_read_killable(struct rw_semaphore *sem)
 		return -EINTR;
 	}
 
+	trace_android_vh_rwsem_read_acquire(sem);
 	return 0;
 }
 EXPORT_SYMBOL(down_read_killable);
@@ -1552,8 +1555,10 @@ int down_read_trylock(struct rw_semaphore *sem)
 {
 	int ret = __down_read_trylock(sem);
 
-	if (ret == 1)
+	if (ret == 1) {
 		rwsem_acquire_read(&sem->dep_map, 0, 1, _RET_IP_);
+		trace_android_vh_rwsem_read_acquire(sem);
+	}
 	return ret;
 }
 EXPORT_SYMBOL(down_read_trylock);
@@ -1566,6 +1571,7 @@ void __sched down_write(struct rw_semaphore *sem)
 	might_sleep();
 	rwsem_acquire(&sem->dep_map, 0, 0, _RET_IP_);
 	LOCK_CONTENDED(sem, __down_write_trylock, __down_write);
+	trace_android_vh_rwsem_write_acquire(sem);
 }
 EXPORT_SYMBOL(down_write);
 
@@ -1583,6 +1589,7 @@ int __sched down_write_killable(struct rw_semaphore *sem)
 		return -EINTR;
 	}
 
+	trace_android_vh_rwsem_write_acquire(sem);
 	return 0;
 }
 EXPORT_SYMBOL(down_write_killable);
@@ -1594,8 +1601,10 @@ int down_write_trylock(struct rw_semaphore *sem)
 {
 	int ret = __down_write_trylock(sem);
 
-	if (ret == 1)
+	if (ret == 1) {
 		rwsem_acquire(&sem->dep_map, 0, 1, _RET_IP_);
+		trace_android_vh_rwsem_write_acquire(sem);
+	}
 
 	return ret;
 }
@@ -1607,6 +1616,7 @@ EXPORT_SYMBOL(down_write_trylock);
 void up_read(struct rw_semaphore *sem)
 {
 	rwsem_release(&sem->dep_map, _RET_IP_);
+	trace_android_vh_rwsem_read_release(sem);
 	__up_read(sem);
 }
 EXPORT_SYMBOL(up_read);
@@ -1629,6 +1639,7 @@ void downgrade_write(struct rw_semaphore *sem)
 {
 	lock_downgrade(&sem->dep_map, _RET_IP_);
 	trace_android_vh_rwsem_write_finished(sem);
+	trace_android_vh_rwsem_downgrade_write(sem);
 	__downgrade_write(sem);
 }
 EXPORT_SYMBOL(downgrade_write);
