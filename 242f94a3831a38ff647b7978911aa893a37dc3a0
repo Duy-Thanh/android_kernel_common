@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7235974c_c5f3cca3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-25T09:07:32Z",
+      "side": 1,
+      "message": "The .xml file update needs to be somewhere as the build system will complain and not allow the series to be merged unless it is updated as it will be out of sync.",
+      "parentUuid": "6acf732b_62846405",
+      "revId": "242f94a3831a38ff647b7978911aa893a37dc3a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "40065c4d_c0b8d89e",
         "filename": "android/abi_gki_aarch64_core",
         "patchSetId": 1
