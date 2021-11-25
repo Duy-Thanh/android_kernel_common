@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6e71e44_b6e2583a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-25T08:53:14Z",
+      "side": 1,
+      "message": "no .xml file update for these new symbols?\n\nAnd why \"core\"?  It\u0027s too late for that name for this branch, please use the vendor name instead.",
+      "revId": "242f94a3831a38ff647b7978911aa893a37dc3a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40065c4d_c0b8d89e",
+        "filename": "android/abi_gki_aarch64_core",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-25T08:53:14Z",
+      "side": 1,
+      "message": "this file should be your vendor name, not \"core\" as that is reserved for all systems.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "242f94a3831a38ff647b7978911aa893a37dc3a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
