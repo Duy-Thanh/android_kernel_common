@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1c573c5_14a14ba5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-25T07:09:42Z",
+      "side": 1,
+      "message": "tiny comments on things I noticed.",
+      "revId": "4bc8f600a0c9c2be62ec2195c43eddd2ae3e3cbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f86ebff7_63f58d91",
+        "filename": "kernel/gki_module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-25T07:09:42Z",
+      "side": 1,
+      "message": "needs a SPDX line at the top of the file with the license in it.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "4bc8f600a0c9c2be62ec2195c43eddd2ae3e3cbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f76f3a27_31adef10",
+        "filename": "kernel/gki_module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-25T07:09:42Z",
+      "side": 1,
+      "message": "nit, it\u0027s nicer to name functions with the subsystem first, so \"gki_is_module...\" might be better?\n\nSame for other function below.",
+      "range": {
+        "startLine": 31,
+        "startChar": 5,
+        "endLine": 31,
+        "endChar": 11
+      },
+      "revId": "4bc8f600a0c9c2be62ec2195c43eddd2ae3e3cbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b437338f_ec8a6fe8",
+        "filename": "kernel/module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2301,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-25T07:09:42Z",
+      "side": 1,
+      "message": "belongs in a .h file, no need to put it in here.  Provide \"empty\" functions in the .h file if the config option is not enabled to keep #ifdef out of .c files.",
+      "range": {
+        "startLine": 2301,
+        "startChar": 0,
+        "endLine": 2301,
+        "endChar": 60
+      },
+      "revId": "4bc8f600a0c9c2be62ec2195c43eddd2ae3e3cbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34e993a2_874b775e",
+        "filename": "kernel/module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2330,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-25T07:09:42Z",
+      "side": 1,
+      "message": "same as above, this can be removed if you put the needed empty inline functions in the .h file.  Then if the option is not enabled the compiler will optimize it all away.",
+      "range": {
+        "startLine": 2330,
+        "startChar": 0,
+        "endLine": 2330,
+        "endChar": 32
+      },
+      "revId": "4bc8f600a0c9c2be62ec2195c43eddd2ae3e3cbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a223aa5_4e71a495",
+        "filename": "kernel/module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2367,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-25T07:09:42Z",
+      "side": 1,
+      "message": "same as above.",
+      "range": {
+        "startLine": 2367,
+        "startChar": 0,
+        "endLine": 2367,
+        "endChar": 61
+      },
+      "revId": "4bc8f600a0c9c2be62ec2195c43eddd2ae3e3cbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cae3eae_7c75d31b",
+        "filename": "kernel/module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2408,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-25T07:09:42Z",
+      "side": 1,
+      "message": "same as above.",
+      "range": {
+        "startLine": 2408,
+        "startChar": 0,
+        "endLine": 2408,
+        "endChar": 32
+      },
+      "revId": "4bc8f600a0c9c2be62ec2195c43eddd2ae3e3cbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
