@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6acf732b_62846405",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1927177
+      },
+      "writtenOn": "2021-11-25T09:00:00Z",
+      "side": 1,
+      "message": "Ok, it can be moved to a vendor file instead. The idea was to be able to add WPAN driver to that kernel branch, cherry-picking patches that were made for the android12-5.10 branch.\n\nAs for the xml update, does it need to happen as part of this patch or as a follow-up in that series?",
+      "parentUuid": "f6e71e44_b6e2583a",
+      "revId": "242f94a3831a38ff647b7978911aa893a37dc3a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "40065c4d_c0b8d89e",
         "filename": "android/abi_gki_aarch64_core",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2021-11-25T08:53:14Z",
       "side": 1,
       "message": "this file should be your vendor name, not \"core\" as that is reserved for all systems.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "242f94a3831a38ff647b7978911aa893a37dc3a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f63fa57e_aa203bfe",
+        "filename": "android/abi_gki_aarch64_core",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1927177
+      },
+      "writtenOn": "2021-11-25T09:00:00Z",
+      "side": 1,
+      "message": "Ok.",
+      "parentUuid": "40065c4d_c0b8d89e",
       "range": {
         "startLine": 1,
         "startChar": 0,
