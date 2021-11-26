@@ -16,6 +16,24 @@
       "message": "do you need a follow-on patch that adds the needed symbols to the abi list?  Otherwise these 2 changes will not provide any additional functionality on their own.",
       "revId": "c2465d62204d09298413a385da9afa23d6c6956b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff408a68_862a6047",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2021-11-26T09:15:11Z",
+      "side": 1,
+      "message": "Thanks.\nJust submitted another patch to add these symbols:\nhttps://android-review.googlesource.com/c/kernel/common/+/1903774",
+      "parentUuid": "d67bc002_893ecb10",
+      "revId": "c2465d62204d09298413a385da9afa23d6c6956b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
