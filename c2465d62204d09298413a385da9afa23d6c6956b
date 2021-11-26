@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d67bc002_893ecb10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-26T08:36:24Z",
+      "side": 1,
+      "message": "do you need a follow-on patch that adds the needed symbols to the abi list?  Otherwise these 2 changes will not provide any additional functionality on their own.",
+      "revId": "c2465d62204d09298413a385da9afa23d6c6956b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
