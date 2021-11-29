@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26289e72_a6220358",
+        "filename": "kernel/gki_module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2021-11-29T20:50:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f86ebff7_63f58d91",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "4bc8f600a0c9c2be62ec2195c43eddd2ae3e3cbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f76f3a27_31adef10",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-11-25T07:09:42Z",
       "side": 1,
       "message": "nit, it\u0027s nicer to name functions with the subsystem first, so \"gki_is_module...\" might be better?\n\nSame for other function below.",
+      "range": {
+        "startLine": 31,
+        "startChar": 5,
+        "endLine": 31,
+        "endChar": 11
+      },
+      "revId": "4bc8f600a0c9c2be62ec2195c43eddd2ae3e3cbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67f4d98e_62e11f21",
+        "filename": "kernel/gki_module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2021-11-29T20:50:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f76f3a27_31adef10",
       "range": {
         "startLine": 31,
         "startChar": 5,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27cd04c6_11e0420c",
+        "filename": "kernel/module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2301,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2021-11-29T20:50:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b437338f_ec8a6fe8",
+      "range": {
+        "startLine": 2301,
+        "startChar": 0,
+        "endLine": 2301,
+        "endChar": 60
+      },
+      "revId": "4bc8f600a0c9c2be62ec2195c43eddd2ae3e3cbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34e993a2_874b775e",
@@ -100,6 +172,30 @@
       "writtenOn": "2021-11-25T07:09:42Z",
       "side": 1,
       "message": "same as above, this can be removed if you put the needed empty inline functions in the .h file.  Then if the option is not enabled the compiler will optimize it all away.",
+      "range": {
+        "startLine": 2330,
+        "startChar": 0,
+        "endLine": 2330,
+        "endChar": 32
+      },
+      "revId": "4bc8f600a0c9c2be62ec2195c43eddd2ae3e3cbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92288334_daa699a2",
+        "filename": "kernel/module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2330,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2021-11-29T20:50:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34e993a2_874b775e",
       "range": {
         "startLine": 2330,
         "startChar": 0,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4926a4d5_acd78afb",
+        "filename": "kernel/module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2367,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2021-11-29T20:50:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a223aa5_4e71a495",
+      "range": {
+        "startLine": 2367,
+        "startChar": 0,
+        "endLine": 2367,
+        "endChar": 61
+      },
+      "revId": "4bc8f600a0c9c2be62ec2195c43eddd2ae3e3cbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cae3eae_7c75d31b",
@@ -146,6 +266,30 @@
       "writtenOn": "2021-11-25T07:09:42Z",
       "side": 1,
       "message": "same as above.",
+      "range": {
+        "startLine": 2408,
+        "startChar": 0,
+        "endLine": 2408,
+        "endChar": 32
+      },
+      "revId": "4bc8f600a0c9c2be62ec2195c43eddd2ae3e3cbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf6ff518_5db0b503",
+        "filename": "kernel/module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2408,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2021-11-29T20:50:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8cae3eae_7c75d31b",
       "range": {
         "startLine": 2408,
         "startChar": 0,
