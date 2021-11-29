@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d7bd69d_df31b1fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2021-11-29T10:10:44Z",
+      "side": 1,
+      "message": "This patch has been added to the 5.10 stable branch last week and can now be found in 5.10.82 (https://cdn.kernel.org/pub/linux/kernel/v5.x/ChangeLog-5.10.82)\n\nI believe will therefore be included soon in this branch.",
+      "revId": "6c49998341208b824deaf384c2a216b864e68b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
