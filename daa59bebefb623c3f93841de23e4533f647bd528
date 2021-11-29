@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e2ee090_9fbdfd54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-29T19:44:05Z",
+      "side": 1,
+      "message": "Breaks multiple builds:\n\n\nCheckpatch issue:\n```\nWARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: \"jeson.gao\" \u003cjeson.gao@unisoc.com\u003e\u0027 !\u003d \u0027Signed-off-by: jeson gao \u003cjeson.gao@unisoc.com\u003e\u0027\n```\n\nBuild break:\n```\nandroid13-5.10/build/build-tools/path/linux-x86/dtc -j40 Image modules Image.lz4\n/usr/local/google/buildbot/src/android/common-android13-5.10/common/drivers/thermal/cpufreq_cooling.c:318:54: error: incompatible pointer types passing \u0027unsigned int *\u0027 to parameter of type \u0027unsigned long *\u0027 [-Werror,-Wincompatible-pointer-types]\n        trace_android_vh_modify_thermal_target_freq(policy, \u0026target_freq);\n                                                            ^~~~~~~~~~~~\n/usr/local/google/buildbot/src/android/common-android13-5.10/common/include/trace/hooks/thermal.h:27:57: note: passing argument to parameter \u0027target_freq\u0027 here\n        TP_PROTO(struct cpufreq_policy *policy, unsigned long *target_freq),\n```",
+      "revId": "daa59bebefb623c3f93841de23e4533f647bd528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
