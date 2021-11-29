@@ -2886,6 +2886,7 @@
       <elf-symbol name='kill_anon_super' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xab16b734'/>
       <elf-symbol name='kill_fasync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcfca9d5'/>
       <elf-symbol name='kill_litter_super' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x66ee9f57'/>
+      <elf-symbol name='kill_pid' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5a4f441d'/>
       <elf-symbol name='kiocb_set_cancel_fn' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x98a3170d'/>
       <elf-symbol name='kmalloc_order' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbbe80fdb'/>
       <elf-symbol name='kmalloc_order_trace' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb8b9f817'/>
@@ -2953,6 +2954,7 @@
       <elf-symbol name='kthread_destroy_worker' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa37f00'/>
       <elf-symbol name='kthread_flush_work' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf98fd8ef'/>
       <elf-symbol name='kthread_flush_worker' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xae6080fa'/>
+      <elf-symbol name='kthread_freezable_should_stop' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xca7d8764'/>
       <elf-symbol name='kthread_mod_delayed_work' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6d7ae2d5'/>
       <elf-symbol name='kthread_park' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7c009f61'/>
       <elf-symbol name='kthread_parkme' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf95322f4'/>
@@ -4886,6 +4888,7 @@
       <elf-symbol name='trace_raw_output_prep' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb4304cd8'/>
       <elf-symbol name='trace_seq_printf' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x525d0aa3'/>
       <elf-symbol name='trace_seq_putc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1b5f4377'/>
+      <elf-symbol name='trace_set_clr_event' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd217e9e6'/>
       <elf-symbol name='tracepoint_probe_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x95e102ab'/>
       <elf-symbol name='tracepoint_probe_register_prio' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9b70c6ff'/>
       <elf-symbol name='tracepoint_probe_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdbeeece6'/>
@@ -5543,6 +5546,7 @@
       <elf-symbol name='vsock_for_each_connected_socket' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x72136f78'/>
       <elf-symbol name='vsock_remove_sock' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa644921c'/>
       <elf-symbol name='vsprintf' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x78b887ed'/>
+      <elf-symbol name='vsscanf' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x50d035c2'/>
       <elf-symbol name='vunmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x94961283'/>
       <elf-symbol name='vzalloc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x40a9b349'/>
       <elf-symbol name='vzalloc_node' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9e0c711d'/>
@@ -117844,16 +117848,26 @@
         <parameter type-id='5afdaa66' name='done' filepath='block/blk-exec.c' line='50' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+<<<<<<< HEAD   (4913a7 UPSTREAM: sched/core: Mitigate race cpus_share_cache()/updat)
       <function-decl name='blk_finish_plug' mangled-name='blk_finish_plug' filepath='block/blk-core.c' line='1772' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='blk_finish_plug'>
         <parameter type-id='39944481' name='plug' filepath='block/blk-core.c' line='1772' column='1'/>
+=======
+      <function-decl name='blk_finish_plug' mangled-name='blk_finish_plug' filepath='block/blk-core.c' line='1779' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='blk_finish_plug'>
+        <parameter type-id='39944481' name='plug' filepath='block/blk-core.c' line='1779' column='1'/>
+>>>>>>> CHANGE (f0a7e5 ANDROID: Update symbol list for mtk)
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='blk_freeze_queue_start' mangled-name='blk_freeze_queue_start' filepath='block/blk-mq.c' line='136' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='blk_freeze_queue_start'>
         <parameter type-id='e7d2a5fc' name='q' filepath='block/blk-mq.c' line='136' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+<<<<<<< HEAD   (4913a7 UPSTREAM: sched/core: Mitigate race cpus_share_cache()/updat)
       <function-decl name='blk_get_queue' mangled-name='blk_get_queue' filepath='block/blk-core.c' line='609' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='blk_get_queue'>
         <parameter type-id='e7d2a5fc' name='q' filepath='block/blk-core.c' line='609' column='1'/>
+=======
+      <function-decl name='blk_get_queue' mangled-name='blk_get_queue' filepath='block/blk-core.c' line='616' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='blk_get_queue'>
+        <parameter type-id='e7d2a5fc' name='q' filepath='block/blk-core.c' line='616' column='1'/>
+>>>>>>> CHANGE (f0a7e5 ANDROID: Update symbol list for mtk)
         <return type-id='b50a4934'/>
       </function-decl>
       <function-decl name='blk_get_request' mangled-name='blk_get_request' filepath='block/blk-core.c' line='626' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='blk_get_request'>
@@ -118104,9 +118118,15 @@
         <parameter type-id='95e97e5e' name='mask' filepath='block/blk-settings.c' line='732' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+<<<<<<< HEAD   (4913a7 UPSTREAM: sched/core: Mitigate race cpus_share_cache()/updat)
       <function-decl name='blk_queue_flag_clear' mangled-name='blk_queue_flag_clear' filepath='block/blk-core.c' line='90' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='blk_queue_flag_clear'>
         <parameter type-id='f0981eeb' name='flag' filepath='block/blk-core.c' line='90' column='1'/>
         <parameter type-id='e7d2a5fc' name='q' filepath='block/blk-core.c' line='90' column='1'/>
+=======
+      <function-decl name='blk_queue_flag_clear' mangled-name='blk_queue_flag_clear' filepath='block/blk-core.c' line='97' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='blk_queue_flag_clear'>
+        <parameter type-id='f0981eeb' name='flag' filepath='block/blk-core.c' line='97' column='1'/>
+        <parameter type-id='e7d2a5fc' name='q' filepath='block/blk-core.c' line='97' column='1'/>
+>>>>>>> CHANGE (f0a7e5 ANDROID: Update symbol list for mtk)
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='blk_queue_flag_set' mangled-name='blk_queue_flag_set' filepath='block/blk-core.c' line='79' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='blk_queue_flag_set'>
@@ -118250,16 +118270,26 @@
         <parameter type-id='7604ff1d' name='lim' filepath='block/blk-settings.c' line='74' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+<<<<<<< HEAD   (4913a7 UPSTREAM: sched/core: Mitigate race cpus_share_cache()/updat)
       <function-decl name='blk_start_plug' mangled-name='blk_start_plug' filepath='block/blk-core.c' line='1688' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='blk_start_plug'>
         <parameter type-id='39944481' name='plug' filepath='block/blk-core.c' line='1688' column='1'/>
+=======
+      <function-decl name='blk_start_plug' mangled-name='blk_start_plug' filepath='block/blk-core.c' line='1695' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='blk_start_plug'>
+        <parameter type-id='39944481' name='plug' filepath='block/blk-core.c' line='1695' column='1'/>
+>>>>>>> CHANGE (f0a7e5 ANDROID: Update symbol list for mtk)
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='blk_stat_enable_accounting' mangled-name='blk_stat_enable_accounting' filepath='block/blk-stat.c' line='187' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='blk_stat_enable_accounting'>
         <parameter type-id='e7d2a5fc' name='q' filepath='block/blk-stat.c' line='187' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+<<<<<<< HEAD   (4913a7 UPSTREAM: sched/core: Mitigate race cpus_share_cache()/updat)
       <function-decl name='blk_status_to_errno' mangled-name='blk_status_to_errno' filepath='block/blk-core.c' line='209' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='blk_status_to_errno'>
         <parameter type-id='f4e2facd' name='status' filepath='block/blk-core.c' line='209' column='1'/>
+=======
+      <function-decl name='blk_status_to_errno' mangled-name='blk_status_to_errno' filepath='block/blk-core.c' line='216' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='blk_status_to_errno'>
+        <parameter type-id='f4e2facd' name='status' filepath='block/blk-core.c' line='216' column='1'/>
+>>>>>>> CHANGE (f0a7e5 ANDROID: Update symbol list for mtk)
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='blk_sync_queue' mangled-name='blk_sync_queue' filepath='block/blk-core.c' line='297' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='blk_sync_queue'>
@@ -126324,6 +126354,13 @@
       </function-decl>
       <function-decl name='genphy_read_status' mangled-name='genphy_read_status' filepath='drivers/net/phy/phy_device.c' line='2320' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='genphy_read_status'>
         <parameter type-id='7efbcaaf' name='phydev' filepath='drivers/net/phy/phy_device.c' line='2320' column='1'/>
+<<<<<<< HEAD   (4913a7 UPSTREAM: sched/core: Mitigate race cpus_share_cache()/updat)
+=======
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='genphy_restart_aneg' mangled-name='genphy_restart_aneg' filepath='drivers/net/phy/phy_device.c' line='2044' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='genphy_restart_aneg'>
+        <parameter type-id='7efbcaaf' name='phydev' filepath='drivers/net/phy/phy_device.c' line='2044' column='1'/>
+>>>>>>> CHANGE (f0a7e5 ANDROID: Update symbol list for mtk)
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='genphy_resume' mangled-name='genphy_resume' filepath='drivers/net/phy/phy_device.c' line='2527' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='genphy_resume'>
@@ -128939,6 +128976,12 @@
         <parameter type-id='42c8f564' name='sb' filepath='fs/super.c' line='1113' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='kill_pid' mangled-name='kill_pid' filepath='kernel/signal.c' line='1805' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kill_pid'>
+        <parameter type-id='b94e5398' name='pid' filepath='kernel/signal.c' line='1805' column='1'/>
+        <parameter type-id='95e97e5e' name='sig' filepath='kernel/signal.c' line='1805' column='1'/>
+        <parameter type-id='95e97e5e' name='priv' filepath='kernel/signal.c' line='1805' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <var-decl name='kimage_voffset' type-id='91ce1af9' mangled-name='kimage_voffset' visibility='default' filepath='arch/arm64/mm/mmu.c' line='49' column='1' elf-symbol-id='kimage_voffset'/>
       <function-decl name='kiocb_set_cancel_fn' mangled-name='kiocb_set_cancel_fn' filepath='fs/aio.c' line='561' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kiocb_set_cancel_fn'>
         <parameter type-id='80f25feb' name='iocb' filepath='fs/aio.c' line='561' column='1'/>
@@ -129316,6 +129359,10 @@
       <function-decl name='kthread_flush_worker' mangled-name='kthread_flush_worker' filepath='kernel/kthread.c' line='1291' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kthread_flush_worker'>
         <parameter type-id='c41f4539' name='worker' filepath='kernel/kthread.c' line='1291' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='kthread_freezable_should_stop' mangled-name='kthread_freezable_should_stop' filepath='kernel/kthread.c' line='166' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kthread_freezable_should_stop'>
+        <parameter type-id='d8e6b335' name='was_frozen' filepath='kernel/kthread.c' line='166' column='1'/>
+        <return type-id='b50a4934'/>
       </function-decl>
       <function-decl name='kthread_mod_delayed_work' mangled-name='kthread_mod_delayed_work' filepath='kernel/kthread.c' line='1151' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kthread_mod_delayed_work'>
         <parameter type-id='c41f4539' name='worker' filepath='kernel/kthread.c' line='1151' column='1'/>
@@ -129960,6 +130007,14 @@
         <parameter type-id='eaa32e2f' name='pool_data' filepath='mm/mempool.c' line='528' column='1'/>
         <return type-id='eaa32e2f'/>
       </function-decl>
+<<<<<<< HEAD   (4913a7 UPSTREAM: sched/core: Mitigate race cpus_share_cache()/updat)
+=======
+      <function-decl name='mempool_resize' mangled-name='mempool_resize' filepath='mm/mempool.c' line='299' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='mempool_resize'>
+        <parameter type-id='78713e8f' name='pool' filepath='mm/mempool.c' line='299' column='1'/>
+        <parameter type-id='95e97e5e' name='new_min_nr' filepath='mm/mempool.c' line='299' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+>>>>>>> CHANGE (f0a7e5 ANDROID: Update symbol list for mtk)
       <function-decl name='memremap' mangled-name='memremap' filepath='kernel/iomem.c' line='71' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='memremap'>
         <parameter type-id='acc63fdf' name='offset' filepath='kernel/iomem.c' line='71' column='1'/>
         <parameter type-id='b59d7dce' name='size' filepath='kernel/iomem.c' line='71' column='1'/>
@@ -132878,6 +132933,17 @@
         <parameter type-id='1dc6a898' name='set' filepath='drivers/net/phy/phy-core.c' line='586' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+<<<<<<< HEAD   (4913a7 UPSTREAM: sched/core: Mitigate race cpus_share_cache()/updat)
+=======
+      <function-decl name='phy_modify_mmd' mangled-name='phy_modify_mmd' filepath='drivers/net/phy/phy-core.c' line='736' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='phy_modify_mmd'>
+        <parameter type-id='7efbcaaf' name='phydev' filepath='drivers/net/phy/phy-core.c' line='736' column='1'/>
+        <parameter type-id='95e97e5e' name='devad' filepath='drivers/net/phy/phy-core.c' line='736' column='1'/>
+        <parameter type-id='19c2251e' name='regnum' filepath='drivers/net/phy/phy-core.c' line='736' column='1'/>
+        <parameter type-id='1dc6a898' name='mask' filepath='drivers/net/phy/phy-core.c' line='737' column='1'/>
+        <parameter type-id='1dc6a898' name='set' filepath='drivers/net/phy/phy-core.c' line='737' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+>>>>>>> CHANGE (f0a7e5 ANDROID: Update symbol list for mtk)
       <function-decl name='phy_modify_paged' mangled-name='phy_modify_paged' filepath='drivers/net/phy/phy-core.c' line='922' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='phy_modify_paged'>
         <parameter type-id='7efbcaaf' name='phydev' filepath='drivers/net/phy/phy-core.c' line='922' column='1'/>
         <parameter type-id='95e97e5e' name='page' filepath='drivers/net/phy/phy-core.c' line='922' column='1'/>
@@ -137187,6 +137253,16 @@
         <parameter type-id='b9608bfc' name='entry' filepath='sound/core/info.c' line='841' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+<<<<<<< HEAD   (4913a7 UPSTREAM: sched/core: Mitigate race cpus_share_cache()/updat)
+=======
+      <function-decl name='snd_interval_ranges' mangled-name='snd_interval_ranges' filepath='sound/core/pcm_lib.c' line='1043' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_interval_ranges'>
+        <parameter type-id='732e15ce' name='i' filepath='sound/core/pcm_lib.c' line='1043' column='1'/>
+        <parameter type-id='f0981eeb' name='count' filepath='sound/core/pcm_lib.c' line='1043' column='1'/>
+        <parameter type-id='1d0ab711' name='ranges' filepath='sound/core/pcm_lib.c' line='1044' column='1'/>
+        <parameter type-id='f0981eeb' name='mask' filepath='sound/core/pcm_lib.c' line='1044' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+>>>>>>> CHANGE (f0a7e5 ANDROID: Update symbol list for mtk)
       <function-decl name='snd_interval_refine' mangled-name='snd_interval_refine' filepath='sound/core/pcm_lib.c' line='580' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='snd_interval_refine'>
         <parameter type-id='732e15ce' name='i' filepath='sound/core/pcm_lib.c' line='580' column='1'/>
         <parameter type-id='1d0ab711' name='v' filepath='sound/core/pcm_lib.c' line='580' column='1'/>
@@ -138528,8 +138604,13 @@
         <parameter type-id='c485c22c' name='bh' filepath='fs/buffer.c' line='3086' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+<<<<<<< HEAD   (4913a7 UPSTREAM: sched/core: Mitigate race cpus_share_cache()/updat)
       <function-decl name='submit_bio' mangled-name='submit_bio' filepath='block/blk-core.c' line='1076' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='submit_bio'>
         <parameter type-id='fb55efa1' name='bio' filepath='block/blk-core.c' line='1076' column='1'/>
+=======
+      <function-decl name='submit_bio' mangled-name='submit_bio' filepath='block/blk-core.c' line='1083' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='submit_bio'>
+        <parameter type-id='fb55efa1' name='bio' filepath='block/blk-core.c' line='1083' column='1'/>
+>>>>>>> CHANGE (f0a7e5 ANDROID: Update symbol list for mtk)
         <return type-id='041bc907'/>
       </function-decl>
       <function-decl name='submit_bio_wait' mangled-name='submit_bio_wait' filepath='block/bio.c' line='1157' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='submit_bio_wait'>
@@ -139146,6 +139227,15 @@
         <parameter type-id='002ac4a6' name='c' filepath='kernel/trace/trace_seq.c' line='233' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+<<<<<<< HEAD   (4913a7 UPSTREAM: sched/core: Mitigate race cpus_share_cache()/updat)
+=======
+      <function-decl name='trace_set_clr_event' mangled-name='trace_set_clr_event' filepath='kernel/trace/trace_events.c' line='891' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='trace_set_clr_event'>
+        <parameter type-id='80f4b756' name='system' filepath='kernel/trace/trace_events.c' line='891' column='1'/>
+        <parameter type-id='80f4b756' name='event' filepath='kernel/trace/trace_events.c' line='891' column='1'/>
+        <parameter type-id='95e97e5e' name='set' filepath='kernel/trace/trace_events.c' line='891' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+>>>>>>> CHANGE (f0a7e5 ANDROID: Update symbol list for mtk)
       <function-decl name='tracepoint_probe_register' mangled-name='tracepoint_probe_register' filepath='kernel/tracepoint.c' line='550' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='tracepoint_probe_register'>
         <parameter type-id='08e531de' name='tp' filepath='kernel/tracepoint.c' line='550' column='1'/>
         <parameter type-id='eaa32e2f' name='probe' filepath='kernel/tracepoint.c' line='550' column='1'/>
@@ -142508,6 +142598,15 @@
         <parameter type-id='2aee9912' name='args' filepath='lib/vsprintf.c' line='2854' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+<<<<<<< HEAD   (4913a7 UPSTREAM: sched/core: Mitigate race cpus_share_cache()/updat)
+=======
+      <function-decl name='vsscanf' mangled-name='vsscanf' filepath='lib/vsprintf.c' line='3288' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='vsscanf'>
+        <parameter type-id='80f4b756' name='buf' filepath='lib/vsprintf.c' line='3288' column='1'/>
+        <parameter type-id='80f4b756' name='fmt' filepath='lib/vsprintf.c' line='3288' column='1'/>
+        <parameter type-id='2aee9912' name='args' filepath='lib/vsprintf.c' line='3288' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+>>>>>>> CHANGE (f0a7e5 ANDROID: Update symbol list for mtk)
       <function-decl name='vunmap' mangled-name='vunmap' filepath='mm/vmalloc.c' line='2367' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='vunmap'>
         <parameter type-id='eaa32e2f' name='addr' filepath='mm/vmalloc.c' line='2367' column='1'/>
         <return type-id='48b5725f'/>
