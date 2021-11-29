@@ -3948,10 +3948,10 @@ asmlinkage __visible void schedule_tail(struct task_struct *prev)
 	balance_callback(rq);
 	preempt_enable();
 
+	calculate_sigpending();
+
 	if (current->set_child_tid)
 		put_user(task_pid_vnr(current), current->set_child_tid);
-
-	calculate_sigpending();
 }
 
 /*
