@@ -8,6 +8,8 @@
 #define _TRACE_HOOK_THERMAL_H
 
 #include <trace/hooks/vendor_hooks.h>
+#include <linux/tracepoint.h>
+#include <linux/cpufreq.h>
 
 DECLARE_HOOK(android_vh_enable_thermal_genl_check,
 	TP_PROTO(int event, int tz_id, int *enable_thermal_genl),
@@ -22,6 +24,14 @@ struct thermal_cooling_device;
 DECLARE_HOOK(android_vh_disable_thermal_cooling_stats,
 	TP_PROTO(struct thermal_cooling_device *cdev, bool *disable_stats),
 	TP_ARGS(cdev, disable_stats));
+
+DECLARE_HOOK(android_vh_modify_thermal_request_freq,
+	TP_PROTO(struct cpufreq_policy *policy, unsigned long *request_freq),
+	TP_ARGS(policy, request_freq));
+
+DECLARE_HOOK(android_vh_modify_thermal_target_freq,
+	TP_PROTO(struct cpufreq_policy *policy, unsigned int *target_freq),
+	TP_ARGS(policy, target_freq));
 
 #endif /* _TRACE_HOOK_THERMAL_H */
 /* This part must be outside protection */
