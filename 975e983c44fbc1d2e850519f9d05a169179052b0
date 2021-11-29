@@ -51,6 +51,24 @@
       "parentUuid": "856cd995_48996254",
       "revId": "975e983c44fbc1d2e850519f9d05a169179052b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9767c579_b57ff2a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-11-29T23:45:56Z",
+      "side": 1,
+      "message": "Hi Liujie,\n\nI think the Fixes tag should point to the sha for https://android-review.googlesource.com/c/kernel/common/+/1571560",
+      "parentUuid": "02208d07_9d3e865a",
+      "revId": "975e983c44fbc1d2e850519f9d05a169179052b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
