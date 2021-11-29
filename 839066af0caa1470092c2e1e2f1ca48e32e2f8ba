@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94e14306_5100b613",
+        "filename": "build.config.gki.aarch64.fips140_eval_testing",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-11-29T20:48:30Z",
+      "side": 1,
+      "message": "merge_config ?\n\nexample: https://android.googlesource.com/kernel/common/+/refs/heads/android13-5.10/build.config.rockpi4#10",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 167
+      },
+      "revId": "839066af0caa1470092c2e1e2f1ca48e32e2f8ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
