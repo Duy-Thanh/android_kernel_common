@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ccad4262_a88a820e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1878106
+      },
+      "writtenOn": "2021-11-30T05:44:39Z",
+      "side": 1,
+      "message": "OK, I revise the commit.",
+      "parentUuid": "faa206b7_9b1cd56e",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "6c49998341208b824deaf384c2a216b864e68b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8d7bd69d_df31b1fb",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -37,6 +61,24 @@
       "writtenOn": "2021-11-29T10:10:44Z",
       "side": 1,
       "message": "This patch has been added to the 5.10 stable branch last week and can now be found in 5.10.82 (https://cdn.kernel.org/pub/linux/kernel/v5.x/ChangeLog-5.10.82)\n\nI believe will therefore be included soon in this branch.",
+      "revId": "6c49998341208b824deaf384c2a216b864e68b89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b37a932c_b9383384",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878106
+      },
+      "writtenOn": "2021-11-30T05:44:39Z",
+      "side": 1,
+      "message": "Thanks for upstream to 5.10 stable branch.\nWe need this patch ASAP due to impact for product.\nThank you.",
+      "parentUuid": "8d7bd69d_df31b1fb",
       "revId": "6c49998341208b824deaf384c2a216b864e68b89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

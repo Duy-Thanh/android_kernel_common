@@ -34,6 +34,24 @@
       "parentUuid": "fb999875_42771caa",
       "revId": "3bb2ed0dbfbff953ee631291cacdf512c984f349",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "379526e8_1b8ebbd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878106
+      },
+      "writtenOn": "2021-11-30T05:44:39Z",
+      "side": 1,
+      "message": "I revise the commit.\nPlease help to review.\nThank you.",
+      "parentUuid": "c87d3993_381b2d3e",
+      "revId": "3bb2ed0dbfbff953ee631291cacdf512c984f349",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
