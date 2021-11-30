@@ -74,6 +74,19 @@ config ANDROID_VENDOR_HOOKS
 	  Allow vendor modules to attach to tracepoint "hooks" defined via
 	  DECLARE_HOOK or DECLARE_RESTRICTED_HOOK.
 
+config ANDROID_STRUCT_PADDING
+	bool "Android Struct Padding"
+	default y
+	help
+	  This option controls the macros including ANDROID_KABI_RESERVE,
+	  ANDROID_VENDOR_DATA, ANDROID_VENDOR_DATA_ARRAY, ANDROID_OEM_DATA
+	  and ANDROID_OEM_DATA_ARRAY.
+
+	  This option is disabled if current platform doesn't need to reserve
+	  the padding which cuts the associated members at the end of structs.
+	  Then this helps to reduce memory consumption, it's useful on the low
+	  memory device.
+
 endif # if ANDROID
 
 endmenu
