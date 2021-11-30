@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70b7ecf2_76c043b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-11-30T18:47:24Z",
+      "side": 1,
+      "message": "Introducing per-cpu lock for each mm struct? Looks like strange to me since per-cpu lock is usually used in the system wide level. It will consume more memory than normal lock.",
+      "revId": "0e372a8433cf7772e34bc51fc8799b33aeddfa2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "030e175f_56f119f0",
+        "filename": "mm/memory.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 4724,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-11-30T18:47:24Z",
+      "side": 1,
+      "message": "This is really hot path. How popular mmu_notifier usecases in the android?",
+      "range": {
+        "startLine": 4724,
+        "startChar": 8,
+        "endLine": 4724,
+        "endChar": 28
+      },
+      "revId": "0e372a8433cf7772e34bc51fc8799b33aeddfa2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
