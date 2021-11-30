@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "698708c2_32a2d4b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-30T09:36:55Z",
+      "side": 1,
+      "message": "no need for this in this branch, just wait until the end of the week and it will come in automatically through the LTS release, right?",
+      "revId": "6def2c30d15136ab481b500395fb6d38403401d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
