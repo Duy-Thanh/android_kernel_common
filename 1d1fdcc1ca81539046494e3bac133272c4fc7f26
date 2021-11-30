@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f12ede5c_86fab5c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2021-11-30T20:30:26Z",
+      "side": 1,
+      "message": "- Updated SPDX-License-Identifier from GPL-2.0 to GPL2.0-Only\n- Fix checkpatch.pl warning - // for .c file instead /* ... */ for SPDX-License-Identifier\n- Used clang-format with kernel config file to reformat changes in kernel/module.c",
+      "revId": "1d1fdcc1ca81539046494e3bac133272c4fc7f26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
