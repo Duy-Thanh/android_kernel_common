@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4a5d3ec_0101ba29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-30T09:31:58Z",
+      "side": 1,
+      "message": "I do not think you test-build this change 😞",
+      "revId": "626d8edb9935129b45d36041d8a906e6d24c3011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eee5f5c_46e01467",
+        "filename": "include/linux/android_kabi.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-30T09:31:58Z",
+      "side": 1,
+      "message": "This change will break the build when this macro is used.",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 31
+      },
+      "revId": "626d8edb9935129b45d36041d8a906e6d24c3011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04b984fb_d84af930",
+        "filename": "include/linux/android_kabi.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-11-30T09:31:58Z",
+      "side": 1,
+      "message": "same as above, this will break the build.",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 31
+      },
+      "revId": "626d8edb9935129b45d36041d8a906e6d24c3011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
