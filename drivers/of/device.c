@@ -12,6 +12,7 @@
 #include <linux/mod_devicetable.h>
 #include <linux/slab.h>
 #include <linux/platform_device.h>
+#include <trace/hooks/mm.h>
 
 #include <asm/errno.h>
 #include "of_private.h"
@@ -179,6 +180,8 @@ int of_dma_configure_id(struct device *dev, struct device_node *np,
 			dev->dma_range_map = NULL;
 		kfree(map);
 		return -EPROBE_DEFER;
+	} else if (!iommu) {
+		trace_android_vh_no_iommu_config(dev);
 	}
 
 	dev_dbg(dev, "device is%sbehind an iommu\n",
