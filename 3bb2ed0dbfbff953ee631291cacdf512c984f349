@@ -16,6 +16,24 @@
       "message": "The upstream sha needs to be included, for example:\n```\n(cherry picked from commit c31e73121f4c1ec41143423ac6ce3ce6dafdcec1)\n```\n\nSee https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "3bb2ed0dbfbff953ee631291cacdf512c984f349",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c87d3993_381b2d3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-11-30T02:27:24Z",
+      "side": 1,
+      "message": "I looked it up... it would be:\n```\n(cherry picked from commit e4511d8dc2560945385a9a137bb54e408c4d51b9)\n```",
+      "parentUuid": "fb999875_42771caa",
+      "revId": "3bb2ed0dbfbff953ee631291cacdf512c984f349",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
