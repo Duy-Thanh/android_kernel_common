@@ -614,6 +614,14 @@ config SHADOW_CALL_STACK
 	  reading and writing arbitrary memory may be able to locate them
 	  and hijack control flow by modifying the stacks.
 
+config BUILD_FOR_ANDROID
+	bool "Build For Android"
+	default y
+	help
+	  This option is enabled if current build is Android, and is disabled
+	  otherwise. This helps to do some optimizations for non-Android build,
+	  such as disabling ANDROID_XXX macros in bottom of some structs.
+
 config LTO
 	bool
 	help
