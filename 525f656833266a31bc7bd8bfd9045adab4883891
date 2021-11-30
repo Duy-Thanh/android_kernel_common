@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad6645d8_f49abdfd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-11-30T18:54:43Z",
+      "side": 1,
+      "message": "Let\u0027s fold this patch into the first patch, too. And let\u0027s think about that we could avoid the locking in the CoW hot path if some vendors doesn\u0027t use mmu_notifier at all. kernel param?",
+      "revId": "525f656833266a31bc7bd8bfd9045adab4883891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
