@@ -33,6 +33,24 @@
       "message": "needs to land in android12-5.10 first",
       "revId": "e5e272164d4ca1ff9c6c7f0c0f830ad309a5eb77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a114210_e57f140a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1746283
+      },
+      "writtenOn": "2021-11-30T02:27:42Z",
+      "side": 1,
+      "message": "Here is the android12-5.10 link:\nhttps://android-review.googlesource.com/c/kernel/common/+/1894999\nhttps://android-review.googlesource.com/c/kernel/common/+/1895000",
+      "parentUuid": "dc30fc2e_30e3ea79",
+      "revId": "e5e272164d4ca1ff9c6c7f0c0f830ad309a5eb77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
