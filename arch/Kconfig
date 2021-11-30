@@ -614,6 +614,15 @@ config SHADOW_CALL_STACK
 	  reading and writing arbitrary memory may be able to locate them
 	  and hijack control flow by modifying the stacks.
 
+config KEEP_ANDROID_KABI_RESERVE
+	bool "Keep ANDROID_KABI_RESERVE macro"
+	default y
+	help
+	  This option is disabled if current platform doesn't need to reserve
+	  the padding which cuts the associated members at the end of structs.
+	  Then this helps to reduce memory consumption, it's useful on the low
+	  memory device.
+
 config LTO
 	bool
 	help
