@@ -16,6 +16,24 @@
       "message": "no need for this in this branch, just wait until the end of the week and it will come in automatically through the LTS release, right?",
       "revId": "6def2c30d15136ab481b500395fb6d38403401d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07366398_4194c277",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373349
+      },
+      "writtenOn": "2021-12-01T01:56:56Z",
+      "side": 1,
+      "message": "Sure. Let me drop this patch.",
+      "parentUuid": "698708c2_32a2d4b9",
+      "revId": "6def2c30d15136ab481b500395fb6d38403401d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
