@@ -46,6 +46,30 @@
       },
       "revId": "b58dabab124ee36a7925dfb14775a9e08963daff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0425f3ed_b5aeb62b",
+        "filename": "kernel/module.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2327,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-01T08:11:19Z",
+      "side": 1,
+      "message": "The \u0026\u0026 should be at the end of the line, and the second line of the if statement should be indented to be under the \u0027(\u0027 character.  Odd that checkpatch does not catch this.",
+      "parentUuid": "bf73c98a_f5f064df",
+      "range": {
+        "startLine": 2327,
+        "startChar": 0,
+        "endLine": 2327,
+        "endChar": 61
+      },
+      "revId": "b58dabab124ee36a7925dfb14775a9e08963daff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
