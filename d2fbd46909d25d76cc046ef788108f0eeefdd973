@@ -16,6 +16,24 @@
       "message": "If this hook is already used, this will break the abi checks.  Did you test build it?",
       "revId": "d2fbd46909d25d76cc046ef788108f0eeefdd973",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47dc192f_a20247d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-12-01T09:10:39Z",
+      "side": 1,
+      "message": "I use this command and the result is pass：\nBUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build.sh",
+      "parentUuid": "e8078602_cc47521e",
+      "revId": "d2fbd46909d25d76cc046ef788108f0eeefdd973",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
