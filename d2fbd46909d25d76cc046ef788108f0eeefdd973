@@ -34,6 +34,41 @@
       "parentUuid": "e8078602_cc47521e",
       "revId": "d2fbd46909d25d76cc046ef788108f0eeefdd973",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04452e68_d8127c43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-01T09:20:04Z",
+      "side": 1,
+      "message": "having treehugger test the abi here...",
+      "revId": "d2fbd46909d25d76cc046ef788108f0eeefdd973",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85cda65a_66b0196b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-01T09:20:04Z",
+      "side": 1,
+      "message": "That does not check the abi, try doing:\n  BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 ./build/build_abi.sh",
+      "parentUuid": "47dc192f_a20247d6",
+      "revId": "d2fbd46909d25d76cc046ef788108f0eeefdd973",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
