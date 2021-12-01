@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7931cad3_de52bb4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-12-01T02:38:17Z",
+      "side": 1,
+      "message": "The builds are still broken. Please actually test it before you upload the next version.\n\n```\nIn file included from /buildbot/src/android/common-android13-5.10/common/drivers/android/vendor_hooks.c:75:\nIn file included from /buildbot/src/android/common-android13-5.10/common/include/trace/hooks/thermal.h:32:\nIn file included from /buildbot/src/android/common-android13-5.10/common/include/trace/define_trace.h:95:\n/buildbot/src/android/common-android13-5.10/common/include/trace/hooks/thermal.h:13:1: error: redefinition of \u0027__tpstrtab_android_vh_enable_thermal_genl_check\u0027\nDECLARE_HOOK(android_vh_enable_thermal_genl_check,\n^\n/buildbot/src/android/common-android13-5.10/common/include/trace/hooks/vendor_hooks.h:14:22: note: expanded from macro \u0027DECLARE_HOOK\u0027\n#define DECLARE_HOOK DECLARE_TRACE\n                     ^\n/buildbot/src/android/common-android13-5.10/common/include/trace/define_trace.h:73:2: note: expanded from macro \u0027DECLARE_TRACE\u0027\n        DEFINE_TRACE(name, PARAMS(proto), PARAMS(args))\n        ^\n/buildbot/src/android/common-android13-5.10/common/include/linux/tracepoint.h:332:2: note: expanded from macro \u0027DEFINE_TRACE\u0027\n        DEFINE_TRACE_FN(name, NULL, NULL, PARAMS(proto), PARAMS(args));\n        ^\n/buildbot/src/android/common-android13-5.10/common/include/linux/tracepoint.h:298:20: note: expanded from macro \u0027DEFINE_TRACE_FN\u0027\n        static const char __tpstrtab_##_name[]                          \\\n                          ^\n\u003cscratch space\u003e:72:1: note: expanded from here\n__tpstrtab_android_vh_enable_thermal_genl_check\n^\n/buildbot/src/android/common-android13-5.10/common/include/trace/hooks/thermal.h:13:1: note: previous definition is here\nDECLARE_HOOK(android_vh_enable_thermal_genl_check,\n^\n/buildbot/src/android/common-android13-5.10/common/include/trace/hooks/vendor_hooks.h:14:22: note: expanded from macro \u0027DECLARE_HOOK\u0027\n#define DECLARE_HOOK DECLARE_TRACE\n                     ^\n/buildbot/src/android/common-android13-5.10/common/include/trace/define_trace.h:73:2: note: expanded from macro \u0027DECLARE_TRACE\u0027\n        DEFINE_TRACE(name, PARAMS(proto), PARAMS(args))\n        ^\n/buildbot/src/android/common-android13-5.10/common/include/linux/tracepoint.h:332:2: note: expanded from macro \u0027DEFINE_TRACE\u0027\n        DEFINE_TRACE_FN(name, NULL, NULL, PARAMS(proto), PARAMS(args));\n        ^\n/buildbot/src/android/common-android13-5.10/common/include/linux/tracepoint.h:298:20: note: expanded from macro \u0027DEFINE_TRACE_FN\u0027\n        static const char __tpstrtab_##_name[]                          \\\n                          ^\n\u003cscratch space\u003e:92:1: note: expanded from here\n__tpstrtab_android_vh_enable_thermal_genl_check\n^\n\n...\n\n^\n9 errors generated.\n```",
+      "revId": "0d3ab05c5e049b5d9e34d4b06183043704a7100e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
