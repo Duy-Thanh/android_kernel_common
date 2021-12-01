@@ -52,6 +52,24 @@
       "parentUuid": "9ece9ce0_f99ad6a3",
       "revId": "d28fcf205f86210fbda77accd509263b02f7c919",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a631242_14559c8a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-12-01T03:24:42Z",
+      "side": 1,
+      "message": "I retrieved it from aosp/android12-5.4. I added it and pushed to f2fs-stable/linux-5.4.y as well. ACK team does not want to merge f2fs-stable in android12-5.4. go/1p-f2fs-merge-process",
+      "parentUuid": "87c94fd2_a648f528",
+      "revId": "d28fcf205f86210fbda77accd509263b02f7c919",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
