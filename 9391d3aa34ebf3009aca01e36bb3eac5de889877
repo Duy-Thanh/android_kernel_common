@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ef55085_c29f937c",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2021-12-01T23:15:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bca4538_835f03bc",
+      "range": {
+        "startLine": 5,
+        "startChar": 1,
+        "endLine": 6,
+        "endChar": 23
+      },
+      "revId": "9391d3aa34ebf3009aca01e36bb3eac5de889877",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6120215f_10503af0",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f1a1414_b7f85243",
+        "filename": "fs/read_write.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2021-12-01T23:15:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6120215f_10503af0",
+      "range": {
+        "startLine": 479,
+        "startChar": 1,
+        "endLine": 479,
+        "endChar": 33
+      },
+      "revId": "9391d3aa34ebf3009aca01e36bb3eac5de889877",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f2cac7e_0a9e1df2",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-11-19T02:20:29Z",
       "side": 1,
       "message": "Looks like we\u0027ve got some debug stuff here...",
+      "range": {
+        "startLine": 2212,
+        "startChar": 1,
+        "endLine": 2213,
+        "endChar": 35
+      },
+      "revId": "9391d3aa34ebf3009aca01e36bb3eac5de889877",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "672cb51c_0df9b5cf",
+        "filename": "mm/filemap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2213,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2021-12-01T23:15:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f2cac7e_0a9e1df2",
       "range": {
         "startLine": 2212,
         "startChar": 1,
