@@ -2517,7 +2517,7 @@ static int binder_proc_transaction(struct binder_transaction *t,
 		thread = binder_select_thread_ilocked(proc);
 
 	trace_android_vh_binder_proc_transaction(current, proc->tsk,
-		thread ? thread->task : 0, node->debug_id, t->code, pending_async);
+		thread ? thread->task : 0, node->debug_id, t->code, pending_async, !oneway);
 
 	if (thread) {
 		binder_transaction_priority(thread->task, t, node_prio,
