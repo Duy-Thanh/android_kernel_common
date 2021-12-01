@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fa87558_92e04012",
+        "filename": "Makefile",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-12-01T21:14:46Z",
+      "side": 1,
+      "message": "nit: add a comment explaining what this does and possibly a TODO with a bug number?",
+      "revId": "310ac1e08cacaee6f94ed80fe2de1ac2c480ad8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
