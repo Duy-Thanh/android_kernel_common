@@ -16,6 +16,24 @@
       "message": "Can you add a Fixes tag?",
       "revId": "d28fcf205f86210fbda77accd509263b02f7c919",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ece9ce0_f99ad6a3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-12-01T02:54:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2872dd50_0863bb43",
+      "revId": "d28fcf205f86210fbda77accd509263b02f7c919",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
