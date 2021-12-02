@@ -855,6 +855,7 @@
   get_device
   __get_free_pages
   get_governor_parent_kobj
+  get_idle_time
   get_pid_task
   get_random_bytes
   get_random_bytes_arch
@@ -977,6 +978,7 @@
   init_timer_key
   init_wait_entry
   __init_waitqueue_head
+  input_alloc_absinfo
   input_allocate_device
   input_close_device
   input_event
