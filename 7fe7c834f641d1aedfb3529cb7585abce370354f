@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc92bddd_022a6bdf",
+        "filename": "arch/arm64/kernel/stacktrace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-02T14:48:30Z",
+      "side": 1,
+      "message": "no, sorry, this is a symbol that is marked to NOT be exported (see the NOKPROBE_SYMBOL() above.\n\nNo driver should be using this as this can cause a recursive trap with hooks.",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 32
+      },
+      "revId": "7fe7c834f641d1aedfb3529cb7585abce370354f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
