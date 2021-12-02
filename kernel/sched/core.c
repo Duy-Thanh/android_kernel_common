@@ -7409,6 +7409,7 @@ int in_sched_functions(unsigned long addr)
 		(addr >= (unsigned long)__sched_text_start
 		&& addr < (unsigned long)__sched_text_end);
 }
+EXPORT_SYMBOL_GPL(in_sched_functions);
 
 #ifdef CONFIG_CGROUP_SCHED
 /*
