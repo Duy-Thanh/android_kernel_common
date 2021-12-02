@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3763266e_489a9e8e",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-12-02T16:34:40Z",
+      "side": 1,
+      "message": "Presumably the point is to inhibit the update by setting next_freq \u003d sg_policy-\u003enext_freq so we return false.\n\nCan\u0027t you do this with the existing hook in get_next_freq()? It is always called before sugov_update_next_freq() and is the source of the passed-in next_freq. You can set it there so this function returns false.",
+      "revId": "1bff256f4f05eb37a438ac30fa266fa62653dbd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
