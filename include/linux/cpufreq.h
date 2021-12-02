@@ -152,6 +152,8 @@ struct cpufreq_policy {
 
 	struct notifier_block nb_min;
 	struct notifier_block nb_max;
+
+	ANDROID_VENDOR_DATA_ARRAY(1, 16);
 };
 
 /*
