@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b696007_e59d3b14",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2021-12-02T01:52:03Z",
+      "side": 0,
+      "message": "If we have fuse-bpf behind a defconfig, would we want to keep this in? Seems a bit hacky to me, but I guess the point was to avoid the dentry extra ops if possible",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 23
+      },
+      "revId": "2521995617681876aeef4012ecbbcaf63d5a8bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa3919d2_9de270f0",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2021-12-02T01:52:03Z",
+      "side": 0,
+      "message": "Note: these were moved to uapi, since it\u0027s exposed to bpf",
+      "range": {
+        "startLine": 252,
+        "startChar": 0,
+        "endLine": 263,
+        "endChar": 0
+      },
+      "revId": "2521995617681876aeef4012ecbbcaf63d5a8bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b467a0b_a68eb841",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2021-12-02T01:52:03Z",
+      "side": 0,
+      "message": "Note: these were moved to uapi, since it\u0027s exposed to bpf",
+      "range": {
+        "startLine": 270,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 0
+      },
+      "revId": "2521995617681876aeef4012ecbbcaf63d5a8bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
