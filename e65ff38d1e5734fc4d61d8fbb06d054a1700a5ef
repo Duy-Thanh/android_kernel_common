@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0d7876c_80fedabc",
+        "filename": "fs/read_write.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2021-12-02T00:33:15Z",
+      "side": 1,
+      "message": "debug line, need to remove",
+      "range": {
+        "startLine": 479,
+        "startChar": 1,
+        "endLine": 479,
+        "endChar": 64
+      },
+      "revId": "e65ff38d1e5734fc4d61d8fbb06d054a1700a5ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
