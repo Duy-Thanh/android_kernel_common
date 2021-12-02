@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e9ded89_e3720f6c",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-02T15:13:43Z",
+      "side": 1,
+      "message": "I doubt you own the copyright on this 😊",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 61
+      },
+      "revId": "e65ff38d1e5734fc4d61d8fbb06d054a1700a5ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4bf073ae_f8837533",
         "filename": "fs/fuse/fuse_i.h",
         "patchSetId": 2
@@ -42,6 +65,75 @@
         "startChar": 1,
         "endLine": 479,
         "endChar": 64
+      },
+      "revId": "e65ff38d1e5734fc4d61d8fbb06d054a1700a5ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2d3c090_ba740f68",
+        "filename": "kernel/bpf/bpf_fuse.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-02T15:13:43Z",
+      "side": 1,
+      "message": "no copyright notice as well?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 35
+      },
+      "revId": "e65ff38d1e5734fc4d61d8fbb06d054a1700a5ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01ac7553_40f43be6",
+        "filename": "tools/testing/selftests/filesystems/fuse/fd_bpf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-02T15:13:43Z",
+      "side": 1,
+      "message": "\"Google LLC\" right?",
+      "range": {
+        "startLine": 2,
+        "startChar": 22,
+        "endLine": 2,
+        "endChar": 28
+      },
+      "revId": "e65ff38d1e5734fc4d61d8fbb06d054a1700a5ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c32bc4a_5b971aad",
+        "filename": "tools/testing/selftests/filesystems/fuse/test_bpf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-02T15:13:43Z",
+      "side": 1,
+      "message": "\"Google LLC\"?",
+      "range": {
+        "startLine": 2,
+        "startChar": 22,
+        "endLine": 2,
+        "endChar": 28
       },
       "revId": "e65ff38d1e5734fc4d61d8fbb06d054a1700a5ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
