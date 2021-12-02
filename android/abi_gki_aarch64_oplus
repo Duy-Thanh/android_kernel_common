@@ -1134,6 +1134,7 @@
   input_unregister_device
   input_unregister_handle
   input_unregister_handler
+  in_sched_functions
   interval_tree_insert
   interval_tree_iter_first
   interval_tree_iter_next
@@ -3033,6 +3034,7 @@
   unregister_sysctl_table
   unregister_virtio_device
   unregister_virtio_driver
+  unwind_frame
   up
   update_devfreq
   update_rq_clock
