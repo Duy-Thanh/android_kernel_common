@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a849faec_99349bc9",
+        "filename": "include/linux/slub_def.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-02T14:55:40Z",
+      "side": 1,
+      "message": "why not below the array of node pointers as the last item in this structure?",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 30
+      },
+      "revId": "b66ee7931384bc49e6066de850bf0148a5f77adf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
