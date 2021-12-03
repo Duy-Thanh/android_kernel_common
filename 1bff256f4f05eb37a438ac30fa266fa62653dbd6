@@ -16,6 +16,24 @@
       "message": "Presumably the point is to inhibit the update by setting next_freq \u003d sg_policy-\u003enext_freq so we return false.\n\nCan\u0027t you do this with the existing hook in get_next_freq()? It is always called before sugov_update_next_freq() and is the source of the passed-in next_freq. You can set it there so this function returns false.",
       "revId": "1bff256f4f05eb37a438ac30fa266fa62653dbd6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74760ef3_00106cc0",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1905323
+      },
+      "writtenOn": "2021-12-03T02:33:10Z",
+      "side": 1,
+      "message": "In get_next_freq(), we can\u0027t get the parameter time to calculate delta_ns.\n\nTo realize the purpose of controlling up and down delay, we need a function with time and next_freq as input parameters. I think sugov_update_next_freq() is an ideal function, especially easily inhibiting the update by setting next_freq \u003d sg_policy-\u003enext_freq.",
+      "parentUuid": "3763266e_489a9e8e",
+      "revId": "1bff256f4f05eb37a438ac30fa266fa62653dbd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
