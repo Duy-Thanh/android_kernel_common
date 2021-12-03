@@ -45,6 +45,10 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/block.h>
 
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/biosaver.h>
+
+#include <trace/events/block.h>
 #include "blk.h"
 #include "blk-mq.h"
 #include "blk-mq-sched.h"
@@ -932,6 +936,8 @@ static blk_qc_t __submit_bio(struct bio *bio)
 {
 	struct gendisk *disk = bio->bi_disk;
 	blk_qc_t ret = BLK_QC_T_NONE;
+
+	trace_android_vh_biosaver_blk(bio);
 
 	if (blk_crypto_bio_prep(&bio)) {
 		if (!disk->fops->submit_bio)
