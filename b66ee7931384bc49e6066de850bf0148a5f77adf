@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "caa9842f_442d0981",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-03T13:23:33Z",
+      "side": 1,
+      "message": "July 2021 is a while ago 😊\n\nAnd yes, it is too late for android12 kernels, sorry.  As you say, the deadline was in July.\n\nThis breaks the abi and is not allowed, sorry.",
+      "parentUuid": "03627793_40f82f3a",
+      "revId": "b66ee7931384bc49e6066de850bf0148a5f77adf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a849faec_99349bc9",
         "filename": "include/linux/slub_def.h",
         "patchSetId": 1
