@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cc90251_2a61649d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1458990
+      },
+      "writtenOn": "2021-12-03T14:41:48Z",
+      "side": 1,
+      "message": "I see. We will try to modify this file.\nThanks for your explanation!",
+      "parentUuid": "3f3af2ca_54baee69",
+      "range": {
+        "startLine": 9,
+        "startChar": 57,
+        "endLine": 9,
+        "endChar": 65
+      },
+      "revId": "dbdea872ba273bb205492b264d6b78394b93f4af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1cc41872_a4d44bad",
