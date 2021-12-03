@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfe0afd1_00abe79c",
+        "filename": "init/Kconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 2204,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2021-12-03T00:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc270857_dfc27ddd",
+      "revId": "a95e99fd5bc09ba8dffdb6495b8592f8740ff731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd95f30e_d6cc2b02",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-12-02T15:11:30Z",
       "side": 1,
       "message": "\"Android GKI\"?\n\nAnd \"protected\" is used twice in the sentence here 😊",
+      "revId": "a95e99fd5bc09ba8dffdb6495b8592f8740ff731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91974be7_3cdcb3e7",
+        "filename": "init/Kconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 2208,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2021-12-03T00:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd95f30e_d6cc2b02",
       "revId": "a95e99fd5bc09ba8dffdb6495b8592f8740ff731",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54fe3d3f_9d583e49",
+        "filename": "kernel/gki_module.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2021-12-03T00:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4e0e273_79ac3395",
+      "revId": "a95e99fd5bc09ba8dffdb6495b8592f8740ff731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ba21dc1_a1adc8d4",
@@ -65,6 +119,30 @@
       "writtenOn": "2021-12-02T15:11:30Z",
       "side": 1,
       "message": "\"Symbols\"?  We can spell words out 😊",
+      "range": {
+        "startLine": 16,
+        "startChar": 28,
+        "endLine": 16,
+        "endChar": 32
+      },
+      "revId": "a95e99fd5bc09ba8dffdb6495b8592f8740ff731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fa9c374_e94f5c4c",
+        "filename": "kernel/gki_module.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2021-12-03T00:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ba21dc1_a1adc8d4",
       "range": {
         "startLine": 16,
         "startChar": 28,
@@ -98,6 +176,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbbdb467_b7eda459",
+        "filename": "kernel/module-internal.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2021-12-03T00:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "146f769c_19217a34",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 38
+      },
+      "revId": "a95e99fd5bc09ba8dffdb6495b8592f8740ff731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf0085f1_bc81d80e",
@@ -111,6 +213,30 @@
       "writtenOn": "2021-12-02T15:11:30Z",
       "side": 1,
       "message": "This might be hard to understand.\n\n\"%s: attempted to access protected symbol %s but failed due to being unsigned.\\n\"?\n\nOr something like that?  Make it easy for engineers where English is not their native language to know what is happening here.",
+      "range": {
+        "startLine": 2401,
+        "startChar": 17,
+        "endLine": 2401,
+        "endChar": 54
+      },
+      "revId": "a95e99fd5bc09ba8dffdb6495b8592f8740ff731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da2269f4_d275015e",
+        "filename": "kernel/module.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2401,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2021-12-03T00:02:25Z",
+      "side": 1,
+      "message": "Changed it to this:\n\n\"%s: is not an Android GKI signed module. It can not access protected symbol: %s\\n\"",
+      "parentUuid": "bf0085f1_bc81d80e",
       "range": {
         "startLine": 2401,
         "startChar": 17,
