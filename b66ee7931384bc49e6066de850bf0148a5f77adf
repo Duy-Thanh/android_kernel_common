@@ -22,6 +22,30 @@
       },
       "revId": "b66ee7931384bc49e6066de850bf0148a5f77adf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6068f7a3_0646bac6",
+        "filename": "include/linux/slub_def.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1928771
+      },
+      "writtenOn": "2021-12-03T01:43:09Z",
+      "side": 1,
+      "message": "The function kmem_cache_init() initialize kmem_cache has some special handling, node pointers is dynamic array \"nr_node_ids * sizeof(struct kmem_cache_node *)\". so I think it is better that node pointers is the last item.",
+      "parentUuid": "a849faec_99349bc9",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 30
+      },
+      "revId": "b66ee7931384bc49e6066de850bf0148a5f77adf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
