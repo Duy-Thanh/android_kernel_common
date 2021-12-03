@@ -1,6 +1,24 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f433bebb_e35832f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1452753
+      },
+      "writtenOn": "2021-12-03T06:43:31Z",
+      "side": 1,
+      "message": "Hi Sami, is there a new change list for Android 12?",
+      "revId": "18cc9fdfb47852720b3cb1e3e6f204593094eeca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "49c25aa4_49a406ea",
         "filename": "kernel/pgo/fs.c",
@@ -14,8 +32,7 @@
       "side": 1,
       "message": "FYI, the header\u0027s format changed. You\u0027ll need to add two fields (and bump up the PGO version). See:\n\nhttps://prodkernel-review.git.corp.google.com/c/kernel/release/9xx/+/242653/7/kernel/pgo/fs.c#40",
       "revId": "18cc9fdfb47852720b3cb1e3e6f204593094eeca",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
