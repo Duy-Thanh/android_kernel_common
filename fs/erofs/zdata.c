@@ -737,7 +737,11 @@ hitted:
 retry:
 	err = z_erofs_attach_page(clt, page, page_type,
 				  clt->mode >= COLLECT_PRIMARY_FOLLOWED);
+<<<<<<< HEAD   (8d21bc Merge 5.10.82 into android12-5.10-lts)
 	/* should allocate an additional staging page for pagevec */
+=======
+	/* should allocate an additional short-lived page for pagevec */
+>>>>>>> BRANCH (324327 ANDROID: GKI: Add symbols abi for USB IP kernel modules.)
 	if (err == -EAGAIN) {
 		struct page *const newpage =
 				alloc_page(GFP_NOFS | __GFP_NOFAIL);
