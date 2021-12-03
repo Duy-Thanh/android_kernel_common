@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8966261_717c0028",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1458990
+      },
+      "writtenOn": "2021-12-03T10:52:21Z",
+      "side": 1,
+      "message": "It is a vendor module for long press key debugging.\nACK does not have this module.   \nIts location is https://android.googlesource.com/kernel/gs/+/refs/heads/android-gs-raviole-5.10-android12-d1/drivers/input/keydebug-func.c#123.\nCurrently it has its own function definition of get_idle_time.\nThe owner is wondering if it is possible to export the symbol in ACK for vendor modules?",
+      "parentUuid": "af533773_6382c005",
+      "range": {
+        "startLine": 9,
+        "startChar": 57,
+        "endLine": 9,
+        "endChar": 65
+      },
+      "revId": "dbdea872ba273bb205492b264d6b78394b93f4af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1cc41872_a4d44bad",
