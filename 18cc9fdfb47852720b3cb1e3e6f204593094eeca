@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f6abdb3_c47e053d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2021-12-03T16:13:23Z",
+      "side": 1,
+      "message": "No, we are not continuing work on PGO at the moment. I believe the latest patch set is here: https://git.kernel.org/pub/scm/linux/kernel/git/kees/linux.git/log/?h\u003dfor-next/clang/pgo",
+      "parentUuid": "f433bebb_e35832f7",
+      "revId": "18cc9fdfb47852720b3cb1e3e6f204593094eeca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49c25aa4_49a406ea",
