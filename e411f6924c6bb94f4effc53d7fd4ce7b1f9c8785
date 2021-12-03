@@ -16,6 +16,92 @@
       "message": "Thanks Greg for the review. I have incorporated all your review comments as suggested unless comment says other than \"Done\".",
       "revId": "e411f6924c6bb94f4effc53d7fd4ce7b1f9c8785",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7afc6b36_2bf07d62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-03T10:55:08Z",
+      "side": 1,
+      "message": "looking better!",
+      "revId": "e411f6924c6bb94f4effc53d7fd4ce7b1f9c8785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c59a5342_11f4698d",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-03T10:55:08Z",
+      "side": 1,
+      "message": "also need to do this for x86 gki_defconfig file.",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 19
+      },
+      "revId": "e411f6924c6bb94f4effc53d7fd4ce7b1f9c8785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a629a27_99d16faf",
+        "filename": "init/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 2211,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-03T10:55:08Z",
+      "side": 1,
+      "message": "this sentence does not make must sense.  so either signed or unsigned modules are allowed, which means \"all modules\", right?\n\nThis is more about keeping modules from accessing symbols that are \"GKI protected\", right?",
+      "range": {
+        "startLine": 2210,
+        "startChar": 3,
+        "endLine": 2211,
+        "endChar": 7
+      },
+      "revId": "e411f6924c6bb94f4effc53d7fd4ce7b1f9c8785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f76522a_8b6f9bf7",
+        "filename": "init/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 2213,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-03T10:55:08Z",
+      "side": 1,
+      "message": "this does not prevent the module from exporting the symbol, it just prevents a \"GKI symbol\" from being duplicated in a non-GKI module and being used that way, right?",
+      "range": {
+        "startLine": 2212,
+        "startChar": 43,
+        "endLine": 2213,
+        "endChar": 65
+      },
+      "revId": "e411f6924c6bb94f4effc53d7fd4ce7b1f9c8785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
