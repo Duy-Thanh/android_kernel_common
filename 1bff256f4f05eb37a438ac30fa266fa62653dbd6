@@ -34,6 +34,24 @@
       "parentUuid": "3763266e_489a9e8e",
       "revId": "1bff256f4f05eb37a438ac30fa266fa62653dbd6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4df35f8_56760602",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-12-03T05:43:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74760ef3_00106cc0",
+      "revId": "1bff256f4f05eb37a438ac30fa266fa62653dbd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
