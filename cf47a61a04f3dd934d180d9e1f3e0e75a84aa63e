@@ -16,6 +16,24 @@
       "message": "why not submit this usptream first?",
       "revId": "cf47a61a04f3dd934d180d9e1f3e0e75a84aa63e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf6c9b87_f1ed91f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1874054
+      },
+      "writtenOn": "2021-12-04T13:53:21Z",
+      "side": 1,
+      "message": "As a general system call, madvise may affect the original recycling logic for servers, etc., but for interactive Android devices, the response speed of the top-app is closely related to the user experience, untimely interruption may cause severe lag and reduce user satisfaction. To illustrate, we submitted a case in the attachment of the BUG description.",
+      "parentUuid": "edde0057_2ba0e664",
+      "revId": "cf47a61a04f3dd934d180d9e1f3e0e75a84aa63e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
