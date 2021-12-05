@@ -34,6 +34,24 @@
       "parentUuid": "edde0057_2ba0e664",
       "revId": "cf47a61a04f3dd934d180d9e1f3e0e75a84aa63e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eea921e_5a1f2b85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-05T12:03:00Z",
+      "side": 1,
+      "message": "Please submit upstream as this will change functionality of all devices.  Also, Android is a valid use case for Linux, upstream is not about only servers, it needs to work well for everyone and changes like this that are not upstream are hard to maintain and justify over time.",
+      "parentUuid": "bf6c9b87_f1ed91f3",
+      "revId": "cf47a61a04f3dd934d180d9e1f3e0e75a84aa63e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
