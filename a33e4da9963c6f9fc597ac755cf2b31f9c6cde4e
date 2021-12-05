@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12cc1749_a226fb9f",
+        "filename": "drivers/virtio/virtio_mmio.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-05T12:00:37Z",
+      "side": 1,
+      "message": "there is no need for this #ifdef stuff, please use SIMPLE_DEV_PM_OPS instead.  This also allows the #ifdef down below to go away.",
+      "range": {
+        "startLine": 766,
+        "startChar": 0,
+        "endLine": 766,
+        "endChar": 22
+      },
+      "revId": "a33e4da9963c6f9fc597ac755cf2b31f9c6cde4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b3b644e7_91d24571",
         "filename": "drivers/virtio/virtio_mmio.c",
         "patchSetId": 4
