@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3b644e7_91d24571",
+        "filename": "drivers/virtio/virtio_mmio.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-05T11:59:31Z",
+      "side": 1,
+      "message": "doesn\u0027t this belong up above in the driver \u003d { } area?",
+      "range": {
+        "startLine": 813,
+        "startChar": 0,
+        "endLine": 813,
+        "endChar": 34
+      },
+      "revId": "a33e4da9963c6f9fc597ac755cf2b31f9c6cde4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
