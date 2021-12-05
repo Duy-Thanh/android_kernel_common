@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c759aaa6_79b02366",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-05T11:59:54Z",
+      "side": 1,
+      "message": "why not upstream first?   Also, see my review comments, this can be made simpler.",
+      "revId": "a33e4da9963c6f9fc597ac755cf2b31f9c6cde4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3b644e7_91d24571",
