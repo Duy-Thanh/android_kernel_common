@@ -34,6 +34,24 @@
       "parentUuid": "f273561e_7624b007",
       "revId": "a0fdf59cdd9efcab8b5b7b605717a741b48baf09",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc1745e7_fc839529",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-12-06T23:12:56Z",
+      "side": 1,
+      "message": "But you can\u0027t safely traverse that list without acquiring the thermal_list_lock. It seems like it would be better to just take the \"tz\" arg here. If you really need to traverse the list, your handler could use for_each_thermal_zone() which takes care of the locking.",
+      "parentUuid": "8d53cccf_518a105f",
+      "revId": "a0fdf59cdd9efcab8b5b7b605717a741b48baf09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
