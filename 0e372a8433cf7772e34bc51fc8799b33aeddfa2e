@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6fce6e41_902a72fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-12-06T23:49:47Z",
+      "side": 1,
+      "message": "We have to use per-cpu lock to avoid performance regression in the hot path. Upstream folks working on SPF were concerned about cacheline-bouncing if we use rw_semaphore. I profiled per-cpu lock vs rw_semaphore during pagefaults and it shows 3x performance improvement. Upstream fix for the latest SPF that Michel will be posting will implement the same approach.",
+      "parentUuid": "70b7ecf2_76c043b1",
+      "revId": "0e372a8433cf7772e34bc51fc8799b33aeddfa2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "030e175f_56f119f0",
         "filename": "mm/memory.c",
         "patchSetId": 9
@@ -31,6 +49,30 @@
       "writtenOn": "2021-11-30T18:47:24Z",
       "side": 1,
       "message": "This is really hot path. How popular mmu_notifier usecases in the android?",
+      "range": {
+        "startLine": 4724,
+        "startChar": 8,
+        "endLine": 4724,
+        "endChar": 28
+      },
+      "revId": "0e372a8433cf7772e34bc51fc8799b33aeddfa2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bfe3f05_53fae3a4",
+        "filename": "mm/memory.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 4724,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-12-06T23:49:47Z",
+      "side": 1,
+      "message": "I know pKVM uses them, not sure about anything else. However this is a fix for SPF which will be present in upstream as well, so the earlier we use and test it the better IMHO.",
+      "parentUuid": "030e175f_56f119f0",
       "range": {
         "startLine": 4724,
         "startChar": 8,
