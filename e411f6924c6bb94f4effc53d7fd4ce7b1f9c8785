@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a82b45f_cb37caf4",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2021-12-06T23:16:57Z",
+      "side": 1,
+      "message": "Ack. I\u0027ll add this in the next patch-set.",
+      "parentUuid": "c59a5342_11f4698d",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 19
+      },
+      "revId": "e411f6924c6bb94f4effc53d7fd4ce7b1f9c8785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a629a27_99d16faf",
@@ -83,6 +107,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3794c43c_0c0a11e8",
+        "filename": "init/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 2211,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2021-12-06T23:16:57Z",
+      "side": 1,
+      "message": "There are 3 types:\n1. Signed for which we have a key (GKI modules built at the build time with build time key)\n2. Signed by any other key.\n3. Unsigned\n\nSIG_FORCE rejects #2 and #3. This option modifies that behavior of SIG_FORCE whose help says, \"Reject unsigned modules or signed modules for which we don\u0027t have a key.\" (Line#2200 above)\n\nThis option doesn\u0027t reject but allows it as long as symbol protection is not violated. If violated then loading will fail.\n\nHow about this?\n\n\"Modifies the behavior of CONFIG_SIG_FORCE by allowing loading of unsigned modules or signed modules for which we don\u0027t have a key if they don\u0027t violate the access to Android GKI protected symbols and do not export the symbols already exported by the Android GKI modules.\"",
+      "parentUuid": "2a629a27_99d16faf",
+      "range": {
+        "startLine": 2210,
+        "startChar": 3,
+        "endLine": 2211,
+        "endChar": 7
+      },
+      "revId": "e411f6924c6bb94f4effc53d7fd4ce7b1f9c8785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f76522a_8b6f9bf7",
         "filename": "init/Kconfig",
         "patchSetId": 5
@@ -94,6 +142,30 @@
       "writtenOn": "2021-12-03T10:55:08Z",
       "side": 1,
       "message": "this does not prevent the module from exporting the symbol, it just prevents a \"GKI symbol\" from being duplicated in a non-GKI module and being used that way, right?",
+      "range": {
+        "startLine": 2212,
+        "startChar": 43,
+        "endLine": 2213,
+        "endChar": 65
+      },
+      "revId": "e411f6924c6bb94f4effc53d7fd4ce7b1f9c8785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f76632f_d1b41223",
+        "filename": "init/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 2213,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2021-12-06T23:16:57Z",
+      "side": 1,
+      "message": "Yes, it doesn\u0027t prevent module to export it but prevents loading of such modules if they export the symbol exported by Android GKI modules to prevent rolling their own version of the Android GKI module. If it can\u0027t load then symbol won\u0027t be exported even they can do so in the code. :)\n\nDoes changing the help as in earlier comment makes sense to cover this as well?",
+      "parentUuid": "3f76522a_8b6f9bf7",
       "range": {
         "startLine": 2212,
         "startChar": 43,
