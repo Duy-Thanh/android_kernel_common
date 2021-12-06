@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f797443d_1645dccc",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3043,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-06T15:54:59Z",
+      "side": 1,
+      "message": "always run checkpatch.pl on your changes.",
+      "revId": "e2a010b0361c5f4f170d03114be80435a7735c89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a01d8d5e_f83d2c9a",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3044,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-06T15:54:59Z",
+      "side": 1,
+      "message": "\"0\"",
+      "range": {
+        "startLine": 3044,
+        "startChar": 9,
+        "endLine": 3044,
+        "endChar": 16
+      },
+      "revId": "e2a010b0361c5f4f170d03114be80435a7735c89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
