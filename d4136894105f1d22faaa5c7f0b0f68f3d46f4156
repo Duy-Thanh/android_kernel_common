@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20ba451b_f80825a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-12-06T19:31:09Z",
+      "side": 1,
+      "message": "/buildbot/src/android/common-android13-5.15/common/kernel/locking/rwsem.c:572:12: error: no member named \u0027handoff_set\u0027 in \u0027struct rwsem_waiter\u0027\n                        waiter-\u003ehandoff_set \u003d true;\n                        ~~~~~~  ^\n/buildbot/src/android/common-android13-5.15/common/kernel/locking/rwsem.c:597:11: error: no member named \u0027handoff_set\u0027 in \u0027struct rwsem_waiter\u0027\n                waiter-\u003ehandoff_set \u003d true;\n                ~~~~~~  ^\n/buildbot/src/android/common-android13-5.15/common/kernel/locking/rwsem.c:1063:9: error: no member named \u0027handoff_set\u0027 in \u0027struct rwsem_waiter\u0027\n        waiter.handoff_set \u003d false;\n        ~~~~~~ ^\n/buildbot/src/android/common-android13-5.15/common/kernel/locking/rwsem.c:1123:14: error: no member named \u0027handoff_set\u0027 in \u0027struct rwsem_waiter\u0027\n                if (waiter.handoff_set) {\n                    ~~~~~~ ^\n4 errors generated.",
+      "revId": "d4136894105f1d22faaa5c7f0b0f68f3d46f4156",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
