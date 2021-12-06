@@ -3037,6 +3037,11 @@ try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 {
 	unsigned long flags;
 	int cpu, success = 0;
+	bool skip = false;
+
+	trace_android_rvh_try_to_wake_up_skip(p, state, wake_flags, &skip);
+	if (skip)
+		return 0;
 
 	preempt_disable();
 	if (p == current) {

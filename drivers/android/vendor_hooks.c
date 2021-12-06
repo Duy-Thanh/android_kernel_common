@@ -160,6 +160,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_irqs_enable);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_task_cpu);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_try_to_wake_up);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_try_to_wake_up_success);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_try_to_wake_up_skip);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_sched_fork);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_wake_up_new_task);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_new_task_stats);
