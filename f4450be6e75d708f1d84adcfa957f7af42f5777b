@@ -16,6 +16,24 @@
       "message": "Please submit to android-mainline too.",
       "revId": "f4450be6e75d708f1d84adcfa957f7af42f5777b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dca92ee_6a6f3ff8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1904140
+      },
+      "writtenOn": "2021-12-06T23:41:20Z",
+      "side": 1,
+      "message": "series starting at https://android-review.googlesource.com/c/kernel/common/+/1912475",
+      "parentUuid": "c6592878_e51db5f3",
+      "revId": "f4450be6e75d708f1d84adcfa957f7af42f5777b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
