@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a08ebcc_4bd7e607",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-12-06T21:41:36Z",
+      "side": 1,
+      "message": "sched_clock_register() is not an exported function so it can\u0027t be added to the symbol list.",
+      "revId": "31ee50022b00ce49d89b8279e3ac3549eb19a012",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
