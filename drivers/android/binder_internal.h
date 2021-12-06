@@ -119,6 +119,7 @@ DEFINE_SHOW_ATTRIBUTE(binder_transactions);
 int binder_transaction_log_show(struct seq_file *m, void *unused);
 DEFINE_SHOW_ATTRIBUTE(binder_transaction_log);
 
+#define BINDER_STRERR_MAXLEN 63
 struct binder_transaction_log_entry {
 	int debug_id;
 	int debug_id_done;
@@ -131,9 +132,8 @@ struct binder_transaction_log_entry {
 	int to_node;
 	int data_size;
 	int offsets_size;
-	int return_error_line;
-	uint32_t return_error;
-	uint32_t return_error_param;
+	struct binder_extended_error ee;
+	char strerr[BINDER_STRERR_MAXLEN + 1];
 	char context_name[BINDERFS_MAX_NAME + 1];
 };
 
@@ -501,6 +501,8 @@ struct binder_proc {
  *                        (only accessed by this thread)
  * @reply_error:          transaction errors reported by target thread
  *                        (protected by @proc->inner_lock)
+ * @ee:                   extended error information from this thread
+ *                        (protected by @proc->inner_lock)
  * @wait:                 wait queue for thread work
  * @stats:                per-thread statistics
  *                        (atomics, no lock needed)
@@ -526,6 +528,7 @@ struct binder_thread {
 	bool process_todo;
 	struct binder_error return_error;
 	struct binder_error reply_error;
+	struct binder_extended_error ee;
 	wait_queue_head_t wait;
 	struct binder_stats stats;
 	atomic_t tmp_ref;
