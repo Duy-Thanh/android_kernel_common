@@ -16,6 +16,24 @@
       "message": "why do you need thermal_tz_list? Based on the commit message, tz would be enough since you are then notified of temp updates. Please add more to the commit message.",
       "revId": "a0fdf59cdd9efcab8b5b7b605717a741b48baf09",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d53cccf_518a105f",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1928107
+      },
+      "writtenOn": "2021-12-06T03:29:16Z",
+      "side": 1,
+      "message": "Updated the commit message, please review, thank you.",
+      "parentUuid": "f273561e_7624b007",
+      "revId": "a0fdf59cdd9efcab8b5b7b605717a741b48baf09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
