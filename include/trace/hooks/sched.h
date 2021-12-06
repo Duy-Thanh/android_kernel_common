@@ -142,6 +142,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_try_to_wake_up_success,
 	TP_PROTO(struct task_struct *p),
 	TP_ARGS(p), 1);
 
+DECLARE_RESTRICTED_HOOK(android_rvh_try_to_wake_up_skip,
+	TP_PROTO(struct task_struct *p, unsigned int state, int wake_flags, bool *skip),
+	TP_ARGS(p, state, wake_flags, skip), 1);
+
 DECLARE_RESTRICTED_HOOK(android_rvh_sched_fork,
 	TP_PROTO(struct task_struct *p),
 	TP_ARGS(p), 1);
