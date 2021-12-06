@@ -22,6 +22,30 @@
       },
       "revId": "7e7355120a34ecce81fd5ca4d61f0705ab8ed3c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dbf6492_1a6a3f06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1885635
+      },
+      "writtenOn": "2021-12-06T23:48:25Z",
+      "side": 1,
+      "message": "Added my signed-off-by, thanks.",
+      "parentUuid": "7c7e3ee8_ce5f3cfb",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 49
+      },
+      "revId": "7e7355120a34ecce81fd5ca4d61f0705ab8ed3c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
