@@ -35,6 +35,7 @@
 #include <scsi/scsi_dh.h>
 
 #include <trace/events/scsi.h>
+#include <trace/hooks/biosaver.h>
 
 #include "scsi_debugfs.h"
 #include "scsi_priv.h"
@@ -1471,6 +1472,8 @@ static int scsi_dispatch_cmd(struct scsi_cmnd *cmd)
 	int rtn = 0;
 
 	atomic_inc(&cmd->device->iorequest_cnt);
+
+	trace_android_vh_biosaver_scsi(cmd->device->iorequest_cnt.counter);
 
 	/* check if the device is still usable */
 	if (unlikely(cmd->device->sdev_state == SDEV_DEL)) {
