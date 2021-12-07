@@ -16,6 +16,24 @@
       "message": "kleaf toolchain should be updated as well.\n\neither in a topic, by bumping https://cs.android.com/android/kernel/superproject/+/common-android-mainline:build/kleaf/kernel.bzl;l\u003d17\n\nor if that is too troublesome, `define_common_kernels()` has a `toolchain_version` argument that can be set to fix the toolchain per branch to anything else than the default: https://cs.android.com/android/kernel/superproject/+/common-android-mainline:common/BUILD.bazel;l\u003d22",
       "revId": "9a0405c05f24d754f1404cf1a54cb6edf6616a05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3af25f2_5e8dbfd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-12-07T22:55:50Z",
+      "side": 1,
+      "message": "Thanks for the analysis of the build failure.\n\nHaving yet another place where the toolchain version is hardcoded slows down our ability to upgrade the toolchain. Worse, hard coding it in Kleaf now requires us to tie toolchain updates for all android13 branches together in one topic.\n\nRather than encode the clang version in multiple places, do you have thoughts on how we could modify kleaf to just parse build.config.common? Or, how build.config.common and kleaf could share the expected toolchain version in one location?",
+      "parentUuid": "d9b36cc1_e09ede32",
+      "revId": "9a0405c05f24d754f1404cf1a54cb6edf6616a05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
