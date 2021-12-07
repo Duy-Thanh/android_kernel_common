@@ -52,6 +52,24 @@
       "parentUuid": "8d53cccf_518a105f",
       "revId": "a0fdf59cdd9efcab8b5b7b605717a741b48baf09",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d6b3719_dcbb5b8d",
+        "filename": "drivers/thermal/thermal_core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1928107
+      },
+      "writtenOn": "2021-12-07T12:59:29Z",
+      "side": 1,
+      "message": "Oh, yes it is. Sorry about neglecting the thermal_list_lock, for_each_thermal_zone() is a better choice! Thank you for your sincere advice. Perhaps I need to rethink about this patch. It seems to be redundant here if take the tz arg only. I would abandont this patch. Thanks again.",
+      "parentUuid": "fc1745e7_fc839529",
+      "revId": "a0fdf59cdd9efcab8b5b7b605717a741b48baf09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
