@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f30f006_7c6e8ddc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-07T08:46:21Z",
+      "side": 1,
+      "message": "Why not just have this added to the stable trees upstream instead of trying to cherry-pick it to all older kernels and branches?\n\n",
+      "revId": "026a62a9708ca31dc349f658a47cc87607ebd4f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
