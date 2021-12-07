@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85f42bed_a430d379",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3043,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-12-07T03:46:15Z",
+      "side": 1,
+      "message": "fixed",
+      "parentUuid": "f797443d_1645dccc",
+      "revId": "e2a010b0361c5f4f170d03114be80435a7735c89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a01d8d5e_f83d2c9a",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-12-06T15:54:59Z",
       "side": 1,
       "message": "\"0\"",
+      "range": {
+        "startLine": 3044,
+        "startChar": 9,
+        "endLine": 3044,
+        "endChar": 16
+      },
+      "revId": "e2a010b0361c5f4f170d03114be80435a7735c89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eec2661_acdbb3d0",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3044,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-12-07T03:46:15Z",
+      "side": 1,
+      "message": "fixed",
+      "parentUuid": "a01d8d5e_f83d2c9a",
       "range": {
         "startLine": 3044,
         "startChar": 9,
