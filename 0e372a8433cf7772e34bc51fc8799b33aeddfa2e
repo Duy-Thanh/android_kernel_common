@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77a7bcfd_f78b5ad8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-12-07T00:15:47Z",
+      "side": 1,
+      "message": "I couldn\u0027t come up with better idea since I didn\u0027t follow the SPF but I am not happy with the approach considering mmu_notifier is relatively rare usecase in this hot path and the per-cpu lock approach per MM looks strange to me.\nI couldn\u0027t give my +2 unless I\u0027m convinced but don\u0027t want to make stuck for you.\nIf you believe it\u0027s best way at this moment, feel free to merge it without my ack.",
+      "parentUuid": "6fce6e41_902a72fb",
+      "revId": "0e372a8433cf7772e34bc51fc8799b33aeddfa2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "030e175f_56f119f0",
         "filename": "mm/memory.c",
         "patchSetId": 9
