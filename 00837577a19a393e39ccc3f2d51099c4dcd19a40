@@ -16,6 +16,24 @@
       "message": "\u003e Patch Set 10: Code-Review+2\n\u003e \n\u003e By voting Code-Review+2 the following files are now code-owner approved by \u003cGERRIT_ACCOUNT_1125653\u003e:\n\u003e * include/linux/fs.h\n\u003e * include/linux/fscrypt.h\n\u003e \n\nThere is currently a merge conflict. Should I rebase and upload again ?",
       "revId": "00837577a19a393e39ccc3f2d51099c4dcd19a40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54cecb21_40669d02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-07T08:58:11Z",
+      "side": 1,
+      "message": "Yes please.",
+      "parentUuid": "61dff642_16109522",
+      "revId": "00837577a19a393e39ccc3f2d51099c4dcd19a40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
