@@ -34,6 +34,24 @@
       "parentUuid": "ad6645d8_f49abdfd",
       "revId": "525f656833266a31bc7bd8bfd9045adab4883891",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0ca50eb_c63f8505",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-12-07T00:29:16Z",
+      "side": 1,
+      "message": "Yub, that\u0027s fine at this moment. However, next time, let\u0027s make separate CL topics in that case. Because IMO, review should be priority than easy cherry-pick.",
+      "parentUuid": "27924c11_d31a26d3",
+      "revId": "525f656833266a31bc7bd8bfd9045adab4883891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
