@@ -52,6 +52,24 @@
       "parentUuid": "54cecb21_40669d02",
       "revId": "00837577a19a393e39ccc3f2d51099c4dcd19a40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2ee8852_c4057945",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1885635
+      },
+      "writtenOn": "2021-12-07T09:12:52Z",
+      "side": 1,
+      "message": "\u003e I just pushed the \"rebase\" button on the upper right side.\n\u003e Is it okay ?\n\nJust forget this please.\nI uploaded patch again.",
+      "parentUuid": "b3cd9bbe_47635938",
+      "revId": "00837577a19a393e39ccc3f2d51099c4dcd19a40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
