@@ -34,6 +34,24 @@
       "parentUuid": "61dff642_16109522",
       "revId": "00837577a19a393e39ccc3f2d51099c4dcd19a40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3cd9bbe_47635938",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1885635
+      },
+      "writtenOn": "2021-12-07T09:06:43Z",
+      "side": 1,
+      "message": "I just pushed the \"rebase\" button on the upper right side.\nIs it okay ?",
+      "parentUuid": "54cecb21_40669d02",
+      "revId": "00837577a19a393e39ccc3f2d51099c4dcd19a40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
