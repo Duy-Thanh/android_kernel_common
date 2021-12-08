@@ -16,6 +16,24 @@
       "message": "no explanation of why you are reverting it?",
       "revId": "8e8d0aa452d0dc934aa84a564abdaf08d91ba0a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "851fd68d_86b81db5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-12-08T18:20:15Z",
+      "side": 1,
+      "message": "To bring it closer to android-mainline. This is out-of-tree patch after all...",
+      "parentUuid": "b779d991_5616928a",
+      "revId": "8e8d0aa452d0dc934aa84a564abdaf08d91ba0a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
