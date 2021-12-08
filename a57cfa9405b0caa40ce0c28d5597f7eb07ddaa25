@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d60b7e00_b1b87818",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-08T08:46:31Z",
+      "side": 1,
+      "message": "You did not test-build this with the option disabled from what I can determine.\n\nTry a \u0027make allmodconfig\u0027 with the new option disabled.",
+      "parentUuid": "143f077a_4fd48cf6",
+      "revId": "a57cfa9405b0caa40ce0c28d5597f7eb07ddaa25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "17cbd9c7_eee4b068",
         "filename": "arch/Kconfig",
         "patchSetId": 7
