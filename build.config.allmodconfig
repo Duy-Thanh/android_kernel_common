@@ -9,6 +9,11 @@ function update_config() {
          -d CPU_BIG_ENDIAN \
          -d DYNAMIC_FTRACE \
          -e UNWINDER_FRAME_POINTER \
+<<<<<<< HEAD   (eddb2f UPSTREAM: drm/amdgpu: temporarily disable broken Clang build)
+=======
+	 -d INFINIBAND_QIB \
+	 -d WERROR \
+>>>>>>> CHANGE (eb57c3 ANDROID: allmodconfig: disable WERROR)
 
     (cd ${OUT_DIR} && \
      make O=${OUT_DIR} $archsubarch CROSS_COMPILE=${CROSS_COMPILE} "${TOOL_ARGS[@]}" ${MAKE_ARGS} olddefconfig)
