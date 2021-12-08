@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e15b43e3_9ce91ca2",
+        "filename": "include/linux/android_kabi.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1927881
+      },
+      "writtenOn": "2021-12-08T03:28:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eee5f5c_46e01467",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 31
+      },
+      "revId": "626d8edb9935129b45d36041d8a906e6d24c3011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04b984fb_d84af930",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-11-30T09:31:58Z",
       "side": 1,
       "message": "same as above, this will break the build.",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 31
+      },
+      "revId": "626d8edb9935129b45d36041d8a906e6d24c3011",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e35ae22b_c9e9c4fb",
+        "filename": "include/linux/android_kabi.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1927881
+      },
+      "writtenOn": "2021-12-08T03:28:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04b984fb_d84af930",
       "range": {
         "startLine": 117,
         "startChar": 0,
