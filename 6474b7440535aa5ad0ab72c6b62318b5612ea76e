@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de3b222e_df78a001",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-12-08T21:23:30Z",
+      "side": 1,
+      "message": "We could remove the kcalloc entirely.",
+      "revId": "6474b7440535aa5ad0ab72c6b62318b5612ea76e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
