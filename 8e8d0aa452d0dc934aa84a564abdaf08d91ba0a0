@@ -34,6 +34,24 @@
       "parentUuid": "b779d991_5616928a",
       "revId": "8e8d0aa452d0dc934aa84a564abdaf08d91ba0a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a700bb90_7972e453",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-08T19:15:58Z",
+      "side": 1,
+      "message": "great, put it in the changelog!  😊",
+      "parentUuid": "851fd68d_86b81db5",
+      "revId": "8e8d0aa452d0dc934aa84a564abdaf08d91ba0a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
