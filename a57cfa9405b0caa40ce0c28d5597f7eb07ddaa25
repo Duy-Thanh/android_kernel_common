@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f98407a_bd2a2d0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-08T07:40:46Z",
+      "side": 1,
+      "message": "I do not think you test-built this change at all.",
+      "revId": "a57cfa9405b0caa40ce0c28d5597f7eb07ddaa25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17cbd9c7_eee4b068",
+        "filename": "arch/Kconfig",
+        "patchSetId": 7
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-08T07:40:46Z",
+      "side": 1,
+      "message": "why not just use CONFIG_ANDROID?  We already have that and it is enabled, no need for yet-another-config-option that we have to support for 20+ years out of the tree.",
+      "range": {
+        "startLine": 617,
+        "startChar": 7,
+        "endLine": 617,
+        "endChar": 24
+      },
+      "revId": "a57cfa9405b0caa40ce0c28d5597f7eb07ddaa25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
