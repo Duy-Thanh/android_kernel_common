@@ -34,6 +34,24 @@
       "parentUuid": "d9b36cc1_e09ede32",
       "revId": "9a0405c05f24d754f1404cf1a54cb6edf6616a05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01c0e625_1639c51a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-12-08T09:52:10Z",
+      "side": 1,
+      "message": "I know it is not ideal. Eventually we want to retire build.config files and get back to one definition (in kleaf only). For now we only have the options topic (which only applies to 3 branches these days) or if that is not working, we can hard code it per branch as suggested above.\n\nWe could create a common location. I thought I might get away with it given how infrequent the updates are. Can you try the topic first and if this is too painful we figure something else out?",
+      "parentUuid": "d3af25f2_5e8dbfd0",
+      "revId": "9a0405c05f24d754f1404cf1a54cb6edf6616a05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
