@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21a6f2ed_ad17cf08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1885635
+      },
+      "writtenOn": "2021-12-08T23:26:49Z",
+      "side": 1,
+      "message": "\u003e Patch Set 2: Code-Review+2\n\u003e \n\u003e By voting Code-Review+2 the following files are now code-owner approved by \u003cGERRIT_ACCOUNT_1125653\u003e:\n\u003e * include/linux/fscrypt.h\n\u003e \n\nMerge conflict occurred, so I rebased and uploaded the patch again.",
+      "revId": "170a770fbe10b027c9e2f751dd674b7c6d3f80bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
