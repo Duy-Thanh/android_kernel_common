@@ -16,6 +16,24 @@
       "message": "no reason why the revert?",
       "revId": "afc8bebf10dfe34ef2f5f991d338d9616b1c808a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9770c84e_07ca9747",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-12-08T18:20:48Z",
+      "side": 1,
+      "message": "reverting out-of-tree patch.",
+      "parentUuid": "884c6fdc_2baa1bba",
+      "revId": "afc8bebf10dfe34ef2f5f991d338d9616b1c808a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
