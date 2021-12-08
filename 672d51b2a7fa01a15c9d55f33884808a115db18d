@@ -33,6 +33,23 @@
       "message": "willdeacon@, need code owners +2, could you please help to +2?",
       "revId": "672d51b2a7fa01a15c9d55f33884808a115db18d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a9a4818_6925d083",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1791520
+      },
+      "writtenOn": "2021-12-08T10:45:35Z",
+      "side": 1,
+      "message": "+ tkjos@, we need code owner approve to merge the change. Could you please help?",
+      "revId": "672d51b2a7fa01a15c9d55f33884808a115db18d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
