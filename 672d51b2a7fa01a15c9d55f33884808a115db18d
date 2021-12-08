@@ -16,6 +16,23 @@
       "message": "We need this fix to unblock speakers no sound issue on this kernel branch.",
       "revId": "672d51b2a7fa01a15c9d55f33884808a115db18d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cf2c39f_e79832d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1791520
+      },
+      "writtenOn": "2021-12-08T10:19:11Z",
+      "side": 1,
+      "message": "willdeacon@, need code owners +2, could you please help to +2?",
+      "revId": "672d51b2a7fa01a15c9d55f33884808a115db18d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
