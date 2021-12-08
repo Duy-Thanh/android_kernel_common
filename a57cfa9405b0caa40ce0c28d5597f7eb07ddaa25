@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b629cec3_95c2fd17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-08T07:41:44Z",
+      "side": 1,
+      "message": "For your next submission, please prove that it has been tested, and what the build savings are.",
+      "revId": "a57cfa9405b0caa40ce0c28d5597f7eb07ddaa25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "17cbd9c7_eee4b068",
         "filename": "arch/Kconfig",
         "patchSetId": 7
