@@ -1679,6 +1679,13 @@ static void copy_seccomp(struct task_struct *p)
 #endif
 }
 
+static void release_seccomp(struct task_struct *p)
+{
+#ifdef CONFIG_SECCOMP
+	seccomp_filter_release(p);
+#endif
+}
+
 SYSCALL_DEFINE1(set_tid_address, int __user *, tidptr)
 {
 	current->clear_child_tid = tidptr;
@@ -2364,6 +2371,7 @@ static __latent_entropy struct task_struct *copy_process(
 	return p;
 
 bad_fork_cancel_cgroup:
+	release_seccomp(p);
 	spin_unlock(&current->sighand->siglock);
 	write_unlock_irq(&tasklist_lock);
 	cgroup_cancel_fork(p, args);
