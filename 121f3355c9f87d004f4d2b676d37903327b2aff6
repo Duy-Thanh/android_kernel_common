@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000018208311",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1915923?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "e0ef37bb_af368743",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 14,
+                "startChar": 0,
+                "endLine": 14,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Venkata Rao Kakani \u003cvkakani@codeaurora.org\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "e55f0aec_e32d1bca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-12-09T07:08:46Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Venkata Rao Kakani \u003cvkakani@codeaurora.org\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 414990510 android-build.ayeaye-python-dispatcher_20211208.04_p0",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 0
+      },
+      "revId": "121f3355c9f87d004f4d2b676d37903327b2aff6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
