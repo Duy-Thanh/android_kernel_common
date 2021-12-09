@@ -50,6 +50,24 @@
       "message": "If you need this now, or in the next 6 months, it should be added now,as this branch is not merging with the LTS release until then.\n\nSo please, if you want this in your device before then, restore it.",
       "revId": "026a62a9708ca31dc349f658a47cc87607ebd4f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdb38203_c2fa6a68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015397
+      },
+      "writtenOn": "2021-12-09T19:24:20Z",
+      "side": 1,
+      "message": "Yes, this will be needed in the coming months for our devices that are running the 5.10 GKI kernel.",
+      "parentUuid": "62969281_522677da",
+      "revId": "026a62a9708ca31dc349f658a47cc87607ebd4f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
