@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfa9bbc2_ca3eccd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-09T16:00:59Z",
+      "side": 1,
+      "message": "same as previous commit, but fixed up the commit id that was being referenced.",
+      "revId": "e2aed161fc26f9e03ffceec742d85800df22b772",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
