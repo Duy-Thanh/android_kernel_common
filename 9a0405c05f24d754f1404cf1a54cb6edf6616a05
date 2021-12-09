@@ -52,6 +52,24 @@
       "parentUuid": "d3af25f2_5e8dbfd0",
       "revId": "9a0405c05f24d754f1404cf1a54cb6edf6616a05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcb58add_23bca3a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-12-09T18:42:35Z",
+      "side": 1,
+      "message": "Sure, aosp/1917137.\n\nI look forward to retiring build.config files! Hopefully aosp/1914067 helps simplify things a bit from the toolchain side.",
+      "parentUuid": "01c0e625_1639c51a",
+      "revId": "9a0405c05f24d754f1404cf1a54cb6edf6616a05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
