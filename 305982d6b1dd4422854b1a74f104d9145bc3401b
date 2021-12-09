@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b601aced_46f01832",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-12-09T17:41:11Z",
+      "side": 1,
+      "message": "The patchset containing this patch has 4 additional patches fixing slab: https://lore.kernel.org/all/20210916123920.48704-1-linmiaohe@huawei.com/T/#m51b10c6f23daafcdba37e3343adad0055fbd297e. Don\u0027t we need the other ones?",
+      "revId": "305982d6b1dd4422854b1a74f104d9145bc3401b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
