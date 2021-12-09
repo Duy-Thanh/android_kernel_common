@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000018215171",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1909904?revision\u003d12",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "0cef7cf2_c4b2895b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-12-09T11:51:39Z",
+      "side": 1,
+      "message": "Commit needs to contain a properly formatted Bug: or Fixes: line\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 414990510 android-build.ayeaye-python-dispatcher_20211208.04_p0",
+      "revId": "f91613884980ac29a4372bf7f821f042795bcb34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000018215171",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1909904?revision\u003d12",
+      "fixSuggestions": [
+        {
+          "fixId": "cc3cb5e4_a1af4806",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 20,
+                "startChar": 0,
+                "endLine": 20,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: humengyao \u003chumengyao@xiaomi.corp-partner.google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "8f03a0dd_0bf6f206",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-12-09T11:51:39Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: humengyao \u003chumengyao@xiaomi.corp-partner.google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 414990510 android-build.ayeaye-python-dispatcher_20211208.04_p0",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 0
+      },
+      "revId": "f91613884980ac29a4372bf7f821f042795bcb34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
