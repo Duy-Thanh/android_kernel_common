@@ -16,6 +16,29 @@
       "message": "if the .xml file is updated, please put the result of the report generated in the changelog text so that we can see the new symbols being tracked easily.",
       "revId": "b9a5e1cc21ae925e1a3257a418af0ab4da6cbea2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43e73136_696f966b",
+        "filename": "android/abi_gki_aarch64_asus",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-10T08:29:59Z",
+      "side": 1,
+      "message": "these symbols are not allowed to be used by drivers, sorry.",
+      "range": {
+        "startLine": 74,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 9
+      },
+      "revId": "b9a5e1cc21ae925e1a3257a418af0ab4da6cbea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
