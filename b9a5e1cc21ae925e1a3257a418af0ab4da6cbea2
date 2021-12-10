@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d74c0ae_134b554a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-10T12:08:30Z",
+      "side": 1,
+      "message": "these are not the symbols used by the in-kernel exfat or ntfs code, sorry, we can not support non-gpl kernel modules like from tuxera.",
+      "parentUuid": "ca35af18_eb6f0326",
+      "revId": "b9a5e1cc21ae925e1a3257a418af0ab4da6cbea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "43e73136_696f966b",
         "filename": "android/abi_gki_aarch64_asus",
         "patchSetId": 3
