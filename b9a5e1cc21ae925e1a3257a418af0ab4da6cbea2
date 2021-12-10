@@ -39,6 +39,30 @@
       },
       "revId": "b9a5e1cc21ae925e1a3257a418af0ab4da6cbea2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90853241_3491e123",
+        "filename": "android/abi_gki_aarch64_asus",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1929712
+      },
+      "writtenOn": "2021-12-10T09:09:39Z",
+      "side": 1,
+      "message": "In https://android.googlesource.com/kernel/common/+/224ea2cd2c32d3a32772b0a2fe8a008210ee686d  filp_open is used in android/abi_gki_aarch64_sony.\nin fs/open.c, filp_open is used EXPORT_SYMBOL.\n\nWhy not allowed?",
+      "parentUuid": "43e73136_696f966b",
+      "range": {
+        "startLine": 74,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 9
+      },
+      "revId": "b9a5e1cc21ae925e1a3257a418af0ab4da6cbea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
