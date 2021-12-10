@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0649bb8_5f6d5b94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-12-10T17:19:19Z",
+      "side": 1,
+      "message": "This patch is only a partial solution. Please cherry-pick the following two patches and drop this one:\n* https://android-review.googlesource.com/c/kernel/common/+/1897777/3\n* https://android-review.googlesource.com/c/kernel/common/+/1897778/2",
+      "revId": "d0c099faf52cf89844ac4c01fca957146ae23cd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
