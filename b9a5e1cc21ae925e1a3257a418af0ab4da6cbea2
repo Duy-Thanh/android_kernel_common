@@ -63,6 +63,30 @@
       },
       "revId": "b9a5e1cc21ae925e1a3257a418af0ab4da6cbea2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdc52c4c_a17fa280",
+        "filename": "android/abi_gki_aarch64_asus",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-10T09:12:52Z",
+      "side": 1,
+      "message": "Drivers should never be reading/writing directly to files.",
+      "parentUuid": "90853241_3491e123",
+      "range": {
+        "startLine": 74,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 9
+      },
+      "revId": "b9a5e1cc21ae925e1a3257a418af0ab4da6cbea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
