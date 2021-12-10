@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a23deeb2_a9250b25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-10T08:29:28Z",
+      "side": 1,
+      "message": "if the .xml file is updated, please put the result of the report generated in the changelog text so that we can see the new symbols being tracked easily.",
+      "revId": "b9a5e1cc21ae925e1a3257a418af0ab4da6cbea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
