@@ -16,6 +16,23 @@
       "message": "Just pushing this up as a reference in case anyone needs to easily cherry-pick. I\u0027ll correct the author/committer fields if this is the solution.",
       "revId": "dbf7cdfed6b21c76db24a6c0e74ee0b13e752be0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6913f56_9d320e8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2021-12-10T08:40:27Z",
+      "side": 1,
+      "message": "A more complete fix was merged as of 94902d849e85093aafcdbea2be8e2beff47233e6 (\"arm64: uaccess: avoid blocking within critical sections\")",
+      "revId": "dbf7cdfed6b21c76db24a6c0e74ee0b13e752be0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
