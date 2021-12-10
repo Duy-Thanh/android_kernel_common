@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "987892b5_9337b7e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2021-12-10T04:56:29Z",
+      "side": 1,
+      "message": "Still going through the code - few questions below. Thanks.",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51528177_c8c88e19",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2021-12-10T04:56:29Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be under CONFIG_FUSE_BPF ?",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3142ab9b_0f56d51a",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1509,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2021-12-10T04:56:29Z",
+      "side": 1,
+      "message": "Initialize() isn\u0027t optional isn\u0027t it ? why no fuse_revalidate_initialize() ?",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db70d4a6_0c08f0d1",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1718,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2021-12-10T04:56:29Z",
+      "side": 1,
+      "message": "fuse_args contains a pointer: \"canonical_path\"; Will this work if the intent here to copy the data?",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bda2826_c6fe8133",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1735,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2021-12-10T04:56:29Z",
+      "side": 1,
+      "message": "Don\u0027t we have to run post-filters even if there is an error at this point ?",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92463c95_e6f9a8f9",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1751,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2021-12-10T04:56:29Z",
+      "side": 1,
+      "message": "If there is no backing, why do we have to run pre-filters.. Sorry, if I am missing something. Shouldn\u0027t initialize-backing-finalize be lock-step and should be present always ?",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "623d3110_c68df4c9",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1776,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2021-12-10T04:56:29Z",
+      "side": 1,
+      "message": "this means we had an error running backing() and passing this error to post filter. How/why does post-filter handle this error ?",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f34a8620_8aa38cef",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1794,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2021-12-10T04:56:29Z",
+      "side": 1,
+      "message": "nit: Shouldn\u0027t we clear FUSE_POSTFILTER bit - I guess it is ok as long as finalize() doesn\u0027t look at it.",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64b884ff_a6b29ba9",
+        "filename": "fs/fuse/readdir.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2021-12-10T04:56:29Z",
+      "side": 1,
+      "message": "curious on when will we ever break out from this try-again loop ?",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
