@@ -16,6 +16,24 @@
       "message": "Hi, Greg, Matthias\n\nJust want to ask if you have any idea about any knowhow or guides on how to fix the various warnings which would be reported as errors now with this change.\n\nLike for \"-Wimplicit-fallthrough\" warning, we normally just need to add the \"fallthrough;\" line before that case line.\nand for \"comparison of array \u0027psSysData-\u003eszTIVersion\u0027 not equal to a null pointer is always true\", maybe we just need to remove the check.\n\nThat would be helpful for people who don\u0027t know the compiler or kernel very much to fix such errors.\n\nThanks in advance!",
       "revId": "3f66c2a071ab7169bde1750da9c4dc088676fd02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9f2e48d_fd4cbc5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-10T16:21:16Z",
+      "side": 1,
+      "message": "Fix the warnings, that\u0027s what upstream is now doing, this is not new, we delayed enabling this for many months.\n\nUpstream builds cleanly, if you have out-of-tree code, well, it\u0027s about time that was cleaned up.  Good luck!  😊",
+      "parentUuid": "eacf2db3_eedf0fdc",
+      "revId": "3f66c2a071ab7169bde1750da9c4dc088676fd02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
