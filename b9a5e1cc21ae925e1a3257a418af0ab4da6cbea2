@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca35af18_eb6f0326",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1929712
+      },
+      "writtenOn": "2021-12-10T11:45:19Z",
+      "side": 1,
+      "message": "We use tuxera exfat/ntfs. The symbols are needed by their requirement.",
+      "parentUuid": "5e54f197_20f1bdae",
+      "revId": "b9a5e1cc21ae925e1a3257a418af0ab4da6cbea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "43e73136_696f966b",
         "filename": "android/abi_gki_aarch64_asus",
         "patchSetId": 3
