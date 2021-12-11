@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d85bbf05_c42133e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1871253
+      },
+      "writtenOn": "2021-12-11T01:30:47Z",
+      "side": 1,
+      "message": "Device doesn\u0027t boot with this, need to debug further, sharing for reference.",
+      "revId": "9f2da252916c2cf306f13e4cd8f28b6dd2fc2b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ef79386_a04ad2b7",
+        "filename": "drivers/of/device.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1871253
+      },
+      "writtenOn": "2021-12-11T01:30:47Z",
+      "side": 1,
+      "message": "Suspected ABI mismatch?",
+      "revId": "9f2da252916c2cf306f13e4cd8f28b6dd2fc2b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
