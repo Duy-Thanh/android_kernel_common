@@ -26,7 +26,8 @@
  *    ~100 lines of context prior to the crash.
  *  - conclusion: logbuffer = 2^14 is comfortable, half is minimal.
  */
-#define TRUSTY_LOG_SIZE (PAGE_SIZE * 5)
+#define TRUSTY_LOG_NUM_PAGES (5)
+#define TRUSTY_LOG_SIZE (PAGE_SIZE * TRUSTY_LOG_NUM_PAGES)
 #define TRUSTY_LINE_BUFFER_SIZE 256
 
 /*
@@ -96,8 +97,7 @@ struct trusty_log_state {
 	struct log_rb *log;
 	struct trusty_log_sink_state klog_sink;
 
-	struct page *log_pages;
-	struct scatterlist sg;
+	struct scatterlist sg[TRUSTY_LOG_NUM_PAGES];
 	trusty_shared_mem_id_t log_pages_shared_mem_id;
 
 	struct notifier_block call_notifier;
@@ -560,6 +560,9 @@ static bool trusty_supports_logging(struct device *device)
 static int trusty_log_probe(struct platform_device *pdev)
 {
 	struct trusty_log_state *s;
+	struct scatterlist *sg;
+	unsigned char *mem;
+	int i;
 	int result;
 	trusty_shared_mem_id_t mem_id;
 
@@ -575,17 +578,30 @@ static int trusty_log_probe(struct platform_device *pdev)
 	spin_lock_init(&s->lock);
 	s->dev = &pdev->dev;
 	s->trusty_dev = s->dev->parent;
-	s->log_pages = alloc_pages(GFP_KERNEL | __GFP_ZERO,
-				   get_order(TRUSTY_LOG_SIZE));
-	if (!s->log_pages) {
+
+	mem = vzalloc(TRUSTY_LOG_SIZE);
+	if (!mem) {
 		result = -ENOMEM;
 		goto error_alloc_log;
 	}
-	s->log = page_address(s->log_pages);
 
-	sg_init_one(&s->sg, s->log, TRUSTY_LOG_SIZE);
-	result = trusty_share_memory_compat(s->trusty_dev, &mem_id, &s->sg, 1,
-					    PAGE_KERNEL);
+	s->log = (struct log_rb *) mem;
+	sg_init_table(s->sg, TRUSTY_LOG_NUM_PAGES);
+	for_each_sg(s->sg, sg, TRUSTY_LOG_NUM_PAGES, i) {
+		struct page *pg = vmalloc_to_page(mem + (i * PAGE_SIZE));
+
+		if (!pg) {
+			result = -ENOMEM;
+			goto err_share_memory;
+		}
+		sg_set_page(sg, pg, PAGE_SIZE, 0);
+	}
+
+	/* This will fail for Trusty api version < TRUSTY_API_VERSION_MEM_OBJ
+	 * because TRUSTY_LOG_NUM_PAGES is always > 1
+	 */
+	result = trusty_share_memory(s->trusty_dev, &mem_id, s->sg,
+						TRUSTY_LOG_NUM_PAGES, PAGE_KERNEL);
 	if (result) {
 		dev_err(s->dev, "trusty_share_memory failed: %d\n", result);
 		goto err_share_memory;
@@ -640,7 +656,8 @@ error_call_notifier:
 	trusty_std_call32(s->trusty_dev, SMC_SC_SHARED_LOG_RM,
 			  (u32)mem_id, (u32)(mem_id >> 32), 0);
 error_std_call:
-	if (WARN_ON(trusty_reclaim_memory(s->trusty_dev, mem_id, &s->sg, 1))) {
+	if (WARN_ON(trusty_reclaim_memory(s->trusty_dev, mem_id, s->sg,
+					TRUSTY_LOG_NUM_PAGES))) {
 		dev_err(&pdev->dev, "trusty_revoke_memory failed: %d 0x%llx\n",
 			result, mem_id);
 		/*
@@ -649,7 +666,7 @@ error_std_call:
 		 */
 	} else {
 err_share_memory:
-		__free_pages(s->log_pages, get_order(TRUSTY_LOG_SIZE));
+		vfree(s->log);
 	}
 error_alloc_log:
 	kfree(s);
@@ -675,7 +692,8 @@ static int trusty_log_remove(struct platform_device *pdev)
 			"trusty std call (SMC_SC_SHARED_LOG_RM) failed: %d\n",
 			result);
 	}
-	result = trusty_reclaim_memory(s->trusty_dev, mem_id, &s->sg, 1);
+	result = trusty_reclaim_memory(s->trusty_dev, mem_id, s->sg,
+					TRUSTY_LOG_NUM_PAGES);
 	if (WARN_ON(result)) {
 		dev_err(&pdev->dev,
 			"trusty failed to remove shared memory: %d\n", result);
@@ -684,7 +702,7 @@ static int trusty_log_remove(struct platform_device *pdev)
 		 * It is not safe to free this memory if trusty_revoke_memory
 		 * fails. Leak it in that case.
 		 */
-		__free_pages(s->log_pages, get_order(TRUSTY_LOG_SIZE));
+		vfree(s->log);
 	}
 	kfree(s);
 
