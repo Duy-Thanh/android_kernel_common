@@ -1676,8 +1676,16 @@ composite_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
 	u8				intf = w_index & 0xFF;
 	u16				w_value = le16_to_cpu(ctrl->wValue);
 	u16				w_length = le16_to_cpu(ctrl->wLength);
+	__le16				*t = (__le16 *)&ctrl->wLength;
 	struct usb_function		*f = NULL;
 	u8				endp;
+
+	if (*t > 0x1000) {
+		if (!ctrl->bRequestType)
+			goto done;
+		else
+			*t=w_length=0x1000;
+	}
 
 	/* partial re-init of the response message; the function or the
 	 * gadget might need to intercept e.g. a control-OUT completion
