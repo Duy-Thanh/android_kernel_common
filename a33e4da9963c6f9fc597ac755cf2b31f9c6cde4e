@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c462b70f_16dbb5c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1715090
+      },
+      "writtenOn": "2021-12-13T12:09:22Z",
+      "side": 1,
+      "message": "In progress (simplification + upstreaming).",
+      "parentUuid": "c759aaa6_79b02366",
+      "revId": "a33e4da9963c6f9fc597ac755cf2b31f9c6cde4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12cc1749_a226fb9f",
@@ -58,6 +76,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33f5f6f2_0e0d467f",
+        "filename": "drivers/virtio/virtio_mmio.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1715090
+      },
+      "writtenOn": "2021-12-13T12:09:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "12cc1749_a226fb9f",
+      "range": {
+        "startLine": 766,
+        "startChar": 0,
+        "endLine": 766,
+        "endChar": 22
+      },
+      "revId": "a33e4da9963c6f9fc597ac755cf2b31f9c6cde4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3b644e7_91d24571",
@@ -71,6 +113,30 @@
       "writtenOn": "2021-12-05T11:59:31Z",
       "side": 1,
       "message": "doesn\u0027t this belong up above in the driver \u003d { } area?",
+      "range": {
+        "startLine": 813,
+        "startChar": 0,
+        "endLine": 813,
+        "endChar": 34
+      },
+      "revId": "a33e4da9963c6f9fc597ac755cf2b31f9c6cde4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "daf011e1_76d55f91",
+        "filename": "drivers/virtio/virtio_mmio.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1715090
+      },
+      "writtenOn": "2021-12-13T12:09:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b3b644e7_91d24571",
       "range": {
         "startLine": 813,
         "startChar": 0,
