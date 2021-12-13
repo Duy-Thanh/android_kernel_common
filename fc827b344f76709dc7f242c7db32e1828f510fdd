@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bc2ce3d_cc0de93d",
+        "filename": "include/trace/hooks/thermal.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-12-13T17:01:20Z",
+      "side": 1,
+      "message": "This line introduced kernelci warnings. See https://linux.kernelci.org/build/id/61b3c8a836aff176a439712e/logs/\n\n```\nIn file included from ../include/trace/hooks/thermal.h:10,\n                 from ../drivers/thermal/thermal_core.c:27:\n../include/trace/hooks/thermal.h:23:18: warning: ‘struct cpufreq_policy’ declared inside parameter list will not be visible outside of this definition or declaration\n   23 |  TP_PROTO(struct cpufreq_policy *policy, unsigned long *request_freq),\n      |                  ^~~~~~~~~~~~~~\n../include/linux/tracepoint.h:577:34: note: in definition of macro ‘DECLARE_EVENT_NOP’\n  577 |  static inline void trace_##name(proto)    \\\n      |                                  ^~~~~\n../include/trace/hooks/thermal.h:23:2: note: in expansion of macro ‘TP_PROTO’\n   23 |  TP_PROTO(struct cpufreq_policy *policy, unsigned long *request_freq),\n      |  ^~~~~~~~\n../include/trace/hooks/thermal.h:27:18: warning: ‘struct cpufreq_policy’ declared inside parameter list will not be visible outside of this definition or declaration\n   27 |  TP_PROTO(struct cpufreq_policy *policy, unsigned int *target_freq),\n      |                  ^~~~~~~~~~~~~~\n../include/linux/tracepoint.h:577:34: note: in definition of macro ‘DECLARE_EVENT_NOP’\n  577 |  static inline void trace_##name(proto)    \\\n      |                                  ^~~~~\n../include/trace/hooks/thermal.h:27:2: note: in expansion of macro ‘TP_PROTO’\n   27 |  TP_PROTO(struct cpufreq_policy *policy, unsigned int *target_freq),\n      |  ^~~~~~~~\n\n```",
+      "revId": "fc827b344f76709dc7f242c7db32e1828f510fdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
