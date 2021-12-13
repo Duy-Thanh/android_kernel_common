@@ -16,6 +16,24 @@
       "message": "how is this wired up to read from build.config.constants?\n\nIs there some implicit convention that Bazel uses here?",
       "revId": "5e960d7e58317dfd32605bb13356cfa280c2928d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e1c92fb_b1251727",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-12-13T20:04:02Z",
+      "side": 1,
+      "message": "ah, aosp/1918665",
+      "parentUuid": "54d59a17_d0d91224",
+      "revId": "5e960d7e58317dfd32605bb13356cfa280c2928d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
