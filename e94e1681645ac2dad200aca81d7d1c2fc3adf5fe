@@ -52,6 +52,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6255635b_207fd6c8",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-12-13T21:44:28Z",
+      "side": 1,
+      "message": "The comment was supposed to explain this. I want to use the first way since it\u0027s a lot simpler, but it would require me to export a function from the core bpf code. So I\u0027m leaving it in, hoping we can switch to it later.",
+      "parentUuid": "1c0fab79_a5347d6e",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47352eac_e7ad46e4",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-12-13T08:26:21Z",
       "side": 1,
       "message": "Isn\u0027t this breaking tests ? I see read_iter() generally populates multiple iovecs",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37e711e4_51623433",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-12-13T21:44:28Z",
+      "side": 1,
+      "message": "This is not breaking tests, but only because we don\u0027t test this code ;)\n\nSpecifically, this works fine so long as the bpf doesn\u0027t look at the data and there is no user filter. In our current use cases, these statements are true. This will be one of the first things we will address after shipping current code.",
+      "parentUuid": "47352eac_e7ad46e4",
       "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -86,6 +122,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c95e0faf_068dd0e9",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1716,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-12-13T21:44:28Z",
+      "side": 1,
+      "message": "Modified so that filldir returns ENOMEM if page is NULL. I *think* this will handle it.",
+      "parentUuid": "fe4b971a_40f6e626",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0090fc13_73416861",
@@ -99,6 +153,24 @@
       "writtenOn": "2021-12-13T08:26:21Z",
       "side": 1,
       "message": "Check for page \u003d\u003d NULL ?",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43e751a9_78c625e3",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1742,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-12-13T21:44:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0090fc13_73416861",
       "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -120,6 +192,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1816f16_e706dc34",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-12-13T21:44:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51528177_c8c88e19",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3142ab9b_0f56d51a",
@@ -133,6 +223,24 @@
       "writtenOn": "2021-12-10T04:56:29Z",
       "side": 1,
       "message": "Initialize() isn\u0027t optional isn\u0027t it ? why no fuse_revalidate_initialize() ?",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97044a8c_352fda4c",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1509,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-12-13T21:44:28Z",
+      "side": 1,
+      "message": "It reuses fuse_lookup_initialize, since they are identical. I think that is OK, even good.",
+      "parentUuid": "3142ab9b_0f56d51a",
       "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -154,6 +262,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4426b19a_d2c1c5a1",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1718,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-12-13T21:44:28Z",
+      "side": 1,
+      "message": "This pointer is used for passthrough only. No, these two features aren\u0027t really compatible. Also passthrough is not upstream, and give fuse-bpf, probably never will be.",
+      "parentUuid": "db70d4a6_0c08f0d1",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bda2826_c6fe8133",
@@ -167,6 +293,24 @@
       "writtenOn": "2021-12-10T04:56:29Z",
       "side": 1,
       "message": "Don\u0027t we have to run post-filters even if there is an error at this point ?",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69eb1f7d_fd221cb0",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1735,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-12-13T21:44:28Z",
+      "side": 1,
+      "message": "No. Postfilters are for running after actually running the backing function. If you want to error out in the prefilter, that\u0027s the end of it.",
+      "parentUuid": "4bda2826_c6fe8133",
       "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -188,6 +332,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ebae3a9_f3802411",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1751,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-12-13T21:44:28Z",
+      "side": 1,
+      "message": "No. The idea here is that the prefilter can decide if we are going to call the backing function or call out to classic fuse, and it makes that decision by setting this flag or not.",
+      "parentUuid": "92463c95_e6f9a8f9",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "623d3110_c68df4c9",
@@ -201,6 +363,24 @@
       "writtenOn": "2021-12-10T04:56:29Z",
       "side": 1,
       "message": "this means we had an error running backing() and passing this error to post filter. How/why does post-filter handle this error ?",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8721baa_971ccd05",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1776,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-12-13T21:44:28Z",
+      "side": 1,
+      "message": "If there is an error from the backing operation, it is possible the post filter might want to do something. Two possible use cases:\n\n1) We want to hide the existence of a file - change EPERM to ENOENT\n2) We want to create a fake file - handle the operation like classic fuse *or* actually set (in LOOKUP) the file handle to point to the file you care about.",
+      "parentUuid": "623d3110_c68df4c9",
       "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -224,6 +404,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ce48d792_5d36c37e",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1794,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-12-13T21:44:28Z",
+      "side": 1,
+      "message": "finalize() doesn\u0027t look at it, and neither does anyone else at this point. In fact, ext_flags is not referenced again.",
+      "parentUuid": "f34a8620_8aa38cef",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "64b884ff_a6b29ba9",
         "filename": "fs/fuse/readdir.c",
         "patchSetId": 4
@@ -235,6 +433,24 @@
       "writtenOn": "2021-12-10T04:56:29Z",
       "side": 1,
       "message": "curious on when will we ever break out from this try-again loop ?",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c61167a_0e38b101",
+        "filename": "fs/fuse/readdir.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-12-13T21:44:28Z",
+      "side": 1,
+      "message": "The use case here is that a user filter might remove entries, and indeed might remove all entries. (Imagine if you only want to show files with certain characteristics - you could imagine a READDIR with all entries that need removed, but there could be entries we want in the next set.) Normally a zero-length return signals the end, so we need to have a flag to say \u0027Yes, there weren\u0027t any, but keep going\u0027. But this has to stop when we\u0027ve iterated the entire lower folder.",
+      "parentUuid": "64b884ff_a6b29ba9",
       "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
