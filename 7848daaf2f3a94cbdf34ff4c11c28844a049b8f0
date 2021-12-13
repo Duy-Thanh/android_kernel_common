@@ -51,6 +51,24 @@
       "parentUuid": "401ef8cc_51d44b97",
       "revId": "7848daaf2f3a94cbdf34ff4c11c28844a049b8f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84f0f174_b17ba7a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-12-13T18:07:20Z",
+      "side": 1,
+      "message": "Mikhail, as Greg says, please update this patch with the upstream submittal information. The headline should be \"FROMLIST:\" instead of \"ANDROID:\" and you need a \"Link:\" tag with the link on lore.kernel.org.\n\nSee https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "parentUuid": "f541f85c_005568f6",
+      "revId": "7848daaf2f3a94cbdf34ff4c11c28844a049b8f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
