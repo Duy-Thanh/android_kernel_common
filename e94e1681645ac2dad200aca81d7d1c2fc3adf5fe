@@ -18,6 +18,91 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "788edb07_4daa7271",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2021-12-13T08:26:21Z",
+      "side": 1,
+      "message": "did go through backing.c - looks good as initialize, backing_functions and finalize() are pretty standard for all; I see quite a few TODO\u0027s mentioned - For ex: read_iter() and write_iter() assumes a single kvec as mentioned in the comments. I guess some of them might be design enhancements.",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c0fab79_a5347d6e",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2021-12-13T08:26:21Z",
+      "side": 1,
+      "message": "debug code ?",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47352eac_e7ad46e4",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2021-12-13T08:26:21Z",
+      "side": 1,
+      "message": "Isn\u0027t this breaking tests ? I see read_iter() generally populates multiple iovecs",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe4b971a_40f6e626",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1716,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2021-12-13T08:26:21Z",
+      "side": 1,
+      "message": "what happens when a NULL page is passed ? This might be a rare case but not clear how is it handled in out_args",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0090fc13_73416861",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1742,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2021-12-13T08:26:21Z",
+      "side": 1,
+      "message": "Check for page \u003d\u003d NULL ?",
+      "revId": "e94e1681645ac2dad200aca81d7d1c2fc3adf5fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51528177_c8c88e19",
