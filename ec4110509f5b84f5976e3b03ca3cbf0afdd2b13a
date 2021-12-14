@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "879e7b25_e3b14a24",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-12-14T23:33:00Z",
+      "side": 1,
+      "message": "... as of trusty api version TRUSTY_API_VERSION_MEM_OBJ",
+      "revId": "ec4110509f5b84f5976e3b03ca3cbf0afdd2b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ace3abc_a039a137",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-12-14T23:33:00Z",
+      "side": 1,
+      "message": "Can you run checkpatch to check that you don\u0027t add any (checked) code style violations",
+      "revId": "ec4110509f5b84f5976e3b03ca3cbf0afdd2b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6f967fc_4a608177",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-12-14T23:33:00Z",
+      "side": 1,
+      "message": "is there no common helper function for this loop in the linux kernel?",
+      "revId": "ec4110509f5b84f5976e3b03ca3cbf0afdd2b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc4cdff3_8d43efa6",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-12-14T23:33:00Z",
+      "side": 1,
+      "message": "_compat was only used to support old trusty versions that expects a pure physical address as the argument to SMC_SC_SHARED_LOG_ADD. Unless your vmalloc allocation happens to be contiguous trusty_share_memory_compat/trusty_share_memory will fail for those trusty version anyway. Should we just add a early version check in this probe function as well?",
+      "range": {
+        "startLine": 598,
+        "startChar": 29,
+        "endLine": 598,
+        "endChar": 36
+      },
+      "revId": "ec4110509f5b84f5976e3b03ca3cbf0afdd2b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
