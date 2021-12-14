@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50bec564_cd608f55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-12-14T19:16:11Z",
+      "side": 1,
+      "message": "-1 because this patch breaks the GKI and also because it includes unresolved merge conflicts.",
+      "revId": "f8a6fc6eec38315f5b25deb5c07bfd2760392f76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
