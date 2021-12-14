@@ -16,6 +16,23 @@
       "message": "Hi Alistair! Can you, please, re-approve? It had to be rebased.",
       "revId": "d3df2d141961079b6a9199d727ac751d6e885c7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2363c369_8a77989c",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 2
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-12-14T18:47:06Z",
+      "side": 1,
+      "message": "actually net_failover.ko was the module missing those.",
+      "revId": "d3df2d141961079b6a9199d727ac751d6e885c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
