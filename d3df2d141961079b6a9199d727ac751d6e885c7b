@@ -51,6 +51,24 @@
       "parentUuid": "2363c369_8a77989c",
       "revId": "d3df2d141961079b6a9199d727ac751d6e885c7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dd4714b_5d1ff0fc",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 2
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-12-14T19:06:43Z",
+      "side": 1,
+      "message": "I think there is no urge to fix this. As you said, the next automatic update will fix it. Would be nice if you could send a follow-up though.",
+      "parentUuid": "c6ecc2a2_660d407a",
+      "revId": "d3df2d141961079b6a9199d727ac751d6e885c7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
