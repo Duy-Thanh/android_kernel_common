@@ -16,6 +16,24 @@
       "message": "please submit upstream first.\n\nAlso, you forgot Documentation/ABI/ updates for your new sysfs files.",
       "revId": "328e5523fbdc8b0c42df8f527630fee35c6e5327",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7ab754f_95642686",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1590141
+      },
+      "writtenOn": "2021-12-14T18:03:05Z",
+      "side": 1,
+      "message": "I fully agree with you regarding the necessary steps.\nI tried marking this as WIP, to be able to share the patches with my team first. We will upstream it first.\n\nI added documentation for newly added sysfs to Documentation/ABI/",
+      "parentUuid": "97bd0a1d_ba1ea3c1",
+      "revId": "328e5523fbdc8b0c42df8f527630fee35c6e5327",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
