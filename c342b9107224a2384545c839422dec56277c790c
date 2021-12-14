@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b6be24a_bfe14bc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-12-14T20:41:49Z",
+      "side": 1,
+      "message": "Is there a bug for a respin request? We can\u0027t accept these into a release branch without an explicit bug for the respin.",
+      "revId": "c342b9107224a2384545c839422dec56277c790c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
