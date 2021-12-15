@@ -16,6 +16,23 @@
       "message": "Trying again since the failed test is marked flaky",
       "revId": "f3f87608d8d4502826a720f14cf5215cfdf6eb32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ff34e4c_5b78231c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876910
+      },
+      "writtenOn": "2021-12-15T20:52:52Z",
+      "side": 1,
+      "message": "Regarding the failed presubmit run, I am disabling the Nintendo Switch test as it is a known flake anyway, but the libcore.java.nio.BufferTest failures look legitimate, and I cannot reproduce them with acloud and atest on git_master/android12-5.10. The code change for this CL does not look like it should break anything, though, so I am a little confused.",
+      "revId": "f3f87608d8d4502826a720f14cf5215cfdf6eb32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
