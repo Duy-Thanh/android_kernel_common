@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5b44cca_32d212bd",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2021-12-15T15:54:19Z",
+      "side": 1,
+      "message": "OK, I thought you were just objecting to the loop itself, since you asked about \"a helper function for this loop\".",
+      "parentUuid": "130fbdf2_05f664d8",
+      "revId": "ec4110509f5b84f5976e3b03ca3cbf0afdd2b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc4cdff3_8d43efa6",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 1
@@ -203,6 +221,30 @@
       "side": 1,
       "message": "If you want to drop the _compat suffix, you should to add a version check or you could accidentally pass a bad value to an old trusty version. The current code is OK, as it could accidentally work with an old trusty version. I think this could use a comment though.",
       "parentUuid": "290b59aa_c775c5fc",
+      "range": {
+        "startLine": 598,
+        "startChar": 29,
+        "endLine": 598,
+        "endChar": 36
+      },
+      "revId": "ec4110509f5b84f5976e3b03ca3cbf0afdd2b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bfdcf41_f14ac624",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2021-12-15T15:54:19Z",
+      "side": 1,
+      "message": "The _compat function calls trusty_transfer_memory, which has a version check already. Is that not sufficient?",
+      "parentUuid": "b12effe9_999f10f1",
       "range": {
         "startLine": 598,
         "startChar": 29,
