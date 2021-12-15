@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7aba4904_40f54501",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-12-15T15:39:13Z",
+      "side": 1,
+      "message": "You can run checkpatch on your patch instead of the file. I use this git hook in my global .gitconfig to avoid having to manually create patch files:\n```\n[alias]\n        checkpatch \u003d !sh -c \\\"git rev-list \\\\${*:-@\\\\{upstream\\\\}..HEAD} | xargs -L 1 sh -c \u0027git log --format\u003d\\\\\\\"%n%n%h %s%n\\\\\\\" \\\\$1^..\\\\$1 \u0026\u0026 git show --format\u003d\\\\\\\"From: %aN \u003c%aE\u003e%n%s%n%n%b\\\\\\\" \\\\$1 | scripts/checkpatch.pl --max-line-length\u003d80 --strict --ignore\u003dGERRIT_CHANGE_ID -\u0027 - | less -FXSR\\\" -\n```",
+      "parentUuid": "86356579_48a0d3bb",
+      "revId": "ec4110509f5b84f5976e3b03ca3cbf0afdd2b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6f967fc_4a608177",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 1
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Looks like I happened to draw inspiration from drivers that use a for-loop instead of \"for_each_sg\". I\u0027ll change it.",
       "parentUuid": "c6f967fc_4a608177",
+      "revId": "ec4110509f5b84f5976e3b03ca3cbf0afdd2b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "130fbdf2_05f664d8",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-12-15T15:39:13Z",
+      "side": 1,
+      "message": "I\u0027m not sure you can use that to create the sg list. There are helper functions to create the sg list from other kernel data structures which is want I was asking for, but I don\u0027t see a common one for this. Other drivers create their own static one, e.g. external/linux/drivers/media/v4l2-core/videobuf-dma-sg.c",
+      "parentUuid": "10c6cd1e_c769508a",
       "revId": "ec4110509f5b84f5976e3b03ca3cbf0afdd2b13a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -143,6 +179,30 @@
       "side": 1,
       "message": "And if that added version check fails, do you want to fail this probe function, or fall back to the old code that uses alloc_pages?\nIf the intent is to fail, I\u0027m not convinced it\u0027s worth adding another version check here just so we can fail a little sooner.",
       "parentUuid": "bc4cdff3_8d43efa6",
+      "range": {
+        "startLine": 598,
+        "startChar": 29,
+        "endLine": 598,
+        "endChar": 36
+      },
+      "revId": "ec4110509f5b84f5976e3b03ca3cbf0afdd2b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b12effe9_999f10f1",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-12-15T15:39:13Z",
+      "side": 1,
+      "message": "If you want to drop the _compat suffix, you should to add a version check or you could accidentally pass a bad value to an old trusty version. The current code is OK, as it could accidentally work with an old trusty version. I think this could use a comment though.",
+      "parentUuid": "290b59aa_c775c5fc",
       "range": {
         "startLine": 598,
         "startChar": 29,
