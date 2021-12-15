@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f02aa60_2f80d473",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1133963
+      },
+      "writtenOn": "2021-12-15T19:46:17Z",
+      "side": 1,
+      "message": "Trying again since the failed test is marked flaky",
+      "revId": "f3f87608d8d4502826a720f14cf5215cfdf6eb32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
