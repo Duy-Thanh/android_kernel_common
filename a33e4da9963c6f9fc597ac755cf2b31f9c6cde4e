@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "867b8807_27f7f72b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1715090
+      },
+      "writtenOn": "2021-12-15T09:51:13Z",
+      "side": 1,
+      "message": "Did simplify the code a bit to keep it simple. Complete removal of ifdefs and moving to __maybe_unused will require touching other parts of virtio (e.g. header)",
+      "parentUuid": "c462b70f_16dbb5c5",
+      "revId": "a33e4da9963c6f9fc597ac755cf2b31f9c6cde4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12cc1749_a226fb9f",
