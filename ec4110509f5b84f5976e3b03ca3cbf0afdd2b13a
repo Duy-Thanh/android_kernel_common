@@ -253,6 +253,30 @@
       },
       "revId": "ec4110509f5b84f5976e3b03ca3cbf0afdd2b13a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c021ded_ef5ca1e2",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-12-15T16:30:43Z",
+      "side": 1,
+      "message": "That version check is only if the number of entries in the list is more than 1. In the current version of your code that seems to always happen though, so yes, that is technically sufficient as longs as you don\u0027t change anything (e.g. TRUSTY_LOG_NUM_PAGES). sg_alloc_table_from_pages which trusty-test.c calls into merge adjacent pages though so if your code is updated to have the same behavior, then _compat is needed to handle the case where nents is 1 and we call into an old trusty version.",
+      "parentUuid": "9bfdcf41_f14ac624",
+      "range": {
+        "startLine": 598,
+        "startChar": 29,
+        "endLine": 598,
+        "endChar": 36
+      },
+      "revId": "ec4110509f5b84f5976e3b03ca3cbf0afdd2b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
