@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66d8a1a6_e1d73d6e",
+        "filename": "mm/memory.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 4724,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-12-15T18:41:55Z",
+      "side": 1,
+      "message": "Could we reuse subscription lock here?\n\nif (!spin_trylock(\u0026vmf-\u003evma-\u003evm_mm-\u003enotifier_subscriptions-\u003elock)) {\n    ret \u003d VM_FAULT_RETRY;\n    goto unlock;\n}",
+      "range": {
+        "startLine": 4724,
+        "startChar": 3,
+        "endLine": 4724,
+        "endChar": 48
+      },
+      "revId": "cbf238b855493d10220dab6701d56410e9a0d5f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
