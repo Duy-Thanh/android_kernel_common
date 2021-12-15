@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c9dc302_5d6a1f32",
+        "filename": "init/Kconfig",
+        "patchSetId": 27
+      },
+      "lineNbr": 2210,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-12-15T23:21:55Z",
+      "side": 1,
+      "message": "\"as follows:\"",
+      "revId": "4a202b83ba3e047d59d2c15675eae04040a61f55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e21107d_800309f7",
+        "filename": "kernel/Makefile",
+        "patchSetId": 27
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-12-15T23:21:55Z",
+      "side": 1,
+      "message": "Does this have to be \"FORCE\"? Can we express the real dependencies?",
+      "revId": "4a202b83ba3e047d59d2c15675eae04040a61f55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5174700d_81030341",
+        "filename": "kernel/gki_module.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-12-15T23:21:55Z",
+      "side": 1,
+      "message": "should this be strncmp() with max length of MAX_PROTECTED_NAME_LEN",
+      "revId": "4a202b83ba3e047d59d2c15675eae04040a61f55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
