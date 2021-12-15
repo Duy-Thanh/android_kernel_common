@@ -22,6 +22,30 @@
       },
       "revId": "cbf238b855493d10220dab6701d56410e9a0d5f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f2f6cb5_529461ed",
+        "filename": "mm/memory.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 4724,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-12-15T18:51:06Z",
+      "side": 1,
+      "message": "Nope. This should be a rw lock and a very efficient one. This is a hot path, so even a simple rw_semaphore would cause cacheline bouncing and affect performance. That\u0027s why we chose to use percpu_rw_semaphore here.",
+      "parentUuid": "66d8a1a6_e1d73d6e",
+      "range": {
+        "startLine": 4724,
+        "startChar": 3,
+        "endLine": 4724,
+        "endChar": 48
+      },
+      "revId": "cbf238b855493d10220dab6701d56410e9a0d5f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
