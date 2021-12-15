@@ -277,6 +277,30 @@
       },
       "revId": "ec4110509f5b84f5976e3b03ca3cbf0afdd2b13a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f290ced8_1ec23020",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-12-15T16:33:39Z",
+      "side": 1,
+      "message": "If you don\u0027t change any logic, a comment saying that the _compat path of trusty_share_memory_compat will not actually be used as long as TRUSTY_LOG_NUM_PAGES \u003e 1 would be helpful",
+      "parentUuid": "6c021ded_ef5ca1e2",
+      "range": {
+        "startLine": 598,
+        "startChar": 29,
+        "endLine": 598,
+        "endChar": 36
+      },
+      "revId": "ec4110509f5b84f5976e3b03ca3cbf0afdd2b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
