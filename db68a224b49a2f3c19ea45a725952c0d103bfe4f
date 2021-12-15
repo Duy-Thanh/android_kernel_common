@@ -16,6 +16,24 @@
       "message": "Add a Fixes tag?",
       "revId": "db68a224b49a2f3c19ea45a725952c0d103bfe4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "441b47b1_648a77f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-12-15T21:26:25Z",
+      "side": 1,
+      "message": "Unfortunately can\u0027t because it fixes https://android-review.googlesource.com/c/kernel/common/+/1897673/ which has to be merged along with this one. They are not squashed together because the ABI breakage fixes are not needed in 5.15 branch.",
+      "parentUuid": "1266ad9b_5639f38b",
+      "revId": "db68a224b49a2f3c19ea45a725952c0d103bfe4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
