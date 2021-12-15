@@ -1,0 +1,13 @@
+[abi_symbol_list]
+#raid0.ko
+    __tracepoint_block_bio_remap
+    blk_ksm_derive_raw_secret
+    blk_crypto_evict_key
+    disk_stack_limits
+    blk_queue_max_write_same_sectors
+    __traceiter_block_bio_remap
+    submit_bio_noacct
+    bio_split
+#lenovo-fan.ko
+    clk_set_duty_cycle
+
