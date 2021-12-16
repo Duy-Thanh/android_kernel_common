@@ -89,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47ecb64c_8e8ee4e9",
+        "filename": "kernel/Makefile",
+        "patchSetId": 27
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2021-12-16T21:49:44Z",
+      "side": 1,
+      "message": "Done. Removed FORCE and listed both symbol list and script as dependency as header needs to be regenerated if either of them change.",
+      "parentUuid": "4b7e7ea8_9121963d",
+      "revId": "4a202b83ba3e047d59d2c15675eae04040a61f55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5174700d_81030341",
@@ -138,6 +156,24 @@
       "side": 1,
       "message": "why would MAX_PROTECTED_NAME_LEN need to be different from MAX_EXPORTED_NAME_LEN? They are both describing the same kind of object (length of some form of exported kernel symbol). I presume they come from the generated headers which must be defining it as the max symbol in that list -- seems reasonable to just use the max of the two here.",
       "parentUuid": "4b8dc34b_ecb3a0b8",
+      "revId": "4a202b83ba3e047d59d2c15675eae04040a61f55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6723a20f_fd67bdf4",
+        "filename": "kernel/gki_module.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2021-12-16T21:49:44Z",
+      "side": 1,
+      "message": "Thanks. Yes, they differ by max symbol name in the particular list. Max of both is a good idea and done the change that way.",
+      "parentUuid": "7328e74c_8fb06e30",
       "revId": "4a202b83ba3e047d59d2c15675eae04040a61f55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
