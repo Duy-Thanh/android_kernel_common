@@ -874,6 +874,8 @@ int bdi_register_va(struct backing_dev_info *bdi, const char *fmt, va_list args)
 {
 	struct device *dev;
 
+	bdi_get(bdi);
+
 	if (bdi->dev)	/* The driver needs to use separate queues per device */
 		return 0;
 
@@ -915,6 +917,7 @@ int bdi_register_owner(struct backing_dev_info *bdi, struct device *owner)
 	rc = bdi_register(bdi, "%u:%u", MAJOR(owner->devt), MINOR(owner->devt));
 	if (rc)
 		return rc;
+
 	/* Leaking owner reference... */
 	WARN_ON(bdi->owner);
 	bdi->owner = owner;
@@ -959,6 +962,8 @@ void bdi_unregister(struct backing_dev_info *bdi)
 		put_device(bdi->owner);
 		bdi->owner = NULL;
 	}
+
+	bdi_put(bdi);
 }
 
 static void release_bdi(struct kref *ref)
