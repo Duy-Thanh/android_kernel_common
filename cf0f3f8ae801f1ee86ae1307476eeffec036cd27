@@ -52,6 +52,24 @@
       "parentUuid": "d30d22e6_8e33361b",
       "revId": "cf0f3f8ae801f1ee86ae1307476eeffec036cd27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d54e3834_e7ee4652",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2021-12-16T19:32:32Z",
+      "side": 1,
+      "message": "I can\u0027t find a broken commit.\n\nThe same base v4.14.234 does not repro.\n\nI suspect this device kernel fixes something (which causes mutex lockups) in the official Stable kernel, but falls into this issue subsequently.\n\nI can submit this to Stable, but I can\u0027t test if it actually fixes anything.",
+      "parentUuid": "4388570d_a7d26f11",
+      "revId": "cf0f3f8ae801f1ee86ae1307476eeffec036cd27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
