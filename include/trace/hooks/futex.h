@@ -18,6 +18,16 @@ DECLARE_HOOK(android_vh_alter_futex_plist_add,
 		 struct plist_head *head,
 		 bool *already_on_hb),
 	TP_ARGS(node, head, already_on_hb));
+<<<<<<< HEAD   (e56843 ANDROID: Update the ABI symbol list)
+=======
+
+DECLARE_HOOK(android_vh_futex_sleep_start,
+	TP_PROTO(struct task_struct *p),
+	TP_ARGS(p));
+
+/* macro versions of hooks are no longer required */
+
+>>>>>>> CHANGE (a7ab78 ANDROID: vendor_hooks: Add hooks for futex)
 #endif /* _TRACE_HOOK_FUTEX_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
