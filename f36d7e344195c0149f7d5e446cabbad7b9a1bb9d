@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "868c1b8b_2159a0ca",
+        "filename": "drivers/clocksource/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-16T12:19:41Z",
+      "side": 0,
+      "message": "why is this change needed?",
+      "range": {
+        "startLine": 458,
+        "startChar": 0,
+        "endLine": 458,
+        "endChar": 45
+      },
+      "revId": "f36d7e344195c0149f7d5e446cabbad7b9a1bb9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
