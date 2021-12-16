@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30255018_7ac45ada",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-12-16T19:53:34Z",
+      "side": 1,
+      "message": "The patch was posted upstream here https://patchwork.kernel.org/project/dri-devel/patch/20210722190747.1986614-1-hridya@google.com and rejected \n\nDaniel\u0027s comment makes sense to be that the process can work around this check by making several very big allocations each a bit smaller than half of total memory:\nhttps://patchwork.kernel.org/project/dri-devel/patch/20210722190747.1986614-1-hridya@google.com/#24369713",
+      "revId": "8abcccab107a68a555b78709aed730a3f3b343d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
