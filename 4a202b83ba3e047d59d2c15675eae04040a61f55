@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b7e7ea8_9121963d",
+        "filename": "kernel/Makefile",
+        "patchSetId": 27
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-12-16T16:24:24Z",
+      "side": 1,
+      "message": "\u003e not all ACK repos have the android directory...\nkernel/Makefile is in the same kernel tree/repo as the android directory, so how could there ever be a case where this is present and enabled but the android directory isn\u0027t? Why generate the empty header files (and then build the dependent objects) if we know they are up-to-date?",
+      "parentUuid": "ec8fe853_37b990f1",
+      "revId": "4a202b83ba3e047d59d2c15675eae04040a61f55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5174700d_81030341",
         "filename": "kernel/gki_module.c",
         "patchSetId": 27
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "This is comparator callback being used for both export protection and symbol protection both of which can have different max symbol length. Since protected_sym is guaranteed to null terminated in addition const void *, I think this is equally safe.\n\nIf you still prefer the change - I\u0027ll have to duplicate the code as comparator has predefined signature and max length can\u0027t be passed as an argument.\n\nPlease suggest.",
       "parentUuid": "5174700d_81030341",
+      "revId": "4a202b83ba3e047d59d2c15675eae04040a61f55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7328e74c_8fb06e30",
+        "filename": "kernel/gki_module.c",
+        "patchSetId": 27
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-12-16T16:24:24Z",
+      "side": 1,
+      "message": "why would MAX_PROTECTED_NAME_LEN need to be different from MAX_EXPORTED_NAME_LEN? They are both describing the same kind of object (length of some form of exported kernel symbol). I presume they come from the generated headers which must be defining it as the max symbol in that list -- seems reasonable to just use the max of the two here.",
+      "parentUuid": "4b8dc34b_ecb3a0b8",
       "revId": "4a202b83ba3e047d59d2c15675eae04040a61f55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
