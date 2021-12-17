@@ -46,6 +46,30 @@
       },
       "revId": "f36d7e344195c0149f7d5e446cabbad7b9a1bb9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7767964b_d0943e8c",
+        "filename": "drivers/clocksource/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-17T08:36:48Z",
+      "side": 0,
+      "message": "Why not send that portion of the change upstream?  Why is no one able to build this without that change?",
+      "parentUuid": "f009dd5d_913a5ab1",
+      "range": {
+        "startLine": 458,
+        "startChar": 0,
+        "endLine": 458,
+        "endChar": 45
+      },
+      "revId": "f36d7e344195c0149f7d5e446cabbad7b9a1bb9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
