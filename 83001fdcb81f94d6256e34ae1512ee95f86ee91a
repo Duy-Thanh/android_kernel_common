@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "337af52b_324f29d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-12-17T19:41:49Z",
+      "side": 1,
+      "message": "Are we allowing custom timer drivers to be enabled in gki kernel? Do we see any footprint impact to kernel image? Why not solve the problem of the driver to be made as module instead?",
+      "revId": "83001fdcb81f94d6256e34ae1512ee95f86ee91a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
