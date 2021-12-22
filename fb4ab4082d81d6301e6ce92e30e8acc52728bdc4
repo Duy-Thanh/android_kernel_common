@@ -52,6 +52,24 @@
       "parentUuid": "69c0f7b1_28ee8095",
       "revId": "fb4ab4082d81d6301e6ce92e30e8acc52728bdc4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86d8ac82_233fa47e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-12-22T16:50:57Z",
+      "side": 1,
+      "message": "Greg, this is for Android Security Bulletin compliance. The cherry-picks are for patches that are slated for an ASB. The downside of our 2-month cadence on LTS merges is that it isn\u0027t completely aligned with the security patch process.\n\nIn this case, they need to land in android12-5.10 before they can land in the Dec release branch (android12-5.10-2021-12) which will never get the LTS update.",
+      "parentUuid": "9027a6ad_0e44b79a",
+      "revId": "fb4ab4082d81d6301e6ce92e30e8acc52728bdc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
