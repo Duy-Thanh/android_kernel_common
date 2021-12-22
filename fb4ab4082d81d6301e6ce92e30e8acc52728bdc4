@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2edd9aa_40c4c127",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-22T09:44:33Z",
+      "side": 1,
+      "message": "needs to be in android12-5.10 first.\n\nAnd again, why just this one bpf patch?  There have been loads of bpf fixes in LTS releases recently, this feels like an odd cherry-pick...",
+      "revId": "fb4ab4082d81d6301e6ce92e30e8acc52728bdc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
