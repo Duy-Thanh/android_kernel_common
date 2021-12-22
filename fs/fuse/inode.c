@@ -123,12 +123,18 @@ static void fuse_evict_inode(struct inode *inode)
 {
 	struct fuse_inode *fi = get_fuse_inode(inode);
 
+<<<<<<< HEAD   (9ab6a2 ANDROID: GKI: Add module load time protected symbol lookup)
 #ifdef CONFIG_FUSE_BPF
 	iput(fi->backing_inode);
 	if (fi->bpf)
 		bpf_prog_put(fi->bpf);
 	fi->bpf = NULL;
 #endif
+=======
+	/* Will write inode on close/munmap and in all other dirtiers */
+	WARN_ON(inode->i_state & I_DIRTY_INODE);
+
+>>>>>>> BRANCH (272aed Linux 5.10.87)
 	truncate_inode_pages_final(&inode->i_data);
 	clear_inode(inode);
 	if (inode->i_sb->s_flags & SB_ACTIVE) {

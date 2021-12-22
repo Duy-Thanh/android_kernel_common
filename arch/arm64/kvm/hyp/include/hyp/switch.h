@@ -411,12 +411,15 @@ static inline bool fixup_guest_exit(struct kvm_vcpu *vcpu, u64 *exit_code)
 	 */
 	vcpu->arch.ctxt.regs.pstate = read_sysreg_el2(SYS_SPSR);
 
+<<<<<<< HEAD   (9ab6a2 ANDROID: GKI: Add module load time protected symbol lookup)
 	/*
 	 * Check whether we want to repaint the state one way or
 	 * another.
 	 */
 	early_exit_filter(vcpu, exit_code);
 
+=======
+>>>>>>> BRANCH (272aed Linux 5.10.87)
 	if (ARM_EXCEPTION_CODE(*exit_code) != ARM_EXCEPTION_IRQ)
 		vcpu->arch.fault.esr_el2 = read_sysreg_el2(SYS_ESR);
 
