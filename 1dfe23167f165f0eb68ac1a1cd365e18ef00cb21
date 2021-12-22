@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcb6c319_92bb99ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-22T09:37:23Z",
+      "side": 1,
+      "message": "This is a user/kernel api that you can not change in a way that is not already upstream, sorry.\n\nPlease submit your needed changes to this code upstream and we will be glad to revisit this.",
+      "revId": "1dfe23167f165f0eb68ac1a1cd365e18ef00cb21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
