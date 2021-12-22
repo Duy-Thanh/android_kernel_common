@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e5921c0_cb4d1fee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1570698
+      },
+      "writtenOn": "2021-12-22T11:11:14Z",
+      "side": 1,
+      "message": "this commit already landed on android12-5.10-lts, but not android12-5.10 yet.\n\nccb79116c3724 sctp: add param size validation for SCTP_PARAM_SET_PRIMARY",
+      "revId": "fc1e1eb74e153dc265b09ed5eeaa316ef4de6052",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
