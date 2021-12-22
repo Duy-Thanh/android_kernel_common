@@ -16,6 +16,23 @@
       "message": "this commit already landed on android12-5.10-lts, but not android12-5.10 yet.\n\nccb79116c3724 sctp: add param size validation for SCTP_PARAM_SET_PRIMARY",
       "revId": "fc1e1eb74e153dc265b09ed5eeaa316ef4de6052",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93d7c081_578e6cb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135739
+      },
+      "writtenOn": "2021-12-22T13:24:42Z",
+      "side": 1,
+      "message": "This CL is included in the respin request for anrdroid12-5.10-2021-12-r3",
+      "revId": "fc1e1eb74e153dc265b09ed5eeaa316ef4de6052",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
