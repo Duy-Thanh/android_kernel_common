@@ -152,6 +152,30 @@
       },
       "revId": "a57cfa9405b0caa40ce0c28d5597f7eb07ddaa25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d910550_cd56e9c1",
+        "filename": "arch/Kconfig",
+        "patchSetId": 7
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1927881
+      },
+      "writtenOn": "2021-12-24T11:00:09Z",
+      "side": 1,
+      "message": "I investigate this existing CONFIG_ANDROID, this config controls to compile /drivers/staging/android/, but my platform needs to use /drivers/staging/android/ion/, so I cannot reuse this config, I should continue to use a new config to control removing ANDROID_KABI_RESERVE macro or not.\n\nAlso I test the patch with config enabled or disabled, both compile pass and boot up to android launcher.\n\nThe test results of disabling my config:\n(1) android platform with android12-5.10, arm64, 12GB-RAM:\nit saves ~20MB slab memory consumption.\n(2) embeded platform, non-android,with kernel-5.4, arm32,256MB-RAM:\nit saves ~3MB slab memory consumption.\n\nThis is helpful for low memory device.",
+      "parentUuid": "fece267a_46aa10c8",
+      "range": {
+        "startLine": 617,
+        "startChar": 7,
+        "endLine": 617,
+        "endChar": 24
+      },
+      "revId": "a57cfa9405b0caa40ce0c28d5597f7eb07ddaa25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
