@@ -16,6 +16,52 @@
       "message": "What about all of the OEM padding?  that should be much larger for some structures, you should remove that as well.\n\nAnd the .config option should start with ANDROID to make it match the other Android config options.",
       "revId": "83da6e7503520e89281eadfd1d1bc504130ab1ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e5519f7_4a90ac46",
+        "filename": "arch/Kconfig",
+        "patchSetId": 10
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-27T15:42:56Z",
+      "side": 1,
+      "message": "ANDROID_KABI_PADDING_DISABLE perhaps?\n\nAlso, what about the OEM padding?  That is much larger than the KABI padding fields in many structures.",
+      "range": {
+        "startLine": 617,
+        "startChar": 7,
+        "endLine": 617,
+        "endChar": 32
+      },
+      "revId": "83da6e7503520e89281eadfd1d1bc504130ab1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a746ee59_4f602dbe",
+        "filename": "arch/Kconfig",
+        "patchSetId": 10
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-27T15:42:56Z",
+      "side": 1,
+      "message": "If you turn this around (you must enable the option to disable the padding), no need for the default value.",
+      "range": {
+        "startLine": 619,
+        "startChar": 0,
+        "endLine": 619,
+        "endChar": 10
+      },
+      "revId": "83da6e7503520e89281eadfd1d1bc504130ab1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
