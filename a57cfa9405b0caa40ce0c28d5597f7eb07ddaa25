@@ -176,6 +176,30 @@
       },
       "revId": "a57cfa9405b0caa40ce0c28d5597f7eb07ddaa25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68601a82_c83f9e79",
+        "filename": "arch/Kconfig",
+        "patchSetId": 7
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-28T10:07:14Z",
+      "side": 1,
+      "message": "Your platform should NOT be using the ion code outside of an Android system, so this should still be depending on CONFIG_ANDROID.\n\nRemember that ion code is gone from upstream, and not supported at all, please use dma-buf instead.",
+      "parentUuid": "0d910550_cd56e9c1",
+      "range": {
+        "startLine": 617,
+        "startChar": 7,
+        "endLine": 617,
+        "endChar": 24
+      },
+      "revId": "a57cfa9405b0caa40ce0c28d5597f7eb07ddaa25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
