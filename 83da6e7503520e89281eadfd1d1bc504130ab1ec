@@ -18,6 +18,41 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dcc24ab_3682d264",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1927881
+      },
+      "writtenOn": "2021-12-28T07:38:19Z",
+      "side": 1,
+      "message": "Yes, will try to remove OEM padding and verify as well.\nYes, will add ANDROID for the new-added config.",
+      "parentUuid": "5f9a331e_03923daf",
+      "revId": "83da6e7503520e89281eadfd1d1bc504130ab1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2622736_763a5537",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1927881
+      },
+      "writtenOn": "2021-12-28T07:38:19Z",
+      "side": 1,
+      "message": "Hi Greg,\nDo you mean to use one config ANDROID_KABI_OEM_PADDING_DISABLE to control both the kabi and OEM padding?",
+      "revId": "83da6e7503520e89281eadfd1d1bc504130ab1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e5519f7_4a90ac46",
@@ -41,6 +76,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fc8dddc_a862530e",
+        "filename": "arch/Kconfig",
+        "patchSetId": 10
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1927881
+      },
+      "writtenOn": "2021-12-28T07:38:19Z",
+      "side": 1,
+      "message": "Yes, will remove OEM padding as well.\nI will use one config named ANDROID_KABI_OEM_PADDING_DISABLE, is it OK for you?",
+      "parentUuid": "5e5519f7_4a90ac46",
+      "range": {
+        "startLine": 617,
+        "startChar": 7,
+        "endLine": 617,
+        "endChar": 32
+      },
+      "revId": "83da6e7503520e89281eadfd1d1bc504130ab1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a746ee59_4f602dbe",
@@ -54,6 +113,30 @@
       "writtenOn": "2021-12-27T15:42:56Z",
       "side": 1,
       "message": "If you turn this around (you must enable the option to disable the padding), no need for the default value.",
+      "range": {
+        "startLine": 619,
+        "startChar": 0,
+        "endLine": 619,
+        "endChar": 10
+      },
+      "revId": "83da6e7503520e89281eadfd1d1bc504130ab1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85c52f8c_b9224996",
+        "filename": "arch/Kconfig",
+        "patchSetId": 10
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1927881
+      },
+      "writtenOn": "2021-12-28T07:38:19Z",
+      "side": 1,
+      "message": "Yes, agree with you.",
+      "parentUuid": "a746ee59_4f602dbe",
       "range": {
         "startLine": 619,
         "startChar": 0,
