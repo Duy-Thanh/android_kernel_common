@@ -397,3 +397,13 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_css_offline);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_css_online);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_free);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_alloc);
+<<<<<<< HEAD   (d70e14 FROMGIT: USB: gadget: bRequestType is a bitfield, not a enum)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_subpage_dma_contig_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_looper_state_registered);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_thread_read);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_free_proc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_thread_release);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_has_work_ilocked);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_read_done);
+>>>>>>> CHANGE (05c23b ANDROID: vendor_hooks: Add hooks for binder)
