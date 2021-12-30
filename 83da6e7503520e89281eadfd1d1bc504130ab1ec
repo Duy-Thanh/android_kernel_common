@@ -53,6 +53,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8412312b_a705abf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1927881
+      },
+      "writtenOn": "2021-12-30T10:13:58Z",
+      "side": 1,
+      "message": "Hi Grek,\nCurrently, I want to do like this:\n1. create two CONFIGs, maybe ANDROID_KABI_RESERVE_ENABLE(which controls keep kabi padding or not in structs) and ANDROID_VENDOR_DATA_ENABLE(which controls keep vendor and oem padding or not in structs).\n2. define the two CONFIGs inside CONFIG_ANDROID in drivers/android/Kconfig like ANDROID_VENDOR_HOOKS locates.\n3. enable the two CONFIGs in gki_defconfig for arm64 and x86.\n4. if the vendor or oem drivers want to use vendor data, their CONFIGs should depend on this new added ANDROID_VENDOR_DATA_ENABLE to make build pass.\n\nDo you agree? And any other comments?\n\n",
+      "revId": "83da6e7503520e89281eadfd1d1bc504130ab1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e5519f7_4a90ac46",
