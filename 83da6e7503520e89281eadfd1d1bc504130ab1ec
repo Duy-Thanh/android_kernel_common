@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "246ae5a5_05948212",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-12-30T12:49:36Z",
+      "side": 1,
+      "message": "I do not understand why you would want/need two config options here.\n\nEither you need the padding to preserve the ABI or you do not, there is no need to split this at all if all you are wanting to do is save memory and not care about ABI preservation issues.\n\nPlease work through your proposed solutions and come up with something that you have tested to work properly for your use case.",
+      "parentUuid": "8412312b_a705abf9",
+      "revId": "83da6e7503520e89281eadfd1d1bc504130ab1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e5519f7_4a90ac46",
         "filename": "arch/Kconfig",
         "patchSetId": 10
