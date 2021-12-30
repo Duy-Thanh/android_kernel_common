@@ -30,6 +30,7 @@
 #include <uapi/linux/magic.h>
 
 #include "dma-buf-sysfs-stats.h"
+#include <trace/hooks/dmabuf.h>
 
 struct dma_buf_list {
 	struct list_head head;
@@ -120,6 +121,7 @@ static int dma_buf_file_release(struct inode *inode, struct file *file)
 
 	mutex_lock(&db_list.lock);
 	list_del(&dmabuf->list_node);
+	trace_android_vh_dmabuf_free(dmabuf);
 	mutex_unlock(&db_list.lock);
 
 	return 0;
@@ -629,6 +631,7 @@ struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
 
 	mutex_lock(&db_list.lock);
 	list_add(&dmabuf->list_node, &db_list.head);
+	trace_android_vh_dmabuf_alloc(dmabuf);
 	mutex_unlock(&db_list.lock);
 
 	return dmabuf;
