@@ -25,7 +25,7 @@ static DEFINE_SPINLOCK(kernfs_idr_lock);	/* root->ino_idr */
 
 static bool kernfs_active(struct kernfs_node *kn)
 {
-	lockdep_assert_held(&kernfs_root(kn)->kernfs_rwsem);
+	lockdep_assert_held(kernfs_rwsem(kernfs_root(kn)));
 	return atomic_read(&kn->active) >= 0;
 }
 
@@ -454,15 +454,15 @@ void kernfs_put_active(struct kernfs_node *kn)
  * return after draining is complete.
  */
 static void kernfs_drain(struct kernfs_node *kn)
-	__releases(&kernfs_root(kn)->kernfs_rwsem)
-	__acquires(&kernfs_root(kn)->kernfs_rwsem)
+	__releases(kernfs_rwsem(kernfs_root(kn)))
+	__acquires(kernfs_rwsem(kernfs_root(kn)))
 {
 	struct kernfs_root *root = kernfs_root(kn);
 
-	lockdep_assert_held_write(&root->kernfs_rwsem);
+	lockdep_assert_held_write(kernfs_rwsem(root));
 	WARN_ON_ONCE(kernfs_active(kn));
 
-	up_write(&root->kernfs_rwsem);
+	up_write(kernfs_rwsem(root));
 
 	if (kernfs_lockdep(kn)) {
 		rwsem_acquire(&kn->dep_map, 0, 0, _RET_IP_);
@@ -481,7 +481,7 @@ static void kernfs_drain(struct kernfs_node *kn)
 
 	kernfs_drain_open_files(kn);
 
-	down_write(&root->kernfs_rwsem);
+	down_write(kernfs_rwsem(root));
 }
 
 /**
@@ -562,7 +562,7 @@ static int kernfs_dop_revalidate(struct dentry *dentry, unsigned int flags)
 
 	kn = kernfs_dentry_node(dentry);
 	root = kernfs_root(kn);
-	down_read(&root->kernfs_rwsem);
+	down_read(kernfs_rwsem(root));
 
 	/* The kernfs node has been deactivated */
 	if (!kernfs_active(kn))
@@ -581,10 +581,10 @@ static int kernfs_dop_revalidate(struct dentry *dentry, unsigned int flags)
 	    kernfs_info(dentry->d_sb)->ns != kn->ns)
 		goto out_bad;
 
-	up_read(&root->kernfs_rwsem);
+	up_read(kernfs_rwsem(root));
 	return 1;
 out_bad:
-	up_read(&root->kernfs_rwsem);
+	up_read(kernfs_rwsem(root));
 out_bad_unlocked:
 	return 0;
 }
@@ -767,7 +767,7 @@ int kernfs_add_one(struct kernfs_node *kn)
 	bool has_ns;
 	int ret;
 
-	down_write(&root->kernfs_rwsem);
+	down_write(kernfs_rwsem(root));
 
 	ret = -EINVAL;
 	has_ns = kernfs_ns_enabled(parent);
@@ -798,7 +798,7 @@ int kernfs_add_one(struct kernfs_node *kn)
 		ps_iattr->ia_mtime = ps_iattr->ia_ctime;
 	}
 
-	up_write(&root->kernfs_rwsem);
+	up_write(kernfs_rwsem(root));
 
 	/*
 	 * Activate the new node unless CREATE_DEACTIVATED is requested.
@@ -812,7 +812,7 @@ int kernfs_add_one(struct kernfs_node *kn)
 	return 0;
 
 out_unlock:
-	up_write(&root->kernfs_rwsem);
+	up_write(kernfs_rwsem(root));
 	return ret;
 }
 
@@ -833,7 +833,7 @@ static struct kernfs_node *kernfs_find_ns(struct kernfs_node *parent,
 	bool has_ns = kernfs_ns_enabled(parent);
 	unsigned int hash;
 
-	lockdep_assert_held(&kernfs_root(parent)->kernfs_rwsem);
+	lockdep_assert_held(kernfs_rwsem(kernfs_root(parent)));
 
 	if (has_ns != (bool)ns) {
 		WARN(1, KERN_WARNING "kernfs: ns %s in '%s' for '%s'\n",
@@ -865,7 +865,7 @@ static struct kernfs_node *kernfs_walk_ns(struct kernfs_node *parent,
 	size_t len;
 	char *p, *name;
 
-	lockdep_assert_held_read(&kernfs_root(parent)->kernfs_rwsem);
+	lockdep_assert_held_read(kernfs_rwsem(kernfs_root(parent)));
 
 	/* grab kernfs_rename_lock to piggy back on kernfs_pr_cont_buf */
 	spin_lock_irq(&kernfs_rename_lock);
@@ -906,10 +906,10 @@ struct kernfs_node *kernfs_find_and_get_ns(struct kernfs_node *parent,
 	struct kernfs_node *kn;
 	struct kernfs_root *root = kernfs_root(parent);
 
-	down_read(&root->kernfs_rwsem);
+	down_read(kernfs_rwsem(root));
 	kn = kernfs_find_ns(parent, name, ns);
 	kernfs_get(kn);
-	up_read(&root->kernfs_rwsem);
+	up_read(kernfs_rwsem(root));
 
 	return kn;
 }
@@ -931,10 +931,10 @@ struct kernfs_node *kernfs_walk_and_get_ns(struct kernfs_node *parent,
 	struct kernfs_node *kn;
 	struct kernfs_root *root = kernfs_root(parent);
 
-	down_read(&root->kernfs_rwsem);
+	down_read(kernfs_rwsem(root));
 	kn = kernfs_walk_ns(parent, path, ns);
 	kernfs_get(kn);
-	up_read(&root->kernfs_rwsem);
+	up_read(kernfs_rwsem(root));
 
 	return kn;
 }
@@ -951,15 +951,17 @@ struct kernfs_node *kernfs_walk_and_get_ns(struct kernfs_node *parent,
 struct kernfs_root *kernfs_create_root(struct kernfs_syscall_ops *scops,
 				       unsigned int flags, void *priv)
 {
+	struct kernfs_root_ext *root_ext;
 	struct kernfs_root *root;
 	struct kernfs_node *kn;
 
-	root = kzalloc(sizeof(*root), GFP_KERNEL);
-	if (!root)
+	root_ext = kzalloc(sizeof(*root_ext), GFP_KERNEL);
+	if (!root_ext)
 		return ERR_PTR(-ENOMEM);
 
+	init_rwsem(&root_ext->kernfs_rwsem);
+	root = &root_ext->root;
 	idr_init(&root->ino_idr);
-	init_rwsem(&root->kernfs_rwsem);
 	INIT_LIST_HEAD(&root->supers);
 
 	/*
@@ -1098,7 +1100,7 @@ static struct dentry *kernfs_iop_lookup(struct inode *dir,
 	const void *ns = NULL;
 
 	root = kernfs_root(parent);
-	down_read(&root->kernfs_rwsem);
+	down_read(kernfs_rwsem(root));
 	if (kernfs_ns_enabled(parent))
 		ns = kernfs_info(dir->i_sb)->ns;
 
@@ -1119,7 +1121,7 @@ static struct dentry *kernfs_iop_lookup(struct inode *dir,
 	/* instantiate and hash dentry */
 	ret = d_splice_alias(inode, dentry);
  out_unlock:
-	up_read(&root->kernfs_rwsem);
+	up_read(kernfs_rwsem(root));
 	return ret;
 }
 
@@ -1238,7 +1240,7 @@ static struct kernfs_node *kernfs_next_descendant_post(struct kernfs_node *pos,
 {
 	struct rb_node *rbn;
 
-	lockdep_assert_held_write(&kernfs_root(root)->kernfs_rwsem);
+	lockdep_assert_held_write(kernfs_rwsem(kernfs_root(root)));
 
 	/* if first iteration, visit leftmost descendant which may be root */
 	if (!pos)
@@ -1275,7 +1277,7 @@ void kernfs_activate(struct kernfs_node *kn)
 	struct kernfs_node *pos;
 	struct kernfs_root *root = kernfs_root(kn);
 
-	down_write(&root->kernfs_rwsem);
+	down_write(kernfs_rwsem(root));
 
 	pos = NULL;
 	while ((pos = kernfs_next_descendant_post(pos, kn))) {
@@ -1289,14 +1291,14 @@ void kernfs_activate(struct kernfs_node *kn)
 		pos->flags |= KERNFS_ACTIVATED;
 	}
 
-	up_write(&root->kernfs_rwsem);
+	up_write(kernfs_rwsem(root));
 }
 
 static void __kernfs_remove(struct kernfs_node *kn)
 {
 	struct kernfs_node *pos;
 
-	lockdep_assert_held_write(&kernfs_root(kn)->kernfs_rwsem);
+	lockdep_assert_held_write(kernfs_rwsem(kernfs_root(kn)));
 
 	/*
 	 * Short-circuit if non-root @kn has already finished removal.
@@ -1368,9 +1370,9 @@ void kernfs_remove(struct kernfs_node *kn)
 {
 	struct kernfs_root *root = kernfs_root(kn);
 
-	down_write(&root->kernfs_rwsem);
+	down_write(kernfs_rwsem(root));
 	__kernfs_remove(kn);
-	up_write(&root->kernfs_rwsem);
+	up_write(kernfs_rwsem(root));
 }
 
 /**
@@ -1458,7 +1460,7 @@ bool kernfs_remove_self(struct kernfs_node *kn)
 	bool ret;
 	struct kernfs_root *root = kernfs_root(kn);
 
-	down_write(&root->kernfs_rwsem);
+	down_write(kernfs_rwsem(root));
 	kernfs_break_active_protection(kn);
 
 	/*
@@ -1486,9 +1488,9 @@ bool kernfs_remove_self(struct kernfs_node *kn)
 			    atomic_read(&kn->active) == KN_DEACTIVATED_BIAS)
 				break;
 
-			up_write(&root->kernfs_rwsem);
+			up_write(kernfs_rwsem(root));
 			schedule();
-			down_write(&root->kernfs_rwsem);
+			down_write(kernfs_rwsem(root));
 		}
 		finish_wait(waitq, &wait);
 		WARN_ON_ONCE(!RB_EMPTY_NODE(&kn->rb));
@@ -1501,7 +1503,7 @@ bool kernfs_remove_self(struct kernfs_node *kn)
 	 */
 	kernfs_unbreak_active_protection(kn);
 
-	up_write(&root->kernfs_rwsem);
+	up_write(kernfs_rwsem(root));
 	return ret;
 }
 
@@ -1527,13 +1529,13 @@ int kernfs_remove_by_name_ns(struct kernfs_node *parent, const char *name,
 	}
 
 	root = kernfs_root(parent);
-	down_write(&root->kernfs_rwsem);
+	down_write(kernfs_rwsem(root));
 
 	kn = kernfs_find_ns(parent, name, ns);
 	if (kn)
 		__kernfs_remove(kn);
 
-	up_write(&root->kernfs_rwsem);
+	up_write(kernfs_rwsem(root));
 
 	if (kn)
 		return 0;
@@ -1561,7 +1563,7 @@ int kernfs_rename_ns(struct kernfs_node *kn, struct kernfs_node *new_parent,
 		return -EINVAL;
 
 	root = kernfs_root(kn);
-	down_write(&root->kernfs_rwsem);
+	down_write(kernfs_rwsem(root));
 
 	error = -ENOENT;
 	if (!kernfs_active(kn) || !kernfs_active(new_parent) ||
@@ -1615,7 +1617,7 @@ int kernfs_rename_ns(struct kernfs_node *kn, struct kernfs_node *new_parent,
 
 	error = 0;
  out:
-	up_write(&root->kernfs_rwsem);
+	up_write(kernfs_rwsem(root));
 	return error;
 }
 
@@ -1693,7 +1695,7 @@ static int kernfs_fop_readdir(struct file *file, struct dir_context *ctx)
 		return 0;
 
 	root = kernfs_root(parent);
-	down_read(&root->kernfs_rwsem);
+	down_read(kernfs_rwsem(root));
 
 	if (kernfs_ns_enabled(parent))
 		ns = kernfs_info(dentry->d_sb)->ns;
@@ -1710,12 +1712,12 @@ static int kernfs_fop_readdir(struct file *file, struct dir_context *ctx)
 		file->private_data = pos;
 		kernfs_get(pos);
 
-		up_read(&root->kernfs_rwsem);
+		up_read(kernfs_rwsem(root));
 		if (!dir_emit(ctx, name, len, ino, type))
 			return 0;
-		down_read(&root->kernfs_rwsem);
+		down_read(kernfs_rwsem(root));
 	}
-	up_read(&root->kernfs_rwsem);
+	up_read(kernfs_rwsem(root));
 	file->private_data = NULL;
 	ctx->pos = INT_MAX;
 	return 0;
