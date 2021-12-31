@@ -88,6 +88,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ea0fab8_c34f1e9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1927881
+      },
+      "writtenOn": "2021-12-31T08:17:15Z",
+      "side": 1,
+      "message": "Hi Greg,\n\u003e\u003e\u003e Why want two CONFIGs?\nOne is used for controlling KABI padding in android_kabi.h, the other is used for controlling VENDOR/OEM padding in android_vendor.h, they are different from function side, it\u0027s more clear to use two CONFIGs to separate them, right?",
+      "revId": "83da6e7503520e89281eadfd1d1bc504130ab1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e5519f7_4a90ac46",
