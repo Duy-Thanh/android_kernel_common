@@ -402,6 +402,8 @@
       <elf-symbol name='__traceiter_android_vh_cpufreq_target' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x84b3623a'/>
       <elf-symbol name='__traceiter_android_vh_cpuidle_psci_enter' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6cbffc19'/>
       <elf-symbol name='__traceiter_android_vh_cpuidle_psci_exit' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9e5cd40b'/>
+      <elf-symbol name='__traceiter_android_vh_dmabuf_alloc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x96bb439c'/>
+      <elf-symbol name='__traceiter_android_vh_dmabuf_free' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8f5629c9'/>
       <elf-symbol name='__traceiter_android_vh_do_send_sig_info' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9d17560f'/>
       <elf-symbol name='__traceiter_android_vh_do_wake_up_sync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7565179c'/>
       <elf-symbol name='__traceiter_android_vh_dump_throttled_rt_tasks' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1a34d1a3'/>
@@ -1629,26 +1631,26 @@
       <elf-symbol name='dma_async_device_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9a9dd4b1'/>
       <elf-symbol name='dma_async_device_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3dbec7e0'/>
       <elf-symbol name='dma_async_tx_descriptor_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x23e1a5b7'/>
-      <elf-symbol name='dma_buf_attach' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x23ce83ac'/>
-      <elf-symbol name='dma_buf_begin_cpu_access' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x71f605a9'/>
-      <elf-symbol name='dma_buf_begin_cpu_access_partial' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x96ab14ac'/>
-      <elf-symbol name='dma_buf_detach' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x78ec79c1'/>
-      <elf-symbol name='dma_buf_dynamic_attach' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc04f8cc2'/>
-      <elf-symbol name='dma_buf_end_cpu_access' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd1764430'/>
-      <elf-symbol name='dma_buf_end_cpu_access_partial' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8d3aa059'/>
-      <elf-symbol name='dma_buf_export' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfb1bfabb'/>
-      <elf-symbol name='dma_buf_fd' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xde32d214'/>
-      <elf-symbol name='dma_buf_get' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6a6d5fb3'/>
-      <elf-symbol name='dma_buf_get_flags' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2af4960'/>
-      <elf-symbol name='dma_buf_map_attachment' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x20d2f8c3'/>
-      <elf-symbol name='dma_buf_mmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x35cdb5a6'/>
-      <elf-symbol name='dma_buf_move_notify' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5d86a400'/>
-      <elf-symbol name='dma_buf_pin' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaf2a0fae'/>
-      <elf-symbol name='dma_buf_put' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x98c2b0fc'/>
-      <elf-symbol name='dma_buf_unmap_attachment' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe1506dd'/>
-      <elf-symbol name='dma_buf_unpin' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9bdf67af'/>
-      <elf-symbol name='dma_buf_vmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb6a444cd'/>
-      <elf-symbol name='dma_buf_vunmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x90a8a2dc'/>
+      <elf-symbol name='dma_buf_attach' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xca1cf88e'/>
+      <elf-symbol name='dma_buf_begin_cpu_access' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x60640943'/>
+      <elf-symbol name='dma_buf_begin_cpu_access_partial' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7cfa2b65'/>
+      <elf-symbol name='dma_buf_detach' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe23526ec'/>
+      <elf-symbol name='dma_buf_dynamic_attach' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe14d340f'/>
+      <elf-symbol name='dma_buf_end_cpu_access' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x32c7aca4'/>
+      <elf-symbol name='dma_buf_end_cpu_access_partial' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb406a0ae'/>
+      <elf-symbol name='dma_buf_export' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3fa87ba1'/>
+      <elf-symbol name='dma_buf_fd' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb7ea09d3'/>
+      <elf-symbol name='dma_buf_get' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8a281191'/>
+      <elf-symbol name='dma_buf_get_flags' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3ccea672'/>
+      <elf-symbol name='dma_buf_map_attachment' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2b6a3f2a'/>
+      <elf-symbol name='dma_buf_mmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9126057a'/>
+      <elf-symbol name='dma_buf_move_notify' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfa0c78ec'/>
+      <elf-symbol name='dma_buf_pin' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x247433d0'/>
+      <elf-symbol name='dma_buf_put' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb9f9f73c'/>
+      <elf-symbol name='dma_buf_unmap_attachment' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x91d6d69a'/>
+      <elf-symbol name='dma_buf_unpin' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4e71bdef'/>
+      <elf-symbol name='dma_buf_vmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xabe4ffe'/>
+      <elf-symbol name='dma_buf_vunmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5f002702'/>
       <elf-symbol name='dma_fence_add_callback' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8e21c9a1'/>
       <elf-symbol name='dma_fence_array_create' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3e713a5'/>
       <elf-symbol name='dma_fence_context_alloc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x14605535'/>
@@ -2419,7 +2421,7 @@
       <elf-symbol name='get_cpu_iowait_time_us' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1234e483'/>
       <elf-symbol name='get_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x54f79951'/>
       <elf-symbol name='get_device_system_crosststamp' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x51f2ba0f'/>
-      <elf-symbol name='get_each_dmabuf' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd4a0a2a0'/>
+      <elf-symbol name='get_each_dmabuf' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9b659308'/>
       <elf-symbol name='get_each_object_track' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x882f614f'/>
       <elf-symbol name='get_freelist_nr_pages' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x618b006f'/>
       <elf-symbol name='get_governor_parent_kobj' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb8da8552'/>
@@ -2876,7 +2878,7 @@
       <elf-symbol name='irq_work_run' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x541bd60a'/>
       <elf-symbol name='irq_work_sync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf361a95b'/>
       <elf-symbol name='is_console_locked' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x944a564d'/>
-      <elf-symbol name='is_dma_buf_file' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xabcf70c3'/>
+      <elf-symbol name='is_dma_buf_file' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7fb51f47'/>
       <elf-symbol name='is_vmalloc_addr' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc31db0ce'/>
       <elf-symbol name='isolate_and_split_free_page' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x20b4b49b'/>
       <elf-symbol name='isolate_anon_lru_page' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1b395e30'/>
@@ -5868,6 +5870,8 @@
       <elf-symbol name='__tracepoint_android_vh_cpufreq_target' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaa641f23'/>
       <elf-symbol name='__tracepoint_android_vh_cpuidle_psci_enter' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x137e6ebe'/>
       <elf-symbol name='__tracepoint_android_vh_cpuidle_psci_exit' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaaacb3b6'/>
+      <elf-symbol name='__tracepoint_android_vh_dmabuf_alloc' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3a5b3c65'/>
+      <elf-symbol name='__tracepoint_android_vh_dmabuf_free' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf90ae4f4'/>
       <elf-symbol name='__tracepoint_android_vh_do_send_sig_info' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6db82691'/>
       <elf-symbol name='__tracepoint_android_vh_do_wake_up_sync' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x24bef402'/>
       <elf-symbol name='__tracepoint_android_vh_dump_throttled_rt_tasks' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd29bebac'/>
@@ -115546,6 +115550,16 @@
         <parameter type-id='b50a4934' name='s2idle' filepath='include/trace/hooks/cpuidle_psci.h' line='19' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='__traceiter_android_vh_dmabuf_alloc' mangled-name='__traceiter_android_vh_dmabuf_alloc' filepath='include/trace/hooks/dmabuf.h' line='17' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_dmabuf_alloc'>
+        <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/dmabuf.h' line='17' column='1'/>
+        <parameter type-id='5e4f599b' name='dmabuf' filepath='include/trace/hooks/dmabuf.h' line='17' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='__traceiter_android_vh_dmabuf_free' mangled-name='__traceiter_android_vh_dmabuf_free' filepath='include/trace/hooks/dmabuf.h' line='21' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_dmabuf_free'>
+        <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/dmabuf.h' line='21' column='1'/>
+        <parameter type-id='5e4f599b' name='dmabuf' filepath='include/trace/hooks/dmabuf.h' line='21' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='__traceiter_android_vh_do_send_sig_info' mangled-name='__traceiter_android_vh_do_send_sig_info' filepath='include/trace/hooks/signal.h' line='12' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_android_vh_do_send_sig_info'>
         <parameter type-id='eaa32e2f' name='__data' filepath='include/trace/hooks/signal.h' line='12' column='1'/>
         <parameter type-id='95e97e5e' name='sig' filepath='include/trace/hooks/signal.h' line='12' column='1'/>
@@ -116912,6 +116926,8 @@
       <var-decl name='__tracepoint_android_vh_cpufreq_target' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_cpufreq_target' visibility='default' filepath='include/trace/hooks/cpufreq.h' line='45' column='1' elf-symbol-id='__tracepoint_android_vh_cpufreq_target'/>
       <var-decl name='__tracepoint_android_vh_cpuidle_psci_enter' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_cpuidle_psci_enter' visibility='default' filepath='include/trace/hooks/cpuidle_psci.h' line='15' column='1' elf-symbol-id='__tracepoint_android_vh_cpuidle_psci_enter'/>
       <var-decl name='__tracepoint_android_vh_cpuidle_psci_exit' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_cpuidle_psci_exit' visibility='default' filepath='include/trace/hooks/cpuidle_psci.h' line='19' column='1' elf-symbol-id='__tracepoint_android_vh_cpuidle_psci_exit'/>
+      <var-decl name='__tracepoint_android_vh_dmabuf_alloc' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_dmabuf_alloc' visibility='default' filepath='include/trace/hooks/dmabuf.h' line='17' column='1' elf-symbol-id='__tracepoint_android_vh_dmabuf_alloc'/>
+      <var-decl name='__tracepoint_android_vh_dmabuf_free' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_dmabuf_free' visibility='default' filepath='include/trace/hooks/dmabuf.h' line='21' column='1' elf-symbol-id='__tracepoint_android_vh_dmabuf_free'/>
       <var-decl name='__tracepoint_android_vh_do_send_sig_info' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_do_send_sig_info' visibility='default' filepath='include/trace/hooks/signal.h' line='12' column='1' elf-symbol-id='__tracepoint_android_vh_do_send_sig_info'/>
       <var-decl name='__tracepoint_android_vh_do_wake_up_sync' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_do_wake_up_sync' visibility='default' filepath='include/trace/hooks/sched.h' line='263' column='1' elf-symbol-id='__tracepoint_android_vh_do_wake_up_sync'/>
       <var-decl name='__tracepoint_android_vh_dump_throttled_rt_tasks' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_dump_throttled_rt_tasks' visibility='default' filepath='include/trace/hooks/sched.h' line='73' column='1' elf-symbol-id='__tracepoint_android_vh_dump_throttled_rt_tasks'/>
@@ -122666,105 +122682,105 @@
         <parameter type-id='27f3f5d8' name='chan' filepath='drivers/dma/dmaengine.c' line='1498' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='dma_buf_attach' mangled-name='dma_buf_attach' filepath='drivers/dma-buf/dma-buf.c' line='830' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_attach'>
-        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='830' column='1'/>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/dma-buf/dma-buf.c' line='831' column='1'/>
+      <function-decl name='dma_buf_attach' mangled-name='dma_buf_attach' filepath='drivers/dma-buf/dma-buf.c' line='833' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_attach'>
+        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='833' column='1'/>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/dma-buf/dma-buf.c' line='834' column='1'/>
         <return type-id='e68e04c1'/>
       </function-decl>
-      <function-decl name='dma_buf_begin_cpu_access' mangled-name='dma_buf_begin_cpu_access' filepath='drivers/dma-buf/dma-buf.c' line='1148' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_begin_cpu_access'>
-        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='1148' column='1'/>
-        <parameter type-id='eea6b025' name='direction' filepath='drivers/dma-buf/dma-buf.c' line='1149' column='1'/>
+      <function-decl name='dma_buf_begin_cpu_access' mangled-name='dma_buf_begin_cpu_access' filepath='drivers/dma-buf/dma-buf.c' line='1151' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_begin_cpu_access'>
+        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='1151' column='1'/>
+        <parameter type-id='eea6b025' name='direction' filepath='drivers/dma-buf/dma-buf.c' line='1152' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='dma_buf_begin_cpu_access_partial' mangled-name='dma_buf_begin_cpu_access_partial' filepath='drivers/dma-buf/dma-buf.c' line='1170' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_begin_cpu_access_partial'>
-        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='1170' column='1'/>
-        <parameter type-id='eea6b025' name='direction' filepath='drivers/dma-buf/dma-buf.c' line='1171' column='1'/>
-        <parameter type-id='f0981eeb' name='offset' filepath='drivers/dma-buf/dma-buf.c' line='1172' column='1'/>
-        <parameter type-id='f0981eeb' name='len' filepath='drivers/dma-buf/dma-buf.c' line='1172' column='1'/>
+      <function-decl name='dma_buf_begin_cpu_access_partial' mangled-name='dma_buf_begin_cpu_access_partial' filepath='drivers/dma-buf/dma-buf.c' line='1173' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_begin_cpu_access_partial'>
+        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='1173' column='1'/>
+        <parameter type-id='eea6b025' name='direction' filepath='drivers/dma-buf/dma-buf.c' line='1174' column='1'/>
+        <parameter type-id='f0981eeb' name='offset' filepath='drivers/dma-buf/dma-buf.c' line='1175' column='1'/>
+        <parameter type-id='f0981eeb' name='len' filepath='drivers/dma-buf/dma-buf.c' line='1175' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='dma_buf_detach' mangled-name='dma_buf_detach' filepath='drivers/dma-buf/dma-buf.c' line='845' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_detach'>
-        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='845' column='1'/>
-        <parameter type-id='e68e04c1' name='attach' filepath='drivers/dma-buf/dma-buf.c' line='845' column='1'/>
+      <function-decl name='dma_buf_detach' mangled-name='dma_buf_detach' filepath='drivers/dma-buf/dma-buf.c' line='848' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_detach'>
+        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='848' column='1'/>
+        <parameter type-id='e68e04c1' name='attach' filepath='drivers/dma-buf/dma-buf.c' line='848' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='dma_buf_dynamic_attach' mangled-name='dma_buf_dynamic_attach' filepath='drivers/dma-buf/dma-buf.c' line='742' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_dynamic_attach'>
-        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='742' column='1'/>
-        <parameter type-id='fa0b179b' name='dev' filepath='drivers/dma-buf/dma-buf.c' line='742' column='1'/>
-        <parameter type-id='ce74919f' name='importer_ops' filepath='drivers/dma-buf/dma-buf.c' line='743' column='1'/>
-        <parameter type-id='eaa32e2f' name='importer_priv' filepath='drivers/dma-buf/dma-buf.c' line='744' column='1'/>
+      <function-decl name='dma_buf_dynamic_attach' mangled-name='dma_buf_dynamic_attach' filepath='drivers/dma-buf/dma-buf.c' line='745' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_dynamic_attach'>
+        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='745' column='1'/>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/dma-buf/dma-buf.c' line='745' column='1'/>
+        <parameter type-id='ce74919f' name='importer_ops' filepath='drivers/dma-buf/dma-buf.c' line='746' column='1'/>
+        <parameter type-id='eaa32e2f' name='importer_priv' filepath='drivers/dma-buf/dma-buf.c' line='747' column='1'/>
         <return type-id='e68e04c1'/>
       </function-decl>
-      <function-decl name='dma_buf_end_cpu_access' mangled-name='dma_buf_end_cpu_access' filepath='drivers/dma-buf/dma-buf.c' line='1206' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_end_cpu_access'>
-        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='1206' column='1'/>
-        <parameter type-id='eea6b025' name='direction' filepath='drivers/dma-buf/dma-buf.c' line='1207' column='1'/>
+      <function-decl name='dma_buf_end_cpu_access' mangled-name='dma_buf_end_cpu_access' filepath='drivers/dma-buf/dma-buf.c' line='1209' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_end_cpu_access'>
+        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='1209' column='1'/>
+        <parameter type-id='eea6b025' name='direction' filepath='drivers/dma-buf/dma-buf.c' line='1210' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='dma_buf_end_cpu_access_partial' mangled-name='dma_buf_end_cpu_access_partial' filepath='drivers/dma-buf/dma-buf.c' line='1220' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_end_cpu_access_partial'>
-        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='1220' column='1'/>
-        <parameter type-id='eea6b025' name='direction' filepath='drivers/dma-buf/dma-buf.c' line='1221' column='1'/>
-        <parameter type-id='f0981eeb' name='offset' filepath='drivers/dma-buf/dma-buf.c' line='1222' column='1'/>
-        <parameter type-id='f0981eeb' name='len' filepath='drivers/dma-buf/dma-buf.c' line='1222' column='1'/>
+      <function-decl name='dma_buf_end_cpu_access_partial' mangled-name='dma_buf_end_cpu_access_partial' filepath='drivers/dma-buf/dma-buf.c' line='1223' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_end_cpu_access_partial'>
+        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='1223' column='1'/>
+        <parameter type-id='eea6b025' name='direction' filepath='drivers/dma-buf/dma-buf.c' line='1224' column='1'/>
+        <parameter type-id='f0981eeb' name='offset' filepath='drivers/dma-buf/dma-buf.c' line='1225' column='1'/>
+        <parameter type-id='f0981eeb' name='len' filepath='drivers/dma-buf/dma-buf.c' line='1225' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='dma_buf_export' mangled-name='dma_buf_export' filepath='drivers/dma-buf/dma-buf.c' line='560' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_export'>
-        <parameter type-id='aecb451e' name='exp_info' filepath='drivers/dma-buf/dma-buf.c' line='560' column='1'/>
+      <function-decl name='dma_buf_export' mangled-name='dma_buf_export' filepath='drivers/dma-buf/dma-buf.c' line='562' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_export'>
+        <parameter type-id='aecb451e' name='exp_info' filepath='drivers/dma-buf/dma-buf.c' line='562' column='1'/>
         <return type-id='5e4f599b'/>
       </function-decl>
-      <function-decl name='dma_buf_fd' mangled-name='dma_buf_fd' filepath='drivers/dma-buf/dma-buf.c' line='659' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_fd'>
-        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='659' column='1'/>
-        <parameter type-id='95e97e5e' name='flags' filepath='drivers/dma-buf/dma-buf.c' line='659' column='1'/>
+      <function-decl name='dma_buf_fd' mangled-name='dma_buf_fd' filepath='drivers/dma-buf/dma-buf.c' line='662' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_fd'>
+        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='662' column='1'/>
+        <parameter type-id='95e97e5e' name='flags' filepath='drivers/dma-buf/dma-buf.c' line='662' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='dma_buf_get' mangled-name='dma_buf_get' filepath='drivers/dma-buf/dma-buf.c' line='684' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_get'>
-        <parameter type-id='95e97e5e' name='fd' filepath='drivers/dma-buf/dma-buf.c' line='684' column='1'/>
+      <function-decl name='dma_buf_get' mangled-name='dma_buf_get' filepath='drivers/dma-buf/dma-buf.c' line='687' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_get'>
+        <parameter type-id='95e97e5e' name='fd' filepath='drivers/dma-buf/dma-buf.c' line='687' column='1'/>
         <return type-id='5e4f599b'/>
       </function-decl>
-      <function-decl name='dma_buf_get_flags' mangled-name='dma_buf_get_flags' filepath='drivers/dma-buf/dma-buf.c' line='1363' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_get_flags'>
-        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='1363' column='1'/>
-        <parameter type-id='1d2c2b85' name='flags' filepath='drivers/dma-buf/dma-buf.c' line='1363' column='1'/>
+      <function-decl name='dma_buf_get_flags' mangled-name='dma_buf_get_flags' filepath='drivers/dma-buf/dma-buf.c' line='1366' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_get_flags'>
+        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='1366' column='1'/>
+        <parameter type-id='1d2c2b85' name='flags' filepath='drivers/dma-buf/dma-buf.c' line='1366' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='dma_buf_map_attachment' mangled-name='dma_buf_map_attachment' filepath='drivers/dma-buf/dma-buf.c' line='925' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_map_attachment'>
-        <parameter type-id='e68e04c1' name='attach' filepath='drivers/dma-buf/dma-buf.c' line='925' column='1'/>
-        <parameter type-id='eea6b025' name='direction' filepath='drivers/dma-buf/dma-buf.c' line='926' column='1'/>
+      <function-decl name='dma_buf_map_attachment' mangled-name='dma_buf_map_attachment' filepath='drivers/dma-buf/dma-buf.c' line='928' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_map_attachment'>
+        <parameter type-id='e68e04c1' name='attach' filepath='drivers/dma-buf/dma-buf.c' line='928' column='1'/>
+        <parameter type-id='eea6b025' name='direction' filepath='drivers/dma-buf/dma-buf.c' line='929' column='1'/>
         <return type-id='4adb0e6a'/>
       </function-decl>
-      <function-decl name='dma_buf_mmap' mangled-name='dma_buf_mmap' filepath='drivers/dma-buf/dma-buf.c' line='1250' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_mmap'>
-        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='1250' column='1'/>
-        <parameter type-id='2ae08426' name='vma' filepath='drivers/dma-buf/dma-buf.c' line='1250' column='1'/>
-        <parameter type-id='7359adad' name='pgoff' filepath='drivers/dma-buf/dma-buf.c' line='1251' column='1'/>
+      <function-decl name='dma_buf_mmap' mangled-name='dma_buf_mmap' filepath='drivers/dma-buf/dma-buf.c' line='1253' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_mmap'>
+        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='1253' column='1'/>
+        <parameter type-id='2ae08426' name='vma' filepath='drivers/dma-buf/dma-buf.c' line='1253' column='1'/>
+        <parameter type-id='7359adad' name='pgoff' filepath='drivers/dma-buf/dma-buf.c' line='1254' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='dma_buf_move_notify' mangled-name='dma_buf_move_notify' filepath='drivers/dma-buf/dma-buf.c' line='1021' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_move_notify'>
-        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='1021' column='1'/>
+      <function-decl name='dma_buf_move_notify' mangled-name='dma_buf_move_notify' filepath='drivers/dma-buf/dma-buf.c' line='1024' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_move_notify'>
+        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='1024' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='dma_buf_pin' mangled-name='dma_buf_pin' filepath='drivers/dma-buf/dma-buf.c' line='880' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_pin'>
-        <parameter type-id='e68e04c1' name='attach' filepath='drivers/dma-buf/dma-buf.c' line='880' column='1'/>
+      <function-decl name='dma_buf_pin' mangled-name='dma_buf_pin' filepath='drivers/dma-buf/dma-buf.c' line='883' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_pin'>
+        <parameter type-id='e68e04c1' name='attach' filepath='drivers/dma-buf/dma-buf.c' line='883' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='dma_buf_put' mangled-name='dma_buf_put' filepath='drivers/dma-buf/dma-buf.c' line='712' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_put'>
-        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='712' column='1'/>
+      <function-decl name='dma_buf_put' mangled-name='dma_buf_put' filepath='drivers/dma-buf/dma-buf.c' line='715' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_put'>
+        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='715' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='dma_buf_unmap_attachment' mangled-name='dma_buf_unmap_attachment' filepath='drivers/dma-buf/dma-buf.c' line='987' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_unmap_attachment'>
-        <parameter type-id='e68e04c1' name='attach' filepath='drivers/dma-buf/dma-buf.c' line='987' column='1'/>
-        <parameter type-id='4adb0e6a' name='sg_table' filepath='drivers/dma-buf/dma-buf.c' line='988' column='1'/>
-        <parameter type-id='eea6b025' name='direction' filepath='drivers/dma-buf/dma-buf.c' line='989' column='1'/>
+      <function-decl name='dma_buf_unmap_attachment' mangled-name='dma_buf_unmap_attachment' filepath='drivers/dma-buf/dma-buf.c' line='990' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_unmap_attachment'>
+        <parameter type-id='e68e04c1' name='attach' filepath='drivers/dma-buf/dma-buf.c' line='990' column='1'/>
+        <parameter type-id='4adb0e6a' name='sg_table' filepath='drivers/dma-buf/dma-buf.c' line='991' column='1'/>
+        <parameter type-id='eea6b025' name='direction' filepath='drivers/dma-buf/dma-buf.c' line='992' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='dma_buf_unpin' mangled-name='dma_buf_unpin' filepath='drivers/dma-buf/dma-buf.c' line='899' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_unpin'>
-        <parameter type-id='e68e04c1' name='attach' filepath='drivers/dma-buf/dma-buf.c' line='899' column='1'/>
+      <function-decl name='dma_buf_unpin' mangled-name='dma_buf_unpin' filepath='drivers/dma-buf/dma-buf.c' line='902' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_unpin'>
+        <parameter type-id='e68e04c1' name='attach' filepath='drivers/dma-buf/dma-buf.c' line='902' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='dma_buf_vmap' mangled-name='dma_buf_vmap' filepath='drivers/dma-buf/dma-buf.c' line='1304' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_vmap'>
-        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='1304' column='1'/>
+      <function-decl name='dma_buf_vmap' mangled-name='dma_buf_vmap' filepath='drivers/dma-buf/dma-buf.c' line='1307' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_vmap'>
+        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='1307' column='1'/>
         <return type-id='eaa32e2f'/>
       </function-decl>
-      <function-decl name='dma_buf_vunmap' mangled-name='dma_buf_vunmap' filepath='drivers/dma-buf/dma-buf.c' line='1344' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_vunmap'>
-        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='1344' column='1'/>
-        <parameter type-id='eaa32e2f' name='vaddr' filepath='drivers/dma-buf/dma-buf.c' line='1344' column='1'/>
+      <function-decl name='dma_buf_vunmap' mangled-name='dma_buf_vunmap' filepath='drivers/dma-buf/dma-buf.c' line='1347' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='dma_buf_vunmap'>
+        <parameter type-id='5e4f599b' name='dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='1347' column='1'/>
+        <parameter type-id='eaa32e2f' name='vaddr' filepath='drivers/dma-buf/dma-buf.c' line='1347' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <var-decl name='dma_contiguous_default_area' type-id='6f67b38a' mangled-name='dma_contiguous_default_area' visibility='default' filepath='kernel/dma/contiguous.c' line='61' column='1' elf-symbol-id='dma_contiguous_default_area'/>
@@ -126794,9 +126810,9 @@
         <parameter type-id='587b4de3' name='xtstamp' filepath='kernel/time/timekeeping.c' line='1196' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='get_each_dmabuf' mangled-name='get_each_dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='46' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_each_dmabuf'>
-        <parameter type-id='dcbbb1fc' name='callback' filepath='drivers/dma-buf/dma-buf.c' line='46' column='1'/>
-        <parameter type-id='eaa32e2f' name='private' filepath='drivers/dma-buf/dma-buf.c' line='47' column='1'/>
+      <function-decl name='get_each_dmabuf' mangled-name='get_each_dmabuf' filepath='drivers/dma-buf/dma-buf.c' line='47' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_each_dmabuf'>
+        <parameter type-id='dcbbb1fc' name='callback' filepath='drivers/dma-buf/dma-buf.c' line='47' column='1'/>
+        <parameter type-id='eaa32e2f' name='private' filepath='drivers/dma-buf/dma-buf.c' line='48' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='get_each_object_track' mangled-name='get_each_object_track' filepath='mm/slub.c' line='586' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_each_object_track'>
@@ -129129,8 +129145,8 @@
       <function-decl name='is_console_locked' mangled-name='is_console_locked' filepath='kernel/printk/printk.c' line='2385' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='is_console_locked'>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='is_dma_buf_file' mangled-name='is_dma_buf_file' filepath='drivers/dma-buf/dma-buf.c' line='480' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='is_dma_buf_file'>
-        <parameter type-id='77e79a4b' name='file' filepath='drivers/dma-buf/dma-buf.c' line='480' column='1'/>
+      <function-decl name='is_dma_buf_file' mangled-name='is_dma_buf_file' filepath='drivers/dma-buf/dma-buf.c' line='482' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='is_dma_buf_file'>
+        <parameter type-id='77e79a4b' name='file' filepath='drivers/dma-buf/dma-buf.c' line='482' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='is_vmalloc_addr' mangled-name='is_vmalloc_addr' filepath='mm/vmalloc.c' line='46' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='is_vmalloc_addr'>
