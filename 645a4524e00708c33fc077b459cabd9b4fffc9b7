@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee5f242e_ad29a211",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3623,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-04T17:22:58Z",
+      "side": 1,
+      "message": "This is specific to BC_REGISTER_LOOPER... why is it needed? Please use a name that doesn\u0027t imply it is for all cases of binder_thread_write.",
+      "revId": "645a4524e00708c33fc077b459cabd9b4fffc9b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e33c1251_2280e105",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3887,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-04T17:22:58Z",
+      "side": 1,
+      "message": "you can\u0027t use _vh_ hooks in atomic context (need to use rvh). Why is this hook needed here but not in the other cases where binder_has_work() is called? Would it make more sense to do this from binder_has_work_ilocked()? Then you wouldn\u0027t need the change at line 507 either.",
+      "revId": "645a4524e00708c33fc077b459cabd9b4fffc9b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71095c3f_168382d6",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4522,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-04T17:22:58Z",
+      "side": 1,
+      "message": "proc is already deallocated here, so any reference by the hook will be use-after-free.",
+      "revId": "645a4524e00708c33fc077b459cabd9b4fffc9b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
