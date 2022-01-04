@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8da1960c_65a6eed1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-01-04T22:15:41Z",
+      "side": 1,
+      "message": "This one is an out-of-tree workaround to allow process_mrelease thread to work in parallel with exit_mmap same way as oom-reaper threads are doing. I\u0027m working with upstream developers to come up with the final upstream solution in https://lore.kernel.org/all/YbHIaq9a0CtqRulE@dhcp22.suse.cz/",
+      "revId": "3827a763455da2960c8e7f29b145354ced23c73e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
