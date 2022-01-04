@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37dd28a7_df35fea5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-04T10:44:41Z",
+      "side": 1,
+      "message": "Do not split them unless you have a real use-case for why you would want to do so.",
+      "parentUuid": "8ea0fab8_c34f1e9f",
+      "revId": "83da6e7503520e89281eadfd1d1bc504130ab1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e5519f7_4a90ac46",
         "filename": "arch/Kconfig",
         "patchSetId": 10
