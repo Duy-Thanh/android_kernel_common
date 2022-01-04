@@ -63,7 +63,7 @@ static int build_info_set(const char *str, const struct kernel_param *kp)
 	size_t build_info_size;
 	int ret = 0;
 
-	if (all_info_addr == 0 || all_info_size == 0) {
+	if (all_info_addr == NULL || all_info_size == 0) {
 		ret = -EPERM;
 		goto Exit;
 	}
@@ -82,6 +82,7 @@ static int build_info_set(const char *str, const struct kernel_param *kp)
 
 Exit:
 	vunmap(all_info_addr);
+	all_info_addr = NULL;
 	return ret;
 }
 
