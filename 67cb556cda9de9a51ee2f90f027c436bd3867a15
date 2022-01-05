@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fd59cf4_c8820e2a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-05T19:46:37Z",
+      "side": 1,
+      "message": "Can you add some more description? Perhaps list the new hooks and what they are for (a couple of them are obviously intended to allocate/free per-thread and per-proc structures).",
+      "revId": "67cb556cda9de9a51ee2f90f027c436bd3867a15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "651e4429_f5a693a8",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4620,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-05T19:46:37Z",
+      "side": 1,
+      "message": "If you touch \"thread\" it will be a use-after-free. Need to move it above binder_thread_dec_tmpref().",
+      "revId": "67cb556cda9de9a51ee2f90f027c436bd3867a15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
