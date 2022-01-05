@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "750ad4ce_586529bb",
+        "filename": "kernel/module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2276,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-01-05T23:34:08Z",
+      "side": 1,
+      "message": "Since we control whether CONFIG_MODULE_SIG is on, should we just wrap this new code in the same #ifdef? Then you don\u0027t need to set mod-\u003esig_ok to 0 if MODULE_SIG isn\u0027t enabled. I think that\u0027ll be useful for local dev/experiments when not running in a GKI configuration.",
+      "range": {
+        "startLine": 2271,
+        "startChar": 0,
+        "endLine": 2276,
+        "endChar": 4
+      },
+      "revId": "bfd022b4d610fa760a2533a54b0c2cba622dd96e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
