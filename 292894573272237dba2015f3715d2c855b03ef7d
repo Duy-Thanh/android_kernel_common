@@ -17,6 +17,24 @@
       "parentUuid": "a060cab7_62f4cfaf",
       "revId": "292894573272237dba2015f3715d2c855b03ef7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9e1aa5e_f0ed492f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1931558
+      },
+      "writtenOn": "2022-01-05T17:39:42Z",
+      "side": 1,
+      "message": "\u003e \u003e ✔️ All files and artifacts have passed presubmit lint checks\n\u003e \u003e For more details see (https://android-build.googleplex.com/builds/treetop/android-review/1858033?revision\u003d4)\n\u003e \u003e \n\u003e \u003e Have a question? Found a bug? http://go/presubmit-lint-bug\n\u003e \n\u003e Please fix.",
+      "parentUuid": "93d2ebd0_a597d9b8",
+      "revId": "292894573272237dba2015f3715d2c855b03ef7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
