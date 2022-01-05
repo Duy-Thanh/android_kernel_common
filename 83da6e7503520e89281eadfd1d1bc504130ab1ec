@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c724f27_d4ec203a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1927881
+      },
+      "writtenOn": "2022-01-05T02:47:18Z",
+      "side": 1,
+      "message": "OK, I have another question, could I put the CONFIG into drivers/android/Kconfig and let it be included by \"if Android\" block? Meanwhile I enable this CONFIG in gki_defconfig? Do you agree or any comments?",
+      "parentUuid": "37dd28a7_df35fea5",
+      "revId": "83da6e7503520e89281eadfd1d1bc504130ab1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e5519f7_4a90ac46",
         "filename": "arch/Kconfig",
         "patchSetId": 10
