@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3ef2298_2d036d2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-05T14:42:42Z",
+      "side": 1,
+      "message": "yes, they should depend on CONFIG_ANDROID and by default, if CONFIG_ANDROID is enabled, they should not need to also be specified again so no gki_defconfig file change should be needed to keep things working as-is for that build.",
+      "parentUuid": "0c724f27_d4ec203a",
+      "revId": "83da6e7503520e89281eadfd1d1bc504130ab1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e5519f7_4a90ac46",
         "filename": "arch/Kconfig",
         "patchSetId": 10
