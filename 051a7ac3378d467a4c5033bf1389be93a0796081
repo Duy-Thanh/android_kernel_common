@@ -57,6 +57,30 @@
       },
       "revId": "051a7ac3378d467a4c5033bf1389be93a0796081",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a34eaf0c_84d483c6",
+        "filename": "drivers/staging/android/debug_kinfo.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1275292
+      },
+      "writtenOn": "2022-01-05T01:54:42Z",
+      "side": 1,
+      "message": "line 66 if all_info_addr \u003d\u003d 0, ret \u003d -EPERM not -EINVAL, maybe owner want to disable build_info writting permission by vunmap(all_info_addr);\nremoving vunmap(all_info_addr), kernel crash also disappear when set twice, but build_info can be set more than one time.",
+      "parentUuid": "1bf16f36_0ffb2286",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 23
+      },
+      "revId": "051a7ac3378d467a4c5033bf1389be93a0796081",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
