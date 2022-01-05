@@ -81,6 +81,30 @@
       },
       "revId": "051a7ac3378d467a4c5033bf1389be93a0796081",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f3f95cb_0fddf0ca",
+        "filename": "drivers/staging/android/debug_kinfo.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-05T14:41:18Z",
+      "side": 1,
+      "message": "I have no idea what the requirement is here, sorry.  but unmapping memory and then reading from it later feels wrong to me.",
+      "parentUuid": "a34eaf0c_84d483c6",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 23
+      },
+      "revId": "051a7ac3378d467a4c5033bf1389be93a0796081",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
