@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "901c75cd_a85ea0a9",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3623,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2022-01-05T06:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee5f242e_ad29a211",
+      "revId": "645a4524e00708c33fc077b459cabd9b4fffc9b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e33c1251_2280e105",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a47e9695_9973ff4a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3887,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2022-01-05T06:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e33c1251_2280e105",
+      "revId": "645a4524e00708c33fc077b459cabd9b4fffc9b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71095c3f_168382d6",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-01-04T17:22:58Z",
       "side": 1,
       "message": "proc is already deallocated here, so any reference by the hook will be use-after-free.",
+      "revId": "645a4524e00708c33fc077b459cabd9b4fffc9b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1229f3ba_866b1982",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4522,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2022-01-05T06:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71095c3f_168382d6",
       "revId": "645a4524e00708c33fc077b459cabd9b4fffc9b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
