@@ -22,6 +22,30 @@
       },
       "revId": "bfd022b4d610fa760a2533a54b0c2cba622dd96e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d67de63_76f69372",
+        "filename": "kernel/module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2276,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-01-05T23:48:11Z",
+      "side": 1,
+      "message": "It was like that in initial implementation; with this one it is being controlled from the module-internal.h with review comments where gki_is_module_* return false if the CONFIG is not enabled.\n\nmod-\u003esig_ok was before assumed to be 0 in existing open-source code; I made it explicit as I wasn\u0027t seeing",
+      "parentUuid": "750ad4ce_586529bb",
+      "range": {
+        "startLine": 2271,
+        "startChar": 0,
+        "endLine": 2276,
+        "endChar": 4
+      },
+      "revId": "bfd022b4d610fa760a2533a54b0c2cba622dd96e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
