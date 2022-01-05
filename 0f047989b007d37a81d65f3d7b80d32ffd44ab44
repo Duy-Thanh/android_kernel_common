@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000018908749",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1914127?revision\u003d6",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "c966aa35_d0f885ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-05T17:22:41Z",
+      "side": 1,
+      "message": "\u0027linux-next\u0027 is not an acceptable maintainer tree as commit hashes are not stable there.\nPlease refer to a different maintainer tree or use FROMLIST instead.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 419610000 android-build.ayeaye-python-dispatcher_20220104.05_p0",
+      "revId": "0f047989b007d37a81d65f3d7b80d32ffd44ab44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
