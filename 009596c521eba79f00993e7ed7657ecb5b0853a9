@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36262ab6_bc259211",
+        "filename": "kernel/sysctl.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2971,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-06T21:40:51Z",
+      "side": 0,
+      "message": "This causes many kernelci warnings/errors:\n```\n72\tkernel/sysctl.c:124:12: error: ‘one_thousand’ defined but not used [-Werror\u003dunused-variable]\n```",
+      "revId": "009596c521eba79f00993e7ed7657ecb5b0853a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
