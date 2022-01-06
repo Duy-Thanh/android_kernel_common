@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d863bc69_82b1f8c1",
+        "filename": "kernel/module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4803,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-06T10:08:28Z",
+      "side": 1,
+      "message": "you just lost the ability to pass data to the callback so you can do something with the information in the callback itself, making this function very limited, if not broken entirely.\n\nWhat information are you missing that is not present here already?",
+      "range": {
+        "startLine": 4803,
+        "startChar": 49,
+        "endLine": 4803,
+        "endChar": 55
+      },
+      "revId": "0de5092af147dcc1eb2cd589ad4e92913ca87008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
