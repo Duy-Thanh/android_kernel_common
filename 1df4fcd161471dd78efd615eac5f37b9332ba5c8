@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da282035_3fc162b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2022-01-06T06:17:54Z",
+      "side": 1,
+      "message": "Please help to reivew again.\nThere is a change in trace_android_vh_binder_thread_read,we need change \"list\", so it should be **list.",
+      "revId": "1df4fcd161471dd78efd615eac5f37b9332ba5c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
