@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd78c0ba_abe02256",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 3627,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-06T18:00:55Z",
+      "side": 1,
+      "message": "Do you need the inner proc lock here? If so, it needs to be rvh (atomic context). If not, move below the unlock.",
+      "revId": "aa018214c3239e5606d681b2783c5a040dad0ed3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89facd7d_152979e1",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 4053,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-06T18:00:55Z",
+      "side": 1,
+      "message": "We are holding the inner proc lock here so the handler runs in atomic context. Needs to be rvh.",
+      "revId": "aa018214c3239e5606d681b2783c5a040dad0ed3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
