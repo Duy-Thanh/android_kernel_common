@@ -105,6 +105,30 @@
       },
       "revId": "051a7ac3378d467a4c5033bf1389be93a0796081",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "508dba14_eb4ffd89",
+        "filename": "drivers/staging/android/debug_kinfo.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1275292
+      },
+      "writtenOn": "2022-01-06T01:24:19Z",
+      "side": 1,
+      "message": "Yes, it\u0027s bug reading all_info_addr after unmapped.\nMaybe we can remove the unmapping and add one more global flag to prevent build_info setting once again, If it\u0027s ok , I can prepare patch again.",
+      "parentUuid": "0f3f95cb_0fddf0ca",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 23
+      },
+      "revId": "051a7ac3378d467a4c5033bf1389be93a0796081",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
