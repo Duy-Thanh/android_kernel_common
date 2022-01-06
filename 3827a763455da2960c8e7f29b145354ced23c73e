@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f5dd1b4_35af03b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-01-06T17:17:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0a81ceb_e0bccf5c",
+      "range": {
+        "startLine": 7,
+        "startChar": 22,
+        "endLine": 7,
+        "endChar": 60
+      },
+      "revId": "3827a763455da2960c8e7f29b145354ced23c73e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59d6ce3b_fa6280c0",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-01-06T17:04:27Z",
       "side": 1,
       "message": "Do we really need this optimization? I think it would need usecase and data point. How often it happens in some workload and how it would be helpful.",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 72
+      },
+      "revId": "3827a763455da2960c8e7f29b145354ced23c73e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e7bd413_0df7fed1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-01-06T17:17:02Z",
+      "side": 1,
+      "message": "Yes, I see measurable difference for how fast memory is reclaimed when I run lmkd_unit_test to stress memory. Without this one-line change process_mrelease and exit_mmap will block each other, so memory can\u0027t be reclaimed in parallel from both threads. With this change I\u0027m reusing the same mechanisms oom-reaper uses to avoid this issue but mhocko@ rejected my proposal to do this for process_mrelease. I\u0027ll keep looking for an alternative (see discussion in https://lore.kernel.org/all/YbHIaq9a0CtqRulE@dhcp22.suse.cz/)",
+      "parentUuid": "59d6ce3b_fa6280c0",
       "range": {
         "startLine": 9,
         "startChar": 3,
