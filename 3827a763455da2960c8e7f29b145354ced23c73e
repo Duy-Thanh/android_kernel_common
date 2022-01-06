@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0a81ceb_e0bccf5c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-01-06T17:04:27Z",
+      "side": 1,
+      "message": "The title is not good. It should describe the goal rather than the implementation. Maybe \"allow process_mrelease during process exit\"?",
+      "range": {
+        "startLine": 7,
+        "startChar": 22,
+        "endLine": 7,
+        "endChar": 60
+      },
+      "revId": "3827a763455da2960c8e7f29b145354ced23c73e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59d6ce3b_fa6280c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-01-06T17:04:27Z",
+      "side": 1,
+      "message": "Do we really need this optimization? I think it would need usecase and data point. How often it happens in some workload and how it would be helpful.",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 72
+      },
+      "revId": "3827a763455da2960c8e7f29b145354ced23c73e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8da1960c_65a6eed1",
