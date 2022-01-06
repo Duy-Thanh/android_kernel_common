@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b343a6a_3db78bd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-01-06T18:00:22Z",
+      "side": 1,
+      "message": "Currently, we could have this and then replace it with upstream solution later since it\u0027s rather urgent. ",
+      "revId": "e99926fdfa9537d7e5132219332c54538c52de56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
