@@ -23,6 +23,17 @@ DECLARE_HOOK(android_vh_enable_thermal_power_throttle,
 	TP_PROTO(int *enable),
 	TP_ARGS(enable));
 
+<<<<<<< HEAD   (4fa38f ANDROID: GKI: Enable BUILD_GKI_CERTIFICATION_TOOLS)
+=======
+DECLARE_HOOK(android_vh_thermal_power_cap,
+	TP_PROTO(u32 *power_range),
+	TP_ARGS(power_range));
+
+DECLARE_HOOK(android_vh_get_thermal_zone_device,
+	TP_PROTO(struct thermal_zone_device *tz),
+	TP_ARGS(tz));
+
+>>>>>>> CHANGE (c53f0e ANDROID: thermal: Add vendor hook to get thermal zone device)
 #endif /* _TRACE_HOOK_THERMAL_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>

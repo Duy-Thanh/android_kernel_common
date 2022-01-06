@@ -257,7 +257,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_thermal_request_freq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_thermal_target_freq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery_set);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_power_throttle);
+<<<<<<< HEAD   (4fa38f ANDROID: GKI: Enable BUILD_GKI_CERTIFICATION_TOOLS)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_finished);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_rwsem_list_add);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_power_cap);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_get_thermal_zone_device);
+>>>>>>> CHANGE (c53f0e ANDROID: thermal: Add vendor hook to get thermal zone device)
