@@ -34,6 +34,23 @@
       "parentUuid": "ee4cbe9f_3f30a681",
       "revId": "4adb287b1c0808d2ac119032e8e751c5702e774b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "442e3212_0ba5d5eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-01-06T01:17:30Z",
+      "side": 1,
+      "message": "This change makes the probe scan look like drivers/net/wireless/ath/ath9k/channel.c, so I think it\u0027s a good change. I can\u0027t see other patterns elsewhere in that driver, so this should be the only change needed.\n\nCan you update the subject and commit message here to be less Android-specific and explain the problem in generic terms, and what your fix does semantically? Then I can help you with the upstream proces.",
+      "revId": "4adb287b1c0808d2ac119032e8e751c5702e774b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
