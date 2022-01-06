@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8be4603a_7a2f9687",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-06T10:08:53Z",
+      "side": 1,
+      "message": "Also, this changes the functionality of existing users of this function, which is not ok as this is a released kernel.",
+      "revId": "0de5092af147dcc1eb2cd589ad4e92913ca87008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d863bc69_82b1f8c1",
