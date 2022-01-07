@@ -16,6 +16,23 @@
       "message": "please add a reference to the corresponding commit in android12-5.10 (commit id pointing to the gerrit change or patch in LTS).",
       "revId": "f6e6376090be9947858bd25eb96473c7069f7235",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0df01320_b44dc1c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-07T18:31:17Z",
+      "side": 1,
+      "message": "Actually, this patch is not in android12-5.10 at all -- please submit there with the same Change-Id",
+      "revId": "f6e6376090be9947858bd25eb96473c7069f7235",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
