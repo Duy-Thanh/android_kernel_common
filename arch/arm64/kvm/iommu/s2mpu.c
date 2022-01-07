@@ -165,7 +165,8 @@ static int s2mpu_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "failed to parse power-domain-id: %d", ret);
 		return ret;
 	}
-	info->powered = true;
+
+	info->powered = !of_get_property(pdev->dev.of_node, "off-at-boot", NULL);
 
 	/*
 	 * Try to parse IRQ information. This is optional as it only affects
