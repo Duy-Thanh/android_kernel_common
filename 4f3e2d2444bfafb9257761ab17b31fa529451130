@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfd7fb1c_70c2a71f",
+        "filename": "fs/Makefile",
+        "patchSetId": 14
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-07T15:57:25Z",
+      "side": 1,
+      "message": "I think I have a fix for this, will stage it before this patch in a series.  So this patch will change a bit after that as the namespace name will change a bit...",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 12,
+        "endChar": 10
+      },
+      "revId": "4f3e2d2444bfafb9257761ab17b31fa529451130",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
