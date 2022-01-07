@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "697d5374_4c413597",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-07T15:36:09Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common/+/1927388 should allow access for a large number of these symbols by the filesystems that you are using.\n\nPlease rebase this patch on top of that one and let us know if your kernel works properly.",
+      "revId": "9c6c9607779451859248fbb3417fa3f241d9febb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
