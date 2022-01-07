@@ -153,6 +153,30 @@
       },
       "revId": "051a7ac3378d467a4c5033bf1389be93a0796081",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8bc98cb_dbd8732b",
+        "filename": "drivers/staging/android/debug_kinfo.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1334815
+      },
+      "writtenOn": "2022-01-07T02:21:08Z",
+      "side": 1,
+      "message": "At the beginning，not sure if reviewer\u0027s request or not. The reason is that is a last usage after debug_kinfo_probe.\nBut for reset twice concern, we can remove vunmap directly.\n\nif (all_info_addr \u003d\u003d 0 || all_info_size \u003d\u003d 0) is only used to confirm debug_kinfo_probe is done.",
+      "parentUuid": "5c5c3d49_9dc9de18",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 23
+      },
+      "revId": "051a7ac3378d467a4c5033bf1389be93a0796081",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
