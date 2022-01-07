@@ -16,6 +16,24 @@
       "message": "Should we fix this on android11-5.4 as well?",
       "revId": "7d1d5848183bd1d9086d0572f9af431d3ded407f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8f43c1b_b9a2eaa5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2022-01-07T21:17:50Z",
+      "side": 1,
+      "message": "I\u0027m not sure. It probably wouldn\u0027t cause any problems but I suspect this fix isn\u0027t needed for anyone running android11-5.4.",
+      "parentUuid": "bc072817_88cb253f",
+      "revId": "7d1d5848183bd1d9086d0572f9af431d3ded407f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
