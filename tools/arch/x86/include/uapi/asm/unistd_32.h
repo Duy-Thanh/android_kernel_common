@@ -14,3 +14,7 @@
 #ifndef __NR_setns
 # define __NR_setns 346
 #endif
+#ifndef __NR_bpf
+# define __NR_bpf 357
+#endif
+

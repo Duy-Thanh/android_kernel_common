@@ -4,6 +4,7 @@
 #define __SKEL_INTERNAL_H
 
 #include <unistd.h>
+#include <asm/unistd.h>
 #include <sys/syscall.h>
 #include <sys/mman.h>
 
