@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b84cbf5_743a6eab",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 3627,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-07T01:38:49Z",
+      "side": 1,
+      "message": "actually, I was wrong here. It\u0027s ok to call \"vh\" in atomic context. Feel free to move it back (or leave it -- doesn\u0027t matter).",
+      "parentUuid": "553d66f2_14eaf4e1",
+      "revId": "aa018214c3239e5606d681b2783c5a040dad0ed3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89facd7d_152979e1",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "89facd7d_152979e1",
+      "revId": "aa018214c3239e5606d681b2783c5a040dad0ed3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73fd2877_cbd19c8e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 4053,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-07T01:38:49Z",
+      "side": 1,
+      "message": "I was wrong here. It\u0027s ok to call \"vh\" in atomic context. Can you change it back to \"vh\" again? I think the patch will be ready then. Sorry about that.",
+      "parentUuid": "ba1654c1_34b2cf72",
       "revId": "aa018214c3239e5606d681b2783c5a040dad0ed3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

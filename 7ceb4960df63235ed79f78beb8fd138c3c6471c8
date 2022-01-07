@@ -16,6 +16,40 @@
       "message": "fixed！",
       "revId": "7ceb4960df63235ed79f78beb8fd138c3c6471c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b66cbef5_30ab1420",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-07T01:38:49Z",
+      "side": 1,
+      "message": "Sorry about this one -- I gave some incorrect feedback. All the \"rvh\" hooks should be changed back to \"vh\" (its ok to call \"vh\" in atomic context).\n\nRemember to update the commit message for these changes.\n\nI think this will be ready to be merged then.",
+      "revId": "7ceb4960df63235ed79f78beb8fd138c3c6471c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b94d43da_52d7d234",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-07T01:38:49Z",
+      "side": 1,
+      "message": "Sorry about my confusing feedback. I was wrong -- it is ok to use \"vh\" hooks in atomic context so please change this to \"vh\".",
+      "revId": "7ceb4960df63235ed79f78beb8fd138c3c6471c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
