@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51d4274a_246bd3f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-01-07T16:44:27Z",
+      "side": 1,
+      "message": "please add a reference to the corresponding commit in android12-5.10 (commit id pointing to the gerrit change or patch in LTS).",
+      "revId": "f6e6376090be9947858bd25eb96473c7069f7235",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
