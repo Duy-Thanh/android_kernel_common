@@ -1,0 +1,11 @@
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.common
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.aarch64
+
+DEFCONFIG=gki_system_dlkm_defconfig
+
+PRE_DEFCONFIG_CMDS="KCONFIG_CONFIG=${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG} ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/gki_defconfig ${ROOT_DIR}/${KERNEL_DIR}/system_dlkm.fragment"
+
+POST_DEFCONFIG_CMDS="rm ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG}"
+
+BUILD_SYSTEM_DLKM=1
+MODULES_LIST=${ROOT_DIR}/${KERNEL_DIR}/android/gki_aarch64_modules

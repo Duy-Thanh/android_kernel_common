@@ -1,0 +1,6 @@
+# system_dlkm.img related config items
+# Do not append for mixed or base builds
+
+# GKI modules signing support
+CONFIG_MODULE_SIG=y
+CONFIG_MODULE_SIG_PROTECT=y
