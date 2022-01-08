@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "589a29ae_79a501e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2022-01-08T00:49:07Z",
+      "side": 1,
+      "message": "This is a fix needed in order to build successfully with CONFIG_DEBUG_INFO_BTF\u003dy; plan is to send upstream but would welcome any input on if there\u0027s anything I should change first.\n\nWithout the LDFLAGS change, the build tries to use ld instead of lld when building resolve_btfids.\n\nWithout the CFLAGS change, the libbpf dependency and resolve_btfids itself are built using different glibc versions; the newer version used to build libbpf defines fcntl as fcntl64, which is undefined in the older version used to build resolve_btfids.",
+      "revId": "92916f09be84c6196ed7c7fd16890d9a1f8ffef5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
