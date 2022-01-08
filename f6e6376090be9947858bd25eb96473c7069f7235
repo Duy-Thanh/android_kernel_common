@@ -33,6 +33,24 @@
       "message": "Actually, this patch is not in android12-5.10 at all -- please submit there with the same Change-Id",
       "revId": "f6e6376090be9947858bd25eb96473c7069f7235",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11a2dbac_eb7c0aaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1570698
+      },
+      "writtenOn": "2022-01-08T08:49:44Z",
+      "side": 1,
+      "message": "I uploaded to android12-5.10 at aosp/1940872 for the review as well. Thanks.",
+      "parentUuid": "51d4274a_246bd3f2",
+      "revId": "f6e6376090be9947858bd25eb96473c7069f7235",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
