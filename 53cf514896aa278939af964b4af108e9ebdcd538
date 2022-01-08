@@ -16,6 +16,24 @@
       "message": "I will send this upstream, want to get build testing here first.",
       "revId": "53cf514896aa278939af964b4af108e9ebdcd538",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1af2c4b7_73da589a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-08T14:26:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d773e033_d891a1f5",
+      "revId": "53cf514896aa278939af964b4af108e9ebdcd538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
