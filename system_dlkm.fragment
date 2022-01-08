@@ -1,0 +1,5 @@
+# system_dlkm.img related config items
+# Do not append for mixed or base builds
+
+# Enabled build time signing for GKI modules
+CONFIG_MODULE_SIG_ALL=y
