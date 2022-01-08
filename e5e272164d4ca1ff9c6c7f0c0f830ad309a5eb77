@@ -68,6 +68,24 @@
       "message": "Hi, this change has merged to android12-5.10, can we consider this branch now?",
       "revId": "e5e272164d4ca1ff9c6c7f0c0f830ad309a5eb77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f046430_5b121293",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1746283
+      },
+      "writtenOn": "2022-01-08T07:39:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a114210_e57f140a",
+      "revId": "e5e272164d4ca1ff9c6c7f0c0f830ad309a5eb77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
