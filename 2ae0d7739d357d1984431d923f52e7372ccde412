@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cacab22c_c7118087",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2022-01-10T19:29:45Z",
+      "side": 1,
+      "message": "Removing WIP designation since it appears to suppress email notifications, but as noted above I\u0027m posting here to gather any feedback before sending upstream, not to merge as an ACK-only fix",
+      "revId": "2ae0d7739d357d1984431d923f52e7372ccde412",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
