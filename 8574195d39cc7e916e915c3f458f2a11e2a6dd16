@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e9a20ad_7d52db42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-10T11:02:09Z",
+      "side": 1,
+      "message": "please rebase on top of my previously mentioned commit and do a test-build to make sure it still works properly for you.",
+      "revId": "8574195d39cc7e916e915c3f458f2a11e2a6dd16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
