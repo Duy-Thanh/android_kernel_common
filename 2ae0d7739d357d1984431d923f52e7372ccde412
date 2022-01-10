@@ -50,6 +50,24 @@
       "message": "could you just add $(KBUILD_HOSTCFLAGS) to this list here, or must it be added to CFLAGS earlier in the makefile?",
       "revId": "2ae0d7739d357d1984431d923f52e7372ccde412",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e87e74f_df324755",
+        "filename": "tools/bpf/resolve_btfids/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2022-01-10T20:18:45Z",
+      "side": 1,
+      "message": "One way or another it needs to be passed through to the libbpf build to ensure same sysroot is used, I think doing what you describe \u0026 changing line 51 to KBUILD_HOSTCFLAGS would work equally well. I went with the current way just because it groups all the \"redefine to host\" logic together but would have no problem changing it",
+      "parentUuid": "925496f6_e30d2af4",
+      "revId": "2ae0d7739d357d1984431d923f52e7372ccde412",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
