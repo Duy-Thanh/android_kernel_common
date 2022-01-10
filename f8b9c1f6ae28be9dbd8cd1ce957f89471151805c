@@ -16,6 +16,24 @@
       "message": "unnecessary changes ?",
       "revId": "f8b9c1f6ae28be9dbd8cd1ce957f89471151805c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a6a65e7_63a5a2f0",
+        "filename": "drivers/staging/android/debug_kinfo.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1275292
+      },
+      "writtenOn": "2022-01-10T02:59:06Z",
+      "side": 1,
+      "message": "rollback to all_info_addr \u003d\u003d 0 done. all_info_addr is pointer，maybe compare with NULL is more rigorous.a",
+      "parentUuid": "65265e2a_b501fc21",
+      "revId": "f8b9c1f6ae28be9dbd8cd1ce957f89471151805c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
