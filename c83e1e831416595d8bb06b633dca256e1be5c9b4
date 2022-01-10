@@ -34,6 +34,24 @@
       "parentUuid": "37f2e077_963b8016",
       "revId": "c83e1e831416595d8bb06b633dca256e1be5c9b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee1f3d5f_6c4b0d0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2022-01-10T18:02:17Z",
+      "side": 1,
+      "message": "I can reproduce the failure locally when running the command from the build bot.\n\n$ tools/bazel run --verbose_failures //common-modules/virtual-device:virtual_device_x86_64_dist -- --dist_dir\u003d/buildbot/dist_dirs/aosp_kernel-common-android-mainline-linux-kernel_kleaf_virt_x86_64/P28765841 --flat\n\nIf I update build/kleaf/kernel.bzl to use the `b` build, I get further along in the build, but it fails later with a different issue.\n\nPermissionError: [Errno 13] Permission denied: \u0027/buildbot\u0027",
+      "parentUuid": "8b6f5b96_4afa2adb",
+      "revId": "c83e1e831416595d8bb06b633dca256e1be5c9b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
