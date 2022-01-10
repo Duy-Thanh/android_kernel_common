@@ -16,6 +16,40 @@
       "message": "Removing WIP designation since it appears to suppress email notifications, but as noted above I\u0027m posting here to gather any feedback before sending upstream, not to merge as an ACK-only fix",
       "revId": "2ae0d7739d357d1984431d923f52e7372ccde412",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cf24fb4_ed2bd233",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2022-01-10T19:46:34Z",
+      "side": 1,
+      "message": "yes, sorry, tools/ is notoriously separate from Kbuild.",
+      "revId": "2ae0d7739d357d1984431d923f52e7372ccde412",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "925496f6_e30d2af4",
+        "filename": "tools/bpf/resolve_btfids/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2022-01-10T19:46:34Z",
+      "side": 1,
+      "message": "could you just add $(KBUILD_HOSTCFLAGS) to this list here, or must it be added to CFLAGS earlier in the makefile?",
+      "revId": "2ae0d7739d357d1984431d923f52e7372ccde412",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
