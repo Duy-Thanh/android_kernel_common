@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e11f0d5_8f062ca2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1854977
+      },
+      "writtenOn": "2022-01-10T04:09:13Z",
+      "side": 1,
+      "message": "\u003e Commit does not refer to the upstream commit\n\u003e Please add a line like \u0027(cherry picked from commit \u003csha1\u003e)\u0027\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\u003e AyeAye - CL 420075904 android-build.ayeaye-python-dispatcher_20220106.05_p0\n\nPlease fix.\n\ndone",
+      "parentUuid": "e36741a9_54dbf808",
+      "revId": "2a4a2e0cfb01d7075829381ef08ec859df0efe58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
