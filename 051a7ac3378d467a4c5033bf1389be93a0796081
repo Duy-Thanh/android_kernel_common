@@ -201,6 +201,30 @@
       },
       "revId": "051a7ac3378d467a4c5033bf1389be93a0796081",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f4bdfd8_68635501",
+        "filename": "drivers/staging/android/debug_kinfo.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-10T17:15:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77c0ff0b_0818aa04",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 23
+      },
+      "revId": "051a7ac3378d467a4c5033bf1389be93a0796081",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
