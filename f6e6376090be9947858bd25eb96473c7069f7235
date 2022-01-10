@@ -51,6 +51,24 @@
       "parentUuid": "51d4274a_246bd3f2",
       "revId": "f6e6376090be9947858bd25eb96473c7069f7235",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "deb4a38c_b59fb75a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1570698
+      },
+      "writtenOn": "2022-01-10T06:13:27Z",
+      "side": 1,
+      "message": "uploaded to aosp/1940872 for review. Thanks Todd.",
+      "parentUuid": "0df01320_b44dc1c2",
+      "revId": "f6e6376090be9947858bd25eb96473c7069f7235",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
