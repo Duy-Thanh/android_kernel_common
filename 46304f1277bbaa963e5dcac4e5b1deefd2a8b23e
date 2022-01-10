@@ -16,6 +16,24 @@
       "message": "These two patches are not applied yet in this branch. Do I need to do anything else?",
       "revId": "46304f1277bbaa963e5dcac4e5b1deefd2a8b23e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e804a69_6ebbc95b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-01-10T14:59:21Z",
+      "side": 1,
+      "message": "There is a red label at the top left of this page that says \"Merge conflict\". Please rebase and retest these patches and reupload these patches.",
+      "parentUuid": "2405bdbc_014d99a3",
+      "revId": "46304f1277bbaa963e5dcac4e5b1deefd2a8b23e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
