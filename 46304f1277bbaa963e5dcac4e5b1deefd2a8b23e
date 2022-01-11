@@ -70,6 +70,24 @@
       "parentUuid": "f67ed214_42e40225",
       "revId": "46304f1277bbaa963e5dcac4e5b1deefd2a8b23e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c4b59d9_14eec3b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2022-01-11T23:39:57Z",
+      "side": 1,
+      "message": "Rebased again.\nIt might be working time gap between you and me. It was active before I left my office (KST: 9:00 PM). In the meantime, some patches have been merged so the patch head was changed. I\u0027m able to rebase again and again but I feel like a maintainer who can have a rebase permission eventually do this. Thanks.",
+      "parentUuid": "1fa54ca8_5e899162",
+      "revId": "46304f1277bbaa963e5dcac4e5b1deefd2a8b23e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
