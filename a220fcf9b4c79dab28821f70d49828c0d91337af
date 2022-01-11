@@ -22,6 +22,30 @@
       },
       "revId": "a220fcf9b4c79dab28821f70d49828c0d91337af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42f20d22_e072f1ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1275292
+      },
+      "writtenOn": "2022-01-11T08:14:41Z",
+      "side": 1,
+      "message": "update correct format for Signed-off-by",
+      "parentUuid": "2cf1d9a8_fe8e17df",
+      "range": {
+        "startLine": 14,
+        "startChar": 15,
+        "endLine": 14,
+        "endChar": 25
+      },
+      "revId": "a220fcf9b4c79dab28821f70d49828c0d91337af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
