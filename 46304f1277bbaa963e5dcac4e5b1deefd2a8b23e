@@ -52,6 +52,24 @@
       "parentUuid": "8e804a69_6ebbc95b",
       "revId": "46304f1277bbaa963e5dcac4e5b1deefd2a8b23e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fa54ca8_5e899162",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-01-11T18:30:04Z",
+      "side": 1,
+      "message": "Hmm ... I still see \"Merge Conflict\" in the top left corner of https://android-review.googlesource.com/c/kernel/common/+/1891380 ?",
+      "parentUuid": "f67ed214_42e40225",
+      "revId": "46304f1277bbaa963e5dcac4e5b1deefd2a8b23e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
