@@ -8,5 +8,10 @@
         }
       ]
     }
+  ],
+  "imports": [
+    {
+      "path": "tools/tradefederation/core"
+    }
   ]
 }
