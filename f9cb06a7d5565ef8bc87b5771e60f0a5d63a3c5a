@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f6573a9_d7f693c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-01-11T18:20:12Z",
+      "side": 1,
+      "message": "The patch introduces kernel command line option to disable ZONE_DMA32. It\u0027s not upstreamable since upstream will tell us to just disable CONFIG_DMA32 but in GKI we can\u0027t do that because there are partners who still use ZONE_DMA32. Everyone else wants to disable it and this is the way we can do that in GKI. So, this patch is very useful for GKI but not upstreamable even in the future.\nSuggesting to merge it into android-mainline.",
+      "revId": "f9cb06a7d5565ef8bc87b5771e60f0a5d63a3c5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
