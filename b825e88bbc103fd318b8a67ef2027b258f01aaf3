@@ -16,6 +16,24 @@
       "message": "This does not look like a respin request bug ...",
       "revId": "b825e88bbc103fd318b8a67ef2027b258f01aaf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3d874de_fe69a417",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1863114
+      },
+      "writtenOn": "2022-01-11T06:36:43Z",
+      "side": 1,
+      "message": "Bug ID updated, please review again, Thanks~",
+      "parentUuid": "9fcdda60_c9a78773",
+      "revId": "b825e88bbc103fd318b8a67ef2027b258f01aaf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
