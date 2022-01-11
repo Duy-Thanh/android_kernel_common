@@ -16,6 +16,24 @@
       "message": "Can we wait until a final version of this is accepted upstream?",
       "revId": "0eb34a06b49e8471c5ec29e90538f7eef0dc1a20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "427a1dfd_d3fbdacb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-01-11T12:58:56Z",
+      "side": 1,
+      "message": "Sadly, we have an IC deadline on Friday, otherwise I wouldn\u0027t be merging any of these ANDROID patches.\n\nWe will, however, come back and replace these with FROMGIT/UPSTREAM if there are further changes. We just can\u0027t wait for that to happen.",
+      "parentUuid": "1085537b_505d21fd",
+      "revId": "0eb34a06b49e8471c5ec29e90538f7eef0dc1a20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
