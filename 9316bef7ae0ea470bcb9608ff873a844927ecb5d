@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86d96092_a4884620",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-11T11:38:40Z",
+      "side": 1,
+      "message": "getting closer!",
+      "revId": "9316bef7ae0ea470bcb9608ff873a844927ecb5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95798132_1ae6253b",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 15
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-11T11:38:40Z",
+      "side": 1,
+      "message": "these macros are not described anywhere, so putting this in the help text isn\u0027t going to be descriptive to many people.",
+      "range": {
+        "startLine": 81,
+        "startChar": 45,
+        "endLine": 83,
+        "endChar": 30
+      },
+      "revId": "9316bef7ae0ea470bcb9608ff873a844927ecb5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19e7df67_e62ce6ea",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 15
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-11T11:38:40Z",
+      "side": 1,
+      "message": "the option is not disabled automatically, so this is hard to parse.",
+      "range": {
+        "startLine": 85,
+        "startChar": 8,
+        "endLine": 85,
+        "endChar": 26
+      },
+      "revId": "9316bef7ae0ea470bcb9608ff873a844927ecb5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1ee35f1_a310dc6f",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 15
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-11T11:38:40Z",
+      "side": 1,
+      "message": "Now about this for some help text instead:\n\n  This option enables the padding that the Android GKI kernel adds\n  to many different kernel structures to support an in-kernel stable ABI\n  over the lifespan of support for the kernel as well as OEM additional\n  fields that are needed by some of the Android kernel tracepoints.\n\n  Only disable this option if you have a system that needs the Android\n  kernel drivers, but is NOT an Android GKI kernel image and you do NOT\n  use the Android kernel tracepoints.  If disabled it has the possibility\n  to make the kernel static and runtime image slightly smaller but will\n  NOT be supported by the Google Android kernel team.\n\n  If even slightly unsure, say Y.\n  \nDoes that look better and make sense?",
+      "revId": "9316bef7ae0ea470bcb9608ff873a844927ecb5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fc9f91d_c60d79b1",
+        "filename": "kernel/fork.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-11T11:38:40Z",
+      "side": 1,
+      "message": "this is going to be hard to track over time, with other fields that are initialized in different places.\n\nCan we get a common macro for this instead that works off of the define?",
+      "range": {
+        "startLine": 982,
+        "startChar": 0,
+        "endLine": 983,
+        "endChar": 68
+      },
+      "revId": "9316bef7ae0ea470bcb9608ff873a844927ecb5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
