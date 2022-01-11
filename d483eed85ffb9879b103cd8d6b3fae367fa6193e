@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7d1aeff_43dc4caa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-11T16:51:01Z",
+      "side": 1,
+      "message": "Greg, this caused kernelci errors for arm32:\n```\nERROR: modpost: module configfs uses symbol kern_path from namespace VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver, but does not import it.\n```\nCould we limit this to 64-bit builds?\n\nSee https://linux.kernelci.org/build/android/branch/android12-5.10/kernel/ASB-2022-01-05_12-5.10-15-gd483eed85ffb/",
+      "revId": "d483eed85ffb9879b103cd8d6b3fae367fa6193e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
