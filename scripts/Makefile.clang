@@ -35,6 +35,10 @@ endif
 # so they can be implemented or wrapped in cc-option.
 CLANG_FLAGS	+= -Werror=unknown-warning-option
 CLANG_FLAGS	+= -Werror=ignored-optimization-argument
+# XXX: Force hermetic build
+# /dev/null used here because we need some path that should never contain a GCC
+# toolchain.
+CLANG_FLAGS	+= -gcc-toolchain /dev/null
 KBUILD_CFLAGS	+= $(CLANG_FLAGS)
 KBUILD_AFLAGS	+= $(CLANG_FLAGS)
 export CLANG_FLAGS
