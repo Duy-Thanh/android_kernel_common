@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b849432c_ffd98817",
+        "filename": "arch/arm64/kvm/hyp/nvhe/host.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-01-12T11:13:47Z",
+      "side": 1,
+      "message": "hyp_panic() is a C function IIRC, so it\u0027s almost guaranteed to use the stack which is not going to go down well :/\nI\u0027m not sure what is best here, though. At this point we\u0027re in deep troubles and will never recover, so we might as well just reset sp to the beginning of the actual stack page and proceed to hyp_panic()? It\u0027ll corrupt the stack, but oh well we\u0027re doomed anyway ... Alternatively we could allocate \u0027emergency\u0027 stack pages during boot and switch to those at this point? That might give a chance to the unwinder to print a readable backtrace, although we\u0027ll have to teach it how to. Or perhaps we should look at what the kernel does and do something similar here instead of being creative. Thoughts?",
+      "range": {
+        "startLine": 174,
+        "startChar": 1,
+        "endLine": 174,
+        "endChar": 12
+      },
+      "revId": "1d2e654bda0f6f6e6b1e9f898c3ab2556e0e993f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
