@@ -16,6 +16,24 @@
       "message": "Hi, I need this patch to be merged to android-mainline.\nWhy was it not merged? Could you initiate it again?",
       "revId": "b6ba9482f17cb74725fe5a49ef7e0abbbf7b0128",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41abf0d1_7b681b30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-12T00:51:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6ab3142_c2a7a3a1",
+      "revId": "b6ba9482f17cb74725fe5a49ef7e0abbbf7b0128",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
