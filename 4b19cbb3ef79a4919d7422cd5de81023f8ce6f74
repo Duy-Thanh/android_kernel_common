@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e84db725_8bc81120",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-12T08:05:13Z",
+      "side": 1,
+      "message": "so close!",
+      "revId": "4b19cbb3ef79a4919d7422cd5de81023f8ce6f74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d90265ff_84744837",
+        "filename": "include/linux/android_vendor.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-12T08:05:13Z",
+      "side": 1,
+      "message": "minor naming nit, noun goes first for global functions to make it easier to see/sort/search in a global namespace.\n\nSo this should be android_init_vendor_data() and android_init_oem_data()",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 32
+      },
+      "revId": "4b19cbb3ef79a4919d7422cd5de81023f8ce6f74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
