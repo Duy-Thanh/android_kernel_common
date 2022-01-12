@@ -107,6 +107,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de4ba2c2_170b831e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-12T12:29:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fed7d1b_7365e9b7",
+      "revId": "a57cfa9405b0caa40ce0c28d5597f7eb07ddaa25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a69a121a_277f1a74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-12T12:29:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f79811c2_6bb1207d",
+      "revId": "a57cfa9405b0caa40ce0c28d5597f7eb07ddaa25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17cbd9c7_eee4b068",
@@ -192,6 +228,30 @@
       "side": 1,
       "message": "Your platform should NOT be using the ion code outside of an Android system, so this should still be depending on CONFIG_ANDROID.\n\nRemember that ion code is gone from upstream, and not supported at all, please use dma-buf instead.",
       "parentUuid": "0d910550_cd56e9c1",
+      "range": {
+        "startLine": 617,
+        "startChar": 7,
+        "endLine": 617,
+        "endChar": 24
+      },
+      "revId": "a57cfa9405b0caa40ce0c28d5597f7eb07ddaa25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b8fb53_e1db7f78",
+        "filename": "arch/Kconfig",
+        "patchSetId": 7
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-12T12:29:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68601a82_c83f9e79",
       "range": {
         "startLine": 617,
         "startChar": 7,
