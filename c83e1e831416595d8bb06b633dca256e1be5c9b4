@@ -70,6 +70,24 @@
       "parentUuid": "ee1f3d5f_6c4b0d0b",
       "revId": "c83e1e831416595d8bb06b633dca256e1be5c9b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a82e2ff6_673562cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-01-12T10:21:44Z",
+      "side": 1,
+      "message": "This is now resolved by an update in kernel/build: https://r.android.com/q/topic:kleaf-clang-default",
+      "parentUuid": "8b184176_f119049e",
+      "revId": "c83e1e831416595d8bb06b633dca256e1be5c9b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
