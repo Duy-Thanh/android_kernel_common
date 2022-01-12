@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e425bc4_ba4320cb",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 15
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1927881
+      },
+      "writtenOn": "2022-01-12T07:02:27Z",
+      "side": 1,
+      "message": "Will remove these in new patch set.",
+      "parentUuid": "95798132_1ae6253b",
+      "range": {
+        "startLine": 81,
+        "startChar": 45,
+        "endLine": 83,
+        "endChar": 30
+      },
+      "revId": "9316bef7ae0ea470bcb9608ff873a844927ecb5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19e7df67_e62ce6ea",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-01-11T11:38:40Z",
       "side": 1,
       "message": "the option is not disabled automatically, so this is hard to parse.",
+      "range": {
+        "startLine": 85,
+        "startChar": 8,
+        "endLine": 85,
+        "endChar": 26
+      },
+      "revId": "9316bef7ae0ea470bcb9608ff873a844927ecb5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f61a44f1_c102a74c",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 15
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1927881
+      },
+      "writtenOn": "2022-01-12T07:02:27Z",
+      "side": 1,
+      "message": "got it, will remove these on new patch set.",
+      "parentUuid": "19e7df67_e62ce6ea",
       "range": {
         "startLine": 85,
         "startChar": 8,
@@ -81,6 +129,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "266d8066_f3363a23",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 15
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1927881
+      },
+      "writtenOn": "2022-01-12T07:02:27Z",
+      "side": 1,
+      "message": "yes, thanks for the advice, will update in new patch set.",
+      "parentUuid": "c1ee35f1_a310dc6f",
+      "revId": "9316bef7ae0ea470bcb9608ff873a844927ecb5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3fc9f91d_c60d79b1",
@@ -94,6 +160,30 @@
       "writtenOn": "2022-01-11T11:38:40Z",
       "side": 1,
       "message": "this is going to be hard to track over time, with other fields that are initialized in different places.\n\nCan we get a common macro for this instead that works off of the define?",
+      "range": {
+        "startLine": 982,
+        "startChar": 0,
+        "endLine": 983,
+        "endChar": 68
+      },
+      "revId": "9316bef7ae0ea470bcb9608ff873a844927ecb5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97d962b1_184e36fe",
+        "filename": "kernel/fork.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 1927881
+      },
+      "writtenOn": "2022-01-12T07:02:27Z",
+      "side": 1,
+      "message": "do you mean to put above codes into one macro which checks CONFIG_ANDROID_STRUCT_PADDING and then call the macro here? I will update in new patch set.",
+      "parentUuid": "3fc9f91d_c60d79b1",
       "range": {
         "startLine": 982,
         "startChar": 0,
