@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93505a85_5ac7fbf4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-12T21:53:56Z",
+      "side": 1,
+      "message": "Patches were merged to allow filesystem modules by namespacing fs-related exports to avoid use by drivers.",
+      "parentUuid": "7d74c0ae_134b554a",
+      "revId": "b9a5e1cc21ae925e1a3257a418af0ab4da6cbea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43e73136_696f966b",
@@ -132,6 +150,30 @@
       "side": 1,
       "message": "Drivers should never be reading/writing directly to files.",
       "parentUuid": "90853241_3491e123",
+      "range": {
+        "startLine": 74,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 9
+      },
+      "revId": "b9a5e1cc21ae925e1a3257a418af0ab4da6cbea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9df73d53_07a9f0f4",
+        "filename": "android/abi_gki_aarch64_asus",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-12T21:53:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdc52c4c_a17fa280",
       "range": {
         "startLine": 74,
         "startChar": 1,
