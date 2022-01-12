@@ -1923,6 +1923,8 @@
   __traceiter_android_vh_clear_mask_adjust
   __traceiter_android_vh_clear_reserved_fmt_fields
   __traceiter_android_vh_commit_creds
+  __traceiter_android_vh_dmabuf_alloc
+  __traceiter_android_vh_dmabuf_free
   __traceiter_android_vh_em_cpu_energy
   __traceiter_android_vh_exit_creds
   __traceiter_android_vh_fill_ext_fmtdesc
@@ -2003,6 +2005,8 @@
   __tracepoint_android_vh_clear_mask_adjust
   __tracepoint_android_vh_clear_reserved_fmt_fields
   __tracepoint_android_vh_commit_creds
+  __tracepoint_android_vh_dmabuf_alloc
+  __tracepoint_android_vh_dmabuf_free
   __tracepoint_android_vh_em_cpu_energy
   __tracepoint_android_vh_exit_creds
   __tracepoint_android_vh_fill_ext_fmtdesc
