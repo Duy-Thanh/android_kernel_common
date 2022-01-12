@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bac1e159_4bc4fea3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-01-12T17:10:40Z",
+      "side": 1,
+      "message": "bypass-presubmit +1 since apparently some cuttlefish tests are broken (the cuttlefish tests do not use the UFS driver).",
+      "revId": "3e91454261ce5a4533bcf741a0b43ce0ed291e1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
