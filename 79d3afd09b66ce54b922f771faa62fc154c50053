@@ -16,6 +16,29 @@
       "message": "Nice!  Let\u0027s let TH run on it...",
       "revId": "79d3afd09b66ce54b922f771faa62fc154c50053",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27f19020_ef3a819d",
+        "filename": "include/linux/android_vendor.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-12T08:37:50Z",
+      "side": 1,
+      "message": "checkpatch complains about these lines being too long, please break them up at 80 columns if possible.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 111
+      },
+      "revId": "79d3afd09b66ce54b922f771faa62fc154c50053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
