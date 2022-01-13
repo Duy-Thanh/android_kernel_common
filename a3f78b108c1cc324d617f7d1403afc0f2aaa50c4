@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c3d5cc0_d67d8114",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-13T11:02:56Z",
+      "side": 1,
+      "message": "No changes other than LTS merges go into this branch.\n\nThis branch merges with android12-5.10 on a weekly basis (or should, over the break it was slower), so it will pick up the change then.",
+      "revId": "a3f78b108c1cc324d617f7d1403afc0f2aaa50c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
