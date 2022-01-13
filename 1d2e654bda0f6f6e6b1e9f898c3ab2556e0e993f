@@ -22,6 +22,30 @@
       },
       "revId": "1d2e654bda0f6f6e6b1e9f898c3ab2556e0e993f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e711407b_de0987e0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/host.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2022-01-13T04:33:30Z",
+      "side": 1,
+      "message": "The kernel switches to an overflow stack to handle this case. I agree, would be good if we can align with that.",
+      "parentUuid": "b849432c_ffd98817",
+      "range": {
+        "startLine": 174,
+        "startChar": 1,
+        "endLine": 174,
+        "endChar": 12
+      },
+      "revId": "1d2e654bda0f6f6e6b1e9f898c3ab2556e0e993f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
