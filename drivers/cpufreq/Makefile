@@ -20,7 +20,13 @@ obj-$(CONFIG_CPU_FREQ_GOV_ATTR_SET)	+= cpufreq_governor_attr_set.o
 obj-$(CONFIG_CPUFREQ_DT)		+= cpufreq-dt.o
 obj-$(CONFIG_CPUFREQ_DT_PLATDEV)	+= cpufreq-dt-platdev.o
 
+<<<<<<< HEAD   (3185b4 Merge bca21755b9fc ("Merge tag 'acpi-5.17-rc1' of git://git.)
 obj-$(CONFIG_CPUFREQ_DUMMY)		+= dummy-cpufreq.o
+=======
+# Traces
+CFLAGS_amd-pstate-trace.o               := -I$(src)
+amd_pstate-y				:= amd-pstate.o amd-pstate-trace.o
+>>>>>>> BRANCH (b35b6d Merge tag 'pm-5.17-rc1' of git://git.kernel.org/pub/scm/linu)
 
 ##################################################################################
 # x86 drivers.
@@ -30,6 +36,7 @@ obj-$(CONFIG_CPUFREQ_DUMMY)		+= dummy-cpufreq.o
 # speedstep-* is preferred over p4-clockmod.
 
 obj-$(CONFIG_X86_ACPI_CPUFREQ)		+= acpi-cpufreq.o
+obj-$(CONFIG_X86_AMD_PSTATE)		+= amd_pstate.o
 obj-$(CONFIG_X86_POWERNOW_K8)		+= powernow-k8.o
 obj-$(CONFIG_X86_PCC_CPUFREQ)		+= pcc-cpufreq.o
 obj-$(CONFIG_X86_POWERNOW_K6)		+= powernow-k6.o
