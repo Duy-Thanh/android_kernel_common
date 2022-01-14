@@ -6,7 +6,11 @@
 #include <linux/module.h>
 #include <linux/compiler.h>
 #include <linux/fs.h>
+<<<<<<< HEAD   (9bd5a1 Merge 42a7b4ed45e7 ("Merge tag 'for-5.17/io_uring-2022-01-11)
 #include <linux/fscrypt.h>
+=======
+#include <linux/pagemap.h>
+>>>>>>> BRANCH (d3c810 Merge tag 'for-5.17/block-2022-01-11' of git://git.kernel.dk)
 #include <linux/iomap.h>
 #include <linux/backing-dev.h>
 #include <linux/uio.h>
