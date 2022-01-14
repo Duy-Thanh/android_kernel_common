@@ -894,6 +894,7 @@
   freq_qos_add_notifier
   freq_qos_add_request
   freq_qos_remove_request
+  freq_qos_remove_notifier
   freq_qos_update_request
   freq_scale
   fs_bio_set
