@@ -16,6 +16,24 @@
       "message": "please rebase on top of my previously mentioned commit and do a test-build to make sure it still works properly for you.",
       "revId": "8574195d39cc7e916e915c3f458f2a11e2a6dd16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe2c6464_918ca71b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1929712
+      },
+      "writtenOn": "2022-01-14T02:34:07Z",
+      "side": 1,
+      "message": "We do a local test-build and it normally works.",
+      "parentUuid": "7e9a20ad_7d52db42",
+      "revId": "8574195d39cc7e916e915c3f458f2a11e2a6dd16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
