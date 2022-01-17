@@ -65,6 +65,7 @@ static __u8 *holtek_mouse_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 static int holtek_mouse_probe(struct hid_device *hdev,
 			      const struct hid_device_id *id)
 {
+<<<<<<< HEAD   (7dd0d2 Merge 5.10.92 into android12-5.10-lts)
 	int ret;
 
 	if (!hid_is_usb(hdev))
@@ -82,6 +83,10 @@ static int holtek_mouse_probe(struct hid_device *hdev,
 		return ret;
 	}
 
+=======
+	if (!hid_is_usb(hdev))
+		return -EINVAL;
+>>>>>>> BRANCH (2c152a UPSTREAM: f2fs: reduce the scope of setting fsck tag when de)
 	return 0;
 }
 
