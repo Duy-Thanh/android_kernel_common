@@ -1799,6 +1799,10 @@ static void __exit zonefs_exit(void)
 MODULE_AUTHOR("Damien Le Moal");
 MODULE_DESCRIPTION("Zone file system for zoned block devices");
 MODULE_LICENSE("GPL");
+<<<<<<< HEAD   (7dd0d2 Merge 5.10.92 into android12-5.10-lts)
 MODULE_ALIAS_FS("zonefs");
+=======
+MODULE_IMPORT_NS(ANDROID_GKI_VFS_EXPORT_ONLY);
+>>>>>>> BRANCH (2c152a UPSTREAM: f2fs: reduce the scope of setting fsck tag when de)
 module_init(zonefs_init);
 module_exit(zonefs_exit);
