@@ -16,6 +16,24 @@
       "message": "Merge conflict.\n\nAlso, those Bug fix mentions need to be on a line each.",
       "revId": "c2196a3c9a839bd7e04c0fead28a329edb0e0758",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0d93270_a4e4e814",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1899961
+      },
+      "writtenOn": "2022-01-18T18:08:54Z",
+      "side": 1,
+      "message": "That was based on a wrong (android12-5.10) branch. I will need to create a new set of reviews based on android-mainline.\nI have also addressed the Bug tag comments in the new set.",
+      "parentUuid": "710d6d30_2f63d0d0",
+      "revId": "c2196a3c9a839bd7e04c0fead28a329edb0e0758",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
