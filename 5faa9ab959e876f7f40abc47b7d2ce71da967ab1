@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8939d8b8_25f2b8c7",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2022-01-19T18:24:57Z",
+      "side": 1,
+      "message": "This is static but it should not be. (It\u0027s declared non-static in ion.h)\nThere has been some back and forth between static and non-static in this history of this file, and this patch must have come from a time when the function was declared static.",
+      "revId": "5faa9ab959e876f7f40abc47b7d2ce71da967ab1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
