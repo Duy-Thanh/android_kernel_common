@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b21be3cd_7238b8e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-01-19T21:50:37Z",
+      "side": 1,
+      "message": "Please see the comment. The backport is incorrect since it can introduce lru_cache_enable/lru_cache_disable imbalance.",
+      "revId": "6063491003c5234711c64cc8d0cba99e27e58c8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5ae932a_ef5e5550",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-01-19T21:50:37Z",
+      "side": 1,
+      "message": "These gotos will result in lru_cache_enable() being called without prior lru_cache_disable() call.",
+      "range": {
+        "startLine": 1533,
+        "startChar": 7,
+        "endLine": 1533,
+        "endChar": 21
+      },
+      "revId": "6063491003c5234711c64cc8d0cba99e27e58c8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
