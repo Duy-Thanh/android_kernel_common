@@ -165,9 +165,11 @@ struct tipc_shared_handle {
 	struct rb_node node;
 	struct tipc_shm tipc;
 	struct tipc_virtio_dev *vds;
-	struct sg_table *sgt;
-	struct dma_buf_attachment *attach;
 	struct dma_buf *dma_buf;
+	bool dma_buf_owns_ffa_handle;
+	/* Following fields are only used if dma_buf_owns_ffa_handle is false */
+	struct dma_buf_attachment *attach;
+	struct sg_table *sgt;
 	bool shared;
 };
 
@@ -649,6 +651,7 @@ static int tipc_shared_handle_drop(struct tipc_shared_handle *shared_handle)
 					 shared_handle->sgt, DMA_BIDIRECTIONAL);
 	if (shared_handle->attach)
 		dma_buf_detach(shared_handle->dma_buf, shared_handle->attach);
+
 	if (shared_handle->dma_buf)
 		dma_buf_put(shared_handle->dma_buf);
 
@@ -1112,6 +1115,7 @@ static int dn_share_fd(struct tipc_dn_chan *dn, int fd,
 	bool writable = false;
 	pgprot_t prot;
 	u64 tag = 0;
+	u64 ffa_handle;
 
 	if (dn->state != TIPC_CONNECTED) {
 		dev_dbg(dev, "Tried to share fd while not connected\n");
@@ -1147,6 +1151,21 @@ static int dn_share_fd(struct tipc_dn_chan *dn, int fd,
 		goto cleanup_handle;
 	}
 
+	tag = trusty_dma_buf_get_ffa_tag(shared_handle->dma_buf);
+	ret = trusty_dma_buf_get_ffa_handle(shared_handle->dma_buf,
+					    &ffa_handle);
+	if (ret) {
+		dev_dbg(dev, "Unable to get FF-A handle (%d)\n", ret);
+		goto cleanup_handle;
+	}
+
+	if (ffa_handle != TRUSTY_INVALID_FFA_HANDLE) {
+		/* Use FF-A handle owned by dma_buf */
+		shared_handle->tipc.obj_id = ffa_handle;
+		shared_handle->dma_buf_owns_ffa_handle = true;
+		goto out;
+	}
+
 	shared_handle->attach = dma_buf_attach(shared_handle->dma_buf, dev);
 	if (IS_ERR(shared_handle->attach)) {
 		ret = PTR_ERR(shared_handle->attach);
@@ -1164,8 +1183,6 @@ static int dn_share_fd(struct tipc_dn_chan *dn, int fd,
 		goto cleanup_handle;
 	}
 
-	tag = trusty_dma_buf_get_ffa_tag(shared_handle->dma_buf);
-
 	ret = trusty_transfer_memory(tipc_shared_handle_dev(shared_handle),
 				     &shared_handle->tipc.obj_id,
 				     shared_handle->sgt->sgl,
@@ -1181,6 +1198,8 @@ static int dn_share_fd(struct tipc_dn_chan *dn, int fd,
 		goto cleanup_handle;
 	}
 	shared_handle->shared = true;
+
+out:
 	shared_handle->tipc.size = shared_handle->dma_buf->size;
 	shared_handle->tipc.tag = tag;
 	*out = shared_handle;
