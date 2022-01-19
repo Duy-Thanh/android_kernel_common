@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41cfd74b_0ba5ba5c",
+        "filename": "include/trace/hooks/remoteproc.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-01-19T00:12:07Z",
+      "side": 1,
+      "message": "This is no longer needed and should be removed (along with the #if at line 15).",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 6
+      },
+      "revId": "79f80a21773421b3e519b74925ea0dc0524b6a84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
