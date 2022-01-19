@@ -16,6 +16,24 @@
       "message": "add a Fixes: tag?\n\nWhy was this dropped from the original commit?",
       "revId": "5e499aa4093eb57a4d39b5876db60346d4d63a2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41d4167d_c3ff6c64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1767641
+      },
+      "writtenOn": "2022-01-19T08:15:47Z",
+      "side": 1,
+      "message": "Add Fixes:.\n\nI have no idea... I think this should ask Sami\u003csamitolvanen@google.com\u003e\nwho submitted this commit 2e39b40dd2180",
+      "parentUuid": "aa46bbd1_f6a27bd5",
+      "revId": "5e499aa4093eb57a4d39b5876db60346d4d63a2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
