@@ -111,6 +111,15 @@ config TRUSTY_CRASH_IS_PANIC
 	 If N, it will contine to run the kernel, but trusty operations will
 	 return errors.
 
+config TRUSTY_DMA_HEAP
+	tristate "Trusty DMA heap"
+	help
+	  Enable Trusty DMA heap used for testing. DMA buffers allocated from
+	  this heap are pre-shared with Trusty before being returned to the
+	  client.
+
+	  If you build this as a module, it will be called trusty-dma-heap.
+
 endif # TRUSTY
 
 endmenu
