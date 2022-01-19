@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94be0254_1be4a8fa",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2022-01-19T21:40:22Z",
+      "side": 1,
+      "message": "user_ion_free_nolock in the next patches needs this not to be static.",
+      "revId": "e0fe68d35c10cd8ebc162c8167c6d7e57a9c591b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
