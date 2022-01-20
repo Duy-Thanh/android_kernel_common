@@ -34,6 +34,24 @@
       "parentUuid": "94be0254_1be4a8fa",
       "revId": "e0fe68d35c10cd8ebc162c8167c6d7e57a9c591b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba12ebf4_bb535aa2",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2022-01-20T08:22:11Z",
+      "side": 1,
+      "message": "Are you just quoting the build failures? :)",
+      "parentUuid": "4ecf3414_1ca5a5e2",
+      "revId": "e0fe68d35c10cd8ebc162c8167c6d7e57a9c591b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
