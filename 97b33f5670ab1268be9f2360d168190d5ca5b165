@@ -16,6 +16,24 @@
       "message": "I think this opens a window for a speculative ATS1 to kick in and ruin the day: we now have a vcpu with its MMU on, and potential invalid S1 PTs (MMU was probably off for a reason).\n\nI think setting EPD{0,1} *before* enabling the MMU takes care of it.",
       "revId": "97b33f5670ab1268be9f2360d168190d5ca5b165",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35e9fd77_bd7439ec",
+        "filename": "arch/arm64/kvm/hyp/nvhe/tlb.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-01-21T16:48:10Z",
+      "side": 1,
+      "message": "Well spotted, yes, I agree! I think that also means I need to restore the SCTLR before the TCR on the exit() path as well.",
+      "parentUuid": "55baa689_94cfe0c1",
+      "revId": "97b33f5670ab1268be9f2360d168190d5ca5b165",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
