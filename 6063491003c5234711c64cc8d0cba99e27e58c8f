@@ -39,6 +39,30 @@
       },
       "revId": "6063491003c5234711c64cc8d0cba99e27e58c8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f447be74_e90f3794",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2022-01-21T00:44:37Z",
+      "side": 1,
+      "message": "Thanks, missed these earlier gotos. Added a separate label for the case below to avoid the potential imbalance.",
+      "parentUuid": "d5ae932a_ef5e5550",
+      "range": {
+        "startLine": 1533,
+        "startChar": 7,
+        "endLine": 1533,
+        "endChar": 21
+      },
+      "revId": "6063491003c5234711c64cc8d0cba99e27e58c8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
