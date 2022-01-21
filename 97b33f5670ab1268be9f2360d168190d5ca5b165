@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55baa689_94cfe0c1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/tlb.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2022-01-21T16:16:27Z",
+      "side": 1,
+      "message": "I think this opens a window for a speculative ATS1 to kick in and ruin the day: we now have a vcpu with its MMU on, and potential invalid S1 PTs (MMU was probably off for a reason).\n\nI think setting EPD{0,1} *before* enabling the MMU takes care of it.",
+      "revId": "97b33f5670ab1268be9f2360d168190d5ca5b165",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
