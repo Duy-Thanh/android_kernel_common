@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d02b121a_e57322fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-22T11:38:00Z",
+      "side": 1,
+      "message": "Please do a check for the needed library on the system so that this is not disabled for all developers using this tree.  Don\u0027t just hard-code this.\n\nBut overall, this is odd, upstream should take a patch to make this dynamic, it should not be failing if this optional module is not installed.",
+      "revId": "cf4df2ed0d9e5a178e19360ed3920fa9c95834b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
