@@ -34,6 +34,23 @@
       "parentUuid": "d02b121a_e57322fa",
       "revId": "cf4df2ed0d9e5a178e19360ed3920fa9c95834b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50980208_b57d0d20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-22T15:39:37Z",
+      "side": 1,
+      "message": "Wait, what is the problem here?  I see a traceback when the module is not present, but then checkpatch returns with no error.  What is thinking that the module traceback is a real error?",
+      "revId": "cf4df2ed0d9e5a178e19360ed3920fa9c95834b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
