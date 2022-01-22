@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "610572b7_f372f7ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-22T11:38:56Z",
+      "side": 1,
+      "message": "Upstream first?\n\nAlso note that the changelog commit references 5.5, while this is 5.10, so something went wrong upstream...",
+      "revId": "dcbba02dfbd7046ee9eb674fe6c36948257055b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
