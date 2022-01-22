@@ -51,6 +51,24 @@
       "message": "Wait, what is the problem here?  I see a traceback when the module is not present, but then checkpatch returns with no error.  What is thinking that the module traceback is a real error?",
       "revId": "cf4df2ed0d9e5a178e19360ed3920fa9c95834b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0796b8b_bf418f11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2022-01-22T18:05:00Z",
+      "side": 1,
+      "message": "You are right. It turns out that the ImportError is actually just a warning, and the \"WARNING:NO_AUTHOR_SIGN_OFF\" message I observed it with is actually an error.\n\nThe sequence of events was:\nObserve checkpatch failure at presubmit.\nLocally amend commit to fix NO_AUTHOR_SIGN_OFF.\nObserve ImportError is still present on local build. (assume this would still fail the presubmit build)\nDisable SPDX checker and observe no ImportError.\n\nThe error is because any non-ignored type (even warnings) found by checkpatch.pl result in a non-zero return code.\nhttps://github.com/torvalds/linux/blob/1c52283265a462a100ae63ddf58b4e5884acde86/scripts/checkpatch.pl#L2440\n($clean is the return value of the process function, which controls the exit code)\n\nI\u0027ve verified this is the case by rerunning presubmit on the originally failing build after resolving the NO_AUTHOR_SIGN_OFF warning. The ImportError is still in the logs, but the build passes. I\u0027ll abandon this change. Sorry.",
+      "parentUuid": "50980208_b57d0d20",
+      "revId": "cf4df2ed0d9e5a178e19360ed3920fa9c95834b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
