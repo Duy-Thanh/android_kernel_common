@@ -250,6 +250,7 @@ int pm_wake_lock(const char *buf)
 	mutex_unlock(&wakelocks_lock);
 	return ret;
 }
+EXPORT_SYMBOL(pm_wake_lock);
 
 int pm_wake_unlock(const char *buf)
 {
@@ -286,3 +287,4 @@ int pm_wake_unlock(const char *buf)
 	mutex_unlock(&wakelocks_lock);
 	return ret;
 }
+EXPORT_SYMBOL(pm_wake_unlock);

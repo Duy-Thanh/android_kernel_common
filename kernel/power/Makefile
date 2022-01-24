@@ -19,3 +19,4 @@ obj-$(CONFIG_PM_SLEEP)		+= wakeup_reason.o
 obj-$(CONFIG_MAGIC_SYSRQ)	+= poweroff.o
 
 obj-$(CONFIG_ENERGY_MODEL)	+= energy_model.o
+obj-m += wakeup_reason_test.o
