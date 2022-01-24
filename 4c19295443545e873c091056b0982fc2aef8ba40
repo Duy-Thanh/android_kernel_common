@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a6db417_90d2f968",
+        "filename": "arch/arm64/kvm/hyp/nvhe/tlb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-01-24T10:40:38Z",
+      "side": 1,
+      "message": "Just trying to fill a knowledge gap: what would happen if it wasn\u0027t?",
+      "range": {
+        "startLine": 67,
+        "startChar": 3,
+        "endLine": 67,
+        "endChar": 43
+      },
+      "revId": "4c19295443545e873c091056b0982fc2aef8ba40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
