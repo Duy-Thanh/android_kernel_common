@@ -27,7 +27,7 @@
 
 static DEFINE_SPINLOCK(wakeup_reason_lock);
 
-static bool capture_reasons;
+static bool capture_reasons = true;
 static char wakeup_reason_str[MAX_WAKEUP_REASON_STR_LEN];
 
 ssize_t log_ws_wakeup_reason(void)
