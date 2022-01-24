@@ -22,6 +22,30 @@
       },
       "revId": "4c19295443545e873c091056b0982fc2aef8ba40",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57f87690_ec0af67c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/tlb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-01-24T11:51:18Z",
+      "side": 1,
+      "message": "In theory, you could load the TLB with identity-mapped entries from the host stage-1 but using the guest VMID, as the EPDx bits don\u0027t prevent a S1 \"walk\" in this case. We could avoid this by switching the SCTLR for the host as we do for guests, but it didn\u0027t seem worth the overhead to me as driving KVM with the MMU off feels pretty unlikely and the nature of the possible corruption is uncontrolled.",
+      "parentUuid": "0a6db417_90d2f968",
+      "range": {
+        "startLine": 67,
+        "startChar": 3,
+        "endLine": 67,
+        "endChar": 43
+      },
+      "revId": "4c19295443545e873c091056b0982fc2aef8ba40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
