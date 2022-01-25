@@ -22,6 +22,30 @@
       },
       "revId": "79f80a21773421b3e519b74925ea0dc0524b6a84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc29526d_e5170488",
+        "filename": "include/trace/hooks/remoteproc.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1931330
+      },
+      "writtenOn": "2022-01-25T18:10:56Z",
+      "side": 1,
+      "message": "Removed in patchset #3",
+      "parentUuid": "41cfd74b_0ba5ba5c",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 6
+      },
+      "revId": "79f80a21773421b3e519b74925ea0dc0524b6a84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
