@@ -16,6 +16,24 @@
       "message": "should all have the same Change-Id across all branches.",
       "revId": "f0004f910b0de6f63c583ce3e476d27a64e77f2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82e798c5_217ca77c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1547421
+      },
+      "writtenOn": "2022-01-25T16:14:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d410d048_fcd5a23b",
+      "revId": "f0004f910b0de6f63c583ce3e476d27a64e77f2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
