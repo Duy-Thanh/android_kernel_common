@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f59bcb8_45795180",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-25T11:37:22Z",
+      "side": 1,
+      "message": "cleaner than the original patch, but needs a bit of work.",
+      "revId": "6eaa52dcf12d5dd35e299d8dd40e06f411c03742",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a1acc36_795aa5b8",
+        "filename": "kernel/power/main.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-25T11:37:22Z",
+      "side": 1,
+      "message": "please document this new sysfs file in Documentation/ABI/",
+      "range": {
+        "startLine": 750,
+        "startChar": 0,
+        "endLine": 750,
+        "endChar": 34
+      },
+      "revId": "6eaa52dcf12d5dd35e299d8dd40e06f411c03742",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a7dddac_d52ac161",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-25T11:37:22Z",
+      "side": 1,
+      "message": "sysfs_emit() handles all of this logic.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 54
+      },
+      "revId": "6eaa52dcf12d5dd35e299d8dd40e06f411c03742",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de970989_3d3482b0",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-25T11:37:22Z",
+      "side": 1,
+      "message": "debugging code?",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 54
+      },
+      "revId": "6eaa52dcf12d5dd35e299d8dd40e06f411c03742",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7760b834_4f1051a5",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-25T11:37:22Z",
+      "side": 1,
+      "message": "just return an error here, no need to do a goto.",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 12
+      },
+      "revId": "6eaa52dcf12d5dd35e299d8dd40e06f411c03742",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
