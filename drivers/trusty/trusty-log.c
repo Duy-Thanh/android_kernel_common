@@ -30,16 +30,6 @@
 #define TRUSTY_LOG_SIZE (PAGE_SIZE * 5)
 #define TRUSTY_LINE_BUFFER_SIZE 256
 
-/*
- * If we log too much and a UART or other slow source is connected, we can stall
- * out another thread which is doing printk.
- *
- * Trusty crash logs are currently ~16 lines, so 100 should include context and
- * the crash most of the time.
- */
-static struct ratelimit_state trusty_log_rate_limit =
-	RATELIMIT_STATE_INIT("trusty_log", 1 * HZ, 100);
-
 /**
  * struct trusty_log_sfile - trusty log misc device state
  *
@@ -262,8 +252,7 @@ static void trusty_log_show(struct trusty_log_state *s,
 		seq_printf(sink->sfile, "%s", s->line_buffer);
 		sink->last_successful_next = sink->get;
 	} else {
-		if (sink->trusty_panicked ||
-		    __ratelimit(&trusty_log_rate_limit)) {
+		if (sink->trusty_panicked) {
 			dev_info(s->dev, "%s", s->line_buffer);
 			/* next line after last successful get */
 			sink->last_successful_next = sink->get;
