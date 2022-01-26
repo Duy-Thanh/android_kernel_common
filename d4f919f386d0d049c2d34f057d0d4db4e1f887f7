@@ -292,6 +292,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0401b03a_15f90656",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T05:16:24Z",
+      "side": 1,
+      "message": "OK. In that case it can\u0027t be set at anytime, but the handler could still handle any value passed in to the kernel or module. You don\u0027t need to make this read-only though even if it has no effect until the next time you bind the device?",
+      "parentUuid": "f0caa2ee_7fefbc9d",
+      "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb7dfe5b_45d28804",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 3
