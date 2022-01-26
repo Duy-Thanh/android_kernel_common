@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c5e70fd_a6441652",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T01:49:59Z",
+      "side": 1,
+      "message": "TRUSTY_LOG_DEFAULT_NUM_PAGES (or remove TRUSTY_LOG_DEFAULT_NUM_PAGES)",
+      "range": {
+        "startLine": 44,
+        "startChar": 43,
+        "endLine": 44,
+        "endChar": 44
+      },
+      "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16cc94f3_ef70c057",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T01:49:59Z",
+      "side": 1,
+      "message": "why is this a different type than the param?",
+      "range": {
+        "startLine": 113,
+        "startChar": 1,
+        "endLine": 113,
+        "endChar": 4
+      },
+      "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7c00465_2750e1ab",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T01:49:59Z",
+      "side": 1,
+      "message": "Why not allow 1 page? The trusty code should support it with a 1/2 page log which is still a power of 2. (although, you would then need to use the _compat function below.",
+      "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcb785c2_ec7d765e",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T01:49:59Z",
+      "side": 1,
+      "message": "Do we need a max? If so, how does this limit compare to other user configurable kernel buffers (e.g. trace buffer, kernel log)",
+      "range": {
+        "startLine": 649,
+        "startChar": 28,
+        "endLine": 649,
+        "endChar": 48
+      },
+      "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99c30160_c67f0a0c",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T01:49:59Z",
+      "side": 1,
+      "message": "Why not round down instead? Also it is possible to set a handler for the param itself",
+      "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb7dfe5b_45d28804",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T01:49:59Z",
+      "side": 1,
+      "message": "kfree",
+      "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
