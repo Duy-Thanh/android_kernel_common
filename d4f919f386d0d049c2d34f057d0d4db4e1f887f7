@@ -132,6 +132,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8dd5cd73_21201e7e",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T04:00:22Z",
+      "side": 1,
+      "message": "It does, but sharing 1 page will work even if the trusty api version is \u003c TRUSTY_API_VERSION_MEM_OBJ. In that case, the the trusty log implementation  expects a different value than what trusty_share_memory provides. trusty_share_memory_compat will perform a conversion for that compatibility path. If you share more than one page, trusty_share_memory (and trusty_share_memory_compat) will fail instead if the trusty api is too old.",
+      "parentUuid": "f0729703_74dd9ae6",
+      "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcb785c2_ec7d765e",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 3
@@ -179,6 +197,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "949e635f_82356d6b",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T04:00:22Z",
+      "side": 1,
+      "message": "OK, but a developer could want a larger size so 1 MB seems like a low limit.",
+      "parentUuid": "81c928b2_a6ac32e1",
+      "range": {
+        "startLine": 649,
+        "startChar": 28,
+        "endLine": 649,
+        "endChar": 48
+      },
+      "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "99c30160_c67f0a0c",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 3
@@ -208,6 +250,24 @@
       "side": 1,
       "message": "I wanted to keep it simple. You specify it wrong, you get the default.\nDo you mean a handler to allow setting the parameter at any time? That goes back to \"keep it simple\". Setting the size at run time would require re-allocating the buffer, reclaiming the old buffer from Trusty, setting a new one, and preferably without losing any logs that haven\u0027t been read yet. It just adds a lot of complexity that I don\u0027t think is worth the effort.",
       "parentUuid": "99c30160_c67f0a0c",
+      "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "554e2571_608d1289",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T04:00:22Z",
+      "side": 1,
+      "message": "The parameter can already be set at any time, but the way you use it only affects future allocations. Re-allocating a buffer for an existing device would be possible with a handler, but that is not what I was suggesting here. The handler can just validate the value, and the rest of the code stays the same. I don\u0027t like that the caller have to know that the number has to be a power of 2 + 1 page. Rounding down, or up, seems like a friendlier interface. The handler is not strictly needed for that, but it makes the real value you get more visible. Although on a related note, a buffer size with memparse would also be nicer as the kernel then support unit suffixes.",
+      "parentUuid": "c8a3ac67_1ea42a40",
       "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
