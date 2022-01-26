@@ -274,6 +274,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0caa2ee_7fefbc9d",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-01-26T05:00:27Z",
+      "side": 1,
+      "message": "\u003e The parameter can already be set at any time,\n\nHow can it currently be set at any time? The /sys entry is read-only.",
+      "parentUuid": "554e2571_608d1289",
+      "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb7dfe5b_45d28804",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 3
