@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2986ffb7_bd145a36",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-01-26T03:37:50Z",
+      "side": 1,
+      "message": "Ack. I meant to do that, but somehow forgot.",
+      "parentUuid": "7c5e70fd_a6441652",
+      "range": {
+        "startLine": 44,
+        "startChar": 43,
+        "endLine": 44,
+        "endChar": 44
+      },
+      "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "16cc94f3_ef70c057",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2022-01-26T01:49:59Z",
       "side": 1,
       "message": "why is this a different type than the param?",
+      "range": {
+        "startLine": 113,
+        "startChar": 1,
+        "endLine": 113,
+        "endChar": 4
+      },
+      "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f8f02d9_0946b3d1",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-01-26T03:37:50Z",
+      "side": 1,
+      "message": "because I changed the type of the param later to match what some other drivers do, and forgot to update this.",
+      "parentUuid": "16cc94f3_ef70c057",
       "range": {
         "startLine": 113,
         "startChar": 1,
@@ -66,6 +114,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0729703_74dd9ae6",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-01-26T03:37:50Z",
+      "side": 1,
+      "message": "I misunderstood the size requirement. I thought the log buffer needed to be a power-of-two number of pages, but apparently it\u0027s power-of-two number of bytes. I should have checked...\nWhy would using one page need the compat function though? The non-compat trusty_share_memory() seems to support using 1 page just fine.",
+      "parentUuid": "b7c00465_2750e1ab",
+      "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcb785c2_ec7d765e",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 3
@@ -77,6 +143,30 @@
       "writtenOn": "2022-01-26T01:49:59Z",
       "side": 1,
       "message": "Do we need a max? If so, how does this limit compare to other user configurable kernel buffers (e.g. trace buffer, kernel log)",
+      "range": {
+        "startLine": 649,
+        "startChar": 28,
+        "endLine": 649,
+        "endChar": 48
+      },
+      "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81c928b2_a6ac32e1",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-01-26T03:37:50Z",
+      "side": 1,
+      "message": "We don\u0027t *need* a max, other than to avoid overflows when we multiply the parameter value with PAGE_SIZE below. That\u0027s the main reason I put a max at all, and I picked 1MB because that seemed plenty, with 1MB being 64 times larger than the currently used buffer.\nOn the two devices I checked we set the kernel log size to 1 MB using a kernel parameter (up from the compiled-in default of 128 KB).",
+      "parentUuid": "dcb785c2_ec7d765e",
       "range": {
         "startLine": 649,
         "startChar": 28,
@@ -106,6 +196,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8a3ac67_1ea42a40",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-01-26T03:37:50Z",
+      "side": 1,
+      "message": "I wanted to keep it simple. You specify it wrong, you get the default.\nDo you mean a handler to allow setting the parameter at any time? That goes back to \"keep it simple\". Setting the size at run time would require re-allocating the buffer, reclaiming the old buffer from Trusty, setting a new one, and preferably without losing any logs that haven\u0027t been read yet. It just adds a lot of complexity that I don\u0027t think is worth the effort.",
+      "parentUuid": "99c30160_c67f0a0c",
+      "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb7dfe5b_45d28804",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 3
@@ -117,6 +225,24 @@
       "writtenOn": "2022-01-26T01:49:59Z",
       "side": 1,
       "message": "kfree",
+      "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3edeb433_13417ce6",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-01-26T03:37:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fb7dfe5b_45d28804",
       "revId": "d4f919f386d0d049c2d34f057d0d4db4e1f887f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
