@@ -223,14 +223,15 @@ static int index_to_shadow_handle(int index)
 	return index + HANDLE_OFFSET;
 }
 
-extern unsigned long hyp_nr_cpus;
+static int shadow_handle_to_vmid(int shadow_handle)
+{
+	int shadow_index = shadow_handle_to_index(shadow_handle);
 
-/*
- * Spinlock for protecting the shadow table related state.
- * Protects writes to shadow_table, num_shadow_entries, and next_shadow_alloc,
- * as well as reads and writes to last_shadow_vcpu_lookup.
- */
-DEFINE_HYP_SPINLOCK(shadow_lock);
+	/* VMID 0 is reserved for the host. */
+	return shadow_index + 1;
+}
+
+extern unsigned long hyp_nr_cpus;
 
 /*
  * The table of shadow entries for protected VMs in hyp.
@@ -244,6 +245,9 @@ int num_shadow_entries;
 /* The next entry index to try to allocate from. */
 int next_shadow_alloc;
 
+/* Protects the shadow table related structures */
+static DEFINE_HYP_SPINLOCK(shadow_table_lock);
+
 /*
  * Return the shadow vm corresponding to the handle.
  */
@@ -254,7 +258,34 @@ static struct kvm_shadow_vm *find_shadow_by_handle(int shadow_handle)
 	if (unlikely(shadow_index < 0 || shadow_index >= KVM_MAX_PVMS))
 		return NULL;
 
-	return shadow_table[shadow_index];
+	return READ_ONCE(shadow_table[shadow_index]);
+}
+
+/*
+ * Returns the shadow vm corresponding to the handle and increments its
+ * reference count, all atomically.
+ */
+static struct kvm_shadow_vm *get_shadow_vm_inc_ref(int shadow_handle)
+{
+	struct kvm_shadow_vm *vm;
+
+	hyp_spin_lock(&shadow_table_lock);
+	vm = find_shadow_by_handle(shadow_handle);
+	if (vm)
+		hyp_page_ref_inc(hyp_virt_to_page(vm));
+	hyp_spin_unlock(&shadow_table_lock);
+
+	return vm;
+}
+
+/*
+ * Decrements the reference count for the vm atomically.
+ */
+static void shadow_vm_dec_ref(struct kvm_shadow_vm *vm)
+{
+	hyp_spin_lock(&shadow_table_lock);
+	hyp_page_ref_dec(hyp_virt_to_page(vm));
+	hyp_spin_unlock(&shadow_table_lock);
 }
 
 struct kvm_vcpu *get_shadow_vcpu(int shadow_handle, unsigned int vcpu_idx)
@@ -262,34 +293,32 @@ struct kvm_vcpu *get_shadow_vcpu(int shadow_handle, unsigned int vcpu_idx)
 	struct kvm_vcpu *vcpu = NULL;
 	struct kvm_shadow_vm *vm;
 
-	hyp_spin_lock(&shadow_lock);
-	vm = find_shadow_by_handle(shadow_handle);
-	if (!vm || vm->created_vcpus <= vcpu_idx)
-		goto unlock;
+	vm = get_shadow_vm_inc_ref(shadow_handle);
+	if (unlikely(!vm || vcpu_idx >= vm->created_vcpus))
+		goto err;
+
 	vcpu = &vm->shadow_vcpus[vcpu_idx].vcpu;
 
 	/* Ensure vcpu isn't loaded on more than one cpu simultaneously. */
-	if (unlikely(vcpu->arch.pkvm.loaded_on_cpu)) {
-		vcpu = NULL;
-		goto unlock;
-	}
-	vcpu->arch.pkvm.loaded_on_cpu = true;
-
-	hyp_page_ref_inc(hyp_virt_to_page(vm));
-unlock:
-	hyp_spin_unlock(&shadow_lock);
+	if (unlikely(xchg(&vcpu->arch.pkvm.loaded_on_cpu, true)))
+		goto err;
 
 	return vcpu;
+
+err:
+	if (vm)
+		shadow_vm_dec_ref(vm);
+
+	return NULL;
 }
 
 void put_shadow_vcpu(struct kvm_vcpu *vcpu)
 {
 	struct kvm_shadow_vm *vm = vcpu->arch.pkvm.shadow_vm;
 
-	hyp_spin_lock(&shadow_lock);
-	vcpu->arch.pkvm.loaded_on_cpu = false;
+	WARN_ON(!xchg(&vcpu->arch.pkvm.loaded_on_cpu, false));
+
 	hyp_page_ref_dec(hyp_virt_to_page(vm));
-	hyp_spin_unlock(&shadow_lock);
 }
 
 /* Check and copy the supported features for the vcpu from the host. */
@@ -438,11 +467,15 @@ static bool exists_shadow(struct kvm *host_kvm)
 	int i;
 	int num_checked = 0;
 
+	hyp_assert_lock_held(&shadow_table_lock);
+
 	for (i = 0; i < KVM_MAX_PVMS && num_checked < num_shadow_entries; i++) {
-		if (!shadow_table[i])
+		struct kvm_shadow_vm *vm = shadow_table[i];
+
+		if (likely(!vm))
 			continue;
 
-		if (unlikely(shadow_table[i]->host_kvm == host_kvm))
+		if (unlikely(vm->host_kvm == host_kvm))
 			return true;
 
 		num_checked++;
@@ -451,21 +484,30 @@ static bool exists_shadow(struct kvm *host_kvm)
 	return false;
 }
 
+static int generate_shadow_handle(void)
+{
+	hyp_assert_lock_held(&shadow_table_lock);
+
+	/* Find the next free entry in the shadow table. */
+	while (shadow_table[next_shadow_alloc])
+		next_shadow_alloc = (next_shadow_alloc + 1) % KVM_MAX_PVMS;
+
+	return index_to_shadow_handle(next_shadow_alloc);
+}
+
 /*
  * Allocate a shadow table entry and insert a pointer to the shadow vm.
  *
  * Return a unique handle to the protected VM on success,
  * negative error code on failure.
  */
-static int __insert_shadow_table(struct kvm *kvm, struct kvm_shadow_vm *vm,
-			         size_t shadow_size)
+static int insert_shadow_table(struct kvm *kvm, struct kvm_shadow_vm *vm,
+			       size_t shadow_size)
 {
 	struct kvm_s2_mmu *mmu = &vm->arch.mmu;
 	int shadow_handle;
-	int vmid;
 
-	if (unlikely(num_shadow_entries >= KVM_MAX_PVMS))
-		return -ENOMEM;
+	hyp_assert_lock_held(&shadow_table_lock);
 
 	/*
 	 * Initializing protected state might have failed, yet a malicious host
@@ -478,41 +520,36 @@ static int __insert_shadow_table(struct kvm *kvm, struct kvm_shadow_vm *vm,
 	if (unlikely(exists_shadow(kvm)))
 		return -EEXIST;
 
-	/* Find the next free entry in the shadow table. */
-	while (shadow_table[next_shadow_alloc])
-		next_shadow_alloc = (next_shadow_alloc + 1) % KVM_MAX_PVMS;
-	shadow_handle = index_to_shadow_handle(next_shadow_alloc);
+	/* Allocate an entry for this shadow, but don't populate it yet. */
+	if (unlikely(num_shadow_entries >= KVM_MAX_PVMS))
+		return -ENOMEM;
 
+	num_shadow_entries++;
+
+	shadow_handle = generate_shadow_handle();
 	vm->shadow_handle = shadow_handle;
 	vm->shadow_area_size = shadow_size;
 
-	/* VMID 0 is reserved for the host */
-	vmid = next_shadow_alloc + 1;
-	if (vmid > 0xff)
-		return -ENOMEM;
-
-	mmu->vmid.vmid = vmid;
+	mmu->vmid.vmid = shadow_handle_to_vmid(shadow_handle);
 	mmu->vmid.vmid_gen = 0;
 	mmu->arch = &vm->arch;
 	mmu->pgt = &vm->pgt;
 
-	shadow_table[next_shadow_alloc] = vm;
-	next_shadow_alloc = (next_shadow_alloc + 1) % KVM_MAX_PVMS;
-	num_shadow_entries++;
-
 	return shadow_handle;
 }
 
-static int insert_shadow_table(struct kvm *kvm, struct kvm_shadow_vm *vm,
-			       size_t shadow_size)
+/*
+ * This function publishes the changes to the shadow table.
+ * From this point on the protected VM is accessable.
+ */
+static void publish_shadow_vm(struct kvm_shadow_vm *vm)
 {
-	int ret;
+	int shadow_handle = vm->shadow_handle;
+	int shadow_index = shadow_handle_to_index(shadow_handle);
 
-	hyp_spin_lock(&shadow_lock);
-	ret = __insert_shadow_table(kvm, vm, shadow_size);
-	hyp_spin_unlock(&shadow_lock);
+	hyp_assert_lock_held(&shadow_table_lock);
 
-	return ret;
+	WRITE_ONCE(shadow_table[shadow_index], vm);
 }
 
 /*
@@ -520,15 +557,44 @@ static int insert_shadow_table(struct kvm *kvm, struct kvm_shadow_vm *vm,
  */
 static void __remove_shadow_table(int shadow_handle)
 {
-	shadow_table[shadow_handle_to_index(shadow_handle)] = NULL;
+	int shadow_index = shadow_handle_to_index(shadow_handle);
+
+	hyp_assert_lock_held(&shadow_table_lock);
+
+	WRITE_ONCE(shadow_table[shadow_index], NULL);
 	num_shadow_entries--;
 }
 
-static void remove_shadow_table(int shadow_handle)
+/*
+ * Removes vm from the shadow table if it doesn't have any references.
+ *
+ * If successful, returns 0 and sets vm_ptr to the vm that was removed.
+ * Otherwise, returns negative error code on failure.
+ */
+int remove_shadow_table_noref(int shadow_handle, struct kvm_shadow_vm **vm_ptr)
 {
-	hyp_spin_lock(&shadow_lock);
+	struct kvm_shadow_vm *vm;
+	int ret;
+
+	hyp_spin_lock(&shadow_table_lock);
+
+	ret = -ENOENT;
+	vm = find_shadow_by_handle(shadow_handle);
+	if (!vm)
+		goto done;
+
+	ret = -EBUSY;
+	if (WARN_ON(hyp_page_count(vm)))
+		goto done;
+
 	__remove_shadow_table(shadow_handle);
-	hyp_spin_unlock(&shadow_lock);
+
+	*vm_ptr = vm;
+	ret = 0;
+
+done:
+	hyp_spin_unlock(&shadow_table_lock);
+	return ret;
 }
 
 static size_t pkvm_get_shadow_size(int num_vcpus)
@@ -627,23 +693,34 @@ int __pkvm_init_shadow(struct kvm *kvm,
 	if (ret)
 		goto err_remove_pgd;
 
-	/* Add the entry to the shadow table. */
-	ret = insert_shadow_table(kvm, vm, shadow_size);
+	ret = init_shadow_structs(kvm, vm, pgd, nr_vcpus);
 	if (ret < 0)
 		goto err_unpin_host_vcpus;
 
-	ret = init_shadow_structs(kvm, vm, pgd, nr_vcpus);
+	hyp_spin_lock(&shadow_table_lock);
+
+	ret = insert_shadow_table(kvm, vm, shadow_size);
 	if (ret < 0)
-		goto err_remove_shadow_table;
+		goto err_unlock_shadow_table_lock;
 
 	ret = kvm_guest_prepare_stage2(vm, pgd);
 	if (ret)
 		goto err_remove_shadow_table;
 
+	/*
+	 * This publishes the shadow table entry, so it should be performed last
+	 * and past the point of possible failure.
+	 */
+	publish_shadow_vm(vm);
+	hyp_spin_unlock(&shadow_table_lock);
+
 	return vm->shadow_handle;
 
 err_remove_shadow_table:
-	remove_shadow_table(vm->shadow_handle);
+	__remove_shadow_table(vm->shadow_handle);
+
+err_unlock_shadow_table_lock:
+	hyp_spin_unlock(&shadow_table_lock);
 
 err_unpin_host_vcpus:
 	unpin_host_vcpus(vm->shadow_vcpus, nr_vcpus);
@@ -668,26 +745,14 @@ int __pkvm_teardown_shadow(int shadow_handle)
 	struct kvm_shadow_vm *vm;
 	struct kvm *host_kvm;
 	size_t shadow_size;
-	int err;
 	u64 pfn;
 	u64 nr_pages;
 	void *addr;
+	int ret;
 
-	/* Lookup then remove entry from the shadow table. */
-	hyp_spin_lock(&shadow_lock);
-	vm = find_shadow_by_handle(shadow_handle);
-	if (!vm) {
-		err = -ENOENT;
-		goto err_unlock;
-	}
-
-	if (WARN_ON(hyp_page_count(vm))) {
-		err = -EBUSY;
-		goto err_unlock;
-	}
-
-	__remove_shadow_table(shadow_handle);
-	hyp_spin_unlock(&shadow_lock);
+	ret = remove_shadow_table_noref(shadow_handle, &vm);
+	if (ret)
+		return ret;
 
 	/* Reclaim guest pages, and page-table pages */
 	mc = &vm->host_kvm->arch.pkvm.teardown_mc;
@@ -706,10 +771,6 @@ int __pkvm_teardown_shadow(int shadow_handle)
 	nr_pages = shadow_size >> PAGE_SHIFT;
 	WARN_ON(__pkvm_hyp_donate_host(pfn, nr_pages));
 	return 0;
-
-err_unlock:
-	hyp_spin_unlock(&shadow_lock);
-	return err;
 }
 
 int pkvm_load_pvmfw_pages(struct kvm_shadow_vm *vm, u64 ipa, phys_addr_t phys,
