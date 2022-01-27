@@ -615,9 +615,13 @@ resizefs_out:
 		    sizeof(range)))
 			return -EFAULT;
 
+<<<<<<< HEAD   (2f2f52 Merge 4.4.299 into android-4.4-p)
 		range.minlen = max((unsigned int)range.minlen,
 				   q->limits.discard_granularity);
 		ret = ext4_trim_fs(sb, &range, flags);
+=======
+		ret = ext4_trim_fs(sb, &range);
+>>>>>>> BRANCH (000f45 Linux 4.4.300)
 		if (ret < 0)
 			return ret;
 
