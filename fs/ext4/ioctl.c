@@ -767,9 +767,13 @@ resizefs_out:
 		    sizeof(range)))
 			return -EFAULT;
 
+<<<<<<< HEAD   (93c6ce Merge 4.9.297 into android-4.9-q)
 		range.minlen = max((unsigned int)range.minlen,
 				   q->limits.discard_granularity);
 		ret = ext4_trim_fs(sb, &range, flags);
+=======
+		ret = ext4_trim_fs(sb, &range);
+>>>>>>> BRANCH (b53085 Linux 4.9.298)
 		if (ret < 0)
 			return ret;
 
