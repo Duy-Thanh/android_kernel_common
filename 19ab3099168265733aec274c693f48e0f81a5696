@@ -16,6 +16,24 @@
       "message": "I would also say why you use trusty_share_memory_compat.\ne.g. Use trusty_share_memory_compat instead of trusty_share_memory in case s-\u003elog_num_pages \u003d\u003d 1 and api version \u003c TRUSTY_API_VERSION_MEM_OBJ. In that case SMC_SC_SHARED_LOG_ADD expects a different value than what trusty_share_memory returns.",
       "revId": "19ab3099168265733aec274c693f48e0f81a5696",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c292113f_0c470881",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-01-28T19:33:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa85927e_67ab3027",
+      "revId": "19ab3099168265733aec274c693f48e0f81a5696",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
