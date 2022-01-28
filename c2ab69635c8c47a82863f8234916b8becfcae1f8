@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76df47e8_aa0ff6ba",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-01-28T19:02:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f1b1faa_831c282d",
+      "revId": "c2ab69635c8c47a82863f8234916b8becfcae1f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e3a5ba2_01ee283b",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69332746_6ea4fef7",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-01-28T19:02:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e3a5ba2_01ee283b",
+      "revId": "c2ab69635c8c47a82863f8234916b8becfcae1f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce7eb294_264bae74",
@@ -48,6 +84,30 @@
       "writtenOn": "2022-01-28T18:35:32Z",
       "side": 1,
       "message": "\"rc \u003d \"?",
+      "range": {
+        "startLine": 777,
+        "startChar": 2,
+        "endLine": 777,
+        "endChar": 8
+      },
+      "revId": "c2ab69635c8c47a82863f8234916b8becfcae1f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "708c00d9_3cc3813e",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-01-28T19:02:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce7eb294_264bae74",
       "range": {
         "startLine": 777,
         "startChar": 2,
