@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f1b1faa_831c282d",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-28T18:35:32Z",
+      "side": 1,
+      "message": "only if log_num_pages \u003e 1. If log_num_pages is 1, then you should use the _compat version below (you can do it always, just update the comment to specify when it is needed)",
+      "revId": "c2ab69635c8c47a82863f8234916b8becfcae1f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e3a5ba2_01ee283b",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-28T18:35:32Z",
+      "side": 1,
+      "message": "add \"\\n\"?",
+      "revId": "c2ab69635c8c47a82863f8234916b8becfcae1f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce7eb294_264bae74",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-28T18:35:32Z",
+      "side": 1,
+      "message": "\"rc \u003d \"?",
+      "range": {
+        "startLine": 777,
+        "startChar": 2,
+        "endLine": 777,
+        "endChar": 8
+      },
+      "revId": "c2ab69635c8c47a82863f8234916b8becfcae1f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
