@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c0a3044_98be3291",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-01-28T03:15:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "05cc68b5_d2d027d2",
+      "range": {
+        "startLine": 41,
+        "startChar": 7,
+        "endLine": 41,
+        "endChar": 10
+      },
+      "revId": "7d3b66a342f40299487f717b50fda9bba97c63e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "999dad50_7aea8602",
@@ -41,6 +65,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e0c2609_8c9c01fa",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-01-28T03:15:13Z",
+      "side": 1,
+      "message": "Thanks. I searched around for a bit but didn\u0027t find anything. Now I know.",
+      "parentUuid": "999dad50_7aea8602",
+      "revId": "7d3b66a342f40299487f717b50fda9bba97c63e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "521a920b_16eba813",
@@ -54,6 +96,24 @@
       "writtenOn": "2022-01-28T03:05:20Z",
       "side": 1,
       "message": "Use DIV_ROUND_UP?",
+      "revId": "7d3b66a342f40299487f717b50fda9bba97c63e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8291604c_12572dcf",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-01-28T03:15:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "521a920b_16eba813",
       "revId": "7d3b66a342f40299487f717b50fda9bba97c63e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
