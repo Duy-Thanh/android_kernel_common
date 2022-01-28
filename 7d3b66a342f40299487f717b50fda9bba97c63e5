@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05cc68b5_d2d027d2",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-28T03:05:20Z",
+      "side": 1,
+      "message": "size_t would be better for this.",
+      "range": {
+        "startLine": 41,
+        "startChar": 7,
+        "endLine": 41,
+        "endChar": 10
+      },
+      "revId": "7d3b66a342f40299487f717b50fda9bba97c63e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "999dad50_7aea8602",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-28T03:05:20Z",
+      "side": 1,
+      "message": "linux/log2.h which we already include has functions for this",
+      "revId": "7d3b66a342f40299487f717b50fda9bba97c63e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "521a920b_16eba813",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-28T03:05:20Z",
+      "side": 1,
+      "message": "Use DIV_ROUND_UP?",
+      "revId": "7d3b66a342f40299487f717b50fda9bba97c63e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
