@@ -208,6 +208,7 @@
   dec_node_page_state
   dec_zone_page_state
   default_llseek
+  default_wake_function
   delayed_work_timer_fn
   del_gendisk
   del_timer
@@ -255,6 +256,7 @@
   devm_gpiod_get_optional
   devm_gpio_request_one
   devm_hwspin_lock_register
+  devm_iio_channel_get
   devm_input_allocate_device
   devm_ioremap
   devm_ioremap_resource
@@ -406,6 +408,8 @@
   extcon_get_property
   extcon_get_state
   extcon_register_notifier
+  extcon_set_property
+  extcon_set_property_capability
   extcon_set_state_sync
   __fdget
   fget
@@ -464,6 +468,7 @@
   get_state_synchronize_srcu
   __get_task_comm
   get_user_ifreq
+  get_zeroed_page
   gic_nonsecure_priorities
   gpiochip_add_data_with_key
   gpiochip_add_pin_range
@@ -499,6 +504,7 @@
   hrtimer_forward
   __hrtimer_get_remaining
   hrtimer_init
+  hrtimer_init_sleeper
   hrtimer_start_range_ns
   hrtimer_try_to_cancel
   hvc_alloc
@@ -532,6 +538,8 @@
   idr_for_each
   idr_get_next
   idr_remove
+  iio_read_channel_processed
+  iio_write_channel_raw
   inc_node_page_state
   inc_zone_page_state
   in_egroup_p
@@ -696,6 +704,7 @@
   ktime_get_mono_fast_ns
   ktime_get_real_ts64
   ktime_get_seconds
+  ktime_get_ts64
   kvfree
   led_classdev_flash_register_ext
   led_classdev_flash_unregister
@@ -1111,6 +1120,7 @@
   release_sock
   remap_pfn_range
   remove_cpu
+  remove_wait_queue
   report_iommu_fault
   request_firmware
   request_firmware_into_buf
@@ -1384,6 +1394,13 @@
   try_module_get
   try_wait_for_completion
   tty_flip_buffer_push
+  typec_get_drvdata
+  typec_register_partner
+  typec_register_port
+  typec_set_data_role
+  typec_set_pwr_opmode
+  typec_set_pwr_role
+  typec_unregister_partner
   uart_add_one_port
   uart_insert_char
   uart_register_driver
@@ -1437,7 +1454,10 @@
   up_write
   usb_add_phy_dev
   usb_assign_descriptors
+  usb_bus_idr
+  usb_bus_idr_lock
   usb_composite_setup_continue
+  usb_debug_root
   usb_ep_alloc_request
   usb_ep_autoconfig
   usb_ep_dequeue
@@ -1451,6 +1471,8 @@
   usb_function_unregister
   usb_gadget_wakeup
   usb_interface_id
+  usb_mon_deregister
+  usb_mon_register
   usb_phy_set_charger_current
   usb_put_function_instance
   usb_register_notify
@@ -1463,6 +1485,7 @@
   usb_speed_string
   usb_string_id
   usb_unregister_notify
+  usleep_range_state
   uuid_parse
   vabits_actual
   vfree
@@ -1488,6 +1511,7 @@
   wakeup_source_register
   wakeup_source_unregister
   __warn_printk
+  work_busy
   ww_mutex_lock
   ww_mutex_unlock
   __xa_alloc
