@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64e1ab20_72cc4597",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-31T16:56:23Z",
+      "side": 1,
+      "message": "breaks the abi as-is, please do not do this.",
+      "revId": "dbcda13f9e42af2c9f72e0c202f101abfe9a0030",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
