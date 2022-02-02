@@ -5270,8 +5270,13 @@ static void _tcpm_pd_vbus_off(struct tcpm_port *port)
 	case SNK_TRYWAIT_DEBOUNCE:
 		break;
 	case SNK_ATTACH_WAIT:
+<<<<<<< HEAD   (fcc2bf Revert "ANDROID: GKI: enable test_stackinit kernel module")
 		port->debouncing = false;
 		tcpm_set_state(port, SNK_UNATTACHED, 0);
+=======
+	case SNK_DEBOUNCED:
+		/* Do nothing, as TCPM is still waiting for vbus to reaach VSAFE5V to connect */
+>>>>>>> BRANCH (f255ac Linux 5.10.96)
 		break;
 
 	case SNK_NEGOTIATE_CAPABILITIES:
