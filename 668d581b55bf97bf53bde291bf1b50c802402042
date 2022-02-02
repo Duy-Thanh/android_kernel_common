@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43814409_e8c40986",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2022-02-02T01:57:32Z",
+      "side": 1,
+      "message": "Hi David,\n\nI want to make the change to include the nvhe symbols in kallsyms so that we can symbolize the hyp stacktrace. (See some example output below)\n\nWere there other known issues for why we didn\u0027t originally include these?\n\nThanks,\nKalesh\n\n\nSample stacktraces:\n\n-------\n\n[  167.018598][  T407] kvm [407]: nVHE hyp panic at: [\u003cffffffc0116145cc\u003e] __kvm_nvhe_overflow_stack+0x10/0x34!\n[  167.020367][  T407] kvm [407]: Hyp Offset: 0xffffff800fe00000\n[  167.020841][  T407] kvm [407]: nVHE HYP call trace:\n[  167.021371][  T407] kvm [407]: [\u003cffffffc011614934\u003e] __kvm_nvhe_hyp_panic_bad_stack+0xc/0x10\n[  167.021972][  T407] kvm [407]: [\u003cffffffc01160fa48\u003e] __kvm_nvhe___kvm_hyp_host_vector+0x248/0x794\n[  167.022572][  T407] kvm [407]: [\u003cffffffc0116145dc\u003e] __kvm_nvhe_overflow_stack+0x20/0x34\n[  167.023135][  T407] kvm [407]: [\u003cffffffc0116145dc\u003e] __kvm_nvhe_overflow_stack+0x20/0x34\n[  167.023699][  T407] kvm [407]: [\u003cffffffc0116145dc\u003e] __kvm_nvhe_overflow_stack+0x20/0x34\n[  167.024261][  T407] kvm [407]: [\u003cffffffc0116145dc\u003e] __kvm_nvhe_overflow_stack+0x20/0x34\n. . .\n\n-------\n\n[  166.161699][  T409] kvm [409]: Invalid host exception to nVHE hyp!\n[  166.163316][  T409] kvm [409]: Hyp Offset: 0xffffff800fe00000\n[  166.163789][  T409] kvm [409]: nVHE HYP call trace:\n[  166.164709][  T409] kvm [409]: [\u003cffffffc011614fa0\u003e] __kvm_nvhe_handle___kvm_vcpu_run+0x198/0x21c\n[  166.165352][  T409] kvm [409]: [\u003cffffffc011614980\u003e] __kvm_nvhe_handle_trap+0xa4/0x124\n[  166.165911][  T409] kvm [409]: [\u003cffffffc01160f060\u003e] __kvm_nvhe___host_exit+0x60/0x64\n[  166.166657][  T409] Kernel panic - not syncing: HYP panic:\n. . .\n\n-------",
+      "revId": "668d581b55bf97bf53bde291bf1b50c802402042",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
