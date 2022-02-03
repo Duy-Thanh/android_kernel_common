@@ -16,6 +16,29 @@
       "message": "needs Documentation/ABI/ entry for all sysfs files.",
       "revId": "9b58959665b153dc0d3a9a23b8714dce688b441c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eb2fca3_30f9726a",
+        "filename": "fs/fuse/inode.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1859,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-02-03T14:37:27Z",
+      "side": 1,
+      "message": "please make this a multi-line list, one line per attribute.  Makes it simpler to add more.",
+      "range": {
+        "startLine": 1859,
+        "startChar": 0,
+        "endLine": 1859,
+        "endChar": 94
+      },
+      "revId": "9b58959665b153dc0d3a9a23b8714dce688b441c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
