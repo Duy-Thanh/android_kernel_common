@@ -16,6 +16,24 @@
       "message": "Isn\u0027t this the same as aosp/1959824? Can you resubmit with the same Change-Id?\n\n```\nChange-Id: Ia0eb86447488c5ba9845a6b2eb98652200e08281\n```",
       "revId": "e8c446e92b86066129886994c7ab5f914216c486",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73c530c6_f9da4acd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2022-02-03T00:23:19Z",
+      "side": 1,
+      "message": "Posted https://r.android.com/1969228.",
+      "parentUuid": "8285f21d_fc90884a",
+      "revId": "e8c446e92b86066129886994c7ab5f914216c486",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
