@@ -1841,15 +1841,22 @@ static const struct attribute_group bpf_attr_group = {
 };
 /* TODO remove to here */
 
+static ssize_t android_bpf_show(struct kobject *kobj,
+					struct kobj_attribute *attr, char *buf)
+{
+	return sysfs_emit(buf, "supported\n");
+}
+
 static ssize_t android_passthrough_show(struct kobject *kobj,
 					struct kobj_attribute *attr, char *buf)
 {
 	return sysfs_emit(buf, "supported\n");
 }
 
+static struct kobj_attribute bpf_attr = __ATTR_RO(android_bpf);
 static struct kobj_attribute passthrough_attr = __ATTR_RO(android_passthrough);
 
-static struct attribute *fuse_attributes[] = { &passthrough_attr.attr, NULL };
+static struct attribute *fuse_attributes[] = { &bpf_attr.attr, &passthrough_attr.attr, NULL };
 static const struct attribute_group feature_attr_group = {
 	.name = "features",
 	.attrs = fuse_attributes,
