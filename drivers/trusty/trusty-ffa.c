@@ -15,6 +15,36 @@
 #include "trusty-ffa.h"
 #include "trusty-private.h"
 
+/* partition property: Supports receipt of direct requests */
+#define FFA_PARTITION_DIRECT_REQ_RECV	BIT(0)
+
+/* string representation of trusty UUID used for partition info get call */
+static const char *trusty_uuid = "40ee25f0-a2bc-304c-8c4c-a173c57d8af1";
+
+static u32 trusty_ffa_send_direct_msg(struct device *dev, unsigned long fid,
+				      unsigned long a0, unsigned long a1,
+				      unsigned long a2)
+{
+	struct trusty_state *s = platform_get_drvdata(to_platform_device(dev));
+	struct ffa_send_direct_data ffa_msg;
+	struct ffa_device *ffa_dev;
+	int ret;
+
+	ffa_dev = to_ffa_dev(s->ffa->dev);
+
+	ffa_msg.data0 = fid;
+	ffa_msg.data1 = a0;
+	ffa_msg.data2 = a1;
+	ffa_msg.data3 = a2;
+	ffa_msg.data4 = 0;
+
+	ret = s->ffa->ops->sync_send_receive(ffa_dev, &ffa_msg);
+	if (!ret)
+		return ffa_msg.data0;
+
+	return ret;
+}
+
 static int __trusty_ffa_share_memory(struct device *dev, u64 *id,
 				     struct scatterlist *sglist,
 				     unsigned int nents, pgprot_t pgprot,
@@ -110,6 +140,11 @@ static int trusty_ffa_reclaim_memory(struct device *dev, u64 id,
 	return 0;
 }
 
+static const struct trusty_msg_ops trusty_ffa_msg_ops = {
+	.desc = &trusty_ffa_transport,
+	.send_direct_msg = &trusty_ffa_send_direct_msg,
+};
+
 static const struct trusty_mem_ops trusty_ffa_mem_ops = {
 	.desc = &trusty_ffa_transport,
 	.trusty_share_memory = &trusty_ffa_share_memory,
@@ -176,6 +211,7 @@ static int trusty_ffa_transport_setup(struct device *dev)
 	struct trusty_state *s = platform_get_drvdata(to_platform_device(dev));
 	struct trusty_ffa_state *ffa_state;
 	struct ffa_device *ffa_dev;
+	struct ffa_partition_info pinfo = { 0 };
 
 	/* ffa transport not required for lower api versions */
 	if (s->api_version != 0 && s->api_version < TRUSTY_API_VERSION_MEM_OBJ)
@@ -198,6 +234,28 @@ static int trusty_ffa_transport_setup(struct device *dev)
 	/* FFA used only for memory sharing operations */
 	if (s->api_version == TRUSTY_API_VERSION_MEM_OBJ) {
 		s->ffa = ffa_state;
+		s->mem_ops = &trusty_ffa_mem_ops;
+		return 0;
+	}
+
+	/* check if Trusty partition can support receipt of direct requests. */
+	rc = ffa_state->ops->partition_info_get(trusty_uuid, &pinfo);
+	if (rc || !(pinfo.properties & FFA_PARTITION_DIRECT_REQ_RECV)) {
+		dev_err(ffa_state->dev, "trusty_ffa_pinfo: ret: 0x%x, prop: 0x%x\n",
+			rc, pinfo.properties);
+		return -EINVAL;
+	}
+
+	/* query and check Trusty API version */
+	s->ffa = ffa_state;
+	rc = trusty_init_api_version(s, dev, trusty_ffa_send_direct_msg);
+	if (rc) {
+		s->ffa = NULL;
+		return -EINVAL;
+	}
+
+	if (s->api_version == TRUSTY_API_VERSION_FFA) {
+		s->msg_ops = &trusty_ffa_msg_ops;
 		s->mem_ops = &trusty_ffa_mem_ops;
 		return 0;
 	}
