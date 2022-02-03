@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12d0ff67_464f91cf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-02-03T00:18:17Z",
+      "side": 1,
+      "message": "Isn\u0027t this the same as aosp/1959824? Can you resubmit with the same Change-Id?\n\n```\nChange-Id: Ia0eb86447488c5ba9845a6b2eb98652200e08281\n```",
+      "revId": "8e8c46501af1f421cbc9975343b6c15946a3c8ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
