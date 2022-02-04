@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2150d3cc_a41807b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2022-02-04T02:29:30Z",
+      "side": 1,
+      "message": "b/217580573 is tracking the pre-existing failure in android.jni.cts.JniStaticTest#test_linker_namespaces",
+      "revId": "287dec2d10896cbc1f55fdb25e0c155cfab6b7b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
