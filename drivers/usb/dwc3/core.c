@@ -8,6 +8,8 @@
  *	    Sebastian Andrzej Siewior <bigeasy@linutronix.de>
  */
 
+//DNM -- prashk
+
 #include <linux/clk.h>
 #include <linux/version.h>
 #include <linux/module.h>
