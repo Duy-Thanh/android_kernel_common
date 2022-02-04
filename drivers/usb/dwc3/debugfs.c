@@ -313,6 +313,7 @@ static void dwc3_gadget_lsp(struct seq_file *s)
 	int			i;
 	u32			reg;
 
+	pr_err("hi 5.10");
 	for (i = 0; i < 16; i++) {
 		reg = DWC3_GDBGLSPMUX_DEVSELECT(i);
 		dwc3_writel(dwc->regs, DWC3_GDBGLSPMUX, reg);
