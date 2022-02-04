@@ -89,7 +89,7 @@ int dwc3_gadget_get_link_state(struct dwc3 *dwc)
 int dwc3_gadget_set_link_state(struct dwc3 *dwc, enum dwc3_link_state state)
 {
 	int		retries = 10000;
-	u32		reg;
+	u32		return reg;
 
 	/*
 	 * Wait until device controller is ready. Only applies to 1.94a and
