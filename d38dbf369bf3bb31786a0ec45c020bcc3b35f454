@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a79d9ea7_3d9c1bb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2022-02-07T10:36:26Z",
+      "side": 1,
+      "message": "Symbol kill_anon_super() added in aosp/1969219",
+      "revId": "d38dbf369bf3bb31786a0ec45c020bcc3b35f454",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
