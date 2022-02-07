@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7ca9f49_b71c797f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2022-02-07T23:02:59Z",
+      "side": 1,
+      "message": "Hi Greg,\n\nI sent out https://lore.kernel.org/all/20220207043907.2758424-1-badhri@google.com/ but got to know that\nhttps://lore.kernel.org/linux-usb/20220203144657.16527-3-heikki.krogerus@linux.intel.com/ is now being actively considered. This would eliminate the need of the vendor hook proposed here, however, looks like it might not land by Android T timeframe.\n\nCan you consider accepting the vendor hook for android13-5.10 ? The vendor hook can definitely be dropped once https://lore.kernel.org/linux-usb/20220203144657.16527-3-heikki.krogerus@linux.intel.com/ and I can help backport them.",
+      "parentUuid": "9c1e7ecd_23cc57df",
+      "revId": "11334f0705aa4a9bf5600d11e7bccea44101b3aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d5c50c6_37b1b9eb",
         "filename": "drivers/usb/typec/tcpm/tcpm.c",
         "patchSetId": 4
