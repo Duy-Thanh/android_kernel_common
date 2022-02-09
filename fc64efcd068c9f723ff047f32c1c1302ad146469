@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0078548c_492bfdff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2022-02-09T02:09:41Z",
+      "side": 1,
+      "message": "The checkpatch error is a false positive (Change is just a revert - the symbolic permissions are already used here)",
+      "revId": "fc64efcd068c9f723ff047f32c1c1302ad146469",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
