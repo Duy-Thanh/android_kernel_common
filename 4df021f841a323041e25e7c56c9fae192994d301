@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a98b8f50_809721f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-02-09T19:02:21Z",
+      "side": 1,
+      "message": "This patch needs to be refactored to avoid breaking the KMI.",
+      "revId": "4df021f841a323041e25e7c56c9fae192994d301",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
