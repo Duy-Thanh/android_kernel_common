@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0be67df1_be8d8bec",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/mem_protect.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-02-09T13:51:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eda3bc3_d261c51b",
+      "revId": "842fcddb08ba1411e85c444d0dc431902699b155",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c956188_762ed0ec",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-02-09T11:55:20Z",
       "side": 1,
       "message": "Don\u0027t you need to handle PKVM_ID_FFA here (and below in completer_owner_id) too?",
+      "revId": "842fcddb08ba1411e85c444d0dc431902699b155",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46b923de_1c16d4e7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-02-09T13:51:44Z",
+      "side": 1,
+      "message": "I don\u0027t think so, no. We don\u0027t support transactions initiated by FFA, and on the completer side we always return early success so this code is never called with PKVM_ID_FFA.",
+      "parentUuid": "7c956188_762ed0ec",
       "revId": "842fcddb08ba1411e85c444d0dc431902699b155",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
