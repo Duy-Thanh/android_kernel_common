@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb8fa3d7_0aa451cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2022-02-09T05:34:19Z",
+      "side": 1,
+      "message": "Based on prior discussion on the bpf list (https://lore.kernel.org/bpf/CAEf4BzZrVT3Mn2oL6kx2E2jdM_mTLX9FfhYsYw8va8_1VNftaQ@mail.gmail.com/) it looks like bpf maintainers might be receptive to a fix for this issue. Just sent a proposed Kconfig patch to the bpf list, we can revert to unbreak these branches for now while trying to upstream a fix.",
+      "revId": "ec19311bc0d25e28a846110b82709a164a87a761",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
