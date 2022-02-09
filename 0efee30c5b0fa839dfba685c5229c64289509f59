@@ -16,6 +16,24 @@
       "message": "what happened upstream? It looks like it was submitted and then there was no followup. Please either followup on the upstream commit, or change this to \"ANDROID:\" if you think it won\u0027t land (it probably won\u0027t since it is about supporting out-of-tree vendor modules).",
       "revId": "0efee30c5b0fa839dfba685c5229c64289509f59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6327aef4_26cf5b7c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1871266
+      },
+      "writtenOn": "2022-02-09T21:05:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7efa691_e0603248",
+      "revId": "0efee30c5b0fa839dfba685c5229c64289509f59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

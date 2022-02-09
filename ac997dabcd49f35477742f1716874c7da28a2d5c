@@ -16,6 +16,24 @@
       "message": "If this is resubmitted as \"ANDRIOD\", is this change needed? You can include remoteproc_internal.h from your vendor module...",
       "revId": "ac997dabcd49f35477742f1716874c7da28a2d5c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f581e6fe_5c460952",
+        "filename": "drivers/remoteproc/remoteproc_internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1871266
+      },
+      "writtenOn": "2022-02-09T21:05:29Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "17eaf247_fbde3020",
+      "revId": "ac997dabcd49f35477742f1716874c7da28a2d5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
