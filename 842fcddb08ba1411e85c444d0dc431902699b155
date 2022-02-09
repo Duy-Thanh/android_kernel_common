@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eda3bc3_d261c51b",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/mem_protect.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-02-09T11:55:20Z",
+      "side": 1,
+      "message": "At least add a comment explaining that this ID represents the secure world. But why call it `pkvm_ffa_id` rather than `pkvm_secure_world_id`? FF-A could (potentially, perhaps in future) be used to share memory with other entities; this ID specifically represents the secure world.",
+      "revId": "842fcddb08ba1411e85c444d0dc431902699b155",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c956188_762ed0ec",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-02-09T11:55:20Z",
+      "side": 1,
+      "message": "Don\u0027t you need to handle PKVM_ID_FFA here (and below in completer_owner_id) too?",
+      "revId": "842fcddb08ba1411e85c444d0dc431902699b155",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
