@@ -2595,6 +2595,7 @@
   __traceiter_android_vh_binder_priority_skip
   __traceiter_android_vh_binder_proc_transaction
   __traceiter_android_vh_binder_proc_transaction_end
+  __tracepoint_android_vh_binder_proc_transaction_finish
   __traceiter_android_vh_binder_read_done
   __traceiter_android_vh_binder_reply
   __traceiter_android_vh_binder_restore_priority
