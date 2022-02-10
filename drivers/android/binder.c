@@ -2539,6 +2539,8 @@ static int binder_proc_transaction(struct binder_transaction *t,
 	if (!pending_async)
 		binder_wakeup_thread_ilocked(proc, thread, !oneway /* sync */);
 
+	trace_android_vh_binder_proc_transaction_finish(proc, thread ? thread->task : NULL,
+							t, pending_async, !oneway);
 	proc->outstanding_txns++;
 	binder_inner_proc_unlock(proc);
 	binder_node_unlock(node);
