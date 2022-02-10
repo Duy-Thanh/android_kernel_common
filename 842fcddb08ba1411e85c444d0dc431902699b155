@@ -69,6 +69,24 @@
       "parentUuid": "7c956188_762ed0ec",
       "revId": "842fcddb08ba1411e85c444d0dc431902699b155",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc29d90b_63387608",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-02-10T12:27:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "46b923de_1c16d4e7",
+      "revId": "842fcddb08ba1411e85c444d0dc431902699b155",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
