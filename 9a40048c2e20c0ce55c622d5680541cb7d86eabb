@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0335bcb_752f0c6c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2543,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-02-10T18:12:32Z",
+      "side": 1,
+      "message": "Does this have to be after the wakeup? While a new hook is needed for parameters, we\u0027d like to eliminate the redundant hook in future releases, so if possible, put this new hook at line 2538 and extend the other hook\u0027s parameter list.",
+      "revId": "9a40048c2e20c0ce55c622d5680541cb7d86eabb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
