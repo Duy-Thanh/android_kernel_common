@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "601aacce_4aa99d7c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-02-11T18:20:24Z",
+      "side": 1,
+      "message": "config THERMAL_STATISTICS\n\tbool \"Thermal state transition statistics\"\n\thelp\n\t  Export thermal state transition statistics information through sysfs.\n\n\t  If in doubt, say N.\n\t  \nHow vendor can enable this?",
+      "range": {
+        "startLine": 11,
+        "startChar": 34,
+        "endLine": 13,
+        "endChar": 55
+      },
+      "revId": "eedc973bbf75adac91db3a5cc12945376e87d5ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e8ad389_b345d6dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-02-11T18:20:24Z",
+      "side": 1,
+      "message": "config THERMAL_STATISTICS\n\tbool \"Thermal state transition statistics\"\n\thelp\n\t  Export thermal state transition statistics information through sysfs.\n\n\t  If in doubt, say N.",
+      "revId": "eedc973bbf75adac91db3a5cc12945376e87d5ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
