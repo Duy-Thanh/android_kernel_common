@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e61fb687_5e4ed67d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-02-11T21:45:38Z",
+      "side": 1,
+      "message": "This cannot be turned off since it is needed by other partners... is it possible to implement a cmdline option or other mechanism to disable it at runtime?",
+      "parentUuid": "2c624338_5fcac353",
+      "range": {
+        "startLine": 10,
+        "startChar": 7,
+        "endLine": 11,
+        "endChar": 33
+      },
+      "revId": "eedc973bbf75adac91db3a5cc12945376e87d5ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "601aacce_4aa99d7c",
