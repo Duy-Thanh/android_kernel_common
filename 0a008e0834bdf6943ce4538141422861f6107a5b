@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b02531ff_809b237c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 2538,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-02-11T16:11:35Z",
+      "side": 1,
+      "message": "If you have \"proc\", you don\u0027t need proc-\u003etsk. You also don\u0027t need current (since it is always available). Since you have t, you don\u0027t need t-\u003ecode. So how about:\n\n  trace_android_vh_binder_proc_transaction_finish(proc, t,\n                                                  thread ? thread-\u003etask : NULL,\n                                                  pending_async, !oneway);",
+      "revId": "0a008e0834bdf6943ce4538141422861f6107a5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
