@@ -33,6 +33,24 @@
       "message": "just confirmed, with this change reverted, the x15 kernel could be built again.",
       "revId": "12ced1aab6265a7484b1eb750ba3ba8c517df2f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14af3b4c_164b4d98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2022-02-11T19:35:45Z",
+      "side": 1,
+      "message": "Thanks for the report. We\u0027ve fixed that upstream in LLVM; AOSP LLVM just built a snapshot from BEFORE that fix.  We can find the fixes in upstream LLVM and cherry pick them back into the release.",
+      "parentUuid": "fac25410_476ba5d6",
+      "revId": "12ced1aab6265a7484b1eb750ba3ba8c517df2f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
