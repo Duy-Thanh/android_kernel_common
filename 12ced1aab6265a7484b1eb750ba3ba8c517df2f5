@@ -1,4 +1,21 @@
 {
-  "comments": [],
-  "submitRequirementResults": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03c9cee1_a29b050a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2022-02-11T14:22:33Z",
+      "side": 1,
+      "message": "Hi, Nick\n\nI could not confirm it locally yet because of the network problem here at the moment, \nbut there seems to be a problem for x15 kernel build as reported here:\n    https://ci.linaro.org/job/lkft-generic-build-gitlab/1743/console\n\nThere error message is like this:\n    12:14:13 clang-14: error: hardware TLS register is not supported for the arm sub-architecture\n    12:14:13 make[2]: *** [/home/buildslave/srv/lkft/workspace/kernel/common/mainline/scripts/Makefile.build:389: arch/arm/kernel/iwmmxt.o] Error 1\n    12:14:13 make[2]: *** Waiting for unfinished jobs....\n\nNot sure if you have any idea about that, or something needs to be updated for the x15 build config.\n\nThanks,\nYongqin Liu",
+      "revId": "12ced1aab6265a7484b1eb750ba3ba8c517df2f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
 }
