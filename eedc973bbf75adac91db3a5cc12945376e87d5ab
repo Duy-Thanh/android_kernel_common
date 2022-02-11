@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c624338_5fcac353",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1903606
+      },
+      "writtenOn": "2022-02-11T21:19:50Z",
+      "side": 1,
+      "message": "Internal slab memory consumption breakup shows 18.5MB for thermal_cooling_device_setup_sysfs",
+      "parentUuid": "1d41b5cf_a279b98a",
+      "range": {
+        "startLine": 10,
+        "startChar": 7,
+        "endLine": 11,
+        "endChar": 33
+      },
+      "revId": "eedc973bbf75adac91db3a5cc12945376e87d5ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "601aacce_4aa99d7c",
