@@ -51,6 +51,24 @@
       "parentUuid": "fac25410_476ba5d6",
       "revId": "12ced1aab6265a7484b1eb750ba3ba8c517df2f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e209a639_139e2ab2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2022-02-11T23:25:48Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/toolchain/llvm_android/+/1983048 for cherry picks from upstream LLVM. We\u0027ll still need to update the prebuilt images of AOSP LLVM.",
+      "parentUuid": "14af3b4c_164b4d98",
+      "revId": "12ced1aab6265a7484b1eb750ba3ba8c517df2f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
