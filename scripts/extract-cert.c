@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (5afc1d Merge 0ed905975612 ("Merge branch 'random-5.17-rc1-for-linus)
 /* Extract X.509 certificate in DER form from PKCS#11 or PEM.
  *
  * Copyright © 2014-2015 Red Hat, Inc. All Rights Reserved.
@@ -167,3 +168,5 @@ int main(int argc, char **argv)
 
 	return 0;
 }
+=======
+>>>>>>> BRANCH (fd6f57 Merge tag 'kbuild-v5.17' of git://git.kernel.org/pub/scm/lin)
