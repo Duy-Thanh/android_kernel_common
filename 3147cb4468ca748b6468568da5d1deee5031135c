@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3faf8771_2b916a27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-02-14T16:46:18Z",
+      "side": 1,
+      "message": "Is this still relevant? If not, let\u0027s abandon.\n\nIf so, then the doc that Greg is referring to is go/gki-newsletter which is used to create https://docs.partner.android.com/partners/guides/gki/whatsnew on Thursday afternoons (PST)",
+      "revId": "3147cb4468ca748b6468568da5d1deee5031135c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
