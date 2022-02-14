@@ -249,9 +249,10 @@ static void handle_pvm_entry_dabt(struct kvm_vcpu *host_vcpu, struct kvm_vcpu *s
 
 static void handle_pvm_exit_wfx(struct kvm_vcpu *host_vcpu, struct kvm_vcpu *shadow_vcpu)
 {
-	host_vcpu->arch.ctxt.regs.pstate = shadow_vcpu->arch.ctxt.regs.pstate &
-		PSR_MODE_MASK;
-	host_vcpu->arch.fault.esr_el2 = shadow_vcpu->arch.fault.esr_el2;
+	WRITE_ONCE(host_vcpu->arch.ctxt.regs.pstate,
+		   shadow_vcpu->arch.ctxt.regs.pstate & PSR_MODE_MASK);
+	WRITE_ONCE(host_vcpu->arch.fault.esr_el2,
+		   shadow_vcpu->arch.fault.esr_el2);
 }
 
 static void handle_pvm_exit_sys64(struct kvm_vcpu *host_vcpu, struct kvm_vcpu *shadow_vcpu)
@@ -270,7 +271,7 @@ static void handle_pvm_exit_sys64(struct kvm_vcpu *host_vcpu, struct kvm_vcpu *s
 		int rt = kvm_vcpu_sys_get_rt(shadow_vcpu);
 		u64 rt_val = vcpu_get_reg(shadow_vcpu, rt);
 
-		vcpu_set_reg(host_vcpu, 0, rt_val);
+		WRITE_ONCE(host_vcpu->arch.ctxt.regs.regs[0], rt_val);
 	}
 }
 
@@ -317,11 +318,13 @@ static void handle_pvm_exit_hvc64(struct kvm_vcpu *host_vcpu, struct kvm_vcpu *s
 		BUG();
 	}
 
-	host_vcpu->arch.fault.esr_el2 = shadow_vcpu->arch.fault.esr_el2;
+	WRITE_ONCE(host_vcpu->arch.fault.esr_el2,
+		   shadow_vcpu->arch.fault.esr_el2);
 
 	/* Pass the hvc function id (r0) as well as any potential arguments. */
 	for (i = 0; i < n; i++)
-		vcpu_set_reg(host_vcpu, i, vcpu_get_reg(shadow_vcpu, i));
+		WRITE_ONCE(host_vcpu->arch.ctxt.regs.regs[i],
+			   vcpu_get_reg(shadow_vcpu, i));
 }
 
 static void handle_pvm_exit_iabt(struct kvm_vcpu *host_vcpu, struct kvm_vcpu *shadow_vcpu)
@@ -345,7 +348,7 @@ static void handle_pvm_exit_dabt(struct kvm_vcpu *host_vcpu, struct kvm_vcpu *sh
 			int rt = kvm_vcpu_dabt_get_rd(shadow_vcpu);
 			u64 rt_val = vcpu_get_reg(shadow_vcpu, rt);
 
-			vcpu_set_reg(host_vcpu, 0, rt_val);
+			WRITE_ONCE(host_vcpu->arch.ctxt.regs.regs[0], rt_val);
 		}
 	} else {
 		WRITE_ONCE(host_vcpu->arch.fault.esr_el2,
@@ -379,12 +382,20 @@ static void handle_vm_entry_generic(struct kvm_vcpu *host_vcpu, struct kvm_vcpu 
 
 static void handle_vm_exit_generic(struct kvm_vcpu *host_vcpu, struct kvm_vcpu *shadow_vcpu)
 {
-	host_vcpu->arch.fault.esr_el2 = shadow_vcpu->arch.fault.esr_el2;
+	WRITE_ONCE(host_vcpu->arch.fault.esr_el2,
+		   shadow_vcpu->arch.fault.esr_el2);
 }
 
 static void handle_vm_exit_abt(struct kvm_vcpu *host_vcpu, struct kvm_vcpu *shadow_vcpu)
 {
-	host_vcpu->arch.fault = shadow_vcpu->arch.fault;
+	WRITE_ONCE(host_vcpu->arch.fault.esr_el2,
+		   shadow_vcpu->arch.fault.esr_el2);
+	WRITE_ONCE(host_vcpu->arch.fault.far_el2,
+		   shadow_vcpu->arch.fault.far_el2);
+	WRITE_ONCE(host_vcpu->arch.fault.hpfar_el2,
+		   shadow_vcpu->arch.fault.hpfar_el2);
+	WRITE_ONCE(host_vcpu->arch.fault.disr_el1,
+		   shadow_vcpu->arch.fault.disr_el1);
 }
 
 static const shadow_entry_exit_handler_fn entry_pvm_shadow_handlers[] = {
@@ -448,10 +459,10 @@ static void sync_vgic_state(struct kvm_vcpu *host_vcpu,
 	host_cpu_if	= &host_vcpu->arch.vgic_cpu.vgic_v3;
 	shadow_cpu_if	= &shadow_vcpu->arch.vgic_cpu.vgic_v3;
 
-	host_cpu_if->vgic_hcr	= shadow_cpu_if->vgic_hcr;
+	WRITE_ONCE(host_cpu_if->vgic_hcr, shadow_cpu_if->vgic_hcr);
 
 	for (i = 0; i < shadow_cpu_if->used_lrs; i++)
-		host_cpu_if->vgic_lr[i] = shadow_cpu_if->vgic_lr[i];
+		WRITE_ONCE(host_cpu_if->vgic_lr[i], shadow_cpu_if->vgic_lr[i]);
 }
 
 static void flush_timer_state(struct pkvm_loaded_state *state)
@@ -595,7 +606,7 @@ static void sync_shadow_state(struct pkvm_loaded_state *state, u32 exit_reason)
 
 	host_flags = READ_ONCE(host_vcpu->arch.flags) &
 		~(KVM_ARM64_PENDING_EXCEPTION | KVM_ARM64_INCREMENT_PC);
-	host_vcpu->arch.flags = host_flags;
+	WRITE_ONCE(host_vcpu->arch.flags, host_flags);
 	shadow_vcpu->arch.pkvm.exit_code = exit_reason;
 }
 
