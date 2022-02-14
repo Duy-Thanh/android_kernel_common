@@ -16,7 +16,24 @@
       "message": "Jaegeuk, this is pretty old...time to abandon?",
       "revId": "7e99f1d7a283900ce7499f4293c2b7bb0207efdd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c88f5d47_3289a664",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2022-02-14T16:49:15Z",
+      "side": 1,
+      "message": "Yea, it seems it\u0027s obsolete. Thanks~",
+      "parentUuid": "a653b709_c30ea81c",
+      "revId": "7e99f1d7a283900ce7499f4293c2b7bb0207efdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
-  ],
-  "submitRequirementResults": []
+  ]
 }
