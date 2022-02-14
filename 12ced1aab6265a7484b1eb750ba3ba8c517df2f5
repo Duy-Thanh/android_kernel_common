@@ -69,6 +69,24 @@
       "parentUuid": "14af3b4c_164b4d98",
       "revId": "12ced1aab6265a7484b1eb750ba3ba8c517df2f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7586edf_69a0d702",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2022-02-14T08:06:56Z",
+      "side": 1,
+      "message": "Thanks very much for the check, and just want you know, if necessary I could check it before the update when the new prebuilt images are ready, just please let me know where I could get the new prebuilt images.",
+      "parentUuid": "e209a639_139e2ab2",
+      "revId": "12ced1aab6265a7484b1eb750ba3ba8c517df2f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
