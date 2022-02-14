@@ -23,6 +23,11 @@ struct load_info {
 #ifdef CONFIG_KALLSYMS
 	unsigned long mod_kallsyms_init_off;
 #endif
+#ifdef CONFIG_MODULE_DECOMPRESS
+	struct page **pages;
+	unsigned int max_pages;
+	unsigned int used_pages;
+#endif
 	struct {
 		unsigned int sym, str, mod, vers, info, pcpu;
 	} index;
@@ -30,6 +35,7 @@ struct load_info {
 
 extern int mod_verify_sig(const void *mod, struct load_info *info);
 
+<<<<<<< HEAD   (af4418 ANDROID: disble the UID_SYS_STATS driver)
 #ifdef CONFIG_MODULE_SIG_PROTECT
 extern bool gki_is_module_exported_symbol(const char *name);
 extern bool gki_is_module_protected_symbol(const char *name);
@@ -43,3 +49,18 @@ static inline bool gki_is_module_protected_symbol(const char *name)
 	return 0;
 }
 #endif /* CONFIG_MODULE_SIG_PROTECT */
+=======
+#ifdef CONFIG_MODULE_DECOMPRESS
+int module_decompress(struct load_info *info, const void *buf, size_t size);
+void module_decompress_cleanup(struct load_info *info);
+#else
+static inline int module_decompress(struct load_info *info,
+				    const void *buf, size_t size)
+{
+	return -EOPNOTSUPP;
+}
+static inline void module_decompress_cleanup(struct load_info *info)
+{
+}
+#endif
+>>>>>>> BRANCH (763978 Merge branch 'modules-next' of git://git.kernel.org/pub/scm/)
