@@ -16,6 +16,24 @@
       "message": "Is this still relevant? If not, let\u0027s abandon.\n\nIf so, then the doc that Greg is referring to is go/gki-newsletter which is used to create https://docs.partner.android.com/partners/guides/gki/whatsnew on Thursday afternoons (PST)",
       "revId": "3147cb4468ca748b6468568da5d1deee5031135c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b94f3a2d_c87e0cc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2022-02-15T01:19:25Z",
+      "side": 1,
+      "message": "I updated the doc a long time ago, and afaik nothing happened.\n\nOn Mon, Feb 14, 2022 at 8:46 AM Todd Kjos (Gerrit)\n\u003cnoreply-gerritcodereview-TF_4_GLeyamGiVIMcD8SCQ\u003d\u003d@google.com\u003e wrote:",
+      "tag": "mailMessageId\u003d\u003cCANP3RGc1pu3d8Rwfk9VPpYFEe_VE-RjTpvLr8_63STN8VVOASg@mail.gmail.com\u003e",
+      "revId": "3147cb4468ca748b6468568da5d1deee5031135c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
