@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44f57437_b9b20768",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-02-15T19:30:01Z",
+      "side": 1,
+      "message": "Please fix userspace, this should not be an issue for android 13.\n\nAnd verify the security issue as well...",
+      "revId": "76296807892b1bc5b21111a673ec3088fc9dc3b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
