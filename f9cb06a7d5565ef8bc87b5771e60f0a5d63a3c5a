@@ -51,6 +51,23 @@
       "parentUuid": "40489d56_96ea4508",
       "revId": "f9cb06a7d5565ef8bc87b5771e60f0a5d63a3c5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c16a9ae_87405ba6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2022-02-15T22:32:51Z",
+      "side": 1,
+      "message": "Please consider to update the current change with:\nhttps://android-review.googlesource.com/c/kernel/common/+/1986269",
+      "revId": "f9cb06a7d5565ef8bc87b5771e60f0a5d63a3c5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
