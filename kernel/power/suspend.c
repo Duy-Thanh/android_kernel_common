@@ -139,9 +139,12 @@ static void s2idle_loop(void)
 			break;
 		}
 
+<<<<<<< HEAD   (82b6e1 Merge branch 'android11-5.4' into 'android11-5.4-lts')
 		pm_wakeup_clear(false);
 		clear_wakeup_reasons();
 
+=======
+>>>>>>> BRANCH (7b3eb6 Linux 5.4.180)
 		s2idle_enter();
 	}
 
