@@ -1315,6 +1315,7 @@ headerdep:
 	$(Q)find $(srctree)/include/ -name '*.h' | xargs --max-args 1 \
 	$(srctree)/scripts/headerdep.pl -I$(srctree)/include
 
+<<<<<<< HEAD   (2130da Merge 50a483405c42 ("kbuild: move headers_check.pl to usr/in)
 # Deprecated. It is no-op now.
 PHONY += headers_check
 headers_check:
@@ -1323,6 +1324,34 @@ headers_check:
 	@echo >&2 "and will be removed after Linux 5.15 release."
 	@echo >&2 "Please remove headers_check from your scripts."
 	@echo >&2 "==============================================="
+=======
+# ---------------------------------------------------------------------------
+# Kernel headers
+
+#Default location for installed headers
+export INSTALL_HDR_PATH = $(objtree)/usr
+
+quiet_cmd_headers_install = INSTALL $(INSTALL_HDR_PATH)/include
+      cmd_headers_install = \
+	mkdir -p $(INSTALL_HDR_PATH); \
+	rsync -mrl --include='*/' --include='*\.h' --exclude='*' \
+	usr/include $(INSTALL_HDR_PATH)
+
+PHONY += headers_install
+headers_install: headers
+	$(call cmd,headers_install)
+
+PHONY += archheaders archscripts
+
+hdr-inst := -f $(srctree)/scripts/Makefile.headersinst obj
+
+PHONY += headers
+headers: $(version_h) scripts_unifdef uapi-asm-generic archheaders archscripts
+	$(if $(wildcard $(srctree)/arch/$(SRCARCH)/include/uapi/asm/Kbuild),, \
+	  $(error Headers not exportable for the $(SRCARCH) architecture))
+	$(Q)$(MAKE) $(hdr-inst)=include/uapi
+	$(Q)$(MAKE) $(hdr-inst)=arch/$(SRCARCH)/include/uapi
+>>>>>>> BRANCH (4fbce8 kbuild: remove headers_check stub)
 
 ifdef CONFIG_HEADERS_INSTALL
 prepare: headers
