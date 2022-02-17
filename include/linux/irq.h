@@ -249,6 +249,33 @@ enum {
 	IRQD_IRQ_ENABLED_ON_SUSPEND	= (1 << 30),
 };
 
+/*
+ * IRQ error type.
+ *
+ * IRQ_ERR_NONE			- irq no error
+ * IRQ_ERR_NOEXT		- irq not exist
+ * IRQ_ERR_UNMAPPED		- irq unmapped
+ * IRQ_ERR_NOACT		- irq no action
+ * IRQ_ERR_DISABLED		- irq coming but already disabled
+ * IRQ_ERR_MASKED		- irq coming but already masked
+ * IRQ_ERR_PM_MISCONFIG		- irq not only armed as wakup source but
+ *				  also works for IRQ_NO_SUSPEND
+ */
+enum {
+	IRQ_ERR_NONE = 0,
+	IRQ_ERR_NOEXT,
+	IRQ_ERR_UNMAPPED,
+	IRQ_ERR_NOACT,
+	IRQ_ERR_DISABLED,
+	IRQ_ERR_MASKED,
+	IRQ_ERR_PM_MISCONFIG,
+};
+
+struct irq_err_type {
+	int irq;
+	int err;
+};
+
 #define __irqd_to_state(d) ACCESS_PRIVATE((d)->common, state_use_accessors)
 
 static inline bool irqd_is_setaffinity_pending(struct irq_data *d)

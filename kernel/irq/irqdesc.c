@@ -23,6 +23,32 @@
  * lockdep: we want to handle all irq_desc locks as a single lock-class:
  */
 static struct lock_class_key irq_desc_lock_class;
+//TODO: optimise this record struct
+static struct irq_err_type irq_err;
+
+static void irq_err_record(int irq, int err)
+{
+	//TODO: combine the record action, and make it atomic
+	irq_err.irq = irq;
+	irq_err.err = err;
+}
+
+int irq_err_read_and_clean(int *irq, int *err)
+{
+	if (!irq || !err) {
+		return -EINVAL;
+	}
+
+	//TODO: make these operations atomic
+	*irq = irq_err.irq;
+	*err = irq_err.err;
+
+	irq_err.err = IRQ_ERR_NONE;
+	irq_err.irq = 0;
+
+	return 0;
+}
+EXPORT_SYMBOL_GPL(irq_err_get);
 
 #if defined(CONFIG_SMP)
 static int __init irq_affinity_setup(char *str)
@@ -656,7 +682,14 @@ int handle_irq_desc(struct irq_desc *desc)
   */
 int generic_handle_irq(unsigned int irq)
 {
-	return handle_irq_desc(irq_to_desc(irq));
+	struct irq_desc *desc;
+
+	desc = irq_to_desc(irq);
+	if (!desc) {
+		irq_err_record(irq, IRQ_ERR_NOEXT)
+		return -EINVAL;
+	}
+	return handle_irq_desc(desc);
 }
 EXPORT_SYMBOL_GPL(generic_handle_irq);
 
@@ -674,8 +707,16 @@ EXPORT_SYMBOL_GPL(generic_handle_irq);
  */
 int generic_handle_domain_irq(struct irq_domain *domain, unsigned int hwirq)
 {
+	struct irq_desc *desc;
+
 	WARN_ON_ONCE(!in_irq());
-	return handle_irq_desc(irq_resolve_mapping(domain, hwirq));
+
+	desc = irq_resolve_mapping(domain, hwirq);
+	if (!desc) {
+		irq_err_record(hwirq, IRQ_ERR_UNMAPPED)
+		return -EINVAL;
+	}
+	return handle_irq_desc(desc);
 }
 EXPORT_SYMBOL_GPL(generic_handle_domain_irq);
 
@@ -692,8 +733,16 @@ EXPORT_SYMBOL_GPL(generic_handle_domain_irq);
  **/
 int generic_handle_domain_nmi(struct irq_domain *domain, unsigned int hwirq)
 {
+	struct irq_desc *desc;
+
 	WARN_ON_ONCE(!in_nmi());
-	return handle_irq_desc(irq_resolve_mapping(domain, hwirq));
+
+	desc = irq_resolve_mapping(domain, hwirq);
+	if (!desc) {
+		irq_err_record(hwirq, IRQ_ERR_UNMAPPED)
+		return -EINVAL;
+	}
+	return handle_irq_desc(desc);
 }
 #endif
 

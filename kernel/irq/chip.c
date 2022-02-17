@@ -19,6 +19,21 @@
 
 #include "internals.h"
 
+static void irq_check_error(struct irq_desc *desc)
+{
+	if (!desc->action) {
+		irq_err_record(desc->irq_data->irq, IRQ_ERR_NOEXT)
+	}
+	if (irqd_irq_disabled(&desc->irq_data)) {
+		irq_err_record(desc->irq_data->irq, IRQ_ERR_DISABLED)
+	}
+	if (unlikely(desc->no_suspend_depth &&
+		irqd_is_wakeup_set(&desc->irq_data))) {
+		irq_err_record(desc->irq_data->irq, IRQ_ERR_PM_MISCONFIG)
+	}
+	return;
+}
+
 static irqreturn_t bad_chained_irq(int irq, void *dev_id)
 {
 	WARN_ONCE(1, "Chained irq %d should not call an action\n", irq);
@@ -548,6 +563,7 @@ void handle_simple_irq(struct irq_desc *desc)
 	desc->istate &= ~(IRQS_REPLAY | IRQS_WAITING);
 
 	if (unlikely(!desc->action || irqd_irq_disabled(&desc->irq_data))) {
+		irq_check_error(desc);
 		desc->istate |= IRQS_PENDING;
 		goto out_unlock;
 	}
@@ -585,6 +601,7 @@ void handle_untracked_irq(struct irq_desc *desc)
 	desc->istate &= ~(IRQS_REPLAY | IRQS_WAITING);
 
 	if (unlikely(!desc->action || irqd_irq_disabled(&desc->irq_data))) {
+		irq_check_error(desc);
 		desc->istate |= IRQS_PENDING;
 		goto out_unlock;
 	}
@@ -645,6 +662,7 @@ void handle_level_irq(struct irq_desc *desc)
 	 * keep it masked and get out of here
 	 */
 	if (unlikely(!desc->action || irqd_irq_disabled(&desc->irq_data))) {
+		irq_check_error(desc);
 		desc->istate |= IRQS_PENDING;
 		goto out_unlock;
 	}
@@ -705,6 +723,7 @@ void handle_fasteoi_irq(struct irq_desc *desc)
 	 * then mask it and get out of here:
 	 */
 	if (unlikely(!desc->action || irqd_irq_disabled(&desc->irq_data))) {
+		irq_check_error(desc);
 		desc->istate |= IRQS_PENDING;
 		mask_irq(desc);
 		goto out;
@@ -792,6 +811,7 @@ void handle_edge_irq(struct irq_desc *desc)
 	 * out of here.
 	 */
 	if (irqd_irq_disabled(&desc->irq_data) || !desc->action) {
+		irq_check_error(desc);
 		desc->istate |= IRQS_PENDING;
 		mask_ack_irq(desc);
 		goto out_unlock;
@@ -855,6 +875,7 @@ void handle_edge_eoi_irq(struct irq_desc *desc)
 	 * out of here.
 	 */
 	if (irqd_irq_disabled(&desc->irq_data) || !desc->action) {
+		irq_check_error(desc);
 		desc->istate |= IRQS_PENDING;
 		goto out_eoi;
 	}
