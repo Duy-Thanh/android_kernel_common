@@ -34,6 +34,8 @@ static int __init init_incfs_module(void)
 	return err;
 }
 
+// HELLO?
+
 static void __exit cleanup_incfs_module(void)
 {
 	incfs_cleanup_sysfs();
