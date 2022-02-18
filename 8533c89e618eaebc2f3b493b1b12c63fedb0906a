@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82ee3957_55f766f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-02-18T18:30:27Z",
+      "side": 1,
+      "message": "Hi Mikhail. We can\u0027t take this change into a12-5.10 unfortunately, even though it is a good change to have, because some downstream boards have already enabled it as a vendor module (so the symbols you are adding to GKI will conflict). I think the best advice we can give for now is you enable this as a module in your 12-5.10 device, and then for a13 and later we\u0027ll make sure it\u0027s built in (as it should be). I will cherry-pick your patch forward if needed on newer versions.",
+      "revId": "8533c89e618eaebc2f3b493b1b12c63fedb0906a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
