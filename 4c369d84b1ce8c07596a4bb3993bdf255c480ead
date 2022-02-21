@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfb33838_021b62ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-02-21T18:13:45Z",
+      "side": 1,
+      "message": "If this hook really is needed, please submit a path that adds it to the list of supported symbols.\n",
+      "revId": "4c369d84b1ce8c07596a4bb3993bdf255c480ead",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
