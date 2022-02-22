@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b272de4e_8e7229e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-02-22T15:45:40Z",
+      "side": 1,
+      "message": "-1-ing until the pending comment is resolved as this would currently proactively make all protected guest memory DMA-able from the host.",
+      "revId": "431792997e9ead141c135f5b958525579be03fa2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f5ecefb2_ebd4f13f",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 7
