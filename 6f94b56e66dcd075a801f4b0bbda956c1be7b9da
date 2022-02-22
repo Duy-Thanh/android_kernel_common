@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8451b6d3_99151c60",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-02-22T15:38:13Z",
+      "side": 1,
+      "message": "Note for later: this looks like it could be a good candidate to turn in a rwlock when Will gets to implement it.",
+      "range": {
+        "startLine": 195,
+        "startChar": 1,
+        "endLine": 195,
+        "endChar": 24
+      },
+      "revId": "6f94b56e66dcd075a801f4b0bbda956c1be7b9da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
