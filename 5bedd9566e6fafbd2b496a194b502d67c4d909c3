@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a14d8845_dabd02d7",
+        "filename": "arch/arm64/kernel/vmlinux.lds.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-02-22T14:57:51Z",
+      "side": 1,
+      "message": "Nit: I guess this doesn\u0027t really need to be plural.",
+      "range": {
+        "startLine": 16,
+        "startChar": 33,
+        "endLine": 16,
+        "endChar": 34
+      },
+      "revId": "5bedd9566e6fafbd2b496a194b502d67c4d909c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
