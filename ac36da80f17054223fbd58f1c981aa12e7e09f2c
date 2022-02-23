@@ -16,6 +16,23 @@
       "message": "The original CL failed to cherry pick directly because of conflict. This CL is made by a local kernel kernel on branch android11-5.4. ",
       "revId": "ac36da80f17054223fbd58f1c981aa12e7e09f2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4769dfce_133a6024",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135739
+      },
+      "writtenOn": "2022-02-23T07:29:08Z",
+      "side": 1,
+      "message": "Feel free to take it over if I\u0027m missing anything.",
+      "revId": "ac36da80f17054223fbd58f1c981aa12e7e09f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
