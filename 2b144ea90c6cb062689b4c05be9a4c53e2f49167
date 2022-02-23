@@ -1,4 +1,21 @@
 {
-  "comments": [],
-  "submitRequirementResults": []
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9a372af_6c5e2fcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1902352
+      },
+      "writtenOn": "2022-02-23T16:47:50Z",
+      "side": 1,
+      "message": "The original change consisted of two commits:\nhttps://android-review.googlesource.com/c/kernel/common/+/1952936\nand\nhttps://android-review.googlesource.com/c/kernel/common/+/1961780\n\nif revert just the first one, but not the other it will cause trouble.\nI planed to have a one revert for the two above squashed together.\nNow that we have only partially reverted it we have a bit of a mess.",
+      "revId": "2b144ea90c6cb062689b4c05be9a4c53e2f49167",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
 }
