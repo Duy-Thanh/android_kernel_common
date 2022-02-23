@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ee3ab79_0fe52e13",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-02-23T19:33:28Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be here for the android branches.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 75
+      },
+      "revId": "c0b09a631efe8bda5f7e0faf3cf06d5ab6f88e41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
