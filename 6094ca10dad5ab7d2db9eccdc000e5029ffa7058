@@ -16,6 +16,41 @@
       "message": "Is this safe on android13-5.10?  I thought that upgrades on the same kernel minor release, like android12-5.10 \u003d\u003e android13-5.10, are supported.",
       "revId": "6094ca10dad5ab7d2db9eccdc000e5029ffa7058",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b5eedfd_f6a1b34d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-02-23T23:45:29Z",
+      "side": 1,
+      "message": "I think in practice, the OEMs that were using ext4 userdata don\u0027t have any kind of track record for upgrading vendor, so I think any code we leave in a13-5.10 will be dead code..",
+      "parentUuid": "6b026fe9_66932429",
+      "revId": "6094ca10dad5ab7d2db9eccdc000e5029ffa7058",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "843875ac_3a1415d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-02-23T23:45:29Z",
+      "side": 1,
+      "message": "I think in practice, the OEMs that were using ext4 userdata don\u0027t have any kind of track record for upgrading vendor, so I think any code we leave in a13-5.10 will be dead code..",
+      "revId": "6094ca10dad5ab7d2db9eccdc000e5029ffa7058",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
