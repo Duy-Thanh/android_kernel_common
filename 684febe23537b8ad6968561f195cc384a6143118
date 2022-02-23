@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bfb2305_9f8530c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-02-23T19:45:23Z",
+      "side": 1,
+      "message": "Can you explain why you want to run an updated linux kernel driver with an old Trusty? Is updating Trusty along with the linux driver not an option for you?",
+      "revId": "684febe23537b8ad6968561f195cc384a6143118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
