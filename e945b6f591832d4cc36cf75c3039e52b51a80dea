@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98958509_7e6680da",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-02-23T19:17:26Z",
+      "side": 1,
+      "message": "For concatenated page-tables, this probably needs natural alignment, but for the purposes of donation this is fine.",
+      "range": {
+        "startLine": 579,
+        "startChar": 6,
+        "endLine": 579,
+        "endChar": 23
+      },
+      "revId": "e945b6f591832d4cc36cf75c3039e52b51a80dea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
