@@ -88,6 +88,24 @@
       "parentUuid": "f5d65b1b_1c519432",
       "revId": "684febe23537b8ad6968561f195cc384a6143118",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04ed8535_c0bde9d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1206463
+      },
+      "writtenOn": "2022-02-24T04:39:02Z",
+      "side": 1,
+      "message": "Yes. For these low-end platforms we don\u0027t have plan to support FF-A but do have plan to support Android 12. For loadable apps, actually we have modified the apploader to make it allocate physical continuous shared memory in such case so it can work.\n\nAs this driver still supports old trusty api as compat so keep the same log buffer size seems reasonable.",
+      "parentUuid": "64b8f905_9eee641e",
+      "revId": "684febe23537b8ad6968561f195cc384a6143118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
