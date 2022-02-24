@@ -16,6 +16,24 @@
       "message": "Can you explain why you want to run an updated linux kernel driver with an old Trusty? Is updating Trusty along with the linux driver not an option for you?",
       "revId": "684febe23537b8ad6968561f195cc384a6143118",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63f49361_e90cc10f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1206463
+      },
+      "writtenOn": "2022-02-24T02:13:19Z",
+      "side": 1,
+      "message": "Hi Marco,\n\nWe haven\u0027t supported the FF-A (Arm Firmware Framework for Arm A-profile), so the API level would be locked to 4 (TRUSTY_API_VERSION_PHYS_MEM_OBJ) which would not support share physical discontinuous memory.",
+      "parentUuid": "1bfb2305_9f8530c9",
+      "revId": "684febe23537b8ad6968561f195cc384a6143118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
