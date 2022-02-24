@@ -16,6 +16,24 @@
       "message": "Argh, now need to do the full XML refresh.",
       "revId": "d089e27aaf2f3147a2546fbd28c2c75fd7d270f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1480b8dc_31fdac43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-02-24T17:20:08Z",
+      "side": 1,
+      "message": "This is now an ABI breaking changes as symbols are removed.",
+      "parentUuid": "4ad89d59_4bfbdb60",
+      "revId": "d089e27aaf2f3147a2546fbd28c2c75fd7d270f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
