@@ -16,6 +16,24 @@
       "message": "What is proc_set_user needed for?",
       "revId": "32ecc78485b107287678bc284ec4fd5b502daeb9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b82f9384_9d9b3ceb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1767641
+      },
+      "writtenOn": "2022-02-24T09:33:41Z",
+      "side": 1,
+      "message": "Some of our modules create procfs node and set its own GID\n \n \n  uid \u003d make_kuid(\u0026init_user_ns, 0);\n  gid \u003d make_kgid(\u0026init_user_ns, 1001);\n\n  prEntry \u003d proc_create(\"XXXX\", PROC_PERM, NULL,\n            \u0026XXXX_fops);\n\n  if (!prEntry)\n    return -ENOENT;\n\n  proc_set_user(prEntry, uid, gid);",
+      "parentUuid": "23aeefc3_0ce41920",
+      "revId": "32ecc78485b107287678bc284ec4fd5b502daeb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
