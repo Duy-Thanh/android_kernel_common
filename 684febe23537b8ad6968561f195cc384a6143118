@@ -52,6 +52,24 @@
       "parentUuid": "63f49361_e90cc10f",
       "revId": "684febe23537b8ad6968561f195cc384a6143118",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5d65b1b_1c519432",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1206463
+      },
+      "writtenOn": "2022-02-24T02:55:45Z",
+      "side": 1,
+      "message": "Hi Arve,\n\nThanks for your reply! Some of our SoCs are based on \"old\" ARM architecture and target for low-end markets, FF-A are not supported on these platforms.\n\nThis commit will allocate memory based on the trusty api level, it makes sure we will not decrease the log buffer size even for old trusty api level.",
+      "parentUuid": "9812e23a_3d76d45f",
+      "revId": "684febe23537b8ad6968561f195cc384a6143118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
