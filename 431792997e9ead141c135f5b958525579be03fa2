@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ec05eef_5f5a25eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-02-24T09:53:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b272de4e_8e7229e4",
+      "revId": "431792997e9ead141c135f5b958525579be03fa2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5ecefb2_ebd4f13f",
@@ -55,6 +73,30 @@
       "side": 1,
       "message": "Ah, my bad. Yeah, this is wrong. Thanks for catching it.",
       "parentUuid": "f5ecefb2_ebd4f13f",
+      "range": {
+        "startLine": 560,
+        "startChar": 49,
+        "endLine": 560,
+        "endChar": 67
+      },
+      "revId": "431792997e9ead141c135f5b958525579be03fa2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43d27ad5_8f3b04fd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-02-24T09:53:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10ba28f2_9e8988fa",
       "range": {
         "startLine": 560,
         "startChar": 49,
