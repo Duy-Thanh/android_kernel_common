@@ -34,6 +34,24 @@
       "parentUuid": "1bfb2305_9f8530c9",
       "revId": "684febe23537b8ad6968561f195cc384a6143118",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9812e23a_3d76d45f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-02-24T02:44:23Z",
+      "side": 1,
+      "message": "Why not? You are making a change to the android 12 trusty Linux driver and FF-A is \"STRONGLY RECOMMENDED\" by the android 12 cdd: https://source.android.com/compatibility/12/android-12-cdd",
+      "parentUuid": "63f49361_e90cc10f",
+      "revId": "684febe23537b8ad6968561f195cc384a6143118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
