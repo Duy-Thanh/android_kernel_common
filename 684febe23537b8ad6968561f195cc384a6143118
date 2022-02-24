@@ -70,6 +70,24 @@
       "parentUuid": "9812e23a_3d76d45f",
       "revId": "684febe23537b8ad6968561f195cc384a6143118",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64b8f905_9eee641e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-02-24T03:04:21Z",
+      "side": 1,
+      "message": "FF-A is not a hardware feature. It is how trusty allows sharing memory in a way that is compatible with a hypervisor (currently only in the non-secure world). While the a low-end device might not have a hypervisor, skipping FF-A support has implications beyond that new features loadable apps depend on it.",
+      "parentUuid": "f5d65b1b_1c519432",
+      "revId": "684febe23537b8ad6968561f195cc384a6143118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
