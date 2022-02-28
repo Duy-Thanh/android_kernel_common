@@ -4314,7 +4314,15 @@ gfp_to_alloc_flags(gfp_t gfp_mask)
 		alloc_flags |= ALLOC_KSWAPD;
 
 #ifdef CONFIG_CMA
-	if (gfpflags_to_migratetype(gfp_mask) == MIGRATE_MOVABLE)
+	/*
+	 * Restrict amending ALLOC_CMA only when GFP_CMA applied.
+	 * Otherwise __zone_watermark_ok for movable allocations
+	 * with no __GFP_CMA will consider CMA as an eligible area
+	 * for allocations and will not subtract NR_FREE_CMA_PAGES
+	 * from free_pages.
+	 */
+	if (gfpflags_to_migratetype(gfp_mask) == MIGRATE_MOVABLE
+			&& gfp_mask & __GFP_CMA)
 		alloc_flags |= ALLOC_CMA;
 #endif
 	return alloc_flags;
@@ -4796,7 +4804,8 @@ static inline bool prepare_alloc_pages(gfp_t gfp_mask, unsigned int order,
 	if (should_fail_alloc_page(gfp_mask, order))
 		return false;
 
-	if (IS_ENABLED(CONFIG_CMA) && ac->migratetype == MIGRATE_MOVABLE)
+	if (IS_ENABLED(CONFIG_CMA) && ac->migratetype == MIGRATE_MOVABLE
+			&& gfp_mask & __GFP_CMA)
 		*alloc_flags |= ALLOC_CMA;
 
 	return true;
@@ -4839,7 +4848,9 @@ __alloc_pages_nodemask(gfp_t gfp_mask, unsigned int order, int preferred_nid,
 	}
 
 	gfp_mask &= gfp_allowed_mask;
+	gfp_mask = current_gfp_context(gfp_mask);
 	alloc_mask = gfp_mask;
+
 	if (!prepare_alloc_pages(gfp_mask, order, preferred_nid, nodemask, &ac, &alloc_mask, &alloc_flags))
 		return NULL;
 
@@ -4862,7 +4873,6 @@ __alloc_pages_nodemask(gfp_t gfp_mask, unsigned int order, int preferred_nid,
 	 * from a particular context which has been marked by
 	 * memalloc_no{fs,io}_{save,restore}.
 	 */
-	alloc_mask = current_gfp_context(gfp_mask);
 	ac.spread_dirty_pages = false;
 
 	/*
