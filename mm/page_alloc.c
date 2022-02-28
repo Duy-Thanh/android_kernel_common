@@ -4314,7 +4314,13 @@ gfp_to_alloc_flags(gfp_t gfp_mask)
 		alloc_flags |= ALLOC_KSWAPD;
 
 #ifdef CONFIG_CMA
-	if (gfpflags_to_migratetype(gfp_mask) == MIGRATE_MOVABLE)
+	/* 
+	 * Restrict amending ALLOC_CMA only when GFP_CMA applied. Otherwise, normal gfp_movable 
+	 * allocation which lack of these will run across a weired watermark check failure because
+	 * of unreasonable deduction of MIGRATE_CMA's page blocks.
+	 */
+	if (gfpflags_to_migratetype(gfp_mask) == MIGRATE_MOVABLE
+			&& gfp_mask & __GFP_CMA)
 		alloc_flags |= ALLOC_CMA;
 #endif
 	return alloc_flags;
