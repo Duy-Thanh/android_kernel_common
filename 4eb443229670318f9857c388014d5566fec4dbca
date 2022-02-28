@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "758383a9_1f17a4be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2022-02-28T09:44:06Z",
+      "side": 1,
+      "message": "I need to think about it some more, but I think that this is a safe change that should fix the problems for now. The atomic refcounts and read/write locks are optimizations.",
+      "revId": "4eb443229670318f9857c388014d5566fec4dbca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
