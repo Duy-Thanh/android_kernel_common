@@ -68,6 +68,24 @@
       "message": "Please consider to update the current change with:\nhttps://android-review.googlesource.com/c/kernel/common/+/1986269",
       "revId": "f9cb06a7d5565ef8bc87b5771e60f0a5d63a3c5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aacf32af_51ec75c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1871253
+      },
+      "writtenOn": "2022-02-28T21:25:31Z",
+      "side": 1,
+      "message": "Addressed by including https://android-review.googlesource.com/c/kernel/common/+/2000234 in this patch.",
+      "parentUuid": "6c16a9ae_87405ba6",
+      "revId": "f9cb06a7d5565ef8bc87b5771e60f0a5d63a3c5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
