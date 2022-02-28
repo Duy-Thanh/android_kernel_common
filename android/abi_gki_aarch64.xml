@@ -929,7 +929,11 @@
       <elf-symbol name='blocking_notifier_chain_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x963aa2a9'/>
       <elf-symbol name='bmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6ee22b9c'/>
       <elf-symbol name='bpf_dispatcher_xdp_func' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6f8f674a'/>
+      <elf-symbol name='bpf_map_get_with_uref' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x43c7ed78'/>
+      <elf-symbol name='bpf_map_put_with_uref' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6d7a05f0'/>
       <elf-symbol name='bpf_prog_add' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd978c611'/>
+      <elf-symbol name='bpf_prog_get_type_dev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc99aa417'/>
+      <elf-symbol name='bpf_prog_get_type_path' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe3a341d6'/>
       <elf-symbol name='bpf_prog_put' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2803638b'/>
       <elf-symbol name='bpf_prog_sub' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x271c7a96'/>
       <elf-symbol name='bpf_trace_run1' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3ebcf954'/>
@@ -14547,89 +14551,6 @@
       <array-type-def dimensions='1' type-id='8f048e17' size-in-bits='infinite' id='167619f6'>
         <subrange length='infinite' type-id='7ff19f0f' id='031f2035'/>
       </array-type-def>
-      <class-decl name='compact_control' size-in-bits='1024' is-struct='yes' visibility='default' filepath='mm/internal.h' line='237' column='1' id='16773614'>
-        <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='freepages' type-id='72f469ec' visibility='default' filepath='mm/internal.h' line='238' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='migratepages' type-id='72f469ec' visibility='default' filepath='mm/internal.h' line='239' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='256'>
-          <var-decl name='nr_freepages' type-id='f0981eeb' visibility='default' filepath='mm/internal.h' line='240' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='288'>
-          <var-decl name='nr_migratepages' type-id='f0981eeb' visibility='default' filepath='mm/internal.h' line='241' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='320'>
-          <var-decl name='free_pfn' type-id='7359adad' visibility='default' filepath='mm/internal.h' line='242' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='384'>
-          <var-decl name='migrate_pfn' type-id='7359adad' visibility='default' filepath='mm/internal.h' line='243' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='448'>
-          <var-decl name='fast_start_pfn' type-id='7359adad' visibility='default' filepath='mm/internal.h' line='244' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='512'>
-          <var-decl name='zone' type-id='0a0aff97' visibility='default' filepath='mm/internal.h' line='245' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='576'>
-          <var-decl name='total_migrate_scanned' type-id='7359adad' visibility='default' filepath='mm/internal.h' line='246' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='640'>
-          <var-decl name='total_free_scanned' type-id='7359adad' visibility='default' filepath='mm/internal.h' line='247' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='704'>
-          <var-decl name='fast_search_fail' type-id='8efea9e5' visibility='default' filepath='mm/internal.h' line='248' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='720'>
-          <var-decl name='search_order' type-id='a2185560' visibility='default' filepath='mm/internal.h' line='249' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='736'>
-          <var-decl name='gfp_mask' type-id='96d7cfec' visibility='default' filepath='mm/internal.h' line='250' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='768'>
-          <var-decl name='order' type-id='95e97e5e' visibility='default' filepath='mm/internal.h' line='251' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='800'>
-          <var-decl name='migratetype' type-id='95e97e5e' visibility='default' filepath='mm/internal.h' line='252' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='832'>
-          <var-decl name='alloc_flags' type-id='20f5f452' visibility='default' filepath='mm/internal.h' line='253' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='864'>
-          <var-decl name='highest_zoneidx' type-id='2448a865' visibility='default' filepath='mm/internal.h' line='254' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='896'>
-          <var-decl name='mode' type-id='157252dd' visibility='default' filepath='mm/internal.h' line='255' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='928'>
-          <var-decl name='ignore_skip_hint' type-id='b50a4934' visibility='default' filepath='mm/internal.h' line='256' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='936'>
-          <var-decl name='no_set_skip_hint' type-id='b50a4934' visibility='default' filepath='mm/internal.h' line='257' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='944'>
-          <var-decl name='ignore_block_suitable' type-id='b50a4934' visibility='default' filepath='mm/internal.h' line='258' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='952'>
-          <var-decl name='direct_compaction' type-id='b50a4934' visibility='default' filepath='mm/internal.h' line='259' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='960'>
-          <var-decl name='proactive_compaction' type-id='b50a4934' visibility='default' filepath='mm/internal.h' line='260' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='968'>
-          <var-decl name='whole_zone' type-id='b50a4934' visibility='default' filepath='mm/internal.h' line='261' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='976'>
-          <var-decl name='contended' type-id='b50a4934' visibility='default' filepath='mm/internal.h' line='262' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='984'>
-          <var-decl name='rescan' type-id='b50a4934' visibility='default' filepath='mm/internal.h' line='263' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='992'>
-          <var-decl name='alloc_contig' type-id='b50a4934' visibility='default' filepath='mm/internal.h' line='264' column='1'/>
-        </data-member>
-      </class-decl>
       <pointer-type-def type-id='59a625dc' size-in-bits='64' id='168dc242'/>
       <function-type size-in-bits='64' id='1697786f'>
         <parameter type-id='91d0de51' name='_vq'/>
@@ -66448,14 +66369,7 @@
       <pointer-type-def type-id='bcb69272' size-in-bits='64' id='9778250c'/>
       <pointer-type-def type-id='d4984c46' size-in-bits='64' id='97786120'/>
       <pointer-type-def type-id='2e6f3990' size-in-bits='64' id='97851996'/>
-      <class-decl name='capture_control' size-in-bits='128' is-struct='yes' visibility='default' filepath='mm/internal.h' line='271' column='1' id='978e8e27'>
-        <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='cc' type-id='cdea3372' visibility='default' filepath='mm/internal.h' line='272' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='64'>
-          <var-decl name='page' type-id='02f11ed4' visibility='default' filepath='mm/internal.h' line='273' column='1'/>
-        </data-member>
-      </class-decl>
+      <class-decl name='capture_control' is-struct='yes' visibility='default' is-declaration-only='yes' id='978e8e27'/>
       <array-type-def dimensions='1' type-id='8f048e17' size-in-bits='80' id='979253d9'>
         <subrange length='10' type-id='7ff19f0f' id='487da03a'/>
       </array-type-def>
@@ -91252,7 +91166,6 @@
           <var-decl name='android_oem_data1' type-id='24a375b2' visibility='default' filepath='block/blk-mq.h' line='39' column='1'/>
         </data-member>
       </class-decl>
-      <pointer-type-def type-id='16773614' size-in-bits='64' id='cdea3372'/>
       <pointer-type-def type-id='23f90633' size-in-bits='64' id='cdea97c3'/>
       <function-type size-in-bits='64' id='cdead692'>
         <parameter type-id='77e79a4b'/>
@@ -119287,18 +119200,37 @@
         <parameter type-id='531a7450' name='bpf_func' filepath='net/core/filter.c' line='10286' column='1'/>
         <return type-id='f0981eeb'/>
       </function-decl>
-      <function-decl name='bpf_prog_add' mangled-name='bpf_prog_add' filepath='kernel/bpf/syscall.c' line='1860' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_prog_add'>
-        <parameter type-id='bdcee7ae' name='prog' filepath='kernel/bpf/syscall.c' line='1860' column='1'/>
-        <parameter type-id='95e97e5e' name='i' filepath='kernel/bpf/syscall.c' line='1860' column='1'/>
+      <function-decl name='bpf_map_get_with_uref' mangled-name='bpf_map_get_with_uref' filepath='kernel/bpf/syscall.c' line='949' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_map_get_with_uref'>
+        <parameter type-id='19c2251e' name='ufd' filepath='kernel/bpf/syscall.c' line='949' column='1'/>
+        <return type-id='00ee50b8'/>
+      </function-decl>
+      <function-decl name='bpf_map_put_with_uref' mangled-name='bpf_map_put_with_uref' filepath='kernel/bpf/syscall.c' line='502' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_map_put_with_uref'>
+        <parameter type-id='00ee50b8' name='map' filepath='kernel/bpf/syscall.c' line='502' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='bpf_prog_put' mangled-name='bpf_prog_put' filepath='kernel/bpf/syscall.c' line='1762' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_prog_put'>
-        <parameter type-id='bdcee7ae' name='prog' filepath='kernel/bpf/syscall.c' line='1762' column='1'/>
+      <function-decl name='bpf_prog_add' mangled-name='bpf_prog_add' filepath='kernel/bpf/syscall.c' line='1862' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_prog_add'>
+        <parameter type-id='bdcee7ae' name='prog' filepath='kernel/bpf/syscall.c' line='1862' column='1'/>
+        <parameter type-id='95e97e5e' name='i' filepath='kernel/bpf/syscall.c' line='1862' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='bpf_prog_sub' mangled-name='bpf_prog_sub' filepath='kernel/bpf/syscall.c' line='1866' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_prog_sub'>
-        <parameter type-id='bdcee7ae' name='prog' filepath='kernel/bpf/syscall.c' line='1866' column='1'/>
-        <parameter type-id='95e97e5e' name='i' filepath='kernel/bpf/syscall.c' line='1866' column='1'/>
+      <function-decl name='bpf_prog_get_type_dev' mangled-name='bpf_prog_get_type_dev' filepath='kernel/bpf/syscall.c' line='1939' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_prog_get_type_dev'>
+        <parameter type-id='19c2251e' name='ufd' filepath='kernel/bpf/syscall.c' line='1939' column='1'/>
+        <parameter type-id='b80df76a' name='type' filepath='kernel/bpf/syscall.c' line='1939' column='1'/>
+        <parameter type-id='b50a4934' name='attach_drv' filepath='kernel/bpf/syscall.c' line='1940' column='1'/>
+        <return type-id='bdcee7ae'/>
+      </function-decl>
+      <function-decl name='bpf_prog_get_type_path' mangled-name='bpf_prog_get_type_path' filepath='kernel/bpf/inode.c' line='585' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_prog_get_type_path'>
+        <parameter type-id='80f4b756' name='name' filepath='kernel/bpf/inode.c' line='585' column='1'/>
+        <parameter type-id='b80df76a' name='type' filepath='kernel/bpf/inode.c' line='585' column='1'/>
+        <return type-id='bdcee7ae'/>
+      </function-decl>
+      <function-decl name='bpf_prog_put' mangled-name='bpf_prog_put' filepath='kernel/bpf/syscall.c' line='1764' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_prog_put'>
+        <parameter type-id='bdcee7ae' name='prog' filepath='kernel/bpf/syscall.c' line='1764' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='bpf_prog_sub' mangled-name='bpf_prog_sub' filepath='kernel/bpf/syscall.c' line='1868' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_prog_sub'>
+        <parameter type-id='bdcee7ae' name='prog' filepath='kernel/bpf/syscall.c' line='1868' column='1'/>
+        <parameter type-id='95e97e5e' name='i' filepath='kernel/bpf/syscall.c' line='1868' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <var-decl name='bpf_stats_enabled_key' type-id='237c0d27' mangled-name='bpf_stats_enabled_key' visibility='default' filepath='kernel/bpf/core.c' line='2347' column='1' elf-symbol-id='bpf_stats_enabled_key'/>
