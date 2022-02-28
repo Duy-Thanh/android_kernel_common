@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e5c14fe_2bea8eeb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-02-28T21:00:21Z",
+      "side": 1,
+      "message": "We can\u0027t change existing vendor hooks because KMI is frozen and this change will affect any other possible user. Please submit a new vendor hook if existing one does not address your needs.",
+      "revId": "e9258ecbc2fd1cd8c14afb2c8790cd2bb1cc1746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
