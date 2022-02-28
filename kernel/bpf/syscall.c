@@ -520,6 +520,7 @@ void bpf_map_put_with_uref(struct bpf_map *map)
 	bpf_map_put_uref(map);
 	bpf_map_put(map);
 }
+EXPORT_SYMBOL_GPL(bpf_map_put_with_uref);
 
 static int bpf_map_release(struct inode *inode, struct file *filp)
 {
@@ -969,6 +970,7 @@ struct bpf_map *bpf_map_get_with_uref(u32 ufd)
 
 	return map;
 }
+EXPORT_SYMBOL_GPL(bpf_map_get_with_uref);
 
 /* map_idr_lock should have been held */
 static struct bpf_map *__bpf_map_inc_not_zero(struct bpf_map *map, bool uref)
