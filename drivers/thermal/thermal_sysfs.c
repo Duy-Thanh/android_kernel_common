@@ -938,9 +938,20 @@ cooling_device_stats_destroy(struct thermal_cooling_device *cdev) {}
 
 #endif /* CONFIG_THERMAL_STATISTICS */
 
+static bool disable_cdev_stats;
+
+static int __init disable_thermal_stats(char *str)
+{
+	disable_cdev_stats = true;
+	return 1;
+}
+
+__setup("nothermalstats", disable_thermal_stats);
+
 void thermal_cooling_device_setup_sysfs(struct thermal_cooling_device *cdev)
 {
-	cooling_device_stats_setup(cdev);
+	if (!disable_cdev_stats)
+		cooling_device_stats_setup(cdev);
 	cdev->device.groups = cooling_device_attr_groups;
 }
 
