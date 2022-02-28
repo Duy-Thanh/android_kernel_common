@@ -4314,7 +4314,12 @@ gfp_to_alloc_flags(gfp_t gfp_mask)
 		alloc_flags |= ALLOC_KSWAPD;
 
 #ifdef CONFIG_CMA
-	if (gfpflags_to_migratetype(gfp_mask) == MIGRATE_MOVABLE)
+	/* 
+	 * restrict amending ALLOC_CMA only when GFP_CMA applied
+	 * otherwise, normal gfp_movable allocation will be affected
+	 */
+	if (gfpflags_to_migratetype(gfp_mask) == MIGRATE_MOVABLE
+			&& gfp_mask & __GFP_CMA)
 		alloc_flags |= ALLOC_CMA;
 #endif
 	return alloc_flags;
