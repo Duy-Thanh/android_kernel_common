@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "abdfcd30_af8a49d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2022-03-01T17:29:45Z",
+      "side": 1,
+      "message": "this information should be part of the tags at the bottom like\n\n(cherry picked from commit 054aa8d439b9185d4f5eb9a90282d1ce74772969)\n\ndocs at https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "3e476f7076b36f3bdac982ae17c595dbe9ce5d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7b2aac8a_80fe35d3",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
