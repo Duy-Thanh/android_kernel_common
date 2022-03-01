@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b2aac8a_80fe35d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-03-01T15:41:27Z",
+      "side": 1,
+      "message": "needs the change on android12-5.10 to land",
+      "revId": "3e476f7076b36f3bdac982ae17c595dbe9ce5d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
