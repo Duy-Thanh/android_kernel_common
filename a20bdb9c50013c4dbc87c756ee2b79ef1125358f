@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "612213e6_e88bdfc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2022-03-01T03:13:00Z",
+      "side": 1,
+      "message": "The ABI lint failures appear to to be for both patches together, despite having also run TH separately for just this CL - e.g. they report added struct fields that result from enabling BTF. It looks like all of the report files from the ABI build for just this CL are empty, which matches what I see locally...",
+      "revId": "a20bdb9c50013c4dbc87c756ee2b79ef1125358f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
