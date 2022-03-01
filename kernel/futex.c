@@ -166,6 +166,7 @@ static int  __read_mostly futex_cmpxchg_enabled;
 #endif
 #define FLAGS_CLOCKRT		0x02
 #define FLAGS_HAS_TIMEOUT	0x04
+#define FLAGS_WAKE_SYNC		0x08
 
 /*
  * Priority Inheritance state:
@@ -1584,6 +1585,14 @@ double_unlock_hb(struct futex_hash_bucket *hb1, struct futex_hash_bucket *hb2)
 		spin_unlock(&hb2->lock);
 }
 
+static void futex_wake_up_q(struct wake_q_head *head, unsigned int flags)
+{
+	if (flags & FLAGS_WAKE_SYNC)
+		wake_up_q_sync(head);
+	else
+		wake_up_q(head);
+}
+
 /*
  * Wake up waiters matching bitset queued on this futex (uaddr).
  */
@@ -1629,7 +1638,7 @@ futex_wake(u32 __user *uaddr, unsigned int flags, int nr_wake, u32 bitset)
 	}
 
 	spin_unlock(&hb->lock);
-	wake_up_q(&wake_q);
+	futex_wake_up_q(&wake_q, flags);
 	return ret;
 }
 
@@ -1765,7 +1774,7 @@ retry_private:
 
 out_unlock:
 	double_unlock_hb(hb1, hb2);
-	wake_up_q(&wake_q);
+	futex_wake_up_q(&wake_q, flags);
 	return ret;
 }
 
@@ -2186,7 +2195,7 @@ retry_private:
 
 out_unlock:
 	double_unlock_hb(hb1, hb2);
-	wake_up_q(&wake_q);
+	futex_wake_up_q(&wake_q, flags);
 	hb_waiters_dec(hb2);
 	return ret ? ret : task_count;
 }
@@ -3719,6 +3728,17 @@ long do_futex(u32 __user *uaddr, int op, u32 val, ktime_t *timeout,
 		flags |= FLAGS_CLOCKRT;
 		if (cmd != FUTEX_WAIT_BITSET &&	cmd != FUTEX_WAIT_REQUEUE_PI)
 			return -ENOSYS;
+	}
+
+	if (op & FUTEX_WAKE_SYNC_FLAG) {
+		flags |= FLAGS_WAKE_SYNC;
+		if (cmd != FUTEX_WAKE && cmd != FUTEX_REQUEUE && cmd != FUTEX_CMP_REQUEUE &&
+		    cmd != FUTEX_WAKE_OP && cmd != FUTEX_WAKE_BITSET &&
+		    cmd != FUTEX_CMP_REQUEUE_PI)
+			return -ENOSYS;
+		/* val is the number of waiters to wake. */
+		else if (val != 1)
+			return -EINVAL;
 	}
 
 	switch (cmd) {
