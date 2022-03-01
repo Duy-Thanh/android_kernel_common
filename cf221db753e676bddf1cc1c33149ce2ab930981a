@@ -16,6 +16,23 @@
       "message": "Is this needed for the android13 kernels too?",
       "revId": "cf221db753e676bddf1cc1c33149ce2ab930981a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3df5073_33f6adf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-01T17:20:54Z",
+      "side": 1,
+      "message": "Also needs to go to android12-5.4 and android11-5.4",
+      "revId": "cf221db753e676bddf1cc1c33149ce2ab930981a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
