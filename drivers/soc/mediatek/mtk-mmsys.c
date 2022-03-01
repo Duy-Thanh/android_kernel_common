@@ -73,6 +73,8 @@ static const struct mtk_mmsys_driver_data mt8183_mmsys_driver_data = {
 	.num_routes = ARRAY_SIZE(mmsys_mt8183_routing_table),
 	.sw0_rst_offset = MT8183_MMSYS_SW0_RST_B,
 	.num_resets = 32,
+	.mdp_isp_ctrl[ISP_CTRL_CAM1] = mmsys_mt8183_mdp_isp_ctrl_table1,
+	.mdp_isp_ctrl[ISP_CTRL_CAM2] = mmsys_mt8183_mdp_isp_ctrl_table2,
 };
 
 static const struct mtk_mmsys_driver_data mt8186_mmsys_driver_data = {
@@ -311,6 +313,67 @@ void mtk_mmsys_vpp_rsz_dcm_config(struct device *dev, bool enable,
 			      ((enable) ? client : 0), cmdq_pkt);
 }
 EXPORT_SYMBOL_GPL(mtk_mmsys_vpp_rsz_dcm_config);
+
+void mtk_mmsys_mdp_isp_ctrl(struct device *dev, struct cmdq_pkt *cmdq_pkt,
+			    enum mtk_isp_ctrl idx)
+{
+	struct mtk_mmsys *mmsys = dev_get_drvdata(dev);
+	const unsigned int *isp_ctrl;
+	u32 ofst;
+
+	if (idx >= ISP_CTRL_MAX) {
+		dev_err(dev, "Invalid idx %d\n", idx);
+		return;
+	}
+
+	isp_ctrl = mmsys->data->mdp_isp_ctrl[idx];
+
+	/* Reset MDP_DL_ASYNC_TX */
+	ofst = isp_ctrl[ISP_REG_MMSYS_SW0_RST_B];
+	mtk_mmsys_update_bits(mmsys, ofst, isp_ctrl[ISP_BIT_MDP_DL_ASYNC_TX],
+			      0x0, cmdq_pkt);
+	mtk_mmsys_update_bits(mmsys, ofst, isp_ctrl[ISP_BIT_MDP_DL_ASYNC_TX],
+			      isp_ctrl[ISP_BIT_MDP_DL_ASYNC_TX], cmdq_pkt);
+
+	/* Reset MDP_DL_ASYNC_RX */
+	ofst = isp_ctrl[ISP_REG_MMSYS_SW1_RST_B];
+	mtk_mmsys_update_bits(mmsys, ofst, isp_ctrl[ISP_BIT_MDP_DL_ASYNC_RX],
+			      0x0, cmdq_pkt);
+	mtk_mmsys_update_bits(mmsys, ofst, isp_ctrl[ISP_BIT_MDP_DL_ASYNC_RX],
+			      isp_ctrl[ISP_BIT_MDP_DL_ASYNC_RX], cmdq_pkt);
+
+	/* Enable sof mode */
+	ofst = isp_ctrl[ISP_REG_ISP_RELAY_CFG_WD];
+	mtk_mmsys_update_bits(mmsys, ofst, isp_ctrl[ISP_BIT_NO_SOF_MODE],
+			      0x0, cmdq_pkt);
+}
+EXPORT_SYMBOL_GPL(mtk_mmsys_mdp_isp_ctrl);
+
+void mtk_mmsys_mdp_camin_ctrl(struct device *dev, struct cmdq_pkt *cmdq_pkt,
+			      enum mtk_isp_ctrl idx, u32 camin_w, u32 camin_h)
+{
+	struct mtk_mmsys *mmsys = dev_get_drvdata(dev);
+	const unsigned int *isp_ctrl;
+	u32 ofst;
+
+	if (idx >= ISP_CTRL_MAX) {
+		dev_err(dev, "Invalid idx %d\n", idx);
+		return;
+	}
+
+	isp_ctrl = mmsys->data->mdp_isp_ctrl[idx];
+
+	/* Config for direct link */
+
+	ofst = isp_ctrl[ISP_REG_MDP_ASYNC_CFG_WD];
+	mtk_mmsys_update_bits(mmsys, ofst, 0x3FFF3FFF,
+			      (camin_h << 16) + camin_w, cmdq_pkt);
+
+	ofst = isp_ctrl[ISP_REG_ISP_RELAY_CFG_WD];
+	mtk_mmsys_update_bits(mmsys, ofst, 0x3FFF3FFF,
+			      (camin_h << 16) + camin_w, cmdq_pkt);
+}
+EXPORT_SYMBOL_GPL(mtk_mmsys_mdp_camin_ctrl);
 
 static int mtk_mmsys_reset_update(struct reset_controller_dev *rcdev, unsigned long id,
 				  bool assert)
