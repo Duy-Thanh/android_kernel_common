@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2c4608b_d991e290",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-03-02T13:26:50Z",
+      "side": 1,
+      "message": "Should this go in the `host_stage2_idmap()` critical section instead having a separate one here? Do we care about a DABT and device registration race?",
+      "range": {
+        "startLine": 368,
+        "startChar": 1,
+        "endLine": 368,
+        "endChar": 23
+      },
+      "revId": "244dc6dce0290cd3115f75d2501c40bc19c5feb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
