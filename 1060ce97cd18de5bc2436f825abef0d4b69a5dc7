@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f321514_f9cba5d1",
+        "filename": "include/uapi/linux/futex.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-03-02T18:12:31Z",
+      "side": 1,
+      "message": "I believe the following ones can cause a wake up:\n-FUTEX_WAKE\n-FUTEX_REQUEUE\n-FUTEX_CMP_REQUEUE\n-FUTEX_WAKE_OP\n-FUTEX_WAKE_BITSET\n-FUTEX_CMP_REQUEUE_PI\n\nThe number of threads that they can wake up is conveyed through the val parameter in the futex syscall signature:\n\n  long syscall(SYS_futex, uint32_t *uaddr, int futex_op, uint32_t val,\n                    const struct timespec *timeout,   /* or: uint32_t val2 */\n                    uint32_t *uaddr2, uint32_t val3);\n                    \nfrom https://man7.org/linux/man-pages/man2/futex.2.html",
+      "parentUuid": "1f51458c_fe479f6d",
+      "revId": "1060ce97cd18de5bc2436f825abef0d4b69a5dc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7da0b1ba_bcadd08f",
         "filename": "kernel/futex.c",
         "patchSetId": 1
@@ -49,6 +67,30 @@
       "writtenOn": "2022-03-02T02:27:58Z",
       "side": 1,
       "message": "Where did this part come from? Also, I was thinking we can use val2 for the flags.",
+      "range": {
+        "startLine": 3889,
+        "startChar": 0,
+        "endLine": 3891,
+        "endChar": 18
+      },
+      "revId": "1060ce97cd18de5bc2436f825abef0d4b69a5dc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7adb58b_38459892",
+        "filename": "kernel/futex.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3891,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-03-02T18:12:31Z",
+      "side": 1,
+      "message": "The specific check for requiring val to be 1? Or how do we know that val is the number of waiters to wake?\n\nIf it\u0027s the requirement of val being 1, then I added that because using this flag, and by extension WF_SYNC, only makes sense when we\u0027re waking one thread, as that thread will start executing after the waker goes to sleep. It is inline with this patch as well: https://fa.linux.kernel.narkive.com/1vsTrION/patch-sched-wake-up-sync-key-fix-nr-exclusive-tasks-which-lead-to-wf-sync-clearing.\n\nIf it\u0027s for val being the number of waiters to wake, I got that from the futex man page. For each of these commands, val is treated as the number of threads to wake up.\n\nI had thought of using val2, or really any of the current parameters, for passing the flag as well, but I couldn\u0027t find one that I could use across all commands. \n\nFUTEX_WAKE ignores val2/timeout, uaddr2, and val3\nFUTEX_REQUEUE ignores val3\nFUTEX_CMP_REQUEUE[_PI] ignores nothing\nFUTEX_WAKE_OP ignores nothing\nFUTEX_WAKE_BITSET ignores val2/timeout, and uaddr2\n\nMy thought was to have a way of specifying this flag in a common way across all of the relevant commands, instead of different ways per command, since that seemed cleaner to me. Do you have any other thoughts about this?",
+      "parentUuid": "7da0b1ba_bcadd08f",
       "range": {
         "startLine": 3889,
         "startChar": 0,
