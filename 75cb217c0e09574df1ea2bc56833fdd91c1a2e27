@@ -34,6 +34,24 @@
       "parentUuid": "40200565_28d65e1c",
       "revId": "75cb217c0e09574df1ea2bc56833fdd91c1a2e27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24ed84e4_f899835e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-03-02T16:31:05Z",
+      "side": 1,
+      "message": "No need to wait for additions to the KMI, only changes to existing symbols.",
+      "parentUuid": "0990cc3d_ee980b4f",
+      "revId": "75cb217c0e09574df1ea2bc56833fdd91c1a2e27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
