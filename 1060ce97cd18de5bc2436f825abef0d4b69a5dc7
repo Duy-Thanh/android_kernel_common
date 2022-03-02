@@ -16,6 +16,47 @@
       "message": "I chose to implement this as a flag within the futex command, since I could not find a common parameter that is ignored--and can thus be repurposed--between all of the different futex commands that can cause a wakeup.",
       "revId": "1060ce97cd18de5bc2436f825abef0d4b69a5dc7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f51458c_fe479f6d",
+        "filename": "include/uapi/linux/futex.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-03-02T02:27:58Z",
+      "side": 1,
+      "message": "So what are all the futex commands that could cause a wakeup? And how many of them wake up more than 1 thread?",
+      "parentUuid": "112dbd9c_2d802d5e",
+      "revId": "1060ce97cd18de5bc2436f825abef0d4b69a5dc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7da0b1ba_bcadd08f",
+        "filename": "kernel/futex.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3891,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-03-02T02:27:58Z",
+      "side": 1,
+      "message": "Where did this part come from? Also, I was thinking we can use val2 for the flags.",
+      "range": {
+        "startLine": 3889,
+        "startChar": 0,
+        "endLine": 3891,
+        "endChar": 18
+      },
+      "revId": "1060ce97cd18de5bc2436f825abef0d4b69a5dc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
