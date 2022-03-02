@@ -122,6 +122,24 @@
       "message": "Is there a respin request bug associated with this patch?",
       "revId": "3e476f7076b36f3bdac982ae17c595dbe9ce5d63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd2964f8_76c1dd63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1279563
+      },
+      "writtenOn": "2022-03-02T01:03:38Z",
+      "side": 1,
+      "message": "Yes, this is request from b/216408350 (CVE-2021-4083 - Linux kernel vulnerability advisory)",
+      "parentUuid": "ec282477_72a93327",
+      "revId": "3e476f7076b36f3bdac982ae17c595dbe9ce5d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
