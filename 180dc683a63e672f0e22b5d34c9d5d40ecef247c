@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5a2a168_b965879e",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5036,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-03-02T23:30:18Z",
+      "side": 1,
+      "message": "I think `if (READ_ONCE(*pgd) \u003d\u003d pgdval)` would be more appropriate here and in all the later places if we are trying to detect any parallel changes to the pgtable.",
+      "range": {
+        "startLine": 5036,
+        "startChar": 5,
+        "endLine": 5036,
+        "endChar": 30
+      },
+      "revId": "180dc683a63e672f0e22b5d34c9d5d40ecef247c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
