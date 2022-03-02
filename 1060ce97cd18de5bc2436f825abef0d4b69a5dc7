@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "112dbd9c_2d802d5e",
+        "filename": "include/uapi/linux/futex.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-03-02T02:01:57Z",
+      "side": 1,
+      "message": "I chose to implement this as a flag within the futex command, since I could not find a common parameter that is ignored--and can thus be repurposed--between all of the different futex commands that can cause a wakeup.",
+      "revId": "1060ce97cd18de5bc2436f825abef0d4b69a5dc7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
