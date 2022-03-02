@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c51d422_2f9d0c53",
+        "filename": "arch/arm64/kvm/iommu/s2mpu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-03-02T14:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e462fe8_39506cb0",
+      "range": {
+        "startLine": 12,
+        "startChar": 8,
+        "endLine": 12,
+        "endChar": 23
+      },
+      "revId": "e1b1e5e623c8717a4a39a134ef60b8db01e8ca6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c157f34_09131693",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-02-22T16:00:17Z",
       "side": 1,
       "message": "This might sleep, lockdep should complain as we\u0027re in a spinlock critical section. Maybe change it to a mutex?",
+      "range": {
+        "startLine": 27,
+        "startChar": 24,
+        "endLine": 27,
+        "endChar": 34
+      },
+      "revId": "e1b1e5e623c8717a4a39a134ef60b8db01e8ca6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cceb3bc_2e5d7067",
+        "filename": "arch/arm64/kvm/iommu/s2mpu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-03-02T14:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c157f34_09131693",
       "range": {
         "startLine": 27,
         "startChar": 24,
