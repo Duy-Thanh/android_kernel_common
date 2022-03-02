@@ -69,6 +69,24 @@
       "message": "needs the change on android12-5.10 to land",
       "revId": "3e476f7076b36f3bdac982ae17c595dbe9ce5d63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b30c0f2_35cd533a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1279563
+      },
+      "writtenOn": "2022-03-02T00:32:27Z",
+      "side": 1,
+      "message": "pa/2004111(android12-5.10) has been merged now.",
+      "parentUuid": "7b2aac8a_80fe35d3",
+      "revId": "3e476f7076b36f3bdac982ae17c595dbe9ce5d63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
