@@ -22,6 +22,30 @@
       },
       "revId": "180dc683a63e672f0e22b5d34c9d5d40ecef247c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b77c4af_a126c66d",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5036,
+      "author": {
+        "id": 1900312
+      },
+      "writtenOn": "2022-03-03T09:04:43Z",
+      "side": 1,
+      "message": "\"if (READ_ONCE(*pgd) \u003d\u003d pgdval)\" would not work straight away, we would have to do structure comparision instead, But I think pgd_none check should be sufficient here. let me know if you think otherwise.",
+      "parentUuid": "c5a2a168_b965879e",
+      "range": {
+        "startLine": 5036,
+        "startChar": 5,
+        "endLine": 5036,
+        "endChar": 30
+      },
+      "revId": "180dc683a63e672f0e22b5d34c9d5d40ecef247c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
