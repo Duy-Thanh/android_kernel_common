@@ -22,6 +22,30 @@
       },
       "revId": "244dc6dce0290cd3115f75d2501c40bc19c5feb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f86bf177_daa77e85",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-03-03T11:56:59Z",
+      "side": 1,
+      "message": "We could move it out, sure. Removing it would need two things:\n* is it safe to iterate over a list that might be appended to concurrently? dunno\n* add a per-device lock of sorts",
+      "parentUuid": "e2c4608b_d991e290",
+      "range": {
+        "startLine": 368,
+        "startChar": 1,
+        "endLine": 368,
+        "endChar": 23
+      },
+      "revId": "244dc6dce0290cd3115f75d2501c40bc19c5feb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
