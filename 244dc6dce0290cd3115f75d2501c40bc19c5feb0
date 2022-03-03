@@ -46,6 +46,30 @@
       },
       "revId": "244dc6dce0290cd3115f75d2501c40bc19c5feb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e93cf93_2ce01a28",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-03-03T13:58:18Z",
+      "side": 1,
+      "message": "Oh sorry, I was suggesting to move this into the `host_stage2_idmap()` critical section, so this would still be protected by the host lock. Maybe it\u0027s fine, but having things split in two places means the state is not stable and that just gets me a little nervous.",
+      "parentUuid": "f86bf177_daa77e85",
+      "range": {
+        "startLine": 368,
+        "startChar": 1,
+        "endLine": 368,
+        "endChar": 23
+      },
+      "revId": "244dc6dce0290cd3115f75d2501c40bc19c5feb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
