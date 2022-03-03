@@ -18,6 +18,7 @@
 #include <linux/lockdep.h>
 #include <linux/memblock.h>
 #include <linux/moduleparam.h>
+#include <linux/proc_fs.h>
 #include <linux/random.h>
 #include <linux/rcupdate.h>
 #include <linux/sched/sysctl.h>
@@ -887,3 +888,62 @@ out:
 
 	return kfence_unprotect(addr); /* Unprotect and let access proceed. */
 }
+
+static struct proc_dir_entry *ent;
+
+static ssize_t mywrite(struct file *file, const char __user *ubuf,size_t count, loff_t *ppos) 
+{
+	volatile char *addr;
+	int index;
+
+	printk( KERN_DEBUG "write handler\n");
+	if (kstrtoint_from_user(ubuf, count, 10, &index) < 0) {
+		printk(KERN_DEBUG "kstrtoint_from_user failed\n");
+		return -1;
+	}
+	addr = __kfence_pool + PAGE_SIZE * 2 * index - 2;
+	printk(KERN_DEBUG "writing to %px\n", addr);
+	*addr = 1;
+	addr += PAGE_SIZE;
+	printk(KERN_DEBUG "writing to %px\n", addr);
+	*addr = 2;
+	return -1;
+}
+ 
+static ssize_t myread(struct file *file, char __user *ubuf,size_t count, loff_t *ppos) 
+{
+	printk( KERN_DEBUG "read handler\n");
+	return 0;
+}
+ 
+static struct proc_ops myops = 
+{
+	.proc_read = myread,
+	.proc_write = mywrite,
+};
+
+static struct delayed_work kfence_bug_timer;
+static void kfence_trigger_bug(struct work_struct *work)
+{
+	volatile char *addr;
+	addr = __kfence_pool + PAGE_SIZE * 2 * 1 - 2;
+	printk(KERN_DEBUG "delayed bug: writing to %px\n", addr);
+	*addr = 1;
+}
+static DECLARE_DELAYED_WORK(kfence_bug_timer, kfence_trigger_bug);
+
+static int simple_init(void)
+{
+	ent=proc_create("mydev", 0666, NULL, &myops);
+	queue_delayed_work(system_unbound_wq, &kfence_bug_timer,
+			   msecs_to_jiffies(1000*120));
+	return 0;
+}
+
+static void simple_cleanup(void)
+{
+	proc_remove(ent);
+}
+ 
+module_init(simple_init);
+module_exit(simple_cleanup);
