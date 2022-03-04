@@ -1763,7 +1763,7 @@ struct dentry *incfs_mount_fs(struct file_system_type *type, int flags,
 	struct super_block *sb;
 	int error = 0;
 
-	sb = sget(type, incfs_test_super, set_anon_super, flags, NULL);
+	sb = sget(type, incfs_test_super, set_anon_super, flags, data);
 	if (IS_ERR(sb))
 		return ERR_CAST(sb);
 
