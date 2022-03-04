@@ -46,6 +46,30 @@
       },
       "revId": "180dc683a63e672f0e22b5d34c9d5d40ecef247c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feec4a0d_e8d75024",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5036,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-03-04T00:55:23Z",
+      "side": 1,
+      "message": "Yeah, you would have to use pgd_val()/p4d_val()/pud_val()/pmd_val().\n\nI\u0027m a bit hesitant about pgd_none() because I think theoretically it\u0027s possible that the entry is freed and reused. In that case pgd_none() would not detect the change. Am I wrong?",
+      "parentUuid": "1b77c4af_a126c66d",
+      "range": {
+        "startLine": 5036,
+        "startChar": 5,
+        "endLine": 5036,
+        "endChar": 30
+      },
+      "revId": "180dc683a63e672f0e22b5d34c9d5d40ecef247c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
