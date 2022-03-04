@@ -1904,14 +1904,17 @@ out:
 void incfs_kill_sb(struct super_block *sb)
 {
 	struct mount_info *mi = sb->s_fs_info;
-	struct inode *dinode = d_inode(mi->mi_backing_dir_path.dentry);
+	struct inode *dinode;
 
 	pr_debug("incfs: unmount\n");
+	if (!mi)
+		return;
+
+	dinode = d_inode(mi->mi_backing_dir_path.dentry);
 	vfs_rmdir(dinode, mi->mi_index_dir);
 	vfs_rmdir(dinode, mi->mi_incomplete_dir);
-
-	kill_anon_super(sb);
 	incfs_free_mount_info(mi);
+	kill_anon_super(sb);
 	sb->s_fs_info = NULL;
 }
 
