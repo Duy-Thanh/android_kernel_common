@@ -16,6 +16,24 @@
       "message": "Is there a respin request bug for this? It also needs to land in android12-5.10 first.",
       "revId": "01e240fb597124abed1fb6a1c2c81753796f9b26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f336fb06_0393b11f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1863114
+      },
+      "writtenOn": "2022-03-04T01:54:05Z",
+      "side": 1,
+      "message": "Hi, Todd,\n\n1. Respin Bug id 220039299 is added in commit message.\n2. It\u0027s alreadly landed in android12-5.10, please check aosp/1845999",
+      "parentUuid": "df71dddd_435b46a5",
+      "revId": "01e240fb597124abed1fb6a1c2c81753796f9b26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
