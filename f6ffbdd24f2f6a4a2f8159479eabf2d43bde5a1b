@@ -103,6 +103,24 @@
       "parentUuid": "d7489cf7_8dbcde0f",
       "revId": "f6ffbdd24f2f6a4a2f8159479eabf2d43bde5a1b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6df9b457_51c05ac5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2022-03-04T06:08:22Z",
+      "side": 1,
+      "message": "changed to FROMGIT and added the upstream commit as well",
+      "parentUuid": "235c6453_851e3b4c",
+      "revId": "f6ffbdd24f2f6a4a2f8159479eabf2d43bde5a1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
