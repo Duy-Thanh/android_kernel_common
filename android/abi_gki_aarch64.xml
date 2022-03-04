@@ -6042,6 +6042,7 @@
       <elf-symbol name='__tracepoint_android_vh_get_from_fragment_pool' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x801cc5b5'/>
       <elf-symbol name='__tracepoint_android_vh_gic_resume' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x80464cd'/>
       <elf-symbol name='__tracepoint_android_vh_gpio_block_read' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4842b6e5'/>
+      <elf-symbol name='__tracepoint_android_vh_handle_tlb_conf' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1907b86d'/>
       <elf-symbol name='__tracepoint_android_vh_include_reserved_zone' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdf6b3544'/>
       <elf-symbol name='__tracepoint_android_vh_iommu_alloc_iova' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x456fc48'/>
       <elf-symbol name='__tracepoint_android_vh_iommu_free_iova' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd04c533c'/>
@@ -114121,8 +114122,8 @@
         <parameter type-id='70de91e2' name='link_ksettings' filepath='net/ethtool/ioctl.c' line='428' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='__fdget' mangled-name='__fdget' filepath='fs/file.c' line='911' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__fdget'>
-        <parameter type-id='f0981eeb' name='fd' filepath='fs/file.c' line='911' column='1'/>
+      <function-decl name='__fdget' mangled-name='__fdget' filepath='fs/file.c' line='915' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__fdget'>
+        <parameter type-id='f0981eeb' name='fd' filepath='fs/file.c' line='915' column='1'/>
         <return type-id='7359adad'/>
       </function-decl>
       <function-decl name='__filemap_set_wb_err' mangled-name='__filemap_set_wb_err' filepath='mm/filemap.c' line='684' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__filemap_set_wb_err'>
@@ -117474,6 +117475,7 @@
       <var-decl name='__tracepoint_android_vh_get_from_fragment_pool' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_get_from_fragment_pool' visibility='default' filepath='include/trace/hooks/mm.h' line='57' column='1' elf-symbol-id='__tracepoint_android_vh_get_from_fragment_pool'/>
       <var-decl name='__tracepoint_android_vh_gic_resume' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_gic_resume' visibility='default' filepath='include/trace/hooks/gic.h' line='15' column='1' elf-symbol-id='__tracepoint_android_vh_gic_resume'/>
       <var-decl name='__tracepoint_android_vh_gpio_block_read' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_gpio_block_read' visibility='default' filepath='include/trace/hooks/gpiolib.h' line='15' column='1' elf-symbol-id='__tracepoint_android_vh_gpio_block_read'/>
+      <var-decl name='__tracepoint_android_vh_handle_tlb_conf' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_handle_tlb_conf' visibility='default' filepath='include/trace/hooks/fault.h' line='32' column='1' elf-symbol-id='__tracepoint_android_vh_handle_tlb_conf'/>
       <var-decl name='__tracepoint_android_vh_include_reserved_zone' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_include_reserved_zone' visibility='default' filepath='include/trace/hooks/mm.h' line='64' column='1' elf-symbol-id='__tracepoint_android_vh_include_reserved_zone'/>
       <var-decl name='__tracepoint_android_vh_iommu_alloc_iova' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_iommu_alloc_iova' visibility='default' filepath='include/trace/hooks/iommu.h' line='23' column='1' elf-symbol-id='__tracepoint_android_vh_iommu_alloc_iova'/>
       <var-decl name='__tracepoint_android_vh_iommu_free_iova' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_iommu_free_iova' visibility='default' filepath='include/trace/hooks/iommu.h' line='33' column='1' elf-symbol-id='__tracepoint_android_vh_iommu_free_iova'/>
@@ -126791,8 +126793,8 @@
         <parameter type-id='77e79a4b' name='file' filepath='fs/file.c' line='633' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
-      <function-decl name='fget' mangled-name='fget' filepath='fs/file.c' line='854' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='fget'>
-        <parameter type-id='f0981eeb' name='fd' filepath='fs/file.c' line='854' column='1'/>
+      <function-decl name='fget' mangled-name='fget' filepath='fs/file.c' line='858' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='fget'>
+        <parameter type-id='f0981eeb' name='fd' filepath='fs/file.c' line='858' column='1'/>
         <return type-id='77e79a4b'/>
       </function-decl>
       <function-decl name='fiemap_fill_next_extent' mangled-name='fiemap_fill_next_extent' filepath='fs/ioctl.c' line='112' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='fiemap_fill_next_extent'>
@@ -130018,11 +130020,11 @@
         <parameter type-id='f0981eeb' name='flags' filepath='fs/splice.c' line='619' column='1'/>
         <return type-id='79a0948f'/>
       </function-decl>
-      <function-decl name='iterate_fd' mangled-name='iterate_fd' filepath='fs/file.c' line='1176' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iterate_fd'>
-        <parameter type-id='16c53416' name='files' filepath='fs/file.c' line='1176' column='1'/>
-        <parameter type-id='f0981eeb' name='n' filepath='fs/file.c' line='1176' column='1'/>
-        <parameter type-id='d092647b' name='f' filepath='fs/file.c' line='1177' column='1'/>
-        <parameter type-id='eaa32e2f' name='p' filepath='fs/file.c' line='1178' column='1'/>
+      <function-decl name='iterate_fd' mangled-name='iterate_fd' filepath='fs/file.c' line='1180' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iterate_fd'>
+        <parameter type-id='16c53416' name='files' filepath='fs/file.c' line='1180' column='1'/>
+        <parameter type-id='f0981eeb' name='n' filepath='fs/file.c' line='1180' column='1'/>
+        <parameter type-id='d092647b' name='f' filepath='fs/file.c' line='1181' column='1'/>
+        <parameter type-id='eaa32e2f' name='p' filepath='fs/file.c' line='1182' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='iunique' mangled-name='iunique' filepath='fs/inode.c' line='1270' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iunique'>
