@@ -22,6 +22,30 @@
       },
       "revId": "91be4236fbe0d70e092f58d1503d874a76dee1e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0214e159_3e886e73",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-08T14:58:32Z",
+      "side": 1,
+      "message": "Ah, didn\u0027t realize that, thanks!",
+      "parentUuid": "a783b1e7_da06b80a",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 52
+      },
+      "revId": "91be4236fbe0d70e092f58d1503d874a76dee1e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
