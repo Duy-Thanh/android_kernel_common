@@ -16,6 +16,24 @@
       "message": "For a FROMGIT patch, we need the SHA and the maintainer repo/branch. Format \"(cherry picked from commit \u003csha\u003e \u003crepo\u003e \u003cbranch\u003e)\"",
       "revId": "56d5bb5140c6a07038ce75b3a924d92f0851d608",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e2991ed_ff5a7c65",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2022-03-08T22:24:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8aed40c6_f24b3a3a",
+      "revId": "56d5bb5140c6a07038ce75b3a924d92f0851d608",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
