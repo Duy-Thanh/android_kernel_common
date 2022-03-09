@@ -51,6 +51,24 @@
       "parentUuid": "e12f2fbd_a82f293d",
       "revId": "4c571f456085d9f1c10611a58352dc00e95e7a3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3eeaf63e_eeebe80d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-03-09T21:00:09Z",
+      "side": 1,
+      "message": "Why can\u0027t your perf image just default to no console\u003d, but when your team needs messages they use console\u003dttyXX ? Why does this driver need to specially register/not register with the console subsystem?",
+      "parentUuid": "f066f5ad_88081097",
+      "revId": "4c571f456085d9f1c10611a58352dc00e95e7a3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
