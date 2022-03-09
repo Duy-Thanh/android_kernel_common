@@ -17,6 +17,10 @@ DECLARE_HOOK(android_vh_ep_create_wakeup_source,
 DECLARE_HOOK(android_vh_timerfd_create,
 	TP_PROTO(char *name, int len),
 	TP_ARGS(name, len));
+
+DECLARE_HOOK(android_vh_fdleak_detect,
+	TP_PROTO(int fd),
+	TP_ARGS(fd));
 #endif /* _TRACE_HOOK_FS_H */
 
 /* This part must be outside protection */
