@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27192bc4_d6238d8b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-03-09T00:45:07Z",
+      "side": 1,
+      "message": "The description should look something like this:\n\n\nANDROID: mm: fix alloc_flags for non-CMA allocations\n\ndd1c26b853 allows movable allocations with __GFP_CMA flags to\nuse CMA. However when setting alloc_flags, __GFP_CMA is not\nbeing considered which leads to __zone_watermark_ok considering\nCMA are as eligible for any movable allocation and wrongly\ninclude NR_FREE_CMA_PAGES into free_pages calculation.\nFix this by setting ALLOC_CMA alloc_flags bit only when\n__GFP_CMA is specified.\n\nFixes: dd1c26b853(ANDROID: GKI: mm: add cma pcp list)\nBug: 221896354\nSigned-off-by: Zhaoyang Huang \u003czhaoyang.huang@unisoc.com\u003e",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 53
+      },
+      "revId": "99187bfe0e90df410321c6638470837bbdd52db8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d4f5c87_f1832335",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4320,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-03-09T00:45:07Z",
+      "side": 1,
+      "message": "Wait, this description does not make sense. Without this change any movable allocation gets ALLOC_CMA flag and __zone_watermark_ok will NOT deduct NR_FREE_CMA_PAGES(https://elixir.bootlin.com/linux/v5.4.182/source/mm/page_alloc.c#L3438). After your change __zone_watermark_ok will start deducting NR_FREE_CMA_PAGES for movable allocations that don\u0027t have __GFP_CMA set.\n\nSo, the issue here is that __zone_watermark_ok thinks it has more available memory for movable allocations that don\u0027t have __GFP_CMA set and your description of the watermark check failure does not sound right. Please explain the issue you are seeing without this change.",
+      "range": {
+        "startLine": 4318,
+        "startChar": 59,
+        "endLine": 4320,
+        "endChar": 59
+      },
+      "revId": "99187bfe0e90df410321c6638470837bbdd52db8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
