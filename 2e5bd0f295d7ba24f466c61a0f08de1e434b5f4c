@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9a6fa8c_6998bdc2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-03-09T16:27:58Z",
+      "side": 1,
+      "message": "This tag should come after Fixes: tag (See my previous comment here) and please change it to \"Bug:\" instead of \"BUG:\" for consistency with others.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 14
+      },
+      "revId": "2e5bd0f295d7ba24f466c61a0f08de1e434b5f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5772ca6a_32eb02d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-03-09T16:27:58Z",
+      "side": 1,
+      "message": "Please either use the same Signed-off-by: and Author: email (zhaoyang.huang@spreadtrum.com vs zhaoyang.huang@unisoc.com) or add another Signed-off-by: Zhaoyang Huang \u003czhaoyang.huang@spreadtrum.com\u003e",
+      "range": {
+        "startLine": 17,
+        "startChar": 31,
+        "endLine": 17,
+        "endChar": 56
+      },
+      "revId": "2e5bd0f295d7ba24f466c61a0f08de1e434b5f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af2600f9_9c374966",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 4317,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-03-09T16:27:58Z",
+      "side": 1,
+      "message": "Please remove this extra space.",
+      "range": {
+        "startLine": 4317,
+        "startChar": 3,
+        "endLine": 4317,
+        "endChar": 4
+      },
+      "revId": "2e5bd0f295d7ba24f466c61a0f08de1e434b5f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4526c37_562437ca",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 4320,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-03-09T16:27:58Z",
+      "side": 1,
+      "message": "I would reword this as:\n\nOtherwise __zone_watermark_ok for movable allocations with no __GFP_CMA will consider CMA as an eligible area for allocations and will not subtract NR_FREE_CMA_PAGES from free_pages.",
+      "range": {
+        "startLine": 4318,
+        "startChar": 59,
+        "endLine": 4320,
+        "endChar": 91
+      },
+      "revId": "2e5bd0f295d7ba24f466c61a0f08de1e434b5f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
