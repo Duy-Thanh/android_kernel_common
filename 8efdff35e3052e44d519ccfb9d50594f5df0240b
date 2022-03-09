@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5e083b4_5d69a654",
+        "filename": "fs/fuse/dev.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1953,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2022-03-09T00:16:42Z",
+      "side": 1,
+      "message": "We could avoid this unpleasantness if we wanted to by having a parent struct containing two file pointers. We\u0027d get back to it via container_of, which could set them to null initially, and to their correct values here. I think that may be a bit cleaner...",
+      "range": {
+        "startLine": 1953,
+        "startChar": 3,
+        "endLine": 1953,
+        "endChar": 56
+      },
+      "revId": "8efdff35e3052e44d519ccfb9d50594f5df0240b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
