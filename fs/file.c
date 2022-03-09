@@ -21,6 +21,7 @@
 #include <linux/rcupdate.h>
 #include <linux/close_range.h>
 #include <net/sock.h>
+#include <trace/hooks/fs.h>
 
 unsigned int sysctl_nr_open __read_mostly = 1024*1024;
 unsigned int sysctl_nr_open_min = BITS_PER_LONG;
@@ -507,6 +508,7 @@ repeat:
 	if (fd < fdt->max_fds)
 		fd = find_next_fd(fdt, fd);
 
+	trace_android_vh_fdleak_detect(current, fd);
 	/*
 	 * N.B. For clone tasks sharing a files structure, this test
 	 * will limit the total number of files that can be opened.
