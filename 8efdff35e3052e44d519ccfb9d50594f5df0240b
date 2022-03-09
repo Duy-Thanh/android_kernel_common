@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51853db5_9484b9c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2022-03-09T00:28:41Z",
+      "side": 1,
+      "message": "I\u0027ll handle the suggestion in a followup patch",
+      "revId": "8efdff35e3052e44d519ccfb9d50594f5df0240b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5e083b4_5d69a654",
