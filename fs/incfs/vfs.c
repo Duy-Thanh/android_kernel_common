@@ -1763,17 +1763,23 @@ struct dentry *incfs_mount_fs(struct file_system_type *type, int flags,
 
 	BUILD_BUG_ON(PAGE_SIZE != INCFS_DATA_FILE_BLOCK_SIZE);
 
+	if (!dev_name) {
+		pr_err("incfs: Backing dir is not set, filesystem can't be mounted.\n");
+		error = -ENOENT;
+		goto err_deactivate;
+	}
+
 	error = parse_options(&options, (char *)data);
 	if (error != 0) {
 		pr_err("incfs: Options parsing error. %d\n", error);
-		goto err;
+		goto err_deactivate;
 	}
 
 	sb->s_bdi->ra_pages = options.readahead_pages;
 	if (!dev_name) {
 		pr_err("incfs: Backing dir is not set, filesystem can't be mounted.\n");
 		error = -ENOENT;
-		goto err;
+		goto err_free_opts;
 	}
 
 	error = kern_path(dev_name, LOOKUP_FOLLOW | LOOKUP_DIRECTORY,
@@ -1782,20 +1788,26 @@ struct dentry *incfs_mount_fs(struct file_system_type *type, int flags,
 		!d_really_is_positive(backing_dir_path.dentry)) {
 		pr_err("incfs: Error accessing: %s.\n",
 			dev_name);
-		goto err;
+		goto err_free_opts;
 	}
 	src_fs_sb = backing_dir_path.dentry->d_sb;
 	sb->s_maxbytes = src_fs_sb->s_maxbytes;
+	sb->s_stack_depth = src_fs_sb->s_stack_depth + 1;
+
+	if (sb->s_stack_depth > FILESYSTEM_MAX_STACK_DEPTH) {
+		error = -EINVAL;
+		goto err_put_path;
+	}
 
 	mi = incfs_alloc_mount_info(sb, &options, &backing_dir_path);
-
 	if (IS_ERR_OR_NULL(mi)) {
 		error = PTR_ERR(mi);
 		pr_err("incfs: Error allocating mount info. %d\n", error);
-		mi = NULL;
-		goto err;
+		goto err_put_path;
 	}
 
+	sb->s_fs_info = mi;
+	mi->mi_backing_dir_path = backing_dir_path;
 	index_dir = open_or_create_special_dir(backing_dir_path.dentry,
 					       INCFS_INDEX_NAME);
 	if (IS_ERR_OR_NULL(index_dir)) {
@@ -1803,10 +1815,9 @@ struct dentry *incfs_mount_fs(struct file_system_type *type, int flags,
 		pr_err("incfs: Can't find or create .index dir in %s\n",
 			dev_name);
 		/* No need to null index_dir since we don't put it */
-		goto err;
+		goto err_put_path;
 	}
 	mi->mi_index_dir = index_dir;
-
 	incomplete_dir = open_or_create_special_dir(backing_dir_path.dentry,
 						    INCFS_INCOMPLETE_NAME);
 	if (IS_ERR_OR_NULL(incomplete_dir)) {
@@ -1814,7 +1825,7 @@ struct dentry *incfs_mount_fs(struct file_system_type *type, int flags,
 		pr_err("incfs: Can't find or create .incomplete dir in %s\n",
 			dev_name);
 		/* No need to null incomplete_dir since we don't put it */
-		goto err;
+		goto err_put_path;
 	}
 	mi->mi_incomplete_dir = incomplete_dir;
 
@@ -1822,17 +1833,17 @@ struct dentry *incfs_mount_fs(struct file_system_type *type, int flags,
 	root_inode = fetch_regular_inode(sb, backing_dir_path.dentry);
 	if (IS_ERR(root_inode)) {
 		error = PTR_ERR(root_inode);
-		goto err;
+		goto err_put_path;
 	}
 
 	sb->s_root = d_make_root(root_inode);
 	if (!sb->s_root) {
 		error = -ENOMEM;
-		goto err;
+		goto err_put_path;
 	}
 	error = incfs_init_dentry(sb->s_root, &backing_dir_path);
 	if (error)
-		goto err;
+		goto err_put_path;
 
 	mi->mi_backing_dir_path = backing_dir_path;
 	sb->s_flags |= SB_ACTIVE;
@@ -1840,12 +1851,14 @@ struct dentry *incfs_mount_fs(struct file_system_type *type, int flags,
 	pr_debug("incfs: mount\n");
 	free_options(&options);
 	return dget(sb->s_root);
-err:
-	sb->s_fs_info = NULL;
+
+err_put_path:
 	path_put(&backing_dir_path);
-	incfs_free_mount_info(mi);
-	deactivate_locked_super(sb);
+err_free_opts:
 	free_options(&options);
+err_deactivate:
+	deactivate_locked_super(sb);
+	pr_err("incfs: mount failed %d\n", error);
 	return ERR_PTR(error);
 }
 
@@ -1880,14 +1893,25 @@ out:
 void incfs_kill_sb(struct super_block *sb)
 {
 	struct mount_info *mi = sb->s_fs_info;
-	struct inode *dinode = d_inode(mi->mi_backing_dir_path.dentry);
+	struct inode *dinode = NULL;
 
 	pr_debug("incfs: unmount\n");
-	vfs_rmdir(dinode, mi->mi_index_dir);
-	vfs_rmdir(dinode, mi->mi_incomplete_dir);
+	sb->s_stack_depth--;
+	if (mi) {
+		if (mi->mi_backing_dir_path.dentry)
+			dinode = d_inode(mi->mi_backing_dir_path.dentry);
 
+		if (dinode && sb->s_stack_depth == 0) {
+			if (mi->mi_index_dir)
+				vfs_rmdir(dinode, mi->mi_index_dir);
+			if (mi->mi_incomplete_dir)
+				vfs_rmdir(dinode, mi->mi_incomplete_dir);
+		}
+
+		incfs_free_mount_info(mi);
+		sb->s_fs_info = NULL;
+	}
 	kill_anon_super(sb);
-	incfs_free_mount_info(mi);
 }
 
 static int show_options(struct seq_file *m, struct dentry *root)
