@@ -16,6 +16,24 @@
       "message": "Should the space after git: perhaps be removed?",
       "revId": "988e73ae53848b447882c6771871a3c78b796a60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a681f0c7_13ac2530",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2022-03-09T01:37:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0690a16e_a8aa9233",
+      "revId": "988e73ae53848b447882c6771871a3c78b796a60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
