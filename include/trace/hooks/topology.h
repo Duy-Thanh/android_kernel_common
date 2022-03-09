@@ -16,6 +16,10 @@ DECLARE_HOOK(android_vh_arch_set_freq_scale,
 		 unsigned long max, unsigned long *scale),
 	TP_ARGS(cpus, freq, max, scale));
 
+DECLARE_RESTRICTED_HOOK(android_rvh_show_max_capacity,
+	TP_PROTO(unsigned int cpu, unsigned long *capacity),
+	TP_ARGS(cpu, capacity), 1);
+
 DECLARE_HOOK(android_vh_update_topology_flags_workfn,
 	TP_PROTO(void *unused),
 	TP_ARGS(unused));
