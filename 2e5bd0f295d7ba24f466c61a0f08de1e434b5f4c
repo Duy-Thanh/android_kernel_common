@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "587bd077_376008b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-03-09T16:30:22Z",
+      "side": 1,
+      "message": "Please keep the lines in description at 75 characters long so that formatting is pretty.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 91
+      },
+      "revId": "2e5bd0f295d7ba24f466c61a0f08de1e434b5f4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5772ca6a_32eb02d5",
         "filename": "/COMMIT_MSG",
         "patchSetId": 7
