@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73ddcff4_e280e285",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-03-09T19:22:41Z",
+      "side": 1,
+      "message": "Let\u0027s keep it out of android-mainline for now. We might be able to either deprecate DMA32 or upstream this option.",
+      "revId": "6915f29cf39fb9e972e6f22e355e913ac49fb6f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
