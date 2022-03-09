@@ -16,6 +16,23 @@
       "message": "Do we need this? I don\u0027t think there will be a performance penalty if you don\u0027t specify the device with console\u003d or earlycon\u003d, will there?",
       "revId": "4c571f456085d9f1c10611a58352dc00e95e7a3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e12f2fbd_a82f293d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-09T10:13:01Z",
+      "side": 1,
+      "message": "Submit this upstream first.\n\nAlso note that module parameters are almost always rejected by upstream due to their inability to work on a per-device basis.  If you can convince them to accept this, that\u0027s fine, and we will be glad to take a backport.  But if not, we can not take this as it adds a new user/kernel abi that we would need to support for the next 20+ years.",
+      "revId": "4c571f456085d9f1c10611a58352dc00e95e7a3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
