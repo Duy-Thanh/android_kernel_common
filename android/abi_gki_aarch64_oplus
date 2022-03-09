@@ -2627,6 +2627,7 @@
   __traceiter_android_vh_exclude_reserved_zone
   __traceiter_android_vh_exit_creds
   __traceiter_android_vh_exit_mm
+  __traceiter_android_vh_fdleak_detect
   __traceiter_android_vh_fill_ext_fmtdesc
   __traceiter_android_vh_finish_update_load_avg_se
   __traceiter_android_vh_ftrace_dump_buffer
@@ -2830,6 +2831,7 @@
   __tracepoint_android_vh_exclude_reserved_zone
   __tracepoint_android_vh_exit_creds
   __tracepoint_android_vh_exit_mm
+  __tracepoint_android_vh_fdleak_detect
   __tracepoint_android_vh_fill_ext_fmtdesc
   __tracepoint_android_vh_finish_update_load_avg_se
   __tracepoint_android_vh_ftrace_dump_buffer
