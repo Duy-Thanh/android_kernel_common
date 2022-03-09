@@ -33,6 +33,24 @@
       "message": "Submit this upstream first.\n\nAlso note that module parameters are almost always rejected by upstream due to their inability to work on a per-device basis.  If you can convince them to accept this, that\u0027s fine, and we will be glad to take a backport.  But if not, we can not take this as it adds a new user/kernel abi that we would need to support for the next 20+ years.",
       "revId": "4c571f456085d9f1c10611a58352dc00e95e7a3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f066f5ad_88081097",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1591476
+      },
+      "writtenOn": "2022-03-09T17:19:21Z",
+      "side": 1,
+      "message": "Hi Greg, Thanks a lot for your quick review.  Let me try to explain the requirements here :\nWe have a special requirements where some of the teams working on performance and power, wants console logging on perf image.\n\n1. Debug builds works as usual with UART console enabled and it will purely based on the Kconfig - CONFIG_SERIAL_QCOM_GENI_CONSOLE_DEFAULT_ENABLED.\n2. Perf image - by default console will remain disabled and with the fastboot or cmdline flag - qcom_geni_serial.con_enabled\u003d1, they can enable it.\n\nIMO this will not harm anything - but extending the console usage for the users who are interested for perf image too. \n\nPlease let us know your thoughts and any suggestion. We wanted to get it vetted here in ACK and then post it to upstream.",
+      "parentUuid": "e12f2fbd_a82f293d",
+      "revId": "4c571f456085d9f1c10611a58352dc00e95e7a3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
