@@ -2800,7 +2800,7 @@ static int large_file_test(const char *mount_dir)
 	int i;
 	int result = TEST_FAILURE;
 	uint8_t data[INCFS_DATA_FILE_BLOCK_SIZE] = {};
-	int block_count = 3LL * 1024 * 1024 * 1024 / INCFS_DATA_FILE_BLOCK_SIZE;
+	int block_count = 3LL * 128 * 1024 * 1024 / INCFS_DATA_FILE_BLOCK_SIZE;
 	struct incfs_fill_block *block_buf =
 		calloc(block_count, sizeof(struct incfs_fill_block));
 	struct incfs_fill_blocks fill_blocks = {
