@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06506cc0_906419f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-03-10T17:47:24Z",
+      "side": 1,
+      "message": "Is http://b/223546211 also related to this patch and revert will fix it? The bug was caused by kill_anon_super usage in incrementalfs, and this revert removes it.\n\nSuggest adding `Bug: 223546211`",
+      "revId": "6571114d69f86f1c39952911d1b36a42635e5001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
