@@ -195,6 +195,24 @@
       "parentUuid": "68445b7d_d3c7798b",
       "revId": "4c571f456085d9f1c10611a58352dc00e95e7a3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c689620e_5d9bbe1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-03-10T23:02:48Z",
+      "side": 1,
+      "message": "Another piece of this I didn\u0027t understand yet. It looks like the printk code will only print messages to your console if it passes the try_enable_new_console() check, and that\u0027s looking for e.g. \"console\u003dttyMSMx\" on the cmdline. It could also happen if somebody had called add_preferred_console(), or the console driver registered with CON_CONSDEV. But I know geni doesn\u0027t use that flag, or call add_preferred_console() itself. So is this kernel patch really just about \"ignoring\" the console\u003dttyMSMx your bootloader always adds to the cmdline? If so, that seems like a bit of a hack, doesn\u0027t it?",
+      "parentUuid": "15d98f4d_99a7e36a",
+      "revId": "4c571f456085d9f1c10611a58352dc00e95e7a3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
