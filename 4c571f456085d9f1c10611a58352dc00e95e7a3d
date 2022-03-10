@@ -69,6 +69,24 @@
       "parentUuid": "f066f5ad_88081097",
       "revId": "4c571f456085d9f1c10611a58352dc00e95e7a3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0af89f5_ad75d1c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2022-03-10T20:58:44Z",
+      "side": 1,
+      "message": "Hi Alistair, can we submit a change to add `console\u003dnone` to gki_defconfig CONFIG_CMDLINE? I think this could impact other devices which might be relying on the default console behavior.\n\nWe don\u0027t have another way to diverge \"perf\" and \"debug\" kernel command line.",
+      "parentUuid": "3eeaf63e_eeebe80d",
+      "revId": "4c571f456085d9f1c10611a58352dc00e95e7a3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
