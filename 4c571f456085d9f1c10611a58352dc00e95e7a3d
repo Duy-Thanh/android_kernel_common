@@ -87,6 +87,24 @@
       "parentUuid": "3eeaf63e_eeebe80d",
       "revId": "4c571f456085d9f1c10611a58352dc00e95e7a3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dcefb26_4e58bb78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-03-10T22:05:47Z",
+      "side": 1,
+      "message": "I don\u0027t think we can change A13\u0027s GKI default console behavior this late, but how about this alternative suggestion?\n\nWe enable CONFIG_NULL_TTY in GKI, and QC sets \"console\u003dttynull\" in their bootloader or vendor_boot.img by default, and then your perf team can either drop this flag or leave it and just add console\u003dttyXX for enabling debugging?\n\nIn A14 we\u0027d also add \"console\u003dttynull\" to gki_defconfig which eliminates some complexity for QC.\n\nLet me know if this alternative can work, as it would avoid a bit more out of tree code. If it doesn\u0027t, please think about it for A14 so we can drop this.",
+      "parentUuid": "c0af89f5_ad75d1c1",
+      "revId": "4c571f456085d9f1c10611a58352dc00e95e7a3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
