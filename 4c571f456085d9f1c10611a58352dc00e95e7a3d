@@ -213,6 +213,24 @@
       "parentUuid": "15d98f4d_99a7e36a",
       "revId": "4c571f456085d9f1c10611a58352dc00e95e7a3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "010c911a_0b43cbee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-03-10T23:16:13Z",
+      "side": 1,
+      "message": "Let\u0027s open a bug and discuss this further. The use case is not completely clear yet. Some details on why QC cannot build default a13 artifacts with \"console\u003dttynull\" in vendor_boot.img cmdline, and then add \"console\u003dttyMSMx\" just to their debug config, would be greatly appreciated.",
+      "parentUuid": "c689620e_5d9bbe1a",
+      "revId": "4c571f456085d9f1c10611a58352dc00e95e7a3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
