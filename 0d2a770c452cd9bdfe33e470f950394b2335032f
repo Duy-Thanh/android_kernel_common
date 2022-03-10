@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be2e7fac_27dc7a91",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 4324,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-03-10T17:12:28Z",
+      "side": 1,
+      "message": "Based on the code, I guess you care about watermark stuff for page_alloc/reclaiming but the routine has more of that for CMA allocation so if AOSP 5.4 care about CMA, we need to backport 8510e69c8efef with this aosp/1555552",
+      "range": {
+        "startLine": 4324,
+        "startChar": 1,
+        "endLine": 4324,
+        "endChar": 57
+      },
+      "revId": "0d2a770c452cd9bdfe33e470f950394b2335032f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
