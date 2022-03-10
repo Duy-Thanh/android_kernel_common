@@ -159,6 +159,24 @@
       "parentUuid": "68445b7d_d3c7798b",
       "revId": "4c571f456085d9f1c10611a58352dc00e95e7a3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ef4e81d_7ad45948",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-03-10T22:39:48Z",
+      "side": 1,
+      "message": "Trilok: I hear you. We can try. But before I do that, and we collect this feedback over some time, can QC comment on the vendor_boot.img or bootloader-based approach for setting \"console\u003dttynull\"? For what it\u0027s worth, I\u0027m going to make the same change for virtual devices now because I recognize this is an important generic issue to solve.",
+      "parentUuid": "94e30f12_d4db5f36",
+      "revId": "4c571f456085d9f1c10611a58352dc00e95e7a3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
