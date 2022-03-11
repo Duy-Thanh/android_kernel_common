@@ -16,6 +16,23 @@
       "message": "rerun with ABTD https://android-build.googleplex.com/builds/abtd/run/L87000000953447707",
       "revId": "80aba0d0c5bdd246bfb888fe21cb9e1e8afcabe5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "994c1d26_71df2e5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135739
+      },
+      "writtenOn": "2022-03-11T15:26:06Z",
+      "side": 1,
+      "message": "The failed test case checks the Nearby service exists and is unlikely to be related to this kernel change. Bypass-prebusmit to unblock partner\u0027s work.\n\nhttps://source.corp.google.com/android/packages/modules/Nearby/tests/cts/fastpair/src/android/nearby/cts/NearbyFrameworkInitializerTest.java;l\u003d41?q\u003dNearbyFrameworkInitializerTest\u0026sq\u003dpackage:android",
+      "revId": "80aba0d0c5bdd246bfb888fe21cb9e1e8afcabe5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
