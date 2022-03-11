@@ -46,6 +46,30 @@
       },
       "revId": "0d2a770c452cd9bdfe33e470f950394b2335032f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c3b4ef9_bfc9a6e9",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 4324,
+      "author": {
+        "id": 1941381
+      },
+      "writtenOn": "2022-03-11T07:29:33Z",
+      "side": 1,
+      "message": "Please ignore above comment.\n\nactually, 1555552 is a redundant check for 5.10 as ALLOC_CMA has been restricted to bellowing three criteria. Current patch is to amend the third one in 5.4\n\nstatic inline unsigned int current_alloc_flags(gfp_t gfp_mask,\n                                        unsigned int alloc_flags)\n{\n#ifdef CONFIG_CMA\n        unsigned int pflags \u003d current-\u003eflags;\n\n        if (!(pflags \u0026 PF_MEMALLOC_NOCMA) \u0026\u0026\n                        gfp_migratetype(gfp_mask) \u003d\u003d MIGRATE_MOVABLE \u0026\u0026\n                        gfp_mask \u0026 __GFP_CMA)\n                alloc_flags |\u003d ALLOC_CMA;\n\n#endif\n        return alloc_flags;\n}",
+      "parentUuid": "4be4ac8f_57780ce1",
+      "range": {
+        "startLine": 4324,
+        "startChar": 1,
+        "endLine": 4324,
+        "endChar": 57
+      },
+      "revId": "0d2a770c452cd9bdfe33e470f950394b2335032f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
