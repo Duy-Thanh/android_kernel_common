@@ -1284,8 +1284,10 @@ enum {
 };
 
 enum {
-	FS_MODE_ADAPTIVE,	/* use both lfs/ssr allocation */
-	FS_MODE_LFS,		/* use lfs allocation only */
+	FS_MODE_ADAPTIVE,		/* use both lfs/ssr allocation */
+	FS_MODE_LFS,			/* use lfs allocation only */
+	FS_MODE_FRAGMENT_SEG,   /* segment fragmentation mode */
+	FS_MODE_FRAGMENT_BLK,	/* block fragmentation mode */
 };
 
 enum {
@@ -1596,6 +1598,9 @@ struct f2fs_sb_info {
 
 	struct kmem_cache *inline_xattr_slab;	/* inline xattr entry */
 	unsigned int inline_xattr_slab_size;	/* default inline xattr slab size */
+
+	int max_fragment_chunk;			/* max chunk size for block fragmentation mode */
+	int max_fragment_hole;			/* max hole size for block fragmentation mode */
 };
 
 struct f2fs_private_dio {
@@ -3377,6 +3382,16 @@ void f2fs_destroy_segment_manager_caches(void);
 int f2fs_rw_hint_to_seg_type(enum rw_hint hint);
 enum rw_hint f2fs_io_type_to_rw_hint(struct f2fs_sb_info *sbi,
 			enum page_type type, enum temp_type temp);
+
+#define DEF_FRAGMENT_SIZE	4
+#define MIN_FRAGMENT_SIZE	1
+#define MAX_FRAGMENT_SIZE	512
+
+static inline bool f2fs_need_rand_seg(struct f2fs_sb_info *sbi)
+{
+	return F2FS_OPTION(sbi).fs_mode == FS_MODE_FRAGMENT_SEG ||
+		F2FS_OPTION(sbi).fs_mode == FS_MODE_FRAGMENT_BLK;
+}
 
 /*
  * checkpoint.c

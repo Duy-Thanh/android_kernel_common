@@ -15,6 +15,7 @@
 #include <linux/timer.h>
 #include <linux/freezer.h>
 #include <linux/sched/signal.h>
+#include <linux/random.h>
 
 #include "f2fs.h"
 #include "segment.h"
@@ -2485,6 +2486,9 @@ static void reset_curseg(struct f2fs_sb_info *sbi, int type, int modified)
 
 static unsigned int __get_next_segno(struct f2fs_sb_info *sbi, int type)
 {
+	if (f2fs_need_rand_seg(sbi))
+		return prandom_u32() % (MAIN_SECS(sbi) * sbi->segs_per_sec);
+
 	/* if segs_per_sec is large than 1, we need to keep original policy. */
 	if (__is_large_section(sbi))
 		return CURSEG_I(sbi, type)->segno;
@@ -2515,6 +2519,9 @@ static void new_curseg(struct f2fs_sb_info *sbi, int type, bool new_sec)
 	struct curseg_info *curseg = CURSEG_I(sbi, type);
 	unsigned int segno = curseg->segno;
 	int dir = ALLOC_LEFT;
+	if (F2FS_OPTION(sbi).fs_mode == FS_MODE_FRAGMENT_BLK)
+		curseg->fragment_remained_chunk =
+			prandom_u32() % sbi->max_fragment_chunk + 1;
 
 	write_sum_page(sbi, curseg->sum_blk,
 				GET_SUM_BLOCK(sbi, segno));
@@ -2557,10 +2564,20 @@ static void __next_free_blkoff(struct f2fs_sb_info *sbi,
 static void __refresh_next_blkoff(struct f2fs_sb_info *sbi,
 				struct curseg_info *seg)
 {
-	if (seg->alloc_type == SSR)
+	if (seg->alloc_type == SSR) {
 		__next_free_blkoff(sbi, seg, seg->next_blkoff + 1);
-	else
+	} else {
 		seg->next_blkoff++;
+		if (F2FS_OPTION(sbi).fs_mode == FS_MODE_FRAGMENT_BLK) {
+			/* To allocate block chunks in different sizes, use random number */
+			if (--seg->fragment_remained_chunk <= 0) {
+				seg->fragment_remained_chunk =
+				   prandom_u32() % sbi->max_fragment_chunk + 1;
+				seg->next_blkoff +=
+				   prandom_u32() % sbi->max_fragment_hole + 1;
+			}
+		}
+	}
 }
 
 /*

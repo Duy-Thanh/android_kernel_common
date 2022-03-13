@@ -391,6 +391,22 @@ out:
 		return count;
 	}
 
+	if (!strcmp(a->attr.name, "max_fragment_chunk")) {
+		if (t >= MIN_FRAGMENT_SIZE && t <= MAX_FRAGMENT_SIZE)
+			sbi->max_fragment_chunk = t;
+		else
+			return -EINVAL;
+		return count;
+	}
+
+	if (!strcmp(a->attr.name, "max_fragment_hole")) {
+		if (t >= MIN_FRAGMENT_SIZE && t <= MAX_FRAGMENT_SIZE)
+			sbi->max_fragment_hole = t;
+		else
+			return -EINVAL;
+		return count;
+	}
+
 	*ui = (unsigned int)t;
 
 	return count;
@@ -600,6 +616,8 @@ F2FS_FEATURE_RO_ATTR(casefold, FEAT_CASEFOLD);
 #ifdef CONFIG_F2FS_FS_COMPRESSION
 F2FS_FEATURE_RO_ATTR(compression, FEAT_COMPRESSION);
 #endif
+F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, max_fragment_chunk, max_fragment_chunk);
+F2FS_RW_ATTR(F2FS_SBI, f2fs_sb_info, max_fragment_hole, max_fragment_hole);
 
 #define ATTR_LIST(name) (&f2fs_attr_##name.attr)
 static struct attribute *f2fs_attrs[] = {
@@ -660,6 +678,8 @@ static struct attribute *f2fs_attrs[] = {
 	ATTR_LIST(moved_blocks_background),
 	ATTR_LIST(avg_vblocks),
 #endif
+	ATTR_LIST(max_fragment_chunk),
+	ATTR_LIST(max_fragment_hole),
 	NULL,
 };
 
