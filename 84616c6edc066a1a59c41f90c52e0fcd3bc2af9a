@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12012a58_dac4e480",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-14T06:42:45Z",
+      "side": 1,
+      "message": "Please put the proper changelog and subject text in here.  Random urls is not how to do this, the documentation should explain this.",
+      "range": {
+        "startLine": 7,
+        "startChar": 20,
+        "endLine": 7,
+        "endChar": 158
+      },
+      "revId": "84616c6edc066a1a59c41f90c52e0fcd3bc2af9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1525bff_355d3a14",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-14T06:42:45Z",
+      "side": 1,
+      "message": "name, not email alias please.",
+      "range": {
+        "startLine": 11,
+        "startChar": 15,
+        "endLine": 11,
+        "endChar": 24
+      },
+      "revId": "84616c6edc066a1a59c41f90c52e0fcd3bc2af9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
