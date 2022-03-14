@@ -1779,6 +1779,7 @@
   sched_trace_rq_cpu
   sched_uclamp_used
   schedule
+  schedule_hrtimeout
   schedule_timeout
   schedule_timeout_interruptible
   scnprintf
@@ -2189,6 +2190,7 @@
   __traceiter_android_vh_ufs_send_tm_command
   __traceiter_android_vh_ufs_send_uic_command
   __traceiter_android_vh_ufs_update_sysfs
+  __traceiter_android_vh_update_curr_rt
   __traceiter_android_vh_usb_dev_resume
   __traceiter_android_vh_usb_dev_suspend
   __traceiter_clock_set_rate
@@ -2279,6 +2281,7 @@
   __tracepoint_android_vh_ufs_send_tm_command
   __tracepoint_android_vh_ufs_send_uic_command
   __tracepoint_android_vh_ufs_update_sysfs
+  __tracepoint_android_vh_update_curr_rt
   __tracepoint_android_vh_usb_dev_resume
   __tracepoint_android_vh_usb_dev_suspend
   __tracepoint_clock_set_rate
