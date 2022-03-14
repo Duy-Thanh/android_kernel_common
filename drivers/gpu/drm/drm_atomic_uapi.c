@@ -128,7 +128,7 @@ int drm_atomic_set_mode_prop_for_crtc(struct drm_crtc_state *state,
 		int ret;
 
 		if (blob->length != sizeof(struct drm_mode_modeinfo)) {
-			DRM_DEBUG_ATOMIC("[CRTC:%d:%s] bad mode blob length: %zu\n",
+			DRM_ERROR("[CRTC:%d:%s] bad mode blob length: %zu\n",
 					 crtc->base.id, crtc->name,
 					 blob->length);
 			return -EINVAL;
@@ -137,7 +137,7 @@ int drm_atomic_set_mode_prop_for_crtc(struct drm_crtc_state *state,
 		ret = drm_mode_convert_umode(crtc->dev,
 					     &state->mode, blob->data);
 		if (ret) {
-			DRM_DEBUG_ATOMIC("[CRTC:%d:%s] invalid mode (ret=%d, status=%s):\n",
+			DRM_ERROR("[CRTC:%d:%s] invalid mode (ret=%d, status=%s):\n",
 					 crtc->base.id, crtc->name,
 					 ret, drm_get_mode_status_name(state->mode.status));
 			drm_mode_debug_printmodeline(&state->mode);
@@ -395,17 +395,21 @@ drm_atomic_replace_property_blob_from_id(struct drm_device *dev,
 
 	if (blob_id != 0) {
 		new_blob = drm_property_lookup_blob(dev, blob_id);
-		if (new_blob == NULL)
+		if (new_blob == NULL) {
+			pr_err("%s %d\n",__func__,__LINE__);
 			return -EINVAL;
+		}
 
 		if (expected_size > 0 &&
 		    new_blob->length != expected_size) {
 			drm_property_blob_put(new_blob);
+			pr_err("%s %d\n",__func__,__LINE__);
 			return -EINVAL;
 		}
 		if (expected_elem_size > 0 &&
 		    new_blob->length % expected_elem_size != 0) {
 			drm_property_blob_put(new_blob);
+			pr_err("%s %d\n",__func__,__LINE__);
 			return -EINVAL;
 		}
 	}
@@ -472,7 +476,7 @@ static int drm_atomic_crtc_set_property(struct drm_crtc *crtc,
 	} else if (crtc->funcs->atomic_set_property) {
 		return crtc->funcs->atomic_set_property(crtc, state, property, val);
 	} else {
-		DRM_DEBUG_ATOMIC("[CRTC:%d:%s] unknown property [PROP:%d:%s]]\n",
+		DRM_ERROR("[CRTC:%d:%s] unknown property [PROP:%d:%s]]\n",
 				 crtc->base.id, crtc->name,
 				 property->base.id, property->name);
 		return -EINVAL;
@@ -505,8 +509,10 @@ drm_atomic_crtc_get_property(struct drm_crtc *crtc,
 		*val = 0;
 	else if (crtc->funcs->atomic_get_property)
 		return crtc->funcs->atomic_get_property(crtc, state, property, val);
-	else
+	else {
+		pr_err("%s %d\n",__func__,__LINE__);
 		return -EINVAL;
+	}
 
 	return 0;
 }
@@ -528,21 +534,26 @@ static int drm_atomic_plane_set_property(struct drm_plane *plane,
 		if (fb)
 			drm_framebuffer_put(fb);
 	} else if (property == config->prop_in_fence_fd) {
-		if (state->fence)
+		if (state->fence) {
+			pr_err("%s %d\n",__func__,__LINE__);
 			return -EINVAL;
+		}
 
 		if (U642I64(val) == -1)
 			return 0;
 
 		state->fence = sync_file_get_fence(val);
-		if (!state->fence)
+		if (!state->fence) {
+			pr_err("%s %d\n",__func__,__LINE__);
 			return -EINVAL;
+		}
 
 	} else if (property == config->prop_crtc_id) {
 		struct drm_crtc *crtc = drm_crtc_find(dev, file_priv, val);
 
-		if (val && !crtc)
+		if (val && !crtc) {
 			return -EACCES;
+		}
 		return drm_atomic_set_crtc_for_plane(state, crtc);
 	} else if (property == config->prop_crtc_x) {
 		state->crtc_x = U642I64(val);
@@ -566,7 +577,7 @@ static int drm_atomic_plane_set_property(struct drm_plane *plane,
 		state->pixel_blend_mode = val;
 	} else if (property == plane->rotation_property) {
 		if (!is_power_of_2(val & DRM_MODE_ROTATE_MASK)) {
-			DRM_DEBUG_ATOMIC("[PLANE:%d:%s] bad rotation bitmask: 0x%llx\n",
+			DRM_ERROR("[PLANE:%d:%s] bad rotation bitmask: 0x%llx\n",
 					 plane->base.id, plane->name, val);
 			return -EINVAL;
 		}
@@ -589,7 +600,7 @@ static int drm_atomic_plane_set_property(struct drm_plane *plane,
 		return plane->funcs->atomic_set_property(plane, state,
 				property, val);
 	} else {
-		DRM_DEBUG_ATOMIC("[PLANE:%d:%s] unknown property [PROP:%d:%s]]\n",
+		DRM_ERROR("[PLANE:%d:%s] unknown property [PROP:%d:%s]]\n",
 				 plane->base.id, plane->name,
 				 property->base.id, property->name);
 		return -EINVAL;
@@ -692,6 +703,7 @@ static int drm_atomic_connector_set_property(struct drm_connector *connector,
 		 * is done in legacy setprop path for us.  Disallow (for
 		 * now?) atomic writes to DPMS property:
 		 */
+		pr_err("%s %d\n",__func__,__LINE__);
 		return -EINVAL;
 	} else if (property == config->tv_select_subconnector_property) {
 		state->tv.subconnector = val;
@@ -746,7 +758,8 @@ static int drm_atomic_connector_set_property(struct drm_connector *connector,
 		state->scaling_mode = val;
 	} else if (property == config->content_protection_property) {
 		if (val == DRM_MODE_CONTENT_PROTECTION_ENABLED) {
-			DRM_DEBUG_KMS("only drivers can set CP Enabled\n");
+			DRM_ERROR("only drivers can set CP Enabled\n");
+			pr_err("%s %d\n",__func__,__LINE__);
 			return -EINVAL;
 		}
 		state->content_protection = val;
@@ -774,7 +787,7 @@ static int drm_atomic_connector_set_property(struct drm_connector *connector,
 		return connector->funcs->atomic_set_property(connector,
 				state, property, val);
 	} else {
-		DRM_DEBUG_ATOMIC("[CONNECTOR:%d:%s] unknown property [PROP:%d:%s]]\n",
+		DRM_ERROR("[CONNECTOR:%d:%s] unknown property [PROP:%d:%s]]\n",
 				 connector->base.id, connector->name,
 				 property->base.id, property->name);
 		return -EINVAL;
@@ -850,6 +863,7 @@ drm_atomic_connector_get_property(struct drm_connector *connector,
 		return connector->funcs->atomic_get_property(connector,
 				state, property, val);
 	} else {
+		pr_err("%s %d\n",__func__,__LINE__);
 		return -EINVAL;
 	}
 
@@ -975,8 +989,10 @@ int drm_atomic_set_property(struct drm_atomic_state *state,
 	struct drm_mode_object *ref;
 	int ret;
 
-	if (!drm_property_change_valid_get(prop, prop_value, &ref))
+	if (!drm_property_change_valid_get(prop, prop_value, &ref)) {
+		pr_err("%s %d\n",__func__,__LINE__);
 		return -EINVAL;
+	}
 
 	switch (obj->type) {
 	case DRM_MODE_OBJECT_CONNECTOR: {
@@ -1224,8 +1240,10 @@ static int prepare_signaling(struct drm_device *dev,
 	 * Having this flag means user mode pends on event which will never
 	 * reach due to lack of at least one CRTC for signaling
 	 */
-	if (c == 0 && (arg->flags & DRM_MODE_PAGE_FLIP_EVENT))
+	if (c == 0 && (arg->flags & DRM_MODE_PAGE_FLIP_EVENT)) {
+		pr_err("%s %d\n",__func__,__LINE__);
 		return -EINVAL;
+	}
 
 	return 0;
 }
@@ -1303,26 +1321,38 @@ int drm_mode_atomic_ioctl(struct drm_device *dev,
 	 * though this may be a bit overkill, since legacy userspace
 	 * wouldn't know how to call this ioctl)
 	 */
-	if (!file_priv->atomic)
+	if (!file_priv->atomic) {
+		pr_err("%s %d\n",__func__,__LINE__);
 		return -EINVAL;
+	}
 
-	if (arg->flags & ~DRM_MODE_ATOMIC_FLAGS)
+	if (arg->flags & ~DRM_MODE_ATOMIC_FLAGS) {
+		pr_err("%s %d\n",__func__,__LINE__);
 		return -EINVAL;
+	}
 
-	if (arg->reserved)
+	if (arg->reserved) {
+		pr_err("%s %d\n",__func__,__LINE__);
 		return -EINVAL;
+	}
 
-	if (arg->flags & DRM_MODE_PAGE_FLIP_ASYNC)
+	if (arg->flags & DRM_MODE_PAGE_FLIP_ASYNC) {
+		pr_err("%s %d\n",__func__,__LINE__);
 		return -EINVAL;
+	}
 
 	/* can't test and expect an event at the same time. */
 	if ((arg->flags & DRM_MODE_ATOMIC_TEST_ONLY) &&
-			(arg->flags & DRM_MODE_PAGE_FLIP_EVENT))
+			(arg->flags & DRM_MODE_PAGE_FLIP_EVENT)) {
+		pr_err("%s %d\n",__func__,__LINE__);
 		return -EINVAL;
+	}
 
 	state = drm_atomic_state_alloc(dev);
-	if (!state)
+	if (!state) {
+		pr_err("%s %d\n",__func__,__LINE__);
 		return -ENOMEM;
+	}
 
 	drm_modeset_acquire_init(&ctx, DRM_MODESET_ACQUIRE_INTERRUPTIBLE);
 	state->acquire_ctx = &ctx;
@@ -1404,8 +1434,10 @@ retry:
 
 	ret = prepare_signaling(dev, state, arg, file_priv, &fence_state,
 				&num_fences);
-	if (ret)
+	if (ret) {
+		pr_err("%s %d %x\n",__func__,__LINE__,arg->flags);
 		goto out;
+	}
 
 	if (arg->flags & DRM_MODE_ATOMIC_TEST_ONLY) {
 		ret = drm_atomic_check_only(state);

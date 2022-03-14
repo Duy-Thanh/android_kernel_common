@@ -335,7 +335,7 @@ static int drm_atomic_crtc_check(const struct drm_crtc_state *old_crtc_state,
 	 */
 
 	if (new_crtc_state->active && !new_crtc_state->enable) {
-		DRM_DEBUG_ATOMIC("[CRTC:%d:%s] active without enabled\n",
+		DRM_ERROR("[CRTC:%d:%s] active without enabled\n",
 				 crtc->base.id, crtc->name);
 		return -EINVAL;
 	}
@@ -345,14 +345,14 @@ static int drm_atomic_crtc_check(const struct drm_crtc_state *old_crtc_state,
 	 * be able to trigger. */
 	if (drm_core_check_feature(crtc->dev, DRIVER_ATOMIC) &&
 	    WARN_ON(new_crtc_state->enable && !new_crtc_state->mode_blob)) {
-		DRM_DEBUG_ATOMIC("[CRTC:%d:%s] enabled without mode blob\n",
+		DRM_ERROR("[CRTC:%d:%s] enabled without mode blob\n",
 				 crtc->base.id, crtc->name);
 		return -EINVAL;
 	}
 
 	if (drm_core_check_feature(crtc->dev, DRIVER_ATOMIC) &&
 	    WARN_ON(!new_crtc_state->enable && new_crtc_state->mode_blob)) {
-		DRM_DEBUG_ATOMIC("[CRTC:%d:%s] disabled with mode blob\n",
+		DRM_ERROR("[CRTC:%d:%s] disabled with mode blob\n",
 				 crtc->base.id, crtc->name);
 		return -EINVAL;
 	}
@@ -369,7 +369,7 @@ static int drm_atomic_crtc_check(const struct drm_crtc_state *old_crtc_state,
 	 */
 	if (new_crtc_state->event &&
 	    !new_crtc_state->active && !old_crtc_state->active) {
-		DRM_DEBUG_ATOMIC("[CRTC:%d:%s] requesting event but off\n",
+		DRM_ERROR("[CRTC:%d:%s] requesting event but off\n",
 				 crtc->base.id, crtc->name);
 		return -EINVAL;
 	}
@@ -415,7 +415,7 @@ static int drm_atomic_connector_check(struct drm_connector *connector,
 		return 0;
 
 	if (writeback_job->fb && !state->crtc) {
-		DRM_DEBUG_ATOMIC("[CONNECTOR:%d:%s] framebuffer without CRTC\n",
+		DRM_ERROR("[CONNECTOR:%d:%s] framebuffer without CRTC\n",
 				 connector->base.id, connector->name);
 		return -EINVAL;
 	}
@@ -425,7 +425,7 @@ static int drm_atomic_connector_check(struct drm_connector *connector,
 								state->crtc);
 
 	if (writeback_job->fb && !crtc_state->active) {
-		DRM_DEBUG_ATOMIC("[CONNECTOR:%d:%s] has framebuffer, but [CRTC:%d] is off\n",
+		DRM_ERROR("[CONNECTOR:%d:%s] has framebuffer, but [CRTC:%d] is off\n",
 				 connector->base.id, connector->name,
 				 state->crtc->base.id);
 		return -EINVAL;
@@ -433,7 +433,7 @@ static int drm_atomic_connector_check(struct drm_connector *connector,
 
 	if (!writeback_job->fb) {
 		if (writeback_job->out_fence) {
-			DRM_DEBUG_ATOMIC("[CONNECTOR:%d:%s] requesting out-fence without framebuffer\n",
+			DRM_ERROR("[CONNECTOR:%d:%s] requesting out-fence without framebuffer\n",
 					 connector->base.id, connector->name);
 			return -EINVAL;
 		}
@@ -549,11 +549,11 @@ static int drm_atomic_plane_check(const struct drm_plane_state *old_plane_state,
 
 	/* either *both* CRTC and FB must be set, or neither */
 	if (crtc && !fb) {
-		DRM_DEBUG_ATOMIC("[PLANE:%d:%s] CRTC set but no FB\n",
+		DRM_ERROR("[PLANE:%d:%s] CRTC set but no FB\n",
 				 plane->base.id, plane->name);
 		return -EINVAL;
 	} else if (fb && !crtc) {
-		DRM_DEBUG_ATOMIC("[PLANE:%d:%s] FB set but no CRTC\n",
+		DRM_ERROR("[PLANE:%d:%s] FB set but no CRTC\n",
 				 plane->base.id, plane->name);
 		return -EINVAL;
 	}
@@ -564,7 +564,7 @@ static int drm_atomic_plane_check(const struct drm_plane_state *old_plane_state,
 
 	/* Check whether this plane is usable on this CRTC */
 	if (!(plane->possible_crtcs & drm_crtc_mask(crtc))) {
-		DRM_DEBUG_ATOMIC("Invalid [CRTC:%d:%s] for [PLANE:%d:%s]\n",
+		DRM_ERROR("Invalid [CRTC:%d:%s] for [PLANE:%d:%s]\n",
 				 crtc->base.id, crtc->name,
 				 plane->base.id, plane->name);
 		return -EINVAL;
@@ -576,7 +576,7 @@ static int drm_atomic_plane_check(const struct drm_plane_state *old_plane_state,
 	if (ret) {
 		struct drm_format_name_buf format_name;
 
-		DRM_DEBUG_ATOMIC("[PLANE:%d:%s] invalid pixel format %s, modifier 0x%llx\n",
+		DRM_ERROR("[PLANE:%d:%s] invalid pixel format %s, modifier 0x%llx\n",
 				 plane->base.id, plane->name,
 				 drm_get_format_name(fb->format->format,
 						     &format_name),
@@ -630,7 +630,7 @@ static int drm_atomic_plane_check(const struct drm_plane_state *old_plane_state,
 		    clips->y1 < 0 ||
 		    clips->x2 > fb_width ||
 		    clips->y2 > fb_height) {
-			DRM_DEBUG_ATOMIC("[PLANE:%d:%s] invalid damage clip %d %d %d %d\n",
+			DRM_ERROR("[PLANE:%d:%s] invalid damage clip %d %d %d %d\n",
 					 plane->base.id, plane->name, clips->x1,
 					 clips->y1, clips->x2, clips->y2);
 			return -EINVAL;
@@ -640,7 +640,7 @@ static int drm_atomic_plane_check(const struct drm_plane_state *old_plane_state,
 	}
 
 	if (plane_switching_crtc(old_plane_state, new_plane_state)) {
-		DRM_DEBUG_ATOMIC("[PLANE:%d:%s] switching CRTC directly\n",
+		DRM_ERROR("[PLANE:%d:%s] switching CRTC directly\n",
 				 plane->base.id, plane->name);
 		return -EINVAL;
 	}
@@ -1269,7 +1269,7 @@ int drm_atomic_check_only(struct drm_atomic_state *state)
 	for_each_oldnew_plane_in_state(state, plane, old_plane_state, new_plane_state, i) {
 		ret = drm_atomic_plane_check(old_plane_state, new_plane_state);
 		if (ret) {
-			DRM_DEBUG_ATOMIC("[PLANE:%d:%s] atomic core check failed\n",
+			DRM_ERROR("[PLANE:%d:%s] atomic core check failed\n",
 					 plane->base.id, plane->name);
 			return ret;
 		}
@@ -1278,7 +1278,7 @@ int drm_atomic_check_only(struct drm_atomic_state *state)
 	for_each_oldnew_crtc_in_state(state, crtc, old_crtc_state, new_crtc_state, i) {
 		ret = drm_atomic_crtc_check(old_crtc_state, new_crtc_state);
 		if (ret) {
-			DRM_DEBUG_ATOMIC("[CRTC:%d:%s] atomic core check failed\n",
+			DRM_ERROR("[CRTC:%d:%s] atomic core check failed\n",
 					 crtc->base.id, crtc->name);
 			return ret;
 		}
@@ -1287,7 +1287,7 @@ int drm_atomic_check_only(struct drm_atomic_state *state)
 	for_each_new_connector_in_state(state, conn, conn_state, i) {
 		ret = drm_atomic_connector_check(conn, conn_state);
 		if (ret) {
-			DRM_DEBUG_ATOMIC("[CONNECTOR:%d:%s] atomic core check failed\n",
+			DRM_ERROR("[CONNECTOR:%d:%s] atomic core check failed\n",
 					 conn->base.id, conn->name);
 			return ret;
 		}
@@ -1297,7 +1297,7 @@ int drm_atomic_check_only(struct drm_atomic_state *state)
 		ret = config->funcs->atomic_check(state->dev, state);
 
 		if (ret) {
-			DRM_DEBUG_ATOMIC("atomic driver check for %p failed: %d\n",
+			DRM_ERROR("atomic driver check for %p failed: %d\n",
 					 state, ret);
 			return ret;
 		}
@@ -1306,7 +1306,7 @@ int drm_atomic_check_only(struct drm_atomic_state *state)
 	if (!state->allow_modeset) {
 		for_each_new_crtc_in_state(state, crtc, new_crtc_state, i) {
 			if (drm_atomic_crtc_needs_modeset(new_crtc_state)) {
-				DRM_DEBUG_ATOMIC("[CRTC:%d:%s] requires full modeset\n",
+				DRM_ERROR("[CRTC:%d:%s] requires full modeset\n",
 						 crtc->base.id, crtc->name);
 				return -EINVAL;
 			}

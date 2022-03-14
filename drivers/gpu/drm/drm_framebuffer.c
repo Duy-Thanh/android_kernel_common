@@ -179,19 +179,19 @@ static int framebuffer_check(struct drm_device *dev,
 	if (!__drm_format_info(r->pixel_format)) {
 		struct drm_format_name_buf format_name;
 
-		DRM_DEBUG_KMS("bad framebuffer format %s\n",
+		DRM_ERROR("bad framebuffer format %s\n",
 			      drm_get_format_name(r->pixel_format,
 						  &format_name));
 		return -EINVAL;
 	}
 
 	if (r->width == 0) {
-		DRM_DEBUG_KMS("bad framebuffer width %u\n", r->width);
+		DRM_ERROR("bad framebuffer width %u\n", r->width);
 		return -EINVAL;
 	}
 
 	if (r->height == 0) {
-		DRM_DEBUG_KMS("bad framebuffer height %u\n", r->height);
+		DRM_ERROR("bad framebuffer height %u\n", r->height);
 		return -EINVAL;
 	}
 
@@ -205,35 +205,39 @@ static int framebuffer_check(struct drm_device *dev,
 		u64 min_pitch = drm_format_info_min_pitch(info, i, width);
 
 		if (!block_size && (r->modifier[i] == DRM_FORMAT_MOD_LINEAR)) {
-			DRM_DEBUG_KMS("Format requires non-linear modifier for plane %d\n", i);
+			DRM_ERROR("Format requires non-linear modifier for plane %d %d %d\n", i, block_size, r->modifier[i]);
 			return -EINVAL;
 		}
 
 		if (!r->handles[i]) {
-			DRM_DEBUG_KMS("no buffer object handle for plane %d\n", i);
+			DRM_ERROR("no buffer object handle for plane %d\n", i);
 			return -EINVAL;
 		}
 
-		if (min_pitch > UINT_MAX)
+		if (min_pitch > UINT_MAX) {
+			DRM_ERROR("min pitch fail %d %d\n", min_pitch, i);
 			return -ERANGE;
+		}
 
-		if ((uint64_t) height * r->pitches[i] + r->offsets[i] > UINT_MAX)
+		if ((uint64_t) height * r->pitches[i] + r->offsets[i] > UINT_MAX) {
+			DRM_ERROR("invalid range %u %u %u %d\n",height, r->pitches[i], r->offsets[i], i);
 			return -ERANGE;
+		}
 
 		if (block_size && r->pitches[i] < min_pitch) {
-			DRM_DEBUG_KMS("bad pitch %u for plane %d\n", r->pitches[i], i);
+			DRM_ERROR("bad pitch %u for plane %d\n", r->pitches[i], i);
 			return -EINVAL;
 		}
 
 		if (r->modifier[i] && !(r->flags & DRM_MODE_FB_MODIFIERS)) {
-			DRM_DEBUG_KMS("bad fb modifier %llu for plane %d\n",
+			DRM_ERROR("bad fb modifier %llu for plane %d\n",
 				      r->modifier[i], i);
 			return -EINVAL;
 		}
 
 		if (r->flags & DRM_MODE_FB_MODIFIERS &&
 		    r->modifier[i] != r->modifier[0]) {
-			DRM_DEBUG_KMS("bad fb modifier %llu for plane %d\n",
+			DRM_ERROR("bad fb modifier %llu for plane %d\n",
 				      r->modifier[i], i);
 			return -EINVAL;
 		}
@@ -247,7 +251,7 @@ static int framebuffer_check(struct drm_device *dev,
 			if (r->pixel_format != DRM_FORMAT_NV12 ||
 					width % 128 || height % 32 ||
 					r->pitches[i] % 128) {
-				DRM_DEBUG_KMS("bad modifier data for plane %d\n", i);
+				DRM_ERROR("bad modifier data for plane %d\n", i);
 				return -EINVAL;
 			}
 			break;
@@ -259,7 +263,7 @@ static int framebuffer_check(struct drm_device *dev,
 
 	for (i = info->num_planes; i < 4; i++) {
 		if (r->modifier[i]) {
-			DRM_DEBUG_KMS("non-zero modifier for unused plane %d\n", i);
+			DRM_ERROR("non-zero modifier for unused plane %d\n", i);
 			return -EINVAL;
 		}
 
@@ -268,17 +272,17 @@ static int framebuffer_check(struct drm_device *dev,
 			continue;
 
 		if (r->handles[i]) {
-			DRM_DEBUG_KMS("buffer object handle for unused plane %d\n", i);
+			DRM_ERROR("buffer object handle for unused plane %d\n", i);
 			return -EINVAL;
 		}
 
 		if (r->pitches[i]) {
-			DRM_DEBUG_KMS("non-zero pitch for unused plane %d\n", i);
+			DRM_ERROR("non-zero pitch for unused plane %d\n", i);
 			return -EINVAL;
 		}
 
 		if (r->offsets[i]) {
-			DRM_DEBUG_KMS("non-zero offset for unused plane %d\n", i);
+			DRM_ERROR("non-zero offset for unused plane %d\n", i);
 			return -EINVAL;
 		}
 	}
@@ -296,34 +300,37 @@ drm_internal_framebuffer_create(struct drm_device *dev,
 	int ret;
 
 	if (r->flags & ~(DRM_MODE_FB_INTERLACED | DRM_MODE_FB_MODIFIERS)) {
-		DRM_DEBUG_KMS("bad framebuffer flags 0x%08x\n", r->flags);
+		DRM_ERROR("bad framebuffer flags 0x%08x\n", r->flags);
 		return ERR_PTR(-EINVAL);
 	}
 
 	if ((config->min_width > r->width) || (r->width > config->max_width)) {
-		DRM_DEBUG_KMS("bad framebuffer width %d, should be >= %d && <= %d\n",
+		DRM_ERROR("bad framebuffer width %d, should be >= %d && <= %d\n",
 			  r->width, config->min_width, config->max_width);
 		return ERR_PTR(-EINVAL);
 	}
 	if ((config->min_height > r->height) || (r->height > config->max_height)) {
-		DRM_DEBUG_KMS("bad framebuffer height %d, should be >= %d && <= %d\n",
+		DRM_ERROR("bad framebuffer height %d, should be >= %d && <= %d\n",
 			  r->height, config->min_height, config->max_height);
 		return ERR_PTR(-EINVAL);
 	}
 
 	if (r->flags & DRM_MODE_FB_MODIFIERS &&
 	    !dev->mode_config.allow_fb_modifiers) {
-		DRM_DEBUG_KMS("driver does not support fb modifiers\n");
+		DRM_ERROR("driver does not support fb modifiers flags:0x%08x\n",r->flags);
 		return ERR_PTR(-EINVAL);
 	}
 
 	ret = framebuffer_check(dev, r);
-	if (ret)
+	if (ret) {
+		struct drm_format_name_buf format_name;
+		DRM_ERROR("w:%u h:%u flags:%x fmt:%s \n",r->width,r->height,r->flags, drm_get_format_name(r->pixel_format, &format_name));
 		return ERR_PTR(ret);
+	}
 
 	fb = dev->mode_config.funcs->fb_create(dev, file_priv, r);
 	if (IS_ERR(fb)) {
-		DRM_DEBUG_KMS("could not create framebuffer\n");
+		DRM_ERROR("could not create framebuffer\n");
 		return fb;
 	}
 
