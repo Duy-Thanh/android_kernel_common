@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "76f88811_4fa6bdcb",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 4808,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-03-14T17:43:10Z",
+      "side": 1,
+      "message": "__alloc_pages_nodemask itself is a exported function so anyone can call the function without current_gfp_context.",
+      "parentUuid": "99afbacc_cf98b9e2",
+      "range": {
+        "startLine": 4808,
+        "startChar": 17,
+        "endLine": 4808,
+        "endChar": 26
+      },
+      "revId": "e3860895520ee2779d0f0f510fba427501757ad4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1f08af30_7ee981ac",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-03-14T06:47:38Z",
       "side": 1,
       "message": "Checking the impaction on current-\u003eflags if any. This could help remove ineligible GFP flags as early as it can.",
+      "range": {
+        "startLine": 4851,
+        "startChar": 32,
+        "endLine": 4851,
+        "endChar": 40
+      },
+      "revId": "e3860895520ee2779d0f0f510fba427501757ad4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d79dea80_4f5c7d7c",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 4851,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-03-14T17:43:10Z",
+      "side": 1,
+      "message": "You moved the current_gfp_context here. It would be better to mention it in above comment so reviewer don\u0027t confused.\n\nAnyway, rather than, let\u0027s move it in prepare_alloc_pages. It\u0027s more consistent with 5.10 kernel.\n\nThen do we need https://android-review.googlesource.com/c/kernel/common/+/1555552  ?",
+      "parentUuid": "1f08af30_7ee981ac",
       "range": {
         "startLine": 4851,
         "startChar": 32,
