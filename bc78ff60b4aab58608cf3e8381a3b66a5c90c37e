@@ -33,6 +33,23 @@
       "message": "Let\u0027s f",
       "revId": "bc78ff60b4aab58608cf3e8381a3b66a5c90c37e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea9dcf70_a176c5db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-03-15T22:41:46Z",
+      "side": 1,
+      "message": "Final solution: we will accept this patch for a13.\n\nFor a14/mainline we ask QC looks at dropping this patch and using the solution in aosp/2025843 instead.",
+      "revId": "bc78ff60b4aab58608cf3e8381a3b66a5c90c37e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
