@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63f5fdda_9ec60510",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2022-03-15T16:23:36Z",
+      "side": 1,
+      "message": "There\u0027s discussion on the underlying change as to whether this change is required, but queuing this for the next KMI update and approving it so it\u0027s ready to go if the underlying change is indeed agreed upon.",
+      "revId": "434671711a2c2ed12ff949595889ea1dbfe68f81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
