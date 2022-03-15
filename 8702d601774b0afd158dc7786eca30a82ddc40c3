@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be248839_08523e56",
+        "filename": "arch/arm64/mm/init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-03-15T05:28:09Z",
+      "side": 1,
+      "message": "I think we can save \"on\"\n\n\nstatic int __init early_no_dma32(char *arg)\n{\n\tno_dma32 \u003d true;\n\n\treturn 0;\n}\nearly_param(\"no_dma32\", early_no_dma32);",
+      "range": {
+        "startLine": 232,
+        "startChar": 1,
+        "endLine": 232,
+        "endChar": 24
+      },
+      "revId": "8702d601774b0afd158dc7786eca30a82ddc40c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "654e422d_ac9f2978",
+        "filename": "kernel/dma/direct.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-03-15T05:28:09Z",
+      "side": 1,
+      "message": "do we need this? we already have the code changes ignoring GFP_DMA32... I thought we can just make CONFIG_ZONE_DMA32 runtime disable-able...",
+      "range": {
+        "startLine": 64,
+        "startChar": 1,
+        "endLine": 66,
+        "endChar": 19
+      },
+      "revId": "8702d601774b0afd158dc7786eca30a82ddc40c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70f4da99_754dd4a6",
+        "filename": "kernel/dma/pool.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-03-15T05:28:09Z",
+      "side": 1,
+      "message": "we have to be careful about every place wrapped with IS_ENABLED(CONFIG_ZONE_DMA32)\n\nso considering replacing all IS_ENABLED(CONFIG_ZONE_DMA32) with a wrapper function e.g. zone_dma32_avaliable() that does \u003d\u003e `IS_ENABLED(CONFIG_ZONE_DMA32) \u0026\u0026 !zone_dma32_are_empty()` may be a bit easier to spot errors when doing a code search and maintenance.",
+      "range": {
+        "startLine": 77,
+        "startChar": 5,
+        "endLine": 77,
+        "endChar": 34
+      },
+      "revId": "8702d601774b0afd158dc7786eca30a82ddc40c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
