@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5937adb1_8b412745",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 4808,
+      "author": {
+        "id": 1941381
+      },
+      "writtenOn": "2022-03-15T02:09:09Z",
+      "side": 1,
+      "message": "Yes, so we add current_gfp_context inside.",
+      "parentUuid": "76f88811_4fa6bdcb",
+      "range": {
+        "startLine": 4808,
+        "startChar": 17,
+        "endLine": 4808,
+        "endChar": 26
+      },
+      "revId": "e3860895520ee2779d0f0f510fba427501757ad4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1f08af30_7ee981ac",
         "filename": "mm/page_alloc.c",
         "patchSetId": 11
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "You moved the current_gfp_context here. It would be better to mention it in above comment so reviewer don\u0027t confused.\n\nAnyway, rather than, let\u0027s move it in prepare_alloc_pages. It\u0027s more consistent with 5.10 kernel.\n\nThen do we need https://android-review.googlesource.com/c/kernel/common/+/1555552  ?",
       "parentUuid": "1f08af30_7ee981ac",
+      "range": {
+        "startLine": 4851,
+        "startChar": 32,
+        "endLine": 4851,
+        "endChar": 40
+      },
+      "revId": "e3860895520ee2779d0f0f510fba427501757ad4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a7a662c_a9bfebf7",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 4851,
+      "author": {
+        "id": 1941381
+      },
+      "writtenOn": "2022-03-15T02:09:09Z",
+      "side": 1,
+      "message": "Anyway, rather than, let\u0027s move it in prepare_alloc_pages. It\u0027s more consistent with 5.10 kernel.\n[HZY]current position is consistent with mainline, keep it here?\n\nThen do we need https://android-review.googlesource.com/c/kernel/common/+/1555552  ?\n[HZY]This patch can ensure the context with PF_MEMALLOC_NOCMA be out of MIGRAGE_CMA(via removing GFP_MOVABLE in context_gfp_context), so NO.",
+      "parentUuid": "d79dea80_4f5c7d7c",
       "range": {
         "startLine": 4851,
         "startChar": 32,
