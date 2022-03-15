@@ -141,6 +141,30 @@
       },
       "revId": "e3860895520ee2779d0f0f510fba427501757ad4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfc2b388_0b25161b",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 4851,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-03-15T16:37:24Z",
+      "side": 1,
+      "message": "IMO, it\u0027s better to be consistent with 5.10 rather than latest upstream.\nWith that, we can catch up stable patchset later coming from upstream for 5.10 to 5.4, too.",
+      "parentUuid": "3a7a662c_a9bfebf7",
+      "range": {
+        "startLine": 4851,
+        "startChar": 32,
+        "endLine": 4851,
+        "endChar": 40
+      },
+      "revId": "e3860895520ee2779d0f0f510fba427501757ad4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
