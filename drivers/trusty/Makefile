@@ -4,11 +4,15 @@
 #
 
 obj-$(CONFIG_TRUSTY)		+= trusty-core.o
-trusty-core-objs		+= trusty.o trusty-mem.o trusty-sched-share.o
-trusty-core-objs		+= trusty-smc.o
-trusty-core-objs		+= trusty-ffa.o
-trusty-core-$(CONFIG_ARM)	+= trusty-smc-arm.o
-trusty-core-$(CONFIG_ARM64)	+= trusty-smc-arm64.o
+trusty-core-objs		+= trusty.o trusty-sched-share.o
+trusty-arm-smc-$(CONFIG_ARM)	+= trusty-smc-arm.o
+trusty-arm-smc64-$(CONFIG_ARM64) += trusty-smc-arm64.o
+trusty-transport-$(CONFIG_TRUSTY_SMC_TRANSPORT) += trusty-smc.o
+trusty-transport-$(CONFIG_TRUSTY_SMC_TRANSPORT) += trusty-mem.o
+trusty-transport-$(CONFIG_TRUSTY_SMC_TRANSPORT) += $(trusty-arm-smc-y)
+trusty-transport-$(CONFIG_TRUSTY_SMC_TRANSPORT) += $(trusty-arm-smc64-y)
+trusty-transport-$(CONFIG_TRUSTY_FFA_TRANSPORT) += trusty-ffa.o
+trusty-core-objs		+= $(trusty-transport-y)
 trusty-core-$(CONFIG_TRUSTY_IRQ)+= trusty-irq.o
 obj-$(CONFIG_TRUSTY_LOG)	+= trusty-log.o
 obj-$(CONFIG_TRUSTY_TEST)	+= trusty-test.o

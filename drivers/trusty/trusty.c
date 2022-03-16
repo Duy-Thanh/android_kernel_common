@@ -928,8 +928,12 @@ static int trusty_remove(struct platform_device *pdev)
  *
  */
 static const struct trusty_transport_desc *trusty_transports[] = {
+#ifdef CONFIG_TRUSTY_SMC_TRANSPORT
 	&trusty_smc_transport,
+#endif
+#ifdef CONFIG_TRUSTY_FFA_TRANSPORT
 	&trusty_ffa_transport,
+#endif
 	NULL,
 };
 
@@ -953,6 +957,9 @@ static struct platform_driver trusty_driver = {
 static int __init trusty_driver_init(void)
 {
 	int ret;
+
+	BUILD_BUG_ON_MSG(!IS_ENABLED(CONFIG_TRUSTY_HAVE_TRANSPORT),
+			"Trusty transport not configured");
 
 	/*
 	 * Initialize trusty_irq_driver first since trusty_probe makes an
