@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afdc5d26_5db63b60",
+        "filename": "kernel/rcu/tree.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4500,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2022-03-16T15:52:25Z",
+      "side": 1,
+      "message": "I used the same priority as the other rcu kthreads.\n\nkthread_prio \u003d IS_ENABLED(CONFIG_RCU_BOOST) ? 1 : 0;\nOr if not builtin, whatever was passed when the module is loaded\n\nIs this sufficient? Or do we need a fixed prio here?",
+      "range": {
+        "startLine": 4500,
+        "startChar": 26,
+        "endLine": 4500,
+        "endChar": 38
+      },
+      "revId": "579bb9d979f36a4cd10e768c2c6d2bda186af5d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
