@@ -21,6 +21,36 @@ config TRUSTY
 
 if TRUSTY
 
+config TRUSTY_HAVE_TRANSPORT
+	bool
+	help
+	  If any of the Trusty transport is enabled then it sets this config
+	  option. This variable is used to break the build when none of the
+	  Trusty transports are enabled.
+
+config TRUSTY_SMC_TRANSPORT
+	bool "Trusty transport based on SMC"
+	select TRUSTY_HAVE_TRANSPORT
+	default y
+	help
+	  Enable SMC based transport for Trusty. This transport is required for
+	  Trusty API version <= TRUSTY_API_VERSION_MEM_OBJ.
+
+	  If you want to use legacy SMC based transport for sending Trusty
+	  messages to secure world, answer Y.
+
+config TRUSTY_FFA_TRANSPORT
+	bool "Trusty transport based on FFA"
+	select TRUSTY_HAVE_TRANSPORT
+	depends on ARM_FFA_TRANSPORT
+	default y
+	help
+	  Enable ARM FF-A based transport for Trusty. This transport is required
+	  for Trusty API version >= TRUSTY_API_VERSION_MEM_OBJ.
+
+	  If you want to use ARM FF-A based transport for sending Trusty messages
+	  to secure world, answer Y.
+
 config TRUSTY_IRQ
 	bool "Trusty IRQ support"
 	default y
