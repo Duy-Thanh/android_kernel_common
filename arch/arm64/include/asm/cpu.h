@@ -12,7 +12,31 @@
 /*
  * Records attributes of an individual CPU.
  */
+<<<<<<< HEAD   (5c5685 Merge 7ae8127e4123 ("arm64: Add HWCAP for self-synchronising)
 struct cpuinfo_32bit {
+=======
+struct cpuinfo_arm64 {
+	struct cpu	cpu;
+	struct kobject	kobj;
+	u32		reg_ctr;
+	u32		reg_cntfrq;
+	u32		reg_dczid;
+	u32		reg_midr;
+	u32		reg_revidr;
+
+	u64		reg_id_aa64dfr0;
+	u64		reg_id_aa64dfr1;
+	u64		reg_id_aa64isar0;
+	u64		reg_id_aa64isar1;
+	u64		reg_id_aa64isar2;
+	u64		reg_id_aa64mmfr0;
+	u64		reg_id_aa64mmfr1;
+	u64		reg_id_aa64mmfr2;
+	u64		reg_id_aa64pfr0;
+	u64		reg_id_aa64pfr1;
+	u64		reg_id_aa64zfr0;
+
+>>>>>>> BRANCH (56cf53 arm64: entry: Add macro for reading symbol addresses from th)
 	u32		reg_id_dfr0;
 	u32		reg_id_dfr1;
 	u32		reg_id_isar0;
