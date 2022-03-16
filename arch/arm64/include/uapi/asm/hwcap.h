@@ -75,6 +75,12 @@
 #define HWCAP2_RNG		(1 << 16)
 #define HWCAP2_BTI		(1 << 17)
 #define HWCAP2_MTE		(1 << 18)
+<<<<<<< HEAD   (2ad392 Merge 5.15.27 into android-5.15)
 #define HWCAP2_MTE3		(1 << 22)
+=======
+#define HWCAP2_ECV		(1 << 19)
+#define HWCAP2_AFP		(1 << 20)
+#define HWCAP2_RPRES		(1 << 21)
+>>>>>>> BRANCH (aa7975 Linux 5.15.28)
 
 #endif /* _UAPI__ASM_HWCAP_H */

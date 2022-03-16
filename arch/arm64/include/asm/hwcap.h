@@ -105,7 +105,13 @@
 #define KERNEL_HWCAP_RNG		__khwcap2_feature(RNG)
 #define KERNEL_HWCAP_BTI		__khwcap2_feature(BTI)
 #define KERNEL_HWCAP_MTE		__khwcap2_feature(MTE)
+<<<<<<< HEAD   (2ad392 Merge 5.15.27 into android-5.15)
 #define KERNEL_HWCAP_MTE3		__khwcap2_feature(MTE3)
+=======
+#define KERNEL_HWCAP_ECV		__khwcap2_feature(ECV)
+#define KERNEL_HWCAP_AFP		__khwcap2_feature(AFP)
+#define KERNEL_HWCAP_RPRES		__khwcap2_feature(RPRES)
+>>>>>>> BRANCH (aa7975 Linux 5.15.28)
 
 /*
  * This yields a mask that user programs can use to figure out what
