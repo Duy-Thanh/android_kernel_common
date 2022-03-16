@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f633f354_fdbd9619",
+        "filename": "drivers/tty/serial/qcom_geni_serial.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-16T07:45:18Z",
+      "side": 1,
+      "message": "no new user/kernel apis that are not submitted upstream please.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 38
+      },
+      "revId": "40b39f8fde2caaf4e21d36af7840818d5ca6cbfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
