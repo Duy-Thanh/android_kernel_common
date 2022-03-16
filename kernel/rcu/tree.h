@@ -10,6 +10,7 @@
  */
 
 #include <linux/cache.h>
+#include <linux/kthread.h>
 #include <linux/spinlock.h>
 #include <linux/rtmutex.h>
 #include <linux/threads.h>
@@ -24,6 +25,7 @@
 struct rcu_exp_work {
 	unsigned long rew_s;
 	struct work_struct rew_work;
+	struct kthread_work rew_kthread_work;
 };
 
 /* RCU's kthread states for tracing. */

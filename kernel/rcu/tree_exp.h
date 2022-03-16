@@ -624,11 +624,11 @@ static void rcu_exp_sel_wait_wake(unsigned long s)
 /*
  * Work-queue handler to drive an expedited grace period forward.
  */
-static void wait_rcu_exp_gp(struct work_struct *wp)
+static void wait_rcu_exp_gp(struct kthread_work *wp)
 {
 	struct rcu_exp_work *rewp;
 
-	rewp = container_of(wp, struct rcu_exp_work, rew_work);
+	rewp = container_of(wp, struct rcu_exp_work, rew_kthread_work);
 	rcu_exp_sel_wait_wake(rewp->rew_s);
 }
 
@@ -847,20 +847,17 @@ void synchronize_rcu_expedited(void)
 	} else {
 		/* Marshall arguments & schedule the expedited grace period. */
 		rew.rew_s = s;
-		INIT_WORK_ONSTACK(&rew.rew_work, wait_rcu_exp_gp);
-		queue_work(rcu_gp_wq, &rew.rew_work);
+		kthread_init_work(&rew.rew_kthread_work, wait_rcu_exp_gp);
+		kthread_queue_work(rcu_exp_gp_kworker, &rew.rew_kthread_work);
 	}
 
 	/* Wait for expedited grace period to complete. */
 	rnp = rcu_get_root();
 	wait_event(rnp->exp_wq[rcu_seq_ctr(s) & 0x3],
 		   sync_exp_work_done(s));
-	smp_mb(); /* Workqueue actions happen before return. */
+	smp_mb(); /* kthread actions happen before return. */
 
 	/* Let the next expedited grace period start. */
 	mutex_unlock(&rcu_state.exp_mutex);
-
-	if (likely(!boottime))
-		destroy_work_on_stack(&rew.rew_work);
 }
 EXPORT_SYMBOL_GPL(synchronize_rcu_expedited);
