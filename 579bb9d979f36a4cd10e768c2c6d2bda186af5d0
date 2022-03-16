@@ -70,6 +70,30 @@
       },
       "revId": "579bb9d979f36a4cd10e768c2c6d2bda186af5d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5915c29_2f29d706",
+        "filename": "kernel/rcu/tree.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4500,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-03-16T23:22:00Z",
+      "side": 1,
+      "message": "what about RT task doing the synchronize_rcu? using a configurable prio is easy to control the behavior there (one of the reason rcu prio is configurable.)\n\n\"kthread_prio\u003d specifies the real-time priority to boost to, and defaults to priority one, the least-important real-time priority level. You should set this priority level to be greater than the highest-priority real-time CPU-bound thread. The default priority is appropriate for the common case where there are no CPU-bound threads running at real-time priority\"",
+      "parentUuid": "65ed1159_04082e72",
+      "range": {
+        "startLine": 4500,
+        "startChar": 26,
+        "endLine": 4500,
+        "endChar": 38
+      },
+      "revId": "579bb9d979f36a4cd10e768c2c6d2bda186af5d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
