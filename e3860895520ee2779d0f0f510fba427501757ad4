@@ -165,6 +165,30 @@
       },
       "revId": "e3860895520ee2779d0f0f510fba427501757ad4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42a1b768_c20e1fb2",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 4851,
+      "author": {
+        "id": 1941381
+      },
+      "writtenOn": "2022-03-16T01:20:26Z",
+      "side": 1,
+      "message": "actually, it is a bug to call current_gfp_context in 5.10\u0027s position as the gfp_mask should be adjusted in very early stage. Both of prepare_alloc_pages and get_page_from_freelist should use the adjusted one to determine the right MIGRATE_TYPE.",
+      "parentUuid": "dfc2b388_0b25161b",
+      "range": {
+        "startLine": 4851,
+        "startChar": 32,
+        "endLine": 4851,
+        "endChar": 40
+      },
+      "revId": "e3860895520ee2779d0f0f510fba427501757ad4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
