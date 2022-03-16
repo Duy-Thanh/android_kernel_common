@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65e718f8_f9c0fae3",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3317,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-03-16T23:59:22Z",
+      "side": 1,
+      "message": "Hmm. You are using the same hook to skip drain_all_pages and free_one_page? That does not seem right. Is there a possibility that you would want to skip one and not the other?\n\nIf these two cases somehow related and therefore should be handled using the same hook, then please add a comment explaining that relationship and why it always holds.",
+      "range": {
+        "startLine": 3317,
+        "startChar": 2,
+        "endLine": 3317,
+        "endChar": 45
+      },
+      "revId": "fb310b8931f5c9f4419004db84ddd149a2b5a920",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
