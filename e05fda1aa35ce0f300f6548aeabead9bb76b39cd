@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0bd2173_9f07d186",
+        "filename": "kernel/rcu/tree.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-03-16T23:38:13Z",
+      "side": 1,
+      "message": "should we also change synchronize_rcu_expedited/sync_rcu_exp_select_cpus?",
+      "range": {
+        "startLine": 25,
+        "startChar": 7,
+        "endLine": 25,
+        "endChar": 19
+      },
+      "revId": "e05fda1aa35ce0f300f6548aeabead9bb76b39cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46b51387_a687bda0",
+        "filename": "kernel/rcu/tree.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-03-16T23:38:13Z",
+      "side": 1,
+      "message": "do we still need this?",
+      "range": {
+        "startLine": 27,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 29
+      },
+      "revId": "e05fda1aa35ce0f300f6548aeabead9bb76b39cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
