@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5f07fd4_60015beb",
+        "filename": "kernel/rcu/tree_exp.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2022-03-17T23:24:16Z",
+      "side": 0,
+      "message": "Wei, with work queues, the code tried to spread the work across CPUs I think to help performance.\n\nThere is no equivalent api for kthread_worker. Functionally kthread_worker is also correct because we previously fell back to  cpu \u003d WORK_CPU_UNBOUND.",
+      "range": {
+        "startLine": 445,
+        "startChar": 0,
+        "endLine": 452,
+        "endChar": 56
+      },
+      "revId": "77bf53b4861491ad49414d8fceefda2602274519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
