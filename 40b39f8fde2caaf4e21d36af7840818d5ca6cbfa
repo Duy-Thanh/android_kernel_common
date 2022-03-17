@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f00398f7_cc811083",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-03-17T18:02:38Z",
+      "side": 1,
+      "message": "Doesn\u0027t affect KMI so no need to wait until 3/23",
+      "parentUuid": "2515ef7d_87ac57d3",
+      "revId": "40b39f8fde2caaf4e21d36af7840818d5ca6cbfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f633f354_fdbd9619",
