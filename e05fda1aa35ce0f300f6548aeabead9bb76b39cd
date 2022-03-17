@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91513b68_867097d0",
+        "filename": "kernel/rcu/tree.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2022-03-17T04:47:18Z",
+      "side": 1,
+      "message": "I only moved wait_rcu_exp_gp() per the bug. (IIUC this is what the Tim discussed with upstream folks).\n\nTim, thoughts on moving synchronize_rcu_expedited/sync_rcu_exp_select_cpus to kthread as well?",
+      "parentUuid": "f0bd2173_9f07d186",
+      "range": {
+        "startLine": 25,
+        "startChar": 7,
+        "endLine": 25,
+        "endChar": 19
+      },
+      "revId": "e05fda1aa35ce0f300f6548aeabead9bb76b39cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46b51387_a687bda0",
         "filename": "kernel/rcu/tree.h",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2022-03-16T23:38:13Z",
       "side": 1,
       "message": "do we still need this?",
+      "range": {
+        "startLine": 27,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 29
+      },
+      "revId": "e05fda1aa35ce0f300f6548aeabead9bb76b39cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8043a18b_9495fd89",
+        "filename": "kernel/rcu/tree.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2022-03-17T04:47:18Z",
+      "side": 1,
+      "message": "Yes, as you noticed above, some of the exp work still uses the wait queue.",
+      "parentUuid": "46b51387_a687bda0",
       "range": {
         "startLine": 27,
         "startChar": 1,

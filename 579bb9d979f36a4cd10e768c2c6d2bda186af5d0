@@ -94,6 +94,30 @@
       },
       "revId": "579bb9d979f36a4cd10e768c2c6d2bda186af5d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd1a182a_081e3f0e",
+        "filename": "kernel/rcu/tree.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4500,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2022-03-17T04:47:18Z",
+      "side": 1,
+      "message": "Thanks for pointing it out Wei. Then makes sense to keep kthread_prio, since it defaults to 1 with RCU_BOOST (same as sched_set_fifo_low)",
+      "parentUuid": "e5915c29_2f29d706",
+      "range": {
+        "startLine": 4500,
+        "startChar": 26,
+        "endLine": 4500,
+        "endChar": 38
+      },
+      "revId": "579bb9d979f36a4cd10e768c2c6d2bda186af5d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
