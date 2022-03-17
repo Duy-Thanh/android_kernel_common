@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73e95768_5142bf58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1348429
+      },
+      "writtenOn": "2022-03-17T19:04:19Z",
+      "side": 1,
+      "message": "This patch disables trapping of access to MAPM0_EL1/MPAM1_EL1 and MPAMIDR_EL1 from EL1 to EL2. This is a bare minimum of changes required to enable MPAM support (note that by default MPAM will be disabled when booting at EL2).\nActual \u0027sample\u0027 implementation of MPAM module can be found at:\nhttps://gitlab.arm.com/linux-arm/linux-power/-/merge_requests/1",
+      "revId": "e6f7dfcdb13a1a80f3f918d8bdc4dec558b8f458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
