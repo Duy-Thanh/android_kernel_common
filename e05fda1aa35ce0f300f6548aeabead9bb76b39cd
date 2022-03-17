@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "573844de_374a7bc2",
+        "filename": "kernel/rcu/tree.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-03-17T05:11:59Z",
+      "side": 1,
+      "message": "I would be surprised we would leave out synchronize_rcu_expedited to CFS though.",
+      "parentUuid": "91513b68_867097d0",
+      "range": {
+        "startLine": 25,
+        "startChar": 7,
+        "endLine": 25,
+        "endChar": 19
+      },
+      "revId": "e05fda1aa35ce0f300f6548aeabead9bb76b39cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46b51387_a687bda0",
         "filename": "kernel/rcu/tree.h",
         "patchSetId": 3
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Yes, as you noticed above, some of the exp work still uses the wait queue.",
       "parentUuid": "46b51387_a687bda0",
+      "range": {
+        "startLine": 27,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 29
+      },
+      "revId": "e05fda1aa35ce0f300f6548aeabead9bb76b39cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40fc9648_f8e9da3b",
+        "filename": "kernel/rcu/tree.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-03-17T05:11:59Z",
+      "side": 1,
+      "message": "I think we need make all of them off load to RT.",
+      "parentUuid": "8043a18b_9495fd89",
       "range": {
         "startLine": 27,
         "startChar": 1,
