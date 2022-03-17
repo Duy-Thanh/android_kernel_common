@@ -510,7 +510,11 @@ void __kasan_poison_vmalloc(const void *start, unsigned long size)
 
 #else /* CONFIG_KASAN_VMALLOC */
 
+<<<<<<< HEAD   (11f1be ANDROID: thermal: Add vendor hooks for thermal)
 int kasan_alloc_module_shadow(void *addr, size_t size, gfp_t gfp_mask)
+=======
+int kasan_module_alloc(void *addr, size_t size, gfp_t gfp_mask)
+>>>>>>> BRANCH (efe316 Linux 5.15.27)
 {
 	void *ret;
 	size_t scaled_size;

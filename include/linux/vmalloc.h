@@ -34,6 +34,20 @@ struct notifier_block;		/* in notifier.h */
 #else
 #define VM_DEFER_KMEMLEAK	0
 #endif
+<<<<<<< HEAD   (11f1be ANDROID: thermal: Add vendor hooks for thermal)
+=======
+
+/*
+ * VM_KASAN is used slightly differently depending on CONFIG_KASAN_VMALLOC.
+ *
+ * If IS_ENABLED(CONFIG_KASAN_VMALLOC), VM_KASAN is set on a vm_struct after
+ * shadow memory has been mapped. It's used to handle allocation errors so that
+ * we don't try to poison shadow on free if it was never allocated.
+ *
+ * Otherwise, VM_KASAN is set for kasan_module_alloc() allocations and used to
+ * determine which allocations need the module shadow freed.
+ */
+>>>>>>> BRANCH (efe316 Linux 5.15.27)
 
 /* bits [20..32] reserved for arch specific ioremap internals */
 

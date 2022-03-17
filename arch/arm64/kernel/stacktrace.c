@@ -33,7 +33,7 @@
  */
 
 
-void start_backtrace(struct stackframe *frame, unsigned long fp,
+notrace void start_backtrace(struct stackframe *frame, unsigned long fp,
 		     unsigned long pc)
 {
 	frame->fp = fp;
@@ -55,7 +55,11 @@ void start_backtrace(struct stackframe *frame, unsigned long fp,
 	frame->prev_fp = 0;
 	frame->prev_type = STACK_TYPE_UNKNOWN;
 }
+<<<<<<< HEAD   (11f1be ANDROID: thermal: Add vendor hooks for thermal)
 EXPORT_SYMBOL_GPL(start_backtrace);
+=======
+NOKPROBE_SYMBOL(start_backtrace);
+>>>>>>> BRANCH (efe316 Linux 5.15.27)
 
 /*
  * Unwind from one frame record (A) to the next frame record (B).

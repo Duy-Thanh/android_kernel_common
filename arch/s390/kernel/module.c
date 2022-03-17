@@ -45,7 +45,11 @@ void *module_alloc(unsigned long size)
 	p = __vmalloc_node_range(size, MODULE_ALIGN, MODULES_VADDR, MODULES_END,
 				 gfp_mask, PAGE_KERNEL_EXEC, VM_DEFER_KMEMLEAK, NUMA_NO_NODE,
 				 __builtin_return_address(0));
+<<<<<<< HEAD   (11f1be ANDROID: thermal: Add vendor hooks for thermal)
 	if (p && (kasan_alloc_module_shadow(p, size, gfp_mask) < 0)) {
+=======
+	if (p && (kasan_module_alloc(p, size, gfp_mask) < 0)) {
+>>>>>>> BRANCH (efe316 Linux 5.15.27)
 		vfree(p);
 		return NULL;
 	}
