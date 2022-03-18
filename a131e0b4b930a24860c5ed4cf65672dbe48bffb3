@@ -22,6 +22,30 @@
       },
       "revId": "a131e0b4b930a24860c5ed4cf65672dbe48bffb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "064641f3_4da97e87",
+        "filename": "include/uapi/linux/fuse.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-03-18T14:48:15Z",
+      "side": 1,
+      "message": "My first reaction was to make this fix upstream as mentioned in commit message. However, there is no usage of __u* in the upstream header currently. So one would also have to also refactor (maybe the whole uapi header) from uint* types to __u* along with the #include fix. Would this be better?",
+      "parentUuid": "65bd7763_20e034f3",
+      "range": {
+        "startLine": 971,
+        "startChar": 68,
+        "endLine": 971,
+        "endChar": 76
+      },
+      "revId": "a131e0b4b930a24860c5ed4cf65672dbe48bffb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
