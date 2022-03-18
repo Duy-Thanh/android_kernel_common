@@ -118,6 +118,30 @@
       },
       "revId": "a131e0b4b930a24860c5ed4cf65672dbe48bffb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0c6e67e_0214522f",
+        "filename": "include/uapi/linux/fuse.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-18T15:49:32Z",
+      "side": 1,
+      "message": "Yes, fixing this upstream would be good.  As for checkpatch.pl, yes, I think that would be a good idea too, but watch out for the churn that could cause 😊",
+      "parentUuid": "3773ccfd_57d48cd9",
+      "range": {
+        "startLine": 971,
+        "startChar": 68,
+        "endLine": 971,
+        "endChar": 76
+      },
+      "revId": "a131e0b4b930a24860c5ed4cf65672dbe48bffb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
