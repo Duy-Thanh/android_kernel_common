@@ -314,6 +314,29 @@ struct fuse_page_desc {
 	unsigned int offset;
 };
 
+<<<<<<< HEAD   (7059e9 Merge 5.10.105 into android13-5.10)
+=======
+struct fuse_args {
+	uint64_t nodeid;
+	uint32_t opcode;
+	unsigned short in_numargs;
+	unsigned short out_numargs;
+	bool force:1;
+	bool noreply:1;
+	bool nocreds:1;
+	bool in_pages:1;
+	bool out_pages:1;
+	bool user_pages:1;
+	bool out_argvar:1;
+	bool page_zeroing:1;
+	bool page_replace:1;
+	bool may_block:1;
+	struct fuse_in_arg in_args[3];
+	struct fuse_arg out_args[2];
+	void (*end)(struct fuse_mount *fm, struct fuse_args *args, int error);
+};
+
+>>>>>>> BRANCH (327f1e Linux 5.10.106)
 struct fuse_args_pages {
 	struct fuse_args args;
 	struct page **pages;
