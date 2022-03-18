@@ -94,6 +94,30 @@
       },
       "revId": "a131e0b4b930a24860c5ed4cf65672dbe48bffb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3773ccfd_57d48cd9",
+        "filename": "include/uapi/linux/fuse.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2022-03-18T15:15:51Z",
+      "side": 1,
+      "message": "Or, if not \"at all\", if there\u0027s a way to enforce this to not be mistakenly used for user/kernel interface.",
+      "parentUuid": "32fed290_062712f0",
+      "range": {
+        "startLine": 971,
+        "startChar": 68,
+        "endLine": 971,
+        "endChar": 76
+      },
+      "revId": "a131e0b4b930a24860c5ed4cf65672dbe48bffb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
