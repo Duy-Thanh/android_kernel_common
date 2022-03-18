@@ -46,6 +46,30 @@
       },
       "revId": "a131e0b4b930a24860c5ed4cf65672dbe48bffb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46e06846_c4004ac2",
+        "filename": "include/uapi/linux/fuse.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-18T14:56:34Z",
+      "side": 1,
+      "message": "Yes, please do, the \"uint*\" types are not to ever be used in the kernel as they are not in the kernel namespace.  Yes, people do all the time, but that\u0027s wrong 😊",
+      "parentUuid": "064641f3_4da97e87",
+      "range": {
+        "startLine": 971,
+        "startChar": 68,
+        "endLine": 971,
+        "endChar": 76
+      },
+      "revId": "a131e0b4b930a24860c5ed4cf65672dbe48bffb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
