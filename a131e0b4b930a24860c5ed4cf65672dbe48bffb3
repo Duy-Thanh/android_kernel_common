@@ -70,6 +70,30 @@
       },
       "revId": "a131e0b4b930a24860c5ed4cf65672dbe48bffb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32fed290_062712f0",
+        "filename": "include/uapi/linux/fuse.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2022-03-18T15:10:26Z",
+      "side": 1,
+      "message": "I understand Greg, this is something we already discussed (so sorry for keeping you busy again). I\u0027m still puzzled for this specific case, as this change is still in line with Miklos\u0027 definitions here, so on the one hand there is doing the right thing, on the other hand there is keeping the code consistent with what we already have.\n\nYeah, maybe sending a patch upstream to fix these types in FUSE would be the best solution.\n\nWould it also make sense at this point to add something in checkpatch.pl to prevent people from using these stdint types and start fixing them around in the kernel?",
+      "parentUuid": "46e06846_c4004ac2",
+      "range": {
+        "startLine": 971,
+        "startChar": 68,
+        "endLine": 971,
+        "endChar": 76
+      },
+      "revId": "a131e0b4b930a24860c5ed4cf65672dbe48bffb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
