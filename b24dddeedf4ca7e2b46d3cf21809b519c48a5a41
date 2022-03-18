@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9d51f3b_fc6fa5e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-03-18T15:12:11Z",
+      "side": 1,
+      "message": "Could we revert the incorrect ones and then take the good ones as FROMGIT?",
+      "revId": "b24dddeedf4ca7e2b46d3cf21809b519c48a5a41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
