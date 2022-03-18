@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba61b35e_01250d4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-03-18T19:26:05Z",
+      "side": 1,
+      "message": "Jeson, can you rebase? (conflict prevents rebasing inside gerrit tool)",
+      "revId": "819c7479249b034f829998d21ea2d1838ee45177",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
