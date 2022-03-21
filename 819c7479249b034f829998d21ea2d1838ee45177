@@ -16,6 +16,24 @@
       "message": "Jeson, can you rebase? (conflict prevents rebasing inside gerrit tool)",
       "revId": "819c7479249b034f829998d21ea2d1838ee45177",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abfea93d_1a2fea86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905498
+      },
+      "writtenOn": "2022-03-21T06:29:57Z",
+      "side": 1,
+      "message": "Done, thank you",
+      "parentUuid": "ba61b35e_01250d4f",
+      "revId": "819c7479249b034f829998d21ea2d1838ee45177",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
