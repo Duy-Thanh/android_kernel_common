@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "272595f9_88315f61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-03-21T10:59:56Z",
+      "side": 1,
+      "message": "kernel_kasan_aarch64 on aosp_kernel-common-android-mainline: File with significant size growth: vmlinux : 472 MiB -\u003e 1 GiB (+797 MiB)\n\nThat is bad. I think that exceeds the threshold of what is acceptable and needs to be investigated.\n",
+      "revId": "583a3c13c5d2ff08363fee1a31c3c9e3071fbe7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
