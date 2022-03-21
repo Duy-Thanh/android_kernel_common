@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8fc4d70_c074b3b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-03-21T11:00:28Z",
+      "side": 1,
+      "message": "kernel_kasan_aarch64 on aosp_kernel-common-android13-5.15: File with significant size growth: vmlinux : 482 MiB -\u003e 1 GiB (+792 MiB)\n",
+      "revId": "fd7c60ffa161b58d6dcb356e4b990f263bcbb878",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
