@@ -16,6 +16,24 @@
       "message": "kernel_kasan_aarch64 on aosp_kernel-common-android-mainline: File with significant size growth: vmlinux : 472 MiB -\u003e 1 GiB (+797 MiB)\n\nThat is bad. I think that exceeds the threshold of what is acceptable and needs to be investigated.\n",
       "revId": "583a3c13c5d2ff08363fee1a31c3c9e3071fbe7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e57a7be_44d22e83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2022-03-21T18:31:31Z",
+      "side": 1,
+      "message": "Is LTO being enabled for KASAN builds somehow?\n\ncommon/build.config.gki_kasan should be disabling LTO, yet\n\n$ BUILD_CONFIG\u003dcommon/build.config.gki_kasan.aarch64 ./build/build.sh\n\nvery visibly is doing LTO builds.",
+      "parentUuid": "272595f9_88315f61",
+      "revId": "583a3c13c5d2ff08363fee1a31c3c9e3071fbe7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
