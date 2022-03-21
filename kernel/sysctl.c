@@ -237,6 +237,7 @@ static int bpf_stats_handler(struct ctl_table *table, int write,
 	return ret;
 }
 
+<<<<<<< HEAD   (3eec44 UPSTREAM: usb: gadget: Fix use-after-free bug by not setting)
 void __weak unpriv_ebpf_notify(int new_state)
 {
 }
@@ -261,6 +262,25 @@ static int bpf_unpriv_handler(struct ctl_table *table, int write,
 
 	unpriv_ebpf_notify(unpriv_enable);
 
+=======
+static int bpf_unpriv_handler(struct ctl_table *table, int write,
+			      void *buffer, size_t *lenp, loff_t *ppos)
+{
+	int ret, unpriv_enable = *(int *)table->data;
+	bool locked_state = unpriv_enable == 1;
+	struct ctl_table tmp = *table;
+
+	if (write && !capable(CAP_SYS_ADMIN))
+		return -EPERM;
+
+	tmp.data = &unpriv_enable;
+	ret = proc_dointvec_minmax(&tmp, write, buffer, lenp, ppos);
+	if (write && !ret) {
+		if (locked_state && unpriv_enable != 1)
+			return -EPERM;
+		*(int *)table->data = unpriv_enable;
+	}
+>>>>>>> BRANCH (c19421 Merge 5.10.101 into android12-5.10-lts)
 	return ret;
 }
 #endif /* CONFIG_BPF_SYSCALL && CONFIG_SYSCTL */
