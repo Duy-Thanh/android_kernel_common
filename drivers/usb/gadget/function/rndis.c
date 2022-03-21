@@ -640,7 +640,10 @@ static int rndis_set_response(struct rndis_params *params,
 	BufLength = le32_to_cpu(buf->InformationBufferLength);
 	BufOffset = le32_to_cpu(buf->InformationBufferOffset);
 	if ((BufLength > RNDIS_MAX_TOTAL_SIZE) ||
+<<<<<<< HEAD   (e12150 UPSTREAM: usb: gadget: Fix use-after-free bug by not setting)
 	    (BufOffset > RNDIS_MAX_TOTAL_SIZE) ||
+=======
+>>>>>>> BRANCH (20d214 Merge 5.4.180 into android11-5.4-lts)
 	    (BufOffset + 8 >= RNDIS_MAX_TOTAL_SIZE))
 		    return -EINVAL;
 
