@@ -16,6 +16,24 @@
       "message": "The .xml file update seems too big for this small number of symbols being added.\n\nHow was it created?",
       "revId": "f73dca533997dfd8272a8566e9f10e3c90efc6b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a519df02_bece7b01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944195
+      },
+      "writtenOn": "2022-03-22T10:01:45Z",
+      "side": 1,
+      "message": "Using the following build command:\nBUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build_abi.sh --update --print-report\n\nI will reset android/abi_gki_aarch64.xml and re-build it again.",
+      "parentUuid": "00b46c88_80d7e718",
+      "revId": "f73dca533997dfd8272a8566e9f10e3c90efc6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
