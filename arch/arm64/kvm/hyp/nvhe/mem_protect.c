@@ -620,6 +620,51 @@ static bool is_dabt(u64 esr)
 	return ESR_ELx_EC(esr) == ESR_ELx_EC_DABT_LOW;
 }
 
+static void __noreturn host_inject_abort(struct kvm_cpu_context *host_ctxt)
+{
+	u64 spsr = read_sysreg(SPSR_EL2);
+	u64 esr = read_sysreg(ESR_EL2);
+	u64 ventry, ec;
+
+	ventry = read_sysreg(VBAR_EL1);
+	ventry += __get_vector_offset(spsr, PSR_MODE_EL1h, except_type_sync);
+
+	/* Repaint the ESR to report a same-level fault if taken from EL1 */
+	if ((spsr & PSR_MODE_MASK) != PSR_MODE_EL0t) {
+		ec = ESR_ELx_EC(esr);
+		if (ec == ESR_ELx_EC_DABT_LOW)
+			ec = ESR_ELx_EC_DABT_CUR;
+		else if (ec == ESR_ELx_EC_IABT_LOW)
+			ec = ESR_ELx_EC_IABT_CUR;
+		else
+			WARN_ON(1);
+		esr &= ~ESR_ELx_EC_MASK;
+		esr |= ec << ESR_ELx_EC_SHIFT;
+	}
+
+	/*
+	 * Since S1PTW should only ever be set for stage-2 faults, we're pretty
+	 * much guaranteed that it won't be set in ESR_EL1 by the hardware. So,
+	 * let's use that bit to allow the host abort handler to differentiate
+	 * this abort from normal userspace faults.
+	 *
+	 * Note: although S1PTW is RES0 at EL1, it is guaranteed by the
+	 * architecture to be backed by flops, so it should be safe to use.
+	 */
+	esr |= ESR_ELx_S1PTW;
+
+	write_sysreg(esr, ESR_EL1);
+	write_sysreg(spsr, SPSR_EL1);
+	write_sysreg(read_sysreg(ELR_EL2), ELR_EL1);
+	write_sysreg(read_sysreg(FAR_EL2), FAR_EL1);
+
+	write_sysreg(PSR_F_BIT | PSR_I_BIT | PSR_A_BIT | PSR_D_BIT | PSR_MODE_EL1h, SPSR_EL2);
+	write_sysreg(ventry, ELR_EL2);
+
+	__host_enter(host_ctxt);
+	unreachable();
+}
+
 void handle_host_mem_abort(struct kvm_cpu_context *host_ctxt)
 {
 	struct kvm_vcpu_fault_info fault;
@@ -644,6 +689,10 @@ void handle_host_mem_abort(struct kvm_cpu_context *host_ctxt)
 		ret = host_stage2_idmap(addr);
 
 	host_unlock_component();
+
+	if (ret == -EPERM)
+		host_inject_abort(host_ctxt);
+
 	BUG_ON(ret && ret != -EAGAIN);
 }
 
