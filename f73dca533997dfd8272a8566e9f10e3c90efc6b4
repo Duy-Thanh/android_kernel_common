@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00b46c88_80d7e718",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-22T08:50:43Z",
+      "side": 1,
+      "message": "The .xml file update seems too big for this small number of symbols being added.\n\nHow was it created?",
+      "revId": "f73dca533997dfd8272a8566e9f10e3c90efc6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
