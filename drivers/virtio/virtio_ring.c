@@ -68,6 +68,12 @@ module_param(force_used_validation, bool, 0444);
 #define LAST_ADD_TIME_INVALID(vq)
 #endif
 
+#define __BAD_RING(_vq, fmt, args...)				\
+	do {							\
+		dev_err(&_vq->vq.vdev->dev,			\
+			"%s:"fmt, (_vq)->vq.name, ##args);	\
+	} while (0)
+
 struct vring_desc_state_split {
 	void *data;			/* Data for callback. */
 	struct vring_desc *indir_desc;	/* Indirect descriptor, if any. */
@@ -793,9 +799,9 @@ static void *virtqueue_get_buf_ctx_split(struct virtqueue *_vq,
 		return NULL;
 	}
 	if (vq->buflen && unlikely(*len > vq->buflen[i])) {
-		BAD_RING(vq, "used len %d is larger than in buflen %u\n",
+		__BAD_RING(vq, "used len %d is larger than in buflen %u\n",
 			*len, vq->buflen[i]);
-		return NULL;
+//		return NULL;
 	}
 
 	/* detach_buf_split clears data, so grab it now. */
@@ -1490,9 +1496,9 @@ static void *virtqueue_get_buf_ctx_packed(struct virtqueue *_vq,
 		return NULL;
 	}
 	if (vq->buflen && unlikely(*len > vq->buflen[id])) {
-		BAD_RING(vq, "used len %d is larger than in buflen %u\n",
+		__BAD_RING(vq, "used len %d is larger than in buflen %u\n",
 			*len, vq->buflen[id]);
-		return NULL;
+//		return NULL;
 	}
 
 	/* detach_buf_packed clears data, so grab it now. */
