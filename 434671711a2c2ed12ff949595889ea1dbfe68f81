@@ -34,6 +34,24 @@
       "parentUuid": "63f5fdda_9ec60510",
       "revId": "434671711a2c2ed12ff949595889ea1dbfe68f81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "004556af_9e18e77d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1345812
+      },
+      "writtenOn": "2022-03-22T15:58:34Z",
+      "side": 1,
+      "message": "Underlying changes that required these APIs are ready.",
+      "parentUuid": "6807f6c5_3d298fc8",
+      "revId": "434671711a2c2ed12ff949595889ea1dbfe68f81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
