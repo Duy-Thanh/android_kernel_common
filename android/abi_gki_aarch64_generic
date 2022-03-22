@@ -1088,7 +1088,9 @@
   irq_create_mapping_affinity
   irq_create_of_mapping
   __irq_domain_add
+  irq_domain_get_irq_data
   irq_domain_remove
+  irq_domain_set_info
   irq_domain_xlate_twocell
   irq_find_mapping
   irq_get_irq_data
