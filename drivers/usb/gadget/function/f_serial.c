@@ -11,6 +11,7 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/device.h>
+#include <trace/hooks/f_serial.h>
 
 #include "u_serial.h"
 
@@ -386,6 +387,7 @@ static struct usb_function *gser_alloc(struct usb_function_instance *fi)
 	gser->port.func.resume = gser_resume;
 	gser->port.func.suspend = gser_suspend;
 
+	trace_android_vh_gser_setup_overwrite(&gser->port.func);
 	return &gser->port.func;
 }
 
