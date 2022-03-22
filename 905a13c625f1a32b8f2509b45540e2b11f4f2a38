@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1be28a1_95f5d477",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1427094
+      },
+      "writtenOn": "2022-03-22T06:30:05Z",
+      "side": 1,
+      "message": "Update the ABI symbol list for pa/2172210\nb/208368211#comment98 for more details",
+      "revId": "905a13c625f1a32b8f2509b45540e2b11f4f2a38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
