@@ -34,6 +34,24 @@
       "parentUuid": "00b46c88_80d7e718",
       "revId": "f73dca533997dfd8272a8566e9f10e3c90efc6b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0b4ad28_feec75e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-03-22T13:11:05Z",
+      "side": 1,
+      "message": "This is `android11-5.4` and `abitidy` is not in use. It\u0027s possible that this level of churn is inevitable.\n\nPlease `repo sync` as well, in case there were other changes.\n\nA final possibility is that `LTO` was specified differently between the builds that created the two XML files.\n\nI would check to see what passive ABI monitoring had to say, but that isn\u0027t even here.",
+      "parentUuid": "a519df02_bece7b01",
+      "revId": "f73dca533997dfd8272a8566e9f10e3c90efc6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
