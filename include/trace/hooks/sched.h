@@ -448,10 +448,17 @@ DECLARE_HOOK(android_vh_task_cmdline_prio_restore,
 	TP_PROTO(int saved_prio),
 	TP_ARGS(saved_prio));
 
+<<<<<<< PATCH SET (65225e31d9df91a4e320884dd82e8fe20fee30b3 ANDROID: sched: Add vendor hook for rt util update)
+DECLARE_RESTRICTED_HOOK(android_rvh_update_rt_rq_load_avg,
+	TP_PROTO(u64 now, struct rq *rq, struct task_struct *tsk, int running),
+	TP_ARGS(now, rq, tsk, running), 1);
+||||||| BASE      (9c8fb18c9387eb441d9b34f0d4e1f8c94d801e0b ANDROID: GKI: Update symbols list for exynos)
+=======
 DECLARE_RESTRICTED_HOOK(android_rvh_util_fits_cpu,
 	TP_PROTO(unsigned long util, unsigned long uclamp_min, unsigned long uclamp_max,
 		 int cpu, bool *fits, bool *done),
 	TP_ARGS(util, uclamp_min, uclamp_max, cpu, fits, done), 1);
+>>>>>>> BASE      (cdba785849ad4a3f1de8d0c89847a4788d91c81f ANDROID: vendor_hooks: Add a hook for set_task_comm)
 
 /* macro versions of hooks are no longer required */
 #endif /* _TRACE_HOOK_SCHED_H */
