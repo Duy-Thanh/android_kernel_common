@@ -70,6 +70,24 @@
       "parentUuid": "d0b4ad28_feec75e7",
       "revId": "f73dca533997dfd8272a8566e9f10e3c90efc6b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c7757d6_71d2ecd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944195
+      },
+      "writtenOn": "2022-03-23T04:31:19Z",
+      "side": 1,
+      "message": "I have tried many times, there are too many different between common/android/abi_gki_aarch64.xml and abi-android11-5.4.180_r00-\u003cid\u003e.xml without my patch. \nThen merge my patch again after building one time without my patch, abi.xml change very little.",
+      "parentUuid": "6651e641_204aa520",
+      "revId": "f73dca533997dfd8272a8566e9f10e3c90efc6b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
