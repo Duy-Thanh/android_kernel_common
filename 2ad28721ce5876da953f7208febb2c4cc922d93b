@@ -16,6 +16,24 @@
       "message": "Maybe if we merge everything it\u0027ll help automerger out?",
       "revId": "2ad28721ce5876da953f7208febb2c4cc922d93b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9938bbd_41a6e68d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2022-03-23T17:11:44Z",
+      "side": 1,
+      "message": "From b/226187600, automerger reports conflicts due to a signed-off-by requirement that is not satisfied, so submitting this won\u0027t help automerger. I\u0027ll hold off until that issue is resolved and hopefully this CL is no longer needed.",
+      "parentUuid": "87d91e14_5a989860",
+      "revId": "2ad28721ce5876da953f7208febb2c4cc922d93b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
