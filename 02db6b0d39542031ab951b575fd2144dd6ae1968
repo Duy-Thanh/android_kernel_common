@@ -16,6 +16,24 @@
       "message": "Hi Todd/Greg,\n\nCould you help set the review bits again?  Looks like there was a merge conflict, which needed a rebase.  Thanks!",
       "revId": "02db6b0d39542031ab951b575fd2144dd6ae1968",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "097c9320_ddc5bc97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-23T07:44:20Z",
+      "side": 1,
+      "message": "Please just set the \"attention needed\" bit in gerrit if you need a reaview.\n\nAnyway, this needs to be rebased again.",
+      "parentUuid": "d0d2d760_b72c0863",
+      "revId": "02db6b0d39542031ab951b575fd2144dd6ae1968",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
