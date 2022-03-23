@@ -379,6 +379,9 @@ static int pkvm_check_extension(struct kvm *kvm, long ext, int kvm_cap)
 	case KVM_CAP_ARM_PROTECTED_VM:
 		r = 1;
 		break;
+	case KVM_CAP_STEAL_TIME:
+		r = 0;
+		break;
 	default:
 		r = (kvm && kvm_vm_is_protected(kvm)) ? 0 : kvm_cap;
 		break;
