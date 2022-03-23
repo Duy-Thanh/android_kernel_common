@@ -16,6 +16,24 @@
       "message": "We want this dropped, as we want this option enabled.",
       "revId": "661b014cf691564b918a4f8ee20e779ba1356226",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bdc0a21_f0214af2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-23T13:27:41Z",
+      "side": 1,
+      "message": "enabled by default that is.",
+      "parentUuid": "af4db5a5_6877a685",
+      "revId": "661b014cf691564b918a4f8ee20e779ba1356226",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
