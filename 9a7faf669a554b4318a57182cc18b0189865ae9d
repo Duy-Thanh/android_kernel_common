@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05ed1913_5654cfb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1345812
+      },
+      "writtenOn": "2022-03-23T03:41:06Z",
+      "side": 1,
+      "message": "Update android/abi_gki_aarch64.xml to fix presubmit failure (stgdiff has reported ABI differences).",
+      "revId": "9a7faf669a554b4318a57182cc18b0189865ae9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
