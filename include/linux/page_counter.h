@@ -25,6 +25,7 @@ struct page_counter {
 
 	/* legacy */
 	unsigned long watermark;
+	unsigned long decayed_watermark;
 	unsigned long failcnt;
 };
 
