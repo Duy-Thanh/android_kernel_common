@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f0655d3_5af26131",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2022-03-24T11:38:10Z",
+      "side": 1,
+      "message": "This was done on purpose. The whole point of non-protected is to allow features that are not available to proected VMs. There is a bunch of things that we want to allow (debug, for example), and for that the trap bits should be that of the host, shouldn\u0027t they?\n\nIt could well be that there is another problem due to not initialising these here, but forcing the protected trap bits on a non-protected vcpu seems wrong.",
+      "revId": "80ebba97506d572349288fd447386d758f51bf2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
