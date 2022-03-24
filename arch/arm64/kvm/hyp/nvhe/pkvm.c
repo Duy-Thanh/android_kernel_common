@@ -169,9 +169,6 @@ static void pvm_init_traps_aa64mmfr1(struct kvm_vcpu *vcpu)
  */
 static void pvm_init_trap_regs(struct kvm_vcpu *vcpu)
 {
-	vcpu->arch.cptr_el2 = CPTR_EL2_DEFAULT;
-	vcpu->arch.mdcr_el2 = 0;
-
 	/*
 	 * Always trap:
 	 * - Feature id registers: to control features exposed to guests
@@ -197,14 +194,23 @@ static void pvm_init_trap_regs(struct kvm_vcpu *vcpu)
 /*
  * Initialize trap register values for protected VMs.
  */
-static void pkvm_vcpu_init_traps(struct kvm_vcpu *vcpu)
+static void pkvm_vcpu_init_traps(struct kvm_vcpu *shadow_vcpu, struct kvm_vcpu *host_vcpu)
 {
-	pvm_init_trap_regs(vcpu);
-	pvm_init_traps_aa64pfr0(vcpu);
-	pvm_init_traps_aa64pfr1(vcpu);
-	pvm_init_traps_aa64dfr0(vcpu);
-	pvm_init_traps_aa64mmfr0(vcpu);
-	pvm_init_traps_aa64mmfr1(vcpu);
+	shadow_vcpu->arch.cptr_el2 = CPTR_EL2_DEFAULT;
+	shadow_vcpu->arch.mdcr_el2 = 0;
+
+	if (!kvm_vm_is_protected(shadow_vcpu->kvm)) {
+		shadow_vcpu->arch.hcr_el2 = HCR_GUEST_FLAGS |
+					    READ_ONCE(host_vcpu->arch.hcr_el2);
+		return;
+	}
+
+	pvm_init_trap_regs(shadow_vcpu);
+	pvm_init_traps_aa64pfr0(shadow_vcpu);
+	pvm_init_traps_aa64pfr1(shadow_vcpu);
+	pvm_init_traps_aa64dfr0(shadow_vcpu);
+	pvm_init_traps_aa64mmfr0(shadow_vcpu);
+	pvm_init_traps_aa64mmfr1(shadow_vcpu);
 }
 
 /*
@@ -405,8 +411,7 @@ static int init_shadow_structs(struct kvm *kvm, struct kvm_shadow_vm *vm,
 		if (ret)
 			return ret;
 
-		if (vm->arch.pkvm.enabled)
-			pkvm_vcpu_init_traps(shadow_vcpu);
+		pkvm_vcpu_init_traps(shadow_vcpu, host_vcpu);
 		kvm_reset_pvm_sys_regs(shadow_vcpu);
 
 		vm->vcpus[i] = shadow_vcpu;
