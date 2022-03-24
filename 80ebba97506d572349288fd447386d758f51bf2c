@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5631e007_e053b08f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2022-03-24T11:42:00Z",
+      "side": 1,
+      "message": "I see. I will abandon this and re",
+      "revId": "80ebba97506d572349288fd447386d758f51bf2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f0655d3_5af26131",
@@ -14,6 +31,24 @@
       "writtenOn": "2022-03-24T11:38:10Z",
       "side": 1,
       "message": "This was done on purpose. The whole point of non-protected is to allow features that are not available to proected VMs. There is a bunch of things that we want to allow (debug, for example), and for that the trap bits should be that of the host, shouldn\u0027t they?\n\nIt could well be that there is another problem due to not initialising these here, but forcing the protected trap bits on a non-protected vcpu seems wrong.",
+      "revId": "80ebba97506d572349288fd447386d758f51bf2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47ef4a5a_6be407d5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2022-03-24T11:42:00Z",
+      "side": 1,
+      "message": "I see. I will abandon this and resubmit patches that fix the initialization.",
+      "parentUuid": "1f0655d3_5af26131",
       "revId": "80ebba97506d572349288fd447386d758f51bf2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
