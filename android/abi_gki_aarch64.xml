@@ -2474,6 +2474,7 @@
       <elf-symbol name='pkvm_iommu_resume' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xff696ab2'/>
       <elf-symbol name='pkvm_iommu_s2mpu_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6d486258'/>
       <elf-symbol name='pkvm_iommu_suspend' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2554db42'/>
+      <elf-symbol name='pkvm_iommu_sysmmu_sync_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x76fa4991'/>
       <elf-symbol name='platform_device_add' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd1f2d2e8'/>
       <elf-symbol name='platform_device_add_data' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb05eda59'/>
       <elf-symbol name='platform_device_add_properties' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5988706b'/>
@@ -118504,8 +118505,8 @@
         <parameter type-id='0fbf3cfd' name='skb' filepath='net/xfrm/xfrm_output.c' line='405' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='pkvm_iommu_resume' mangled-name='pkvm_iommu_resume' filepath='arch/arm64/kvm/iommu.c' line='51' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pkvm_iommu_resume'>
-        <parameter type-id='fa0b179b' name='dev' filepath='arch/arm64/kvm/iommu.c' line='51' column='1'/>
+      <function-decl name='pkvm_iommu_resume' mangled-name='pkvm_iommu_resume' filepath='arch/arm64/kvm/iommu.c' line='52' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pkvm_iommu_resume'>
+        <parameter type-id='fa0b179b' name='dev' filepath='arch/arm64/kvm/iommu.c' line='52' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='pkvm_iommu_s2mpu_register' mangled-name='pkvm_iommu_s2mpu_register' filepath='arch/arm64/kvm/iommu/s2mpu.c' line='72' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pkvm_iommu_s2mpu_register'>
@@ -118513,8 +118514,14 @@
         <parameter type-id='2522883d' name='addr' filepath='arch/arm64/kvm/iommu/s2mpu.c' line='72' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='pkvm_iommu_suspend' mangled-name='pkvm_iommu_suspend' filepath='arch/arm64/kvm/iommu.c' line='44' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pkvm_iommu_suspend'>
-        <parameter type-id='fa0b179b' name='dev' filepath='arch/arm64/kvm/iommu.c' line='44' column='1'/>
+      <function-decl name='pkvm_iommu_suspend' mangled-name='pkvm_iommu_suspend' filepath='arch/arm64/kvm/iommu.c' line='45' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pkvm_iommu_suspend'>
+        <parameter type-id='fa0b179b' name='dev' filepath='arch/arm64/kvm/iommu.c' line='45' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='pkvm_iommu_sysmmu_sync_register' mangled-name='pkvm_iommu_sysmmu_sync_register' filepath='arch/arm64/kvm/iommu/s2mpu.c' line='104' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pkvm_iommu_sysmmu_sync_register'>
+        <parameter type-id='fa0b179b' name='dev' filepath='arch/arm64/kvm/iommu/s2mpu.c' line='104' column='1'/>
+        <parameter type-id='2522883d' name='addr' filepath='arch/arm64/kvm/iommu/s2mpu.c' line='104' column='1'/>
+        <parameter type-id='fa0b179b' name='parent' filepath='arch/arm64/kvm/iommu/s2mpu.c' line='105' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <var-decl name='platform_bus' type-id='66e487eb' mangled-name='platform_bus' visibility='default' filepath='drivers/base/platform.c' line='38' column='1' elf-symbol-id='platform_bus'/>
