@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f859877d_7b98850a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2022-03-25T18:36:05Z",
+      "side": 1,
+      "message": "What was being done of LKDTM earlier? Was it compiled statically for gki-2.0? ",
+      "revId": "9b4ed6c50aaaa0341543c8a529682e0ffd87611b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
