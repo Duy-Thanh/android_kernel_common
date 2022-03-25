@@ -16,6 +16,24 @@
       "message": "Please submit needed changes upstream first.  Why wasn\u0027t this done in the past since we took the previous version of this?",
       "revId": "9d4cb4c1be93bd3b18097ce649852b8500f2146b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "885ee0ca_2ce822f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2022-03-25T08:49:55Z",
+      "side": 1,
+      "message": "I see that this patch has been cherry-picked to android13-5.10, so I cherry-pick it to android13-5.15.\n\nWhat I really need is this patch which is also cherry-picked to android13-5.10:\nhttps://android-review.googlesource.com/c/kernel/common/+/1710894\n\nBecause of the conflict, I cherry-pick this patch first.",
+      "parentUuid": "9cddf2f0_ff35dac5",
+      "revId": "9d4cb4c1be93bd3b18097ce649852b8500f2146b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
