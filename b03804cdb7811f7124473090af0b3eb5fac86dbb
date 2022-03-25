@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd8533b3_1f2199c5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-03-25T15:28:06Z",
+      "side": 1,
+      "message": "What would it take to make this parallel? Just split these in two distinct loops?",
+      "range": {
+        "startLine": 183,
+        "startChar": 1,
+        "endLine": 186,
+        "endChar": 2
+      },
+      "revId": "b03804cdb7811f7124473090af0b3eb5fac86dbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
