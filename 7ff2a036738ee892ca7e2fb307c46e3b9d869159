@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d42b547_81be8969",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-03-25T02:31:50Z",
+      "side": 1,
+      "message": "Replacing FROMLIST patch with UPSTREAM ones now that Linus merged the final version.",
+      "revId": "7ff2a036738ee892ca7e2fb307c46e3b9d869159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
