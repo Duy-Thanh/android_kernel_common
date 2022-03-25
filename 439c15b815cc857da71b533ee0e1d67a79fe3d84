@@ -16,6 +16,24 @@
       "message": "Why is this a \"restricted\" hook?",
       "revId": "439c15b815cc857da71b533ee0e1d67a79fe3d84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95ed3673_fc7365b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2022-03-25T07:36:50Z",
+      "side": 1,
+      "message": "Hi Greg\nBecause the scheduler uses this function, I take it for granted that it should be like this. . .\nAnd I thought about it carefully, it is indeed no need to set it restricted.\nI would change it in next patch.\n\nThanks",
+      "parentUuid": "62bcfdd3_92afb40a",
+      "revId": "439c15b815cc857da71b533ee0e1d67a79fe3d84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
