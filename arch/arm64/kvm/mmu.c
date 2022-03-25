@@ -1201,15 +1201,15 @@ static int pkvm_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa,
 	 * pages backed by swap in the knowledge that the GUP pin will
 	 * prevent try_to_unmap() from succeeding.
 	 */
-	if (!PageSwapBacked(page)) {
-		ret = -EIO;
-		goto dec_account;
-	} else if (ret == -EHWPOISON) {
+	if (ret == -EHWPOISON) {
 		kvm_send_hwpoison_signal(hva, PAGE_SHIFT);
 		ret = 0;
 		goto dec_account;
 	} else if (ret != 1) {
 		ret = -EFAULT;
+		goto dec_account;
+	} else if (!PageSwapBacked(page)) {
+		ret = -EIO;
 		goto dec_account;
 	}
 
