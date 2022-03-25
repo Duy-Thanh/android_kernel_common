@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d18139f_4ed5ed59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-25T15:14:24Z",
+      "side": 1,
+      "message": "needed for now during the merge cycle to keep kernelci systems happy.",
+      "revId": "f411e76d5c0cf8308f4db4bf105ac1ca21d89153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
