@@ -22,6 +22,30 @@
       },
       "revId": "357a1e8962cf1db14550df0246b554be4f504bd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46fee956_395f15ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2022-03-25T17:08:13Z",
+      "side": 1,
+      "message": "Oeuf corse! 😄\nI\u0027ll fix that in both patches.",
+      "parentUuid": "294aeb69_08e6d104",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 9,
+        "endChar": 12
+      },
+      "revId": "357a1e8962cf1db14550df0246b554be4f504bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
