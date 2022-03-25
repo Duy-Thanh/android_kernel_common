@@ -26,6 +26,7 @@
 #include <linux/types.h>
 #include <linux/workqueue.h>
 #include <linux/usb/ch9.h>
+#include <linux/android_vendor.h>
 
 #define UDC_TRACE_STR_MAX	512
 
@@ -240,6 +241,8 @@ struct usb_ep {
 	u8			address;
 	const struct usb_endpoint_descriptor	*desc;
 	const struct usb_ss_ep_comp_descriptor	*comp_desc;
+
+	ANDROID_VENDOR_DATA(1);
 };
 
 /*-------------------------------------------------------------------------*/
