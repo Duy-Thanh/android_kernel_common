@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "294aeb69_08e6d104",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-03-25T16:34:24Z",
+      "side": 1,
+      "message": "Nit: protected?",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 9,
+        "endChar": 12
+      },
+      "revId": "357a1e8962cf1db14550df0246b554be4f504bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
