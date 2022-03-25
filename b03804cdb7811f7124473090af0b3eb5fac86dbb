@@ -22,6 +22,30 @@
       },
       "revId": "b03804cdb7811f7124473090af0b3eb5fac86dbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3be108d3_ea885db5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-03-25T16:18:17Z",
+      "side": 1,
+      "message": "That would only get you parallelism across SYNCs of a single S2MPU. I have a patch that merges the prepare/apply stages and that way you can start all the currently powered SYNCs first.\n\nI\u0027ll test that next, now just want to get it working without too much churn.",
+      "parentUuid": "dd8533b3_1f2199c5",
+      "range": {
+        "startLine": 183,
+        "startChar": 1,
+        "endLine": 186,
+        "endChar": 2
+      },
+      "revId": "b03804cdb7811f7124473090af0b3eb5fac86dbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
