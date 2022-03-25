@@ -25,6 +25,7 @@
 #include <linux/rwsem.h>
 #include <linux/interrupt.h>
 #include <linux/idr.h>
+#include <linux/android_vendor.h>
 
 #define MAX_TOPO_LEVEL		6
 
@@ -413,6 +414,10 @@ struct hc_driver {
 #define EHSET_TEST_SINGLE_STEP_SET_FEATURE 0x06
 	int	(*submit_single_step_set_feature)(struct usb_hcd *,
 			struct urb *, int);
+
+	/* Android vendor reserved */
+	ANDROID_VENDOR_DATA(1);
+	ANDROID_VENDOR_DATA(2);
 };
 
 static inline int hcd_giveback_urb_in_bh(struct usb_hcd *hcd)
