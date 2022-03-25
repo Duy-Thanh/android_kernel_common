@@ -211,6 +211,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_mem);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_print_slabinfo_header);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cache_show);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_effective_cpu_util);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_report_bug);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_watchdog_timer_softlockup);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_freeze_todo);
