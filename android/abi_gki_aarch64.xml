@@ -2056,6 +2056,7 @@
       <elf-symbol name='mbox_free_channel' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4b128769'/>
       <elf-symbol name='mbox_request_channel' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x669f6337'/>
       <elf-symbol name='mbox_send_message' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4f6b5ac1'/>
+      <elf-symbol name='memchr' type='func-type' binding='weak-binding' visibility='default-visibility' is-defined='yes' crc='0xa07a37f0'/>
       <elf-symbol name='memchr_inv' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8df92f66'/>
       <elf-symbol name='memcmp' type='func-type' binding='weak-binding' visibility='default-visibility' is-defined='yes' crc='0x449ad0a7'/>
       <elf-symbol name='memcpy' type='func-type' binding='weak-binding' visibility='default-visibility' is-defined='yes' crc='0x4829a47e'/>
