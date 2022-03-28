@@ -16,6 +16,24 @@
       "message": "Android still needs these tracepoints (for storaged stats)",
       "revId": "84921133d68561ba1445493248a0367b7c8d90e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfa6ac49_7f181d7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2022-03-28T18:22:08Z",
+      "side": 1,
+      "message": "Nice timing - b/225959108. Agreed to kill this android tracepoint.",
+      "parentUuid": "5cc5627b_cfc82f2a",
+      "revId": "84921133d68561ba1445493248a0367b7c8d90e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
