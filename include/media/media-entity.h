@@ -145,6 +145,7 @@ struct media_link {
 	struct media_link *reverse;
 	unsigned long flags;
 	bool is_backlink;
+	ANDROID_VENDOR_DATA(1);
 };
 
 /**
