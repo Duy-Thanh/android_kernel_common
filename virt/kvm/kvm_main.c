@@ -1521,6 +1521,11 @@ static struct kvm_memslots *kvm_dup_memslots(struct kvm_memslots *old,
 	return slots;
 }
 
+int __weak kvm_arch_check_set_memslot(struct kvm *kvm, enum kvm_mr_change change)
+{
+	return 0;
+}
+
 static int kvm_set_memslot(struct kvm *kvm,
 			   const struct kvm_userspace_memory_region *mem,
 			   struct kvm_memory_slot *new, int as_id,
@@ -1529,6 +1534,10 @@ static int kvm_set_memslot(struct kvm *kvm,
 	struct kvm_memory_slot *slot, old;
 	struct kvm_memslots *slots;
 	int r;
+
+	r = kvm_arch_check_set_memslot(kvm, change);
+	if (r)
+		return r;
 
 	/*
 	 * Released in install_new_memslots.
