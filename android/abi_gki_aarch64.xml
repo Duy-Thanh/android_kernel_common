@@ -932,6 +932,8 @@
       <elf-symbol name='bmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6ee22b9c'/>
       <elf-symbol name='bpf_dispatcher_xdp_func' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6f8f674a'/>
       <elf-symbol name='bpf_prog_add' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd978c611'/>
+      <elf-symbol name='bpf_prog_get_type_dev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc99aa417'/>
+      <elf-symbol name='bpf_prog_get_type_path' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe3a341d6'/>
       <elf-symbol name='bpf_prog_put' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2803638b'/>
       <elf-symbol name='bpf_prog_sub' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x271c7a96'/>
       <elf-symbol name='bpf_trace_run1' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3ebcf954'/>
@@ -64244,7 +64246,7 @@
         <return type-id='95e97e5e'/>
       </function-type>
       <function-type size-in-bits='64' id='9102a0ad'>
-        <parameter type-id='eb572b74' name='sdev'/>
+        <parameter type-id='eb572b74'/>
         <return type-id='48b5725f'/>
       </function-type>
       <pointer-type-def type-id='d89691b6' size-in-bits='64' id='91073894'/>
@@ -100431,8 +100433,8 @@
         </data-member>
       </class-decl>
       <function-type size-in-bits='64' id='e1740daa'>
-        <parameter type-id='c485c22c'/>
-        <parameter type-id='95e97e5e'/>
+        <parameter type-id='c485c22c' name='bh'/>
+        <parameter type-id='95e97e5e' name='uptodate'/>
         <return type-id='48b5725f'/>
       </function-type>
       <pointer-type-def type-id='a5eadeee' size-in-bits='64' id='e1759090'/>
@@ -119321,6 +119323,17 @@
         <parameter type-id='bdcee7ae' name='prog' filepath='kernel/bpf/syscall.c' line='1875' column='1'/>
         <parameter type-id='95e97e5e' name='i' filepath='kernel/bpf/syscall.c' line='1875' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='bpf_prog_get_type_dev' mangled-name='bpf_prog_get_type_dev' filepath='kernel/bpf/syscall.c' line='1952' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_prog_get_type_dev'>
+        <parameter type-id='19c2251e' name='ufd' filepath='kernel/bpf/syscall.c' line='1952' column='1'/>
+        <parameter type-id='b80df76a' name='type' filepath='kernel/bpf/syscall.c' line='1952' column='1'/>
+        <parameter type-id='b50a4934' name='attach_drv' filepath='kernel/bpf/syscall.c' line='1953' column='1'/>
+        <return type-id='bdcee7ae'/>
+      </function-decl>
+      <function-decl name='bpf_prog_get_type_path' mangled-name='bpf_prog_get_type_path' filepath='kernel/bpf/inode.c' line='585' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_prog_get_type_path'>
+        <parameter type-id='80f4b756' name='name' filepath='kernel/bpf/inode.c' line='585' column='1'/>
+        <parameter type-id='b80df76a' name='type' filepath='kernel/bpf/inode.c' line='585' column='1'/>
+        <return type-id='bdcee7ae'/>
       </function-decl>
       <function-decl name='bpf_prog_put' mangled-name='bpf_prog_put' filepath='kernel/bpf/syscall.c' line='1777' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='bpf_prog_put'>
         <parameter type-id='bdcee7ae' name='prog' filepath='kernel/bpf/syscall.c' line='1777' column='1'/>
