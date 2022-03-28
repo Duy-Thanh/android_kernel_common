@@ -541,6 +541,10 @@ rcu_preempt_deferred_qs_irqrestore(struct task_struct *t, unsigned long flags)
 		/* Unboost if we were boosted. */
 		if (IS_ENABLED(CONFIG_RCU_BOOST) && drop_boost_mutex)
 			rt_mutex_futex_unlock(&rnp->boost_mtx);
+<<<<<<< HEAD   (f0c409 Merge 5.10.108 into android13-5.10-lts)
+=======
+
+>>>>>>> BRANCH (d9c581 Linux 5.10.109)
 	} else {
 		local_irq_restore(flags);
 	}
