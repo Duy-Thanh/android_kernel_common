@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb3f097e_c2dd59be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-03-28T11:14:51Z",
+      "side": 1,
+      "message": "Only presubmit error is a checkpatch warning.",
+      "revId": "6c33201763d1dbaf0aa7da753d990b2845b36a1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
