@@ -52,6 +52,24 @@
       "parentUuid": "95ed3673_fc7365b6",
       "revId": "439c15b815cc857da71b533ee0e1d67a79fe3d84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "defd5722_3ab0eceb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-03-28T20:10:59Z",
+      "side": 1,
+      "message": "the handlers for regular vendor hooks are executed under the conditional:\n```\n  if (cpu_online(raw_smp_processor_id()))\n```\nsee tracepoint.h.\n\nI think there exist cases where a cpu_online(id) might be false during the scheduler wake-up path which was part of the motivation for so many of the scheduler hooks being \"restricted\". Are you ok with this handler being skipped in corner cases like this?",
+      "parentUuid": "065d5874_d4934d99",
+      "revId": "439c15b815cc857da71b533ee0e1d67a79fe3d84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
