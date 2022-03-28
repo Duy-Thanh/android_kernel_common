@@ -1764,6 +1764,14 @@ out:
 	return err;
 }
 
+int kvm_arch_check_set_memslot(struct kvm *kvm, enum kvm_mr_change change)
+{
+	if (!static_branch_unlikely(&kvm_protected_mode_initialized))
+		return 0;
+
+	return (change == KVM_MR_DELETE || change == KVM_MR_MOVE) ? -EPERM : 0;
+}
+
 void kvm_arch_commit_memory_region(struct kvm *kvm,
 				   const struct kvm_userspace_memory_region *mem,
 				   struct kvm_memory_slot *old,
