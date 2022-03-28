@@ -22,6 +22,30 @@
       },
       "revId": "f4f771bd4e54c1f49409d57e954a7ba49fbd93b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecfc501e_191bc9d1",
+        "filename": "android/abi_gki_aarch64_generic",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1345812
+      },
+      "writtenOn": "2022-03-28T06:35:58Z",
+      "side": 1,
+      "message": "It\u0027s CP\u0027d by Gerrit. I\u0027m abandoning this (and the android-mainline one) since 5.15 products are not building with AOSP yet.",
+      "parentUuid": "0496947c_5879c5ab",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 7
+      },
+      "revId": "f4f771bd4e54c1f49409d57e954a7ba49fbd93b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
