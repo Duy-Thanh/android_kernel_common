@@ -1484,4 +1484,5 @@ static inline void kvm_handle_signal_exit(struct kvm_vcpu *vcpu)
 }
 #endif /* CONFIG_KVM_XFER_TO_GUEST_WORK */
 
+int kvm_arch_check_set_memslot(struct kvm *kvm, enum kvm_mr_change change);
 #endif
