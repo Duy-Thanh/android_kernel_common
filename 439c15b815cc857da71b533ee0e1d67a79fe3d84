@@ -70,6 +70,24 @@
       "parentUuid": "065d5874_d4934d99",
       "revId": "439c15b815cc857da71b533ee0e1d67a79fe3d84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dec3dcd_878e9e46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2022-03-29T02:52:01Z",
+      "side": 1,
+      "message": "the hook is return the cpu_util, if the cpu is offline, it is unnecessary to get the offline-cpu-util.\nnow in kernel， there are three places where the function is called:\n1.\ncompute_energy\n    for_each_cpu_and(cpu, pd_mask, cpu_online_mask)\n          effective_cpu_util()\n\n2.\nsugov_next_freq_shared\n    for_each_cpu(j, policy-\u003ecpus)\n          sugov_get_util(j_sg_cpu)\n                  effective_cpu_util()\n3.\ncpufreq_get_requested_power\n    for_each_cpu(cpu, policy-\u003erelated_cpus)\n        if (cpu_online(cpu))\n            get_load(cpufreq_cdev, cpu, i);\n                sched_cpu_util(cpu, max);\n                    effective_cpu_util()\n                    \nIt can see that the it would not get cpu util of the offline cpu.\n\nabove all, I think it is unnecessary to set the hook restricted.",
+      "parentUuid": "defd5722_3ab0eceb",
+      "revId": "439c15b815cc857da71b533ee0e1d67a79fe3d84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
