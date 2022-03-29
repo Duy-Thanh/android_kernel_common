@@ -21,3 +21,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(powernv_throttle);
 EXPORT_TRACEPOINT_SYMBOL_GPL(device_pm_callback_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(device_pm_callback_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(clock_set_rate);
+
+struct trace_event_raw_cpu trace_event_raw_cpu;
+EXPORT_SYMBOL_GPL(trace_event_raw_cpu);

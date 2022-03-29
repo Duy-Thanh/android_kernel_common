@@ -7,3 +7,6 @@
   ieee802154_unregister_hw
   ieee802154_wake_queue
   ieee802154_xmit_complete
+  trace_event_raw_cpu
+  trace_event_raw_sched_process_template
+  trace_event_raw_sched_switch
