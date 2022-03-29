@@ -15,7 +15,7 @@
 #include "internal.h"
 
 #define PAGE_PINNER_STACK_DEPTH 16
-#define PP_BUF_SIZE	4096
+unsigned long pp_buf_size = 4096;
 
 struct page_pinner {
 	depot_stack_handle_t handle;
@@ -135,7 +135,7 @@ static void add_record(struct page_pinner_buffer *pp_buf,
 
 	spin_lock_irqsave(&pp_buf->lock, flags);
 	idx = pp_buf->index++;
-	pp_buf->index %= PP_BUF_SIZE;
+	pp_buf->index %= pp_buf_size;
 	pp_buf->buffer[idx] = *record;
 	spin_unlock_irqrestore(&pp_buf->lock, flags);
 }
@@ -350,7 +350,7 @@ static ssize_t read_buffer(struct file *file, char __user *buf,
 	if (!static_branch_unlikely(&failure_tracking))
 		return -EINVAL;
 
-	if (*ppos >= PP_BUF_SIZE)
+	if (*ppos >= pp_buf_size)
 		return 0;
 
 	i = *ppos;
@@ -360,8 +360,8 @@ static ssize_t read_buffer(struct file *file, char __user *buf,
 	 * reading the records in the reverse order with newest one
 	 * being read first followed by older ones
 	 */
-	idx = (pp_buffer.index - 1 - i + PP_BUF_SIZE) %
-	       PP_BUF_SIZE;
+	idx = (pp_buffer.index - 1 - i + pp_buf_size) %
+	       pp_buf_size;
 
 	spin_lock_irqsave(&pp_buffer.lock, flags);
 	record = pp_buffer.buffer[idx];
@@ -397,6 +397,35 @@ DEFINE_DEBUGFS_ATTRIBUTE(failure_tracking_fops,
 			 failure_tracking_get,
 			 failure_tracking_set, "%llu\n");
 
+static int buffer_size_set(void *data, u64 val)
+{
+	unsigned long flags;
+	struct captured_pinner *new, *old;
+
+	new = kvmalloc_array(val, sizeof(*new), GFP_KERNEL);
+	if (!new)
+		return -ENOMEM;
+
+	spin_lock_irqsave(&pp_buffer.lock, flags);
+	old = pp_buffer.buffer;
+	pp_buffer.buffer = new;
+	pp_buffer.index = 0;
+	pp_buf_size = val;
+	spin_unlock_irqrestore(&pp_buffer.lock, flags);
+	kvfree(old);
+
+	return 0;
+}
+
+static int buffer_size_get(void *data, u64 *val)
+{
+	*val = pp_buf_size;
+	return 0;
+}
+DEFINE_DEBUGFS_ATTRIBUTE(buffer_size_fops,
+			 buffer_size_get,
+			 buffer_size_set, "%llu\n");
+
 static int __init page_pinner_init(void)
 {
 	struct dentry *pp_debugfs_root;
@@ -404,7 +433,7 @@ static int __init page_pinner_init(void)
 	if (!static_branch_unlikely(&page_pinner_inited))
 		return 0;
 
-	pp_buffer.buffer = kvmalloc_array(PP_BUF_SIZE, sizeof(*pp_buffer.buffer),
+	pp_buffer.buffer = kvmalloc_array(pp_buf_size, sizeof(*pp_buffer.buffer),
 				GFP_KERNEL);
 	if (!pp_buffer.buffer) {
 		pr_info("page_pinner disabled due to \n");
@@ -425,6 +454,10 @@ static int __init page_pinner_init(void)
 	debugfs_create_file("failure_tracking", 0644,
 			    pp_debugfs_root, NULL,
 			    &failure_tracking_fops);
+
+	debugfs_create_file("buffer_size", 0644,
+			    pp_debugfs_root, NULL,
+			    &buffer_size_fops);
 	return 0;
 }
 late_initcall(page_pinner_init)
