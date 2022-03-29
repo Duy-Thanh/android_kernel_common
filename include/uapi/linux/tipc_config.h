@@ -43,10 +43,6 @@
 #include <linux/tipc.h>
 #include <asm/byteorder.h>
 
-#ifndef __KERNEL__
-#include <arpa/inet.h> /* for ntohs etc. */
-#endif
-
 /*
  * Configuration
  *
@@ -257,6 +253,10 @@ struct tlv_desc {
 #define TLV_SPACE(datalen) (TLV_ALIGN(TLV_LENGTH(datalen)))
 #define TLV_DATA(tlv) ((void *)((char *)(tlv) + TLV_LENGTH(0)))
 
+#define __htonl(x) __cpu_to_be32(x)
+#define __htons(x) __cpu_to_be16(x)
+#define __ntohs(x) __be16_to_cpu(x)
+
 static inline int TLV_OK(const void *tlv, __u16 space)
 {
 	/*
@@ -269,33 +269,33 @@ static inline int TLV_OK(const void *tlv, __u16 space)
 	 */
 
 	return (space >= TLV_SPACE(0)) &&
-		(ntohs(((struct tlv_desc *)tlv)->tlv_len) <= space);
+		(__ntohs(((struct tlv_desc *)tlv)->tlv_len) <= space);
 }
 
 static inline int TLV_CHECK(const void *tlv, __u16 space, __u16 exp_type)
 {
 	return TLV_OK(tlv, space) &&
-		(ntohs(((struct tlv_desc *)tlv)->tlv_type) == exp_type);
+		(__ntohs(((struct tlv_desc *)tlv)->tlv_type) == exp_type);
 }
 
 static inline int TLV_GET_LEN(struct tlv_desc *tlv)
 {
-	return ntohs(tlv->tlv_len);
+	return __ntohs(tlv->tlv_len);
 }
 
 static inline void TLV_SET_LEN(struct tlv_desc *tlv, __u16 len)
 {
-	tlv->tlv_len = htons(len);
+	tlv->tlv_len = __htons(len);
 }
 
 static inline int TLV_CHECK_TYPE(struct tlv_desc *tlv,  __u16 type)
 {
-	return (ntohs(tlv->tlv_type) == type);
+	return (__ntohs(tlv->tlv_type) == type);
 }
 
 static inline void TLV_SET_TYPE(struct tlv_desc *tlv, __u16 type)
 {
-	tlv->tlv_type = htons(type);
+	tlv->tlv_type = __htons(type);
 }
 
 static inline int TLV_SET(void *tlv, __u16 type, void *data, __u16 len)
@@ -305,8 +305,8 @@ static inline int TLV_SET(void *tlv, __u16 type, void *data, __u16 len)
 
 	tlv_len = TLV_LENGTH(len);
 	tlv_ptr = (struct tlv_desc *)tlv;
-	tlv_ptr->tlv_type = htons(type);
-	tlv_ptr->tlv_len  = htons(tlv_len);
+	tlv_ptr->tlv_type = __htons(type);
+	tlv_ptr->tlv_len  = __htons(tlv_len);
 	if (len && data) {
 		memcpy(TLV_DATA(tlv_ptr), data, len);
 		memset((char *)TLV_DATA(tlv_ptr) + len, 0, TLV_SPACE(len) - tlv_len);
@@ -348,7 +348,7 @@ static inline void *TLV_LIST_DATA(struct tlv_list_desc *list)
 
 static inline void TLV_LIST_STEP(struct tlv_list_desc *list)
 {
-	__u16 tlv_space = TLV_ALIGN(ntohs(list->tlv_ptr->tlv_len));
+	__u16 tlv_space = TLV_ALIGN(__ntohs(list->tlv_ptr->tlv_len));
 
 	list->tlv_ptr = (struct tlv_desc *)((char *)list->tlv_ptr + tlv_space);
 	list->tlv_space -= tlv_space;
@@ -404,9 +404,9 @@ static inline int TCM_SET(void *msg, __u16 cmd, __u16 flags,
 
 	msg_len = TCM_LENGTH(data_len);
 	tcm_hdr = (struct tipc_cfg_msg_hdr *)msg;
-	tcm_hdr->tcm_len   = htonl(msg_len);
-	tcm_hdr->tcm_type  = htons(cmd);
-	tcm_hdr->tcm_flags = htons(flags);
+	tcm_hdr->tcm_len   = __htonl(msg_len);
+	tcm_hdr->tcm_type  = __htons(cmd);
+	tcm_hdr->tcm_flags = __htons(flags);
 	if (data_len && data) {
 		memcpy(TCM_DATA(msg), data, data_len);
 		memset((char *)TCM_DATA(msg) + data_len, 0, TCM_SPACE(data_len) - msg_len);
