@@ -21,3 +21,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(powernv_throttle);
 EXPORT_TRACEPOINT_SYMBOL_GPL(device_pm_callback_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(device_pm_callback_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(clock_set_rate);
+
+/*
+ * Export user-facing trace event formats for tracepoints used by BPF tracepoint
+ * programs so stability can be enforced as part of KMI.
+ */
+struct trace_event_raw_cpu trace_event_raw_cpu;
+EXPORT_SYMBOL_GPL(trace_event_raw_cpu);
