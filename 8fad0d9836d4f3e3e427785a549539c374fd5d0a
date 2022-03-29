@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8daf23f0_d9acc3c5",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 8769,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-03-29T19:49:58Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be using `migratetype` passed to alloc_contig_range() as a parameter?",
+      "range": {
+        "startLine": 8769,
+        "startChar": 45,
+        "endLine": 8769,
+        "endChar": 56
+      },
+      "revId": "8fad0d9836d4f3e3e427785a549539c374fd5d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
