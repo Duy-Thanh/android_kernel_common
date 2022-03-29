@@ -56,6 +56,16 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_blocked);
 DEFINE_PER_CPU_SHARED_ALIGNED(struct rq, runqueues);
 EXPORT_SYMBOL_GPL(runqueues);
 
+/*
+ * Export user-facing trace event formats for tracepoints used by BPF tracepoint
+ * programs so stability can be enforced as part of KMI.
+ */
+struct trace_event_raw_sched_process_template trace_event_raw_sched_process_template;
+EXPORT_SYMBOL_GPL(trace_event_raw_sched_process_template);
+
+struct trace_event_raw_sched_switch trace_event_raw_sched_switch;
+EXPORT_SYMBOL_GPL(trace_event_raw_sched_switch);
+
 #ifdef CONFIG_SCHED_DEBUG
 /*
  * Debugging: various feature bits
