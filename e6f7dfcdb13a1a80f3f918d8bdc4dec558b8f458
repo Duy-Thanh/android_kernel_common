@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "05d0b8d1_a7a8aa75",
+        "filename": "arch/arm64/include/asm/el2_setup.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2022-03-30T10:33:31Z",
+      "side": 1,
+      "message": "I\u0027d have the exact opposite argument. The sooner we detect these broken systems, the better. By making sure these systems explode early, we have a chance to fix them. Also, in a GKI world, we\u0027d need to have this enabled anyway. Given that, the option should go.",
+      "parentUuid": "bfa45e1c_6ef87a43",
+      "revId": "e6f7dfcdb13a1a80f3f918d8bdc4dec558b8f458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db75fb4b_ccc2f7da",
         "filename": "arch/arm64/include/asm/el2_setup.h",
         "patchSetId": 2
