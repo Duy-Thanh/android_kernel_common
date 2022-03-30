@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5912c829_625373f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-30T11:41:52Z",
+      "side": 1,
+      "message": "You are doing 2 different things here, adding a new hook, and modifying an existing one.  Please break this up into 2 different commits.",
+      "revId": "ac3fe494bbb158cd81a6b55bd39ae73833cad5c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0a9f97f_ce2a1ffc",
+        "filename": "drivers/thermal/gov_power_allocator.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-30T11:41:52Z",
+      "side": 1,
+      "message": "new line please.  And shouldn\u0027t this be a boolean?",
+      "range": {
+        "startLine": 717,
+        "startChar": 17,
+        "endLine": 717,
+        "endChar": 25
+      },
+      "revId": "ac3fe494bbb158cd81a6b55bd39ae73833cad5c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30d2dae2_cf538282",
+        "filename": "drivers/thermal/gov_power_allocator.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-30T11:41:52Z",
+      "side": 1,
+      "message": "should also be a boolean.",
+      "range": {
+        "startLine": 717,
+        "startChar": 5,
+        "endLine": 717,
+        "endChar": 11
+      },
+      "revId": "ac3fe494bbb158cd81a6b55bd39ae73833cad5c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
