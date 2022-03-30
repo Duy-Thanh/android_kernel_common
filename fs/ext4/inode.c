@@ -3409,10 +3409,16 @@ static int ext4_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
 	if (ret < 0)
 		return ret;
 out:
+<<<<<<< HEAD   (2c7316 Merge b47d5a4f6b8d ("Merge tag 'audit-pr-20220321' of git://)
 
 	/*
 	 * When inline encryption is enabled, sometimes I/O to an encrypted file
 	 * has to be broken up to guarantee DUN contiguity. Handle this by
+=======
+	/*
+	 * When inline encryption is enabled, sometimes I/O to an encrypted file
+	 * has to be broken up to guarantee DUN contiguity.  Handle this by
+>>>>>>> BRANCH (881b56 Merge tag 'fscrypt-for-linus' of git://git.kernel.org/pub/sc)
 	 * limiting the length of the mapping returned.
 	 */
 	map.m_len = fscrypt_limit_io_blocks(inode, map.m_lblk, map.m_len);
