@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db18a435_a43aa302",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2022-03-30T19:07:39Z",
+      "side": 1,
+      "message": "This isn\u0027t valid anymore.\n\nAlso, TH seems to be unhappy about the cherry-picked line -- no idea why.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 0
+      },
+      "revId": "02502b98f6f27b65ae13c47db1abcf0dee73e42c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29c334d3_444ff926",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2022-03-30T19:07:39Z",
+      "side": 1,
+      "message": "This isn\u0027t valid either.",
+      "range": {
+        "startLine": 24,
+        "startChar": 1,
+        "endLine": 24,
+        "endChar": 41
+      },
+      "revId": "02502b98f6f27b65ae13c47db1abcf0dee73e42c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
