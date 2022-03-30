@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a049ca29_732c9f52",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-03-30T19:30:04Z",
+      "side": 1,
+      "message": "Our AyeAye checker wants it to be \"(...)\", not \"[...]\"",
+      "parentUuid": "db18a435_a43aa302",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 0
+      },
+      "revId": "02502b98f6f27b65ae13c47db1abcf0dee73e42c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29c334d3_444ff926",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
