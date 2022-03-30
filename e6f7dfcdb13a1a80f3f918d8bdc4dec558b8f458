@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bfa45e1c_6ef87a43",
+        "filename": "arch/arm64/include/asm/el2_setup.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1348429
+      },
+      "writtenOn": "2022-03-30T10:23:57Z",
+      "side": 1,
+      "message": "It should be harmless indeed as long as EL3 setup (if EL3 is implemented) disabled trapping accesses to MPAM sys regs on lower levels. So it might be safer to keep those under control (with config option) case the MPAM feature itself is implemented (as per ID_AA64PRF0_EL1) but still not actually supported (?)",
+      "parentUuid": "9c434b78_9b832dd0",
+      "revId": "e6f7dfcdb13a1a80f3f918d8bdc4dec558b8f458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db75fb4b_ccc2f7da",
         "filename": "arch/arm64/include/asm/el2_setup.h",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2022-03-30T09:05:59Z",
       "side": 1,
       "message": "Please use named labels as with the rest of this file, as this has bitten us in the past (see 114945d84a30a5feba8ec24d854257c78c89abd1 for the gory details).",
+      "revId": "e6f7dfcdb13a1a80f3f918d8bdc4dec558b8f458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74802c06_3b8a0713",
+        "filename": "arch/arm64/include/asm/el2_setup.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1348429
+      },
+      "writtenOn": "2022-03-30T10:23:57Z",
+      "side": 1,
+      "message": "Right! Will do, thanks for pointing that out.",
+      "parentUuid": "db75fb4b_ccc2f7da",
       "revId": "e6f7dfcdb13a1a80f3f918d8bdc4dec558b8f458",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
