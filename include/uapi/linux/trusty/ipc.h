@@ -61,5 +61,6 @@ struct tipc_send_msg_req {
 #define TIPC_IOC_CONNECT		_IOW(TIPC_IOC_MAGIC, 0x80, char *)
 #define TIPC_IOC_SEND_MSG		_IOW(TIPC_IOC_MAGIC, 0x81, \
 					     struct tipc_send_msg_req)
+#define TIPC_IOC_GET_SOCKET		_IO(TIPC_IOC_MAGIC, 0x82)
 
 #endif

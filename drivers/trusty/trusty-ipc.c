@@ -18,6 +18,8 @@
 #include <linux/compat.h>
 #include <linux/uio.h>
 #include <linux/file.h>
+#include <linux/net.h>
+#include <net/sock.h>
 
 #include <linux/virtio.h>
 #include <linux/virtio_ids.h>
@@ -915,6 +917,7 @@ EXPORT_SYMBOL(tipc_chan_destroy);
 
 struct tipc_dn_chan {
 	int state;
+	struct kref refcount;
 	struct mutex lock; /* protects rx_msg_queue list and channel state */
 	struct tipc_chan *chan;
 	wait_queue_head_t readq;
@@ -1095,6 +1098,7 @@ static int tipc_open(struct inode *inode, struct file *filp)
 		goto err_alloc_chan;
 	}
 
+	kref_init(&dn->refcount);
 	mutex_init(&dn->lock);
 	init_waitqueue_head(&dn->readq);
 	init_completion(&dn->reply_comp);
@@ -1433,42 +1437,19 @@ shm_share_failed:
 	goto common_cleanup;
 }
 
-static long tipc_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+static ssize_t dn_check_chan_state(struct tipc_dn_chan *dn)
 {
-	struct tipc_dn_chan *dn = filp->private_data;
-
-	switch (cmd) {
-	case TIPC_IOC_CONNECT:
-		return dn_connect_ioctl(dn, (char __user *)arg);
-	case TIPC_IOC_SEND_MSG:
-		return filp_send_ioctl(filp,
-				       (const struct tipc_send_msg_req __user *)
-				       arg);
-	default:
-		dev_dbg(&dn->chan->vds->vdev->dev,
-			"Unhandled ioctl cmd: 0x%x\n", cmd);
-		return -ENOTTY;
-	}
+	if (dn->state == TIPC_CONNECTED)
+		return 0;
+	else if (dn->state == TIPC_CONNECTING)
+		return -ENOTCONN;
+	else if (dn->state == TIPC_DISCONNECTED)
+		return -ENOTCONN;
+	else if (dn->state == TIPC_STALE)
+		return -ESHUTDOWN;
+	else
+		return -EBADFD;
 }
-
-#ifdef CONFIG_COMPAT
-static long tipc_compat_ioctl(struct file *filp,
-			      unsigned int cmd, unsigned long arg)
-{
-	struct tipc_dn_chan *dn = filp->private_data;
-
-	switch (cmd) {
-	case TIPC_IOC32_CONNECT:
-		cmd = TIPC_IOC_CONNECT;
-		break;
-	default:
-		dev_dbg(&dn->chan->vds->vdev->dev,
-			"Unhandled compat ioctl command: 0x%x\n", cmd);
-		return -ENOTTY;
-	}
-	return tipc_ioctl(filp, cmd, (unsigned long)compat_ptr(arg));
-}
-#endif
 
 static inline bool _got_rx(struct tipc_dn_chan *dn)
 {
@@ -1481,26 +1462,18 @@ static inline bool _got_rx(struct tipc_dn_chan *dn)
 	return false;
 }
 
-static ssize_t tipc_read_iter(struct kiocb *iocb, struct iov_iter *iter)
+static ssize_t dn_read_iter(struct tipc_dn_chan *dn, struct file *filp,
+			    struct iov_iter *iter, bool peek)
 {
 	ssize_t ret;
 	size_t len;
 	struct tipc_msg_buf *mb;
-	struct file *filp = iocb->ki_filp;
-	struct tipc_dn_chan *dn = filp->private_data;
 
 	mutex_lock(&dn->lock);
 
 	while (list_empty(&dn->rx_msg_queue)) {
-		if (dn->state != TIPC_CONNECTED) {
-			if (dn->state == TIPC_CONNECTING)
-				ret = -ENOTCONN;
-			else if (dn->state == TIPC_DISCONNECTED)
-				ret = -ENOTCONN;
-			else if (dn->state == TIPC_STALE)
-				ret = -ESHUTDOWN;
-			else
-				ret = -EBADFD;
+		ret = dn_check_chan_state(dn);
+		if (ret) {
 			goto out;
 		}
 
@@ -1529,18 +1502,19 @@ static ssize_t tipc_read_iter(struct kiocb *iocb, struct iov_iter *iter)
 	}
 
 	ret = len;
-	list_del(&mb->node);
-	tipc_chan_put_rxbuf(dn->chan, mb);
+	if (!peek) {
+		list_del(&mb->node);
+		tipc_chan_put_rxbuf(dn->chan, mb);
+	}
 
 out:
 	mutex_unlock(&dn->lock);
 	return ret;
 }
 
-static ssize_t tipc_write_iter(struct kiocb *iocb, struct iov_iter *iter)
+static ssize_t dn_write_iter(struct tipc_dn_chan *dn, struct file *filp,
+			     struct iov_iter *iter)
 {
-	struct file *filp = iocb->ki_filp;
-	struct tipc_dn_chan *dn = filp->private_data;
 	long timeout = TXBUF_TIMEOUT;
 	struct tipc_msg_buf *txbuf = NULL;
 	ssize_t ret = 0;
@@ -1570,10 +1544,11 @@ err_out:
 	return ret;
 }
 
-static __poll_t tipc_poll(struct file *filp, poll_table *wait)
+
+static __poll_t dn_poll(struct tipc_dn_chan *dn, struct file *filp,
+			poll_table *wait)
 {
 	__poll_t mask = 0;
-	struct tipc_dn_chan *dn = filp->private_data;
 
 	mutex_lock(&dn->lock);
 
@@ -1592,11 +1567,82 @@ static __poll_t tipc_poll(struct file *filp, poll_table *wait)
 	return mask;
 }
 
+struct tipc_sock {
+	struct sock sk;
+	struct tipc_dn_chan *dn;
+};
 
-static int tipc_release(struct inode *inode, struct file *filp)
+static struct tipc_sock *tipc_sk(struct sock *sk)
 {
-	struct tipc_dn_chan *dn = filp->private_data;
+	return (struct tipc_sock*)sk;
+}
 
+static int tipc_sock_release(struct socket *sock)
+{
+	struct sock *sk = sock->sk;
+	if (sk) {
+		sock->sk = NULL;
+		sock_put(sk);
+	}
+	return 0;
+}
+
+static int tipc_sock_sendmsg(struct socket *sock, struct msghdr *m,
+			     size_t total_len)
+{
+	struct sock *sk = sock->sk;
+	struct tipc_sock *ts = tipc_sk(sk);
+	/* TODO(ahomescu): support MSG_NOSIGNAL */
+	return dn_write_iter(ts->dn, sock->file, &m->msg_iter);
+}
+
+static int tipc_sock_recvmsg(struct socket *sock, struct msghdr *m,
+			     size_t total_len, int flags)
+{
+	struct sock *sk = sock->sk;
+	struct tipc_sock *ts = tipc_sk(sk);
+	return dn_read_iter(ts->dn, sock->file, &m->msg_iter,
+			    !!(flags & MSG_PEEK));
+}
+
+static __poll_t tipc_sock_poll(struct file *file, struct socket *sock,
+			       struct poll_table_struct *wait)
+{
+	struct sock *sk = sock->sk;
+	struct tipc_sock *ts = tipc_sk(sk);
+	return dn_poll(ts->dn, file, wait);
+}
+
+static struct proto tipc_proto = {
+	.owner = THIS_MODULE,
+	.obj_size = sizeof(struct tipc_sock),
+};
+
+static struct proto_ops tipc_sock_ops = {
+	.family = PF_UNSPEC,
+	.owner = THIS_MODULE,
+	.release = tipc_sock_release,
+	.sendmsg = tipc_sock_sendmsg,
+	.recvmsg = tipc_sock_recvmsg,
+	.poll = tipc_sock_poll,
+	/* Unsupported operatons */
+	.bind = sock_no_bind,
+	.connect = sock_no_connect,
+	.socketpair = sock_no_socketpair,
+	.accept = sock_no_accept,
+	.getname = sock_no_getname,
+	.ioctl = sock_no_ioctl,
+	.gettstamp = sock_gettstamp,
+	.listen = sock_no_listen,
+	.shutdown = sock_no_shutdown,
+	.mmap = sock_no_mmap,
+	.sendpage = sock_no_sendpage,
+};
+
+static void _free_dn(struct kref *kref)
+{
+	struct tipc_dn_chan *dn = container_of(kref, struct tipc_dn_chan,
+					       refcount);
 	dn_shutdown(dn);
 
 	/* free all pending buffers */
@@ -1607,6 +1653,142 @@ static int tipc_release(struct inode *inode, struct file *filp)
 
 	/* and destroy it */
 	tipc_chan_destroy(dn->chan);
+}
+
+static void tipc_sock_destructor(struct sock *sk)
+{
+	struct tipc_sock *ts = tipc_sk(sk);
+	kref_put(&ts->dn->refcount, _free_dn);
+}
+
+static long tipc_get_socket(struct tipc_dn_chan *dn, int flags)
+{
+	long ret;
+	struct sock *sk;
+	struct tipc_sock *ts;
+	struct socket *sock;
+	struct file *file;
+
+	ret = dn_check_chan_state(dn);
+	if (ret) {
+		goto err_check_chan_state;
+	}
+
+	ret = sock_create_lite(AF_UNSPEC, SOCK_DGRAM, 0, &sock);
+	if (ret) {
+		goto err_sock_create;
+	}
+	sock->ops = &tipc_sock_ops;
+
+	sk = sk_alloc(current->nsproxy->net_ns, PF_UNSPEC, GFP_KERNEL,
+		      &tipc_proto, 0);
+	if (!sk) {
+		ret = -ENOMEM;
+		goto err_sk_alloc;
+	}
+
+	sock_init_data(sock, sk);
+	/* TODO(ahomescu): sk_write_space??? */
+        sk->sk_destruct = tipc_sock_destructor;
+
+	ts = tipc_sk(sk);
+	ts->dn = dn;
+	kref_get(&dn->refcount);
+
+	ret = get_unused_fd_flags(flags);
+	if (ret < 0) {
+		goto err_get_fd;
+	}
+
+	file = sock_alloc_file(sock, flags, NULL);
+	/* sock_alloc_file releases sock */
+	sock = NULL;
+	if (IS_ERR(file)) {
+		ret = PTR_ERR(file);
+		goto err_alloc_file;
+	}
+
+	fd_install(ret, file);
+	return ret;
+
+err_alloc_file:
+	put_unused_fd(ret);
+err_get_fd:
+	sk_common_release(sk);
+err_sk_alloc:
+	if (sock) {
+		sock_release(sock);
+	}
+err_sock_create:
+err_check_chan_state:
+	return ret;
+}
+
+static long tipc_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+{
+	struct tipc_dn_chan *dn = filp->private_data;
+
+	switch (cmd) {
+	case TIPC_IOC_CONNECT:
+		return dn_connect_ioctl(dn, (char __user *)arg);
+	case TIPC_IOC_SEND_MSG:
+		return filp_send_ioctl(filp,
+				       (const struct tipc_send_msg_req __user *)
+				       arg);
+        case TIPC_IOC_GET_SOCKET:
+		return tipc_get_socket(dn, filp->f_flags);
+	default:
+		dev_dbg(&dn->chan->vds->vdev->dev,
+			"Unhandled ioctl cmd: 0x%x\n", cmd);
+		return -ENOTTY;
+	}
+}
+
+#ifdef CONFIG_COMPAT
+static long tipc_compat_ioctl(struct file *filp,
+			      unsigned int cmd, unsigned long arg)
+{
+	struct tipc_dn_chan *dn = filp->private_data;
+
+	switch (cmd) {
+	case TIPC_IOC32_CONNECT:
+		cmd = TIPC_IOC_CONNECT;
+		break;
+	default:
+		dev_dbg(&dn->chan->vds->vdev->dev,
+			"Unhandled compat ioctl command: 0x%x\n", cmd);
+		return -ENOTTY;
+	}
+	return tipc_ioctl(filp, cmd, (unsigned long)compat_ptr(arg));
+}
+#endif
+
+static ssize_t tipc_read_iter(struct kiocb *iocb, struct iov_iter *iter)
+{
+	struct file *filp = iocb->ki_filp;
+	struct tipc_dn_chan *dn = filp->private_data;
+	return dn_read_iter(dn, filp, iter, false);
+}
+
+static ssize_t tipc_write_iter(struct kiocb *iocb, struct iov_iter *iter)
+{
+	struct file *filp = iocb->ki_filp;
+	struct tipc_dn_chan *dn = filp->private_data;
+	return dn_write_iter(dn, filp, iter);
+}
+
+static __poll_t tipc_poll(struct file *filp, poll_table *wait)
+{
+	struct tipc_dn_chan *dn = filp->private_data;
+	return dn_poll(dn, filp, wait);
+}
+
+
+static int tipc_release(struct inode *inode, struct file *filp)
+{
+	struct tipc_dn_chan *dn = filp->private_data;
+
+	kref_put(&dn->refcount, _free_dn);
 
 	return 0;
 }
