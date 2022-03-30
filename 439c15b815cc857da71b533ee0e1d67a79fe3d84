@@ -88,6 +88,24 @@
       "parentUuid": "defd5722_3ab0eceb",
       "revId": "439c15b815cc857da71b533ee0e1d67a79fe3d84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa40db5a_b9830993",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2022-03-30T03:09:34Z",
+      "side": 1,
+      "message": "Hi Todd,\nI compared the difference between rvh and vh and found that vh turns off preemption when executing the handler. If so, is it better to set this hook to rvh, because preemption may affect performance. In fact, in the function calling process, thermal does not turn off preemption. If it is set to vh, it may affect the original process.\nI don\u0027t have a deep understanding of vendor hooks, do you have a better suggestion?\n\nThanks!\nBR",
+      "parentUuid": "5dec3dcd_878e9e46",
+      "revId": "439c15b815cc857da71b533ee0e1d67a79fe3d84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
