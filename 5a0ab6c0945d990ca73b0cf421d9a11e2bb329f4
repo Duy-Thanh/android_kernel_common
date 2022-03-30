@@ -16,6 +16,24 @@
       "message": "This is a subset of the series needed for spectre-BHB mitigation. I\u0027ll upload the complete series today.",
       "revId": "5a0ab6c0945d990ca73b0cf421d9a11e2bb329f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bbccc52_5d7c5ed3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-03-30T20:49:41Z",
+      "side": 1,
+      "message": "Actually, the rest of the series is already there (was merged prior to 2022-03 forking). Confirmed that these complete the series.",
+      "parentUuid": "7d724fa9_4a0bee41",
+      "revId": "5a0ab6c0945d990ca73b0cf421d9a11e2bb329f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
