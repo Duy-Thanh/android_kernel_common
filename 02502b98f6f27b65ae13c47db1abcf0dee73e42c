@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72088d1a_dcb83983",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1348429
+      },
+      "writtenOn": "2022-03-30T20:01:23Z",
+      "side": 1,
+      "message": "Removed the line re: config and cpufeature.\nDid change the brackets: not sure if the checker won\u0027t complain further though\n(quick grep on git log doesn\u0027t show any reference with provided git repo for cherry-picks)",
+      "parentUuid": "a049ca29_732c9f52",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 0
+      },
+      "revId": "02502b98f6f27b65ae13c47db1abcf0dee73e42c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29c334d3_444ff926",
@@ -61,6 +85,30 @@
       "writtenOn": "2022-03-30T19:07:39Z",
       "side": 1,
       "message": "This isn\u0027t valid either.",
+      "range": {
+        "startLine": 24,
+        "startChar": 1,
+        "endLine": 24,
+        "endChar": 41
+      },
+      "revId": "02502b98f6f27b65ae13c47db1abcf0dee73e42c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "545248db_48fa0a17",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1348429
+      },
+      "writtenOn": "2022-03-30T20:01:23Z",
+      "side": 1,
+      "message": "Dropped that as well.\n(with small update further down the lines with amending commit msg)",
+      "parentUuid": "29c334d3_444ff926",
       "range": {
         "startLine": 24,
         "startChar": 1,
