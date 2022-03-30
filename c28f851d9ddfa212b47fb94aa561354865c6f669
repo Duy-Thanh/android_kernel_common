@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e45f6a3a_2bd9e30d",
+        "filename": "drivers/usb/dwc3/core.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1303,
+      "author": {
+        "id": 1901821
+      },
+      "writtenOn": "2022-03-30T08:59:15Z",
+      "side": 1,
+      "message": "This branch isn\u0027t KMI frozen yet. Could we instead just do a straight cherry-pick from upstream so we can avoid this wrapper structure?",
+      "revId": "c28f851d9ddfa212b47fb94aa561354865c6f669",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
