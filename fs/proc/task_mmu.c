@@ -1579,10 +1579,18 @@ static int pagemap_hugetlb_range(pte_t *ptep, unsigned long hmask,
 #define pagemap_hugetlb_range	NULL
 #endif /* HUGETLB_PAGE */
 
+/* Don't skip any VMAs */
+static int pagemap_test_walk(unsigned long start, unsigned long end,
+			     struct mm_walk *walk)
+{
+	return 0;
+}
+
 static const struct mm_walk_ops pagemap_ops = {
 	.pmd_entry	= pagemap_pmd_range,
 	.pte_hole	= pagemap_pte_hole,
 	.hugetlb_entry	= pagemap_hugetlb_range,
+	.test_walk	= pagemap_test_walk,
 };
 
 /*
