@@ -33,6 +33,24 @@
       "message": "This line is too long (fails checkpatch limit of 100 characters). Can you reformat? Maybe newline after \"int type,\"",
       "revId": "b291375438cd71a5878dcabe3e1045e73d8417b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ae0a0d0_ef6c9b92",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2022-03-30T01:59:57Z",
+      "side": 1,
+      "message": "ok,fixed.",
+      "parentUuid": "b8dbf047_9c1b5dcc",
+      "revId": "b291375438cd71a5878dcabe3e1045e73d8417b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
