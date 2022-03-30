@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afa95f15_eccde6f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-03-30T20:10:26Z",
+      "side": 1,
+      "message": "Now its going to be mad about the upper-case C in Commit. Best to follow the examples at https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "ce17ce5103cc7fde2d3a4314261ae7b438170b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
