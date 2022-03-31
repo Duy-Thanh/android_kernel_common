@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "372ba6e6_9d4d8426",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-03-31T00:15:42Z",
+      "side": 1,
+      "message": "This needs to be understood before we merge. Since partners interact with these headers, it needs to be clear whether tracehook.h must be included or not -- and documentation should be updated to reflect that. It also should go into all of the GKI branches or none of them unless we plan to fork the documentation to be per-GKI-branch.",
+      "revId": "07fd6152d3ec53901cded6da7cb3f30cbca82e4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
