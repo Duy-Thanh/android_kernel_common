@@ -16,6 +16,24 @@
       "message": "This branch isn\u0027t KMI frozen yet. Could we instead just do a straight cherry-pick from upstream so we can avoid this wrapper structure?",
       "revId": "c28f851d9ddfa212b47fb94aa561354865c6f669",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0b25569_3d226626",
+        "filename": "drivers/usb/dwc3/core.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1303,
+      "author": {
+        "id": 1901900
+      },
+      "writtenOn": "2022-03-31T18:31:32Z",
+      "side": 1,
+      "message": "hi jack,\nsure, let me just pull the change from upstream as is if KMI freeze hasn\u0027t happened.",
+      "parentUuid": "e45f6a3a_2bd9e30d",
+      "revId": "c28f851d9ddfa212b47fb94aa561354865c6f669",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
