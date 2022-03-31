@@ -124,6 +124,24 @@
       "parentUuid": "fa40db5a_b9830993",
       "revId": "439c15b815cc857da71b533ee0e1d67a79fe3d84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9032729f_1ed619f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2022-03-31T01:30:25Z",
+      "side": 1,
+      "message": "Thanks for the suggestion! I would change back to rvh and explain the reasons in the next patch version.\n\nBR",
+      "parentUuid": "77b9447f_422dd055",
+      "revId": "439c15b815cc857da71b533ee0e1d67a79fe3d84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
