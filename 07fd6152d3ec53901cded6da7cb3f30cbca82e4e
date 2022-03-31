@@ -34,6 +34,24 @@
       "parentUuid": "372ba6e6_9d4d8426",
       "revId": "07fd6152d3ec53901cded6da7cb3f30cbca82e4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e84f4e0_0d2ab7eb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-03-31T03:55:06Z",
+      "side": 1,
+      "message": "sched.h issue fixed. I\u0027ll update the doc once this lands on all the android13 branches.",
+      "parentUuid": "7f945af1_c306e62c",
+      "revId": "07fd6152d3ec53901cded6da7cb3f30cbca82e4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
