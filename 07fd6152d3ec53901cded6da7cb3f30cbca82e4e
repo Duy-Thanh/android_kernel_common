@@ -16,6 +16,24 @@
       "message": "This needs to be understood before we merge. Since partners interact with these headers, it needs to be clear whether tracehook.h must be included or not -- and documentation should be updated to reflect that. It also should go into all of the GKI branches or none of them unless we plan to fork the documentation to be per-GKI-branch.",
       "revId": "07fd6152d3ec53901cded6da7cb3f30cbca82e4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f945af1_c306e62c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-03-31T01:49:10Z",
+      "side": 1,
+      "message": "This can\u0027t go into KMI frozen branches as is though because it will break CRC. We could merge a partial version of this so that for NEW vendorhook headers on frozen branches can follow the same steps we recommend for the rest of the newer branches.\n\nI\u0027ll try to figure out what\u0027s going on with sched.h",
+      "parentUuid": "372ba6e6_9d4d8426",
+      "revId": "07fd6152d3ec53901cded6da7cb3f30cbca82e4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
