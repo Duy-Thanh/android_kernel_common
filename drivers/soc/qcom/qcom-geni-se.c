@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0
-// Copyright (c) 2017-2018, The Linux Foundation. All rights reserved.
+/*
+ * Copyright (c) 2017-2018, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
 
 #include <linux/acpi.h>
 #include <linux/clk.h>
@@ -874,6 +877,7 @@ static int geni_se_probe(struct platform_device *pdev)
 	struct resource *res;
 	struct geni_wrapper *wrapper;
 	int ret;
+	bool is_non_la_vm = false;
 
 	wrapper = devm_kzalloc(dev, sizeof(*wrapper), GFP_KERNEL);
 	if (!wrapper)
@@ -885,7 +889,15 @@ static int geni_se_probe(struct platform_device *pdev)
 	if (IS_ERR(wrapper->base))
 		return PTR_ERR(wrapper->base);
 
-	if (!has_acpi_companion(&pdev->dev)) {
+	if (of_property_read_bool(pdev->dev.of_node, "qcom,not-la-vm")) {
+		is_non_la_vm = true;
+		dev_dbg(dev, "GENI SE NO-LA-VM usecase\n");
+	}
+
+	/* If any other non LA-VM's doesn't have clocks support, we are
+	 * not reading clock entries.
+	 */
+	if ((!has_acpi_companion(&pdev->dev)) && (!is_non_la_vm)) {
 		wrapper->ahb_clks[0].id = "m-ahb";
 		wrapper->ahb_clks[1].id = "s-ahb";
 		ret = devm_clk_bulk_get(dev, NUM_AHB_CLKS, wrapper->ahb_clks);
