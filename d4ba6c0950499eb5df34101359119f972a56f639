@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51c736e8_0c063eaf",
+        "filename": "drivers/thermal/gov_power_allocator.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-31T17:00:20Z",
+      "side": 1,
+      "message": "no, this is getting crazy and I can not determine what is, and is not, the correct logic here at all.\n\nWhy do you need \"override\" if you already have enable?\n\nAnd why is tz not being passed in here, how are you able to do this without knowing any information at all?  That feels very dangerous and broken.",
+      "range": {
+        "startLine": 727,
+        "startChar": 0,
+        "endLine": 727,
+        "endChar": 68
+      },
+      "revId": "d4ba6c0950499eb5df34101359119f972a56f639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
