@@ -891,7 +891,6 @@ static int geni_se_probe(struct platform_device *pdev)
 		ret = devm_clk_bulk_get(dev, NUM_AHB_CLKS, wrapper->ahb_clks);
 		if (ret) {
 			dev_err(dev, "Err getting AHB clks %d\n", ret);
-			return ret;
 		}
 	}
 
