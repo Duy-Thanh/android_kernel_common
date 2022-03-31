@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce25a5ad_191ecf4d",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-31T16:54:25Z",
+      "side": 1,
+      "message": "you need better help text here.  Same for below.\n\nWhy is ANDROID_STRUCT_PADDING still needed here anymore?  Just split this into the two different items and ANDROID_STRUCT_PADDING can go away, right?",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 59
+      },
+      "revId": "aa34f9433d3e118bbd0910fe62faa15ab6337385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
