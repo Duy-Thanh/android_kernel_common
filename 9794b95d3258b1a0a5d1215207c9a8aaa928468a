@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "047f8290_a4541f25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-03-31T23:21:11Z",
+      "side": 1,
+      "message": "All of presubmit failure came from ABI so relies on the KMI update from Todd\nSo add hash tag for it.",
+      "revId": "9794b95d3258b1a0a5d1215207c9a8aaa928468a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
