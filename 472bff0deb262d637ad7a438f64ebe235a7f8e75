@@ -106,6 +106,24 @@
       "parentUuid": "c2ac431d_cd6e7683",
       "revId": "472bff0deb262d637ad7a438f64ebe235a7f8e75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "290e42b5_e9d41663",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943840
+      },
+      "writtenOn": "2022-04-01T12:12:05Z",
+      "side": 1,
+      "message": "Dear Greg,\nIn USB controller we called charger_detect to get the charger type, if the charger type is UNKNOWN_TYPE, then we need to do retry_charger_detect. In usb controller, according to the charger type to start usb peripheral mode or not. So we cannot just do it in phy driver.\n\nPhy driver is different for different vendor.",
+      "parentUuid": "cabca535_1e435f3f",
+      "revId": "472bff0deb262d637ad7a438f64ebe235a7f8e75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
