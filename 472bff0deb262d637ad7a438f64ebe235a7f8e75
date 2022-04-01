@@ -34,6 +34,24 @@
       "parentUuid": "0ea0003b_b9ba6ab3",
       "revId": "472bff0deb262d637ad7a438f64ebe235a7f8e75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7f8e814_327d9e04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1612695
+      },
+      "writtenOn": "2022-04-01T07:43:23Z",
+      "side": 1,
+      "message": "Maybe something like this?\n\nstruct your_phy {\n  struct core_phy;\n  int your_data;\n};",
+      "parentUuid": "9ccb7270_888fd9ce",
+      "revId": "472bff0deb262d637ad7a438f64ebe235a7f8e75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
