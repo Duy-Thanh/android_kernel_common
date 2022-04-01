@@ -88,6 +88,24 @@
       "parentUuid": "c7f8e814_327d9e04",
       "revId": "472bff0deb262d637ad7a438f64ebe235a7f8e75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cabca535_1e435f3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-01T09:28:40Z",
+      "side": 1,
+      "message": "When do you have to run detect again?  Why not just do that in your phy driver?  This should be no different than any other phy driver from what I can tell.\n\nHave you submitted your phy driver upstream with these changes?",
+      "parentUuid": "c2ac431d_cd6e7683",
+      "revId": "472bff0deb262d637ad7a438f64ebe235a7f8e75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
