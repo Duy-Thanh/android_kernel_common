@@ -124,6 +124,24 @@
       "parentUuid": "cabca535_1e435f3f",
       "revId": "472bff0deb262d637ad7a438f64ebe235a7f8e75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5004eb23_705d7100",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-01T12:14:54Z",
+      "side": 1,
+      "message": "Ok, but why would \"retry\" suddenly work the second time around?  Why not just call detect again?\n\nAnyway, do you have a real kernel change that I can look at that adds this new functionality?  Why not submit that upstream to get these types of devices working properly?",
+      "parentUuid": "290e42b5_e9d41663",
+      "revId": "472bff0deb262d637ad7a438f64ebe235a7f8e75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
