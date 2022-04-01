@@ -70,6 +70,24 @@
       "parentUuid": "c7f8e814_327d9e04",
       "revId": "472bff0deb262d637ad7a438f64ebe235a7f8e75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2ac431d_cd6e7683",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943840
+      },
+      "writtenOn": "2022-04-01T08:24:53Z",
+      "side": 1,
+      "message": "Dear,\nLet me explain why we need it:\nIt\u0027s for UNISOC charger ICs issue, in some case, charger detect may not return the right charger type. It may cause USB enumerate error.\nSo we need to re-detect charger type again.\n\nThere is charger_detect interface in phy.h, so we added retry_charger_detect in phy.h.",
+      "parentUuid": "c7f8e814_327d9e04",
+      "revId": "472bff0deb262d637ad7a438f64ebe235a7f8e75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
