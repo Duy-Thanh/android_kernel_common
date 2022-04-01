@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8953a058_21ef7698",
+        "filename": "include/uapi/linux/fuse.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2022-04-01T22:37:17Z",
+      "side": 1,
+      "message": "Since we\u0027re going to need a pointer to the end of the allowable write space, we may just want to add a placeholder for the moment to keep the same size.\n\nIt also feels strange having pointers in this file.",
+      "range": {
+        "startLine": 971,
+        "startChar": 1,
+        "endLine": 971,
+        "endChar": 19
+      },
+      "revId": "05b96fa5bf31967dc59228bfb872867b4df87462",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
