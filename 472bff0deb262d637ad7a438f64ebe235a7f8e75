@@ -16,6 +16,24 @@
       "message": "This should not be needed as you control the device that this usb phy structure is assigned to.  You can put your vendor-driver-specific information there, not in the usb_phy structure.  This is how all in-kernel usb phy drivers work today.",
       "revId": "472bff0deb262d637ad7a438f64ebe235a7f8e75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ccb7270_888fd9ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943840
+      },
+      "writtenOn": "2022-04-01T07:12:49Z",
+      "side": 1,
+      "message": "Dear Greg,\nI don\u0027t understand the way you mentioned. Could you give some detail about it?",
+      "parentUuid": "0ea0003b_b9ba6ab3",
+      "revId": "472bff0deb262d637ad7a438f64ebe235a7f8e75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
