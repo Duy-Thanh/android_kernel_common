@@ -2,8 +2,11 @@
 /*
  * Simple CPU accounting cgroup controller
  */
+<<<<<<< HEAD   (c0f930 Revert "ANDROID: sched: Add vendor hooks for override sugov )
 #include <linux/cpufreq_times.h>
 #include "sched.h"
+=======
+>>>>>>> BRANCH (3fe2f7 Merge tag 'sched-core-2022-03-22' of git://git.kernel.org/pu)
 
 #ifdef CONFIG_IRQ_TIME_ACCOUNTING
 
