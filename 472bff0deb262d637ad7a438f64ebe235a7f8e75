@@ -52,6 +52,24 @@
       "parentUuid": "9ccb7270_888fd9ce",
       "revId": "472bff0deb262d637ad7a438f64ebe235a7f8e75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d68b548f_dd24a872",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-01T08:06:25Z",
+      "side": 1,
+      "message": "No, the device that the phy is on should have the driver-specific data.  Again like all in-kernel USB phy drivers.  None of them need this.\n\nCan you point to your out-of-tree driver that requires this, I can help show the needed changes based on that easier.\n\nAlso, why isn\u0027t your driver just submitted upstream?  That would make this all much easier 😊",
+      "parentUuid": "c7f8e814_327d9e04",
+      "revId": "472bff0deb262d637ad7a438f64ebe235a7f8e75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
