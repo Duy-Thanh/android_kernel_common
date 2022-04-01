@@ -22,6 +22,30 @@
       },
       "revId": "d4ba6c0950499eb5df34101359119f972a56f639",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f2624e9_c2023e2e",
+        "filename": "drivers/thermal/gov_power_allocator.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1928107
+      },
+      "writtenOn": "2022-04-01T14:01:52Z",
+      "side": 1,
+      "message": "Thanks for your review.\nFirst of all, I would like to introduce the background:\nTaking in account of SoC\u0027s surface temperature, we have to use more strict temperature control to make IPA can monitor and mitigate temperature control earlier and faster. It means power budget will be overrided with a more strict one. So add an override flag. \n\nIt is not the same as \"enable\" flag. Actually, whether the IPA turns on or not depends on whether the temperature exceeds switch_on_temp，therefore add \"enable\" flag. \nAbout enable flag:\ntrue: enable IPA control when temperature \u003e\u003d swtich_on_temp\nfalse: disable IPA control when temperature \u003c switch_on_temp\n\nNow in order not to affect the original logic, add another flag \"override\". \nAbout override flag:\ntrue: power budget is overrided, and then thermal power throttle takes action even if temperature \u003c switch_on_temp.\nfalse: power budget is not overrided, there\u0027s no other thermal requirment. Normal temperature control.\n\nIf there\u0027re any new questions, looking forward to your reply. Thanks you.",
+      "parentUuid": "51c736e8_0c063eaf",
+      "range": {
+        "startLine": 727,
+        "startChar": 0,
+        "endLine": 727,
+        "endChar": 68
+      },
+      "revId": "d4ba6c0950499eb5df34101359119f972a56f639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
