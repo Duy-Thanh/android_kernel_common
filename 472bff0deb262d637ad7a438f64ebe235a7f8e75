@@ -142,6 +142,24 @@
       "parentUuid": "290e42b5_e9d41663",
       "revId": "472bff0deb262d637ad7a438f64ebe235a7f8e75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89031452_221cd710",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943840
+      },
+      "writtenOn": "2022-04-01T12:55:30Z",
+      "side": 1,
+      "message": "We need re-configure charger IC, reset bc1p2 detect result, then to detect again.\nThe phy source code is just for UNISOC and I cannot copy it to PC which with internet now, so here just sketches code.\nstatic enum usb_charger_type sprd_hsphy_retry_charger_detect(struct usb_phy *x)\n{\n//////\nsc27xx_charger_phy_redetect_trigger(phy-\u003epmic, SC27XX_CHG_REDET_DELAY_MS);\n//////\ntype \u003d sc27xx_charger_detect(phy-\u003epmic);\n\nreturn type; \n}",
+      "parentUuid": "5004eb23_705d7100",
+      "revId": "472bff0deb262d637ad7a438f64ebe235a7f8e75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
