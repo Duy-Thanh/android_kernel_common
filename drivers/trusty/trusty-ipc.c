@@ -1264,6 +1264,7 @@ cleanup_handle:
 }
 
 static ssize_t txbuf_write_iter(struct tipc_msg_buf *txbuf,
+				struct tipc_chan *chan,
 				struct iov_iter *iter)
 {
 	size_t len;
@@ -1272,6 +1273,10 @@ static ssize_t txbuf_write_iter(struct tipc_msg_buf *txbuf,
 
 	/* check available space */
 	if (len > mb_avail_space(txbuf))
+		return -EMSGSIZE;
+
+	/* check maximum buffer size specified by port */
+	if (len > chan->max_msg_size)
 		return -EMSGSIZE;
 
 	/* copy in message data */
@@ -1386,7 +1391,7 @@ static long filp_send_ioctl(struct file *filp,
 		goto get_txbuf_failed;
 	}
 
-	data_len = txbuf_write_iter(txbuf, &iter);
+	data_len = txbuf_write_iter(txbuf, dn->chan, &iter);
 	if (data_len < 0) {
 		ret = data_len;
 		goto txbuf_write_failed;
@@ -1557,7 +1562,7 @@ static ssize_t tipc_write_iter(struct kiocb *iocb, struct iov_iter *iter)
 	if (IS_ERR(txbuf))
 		return PTR_ERR(txbuf);
 
-	len = txbuf_write_iter(txbuf, iter);
+	len = txbuf_write_iter(txbuf, dn->chan, iter);
 	if (len < 0)
 		goto err_out;
 
