@@ -16,6 +16,23 @@
       "message": "Hi Quentin\n\nCan this patch cherry picked to k515?\n\nThanks",
       "revId": "47b20f8637281b1a06121fba8115bdd5b80c6151",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d9c363d_fedfbdaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2022-04-02T02:55:07Z",
+      "side": 1,
+      "message": "Hi Quentin\n\nthe patch would destory the KMI, can you merge the patch when next KMI release?\n\nThanks!\nxuewen\n",
+      "revId": "47b20f8637281b1a06121fba8115bdd5b80c6151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
