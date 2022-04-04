@@ -22,6 +22,30 @@
       },
       "revId": "f6c9771aa705415d8b9964654287c44d90531e84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a47666af_c3f7029d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1928107
+      },
+      "writtenOn": "2022-04-04T05:18:52Z",
+      "side": 1,
+      "message": "Done. Updated in the latest patch set. Thank you.",
+      "parentUuid": "1ae854e4_bb6875d2",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 279
+      },
+      "revId": "f6c9771aa705415d8b9964654287c44d90531e84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
