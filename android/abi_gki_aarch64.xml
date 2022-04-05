@@ -1056,6 +1056,7 @@
       <elf-symbol name='devm_regulator_get_optional' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6fd93cf7'/>
       <elf-symbol name='devm_regulator_put' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc8bb6e88'/>
       <elf-symbol name='devm_regulator_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe9057e90'/>
+      <elf-symbol name='devm_regulator_register_notifier' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x250ba679'/>
       <elf-symbol name='devm_request_any_context_irq' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbe784578'/>
       <elf-symbol name='devm_request_pci_bus_resources' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5a5c642'/>
       <elf-symbol name='devm_request_threaded_irq' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x70029c7c'/>
@@ -1507,6 +1508,13 @@
       <elf-symbol name='dw_pcie_read' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7791e066'/>
       <elf-symbol name='dw_pcie_setup_rc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x20a6dfdf'/>
       <elf-symbol name='dw_pcie_write' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbe9a83d5'/>
+      <elf-symbol name='edac_device_add_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x95c5a16b'/>
+      <elf-symbol name='edac_device_alloc_ctl_info' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x65f85ee'/>
+      <elf-symbol name='edac_device_alloc_index' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6e3ff83a'/>
+      <elf-symbol name='edac_device_del_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4a26b866'/>
+      <elf-symbol name='edac_device_free_ctl_info' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x37c1e4e5'/>
+      <elf-symbol name='edac_device_handle_ce_count' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x40cbdc4d'/>
+      <elf-symbol name='edac_device_handle_ue_count' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x33170b08'/>
       <elf-symbol name='emergency_restart' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd0c05159'/>
       <elf-symbol name='enable_irq' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfcec0987'/>
       <elf-symbol name='enable_percpu_irq' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x335c570f'/>
@@ -1665,6 +1673,7 @@
       <elf-symbol name='get_user_pages_remote' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x647c7138'/>
       <elf-symbol name='get_vaddr_frames' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc2d9e090'/>
       <elf-symbol name='get_zeroed_page' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf09b5d9a'/>
+      <elf-symbol name='gic_resume' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x14da596c'/>
       <elf-symbol name='glob_match' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5009c71d'/>
       <elf-symbol name='gov_attr_set_get' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4b760e8b'/>
       <elf-symbol name='gov_attr_set_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3b7e0e6f'/>
@@ -2091,6 +2100,8 @@
       <elf-symbol name='kobject_uevent_env' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa9e7047'/>
       <elf-symbol name='krealloc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc8dcc62a'/>
       <elf-symbol name='kset_create_and_add' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa5acdbc9'/>
+      <elf-symbol name='kset_find_obj' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5465817f'/>
+      <elf-symbol name='kset_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6b23ad9'/>
       <elf-symbol name='kstat_irqs_cpu' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb6bffb99'/>
       <elf-symbol name='kstat_irqs_usr' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9bb05a3a'/>
       <elf-symbol name='kstrdup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2d39b0a7'/>
@@ -2944,8 +2955,10 @@
       <elf-symbol name='rproc_add_subdev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdf27d02a'/>
       <elf-symbol name='rproc_alloc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc79bee78'/>
       <elf-symbol name='rproc_boot' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbea7d34b'/>
+      <elf-symbol name='rproc_coredump' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7923f851'/>
       <elf-symbol name='rproc_coredump_add_custom_segment' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf63c4597'/>
       <elf-symbol name='rproc_coredump_add_segment' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x614da2b'/>
+      <elf-symbol name='rproc_coredump_cleanup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf488d50b'/>
       <elf-symbol name='rproc_coredump_set_elf_info' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf541b56f'/>
       <elf-symbol name='rproc_coredump_using_sections' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6086b970'/>
       <elf-symbol name='rproc_del' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x13f25584'/>
@@ -3394,6 +3407,7 @@
       <elf-symbol name='strnstr' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc310b981'/>
       <elf-symbol name='strpbrk' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9a1dfd65'/>
       <elf-symbol name='strrchr' type='func-type' binding='weak-binding' visibility='default-visibility' is-defined='yes' crc='0x9f984513'/>
+      <elf-symbol name='strreplace' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7410aba2'/>
       <elf-symbol name='strscpy' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdd64e639'/>
       <elf-symbol name='strsep' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x85df9b6c'/>
       <elf-symbol name='strspn' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc29bf967'/>
@@ -3589,6 +3603,8 @@
       <elf-symbol name='ufshcd_suspend_prepare' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa8bc9451'/>
       <elf-symbol name='ufshcd_system_resume' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd7e9277e'/>
       <elf-symbol name='ufshcd_system_suspend' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xab9a21'/>
+      <elf-symbol name='ufshcd_uic_hibern8_enter' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x27d5220d'/>
+      <elf-symbol name='ufshcd_uic_hibern8_exit' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x23bb6d1e'/>
       <elf-symbol name='uio_unregister_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x594327d0'/>
       <elf-symbol name='unload_nls' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa9531118'/>
       <elf-symbol name='unlock_buffer' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x568a5985'/>
@@ -3654,6 +3670,7 @@
       <elf-symbol name='usb_copy_descriptors' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2e09263f'/>
       <elf-symbol name='usb_create_hcd' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8ca5bf8d'/>
       <elf-symbol name='usb_create_shared_hcd' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xce3291f4'/>
+      <elf-symbol name='usb_decode_ctrl' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4531624f'/>
       <elf-symbol name='usb_del_gadget_udc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x22ef3255'/>
       <elf-symbol name='usb_deregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6bf59887'/>
       <elf-symbol name='usb_disabled' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x19a304ba'/>
@@ -4120,16 +4137,20 @@
       <elf-symbol name='__tracepoint_android_vh_binder_wakeup_ilocked' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x45c1c15b'/>
       <elf-symbol name='__tracepoint_android_vh_cpu_idle_enter' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xefbedb90'/>
       <elf-symbol name='__tracepoint_android_vh_cpu_idle_exit' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd391e1ed'/>
+      <elf-symbol name='__tracepoint_android_vh_cpuidle_psci_enter' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x137e6ebe'/>
+      <elf-symbol name='__tracepoint_android_vh_cpuidle_psci_exit' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaaacb3b6'/>
       <elf-symbol name='__tracepoint_android_vh_ftrace_dump_buffer' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x86ca15d4'/>
       <elf-symbol name='__tracepoint_android_vh_ftrace_format_check' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd707ac7b'/>
       <elf-symbol name='__tracepoint_android_vh_ftrace_oops_enter' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa485475e'/>
       <elf-symbol name='__tracepoint_android_vh_ftrace_oops_exit' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xecd968c8'/>
       <elf-symbol name='__tracepoint_android_vh_ftrace_size_check' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcbc20ca'/>
+      <elf-symbol name='__tracepoint_android_vh_gic_resume' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x80464cd'/>
       <elf-symbol name='__tracepoint_android_vh_ipi_stop' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8064d573'/>
       <elf-symbol name='__tracepoint_android_vh_jiffies_update' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5415675e'/>
       <elf-symbol name='__tracepoint_android_vh_logbuf' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8bf980ca'/>
       <elf-symbol name='__tracepoint_android_vh_logbuf_pr_cont' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x783fd15a'/>
       <elf-symbol name='__tracepoint_android_vh_printk_hotplug' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe329d35d'/>
+      <elf-symbol name='__tracepoint_android_vh_rproc_recovery' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe1337b04'/>
       <elf-symbol name='__tracepoint_android_vh_scheduler_tick' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa3e74b24'/>
       <elf-symbol name='__tracepoint_android_vh_setscheduler_uclamp' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7ae79b81'/>
       <elf-symbol name='__tracepoint_android_vh_sha256' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x890676c3'/>
@@ -5351,6 +5372,7 @@
       </function-type>
       <typedef-decl name='blk_qc_t' type-id='f0981eeb' filepath='include/linux/blk_types.h' line='503' column='1' id='041bc907'/>
       <pointer-type-def type-id='e6fe4054' size-in-bits='64' id='041f6b76'/>
+      <pointer-type-def type-id='d5dd5721' size-in-bits='64' id='0424a2d9'/>
       <qualified-type-def type-id='424ad5b6' const='yes' id='04379599'/>
       <union-decl name='__anonymous_union__' size-in-bits='128' visibility='default' filepath='include/uapi/linux/xfrm.h' line='15' column='1' id='043f0147' is-anonymous='yes'>
         <data-member access='public'>
@@ -6411,6 +6433,11 @@
       <pointer-type-def type-id='56731789' size-in-bits='64' id='07ebb4cd'/>
       <typedef-decl name='rht_hashfn_t' type-id='bc00c03b' filepath='include/linux/rhashtable-types.h' line='38' column='1' id='07fa0d18'/>
       <pointer-type-def type-id='7db7e025' size-in-bits='64' id='080a0935'/>
+      <function-type size-in-bits='64' id='080ce95f'>
+        <parameter type-id='b7d8b860'/>
+        <parameter type-id='26a90f95'/>
+        <return type-id='79a0948f'/>
+      </function-type>
       <pointer-type-def type-id='ec50bf48' size-in-bits='64' id='08113f0a'/>
       <function-type size-in-bits='64' id='081241b5'>
         <parameter type-id='366d2695'/>
@@ -7453,6 +7480,7 @@
           <var-decl name='readio' type-id='888567bf' visibility='default' filepath='include/linux/fb.h' line='200' column='1'/>
         </data-member>
       </class-decl>
+      <pointer-type-def type-id='7486ad2e' size-in-bits='64' id='0a4e3854'/>
       <class-decl name='v4l2_format' size-in-bits='1664' is-struct='yes' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2331' column='1' id='0a5711c9'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='type' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/videodev2.h' line='2332' column='1'/>
@@ -26087,7 +26115,7 @@
           <var-decl name='fdb_nh' type-id='b50a4934' visibility='default' filepath='include/net/nexthop.h' line='63' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='256'>
-          <var-decl name='' type-id='ac5ab66a' visibility='default' filepath='include/net/nexthop.h' line='65' column='1'/>
+          <var-decl name='' type-id='ac5ab667' visibility='default' filepath='include/net/nexthop.h' line='65' column='1'/>
         </data-member>
       </class-decl>
       <function-type size-in-bits='64' id='3f0a3b53'>
@@ -28610,6 +28638,10 @@
           <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='include/linux/dma-fence-chain.h' line='49' column='1'/>
         </data-member>
       </class-decl>
+      <function-type size-in-bits='64' id='46a1625d'>
+        <parameter type-id='b7d8b860'/>
+        <return type-id='48b5725f'/>
+      </function-type>
       <enum-decl name='hdmi_metadata_type' filepath='include/linux/hdmi.h' line='158' column='1' id='46a5cd93'>
         <underlying-type type-id='9cac1fee'/>
         <enumerator name='HDMI_STATIC_METADATA_TYPE1' value='0'/>
@@ -34776,6 +34808,7 @@
           <var-decl name='base' type-id='81e9d700' visibility='default' filepath='drivers/i3c/master.c' line='2273' column='1'/>
         </data-member>
       </class-decl>
+      <pointer-type-def type-id='be37740b' size-in-bits='64' id='581e52eb'/>
       <class-decl name='of_endpoint' size-in-bits='128' is-struct='yes' visibility='default' filepath='include/linux/of_graph.h' line='23' column='1' id='5821ac64'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='port' type-id='f0981eeb' visibility='default' filepath='include/linux/of_graph.h' line='24' column='1'/>
@@ -46505,6 +46538,17 @@
         <return type-id='df412e35'/>
       </function-type>
       <pointer-type-def type-id='0a3bbc4c' size-in-bits='64' id='74819aa6'/>
+      <class-decl name='edac_dev_sysfs_attribute' size-in-bits='256' is-struct='yes' visibility='default' filepath='drivers/edac/edac_device.h' line='88' column='1' id='7486ad2e'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='attr' type-id='a6222917' visibility='default' filepath='drivers/edac/edac_device.h' line='89' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='show' type-id='a58e905b' visibility='default' filepath='drivers/edac/edac_device.h' line='90' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='192'>
+          <var-decl name='store' type-id='f40bec0f' visibility='default' filepath='drivers/edac/edac_device.h' line='91' column='1'/>
+        </data-member>
+      </class-decl>
       <enum-decl name='ufs_dev_pwr_mode' filepath='drivers/scsi/ufs/ufs.h' line='459' column='1' id='748f6f00'>
         <underlying-type type-id='9cac1fee'/>
         <enumerator name='UFS_ACTIVE_PWR_MODE' value='1'/>
@@ -51892,6 +51936,7 @@
       <array-type-def dimensions='1' type-id='be9189df' size-in-bits='38400' id='83aedf28'>
         <subrange length='3' type-id='7ff19f0f' id='56f209d2'/>
       </array-type-def>
+      <pointer-type-def type-id='46a1625d' size-in-bits='64' id='83b4f711'/>
       <class-decl name='genl_ops' size-in-bits='384' is-struct='yes' visibility='default' filepath='include/net/genetlink.h' line='149' column='1' id='83b59630'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='doit' type-id='8f8224f6' visibility='default' filepath='include/net/genetlink.h' line='150' column='1'/>
@@ -54239,7 +54284,7 @@
           <var-decl name='prog_id' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/bpf.h' line='5611' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='' type-id='ac5ab667' visibility='default' filepath='include/uapi/linux/bpf.h' line='5612' column='1'/>
+          <var-decl name='' type-id='ac5ab66a' visibility='default' filepath='include/uapi/linux/bpf.h' line='5612' column='1'/>
         </data-member>
       </class-decl>
       <function-type size-in-bits='64' id='891c6957'>
@@ -58896,6 +58941,23 @@
         <return type-id='95e97e5e'/>
       </function-type>
       <pointer-type-def type-id='83fa0aaf' size-in-bits='64' id='9424eb47'/>
+      <class-decl name='edac_dev_sysfs_block_attribute' size-in-bits='384' is-struct='yes' visibility='default' filepath='drivers/edac/edac_device.h' line='106' column='1' id='942a7948'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='attr' type-id='a6222917' visibility='default' filepath='drivers/edac/edac_device.h' line='107' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='show' type-id='434e45fe' visibility='default' filepath='drivers/edac/edac_device.h' line='108' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='192'>
+          <var-decl name='store' type-id='855e70d2' visibility='default' filepath='drivers/edac/edac_device.h' line='109' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='256'>
+          <var-decl name='block' type-id='0424a2d9' visibility='default' filepath='drivers/edac/edac_device.h' line='111' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='320'>
+          <var-decl name='value' type-id='f0981eeb' visibility='default' filepath='drivers/edac/edac_device.h' line='113' column='1'/>
+        </data-member>
+      </class-decl>
       <array-type-def dimensions='1' type-id='39a43b40' size-in-bits='320' id='94310593'>
         <subrange length='5' type-id='7ff19f0f' id='53010e10'/>
       </array-type-def>
@@ -65314,6 +65376,7 @@
       </class-decl>
       <pointer-type-def type-id='8b69ca04' size-in-bits='64' id='a589466a'/>
       <pointer-type-def type-id='26e73b36' size-in-bits='64' id='a5896095'/>
+      <pointer-type-def type-id='080ce95f' size-in-bits='64' id='a58e905b'/>
       <qualified-type-def type-id='f817de22' const='yes' id='a5b2ff47'/>
       <function-type size-in-bits='64' id='a5b67631'>
         <parameter type-id='8898134d'/>
@@ -69846,40 +69909,7 @@
           <var-decl name='uint_64' type-id='91ce1af9' visibility='default' filepath='include/linux/fs_parser.h' line='59' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/bpf.h' line='5612' column='1' id='ac5ab667'>
-        <data-member access='public'>
-          <var-decl name='raw_tracepoint' type-id='e7f4401f' visibility='default' filepath='include/uapi/linux/bpf.h' line='5616' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='tracing' type-id='e7f44020' visibility='default' filepath='include/uapi/linux/bpf.h' line='5621' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='cgroup' type-id='e7f44021' visibility='default' filepath='include/uapi/linux/bpf.h' line='5625' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='iter' type-id='e7f44022' visibility='default' filepath='include/uapi/linux/bpf.h' line='5634' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='netns' type-id='e7f44023' visibility='default' filepath='include/uapi/linux/bpf.h' line='5638' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='xdp' type-id='e7f44024' visibility='default' filepath='include/uapi/linux/bpf.h' line='5641' column='1'/>
-        </data-member>
-      </union-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/bpf.h' line='5629' column='1' id='ac5ab668'>
-        <data-member access='public'>
-          <var-decl name='map' type-id='e7f44025' visibility='default' filepath='include/uapi/linux/bpf.h' line='5632' column='1'/>
-        </data-member>
-      </union-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/igmp.h' line='74' column='1' id='ac5ab669'>
-        <data-member access='public'>
-          <var-decl name='next' type-id='26479c18' visibility='default' filepath='include/linux/igmp.h' line='75' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='next_rcu' type-id='26479c18' visibility='default' filepath='include/linux/igmp.h' line='76' column='1'/>
-        </data-member>
-      </union-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='832' is-anonymous='yes' visibility='default' filepath='include/net/nexthop.h' line='65' column='1' id='ac5ab66a'>
+      <union-decl name='__anonymous_union__' size-in-bits='832' is-anonymous='yes' visibility='default' filepath='include/net/nexthop.h' line='65' column='1' id='ac5ab667'>
         <data-member access='public'>
           <var-decl name='fib_nhc' type-id='e1f89457' visibility='default' filepath='include/net/nexthop.h' line='66' column='1'/>
         </data-member>
@@ -69890,20 +69920,53 @@
           <var-decl name='fib6_nh' type-id='979d5bbb' visibility='default' filepath='include/net/nexthop.h' line='68' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/net/nexthop.h' line='102' column='1' id='ac5ab66b'>
+      <union-decl name='__anonymous_union__' size-in-bits='192' is-anonymous='yes' visibility='default' filepath='include/net/nexthop.h' line='102' column='1' id='ac5ab668'>
         <data-member access='public'>
-          <var-decl name='hthr' type-id='e7f44026' visibility='default' filepath='include/net/nexthop.h' line='105' column='1'/>
+          <var-decl name='hthr' type-id='e7f4401f' visibility='default' filepath='include/net/nexthop.h' line='105' column='1'/>
         </data-member>
         <data-member access='public'>
-          <var-decl name='res' type-id='e7f44027' visibility='default' filepath='include/net/nexthop.h' line='112' column='1'/>
+          <var-decl name='res' type-id='e7f44020' visibility='default' filepath='include/net/nexthop.h' line='112' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/net/nexthop.h' line='149' column='1' id='ac5ab66c'>
+      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/net/nexthop.h' line='149' column='1' id='ac5ab669'>
         <data-member access='public'>
           <var-decl name='nh_info' type-id='e55edb2e' visibility='default' filepath='include/net/nexthop.h' line='150' column='1'/>
         </data-member>
         <data-member access='public'>
           <var-decl name='nh_grp' type-id='c5ff416f' visibility='default' filepath='include/net/nexthop.h' line='151' column='1'/>
+        </data-member>
+      </union-decl>
+      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/bpf.h' line='5612' column='1' id='ac5ab66a'>
+        <data-member access='public'>
+          <var-decl name='raw_tracepoint' type-id='e7f44021' visibility='default' filepath='include/uapi/linux/bpf.h' line='5616' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='tracing' type-id='e7f44022' visibility='default' filepath='include/uapi/linux/bpf.h' line='5621' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='cgroup' type-id='e7f44023' visibility='default' filepath='include/uapi/linux/bpf.h' line='5625' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='iter' type-id='e7f44024' visibility='default' filepath='include/uapi/linux/bpf.h' line='5634' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='netns' type-id='e7f44025' visibility='default' filepath='include/uapi/linux/bpf.h' line='5638' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='xdp' type-id='e7f44026' visibility='default' filepath='include/uapi/linux/bpf.h' line='5641' column='1'/>
+        </data-member>
+      </union-decl>
+      <union-decl name='__anonymous_union__' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/bpf.h' line='5629' column='1' id='ac5ab66b'>
+        <data-member access='public'>
+          <var-decl name='map' type-id='e7f44027' visibility='default' filepath='include/uapi/linux/bpf.h' line='5632' column='1'/>
+        </data-member>
+      </union-decl>
+      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/igmp.h' line='74' column='1' id='ac5ab66c'>
+        <data-member access='public'>
+          <var-decl name='next' type-id='26479c18' visibility='default' filepath='include/linux/igmp.h' line='75' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='next_rcu' type-id='26479c18' visibility='default' filepath='include/linux/igmp.h' line='76' column='1'/>
         </data-member>
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='16' is-anonymous='yes' visibility='default' filepath='include/net/netfilter/nf_conntrack_tuple.h' line='43' column='1' id='ac5ab66d'>
@@ -73829,6 +73892,7 @@
         <parameter type-id='cfff5953'/>
         <return type-id='95e97e5e'/>
       </function-type>
+      <pointer-type-def type-id='942a7948' size-in-bits='64' id='b52eac2e'/>
       <class-decl name='cfg80211_mgmt_tx_params' size-in-bits='384' is-struct='yes' visibility='default' filepath='include/net/cfg80211.h' line='3316' column='1' id='b52f43dd'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='chan' type-id='ec00acfb' visibility='default' filepath='include/net/cfg80211.h' line='3317' column='1'/>
@@ -74725,7 +74789,7 @@
           <var-decl name='rcu' type-id='e3d8ce29' visibility='default' filepath='include/net/nexthop.h' line='147' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='1024'>
-          <var-decl name='' type-id='ac5ab66c' visibility='default' filepath='include/net/nexthop.h' line='149' column='1'/>
+          <var-decl name='' type-id='ac5ab669' visibility='default' filepath='include/net/nexthop.h' line='149' column='1'/>
         </data-member>
       </class-decl>
       <pointer-type-def type-id='2449db3f' size-in-bits='64' id='b7589fb3'/>
@@ -74894,6 +74958,7 @@
       <array-type-def dimensions='1' type-id='e7f44030' size-in-bits='192' id='b7cdf388'>
         <subrange length='4' type-id='7ff19f0f' id='16fe7105'/>
       </array-type-def>
+      <pointer-type-def type-id='ebded5f2' size-in-bits='64' id='b7d8b860'/>
       <pointer-type-def type-id='faebaea7' size-in-bits='64' id='b7daa1eb'/>
       <pointer-type-def type-id='53422e64' size-in-bits='64' id='b7db9582'/>
       <enum-decl name='__anonymous_enum__' filepath='include/uapi/linux/net.h' line='48' column='1' id='b7dbf8c7' is-anonymous='yes'>
@@ -78493,6 +78558,26 @@
         <parameter type-id='eaa32e2f'/>
         <return type-id='48b5725f'/>
       </function-type>
+      <class-decl name='edac_device_instance' size-in-bits='1024' is-struct='yes' visibility='default' filepath='drivers/edac/edac_device.h' line='133' column='1' id='be37740b'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='ctl' type-id='b7d8b860' visibility='default' filepath='drivers/edac/edac_device.h' line='134' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='name' type-id='d6e8cc9d' visibility='default' filepath='drivers/edac/edac_device.h' line='135' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='352'>
+          <var-decl name='counters' type-id='c0388fd4' visibility='default' filepath='drivers/edac/edac_device.h' line='137' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='416'>
+          <var-decl name='nr_blocks' type-id='19c2251e' visibility='default' filepath='drivers/edac/edac_device.h' line='139' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='448'>
+          <var-decl name='blocks' type-id='0424a2d9' visibility='default' filepath='drivers/edac/edac_device.h' line='140' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='512'>
+          <var-decl name='kobj' type-id='b6ab8849' visibility='default' filepath='drivers/edac/edac_device.h' line='143' column='1'/>
+        </data-member>
+      </class-decl>
       <pointer-type-def type-id='abc85e8f' size-in-bits='64' id='be3a232b'/>
       <pointer-type-def type-id='860353ed' size-in-bits='64' id='be3ce245'/>
       <pointer-type-def type-id='cc7d2869' size-in-bits='64' id='be4e3fad'/>
@@ -79238,6 +79323,14 @@
         </data-member>
         <data-member access='public' layout-offset-in-bits='320'>
           <var-decl name='next' type-id='d38eb863' visibility='default' filepath='include/linux/uprobes.h' line='90' column='1'/>
+        </data-member>
+      </class-decl>
+      <class-decl name='edac_device_counter' size-in-bits='64' is-struct='yes' visibility='default' filepath='drivers/edac/edac_device.h' line='74' column='1' id='c0388fd4'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='ue_count' type-id='19c2251e' visibility='default' filepath='drivers/edac/edac_device.h' line='75' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='32'>
+          <var-decl name='ce_count' type-id='19c2251e' visibility='default' filepath='drivers/edac/edac_device.h' line='76' column='1'/>
         </data-member>
       </class-decl>
       <function-type size-in-bits='64' id='c039af2e'>
@@ -80111,7 +80204,7 @@
           <var-decl name='sfcount' type-id='f05e8e77' visibility='default' filepath='include/linux/igmp.h' line='73' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='384'>
-          <var-decl name='' type-id='ac5ab669' visibility='default' filepath='include/linux/igmp.h' line='74' column='1'/>
+          <var-decl name='' type-id='ac5ab66c' visibility='default' filepath='include/linux/igmp.h' line='74' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='448'>
           <var-decl name='next_hash' type-id='26479c18' visibility='default' filepath='include/linux/igmp.h' line='78' column='1'/>
@@ -87185,6 +87278,26 @@
       <pointer-type-def type-id='0d22ecf9' size-in-bits='64' id='d5cbf711'/>
       <pointer-type-def type-id='67b24a02' size-in-bits='64' id='d5d06540'/>
       <pointer-type-def type-id='c40caf76' size-in-bits='64' id='d5d36d38'/>
+      <class-decl name='edac_device_block' size-in-bits='1024' is-struct='yes' visibility='default' filepath='drivers/edac/edac_device.h' line='117' column='1' id='d5dd5721'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='instance' type-id='581e52eb' visibility='default' filepath='drivers/edac/edac_device.h' line='118' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='name' type-id='16dc656a' visibility='default' filepath='drivers/edac/edac_device.h' line='119' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='320'>
+          <var-decl name='counters' type-id='c0388fd4' visibility='default' filepath='drivers/edac/edac_device.h' line='121' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='384'>
+          <var-decl name='nr_attribs' type-id='95e97e5e' visibility='default' filepath='drivers/edac/edac_device.h' line='123' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='448'>
+          <var-decl name='block_attributes' type-id='b52eac2e' visibility='default' filepath='drivers/edac/edac_device.h' line='126' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='512'>
+          <var-decl name='kobj' type-id='b6ab8849' visibility='default' filepath='drivers/edac/edac_device.h' line='129' column='1'/>
+        </data-member>
+      </class-decl>
       <pointer-type-def type-id='9712f929' size-in-bits='64' id='d5ddffb9'/>
       <pointer-type-def type-id='bb75ea85' size-in-bits='64' id='d5df7665'/>
       <pointer-type-def type-id='e3840c87' size-in-bits='64' id='d5dff457'/>
@@ -87931,6 +88044,9 @@
         <parameter type-id='77e79a4b'/>
         <return type-id='48b5725f'/>
       </function-type>
+      <array-type-def dimensions='1' type-id='a84c031d' size-in-bits='280' id='d6e8cc9d'>
+        <subrange length='35' type-id='7ff19f0f' id='6e6845b5'/>
+      </array-type-def>
       <pointer-type-def type-id='bc5c36f0' size-in-bits='64' id='d6e9f1fa'/>
       <class-decl name='dentry' size-in-bits='1536' is-struct='yes' visibility='default' filepath='include/linux/dcache.h' line='91' column='1' id='d6ebca75'>
         <data-member access='public' layout-offset-in-bits='0'>
@@ -97094,7 +97210,23 @@
           <var-decl name='more' type-id='f9b06939' visibility='default' filepath='include/linux/netdevice.h' line='3351' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/bpf.h' line='5613' column='1' id='e7f4401f'>
+      <class-decl name='__anonymous_struct__' size-in-bits='32' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/nexthop.h' line='103' column='1' id='e7f4401f'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='upper_bound' type-id='49178f86' visibility='default' filepath='include/net/nexthop.h' line='104' column='1'/>
+        </data-member>
+      </class-decl>
+      <class-decl name='__anonymous_struct__' size-in-bits='192' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/nexthop.h' line='106' column='1' id='e7f44020'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='uw_nh_entry' type-id='72f469ec' visibility='default' filepath='include/net/nexthop.h' line='108' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='count_buckets' type-id='1dc6a898' visibility='default' filepath='include/net/nexthop.h' line='110' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='144'>
+          <var-decl name='wants_buckets' type-id='1dc6a898' visibility='default' filepath='include/net/nexthop.h' line='111' column='1'/>
+        </data-member>
+      </class-decl>
+      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/bpf.h' line='5613' column='1' id='e7f44021'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='tp_name' type-id='d3130597' visibility='default' filepath='include/uapi/linux/bpf.h' line='5614' column='1'/>
         </data-member>
@@ -97102,7 +97234,7 @@
           <var-decl name='tp_name_len' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/bpf.h' line='5615' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='96' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/bpf.h' line='5617' column='1' id='e7f44020'>
+      <class-decl name='__anonymous_struct__' size-in-bits='96' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/bpf.h' line='5617' column='1' id='e7f44022'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='attach_type' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/bpf.h' line='5618' column='1'/>
         </data-member>
@@ -97113,7 +97245,7 @@
           <var-decl name='target_btf_id' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/bpf.h' line='5620' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/bpf.h' line='5622' column='1' id='e7f44021'>
+      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/bpf.h' line='5622' column='1' id='e7f44023'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='cgroup_id' type-id='d3130597' visibility='default' filepath='include/uapi/linux/bpf.h' line='5623' column='1'/>
         </data-member>
@@ -97121,7 +97253,7 @@
           <var-decl name='attach_type' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/bpf.h' line='5624' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/bpf.h' line='5626' column='1' id='e7f44022'>
+      <class-decl name='__anonymous_struct__' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/bpf.h' line='5626' column='1' id='e7f44024'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='target_name' type-id='d3130597' visibility='default' filepath='include/uapi/linux/bpf.h' line='5627' column='1'/>
         </data-member>
@@ -97129,10 +97261,10 @@
           <var-decl name='target_name_len' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/bpf.h' line='5628' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='96'>
-          <var-decl name='' type-id='ac5ab668' visibility='default' filepath='include/uapi/linux/bpf.h' line='5629' column='1'/>
+          <var-decl name='' type-id='ac5ab66b' visibility='default' filepath='include/uapi/linux/bpf.h' line='5629' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/bpf.h' line='5635' column='1' id='e7f44023'>
+      <class-decl name='__anonymous_struct__' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/bpf.h' line='5635' column='1' id='e7f44025'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='netns_ino' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/bpf.h' line='5636' column='1'/>
         </data-member>
@@ -97140,30 +97272,14 @@
           <var-decl name='attach_type' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/bpf.h' line='5637' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='32' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/bpf.h' line='5639' column='1' id='e7f44024'>
+      <class-decl name='__anonymous_struct__' size-in-bits='32' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/bpf.h' line='5639' column='1' id='e7f44026'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='ifindex' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/bpf.h' line='5640' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='32' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/bpf.h' line='5630' column='1' id='e7f44025'>
+      <class-decl name='__anonymous_struct__' size-in-bits='32' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/uapi/linux/bpf.h' line='5630' column='1' id='e7f44027'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='map_id' type-id='3f1a6b60' visibility='default' filepath='include/uapi/linux/bpf.h' line='5631' column='1'/>
-        </data-member>
-      </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='32' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/nexthop.h' line='103' column='1' id='e7f44026'>
-        <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='upper_bound' type-id='49178f86' visibility='default' filepath='include/net/nexthop.h' line='104' column='1'/>
-        </data-member>
-      </class-decl>
-      <class-decl name='__anonymous_struct__' size-in-bits='192' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/nexthop.h' line='106' column='1' id='e7f44027'>
-        <data-member access='public' layout-offset-in-bits='0'>
-          <var-decl name='uw_nh_entry' type-id='72f469ec' visibility='default' filepath='include/net/nexthop.h' line='108' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='count_buckets' type-id='1dc6a898' visibility='default' filepath='include/net/nexthop.h' line='110' column='1'/>
-        </data-member>
-        <data-member access='public' layout-offset-in-bits='144'>
-          <var-decl name='wants_buckets' type-id='1dc6a898' visibility='default' filepath='include/net/nexthop.h' line='111' column='1'/>
         </data-member>
       </class-decl>
       <class-decl name='__anonymous_struct__' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/netfilter/nf_conntrack.h' line='104' column='1' id='e7f44028'/>
@@ -99417,6 +99533,83 @@
       <pointer-type-def type-id='0f840455' size-in-bits='64' id='ebd313ed'/>
       <pointer-type-def type-id='b0e90747' size-in-bits='64' id='ebd6b097'/>
       <pointer-type-def type-id='1f79c412' size-in-bits='64' id='ebda04fc'/>
+      <class-decl name='edac_device_ctl_info' size-in-bits='3008' is-struct='yes' visibility='default' filepath='drivers/edac/edac_device.h' line='151' column='1' id='ebded5f2'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='link' type-id='72f469ec' visibility='default' filepath='drivers/edac/edac_device.h' line='153' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='owner' type-id='2730d015' visibility='default' filepath='drivers/edac/edac_device.h' line='155' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='192'>
+          <var-decl name='dev_idx' type-id='95e97e5e' visibility='default' filepath='drivers/edac/edac_device.h' line='157' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='224'>
+          <var-decl name='log_ue' type-id='95e97e5e' visibility='default' filepath='drivers/edac/edac_device.h' line='160' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='256'>
+          <var-decl name='log_ce' type-id='95e97e5e' visibility='default' filepath='drivers/edac/edac_device.h' line='161' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='288'>
+          <var-decl name='panic_on_ue' type-id='95e97e5e' visibility='default' filepath='drivers/edac/edac_device.h' line='162' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='320'>
+          <var-decl name='poll_msec' type-id='f0981eeb' visibility='default' filepath='drivers/edac/edac_device.h' line='163' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='384'>
+          <var-decl name='delay' type-id='7359adad' visibility='default' filepath='drivers/edac/edac_device.h' line='164' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='448'>
+          <var-decl name='sysfs_attributes' type-id='0a4e3854' visibility='default' filepath='drivers/edac/edac_device.h' line='176' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='512'>
+          <var-decl name='edac_subsys' type-id='5e2671f8' visibility='default' filepath='drivers/edac/edac_device.h' line='179' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='576'>
+          <var-decl name='op_state' type-id='95e97e5e' visibility='default' filepath='drivers/edac/edac_device.h' line='182' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='640'>
+          <var-decl name='work' type-id='5ad6e0ef' visibility='default' filepath='drivers/edac/edac_device.h' line='184' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1344'>
+          <var-decl name='edac_check' type-id='83b4f711' visibility='default' filepath='drivers/edac/edac_device.h' line='191' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1408'>
+          <var-decl name='dev' type-id='fa0b179b' visibility='default' filepath='drivers/edac/edac_device.h' line='193' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1472'>
+          <var-decl name='mod_name' type-id='80f4b756' visibility='default' filepath='drivers/edac/edac_device.h' line='195' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1536'>
+          <var-decl name='ctl_name' type-id='80f4b756' visibility='default' filepath='drivers/edac/edac_device.h' line='196' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1600'>
+          <var-decl name='dev_name' type-id='80f4b756' visibility='default' filepath='drivers/edac/edac_device.h' line='197' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1664'>
+          <var-decl name='pvt_info' type-id='eaa32e2f' visibility='default' filepath='drivers/edac/edac_device.h' line='199' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1728'>
+          <var-decl name='start_time' type-id='7359adad' visibility='default' filepath='drivers/edac/edac_device.h' line='201' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='1792'>
+          <var-decl name='removal_complete' type-id='f9fef04f' visibility='default' filepath='drivers/edac/edac_device.h' line='203' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='2048'>
+          <var-decl name='name' type-id='16dc656a' visibility='default' filepath='drivers/edac/edac_device.h' line='212' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='2304'>
+          <var-decl name='nr_instances' type-id='19c2251e' visibility='default' filepath='drivers/edac/edac_device.h' line='217' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='2368'>
+          <var-decl name='instances' type-id='581e52eb' visibility='default' filepath='drivers/edac/edac_device.h' line='218' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='2432'>
+          <var-decl name='counters' type-id='c0388fd4' visibility='default' filepath='drivers/edac/edac_device.h' line='221' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='2496'>
+          <var-decl name='kobj' type-id='b6ab8849' visibility='default' filepath='drivers/edac/edac_device.h' line='226' column='1'/>
+        </data-member>
+      </class-decl>
       <class-decl name='property' size-in-bits='768' is-struct='yes' visibility='default' filepath='include/linux/of.h' line='31' column='1' id='ebe3ac70'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='name' type-id='26a90f95' visibility='default' filepath='include/linux/of.h' line='32' column='1'/>
@@ -102420,6 +102613,7 @@
           <var-decl name='dirfd' type-id='95e97e5e' visibility='default' filepath='include/linux/fs_context.h' line='73' column='1'/>
         </data-member>
       </class-decl>
+      <pointer-type-def type-id='f5dd710b' size-in-bits='64' id='f40bec0f'/>
       <class-decl name='ethtool_rmon_hist_range' size-in-bits='32' is-struct='yes' visibility='default' filepath='include/linux/ethtool.h' line='360' column='1' id='f40f8242'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='low' type-id='1dc6a898' visibility='default' filepath='include/linux/ethtool.h' line='361' column='1'/>
@@ -102870,7 +103064,7 @@
           <var-decl name='weight' type-id='f9b06939' visibility='default' filepath='include/net/nexthop.h' line='100' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='' type-id='ac5ab66b' visibility='default' filepath='include/net/nexthop.h' line='102' column='1'/>
+          <var-decl name='' type-id='ac5ab668' visibility='default' filepath='include/net/nexthop.h' line='102' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='320'>
           <var-decl name='nh_list' type-id='72f469ec' visibility='default' filepath='include/net/nexthop.h' line='115' column='1'/>
@@ -102900,6 +103094,12 @@
         <return type-id='95e97e5e'/>
       </function-type>
       <typedef-decl name='raw_spinlock_t' type-id='f106d0e5' filepath='include/linux/spinlock_types_raw.h' line='23' column='1' id='f5c90b3f'/>
+      <function-type size-in-bits='64' id='f5dd710b'>
+        <parameter type-id='b7d8b860'/>
+        <parameter type-id='80f4b756'/>
+        <parameter type-id='b59d7dce'/>
+        <return type-id='79a0948f'/>
+      </function-type>
       <class-decl name='badrange' size-in-bits='192' is-struct='yes' visibility='default' filepath='include/linux/libnvdimm.h' line='22' column='1' id='f5e659a5'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='list' type-id='72f469ec' visibility='default' filepath='include/linux/libnvdimm.h' line='23' column='1'/>
@@ -108327,16 +108527,20 @@
       <var-decl name='__tracepoint_android_vh_binder_wakeup_ilocked' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_binder_wakeup_ilocked' visibility='default' filepath='include/trace/hooks/binder.h' line='27' column='1' elf-symbol-id='__tracepoint_android_vh_binder_wakeup_ilocked'/>
       <var-decl name='__tracepoint_android_vh_cpu_idle_enter' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_cpu_idle_enter' visibility='default' filepath='include/trace/hooks/cpuidle.h' line='15' column='1' elf-symbol-id='__tracepoint_android_vh_cpu_idle_enter'/>
       <var-decl name='__tracepoint_android_vh_cpu_idle_exit' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_cpu_idle_exit' visibility='default' filepath='include/trace/hooks/cpuidle.h' line='18' column='1' elf-symbol-id='__tracepoint_android_vh_cpu_idle_exit'/>
+      <var-decl name='__tracepoint_android_vh_cpuidle_psci_enter' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_cpuidle_psci_enter' visibility='default' filepath='include/trace/hooks/cpuidle_psci.h' line='15' column='1' elf-symbol-id='__tracepoint_android_vh_cpuidle_psci_enter'/>
+      <var-decl name='__tracepoint_android_vh_cpuidle_psci_exit' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_cpuidle_psci_exit' visibility='default' filepath='include/trace/hooks/cpuidle_psci.h' line='19' column='1' elf-symbol-id='__tracepoint_android_vh_cpuidle_psci_exit'/>
       <var-decl name='__tracepoint_android_vh_ftrace_dump_buffer' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_ftrace_dump_buffer' visibility='default' filepath='include/trace/hooks/ftrace_dump.h' line='34' column='1' elf-symbol-id='__tracepoint_android_vh_ftrace_dump_buffer'/>
       <var-decl name='__tracepoint_android_vh_ftrace_format_check' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_ftrace_format_check' visibility='default' filepath='include/trace/hooks/ftrace_dump.h' line='30' column='1' elf-symbol-id='__tracepoint_android_vh_ftrace_format_check'/>
       <var-decl name='__tracepoint_android_vh_ftrace_oops_enter' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_ftrace_oops_enter' visibility='default' filepath='include/trace/hooks/ftrace_dump.h' line='18' column='1' elf-symbol-id='__tracepoint_android_vh_ftrace_oops_enter'/>
       <var-decl name='__tracepoint_android_vh_ftrace_oops_exit' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_ftrace_oops_exit' visibility='default' filepath='include/trace/hooks/ftrace_dump.h' line='22' column='1' elf-symbol-id='__tracepoint_android_vh_ftrace_oops_exit'/>
       <var-decl name='__tracepoint_android_vh_ftrace_size_check' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_ftrace_size_check' visibility='default' filepath='include/trace/hooks/ftrace_dump.h' line='26' column='1' elf-symbol-id='__tracepoint_android_vh_ftrace_size_check'/>
+      <var-decl name='__tracepoint_android_vh_gic_resume' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_gic_resume' visibility='default' filepath='include/trace/hooks/gic.h' line='15' column='1' elf-symbol-id='__tracepoint_android_vh_gic_resume'/>
       <var-decl name='__tracepoint_android_vh_ipi_stop' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_ipi_stop' visibility='default' filepath='include/trace/hooks/debug.h' line='16' column='1' elf-symbol-id='__tracepoint_android_vh_ipi_stop'/>
       <var-decl name='__tracepoint_android_vh_jiffies_update' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_jiffies_update' visibility='default' filepath='include/trace/hooks/sched.h' line='94' column='1' elf-symbol-id='__tracepoint_android_vh_jiffies_update'/>
       <var-decl name='__tracepoint_android_vh_logbuf' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_logbuf' visibility='default' filepath='include/trace/hooks/logbuf.h' line='16' column='1' elf-symbol-id='__tracepoint_android_vh_logbuf'/>
       <var-decl name='__tracepoint_android_vh_logbuf_pr_cont' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_logbuf_pr_cont' visibility='default' filepath='include/trace/hooks/logbuf.h' line='20' column='1' elf-symbol-id='__tracepoint_android_vh_logbuf_pr_cont'/>
       <var-decl name='__tracepoint_android_vh_printk_hotplug' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_printk_hotplug' visibility='default' filepath='include/trace/hooks/printk.h' line='13' column='1' elf-symbol-id='__tracepoint_android_vh_printk_hotplug'/>
+      <var-decl name='__tracepoint_android_vh_rproc_recovery' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_rproc_recovery' visibility='default' filepath='include/trace/hooks/remoteproc.h' line='18' column='1' elf-symbol-id='__tracepoint_android_vh_rproc_recovery'/>
       <var-decl name='__tracepoint_android_vh_scheduler_tick' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_scheduler_tick' visibility='default' filepath='include/trace/hooks/sched.h' line='31' column='1' elf-symbol-id='__tracepoint_android_vh_scheduler_tick'/>
       <var-decl name='__tracepoint_android_vh_setscheduler_uclamp' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_setscheduler_uclamp' visibility='default' filepath='include/trace/hooks/sched.h' line='365' column='1' elf-symbol-id='__tracepoint_android_vh_setscheduler_uclamp'/>
       <var-decl name='__tracepoint_android_vh_sha256' type-id='4ca0c298' mangled-name='__tracepoint_android_vh_sha256' visibility='default' filepath='include/trace/hooks/fips140.h' line='20' column='1' elf-symbol-id='__tracepoint_android_vh_sha256'/>
@@ -112620,6 +112824,11 @@
         <parameter type-id='661ccd0c' name='config' filepath='drivers/regulator/devres.c' line='187' column='1'/>
         <return type-id='43c38462'/>
       </function-decl>
+      <function-decl name='devm_regulator_register_notifier' mangled-name='devm_regulator_register_notifier' filepath='drivers/regulator/devres.c' line='366' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devm_regulator_register_notifier'>
+        <parameter type-id='850c13f6' name='regulator' filepath='drivers/regulator/devres.c' line='366' column='1'/>
+        <parameter type-id='d504f73d' name='nb' filepath='drivers/regulator/devres.c' line='367' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='devm_request_any_context_irq' mangled-name='devm_request_any_context_irq' filepath='kernel/irq/devres.c' line='99' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devm_request_any_context_irq'>
         <parameter type-id='fa0b179b' name='dev' filepath='kernel/irq/devres.c' line='99' column='1'/>
         <parameter type-id='f0981eeb' name='irq' filepath='kernel/irq/devres.c' line='99' column='1'/>
@@ -115034,6 +115243,49 @@
         <parameter type-id='19c2251e' name='val' filepath='drivers/pci/controller/dwc/pcie-designware.c' line='121' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='edac_device_add_device' mangled-name='edac_device_add_device' filepath='drivers/edac/edac_device.c' line='448' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='edac_device_add_device'>
+        <parameter type-id='b7d8b860' name='edac_dev' filepath='drivers/edac/edac_device.c' line='448' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='edac_device_alloc_ctl_info' mangled-name='edac_device_alloc_ctl_info' filepath='drivers/edac/edac_device.c' line='50' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='edac_device_alloc_ctl_info'>
+        <parameter type-id='f0981eeb' name='sz_private' filepath='drivers/edac/edac_device.c' line='51' column='1'/>
+        <parameter type-id='26a90f95' name='edac_device_name' filepath='drivers/edac/edac_device.c' line='52' column='1'/>
+        <parameter type-id='f0981eeb' name='nr_instances' filepath='drivers/edac/edac_device.c' line='52' column='1'/>
+        <parameter type-id='26a90f95' name='edac_block_name' filepath='drivers/edac/edac_device.c' line='53' column='1'/>
+        <parameter type-id='f0981eeb' name='nr_blocks' filepath='drivers/edac/edac_device.c' line='53' column='1'/>
+        <parameter type-id='f0981eeb' name='offset_value' filepath='drivers/edac/edac_device.c' line='54' column='1'/>
+        <parameter type-id='b52eac2e' name='attrib_spec' filepath='drivers/edac/edac_device.c' line='55' column='1'/>
+        <parameter type-id='f0981eeb' name='nr_attrib' filepath='drivers/edac/edac_device.c' line='55' column='1'/>
+        <parameter type-id='95e97e5e' name='device_index' filepath='drivers/edac/edac_device.c' line='56' column='1'/>
+        <return type-id='b7d8b860'/>
+      </function-decl>
+      <function-decl name='edac_device_alloc_index' mangled-name='edac_device_alloc_index' filepath='drivers/edac/edac_device.c' line='440' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='edac_device_alloc_index'>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='edac_device_del_device' mangled-name='edac_device_del_device' filepath='drivers/edac/edac_device.c' line='504' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='edac_device_del_device'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/edac/edac_device.c' line='504' column='1'/>
+        <return type-id='b7d8b860'/>
+      </function-decl>
+      <function-decl name='edac_device_free_ctl_info' mangled-name='edac_device_free_ctl_info' filepath='drivers/edac/edac_device.c' line='229' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='edac_device_free_ctl_info'>
+        <parameter type-id='b7d8b860' name='ctl_info' filepath='drivers/edac/edac_device.c' line='229' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='edac_device_handle_ce_count' mangled-name='edac_device_handle_ce_count' filepath='drivers/edac/edac_device.c' line='558' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='edac_device_handle_ce_count'>
+        <parameter type-id='b7d8b860' name='edac_dev' filepath='drivers/edac/edac_device.c' line='558' column='1'/>
+        <parameter type-id='f0981eeb' name='count' filepath='drivers/edac/edac_device.c' line='559' column='1'/>
+        <parameter type-id='95e97e5e' name='inst_nr' filepath='drivers/edac/edac_device.c' line='559' column='1'/>
+        <parameter type-id='95e97e5e' name='block_nr' filepath='drivers/edac/edac_device.c' line='559' column='1'/>
+        <parameter type-id='80f4b756' name='msg' filepath='drivers/edac/edac_device.c' line='560' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='edac_device_handle_ue_count' mangled-name='edac_device_handle_ue_count' filepath='drivers/edac/edac_device.c' line='604' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='edac_device_handle_ue_count'>
+        <parameter type-id='b7d8b860' name='edac_dev' filepath='drivers/edac/edac_device.c' line='604' column='1'/>
+        <parameter type-id='f0981eeb' name='count' filepath='drivers/edac/edac_device.c' line='605' column='1'/>
+        <parameter type-id='95e97e5e' name='inst_nr' filepath='drivers/edac/edac_device.c' line='605' column='1'/>
+        <parameter type-id='95e97e5e' name='block_nr' filepath='drivers/edac/edac_device.c' line='605' column='1'/>
+        <parameter type-id='80f4b756' name='msg' filepath='drivers/edac/edac_device.c' line='606' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='emergency_restart' mangled-name='emergency_restart' filepath='kernel/reboot.c' line='67' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='emergency_restart'>
         <return type-id='48b5725f'/>
       </function-decl>
@@ -115892,6 +116144,9 @@
         <return type-id='7359adad'/>
       </function-decl>
       <var-decl name='gic_nonsecure_priorities' type-id='237c0d27' mangled-name='gic_nonsecure_priorities' visibility='default' filepath='drivers/irqchip/irq-gic-v3.c' line='92' column='1' elf-symbol-id='gic_nonsecure_priorities'/>
+      <function-decl name='gic_resume' mangled-name='gic_resume' filepath='drivers/irqchip/irq-gic-v3.c' line='1332' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='gic_resume'>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='glob_match' mangled-name='glob_match' filepath='lib/glob.c' line='40' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='glob_match'>
         <parameter type-id='80f4b756' name='pat' filepath='lib/glob.c' line='40' column='1'/>
         <parameter type-id='80f4b756' name='str' filepath='lib/glob.c' line='40' column='1'/>
@@ -118074,6 +118329,15 @@
         <parameter type-id='86462700' name='uevent_ops' filepath='lib/kobject.c' line='1006' column='1'/>
         <parameter type-id='d30bdc51' name='parent_kobj' filepath='lib/kobject.c' line='1007' column='1'/>
         <return type-id='89b70200'/>
+      </function-decl>
+      <function-decl name='kset_find_obj' mangled-name='kset_find_obj' filepath='lib/kobject.c' line='908' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kset_find_obj'>
+        <parameter type-id='89b70200' name='kset' filepath='lib/kobject.c' line='908' column='1'/>
+        <parameter type-id='80f4b756' name='name' filepath='lib/kobject.c' line='908' column='1'/>
+        <return type-id='d30bdc51'/>
+      </function-decl>
+      <function-decl name='kset_unregister' mangled-name='kset_unregister' filepath='lib/kobject.c' line='890' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kset_unregister'>
+        <parameter type-id='89b70200' name='k' filepath='lib/kobject.c' line='890' column='1'/>
+        <return type-id='48b5725f'/>
       </function-decl>
       <var-decl name='ksoftirqd' type-id='f23e2572' mangled-name='ksoftirqd' visibility='default' filepath='kernel/softirq.c' line='64' column='1' elf-symbol-id='ksoftirqd'/>
       <var-decl name='kstat' type-id='153750ef' mangled-name='kstat' visibility='default' filepath='kernel/sched/core.c' line='5197' column='1' elf-symbol-id='kstat'/>
@@ -122369,6 +122633,10 @@
         <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_core.c' line='1990' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='rproc_coredump' mangled-name='rproc_coredump' filepath='drivers/remoteproc/remoteproc_coredump.c' line='235' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_coredump'>
+        <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_coredump.c' line='235' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='rproc_coredump_add_custom_segment' mangled-name='rproc_coredump_add_custom_segment' filepath='drivers/remoteproc/remoteproc_coredump.c' line='79' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_coredump_add_custom_segment'>
         <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_coredump.c' line='79' column='1'/>
         <parameter type-id='cf29c9b3' name='da' filepath='drivers/remoteproc/remoteproc_coredump.c' line='80' column='1'/>
@@ -122382,6 +122650,10 @@
         <parameter type-id='cf29c9b3' name='da' filepath='drivers/remoteproc/remoteproc_coredump.c' line='48' column='1'/>
         <parameter type-id='b59d7dce' name='size' filepath='drivers/remoteproc/remoteproc_coredump.c' line='48' column='1'/>
         <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='rproc_coredump_cleanup' mangled-name='rproc_coredump_cleanup' filepath='drivers/remoteproc/remoteproc_coredump.c' line='26' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_coredump_cleanup'>
+        <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_coredump.c' line='26' column='1'/>
+        <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='rproc_coredump_set_elf_info' mangled-name='rproc_coredump_set_elf_info' filepath='drivers/remoteproc/remoteproc_coredump.c' line='114' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='rproc_coredump_set_elf_info'>
         <parameter type-id='5771c601' name='rproc' filepath='drivers/remoteproc/remoteproc_coredump.c' line='114' column='1'/>
@@ -124753,6 +125025,12 @@
         <parameter type-id='80f4b756' name='ct' filepath='lib/string.c' line='647' column='1'/>
         <return type-id='26a90f95'/>
       </function-decl>
+      <function-decl name='strreplace' mangled-name='strreplace' filepath='lib/string.c' line='1153' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='strreplace'>
+        <parameter type-id='26a90f95' name='s' filepath='lib/string.c' line='1153' column='1'/>
+        <parameter type-id='a84c031d' name='old' filepath='lib/string.c' line='1153' column='1'/>
+        <parameter type-id='a84c031d' name='new' filepath='lib/string.c' line='1153' column='1'/>
+        <return type-id='26a90f95'/>
+      </function-decl>
       <function-decl name='strscpy' mangled-name='strscpy' filepath='lib/string.c' line='180' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='strscpy'>
         <parameter type-id='26a90f95' name='dest' filepath='lib/string.c' line='180' column='1'/>
         <parameter type-id='80f4b756' name='src' filepath='lib/string.c' line='180' column='1'/>
@@ -125753,6 +126031,14 @@
         <parameter type-id='fa0b179b' name='dev' filepath='drivers/scsi/ufs/ufshcd.c' line='9147' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='ufshcd_uic_hibern8_enter' mangled-name='ufshcd_uic_hibern8_enter' filepath='drivers/scsi/ufs/ufshcd.c' line='4098' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ufshcd_uic_hibern8_enter'>
+        <parameter type-id='442b8d89' name='hba' filepath='drivers/scsi/ufs/ufshcd.c' line='4098' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='ufshcd_uic_hibern8_exit' mangled-name='ufshcd_uic_hibern8_exit' filepath='drivers/scsi/ufs/ufshcd.c' line='4122' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ufshcd_uic_hibern8_exit'>
+        <parameter type-id='442b8d89' name='hba' filepath='drivers/scsi/ufs/ufshcd.c' line='4122' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='uio_unregister_device' mangled-name='uio_unregister_device' filepath='drivers/uio/uio.c' line='1042' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='uio_unregister_device'>
         <parameter type-id='fb1092f1' name='info' filepath='drivers/uio/uio.c' line='1042' column='1'/>
         <return type-id='48b5725f'/>
@@ -126054,6 +126340,16 @@
         <return type-id='fc4f83c1'/>
       </function-decl>
       <var-decl name='usb_debug_root' type-id='27675065' mangled-name='usb_debug_root' visibility='default' filepath='drivers/usb/common/common.c' line='416' column='1' elf-symbol-id='usb_debug_root'/>
+      <function-decl name='usb_decode_ctrl' mangled-name='usb_decode_ctrl' filepath='drivers/usb/common/debug.c' line='231' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_decode_ctrl'>
+        <parameter type-id='26a90f95' name='str' filepath='drivers/usb/common/debug.c' line='231' column='1'/>
+        <parameter type-id='b59d7dce' name='size' filepath='drivers/usb/common/debug.c' line='231' column='1'/>
+        <parameter type-id='8f048e17' name='bRequestType' filepath='drivers/usb/common/debug.c' line='231' column='1'/>
+        <parameter type-id='8f048e17' name='bRequest' filepath='drivers/usb/common/debug.c' line='232' column='1'/>
+        <parameter type-id='d315442e' name='wValue' filepath='drivers/usb/common/debug.c' line='232' column='1'/>
+        <parameter type-id='d315442e' name='wIndex' filepath='drivers/usb/common/debug.c' line='232' column='1'/>
+        <parameter type-id='d315442e' name='wLength' filepath='drivers/usb/common/debug.c' line='233' column='1'/>
+        <return type-id='80f4b756'/>
+      </function-decl>
       <function-decl name='usb_del_gadget_udc' mangled-name='usb_del_gadget_udc' filepath='drivers/usb/gadget/udc/core.c' line='1481' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_del_gadget_udc'>
         <parameter type-id='49a58c0c' name='gadget' filepath='drivers/usb/gadget/udc/core.c' line='1481' column='1'/>
         <return type-id='48b5725f'/>
