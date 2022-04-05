@@ -22,6 +22,30 @@
       },
       "revId": "49500bf37ce217e722a942a936037461c9290ba0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7175656d_1efe368f",
+        "filename": "virt/kvm/kvm_main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1557,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2022-04-05T12:45:02Z",
+      "side": 1,
+      "message": "Also, it would make sense to give the helper *all* of the context. We say we change something, without saying *what*.",
+      "parentUuid": "68978e0a_5f623769",
+      "range": {
+        "startLine": 1557,
+        "startChar": 2,
+        "endLine": 1557,
+        "endChar": 11
+      },
+      "revId": "49500bf37ce217e722a942a936037461c9290ba0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
