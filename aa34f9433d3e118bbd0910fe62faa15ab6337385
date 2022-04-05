@@ -22,6 +22,30 @@
       },
       "revId": "aa34f9433d3e118bbd0910fe62faa15ab6337385",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b452fe9_08282efe",
+        "filename": "drivers/android/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1945302
+      },
+      "writtenOn": "2022-04-05T10:34:59Z",
+      "side": 1,
+      "message": "Hi Greg,\n\nAfter some discussion we think that a better approach for our usecase would be to decouple ANDROID_KABI_RESERVE from ANDROID_STRUCT_PADDING rather than create two different knobs that depend on ANDROID_STRUCT_PADDING for vendor_data and oem_data. This is because most substantial memory savings we\u0027re seeing are from disabling ANDROID_KABI_RESERVE rather than vendor_data and oem_data.\n\nBut it would also be beneficial to have control over vendor_data and oem_data, so we would create one config to enable/disable them.\n\nSo the approach would be:\n\n- CONFIG_ANDROID_VENDOR_OEM_DATA: enable/disable ANDROID_VENDOR_DATA and ANDROID_OEM_DATA\n- CONFIG_ANDROID_KABI_RESERVE_ENABLE: enable/disable ANDROID_KABI_RESERVE\n- Remove CONFIG_ANDROID_STRUCT_PADDING\n\nWould this approach be okay?\n\nThanks,\nJaskaran.",
+      "parentUuid": "ce25a5ad_191ecf4d",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 59
+      },
+      "revId": "aa34f9433d3e118bbd0910fe62faa15ab6337385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
