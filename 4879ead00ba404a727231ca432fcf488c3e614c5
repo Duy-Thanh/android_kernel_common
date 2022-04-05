@@ -16,6 +16,29 @@
       "message": "Now it\u0027s ready for review.",
       "revId": "4879ead00ba404a727231ca432fcf488c3e614c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a482061d_18064a36",
+        "filename": "virt/kvm/kvm_main.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1564,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-04-05T15:54:37Z",
+      "side": 1,
+      "message": "Why do we need this ternary condition here? Can \u0027new\u0027 really be NULL? We seem to dereference it unconditionally further down?",
+      "range": {
+        "startLine": 1564,
+        "startChar": 8,
+        "endLine": 1564,
+        "endChar": 50
+      },
+      "revId": "4879ead00ba404a727231ca432fcf488c3e614c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
