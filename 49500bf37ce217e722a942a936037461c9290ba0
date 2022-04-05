@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68978e0a_5f623769",
+        "filename": "virt/kvm/kvm_main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1557,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-04-05T12:43:08Z",
+      "side": 1,
+      "message": "Please unlock first :)",
+      "range": {
+        "startLine": 1557,
+        "startChar": 2,
+        "endLine": 1557,
+        "endChar": 11
+      },
+      "revId": "49500bf37ce217e722a942a936037461c9290ba0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
