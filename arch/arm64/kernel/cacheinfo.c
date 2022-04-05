@@ -97,3 +97,10 @@ int populate_cache_leaves(unsigned int cpu)
 	}
 	return 0;
 }
+
+#ifndef CONFIG_SLOB
+unsigned int arch_kmalloc_minalign(void)
+{
+	return cache_line_size();
+}
+#endif
