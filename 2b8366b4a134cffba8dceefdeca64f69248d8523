@@ -16,6 +16,24 @@
       "message": "This looks like it broke the raviole build target as seen here: https://android-review.googlesource.com/c/kernel/common/+/2054486",
       "revId": "2b8366b4a134cffba8dceefdeca64f69248d8523",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02730470_7a3cd845",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-06T14:16:03Z",
+      "side": 1,
+      "message": "oops, not resolved.",
+      "parentUuid": "0dfdba62_b322ccf0",
+      "revId": "2b8366b4a134cffba8dceefdeca64f69248d8523",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
