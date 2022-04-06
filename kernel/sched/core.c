@@ -90,6 +90,8 @@ unsigned int sysctl_sched_rt_period = 1000000;
 
 __read_mostly int scheduler_running;
 
+DEFINE_PER_CPU(u64, rt_task_arrival_time);
+
 #ifdef CONFIG_SCHED_CORE
 
 DEFINE_STATIC_KEY_FALSE(__sched_core_enabled);
@@ -5350,6 +5352,22 @@ void scheduler_tick(void)
 	trigger_load_balance(rq);
 #endif
 
+	if (per_cpu(rt_task_arrival_time, cpu)) {
+		if (curr->policy != SCHED_FIFO) {
+			per_cpu(rt_task_arrival_time, cpu) = 0;
+		} else {
+			if (rq_clock_task(rq) - per_cpu(rt_task_arrival_time, cpu) >
+					400000000) {
+				printk_deferred("RT task %s (%d) runtime > 400000000 now=%llu task arrival time=%llu runtime=%llu\n",
+				curr->comm, curr->pid,
+				rq_clock_task(rq),
+				per_cpu(rt_task_arrival_time, cpu),
+				rq_clock_task(rq) - per_cpu(rt_task_arrival_time, cpu));
+				BUG();
+			}
+		}
+	}
+
 	trace_android_vh_scheduler_tick(rq);
 }
 
@@ -6429,6 +6447,11 @@ static void __sched notrace __schedule(unsigned int sched_mode)
 		psi_sched_switch(prev, next, !task_on_rq_queued(prev));
 
 		trace_sched_switch(sched_mode & SM_MASK_PREEMPT, prev, next);
+
+		if (next->policy == SCHED_FIFO && next != rq->stop)
+			per_cpu(rt_task_arrival_time, cpu) = rq_clock_task(rq);
+		else
+			per_cpu(rt_task_arrival_time, cpu) = 0;
 
 		/* Also unlocks the rq: */
 		rq = context_switch(rq, prev, next, &rf);
