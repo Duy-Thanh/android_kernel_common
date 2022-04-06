@@ -33,10 +33,12 @@
 #include <linux/vmalloc.h>
 #include <linux/mutex.h>
 #include <linux/mm.h>
+#include <trace/hooks/mm.h>
 
 static DEFINE_PER_CPU(struct swap_slots_cache, swp_slots);
 static bool	swap_slot_cache_active;
 bool	swap_slot_cache_enabled;
+EXPORT_SYMBOL_GPL(swap_slot_cache_enabled);
 static bool	swap_slot_cache_initialized;
 static DEFINE_MUTEX(swap_slots_cache_mutex);
 /* Serialize swap slots cache enable/disable operations */
@@ -54,6 +56,7 @@ static void deactivate_swap_slots_cache(void)
 {
 	mutex_lock(&swap_slots_cache_mutex);
 	swap_slot_cache_active = false;
+	trace_android_rvh_swap_slot_cache_active(false);
 	__drain_swap_slots_cache(SLOTS_CACHE|SLOTS_CACHE_RET);
 	mutex_unlock(&swap_slots_cache_mutex);
 }
@@ -62,6 +65,7 @@ static void reactivate_swap_slots_cache(void)
 {
 	mutex_lock(&swap_slots_cache_mutex);
 	swap_slot_cache_active = true;
+	trace_android_rvh_swap_slot_cache_active(true);
 	mutex_unlock(&swap_slots_cache_mutex);
 }
 
@@ -115,19 +119,25 @@ static int alloc_swap_slot_cache(unsigned int cpu)
 {
 	struct swap_slots_cache *cache;
 	swp_entry_t *slots, *slots_ret;
+	bool skip_alloc_slots = false;
+	bool skip_alloc_slots_ret = false;
+	bool skip_initializecache = false;
 
 	/*
 	 * Do allocation outside swap_slots_cache_mutex
 	 * as kvzalloc could trigger reclaim and get_swap_page,
 	 * which can lock swap_slots_cache_mutex.
 	 */
-	slots = kvcalloc(SWAP_SLOTS_CACHE_SIZE, sizeof(swp_entry_t),
-			 GFP_KERNEL);
+	trace_android_rvh_alloc_slots(&slots, &skip_alloc_slots);
+	if (skip_alloc_slots)
+		slots = kvcalloc(SWAP_SLOTS_CACHE_SIZE, sizeof(swp_entry_t),
+				 GFP_KERNEL);
 	if (!slots)
 		return -ENOMEM;
-
-	slots_ret = kvcalloc(SWAP_SLOTS_CACHE_SIZE, sizeof(swp_entry_t),
-			     GFP_KERNEL);
+	trace_android_rvh_alloc_slots(&slots_ret, &skip_alloc_slots_ret);
+	if (skip_alloc_slots_ret)
+		slots_ret = kvcalloc(SWAP_SLOTS_CACHE_SIZE, sizeof(swp_entry_t),
+				     GFP_KERNEL);
 	if (!slots_ret) {
 		kvfree(slots);
 		return -ENOMEM;
@@ -150,9 +160,12 @@ static int alloc_swap_slot_cache(unsigned int cpu)
 		spin_lock_init(&cache->free_lock);
 		cache->lock_initialized = true;
 	}
-	cache->nr = 0;
-	cache->cur = 0;
-	cache->n_ret = 0;
+	trace_android_rvh_swap_slots_cache(cache, 0, &skip_initializecache);
+	if (skip_initializecache) {
+		cache->nr = 0;
+		cache->cur = 0;
+		cache->n_ret = 0;
+	}
 	/*
 	 * We initialized alloc_lock and free_lock earlier.  We use
 	 * !cache->slots or !cache->slots_ret to know if it is safe to acquire
@@ -171,13 +184,18 @@ static void drain_slots_cache_cpu(unsigned int cpu, unsigned int type,
 {
 	struct swap_slots_cache *cache;
 	swp_entry_t *slots = NULL;
+	bool skip_initialize_slots = false;
+	bool skip_initialize_slots_ret = false;
 
 	cache = &per_cpu(swp_slots, cpu);
 	if ((type & SLOTS_CACHE) && cache->slots) {
 		mutex_lock(&cache->alloc_lock);
-		swapcache_free_entries(cache->slots + cache->cur, cache->nr);
-		cache->cur = 0;
-		cache->nr = 0;
+		trace_android_rvh_swap_slots_cache(cache, 1, &skip_initialize_slots);
+		if (skip_initialize_slots) {
+			swapcache_free_entries(cache->slots + cache->cur, cache->nr);
+			cache->cur = 0;
+			cache->nr = 0;
+		}
 		if (free_slots && cache->slots) {
 			kvfree(cache->slots);
 			cache->slots = NULL;
@@ -186,8 +204,11 @@ static void drain_slots_cache_cpu(unsigned int cpu, unsigned int type,
 	}
 	if ((type & SLOTS_CACHE_RET) && cache->slots_ret) {
 		spin_lock_irq(&cache->free_lock);
-		swapcache_free_entries(cache->slots_ret, cache->n_ret);
-		cache->n_ret = 0;
+		trace_android_rvh_swap_slots_cache(cache, 2, &skip_initialize_slots_ret);
+		if (skip_initialize_slots_ret) {
+			swapcache_free_entries(cache->slots_ret, cache->n_ret);
+			cache->n_ret = 0;
+		}
 		if (free_slots && cache->slots_ret) {
 			slots = cache->slots_ret;
 			cache->slots_ret = NULL;
@@ -307,8 +328,12 @@ swp_entry_t get_swap_page(struct page *page)
 {
 	swp_entry_t entry;
 	struct swap_slots_cache *cache;
-
+	bool skip = false;
 	entry.val = 0;
+
+	trace_android_rvh_get_swap_slot_info(page, raw_cpu_ptr(&swp_slots), check_cache_active, &entry, &skip);
+	if (skip)
+		return entry;
 
 	if (PageTransHuge(page)) {
 		if (IS_ENABLED(CONFIG_THP_SWAP))
@@ -352,3 +377,4 @@ out:
 	}
 	return entry;
 }
+EXPORT_SYMBOL_GPL(get_swap_page);
