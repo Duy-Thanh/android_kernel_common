@@ -39,6 +39,7 @@
 #include <linux/frontswap.h>
 #include <linux/fs_parser.h>
 #include <linux/mm_inline.h>
+#include <trace/hooks/mm.h>
 
 #include <asm/tlbflush.h> /* for arch/microblaze update_mmu_cache() */
 
@@ -1283,6 +1284,7 @@ static int shmem_unuse_inode(struct inode *inode, unsigned int type,
 	pgoff_t indices[PAGEVEC_SIZE];
 	bool frontswap_partial = (frontswap && *fs_pages_to_unuse > 0);
 	int ret = 0;
+	bool skip = false;
 
 	pagevec_init(&pvec);
 	do {
@@ -1299,7 +1301,9 @@ static int shmem_unuse_inode(struct inode *inode, unsigned int type,
 			break;
 		}
 
-		ret = shmem_unuse_swap_entries(inode, pvec, indices);
+		trace_android_rvh_shmem_unuse_swap_entries(inode, pvec, indices, type, shmem_swapin_page, &ret, &skip);
+		if (skip)
+			ret = shmem_unuse_swap_entries(inode, pvec, indices);
 		if (ret < 0)
 			break;
 
@@ -1374,6 +1378,7 @@ static int shmem_writepage(struct page *page, struct writeback_control *wbc)
 	struct inode *inode;
 	swp_entry_t swap;
 	pgoff_t index;
+	bool skip = false;
 
 	VM_BUG_ON_PAGE(PageCompound(page), page);
 	BUG_ON(!PageLocked(page));
@@ -1430,7 +1435,9 @@ static int shmem_writepage(struct page *page, struct writeback_control *wbc)
 		SetPageUptodate(page);
 	}
 
-	swap = get_swap_page(page);
+	trace_android_rvh_get_swap_page(page, 1, &swap, &skip);
+	if (skip)
+		swap = get_swap_page(page);
 	if (!swap.val)
 		goto redirty;
 
