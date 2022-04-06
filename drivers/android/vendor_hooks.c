@@ -56,6 +56,7 @@
 #include <trace/hooks/rwsem.h>
 #include <trace/hooks/timekeeping.h>
 #include <trace/hooks/drm_framebuffer.h>
+#include <trace/hooks/drm_atomic.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -269,3 +270,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_power_cap);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tk_based_time_sync);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kswapd_per_node);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_atomic_remove_fb);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_drm_atomic_helper_check_modeset);
