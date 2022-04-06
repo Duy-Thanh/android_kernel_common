@@ -15,7 +15,7 @@
 #include <linux/rmap.h>
 #include <linux/swap.h>
 #include <linux/shrinker.h>
-#include <linux/mm_inline.h>
+#include <linux/mm_inline.h>huge_zero_pfn
 #include <linux/swapops.h>
 #include <linux/dax.h>
 #include <linux/khugepaged.h>
@@ -62,6 +62,7 @@ static struct shrinker deferred_split_shrinker;
 static atomic_t huge_zero_refcount;
 struct page *huge_zero_page __read_mostly;
 unsigned long huge_zero_pfn __read_mostly = ~0UL;
+EXPORT_SYMBOL_GPL(huge_zero_pfn);
 
 static inline bool file_thp_enabled(struct vm_area_struct *vma)
 {
@@ -1906,6 +1907,7 @@ spinlock_t *__pmd_trans_huge_lock(pmd_t *pmd, struct vm_area_struct *vma)
 	spin_unlock(ptl);
 	return NULL;
 }
+EXPORT_SYMBOL_GPL(__pmd_trans_huge_lock);
 
 /*
  * Returns true if a given pud maps a thp, false otherwise.
@@ -2765,6 +2767,7 @@ out:
 	count_vm_event(!ret ? THP_SPLIT_PAGE : THP_SPLIT_PAGE_FAILED);
 	return ret;
 }
+EXPORT_SYMBOL_GPL(split_huge_page_to_list);
 
 void free_transhuge_page(struct page *page)
 {
