@@ -292,6 +292,7 @@ struct lruvec {
 	unsigned long			refaults[ANON_AND_FILE];
 	/* Various lruvec state flags (enum lruvec_flags) */
 	unsigned long			flags;
+	ANDROID_OEM_DATA_ARRAY(1, 2);
 #ifdef CONFIG_MEMCG
 	struct pglist_data *pgdat;
 #endif
