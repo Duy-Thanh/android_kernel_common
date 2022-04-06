@@ -666,6 +666,7 @@ static inline void INIT_VMA(struct vm_area_struct *vma)
 	seqcount_init(&vma->vm_sequence);
 	atomic_set(&vma->vm_ref_count, 1);
 #endif
+	android_init_oem_data(vma, 1);
 }
 
 static inline void vma_init(struct vm_area_struct *vma, struct mm_struct *mm)

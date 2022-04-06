@@ -43,6 +43,7 @@
 #include <asm/tlbflush.h>
 #include <linux/swapops.h>
 #include <linux/swap_cgroup.h>
+#include <trace/hooks/mm.h>
 
 static bool swap_count_continued(struct swap_info_struct *, pgoff_t,
 				 unsigned char);
@@ -89,6 +90,7 @@ static struct plist_head *swap_avail_heads;
 static DEFINE_SPINLOCK(swap_avail_lock);
 
 struct swap_info_struct *swap_info[MAX_SWAPFILES];
+EXPORT_SYMBOL_GPL(swap_info);
 
 static DEFINE_MUTEX(swapon_mutex);
 
@@ -712,6 +714,7 @@ static void swap_range_free(struct swap_info_struct *si, unsigned long offset,
 	unsigned long begin = offset;
 	unsigned long end = offset + nr_entries - 1;
 	void (*swap_slot_free_notify)(struct block_device *, unsigned long);
+	int ret = 0;
 
 	if (offset < si->lowest_bit)
 		si->lowest_bit = offset;
@@ -722,7 +725,9 @@ static void swap_range_free(struct swap_info_struct *si, unsigned long offset,
 		if (was_full && (si->flags & SWP_WRITEOK))
 			add_to_avail_list(si);
 	}
-	atomic_long_add(nr_entries, &nr_swap_pages);
+	trace_android_rvh_add_nr_swap_pages(si, nr_entries, &nr_swap_pages, &ret);
+	if (!ret)
+		atomic_long_add(nr_entries, &nr_swap_pages);
 	si->inuse_pages -= nr_entries;
 	if (si->flags & SWP_BLKDEV)
 		swap_slot_free_notify =
@@ -1137,6 +1142,7 @@ swp_entry_t get_swap_page_of_type(int type)
 {
 	struct swap_info_struct *si = swap_type_to_swap_info(type);
 	pgoff_t offset;
+	int ret = 0;
 
 	if (!si)
 		goto fail;
@@ -1146,7 +1152,9 @@ swp_entry_t get_swap_page_of_type(int type)
 		/* This is called for allocating swap entry, not cache */
 		offset = scan_swap_map(si, 1);
 		if (offset) {
-			atomic_long_dec(&nr_swap_pages);
+			trace_android_rvh_dec_nr_swap_pages(si, &nr_swap_pages, &ret);
+			if (!ret)
+				atomic_long_dec(&nr_swap_pages);
 			spin_unlock(&si->lock);
 			return swp_entry(type, offset);
 		}
@@ -1337,12 +1345,16 @@ static unsigned char __swap_entry_free(struct swap_info_struct *p,
 	struct swap_cluster_info *ci;
 	unsigned long offset = swp_offset(entry);
 	unsigned char usage;
+	bool skip = false;
 
 	ci = lock_cluster_or_swap_info(p, offset);
 	usage = __swap_entry_free_locked(p, offset, 1);
 	unlock_cluster_or_swap_info(p, ci);
-	if (!usage)
-		free_swap_slot(entry);
+	if (!usage) {
+		trace_android_rvh_free_swap_slot(entry, p, &skip);
+		if (!skip)
+			free_swap_slot(entry);
+	}
 
 	return usage;
 }
@@ -1390,6 +1402,7 @@ void put_swap_page(struct page *page, swp_entry_t entry)
 	unsigned int i, free_entries = 0;
 	unsigned char val;
 	int size = swap_entry_size(thp_nr_pages(page));
+	bool skip = false;
 
 	si = _swap_info_get(entry);
 	if (!si)
@@ -1418,7 +1431,9 @@ void put_swap_page(struct page *page, swp_entry_t entry)
 	for (i = 0; i < size; i++, entry.val++) {
 		if (!__swap_entry_free_locked(si, offset + i, SWAP_HAS_CACHE)) {
 			unlock_cluster_or_swap_info(si, ci);
-			free_swap_slot(entry);
+			trace_android_rvh_free_swap_slot(entry, si, &skip);
+			if (!skip)
+				free_swap_slot(entry);
 			if (i == size - 1)
 				return;
 			lock_cluster_or_swap_info(si, offset);
@@ -1426,6 +1441,7 @@ void put_swap_page(struct page *page, swp_entry_t entry)
 	}
 	unlock_cluster_or_swap_info(si, ci);
 }
+EXPORT_SYMBOL_GPL(put_swap_page);
 
 #ifdef CONFIG_THP_SWAP
 int split_swap_cluster(swp_entry_t entry)
@@ -1478,6 +1494,7 @@ void swapcache_free_entries(swp_entry_t *entries, int n)
 	if (p)
 		spin_unlock(&p->lock);
 }
+EXPORT_SYMBOL_GPL(swapcache_free_entries);
 
 /*
  * How many references to page are currently swapped out?
@@ -2007,6 +2024,7 @@ static int unuse_pte_range(struct vm_area_struct *vma, pmd_t *pmd,
 		}
 
 		try_to_free_swap(page);
+		trace_android_rvh_set_page_hot(si, page);
 		unlock_page(page);
 		put_page(page);
 
@@ -2245,6 +2263,7 @@ retry:
 		lock_page(page);
 		wait_on_page_writeback(page);
 		try_to_free_swap(page);
+		trace_android_rvh_set_page_hot(si, page);
 		unlock_page(page);
 		put_page(page);
 
@@ -2499,9 +2518,13 @@ static void setup_swap_info(struct swap_info_struct *p, int prio,
 
 static void _enable_swap_info(struct swap_info_struct *p)
 {
+	int ret = 0;
 	p->flags |= SWP_WRITEOK | SWP_VALID;
-	atomic_long_add(p->pages, &nr_swap_pages);
-	total_swap_pages += p->pages;
+	trace_android_rvh_add_nr_total_swap_pages(p, &nr_swap_pages, &total_swap_pages, &ret);
+	if (!ret) {
+		atomic_long_add(p->pages, &nr_swap_pages);
+		total_swap_pages += p->pages;
+        }
 
 	assert_spin_locked(&swap_lock);
 	/*
@@ -2574,6 +2597,7 @@ SYSCALL_DEFINE1(swapoff, const char __user *, specialfile)
 	struct filename *pathname;
 	int err, found = 0;
 	unsigned int old_block_size;
+	int ret = 0;
 
 	if (!capable(CAP_SYS_ADMIN))
 		return -EPERM;
@@ -2628,8 +2652,11 @@ SYSCALL_DEFINE1(swapoff, const char __user *, specialfile)
 		least_priority++;
 	}
 	plist_del(&p->list, &swap_active_head);
-	atomic_long_sub(p->pages, &nr_swap_pages);
-	total_swap_pages -= p->pages;
+	trace_android_rvh_add_nr_total_swap_pages(p, &nr_swap_pages, &total_swap_pages, &ret);
+	if (!ret) {
+		atomic_long_sub(p->pages, &nr_swap_pages);
+		total_swap_pages -= p->pages;
+        }
 	p->flags &= ~SWP_WRITEOK;
 	spin_unlock(&p->lock);
 	spin_unlock(&swap_lock);
@@ -2927,6 +2954,9 @@ static struct swap_info_struct *alloc_swap_info(void)
 	kvfree(defer);
 	spin_lock_init(&p->lock);
 	spin_lock_init(&p->cont_lock);
+	trace_android_rvh_get_nr_swapfiles(nr_swapfiles);
+	trace_android_rvh_scan_swap_map_slots(scan_swap_map_slots);
+	trace_android_rvh_swap_alloc_cluster(swap_alloc_cluster);
 
 	return p;
 }
@@ -3114,6 +3144,7 @@ static int setup_swap_map_and_extents(struct swap_info_struct *p,
 		inc_cluster_info_page(p, cluster_info, 0);
 		p->max = maxpages;
 		p->pages = nr_good_pages;
+		trace_android_rvh_init_swap_info_struct(p);
 		nr_extents = setup_swap_extents(p, span);
 		if (nr_extents < 0)
 			return nr_extents;
@@ -3190,6 +3221,7 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
 	if (!swap_avail_heads)
 		return -ENOMEM;
 
+	trace_android_rvh_get_swap_avail_heads(swap_avail_heads);
 	p = alloc_swap_info();
 	if (IS_ERR(p))
 		return PTR_ERR(p);
@@ -3252,6 +3284,7 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
 
 	if (p->bdev && blk_queue_stable_writes(p->bdev->bd_disk->queue))
 		p->flags |= SWP_STABLE_WRITES;
+	trace_android_rvh_add_swp_hot_flag(p);
 
 	if (p->bdev && p->bdev->bd_disk->fops->rw_page)
 		p->flags |= SWP_SYNCHRONOUS_IO;
@@ -3368,6 +3401,7 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
 		prio =
 		  (swap_flags & SWAP_FLAG_PRIO_MASK) >> SWAP_FLAG_PRIO_SHIFT;
 	enable_swap_info(p, prio, swap_map, cluster_info, frontswap_map);
+	trace_android_rvh_get_swap_size(p);
 
 	pr_info("Adding %uk swap on %s.  Priority:%d extents:%d across:%lluk %s%s%s%s%s\n",
 		p->pages<<(PAGE_SHIFT-10), name->name, p->prio,
@@ -3429,13 +3463,17 @@ void si_swapinfo(struct sysinfo *val)
 {
 	unsigned int type;
 	unsigned long nr_to_be_unused = 0;
+	int ret = 0;
 
 	spin_lock(&swap_lock);
 	for (type = 0; type < nr_swapfiles; type++) {
 		struct swap_info_struct *si = swap_info[type];
 
-		if ((si->flags & SWP_USED) && !(si->flags & SWP_WRITEOK))
-			nr_to_be_unused += si->inuse_pages;
+		trace_android_rvh_si_swapinfo(si, &nr_to_be_unused, &ret);
+		if (!ret) {
+			if ((si->flags & SWP_USED) && !(si->flags & SWP_WRITEOK))
+				nr_to_be_unused += si->inuse_pages;
+		}
 	}
 	val->freeswap = atomic_long_read(&nr_swap_pages) + nr_to_be_unused;
 	val->totalswap = total_swap_pages + nr_to_be_unused;
@@ -3856,6 +3894,8 @@ static int __init swapfile_init(void)
 
 	for_each_node(nid)
 		plist_head_init(&swap_avail_heads[nid]);
+
+	trace_android_rvh_get_swap_avail_heads(swap_avail_heads);
 
 	return 0;
 }
