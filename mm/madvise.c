@@ -31,6 +31,8 @@
 #include <linux/swapops.h>
 #include <linux/shmem_fs.h>
 #include <linux/mmu_notifier.h>
+#include <trace/hooks/mm.h>
+#include <trace/hooks/sched.h>
 
 #include <asm/tlb.h>
 
@@ -48,6 +50,11 @@ struct madvise_walk_private {
  */
 static int madvise_need_mmap_write(int behavior)
 {
+	int ret = 0;
+	trace_android_rvh_madvise_case_memfusion(&ret, behavior);
+	if (ret) {
+		return 0;
+	}
 	switch (behavior) {
 	case MADV_REMOVE:
 	case MADV_WILLNEED:
