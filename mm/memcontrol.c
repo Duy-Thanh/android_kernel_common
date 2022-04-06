@@ -73,6 +73,7 @@ struct cgroup_subsys memory_cgrp_subsys __read_mostly;
 EXPORT_SYMBOL(memory_cgrp_subsys);
 
 struct mem_cgroup *root_mem_cgroup __read_mostly;
+EXPORT_SYMBOL_GPL(root_mem_cgroup);
 
 /* Active memory cgroup to use from an interrupt context */
 DEFINE_PER_CPU(struct mem_cgroup *, int_active_memcg);
@@ -7297,6 +7298,7 @@ int __mem_cgroup_try_charge_swap(struct page *page, swp_entry_t entry)
 
 	return 0;
 }
+EXPORT_SYMBOL_GPL(__mem_cgroup_try_charge_swap);
 
 /**
  * __mem_cgroup_uncharge_swap - uncharge swap space

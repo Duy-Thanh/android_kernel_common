@@ -817,6 +817,7 @@ static bool page_referenced_one(struct page *page, struct vm_area_struct *vma,
 		pra->vm_flags |= vma->vm_flags;
 	}
 
+	trace_android_rvh_page_referenced_one(vma, pra);
 	if (!pra->mapcount)
 		return false; /* To break the loop */
 
