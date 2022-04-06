@@ -65,6 +65,7 @@
 
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/vmscan.h>
+#include <linux/swap_slots.h>
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(mm_vmscan_direct_reclaim_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(mm_vmscan_direct_reclaim_end);
@@ -146,6 +147,8 @@ struct scan_control {
 
 	/* Number of pages freed so far during a call to shrink_zones() */
 	unsigned long nr_reclaimed;
+
+	ANDROID_OEM_DATA(1);
 
 	struct {
 		unsigned int dirty;
@@ -1025,6 +1028,7 @@ static enum page_references page_check_references(struct page *page,
 	referenced_ptes = page_referenced(page, 1, sc->target_mem_cgroup,
 					  &vm_flags);
 	referenced_page = TestClearPageReferenced(page);
+	trace_android_rvh_page_check_references(&(sc->android_oem_data1), vm_flags);
 
 	/*
 	 * Mlock lost the isolation race with us.  Let try_to_unmap()
@@ -1112,6 +1116,7 @@ static unsigned int shrink_page_list(struct list_head *page_list,
 	LIST_HEAD(free_pages);
 	unsigned int nr_reclaimed = 0;
 	unsigned int pgactivate = 0;
+	int ret = 0;
 
 	memset(stat, 0, sizeof(*stat));
 	cond_resched();
@@ -1289,18 +1294,24 @@ static unsigned int shrink_page_list(struct list_head *page_list,
 								    page_list))
 						goto activate_locked;
 				}
-				if (!add_to_swap(page)) {
-					if (!PageTransHuge(page))
-						goto activate_locked_split;
-					/* Fallback to swap normal pages */
-					if (split_huge_page_to_list(page,
-								    page_list))
-						goto activate_locked;
+				trace_android_rvh_shrink_page_list(page, sc->android_oem_data1, swap_slot_cache_enabled, &ret);
+				if (!ret) {
+					if (!add_to_swap(page)) {
+						if (!PageTransHuge(page))
+							goto activate_locked_split;
+						/* Fallback to swap normal pages */
+						if (split_huge_page_to_list(page,
+									    page_list))
+							goto activate_locked;
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
-					count_vm_event(THP_SWPOUT_FALLBACK);
+						count_vm_event(THP_SWPOUT_FALLBACK);
 #endif
-					if (!add_to_swap(page))
-						goto activate_locked_split;
+						trace_android_rvh_shrink_page_list(page, sc->android_oem_data1, swap_slot_cache_enabled, &ret);
+						if (!ret){
+							if (!add_to_swap(page))
+								goto activate_locked_split;
+                                                }
+                                        }
 				}
 
 				may_enter_fs = true;
@@ -2266,15 +2277,19 @@ static bool inactive_is_low(struct lruvec *lruvec, enum lru_list inactive_lru)
 	unsigned long inactive, active;
 	unsigned long inactive_ratio;
 	unsigned long gb;
+	int ret = 0;
 
 	inactive = lruvec_page_state(lruvec, NR_LRU_BASE + inactive_lru);
 	active = lruvec_page_state(lruvec, NR_LRU_BASE + active_lru);
 
 	gb = (inactive + active) >> (30 - PAGE_SHIFT);
-	if (gb)
-		inactive_ratio = int_sqrt(10 * gb);
-	else
-		inactive_ratio = 1;
+	trace_android_rvh_inactive_is_low(&ret, gb, &inactive_ratio, inactive_lru);
+	if (!ret) {
+		if (gb)
+			inactive_ratio = int_sqrt(10 * gb);
+		else
+			inactive_ratio = 1;
+	}
 
 	trace_android_vh_tune_inactive_ratio(&inactive_ratio, is_file_lru(inactive_lru));
 
@@ -3069,6 +3084,7 @@ static void snapshot_refaults(struct mem_cgroup *target_memcg, pg_data_t *pgdat)
 	target_lruvec->refaults[0] = refaults;
 	refaults = lruvec_page_state(target_lruvec, WORKINGSET_ACTIVATE_FILE);
 	target_lruvec->refaults[1] = refaults;
+	trace_android_rvh_snapshot_refaults(target_lruvec, refaults);
 }
 
 /*
