@@ -31,6 +31,8 @@
 #include <linux/swapops.h>
 #include <linux/shmem_fs.h>
 #include <linux/mmu_notifier.h>
+#include <trace/hooks/mm.h>
+#include <trace/hooks/sched.h>
 
 #include <asm/tlb.h>
 
@@ -48,6 +50,11 @@ struct madvise_walk_private {
  */
 static int madvise_need_mmap_write(int behavior)
 {
+	int ret = 0;
+	trace_android_rvh_madvise_case_memfusion(&ret, behavior);
+	if (ret) {
+		return 0;
+	}
 	switch (behavior) {
 	case MADV_REMOVE:
 	case MADV_WILLNEED:
@@ -897,6 +904,11 @@ static int madvise_vma_behavior(struct vm_area_struct *vma,
 	int error;
 	struct anon_vma_name *anon_name;
 	unsigned long new_flags = vma->vm_flags;
+	int ret = 1;
+	trace_android_rvh_madvise_vma(&ret, vma, prev, start, end, behavior);
+	if (ret <= 0) {
+		return ret;
+	}
 
 	switch (behavior) {
 	case MADV_REMOVE:
@@ -1030,6 +1042,11 @@ static int madvise_inject_error(int behavior,
 static bool
 madvise_behavior_valid(int behavior)
 {
+	int ret = 0;
+	trace_android_rvh_madvise_case_memfusion(&ret, behavior);
+	if (ret) {
+		return true;
+	}
 	switch (behavior) {
 	case MADV_DOFORK:
 	case MADV_DONTFORK:
@@ -1068,6 +1085,11 @@ madvise_behavior_valid(int behavior)
 static bool
 process_madvise_behavior_valid(int behavior)
 {
+	int ret = 0;
+	trace_android_rvh_madvise_case_memfusion(&ret, behavior);
+	if (ret) {
+		return true;
+	}
 	switch (behavior) {
 	case MADV_COLD:
 	case MADV_PAGEOUT:
