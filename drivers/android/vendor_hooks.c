@@ -54,6 +54,7 @@
 #include <trace/hooks/thermal.h>
 #include <trace/hooks/rwsem.h>
 #include <trace/hooks/drm_framebuffer.h>
+#include <trace/hooks/drm_atomic.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -265,3 +266,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_finished);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_rwsem_list_add);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_power_cap);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_atomic_remove_fb);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_drm_atomic_helper_check_modeset);
