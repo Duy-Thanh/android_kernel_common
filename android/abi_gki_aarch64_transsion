@@ -1,0 +1,25 @@
+[abi_symbol_list]
+  activate_task
+  add_to_swap_cache
+  root_mem_cgroup
+  huge_zero_pfn
+  __mmu_notifier_invalidate_range
+  mte_sync_tags
+  split_huge_page_to_list
+  __pmd_trans_huge_lock
+  reclaim_pages
+  deactivate_page
+  putback_lru_page
+  isolate_lru_page
+  pmdp_invalidate
+  walk_page_range
+  tlb_finish_mmu
+  tlb_gather_mmu
+  lru_add_drain
+  swap_slot_cache_enabled
+  swapcache_free_entries
+  __mem_cgroup_try_charge_swap
+  put_swap_page
+  get_swap_page
+  swap_info
+  _vm_normal_page

@@ -77,6 +77,7 @@ void mte_sync_tags(pte_t old_pte, pte_t pte)
 					   pte_is_tagged);
 	}
 }
+EXPORT_SYMBOL_GPL(mte_sync_tags);
 
 int memcmp_pages(struct page *page1, struct page *page2)
 {
