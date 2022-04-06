@@ -286,6 +286,7 @@ void tlb_gather_mmu(struct mmu_gather *tlb, struct mm_struct *mm,
 	__tlb_reset_range(tlb);
 	inc_tlb_flush_pending(tlb->mm);
 }
+EXPORT_SYMBOL_GPL(tlb_gather_mmu);
 
 /**
  * tlb_finish_mmu - finish an mmu_gather structure
@@ -332,3 +333,4 @@ void tlb_finish_mmu(struct mmu_gather *tlb,
 #endif
 	dec_tlb_flush_pending(tlb->mm);
 }
+EXPORT_SYMBOL_GPL(tlb_finish_mmu);

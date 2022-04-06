@@ -23,6 +23,7 @@
 #include <linux/huge_mm.h>
 #include <linux/shmem_fs.h>
 #include "internal.h"
+#include <trace/hooks/mm.h>
 
 /*
  * swapper_space is a fiction, retained to simplify the path through
@@ -176,6 +177,7 @@ unlock:
 	page_ref_sub(page, nr);
 	return xas_error(&xas);
 }
+EXPORT_SYMBOL_GPL(add_to_swap_cache);
 
 /*
  * This must be called only on pages that have
@@ -219,6 +221,9 @@ int add_to_swap(struct page *page)
 	swp_entry_t entry;
 	int err;
 
+	trace_android_rvh_add_to_swap(&err);
+	if (err)
+		return 0;
 	VM_BUG_ON_PAGE(!PageLocked(page), page);
 	VM_BUG_ON_PAGE(!PageUptodate(page), page);
 

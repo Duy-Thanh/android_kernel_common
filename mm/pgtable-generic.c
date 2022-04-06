@@ -198,6 +198,7 @@ pmd_t pmdp_invalidate(struct vm_area_struct *vma, unsigned long address,
 	flush_pmd_tlb_range(vma, address, address + HPAGE_PMD_SIZE);
 	return old;
 }
+EXPORT_SYMBOL_GPL(pmdp_invalidate);
 #endif
 
 #ifndef pmdp_collapse_flush
