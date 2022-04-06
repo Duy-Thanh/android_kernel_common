@@ -54,7 +54,11 @@
 #include <trace/hooks/fips140.h>
 #include <trace/hooks/thermal.h>
 #include <trace/hooks/rwsem.h>
+<<<<<<< HEAD
 #include <trace/hooks/timekeeping.h>
+=======
+#include <trace/hooks/audio_usboffload.h>
+>>>>>>> 44f37afcf1f2... ANDROID: Add vendor hook to support audio usb offload
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -267,3 +271,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_rwsem_list_add);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_power_cap);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_tk_based_time_sync);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kswapd_per_node);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_audio_usb_offload_vendor_set);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_audio_usb_offload_ep_action);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_audio_usb_offload_synctype);
