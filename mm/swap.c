@@ -744,6 +744,7 @@ void deactivate_page(struct page *page)
 		local_unlock(&lru_pvecs.lock);
 	}
 }
+EXPORT_SYMBOL_GPL(deactivate_page);
 
 /**
  * mark_page_lazyfree - make an anon page lazyfree
@@ -796,6 +797,7 @@ void lru_add_drain(void)
 	lru_add_drain_cpu(smp_processor_id());
 	local_unlock(&lru_pvecs.lock);
 }
+EXPORT_SYMBOL_GPL(lru_add_drain);
 
 void lru_add_drain_cpu_zone(struct zone *zone)
 {

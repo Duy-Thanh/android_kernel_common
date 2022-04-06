@@ -28,6 +28,18 @@ DECLARE_HOOK(android_vh_do_shrink_slab,
 DECLARE_RESTRICTED_HOOK(android_rvh_set_balance_anon_file_reclaim,
 			TP_PROTO(bool *balance_anon_file_reclaim),
 			TP_ARGS(balance_anon_file_reclaim), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_inactive_is_low,
+	TP_PROTO(int *ret, unsigned long gb, unsigned long *inactive_ratio, enum lru_list inactive_lru),
+	TP_ARGS(ret, gb, inactive_ratio, inactive_lru), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_page_check_references,
+	TP_PROTO(u64 *oem_data1, unsigned long vm_flags),
+	TP_ARGS(oem_data1, vm_flags), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_snapshot_refaults,
+	TP_PROTO(struct lruvec *target_lruvec, unsigned long refaults),
+	TP_ARGS(target_lruvec, refaults), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_shrink_page_list,
+	TP_PROTO(struct page *page, u64 hotness, bool swap_slot_cache_enabled, int *ret),
+	TP_ARGS(page, hotness, swap_slot_cache_enabled, ret), 1);
 #endif /* _TRACE_HOOK_VMSCAN_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
