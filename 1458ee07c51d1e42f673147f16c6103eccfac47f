@@ -16,6 +16,24 @@
       "message": "Again, please document this in the comment for the hook itself.",
       "revId": "1458ee07c51d1e42f673147f16c6103eccfac47f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c0433c6_1ace6fb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1928107
+      },
+      "writtenOn": "2022-04-06T02:45:20Z",
+      "side": 1,
+      "message": "Did you mean to add a detailed comment above trace_android_vh_enable_thermal_power_throttle(\u0026enable, \u0026override);? \nSince comments in functions are best kept brief, I just added a short one-line comment in patchset3.",
+      "parentUuid": "e068df10_5447fc7d",
+      "revId": "1458ee07c51d1e42f673147f16c6103eccfac47f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
