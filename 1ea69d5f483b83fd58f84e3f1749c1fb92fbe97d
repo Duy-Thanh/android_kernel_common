@@ -16,6 +16,29 @@
       "message": "Cherrypick from android13-5.15. Please review. Thank you!",
       "revId": "1ea69d5f483b83fd58f84e3f1749c1fb92fbe97d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01435e80_1fc3f4da",
+        "filename": "include/trace/hooks/thermal.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-07T12:13:56Z",
+      "side": 1,
+      "message": "not needed anymore, right?",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 27
+      },
+      "revId": "1ea69d5f483b83fd58f84e3f1749c1fb92fbe97d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
