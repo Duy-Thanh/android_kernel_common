@@ -22,6 +22,30 @@
       },
       "revId": "7e6e12e709a05bd212cb9c2f7b3d76aab2e461e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6647b40e_af3908ef",
+        "filename": "virt/kvm/kvm_main.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1524,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-04-07T12:12:39Z",
+      "side": 1,
+      "message": "Sorry, copy-paste error there. I meant to say:\n\nCan you avoid the new function if you change `kvm_arch_flush_shadow_memslot` to do nothing for pKVM and then reject the change later in `kvm_arch_prepare_memory_region`?\n\nIn any case, I don\u0027t think rejecting these requests blindly is the right thing to do -- the VMM should be able to mess around arbitrarily with memslots before the VM has run.",
+      "parentUuid": "93442154_5d2394e9",
+      "range": {
+        "startLine": 1524,
+        "startChar": 11,
+        "endLine": 1524,
+        "endChar": 37
+      },
+      "revId": "7e6e12e709a05bd212cb9c2f7b3d76aab2e461e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
