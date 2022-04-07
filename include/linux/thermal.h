@@ -300,6 +300,8 @@ struct thermal_zone_params {
 	 */
 	int offset;
 
+	s32 default_err_integral;
+
 	ANDROID_KABI_RESERVE(1);
 };
 

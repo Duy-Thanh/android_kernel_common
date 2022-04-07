@@ -69,6 +69,7 @@ static inline s64 div_frac(s64 x, s64 y)
 struct power_allocator_params {
 	bool allocated_tzp;
 	s64 err_integral;
+	s64 default_err_integral;
 	s32 prev_err;
 	int trip_switch_on;
 	int trip_max_desired_temperature;
@@ -220,8 +221,15 @@ static u32 pid_controller(struct thermal_zone_device *tz,
 
 	if (err < int_to_frac(tz->tzp->integral_cutoff)) {
 		s64 i_next = i + mul_frac(tz->tzp->k_i, err);
+		s64 i_windup = int_to_frac(-1 * (s64)sustainable_power);
 
-		if (abs(i_next) < max_power_frac) {
+		if (i_next > int_to_frac((s64)tz->tzp->default_err_integral)) {
+			i = int_to_frac((s64)tz->tzp->default_err_integral);
+			params->err_integral = div_frac(i, tz->tzp->k_i);
+		} else if (i_next <= i_windup) {
+			i = i_windup;
+			params->err_integral = div_frac(i, tz->tzp->k_i);
+		} else {
 			i = i_next;
 			params->err_integral += err;
 		}
@@ -510,7 +518,7 @@ static void get_governor_trips(struct thermal_zone_device *tz,
 
 static void reset_pid_controller(struct power_allocator_params *params)
 {
-	params->err_integral = 0;
+	params->err_integral = params->default_err_integral;
 	params->prev_err = 0;
 }
 
@@ -578,6 +586,7 @@ static int power_allocator_bind(struct thermal_zone_device *tz)
 					       control_temp, false);
 	}
 
+	params->default_err_integral = tz->tzp->default_err_integral;
 	reset_pid_controller(params);
 
 	tz->governor_data = params;
