@@ -1857,6 +1857,13 @@ int kvm_arch_prepare_memory_region(struct kvm *kvm,
 			change != KVM_MR_FLAGS_ONLY)
 		return 0;
 
+	/* In protected mode, cannot modify memslots once a VM has run. */
+	if (static_branch_unlikely(&kvm_protected_mode_initialized) &&
+	    (change == KVM_MR_DELETE || change == KVM_MR_MOVE) &&
+	    test_bit(KVM_ARCH_FLAG_HAS_RAN_ONCE, &kvm->arch.flags)) {
+		    return -EPERM;
+	}
+
 	/*
 	 * Prevent userspace from creating a memory region outside of the IPA
 	 * space addressable by the KVM guest IPA space.
@@ -1925,6 +1932,10 @@ void kvm_arch_flush_shadow_memslot(struct kvm *kvm,
 {
 	gpa_t gpa = slot->base_gfn << PAGE_SHIFT;
 	phys_addr_t size = slot->npages << PAGE_SHIFT;
+
+	/* Stage-2 is managed by hyp in protected mode. */
+	if (static_branch_unlikely(&kvm_protected_mode_initialized))
+		return;
 
 	spin_lock(&kvm->mmu_lock);
 	unmap_stage2_range(&kvm->arch.mmu, gpa, size);
