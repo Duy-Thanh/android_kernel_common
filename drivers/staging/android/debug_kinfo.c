@@ -174,6 +174,44 @@ static int debug_kinfo_probe(struct platform_device *pdev)
 	info->module_start_va = VMALLOC_START;
 	info->module_end_va = VMALLOC_END;
 #endif
+
+#if defined(CONFIG_KVM)
+	info->__hyp_rodata_start_pa = (u64)__pa_symbol((volatile void *)__hyp_rodata_start);
+	info->__hyp_rodata_end_pa = (u64)__pa_symbol((volatile void *)__hyp_rodata_end);
+	info->__hyp_data_start_pa = (u64)__pa_symbol((volatile void *)__hyp_data_start);
+	info->__hyp_data_end_pa = (u64)__pa_symbol((volatile void *)__hyp_data_end);
+	info->__hyp_reloc_begin_pa = (u64)__pa_symbol((volatile void *)__hyp_reloc_begin);
+	info->__hyp_reloc_end_pa = (u64)__pa_symbol((volatile void *)__hyp_reloc_end);
+	info->__hyp_bss_start_pa = (u64)__pa_symbol((volatile void *)__hyp_bss_start);
+	info->__hyp_bss_end_pa = (u64)__pa_symbol((volatile void *)__hyp_bss_end);
+#endif
+	info->__hyp_idmap_text_start_pa = (u64)__pa_symbol((volatile void *)__hyp_idmap_text_start);
+	info->__hyp_idmap_text_end_pa = (u64)__pa_symbol((volatile void *)__hyp_idmap_text_end);
+	info->__hyp_text_start_pa = (u64)__pa_symbol((volatile void *)__hyp_text_start);
+	info->__hyp_text_end_pa = (u64)__pa_symbol((volatile void *)__hyp_text_end);
+	info->__idmap_text_start_pa = (u64)__pa_symbol((volatile void *)__idmap_text_start);
+	info->__idmap_text_end_pa = (u64)__pa_symbol((volatile void *)__idmap_text_end);
+#if defined(CONFIG_HIBERNATION)
+	info->__hibernate_exit_text_start_pa = (u64)__pa_symbol((volatile void *)__hibernate_exit_text_start);
+	info->__hibernate_exit_text_end_pa = (u64)__pa_symbol((volatile void *)__hibernate_exit_text_end);
+#endif
+#if defined(CONFIG_UNMAP_KERNEL_AT_EL0)
+	info->__entry_tramp_text_start_pa = (u64)__pa_symbol((volatile void *)__entry_tramp_text_start);
+	info->__entry_tramp_text_end_pa = (u64)__pa_symbol((volatile void *)__entry_tramp_text_end);
+#endif
+	info->__alt_instructions_pa = (u64)__pa_symbol((volatile void *)__alt_instructions);
+	info->__alt_instructions_end_pa = (u64)__pa_symbol((volatile void *)__alt_instructions_end);
+	info->__initdata_begin_pa = (u64)__pa_symbol((volatile void *)__initdata_begin);
+	info->__initdata_end_pa = (u64)__pa_symbol((volatile void *)__initdata_end);
+	info->__inittext_begin_pa = (u64)__pa_symbol((volatile void *)__inittext_begin);
+	info->__inittext_end_pa = (u64)__pa_symbol((volatile void *)__inittext_end);
+	info->__exittext_begin_pa = (u64)__pa_symbol((volatile void *)__exittext_begin);
+	info->__exittext_end_pa = (u64)__pa_symbol((volatile void *)__exittext_end);
+	info->__irqentry_text_start_pa = (u64)__pa_symbol((volatile void *)__irqentry_text_start);
+	info->__irqentry_text_end_pa = (u64)__pa_symbol((volatile void *)__irqentry_text_end);
+	info->__mmuoff_data_start_pa = (u64)__pa_symbol((volatile void *)__mmuoff_data_start);
+	info->__mmuoff_data_end_pa = (u64)__pa_symbol((volatile void *)__mmuoff_data_end);
+
 	update_kernel_all_info(all_info);
 
 	return 0;

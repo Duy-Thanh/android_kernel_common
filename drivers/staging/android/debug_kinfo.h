@@ -60,6 +60,38 @@ struct kernel_info {
 	__u32 mod_kallsyms_offset;
 	__u64 module_start_va;
 	__u64 module_end_va;
+
+	/* For kvm */
+	__u64 __alt_instructions_pa;
+	__u64 __alt_instructions_end_pa;
+	__u64 __hibernate_exit_text_start_pa;
+	__u64 __hibernate_exit_text_end_pa;
+	__u64 __hyp_idmap_text_start_pa;
+	__u64 __hyp_idmap_text_end_pa;
+	__u64 __hyp_text_start_pa;
+	__u64 __hyp_text_end_pa;
+	__u64 __hyp_data_start_pa;
+	__u64 __hyp_data_end_pa;
+	__u64 __hyp_rodata_start_pa;
+	__u64 __hyp_rodata_end_pa;
+	__u64 __hyp_reloc_begin_pa;
+	__u64 __hyp_reloc_end_pa;
+	__u64 __hyp_bss_start_pa;
+	__u64 __hyp_bss_end_pa;
+	__u64 __idmap_text_start_pa;
+	__u64 __idmap_text_end_pa;
+	__u64 __initdata_begin_pa;
+	__u64 __initdata_end_pa;
+	__u64 __inittext_begin_pa;
+	__u64 __inittext_end_pa;
+	__u64 __exittext_begin_pa;
+	__u64 __exittext_end_pa;
+	__u64 __irqentry_text_start_pa;
+	__u64 __irqentry_text_end_pa;
+	__u64 __mmuoff_data_start_pa;
+	__u64 __mmuoff_data_end_pa;
+	__u64 __entry_tramp_text_start_pa;
+	__u64 __entry_tramp_text_end_pa;
 } __packed;
 
 struct kernel_all_info {
