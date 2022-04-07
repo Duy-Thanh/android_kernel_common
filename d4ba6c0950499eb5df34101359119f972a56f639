@@ -118,6 +118,30 @@
       },
       "revId": "d4ba6c0950499eb5df34101359119f972a56f639",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "808b3f16_0ccb8b78",
+        "filename": "drivers/thermal/gov_power_allocator.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1928107
+      },
+      "writtenOn": "2022-04-07T06:29:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e85a151b_898061fc",
+      "range": {
+        "startLine": 727,
+        "startChar": 0,
+        "endLine": 727,
+        "endChar": 68
+      },
+      "revId": "d4ba6c0950499eb5df34101359119f972a56f639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
