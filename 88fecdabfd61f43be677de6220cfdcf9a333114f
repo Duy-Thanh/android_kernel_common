@@ -22,6 +22,30 @@
       },
       "revId": "88fecdabfd61f43be677de6220cfdcf9a333114f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9455caaa_5614ee02",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1928107
+      },
+      "writtenOn": "2022-04-07T12:11:35Z",
+      "side": 1,
+      "message": "The conflicts have been resolved in patchset3. Please review. Thank you!",
+      "parentUuid": "9957c15d_b50556da",
+      "range": {
+        "startLine": 260,
+        "startChar": 0,
+        "endLine": 260,
+        "endChar": 74
+      },
+      "revId": "88fecdabfd61f43be677de6220cfdcf9a333114f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
