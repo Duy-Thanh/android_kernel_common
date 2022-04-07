@@ -46,6 +46,30 @@
       },
       "revId": "7e6e12e709a05bd212cb9c2f7b3d76aab2e461e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb984de1_8ba4be0f",
+        "filename": "virt/kvm/kvm_main.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1524,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2022-04-07T12:19:59Z",
+      "side": 1,
+      "message": "I think this would simplify the code. Let me rework it and repost.",
+      "parentUuid": "6647b40e_af3908ef",
+      "range": {
+        "startLine": 1524,
+        "startChar": 11,
+        "endLine": 1524,
+        "endChar": 37
+      },
+      "revId": "7e6e12e709a05bd212cb9c2f7b3d76aab2e461e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
