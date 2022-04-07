@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5411676_d418c0fd",
+        "filename": "drivers/gpu/drm/drm_framebuffer.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 1946235
+      },
+      "writtenOn": "2022-04-07T02:33:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b825dddb_773da614",
+      "revId": "955a554024448095aec10430d068b75ab499d4a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d51e9402_f30907a5",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-04-06T19:24:54Z",
       "side": 1,
       "message": "this inclusion is no longer needed, please remove (as of 04/06 KMI update)",
+      "revId": "955a554024448095aec10430d068b75ab499d4a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cfc2b7d_c5050ef6",
+        "filename": "include/trace/hooks/drm_framebuffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1946235
+      },
+      "writtenOn": "2022-04-07T02:33:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d51e9402_f30907a5",
       "revId": "955a554024448095aec10430d068b75ab499d4a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
