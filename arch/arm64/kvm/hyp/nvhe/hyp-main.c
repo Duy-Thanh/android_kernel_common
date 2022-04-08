@@ -1050,6 +1050,15 @@ static void handle___pkvm_iommu_finalize(struct kvm_cpu_context *host_ctxt)
 	cpu_reg(host_ctxt, 1) = __pkvm_iommu_finalize();
 }
 
+static void handle___host_debug_hyp_panic(struct kvm_cpu_context *host_ctxt)
+{
+	u64 spsr = read_sysreg_el2(SYS_SPSR);
+	u64 elr = read_sysreg_el2(SYS_ELR);
+	u64 par = read_sysreg_par();
+
+	__hyp_do_panic(host_ctxt, spsr, elr, par);
+}
+
 typedef void (*hcall_t)(struct kvm_cpu_context *);
 
 #define HANDLE_FUNC(x)	[__KVM_HOST_SMCCC_FUNC_##x] = (hcall_t)handle_##x
@@ -1087,6 +1096,7 @@ static const hcall_t host_hcall[] = {
 	HANDLE_FUNC(__pkvm_iommu_register),
 	HANDLE_FUNC(__pkvm_iommu_pm_notify),
 	HANDLE_FUNC(__pkvm_iommu_finalize),
+	HANDLE_FUNC(__host_debug_hyp_panic),
 };
 
 static inline u64 kernel__text_addr(void)

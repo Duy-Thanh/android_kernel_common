@@ -2314,6 +2314,12 @@ enum kvm_mode kvm_get_mode(void)
 	return kvm_mode;
 }
 
+void hyp_debug_testpoint(void)
+{
+	kvm_call_hyp_nvhe(__host_debug_hyp_panic);
+}
+EXPORT_SYMBOL_GPL(hyp_debug_testpoint);
+
 static int arm_init(void)
 {
 	int rc = kvm_init(NULL, sizeof(struct kvm_vcpu), 0, THIS_MODULE);
