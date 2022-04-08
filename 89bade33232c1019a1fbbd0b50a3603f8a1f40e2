@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0e89e3f_fd6cd6b9",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1863,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2022-04-08T09:33:31Z",
+      "side": 1,
+      "message": "This would be test_bit(KVM_ARCH_FLAG_HAS_RAN_ONCE, \u0026kvm-\u003earch.flags) in 5.18",
+      "revId": "89bade33232c1019a1fbbd0b50a3603f8a1f40e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
