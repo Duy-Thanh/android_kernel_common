@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1295f158_ebd7bec8",
+        "filename": "drivers/cpufreq/cpufreq.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1632,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-08T05:30:24Z",
+      "side": 1,
+      "message": "pass in policy please not the cdev.",
+      "range": {
+        "startLine": 1632,
+        "startChar": 38,
+        "endLine": 1632,
+        "endChar": 44
+      },
+      "revId": "ce32a3fba7c4c9d485c952aca42e46812745e9b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
