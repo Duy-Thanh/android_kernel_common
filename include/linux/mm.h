@@ -666,6 +666,8 @@ static inline void INIT_VMA(struct vm_area_struct *vma)
 	seqcount_init(&vma->vm_sequence);
 	atomic_set(&vma->vm_ref_count, 1);
 #endif
+    vma->android_kabi_reserved3 = 0;
+    vma->android_kabi_reserved4 = 0;
 }
 
 static inline void vma_init(struct vm_area_struct *vma, struct mm_struct *mm)
