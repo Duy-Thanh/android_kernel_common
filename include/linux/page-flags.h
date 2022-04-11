@@ -142,6 +142,9 @@ enum pageflags {
 #ifdef CONFIG_KASAN_HW_TAGS
 	PG_skip_kasan_poison,
 #endif
+	PG_hot,
+	PG_cold,
+	PG_framework,
 	__NR_PAGEFLAGS,
 
 	/* Filesystems */
@@ -342,6 +345,12 @@ PAGEFLAG(Active, active, PF_HEAD) __CLEARPAGEFLAG(Active, active, PF_HEAD)
 	TESTCLEARFLAG(Active, active, PF_HEAD)
 PAGEFLAG(Workingset, workingset, PF_HEAD)
 	TESTCLEARFLAG(Workingset, workingset, PF_HEAD)
+PAGEFLAG(Hot, hot, PF_HEAD)
+	TESTCLEARFLAG(Hot, hot, PF_HEAD)
+PAGEFLAG(Cold, cold, PF_HEAD)
+	TESTCLEARFLAG(Cold, cold, PF_HEAD)
+PAGEFLAG(Framework, framework, PF_HEAD)
+	TESTCLEARFLAG(Framework, framework, PF_HEAD)
 __PAGEFLAG(Slab, slab, PF_NO_TAIL)
 __PAGEFLAG(SlobFree, slob_free, PF_NO_TAIL)
 PAGEFLAG(Checked, checked, PF_NO_COMPOUND)	   /* Used by some filesystems */
