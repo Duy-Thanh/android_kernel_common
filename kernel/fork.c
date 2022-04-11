@@ -353,7 +353,10 @@ static struct kmem_cache *mm_cachep;
 
 struct vm_area_struct *vm_area_alloc(struct mm_struct *mm)
 {
-	struct vm_area_struct *vma;
+	struct vm_area_struct *vma = NULL;
+	trace_android_rvh_vm_area_alloc(&vma);
+	if (vma)
+		return vma;
 
 	vma = kmem_cache_alloc(vm_area_cachep, GFP_KERNEL);
 	if (vma)

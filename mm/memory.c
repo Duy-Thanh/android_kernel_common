@@ -86,6 +86,7 @@
 
 #include "pgalloc-track.h"
 #include "internal.h"
+#include <trace/hooks/mm.h>
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/pagefault.h>
@@ -3129,6 +3130,7 @@ static vm_fault_t wp_page_copy(struct vm_fault *vmf)
 				put_page(old_page);
 			return 0;
 		}
+		trace_android_rvh_vma_flag_process(vmf, new_page, 0);
 	}
 
 	if (mem_cgroup_charge(new_page, mm, GFP_KERNEL))
@@ -3677,6 +3679,7 @@ vm_fault_t do_swap_page(struct vm_fault *vmf)
 
 		/* Had to read the page from swap area: Major fault */
 		ret = VM_FAULT_MAJOR;
+		trace_android_rvh_count_vma_counter(vma, 1);
 		count_vm_event(PGMAJFAULT);
 		count_memcg_event_mm(vma->vm_mm, PGMAJFAULT);
 	} else if (PageHWPoison(page)) {
@@ -3741,7 +3744,7 @@ vm_fault_t do_swap_page(struct vm_fault *vmf)
 	 * before page_add_anon_rmap() and swap_free(); try_to_free_swap()
 	 * must be called after the swap_free(), or it will never succeed.
 	 */
-
+	trace_android_rvh_vma_flag_process(vmf, page, 1);
 	inc_mm_counter_fast(vma->vm_mm, MM_ANONPAGES);
 	dec_mm_counter_fast(vma->vm_mm, MM_SWAPENTS);
 	pte = mk_pte(page, vmf->vma_page_prot);
@@ -3770,6 +3773,7 @@ vm_fault_t do_swap_page(struct vm_fault *vmf)
 		do_page_add_anon_rmap(page, vma, vmf->address, exclusive);
 	}
 
+	trace_android_rvh_vma_flag_process(vmf, page, 2);
 	swap_free(entry);
 	if (mem_cgroup_swap_full(page) ||
 	    (vmf->vma_flags & VM_LOCKED) || PageMlocked(page))
@@ -4739,6 +4743,7 @@ static vm_fault_t handle_pte_fault(struct vm_fault *vmf)
 		if (vmf->flags & FAULT_FLAG_WRITE)
 			flush_tlb_fix_spurious_fault(vmf->vma, vmf->address);
 	}
+	trace_android_rvh_do_access_page(vmf);
 unlock:
 	pte_unmap_unlock(vmf->pte, vmf->ptl);
 	return ret;
@@ -5099,6 +5104,7 @@ static vm_fault_t ___handle_speculative_fault(struct mm_struct *mm,
 	mem_cgroup_exit_user_fault();
 
 	if (ret != VM_FAULT_RETRY) {
+		trace_android_rvh_count_vma_counter(vma, 0);
 		if (vma_is_anonymous(vmf.vma))
 			count_vm_event(SPECULATIVE_PGFAULT_ANON);
 		else
@@ -5183,6 +5189,7 @@ vm_fault_t handle_mm_fault(struct vm_area_struct *vma, unsigned long address,
 	vm_fault_t ret;
 
 	__set_current_state(TASK_RUNNING);
+	trace_android_rvh_count_vma_counter(vma, 0);
 
 	count_vm_event(PGFAULT);
 	count_memcg_event_mm(vma->vm_mm, PGFAULT);
