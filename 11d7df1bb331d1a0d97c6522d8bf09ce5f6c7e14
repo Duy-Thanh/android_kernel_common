@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3545083d_71fd8fd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-04-11T17:40:10Z",
+      "side": 1,
+      "message": "Why not post it in AOSP? Do you want to test it first?",
+      "revId": "11d7df1bb331d1a0d97c6522d8bf09ce5f6c7e14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f476146d_cbd76b96",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3352,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-04-11T17:40:10Z",
+      "side": 1,
+      "message": "Why do you want to disable this logic when CONFIG_CMA\u003dn?",
+      "range": {
+        "startLine": 3352,
+        "startChar": 7,
+        "endLine": 3352,
+        "endChar": 17
+      },
+      "revId": "11d7df1bb331d1a0d97c6522d8bf09ce5f6c7e14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f70f361e_7ea2f2c1",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3366,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-04-11T17:40:10Z",
+      "side": 1,
+      "message": "Maybe (migratetype !\u003d MIGRATE_CMA) would be more future-proof?",
+      "range": {
+        "startLine": 3366,
+        "startChar": 6,
+        "endLine": 3366,
+        "endChar": 39
+      },
+      "revId": "11d7df1bb331d1a0d97c6522d8bf09ce5f6c7e14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
