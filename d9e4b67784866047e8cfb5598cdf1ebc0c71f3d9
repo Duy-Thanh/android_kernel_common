@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dea17da_c7186329",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3359,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2022-04-12T21:44:46Z",
+      "side": 1,
+      "message": "This breaks the build if CONFIG_CMA is not set.",
+      "range": {
+        "startLine": 3359,
+        "startChar": 20,
+        "endLine": 3359,
+        "endChar": 31
+      },
+      "revId": "d9e4b67784866047e8cfb5598cdf1ebc0c71f3d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
