@@ -1077,6 +1077,7 @@
       <elf-symbol name='dev_valid_name' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x62849ac7'/>
       <elf-symbol name='devfreq_add_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x74515df7'/>
       <elf-symbol name='devfreq_add_governor' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8cd65ec8'/>
+      <elf-symbol name='devfreq_cooling_em_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x61bc9b03'/>
       <elf-symbol name='devfreq_cooling_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2e799528'/>
       <elf-symbol name='devfreq_event_get_event' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb644cfa3'/>
       <elf-symbol name='devfreq_get_devfreq_by_node' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd38e8015'/>
@@ -1231,6 +1232,7 @@
       <elf-symbol name='devm_pm_clk_create' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3fb85e31'/>
       <elf-symbol name='devm_pm_opp_of_add_table' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x97687ae4'/>
       <elf-symbol name='devm_pm_opp_set_clkname' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc7c2b089'/>
+      <elf-symbol name='devm_pm_opp_set_regulators' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfd596628'/>
       <elf-symbol name='devm_pm_opp_set_supported_hw' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf36de695'/>
       <elf-symbol name='devm_pm_runtime_enable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb0dbb416'/>
       <elf-symbol name='devm_power_supply_get_by_phandle' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7c3150f9'/>
@@ -1556,6 +1558,7 @@
       <elf-symbol name='drm_gem_cleanup_shadow_fb' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9855a411'/>
       <elf-symbol name='drm_gem_cma_dumb_create' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1500fbf0'/>
       <elf-symbol name='drm_gem_cma_prime_import_sg_table' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1326280d'/>
+      <elf-symbol name='drm_gem_cma_vmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x32bfa2c3'/>
       <elf-symbol name='drm_gem_create_mmap_offset' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x74630e90'/>
       <elf-symbol name='drm_gem_dmabuf_mmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1a48ad2c'/>
       <elf-symbol name='drm_gem_dmabuf_release' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe9a86bb3'/>
@@ -1582,6 +1585,7 @@
       <elf-symbol name='drm_gem_object_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb26c8a33'/>
       <elf-symbol name='drm_gem_object_lookup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1f49c0eb'/>
       <elf-symbol name='drm_gem_object_release' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb2dcd624'/>
+      <elf-symbol name='drm_gem_objects_lookup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfd6c6374'/>
       <elf-symbol name='drm_gem_plane_helper_prepare_fb' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1eb40119'/>
       <elf-symbol name='drm_gem_prepare_shadow_fb' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x705a6ef3'/>
       <elf-symbol name='drm_gem_prime_export' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfc532b53'/>
@@ -1595,11 +1599,15 @@
       <elf-symbol name='drm_gem_shmem_create' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xdf339c06'/>
       <elf-symbol name='drm_gem_shmem_dumb_create' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9e1cdb45'/>
       <elf-symbol name='drm_gem_shmem_free_object' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf5653144'/>
+      <elf-symbol name='drm_gem_shmem_get_pages_sgt' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb3130ad9'/>
       <elf-symbol name='drm_gem_shmem_get_sg_table' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xccb2dd7'/>
+      <elf-symbol name='drm_gem_shmem_madvise' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x22bb9a06'/>
       <elf-symbol name='drm_gem_shmem_mmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcb069bb6'/>
       <elf-symbol name='drm_gem_shmem_pin' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2d7833da'/>
       <elf-symbol name='drm_gem_shmem_prime_import_sg_table' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfc577dcd'/>
       <elf-symbol name='drm_gem_shmem_print_info' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcb2c241f'/>
+      <elf-symbol name='drm_gem_shmem_purge_locked' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa53a76ab'/>
+      <elf-symbol name='drm_gem_shmem_put_pages' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc5a4387c'/>
       <elf-symbol name='drm_gem_shmem_unpin' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe7cd17a9'/>
       <elf-symbol name='drm_gem_shmem_vmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x77b5fd56'/>
       <elf-symbol name='drm_gem_shmem_vunmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc2140ea6'/>
@@ -1662,6 +1670,7 @@
       <elf-symbol name='drm_modeset_unlock_all' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x44e26ba9'/>
       <elf-symbol name='drm_object_attach_property' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7d8e95fa'/>
       <elf-symbol name='drm_of_component_match_add' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8727788e'/>
+      <elf-symbol name='drm_of_component_probe' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbca894a7'/>
       <elf-symbol name='drm_of_find_panel_or_bridge' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x230ad00b'/>
       <elf-symbol name='drm_open' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa891ae93'/>
       <elf-symbol name='drm_panel_add' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe15a1e96'/>
@@ -1723,6 +1732,7 @@
       <elf-symbol name='drm_syncobj_find_fence' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc66d4c13'/>
       <elf-symbol name='drm_syncobj_free' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1a411479'/>
       <elf-symbol name='drm_syncobj_replace_fence' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf77d56e5'/>
+      <elf-symbol name='drm_timeout_abs_to_jiffies' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x50674de7'/>
       <elf-symbol name='drm_universal_plane_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa46255ee'/>
       <elf-symbol name='drm_vblank_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcc2056d3'/>
       <elf-symbol name='drm_writeback_connector_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfcb9f486'/>
@@ -3763,6 +3773,7 @@
       <elf-symbol name='shash_free_singlespawn_instance' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x41a8e545'/>
       <elf-symbol name='shash_register_instance' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x47ce69bc'/>
       <elf-symbol name='shmem_file_setup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8d7ba7c3'/>
+      <elf-symbol name='shmem_read_mapping_page_gfp' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x21075973'/>
       <elf-symbol name='shmem_truncate_range' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x13abf46c'/>
       <elf-symbol name='show_rcu_gp_kthreads' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4f6a07fe'/>
       <elf-symbol name='show_rcu_tasks_classic_gp_kthread' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd74e400f'/>
@@ -78226,6 +78237,7 @@
         <return type-id='95e97e5e'/>
       </function-type>
       <pointer-type-def type-id='9f25e800' size-in-bits='64' id='b2ac7a1e'/>
+      <pointer-type-def type-id='3e2545f4' size-in-bits='64' id='b2acfc7a'/>
       <pointer-type-def type-id='90f4cdc0' size-in-bits='64' id='b2ad9442'/>
       <pointer-type-def type-id='e68a6e6a' size-in-bits='64' id='b2b04204'/>
       <function-type size-in-bits='64' id='b2bada68'>
@@ -120650,6 +120662,11 @@
         <parameter type-id='247297cd' name='governor' filepath='drivers/devfreq/devfreq.c' line='1243' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='devfreq_cooling_em_register' mangled-name='devfreq_cooling_em_register' filepath='drivers/thermal/devfreq_cooling.c' line='477' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devfreq_cooling_em_register'>
+        <parameter type-id='f66fa7f4' name='df' filepath='drivers/thermal/devfreq_cooling.c' line='477' column='1'/>
+        <parameter type-id='0b660ebe' name='dfc_power' filepath='drivers/thermal/devfreq_cooling.c' line='478' column='1'/>
+        <return type-id='2feec21f'/>
+      </function-decl>
       <function-decl name='devfreq_cooling_unregister' mangled-name='devfreq_cooling_unregister' filepath='drivers/thermal/devfreq_cooling.c' line='510' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devfreq_cooling_unregister'>
         <parameter type-id='2feec21f' name='cdev' filepath='drivers/thermal/devfreq_cooling.c' line='510' column='1'/>
         <return type-id='48b5725f'/>
@@ -121488,6 +121505,12 @@
       <function-decl name='devm_pm_opp_set_clkname' mangled-name='devm_pm_opp_set_clkname' filepath='drivers/opp/core.c' line='2193' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devm_pm_opp_set_clkname'>
         <parameter type-id='fa0b179b' name='dev' filepath='drivers/opp/core.c' line='2193' column='1'/>
         <parameter type-id='80f4b756' name='name' filepath='drivers/opp/core.c' line='2193' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='devm_pm_opp_set_regulators' mangled-name='devm_pm_opp_set_regulators' filepath='drivers/opp/core.c' line='2095' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devm_pm_opp_set_regulators'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/opp/core.c' line='2095' column='1'/>
+        <parameter type-id='13956559' name='names' filepath='drivers/opp/core.c' line='2096' column='1'/>
+        <parameter type-id='f0981eeb' name='count' filepath='drivers/opp/core.c' line='2097' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='devm_pm_opp_set_supported_hw' mangled-name='devm_pm_opp_set_supported_hw' filepath='drivers/opp/core.c' line='1882' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devm_pm_opp_set_supported_hw'>
@@ -123232,6 +123255,11 @@
         <return type-id='abd62a96'/>
       </function-decl>
       <var-decl name='drm_gem_cma_vm_ops' type-id='92e9b57c' mangled-name='drm_gem_cma_vm_ops' visibility='default' filepath='drivers/gpu/drm/drm_gem_cma_helper.c' line='294' column='1' elf-symbol-id='drm_gem_cma_vm_ops'/>
+      <function-decl name='drm_gem_cma_vmap' mangled-name='drm_gem_cma_vmap' filepath='drivers/gpu/drm/drm_gem_cma_helper.c' line='483' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='drm_gem_cma_vmap'>
+        <parameter type-id='abd62a96' name='obj' filepath='drivers/gpu/drm/drm_gem_cma_helper.c' line='483' column='1'/>
+        <parameter type-id='ce092740' name='map' filepath='drivers/gpu/drm/drm_gem_cma_helper.c' line='483' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='drm_gem_create_mmap_offset' mangled-name='drm_gem_create_mmap_offset' filepath='drivers/gpu/drm/drm_gem.c' line='498' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='drm_gem_create_mmap_offset'>
         <parameter type-id='abd62a96' name='obj' filepath='drivers/gpu/drm/drm_gem.c' line='498' column='1'/>
         <return type-id='95e97e5e'/>
@@ -123363,6 +123391,13 @@
         <parameter type-id='abd62a96' name='obj' filepath='drivers/gpu/drm/drm_gem.c' line='943' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='drm_gem_objects_lookup' mangled-name='drm_gem_objects_lookup' filepath='drivers/gpu/drm/drm_gem.c' line='689' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='drm_gem_objects_lookup'>
+        <parameter type-id='9e99ecc1' name='filp' filepath='drivers/gpu/drm/drm_gem.c' line='689' column='1'/>
+        <parameter type-id='eaa32e2f' name='bo_handles' filepath='drivers/gpu/drm/drm_gem.c' line='689' column='1'/>
+        <parameter type-id='95e97e5e' name='count' filepath='drivers/gpu/drm/drm_gem.c' line='690' column='1'/>
+        <parameter type-id='b2acfc7a' name='objs_out' filepath='drivers/gpu/drm/drm_gem.c' line='690' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='drm_gem_plane_helper_prepare_fb' mangled-name='drm_gem_plane_helper_prepare_fb' filepath='drivers/gpu/drm/drm_gem_atomic_helper.c' line='144' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='drm_gem_plane_helper_prepare_fb'>
         <parameter type-id='a6711537' name='plane' filepath='drivers/gpu/drm/drm_gem_atomic_helper.c' line='144' column='1'/>
         <parameter type-id='d0835005' name='state' filepath='drivers/gpu/drm/drm_gem_atomic_helper.c' line='144' column='1'/>
@@ -123437,9 +123472,18 @@
         <parameter type-id='abd62a96' name='obj' filepath='drivers/gpu/drm/drm_gem_shmem_helper.c' line='122' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='drm_gem_shmem_get_pages_sgt' mangled-name='drm_gem_shmem_get_pages_sgt' filepath='drivers/gpu/drm/drm_gem_shmem_helper.c' line='686' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='drm_gem_shmem_get_pages_sgt'>
+        <parameter type-id='abd62a96' name='obj' filepath='drivers/gpu/drm/drm_gem_shmem_helper.c' line='686' column='1'/>
+        <return type-id='4adb0e6a'/>
+      </function-decl>
       <function-decl name='drm_gem_shmem_get_sg_table' mangled-name='drm_gem_shmem_get_sg_table' filepath='drivers/gpu/drm/drm_gem_shmem_helper.c' line='660' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='drm_gem_shmem_get_sg_table'>
         <parameter type-id='abd62a96' name='obj' filepath='drivers/gpu/drm/drm_gem_shmem_helper.c' line='660' column='1'/>
         <return type-id='4adb0e6a'/>
+      </function-decl>
+      <function-decl name='drm_gem_shmem_madvise' mangled-name='drm_gem_shmem_madvise' filepath='drivers/gpu/drm/drm_gem_shmem_helper.c' line='422' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='drm_gem_shmem_madvise'>
+        <parameter type-id='abd62a96' name='obj' filepath='drivers/gpu/drm/drm_gem_shmem_helper.c' line='422' column='1'/>
+        <parameter type-id='95e97e5e' name='madv' filepath='drivers/gpu/drm/drm_gem_shmem_helper.c' line='422' column='1'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='drm_gem_shmem_mmap' mangled-name='drm_gem_shmem_mmap' filepath='drivers/gpu/drm/drm_gem_shmem_helper.c' line='594' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='drm_gem_shmem_mmap'>
         <parameter type-id='abd62a96' name='obj' filepath='drivers/gpu/drm/drm_gem_shmem_helper.c' line='594' column='1'/>
@@ -123460,6 +123504,14 @@
         <parameter type-id='7ac48c21' name='p' filepath='drivers/gpu/drm/drm_gem_shmem_helper.c' line='633' column='1'/>
         <parameter type-id='f0981eeb' name='indent' filepath='drivers/gpu/drm/drm_gem_shmem_helper.c' line='633' column='1'/>
         <parameter type-id='e8a41089' name='obj' filepath='drivers/gpu/drm/drm_gem_shmem_helper.c' line='634' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='drm_gem_shmem_purge_locked' mangled-name='drm_gem_shmem_purge_locked' filepath='drivers/gpu/drm/drm_gem_shmem_helper.c' line='439' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='drm_gem_shmem_purge_locked'>
+        <parameter type-id='abd62a96' name='obj' filepath='drivers/gpu/drm/drm_gem_shmem_helper.c' line='439' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='drm_gem_shmem_put_pages' mangled-name='drm_gem_shmem_put_pages' filepath='drivers/gpu/drm/drm_gem_shmem_helper.c' line='218' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='drm_gem_shmem_put_pages'>
+        <parameter type-id='970cb2d9' name='shmem' filepath='drivers/gpu/drm/drm_gem_shmem_helper.c' line='218' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='drm_gem_shmem_unpin' mangled-name='drm_gem_shmem_unpin' filepath='drivers/gpu/drm/drm_gem_shmem_helper.c' line='254' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='drm_gem_shmem_unpin'>
@@ -123762,6 +123814,12 @@
         <parameter type-id='92d15ae9' name='compare' filepath='drivers/gpu/drm/drm_of.c' line='93' column='1'/>
         <parameter type-id='9a537bbe' name='node' filepath='drivers/gpu/drm/drm_of.c' line='94' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='drm_of_component_probe' mangled-name='drm_of_component_probe' filepath='drivers/gpu/drm/drm_of.c' line='115' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='drm_of_component_probe'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/gpu/drm/drm_of.c' line='115' column='1'/>
+        <parameter type-id='92d15ae9' name='compare_of' filepath='drivers/gpu/drm/drm_of.c' line='116' column='1'/>
+        <parameter type-id='27729729' name='m_ops' filepath='drivers/gpu/drm/drm_of.c' line='117' column='1'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='drm_of_find_panel_or_bridge' mangled-name='drm_of_find_panel_or_bridge' filepath='drivers/gpu/drm/drm_of.c' line='236' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='drm_of_find_panel_or_bridge'>
         <parameter type-id='0afa6ea3' name='np' filepath='drivers/gpu/drm/drm_of.c' line='236' column='1'/>
@@ -124101,6 +124159,10 @@
         <parameter type-id='919f23a5' name='syncobj' filepath='drivers/gpu/drm/drm_syncobj.c' line='321' column='1'/>
         <parameter type-id='28271da3' name='fence' filepath='drivers/gpu/drm/drm_syncobj.c' line='322' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='drm_timeout_abs_to_jiffies' mangled-name='drm_timeout_abs_to_jiffies' filepath='drivers/gpu/drm/drm_syncobj.c' line='1114' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='drm_timeout_abs_to_jiffies'>
+        <parameter type-id='9da381c4' name='timeout_nsec' filepath='drivers/gpu/drm/drm_syncobj.c' line='1114' column='1'/>
+        <return type-id='bd54fe1a'/>
       </function-decl>
       <function-decl name='drm_universal_plane_init' mangled-name='drm_universal_plane_init' filepath='drivers/gpu/drm/drm_plane.c' line='382' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='drm_universal_plane_init'>
         <parameter type-id='8898134d' name='dev' filepath='drivers/gpu/drm/drm_plane.c' line='382' column='1'/>
@@ -134573,6 +134635,12 @@
         <parameter type-id='69bf7bee' name='size' filepath='mm/shmem.c' line='4119' column='1'/>
         <parameter type-id='7359adad' name='flags' filepath='mm/shmem.c' line='4119' column='1'/>
         <return type-id='77e79a4b'/>
+      </function-decl>
+      <function-decl name='shmem_read_mapping_page_gfp' mangled-name='shmem_read_mapping_page_gfp' filepath='mm/shmem.c' line='4187' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='shmem_read_mapping_page_gfp'>
+        <parameter type-id='f57039f0' name='mapping' filepath='mm/shmem.c' line='4187' column='1'/>
+        <parameter type-id='7359adad' name='index' filepath='mm/shmem.c' line='4188' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='mm/shmem.c' line='4188' column='1'/>
+        <return type-id='02f11ed4'/>
       </function-decl>
       <function-decl name='shmem_truncate_range' mangled-name='shmem_truncate_range' filepath='mm/shmem.c' line='1062' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='shmem_truncate_range'>
         <parameter type-id='7e666abe' name='inode' filepath='mm/shmem.c' line='1062' column='1'/>
