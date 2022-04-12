@@ -89,7 +89,11 @@ static const char * const POWER_SUPPLY_CHARGE_TYPE_TEXT[] = {
 	[POWER_SUPPLY_CHARGE_TYPE_ADAPTIVE]	= "Adaptive",
 	[POWER_SUPPLY_CHARGE_TYPE_CUSTOM]	= "Custom",
 	[POWER_SUPPLY_CHARGE_TYPE_LONGLIFE]	= "Long Life",
+<<<<<<< HEAD   (f5e944 ANDROID: arm64 gki_defconfig fixup)
 	[POWER_SUPPLY_CHARGE_TYPE_TAPER_EXT]	= "Taper",
+=======
+	[POWER_SUPPLY_CHARGE_TYPE_BYPASS]	= "Bypass",
+>>>>>>> BRANCH (8eb48f Merge tag 'for-v5.18' of git://git.kernel.org/pub/scm/linux/)
 };
 
 static const char * const POWER_SUPPLY_HEALTH_TEXT[] = {
