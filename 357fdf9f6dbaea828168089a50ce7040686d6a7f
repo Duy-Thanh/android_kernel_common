@@ -35,6 +35,24 @@
       "parentUuid": "d92dfb43_863df008",
       "revId": "357fdf9f6dbaea828168089a50ce7040686d6a7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b12c5ab5_74bab496",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943840
+      },
+      "writtenOn": "2022-04-12T08:37:06Z",
+      "side": 1,
+      "message": "You mean breaks GKI2.0? Or something else need be changed?",
+      "parentUuid": "9039b87e_de49de28",
+      "revId": "357fdf9f6dbaea828168089a50ce7040686d6a7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
