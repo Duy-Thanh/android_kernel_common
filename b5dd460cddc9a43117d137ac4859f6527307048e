@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cff0f99_76ef01b7",
+        "filename": "fs/fuse/backing.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2022-04-12T16:37:56Z",
+      "side": 0,
+      "message": "These checks were added to ensure fuse can\u0027t open the lower fs file without the correct permissions. Removing them may allow opens in some cases where the daemon is trying to subvert permissions. Let\u0027s discuss.",
+      "revId": "b5dd460cddc9a43117d137ac4859f6527307048e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
