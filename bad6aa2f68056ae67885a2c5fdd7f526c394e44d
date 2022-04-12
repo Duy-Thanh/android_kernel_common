@@ -16,6 +16,24 @@
       "message": "Hi, Greg,\nWill you merge this today or postpone this next week?\nI\u0027d like to apply android13-5.15 branch to in-house kernel so I need to wait this or not.",
       "revId": "bad6aa2f68056ae67885a2c5fdd7f526c394e44d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a051d76_56e4becf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-12T07:54:43Z",
+      "side": 1,
+      "message": "Needs some abi fixups first, will probably happen later today, depending on my workload.  Why the rush?",
+      "parentUuid": "6379e9ae_f231af69",
+      "revId": "bad6aa2f68056ae67885a2c5fdd7f526c394e44d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
