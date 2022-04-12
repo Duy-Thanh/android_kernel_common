@@ -305,6 +305,7 @@ config ARM_ARCH_TIMER_EVTSTREAM
 	  This must be disabled for hardware validation purposes to detect any
 	  hardware anomalies of missing events.
 
+<<<<<<< HEAD   (3171b9 Merge 4.9.309 into android-4.9-q)
 config ARM_ARCH_TIMER_VCT_ACCESS
 	bool "Support for ARM architected timer virtual counter access in userspace"
 	default !ARM64
@@ -312,11 +313,16 @@ config ARM_ARCH_TIMER_VCT_ACCESS
 	help
 	  This option enables support for reading the ARM architected timer's
 	  virtual counter in userspace.
+=======
+config ARM_ARCH_TIMER_OOL_WORKAROUND
+	bool
+>>>>>>> BRANCH (6348ae Linux 4.9.310)
 
 config FSL_ERRATUM_A008585
 	bool "Workaround for Freescale/NXP Erratum A-008585"
 	default y
 	depends on ARM_ARCH_TIMER && ARM64
+	select ARM_ARCH_TIMER_OOL_WORKAROUND
 	help
 	  This option enables a workaround for Freescale/NXP Erratum
 	  A-008585 ("ARM generic timer may contain an erroneous
