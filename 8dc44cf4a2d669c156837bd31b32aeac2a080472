@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10cbf8d1_17319e79",
+        "filename": "include/linux/mm.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-12T06:20:26Z",
+      "side": 1,
+      "message": "android kabi fields are reserved for the Google Android team only, for preserving the kernel ABI over time.  They can NOT be used by anyone else.",
+      "range": {
+        "startLine": 669,
+        "startChar": 0,
+        "endLine": 669,
+        "endChar": 36
+      },
+      "revId": "8dc44cf4a2d669c156837bd31b32aeac2a080472",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
