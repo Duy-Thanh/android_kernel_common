@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9178b133_4cb8c25f",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1861,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-04-13T16:09:04Z",
+      "side": 1,
+      "message": "We have a handy helper for checking this key: is_pkvm_initialized(). However, shouldn\u0027t we just be using is_protected_kvm_enabled() instead?\n\nSame thing for the change in kvm_arch_flush_shadow_memslot().",
+      "range": {
+        "startLine": 1861,
+        "startChar": 29,
+        "endLine": 1861,
+        "endChar": 59
+      },
+      "revId": "89bade33232c1019a1fbbd0b50a3603f8a1f40e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a0e89e3f_fd6cd6b9",
