@@ -398,6 +398,11 @@ struct snd_pcm_runtime {
 	wait_queue_head_t tsleep;	/* transfer sleep */
 	struct fasync_struct *fasync;
 	bool stop_operating;		/* sync_stop will be called */
+<<<<<<< HEAD   (414e6c ANDROID: fix up abi issue with struct snd_pcm_runtime)
+=======
+	struct mutex buffer_mutex;	/* protect for buffer changes */
+	atomic_t buffer_accessing;	/* >0: in r/w operation, <0: blocked */
+>>>>>>> BRANCH (3238bf Linux 5.10.110)
 
 	/* -- private section -- */
 	void *private_data;
