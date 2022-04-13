@@ -16,6 +16,24 @@
       "message": "Hi, this is to address some issues noted after tkjos patch set in linux 5.17\nWhen running and android 10 image on it i\u0027ve hit a kernel BUG.\n\nI\u0027m using gerrit as i\u0027m much more comfortable with this style of review... :)\nTodd does this patch make sense to you?",
       "revId": "b94df20a9cff56d3c530eb0ef58d4e73b7adf3e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfd9f37c_4d2e917d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-13T07:19:28Z",
+      "side": 1,
+      "message": "Please submit upstream, through email, like all other changes for this driver should be done :)",
+      "parentUuid": "a5dd90d6_821eae84",
+      "revId": "b94df20a9cff56d3c530eb0ef58d4e73b7adf3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
