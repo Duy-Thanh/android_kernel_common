@@ -988,6 +988,7 @@
   hrtimer_try_to_cancel
   hwrng_register
   hwrng_unregister
+  hyp_debug_testpoint
   i2c_adapter_type
   i2c_add_numbered_adapter
   i2c_bus_type
