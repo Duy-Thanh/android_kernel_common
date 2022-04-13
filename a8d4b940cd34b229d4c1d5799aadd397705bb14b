@@ -22,6 +22,30 @@
       },
       "revId": "a8d4b940cd34b229d4c1d5799aadd397705bb14b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f02ff9c_2189e073",
+        "filename": "arch/arm64/kvm/hyp_dbg.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-04-13T16:12:55Z",
+      "side": 1,
+      "message": "Ah, just realized hyp_panic() is the EL1 handler. But __hyp_do_panic() should be callable from EL2. Alternatively, you can just BUG().",
+      "parentUuid": "1a4aabec_b6ef1470",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 1
+      },
+      "revId": "a8d4b940cd34b229d4c1d5799aadd397705bb14b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
