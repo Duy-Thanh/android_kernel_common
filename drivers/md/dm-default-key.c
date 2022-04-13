@@ -392,10 +392,30 @@ static void default_key_io_hints(struct dm_target *ti,
 	limits->io_min = max_t(unsigned int, limits->io_min, sector_size);
 }
 
+#ifdef CONFIG_BLK_DEV_ZONED
+
+static int default_key_report_zones(struct dm_target *ti,
+		struct dm_report_zones_args *args, unsigned int nr_zones)
+{
+	struct default_key_c *dkc = ti->private;
+	sector_t sector = dkc->start + dm_target_offset(ti, args->next_sector);
+
+	args->start = dkc->start;
+	return blkdev_report_zones(dkc->dev->bdev, sector, nr_zones,
+				   dm_report_zones_cb, args);
+}
+
+#endif
+
 static struct target_type default_key_target = {
 	.name			= "default-key",
 	.version		= {2, 1, 0},
+#ifdef CONFIG_BLK_DEV_ZONED
+	.features		= DM_TARGET_ZONED_HM | DM_TARGET_PASSES_CRYPTO,
+	.report_zones		= default_key_report_zones,
+#else
 	.features		= DM_TARGET_PASSES_CRYPTO,
+#endif
 	.module			= THIS_MODULE,
 	.ctr			= default_key_ctr,
 	.dtr			= default_key_dtr,
