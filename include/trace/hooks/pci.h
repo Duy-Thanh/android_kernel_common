@@ -12,8 +12,8 @@
  */
 
 DECLARE_RESTRICTED_HOOK(android_rvh_pci_d3_sleep,
-             TP_PROTO(struct pci_dev *dev, unsigned int delay, int *err),
-             TP_ARGS(dev, delay, err), 1);
+		TP_PROTO(struct pci_dev *dev, unsigned int delay, int *err),
+		TP_ARGS(dev, delay, err), 1);
 
 #endif /* _TRACE_HOOK_PCI_H */
 
