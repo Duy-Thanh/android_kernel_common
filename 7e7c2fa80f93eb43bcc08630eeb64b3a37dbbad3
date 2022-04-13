@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51ffe18a_3afdf225",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2022-04-13T18:19:29Z",
+      "side": 1,
+      "message": "is_cpu_allowed series from android13-5.15, attempting to push into android-mainline so it can be maintained there. candid thoughts are welcome.  ",
+      "revId": "7e7c2fa80f93eb43bcc08630eeb64b3a37dbbad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
