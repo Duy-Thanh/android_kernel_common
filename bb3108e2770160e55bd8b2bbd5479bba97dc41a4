@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76672d04_2a6ea03b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-04-13T18:02:28Z",
+      "side": 1,
+      "message": "I will fix this, thanks !",
+      "parentUuid": "e805ea5f_8cc59384",
+      "revId": "bb3108e2770160e55bd8b2bbd5479bba97dc41a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "192814ff_49120874",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-04-13T16:07:08Z",
       "side": 1,
       "message": "This needs your SoB as well Sebastian",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 44
+      },
+      "revId": "bb3108e2770160e55bd8b2bbd5479bba97dc41a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aca5137b_fb6053d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-04-13T18:02:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "192814ff_49120874",
       "range": {
         "startLine": 21,
         "startChar": 0,
@@ -78,6 +120,30 @@
       "side": 1,
       "message": "Ah, good point. Yes, definitely worth fixing.",
       "parentUuid": "c2c9b007_27843783",
+      "range": {
+        "startLine": 1123,
+        "startChar": 11,
+        "endLine": 1123,
+        "endChar": 35
+      },
+      "revId": "bb3108e2770160e55bd8b2bbd5479bba97dc41a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8066235_f5dbc593",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-04-13T18:02:28Z",
+      "side": 1,
+      "message": "I will fix this, nice catch !",
+      "parentUuid": "5d4aa7e6_25994c71",
       "range": {
         "startLine": 1123,
         "startChar": 11,
