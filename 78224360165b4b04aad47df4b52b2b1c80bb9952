@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "639ccb15_e4d87f53",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-13T07:22:57Z",
+      "side": 1,
+      "message": "this does not reflect what this commit does at all.\n\nThis commit does not have any hooks.",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 21
+      },
+      "revId": "78224360165b4b04aad47df4b52b2b1c80bb9952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b8b6c75_079f4c95",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-13T07:22:57Z",
+      "side": 1,
+      "message": "please explain this better.\n\nalso, one commit per addition would be best, that way you can properly describe the need for these in detail.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 71
+      },
+      "revId": "78224360165b4b04aad47df4b52b2b1c80bb9952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "803ba797_f0dd5120",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-13T07:22:57Z",
+      "side": 1,
+      "message": "not needed.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 70
+      },
+      "revId": "78224360165b4b04aad47df4b52b2b1c80bb9952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09e0ded5_0bf1f8d9",
+        "filename": "include/linux/mmzone.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-13T07:22:57Z",
+      "side": 1,
+      "message": "why 2 and not just 1 for a pointer?",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 298,
+        "endChar": 30
+      },
+      "revId": "78224360165b4b04aad47df4b52b2b1c80bb9952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f86a0671_b50d3aa2",
+        "filename": "include/linux/page_ext.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-13T07:22:57Z",
+      "side": 1,
+      "message": "make these obvious they are for android-only please.  If they are really needed, it\u0027s odd that 3 new flags are required here.  That feels very wrong, please justify the use in detail.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 16
+      },
+      "revId": "78224360165b4b04aad47df4b52b2b1c80bb9952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
