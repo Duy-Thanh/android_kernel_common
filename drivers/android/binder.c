@@ -5107,6 +5107,7 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	}
 	default:
 		ret = -EINVAL;
+        trace_android_vh_expand_cmd(cmd, &ret, ubuf);
 		goto err;
 	}
 	ret = 0;

@@ -70,6 +70,10 @@ DECLARE_HOOK(android_vh_binder_print_transaction_info,
 		 const char *prefix, struct binder_transaction *t),
 	TP_ARGS(m, proc, prefix, t));
 
+DECLARE_HOOK(android_vh_expand_cmd,
+	TP_PROTO(int cmd, int *ret, void __user  *ubuf),
+	TP_ARGS(cmd, ret, ubuf));
+
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_BINDER_H */
