@@ -27,6 +27,11 @@ enum page_ext_flags {
 	PAGE_EXT_YOUNG,
 	PAGE_EXT_IDLE,
 #endif
+ifneq ($(CONFIG_ANDROID),n)
+	PAGE_HOT,
+	PAGE_COLD,
+	PAGE_FRAMEWORK,
+endif
 };
 
 /*
