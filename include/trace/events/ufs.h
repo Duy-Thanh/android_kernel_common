@@ -390,6 +390,28 @@ TRACE_EVENT(ufshcd_exception_event,
 	)
 );
 
+TRACE_EVENT(ufshcd_timing_measure,
+	TP_PROTO(const char *dev_name, const char *func_name, const char *enter_or_exit),
+
+	TP_ARGS(dev_name, func_name, enter_or_exit),
+
+	TP_STRUCT__entry(
+		__string(dev_name, dev_name)
+		__string(func_name, func_name)
+		__string(enter_or_exit, enter_or_exit)
+	),
+
+	TP_fast_assign(
+		__assign_str(dev_name, dev_name);
+		__assign_str(func_name, func_name);
+		__assign_str(enter_or_exit, enter_or_exit);
+	),
+
+	TP_printk("%s: %s %s",
+		__get_str(dev_name), __get_str(func_name), __get_str(enter_or_exit)
+	)
+);
+
 #endif /* if !defined(_TRACE_UFS_H) || defined(TRACE_HEADER_MULTI_READ) */
 
 /* This part must be outside protection */
