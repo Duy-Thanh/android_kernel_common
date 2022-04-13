@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edbb1e97_8fc1cc06",
+        "filename": "drivers/pci/pci.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2022-04-13T22:57:25Z",
+      "side": 1,
+      "message": "Please drop this. It shouldn\u0027t be needed.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 21
+      },
+      "revId": "e4d126650f725937572998508606ad022028eaac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d81d3335_d1302500",
+        "filename": "include/trace/hooks/pci.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2022-04-13T22:57:25Z",
+      "side": 1,
+      "message": "Can you drop this please? It\u0027s already included in vendor_hooks.h and has the GENKSYMS workaround to avoid CRC differences.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 29
+      },
+      "revId": "e4d126650f725937572998508606ad022028eaac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
