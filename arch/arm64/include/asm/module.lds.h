@@ -1,5 +1,6 @@
 SECTIONS {
 #ifdef CONFIG_ARM64_MODULE_PLTS
+<<<<<<< HEAD   (3d21ef ANDROID: KVM: arm64: Fix size calculation of FFA memory rang)
 	.plt 0 (NOLOAD) : { BYTE(0) }
 	.init.plt 0 (NOLOAD) : { BYTE(0) }
 	.text.ftrace_trampoline 0 (NOLOAD) : { BYTE(0) }
@@ -32,6 +33,11 @@ SECTIONS {
 		*(.initcalls._end)
 	}
 #endif
+=======
+	.plt 0 : { BYTE(0) }
+	.init.plt 0 : { BYTE(0) }
+	.text.ftrace_trampoline 0 : { BYTE(0) }
+>>>>>>> BRANCH (06f50c Linux 5.15.33)
 #endif
 
 #ifdef CONFIG_KASAN_SW_TAGS
