@@ -221,6 +221,7 @@ static inline bool selinux_policycap_genfs_seclabel_symlinks(void)
 	return READ_ONCE(state->policycap[POLICYDB_CAPABILITY_GENFS_SECLABEL_SYMLINKS]);
 }
 
+<<<<<<< HEAD   (35ce45 ANDROID: Update the ABI symbol list)
 static inline bool selinux_android_nlroute_getlink(void)
 {
 	struct selinux_state *state = &selinux_state;
@@ -233,6 +234,13 @@ static inline bool selinux_android_nlroute_getneigh(void)
 	struct selinux_state *state = &selinux_state;
 
 	return state->android_netlink_getneigh;
+=======
+static inline bool selinux_policycap_ioctl_skip_cloexec(void)
+{
+	struct selinux_state *state = &selinux_state;
+
+	return READ_ONCE(state->policycap[POLICYDB_CAPABILITY_IOCTL_SKIP_CLOEXEC]);
+>>>>>>> BRANCH (3238bf Linux 5.10.110)
 }
 
 struct selinux_policy_convert_data;

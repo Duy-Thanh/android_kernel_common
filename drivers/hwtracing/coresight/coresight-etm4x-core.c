@@ -2056,7 +2056,11 @@ static void clear_etmdrvdata(void *info)
 	etmdrvdata[cpu] = NULL;
 }
 
+<<<<<<< HEAD   (35ce45 ANDROID: Update the ABI symbol list)
 static int __exit etm4_remove_dev(struct etmv4_drvdata *drvdata)
+=======
+static void etm4_remove(struct amba_device *adev)
+>>>>>>> BRANCH (3238bf Linux 5.10.110)
 {
 	etm_perf_symlink(drvdata->csdev, false);
 	/*
@@ -2076,8 +2080,6 @@ static int __exit etm4_remove_dev(struct etmv4_drvdata *drvdata)
 	cpus_read_unlock();
 
 	coresight_unregister(drvdata->csdev);
-
-	return 0;
 }
 
 static void __exit etm4_remove_amba(struct amba_device *adev)

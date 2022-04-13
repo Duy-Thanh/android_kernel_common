@@ -73,13 +73,19 @@ static int vfio_amba_probe(struct amba_device *adev, const struct amba_id *id)
 
 static void vfio_amba_remove(struct amba_device *adev)
 {
-	struct vfio_platform_device *vdev;
+	struct vfio_platform_device *vdev =
+		vfio_platform_remove_common(&adev->dev);
 
+<<<<<<< HEAD   (35ce45 ANDROID: Update the ABI symbol list)
 	vdev = vfio_platform_remove_common(&adev->dev);
 	if (vdev) {
 		kfree(vdev->name);
 		kfree(vdev);
 	}
+=======
+	kfree(vdev->name);
+	kfree(vdev);
+>>>>>>> BRANCH (3238bf Linux 5.10.110)
 }
 
 static const struct amba_id pl330_ids[] = {
