@@ -59,4 +59,8 @@ obj-$(CONFIG_UACCE)		+= uacce/
 obj-$(CONFIG_XILINX_SDFEC)	+= xilinx_sdfec.o
 obj-$(CONFIG_HISI_HIKEY_USB)	+= hisi_hikey_usb.o
 obj-$(CONFIG_HI6421V600_IRQ)	+= hi6421v600-irq.o
+<<<<<<< HEAD   (dbf75d Merge ff61bc81b3fe ("Merge tag 'pinctrl-v5.18-1' of git://gi)
 obj-$(CONFIG_UID_SYS_STATS)	+= uid_sys_stats.o
+=======
+obj-$(CONFIG_OPEN_DICE)		+= open-dice.o
+>>>>>>> BRANCH (02e2af Merge tag 'char-misc-5.18-rc1' of git://git.kernel.org/pub/s)
