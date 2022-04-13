@@ -1,0 +1,6 @@
+config TRAN_ANDROID_BINDER_BLOCK_MONITOR
+        bool "android binder block monitor"
+        default y
+        ---help---
+            monitor critical process binder ipc, and get server process info.
+endif # if TRAN_ANDROID_BINDER_BLOCK_MONITOR
