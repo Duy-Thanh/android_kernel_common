@@ -65,6 +65,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e22f0a52_ccd1d277",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1358017
+      },
+      "writtenOn": "2022-04-13T05:45:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c490272a_75109557",
+      "revId": "ee5a5accd3f746c6abf69e0edcb270eef5fb409c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb7b7c46_e82fee12",
@@ -78,6 +96,30 @@
       "writtenOn": "2022-04-07T07:02:22Z",
       "side": 1,
       "message": "link is not needed for upstream commits.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 83
+      },
+      "revId": "ee5a5accd3f746c6abf69e0edcb270eef5fb409c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67e17dbf_da21fc5f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1358017
+      },
+      "writtenOn": "2022-04-13T05:45:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb7b7c46_e82fee12",
       "range": {
         "startLine": 57,
         "startChar": 0,
