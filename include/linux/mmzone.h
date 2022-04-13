@@ -295,6 +295,7 @@ struct lruvec {
 #ifdef CONFIG_MEMCG
 	struct pglist_data *pgdat;
 #endif
+	ANDROID_OEM_DATA_ARRAY(1, 2);
 };
 
 /* Isolate unmapped pages */
