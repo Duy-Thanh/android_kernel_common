@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "526adc9d_d5d5e87f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1358017
+      },
+      "writtenOn": "2022-04-13T05:44:50Z",
+      "side": 1,
+      "message": "\u003e this is UPSTREAM now.",
+      "parentUuid": "aa38eca4_a208ef39",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "ee5a5accd3f746c6abf69e0edcb270eef5fb409c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c490272a_75109557",
