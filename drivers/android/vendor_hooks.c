@@ -60,12 +60,19 @@
 #include <trace/hooks/traps.h>
 #include <trace/hooks/thermal.h>
 #include <trace/hooks/audio_usboffload.h>
+<<<<<<< HEAD   (f3c632 ANDROID: ABI: Update symbol for Exynos SoC)
 #include <trace/hooks/typec.h>
 #include <trace/hooks/user.h>
 #include <trace/hooks/signal.h>
 #include <trace/hooks/psci.h>
 #include <trace/hooks/psi.h>
 #include <trace/hooks/bl_hib.h>
+=======
+#include <trace/hooks/drm_framebuffer.h>
+#include <trace/hooks/drm_atomic.h>
+#include <trace/hooks/usb.h>
+#include <trace/hooks/regmap.h>
+>>>>>>> CHANGE (53e342 ANDROID: GKI: regmap: Add regmap vendor hook for of_syscon_r)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -290,6 +297,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_del_ref);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_register);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_unregister);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_get_thermal_zone_device);
+<<<<<<< HEAD   (f3c632 ANDROID: ABI: Update symbol for Exynos SoC)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_power_cap);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_power_throttle);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_reclaim_bypass);
@@ -310,3 +318,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_post_image_save);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_pageout_skip);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue_smallest_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_one_page_bypass);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_new_device_added);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_regmap_update);
+>>>>>>> CHANGE (53e342 ANDROID: GKI: regmap: Add regmap vendor hook for of_syscon_r)
