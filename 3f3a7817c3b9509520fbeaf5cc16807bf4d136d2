@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c5e43d0_9d7dea59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-04-14T14:36:09Z",
+      "side": 1,
+      "message": "Please follow instructions in https://android-review.googlesource.com/c/kernel/common/+/2059553 to change the owner\u0027s email and Signed-off-by: tag.",
+      "revId": "3f3a7817c3b9509520fbeaf5cc16807bf4d136d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
