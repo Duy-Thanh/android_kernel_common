@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d1251edf_fb91da57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1345100
+      },
+      "writtenOn": "2022-04-14T23:37:32Z",
+      "side": 1,
+      "message": "the vendor hook implementation changes the timing of the resume.\nhaving the ability for multiple contexts to attach to this hook at the same time would have unpredictable results.\ndefining it as restricted ensures that there is just one context in which the hook executes.",
+      "parentUuid": "0909c2ee_e18bb3fc",
+      "revId": "2553a8f56911eb484dcd9225c378ca6cc0c188f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "99fd4591_d862d2dd",
         "filename": "drivers/pci/pci.c",
         "patchSetId": 10
@@ -31,6 +49,30 @@
       "writtenOn": "2022-04-14T14:16:29Z",
       "side": 1,
       "message": "just change delay here, could be:\n  `trace_android...(dev, \u0026delay);`\nand then only if delay is not 0, sleep.\n\nRemoves the extra variable.",
+      "range": {
+        "startLine": 74,
+        "startChar": 46,
+        "endLine": 74,
+        "endChar": 49
+      },
+      "revId": "2553a8f56911eb484dcd9225c378ca6cc0c188f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5bed541_877dccbd",
+        "filename": "drivers/pci/pci.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1345100
+      },
+      "writtenOn": "2022-04-14T23:37:32Z",
+      "side": 1,
+      "message": "err is set by the vendor hook framework if the vendor hook has not been implemented. I\u0027d rather not override that functionality into delay.",
+      "parentUuid": "99fd4591_d862d2dd",
       "range": {
         "startLine": 74,
         "startChar": 46,
