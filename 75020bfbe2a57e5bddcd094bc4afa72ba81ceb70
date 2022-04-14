@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "936794a6_6d09f59a",
+        "filename": "build.config.common",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2022-04-14T23:59:19Z",
+      "side": 1,
+      "message": "Can we move this too? You can do it in a follow up if you want.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 16
+      },
+      "revId": "75020bfbe2a57e5bddcd094bc4afa72ba81ceb70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
