@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70576eca_dee8767c",
+        "filename": "include/linux/page_ext.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-04-14T02:52:12Z",
+      "side": 1,
+      "message": "I think a better approach would be:\n\nenum page_ext_flags {\n\tPAGE_EXT_OWNER,\n\tPAGE_EXT_OWNER_ALLOCATED,\n#if defined(CONFIG_PAGE_PINNER)\n\t/* page migration failed */\n\tPAGE_EXT_PINNER_MIGRATION_FAILED,\n#endif\n#if defined(CONFIG_IDLE_PAGE_TRACKING) \u0026\u0026 !defined(CONFIG_64BIT)\n\tPAGE_EXT_YOUNG,\n\tPAGE_EXT_IDLE,\n#endif\n\tPAGE_EXT_LAST\n};\n\nAnd in your code you can have:\n\nenum oem_page_ext_flags {\n\tPAGE_HOT \u003d PAGE_EXT_LAST,\n\tPAGE_COLD,\n\tPAGE_FRAMEWORK,\n};\n\nThis way you can modify your enum later on easily.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 2
+      },
+      "revId": "ef588a8a9e25e10c2b3b2c369a0690d662daee65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
