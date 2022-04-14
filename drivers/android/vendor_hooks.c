@@ -58,7 +58,11 @@
 #include <trace/hooks/audio_usboffload.h>
 #include <trace/hooks/drm_framebuffer.h>
 #include <trace/hooks/drm_atomic.h>
+<<<<<<< HEAD
 #include <trace/hooks/usb.h>
+=======
+#include <trace/hooks/regmap.h>
+>>>>>>> e46721461468... ANDROID: GKI: regmap: Add regmap vendor hook for of_syscon_register
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -282,3 +286,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_atomic_remove_fb);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_drm_atomic_check_modeset);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_get_thermal_zone_device);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_new_device_added);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_regmap_update);
