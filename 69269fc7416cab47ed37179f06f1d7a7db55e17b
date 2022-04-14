@@ -57,6 +57,24 @@
       "parentUuid": "5a9adbbd_832b5b7d",
       "revId": "69269fc7416cab47ed37179f06f1d7a7db55e17b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2a9c045_9b7c8bc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-14T10:24:16Z",
+      "side": 1,
+      "message": "No, we can not allow unlimited numbers of new binder ioctls.  If you have a problem with how binder works, please work on fixing the binder core code.  As is, we have not heard of this issue at all.\n\nAlso, your new ioctl is very slow and will cause performance issues if called.",
+      "parentUuid": "733d189c_5ea57b94",
+      "revId": "69269fc7416cab47ed37179f06f1d7a7db55e17b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
