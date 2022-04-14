@@ -45,6 +45,30 @@
       },
       "revId": "076ec53e18f0ffabe07c7a5c65c137f4e9b24a63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b71ea500_acef2ffb",
+        "filename": "arch/arm64/kvm/hyp_dbg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-04-14T14:07:06Z",
+      "side": 1,
+      "message": "That\u0027s right I will move it. It doesn\u0027t make sense to keep a separate file for this small function",
+      "parentUuid": "ff3c12c8_3701413d",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 0
+      },
+      "revId": "076ec53e18f0ffabe07c7a5c65c137f4e9b24a63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
