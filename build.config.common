@@ -1,7 +1,11 @@
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.constants
 
+<<<<<<< HEAD   (65eadb Merge 5.10.110 into android13-5.10-lts)
 BRANCH=android13-5.10
 KMI_GENERATION=1
+=======
+KMI_GENERATION=3
+>>>>>>> CHANGE (75020b ANDROID: Move BRANCH from build.config.common to .constants.)
 
 LLVM=1
 DEPMOD=depmod

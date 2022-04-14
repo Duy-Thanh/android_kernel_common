@@ -1,1 +1,6 @@
+<<<<<<< HEAD   (65eadb Merge 5.10.110 into android13-5.10-lts)
 CLANG_VERSION=r445002
+=======
+BRANCH=android13-5.10
+CLANG_VERSION=r450784b
+>>>>>>> CHANGE (75020b ANDROID: Move BRANCH from build.config.common to .constants.)
