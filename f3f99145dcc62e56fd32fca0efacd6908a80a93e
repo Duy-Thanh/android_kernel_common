@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef89f544_1b004016",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1275143
+      },
+      "writtenOn": "2022-04-14T09:15:42Z",
+      "side": 1,
+      "message": "I have add the changelog text",
+      "parentUuid": "61bb2c7d_026cdd65",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 0
+      },
+      "revId": "f3f99145dcc62e56fd32fca0efacd6908a80a93e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0178ab55_c37c6e99",
