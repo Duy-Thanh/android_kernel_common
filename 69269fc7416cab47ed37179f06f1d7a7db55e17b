@@ -39,6 +39,24 @@
       "message": "Please always run checkpatch on your changes.",
       "revId": "69269fc7416cab47ed37179f06f1d7a7db55e17b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "733d189c_5ea57b94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275143
+      },
+      "writtenOn": "2022-04-14T09:57:22Z",
+      "side": 1,
+      "message": "Regardless of compilation, can you help evaluate the feasibility of the solution first?\n\nhttps://android-review.googlesource.com/c/platform/frameworks/base/+/2063470\nhttps://android-review.googlesource.com/c/platform/frameworks/native/+/2063070/\nhttps://android-review.googlesource.com/c/kernel/common/+/2063487/\n\nThese three changes are the whole content of this solution\n\nThe general principle is\nUse a watchdog to observe whether the thread of system_server has been used up. If it has been used up for more than 40 seconds, we will ioctl the binder driver to find the opposite process blocking the thread. If the opposite process is not in the foreground, kill it\n\nthanks",
+      "parentUuid": "5a9adbbd_832b5b7d",
+      "revId": "69269fc7416cab47ed37179f06f1d7a7db55e17b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
