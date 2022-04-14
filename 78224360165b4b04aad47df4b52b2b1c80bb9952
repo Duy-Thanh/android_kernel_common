@@ -95,6 +95,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba76411c_348d85a9",
+        "filename": "include/linux/mmzone.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-04-14T02:44:17Z",
+      "side": 1,
+      "message": "If you need to store multiple stats, it\u0027s better to have only one OEM field here which is a pointer to a structure with the data that you need. So, here you can have only one field ANDROID_VENDOR_DATA(1) which is used as a pointer to your stats structure.",
+      "parentUuid": "09e0ded5_0bf1f8d9",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 298,
+        "endChar": 30
+      },
+      "revId": "78224360165b4b04aad47df4b52b2b1c80bb9952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f86a0671_b50d3aa2",
         "filename": "include/linux/page_ext.h",
         "patchSetId": 5
