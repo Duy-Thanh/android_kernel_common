@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d26d0f0b_510e465d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-04-14T03:01:25Z",
+      "side": 1,
+      "message": "ANDROID: add vendor fields to lruvec to record refault stats",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 58
+      },
+      "revId": "86b079fc735e2f3f633dc4145a628bfffc2c746a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
