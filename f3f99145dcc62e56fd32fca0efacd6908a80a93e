@@ -71,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2575ffa2_707c570d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-04-14T14:39:53Z",
+      "side": 1,
+      "message": "Please follow instructions in https://android-review.googlesource.com/c/kernel/common/+/2059553 to change the owner\u0027s email and Signed-off-by: tag.",
+      "parentUuid": "0178ab55_c37c6e99",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 70
+      },
+      "revId": "f3f99145dcc62e56fd32fca0efacd6908a80a93e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8d2736d2_1abc26d1",
