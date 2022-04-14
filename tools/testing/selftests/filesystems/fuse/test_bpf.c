@@ -594,3 +594,68 @@ int error_test(struct fuse_bpf_args *fa)
 	}
 }
 
+SEC("test_verify")
+
+int verify_test(struct fuse_bpf_args *fa)
+{
+	if (fa->opcode == (FUSE_MKDIR | FUSE_PREFILTER)) {
+		const char *start;
+		const char *end;
+		const struct fuse_mkdir_in *in;
+
+		start = fa->in_args[0].value;
+		end = fa->in_args[0].end_offset;
+		if (start + sizeof(*in) <= end) {
+			in = (struct fuse_mkdir_in *)(start);
+			bpf_printk("test1: %d %d", in->mode, in->umask);
+		}
+
+		return FUSE_BPF_BACKING;
+	}
+	return FUSE_BPF_BACKING;
+}
+
+SEC("test_verify_fail")
+
+int verify_fail_test(struct fuse_bpf_args *fa)
+{
+	struct t {
+		uint32_t a;
+		uint32_t b;
+		char d[];
+	};
+	if (fa->opcode == (FUSE_MKDIR | FUSE_PREFILTER)) {
+		const char *start;
+		const char *end;
+		const struct t *c;
+
+		start = fa->in_args[0].value;
+		end = fa->in_args[0].end_offset;
+		if (start + sizeof(struct t) <= end) {
+			c = (struct t *)start;
+			bpf_printk("test1: %d %d %d", c->a, c->b, c->d[0]);
+		}
+		return FUSE_BPF_BACKING;
+	}
+	return FUSE_BPF_BACKING;
+}
+
+SEC("test_verify_fail2")
+
+int verify_fail_test2(struct fuse_bpf_args *fa)
+{
+	if (fa->opcode == (FUSE_MKDIR | FUSE_PREFILTER)) {
+		const char *start;
+		const char *end;
+		struct fuse_mkdir_in *c;
+
+		start = fa->in_args[0].value;
+		end = fa->in_args[1].end_offset;
+		if (start + sizeof(*c) <= end) {
+			c = (struct fuse_mkdir_in *)start;
+			bpf_printk("test1: %d %d", c->mode, c->umask);
+		}
+		return FUSE_BPF_BACKING;
+	}
+	return FUSE_BPF_BACKING;
+}

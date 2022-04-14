@@ -317,4 +317,6 @@ int mount_fuse_no_init(const char *mount_dir, int bpf_fd, int dir_fd,
 	       int *fuse_dev_ptr);
 int install_elf_bpf(const char *file, const char *section, int *fd,
 		    struct map_relocation **map_relocations, size_t *map_count);
+int install_elf_bpf_invalid(const char *file, const char *section, int *fd,
+		    struct map_relocation **map_relocations, size_t *map_count);
 #endif

@@ -40,10 +40,16 @@ static bool fuse_prog_is_valid_access(int off, int size,
 		return false;
 
 	/* TODO This is garbage. Do it properly */
-	for (i = 0; i < 5; i++) {
+	for (i = 0; i < FUSE_MAX_IN_ARGS; i++) {
 		if (off == offsetof(struct fuse_bpf_args, in_args[i].value)) {
-			info->reg_type = PTR_TO_RDONLY_BUF;
-			info->ctx_field_size = 256;
+			info->reg_type = PTR_TO_PACKET;
+			info->data_id = i;
+			if (type != BPF_READ)
+				return false;
+			return true;
+		} else if (off == offsetof(struct fuse_bpf_args, in_args[i].end_offset)) {
+			info->reg_type = PTR_TO_PACKET_END;
+			info->data_id = i;
 			if (type != BPF_READ)
 				return false;
 			return true;
