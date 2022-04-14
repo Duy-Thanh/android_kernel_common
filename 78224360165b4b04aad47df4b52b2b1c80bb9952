@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2796d830_e5d75b9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1275143
+      },
+      "writtenOn": "2022-04-14T07:34:59Z",
+      "side": 1,
+      "message": "This has been deleted.",
+      "parentUuid": "639ccb15_e4d87f53",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 21
+      },
+      "revId": "78224360165b4b04aad47df4b52b2b1c80bb9952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b8b6c75_079f4c95",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01d814b5_a957c68a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1275143
+      },
+      "writtenOn": "2022-04-14T07:34:59Z",
+      "side": 1,
+      "message": "I have split this patch to 2 patches, each containing a commit, including this patch and https://android-review.googlesource.com/c/kernel/common/+/2063747\n\nRelated explaination have been added in this patch.",
+      "parentUuid": "2b8b6c75_079f4c95",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 71
+      },
+      "revId": "78224360165b4b04aad47df4b52b2b1c80bb9952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "803ba797_f0dd5120",
@@ -84,6 +132,30 @@
       "writtenOn": "2022-04-13T07:22:57Z",
       "side": 1,
       "message": "not needed.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 70
+      },
+      "revId": "78224360165b4b04aad47df4b52b2b1c80bb9952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75bb84ad_75ab4607",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1275143
+      },
+      "writtenOn": "2022-04-14T07:34:59Z",
+      "side": 1,
+      "message": "Without this line of signed-off-by, the publish will fail with the follow message:\nAn error occurred\nCould not perform action: not Signed-off-by author/committer/uploader in message footer",
+      "parentUuid": "803ba797_f0dd5120",
       "range": {
         "startLine": 17,
         "startChar": 0,
@@ -141,6 +213,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "156c1c24_9c114979",
+        "filename": "include/linux/mmzone.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1275143
+      },
+      "writtenOn": "2022-04-14T07:34:59Z",
+      "side": 1,
+      "message": "I have changed as you suggested, replacing ANDROID_OEM_DATA_ARRAY(1, 2) with ANDROID_VENDOR_DATA(1).",
+      "parentUuid": "09e0ded5_0bf1f8d9",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 298,
+        "endChar": 30
+      },
+      "revId": "78224360165b4b04aad47df4b52b2b1c80bb9952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f86a0671_b50d3aa2",
@@ -154,6 +250,30 @@
       "writtenOn": "2022-04-13T07:22:57Z",
       "side": 1,
       "message": "make these obvious they are for android-only please.  If they are really needed, it\u0027s odd that 3 new flags are required here.  That feels very wrong, please justify the use in detail.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 16
+      },
+      "revId": "78224360165b4b04aad47df4b52b2b1c80bb9952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7dbfe7e_3be736a7",
+        "filename": "include/linux/page_ext.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1275143
+      },
+      "writtenOn": "2022-04-14T07:34:59Z",
+      "side": 1,
+      "message": "Is configured by macro(CONFIG_ANDROID), and the 3 new flags are described in detail in patch: https://android-review.googlesource.com/c/kernel/common/+/2063747",
+      "parentUuid": "f86a0671_b50d3aa2",
       "range": {
         "startLine": 30,
         "startChar": 0,

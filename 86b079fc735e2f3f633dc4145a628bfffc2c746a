@@ -22,6 +22,30 @@
       },
       "revId": "86b079fc735e2f3f633dc4145a628bfffc2c746a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cdcf6fd_2f821669",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1275143
+      },
+      "writtenOn": "2022-04-14T07:34:59Z",
+      "side": 1,
+      "message": "I have changed as you suggested.",
+      "parentUuid": "d26d0f0b_510e465d",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 58
+      },
+      "revId": "86b079fc735e2f3f633dc4145a628bfffc2c746a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
