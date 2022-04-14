@@ -43,6 +43,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1fabd594_694ad884",
+        "filename": "include/linux/page_ext.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-14T04:55:18Z",
+      "side": 1,
+      "message": "not how to check for config options at all.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 27
+      },
+      "revId": "ef588a8a9e25e10c2b3b2c369a0690d662daee65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be73e072_16bdbb75",
+        "filename": "include/linux/page_ext.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-14T04:55:18Z",
+      "side": 1,
+      "message": "name these to be explicit that these are for android-only, otherwise people can get confused.",
+      "range": {
+        "startLine": 31,
+        "startChar": 1,
+        "endLine": 31,
+        "endChar": 9
+      },
+      "revId": "ef588a8a9e25e10c2b3b2c369a0690d662daee65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70576eca_dee8767c",
         "filename": "include/linux/page_ext.h",
         "patchSetId": 6
