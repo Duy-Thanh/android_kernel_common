@@ -116,7 +116,8 @@ struct f2fs_super_block {
 	__u8 hot_ext_count;		/* # of hot file extension */
 	__le16  s_encoding;		/* Filename charset encoding */
 	__le16  s_encoding_flags;	/* Filename charset encoding flags */
-	__u8 reserved[306];		/* valid reserved region */
+    ANDROID_OEM_DATA_ARRAY(1, 264);
+	__u8 reserved[42];		/* valid reserved region */
 	__le32 crc;			/* checksum of superblock */
 } __packed;
 
