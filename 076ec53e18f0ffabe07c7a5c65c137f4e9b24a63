@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3de01e7a_7e40234a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-04-14T13:28:34Z",
+      "side": 1,
+      "message": "Aha, so interestingly this means the ESR will be the one we took from the HC. That might actually be a good thing --  at least it will be obvious from the backtrace that this hcall caused the issue.",
+      "range": {
+        "startLine": 1059,
+        "startChar": 1,
+        "endLine": 1059,
+        "endChar": 43
+      },
+      "revId": "076ec53e18f0ffabe07c7a5c65c137f4e9b24a63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff3c12c8_3701413d",
+        "filename": "arch/arm64/kvm/hyp_dbg.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-04-14T13:28:34Z",
+      "side": 1,
+      "message": "Nit: no strong opinion, but maybe move this to arm.c? This is so small I don\u0027t think this will conflict all that much.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 0
+      },
+      "revId": "076ec53e18f0ffabe07c7a5c65c137f4e9b24a63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
