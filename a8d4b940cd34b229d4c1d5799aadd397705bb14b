@@ -94,6 +94,30 @@
       },
       "revId": "a8d4b940cd34b229d4c1d5799aadd397705bb14b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc1989cf_0d40da5f",
+        "filename": "arch/arm64/kvm/hyp_dbg.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-04-14T12:40:37Z",
+      "side": 1,
+      "message": "We definitely have a sub-section in .text for the hyp code, see https://android.googlesource.com/kernel/common/+/refs/heads/android13-5.10/arch/arm64/kernel/vmlinux.lds.S#92\n\nThe prefixing is done by some objcopy magic when creating the EL2 object, see https://android.googlesource.com/kernel/common/+/refs/heads/android13-5.10/arch/arm64/kvm/hyp/nvhe/Makefile#83\n\nSo, I really think hyp_debug_service_testpoint() is currently not reachable from EL2 as it falls outside of the .hyp.text section and it isn\u0027t mapped in the hypervisor stage-1. Interestingly, accessing this will in fact panic the hypervisor, but clearly that is \u0027luck\u0027 in this case :)",
+      "parentUuid": "d83added_ef3914a6",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 1
+      },
+      "revId": "a8d4b940cd34b229d4c1d5799aadd397705bb14b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
