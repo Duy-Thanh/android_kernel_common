@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1c8b4a8_eddc97ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1275143
+      },
+      "writtenOn": "2022-04-14T07:11:04Z",
+      "side": 1,
+      "message": "I have changed as you suggested",
+      "parentUuid": "9451012b_76382c38",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 58
+      },
+      "revId": "ef588a8a9e25e10c2b3b2c369a0690d662daee65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41bbc98a_eb9d5cfe",
@@ -41,6 +65,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "311299d8_5669260c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275143
+      },
+      "writtenOn": "2022-04-14T07:11:04Z",
+      "side": 1,
+      "message": "This patch is https://android-review.googlesource.com/c/kernel/common/+/2063747",
+      "parentUuid": "41bbc98a_eb9d5cfe",
+      "revId": "ef588a8a9e25e10c2b3b2c369a0690d662daee65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fabd594_694ad884",
@@ -54,6 +96,30 @@
       "writtenOn": "2022-04-14T04:55:18Z",
       "side": 1,
       "message": "not how to check for config options at all.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 27
+      },
+      "revId": "ef588a8a9e25e10c2b3b2c369a0690d662daee65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0e92ac7_d71e707d",
+        "filename": "include/linux/page_ext.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1275143
+      },
+      "writtenOn": "2022-04-14T07:11:04Z",
+      "side": 1,
+      "message": "I have deleted this, adopt the suggestion of Suren Baghdasaryan to add PAGE_EXT_LAST  at the end of page_ext_flags",
+      "parentUuid": "1fabd594_694ad884",
       "range": {
         "startLine": 30,
         "startChar": 0,
@@ -87,6 +153,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ff7a0a1_7bd22543",
+        "filename": "include/linux/page_ext.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1275143
+      },
+      "writtenOn": "2022-04-14T07:11:04Z",
+      "side": 1,
+      "message": "I have deleted this, adopt the suggestion of Suren Baghdasaryan to add PAGE_EXT_LAST  at the end of page_ext_flags",
+      "parentUuid": "be73e072_16bdbb75",
+      "range": {
+        "startLine": 31,
+        "startChar": 1,
+        "endLine": 31,
+        "endChar": 9
+      },
+      "revId": "ef588a8a9e25e10c2b3b2c369a0690d662daee65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70576eca_dee8767c",
@@ -100,6 +190,30 @@
       "writtenOn": "2022-04-14T02:52:12Z",
       "side": 1,
       "message": "I think a better approach would be:\n\nenum page_ext_flags {\n\tPAGE_EXT_OWNER,\n\tPAGE_EXT_OWNER_ALLOCATED,\n#if defined(CONFIG_PAGE_PINNER)\n\t/* page migration failed */\n\tPAGE_EXT_PINNER_MIGRATION_FAILED,\n#endif\n#if defined(CONFIG_IDLE_PAGE_TRACKING) \u0026\u0026 !defined(CONFIG_64BIT)\n\tPAGE_EXT_YOUNG,\n\tPAGE_EXT_IDLE,\n#endif\n\tPAGE_EXT_LAST\n};\n\nAnd in your code you can have:\n\nenum oem_page_ext_flags {\n\tPAGE_HOT \u003d PAGE_EXT_LAST,\n\tPAGE_COLD,\n\tPAGE_FRAMEWORK,\n};\n\nThis way you can modify your enum later on easily.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 2
+      },
+      "revId": "ef588a8a9e25e10c2b3b2c369a0690d662daee65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf8cf760_8cca11ea",
+        "filename": "include/linux/page_ext.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1275143
+      },
+      "writtenOn": "2022-04-14T07:11:04Z",
+      "side": 1,
+      "message": "I have changed as you suggested",
+      "parentUuid": "70576eca_dee8767c",
       "range": {
         "startLine": 19,
         "startChar": 0,
