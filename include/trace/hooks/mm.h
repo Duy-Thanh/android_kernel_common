@@ -116,6 +116,10 @@ DECLARE_HOOK(android_vh_mem_cgroup_css_online,
 DECLARE_HOOK(android_vh_mem_cgroup_css_offline,
 	TP_PROTO(struct cgroup_subsys_state *css, struct mem_cgroup *memcg),
 	TP_ARGS(css, memcg));
+struct file;
+DECLARE_RESTRICTED_HOOK(android_rvh_ra_tuning_max_page,
+	TP_PROTO(struct file *filp, unsigned long *max_page),
+	TP_ARGS(filp, max_page), 1);
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_MM_H */
