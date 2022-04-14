@@ -51,6 +51,7 @@
 #include <trace/hooks/futex.h>
 #include <trace/hooks/bug.h>
 #include <trace/hooks/signal.h>
+#include <trace/hooks/regmap.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -175,3 +176,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_cpu_resume);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_hib_resume_bdev);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_futex_plist_add);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_report_bug);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_regmap_update);
