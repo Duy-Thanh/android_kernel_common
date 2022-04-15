@@ -50,6 +50,42 @@
       "message": "Shouldn\u0027t this just be 1 commit, not 3?  Add it in the format which you know is correct and should be added.",
       "revId": "7e7c2fa80f93eb43bcc08630eeb64b3a37dbbad3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6420653d_3a5067fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2022-04-15T19:50:23Z",
+      "side": 1,
+      "message": "Squashed to a single commit for android-mainline.  The reason it was three is that this has (unfortunately) evolved over the last few months in the android13-5.15 branch.  It is definitely cleaner and less overhead to have a single commit.\n\nBeyond that though, I am wondering what you mean \"Add in the format which you know is correct\".  At this time I believe the format of the patch is correct, but any candid feedback is welcome.",
+      "parentUuid": "a47c967c_1e4b001f",
+      "revId": "7e7c2fa80f93eb43bcc08630eeb64b3a37dbbad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "560c5f9c_321aa891",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2022-04-15T19:50:23Z",
+      "side": 1,
+      "message": "Internally it has been suggested that all tracehooks that we\u0027re interested in, are merged to android-mainline.  This ensures that we won\u0027t have to re-request these trace-hooks in the next kernel revision.  I could really use your opinion on this.",
+      "parentUuid": "4d074e99_0b7cbbdf",
+      "revId": "7e7c2fa80f93eb43bcc08630eeb64b3a37dbbad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
