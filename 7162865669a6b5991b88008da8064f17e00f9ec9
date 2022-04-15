@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0619a8db_38b63f8c",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-04-15T22:34:15Z",
+      "side": 1,
+      "message": "OK, but don\u0027t you also want to restore the code in poll to update this when the kernel log output path is not active?",
+      "revId": "7162865669a6b5991b88008da8064f17e00f9ec9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6401cb47_5021c7bd",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-04-15T22:34:15Z",
+      "side": 1,
+      "message": "Would it be simpler to have a single state variable to check here instead?",
+      "revId": "7162865669a6b5991b88008da8064f17e00f9ec9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
