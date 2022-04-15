@@ -81,6 +81,30 @@
       },
       "revId": "2553a8f56911eb484dcd9225c378ca6cc0c188f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c241e049_33707194",
+        "filename": "drivers/pci/pci.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-15T04:48:47Z",
+      "side": 1,
+      "message": "there is no vendor hook framework here, you can use whatever you want.  That would make it much simpler and less code overall.",
+      "parentUuid": "e5bed541_877dccbd",
+      "range": {
+        "startLine": 74,
+        "startChar": 46,
+        "endLine": 74,
+        "endChar": 49
+      },
+      "revId": "2553a8f56911eb484dcd9225c378ca6cc0c188f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
