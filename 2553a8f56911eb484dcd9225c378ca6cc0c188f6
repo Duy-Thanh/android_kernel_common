@@ -105,6 +105,30 @@
       },
       "revId": "2553a8f56911eb484dcd9225c378ca6cc0c188f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecebd26e_c93bce69",
+        "filename": "drivers/pci/pci.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1345100
+      },
+      "writtenOn": "2022-04-15T15:44:30Z",
+      "side": 1,
+      "message": "aah, I thought there would be some error returned if trace_android_rvh_pci_d3_sleep() was not found.\n\nso just to be sure I understand the change you are proposing ..\n\nstatic void pci_dev_d3_sleep(struct pci_dev *dev)\n{\n\tunsigned int delay \u003d dev-\u003ed3hot_delay;\n\tif (delay \u003c pci_pm_d3hot_delay)\n\t\tdelay \u003d pci_pm_d3hot_delay;\n\tif (delay) {\n\t\ttrace_android_rvh_pci_d3_sleep(dev, \u0026delay);\n\t\tif (delay)\n\t\t\tmsleep(delay);\n\t}\n}\n\nAnd in the implementation of the vendor hook, I\u0027d set delay \u003d 0, to skip the mdelay() ?\n\nstatic void exynos_d3_sleep_hook(void *unused, struct pci_dev *dev,\n\t\t\t\t unsigned int *delay)\n{\n\tusleep_range(*delay * 1000, *delay * 1000);\n\t*delay \u003d 0;\n}",
+      "parentUuid": "c241e049_33707194",
+      "range": {
+        "startLine": 74,
+        "startChar": 46,
+        "endLine": 74,
+        "endChar": 49
+      },
+      "revId": "2553a8f56911eb484dcd9225c378ca6cc0c188f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
