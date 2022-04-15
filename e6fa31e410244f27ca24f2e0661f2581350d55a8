@@ -16,6 +16,23 @@
       "message": "is_cpu_allowed series for android-mainline\n\n",
       "revId": "e6fa31e410244f27ca24f2e0661f2581350d55a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "132bd994_bdd3861e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2022-04-15T19:44:18Z",
+      "side": 1,
+      "message": "Abandon This Change,  for android-mainline the relevant patches will be squashed to a single commit.",
+      "revId": "e6fa31e410244f27ca24f2e0661f2581350d55a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
