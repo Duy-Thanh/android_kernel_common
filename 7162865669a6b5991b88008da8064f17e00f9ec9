@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d2447b6b_3711ab35",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-04-16T00:38:06Z",
+      "side": 1,
+      "message": "Without it we would dump the entire trusty log buffer on every Linux panic though.",
+      "parentUuid": "cb380337_99011c03",
+      "revId": "7162865669a6b5991b88008da8064f17e00f9ec9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6401cb47_5021c7bd",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 5
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Wouldn\u0027t that just move whatever complexity there is here to a different place or places?\nMaybe I\u0027m misunderstanding what you mean, but such a state variable would still have to be set based on the value of log_to_dmesg_param and whether or not the virtual file has been opened, so I think that would mean adding code to both trusty_log_mode_set and trusty_log_sfile_dev_open.",
       "parentUuid": "6401cb47_5021c7bd",
+      "revId": "7162865669a6b5991b88008da8064f17e00f9ec9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca4a0bb1_6c8f07e5",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-04-16T00:38:06Z",
+      "side": 1,
+      "message": "If this is the only reader yes, but if poll also need to know if the log is enabled, then I was thinking a single state variable might be simpler. The state check that poll would need can be simplified though compared to this site so the end result is probably not that different.",
+      "parentUuid": "1ee26652_b28cfd7b",
       "revId": "7162865669a6b5991b88008da8064f17e00f9ec9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
