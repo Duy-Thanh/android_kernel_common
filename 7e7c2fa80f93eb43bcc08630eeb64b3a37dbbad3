@@ -86,6 +86,24 @@
       "parentUuid": "4d074e99_0b7cbbdf",
       "revId": "7e7c2fa80f93eb43bcc08630eeb64b3a37dbbad3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e421b5d_d544a729",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-16T15:21:10Z",
+      "side": 1,
+      "message": "If you do not need these now, no, do not add them as they just cause merge issues and maintenance work on our side.  Add them only for the specific branches that you need them for, relying on hooks for forever is not ever the correct solution, work with upstream to do it correct, do not rely on this crutch.",
+      "parentUuid": "560c5f9c_321aa891",
+      "revId": "7e7c2fa80f93eb43bcc08630eeb64b3a37dbbad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
