@@ -153,6 +153,30 @@
       },
       "revId": "2553a8f56911eb484dcd9225c378ca6cc0c188f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0e2f0e4_a91ab017",
+        "filename": "drivers/pci/pci.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1345100
+      },
+      "writtenOn": "2022-04-16T16:04:53Z",
+      "side": 1,
+      "message": "It may be simpler, but not a big fan of the delay variable being overloaded to return an error status. It makes reading the code less intuitive. Also if the vendor hook decides to return an error it\u0027ll make the code even more awkward.",
+      "parentUuid": "86bc20d6_32b7d81a",
+      "range": {
+        "startLine": 74,
+        "startChar": 46,
+        "endLine": 74,
+        "endChar": 49
+      },
+      "revId": "2553a8f56911eb484dcd9225c378ca6cc0c188f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
