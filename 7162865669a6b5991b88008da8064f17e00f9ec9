@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cb380337_99011c03",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-04-16T00:13:29Z",
+      "side": 1,
+      "message": "Possibly? I had that in the previous patch set, but I dropped it after in the discussion yesterday it was said that it\u0027s better to duplicate logs than to have a gap. With the code in poll there would be the possibility of a gap in the logs if logd reads the logs but hasn\u0027t yet persisted them when there\u0027s a panic. Are we OK with that?",
+      "parentUuid": "0619a8db_38b63f8c",
+      "revId": "7162865669a6b5991b88008da8064f17e00f9ec9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6401cb47_5021c7bd",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 5
@@ -31,6 +49,24 @@
       "writtenOn": "2022-04-15T22:34:15Z",
       "side": 1,
       "message": "Would it be simpler to have a single state variable to check here instead?",
+      "revId": "7162865669a6b5991b88008da8064f17e00f9ec9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ee26652_b28cfd7b",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-04-16T00:13:29Z",
+      "side": 1,
+      "message": "Wouldn\u0027t that just move whatever complexity there is here to a different place or places?\nMaybe I\u0027m misunderstanding what you mean, but such a state variable would still have to be set based on the value of log_to_dmesg_param and whether or not the virtual file has been opened, so I think that would mean adding code to both trusty_log_mode_set and trusty_log_sfile_dev_open.",
+      "parentUuid": "6401cb47_5021c7bd",
       "revId": "7162865669a6b5991b88008da8064f17e00f9ec9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
