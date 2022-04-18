@@ -39,6 +39,10 @@
 
 #include "dma-buf-sysfs-stats.h"
 
+#include <trace/hooks/dmabuf.h>
+#include <linux/android_kabi.h>
+ANDROID_KABI_DECLONLY(trace_eval_map);
+
 DEFINE_STATIC_KEY_TRUE(dmabuf_accounting_key);
 
 static DEFINE_MUTEX(dmabuf_list_mutex);
@@ -165,6 +169,7 @@ static void dma_buf_release(struct dentry *dentry)
 	dma_buf_stats_teardown(dmabuf);
 	dmabuf->ops->release(dmabuf);
 
+	trace_android_vh_dma_buf_release(dmabuf);
 	if (dmabuf->resv == (struct dma_resv *)&dmabuf[1])
 		dma_resv_fini(dmabuf->resv);
 
