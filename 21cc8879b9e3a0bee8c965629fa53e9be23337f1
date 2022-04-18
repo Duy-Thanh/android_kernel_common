@@ -16,6 +16,24 @@
       "message": "git push origin HEAD:refs/for/brillo-m10-release be",
       "revId": "21cc8879b9e3a0bee8c965629fa53e9be23337f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5162b49a_14f2cc4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-18T11:31:51Z",
+      "side": 1,
+      "message": "????",
+      "parentUuid": "742c1886_42b691bf",
+      "revId": "21cc8879b9e3a0bee8c965629fa53e9be23337f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
