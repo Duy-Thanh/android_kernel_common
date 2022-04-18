@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffedce99_1a7bbcfd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1345100
+      },
+      "writtenOn": "2022-04-18T21:55:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d1251edf_fb91da57",
+      "revId": "2553a8f56911eb484dcd9225c378ca6cc0c188f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99fd4591_d862d2dd",
@@ -217,6 +235,30 @@
       "side": 1,
       "message": "I\u0027ll make the change and push it again for review.",
       "parentUuid": "95ddbe0f_dc126e4f",
+      "range": {
+        "startLine": 74,
+        "startChar": 46,
+        "endLine": 74,
+        "endChar": 49
+      },
+      "revId": "2553a8f56911eb484dcd9225c378ca6cc0c188f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4c73dcd_7fff2739",
+        "filename": "drivers/pci/pci.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1345100
+      },
+      "writtenOn": "2022-04-18T21:55:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4e9b2fd7_b8dc2e25",
       "range": {
         "startLine": 74,
         "startChar": 46,
