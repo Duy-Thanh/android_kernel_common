@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76be79f7_a13b6d49",
+        "filename": "include/trace/hooks/psci.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-04-18T01:14:06Z",
+      "side": 1,
+      "message": "please remove this inclusion (no longer needed)",
+      "revId": "a0d40efdc79c8963553bca5f5f19bf05a87b6bd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
