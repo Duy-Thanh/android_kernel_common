@@ -35,8 +35,22 @@
 
 #include "dma-buf-sysfs-stats.h"
 
+<<<<<<< HEAD   (db15f4990be1b8865ae651c9d748d43c91bb9d13 Merge 6.18.13 into android17-6.18)
 static DEFINE_MUTEX(dmabuf_list_mutex);
 static LIST_HEAD(dmabuf_list);
+||||||| BASE   (affdb774d7ec489843c01b1e82a1c4626af9e0c6 ANDROID: GKI: update symbol list file for xiaomi)
+#if IS_ENABLED(CONFIG_DEBUG_FS)
+static DEFINE_MUTEX(debugfs_list_mutex);
+static LIST_HEAD(debugfs_list);
+=======
+#include <trace/hooks/dmabuf.h>
+#include <linux/android_kabi.h>
+ANDROID_KABI_DECLONLY(trace_eval_map);
+
+#if IS_ENABLED(CONFIG_DEBUG_FS)
+static DEFINE_MUTEX(debugfs_list_mutex);
+static LIST_HEAD(debugfs_list);
+>>>>>>> CHANGE (1d3cdeb464ce95d74494c87ca07c3d1ac17cadf1 ANDROID: GKI: dma-buf: add vendor hook for dma_buf_release)
 
 static void __dma_buf_list_add(struct dma_buf *dmabuf)
 {
@@ -159,6 +173,7 @@ static void dma_buf_release(struct dentry *dentry)
 	dma_buf_stats_teardown(dmabuf);
 	dmabuf->ops->release(dmabuf);
 
+	trace_android_vh_dma_buf_release(dmabuf);
 	if (dmabuf->resv == (struct dma_resv *)&dmabuf[1])
 		dma_resv_fini(dmabuf->resv);
 
