@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c7b8b7b_10e07412",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-04-18T22:05:37Z",
+      "side": 1,
+      "message": "I think more importantly restricted vendorhook is needed because there might be a sleep inside the hook in this case.",
+      "parentUuid": "ffedce99_1a7bbcfd",
+      "revId": "2553a8f56911eb484dcd9225c378ca6cc0c188f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99fd4591_d862d2dd",
