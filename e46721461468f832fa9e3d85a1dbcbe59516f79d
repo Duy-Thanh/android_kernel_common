@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98ec870c_21d8da57",
+        "filename": "include/trace/hooks/regmap.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-04-18T01:11:55Z",
+      "side": 1,
+      "message": "This inclusion is no longer necessary, please remove it.",
+      "revId": "e46721461468f832fa9e3d85a1dbcbe59516f79d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1326de2_7b11cdfc",
+        "filename": "include/trace/hooks/regmap.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-04-18T01:11:55Z",
+      "side": 1,
+      "message": "please remove this inclusion since it can affect the visibility of structures. Instead, just do an explicit:\n```\nstruct regmap_config;\nstruct regmap;\n```",
+      "revId": "e46721461468f832fa9e3d85a1dbcbe59516f79d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
