@@ -16,6 +16,24 @@
       "message": "Failed checkpatch:\n```\nSummary:\n\nERROR:TRAILING_WHITESPACE: trailing whitespace\n#59: FILE: drivers/thermal/gov_power_allocator.c:727:\n--\nERROR:TRAILING_WHITESPACE: trailing whitespace\n#60: FILE: drivers/thermal/gov_power_allocator.c:728:\n--\nERROR:CODE_INDENT: code indent should use tabs where possible\n#60: FILE: drivers/thermal/gov_power_allocator.c:728:\n--\nERROR:CODE_INDENT: code indent should use tabs where possible\n#61: FILE: drivers/thermal/gov_power_allocator.c:729:\n--\nERROR:TRAILING_WHITESPACE: trailing whitespace\n#66: FILE: drivers/thermal/gov_power_allocator.c:734:\n--\nERROR:CODE_INDENT: code indent should use tabs where possible\n#67: FILE: drivers/thermal/gov_power_allocator.c:735:\n\nSee checkpatch.log for complete output.\n```\n",
       "revId": "df864ea9af677db377dfd354e4ad756bb162ab68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "605ba31e_6a5aa38f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1928107
+      },
+      "writtenOn": "2022-04-18T01:49:41Z",
+      "side": 1,
+      "message": "Thanks a lot! I will fix these errors.",
+      "parentUuid": "30f532c5_dc548241",
+      "revId": "df864ea9af677db377dfd354e4ad756bb162ab68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
