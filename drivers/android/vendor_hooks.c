@@ -517,6 +517,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_anonymous_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uprobes_uprobe_write);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_swap_bio_charge);
+<<<<<<< PATCH SET (2f06bed246e056a54d0628e5c55881eea62577a4 ANDROID: GKI: dma-buf: add vendor hook for dma_buf_release)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_buf_release);
+||||||| BASE      (ef6386ddb0f30b65bebb7030a90f00d93f8cee6f ANDROID: GKI: update symbol list for xiaomi)
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_folio_drop_mmap_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_folio_drop_mmap_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_update_page);
@@ -529,3 +533,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_up_write);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_percpu_rwsem_wait_complete);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_release_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_end);
+>>>>>>> BASE      (9f7bf2771d01084d90826addcb6869171b786e1c ANDROID: GKI: Add symbols to xiaomi symbol list)
