@@ -16,6 +16,24 @@
       "message": "please fix the changelog text.",
       "revId": "551a1b5a495a6087becb4855fbb049b020593cec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85975a50_a71bb168",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373349
+      },
+      "writtenOn": "2022-04-19T10:43:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a611cf0a_4a9ab1d4",
+      "revId": "551a1b5a495a6087becb4855fbb049b020593cec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
