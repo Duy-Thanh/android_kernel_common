@@ -51,6 +51,23 @@
       "message": "I think in practice, the OEMs that were using ext4 userdata don\u0027t have any kind of track record for upgrading vendor, so I think any code we leave in a13-5.10 will be dead code..",
       "revId": "6094ca10dad5ab7d2db9eccdc000e5029ffa7058",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b298791b_29086d7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-04-19T21:58:54Z",
+      "side": 1,
+      "message": "Any update on this CL, or should it be abandoned?",
+      "revId": "6094ca10dad5ab7d2db9eccdc000e5029ffa7058",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
