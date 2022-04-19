@@ -3800,6 +3800,7 @@
       <elf-symbol name='bpf_stats_enabled_key' size='16' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf84bd6ee'/>
       <elf-symbol name='clk_fixed_factor_ops' size='216' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb94d81d6'/>
       <elf-symbol name='clk_fixed_rate_ops' size='216' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5299a868'/>
+      <elf-symbol name='console_set_on_cmdline' size='4' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2459bbcc'/>
       <elf-symbol name='console_suspend_enabled' size='1' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x366307a'/>
       <elf-symbol name='contig_page_data' size='6976' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7007215'/>
       <elf-symbol name='cpu_all_bits' size='8' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd994ecee'/>
@@ -19652,7 +19653,7 @@
           <var-decl name='flags' type-id='f9b06939' visibility='default' filepath='include/drm/drm_edid.h' line='105' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='48'>
-          <var-decl name='formula' type-id='ac5ab5bd' visibility='default' filepath='include/drm/drm_edid.h' line='124' column='1'/>
+          <var-decl name='formula' type-id='ac5ab5bc' visibility='default' filepath='include/drm/drm_edid.h' line='124' column='1'/>
         </data-member>
       </class-decl>
       <pointer-type-def type-id='154f1323' size-in-bits='64' id='2d642297'/>
@@ -26676,7 +26677,7 @@
           <var-decl name='pad2' type-id='f9b06939' visibility='default' filepath='include/drm/drm_edid.h' line='150' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='24'>
-          <var-decl name='data' type-id='ac5ab5be' visibility='default' filepath='include/drm/drm_edid.h' line='157' column='1'/>
+          <var-decl name='data' type-id='ac5ab5bd' visibility='default' filepath='include/drm/drm_edid.h' line='157' column='1'/>
         </data-member>
       </class-decl>
       <function-type size-in-bits='64' id='419202b8'>
@@ -39405,7 +39406,7 @@
           <var-decl name='sequence' type-id='91ce1af9' visibility='default' filepath='include/drm/drm_vblank.h' line='54' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='704'>
-          <var-decl name='event' type-id='ac5ab5c0' visibility='default' filepath='include/drm/drm_vblank.h' line='78' column='1'/>
+          <var-decl name='event' type-id='ac5ab5bf' visibility='default' filepath='include/drm/drm_vblank.h' line='78' column='1'/>
         </data-member>
       </class-decl>
       <pointer-type-def type-id='8a324762' size-in-bits='64' id='6430463c'/>
@@ -67368,18 +67369,7 @@
           <var-decl name='' type-id='e7f43f87' visibility='default' filepath='drivers/base/regmap/internal.h' line='52' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/linux/dma-fence.h' line='84' column='1' id='ac5ab5bc'>
-        <data-member access='public'>
-          <var-decl name='cb_list' type-id='72f469ec' visibility='default' filepath='include/linux/dma-fence.h' line='85' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='timestamp' type-id='fbc017ef' visibility='default' filepath='include/linux/dma-fence.h' line='87' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='rcu' type-id='e3d8ce29' visibility='default' filepath='include/linux/dma-fence.h' line='89' column='1'/>
-        </data-member>
-      </union-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='56' is-anonymous='yes' visibility='default' filepath='include/drm/drm_edid.h' line='106' column='1' id='ac5ab5bd'>
+      <union-decl name='__anonymous_union__' size-in-bits='56' is-anonymous='yes' visibility='default' filepath='include/drm/drm_edid.h' line='106' column='1' id='ac5ab5bc'>
         <data-member access='public'>
           <var-decl name='gtf2' type-id='e7f43f93' visibility='default' filepath='include/drm/drm_edid.h' line='114' column='1'/>
         </data-member>
@@ -67387,7 +67377,7 @@
           <var-decl name='cvt' type-id='e7f43f94' visibility='default' filepath='include/drm/drm_edid.h' line='123' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='104' is-anonymous='yes' visibility='default' filepath='include/drm/drm_edid.h' line='151' column='1' id='ac5ab5be'>
+      <union-decl name='__anonymous_union__' size-in-bits='104' is-anonymous='yes' visibility='default' filepath='include/drm/drm_edid.h' line='151' column='1' id='ac5ab5bd'>
         <data-member access='public'>
           <var-decl name='str' type-id='9839ad2e' visibility='default' filepath='include/drm/drm_edid.h' line='152' column='1'/>
         </data-member>
@@ -67404,7 +67394,7 @@
           <var-decl name='cvt' type-id='e6001147' visibility='default' filepath='include/drm/drm_edid.h' line='156' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/drm/drm_edid.h' line='172' column='1' id='ac5ab5bf'>
+      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/drm/drm_edid.h' line='172' column='1' id='ac5ab5be'>
         <data-member access='public'>
           <var-decl name='pixel_data' type-id='42c5f701' visibility='default' filepath='include/drm/drm_edid.h' line='173' column='1'/>
         </data-member>
@@ -67412,7 +67402,7 @@
           <var-decl name='other_data' type-id='4191437e' visibility='default' filepath='include/drm/drm_edid.h' line='174' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='256' is-anonymous='yes' visibility='default' filepath='include/drm/drm_vblank.h' line='58' column='1' id='ac5ab5c0'>
+      <union-decl name='__anonymous_union__' size-in-bits='256' is-anonymous='yes' visibility='default' filepath='include/drm/drm_vblank.h' line='58' column='1' id='ac5ab5bf'>
         <data-member access='public'>
           <var-decl name='base' type-id='9857a465' visibility='default' filepath='include/drm/drm_vblank.h' line='62' column='1'/>
         </data-member>
@@ -67423,9 +67413,20 @@
           <var-decl name='seq' type-id='3aca1eaa' visibility='default' filepath='include/drm/drm_vblank.h' line='77' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/hdmi.h' line='386' column='1' id='ac5ab5c1'>
+      <union-decl name='__anonymous_union__' size-in-bits='64' is-anonymous='yes' visibility='default' filepath='include/linux/hdmi.h' line='386' column='1' id='ac5ab5c0'>
         <data-member access='public'>
           <var-decl name='hdmi_type1' type-id='4ba022f8' visibility='default' filepath='include/linux/hdmi.h' line='387' column='1'/>
+        </data-member>
+      </union-decl>
+      <union-decl name='__anonymous_union__' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/linux/dma-fence.h' line='84' column='1' id='ac5ab5c1'>
+        <data-member access='public'>
+          <var-decl name='cb_list' type-id='72f469ec' visibility='default' filepath='include/linux/dma-fence.h' line='85' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='timestamp' type-id='fbc017ef' visibility='default' filepath='include/linux/dma-fence.h' line='87' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='rcu' type-id='e3d8ce29' visibility='default' filepath='include/linux/dma-fence.h' line='89' column='1'/>
         </data-member>
       </union-decl>
       <union-decl name='__anonymous_union__' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='include/drm/drm_fourcc.h' line='72' column='1' id='ac5ab5c2'>
@@ -72212,7 +72213,7 @@
           <var-decl name='metadata_type' type-id='3f1a6b60' visibility='default' filepath='include/linux/hdmi.h' line='382' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='32'>
-          <var-decl name='' type-id='ac5ab5c1' visibility='default' filepath='include/linux/hdmi.h' line='386' column='1'/>
+          <var-decl name='' type-id='ac5ab5c0' visibility='default' filepath='include/linux/hdmi.h' line='386' column='1'/>
         </data-member>
       </class-decl>
       <class-decl name='pr_ops' is-struct='yes' visibility='default' is-declaration-only='yes' id='b45c773c'/>
@@ -83283,7 +83284,7 @@
           <var-decl name='ops' type-id='13d85783' visibility='default' filepath='include/linux/dma-fence.h' line='67' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='128'>
-          <var-decl name='' type-id='ac5ab5bc' visibility='default' filepath='include/linux/dma-fence.h' line='84' column='1'/>
+          <var-decl name='' type-id='ac5ab5c1' visibility='default' filepath='include/linux/dma-fence.h' line='84' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='256'>
           <var-decl name='context' type-id='91ce1af9' visibility='default' filepath='include/linux/dma-fence.h' line='91' column='1'/>
@@ -84803,7 +84804,7 @@
           <var-decl name='pixel_clock' type-id='23119536' visibility='default' filepath='include/drm/drm_edid.h' line='171' column='1'/>
         </data-member>
         <data-member access='public' layout-offset-in-bits='16'>
-          <var-decl name='data' type-id='ac5ab5bf' visibility='default' filepath='include/drm/drm_edid.h' line='175' column='1'/>
+          <var-decl name='data' type-id='ac5ab5be' visibility='default' filepath='include/drm/drm_edid.h' line='175' column='1'/>
         </data-member>
       </class-decl>
       <function-type size-in-bits='64' id='d31161f1'>
@@ -109365,6 +109366,7 @@
         <parameter type-id='598755ca' name='subsys' filepath='fs/configfs/dir.c' line='1947' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <var-decl name='console_set_on_cmdline' type-id='95e97e5e' mangled-name='console_set_on_cmdline' visibility='default' filepath='kernel/printk/printk.c' line='287' column='1' elf-symbol-id='console_set_on_cmdline'/>
       <var-decl name='console_suspend_enabled' type-id='b50a4934' mangled-name='console_suspend_enabled' visibility='default' filepath='kernel/printk/printk.c' line='2287' column='1' elf-symbol-id='console_suspend_enabled'/>
       <function-decl name='console_trylock' mangled-name='console_trylock' filepath='kernel/printk/printk.c' line='2378' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='console_trylock'>
         <return type-id='95e97e5e'/>
@@ -114165,29 +114167,29 @@
         <parameter type-id='f0981eeb' name='flags' filepath='fs/file.c' line='561' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='get_user_pages' mangled-name='get_user_pages' filepath='mm/gup.c' line='1876' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_user_pages'>
-        <parameter type-id='7359adad' name='start' filepath='mm/gup.c' line='1876' column='1'/>
-        <parameter type-id='7359adad' name='nr_pages' filepath='mm/gup.c' line='1876' column='1'/>
-        <parameter type-id='f0981eeb' name='gup_flags' filepath='mm/gup.c' line='1877' column='1'/>
-        <parameter type-id='9f93c9da' name='pages' filepath='mm/gup.c' line='1877' column='1'/>
-        <parameter type-id='8b6fdee4' name='vmas' filepath='mm/gup.c' line='1878' column='1'/>
+      <function-decl name='get_user_pages' mangled-name='get_user_pages' filepath='mm/gup.c' line='1885' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_user_pages'>
+        <parameter type-id='7359adad' name='start' filepath='mm/gup.c' line='1885' column='1'/>
+        <parameter type-id='7359adad' name='nr_pages' filepath='mm/gup.c' line='1885' column='1'/>
+        <parameter type-id='f0981eeb' name='gup_flags' filepath='mm/gup.c' line='1886' column='1'/>
+        <parameter type-id='9f93c9da' name='pages' filepath='mm/gup.c' line='1886' column='1'/>
+        <parameter type-id='8b6fdee4' name='vmas' filepath='mm/gup.c' line='1887' column='1'/>
         <return type-id='bd54fe1a'/>
       </function-decl>
-      <function-decl name='get_user_pages_fast' mangled-name='get_user_pages_fast' filepath='mm/gup.c' line='2774' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_user_pages_fast'>
-        <parameter type-id='7359adad' name='start' filepath='mm/gup.c' line='2774' column='1'/>
-        <parameter type-id='95e97e5e' name='nr_pages' filepath='mm/gup.c' line='2774' column='1'/>
-        <parameter type-id='f0981eeb' name='gup_flags' filepath='mm/gup.c' line='2775' column='1'/>
-        <parameter type-id='9f93c9da' name='pages' filepath='mm/gup.c' line='2775' column='1'/>
+      <function-decl name='get_user_pages_fast' mangled-name='get_user_pages_fast' filepath='mm/gup.c' line='2793' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_user_pages_fast'>
+        <parameter type-id='7359adad' name='start' filepath='mm/gup.c' line='2793' column='1'/>
+        <parameter type-id='95e97e5e' name='nr_pages' filepath='mm/gup.c' line='2793' column='1'/>
+        <parameter type-id='f0981eeb' name='gup_flags' filepath='mm/gup.c' line='2794' column='1'/>
+        <parameter type-id='9f93c9da' name='pages' filepath='mm/gup.c' line='2794' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='get_user_pages_remote' mangled-name='get_user_pages_remote' filepath='mm/gup.c' line='1829' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_user_pages_remote'>
-        <parameter type-id='df4b7819' name='mm' filepath='mm/gup.c' line='1829' column='1'/>
-        <parameter type-id='7359adad' name='start' filepath='mm/gup.c' line='1830' column='1'/>
-        <parameter type-id='7359adad' name='nr_pages' filepath='mm/gup.c' line='1830' column='1'/>
-        <parameter type-id='f0981eeb' name='gup_flags' filepath='mm/gup.c' line='1831' column='1'/>
-        <parameter type-id='9f93c9da' name='pages' filepath='mm/gup.c' line='1831' column='1'/>
-        <parameter type-id='8b6fdee4' name='vmas' filepath='mm/gup.c' line='1832' column='1'/>
-        <parameter type-id='7292109c' name='locked' filepath='mm/gup.c' line='1832' column='1'/>
+      <function-decl name='get_user_pages_remote' mangled-name='get_user_pages_remote' filepath='mm/gup.c' line='1838' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_user_pages_remote'>
+        <parameter type-id='df4b7819' name='mm' filepath='mm/gup.c' line='1838' column='1'/>
+        <parameter type-id='7359adad' name='start' filepath='mm/gup.c' line='1839' column='1'/>
+        <parameter type-id='7359adad' name='nr_pages' filepath='mm/gup.c' line='1839' column='1'/>
+        <parameter type-id='f0981eeb' name='gup_flags' filepath='mm/gup.c' line='1840' column='1'/>
+        <parameter type-id='9f93c9da' name='pages' filepath='mm/gup.c' line='1840' column='1'/>
+        <parameter type-id='8b6fdee4' name='vmas' filepath='mm/gup.c' line='1841' column='1'/>
+        <parameter type-id='7292109c' name='locked' filepath='mm/gup.c' line='1841' column='1'/>
         <return type-id='bd54fe1a'/>
       </function-decl>
       <function-decl name='get_vaddr_frames' mangled-name='get_vaddr_frames' filepath='mm/frame_vector.c' line='34' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='get_vaddr_frames'>
@@ -118636,29 +118638,29 @@
         <parameter type-id='20f5f452' name='pin' filepath='drivers/pinctrl/core.c' line='167' column='1'/>
         <return type-id='80f4b756'/>
       </function-decl>
-      <function-decl name='pin_user_pages' mangled-name='pin_user_pages' filepath='mm/gup.c' line='2911' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pin_user_pages'>
-        <parameter type-id='7359adad' name='start' filepath='mm/gup.c' line='2911' column='1'/>
-        <parameter type-id='7359adad' name='nr_pages' filepath='mm/gup.c' line='2911' column='1'/>
-        <parameter type-id='f0981eeb' name='gup_flags' filepath='mm/gup.c' line='2912' column='1'/>
-        <parameter type-id='9f93c9da' name='pages' filepath='mm/gup.c' line='2912' column='1'/>
-        <parameter type-id='8b6fdee4' name='vmas' filepath='mm/gup.c' line='2913' column='1'/>
+      <function-decl name='pin_user_pages' mangled-name='pin_user_pages' filepath='mm/gup.c' line='2930' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pin_user_pages'>
+        <parameter type-id='7359adad' name='start' filepath='mm/gup.c' line='2930' column='1'/>
+        <parameter type-id='7359adad' name='nr_pages' filepath='mm/gup.c' line='2930' column='1'/>
+        <parameter type-id='f0981eeb' name='gup_flags' filepath='mm/gup.c' line='2931' column='1'/>
+        <parameter type-id='9f93c9da' name='pages' filepath='mm/gup.c' line='2931' column='1'/>
+        <parameter type-id='8b6fdee4' name='vmas' filepath='mm/gup.c' line='2932' column='1'/>
         <return type-id='bd54fe1a'/>
       </function-decl>
-      <function-decl name='pin_user_pages_fast' mangled-name='pin_user_pages_fast' filepath='mm/gup.c' line='2807' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pin_user_pages_fast'>
-        <parameter type-id='7359adad' name='start' filepath='mm/gup.c' line='2807' column='1'/>
-        <parameter type-id='95e97e5e' name='nr_pages' filepath='mm/gup.c' line='2807' column='1'/>
-        <parameter type-id='f0981eeb' name='gup_flags' filepath='mm/gup.c' line='2808' column='1'/>
-        <parameter type-id='9f93c9da' name='pages' filepath='mm/gup.c' line='2808' column='1'/>
+      <function-decl name='pin_user_pages_fast' mangled-name='pin_user_pages_fast' filepath='mm/gup.c' line='2826' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pin_user_pages_fast'>
+        <parameter type-id='7359adad' name='start' filepath='mm/gup.c' line='2826' column='1'/>
+        <parameter type-id='95e97e5e' name='nr_pages' filepath='mm/gup.c' line='2826' column='1'/>
+        <parameter type-id='f0981eeb' name='gup_flags' filepath='mm/gup.c' line='2827' column='1'/>
+        <parameter type-id='9f93c9da' name='pages' filepath='mm/gup.c' line='2827' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
-      <function-decl name='pin_user_pages_remote' mangled-name='pin_user_pages_remote' filepath='mm/gup.c' line='2878' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pin_user_pages_remote'>
-        <parameter type-id='df4b7819' name='mm' filepath='mm/gup.c' line='2878' column='1'/>
-        <parameter type-id='7359adad' name='start' filepath='mm/gup.c' line='2879' column='1'/>
-        <parameter type-id='7359adad' name='nr_pages' filepath='mm/gup.c' line='2879' column='1'/>
-        <parameter type-id='f0981eeb' name='gup_flags' filepath='mm/gup.c' line='2880' column='1'/>
-        <parameter type-id='9f93c9da' name='pages' filepath='mm/gup.c' line='2880' column='1'/>
-        <parameter type-id='8b6fdee4' name='vmas' filepath='mm/gup.c' line='2881' column='1'/>
-        <parameter type-id='7292109c' name='locked' filepath='mm/gup.c' line='2881' column='1'/>
+      <function-decl name='pin_user_pages_remote' mangled-name='pin_user_pages_remote' filepath='mm/gup.c' line='2897' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pin_user_pages_remote'>
+        <parameter type-id='df4b7819' name='mm' filepath='mm/gup.c' line='2897' column='1'/>
+        <parameter type-id='7359adad' name='start' filepath='mm/gup.c' line='2898' column='1'/>
+        <parameter type-id='7359adad' name='nr_pages' filepath='mm/gup.c' line='2898' column='1'/>
+        <parameter type-id='f0981eeb' name='gup_flags' filepath='mm/gup.c' line='2899' column='1'/>
+        <parameter type-id='9f93c9da' name='pages' filepath='mm/gup.c' line='2899' column='1'/>
+        <parameter type-id='8b6fdee4' name='vmas' filepath='mm/gup.c' line='2900' column='1'/>
+        <parameter type-id='7292109c' name='locked' filepath='mm/gup.c' line='2900' column='1'/>
         <return type-id='bd54fe1a'/>
       </function-decl>
       <function-decl name='pinconf_generic_dt_free_map' mangled-name='pinconf_generic_dt_free_map' filepath='drivers/pinctrl/pinconf-generic.c' line='407' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pinconf_generic_dt_free_map'>
