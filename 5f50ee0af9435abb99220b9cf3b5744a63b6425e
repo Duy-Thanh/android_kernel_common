@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f656c52_c759c1e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-19T10:18:03Z",
+      "side": 1,
+      "message": "No driver should be touching this sysfs link as you are creating a new user/kernel api that upstream does not support.  Please do not do this.",
+      "revId": "5f50ee0af9435abb99220b9cf3b5744a63b6425e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
