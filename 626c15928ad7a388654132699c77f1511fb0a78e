@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a304538b_4836b35e",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-04-19T17:41:08Z",
+      "side": 1,
+      "message": "OK. If you are fixing this up, the standard functions (see kernel/params.c) use scnprintf.",
+      "revId": "626c15928ad7a388654132699c77f1511fb0a78e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "166d0f04_18106d0e",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-04-19T17:41:08Z",
+      "side": 1,
+      "message": "use sysfs_match_string?",
+      "revId": "626c15928ad7a388654132699c77f1511fb0a78e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

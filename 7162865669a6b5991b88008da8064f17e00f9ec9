@@ -141,6 +141,24 @@
       "parentUuid": "ca4a0bb1_6c8f07e5",
       "revId": "7162865669a6b5991b88008da8064f17e00f9ec9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56f76014_c70d37ed",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-04-19T17:41:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "aeb79b6e_471f1932",
+      "revId": "7162865669a6b5991b88008da8064f17e00f9ec9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
