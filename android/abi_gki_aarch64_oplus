@@ -111,6 +111,8 @@
   blocking_notifier_call_chain
   blocking_notifier_chain_register
   blocking_notifier_chain_unregister
+  bpf_prog_get_type_dev
+  bpf_prog_get_type_path
   bpf_trace_run1
   bpf_trace_run10
   bpf_trace_run12
