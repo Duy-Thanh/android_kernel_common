@@ -2609,6 +2609,8 @@
   __traceiter_sched_overutilized_tp
   __traceiter_sched_switch
   __traceiter_suspend_resume
+  __traceiter_map
+  __traceiter_unmap
   __tracepoint_android_rvh_account_irq
   __tracepoint_android_rvh_after_dequeue_task
   __tracepoint_android_rvh_after_enqueue_task
@@ -2736,6 +2738,8 @@
   __tracepoint_sched_overutilized_tp
   __tracepoint_sched_switch
   __tracepoint_suspend_resume
+  __tracepoint_unmap
+  __tracepoint_map
   trace_print_array_seq
   trace_print_flags_seq
   trace_print_hex_seq
