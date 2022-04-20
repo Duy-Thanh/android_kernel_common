@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d999864c_7ab979dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-04-20T16:31:40Z",
+      "side": 1,
+      "message": "Add:\n```\nFixes: 43b0536cb471 (\"mm/damon: introduce DAMON-based Reclamation (DAMON_RECLAIM)\")\n```",
+      "revId": "cd6f33cca780122b867da56ad2a359f7f3d8f92e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7adc6f01_3def24bd",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -14,6 +31,23 @@
       "writtenOn": "2022-04-20T15:23:16Z",
       "side": 1,
       "message": "upstream first please.",
+      "revId": "cd6f33cca780122b867da56ad2a359f7f3d8f92e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "058f8dcf_22264c08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-04-20T16:31:40Z",
+      "side": 1,
+      "message": "As Greg said, please post upstream and then here as FROMLIST patch with the http://lore.kernel.org link to the upstream posting (see https://android-review.googlesource.com/c/kernel/common/+/2054929 for a FROMLIST patch example).",
       "revId": "cd6f33cca780122b867da56ad2a359f7f3d8f92e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
