@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "472a2c63_0bce2c25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-20T15:20:54Z",
+      "side": 1,
+      "message": "Why is this needed now and not just taken in during the normal merges from upstream?\n\nWhat Android device requires this now for this branch?",
+      "revId": "227d072c6af214ea3a2213cfa43e1fc445b0bb35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
