@@ -22,6 +22,30 @@
       },
       "revId": "9c1c34894dba0da83a26de9857ec640ee6297db7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ec8428e_4fa6014e",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-04-20T19:10:40Z",
+      "side": 1,
+      "message": "You can, but since the max size is static, I think a comment would be sufficient. strcat is not the most efficient way to write to the buffer though as it starts at the beginning each time.",
+      "parentUuid": "1698f041_58e45fae",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 22
+      },
+      "revId": "9c1c34894dba0da83a26de9857ec640ee6297db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

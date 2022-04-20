@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0276714_23c066a8",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-04-20T19:10:40Z",
+      "side": 1,
+      "message": "The point was mainly to get rid of the extra strlen call. Buffer size is documented in Documentation/filesystems/sysfs.rst",
+      "parentUuid": "ab2a6446_692f5dd3",
+      "revId": "626c15928ad7a388654132699c77f1511fb0a78e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "166d0f04_18106d0e",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 6
