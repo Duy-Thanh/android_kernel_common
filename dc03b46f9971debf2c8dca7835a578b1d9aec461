@@ -16,6 +16,23 @@
       "message": "Any reason this can\u0027t be upstreamed first?",
       "revId": "dc03b46f9971debf2c8dca7835a578b1d9aec461",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1b6fb05_dc369598",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2022-04-20T05:48:03Z",
+      "side": 1,
+      "message": "We plan to send it to upstream as well, but thought of uploading here so that Google kernel developers and partner is aware. ",
+      "revId": "dc03b46f9971debf2c8dca7835a578b1d9aec461",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
