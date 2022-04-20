@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98744d15_dd31820a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-04-20T15:42:15Z",
+      "side": 1,
+      "message": "We don\u0027t accept FROM* patches in android-mainline. Wait for it to land in android-mainline via merge.",
+      "revId": "227d072c6af214ea3a2213cfa43e1fc445b0bb35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "472a2c63_0bce2c25",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
