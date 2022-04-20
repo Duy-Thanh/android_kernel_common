@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04ae7356_49da0c03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-20T18:00:04Z",
+      "side": 1,
+      "message": "Please submit upstream first.\n\nAlso your changelog says what you do, but not _why_ you are doing it.",
+      "revId": "c018d8d7cfcfcc60080e78ade90e715c6b9b96a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
