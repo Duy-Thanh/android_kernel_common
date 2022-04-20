@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e497b2ae_15ffd40f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-20T06:29:24Z",
+      "side": 1,
+      "message": "Please submit upstream first, like was asked for on the last time this was submitted.\n\nAlso, there are already hooks in here that might do what you need, if not, please specify why not.",
+      "revId": "c02b3ce2c3f81e5c35f33ad86e8eed758f0629be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
