@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "78149de1_55ac499c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-20T14:05:08Z",
+      "side": 1,
+      "message": "no description of why this is needed?  You can\u0027t submit things without any changelog text 😞",
+      "revId": "c6ce150440e779e24c1721006c54df3d2d316b5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "82785c63_947a3251",
