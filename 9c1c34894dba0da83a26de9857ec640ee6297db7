@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1698f041_58e45fae",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-04-20T01:30:13Z",
+      "side": 1,
+      "message": "Do you want me to rework this so it also uses scnprintf or other length-checking print functions?",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 22
+      },
+      "revId": "9c1c34894dba0da83a26de9857ec640ee6297db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

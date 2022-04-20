@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab2a6446_692f5dd3",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-04-20T01:30:13Z",
+      "side": 1,
+      "message": "Changed it to match what other drivers do, though it doesn\u0027t seem super useful in this case because we know the string will be at most 22 characters.\n(I couldn\u0027t find any documentation that says that the buffer is PAGE_SIZE, but that\u0027s what other drivers use)",
+      "parentUuid": "a304538b_4836b35e",
+      "revId": "626c15928ad7a388654132699c77f1511fb0a78e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "166d0f04_18106d0e",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-04-19T17:41:08Z",
       "side": 1,
       "message": "use sysfs_match_string?",
+      "revId": "626c15928ad7a388654132699c77f1511fb0a78e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3047d20a_83d809fd",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-04-20T01:30:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "166d0f04_18106d0e",
       "revId": "626c15928ad7a388654132699c77f1511fb0a78e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
