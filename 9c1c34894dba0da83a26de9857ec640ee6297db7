@@ -46,6 +46,30 @@
       },
       "revId": "9c1c34894dba0da83a26de9857ec640ee6297db7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9c98905_435f7b67",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-04-20T20:24:36Z",
+      "side": 1,
+      "message": "I added such a comment in the next patch set, though I was also thinking of replacing the whole loop with:\n\n       static_assert(ARRAY_SIZE(log_to_dmesg_opt_names) \u003d\u003d 3);\n\n       return scnprintf(buffer, PAGE_SIZE, \"%s%s%s%s%s%s%s\\n\",\n                        i \u003d\u003d 0 ? \"[\" : \"\",\n                        log_to_dmesg_opt_names[0],\n                        i \u003d\u003d 0 ? \"] \" : i \u003d\u003d 1 ? \" [\" : \" \",\n                        log_to_dmesg_opt_names[1],\n                        i \u003d\u003d 1 ? \"] \" : i \u003d\u003d 2 ? \" [\" : \" \",\n                        log_to_dmesg_opt_names[2],\n                        i \u003d\u003d 2 ? \"]\" : \"\");\n\nthough of course that makes it a little more work to expand the number of options if we ever want to do that. Let me know if you prefer this instead.",
+      "parentUuid": "2ec8428e_4fa6014e",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 22
+      },
+      "revId": "9c1c34894dba0da83a26de9857ec640ee6297db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

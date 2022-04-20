@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df3a9ee4_c7a52758",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2022-04-20T20:24:36Z",
+      "side": 1,
+      "message": "ah, and then of course I only changed the sprintf, and left the strlen. Fixed in the next patch set.",
+      "parentUuid": "f0276714_23c066a8",
+      "revId": "626c15928ad7a388654132699c77f1511fb0a78e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "166d0f04_18106d0e",
