@@ -448,6 +448,8 @@ static int init_shadow_structs(struct kvm *kvm, struct kvm_shadow_vm *vm,
 		shadow_vcpu->arch.pkvm.shadow_handle = vm->shadow_handle;
 		shadow_vcpu->arch.pkvm.shadow_vm = vm;
 		shadow_vcpu->arch.power_off = true;
+		set_bit(KVM_ARCH_FLAG_MMIO_GUARD,
+			&shadow_vcpu->arch.pkvm.shadow_vm->arch.flags);
 
 		if (test_bit(KVM_ARM_VCPU_POWER_OFF, shadow_vcpu->arch.features)) {
 			shadow_vcpu->arch.pkvm.power_state = PSCI_0_2_AFFINITY_LEVEL_OFF;
