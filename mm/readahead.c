@@ -533,7 +533,213 @@ static unsigned long ractl_max_pages(struct readahead_control *ractl,
 	 */
 	if (req_size > max_pages && bdi->io_pages > max_pages)
 		max_pages = min(req_size, bdi->io_pages);
+<<<<<<< HEAD   (655042 ANDROID: vendor_hooks: Add hooks for memory when debug)
 	return max_pages;
+||||||| BASE
+
+	/*
+	 * start of file
+	 */
+	if (!index)
+		goto initial_readahead;
+
+	/*
+	 * It's the expected callback index, assume sequential access.
+	 * Ramp up sizes, and push forward the readahead window.
+	 */
+	expected = round_down(ra->start + ra->size - ra->async_size,
+			1UL << order);
+	if (index == expected || index == (ra->start + ra->size)) {
+		ra->start += ra->size;
+		ra->size = get_next_ra_size(ra, max_pages);
+		ra->async_size = ra->size;
+		goto readit;
+	}
+
+	/*
+	 * Hit a marked folio without valid readahead state.
+	 * E.g. interleaved reads.
+	 * Query the pagecache for async_size, which normally equals to
+	 * readahead size. Ramp it up and use it as the new readahead size.
+	 */
+	if (folio) {
+		pgoff_t start;
+
+		rcu_read_lock();
+		start = page_cache_next_miss(ractl->mapping, index + 1,
+				max_pages);
+		rcu_read_unlock();
+
+		if (!start || start - index > max_pages)
+			return;
+
+		ra->start = start;
+		ra->size = start - index;	/* old async_size */
+		ra->size += req_size;
+		ra->size = get_next_ra_size(ra, max_pages);
+		ra->async_size = ra->size;
+		goto readit;
+	}
+
+	/*
+	 * oversize read
+	 */
+	if (req_size > max_pages)
+		goto initial_readahead;
+
+	/*
+	 * sequential cache miss
+	 * trivial case: (index - prev_index) == 1
+	 * unaligned reads: (index - prev_index) == 0
+	 */
+	prev_index = (unsigned long long)ra->prev_pos >> PAGE_SHIFT;
+	if (index - prev_index <= 1UL)
+		goto initial_readahead;
+
+	/*
+	 * Query the page cache and look for the traces(cached history pages)
+	 * that a sequential stream would leave behind.
+	 */
+	if (try_context_readahead(ractl->mapping, ra, index, req_size,
+			max_pages))
+		goto readit;
+
+	/*
+	 * standalone, small random read
+	 * Read as is, and do not pollute the readahead state.
+	 */
+	do_page_cache_ra(ractl, req_size, 0);
+	return;
+
+initial_readahead:
+	ra->start = index;
+	ra->size = get_init_ra_size(req_size, max_pages);
+	ra->async_size = ra->size > req_size ? ra->size - req_size : ra->size;
+
+readit:
+	/*
+	 * Will this read hit the readahead marker made by itself?
+	 * If so, trigger the readahead marker hit now, and merge
+	 * the resulted next readahead window into the current one.
+	 * Take care of maximum IO pages as above.
+	 */
+	if (index == ra->start && ra->size == ra->async_size) {
+		add_pages = get_next_ra_size(ra, max_pages);
+		if (ra->size + add_pages <= max_pages) {
+			ra->async_size = add_pages;
+			ra->size += add_pages;
+		} else {
+			ra->size = max_pages;
+			ra->async_size = max_pages >> 1;
+		}
+	}
+
+	ractl->_index = ra->start;
+	page_cache_ra_order(ractl, ra, order);
+=======
+
+	trace_android_vh_ra_tuning_max_page(ractl, &max_pages);
+
+	/*
+	 * start of file
+	 */
+	if (!index)
+		goto initial_readahead;
+
+	/*
+	 * It's the expected callback index, assume sequential access.
+	 * Ramp up sizes, and push forward the readahead window.
+	 */
+	expected = round_down(ra->start + ra->size - ra->async_size,
+			1UL << order);
+	if (index == expected || index == (ra->start + ra->size)) {
+		ra->start += ra->size;
+		ra->size = get_next_ra_size(ra, max_pages);
+		ra->async_size = ra->size;
+		goto readit;
+	}
+
+	/*
+	 * Hit a marked folio without valid readahead state.
+	 * E.g. interleaved reads.
+	 * Query the pagecache for async_size, which normally equals to
+	 * readahead size. Ramp it up and use it as the new readahead size.
+	 */
+	if (folio) {
+		pgoff_t start;
+
+		rcu_read_lock();
+		start = page_cache_next_miss(ractl->mapping, index + 1,
+				max_pages);
+		rcu_read_unlock();
+
+		if (!start || start - index > max_pages)
+			return;
+
+		ra->start = start;
+		ra->size = start - index;	/* old async_size */
+		ra->size += req_size;
+		ra->size = get_next_ra_size(ra, max_pages);
+		ra->async_size = ra->size;
+		goto readit;
+	}
+
+	/*
+	 * oversize read
+	 */
+	if (req_size > max_pages)
+		goto initial_readahead;
+
+	/*
+	 * sequential cache miss
+	 * trivial case: (index - prev_index) == 1
+	 * unaligned reads: (index - prev_index) == 0
+	 */
+	prev_index = (unsigned long long)ra->prev_pos >> PAGE_SHIFT;
+	if (index - prev_index <= 1UL)
+		goto initial_readahead;
+
+	/*
+	 * Query the page cache and look for the traces(cached history pages)
+	 * that a sequential stream would leave behind.
+	 */
+	if (try_context_readahead(ractl->mapping, ra, index, req_size,
+			max_pages))
+		goto readit;
+
+	/*
+	 * standalone, small random read
+	 * Read as is, and do not pollute the readahead state.
+	 */
+	do_page_cache_ra(ractl, req_size, 0);
+	return;
+
+initial_readahead:
+	ra->start = index;
+	ra->size = get_init_ra_size(req_size, max_pages);
+	ra->async_size = ra->size > req_size ? ra->size - req_size : ra->size;
+
+readit:
+	/*
+	 * Will this read hit the readahead marker made by itself?
+	 * If so, trigger the readahead marker hit now, and merge
+	 * the resulted next readahead window into the current one.
+	 * Take care of maximum IO pages as above.
+	 */
+	if (index == ra->start && ra->size == ra->async_size) {
+		add_pages = get_next_ra_size(ra, max_pages);
+		if (ra->size + add_pages <= max_pages) {
+			ra->async_size = add_pages;
+			ra->size += add_pages;
+		} else {
+			ra->size = max_pages;
+			ra->async_size = max_pages >> 1;
+		}
+	}
+
+	ractl->_index = ra->start;
+	page_cache_ra_order(ractl, ra, order);
+>>>>>>> CHANGE (b1cd86 ANDROID: add for tuning readahead size)
 }
 
 void page_cache_sync_ra(struct readahead_control *ractl,
