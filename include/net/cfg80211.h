@@ -39,6 +39,9 @@
  * use restrictions.
  */
 
+/* Flag to indicate support for 11BE changes */
+#define CFG80211_11BE_BASIC 1
+
 
 /**
  * DOC: Device registration
