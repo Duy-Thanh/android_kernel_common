@@ -16,6 +16,23 @@
       "message": "who checks this flag? How is it set?",
       "revId": "af434d93ba8901af720b4f66141a6e972514fc42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aebb92c_c78a5b7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-04-21T18:45:34Z",
+      "side": 1,
+      "message": "This should be done with a vendor-specific definition since there is no user of this in ACK.",
+      "revId": "af434d93ba8901af720b4f66141a6e972514fc42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
