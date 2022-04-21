@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60ae36fd_c3441e1d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-04-21T11:30:27Z",
+      "side": 1,
+      "message": "I think we should only do this for protected VMs using pvmfw. In which case, maybe it would be better to stick this in `pkvm_reset_vcpu()` as part of initialising the `pvmfw_entry_vcpu`?",
+      "range": {
+        "startLine": 451,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 35
+      },
+      "revId": "240be2dac164217f067b0cf65912edff3a6fcef5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
