@@ -33,6 +33,24 @@
       "message": "Why is this needed now and not just taken in during the normal merges from upstream?\n\nWhat Android device requires this now for this branch?",
       "revId": "227d072c6af214ea3a2213cfa43e1fc445b0bb35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb8793be_7f3b81d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1367175
+      },
+      "writtenOn": "2022-04-21T11:18:59Z",
+      "side": 1,
+      "message": "If it could be auto mereged, We can only consider it should go to the older devices built with android 12.",
+      "parentUuid": "472a2c63_0bce2c25",
+      "revId": "227d072c6af214ea3a2213cfa43e1fc445b0bb35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
