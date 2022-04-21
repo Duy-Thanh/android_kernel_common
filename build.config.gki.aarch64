@@ -26,9 +26,13 @@ android/abi_gki_aarch64_qcom
 android/abi_gki_aarch64_rockchip
 android/abi_gki_aarch64_unisoc
 android/abi_gki_aarch64_virtual_device
+<<<<<<< HEAD   (5558db ANDROID: Add flag to indicate compiling against ACK)
 android/abi_gki_aarch64_vivo
 android/abi_gki_aarch64_xiaomi
 android/abi_gki_aarch64_asus
+=======
+android/abi_gki_aarch64_transsion
+>>>>>>> CHANGE (99f7eb ANDROID: ABI: Update symbols for transsion FFU(Field Firmwar)
 "
 
 FILES="${FILES}
