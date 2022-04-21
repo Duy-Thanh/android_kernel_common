@@ -1,6 +1,10 @@
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.constants
 
+<<<<<<< HEAD   (d7beef ANDROID: Update the ABI symbol list)
 KMI_GENERATION=1
+=======
+KMI_GENERATION=4
+>>>>>>> BRANCH (7a9a53 BACKPORT: ext4: don't BUG if someone dirty pages without ask)
 
 LLVM=1
 DEPMOD=depmod
