@@ -34,6 +34,24 @@
       "parentUuid": "e497b2ae_15ffd40f",
       "revId": "c02b3ce2c3f81e5c35f33ad86e8eed758f0629be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0f35ef7_1caa4719",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1865570
+      },
+      "writtenOn": "2022-04-21T07:17:30Z",
+      "side": 1,
+      "message": "Yes, there are already 5 vendor hooks for usb audio offload.\nandroid_vh_audio_usb_offload_vendor_set  -\u003e used\nandroid_vh_audio_usb_offload_connect      -\u003e used\nandroid_rvh_audio_usb_offload_disconnect -\u003e used\nandroid_vh_audio_usb_offload_ep_action\nandroid_vh_audio_usb_offload_synctype\n\nThe three vendor hooks were used because I also need that, but the last two are not the calling point that our vendor driver wants.\n\nSo I added the following vendor hooks.\n\nandroid_vh_audio_usb_offload_set_rate :\nWe need to configure sampling rate supported by the interface of the connected audio device when pcm is prepared.\n\nandroid_vh_audio_usb_offload_pcmbuf :\nWe need usb device information, interface number to configure a pcm buffer address when pcm is prepared.\n\nandroid_rvh_audio_usb_offload_pcm_intf :\nOur vendor driver need a dequeue pointer address configured after snd_usb_endpoint_configure is executed, and also need pcm intf num, alt setting num to map dequeue pointer.\n\nandroid_rvh_audio_usb_offload_pcm_control :\nour vendor driver need pcm status when pcm is open/close to do additional handling.\n\nandroid_vh_audio_usb_offload_pcm_binterval :\nour vendor driver need to choose audio data interval.\n\nThanks.",
+      "parentUuid": "be54403c_ee0530f6",
+      "revId": "c02b3ce2c3f81e5c35f33ad86e8eed758f0629be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
