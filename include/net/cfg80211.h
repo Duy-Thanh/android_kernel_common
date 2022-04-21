@@ -42,6 +42,8 @@
 /* Flag to indicate support for 11BE changes */
 #define CFG80211_11BE_BASIC 1
 
+/* Flag to indicate support for offloading SA Query handling */
+#define CFG80211_SA_QUERY_OFFLOAD_SUPPORT 1
 
 /**
  * DOC: Device registration
