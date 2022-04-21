@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9dda05f_b09367e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275292
+      },
+      "writtenOn": "2022-04-21T01:40:56Z",
+      "side": 1,
+      "message": "I can\u0027t access this path, how to fix it?\nhttp://go/presubmit-lint-bug\n\nthis is cherry-pick patch from 1936190\nhttps://android-review.googlesource.com/c/kernel/common/+/1936190",
+      "parentUuid": "ece3d480_a409ad79",
+      "revId": "0a27bc860270f88e305d558513aabd7bd2fc1ca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
