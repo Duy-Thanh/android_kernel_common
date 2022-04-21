@@ -98,6 +98,7 @@ static void test_ubsan_misaligned_access(void)
 	*ptr = val;
 }
 
+<<<<<<< HEAD   (e08dd8 ANDROID: fix up abi issue with struct snd_pcm_runtime, again)
 static void test_ubsan_object_size_mismatch(void)
 {
 	/* "((aligned(8)))" helps this not into be misaligned for ptr-access. */
@@ -109,12 +110,13 @@ static void test_ubsan_object_size_mismatch(void)
 	val2 = *ptr;
 }
 
+=======
+>>>>>>> BRANCH (6c8e5c Linux 5.10.111)
 static const test_ubsan_fp test_ubsan_array[] = {
 	test_ubsan_shift_out_of_bounds,
 	test_ubsan_out_of_bounds,
 	test_ubsan_load_invalid_value,
 	test_ubsan_misaligned_access,
-	test_ubsan_object_size_mismatch,
 };
 
 /* Excluded because they Oops the module. */

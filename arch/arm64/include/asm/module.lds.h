@@ -1,5 +1,6 @@
 #ifdef CONFIG_ARM64_MODULE_PLTS
 SECTIONS {
+<<<<<<< HEAD   (e08dd8 ANDROID: fix up abi issue with struct snd_pcm_runtime, again)
 	.plt 0 (NOLOAD) : { BYTE(0) }
 	.init.plt 0 (NOLOAD) : { BYTE(0) }
 	.text.ftrace_trampoline 0 (NOLOAD) : { BYTE(0) }
@@ -32,5 +33,10 @@ SECTIONS {
 		*(.initcalls._end)
 	}
 #endif
+=======
+	.plt 0 : { BYTE(0) }
+	.init.plt 0 : { BYTE(0) }
+	.text.ftrace_trampoline 0 : { BYTE(0) }
+>>>>>>> BRANCH (6c8e5c Linux 5.10.111)
 }
 #endif
