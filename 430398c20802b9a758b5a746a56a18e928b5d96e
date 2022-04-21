@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "170e4b61_036fa3c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-04-21T10:54:24Z",
+      "side": 1,
+      "message": "Please add an ANDROID: prefix here",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "430398c20802b9a758b5a746a56a18e928b5d96e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8148dbb_425800bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-04-21T10:54:24Z",
+      "side": 1,
+      "message": "Regardless of what we end up doing for the debug/panic stuff, this feels like a good thing to have so I\u0027d be inclined to merge this CL anyways.",
+      "revId": "430398c20802b9a758b5a746a56a18e928b5d96e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
