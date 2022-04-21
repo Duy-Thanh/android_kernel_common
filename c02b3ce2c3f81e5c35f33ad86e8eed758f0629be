@@ -16,6 +16,24 @@
       "message": "Please submit upstream first, like was asked for on the last time this was submitted.\n\nAlso, there are already hooks in here that might do what you need, if not, please specify why not.",
       "revId": "c02b3ce2c3f81e5c35f33ad86e8eed758f0629be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be54403c_ee0530f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1668107
+      },
+      "writtenOn": "2022-04-21T02:22:01Z",
+      "side": 1,
+      "message": "I can not find \"drivers/android/vendor_hooks.c\" file on linux mainline.\nCan i upstream without this file?",
+      "parentUuid": "e497b2ae_15ffd40f",
+      "revId": "c02b3ce2c3f81e5c35f33ad86e8eed758f0629be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
