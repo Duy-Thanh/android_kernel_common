@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0808db22_a96ea4b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-22T07:04:41Z",
+      "side": 1,
+      "message": "please wrap your changelog text at 72 columns like your editor asks for.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 142
+      },
+      "revId": "f962db68e63195e7dc453da30e7c8bbf440a9d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81bd2209_4cc1236a",
+        "filename": "drivers/mmc/core/queue.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-22T07:04:41Z",
+      "side": 1,
+      "message": "not needed, just use `ret`.",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 16
+      },
+      "revId": "f962db68e63195e7dc453da30e7c8bbf440a9d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
