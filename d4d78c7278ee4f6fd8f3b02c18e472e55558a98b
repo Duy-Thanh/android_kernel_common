@@ -22,6 +22,30 @@
       },
       "revId": "d4d78c7278ee4f6fd8f3b02c18e472e55558a98b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b13bfaf_8732c44c",
+        "filename": "fs/fuse/inode.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1906,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2022-04-22T16:22:45Z",
+      "side": 1,
+      "message": "This is not the only time we have done this. (Also, to be fair, not the only time someone else has done this within the fuse subsystem, but that\u0027s not an excuse.) I count 48 uses of ifdef CONFIG_FUSE_BPF in c files in fs/fuse\n\nI will prepare a separate change to remove them asap.",
+      "parentUuid": "01585268_7c847d1b",
+      "range": {
+        "startLine": 1906,
+        "startChar": 0,
+        "endLine": 1906,
+        "endChar": 22
+      },
+      "revId": "d4d78c7278ee4f6fd8f3b02c18e472e55558a98b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
