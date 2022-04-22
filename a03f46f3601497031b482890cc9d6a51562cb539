@@ -16,6 +16,24 @@
       "message": "This should not be hard-coded into a makefile.",
       "revId": "a03f46f3601497031b482890cc9d6a51562cb539",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3307fd04_d9d5bac5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2022-04-22T16:46:55Z",
+      "side": 1,
+      "message": "...I didn\u0027t understand the comment. This is similar to how we skip the KASAN instrumentation checks.",
+      "parentUuid": "a501a282_b8e26bdf",
+      "revId": "a03f46f3601497031b482890cc9d6a51562cb539",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
