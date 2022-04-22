@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3dc3c0c_bd589298",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1947925
+      },
+      "writtenOn": "2022-04-22T10:15:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bd03e97_0f391177",
+      "revId": "c488bf87a1c432cee44eb8fe539ddd66c95ea11f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "015062d6_6c42481e",
@@ -71,6 +89,54 @@
       "writtenOn": "2022-04-22T07:18:48Z",
       "side": 1,
       "message": "just use `bd` here, no need for these two structures, you can compute them if needed.",
+      "range": {
+        "startLine": 267,
+        "startChar": 36,
+        "endLine": 267,
+        "endChar": 44
+      },
+      "revId": "c488bf87a1c432cee44eb8fe539ddd66c95ea11f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d73de876_7a8b9998",
+        "filename": "drivers/mmc/core/queue.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1947925
+      },
+      "writtenOn": "2022-04-22T10:15:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "015062d6_6c42481e",
+      "range": {
+        "startLine": 267,
+        "startChar": 46,
+        "endLine": 267,
+        "endChar": 56
+      },
+      "revId": "c488bf87a1c432cee44eb8fe539ddd66c95ea11f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfd5fd73_3eecb588",
+        "filename": "drivers/mmc/core/queue.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1947925
+      },
+      "writtenOn": "2022-04-22T10:15:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf1e5c65_017dafd4",
       "range": {
         "startLine": 267,
         "startChar": 36,
