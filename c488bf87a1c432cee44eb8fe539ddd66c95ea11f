@@ -16,6 +16,69 @@
       "message": "Done",
       "revId": "c488bf87a1c432cee44eb8fe539ddd66c95ea11f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bd03e97_0f391177",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-22T07:18:48Z",
+      "side": 1,
+      "message": "Hook can be simplified to just 2 parameters. ",
+      "revId": "c488bf87a1c432cee44eb8fe539ddd66c95ea11f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "015062d6_6c42481e",
+        "filename": "drivers/mmc/core/queue.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-22T07:18:48Z",
+      "side": 1,
+      "message": "you already know the issue type, this is not needed in the hook.",
+      "range": {
+        "startLine": 267,
+        "startChar": 46,
+        "endLine": 267,
+        "endChar": 56
+      },
+      "revId": "c488bf87a1c432cee44eb8fe539ddd66c95ea11f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf1e5c65_017dafd4",
+        "filename": "drivers/mmc/core/queue.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-22T07:18:48Z",
+      "side": 1,
+      "message": "just use `bd` here, no need for these two structures, you can compute them if needed.",
+      "range": {
+        "startLine": 267,
+        "startChar": 36,
+        "endLine": 267,
+        "endChar": 44
+      },
+      "revId": "c488bf87a1c432cee44eb8fe539ddd66c95ea11f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
