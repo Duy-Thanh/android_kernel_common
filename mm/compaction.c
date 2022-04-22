@@ -1171,6 +1171,8 @@ isolate_migratepages_range(struct compact_control *cc, unsigned long start_pfn,
 #endif /* CONFIG_COMPACTION || CONFIG_CMA */
 #ifdef CONFIG_COMPACTION
 
+EXPORT_TRACEPOINT_SYMBOL_GPL(mm_compaction_begin);
+EXPORT_TRACEPOINT_SYMBOL_GPL(mm_compaction_end);
 static bool suitable_migration_source(struct compact_control *cc,
 							struct page *page)
 {
