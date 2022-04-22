@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01585268_7c847d1b",
+        "filename": "fs/fuse/inode.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1906,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-22T06:59:27Z",
+      "side": 1,
+      "message": "do not put ifdef in .c files.  Please put this into a .h file like all other kernel subsystems do.",
+      "range": {
+        "startLine": 1906,
+        "startChar": 0,
+        "endLine": 1906,
+        "endChar": 22
+      },
+      "revId": "d4d78c7278ee4f6fd8f3b02c18e472e55558a98b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
