@@ -16,6 +16,23 @@
       "message": "Need a \"Bug: \"",
       "revId": "eda7b93f63d3c0e196e769d9e429648a058a7bb9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47cf7397_6d93300c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2022-04-22T21:32:26Z",
+      "side": 1,
+      "message": "What happens for the devices which doesn\u0027t use Hibernation? For example, is all the code under CONFIG_HIBERNATION not going to get executed? Do we have kernel command line switch to disable this feature? \n\nFor example, what if some core kernel driver like GIC code gets executed under \n\n... gic_suspend(..) \n#ifdef CONFIG_HIBERNATION\n... do the magic w/ GIC \n#endif\n\nand same goes for resume for the devices which doesn\u0027t need HIBERNATION? ",
+      "revId": "eda7b93f63d3c0e196e769d9e429648a058a7bb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
