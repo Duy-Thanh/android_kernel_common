@@ -565,8 +565,8 @@ static int fuse_statfs(struct dentry *dentry, struct kstatfs *buf)
 
 #ifdef CONFIG_FUSE_BPF
 	fer = fuse_bpf_backing(dentry->d_inode, struct fuse_statfs_out,
-			       fuse_statfs_initialize, fuse_statfs_backing,
-			       fuse_statfs_finalize,
+			       fuse_statfs_initialize_in, fuse_statfs_initialize_out,
+			       fuse_statfs_backing, fuse_statfs_finalize,
 			       dentry, buf);
 	if (fer.ret)
 		return PTR_ERR(fer.result);

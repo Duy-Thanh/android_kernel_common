@@ -21,10 +21,23 @@ static long (*bpf_trace_printk)(const char *fmt, __u32 fmt_size, ...)
 		                 ##__VA_ARGS__);                \
 	})
 
-inline const void *fa_verify_in(struct fuse_bpf_args *fa, int i, unsigned int size)
+//static long (*bpf_fuse_get_writeable_in)(struct fuse_bpf_args *fa, u32 index, void *value,
+//					 u64 size, bool copy)
+//	= (void *) 156;
+static long (*bpf_fuse_get_writeable_out)(struct __bpf_fuse_args *fa, u32 index, void *value,
+					  u64 size, bool copy)
+	= (void *) 157;
+
+
+//#define bpf_make_writable_in(fa, index, size, copy)\
+//	(void *)bpf_fuse_get_writeable_in(fa, index, size, copy)
+#define bpf_make_writable_out(fa, index, value, size, copy) \
+	(void *)bpf_fuse_get_writeable_out(fa, index, (void *)(long)value, size, copy)
+
+inline const void *fa_verify_in(struct __bpf_fuse_args *fa, int i, unsigned int size)
 {
-	const char *val = fa->in_args[i].value;
-	const char *end = fa->in_args[i].end_offset;
+	const char *val = (void *)(long)fa->in_args[i].value;
+	const char *end = (void *)(long)fa->in_args[i].end_offset;
 
 	if (i >= fa->in_numargs)
 		return NULL;
@@ -33,10 +46,10 @@ inline const void *fa_verify_in(struct fuse_bpf_args *fa, int i, unsigned int si
 	return NULL;
 }
 
-inline void *fa_verify_out(struct fuse_bpf_args *fa, int i, unsigned int size)
+inline void *fa_verify_out(struct __bpf_fuse_args *fa, int i, unsigned int size)
 {
-	char *val = fa->out_args[i].value;
-	char *end = fa->out_args[i].end_offset;
+	char *val = (void *)(long)fa->out_args[i].value;
+	char *end = (void *)(long)fa->out_args[i].end_offset;
 
 	if (i >= fa->out_numargs)
 		return NULL;
@@ -63,7 +76,7 @@ inline int strcmp(const char *a, const char *b)
 
 SEC("test_readdir_redact")
 /* return FUSE_BPF_BACKING to use backing fs, 0 to pass to usermode */
-int readdir_test(struct fuse_bpf_args *fa)
+int readdir_test(struct __bpf_fuse_args *fa)
 {
 	switch (fa->opcode) {
 	case FUSE_READDIR | FUSE_PREFILTER: {
@@ -94,13 +107,13 @@ int readdir_test(struct fuse_bpf_args *fa)
 SEC("test_trace")
 
 /* return FUSE_BPF_BACKING to use backing fs, 0 to pass to usermode */
-int trace_test(struct fuse_bpf_args *fa)
+int trace_test(struct __bpf_fuse_args *fa)
 {
 	switch (fa->opcode) {
 	case FUSE_LOOKUP | FUSE_PREFILTER: {
 		/* real and partial use backing file */
-		const char *name = fa->in_args[0].value;
-		const char *end = fa->in_args[0].end_offset;
+		const char *name = (void *)(long)fa->in_args[0].value;
+		const char *end = (void *)(long)fa->in_args[0].end_offset;
 		bool backing = false;
 
 		if (strcmp_check("real", name, end) == 0 || strcmp_check("partial", name, end) == 0)
@@ -121,9 +134,11 @@ int trace_test(struct fuse_bpf_args *fa)
 	}
 
 	case FUSE_LOOKUP | FUSE_POSTFILTER: {
-		const char *name = fa->in_args[0].value;
-		const char *end = fa->in_args[0].end_offset;
-		struct fuse_entry_out *feo = fa_verify_out(fa, 0, sizeof(*feo));
+		const char *name = (void *)(long)fa->in_args[0].value;
+		const char *end = (void *)(long)fa->in_args[0].end_offset;
+		struct fuse_entry_out *feo = (struct fuse_entry_out *)
+				bpf_make_writable_out(fa, 0, fa->out_args[0].value,
+						      sizeof(*feo), true);
 
 		if (!feo)
 			return -1;
@@ -148,7 +163,7 @@ int trace_test(struct fuse_bpf_args *fa)
 
 	case FUSE_MKNOD | FUSE_PREFILTER: {
 		const struct fuse_mknod_in *fmi = fa_verify_in(fa, 0, sizeof(*fmi));
-		const char *name = fa->in_args[1].value;
+		const char *name = (void *)(long)fa->in_args[1].value;
 
 		if (!fmi)
 			return -1;
@@ -159,7 +174,7 @@ int trace_test(struct fuse_bpf_args *fa)
 
 	case FUSE_MKDIR | FUSE_PREFILTER: {
 		const struct fuse_mkdir_in *fmi = fa_verify_in(fa, 0, sizeof(*fmi));
-		const char *name = fa->in_args[1].value;
+		const char *name = (void *)(long)fa->in_args[1].value;
 
 		if (!fmi)
 			return -1;
@@ -169,15 +184,15 @@ int trace_test(struct fuse_bpf_args *fa)
 	}
 
 	case FUSE_RMDIR | FUSE_PREFILTER: {
-		const char *name = fa->in_args[0].value;
+		const char *name = (void *)(long)fa->in_args[0].value;
 
 		bpf_printk("rmdir %s", name);
 		return FUSE_BPF_BACKING;
 	}
 
 	case FUSE_RENAME | FUSE_PREFILTER: {
-		const char *oldname = fa->in_args[1].value;
-		const char *newname = fa->in_args[2].value;
+		const char *oldname = (void *)(long)fa->in_args[1].value;
+		const char *newname = (void *)(long)fa->in_args[2].value;
 
 		bpf_printk("rename from %s", oldname);
 		bpf_printk("rename to %s", newname);
@@ -187,8 +202,8 @@ int trace_test(struct fuse_bpf_args *fa)
 	case FUSE_RENAME2 | FUSE_PREFILTER: {
 		const struct fuse_rename2_in *fri = fa_verify_in(fa, 0, sizeof(*fri));
 		uint32_t flags = fri->flags;
-		const char *oldname = fa->in_args[1].value;
-		const char *newname = fa->in_args[2].value;
+		const char *oldname = (void *)(long) fa->in_args[1].value;
+		const char *newname = (void *)(long) fa->in_args[2].value;
 
 		if (!fri)
 			return -1;
@@ -199,7 +214,7 @@ int trace_test(struct fuse_bpf_args *fa)
 	}
 
 	case FUSE_UNLINK | FUSE_PREFILTER: {
-		const char *name = fa->in_args[0].value;
+		const char *name = (void *)(long)fa->in_args[0].value;
 
 		bpf_printk("unlink %s", name);
 		return FUSE_BPF_BACKING;
@@ -207,7 +222,7 @@ int trace_test(struct fuse_bpf_args *fa)
 
 	case FUSE_LINK | FUSE_PREFILTER: {
 		const struct fuse_link_in *fli = fa_verify_in(fa, 0, sizeof(*fli));
-		const char *link_name = fa->in_args[1].value;
+		const char *link_name = (void *)(long) fa->in_args[1].value;
 
 		if (!fli)
 			return -1;
@@ -217,8 +232,8 @@ int trace_test(struct fuse_bpf_args *fa)
 	}
 
 	case FUSE_SYMLINK | FUSE_PREFILTER: {
-		const char *link_name = fa->in_args[0].value;
-		const char *link_dest = fa->in_args[1].value;
+		const char *link_name = (void *)(long) fa->in_args[0].value;
+		const char *link_dest = (void *)(long) fa->in_args[1].value;
 
 		bpf_printk("symlink from %s", link_name);
 		bpf_printk("symlink to %s", link_dest);
@@ -226,7 +241,7 @@ int trace_test(struct fuse_bpf_args *fa)
 	}
 
 	case FUSE_READLINK | FUSE_PREFILTER: {
-		const char *link_name = fa->in_args[0].value;
+		const char *link_name = (void *)(long) fa->in_args[0].value;
 
 		bpf_printk("readlink from", link_name);
 		return FUSE_BPF_BACKING;
@@ -321,7 +336,8 @@ int trace_test(struct fuse_bpf_args *fa)
 	}
 
 	case FUSE_OPENDIR | FUSE_POSTFILTER: {
-		struct fuse_open_out *foo = fa_verify_out(fa, 0, sizeof(*foo));
+		struct fuse_open_out *foo = bpf_make_writable_out(fa, 0, fa->out_args[0].value,
+								  sizeof(*foo), true);
 
 		if (!foo)
 			return -1;
@@ -371,30 +387,30 @@ int trace_test(struct fuse_bpf_args *fa)
 	}
 
 	case FUSE_GETXATTR | FUSE_PREFILTER: {
-		const struct fuse_flush_in *ffi = fa_verify_in(fa, 0, sizeof(*ffi));
-		const char *name = fa->in_args[1].value;
+		const struct fuse_getxattr_in *fgi = fa_verify_in(fa, 0, sizeof(*fgi));
+		const char *name = (void *)(long)fa->in_args[1].value;
 
-		if (!ffi)
+		if (!fgi)
 			return -1;
 
-		bpf_printk("getxattr %d %s", ffi->fh, name);
+		bpf_printk("getxattr %d %s", fgi->size, name);
 		return FUSE_BPF_BACKING;
 	}
 
 	case FUSE_LISTXATTR | FUSE_PREFILTER: {
-		const struct fuse_flush_in *ffi = fa_verify_in(fa, 0, sizeof(*ffi));
-		const char *name = fa->in_args[1].value;
+		const struct fuse_getxattr_in *fgi = fa_verify_in(fa, 0, sizeof(*fgi));
+		const char *name = (void *)(long)fa->in_args[1].value;
 
-		if (!ffi)
+		if (!fgi)
 			return -1;
 
-		bpf_printk("listxattr %d %s", ffi->fh, name);
+		bpf_printk("listxattr %d %s", fgi->size, name);
 		return FUSE_BPF_BACKING;
 	}
 
 	case FUSE_SETXATTR | FUSE_PREFILTER: {
 		const struct fuse_setxattr_in *fsi = fa_verify_in(fa, 0, sizeof(*fsi));
-		const char *name = fa->in_args[1].value;
+		const char *name = (void *)(long)fa->in_args[1].value;
 		unsigned int size = fa->in_args[2].size;
 
 		if (!fsi)
@@ -404,7 +420,7 @@ int trace_test(struct fuse_bpf_args *fa)
 	}
 
 	case FUSE_REMOVEXATTR | FUSE_PREFILTER: {
-		const char *name = fa->in_args[0].value;
+		const char *name = (void *)(long)fa->in_args[0].value;
 
 		bpf_printk("removexattr %s", name);
 		return FUSE_BPF_BACKING;
@@ -437,12 +453,12 @@ int trace_test(struct fuse_bpf_args *fa)
 
 SEC("test_hidden")
 
-int trace_hidden(struct fuse_bpf_args *fa)
+int trace_hidden(struct __bpf_fuse_args *fa)
 {
 	switch (fa->opcode) {
 	case FUSE_LOOKUP | FUSE_PREFILTER: {
-		const char *name = fa->in_args[0].value;
-		const char *end = fa->in_args[0].end_offset;
+		const char *name = (void *)(long)fa->in_args[0].value;
+		const char *end = (void *)(long)fa->in_args[0].end_offset;
 
 		bpf_printk("Lookup: %s", name);
 		if (!strcmp_check("show", name, end))
@@ -495,7 +511,7 @@ int trace_hidden(struct fuse_bpf_args *fa)
 }
 
 SEC("test_simple")
-int trace_simple(struct fuse_bpf_args *fa)
+int trace_simple(struct __bpf_fuse_args *fa)
 {
 	if (fa->opcode & FUSE_PREFILTER)
 		bpf_printk("prefilter opcode: %d",
@@ -509,19 +525,21 @@ int trace_simple(struct fuse_bpf_args *fa)
 }
 
 SEC("test_passthrough")
-int trace_daemon(struct fuse_bpf_args *fa)
+int trace_daemon(struct __bpf_fuse_args *fa)
 {
 	switch (fa->opcode) {
 	case FUSE_LOOKUP | FUSE_PREFILTER: {
-		const char *name = fa->in_args[0].value;
+		const char *name = (void *)(long)fa->in_args[0].value;
 
 		bpf_printk("Lookup prefilter: %lx %s", fa->nodeid, name);
 		return FUSE_BPF_BACKING | FUSE_BPF_POST_FILTER;
 	}
 
 	case FUSE_LOOKUP | FUSE_POSTFILTER: {
-		const char *name = fa->in_args[0].value;
-		struct fuse_entry_bpf_out *febo = fa_verify_out(fa, 1, sizeof(*febo));
+		const char *name = (void *)(long)fa->in_args[0].value;
+		struct fuse_entry_bpf_out *febo = bpf_make_writable_out(fa, 1,
+									fa->out_args[1].value,
+									sizeof(*febo), true);
 
 		if (!febo)
 			return -1;
@@ -547,7 +565,7 @@ int trace_daemon(struct fuse_bpf_args *fa)
 SEC("test_error")
 
 /* return FUSE_BPF_BACKING to use backing fs, 0 to pass to usermode */
-int error_test(struct fuse_bpf_args *fa)
+int error_test(struct __bpf_fuse_args *fa)
 {
 	switch (fa->opcode) {
 	case FUSE_MKDIR | FUSE_PREFILTER: {
@@ -563,14 +581,14 @@ int error_test(struct fuse_bpf_args *fa)
 	}
 
 	case FUSE_LOOKUP | FUSE_PREFILTER: {
-		const char *name = fa->in_args[0].value;
+		const char *name = (void *)(long)fa->in_args[0].value;
 
 		bpf_printk("lookup prefilter %s", name);
 		return FUSE_BPF_BACKING | FUSE_BPF_POST_FILTER;
 	}
 	case FUSE_LOOKUP | FUSE_POSTFILTER: {
-		const char *name = fa->in_args[0].value;
-		const char *end = fa->in_args[0].end_offset;
+		const char *name = (void *)(long)fa->in_args[0].value;
+		const char *end = (void *)(long)fa->in_args[0].end_offset;
 
 		bpf_printk("lookup postfilter %s %d", name, fa->error_in);
 		if (strcmp_check("doesnotexist", name, end) == 0/* && fa->error_in == -EEXIST*/) {
@@ -596,15 +614,15 @@ int error_test(struct fuse_bpf_args *fa)
 
 SEC("test_verify")
 
-int verify_test(struct fuse_bpf_args *fa)
+int verify_test(struct __bpf_fuse_args *fa)
 {
 	if (fa->opcode == (FUSE_MKDIR | FUSE_PREFILTER)) {
 		const char *start;
 		const char *end;
 		const struct fuse_mkdir_in *in;
 
-		start = fa->in_args[0].value;
-		end = fa->in_args[0].end_offset;
+		start = (void *)(long) fa->in_args[0].value;
+		end = (void *)(long) fa->in_args[0].end_offset;
 		if (start + sizeof(*in) <= end) {
 			in = (struct fuse_mkdir_in *)(start);
 			bpf_printk("test1: %d %d", in->mode, in->umask);
@@ -617,7 +635,7 @@ int verify_test(struct fuse_bpf_args *fa)
 
 SEC("test_verify_fail")
 
-int verify_fail_test(struct fuse_bpf_args *fa)
+int verify_fail_test(struct __bpf_fuse_args *fa)
 {
 	struct t {
 		uint32_t a;
@@ -629,8 +647,8 @@ int verify_fail_test(struct fuse_bpf_args *fa)
 		const char *end;
 		const struct t *c;
 
-		start = fa->in_args[0].value;
-		end = fa->in_args[0].end_offset;
+		start = (void *)(long) fa->in_args[0].value;
+		end = (void *)(long) fa->in_args[0].end_offset;
 		if (start + sizeof(struct t) <= end) {
 			c = (struct t *)start;
 			bpf_printk("test1: %d %d %d", c->a, c->b, c->d[0]);
@@ -642,20 +660,131 @@ int verify_fail_test(struct fuse_bpf_args *fa)
 
 SEC("test_verify_fail2")
 
-int verify_fail_test2(struct fuse_bpf_args *fa)
+int verify_fail_test2(struct __bpf_fuse_args *fa)
 {
 	if (fa->opcode == (FUSE_MKDIR | FUSE_PREFILTER)) {
 		const char *start;
 		const char *end;
 		struct fuse_mkdir_in *c;
 
-		start = fa->in_args[0].value;
-		end = fa->in_args[1].end_offset;
+		start = (void *)(long) fa->in_args[0].value;
+		end = (void *)(long) fa->in_args[1].end_offset;
 		if (start + sizeof(*c) <= end) {
 			c = (struct fuse_mkdir_in *)start;
 			bpf_printk("test1: %d %d", c->mode, c->umask);
 		}
 		return FUSE_BPF_BACKING;
 	}
+	return FUSE_BPF_BACKING;
+}
+
+SEC("test_verify_fail3")
+/* Cannot write directly to fa */
+int verify_fail_test3(struct __bpf_fuse_args *fa)
+{
+	if (fa->opcode == (FUSE_LOOKUP | FUSE_POSTFILTER)) {
+		const char *name = (void *)(long)fa->in_args[0].value;
+		const char *end = (void *)(long)fa->in_args[0].end_offset;
+		struct fuse_entry_out *feo = fa_verify_out(fa, 0, sizeof(*feo));
+
+		if (!feo)
+			return -1;
+
+		if (strcmp_check("real", name, end) == 0)
+			feo->nodeid = 5;
+		else if (strcmp_check("partial", name, end) == 0)
+			feo->nodeid = 6;
+
+		bpf_printk("post-lookup %s %d", name, feo->nodeid);
+		return FUSE_BPF_BACKING;
+	}
+	return FUSE_BPF_BACKING;
+}
+
+SEC("test_verify_fail4")
+/* Cannot write outside of requested area */
+int verify_fail_test4(struct __bpf_fuse_args *fa)
+{
+	if (fa->opcode == (FUSE_LOOKUP | FUSE_POSTFILTER)) {
+		const char *name = (void *)(long)fa->in_args[0].value;
+		const char *end = (void *)(long)fa->in_args[0].end_offset;
+		struct fuse_entry_out *feo = bpf_make_writable_out(fa, 0, fa->out_args[0].value,
+								   1, true);
+
+		if (!feo)
+			return -1;
+
+		if (strcmp_check("real", name, end) == 0)
+			feo->nodeid = 5;
+		else if (strcmp_check("partial", name, end) == 0)
+			feo->nodeid = 6;
+
+		bpf_printk("post-lookup %s %d", name, feo->nodeid);
+		return FUSE_BPF_BACKING;
+	}
+	return FUSE_BPF_BACKING;
+}
+
+SEC("test_verify_fail5")
+/* Cannot use old verification after requesting writable */
+int verify_fail_test5(struct __bpf_fuse_args *fa)
+{
+	if (fa->opcode == (FUSE_LOOKUP | FUSE_POSTFILTER)) {
+		struct fuse_entry_out *feo;
+		struct fuse_entry_out *feo_w;
+
+		feo = fa_verify_out(fa, 0, sizeof(*feo));
+		if (!feo)
+			return -1;
+
+		feo_w = bpf_make_writable_out(fa, 0, fa->out_args[0].value, sizeof(*feo_w), true);
+		bpf_printk("post-lookup %d", feo->nodeid);
+		if (!feo_w)
+			return -1;
+
+		feo_w->nodeid = 5;
+
+		return FUSE_BPF_BACKING;
+	}
+	return FUSE_BPF_BACKING;
+}
+
+SEC("test_verify5")
+/* Can use new verification after requesting writable */
+int verify_pass_test5(struct __bpf_fuse_args *fa)
+{
+	if (fa->opcode == (FUSE_LOOKUP | FUSE_POSTFILTER)) {
+		struct fuse_entry_out *feo;
+		struct fuse_entry_out *feo_w;
+
+		feo = fa_verify_out(fa, 0, sizeof(*feo));
+		if (!feo)
+			return -1;
+
+		bpf_printk("post-lookup %d", feo->nodeid);
+
+		feo_w = bpf_make_writable_out(fa, 0, fa->out_args[0].value, sizeof(*feo_w), true);
+
+		feo = fa_verify_out(fa, 0, sizeof(*feo));
+		if (feo)
+			bpf_printk("post-lookup %d", feo->nodeid);
+		if (!feo_w)
+			return -1;
+
+		feo_w->nodeid = 5;
+
+		return FUSE_BPF_BACKING;
+	}
+	return FUSE_BPF_BACKING;
+}
+
+SEC("test_verify_fail6")
+/* Reading context from a nonsense offset is not allowed */
+int verify_pass_test6(struct __bpf_fuse_args *fa)
+{
+	char *nonsense = (char *)fa;
+
+	bpf_printk("post-lookup %d", nonsense[1]);
+
 	return FUSE_BPF_BACKING;
 }

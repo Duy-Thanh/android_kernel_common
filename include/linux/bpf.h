@@ -1898,6 +1898,8 @@ extern const struct bpf_func_proto bpf_copy_from_user_proto;
 extern const struct bpf_func_proto bpf_snprintf_btf_proto;
 extern const struct bpf_func_proto bpf_per_cpu_ptr_proto;
 extern const struct bpf_func_proto bpf_this_cpu_ptr_proto;
+extern const struct bpf_func_proto bpf_fuse_get_writeable_in_proto;
+extern const struct bpf_func_proto bpf_fuse_get_writeable_out_proto;
 
 const struct bpf_func_proto *bpf_tracing_func_proto(
 	enum bpf_func_id func_id, const struct bpf_prog *prog);
