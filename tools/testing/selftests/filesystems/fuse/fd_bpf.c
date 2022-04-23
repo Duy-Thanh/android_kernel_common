@@ -43,10 +43,10 @@ static long (*bpf_get_current_uid_gid)()
 		                 ##__VA_ARGS__);                \
 	})
 
-inline const void *fa_verify_in(struct fuse_bpf_args *fa, int i, unsigned int size)
+inline const void *fa_verify_in(struct __bpf_fuse_args *fa, int i, unsigned int size)
 {
-	const char *val = fa->in_args[i].value;
-	const char *end = fa->in_args[i].end_offset;
+	const char *val = (void *)(long) fa->in_args[i].value;
+	const char *end = (void *)(long) fa->in_args[i].end_offset;
 
 	if (i >= fa->in_numargs)
 		return NULL;
@@ -55,10 +55,10 @@ inline const void *fa_verify_in(struct fuse_bpf_args *fa, int i, unsigned int si
 	return NULL;
 }
 
-inline void *fa_verify_out(struct fuse_bpf_args *fa, int i, unsigned int size)
+inline void *fa_verify_out(struct __bpf_fuse_args *fa, int i, unsigned int size)
 {
-	char *val = fa->out_args[i].value;
-	char *end = fa->out_args[i].end_offset;
+	char *val = (void *)(long) fa->out_args[i].value;
+	char *end = (void *)(long) fa->out_args[i].end_offset;
 
 	if (i >= fa->out_numargs)
 		return NULL;
@@ -98,7 +98,7 @@ SEC("maps") struct fuse_bpf_map test_map2 = {
 
 SEC("test_daemon")
 
-int trace_daemon(struct fuse_bpf_args *fa)
+int trace_daemon(struct __bpf_fuse_args *fa)
 {
 	uint64_t uid_gid = bpf_get_current_uid_gid();
 	uint32_t uid = uid_gid & 0xffffffff;
@@ -159,7 +159,7 @@ int trace_daemon(struct fuse_bpf_args *fa)
 	}
 
 	case FUSE_LOOKUP | FUSE_PREFILTER: {
-		const char *name = fa->in_args[0].value;
+		const char *name = (void *)(long)fa->in_args[0].value;
 
 		bpf_printk("Lookup: %lx %s", fa->nodeid, name);
 		if (fa->nodeid == 1)
@@ -170,7 +170,7 @@ int trace_daemon(struct fuse_bpf_args *fa)
 
 	case FUSE_MKNOD | FUSE_PREFILTER: {
 		const struct fuse_mknod_in *fmi = fa_verify_in(fa, 0, sizeof(*fmi));
-		const char *name = fa->in_args[1].value;
+		const char *name = (void *)(long)fa->in_args[1].value;
 
 		if (!fmi)
 			return -1;
@@ -181,7 +181,7 @@ int trace_daemon(struct fuse_bpf_args *fa)
 
 	case FUSE_MKDIR | FUSE_PREFILTER: {
 		const struct fuse_mkdir_in *fmi = fa_verify_in(fa, 0, sizeof(*fmi));
-		const char *name = fa->in_args[1].value;
+		const char *name = (void *)(long)fa->in_args[1].value;
 
 		if (!fmi)
 			return -1;
@@ -191,15 +191,15 @@ int trace_daemon(struct fuse_bpf_args *fa)
 	}
 
 	case FUSE_RMDIR | FUSE_PREFILTER: {
-		const char *name = fa->in_args[0].value;
+		const char *name = (void *)(long)fa->in_args[0].value;
 
 		bpf_printk("rmdir: %s", name);
 		return FUSE_BPF_BACKING;
 	}
 
 	case FUSE_RENAME | FUSE_PREFILTER: {
-		const char *oldname = fa->in_args[1].value;
-		const char *newname = fa->in_args[2].value;
+		const char *oldname = (void *)(long) fa->in_args[1].value;
+		const char *newname = (void *)(long) fa->in_args[2].value;
 
 		bpf_printk("rename from %s", oldname);
 		bpf_printk("rename to %s", newname);
@@ -209,8 +209,8 @@ int trace_daemon(struct fuse_bpf_args *fa)
 	case FUSE_RENAME2 | FUSE_PREFILTER: {
 		const struct fuse_rename2_in *fri = fa_verify_in(fa, 0, sizeof(*fri));
 		uint32_t flags = fri->flags;
-		const char *oldname = fa->in_args[1].value;
-		const char *newname = fa->in_args[2].value;
+		const char *oldname = (void *)(long) fa->in_args[1].value;
+		const char *newname = (void *)(long) fa->in_args[2].value;
 
 		if (!fri)
 			return -1;
@@ -221,7 +221,7 @@ int trace_daemon(struct fuse_bpf_args *fa)
 	}
 
 	case FUSE_UNLINK | FUSE_PREFILTER: {
-		const char *name = fa->in_args[0].value;
+		const char *name = (void *)(long)fa->in_args[0].value;
 
 		bpf_printk("unlink: %s", name);
 		return FUSE_BPF_BACKING;
@@ -229,7 +229,7 @@ int trace_daemon(struct fuse_bpf_args *fa)
 
 	case FUSE_LINK | FUSE_PREFILTER: {
 		const struct fuse_link_in *fli = fa_verify_in(fa, 0, sizeof(*fli));
-		const char *dst_name = fa->in_args[1].value;
+		const char *dst_name = (void *)(long) fa->in_args[1].value;
 
 		if (!fli)
 			return -1;
@@ -239,8 +239,8 @@ int trace_daemon(struct fuse_bpf_args *fa)
 	}
 
 	case FUSE_SYMLINK | FUSE_PREFILTER: {
-		const char *link_name = fa->in_args[0].value;
-		const char *link_dest = fa->in_args[1].value;
+		const char *link_name = (void *)(long) fa->in_args[0].value;
+		const char *link_dest = (void *)(long) fa->in_args[1].value;
 
 		bpf_printk("symlink from %s", link_name);
 		bpf_printk("symlink to %s", link_dest);
@@ -248,7 +248,7 @@ int trace_daemon(struct fuse_bpf_args *fa)
 	}
 
 	case FUSE_READLINK | FUSE_PREFILTER: {
-		const char *link_name = fa->in_args[0].value;
+		const char *link_name = (void *)(long) fa->in_args[0].value;
 
 		bpf_printk("readlink from %s", link_name);
 		return FUSE_BPF_BACKING;
@@ -327,21 +327,21 @@ int trace_daemon(struct fuse_bpf_args *fa)
 	}
 
 	case FUSE_GETXATTR | FUSE_PREFILTER: {
-		const char *name = fa->in_args[1].value;
+		const char *name = (void *)(long)fa->in_args[1].value;
 
 		bpf_printk("Getxattr %d %s", fa->nodeid, name);
 		return FUSE_BPF_BACKING;
 	}
 
 	case FUSE_LISTXATTR | FUSE_PREFILTER: {
-		const char *name = fa->in_args[1].value;
+		const char *name = (void *)(long)fa->in_args[1].value;
 
 		bpf_printk("Listxattr %d %s", fa->nodeid, name);
 		return FUSE_BPF_BACKING;
 	}
 
 	case FUSE_SETXATTR | FUSE_PREFILTER: {
-		const char *name = fa->in_args[1].value;
+		const char *name = (void *)(long)fa->in_args[1].value;
 
 		bpf_printk("Setxattr %d %s", fa->nodeid, name);
 		return FUSE_BPF_BACKING;

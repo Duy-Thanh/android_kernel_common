@@ -3901,6 +3901,8 @@ union bpf_attr {
 	FN(per_cpu_ptr),		\
 	FN(this_cpu_ptr),		\
 	FN(redirect_peer),		\
+	FN(fuse_get_writeable_in),	\
+	FN(fuse_get_writeable_out),	\
 	/* */
 
 /* integer value in 'imm' field of BPF_CALL instruction selects which helper
@@ -5048,5 +5050,33 @@ enum {
 	BTF_F_PTR_RAW	=	(1ULL << 2),
 	BTF_F_ZERO	=	(1ULL << 3),
 };
+
+struct __bpf_fuse_arg {
+	__u64 value;
+	__u64 end_offset;
+	__u32 size;
+	__u32 max_size;
+};
+
+struct __bpf_fuse_args {
+	__u64 nodeid;
+	__u32 opcode;
+	__u32 error_in;
+	__u32 in_numargs;
+	__u32 out_numargs;
+	__u32 flags;
+	struct __bpf_fuse_arg in_args[3];
+	struct __bpf_fuse_arg out_args[2];
+};
+
+/* Return Codes for Fuse BPF programs */
+#define FUSE_BPF_USER_FILTER	1
+#define FUSE_BPF_BACKING	2
+#define FUSE_BPF_POST_FILTER	4
+
+/* Op Code Filter values for BPF Programs */
+#define FUSE_OPCODE_FILTER	0x0ffff
+#define FUSE_PREFILTER		0x10000
+#define FUSE_POSTFILTER		0x20000
 
 #endif /* _UAPI__LINUX_BPF_H__ */

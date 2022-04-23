@@ -246,7 +246,7 @@ int fuse_open_common(struct inode *inode, struct file *file, bool isdir)
 		struct fuse_err_ret fer;
 
 		fer = fuse_bpf_backing(inode, struct fuse_open_io,
-				       fuse_open_initialize,
+				       fuse_open_initialize_in, fuse_open_initialize_out,
 				       fuse_open_backing,
 				       fuse_open_finalize,
 				       inode, file, isdir);
@@ -357,8 +357,8 @@ static int fuse_release(struct inode *inode, struct file *file)
 	struct fuse_err_ret fer;
 
 	fer = fuse_bpf_backing(inode, struct fuse_release_in,
-		       fuse_release_initialize, fuse_release_backing,
-		       fuse_release_finalize,
+		       fuse_release_initialize_in, fuse_release_initialize_out,
+		       fuse_release_backing, fuse_release_finalize,
 		       inode, file);
 	if (fer.ret)
 		return PTR_ERR(fer.result);
@@ -505,7 +505,8 @@ static int fuse_flush(struct file *file, fl_owner_t id)
 	struct fuse_err_ret fer;
 
 	fer = fuse_bpf_backing(file->f_inode, struct fuse_flush_in,
-			       fuse_flush_initialize, fuse_flush_backing,
+			       fuse_flush_initialize_in, fuse_flush_initialize_out,
+			       fuse_flush_backing,
 			       fuse_flush_finalize,
 			       file, id);
 	if (fer.ret)
@@ -588,8 +589,8 @@ static int fuse_fsync(struct file *file, loff_t start, loff_t end,
 	struct fuse_err_ret fer;
 
 	fer = fuse_bpf_backing(inode, struct fuse_fsync_in,
-			       fuse_fsync_initialize, fuse_fsync_backing,
-			       fuse_fsync_finalize,
+			       fuse_fsync_initialize_in, fuse_fsync_initialize_out,
+			       fuse_fsync_backing, fuse_fsync_finalize,
 			       file, start, end, datasync);
 	if (fer.ret)
 		return PTR_ERR(fer.result);
@@ -1644,7 +1645,8 @@ static ssize_t fuse_file_read_iter(struct kiocb *iocb, struct iov_iter *to)
 		struct fuse_err_ret fer;
 
 		fer = fuse_bpf_backing(inode, struct fuse_file_read_iter_io,
-				       fuse_file_read_iter_initialize,
+				       fuse_file_read_iter_initialize_in,
+				       fuse_file_read_iter_initialize_out,
 				       fuse_file_read_iter_backing,
 				       fuse_file_read_iter_finalize,
 				       iocb, to);
@@ -1678,7 +1680,8 @@ static ssize_t fuse_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
 		struct fuse_err_ret fer;
 
 		fer = fuse_bpf_backing(inode, struct fuse_file_write_iter_io,
-				       fuse_file_write_iter_initialize,
+				       fuse_file_write_iter_initialize_in,
+				       fuse_file_write_iter_initialize_out,
 				       fuse_file_write_iter_backing,
 				       fuse_file_write_iter_finalize,
 				       iocb, from);
@@ -2743,7 +2746,7 @@ static loff_t fuse_file_llseek(struct file *file, loff_t offset, int whence)
 	struct fuse_err_ret fer;
 
 	fer = fuse_bpf_backing(inode, struct fuse_lseek_io,
-			       fuse_lseek_initialize,
+			       fuse_lseek_initialize_in, fuse_lseek_initialize_out,
 			       fuse_lseek_backing,
 			       fuse_lseek_finalize,
 			       file, offset, whence);
@@ -3402,7 +3405,8 @@ static long fuse_file_fallocate(struct file *file, int mode, loff_t offset,
 	struct fuse_err_ret fer;
 
 	fer = fuse_bpf_backing(inode, struct fuse_fallocate_in,
-			       fuse_file_fallocate_initialize,
+			       fuse_file_fallocate_initialize_in,
+			       fuse_file_fallocate_initialize_out,
 			       fuse_file_fallocate_backing,
 			       fuse_file_fallocate_finalize,
 			       file, mode, offset, length);
@@ -3517,7 +3521,8 @@ static ssize_t __fuse_copy_file_range(struct file *file_in, loff_t pos_in,
 	struct fuse_err_ret fer;
 
 	fer = fuse_bpf_backing(file_in->f_inode, struct fuse_copy_file_range_io,
-			       fuse_copy_file_range_initialize,
+			       fuse_copy_file_range_initialize_in,
+			       fuse_copy_file_range_initialize_out,
 			       fuse_copy_file_range_backing,
 			       fuse_copy_file_range_finalize,
 			       file_in, pos_in, file_out, pos_out, len, flags);
