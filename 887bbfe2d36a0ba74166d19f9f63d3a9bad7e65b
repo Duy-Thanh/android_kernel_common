@@ -51,6 +51,24 @@
       "parentUuid": "3248b764_189bddd5",
       "revId": "887bbfe2d36a0ba74166d19f9f63d3a9bad7e65b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f6d1692_2e6f4cd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-24T13:47:05Z",
+      "side": 1,
+      "message": "Please document that somewhere otherwise people will be confused, like I was.",
+      "parentUuid": "e48bc372_3828cbdd",
+      "revId": "887bbfe2d36a0ba74166d19f9f63d3a9bad7e65b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
