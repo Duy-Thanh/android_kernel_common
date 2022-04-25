@@ -16,6 +16,24 @@
       "message": "Few questions:\n\n1. Is the protected symbol list auto generated?  \n2. Does the build automatically exclude the protected symbols from abi_gki_aarch64?  \n3. Why do we have two _modules files that are identical? Are they used for different purposes, e.g. ABI monitoring and system_dlkm package generation?",
       "revId": "76deefd55e76432cc58fdc56ab981b91c245726e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7db27153_7a9a85b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-04-25T18:48:34Z",
+      "side": 1,
+      "message": "1. Not yet, but I am going to add a script to generate the both _protected and _exports files which basically sorted list of symbols in (vmlinux + GKI Modules) - (Union of all the symbols)\n\n2. Why do we need to exclude protected symbols? They need to be part of the KMI as GKI modules exported symbols can be used by vendor if defined in their symbol list. Protection enforcement is runtime but the protected symbols which can be all or subset of GKI modules symbols still needs to be part of the abi_gki_aarach64.\n\n3. gki_aarach64_modules file exists before the GKI modules and it\u0027s use is not very consistent but being used as a module.order currently. I do not want to break stuff to use as a list of modules for the system_dlkm so I added the new one which is particularly being sued for system_dlkm.",
+      "parentUuid": "89c10eb5_6735399d",
+      "revId": "76deefd55e76432cc58fdc56ab981b91c245726e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
