@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89c10eb5_6735399d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2022-04-25T18:12:11Z",
+      "side": 1,
+      "message": "Few questions:\n\n1. Is the protected symbol list auto generated?  \n2. Does the build automatically exclude the protected symbols from abi_gki_aarch64?  \n3. Why do we have two _modules files that are identical? Are they used for different purposes, e.g. ABI monitoring and system_dlkm package generation?",
+      "revId": "76deefd55e76432cc58fdc56ab981b91c245726e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
