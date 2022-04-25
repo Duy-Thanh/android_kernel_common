@@ -16,6 +16,24 @@
       "message": "LGTM, but I\u0027d like Pierre-Clement to confirm that pvmfw is ready for this change before we submit it.",
       "revId": "5f583c3c9d762dfbf1c70fdac849c305573b600c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b986350d_030fd3dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-04-25T07:42:27Z",
+      "side": 1,
+      "message": "aosp-master is ready and tm-dev should be once ag/17909541 is merged.",
+      "parentUuid": "e83a7320_ff028a93",
+      "revId": "5f583c3c9d762dfbf1c70fdac849c305573b600c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
