@@ -13,6 +13,7 @@
 #include <trace/hooks/iommu.h>
 
 #include <asm/cacheflush.h>
+#include <asm/dma-mapping-noalias.h>
 
 void arch_sync_dma_for_device(phys_addr_t paddr, size_t size,
 		enum dma_data_direction dir)
@@ -31,7 +32,7 @@ void arch_dma_prep_coherent(struct page *page, size_t size)
 	__dma_flush_area(page_address(page), size);
 }
 
-#ifdef CONFIG_IOMMU_DMA
+#ifdef CONFIG_ARCH_HAS_TEARDOWN_DMA_OPS
 void arch_teardown_dma_ops(struct device *dev)
 {
 	dev->dma_ops = NULL;
@@ -55,6 +56,8 @@ void arch_setup_dma_ops(struct device *dev, u64 dma_base, u64 size,
 		trace_android_vh_iommu_setup_dma_ops(dev, dma_base, size);
 		trace_android_rvh_iommu_setup_dma_ops(dev, dma_base, size);
 	}
+
+	arm64_noalias_setup_dma_ops(dev);
 
 #ifdef CONFIG_XEN
 	if (xen_initial_domain())
