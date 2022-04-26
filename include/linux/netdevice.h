@@ -191,6 +191,7 @@ struct net_device_stats {
 	unsigned long	tx_window_errors;
 	unsigned long	rx_compressed;
 	unsigned long	tx_compressed;
+	char		wally;
 };
 
 
