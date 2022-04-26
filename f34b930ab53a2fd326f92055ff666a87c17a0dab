@@ -16,6 +16,24 @@
       "message": "Please submit the implementation using this upstream first.",
       "revId": "f34b930ab53a2fd326f92055ff666a87c17a0dab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c41bf42c_3b7ccc27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1865570
+      },
+      "writtenOn": "2022-04-26T10:52:28Z",
+      "side": 1,
+      "message": "Hi, the number of vendor hooks has been changed from 5 to 3 in my patch.\n\nI would like to add additional vendor hooks as if other vendor hooks were merged into AOSP like the patch below.\n\ncommit 982c7ee3e3abc4a9705762cb3d042081dbde9b93\nAuthor: Jack Pham \u003cquic_jackp@quicinc.com\u003e\nDate:   Tue Apr 5 17:55:58 2022 -0700\n\n    ANDROID: sound: usb: Add vendor hooks for connect \u0026 disconnect\n\n    Add vendor hooks to capture when a USB audio interface is probed\n    and disconnected.  These will allow for supporting offloading of\n    audio device handling to a co-processor.\n\n    The disconnect hook needs to be restricted as the additional\n    vendor handling may need to perform operations (such as\n    wait_for_completion) in non-atomic context.\n\n    Bug: 224904393\n    Change-Id: Idf1da95556814e0ffbdc5f9fb5a25563ebee9be2\n    Signed-off-by: Jack Pham \u003cquic_jackp@quicinc.com\u003e\n\ncommit 7c380c0057ce3f54f16b08d95c5af2260b8b6d3e\nAuthor: Wei.Chen \u003cwei.chen3@unisoc.com\u003e\nDate:   Wed Apr 6 16:02:01 2022 +0800\n\n    ANDROID: Add vendor hook to support audio usb offload\n\n    android_vh_audio_usb_offload_vendor_set:\n        To set vendor data, used in sound/usb/card.c\n    android_vh_audio_usb_offload_ep_action:\n        To start/stop offload ep, used in sound/usb/endpoiont.c\n    android_vh_audio_usb_offload_synctype:\n        To ignore specific synctype usb device, used in sound/usb/pcm.c\n\n    Bug: 228276284\n    Test: build pass\n\n    Signed-off-by: Wei Chen \u003cwei.chen3@unisoc.com\u003e\n    Change-Id: I121ece1fee1934366c0b3b91b4f035ffac35d555",
+      "parentUuid": "8614afe4_d7e1ce73",
+      "revId": "f34b930ab53a2fd326f92055ff666a87c17a0dab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
