@@ -190,6 +190,7 @@ static void __init zone_sizes_init(unsigned long min, unsigned long max)
 	free_area_init(max_zone_pfns);
 }
 
+<<<<<<< HEAD   (c978fa UPSTREAM: f2fs: should not truncate blocks during roll-forwa)
 static int __init early_disable_dma32(char *buf)
 {
 	if (!buf)
@@ -239,6 +240,8 @@ int pfn_valid(unsigned long pfn)
 }
 EXPORT_SYMBOL(pfn_valid);
 
+=======
+>>>>>>> BRANCH (45451e Linux 5.15.36)
 int pfn_is_map_memory(unsigned long pfn)
 {
 	phys_addr_t addr = PFN_PHYS(pfn);

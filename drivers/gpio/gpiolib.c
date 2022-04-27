@@ -1550,6 +1550,18 @@ static int gpiochip_add_irqchip(struct gpio_chip *gc,
 
 	gpiochip_set_irq_hooks(gc);
 
+<<<<<<< HEAD   (c978fa UPSTREAM: f2fs: should not truncate blocks during roll-forwa)
+=======
+	/*
+	 * Using barrier() here to prevent compiler from reordering
+	 * gc->irq.initialized before initialization of above
+	 * GPIO chip irq members.
+	 */
+	barrier();
+
+	gc->irq.initialized = true;
+
+>>>>>>> BRANCH (45451e Linux 5.15.36)
 	acpi_gpiochip_request_interrupts(gc);
 
 	return 0;
