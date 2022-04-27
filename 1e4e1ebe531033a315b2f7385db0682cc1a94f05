@@ -16,6 +16,23 @@
       "message": "get accepted first please.",
       "revId": "1e4e1ebe531033a315b2f7385db0682cc1a94f05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48a07601_9395e8af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275292
+      },
+      "writtenOn": "2022-04-27T05:56:25Z",
+      "side": 1,
+      "message": "please abandon this patch,android13-5.15 already merged the upstream patch\n\nhttps://android.googlesource.com/kernel/common/+log/refs/heads/android13-5.15/drivers/remoteproc/remoteproc_debugfs.c\ncommit f89672cc3681952f2d06314981a6b45f8b0045d1 upstream.",
+      "revId": "1e4e1ebe531033a315b2f7385db0682cc1a94f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
