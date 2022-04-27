@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6e53c17_9ab5c014",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936870
+      },
+      "writtenOn": "2022-04-27T16:52:56Z",
+      "side": 1,
+      "message": "changes to fix lock -up issue when period interrupts are disabled",
+      "revId": "ed947bb5be8a94b16fa2b8530affd0bfe5230086",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
