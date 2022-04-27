@@ -1047,7 +1047,7 @@ static void armv8pmu_reset(void *info)
 	if (armv8pmu_has_long_event(cpu_pmu))
 		pmcr |= ARMV8_PMU_PMCR_LP;
 
-	armv8pmu_pmcr_write(pmcr);
+	armv8pmu_pmcr_write(armv8pmu_pmcr_read() | pmcr);
 }
 
 static int __armv8_pmuv3_map_event(struct perf_event *event,
