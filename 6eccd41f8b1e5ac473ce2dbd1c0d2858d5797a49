@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48a2a750_0b80b4d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1229163
+      },
+      "writtenOn": "2022-04-27T16:36:59Z",
+      "side": 1,
+      "message": "Hi,\nThe test failures here were caused by \"No capacity available to run this test.\"\nThis change looks relatively simple, can we bypass presubmit for these failures?\nThanks",
+      "revId": "6eccd41f8b1e5ac473ce2dbd1c0d2858d5797a49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
