@@ -11,10 +11,26 @@
  * mechanism for vendor modules to hook and extend functionality
  */
 struct mutex;
+struct mutex_waiter;
 DECLARE_HOOK(android_vh_mutex_wait_start,
 	TP_PROTO(struct mutex *lock),
 	TP_ARGS(lock));
 DECLARE_HOOK(android_vh_mutex_wait_finish,
+	TP_PROTO(struct mutex *lock),
+	TP_ARGS(lock));
+DECLARE_HOOK(android_vh_mutex_waiter_list_add,
+		TP_PROTO(struct mutex *lock,
+			struct mutex_waiter *waiter,
+			struct list_head *list,
+			bool *add_finish),
+		TP_ARGS(lock, waiter, list, add_finish));
+DECLARE_HOOK(android_vh_mutex_unlock_slowpath,
+		TP_PROTO(struct mutex *lock),
+		TP_ARGS(lock));
+DECLARE_HOOK(android_vh_mutex_waiting,
+	TP_PROTO(struct mutex *lock),
+	TP_ARGS(lock));
+DECLARE_HOOK(android_vh_mutex_init,
 	TP_PROTO(struct mutex *lock),
 	TP_ARGS(lock));
 
