@@ -45,6 +45,11 @@ struct pkvm_loaded_state {
 
 static DEFINE_PER_CPU(struct pkvm_loaded_state, loaded_state);
 
+/*
+ * Track the vcpu most recently loaded on each physical CPU.
+ */
+static DEFINE_PER_CPU(struct kvm_vcpu *, last_loaded_vcpu);
+
 DEFINE_PER_CPU(struct kvm_nvhe_init_params, kvm_init_params);
 
 void __kvm_hyp_host_forward_smc(struct kvm_cpu_context *host_ctxt);
@@ -647,6 +652,16 @@ static void handle___pkvm_vcpu_load(struct kvm_cpu_context *host_ctxt)
 
 	if (!state->vcpu)
 		return;
+	/*
+	 * Guarantee that both TLBs and I-cache are private to each vcpu.
+	 * The check below is conservative and could lead to over-invalidation,
+	 * because there is no need to nuke the contexts if the vcpu belongs to
+	 * a different vm.
+	 */
+	if (state->vcpu != __this_cpu_read(last_loaded_vcpu)) {
+		__kvm_flush_cpu_context(state->vcpu->arch.hw_mmu);
+		__this_cpu_write(last_loaded_vcpu, state->vcpu);
+	}
 
 	state->is_protected = state->vcpu->arch.pkvm.shadow_vm->arch.pkvm.enabled;
 
@@ -1009,6 +1024,20 @@ static void handle___pkvm_init_shadow(struct kvm_cpu_context *host_ctxt)
 static void handle___pkvm_teardown_shadow(struct kvm_cpu_context *host_ctxt)
 {
 	DECLARE_REG(int, shadow_handle, host_ctxt, 1);
+	int i;
+
+	/*
+	 * Clear the tracking for last_loaded_vcpu for all cpus for this vm in
+	 * case the same addresses for those vcpus are reused for future vms.
+	 */
+	for (i = 0; i < hyp_nr_cpus; i++) {
+		struct kvm_vcpu **last_loaded_vcpu_ptr =
+			per_cpu_ptr(&last_loaded_vcpu, i);
+		struct kvm_vcpu *vcpu = *last_loaded_vcpu_ptr;
+
+
+		cmpxchg_relaxed(last_loaded_vcpu_ptr, vcpu, NULL);
+	}
 
 	cpu_reg(host_ctxt, 1) = __pkvm_teardown_shadow(shadow_handle);
 }
