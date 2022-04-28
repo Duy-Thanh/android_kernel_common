@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ab75570_24ba0b19",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2022-04-28T18:54:39Z",
+      "side": 0,
+      "message": "I don\u0027t know why UAPI_HEADER_TEST shows as pink. Is it removed?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 23
+      },
+      "revId": "9f7014a6d21b6f650df4ba43869649ff37aa8c75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
