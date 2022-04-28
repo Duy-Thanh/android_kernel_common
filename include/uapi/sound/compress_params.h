@@ -60,6 +60,8 @@
 #define MAX_NUM_BITRATES 32
 #define MAX_NUM_SAMPLE_RATES 32
 
+#define COMPRESSED_TIMESTAMP_FLAG 0x0001
+
 /* Codecs are listed linearly to allow for extensibility */
 #define SND_AUDIOCODEC_PCM                   ((__u32) 0x00000001)
 #define SND_AUDIOCODEC_MP3                   ((__u32) 0x00000002)
@@ -77,7 +79,12 @@
 #define SND_AUDIOCODEC_BESPOKE               ((__u32) 0x0000000E)
 #define SND_AUDIOCODEC_ALAC                  ((__u32) 0x0000000F)
 #define SND_AUDIOCODEC_APE                   ((__u32) 0x00000010)
-#define SND_AUDIOCODEC_MAX                   SND_AUDIOCODEC_APE
+#define SND_AUDIOCODEC_TRUEHD                ((__u32) 0x00001001)
+#define SND_AUDIOCODEC_MP2                   ((__u32) 0x00001006)
+#define SND_AUDIOCODEC_AC3                   ((__u32) 0x00001008)
+#define SND_AUDIOCODEC_DTS                   ((__u32) 0x0000100A)
+#define SND_AUDIOCODEC_EAC3                  ((__u32) 0x0000100B)
+#define SND_AUDIOCODEC_MAX                   SND_AUDIOCODEC_EAC3
 
 /*
  * Profile and modes are listed with bit masks. This allows for a
@@ -447,5 +454,20 @@ struct snd_codec {
 	union snd_codec_options options;
 	__u32 reserved[3];
 } __attribute__((packed, aligned(4)));
+
+/** struct snd_codec_metadata
+ * @length: Length of the encoded buffer.
+ * @offset: Offset from the buffer address to the first byte of the first
+ *	    encoded frame. All encoded frames are consecutive starting
+ *	    from this offset.
+ * @timestamp: Session time in microseconds of the first sample in the buffer.
+ * @reserved: Reserved for future use.
+ */
+struct snd_codec_metadata {
+	__u32 length;
+	__u32 offset;
+	__u64 timestamp;
+	__u32 reserved[4];
+};
 
 #endif
