@@ -45,6 +45,11 @@ struct pkvm_loaded_state {
 
 static DEFINE_PER_CPU(struct pkvm_loaded_state, loaded_state);
 
+/*
+ * Track the vcpu id most recently loaded on each physical CPU.
+ */
+static DEFINE_PER_CPU(int, last_loaded_vcpu_id) = -1;
+
 DEFINE_PER_CPU(struct kvm_nvhe_init_params, kvm_init_params);
 
 void __kvm_hyp_host_forward_smc(struct kvm_cpu_context *host_ctxt);
@@ -632,6 +637,7 @@ static void handle___pkvm_vcpu_load(struct kvm_cpu_context *host_ctxt)
 	DECLARE_REG(int, vcpu_idx, host_ctxt, 2);
 	DECLARE_REG(u64, hcr_el2, host_ctxt, 3);
 	struct pkvm_loaded_state *state;
+	int *last_loaded;
 
 	/* Why did you bother? */
 	if (!is_protected_kvm_enabled())
@@ -647,6 +653,26 @@ static void handle___pkvm_vcpu_load(struct kvm_cpu_context *host_ctxt)
 
 	if (!state->vcpu)
 		return;
+
+	last_loaded = this_cpu_ptr(&last_loaded_vcpu_id);
+
+	/*
+	 * We guarantee that both TLBs and I-cache are private to each vcpu.
+	 * If a vcpu with a different id was previously loaded on the same
+	 * physical CPU, even if it belongs to a different vm, nuke the relevant
+	 * contexts.
+	 *
+	 * This could lead to over-invalidation, because there is no need to
+	 * nuke the contexts if the vcpu belongs to a different vm. However,
+	 * this over-invalidation could affect performance but not correctness.
+	 *
+	 * Aliasing of vcpu ids between vms does not affect correctness, since
+	 * we know that another vcpu of the same vm wasn't loaded on this CPU.
+	 */
+	if (*last_loaded != state->vcpu->vcpu_id) {
+		__kvm_flush_cpu_context(state->vcpu->arch.hw_mmu);
+		*last_loaded = state->vcpu->vcpu_id;
+	}
 
 	state->is_protected = state->vcpu->arch.pkvm.shadow_vm->arch.pkvm.enabled;
 
