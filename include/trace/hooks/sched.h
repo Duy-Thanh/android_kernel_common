@@ -398,6 +398,26 @@ DECLARE_HOOK(android_vh_force_compatible_post,
 	TP_PROTO(void *unused),
 	TP_ARGS(unused));
 
+DECLARE_RESTRICTED_HOOK(android_rvh_throttle_cfs_rq,
+	TP_PROTO(struct cfs_rq *qcfs_rq, struct cfs_rq *tcfs_rq),
+	TP_ARGS(qcfs_rq, tcfs_rq), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_unthrottle_cfs_rq,
+	TP_PROTO(struct cfs_rq *qcfs_rq, struct cfs_rq *tcfs_rq),
+	TP_ARGS(qcfs_rq, tcfs_rq), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_cfs_bw_enqueue_task_fair,
+	TP_PROTO(struct cfs_rq *cfs_rq, struct task_struct *p),
+	TP_ARGS(cfs_rq, p), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_cfs_bw_dequeue_task_fair,
+	TP_PROTO(struct cfs_rq *cfs_rq, struct task_struct *p),
+	TP_ARGS(cfs_rq, p), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_init_cfs_rq_runtime,
+	TP_PROTO(struct cfs_rq *cfs_rq),
+	TP_ARGS(cfs_rq), 1);
+
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_SCHED_H */

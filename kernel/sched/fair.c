@@ -4271,7 +4271,7 @@ static inline void check_schedstat_required(void)
 #endif
 }
 
-static inline bool cfs_bandwidth_used(void);
+bool cfs_bandwidth_used(void);
 
 /*
  * MIGRATION
@@ -4677,7 +4677,7 @@ entity_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr, int queued)
 #ifdef CONFIG_JUMP_LABEL
 static struct static_key __cfs_bandwidth_used;
 
-static inline bool cfs_bandwidth_used(void)
+bool cfs_bandwidth_used(void)
 {
 	return static_key_false(&__cfs_bandwidth_used);
 }
@@ -4692,7 +4692,7 @@ void cfs_bandwidth_usage_dec(void)
 	static_key_slow_dec_cpuslocked(&__cfs_bandwidth_used);
 }
 #else /* CONFIG_JUMP_LABEL */
-static bool cfs_bandwidth_used(void)
+bool cfs_bandwidth_used(void)
 {
 	return true;
 }
@@ -4915,6 +4915,7 @@ static bool throttle_cfs_rq(struct cfs_rq *cfs_rq)
 
 		qcfs_rq->h_nr_running -= task_delta;
 		qcfs_rq->idle_h_nr_running -= idle_task_delta;
+		trace_android_rvh_throttle_cfs_rq(qcfs_rq, cfs_rq);
 
 		if (qcfs_rq->load.weight) {
 			/* Avoid re-evaluating load for this entity: */
@@ -4941,6 +4942,7 @@ static bool throttle_cfs_rq(struct cfs_rq *cfs_rq)
 
 	/* At this point se is NULL and we are at root level*/
 	sub_nr_running(rq, task_delta);
+	trace_android_rvh_throttle_cfs_rq(NULL, cfs_rq);
 
 done:
 	/*
@@ -4994,6 +4996,7 @@ void unthrottle_cfs_rq(struct cfs_rq *cfs_rq)
 
 		qcfs_rq->h_nr_running += task_delta;
 		qcfs_rq->idle_h_nr_running += idle_task_delta;
+		trace_android_rvh_unthrottle_cfs_rq(qcfs_rq, cfs_rq);
 
 		/* end evaluation on encountering a throttled cfs_rq */
 		if (cfs_rq_throttled(qcfs_rq))
@@ -5026,6 +5029,7 @@ void unthrottle_cfs_rq(struct cfs_rq *cfs_rq)
 
 	/* At this point se is NULL and we are at root level*/
 	add_nr_running(rq, task_delta);
+	trace_android_rvh_unthrottle_cfs_rq(NULL, cfs_rq);
 
 unthrottle_throttle:
 	/*
@@ -5410,6 +5414,7 @@ static void init_cfs_rq_runtime(struct cfs_rq *cfs_rq)
 {
 	cfs_rq->runtime_enabled = 0;
 	INIT_LIST_HEAD(&cfs_rq->throttled_list);
+	trace_android_rvh_init_cfs_rq_runtime(cfs_rq);
 }
 
 void start_cfs_bandwidth(struct cfs_bandwidth *cfs_b)
@@ -5493,7 +5498,7 @@ static void __maybe_unused unthrottle_offline_cfs_rqs(struct rq *rq)
 
 #else /* CONFIG_CFS_BANDWIDTH */
 
-static inline bool cfs_bandwidth_used(void)
+bool cfs_bandwidth_used(void)
 {
 	return false;
 }
@@ -5535,6 +5540,7 @@ static inline void update_runtime_enabled(struct rq *rq) {}
 static inline void unthrottle_offline_cfs_rqs(struct rq *rq) {}
 
 #endif /* CONFIG_CFS_BANDWIDTH */
+EXPORT_SYMBOL_GPL(cfs_bandwidth_used);
 
 /**************************************************
  * CFS operations on tasks:
@@ -5667,6 +5673,7 @@ enqueue_task_fair(struct rq *rq, struct task_struct *p, int flags)
 
 		cfs_rq->h_nr_running++;
 		cfs_rq->idle_h_nr_running += idle_h_nr_running;
+		trace_android_rvh_cfs_bw_enqueue_task_fair(cfs_rq, p);
 
 		if (cfs_rq_is_idle(cfs_rq))
 			idle_h_nr_running = 1;
@@ -5688,6 +5695,7 @@ enqueue_task_fair(struct rq *rq, struct task_struct *p, int flags)
 
 		cfs_rq->h_nr_running++;
 		cfs_rq->idle_h_nr_running += idle_h_nr_running;
+		trace_android_rvh_cfs_bw_enqueue_task_fair(cfs_rq, p);
 
 		if (cfs_rq_is_idle(cfs_rq))
 			idle_h_nr_running = 1;
@@ -5768,6 +5776,7 @@ static void dequeue_task_fair(struct rq *rq, struct task_struct *p, int flags)
 
 		cfs_rq->h_nr_running--;
 		cfs_rq->idle_h_nr_running -= idle_h_nr_running;
+		trace_android_rvh_cfs_bw_dequeue_task_fair(cfs_rq, p);
 
 		if (cfs_rq_is_idle(cfs_rq))
 			idle_h_nr_running = 1;
@@ -5801,6 +5810,7 @@ static void dequeue_task_fair(struct rq *rq, struct task_struct *p, int flags)
 
 		cfs_rq->h_nr_running--;
 		cfs_rq->idle_h_nr_running -= idle_h_nr_running;
+		trace_android_rvh_cfs_bw_dequeue_task_fair(cfs_rq, p);
 
 		if (cfs_rq_is_idle(cfs_rq))
 			idle_h_nr_running = 1;
