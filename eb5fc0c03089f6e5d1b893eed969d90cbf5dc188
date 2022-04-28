@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0d8665a_b5571d91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2022-04-28T18:55:42Z",
+      "side": 1,
+      "message": "As mentioned by Greg, no UAPI changes please. Send it to kernel.org first. ",
+      "revId": "eb5fc0c03089f6e5d1b893eed969d90cbf5dc188",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
