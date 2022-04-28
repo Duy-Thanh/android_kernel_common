@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f245d9b3_8b045226",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-28T09:10:19Z",
+      "side": 1,
+      "message": "Please submit upstream first.  We can not take uapi changes without upstream\u0027s acceptance for obvious reasons.",
+      "revId": "9ef53abc5e1929062669330b335f40b1b36126a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
