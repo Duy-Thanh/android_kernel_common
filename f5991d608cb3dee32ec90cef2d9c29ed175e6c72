@@ -16,6 +16,24 @@
       "message": "Presubmit-Verified -1, how to move on? thanks",
       "revId": "f5991d608cb3dee32ec90cef2d9c29ed175e6c72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4905043f_846bb388",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-04-29T07:55:42Z",
+      "side": 1,
+      "message": "`WARNING:FROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: \"chunhui.li\" \u003cchunhui.li@mediatek.com\u003e\u0027 !\u003d \u0027Signed-off-by: Chunhui Li \u003cchunhui.li@mediatek.com\u003e\u0027`\n\nPlease fix.",
+      "parentUuid": "e39767ae_c07409dd",
+      "revId": "f5991d608cb3dee32ec90cef2d9c29ed175e6c72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
