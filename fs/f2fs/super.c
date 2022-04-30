@@ -2950,6 +2950,7 @@ loff_t max_file_blocks(struct inode *inode)
 
 	return result;
 }
+EXPORT_SYMBOL_GPL(max_file_blocks);
 
 static int __f2fs_commit_super(struct buffer_head *bh,
 			struct f2fs_super_block *super)
