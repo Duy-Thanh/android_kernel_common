@@ -16,6 +16,23 @@
       "message": "No, this is not how devices are to be found on this bus, sorry.",
       "revId": "fdb5a629b65325da7407bc6786ad55e45f2b8b15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75c82f86_330b62e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1591476
+      },
+      "writtenOn": "2022-05-02T08:52:31Z",
+      "side": 1,
+      "message": "We know that client devices gets registered via enumeration process/DAA on the bus. Here clients have mixed of devices under i2c and i3c busses. \n\nHere the client does bus_find_device(\u0026i3c_bus_type, ...) and finds the slave device on this bus. I2C already does it and exports i2c_bus_type(), same way i3c can export this. Clients have further usage of found devices and maintain it internally in a list.",
+      "revId": "fdb5a629b65325da7407bc6786ad55e45f2b8b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
