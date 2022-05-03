@@ -123,7 +123,8 @@
   __task_rq_lock
   __tasklet_hi_schedule
   __tasklet_schedule
-  __tracepoint_android_rvh_account_irq
+  __tracepoint_android_rvh_account_irq_start
+  __tracepoint_android_rvh_account_irq_end
   __tracepoint_android_rvh_after_dequeue_task
   __tracepoint_android_rvh_after_enqueue_task
   __tracepoint_android_rvh_audio_usb_offload_disconnect
