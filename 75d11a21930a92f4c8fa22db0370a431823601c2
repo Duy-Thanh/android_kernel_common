@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "037a05fe_21cbeb52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2022-05-04T18:36:37Z",
+      "side": 1,
+      "message": "Regarding the `cmpxchg_relaxed`, you just meant to check that the value is the same as was before, to ensure that the write is atomic, not to actually check whether the vcpu belongs to the vms being torn down, right? \n\nThe latter could reduce the number of `last_loaded_vcpu`s being cleared, but would require a lock to ensure we don\u0027t dereference a vcpu for another vm in the process of being destroyed.\n\nIf that\u0027s the case, I could move it to `__pkvm_teardown_shadow`, where we already grab `shadow_lock`. ",
+      "revId": "75d11a21930a92f4c8fa22db0370a431823601c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
