@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08c0a03c_a7d91f32",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-05-05T23:13:45Z",
+      "side": 1,
+      "message": "I\u0027m a bit divided on this one. Technically this is a non-functional, so we could skip it and keep the source code closer to upstream 5.15. This would also avoid breaking the ABI.\nOTOH skipping it would require you to modify the patches that follow it.\nNot sure which one is better.",
+      "range": {
+        "startLine": 86,
+        "startChar": 3,
+        "endLine": 97,
+        "endChar": 5
+      },
+      "revId": "8f1c8d088b58f98e866f12d7cb5f236c601ebb90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
