@@ -68,6 +68,30 @@
       },
       "revId": "8f1c8d088b58f98e866f12d7cb5f236c601ebb90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8883e49c_986d10a0",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-05-05T23:42:30Z",
+      "side": 1,
+      "message": "To keep history clean and easier to review, let\u0027s apply upstream patch and then revert the ABI broken parts from later patches\n\nhttps://android-review.googlesource.com/c/kernel/common/+/2084547",
+      "parentUuid": "08c0a03c_a7d91f32",
+      "range": {
+        "startLine": 86,
+        "startChar": 3,
+        "endLine": 97,
+        "endChar": 5
+      },
+      "revId": "8f1c8d088b58f98e866f12d7cb5f236c601ebb90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
