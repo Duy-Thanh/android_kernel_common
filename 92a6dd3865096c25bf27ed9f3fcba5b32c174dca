@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92ef997d_d8a39c32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-05-05T13:52:29Z",
+      "side": 1,
+      "message": "LGTM, but I\u0027d like somebody else to take a look as well (and this also needs testing on an Android device)",
+      "revId": "92a6dd3865096c25bf27ed9f3fcba5b32c174dca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
