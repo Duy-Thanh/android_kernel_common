@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2053147_4f43c465",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2022-05-05T00:35:05Z",
+      "side": 1,
+      "message": "Compared to android12-5.10, these are the new-to-ACK symbols:\n\n  cfg80211_gtk_rekey_notify\n  cfg80211_register_netdevice\n  cfg80211_rx_unprot_mlme_mgmt\n  cfg80211_stop_iface\n  cfg80211_update_owe_info_event\n  close_fd\n  kobject_get_path\n  regulatory_set_wiphy_regd",
+      "revId": "2494b45ba15e47b0224c632b76a81c49417a98d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
