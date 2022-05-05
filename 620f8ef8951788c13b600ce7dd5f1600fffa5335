@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "308ebfe7_df8951f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2022-05-05T10:52:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "336451a0_b78d5be3",
+      "revId": "620f8ef8951788c13b600ce7dd5f1600fffa5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd7b6789_d2b384fd",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-05-05T10:47:38Z",
       "side": 1,
       "message": "Accidental blank line?",
+      "revId": "620f8ef8951788c13b600ce7dd5f1600fffa5335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "574218f9_06548c2e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2022-05-05T10:52:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd7b6789_d2b384fd",
       "revId": "620f8ef8951788c13b600ce7dd5f1600fffa5335",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
