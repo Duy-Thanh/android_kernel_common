@@ -24,6 +24,7 @@
 #include <trace/hooks/usb.h>
 #include <trace/hooks/psci.h>
 #include <trace/hooks/ion.h>
+#include <trace/hooks/fs.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -84,3 +85,11 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_persist_overwrite);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psci_tos_resident_on);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psci_cpu_suspend);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ion_buffer_release);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_ioctl_defrag);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_set_gc_status);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_restore_gc_status);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_set_gc_mode);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_get_is_idle);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_get_pages_address);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_inode_flag_set);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_set_is_file);
