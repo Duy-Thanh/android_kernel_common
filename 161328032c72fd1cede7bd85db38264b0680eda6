@@ -16,6 +16,24 @@
       "message": "nit: spurious newline",
       "revId": "161328032c72fd1cede7bd85db38264b0680eda6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "700b6d46_a1aa351c",
+        "filename": "lib/kunit/test.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2022-05-06T16:38:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "febc5929_de4320b9",
+      "revId": "161328032c72fd1cede7bd85db38264b0680eda6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
