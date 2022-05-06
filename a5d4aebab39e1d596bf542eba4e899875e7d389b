@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5afc5f1_22fe7252",
+        "filename": "mm/damon/dbgfs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-05-06T23:29:54Z",
+      "side": 1,
+      "message": "Original patch https://lore.kernel.org/all/20211110145758.16558-3-sj@kernel.org/T/#m0eaab1a6c00ed904ac48bbe2c51c5e3baa8593a8 includes changes in this function which seem to have been squashed somewhere else. You can\u0027t do that and call it an UPSTREAM patch. Please fix.",
+      "range": {
+        "startLine": 950,
+        "startChar": 0,
+        "endLine": 972,
+        "endChar": 11
+      },
+      "revId": "a5d4aebab39e1d596bf542eba4e899875e7d389b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
