@@ -32,6 +32,8 @@
 #include <trace/events/f2fs.h>
 #include <uapi/linux/f2fs.h>
 
+#include <trace/hooks/fs.h>
+
 static vm_fault_t f2fs_filemap_fault(struct vm_fault *vmf)
 {
 	struct inode *inode = file_inode(vmf->vma->vm_file);
@@ -4223,6 +4225,7 @@ out:
 
 static long __f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
+	trace_android_vh_f2fs_ioctl_defrag(f2fs_defragment_range, filp, &cmd, arg, FS_IOC_GETVERSION);
 	switch (cmd) {
 	case FS_IOC_GETFLAGS:
 		return f2fs_ioc_getflags(filp, arg);

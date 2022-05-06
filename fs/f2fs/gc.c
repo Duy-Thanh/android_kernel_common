@@ -20,6 +20,7 @@
 #include "segment.h"
 #include "gc.h"
 #include <trace/events/f2fs.h>
+#include <trace/hooks/fs.h>
 
 static struct kmem_cache *victim_entry_slab;
 
@@ -89,11 +90,14 @@ static int gc_thread_func(void *data)
 		 * invalidated soon after by user update or deletion.
 		 * So, I'd like to wait some time to collect dirty segments.
 		 */
+		trace_android_vh_f2fs_set_gc_mode(&sbi->gc_mode);
 		if (sbi->gc_mode == GC_URGENT_HIGH) {
 			wait_ms = gc_th->urgent_sleep_time;
 			down_write(&sbi->gc_lock);
 			goto do_gc;
 		}
+
+		trace_android_vh_f2fs_set_gc_mode(&sbi->gc_mode);
 
 		if (foreground) {
 			down_write(&sbi->gc_lock);
@@ -1572,6 +1576,8 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
 						SUM_TYPE_DATA : SUM_TYPE_NODE;
 	int submitted = 0;
 
+	trace_android_vh_f2fs_set_gc_status(NULL);
+
 	if (__is_large_section(sbi))
 		end_segno = rounddown(end_segno, sbi->segs_per_sec);
 
@@ -1671,6 +1677,8 @@ skip:
 	blk_finish_plug(&plug);
 
 	stat_inc_call_count(sbi->stat_info);
+
+	trace_android_vh_f2fs_restore_gc_status(NULL);
 
 	return seg_freed;
 }
