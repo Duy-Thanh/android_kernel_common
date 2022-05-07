@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06606dbc_bde1de5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275292
+      },
+      "writtenOn": "2022-05-07T09:04:20Z",
+      "side": 1,
+      "message": "WARNING:FROM_SIGN_OFF_MISMATCH can\u0027t fix, could you please Bypass-Presubmit? \nas https://android-review.googlesource.com/c/kernel/common/+/1936190",
+      "revId": "8cd13479005a07631f7941dbaf3bc0a8d99ca79d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
