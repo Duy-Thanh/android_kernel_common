@@ -16,6 +16,24 @@
       "message": "Please submit upstream first.",
       "revId": "3a4d01ce79c42263467f0745958ea7b9baa8c9c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "304b8672_1af768ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1941617
+      },
+      "writtenOn": "2022-05-08T08:25:58Z",
+      "side": 1,
+      "message": "Relevant upstream change: https://lore.kernel.org/lkml/282f2d8fb795e8b1961693ed4184b8136c3520db.1651663123.git.quic_saipraka@quicinc.com/\nRequest to please merge, since we can’t wait for the final series to get accepted at kernel.org as it won’t align with our program deadlines.",
+      "parentUuid": "fa14b8db_0a2ab70a",
+      "revId": "3a4d01ce79c42263467f0745958ea7b9baa8c9c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
