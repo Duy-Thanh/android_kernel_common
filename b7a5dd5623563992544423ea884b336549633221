@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fa4c602_b41b81b8",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 2
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-05-09T17:47:49Z",
+      "side": 1,
+      "message": "I\u0027m curious, why do you need this symbol?",
+      "range": {
+        "startLine": 1123,
+        "startChar": 2,
+        "endLine": 1123,
+        "endChar": 14
+      },
+      "revId": "b7a5dd5623563992544423ea884b336549633221",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
